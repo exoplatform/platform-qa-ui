@@ -1,0 +1,547 @@
+/*
+ * Copyright (C) 2003-2017 eXo Platform SAS.
+ *
+ * This file is part of eXo PLF:: QA - UI - Selenium (Legacy Code).
+ *
+ * eXo PLF:: QA - UI - Selenium (Legacy Code) is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 3 of
+ * the License, or (at your option) any later version.
+ *
+ * eXo PLF:: QA - UI - Selenium (Legacy Code) software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with eXo PLF:: QA - UI - Selenium (Legacy Code); if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see <http://www.gnu.org/licenses/>.
+ */
+package org.exoplatform.platform.qa.ui.selenium.platform;
+
+import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.Utils;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.exoplatform.platform.qa.ui.selenium.user.UserDatabase;
+import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.Select;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
+
+import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME;
+
+public class PlatformBase {
+
+  private final TestBase testBase;
+
+  public ManageAlert alert;
+
+  private ElementEventTestBase evt;
+
+  public PlatformBase(TestBase testBase) {
+    this.testBase = testBase;
+    this.evt = testBase.getElementEventTestBase();
+    this.alert = new ManageAlert(testBase);
+  }
+
+  /**
+   * get default user pass from data driven
+   *
+   * @param userDataFile
+   * @param userSheet
+   * @param opParams
+   * @throws Exception
+   */
+  public static void getDefaultUserPass(String userDataFile, String userSheet, Object... opParams) throws Exception {
+    info("Get deault user pass from data driven");
+    UserDatabase userData = new UserDatabase();
+    userData.setUserData(userDataFile, userSheet, opParams);
+
+  }
+
+  /**
+   * Type a text to a Frame using for CKEDITOR
+   * By QuynhPT
+   *
+   * @param frameLocator
+   * @param content
+   */
+  public void inputFrame(By frameLocator, String content) {
+    info("Finding the frameLocator:" + frameLocator);
+    WebElement e = evt.waitForAndGetElement(frameLocator, testBase.getDefaultTimeout(), 1, 2);
+    info("Switch to the frame:" + frameLocator);
+    testBase.getSeleniumDriver().switchTo().frame(e);
+    WebElement inputsummary = testBase.getSeleniumDriver().switchTo().activeElement();
+    info("focus on the text area");
+    inputsummary.click();
+    info("Input the content:" + content);
+    inputsummary.clear();
+    inputsummary.sendKeys(content);
+    info("Back to parent window");
+    evt.switchToParentWindow();
+  }
+
+  /****************************Method*************************************/
+
+  /**
+   * Switch into the frame
+   *
+   * @param frameLocator
+   */
+  public void switchFrame(By frameLocator, Object... param) {
+    info("Finding the frameLocator:" + frameLocator);
+    WebElement e = evt.waitForAndGetElement(frameLocator, testBase.getDefaultTimeout(), 1, 2);
+    info("Switch to the frame:" + frameLocator);
+    testBase.getSeleniumDriver().switchTo().frame(e);
+    WebElement inputsummary = testBase.getSeleniumDriver().switchTo().activeElement();
+    info("focus on the text area");
+    inputsummary.click();
+    if (param.length > 0)
+      inputsummary.sendKeys("\n");
+  }
+
+  /**
+   * Select option from combo box
+   *
+   * @param locator
+   * @param option
+   */
+  public void selectOption(Object locator, String option) {
+    try {
+      for (int second = 0; ; second++) {
+        if (second >= testBase.getDefaultTimeout() / evt.getWaitInterval()) {
+          Assertions.fail("Timeout at select: " + option + " into "
+                                  + locator);
+        }
+
+        Select select = new Select(evt.waitForAndGetElement(locator));
+        select.selectByValue(option);
+        if (option.equals(select.getFirstSelectedOption().getAttribute(
+                "value"))) {
+          break;
+        }
+        Utils.pause(evt.getWaitInterval());
+      }
+    } catch (StaleElementReferenceException e) {
+      evt.checkCycling(e, testBase.getDefaultTimeout() / evt.getWaitInterval());
+      Utils.pause(evt.getWaitInterval());
+      evt.select(locator, option);
+    } finally {
+      testBase.loopCount = 0;
+    }
+  }
+
+  /**
+   * Add by @author vuna2
+   * <li> Switch to a new browser/ Popup window</li>
+   */
+  public void switchToNewWindow() {
+    Set<String> windowids = testBase.getSeleniumDriver().getWindowHandles();
+    Iterator<String> iter = windowids.iterator();
+    while (iter.hasNext()) {
+      String windowHandle = iter.next();
+      testBase.getSeleniumDriver().switchTo().window(windowHandle);
+      info("Switch to new windown successfully");
+    }
+  }
+
+  /**
+   * Switch to new browser window
+   *
+   * @param user
+   * @param pass
+   */
+  public void switchToNewBrowserWindow(String user, String pass) {
+    ManageLogInOut magAcc = new ManageLogInOut(testBase);
+
+    this.openNewBrowser();
+    if (user != null) {
+      if (evt.isElementNotPresent(ELEMENT_INPUT_USERNAME)) {
+        magAcc.signOut();
+      } else {
+        info("-- User.logIn: " + user);
+      }
+      magAcc.signIn(user, pass);
+      Utils.pause(1000);
+    }
+  }
+
+  /**
+   * Add by @author vuna2
+   * Open a new browser by Javascript
+   */
+  public void openNewBrowser() {
+    //Open new browser by Javascript
+    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("window.open()");
+    for (String winHandle : testBase.getSeleniumDriver().getWindowHandles()) {
+      testBase.getSeleniumDriver().switchTo().window(winHandle);
+    }
+    testBase.getSeleniumDriver().manage().window().maximize();
+    testBase.getSeleniumDriver().navigate().refresh();
+    testBase.getSeleniumDriver().navigate().to(testBase.getDriver().getBaseUrl());
+  }
+
+  /**
+   * Add by @author vuna2
+   * Open a new browser by Javascript
+   */
+  public void openNewBrowser(String url) {
+    //Open new browser by Javascript
+    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("window.open()");
+    for (String winHandle : testBase.getSeleniumDriver().getWindowHandles()) {
+      testBase.getSeleniumDriver().switchTo().window(winHandle);
+    }
+    testBase.getSeleniumDriver().manage().window().maximize();
+    testBase.getSeleniumDriver().navigate().refresh();
+    testBase.getSeleniumDriver().navigate().to(url);
+  }
+
+  /**
+   * function: switch between windows using title windows
+   *
+   * @param windowTitle
+   */
+  public void switchBetweenWindowsUsingTitle(String windowTitle) {
+    Set<String> windows = testBase.getSeleniumDriver().getWindowHandles();
+    for (String window : windows) {
+      testBase.getSeleniumDriver().switchTo().window(window);
+      if (testBase.getSeleniumDriver().getTitle().contains(windowTitle)) {
+        return;
+      }
+    }
+  }
+
+  /**
+   * switch between browsers using window handle
+   *
+   * @param windowHandle
+   */
+  public void switchBetweenBrowsers(String windowHandle) {
+    Set<String> windows = testBase.getSeleniumDriver().getWindowHandles();
+    for (String window : windows) {
+      testBase.getSeleniumDriver().switchTo().window(window);
+      if (testBase.getSeleniumDriver().getWindowHandle().contains(windowHandle)) {
+        return;
+      }
+    }
+  }
+
+  /**
+   * Go to gmail and login by new browser
+   *
+   * @param email
+   * @param pass
+   */
+  public void goToMail(String email, String pass) {
+    //((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("window.open()");
+    testBase.getSeleniumDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL + "n");
+    for (String winHandle : testBase.getSeleniumDriver().getWindowHandles()) {
+      testBase.getSeleniumDriver().switchTo().window(winHandle);
+    }
+    info("Go to gmail");
+    testBase.getSeleniumDriver().navigate().to(GMAIL_URL);
+    testBase.getSeleniumDriver().manage().window().maximize();
+
+    //login to mail
+    if (evt.waitForAndGetElement(ELEMENT_GMAIL_USERNAME, 5000, 0) == null) {
+      if (evt.waitForAndGetElement(ELEMENT_GMAIL_SIGN_IN_LINK, 3000, 0) != null)
+        evt.click(ELEMENT_GMAIL_SIGN_IN_LINK);
+      else {
+        evt.click(ELEMENT_GMAIL_SIGNIN_DIFFERENT_ACC);
+        evt.click(ELEMENT_GMAIL_ADD_ACCOUNT);
+      }
+    }
+    evt.type(ELEMENT_GMAIL_USERNAME, email, true);
+    evt.click(ELEMENT_GMAIL_NEXT_BTN);
+    Utils.pause(1000);
+    evt.type(ELEMENT_GMAIL_PASS, pass, true);
+    evt.click(ELEMENT_GMAIL_SIGN_IN);
+    //clearCache();
+    Utils.pause(2000);
+    evt.click(ELEMENT_GMAIL_INBOX);
+    Utils.pause(2000);
+  }
+
+  /**
+   * Open gmail when user is logging
+   */
+  public void openMail() {
+    testBase.getSeleniumDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL + "n");
+    for (String winHandle : testBase.getSeleniumDriver().getWindowHandles()) {
+      testBase.getSeleniumDriver().switchTo().window(winHandle);
+    }
+    info("Go to gmail");
+    testBase.getSeleniumDriver().navigate().to(GMAIL_URL);
+    testBase.getSeleniumDriver().manage().window().maximize();
+    Utils.pause(2000);
+    evt.click(ELEMENT_GMAIL_INBOX);
+    Utils.pause(2000);
+  }
+
+  /**
+   * Open mail by opening new tab
+   *
+   * @param email
+   * @param pass
+   */
+  public void goToMailByTab(String email, String pass) {
+    testBase.getSeleniumDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL + "t");
+    ArrayList<String> tabs = new ArrayList<String>(testBase.getSeleniumDriver().getWindowHandles());
+    testBase.getSeleniumDriver().switchTo().window(tabs.get(0));
+    info("Go to gmail");
+    testBase.getSeleniumDriver().navigate().to(GMAIL_URL);
+
+    //login to mail
+    if (evt.waitForAndGetElement(ELEMENT_GMAIL_USERNAME, 5000, 0) == null) {
+      if (evt.waitForAndGetElement(ELEMENT_GMAIL_SIGN_IN_LINK, 3000, 0) != null)
+        evt.click(ELEMENT_GMAIL_SIGN_IN_LINK);
+      else {
+        evt.click(ELEMENT_GMAIL_SIGNIN_DIFFERENT_ACC);
+        evt.click(ELEMENT_GMAIL_ADD_ACCOUNT);
+      }
+    }
+    evt.type(ELEMENT_GMAIL_USERNAME, email, true);
+    evt.click(ELEMENT_GMAIL_NEXT_BTN);
+    Utils.pause(1000);
+    evt.type(ELEMENT_GMAIL_PASS, pass, true);
+    evt.click(ELEMENT_GMAIL_SIGN_IN);
+    testBase.clearCache();
+    Utils.pause(2000);
+    evt.click(ELEMENT_GMAIL_INBOX);
+    Utils.pause(2000);
+
+  }
+
+  /**
+   * function: check content of mail then delete mail
+   *
+   * @param mail    element title of mail
+   * @param content mail content
+   */
+  public void checkAndDeleteMail(By mail, String content) {
+    info("Check and delete mail");
+    evt.waitForAndGetElement(mail, 300000);
+    evt.click(mail);
+    if (evt.waitForAndGetElement(ELEMENT_GMAIL_CONTENT.replace("${content}", content), 20000, 0) == null)
+      evt.click(ELEMENT_FIRST_MAIL);
+    assert evt.waitForAndGetElement(ELEMENT_MAIL_CONTENT).getText().contains(content);
+    info("Found notify mail");
+
+    info("delete mail");
+    if (evt.waitForAndGetElement(ELEMENT_DELETE_MAIL_2, 5000, 0) == null) {
+      evt.click(ELEMENT_DELETE_MAIL);
+      info("Delete 1");
+    } else {
+      evt.click(ELEMENT_DELETE_MAIL_2);
+      info("Delete 2");
+    }
+    evt.waitForElementNotPresent(mail);
+    Utils.pause(1000);
+  }
+
+  /**
+   * Get list all Browsers
+   */
+  public void getAllChildWindows() {
+    for (String windowHandle : testBase.getSeleniumDriver().getWindowHandles()) {
+      testBase.getSeleniumDriver().switchTo().window(windowHandle);
+      info("testBase.getSeleniumDriver().title:" + testBase.getSeleniumDriver().getTitle());
+      testBase.getSeleniumDriver().manage().window().maximize();
+    }
+  }
+
+  /**
+   * Close all child testBase.getSeleniumDriver()s
+   *
+   * @param parentWindow is the tilte of parent browsers
+   */
+  public void closeChildBrowsers(String parentWindow) {
+    info("parentWindow:" + parentWindow);
+    Set<String> handlers = testBase.getSeleniumDriver().getWindowHandles();
+    //Handler will have all the three window handles
+    for (String windowHandle : handlers) {
+      testBase.getSeleniumDriver().switchTo().window(windowHandle);
+      info("windowHandle" + windowHandle);
+      //If it is not the parent window it will close the child window
+      if (!windowHandle.contains(parentWindow)) {
+        info("close testBase.getSeleniumDriver().title:" + testBase.getSeleniumDriver().getTitle());
+        Utils.pause(2000);
+        testBase.getSeleniumDriver().close();
+      }
+
+    }
+    evt.switchToParentWindow();
+  }
+
+  /**
+   * function: check content of mail then delete mail
+   *
+   * @param title    title of the page
+   * @param opParams if true check it's present, false check if it's not present
+   */
+  public void checkEmailNotification(String title, Object... opParams) {
+    info("Check and delete mail");
+    Boolean checkOrNo = (Boolean) (opParams.length > 0 ? opParams[0] : true);
+
+    String parentWindow = testBase.getSeleniumDriver().getWindowHandle();
+    info("parentWindow:" + parentWindow);
+    for (String windowHandle : testBase.getSeleniumDriver().getWindowHandles()) {
+      testBase.getSeleniumDriver().switchTo().window(windowHandle);
+      info("testBase.getSeleniumDriver().title:" + testBase.getSeleniumDriver().getTitle());
+    }
+    if (opParams.length > 0) {
+      if (checkOrNo == true)
+        evt.waitForAndGetElement(ELEMENT_GMAIL_CONTENT.replace("${title}", title), 30000, 1);
+      else
+        evt.waitForElementNotPresent(ELEMENT_GMAIL_CONTENT.replace("${title}", title), 30000, 1);
+    }
+
+    //close windows mail
+    if (opParams.length > 1)
+      testBase.getSeleniumDriver().close();
+  }
+
+  /**
+   * User pageinator
+   *
+   * @param locator
+   * @param exceptionMessage
+   */
+  public void usePaginator(Object locator, String exceptionMessage) {
+    String page1 = ELEMENT_PAGINATOR_PAGE_LINK.replace("${number}", "1");
+
+    if (evt.waitForAndGetElement(page1, 5000, 0) != null)
+      evt.click(page1);
+    Utils.pause(500);
+    int totalPages = 0;
+    if (evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE, 3000, 0) != null) {
+      totalPages = evt.isElementPresent(ELEMENT_TOTAL_PAGE) ? Integer.valueOf(testBase.getText(ELEMENT_TOTAL_PAGE)) : 1;
+    }
+    info("-- The total pages is: " + totalPages);
+    int i = 1;
+    while (evt.isElementNotPresent(locator)) {
+      if (i == totalPages) {
+        info(exceptionMessage);
+        break;
+      }
+      if (evt.waitForAndGetElement(ELEMENT_NEXT_PAGE, 3000, 0) != null) {
+        evt.click(ELEMENT_NEXT_PAGE);
+      }
+      Utils.pause(500);
+    }
+  }
+
+  /**
+   * Search users in user list popup
+   *
+   * @param user
+   * @param op
+   */
+  public void searchUser(String user, filterOption op) {
+    if (!user.isEmpty()) {
+      info("Type user into the search field");
+      evt.type(ELEMENT_SEARCH_USER_INPUT, user, true);
+      switch (op) {
+      case userName:
+        selectOption(ELEMENT_SELECT_SEARCH, filterOption.userName.name());
+        break;
+      case firstName:
+        selectOption(ELEMENT_SELECT_SEARCH, filterOption.firstName.name());
+        break;
+      case lastName:
+        selectOption(ELEMENT_SELECT_SEARCH, filterOption.lastName.name());
+        break;
+      case email:
+        selectOption(ELEMENT_SELECT_SEARCH, filterOption.email.name());
+        break;
+      }
+      evt.click(ELEMENT_QUICK_SEARCH_BUTTON);
+      Utils.pause(2000);
+      info("the user is shown in searched result list");
+    }
+
+  }
+
+  /**
+   * Select a user in User list
+   *
+   * @param user
+   * @param op
+   */
+  public void selectUser(String user, filterOption op) {
+    searchUser(user, op);
+    info("Select the user");
+    evt.check(ELEMENT_USER_CHECKBOX.replace("$user", user), 2);
+    info("Click on Add button");
+    evt.click(ELEMENT_ADD_USERS_BUTTON);
+    evt.waitForElementNotPresent(ELEMENT_ADD_USERS_BUTTON);
+    info("the user is added");
+  }
+
+  /**
+   * Select a membership in the list
+   *
+   * @param group
+   * @param membership
+   */
+  public void selectMembership(String group, String membership) {
+    String[] groups = group.split("/");
+    for (String groupName : groups) {
+      info("Select the group:" + groupName);
+      evt.click(ELEMENT_GROUP_MEMBERSHIP_NAME_SELECT
+                        .replace("$groupName", groupName));
+    }
+    if (!membership.isEmpty()) {
+      info("Select the membership:" + membership);
+      evt.click(ELEMENT_GROUP_MEMBERSHIP_NAME_SELECT
+                        .replace("$groupName", membership));
+    }
+    evt.waitForElementNotPresent(ELEMENT_MEMBERSHIP_POPUP);
+  }
+
+  /**
+   * Select a group
+   *
+   * @param group
+   */
+  public void selectGroup(String group) {
+    String[] groups = group.split("/");
+    for (String groupName : groups) {
+      info("Select the group:" + groupName);
+      evt.click(ELEMENT_GROUP_NAME
+                        .replace("$group", groupName));
+    }
+    info("Select the group");
+    evt.click(ELEMENT_SELECT_THIS_GROUP);
+    evt.waitForElementNotPresent(ELEMENT_SELECT_GROUP_POPUP);
+  }
+
+  /**
+   * Available option
+   */
+  public enum selectInvitationOption {
+    ALWAYS, NEVER, ASK
+  }
+
+  /**
+   * Arrow option
+   */
+  public enum selectArrowOption {
+    NEXT, PREVIOUS, NOW
+  }
+
+  /**
+   * Define filter user option
+   */
+  public enum filterOption {
+    userName, firstName, lastName, email;
+  }
+
+}

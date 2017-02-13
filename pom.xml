@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2003-2017 eXo Platform SAS.
+
+    This file is part of eXo PLF:: QA - UI.
+
+    eXo PLF:: QA - UI is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 3 of
+    the License, or (at your option) any later version.
+
+    eXo PLF:: QA - UI software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with eXo PLF:: QA - UI; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see <http://www.gnu.org/licenses/>.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>maven-parent-pom</artifactId>
+    <groupId>org.exoplatform</groupId>
+    <version>17-SNAPSHOT</version>
+    <relativePath />
+  </parent>
+  <groupId>org.exoplatform.platform.qa.ui</groupId>
+  <artifactId>platform-qa-ui</artifactId>
+  <version>1.0.x-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>eXo PLF:: QA - UI</name>
+  <modules>
+  <module>api</module>
+  <module>selenium</module>
+    <module>core</module>
+
+  </modules>
+  <scm>
+    <connection>scm:git:git://github.com/exoplatform/platform-qa-ui.git</connection>
+    <developerConnection>scm:git:git@github.com:exoplatform/platform-qa-ui.git</developerConnection>
+    <tag>HEAD</tag>
+    <url>https://github.com/exoplatform/platform-qa-ui</url>
+  </scm>
+  <properties>
+    <!-- PLF dependencies -->
+    <org.exoplatform.depmgt.version>13-SNAPSHOT</org.exoplatform.depmgt.version>
+    <!-- Dependencies for UI Tests -->
+    <!-- JUnit5 stack -->
+    <org.junit.platform.version>1.0.0-M3</org.junit.platform.version>
+    <org.junit.jupiter.version>5.0.0-M3</org.junit.jupiter.version>
+    <!-- Selenium/Selenide Stack -->
+    <selenide.version>4.2</selenide.version>
+    <guava.version>16.0.1</guava.version>
+  </properties>
+  <dependencyManagement>
+    <!-- Import versions of external dependencies to use -->
+    <dependencies>
+      <dependency>
+        <groupId>org.exoplatform</groupId>
+        <artifactId>maven-depmgt-pom</artifactId>
+        <version>${org.exoplatform.depmgt.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+        <exclusions>
+          <exclusion>
+            <artifactId>junit</artifactId>
+            <groupId>junit</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>log4j-over-slf4j</artifactId>
+    </dependency>
+    <!-- Selenium/Selenide Stack -->
+    <dependency>
+      <groupId>com.codeborne</groupId>
+      <artifactId>selenide</artifactId>
+      <version>${selenide.version}</version>
+    </dependency>
+    <!--  Add this dependency to fix a classpath error with ChromeDriver -->
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>${guava.version}</version>
+    </dependency>
+    <!-- JUnit5 stack -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${org.junit.jupiter.version}</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <configuration>
+          <includes>
+            <include>*TestIT.java</include>
+          </includes>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-surefire-provider</artifactId>
+            <version>${org.junit.platform.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${org.junit.jupiter.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+</project>
