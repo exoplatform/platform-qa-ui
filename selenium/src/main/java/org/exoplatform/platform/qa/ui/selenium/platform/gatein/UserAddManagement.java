@@ -30,7 +30,7 @@ public class UserAddManagement {
     this.alert = new ManageAlert(testBase);
     this.dialog = new Dialog(testBase);
     this.userAndGroupManage=new UserAndGroupManagement(testBase);
-    button = new Button(testBase);
+    this.button = new Button(testBase);
   }
 
   /**
