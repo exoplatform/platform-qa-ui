@@ -55,6 +55,7 @@ public class UserAndGroupManagement {
     this.alert = new ManageAlert(testBase);
     this.dialog = new Dialog(testBase);
     this.plfBase = new PlatformBase(testBase);
+
   }
 
   /**
