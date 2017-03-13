@@ -53,7 +53,7 @@ public class PLFData {
 
   public static String DATA_NAME_ROOT = "Root Root";
 
-  public static String ADMINISTRATION_GROUP = "Administration";
+  public static String ADMINISTRATION_GROUP = "administration";
 
   public static String PLATFORM_GROUP = "Platform";
 

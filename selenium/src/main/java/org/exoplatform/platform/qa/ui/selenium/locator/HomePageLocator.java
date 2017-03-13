@@ -153,7 +153,7 @@ public final class HomePageLocator {
   public static final By ELEMENT_TOOLBAR_ADMINISTRATION =
           By.xpath("//*[@class='uiIconPLF24x24Setup']");
 
-  // Administration
+  // administration
   public static final By ELEMENT_ADMINISTRATION_CONTENT = By.xpath("//*[text()='Content']");
 
   public static final By ELEMENT_ADMINISTRATION_SITEEXPLORER =
@@ -178,7 +178,7 @@ public final class HomePageLocator {
           By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[contains(text(),'Content')]");
 
   public static final By ELEMENT_CONTENT_TOPBAR_ADMINISTRATION =
-          By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[contains(text(),'Content Administration')]");
+          By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[contains(text(),'Content administration')]");
 
   public static final By ELEMENT_CONTENT_TOPBAR_SITEEXPLORER =
           By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[contains(text(),'Sites Explorer')]");

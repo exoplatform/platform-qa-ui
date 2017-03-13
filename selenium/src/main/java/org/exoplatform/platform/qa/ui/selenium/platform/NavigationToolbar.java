@@ -70,7 +70,7 @@ public class NavigationToolbar {
   }
 
   /**
-   * Go to Manage Sites page: Administration-->Portal->Sites By QuynhPT
+   * Go to Manage Sites page: administration-->Portal->Sites By QuynhPT
    */
   public void goToPotalSites() {
     info("--Go to Portal-->Sites--");
@@ -86,7 +86,7 @@ public class NavigationToolbar {
   }
 
   /**
-   * Go to Manage Group Sites page: Administration-->Portal->Group Sites
+   * Go to Manage Group Sites page: administration-->Portal->Group Sites
    */
   public void goToGroupSites() {
     info("--Go to Portal-->Sites--");
@@ -100,7 +100,7 @@ public class NavigationToolbar {
   }
 
   /**
-   * Go to Manage Sites page: Administration-->Portal->Pages
+   * Go to Manage Sites page: administration-->Portal->Pages
    */
   public void goToPotalPages() {
     info("-- Go to Page Management page --");
@@ -124,7 +124,7 @@ public class NavigationToolbar {
   }
 
   /**
-   * function: Go to Users and Group management (Administration --> Users -->
+   * function: Go to Users and Group management (administration --> Users -->
    * Groups and Roles)
    */
   public void goToUsersAndGroupsManagement() {
@@ -147,7 +147,7 @@ public class NavigationToolbar {
   }
 
   /**
-   * function: Go to Users and Group management (Administration --> Community
+   * function: Go to Users and Group management (administration --> Community
    * --> Manage Community)
    */
   public void goToCommunityManagement() {
@@ -589,7 +589,7 @@ public class NavigationToolbar {
     while (evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_USERS, 3000, 0) == null) {
       if (repeat > 5)
         break;
-      info("Click on Administration icon");
+      info("Click on administration icon");
       evt.click(ELEMENT_TOOLBAR_ADMINISTRATION);
       repeat++;
     }

@@ -239,7 +239,7 @@ public final class ActivityStreamLocator {
 
   public static final String
           ELEMENT_QUESTION_ACTIVITY_ANSWER_NUMBER =
-          "//*[@class='author']/*[contains(@href,'$user')]/../../..//*[contains(@class,'titleAnswer')]/*[@class='linkTitle' and text()='$question']/../../..//*[contains(@class,'contentAnswer')]//*[contains(text(),'$number Answer')]";
+          "//*[@class='author']/*[contains(@href,'$user')]/../../..//*[contains(@class,'titleAnswer')]/*[@class='linkTitle' and text()='$question']/../../..//*[contains(@class,'contentAnswer')]//*[contains(text(),'$number answer')]";
 
   public static final String
           ELEMENT_QUESTION_ACTIVITY_COMMENT_NUMBER =
@@ -249,7 +249,7 @@ public final class ActivityStreamLocator {
           ELEMENT_QUESTION_ACTIVITY_COMMENT_CONTENT =
           "//*[@class='author']/*[contains(@href,'$userActivity')]/../../..//*[contains(@class,'titleAnswer')]/*[@class='linkTitle' and text()='$question']/../../../..//*[@class='commentList']/div[$index]//*[@class='author']/*[contains(@href,'$userComment')]/../../*[@class='contentComment']";
 
-  public static final String ELEMENT_QUESTION_ACTIVITY_COMMENT_ANSWER = "Answer has been submitted: ";
+  public static final String ELEMENT_QUESTION_ACTIVITY_COMMENT_ANSWER = "answer has been submitted: ";
 
   public static final String
           ELEMENT_QUESTION_ACTIVITY_NUMBER_COMMENT =

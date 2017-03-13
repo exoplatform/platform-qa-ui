@@ -172,7 +172,7 @@ public final class NavigationToolBarLocator {
 
   public static final By ELEMENT_ACTIVITY_UPLOAD_POPUP_UPLOAD_BUTTON = By.xpath(".//input[@type='file']");
 
-  // Administration Menu
+  // administration Menu
   // users
   public static final By ELEMENT_ADMINISTRATION_USERS =
           By.xpath("//*[contains(@href,'g/:platform:administrators/administration/newStaff') and text()='Community']");
@@ -183,7 +183,7 @@ public final class NavigationToolBarLocator {
   public static final By ELEMENT_GROUP_AND_ROLE_LINK =
           By.xpath(".//*[@id='UISetupPlatformToolBarPortlet']//a[contains(@href,'management')]");
 
-  // Administration-->Portal
+  // administration-->Portal
   public static final By ELEMENT_ADMINISTRATION_PORTAL = By.xpath("//*[text()='Portal']");
 
   public static final By ELEMENT_ADMINISTRATION_PORTAL_SITES = By.xpath("//*[text()='Sites']");
@@ -200,7 +200,7 @@ public final class NavigationToolBarLocator {
   public static final By ELEMENT_ADMINISTRATION_PORTAL_GROUP_SITES = By.xpath("//*[text()='Group Sites']");
 
   // Administation-->Content
-  public static final By ELEMENT_LINK_CONTENT_ADMIN = By.xpath("//*[text()='Content Administration']");
+  public static final By ELEMENT_LINK_CONTENT_ADMIN = By.xpath("//*[text()='Content administration']");
 
   public static final By ELEMENT_MENU_CONTENT_LINK =
           By.xpath("//li[@class='dropdown-submenu']/a[text()='Content']");
@@ -222,7 +222,7 @@ public final class NavigationToolBarLocator {
           By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[contains(text(),'Content')]");
 
   public static final By ELEMENT_CONTENT_TOPBAR_ADMINISTRATION =
-          By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[contains(text(),'Content Administration')]");
+          By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[contains(text(),'Content administration')]");
 
   // Setup icon
   public static final By ELEMENT_LINK_SETUP =
@@ -299,7 +299,7 @@ public final class NavigationToolBarLocator {
 
   public static final By ELEMENT_ACTIVITIES_PORTLET = By.id("UIUserActivityStreamPortlet");
 
-  // Administration-->Application
+  // administration-->Application
   public static final By ELEMENT_ADMINISTRATION_APPLICATION = By.xpath(".//*[text()='Applications']");
 
   public static final By ELEMENT_ADD_TOOTLBAR =

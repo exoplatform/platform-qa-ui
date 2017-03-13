@@ -141,7 +141,7 @@ public class UserAndGroupManagement {
   }
 
   /**
-   * Add a user to Administration group
+   * Add a user to administration group
    *
    * @param user
    * @param membership
@@ -150,9 +150,9 @@ public class UserAndGroupManagement {
     info("Go to Group tab");
     goToGroupTab();
     evt.scrollToBottomPage(this.testBase.getSeleniumDriver());
-    info("Select Platform/Administration group");
-    selectGroup("Platform/Administration");
-    info("Add user to Administration group by type");
+    info("Select Platform/administration group");
+    selectGroup("Platform/administration");
+    info("Add user to administration group by type");
     evt.type(ELEMENT_INPUT_USERNAME, user, true);
     if (membership.length > 0)
       evt.select(ELEMENT_SELECT_MEMBERSHIP, membership[0]);
@@ -166,7 +166,7 @@ public class UserAndGroupManagement {
     } else {
       evt.waitForAndGetElement(addedUser);
     }
-    info("User is added to Administration group");
+    info("User is added to administration group");
   }
 
   /**
