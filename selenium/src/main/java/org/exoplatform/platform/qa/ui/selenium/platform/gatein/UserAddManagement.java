@@ -12,24 +12,24 @@ import org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class UserAddManagement {
-  private final TestBase       testBase;
+  private final TestBase         testBase;
 
-  public Dialog                dialog;
+  public Dialog                  dialog;
 
-  public ManageAlert           alert;
+  public ManageAlert             alert;
 
-  public Button                button;
+  public Button                  button;
 
-  private  UserAndGroupManagement       userAndGroupManage;
+  private UserAndGroupManagement userAndGroupManage;
 
-  private ElementEventTestBase evt;
+  private ElementEventTestBase   evt;
 
   public UserAddManagement(TestBase testBase) {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
     this.alert = new ManageAlert(testBase);
     this.dialog = new Dialog(testBase);
-    this.userAndGroupManage=new UserAndGroupManagement(testBase);
+    this.userAndGroupManage = new UserAndGroupManagement(testBase);
     this.button = new Button(testBase);
   }
 
