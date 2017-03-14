@@ -38,7 +38,7 @@ public class PortalBranding {
     ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].style.visibility = 'visible'; arguments[0].style.height = '1px'; "
         + "arguments[0].style.width = '1px'; arguments[0].style.opacity = 1", upload);
     ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].style.display = 'block'; arguments[0].style.visibility = 'visible'",
-                                                                           upload);
+                                                                      upload);
     Utils.pause(10000);
     info("Select a file to upload");
     upload.sendKeys(mftb.getAbsoluteFilePath(link));
