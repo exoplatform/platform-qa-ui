@@ -30,14 +30,14 @@ public class PortalBranding {
   public PortalBranding uploadFile(String link, Object... params) {
     info("Upload a file to Site Explorer");
     Boolean verify = (Boolean) (params.length > 0 ? params[0] : true);
-    if (evt.waitForAndGetElement(ELEMENT_BUTTON_UPLOAD, this.testBase.getDefaultTimeout(), 0) == null) {
+    if (evt.waitForAndGetElement(ELEMENT_BUTTON_UPLOAD, testBase.getDefaultTimeout(), 0) == null) {
       info("wrong page");
     }
 
-    WebElement upload = evt.waitForAndGetElement(ELEMENT_UPLOAD_LINK, this.testBase.getDefaultTimeout(), 1, 2);
-    ((JavascriptExecutor) this.testBase.getSeleniumDriver()).executeScript("arguments[0].style.visibility = 'visible'; arguments[0].style.height = '1px'; "
+    WebElement upload = evt.waitForAndGetElement(ELEMENT_UPLOAD_LINK, testBase.getDefaultTimeout(), 1, 2);
+    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].style.visibility = 'visible'; arguments[0].style.height = '1px'; "
         + "arguments[0].style.width = '1px'; arguments[0].style.opacity = 1", upload);
-    ((JavascriptExecutor) this.testBase.getSeleniumDriver()).executeScript("arguments[0].style.display = 'block'; arguments[0].style.visibility = 'visible'",
+    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].style.display = 'block'; arguments[0].style.visibility = 'visible'",
                                                                            upload);
     Utils.pause(10000);
     info("Select a file to upload");
@@ -51,6 +51,6 @@ public class PortalBranding {
     }
     info("Upload file successfully");
     Utils.pause(2000);
-    return new PortalBranding((TestBase) this.testBase.getSeleniumDriver());
+    return new PortalBranding((TestBase) testBase.getSeleniumDriver());
   }
 }

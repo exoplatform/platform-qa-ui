@@ -45,7 +45,7 @@ public class UserAddManagement {
   public void addUser(String userName, String Password, String email, String Firstname, String lastName) {
     info("Add an user");
     Utils.pause(3000);
-    evt.waitForAndGetElement(GateinLocator.ELEMENT_USERNAME, 60000, 0);
+    evt.waitForAndGetElement(ELEMENT_USERNAME, 60000, 0);
     evt.type(ELEMENT_USERNAME, userName, true);
     evt.type(ELEMENT_PASSWORD, Password, true);
     evt.type(ELEMENT_CONFIRM_PASSWORD, Password, true);
@@ -89,11 +89,11 @@ public class UserAddManagement {
   public void checkEmailNotification(String title, Object... opParams) {
     info("Check and delete mail");
     Boolean checkOrNo = (Boolean) (opParams.length > 0 ? opParams[0] : true);
-    String parentWindow = this.testBase.getSeleniumDriver().getWindowHandle();
+    String parentWindow = testBase.getSeleniumDriver().getWindowHandle();
     info("parentWindow:" + parentWindow);
-    for (String windowHandle : this.testBase.getSeleniumDriver().getWindowHandles()) {
-      this.testBase.getSeleniumDriver().switchTo().window(windowHandle);
-      info("driver.title:" + this.testBase.getSeleniumDriver().getTitle());
+    for (String windowHandle : testBase.getSeleniumDriver().getWindowHandles()) {
+      testBase.getSeleniumDriver().switchTo().window(windowHandle);
+      info("driver.title:" + testBase.getSeleniumDriver().getTitle());
     }
     if (checkOrNo == true) {
       evt.waitForAndGetElement(PlatformLocator.ELEMENT_GMAIL_CONTENT.replace("${title}", title), 30000, 1);
@@ -120,7 +120,7 @@ public class UserAddManagement {
     if (confirmNewPass != null && confirmNewPass != "")
       evt.type(ELEMENT_CONFIRM_NEW_PASSWORD, confirmNewPass, true);
     evt.click(ELEMENT_SAVE_PASSWORD);
-    evt.waitForMessage(GateinLocator.ELEMENT_MSG_CHANGE_PASS_WORD);
+    evt.waitForMessage(ELEMENT_MSG_CHANGE_PASS_WORD);
     evt.click(ELEMENT_CLOSE_MESSAGE);
     button.close();
     evt.waitForElementNotPresent(button.ELEMENT_CLOSE_BUTTON);

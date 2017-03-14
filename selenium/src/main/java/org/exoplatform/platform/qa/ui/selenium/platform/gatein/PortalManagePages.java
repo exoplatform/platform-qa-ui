@@ -109,9 +109,9 @@ public class PortalManagePages {
   public void addPage(String pageName, String title, String type, boolean... isMaxWindow) {
     info("Click on Add new Page button");
     Utils.pause(3000);
-    evt.waitForAndGetElement(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_BTN, this.testBase.getDefaultTimeout(), 1);
+    evt.waitForAndGetElement(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_BTN, testBase.getDefaultTimeout(), 1);
     evt.click(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_BTN);
-    this.testBase.getSeleniumDriver().navigate().refresh();
+    testBase.getSeleniumDriver().navigate().refresh();
     if (!pageName.isEmpty()) {
       info("Input page name");
       evt.type(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_PAGE_NAME, pageName, true);
@@ -140,7 +140,7 @@ public class PortalManagePages {
    */
   public void openPage(String url) {
     info("open page:" + url);
-    this.testBase.getSeleniumDriver().get(url);
+    testBase.getSeleniumDriver().get(url);
     Utils.pause(1000);
   }
 
