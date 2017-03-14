@@ -54,8 +54,8 @@
     <org.junit.platform.version>1.0.0-M3</org.junit.platform.version>
     <org.junit.jupiter.version>5.0.0-M3</org.junit.jupiter.version>
     <!-- Selenium/Selenide Stack -->
-    <selenide.version>4.2</selenide.version>
-    <guava.version>16.0.1</guava.version>
+    <selenide.version>4.3</selenide.version>
+    <guava.version>21.0</guava.version>
   </properties>
   <dependencyManagement>
     <!-- Import versions of external dependencies to use -->

@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
  * All tests marked by this annotation can be executed on a default PLF instance.
  */
 @Test
-@Tag("default")
-public @interface DefaultContext {
+@Tag("smoke")
+public @interface Smoke {
 
 }
