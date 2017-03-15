@@ -1,20 +1,21 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.Actions;
+
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.Actions;
-
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class SpaceManagement {
 
-  private final TestBase testBase;
+  private final TestBase       testBase;
 
-  public ManageAlert alert;
+  public ManageAlert           alert;
 
   private ElementEventTestBase evt;
 
@@ -38,8 +39,8 @@ public class SpaceManagement {
    * delete Space
    *
    * @param spaceName name of space
-   * @param isVerify  true: verify content of confirm msg
-   *                  false: not verify content of confirm msg
+   * @param isVerify true: verify content of confirm msg false: not verify
+   *          content of confirm msg
    */
   public void deleteSpace(String spaceName, Boolean isVerify) {
     if (evt.waitForAndGetElement(ELEMENT_SPACE_DELETE_BUTTON.replace("${space}", spaceName), 2000, 0) != null) {
@@ -174,8 +175,7 @@ public class SpaceManagement {
    */
   public void editSpaceSimple(String space, String newName, String newDes, boolean isChangeAvatar, String filepath) {
     info("evt.click on Edit button of the space");
-    if (evt.waitForAndGetElement(
-            ELEMENT_SPACE_EDIT_BTN.replace("${space}", space), testBase.getDefaultTimeout(), 0) != null)
+    if (evt.waitForAndGetElement(ELEMENT_SPACE_EDIT_BTN.replace("${space}", space), testBase.getDefaultTimeout(), 0) != null)
       evt.click(ELEMENT_SPACE_EDIT_BTN.replace("${space}", space));
     if (evt.waitForAndGetElement(ELEMENT_SPACE_NAME_INPUT, testBase.getDefaultTimeout(), 0) == null)
       evt.click(ELEMENT_SPACE_EDIT_SETTING_TAB);
@@ -310,7 +310,8 @@ public class SpaceManagement {
   }
 
   /**
-   * Verify the message when a user accesses to a space if the user is not member of that space
+   * Verify the message when a user accesses to a space if the user is not
+   * member of that space
    *
    * @param space
    */
@@ -366,8 +367,7 @@ public class SpaceManagement {
     searchSpace(space, "");
     evt.click(ELEMENT_REQUEST_TO_JOIN_SPACE_BTN.replace("${space}", space));
     if (isVerify.length > 0) {
-      evt.waitForAndGetElement(
-              ELEMENT_REQUEST_PENDING.replace("${space}", space), 2000, 1);
+      evt.waitForAndGetElement(ELEMENT_REQUEST_PENDING.replace("${space}", space), 2000, 1);
     }
     info("Request successfully");
   }
@@ -383,8 +383,7 @@ public class SpaceManagement {
     searchSpace(space, "");
     evt.click(ELEMENT_MY_SPACE_ALL_SPACES_JOIN_BTN.replace("${space}", space));
     if (isVerify.length > 0) {
-      evt.waitForAndGetElement(
-              ELEMENT_SPACE_LEAVE_BTN.replace("${space}", space), 2000, 1);
+      evt.waitForAndGetElement(ELEMENT_SPACE_LEAVE_BTN.replace("${space}", space), 2000, 1);
     }
     info("Request successfully");
   }
@@ -476,9 +475,9 @@ public class SpaceManagement {
   /**
    * Verify that a user is a member of the space or not
    *
-   * @param fullName  is full name of the user
-   * @param isDisplay =true if user is a member of the space
-   *                  =false if user is not a memebr of the space
+   * @param fullName is full name of the user
+   * @param isDisplay =true if user is a member of the space =false if user is
+   *          not a memebr of the space
    */
   public void verifyMember(String fullName, Boolean isDisplay) {
     goToMemberTab();
@@ -495,9 +494,9 @@ public class SpaceManagement {
   /**
    * Verify that a user is a manager of the space or not
    *
-   * @param fullName  is full name of the user
-   * @param isDisplay =true if user is a manager of the space
-   *                  =false if user is not a manager of the space
+   * @param fullName is full name of the user
+   * @param isDisplay =true if user is a manager of the space =false if user is
+   *          not a manager of the space
    */
   public void verifyManager(String fullName, Boolean isDisplay) {
     goToMemberTab();
@@ -550,8 +549,7 @@ public class SpaceManagement {
   public void openFolder(String name) {
     info("evt.click on the folder's name");
     Actions action = new Actions(this.testBase.getSeleniumDriver());
-    action.moveToElement(evt.waitForAndGetElement(ELEMENT_DOCUMENT_FOLDER_NAME.replace("$name", name)))
-          .doubleClick().perform();
+    action.moveToElement(evt.waitForAndGetElement(ELEMENT_DOCUMENT_FOLDER_NAME.replace("$name", name))).doubleClick().perform();
     info("Verify that folder is opened");
     evt.waitForAndGetElement(ELMENT_DOCUMENT_FOLDER_ADDRESS.replace("$name", name.toLowerCase()));
     info("the folder is opened");

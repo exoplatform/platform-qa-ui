@@ -20,28 +20,29 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
-import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.exoplatform.platform.qa.ui.selenium.user.UserDatabase;
-import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.Select;
+import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME;
+import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.Select;
+
+import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.Utils;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.exoplatform.platform.qa.ui.selenium.user.UserDatabase;
 
 public class PlatformBase {
 
-  private final TestBase testBase;
+  private final TestBase       testBase;
 
-  public ManageAlert alert;
+  public ManageAlert           alert;
 
   private ElementEventTestBase evt;
 
@@ -67,8 +68,7 @@ public class PlatformBase {
   }
 
   /**
-   * Type a text to a Frame using for CKEDITOR
-   * By QuynhPT
+   * Type a text to a Frame using for CKEDITOR By QuynhPT
    *
    * @param frameLocator
    * @param content
@@ -88,7 +88,7 @@ public class PlatformBase {
     evt.switchToParentWindow();
   }
 
-  /****************************Method*************************************/
+  /**************************** Method *************************************/
 
   /**
    * Switch into the frame
@@ -115,16 +115,14 @@ public class PlatformBase {
    */
   public void selectOption(Object locator, String option) {
     try {
-      for (int second = 0; ; second++) {
+      for (int second = 0;; second++) {
         if (second >= testBase.getDefaultTimeout() / evt.getWaitInterval()) {
-          Assertions.fail("Timeout at select: " + option + " into "
-                                  + locator);
+          Assertions.fail("Timeout at select: " + option + " into " + locator);
         }
 
         Select select = new Select(evt.waitForAndGetElement(locator));
         select.selectByValue(option);
-        if (option.equals(select.getFirstSelectedOption().getAttribute(
-                "value"))) {
+        if (option.equals(select.getFirstSelectedOption().getAttribute("value"))) {
           break;
         }
         Utils.pause(evt.getWaitInterval());
@@ -140,7 +138,7 @@ public class PlatformBase {
 
   /**
    * Add by @author vuna2
-   * <li> Switch to a new browser/ Popup window</li>
+   * <li>Switch to a new browser/ Popup window</li>
    */
   public void switchToNewWindow() {
     Set<String> windowids = testBase.getSeleniumDriver().getWindowHandles();
@@ -174,11 +172,10 @@ public class PlatformBase {
   }
 
   /**
-   * Add by @author vuna2
-   * Open a new browser by Javascript
+   * Add by @author vuna2 Open a new browser by Javascript
    */
   public void openNewBrowser() {
-    //Open new browser by Javascript
+    // Open new browser by Javascript
     ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("window.open()");
     for (String winHandle : testBase.getSeleniumDriver().getWindowHandles()) {
       testBase.getSeleniumDriver().switchTo().window(winHandle);
@@ -189,11 +186,10 @@ public class PlatformBase {
   }
 
   /**
-   * Add by @author vuna2
-   * Open a new browser by Javascript
+   * Add by @author vuna2 Open a new browser by Javascript
    */
   public void openNewBrowser(String url) {
-    //Open new browser by Javascript
+    // Open new browser by Javascript
     ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("window.open()");
     for (String winHandle : testBase.getSeleniumDriver().getWindowHandles()) {
       testBase.getSeleniumDriver().switchTo().window(winHandle);
@@ -240,7 +236,8 @@ public class PlatformBase {
    * @param pass
    */
   public void goToMail(String email, String pass) {
-    //((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("window.open()");
+    // ((JavascriptExecutor)
+    // testBase.getSeleniumDriver()).executeScript("window.open()");
     testBase.getSeleniumDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL + "n");
     for (String winHandle : testBase.getSeleniumDriver().getWindowHandles()) {
       testBase.getSeleniumDriver().switchTo().window(winHandle);
@@ -249,7 +246,7 @@ public class PlatformBase {
     testBase.getSeleniumDriver().navigate().to(GMAIL_URL);
     testBase.getSeleniumDriver().manage().window().maximize();
 
-    //login to mail
+    // login to mail
     if (evt.waitForAndGetElement(ELEMENT_GMAIL_USERNAME, 5000, 0) == null) {
       if (evt.waitForAndGetElement(ELEMENT_GMAIL_SIGN_IN_LINK, 3000, 0) != null)
         evt.click(ELEMENT_GMAIL_SIGN_IN_LINK);
@@ -263,7 +260,7 @@ public class PlatformBase {
     Utils.pause(1000);
     evt.type(ELEMENT_GMAIL_PASS, pass, true);
     evt.click(ELEMENT_GMAIL_SIGN_IN);
-    //clearCache();
+    // clearCache();
     Utils.pause(2000);
     evt.click(ELEMENT_GMAIL_INBOX);
     Utils.pause(2000);
@@ -298,7 +295,7 @@ public class PlatformBase {
     info("Go to gmail");
     testBase.getSeleniumDriver().navigate().to(GMAIL_URL);
 
-    //login to mail
+    // login to mail
     if (evt.waitForAndGetElement(ELEMENT_GMAIL_USERNAME, 5000, 0) == null) {
       if (evt.waitForAndGetElement(ELEMENT_GMAIL_SIGN_IN_LINK, 3000, 0) != null)
         evt.click(ELEMENT_GMAIL_SIGN_IN_LINK);
@@ -322,7 +319,7 @@ public class PlatformBase {
   /**
    * function: check content of mail then delete mail
    *
-   * @param mail    element title of mail
+   * @param mail element title of mail
    * @param content mail content
    */
   public void checkAndDeleteMail(By mail, String content) {
@@ -365,11 +362,11 @@ public class PlatformBase {
   public void closeChildBrowsers(String parentWindow) {
     info("parentWindow:" + parentWindow);
     Set<String> handlers = testBase.getSeleniumDriver().getWindowHandles();
-    //Handler will have all the three window handles
+    // Handler will have all the three window handles
     for (String windowHandle : handlers) {
       testBase.getSeleniumDriver().switchTo().window(windowHandle);
       info("windowHandle" + windowHandle);
-      //If it is not the parent window it will close the child window
+      // If it is not the parent window it will close the child window
       if (!windowHandle.contains(parentWindow)) {
         info("close testBase.getSeleniumDriver().title:" + testBase.getSeleniumDriver().getTitle());
         Utils.pause(2000);
@@ -383,7 +380,7 @@ public class PlatformBase {
   /**
    * function: check content of mail then delete mail
    *
-   * @param title    title of the page
+   * @param title title of the page
    * @param opParams if true check it's present, false check if it's not present
    */
   public void checkEmailNotification(String title, Object... opParams) {
@@ -403,7 +400,7 @@ public class PlatformBase {
         evt.waitForElementNotPresent(ELEMENT_GMAIL_CONTENT.replace("${title}", title), 30000, 1);
     }
 
-    //close windows mail
+    // close windows mail
     if (opParams.length > 1)
       testBase.getSeleniumDriver().close();
   }
@@ -495,13 +492,11 @@ public class PlatformBase {
     String[] groups = group.split("/");
     for (String groupName : groups) {
       info("Select the group:" + groupName);
-      evt.click(ELEMENT_GROUP_MEMBERSHIP_NAME_SELECT
-                        .replace("$groupName", groupName));
+      evt.click(ELEMENT_GROUP_MEMBERSHIP_NAME_SELECT.replace("$groupName", groupName));
     }
     if (!membership.isEmpty()) {
       info("Select the membership:" + membership);
-      evt.click(ELEMENT_GROUP_MEMBERSHIP_NAME_SELECT
-                        .replace("$groupName", membership));
+      evt.click(ELEMENT_GROUP_MEMBERSHIP_NAME_SELECT.replace("$groupName", membership));
     }
     evt.waitForElementNotPresent(ELEMENT_MEMBERSHIP_POPUP);
   }
@@ -515,8 +510,7 @@ public class PlatformBase {
     String[] groups = group.split("/");
     for (String groupName : groups) {
       info("Select the group:" + groupName);
-      evt.click(ELEMENT_GROUP_NAME
-                        .replace("$group", groupName));
+      evt.click(ELEMENT_GROUP_NAME.replace("$group", groupName));
     }
     info("Select the group");
     evt.click(ELEMENT_SELECT_THIS_GROUP);
