@@ -84,7 +84,7 @@ public class GadgetManagement {
     evt.type(ELEMENT_CREATE_NEW_GADGET_INPUT_NAME_FIELD, name, true);
     if (!xmlCode.isEmpty()) {
       info("Input a new source code");
-      WebElement element = testBase.getSeleniumDriver().findElement(ELEMENT_CREATE_NEW_GADGET_SOURCE_FIELD);
+      WebElement element = testBase.getExoWebDriver().getWebDriver().findElement(ELEMENT_CREATE_NEW_GADGET_SOURCE_FIELD);
       element.clear();
       element.click();
       System.out.println(xmlCode);

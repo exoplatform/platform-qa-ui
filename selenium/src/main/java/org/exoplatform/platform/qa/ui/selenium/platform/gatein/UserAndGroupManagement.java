@@ -150,14 +150,14 @@ public class UserAndGroupManagement {
   public void addUserAdmin(String user, String... membership) {
     info("Go to Group tab");
     goToGroupTab();
-    evt.scrollToBottomPage(this.testBase.getSeleniumDriver());
+    evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     info("Select Platform/administration group");
     selectGroup("Platform/administration");
     info("Add user to administration group by type");
     evt.type(ELEMENT_INPUT_USERNAME, user, true);
     if (membership.length > 0)
       evt.select(ELEMENT_SELECT_MEMBERSHIP, membership[0]);
-    evt.scrollToElement(evt.waitForAndGetElement(ELEMENT_SAVE_BUTTON_2), this.testBase.getSeleniumDriver());
+    evt.scrollToElement(evt.waitForAndGetElement(ELEMENT_SAVE_BUTTON_2), this.testBase.getExoWebDriver().getWebDriver());
     evt.click(ELEMENT_SAVE_BUTTON_2);
     String addedUser = ELEMENT_ADDED_GROUP_USER_IN_TABLE.replace(
             "${username}", user);
@@ -179,15 +179,15 @@ public class UserAndGroupManagement {
   public void addUserContentManagement(String user, String... membership) {
     info("Go to Group tab");
     goToGroupTab();
-    evt.scrollToBottomPage(this.testBase.getSeleniumDriver());
+    evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     info("Select Platform/Content Management group");
     selectGroup("Platform/Content Management");
     info("Add user to Content Management group by type");
-    evt.scrollToBottomPage(this.testBase.getSeleniumDriver());
+    evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     evt.type(ELEMENT_INPUT_USERNAME, user, true);
     if (membership.length > 0)
       evt.select(ELEMENT_SELECT_MEMBERSHIP, membership[0]);
-    evt.scrollToBottomPage(this.testBase.getSeleniumDriver());
+    evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     evt.click(ELEMENT_SAVE_BUTTON_2);
     String addedUser = ELEMENT_ADDED_GROUP_USER_IN_TABLE.replace(
             "${username}", user);

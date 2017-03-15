@@ -27,7 +27,7 @@ public class DocumentPreview {
    */
   public void closeByPressECS() {
     info("press ESC key");
-    Actions action = new Actions(this.testBase.getSeleniumDriver());
+    Actions action = new Actions(this.testBase.getExoWebDriver().getWebDriver());
     action.sendKeys(Keys.ESCAPE).build().perform();
     action.release();
     Utils.pause(2000);
@@ -57,7 +57,7 @@ public class DocumentPreview {
     info("x is:" + x);
     info("y is:" + y);
     info("click on black background of Display area");
-    Actions action = new Actions(this.testBase.getSeleniumDriver());
+    Actions action = new Actions(this.testBase.getExoWebDriver().getWebDriver());
     action.moveToElement(el, 0, 0).moveByOffset(x, y).click().build().perform();
 
     info("Verify that the preview is closed");
@@ -111,7 +111,7 @@ public class DocumentPreview {
       evt.type(ELEMENT_COMMENT_INPUT_FIELD, text, true);
 
       info("Press Enter to add a comment to Comment area");
-      Actions action = new Actions(testBase.getSeleniumDriver());
+      Actions action = new Actions(testBase.getExoWebDriver().getWebDriver());
       action.sendKeys(Keys.ENTER).build().perform();
     }
     info("Finish adding a comment to Comment area");

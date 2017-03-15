@@ -77,8 +77,8 @@ public class PlatformBase {
     info("Finding the frameLocator:" + frameLocator);
     WebElement e = evt.waitForAndGetElement(frameLocator, testBase.getDefaultTimeout(), 1, 2);
     info("Switch to the frame:" + frameLocator);
-    testBase.getSeleniumDriver().switchTo().frame(e);
-    WebElement inputsummary = testBase.getSeleniumDriver().switchTo().activeElement();
+    testBase.getExoWebDriver().getWebDriver().switchTo().frame(e);
+    WebElement inputsummary = testBase.getExoWebDriver().getWebDriver().switchTo().activeElement();
     info("focus on the text area");
     inputsummary.click();
     info("Input the content:" + content);
@@ -99,8 +99,8 @@ public class PlatformBase {
     info("Finding the frameLocator:" + frameLocator);
     WebElement e = evt.waitForAndGetElement(frameLocator, testBase.getDefaultTimeout(), 1, 2);
     info("Switch to the frame:" + frameLocator);
-    testBase.getSeleniumDriver().switchTo().frame(e);
-    WebElement inputsummary = testBase.getSeleniumDriver().switchTo().activeElement();
+    testBase.getExoWebDriver().getWebDriver().switchTo().frame(e);
+    WebElement inputsummary = testBase.getExoWebDriver().getWebDriver().switchTo().activeElement();
     info("focus on the text area");
     inputsummary.click();
     if (param.length > 0)
@@ -141,11 +141,11 @@ public class PlatformBase {
    * <li>Switch to a new browser/ Popup window</li>
    */
   public void switchToNewWindow() {
-    Set<String> windowids = testBase.getSeleniumDriver().getWindowHandles();
+    Set<String> windowids = testBase.getExoWebDriver().getWebDriver().getWindowHandles();
     Iterator<String> iter = windowids.iterator();
     while (iter.hasNext()) {
       String windowHandle = iter.next();
-      testBase.getSeleniumDriver().switchTo().window(windowHandle);
+      testBase.getExoWebDriver().getWebDriver().switchTo().window(windowHandle);
       info("Switch to new windown successfully");
     }
   }
@@ -176,13 +176,13 @@ public class PlatformBase {
    */
   public void openNewBrowser() {
     // Open new browser by Javascript
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("window.open()");
-    for (String winHandle : testBase.getSeleniumDriver().getWindowHandles()) {
-      testBase.getSeleniumDriver().switchTo().window(winHandle);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("window.open()");
+    for (String winHandle : testBase.getExoWebDriver().getWebDriver().getWindowHandles()) {
+      testBase.getExoWebDriver().getWebDriver().switchTo().window(winHandle);
     }
-    testBase.getSeleniumDriver().manage().window().maximize();
-    testBase.getSeleniumDriver().navigate().refresh();
-    testBase.getSeleniumDriver().navigate().to(testBase.getDriver().getBaseUrl());
+    testBase.getExoWebDriver().getWebDriver().manage().window().maximize();
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+    testBase.getExoWebDriver().getWebDriver().navigate().to(testBase.getExoWebDriver().getBaseUrl());
   }
 
   /**
@@ -190,13 +190,13 @@ public class PlatformBase {
    */
   public void openNewBrowser(String url) {
     // Open new browser by Javascript
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("window.open()");
-    for (String winHandle : testBase.getSeleniumDriver().getWindowHandles()) {
-      testBase.getSeleniumDriver().switchTo().window(winHandle);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("window.open()");
+    for (String winHandle : testBase.getExoWebDriver().getWebDriver().getWindowHandles()) {
+      testBase.getExoWebDriver().getWebDriver().switchTo().window(winHandle);
     }
-    testBase.getSeleniumDriver().manage().window().maximize();
-    testBase.getSeleniumDriver().navigate().refresh();
-    testBase.getSeleniumDriver().navigate().to(url);
+    testBase.getExoWebDriver().getWebDriver().manage().window().maximize();
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+    testBase.getExoWebDriver().getWebDriver().navigate().to(url);
   }
 
   /**
@@ -205,10 +205,10 @@ public class PlatformBase {
    * @param windowTitle
    */
   public void switchBetweenWindowsUsingTitle(String windowTitle) {
-    Set<String> windows = testBase.getSeleniumDriver().getWindowHandles();
+    Set<String> windows = testBase.getExoWebDriver().getWebDriver().getWindowHandles();
     for (String window : windows) {
-      testBase.getSeleniumDriver().switchTo().window(window);
-      if (testBase.getSeleniumDriver().getTitle().contains(windowTitle)) {
+      testBase.getExoWebDriver().getWebDriver().switchTo().window(window);
+      if (testBase.getExoWebDriver().getWebDriver().getTitle().contains(windowTitle)) {
         return;
       }
     }
@@ -220,10 +220,10 @@ public class PlatformBase {
    * @param windowHandle
    */
   public void switchBetweenBrowsers(String windowHandle) {
-    Set<String> windows = testBase.getSeleniumDriver().getWindowHandles();
+    Set<String> windows = testBase.getExoWebDriver().getWebDriver().getWindowHandles();
     for (String window : windows) {
-      testBase.getSeleniumDriver().switchTo().window(window);
-      if (testBase.getSeleniumDriver().getWindowHandle().contains(windowHandle)) {
+      testBase.getExoWebDriver().getWebDriver().switchTo().window(window);
+      if (testBase.getExoWebDriver().getWebDriver().getWindowHandle().contains(windowHandle)) {
         return;
       }
     }
@@ -237,14 +237,14 @@ public class PlatformBase {
    */
   public void goToMail(String email, String pass) {
     // ((JavascriptExecutor)
-    // testBase.getSeleniumDriver()).executeScript("window.open()");
-    testBase.getSeleniumDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL + "n");
-    for (String winHandle : testBase.getSeleniumDriver().getWindowHandles()) {
-      testBase.getSeleniumDriver().switchTo().window(winHandle);
+    // testBase.getExoWebDriver().getWebDriver()).executeScript("window.open()");
+    testBase.getExoWebDriver().getWebDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL + "n");
+    for (String winHandle : testBase.getExoWebDriver().getWebDriver().getWindowHandles()) {
+      testBase.getExoWebDriver().getWebDriver().switchTo().window(winHandle);
     }
     info("Go to gmail");
-    testBase.getSeleniumDriver().navigate().to(GMAIL_URL);
-    testBase.getSeleniumDriver().manage().window().maximize();
+    testBase.getExoWebDriver().getWebDriver().navigate().to(GMAIL_URL);
+    testBase.getExoWebDriver().getWebDriver().manage().window().maximize();
 
     // login to mail
     if (evt.waitForAndGetElement(ELEMENT_GMAIL_USERNAME, 5000, 0) == null) {
@@ -270,13 +270,13 @@ public class PlatformBase {
    * Open gmail when user is logging
    */
   public void openMail() {
-    testBase.getSeleniumDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL + "n");
-    for (String winHandle : testBase.getSeleniumDriver().getWindowHandles()) {
-      testBase.getSeleniumDriver().switchTo().window(winHandle);
+    testBase.getExoWebDriver().getWebDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL + "n");
+    for (String winHandle : testBase.getExoWebDriver().getWebDriver().getWindowHandles()) {
+      testBase.getExoWebDriver().getWebDriver().switchTo().window(winHandle);
     }
     info("Go to gmail");
-    testBase.getSeleniumDriver().navigate().to(GMAIL_URL);
-    testBase.getSeleniumDriver().manage().window().maximize();
+    testBase.getExoWebDriver().getWebDriver().navigate().to(GMAIL_URL);
+    testBase.getExoWebDriver().getWebDriver().manage().window().maximize();
     Utils.pause(2000);
     evt.click(ELEMENT_GMAIL_INBOX);
     Utils.pause(2000);
@@ -289,11 +289,11 @@ public class PlatformBase {
    * @param pass
    */
   public void goToMailByTab(String email, String pass) {
-    testBase.getSeleniumDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL + "t");
-    ArrayList<String> tabs = new ArrayList<String>(testBase.getSeleniumDriver().getWindowHandles());
-    testBase.getSeleniumDriver().switchTo().window(tabs.get(0));
+    testBase.getExoWebDriver().getWebDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL + "t");
+    ArrayList<String> tabs = new ArrayList<String>(testBase.getExoWebDriver().getWebDriver().getWindowHandles());
+    testBase.getExoWebDriver().getWebDriver().switchTo().window(tabs.get(0));
     info("Go to gmail");
-    testBase.getSeleniumDriver().navigate().to(GMAIL_URL);
+    testBase.getExoWebDriver().getWebDriver().navigate().to(GMAIL_URL);
 
     // login to mail
     if (evt.waitForAndGetElement(ELEMENT_GMAIL_USERNAME, 5000, 0) == null) {
@@ -347,30 +347,30 @@ public class PlatformBase {
    * Get list all Browsers
    */
   public void getAllChildWindows() {
-    for (String windowHandle : testBase.getSeleniumDriver().getWindowHandles()) {
-      testBase.getSeleniumDriver().switchTo().window(windowHandle);
-      info("testBase.getSeleniumDriver().title:" + testBase.getSeleniumDriver().getTitle());
-      testBase.getSeleniumDriver().manage().window().maximize();
+    for (String windowHandle : testBase.getExoWebDriver().getWebDriver().getWindowHandles()) {
+      testBase.getExoWebDriver().getWebDriver().switchTo().window(windowHandle);
+      info("testBase.getExoWebDriver().getWebDriver().title:" + testBase.getExoWebDriver().getWebDriver().getTitle());
+      testBase.getExoWebDriver().getWebDriver().manage().window().maximize();
     }
   }
 
   /**
-   * Close all child testBase.getSeleniumDriver()s
+   * Close all child testBase.getExoWebDriver().getWebDriver()s
    *
    * @param parentWindow is the tilte of parent browsers
    */
   public void closeChildBrowsers(String parentWindow) {
     info("parentWindow:" + parentWindow);
-    Set<String> handlers = testBase.getSeleniumDriver().getWindowHandles();
+    Set<String> handlers = testBase.getExoWebDriver().getWebDriver().getWindowHandles();
     // Handler will have all the three window handles
     for (String windowHandle : handlers) {
-      testBase.getSeleniumDriver().switchTo().window(windowHandle);
+      testBase.getExoWebDriver().getWebDriver().switchTo().window(windowHandle);
       info("windowHandle" + windowHandle);
       // If it is not the parent window it will close the child window
       if (!windowHandle.contains(parentWindow)) {
-        info("close testBase.getSeleniumDriver().title:" + testBase.getSeleniumDriver().getTitle());
+        info("close testBase.getExoWebDriver().getWebDriver().title:" + testBase.getExoWebDriver().getWebDriver().getTitle());
         Utils.pause(2000);
-        testBase.getSeleniumDriver().close();
+        testBase.getExoWebDriver().getWebDriver().close();
       }
 
     }
@@ -387,11 +387,11 @@ public class PlatformBase {
     info("Check and delete mail");
     Boolean checkOrNo = (Boolean) (opParams.length > 0 ? opParams[0] : true);
 
-    String parentWindow = testBase.getSeleniumDriver().getWindowHandle();
+    String parentWindow = testBase.getExoWebDriver().getWebDriver().getWindowHandle();
     info("parentWindow:" + parentWindow);
-    for (String windowHandle : testBase.getSeleniumDriver().getWindowHandles()) {
-      testBase.getSeleniumDriver().switchTo().window(windowHandle);
-      info("testBase.getSeleniumDriver().title:" + testBase.getSeleniumDriver().getTitle());
+    for (String windowHandle : testBase.getExoWebDriver().getWebDriver().getWindowHandles()) {
+      testBase.getExoWebDriver().getWebDriver().switchTo().window(windowHandle);
+      info("testBase.getExoWebDriver().getWebDriver().title:" + testBase.getExoWebDriver().getWebDriver().getTitle());
     }
     if (opParams.length > 0) {
       if (checkOrNo == true)
@@ -402,7 +402,7 @@ public class PlatformBase {
 
     // close windows mail
     if (opParams.length > 1)
-      testBase.getSeleniumDriver().close();
+      testBase.getExoWebDriver().getWebDriver().close();
   }
 
   /**

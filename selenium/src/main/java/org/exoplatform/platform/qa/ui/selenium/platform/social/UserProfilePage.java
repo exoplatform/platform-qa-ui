@@ -73,7 +73,7 @@ public class UserProfilePage {
    */
   public void updateBasicInformation(String firstName, String lastName, String email) {
     info("Update basic information");
-    evt.scrollToBottomPage(this.testBase.getSeleniumDriver());
+    evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     if (evt.waitForAndGetElement(ELEMENT_EDIT_BASIC_INFORMATION, 5000, 0) != null) {
       evt.click(ELEMENT_EDIT_BASIC_INFORMATION);
     }
@@ -118,7 +118,7 @@ public class UserProfilePage {
    * @param job
    */
   public void updateGenderJob(String gender, String job) {
-    evt.scrollToBottomPage(this.testBase.getSeleniumDriver());
+    evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     if (evt.waitForAndGetElement(ELEMENT_CONTACT_EDIT_ICON, 5000, 0) != null)
       evt.click(ELEMENT_CONTACT_EDIT_ICON);
     if (gender != "" && gender != null) {
@@ -141,7 +141,7 @@ public class UserProfilePage {
    */
   public void updateIms(String type, String ims, Object... opParams) {
     info("Update ims");
-    evt.scrollToBottomPage(this.testBase.getSeleniumDriver());
+    evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     String index = (String) (opParams.length > 0 ? opParams[0] : "0");
     Integer xpathCount = testBase.getElements(ELEMENT_CONTACT_IMS_INPUT_LIST).size();
     if (Integer.valueOf(index) >= xpathCount) {
@@ -162,7 +162,7 @@ public class UserProfilePage {
    * @param opParams
    */
   public void updateUrl(String url, Object... opParams) {
-    evt.scrollToBottomPage(this.testBase.getSeleniumDriver());
+    evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     String index = (String) (opParams.length > 0 ? opParams[0] : "0");
     Integer xpathCount = testBase.getElements(ELEMENT_CONTACT_URL_INPUT_LIST).size();
     if (Integer.valueOf(index) >= xpathCount) {
@@ -173,7 +173,7 @@ public class UserProfilePage {
       WebElement input = evt.waitForAndGetElement(By.xpath(ELEMENT_CONTACT_URL_INPUT.replace("${index}", index)),
                                                   testBase.getDefaultTimeout(),
                                                   1);
-      Actions action = new Actions(testBase.getSeleniumDriver());
+      Actions action = new Actions(testBase.getExoWebDriver().getWebDriver());
       action.moveToElement(input).click().perform();
       action.sendKeys(url).perform();
       // action.moveToElement(input).sendKeys(url).build().perform();
@@ -190,7 +190,7 @@ public class UserProfilePage {
    */
   public void updatePhone(String type, String phone, Object... opParams) {
     info("Update phone");
-    evt.scrollToBottomPage(this.testBase.getSeleniumDriver());
+    evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     String index = (String) (opParams.length > 0 ? opParams[0] : "1");
     Integer xpathCount = testBase.getElements(ELEMENT_CONTACT_PHONE_INPUT_LIST).size();
     if (Integer.valueOf(index) >= xpathCount) {
@@ -263,7 +263,7 @@ public class UserProfilePage {
    * @param isSave null or true: save updating false: cancel
    */
   public void saveCancelUpdateInfo(Boolean isSave) {
-    evt.scrollToBottomPage(this.testBase.getSeleniumDriver());
+    evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     if (isSave == null || isSave) {
       info("Save updating information");
       Utils.pause(2000);
@@ -293,7 +293,7 @@ public class UserProfilePage {
    */
   public void connectToUserInProfilePage(String user) {
     info("connect to: " + user);
-    testBase.getSeleniumDriver().get(testBase.getDriver().getBaseUrl() + "/intranet/profile/" + user);
+    testBase.getExoWebDriver().getWebDriver().get(testBase.getExoWebDriver().getBaseUrl() + "/intranet/profile/" + user);
     evt.click(ELEMENT_UIMINICONNECTIONS_PORLET_CONNECT_STATUS, 0, true);
     evt.waitForAndGetElement(ELEMENT_UIMINICONNECTIONS_PORLET_CANCEL_STATUS);
     evt.waitForElementNotPresent(ELEMENT_UIMINICONNECTIONS_PORLET_CONNECT_STATUS);
@@ -306,7 +306,7 @@ public class UserProfilePage {
    */
   public void disconnectInProfilePage(String user) {
     info("disconnect: " + user);
-    testBase.getSeleniumDriver().get(testBase.getDriver().getBaseUrl() + "/intranet/profile/" + user);
+    testBase.getExoWebDriver().getWebDriver().get(testBase.getExoWebDriver().getBaseUrl() + "/intranet/profile/" + user);
     evt.mouseOver(ELEMENT_UIMINICONNECTIONS_PORLET_CONNECTED_STATUS, true);
     evt.waitForAndGetElement(ELEMENT_UIMINICONNECTIONS_PORLET_DISCONNECTED_STATUS).click();
     evt.waitForAndGetElement(ELEMENT_UIMINICONNECTIONS_PORLET_CONNECT_STATUS);

@@ -35,9 +35,9 @@ public class PortalBranding {
     }
 
     WebElement upload = evt.waitForAndGetElement(ELEMENT_UPLOAD_LINK, testBase.getDefaultTimeout(), 1, 2);
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].style.visibility = 'visible'; arguments[0].style.height = '1px'; "
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.visibility = 'visible'; arguments[0].style.height = '1px'; "
         + "arguments[0].style.width = '1px'; arguments[0].style.opacity = 1", upload);
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].style.display = 'block'; arguments[0].style.visibility = 'visible'",
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block'; arguments[0].style.visibility = 'visible'",
                                                                       upload);
     Utils.pause(10000);
     info("Select a file to upload");
@@ -51,6 +51,6 @@ public class PortalBranding {
     }
     info("Upload file successfully");
     Utils.pause(2000);
-    return new PortalBranding((TestBase) testBase.getSeleniumDriver());
+    return new PortalBranding((TestBase) testBase.getExoWebDriver().getWebDriver());
   }
 }

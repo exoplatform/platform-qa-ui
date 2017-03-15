@@ -74,13 +74,9 @@ public class ElementEventTestBase {
   public WebElement getElement(Object locator, Object... opParams) {
     By by = locator instanceof By ? (By) locator : By.xpath(locator.toString());
     WebDriver wDriver;
-    if (testBase.isDriver)
-      wDriver = (WebDriver) (opParams.length > 0 ? opParams[0] : testBase.getSeleniumDriver());
-    else
-      wDriver = (WebDriver) (opParams.length > 0 ? opParams[0] : testBase.getNewSeleniumDriver());
     WebElement elem = null;
     try {
-      elem = wDriver.findElement(by);
+      elem = testBase.getExoWebDriver().getWebDriver().findElement(by);
     } catch (NoSuchElementException e) {
 
     }
@@ -96,15 +92,11 @@ public class ElementEventTestBase {
    */
   public WebElement getDisplayedElement(Object locator, Object... opParams) {
     By by = locator instanceof By ? (By) locator : By.xpath(locator.toString());
-    WebDriver wDriver;
-    if (testBase.isDriver)
-      wDriver = (WebDriver) (opParams.length > 0 ? opParams[0] : testBase.getSeleniumDriver());
-    else
-      wDriver = (WebDriver) (opParams.length > 0 ? opParams[0] : testBase.getNewSeleniumDriver());
+
     WebElement e = null;
     try {
       if (by != null)
-        e = wDriver.findElement(by);
+        e = testBase.getExoWebDriver().getWebDriver().findElement(by);
       if (e != null) {
         if (isDisplay(by))
           return e;
@@ -152,11 +144,8 @@ public class ElementEventTestBase {
     int timeout = (Integer) (opParams.length > 0 ? opParams[0] : testBase.getDefaultTimeout());
     int isAssert = (Integer) (opParams.length > 1 ? opParams[1] : 1);
     int notDisplayE = (Integer) (opParams.length > 2 ? opParams[2] : 0);
-    WebDriver wDriver;
-    if (testBase.isDriver)
-      wDriver = (WebDriver) (opParams.length > 3 ? opParams[3] : testBase.getSeleniumDriver());
-    else
-      wDriver = (WebDriver) (opParams.length > 3 ? opParams[3] : testBase.getNewSeleniumDriver());
+    WebDriver wDriver = testBase.getExoWebDriver().getWebDriver();
+
     for (int tick = 0; tick < timeout / WAIT_INTERVAL; tick++) {
       if (notDisplayE == 2) {
         elem = getElement(locator, wDriver);
@@ -246,7 +235,7 @@ public class ElementEventTestBase {
    */
   public List<WebElement> getElements(String xpath) {
     try {
-      return testBase.getSeleniumDriver().findElements(By.xpath(xpath));
+      return testBase.getExoWebDriver().getWebDriver().findElements(By.xpath(xpath));
     } catch (StaleElementReferenceException e) {
       checkCycling(e, 5);
       Utils.pause(1000);
@@ -274,7 +263,7 @@ public class ElementEventTestBase {
    */
   public void dragAndDropToObject(Object sourceLocator, Object targetLocator) {
     Logger.info("--Drag and drop to object--");
-    Actions action = new Actions(testBase.getSeleniumDriver());
+    Actions action = new Actions(testBase.getExoWebDriver().getWebDriver());
     try {
       WebElement source = waitForAndGetElement(sourceLocator);
       WebElement target = waitForAndGetElement(targetLocator);
@@ -286,7 +275,7 @@ public class ElementEventTestBase {
       dragAndDropToObject(sourceLocator, targetLocator);
     } catch (UnhandledAlertException e) {
       try {
-        Alert alert = testBase.getSeleniumDriver().switchTo().alert();
+        Alert alert = testBase.getExoWebDriver().getWebDriver().switchTo().alert();
         alert.accept();
         switchToParentWindow();
       } catch (NoAlertPresentException eNoAlert) {
@@ -305,7 +294,7 @@ public class ElementEventTestBase {
    */
   public void dragObject(String sourceLocator, String targetLocator) {
     Logger.info("--Drag an object--");
-    Actions action = new Actions(testBase.getSeleniumDriver());
+    Actions action = new Actions(testBase.getExoWebDriver().getWebDriver());
     WebElement source = waitForAndGetElement(sourceLocator);
     WebElement target = waitForAndGetElement(targetLocator);
 
@@ -317,7 +306,7 @@ public class ElementEventTestBase {
       action.clickAndHold(source).moveToElement(target).release().build().perform();
     } catch (UnhandledAlertException e) {
       try {
-        Alert alert = testBase.getSeleniumDriver().switchTo().alert();
+        Alert alert = testBase.getExoWebDriver().getWebDriver().switchTo().alert();
         alert.accept();
         switchToParentWindow();
       } catch (NoAlertPresentException eNoAlert) {
@@ -343,7 +332,7 @@ public class ElementEventTestBase {
       Logger.info("wait and get element");
       e = waitForAndGetElement(locator, testBase.getDefaultTimeout(), 1, notDisplay);
     }
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].click();", e);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].click();", e);
   }
 
   /**
@@ -355,7 +344,7 @@ public class ElementEventTestBase {
    */
   public void typeByJavascript(Object locatorById, String value, Object... opParams) {
     Utils.pause(3000);
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("document.getElementById('" + locatorById + "').value='"
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("document.getElementById('" + locatorById + "').value='"
                                                                               + value + "'");
   }
 
@@ -368,7 +357,7 @@ public class ElementEventTestBase {
   public void click(Object locator, Object... opParams) {
     int notDisplay = (Integer) (opParams.length > 0 ? opParams[0] : 0);
     WebElement element = null;
-    Actions actions = new Actions(testBase.getSeleniumDriver());
+    Actions actions = new Actions(testBase.getExoWebDriver().getWebDriver());
     try {
       if (testBase.getBrowser().contains("iexplorer") || testBase.getBrowser().contains("chrome")) {
         Logger.info("use javasript to click");
@@ -381,7 +370,7 @@ public class ElementEventTestBase {
           element = (WebElement) locator;
         }
         if (testBase.getBrowser().contains("chrome")) {
-          scrollToElement(element, testBase.getSeleniumDriver());
+          scrollToElement(element, testBase.getExoWebDriver().getWebDriver());
         }
         if (element.isEnabled()) {
           Logger.info("click element");
@@ -417,11 +406,11 @@ public class ElementEventTestBase {
    */
   public void check(Object locator, int... opParams) {
     int notDisplayE = opParams.length > 0 ? opParams[0] : 0;
-    Actions actions = new Actions(testBase.getSeleniumDriver());
+    Actions actions = new Actions(testBase.getExoWebDriver().getWebDriver());
     try {
       WebElement element = waitForAndGetElement(locator, testBase.getDefaultTimeout(), 1, notDisplayE);
       if (testBase.getBrowser().contains("chrome")) {
-        scrollToElement(element, testBase.getSeleniumDriver());
+        scrollToElement(element, testBase.getExoWebDriver().getWebDriver());
       }
       if (!element.isSelected()) {
         actions.click(element).perform();
@@ -480,7 +469,7 @@ public class ElementEventTestBase {
             mouseOverScript =
             "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
     targetElement = waitForAndGetElement(locator, 5000, 1, notDisplay);
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript(mouseOverScript, targetElement);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript(mouseOverScript, targetElement);
   }
 
   /**
@@ -492,7 +481,7 @@ public class ElementEventTestBase {
    */
   public void mouseOver(Object locator, boolean safeToSERE, Object... opParams) {
     WebElement element;
-    Actions actions = new Actions(testBase.getSeleniumDriver());
+    Actions actions = new Actions(testBase.getExoWebDriver().getWebDriver());
     int notDisplay = (Integer) (opParams.length > 0 ? opParams[0] : 0);
     try {
       if (safeToSERE) {
@@ -533,8 +522,8 @@ public class ElementEventTestBase {
    */
   public void mouseOverAndClick(Object locator) {
     WebElement element;
-    Actions actions = new Actions(testBase.getSeleniumDriver());
-    if (testBase.getDriver().isIEDriver()) {
+    Actions actions = new Actions(testBase.getExoWebDriver().getWebDriver());
+    if (testBase.getExoWebDriver().isIEDriver()) {
       element = getDisplayedElement(locator);
     } else {
       element = waitForAndGetElement(locator);
@@ -673,7 +662,7 @@ public class ElementEventTestBase {
    */
   public void uncheck(Object locator, int... opParams) {
     int notDisplayE = opParams.length > 0 ? opParams[0] : 0;
-    Actions actions = new Actions(testBase.getSeleniumDriver());
+    Actions actions = new Actions(testBase.getExoWebDriver().getWebDriver());
     try {
       WebElement element = waitForAndGetElement(locator, testBase.getDefaultTimeout(), 1, notDisplayE);
 
@@ -705,7 +694,7 @@ public class ElementEventTestBase {
    */
   public void rightClickOnElement(Object locator, int... opParams) {
     int display = opParams.length > 0 ? opParams[0] : 0;
-    Actions actions = new Actions(testBase.getSeleniumDriver());
+    Actions actions = new Actions(testBase.getExoWebDriver().getWebDriver());
     Utils.pause(500);
     try {
       WebElement element = waitForAndGetElement(locator, testBase.getDefaultTimeout(), 1, display);
@@ -729,7 +718,7 @@ public class ElementEventTestBase {
    * @param locator
    */
   public void doubleClickOnElement(Object locator) {
-    Actions actions = new Actions(testBase.getSeleniumDriver());
+    Actions actions = new Actions(testBase.getExoWebDriver().getWebDriver());
     WebElement element;
     try {
       if (!locator.getClass().getName().contains("WebElement")) {
@@ -767,7 +756,7 @@ public class ElementEventTestBase {
    */
   public void switchToParentWindow() {
     try {
-      Set<String> availableWindows = testBase.getSeleniumDriver().getWindowHandles();
+      Set<String> availableWindows = testBase.getExoWebDriver().getWebDriver().getWindowHandles();
       String WindowIdParent = null;
       int counter = 1;
       for (String windowId : availableWindows) {
@@ -776,7 +765,7 @@ public class ElementEventTestBase {
         }
         counter++;
       }
-      testBase.getSeleniumDriver().switchTo().window(WindowIdParent);
+      testBase.getExoWebDriver().getWebDriver().switchTo().window(WindowIdParent);
       Utils.pause(1000);
     } catch (WebDriverException e) {
       e.printStackTrace();
@@ -812,7 +801,7 @@ public class ElementEventTestBase {
    */
   public void changeDisplayAttributeHTML(Object locator) {
     WebElement element = waitForAndGetElement(locator, testBase.getDefaultTimeout(), 1, 2);
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].style.display = 'block';", element);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';", element);
   }
 
   /**
@@ -823,8 +812,8 @@ public class ElementEventTestBase {
    * @param value
    */
   public void copyPasteString(By origin, By target, String value) {
-    WebElement element1 = testBase.getSeleniumDriver().findElement(origin);
-    WebElement element2 = testBase.getSeleniumDriver().findElement(target);
+    WebElement element1 = testBase.getExoWebDriver().getWebDriver().findElement(origin);
+    WebElement element2 = testBase.getExoWebDriver().getWebDriver().findElement(target);
 
     Logger.info("Type into the first locator");
     element1.clear();
@@ -848,10 +837,10 @@ public class ElementEventTestBase {
   public boolean checkExitScrollBar(By object) {
     WebElement element = waitForAndGetElement(object);
     String scrollHeight =
-            String.valueOf(((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("return arguments[0].scrollHeight;",
+            String.valueOf(((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("return arguments[0].scrollHeight;",
                                                                                              element));
     String offsetHeight =
-            String.valueOf(((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("return arguments[0].offsetHeight;",
+            String.valueOf(((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("return arguments[0].offsetHeight;",
                                                                                              element));
     Logger.info("scrollHeight: " + scrollHeight);
     Logger.info("offsetHeight: " + offsetHeight);
@@ -868,7 +857,7 @@ public class ElementEventTestBase {
    */
   public WebElement getElementFromTextByJquery(String text) {
 
-    JavascriptExecutor js = (JavascriptExecutor) testBase.getSeleniumDriver();
+    JavascriptExecutor js = (JavascriptExecutor) testBase.getExoWebDriver().getWebDriver();
     Utils.pause(2000);
     try {
       WebElement web = (WebElement) js.executeScript("return $(\"a:contains('" + text + "')\").get(0);");
@@ -889,7 +878,7 @@ public class ElementEventTestBase {
     int display = opParams.length > 0 ? opParams[0] : 0;
     WebElement element = waitForAndGetElement(object, 5000, 1, display);
     JavascriptExecutor jse;
-    jse = (JavascriptExecutor) testBase.getSeleniumDriver();
+    jse = (JavascriptExecutor) testBase.getExoWebDriver().getWebDriver();
     jse.executeScript("arguments[0].scrollIntoView(true);", element);
   }
 
@@ -905,39 +894,39 @@ public class ElementEventTestBase {
     try {
       WebElement inputsummary = null;
       WebElement e = waitForAndGetElement(framelocator, testBase.getDefaultTimeout(), 1, 2);
-      testBase.getSeleniumDriver().switchTo().frame(e);
-      inputsummary = testBase.getSeleniumDriver().switchTo().activeElement();
+      testBase.getExoWebDriver().getWebDriver().switchTo().frame(e);
+      inputsummary = testBase.getExoWebDriver().getWebDriver().switchTo().activeElement();
       inputsummary.click();
       inputsummary.clear();
       if ("iexplorer".equals(testBase.getBrowser())) {
         if ("true".equals(testBase.nativeEvent)) {
           Logger.info("Set nativeEvent is TRUE");
-          ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("document.body.innerHTML='" + data
+          ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("document.body.innerHTML='" + data
                                                                                     + "' + document.body.innerHTML;");
         } else {
           Logger.info("Set nativeEvent is FALSE");
           // inputsummary.sendKeys(data);
-          ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("document.body.innerHTML='" + data
+          ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("document.body.innerHTML='" + data
                                                                                     + "' + document.body.innerHTML;");
         }
       } else {
-        ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("document.body.innerHTML='" + data
+        ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("document.body.innerHTML='" + data
                                                                                   + "' + document.body.innerHTML;");
       }
     } catch (StaleElementReferenceException e) {
       checkCycling(e, testBase.getDefaultTimeout() / WAIT_INTERVAL);
       Utils.pause(WAIT_INTERVAL);
-      testBase.getSeleniumDriver().switchTo().defaultContent();
+      testBase.getExoWebDriver().getWebDriver().switchTo().defaultContent();
       inputDataToCKEditor(framelocator, data);
     } catch (ElementNotVisibleException e) {
       checkCycling(e, testBase.getDefaultTimeout() / WAIT_INTERVAL);
       Utils.pause(WAIT_INTERVAL);
-      testBase.getSeleniumDriver().switchTo().defaultContent();
+      testBase.getExoWebDriver().getWebDriver().switchTo().defaultContent();
       inputDataToCKEditor(framelocator, data);
     } catch (WebDriverException e) {
       checkCycling(e, testBase.getDefaultTimeout() / WAIT_INTERVAL);
       Utils.pause(WAIT_INTERVAL);
-      testBase.getSeleniumDriver().switchTo().defaultContent();
+      testBase.getExoWebDriver().getWebDriver().switchTo().defaultContent();
       inputDataToCKEditor(framelocator, data);
     }
     switchToParentWindow();
@@ -992,7 +981,7 @@ public class ElementEventTestBase {
         break;
       }
       Logger.info("Retry...[" + repeat + "]");
-      testBase.getSeleniumDriver().navigate().refresh();
+      testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     }
     Utils.pause(2000);
     Logger.info("The elemnt is shown successfully");

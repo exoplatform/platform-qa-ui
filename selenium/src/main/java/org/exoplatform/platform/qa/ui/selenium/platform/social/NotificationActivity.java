@@ -187,7 +187,7 @@ public class NotificationActivity {
    */
   public void verifyTitlePage(String expectedTitle) {
     info("Verify that the title of the page is shown with correct data");
-    String actualTitle = testBase.getSeleniumDriver().getTitle();
+    String actualTitle = testBase.getExoWebDriver().getWebDriver().getTitle();
     info("Actual title as:" + actualTitle);
     if (expectedTitle.equals(actualTitle))
       assert true;
@@ -206,11 +206,11 @@ public class NotificationActivity {
       WebElement commentButton = evt.waitForAndGetElement(ELEMENT_COMMENT_BUTTON);
       WebElement workingLabel = evt.waitForAndGetElement(ELEMENT_ACTIVITY_ADD_YOUR_COMMENTLABEL);
 
-      ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].textContent = '';", workingLabel);
-      ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].textContent = '" + comment + "';",
+      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].textContent = '';", workingLabel);
+      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].textContent = '" + comment + "';",
                                                                         commentText);
-      ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].disabled = false;", commentButton);
-      ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].className = 'btn pull-right btn-primary';",
+      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].disabled = false;", commentButton);
+      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].className = 'btn pull-right btn-primary';",
                                                                         commentButton);
       evt.click(ELEMENT_COMMENT_BUTTON);
       info("Verify comment successfully");
@@ -343,7 +343,7 @@ public class NotificationActivity {
    * @param content
    */
   public void replyTopic(String title, String content) {
-    String titleWindows = this.testBase.getSeleniumDriver().getTitle();
+    String titleWindows = this.testBase.getExoWebDriver().getWebDriver().getTitle();
     info("titleWinodws:" + titleWindows);
     if (!title.isEmpty())
       evt.type(ELEMENT_TITLE_POST, title, true);
@@ -363,8 +363,8 @@ public class NotificationActivity {
     info("Finding the frameLocator:" + frameLocator);
     WebElement e = evt.waitForAndGetElement(frameLocator, testBase.getDefaultTimeout(), 1, 2);
     info("Switch to the frame:" + frameLocator);
-    testBase.getSeleniumDriver().switchTo().frame(e);
-    WebElement inputsummary = testBase.getSeleniumDriver().switchTo().activeElement();
+    testBase.getExoWebDriver().getWebDriver().switchTo().frame(e);
+    WebElement inputsummary = testBase.getExoWebDriver().getWebDriver().switchTo().activeElement();
     info("focus on the text area");
     inputsummary.click();
     info("Input the content:" + content);

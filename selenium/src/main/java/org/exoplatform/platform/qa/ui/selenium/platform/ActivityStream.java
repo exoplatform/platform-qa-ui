@@ -335,7 +335,7 @@ public class ActivityStream {
       else {
         evt.switchToParentWindow();
         WebElement input = evt.waitForAndGetElement(ELEMENT_COMMENTBOX.replace("${title}", filename));
-        Actions action = new Actions(testBase.getSeleniumDriver());
+        Actions action = new Actions(testBase.getExoWebDriver().getWebDriver());
         action.moveToElement(input).sendKeys(textContent).build().perform();
         info("Click on comment button to add comment to the activity");
         evt.click(ELEMENT_COMMENT_BUTTON.replace("${activityText}", filename));
@@ -361,11 +361,11 @@ public class ActivityStream {
     WebElement workingLabel = evt.waitForAndGetElement(ELEMENT_ACTIVITY_ADD_YOUR_COMMENTLABEL.replace("${activityText}",
                                                                                                       activityText));
 
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].textContent = '';", workingLabel);
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].textContent = '" + contentOfComment + "';",
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].textContent = '';", workingLabel);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].textContent = '" + contentOfComment + "';",
                                                                       commentText);
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].disabled = false;", commentButton);
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].className = 'btn pull-right btn-primary';",
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].disabled = false;", commentButton);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].className = 'btn pull-right btn-primary';",
                                                                       commentButton);
     evt.click(ELEMENT_COMMENT_BUTTON.replace("${activityText}", activityText));
     info("Verify comment successfully");
@@ -453,10 +453,10 @@ public class ActivityStream {
     // type(ELEMENT_COMPOSER_INPUT_FILED, text, false);
     WebElement shareButton = evt.waitForAndGetElement(ELEMENT_COMPOSER_SHARE_BUTTON);
     WebElement workingLabel = evt.waitForAndGetElement(ELEMENT_ACTIVITY_WHAT_ARE_YOU_WORKING_LABEL);
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].textContent = '';", workingLabel);
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].textContent = '" + text + "';", inputText);
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].disabled = false;", shareButton);
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].className = 'pull-right btn btn-primary';",
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].textContent = '';", workingLabel);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].textContent = '" + text + "';", inputText);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].disabled = false;", shareButton);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].className = 'pull-right btn btn-primary';",
                                                                       shareButton);
   }
 
@@ -473,7 +473,7 @@ public class ActivityStream {
     info("----Input link into link box-----");
     evt.waitForAndGetElement(ELEMENT_COMPOSER_INPUT_LINK_FIELD);
     WebElement input = evt.waitForAndGetElement(ELEMENT_COMPOSER_INPUT_LINK_FIELD, testBase.getDefaultTimeout(), 1);
-    Actions action = new Actions(testBase.getSeleniumDriver());
+    Actions action = new Actions(testBase.getExoWebDriver().getWebDriver());
     action.moveToElement(input).click().perform();
     action.sendKeys(link).perform();
     // type(ELEMENT_COMPOSER_INPUT_LINK_FIELD, link, true);
@@ -593,7 +593,7 @@ public class ActivityStream {
         break;
       }
       info("Retry...[" + repeat + "]");
-      this.testBase.getSeleniumDriver().navigate().refresh();
+      this.testBase.getExoWebDriver().getWebDriver().navigate().refresh();
       openUploadPopup(nameDrive, pathFolder);
       evt.waitForAndGetElement(By.linkText(nameFile)).click();
       Utils.pause(2000);
@@ -635,7 +635,7 @@ public class ActivityStream {
         }
       }
       info("Retry...[" + repeat + "]");
-      this.testBase.getSeleniumDriver().navigate().refresh();
+      this.testBase.getExoWebDriver().getWebDriver().navigate().refresh();
       evt.clickByJavascript(ELEMENT_COMPOSER_FILE_BUTTON);
     }
     info("----Upload a file-----");
@@ -674,7 +674,7 @@ public class ActivityStream {
     boolean prev = (Doc.length > 0 ? Doc[0] : false);
     info("-- Upload file --");
     WebElement frame = evt.waitForAndGetElement(ELEMENT_UPLOAD_FILE_FRAME_XPATH, 3000, 0);
-    testBase.getSeleniumDriver().switchTo().frame(frame);
+    testBase.getExoWebDriver().getWebDriver().switchTo().frame(frame);
     evt.click(ELEMENT_UPLOAD_BUTTON);
     /*
      * WebElement el = waitForAndGetElement(ELEMENT_UPLOAD_BUTTON, 4000, 0);

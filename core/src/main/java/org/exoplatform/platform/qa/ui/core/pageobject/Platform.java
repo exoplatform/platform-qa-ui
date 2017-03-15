@@ -42,6 +42,18 @@ public class Platform {
    */
   public Platform ensureLicenseIsAccepted() {
 
+    boolean alreadySkipped = false;
+    try {
+      alreadySkipped = !License.element.exists();
+    } catch (Exception ex) {
+      System.out.print("License skip exception " + ex.getStackTrace());
+    }
+    if (alreadySkipped == false) {
+      System.out.print("Skip the License ");
+      new License().accept();
+    }
+
+
     return this;
   }
 
@@ -76,7 +88,8 @@ public class Platform {
     } catch (Exception ex) {
       System.out.print(" ");
     }
-    if (!alreadySkipped) {
+    if (alreadySkipped == false) {
+      System.out.print("Skip the Account ");
       new AccountSetup().skip();
     }
 
@@ -91,7 +104,8 @@ public class Platform {
     } catch (Exception ex) {
       System.out.print(" ");
     }
-    if (!alreadyLogged) {
+    if (alreadyLogged == false) {
+      System.out.print("Log in ");
       new Login().signIn();
     }
 

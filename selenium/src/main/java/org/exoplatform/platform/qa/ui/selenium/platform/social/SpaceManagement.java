@@ -548,7 +548,7 @@ public class SpaceManagement {
    */
   public void openFolder(String name) {
     info("evt.click on the folder's name");
-    Actions action = new Actions(this.testBase.getSeleniumDriver());
+    Actions action = new Actions(this.testBase.getExoWebDriver().getWebDriver());
     action.moveToElement(evt.waitForAndGetElement(ELEMENT_DOCUMENT_FOLDER_NAME.replace("$name", name))).doubleClick().perform();
     info("Verify that folder is opened");
     evt.waitForAndGetElement(ELMENT_DOCUMENT_FOLDER_ADDRESS.replace("$name", name.toLowerCase()));

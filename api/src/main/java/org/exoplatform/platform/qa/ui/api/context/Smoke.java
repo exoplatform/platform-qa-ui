@@ -24,7 +24,8 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 /**
- * All tests marked by this annotation can be executed on a default PLF instance.
+ * All tests marked by this annotation can be executed on a default PLF
+ * instance.
  */
 @Test
 @Tag("smoke")

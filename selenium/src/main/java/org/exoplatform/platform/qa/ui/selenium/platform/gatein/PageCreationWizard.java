@@ -128,9 +128,6 @@ public class PageCreationWizard {
   /**
    * Add a Content list to a Page by folder
    * 
-   * @param titlePage
-   * @param Description
-   * @param language
    * @param path
    * @param folder
    */
@@ -292,7 +289,7 @@ public class PageCreationWizard {
     info("Get the size of target");
     Dimension size = elTarget.getSize();
 
-    Actions builder = new Actions(testBase.getSeleniumDriver());
+    Actions builder = new Actions(testBase.getExoWebDriver().getWebDriver());
     info("Hold the source");
     builder.clickAndHold(elSource).build().perform();
     info("Move the mouse to the middle of the portlet");
@@ -420,7 +417,7 @@ public class PageCreationWizard {
     info("Get the size of target");
     Dimension size = elTarget.getSize();
 
-    Actions builder = new Actions(testBase.getSeleniumDriver());
+    Actions builder = new Actions(testBase.getExoWebDriver().getWebDriver());
     info("Hold the source:");
     builder.clickAndHold(elSource).build().perform();
     info("Move the mouse to the middle of the portlet");
@@ -489,7 +486,7 @@ public class PageCreationWizard {
    * @return title
    */
   public String getOldTitle() {
-    WebElement el = testBase.getSeleniumDriver().findElement(ELEMENT_VIEW_PROPERTIES_TITLE);
+    WebElement el = testBase.getExoWebDriver().getWebDriver().findElement(ELEMENT_VIEW_PROPERTIES_TITLE);
     String tilte = el.getAttribute("value");
     info("tilte:" + tilte);
     return tilte;
@@ -606,7 +603,7 @@ public class PageCreationWizard {
    * 
    * @param title
    * @param groupPath
-   * @param memberShip
+   * @param editPermission
    * @param isShowMaxWindow
    */
   public void resetValuesProperties(String title, String groupPath, String editPermission, boolean... isShowMaxWindow) {

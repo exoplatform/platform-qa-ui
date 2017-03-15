@@ -43,28 +43,28 @@ public class RichTextEditor {
   public void typeEnterInRichText() {
     try {
       WebElement inputsummary = null;
-      testBase.getSeleniumDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
-      inputsummary = testBase.getSeleniumDriver().switchTo().activeElement();
+      testBase.getExoWebDriver().getWebDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
+      inputsummary = testBase.getExoWebDriver().getWebDriver().switchTo().activeElement();
       inputsummary.click();
       inputsummary.sendKeys(Keys.END);
       inputsummary.sendKeys(Keys.ENTER);
       evt.switchToParentWindow();
       Utils.pause(1000);
-      testBase.getSeleniumDriver().switchTo().defaultContent();
+      testBase.getExoWebDriver().getWebDriver().switchTo().defaultContent();
     } catch (StaleElementReferenceException e) {
       evt.checkCycling(e, testBase.getDefaultTimeout() / evt.getWaitInterval());
       Utils.pause(evt.getWaitInterval());
-      testBase.getSeleniumDriver().switchTo().defaultContent();
+      testBase.getExoWebDriver().getWebDriver().switchTo().defaultContent();
       typeEnterInRichText();
     } catch (ElementNotVisibleException e) {
       evt.checkCycling(e, testBase.getDefaultTimeout() / evt.getWaitInterval());
       Utils.pause(evt.getWaitInterval());
-      testBase.getSeleniumDriver().switchTo().defaultContent();
+      testBase.getExoWebDriver().getWebDriver().switchTo().defaultContent();
       typeEnterInRichText();
     } catch (WebDriverException e) {
       evt.checkCycling(e, testBase.getDefaultTimeout() / evt.getWaitInterval());
       Utils.pause(evt.getWaitInterval());
-      testBase.getSeleniumDriver().switchTo().defaultContent();
+      testBase.getExoWebDriver().getWebDriver().switchTo().defaultContent();
       typeEnterInRichText();
     } finally {
       testBase.loopCount = 0;
@@ -126,7 +126,7 @@ public class RichTextEditor {
     evt.waitForElementNotPresent(but.ELEMENT_CREATE_LINK_BUTTON);
     if (verify) {
       WebElement e = evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME, testBase.getDefaultTimeout(), 1, 2);
-      testBase.getSeleniumDriver().switchTo().frame(e);
+      testBase.getExoWebDriver().getWebDriver().switchTo().frame(e);
       if (label != null && label != "")
         evt.waitForAndGetElement(By.linkText(label));
       if (tooltip != null && tooltip != "")
@@ -555,7 +555,7 @@ public class RichTextEditor {
     info("Click on Create link button");
     goToCreateLink();
     info("Move focus at the end of the line");
-    evt.pressEndKey(this.testBase.getSeleniumDriver());
+    evt.pressEndKey(this.testBase.getExoWebDriver().getWebDriver());
   }
 
   /**
@@ -585,7 +585,7 @@ public class RichTextEditor {
     goToCreateLink();
     if (isPreEndKey) {
       info("Move focus at the end of the line");
-      evt.pressEndKey(this.testBase.getSeleniumDriver());
+      evt.pressEndKey(this.testBase.getExoWebDriver().getWebDriver());
     }
   }
 
@@ -622,7 +622,7 @@ public class RichTextEditor {
     info("Click on Create link button");
     goToCreateLink();
     info("Move focus at the end of the line");
-    evt.pressEndKey(this.testBase.getSeleniumDriver());
+    evt.pressEndKey(this.testBase.getExoWebDriver().getWebDriver());
   }
 
   /**
@@ -646,7 +646,7 @@ public class RichTextEditor {
         evt.inputDataToCKEditor(ELEMENT_CONTENT_WIKI_FRAME, content);
       }
       Utils.pause(1000);
-      testBase.getSeleniumDriver().switchTo().defaultContent();
+      testBase.getExoWebDriver().getWebDriver().switchTo().defaultContent();
     }
     evt.click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
     evt.waitForElementNotPresent(ELEMENT_SAVE_BUTTON_ADD_PAGE);
@@ -696,7 +696,7 @@ public class RichTextEditor {
     goToCreateLink();
     if (isPressEndKey) {
       info("Move focus at the end of the line");
-      evt.pressEndKey(this.testBase.getSeleniumDriver());
+      evt.pressEndKey(this.testBase.getExoWebDriver().getWebDriver());
     }
   }
 
@@ -739,7 +739,7 @@ public class RichTextEditor {
     info("Click on Create link button");
     goToCreateLink();
     info("Move focus at the end of the line");
-    evt.pressEndKey(this.testBase.getSeleniumDriver());
+    evt.pressEndKey(this.testBase.getExoWebDriver().getWebDriver());
   }
 
   /**
@@ -783,7 +783,7 @@ public class RichTextEditor {
     goToCreateLink();
     if (isPressEndKey) {
       info("Move focus at the end of the line");
-      evt.pressEndKey(this.testBase.getSeleniumDriver());
+      evt.pressEndKey(this.testBase.getExoWebDriver().getWebDriver());
     }
   }
 
@@ -857,7 +857,7 @@ public class RichTextEditor {
     goToCreateLink();
     if (isPressEndKey) {
       info("Move focus at the end of the line");
-      evt.pressEndKey(this.testBase.getSeleniumDriver());
+      evt.pressEndKey(this.testBase.getExoWebDriver().getWebDriver());
     }
   }
 
@@ -1019,7 +1019,7 @@ public class RichTextEditor {
     goToInsertImage();
     if (isPressEndKey) {
       info("Move focus at the end of the line");
-      evt.pressEndKey(this.testBase.getSeleniumDriver());
+      evt.pressEndKey(this.testBase.getExoWebDriver().getWebDriver());
     }
   }
 
@@ -1034,7 +1034,7 @@ public class RichTextEditor {
     info("Click on Remove Image link");
     evt.mouseOverAndClick(ELEMENT_REMOVE_IMAGE_LINK_MENU);
     info("Switch to the frame");
-    testBase.getSeleniumDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
+    testBase.getExoWebDriver().getWebDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
     info("Verify that the image is removed");
     evt.waitForElementNotPresent(ELEMENT_CHECK_IMAGE.replace("${file}", content));
     info("Switch to the parent");
@@ -1098,7 +1098,7 @@ public class RichTextEditor {
     evt.waitForAndGetElement(ELEMENT_REMOVE_LINK_MENU, testBase.getDefaultTimeout(), 1);
     evt.click(ELEMENT_REMOVE_LINK_MENU);
     info("Switch to the frame");
-    testBase.getSeleniumDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
+    testBase.getExoWebDriver().getWebDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
     info("Verify that the link is removed");
     evt.waitForElementNotPresent(By.linkText(content));
     info("Switch to the parent");
@@ -1176,9 +1176,9 @@ public class RichTextEditor {
     evt.doubleClickOnElement(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_NEW_FILE_BTN);
 
     Utils.pause(3000);
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
     Utils.pause(2000);
-    testBase.getSeleniumDriver().findElement(By.xpath("//*[@name='filepath']")).sendKeys(path);
+    testBase.getExoWebDriver().getWebDriver().findElement(By.xpath("//*[@name='filepath']")).sendKeys(path);
     /*
      * WebElement elem =
      * waitForAndGetElement(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_NAME,5000,1,2);
@@ -1251,9 +1251,9 @@ public class RichTextEditor {
     evt.doubleClickOnElement(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_IMAGE_BTN);
 
     Utils.pause(2000);
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
     Utils.pause(2000);
-    testBase.getSeleniumDriver().findElement(By.xpath("//*[@name='filepath']")).sendKeys(path);
+    testBase.getExoWebDriver().getWebDriver().findElement(By.xpath("//*[@name='filepath']")).sendKeys(path);
 
     /*
      * WebElement elem =
@@ -1293,7 +1293,7 @@ public class RichTextEditor {
    */
   public void selectAttachedFile(String page, String attachedFile) {
     WebElement el = evt.waitForAndGetElement(ELEMENT_ALL_PAGE_TAB_PAGE_SELECTED.replace("$title", page), 5000, 1, 2);
-    evt.scrollToElement(el, this.testBase.getSeleniumDriver());
+    evt.scrollToElement(el, this.testBase.getExoWebDriver().getWebDriver());
     if (evt.waitForAndGetElement(ELEMENT_ALL_PAGE_TAB_PAGE_SELECTED.replace("$title", page), 5000, 0) != null) {
       info("Select the page");
       evt.click(ELEMENT_ALL_PAGE_TAB_PAGE_SELECTED.replace("$title", page));
@@ -1341,7 +1341,7 @@ public class RichTextEditor {
    */
   public void selectPageInAllPagesTab(String page) {
     WebElement el = evt.waitForAndGetElement(ELEMENT_ALL_PAGE_TAB_PAGE_SELECTED.replace("$title", page), 5000, 1, 2);
-    evt.scrollToElement(el, this.testBase.getSeleniumDriver());
+    evt.scrollToElement(el, this.testBase.getExoWebDriver().getWebDriver());
     if (evt.waitForAndGetElement(ELEMENT_ALL_PAGE_TAB_PAGE_SELECTED.replace("$title", page), 5000, 0) != null) {
       info("Select the page");
       evt.click(ELEMENT_ALL_PAGE_TAB_PAGE_SELECTED.replace("$title", page));
@@ -1373,7 +1373,7 @@ public class RichTextEditor {
    */
   public void selectPageInMyRecentChangesTab(String page) {
     WebElement el = evt.waitForAndGetElement(ELEMENT_MY_RECENT_CHANGES_TAB_PAGE_SELECTED.replace("$title", page), 5000, 1, 2);
-    evt.scrollToElement(el, this.testBase.getSeleniumDriver());
+    evt.scrollToElement(el, this.testBase.getExoWebDriver().getWebDriver());
     if (evt.waitForAndGetElement(ELEMENT_MY_RECENT_CHANGES_TAB_PAGE_SELECTED.replace("$title", page), 5000, 0) != null) {
       info("Select the page");
       evt.click(ELEMENT_MY_RECENT_CHANGES_TAB_PAGE_SELECTED.replace("$title", page));
@@ -1455,7 +1455,7 @@ public class RichTextEditor {
   public void selectImage(String altTextImage) {
     info("Focus on the frame");
     plf.switchFrame(ELEMENT_CONTENT_WIKI_FRAME);
-    WebElement element = testBase.getSeleniumDriver()
+    WebElement element = testBase.getExoWebDriver().getWebDriver()
                                  .findElement(By.xpath(ELEMENT_WIKI_CONTENT_IMAGE_ALT.replace("$alt", altTextImage)));
     selectItems(element);
     evt.switchToParentWindow();
@@ -1468,7 +1468,7 @@ public class RichTextEditor {
    */
   public void selectLabelLink(String label) {
     info("Select a line text");
-    WebElement element = testBase.getSeleniumDriver().findElement(By.linkText(label));
+    WebElement element = testBase.getExoWebDriver().getWebDriver().findElement(By.linkText(label));
     selectItems(element);
   }
 
@@ -1478,7 +1478,7 @@ public class RichTextEditor {
    * @param el
    */
   public void selectItems(WebElement el) {
-    testBase.action = new Actions(testBase.getSeleniumDriver());
+    testBase.action = new Actions(testBase.getExoWebDriver().getWebDriver());
     testBase.action.moveToElement(el).clickAndHold().perform();
     testBase.action.release();
   }
@@ -1510,7 +1510,7 @@ public class RichTextEditor {
   public void attachFile(String link) {
     String fs = File.separator;
     WebElement elem = evt.waitForAndGetElement(ELEMENT_UPLOAD_NAME, 5000, 1, 2);
-    evt.scrollToElement(elem, testBase.getSeleniumDriver());
+    evt.scrollToElement(elem, testBase.getExoWebDriver().getWebDriver());
     evt.click(elem, 2, true);
     testBase.uploadFileUsingRobot(link);
     evt.waitForAndGetElement(By.linkText(link.substring(link.lastIndexOf(fs) + 1)));
@@ -1642,14 +1642,14 @@ public class RichTextEditor {
     if (control) {
       info("Using Ctrl + Shift + C");
       Utils.javaSimulateKeyPress(KeyEvent.VK_CONTROL, KeyEvent.VK_SHIFT, KeyEvent.VK_C);
-      testBase.getSeleniumDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
+      testBase.getExoWebDriver().getWebDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
     } else {
       info("Click on collapse link");
       evt.waitForAndGetElement(ELEMENT_MACRO_LINK);
       evt.mouseOverAndClick(ELEMENT_MACRO_LINK);
       evt.waitForAndGetElement(ELEMENT_MACRO_COLLAPSE_LINK);
       evt.mouseOverAndClick(ELEMENT_MACRO_COLLAPSE_LINK);
-      testBase.getSeleniumDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
+      testBase.getExoWebDriver().getWebDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
     }
   }
 
@@ -1663,14 +1663,14 @@ public class RichTextEditor {
     if (control) {
       info("Using Ctrl + Shift + E");
       Utils.javaSimulateKeyPress(KeyEvent.VK_CONTROL, KeyEvent.VK_SHIFT, KeyEvent.VK_E);
-      testBase.getSeleniumDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
+      testBase.getExoWebDriver().getWebDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
     } else {
       info("Click on expand link");
       evt.waitForAndGetElement(ELEMENT_MACRO_LINK);
       evt.mouseOverAndClick(ELEMENT_MACRO_LINK);
       evt.waitForAndGetElement(ELEMENT_MACRO_EXPAND_LINK);
       evt.mouseOverAndClick(ELEMENT_MACRO_EXPAND_LINK);
-      testBase.getSeleniumDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
+      testBase.getExoWebDriver().getWebDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
     }
   }
 
@@ -1712,7 +1712,7 @@ public class RichTextEditor {
     info("Focus on the frame");
     plf.switchFrame(ELEMENT_CONTENT_WIKI_FRAME, 1);
     Utils.pause(2000);
-    WebElement element = testBase.getSeleniumDriver().findElement(ELEMENT_JIRA_TABLE);
+    WebElement element = testBase.getExoWebDriver().getWebDriver().findElement(ELEMENT_JIRA_TABLE);
     selectItems(element);
     element.click();
     evt.switchToParentWindow();

@@ -112,7 +112,7 @@ public class HomePagePlatform {
     evt.waitForAndGetElement(ELEMENT_ANSWER_LINK_PLF);
     evt.click(ELEMENT_ANSWER_LINK_PLF, 0, true);
     if (evt.waitForAndGetElement(ELEMENT_ANSWER_PORTLET, 5000, 0) == null)
-      testBase.getSeleniumDriver().navigate().refresh();
+      testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     evt.waitForAndGetElement(ELEMENT_ANSWER_PORTLET);
     Utils.pause(2000);
   }
@@ -134,10 +134,10 @@ public class HomePagePlatform {
    * Go to faq page
    */
   public void goToFaq() {
-    info("Base url is " + testBase.getDriver().getBaseUrl());
-    String url = testBase.getDriver().getBaseUrl() + "/intranet/home/FAQ";
+    info("Base url is " + testBase.getExoWebDriver().getBaseUrl());
+    String url = testBase.getExoWebDriver().getBaseUrl() + "/intranet/home/FAQ";
     info("-- Go to FAQ page --");
-    testBase.getSeleniumDriver().get(url);
+    testBase.getExoWebDriver().getWebDriver().get(url);
     evt.waitForAndGetElement(ELEMENT_FAQ_QUESTION_LIST);
   }
 
@@ -172,7 +172,7 @@ public class HomePagePlatform {
    */
   public void goToFriendProfilePage(String username) {
     info("Go to Friend profile page");
-    testBase.getSeleniumDriver().get(testBase.getDriver().getBaseUrl() + "/intranet/profile/" + username);
+    testBase.getExoWebDriver().getWebDriver().get(testBase.getExoWebDriver().getBaseUrl() + "/intranet/profile/" + username);
     Utils.pause(2000);
   }
 

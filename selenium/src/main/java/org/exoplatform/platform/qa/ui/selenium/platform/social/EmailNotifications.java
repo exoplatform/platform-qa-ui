@@ -39,10 +39,10 @@ public class EmailNotifications {
    * Get list all Browsers
    */
   public void getAllChildWindows() {
-    for (String windowHandle : testBase.getSeleniumDriver().getWindowHandles()) {
-      testBase.getSeleniumDriver().switchTo().window(windowHandle);
-      info("driver.title:" + testBase.getSeleniumDriver().getTitle());
-      testBase.getSeleniumDriver().manage().window().maximize();
+    for (String windowHandle : testBase.getExoWebDriver().getWebDriver().getWindowHandles()) {
+      testBase.getExoWebDriver().getWebDriver().switchTo().window(windowHandle);
+      info("driver.title:" + testBase.getExoWebDriver().getWebDriver().getTitle());
+      testBase.getExoWebDriver().getWebDriver().manage().window().maximize();
     }
   }
 
@@ -53,16 +53,16 @@ public class EmailNotifications {
    */
   public void closeChildBrowsers(String parentWindow) {
     info("parentWindow:" + parentWindow);
-    Set<String> handlers = testBase.getSeleniumDriver().getWindowHandles();
+    Set<String> handlers = testBase.getExoWebDriver().getWebDriver().getWindowHandles();
     // Handler will have all the three window handles
     for (String windowHandle : handlers) {
-      testBase.getSeleniumDriver().switchTo().window(windowHandle);
+      testBase.getExoWebDriver().getWebDriver().switchTo().window(windowHandle);
       info("windowHandle" + windowHandle);
       // If it is not the parent window it will close the child window
       if (!windowHandle.contains(parentWindow)) {
-        info("close driver.title:" + testBase.getSeleniumDriver().getTitle());
+        info("close driver.title:" + testBase.getExoWebDriver().getWebDriver().getTitle());
         Utils.pause(2000);
-        testBase.getSeleniumDriver().close();
+        testBase.getExoWebDriver().getWebDriver().close();
       }
 
     }
@@ -331,7 +331,7 @@ public class EmailNotifications {
    */
   public void goToPreviousPage() {
     info("Back to the previous page");
-    testBase.getSeleniumDriver().navigate().back();
+    testBase.getExoWebDriver().getWebDriver().navigate().back();
     Utils.pause(2000);
   }
 

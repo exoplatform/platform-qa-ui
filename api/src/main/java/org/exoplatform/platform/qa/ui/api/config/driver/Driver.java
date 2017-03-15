@@ -18,11 +18,42 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see <http://www.gnu.org/licenses/>.
  */
-package org.exoplatform.platform.qa.ui.api;
+package org.exoplatform.platform.qa.ui.api.config.driver;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 
 /**
  * Created by mgreau on 13/02/2017.
  */
 public interface Driver {
+
+  WebDriver getWebDriver();
+
+  String getBrowser();
+
+  String getBaseUrl();
+
+  default boolean isChromeDriver() {
+    return getWebDriver() instanceof ChromeDriver;
+  }
+
+  default boolean isIEDriver() {
+    return getWebDriver() instanceof InternetExplorerDriver;
+  }
+
+  default boolean isFFDriver() {
+    return getWebDriver() instanceof FirefoxDriver;
+  }
+
+  // @TODO Decide how to manage the following behavior:
+
+  WebDriver getDriverAutoOpenWindow();
+
+  WebDriver getDriverSetLanguage(String locale);
+
+  void setPreferenceRunTime();
 
 }

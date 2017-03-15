@@ -20,6 +20,7 @@
  */
 package org.exoplatform.platform.qa.ui.core.oauth.functional;
 
+import org.exoplatform.platform.qa.ui.api.context.Smoke;
 import org.exoplatform.platform.qa.ui.core.Base;
 import org.exoplatform.platform.qa.ui.api.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.Button;
@@ -82,21 +83,21 @@ public class SignInFlow extends Base {
     waitForAndGetElement(ELEMENT_FACEBOOK_LOGIN_FORM_LOGIN_BUTTON);
 
     info("Back to the platform login page");
-    getSeleniumDriver().navigate().back();
+    getExoWebDriver().getWebDriver().navigate().back();
 
     info("Check twitter");
     manageLoginOut.checkTwitterLoginForm();
     waitForAndGetElement(ELEMENT_TWITTER_LOGIN_FORM_LOGIN_BUTTON);
 
     info("Back to the platform login page");
-    getSeleniumDriver().navigate().back();
+    getExoWebDriver().getWebDriver().navigate().back();
 
     info("Check linkedin");
     manageLoginOut.checkLinkedinLoginForm();
     waitForAndGetElement(ELEMENT_LINKEDIN_LOGIN_FORM_LOGIN_BUTTON);
 
     info("Back to the platform login page");
-    getSeleniumDriver().navigate().back();
+    getExoWebDriver().getWebDriver().navigate().back();
 
     info("Check G+");
     manageLoginOut.checkGoogleLoginForm();
@@ -217,6 +218,7 @@ public class SignInFlow extends Base {
   @Test
   @DisplayName("Case ID:128346")
   @Disabled
+  @Smoke
   public void test07_CheckTheRegistrationOnTheFlyInCaseTheSocialNetworkAccountIsNotLinkedToAnyEXoUserAccount() {
     info("Test 7: Check the registration on the fly in case the social network account is not linked to any eXo user account");
 

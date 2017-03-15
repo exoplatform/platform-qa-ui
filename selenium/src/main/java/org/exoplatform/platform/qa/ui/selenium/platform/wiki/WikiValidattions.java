@@ -61,7 +61,7 @@ public class WikiValidattions {
   public void verifyResumADraf(String titleBeforeDraf) {
     info("Get current title in iput field");
     String currentTitle =
-                        this.testBase.getSeleniumDriver().findElement(ELEMENT_TITLE_WIKI_INPUT).getAttribute("value").toString();
+                        this.testBase.getExoWebDriver().getWebDriver().findElement(ELEMENT_TITLE_WIKI_INPUT).getAttribute("value").toString();
     if (currentTitle.contains(titleBeforeDraf))
       assert true;
     else
@@ -76,7 +76,7 @@ public class WikiValidattions {
    */
   public void verifyInsertedLinkIntoFrame(String label, String tooltip) {
     WebElement e = evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME, testBase.getDefaultTimeout(), 1, 2);
-    testBase.getSeleniumDriver().switchTo().frame(e);
+    testBase.getExoWebDriver().getWebDriver().switchTo().frame(e);
     if (label != null && label != "")
       evt.waitForAndGetElement(By.linkText(label));
     if (tooltip != null && tooltip != "")
@@ -91,7 +91,7 @@ public class WikiValidattions {
    */
   public void verifyMacroIntoFrame(String macroType) {
     WebElement e = evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME, testBase.getDefaultTimeout(), 1, 2);
-    testBase.getSeleniumDriver().switchTo().frame(e);
+    testBase.getExoWebDriver().getWebDriver().switchTo().frame(e);
     evt.waitForAndGetElement(ELEMENT_MACRO_CLASS_INSERT_INTO_FRAME.replace("$macro", macroType));
     evt.switchToParentWindow();
   }
@@ -397,7 +397,7 @@ public class WikiValidattions {
    */
   public void verifyInsertNewLink(String label, String pageLink) {
     info("The page link is shown");
-    String actualTitle = this.testBase.getSeleniumDriver().findElement(ELEMENT_TITLE_WIKI_INPUT).getAttribute("value").toString();
+    String actualTitle = this.testBase.getExoWebDriver().getWebDriver().findElement(ELEMENT_TITLE_WIKI_INPUT).getAttribute("value").toString();
     if (actualTitle.contains(pageLink))
       assert true;
     else
@@ -636,7 +636,7 @@ public class WikiValidattions {
     evt.waitForAndGetElement(ELEMENT_TITLE_WIKI_INPUT);
     info("Verify that the value of input title field has correct value of old title");
     String currentTitle =
-                        this.testBase.getSeleniumDriver().findElement(ELEMENT_TITLE_WIKI_INPUT).getAttribute("value").toString();
+                        this.testBase.getExoWebDriver().getWebDriver().findElement(ELEMENT_TITLE_WIKI_INPUT).getAttribute("value").toString();
     if (currentTitle.contains(oldTitle))
       assert true;
     else
@@ -784,10 +784,10 @@ public class WikiValidattions {
     info("Scroll down");
     WebElement spaceList = evt.waitForAndGetElement(By.className("spaceList"));
     String str1 =
-                String.valueOf(((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("return arguments[0].clientHeight;",
+                String.valueOf(((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("return arguments[0].clientHeight;",
                                                                                                  spaceList));
     String str =
-               String.valueOf(((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("return arguments[0].scrollHeight;",
+               String.valueOf(((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("return arguments[0].scrollHeight;",
                                                                                                 spaceList));
     int clientHeight = Integer.parseInt(str1);
     int scrollHeight = Integer.parseInt(str);
@@ -1033,7 +1033,7 @@ public class WikiValidattions {
    * @param contentMacroBox
    */
   public void verifyMacroFootNodeIntoFrame(String footNode1, String footNode2, String contentMacroBox) {
-    testBase.getSeleniumDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
+    testBase.getExoWebDriver().getWebDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
     evt.waitForAndGetElement(By.linkText("1"));
     evt.waitForAndGetElement(By.linkText("2"));
     evt.waitForAndGetElement(ELEMENT_MACRO_FOOTNOTE.replace("${macro}", footNode1));

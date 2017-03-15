@@ -20,76 +20,34 @@
  */
 package org.exoplatform.platform.qa.ui.core;
 
-import com.codeborne.selenide.Configuration;
-import org.exoplatform.platform.qa.ui.core.pageobject.Platform;
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.api.context.Smoke;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.util.Enumeration;
-
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import org.exoplatform.platform.qa.ui.core.pageobject.Platform;
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.junit.jupiter.api.TestInfo;
 
 public class Base extends TestBase {
 
   public Base() {
-    super.setDriver(getWebDriver());
+
   }
 
   @BeforeAll
   public static void setup() {
 
-    final String ipAddress;
-    try {
-      ipAddress = getIpAddress();
 
-      Configuration.browser = "chrome";
-      Configuration.baseUrl = "http://" + ipAddress + ":" + getPLFHTTPPort();
-      Configuration.holdBrowserOpen = true;
-      //Configuration.remote = "http://" + ipAddress + ":" + getHubHTTPPort() + "/wd/hub";
-    } catch (SocketException e) {
-      e.printStackTrace();
-    }
-
-  }
-
-  private static String getPLFHTTPPort() {
-    String defaultPort = "80";
-
-    return defaultPort;
-  }
-
-  private static String getHubHTTPPort() {
-    String defaultPort = "4444";
-
-    return defaultPort;
-  }
-
-  private static String getIpAddress() throws SocketException {
-    String ipAddress = null;
-
-    Enumeration<NetworkInterface> n = NetworkInterface.getNetworkInterfaces();
-    for (; n.hasMoreElements(); ) {
-      NetworkInterface e = n.nextElement();
-
-      Enumeration<InetAddress> a = e.getInetAddresses();
-      for (; a.hasMoreElements(); ) {
-        InetAddress addr = a.nextElement();
-        //Find local address
-        if (addr.getHostAddress().contains("192")) {
-          ipAddress = addr.getHostAddress();
-        }
-      }
-    }
-    return ipAddress;
   }
 
   @BeforeEach
-  public void openPlatform() {
-    new Platform().open();
-  }
+  public void openPlatform(TestInfo testInfo) {
+    Platform plf = new Platform();
+    plf.open();
 
+    // Smoke tests use default data
+    if (testInfo.getTags().contains(Smoke.class.getSimpleName().toLowerCase())){
+      plf.ensureLicenseIsAccepted().ensureRegisterSoftwareIsSkipped().ensureAccountSetupIsSkipped().ensureUserIsLoggedIn();
+    }
+  }
 }

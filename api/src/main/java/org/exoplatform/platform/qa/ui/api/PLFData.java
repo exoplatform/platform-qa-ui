@@ -25,37 +25,37 @@ package org.exoplatform.platform.qa.ui.api;
  */
 public class PLFData {
 
-  public static String username = "root";
+  public static String username             = "root";
 
-  public static String password = "gtn";
+  public static String password             = "gtn";
 
-  public static String DATA_USER1 = "john";
+  public static String DATA_USER1           = "john";
 
-  public static String DATA_USER2 = "mary";
+  public static String DATA_USER2           = "mary";
 
-  public static String DATA_USER3 = "james";
+  public static String DATA_USER3           = "james";
 
-  public static String DATA_USER4 = "demo";
+  public static String DATA_USER4           = "demo";
 
-  public static String USER_ROOT = "root";
+  public static String USER_ROOT            = "root";
 
-  public static String PASS_ROOT = "gtn";
+  public static String PASS_ROOT            = "gtn";
 
-  public static String DATA_PASS = "gtn";
+  public static String DATA_PASS            = "gtn";
 
-  public static String DATA_NAME_USER1 = "John Smith";
+  public static String DATA_NAME_USER1      = "John Smith";
 
-  public static String DATA_NAME_USER2 = "Mary Williams";
+  public static String DATA_NAME_USER2      = "Mary Williams";
 
-  public static String DATA_NAME_USER3 = "James Davis";
+  public static String DATA_NAME_USER3      = "James Davis";
 
-  public static String DATA_NAME_USER4 = "Jack Miller";
+  public static String DATA_NAME_USER4      = "Jack Miller";
 
-  public static String DATA_NAME_ROOT = "Root Root";
+  public static String DATA_NAME_ROOT       = "Root Root";
 
   public static String ADMINISTRATION_GROUP = "administration";
 
-  public static String PLATFORM_GROUP = "Platform";
+  public static String PLATFORM_GROUP       = "Platform";
 
   public PLFData() {
 

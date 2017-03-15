@@ -1151,11 +1151,11 @@ public class EventManagement {
   public void checkEmailNotificationReminderEvent(String titleEvent, Object... opParams) {
     info("Check and delete mail");
     Boolean checkOrNo = (Boolean) (opParams.length > 0 ? opParams[0] : true);
-    String parentWindow = testBase.getSeleniumDriver().getWindowHandle();
+    String parentWindow = testBase.getExoWebDriver().getWebDriver().getWindowHandle();
     info("parentWindow:" + parentWindow);
-    for (String windowHandle : testBase.getSeleniumDriver().getWindowHandles()) {
-      testBase.getSeleniumDriver().switchTo().window(windowHandle);
-      info("driver.title:" + testBase.getSeleniumDriver().getTitle());
+    for (String windowHandle : testBase.getExoWebDriver().getWebDriver().getWindowHandles()) {
+      testBase.getExoWebDriver().getWebDriver().switchTo().window(windowHandle);
+      info("driver.title:" + testBase.getExoWebDriver().getWebDriver().getTitle());
     }
     if (opParams.length > 0) {
       if (checkOrNo == true)

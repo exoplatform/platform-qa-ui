@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.core.plf;
 
+import org.exoplatform.platform.qa.ui.api.context.Smoke;
 import org.exoplatform.platform.qa.ui.core.Base;
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +16,7 @@ public class Plf_Integration extends Base {
    * <li> Post-Condition: </li>
    */
   @Test
+  @Smoke
   public void test01_CheckHomePage() {
     info("Test 1: Check Home page");
     /*Step Number: 1

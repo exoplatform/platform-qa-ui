@@ -107,7 +107,7 @@ public class ManageLogInOut {
    * @param password
    */
   public void signInCas(String username, String password) {
-    testBase.getSeleniumDriver();
+    testBase.getExoWebDriver().getWebDriver();
     evt.type(ELEMENT_INPUT_USERNAME_CAS, username, true);
     evt.type(ELEMENT_INPUT_PASSWORD_CAS, password, true);
     evt.click(ELEMENT_SIGN_IN_BUTTON_CAS);
@@ -133,13 +133,13 @@ public class ManageLogInOut {
         break;
       }
       info("Retry...[" + repeat + "]");
-      testBase.getSeleniumDriver().navigate().refresh();
+      testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     }
     evt.click(ManageLogInOutLocator.ELEMENT_SIGN_OUT_LINK);
     if (evt.waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK, 2000, 0) != null) {
       info("Clear cache and reconnect to the package");
-      testBase.getSeleniumDriver().manage().deleteAllCookies();
-      testBase.getSeleniumDriver();
+      testBase.getExoWebDriver().getWebDriver().manage().deleteAllCookies();
+      testBase.getExoWebDriver().getWebDriver();
     }
 
     Utils.pause(3000);
@@ -150,8 +150,8 @@ public class ManageLogInOut {
     WebElement logOutSucess = evt.waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK, 3000, 0);
     if (logOutSucess != null) {
       info("Because issue: in jboss, logout then come back homepage, we have to close IE and init the new one");
-      testBase.getSeleniumDriver().manage().deleteAllCookies();
-      testBase.getSeleniumDriver();
+      testBase.getExoWebDriver().getWebDriver().manage().deleteAllCookies();
+      testBase.getExoWebDriver().getWebDriver();
     } else {
       info("Logout sucessfully");
     }

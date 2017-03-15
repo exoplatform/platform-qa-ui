@@ -260,7 +260,7 @@ public class AnswerCategoryManagement {
     String[] links = path.split("/");
     goToActionOfCategoryFromActionBar(actionCategoryOption.IMPORT);
     WebElement eFile = evt.waitForAndGetElement(ELEMENT_IMPORT_CATEGORY_INPUT, testBase.getDefaultTimeout(), 1, 2);
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].style.display = 'block';", eFile);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';", eFile);
     eFile.sendKeys(testBase.getAbsoluteFilePath(path));
     evt.waitForAndGetElement(ELEMENT_ATTACHMENT_FORM_FILE_NAME.replace("$fileName", links[links.length - 1]));
     evt.switchToParentWindow();
@@ -274,7 +274,7 @@ public class AnswerCategoryManagement {
    * 
    * @param cat
    * @param group
-   * @param isRestriected
+   * @param isRestricted
    * @param isMod
    */
   public void setPermission(String cat, String group, boolean isRestricted, boolean isMod) {

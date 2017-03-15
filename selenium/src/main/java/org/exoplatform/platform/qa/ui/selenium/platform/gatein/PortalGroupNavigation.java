@@ -85,7 +85,7 @@ public class PortalGroupNavigation {
    */
   public void verifyAddNavigationPerm(String title, boolean isEnable, String groupName) {
     info("verify Add Navigation permission");
-    portMg.openPage(testBase.getDriver().getBaseUrl() + "/intranet/home/" + title);
+    portMg.openPage(testBase.getExoWebDriver().getBaseUrl() + "/intranet/home/" + title);
     if (isEnable && groupName.length() > 0) {
       evt.waitForAndGetElement(ELEMENT_ADD_NAVIGATION_BUTTON);
       evt.click(ELEMENT_ADD_NAVIGATION_BUTTON);

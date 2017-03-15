@@ -185,7 +185,7 @@ public class WikiPageInformation {
       evt.click(ELEMENT_REVISION_LINK);
     }
     Utils.pause(500);
-    testBase.getSeleniumDriver().navigate().refresh();
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     Utils.pause(2000);
     evt.click(versionLink);
     Utils.pause(1000);

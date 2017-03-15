@@ -43,7 +43,7 @@ public final class DefaultDataTestBase {
 
   public static final Boolean DEFAULT_ISUSEFILE = true;
 
-  public static final String DEFAULT_JDBCDRIVER = "com.mysql.jdbc.SeleniumDriverImpl";
+  public static final String DEFAULT_JDBCDRIVER = "com.mysql.jdbc.LegacySeleniumDriver";
 
   public static final String DEFAULT_DBURL = "jdbc:mysql://localhost:3306/selenium";
 

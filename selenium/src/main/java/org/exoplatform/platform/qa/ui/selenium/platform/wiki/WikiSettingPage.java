@@ -39,7 +39,7 @@ public class WikiSettingPage {
     info("Input a template's name");
     evt.type(ELEMENT_TEMPLATE_SEARCH_TEXTBOX, template, true);
     info("Press Enter key");
-    testBase.getSeleniumDriver().findElement(ELEMENT_TEMPLATE_SEARCH_TEXTBOX).sendKeys(Keys.ENTER);
+    testBase.getExoWebDriver().getWebDriver().findElement(ELEMENT_TEMPLATE_SEARCH_TEXTBOX).sendKeys(Keys.ENTER);
     info("Verify that the search results is shown that matchs with keyword");
     evt.waitForAndGetElement(ELEMENT_WIKI_SETTINGS_RESULTS.replace("${tempalte}", template), 3000, 0);
   }

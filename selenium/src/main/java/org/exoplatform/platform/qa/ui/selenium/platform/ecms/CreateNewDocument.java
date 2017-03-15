@@ -148,7 +148,7 @@ public class CreateNewDocument {
    * @param content
    */
   public void addNewFile(String title, String content) {
-    this.testBase.getSeleniumDriver().navigate().refresh();
+    this.testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     Utils.pause(2000);
     evt.waitForAndGetElement(ELEMENT_FILEFORM_BLANK_NAME, testBase.getDefaultTimeout(), 1);
     evt.type(ELEMENT_FILEFORM_BLANK_NAME, title, true);
@@ -162,7 +162,7 @@ public class CreateNewDocument {
    * @param content
    */
   public void addNewWebContent(String title, String content) {
-    testBase.getSeleniumDriver().navigate().refresh();
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     Utils.pause(1000);
     evt.type(ELEMENT_FILEFORM_BLANK_NAME, title, true);
     testBase.inputDataToCKEditor(ELEMENT_FILEFORM_BLANK_CONTENT, content);
@@ -175,7 +175,7 @@ public class CreateNewDocument {
    * @param summary
    */
   public void addNewProduct(String title, String summary) {
-    testBase.getSeleniumDriver().navigate().refresh();
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     evt.type(ELEMENT_FILEFORM_BLANK_NAME, title, true);
     plf.inputFrame(ELEMENT_FILEFORM_BLANK_CONTENT, summary);
     evt.switchToParentWindow();

@@ -23,7 +23,7 @@ public class QuestionManagement {
   /**
    * constructor
    * 
-   * @param dr
+   * @param testBase
    */
   public QuestionManagement(TestBase testBase) {
     this.testBase = testBase;
@@ -83,7 +83,7 @@ public class QuestionManagement {
       String[] links = pathFile.split("/");
       evt.click(ELEMENT_SUBMIT_QUESTION_FORM_ATTACHMENT_BUTTON);
       WebElement eFile = evt.waitForAndGetElement(ELEMENT_QUESTION_FILE_INPUT, testBase.getDefaultTimeout(), 1, 2);
-      ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].style.display = 'block';", eFile);
+      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';", eFile);
       eFile.sendKeys(testBase.getAbsoluteFilePath(pathFile));
       evt.waitForAndGetElement(ELEMENT_ATTACHMENT_FORM_FILE_NAME.replace("$fileName", links[links.length - 1]));
       evt.click(ELEMENT_ATTACH_SAVE_BUTTON);
@@ -362,7 +362,7 @@ public class QuestionManagement {
                                                testBase.getDefaultTimeout(),
                                                1,
                                                2);
-      ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].click();", e1);
+      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].click();", e1);
       evt.waitForAndGetElement(ELEMENT_QUESTION_RATE_NUMBER.replace("$index", st));
     }
   }

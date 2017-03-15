@@ -131,7 +131,7 @@ public class NavigationToolbar {
   public void goToUsersAndGroupsManagement() {
     info("--Go to Users and groups management--");
     Utils.pause(3000);
-    if (testBase.getDriver().isIEDriver()) {
+    if (testBase.getExoWebDriver().isIEDriver()) {
       evt.waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION, testBase.getDefaultTimeout(), 1, 2);
       evt.clickByJavascript(ELEMENT_TOOLBAR_ADMINISTRATION, 2);
       evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_USERS, testBase.getDefaultTimeout(), 1);
@@ -141,8 +141,8 @@ public class NavigationToolbar {
     if (evt.waitForAndGetElement(ELEMENT_GROUP_AND_ROLE_LINK, 2000, 0) != null)
       evt.click(ELEMENT_GROUP_AND_ROLE_LINK);
     else {
-      testBase.getSeleniumDriver()
-              .get(testBase.getDriver().getBaseUrl() + "/g/:platform:administrators/administration/management");
+      testBase.getExoWebDriver().getWebDriver()
+              .get(testBase.getExoWebDriver().getBaseUrl() + "/g/:platform:administrators/administration/management");
     }
     Utils.pause(3000);
   }
@@ -158,8 +158,8 @@ public class NavigationToolbar {
     if (evt.waitForAndGetElement(ELEMENT_GROUP_AND_ROLE_LINK, 2000, 0) != null)
       evt.click(ELEMENT_GROUP_AND_ROLE_LINK);
     else {
-      testBase.getSeleniumDriver()
-              .get(testBase.getDriver().getBaseUrl() + "/g/:platform:administrators/administration/management");
+      testBase.getExoWebDriver().getWebDriver()
+              .get(testBase.getExoWebDriver().getBaseUrl() + "/g/:platform:administrators/administration/management");
     }
     Utils.pause(2000);
   }
@@ -224,7 +224,7 @@ public class NavigationToolbar {
         evt.mouseOverAndClick(ELEMENT_LINK_SETUP);
         break;
       }
-      if (testBase.getDriver().isIEDriver()) {
+      if (testBase.getExoWebDriver().isIEDriver()) {
         evt.waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION, testBase.getDefaultTimeout(), 1, 2);
         evt.clickByJavascript(ELEMENT_TOOLBAR_ADMINISTRATION, 2);
       } else
@@ -254,7 +254,7 @@ public class NavigationToolbar {
     evt.mouseOver(ELEMENT_MENU_PAGE_LINK, true);
     info("Click on Seo Menu");
     WebElement seoMenu = evt.waitForAndGetElement(ELEMENT_MENU_SEO_LINK, 10000, 1, 2);
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].evt.click()", seoMenu);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].evt.click()", seoMenu);
     Utils.pause(2000);
   }
 
@@ -296,15 +296,15 @@ public class NavigationToolbar {
    */
   public void goToContentAdministration() {
     info("Go to content administration");
-    info("Base url is " + testBase.getDriver().getBaseUrl());
-    String url = testBase.getDriver().getBaseUrl() + "/g/:platform:web-contributors/wcmAdmin";
+    info("Base url is " + testBase.getExoWebDriver().getBaseUrl());
+    String url = testBase.getExoWebDriver().getBaseUrl() + "/g/:platform:web-contributors/wcmAdmin";
     info("base url of content admin is " + url);
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
-        testBase.getSeleniumDriver().get(url);
+        testBase.getExoWebDriver().getWebDriver().get(url);
         break;
       }
-      if (testBase.getDriver().isIEDriver()) {
+      if (testBase.getExoWebDriver().isIEDriver()) {
         evt.waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION, testBase.getDefaultTimeout(), 1, 2);
         evt.clickByJavascript(ELEMENT_TOOLBAR_ADMINISTRATION, 2);
       } else
@@ -488,12 +488,12 @@ public class NavigationToolbar {
     }
 
     WebElement frame = evt.waitForAndGetElement(ELEMENT_UPLOAD_FILE_FRAME_XPATH);
-    testBase.getSeleniumDriver().switchTo().frame(frame);
+    testBase.getExoWebDriver().getWebDriver().switchTo().frame(frame);
     info(testBase.getAbsoluteFilePath(linkFile));
     Utils.pause(2000);
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
     Utils.pause(2000);
-    testBase.getSeleniumDriver()
+    testBase.getExoWebDriver().getWebDriver()
             .findElement(ELEMENT_ACTIVITY_UPLOAD_POPUP_UPLOAD_BUTTON)
             .sendKeys(testBase.getAbsoluteFilePath(linkFile));
     Utils.pause(1000);
@@ -601,7 +601,7 @@ public class NavigationToolbar {
       evt.click(ELEMENT_ADMINISTRATION_PORTAL_ADD_USERS);
     } else {
       info("Cannot evt.click on add user link. Go to this page by link");
-      testBase.getSeleniumDriver().get(testBase.getDriver().getBaseUrl() + "/g/:platform:administrators/administration/newStaff");
+      testBase.getExoWebDriver().getWebDriver().get(testBase.getExoWebDriver().getBaseUrl() + "/g/:platform:administrators/administration/newStaff");
     }
   }
 
@@ -629,7 +629,7 @@ public class NavigationToolbar {
    */
   public void goToIntranetNotification() {
     info("Go to Intranet Notification");
-    testBase.getSeleniumDriver().navigate().refresh();
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     Utils.pause(2000);
     evt.click(ELEMENT_INTRANET_NOTIFICATION_BELL);
     evt.waitForAndGetElement(ELEMENT_NOTIFICATION_DROPDOWN);
@@ -657,7 +657,7 @@ public class NavigationToolbar {
       } else {
         String editPageRequest = "ajaxGet(eXo.env.server.createPortalURL('UIWorkingWorkspace', 'EditInline', true))";
         info("editPageRequest:" + editPageRequest);
-        ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript(editPageRequest);
+        ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript(editPageRequest);
         Utils.pause(1000);
         break;
       }
@@ -720,7 +720,7 @@ public class NavigationToolbar {
     info("verify edit page permission");
     /*
      * @FIXME
-     * portMg.openPage(testBase.getDriver().getBaseUrl()+"/intranet/home/"+title
+     * portMg.openPage(testBase.getExoWebDriver().getBaseUrl()+"/intranet/home/"+title
      * );
      */
     if (isEnable) {
@@ -741,7 +741,7 @@ public class NavigationToolbar {
    */
   public void verifyEditSitePerm(String title, boolean isEnable) {
     info("verify edit stie permission");
-    testBase.getSeleniumDriver().get(testBase.getDriver().getBaseUrl() + "/" + title);
+    testBase.getExoWebDriver().getWebDriver().get(testBase.getExoWebDriver().getBaseUrl() + "/" + title);
     if (isEnable) {
       evt.click(ELEMENT_LINK_EDIT, 0, true);
       evt.mouseOver(ELEMENT_MENU_SITE_LINK, true);

@@ -60,8 +60,8 @@ public class LoginScreens extends Base {
 
   @AfterEach
   public void afterMethod() {
-    getSeleniumDriver().manage().deleteAllCookies();
-    getSeleniumDriver().quit();
+    getExoWebDriver().getWebDriver().manage().deleteAllCookies();
+    getExoWebDriver().getWebDriver().quit();
   }
 
   /**
@@ -262,21 +262,21 @@ public class LoginScreens extends Base {
     manageLoginOut.checkTwitterLoginForm();
 
     info("Back to the platform login page");
-    getSeleniumDriver().navigate().back();
+    getExoWebDriver().getWebDriver().navigate().back();
     Utils.pause(2000);
 
     info("Check linkedin login form");
     manageLoginOut.checkLinkedinLoginForm();
 
     info("Back to the platform login page");
-    getSeleniumDriver().navigate().back();
+    getExoWebDriver().getWebDriver().navigate().back();
     Utils.pause(2000);
 
     info("Check facebook login form");
     manageLoginOut.checkFacebookLoginForm();
 
     info("Back to the platform login page");
-    getSeleniumDriver().navigate().back();
+    getExoWebDriver().getWebDriver().navigate().back();
 
     info("Check google login form");
     manageLoginOut.checkGoogleLoginForm();

@@ -119,7 +119,7 @@ public class CalendarManagement {
     if (evt.waitForAndGetElement(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar", name), 2000, 0) != null) {
       boolean isVerify = (verify.length > 0 ? verify[0] : false);
       info("Remove calendar");
-      testBase.getSeleniumDriver().navigate().refresh();
+      testBase.getExoWebDriver().getWebDriver().navigate().refresh();
       executeActionCalendar(name, menuOfCalendarOption.REMOVE);
       if (isVerify)
         alert.verifyAlertMessage(ELEMENT_CONFIRM_REMOVE_CALENDAR_MSG);
@@ -494,7 +494,7 @@ public class CalendarManagement {
   public void uploadCalendar(String path) {
     info("--Upload Calendar--");
     WebElement element = evt.waitForAndGetElement(ELEMENT_CALENDAR_IMPORT_SELECT_FILE, testBase.getDefaultTimeout(), 1, 2);
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].style.display = 'block';", element);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';", element);
     element.sendKeys(testBase.getAbsoluteFilePath(path));
     String[] links = path.split("/");
     evt.waitForAndGetElement(".//*[contains(@class,'selectFileFrame')]//*[contains(text(),'" + links[links.length - 1] + "')]");
@@ -531,7 +531,7 @@ public class CalendarManagement {
     }
     evt.click(ELEMENT_CALENDAR_IMPORT_SAVE_BUTTON);
     evt.waitForElementNotPresent(ELEMENT_CALENDAR_IMPORT_POPUP_FORM);
-    testBase.getSeleniumDriver().navigate().refresh();
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     evt.waitForAndGetElement(By.linkText(name));
     button.ok();
   }
@@ -547,7 +547,7 @@ public class CalendarManagement {
     uploadCalendar(path);
     evt.click(ELEMENT_CALENDAR_IMPORT_SAVE_BUTTON);
     evt.waitForElementNotPresent(ELEMENT_CALENDAR_IMPORT_POPUP_FORM);
-    this.testBase.getSeleniumDriver().navigate().refresh();
+    this.testBase.getExoWebDriver().getWebDriver().navigate().refresh();
   }
 
   /**
@@ -850,7 +850,7 @@ public class CalendarManagement {
    */
   public void openEditEventTaskPopup(String name, CalendarHomePage.selectViewOption view, String... opt) {
     info("Edit an event");
-    Actions action = new Actions(this.testBase.getSeleniumDriver());
+    Actions action = new Actions(this.testBase.getExoWebDriver().getWebDriver());
     cHome.goToView(view);
     if (opt.length > 0 && opt[0] != null) {
       switch (view) {
@@ -884,7 +884,7 @@ public class CalendarManagement {
 
     } else {
       info("Double click on the event");
-      scrollElementIntoView(this.testBase.getSeleniumDriver()
+      scrollElementIntoView(this.testBase.getExoWebDriver().getWebDriver()
                                          .findElement(By.xpath(ELEMENT_EVENT_TASK_TITLE.replace("${name}", name))));
       action.moveToElement(evt.waitForAndGetElement(ELEMENT_EVENT_TASK_TITLE.replace("${name}", name))).doubleClick().perform();
     }
@@ -995,7 +995,7 @@ public class CalendarManagement {
    */
   public void scrollElementIntoView(WebElement element) {
     info("Scroll to the element to view");
-    ((JavascriptExecutor) this.testBase.getSeleniumDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
+    ((JavascriptExecutor) this.testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
   }
 
   /**
@@ -1013,11 +1013,11 @@ public class CalendarManagement {
                                              String user,
                                              Boolean... opParams) {
     info("Check and delete mail");
-    String parentWindow = testBase.getSeleniumDriver().getWindowHandle();
+    String parentWindow = testBase.getExoWebDriver().getWebDriver().getWindowHandle();
     info("parentWindow:" + parentWindow);
-    for (String windowHandle : testBase.getSeleniumDriver().getWindowHandles()) {
-      testBase.getSeleniumDriver().switchTo().window(windowHandle);
-      info("driver.title:" + testBase.getSeleniumDriver().getTitle());
+    for (String windowHandle : testBase.getExoWebDriver().getWebDriver().getWindowHandles()) {
+      testBase.getExoWebDriver().getWebDriver().switchTo().window(windowHandle);
+      info("driver.title:" + testBase.getExoWebDriver().getWebDriver().getTitle());
     }
     if (opParams.length > 0) {
       if (opParams[0] == true)
@@ -1030,9 +1030,9 @@ public class CalendarManagement {
       info("Click on the email");
       evt.click(ELEMENT_GMAIL_CONTENT_INVITATION_EMAIL.replace("$eventTask", titleEventTask));
       Utils.pause(2000);
-      for (String windowHandle : testBase.getSeleniumDriver().getWindowHandles()) {
-        testBase.getSeleniumDriver().switchTo().window(windowHandle);
-        info("driver.title:" + testBase.getSeleniumDriver().getTitle());
+      for (String windowHandle : testBase.getExoWebDriver().getWebDriver().getWindowHandles()) {
+        testBase.getExoWebDriver().getWebDriver().switchTo().window(windowHandle);
+        info("driver.title:" + testBase.getExoWebDriver().getWebDriver().getTitle());
       }
       if (!fileAttch.isEmpty())
         evt.waitForAndGetElement(ELEMENT_GMAIL_EMAIL_ICS_FILE.replace("$file", fileAttch));
@@ -1040,9 +1040,9 @@ public class CalendarManagement {
       if (!link.isEmpty()) {
         info("Click on the link");
         evt.click(ELEMENT_GMAIL_EMAIL_DETAIL_LINK.replace("$link", link));
-        for (String windowHandle : testBase.getSeleniumDriver().getWindowHandles()) {
-          testBase.getSeleniumDriver().switchTo().window(windowHandle);
-          info("driver.title:" + testBase.getSeleniumDriver().getTitle());
+        for (String windowHandle : testBase.getExoWebDriver().getWebDriver().getWindowHandles()) {
+          testBase.getExoWebDriver().getWebDriver().switchTo().window(windowHandle);
+          info("driver.title:" + testBase.getExoWebDriver().getWebDriver().getTitle());
         }
         if (!user.isEmpty()) {
           if (evt.waitForAndGetElement(ELEMENT_REFUSE_INVITATION_MESSAGE.replace("$user", user), 2000, 0) != null)
@@ -1322,7 +1322,7 @@ public class CalendarManagement {
     info("Click on Close button");
     evt.click(ELMEENT_EVENT_TASK_LARGE_IMAGE_CLOSE);
     if (verify == true) {
-      Dimension size_large_img = testBase.getSeleniumDriver().findElement(ELEMENT_EVENT_TASK_LARGE_IMAGE).getSize();
+      Dimension size_large_img = testBase.getExoWebDriver().getWebDriver().findElement(ELEMENT_EVENT_TASK_LARGE_IMAGE).getSize();
       info("size_large_img.width:" + size_large_img.width);
       info("size_large_img.height:" + size_large_img.height);
       if (size_large_img.width == 0 && size_large_img.height == 0)

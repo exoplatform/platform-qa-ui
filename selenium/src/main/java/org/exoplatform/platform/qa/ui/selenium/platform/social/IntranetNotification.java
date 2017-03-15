@@ -37,7 +37,7 @@ public class IntranetNotification {
       evt.click(ELEMENT_VIEW_ALL);
     } else {
       info("Open All page by link");
-      testBase.getSeleniumDriver().get(testBase.getDriver().getBaseUrl() + "/intranet/allNotifications/");
+      testBase.getExoWebDriver().getWebDriver().get(testBase.getExoWebDriver().getBaseUrl() + "/intranet/allNotifications/");
     }
     evt.waitForAndGetElement(ELEMENT_ALL_NOTIFICATIONS);
   }
@@ -578,7 +578,7 @@ public class IntranetNotification {
         break;
       }
       info("Retry...[" + repeat + "]");
-      this.testBase.getSeleniumDriver().navigate().refresh();
+      this.testBase.getExoWebDriver().getWebDriver().navigate().refresh();
       Utils.pause(2000);
     }
   }

@@ -165,7 +165,7 @@ public class ForumHomePage {
   public void attachFile(String pathFile, String fileName) {
     info("Attach a file");
     WebElement element = evt.waitForAndGetElement(ELEMENT_UPLOAD_POPUP_ATTACHMENT_FILE_INPUT, testBase.getDefaultTimeout(), 1, 2);
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].style.display = 'block';", element);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';", element);
     info("Get the file to attach");
     element.sendKeys(testBase.getAbsoluteFilePath(pathFile + fileName));
     info("Verify that the file is attached");

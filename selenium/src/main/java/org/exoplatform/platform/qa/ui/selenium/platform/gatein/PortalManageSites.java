@@ -366,7 +366,7 @@ public class PortalManageSites {
    */
   public void verifyPermOnSite(String portal, boolean isEnable) {
     info("check permission to access site: " + portal);
-    testBase.getSeleniumDriver().get(testBase.getDriver().getBaseUrl() + "/" + portal);
+    testBase.getExoWebDriver().getWebDriver().get(testBase.getExoWebDriver().getBaseUrl() + "/" + portal);
     if (isEnable)
       evt.waitForAndGetElement(ELEMENT_NEW_PORTAL_LOGOUT, 3000, 0);
     else

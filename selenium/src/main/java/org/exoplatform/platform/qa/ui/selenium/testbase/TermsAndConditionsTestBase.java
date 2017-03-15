@@ -47,7 +47,7 @@ public class TermsAndConditionsTestBase {
   public void termsAndConditions(Object... opParams) {
     info("Term and conditions");
     Boolean isCreateAccount = (Boolean) (opParams.length > 0 ? opParams[0] : true);
-    testBase.getSeleniumDriver();
+    testBase.getExoWebDriver().getWebDriver();
     info("Agreement page");
     if (evt.waitForAndGetElement(ELEMENT_REGISTER_SKIP_BTN, testBase.getDefaultTimeout(), 2) != null) {
       info("Skipp register");
@@ -83,7 +83,7 @@ public class TermsAndConditionsTestBase {
       if (isCreateAccount == true) {
         acc.accountSetup();
         info("-- Administrator account (FQA) has been created successfully... --");
-        testBase.getSeleniumDriver().navigate().refresh();
+        testBase.getExoWebDriver().getWebDriver().navigate().refresh();
       }
     }
     Utils.pause(3000);

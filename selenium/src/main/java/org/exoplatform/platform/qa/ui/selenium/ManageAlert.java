@@ -48,7 +48,7 @@ public class ManageAlert {
   public ManageAlert(TestBase testBase) {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
-    this.seleniumWebDriver = testBase.getSeleniumDriver();
+    this.seleniumWebDriver = testBase.getExoWebDriver().getWebDriver();
     this.button = new Button(testBase);
   }
 

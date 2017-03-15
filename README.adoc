@@ -1,3 +1,30 @@
 = UI Quality Assurance project for eXo Platform
 
 Automation Process for Functional Tests on eXo Platform.
+
+[IMPORTANT]
+The whole documentation is availabe at https://github.com/exoplatform/platform-qa-ui-documentation
+
+== Quick Start
+
+
+. Start PLF instance
++
+[source, shell]
+----
+$ docker-compose -f api/src/main/resources/stack/docker-compose-44-hsqldb.yml -p exo44hsqldb up
+
+# Access to PLF instance
+$ open http://localhost
+
+# Access to Mail UI (all mails sent by eXo PLF)
+$ open http://localhost/mail
+----
++
+. Configure your browser
+.. Run tests with your local Browsers
+... Chrome
+
+... Firefox
+
+.. Run tests in headless Browsers

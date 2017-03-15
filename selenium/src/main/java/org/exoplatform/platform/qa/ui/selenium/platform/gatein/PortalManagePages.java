@@ -111,7 +111,7 @@ public class PortalManagePages {
     Utils.pause(3000);
     evt.waitForAndGetElement(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_BTN, testBase.getDefaultTimeout(), 1);
     evt.click(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_BTN);
-    testBase.getSeleniumDriver().navigate().refresh();
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     if (!pageName.isEmpty()) {
       info("Input page name");
       evt.type(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_PAGE_NAME, pageName, true);
@@ -140,7 +140,7 @@ public class PortalManagePages {
    */
   public void openPage(String url) {
     info("open page:" + url);
-    testBase.getSeleniumDriver().get(url);
+    testBase.getExoWebDriver().getWebDriver().get(url);
     Utils.pause(1000);
   }
 

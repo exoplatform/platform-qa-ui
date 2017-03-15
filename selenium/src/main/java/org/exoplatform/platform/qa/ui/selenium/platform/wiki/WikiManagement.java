@@ -31,7 +31,6 @@ public class WikiManagement {
   /**
    * constructor
    * 
-   * @param dr
    */
   public WikiManagement(TestBase testBase) {
     this.testBase = testBase;
@@ -154,9 +153,9 @@ public class WikiManagement {
     String ELEMENT_PARAGRAPH_ID = "H" + paragraphTitle;
     evt.mouseOver(By.id(ELEMENT_PARAGRAPH_ID), true);
     WebElement element = evt.waitForAndGetElement(By.xpath("//*[@data-original-title='Edit Section: " + paragraphTitle + "']"));
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].click();", element);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].click();", element);
     Utils.pause(500);
-    testBase.getSeleniumDriver().navigate().refresh();
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     Utils.pause(2000);
     evt.type(ELEMENT_CONTENT_WIKI_INPUT, paragraphContent, true);
     evt.switchToParentWindow();
@@ -339,10 +338,10 @@ public class WikiManagement {
    */
   public void renamePageByDoubleClick(String title, String newTitle) {
     info("Open the page");
-    Actions action = new Actions(this.testBase.getSeleniumDriver());
+    Actions action = new Actions(this.testBase.getExoWebDriver().getWebDriver());
     action.doubleClick(evt.waitForAndGetElement(ELEMENT_PAGE_TITLE.replace("${title}", title), 2000, 0)).perform();
     evt.type(ELEMENT_WIKI_PAGE_TITLE_RENAME_FIELD, newTitle, true);
-    Actions actionEnter = new Actions(this.testBase.getSeleniumDriver());
+    Actions actionEnter = new Actions(this.testBase.getExoWebDriver().getWebDriver());
     actionEnter.sendKeys(Keys.ENTER).perform();
     actionEnter.release();
     Utils.pause(20000);
@@ -384,9 +383,9 @@ public class WikiManagement {
   public void checkEmailNotification(String title) {
     info("Check and delete mail");
 
-    for (String windowHandle : testBase.getSeleniumDriver().getWindowHandles()) {
-      testBase.getSeleniumDriver().switchTo().window(windowHandle);
-      info("driver.title:" + testBase.getSeleniumDriver().getTitle());
+    for (String windowHandle : testBase.getExoWebDriver().getWebDriver().getWindowHandles()) {
+      testBase.getExoWebDriver().getWebDriver().switchTo().window(windowHandle);
+      info("driver.title:" + testBase.getExoWebDriver().getWebDriver().getTitle());
     }
     evt.waitForAndGetElement(ELEMENT_GMAIL_CONTENT_WIKI.replace("${title}", title), 30000, 0);
     info("Found notify mail");
@@ -394,9 +393,9 @@ public class WikiManagement {
     info("ELEMENT_GMAIL_CONTENT:" + ELEMENT_GMAIL_CONTENT_WIKI.replace("${title}", title));
     info("Open email");
     evt.waitForAndGetElement(ELEMENT_GMAIL_CONTENT_WIKI.replace("${title}", title)).click();
-    String defaultLink = testBase.getDriver().getBaseUrl() + "/intranet/wiki/" + title;
+    String defaultLink = testBase.getExoWebDriver().getBaseUrl() + "/intranet/wiki/" + title;
     // Store childs and parent windows
-    Object[] allWindows = testBase.getSeleniumDriver().getWindowHandles().toArray();
+    Object[] allWindows = testBase.getExoWebDriver().getWebDriver().getWindowHandles().toArray();
     // Get parent window
     String paWindow = allWindows[0].toString();
     // Get child window 1. Here is gmail browser
@@ -405,7 +404,7 @@ public class WikiManagement {
     // email notification
     String chilwindow2 = allWindows[2].toString();
     // Focus on Child window2
-    testBase.getSeleniumDriver().switchTo().window(chilwindow2);
+    testBase.getExoWebDriver().getWebDriver().switchTo().window(chilwindow2);
     info("Verify that the link is shown as correct format:");
     evt.click(ELEMENT_GMAIL_PREVIOUS_EMAIL);
     info("Check the link's format");
@@ -413,13 +412,13 @@ public class WikiManagement {
                      .getAttribute("href")
                      .toString();
     // close child window 2
-    testBase.getSeleniumDriver().close();
+    testBase.getExoWebDriver().getWebDriver().close();
     // Focus on child window 1
-    testBase.getSeleniumDriver().switchTo().window(chilwindow1);
+    testBase.getExoWebDriver().getWebDriver().switchTo().window(chilwindow1);
     // close child window 1
-    testBase.getSeleniumDriver().close();
+    testBase.getExoWebDriver().getWebDriver().close();
     // Focus on parent window
-    testBase.getSeleniumDriver().switchTo().window(paWindow);
+    testBase.getExoWebDriver().getWebDriver().switchTo().window(paWindow);
 
     info("link:" + link);
     info("default:" + defaultLink);
@@ -451,8 +450,6 @@ public class WikiManagement {
    * Rename a page from alert message when move a page to a destination that has
    * same name
    * 
-   * @param newTitle
-   * @param newContent
    */
   public void renameFromAlertMessageOfOnePage() {
     info("Click on Rename link on the alert message area");

@@ -16,7 +16,7 @@ public class NotificationsAdminSeting {
   /**
    * constructor
    * 
-   * @param dr
+   * @param testBase
    */
   public NotificationsAdminSeting(TestBase testBase) {
     this.testBase = testBase;
@@ -482,7 +482,7 @@ public class NotificationsAdminSeting {
    * @param address
    */
   public void changeNotificationSender(String name, String address) {
-    evt.scrollToBottomPage(this.testBase.getSeleniumDriver());
+    evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     if (!name.isEmpty()) {
       info("Input name");
       evt.type(ELEMENT_ADMIN_NOTIFICATION_SENDER_NAME, name, true);

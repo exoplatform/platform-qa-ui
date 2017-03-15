@@ -27,10 +27,16 @@ import java.util.List;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 
-import org.exoplatform.platform.qa.ui.selenium.driver.SeleniumDriverImpl;
+import org.exoplatform.platform.qa.ui.api.config.driver.Driver;
+import org.exoplatform.platform.qa.ui.api.config.driver.ExoWebDriver;
 import org.exoplatform.platform.qa.ui.selenium.testbase.*;
 
 public class TestBase {
+
+  static {
+    System.setProperty("selenide.browser", "org.exoplatform.platform.qa.ui.api.config.driver.ExoWebDriverProvider");
+    System.setProperty("webdriver.chrome.driver", "/Users/mgreau/bin/chromedriver");
+  }
 
   public final int                         ACTION_REPEAT              = 5;
 
@@ -45,18 +51,14 @@ public class TestBase {
 
   private final TermsAndConditionsTestBase termsAndConditionsTestBase = new TermsAndConditionsTestBase(this);
 
-  public WebDriver                         newSeleniumDriver;
-
-  public Boolean                           isDriver                   = true;
-
   public int                               loopCount                  = 0;
 
   public Actions                           action;
+
+  public String                            nativeEvent;
   // =
   // 30
   // seconds
-
-  public String                            nativeEvent;
 
   protected int                            DEFAULT_TIMEOUT            = 30000;                               // milliseconds
 
@@ -89,10 +91,10 @@ public class TestBase {
 
   protected String                         defaultSheet;
 
-  private SeleniumDriverImpl               driver;
-
-  private WebDriver                        seleniumDriver;                                                   // =
-                                                                                                             // driver.createSeleniumWebDriver();
+  /**
+   * exoWebDriver that uses Selenide Driver, a wrapper of Selenium Web Driver
+   */
+  private Driver                           exoWebDriver               = new ExoWebDriver();
 
   private String                           ssoType;
 
@@ -153,16 +155,6 @@ public class TestBase {
   }
 
   /**
-   * change language of browser
-   *
-   * @param language English: "en" French: "fr"
-   */
-  public void initFFBrowserWithSetLanguageBrowser(String language) {
-    // seleniumDriver = driver.initFFBrowserWithSetLanguageBrowser(language);
-    action = new Actions(seleniumDriver);
-  }
-
-  /**
    * init browser
    *
    * @param opParams
@@ -175,17 +167,10 @@ public class TestBase {
   }
 
   public void initSeleniumTestWithOutTermAndCondition(Object... opParams) {
-    // final WebDriver wd = driver.initDriver();
-    chromeFlag = driver.isChromeDriver(seleniumDriver);
-    ieFlag = driver.isIEDriver(seleniumDriver);
-    action = new Actions(seleniumDriver);
-  }
-
-  /**
-   * Start new seleniumWebDriver without cache
-   */
-  public void startNewDriver() {
-    seleniumDriver = driver.startNewDriver();
+    // final WebDriver wd = exoWebDriver.initDriver();
+    chromeFlag = exoWebDriver.isChromeDriver();
+    ieFlag = exoWebDriver.isIEDriver();
+    action = new Actions(exoWebDriver.getWebDriver());
   }
 
   /**
@@ -325,7 +310,7 @@ public class TestBase {
    * clear cache
    */
   public void clearCache() {
-    Actions actionObject = new Actions(seleniumDriver);
+    Actions actionObject = new Actions(exoWebDriver.getWebDriver());
     try {
       actionObject.sendKeys(Keys.CONTROL).sendKeys(Keys.F5).build().perform();
     } catch (WebDriverException e) {
@@ -498,7 +483,7 @@ public class TestBase {
    * function set seleniumDriver to auto open new window when click link
    */
   public void getDriverAutoOpenWindow() {
-    WebDriver seleniumWebDriver = driver.getDriverAutoOpenWindow();
+    WebDriver seleniumWebDriver = exoWebDriver.getDriverAutoOpenWindow();
     action = new Actions(seleniumWebDriver);
     termsAndConditionsTestBase.termsAndConditions();
 
@@ -510,7 +495,7 @@ public class TestBase {
    * @param language
    */
   public void getDriverSetLanguage(Language language) {
-    WebDriver seleniumWebDriver = driver.getDriverSetLanguage(language.toString());
+    WebDriver seleniumWebDriver = exoWebDriver.getDriverSetLanguage(language.toString());
     action = new Actions(seleniumWebDriver);
     termsAndConditionsTestBase.termsAndConditions();
   }
@@ -528,7 +513,7 @@ public class TestBase {
    * setPreferenceRunTime
    */
   public void setPreferenceRunTime() {
-    driver.setPreferenceRunTime();
+    exoWebDriver.setPreferenceRunTime();
   }
 
   /**
@@ -639,7 +624,7 @@ public class TestBase {
    * @param fileName
    */
   public void attachFile(String pathFile, String fileName) {
-    manageFileTestBase.attachFile(pathFile, fileName, DEFAULT_TIMEOUT, seleniumDriver);
+    manageFileTestBase.attachFile(pathFile, fileName, DEFAULT_TIMEOUT, exoWebDriver.getWebDriver());
   }
 
   /**
@@ -918,14 +903,6 @@ public class TestBase {
     return elementEventTestBase;
   }
 
-  public WebDriver getSeleniumDriver() {
-    return seleniumDriver;
-  }
-
-  public WebDriver getNewSeleniumDriver() {
-    return newSeleniumDriver;
-  }
-
   public int getLoopCount() {
     return loopCount;
   }
@@ -935,7 +912,7 @@ public class TestBase {
   }
 
   public String getBrowser() {
-    return driver.getBrowser();
+    return exoWebDriver.getBrowser();
   }
 
   public Actions getAction() {
@@ -946,13 +923,8 @@ public class TestBase {
     this.action = action;
   }
 
-  public SeleniumDriverImpl getDriver() {
-    return driver;
-  }
-
-  protected void setDriver(WebDriver webDriver) {
-    this.seleniumDriver = webDriver;
-    this.driver = new SeleniumDriverImpl(webDriver);
+  public Driver getExoWebDriver() {
+    return exoWebDriver;
   }
 
   public String getUser() {

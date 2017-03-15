@@ -202,9 +202,9 @@ public class SourceTextEditor {
     // doubleClickOnElement(ELEMENT_UPLOAD_NAME);
 
     Utils.pause(2000);
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
     Utils.pause(2000);
-    testBase.getSeleniumDriver().findElement(ELEMENT_UPLOAD_NAME).sendKeys(path);
+    testBase.getExoWebDriver().getWebDriver().findElement(ELEMENT_UPLOAD_NAME).sendKeys(path);
     /*
      * scrollToElement(elem, driver); click(elem, 2, true);
      * uploadFileUsingRobot(link); waitForAndGetElement(By
@@ -237,7 +237,7 @@ public class SourceTextEditor {
   public void attachFileInWiki(String link, Integer... type) {
     String fs = File.separator;
     WebElement elem = evt.waitForAndGetElement(ELEMENT_UPLOAD_NAME, 5000, 1, 2);
-    evt.scrollToElement(elem, testBase.getSeleniumDriver());
+    evt.scrollToElement(elem, testBase.getExoWebDriver().getWebDriver());
     evt.click(elem, 2, true);
     testBase.uploadFileUsingRobot(link);
     evt.waitForAndGetElement(By.linkText(link.substring(link.lastIndexOf(fs) + 1)));

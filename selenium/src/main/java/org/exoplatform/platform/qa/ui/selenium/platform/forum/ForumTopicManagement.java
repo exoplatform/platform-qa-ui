@@ -331,7 +331,7 @@ public class ForumTopicManagement {
   public void editPoll(String question, String option1, String option2) {
     selectItemMoreActionMenuPoll(specifMoreActionMenuPoll.EDIT);
     info("Refresh the page");
-    testBase.getSeleniumDriver().navigate().refresh();
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     evt.waitForAndGetElement(ELEMENT_POLL_POPUP_TITLE);
     info("Input a question to poll");
     evt.waitForAndGetElement(ELEMENT_POLL_QUESTION).clear();
@@ -432,7 +432,7 @@ public class ForumTopicManagement {
     info("Verify that the pop up is shown");
     evt.waitForAndGetElement(ELEMENT_TOPIC_NEW_POST_TITLE);
     info("Refresh the page");
-    this.testBase.getSeleniumDriver().navigate().refresh();
+    this.testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     if (!newTitle.isEmpty()) {
       info("Input the title:" + newTitle);
       evt.waitForAndGetElement(ELEMENT_TOPIC_NEW_POST_TITLE_FIELD).clear();

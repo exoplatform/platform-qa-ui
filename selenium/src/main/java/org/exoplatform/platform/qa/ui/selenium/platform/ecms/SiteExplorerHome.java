@@ -177,7 +177,7 @@ public class SiteExplorerHome {
     evt.click(ELEMENT_SITEEXPLORER_ACTION_COPY);
     evt.rightClickOnElement(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", destination)));
     evt.click(ELEMENT_SITEEXPLORER_ACTION_PASTE);
-    testBase.getSeleniumDriver().navigate().refresh();
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     evt.click(ELEMENT_SIDEBAR_SITES_MANAGEMENT);
     Utils.pause(2000);
   }
@@ -216,7 +216,7 @@ public class SiteExplorerHome {
     evt.click(ELEMENT_SITEEXPLORER_ACTION_CUT);
     evt.rightClickOnElement(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", destination)));
     evt.click(ELEMENT_SITEEXPLORER_ACTION_PASTE);
-    testBase.getSeleniumDriver().navigate().refresh();
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     evt.click(ELEMENT_SIDEBAR_SITES_MANAGEMENT);
     Utils.pause(2000);
   }
@@ -346,7 +346,7 @@ public class SiteExplorerHome {
     evt.click(ELEMENT_SIDEBAR_TAGCLOUD_POPUP_EDIT.replace("${name}", oldName));
     evt.waitForAndGetElement(ELEMENT_TAG_POPUP_NAME_FIELD);
     info("Input new name of tag");
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].setAttribute('value', '" + newName + "')",
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].setAttribute('value', '" + newName + "')",
                                                                       evt.waitForAndGetElement(ELEMENT_TAG_POPUP_NAME_FIELD));
     info("Save all changes");
     evt.clickByJavascript(ELEMENT_TAG_POPUP_SAVE);
@@ -392,7 +392,7 @@ public class SiteExplorerHome {
     }
     info("Click on Edit link");
     evt.click(ELEMENT_ACTIONBAR_EDIT);
-    testBase.getSeleniumDriver().navigate().refresh();
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     Utils.pause(2000);
     if (!newTitle.isEmpty())
       evt.waitForAndGetElement(ELEMENT_FILE_FORM_TITLE, testBase.getDefaultTimeout(), 1);
@@ -693,7 +693,7 @@ public class SiteExplorerHome {
     // upload the file
     WebElement upload = evt.waitForAndGetElement(ELEMENT_IMPORT_NODE_POPUP_UPLOAD_BUTTON, testBase.getDefaultTimeout(), 1, 2);
 
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].style.display = 'block';", upload);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';", upload);
     upload.sendKeys(testBase.getAbsoluteFilePath(linkFile));
     String[] nameFile = linkFile.split("/");
     evt.waitForAndGetElement(ELEMENT_IMPORT_NODE_POPUP_UPLOAD_FILE_LABEL.replace("${fileName}", nameFile[1]));
@@ -706,7 +706,7 @@ public class SiteExplorerHome {
                                                           testBase.getDefaultTimeout(),
                                                           1,
                                                           2);
-      ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("arguments[0].style.display = 'block';", uploadVersion);
+      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';", uploadVersion);
       uploadVersion.sendKeys(testBase.getAbsoluteFilePath(linkVersion));
       String[] namefile = linkVersion.split("/");
       evt.waitForAndGetElement(ELEMENT_IMPORT_NODE_POPUP_UPLOAD_FILE_LABEL.replace("${fileName}", namefile[1]));
@@ -937,7 +937,7 @@ public class SiteExplorerHome {
       evt.click(ELEMENT_SITEEXPLORER_COMMENT_EDIT);
     }
     info("Refresh the page");
-    this.testBase.getSeleniumDriver().navigate().refresh();
+    this.testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     info("Input a content to the frame");
     evt.inputDataToCKEditor(ELEMENT_FILEFORM_BLANK_CONTENT, content);
     info("Switch to parent window");
@@ -996,7 +996,7 @@ public class SiteExplorerHome {
     pathInput.clear();
     pathInput.sendKeys(path);
 
-    Actions action = new Actions(this.testBase.getSeleniumDriver());
+    Actions action = new Actions(this.testBase.getExoWebDriver().getWebDriver());
     action.moveToElement(pathInput).sendKeys(Keys.ENTER).build().perform();
     action.moveToElement(pathInput).release();
     Utils.pause(2000);
@@ -1050,7 +1050,7 @@ public class SiteExplorerHome {
    */
   public void selectFileExplorer() {
     info("Select File Explorer");
-    WebElement el = (new WebDriverWait(testBase.getSeleniumDriver(),
+    WebElement el = (new WebDriverWait(testBase.getExoWebDriver().getWebDriver(),
                                        30)).until(ExpectedConditions.presenceOfElementLocated(ELEMENT_FILE_EXPLORER_ICON));
     el.click();
     Utils.pause(3000);
@@ -1093,7 +1093,7 @@ public class SiteExplorerHome {
   public void selectAllFiles() {
     info("Select all file");
     WebElement el =
-                  (new WebDriverWait(testBase.getSeleniumDriver(),
+                  (new WebDriverWait(testBase.getExoWebDriver().getWebDriver(),
                                      30)).until(ExpectedConditions.presenceOfElementLocated(ELEMENT_SITE_EXPLORER_ALL_CHECKBOX));
     if (evt.waitForAndGetElement(ELEMENT_DOCUMENT_LIST_ROW_CONTENT, 5000, 0) != null) {
       info("check on the checkbox");
@@ -1114,7 +1114,7 @@ public class SiteExplorerHome {
   public void selectAContentType(String nameContent) {
     info("Select a content");
     WebElement el =
-                  (new WebDriverWait(testBase.getSeleniumDriver(),
+                  (new WebDriverWait(testBase.getExoWebDriver().getWebDriver(),
                                      30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(ELEMENT_SITE_EXPLORER_CONTENT_NAME.replace("${nameContent}",
                                                                                                                                                 nameContent))));
     el.click();

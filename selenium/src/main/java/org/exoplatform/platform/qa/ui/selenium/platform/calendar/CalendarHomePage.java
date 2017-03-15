@@ -961,7 +961,7 @@ public class CalendarHomePage {
     boolean isVerify = (Boolean) (opParams.length > 0 ? opParams[0] : false);
     boolean isEvent = (Boolean) (opParams.length > 1 ? opParams[1] : false);
     info("Delete event/tak: " + name);
-    Button button = new Button((TestBase) testBase.getSeleniumDriver());
+    Button button = new Button((TestBase) testBase.getExoWebDriver().getWebDriver());
     goToRightMenuTaskEventFromAnyView(name, view, optionDay, date);
     evt.click(ELEMENT_CONTEXT_MENU_DELETE);
     if (isVerify) {
@@ -969,7 +969,7 @@ public class CalendarHomePage {
         alert.verifyAlertMessage(ELEMENT_CONFIRM_DELETE_EVENT_MSG);
       else
         alert.verifyAlertMessage(ELEMENT_CONFIRM_DELETE_TASK_MSG);
-      testBase.getSeleniumDriver().navigate().refresh();
+      testBase.getExoWebDriver().getWebDriver().navigate().refresh();
       Utils.pause(1000);
       verifyIsNotPresentEventTask(name, view, optionDay);
     } else
@@ -1018,7 +1018,7 @@ public class CalendarHomePage {
   public void quickSearchCalendar(String keyword) {
     info("----Type in quick search box----");
     evt.type(ELEMENT_QUICK_SEARCH_INPUT, keyword, true);
-    Actions action = new Actions(testBase.getSeleniumDriver());
+    Actions action = new Actions(testBase.getExoWebDriver().getWebDriver());
     action.sendKeys(Keys.RETURN).build().perform();
     evt.waitForAndGetElement(ELEMENT_BUTTON_CLOSE_QUICK_SEARCH_RESULT);
   }

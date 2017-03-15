@@ -31,7 +31,7 @@ import com.codeborne.selenide.SelenideElement;
  */
 public class License {
 
-  private final SelenideElement element = $(By.id("agreement"));
+  public static final SelenideElement element = $(By.id("agreement"));
 
   public License() {
   }
