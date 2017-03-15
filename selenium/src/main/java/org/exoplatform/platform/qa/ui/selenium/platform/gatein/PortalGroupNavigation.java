@@ -21,7 +21,7 @@ public class PortalGroupNavigation {
     this.testBase = testBase;
     this.alert = new ManageAlert(testBase);
     this.portMg = new PortalManagePages(testBase);
-    this.evt = new ElementEventTestBase(testBase);
+    this.evt = testBase.getElementEventTestBase();
   }
 
   /**

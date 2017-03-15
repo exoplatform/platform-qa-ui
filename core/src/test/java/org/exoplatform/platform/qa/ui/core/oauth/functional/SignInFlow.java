@@ -20,7 +20,6 @@
  */
 package org.exoplatform.platform.qa.ui.core.oauth.functional;
 
-import org.exoplatform.platform.qa.ui.api.context.DefaultContext;
 import org.exoplatform.platform.qa.ui.core.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.Button;
@@ -218,7 +217,6 @@ public class SignInFlow extends Base {
   @Test
   @DisplayName("Case ID:128346")
   @Disabled
-  @DefaultContext()
   public void test07_CheckTheRegistrationOnTheFlyInCaseTheSocialNetworkAccountIsNotLinkedToAnyEXoUserAccount() {
     info("Test 7: Check the registration on the fly in case the social network account is not linked to any eXo user account");
 

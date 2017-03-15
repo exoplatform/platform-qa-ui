@@ -23,7 +23,7 @@ public class PortalBranding {
   public PortalBranding(TestBase testBase) {
 
     this.testBase = testBase;
-    this.evt = new ElementEventTestBase(testBase);
+    this.evt = testBase.getElementEventTestBase();
     this.mftb = new ManageFileTestBase(testBase);
   }
 

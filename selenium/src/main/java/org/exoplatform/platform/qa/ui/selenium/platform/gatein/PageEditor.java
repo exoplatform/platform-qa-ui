@@ -15,7 +15,7 @@ public class PageEditor {
   private ElementEventTestBase evt;
 
   public PageEditor(TestBase testBase) {
-    this.evt = new ElementEventTestBase(testBase);
+    this.evt = testBase.getElementEventTestBase();
     this.testBase = testBase;
   }
 

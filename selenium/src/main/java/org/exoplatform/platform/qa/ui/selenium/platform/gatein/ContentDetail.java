@@ -14,6 +14,7 @@ public class ContentDetail {
 
   public ContentDetail(TestBase testBase) {
     this.testBase = testBase;
+    this.evt = testBase.getElementEventTestBase();
   }
 
   /**

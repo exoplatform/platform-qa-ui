@@ -15,7 +15,7 @@ public class ContentList {
   public ContentList(TestBase testBase) {
 
     this.testBase = testBase;
-    this.evt = new ElementEventTestBase(testBase);
+    this.evt = testBase.getElementEventTestBase();
   }
 
   /**

@@ -21,16 +21,22 @@ import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 public class PageCreationWizard {
 
   private final TestBase       testBase;
+
   public ContentList           contList;
+
   public ManageAlert           magAlert;
+
   public Button                but;
+
   public PortalManagePages     portMgPg;
+
   ContentDetail                contDetail;
+
   private ElementEventTestBase evt;
 
   public PageCreationWizard(TestBase testBase) {
     this.testBase = testBase;
-    this.evt = new ElementEventTestBase(testBase);
+    this.evt = testBase.getElementEventTestBase();
     this.contList = new ContentList(testBase);
     this.contDetail = new ContentDetail(testBase);
     this.magAlert = new ManageAlert(testBase);

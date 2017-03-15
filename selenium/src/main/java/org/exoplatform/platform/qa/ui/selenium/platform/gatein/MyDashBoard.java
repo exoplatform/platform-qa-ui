@@ -21,7 +21,7 @@ public class MyDashBoard {
   public MyDashBoard(TestBase testBase) {
     this.testBase = testBase;
     this.magAlert = new ManageAlert(testBase);
-    this.evt = new ElementEventTestBase(testBase);
+    this.evt = testBase.getElementEventTestBase();
   }
 
   /**

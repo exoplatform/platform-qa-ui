@@ -13,13 +13,15 @@ import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 public class GadgetManagement {
 
   private final TestBase       testBase;
+
   public ManageAlert           alert;
+
   private ElementEventTestBase evt;
 
   public GadgetManagement(TestBase testBase) {
     this.testBase = testBase;
     this.alert = new ManageAlert(testBase);
-    this.evt = new ElementEventTestBase(testBase);
+    this.evt = testBase.getElementEventTestBase();
   }
 
   /**
