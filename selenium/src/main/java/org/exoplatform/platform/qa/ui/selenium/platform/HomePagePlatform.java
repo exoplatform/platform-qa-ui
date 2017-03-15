@@ -1,9 +1,5 @@
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_CONNECTION_EVERYONE_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.ELEMENT_ANSWER_PORTLET;
@@ -12,9 +8,13 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarL
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_FORUM_PORTLET;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.Utils;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+
 public class HomePagePlatform {
 
-  private final TestBase testBase;
+  private final TestBase       testBase;
 
   private ElementEventTestBase evt;
 
@@ -245,12 +245,10 @@ public class HomePagePlatform {
   }
 
   /**
-   * Define display mode's type of the AS
-   * as My Activities,All Activities,...
+   * Define display mode's type of the AS as My Activities,All Activities,...
    */
   public enum displayModeType {
     My_Activities, All_Activities, My_Spaces, Connections;
   }
 
 }
-

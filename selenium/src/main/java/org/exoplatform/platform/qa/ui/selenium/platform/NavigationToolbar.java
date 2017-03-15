@@ -20,22 +20,23 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator;
 import org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator;
 import org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-
-import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 public class NavigationToolbar {
 
-  private final TestBase testBase;
+  private final TestBase       testBase;
 
   private ElementEventTestBase evt;
 
@@ -105,7 +106,7 @@ public class NavigationToolbar {
   public void goToPotalPages() {
     info("-- Go to Page Management page --");
     Utils.pause(2000);
-    for (int repeat = 0; ; repeat++) {
+    for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         evt.mouseOverAndClick(ELEMENT_LINK_SETUP);
         break;
@@ -218,7 +219,7 @@ public class NavigationToolbar {
   public void goToSiteExplorer() {
     info("-- Go to site explorer home page --");
     Utils.pause(500);
-    for (int repeat = 0; ; repeat++) {
+    for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         evt.mouseOverAndClick(ELEMENT_LINK_SETUP);
         break;
@@ -298,7 +299,7 @@ public class NavigationToolbar {
     info("Base url is " + testBase.getDriver().getBaseUrl());
     String url = testBase.getDriver().getBaseUrl() + "/g/:platform:web-contributors/wcmAdmin";
     info("base url of content admin is " + url);
-    for (int repeat = 0; ; repeat++) {
+    for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         testBase.getSeleniumDriver().get(url);
         break;
@@ -326,7 +327,7 @@ public class NavigationToolbar {
   public void goToIDE() {
     info("-- Go to IDE home page --");
     Utils.pause(500);
-    for (int repeat = 0; ; repeat++) {
+    for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         evt.mouseOverAndClick(ELEMENT_LINK_SETUP);
         break;
@@ -348,7 +349,7 @@ public class NavigationToolbar {
   public void goToApplication() {
     info("-- Go to Application home page --");
     Utils.pause(500);
-    for (int repeat = 0; ; repeat++) {
+    for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         evt.mouseOverAndClick(ELEMENT_LINK_SETUP);
         break;
@@ -490,8 +491,7 @@ public class NavigationToolbar {
     testBase.getSeleniumDriver().switchTo().frame(frame);
     info(testBase.getAbsoluteFilePath(linkFile));
     Utils.pause(2000);
-    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript(
-            "document.getElementsByTagName('input')[0].style.display = 'block';");
+    ((JavascriptExecutor) testBase.getSeleniumDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
     Utils.pause(2000);
     testBase.getSeleniumDriver()
             .findElement(ELEMENT_ACTIVITY_UPLOAD_POPUP_UPLOAD_BUTTON)
@@ -641,7 +641,7 @@ public class NavigationToolbar {
    */
   public void goToEditSiteLayout() {
     info("Go to Edit layout form");
-    for (int repeat = 0; ; repeat++) {
+    for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         evt.mouseOverAndClick(ELEMENT_LINK_EDIT);
         break;

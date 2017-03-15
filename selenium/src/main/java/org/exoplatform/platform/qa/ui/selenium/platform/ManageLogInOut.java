@@ -20,22 +20,23 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.locator.ManageLogInOutLocator;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
 
 public class ManageLogInOut {
 
-  private final TestBase testBase;
+  private final TestBase       testBase;
 
-  public ManageAlert alt;
+  public ManageAlert           alt;
 
   private ElementEventTestBase evt;
 
@@ -121,7 +122,7 @@ public class ManageLogInOut {
   public void signOut() {
 
     info("Sign out");
-    for (int repeat = 0; ; repeat++) {
+    for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         evt.mouseOverAndClick(ELEMENT_ACCOUNT_NAME_LINK);
         break;
