@@ -18,7 +18,9 @@ import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class ActivityStream {
   private final TestBase       testBase;
+
   public Button                button;
+
   private ElementEventTestBase evt;
 
   /**
