@@ -12,12 +12,19 @@ import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class AnswerPage {
   private final TestBase       testBase;
+
   public NavigationToolbar     navTool;
+
   public PageCreationWizard    pagMang;
+
   public PageEditor            pagEditor;
+
   public HomePagePlatform      hp;
+
   public ManageAlert           alert;
+
   public ApplicationRegistry   arPage;
+
   private ElementEventTestBase evt;
 
   public AnswerPage(TestBase testBase) {

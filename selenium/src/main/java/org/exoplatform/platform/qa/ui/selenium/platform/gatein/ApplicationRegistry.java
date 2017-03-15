@@ -14,11 +14,17 @@ import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class ApplicationRegistry {
   private final TestBase       testBase;
+
   public NavigationToolbar     navTool;
+
   public PageEditor            pagEditor;
+
   public HomePagePlatform      hp;
+
   public ManageAlert           alert;
+
   public PortalManagePages     pagMag;
+
   private ElementEventTestBase evt;
 
   public ApplicationRegistry(TestBase testBase) {
