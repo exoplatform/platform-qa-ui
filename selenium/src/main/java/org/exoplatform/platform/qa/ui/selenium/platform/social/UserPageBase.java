@@ -1,66 +1,64 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
-
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.openqa.selenium.WebDriver;
-
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-public class UserPageBase  {
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
-	private final TestBase testBase;
+public class UserPageBase {
 
-	private ElementEventTestBase evt;
+  private final TestBase       testBase;
 
-	/**
-	 * constructor
-	 * @param dr
-	 */
-	public UserPageBase(TestBase testBase){
-		this.testBase = testBase;
-		this.evt = testBase.getElementEventTestBase();
-	}
-	
-	
-	/**
-	 * Go to my wiki
-	 */
-	public void goToProfileTab(){
-		info("Go to profile tab");
-		evt.click(ELEMENT_HORIZONTAL_TOOLBAR_FIRST_APP_PROFILE);
-	}
-	
-	/**
-	 * Go to my wiki
-	 */
-	public void goToWikiTab(){
-		info("Go to my wiki");
-		evt.click(ELEMENT_HORIZONTAL_TOOLBAR_FORTH_APP_WIKI);
-	}
-	
-	/**
-	 * Go to my activity tab
-	 */
-	public void goToActivityTab(){
-		info("Go to activity tab");
-		evt.click(ELEMENT_HORIZONTAL_TOOLBAR_SECOND_APP_ACTIVITIES);
-	}
-	
-	/**
-	 * Go to my activity tab
-	 */
-	public void goToConnectionTab(){
-		info("Go to activity tab");
-		evt.click(ELEMENT_HORIZONTAL_TOOLBAR_THIRD_APP_CONNECTIONS);
-	}
-	
-	/**
-	 * Go to my activity tab
-	 */
-	public void goToDashboardTab(){
-		info("Go to dashboard tab");
-		evt.click(ELEMENT_HORIZONTAL_TOOLBAR_FIFTH_APP_DASHBOARD);
-	}
+  private ElementEventTestBase evt;
+
+  /**
+   * constructor
+   * 
+   * @param dr
+   */
+  public UserPageBase(TestBase testBase) {
+    this.testBase = testBase;
+    this.evt = testBase.getElementEventTestBase();
+  }
+
+  /**
+   * Go to my wiki
+   */
+  public void goToProfileTab() {
+    info("Go to profile tab");
+    evt.click(ELEMENT_HORIZONTAL_TOOLBAR_FIRST_APP_PROFILE);
+  }
+
+  /**
+   * Go to my wiki
+   */
+  public void goToWikiTab() {
+    info("Go to my wiki");
+    evt.click(ELEMENT_HORIZONTAL_TOOLBAR_FORTH_APP_WIKI);
+  }
+
+  /**
+   * Go to my activity tab
+   */
+  public void goToActivityTab() {
+    info("Go to activity tab");
+    evt.click(ELEMENT_HORIZONTAL_TOOLBAR_SECOND_APP_ACTIVITIES);
+  }
+
+  /**
+   * Go to my activity tab
+   */
+  public void goToConnectionTab() {
+    info("Go to activity tab");
+    evt.click(ELEMENT_HORIZONTAL_TOOLBAR_THIRD_APP_CONNECTIONS);
+  }
+
+  /**
+   * Go to my activity tab
+   */
+  public void goToDashboardTab() {
+    info("Go to dashboard tab");
+    evt.click(ELEMENT_HORIZONTAL_TOOLBAR_FIFTH_APP_DASHBOARD);
+  }
 }
