@@ -50,8 +50,8 @@ public class AnswerCategoryManagement {
 	public void goToActionOfCategoryFromActionBar(actionCategoryOption action){
 		info("Select action from menu");
 		Utils.pause(2000);
-		evt.waitForAndGetElement(aHome.ELEMENT_CATEGORY_BUTTON, testBase.getDefaultTimeout(), 1);
-		evt.click(aHome.ELEMENT_CATEGORY_BUTTON);
+		evt.waitForAndGetElement(ELEMENT_CATEGORY_BUTTON, testBase.getDefaultTimeout(), 1);
+		evt.click(ELEMENT_CATEGORY_BUTTON);
 		switch(action){
 		case EDIT:
 			info("Edit category");
@@ -142,7 +142,7 @@ public class AnswerCategoryManagement {
 		case SUBMITQUESTION:
 			info("SUBMITQUESTION category");
 			evt.click(ELEMENT_CATEGORY_RIGHT_SUBMIT_QUESTION_BUTTON);
-			evt.waitForAndGetElement(qMang.ELEMENT_SUBMIT_QUESTION_FORM);
+			evt.waitForAndGetElement(ELEMENT_SUBMIT_QUESTION_FORM);
 			break;
 		case RSS:
 			info("RSS category");
@@ -320,7 +320,7 @@ public class AnswerCategoryManagement {
 		if(isAccess){
 			evt.click(ELEMENT_CATEGORY_LIST_ITEM.replace("$category", cat),0,true);
 			for (String q : ques) {
-				evt.waitForAndGetElement(By.xpath(aHome.ELEMENT_QUESTION_LIST_ITEM.replace("$question", q)));
+				evt.waitForAndGetElement(By.xpath(ELEMENT_QUESTION_LIST_ITEM.replace("$question", q)));
 			}
 		}else
 			evt.waitForElementNotPresent(ELEMENT_CATEGORY_LIST_ITEM.replace("$category", cat));
