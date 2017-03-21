@@ -1,27 +1,35 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.forum;
 
-import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.Utils;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
-import org.exoplatform.selenium.ManageAlert;
-import org.exoplatform.selenium.Utils;
 
-public class ForumForumManagement extends ForumLocator {
+import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
+
+public class ForumForumManagement  {
 	
-	ManageAlert alert;
-	ForumHomePage forumHP;
-	ForumPermission forumPerm;
+	public ManageAlert alert;
+	public ForumHomePage forumHP;
+	public ForumPermission forumPerm;
+	private final TestBase testBase;
+
+	private ElementEventTestBase evt;
 	/**
 	 * constructor
 	 * @param dr
 	 */
-	public ForumForumManagement(WebDriver dr){
-		this.driver=dr;
-		alert = new ManageAlert(dr);
-		forumHP = new ForumHomePage(dr);
-		forumPerm = new ForumPermission(driver);
+	public ForumForumManagement(TestBase testBase){
+		this.testBase = testBase;
+		this.evt = testBase.getElementEventTestBase();
+		this.alert = new ManageAlert(testBase);
+		this.forumHP =new ForumHomePage(testBase);
+		this.forumPerm = new ForumPermission(testBase);
 	}
 
 	/**
@@ -34,29 +42,29 @@ public class ForumForumManagement extends ForumLocator {
 	public void addForumSimple(String nameForum, String order, String description) {
 		// TODO Auto-generated method stub
 		info("Add forum simple");
-		waitForAndGetElement(ELEMENT_ACTIONBAR_ADDFORUM,DEFAULT_TIMEOUT,1);
+		evt.waitForAndGetElement(ELEMENT_ACTIONBAR_ADDFORUM,testBase.getDefaultTimeout(),1);
 		info("click on Add forum button");
-		click(ELEMENT_ACTIONBAR_ADDFORUM);
+		evt.click(ELEMENT_ACTIONBAR_ADDFORUM);
 	    info("input the title for the forum");
-	    waitForAndGetElement(ELEMENT_ADDFORUM_POPUP_TITLE, DEFAULT_TIMEOUT, 1);
-	    type(ELEMENT_ADDFORUM_POPUP_TITLE,nameForum,true);
+		evt.waitForAndGetElement(ELEMENT_ADDFORUM_POPUP_TITLE, testBase.getDefaultTimeout(), 1);
+		evt.type(ELEMENT_ADDFORUM_POPUP_TITLE,nameForum,true);
 	    
 	    info("check and input Oder field");
 	    if(order!=null && order!=""){
 	    	info("Clear all old order data");
-	    	waitForAndGetElement(ELEMENT_ADDFORUM_POPUP_ORDER).clear();
+			evt.waitForAndGetElement(ELEMENT_ADDFORUM_POPUP_ORDER).clear();
 	    	info("Input new order data");
-	    	type(ELEMENT_ADDFORUM_POPUP_ORDER,order,true);
+			evt.type(ELEMENT_ADDFORUM_POPUP_ORDER,order,true);
 	    }
         info("check and input description");
 	    if (description!=null && description!=""){
 	    	info("Clear all old description data");
-	    	waitForAndGetElement(ELEMENT_ADDFORUM_POPUP_DESCRIPTION).clear();
+			evt.waitForAndGetElement(ELEMENT_ADDFORUM_POPUP_DESCRIPTION).clear();
 	    	info("Input new description data");
-	    	type(ELEMENT_ADDFORUM_POPUP_DESCRIPTION,description,true);
+			evt.type(ELEMENT_ADDFORUM_POPUP_DESCRIPTION,description,true);
 	    }
 		info("Click on Save button");
-		click(ELEMENT_ADDFORUM_POPUP_SAVE_BUTTON);
+		evt.click(ELEMENT_ADDFORUM_POPUP_SAVE_BUTTON);
 		Utils.pause(2000);
 		info("Finish adding new forum");
 	}
@@ -66,8 +74,8 @@ public class ForumForumManagement extends ForumLocator {
 	 * By QuynhPT
 	 */
 	public void cancelChangeAddForum(){
-		waitForAndGetElement(ELEMENT_ADDFORUM_POPUP_CANCEL_BUTTON);
-		click(ELEMENT_ADDFORUM_POPUP_CANCEL_BUTTON);
+		evt.waitForAndGetElement(ELEMENT_ADDFORUM_POPUP_CANCEL_BUTTON);
+		evt.click(ELEMENT_ADDFORUM_POPUP_CANCEL_BUTTON);
 		Utils.pause(2000);
 	}
 	/**
@@ -85,66 +93,66 @@ public class ForumForumManagement extends ForumLocator {
 	 */
     public void selectItemMoreActionMenu(specifMoreActionMenu item){
     	info("Wait More link is shown");
-		waitForAndGetElement(ELEMENT_MORE_ACTION);
+		evt.waitForAndGetElement(ELEMENT_MORE_ACTION);
 		info("Click on More link");
-		click(ELEMENT_MORE_ACTION);
+		evt.click(ELEMENT_MORE_ACTION);
     	info("Select a link on More menu");
     	switch(item) {
 		case START_TOPIC:
 			info("wait Start Topic button is shown");
-			waitForAndGetElement(ELEMENT_START_TOPIC_BUTTON,2000,0);
+			evt.waitForAndGetElement(ELEMENT_START_TOPIC_BUTTON,2000,0);
 			info("click on Start Topic button");
-			click(ELEMENT_START_TOPIC_BUTTON);
+			evt.click(ELEMENT_START_TOPIC_BUTTON);
 			info("Verify that the popup is shown");
-			waitForAndGetElement(ELEMENT_START_TOPIC_POPUP_TITLE);
+			evt.waitForAndGetElement(ELEMENT_START_TOPIC_POPUP_TITLE);
 			info("The popup is shown successfully");
 			break;
 		case EDIT:
 			info("click on Edit link");
-			waitForAndGetElement(ELEMENT_EDIT_FORUM,2000,0);
-			click(ELEMENT_EDIT_FORUM);
+			evt.waitForAndGetElement(ELEMENT_EDIT_FORUM,2000,0);
+			evt.click(ELEMENT_EDIT_FORUM);
 			info("Verify that Edit popup is shown");
-			waitForAndGetElement(ELEMENT_EDITFORUM_POPUP_TITLE);
+			evt.waitForAndGetElement(ELEMENT_EDITFORUM_POPUP_TITLE);
 			info("The popup is shown successfully");
 			break;
 		case DELETE:
 			info("click on Delete link");
-			waitForAndGetElement(ELEMENT_DELETE_FORUM,2000,0);
-			click(ELEMENT_DELETE_FORUM);
+			evt.waitForAndGetElement(ELEMENT_DELETE_FORUM,2000,0);
+			evt.click(ELEMENT_DELETE_FORUM);
 			Utils.pause(1000);
 			info("Verify that Confirm popup is shown");
-			alert.waitForMessage("Are you sure you want to delete this forum ?");
+			evt.waitForMessage("Are you sure you want to delete this forum ?");
 			info("Click on OK button of Confirm popup");
-			click(ELEMENT_OK_DELETE);
+			evt.click(ELEMENT_OK_DELETE);
 			info("Finish deleting the forum");
 			break;
 		case WATCHES:
 			break;
 		case LOCK:
-			waitForAndGetElement(ELEMENT_LOCK_FORUM,2000,0);
-			click(ELEMENT_LOCK_FORUM);
+			evt.waitForAndGetElement(ELEMENT_LOCK_FORUM,2000,0);
+			evt.click(ELEMENT_LOCK_FORUM);
 			break;
 		case UNLOCK:
-			waitForAndGetElement(ELEMENT_UNLOCK_FORUM,2000,0);
-			click(ELEMENT_UNLOCK_FORUM);
+			evt.waitForAndGetElement(ELEMENT_UNLOCK_FORUM,2000,0);
+			evt.click(ELEMENT_UNLOCK_FORUM);
 			break;
 		case CLOSE:
-			waitForAndGetElement(ELEMENT_CLOSE_FORUM,2000,0);
-			click(ELEMENT_CLOSE_FORUM);
+			evt.waitForAndGetElement(ELEMENT_CLOSE_FORUM,2000,0);
+			evt.click(ELEMENT_CLOSE_FORUM);
 			break;
 		case OPEN:
-			waitForAndGetElement(ELEMENT_OPEN_FORUM,2000,0);
-			click(ELEMENT_OPEN_FORUM);
+			evt.waitForAndGetElement(ELEMENT_OPEN_FORUM,2000,0);
+			evt.click(ELEMENT_OPEN_FORUM);
 			break;
 		case EXPORT_FORUM:
 			break;
 		case MOVE:
 			info("Wait Move link is shown");
-			waitForAndGetElement(ELEMENT_MOVE_FORUM,2000,0);
+			evt.waitForAndGetElement(ELEMENT_MOVE_FORUM,2000,0);
 			info("Click on Move link");
-			click(ELEMENT_MOVE_FORUM);
+			evt.click(ELEMENT_MOVE_FORUM);
 			info("Verify that Move popup is shown");
-			waitForAndGetElement(ELEMENT_POPUP_MOVE_FORUM);
+			evt.waitForAndGetElement(ELEMENT_POPUP_MOVE_FORUM);
 			info("The popup is shown successfully");
 			break;
 		case BANNED_IPS:
@@ -164,15 +172,15 @@ public class ForumForumManagement extends ForumLocator {
 		// TODO Auto-generated method stub
 		selectItemMoreActionMenu(specifMoreActionMenu.EDIT);
         info("Input a new title");
-		type(ELEMENT_ADDFORUM_POPUP_TITLE,newName,true);
+		evt.type(ELEMENT_ADDFORUM_POPUP_TITLE,newName,true);
 		info("check and input Oder field");
 		if (!order.isEmpty())
-			type(ELEMENT_ADDFORUM_POPUP_ORDER,order,true);
+			evt.type(ELEMENT_ADDFORUM_POPUP_ORDER,order,true);
 		info("check and input description");
 		if (!newDescription.isEmpty())
-			type(ELEMENT_ADDFORUM_POPUP_DESCRIPTION,newDescription,true);
+			evt.type(ELEMENT_ADDFORUM_POPUP_DESCRIPTION,newDescription,true);
 		info("Click on Save button");
-		click(ELEMENT_ADDFORUM_POPUP_SAVE_BUTTON);
+		evt.click(ELEMENT_ADDFORUM_POPUP_SAVE_BUTTON);
 		Utils.pause(2000);
 		info("Finish edting new forum");
 
@@ -187,10 +195,10 @@ public class ForumForumManagement extends ForumLocator {
 	public void closeAndOpen(boolean isClose){
 		if (isClose) {
 			selectItemMoreActionMenu(specifMoreActionMenu.CLOSE);
-			waitForAndGetElement(ELEMENT_FORUM_START_TOPIC_DISABLE);
+			evt.waitForAndGetElement(ELEMENT_FORUM_START_TOPIC_DISABLE);
 		}else {
 			selectItemMoreActionMenu(specifMoreActionMenu.OPEN);
-			waitForAndGetElement(ELEMENT_FORUM_START_TOPIC_BUTTON);
+			evt.waitForAndGetElement(ELEMENT_FORUM_START_TOPIC_BUTTON);
 		}
 	}
 	
@@ -202,7 +210,7 @@ public class ForumForumManagement extends ForumLocator {
 	public void deleteForum(String name){
 		selectItemMoreActionMenu(specifMoreActionMenu.DELETE);
 		info("Verify that the forum is deleted");
-		waitForElementNotPresent(ELEMENT_FORUM_FORUM_NAME_LINK.replace("${name}",name));
+		evt.waitForElementNotPresent(ELEMENT_FORUM_FORUM_NAME_LINK.replace("${name}",name));
 	}
 	
 	/**
@@ -213,10 +221,10 @@ public class ForumForumManagement extends ForumLocator {
 	public void moveForum(String forum, String destination){
 		info("move forum to category " + destination);
 		selectItemMoreActionMenu(specifMoreActionMenu.MOVE);
-		click(By.linkText(destination));
-		waitForElementNotPresent(ELEMENT_POPUP_MOVE_FORUM);
+		evt.click(By.linkText(destination));
+		evt.waitForElementNotPresent(ELEMENT_POPUP_MOVE_FORUM);
 		forumHP.goToCategory(destination);
-		waitForAndGetElement(ELEMENT_FORUM_FORUM_NAME_LINK.replace("${name}", forum));
+		evt.waitForAndGetElement(ELEMENT_FORUM_FORUM_NAME_LINK.replace("${name}", forum));
 		info("Move forum successfully");
 	}
 	/**
@@ -238,10 +246,10 @@ public class ForumForumManagement extends ForumLocator {
 	public void lockAndUnlock(boolean islock){
 		if (islock) {
 			selectItemMoreActionMenu(specifMoreActionMenu.LOCK);
-			waitForAndGetElement(ELEMENT_FORUM_START_TOPIC_DISABLE);
+			evt.waitForAndGetElement(ELEMENT_FORUM_START_TOPIC_DISABLE);
 		}else {
 			selectItemMoreActionMenu(specifMoreActionMenu.UNLOCK);
-			waitForAndGetElement(ELEMENT_FORUM_START_TOPIC_BUTTON);
+			evt.waitForAndGetElement(ELEMENT_FORUM_START_TOPIC_BUTTON);
 		}
 	}
 	/**
@@ -251,13 +259,13 @@ public class ForumForumManagement extends ForumLocator {
 	 */
 	public void checkDisplayOfForumManage(String forum,boolean isDisplay){
 		info("check display of manage forum");
-		click(ELEMENT_FORUM_FORUM_NAME_LINK.replace("${name}",forum));
+		evt.click(ELEMENT_FORUM_FORUM_NAME_LINK.replace("${name}",forum));
 		if(isDisplay){
-			waitForAndGetElement(ELEMENT_MORE_ACTION);
-			waitForAndGetElement(ELEMENT_MODERATOR);
+			evt.waitForAndGetElement(ELEMENT_MORE_ACTION);
+			evt.waitForAndGetElement(ELEMENT_MODERATOR);
 		}else{
-			waitForElementNotPresent(ELEMENT_MORE_ACTION);
-			waitForElementNotPresent(ELEMENT_MODERATOR);
+			evt.waitForElementNotPresent(ELEMENT_MORE_ACTION);
+			evt.waitForElementNotPresent(ELEMENT_MODERATOR);
 		}
 	}
 	/**
@@ -272,10 +280,10 @@ public class ForumForumManagement extends ForumLocator {
 	 */
 	public void editPermOfForum(String forum,String groupPath,String member,boolean isMod,boolean isStartTop,boolean isPostReply,boolean isViewPost){
 		info("edit permission of forum:"+forum);
-		click(ELEMENT_FORUM_FORUM_NAME_LINK.replace("${name}",forum),0,true);
+		evt.click(ELEMENT_FORUM_FORUM_NAME_LINK.replace("${name}",forum),0,true);
 		selectItemMoreActionMenu(specifMoreActionMenu.EDIT);
 		forumPerm.selectPermGroupMember(groupPath, member, isMod, isStartTop, isPostReply, isViewPost);
-		click(ELEMENT_ADDFORUM_POPUP_SAVE_BUTTON);
+		evt.click(ELEMENT_ADDFORUM_POPUP_SAVE_BUTTON);
 	}
 	/**
 	 * Check enable of start topic
@@ -284,11 +292,11 @@ public class ForumForumManagement extends ForumLocator {
 	 */
 	public void checkEnableOfStartTopic(String forum,boolean isEnable){
 		info("check enable of start topic");
-		click(ELEMENT_FORUM_FORUM_NAME_LINK.replace("${name}",forum),0,true);
+		evt.click(ELEMENT_FORUM_FORUM_NAME_LINK.replace("${name}",forum),0,true);
 		if(isEnable){
-			waitForAndGetElement(ELEMENT_START_TOPIC_BTN);
+			evt.waitForAndGetElement(ELEMENT_START_TOPIC_BTN);
 		}else{
-			waitForElementNotPresent(ELEMENT_START_TOPIC_BTN);
+			evt.waitForElementNotPresent(ELEMENT_START_TOPIC_BTN);
 		}
 	}	
 	/**
@@ -296,7 +304,7 @@ public class ForumForumManagement extends ForumLocator {
 	 */
 	public void goToPermissions(){
 		info("Permissions page");
-		   click(ELEMENT_FORUM_PERMISSION_TAB);
+		evt.click(ELEMENT_FORUM_PERMISSION_TAB);
 	}
 	
 	/**
@@ -305,7 +313,7 @@ public class ForumForumManagement extends ForumLocator {
 	 */
 	public void gotoUserSelectorInPermissionTab(){
 		info("-- Go to wiki home page --");
-		click(ELEMENT_FORUM_PERMISSION_TAB_USER_SELECTOR);
+		evt.click(ELEMENT_FORUM_PERMISSION_TAB_USER_SELECTOR);
 	}
 	
 	/**
@@ -313,7 +321,7 @@ public class ForumForumManagement extends ForumLocator {
 	 */
 	public void cancelAddEditForum(){
 		info("Cancel Add or Edit Forum");
-		click(ELEMENT_FORUM_CANCEL);
+		evt.click(ELEMENT_FORUM_CANCEL);
 	}
 	
 	/**
@@ -321,7 +329,7 @@ public class ForumForumManagement extends ForumLocator {
 	 */
 	public void closeUserSelector(){
 		info("-- Go to User Selector page --");
-		click(ELEMENT_FORUM_PERMISSION_CLOSE_USER_SELETOR);
+		evt.click(ELEMENT_FORUM_PERMISSION_CLOSE_USER_SELETOR);
 		Utils.pause(2000);
 	}
 	
@@ -333,10 +341,10 @@ public class ForumForumManagement extends ForumLocator {
 	
 	public void searchUser(String user, String searchOption) {
 		info("--Search user " + user + "--");
-		type(ELEMENT_FORUM_PERMISSION_INPUT_SEARCH_USER_NAME, user, true);
-		select(ELEMENT_FORUM_PERMISSION_SELECT_SEARCH_OPTION, searchOption);
-		click(ELEMENT_FORUM_PERMISSION_SEARCH_ICON);
-		waitForTextPresent(user);
+		evt.type(ELEMENT_FORUM_PERMISSION_INPUT_SEARCH_USER_NAME, user, true);
+		evt.select(ELEMENT_FORUM_PERMISSION_SELECT_SEARCH_OPTION, searchOption);
+		evt.click(ELEMENT_FORUM_PERMISSION_SEARCH_ICON);
+		evt.waitForTextPresent(user);
 	}
 	/**
 	 * Search user not found
@@ -345,9 +353,9 @@ public class ForumForumManagement extends ForumLocator {
 	 */
 	public void searchUserNotFound(String user, String searchOption) {
 		info("--Search user " + user + "--");
-		type(ELEMENT_FORUM_PERMISSION_INPUT_SEARCH_USER_NAME, user, true);
-		select(ELEMENT_FORUM_PERMISSION_SELECT_SEARCH_OPTION, searchOption);
-		click(ELEMENT_FORUM_PERMISSION_SEARCH_ICON);
-		waitForTextNotPresent(user);
+		evt.type(ELEMENT_FORUM_PERMISSION_INPUT_SEARCH_USER_NAME, user, true);
+		evt.select(ELEMENT_FORUM_PERMISSION_SELECT_SEARCH_OPTION, searchOption);
+		evt.click(ELEMENT_FORUM_PERMISSION_SEARCH_ICON);
+		evt.waitForTextNotPresent(user);
 	}
 }
