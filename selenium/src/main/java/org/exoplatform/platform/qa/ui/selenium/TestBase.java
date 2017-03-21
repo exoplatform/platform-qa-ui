@@ -20,79 +20,81 @@
  */
 package org.exoplatform.platform.qa.ui.selenium;
 
-import org.exoplatform.platform.qa.ui.selenium.driver.SeleniumDriverImpl;
-import org.exoplatform.platform.qa.ui.selenium.testbase.*;
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.debug;
 
 import java.util.List;
 
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.debug;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
+
+import org.exoplatform.platform.qa.ui.selenium.driver.SeleniumDriverImpl;
+import org.exoplatform.platform.qa.ui.selenium.testbase.*;
 
 public class TestBase {
 
-  public final int ACTION_REPEAT = 5;
+  public final int                         ACTION_REPEAT              = 5;
 
   /**
    * REFACTORING: Use delegate to new classes
    */
-  private final ManageFileTestBase manageFileTestBase = new ManageFileTestBase(this);
+  private final ManageFileTestBase         manageFileTestBase         = new ManageFileTestBase(this);
 
-  private final DateTestBase dateTestBase = new DateTestBase(this);
+  private final DateTestBase               dateTestBase               = new DateTestBase(this);
 
-  private final ElementEventTestBase elementEventTestBase = new ElementEventTestBase(this);
+  private final ElementEventTestBase       elementEventTestBase       = new ElementEventTestBase(this);
 
   private final TermsAndConditionsTestBase termsAndConditionsTestBase = new TermsAndConditionsTestBase(this);
 
-  public WebDriver newSeleniumDriver;
+  public WebDriver                         newSeleniumDriver;
 
-  public Boolean isDriver = true;
+  public Boolean                           isDriver                   = true;
 
-  public int loopCount = 0;
+  public int                               loopCount                  = 0;
 
-  public Actions action;
+  public Actions                           action;
   // =
   // 30
   // seconds
 
-  public String nativeEvent;
+  public String                            nativeEvent;
 
-  protected int DEFAULT_TIMEOUT = 30000;                               // milliseconds
+  protected int                            DEFAULT_TIMEOUT            = 30000;                               // milliseconds
 
-  protected boolean ieFlag;
+  protected boolean                        ieFlag;
 
-  protected boolean chromeFlag;
+  protected boolean                        chromeFlag;
 
-  protected String plfVersion = "";
+  protected String                         plfVersion                 = "";
 
   /* ========System Property==================== */
-  protected Boolean isRandom;
+  protected Boolean                        isRandom;
 
-  protected Boolean isUseFile;
+  protected Boolean                        isUseFile;
 
-  protected String jdbcDriver;
+  protected String                         jdbcDriver;
 
-  protected String dbUrl;
+  protected String                         dbUrl;
 
-  protected String user;
+  protected String                         user;
 
-  protected String pass;
+  protected String                         pass;
 
-  protected String sqlWiki;
+  protected String                         sqlWiki;
 
-  protected String sqlAttach;
+  protected String                         sqlAttach;
 
-  protected String sqlUser;
+  protected String                         sqlUser;
 
-  protected String sqlContent;
+  protected String                         sqlContent;
 
-  protected String defaultSheet;
+  protected String                         defaultSheet;
 
-  private SeleniumDriverImpl driver;
+  private SeleniumDriverImpl               driver;
 
-  private WebDriver seleniumDriver; //           = driver.createSeleniumWebDriver();
+  private WebDriver                        seleniumDriver;                                                   // =
+                                                                                                             // driver.createSeleniumWebDriver();
 
-  private String ssoType;
+  private String                           ssoType;
 
   public String getSsoType() {
     return ssoType;
@@ -156,7 +158,7 @@ public class TestBase {
    * @param language English: "en" French: "fr"
    */
   public void initFFBrowserWithSetLanguageBrowser(String language) {
-    //seleniumDriver = driver.initFFBrowserWithSetLanguageBrowser(language);
+    // seleniumDriver = driver.initFFBrowserWithSetLanguageBrowser(language);
     action = new Actions(seleniumDriver);
   }
 
@@ -167,13 +169,13 @@ public class TestBase {
    */
   public void initSeleniumTest(Object... opParams) {
     initSeleniumTestWithOutTermAndCondition();
-    //seleniumDriver.manage().window().maximize();
-    //seleniumDriver.navigate().refresh();
+    // seleniumDriver.manage().window().maximize();
+    // seleniumDriver.navigate().refresh();
     termsAndConditionsTestBase.termsAndConditions(opParams);
   }
 
   public void initSeleniumTestWithOutTermAndCondition(Object... opParams) {
-    //final WebDriver wd = driver.initDriver();
+    // final WebDriver wd = driver.initDriver();
     chromeFlag = driver.isChromeDriver(seleniumDriver);
     ieFlag = driver.isIEDriver(seleniumDriver);
     action = new Actions(seleniumDriver);
@@ -209,7 +211,7 @@ public class TestBase {
   /**
    * Get element
    *
-   * @param locator  locator of element
+   * @param locator locator of element
    * @param opParams opPram[0]: timeout opPram[1]: 0,1 0: No Assert 1: Assert
    * @return an element
    */
@@ -220,7 +222,7 @@ public class TestBase {
   /**
    * Get element
    *
-   * @param locator  locator of element
+   * @param locator locator of element
    * @param opParams opPram[0]: timeout opPram[1]: 0,1 0: No Assert 1: Assert
    * @return an element
    */
@@ -543,7 +545,7 @@ public class TestBase {
   /**
    * @param object
    * @return = true: if there is not scroll bar on element = false: if there is
-   * scroll bar on element
+   *         scroll bar on element
    */
   public boolean checkExitScrollBar(By object) {
     return elementEventTestBase.checkExitScrollBar(object);
@@ -951,6 +953,10 @@ public class TestBase {
   protected void setDriver(WebDriver webDriver) {
     this.seleniumDriver = webDriver;
     this.driver = new SeleniumDriverImpl(webDriver);
+  }
+
+  public String getUser() {
+    return user;
   }
 
   /**
