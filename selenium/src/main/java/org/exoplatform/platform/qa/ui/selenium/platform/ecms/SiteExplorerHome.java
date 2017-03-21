@@ -3,11 +3,10 @@ package org.exoplatform.platform.qa.ui.selenium.platform.ecms;
 
 import org.exoplatform.platform.qa.ui.selenium.*;
 import org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator;
-import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
-import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
-import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
-import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
+import org.exoplatform.platform.qa.ui.selenium.platform.*;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ManageFileTestBase;
 import org.openqa.selenium.*;
@@ -32,6 +31,8 @@ public class SiteExplorerHome {
 	public Dialog dialog;
 	public PlatformPermission plfPerm;
 	public ManageFileTestBase MFTB;
+
+
 	
 	public SiteExplorerHome(TestBase testBase){
 		this.testBase = testBase;
@@ -1325,7 +1326,7 @@ public class SiteExplorerHome {
 	 * @param comment
 	 */
 	public void uploadAndShareDocumentToSpace(String fileName, String spaceName, String comment){
-		NavigationToolbar navTool = new NavigationToolbar(driver);
+		NavigationToolbar navTool = new NavigationToolbar(testBase);
 		
 		info("Share document to space");
 		navTool.goToSiteExplorer();
@@ -1333,22 +1334,22 @@ public class SiteExplorerHome {
 		
 		uploadFile("TestData/"+fileName);
 		Utils.pause(3000);
-		waitForAndGetElement(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", fileName));		
+		evt.waitForAndGetElement(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", fileName));
 		//Share file to space
-		click(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", fileName));		
+		evt.click(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", fileName));
 		shareDocument();
 		//Click space list
-		click(ELEMENT_SPACE_LIST);
+		evt.click(ELEMENT_SPACE_LIST);
 		//Select a space
-		click(ELEMENT_SELECTED_SPACE.replace("${spaceName}", spaceName));	
+		evt.click(ELEMENT_SELECTED_SPACE.replace("${spaceName}", spaceName));
 		
 		//Comment
 		if(comment!= null && !comment.isEmpty()){
-			type(ELEMENT_SHARE_DOCUMENT_COMMENT, comment, false);
+			evt.type(ELEMENT_SHARE_DOCUMENT_COMMENT, comment, false);
 		}
 		
 		//Click Share button
-		click(ELEMENT_SHARE_DOCUMENT_ACTION_BUTTON.replace("${name}", "Share"));
+		evt.click(ELEMENT_SHARE_DOCUMENT_ACTION_BUTTON.replace("${name}", "Share"));
 	}
 	
 	/**
@@ -1357,45 +1358,45 @@ public class SiteExplorerHome {
 	 * Delete symlink of shared document in space documents
 	 */
 	public void deleteSymlink(String spaceName, String fileName){
-		HomePagePlatform homepage = new HomePagePlatform(driver);
-		SpaceManagement spaceManage = new SpaceManagement(driver);
+		HomePagePlatform homepage = new HomePagePlatform(testBase);
+		SpaceManagement spaceManage = new SpaceManagement(testBase);
 		
 		homepage.goToSpecificSpace(spaceName);
 		
 		spaceManage.goToDocumentTab();
-		waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER);
+		evt.waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER);
 		//Open shared folder
-		doubleClickOnElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER);
+		evt.doubleClickOnElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER);
 		//Find the shared file
-		waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK
+		evt.waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK
 																.replace("${spaceName}", spaceName)
 																.replace("${fileName}", fileName));
 		//Delete symlink
-		rightClickOnElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK
+		evt.rightClickOnElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK
 																.replace("${spaceName}", spaceName)
 																.replace("${fileName}", fileName));
-		waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE);
-		click(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE);
+		evt.waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE);
+		evt.click(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE);
 		//confirm
-		waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE_OPTION.replace("${action}", "Delete"));
-		click(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE_OPTION.replace("${action}", "Delete"));		
-		waitForElementNotPresent(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK
+		evt.waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE_OPTION.replace("${action}", "Delete"));
+		evt.click(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE_OPTION.replace("${action}", "Delete"));
+		evt.waitForElementNotPresent(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK
 																.replace("${spaceName}", spaceName)
 																.replace("${fileName}", fileName));				
 	}
 	
 	
 	public void checkShareActivityAfterDeleted(String spaceName, boolean verifyInSpace){	
-		HomePagePlatform homepage = new HomePagePlatform(driver);
-		SpaceManagement spaceManage = new SpaceManagement(driver);
-		
-		waitForElementNotPresent(ELEMENT_SHARE_DOCUMENT_CONTENT
+		HomePagePlatform homepage = new HomePagePlatform(testBase);
+		SpaceManagement spaceManage = new SpaceManagement(testBase);
+
+		evt.waitForElementNotPresent(ELEMENT_SHARE_DOCUMENT_CONTENT
 														.replace("${author}", DATA_NAME_USER1)
 														.replace("${spaceName}", spaceName));
 		if(verifyInSpace){
 			homepage.goToSpecificSpace(spaceName);
 			spaceManage.goToActivityStreamTab();
-			waitForElementNotPresent(ELEMENT_SHARE_DOCUMENT_CONTENT_IN_SPACE.replace("${author}", DATA_NAME_USER1));
+			evt.waitForElementNotPresent(ELEMENT_SHARE_DOCUMENT_CONTENT_IN_SPACE.replace("${author}", DATA_NAME_USER1));
 		}	
 	}	
 	
@@ -1406,8 +1407,8 @@ public class SiteExplorerHome {
 	 */
 	public void clickIconView() {
 		info("Select a view type");
-		waitForAndGetElement(ELEMENT_ADDRESS_BAR_ICON_VIEW);
-		click(ELEMENT_ADDRESS_BAR_ICON_VIEW);
+		evt.waitForAndGetElement(ELEMENT_ADDRESS_BAR_ICON_VIEW);
+		evt.click(ELEMENT_ADDRESS_BAR_ICON_VIEW);
 		Utils.pause(2000);
 	}
 	
@@ -1417,14 +1418,14 @@ public class SiteExplorerHome {
 	 * Date: Oct 21, 2015
 	 */
 	public void checkSharedFileSymlinkAfterDeleted( String fileName, String spaceName){
-		SpaceManagement spaceManage = new SpaceManagement(driver);
+		SpaceManagement spaceManage = new SpaceManagement(testBase);
 		//Go to Documents of Space
 		spaceManage.goToDocumentTab();
-		waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER);
+		evt.waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER);
 		//Open shared folder
-		doubleClickOnElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER);
+		evt.doubleClickOnElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER);
 		//Find the shared file
-		waitForElementNotPresent(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK
+		evt.waitForElementNotPresent(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK
 												.replace("${spaceName}", spaceName)
 												.replace("${fileName}", fileName));				
 	}	
@@ -1436,18 +1437,18 @@ public class SiteExplorerHome {
 	 */
 	public void shareDocumentToSpaceWithAccessRight(String spaceName, String accessRight, String comment){
 		shareDocument();
-		click(ELEMENT_DOCUMENT_SHARE_ACCESS_OPTION.replace("${option}", accessRight));
+		evt.click(ELEMENT_DOCUMENT_SHARE_ACCESS_OPTION.replace("${option}", accessRight));
 		//Click space list
-		click(ELEMENT_SPACE_LIST);
+		evt.click(ELEMENT_SPACE_LIST);
 		//Select a space
-		click(ELEMENT_SELECTED_SPACE.replace("${spaceName}", spaceName));	
+		evt.click(ELEMENT_SELECTED_SPACE.replace("${spaceName}", spaceName));
 		
 		//Comment
 		if(comment!= null && !comment.isEmpty()){
-			type(ELEMENT_SHARE_DOCUMENT_COMMENT, comment, false);
+			evt.type(ELEMENT_SHARE_DOCUMENT_COMMENT, comment, false);
 		}		
 		//Click Share button
-		click(ELEMENT_SHARE_DOCUMENT_ACTION_BUTTON.replace("${name}", "Share"));		
+		evt.click(ELEMENT_SHARE_DOCUMENT_ACTION_BUTTON.replace("${name}", "Share"));
 	}
 
 	/**
@@ -1456,10 +1457,10 @@ public class SiteExplorerHome {
 	 */
 	public void goToPathOfDrive(String path, String drive){
 		info("Go to selected Drive");
-		waitForAndGetElement(ELEMENT_ACTIONBAR_SHOWDRIVES);
-		click(ELEMENT_ACTIONBAR_SHOWDRIVES);
-		waitForAndGetElement(ELEMENT_ACTIONBAR_SELECTED_DRIVE.replace("${drive}",drive));
-		click(ELEMENT_ACTIONBAR_SELECTED_DRIVE.replace("${drive}",drive));
+		evt.waitForAndGetElement(ELEMENT_ACTIONBAR_SHOWDRIVES);
+		evt.click(ELEMENT_ACTIONBAR_SHOWDRIVES);
+		evt.waitForAndGetElement(ELEMENT_ACTIONBAR_SELECTED_DRIVE.replace("${drive}",drive));
+		evt.click(ELEMENT_ACTIONBAR_SELECTED_DRIVE.replace("${drive}",drive));
 		info("Go to folder");
 		String[] arrayPath = path.split("/");
 		for (String arrayElement : arrayPath){
@@ -1474,7 +1475,7 @@ public class SiteExplorerHome {
 	public void verifyContentCreatedSuccessfully(String title){
 		info ("Verify Content was created successfully");
 		Utils.pause(2000);
-		waitForAndGetElement(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", title)), DEFAULT_TIMEOUT, 1);
+		evt.waitForAndGetElement(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", title)), testBase.getDefaultTimeout(), 1);
 		info("Content was created successfully");
 	}
 }
