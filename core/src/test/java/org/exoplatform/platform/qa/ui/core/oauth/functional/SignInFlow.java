@@ -21,7 +21,7 @@
 package org.exoplatform.platform.qa.ui.core.oauth.functional;
 
 import org.exoplatform.platform.qa.ui.core.Base;
-import org.exoplatform.platform.qa.ui.core.PLFData;
+import org.exoplatform.platform.qa.ui.api.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator;
