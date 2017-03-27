@@ -1,4 +1,10 @@
 = UI Quality Assurance project for eXo Platform
+:link-chrome-driver: https://chromedriver.storage.googleapis.com/2.28
+:link-chrome-driver-notes: {link-chrome-driver}/notes.txt
+:link-chrome-driver-linux32: {link-chrome-driver}/chromedriver_linux32.zip
+:link-chrome-driver-linux64: {link-chrome-driver}/chromedriver_linux64.zip
+:link-chrome-driver-mac64: {link-chrome-driver}/chromedriver_mac64.zip
+:link-chrome-driver-win32: {link-chrome-driver}/chromedriver_win32.zip
 
 Automation Process for Functional Tests on eXo Platform.
 
@@ -25,6 +31,18 @@ $ open http://localhost/mail
 .. Run tests with your local Browsers
 ... Chrome
 
-... Firefox
+* Download the *Chrome Driver* compatible with your OS ({link-chrome-driver-notes}[notes]):
+** {link-chrome-driver-linux32}[Linux32] / {link-chrome-driver-linux64}[Linux64]
+** {link-chrome-driver-mac64}[Mac64]
+** {link-chrome-driver-win32}[Win32]
+* Unzip it locally
+** _ie: /tmp/chromedriver_
 
+... Firefox
+TODO
 .. Run tests in headless Browsers
+TODO
+. Execute the UI Integration Tests from your IDE
+.. Configure the test to *add the following System properties* in the `Run > Edit configurations... > VM options` input text +
+ `-ea -Dwebdriver.chrome.driver=/tmp/chromedriver -Dselenide.baseUrl=http://localhost:80`
+.. Run the test
