@@ -11,6 +11,8 @@ import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
+import static com.codeborne.selenide.Selenide.$;
+
 public class SpaceManagement {
 
   private final TestBase       testBase;
@@ -71,18 +73,12 @@ public class SpaceManagement {
    * @param desc : Space description
    */
   public void addNewSpaceSimple(String name, String desc, int... params) {
-    int iTimeout = params.length > 0 ? params[0] : testBase.getDefaultTimeout();
-    if (evt.waitForAndGetElement(ELEMENT_ADDNEWSPACE_BUTTON, 3000, 0, 2) != null) {
-      evt.click(ELEMENT_ADDNEWSPACE_BUTTON, 0, true);
-    } else {
-      evt.click(By.xpath("//*[contains(@class, 'uiIconSocSimplePlus')]"));
-    }
-    evt.waitForAndGetElement(ELEMENT_ADDNEWSPACE_FORM, 3000, 1);
-    evt.type(ELEMENT_SPACE_NAME_INPUT, name, true);
-    evt.type(ELEMENT_SPACE_DESCRIPTION_INPUT, desc, true);
+
+    $(ELEMENT_ADDNEWSPACE_BUTTON).click();
+    $(ELEMENT_SPACE_NAME_INPUT).val(name);
+    $(ELEMENT_SPACE_DESCRIPTION_INPUT).val(desc);
     info("Save all changes");
-    evt.clickByJavascript(ELEMENET_SPACE_CREATE_BUTTON);
-    evt.waitForAndGetElement(By.linkText(name), iTimeout);
+    $(ELEMENET_SPACE_CREATE_BUTTON).click();
   }
 
   /**

@@ -115,7 +115,7 @@ public final class HomePageLocator {
           "//*[text()='${title}']/../../../..//*[@class='contentComment' and contains(text(), 'Page has been moved to: ${path}')]";
 
   public static final By ELEMENT_MY_SPACE_LINK_PLF =
-          By.xpath("//*[@id='UISpaceNavigationPortlet']//*[contains(text(),'My Spaces')]");
+          By.xpath("//*[@id='UISpaceNavigationPortlet']//*[contains(@href,'/spaces')]");
 
   public static final By ELEMENT_ALL_SPACE_JOIN_LINK =
           By.cssSelector("#UISpaceNavigationPortlet .uiIconPLFMan");

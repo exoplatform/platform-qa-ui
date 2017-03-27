@@ -2100,7 +2100,7 @@ public final class SocialLocator {
 
   // Button create
   public static final By     ELEMENET_SPACE_CREATE_BUTTON                                      =
-                                                          By.xpath("//*[@class='uiAction']/*[text()='Create']");
+                                                          By.xpath("//*[@class='uiAction']/*[text()='Create Space']");
 
   // Activity like
   public static final By     ELEMENT_ACTIVITY_LIKE_EDIT_BTN                                    =

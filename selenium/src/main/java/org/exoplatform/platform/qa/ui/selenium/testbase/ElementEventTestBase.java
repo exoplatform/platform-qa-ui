@@ -31,6 +31,8 @@ import org.openqa.selenium.support.ui.Select;
 import java.util.List;
 import java.util.Set;
 
+import static com.codeborne.selenide.Selenide.$;
+
 public class ElementEventTestBase {
 
   private final TestBase testBase;
@@ -139,27 +141,8 @@ public class ElementEventTestBase {
    * @param opParams opPram[0]: timeout opPram[1]: 0,1 0: No Assert 1: Assert
    * @return an element
    */
-  public WebElement waitForAndGetElement(Object locator, Object... opParams) {
-    WebElement elem = null;
-    int timeout = (Integer) (opParams.length > 0 ? opParams[0] : testBase.getDefaultTimeout());
-    int isAssert = (Integer) (opParams.length > 1 ? opParams[1] : 1);
-    int notDisplayE = (Integer) (opParams.length > 2 ? opParams[2] : 0);
-    WebDriver wDriver = testBase.getExoWebDriver().getWebDriver();
-
-    for (int tick = 0; tick < timeout / WAIT_INTERVAL; tick++) {
-      if (notDisplayE == 2) {
-        elem = getElement(locator, wDriver);
-      } else {
-        elem = getDisplayedElement(locator, wDriver);
-      }
-      if (null != elem)
-        return elem;
-      Utils.pause(WAIT_INTERVAL);
-    }
-    if (isAssert == 1)
-      assert false : ("Timeout after " + timeout + "ms waiting for element present: " + locator);
-    Logger.info("cannot find element after " + timeout / 1000 + "s.");
-    return null;
+  public WebElement waitForAndGetElement(Object locator, Object... opParams){
+    return $((By)locator);
   }
 
   /**
@@ -353,49 +336,22 @@ public class ElementEventTestBase {
    *
    * @param locator
    * @param opParams
+   * @deprecated
    */
   public void click(Object locator, Object... opParams) {
-    int notDisplay = (Integer) (opParams.length > 0 ? opParams[0] : 0);
-    WebElement element = null;
-    Actions actions = new Actions(testBase.getExoWebDriver().getWebDriver());
-    try {
-      if (testBase.getBrowser().contains("iexplorer") || testBase.getBrowser().contains("chrome")) {
-        Logger.info("use javasript to click");
-        clickByJavascript(locator, notDisplay);
-      } else {
-        if (!locator.getClass().getName().contains("WebElement")) {
-          Logger.info("wait and get elements");
-          element = waitForAndGetElement(locator, testBase.getDefaultTimeout(), 1, notDisplay);
-        } else {
-          element = (WebElement) locator;
-        }
-        if (testBase.getBrowser().contains("chrome")) {
-          scrollToElement(element, testBase.getExoWebDriver().getWebDriver());
-        }
-        if (element.isEnabled()) {
-          Logger.info("click element");
-          actions.click(element).perform();
-        } else {
-          Logger.info("Element is not enabled");
-          Logger.info("click element by javascript");
-          clickByJavascript(locator, notDisplay);
-        }
-      }
-    } catch (StaleElementReferenceException e) {
-      checkCycling(e, testBase.getDefaultTimeout() / WAIT_INTERVAL);
-      Utils.pause(WAIT_INTERVAL);
-      Logger.info("click element by javascript");
-      clickByJavascript(locator, notDisplay);
-    } catch (ElementNotVisibleException e) {
-      checkCycling(e, testBase.getDefaultTimeout() / WAIT_INTERVAL);
-      Utils.pause(WAIT_INTERVAL);
-      Logger.info("click element by javascript");
-      clickByJavascript(locator, notDisplay);
-    } finally {
-      testBase.setLoopCount(0);
-    }
-    Utils.pause(1000);
+    $((By)locator).click();
   }
+
+  /**
+   * click action
+   *
+   * @param locator
+   */
+  public void click(Object locator) {
+    $((By)locator).click();
+  }
+
+
 
   /**
    * Use this function to verify if a check-box is checked (using when creating
@@ -589,38 +545,20 @@ public class ElementEventTestBase {
    * @param value
    * @param validate
    * @param opParams
+   * @deprecated
    */
   public void type(Object locator, String value, boolean validate, Object... opParams) {
-    int notDisplay = (Integer) (opParams.length > 0 ? opParams[0] : 0);
-    try {
-      for (int loop = 1; ; loop++) {
-        if (loop >= testBase.ACTION_REPEAT) {
-          Assert.fail("Timeout at type: " + value + " into " + locator);
-        }
-        WebElement element = waitForAndGetElement(locator, testBase.getDefaultTimeout(), 1, notDisplay);
-        if (element != null) {
-          if (validate)
-            element.clear();
-          element.click();
-          element.sendKeys(value);
-          if (!validate || value.equals(getValue(locator))) {
-            break;
-          }
-        }
-        Logger.info("Repeat action..." + loop + "time(s)");
-        Utils.pause(WAIT_INTERVAL);
-      }
-    } catch (StaleElementReferenceException e) {
-      checkCycling(e, testBase.getDefaultTimeout() / WAIT_INTERVAL);
-      Utils.pause(WAIT_INTERVAL);
-      type(locator, value, validate, opParams);
-    } catch (ElementNotVisibleException e) {
-      checkCycling(e, testBase.getDefaultTimeout() / WAIT_INTERVAL);
-      Utils.pause(WAIT_INTERVAL);
-      type(locator, value, validate, opParams);
-    } finally {
-      testBase.setLoopCount(0);
-    }
+    $((By)locator).val(value);
+  }
+
+  /**
+   * type to textbox
+   *
+   * @param locator
+   * @param value
+   */
+  public void type(Object locator, String value) {
+    $((By)locator).val(value);
   }
 
   /**

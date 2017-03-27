@@ -35,7 +35,6 @@ public class TestBase {
 
   static {
     System.setProperty("selenide.browser", "org.exoplatform.platform.qa.ui.api.config.driver.ExoWebDriverProvider");
-    System.setProperty("webdriver.chrome.driver", "/Users/mgreau/bin/chromedriver");
   }
 
   public final int                         ACTION_REPEAT              = 5;
@@ -160,10 +159,7 @@ public class TestBase {
    * @param opParams
    */
   public void initSeleniumTest(Object... opParams) {
-    initSeleniumTestWithOutTermAndCondition();
-    // seleniumDriver.manage().window().maximize();
-    // seleniumDriver.navigate().refresh();
-    termsAndConditionsTestBase.termsAndConditions(opParams);
+    // Now the Selenium Driver and the eXo Platform screens are initialize in the core project.
   }
 
   public void initSeleniumTestWithOutTermAndCondition(Object... opParams) {
@@ -199,9 +195,20 @@ public class TestBase {
    * @param locator locator of element
    * @param opParams opPram[0]: timeout opPram[1]: 0,1 0: No Assert 1: Assert
    * @return an element
+   * @deprecated
    */
   public WebElement waitForAndGetElement(Object locator, Object... opParams) {
     return elementEventTestBase.waitForAndGetElement(locator, opParams);
+  }
+
+  /**
+   * Get element
+   *
+   * @param locator locator of element
+   * @return an element
+   */
+  public WebElement waitForAndGetElement(Object locator) {
+    return elementEventTestBase.waitForAndGetElement(locator, null);
   }
 
   /**
@@ -407,9 +414,20 @@ public class TestBase {
    * @param value
    * @param validate
    * @param opParams
+   * @deprecated
    */
   public void type(Object locator, String value, boolean validate, Object... opParams) {
-    elementEventTestBase.type(locator, value, validate, opParams);
+    elementEventTestBase.type(locator, value);
+  }
+
+  /**
+   * type to textbox
+   *
+   * @param locator
+   * @param value
+   */
+  public void type(Object locator, String value) {
+    elementEventTestBase.type(locator, value);
   }
 
   /**

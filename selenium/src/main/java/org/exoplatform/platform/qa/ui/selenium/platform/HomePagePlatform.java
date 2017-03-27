@@ -12,6 +12,8 @@ import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
+import static com.codeborne.selenide.Selenide.$;
+
 public class HomePagePlatform {
 
   private final TestBase       testBase;
@@ -47,21 +49,8 @@ public class HomePagePlatform {
    * Go to Home page
    */
   public void goToHomePage() {
-    info("--Go to Home page--");
-    Utils.pause(3000);
-    int repeat = 0;
-    while (evt.waitForAndGetElement(ELEMENT_PLF_OFFICE_RIGHT_COLUMN, 2000, 0) == null) {
-      if (repeat > 5)
-        break;
       info("Click on Home link of intranet page");
-      evt.click(ELEMENT_HOME_LINK_PLF);
-      if (evt.waitForAndGetElement(ELEMENT_PLF_OFFICE_RIGHT_COLUMN, 2000, 0) != null)
-        break;
-      repeat++;
-    }
-    evt.waitForAndGetElement(ELEMENT_PLF_OFFICE_RIGHT_COLUMN);
-    info("the intranet is shown sucessfully");
-    Utils.pause(2000);
+      $(ELEMENT_HOME_LINK_PLF).click();
   }
 
   /**
@@ -83,15 +72,7 @@ public class HomePagePlatform {
    */
   public void goToMySpaces() {
     info("-- Go to my spaces --");
-    int repeat = 0;
-    while (evt.waitForAndGetElement(ELEMENT_ADDNEWSPACE_BUTTON, 3000, 0) == null) {
-      if (repeat > 5)
-        break;
-      evt.click(ELEMENT_MY_SPACE_LINK_PLF);
-      Utils.pause(2000);
-      repeat++;
-    }
-    evt.waitForAndGetElement(ELEMENT_ADDNEWSPACE_BUTTON, 3000, 1);
+    $(ELEMENT_MY_SPACE_LINK_PLF).click();
   }
 
   /**

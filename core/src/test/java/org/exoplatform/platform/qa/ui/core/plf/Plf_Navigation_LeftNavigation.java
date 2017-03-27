@@ -5,7 +5,9 @@ import org.exoplatform.platform.qa.ui.core.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_RESULT_SEARCH_SPACE;
@@ -26,8 +28,6 @@ public class Plf_Navigation_LeftNavigation extends Base {
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
 
-    initSeleniumTest();
-
     homePagePlatform = new HomePagePlatform(this);
     spaceManagement = new SpaceManagement(this);
   }
@@ -38,6 +38,7 @@ public class Plf_Navigation_LeftNavigation extends Base {
    */
   @Test
   @Smoke
+  @Tag("smoke")
   public void test03_OpenASpace() {
     info("Test 3: Open a Space");
     /*Step Number: 1
@@ -62,7 +63,7 @@ public class Plf_Navigation_LeftNavigation extends Base {
 			The space is opened in the Home space's stream*/
 
     homePagePlatform.goToMySpaces();
-    waitForAndGetElement(ELEMENT_SPACE_PANEL);
+    waitForAndGetElement(ELEMENT_SPACE_PANEL).isDisplayed();
 
   }
 
@@ -73,16 +74,17 @@ public class Plf_Navigation_LeftNavigation extends Base {
    */
   @Test
   @Smoke
+  @Tag("smoke")
   public void test05_SearchSpaceInMYSPACES() {
     info("Test 5: Search space in MY SPACES");
-    String space1 = "abc" + getRandomNumber();
-    String space2 = "ahd" + getRandomNumber();
+    String space1 = "space1" + getRandomNumber();
+    String space2 = "space2" + getRandomNumber();
 
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space1, space1);
+    spaceManagement.addNewSpaceSimple(space1, space1 + " - description");
 
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space2, space2);
+    spaceManagement.addNewSpaceSimple(space2, space2 + " - description");
 
 		/*Step Number: 1
 		 *Step Name: Connect to intranet
@@ -104,10 +106,10 @@ public class Plf_Navigation_LeftNavigation extends Base {
 
 		 *Expected Outcome: 
 			- All spaces having a word containing with the inputed letter are displayed*/
-    type(ELEMENT_SEARCH_SPACE, "a", false);
-    waitForAndGetElement(ELEMENT_RESULT_SEARCH_SPACE.replace("{$space}", space1), 3000, 0);
-    waitForAndGetElement(ELEMENT_RESULT_SEARCH_SPACE.replace("{$space}", space2), 3000, 0);
-
+    type(ELEMENT_SEARCH_SPACE, "spa");
+    waitForAndGetElement(By.xpath(ELEMENT_RESULT_SEARCH_SPACE.replace("{$space}", space1))).isDisplayed();
+    waitForAndGetElement(By.xpath(ELEMENT_RESULT_SEARCH_SPACE.replace("{$space}", space2))).isDisplayed();
+/*
     homePagePlatform.goToHomePage();
 
     type(ELEMENT_SEARCH_SPACE, "ah", false);
@@ -121,9 +123,11 @@ public class Plf_Navigation_LeftNavigation extends Base {
 
 		 *Expected Outcome: 
 			- Only spaces containing "ab" are displayed*/
+/*
     info("Delete spaces");
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space1, false);
     spaceManagement.deleteSpace(space2, false);
+    */
   }
 }
