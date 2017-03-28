@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.gatein;
+package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
@@ -23,7 +23,7 @@ public class ContentDetail {
   /**
    * Select a folder or a content or both in Multiple Content Selector Pane
    * popup
-   * 
+   *
    * @param arrayPath
    * @param content
    */

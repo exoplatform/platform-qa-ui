@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.gatein;
+package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;

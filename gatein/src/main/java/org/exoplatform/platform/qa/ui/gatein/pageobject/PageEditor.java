@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.gatein;
+package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -21,7 +21,7 @@ public class PageEditor {
 
   /**
    * Edit a Portlet with locator of the portlet
-   * 
+   *
    * @param locatorPortlet
    */
   public void goToEditPortlet(Object locatorPortlet) {
@@ -34,7 +34,7 @@ public class PageEditor {
 
   /**
    * Edit a Portlet with the name of portlet
-   * 
+   *
    * @param namePortlet
    */
   public void goToEditPortlet(String namePortlet) {
@@ -55,7 +55,7 @@ public class PageEditor {
 
   /**
    * Select an application and move to tagerget container
-   * 
+   *
    * @param portletPath (Format: catgory-porlets). Ex: answer-AnswersPortlet)
    * @param targetLocator
    */
@@ -77,7 +77,7 @@ public class PageEditor {
 
   /**
    * Verify application permission
-   * 
+   *
    * @param cat
    * @param app
    * @param isEnable
@@ -96,7 +96,7 @@ public class PageEditor {
 
   /**
    * Verify category permission
-   * 
+   *
    * @param cat
    * @param isEnable
    */
@@ -111,7 +111,7 @@ public class PageEditor {
 
   /**
    * Verify permission edit delete application
-   * 
+   *
    * @param app
    * @param isEnable
    */

@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.gatein;
+package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -26,7 +26,7 @@ public class NavigationManagement {
 
   /**
    * Open Navigation Management popup
-   * 
+   *
    * @param site as acme or intranet or a group
    */
   public void goToEditNavigation(String site) {
@@ -37,7 +37,7 @@ public class NavigationManagement {
 
   /**
    * Edit layout of a portal
-   * 
+   *
    * @param site
    */
   public void goToEditLayout(String site) {
@@ -48,7 +48,7 @@ public class NavigationManagement {
 
   /**
    * change config of a portal
-   * 
+   *
    * @param site
    */
   public void changeConfig(String site) {
@@ -60,7 +60,7 @@ public class NavigationManagement {
 
   /**
    * Go to Edit site configuration
-   * 
+   *
    * @param site
    */
   public void goToEditSiteConfig(String site) {

@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.gatein;
+package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import org.exoplatform.platform.qa.ui.selenium.*;
 import org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator;
-import org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class UserAddManagement {
@@ -35,7 +34,7 @@ public class UserAddManagement {
 
   /**
    * Add en user on the plf
-   * 
+   *
    * @param userName
    * @param Password
    * @param email
@@ -61,7 +60,7 @@ public class UserAddManagement {
 
   /**
    * Add many users at the same time
-   * 
+   *
    * @param number is the number of user that wants to create
    * @param password
    * @return array
@@ -82,7 +81,7 @@ public class UserAddManagement {
 
   /**
    * function: check content of mail then delete mail
-   * 
+   *
    * @param title title of the page
    * @object if true check it's present, false check if it's not present
    */
@@ -104,7 +103,7 @@ public class UserAddManagement {
 
   /**
    * function: changePasswordFor User
-   * 
+   *
    * @param currentPass Current password of user
    * @param newPass new Password of User
    * @param confirmNewPass confirm new pass word of User

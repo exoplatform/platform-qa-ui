@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.gatein;
+package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
@@ -68,7 +68,7 @@ public class PortalManagePages {
 
   /**
    * Delete a page
-   * 
+   *
    * @param titlePage
    */
   public void deletePage(String titlePage, String type) {
@@ -83,7 +83,7 @@ public class PortalManagePages {
 
   /**
    * Go to edit a page
-   * 
+   *
    * @param titlePage
    */
   public void editPage(String titlePage, String type) {
@@ -96,7 +96,7 @@ public class PortalManagePages {
 
   /**
    * Add a new simple page
-   * 
+   *
    * @param pageName
    * @param title
    * @param type
@@ -131,7 +131,7 @@ public class PortalManagePages {
 
   /**
    * Open page
-   * 
+   *
    * @param url
    */
   public void openPage(String url) {

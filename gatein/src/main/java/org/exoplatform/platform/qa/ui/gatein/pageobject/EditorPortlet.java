@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.gatein;
+package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -31,7 +31,7 @@ public class EditorPortlet {
 
   /**
    * Delete a access permission group
-   * 
+   *
    * @param group is group path as: /platform/users,...
    */
   public void deleteGroupPermission(String group) {
@@ -47,7 +47,7 @@ public class EditorPortlet {
 
   /**
    * Add permission for a portlet
-   * 
+   *
    * @param groupPath is group's path as: Platform/Administration,..
    * @param membership is membership's name
    * @param addedGroup is group's name that is added after added permission in
@@ -73,7 +73,7 @@ public class EditorPortlet {
 
   /**
    * Save or close all changes
-   * 
+   *
    * @param isSave
    */
   public void saveCloseChange(Boolean isSave) {

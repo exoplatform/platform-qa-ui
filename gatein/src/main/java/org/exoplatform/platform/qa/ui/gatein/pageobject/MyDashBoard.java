@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.gatein;
+package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -26,7 +26,7 @@ public class MyDashBoard {
 
   /**
    * Add a gadget to dashboard
-   * 
+   *
    * @param name the name of gadget that will be added to dashboard
    * @param numberCol the number of column that will put the gadget. We have 3
    *          columns as: + numberCol= 1: this is for left column + numberCol=
@@ -48,7 +48,7 @@ public class MyDashBoard {
 
   /**
    * Delete a Gadget in Dashboard page
-   * 
+   *
    * @param name
    */
   public void deleteGadget(String name) {
@@ -62,7 +62,7 @@ public class MyDashBoard {
 
   /**
    * Add a remote gadget to the page
-   * 
+   *
    * @param url
    * @param name
    */
@@ -85,7 +85,7 @@ public class MyDashBoard {
 
   /**
    * Add new tab
-   * 
+   *
    * @param name
    */
   public void addTab(String name) {
@@ -101,7 +101,7 @@ public class MyDashBoard {
 
   /**
    * Rename a tab
-   * 
+   *
    * @param oldName
    * @param newName
    */
@@ -118,7 +118,7 @@ public class MyDashBoard {
 
   /**
    * Delete a tab
-   * 
+   *
    * @param name
    */
   public void deleteTab(String name) {

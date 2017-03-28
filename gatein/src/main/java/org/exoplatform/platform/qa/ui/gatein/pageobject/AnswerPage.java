@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.gatein;
+package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -90,7 +90,7 @@ public class AnswerPage {
 
   /**
    * function setting display for categories in answer portlet
-   * 
+   *
    * @param categoryScope
    * @param display
    */
@@ -113,7 +113,7 @@ public class AnswerPage {
 
   /**
    * select forum in caltegory
-   * 
+   *
    * @param forumPath (Ex: cat1/forum1)
    */
   public void selectForumCategory(String forumPath) {
@@ -132,7 +132,7 @@ public class AnswerPage {
 
   /**
    * Function setting discussion in answer portlet
-   * 
+   *
    * @param discuss
    * @param forumPath
    */
@@ -155,7 +155,7 @@ public class AnswerPage {
 
   /**
    * function setting email template for answser portlet
-   * 
+   *
    * @param tab
    * @param content
    */
@@ -195,7 +195,7 @@ public class AnswerPage {
 
   /**
    * function setting display mode in answer portlet
-   * 
+   *
    * @param all
    * @param date
    * @param ascending

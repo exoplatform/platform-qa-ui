@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.gatein;
+package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -26,7 +26,7 @@ public class GadgetManagement {
 
   /**
    * Add a Remote gadget
-   * 
+   *
    * @param url
    */
   public void addRemoteGadget(String url) {
@@ -43,7 +43,7 @@ public class GadgetManagement {
 
   /**
    * Add a new gadget into a category
-   * 
+   *
    * @param category
    */
   public void addIntoCategory(String category) {
@@ -61,7 +61,7 @@ public class GadgetManagement {
 
   /**
    * Delete a gadget
-   * 
+   *
    * @param name
    */
   public void deleteGadget(String name) {
@@ -73,7 +73,7 @@ public class GadgetManagement {
 
   /**
    * Create a new gadget
-   * 
+   *
    * @param name
    * @param xmlCode
    */
@@ -99,7 +99,7 @@ public class GadgetManagement {
 
   /**
    * Edit a Gadget with newXmlCode that include newName
-   * 
+   *
    * @param oldName
    * @param newXmlCode
    * @param newName

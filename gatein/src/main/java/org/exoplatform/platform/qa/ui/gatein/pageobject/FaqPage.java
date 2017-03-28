@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.gatein;
+package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -72,7 +72,7 @@ public class FaqPage {
 
   /**
    * setting template
-   * 
+   *
    * @param data
    */
   public void settingFAQTemplate(String data) {

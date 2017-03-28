@@ -39,6 +39,8 @@ import org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator;
 import org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
+import static com.codeborne.selenide.Selenide.$;
+
 public class NavigationToolbar {
 
   private final TestBase       testBase;
@@ -120,21 +122,11 @@ public class NavigationToolbar {
    */
   public void goToUsersAndGroupsManagement() {
     info("--Go to Users and groups management--");
-    Utils.pause(3000);
-    if (testBase.getExoWebDriver().isIEDriver()) {
-      evt.waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION, testBase.getDefaultTimeout(), 1, 2);
-      evt.clickByJavascript(ELEMENT_TOOLBAR_ADMINISTRATION, 2);
-      evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_USERS, testBase.getDefaultTimeout(), 1);
-    } else
-      evt.click(ELEMENT_LINK_SETUP, 2);
-    evt.mouseOver(ELEMENT_ADMINISTRATION_USERS, true);
-    if (evt.waitForAndGetElement(ELEMENT_GROUP_AND_ROLE_LINK, 2000, 0) != null)
-      evt.click(ELEMENT_GROUP_AND_ROLE_LINK);
-    else {
-      testBase.getExoWebDriver().getWebDriver()
-              .get(testBase.getExoWebDriver().getBaseUrl() + "/g/:platform:administrators/administration/management");
-    }
-    Utils.pause(3000);
+
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    $(ELEMENT_ADMINISTRATION_USERS).hover();
+    $(ELEMENT_GROUP_AND_ROLE_LINK).click();
+
   }
 
   /**

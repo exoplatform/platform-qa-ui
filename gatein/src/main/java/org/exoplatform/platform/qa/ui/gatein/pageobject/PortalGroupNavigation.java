@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.gatein;
+package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -26,7 +26,7 @@ public class PortalGroupNavigation {
 
   /**
    * function: add new navigation for group
-   * 
+   *
    * @param groupName name of group you want to add navigation
    */
   public void addNewNavigationForGroup(String groupName) {
@@ -40,7 +40,7 @@ public class PortalGroupNavigation {
 
   /**
    * function delete navigation for group
-   * 
+   *
    * @param groupName name of Group
    */
   public void deleteNavigationForGroup(String groupName) {
@@ -53,7 +53,7 @@ public class PortalGroupNavigation {
 
   /**
    * function: Edit Priority For Group
-   * 
+   *
    * @param groupAdmin Description of group
    * @param priority Priority you want to set for group
    */
@@ -67,7 +67,7 @@ public class PortalGroupNavigation {
 
   /**
    * function: Go to Edit navigation
-   * 
+   *
    * @param currentNavigation
    */
   public void editNavigation(String currentNavigation) {
@@ -78,7 +78,7 @@ public class PortalGroupNavigation {
 
   /**
    * Verify Add Navigation permission
-   * 
+   *
    * @param title page's title
    * @param isEnable
    * @param groupName
@@ -98,7 +98,7 @@ public class PortalGroupNavigation {
 
   /**
    * Verify Manage Group Site
-   * 
+   *
    * @param group
    * @param isEnable
    */

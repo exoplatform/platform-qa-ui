@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.gatein;
+package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
@@ -30,7 +30,7 @@ public class PortalManageSites {
 
   /**
    * Open Navigation Management popup
-   * 
+   *
    * @param site as acme or intranet
    */
   public void goToEditNavigation(String site) {
@@ -42,7 +42,7 @@ public class PortalManageSites {
 
   /**
    * Edit layout of a portal
-   * 
+   *
    * @param site
    */
   public void goToEditLayout(String site) {
@@ -53,7 +53,7 @@ public class PortalManageSites {
 
   /**
    * change config of a portal
-   * 
+   *
    * @param site
    */
   public void changeConfig(String site) {
@@ -65,7 +65,7 @@ public class PortalManageSites {
 
   /**
    * Go to Edit site configuration
-   * 
+   *
    * @param site
    */
   public void goToEditSiteConfig(String site) {
@@ -76,7 +76,7 @@ public class PortalManageSites {
 
   /**
    * Add a simple portal
-   * 
+   *
    * @param portalName
    * @param label
    * @param des
@@ -117,7 +117,7 @@ public class PortalManageSites {
 
   /**
    * Select a group in permission selector popup
-   * 
+   *
    * @param groupsPath is path of groups as:Platform/Content Manangement
    */
   public void selectGroup(String groupsPath) {
@@ -132,7 +132,7 @@ public class PortalManageSites {
 
   /**
    * Select a membership of a group
-   * 
+   *
    * @param memberShip
    */
   public void selectMemberShip(String memberShip) {
@@ -152,7 +152,7 @@ public class PortalManageSites {
 
   /**
    * Edit a simple portal
-   * 
+   *
    * @param portalName
    * @param label
    * @param des
@@ -191,7 +191,7 @@ public class PortalManageSites {
 
   /**
    * Add New Portal
-   * 
+   *
    * @param portalName
    * @param label
    * @param description
@@ -233,7 +233,7 @@ public class PortalManageSites {
 
   /**
    * Configure Portal
-   * 
+   *
    * @param portalName
    * @param label
    * @param description
@@ -304,7 +304,7 @@ public class PortalManageSites {
 
   /**
    * Set View Permissions
-   * 
+   *
    * @param groupId
    * @param membership
    */
@@ -329,7 +329,7 @@ public class PortalManageSites {
 
   /**
    * Set Edit Permissions
-   * 
+   *
    * @param groupId
    * @param membership
    */
@@ -351,7 +351,7 @@ public class PortalManageSites {
 
   /**
    * Delete Portal
-   * 
+   *
    * @param portalName
    */
   public void deletePortal(String portalName) {
@@ -364,7 +364,7 @@ public class PortalManageSites {
 
   /**
    * Verify permission on site
-   * 
+   *
    * @param isEnable
    */
   public void verifyPermOnSite(String portal, boolean isEnable) {

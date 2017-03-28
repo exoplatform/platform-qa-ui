@@ -18,9 +18,17 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see <http://www.gnu.org/licenses/>.
  */
-package org.exoplatform.platform.qa.ui.selenium.platform.gatein;
+package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
-import junit.framework.Assert;
+import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_NEXT_PAGE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME;
+
+import java.util.ArrayList;
+
+import org.openqa.selenium.By;
+
 import org.exoplatform.platform.qa.ui.selenium.Dialog;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -28,26 +36,20 @@ import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.openqa.selenium.By;
 
-import java.util.ArrayList;
-
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_NEXT_PAGE;
-import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME;
+import junit.framework.Assert;
 
 public class UserAndGroupManagement {
 
-  private final TestBase testBase;
+  private final TestBase       testBase;
 
-  public ManageAlert alert;
+  public ManageAlert           alert;
 
-  public Dialog      dialog;
+  public Dialog                dialog;
 
   private ElementEventTestBase evt;
 
-  private PlatformBase plfBase;
+  private PlatformBase         plfBase;
 
   public UserAndGroupManagement(TestBase testBase) {
     this.testBase = testBase;
@@ -59,8 +61,7 @@ public class UserAndGroupManagement {
   }
 
   /**
-   * Select users tab
-   * function: Choose Users Tab
+   * Select users tab function: Choose Users Tab
    */
   public void goToUsersTab() {
     info("-- Choose Users Management tab--");
@@ -70,8 +71,7 @@ public class UserAndGroupManagement {
   }
 
   /**
-   * Select group management tab
-   * function: Choose Group Tab
+   * Select group management tab function: Choose Group Tab
    */
   public void goToGroupTab() {
     info("-- Choose Group Management tab--");
@@ -81,8 +81,7 @@ public class UserAndGroupManagement {
   }
 
   /**
-   * Select membership management tab
-   * function: Choose MemberShip Tab
+   * Select membership management tab function: Choose MemberShip Tab
    */
   public void goToMembershipTab() {
     info("-- Choose Membership Management tab--");
@@ -124,10 +123,10 @@ public class UserAndGroupManagement {
   /**
    * function: Add new group
    *
-   * @param groupName  name of Group
+   * @param groupName name of Group
    * @param groupLabel label of Group
-   * @param groupDesc  description of Group
-   * @param verify     (True if you want to verify new group created successfully)
+   * @param groupDesc description of Group
+   * @param verify (True if you want to verify new group created successfully)
    */
   public void addGroup(String groupName, String groupLabel, String groupDesc, boolean verify) {
     info("--Add a new group--");
@@ -136,8 +135,7 @@ public class UserAndGroupManagement {
     inputDataGroup(groupName, groupLabel, groupDesc);
     evt.click(ELEMENT_SAVE_BUTTON);
     if (verify && groupLabel != null && groupLabel != "") {
-      evt.waitForAndGetElement(ELEMENT_GROUP_ADDED.replace("${groupLabel}",
-                                                           groupLabel));
+      evt.waitForAndGetElement(ELEMENT_GROUP_ADDED.replace("${groupLabel}", groupLabel));
     }
   }
 
@@ -159,11 +157,9 @@ public class UserAndGroupManagement {
       evt.select(ELEMENT_SELECT_MEMBERSHIP, membership[0]);
     evt.scrollToElement(evt.waitForAndGetElement(ELEMENT_SAVE_BUTTON_2), this.testBase.getExoWebDriver().getWebDriver());
     evt.click(ELEMENT_SAVE_BUTTON_2);
-    String addedUser = ELEMENT_ADDED_GROUP_USER_IN_TABLE.replace(
-            "${username}", user);
+    String addedUser = ELEMENT_ADDED_GROUP_USER_IN_TABLE.replace("${username}", user);
     if (testBase.isTextPresent(ELEMENT_MSG_TOTAL_PAGES)) {
-      plfBase.usePaginator(addedUser,
-                           ELEMENT_USER_NOT_FOUND.replace("${user}", user));
+      plfBase.usePaginator(addedUser, ELEMENT_USER_NOT_FOUND.replace("${user}", user));
     } else {
       evt.waitForAndGetElement(addedUser);
     }
@@ -189,11 +185,9 @@ public class UserAndGroupManagement {
       evt.select(ELEMENT_SELECT_MEMBERSHIP, membership[0]);
     evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     evt.click(ELEMENT_SAVE_BUTTON_2);
-    String addedUser = ELEMENT_ADDED_GROUP_USER_IN_TABLE.replace(
-            "${username}", user);
+    String addedUser = ELEMENT_ADDED_GROUP_USER_IN_TABLE.replace("${username}", user);
     if (testBase.isTextPresent(ELEMENT_MSG_TOTAL_PAGES)) {
-      plfBase.usePaginator(addedUser,
-                           ELEMENT_USER_NOT_FOUND.replace("${user}", user));
+      plfBase.usePaginator(addedUser, ELEMENT_USER_NOT_FOUND.replace("${user}", user));
     } else {
       evt.waitForAndGetElement(addedUser);
     }
@@ -203,12 +197,11 @@ public class UserAndGroupManagement {
   /**
    * function: Input data to create a new group
    *
-   * @param groupName  name of Group
+   * @param groupName name of Group
    * @param groupLabel label of Group
-   * @param groupDesc  description of Group
+   * @param groupDesc description of Group
    */
-  public void inputDataGroup(String groupName, String groupLabel,
-                             String groupDesc) {
+  public void inputDataGroup(String groupName, String groupLabel, String groupDesc) {
     if (groupName != null) {
       if (evt.waitForAndGetElement(ELEMENT_INPUT_GROUP_NAME, 5000, 0) != null) {
         evt.type(ELEMENT_INPUT_GROUP_NAME, groupName, true);
@@ -225,11 +218,11 @@ public class UserAndGroupManagement {
   /**
    * function: Edit group
    *
-   * @param oldName    old name of Group
-   * @param groupName  name of Group
+   * @param oldName old name of Group
+   * @param groupName name of Group
    * @param groupLabel label of Group
-   * @param groupDesc  description of Group
-   * @param verify     (True if you want to verify new group edited successfully)
+   * @param groupDesc description of Group
+   * @param verify (True if you want to verify new group edited successfully)
    */
   public void editGroup(String oldName, String groupName, String groupLabel, String groupDesc, boolean verify) {
     info("-- Edit group: " + groupName + "--");
@@ -238,19 +231,18 @@ public class UserAndGroupManagement {
     inputDataGroup(groupName, groupLabel, groupDesc);
     evt.click(ELEMENT_SAVE_BUTTON);
     if (verify) {
-      evt.waitForAndGetElement(ELEMENT_GROUP_ADDED.replace("${groupLabel}",
-                                                           groupLabel));
+      evt.waitForAndGetElement(ELEMENT_GROUP_ADDED.replace("${groupLabel}", groupLabel));
     }
   }
 
   /**
    * function: Add user to Group
    *
-   * @param userNames  name of user you want to add to group
+   * @param userNames name of user you want to add to group
    * @param memberShip membership of user in group
-   * @param select     (True: if you want to search user by selecting user / False:
-   *                   If you want to search user by typing user name)
-   * @param verify     (True: if you want to verify new user added successfully)
+   * @param select (True: if you want to search user by selecting user / False:
+   *          If you want to search user by typing user name)
+   * @param verify (True: if you want to verify new user added successfully)
    */
   public void addUsersToGroup(String userNames, String memberShip, boolean select, boolean verify) {
     info("--Adding users to group--");
@@ -258,8 +250,7 @@ public class UserAndGroupManagement {
     if (select) {
       if (testBase.isElementPresent(ELEMENT_GROUP_SEARCH_USER_ICON)) {
         evt.click(ELEMENT_GROUP_SEARCH_USER_ICON);
-      } else if (testBase.isElementPresent(By
-                                                   .xpath(ELEMENT_GROUP_SEARCH_USER_ICON_2))) {
+      } else if (testBase.isElementPresent(By.xpath(ELEMENT_GROUP_SEARCH_USER_ICON_2))) {
         evt.click(By.xpath(ELEMENT_GROUP_SEARCH_USER_ICON_2));
       }
       evt.waitForTextPresent(ELEMENT_MSG_SELECT_USER);
@@ -277,11 +268,9 @@ public class UserAndGroupManagement {
     evt.click(ELEMENT_SAVE_BUTTON_2);
     if (verify) {
       for (String user : users) {
-        String addedUser = ELEMENT_ADDED_GROUP_USER_IN_TABLE.replace(
-                "${username}", user);
+        String addedUser = ELEMENT_ADDED_GROUP_USER_IN_TABLE.replace("${username}", user);
         if (testBase.isTextPresent(ELEMENT_MSG_TOTAL_PAGES)) {
-          plfBase.usePaginator(addedUser,
-                               ELEMENT_USER_NOT_FOUND.replace("${user}", user));
+          plfBase.usePaginator(addedUser, ELEMENT_USER_NOT_FOUND.replace("${user}", user));
         } else {
           evt.waitForAndGetElement(addedUser);
         }
@@ -306,22 +295,20 @@ public class UserAndGroupManagement {
   /**
    * function: Search user In Group Management (To add to group)
    *
-   * @param user         (Can be: User name, Last name, First name or Email of the user
-   *                     you want to search)
+   * @param user (Can be: User name, Last name, First name or Email of the user
+   *          you want to search)
    * @param searchOption (Can be: User name, Last name, First me or Email option
-   *                     corresponding with information you input in "Search")
-   * @param verify       (True: if you want to verify new user Searched successfully)
+   *          corresponding with information you input in "Search")
+   * @param verify (True: if you want to verify new user Searched successfully)
    */
-  public void searchUserInGroupManagement(String user, String searchOption,
-                                          boolean verify) {
+  public void searchUserInGroupManagement(String user, String searchOption, boolean verify) {
     info("--Search user " + user + "--");
     evt.click(ELEMENT_GROUP_SEARCH_USER_SEARCH_INPUT);
     evt.type(ELEMENT_GROUP_SEARCH_USER_SEARCH_INPUT, user, true);
     evt.select(ELEMENT_GROUP_SEARCH_USER_OPTION, searchOption);
     evt.click(ELEMENT_GROUP_SEARCH_USER_SEARCH_ICON);
     if (verify) {
-      evt.waitForAndGetElement(ELEMENT_SEARCH_GROUP_USER_IN_TABLE.replace(
-              "${username}", user));
+      evt.waitForAndGetElement(ELEMENT_SEARCH_GROUP_USER_IN_TABLE.replace("${username}", user));
     }
   }
 
@@ -329,8 +316,8 @@ public class UserAndGroupManagement {
    * function: Delete group
    *
    * @param groupName name of Group
-   * @param verify    (True: if you want to verify group deleted successfully)
-   * @param wait      time to evt.wait to verify group deleted successfully
+   * @param verify (True: if you want to verify group deleted successfully)
+   * @param wait time to evt.wait to verify group deleted successfully
    */
   public void deleteGroup(String groupName, boolean verify, int... wait) {
     info("-- Delete group: " + groupName + "--");
@@ -338,9 +325,7 @@ public class UserAndGroupManagement {
     evt.click(ELEMENT_GROUP_REMOVE_ICON);
     alert.acceptAlert();
     if (verify) {
-      evt.waitForElementNotPresent(
-              ELEMENT_GROUP_NODE.replace("${groupName}", groupName),
-              waitTime);
+      evt.waitForElementNotPresent(ELEMENT_GROUP_NODE.replace("${groupName}", groupName), waitTime);
     }
     Utils.pause(1000);
   }
@@ -350,8 +335,8 @@ public class UserAndGroupManagement {
    *
    * @param membershipName name of membership
    * @param membershipDesc description of membership
-   * @param verify         (True if you want to verify new membership created
-   *                       successfully)
+   * @param verify (True if you want to verify new membership created
+   *          successfully)
    */
   public void addMembership(String membershipName, String membershipDesc, boolean verify) {
     By member = By.xpath(ELEMENT_MEMBERSHIHP.replace("${membershipName}", membershipName));
@@ -372,7 +357,7 @@ public class UserAndGroupManagement {
    * function: Edit membership
    *
    * @param membershipName name of membership you want to edit
-   * @param newDesc        new description of membership
+   * @param newDesc new description of membership
    */
   public void editMembership(String membershipName, String newDesc) {
     info("-- Edit membership: " + membershipName + "--");
@@ -383,10 +368,8 @@ public class UserAndGroupManagement {
     } else {
       evt.click(ELEMENT_NEXT_PAGE);
     }
-    String editIcon = ELEMENT_MEMBERSHIP_EDIT_ICON.replace("${membership}",
-                                                           membershipName);
-    String membershipInput = ELEMENT_MEMBERSHIP_INPUT.replace(
-            "${membershipName}", membershipName);
+    String editIcon = ELEMENT_MEMBERSHIP_EDIT_ICON.replace("${membership}", membershipName);
+    String membershipInput = ELEMENT_MEMBERSHIP_INPUT.replace("${membershipName}", membershipName);
     evt.click(editIcon);
     Utils.pause(1000);
     evt.waitForAndGetElement(membershipInput);
@@ -433,7 +416,7 @@ public class UserAndGroupManagement {
    * function: Delete Membership
    *
    * @param membershipName name of membership
-   * @param verify         (True: if you want to verify membership deleted successfully)
+   * @param verify (True: if you want to verify membership deleted successfully)
    */
   public void deleteMembership(String membershipName, boolean verify) {
     boolean verifyMembership;
@@ -443,8 +426,7 @@ public class UserAndGroupManagement {
     } else {
       evt.click(ELEMENT_NEXT_PAGE);
     }
-    String deleteIcon = ELEMENT_MEMBERSHIP_DELETE_ICON.replace(
-            "${membership}", membershipName);
+    String deleteIcon = ELEMENT_MEMBERSHIP_DELETE_ICON.replace("${membership}", membershipName);
     info("--Deleting membership--");
     evt.click(deleteIcon);
     alert.waitForConfirmation(ELEMENT_MSG_CONFIRM_DELETE_MEMBERSHIP);
@@ -467,8 +449,7 @@ public class UserAndGroupManagement {
    * @param username name of user need to edit information
    */
   public void goToEditUserInfo(String username) {
-    String userEditIcon = ELEMENT_USER_EDIT_ICON.replace("${username}",
-                                                         username);
+    String userEditIcon = ELEMENT_USER_EDIT_ICON.replace("${username}", username);
     info("--Search user " + username + "--");
     if (testBase.isTextPresent("Search")) {
       evt.type(GateinLocator.ELEMENT_INPUT_SEARCH_USER_NAME, username, true);
@@ -483,13 +464,12 @@ public class UserAndGroupManagement {
   /**
    * function: Edit user's information in Account Tab
    *
-   * @param first       first name of user
-   * @param last        last name of user
+   * @param first first name of user
+   * @param last last name of user
    * @param displayName display name of user
-   * @param email       email of user
+   * @param email email of user
    */
-  public void editUserInfo_AccountTab(String first, String last,
-                                      String displayName, String email) {
+  public void editUserInfo_AccountTab(String first, String last, String displayName, String email) {
     evt.waitForAndGetElement(ELEMENT_USER_ACCOUNT_INFO_TAB, 2000, 1);
     evt.click(ELEMENT_USER_ACCOUNT_INFO_TAB);
     info("--editUserInfo_AccountTab--");
@@ -515,15 +495,15 @@ public class UserAndGroupManagement {
   /**
    * function: Edit user's information in User Profile Tab
    *
-   * @param givenName  given name of user
+   * @param givenName given name of user
    * @param familyName family name of user
-   * @param nickName   nick name of user
-   * @param birthday   birthday of user
-   * @param Gender     Gender of user
-   * @param Employer   Employer of user
+   * @param nickName nick name of user
+   * @param birthday birthday of user
+   * @param Gender Gender of user
+   * @param Employer Employer of user
    * @param Department Department of user
-   * @param jobTitle   jobTitle of user
-   * @param language   language of user
+   * @param jobTitle jobTitle of user
+   * @param language language of user
    */
   public void editUserInfo_UserProfileTab(String givenName,
                                           String familyName,
@@ -574,10 +554,10 @@ public class UserAndGroupManagement {
   /**
    * function: Search user
    *
-   * @param user         (Can be: User name, Last name, First name or Email of the user
-   *                     you want to search)
-   * @param searchOption (Can be: User name, Last name, First name or Email option
-   *                     corresponding with information you input in "Search")
+   * @param user (Can be: User name, Last name, First name or Email of the user
+   *          you want to search)
+   * @param searchOption (Can be: User name, Last name, First name or Email
+   *          option corresponding with information you input in "Search")
    */
   public void searchUser(String user, String searchOption) {
     info("--Search user " + user + "--");
@@ -616,18 +596,16 @@ public class UserAndGroupManagement {
   public void findUsersBbyNextArrow(String user) {
     if (evt.waitForAndGetElement(ELEMENT_PAGINATION_CONTROL, 2000, 0) != null) {
       int totalPage = Integer.parseInt(evt.waitForAndGetElement(ELEMENT_PAGINATION_TOTAL_PAGE).getText());
-      //if not found user
-      if (evt.waitForAndGetElement(ELEMENT_USER_DELETE_ICON.replace("${username}",
-                                                                    user), 2000, 0) == null) {
-        //click on next arrow
+      // if not found user
+      if (evt.waitForAndGetElement(ELEMENT_USER_DELETE_ICON.replace("${username}", user), 2000, 0) == null) {
+        // click on next arrow
         for (int i = 0; i < totalPage; i++) {
           info("Click on Next arrow");
           evt.click(ELEMENT_PAGINATION_ENABLED_NEXT_ARROW);
-          //if found the user, break the loop
-          if (evt.waitForAndGetElement(ELEMENT_USER_DELETE_ICON.replace("${username}",
-                                                                        user), 2000, 0) != null)
+          // if found the user, break the loop
+          if (evt.waitForAndGetElement(ELEMENT_USER_DELETE_ICON.replace("${username}", user), 2000, 0) != null)
             break;
-          //if next arrow is disabled, break the loop
+          // if next arrow is disabled, break the loop
           if (evt.waitForAndGetElement(ELMEMENT_PAGINATION_CONTROL_DISBALED_NEXT_ARROW, 2000, 0) != null)
             break;
         }
@@ -635,7 +613,8 @@ public class UserAndGroupManagement {
     }
   }
 
-  //************************************************DISABLE USERS***********************************//
+  // ************************************************DISABLE
+  // USERS***********************************//
 
   /**
    * Select an option in Disable User drop list
@@ -653,9 +632,9 @@ public class UserAndGroupManagement {
   /**
    * Enable or disable a User
    *
-   * @param userName  is username of the user
-   * @param isEnabled = true if want to check the user that is enabled
-   *                  = false if want to check the user that is disabled
+   * @param userName is username of the user
+   * @param isEnabled = true if want to check the user that is enabled = false
+   *          if want to check the user that is disabled
    */
   public void enableDisableUser(String userName, boolean isEnabled) {
     info("---Enable a user---");
@@ -693,7 +672,7 @@ public class UserAndGroupManagement {
     evt.waitForElementNotPresent(ELEMENT_USER_NAME_IN_USER_LIST.replace("$userName", userName));
     info("The user is not shown in the table");
   }
-  //*********************************************************************************************************//
+  // *********************************************************************************************************//
 
   /**
    * function: Delete user
@@ -709,11 +688,9 @@ public class UserAndGroupManagement {
     }
 
     evt.click(GateinLocator.ELEMENT_SEARCH_ICON_USERS_MANAGEMENT, 0, true);
-    if (evt.waitForAndGetElement(ELEMENT_USER_DELETE_ICON.replace("${username}",
-                                                                  username), 2000, 0) != null) {
+    if (evt.waitForAndGetElement(ELEMENT_USER_DELETE_ICON.replace("${username}", username), 2000, 0) != null) {
       Utils.pause(2000);
-      evt.click(ELEMENT_USER_DELETE_ICON.replace("${username}",
-                                                 username));
+      evt.click(ELEMENT_USER_DELETE_ICON.replace("${username}", username));
       alert.acceptAlert();
       Utils.pause(1000);
       evt.type(GateinLocator.ELEMENT_INPUT_SEARCH_USER_NAME, username, true);
@@ -833,9 +810,8 @@ public class UserAndGroupManagement {
   }
 
   /**
-   * Check A link is established between the eXo Platform user account and the social network account.
-   * By: QuyenNT
-   * Date: Dec 1, 2015
+   * Check A link is established between the eXo Platform user account and the
+   * social network account. By: QuyenNT Date: Dec 1, 2015
    */
   public void checkLinkedSocialAccount(String element, String placeHolder, String accountValue) {
     evt.waitForAndGetElement(ELEMENT_USER_SOCIAL_NETWORKS_TAB);
@@ -844,9 +820,7 @@ public class UserAndGroupManagement {
   }
 
   /**
-   * Unlink social network account
-   * By: QuyenNT
-   * Date: Dec 3, 2015
+   * Unlink social network account By: QuyenNT Date: Dec 3, 2015
    */
   public void unLinkedSocialAccount(Object unlinkElement) {
     evt.waitForAndGetElement(ELEMENT_USER_SOCIAL_NETWORKS_TAB);

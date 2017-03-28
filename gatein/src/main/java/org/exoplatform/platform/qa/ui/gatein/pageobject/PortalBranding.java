@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.gatein;
+package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_BUTTON_UPLOAD;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_UPLOAD_LINK;
@@ -35,10 +35,13 @@ public class PortalBranding {
     }
 
     WebElement upload = evt.waitForAndGetElement(ELEMENT_UPLOAD_LINK, testBase.getDefaultTimeout(), 1, 2);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.visibility = 'visible'; arguments[0].style.height = '1px'; "
-        + "arguments[0].style.width = '1px'; arguments[0].style.opacity = 1", upload);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block'; arguments[0].style.visibility = 'visible'",
-                                                                      upload);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript(
+                                                                                   "arguments[0].style.visibility = 'visible'; arguments[0].style.height = '1px'; "
+                                                                                       + "arguments[0].style.width = '1px'; arguments[0].style.opacity = 1",
+                                                                                   upload);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript(
+                                                                                   "arguments[0].style.display = 'block'; arguments[0].style.visibility = 'visible'",
+                                                                                   upload);
     Utils.pause(10000);
     info("Select a file to upload");
     upload.sendKeys(mftb.getAbsoluteFilePath(link));

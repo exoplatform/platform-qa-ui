@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.gatein;
+package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
@@ -49,7 +49,7 @@ public class PageCreationWizard {
 
   /**
    * Input data in page info page at step 1
-   * 
+   *
    * @param name
    * @param isMode
    * @param lang
@@ -97,7 +97,7 @@ public class PageCreationWizard {
 
   /**
    * Add content in page editor
-   * 
+   *
    * @param tab
    * @param element
    */
@@ -111,7 +111,7 @@ public class PageCreationWizard {
 
   /**
    * Add an application to a layout
-   * 
+   *
    * @param nameApp
    * @param appLocator
    * @param layoutLocator
@@ -132,7 +132,7 @@ public class PageCreationWizard {
 
   /**
    * Add a Content list to a Page by folder
-   * 
+   *
    * @param path
    * @param folder
    */
@@ -149,7 +149,7 @@ public class PageCreationWizard {
 
   /**
    * Add a Content list to a page by content
-   * 
+   *
    * @param path
    * @param content
    */
@@ -167,7 +167,7 @@ public class PageCreationWizard {
 
   /**
    * Add a Cotent Detail to a page
-   * 
+   *
    * @param path
    * @param content
    */
@@ -184,7 +184,7 @@ public class PageCreationWizard {
 
   /**
    * Create a simple page
-   * 
+   *
    * @param title
    * @param description
    */
@@ -200,7 +200,7 @@ public class PageCreationWizard {
 
   /**
    * Add a Container
-   * 
+   *
    * @param numRow this name of containers as: oneRow,twoRow...
    * @param verify
    */
@@ -228,7 +228,7 @@ public class PageCreationWizard {
 
   /**
    * Edit a container
-   * 
+   *
    * @param newTitle
    * @param width
    * @param height
@@ -263,7 +263,7 @@ public class PageCreationWizard {
 
   /**
    * Move a container to new place in layout
-   * 
+   *
    * @param title is the name of container that will be dragged and dropped
    * @param sourceLocator is the locator of the container that will be moved up
    *          or down targetLocator
@@ -317,7 +317,7 @@ public class PageCreationWizard {
   /**
    * Check the positions of containers or portlets before and after changed
    * their position in the layout
-   * 
+   *
    * @param positionFirst is the position before changed
    * @param positionEnd is the position after changed
    */
@@ -330,7 +330,7 @@ public class PageCreationWizard {
 
   /**
    * Delete a contain in the layout
-   * 
+   *
    * @param name
    */
   public void deleteContainer(String name) {
@@ -355,7 +355,7 @@ public class PageCreationWizard {
 
   /**
    * Edit an application with changes about title, width and height
-   * 
+   *
    * @param oldTitle
    * @param newTitle
    * @param width
@@ -399,7 +399,7 @@ public class PageCreationWizard {
 
   /**
    * Move an application to new place
-   * 
+   *
    * @param titleSource is the title of applicattion source that will be moved
    *          to new place
    * @param titleTarget is the title of application target that application
@@ -444,7 +444,7 @@ public class PageCreationWizard {
 
   /**
    * Delete an application
-   * 
+   *
    * @param name
    */
   public void deleteApplication(String name) {
@@ -464,7 +464,7 @@ public class PageCreationWizard {
 
   /**
    * Change to Switch view mode
-   * 
+   *
    * @param verify
    */
   public void switchViewMode(boolean... verify) {
@@ -476,7 +476,7 @@ public class PageCreationWizard {
 
   /**
    * View properties
-   * 
+   *
    * @param verify
    */
   public void viewProperties(boolean... verify) {
@@ -488,7 +488,7 @@ public class PageCreationWizard {
 
   /**
    * Get old title of a page
-   * 
+   *
    * @return title
    */
   public String getOldTitle() {
@@ -500,7 +500,7 @@ public class PageCreationWizard {
 
   /**
    * Change Properties of a page
-   * 
+   *
    * @param title
    * @param groupsPath
    * @param memberShips
@@ -554,7 +554,7 @@ public class PageCreationWizard {
 
   /**
    * Select a group in permission selector popup
-   * 
+   *
    * @param groupsPath is path of groups as:Platform/Content Manangement
    */
   public void selectGroup(String groupsPath) {
@@ -569,7 +569,7 @@ public class PageCreationWizard {
 
   /**
    * Select a group in permission selector popup
-   * 
+   *
    * @param groupsPath is path of groups as:Platform/Content Manangement
    */
   public void selectGroupEditTab(String groupsPath) {
@@ -584,7 +584,7 @@ public class PageCreationWizard {
 
   /**
    * Select a membership of a group
-   * 
+   *
    * @param memberShip
    */
   public void selectMemberShip(String memberShip) {
@@ -595,7 +595,7 @@ public class PageCreationWizard {
 
   /**
    * Select a membership of a group
-   * 
+   *
    * @param memberShip
    */
   public void selectMemberShipEditTab(String memberShip) {
@@ -606,7 +606,7 @@ public class PageCreationWizard {
 
   /**
    * Reset default values of Page's properties after changed
-   * 
+   *
    * @param title
    * @param groupPath
    * @param editPermission
@@ -634,7 +634,7 @@ public class PageCreationWizard {
 
   /**
    * Remove a group permission
-   * 
+   *
    * @param group
    */
   public void removeGroup(String group) {
@@ -656,7 +656,7 @@ public class PageCreationWizard {
 
   /**
    * function: Edit view properties when edit layout
-   * 
+   *
    * @param pageName name of page you want to edit
    * @param newtitle new Name of page you want to edit
    * @param groupId Group Id when select permission
@@ -675,7 +675,7 @@ public class PageCreationWizard {
 
   /**
    * Edit permission when view properties
-   * 
+   *
    * @param groupId
    * @param membership
    * @param isAccess
@@ -724,7 +724,7 @@ public class PageCreationWizard {
 
   /**
    * edit permission in container permission
-   * 
+   *
    * @param cont
    * @param groupId
    * @param membership
@@ -760,7 +760,7 @@ public class PageCreationWizard {
 
   /**
    * function: Edit permission when view properties
-   * 
+   *
    * @param groupId Group Id when select permission
    * @param membership membership when select permission
    */
@@ -785,7 +785,7 @@ public class PageCreationWizard {
 
   /**
    * function: Edit permission when view properties
-   * 
+   *
    * @param groupId Group Id when select permission
    * @param membership membership when select permission
    */
@@ -812,7 +812,7 @@ public class PageCreationWizard {
 
   /**
    * Set access permission
-   * 
+   *
    * @param groupId
    * @param membership
    */
@@ -871,7 +871,7 @@ public class PageCreationWizard {
 
   /**
    * Verify permission drag drop application
-   * 
+   *
    * @param tabName
    * @param nameApp
    * @param appLocator
@@ -915,7 +915,7 @@ public class PageCreationWizard {
 
   /**
    * Add an application to a layout with an user not having permission
-   * 
+   *
    * @param nameApp
    * @param appLocator
    * @param layoutLocator
@@ -956,7 +956,7 @@ public class PageCreationWizard {
 
   /**
    * Select a container and open Edit form <<<<<<< HEAD <<<<<<< HEAD
-   * 
+   *
    * @param containerLocation
    * @param containerEditLocation ======= ======= >>>>>>> FQA-2759:PLF43 - Write
    *          High Fnc/PLF/Restricted Page Editor/Site Permissions <<<<<<< HEAD
@@ -980,7 +980,7 @@ public class PageCreationWizard {
 
   /**
    * <<<<<<< HEAD Delete a container without permission
-   * 
+   *
    * @param containerId
    * @param containerDeleteId ======= Delete a container without permission
    *          <<<<<<< HEAD <<<<<<< HEAD By: QuyenNT =======
