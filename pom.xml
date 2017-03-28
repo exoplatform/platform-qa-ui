@@ -37,7 +37,7 @@
   <modules>
   <module>api</module>
   <module>selenium</module>
-    <module>core</module>
+    <module>commons</module>
 
   </modules>
   <scm>
