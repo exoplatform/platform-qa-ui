@@ -28,7 +28,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.gatein.UserAndGroupManagement;
 import org.junit.jupiter.api.*;
 
-import static org.exoplatform.platform.qa.ui.api.PLFData.PASS_ROOT;
+import static org.exoplatform.platform.qa.ui.core.PLFData.PASS_ROOT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_PLF_HOMEPAGE_DISPLAY;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ManageLogInOutLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;

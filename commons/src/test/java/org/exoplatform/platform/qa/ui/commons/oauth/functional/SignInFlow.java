@@ -20,9 +20,9 @@
  */
 package org.exoplatform.platform.qa.ui.commons.oauth.functional;
 
-import org.exoplatform.platform.qa.ui.api.context.Smoke;
+import org.exoplatform.platform.qa.ui.core.context.Smoke;
 import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.api.PLFData;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator;

@@ -20,7 +20,7 @@
  */
 package org.exoplatform.platform.qa.ui.commons;
 
-import org.exoplatform.platform.qa.ui.api.context.Smoke;
+import org.exoplatform.platform.qa.ui.core.context.Smoke;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 

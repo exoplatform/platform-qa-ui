@@ -35,7 +35,7 @@
   <packaging>pom</packaging>
   <name>eXo PLF:: QA - UI</name>
   <modules>
-  <module>api</module>
+  <module>core</module>
   <module>selenium</module>
     <module>commons</module>
 

@@ -15,7 +15,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import org.exoplatform.platform.qa.ui.api.PLFData;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.*;
 import org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;

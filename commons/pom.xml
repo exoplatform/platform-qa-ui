@@ -35,7 +35,7 @@
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>platform-qa-ui-api</artifactId>
+      <artifactId>platform-qa-ui-core</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>

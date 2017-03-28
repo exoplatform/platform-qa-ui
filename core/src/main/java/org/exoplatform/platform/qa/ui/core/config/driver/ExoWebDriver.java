@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.api.config.driver;
+package org.exoplatform.platform.qa.ui.core.config.driver;
 
 import org.openqa.selenium.WebDriver;
 

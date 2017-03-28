@@ -22,7 +22,7 @@ package org.exoplatform.platform.qa.ui.commons.pageobject;
 
 import static com.codeborne.selenide.Selenide.$;
 
-import org.exoplatform.platform.qa.ui.api.PLFData;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.openqa.selenium.By;
 
 import com.codeborne.selenide.SelenideElement;

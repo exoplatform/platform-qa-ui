@@ -18,7 +18,7 @@ The whole documentation is availabe at https://github.com/exoplatform/platform-q
 +
 [source, shell]
 ----
-$ docker-compose -f api/src/main/resources/stack/docker-compose-44-hsqldb.yml -p exo44hsqldb up
+$ docker-compose -f core/src/main/resources/stack/docker-compose-44-hsqldb.yml -p exo44hsqldb up
 
 # Access to PLF instance
 $ open http://localhost

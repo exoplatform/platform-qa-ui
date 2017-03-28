@@ -18,7 +18,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see <http://www.gnu.org/licenses/>.
  */
-package org.exoplatform.platform.qa.ui.api.context;
+package org.exoplatform.platform.qa.ui.core.context;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
  * instance.
  */
 @Test
-@Tag("oauth")
-public @interface OAuthContext {
+@Tag("smoke")
+public @interface Smoke {
 
 }

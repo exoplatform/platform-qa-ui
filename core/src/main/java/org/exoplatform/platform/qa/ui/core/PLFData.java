@@ -18,7 +18,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see <http://www.gnu.org/licenses/>.
  */
-package org.exoplatform.platform.qa.ui.api;
+package org.exoplatform.platform.qa.ui.core;
 
 /**
  * All static data used for UI Tests.

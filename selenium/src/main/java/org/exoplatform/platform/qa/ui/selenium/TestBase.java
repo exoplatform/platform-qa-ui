@@ -27,14 +27,14 @@ import java.util.List;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 
-import org.exoplatform.platform.qa.ui.api.config.driver.Driver;
-import org.exoplatform.platform.qa.ui.api.config.driver.ExoWebDriver;
+import org.exoplatform.platform.qa.ui.core.config.driver.Driver;
+import org.exoplatform.platform.qa.ui.core.config.driver.ExoWebDriver;
 import org.exoplatform.platform.qa.ui.selenium.testbase.*;
 
 public class TestBase {
 
   static {
-    System.setProperty("selenide.browser", "org.exoplatform.platform.qa.ui.api.config.driver.ExoWebDriverProvider");
+    System.setProperty("selenide.browser", "org.exoplatform.platform.qa.ui.core.config.driver.ExoWebDriverProvider");
   }
 
   public final int                         ACTION_REPEAT              = 5;

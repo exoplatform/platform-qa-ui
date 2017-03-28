@@ -1,6 +1,6 @@
 package org.exoplatform.platform.qa.ui.commons.plf;
 
-import org.exoplatform.platform.qa.ui.api.context.Smoke;
+import org.exoplatform.platform.qa.ui.core.context.Smoke;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
