@@ -1,9 +1,17 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.forum;
+package org.exoplatform.platform.qa.ui.forum.pageobject;
 
+import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.File;
+
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
+
+import com.codeborne.selenide.Condition;
 
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
@@ -31,7 +39,7 @@ public class ForumTopicManagement {
 
   /**
    * constructor
-   * 
+   *
    * @param dr
    */
   public ForumTopicManagement(TestBase testBase) {
@@ -45,7 +53,7 @@ public class ForumTopicManagement {
 
   /**
    * Move a topic to a forum
-   * 
+   *
    * @param category
    * @param forum
    */
@@ -75,7 +83,7 @@ public class ForumTopicManagement {
 
   /**
    * select a item in More Action menu By QuynhPT
-   * 
+   *
    * @param item
    */
   public void selectItemMoreActionMenuTopic(specifMoreActionMenuTopic item) {
@@ -145,7 +153,7 @@ public class ForumTopicManagement {
 
   /**
    * Select a action in More Action menu of Poll portlet
-   * 
+   *
    * @param item
    */
   public void selectItemMoreActionMenuPoll(specifMoreActionMenuPoll item) {
@@ -176,7 +184,7 @@ public class ForumTopicManagement {
 
   /**
    * Close or open a poll
-   * 
+   *
    * @param isClose = true if the poll is closed = false if the poll is opened
    */
   public void closeOpenPoll(boolean isClose) {
@@ -194,7 +202,7 @@ public class ForumTopicManagement {
 
   /**
    * Post a reply
-   * 
+   *
    * @param title
    * @param content
    */
@@ -205,7 +213,7 @@ public class ForumTopicManagement {
 
   /**
    * Input information for Reply form
-   * 
+   *
    * @param title
    * @param content
    */
@@ -220,7 +228,7 @@ public class ForumTopicManagement {
 
   /**
    * Edit a post
-   * 
+   *
    * @param title
    * @param newTitle
    * @param newContent
@@ -236,7 +244,7 @@ public class ForumTopicManagement {
 
   /**
    * Quote a post
-   * 
+   *
    * @param title
    * @param newContent
    */
@@ -251,7 +259,7 @@ public class ForumTopicManagement {
 
   /**
    * Create a private post
-   * 
+   *
    * @param titlePost
    * @param newTitle
    * @param content
@@ -270,7 +278,7 @@ public class ForumTopicManagement {
 
   /**
    * Add poll
-   * 
+   *
    * @param question
    * @param option1
    * @param option2
@@ -292,7 +300,7 @@ public class ForumTopicManagement {
 
   /**
    * Lock or Unlock a topic By QuynhPT
-   * 
+   *
    * @param islock =true if a topic is locked =false if a topic is unlocked
    */
   public void lockUnlockTopic(boolean islock) {
@@ -307,7 +315,7 @@ public class ForumTopicManagement {
 
   /**
    * Close or Open a topic
-   * 
+   *
    * @param isClose =true if a topic is closed = false if a topic is opened
    */
   public void closeOpenTopic(boolean isClose) {
@@ -323,7 +331,7 @@ public class ForumTopicManagement {
 
   /**
    * Edit Poll
-   * 
+   *
    * @param question
    * @param option1
    * @param option2
@@ -367,7 +375,7 @@ public class ForumTopicManagement {
 
   /**
    * Add a tag gor topic
-   * 
+   *
    * @param name
    */
   public void addATag(String name) {
@@ -379,7 +387,7 @@ public class ForumTopicManagement {
 
   /**
    * addPostSimple
-   * 
+   *
    * @param name
    * @param message
    */
@@ -398,7 +406,7 @@ public class ForumTopicManagement {
 
   /**
    * addTopicSimple
-   * 
+   *
    * @param name
    * @param message
    */
@@ -419,7 +427,7 @@ public class ForumTopicManagement {
 
   /**
    * Reply the topic
-   * 
+   *
    * @param newTitle
    * @param newMessg
    * @param pathFile
@@ -464,48 +472,39 @@ public class ForumTopicManagement {
 
   /**
    * Start a Topic By QuynhPT
-   * 
+   *
    * @param title
    * @param message
    */
   public void startTopic(String title, String message, String pathFile, String fileName) {
     info("Verify that the pop up is shown");
-    evt.waitForAndGetElement(ELEMENT_START_TOPIC_POPUP_TITLE_FILED);
-    // info("Refresh the page");
-    // this.driver.navigate().refresh();
-    if (!title.isEmpty()) {
-      info("Input the title:" + title);
-      evt.waitForAndGetElement(ELEMENT_START_TOPIC_POPUP_TITLE_FILED, testBase.getDefaultTimeout(), 1);
-      evt.type(ELEMENT_START_TOPIC_POPUP_TITLE_FILED, title, true);
-    }
+    $(ELEMENT_START_TOPIC_POPUP_TITLE_FILED).waitUntil(Condition.appears, Configuration.timeout);
 
-    if (!message.isEmpty()) {
-      info("Input the message:" + message);
-      plf.inputFrame(ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR, message);
-    }
+    info("Input the title:" + title);
 
-    if (!pathFile.isEmpty() || !fileName.isEmpty()) {
-      info("click on Attached file button");
-      evt.click(ELEMENT_START_TOPIC_ATTACH_FILE);
-      info("Verify that upload button is shown");
-      evt.waitForAndGetElement(ELEMENT_UPLOAD_POPUP_FILE);
-      info("Attached file");
-      testBase.attachFile(pathFile, fileName);
-      info("Verify that upload popup is closed");
-      evt.waitForElementNotPresent(ELEMENT_UPLOAD_POPUP_FILE);
-    }
-    info("click on Submit button");
-    evt.waitForAndGetElement(ELEMENT_SUBMIT_BUTTON, testBase.getDefaultTimeout(), 1);
-    evt.clickByJavascript(ELEMENT_SUBMIT_BUTTON, 2);
-    // click(ELEMENT_SUBMIT_BUTTON);
+    $(ELEMENT_START_TOPIC_POPUP_TITLE_FILED).val(title);
+
+    info("Input the message:" + message);
+    $(ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR).click();
+    $(ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR).sendKeys(message);
+
+    info("click on Attached file button");
+    $(ELEMENT_START_TOPIC_ATTACH_FILE).click();
+    File file = $(By.className("file")).uploadFromClasspath("topic_attachment.txt");
+    assertTrue(file.exists());
+    $(ELEMENT_SAVE_BTN).click();
+
+    $(ELEMENT_SUBMIT_BUTTON).click();
+    $(ELEMENT_SUBMIT_BUTTON).waitUntil(Condition.disappear, Configuration.timeout);
     info("Verify that the topic is created");
-    evt.waitForAndGetElement(By.linkText(title));
+
+    $(By.linkText(title)).should(exist);
     info("Start topic successfully");
   }
 
   /**
    * Rate a topic
-   * 
+   *
    * @param name
    */
   public void rateTopic(String name, String starType) {
@@ -516,7 +515,7 @@ public class ForumTopicManagement {
 
   /**
    * Edit a topic
-   * 
+   *
    * @param newTitle
    * @param newContent
    */
@@ -535,7 +534,7 @@ public class ForumTopicManagement {
 
   /**
    * Check display of manage topic
-   * 
+   *
    * @param forum
    * @param topic
    * @param isDisplay
@@ -554,7 +553,7 @@ public class ForumTopicManagement {
 
   /**
    * Check enable of post reply
-   * 
+   *
    * @param topic
    * @param isEnable
    */
@@ -570,7 +569,7 @@ public class ForumTopicManagement {
 
   /**
    * Check enable of view post
-   * 
+   *
    * @param forum
    * @param topic
    * @param isEnable
@@ -589,7 +588,7 @@ public class ForumTopicManagement {
 
   /**
    * Edit permission of topic
-   * 
+   *
    * @param topic
    * @param groupPath
    * @param member
@@ -659,7 +658,7 @@ public class ForumTopicManagement {
 
   /**
    * list sublinks in More Action menu of Topic
-   * 
+   *
    * @author quynhpt
    */
   public enum specifMoreActionMenuTopic {
@@ -668,7 +667,7 @@ public class ForumTopicManagement {
 
   /**
    * list sublinks of MoreAction of Poll portlet
-   * 
+   *
    * @author quynhpt
    */
   public enum specifMoreActionMenuPoll {

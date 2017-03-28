@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.forum;
+package org.exoplatform.platform.qa.ui.forum.pageobject;
 
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 
@@ -29,7 +29,7 @@ public class PrivateMessageManagement {
 
   /**
    * constructor
-   * 
+   *
    * @param dr
    */
   public PrivateMessageManagement(TestBase testBase) {
@@ -72,7 +72,7 @@ public class PrivateMessageManagement {
 
   /**
    * Write message
-   * 
+   *
    * @param contact
    * @param title
    * @param content
@@ -88,7 +88,7 @@ public class PrivateMessageManagement {
 
   /**
    * Write message to group
-   * 
+   *
    * @param groupPath
    * @param member
    * @param title
@@ -105,7 +105,7 @@ public class PrivateMessageManagement {
 
   /**
    * Check inbox message
-   * 
+   *
    * @param contact
    * @param title
    * @param content
@@ -117,7 +117,7 @@ public class PrivateMessageManagement {
 
   /**
    * Check display of message
-   * 
+   *
    * @param title
    * @param author
    * @param isDisplay
@@ -132,7 +132,7 @@ public class PrivateMessageManagement {
 
   /**
    * check inbox message not found
-   * 
+   *
    * @param title
    */
   public void checkInboxMessageNotFound(String title) {
@@ -141,7 +141,7 @@ public class PrivateMessageManagement {
 
   /**
    * Reply a message
-   * 
+   *
    * @param contact
    * @param title
    * @param newTitle
@@ -158,7 +158,7 @@ public class PrivateMessageManagement {
 
   /**
    * Forward a message
-   * 
+   *
    * @param contact
    * @param title
    * @param newContact
@@ -180,7 +180,7 @@ public class PrivateMessageManagement {
 
   /**
    * Delete a message
-   * 
+   *
    * @param title
    * @param contact
    */
@@ -208,7 +208,7 @@ public class PrivateMessageManagement {
 
   /**
    * Write message to group
-   * 
+   *
    * @param group
    */
 
@@ -225,7 +225,7 @@ public class PrivateMessageManagement {
 
   /**
    * Write message to group
-   * 
+   *
    * @param group
    */
 

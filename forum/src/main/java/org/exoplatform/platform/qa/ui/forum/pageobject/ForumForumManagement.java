@@ -1,8 +1,12 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.forum;
+package org.exoplatform.platform.qa.ui.forum.pageobject;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
@@ -24,7 +28,7 @@ public class ForumForumManagement {
 
   /**
    * constructor
-   * 
+   *
    * @param dr
    */
   public ForumForumManagement(TestBase testBase) {
@@ -37,7 +41,7 @@ public class ForumForumManagement {
 
   /**
    * Add a new forum By QuynhPT
-   * 
+   *
    * @param nameForum
    * @param order
    * @param description
@@ -45,29 +49,20 @@ public class ForumForumManagement {
   public void addForumSimple(String nameForum, String order, String description) {
     // TODO Auto-generated method stub
     info("Add forum simple");
-    evt.waitForAndGetElement(ELEMENT_ACTIONBAR_ADDFORUM, testBase.getDefaultTimeout(), 1);
+    //evt.waitForAndGetElement(ELEMENT_ACTIONBAR_ADDFORUM, testBase.getDefaultTimeout(), 1);
+    $(ELEMENT_ACTIONBAR_ADDFORUM).waitUntil(Condition.appears, Configuration.timeout);
     info("click on Add forum button");
-    evt.click(ELEMENT_ACTIONBAR_ADDFORUM);
+    $(ELEMENT_ACTIONBAR_ADDFORUM).click();
     info("input the title for the forum");
-    evt.waitForAndGetElement(ELEMENT_ADDFORUM_POPUP_TITLE, testBase.getDefaultTimeout(), 1);
-    evt.type(ELEMENT_ADDFORUM_POPUP_TITLE, nameForum, true);
-
+    $(ELEMENT_ADDFORUM_POPUP_TITLE).val(nameForum);
     info("check and input Oder field");
-    if (order != null && order != "") {
-      info("Clear all old order data");
-      evt.waitForAndGetElement(ELEMENT_ADDFORUM_POPUP_ORDER).clear();
-      info("Input new order data");
-      evt.type(ELEMENT_ADDFORUM_POPUP_ORDER, order, true);
-    }
+
+   $(ELEMENT_ADDFORUM_POPUP_ORDER).val(order);
     info("check and input description");
-    if (description != null && description != "") {
-      info("Clear all old description data");
-      evt.waitForAndGetElement(ELEMENT_ADDFORUM_POPUP_DESCRIPTION).clear();
-      info("Input new description data");
-      evt.type(ELEMENT_ADDFORUM_POPUP_DESCRIPTION, description, true);
-    }
+
+    $(ELEMENT_ADDFORUM_POPUP_DESCRIPTION).val(description);
     info("Click on Save button");
-    evt.click(ELEMENT_ADDFORUM_POPUP_SAVE_BUTTON);
+    $(ELEMENT_ADDFORUM_POPUP_SAVE_BUTTON).click();
     Utils.pause(2000);
     info("Finish adding new forum");
   }
@@ -83,7 +78,7 @@ public class ForumForumManagement {
 
   /**
    * select a item in More Action menu for a forum By QuynhPT
-   * 
+   *
    * @param item
    */
   public void selectItemMoreActionMenu(specifMoreActionMenu item) {
@@ -116,9 +111,9 @@ public class ForumForumManagement {
       evt.click(ELEMENT_DELETE_FORUM);
       Utils.pause(1000);
       info("Verify that Confirm popup is shown");
-      evt.waitForMessage("Are you sure you want to delete this forum ?");
+      $(byText("Are you sure you want to delete this forum ?")).waitUntil(Condition.appears,10000);
       info("Click on OK button of Confirm popup");
-      evt.click(ELEMENT_OK_DELETE);
+      $(ELEMENT_OK_DELETE).click();
       info("Finish deleting the forum");
       break;
     case WATCHES:
@@ -159,7 +154,7 @@ public class ForumForumManagement {
 
   /**
    * Edit a forum
-   * 
+   *
    * @param newName
    * @param order
    * @param newDescription
@@ -184,7 +179,7 @@ public class ForumForumManagement {
 
   /**
    * Open or Close a forum By QuynhPT
-   * 
+   *
    * @param isClose =true if a forum is closed =false if a forum is opened
    */
   public void closeAndOpen(boolean isClose) {
@@ -199,18 +194,19 @@ public class ForumForumManagement {
 
   /**
    * Delete a forum in the list By QuynhPT
-   * 
+   *
    * @param name
    */
   public void deleteForum(String name) {
     selectItemMoreActionMenu(specifMoreActionMenu.DELETE);
     info("Verify that the forum is deleted");
-    evt.waitForElementNotPresent(ELEMENT_FORUM_FORUM_NAME_LINK.replace("${name}", name));
+    //evt.waitForElementNotPresent(ELEMENT_FORUM_FORUM_NAME_LINK.replace("${name}", name));
+$(byText(name)).shouldNot(Condition.exist);
   }
 
   /**
    * function: move a forum from a category to another category
-   * 
+   *
    * @param forum
    * @param destination
    */
@@ -220,7 +216,7 @@ public class ForumForumManagement {
     evt.click(By.linkText(destination));
     evt.waitForElementNotPresent(ELEMENT_POPUP_MOVE_FORUM);
     forumHP.goToCategory(destination);
-    evt.waitForAndGetElement(ELEMENT_FORUM_FORUM_NAME_LINK.replace("${name}", forum));
+    $(byText(forum)).waitUntil(Condition.appears,Configuration.timeout);
     info("Move forum successfully");
   }
 
@@ -230,12 +226,11 @@ public class ForumForumManagement {
   public void goToStartTopic() {
     info("Go to start topic from more action");
     selectItemMoreActionMenu(specifMoreActionMenu.START_TOPIC);
-    Utils.pause(2000);
   }
 
   /**
    * Lock or Unlock a forum By QuynhPT
-   * 
+   *
    * @param islock =true if a forum is locked =false if a forum is unlocked
    */
   public void lockAndUnlock(boolean islock) {
@@ -250,7 +245,7 @@ public class ForumForumManagement {
 
   /**
    * Check display of manage forum
-   * 
+   *
    * @param forum
    * @param isDisplay
    */
@@ -268,7 +263,7 @@ public class ForumForumManagement {
 
   /**
    * Edit permission of forum
-   * 
+   *
    * @param cat
    * @param groupPath
    * @param member
@@ -293,7 +288,7 @@ public class ForumForumManagement {
 
   /**
    * Check enable of start topic
-   * 
+   *
    * @param forum
    * @param isEnable
    */
@@ -342,7 +337,7 @@ public class ForumForumManagement {
 
   /**
    * function: Search user in User Selection Form in Forum Permission
-   * 
+   *
    * @param user
    * @param searchOption
    */
@@ -357,7 +352,7 @@ public class ForumForumManagement {
 
   /**
    * Search user not found
-   * 
+   *
    * @param user
    * @param searchOption
    */
@@ -371,7 +366,7 @@ public class ForumForumManagement {
 
   /**
    * list sublinks in More Action menu of Forum
-   * 
+   *
    * @author quynhpt
    */
   public enum specifMoreActionMenu {

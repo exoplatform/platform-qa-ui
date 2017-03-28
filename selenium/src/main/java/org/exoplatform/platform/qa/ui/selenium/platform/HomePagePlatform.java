@@ -105,13 +105,8 @@ public class HomePagePlatform {
    * Go to forum page
    */
   public void goToForum() {
-    do {
-      info("-- Go to forum page --");
-      info("Click on Forum link");
-      evt.click(ELEMENT_FORUM_LINK_PLF);
-      info("Verify that the forum portlet is shown");
-    } while (evt.waitForAndGetElement(ELEMENT_FORUM_PORTLET, testBase.getDefaultTimeout(), 1) == null);
-    info("The forum portlet is shown successfully");
+    info("-- Go to forum page --");
+    $(ELEMENT_FORUM_LINK_PLF).click();
   }
 
   /**

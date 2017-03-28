@@ -1,8 +1,13 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.forum;
+package org.exoplatform.platform.qa.ui.forum.pageobject;
 
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selectors;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -26,8 +31,8 @@ public class ForumCategoryManagement {
 
   /**
    * constructor
-   * 
-   * @param dr
+   *
+   * @param testBase
    */
   public ForumCategoryManagement(TestBase testBase) {
     this.testBase = testBase;
@@ -40,44 +45,27 @@ public class ForumCategoryManagement {
 
   /**
    * Add a new category By QuynhPT
-   * 
+   *
    * @param nameCat the title of category
    * @param order the order's number as:0,1,2,3...(0 is default value)
    * @param description the content of description for category
    */
   public void addCategorySimple(String nameCat, String order, String description) {
-    info("Add Category Simple");
-    Utils.pause(2000);
-    evt.waitForAndGetElement(ELEMENT_ACTIONBAR_ADDCATEGORY);
+
+
     info("click on Add Category button");
-    evt.click(ELEMENT_ACTIONBAR_ADDCATEGORY);
+   $(ELEMENT_ACTIONBAR_ADDCATEGORY).click();
     info("input the title for the category");
-    Utils.pause(2000);
-    evt.waitForAndGetElement(ELEMENT_ADDCATEGORY_POPUP_TITLE, testBase.getDefaultTimeout(), 1);
-    evt.type(ELEMENT_ADDCATEGORY_POPUP_TITLE, nameCat, true);
-    info("check and input Oder field");
-    if (order != null && order != "") {
-      info("Clear all old order data");
-      evt.waitForAndGetElement(ELEMENT_ADDCATEGORY_POPUP_ORDER).clear();
-      info("Input new order");
-      evt.type(ELEMENT_ADDCATEGORY_POPUP_ORDER, order, true);
-    }
+   $(ELEMENT_ADDCATEGORY_POPUP_TITLE).val(nameCat);
     info("check and input description");
-    if (description != null && description != "") {
-      info("Clear all old description data");
-      evt.waitForAndGetElement(ELEMENT_ADDCATEGORY_POPUP_DESCRIPTION).clear();
-      info("Input new description data");
-      evt.type(ELEMENT_ADDCATEGORY_POPUP_DESCRIPTION, description, true);
-    }
+   $(ELEMENT_ADDCATEGORY_POPUP_DESCRIPTION).val(description);
     info("Click on Save button");
-    evt.click(ELEMENT_ADDCATEGORY_POPUP_SAVE_BUTTON);
-    Utils.pause(2000);
-    info("Fisnihed adding a category");
+   $(ELEMENT_ADDCATEGORY_POPUP_SAVE_BUTTON).click();
   }
 
   /**
    * select a item in Manage Category Menu By QuynhPT
-   * 
+   *
    * @param item
    */
   public void selectItemManageCategoryMenu(specifManageCategoryMenu item) {
@@ -85,29 +73,23 @@ public class ForumCategoryManagement {
     evt.waitForAndGetElement(ELEMENT_MENU_MANAGE_CATEGORY);
     info("Click on Manage menu");
     evt.click(ELEMENT_MENU_MANAGE_CATEGORY, 0, true);
-    Utils.pause(1000);
     switch (item) {
     case EDIT_CATEGORY:
       info("click on Edit link");
       evt.click(ELEMENT_EDIT_CATEGORY);
-      Utils.pause(1000);
       break;
     case EXPORT_FORUM:
       info("Click on Export link");
       evt.click(ELEMENT_EXPORT_FORUM);
-      Utils.pause(1000);
       break;
     case IMPORT_FORUM:
       info("Click on Import link");
       evt.click(ELEMENT_IMPORT_FORUM);
-      Utils.pause(1000);
       break;
     case DELETE:
       info("Click on Delete link");
-      evt.click(ELEMENT_DELETE_CATEGORY);
-      Utils.pause(1000);
-      evt.waitForMessage(ELEMENT_CATEGORY_DELETE_CONFIRM_MSG);
-      evt.click(ELEMENT_OK_DELETE);
+      $(ELEMENT_DELETE_CATEGORY).click();
+      $(ELEMENT_OK_DELETE).click();
       break;
     case WATCHES:
       break;
@@ -132,35 +114,42 @@ public class ForumCategoryManagement {
 
   /**
    * Edit a category
-   * 
+   *
    * @param newName
    */
   public void editCategory(String newName) {
     selectItemManageCategoryMenu(specifManageCategoryMenu.EDIT_CATEGORY);
     info("Imput a new name");
-    evt.type(ELEMENT_ADDCATEGORY_POPUP_TITLE, newName, true);
+    $(ELEMENT_ADDCATEGORY_POPUP_TITLE).val(newName);
+
     info("Save all changes");
-    evt.click(ELEMENT_ADDCATEGORY_POPUP_SAVE_BUTTON);
-    info("Verify that the name is changed with new name");
-    evt.waitForAndGetElement(ELEMENT_FORUM_CATEGORY_HOME_TITLE_LINK.replace("${name}", newName));
+    $(ELEMENT_ADDCATEGORY_POPUP_SAVE_BUTTON).click();
+
+
   }
 
   /**
    * Delete Category By QuynhPT
-   * 
+   *
    * @param nameCat
    */
   public void deleteCategory(String nameCat) {
     // TODO Auto-generated method stub
     info("Wait the category is shown");
-    evt.waitForAndGetElement(ELEMENT_FORUM_CATEGORY_HOME_TITLE_LINK.replace("${name}", nameCat), 3000, 0);
+
+    $(byText(nameCat)).waitUntil(appears, Configuration.timeout);
+
     info("Click on the category");
-    evt.click(ELEMENT_FORUM_CATEGORY_HOME_TITLE_LINK.replace("${name}", nameCat));
+    $(byText(nameCat)).click();
     info("Select Delete link");
     selectItemManageCategoryMenu(specifManageCategoryMenu.DELETE);
+
     info("Verify that the category is deleted");
-    evt.waitForElementNotPresent(ELEMENT_FORUM_CATEGORY_HOME_TITLE_LINK.replace("${name}", nameCat), 3000, 0);
+    $(withText(nameCat)).shouldNot(exist);
     info("The category is deleted successfully");
+
+
+
   }
 
   /**
@@ -174,7 +163,7 @@ public class ForumCategoryManagement {
 
   /**
    * Export a forum
-   * 
+   *
    * @param forumName
    * @param fileName
    */
@@ -192,7 +181,7 @@ public class ForumCategoryManagement {
 
   /**
    * Import a forum
-   * 
+   *
    * @param folderDowloadFile
    * @param nameFile
    */
@@ -204,7 +193,7 @@ public class ForumCategoryManagement {
 
   /**
    * Edit permission of category
-   * 
+   *
    * @param cat
    * @param groupPath
    * @param member
@@ -226,7 +215,7 @@ public class ForumCategoryManagement {
 
   /**
    * Edit permission of category
-   * 
+   *
    * @param cat
    * @param groupPath
    * @param member
@@ -241,7 +230,7 @@ public class ForumCategoryManagement {
 
   /**
    * Check display of category
-   * 
+   *
    * @param cat
    * @param isDisplay
    */
@@ -315,7 +304,7 @@ public class ForumCategoryManagement {
 
   /**
    * list sublinks in Manage Cagegory menu
-   * 
+   *
    * @author quynhpt
    */
   public enum specifManageCategoryMenu {

@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.forum;
+package org.exoplatform.platform.qa.ui.forum.pageobject;
 
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -17,7 +17,7 @@ public class ForumPermission {
 
   /**
    * constructor
-   * 
+   *
    * @param dr
    */
   public ForumPermission(TestBase testBase) {
@@ -28,7 +28,7 @@ public class ForumPermission {
 
   /**
    * select permission in category
-   * 
+   *
    * @param isMod
    * @param isStartTop
    * @param isPostReply
@@ -60,7 +60,7 @@ public class ForumPermission {
 
   /**
    * Select permission group membership
-   * 
+   *
    * @param groupPath
    * @param member
    * @param isMod
@@ -91,7 +91,7 @@ public class ForumPermission {
 
   /**
    * Select permission group membership
-   * 
+   *
    * @param groupPath
    * @param member
    */
@@ -110,7 +110,7 @@ public class ForumPermission {
 
   /**
    * select permission in topic
-   * 
+   *
    * @param isView
    * @param isPost
    */
@@ -130,7 +130,7 @@ public class ForumPermission {
 
   /**
    * Select permission group membership in topic
-   * 
+   *
    * @param groupPath
    * @param member
    * @param isView
@@ -154,7 +154,7 @@ public class ForumPermission {
 
   /**
    * Select permission group membership
-   * 
+   *
    * @param groupPath
    * @param member
    */

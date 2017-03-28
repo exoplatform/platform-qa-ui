@@ -20,6 +20,9 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.testbase;
 
+import static com.codeborne.selenide.Selectors.*;
+
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.logger.Logger;
@@ -32,6 +35,9 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.Scanner;
+
+import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_UPLOAD_POPUP_ATTACHMENT_FILE_INPUT;
 
 public class ManageFileTestBase {
 
@@ -293,7 +299,7 @@ public class ManageFileTestBase {
    * This function returns a absolute path from a relative path
    *
    * @param relativeFilePath
-   * @return - FQA-2092: Run and check calendar sniff on IE and FF
+   * @return - FQA-2092: Run and check calendar smoke on IE and FF
    */
   public String getAbsoluteFilePath(String relativeFilePath) {
     String fs = File.separator;
@@ -360,14 +366,17 @@ public class ManageFileTestBase {
   public void attachFile(String pathFile, String fileName, final int timeout, WebDriver driver) {
     Logger.info("Attach a file");
     WebElement element = testBase.waitForAndGetElement(LocatorTestBase.ELEMENT_UPLOAD_POPUP_ATTACHMENT_FILE_INPUT, timeout, 1, 2);
+    $(byText("Select File")) .click();
     ((JavascriptExecutor) driver).executeScript("arguments[0].style.display = 'block';", element);
     Logger.info("Get the file to attach");
     element.sendKeys(getAbsoluteFilePath(pathFile + fileName));
     Logger.info("Verify that the file is attached");
-    testBase.waitForAndGetElement(LocatorTestBase.ELEMENT_UPLOAD_POPUP_NAMEFILE.replace("${fileName}", fileName));
+//    testBase.waitForAndGetElement(LocatorTestBase.ELEMENT_UPLOAD_POPUP_NAMEFILE.replace("${fileName}", fileName));
+    $(byText(fileName)).waitUntil(Condition.appears,10000);
     Logger.info("The file is attached successfully");
     Logger.info("Click on Save button");
     testBase.click(LocatorTestBase.ELEMENT_UPLOAD_POPUP_ATTACHMENT_FILE_SAVE_BUTTON);
+    $(LocatorTestBase.ELEMENT_UPLOAD_POPUP_ATTACHMENT_FILE_SAVE_BUTTON).click();
     Utils.pause(2000);
   }
 

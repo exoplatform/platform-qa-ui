@@ -1,5 +1,7 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.forum;
+package org.exoplatform.platform.qa.ui.forum.pageobject;
 
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
@@ -29,7 +31,7 @@ public class ForumHomePage {
 
   /**
    * constructor
-   * 
+   *
    * @param dr
    */
   public ForumHomePage(TestBase testBase) {
@@ -44,16 +46,13 @@ public class ForumHomePage {
    * Go to home category
    */
   public void goToHomeCategory() {
-    if (evt.waitForAndGetElement(ELEMENT_CATEGORY_BREADCUMB_HOME, 5000, 0) != null) {
-      info("Go to home category");
-      evt.click(ELEMENT_CATEGORY_BREADCUMB_HOME);
-    }
-    evt.waitForElementNotPresent(ELEMENT_CATEGORY_BREADCUMB_HOME);
+
+    $(ELEMENT_CATEGORY_BREADCUMB_HOME).click();
   }
 
   /**
    * select a item in Manage Category Menu By QuynhPT
-   * 
+   *
    * @param item
    */
   public void selectItemAdministrationMenu(specifAdministrationMenu item) {
@@ -92,7 +91,7 @@ public class ForumHomePage {
 
   /**
    * Import a category from Administration menu
-   * 
+   *
    * @param folderDowloadFile
    * @param nameFile
    */
@@ -105,18 +104,19 @@ public class ForumHomePage {
 
   /**
    * Go to a detail category in list By QuynhPT
-   * 
+   *
    * @param name
    */
   public void goToCategory(String name) {
-    goToHomeCategory();
-    evt.click(ELEMENT_FORUM_DETAIL_FORUM_NAME_LINK.replace("${name}", name));
+    // goToHomeCategory();
+    // evt.click(ELEMENT_FORUM_DETAIL_FORUM_NAME_LINK.replace("${name}", name));
+    $(byText(name)).click();
   }
 
   /**
    * Watch or UnWatch true is for watching false is for un-watching Update
    * QuynhPT
-   * 
+   *
    * @param watch
    */
   public void watchItem(boolean watch) {
@@ -147,7 +147,7 @@ public class ForumHomePage {
 
   /**
    * Open a forum
-   * 
+   *
    * @param name
    */
   public void goToForum(String name) {
@@ -158,14 +158,15 @@ public class ForumHomePage {
 
   /**
    * Attach file in attach popup
-   * 
+   *
    * @param pathFile
    * @param fileName
    */
   public void attachFile(String pathFile, String fileName) {
     info("Attach a file");
     WebElement element = evt.waitForAndGetElement(ELEMENT_UPLOAD_POPUP_ATTACHMENT_FILE_INPUT, testBase.getDefaultTimeout(), 1, 2);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';", element);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';",
+                                                                                   element);
     info("Get the file to attach");
     element.sendKeys(testBase.getAbsoluteFilePath(pathFile + fileName));
     info("Verify that the file is attached");
@@ -178,7 +179,7 @@ public class ForumHomePage {
 
   /**
    * Add a BBcode Update QuynhPT
-   * 
+   *
    * @param tag
    * @param replacement
    * @param description
@@ -210,7 +211,7 @@ public class ForumHomePage {
 
   /**
    * Edit BBcode
-   * 
+   *
    * @param newTag
    * @param newReplacement
    * @param newDescription
@@ -241,7 +242,7 @@ public class ForumHomePage {
 
   /**
    * Delete a BBcode
-   * 
+   *
    * @param tag
    */
   public void deleteBBcode(String tag) {
@@ -258,7 +259,7 @@ public class ForumHomePage {
 
   /**
    * Bookmark a topic, a category and a forum
-   * 
+   *
    * @param name
    */
   public void bookmark(String name) {
@@ -279,7 +280,7 @@ public class ForumHomePage {
 
   /**
    * Export a category from Action bar
-   * 
+   *
    * @param catName
    * @param fileName
    */
@@ -297,13 +298,12 @@ public class ForumHomePage {
 
   /**
    * Open a topic
-   * 
+   *
    * @param name
    */
   public void goToTopic(String name) {
     info("Click on the topic with the name:" + name);
-    evt.click(ELEMENT_SELECT_FORUM_TOPIC.replace("${link}", name), 0, true);
-    Utils.pause(2000);
+    $(byText(name)).click();
   }
 
   /**
@@ -313,7 +313,6 @@ public class ForumHomePage {
     // TODO Auto-generated method stub
     info("Click on Private Message button");
     evt.click(ELEMENT_ACTIONBAR_PRIVATE_MESSAGE);
-    Utils.pause(2000);
   }
 
   /**
@@ -428,7 +427,7 @@ public class ForumHomePage {
 
   /**
    * list sublinks in Administration menu
-   * 
+   *
    * @author quynhpt
    */
   public enum specifAdministrationMenu {

@@ -711,7 +711,7 @@ public class ForumLocator {
                                                                         By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");
 
   public static final By     ELEMENT_START_TOPIC_ATTACH_FILE                    =
-                                                             By.xpath("//*[@id='ThreadContent']//*[@class='uiIconAttach uiIconLightGray']");
+                                                             By.xpath("//*[@id='ThreadContent']//*[@class='btn']");
 
   public static final By     ELEMENT_UPLOAD_POPUP_FILE                          =
                                                        By.xpath("//span[@class='PopupTitle popupTitle' and text()='Attach File']");

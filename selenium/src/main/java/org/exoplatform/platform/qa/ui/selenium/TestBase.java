@@ -604,7 +604,7 @@ public class TestBase {
    * This function returns a absolute path from a relative path
    *
    * @param relativeFilePath
-   * @return - FQA-2092: Run and check calendar sniff on IE and FF
+   * @return - FQA-2092: Run and check calendar smoke on IE and FF
    */
   public String getAbsoluteFilePath(String relativeFilePath) {
     return manageFileTestBase.getAbsoluteFilePath(relativeFilePath);
