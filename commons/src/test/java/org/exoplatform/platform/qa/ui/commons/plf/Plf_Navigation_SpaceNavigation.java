@@ -1,9 +1,11 @@
 package org.exoplatform.platform.qa.ui.commons.plf;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -43,6 +45,7 @@ public class Plf_Navigation_SpaceNavigation extends Base {
     String space1 = "space" + getRandomNumber();
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1);
+    $(ELEMENT_SPACE_NAME_INPUT).waitUntil(Condition.disappear,10000);
 
     /*
      * Step Number: 1 Step Name: Show space applications Step Description: -
