@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.wiki;
+package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -27,7 +27,7 @@ public class WikiPermission {
 
   /**
    * constructor
-   * 
+   *
    * @param dr
    */
   public WikiPermission(TestBase testBase) {
@@ -40,7 +40,7 @@ public class WikiPermission {
 
   /**
    * Delete a group, users in permission popup
-   * 
+   *
    * @param group
    */
   public void deletePermission(String groupUsers) {
@@ -55,7 +55,7 @@ public class WikiPermission {
 
   /**
    * Select permission for a username/group/membership
-   * 
+   *
    * @param userGroup
    * @param type
    */
@@ -82,7 +82,7 @@ public class WikiPermission {
 
   /**
    * Unselect permission for a username/group/membership
-   * 
+   *
    * @param userGroup
    * @param type
    */
@@ -109,7 +109,7 @@ public class WikiPermission {
 
   /**
    * Add a group/user/membership to permission table by type
-   * 
+   *
    * @param groupUsers
    */
   public void addPermisisonByType(String groupUsers) {
@@ -152,7 +152,7 @@ public class WikiPermission {
 
   /**
    * Add permission for a user/group/membership by selecting
-   * 
+   *
    * @param groupUsers
    * @param membership
    * @param type

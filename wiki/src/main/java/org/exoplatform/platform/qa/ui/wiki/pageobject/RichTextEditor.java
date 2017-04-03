@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.wiki;
+package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -26,7 +26,7 @@ public class RichTextEditor {
 
   /**
    * constructor
-   * 
+   *
    * @param dr
    * @throws Exception
    */
@@ -73,7 +73,7 @@ public class RichTextEditor {
 
   /**
    * Select a macro in a Wiki page editor
-   * 
+   *
    * @param cat category to which a macro that will be chosen belongs
    * @param macro macro name that will be chosen
    */
@@ -95,7 +95,7 @@ public class RichTextEditor {
 
   /**
    * Add link to a Wiki page
-   * 
+   *
    * @param search parameter to choose whether to search page link or not
    * @param page Wiki page that will be the target link
    * @param label label of link that will be added into Wiki page
@@ -137,7 +137,7 @@ public class RichTextEditor {
 
   /**
    * Add table to a Wiki page
-   * 
+   *
    * @param rows Number of rows that will be added in the table
    * @param columns Number of columns that will be added in the table
    */
@@ -152,7 +152,7 @@ public class RichTextEditor {
 
   /**
    * Add macro: "color" into a Wiki page
-   * 
+   *
    * @param color color setting of macro
    * @param message message setting of macro
    */
@@ -164,7 +164,7 @@ public class RichTextEditor {
 
   /**
    * InsertMacroBox
-   * 
+   *
    * @param cssClass
    * @param image
    * @param title
@@ -211,7 +211,7 @@ public class RichTextEditor {
 
   /**
    * Insert Children macro
-   * 
+   *
    * @param childNum
    * @param depth
    * @param descendantType
@@ -265,7 +265,7 @@ public class RichTextEditor {
 
   /**
    * Insert macro code
-   * 
+   *
    * @param cssClass
    * @param image
    * @param language
@@ -303,7 +303,7 @@ public class RichTextEditor {
 
   /**
    * Insert Macro excerpt
-   * 
+   *
    * @param hideMode
    * @param content
    */
@@ -328,7 +328,7 @@ public class RichTextEditor {
 
   /**
    * Insert Macro Tip message
-   * 
+   *
    * @param content
    */
   public void insertMacroMessage(String content) {
@@ -341,7 +341,7 @@ public class RichTextEditor {
 
   /**
    * Insert Macro FootNode
-   * 
+   *
    * @param content
    */
   public void insertMacroFootNode(String content) {
@@ -354,7 +354,7 @@ public class RichTextEditor {
 
   /**
    * Insert Macro table of content
-   * 
+   *
    * @param depth
    * @param numberedMode
    * @param scope
@@ -398,7 +398,7 @@ public class RichTextEditor {
 
   /**
    * Insert Macro IFrame
-   * 
+   *
    * @param height
    * @param src
    * @param width
@@ -421,7 +421,7 @@ public class RichTextEditor {
 
   /**
    * Insert Macro JIRA
-   * 
+   *
    * @param url
    * @param fieldNames
    * @param fields
@@ -459,7 +459,7 @@ public class RichTextEditor {
 
   /**
    * Insert Macro HTML
-   * 
+   *
    * @param cleanMode
    * @param wikiMode
    * @param content
@@ -518,7 +518,7 @@ public class RichTextEditor {
 
   /**
    * Add a simple wiki page with rich text
-   * 
+   *
    * @param title updated title of the wiki page. Can not be <code>null</code>
    * @param content updated content of the wiki page. Can not be
    *          <code>null</code>
@@ -536,7 +536,7 @@ public class RichTextEditor {
 
   /**
    * Edit an attached file link
-   * 
+   *
    * @param fileName
    * @param label
    * @param tooltip
@@ -571,7 +571,7 @@ public class RichTextEditor {
 
   /**
    * Insert an attached file to the page
-   * 
+   *
    * @param attachedFile
    * @param tooltip
    * @param tab
@@ -591,7 +591,7 @@ public class RichTextEditor {
 
   /**
    * Insert attached File link into the page
-   * 
+   *
    * @param page
    * @param attachedFile
    * @param tooltip
@@ -627,7 +627,7 @@ public class RichTextEditor {
 
   /**
    * Modify Wiki content with rich text
-   * 
+   *
    * @param title updated title of the wiki page. Can not be <code>null</code>
    * @param content updated content of the wiki page. Can not be
    *          <code>null</code>
@@ -665,7 +665,7 @@ public class RichTextEditor {
 
   /**
    * Input email address into EMail link popup
-   * 
+   *
    * @param address
    */
   public void inputEmailAddress(String address) {
@@ -678,7 +678,7 @@ public class RichTextEditor {
 
   /**
    * Insert email address into the page
-   * 
+   *
    * @param address
    * @param label
    * @param tooltip
@@ -702,7 +702,7 @@ public class RichTextEditor {
 
   /**
    * Insert a exist wiki page link into other page
-   * 
+   *
    * @param search
    * @param page
    * @param label
@@ -744,7 +744,7 @@ public class RichTextEditor {
 
   /**
    * Insert a new wiki page into other page
-   * 
+   *
    * @param page
    * @param label
    * @param tooltip
@@ -789,7 +789,7 @@ public class RichTextEditor {
 
   /**
    * Input web address
-   * 
+   *
    * @param address
    */
   public void inputWebAddress(String address) {
@@ -802,7 +802,7 @@ public class RichTextEditor {
 
   /**
    * Edit an image
-   * 
+   *
    * @param imageName
    * @param width
    * @param height
@@ -841,7 +841,7 @@ public class RichTextEditor {
 
   /**
    * Insert a web link into the page
-   * 
+   *
    * @param address
    * @param label
    * @param tooltip
@@ -863,7 +863,7 @@ public class RichTextEditor {
 
   /**
    * Edit a simple wiki page with rich editor
-   * 
+   *
    * @param newTitle updated title of the wiki page. Can not be
    *          <code>null</code>
    * @param newContent updated content of the wiki page. Can not be
@@ -892,7 +892,7 @@ public class RichTextEditor {
 
   /**
    * Input a tooltip
-   * 
+   *
    * @param tooltip
    */
   public void inputToolTip(String tooltip) {
@@ -903,7 +903,7 @@ public class RichTextEditor {
 
   /**
    * Input a label
-   * 
+   *
    * @param label
    */
   public void inputLabel(String label) {
@@ -925,7 +925,7 @@ public class RichTextEditor {
 
   /**
    * Input an external image into the content of the page
-   * 
+   *
    * @param link
    * @param width
    * @param height
@@ -954,7 +954,7 @@ public class RichTextEditor {
 
   /**
    * Input an external image link
-   * 
+   *
    * @param link
    */
   public void inputExternalImageLink(String link) {
@@ -977,7 +977,7 @@ public class RichTextEditor {
 
   /**
    * Insert an image into the content of the page
-   * 
+   *
    * @param attachedFile
    * @param width
    * @param height
@@ -1007,7 +1007,7 @@ public class RichTextEditor {
 
   /**
    * Insert an image into the content of the page
-   * 
+   *
    * @param attachedFile
    */
   public void insertImage(String attachedFile, Boolean isPressEndKey) {
@@ -1025,7 +1025,7 @@ public class RichTextEditor {
 
   /**
    * Delete an image in wiki page
-   * 
+   *
    * @param content
    */
   public void removeImage(String content) {
@@ -1048,7 +1048,7 @@ public class RichTextEditor {
 
   /**
    * Select algin of Image
-   * 
+   *
    * @param type
    */
   public void selectAlign(alignType type) {
@@ -1084,7 +1084,7 @@ public class RichTextEditor {
 
   /**
    * Remove a link in wiki page
-   * 
+   *
    * @param content
    */
   public void removeLink(String content) {
@@ -1112,7 +1112,7 @@ public class RichTextEditor {
 
   /**
    * Input a name for a new wiki page link
-   * 
+   *
    * @param page
    */
   public void inputNameWikiPageLink(String page) {
@@ -1141,7 +1141,7 @@ public class RichTextEditor {
 
   /**
    * Add a new wiki page in My Recent changes tab
-   * 
+   *
    * @param page
    */
   public void addNewPageInMyRecentChangesTab(String page) {
@@ -1153,7 +1153,7 @@ public class RichTextEditor {
 
   /**
    * Add a new wiki page in Search tab
-   * 
+   *
    * @param page
    */
   public void addNewPageInSearchTab(String page) {
@@ -1165,7 +1165,7 @@ public class RichTextEditor {
 
   /**
    * Upload an attached file link in Attached File link popup
-   * 
+   *
    * @param link
    */
   public void uploadAttachedFile(String link) {
@@ -1176,7 +1176,8 @@ public class RichTextEditor {
     evt.doubleClickOnElement(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_NEW_FILE_BTN);
 
     Utils.pause(3000);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
+    ((JavascriptExecutor) testBase.getExoWebDriver()
+                                  .getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
     Utils.pause(2000);
     testBase.getExoWebDriver().getWebDriver().findElement(By.xpath("//*[@name='filepath']")).sendKeys(path);
     /*
@@ -1218,7 +1219,7 @@ public class RichTextEditor {
 
   /**
    * Search a page in Wiki page popup
-   * 
+   *
    * @param page
    */
   public void searchPage(String page) {
@@ -1240,7 +1241,7 @@ public class RichTextEditor {
 
   /**
    * Upload an image file in Attached Image link popup
-   * 
+   *
    * @param link
    */
   public void uploadImageFile(String link) {
@@ -1251,7 +1252,8 @@ public class RichTextEditor {
     evt.doubleClickOnElement(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_IMAGE_BTN);
 
     Utils.pause(2000);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
+    ((JavascriptExecutor) testBase.getExoWebDriver()
+                                  .getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
     Utils.pause(2000);
     testBase.getExoWebDriver().getWebDriver().findElement(By.xpath("//*[@name='filepath']")).sendKeys(path);
 
@@ -1287,7 +1289,7 @@ public class RichTextEditor {
 
   /**
    * Select an attached file in list of All pages tab
-   * 
+   *
    * @param page
    * @param attachedFile
    */
@@ -1317,7 +1319,7 @@ public class RichTextEditor {
 
   /**
    * Add a page with checking auto save after 30s
-   * 
+   *
    * @param title
    * @param content
    */
@@ -1336,7 +1338,7 @@ public class RichTextEditor {
 
   /**
    * Select a page from All pages tab
-   * 
+   *
    * @param page
    */
   public void selectPageInAllPagesTab(String page) {
@@ -1353,7 +1355,7 @@ public class RichTextEditor {
 
   /**
    * Select a page in Search Tab
-   * 
+   *
    * @param page
    */
   public void selectPageInSearchTab(String page) {
@@ -1368,7 +1370,7 @@ public class RichTextEditor {
 
   /**
    * Select a page in My Recent Changes list
-   * 
+   *
    * @param page
    */
   public void selectPageInMyRecentChangesTab(String page) {
@@ -1395,7 +1397,7 @@ public class RichTextEditor {
 
   /**
    * Edit a wiki page with auto save status
-   * 
+   *
    * @param newTitle
    * @param newContent
    */
@@ -1413,7 +1415,7 @@ public class RichTextEditor {
 
   /**
    * Add a new page that has auto save without save
-   * 
+   *
    * @param title
    * @param content
    */
@@ -1435,7 +1437,7 @@ public class RichTextEditor {
 
   /**
    * Replace a new link for old link that inserted into the page
-   * 
+   *
    * @param label
    * @param xOffsetLabel
    * @param yOffsetLabel
@@ -1449,13 +1451,14 @@ public class RichTextEditor {
 
   /**
    * Select the image
-   * 
+   *
    * @param altTextImage
    */
   public void selectImage(String altTextImage) {
     info("Focus on the frame");
     plf.switchFrame(ELEMENT_CONTENT_WIKI_FRAME);
-    WebElement element = testBase.getExoWebDriver().getWebDriver()
+    WebElement element = testBase.getExoWebDriver()
+                                 .getWebDriver()
                                  .findElement(By.xpath(ELEMENT_WIKI_CONTENT_IMAGE_ALT.replace("$alt", altTextImage)));
     selectItems(element);
     evt.switchToParentWindow();
@@ -1463,7 +1466,7 @@ public class RichTextEditor {
 
   /**
    * Select the label's link that is inserted into the page
-   * 
+   *
    * @param driver
    */
   public void selectLabelLink(String label) {
@@ -1474,7 +1477,7 @@ public class RichTextEditor {
 
   /**
    * Select element by click and hold
-   * 
+   *
    * @param el
    */
   public void selectItems(WebElement el) {
@@ -1503,7 +1506,7 @@ public class RichTextEditor {
 
   /**
    * Attach a file to a Wiki page
-   * 
+   *
    * @param link link of file that will be attached
    * @param type optional parameter of this method.
    */
@@ -1518,7 +1521,7 @@ public class RichTextEditor {
 
   /**
    * Insert Macro RSS
-   * 
+   *
    * @param content
    * @param count
    * @param decoration
@@ -1584,7 +1587,7 @@ public class RichTextEditor {
 
   /**
    * Insert macro: "JIRA" into a Wiki page
-   * 
+   *
    * @param URL URL setting of macro
    * @param Content Content setting of macro
    */
@@ -1627,13 +1630,13 @@ public class RichTextEditor {
 
   /**
    * Attach a file to a Wiki page
-   * 
+   *
    * @param link link of file that will be attached
    */
 
   /**
    * Collapse all macro
-   * 
+   *
    * @param control true if use key
    */
   public void CollapseAllMacro(boolean control) {
@@ -1655,7 +1658,7 @@ public class RichTextEditor {
 
   /**
    * Expand all macro
-   * 
+   *
    * @param control true if use key
    */
   public void ExpandAllMacro(boolean control) {
@@ -1676,7 +1679,7 @@ public class RichTextEditor {
 
   /**
    * Verify after collapse macro
-   * 
+   *
    * @param control true if use key
    */
   public void verifyCollapsemacro(String macro) {
@@ -1686,7 +1689,7 @@ public class RichTextEditor {
 
   /**
    * Verify after expand macro
-   * 
+   *
    * @param control true if use key
    */
   public void verifyExpandmacro(macroCategories macroCate, String... Content) {

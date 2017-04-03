@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.wiki;
+package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -20,7 +20,7 @@ public class WikiHomePage {
 
   /**
    * constructor
-   * 
+   *
    * @param dr
    */
   public WikiHomePage(TestBase testBase) {
@@ -83,7 +83,7 @@ public class WikiHomePage {
 
   /**
    * Select any page
-   * 
+   *
    * @param title
    */
   public void goToAPage(String title) {
@@ -94,7 +94,7 @@ public class WikiHomePage {
 
   /**
    * Select any page
-   * 
+   *
    * @param title
    */
   public void deleteWiki(String title) {
@@ -116,7 +116,7 @@ public class WikiHomePage {
 
   /**
    * Select any page
-   * 
+   *
    * @param title
    */
   public void cancelDeleteWiki(String title) {
@@ -138,7 +138,7 @@ public class WikiHomePage {
 
   /**
    * Select a page
-   * 
+   *
    * @param page
    */
   public void selectAPage(String page) {
@@ -163,7 +163,7 @@ public class WikiHomePage {
 
   /**
    * Open search page with a text
-   * 
+   *
    * @param text
    */
   public void goTosearchPage(String text) {
@@ -206,7 +206,7 @@ public class WikiHomePage {
 
   /**
    * Confirm messages
-   * 
+   *
    * @param isConfirm = true if want to click on Confirm button = false if want
    *          to click on Cancel button
    */
@@ -248,7 +248,7 @@ public class WikiHomePage {
 
   /**
    * Get a permalink of the page
-   * 
+   *
    * @return perLink
    */
   public void goToPermalink() {
@@ -261,7 +261,7 @@ public class WikiHomePage {
 
   /**
    * Restricted a page from infor bar or More menu
-   * 
+   *
    * @param opParams
    */
   public void restrictedPage(Boolean... opParams) {
@@ -281,7 +281,7 @@ public class WikiHomePage {
 
   /**
    * Public a page from infor bar or More menu
-   * 
+   *
    * @param opParams
    */
   public void publicPage(Boolean... opParams) {
@@ -301,7 +301,7 @@ public class WikiHomePage {
 
   /**
    * Gets a permanent link by a given value.
-   * 
+   *
    * @return The value.
    */
   public String getPermalink() {
@@ -320,7 +320,7 @@ public class WikiHomePage {
 
   /**
    * Go to attach files in Wiki Home page
-   * 
+   *
    * @param number
    */
   public void goToAttachFiles(String number) {
@@ -333,7 +333,7 @@ public class WikiHomePage {
   /**
    * Delete attach file in View mode in Wiki Homepage or in edit mode when
    * editing a wiki page
-   * 
+   *
    * @param fileName
    */
   public void DeleteAttachFiles(String fileName) {
@@ -353,7 +353,7 @@ public class WikiHomePage {
 
   /**
    * Go to Wiki Home of the space
-   * 
+   *
    * @param space
    */
   public void goToWikiHomeOfSpaceFromBreadcrumb(String space, String userWiki) {
@@ -382,7 +382,7 @@ public class WikiHomePage {
 
   /**
    * Input and search a space in space switcher
-   * 
+   *
    * @param text
    */
   public void inputSpaceSwitcher(String text) {
@@ -434,7 +434,7 @@ public class WikiHomePage {
 
   /**
    * Open information version table
-   * 
+   *
    * @param version
    */
   public void goToRevisions(String version) {
@@ -446,7 +446,7 @@ public class WikiHomePage {
 
   /**
    * Open information table
-   * 
+   *
    * @param page
    * @param version
    */

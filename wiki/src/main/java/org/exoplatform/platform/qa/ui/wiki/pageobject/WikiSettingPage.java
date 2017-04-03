@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.wiki;
+package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -15,7 +15,7 @@ public class WikiSettingPage {
 
   /**
    * constructor
-   * 
+   *
    * @param dr
    */
   private final TestBase       testBase;
@@ -32,7 +32,7 @@ public class WikiSettingPage {
 
   /**
    * Search a template
-   * 
+   *
    * @param template
    */
   public void searchTemplate(String template) {
@@ -46,7 +46,7 @@ public class WikiSettingPage {
 
   /**
    * Edit a wiki template
-   * 
+   *
    * @param template
    * @param text
    */
@@ -71,7 +71,7 @@ public class WikiSettingPage {
 
   /**
    * Delete a template
-   * 
+   *
    * @param template
    */
   public void deleteTemplate(String template) {
@@ -85,7 +85,7 @@ public class WikiSettingPage {
 
   /**
    * Cancel deleting a template
-   * 
+   *
    * @param template
    */
   public void deleteTemplateWithCanceling(String template) {
@@ -133,7 +133,7 @@ public class WikiSettingPage {
 
   /**
    * Add new a template
-   * 
+   *
    * @param title
    * @param des
    * @param content

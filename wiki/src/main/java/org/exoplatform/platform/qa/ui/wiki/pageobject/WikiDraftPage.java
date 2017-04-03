@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.wiki;
+package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_DELETE_DRAFT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_DRAFT_OF_NEW_PAGE;
@@ -16,7 +16,7 @@ public class WikiDraftPage {
 
   /**
    * constructor
-   * 
+   *
    * @param dr
    */
   ManageAlert                  alert;
@@ -31,7 +31,7 @@ public class WikiDraftPage {
 
   /**
    * Deletes a draft.
-   * 
+   *
    * @param title The title of a wiki's page to be deleted.
    */
   public void deleteDraft(String title) {
@@ -42,7 +42,7 @@ public class WikiDraftPage {
 
   /**
    * resume a draft
-   * 
+   *
    * @param title
    */
   public void resumeADraft(String title) {

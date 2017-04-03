@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.wiki;
+package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -21,7 +21,7 @@ public class SourceTextEditor {
 
   /**
    * constructor
-   * 
+   *
    * @param dr
    */
   public SourceTextEditor(TestBase testBase) {
@@ -31,7 +31,7 @@ public class SourceTextEditor {
 
   /**
    * Add a simple wiki page with source editor
-   * 
+   *
    * @param title
    * @param content
    */
@@ -52,7 +52,7 @@ public class SourceTextEditor {
 
   /**
    * Add a page with checking auto save after 30s
-   * 
+   *
    * @param title
    * @param content
    */
@@ -76,7 +76,7 @@ public class SourceTextEditor {
 
   /**
    * Add a new page that has auto save without save
-   * 
+   *
    * @param title
    * @param content
    */
@@ -103,7 +103,7 @@ public class SourceTextEditor {
 
   /**
    * Edit a simple wiki page with source editor
-   * 
+   *
    * @param newTitle
    * @param newContent
    */
@@ -126,7 +126,7 @@ public class SourceTextEditor {
 
   /**
    * Modify Wiki content with Source editor
-   * 
+   *
    * @param title updated title of the wiki page. Can not be <code>null</code>
    * @param content updated content of the wiki page. Can not be
    *          <code>null</code>
@@ -161,7 +161,7 @@ public class SourceTextEditor {
 
   /**
    * Edit a wiki page with auto save status
-   * 
+   *
    * @param newTitle
    * @param newContent
    */
@@ -184,12 +184,12 @@ public class SourceTextEditor {
 
   /**
    * Attach a file to a Wiki page
-   * 
+   *
    * @param link link of file that will be attached
    */
   /**
    * Attach a file to a Wiki page
-   * 
+   *
    * @param link link of file that will be attached
    * @param type optional parameter of this method.
    */
@@ -202,7 +202,8 @@ public class SourceTextEditor {
     // doubleClickOnElement(ELEMENT_UPLOAD_NAME);
 
     Utils.pause(2000);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
+    ((JavascriptExecutor) testBase.getExoWebDriver()
+                                  .getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
     Utils.pause(2000);
     testBase.getExoWebDriver().getWebDriver().findElement(ELEMENT_UPLOAD_NAME).sendKeys(path);
     /*
@@ -225,12 +226,12 @@ public class SourceTextEditor {
 
   /**
    * Attach a file to a Wiki page
-   * 
+   *
    * @param link link of file that will be attached
    */
   /**
    * Attach a file to a Wiki page
-   * 
+   *
    * @param link link of file that will be attached
    * @param type optional parameter of this method.
    */
