@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.commons.plf;
 
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.core.context.Smoke;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
@@ -9,9 +10,11 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_RESULT_SEARCH_SPACE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_SEARCH_SPACE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACE_NAME_INPUT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACE_PANEL;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -82,10 +85,11 @@ public class Plf_Navigation_LeftNavigation extends Base {
 
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1 + " - description");
+    $(ELEMENT_SPACE_NAME_INPUT).waitUntil(Condition.disappear,10000);
 
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space2, space2 + " - description");
-
+    $(ELEMENT_SPACE_NAME_INPUT).waitUntil(Condition.disappear,10000);
 		/*Step Number: 1
 		 *Step Name: Connect to intranet
 		 *Step Description: 
