@@ -1,12 +1,19 @@
 package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
+
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.interactions.Actions;
 
 /**
  * Path: Navigation Management popup
@@ -80,7 +87,8 @@ public class NavigationManagement {
       break;
     case EDIT_NODE_PAGE:
       info("Click on Edit node page");
-      evt.click(ELEMENT_MANAGESITES_CONTEXTMENU_EDIT_NODE_PAGE_ICON);
+    $(byText("Edit Node's Page")).click();
+      //$(ELEMENT_MANAGESITES_CONTEXTMENU_EDIT_NODE_PAGE_ICON).click();
       Utils.pause(2000);
       break;
     case EDIT_THIS_NODE:
@@ -110,7 +118,7 @@ public class NavigationManagement {
       break;
     case DELETE_NODE:
       info("Click on Delete node");
-      evt.click(ELEMENT_MANAGESITES_CONTEXTMENU_DELETE_ICON);
+      $(ELEMENT_MANAGESITES_CONTEXTMENU_DELETE_ICON).click();
       alert.acceptAlert();
       break;
     case MOVE_UP:
@@ -155,14 +163,14 @@ public class NavigationManagement {
   public void deleteNode(String title) {
     info("Delete a node");
     info("Right click on the node");
-    evt.rightClickOnElement(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", title));
+
+    contextClick($(byText(title)));
     info("Select Delete link");
     selectItem(specifiContextMenu.DELETE_NODE);
-    info("Verify that the node is deleted");
-    evt.waitForElementNotPresent(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", title));
-    evt.waitForAndGetElement(ELEMENT_NAVIGATION_MANAGEMENT_SAVE);
+
+
     info("Click on Save button");
-    evt.click(ELEMENT_NAVIGATION_MANAGEMENT_SAVE);
+    $(ELEMENT_NAVIGATION_MANAGEMENT_SAVE).click();
     Utils.pause(2000);
   }
 
@@ -171,12 +179,21 @@ public class NavigationManagement {
    *
    * @param name
    */
+  public static SelenideElement contextClick(SelenideElement el){
+    (new Actions(getWebDriver())).contextClick(el).perform();
+    return el;
+  }
   public void editNodePage(String name) {
     info("Edit a node page");
     info("Right click on the node");
-    evt.rightClickOnElement(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name));
+//    evt.rightClickOnElement(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name));
+
+    contextClick($(byText(name)));
+    $(byText("Edit Node's Page")).click();
+
+
     info("Select Edit link");
-    selectItem(specifiContextMenu.EDIT_NODE_PAGE);
+    //selectItem(specifiContextMenu.EDIT_NODE_PAGE);
   }
 
   /**

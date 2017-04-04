@@ -7,6 +7,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.util.Map;
 
+import com.codeborne.selenide.Condition;
 import org.openqa.selenium.WebElement;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
@@ -38,6 +39,11 @@ public class PortalManageSites {
     evt.click(ELEMENT_MANAGESITES_EDIT_NAVIGATION_ICON.replace("${site}", site));
     evt.waitForAndGetElement(ELEMENT_NAVIGATION_MANAGEMENT_POPUP_TITLE, 3000, 0);*/
     $(byText("Edit Navigation")).click();
+//    evt.waitForAndGetElement(ELEMENT_MANAGESITES_EDIT_NAVIGATION_ICON.replace("${site}", site), 3000, 0);
+    $(byText("Edit Navigation")).waitUntil(Condition.appears,10000);
+  //  evt.click(ELEMENT_MANAGESITES_EDIT_NAVIGATION_ICON.replace("${site}", site));
+    $(byText("Edit Navigation")).click();
+  //  evt.waitForAndGetElement(ELEMENT_NAVIGATION_MANAGEMENT_POPUP_TITLE, 3000, 0);
   }
 
   /**

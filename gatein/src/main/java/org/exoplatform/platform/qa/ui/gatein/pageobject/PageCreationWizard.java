@@ -6,6 +6,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocat
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
@@ -392,8 +393,8 @@ public class PageCreationWizard {
    */
   public void saveChangesPageEditor() {
     info("Save change Page Editor");
-    evt.waitForAndGetElement(ELEMENT_PAGEEDITOR_FINISHBTN);
-    evt.click(ELEMENT_PAGEEDITOR_FINISHBTN);
+    $(ELEMENT_PAGEEDITOR_FINISHBTN).waitUntil(Condition.appears,10000);
+   $(ELEMENT_PAGEEDITOR_FINISHBTN).click();
     Utils.pause(3000);
   }
 
@@ -481,9 +482,10 @@ public class PageCreationWizard {
    */
   public void viewProperties(boolean... verify) {
     info("Click on Switch view mode button");
-    evt.click(ELEMENT_VIEW_PROPERTIES);
-    if (verify.length > 0)
-      evt.waitForAndGetElement(ELEMENT_VIEW_PROPERTIES_POPUP, 2000, 0);
+    $(ELEMENT_VIEW_PROPERTIES).click();
+    /*if (verify.length > 0)
+      evt.waitForAndGetElement(ELEMENT_VIEW_PROPERTIES_POPUP, 2000, 0);*/
+    $(ELEMENT_VIEW_PROPERTIES_POPUP).waitUntil(Condition.appears,10000);
   }
 
   /**
@@ -514,23 +516,29 @@ public class PageCreationWizard {
                                boolean... isShowMaxWindow) {
     if (!title.isEmpty()) {
       info("Input new title");
-      evt.type(ELEMENT_VIEW_PROPERTIES_TITLE, title, true);
+      //evt.type(ELEMENT_VIEW_PROPERTIES_TITLE, title, true);
+      $(ELEMENT_VIEW_PROPERTIES_TITLE).setValue(title);
+
     }
     if (!groupsPath.isEmpty()) {
       info("Select a group");
-      evt.click(ELEMENT_VIEW_PROPERTIES_PERMISSION_TAB);
+     //evt.click(ELEMENT_VIEW_PROPERTIES_PERMISSION_TAB);
+
+      $(ELEMENT_VIEW_PROPERTIES_PERMISSION_TAB).click();
       if (isAccessPermision == true) {
-        evt.click(ELEMENT_VIEW_PROPERTIES_ADD_PERMISSION_BTN);
+        //evt.click(ELEMENT_VIEW_PROPERTIES_ADD_PERMISSION_BTN);
+        $(ELEMENT_VIEW_PROPERTIES_ADD_PERMISSION_BTN).click();
         info("Select a group");
         selectGroup(groupsPath);
         info("Select a meberships");
         selectMemberShip(memberShips);
       }
+
       if (isEditPermission == true) {
         info("Select Edit permission settings tab");
-        evt.click(ELEMENT_VIEW_PROPERTIES_EDIT_PERMISSITION_SETTINGS);
+        $(ELEMENT_VIEW_PROPERTIES_EDIT_PERMISSITION_SETTINGS).click();
         info("Click on Select permission button");
-        evt.click(ELEMENT_VIEW_PROPERTIES_SELECT_PERMISSION_BTN);
+        $(ELEMENT_VIEW_PROPERTIES_SELECT_PERMISSION_BTN).click();
         selectGroupEditTab(groupsPath);
         info("Select a meberships");
         selectMemberShipEditTab(memberShips);
@@ -541,6 +549,8 @@ public class PageCreationWizard {
       evt.check(ELEMENT_VIEW_PROPERTIES_SHOW_MAX_WINDOW, 2);
     }
     saveChangeProperties();
+
+
   }
 
   /**
@@ -548,7 +558,7 @@ public class PageCreationWizard {
    */
   public void saveChangeProperties() {
     info("Save all changes");
-    evt.click(ELEMENT_VIEW_PROPERTIES_SAVE_BTN);
+    $(ELEMENT_VIEW_PROPERTIES_SAVE_BTN).click();
     Utils.pause(2000);
   }
 
@@ -559,12 +569,14 @@ public class PageCreationWizard {
    */
   public void selectGroup(String groupsPath) {
     info("Select a group with the path:" + groupsPath);
-    String[] groups = groupsPath.split("/");
+   String[] groups = groupsPath.split("/");
     for (String groupSelect : groups) {
       info("Select group:" + groupSelect);
-      evt.click(ELEMENT_ADD_PERMISSION_SELECTOR_POPUP_GROUP.replace("${group}", groupSelect), 0, true);
+      //evt.click(ELEMENT_ADD_PERMISSION_SELECTOR_POPUP_GROUP.replace("${group}", groupSelect), 0, true);
+      $(byTitle(groupSelect)).click();
     }
     Utils.pause(2000);
+
   }
 
   /**
@@ -589,7 +601,8 @@ public class PageCreationWizard {
    */
   public void selectMemberShip(String memberShip) {
     info("Select a membership:" + memberShip);
-    evt.click(ELEMENT_ADD_PERMISSION_SELECTOR_POPUP_MEMEBRSHIP.replace("${member}", memberShip), 0, true);
+//    evt.click(ELEMENT_ADD_PERMISSION_SELECTOR_POPUP_MEMEBRSHIP.replace("${member}", memberShip), 0, true);
+    $(byText(memberShip)).click();
     Utils.pause(2000);
   }
 
