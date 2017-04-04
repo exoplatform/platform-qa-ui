@@ -22,6 +22,8 @@ package org.exoplatform.platform.qa.ui.commons;
 
 import org.exoplatform.platform.qa.ui.commons.pageobject.Platform;
 import org.exoplatform.platform.qa.ui.commons.pageobject.RegisterSoftware;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -38,6 +40,7 @@ public final class RegisterSoftwareTestIT extends Base {
    * where this feature has not be skipped more than 3 times.
    */
   @Test
+  @Tag("register")
   public void skipRegisterSoftware() {
     new Platform().open();
     // ensure that LicenseAgreement is accepted

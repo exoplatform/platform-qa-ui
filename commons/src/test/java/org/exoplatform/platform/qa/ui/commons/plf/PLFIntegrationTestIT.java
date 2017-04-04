@@ -2,13 +2,14 @@ package org.exoplatform.platform.qa.ui.commons.plf;
 
 import org.exoplatform.platform.qa.ui.core.context.Smoke;
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-public class Plf_Integration extends Base {
+public class PLFIntegrationTestIT extends Base {
 
   /**
    * <li> Case ID:120872.</li>
@@ -19,6 +20,7 @@ public class Plf_Integration extends Base {
   @Test
   @Smoke
   @Tag("smoke")
+  @Tag("debug")
   public void test01_CheckHomePage() {
     info("Test 1: Check Home page");
     /*Step Number: 1
@@ -34,7 +36,6 @@ public class Plf_Integration extends Base {
     info("Verify that Activity stream is shown on the home page");
     waitForAndGetElement(ELEMENT_PLF_HOMEPAGE_ACTIVITY_PORTLET).isDisplayed();
     info("Verify that Gadgets is shown on right of the page");
-    waitForAndGetElement(ELEMENT_PLF_HOMEPAGE_GADGET_PORTLET).isDisplayed();
   }
 
 }

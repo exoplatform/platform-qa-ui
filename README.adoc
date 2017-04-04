@@ -46,3 +46,61 @@ TODO
 .. Configure the test to *add the following System properties* in the `Run > Edit configurations... > VM options` input text +
  `-ea -Dwebdriver.chrome.driver=/tmp/chromedriver -Dselenide.baseUrl=http://localhost:80`
 .. Run the test
+
+
+
+~/opt/maven32/bin/mvn  clean verify -Prun-its -Dmaven.failsafe.debug="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000 -Xnoagent -Djava.compiler=NONE" -Dremote=http://192.168.0.7:4444/wd/hub -Dbrowser=chrome
+
+[source,shell]
+.Run All in containers: test with Maven and Local Chrome
+----
+mvn  clean verify -Prun-its,chrome \
+    -Dselenide.baseUrl=http://localhost:8080
+----
+
+.Run All in containers: test with Maven and Local Firefox
+----
+mvn  clean verify -Prun-its,firefox \
+    -Dselenide.baseUrl=http://localhost:8080
+----
+
+.Debug on test tagged with @tag("debug")
+----
+mvn  clean verify -Prun-its,firefox \
+    -Dselenide.test.tags.include=debug \
+    -Dmaven.failsafe.debug="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000 -Xnoagent -Djava.compiler=NONE" \
+    -Dselenide.baseUrl=http://localhost:8080
+----
+
+
+[source,shell]
+. Maven and Selenium Grid / Chrome
+----
+mvn  clean verify -Prun-its,grid \
+    -Dselenide.baseUrl=http://localhost:8080 \
+    -Dremote=http://localhost:4444/wd/hub \
+    -Dselenide.browser=chrome  \
+    -Dselenide.timeout=20000
+----
+
+
+[source,shell]
+. Maven and Selenium Grid / Firefox
+----
+mvn  clean verify -Prun-its,grid \
+    -Dselenide.test.tags.include=debug \
+    -Dselenide.baseUrl=http://exo:8080 \
+    -Dremote=http://localhost:4444/wd/hub \
+    -Dselenide.browser=firefox  \
+    -Dselenide.timeout=20000
+----
+
+[source,shell]
+.Run All in containers: test with Maven and Selenium Grid
+----
+c-mvn  clean verify -Prun-its,grid \
+    -Dselenide.baseUrl=http://exo:8080 \
+    -Dremote=http://hub:4444/wd/hub \
+    -Dselenide.browser=chrome  \
+    -Dselenide.timeout=20000
+----

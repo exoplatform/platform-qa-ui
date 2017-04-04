@@ -12,6 +12,7 @@ import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 
 public class SpaceManagement {
 
@@ -75,8 +76,8 @@ public class SpaceManagement {
   public void addNewSpaceSimple(String name, String desc, int... params) {
 
     $(ELEMENT_ADDNEWSPACE_BUTTON).click();
-    $(ELEMENT_SPACE_NAME_INPUT).val(name);
-    $(ELEMENT_SPACE_DESCRIPTION_INPUT).val(desc);
+    $(byId("displayName")).setValue(name);
+    $(byId("description")).setValue(desc);
     info("Save all changes");
     $(ELEMENET_SPACE_CREATE_BUTTON).click();
   }

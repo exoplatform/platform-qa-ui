@@ -21,6 +21,8 @@
 package org.exoplatform.platform.qa.ui.commons;
 
 import org.exoplatform.platform.qa.ui.commons.pageobject.Platform;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 public final class LicenseTestIT extends Base {
@@ -31,6 +33,7 @@ public final class LicenseTestIT extends Base {
   }
 
   @Test
+  @Tag("license")
   public void acceptAgreement() {
     new Platform().open();
 

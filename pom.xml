@@ -35,10 +35,9 @@
   <packaging>pom</packaging>
   <name>eXo PLF:: QA - UI</name>
   <modules>
-  <module>core</module>
-  <module>selenium</module>
+    <module>core</module>
+    <module>selenium</module>
     <module>commons</module>
-
   </modules>
   <scm>
     <connection>scm:git:git://github.com/exoplatform/platform-qa-ui.git</connection>
@@ -56,6 +55,17 @@
     <!-- Selenium/Selenide Stack -->
     <selenide.version>4.3</selenide.version>
     <guava.version>21.0</guava.version>
+    <!-- Selenium / Selenide configuration  -->
+    <selenide.browser>org.exoplatform.platform.qa.ui.core.config.driver.ExoWebDriverProvider</selenide.browser>
+    <selenide.holdBrowserOpen>false</selenide.holdBrowserOpen>
+    <!-- Grid configuration -->
+    <selenide.remote>http://localhost:4444/wd/hub</selenide.remote>
+    <selenide.baseUrl>http://localhost:8080</selenide.baseUrl>
+    <selenide.browserSize>1366x768</selenide.browserSize>
+    <selenide.reports>${project.build.directory}/reports/ui-tests</selenide.reports>
+    <!-- Tests filtered by tags to include/exclude -->
+    <selenide.test.tags.include>smoke</selenide.test.tags.include>
+    <selenide.test.tags.exclude>license,register</selenide.test.tags.exclude>
   </properties>
   <dependencyManagement>
     <!-- Import versions of external dependencies to use -->
@@ -78,13 +88,18 @@
   <dependencies>
     <dependency>
       <groupId>org.slf4j</groupId>
-      <artifactId>log4j-over-slf4j</artifactId>
+      <artifactId>slf4j-simple</artifactId>
     </dependency>
     <!-- Selenium/Selenide Stack -->
     <dependency>
       <groupId>com.codeborne</groupId>
       <artifactId>selenide</artifactId>
       <version>${selenide.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-api</artifactId>
+      <version>3.0.1</version>
     </dependency>
     <!--  Add this dependency to fix a classpath error with ChromeDriver -->
     <dependency>
@@ -103,11 +118,6 @@
     <plugins>
       <plugin>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <configuration>
-          <includes>
-            <include>*TestIT.java</include>
-          </includes>
-        </configuration>
         <dependencies>
           <dependency>
             <groupId>org.junit.platform</groupId>
@@ -120,7 +130,79 @@
             <version>${org.junit.jupiter.version}</version>
           </dependency>
         </dependencies>
+        <configuration>
+          <properties>
+            <includeTags>${selenide.test.tags.include}</includeTags>
+            <excludeTags>${selenide.test.tags.exclude}</excludeTags>
+          </properties>
+          <detail>true</detail>
+          <forkCount>1C</forkCount>
+          <reuseForks>true</reuseForks>
+          <systemPropertyVariables>
+            <!-- Common configuration for all tests -->
+            <holdBrowserOpen>${selenide.holdBrowserOpen}</holdBrowserOpen>
+            <selenide.baseUrl>${selenide.baseUrl}</selenide.baseUrl>
+            <browser>${selenide.browser}</browser>
+            <selenide.browserSize>${selenide.browserSize}</selenide.browserSize>
+            <selenide.reports>${selenide.reports}</selenide.reports>
+          </systemPropertyVariables>
+        </configuration>
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>chrome</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <configuration>
+              <systemPropertyVariables>
+                <webdriver.chrome.driver>${selenium.webdriver.chrome.driver.path}</webdriver.chrome.driver>
+              </systemPropertyVariables>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+      <properties>
+        <selenium.webdriver.chrome.driver.path>/tmp/chromedriver</selenium.webdriver.chrome.driver.path>
+      </properties>
+    </profile>
+    <profile>
+      <id>firefox</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <configuration>
+              <systemPropertyVariables>
+                <webdriver.gecko.driver>${selenium.webdriver.geckodriver.driver.path}</webdriver.gecko.driver>
+                <webdriver.firefox.marionette>true</webdriver.firefox.marionette>
+              </systemPropertyVariables>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+      <properties>
+        <selenium.webdriver.geckodriver.driver.path>/tmp/geckodriver</selenium.webdriver.geckodriver.driver.path>
+      </properties>
+    </profile>
+    <profile>
+      <!-- Run UI Integration Tests in Selenium Grid -->
+      <id>grid</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <configuration>
+              <systemPropertyVariables>
+                <remote>${selenide.remote}</remote>
+              </systemPropertyVariables>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

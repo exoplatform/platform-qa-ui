@@ -33,10 +33,6 @@ import org.exoplatform.platform.qa.ui.selenium.testbase.*;
 
 public class TestBase {
 
-  static {
-    System.setProperty("selenide.browser", "org.exoplatform.platform.qa.ui.core.config.driver.ExoWebDriverProvider");
-  }
-
   public final int                         ACTION_REPEAT              = 5;
 
   /**

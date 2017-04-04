@@ -1,9 +1,5 @@
 package org.exoplatform.platform.qa.ui.core.config.driver;
 
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,11 +20,11 @@ import com.codeborne.selenide.WebDriverRunner;
  */
 public class ExoWebDriverProvider implements WebDriverProvider {
 
-  private final boolean useRemoteWebDriver = Boolean.getBoolean("remote");
+  private final boolean proxyEnabled          = Boolean.getBoolean("proxyEnabled");
 
-  private final boolean proxyEnabled       = Boolean.getBoolean("proxyEnabled");
+  private final String  chromeDriver          = System.getProperty("webdriver.chrome.driver");
 
-  private final String browser = System.getProperty("browser");
+  private final String  recommendedResolution = System.getProperty("window.size", "1366,768");
 
   /**
    * Create the WebDriver regarding to the System Properties configured.
@@ -42,24 +38,16 @@ public class ExoWebDriverProvider implements WebDriverProvider {
     // Override output configuration for Maven
     Configuration.reportsFolder = "target";
 
-    if (useRemoteWebDriver) {
-      configureSeleniumHub();
-    }
-
-    // No default browser defined, we use chrome
-    if (browser == null || browser.trim().equals("")) {
-      Configuration.browser = WebDriverRunner.CHROME;
-      Configuration.holdBrowserOpen = true;
+    // ChromeDriver
+    if (chromeDriver != null && !chromeDriver.trim().equals("")) {
+      return configureChromeDriver(capabilities);
     }
 
     if (Configuration.browser.equals(WebDriverRunner.CHROME)) {
       return configureChromeDriver(capabilities);
 
     } else {
-      FirefoxProfile profile = new FirefoxProfile();
-      profile.setPreference("intl.accept_languages", "en");
-      capabilities.setCapability(FirefoxDriver.PROFILE, profile);
-      return new FirefoxDriver(capabilities);
+      return configureFirefoxDriver(capabilities);
     }
 
   }
@@ -72,53 +60,28 @@ public class ExoWebDriverProvider implements WebDriverProvider {
     // names
     prefs.put("intl.accept_languages", "en");
     options.setExperimentalOption("prefs", prefs);
+    options.addArguments("--window-size=" + recommendedResolution);
     capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+
     return new ChromeDriver(capabilities);
 
   }
 
-  public void configureSeleniumHub() {
+  private FirefoxDriver configureFirefoxDriver(DesiredCapabilities capabilities) {
+    FirefoxProfile profile = new FirefoxProfile();
+    profile.setPreference("intl.accept_languages", "en");
 
-    final String ipAddress;
-    try {
-      ipAddress = getIpAddress();
+    capabilities.setCapability(FirefoxDriver.MARIONETTE, true);
+    // To fix problem with Firefox/Marionette
+    // https://github.com/mozilla/geckodriver/issues/517
+    // profile.setPreference("browser.tabs.remote.autostart", false);
+    // profile.setPreference("browser.tabs.remote.autostart.1", false);
+    // profile.setPreference("browser.tabs.remote.autostart.2", false);
+    profile.setPreference("browser.tabs.remote.force-enable", "false");
 
-      Configuration.baseUrl = "http://" + ipAddress + ":" + getPLFHTTPPort();
-
-    } catch (SocketException e) {
-      e.printStackTrace();
-    }
+    capabilities.setCapability(FirefoxDriver.PROFILE, profile);
+    return new FirefoxDriver(capabilities);
 
   }
 
-  private String getPLFHTTPPort() {
-    String defaultPort = "8080";
-
-    return defaultPort;
-  }
-
-  private String getHubHTTPPort() {
-    String defaultPort = "4444";
-
-    return defaultPort;
-  }
-
-  private String getIpAddress() throws SocketException {
-    String ipAddress = null;
-
-    Enumeration<NetworkInterface> n = NetworkInterface.getNetworkInterfaces();
-    for (; n.hasMoreElements();) {
-      NetworkInterface e = n.nextElement();
-
-      Enumeration<InetAddress> a = e.getInetAddresses();
-      for (; a.hasMoreElements();) {
-        InetAddress addr = a.nextElement();
-        // Find local address
-        if (addr.getHostAddress().contains("192")) {
-          ipAddress = addr.getHostAddress();
-        }
-      }
-    }
-    return ipAddress;
-  }
 }

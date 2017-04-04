@@ -36,12 +36,14 @@ services:
     extends:
       file: common-plf44-stack.yml
       service: exo
+    container_name: exo
     image: exoplatform/exo:develop
     environment:
       EXO_DB_TYPE: hsqldb
       EXO_ADDONS_LIST:
       EXO_ES_EMBEDDED: "true"
     ports:
+      - "8080:8080"
       # (Linux) open JMX ports for local connection only
       #- "127.0.0.1:10001:10001"
       #- "127.0.0.1:10002:10002"
@@ -63,11 +65,31 @@ services:
       service: mail
     depends_on:
       - mongo
-volumes:
-  exo_data:
-  exo_logs:
-  mongo_data:
-  search_data:
+  selenium_hub:
+    container_name: hub
+    image: 'selenium/hub:3.0.1'
+    ports:
+    - '4444:4444'
+    networks:
+      - front
+  selenium_node:
+    image: 'selenium/node-firefox:3.0.1'
+    depends_on:
+      - selenium_hub
+    environment:
+      HUB_PORT_4444_TCP_ADDR: selenium_hub
+      HUB_PORT_4444_TCP_PORT: 4444
+    networks:
+      - front
+  selenium_node_chrome:
+    image: 'selenium/node-chrome:3.0.1'
+    depends_on:
+      - selenium_hub
+    environment:
+      HUB_PORT_4444_TCP_ADDR: selenium_hub
+      HUB_PORT_4444_TCP_PORT: 4444
+    networks:
+      - front
 networks:
   front:
   back:

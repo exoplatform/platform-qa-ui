@@ -52,18 +52,12 @@ services:
       EXO_JODCONVERTER_PORTS: "2002"
     expose:
       - "8080"
-    volumes:
-      - exo_data:/srv/exo
-      - search_data:/srv/es
-      - exo_logs:/var/log/exo
     networks:
       - front
       - back
       - mail
   mongo:
     image: mongo:3.2
-    volumes:
-      - mongo_data:/data/db:rw
     networks:
       - back
   mysql:
@@ -73,8 +67,6 @@ services:
       MYSQL_DATABASE: exo
       MYSQL_USER: exo
       MYSQL_PASSWORD: exo
-    volumes:
-      - db_data:/var/lib/mysql:rw
     networks:
       - back
   pgsql:
@@ -83,14 +75,10 @@ services:
       POSTGRES_DB: exo
       POSTGRES_USER: exo
       POSTGRES_PASSWORD: exo
-    volumes:
-      - db_data:/var/lib/postgresql/data:rw
     networks:
       - back
   es:
     image: exoplatform/elasticsearch:0.3
-    volumes:
-      - search_data:/usr/share/elasticsearch/data:rw
     networks:
       - back
   mail:

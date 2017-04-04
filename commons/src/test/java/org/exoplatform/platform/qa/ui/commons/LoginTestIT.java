@@ -22,6 +22,8 @@ package org.exoplatform.platform.qa.ui.commons;
 
 import org.exoplatform.platform.qa.ui.commons.pageobject.Login;
 import org.exoplatform.platform.qa.ui.commons.pageobject.Platform;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 public final class LoginTestIT extends Base {
@@ -32,6 +34,7 @@ public final class LoginTestIT extends Base {
   }
 
   @Test
+  @Tag("smoke")
   public void signIn() {
     // Init instance for signInTest
     Platform plf = new Platform();
@@ -43,6 +46,7 @@ public final class LoginTestIT extends Base {
   }
 
   @Test
+  @Tag("smoke")
   public void signOut() {
     // Init instance for signInTest
     Platform plf = new Platform();
