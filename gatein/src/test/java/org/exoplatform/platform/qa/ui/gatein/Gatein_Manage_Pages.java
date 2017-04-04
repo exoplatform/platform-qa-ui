@@ -117,6 +117,8 @@ public  void test10_EditPageOfPortal() {
 *<li> Test Case Name: Delete page of portal.</li>
 */
 @Test
+@Smoke
+@Tag("smoke")
 public  void test03_DeletePageOfPortal() {
     info("Test 03: Delete page of portal");
     String num=getRandomNumber();
