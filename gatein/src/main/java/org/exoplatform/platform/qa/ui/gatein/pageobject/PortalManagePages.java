@@ -4,8 +4,10 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.selenium.*;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import static com.codeborne.selenide.Selectors.*;
 
 /**
  * Path: Administration-->Portal-->Pages
@@ -37,6 +39,7 @@ public class PortalManagePages {
    * @param type
    */
   public void searchPage(String title, String siteName, String type, boolean... verify) {
+
     info("waiting the page is loaded full");
     evt.waitForAndGetElement(ELEMENT_MANAGEPAGES_TITLE_FIELD);
     if (!title.isEmpty()) {
@@ -51,19 +54,15 @@ public class PortalManagePages {
       info("Select a type");
       $(ELEMENT_MANAGEPAGES_TYPE_DROPBOX).selectOption(type);
     }
+   $(ELEMENT_MANAGEPAGES_TITLE_FIELD).waitUntil(Condition.appears,10000);
+    info("Input a new title");
+   $(ELEMENT_MANAGEPAGES_TITLE_FIELD).setValue(title);
+    info("Select a type");
+    $(ELEMENT_MANAGEPAGES_TYPE_DROPBOX).selectOption("group");
     info("Click on Search button");
-    evt.click(ELEMENT_MANAGEPAGES_SEARCH_BUTTON);
-    if (verify.length > 0) {
-      info("Verify that the search page is shown with correct results");
-      if (!title.isEmpty())
-        evt.waitForAndGetElement(ELEMENT_MANAGEPAGES_CONTENT_TITLE_COLUMN.replace("${title}", title), 3000, 0);
-      if (!siteName.isEmpty() & !type.isEmpty())
-        evt.waitForAndGetElement(ELEMENT_MANAGEPAGES_CONTENT_SEARCH_TABLE.replace("${type}", type)
-                                                                         .replace("${siteName}", siteName)
-                                                                         .replace("${title}", title),
-                                 2000,
-                                 0);
-    }
+    $(ELEMENT_MANAGEPAGES_SEARCH_BUTTON).click();
+    info("Verify that the search page is shown with correct results");
+    $(byText(title)).should(Condition.exist);
   }
 
   /**
@@ -104,30 +103,15 @@ public class PortalManagePages {
    */
   public void addPage(String pageName, String title, String type, boolean... isMaxWindow) {
     info("Click on Add new Page button");
-    Utils.pause(3000);
-    evt.waitForAndGetElement(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_BTN, testBase.getDefaultTimeout(), 1);
-    evt.click(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_BTN);
-    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-    if (!pageName.isEmpty()) {
-      info("Input page name");
-      evt.type(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_PAGE_NAME, pageName, true);
+
+    $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_BTN).waitUntil(Condition.appears, 10000);
+    $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_BTN).click();
+    $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_PAGE_NAME).setValue(pageName);
+    $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_TITLE).setValue(title);
+    $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_TYPE_DROPBOX).selectOption("group");
+    $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGES_POPUP_SAVE_BTN).click();
     }
-    if (!title.isEmpty()) {
-      info("Input title");
-      evt.type(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_TITLE, title, true);
-    }
-    if (!type.isEmpty()) {
-      info("Select a type");
-      evt.select(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_TYPE_DROPBOX, type);
-    }
-    if (isMaxWindow.length > 0) {
-      info("Tick on show Max Window checkbox");
-      evt.check(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_CHECKBOX, 2);
-    }
-    info("Save all changes");
-    evt.click(ELEMENT_MANAGEPAGES_ADD_NEW_PAGES_POPUP_SAVE_BTN);
-    Utils.pause(2000);
-  }
+
 
   /**
    * Open page

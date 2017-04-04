@@ -110,6 +110,10 @@ public class NavigationToolbar {
   public void goToPotalPages() {
     info("-- Go to Page Management page --");
 
+
+   $(ELEMENT_LINK_SETUP).click();
+   $(ELEMENT_ADMINISTRATION_PORTAL).waitUntil(Condition.appears,10000);
+   $(ELEMENT_ADMINISTRATION_PORTAL).click();
     info("Page Managements is shown successfully");
     $(ELEMENT_LINK_SETUP).click();
     $(ELEMENT_ADMINISTRATION_PORTAL).click();
