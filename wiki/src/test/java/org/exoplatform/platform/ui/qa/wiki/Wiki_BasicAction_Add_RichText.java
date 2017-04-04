@@ -6,6 +6,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
@@ -53,6 +54,7 @@ public class Wiki_BasicAction_Add_RichText extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
+  @Tag("smoke")
   public void test01_AddAPageWithLinkWikiPageExisted() {
     info("Test 1: Add a page with link wiki page existed");
     /*
@@ -110,6 +112,7 @@ public class Wiki_BasicAction_Add_RichText extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
+  @Tag("smoke")
   public void test04_AddWebPage() {
     info("Test 4: Add web page");
     /*
