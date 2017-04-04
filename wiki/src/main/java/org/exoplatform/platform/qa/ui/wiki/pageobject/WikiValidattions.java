@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -24,7 +25,7 @@ public class WikiValidattions {
   /**
    * constructor
    *
-   * @param dr
+   * @param testBase
    */
 
   public WikiValidattions(TestBase testBase) {
@@ -124,7 +125,6 @@ public class WikiValidattions {
    * Verify Confirmation message
    *
    * @param mess
-   * @param isConfirm
    */
   public void verifyWarningMessage(String mess) {
     info("Verify that the warning message is shown");
@@ -688,7 +688,7 @@ public class WikiValidattions {
    */
   public void verifyTitleWikiPage(String title) {
     info("Verify that the wiki page is created and shown in the list");
-    evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_LINK.replace("${pageTitle}", title));
+    $(ELEMENT_WIKI_PAGE_LINK.replace("${pageTitle}", title));
     info("The wiki page is created successfully");
   }
 

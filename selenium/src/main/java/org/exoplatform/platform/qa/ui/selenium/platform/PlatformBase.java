@@ -20,6 +20,7 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME;
@@ -75,10 +76,11 @@ public class PlatformBase {
    */
   public void inputFrame(By frameLocator, String content) {
     info("Finding the frameLocator:" + frameLocator);
-    WebElement e = evt.waitForAndGetElement(frameLocator, testBase.getDefaultTimeout(), 1, 2);
+    WebElement e = $(frameLocator);
     info("Switch to the frame:" + frameLocator);
-    testBase.getExoWebDriver().getWebDriver().switchTo().frame(e);
-    WebElement inputsummary = testBase.getExoWebDriver().getWebDriver().switchTo().activeElement();
+    WebDriver webDriver = testBase.getExoWebDriver().getWebDriver();
+    webDriver.switchTo().frame(e);
+    WebElement inputsummary = webDriver.switchTo().activeElement();
     info("focus on the text area");
     inputsummary.click();
     info("Input the content:" + content);

@@ -7,7 +7,7 @@ public class WikiLocators {
   // *====================================================HOME
   // PAGE=================================================================*\\
   public static final String ELEMENT_WIKI_PAGE_LINK                                     =
-                                                    ".//*[@id='iconTreeExplorer']//*[contains(text(),'${pageTitle}')]";
+                                                    ".//*[@class='uiLeftContainerArea']//div[@id='UITreeExplorer']//*[@id='iconTreeExplorer']//a[contains(text(),'${pageTitle}')]";
 
   public static final By     ELEMENT_WIKI_HOME_PAGE_LINK                                =
                                                          By.xpath(".//*[@id='UIWikiBreadCrumb']//*[contains(text(),'Wiki Home')]");

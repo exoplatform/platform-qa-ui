@@ -35,6 +35,7 @@ public class Wiki_BasicAction_Add_RichText extends Base {
     info("Start setUpBeforeMethod");
 
     homePagePlatform = new HomePagePlatform(this);
+    wikiHomePage = new WikiHomePage(this);
     wikiValidattions = new WikiValidattions(this);
     wikiManagement = new WikiManagement(this);
     try {
