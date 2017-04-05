@@ -20,6 +20,9 @@
  */
 package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_NEXT_PAGE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -27,6 +30,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 
 import java.util.ArrayList;
 
+import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 
 import org.exoplatform.platform.qa.ui.selenium.Dialog;
@@ -75,8 +79,8 @@ public class UserAndGroupManagement {
    */
   public void goToGroupTab() {
     info("-- Choose Group Management tab--");
-    evt.click(ELEMENT_GROUP_MANAGEMENT_TAB);
-    evt.waitForAndGetElement(ELEMENT_GROUP_MANAGEMENT_INFO);
+    $(byText("Groups")).click();
+    $(byText("Group Info")).waitUntil(Condition.appears,10000);
     Utils.pause(2000);
   }
 
@@ -131,12 +135,11 @@ public class UserAndGroupManagement {
   public void addGroup(String groupName, String groupLabel, String groupDesc, boolean verify) {
     info("--Add a new group--");
     Utils.pause(500);
-    evt.click(ELEMENT_GROUP_ADD_NEW_ICON);
+   $(byClassName("uiIconPlus")).click();
+
     inputDataGroup(groupName, groupLabel, groupDesc);
-    evt.click(ELEMENT_SAVE_BUTTON);
-    if (verify && groupLabel != null && groupLabel != "") {
-      evt.waitForAndGetElement(ELEMENT_GROUP_ADDED.replace("${groupLabel}", groupLabel));
-    }
+    $(byText("Save")).click();
+    $(byText(groupLabel)).should(Condition.exist);
   }
 
   /**
@@ -202,19 +205,19 @@ public class UserAndGroupManagement {
    * @param groupDesc description of Group
    */
   public void inputDataGroup(String groupName, String groupLabel, String groupDesc) {
-    if (groupName != null) {
-      if (evt.waitForAndGetElement(ELEMENT_INPUT_GROUP_NAME, 5000, 0) != null) {
-        evt.type(ELEMENT_INPUT_GROUP_NAME, groupName, true);
-      }
-    }
-    if (groupLabel != null) {
-      evt.type(GateinLocator.ELEMENT_INPUT_LABEL, groupLabel, true);
-    }
-    if (groupDesc != null) {
-      evt.type(ELEMENT_TEXTAREA_DESCRIPTION, groupDesc, true);
-    }
-  }
 
+    $(ELEMENT_INPUT_GROUP_NAME).waitUntil(Condition.appears,10000);
+    $(ELEMENT_INPUT_GROUP_NAME).setValue(groupName);
+    $(ELEMENT_INPUT_LABEL).setValue(groupLabel);
+    $(ELEMENT_TEXTAREA_DESCRIPTION).setValue(groupDesc);
+  }
+  public void inputDataGroupForEdit(String groupLabel, String groupDesc) {
+
+    $(ELEMENT_INPUT_GROUP_NAME).waitUntil(Condition.appears,10000);
+
+    $(ELEMENT_INPUT_LABEL).setValue(groupLabel);
+    $(ELEMENT_TEXTAREA_DESCRIPTION).setValue(groupDesc);
+  }
   /**
    * function: Edit group
    *
@@ -226,12 +229,12 @@ public class UserAndGroupManagement {
    */
   public void editGroup(String oldName, String groupName, String groupLabel, String groupDesc, boolean verify) {
     info("-- Edit group: " + groupName + "--");
-    evt.click(ELEMENT_GROUP_EDIT_ICON);
+    $(byClassName("uiIconEdit")).click();
     Utils.pause(1000);
-    inputDataGroup(groupName, groupLabel, groupDesc);
-    evt.click(ELEMENT_SAVE_BUTTON);
+    inputDataGroupForEdit(groupLabel, groupDesc);
+    $(byText("Save")).click();
     if (verify) {
-      evt.waitForAndGetElement(ELEMENT_GROUP_ADDED.replace("${groupLabel}", groupLabel));
+      $(byText(groupLabel)).should(Condition.exist);
     }
   }
 
@@ -249,30 +252,31 @@ public class UserAndGroupManagement {
     String[] users = userNames.split(",");
     if (select) {
       if (testBase.isElementPresent(ELEMENT_GROUP_SEARCH_USER_ICON)) {
-        evt.click(ELEMENT_GROUP_SEARCH_USER_ICON);
+        $(ELEMENT_GROUP_SEARCH_USER_ICON).click();
       } else if (testBase.isElementPresent(By.xpath(ELEMENT_GROUP_SEARCH_USER_ICON_2))) {
-        evt.click(By.xpath(ELEMENT_GROUP_SEARCH_USER_ICON_2));
+        $(By.xpath(ELEMENT_GROUP_SEARCH_USER_ICON_2)).click();
       }
-      evt.waitForTextPresent(ELEMENT_MSG_SELECT_USER);
+
       for (String user : users) {
-        searchUserInGroupManagement(user, ELEMENT_USER_NAME, true);
-        evt.check(ELEMENT_CHECK.replace("${user}", user), 2);
+
+        $(ELEMENT_GROUP_SEARCH_USER_SEARCH_INPUT).setValue(user);
+        $(byClassName("btnSearchUser")).click();
+        $(byClassName("uiCheckbox")).click();
       }
-      evt.click(ELEMENT_ADD_BUTTON);
+      $(byText("Add")).click();
       Utils.pause(500);
       Assert.assertEquals(testBase.getValue(ELEMENT_INPUT_USERNAME), userNames);
     } else {
-      evt.type(ELEMENT_INPUT_USERNAME, userNames, true);
+      $(ELEMENT_INPUT_USERNAME).setValue(userNames);
     }
-    evt.select(ELEMENT_SELECT_MEMBERSHIP, memberShip);
-    evt.click(ELEMENT_SAVE_BUTTON_2);
+    $(byId("membership")).selectOption(memberShip);
+    $(ELEMENT_SAVE_BUTTON_2).click();
     if (verify) {
       for (String user : users) {
-        String addedUser = ELEMENT_ADDED_GROUP_USER_IN_TABLE.replace("${username}", user);
         if (testBase.isTextPresent(ELEMENT_MSG_TOTAL_PAGES)) {
-          plfBase.usePaginator(addedUser, ELEMENT_USER_NOT_FOUND.replace("${user}", user));
+          plfBase.usePaginator($(byText(user)), ELEMENT_USER_NOT_FOUND.replace("${user}", user));
         } else {
-          evt.waitForAndGetElement(addedUser);
+          $(byText(user)).should(Condition.exist);
         }
       }
     }
@@ -303,12 +307,13 @@ public class UserAndGroupManagement {
    */
   public void searchUserInGroupManagement(String user, String searchOption, boolean verify) {
     info("--Search user " + user + "--");
-    evt.click(ELEMENT_GROUP_SEARCH_USER_SEARCH_INPUT);
-    evt.type(ELEMENT_GROUP_SEARCH_USER_SEARCH_INPUT, user, true);
-    evt.select(ELEMENT_GROUP_SEARCH_USER_OPTION, searchOption);
-    evt.click(ELEMENT_GROUP_SEARCH_USER_SEARCH_ICON);
+    $(ELEMENT_GROUP_SEARCH_USER_SEARCH_INPUT).click();
+    $(ELEMENT_GROUP_SEARCH_USER_SEARCH_INPUT).setValue(user);
+    $(ELEMENT_GROUP_SEARCH_USER_OPTION).selectOption(searchOption);
+    $(ELEMENT_GROUP_SEARCH_USER_SEARCH_ICON).click();
     if (verify) {
-      evt.waitForAndGetElement(ELEMENT_SEARCH_GROUP_USER_IN_TABLE.replace("${username}", user));
+      //evt.waitForAndGetElement(ELEMENT_SEARCH_GROUP_USER_IN_TABLE.replace("${username}", user));
+$(byText(user)).should(Condition.exist);
     }
   }
 
@@ -322,10 +327,10 @@ public class UserAndGroupManagement {
   public void deleteGroup(String groupName, boolean verify, int... wait) {
     info("-- Delete group: " + groupName + "--");
     int waitTime = wait.length > 0 ? wait[0] : testBase.getDefaultTimeout();
-    evt.click(ELEMENT_GROUP_REMOVE_ICON);
+    $(byClassName("uiIconTrash")).click();
     alert.acceptAlert();
     if (verify) {
-      evt.waitForElementNotPresent(ELEMENT_GROUP_NODE.replace("${groupName}", groupName), waitTime);
+$(byText(groupName)).shouldNot(Condition.exist);
     }
     Utils.pause(1000);
   }
