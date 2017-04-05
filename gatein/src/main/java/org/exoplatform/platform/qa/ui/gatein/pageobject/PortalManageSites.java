@@ -34,16 +34,13 @@ public class PortalManageSites {
    *
    * @param site as acme or intranet
    */
-  public void goToEditNavigation(String site) {
-   /* evt.waitForAndGetElement(ELEMENT_MANAGESITES_EDIT_NAVIGATION_ICON.replace("${site}", site), 3000, 0);
-    evt.click(ELEMENT_MANAGESITES_EDIT_NAVIGATION_ICON.replace("${site}", site));
-    evt.waitForAndGetElement(ELEMENT_NAVIGATION_MANAGEMENT_POPUP_TITLE, 3000, 0);*/
-    $(byText("Edit Navigation")).click();
-//    evt.waitForAndGetElement(ELEMENT_MANAGESITES_EDIT_NAVIGATION_ICON.replace("${site}", site), 3000, 0);
+   public void goToEditNavigation() {
+
     $(byText("Edit Navigation")).waitUntil(Condition.appears,10000);
-  //  evt.click(ELEMENT_MANAGESITES_EDIT_NAVIGATION_ICON.replace("${site}", site));
+
     $(byText("Edit Navigation")).click();
-  //  evt.waitForAndGetElement(ELEMENT_NAVIGATION_MANAGEMENT_POPUP_TITLE, 3000, 0);
+
+    $(ELEMENT_NAVIGATION_MANAGEMENT_POPUP_TITLE).waitUntil(Condition.appears,10000);
   }
 
   /**

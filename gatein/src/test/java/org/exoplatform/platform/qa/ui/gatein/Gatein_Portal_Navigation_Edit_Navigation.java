@@ -72,7 +72,7 @@ public void test01_Add_Edit_Delete_NodePage() {
         Add node successfully
         */
     navigationToolbar.goToPotalSites();
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     info("Add a new node");
     navigationmanagement.addNode(nodeName,"");
     navigationmanagement.inputInfoPageSelector(namePage, titlePage, true,false,false);
@@ -92,7 +92,7 @@ public void test01_Add_Edit_Delete_NodePage() {
 
     *Expected Outcome:
         Page Setting, Permission setting tab are updated successfully with new changes*/
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     navigationmanagement.editNodePage(nodeName);
     pagecreationwizard.viewProperties();
     pagecreationwizard.changeProperties(newTitlePage,groupPath,memberships,true,false);
@@ -131,9 +131,12 @@ public void test01_Add_Edit_Delete_NodePage() {
 *<li> Test Case Name:Edit node.</li>
 */
 @Test
+@Smoke
+@Tag("smoke")
+
 public void test04_EditNode() {
     info("Test 04: Edit Node");
-    String portalName = portDeftData.getContentByIndex(1);
+    String portalName = "portalName"+getRandomNumber();
     String nodeName = "nodeName"+getRandomNumber();
     String newNodeName= "newNodeName"+getRandomNumber();
 
@@ -150,30 +153,31 @@ public void test04_EditNode() {
         The node is updated with the change value
         */
     navigationToolbar.goToPotalSites();
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     info("Add a new node");
     navigationmanagement.addNode(nodeName,"");
     navigationmanagement.saveNode();
 
     info("Edit a node");
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     navigationmanagement.editThisNode(nodeName);
     navigationmanagement.inputInfoNodeSetting(true, "",newNodeName,true,false);
     navigationmanagement.saveNode();
 
     info("Verify that the node is changed with new name");
-    portalmanagesites.goToEditNavigation(portalName);
-    waitForAndGetElement(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace(
-            "${name}",newNodeName));
+    portalmanagesites.goToEditNavigation();
+
+    $(byText(newNodeName)).should(Condition.exist);
     navigationmanagement.editThisNode(newNodeName);
     info("Verify that label mode is not checked");
-    waitForElementNotPresent(ELEMENT_NODE_SETTING_SWITCH_MODE_CHECKED);
+    $(byText("Extended label mode:")).shouldNotBe(Condition.selected);
+
     info("Verify that language box is not shown");
-    waitForElementNotPresent(ELEMENT_NODE_SETTING_LANGUAGE_BOX);
+    $(ELEMENT_NODE_SETTING_LANGUAGE_BOX).shouldNot(Condition.exist);
     info("Verify that visible is not checked");
-    waitForElementNotPresent(ELEMENT_NODE_SETTING_VISIBLE_CHECKED);
+    $(byText("Visible:")).shouldNotBe(Condition.selected);
     info("Verify that publish date and time is not shown");
-    waitForElementNotPresent(ELEMENT_NODE_SETTING_PUBLISH_DATE_TIME);
+  $(ELEMENT_NODE_SETTING_PUBLISH_DATE_TIME).shouldNot(Condition.exist);
     navigationmanagement.saveNode();
 }
 

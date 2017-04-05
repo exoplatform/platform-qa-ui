@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.gatein;
 
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.context.Smoke;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.*;
@@ -10,6 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -73,16 +76,18 @@ public class Gatein_Manage_Pages extends Base{
 *<li> Case ID:123101.</li>
 *<li> Test Case Name: Edit page of portal.</li>
 */
-/*
+
 @Test
+@Smoke
+@Tag("smoke")
 public  void test10_EditPageOfPortal() {
     info("Test 10: Edit page of portal");
     String num=getRandomNumber();
     String pageName ="pageName"+num;
     String title = "title"+num;
-    int index = appLayData.getRandomIndexByType(1);
+   /* int index = appLayData.getRandomIndexByType(1);
    String idName = appLayData.newId.get(index);
-   String name = appLayData.newTitle.get(index);
+   String name = appLayData.newTitle.get(index);*/
     /*Step Number: 1
     *Step Name: Step 1: Edit page of portal
     *Step Description:
@@ -101,16 +106,17 @@ public  void test10_EditPageOfPortal() {
     *Expected Outcome:
         - The page is updated with the change value
         */
-   /* navigationToolbar.goToPotalPages();
+   navigationToolbar.goToPotalPages();
     portalmanagepages.addPage(pageName, title,"");
     portalmanagepages.editPage(title,"");
-    pagecreationwizard.addApp("",name,ELEMENT_APPLICATION_APPLICATION.replace("${name}",idName),ELEMENT_PAGEEDITOR_VIEWPAGE);
+    pagecreationwizard.addApp("","Application Registry",$(byId("Administration/portlet_ApplicationRegistryPortlet")),$(byClassName("VIEW-PAGE")));
     info("Verify that all changes of page is saved");
     portalmanagepages.editPage(title,"");
-    waitForAndGetElement(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}",name),3000,0);
+    //waitForAndGetElement(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}",name),3000,0);
+    $(byText("Application Registry")).should(Condition.exist);
     pagecreationwizard.saveChangesPageEditor();
     portalmanagepages.deletePage(title,"");
-}*/
+}
 
 /**
 *<li> Case ID:123102.</li>

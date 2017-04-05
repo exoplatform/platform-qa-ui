@@ -7,6 +7,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
@@ -117,15 +118,18 @@ public class PageCreationWizard {
    * @param appLocator
    * @param layoutLocator
    */
-  public void addApp(String tabName, String nameApp, Object appLocator, Object layoutLocator) {
+  public void addApp(String tabName, String nameApp, SelenideElement appLocator, SelenideElement layoutLocator) {
     info("Add an application to the layout");
-    evt.click(ELEMENT_APPLICATION_TAB);
+    $(ELEMENT_APPLICATION_TAB).click();
     Utils.pause(1000);
     if (!tabName.isEmpty())
-      evt.click(ELEMENT_APPLICATION_SUB_TAB.replace("${tabName}", tabName));
-    evt.dragAndDropToObject(appLocator, layoutLocator);
+      //evt.click(ELEMENT_APPLICATION_SUB_TAB.replace("${tabName}", tabName));
+      $(byText(tabName)).click();
+    $(appLocator).dragAndDropTo(layoutLocator);
+
     info("Verify that the application is shown in the layout");
-    evt.waitForAndGetElement(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}", nameApp), 3000, 0);
+    //evt.waitForAndGetElement(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}", nameApp), 3000, 0);
+    $(byText(nameApp)).should(Condition.exist);
     info("The application is shown in the layout page");
     Utils.pause(2000);
     saveChangesPageEditor();

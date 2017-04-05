@@ -88,12 +88,11 @@ public class NavigationManagement {
     case EDIT_NODE_PAGE:
       info("Click on Edit node page");
     $(byText("Edit Node's Page")).click();
-      //$(ELEMENT_MANAGESITES_CONTEXTMENU_EDIT_NODE_PAGE_ICON).click();
       Utils.pause(2000);
       break;
     case EDIT_THIS_NODE:
       info("Click on Edit icon");
-      evt.click(ELEMENT_MANAGESITES_CONTEXTMENU_EDIT_ICON);
+      $(ELEMENT_MANAGESITES_CONTEXTMENU_EDIT_ICON).click();
       Utils.pause(2000);
       break;
     case COPY_NODE:
@@ -186,14 +185,9 @@ public class NavigationManagement {
   public void editNodePage(String name) {
     info("Edit a node page");
     info("Right click on the node");
-//    evt.rightClickOnElement(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name));
-
     contextClick($(byText(name)));
-    $(byText("Edit Node's Page")).click();
-
-
     info("Select Edit link");
-    //selectItem(specifiContextMenu.EDIT_NODE_PAGE);
+    selectItem(specifiContextMenu.EDIT_NODE_PAGE);
   }
 
   /**
@@ -205,7 +199,7 @@ public class NavigationManagement {
   public void editThisNode(String name) {
     info("Edit a node");
     info("Right click on the node");
-    evt.rightClickOnElement(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name));
+    contextClick($(byText(name)));
     info("Select Edit link");
     selectItem(specifiContextMenu.EDIT_THIS_NODE);
   }
@@ -293,9 +287,11 @@ public class NavigationManagement {
    */
   public void saveNode() {
     info("Save all changes of a node");
-    evt.waitForAndGetElement(ELEMENT_NAVIGATION_MANAGEMENT_SAVE);
+    //evt.waitForAndGetElement(ELEMENT_NAVIGATION_MANAGEMENT_SAVE);
+    $(ELEMENT_NAVIGATION_MANAGEMENT_SAVE).waitUntil(Condition.appears,10000);
     info("Click on Save button");
-    evt.click(ELEMENT_NAVIGATION_MANAGEMENT_SAVE);
+    //evt.click(ELEMENT_NAVIGATION_MANAGEMENT_SAVE);
+    $(ELEMENT_NAVIGATION_MANAGEMENT_SAVE).click();
     Utils.pause(1000);
     closeNavigationManagementPopup();
   }
@@ -304,7 +300,7 @@ public class NavigationManagement {
    * Save and close navigation mangement popup
    */
   public void closeNavigationManagementPopup() {
-    evt.click(ELEMENT_SAVE_NODE);
+    $(ELEMENT_SAVE_NODE).click();
     Utils.pause(2000);
   }
 
@@ -324,29 +320,31 @@ public class NavigationManagement {
                                    boolean isPublishDateTime) {
     if (isNotLabelMode == true) {
       info("Uncheck label mode");
-      evt.uncheck(ELEMENT_NODE_SETTING_SWITCH_MODE, 2);
+      $(byText("Extended label mode:")).click();
       if (!label.isEmpty()) {
         info("Input a label");
-        evt.type(ELEMENT_NODE_SETTING_LABEL_FIELD_2, label, true);
+
+        $(ELEMENT_NODE_SETTING_LABEL_FIELD_2).setValue(label);
       }
     } else {
       if (!language.isEmpty()) {
         info("Click on Language box");
-        evt.select(ELEMENT_NODE_SETTING_LANGUAGE_BOX, language);
+        $(ELEMENT_NODE_SETTING_LANGUAGE_BOX).selectOption(language);
       }
       if (!label.isEmpty()) {
         info("Input a label");
-        evt.type(ELEMENT_NODE_SETTING_LABEL_FIELD_1, label, true);
+        $(ELEMENT_NODE_SETTING_LABEL_FIELD_1).setValue(label);
       }
     }
 
     if (isVisibale == true) {
       info("Uncheck visible box");
-      evt.uncheck(ELEMENT_NODE_SETTING_VISIBLE, 2);
+      $(byText("Visible:")).click();
     } else {
       if (isPublishDateTime == true) {
         info("Check publish date and time box");
-        evt.check(ELEMENT_NODE_SETTING_PUBLISH_DATE_TIME, 2);
+
+        $(byText("Publication date & time:")).click();
       }
     }
   }

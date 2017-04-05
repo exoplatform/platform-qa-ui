@@ -24,6 +24,7 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_PAGE_CREATION_WIZARD;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_MANAGESITES_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
@@ -80,14 +81,22 @@ public class NavigationToolbar {
   public void goToPotalSites() {
     info("--Go to Portal-->Sites--");
     // evt.waitElementAndTryGetElement(ELEMENT_TOOLBAR_ADMINISTRATION);
-    evt.waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION, testBase.getDefaultTimeout(), 1);
-    evt.click(ELEMENT_TOOLBAR_ADMINISTRATION);
-    evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL, 6000, 0);
+    //evt.waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION, testBase.getDefaultTimeout(), 1);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,10000);
+
+    //evt.click(ELEMENT_TOOLBAR_ADMINISTRATION);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    //evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL, 6000, 0);
+    $(ELEMENT_ADMINISTRATION_PORTAL).waitUntil(Condition.appears,10000);
+
     evt.mouseOver(ELEMENT_ADMINISTRATION_PORTAL, true);
-    evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL_SITES, testBase.getDefaultTimeout(), 0);
-    evt.click(ELEMENT_ADMINISTRATION_PORTAL_SITES);
+    //evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL_SITES, testBase.getDefaultTimeout(), 0);
+    $(ELEMENT_ADMINISTRATION_PORTAL_SITES).waitUntil(Condition.appears,10000);
+    //evt.click(ELEMENT_ADMINISTRATION_PORTAL_SITES);
+    $(ELEMENT_ADMINISTRATION_PORTAL_SITES).click();
     Utils.pause(3000);
-    evt.waitForAndGetElement(GateinLocator.ELEMENT_MANAGESITES_TITLE, 3000, 0);
+    //evt.waitForAndGetElement(GateinLocator.ELEMENT_MANAGESITES_TITLE, 3000, 0);
+    $(ELEMENT_MANAGESITES_TITLE).waitUntil(Condition.appears,10000);
   }
 
   /**

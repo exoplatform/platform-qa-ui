@@ -101,7 +101,7 @@ public class PortalManagePages {
     info("Go to edit a page");
     searchPage(titlePage, "", type);
     info("Click on Edit button");
-    evt.click(ELEMENT_MAGEPAGES_CONTENT_ACTION_COLUMN_EDIT);
+    $(ELEMENT_MAGEPAGES_CONTENT_ACTION_COLUMN_EDIT).click();
     Utils.pause(2000);
   }
 
