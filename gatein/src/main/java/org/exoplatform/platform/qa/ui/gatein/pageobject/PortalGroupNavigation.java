@@ -1,11 +1,26 @@
 package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.actions;
+import static org.exoplatform.platform.qa.ui.selenium.DownloadFileControl.driver;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.WebDriverRunner;
+import org.exoplatform.platform.qa.ui.core.config.driver.Driver;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class PortalGroupNavigation {
 
@@ -31,11 +46,17 @@ public class PortalGroupNavigation {
    */
   public void addNewNavigationForGroup(String groupName) {
     info("Add navigation for group " + groupName);
-    evt.click(ELEMENT_ADD_NAVIGATION_BUTTON);
-    evt.click(ELEMENT_GROUP_SELECT_ADD_NAVIGATION.replace("${groupName}", groupName));
-    evt.waitForElementNotPresent(ELEMENT_GROUP_SELECT_ADD_NAVIGATION.replace("${groupName}", groupName));
-    evt.click(ELEMENT_CANCEL_BUTON);
-    evt.waitForAndGetElement(ELEMENT_GROUP_NAME.replace("${groupName}", groupName));
+    $(byText("Add Navigation")).click();
+/*    int x =$(byText("/"+groupName)).getLocation().getX();
+    int y =$(byText("/"+groupName)).getLocation().getY();
+    int x1=x+520;
+    int y1=y+20;
+
+  actions().moveByOffset(x1,y1).click();*/
+$(byText(groupName)).click();
+$(ELEMENT_CANCEL_BUTON).click();
+$(byText(groupName)).shouldNot(Condition.exist);
+$(byText(groupName)).waitUntil(Condition.appears,10000);
   }
 
   /**

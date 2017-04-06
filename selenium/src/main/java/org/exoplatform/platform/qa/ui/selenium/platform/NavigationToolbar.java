@@ -24,6 +24,7 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_PAGE_CREATION_WIZARD;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_ADD_NAVIGATION_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_MANAGESITES_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
@@ -104,13 +105,11 @@ public class NavigationToolbar {
   public void goToGroupSites() {
     info("--Go to Portal-->Sites--");
     evt.waitElementAndTryGetElement(ELEMENT_TOOLBAR_ADMINISTRATION);
-    evt.click(ELEMENT_TOOLBAR_ADMINISTRATION);
-    evt.mouseOver(ELEMENT_ADMINISTRATION_PORTAL, true);
-    evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL_GROUP_SITES, 3000, 0);
-    evt.click(ELEMENT_ADMINISTRATION_PORTAL_GROUP_SITES);
-    Utils.pause(3000);
-    evt.waitForAndGetElement(GateinLocator.ELEMENT_ADD_NAVIGATION_BUTTON, 3000, 0);
-  }
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    $(ELEMENT_ADMINISTRATION_PORTAL).hover();
+    $(ELEMENT_ADMINISTRATION_PORTAL_GROUP_SITES).waitUntil(Condition.appears,10000);
+    $(ELEMENT_ADMINISTRATION_PORTAL_GROUP_SITES).click();
+    $(byText("Add Navigation")).should(Condition.exist);  }
 
   /**
    * Go to Manage Sites page: administration-->Portal->Pages

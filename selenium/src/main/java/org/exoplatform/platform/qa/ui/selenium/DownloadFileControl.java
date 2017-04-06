@@ -34,7 +34,7 @@ import java.util.Set;
 @SuppressWarnings("deprecation")
 public class DownloadFileControl {
 
-  static WebDriver driver;
+  public static WebDriver driver;
 
   public DownloadFileControl(WebDriver driverObject) {
     driver = driverObject;
