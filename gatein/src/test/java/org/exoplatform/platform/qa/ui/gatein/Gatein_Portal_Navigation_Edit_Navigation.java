@@ -93,7 +93,7 @@ public void test01_Add_Edit_Delete_NodePage() {
     *Expected Outcome:
         Page Setting, Permission setting tab are updated successfully with new changes*/
     portalmanagesites.goToEditNavigation();
-    navigationmanagement.editNodePage(nodeName);
+    navigationmanagement.editNodePage(nodeName);//go to declaration de automate right click
     pagecreationwizard.viewProperties();
     pagecreationwizard.changeProperties(newTitlePage,groupPath,memberships,true,false);
 
@@ -123,7 +123,7 @@ public void test01_Add_Edit_Delete_NodePage() {
 
     *Expected Outcome:
         - The node is removed from the list*/
-    navigationmanagement.deleteNode(nodeName);
+    navigationmanagement.deleteNode(nodeName);// go to declaration to automate right click
 }
 
 /**
@@ -133,7 +133,7 @@ public void test01_Add_Edit_Delete_NodePage() {
 @Test
 @Smoke
 @Tag("smoke")
-
+//Right click manuammy
 public void test04_EditNode() {
     info("Test 04: Edit Node");
     String portalName = "portalName"+getRandomNumber();
@@ -160,7 +160,7 @@ public void test04_EditNode() {
 
     info("Edit a node");
     portalmanagesites.goToEditNavigation();
-    navigationmanagement.editThisNode(nodeName);
+    navigationmanagement.editThisNode(nodeName);//go to declaration to automate right click
     navigationmanagement.inputInfoNodeSetting(true, "",newNodeName,true,false);
     navigationmanagement.saveNode();
 

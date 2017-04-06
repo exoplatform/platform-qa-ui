@@ -456,9 +456,7 @@ $(byText(groupName)).shouldNot(Condition.exist);
   public void goToEditUserInfo(String username) {
     info("--Search user " + username + "--");
     if (testBase.isTextPresent("Search")) {
-      //evt.type(ELEMENT_INPUT_SEARCH_USER_NAME, username, true);
       $(ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);
-      //evt.select(ELEMENT_SELECT_SEARCH_OPTION, ELEMENT_MSG_SEARCH_USER_NAME);
     }
     $(byTitle("Quick Search")).click();
     info("--Editing user " + username + "--");
