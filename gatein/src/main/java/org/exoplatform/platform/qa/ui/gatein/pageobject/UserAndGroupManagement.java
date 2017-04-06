@@ -454,15 +454,15 @@ $(byText(groupName)).shouldNot(Condition.exist);
    * @param username name of user need to edit information
    */
   public void goToEditUserInfo(String username) {
-    String userEditIcon = ELEMENT_USER_EDIT_ICON.replace("${username}", username);
     info("--Search user " + username + "--");
     if (testBase.isTextPresent("Search")) {
-      evt.type(GateinLocator.ELEMENT_INPUT_SEARCH_USER_NAME, username, true);
-      evt.select(GateinLocator.ELEMENT_SELECT_SEARCH_OPTION, GateinLocator.ELEMENT_MSG_SEARCH_USER_NAME);
+      //evt.type(ELEMENT_INPUT_SEARCH_USER_NAME, username, true);
+      $(ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);
+      //evt.select(ELEMENT_SELECT_SEARCH_OPTION, ELEMENT_MSG_SEARCH_USER_NAME);
     }
-    evt.click(GateinLocator.ELEMENT_SEARCH_ICON_USERS_MANAGEMENT);
+    $(byTitle("Quick Search")).click();
     info("--Editing user " + username + "--");
-    evt.click(userEditIcon);
+    $(byClassName("actionIcon")).click();
     Utils.pause(1000);
   }
 
@@ -475,26 +475,19 @@ $(byText(groupName)).shouldNot(Condition.exist);
    * @param email email of user
    */
   public void editUserInfo_AccountTab(String first, String last, String displayName, String email) {
-    evt.waitForAndGetElement(ELEMENT_USER_ACCOUNT_INFO_TAB, 2000, 1);
-    evt.click(ELEMENT_USER_ACCOUNT_INFO_TAB);
     info("--editUserInfo_AccountTab--");
-    if (first != null && first != "") {
-      evt.type(GateinLocator.ELEMENT_FIRSTNAME, first, true);
-    }
-    if (last != null && last != "") {
-      evt.type(GateinLocator.ELEMENT_LASTNAME, last, true);
-    }
-    if (displayName != null && displayName != "") {
-      evt.type(ELEMENT_DISPLAY_NAME, displayName, true);
-    }
-    if (email != null && email != "") {
-      evt.type(GateinLocator.ELEMENT_EMAIL, email, true);
-    }
-    evt.click(ELEMENT_SAVE_BUTTON);
+
+    $(byClassName("uiIconViewUserInfo")).click();
+    $(ELEMENT_FIRSTNAME).setValue(first);
+    $(ELEMENT_LASTNAME).setValue(last);
+    $(ELEMENT_DISPLAY_NAME).setValue(displayName);
+    $(ELEMENT_EMAIL).setValue(email);
+
+    $(byText("Save")).click();
     Utils.pause(3000);
-    evt.waitForElementNotPresent(ELEMENT_SAVE_BUTTON);
-    evt.waitForMessage("The user profile has been updated.");
-    evt.click(GateinLocator.ELEMENT_CLOSE_MESSAGE);
+    $(byText("Save")).waitUntil(Condition.disappears,10000);
+    $(byText("The user profile has been updated.")).waitUntil(Condition.appears,10000);
+    $(byText("OK")).click();
   }
 
   /**
@@ -688,24 +681,21 @@ $(byText(groupName)).shouldNot(Condition.exist);
     info("--Deleting user " + username + "--");
     info("--Search user " + username + "--");
     if (testBase.isTextPresent("Search")) {
-      evt.type(GateinLocator.ELEMENT_INPUT_SEARCH_USER_NAME, username, true);
-      evt.select(GateinLocator.ELEMENT_SELECT_SEARCH_OPTION, GateinLocator.ELEMENT_MSG_SEARCH_USER_NAME);
+      //evt.select(GateinLocator.ELEMENT_SELECT_SEARCH_OPTION, GateinLocator.ELEMENT_MSG_SEARCH_USER_NAME);
+      $(ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);
     }
 
-    evt.click(GateinLocator.ELEMENT_SEARCH_ICON_USERS_MANAGEMENT, 0, true);
-    if (evt.waitForAndGetElement(ELEMENT_USER_DELETE_ICON.replace("${username}", username), 2000, 0) != null) {
-      Utils.pause(2000);
-      evt.click(ELEMENT_USER_DELETE_ICON.replace("${username}", username));
+    $(byTitle("Quick Search")).click();
+
+      $(byClassName("uiIconDeleteUser")).click();
       alert.acceptAlert();
-      Utils.pause(1000);
-      evt.type(GateinLocator.ELEMENT_INPUT_SEARCH_USER_NAME, username, true);
-      evt.select(GateinLocator.ELEMENT_SELECT_SEARCH_OPTION, GateinLocator.ELEMENT_MSG_SEARCH_USER_NAME);
-      evt.click(GateinLocator.ELEMENT_SEARCH_ICON_USERS_MANAGEMENT);
-      Utils.pause(3000);
-      evt.waitForMessage(ELEMENT_MSG_RESULT);
+      $(ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);
+     // evt.select(GateinLocator.ELEMENT_SELECT_SEARCH_OPTION, GateinLocator.ELEMENT_MSG_SEARCH_USER_NAME);
+    $(byTitle("Quick Search")).click();
+    $(byText("No result found.")).waitUntil(Condition.appears,10000);
       dialog.closeMessageDialog();
-      Utils.pause(2000);
-    }
+
+
   }
 
   /**

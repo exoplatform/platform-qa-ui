@@ -24,6 +24,9 @@ import org.exoplatform.platform.qa.ui.selenium.logger.Logger;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
+
 public class Dialog {
 
   // Dialog warning
@@ -73,9 +76,9 @@ public class Dialog {
   public void closeMessageDialog() {
     Logger.info("--Closing message dialog--");
     if (testBase.ieFlag) {
-      evt.click(ELEMENT_MESSAGE_DIALOG_CLOSE_ICON_IE);
+     $(ELEMENT_MESSAGE_DIALOG_CLOSE_ICON_IE).click();
     } else {
-      evt.click(ELEMENT_MESSAGE_DIALOG_CLOSE_ICON);
+      $(byTitle("Close Window")).click();
     }
     Utils.pause(1000);
   }

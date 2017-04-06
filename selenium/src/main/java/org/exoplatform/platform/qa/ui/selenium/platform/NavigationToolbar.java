@@ -41,6 +41,7 @@ import org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 
 public class NavigationToolbar {
 
@@ -80,22 +81,20 @@ public class NavigationToolbar {
    */
   public void goToPotalSites() {
     info("--Go to Portal-->Sites--");
-    // evt.waitElementAndTryGetElement(ELEMENT_TOOLBAR_ADMINISTRATION);
-    //evt.waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION, testBase.getDefaultTimeout(), 1);
+
     $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,10000);
 
-    //evt.click(ELEMENT_TOOLBAR_ADMINISTRATION);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-    //evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL, 6000, 0);
+
     $(ELEMENT_ADMINISTRATION_PORTAL).waitUntil(Condition.appears,10000);
 
     evt.mouseOver(ELEMENT_ADMINISTRATION_PORTAL, true);
-    //evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL_SITES, testBase.getDefaultTimeout(), 0);
+
     $(ELEMENT_ADMINISTRATION_PORTAL_SITES).waitUntil(Condition.appears,10000);
-    //evt.click(ELEMENT_ADMINISTRATION_PORTAL_SITES);
+
     $(ELEMENT_ADMINISTRATION_PORTAL_SITES).click();
-    Utils.pause(3000);
-    //evt.waitForAndGetElement(GateinLocator.ELEMENT_MANAGESITES_TITLE, 3000, 0);
+
+
     $(ELEMENT_MANAGESITES_TITLE).waitUntil(Condition.appears,10000);
   }
 
@@ -551,24 +550,14 @@ public class NavigationToolbar {
    */
   public void goToAddUser() {
     info("Go to add user page");
-    int repeat = 0;
-    while (evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_USERS, 3000, 0) == null) {
-      if (repeat > 5)
-        break;
+
       info("Click on administration icon");
-      evt.click(ELEMENT_TOOLBAR_ADMINISTRATION);
-      repeat++;
-    }
-    info("add user page is shown");
-    info("evt.mouse over on community link");
-    evt.mouseOver(ELEMENT_ADMINISTRATION_USERS, true);
-    if (evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL_ADD_USERS, 3000, 0) != null) {
-      info("evt.click on Add user link");
-      evt.click(ELEMENT_ADMINISTRATION_PORTAL_ADD_USERS);
-    } else {
-      info("Cannot evt.click on add user link. Go to this page by link");
-      testBase.getExoWebDriver().getWebDriver().get(testBase.getExoWebDriver().getBaseUrl() + "/g/:platform:administrators/administration/newStaff");
-    }
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,10000);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    $(byText("Community")).waitUntil(Condition.appears,10000);
+    $(byText("Community")).hover();
+    $(byText("Add Users")).click();
+
   }
 
   /**

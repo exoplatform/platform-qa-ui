@@ -1,11 +1,16 @@
 package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
+import static com.codeborne.selenide.Condition.appear;
+import static com.codeborne.selenide.Condition.appears;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.util.ArrayList;
 
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.selenium.*;
 import org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -41,20 +46,19 @@ public class UserAddManagement {
    * @param Firstname
    * @param lastName
    */
-  public void addUser(String userName, String Password, String email, String Firstname, String lastName) {
+  public void addUser(String userName, String password, String email, String firstname, String lastName) {
     info("Add an user");
     Utils.pause(3000);
-    evt.waitForAndGetElement(ELEMENT_USERNAME, 60000, 0);
-    evt.type(ELEMENT_USERNAME, userName, true);
-    evt.type(ELEMENT_PASSWORD, Password, true);
-    evt.type(ELEMENT_CONFIRM_PASSWORD, Password, true);
-    evt.type(ELEMENT_EMAIL, email, true);
-    evt.type(ELEMENT_FIRSTNAME, Firstname, true);
-    evt.type(ELEMENT_LASTNAME, lastName, true);
-    evt.click(ELEMENT_SAVE_ADD_USER);
-    Utils.pause(3000);
-    evt.waitForMessage(ELEMENT_MSG_CREATE_ACCOUNT);
-    evt.click(ELEMENT_CLOSE_MESSAGE);
+$(ELEMENT_USERNAME).waitUntil(appears,10000);
+$(ELEMENT_USERNAME).setValue(userName);
+    $(ELEMENT_PASSWORD).setValue(password);
+    $(ELEMENT_CONFIRM_PASSWORD).setValue(password);
+    $(ELEMENT_EMAIL).setValue(email);
+    $(ELEMENT_FIRSTNAME).setValue(firstname);
+    $(ELEMENT_LASTNAME).setValue(lastName);
+    $(ELEMENT_SAVE_ADD_USER).click();
+    $(byText("You have registered a new account.")).waitUntil(appears,10000);
+    $(byText("OK")).click();
     info("Finish adding an user");
   }
 

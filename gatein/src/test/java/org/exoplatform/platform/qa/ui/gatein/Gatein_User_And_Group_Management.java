@@ -1,19 +1,23 @@
 package org.exoplatform.platform.qa.ui.gatein;
 
 
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.context.Smoke;
-import org.exoplatform.platform.qa.ui.gatein.pageobject.MyDashBoard;
-import org.exoplatform.platform.qa.ui.gatein.pageobject.PageCreationWizard;
-import org.exoplatform.platform.qa.ui.gatein.pageobject.PortalManagePages;
-import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
+import org.exoplatform.platform.qa.ui.gatein.pageobject.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
+import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_USER_MANAGEMENT_ACTIVE_TAB;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_USER_MANAGEMENT_TAB;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 /**
@@ -25,12 +29,14 @@ public class Gatein_User_And_Group_Management extends Base{
 	
 	NavigationToolbar navigationToolbar;
 	UserAndGroupManagement userandgroupmanagement;
+	UserAddManagement useraddmanagement;
 	@BeforeEach
 	public void setupBeforeMethod() {
 		info("Start setUpBeforeMethod");
 
 		navigationToolbar = new NavigationToolbar(this);
-		userandgroupmanagement=new UserAndGroupManagement(this);}
+		userandgroupmanagement=new UserAndGroupManagement(this);
+	useraddmanagement=new UserAddManagement(this);}
 	
 	/**
 	*<li> Case ID:123072.</li>
@@ -120,30 +126,32 @@ public class Gatein_User_And_Group_Management extends Base{
 	*<li> Case ID:123070.</li>
 	*<li> Test Case Name: Delete user.</li>
 	*/
-	/*@Test
+	@Test
+	@Smoke
+	@Tag("smoke")
 	public void test08_09_10_EditSearchDeleteUser(){
-		String username = userInfoData.getUserNameByIndex(5)+getRandomString();
-		String password = userInfoData.getPassWordByIndex(5)+getRandomString();
-		String firstName = userInfoData.getFirstNameByIndex(5)+getRandomString();
-		String lastName = userInfoData.getLastNameByIndex(5)+getRandomString();
-		String email = userInfoData.getEmailByIndex(5)+getRandomString()+mailSuffixData.getMailSuffixByIndex(2);
+		String username = "username"+getRandomNumber();
+		String password = "password"+getRandomNumber();
+		String firstName = getRandomString();
+		String lastName = getRandomString();
+		String email =firstName+getRandomNumber()+"@gmail.com";
 		
-		String newFirstName = userInfoData.getFirstNameByIndex(5)+getRandomString();
-		String newLastName = userInfoData.getLastNameByIndex(5)+getRandomString();
-		String newDisplayName = userInfoData.getDisplayNameByIndex(5)+getRandomString();
-		String newEmail = userInfoData.getEmailByIndex(5)+getRandomString()+mailSuffixData.getMailSuffixByIndex(2);
+		String newFirstName = getRandomString();
+		String newLastName =getRandomString();
+		String newDisplayName = "newDisplayName"+getRandomNumber();
+		String newEmail = newFirstName+getRandomNumber()+"@gmail.com";
 		
-		String searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
+		/*String searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
 		String searchLastName = userSearchOptionData.getUserSearchOptionByIndex(1);
 		String searchFirstName = userSearchOptionData.getUserSearchOptionByIndex(2);
 		String searchEmail = userSearchOptionData.getUserSearchOptionByIndex(3);
 		
 		String searchUser1 = userInfoData.getLastNameByIndex(2);
-		String searchUser2 = userInfoData.getFirstNameByIndex(4);
-		
-		navToolBar.goToAddUser();
+		String searchUser2 = userInfoData.getFirstNameByIndex(4);*/
+
+		navigationToolbar.goToAddUser();
 		info("Create new user");
-		addUserPage.addUser(username, password, email, firstName, lastName);
+		useraddmanagement.addUser(username, password, email, firstName, lastName);
 		
 		/*Step Number: 1
 		*Step Name: Step 1: Edit User information
@@ -155,13 +163,14 @@ public class Gatein_User_And_Group_Management extends Base{
 		*Expected Outcome: 
 			- Users list is shown properly
 			- User is updated with the change value*/
-		/*info("Test Case 08: Edit user information");
-		navToolBar.goToUsersAndGroupsManagement();
-		if(waitForAndGetElement(userAndGroup.ELEMENT_USER_MANAGEMENT_ACTIVE_TAB, 3000, 0) == null)
-			click(userAndGroup.ELEMENT_USER_MANAGEMENT_TAB);
-		userAndGroup.goToEditUserInfo(username);
-		userAndGroup.editUserInfo_AccountTab(newFirstName, newLastName, newDisplayName, newEmail);
-		waitForTextPresent(newFirstName);
+		info("Test Case 08: Edit user information");
+		navigationToolbar.goToUsersAndGroupsManagement();
+		/*if(waitForAndGetElement(ELEMENT_USER_MANAGEMENT_ACTIVE_TAB, 3000, 0) == null)
+			click(ELEMENT_USER_MANAGEMENT_TAB);*/
+		userandgroupmanagement.goToEditUserInfo(username);
+		userandgroupmanagement.editUserInfo_AccountTab(newFirstName, newLastName, newDisplayName, newEmail);
+		//waitForTextPresent(newFirstName);
+		$(byText(newFirstName)).should(Condition.exist);
 		
 		
 		/*Step Number: 2
@@ -176,10 +185,10 @@ public class Gatein_User_And_Group_Management extends Base{
 		*Expected Outcome: 
 			- The results are displayed matching with the search keyword*/
 		/*info("Test Case 09: Search user follow username, last name, first name, email");
-		userAndGroup.searchUser(DATA_USER1, searchUserName);
-		userAndGroup.searchUser(searchUser1, searchLastName);
-		userAndGroup.searchUser(searchUser2, searchFirstName);
-		userAndGroup.searchUser(newEmail, searchEmail);
+		userandgroupmanagement.searchUser(DATA_USER1, searchUserName);
+		userandgroupmanagement.searchUser(searchUser1, searchLastName);
+		userandgroupmanagement.searchUser(searchUser2, searchFirstName);
+		userandgroupmanagement.searchUser(newEmail, searchEmail);
 		
 		
 		/*Step Number: 3
@@ -190,8 +199,8 @@ public class Gatein_User_And_Group_Management extends Base{
 		*Input Data: 
 		*Expected Outcome: 
 			- - The user will be removed from the list*/
-		/*info("Test Case 10: Delete user");
-		userAndGroup.deleteUser(username);
-	}*/
+		info("Test Case 10: Delete user");
+		userandgroupmanagement.deleteUser(username);
+	}
 	
 }
