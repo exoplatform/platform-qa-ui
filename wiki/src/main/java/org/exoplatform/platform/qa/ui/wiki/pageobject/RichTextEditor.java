@@ -522,8 +522,7 @@ public class RichTextEditor {
     }
     info("Input a content for the page");
     if (!content.isEmpty()) {
-      plf.inputFrame(ELEMENT_CONTENT_WIKI_FRAME, content);
-    }
+$(ELEMENT_CONTENT_WIKI_FRAME).sendKeys(content);    }
   }
 
   /**

@@ -86,20 +86,15 @@ public class WikiHomePage {
    * @param title
    */
   public void deleteWiki(String title) {
-    if (evt.waitForAndGetElement(ELEMENT_TREE_WIKI_NAME.replace("${name}", title), 3000, 0) != null) {
-      info("Go to delete wiki page...");
-      info("Select the wiki page to delete");
-      selectAPage(title);
-      info("Click on More link");
-      $(ELEMENT_MORE_LINK).click();
-      if (evt.waitForAndGetElement(ELEMENT_DELETE_LINK, 5000, 0) == null) {
-        evt.mouseOverAndClick(ELEMENT_DELETE_LINK);
-      } else {
-        $(ELEMENT_DELETE_LINK).click();
-      }
-      evt.waitForAndGetElement(ELEMENT_CONFIRM_WIKI_DELETE, 2000, 0).click();
-      evt.waitForElementNotPresent(ELEMENT_TREE_WIKI_NAME.replace("${name}", title));
-    }
+
+    info("Select the wiki page to delete");
+    selectAPage(title);
+    info("Click on More link");
+    $(ELEMENT_MORE_LINK).click();
+    $(ELEMENT_DELETE_LINK).click();
+    $(ELEMENT_CONFIRM_WIKI_DELETE).click();
+    $(byText(title)).shouldNot(Condition.exist);
+
   }
 
   /**
@@ -132,7 +127,7 @@ public class WikiHomePage {
   public void selectAPage(String page) {
     info("Go to a wiki page...");
     info("Select the wiki page");
-    $(ELEMENT_TREE_WIKI_NAME.replace("${name}", page)).click();
+    $(byText(page)).click();
     info("The page is shown");
   }
 
