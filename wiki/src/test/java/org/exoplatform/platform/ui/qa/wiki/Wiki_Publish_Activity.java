@@ -104,10 +104,12 @@ public class Wiki_Publish_Activity extends Base {
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
+	@Smoke
+	@Tag("smoke")
 	public  void test02_DeleteWikiPage() {
 		info("Test 2: Delete wiki page");
-		String title = ""+getRandomNumber();
-		String content = ""+getRandomNumber();
+		String title = "title"+getRandomNumber();
+		String content = "content"+getRandomNumber();
 
 		/*Step Number: 1
 		 *Step Name: Step 1: Add new wiki page
@@ -127,7 +129,7 @@ public class Wiki_Publish_Activity extends Base {
 		richTextEditor.addSimplePage(title,content);
 		wikiManagement.saveAddPage();
 		info("Verify that the new wiki page is created successfully");
-		waitForAndGetElement(ELEMENT_TREE_WIKI_NAME.replace("${name}",title),2000,0);
+		$(byText(title)).should(Condition.exist);
 		info("Verify that an activity is added to the activity stream");
 		homePagePlatform.goToHomePage();
 		activityStream.checkActivity(title);
@@ -145,8 +147,7 @@ public class Wiki_Publish_Activity extends Base {
 		homePagePlatform.goToWiki();
 		wikiHomePage.deleteWiki(title);
 		homePagePlatform.goToHomePage();
-		waitForElementNotPresent(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("{$name}",title));
-	}
+		$(byText(title)).shouldNot(Condition.exist);	}
 
 
 }

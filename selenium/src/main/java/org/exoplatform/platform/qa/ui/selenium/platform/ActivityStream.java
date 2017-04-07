@@ -91,9 +91,7 @@ public class ActivityStream {
    */
   public void checkActivity(String name) {
     info("Verify that the activity of the name:" + name + " is shown");
-    evt.waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("${title}", name)),
-                             testBase.getDefaultTimeout(),
-                             1);
+    $(byText(name)).should(Condition.exist);
     info("The activity of the name:" + name + " is shown successfully");
   }
 
