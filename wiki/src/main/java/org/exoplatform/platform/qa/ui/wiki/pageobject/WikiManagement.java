@@ -57,11 +57,8 @@ public class WikiManagement {
    * Change to Source Editor mode
    */
   public void goToSourceEditor() {
-    if (evt.waitForAndGetElement(ELEMENT_SOURCE_EDITOR_BUTTON, 5000, 0) != null) {
-      info("Go to Source Editor");
-      evt.click(ELEMENT_SOURCE_EDITOR_BUTTON, 0, true);
-    }
-    evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT);
+    $(ELEMENT_SOURCE_EDITOR_BUTTON).click();
+    $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.appears,10000);
   }
 
   /**

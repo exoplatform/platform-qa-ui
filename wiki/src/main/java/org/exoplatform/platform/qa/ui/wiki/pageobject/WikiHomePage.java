@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -76,8 +77,8 @@ public class WikiHomePage {
    */
   public void goToAPage(String title) {
     info("-- Go to wiki page --");
-    $(By.xpath(ELEMENT_WIKI_PAGE_LINK.replace("${pageTitle}", title.replace(" ", "_")))).click();
-  }
+    $(byText(title)).click();
+    $(ELEMENT_WIKI_HOME_PAGE_TEXT).shouldNot(Condition.exist);  }
 
   /**
    * Select any page
