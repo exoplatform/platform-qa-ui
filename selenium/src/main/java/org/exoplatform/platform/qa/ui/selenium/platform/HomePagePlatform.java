@@ -32,8 +32,8 @@ public class HomePagePlatform {
    */
   public void goToWiki() {
     info("--Go to Wiki--");
-    evt.waitForAndGetElement(ELEMENT_WIKI_LINK_PLF, testBase.getDefaultTimeout(), 1);
-    evt.click(ELEMENT_WIKI_LINK_PLF);
+    $(ELEMENT_WIKI_LINK_PLF).waitUntil(Condition.appears,10000);
+    $(ELEMENT_WIKI_LINK_PLF).click();
   }
 
   /**

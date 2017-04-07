@@ -1,8 +1,11 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
+import static com.codeborne.selenide.Selectors.byId;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -90,8 +93,8 @@ public class WikiManagement {
   public void saveAddPage() {
     info("Save all changes");
     Utils.pause(2000);
-    evt.click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
-    evt.waitForElementNotPresent(ELEMENT_SAVE_BUTTON_ADD_PAGE);
+    $(byId("UISubmitToolBarBottom_SavePage_")).click();
+    $(ELEMENT_SAVE_BUTTON_ADD_PAGE).shouldNotBe(Condition.present);
     info("Wiki page simple is created successfully");
   }
 

@@ -492,9 +492,10 @@ public class RichTextEditor {
    */
   public void goToWebPageLink() {
     info("Click on Link menu");
-    evt.mouseOverAndClick(ELEMENT_LINK);
+    $(ELEMENT_LINK).click();
     info("Click on Web Page Link menu");
-    evt.mouseOverAndClick(ELEMENT_WEB_PAGE_LINK_MENU);
+    $(ELEMENT_WEB_PAGE_LINK_MENU).click();
+    Utils.pause(500);
   }
 
   /**
