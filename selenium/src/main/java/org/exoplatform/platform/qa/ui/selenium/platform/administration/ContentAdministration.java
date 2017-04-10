@@ -1,11 +1,14 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.administration;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.getElement;
 import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-import org.exoplatform.platform.qa.ui.ecms.pageobject.ECMS_Permission;
+import com.codeborne.selenide.Condition;
+import org.exoplatform.platform.qa.ui.selenium.platform.ecms.ECMS_Permission;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -54,9 +57,12 @@ public class ContentAdministration {
     switch (main) {
     case EXPLORER:
       info("Select Explorer tab");
-      if (evt.waitForAndGetElement(ELEMENT_EXPLORER_CATEGORIES_ECM_FUNCTIONS, 5000, 0) != null)
-        evt.click(ELEMENT_EXPLORER_CATEGORIES_ECM_FUNCTIONS);
+      //if (evt.waitForAndGetElement(ELEMENT_EXPLORER_CATEGORIES_ECM_FUNCTIONS, 5000, 0) != null)
+      //  evt.click(ELEMENT_EXPLORER_CATEGORIES_ECM_FUNCTIONS);
+      $(ELEMENT_EXPLORER_CATEGORIES_ECM_FUNCTIONS).waitUntil(Condition.appears,10000);
+      $(ELEMENT_EXPLORER_CATEGORIES_ECM_FUNCTIONS).click();
       break;
+
     case ADVANCED:
       info("Select Advanced tab");
       if (evt.waitForAndGetElement(ELEMENT_ADVANCED_CATEGORIES_ECM_FUNCTIONS, 5000, 0) != null)
@@ -102,7 +108,7 @@ public class ContentAdministration {
       break;
     case DRIVES:
       info("Select Drives function");
-      evt.click(ELEMENT_ECMS_FUNCTIONS_DRIVES);
+      $(ELEMENT_ECMS_FUNCTIONS_DRIVES).click();
       break;
     case VIEW:
       info("Select Views function");
@@ -207,17 +213,18 @@ public class ContentAdministration {
    */
   public void addDrives(String name, String permission, specificView[] applyViews) {
     info("Click on Add button of the drive in the list");
-    evt.click(ELEMENT_ECM_EXPLORER_DRIVES_ADD_DRIVES);
+    $(ELEMENT_ECM_EXPLORER_DRIVES_ADD_DRIVES).click();
     info("Type a name for the drive");
-    evt.type(ELEMENT_ECM_EXPLORER_NAME_DRIVES_FORM, name, true);
+   // evt.type(ELEMENT_ECM_EXPLORER_NAME_DRIVES_FORM, name, true);
+    $(ELEMENT_ECM_EXPLORER_NAME_DRIVES_FORM).setValue(name);
     info("Click on Add Permission button for the drive");
-    evt.click(ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON);
+    $(ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON).click();
     if (permission == "any") {
       info("Set 'any' permission for the drive");
-      evt.click(ELEMENT_ECM_COMMON_ANY_PERMISSION);
+      $(ELEMENT_ECM_COMMON_ANY_PERMISSION).click();
     }
     info("Click on Aplly Views tab");
-    evt.click(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_FORM);
+    $(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_FORM).click();
     for (specificView arrayElement : applyViews) {
       info("Select a view type for the drive");
       switch (arrayElement) {
@@ -264,8 +271,8 @@ public class ContentAdministration {
    *          other will be uncheck)
    */
   public void editDrives(String name, specificView[] applyViews, String... views) {
-    evt.click(By.xpath(ELEMENT_ECM_EXPLORER_DRIVES_EDIT_LIST.replace("{$name}", name)));
-    evt.click(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_FORM);
+    $(byClassName("actionIcon")).click();
+   $(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_FORM).click();
     evt.uncheck(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ADMIN, 2);
     evt.uncheck(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_CATEGORIES, 2);
     evt.uncheck(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ICONS, 2);
@@ -305,10 +312,13 @@ public class ContentAdministration {
    * @param name
    */
   public void deleteDrives(String name) {
-    evt.click(By.xpath(ELEMENT_ECM_EXPLORER_DRIVES_DELETE_LIST.replace("{$name}", name)));
+   // evt.click(By.xpath(ELEMENT_ECM_EXPLORER_DRIVES_DELETE_LIST.replace("{$name}", name)));
+    $(byTitle("Delete")).click();
     alert.acceptAlert();
-    evt.waitForElementNotPresent(By.xpath(ELEMENT_ECM_EXPLORER_DRIVES_DELETE_LIST.replace("{$name}", name)));
+    //evt.waitForElementNotPresent(By.xpath(ELEMENT_ECM_EXPLORER_DRIVES_DELETE_LIST.replace("{$name}", name)));
+    $(byText(name)).shouldNot(Condition.exist);
   }
+
 
   /**
    * Add a Tags

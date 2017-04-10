@@ -20,6 +20,7 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -301,7 +302,7 @@ public class NavigationToolbar {
     info("Base url is " + testBase.getExoWebDriver().getBaseUrl());
     String url = testBase.getExoWebDriver().getBaseUrl() + "/g/:platform:web-contributors/wcmAdmin";
     info("base url of content admin is " + url);
-    for (int repeat = 0;; repeat++) {
+    /*for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         testBase.getExoWebDriver().getWebDriver().get(url);
         break;
@@ -321,14 +322,18 @@ public class NavigationToolbar {
           evt.click(ELEMENT_LINK_CONTENT_ADMIN);
           break;
         }
-      }*/
-     $(ELEMENT_MENU_CONTENT_LINK).waitUntil(Condition.appears,10000);
+      }
+    $(ELEMENT_MENU_CONTENT_LINK).waitUntil(Condition.appears,10000);
      $(ELEMENT_MENU_CONTENT_LINK).click();
-     $(ELEMENT_LINK_CONTENT_ADMIN).waitUntil(Condition.appears,10000);
-     $(ELEMENT_LINK_CONTENT_ADMIN).click();
+
 
       info("Retry...[" + repeat + "]");
-    }
+    }*/
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,10000);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    $(byText("Content")).hover();
+    $(ELEMENT_LINK_CONTENT_ADMIN).waitUntil(Condition.appears,10000);
+    $(ELEMENT_LINK_CONTENT_ADMIN).click();
     Utils.pause(1000);
   }
 

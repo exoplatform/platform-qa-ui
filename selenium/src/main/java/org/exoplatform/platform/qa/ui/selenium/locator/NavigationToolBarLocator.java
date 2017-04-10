@@ -200,7 +200,7 @@ public final class NavigationToolBarLocator {
   public static final By ELEMENT_ADMINISTRATION_PORTAL_GROUP_SITES = By.xpath("//*[text()='Group Sites']");
 
   // Administation-->Content
-  public static final By ELEMENT_LINK_CONTENT_ADMIN = By.xpath("//*[text()='Content administration']");
+  public static final By ELEMENT_LINK_CONTENT_ADMIN = By.xpath("//*[text()='Content Administration']");
 
   public static final By ELEMENT_MENU_CONTENT_LINK =
           By.xpath("//li[@class='dropdown-submenu']/a[text()='Content']");

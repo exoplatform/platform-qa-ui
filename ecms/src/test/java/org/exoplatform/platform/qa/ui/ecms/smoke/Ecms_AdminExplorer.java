@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.ecms.smoke;
 
 
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.context.Smoke;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -11,6 +12,8 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -46,7 +49,7 @@ public class Ecms_AdminExplorer extends Base{
 	public  void test01_02_03_Add_Edit_Delete_Drive() {
 		info("Test 01: Add Drive");
 		info("Get data test");
-		String title = "title"+getRandomNumber();
+		String title = "Atitle"+getRandomNumber();
 		String permission = "any";
 		ContentAdministration.specificView[] view ={ContentAdministration.specificView.ADMIN};
 		ContentAdministration.specificView[] newView = {ContentAdministration.specificView.WEB};
@@ -57,7 +60,7 @@ public class Ecms_AdminExplorer extends Base{
 		contentAdministration.goToSpecificFunctions(ContentAdministration.specificEcmFunctions.DRIVES);
 		contentAdministration.addDrives(title, permission, view);
 		contentAdministration.editDrives(title, newView);
-		waitForAndGetElement(By.xpath(ELEMENT_ECM_EXPLORER_DRIVES_VIEW_OF_VIEWS_LIST.replace("{$name}",title).replace("{$view}",newV[0])));
+		$(byText(title)).waitUntil(Condition.appears,10000);
 		// delete drive
 		contentAdministration.deleteDrives(title);
 		/*Step Number: 1
