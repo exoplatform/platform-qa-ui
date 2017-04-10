@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.ecms.smoke.pageobject;
+package org.exoplatform.platform.qa.ui.ecms.pageobject;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
