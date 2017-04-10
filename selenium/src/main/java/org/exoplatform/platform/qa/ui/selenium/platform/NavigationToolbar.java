@@ -20,10 +20,12 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
+import com.codeborne.selenide.Condition;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
@@ -305,17 +307,26 @@ public class NavigationToolbar {
         break;
       }
       if (testBase.getExoWebDriver().isIEDriver()) {
-        evt.waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION, testBase.getDefaultTimeout(), 1, 2);
-        evt.clickByJavascript(ELEMENT_TOOLBAR_ADMINISTRATION, 2);
+        //evt.waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION, testBase.getDefaultTimeout(), 1, 2);
+        //evt.clickByJavascript(ELEMENT_TOOLBAR_ADMINISTRATION, 2);
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,10000);
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+
       } else
-        evt.click(ELEMENT_LINK_SETUP, 2);
-      if (evt.waitForAndGetElement(ELEMENT_MENU_CONTENT_LINK, 5000, 0) != null) {
+        //evt.click(ELEMENT_LINK_SETUP, 2);
+      $(ELEMENT_LINK_SETUP).click();
+     /* if (evt.waitForAndGetElement(ELEMENT_MENU_CONTENT_LINK, 5000, 0) != null) {
         evt.mouseOver(ELEMENT_MENU_CONTENT_LINK, true);
         if (evt.waitForAndGetElement(ELEMENT_LINK_CONTENT_ADMIN, 5000, 0) != null) {
           evt.click(ELEMENT_LINK_CONTENT_ADMIN);
           break;
         }
-      }
+      }*/
+     $(ELEMENT_MENU_CONTENT_LINK).waitUntil(Condition.appears,10000);
+     $(ELEMENT_MENU_CONTENT_LINK).click();
+     $(ELEMENT_LINK_CONTENT_ADMIN).waitUntil(Condition.appears,10000);
+     $(ELEMENT_LINK_CONTENT_ADMIN).click();
+
       info("Retry...[" + repeat + "]");
     }
     Utils.pause(1000);

@@ -5,7 +5,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.administration.Adm
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-import org.exoplatform.platform.qa.ui.ecms.pageobject.ECMS_Permission;
+import org.exoplatform.platform.qa.ui.ecms.smoke.pageobject.ECMS_Permission;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
