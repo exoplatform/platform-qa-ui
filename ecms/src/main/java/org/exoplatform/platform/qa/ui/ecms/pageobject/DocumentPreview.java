@@ -1,16 +1,15 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.ecms;
+package org.exoplatform.platform.qa.ui.ecms.pageobject;
 
-import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.Utils;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class DocumentPreview {
   private final TestBase       testBase;

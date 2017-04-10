@@ -1,19 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.ecms;
-
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_SELECT_USER_ICON1;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-import java.util.ArrayList;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+package org.exoplatform.platform.qa.ui.ecms.pageobject;
 
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.*;
@@ -24,6 +9,20 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ManageFileTestBase;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.ArrayList;
+
+import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_SELECT_USER_ICON1;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class SiteExplorerHome {
   private final TestBase       testBase;
@@ -32,7 +31,7 @@ public class SiteExplorerHome {
 
   public Button                button;
 
-  public CreateNewDocument     CreNewDoc;
+  public CreateNewDocument CreNewDoc;
 
   public Dialog                dialog;
 

@@ -5,6 +5,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.administration.Adm
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.ecms.pageobject.ECMS_Permission;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -16,14 +17,13 @@ import org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator
 import org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
-import org.exoplatform.platform.qa.ui.selenium.platform.ecms.ECMS_Permission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class ContentAdministration {
 
   private final TestBase       testBase;
 
-  public ECMS_Permission       ecmsPerm;
+  public ECMS_Permission ecmsPerm;
 
   public PlatformPermission    plfPerm;
 

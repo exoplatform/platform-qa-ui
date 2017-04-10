@@ -1,11 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.ecms;
-
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_NAME;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-import org.openqa.selenium.WebElement;
+package org.exoplatform.platform.qa.ui.ecms.pageobject;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -13,6 +6,12 @@ import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.WebElement;
+
+import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_NAME;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class CreateNewDocument {
 
@@ -24,7 +23,7 @@ public class CreateNewDocument {
 
   public PlatformBase          plf;
 
-  public SiteExplorerHome      SEHome;
+  public SiteExplorerHome SEHome;
 
   private ElementEventTestBase evt;
 

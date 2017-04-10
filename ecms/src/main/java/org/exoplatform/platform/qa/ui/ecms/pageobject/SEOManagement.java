@@ -1,10 +1,10 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.ecms;
-
-import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
+package org.exoplatform.platform.qa.ui.ecms.pageobject;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+
+import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 
 public class SEOManagement {
 
