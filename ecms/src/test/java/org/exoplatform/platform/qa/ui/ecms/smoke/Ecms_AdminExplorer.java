@@ -88,29 +88,33 @@ public class Ecms_AdminExplorer extends Base{
 	 *<li> Test Case Name: Delete a View.</li>
 	 */
 	@Test
+	@Smoke
+	@Tag("smoke")
 	public  void test04_05_06_07_Add_Edit_Delete_View_AView() {
 		info("Test 02 : Add, edit, show and delete a View");
-		String title = "title"+getRandomNumber();
+		String title = "aatitle"+getRandomNumber();
 		String tabName = "tabName"+getRandomNumber();
-		String oldPermission = "fqa";
-		String[] tab={"Add Category"};
-		String permission = "john";
+		String oldPermission = "demo";
+		String[] tab={"Add Category:"};
+		String permission = "mary";
 
 		navigationToolbar.goToContentAdministration();
 		contentAdministration.goToSpecificMainFunctions(ContentAdministration.mainEcmFunctions.EXPLORER);
-		testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+		//testBase.getExoWebDriver().getWebDriver().navigate().refresh();
 		contentAdministration.goToSpecificFunctions(ContentAdministration.specificEcmFunctions.VIEW);
 		info("add a view");
 		contentAdministration.addView(title, tabName, tab, oldPermission);
 		info("show a view");
-		click(By.xpath(ELEMENT_ECM_EXPLORER_VIEW_SHOW_A_VIEW_LIST.replace("{$name}",title)));
-		waitForAndGetElement(By.xpath(ELEMENT_ECM_EXPLORER_NAME_VIEW_SHOW_VIEW.replace("{$name}",title)));
-		click(ELEMENT_ECM_EXPLORER_GO_TO_ACTION_FORM);
-		waitForAndGetElement(By.xpath(ELEMENT_ECM_EXPLORER_TAB_ICONS_LIST_SHOW_VIEW.replace("{$tab}",tab[0])));
+		$(byClassName("uiIconView")).click();
+		//waitForAndGetElement(By.xpath(ELEMENT_ECM_EXPLORER_NAME_VIEW_SHOW_VIEW.replace("{$name}",title)));
+		$(byText(title)).waitUntil(Condition.appears,10000);
+		$(ELEMENT_ECM_EXPLORER_GO_TO_ACTION_FORM).click();
+		//waitForAndGetElement(By.xpath(ELEMENT_ECM_EXPLORER_TAB_ICONS_LIST_SHOW_VIEW.replace("{$tab}",tab[0])));
+		$(byText(tabName)).waitUntil(Condition.appears,10000);
 		click(ELEMENT_ECM_EXPLORER_CLOSE_VIEW_MODE);
 		info("edit a view");
-		contentAdministration.editViewPermissionUser(title, "Fqa", permission);
-		waitForAndGetElement(By.xpath(ELEMENT_ECM_EXPLORER_VIEW_PERMISSIONS_LIST.replace("{$name}",title).replace("{$permission}","John")));
+		contentAdministration.editViewPermissionUser(title, oldPermission, permission);
+		$(byText("Mary")).should(Condition.exist);
 		info("delete a view");
 		contentAdministration.deleteView(title);
 		

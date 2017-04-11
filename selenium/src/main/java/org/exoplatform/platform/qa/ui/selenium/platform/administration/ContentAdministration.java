@@ -112,7 +112,7 @@ public class ContentAdministration {
       break;
     case VIEW:
       info("Select Views function");
-      evt.click(ELEMENT_ECMS_FUNCTIONS_VIEWS);
+      $(ELEMENT_ECMS_FUNCTIONS_VIEWS).click();
       break;
     case TAGS:
       info("Select Tags function");
@@ -155,24 +155,33 @@ public class ContentAdministration {
    * @param userNamePermission
    */
   public void addView(String name, String tabName, String[] tab, String... perm) {
-    evt.click(ELEMENT_ECM_EXPLORER_VIEWS_ADD_VIEWS);
+    /*evt.click(ELEMENT_ECM_EXPLORER_VIEWS_ADD_VIEWS);
     evt.type(ELEMENT_ECM_EXPLORER_NAME_VIEW_FORM, name, true);
     evt.click(ELEMENT_ECM_EXPLORER_GO_TO_ACTION_FORM);
     evt.click(ELEMENT_ECM_EXPLORER_ADD_ACTION_VIEW_FORM);
-    evt.type(ELEMENT_ECM_EXPLORE_TAB_NAME_VIEW_FORM, tabName, true);
+    evt.type(ELEMENT_ECM_EXPLORE_TAB_NAME_VIEW_FORM, tabName, true);*/
+    $(ELEMENT_ECM_EXPLORER_VIEWS_ADD_VIEWS).click();
+    $(ELEMENT_ECM_EXPLORER_NAME_VIEW_FORM).setValue(name);
+    $(ELEMENT_ECM_EXPLORER_GO_TO_ACTION_FORM).click();
+    $(ELEMENT_ECM_EXPLORER_ADD_ACTION_VIEW_FORM).click();
+    $(ELEMENT_ECM_EXPLORE_TAB_NAME_VIEW_FORM).setValue(tabName);
     for (String arrayElement : tab) {
-      evt.check(By.xpath(ELEMENT_ECM_EXPLORER_CHOOSE_TAB_CATEGORY_VIEW_FORM.replace("{$tab}", arrayElement)), 2);
+      //evt.check(By.xpath(ELEMENT_ECM_EXPLORER_CHOOSE_TAB_CATEGORY_VIEW_FORM.replace("{$tab}", arrayElement)), 2);
+      $(byText(arrayElement)).click();
     }
-    evt.click(ELEMENT_ECM_EXPLORE_SAVE_TAB_VIEW_FORM);
-    evt.click(ELEMENT_ECM_EXPLORER_GO_TO_PERMISSION_FORM);
+    $(ELEMENT_ECM_EXPLORE_SAVE_TAB_VIEW_FORM).click();
+    $(ELEMENT_ECM_EXPLORER_GO_TO_PERMISSION_FORM).click();
     if (perm.length < 2) {
-      evt.click(ELEMENT_ECM_EXPLORER_USER_PERMISSION_ADD);
-      evt.click(By.xpath(ELEMENT_ECM_EXPLORER_SELECT_USER_LIST_PERMISSION.replace("{$user}", perm[0])));
+      $(ELEMENT_ECM_EXPLORER_USER_PERMISSION_ADD).click();
+//      evt.click(By.xpath(ELEMENT_ECM_EXPLORER_SELECT_USER_LIST_PERMISSION.replace("{$user}", perm[0])));
+      $(byId("Quick Search")).setValue(perm[0]);
+      $(byClassName("btnSearchUser")).click();
+      $(byClassName("uiIconPlus")).click();
     } else {
       ecmsPerm.selectGroupMembershipOfTag(perm[0], perm[1]);
     }
-    evt.click(ELEMENT_ECM_EXPLORER_ADD_PERMISSION_FORM);
-    evt.click(ELEMENT_ECM_EXPLORER_SAVE_FORM_ADD_VIEW);
+    $(ELEMENT_ECM_EXPLORER_ADD_PERMISSION_FORM).click();
+    $(ELEMENT_ECM_EXPLORER_SAVE_FORM_ADD_VIEW).click();
   }
 
   /**
@@ -183,14 +192,19 @@ public class ContentAdministration {
    * @param newName
    */
   public void editViewPermissionUser(String viewName, String oldName, String newName) {
-    evt.click(By.xpath(ELEMENT_ECM_EXPLORER_VIEW_EDIT_LIST.replace("{$name}", viewName)));
-    evt.click(ELEMENT_ECM_EXPLORER_GO_TO_PERMISSION_FORM);
-    evt.click(ELEMENT_ECM_EXPLORER_USER_PERMISSION_ADD);
-    evt.click(By.xpath(ELEMENT_ECM_EXPLORER_SELECT_USER_LIST_PERMISSION.replace("{$user}", newName)));
-    evt.click(ELEMENT_ECM_EXPLORER_ADD_PERMISSION_FORM);
-    evt.click(By.xpath(ELEMENT_ECM_EXPLORER_DELETE_PERMISSION_USER.replace("{$name}", oldName)));
+$(byClassName("uiIconEditInfo")).click();
+    $(ELEMENT_ECM_EXPLORER_GO_TO_PERMISSION_FORM).click();
+    $(ELEMENT_ECM_EXPLORER_USER_PERMISSION_ADD).click();
+//    evt.click(By.xpath(ELEMENT_ECM_EXPLORER_SELECT_USER_LIST_PERMISSION.replace("{$user}", newName)));
+    $(byId("Quick Search")).setValue(newName);
+    $(byClassName("btnSearchUser")).click();
+    $(byClassName("uiIconPlus")).click();
+    $(ELEMENT_ECM_EXPLORER_ADD_PERMISSION_FORM).click();
+    $(byText("Demo")).hover();
+   // evt.click(By.xpath(ELEMENT_ECM_EXPLORER_DELETE_PERMISSION_USER.replace("{$name}", oldName)));
+    $(byId("UIViewPermissionContainer")).find(byClassName("uiIconDelete")).click();
     alert.acceptAlert();
-    evt.click(ELEMENT_ECM_EXPLORER_SAVE_FORM_ADD_VIEW);
+    $(ELEMENT_ECM_EXPLORER_SAVE_FORM_ADD_VIEW).click();
   }
 
   /**
@@ -199,9 +213,10 @@ public class ContentAdministration {
    * @param viewName
    */
   public void deleteView(String viewName) {
-    evt.click(By.xpath(ELEMENT_ECM_EXPLORER_VIEW_DELETE_LIST.replace("{$name}", viewName)));
+    $(By.xpath(ELEMENT_ECM_EXPLORER_VIEW_DELETE_LIST.replace("{$name}", viewName))).click();
     alert.acceptAlert();
-    evt.waitForElementNotPresent(By.xpath(ELEMENT_ECM_EXPLORER_VIEW_EDIT_LIST.replace("{$name}", viewName)));
+    //evt.waitForElementNotPresent(By.xpath(ELEMENT_ECM_EXPLORER_VIEW_EDIT_LIST.replace("{$name}", viewName)));
+    $(byText(viewName)).shouldNot(Condition.exist);
   }
 
   /**
