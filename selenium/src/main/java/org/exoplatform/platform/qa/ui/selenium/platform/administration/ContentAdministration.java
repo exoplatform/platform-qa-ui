@@ -57,9 +57,7 @@ public class ContentAdministration {
     switch (main) {
     case EXPLORER:
       info("Select Explorer tab");
-      //if (evt.waitForAndGetElement(ELEMENT_EXPLORER_CATEGORIES_ECM_FUNCTIONS, 5000, 0) != null)
-      //  evt.click(ELEMENT_EXPLORER_CATEGORIES_ECM_FUNCTIONS);
-      $(ELEMENT_EXPLORER_CATEGORIES_ECM_FUNCTIONS).waitUntil(Condition.appears,10000);
+
       $(ELEMENT_EXPLORER_CATEGORIES_ECM_FUNCTIONS).click();
       break;
 
