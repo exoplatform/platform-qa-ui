@@ -89,8 +89,7 @@ public class WikiManagement {
    */
   public void saveAddPage() {
     info("Save all changes");
-    Utils.pause(2000);
-    $(byId("UISubmitToolBarBottom_SavePage_")).click();
+    $(byId("UISubmitToolBarBottom_SavePage_")).scrollTo().click();
     $(ELEMENT_SAVE_BUTTON_ADD_PAGE).shouldNotBe(Condition.present);
     info("Wiki page simple is created successfully");
   }
@@ -101,7 +100,6 @@ public class WikiManagement {
   public void savePage() {
     info("Save all changes");
     evt.click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
-    Utils.pause(300);
   }
 
   /**
@@ -110,7 +108,6 @@ public class WikiManagement {
   public void cancelAddPage() {
     info("Click on Cancel button");
     evt.click(ELEMENT_CANCEL_BUTTON_ADD_PAGE, 0, true);
-    Utils.pause(2000);
   }
 
   /**
@@ -119,7 +116,6 @@ public class WikiManagement {
   public void publishPageWhenEditPage() {
     info("check on publish checkbox");
     evt.check(ELEMENT_PUBLISH_ACTIVITY_CHECKBOX, 2);
-    Utils.pause(2000);
   }
 
   /**
