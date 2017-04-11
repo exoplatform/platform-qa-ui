@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.ecms.pageobject;
 
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
@@ -8,6 +9,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.openqa.selenium.WebElement;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_NAME;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
@@ -45,59 +47,59 @@ public class CreateNewDocument {
     switch (type) {
     case FILE:
       info("Select File type");
-      evt.click(ELEMENT_ADDDOCUMENT_FILE);
+      $(ELEMENT_ADDDOCUMENT_FILE).click();
       break;
     case WEBCONTENT:
       info("Select WebContent type");
       if ((evt.waitForAndGetElement(ELEMENT_ADDDOCUMENT_WEBCONTENT, 3000, 0) == null)
           && (evt.waitForAndGetElement(ELEMENT_ADDDOCUMENT_NEXT_PAGE, 3000, 0) != null)) {
-        evt.click(ELEMENT_ADDDOCUMENT_NEXT_PAGE, 2);
-        evt.waitForAndGetElement(ELEMENT_ADDDOCUMENT_WEBCONTENT, testBase.getDefaultTimeout(), 1);
-        evt.click(ELEMENT_ADDDOCUMENT_WEBCONTENT, 2);
+        $(ELEMENT_ADDDOCUMENT_NEXT_PAGE).click();
+        $(ELEMENT_ADDDOCUMENT_WEBCONTENT).waitUntil(Condition.appears,10000);
+        $(ELEMENT_ADDDOCUMENT_WEBCONTENT).click();
       } else
-        evt.click(ELEMENT_ADDDOCUMENT_WEBCONTENT, 2);
+        $(ELEMENT_ADDDOCUMENT_WEBCONTENT).waitUntil(Condition.appears,10000);
       break;
     case ACCESSIBLEMEDIA:
       info("Select Accessiblemedia type");
-      evt.click(ELEMENT_ADDDOCUMENT_ACCESSIBLE_MEDIA);
+      $(ELEMENT_ADDDOCUMENT_ACCESSIBLE_MEDIA).click();
       break;
     case ANNOUNCEMENT:
       info("Select Announcement type");
-      evt.click(ELEMENT_ADDDOCUMENT_ANNOUNCEMENT);
+      $(ELEMENT_ADDDOCUMENT_ANNOUNCEMENT).click();
       break;
     case CSSFILE:
       info("Select Css file type");
-      evt.click(ELEMENT_ADDDOCUMENT_CSS_FILE);
+      $(ELEMENT_ADDDOCUMENT_CSS_FILE).click();
       break;
     case CONTACTUS:
       info("Select Contact us type");
-      evt.click(ELEMENT_ADDDOCUMENT_CONTACT_US);
+      $(ELEMENT_ADDDOCUMENT_CONTACT_US).click();
       break;
     case HTMLFILE:
       info("Select HTML file type");
-      evt.click(ELEMENT_ADDDOCUMENT_HTML_FILE);
+      $(ELEMENT_ADDDOCUMENT_HTML_FILE).click();
       break;
     case ILLUSTRATEDWEBCONTENT:
       info("Select Illustrated webcontent type");
-      evt.click(ELEMENT_ADDDOCUMENT_ILLUSTRATED_WEB_CONTENT);
+      $(ELEMENT_ADDDOCUMENT_ILLUSTRATED_WEB_CONTENT).click();
       break;
     case WEBLINK:
       info("Select Weblink type");
       if ((evt.waitForAndGetElement(ELEMENT_ADDDOCUMENT_WEBLINK, 3000, 0) == null)
           && (evt.waitForAndGetElement(ELEMENT_ADDDOCUMENT_NEXT_PAGE, 3000, 0) != null)) {
-        evt.click(ELEMENT_ADDDOCUMENT_NEXT_PAGE, 2);
-        evt.waitForAndGetElement(ELEMENT_ADDDOCUMENT_WEBLINK, testBase.getDefaultTimeout(), 1);
-        evt.click(ELEMENT_ADDDOCUMENT_WEBLINK, 2);
+        $(ELEMENT_ADDDOCUMENT_NEXT_PAGE).click();
+        $(ELEMENT_ADDDOCUMENT_WEBLINK).waitUntil(Condition.appears,10000);
+        $(ELEMENT_ADDDOCUMENT_WEBLINK).click();
       } else
-        evt.click(ELEMENT_ADDDOCUMENT_WEBLINK);
+        $(ELEMENT_ADDDOCUMENT_WEBLINK).click();
       break;
     case PRODUCT:
       info("Select Product type");
-      evt.click(ELEMENT_ADDDOCUMENT_PRODUCT);
+      $(ELEMENT_ADDDOCUMENT_PRODUCT).click();
       break;
     case JAVASCRIPTFILE:
       info("Select Javascript file type");
-      evt.click(ELEMENT_ADDDOCUMENT_JAVASCRIPT_FILE);
+      $(ELEMENT_ADDDOCUMENT_JAVASCRIPT_FILE).click();
       break;
     }
   }
@@ -148,10 +150,10 @@ public class CreateNewDocument {
    */
   public void addNewFile(String title, String content) {
     this.testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-    Utils.pause(2000);
-    evt.waitForAndGetElement(ELEMENT_FILEFORM_BLANK_NAME, testBase.getDefaultTimeout(), 1);
-    evt.type(ELEMENT_FILEFORM_BLANK_NAME, title, true);
-    plf.inputFrame(ELEMENT_FILEFORM_BLANK_CONTENT, content);
+    $(ELEMENT_FILEFORM_BLANK_NAME).waitUntil(Condition.appears,10000);
+    $(ELEMENT_FILEFORM_BLANK_NAME).setValue(title);
+    $(ELEMENT_FILEFORM_BLANK_CONTENT).click();
+    $(ELEMENT_FILEFORM_BLANK_CONTENT).sendKeys(content);
   }
 
   /**
@@ -185,9 +187,8 @@ public class CreateNewDocument {
    */
 
   public void saveAndClose() {
-    evt.clickByJavascript(ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE);
-    Utils.pause(2000);
-    evt.waitForElementNotPresent(ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE);
+    $(ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE).click();
+    $(ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE).waitUntil(Condition.appears,10000);
 
   }
 

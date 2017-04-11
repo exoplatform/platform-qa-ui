@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.ecms.pageobject;
 
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.*;
 import org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator;
@@ -19,6 +20,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_SELECT_USER_ICON1;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
@@ -64,16 +68,19 @@ public class SiteExplorerHome {
    */
   public void goToPath(String path, String drive) {
     info("Go to selected Drive");
-    evt.waitForAndGetElement(ELEMENT_ACTIONBAR_SHOWDRIVES);
-    evt.click(ELEMENT_ACTIONBAR_SHOWDRIVES);
-    evt.waitForAndGetElement(ELEMENT_ACTIONBAR_SELECTED_DRIVE.replace("${driver}", drive));
-    evt.click(ELEMENT_ACTIONBAR_SELECTED_DRIVE.replace("${driver}", drive));
-    evt.waitForAndGetElement(ELEMENT_SIDE_BAR_MAINTAB);
-    evt.click(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON);
+    info("Go to selected Drive");
+    //waitForAndGetElement(ELEMENT_ACTIONBAR_SHOWDRIVES);
+    $(ELEMENT_ACTIONBAR_SHOWDRIVES).click();
+    //waitForAndGetElement(ELEMENT_ACTIONBAR_SELECTED_DRIVE.replace("${driver}",drive));
+    $(byText(drive)).waitUntil(Condition.appears,10000);
+    $(byText(drive)).click();
+    //click(ELEMENT_ACTIONBAR_SELECTED_DRIVE.replace("${driver}",drive));
+    $(ELEMENT_SIDE_BAR_MAINTAB).waitUntil(Condition.appears,10000);
+    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
     info("Go to folder");
-    if (!path.isEmpty()) {
+    if(!path.isEmpty()){
       String[] arrayPath = path.split("/");
-      for (String arrayElement : arrayPath) {
+      for (String arrayElement : arrayPath){
         selectNode(arrayElement);
       }
     }
@@ -124,11 +131,12 @@ public class SiteExplorerHome {
    * Go to New content page
    */
   public void goToAddNewContent() {
-    evt.waitForAndGetElement(ELEMENT_ACTIONBAR_ADDDOCUMENT);
+
+    $(ELEMENT_ACTIONBAR_ADDDOCUMENT).waitUntil(Condition.appears,10000);
     info("Click on New Document on Action Bar");
-    evt.click(ELEMENT_ACTIONBAR_ADDDOCUMENT);
+    $(ELEMENT_ACTIONBAR_ADDDOCUMENT).click();
     info("Verify that New content page is shown");
-    evt.waitForAndGetElement(ELEMENT_ADDDOCUMENT_CHOICETYPE);
+    $(ELEMENT_ADDDOCUMENT_CHOICETYPE).waitUntil(Condition.appears,10000);
     info("New content page is shown successfully");
   }
 
@@ -154,7 +162,8 @@ public class SiteExplorerHome {
     evt.click(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON);
     Utils.pause(2000);
     info("Right click on nodename");
-    evt.rightClickOnElement(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", title)));
+
+    $(byText(title)).hover().contextClick();
     info("Click on Delete link");
     evt.click(ELEMENT_SITEEXPLORER_ACTION_DELETE);
     info("Click on Delete button on Confirm popup");
@@ -395,10 +404,12 @@ public class SiteExplorerHome {
     Utils.pause(2000);
     if (!newTitle.isEmpty())
       evt.waitForAndGetElement(ELEMENT_FILE_FORM_TITLE, testBase.getDefaultTimeout(), 1);
-    evt.type(ELEMENT_FILE_FORM_TITLE, newTitle, true);
+    //evt.type(ELEMENT_FILE_FORM_TITLE, newTitle, true);
+    $(ELEMENT_FILE_FORM_TITLE).setValue(newTitle);
     if (!content.isEmpty()) {
       evt.waitForAndGetElement(ELEMENT_FILEFORM_BLANK_CONTENT, testBase.getDefaultTimeout(), 1);
-      plf.inputFrame(ELEMENT_FILEFORM_BLANK_CONTENT, content);
+      //plf.inputFrame(ELEMENT_FILEFORM_BLANK_CONTENT, content);
+      $(ELEMENT_FILEFORM_BLANK_CONTENT).sendKeys(content);
       evt.switchToParentWindow();
     }
   }
@@ -485,10 +496,11 @@ public class SiteExplorerHome {
    */
   public void selectNode(String nodeName) {
     info("Verify that nodeName:" + nodeName + " is shown");
-    evt.waitForAndGetElement(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", nodeName));
+   // evt.waitForAndGetElement(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", nodeName));
+    $(byText(nodeName)).waitUntil(Condition.appears,10000);
     info("Click on the nodeName:" + nodeName);
-    evt.click(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", nodeName));
-    Utils.pause(2000);
+    //evt.click(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", nodeName));
+    $(byText(nodeName)).click();
     info("Finished selecting nodeName:" + nodeName);
   }
 

@@ -69,7 +69,7 @@ public class ContentAdministration {
     case TEMPLATES:
       info("Select Templates tab");
       if (evt.waitForAndGetElement(ELEMENT_TEMPLATE_CATEGORIES_ECM_FUNCTIONS, 5000, 0) != null)
-        evt.click(ELEMENT_TEMPLATE_CATEGORIES_ECM_FUNCTIONS);
+        $(byText("Templates")).click();
       break;
     case REPOSITORY:
       info("Select Repository tab");
@@ -130,7 +130,7 @@ public class ContentAdministration {
       break;
     case DOCUMENTS:
       info("Select Documents function");
-      evt.click(ELEMENT_ECMS_FUNCTIONS_DOCUMENTS);
+      $(ELEMENT_ECMS_FUNCTIONS_DOCUMENTS).click();
       break;
     case LIST:
       info("Select List function");
@@ -384,11 +384,11 @@ $(byClassName("uiIconEditInfo")).click();
   public void deleteCategories(String name) {
     info("Delete the category");
     info("Click on Delete button of the category");
-    evt.click(By.xpath(ELEMENT_ECM_ADVANCED_CATEGORIES_DELETE.replace("{$name}", name)));
+    $(byClassName("uiIconDelete")).click();
     info("Click on Ok button of the alert popup");
     alert.acceptAlert();
     info("Verify that the category is deleted");
-    evt.waitForElementNotPresent(By.xpath(ELEMENT_ECM_ADVANCED_CATEGORIES_DELETE.replace("{$name}", name)));
+    $(byText(name)).shouldNot(Condition.exist);
     info("The category is deleted succcessfully");
   }
 
@@ -809,17 +809,17 @@ $(byClassName("uiIconEditInfo")).click();
    * @param permission
    */
   public void addDocumentInTemplates(String label, String... permission) {
-    evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_ADD_DOCUMENT);
-    evt.type(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LABEL_FORM, label, true);
-    evt.click(ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON);
+    $(ELEMENT_ECM_TEMPLATES_DOCUMENTS_ADD_DOCUMENT).click();
+    $(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LABEL_FORM).setValue(label);
+    $(ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON).click();
     if (permission[0] == "any")
-      evt.click(AdministrationLocator.ELEMENT_PERMISSION_ANY);
+      $(AdministrationLocator.ELEMENT_PERMISSION_ANY).click();
     else {
       ecmsPerm.selectGroupMembershipOfLock(permission[0], permission[1]);
 
     }
     Utils.pause(1000);
-    evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_SAVE_FORM);
+    $(ELEMENT_ECM_TEMPLATES_DOCUMENTS_SAVE_FORM).click();
   }
 
   /**
@@ -829,10 +829,11 @@ $(byClassName("uiIconEditInfo")).click();
    * @param newName
    */
   public void editDocumentInTemplates(String oldName, String newName) {
-    evt.click(By.xpath(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LIST_EDIT.replace("{$name}", oldName)));
-    evt.type(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LABEL_FORM, newName, true);
-    evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_SAVE_EDIT_FORM);
-    evt.waitForAndGetElement(By.xpath(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LIST.replace("{$name}", newName)));
+    $(byClassName("uiIconEdit ")).click();
+    $(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LABEL_FORM).setValue(newName);
+    $(ELEMENT_ECM_TEMPLATES_DOCUMENTS_SAVE_EDIT_FORM).click();
+    $(byText(newName)).waitUntil(Condition.appears,10000);
+
   }
 
   /**

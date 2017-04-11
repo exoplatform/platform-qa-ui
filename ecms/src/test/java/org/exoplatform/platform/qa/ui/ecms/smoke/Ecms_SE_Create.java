@@ -1,0 +1,87 @@
+package org.exoplatform.platform.qa.ui.ecms.smoke;
+import com.codeborne.selenide.Condition;
+import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.context.Smoke;
+import org.exoplatform.platform.qa.ui.ecms.pageobject.CreateNewDocument;
+import org.exoplatform.platform.qa.ui.ecms.pageobject.SiteExplorerHome;
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.Utils;
+import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
+import org.exoplatform.platform.qa.ui.selenium.platform.administration.ContentAdministration;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
+public class Ecms_SE_Create extends Base{
+	ContentAdministration contentAdministration;
+	NavigationToolbar navigationToolbar;
+	SiteExplorerHome siteExplorerHome;
+	CreateNewDocument createNewDoc;
+	@BeforeEach
+	public void setupBeforeMethod() {
+		info("Start setUpBeforeMethod");
+
+		contentAdministration=new ContentAdministration(this);
+		navigationToolbar=new NavigationToolbar(this);
+		siteExplorerHome=new SiteExplorerHome (this);
+		createNewDoc=new CreateNewDocument(this);
+	}
+
+	/**
+	 *<li> Case ID:116572.</li>
+	 *<li> Test Case Name: Delete File document.</li>
+
+	 *<li> Case ID:116641.</li>
+	 *<li> Test Case Name: Create File document.</li>
+
+	 *<li> Case ID:116642.</li>
+	 *<li> Test Case Name: Edit File document.</li>
+	 */
+	@Test
+	@Smoke
+	@Tag("smoke")
+	public  void test02_06_07_Create_Edit_DeleteFileDocument() {
+		info("Test 2: Delete File document");
+		info("Create data test");
+		String name = "name"+getRandomNumber();
+		String content = "content"+getRandomNumber();
+		String content2 = "content2"+getRandomNumber();
+		info("Finished creating data test");
+
+		/*Step Number: 1
+		 *Step Name: -
+		 *Step Description: 
+			Step 1: Edit File document
+		 *Input Data: 
+			- Create a File
+			- Click Edit on action bar, perform to edit it
+			- Click Save & Close
+		 *Expected Outcome: 
+			File is Edited successfully*/ 
+		info("Create a content");
+		navigationToolbar.goToSiteExplorer();
+		siteExplorerHome.goToPath("intranet/documents", "Site Management");
+		siteExplorerHome.goToAddNewContent();
+		info("Create new file document");
+		createNewDoc.createNewDoc(CreateNewDocument.selectDocumentType.FILE);
+		createNewDoc.addNewFile(name, content);
+		createNewDoc.saveAndClose();
+
+		info("Edit a content");
+		siteExplorerHome.selectNode(name);
+		siteExplorerHome.editDocument("",content2);
+		createNewDoc.saveAndClose();
+
+		info("Delete file document");
+		navigationToolbar.goToSiteExplorer();
+		siteExplorerHome.goToPath("intranet/documents", "Site Management");
+		siteExplorerHome.deleteData(name);
+	}
+
+}

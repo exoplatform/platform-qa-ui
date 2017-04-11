@@ -224,22 +224,21 @@ public class NavigationToolbar {
     Utils.pause(500);
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
-        evt.mouseOverAndClick(ELEMENT_LINK_SETUP);
+        $(ELEMENT_LINK_SETUP).click();
         break;
       }
       if (testBase.getExoWebDriver().isIEDriver()) {
-        evt.waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION, testBase.getDefaultTimeout(), 1, 2);
-        evt.clickByJavascript(ELEMENT_TOOLBAR_ADMINISTRATION, 2);
+       // evt.waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION, testBase.getDefaultTimeout(), 1, 2);
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,10000);
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
       } else
-        evt.click(ELEMENT_LINK_SETUP, 2);
-      if (evt.waitForAndGetElement(ELEMENT_MENU_CONTENT_LINK, 5000, 0) != null) {
+       $(ELEMENT_LINK_SETUP).click();
         info("Element " + ELEMENT_MENU_CONTENT_LINK + "... is displayed");
-        evt.mouseOver(ELEMENT_MENU_CONTENT_LINK, true);
-        if (evt.waitForAndGetElement(ELEMENT_MENU_SITE_EXPLORER, 5000, 0) != null) {
-          evt.click(ELEMENT_MENU_SITE_EXPLORER);
-          break;
-        }
-      }
+        $(ELEMENT_MENU_CONTENT_LINK).click();
+
+
+
+
       info("Retry...[" + repeat + "]");
     }
     Utils.pause(2000);
@@ -302,33 +301,7 @@ public class NavigationToolbar {
     info("Base url is " + testBase.getExoWebDriver().getBaseUrl());
     String url = testBase.getExoWebDriver().getBaseUrl() + "/g/:platform:web-contributors/wcmAdmin";
     info("base url of content admin is " + url);
-    /*for (int repeat = 0;; repeat++) {
-      if (repeat > 1) {
-        testBase.getExoWebDriver().getWebDriver().get(url);
-        break;
-      }
-      if (testBase.getExoWebDriver().isIEDriver()) {
-        //evt.waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION, testBase.getDefaultTimeout(), 1, 2);
-        //evt.clickByJavascript(ELEMENT_TOOLBAR_ADMINISTRATION, 2);
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,10000);
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
 
-      } else
-        //evt.click(ELEMENT_LINK_SETUP, 2);
-      $(ELEMENT_LINK_SETUP).click();
-     /* if (evt.waitForAndGetElement(ELEMENT_MENU_CONTENT_LINK, 5000, 0) != null) {
-        evt.mouseOver(ELEMENT_MENU_CONTENT_LINK, true);
-        if (evt.waitForAndGetElement(ELEMENT_LINK_CONTENT_ADMIN, 5000, 0) != null) {
-          evt.click(ELEMENT_LINK_CONTENT_ADMIN);
-          break;
-        }
-      }
-    $(ELEMENT_MENU_CONTENT_LINK).waitUntil(Condition.appears,10000);
-     $(ELEMENT_MENU_CONTENT_LINK).click();
-
-
-      info("Retry...[" + repeat + "]");
-    }*/
     $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,10000);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     $(byText("Content")).hover();
