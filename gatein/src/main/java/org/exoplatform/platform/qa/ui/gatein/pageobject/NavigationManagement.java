@@ -163,7 +163,7 @@ public class NavigationManagement {
     info("Delete a node");
     info("Right click on the node");
 
-    $(byText(title)).contextClick();
+    $(byClassName("uiNavigationManagement")).find(byText(title)).scrollTo().contextClick();
     info("Select Delete link");
     selectItem(specifiContextMenu.DELETE_NODE);
 
@@ -185,7 +185,7 @@ public class NavigationManagement {
   public void editNodePage(String name) {
     info("Edit a node page");
     info("Right click on the node");
-    $(byText(name)).contextClick();
+    $(byClassName("uiNavigationManagement")).find(byText(name)).scrollTo().contextClick();
     info("Select Edit link");
     selectItem(specifiContextMenu.EDIT_NODE_PAGE);
   }
