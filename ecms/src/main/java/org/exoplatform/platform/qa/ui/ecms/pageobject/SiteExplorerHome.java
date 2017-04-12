@@ -68,13 +68,9 @@ public class SiteExplorerHome {
    */
   public void goToPath(String path, String drive) {
     info("Go to selected Drive");
-    info("Go to selected Drive");
-    //waitForAndGetElement(ELEMENT_ACTIONBAR_SHOWDRIVES);
     $(ELEMENT_ACTIONBAR_SHOWDRIVES).click();
-    //waitForAndGetElement(ELEMENT_ACTIONBAR_SELECTED_DRIVE.replace("${driver}",drive));
     $(byText(drive)).waitUntil(Condition.appears,10000);
     $(byText(drive)).click();
-    //click(ELEMENT_ACTIONBAR_SELECTED_DRIVE.replace("${driver}",drive));
     $(ELEMENT_SIDE_BAR_MAINTAB).waitUntil(Condition.appears,10000);
     $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
     info("Go to folder");
@@ -159,21 +155,23 @@ public class SiteExplorerHome {
   public void deleteData(String title, boolean... destination) {
     boolean verify = (destination.length > 0 ? destination[0] : false);
     info("Click on File Explorer icon");
-    evt.click(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON);
+    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
     Utils.pause(2000);
     info("Right click on nodename");
 
-    $(byText(title)).hover().contextClick();
+
+    $(byId("UITreeExplorer")).find(byText(title)).contextClick();
     info("Click on Delete link");
-    evt.click(ELEMENT_SITEEXPLORER_ACTION_DELETE);
+    $(ELEMENT_SITEEXPLORER_ACTION_DELETE).click();
     info("Click on Delete button on Confirm popup");
     // click(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE);
-    evt.clickByJavascript(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE, 2);
+    $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).click();
     info("Verify that the node is deleted");
     Utils.pause(3000);
     if (verify)
-      evt.waitForElementNotPresent(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", title)));
-    info("the node is deleted successfully");
+     // evt.waitForElementNotPresent(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", title)));
+    $(byText(title)).shouldNot(Condition.exist);
+      info("the node is deleted successfully");
   }
 
   /**
@@ -394,24 +392,13 @@ public class SiteExplorerHome {
    * @param content
    */
   public void editDocument(String newTitle, String content) {
-    if (evt.waitForAndGetElement(ELEMENT_ACTIONBAR_MORE, 5000, 0) != null) {
-      info("Click on More menu");
-      evt.click(ELEMENT_ACTIONBAR_MORE);
-    }
-    info("Click on Edit link");
-    evt.click(ELEMENT_ACTIONBAR_EDIT);
-    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-    Utils.pause(2000);
-    if (!newTitle.isEmpty())
-      evt.waitForAndGetElement(ELEMENT_FILE_FORM_TITLE, testBase.getDefaultTimeout(), 1);
-    //evt.type(ELEMENT_FILE_FORM_TITLE, newTitle, true);
-    $(ELEMENT_FILE_FORM_TITLE).setValue(newTitle);
-    if (!content.isEmpty()) {
-      evt.waitForAndGetElement(ELEMENT_FILEFORM_BLANK_CONTENT, testBase.getDefaultTimeout(), 1);
-      //plf.inputFrame(ELEMENT_FILEFORM_BLANK_CONTENT, content);
-      $(ELEMENT_FILEFORM_BLANK_CONTENT).sendKeys(content);
-      evt.switchToParentWindow();
-    }
+
+    $(ELEMENT_ACTIONBAR_MORE).click();
+    $(ELEMENT_ACTIONBAR_EDIT).click();
+    if ($(ELEMENT_FILE_FORM_TITLE).is(Condition.enabled)){
+    $(ELEMENT_FILE_FORM_TITLE).setValue(newTitle);}
+    $(ELEMENT_FILEFORM_BLANK_CONTENT).click();
+    $(ELEMENT_FILEFORM_BLANK_CONTENT).sendKeys(content);
   }
 
   /**

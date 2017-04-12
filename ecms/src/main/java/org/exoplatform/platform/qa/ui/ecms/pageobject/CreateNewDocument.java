@@ -10,6 +10,7 @@ import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.openqa.selenium.WebElement;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_NAME;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
@@ -51,14 +52,11 @@ public class CreateNewDocument {
       break;
     case WEBCONTENT:
       info("Select WebContent type");
-      if ((evt.waitForAndGetElement(ELEMENT_ADDDOCUMENT_WEBCONTENT, 3000, 0) == null)
-          && (evt.waitForAndGetElement(ELEMENT_ADDDOCUMENT_NEXT_PAGE, 3000, 0) != null)) {
-        $(ELEMENT_ADDDOCUMENT_NEXT_PAGE).click();
-        $(ELEMENT_ADDDOCUMENT_WEBCONTENT).waitUntil(Condition.appears,10000);
+
+        //$(ELEMENT_ADDDOCUMENT_NEXT_PAGE).click();
+        //$(ELEMENT_ADDDOCUMENT_WEBCONTENT).waitUntil(Condition.appears,10000);
         $(ELEMENT_ADDDOCUMENT_WEBCONTENT).click();
-      } else
-        $(ELEMENT_ADDDOCUMENT_WEBCONTENT).waitUntil(Condition.appears,10000);
-      break;
+       break;
     case ACCESSIBLEMEDIA:
       info("Select Accessiblemedia type");
       $(ELEMENT_ADDDOCUMENT_ACCESSIBLE_MEDIA).click();
@@ -163,10 +161,9 @@ public class CreateNewDocument {
    * @param content
    */
   public void addNewWebContent(String title, String content) {
-    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-    Utils.pause(1000);
-    evt.type(ELEMENT_FILEFORM_BLANK_NAME, title, true);
-    testBase.inputDataToCKEditor(ELEMENT_FILEFORM_BLANK_CONTENT, content);
+    $(ELEMENT_FILEFORM_BLANK_NAME).setValue(title);
+    $(ELEMENT_FILEFORM_BLANK_CONTENT).click();
+    $(ELEMENT_FILEFORM_BLANK_CONTENT).sendKeys(content);
   }
 
   /**

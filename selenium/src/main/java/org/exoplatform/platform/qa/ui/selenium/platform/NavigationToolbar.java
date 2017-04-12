@@ -222,25 +222,14 @@ public class NavigationToolbar {
   public void goToSiteExplorer() {
     info("-- Go to site explorer home page --");
     Utils.pause(500);
-    for (int repeat = 0;; repeat++) {
-      if (repeat > 1) {
-        $(ELEMENT_LINK_SETUP).click();
-        break;
-      }
+
       if (testBase.getExoWebDriver().isIEDriver()) {
-       // evt.waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION, testBase.getDefaultTimeout(), 1, 2);
         $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,10000);
         $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
       } else
        $(ELEMENT_LINK_SETUP).click();
         info("Element " + ELEMENT_MENU_CONTENT_LINK + "... is displayed");
         $(ELEMENT_MENU_CONTENT_LINK).click();
-
-
-
-
-      info("Retry...[" + repeat + "]");
-    }
     Utils.pause(2000);
     info("Site Explorer is shown successfully");
   }
