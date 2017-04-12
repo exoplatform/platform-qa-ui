@@ -158,18 +158,14 @@ public class SiteExplorerHome {
     $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
     Utils.pause(2000);
     info("Right click on nodename");
-
-
     $(byId("UITreeExplorer")).find(byText(title)).contextClick();
     info("Click on Delete link");
     $(ELEMENT_SITEEXPLORER_ACTION_DELETE).click();
     info("Click on Delete button on Confirm popup");
-    // click(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE);
     $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).click();
     info("Verify that the node is deleted");
     Utils.pause(3000);
     if (verify)
-     // evt.waitForElementNotPresent(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", title)));
     $(byText(title)).shouldNot(Condition.exist);
       info("the node is deleted successfully");
   }
@@ -1502,9 +1498,7 @@ public class SiteExplorerHome {
   public void verifyContentCreatedSuccessfully(String title) {
     info("Verify Content was created successfully");
     Utils.pause(2000);
-    evt.waitForAndGetElement(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", title)),
-                             testBase.getDefaultTimeout(),
-                             1);
+    $(byText(title)).waitUntil(Condition.appears,10000);
     info("Content was created successfully");
   }
 

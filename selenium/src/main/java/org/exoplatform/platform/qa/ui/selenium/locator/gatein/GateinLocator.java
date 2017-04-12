@@ -1532,7 +1532,7 @@ public final class GateinLocator {
   public static final By     ELEMENT_CONTENT_DETAIL_CLOSE_BTN                        = By.id("Close");
 
   public static final By     ELEMENT_CONTENT_DETAIL_ADDPATH_BTN                      =
-                                                                By.xpath("//*[@class='uiIconAddPath uiIconLightGray']");
+                                                                By.xpath("//*[@class='uiIconAddPath']");
 
   public static final By     ELEMENT_CONTENT_DETAIL_BY_CONTENT_MODE                  =
                                                                     By.xpath("//*[@class='radio' and @value='ManualViewerMode']");
