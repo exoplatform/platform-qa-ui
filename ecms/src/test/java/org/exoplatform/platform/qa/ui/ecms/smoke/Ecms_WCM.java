@@ -118,6 +118,8 @@ public class Ecms_WCM extends Base {
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
+	@Smoke
+	@Tag("smoke")
 	public  void test10_EditSingleContentViewerPage() {
 		info("Test 10 Edit Single Content Viewer page");
 		String title = "title"+getRandomNumber();
@@ -132,9 +134,8 @@ public class Ecms_WCM extends Base {
 
 		 *Expected Outcome: 
 			- The selected web content/document is displayed*/
-		this.getExoWebDriver().getWebDriver().get(baseUrl+"/acme");
 		navigationToolbar.goToSiteExplorer();
-		siteExplorerHome.goToPath("acme", "Site Management");
+		siteExplorerHome.goToPath("intranet", "Site Management");
 
 		info("Create webcontent 1");
 		siteExplorerHome.goToAddNewContent();
@@ -144,7 +145,7 @@ public class Ecms_WCM extends Base {
 		siteExplorerHome.verifyContentCreatedSuccessfully(content1);
 		
 		info("Select acme folder");
-		siteExplorerHome.selectNode("acme");
+		siteExplorerHome.selectNode("intranet");
 		
 		info("Create webcontent2");
 		siteExplorerHome.goToAddNewContent();
@@ -153,16 +154,14 @@ public class Ecms_WCM extends Base {
 		createNewDoc.saveAndClose();
 		siteExplorerHome.verifyContentCreatedSuccessfully(content2);
 
-		this.getExoWebDriver().getWebDriver().get(baseUrl+"/acme");
 		navigationToolbar.goToAddPage();
 		pageCreationWizard.inputPageInfoStep1(title, true, "English",title, true,false);
-		click(ELEMENT_ADDNEWPAGE_BTNNEXT);
-		click(ELEMENT_ADDNEWPAGE_BTNNEXT);
-		pageCreationWizard.addContentDetail("General Drives/Sites Management/acme",content1);
+		$(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
+		$(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
+		pageCreationWizard.addContentDetail("General Drives/Sites Management/intranet",content1);
 
 		navigationToolbar.goToEditContent();
-		waitForAndGetElement(ELEMENT_CONTENT_DETAIL_VIEW_CONTENT.replace("${title}",content1));
-		
+
 		/*Step number: 2
 		 *Step Name: Step 2: Edit Single Content Viewer page
 		 *Step Description: 
@@ -173,26 +172,21 @@ public class Ecms_WCM extends Base {
 
 		 *Expected Outcome: 
 			- The new selected web content/document is displayed*/ 
-		mouseOver(ELEMENT_CONTENT_DETAIL_VIEW_CONTENT.replace("${title}",content1),true);
-		//click(contDetail.ELEMENT_CONTENT_DETAIL_CONTENT_BOX_PREFERENCES_BTN.replace("${title}",content1));
-		clickByJavascript(ELEMENT_CONTENT_DETAIL_CONTENT_BOX_PREFERENCES_BTN.replace("${title}",content1), 2);
-		click(ELEMENT_CONTENT_DETAIL_ADDPATH_BTN);
-		contentList.selectFolderContent("General Drives/Sites Management/acme",content2);
-		click(ELEMENT_CONTENT_DETAIL_SAVE_BTN);
-		waitForAndGetElement(ELEMENT_CONTENT_DETAIL_VIEW_CONTENT.replace("${title}",content2));
-		
+		$(byClassName("UIPresentationContainer")).hover();
+		$(byClassName("UIPresentationContainer")).find(byClassName("uiIconSetting")).hover().click();
+		$(byClassName("uiIconAddPath")).click();
+		contentList.selectFolderContent("General Drives/Sites Management/intranet",content2);
+		$(ELEMENT_CONTENT_DETAIL_SAVE_BTN).click();
+		$(byText(content2)).waitUntil(Condition.appears,10000);
 		info("Delete created files");
-		this.getExoWebDriver().getWebDriver().get(baseUrl+"/intranet");
 		navigationToolbar.goToSiteExplorer();
 		siteExplorerHome.deleteData(content1, true);
+		$(byText(content2)).waitUntil(Condition.appears,10000);
 		siteExplorerHome.deleteData(content2, true);
 		info("Delete create page");
 		navigationToolbar.goToPotalPages();
-		paMang.deletePage(title,"");
-		info("Delete created node on navigation");
-		navigationToolbar.goToPotalSites();
-		portalManageSites.goToEditNavigation("acme");
-		navigationManagement.deleteNode(title);
+		paMang.deletePage(title,"group");
+
 	}
 
 

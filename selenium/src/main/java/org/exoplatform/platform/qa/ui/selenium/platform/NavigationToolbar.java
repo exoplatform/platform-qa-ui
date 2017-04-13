@@ -66,11 +66,8 @@ public class NavigationToolbar {
   public void goToAddPage() {
     info("Go to add page form");
     $(ELEMENT_LINK_EDIT).click();
-    //evt.mouseOver(ELEMENT_MENU_PAGE_LINK, true);
     $(ELEMENT_MENU_PAGE_LINK).hover();
-    //evt.click(ELEMENT_MENU_ADD_PAGE_LINK, 2, true);
     $(ELEMENT_MENU_ADD_PAGE_LINK).click();
-    //evt.waitForAndGetElement(ELEMENT_PAGE_CREATION_WIZARD, 3000, 0);
     $(ELEMENT_PAGE_CREATION_WIZARD).waitUntil(Condition.appears,10000);
   }
 
@@ -109,21 +106,7 @@ public class NavigationToolbar {
    */
   public void goToPotalPages() {
     info("-- Go to Page Management page --");
-   /* for (int repeat = 0;; repeat++) {
-      if (repeat > 1) {
-        evt.mouseOverAndClick(ELEMENT_LINK_SETUP);
-        break;
-      }
-      // evt.mouseOver(ELEMENT_LINK_SETUP, true);
-      evt.clickByJavascript(ELEMENT_LINK_SETUP, 2);
-      if (evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL, 5000, 0) != null) {
-        info("Element " + ELEMENT_ADMINISTRATION_PORTAL + "... is displayed");
-        break;
-      }
-      info("Retry...[" + repeat + "]");
-    }
-    evt.mouseOverAndClick(ELEMENT_ADMINISTRATION_PORTAL);
-    Utils.pause(2000);*/
+
     info("Page Managements is shown successfully");
     $(ELEMENT_LINK_SETUP).click();
     $(ELEMENT_ADMINISTRATION_PORTAL).click();
@@ -224,7 +207,6 @@ public class NavigationToolbar {
    */
   public void goToSiteExplorer() {
     info("-- Go to site explorer home page --");
-    Utils.pause(500);
 
       if (testBase.getExoWebDriver().isIEDriver()) {
         $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,10000);
@@ -233,7 +215,6 @@ public class NavigationToolbar {
        $(ELEMENT_LINK_SETUP).click();
         info("Element " + ELEMENT_MENU_CONTENT_LINK + "... is displayed");
         $(ELEMENT_MENU_CONTENT_LINK).click();
-    Utils.pause(2000);
     info("Site Explorer is shown successfully");
   }
 

@@ -61,44 +61,36 @@ public class PageCreationWizard {
     info("Input data in page info page at step 1");
     if (name != null && name != "") {
       info("Input name");
-      //evt.type(ELEMENT_PAGE_NAME_INPUT, name, true);
       $(ELEMENT_PAGE_NAME_INPUT).setValue(name);
 
     }
     if (isMode != null) {
       info("Input mode");
       if (isMode)
-        //evt.check(ELEMENT_PAGE_MODE_CHECKBOX, 2);
         $(ELEMENT_PAGE_MODE_CHECKBOX).setSelected(true);
       else
         evt.uncheck(ELEMENT_PAGE_MODE_CHECKBOX, 2);
     }
     if (lang != null && lang != "") {
       info("Input language");
-     // evt.select(ELEMENT_PAGE_LANGUAGE_SELECT_BOX, lang);
       $(ELEMENT_PAGE_LANGUAGE_SELECT_BOX).selectOption(lang);
     }
     if (disName != null && disName != "") {
       info("Input display name");
-      //evt.type(ELEMENT_PAGE_DISPLAY_NAME_INPUT, name, true);
       $(ELEMENT_PAGE_DISPLAY_NAME_INPUT).setValue(name);
     }
     if (isVis != null) {
       info("Input Visible");
       if (isVis)
-        //evt.check(ELEMENT_PAGE_VISIBLE_CHECKBOX, 2);
       $(ELEMENT_PAGE_VISIBLE_CHECKBOX).setSelected(true);
       else
-        //evt.uncheck(ELEMENT_PAGE_VISIBLE_CHECKBOX, 2);
       $(ELEMENT_PAGE_VISIBLE_CHECKBOX).setSelected(false);
     }
     if (isPub != null) {
       info("Input publication date");
       if (isPub)
-        //evt.check(ELEMENT_PAGE_PUBLICATION_DATE_CHECKBOX, 2);
       $(ELEMENT_PAGE_PUBLICATION_DATE_CHECKBOX).setSelected(true);
       else
-        //evt.uncheck(ELEMENT_PAGE_PUBLICATION_DATE_CHECKBOX, 2);
         $(ELEMENT_PAGE_PUBLICATION_DATE_CHECKBOX).setSelected(false);
     }
   }

@@ -158,7 +158,6 @@ public class SiteExplorerHome {
     $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
     Utils.pause(2000);
     info("Right click on nodename");
-    $(byId("UITreeExplorer")).find(byText(title)).waitUntil(Condition.appears,10000);
     $(byId("UITreeExplorer")).find(byText(title)).hover().contextClick();
     info("Click on Delete link");
     $(ELEMENT_SITEEXPLORER_ACTION_DELETE).click();
@@ -478,10 +477,8 @@ public class SiteExplorerHome {
    */
   public void selectNode(String nodeName) {
     info("Verify that nodeName:" + nodeName + " is shown");
-   // evt.waitForAndGetElement(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", nodeName));
     $(byText(nodeName)).waitUntil(Condition.appears,10000);
     info("Click on the nodeName:" + nodeName);
-    //evt.click(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", nodeName));
     $(byText(nodeName)).click();
     info("Finished selecting nodeName:" + nodeName);
   }

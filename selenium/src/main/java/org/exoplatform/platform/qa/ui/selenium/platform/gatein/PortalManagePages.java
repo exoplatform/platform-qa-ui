@@ -76,14 +76,9 @@ public class PortalManagePages {
     searchPage(titlePage, "", type);
     $(ELEMENT_MAGEPAGES_CONTENT_ACTION_COLUMN_DELETE).click();
     alert.acceptAlert();
-    /*
-     * waitForAndGetElement(ELEMENT_MANGEPAGES_INFORM_POPUP_OK, 4000, 0);
-     * click(ELEMENT_MANGEPAGES_INFORM_POPUP_OK, 2);
-     */
+
     evt.waitForAndGetElement(ELEMENT_MANGEPAGES_INFORM_POPUP_CLOSE, 4000, 0);
     $(ELEMENT_MANGEPAGES_INFORM_POPUP_CLOSE).click();
-   // evt.waitForElementNotPresent(ELEMENT_MANAGEPAGES_CONTENT_TITLE_COLUMN.replace("${tilte}", titlePage));
-    Utils.pause(2000);
   }
 
   /**

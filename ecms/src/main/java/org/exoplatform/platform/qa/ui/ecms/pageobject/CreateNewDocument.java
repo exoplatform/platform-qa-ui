@@ -53,8 +53,7 @@ public class CreateNewDocument {
     case WEBCONTENT:
       info("Select WebContent type");
 
-        //$(ELEMENT_ADDDOCUMENT_NEXT_PAGE).click();
-        //$(ELEMENT_ADDDOCUMENT_WEBCONTENT).waitUntil(Condition.appears,10000);
+
         $(ELEMENT_ADDDOCUMENT_WEBCONTENT).click();
        break;
     case ACCESSIBLEMEDIA:
