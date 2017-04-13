@@ -1,10 +1,10 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.social;
-
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+package org.exoplatform.platform.qa.ui.social.pageobject;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class UserPageBase {
 

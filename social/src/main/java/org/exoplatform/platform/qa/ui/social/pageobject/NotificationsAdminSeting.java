@@ -1,12 +1,11 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.social;
-
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-import org.openqa.selenium.By;
+package org.exoplatform.platform.qa.ui.social.pageobject;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.By;
+
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class NotificationsAdminSeting {
   private final TestBase       testBase;
