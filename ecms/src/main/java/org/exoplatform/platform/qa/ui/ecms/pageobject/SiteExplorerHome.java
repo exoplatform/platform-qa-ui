@@ -158,15 +158,14 @@ public class SiteExplorerHome {
     $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
     Utils.pause(2000);
     info("Right click on nodename");
-    $(byId("UITreeExplorer")).find(byText(title)).contextClick();
+    $(byId("UITreeExplorer")).find(byText(title)).waitUntil(Condition.appears,10000);
+    $(byId("UITreeExplorer")).find(byText(title)).hover().contextClick();
     info("Click on Delete link");
     $(ELEMENT_SITEEXPLORER_ACTION_DELETE).click();
     info("Click on Delete button on Confirm popup");
     $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).click();
     info("Verify that the node is deleted");
     Utils.pause(3000);
-    if (verify)
-    $(byText(title)).shouldNot(Condition.exist);
       info("the node is deleted successfully");
   }
 
