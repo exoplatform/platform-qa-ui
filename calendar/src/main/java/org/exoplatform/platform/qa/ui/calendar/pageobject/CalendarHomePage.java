@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -11,6 +12,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -55,10 +58,8 @@ public class CalendarHomePage {
       evt.waitForAndGetElement(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Week"), testBase.getDefaultTimeout(), 1, 2);
       break;
     case LIST:
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "List"), testBase.getDefaultTimeout(), 1);
-      evt.click(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "List"));
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "List"), testBase.getDefaultTimeout(), 1, 2);
-      break;
+      $(byId("UIActionBar")).find(byText("List")).waitUntil(Condition.appears,10000).click();
+           break;
     case MONTH:
       evt.waitForAndGetElement(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"), testBase.getDefaultTimeout(), 1);
       evt.clickByJavascript(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"));

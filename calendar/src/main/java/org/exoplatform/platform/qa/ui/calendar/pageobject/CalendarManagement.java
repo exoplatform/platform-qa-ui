@@ -16,6 +16,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_USER_CLOSE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -118,10 +119,10 @@ public class CalendarManagement {
    *          is deleted, = false: not verify that calendar is deleted,
    */
   public void deleteCalendar(String name, boolean... verify) {
-    if (evt.waitForAndGetElement(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar", name), 2000, 0) != null) {
+    if ($(byId("UICalendars")).find(byText(name)).is(Condition.exist)) {
       boolean isVerify = (verify.length > 0 ? verify[0] : false);
       info("Remove calendar");
-      testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+      refresh();
       executeActionCalendar(name, menuOfCalendarOption.REMOVE);
       if (isVerify)
         alert.verifyAlertMessage(ELEMENT_CONFIRM_REMOVE_CALENDAR_MSG);
@@ -347,10 +348,11 @@ public class CalendarManagement {
   public void openMenuOfCalendar(String calendar) {
     info("Open menu of a calendar");
     Utils.pause(2000);
-    evt.mouseHoverByJavaScript(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar", calendar), 2);
+/*    evt.mouseHoverByJavaScript(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar", calendar), 2);
     evt.clickByJavascript(ELEMENT_CALENDAR_SETTING_ICON.replace("$calendar", calendar), 2);
-    evt.waitForAndGetElement(ELEMENT_CALENDAR_RIGHT_MENU);
-    Utils.pause(1000);
+    evt.waitForAndGetElement(ELEMENT_CALENDAR_RIGHT_MENU);*/
+    $(byClassName("contentContainer")).find(byText(calendar)).hover();
+    $(byClassName("contentContainer")).findAll(byClassName("uiIconCalSettingMini")).get(2).click();
   }
 
   /**
@@ -377,8 +379,9 @@ public class CalendarManagement {
       evt.waitForAndGetElement(ELEMENT_CALENDAR_ADD_FORM);
       break;
     case REMOVE:
-      evt.clickByJavascript(ELEMENT_CALENDAR_REMOVE_MENU, 2);
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_REMOVE_FORM);
+     // evt.clickByJavascript(ELEMENT_CALENDAR_REMOVE_MENU, 2);
+      $(ELEMENT_CALENDAR_REMOVE_MENU).click();
+      $(ELEMENT_CALENDAR_REMOVE_FORM).waitUntil(Condition.appears,10000);
       break;
     case SHARE:
       evt.clickByJavascript(ELEMENT_CALENDAR_SHARE_MENU, 2);
@@ -887,11 +890,12 @@ public class CalendarManagement {
 
     } else {
       info("Double click on the event");
-      scrollElementIntoView(this.testBase.getExoWebDriver().getWebDriver()
-                                         .findElement(By.xpath(ELEMENT_EVENT_TASK_TITLE.replace("${name}", name))));
-      action.moveToElement(evt.waitForAndGetElement(ELEMENT_EVENT_TASK_TITLE.replace("${name}", name))).doubleClick().perform();
+     // scrollElementIntoView(this.testBase.getExoWebDriver().getWebDriver()
+       //                                  .findElement(By.xpath(ELEMENT_EVENT_TASK_TITLE.replace("${name}", name))));
+     // action.moveToElement(evt.waitForAndGetElement(ELEMENT_EVENT_TASK_TITLE.replace("${name}", name))).doubleClick().perform();
+    $(byClassName("spliterResizableListArea")).find(byText(name)).doubleClick();
     }
-    evt.waitForAndGetElement(ELEMENT_ADD_EDIT_EVENT_POPUP, 4000, 0);
+    $(ELEMENT_ADD_EDIT_EVENT_POPUP).waitUntil(Condition.appears,10000);
     info("The edit form is shown");
   }
 

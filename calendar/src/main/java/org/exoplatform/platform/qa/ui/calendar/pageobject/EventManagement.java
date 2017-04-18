@@ -197,22 +197,22 @@ public class EventManagement {
   public void inputBasicDetailEvent(String name, String note, String... opt) {
     info("Input into basic fields of Quick EVENT form");
     if (name != null) {
-      evt.type(ELEMENT_ADD_EDIT_EVENT_NAME, name, true);
+      $(ELEMENT_ADD_EDIT_EVENT_NAME).setValue(name);
     }
     if (note != null) {
-      evt.type(ELEMENT_ADD_EDIT_EVENT_NOTE, note, true);
+      $(ELEMENT_ADD_EDIT_EVENT_NOTE).setValue(note);
     }
     if (opt.length > 0 && opt[0] != null) {
-      evt.select(ELEMENT_ADD_EDIT_EVENT_CALENDAR, opt[0], 2);
+      $(ELEMENT_ADD_EDIT_EVENT_CALENDAR).selectOption(opt[0]);
     }
     if (opt.length > 1 && opt[1] != null) {
-      evt.select(ELEMENT_ADD_EDIT_EVENT_CATEGORY, opt[1]);
+      $(ELEMENT_ADD_EDIT_EVENT_CALENDAR).selectOption(opt[1]);
     }
     if (opt.length > 2 && opt[2] != null) {
-      evt.type(ELEMENT_ADD_EDIT_EVENT_LOCATION, opt[2], true);
+      $(ELEMENT_ADD_EDIT_EVENT_LOCATION).setValue(opt[2]);
     }
     if (opt.length > 3 && opt[3] != null) {
-      evt.select(ELEMENT_ADD_EDIT_EVENT_PRIORITY, opt[3]);
+      $(ELEMENT_ADD_EDIT_EVENT_CALENDAR).selectOption(opt[3]);
     }
   }
 
@@ -723,11 +723,10 @@ public class EventManagement {
    */
   public void saveAddEventDetails() {
     info("Sae add event details");
-    evt.waitForAndGetElement(ELEMENT_BUTTON_EVENT_SAVE_DETAILS, testBase.getDefaultTimeout(), 1);
+    $(ELEMENT_BUTTON_EVENT_SAVE_DETAILS).waitUntil(Condition.appears,10000);
     // click(ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
     // waitForElementNotPresent(ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
-    evt.clickByJavascript(ELEMENT_BUTTON_EVENT_SAVE_DETAILS, 2);
-    Utils.pause(500);
+    $(ELEMENT_BUTTON_EVENT_SAVE_DETAILS).click();
   }
 
   /**
