@@ -1,15 +1,6 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.calendar;
+package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_USER_CLOSE_BUTTON;
-import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -17,6 +8,17 @@ import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_USER_CLOSE_BUTTON;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class CalendarManagement {
 
@@ -24,13 +26,13 @@ public class CalendarManagement {
 
   public PlatformPermission    pPer;
 
-  public EventManagement       evMg;
+  public EventManagement evMg;
 
   public ManageAlert           alert;
 
   public Button                button;
 
-  public CalendarHomePage      cHome;
+  public CalendarHomePage cHome;
 
   private ElementEventTestBase evt;
 
@@ -63,9 +65,9 @@ public class CalendarManagement {
     case ADDCAL:
       info("Go to add calendar");
       Utils.pause(2000);
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_MENU_ACTIONS_ADD, testBase.getDefaultTimeout(), 1);
-      evt.click(ELEMENT_CALENDAR_MENU_ACTIONS_ADD, 0, true);
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_ADD_FORM, testBase.getDefaultTimeout(), 1);
+      $(ELEMENT_CALENDAR_MENU_ACTIONS_ADD).waitUntil(Condition.appears,10000);
+      $(ELEMENT_CALENDAR_MENU_ACTIONS_ADD).click();
+      $(ELEMENT_CALENDAR_ADD_FORM).waitUntil(Condition.appears,10000);
       break;
     case REMOTECAL:
       info("Go to remote calendar");
@@ -157,14 +159,14 @@ public class CalendarManagement {
    */
   public void inputDataInDetailTabCalendarForm(String name, String description, String color) {
     info("Input into tab Detail of Add calendar form");
-    evt.click(ELEMENT_CALENDAR_DETAIL_TAB);
+    $(ELEMENT_CALENDAR_DETAIL_TAB).click();
     if (name != null && name != "")
-      evt.type(ELEMENT_CALENDAR_DISPLAY_NAME_INPUT, name, true);
+      $(ELEMENT_CALENDAR_DISPLAY_NAME_INPUT).setValue(name);
     if (description != null && description != "")
-      evt.type(ELEMENT_CALENDAR_DESC_INPUT, description, true);
+      $(ELEMENT_CALENDAR_DESC_INPUT).setValue(description);
     if (color != null && color != "") {
-      evt.click(ELEMENT_CALENDAR_COLOR);
-      evt.click(ELEMENT_CALENDAR_COLOR_SELECT.replace("${color}", color));
+      $(ELEMENT_CALENDAR_COLOR).click();
+      $(ELEMENT_CALENDAR_COLOR_SELECT.replace("${color}", color)).click();
     }
   }
 
@@ -179,16 +181,16 @@ public class CalendarManagement {
    */
   public void selectGroupInGroupTabCalendarForm(String group, boolean isType) {
     info("Input into tab Show in Group of Add calendar form");
-    evt.click(ELEMENT_CALENDAR_GROUP_TAB);
+    $(ELEMENT_CALENDAR_GROUP_TAB).click();
     if (group != null && group != "") {
       if (isType) {
-        evt.type(ELEMENT_CALENDAR_GROUP_INPUT, group, true);
+        $(ELEMENT_CALENDAR_GROUP_INPUT).setValue(group);
       } else {
         evt.click(ELEMENT_CALENDAR_SELECT_GROUP_ICON);
         evt.click(group);
       }
     }
-    evt.click(ELEMENT_CALENDAR_ADD_GROUP_BUTTON);
+    $(ELEMENT_CALENDAR_ADD_GROUP_BUTTON).click();
   }
 
   /**
@@ -219,8 +221,9 @@ public class CalendarManagement {
         evt.type(ELEMENT_CALENDAR_GROUP_INPUT_USER, user[i], true);
         break;
       case 1:
-        evt.click(ELEMENT_CALENDAR_GROUP_SELECT_USER_BTN);
-        evt.click(ELEMENT_CALENDAR_GROUP_USER_IN_SELECT_FORM.replace("$user", user[i]));
+        $(ELEMENT_CALENDAR_GROUP_SELECT_USER_BTN).click();
+        //evt.click(ELEMENT_CALENDAR_GROUP_USER_IN_SELECT_FORM.replace("$user", user[i]));
+        $(byText(user[i])).click();
         break;
       case 2:
         String[] groupMem = user[i].split(":");
@@ -812,7 +815,7 @@ public class CalendarManagement {
       break;
     case DELETE:
       info("Select Delete option");
-      evt.click(ELEMENT_CONTEXT_MENU_DELETE);
+      $(ELEMENT_CONTEXT_MENU_DELETE).click();
       // click(ELEMENT_CONFIRM_POPUP_OK);
       break;
     case DELETE_RECURRING:
@@ -914,10 +917,12 @@ public class CalendarManagement {
   public void deleteTaskEvent(String name) {
     info("Right click on an Event/Task");
     // scrollElementIntoView(this.driver.findElement(By.xpath(ELEMENT_EVENT_TASK_TITLE.replace("${name}",name))));
-    evt.rightClickOnElement(By.xpath(ELEMENT_EVENT_TASK_TITLE.replace("${name}", name)));
+    //evt.rightClickOnElement(By.xpath(ELEMENT_EVENT_TASK_TITLE.replace("${name}", name)));
+    $(byText(name)).contextClick();
     selectOptionByRightclickOnEvent(contextMenuEditEvenOption.DELETE);
-    evt.click(ELEMENT_YES_BUTTON);
-    evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_TITLE.replace("${name}", name));
+    $(ELEMENT_YES_BUTTON).click();
+    //evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_TITLE.replace("${name}", name));
+    $(byText(name)).shouldNot(Condition.exist);
   }
 
   /**

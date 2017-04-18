@@ -38,6 +38,7 @@
     <module>core</module>
     <module>selenium</module>
     <module>commons</module>
+      <module>calendar</module>
 
     <module>forum</module>
 

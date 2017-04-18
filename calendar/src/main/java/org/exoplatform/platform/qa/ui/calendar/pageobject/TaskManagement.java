@@ -1,22 +1,21 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.calendar;
+package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
-import static org.bouncycastle.crypto.tls.ConnectionEnd.server;
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_USER_CLOSE_BUTTON;
-import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.Utils;
+import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
-import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import static org.bouncycastle.crypto.tls.ConnectionEnd.server;
+import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_USER_CLOSE_BUTTON;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class TaskManagement {
   private final TestBase       testBase;

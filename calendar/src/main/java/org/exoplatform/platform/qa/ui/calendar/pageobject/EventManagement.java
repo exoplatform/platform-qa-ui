@@ -1,30 +1,31 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.calendar;
+package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
-import static org.bouncycastle.crypto.tls.ConnectionEnd.server;
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_USER_CLOSE_BUTTON;
-import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import org.openqa.selenium.By;
-
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.By;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import static com.codeborne.selenide.Selenide.$;
+import static org.bouncycastle.crypto.tls.ConnectionEnd.server;
+import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_USER_CLOSE_BUTTON;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class EventManagement {
   private final TestBase       testBase;
 
   public PlatformPermission    pPer;
 
-  public CalendarHomePage      cHome;
+  public CalendarHomePage cHome;
 
   public ManageAlert           alert;
 
@@ -120,7 +121,7 @@ public class EventManagement {
 
   /**
    * Open add event/task by right click in Month view
-   * 
+   *
    * @param date date to create event format: MM/dd/yyyy (Ex: 12/09/2014)
    */
   public void goToAddEventByRightClickForMothnView(String date) {
@@ -156,14 +157,14 @@ public class EventManagement {
     info("Go to Add Event page from action bar");
     Utils.pause(2000);
     // waitForAndGetElement(ELEMENT_BUTTON_EVENT, DEFAULT_TIMEOUT, 1);
-    evt.click(ELEMENT_BUTTON_EVENT);
+    $(ELEMENT_BUTTON_EVENT).click();
     /// clickByJavascript(ELEMENT_BUTTON_EVENT, 2);
-    evt.waitForAndGetElement(ELEMENT_QUICK_ADD_EVENT_POPUP, testBase.getDefaultTimeout(), 1);
+    $(ELEMENT_QUICK_ADD_EVENT_POPUP).waitUntil(Condition.appears,10000);
   }
 
   /**
    * Input into basic fields of Quick EVENT form
-   * 
+   *
    * @param name name of a EVENT
    * @param note note of a EVENT
    * @param opt optional parameter opt[0]: calendar opt[1]: category
@@ -171,23 +172,23 @@ public class EventManagement {
   public void inputBasicQuickEvent(String name, String note, String... opt) {
     info("Input into basic fields of Quick EVENT form");
     if (name != null) {
-      evt.type(ELEMENT_QUICK_INPUT_EVENT_NAME, name, true);
+      $(ELEMENT_QUICK_INPUT_EVENT_NAME).setValue(name);
     }
     if (note != null) {
-      evt.type(ELEMENT_QUICK_INPUT_EVENT_NOTE, note, true);
+      $(ELEMENT_QUICK_INPUT_EVENT_NOTE).setValue(note);
     }
     if (opt.length > 0 && opt[0] != null) {
-      evt.select(ELEMENT_QUICK_INPUT_EVENT_CALENDAR, opt[0]);
+      $(ELEMENT_QUICK_INPUT_EVENT_CALENDAR).selectOption(opt[0]);
     }
     if (opt.length > 1 && opt[1] != null) {
-      evt.select(ELEMENT_QUICK_INPUT_EVENT_CATEGORY, opt[1]);
+      $(ELEMENT_QUICK_INPUT_EVENT_CALENDAR).selectOption(opt[1]);
     }
     Utils.pause(2000);
   }
 
   /**
    * Input into basic fields of EVENT detail form
-   * 
+   *
    * @param name name of a EVENT
    * @param note note of a EVENT
    * @param opt optional parameter opt[0]: calendar opt[1]: category opt[2]:
@@ -218,7 +219,7 @@ public class EventManagement {
   /**
    * Input into "From, To" and check/uncheck allday checkbox fields of a EVENT
    * in quick form
-   * 
+   *
    * @param from From date, time of a EVENT i.e.: 11/06/2013 14:00
    * @param to To date, time of a EVENT, i.e.: 11/06/2013 14:00
    * @param allDay Option "all day" of a EVENT
@@ -264,7 +265,7 @@ public class EventManagement {
   /**
    * Input into "From, To" and check/uncheck allday checkbox fields of a EVENT
    * in detail form
-   * 
+   *
    * @param from From date, time of a EVENT i.e.: 11/06/2013 14:00
    * @param to To date, time of a EVENT, i.e.: 11/06/2013 14:00
    * @param allDay Option "all day" of a EVENT
@@ -313,7 +314,7 @@ public class EventManagement {
 
   /**
    * Input into basic fields of Quick EVENT form
-   * 
+   *
    * @param name
    * @param from From date, time of a EVENT i.e.: 11/06/2013 14:00
    * @param to To date, time of a EVENT, i.e.: 11/06/2013 14:00
@@ -328,7 +329,7 @@ public class EventManagement {
 
   /**
    * Input into basic fields of detail EVENT form
-   * 
+   *
    * @param name
    * @param note
    * @param from From date, time of a EVENT i.e.: 11/06/2013 14:00
@@ -343,7 +344,7 @@ public class EventManagement {
 
   /**
    * Attach file in "Add new EVENT" form
-   * 
+   *
    * @param path path of attachment of a EVENT
    */
   public void attachFileToEvent(String path, Boolean... opt) {
@@ -368,7 +369,7 @@ public class EventManagement {
 
   /**
    * Check default suggestion EVENT time in detail add form
-   * 
+   *
    * @param fromDateTime (Format: MM/dd/yyyy HH:mm)
    * @param toDateTime (Format: MM/dd/yyyy HH:mm)
    * @param duration
@@ -430,7 +431,7 @@ public class EventManagement {
 
   /**
    * Check default suggestion EVENT time in detail add form
-   * 
+   *
    * @param fromDateTime (Format: MM/dd/yyyy HH:mm)
    * @param toDateTime (Format: MM/dd/yyyy HH:mm)
    * @param duration
@@ -492,7 +493,7 @@ public class EventManagement {
 
   /**
    * add participants into schedule
-   * 
+   *
    * @param user
    * @param type
    */
@@ -507,7 +508,7 @@ public class EventManagement {
 
   /**
    * convertFromTimeToIndex
-   * 
+   *
    * @param time (ex: HH:mm)
    */
   @SuppressWarnings("deprecation")
@@ -529,7 +530,7 @@ public class EventManagement {
 
   /**
    * Check busy time of user
-   * 
+   *
    * @param user
    * @param from (ex: HH:mm)
    * @param to (ex: HH:mm)
@@ -552,7 +553,7 @@ public class EventManagement {
 
   /**
    * Check schedule time of user
-   * 
+   *
    * @param from (ex: MM/dd/yyyy HH:mm)
    * @param to (ex: MM/dd/yyyy HH:mm)
    */
@@ -587,7 +588,7 @@ public class EventManagement {
 
   /**
    * change time event from schedule tab
-   * 
+   *
    * @param option
    * @param fromTime
    * @param toTime
@@ -616,7 +617,7 @@ public class EventManagement {
 
   /**
    * Select privacy
-   * 
+   *
    * @param isPublic true: check public checkbox false: check private checkbox
    */
   public void selectPrivacyParticipant(boolean isPublic) {
@@ -631,7 +632,7 @@ public class EventManagement {
 
   /**
    * selectAvailable on participant tab
-   * 
+   *
    * @param option
    */
   public void selectAvailable(selectAvailableOption option) {
@@ -657,7 +658,7 @@ public class EventManagement {
 
   /**
    * selectSendInvitation
-   * 
+   *
    * @param option
    */
   public void selectSendInvitation(PlatformBase.selectInvitationOption option) {
@@ -684,7 +685,7 @@ public class EventManagement {
 
   /**
    * select user participant
-   * 
+   *
    * @param users
    * @param content
    * @param type
@@ -712,10 +713,9 @@ public class EventManagement {
   public void saveQuickAddEvent() {
     // click(ELEMENT_BUTTON_EVENT_SAVE);
     info("Save quick add event");
-    evt.waitForAndGetElement(ELEMENT_BUTTON_EVENT_SAVE, testBase.getDefaultTimeout(), 1);
-    evt.clickByJavascript(ELEMENT_BUTTON_EVENT_SAVE, 2);
-    evt.waitForElementNotPresent(ELEMENT_BUTTON_EVENT_SAVE);
-    Utils.pause(2000);
+    $(ELEMENT_BUTTON_EVENT_SAVE).waitUntil(Condition.appears,10000);
+    $(ELEMENT_BUTTON_EVENT_SAVE).click();
+    $(ELEMENT_BUTTON_EVENT_SAVE).waitUntil(Condition.disappears,10000);
   }
 
   /**
@@ -731,7 +731,7 @@ public class EventManagement {
   }
 
   /**
-   * 
+   *
    */
 
   /**
@@ -761,7 +761,7 @@ public class EventManagement {
 
   /**
    * Remove attachment
-   * 
+   *
    * @param file name of file
    */
   public void removeAttachment(String file) {
@@ -771,7 +771,7 @@ public class EventManagement {
 
   /**
    * input recurring info event
-   * 
+   *
    * @param repeatType repeat type: Daily, Weekly, Monthly, Yearly;
    * @param repeatInterval
    * @param repeatOn
@@ -822,7 +822,7 @@ public class EventManagement {
 
   /**
    * Add more Repeat By option
-   * 
+   *
    * @param isMonthByMonth
    */
   public void selectRepeatByOption(boolean isMonthByMonth) {
@@ -835,7 +835,7 @@ public class EventManagement {
 
   /**
    * Delete an event
-   * 
+   *
    * @param name name of event or task
    * @param view view of calendar: day, week, list...
    * @param optionDay ONEDAY or ALLDAY

@@ -1,13 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.calendar;
-
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
@@ -15,6 +6,14 @@ import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
+import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class CalendarHomePage {
 

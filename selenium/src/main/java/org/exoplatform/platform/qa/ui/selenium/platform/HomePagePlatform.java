@@ -58,12 +58,11 @@ public class HomePagePlatform {
    */
   public void goToCalendarPage() {
     info("-- Go to calendar home page --");
-    Utils.pause(3000);
-    evt.waitForAndGetElement(ELEMENT_CALENDAR_LINK_PLF, testBase.getDefaultTimeout(), 1);
+    $(ELEMENT_CALENDAR_LINK_PLF).waitUntil(Condition.appears,10000);
     info("click on Calendar link");
-    evt.click(ELEMENT_CALENDAR_LINK_PLF);
+    $(ELEMENT_CALENDAR_LINK_PLF).click();
     info("Verify that Calendar page is shown");
-    evt.waitForAndGetElement(ELEMENT_CALENDAR_WORKING_PANEL);
+    $(ELEMENT_CALENDAR_WORKING_PANEL).waitUntil(Condition.appears,10000);
     info("The calendar page is shown successfully");
   }
 
