@@ -85,11 +85,11 @@ public class PLFNavigationLeftNavigationTestIT extends Base {
 
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1 + " - description");
-   // $ (byText("Invite users from group")).waitUntil(Condition.disappears,10000);
+    $(byClassName("UIPopupWindow")).find (byText("Settings")).waitUntil(Condition.disappears,10000);
 
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space2, space2 + " - description");
-    //$(byClassName("UIPopupWindow")).find (byText("Settings")).waitUntil(Condition.disappear,10000);
+    $(byClassName("UIPopupWindow")).find (byText("Settings")).waitUntil(Condition.disappears,10000);
 		/*Step Number: 1
 		 *Step Name: Connect to intranet
 		 *Step Description: 
@@ -110,11 +110,11 @@ public class PLFNavigationLeftNavigationTestIT extends Base {
 
 		 *Expected Outcome: 
 			- All spaces having a word containing with the inputed letter are displayed*/
-    type(ELEMENT_SEARCH_SPACE, "spa");
+    ELEMENT_SEARCH_SPACE.setValue("spa");
     //waitForAndGetElement(By.xpath(ELEMENT_RESULT_SEARCH_SPACE.replace("{$space}", space1))).isDisplayed();
     //waitForAndGetElement(By.xpath(ELEMENT_RESULT_SEARCH_SPACE.replace("{$space}", space2))).isDisplayed();
-    $(byText(space1)).should(Condition.exist);
-    $(byText(space2)).should(Condition.exist);
+    $(byText(space1)).waitUntil(Condition.appears,10000);
+    $(byText(space2)).waitUntil(Condition.appears,10000);
     /*
     homePagePlatform.goToHomePage();
 

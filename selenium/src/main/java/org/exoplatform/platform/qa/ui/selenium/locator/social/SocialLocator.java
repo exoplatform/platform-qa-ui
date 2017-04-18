@@ -20,7 +20,11 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.locator.social;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
+
 
 public final class SocialLocator {
 
@@ -1469,8 +1473,8 @@ public final class SocialLocator {
    * SPACE MANAGEMENTT
    ***********************************************************************/
   // Add form space
-  public static final By     ELEMENT_ADDNEWSPACE_BUTTON                                        =
-                                                        By.xpath("//button[contains(.,'Add New Space')]");
+  public static final SelenideElement     ELEMENT_ADDNEWSPACE_BUTTON                                        =$(byText("Add New Space"));
+
 
   public static final By     ELEMENT_ADDNEWSPACE_FORM                                          =
                                                       By.xpath("//span[@class='PopupTitle popupTitle' and text()='Add New Space']");
@@ -1753,11 +1757,9 @@ public final class SocialLocator {
                                                                      By.xpath(".//*[@id='UIAddApplication']//*[@class='uiIconClose pull-right']");
 
   // Settings tab
-  public static final By     ELEMENT_SPACE_NAME_INPUT                                          =
-                                                      By.xpath("//input[contains(@name,'displayName')]");
+  public static final SelenideElement ELEMENT_SPACE_NAME_INPUT =$(byId("displayName"));
 
-  public static final By     ELEMENT_SPACE_DESCRIPTION_INPUT                                   =
-                                                             By.xpath("//textarea[contains(@name,'description')]");
+  public static final SelenideElement ELEMENT_SPACE_DESCRIPTION_INPUT= $(byId("description"));
 
   public static final By     ELEMENT_SPACE_SETTING_TAB                                         =
                                                        By.xpath(".//*[contains(@data-target,'#UISpaceInfo-tab')]");
@@ -2099,8 +2101,8 @@ public final class SocialLocator {
                                                             ".//*[@id='UISpaceApplication']//*[contains(text(),'{$application}')]/../..//*[@class='uiIconClose pull-right']";
 
   // Button create
-  public static final By     ELEMENET_SPACE_CREATE_BUTTON                                      =
-                                                          By.xpath("//*[@class='uiAction']/*[text()='Create Space']");
+  public static final SelenideElement     ELEMENET_SPACE_CREATE_BUTTON                                      =$(byClassName("PopupContent")).find(byText("Create Space"));
+
 
   // Activity like
   public static final By     ELEMENT_ACTIVITY_LIKE_EDIT_BTN                                    =

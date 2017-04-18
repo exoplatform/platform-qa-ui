@@ -48,7 +48,7 @@ public class PLFNavigationSpaceNavigationTestIT extends Base {
     String space1 = "space" + getRandomNumber();
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1);
-    $(ELEMENT_SPACE_NAME_INPUT).waitUntil(Condition.disappear,10000);
+    ELEMENT_SPACE_NAME_INPUT.waitUntil(Condition.disappears,10000);
 
     /*
      * Step Number: 1 Step Name: Show space applications Step Description: -

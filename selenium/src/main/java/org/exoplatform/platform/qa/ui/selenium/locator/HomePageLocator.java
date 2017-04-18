@@ -20,15 +20,19 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.locator;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 
 public final class HomePageLocator {
 
-  public static final By ELEMENT_PLF_HOMEPAGE_DISPLAY =
-          By.xpath("//*[@class='navItemSelected']//*[@href='/portal/intranet/home']");
+  public static final SelenideElement ELEMENT_PLF_HOMEPAGE_DISPLAY =
+          $(byClassName("navItemSelected"));
 
-  public static final By ELEMENT_PLF_HOMEPAGE_ACTIVITY_PORTLET =
-          By.xpath(".//*[@id='UIUserActivityStreamPortlet']//div[@class='uiUserActivitiesContainer']");
+  public static final SelenideElement ELEMENT_PLF_HOMEPAGE_ACTIVITY_PORTLET =
+          $(byId("UIUserActivityStreamPortlet"));
 
   public static final By ELEMENT_PLF_HOMEPAGE_GADGET_PORTLET =
           By.xpath(".//*[@id='OfficeRightMiddle']");
@@ -70,8 +74,8 @@ public final class HomePageLocator {
   public static final By ELEMENT_CONNECTIONS_LINK_PLF =
           By.xpath("//*[@class='uiCompanyNavigations']//*[contains(@class,'uiIconPLFMyConnection')]");
 
-  public static final By ELEMENT_SEARCH_SPACE =
-          By.xpath(".//*[@id='UISpaceNavigationPortlet']//input[contains(@placeholder,'Search Spaces')]");
+  public static final SelenideElement ELEMENT_SEARCH_SPACE =
+          $(byClassName("searchText "));
 
   public static final String
           ELEMENT_RESULT_SEARCH_SPACE =
@@ -114,8 +118,8 @@ public final class HomePageLocator {
           ELEMENT_ACTIVITY_MOVE_WIKI_PAGE =
           "//*[text()='${title}']/../../../..//*[@class='contentComment' and contains(text(), 'Page has been moved to: ${path}')]";
 
-  public static final By ELEMENT_MY_SPACE_LINK_PLF =
-          By.xpath("//*[@id='UISpaceNavigationPortlet']//*[contains(@href,'/spaces')]");
+  public static final SelenideElement ELEMENT_MY_SPACE_LINK_PLF =$(byClassName("uiSpaceNavigationPortlet")).find(byLinkText("MY SPACES"));
+
 
   public static final By ELEMENT_ALL_SPACE_JOIN_LINK =
           By.cssSelector("#UISpaceNavigationPortlet .uiIconPLFMan");

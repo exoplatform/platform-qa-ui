@@ -26,6 +26,10 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byId;
+import static com.codeborne.selenide.Selenide.$;
+
 public final class LoginTestIT extends Base {
 
   public LoginTestIT() {
@@ -34,7 +38,6 @@ public final class LoginTestIT extends Base {
   }
 
   @Test
-  @Tag("smoke")
   public void signIn() {
     // Init instance for signInTest
     Platform plf = new Platform();
@@ -42,6 +45,7 @@ public final class LoginTestIT extends Base {
     plf.ensureLicenseIsAccepted().ensureRegisterSoftwareIsSkipped().ensureAccountSetupIsSkipped();
 
     new Login().signIn();
+
 
   }
 

@@ -21,7 +21,9 @@
 package org.exoplatform.platform.qa.ui.commons.pageobject;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.openqa.selenium.By;
 
@@ -37,7 +39,7 @@ public class Login {
 
 
   public boolean isUserLogged(){
-    return $(By.id("UIUserPlatformToolBarPortlet")).exists();
+    return $(byId("UIUserPlatformToolBarPortlet")).exists();
 
   }
 
@@ -53,17 +55,18 @@ public class Login {
    * @param password
    */
   public Login signIn(final String user, final String password) {
-    $(By.name("username")).setValue("root");
-    $(By.name("password")).setValue("gtn");
-    $(By.className("button")).click();
+    $(byId("username")).setValue("root");
+    $(byId("UIPortalLoginFormControl")).setValue("gtn");
+    $(byClassName("button")).click();
 
     return this;
   }
 
+
   public Login signOut() {
 
-    $(By.id("UIUserPlatformToolBarPortlet")).click();
-    $(By.className("uiIconPLFLogout")).click();
+    $(byId("UIUserPlatformToolBarPortlet")).click();
+    $(byClassName("uiIconPLFLogout")).click();
 
     return this;
   }

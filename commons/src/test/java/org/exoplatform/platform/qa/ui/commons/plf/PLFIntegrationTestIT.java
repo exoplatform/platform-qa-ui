@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.commons.plf;
 
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.core.context.Smoke;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.junit.jupiter.api.Assertions;
@@ -32,9 +33,9 @@ public class PLFIntegrationTestIT extends Base {
 		 *Expected Outcome: 
 			Home page is show properly, inlcuding activity stream at the center, gadgets that are well displayed at the right*/
     info("Verify that Home page is shown");
-    waitForAndGetElement(ELEMENT_PLF_HOMEPAGE_DISPLAY).isDisplayed();
+    ELEMENT_PLF_HOMEPAGE_DISPLAY.waitUntil(Condition.appears,10000);
     info("Verify that Activity stream is shown on the home page");
-    waitForAndGetElement(ELEMENT_PLF_HOMEPAGE_ACTIVITY_PORTLET).isDisplayed();
+    ELEMENT_PLF_HOMEPAGE_ACTIVITY_PORTLET.waitUntil(Condition.appears,10000);
     info("Verify that Gadgets is shown on right of the page");
   }
 

@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.selenium.platform.social;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 
@@ -75,11 +76,12 @@ public class SpaceManagement {
    */
   public void addNewSpaceSimple(String name, String desc, int... params) {
 
-    $(ELEMENT_ADDNEWSPACE_BUTTON).click();
-    $(byId("displayName")).setValue(name);
-    $(byId("description")).setValue(desc);
+    ELEMENT_ADDNEWSPACE_BUTTON.click();
+    ELEMENT_SPACE_NAME_INPUT.waitUntil(Condition.appears,10000);
+    ELEMENT_SPACE_NAME_INPUT.setValue(name);
+    ELEMENT_SPACE_DESCRIPTION_INPUT.setValue(desc);
     info("Save all changes");
-    $(ELEMENET_SPACE_CREATE_BUTTON).click();
+    ELEMENET_SPACE_CREATE_BUTTON.click();
   }
 
   /**
