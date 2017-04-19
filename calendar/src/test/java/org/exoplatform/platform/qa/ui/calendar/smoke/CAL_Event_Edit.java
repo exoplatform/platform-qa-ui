@@ -121,4 +121,75 @@ info("Add an Event");
 
     calendarManagement.deleteCalendar(calendar);
  }
+ /**
+         *<li> Case ID:116441.</li>
+            *<li> Test Case Name: Edit event with valid data.</li>
+            *<li> Pre-Condition: </li>
+            *<li> Post-Condition: </li>
+            */
+    @Test
+    @Smoke
+    @Tag("smoke")
+    public  void test19_EditEventWithValidData() {
+        info("Test 19 Edit event with valid data");
+		/*Step Number: 1
+		*Step Name: -
+		*Step Description:
+			Step 1: Add event
+		*Input Data:
+			- Add category [ Details ]
+			- calendar [ Details ]
+			- event [ Details ]
+		*Expected Outcome:
+			All events/tasks of selecting calendar are displayed in list*/
+        info("Create a new category");
+        String categoryName="categoryName"+getRandomNumber();
+        homePagePlatform.goToCalendarPage();
+        calendarManagement.addEventCategory(categoryName);
+
+        info("Create a new calendar");
+        String calendar = "calendar"+getRandomNumber();
+        homePagePlatform.goToCalendarPage();
+        calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.ADDCAL);
+        calendarManagement.inputDataInDetailTabCalendarForm(calendar, calendar,null);
+        calendarManagement.saveAddCalendar();
+        homePagePlatform.goToCalendarPage();
+        //waitForAndGetElement(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar",calendar));
+        $(byText(calendar)).waitUntil(Condition.appears,10000);
+        info("Add an Event");
+        String titleEvent = "titleEvent"+getRandomNumber();
+        String content= "content"+getRandomNumber();
+        eventManagement.goToAddEventFromActionBar();
+        eventManagement.inputDataEventInQuickForm(titleEvent, content, null,null,false,calendar);
+        eventManagement.saveQuickAddEvent();
+
+		/*Step number: 2
+		*Step Name: -
+		*Step Description:
+			Step 2: Show form to edit event
+		*Input Data:
+			- Select view type
+			- Right click on event that you have edit right from list/working pane and select Edit
+		*Expected Outcome:
+			- Edit event form appears with current information of event in form
+			- all events/tasks in list are kept in alphabetical order if they was sorted before*/
+
+		/*Step number: 3
+		*Step Name: -
+		*Step Description:
+			Step 3: Edit event
+		*Input Data:
+			Do some valid changes and clickSave
+		*Expected Outcome:
+			Event is changed and updated in list/working pane*/
+        String titleEvent2 = "titleEvent2"+getRandomNumber();
+        calendarManagement.openEditEventTaskPopup(titleEvent, CalendarHomePage.selectViewOption.LIST);
+        eventManagement.inputDataEventInDetailForm(titleEvent2,titleEvent2,null,null,false,null,categoryName);
+        eventManagement.saveAddEventDetails();
+        calendarHomePage.goToView(CalendarHomePage.selectViewOption.LIST);
+        //waitForAndGetElement(ELEMENT_EVENT_TASK_TITLE.replace("${name}",titleEvent2));
+        $(byText(titleEvent2)).waitUntil(Condition.appears,10000);
+        calendarManagement.deleteCalendar(calendar);
+        calendarManagement.deleteEventCategory(categoryName);
+    }
 }

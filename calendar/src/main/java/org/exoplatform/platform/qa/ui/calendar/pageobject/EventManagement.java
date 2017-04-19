@@ -206,7 +206,7 @@ public class EventManagement {
       $(ELEMENT_ADD_EDIT_EVENT_CALENDAR).selectOption(opt[0]);
     }
     if (opt.length > 1 && opt[1] != null) {
-      $(ELEMENT_ADD_EDIT_EVENT_CALENDAR).selectOption(opt[1]);
+      $(ELEMENT_ADD_EDIT_EVENT_CATEGORY).selectOption(opt[1]);
     }
     if (opt.length > 2 && opt[2] != null) {
       $(ELEMENT_ADD_EDIT_EVENT_LOCATION).setValue(opt[2]);

@@ -20,7 +20,12 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.locator.calender;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selectors.byId;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
 
 public class CalendarLocator {
 
@@ -374,8 +379,8 @@ public class CalendarLocator {
   public static final By     ELEMENT_ADD_EVENT_CATEGORY_BUTTON_ADD                            =
                                                                    By.id("btnEventCategoryFormContainer");
 
-  public static final String ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE                          =
-                                                                     "//*[@id='UIEventCategoryForm']//button[contains(text(),'Close')]";
+  public static final SelenideElement ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE                          =$(byId("UICalendarPopupWindow")).find(byText("Close"));
+
 
   public static final String ELEMENT_LIST_EVENT_CATEGORY                                      =
                                                          "//*[@id='UIEventCategoryList']//span[contains(text(),'${categoryName}')]";

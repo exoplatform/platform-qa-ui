@@ -77,8 +77,8 @@ public class CalendarManagement {
       break;
     case ADDCATEGORY:
       info("Go to add category calendar");
-      evt.click(ELEMENT_CALENDAR_MENU_ACTIONS_ADD_EVENT_CATEGORY, 0, true);
-      evt.waitForAndGetElement(ELEMENT_ADD_EVENT_CATEGORY_FORM);
+      $(ELEMENT_CALENDAR_MENU_ACTIONS_ADD_EVENT_CATEGORY).click();
+      $(ELEMENT_ADD_EVENT_CATEGORY_FORM).waitUntil(Condition.appears,10000);
       break;
     case CALSETTING:
       info("Go to calendar setting");
@@ -301,11 +301,11 @@ public class CalendarManagement {
   public void addEventCategory(String categoryName) {
     info("----Add new event category----");
     goToMenuFromMainCalendar(menuOfMainCalendar.ADDCATEGORY);
-    evt.type(ELEMENT_ADD_EVENT_CATEGORY_INPUT, categoryName, true);
+    $(ELEMENT_ADD_EVENT_CATEGORY_INPUT).setValue(categoryName);
     evt.click(ELEMENT_ADD_EVENT_CATEGORY_BUTTON_ADD);
     info("----Verify if event category is added in Category List or not----");
-    evt.waitForAndGetElement(ELEMENT_LIST_EVENT_CATEGORY.replace("${categoryName}", categoryName));
-    evt.click(ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE);
+    $(byText(categoryName)).waitUntil(Condition.appears,10000);
+    ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE.click();
   }
 
   /**
@@ -316,12 +316,15 @@ public class CalendarManagement {
   public void deleteEventCategory(String categoryName) {
     info("Delete category");
     goToMenuFromMainCalendar(menuOfMainCalendar.ADDCATEGORY);
-    evt.waitForAndGetElement(ELEMENT_LIST_DELETE_EVENT_BUTTON.replace("${categoryName}", categoryName));
-    evt.click(ELEMENT_LIST_DELETE_EVENT_BUTTON.replace("${categoryName}", categoryName));
+    //evt.waitForAndGetElement(ELEMENT_LIST_DELETE_EVENT_BUTTON.replace("${categoryName}", categoryName));
+    $(byText(categoryName)).waitUntil(Condition.appears,10000);
+    //evt.click(ELEMENT_LIST_DELETE_EVENT_BUTTON.replace("${categoryName}", categoryName));
+    $(byClassName("PopupContent")).findAll(byClassName("uiIconDelete")).get(6).click();
     alert.acceptAlert();
     button.yes();
-    evt.waitForElementNotPresent(ELEMENT_LIST_DELETE_EVENT_BUTTON.replace("${categoryName}", categoryName));
-    evt.click(ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE);
+    //evt.waitForElementNotPresent(ELEMENT_LIST_DELETE_EVENT_BUTTON.replace("${categoryName}", categoryName));
+    $(byText(categoryName)).waitUntil(Condition.disappears,10000);
+    ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE.click();
   }
 
   /**
@@ -352,7 +355,7 @@ public class CalendarManagement {
     evt.clickByJavascript(ELEMENT_CALENDAR_SETTING_ICON.replace("$calendar", calendar), 2);
     evt.waitForAndGetElement(ELEMENT_CALENDAR_RIGHT_MENU);*/
     $(byClassName("contentContainer")).find(byText(calendar)).hover();
-    $(byClassName("contentContainer")).findAll(byClassName("uiIconCalSettingMini")).get(2).click();
+    $(byClassName("contentContainer")).findAll(byClassName("uiIconCalSettingMini")).get(1).click();
   }
 
   /**
