@@ -16,6 +16,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_USER_CLOSE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
@@ -280,7 +281,7 @@ public class CalendarManagement {
    */
   public void saveAddCalendar() {
     info("Save add calendar");
-    evt.click(ELEMENT_CALENDAR_ADD_SAVE_BUTTON);
+    $(ELEMENT_CALENDAR_ADD_SAVE_BUTTON).click();
     Utils.pause(2000);
   }
 
@@ -316,13 +317,10 @@ public class CalendarManagement {
   public void deleteEventCategory(String categoryName) {
     info("Delete category");
     goToMenuFromMainCalendar(menuOfMainCalendar.ADDCATEGORY);
-    //evt.waitForAndGetElement(ELEMENT_LIST_DELETE_EVENT_BUTTON.replace("${categoryName}", categoryName));
     $(byText(categoryName)).waitUntil(Condition.appears,10000);
-    //evt.click(ELEMENT_LIST_DELETE_EVENT_BUTTON.replace("${categoryName}", categoryName));
-    $(byClassName("PopupContent")).findAll(byClassName("uiIconDelete")).get(6).click();
+    ELEMENT_LIST_DELETE_EVENT_BUTTON.click();
     alert.acceptAlert();
     button.yes();
-    //evt.waitForElementNotPresent(ELEMENT_LIST_DELETE_EVENT_BUTTON.replace("${categoryName}", categoryName));
     $(byText(categoryName)).waitUntil(Condition.disappears,10000);
     ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE.click();
   }

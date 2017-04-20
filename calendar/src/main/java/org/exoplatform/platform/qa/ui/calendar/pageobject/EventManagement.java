@@ -156,9 +156,7 @@ public class EventManagement {
   public void goToAddEventFromActionBar() {
     info("Go to Add Event page from action bar");
     Utils.pause(2000);
-    // waitForAndGetElement(ELEMENT_BUTTON_EVENT, DEFAULT_TIMEOUT, 1);
     $(ELEMENT_BUTTON_EVENT).click();
-    /// clickByJavascript(ELEMENT_BUTTON_EVENT, 2);
     $(ELEMENT_QUICK_ADD_EVENT_POPUP).waitUntil(Condition.appears,10000);
   }
 
@@ -711,7 +709,6 @@ public class EventManagement {
    * Save add EVENT
    */
   public void saveQuickAddEvent() {
-    // click(ELEMENT_BUTTON_EVENT_SAVE);
     info("Save quick add event");
     $(ELEMENT_BUTTON_EVENT_SAVE).waitUntil(Condition.appears,10000);
     $(ELEMENT_BUTTON_EVENT_SAVE).click();

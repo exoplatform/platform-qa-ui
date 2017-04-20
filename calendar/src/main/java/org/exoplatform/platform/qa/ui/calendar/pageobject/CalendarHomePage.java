@@ -58,7 +58,7 @@ public class CalendarHomePage {
       evt.waitForAndGetElement(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Week"), testBase.getDefaultTimeout(), 1, 2);
       break;
     case LIST:
-      $(byId("UIActionBar")).find(byText("List")).waitUntil(Condition.appears,10000).click();
+      ELEMENT_CALENDAR_LIST_BUTTON.click();
            break;
     case MONTH:
       evt.waitForAndGetElement(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"), testBase.getDefaultTimeout(), 1);
