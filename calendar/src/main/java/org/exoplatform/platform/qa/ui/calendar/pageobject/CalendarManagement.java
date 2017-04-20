@@ -128,7 +128,7 @@ public class CalendarManagement {
       if (isVerify)
         alert.verifyAlertMessage(ELEMENT_CONFIRM_REMOVE_CALENDAR_MSG);
       else
-        evt.click(ELEMENT_YES_BUTTON);
+        $(ELEMENT_YES_BUTTON).click();
       evt.waitForElementNotPresent(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar", name));
     }
 

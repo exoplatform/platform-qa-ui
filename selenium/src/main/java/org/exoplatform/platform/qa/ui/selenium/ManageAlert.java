@@ -20,12 +20,15 @@
  */
 package org.exoplatform.platform.qa.ui.selenium;
 
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
+
+import static com.codeborne.selenide.Selenide.$;
 
 public class ManageAlert {
   // ECMS > Symlink
@@ -143,11 +146,11 @@ public class ManageAlert {
     } else if (evt.isElementPresent(ELEMENT_CONFIRM)) {
       assert evt.getText(ELEMENT_CONFIRM).contains(message) : "Message is wrong. Actual msg is " + evt.getText(ELEMENT_CONFIRM);
     }
-    if (evt.waitForAndGetElement(button.ELEMENT_OK_BUTTON, 5000, 0) != null) {
-      evt.click(button.ELEMENT_OK_BUTTON);
+    if ($(button.ELEMENT_OK_BUTTON).is(Condition.exist)) {
+      $(button.ELEMENT_OK_BUTTON).click();
     }
-    if (evt.waitForAndGetElement(button.ELEMENT_YES_BUTTON, 3000, 0) != null) {
-      evt.click(button.ELEMENT_YES_BUTTON);
+    if ($(button.ELEMENT_YES_BUTTON).is(Condition.exist)) {
+      $(button.ELEMENT_YES_BUTTON).click();
     }
     Utils.pause(1000);
   }

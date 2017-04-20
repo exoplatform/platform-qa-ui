@@ -1621,4 +1621,6 @@ public class CalendarLocator {
   public static final SelenideElement ELEMENT_LIST_DELETE_EVENT_BUTTON                                 =$(byId("UIEventCategoryList")).findAll(byClassName("uiIconDelete")).get(6);
 
 public static final SelenideElement ELEMENT_CALENDAR_LIST_BUTTON= $(byId("UIActionBar")).find(byText("List")).waitUntil(Condition.appears,10000);
+  public static final SelenideElement ELEMENT_CALENDAR_WEEK_BUTTON= $(byId("UIActionBar")).find(byText("Week")).waitUntil(Condition.appears,10000);
+
 }

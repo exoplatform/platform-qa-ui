@@ -53,9 +53,7 @@ public class CalendarHomePage {
       evt.waitForAndGetElement(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Day"), testBase.getDefaultTimeout(), 1, 2);
       break;
     case WEEK:
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Week"), testBase.getDefaultTimeout(), 1);
-      evt.click(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Week"));
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Week"), testBase.getDefaultTimeout(), 1, 2);
+      ELEMENT_CALENDAR_WEEK_BUTTON.click();
       break;
     case LIST:
       ELEMENT_CALENDAR_LIST_BUTTON.click();
