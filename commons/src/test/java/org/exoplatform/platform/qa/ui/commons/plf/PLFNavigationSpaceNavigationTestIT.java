@@ -7,6 +7,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocat
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.core.context.Smoke;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -48,7 +49,7 @@ public class PLFNavigationSpaceNavigationTestIT extends Base {
     String space1 = "space" + getRandomNumber();
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1);
-    ELEMENT_SPACE_NAME_INPUT.waitUntil(Condition.disappears,10000);
+    ELEMENT_SPACE_NAME_INPUT.waitUntil(Condition.disappears, Configuration.timeout);
 
     /*
      * Step Number: 1 Step Name: Show space applications Step Description: -

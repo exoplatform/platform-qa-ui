@@ -4,6 +4,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocat
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 
@@ -77,7 +78,7 @@ public class SpaceManagement {
   public void addNewSpaceSimple(String name, String desc, int... params) {
 
     ELEMENT_ADDNEWSPACE_BUTTON.click();
-    ELEMENT_SPACE_NAME_INPUT.waitUntil(Condition.appears,10000);
+    ELEMENT_SPACE_NAME_INPUT.waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_SPACE_NAME_INPUT.setValue(name);
     ELEMENT_SPACE_DESCRIPTION_INPUT.setValue(desc);
     info("Save all changes");

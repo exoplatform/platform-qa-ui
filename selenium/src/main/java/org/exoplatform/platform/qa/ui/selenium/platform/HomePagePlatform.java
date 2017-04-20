@@ -9,6 +9,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -73,7 +74,7 @@ public class HomePagePlatform {
    */
   public void goToMySpaces() {
     info("-- Go to my spaces --");
-    ELEMENT_MY_SPACE_LINK_PLF.waitUntil(Condition.appears,10000);
+    ELEMENT_MY_SPACE_LINK_PLF.waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_MY_SPACE_LINK_PLF.click();
   }
 

@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.commons.plf;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.core.context.Smoke;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
@@ -85,11 +86,11 @@ public class PLFNavigationLeftNavigationTestIT extends Base {
 
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1 + " - description");
-    $(byClassName("UIPopupWindow")).find (byText("Settings")).waitUntil(Condition.disappears,10000);
+    $(byClassName("UIPopupWindow")).find (byText("Settings")).waitUntil(Condition.disappears,Configuration.timeout);
 
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space2, space2 + " - description");
-    $(byClassName("UIPopupWindow")).find (byText("Settings")).waitUntil(Condition.disappears,10000);
+    $(byClassName("UIPopupWindow")).find (byText("Settings")).waitUntil(Condition.disappears, Configuration.timeout);
 		/*Step Number: 1
 		 *Step Name: Connect to intranet
 		 *Step Description: 
@@ -113,8 +114,8 @@ public class PLFNavigationLeftNavigationTestIT extends Base {
     ELEMENT_SEARCH_SPACE.setValue("spa");
     //waitForAndGetElement(By.xpath(ELEMENT_RESULT_SEARCH_SPACE.replace("{$space}", space1))).isDisplayed();
     //waitForAndGetElement(By.xpath(ELEMENT_RESULT_SEARCH_SPACE.replace("{$space}", space2))).isDisplayed();
-    $(byText(space1)).waitUntil(Condition.appears,10000);
-    $(byText(space2)).waitUntil(Condition.appears,10000);
+    $(byText(space1)).waitUntil(Condition.appears,Configuration.timeout);
+    $(byText(space2)).waitUntil(Condition.appears,Configuration.timeout);
     /*
     homePagePlatform.goToHomePage();
 
