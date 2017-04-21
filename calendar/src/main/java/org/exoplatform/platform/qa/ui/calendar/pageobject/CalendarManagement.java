@@ -168,7 +168,9 @@ public class CalendarManagement {
       $(ELEMENT_CALENDAR_DESC_INPUT).setValue(description);
     if (color != null && color != "") {
       $(ELEMENT_CALENDAR_COLOR).click();
-      $(ELEMENT_CALENDAR_COLOR_SELECT.replace("${color}", color)).click();
+      $(byId("UICalendarPopupWindow")).find(byClassName(color)).waitUntil(Condition.appears,10000);
+      $(byId("UICalendarPopupWindow")).find(byClassName(color)).click();
+
     }
   }
 
