@@ -377,8 +377,8 @@ public class EventManagement {
     DateFormat formatterTimeTemp = new SimpleDateFormat("MM/dd/yyyy HH:mm");
     DateFormat formatterTime = new SimpleDateFormat("HH:mm");
     DateFormat formatterDate = new SimpleDateFormat("MM/dd/yyyy");
-    String dateFrom = evt.getValue(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE);
-    String dateTo = evt.getValue(ELEMENT_QUICK_INPUT_EVENT_TO_DATE);
+    String dateFrom = $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).getValue();
+    String dateTo = $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).getValue();
     String fromTime = evt.waitForAndGetElement(ELEMENT_QUICK_INPUT_EVENT_FROM_TIME, testBase.getDefaultTimeout(), 1, 2)
                          .getAttribute("value");
     String toTime = evt.waitForAndGetElement(ELEMENT_QUICK_INPUT_EVENT_TO_TIME, testBase.getDefaultTimeout(), 1, 2)

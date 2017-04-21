@@ -374,8 +374,8 @@ public class CalendarManagement {
       evt.waitForAndGetElement(ELEMENT_CALENDAR_QUICK_ADD_TASK_FORM);
       break;
     case ADDEVENT:
-      evt.clickByJavascript(ELEMENT_CALENDAR_ADD_EVENT_MENU, 2);
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_QUICK_ADD_EVENT_FORM);
+      $(ELEMENT_CALENDAR_ADD_EVENT_MENU).click();
+      $(ELEMENT_CALENDAR_QUICK_ADD_EVENT_FORM).waitUntil(Condition.appears,10000);
       break;
     case EDIT:
       evt.clickByJavascript(ELEMENT_CALENDAR_EDIT_MENU, 2);

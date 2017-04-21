@@ -119,7 +119,8 @@ public class CalendarHomePage {
       case DETAILTIME:
         evt.scrollBarToGetElement(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$name", name)
                                                                                            .replace("$date", date)));
-        evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date", date));
+//        evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date", date));
+        $(byText(name)).contextClick();
         break;
       case ALLDAY:
         evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ALL_DAY.replace("$name", name).replace("$date", date));
@@ -189,7 +190,7 @@ public class CalendarHomePage {
     info("Got to edit task from list view");
     goToView(selectViewOption.LIST);
     if (date != null && date != "") {
-      if (evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE, 5000, 0) != null) {
+      if ($(ELEMENT_TOTAL_PAGE).is(Condition.exist)) {
         info("paginator page in calendar list view");
         evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
         while ((evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name), 5000, 0) == null)
@@ -200,8 +201,8 @@ public class CalendarHomePage {
         evt.waitForAndGetElement(ELEMENT_EVENT_TASK_START_DETAIL_DATE_LIST_VIEW.replace("$name", name).replace("$date", date));
         evt.rightClickOnElement(ELEMENT_EVENT_TASK_START_DETAIL_DATE_LIST_VIEW.replace("$name", name).replace("$date", date));
       } else {
-        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_START_DETAIL_DATE_LIST_VIEW.replace("$name", name).replace("$date", date));
-        evt.rightClickOnElement(ELEMENT_EVENT_TASK_START_DETAIL_DATE_LIST_VIEW.replace("$name", name).replace("$date", date));
+        $(byText(name)).waitUntil(Condition.appears,10000);
+        $(byText(name)).contextClick();
       }
     } else {
       if (evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE, 5000, 0) != null) {
@@ -310,8 +311,8 @@ public class CalendarHomePage {
       goToRightMenuTaskEventFromDayView(name, optionDay);
       break;
     }
-    evt.click(ELEMENT_CONTEXT_MENU_EDIT);
-    evt.waitForAndGetElement(ELEMENT_ADD_EDIT_TASK_POPUP);
+    $(ELEMENT_CONTEXT_MENU_EDIT).click();
+   $(ELEMENT_ADD_EDIT_TASK_POPUP).waitUntil(Condition.appears,10000);
   }
 
   /**
@@ -434,7 +435,7 @@ public class CalendarHomePage {
       }
       break;
     case LIST:
-      if (evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE, 5000, 0) != null) {
+      if ($(ELEMENT_TOTAL_PAGE).is(Condition.exist)) {
         evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
         while ((evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name), 5000, 0) == null)
             && !(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
@@ -444,7 +445,7 @@ public class CalendarHomePage {
         evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
         evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
       } else {
-        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
+       $(byText(name)).waitUntil(Condition.appears,10000);
       }
       break;
     case MONTH:
@@ -466,7 +467,7 @@ public class CalendarHomePage {
     default:
       switch (optionDay) {
       case DETAILTIME:
-        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        $(byText(name)).waitUntil(Condition.appears,10000);
         break;
       case ALLDAY:
         evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name));
@@ -959,9 +960,9 @@ public class CalendarHomePage {
     boolean isVerify = (Boolean) (opParams.length > 0 ? opParams[0] : false);
     boolean isEvent = (Boolean) (opParams.length > 1 ? opParams[1] : false);
     info("Delete event/tak: " + name);
-    Button button = new Button((TestBase) testBase.getExoWebDriver().getWebDriver());
+    Button button = new Button(this.testBase);
     goToRightMenuTaskEventFromAnyView(name, view, optionDay, date);
-    evt.click(ELEMENT_CONTEXT_MENU_DELETE);
+   $(ELEMENT_CONTEXT_MENU_DELETE).click();
     if (isVerify) {
       if (isEvent)
         alert.verifyAlertMessage(ELEMENT_CONFIRM_DELETE_EVENT_MSG);
@@ -971,7 +972,7 @@ public class CalendarHomePage {
       Utils.pause(1000);
       verifyIsNotPresentEventTask(name, view, optionDay);
     } else
-      button.yes();
+     button.yes();
   }
 
   /**
