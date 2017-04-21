@@ -1622,5 +1622,5 @@ public class CalendarLocator {
 
 public static final SelenideElement ELEMENT_CALENDAR_LIST_BUTTON= $(byId("UIActionBar")).find(byText("List")).waitUntil(Condition.appears,10000);
   public static final SelenideElement ELEMENT_CALENDAR_WEEK_BUTTON= $(byId("UIActionBar")).find(byText("Week")).waitUntil(Condition.appears,10000);
-
+public static final SelenideElement ELEMENT_CALENDAR_DAY_BUTTON= $(byId("UIActionBar")).find(byText("Day")).waitUntil(Condition.appears,10000);
 }

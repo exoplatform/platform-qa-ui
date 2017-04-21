@@ -49,8 +49,7 @@ public class CalendarHomePage {
     Utils.pause(2000);
     switch (view) {
     case DAY:
-      evt.click(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Day"));
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Day"), testBase.getDefaultTimeout(), 1, 2);
+      ELEMENT_CALENDAR_DAY_BUTTON.click();
       break;
     case WEEK:
       ELEMENT_CALENDAR_WEEK_BUTTON.click();
@@ -411,7 +410,8 @@ public class CalendarHomePage {
     case DAY:
       switch (optionDay) {
       case DETAILTIME:
-        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
+        //evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
+        $(byText(name)).waitUntil(Condition.appears,10000);
         break;
       case ALLDAY:
         evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY.replace("$name", name));

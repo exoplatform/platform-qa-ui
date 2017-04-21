@@ -370,8 +370,8 @@ public class CalendarManagement {
     openMenuOfCalendar(calendar);
     switch (action) {
     case ADDTASK:
-      evt.clickByJavascript(ELEMENT_CALENDAR_ADD_TASK_MENU, 2);
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_QUICK_ADD_TASK_FORM);
+      $(ELEMENT_CALENDAR_ADD_TASK_MENU).click();
+      $(ELEMENT_CALENDAR_QUICK_ADD_TASK_FORM).waitUntil(Condition.appears,10000);
       break;
     case ADDEVENT:
       $(ELEMENT_CALENDAR_ADD_EVENT_MENU).click();
