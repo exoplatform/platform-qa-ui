@@ -93,13 +93,13 @@ public class Gatein_Group_Navigation_Manage_Navigation extends Base {
      * button of a Group Input Data: Expected Outcome: - The navigation group is
      * removed successfully
      */
-   /* info("Delete navigation of group");
+    info("Delete navigation of group");
     portalGroupNavigation.deleteNavigationForGroup(groupName);
 
     info("Delete group");
     navigationToolbar.goToUsersAndGroupsManagement();
     userAndGroupManagement.goToGroupTab();
     click(By.linkText(groupName));
-    userAndGroupManagement.deleteGroup(groupName, true, 60000);*/
+    userAndGroupManagement.deleteGroup(groupName, true, 60000);
   }
 }
