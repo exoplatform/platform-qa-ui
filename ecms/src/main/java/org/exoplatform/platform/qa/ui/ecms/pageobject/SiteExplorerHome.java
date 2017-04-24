@@ -158,7 +158,7 @@ public class SiteExplorerHome {
     $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
     Utils.pause(2000);
     info("Right click on nodename");
-    $(byId("UITreeExplorer")).find(byText(title)).hover().contextClick();
+    $(byId("UITreeExplorer")).find(byLinkText(title)).hover().contextClick();
     info("Click on Delete link");
     $(ELEMENT_SITEEXPLORER_ACTION_DELETE).click();
     info("Click on Delete button on Confirm popup");

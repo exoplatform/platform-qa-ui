@@ -160,7 +160,7 @@ public class Ecms_WCM extends Base {
 		$(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
 		pageCreationWizard.addContentDetail("General Drives/Sites Management/intranet",content1);
 
-		navigationToolbar.goToEditContent();
+//		navigationToolbar.goToEditContent();
 
 		/*Step number: 2
 		 *Step Name: Step 2: Edit Single Content Viewer page
