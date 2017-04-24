@@ -350,12 +350,13 @@ public class CalendarManagement {
    */
   public void openMenuOfCalendar(String calendar) {
     info("Open menu of a calendar");
-    Utils.pause(2000);
-/*    evt.mouseHoverByJavaScript(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar", calendar), 2);
-    evt.clickByJavascript(ELEMENT_CALENDAR_SETTING_ICON.replace("$calendar", calendar), 2);
-    evt.waitForAndGetElement(ELEMENT_CALENDAR_RIGHT_MENU);*/
-    $(byClassName("contentContainer")).find(byText(calendar)).hover();
-    $(byClassName("contentContainer")).findAll(byClassName("uiIconCalSettingMini")).get(1).click();
+if ($(byClassName("contentContainer")).findAll(byClassName("calendarItem")).get(1).has(Condition.text(calendar)))
+      {$(byClassName("contentContainer")).find(byText(calendar)).hover();
+        $(byClassName("contentContainer")).findAll(byClassName("uiIconCalSettingMini")).get(1).click();}
+    else {
+  $(byClassName("contentContainer")).find(byText(calendar)).hover();
+  $(byClassName("contentContainer")).findAll(byClassName("uiIconCalSettingMini")).get(3).click();
+    }
   }
 
   /**
