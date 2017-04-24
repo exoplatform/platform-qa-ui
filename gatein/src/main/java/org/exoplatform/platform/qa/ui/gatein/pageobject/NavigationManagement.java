@@ -178,10 +178,7 @@ public class NavigationManagement {
    *
    * @param name
    */
-  public static SelenideElement contextClick(SelenideElement el){
-    (new Actions(getWebDriver())).contextClick(el).perform();
-    return el;
-  }
+
   public void editNodePage(String name) {
     info("Edit a node page");
     info("Right click on the node");
@@ -199,7 +196,7 @@ public class NavigationManagement {
   public void editThisNode(String name) {
     info("Edit a node");
     info("Right click on the node");
-    $(byText(name)).contextClick();
+    $(byClassName("uiNavigationManagement")).find(byText(name)).scrollTo().contextClick();
     info("Select Edit link");
     selectItem(specifiContextMenu.EDIT_THIS_NODE);
   }

@@ -160,7 +160,7 @@ public void test04_EditNode() {
 
     info("Edit a node");
     portalmanagesites.goToEditNavigation();
-    navigationmanagement.editThisNode(nodeName);//go to declaration to automate right click
+    navigationmanagement.editThisNode(nodeName);
     navigationmanagement.inputInfoNodeSetting(true, "",newNodeName,true,false);
     navigationmanagement.saveNode();
 
