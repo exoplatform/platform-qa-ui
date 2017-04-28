@@ -123,7 +123,7 @@ public class WikiLocators {
   public static final By     ELEMENT_MORE_LINK                                          =
                                                By.xpath("//*[@id='UIWikiPageControlArea_PageToolBar']//div[contains(text(), 'More')]");
 
-  public static final By     ELEMENT_DELETE_LINK                                        = By.xpath(".//*[text()='Delete Page']");
+  public static final By     ELEMENT_DELETE_LINK                                        = By.xpath(".//*[text()='Delete']");
 
   public static final By     ELEMENT_DELETE_LINK_2                                      = By.className("uiIconDeletePage");
 
