@@ -104,7 +104,6 @@ public  void test01_EditPage() {
     }
     sourcetexteditor.editSimplePage(newTitle, newContent);
    wikiManagement.saveAddPage();
-    Utils.pause(2000);
     wikiValidattions.verifyTitleWikiPage(newTitle);
     arrayPage.add(newTitle);
 

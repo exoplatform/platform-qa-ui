@@ -32,7 +32,7 @@ public class HomePagePlatform {
    */
   public void goToWiki() {
     info("--Go to Wiki--");
-    $(ELEMENT_WIKI_LINK_PLF).waitUntil(Condition.appears,10000);
+    $(ELEMENT_WIKI_LINK_PLF).waitUntil(Condition.appears,Configuration.timeout);
     $(ELEMENT_WIKI_LINK_PLF).click();
   }
 

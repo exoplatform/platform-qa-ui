@@ -495,7 +495,6 @@ public class RichTextEditor {
     $(ELEMENT_LINK).click();
     info("Click on Web Page Link menu");
     $(ELEMENT_WEB_PAGE_LINK_MENU).click();
-    Utils.pause(500);
   }
 
   /**

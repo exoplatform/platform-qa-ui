@@ -6,6 +6,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -58,7 +59,7 @@ public class WikiManagement {
    */
   public void goToSourceEditor() {
     $(ELEMENT_SOURCE_EDITOR_BUTTON).click();
-    $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.appears,10000);
+    $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**
@@ -89,8 +90,8 @@ public class WikiManagement {
    */
   public void saveAddPage() {
     info("Save all changes");
-    $(byId("UISubmitToolBarBottom_SavePage_")).scrollTo().click();
-    $(ELEMENT_SAVE_BUTTON_ADD_PAGE).shouldNotBe(Condition.present);
+    ELEMENT_SAVE_BUTTON_ADD_PAGE.scrollTo().click();
+    ELEMENT_SAVE_BUTTON_ADD_PAGE.shouldNotBe(Condition.present);
     info("Wiki page simple is created successfully");
   }
 
