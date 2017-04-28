@@ -20,7 +20,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 
-public class Wiki_BasicAction_Edit extends Base {
+public class Wiki_BasicAction_EditTestIT extends Base {
 
     HomePagePlatform homePagePlatform;
     WikiHomePage wikiHomePage;

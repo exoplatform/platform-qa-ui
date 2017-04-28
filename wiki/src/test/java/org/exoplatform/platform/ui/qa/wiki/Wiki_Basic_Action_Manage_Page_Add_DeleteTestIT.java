@@ -18,7 +18,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 
-public class Wiki_Basic_Action_Manage_Page_Add_Delete extends Base {
+public class Wiki_Basic_Action_Manage_Page_Add_DeleteTestIT extends Base {
 	HomePagePlatform homePagePlatform;
 
 	WikiHomePage wikiHomePage;
