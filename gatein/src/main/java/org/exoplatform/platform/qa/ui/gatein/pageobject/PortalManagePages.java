@@ -5,6 +5,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocat
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.*;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import static com.codeborne.selenide.Selectors.*;
@@ -55,6 +56,7 @@ public class PortalManagePages {
       $(ELEMENT_MANAGEPAGES_TYPE_DROPBOX).selectOption(type);
     }
    $(ELEMENT_MANAGEPAGES_TITLE_FIELD).waitUntil(Condition.appears,10000);
+   $(ELEMENT_MANAGEPAGES_TITLE_FIELD).waitUntil(Condition.appears,Configuration.timeout);
     info("Input a new title");
    $(ELEMENT_MANAGEPAGES_TITLE_FIELD).setValue(title);
     info("Select a type");
@@ -86,10 +88,10 @@ public class PortalManagePages {
     $(ELEMENT_MANGEPAGES_INFORM_POPUP_CLOSE).waitUntil(Condition.appears,10000);
 
     //evt.click(ELEMENT_MANGEPAGES_INFORM_POPUP_CLOSE, 2);
+    $(ELEMENT_MANGEPAGES_INFORM_POPUP_CLOSE).waitUntil(Condition.appears,Configuration.timeout);
+
     $(ELEMENT_MANGEPAGES_INFORM_POPUP_CLOSE).click();
-    //evt.waitForElementNotPresent(ELEMENT_MANAGEPAGES_CONTENT_TITLE_COLUMN.replace("${tilte}", titlePage));
     $(byText(titlePage)).shouldNot(Condition.exist);
-    Utils.pause(2000);
   }
 
   /**
@@ -102,7 +104,6 @@ public class PortalManagePages {
     searchPage(titlePage, "", type);
     info("Click on Edit button");
     $(ELEMENT_MAGEPAGES_CONTENT_ACTION_COLUMN_EDIT).click();
-    Utils.pause(2000);
   }
 
   /**
@@ -116,8 +117,8 @@ public class PortalManagePages {
   public void addPage(String pageName, String title, String type, boolean... isMaxWindow) {
     info("Click on Add new Page button");
 
-    $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_BTN).waitUntil(Condition.appears, 10000);
-    $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_BTN).click();
+    $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_BTN).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_BTN).scrollTo().click();
     $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_PAGE_NAME).setValue(pageName);
     $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_TITLE).setValue(title);
     $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_TYPE_DROPBOX).selectOption("group");

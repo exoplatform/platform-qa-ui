@@ -112,7 +112,6 @@ public  void test10_EditPageOfPortal() {
     pagecreationwizard.addApp("","Application Registry",$(byId("Administration/portlet_ApplicationRegistryPortlet")),$(byClassName("VIEW-PAGE")));
     info("Verify that all changes of page is saved");
     portalmanagepages.editPage(title,"");
-    //waitForAndGetElement(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}",name),3000,0);
     $(byText("Application Registry")).should(Condition.exist);
     pagecreationwizard.saveChangesPageEditor();
     portalmanagepages.deletePage(title,"");

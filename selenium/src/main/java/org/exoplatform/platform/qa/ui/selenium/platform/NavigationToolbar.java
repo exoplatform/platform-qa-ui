@@ -83,20 +83,20 @@ public class NavigationToolbar {
   public void goToPotalSites() {
     info("--Go to Portal-->Sites--");
 
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,10000);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,Configuration.timeout);
 
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
 
-    $(ELEMENT_ADMINISTRATION_PORTAL).waitUntil(Condition.appears,10000);
+    $(ELEMENT_ADMINISTRATION_PORTAL).waitUntil(Condition.appears,Configuration.timeout);
 
     evt.mouseOver(ELEMENT_ADMINISTRATION_PORTAL, true);
 
-    $(ELEMENT_ADMINISTRATION_PORTAL_SITES).waitUntil(Condition.appears,10000);
+    $(ELEMENT_ADMINISTRATION_PORTAL_SITES).waitUntil(Condition.appears,Configuration.timeout);
 
     $(ELEMENT_ADMINISTRATION_PORTAL_SITES).click();
 
 
-    $(ELEMENT_MANAGESITES_TITLE).waitUntil(Condition.appears,10000);
+    $(ELEMENT_MANAGESITES_TITLE).waitUntil(Condition.appears,Configuration.timeout);
   }
 
   /**
@@ -119,7 +119,7 @@ public class NavigationToolbar {
 
 
    $(ELEMENT_LINK_SETUP).click();
-   $(ELEMENT_ADMINISTRATION_PORTAL).waitUntil(Condition.appears,10000);
+   $(ELEMENT_ADMINISTRATION_PORTAL).waitUntil(Condition.appears, Configuration.timeout);
    $(ELEMENT_ADMINISTRATION_PORTAL).click();
     info("Page Managements is shown successfully");
     $(ELEMENT_LINK_SETUP).click();

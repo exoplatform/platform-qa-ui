@@ -31,6 +31,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 import java.util.ArrayList;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 
 import org.exoplatform.platform.qa.ui.selenium.Dialog;
@@ -80,8 +81,7 @@ public class UserAndGroupManagement {
   public void goToGroupTab() {
     info("-- Choose Group Management tab--");
     $(byText("Groups")).click();
-    $(byText("Group Info")).waitUntil(Condition.appears,10000);
-    Utils.pause(2000);
+    $(byText("Group Info")).waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**
@@ -134,7 +134,6 @@ public class UserAndGroupManagement {
    */
   public void addGroup(String groupName, String groupLabel, String groupDesc, boolean verify) {
     info("--Add a new group--");
-    Utils.pause(500);
    $(byClassName("uiIconPlus")).click();
 
     inputDataGroup(groupName, groupLabel, groupDesc);
@@ -230,7 +229,6 @@ public class UserAndGroupManagement {
   public void editGroup(String oldName, String groupName, String groupLabel, String groupDesc, boolean verify) {
     info("-- Edit group: " + groupName + "--");
     $(byClassName("uiIconEdit")).click();
-    Utils.pause(1000);
     inputDataGroupForEdit(groupLabel, groupDesc);
     $(byText("Save")).click();
     if (verify) {
@@ -332,7 +330,6 @@ $(byText(user)).should(Condition.exist);
     if (verify) {
 $(byText(groupName)).shouldNot(Condition.exist);
     }
-    Utils.pause(1000);
   }
 
   /**
@@ -461,7 +458,6 @@ $(byText(groupName)).shouldNot(Condition.exist);
     $(byTitle("Quick Search")).click();
     info("--Editing user " + username + "--");
     $(byClassName("actionIcon")).click();
-    Utils.pause(1000);
   }
 
   /**
@@ -482,9 +478,8 @@ $(byText(groupName)).shouldNot(Condition.exist);
     $(ELEMENT_EMAIL).setValue(email);
 
     $(byText("Save")).click();
-    Utils.pause(3000);
-    $(byText("Save")).waitUntil(Condition.disappears,10000);
-    $(byText("The user profile has been updated.")).waitUntil(Condition.appears,10000);
+    $(byText("Save")).waitUntil(Condition.disappears,Configuration.timeout);
+    $(byText("The user profile has been updated.")).waitUntil(Condition.appears,Configuration.timeout);
     $(byText("OK")).click();
   }
 
@@ -679,7 +674,6 @@ $(byText(groupName)).shouldNot(Condition.exist);
     info("--Deleting user " + username + "--");
     info("--Search user " + username + "--");
     if (testBase.isTextPresent("Search")) {
-      //evt.select(GateinLocator.ELEMENT_SELECT_SEARCH_OPTION, GateinLocator.ELEMENT_MSG_SEARCH_USER_NAME);
       $(ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);
     }
 
@@ -688,9 +682,8 @@ $(byText(groupName)).shouldNot(Condition.exist);
       $(byClassName("uiIconDeleteUser")).click();
       alert.acceptAlert();
       $(ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);
-     // evt.select(GateinLocator.ELEMENT_SELECT_SEARCH_OPTION, GateinLocator.ELEMENT_MSG_SEARCH_USER_NAME);
     $(byTitle("Quick Search")).click();
-    $(byText("No result found.")).waitUntil(Condition.appears,10000);
+    $(byText("No result found.")).waitUntil(Condition.appears,Configuration.timeout);
       dialog.closeMessageDialog();
 
 

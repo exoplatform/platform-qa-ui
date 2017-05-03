@@ -7,6 +7,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -121,17 +122,13 @@ public class PageCreationWizard {
   public void addApp(String tabName, String nameApp, SelenideElement appLocator, SelenideElement layoutLocator) {
     info("Add an application to the layout");
     $(ELEMENT_APPLICATION_TAB).click();
-    Utils.pause(1000);
     if (!tabName.isEmpty())
-      //evt.click(ELEMENT_APPLICATION_SUB_TAB.replace("${tabName}", tabName));
       $(byText(tabName)).click();
     $(appLocator).dragAndDropTo(layoutLocator);
 
     info("Verify that the application is shown in the layout");
-    //evt.waitForAndGetElement(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}", nameApp), 3000, 0);
     $(byText(nameApp)).should(Condition.exist);
     info("The application is shown in the layout page");
-    Utils.pause(2000);
     saveChangesPageEditor();
   }
 
@@ -397,9 +394,8 @@ public class PageCreationWizard {
    */
   public void saveChangesPageEditor() {
     info("Save change Page Editor");
-    $(ELEMENT_PAGEEDITOR_FINISHBTN).waitUntil(Condition.appears,10000);
+    $(ELEMENT_PAGEEDITOR_FINISHBTN).waitUntil(Condition.appears, Configuration.timeout);
    $(ELEMENT_PAGEEDITOR_FINISHBTN).click();
-    Utils.pause(3000);
   }
 
   /**
@@ -487,9 +483,8 @@ public class PageCreationWizard {
   public void viewProperties(boolean... verify) {
     info("Click on Switch view mode button");
     $(ELEMENT_VIEW_PROPERTIES).click();
-    /*if (verify.length > 0)
-      evt.waitForAndGetElement(ELEMENT_VIEW_PROPERTIES_POPUP, 2000, 0);*/
-    $(ELEMENT_VIEW_PROPERTIES_POPUP).waitUntil(Condition.appears,10000);
+
+    $(ELEMENT_VIEW_PROPERTIES_POPUP).waitUntil(Condition.appears,Configuration.timeout);
   }
 
   /**
@@ -520,13 +515,11 @@ public class PageCreationWizard {
                                boolean... isShowMaxWindow) {
     if (!title.isEmpty()) {
       info("Input new title");
-      //evt.type(ELEMENT_VIEW_PROPERTIES_TITLE, title, true);
       $(ELEMENT_VIEW_PROPERTIES_TITLE).setValue(title);
 
     }
     if (!groupsPath.isEmpty()) {
       info("Select a group");
-     //evt.click(ELEMENT_VIEW_PROPERTIES_PERMISSION_TAB);
 
       $(ELEMENT_VIEW_PROPERTIES_PERMISSION_TAB).click();
       if (isAccessPermision == true) {
@@ -563,7 +556,6 @@ public class PageCreationWizard {
   public void saveChangeProperties() {
     info("Save all changes");
     $(ELEMENT_VIEW_PROPERTIES_SAVE_BTN).click();
-    Utils.pause(2000);
   }
 
   /**

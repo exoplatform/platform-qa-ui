@@ -8,6 +8,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocat
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -284,12 +285,10 @@ public class NavigationManagement {
    */
   public void saveNode() {
     info("Save all changes of a node");
-    //evt.waitForAndGetElement(ELEMENT_NAVIGATION_MANAGEMENT_SAVE);
-    $(ELEMENT_NAVIGATION_MANAGEMENT_SAVE).waitUntil(Condition.appears,10000);
+    $(ELEMENT_NAVIGATION_MANAGEMENT_SAVE).waitUntil(Condition.appears, Configuration.timeout);
     info("Click on Save button");
-    //evt.click(ELEMENT_NAVIGATION_MANAGEMENT_SAVE);
     $(ELEMENT_NAVIGATION_MANAGEMENT_SAVE).click();
-    Utils.pause(1000);
+    Utils.pause(Configuration.timeout);
     closeNavigationManagementPopup();
   }
 
