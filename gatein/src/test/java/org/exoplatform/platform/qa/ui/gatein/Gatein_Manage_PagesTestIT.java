@@ -22,7 +22,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 * @author eXo
 *
 */
-public class Gatein_Manage_Pages extends Base{
+public class Gatein_Manage_PagesTestIT extends Base{
 
     NavigationToolbar navigationToolbar;
     HomePagePlatform homePagePlatform;

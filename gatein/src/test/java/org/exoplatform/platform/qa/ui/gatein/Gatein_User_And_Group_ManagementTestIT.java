@@ -25,7 +25,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
  * @author tult
  */
 
-public class Gatein_User_And_Group_Management extends Base{
+public class Gatein_User_And_Group_ManagementTestIT extends Base{
 	
 	NavigationToolbar navigationToolbar;
 	UserAndGroupManagement userandgroupmanagement;
@@ -48,7 +48,7 @@ public class Gatein_User_And_Group_Management extends Base{
 	*<li> Case ID:123095.</li>
 	*<li> Test Case Name: Delete group.</li>
 	*/
-	@Test
+
 	@Smoke
 	@Tag("smoke")
 	public void test01_02_03_04_AddEditDeleteGroupAddUsersToGroup(){

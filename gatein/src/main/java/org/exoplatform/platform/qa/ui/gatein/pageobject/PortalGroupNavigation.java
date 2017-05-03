@@ -8,6 +8,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocat
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
 import org.exoplatform.platform.qa.ui.core.config.driver.Driver;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
@@ -52,7 +53,7 @@ public class PortalGroupNavigation {
 
   for(int i=1; i<15;i++){
   //xpath of the tr that have text groupName
-      if ($(byXpath("//*[@id=\"UIAddGroupNavigationGrid\"]/table/tbody/tr["+i+"]/td[1]")).has(Condition.text(groupName)))
+      if ($(byXpath("//*[@id=\"UIAddGroupNavigationGrid\"]/table/tbody/tr["+i+"]/td[1]")).has(Condition.text("/"+groupName)))
   /*(i-1) is the order of the linkText add navigation of the groupName
   (i-1) because the function get(X) sould have arguments 0=< X=< n
    */
@@ -62,7 +63,7 @@ public class PortalGroupNavigation {
 }
 
 $(ELEMENT_CANCEL_BUTON).click();
-$(byText(groupName)).waitUntil(Condition.appears,10000);
+$(byText(groupName)).waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**

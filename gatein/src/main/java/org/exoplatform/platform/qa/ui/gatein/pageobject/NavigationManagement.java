@@ -196,7 +196,7 @@ public class NavigationManagement {
   public void editThisNode(String name) {
     info("Edit a node");
     info("Right click on the node");
-    $(byClassName("uiNavigationManagement")).find(byText(name)).scrollTo().contextClick();
+    $(byClassName("uiNavigationManagement")).find(byLinkText(name)).scrollTo().contextClick();
     info("Select Edit link");
     selectItem(specifiContextMenu.EDIT_THIS_NODE);
   }
