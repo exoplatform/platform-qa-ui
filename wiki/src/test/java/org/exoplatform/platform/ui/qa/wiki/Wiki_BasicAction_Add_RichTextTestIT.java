@@ -15,7 +15,7 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.RichTextEditor;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
-
+@Tag("wiki")
 public class Wiki_BasicAction_Add_RichTextTestIT extends Base {
 
   HomePagePlatform  homePagePlatform;

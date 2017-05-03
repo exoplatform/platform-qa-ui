@@ -19,7 +19,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLoca
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_TREE_WIKI_NAME;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-
+@Tag("wiki")
 public class Wiki_Publish_ActivityTestIT extends Base {
 
 	HomePagePlatform homePagePlatform;

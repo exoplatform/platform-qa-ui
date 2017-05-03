@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
+import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
@@ -90,6 +91,7 @@ public class WikiHomePage {
     info("Select the wiki page to delete");
     selectAPage(title);
     info("Click on More link");
+
     $(ELEMENT_MORE_LINK).click();
     $(ELEMENT_DELETE_LINK).click();
     $(ELEMENT_CONFIRM_WIKI_DELETE).click();
