@@ -58,7 +58,7 @@ public class PortalManagePages {
    $(ELEMENT_MANAGEPAGES_TITLE_FIELD).waitUntil(Condition.appears,10000);
    $(ELEMENT_MANAGEPAGES_TITLE_FIELD).waitUntil(Condition.appears,Configuration.timeout);
     info("Input a new title");
-   $(ELEMENT_MANAGEPAGES_TITLE_FIELD).setValue(title);
+   $(ELEMENT_MANAGEPAGES_TITLE_FIELD).scrollTo().setValue(title);
     info("Select a type");
     $(ELEMENT_MANAGEPAGES_TYPE_DROPBOX).selectOption("group");
     info("Click on Search button");

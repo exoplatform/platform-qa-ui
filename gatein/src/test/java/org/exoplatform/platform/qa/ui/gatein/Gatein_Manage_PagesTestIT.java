@@ -22,6 +22,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 * @author eXo
 *
 */
+@Tag("gatein")
 public class Gatein_Manage_PagesTestIT extends Base{
 
     NavigationToolbar navigationToolbar;

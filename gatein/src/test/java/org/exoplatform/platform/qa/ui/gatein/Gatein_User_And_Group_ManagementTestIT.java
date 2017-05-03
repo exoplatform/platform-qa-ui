@@ -24,6 +24,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
  * @date March 10 2015
  * @author tult
  */
+@Tag("gatein")
 
 public class Gatein_User_And_Group_ManagementTestIT extends Base{
 	

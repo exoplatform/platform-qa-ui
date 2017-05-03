@@ -21,6 +21,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 * @author eXo
 *
 */
+@Tag("gatein")
 public class Gatein_Portal_Navigation_Edit_NavigationTestIT extends Base{
     NavigationToolbar navigationToolbar;
     PortalManageSites portalmanagesites;
@@ -133,6 +134,7 @@ public void test01_Add_Edit_Delete_NodePage() {
 @Test
 @Smoke
 @Tag("smoke")
+
 public void test04_EditNode() {
     info("Test 04: Edit Node");
     String portalName = "portalName"+getRandomNumber();
