@@ -37,7 +37,6 @@ services:
       file: common-plf44-stack.yml
       service: exo
     container_name: exo
-    image: exoplatform/exo:develop
     environment:
       EXO_DB_TYPE: hsqldb
       EXO_ADDONS_LIST:
