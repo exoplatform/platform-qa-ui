@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.wiki;
+package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -15,7 +15,7 @@ public class WikiSearch {
 
   /**
    * constructor
-   * 
+   *
    * @param dr
    */
   public WikiSearch(TestBase testBase) {
@@ -34,7 +34,7 @@ public class WikiSearch {
 
   /**
    * Search a space in space switcher
-   * 
+   *
    * @param text
    */
   public void searchSpaces(String text) {
@@ -46,7 +46,7 @@ public class WikiSearch {
 
   /**
    * Advanced search
-   * 
+   *
    * @param location
    */
   public void advancedSearch(String text, String location) {
@@ -68,7 +68,7 @@ public class WikiSearch {
 
   /**
    * Quick search a page
-   * 
+   *
    * @param text
    */
   public void quickSeach(String text) {
@@ -83,7 +83,7 @@ public class WikiSearch {
 
   /**
    * View detail of a page that is listed in searched results page
-   * 
+   *
    * @param page
    * @param contentPage
    */

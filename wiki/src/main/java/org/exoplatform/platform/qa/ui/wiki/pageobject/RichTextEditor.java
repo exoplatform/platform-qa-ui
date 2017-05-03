@@ -1,5 +1,6 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.wiki;
+package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -26,8 +27,8 @@ public class RichTextEditor {
 
   /**
    * constructor
-   * 
-   * @param dr
+   *
+   * @param testBase
    * @throws Exception
    */
   public RichTextEditor(TestBase testBase) throws Exception {
@@ -49,21 +50,17 @@ public class RichTextEditor {
       inputsummary.sendKeys(Keys.END);
       inputsummary.sendKeys(Keys.ENTER);
       evt.switchToParentWindow();
-      Utils.pause(1000);
       testBase.getExoWebDriver().getWebDriver().switchTo().defaultContent();
     } catch (StaleElementReferenceException e) {
       evt.checkCycling(e, testBase.getDefaultTimeout() / evt.getWaitInterval());
-      Utils.pause(evt.getWaitInterval());
       testBase.getExoWebDriver().getWebDriver().switchTo().defaultContent();
       typeEnterInRichText();
     } catch (ElementNotVisibleException e) {
       evt.checkCycling(e, testBase.getDefaultTimeout() / evt.getWaitInterval());
-      Utils.pause(evt.getWaitInterval());
       testBase.getExoWebDriver().getWebDriver().switchTo().defaultContent();
       typeEnterInRichText();
     } catch (WebDriverException e) {
       evt.checkCycling(e, testBase.getDefaultTimeout() / evt.getWaitInterval());
-      Utils.pause(evt.getWaitInterval());
       testBase.getExoWebDriver().getWebDriver().switchTo().defaultContent();
       typeEnterInRichText();
     } finally {
@@ -73,7 +70,7 @@ public class RichTextEditor {
 
   /**
    * Select a macro in a Wiki page editor
-   * 
+   *
    * @param cat category to which a macro that will be chosen belongs
    * @param macro macro name that will be chosen
    */
@@ -86,16 +83,14 @@ public class RichTextEditor {
     if (!macro.isEmpty()) {
       evt.mouseOverAndClick(ELEMENT_MACRO_TYPE_FILTER);
       evt.type(ELEMENT_MACRO_TYPE_FILTER, macro, true);
-      Utils.pause(1000);
     }
     evt.click(ELEMENT_MACRO_LABEL.replace("${macro}", macro));
     evt.click(but.ELEMENT_SELECT_BUTTON);
-    Utils.pause(3000);
   }
 
   /**
    * Add link to a Wiki page
-   * 
+   *
    * @param search parameter to choose whether to search page link or not
    * @param page Wiki page that will be the target link
    * @param label label of link that will be added into Wiki page
@@ -105,7 +100,6 @@ public class RichTextEditor {
     Boolean verify = (Boolean) (opParam.length > 0 ? opParam[0] : false);
     evt.mouseOverAndClick(ELEMENT_LINK);
     evt.mouseOverAndClick(ELEMENT_WIKI_PAGE_LINK);
-    Utils.pause(500);
     info("Create link to the page " + page);
     if (search) {
       evt.click(ELEMENT_SEARCH_TAB);
@@ -121,7 +115,6 @@ public class RichTextEditor {
       evt.type(ELEMENT_LABEL_LINK_TEXTBOX, label, true);
     if (tooltip != null && tooltip != "")
       evt.type(ELEMENT_TOOLTIP_LINK_TEXTBOX, tooltip, true);
-    Utils.pause(500);
     evt.click(but.ELEMENT_CREATE_LINK_BUTTON);
     evt.waitForElementNotPresent(but.ELEMENT_CREATE_LINK_BUTTON);
     if (verify) {
@@ -137,7 +130,7 @@ public class RichTextEditor {
 
   /**
    * Add table to a Wiki page
-   * 
+   *
    * @param rows Number of rows that will be added in the table
    * @param columns Number of columns that will be added in the table
    */
@@ -152,7 +145,7 @@ public class RichTextEditor {
 
   /**
    * Add macro: "color" into a Wiki page
-   * 
+   *
    * @param color color setting of macro
    * @param message message setting of macro
    */
@@ -164,7 +157,7 @@ public class RichTextEditor {
 
   /**
    * InsertMacroBox
-   * 
+   *
    * @param cssClass
    * @param image
    * @param title
@@ -211,7 +204,7 @@ public class RichTextEditor {
 
   /**
    * Insert Children macro
-   * 
+   *
    * @param childNum
    * @param depth
    * @param descendantType
@@ -265,7 +258,7 @@ public class RichTextEditor {
 
   /**
    * Insert macro code
-   * 
+   *
    * @param cssClass
    * @param image
    * @param language
@@ -303,7 +296,7 @@ public class RichTextEditor {
 
   /**
    * Insert Macro excerpt
-   * 
+   *
    * @param hideMode
    * @param content
    */
@@ -328,7 +321,7 @@ public class RichTextEditor {
 
   /**
    * Insert Macro Tip message
-   * 
+   *
    * @param content
    */
   public void insertMacroMessage(String content) {
@@ -341,7 +334,7 @@ public class RichTextEditor {
 
   /**
    * Insert Macro FootNode
-   * 
+   *
    * @param content
    */
   public void insertMacroFootNode(String content) {
@@ -354,7 +347,7 @@ public class RichTextEditor {
 
   /**
    * Insert Macro table of content
-   * 
+   *
    * @param depth
    * @param numberedMode
    * @param scope
@@ -398,7 +391,7 @@ public class RichTextEditor {
 
   /**
    * Insert Macro IFrame
-   * 
+   *
    * @param height
    * @param src
    * @param width
@@ -421,7 +414,7 @@ public class RichTextEditor {
 
   /**
    * Insert Macro JIRA
-   * 
+   *
    * @param url
    * @param fieldNames
    * @param fields
@@ -459,7 +452,7 @@ public class RichTextEditor {
 
   /**
    * Insert Macro HTML
-   * 
+   *
    * @param cleanMode
    * @param wikiMode
    * @param content
@@ -499,10 +492,9 @@ public class RichTextEditor {
    */
   public void goToWebPageLink() {
     info("Click on Link menu");
-    evt.mouseOverAndClick(ELEMENT_LINK);
+    $(ELEMENT_LINK).click();
     info("Click on Web Page Link menu");
-    evt.mouseOverAndClick(ELEMENT_WEB_PAGE_LINK_MENU);
-    Utils.pause(500);
+    $(ELEMENT_WEB_PAGE_LINK_MENU).click();
   }
 
   /**
@@ -513,30 +505,28 @@ public class RichTextEditor {
     evt.mouseOverAndClick(ELEMENT_LINK);
     info("Click on Edit Link menu");
     evt.mouseOverAndClick(ELEMENT_EDIT_LINK_MENU);
-    Utils.pause(500);
   }
 
   /**
    * Add a simple wiki page with rich text
-   * 
+   *
    * @param title updated title of the wiki page. Can not be <code>null</code>
    * @param content updated content of the wiki page. Can not be
    *          <code>null</code>
    */
   public void addSimplePage(String title, String content) {
-    Utils.pause(2000);
     info("Input a title for the page");
-    if (!title.isEmpty())
-      evt.type(ELEMENT_TITLE_WIKI_INPUT, title, true);
+    if (!title.isEmpty()) {
+      $(ELEMENT_TITLE_WIKI_INPUT).val(title);
+    }
     info("Input a content for the page");
     if (!content.isEmpty()) {
-      plf.inputFrame(ELEMENT_CONTENT_WIKI_FRAME, content);
-    }
+$(ELEMENT_CONTENT_WIKI_FRAME).sendKeys(content);    }
   }
 
   /**
    * Edit an attached file link
-   * 
+   *
    * @param fileName
    * @param label
    * @param tooltip
@@ -566,15 +556,13 @@ public class RichTextEditor {
     evt.mouseOverAndClick(ELEMENT_LINK);
     info("Click on Attached file Link menu");
     evt.mouseOverAndClick(ELEMENT_ATTACHED_FILE_LINK_MENU);
-    Utils.pause(500);
   }
 
   /**
    * Insert an attached file to the page
-   * 
+   *
    * @param attachedFile
-   * @param tooltip
-   * @param tab
+   * @param isPreEndKey
    */
   public void insertAttachedFileLink(String attachedFile, Boolean isPreEndKey) {
     info("Go to Attached file Link");
@@ -591,7 +579,7 @@ public class RichTextEditor {
 
   /**
    * Insert attached File link into the page
-   * 
+   *
    * @param page
    * @param attachedFile
    * @param tooltip
@@ -627,7 +615,7 @@ public class RichTextEditor {
 
   /**
    * Modify Wiki content with rich text
-   * 
+   *
    * @param title updated title of the wiki page. Can not be <code>null</code>
    * @param content updated content of the wiki page. Can not be
    *          <code>null</code>
@@ -645,7 +633,6 @@ public class RichTextEditor {
       } else {
         evt.inputDataToCKEditor(ELEMENT_CONTENT_WIKI_FRAME, content);
       }
-      Utils.pause(1000);
       testBase.getExoWebDriver().getWebDriver().switchTo().defaultContent();
     }
     evt.click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
@@ -660,12 +647,11 @@ public class RichTextEditor {
     evt.mouseOverAndClick(ELEMENT_LINK);
     info("Click on Page Link menu");
     evt.mouseOverAndClick(ELEMENT_WIKI_PAGE_LINK_MENU);
-    Utils.pause(500);
   }
 
   /**
    * Input email address into EMail link popup
-   * 
+   *
    * @param address
    */
   public void inputEmailAddress(String address) {
@@ -673,12 +659,11 @@ public class RichTextEditor {
       info("Input web address");
       evt.type(ELEMENT_EMAIL_LINK_EMAIL_ADDRESS, address, true);
     }
-    Utils.pause(2000);
   }
 
   /**
    * Insert email address into the page
-   * 
+   *
    * @param address
    * @param label
    * @param tooltip
@@ -702,12 +687,11 @@ public class RichTextEditor {
 
   /**
    * Insert a exist wiki page link into other page
-   * 
-   * @param search
+   *
    * @param page
    * @param label
    * @param tooltip
-   * @param opParam
+   * @param tab
    */
   public void insertExistWikiPageLink(String page, String label, String tooltip, wikiPageLinkTab tab) {
     switch (tab) {
@@ -744,7 +728,7 @@ public class RichTextEditor {
 
   /**
    * Insert a new wiki page into other page
-   * 
+   *
    * @param page
    * @param label
    * @param tooltip
@@ -789,20 +773,19 @@ public class RichTextEditor {
 
   /**
    * Input web address
-   * 
+   *
    * @param address
    */
   public void inputWebAddress(String address) {
     if (!address.isEmpty()) {
       info("Input web address");
-      evt.type(ELEMENT_WEB_PAGE_WEB_ADDRESS, address, true);
+      $(ELEMENT_WEB_PAGE_WEB_ADDRESS).val(address);
     }
-    Utils.pause(2000);
   }
 
   /**
    * Edit an image
-   * 
+   *
    * @param imageName
    * @param width
    * @param height
@@ -836,12 +819,11 @@ public class RichTextEditor {
     evt.mouseOverAndClick(ELEMENT_IMAGE_LINK);
     info("Click on Edit image Link menu");
     evt.mouseOverAndClick(ELEMENT_EDIT_IMAGE_LINK_MENU);
-    Utils.pause(500);
   }
 
   /**
    * Insert a web link into the page
-   * 
+   *
    * @param address
    * @param label
    * @param tooltip
@@ -863,7 +845,7 @@ public class RichTextEditor {
 
   /**
    * Edit a simple wiki page with rich editor
-   * 
+   *
    * @param newTitle updated title of the wiki page. Can not be
    *          <code>null</code>
    * @param newContent updated content of the wiki page. Can not be
@@ -872,7 +854,7 @@ public class RichTextEditor {
   public void editSimplePage(String newTitle, String newContent) {
     info("Input a new title for the page");
     if (!newTitle.isEmpty())
-      evt.type(ELEMENT_TITLE_WIKI_INPUT, newTitle, true);
+      $(ELEMENT_TITLE_WIKI_INPUT).val(newTitle);
     info("Input a new content for the page");
     if (!newContent.isEmpty()) {
       plf.inputFrame(ELEMENT_CONTENT_WIKI_FRAME, newContent);
@@ -887,28 +869,27 @@ public class RichTextEditor {
     evt.mouseOverAndClick(ELEMENT_LINK);
     info("Click on Attached file Link menu");
     evt.mouseOverAndClick(ELEMENT_EMAIL_LINK_MENU);
-    Utils.pause(500);
   }
 
   /**
    * Input a tooltip
-   * 
+   *
    * @param tooltip
    */
   public void inputToolTip(String tooltip) {
     if (tooltip != null && tooltip != "") {
-      evt.type(ELEMENT_TOOLTIP_LINK_TEXTBOX, tooltip, true);
+      $(ELEMENT_TOOLTIP_LINK_TEXTBOX).val(tooltip);
     }
   }
 
   /**
    * Input a label
-   * 
+   *
    * @param label
    */
   public void inputLabel(String label) {
     if (label != null && label != "") {
-      evt.type(ELEMENT_LABEL_LINK_TEXTBOX, label, true);
+      $(ELEMENT_LABEL_LINK_TEXTBOX).val(label);
     }
   }
 
@@ -920,12 +901,11 @@ public class RichTextEditor {
     evt.mouseOverAndClick(ELEMENT_IMAGE_LINK);
     info("Click on Attached file Link menu");
     evt.mouseOverAndClick(ELEMENT_EXTERNAL_IMAGE_LINK_MENU);
-    Utils.pause(500);
   }
 
   /**
    * Input an external image into the content of the page
-   * 
+   *
    * @param link
    * @param width
    * @param height
@@ -940,27 +920,27 @@ public class RichTextEditor {
     goToImageSettings();
     if (!width.isEmpty()) {
       info("Input width");
-      evt.type(ELEMENT_IMAGE_WIDTH, width, true);
+      $(ELEMENT_IMAGE_WIDTH).val(width);
     }
     if (!height.isEmpty()) {
       info("Input height");
-      evt.type(ELEMENT_IMAGE_HEIGHT, height, true);
+      $(ELEMENT_IMAGE_HEIGHT).val(height);
     }
     if (!altText.isEmpty()) {
       info("Change alt text");
-      evt.type(ELEMENT_IMAGE_ALTERNATIVE_TEXT, altText, true);
+      $(ELEMENT_IMAGE_ALTERNATIVE_TEXT).val(altText);
     }
   }
 
   /**
    * Input an external image link
-   * 
+   *
    * @param link
    */
   public void inputExternalImageLink(String link) {
     if (!link.isEmpty()) {
       info("Input external Image link");
-      evt.type(ELEMENT_EXTERNAL_IMAGE_INPUT_LINK, link, true);
+      $(ELEMENT_EXTERNAL_IMAGE_INPUT_LINK).val(link);
     }
   }
 
@@ -972,12 +952,11 @@ public class RichTextEditor {
     evt.mouseOverAndClick(ELEMENT_IMAGE_LINK);
     info("Click on Attached file Link menu");
     evt.mouseOverAndClick(ELEMENT_ATTACHED_IMAGE_LINK_MENU);
-    Utils.pause(500);
   }
 
   /**
    * Insert an image into the content of the page
-   * 
+   *
    * @param attachedFile
    * @param width
    * @param height
@@ -992,22 +971,22 @@ public class RichTextEditor {
     goToImageSettings();
     if (!width.isEmpty()) {
       info("Input width");
-      evt.type(ELEMENT_IMAGE_WIDTH, width, true);
+      $(ELEMENT_IMAGE_WIDTH).val(width);
     }
     if (!height.isEmpty()) {
       info("Input height");
-      evt.type(ELEMENT_IMAGE_HEIGHT, height, true);
+      $(ELEMENT_IMAGE_HEIGHT).val(height);
     }
     if (!altText.isEmpty()) {
       info("Change alt text");
-      evt.type(ELEMENT_IMAGE_ALTERNATIVE_TEXT, altText, true);
+      $(ELEMENT_IMAGE_ALTERNATIVE_TEXT).val(altText);
     }
 
   }
 
   /**
    * Insert an image into the content of the page
-   * 
+   *
    * @param attachedFile
    */
   public void insertImage(String attachedFile, Boolean isPressEndKey) {
@@ -1025,7 +1004,7 @@ public class RichTextEditor {
 
   /**
    * Delete an image in wiki page
-   * 
+   *
    * @param content
    */
   public void removeImage(String content) {
@@ -1039,7 +1018,6 @@ public class RichTextEditor {
     evt.waitForElementNotPresent(ELEMENT_CHECK_IMAGE.replace("${file}", content));
     info("Switch to the parent");
     evt.switchToParentWindow();
-    Utils.pause(500);
     info("click on Image link again");
     evt.mouseOverAndClick(ELEMENT_IMAGE_LINK);
     info("Verify that Remove Image link is not shown");
@@ -1048,7 +1026,7 @@ public class RichTextEditor {
 
   /**
    * Select algin of Image
-   * 
+   *
    * @param type
    */
   public void selectAlign(alignType type) {
@@ -1084,7 +1062,7 @@ public class RichTextEditor {
 
   /**
    * Remove a link in wiki page
-   * 
+   *
    * @param content
    */
   public void removeLink(String content) {
@@ -1094,7 +1072,6 @@ public class RichTextEditor {
     evt.click(ELEMENT_LINK);
     info("Click on Remove link");
     // mouseOverAndClick(ELEMENT_REMOVE_LINK_MENU);
-    Utils.pause(2000);
     evt.waitForAndGetElement(ELEMENT_REMOVE_LINK_MENU, testBase.getDefaultTimeout(), 1);
     evt.click(ELEMENT_REMOVE_LINK_MENU);
     info("Switch to the frame");
@@ -1103,7 +1080,6 @@ public class RichTextEditor {
     evt.waitForElementNotPresent(By.linkText(content));
     info("Switch to the parent");
     evt.switchToParentWindow();
-    Utils.pause(500);
     info("click on link again");
     evt.mouseOverAndClick(ELEMENT_LINK);
     info("Verify that Remove link is not shown");
@@ -1112,20 +1088,18 @@ public class RichTextEditor {
 
   /**
    * Input a name for a new wiki page link
-   * 
+   *
    * @param page
    */
   public void inputNameWikiPageLink(String page) {
     info("Input the name of the page");
-    evt.type(ELEMENT_INPUT_NAME_NEW_WIKI_PAGE, page, true);
-    Utils.pause(2000);
+    $(ELEMENT_INPUT_NAME_NEW_WIKI_PAGE).val(page);
   }
 
   /**
    * Click on Create link button on Wiki page popup
    */
   public void goToCreateLink() {
-    Utils.pause(500);
     evt.click(ELEMENT_CREATE_LINK_BUTTON);
     evt.waitForElementNotPresent(ELEMENT_CREATE_LINK_BUTTON);
   }
@@ -1136,12 +1110,11 @@ public class RichTextEditor {
   public void goToMyRecentChangesTab() {
     info("Click on My Recent Changes Tab");
     evt.click(ELEMENT_MY_RECENT_CHANGES_TAB);
-    Utils.pause(2000);
   }
 
   /**
    * Add a new wiki page in My Recent changes tab
-   * 
+   *
    * @param page
    */
   public void addNewPageInMyRecentChangesTab(String page) {
@@ -1153,7 +1126,7 @@ public class RichTextEditor {
 
   /**
    * Add a new wiki page in Search tab
-   * 
+   *
    * @param page
    */
   public void addNewPageInSearchTab(String page) {
@@ -1165,7 +1138,7 @@ public class RichTextEditor {
 
   /**
    * Upload an attached file link in Attached File link popup
-   * 
+   *
    * @param link
    */
   public void uploadAttachedFile(String link) {
@@ -1175,9 +1148,8 @@ public class RichTextEditor {
     info("path in uploadRobot:" + path);
     evt.doubleClickOnElement(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_NEW_FILE_BTN);
 
-    Utils.pause(3000);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
-    Utils.pause(2000);
+    ((JavascriptExecutor) testBase.getExoWebDriver()
+                                  .getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
     testBase.getExoWebDriver().getWebDriver().findElement(By.xpath("//*[@name='filepath']")).sendKeys(path);
     /*
      * WebElement elem =
@@ -1185,7 +1157,6 @@ public class RichTextEditor {
      * scrollToElement(elem, driver); click(elem,2,true);
      * uploadFileUsingRobot(link);
      */
-    Utils.pause(3000);
   }
 
   /**
@@ -1194,7 +1165,6 @@ public class RichTextEditor {
   public void goToLinkSetting() {
     info("Click on Link Setting button");
     evt.click(ELEMENT_WIKI_PAGE_LINK_LINK_SETTING_BTN);
-    Utils.pause(2000);
   }
 
   /**
@@ -1203,7 +1173,6 @@ public class RichTextEditor {
   public void goToAllPagesTab() {
     info("Click on All Pages tab");
     evt.click(ELEMENT_ALL_PAGE_TAB);
-    Utils.pause(2000);
   }
 
   /**
@@ -1218,13 +1187,13 @@ public class RichTextEditor {
 
   /**
    * Search a page in Wiki page popup
-   * 
+   *
    * @param page
    */
   public void searchPage(String page) {
     goToSearchTab();
     info("Input the page:" + page);
-    evt.type(ELEMENT_SEARCH_TEXTBOX_POPUP, page, true);
+    $(ELEMENT_SEARCH_TEXTBOX_POPUP).val(page);
     info("Search the page");
     evt.click(ELEMENT_SEARCH_BUTTON);
   }
@@ -1235,12 +1204,11 @@ public class RichTextEditor {
   public void goToCurrentPageTab() {
     info("Click on Current Page Tab");
     evt.click(ELEMENT_CURRENT_PAGE_TAB);
-    Utils.pause(2000);
   }
 
   /**
    * Upload an image file in Attached Image link popup
-   * 
+   *
    * @param link
    */
   public void uploadImageFile(String link) {
@@ -1250,9 +1218,8 @@ public class RichTextEditor {
     info("path in uploadRobot:" + path);
     evt.doubleClickOnElement(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_IMAGE_BTN);
 
-    Utils.pause(2000);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
-    Utils.pause(2000);
+    ((JavascriptExecutor) testBase.getExoWebDriver()
+                                  .getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
     testBase.getExoWebDriver().getWebDriver().findElement(By.xpath("//*[@name='filepath']")).sendKeys(path);
 
     /*
@@ -1261,7 +1228,6 @@ public class RichTextEditor {
      * scrollToElement(elem, driver); click(elem,2,true);
      * uploadFileUsingRobot(link);
      */
-    Utils.pause(3000);
   }
 
   /**
@@ -1277,17 +1243,13 @@ public class RichTextEditor {
    * Expand Wiki Home node in All pages tab
    */
   public void goToExplorerWikiHome() {
-    if (evt.waitForAndGetElement(ELEMENT_EXPLORER_WIKIHOME, 3000, 0) != null) {
-      info("click on Wiki Home note");
-      evt.click(ELEMENT_EXPLORER_WIKIHOME);
-    }
-
-    Utils.pause(2000);
+    info("click on Wiki Home note");
+    $(ELEMENT_EXPLORER_WIKIHOME).click();
   }
 
   /**
    * Select an attached file in list of All pages tab
-   * 
+   *
    * @param page
    * @param attachedFile
    */
@@ -1317,14 +1279,14 @@ public class RichTextEditor {
 
   /**
    * Add a page with checking auto save after 30s
-   * 
+   *
    * @param title
    * @param content
    */
   public void addSimplePageWithAutoSaveStatus(String title, String content) {
     info("Input a title for the page");
     if (!title.isEmpty())
-      evt.type(ELEMENT_TITLE_WIKI_INPUT, title, true);
+      $(ELEMENT_TITLE_WIKI_INPUT).val(title);
     info("Input a content for the page");
     if (!content.isEmpty()) {
       plf.inputFrame(ELEMENT_CONTENT_WIKI_FRAME, content);
@@ -1336,7 +1298,7 @@ public class RichTextEditor {
 
   /**
    * Select a page from All pages tab
-   * 
+   *
    * @param page
    */
   public void selectPageInAllPagesTab(String page) {
@@ -1353,7 +1315,7 @@ public class RichTextEditor {
 
   /**
    * Select a page in Search Tab
-   * 
+   *
    * @param page
    */
   public void selectPageInSearchTab(String page) {
@@ -1368,7 +1330,7 @@ public class RichTextEditor {
 
   /**
    * Select a page in My Recent Changes list
-   * 
+   *
    * @param page
    */
   public void selectPageInMyRecentChangesTab(String page) {
@@ -1390,12 +1352,11 @@ public class RichTextEditor {
     evt.mouseOverAndClick(ELEMENT_IMAGE_LINK);
     info("Click on Edit image Link menu");
     evt.mouseOverAndClick(ELEMENT_REMOVE_IMAGE_LINK_MENU);
-    Utils.pause(500);
   }
 
   /**
    * Edit a wiki page with auto save status
-   * 
+   *
    * @param newTitle
    * @param newContent
    */
@@ -1413,14 +1374,14 @@ public class RichTextEditor {
 
   /**
    * Add a new page that has auto save without save
-   * 
+   *
    * @param title
    * @param content
    */
   public void addSimplePageHasAutoSaveWithoutSave(String title, String content) {
     info("Input a title for the page");
     if (!title.isEmpty())
-      evt.type(ELEMENT_TITLE_WIKI_INPUT, title, true);
+      $(ELEMENT_TITLE_WIKI_INPUT).val(title);
     info("Input a content for the page");
     if (!content.isEmpty()) {
       plf.inputFrame(ELEMENT_CONTENT_WIKI_FRAME, content);
@@ -1430,15 +1391,12 @@ public class RichTextEditor {
     info("Cancel adding page");
     evt.click(ELEMENT_CANCEL_BUTTON_ADD_PAGE, 0, true);
     evt.click(ELEMENT_CONFIRMATION_POPUP_YES_BTN);
-    Utils.pause(2000);
   }
 
   /**
    * Replace a new link for old link that inserted into the page
-   * 
+   *
    * @param label
-   * @param xOffsetLabel
-   * @param yOffsetLabel
    */
   public void changeLink(String label) {
     info("Focus on the frame");
@@ -1449,13 +1407,14 @@ public class RichTextEditor {
 
   /**
    * Select the image
-   * 
+   *
    * @param altTextImage
    */
   public void selectImage(String altTextImage) {
     info("Focus on the frame");
     plf.switchFrame(ELEMENT_CONTENT_WIKI_FRAME);
-    WebElement element = testBase.getExoWebDriver().getWebDriver()
+    WebElement element = testBase.getExoWebDriver()
+                                 .getWebDriver()
                                  .findElement(By.xpath(ELEMENT_WIKI_CONTENT_IMAGE_ALT.replace("$alt", altTextImage)));
     selectItems(element);
     evt.switchToParentWindow();
@@ -1463,8 +1422,8 @@ public class RichTextEditor {
 
   /**
    * Select the label's link that is inserted into the page
-   * 
-   * @param driver
+   *
+   * @param label
    */
   public void selectLabelLink(String label) {
     info("Select a line text");
@@ -1474,7 +1433,7 @@ public class RichTextEditor {
 
   /**
    * Select element by click and hold
-   * 
+   *
    * @param el
    */
   public void selectItems(WebElement el) {
@@ -1489,7 +1448,6 @@ public class RichTextEditor {
   public void uncheckOpenNewWindow() {
     info("Uncheck Open New Window checkbox");
     evt.uncheck(ELEMENT_OPEN_NEW_WINDOW_CHECKBOX, 2);
-    Utils.pause(2000);
   }
 
   /**
@@ -1498,14 +1456,12 @@ public class RichTextEditor {
   public void checkOpenNewWindow() {
     info("Check Open New Window checkbox");
     evt.check(ELEMENT_OPEN_NEW_WINDOW_CHECKBOX, 2);
-    Utils.pause(2000);
   }
 
   /**
    * Attach a file to a Wiki page
-   * 
+   *
    * @param link link of file that will be attached
-   * @param type optional parameter of this method.
    */
   public void attachFile(String link) {
     String fs = File.separator;
@@ -1518,7 +1474,7 @@ public class RichTextEditor {
 
   /**
    * Insert Macro RSS
-   * 
+   *
    * @param content
    * @param count
    * @param decoration
@@ -1545,7 +1501,7 @@ public class RichTextEditor {
 
     if (!count.isEmpty()) {
       info("Input count");
-      evt.type(ELEMENT_MACRO_RSS_COUNT_FIELD, count, true);
+      $(ELEMENT_MACRO_RSS_COUNT_FIELD).val(count);
     }
 
     switch (decoration) {
@@ -1577,14 +1533,14 @@ public class RichTextEditor {
 
     if (!width.isEmpty()) {
       info("Input width");
-      evt.type(ELEMENT_MACRO_RSS_WIDTH_FIELD, width, true);
+      $(ELEMENT_MACRO_RSS_WIDTH_FIELD).val(width);
     }
     clickInsertMacroBtn();
   }
 
   /**
    * Insert macro: "JIRA" into a Wiki page
-   * 
+   *
    * @param URL URL setting of macro
    * @param Content Content setting of macro
    */
@@ -1593,15 +1549,14 @@ public class RichTextEditor {
     if (URL != null && URL != "") {
       info("Insert URL");
       evt.waitForAndGetElement(ELEMENT_JIRA_URL);
-      evt.type(ELEMENT_JIRA_URL, URL, true);
+      $(ELEMENT_JIRA_URL).val(URL);
     }
 
     if (Content != null && Content != "") {
       info("Insert Content");
       evt.waitForAndGetElement(ELEMENT_JIRA_CONTENT);
-      evt.type(ELEMENT_JIRA_CONTENT, Content, true);
+      $(ELEMENT_JIRA_CONTENT).val(Content);
     }
-    Utils.pause(1000);
   }
 
   /**
@@ -1611,7 +1566,6 @@ public class RichTextEditor {
     info("Click on Create button");
     evt.click(but.ELEMENT_CREATE_MACRO_BUTTON);
     evt.waitForElementNotPresent(but.ELEMENT_CREATE_MACRO_BUTTON);
-    Utils.pause(3000);
   }
 
   /**
@@ -1622,23 +1576,21 @@ public class RichTextEditor {
     evt.mouseOverAndClick(ELEMENT_MACRO_LINK);
     info("Click on Edit Macro link");
     evt.mouseOverAndClick(ELEMENT_EDIT_MACRO_LINK);
-    Utils.pause(500);
   }
 
   /**
    * Attach a file to a Wiki page
-   * 
+   *
    * @param link link of file that will be attached
    */
 
   /**
    * Collapse all macro
-   * 
+   *
    * @param control true if use key
    */
   public void CollapseAllMacro(boolean control) {
     info("Collapse all macro");
-    Utils.pause(2000);
     if (control) {
       info("Using Ctrl + Shift + C");
       Utils.javaSimulateKeyPress(KeyEvent.VK_CONTROL, KeyEvent.VK_SHIFT, KeyEvent.VK_C);
@@ -1655,7 +1607,7 @@ public class RichTextEditor {
 
   /**
    * Expand all macro
-   * 
+   *
    * @param control true if use key
    */
   public void ExpandAllMacro(boolean control) {
@@ -1676,8 +1628,8 @@ public class RichTextEditor {
 
   /**
    * Verify after collapse macro
-   * 
-   * @param control true if use key
+   *
+   * @param macro
    */
   public void verifyCollapsemacro(String macro) {
     info("Verify collapse macro");
@@ -1686,8 +1638,9 @@ public class RichTextEditor {
 
   /**
    * Verify after expand macro
-   * 
-   * @param control true if use key
+   *
+   * @param macroCate
+   * @param Content
    */
   public void verifyExpandmacro(macroCategories macroCate, String... Content) {
     String content = (Content.length > 0 ? Content[0] : null);
@@ -1711,7 +1664,6 @@ public class RichTextEditor {
   public void selectJIRAMacro() {
     info("Focus on the frame");
     plf.switchFrame(ELEMENT_CONTENT_WIKI_FRAME, 1);
-    Utils.pause(2000);
     WebElement element = testBase.getExoWebDriver().getWebDriver().findElement(ELEMENT_JIRA_TABLE);
     selectItems(element);
     element.click();
@@ -1725,7 +1677,6 @@ public class RichTextEditor {
     info("click on Apply button");
     evt.click(ELMENET_MACRO_JIRA_EDIT_FORM_APPLY_BTN);
     evt.waitForElementNotPresent(ELMENET_MACRO_JIRA_EDIT_FORM_APPLY_BTN);
-    Utils.pause(5000);
   }
 
   /**

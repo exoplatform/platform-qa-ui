@@ -1,11 +1,14 @@
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -88,9 +91,7 @@ public class ActivityStream {
    */
   public void checkActivity(String name) {
     info("Verify that the activity of the name:" + name + " is shown");
-    evt.waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("${title}", name)),
-                             testBase.getDefaultTimeout(),
-                             1);
+    $(byText(name)).should(Condition.exist);
     info("The activity of the name:" + name + " is shown successfully");
   }
 
@@ -170,16 +171,16 @@ public class ActivityStream {
     String[] arrayline;
     arrayline = content.split("</br>");
     info("Check wiki page's title");
-    evt.waitForAndGetElement(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("{$name}", title), 2000, 1);
+    $(byText(title)).should(Condition.exist);
     info("Check wiki page's version");
-    evt.waitForAndGetElement(ELEMENT_ACTIVITY_VERSION.replace("${name}", title).replace("${version}", version), 2000, 1);
+    $(byText(version)).should(Condition.exist);
     info("Check first 4 lines of the wiki page");
-    evt.waitForAndGetElement(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("{$name}", arrayline[0]), 2000, 1);
-    evt.waitForAndGetElement(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("{$name}", arrayline[1]), 2000, 1);
-    evt.waitForAndGetElement(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("{$name}", arrayline[2]), 2000, 1);
-    evt.waitForAndGetElement(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("{$name}", arrayline[3]), 2000, 1);
+    $(byText(arrayline[0])).isDisplayed();
+    $(byText(arrayline[1])).isDisplayed();
+    $(byText(arrayline[2])).isDisplayed();
+    $(byText(arrayline[3])).isDisplayed();
     info("Check line 5 of the wiki page is not shown");
-    evt.waitForElementNotPresent(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("{$name}", arrayline[4]));
+   $(byText(arrayline[4])).shouldNot(Condition.exist);
   }
 
   /**

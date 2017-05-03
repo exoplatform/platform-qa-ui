@@ -38,7 +38,11 @@
     <module>core</module>
     <module>selenium</module>
     <module>commons</module>
+
     <module>forum</module>
+
+    <module>wiki</module>
+
   </modules>
   <scm>
     <connection>scm:git:git://github.com/exoplatform/platform-qa-ui.git</connection>

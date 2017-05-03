@@ -1,13 +1,18 @@
 package org.exoplatform.platform.qa.ui.selenium.locator.wiki;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selectors.byId;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
 
 public class WikiLocators {
 
   // *====================================================HOME
   // PAGE=================================================================*\\
   public static final String ELEMENT_WIKI_PAGE_LINK                                     =
-                                                    ".//*[@id='iconTreeExplorer']//*[contains(text(),'${pageTitle}')]";
+                                                    ".//*[@class='uiLeftContainerArea']//div[@id='UITreeExplorer']//*[@id='iconTreeExplorer']//a[contains(text(),'${pageTitle}')]";
 
   public static final By     ELEMENT_WIKI_HOME_PAGE_LINK                                =
                                                          By.xpath(".//*[@id='UIWikiBreadCrumb']//*[contains(text(),'Wiki Home')]");
@@ -123,7 +128,7 @@ public class WikiLocators {
   public static final By     ELEMENT_MORE_LINK                                          =
                                                By.xpath("//*[@id='UIWikiPageControlArea_PageToolBar']//div[contains(text(), 'More')]");
 
-  public static final By     ELEMENT_DELETE_LINK                                        = By.xpath(".//*[text()='Delete Page']");
+  public static final By     ELEMENT_DELETE_LINK                                        = By.xpath(".//*[text()='Delete']");
 
   public static final By     ELEMENT_DELETE_LINK_2                                      = By.className("uiIconDeletePage");
 
@@ -473,7 +478,7 @@ public class WikiLocators {
   public static final By     ELEMENT_WIKI_PAGE_TOOL_BAR_AUTO_SAVE_TEXT                  =
                                                                        By.xpath(".//*[@id='UIWikiPageEditForm']//*[contains(text(),'Draft saved')]");
 
-  public static final By     ELEMENT_SAVE_BUTTON_ADD_PAGE                               = By.id("UISubmitToolBarUpper_SavePage_");
+  //public static final By     ELEMENT_SAVE_BUTTON_ADD_PAGE                               = By.id("UISubmitToolBarUpper_SavePage_");
 
   public static final By     ELEMENT_CANCEL_BUTTON_ADD_PAGE                             = By.id("UISubmitToolBarBottom_Cancel_");
 
@@ -1342,4 +1347,6 @@ public class WikiLocators {
 
   public static final String ELEMENT_WIKI_SETTING_PERMISSION_SEARCH_GROUP_USER_IN_TABLE =
                                                                                         "//*[@id='UIListUsers']//span[contains(text(),'${username}')]";
+public static final SelenideElement ELEMENT_SAVE_BUTTON_ADD_PAGE=$(byId("UISubmitToolBarUpper_SavePage_"));
+public static final SelenideElement ELEMENT_DELETE_LINK2= $(byText("Delete Page"));
 }

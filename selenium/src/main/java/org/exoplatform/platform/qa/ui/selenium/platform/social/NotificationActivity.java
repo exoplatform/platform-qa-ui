@@ -13,13 +13,12 @@ import org.openqa.selenium.WebElement;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
-import org.exoplatform.platform.qa.ui.selenium.platform.wiki.WikiHomePage;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class NotificationActivity {
   private final TestBase       testBase;
 
-  public WikiHomePage          wikiHome;
+  //public WikiHomePage          wikiHome;
 
   public PlatformBase          plf;
 
@@ -33,7 +32,7 @@ public class NotificationActivity {
   public NotificationActivity(TestBase testBase) {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
-    this.wikiHome = new WikiHomePage(testBase);
+    //this.wikiHome = new WikiHomePage(testBase);
     this.plf = new PlatformBase(testBase);
   }
 

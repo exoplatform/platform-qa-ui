@@ -1,5 +1,6 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.wiki;
+package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -23,8 +24,8 @@ public class WikiValidattions {
 
   /**
    * constructor
-   * 
-   * @param dr
+   *
+   * @param testBase
    */
 
   public WikiValidattions(TestBase testBase) {
@@ -35,7 +36,7 @@ public class WikiValidattions {
 
   /**
    * Verify a draf page
-   * 
+   *
    * @param title
    */
   public void verifyTitleDrafPage(String title) {
@@ -45,7 +46,7 @@ public class WikiValidattions {
 
   /**
    * Verify that Draf page is not shown
-   * 
+   *
    * @param title
    */
   public void verifyNotTitleDrafPage(String title) {
@@ -55,13 +56,16 @@ public class WikiValidattions {
 
   /**
    * Verify resuming a draf page
-   * 
+   *
    * @param titleBeforeDraf
    */
   public void verifyResumADraf(String titleBeforeDraf) {
     info("Get current title in iput field");
-    String currentTitle =
-                        this.testBase.getExoWebDriver().getWebDriver().findElement(ELEMENT_TITLE_WIKI_INPUT).getAttribute("value").toString();
+    String currentTitle = this.testBase.getExoWebDriver()
+                                       .getWebDriver()
+                                       .findElement(ELEMENT_TITLE_WIKI_INPUT)
+                                       .getAttribute("value")
+                                       .toString();
     if (currentTitle.contains(titleBeforeDraf))
       assert true;
     else
@@ -70,7 +74,7 @@ public class WikiValidattions {
 
   /**
    * Verify that a wiki page link is inserted to the page
-   * 
+   *
    * @param label
    * @param tooltip
    */
@@ -86,7 +90,7 @@ public class WikiValidattions {
 
   /**
    * Verify that a macro is inserted into the content of the page
-   * 
+   *
    * @param macroType
    */
   public void verifyMacroIntoFrame(String macroType) {
@@ -98,7 +102,7 @@ public class WikiValidattions {
 
   /**
    * Verify that macro Iframe is inserted into the content of the page
-   * 
+   *
    * @param src
    */
   public void verifyMacroIFrame(String src) {
@@ -108,7 +112,7 @@ public class WikiValidattions {
 
   /**
    * Verify the alert message when editing same page
-   * 
+   *
    * @param status
    * @param fullName
    */
@@ -119,9 +123,8 @@ public class WikiValidattions {
 
   /**
    * Verify Confirmation message
-   * 
+   *
    * @param mess
-   * @param isConfirm
    */
   public void verifyWarningMessage(String mess) {
     info("Verify that the warning message is shown");
@@ -131,7 +134,7 @@ public class WikiValidattions {
 
   /**
    * Verify effects of Page's content
-   * 
+   *
    * @param type
    */
   public void verifyEffectsPageContent(effectTypes type, String content) {
@@ -194,7 +197,7 @@ public class WikiValidattions {
 
   /**
    * Check display of Admin Pages permission
-   * 
+   *
    * @param isDisplay
    */
   public void checkDisplayOfAdmPage(boolean isDisplay) {
@@ -210,7 +213,7 @@ public class WikiValidattions {
 
   /**
    * Check display of Admin Wiki permission
-   * 
+   *
    * @param isDisplay
    */
   public void checkDisplayOfAdmWiki(boolean isDisplay) {
@@ -228,7 +231,7 @@ public class WikiValidattions {
 
   /**
    * Check display of edit page permission
-   * 
+   *
    * @param title
    * @param isDisplay
    */
@@ -247,7 +250,7 @@ public class WikiValidattions {
 
   /**
    * Check display of view page permission
-   * 
+   *
    * @param title
    * @param isDisplay
    */
@@ -265,7 +268,7 @@ public class WikiValidattions {
 
   /**
    * Verify the page isnot created and shown in the list
-   * 
+   *
    * @param title
    */
   public void verifyNotTitleWikiPage(String title) {
@@ -276,7 +279,7 @@ public class WikiValidattions {
 
   /**
    * Verify that the page is shown detail
-   * 
+   *
    * @param pageName
    * @param pageContent
    */
@@ -318,7 +321,7 @@ public class WikiValidattions {
 
   /**
    * Check versions on Compare version page
-   * 
+   *
    * @param oldVersion
    */
   public void verifyCompareVersions(String oldVersion) {
@@ -331,7 +334,7 @@ public class WikiValidattions {
 
   /**
    * Verify the content of a page after created successfully
-   * 
+   *
    * @param content
    */
   public void verifyContentPage(String content) {
@@ -344,7 +347,7 @@ public class WikiValidattions {
    * Verify draf in out date version status with text: "Your version is
    * outdated, a version of this content has been updated by another user. You
    * can [view your changes] and [Continue Editing] or [delete] your draft."
-   * 
+   *
    * @param message
    */
   public void verifyDraftInOutDateVersionStatus(String message) {
@@ -361,7 +364,7 @@ public class WikiValidattions {
   /**
    * Verify email format of the email link after inserted a email link to the
    * page
-   * 
+   *
    * @param address
    */
   public void verifyEmailFormatLink(String address) {
@@ -380,7 +383,7 @@ public class WikiValidattions {
 
   /**
    * Verify that the system redirects to the wiki page link that is inserted
-   * 
+   *
    * @param label
    * @param pageLink
    */
@@ -391,13 +394,17 @@ public class WikiValidattions {
 
   /**
    * Verify that the system redirects to the wiki page that is created
-   * 
+   *
    * @param label
    * @param pageLink
    */
   public void verifyInsertNewLink(String label, String pageLink) {
     info("The page link is shown");
-    String actualTitle = this.testBase.getExoWebDriver().getWebDriver().findElement(ELEMENT_TITLE_WIKI_INPUT).getAttribute("value").toString();
+    String actualTitle = this.testBase.getExoWebDriver()
+                                      .getWebDriver()
+                                      .findElement(ELEMENT_TITLE_WIKI_INPUT)
+                                      .getAttribute("value")
+                                      .toString();
     if (actualTitle.contains(pageLink))
       assert true;
     else
@@ -406,7 +413,7 @@ public class WikiValidattions {
 
   /**
    * Verify the size of the image in the page's content
-   * 
+   *
    * @param width
    * @param height
    */
@@ -417,7 +424,7 @@ public class WikiValidattions {
 
   /**
    * Verify status when edit a page that has existing a draf
-   * 
+   *
    * @param message
    */
   public void verifyStatusWhenEditPageHasExistingDraf(String message, String date) {
@@ -449,7 +456,7 @@ public class WikiValidattions {
 
   /**
    * Verify that edit permission is checked or not
-   * 
+   *
    * @param userGroupMembership is username/Group or Membership
    * @param isChecked = true if want to verify that is checked = false if want
    *          to verify that is not checked
@@ -466,7 +473,7 @@ public class WikiValidattions {
 
   /**
    * Verify that view permission is checked or not
-   * 
+   *
    * @param userGroupMembership is username/Group or Membership
    * @param isChecked = true if want to verify that is checked = false if want
    *          to verify that is not checked
@@ -504,7 +511,7 @@ public class WikiValidattions {
 
   /**
    * Verify that the message for many pages have same title in moving page
-   * 
+   *
    * @param mess
    * @param pages
    */
@@ -532,7 +539,7 @@ public class WikiValidattions {
 
   /**
    * Verify the message for one page has same title in moving page
-   * 
+   *
    * @param mess
    */
   public void verifyMessageOnePageHasSameTitleInMovingPage(String mess) {
@@ -545,7 +552,7 @@ public class WikiValidattions {
 
   /**
    * Verify breadcrumb path of a page
-   * 
+   *
    * @param locator1
    * @param locator2
    * @param page
@@ -560,7 +567,7 @@ public class WikiValidattions {
 
   /**
    * Verify breadcrumb path of a page
-   * 
+   *
    * @param locator1
    * @param locator2
    */
@@ -574,7 +581,7 @@ public class WikiValidattions {
   /**
    * Verify that the tooltip of rename in the message is shown for one page has
    * same title in moving page
-   * 
+   *
    * @param mess
    */
   public void verifyToolTipMessageOnePageHasSameTitleInMovingPage(String mess) {
@@ -588,7 +595,7 @@ public class WikiValidattions {
   /**
    * Verify that the tooltip of the message for many pages have same title in
    * moving page
-   * 
+   *
    * @param mess
    * @param pages
    */
@@ -615,7 +622,7 @@ public class WikiValidattions {
 
   /**
    * Verify that a page is parent of other page
-   * 
+   *
    * @param parentNode
    * @param childNode
    */
@@ -628,15 +635,18 @@ public class WikiValidattions {
 
   /**
    * Verify that edit mode is opening
-   * 
+   *
    * @param oldTitle
    */
   public void verifyEditModeOpenning(String oldTitle) {
     info("Verify that input tilte field is shown");
     evt.waitForAndGetElement(ELEMENT_TITLE_WIKI_INPUT);
     info("Verify that the value of input title field has correct value of old title");
-    String currentTitle =
-                        this.testBase.getExoWebDriver().getWebDriver().findElement(ELEMENT_TITLE_WIKI_INPUT).getAttribute("value").toString();
+    String currentTitle = this.testBase.getExoWebDriver()
+                                       .getWebDriver()
+                                       .findElement(ELEMENT_TITLE_WIKI_INPUT)
+                                       .getAttribute("value")
+                                       .toString();
     if (currentTitle.contains(oldTitle))
       assert true;
     else
@@ -645,7 +655,7 @@ public class WikiValidattions {
 
   /**
    * Verify alt Text of image is changed
-   * 
+   *
    * @param altText
    */
   public void verifyAltTextImageInContentPage(String altText) {
@@ -673,18 +683,18 @@ public class WikiValidattions {
 
   /**
    * Verify the page is created and shown in the list
-   * 
+   *
    * @param title
    */
   public void verifyTitleWikiPage(String title) {
     info("Verify that the wiki page is created and shown in the list");
-    evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_LINK.replace("${pageTitle}", title));
+    $(ELEMENT_WIKI_PAGE_LINK.replace("${pageTitle}", title));
     info("The wiki page is created successfully");
   }
 
   /**
    * Verify the page is not displayed in Wiki Home
-   * 
+   *
    * @param title
    */
   public void verifyWikiPageNotDisplayedInWikiHome(String title) {
@@ -695,7 +705,7 @@ public class WikiValidattions {
 
   /**
    * Verify that a template is shown in the list
-   * 
+   *
    * @param template
    */
   public void verifyTemplateInList(String template) {
@@ -722,7 +732,7 @@ public class WikiValidattions {
 
   /**
    * Verify that a template isnot shown in the list
-   * 
+   *
    * @param template
    */
   public void verifyNotTemplateInList(String template) {
@@ -748,7 +758,7 @@ public class WikiValidattions {
 
   /**
    * Verify that the page is shown in searched results list
-   * 
+   *
    * @param page
    */
   public void verifySearchResults(String page) {
@@ -759,7 +769,7 @@ public class WikiValidattions {
 
   /**
    * Verify that the page is not shown in searched results list
-   * 
+   *
    * @param page
    */
   public void verifyNotSearchResults(String page) {
@@ -783,12 +793,12 @@ public class WikiValidattions {
   public void verifyScrollDownOfSpaceSwitcher() {
     info("Scroll down");
     WebElement spaceList = evt.waitForAndGetElement(By.className("spaceList"));
-    String str1 =
-                String.valueOf(((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("return arguments[0].clientHeight;",
-                                                                                                 spaceList));
-    String str =
-               String.valueOf(((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("return arguments[0].scrollHeight;",
-                                                                                                spaceList));
+    String str1 = String.valueOf(((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript(
+                                                                                                                "return arguments[0].clientHeight;",
+                                                                                                                spaceList));
+    String str = String.valueOf(((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript(
+                                                                                                               "return arguments[0].scrollHeight;",
+                                                                                                               spaceList));
     int clientHeight = Integer.parseInt(str1);
     int scrollHeight = Integer.parseInt(str);
     assert clientHeight < scrollHeight;
@@ -796,7 +806,7 @@ public class WikiValidattions {
 
   /**
    * Verify that spaces in space switcher lis are shown
-   * 
+   *
    * @param spaces
    * @param numIndex
    */
@@ -816,7 +826,7 @@ public class WikiValidattions {
 
   /**
    * Verify that spaces in space switcher are not shown
-   * 
+   *
    * @param spaces
    * @param numIndex
    */
@@ -836,7 +846,7 @@ public class WikiValidattions {
 
   /**
    * Verify that a space is shown in space switcher
-   * 
+   *
    * @param space
    */
   public void verifyPresentSpaceSwitcher(String space) {
@@ -849,7 +859,7 @@ public class WikiValidattions {
 
   /**
    * Verify that a space isnot shown in space switcher
-   * 
+   *
    * @param space
    */
   public void verifyNotPresentSpaceSwitcher(String space) {
@@ -869,7 +879,7 @@ public class WikiValidattions {
 
   /**
    * Verify that a space has a position in the list
-   * 
+   *
    * @param i
    * @param space
    */
@@ -895,7 +905,7 @@ public class WikiValidattions {
 
   /**
    * Verify that related page is added in Related table
-   * 
+   *
    * @param locator
    * @param relatedPage
    */
@@ -909,7 +919,7 @@ public class WikiValidattions {
   /**
    * Verify that a page is not shown in related page list of the related page
    * popup
-   * 
+   *
    * @param page
    */
   public void verifyNotPageInRelatedPageList(String page) {
@@ -919,7 +929,7 @@ public class WikiValidattions {
 
   /**
    * Verify that a page is not shown in left related page list
-   * 
+   *
    * @param page
    */
   public void verifyNotPageInLeftRelatePageList(String page) {
@@ -929,7 +939,7 @@ public class WikiValidattions {
 
   /**
    * Verify that a page is shown in left related page list
-   * 
+   *
    * @param page
    */
   public void verifyPageInLeftRelatePageList(String page) {
@@ -939,7 +949,7 @@ public class WikiValidattions {
 
   /**
    * Verify page's version
-   * 
+   *
    * @param version
    */
   public void verifyVersionPage(String version) {
@@ -949,7 +959,7 @@ public class WikiValidattions {
 
   /**
    * Verify that vesion is listed in recent changes table
-   * 
+   *
    * @param num
    */
   public void verifyVersionsInPage(int num) {
@@ -959,7 +969,7 @@ public class WikiValidattions {
 
   /**
    * Verify that the content of the version is shown
-   * 
+   *
    * @param content
    */
   public void verifyContentOfVersion(String content) {
@@ -969,7 +979,7 @@ public class WikiValidattions {
 
   /**
    * Verify compare version page's content
-   * 
+   *
    * @param oldContent
    * @param newContent
    */
@@ -987,7 +997,7 @@ public class WikiValidattions {
 
   /**
    * Verify that version is listed in history page
-   * 
+   *
    * @param version
    */
   public void verifyVersionsInHistoryPage(String version) {
@@ -997,7 +1007,7 @@ public class WikiValidattions {
 
   /**
    * Verify that Draft exists n Draft list or not
-   * 
+   *
    * @param title
    * @param exist
    */
@@ -1027,7 +1037,7 @@ public class WikiValidattions {
 
   /**
    * Verify footNode intoFrame of Rich Text Mode
-   * 
+   *
    * @param footNode1
    * @param footNode2
    * @param contentMacroBox
@@ -1044,7 +1054,7 @@ public class WikiValidattions {
 
   /**
    * Verify footNode into the content of the page
-   * 
+   *
    * @param footNode1
    * @param footNode2
    * @param contentMacroBox

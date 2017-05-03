@@ -1,8 +1,12 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.wiki;
+package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
+import static com.codeborne.selenide.Selectors.byId;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -30,7 +34,6 @@ public class WikiManagement {
 
   /**
    * constructor
-   * 
    */
   public WikiManagement(TestBase testBase) {
     this.testBase = testBase;
@@ -55,11 +58,8 @@ public class WikiManagement {
    * Change to Source Editor mode
    */
   public void goToSourceEditor() {
-    if (evt.waitForAndGetElement(ELEMENT_SOURCE_EDITOR_BUTTON, 5000, 0) != null) {
-      info("Go to Source Editor");
-      evt.click(ELEMENT_SOURCE_EDITOR_BUTTON, 0, true);
-    }
-    evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT);
+    $(ELEMENT_SOURCE_EDITOR_BUTTON).click();
+    $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**
@@ -75,7 +75,7 @@ public class WikiManagement {
 
   /**
    * Add a content for a wiki page
-   * 
+   *
    * @param content
    */
   public void addContentPage(String content) {
@@ -90,9 +90,8 @@ public class WikiManagement {
    */
   public void saveAddPage() {
     info("Save all changes");
-    Utils.pause(2000);
-    evt.click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
-    evt.waitForElementNotPresent(ELEMENT_SAVE_BUTTON_ADD_PAGE);
+    ELEMENT_SAVE_BUTTON_ADD_PAGE.click();
+    ELEMENT_SAVE_BUTTON_ADD_PAGE.waitUntil(Condition.disappears,Configuration.timeout);
     info("Wiki page simple is created successfully");
   }
 
@@ -102,7 +101,6 @@ public class WikiManagement {
   public void savePage() {
     info("Save all changes");
     evt.click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
-    Utils.pause(300);
   }
 
   /**
@@ -111,7 +109,6 @@ public class WikiManagement {
   public void cancelAddPage() {
     info("Click on Cancel button");
     evt.click(ELEMENT_CANCEL_BUTTON_ADD_PAGE, 0, true);
-    Utils.pause(2000);
   }
 
   /**
@@ -120,7 +117,6 @@ public class WikiManagement {
   public void publishPageWhenEditPage() {
     info("check on publish checkbox");
     evt.check(ELEMENT_PUBLISH_ACTIVITY_CHECKBOX, 2);
-    Utils.pause(2000);
   }
 
   /**
@@ -141,7 +137,7 @@ public class WikiManagement {
 
   /**
    * Edit paragraph in a Wiki page
-   * 
+   *
    * @param paragraphTitle input paragraph title without space character. Can
    *          not be <code>null</code>.
    * @param paragraphContent input paragraph content with heading followed help
@@ -163,7 +159,7 @@ public class WikiManagement {
 
   /**
    * input a comment to new wiki page
-   * 
+   *
    * @param comment
    */
   public void addComment(String comment) {
@@ -173,7 +169,7 @@ public class WikiManagement {
 
   /**
    * Move page 1 to page 2
-   * 
+   *
    * @param page1
    * @param page2
    */
@@ -198,7 +194,7 @@ public class WikiManagement {
   /**
    * Move page 1 to page 2 when user does not have edit permission in
    * destination
-   * 
+   *
    * @param page1
    * @param page2
    */
@@ -228,7 +224,7 @@ public class WikiManagement {
 
   /**
    * Move a page1 of destination 1 to a page 2 of destination 2
-   * 
+   *
    * @param page1
    * @param page2
    * @param locator
@@ -271,7 +267,7 @@ public class WikiManagement {
 
   /**
    * Select a space destination in move page popup
-   * 
+   *
    * @param destination
    */
   public void selectSpaceDestination(String destination) {
@@ -292,7 +288,7 @@ public class WikiManagement {
 
   /**
    * Check options in Add Relations drop down list
-   * 
+   *
    * @param spaces
    */
   public void checkAddRelationDropDownList(String spaces) {
@@ -316,7 +312,7 @@ public class WikiManagement {
 
   /**
    * Preview a template
-   * 
+   *
    * @param template
    */
   public void previewATemplate(String template) {
@@ -332,7 +328,7 @@ public class WikiManagement {
 
   /**
    * Rename the title of the page by double-click on the title field
-   * 
+   *
    * @param title
    * @param newTitle
    */
@@ -377,7 +373,7 @@ public class WikiManagement {
 
   /**
    * function: check content of mail then delete mail
-   * 
+   *
    * @param title title of the page
    */
   public void checkEmailNotification(String title) {
@@ -432,7 +428,7 @@ public class WikiManagement {
 
   /**
    * Un check view permission for a user or a group
-   * 
+   *
    * @param locator
    */
   public void unCheckViewAUserOfPage(Object locator) {
@@ -449,7 +445,6 @@ public class WikiManagement {
   /**
    * Rename a page from alert message when move a page to a destination that has
    * same name
-   * 
    */
   public void renameFromAlertMessageOfOnePage() {
     info("Click on Rename link on the alert message area");
@@ -465,7 +460,7 @@ public class WikiManagement {
 
   /**
    * Click on inserted link in the wiki page
-   * 
+   *
    * @param label
    */
   public void viewInsertLink(String label) {
@@ -516,7 +511,7 @@ public class WikiManagement {
 
   /**
    * Add a simple wiki page by template format
-   * 
+   *
    * @param template
    */
   public void addSimpleWikiPageByTemplate(String template, String newTitle) {
@@ -532,7 +527,7 @@ public class WikiManagement {
 
   /**
    * Add a simple wiki page with template with auto save status
-   * 
+   *
    * @param template
    */
   public void addSimplePageByTemplateWithAutoSave(String template, String newTitle) {
@@ -550,7 +545,7 @@ public class WikiManagement {
 
   /**
    * Preview a simple page
-   * 
+   *
    * @param title
    * @param content
    */

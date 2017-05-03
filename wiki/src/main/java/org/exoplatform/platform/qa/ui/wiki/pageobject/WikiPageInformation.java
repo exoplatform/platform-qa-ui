@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.wiki;
+package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -17,7 +17,7 @@ public class WikiPageInformation {
 
   /**
    * constructor
-   * 
+   *
    * @param dr
    */
   public WikiPageInformation(TestBase testBase) {
@@ -28,7 +28,7 @@ public class WikiPageInformation {
 
   /**
    * Add a relation to a page
-   * 
+   *
    * @param location
    * @param page
    */
@@ -70,7 +70,7 @@ public class WikiPageInformation {
 
   /**
    * Delete a relation of a page
-   * 
+   *
    * @param relation
    */
   public void deleteRelation(String relation) {
@@ -84,7 +84,7 @@ public class WikiPageInformation {
 
   /**
    * Delete a relation of a page
-   * 
+   *
    * @param relation
    */
   public void deleteRelationWithCancelDeleting(String relation) {
@@ -98,7 +98,7 @@ public class WikiPageInformation {
 
   /**
    * Verify that related page is viewed
-   * 
+   *
    * @param page
    */
   public void viewRelatedPageContent(String page) {
@@ -110,7 +110,7 @@ public class WikiPageInformation {
 
   /**
    * View version's content of a Wiki page
-   * 
+   *
    * @param num
    */
   public void viewVersion(int num) {
@@ -153,7 +153,7 @@ public class WikiPageInformation {
 
   /**
    * Compare 2 reversion
-   * 
+   *
    * @param reversion1 as v.1
    * @param reversion2 as v.2
    */
@@ -173,7 +173,7 @@ public class WikiPageInformation {
 
   /**
    * Restore version of a Wiki page
-   * 
+   *
    * @param version number of version
    */
   public void restoreVersion(String version) {
@@ -193,7 +193,7 @@ public class WikiPageInformation {
 
   /**
    * Change compare versions of Compare version page
-   * 
+   *
    * @param firstNumberVersion first version to compare
    * @param secondNumberVersion second version to compare
    */

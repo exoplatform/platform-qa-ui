@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.wiki;
+package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -17,7 +17,7 @@ public class WikiSettingManagement {
 
   /**
    * constructor
-   * 
+   *
    * @param dr
    */
   public ManageAlert           alert;
@@ -32,7 +32,7 @@ public class WikiSettingManagement {
 
   /**
    * Search a template
-   * 
+   *
    * @param template
    */
   public void searchTemplate(String template) {
@@ -46,7 +46,7 @@ public class WikiSettingManagement {
 
   /**
    * Edit a wiki template
-   * 
+   *
    * @param template
    * @param text
    */
@@ -84,7 +84,7 @@ public class WikiSettingManagement {
 
   /**
    * function: Search user in Wiki Settings Permission Page
-   * 
+   *
    * @param user (Can be: User name, Last name, First name or Email of the user
    *          you want to search)
    * @param searchOption (Can be: User name, Last name, First name or Email
@@ -108,7 +108,7 @@ public class WikiSettingManagement {
 
   /**
    * Verify that the user is shown in the user list
-   * 
+   *
    * @param userName is user-name of the user
    */
   public void verifyUserPresent(String userName) {

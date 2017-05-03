@@ -1,5 +1,6 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.wiki;
+package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -21,7 +22,7 @@ public class SourceTextEditor {
 
   /**
    * constructor
-   * 
+   *
    * @param dr
    */
   public SourceTextEditor(TestBase testBase) {
@@ -31,28 +32,21 @@ public class SourceTextEditor {
 
   /**
    * Add a simple wiki page with source editor
-   * 
+   *
    * @param title
    * @param content
    */
   public void addSimplePage(String title, String content) {
     info("Input a title for the page");
-    String[] text;
-    if (!title.isEmpty())
-      evt.type(ELEMENT_TITLE_WIKI_INPUT, title, true);
+    $(ELEMENT_TITLE_WIKI_INPUT).setValue(title);
+
     info("Input a content for the page");
-    if (!content.isEmpty()) {
-      text = content.split("</br>");
-      for (int i = 0; i < text.length; i++) {
-        evt.type(ELEMENT_CONTENT_WIKI_INPUT, text[i], false);
-        evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).sendKeys(Keys.ENTER);
-      }
-    }
+    $(ELEMENT_CONTENT_WIKI_INPUT).setValue(content);
   }
 
   /**
    * Add a page with checking auto save after 30s
-   * 
+   *
    * @param title
    * @param content
    */
@@ -76,7 +70,7 @@ public class SourceTextEditor {
 
   /**
    * Add a new page that has auto save without save
-   * 
+   *
    * @param title
    * @param content
    */
@@ -103,30 +97,23 @@ public class SourceTextEditor {
 
   /**
    * Edit a simple wiki page with source editor
-   * 
+   *
    * @param newTitle
    * @param newContent
    */
   public void editSimplePage(String newTitle, String newContent) {
     info("Input a title for the page");
-    String[] text;
-    if (!newTitle.isEmpty())
-      evt.type(ELEMENT_TITLE_WIKI_INPUT, newTitle, true);
+    $(ELEMENT_TITLE_WIKI_INPUT).setValue(newTitle);
+
     info("Input a content for the page");
-    if (!newContent.isEmpty()) {
-      evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).clear();
-      text = newContent.split("</br>");
-      for (int i = 0; i < text.length; i++) {
-        evt.type(ELEMENT_CONTENT_WIKI_INPUT, text[i], false);
-        evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).sendKeys(Keys.ENTER);
-      }
-    }
+    $(ELEMENT_CONTENT_WIKI_INPUT).sendKeys(newContent);
+
 
   }
 
   /**
    * Modify Wiki content with Source editor
-   * 
+   *
    * @param title updated title of the wiki page. Can not be <code>null</code>
    * @param content updated content of the wiki page. Can not be
    *          <code>null</code>
@@ -161,7 +148,7 @@ public class SourceTextEditor {
 
   /**
    * Edit a wiki page with auto save status
-   * 
+   *
    * @param newTitle
    * @param newContent
    */
@@ -184,12 +171,12 @@ public class SourceTextEditor {
 
   /**
    * Attach a file to a Wiki page
-   * 
+   *
    * @param link link of file that will be attached
    */
   /**
    * Attach a file to a Wiki page
-   * 
+   *
    * @param link link of file that will be attached
    * @param type optional parameter of this method.
    */
@@ -202,7 +189,8 @@ public class SourceTextEditor {
     // doubleClickOnElement(ELEMENT_UPLOAD_NAME);
 
     Utils.pause(2000);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
+    ((JavascriptExecutor) testBase.getExoWebDriver()
+                                  .getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
     Utils.pause(2000);
     testBase.getExoWebDriver().getWebDriver().findElement(ELEMENT_UPLOAD_NAME).sendKeys(path);
     /*
@@ -225,12 +213,12 @@ public class SourceTextEditor {
 
   /**
    * Attach a file to a Wiki page
-   * 
+   *
    * @param link link of file that will be attached
    */
   /**
    * Attach a file to a Wiki page
-   * 
+   *
    * @param link link of file that will be attached
    * @param type optional parameter of this method.
    */
