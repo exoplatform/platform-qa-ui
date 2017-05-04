@@ -20,7 +20,8 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
  * @author rosso
  *
  */
-public class Ecms_AdminExplorer extends Base{
+@Tag("ecms")
+public class Ecms_AdminExplorerTestIT extends Base{
 	ContentAdministration contentAdministration;
 	NavigationToolbar navigationToolbar;
 	TestBase testBase;

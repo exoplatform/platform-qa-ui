@@ -19,7 +19,8 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;/**
 * @author eXo
 *
 */
-public class Ecms_AdminTemplates extends Base{
+@Tag("ecms")
+public class Ecms_AdminTemplatesTestIT extends Base{
     ContentAdministration contentAdministration;
     NavigationToolbar navigationToolbar;
     TestBase testBase;

@@ -17,8 +17,8 @@ import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-public class Ecms_SE_Create extends Base{
+@Tag("ecms")
+public class Ecms_SE_CreateTestIT extends Base{
 	ContentAdministration contentAdministration;
 	NavigationToolbar navigationToolbar;
 	SiteExplorerHome siteExplorerHome;

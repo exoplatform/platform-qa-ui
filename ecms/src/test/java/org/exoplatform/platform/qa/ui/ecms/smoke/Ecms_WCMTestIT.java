@@ -28,8 +28,8 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
  * update 26/01/2015
  */
 
-
-public class Ecms_WCM extends Base {
+@Tag("ecms")
+public class Ecms_WCMTestIT extends Base {
 
 
 	NavigationToolbar navigationToolbar;
