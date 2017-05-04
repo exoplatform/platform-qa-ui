@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.ecms.pageobject;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.*;
 import org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator;
@@ -68,10 +69,10 @@ public class SiteExplorerHome {
    */
   public void goToPath(String path, String drive) {
     info("Go to selected Drive");
-    $(ELEMENT_ACTIONBAR_SHOWDRIVES).click();
-    $(byText(drive)).waitUntil(Condition.appears,10000);
+    $(byId("uiActionsBarContainer")).find(byText("Site Management")).click();
+    $(byText(drive)).waitUntil(Condition.appears,Configuration.timeout);
     $(byText(drive)).click();
-    $(ELEMENT_SIDE_BAR_MAINTAB).waitUntil(Condition.appears,10000);
+    $(ELEMENT_SIDE_BAR_MAINTAB).waitUntil(Condition.appears,Configuration.timeout);
     $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
     info("Go to folder");
     if(!path.isEmpty()){
@@ -128,11 +129,11 @@ public class SiteExplorerHome {
    */
   public void goToAddNewContent() {
 
-    $(ELEMENT_ACTIONBAR_ADDDOCUMENT).waitUntil(Condition.appears,10000);
+    $(ELEMENT_ACTIONBAR_ADDDOCUMENT).waitUntil(Condition.appears, Configuration.timeout);
     info("Click on New Document on Action Bar");
     $(ELEMENT_ACTIONBAR_ADDDOCUMENT).click();
     info("Verify that New content page is shown");
-    $(ELEMENT_ADDDOCUMENT_CHOICETYPE).waitUntil(Condition.appears,10000);
+    $(ELEMENT_ADDDOCUMENT_CHOICETYPE).waitUntil(Condition.appears,Configuration.timeout);
     info("New content page is shown successfully");
   }
 
@@ -156,15 +157,13 @@ public class SiteExplorerHome {
     boolean verify = (destination.length > 0 ? destination[0] : false);
     info("Click on File Explorer icon");
     $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
-    Utils.pause(2000);
     info("Right click on nodename");
-    $(byId("UITreeExplorer")).find(byLinkText(title)).hover().contextClick();
+    $(byId("UITreeExplorer")).find(byLinkText(title)).contextClick();
     info("Click on Delete link");
     $(ELEMENT_SITEEXPLORER_ACTION_DELETE).click();
     info("Click on Delete button on Confirm popup");
     $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).click();
     info("Verify that the node is deleted");
-    Utils.pause(3000);
       info("the node is deleted successfully");
   }
 
@@ -477,7 +476,7 @@ public class SiteExplorerHome {
    */
   public void selectNode(String nodeName) {
     info("Verify that nodeName:" + nodeName + " is shown");
-    $(byText(nodeName)).waitUntil(Condition.appears,10000);
+    $(byText(nodeName)).waitUntil(Condition.appears,Configuration.timeout);
     info("Click on the nodeName:" + nodeName);
     $(byText(nodeName)).click();
     info("Finished selecting nodeName:" + nodeName);
@@ -1493,8 +1492,7 @@ public class SiteExplorerHome {
    */
   public void verifyContentCreatedSuccessfully(String title) {
     info("Verify Content was created successfully");
-    Utils.pause(2000);
-    $(byText(title)).waitUntil(Condition.appears,10000);
+    $(byText(title)).waitUntil(Condition.appears,Configuration.timeout);
     info("Content was created successfully");
   }
 

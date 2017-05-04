@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.ecms.smoke;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.context.Smoke;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -69,7 +70,7 @@ public void test04_05_06_AddDocument_Edit_DeleteTemplate() {
     navigationToolbar.goToContentAdministration();
     contentAdministration.goToSpecificFunctions(ContentAdministration.specificEcmFunctions.DOCUMENTS);
     contentAdministration.addDocumentInTemplates(title,permission);
-    $(byText(title)).waitUntil(Condition.appears,10000);
+    $(byText(title)).waitUntil(Condition.appears, Configuration.timeout);
     contentAdministration.editDocumentInTemplates(title, newTitle);
    contentAdministration.deleteCategories(newTitle);
 }

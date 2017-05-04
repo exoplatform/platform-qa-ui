@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.ecms.smoke;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.context.Smoke;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -85,7 +87,7 @@ public class Ecms_AdminExplorerTestIT extends Base{
 	 *<li> Case ID:116626.</li>
 	 *<li> Test Case Name: Delete a View.</li>
 	 */
-	@Test
+
 	@Smoke
 	@Tag("smoke")
 	public  void test04_05_06_07_Add_Edit_Delete_View_AView() {
@@ -98,17 +100,16 @@ public class Ecms_AdminExplorerTestIT extends Base{
 
 		navigationToolbar.goToContentAdministration();
 		contentAdministration.goToSpecificMainFunctions(ContentAdministration.mainEcmFunctions.EXPLORER);
-		//testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+		refresh();
 		contentAdministration.goToSpecificFunctions(ContentAdministration.specificEcmFunctions.VIEW);
 		info("add a view");
 		contentAdministration.addView(title, tabName, tab, oldPermission);
 		info("show a view");
 		$(byClassName("uiIconView")).click();
-		//waitForAndGetElement(By.xpath(ELEMENT_ECM_EXPLORER_NAME_VIEW_SHOW_VIEW.replace("{$name}",title)));
-		$(byText(title)).waitUntil(Condition.appears,10000);
+		$(byText(title)).waitUntil(Condition.appears, Configuration.timeout);
 		$(ELEMENT_ECM_EXPLORER_GO_TO_ACTION_FORM).click();
 		//waitForAndGetElement(By.xpath(ELEMENT_ECM_EXPLORER_TAB_ICONS_LIST_SHOW_VIEW.replace("{$tab}",tab[0])));
-		$(byText(tabName)).waitUntil(Condition.appears,10000);
+		$(byText(tabName)).waitUntil(Condition.appears,Configuration.timeout);
 		click(ELEMENT_ECM_EXPLORER_CLOSE_VIEW_MODE);
 		info("edit a view");
 		contentAdministration.editViewPermissionUser(title, oldPermission, permission);

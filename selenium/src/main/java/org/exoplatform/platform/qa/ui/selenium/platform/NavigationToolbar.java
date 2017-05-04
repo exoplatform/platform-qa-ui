@@ -28,6 +28,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
@@ -68,7 +69,7 @@ public class NavigationToolbar {
     $(ELEMENT_LINK_EDIT).click();
     $(ELEMENT_MENU_PAGE_LINK).hover();
     $(ELEMENT_MENU_ADD_PAGE_LINK).click();
-    $(ELEMENT_PAGE_CREATION_WIZARD).waitUntil(Condition.appears,10000);
+    $(ELEMENT_PAGE_CREATION_WIZARD).waitUntil(Condition.appears,Configuration.timeout);
   }
 
   /**
@@ -209,7 +210,7 @@ public class NavigationToolbar {
     info("-- Go to site explorer home page --");
 
       if (testBase.getExoWebDriver().isIEDriver()) {
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,10000);
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,Configuration.timeout);
         $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
       } else
        $(ELEMENT_LINK_SETUP).click();
@@ -238,7 +239,7 @@ public class NavigationToolbar {
    */
   public void goToEditContent() {
     info("Go to Edit content");
-    $(ELEMENT_LINK_EDIT).waitUntil(Condition.appears, 10000);
+    $(ELEMENT_LINK_EDIT).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_LINK_EDIT).click();
     $(ELEMENT_EDIT_CONTENT).click();
   }
@@ -274,12 +275,11 @@ public class NavigationToolbar {
     String url = testBase.getExoWebDriver().getBaseUrl() + "/g/:platform:web-contributors/wcmAdmin";
     info("base url of content admin is " + url);
 
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,10000);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     $(byText("Content")).hover();
-    $(ELEMENT_LINK_CONTENT_ADMIN).waitUntil(Condition.appears,10000);
+    $(ELEMENT_LINK_CONTENT_ADMIN).waitUntil(Condition.appears,Configuration.timeout);
     $(ELEMENT_LINK_CONTENT_ADMIN).click();
-    Utils.pause(1000);
   }
 
   /**

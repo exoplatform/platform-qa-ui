@@ -1,16 +1,23 @@
 package org.exoplatform.platform.qa.ui.ecms.pageobject;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.awt.*;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_NAME;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
@@ -43,7 +50,6 @@ public class CreateNewDocument {
    * @param type
    */
   public void createNewDoc(selectDocumentType type) {
-    Utils.pause(2000);
     info("Go to type " + type);
     switch (type) {
     case FILE:
@@ -85,7 +91,7 @@ public class CreateNewDocument {
       if ((evt.waitForAndGetElement(ELEMENT_ADDDOCUMENT_WEBLINK, 3000, 0) == null)
           && (evt.waitForAndGetElement(ELEMENT_ADDDOCUMENT_NEXT_PAGE, 3000, 0) != null)) {
         $(ELEMENT_ADDDOCUMENT_NEXT_PAGE).click();
-        $(ELEMENT_ADDDOCUMENT_WEBLINK).waitUntil(Condition.appears,10000);
+        $(ELEMENT_ADDDOCUMENT_WEBLINK).waitUntil(Condition.appears,Configuration.timeout);
         $(ELEMENT_ADDDOCUMENT_WEBLINK).click();
       } else
         $(ELEMENT_ADDDOCUMENT_WEBLINK).click();
@@ -147,7 +153,7 @@ public class CreateNewDocument {
    */
   public void addNewFile(String title, String content) {
     this.testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-    $(ELEMENT_FILEFORM_BLANK_NAME).waitUntil(Condition.appears,10000);
+    $(ELEMENT_FILEFORM_BLANK_NAME).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_FILEFORM_BLANK_NAME).setValue(title);
     $(ELEMENT_FILEFORM_BLANK_CONTENT).click();
     $(ELEMENT_FILEFORM_BLANK_CONTENT).sendKeys(content);
@@ -163,6 +169,7 @@ public class CreateNewDocument {
     $(ELEMENT_FILEFORM_BLANK_NAME).setValue(title);
     $(ELEMENT_FILEFORM_BLANK_CONTENT).click();
     $(ELEMENT_FILEFORM_BLANK_CONTENT).sendKeys(content);
+
   }
 
   /**
@@ -183,8 +190,10 @@ public class CreateNewDocument {
    */
 
   public void saveAndClose() {
+    info("save and close");
+    //scroll up
+    executeJavaScript("window.scrollBy(0,-250)");
     $(ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE).click();
-    $(ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE).waitUntil(Condition.appears,10000);
 
   }
 

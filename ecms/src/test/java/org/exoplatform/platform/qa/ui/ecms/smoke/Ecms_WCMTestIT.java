@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.ecms.smoke;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 
 import org.exoplatform.platform.qa.ui.core.context.Smoke;
@@ -18,6 +19,7 @@ import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -171,17 +173,17 @@ public class Ecms_WCMTestIT extends Base {
 		 *Input Data: 
 
 		 *Expected Outcome: 
-			- The new selected web content/document is displayed*/ 
-		$(byClassName("UIPresentationContainer")).hover();
-		$(byClassName("UIPresentationContainer")).find(byClassName("uiIconSetting")).hover().click();
-		$(byClassName("uiIconAddPath")).click();
+			- The new selected web content/document is displayed*/
+		ElEMENT_PRESENTATION_CONTAINER.hover();
+		ElEMENT_PRESENTATION_CONTAINER.find(byClassName("uiIconSetting")).hover().click();
+		ELEMENT_INCON_ADD_PATH.click();
 		contentList.selectFolderContent("General Drives/Sites Management/intranet",content2);
-		$(ELEMENT_CONTENT_DETAIL_SAVE_BTN).click();
-		$(byText(content2)).waitUntil(Condition.appears,10000);
+		$(ELEMENT_CONTENT_DETAIL_SAVE_BTN).scrollTo().click();
+		$(byText(content2)).waitUntil(Condition.appears, Configuration.timeout);
 		info("Delete created files");
 		navigationToolbar.goToSiteExplorer();
 		siteExplorerHome.deleteData(content1, true);
-		$(byText(content2)).waitUntil(Condition.appears,10000);
+		$(byText(content2)).waitUntil(Condition.appears,Configuration.timeout);
 		siteExplorerHome.deleteData(content2, true);
 		info("Delete create page");
 		navigationToolbar.goToPotalPages();

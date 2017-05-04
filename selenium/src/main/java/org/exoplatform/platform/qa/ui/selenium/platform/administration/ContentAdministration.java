@@ -8,6 +8,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.platform.ecms.ECMS_Permission;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -130,7 +131,13 @@ public class ContentAdministration {
       break;
     case DOCUMENTS:
       info("Select Documents function");
-      $(ELEMENT_ECMS_FUNCTIONS_DOCUMENTS).click();
+      if ($(ELEMENT_ECMS_FUNCTIONS_DOCUMENTS).isDisplayed())
+      {      $(ELEMENT_ECMS_FUNCTIONS_DOCUMENTS).click();}
+      else
+      {$(byId("accordion")).find(byText("Templates")).click();
+        $(ELEMENT_ECMS_FUNCTIONS_DOCUMENTS).click();
+
+      }
       break;
     case LIST:
       info("Select List function");
@@ -193,13 +200,11 @@ public class ContentAdministration {
 $(byClassName("uiIconEditInfo")).click();
     $(ELEMENT_ECM_EXPLORER_GO_TO_PERMISSION_FORM).click();
     $(ELEMENT_ECM_EXPLORER_USER_PERMISSION_ADD).click();
-//    evt.click(By.xpath(ELEMENT_ECM_EXPLORER_SELECT_USER_LIST_PERMISSION.replace("{$user}", newName)));
     $(byId("Quick Search")).setValue(newName);
     $(byClassName("btnSearchUser")).click();
     $(byClassName("uiIconPlus")).click();
     $(ELEMENT_ECM_EXPLORER_ADD_PERMISSION_FORM).click();
     $(byText("Demo")).hover();
-   // evt.click(By.xpath(ELEMENT_ECM_EXPLORER_DELETE_PERMISSION_USER.replace("{$name}", oldName)));
     $(byId("UIViewPermissionContainer")).find(byClassName("uiIconDelete")).click();
     alert.acceptAlert();
     $(ELEMENT_ECM_EXPLORER_SAVE_FORM_ADD_VIEW).click();
@@ -226,9 +231,8 @@ $(byClassName("uiIconEditInfo")).click();
    */
   public void addDrives(String name, String permission, specificView[] applyViews) {
     info("Click on Add button of the drive in the list");
-    $(ELEMENT_ECM_EXPLORER_DRIVES_ADD_DRIVES).click();
+    $(ELEMENT_ECM_EXPLORER_DRIVES_ADD_DRIVES).scrollTo().click();
     info("Type a name for the drive");
-   // evt.type(ELEMENT_ECM_EXPLORER_NAME_DRIVES_FORM, name, true);
     $(ELEMENT_ECM_EXPLORER_NAME_DRIVES_FORM).setValue(name);
     info("Click on Add Permission button for the drive");
     $(ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON).click();
@@ -809,7 +813,7 @@ $(byClassName("uiIconEditInfo")).click();
    * @param permission
    */
   public void addDocumentInTemplates(String label, String... permission) {
-    $(ELEMENT_ECM_TEMPLATES_DOCUMENTS_ADD_DOCUMENT).click();
+    $(ELEMENT_ECM_TEMPLATES_DOCUMENTS_ADD_DOCUMENT).scrollTo().click();
     $(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LABEL_FORM).setValue(label);
     $(ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON).click();
     if (permission[0] == "any")
@@ -818,8 +822,7 @@ $(byClassName("uiIconEditInfo")).click();
       ecmsPerm.selectGroupMembershipOfLock(permission[0], permission[1]);
 
     }
-    Utils.pause(1000);
-    $(ELEMENT_ECM_TEMPLATES_DOCUMENTS_SAVE_FORM).click();
+    $(ELEMENT_ECM_TEMPLATES_DOCUMENTS_SAVE_FORM).scrollTo().click();
   }
 
   /**
@@ -831,8 +834,8 @@ $(byClassName("uiIconEditInfo")).click();
   public void editDocumentInTemplates(String oldName, String newName) {
     $(byClassName("uiIconEdit ")).click();
     $(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LABEL_FORM).setValue(newName);
-    $(ELEMENT_ECM_TEMPLATES_DOCUMENTS_SAVE_EDIT_FORM).click();
-    $(byText(newName)).waitUntil(Condition.appears,10000);
+    $(ELEMENT_ECM_TEMPLATES_DOCUMENTS_SAVE_EDIT_FORM).scrollTo().click();
+    $(byText(newName)).waitUntil(Condition.appears, Configuration.timeout);
 
   }
 
