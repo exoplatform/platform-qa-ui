@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -200,7 +201,7 @@ public class CalendarHomePage {
         evt.waitForAndGetElement(ELEMENT_EVENT_TASK_START_DETAIL_DATE_LIST_VIEW.replace("$name", name).replace("$date", date));
         evt.rightClickOnElement(ELEMENT_EVENT_TASK_START_DETAIL_DATE_LIST_VIEW.replace("$name", name).replace("$date", date));
       } else {
-        $(byText(name)).waitUntil(Condition.appears,10000);
+        $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
         $(byText(name)).contextClick();
       }
     } else {
@@ -311,7 +312,7 @@ public class CalendarHomePage {
       break;
     }
     $(ELEMENT_CONTEXT_MENU_EDIT).click();
-   $(ELEMENT_ADD_EDIT_TASK_POPUP).waitUntil(Condition.appears,10000);
+   $(ELEMENT_ADD_EDIT_TASK_POPUP).waitUntil(Condition.appears,Configuration.timeout);
   }
 
   /**
@@ -411,7 +412,7 @@ public class CalendarHomePage {
       switch (optionDay) {
       case DETAILTIME:
         //evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
-        $(byText(name)).waitUntil(Condition.appears,10000);
+        $(byText(name)).waitUntil(Condition.appears,Configuration.timeout);
         break;
       case ALLDAY:
         evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY.replace("$name", name));
@@ -445,7 +446,7 @@ public class CalendarHomePage {
         evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
         evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
       } else {
-       $(byText(name)).waitUntil(Condition.appears,10000);
+       $(byText(name)).waitUntil(Condition.appears,Configuration.timeout);
       }
       break;
     case MONTH:
@@ -467,7 +468,7 @@ public class CalendarHomePage {
     default:
       switch (optionDay) {
       case DETAILTIME:
-        $(byText(name)).waitUntil(Condition.appears,10000);
+        $(byText(name)).waitUntil(Condition.appears,Configuration.timeout);
         break;
       case ALLDAY:
         evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name));

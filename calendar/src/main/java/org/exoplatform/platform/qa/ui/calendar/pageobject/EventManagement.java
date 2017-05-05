@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
@@ -157,7 +158,7 @@ public class EventManagement {
     info("Go to Add Event page from action bar");
     Utils.pause(2000);
     $(ELEMENT_BUTTON_EVENT).click();
-    $(ELEMENT_QUICK_ADD_EVENT_POPUP).waitUntil(Condition.appears,10000);
+    $(ELEMENT_QUICK_ADD_EVENT_POPUP).waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**
@@ -710,9 +711,9 @@ public class EventManagement {
    */
   public void saveQuickAddEvent() {
     info("Save quick add event");
-    $(ELEMENT_BUTTON_EVENT_SAVE).waitUntil(Condition.appears,10000);
+    $(ELEMENT_BUTTON_EVENT_SAVE).waitUntil(Condition.appears,Configuration.timeout);
     $(ELEMENT_BUTTON_EVENT_SAVE).click();
-    $(ELEMENT_BUTTON_EVENT_SAVE).waitUntil(Condition.disappears,10000);
+    $(ELEMENT_BUTTON_EVENT_SAVE).waitUntil(Condition.disappears,Configuration.timeout);
   }
 
   /**
@@ -720,7 +721,7 @@ public class EventManagement {
    */
   public void saveAddEventDetails() {
     info("Sae add event details");
-    $(ELEMENT_BUTTON_EVENT_SAVE_DETAILS).waitUntil(Condition.appears,10000);
+    $(ELEMENT_BUTTON_EVENT_SAVE_DETAILS).waitUntil(Condition.appears,Configuration.timeout);
     // click(ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
     // waitForElementNotPresent(ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
     $(ELEMENT_BUTTON_EVENT_SAVE_DETAILS).click();

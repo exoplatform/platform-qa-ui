@@ -1623,4 +1623,10 @@ public class CalendarLocator {
 public static final SelenideElement ELEMENT_CALENDAR_LIST_BUTTON= $(byId("UIActionBar")).find(byText("List")).waitUntil(Condition.appears,10000);
   public static final SelenideElement ELEMENT_CALENDAR_WEEK_BUTTON= $(byId("UIActionBar")).find(byText("Week")).waitUntil(Condition.appears,10000);
 public static final SelenideElement ELEMENT_CALENDAR_DAY_BUTTON= $(byId("UIActionBar")).find(byText("Day")).waitUntil(Condition.appears,10000);
+public static final SelenideElement ELEMENT_CALENDAR_ITEM_PERSONAL_CALENDAR =$(byClassName("contentContainer")).findAll(byClassName("calendarItem")).get(1);
+public static final SelenideElement ELEMENT_CONTAINER_CALENDAR= $(byClassName("contentContainer"));
+public static final SelenideElement ELEMENT_CALENDAR_ICON_SETTINGS_OF_PERSONAL_CALENDAR= $(byClassName("contentContainer")).findAll(byClassName("uiIconCalSettingMini")).get(1);
+public static final SelenideElement ELEMENT_CALENDAR_ICON_SETTINGS_OF_GROUP_CALENDAR=$(byClassName("contentContainer")).findAll(byClassName("uiIconCalSettingMini")).get(2);
+
 }
+

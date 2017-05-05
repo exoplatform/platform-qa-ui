@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -67,9 +68,9 @@ public class CalendarManagement {
     case ADDCAL:
       info("Go to add calendar");
       Utils.pause(2000);
-      $(ELEMENT_CALENDAR_MENU_ACTIONS_ADD).waitUntil(Condition.appears,10000);
+      $(ELEMENT_CALENDAR_MENU_ACTIONS_ADD).waitUntil(Condition.appears, Configuration.timeout);
       $(ELEMENT_CALENDAR_MENU_ACTIONS_ADD).click();
-      $(ELEMENT_CALENDAR_ADD_FORM).waitUntil(Condition.appears,10000);
+      $(ELEMENT_CALENDAR_ADD_FORM).waitUntil(Condition.appears,Configuration.timeout);
       break;
     case REMOTECAL:
       info("Go to remote calendar");
@@ -79,7 +80,7 @@ public class CalendarManagement {
     case ADDCATEGORY:
       info("Go to add category calendar");
       $(ELEMENT_CALENDAR_MENU_ACTIONS_ADD_EVENT_CATEGORY).click();
-      $(ELEMENT_ADD_EVENT_CATEGORY_FORM).waitUntil(Condition.appears,10000);
+      $(ELEMENT_ADD_EVENT_CATEGORY_FORM).waitUntil(Condition.appears,Configuration.timeout);
       break;
     case CALSETTING:
       info("Go to calendar setting");
@@ -168,7 +169,7 @@ public class CalendarManagement {
       $(ELEMENT_CALENDAR_DESC_INPUT).setValue(description);
     if (color != null && color != "") {
       $(ELEMENT_CALENDAR_COLOR).click();
-      $(byId("UICalendarPopupWindow")).find(byClassName(color)).waitUntil(Condition.appears,10000);
+      $(byId("UICalendarPopupWindow")).find(byClassName(color)).waitUntil(Condition.appears,Configuration.timeout);
       $(byId("UICalendarPopupWindow")).find(byClassName(color)).click();
 
     }
@@ -307,7 +308,7 @@ public class CalendarManagement {
     $(ELEMENT_ADD_EVENT_CATEGORY_INPUT).setValue(categoryName);
     evt.click(ELEMENT_ADD_EVENT_CATEGORY_BUTTON_ADD);
     info("----Verify if event category is added in Category List or not----");
-    $(byText(categoryName)).waitUntil(Condition.appears,10000);
+    $(byText(categoryName)).waitUntil(Condition.appears,Configuration.timeout);
     ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE.click();
   }
 
@@ -319,11 +320,11 @@ public class CalendarManagement {
   public void deleteEventCategory(String categoryName) {
     info("Delete category");
     goToMenuFromMainCalendar(menuOfMainCalendar.ADDCATEGORY);
-    $(byText(categoryName)).waitUntil(Condition.appears,10000);
+    $(byText(categoryName)).waitUntil(Condition.appears,Configuration.timeout);
     ELEMENT_LIST_DELETE_EVENT_BUTTON.click();
     alert.acceptAlert();
     button.yes();
-    $(byText(categoryName)).waitUntil(Condition.disappears,10000);
+    $(byText(categoryName)).waitUntil(Condition.disappears,Configuration.timeout);
     ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE.click();
   }
 
@@ -350,12 +351,12 @@ public class CalendarManagement {
    */
   public void openMenuOfCalendar(String calendar) {
     info("Open menu of a calendar");
-if ($(byClassName("contentContainer")).findAll(byClassName("calendarItem")).get(1).has(Condition.text(calendar)))
-      {$(byClassName("contentContainer")).find(byText(calendar)).hover();
-        $(byClassName("contentContainer")).findAll(byClassName("uiIconCalSettingMini")).get(1).click();}
+if (ELEMENT_CALENDAR_ITEM_PERSONAL_CALENDAR.has(Condition.text(calendar)))
+      {ELEMENT_CONTAINER_CALENDAR.find(byText(calendar)).hover();
+        ELEMENT_CALENDAR_ICON_SETTINGS_OF_PERSONAL_CALENDAR.click();}
     else {
-  $(byClassName("contentContainer")).find(byText(calendar)).hover();
-  $(byClassName("contentContainer")).findAll(byClassName("uiIconCalSettingMini")).get(3).click();
+  ELEMENT_CONTAINER_CALENDAR.find(byText(calendar)).hover();
+  ELEMENT_CALENDAR_ICON_SETTINGS_OF_GROUP_CALENDAR.click();
     }
   }
 
@@ -372,11 +373,11 @@ if ($(byClassName("contentContainer")).findAll(byClassName("calendarItem")).get(
     switch (action) {
     case ADDTASK:
       $(ELEMENT_CALENDAR_ADD_TASK_MENU).click();
-      $(ELEMENT_CALENDAR_QUICK_ADD_TASK_FORM).waitUntil(Condition.appears,10000);
+      $(ELEMENT_CALENDAR_QUICK_ADD_TASK_FORM).waitUntil(Condition.appears,Configuration.timeout);
       break;
     case ADDEVENT:
       $(ELEMENT_CALENDAR_ADD_EVENT_MENU).click();
-      $(ELEMENT_CALENDAR_QUICK_ADD_EVENT_FORM).waitUntil(Condition.appears,10000);
+      $(ELEMENT_CALENDAR_QUICK_ADD_EVENT_FORM).waitUntil(Condition.appears,Configuration.timeout);
       break;
     case EDIT:
       evt.clickByJavascript(ELEMENT_CALENDAR_EDIT_MENU, 2);
@@ -385,7 +386,7 @@ if ($(byClassName("contentContainer")).findAll(byClassName("calendarItem")).get(
     case REMOVE:
      // evt.clickByJavascript(ELEMENT_CALENDAR_REMOVE_MENU, 2);
       $(ELEMENT_CALENDAR_REMOVE_MENU).click();
-      $(ELEMENT_CALENDAR_REMOVE_FORM).waitUntil(Condition.appears,10000);
+      $(ELEMENT_CALENDAR_REMOVE_FORM).waitUntil(Condition.appears,Configuration.timeout);
       break;
     case SHARE:
       evt.clickByJavascript(ELEMENT_CALENDAR_SHARE_MENU, 2);
@@ -899,7 +900,7 @@ if ($(byClassName("contentContainer")).findAll(byClassName("calendarItem")).get(
      // action.moveToElement(evt.waitForAndGetElement(ELEMENT_EVENT_TASK_TITLE.replace("${name}", name))).doubleClick().perform();
     $(byClassName("spliterResizableListArea")).find(byText(name)).doubleClick();
     }
-    $(ELEMENT_ADD_EDIT_EVENT_POPUP).waitUntil(Condition.appears,10000);
+    $(ELEMENT_ADD_EDIT_EVENT_POPUP).waitUntil(Condition.appears,Configuration.timeout);
     info("The edit form is shown");
   }
 
