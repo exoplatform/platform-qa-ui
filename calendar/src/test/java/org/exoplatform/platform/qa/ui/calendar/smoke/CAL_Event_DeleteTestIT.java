@@ -22,8 +22,8 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-
-public class CAL_Event_Delete extends Base{
+@Tag("calendar")
+public class CAL_Event_DeleteTestIT extends Base{
 
     HomePagePlatform homePagePlatform;
     CalendarManagement calendarManagement;
@@ -44,7 +44,7 @@ public class CAL_Event_Delete extends Base{
 *<li> Pre-Condition: </li>
 *<li> Post-Condition: </li>
 */
-@Test
+
 @Smoke
 @Tag("smoke")
 public  void test05_DeleteEventOfGroupCalendar() {

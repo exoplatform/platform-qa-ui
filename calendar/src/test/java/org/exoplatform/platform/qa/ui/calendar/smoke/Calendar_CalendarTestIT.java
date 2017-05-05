@@ -18,8 +18,8 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-
-public class Calendar_Calendar extends Base {
+@Tag("calendar")
+public class Calendar_CalendarTestIT extends Base {
 	HomePagePlatform homePagePlatform;
 	CalendarManagement calendarManagement;
 

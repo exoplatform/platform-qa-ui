@@ -18,8 +18,8 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-
-public class Calendar_Event extends Base {
+@Tag("calendar")
+public class Calendar_EventTestIT extends Base {
 	HomePagePlatform homePagePlatform;
 	ManageLogInOut manageLogInOut;
 	CalendarHomePage calendarHomePage;

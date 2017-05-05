@@ -20,8 +20,8 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-
-public class CAL_Event_Edit extends Base{
+@Tag("calendar")
+public class CAL_Event_EditTestIT extends Base{
 
 
     HomePagePlatform homePagePlatform;
@@ -45,7 +45,7 @@ public class CAL_Event_Edit extends Base{
 *<li> Pre-Condition: </li>
 *<li> Post-Condition: </li>
 */
-@Test
+
 @Smoke
 @Tag("smoke")
 public  void test03_EditEventOfGroupCalendar() {
