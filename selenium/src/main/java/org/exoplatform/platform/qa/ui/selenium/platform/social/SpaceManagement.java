@@ -48,14 +48,13 @@ public class SpaceManagement {
    *          content of confirm msg
    */
   public void deleteSpace(String spaceName, Boolean isVerify) {
-    if (evt.waitForAndGetElement(ELEMENT_SPACE_DELETE_BUTTON.replace("${space}", spaceName), 2000, 0) != null) {
+    if ($(byText(spaceName)).is(Condition.exist)) {
       info("Do delete space");
-      evt.click(ELEMENT_SPACE_DELETE_BUTTON.replace("${space}", spaceName));
+      $(byText("Delete")).click();
       if (isVerify)
         alert.verifyAlertMessage(ELEMENT_SPACE_CONFIRM_DELETE);
-      evt.click(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON);
-      evt.waitForElementNotPresent(ELEMENT_SPACE_DELETE_BUTTON.replace("${space}", spaceName), 60000);
-    }
+      $(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON).click();
+      $(byText(spaceName)).waitUntil(Condition.disappears,Configuration.timeout);    }
   }
 
   /**

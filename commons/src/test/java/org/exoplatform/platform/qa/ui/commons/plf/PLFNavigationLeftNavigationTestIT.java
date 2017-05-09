@@ -130,11 +130,11 @@ public class PLFNavigationLeftNavigationTestIT extends Base {
 
 		 *Expected Outcome: 
 			- Only spaces containing "ab" are displayed*/
-/*
+
     info("Delete spaces");
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space1, false);
     spaceManagement.deleteSpace(space2, false);
-    */
+
   }
 }
