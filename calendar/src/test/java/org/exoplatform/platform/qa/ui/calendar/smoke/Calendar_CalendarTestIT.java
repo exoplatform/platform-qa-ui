@@ -19,6 +19,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarL
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("calendar")
+@Tag("smoke")
 public class Calendar_CalendarTestIT extends Base {
 	HomePagePlatform homePagePlatform;
 	CalendarManagement calendarManagement;
@@ -42,8 +43,6 @@ public class Calendar_CalendarTestIT extends Base {
 	 * Post-Condition: 
 	 */
 	@Test
-	@Smoke
-	@Tag("smoke")
 	public  void test02_03_04_AddEditDeletePersonalCalendar() {
 		String calendarName= "calendarName"+getRandomNumber();
 		String newCalendar= "newCalendar"+getRandomNumber();
@@ -107,8 +106,6 @@ public class Calendar_CalendarTestIT extends Base {
 	 * Post-Condition: 
 	 */
 	@Test
-	@Smoke
-	@Tag("smoke")
 	public  void test05_06_07_AddEditDeleteGroupCalendar() {
 		String groupCalendar = "/platform/users";
 		String calendarName= "calendarName"+getRandomNumber();

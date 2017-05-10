@@ -21,6 +21,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarL
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("calendar")
+@Tag("smoke")
 public class CAL_Event_EditTestIT extends Base{
 
 
@@ -46,8 +47,7 @@ public class CAL_Event_EditTestIT extends Base{
 *<li> Post-Condition: </li>
 */
 
-@Smoke
-@Tag("smoke")
+
 public  void test03_EditEventOfGroupCalendar() {
     info("Test 3: Edit event of group calendar");
     /*Step Number: 1
@@ -128,8 +128,6 @@ info("Add an Event");
             *<li> Post-Condition: </li>
             */
     @Test
-    @Smoke
-    @Tag("smoke")
     public  void test19_EditEventWithValidData() {
         info("Test 19 Edit event with valid data");
 		/*Step Number: 1

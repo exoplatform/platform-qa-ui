@@ -19,6 +19,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarL
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("calendar")
+@Tag("smoke")
 public class CAL_Manage_Personal_CalendarTestIT extends Base{
 
     HomePagePlatform homePagePlatform;
@@ -38,8 +39,6 @@ public class CAL_Manage_Personal_CalendarTestIT extends Base{
 *<li> Post-Condition: </li>
 */
 @Test
-@Smoke
-@Tag("smoke")
 public  void test03_AddNewCalendarWithValidInformation() {
     info("Test 3: Add new calendar with valid information");
     /*Step Number: 1
@@ -78,8 +77,6 @@ public  void test03_AddNewCalendarWithValidInformation() {
      *<li> Post-Condition: </li>
      */
     @Test
-    @Smoke
-    @Tag("smoke")
     public  void test04_EditAPersonalCalendarWithValidValue() {
         info("Test 4: Edit a personal calendar with valid value");
 		/*Step Number: 1

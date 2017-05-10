@@ -23,6 +23,8 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarL
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("calendar")
+@Tag("smoke")
+
 public class CAL_Event_DeleteTestIT extends Base{
 
     HomePagePlatform homePagePlatform;
@@ -45,8 +47,7 @@ public class CAL_Event_DeleteTestIT extends Base{
 *<li> Post-Condition: </li>
 */
 
-@Smoke
-@Tag("smoke")
+
 public  void test05_DeleteEventOfGroupCalendar() {
 
 

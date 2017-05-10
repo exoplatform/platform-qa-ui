@@ -19,6 +19,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("calendar")
+@Tag("smoke")
 public class Calendar_EventTestIT extends Base {
 	HomePagePlatform homePagePlatform;
 	ManageLogInOut manageLogInOut;
@@ -49,8 +50,6 @@ public class Calendar_EventTestIT extends Base {
 	 * Post-Condition: 
 	 */
 	@Test
-	@Smoke
-	@Tag("smoke")
 	public  void test13_14_15_AddEditDeleteAnEventInPersonalCalendar() {
 		String titleEvent = "titleEvent"+getRandomNumber();
 		String calendar="calendar"+getRandomNumber();
