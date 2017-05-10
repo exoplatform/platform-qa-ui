@@ -23,6 +23,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
  *
  */
 @Tag("ecms")
+@Tag("smoke")
 public class Ecms_AdminExplorerTestIT extends Base{
 	ContentAdministration contentAdministration;
 	NavigationToolbar navigationToolbar;
@@ -44,8 +45,6 @@ public class Ecms_AdminExplorerTestIT extends Base{
 	 *<li> Test Case Name: Delete Drive.</li>
 	 */
 	@Test
-	@Smoke
-	@Tag("smoke")
 	public  void test01_02_03_Add_Edit_Delete_Drive() {
 		info("Test 01: Add Drive");
 		info("Get data test");
@@ -88,8 +87,7 @@ public class Ecms_AdminExplorerTestIT extends Base{
 	 *<li> Test Case Name: Delete a View.</li>
 	 */
 
-	@Smoke
-	@Tag("smoke")
+
 	public  void test04_05_06_07_Add_Edit_Delete_View_AView() {
 		info("Test 02 : Add, edit, show and delete a View");
 		String title = "aatitle"+getRandomNumber();

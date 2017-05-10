@@ -21,6 +21,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;/**
 *
 */
 @Tag("ecms")
+@Tag("smoke")
 public class Ecms_AdminTemplatesTestIT extends Base{
     ContentAdministration contentAdministration;
     NavigationToolbar navigationToolbar;
@@ -45,9 +46,6 @@ public class Ecms_AdminTemplatesTestIT extends Base{
 *<li> Test Case Name: Delete Document Template.</li>
 */
 @Test
-@Smoke
-@Tag("smoke")
-
 public void test04_05_06_AddDocument_Edit_DeleteTemplate() {
     info("Test 1: Add, edit and delete Document Template");
     String title = "title"+getRandomNumber();

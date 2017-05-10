@@ -31,6 +31,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
  */
 
 @Tag("ecms")
+@Tag("smoke")
 public class Ecms_WCMTestIT extends Base {
 
 
@@ -63,8 +64,6 @@ public class Ecms_WCMTestIT extends Base {
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
-	@Smoke
-	@Tag("smoke")
 	public  void test03_CreateSingleContentViewerPage() {
 		info("Test 3: Create Single Content Viewer page");
 		String content = "content"+getRandomNumber();
@@ -120,8 +119,6 @@ public class Ecms_WCMTestIT extends Base {
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
-	@Smoke
-	@Tag("smoke")
 	public  void test10_EditSingleContentViewerPage() {
 		info("Test 10 Edit Single Content Viewer page");
 		String title = "title"+getRandomNumber();

@@ -18,6 +18,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 @Tag("ecms")
+@Tag("smoke")
 public class Ecms_SE_CreateTestIT extends Base{
 	ContentAdministration contentAdministration;
 	NavigationToolbar navigationToolbar;
@@ -44,8 +45,6 @@ public class Ecms_SE_CreateTestIT extends Base{
 	 *<li> Test Case Name: Edit File document.</li>
 	 */
 	@Test
-	@Smoke
-	@Tag("smoke")
 	public  void test02_06_07_Create_Edit_DeleteFileDocument() {
 		info("Test 2: Delete File document");
 		info("Create data test");
@@ -97,8 +96,6 @@ public class Ecms_SE_CreateTestIT extends Base{
 	 *<li> Pre-Condition: A Web Content document is already created.</li>
 	 */
 	@Test
-	@Smoke
-	@Tag("smoke")
 	public  void test03_08_09_Create_Edit_Delete_WebContentDocument() {
 		info("Test 3: Create Web Content document");
 		info("Create data test");
