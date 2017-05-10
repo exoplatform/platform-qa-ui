@@ -1,19 +1,28 @@
 package org.exoplatform.platform.qa.ui.social.smoke;
 
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.context.Smoke;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.ecms.CreateNewDocument;
 import org.exoplatform.platform.qa.ui.selenium.platform.ecms.SiteExplorerHome;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 
 import java.awt.*;
 
 import static com.codeborne.selenide.Configuration.browser;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$$;
+import static org.bouncycastle.asn1.x500.style.RFC4519Style.name;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
@@ -21,19 +30,32 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 
 public class SOC_HomePage extends Base {
-	/**
-	 *<li> Case ID:121888.</li>
-	 *<li> Test Case Name: Like Activity.</li>
-	 *<li> Pre-Condition: </li>
-	 *<li> Post-Condition: </li>
-	 */
 	NavigationToolbar navigationToolbar;
 
 	HomePagePlatform homePagePlatform;
 	ActivityStream activityStream;
 	CreateNewDocument createNewDocument;
 	SiteExplorerHome siteExplorerHome;
+
+	@BeforeEach
+	public void setupBeforeMethod() {
+		info("Start setUpBeforeMethod");
+	navigationToolbar=new NavigationToolbar(this);
+	homePagePlatform =new HomePagePlatform(this);
+	activityStream=new ActivityStream(this);
+	createNewDocument=new CreateNewDocument(this);
+	siteExplorerHome=new SiteExplorerHome(this);
+	}
+	/**
+	 *<li> Case ID:121888.</li>
+	 *<li> Test Case Name: Like Activity.</li>
+	 *<li> Pre-Condition: </li>
+	 *<li> Post-Condition: </li>
+	 */
+
 	@Test
+	@Smoke
+	@Tag("smoke")
 	public  void test01_LikeActivity() {
 		info("Test 1: Like Activity");
 
@@ -46,7 +68,6 @@ public class SOC_HomePage extends Base {
 		createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
 		createNewDocument.addNewWebContent(name, content);
 		createNewDocument.saveAndClose();
-		Utils.pause(5000);
 		homePagePlatform.goToHomePage();
 
 		/*Step Number: 1
@@ -59,9 +80,15 @@ public class SOC_HomePage extends Base {
 		 *Expected Outcome: 
 			- Like button is highlighted and the number of likers is updated*/
 
-		clickByJavascript((ELEMENT_PUBLICATION_LIKE).replace("${title}", name));
-		waitForAndGetElement((ELEMENT_PUBLICATION_LIKED).replace("${title}", name));
+		//$((ELEMENT_PUBLICATION_LIKE).replace("${title}", name)).click();
+		String id = $(byClassName("contentShare")).parent().getAttribute("id").split("ActivityContextBox")[1];
 
+for (int i=0; i<200;i++) {
+	if($(byXpath("//*[@id=\"LikeLink"+i+"\"]")).is(Condition.exist)){
+		$(byXpath("//*[@id=\"LikeLink"+i+"\"]")).click();
+}
+//waitForAndGetElement((ELEMENT_PUBLICATION_LIKED).replace("${title}", name));
+	}
 		/*Step number: 2
 		 *Step Name: Check Likes part
 		 *Step Description: 
@@ -73,8 +100,8 @@ public class SOC_HomePage extends Base {
 			- Avatar of liker is added into likes part, the oldest liker is displayed at the right and the newest at the left.
 			- Profile pictures of users popup*/ 
 		//mouseOver(hp.ELEMENT_PUBLICATION_WHOLIKED, true);
-		mouseHoverByJavaScript(ELEMENT_PUBLICATION_WHOLIKED, 2);
-		waitForAndGetElement(ELEMENT_PUBLICATION_WHOLIKEDPOPUP);
+		/*mouseHoverByJavaScript(ELEMENT_PUBLICATION_WHOLIKED, 2);
+		waitForAndGetElement(ELEMENT_PUBLICATION_WHOLIKEDPOPUP);*/
 	}
 
 	/**

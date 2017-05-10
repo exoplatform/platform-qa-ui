@@ -4,6 +4,8 @@ import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 import java.util.Set;
@@ -15,7 +17,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class EmailNotifications {
   private final TestBase       testBase;
-  public UserProfilePage       userProPage;
+  public UserProfilePage userProPage;
   public HomePagePlatform      hpPlat;
   public SpaceHomePage spaceHome;
   public ActivityStream        hpAct;

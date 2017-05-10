@@ -2,6 +2,8 @@ package org.exoplatform.platform.qa.ui.social.pageobject;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 import java.util.ArrayList;

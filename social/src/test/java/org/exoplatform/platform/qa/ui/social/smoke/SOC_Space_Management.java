@@ -3,13 +3,11 @@ package org.exoplatform.platform.qa.ui.social.smoke;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
-import org.exoplatform.platform.qa.ui.social.pageobject.SpaceManagement;
-import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.junit.jupiter.api.Test;
 
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_SPACE_MENU_ACTIVITY_PORTLET;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 

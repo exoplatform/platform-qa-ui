@@ -20,6 +20,20 @@ import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.awt.*;
+
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_NAME;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class CreateNewDocument {
 
@@ -31,7 +45,7 @@ public class CreateNewDocument {
 
   public PlatformBase          plf;
 
-  public SiteExplorerHome      SEHome;
+  public SiteExplorerHome SEHome;
 
   private ElementEventTestBase evt;
 
@@ -44,7 +58,7 @@ public class CreateNewDocument {
 
   /**
    * Create a new document
-   * 
+   *
    * @param type
    */
   public void createNewDoc(selectDocumentType type) {
@@ -109,12 +123,12 @@ public class CreateNewDocument {
       info("Select Javascript file type");
       $(ELEMENT_ADDDOCUMENT_JAVASCRIPT_FILE).click();
       break;
-    }
+ }
   }
 
   /**
    * Add and select the type of new Content Folder By QuynhPT Date 16/01/2015
-   * 
+   *
    * @param title
    * @param type
    */
@@ -131,18 +145,18 @@ public class CreateNewDocument {
     }
     info("Select a type of new folder");
     switch (type) {
-    case Content:
-      info("Type a text to title field of Content type");
-      evt.type(ELEMENT_FOLDER_TITLE_TEXTBOX, title, true);
-      break;
-    case Document:
-      info("Type a text to title field of Document type");
-      evt.type(ELEMENT_FOLDER_TITLE_TEXTBOX, title, true);
-      info("Select Document type");
-      plf.selectOption(ELEMENT_FOLDER_TYPE_OPTION, ELEMENT_DOCUMENT_FOLDER_TYPE);
-      break;
-    default:
-      break;
+      case Content:
+        info("Type a text to title field of Content type");
+        evt.type(ELEMENT_FOLDER_TITLE_TEXTBOX, title, true);
+        break;
+      case Document:
+        info("Type a text to title field of Document type");
+        evt.type(ELEMENT_FOLDER_TITLE_TEXTBOX, title, true);
+        info("Select Document type");
+        plf.selectOption(ELEMENT_FOLDER_TYPE_OPTION, ELEMENT_DOCUMENT_FOLDER_TYPE);
+        break;
+      default:
+        break;
     }
     info("Save the changes");
     evt.click(ELEMENT_CREATE_FOLDER_BUTTON);
@@ -152,7 +166,7 @@ public class CreateNewDocument {
   /**
    * Add a new file only with title and content string update QuynhPT date
    * 13/01/2015
-   * 
+   *
    * @param title
    * @param content
    */
@@ -166,7 +180,7 @@ public class CreateNewDocument {
 
   /**
    * Add a new Webcontent
-   * 
+   *
    * @param title
    * @param content
    */
@@ -179,7 +193,7 @@ public class CreateNewDocument {
 
   /**
    * Add a new product
-   * 
+   *
    * @param title
    * @param summary
    */
@@ -196,7 +210,7 @@ public class CreateNewDocument {
 
   public void saveAndClose() {
     info("save and close");
-    // scroll up
+    //scroll up
     executeJavaScript("window.scrollBy(0,-250)");
     $(ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE).click();
 
@@ -204,7 +218,7 @@ public class CreateNewDocument {
 
   /**
    * Add a link into webcontent
-   * 
+   *
    * @param url
    */
   public void addLinkInWebContent(String url) {
@@ -215,7 +229,7 @@ public class CreateNewDocument {
 
   /**
    * Create a Advanced Document
-   * 
+   *
    * @param name
    * @param content
    * @param title

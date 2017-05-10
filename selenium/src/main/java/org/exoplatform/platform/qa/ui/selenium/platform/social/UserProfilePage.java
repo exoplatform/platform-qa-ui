@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.social.pageobject;
+package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;

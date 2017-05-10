@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.social.pageobject;
+package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;

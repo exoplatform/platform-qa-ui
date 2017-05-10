@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.social.pageobject;
+package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
