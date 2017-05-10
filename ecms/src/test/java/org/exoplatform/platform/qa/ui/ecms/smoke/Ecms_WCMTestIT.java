@@ -18,6 +18,7 @@ import org.openqa.selenium.By;
 import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
@@ -119,6 +120,7 @@ public class Ecms_WCMTestIT extends Base {
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
+	@Tag("smoke")
 	public  void test10_EditSingleContentViewerPage() {
 		info("Test 10 Edit Single Content Viewer page");
 		String title = "title"+getRandomNumber();
@@ -171,13 +173,16 @@ public class Ecms_WCMTestIT extends Base {
 
 		 *Expected Outcome: 
 			- The new selected web content/document is displayed*/
-		ElEMENT_PRESENTATION_CONTAINER.hover();
-		ElEMENT_PRESENTATION_CONTAINER.find(byClassName("uiIconSetting")).hover().click();
+		$(byTitle("Portlet Mode")).click();
+		$(byTitle("Edit")).click();
 		ELEMENT_INCON_ADD_PATH.click();
 		contentList.selectFolderContent("General Drives/Sites Management/intranet",content2);
-		$(ELEMENT_CONTENT_DETAIL_SAVE_BTN).scrollTo().click();
-		$(byText(content2)).waitUntil(Condition.appears, Configuration.timeout);
+		//$(ELEMENT_CONTENT_DETAIL_SAVE_BTN).scrollTo().click();
+		//scroll up
+		executeJavaScript("window.scrollBy(0,-350);","");
+		$(byText("Done")).waitUntil(Condition.appears, Configuration.timeout);
 		info("Delete created files");
+
 		navigationToolbar.goToSiteExplorer();
 		siteExplorerHome.deleteData(content1, true);
 		$(byText(content2)).waitUntil(Condition.appears,Configuration.timeout);

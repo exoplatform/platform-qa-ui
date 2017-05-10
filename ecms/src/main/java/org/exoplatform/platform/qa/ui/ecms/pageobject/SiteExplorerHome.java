@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_SELECT_USER_ICON1;
@@ -156,7 +157,10 @@ public class SiteExplorerHome {
   public void deleteData(String title, boolean... destination) {
     boolean verify = (destination.length > 0 ? destination[0] : false);
     info("Click on File Explorer icon");
+    //scroll de 10 pixel
+    executeJavaScript("window.scrollBy(0,50);","");
     $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
+
     info("Right click on nodename");
     $(byId("UITreeExplorer")).find(byLinkText(title)).contextClick();
     info("Click on Delete link");
