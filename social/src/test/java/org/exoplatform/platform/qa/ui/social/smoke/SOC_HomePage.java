@@ -119,6 +119,8 @@ public class SOC_HomePage extends Base {
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
+	@Smoke
+	@Tag("smoke")
 	public  void test02_15_AddDeleteComment() {
 		info("Test 2: Add comment");
 
@@ -146,13 +148,16 @@ public class SOC_HomePage extends Base {
 
 		 *Expected Outcome: 
 			- Comment will be shown in comment section of activity*/
-		activityStream.addComment(name,content2);
-		waitForAndGetElement(ELEMENT_PUBLICATION_COMMENTPOSTED.replace("${content}", content2));
+		String id = $(byClassName("contentShare")).parent().getAttribute("id").split("ActivityContextBox")[1];
+		$(byXpath("//*[@id=\"CommentLink"+id+"\"]")).click();
+		$(byClassName("cke_wysiwyg_frame cke_reset")).click();
+
+		/*waitForAndGetElement(ELEMENT_PUBLICATION_COMMENTPOSTED.replace("${content}", content2));
 
 		info("Test 15: Delete comment");
 		homePagePlatform.goToHomePage();
 		activityStream.deleteComment(name, content2);
-		waitForElementNotPresent(ELEMENT_PUBLICATION_COMMENTPOSTED.replace("${content}", content2));
+		waitForElementNotPresent(ELEMENT_PUBLICATION_COMMENTPOSTED.replace("${content}", content2));*/
 	}
 
 	/**
