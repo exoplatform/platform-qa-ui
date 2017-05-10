@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.social.smoke;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.context.Smoke;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
@@ -80,15 +81,13 @@ public class SOC_HomePage extends Base {
 		 *Expected Outcome: 
 			- Like button is highlighted and the number of likers is updated*/
 
-		//$((ELEMENT_PUBLICATION_LIKE).replace("${title}", name)).click();
+//get the id of the webContent created
 		String id = $(byClassName("contentShare")).parent().getAttribute("id").split("ActivityContextBox")[1];
 
-for (int i=0; i<200;i++) {
-	if($(byXpath("//*[@id=\"LikeLink"+i+"\"]")).is(Condition.exist)){
-		$(byXpath("//*[@id=\"LikeLink"+i+"\"]")).click();
-}
-//waitForAndGetElement((ELEMENT_PUBLICATION_LIKED).replace("${title}", name));
-	}
+//click on the like button of the webContent
+		$(byXpath("//*[@id=\"LikeLink"+id+"\"]")).click();
+
+		$(byXpath("//*[@id=\"UnLikeLink"+id+"\"]")).waitUntil(Condition.appears, Configuration.timeout);
 		/*Step number: 2
 		 *Step Name: Check Likes part
 		 *Step Description: 
@@ -99,9 +98,13 @@ for (int i=0; i<200;i++) {
 		 *Expected Outcome: 
 			- Avatar of liker is added into likes part, the oldest liker is displayed at the right and the newest at the left.
 			- Profile pictures of users popup*/ 
-		//mouseOver(hp.ELEMENT_PUBLICATION_WHOLIKED, true);
-		/*mouseHoverByJavaScript(ELEMENT_PUBLICATION_WHOLIKED, 2);
+		/*mouseOver(ELEMENT_PUBLICATION_WHOLIKED, true);
+		mouseHoverByJavaScript(ELEMENT_PUBLICATION_WHOLIKED, 2);
 		waitForAndGetElement(ELEMENT_PUBLICATION_WHOLIKEDPOPUP);*/
+		ELEMENT_WHO_LIKED_POPUP.waitUntil(Condition.appears,Configuration.timeout);
+		navigationToolbar.goToSiteExplorer();
+		siteExplorerHome.deleteData(name);
+
 	}
 
 	/**
