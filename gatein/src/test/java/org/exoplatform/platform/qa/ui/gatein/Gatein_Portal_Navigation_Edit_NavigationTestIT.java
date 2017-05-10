@@ -22,6 +22,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 *
 */
 @Tag("gatein")
+@Tag("smoke")
 public class Gatein_Portal_Navigation_Edit_NavigationTestIT extends Base{
     NavigationToolbar navigationToolbar;
     PortalManageSites portalmanagesites;
@@ -47,9 +48,6 @@ public class Gatein_Portal_Navigation_Edit_NavigationTestIT extends Base{
 *<li> Test Case Name:Edit node's page properties.</li>
 */
 @Test
-
-@Smoke
-@Tag("smoke")
 public void test01_Add_Edit_Delete_NodePage() {
     info("Test 01: Add new node");
     String portalName = "portalName"+getRandomNumber();
@@ -132,9 +130,6 @@ public void test01_Add_Edit_Delete_NodePage() {
 *<li> Test Case Name:Edit node.</li>
 */
 @Test
-@Smoke
-@Tag("smoke")
-
 public void test04_EditNode() {
     info("Test 04: Edit Node");
     String portalName = "portalName"+getRandomNumber();

@@ -23,6 +23,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 *
 */
 @Tag("gatein")
+@Tag("smoke")
 public class Gatein_Manage_PagesTestIT extends Base{
 
     NavigationToolbar navigationToolbar;
@@ -47,8 +48,6 @@ public class Gatein_Manage_PagesTestIT extends Base{
 *<li> Test Case Name: Add page of portal using Page Management.</li>
 */
 @Test
-@Smoke
-@Tag("smoke")
     public  void test02_AddPageOfPortalUsingPageManagement() {
     info("Test 02:Add page of portal using Page Management");
     String num=getRandomNumber();
@@ -79,8 +78,6 @@ public class Gatein_Manage_PagesTestIT extends Base{
 */
 
 @Test
-@Smoke
-@Tag("smoke")
 public  void test10_EditPageOfPortal() {
     info("Test 10: Edit page of portal");
     String num=getRandomNumber();
@@ -123,8 +120,6 @@ public  void test10_EditPageOfPortal() {
 *<li> Test Case Name: Delete page of portal.</li>
 */
 @Test
-@Smoke
-@Tag("smoke")
 public  void test03_DeletePageOfPortal() {
     info("Test 03: Delete page of portal");
     String num=getRandomNumber();

@@ -25,7 +25,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
  * @author tult
  */
 @Tag("gatein")
-
+@Tag("smoke")
 public class Gatein_User_And_Group_ManagementTestIT extends Base{
 	
 	NavigationToolbar navigationToolbar;
@@ -50,8 +50,7 @@ public class Gatein_User_And_Group_ManagementTestIT extends Base{
 	*<li> Test Case Name: Delete group.</li>
 	*/
 
-	@Smoke
-	@Tag("smoke")
+
 	public void test01_02_03_04_AddEditDeleteGroupAddUsersToGroup(){
 		String groupName = "groupName"+getRandomNumber();
 		String groupLabel = "groupLabel"+getRandomNumber();
@@ -128,8 +127,6 @@ public class Gatein_User_And_Group_ManagementTestIT extends Base{
 	*<li> Test Case Name: Delete user.</li>
 	*/
 	@Test
-	@Smoke
-	@Tag("smoke")
 	public void test08_09_10_EditSearchDeleteUser(){
 		String username = "username"+getRandomNumber();
 		String password = "password"+getRandomNumber();

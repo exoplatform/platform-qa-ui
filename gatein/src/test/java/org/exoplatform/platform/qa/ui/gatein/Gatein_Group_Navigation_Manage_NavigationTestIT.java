@@ -16,6 +16,7 @@ import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 @Tag("gatein")
+@Tag("smoke")
 public class Gatein_Group_Navigation_Manage_NavigationTestIT extends Base {
 
   HomePagePlatform       homePagePlatform;
@@ -42,9 +43,6 @@ public class Gatein_Group_Navigation_Manage_NavigationTestIT extends Base {
    * Test Case Name: Manage Navigation of group.
    */
   @Test
-  @Smoke
-  @Tag("smoke")
-
   public void test01_02_03_Show_Add_ManageGroupNavigation() {
     String groupName = "group-" + getRandomNumber();
     String group1 = "group1-" + getRandomNumber();
