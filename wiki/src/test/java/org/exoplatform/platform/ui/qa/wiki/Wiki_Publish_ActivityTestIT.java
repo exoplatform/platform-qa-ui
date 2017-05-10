@@ -20,6 +20,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("wiki")
+@Tag("smoke")
 public class Wiki_Publish_ActivityTestIT extends Base {
 
 	HomePagePlatform homePagePlatform;
@@ -46,8 +47,6 @@ public class Wiki_Publish_ActivityTestIT extends Base {
 	 *<li> Post-Condition:</li>
 	 */
 	@Test
-	@Smoke
-	@Tag("smoke")
 	public  void test01_CreateNewWikiPage() {
 		info("Test 01: Create new wiki page");
 		String title = "title"+getRandomNumber();
@@ -104,8 +103,6 @@ public class Wiki_Publish_ActivityTestIT extends Base {
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
-	@Smoke
-	@Tag("smoke")
 	public  void test02_DeleteWikiPage() {
 		info("Test 2: Delete wiki page");
 		String title = "title"+getRandomNumber();

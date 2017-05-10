@@ -22,7 +22,8 @@ import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 /**
  * By quynhpt Date 20/01/2015
  */
-
+@Tag("smoke")
+@Tag("forum")
 public class Forum_Forum_BasicActionTestIT extends Base {
 
   HomePagePlatform        homePagePlatform;
@@ -50,8 +51,7 @@ public class Forum_Forum_BasicActionTestIT extends Base {
    * changes
    */
   @Test
-  @Smoke
-  @Tag("smoke")
+
   public void test01_AddForum() {
     info("test01: Add Forum");
     String nameCat = "category-" + getRandomNumber();
@@ -77,8 +77,6 @@ public class Forum_Forum_BasicActionTestIT extends Base {
    * Save Expected: Forum is added successfully.
    */
   @Test
-  @Smoke
-  @Tag("smoke")
   public void test02_EditForum() {
     info("test02: Edit Forum");
     String nameCat = "category-" + getRandomNumber();
@@ -107,8 +105,6 @@ public class Forum_Forum_BasicActionTestIT extends Base {
    * Save Expected: Forum is added successfully.
    */
   @Test
-  @Smoke
-  @Tag("smoke")
   public void test03_DeleteForum() {
     info("test03: Delete Forum");
     String nameCat = "category-" + getRandomNumber();
@@ -134,8 +130,6 @@ public class Forum_Forum_BasicActionTestIT extends Base {
    * destination category
    */
   @Test
-  @Smoke
-  @Tag("smoke")
   public void test04_MoveForum() {
     info("Move a forum");
     String category1 = "category1-" + getRandomNumber();

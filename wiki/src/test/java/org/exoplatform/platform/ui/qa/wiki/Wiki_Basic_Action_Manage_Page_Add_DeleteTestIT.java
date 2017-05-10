@@ -18,6 +18,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("wiki")
+@Tag("smoke")
 public class Wiki_Basic_Action_Manage_Page_Add_DeleteTestIT extends Base {
 	HomePagePlatform homePagePlatform;
 
@@ -47,8 +48,6 @@ public class Wiki_Basic_Action_Manage_Page_Add_DeleteTestIT extends Base {
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
-	@Smoke
-	@Tag("smoke")
 	public  void test02_09_Create_Delete_PageUsingSourceEditor() {
 		info("Test 02: Create page using Source Editor");
 		String wiki = "wiki"+getRandomNumber();

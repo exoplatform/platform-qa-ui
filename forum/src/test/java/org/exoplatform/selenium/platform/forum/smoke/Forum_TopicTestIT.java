@@ -19,7 +19,8 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-
+@Tag("smoke")
+@Tag("forum")
 public class Forum_TopicTestIT extends Base {
 	HomePagePlatform homePagePlatform;
 	ForumCategoryManagement forumCategoryManagement;
@@ -49,8 +50,6 @@ public class Forum_TopicTestIT extends Base {
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
-	@Smoke
-	@Tag("smoke")
 	public  void test09_CreateDeleteNewTopic() {
 		info("Test 9: Create new Topic");
 

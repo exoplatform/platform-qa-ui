@@ -14,7 +14,8 @@ import org.openqa.selenium.By;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-
+@Tag("smoke")
+@Tag("forum")
 public class Forum_CategoryTestIT extends Base{
 	HomePagePlatform homePagePlatform;
 	ForumCategoryManagement forumCategoryManagement;
@@ -48,8 +49,6 @@ public class Forum_CategoryTestIT extends Base{
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
-	@Smoke
-	@Tag("smoke")
 	public  void test02_03_04_AddEditDeleteACategory() {
 		info("Test 2: Add a category");
 
