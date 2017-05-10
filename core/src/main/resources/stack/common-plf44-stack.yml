@@ -31,7 +31,7 @@ services:
       - front
       - mail
   exo:
-    image: exoplatform/exo:4.4.1_0
+    image: exoplatform/exo:5.0_latest
     environment:
       EXO_DB_NAME: exo
       EXO_DB_USER: exo
