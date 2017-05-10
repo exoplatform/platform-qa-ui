@@ -58,9 +58,14 @@ public class CreateNewDocument {
       break;
     case WEBCONTENT:
       info("Select WebContent type");
-
-
-        $(ELEMENT_ADDDOCUMENT_WEBCONTENT).click();
+      if ($(ELEMENT_ADDDOCUMENT_WEBCONTENT).is(Condition.exist))
+      {$(ELEMENT_ADDDOCUMENT_WEBCONTENT).click();}
+      else
+      {//move ti page 2 for the list of template
+        $(byClassName("pagination")).scrollTo().find(byText("2")).click();
+        //scroll up
+        executeJavaScript("window.scrollBy(0,-250);","");
+        $(ELEMENT_ADDDOCUMENT_WEBCONTENT).click();}
        break;
     case ACCESSIBLEMEDIA:
       info("Select Accessiblemedia type");
