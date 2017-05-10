@@ -64,7 +64,7 @@ public class CreateNewDocument {
       {//move ti page 2 for the list of template
         $(byClassName("pagination")).scrollTo().find(byText("2")).click();
         //scroll up
-        executeJavaScript("window.scrollBy(0,-250);","");
+        executeJavaScript("window.scrollBy(0,-350);","");
         $(ELEMENT_ADDDOCUMENT_WEBCONTENT).click();}
        break;
     case ACCESSIBLEMEDIA:
