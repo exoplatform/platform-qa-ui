@@ -1,13 +1,20 @@
 package org.exoplatform.platform.qa.ui.social.smoke;
 
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
@@ -21,6 +28,17 @@ public class SOC_People_Activity_Comment extends Base{
 	ConnectionsManagement connectionsManagement;
 	ActivityStream activityStream;
 	UserPageBase userPageBase;
+	@BeforeEach
+	public void setupBeforeMethod() {
+		info("Start setUpBeforeMethod");
+		navigationToolbar=new NavigationToolbar(this);
+		homePagePlatform =new HomePagePlatform(this);
+		addUsers=new AddUsers(this);
+		manageLogInOut=new ManageLogInOut(this);
+		connectionsManagement=new ConnectionsManagement(this);
+		activityStream=new ActivityStream(this);
+		userPageBase=new UserPageBase(this);
+	}
 	/**
 	 *<li> Case ID:122799.</li>
 	 *<li> Test Case Name: Comment on your activity.</li>
@@ -28,6 +46,7 @@ public class SOC_People_Activity_Comment extends Base{
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
+	@Tag("smoke")
 	public  void test01_CommentOnYourActivity() {
 		info("Test 1: Comment on your activity");
 		/*Step Number: 1
@@ -78,8 +97,20 @@ public class SOC_People_Activity_Comment extends Base{
 			- Content of comment
 			- Time comment is posted*/ 
 		String comment="comment"+getRandomNumber();
-		activityStream.addComment(activity1, comment);
-		waitForAndGetElement(ELEMENT_COMMENT_TEXT.replace("${activityText}",activity1).replace("${commentText}",comment));
+		//get the id of webContent created
+		String id = $(byClassName("heading")).parent().getAttribute("id").split("ActivityContextBox")[1];
+		//click on comment icon
+		$(byXpath("//*[@id=\"CommentLink"+id+"\"]")).click();
+		//insert comment
+		$(byId("cke_CommentTextarea"+id)).waitUntil(Condition.appears, Configuration.timeout).click();
+		executeJavaScript("CKEDITOR.instances.CommentTextarea"+id+".insertText(\""+comment+"\")","");
+		//click on the button comment
+		$(byText("Comment")).waitUntil(Condition.enabled,Configuration.timeout).click();
+		$(byText("Comment")).waitUntil(Condition.disappears,Configuration.timeout);
+		$(byText(comment)).should(Condition.exist);
+		manageLogInOut.signIn("root","gtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
 	}
 
 	/**
@@ -89,6 +120,7 @@ public class SOC_People_Activity_Comment extends Base{
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
+	@Tag("smoke")
 	public  void test02_CommentOnYourFriendsActivity() {
 		/*Create data test*/
 		String username1 = "usernamea" + getRandomString();
@@ -172,12 +204,28 @@ public class SOC_People_Activity_Comment extends Base{
 		manageLogInOut.signIn(username2, password);
 		homePagePlatform.goToConnections();
 		connectionsManagement.goToConnectionTab(ConnectionsManagement.selectTabOption.ALL);
-		connectionsManagement.goToUserByFullName(username1+" "+username1);
+		connectionsManagement.searchPeople(username1,null,null,null);
+		//click on the username to join his profile
+		$(byClassName("uiTabNormal")).find(byClassName("limitText")).click();
 		userPageBase.goToActivityTab();
 		String comment="comment"+getRandomNumber();
-		activityStream.addComment(activity1, comment);
-		waitForAndGetElement(ELEMENT_COMMENT_TEXT.replace("${activityText}",activity1).replace("${commentText}",comment));
-	}
+		//get the id of webContent created
+		String id = $(byClassName("heading")).parent().getAttribute("id").split("ActivityContextBox")[1];
+		//click on comment icon
+		$(byXpath("//*[@id=\"CommentLink"+id+"\"]")).click();
+		//insert comment
+		$(byId("cke_CommentTextarea"+id)).waitUntil(Condition.appears, Configuration.timeout).click();
+		executeJavaScript("CKEDITOR.instances.CommentTextarea"+id+".insertText(\""+comment+"\")","");
+		//click on the button comment
+		$(byText("Comment")).waitUntil(Condition.enabled,Configuration.timeout).click();
+		$(byText("Comment")).waitUntil(Condition.disappears,Configuration.timeout);
+		$(byText(comment)).should(Condition.exist);
+		manageLogInOut.signIn("root","gtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+		addUsers.deleteUser(username2);
+
+				}
 
 	/**
 	 *<li> Case ID:122787.</li>

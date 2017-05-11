@@ -15,6 +15,7 @@ import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.WebDriver;
 
 ;
 
@@ -160,11 +161,12 @@ $(byText("Connect")).click();
    * @param accept (true: if user accept invitation)
    */
   public void verifyConnection(String username, Boolean accept) {
+
     $(ELEMENT_MY_CONNECTIONS_TAB).click();
     // With user confirmed the invitation, user becomes friend and user's name
     // is displayed on user's network list
     searchPeople(username, null, null, null);
-    refresh();
+
     if (accept)
     $(byText("Remove Connection")).should(Condition.exist);
     else
