@@ -20,9 +20,8 @@ import org.openqa.selenium.WebElement;
 import java.awt.*;
 
 import static com.codeborne.selenide.Configuration.browser;
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.*;
 import static org.bouncycastle.asn1.x500.style.RFC4519Style.name;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
@@ -148,16 +147,34 @@ public class SOC_HomePage extends Base {
 
 		 *Expected Outcome: 
 			- Comment will be shown in comment section of activity*/
-		String id = $(byClassName("contentShare")).parent().getAttribute("id").split("ActivityContextBox")[1];
-		$(byXpath("//*[@id=\"CommentLink"+id+"\"]")).click();
-		$(byClassName("cke_wysiwyg_frame cke_reset")).click();
 
-		/*waitForAndGetElement(ELEMENT_PUBLICATION_COMMENTPOSTED.replace("${content}", content2));
+		//get the id of webContent created
+		String id = $(byClassName("contentShare")).parent().getAttribute("id").split("ActivityContextBox")[1];
+		//click on comment icon
+		$(byXpath("//*[@id=\"CommentLink"+id+"\"]")).click();
+		//insert comment
+		$(byId("cke_CommentTextarea"+id)).waitUntil(Condition.appears,Configuration.timeout).click();
+		executeJavaScript("CKEDITOR.instances.CommentTextarea"+id+".insertText(\"test\")","");
+		//click on the button comment
+		$(byText("Comment")).waitUntil(Condition.enabled,Configuration.timeout).click();
+
 
 		info("Test 15: Delete comment");
-		homePagePlatform.goToHomePage();
-		activityStream.deleteComment(name, content2);
-		waitForElementNotPresent(ELEMENT_PUBLICATION_COMMENTPOSTED.replace("${content}", content2));*/
+		//hover on the comment to appear the delete button
+		$(byClassName("commentRight")).waitUntil(Condition.appears,Configuration.timeout).hover();
+		//the id of the comment is id of the activity+1
+		Integer idComment=Integer.parseInt(id)+1;
+		$(byId("DeleteCommentButtoncomment"+idComment.toString())).click();
+		//Confirm
+		$(byText("OK")).click();
+		//verify that the comment is deleted
+		$(byText("test")).shouldNot(Condition.exist);
+		//delete webContent
+		navigationToolbar.goToSiteExplorer();
+		siteExplorerHome.deleteData(name);
+
+
+
 	}
 
 	/**
