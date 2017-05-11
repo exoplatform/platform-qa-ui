@@ -184,6 +184,7 @@ public class SOC_HomePage extends Base {
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
+	@Tag("smoke")
 	public  void test03_DeleteYourActivity() {
 		info("Test 3: Delete your activity");
 		//Actions actions = new Actions(driver);
@@ -196,7 +197,6 @@ public class SOC_HomePage extends Base {
 		createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
 		createNewDocument.addNewWebContent(name, content);
 		createNewDocument.saveAndClose();
-		Utils.pause(5000);
 		homePagePlatform.goToHomePage();
 
 		/*Step Number: 1
@@ -212,31 +212,20 @@ public class SOC_HomePage extends Base {
 			- Comment will be shown in comment section of activity
 			- the (x) icon display on the top
 			-right of activity
-			- activity is deteled successfully*/ 
-		if(browser.contains("iexplorer")){
-			info("Click X icon");
-			Utils.pause(2000);
-			waitForAndGetElement(ELEMENT_PUBLICATION_AUTHOR.replace("${title}", name), DEFAULT_TIMEOUT, 1);
-			mouseOver((ELEMENT_PUBLICATION_AUTHOR).replace("${title}", name), true);
-			waitForAndGetElement(ELEMENT_PUBLICATION_DELETE.replace("${title}", name), 5000, 1);
-			Utils.pause(2000);
-			clickByJavascript((ELEMENT_PUBLICATION_DELETE).replace("${title}", name), 2);
-			
-			info("clik OK button");
-			waitForAndGetElement(ELEMENT_DELETE_POPUP_OK, DEFAULT_TIMEOUT, 1);
-			Utils.pause(2000);
-			
-			click(ELEMENT_DELETE_POPUP_OK, 2);
-			waitForElementNotPresent(ELEMENT_PUBLICATION_AUTHOR.replace("${title}", name));
-		}
-		else{
-			Utils.pause(2000);
-			mouseOver((ELEMENT_PUBLICATION_AUTHOR).replace("${title}", name), true);
-			waitForAndGetElement(ELEMENT_PUBLICATION_DELETE.replace("${title}", name), 5000, 1);
-			click((ELEMENT_PUBLICATION_DELETE).replace("${title}", name));
-			click(ELEMENT_DELETE_POPUP_OK);
-			waitForElementNotPresent(ELEMENT_PUBLICATION_TITLE.replace("${title}", name));
-		}
+			- activity is deteled successfully*/
+
+		//get the id of the webContent created
+		String id = $(byClassName("contentShare")).parent().getAttribute("id").split("ActivityContextBox")[1];
+		//hover on the activity to appear the delete button
+		$(byId("ActivityContextBox"+id)).find(byClassName("dateTime")).hover();
+		//click on delete button
+		$(byId("DeleteActivityButton"+id)).click();
+		$(byText("OK")).click();
+		$(byText(name)).shouldNot(Condition.exist);
+		navigationToolbar.goToSiteExplorer();
+		siteExplorerHome.deleteData(name);
+
+
 	}
 
 
