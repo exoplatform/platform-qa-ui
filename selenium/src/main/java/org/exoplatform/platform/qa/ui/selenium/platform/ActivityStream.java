@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.selenium.platform;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -450,15 +451,8 @@ public class ActivityStream {
    */
   public void addText(String text) {
     info("----Add text into activity text box-----");
-    WebElement inputText = evt.waitForAndGetElement(ELEMENT_COMPOSER_INPUT_FILED, 100000);
-    // type(ELEMENT_COMPOSER_INPUT_FILED, text, false);
-    WebElement shareButton = evt.waitForAndGetElement(ELEMENT_COMPOSER_SHARE_BUTTON);
-    WebElement workingLabel = evt.waitForAndGetElement(ELEMENT_ACTIVITY_WHAT_ARE_YOU_WORKING_LABEL);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].textContent = '';", workingLabel);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].textContent = '" + text + "';", inputText);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].disabled = false;", shareButton);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].className = 'pull-right btn btn-primary';",
-                                                                      shareButton);
+    $(byId("cke_1_contents")).click();
+    executeJavaScript(" CKEDITOR.instances.composerInput.insertText(\""+text+"\")","");
   }
 
   /**
@@ -500,8 +494,7 @@ public class ActivityStream {
       WebElement el = evt.waitForAndGetElement(ELEMENT_COMPOSER_SHARE_BUTTON, 2000, 1, 2);
       el.sendKeys("\n");
     } else
-      evt.click(ELEMENT_COMPOSER_SHARE_BUTTON);
-    Utils.pause(1000);
+      $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
 
   }
 
@@ -527,17 +520,10 @@ public class ActivityStream {
     shareActivity();
     Utils.pause(3000);
     info("-- Verify that an activity has been added --");
-    int repeat = 0;
-    if (text != "" && text != null) {
-      while (evt.waitForAndGetElement(ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", text), 3000, 0) == null) {
-        if (repeat > 5)
-          break;
-        shareActivity();
-        repeat++;
-      }
-      evt.waitForAndGetElement(ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", text), 3000, 1);
-      info("The activity is shared success");
-    }
+    $(byText(text)).should(Condition.exist);
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).shouldBe(Condition.disabled);
+    info("The activity is shared success");
+
   }
 
   /**

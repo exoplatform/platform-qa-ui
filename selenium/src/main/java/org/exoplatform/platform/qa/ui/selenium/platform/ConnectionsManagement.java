@@ -1,9 +1,14 @@
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_NAME_OF_PROFILE_TOP_LEFT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -69,8 +74,8 @@ public class ConnectionsManagement {
       searchPeople(name[0], null, null, null);
     else
       searchPeople(username, null, null, null);
-    evt.clickByJavascript(ELEMENT_CONNECTION_CONNECT_BTN.replace("${user}", username));
-    evt.waitForAndGetElement(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}", username), 2000, 1);
+$(byText("Connect")).click();
+    //evt.waitForAndGetElement(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}", username), 2000, 1);
     info("Connected to the user");
   }
 
@@ -143,9 +148,8 @@ public class ConnectionsManagement {
       searchPeople(fullName[0], null, null, null);
     else
       searchPeople(username, null, null, null);
-    evt.waitForAndGetElement(ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}", username));
-    evt.clickByJavascript(ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}", username));
-    evt.waitForElementNotPresent(ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}", username));
+    $(byText("Confirm")).waitUntil(Condition.appears, Configuration.timeout).click();
+    $(byText("Confirm")).waitUntil(Condition.disappears, Configuration.timeout);
     info("Accepted to the user");
   }
 
@@ -156,12 +160,13 @@ public class ConnectionsManagement {
    * @param accept (true: if user accept invitation)
    */
   public void verifyConnection(String username, Boolean accept) {
-    evt.click(ELEMENT_MY_CONNECTIONS_TAB);
+    $(ELEMENT_MY_CONNECTIONS_TAB).click();
     // With user confirmed the invitation, user becomes friend and user's name
     // is displayed on user's network list
     searchPeople(username, null, null, null);
+    refresh();
     if (accept)
-      evt.waitForAndGetElement(ELEMENT_CONNECTION_REVOVE_BTN.replace("${user}", username));
+    $(byText("Remove Connection")).should(Condition.exist);
     else
       evt.waitForElementNotPresent(ELEMENT_CONNECTION_REVOVE_BTN.replace("${user}", username));
   }
@@ -207,24 +212,24 @@ public class ConnectionsManagement {
   public void searchPeople(String peopleName, String position, String skills, String directory) {
     info("-- Searching people ... --");
     if (peopleName != "" && peopleName != null) {
-      evt.type(ELEMENT_NAME_OF_PEOPLE, peopleName, true);
+     // $(byClassName("selectize-input")).click();
+      ELEMENT_NAME_OF_PEOPLE.setValue(peopleName);
     } else {
       evt.type(ELEMENT_NAME_OF_PEOPLE, "", true);
     }
     if (position != "" && position != null) {
-      evt.type(ELEMENT_POSITIONS_OF_PEOPLE, position, true);
+      $(ELEMENT_POSITIONS_OF_PEOPLE).setValue(position);
     } else {
       evt.type(ELEMENT_POSITIONS_OF_PEOPLE, "", true);
     }
     if (skills != "" && skills != null) {
-      evt.type(ELEMENT_SKILL_OF_PEOPLE, skills, true);
+      $(ELEMENT_SKILL_OF_PEOPLE).setValue(skills);
     } else {
       evt.type(ELEMENT_SKILL_OF_PEOPLE, "", true);
     }
-    evt.clickByJavascript(ELEMENT_SEARCH_BUTTON);
+    $(ELEMENT_SEARCH_BUTTON).click();
     if (directory != "" && directory != null)
-      evt.click(By.linkText(directory));
-    Utils.pause(1000);
+      $(byLinkText(directory)).click();
   }
 
   /**

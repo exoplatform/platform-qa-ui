@@ -20,12 +20,16 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.locator;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selenide.$;
 
 public class ConnectionsLocator {
 
   public static final By ELEMENT_CONNECTION_EVERYONE_TITLE =
-          By.xpath(".//*[@id='UIAllPeople']//*[contains(text(),'Contacts Directory')]");
+          By.xpath(".//*[@id='UIAllPeople']//*[contains(text(),'Everyone')]");
 
   public static final String ELEMENT_CONNECTION_CONNECT_BTN = "//a[contains(@href,'${user}')]/../..//*[text()='Connect']";
 
@@ -57,7 +61,7 @@ public class ConnectionsLocator {
 
   public static final By ELEMENT_ALL_RESULTS = By.id("searchAll");
 
-  public static final By ELEMENT_NAME_OF_PEOPLE = By.id("name");
+  //public static final By ELEMENT_NAME_OF_PEOPLE = By.id("name");
 
   public static final By ELEMENT_POSITIONS_OF_PEOPLE = By.id("position");
 
@@ -68,4 +72,5 @@ public class ConnectionsLocator {
   public static final String ELEMENT_USER_LINK = "//*[@class='spaceTitle']//*[contains(@href,'${userName}')]";
 
   public static final String ELEMENT_USER_AVATAR = ".//*[@alt='${fullname}']";
+  public static final SelenideElement ELEMENT_NAME_OF_PEOPLE= $(byXpath("//*[@id=\"uiTableProfileUserSearchInput\"]/div[1]/div/div/div[1]/input"));
 }

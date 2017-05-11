@@ -1695,7 +1695,7 @@ public final class SocialLocator {
   public static final String ELEMENT_CLOSE_MESSAGE                                             =
                                                    "//*[contains(@title,'Close Window')]";
 
-  public static final By     ELEMENT_INPUT_SEARCH_USER_NAME                                    = By.id("Quick Search");
+  public static final By     ELEMENT_INPUT_SEARCH_USER_NAME                                    = By.id("searchTerm");
 
   public static final String ELEMENT_SELECT_SEARCH_OPTION                                      = "//*[contains(@name,'filter')]";
 

@@ -1,15 +1,21 @@
 package org.exoplatform.platform.qa.ui.social.smoke;
 
 
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.context.Smoke;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
+import org.exoplatform.platform.qa.ui.selenium.platform.ecms.CreateNewDocument;
+import org.exoplatform.platform.qa.ui.selenium.platform.ecms.SiteExplorerHome;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_AUTHOR_ACTIVITY;
@@ -24,6 +30,17 @@ public class SOC_People_Activity_Add extends Base{
 	ConnectionsManagement connectionsManagement;
 	ActivityStream activityStream;
 	UserPageBase userPageBase;
+	@BeforeEach
+	public void setupBeforeMethod() {
+		info("Start setUpBeforeMethod");
+		navigationToolbar=new NavigationToolbar(this);
+		homePagePlatform =new HomePagePlatform(this);
+		addUsers=new AddUsers(this);
+		manageLogInOut=new ManageLogInOut(this);
+		connectionsManagement=new ConnectionsManagement(this);
+		activityStream=new ActivityStream(this);
+		userPageBase=new UserPageBase(this);
+	}
 
 
 	/**
@@ -47,8 +64,7 @@ public class SOC_People_Activity_Add extends Base{
 		addUsers.addUser(username1, password, email1, username1, username1);
 		addUsers.addUser(username2, password, email2, username2, username2);
 		manageLogInOut.signIn(username1,password);
-		Utils.pause(3000);
-		
+
 		
 		info("Click on Connections on the left panel");
 		homePagePlatform.goToConnections();
@@ -61,6 +77,7 @@ public class SOC_People_Activity_Add extends Base{
 		homePagePlatform.goToConnections();
 		connectionsManagement.acceptAConnection(username1);
 		info("Verify after accept");
+		refresh();
 		connectionsManagement.verifyConnection(username1, true);
 		
 		info("Test 3: Add new your activity");
@@ -92,11 +109,18 @@ public class SOC_People_Activity_Add extends Base{
 
 		manageLogInOut.signIn(username2, password);
 		homePagePlatform.goToConnections();
-		click(ELEMENT_ALL_CONNECTIONS_TAB);
+		$(ELEMENT_ALL_CONNECTIONS_TAB).click();
 		connectionsManagement.searchPeople(username1,null,null,null);
-		click(ELEMENT_CONNECTION_USER_NAME.replace("${user}",username1));
+		//click on the username to join his profile
+		$(byClassName("uiTabNormal")).find(byClassName("limitText")).click();
 		userPageBase.goToActivityTab();
-		waitForAndGetElement(ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", activity1));
+		$(byText(activity1)).should(Condition.exist);
+		manageLogInOut.signIn("root", "gtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+		addUsers.deleteUser(username2);
+
+
 	}
 
 

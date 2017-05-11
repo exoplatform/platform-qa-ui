@@ -171,9 +171,9 @@ public class NavigationToolbar {
         break;
       case MY_ACTIVITY:
         info("Go to Activities of User");
-        evt.waitForAndGetElement(ELEMENT_ACTIVITIES_LINK);
-        evt.click(ELEMENT_ACTIVITIES_LINK);
-        evt.waitForAndGetElement(ELEMENT_ACTIVITIES_PORTLET, 2000, 1);
+        $(ELEMENT_ACTIVITIES_LINK).waitUntil(Condition.appears,Configuration.timeout);
+        $(ELEMENT_ACTIVITIES_LINK).click();
+        $(ELEMENT_ACTIVITIES_PORTLET).waitUntil(Condition.appears,Configuration.timeout);
         break;
       case MY_CONNECTIONS:
         evt.click(ELEMENT_MY_CONNECTION_LINK);
@@ -505,7 +505,6 @@ public class NavigationToolbar {
    */
   public void goToMyActivities() {
     selectALinkOfUserMenu(specifUserToolBar.MY_ACTIVITY);
-    Utils.pause(2000);
   }
 
   /**
@@ -550,15 +549,22 @@ public class NavigationToolbar {
   public void goToAddUser() {
     info("Go to add user page");
 
-      info("Click on administration icon");
+
+    info("Click on administration icon");
     $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,10000);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     $(byText("Community")).waitUntil(Condition.appears,10000);
     $(byText("Community")).hover();
     $(byText("Add Users")).click();
-
   }
+public void goToManageCommunity(){
+  $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,10000);
+  $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+  $(byText("Community")).waitUntil(Condition.appears,10000);
+  $(byText("Community")).hover();
+  $(byText("Manage Community")).click();
 
+}
   /**
    * Open Notification list
    */
