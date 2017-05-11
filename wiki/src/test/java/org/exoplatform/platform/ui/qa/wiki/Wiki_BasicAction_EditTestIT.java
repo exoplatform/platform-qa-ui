@@ -20,6 +20,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("wiki")
+@Tag("smoke")
 public class Wiki_BasicAction_EditTestIT extends Base {
 
     HomePagePlatform homePagePlatform;
@@ -52,8 +53,6 @@ public class Wiki_BasicAction_EditTestIT extends Base {
 *<li> Post-Condition: </li>
 */
 @Test
-@Smoke
-@Tag("smoke")
 public  void test01_EditPage() {
     info("Test 1: Edit page");
     /*Step Number: 1

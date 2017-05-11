@@ -16,6 +16,7 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
 @Tag("wiki")
+@Tag("smoke")
 public class Wiki_BasicAction_Add_RichTextTestIT extends Base {
 
   HomePagePlatform  homePagePlatform;
@@ -54,7 +55,6 @@ public class Wiki_BasicAction_Add_RichTextTestIT extends Base {
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li>
    */
-  @Tag("smoke")
   public void test01_AddAPageWithLinkWikiPageExisted() {
     info("Test 1: Add a page with link wiki page existed");
     /*
@@ -112,7 +112,6 @@ public class Wiki_BasicAction_Add_RichTextTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
-  @Tag("smoke")
   public void test04_AddWebPage() {
     info("Test 4: Add web page");
     /*
