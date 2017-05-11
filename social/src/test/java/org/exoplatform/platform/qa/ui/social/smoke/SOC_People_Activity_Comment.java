@@ -234,6 +234,7 @@ public class SOC_People_Activity_Comment extends Base{
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
+	@Tag("smoke")
 	public  void test03_DeleteComment() {
 		info("Test 3: Delete comment");
 		/*Step Number: 1
@@ -274,8 +275,17 @@ public class SOC_People_Activity_Comment extends Base{
 			Add an activity successfully:
 			- This activity is added into users activities list.User who is in your contact, can view your active on his/her activity list*/
 		String comment="comment"+getRandomNumber();
-		activityStream.addComment(activity1, comment);
-		waitForAndGetElement(ELEMENT_COMMENT_TEXT.replace("${activityText}",activity1).replace("${commentText}",comment));
+		//get the id of webContent created
+		String id = $(byClassName("heading")).parent().getAttribute("id").split("ActivityContextBox")[1];
+		//click on comment icon
+		$(byXpath("//*[@id=\"CommentLink"+id+"\"]")).click();
+		//insert comment
+		$(byId("cke_CommentTextarea"+id)).waitUntil(Condition.appears, Configuration.timeout).click();
+		executeJavaScript("CKEDITOR.instances.CommentTextarea"+id+".insertText(\""+comment+"\")","");
+		//click on the button comment
+		$(byText("Comment")).waitUntil(Condition.enabled,Configuration.timeout).click();
+		$(byText("Comment")).waitUntil(Condition.disappears,Configuration.timeout);
+		$(byText(comment)).should(Condition.exist);
 
 		/*Step number: 3
 		 *Step Name: -
@@ -287,8 +297,20 @@ public class SOC_People_Activity_Comment extends Base{
 			- Click OK to confirm deleting
 		 *Expected Outcome: 
 			This comment is deleted.*/
-		activityStream.deleteComment(activity1, comment);
-		waitForElementNotPresent(ELEMENT_COMMENT_TEXT.replace("${activityText}",activity1).replace("${commentText}",comment));
+		//scroll up
+		executeJavaScript("window.scrollBy(0,-250);","");
+		//hover on the comment to appear the delete button
+		$(byClassName("commentRight")).waitUntil(Condition.appears,Configuration.timeout).hover();
+		//the id of the comment is id of the activity+1
+		Integer idComment=Integer.parseInt(id)+1;
+		$(byId("DeleteCommentButtoncomment"+idComment.toString())).click();
+		//Confirm
+		$(byText("OK")).click();
+		//verify that the comment is deleted
+		$(byText(comment)).shouldNot(Condition.exist);
+		manageLogInOut.signIn("root","gtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
 	}
 
 

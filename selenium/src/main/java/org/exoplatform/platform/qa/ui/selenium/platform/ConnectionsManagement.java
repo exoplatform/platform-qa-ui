@@ -48,11 +48,11 @@ public class ConnectionsManagement {
       break;
     case RECEIVE:
       info("Go to receive tab");
-      evt.click(ELEMENT_REQUEST_RECEIVE_CONNECTIONS_TAB, 0, true);
+      $(ELEMENT_REQUEST_RECEIVE_CONNECTIONS_TAB).click();
       break;
     case PENDING:
       info("Go to pending tab");
-      evt.click(ELEMENT_REQUEST_PENDING_CONNECTIONS_TAB, 0, true);
+      $(ELEMENT_REQUEST_PENDING_CONNECTIONS_TAB).click();
       break;
     default:
       info("Go to all tab");
@@ -103,8 +103,8 @@ $(byText("Connect")).click();
     info("--Cancel a connection of a user--");
     info("Click on Cancel button");
     searchPeople(username, null, null, null);
-    evt.clickByJavascript(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}", username));
-    evt.waitForElementNotPresent(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}", username));
+    $(byText("Cancel Request")).click();
+    $(byText("Cancel Request")).waitUntil(Condition.disappears,Configuration.timeout);
     info("Canceled to the user");
   }
 
@@ -149,7 +149,7 @@ $(byText("Connect")).click();
       searchPeople(fullName[0], null, null, null);
     else
       searchPeople(username, null, null, null);
-    $(byText("Confirm")).waitUntil(Condition.appears, Configuration.timeout).click();
+    $(byText("Confirm")).click();
     $(byText("Confirm")).waitUntil(Condition.disappears, Configuration.timeout);
     info("Accepted to the user");
   }

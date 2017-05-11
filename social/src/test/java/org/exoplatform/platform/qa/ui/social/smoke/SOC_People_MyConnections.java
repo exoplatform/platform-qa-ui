@@ -1,14 +1,20 @@
 package org.exoplatform.platform.qa.ui.social.smoke;
 
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -20,7 +26,16 @@ public class SOC_People_MyConnections extends Base{
 	ManageLogInOut manageLogInOut;
 	HomePagePlatform homePagePlatform;
 	ConnectionsManagement connectionsManagement;
+	@BeforeEach
+	public void setupBeforeMethod() {
+		info("Start setUpBeforeMethod");
+		navigationToolbar=new NavigationToolbar(this);
+		homePagePlatform =new HomePagePlatform(this);
+		addUsers=new AddUsers(this);
+		manageLogInOut=new ManageLogInOut(this);
+		connectionsManagement=new ConnectionsManagement(this);
 
+	}
 
 	/**
 	 *<li> Case ID:122731.</li>
@@ -31,6 +46,7 @@ public class SOC_People_MyConnections extends Base{
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
+	@Tag("smoke")
 	public  void test01_06_AcceptTheInvitation() {
 		/*Create data test*/
 		String username1 = "usernamea" + getRandomString();
@@ -72,8 +88,7 @@ public class SOC_People_MyConnections extends Base{
 		info("Click on Connect button to invite about 2 users");
 		connectionsManagement.connectToAUser(username2);
 		connectionsManagement.goToConnectionTab(ConnectionsManagement.selectTabOption.PENDING);
-		waitForAndGetElement(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}",username2),2000,1);
-
+		$(byText("Cancel Request")).waitUntil(Condition.appears, Configuration.timeout);
 		info("Test 1: Accept the invitation");
 		/*Step number: 3
 		 *Step Name: Step 3: Ignore a request
@@ -91,6 +106,10 @@ public class SOC_People_MyConnections extends Base{
 		homePagePlatform.goToConnections();
 		connectionsManagement.goToConnectionTab(ConnectionsManagement.selectTabOption.RECEIVE);
 		connectionsManagement.acceptAConnection(username1);
+		manageLogInOut.signIn("root", "gtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+		addUsers.deleteUser(username2);
 	}
 
 	/**
@@ -100,6 +119,7 @@ public class SOC_People_MyConnections extends Base{
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
+	@Tag("smoke")
 	public  void test02_CancelAInvitationRequest() {
 		info("Test 2: Cancel a invitation request");
 		/*Create data test*/
@@ -139,8 +159,7 @@ public class SOC_People_MyConnections extends Base{
 		info("Click on Connect button to invite about 2 users");
 		connectionsManagement.connectToAUser(username2);
 		connectionsManagement.goToConnectionTab(ConnectionsManagement.selectTabOption.PENDING);
-		waitForAndGetElement(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}",username2),2000,1);
-
+		$(byText("Cancel Request")).waitUntil(Condition.appears, Configuration.timeout);
 		/*Step number: 3
 		 *Step Name: Step 3: Cancel Request
 		 *Step Description: 
@@ -150,6 +169,10 @@ public class SOC_People_MyConnections extends Base{
 		 *Expected Outcome: 
 			- The request is cancelled, [Cancel Request] button is changed to [Connect] button*/
 		connectionsManagement.cancelConnection(username2);
+		manageLogInOut.signIn("root", "gtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+		addUsers.deleteUser(username2);
 	}
 
 
