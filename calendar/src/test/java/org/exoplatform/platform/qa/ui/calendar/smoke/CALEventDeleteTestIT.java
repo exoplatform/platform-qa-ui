@@ -25,7 +25,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 @Tag("calendar")
 @Tag("smoke")
 
-public class CAL_Event_DeleteTestIT extends Base{
+public class CALEventDeleteTestIT extends Base{
 
     HomePagePlatform homePagePlatform;
     CalendarManagement calendarManagement;

@@ -22,7 +22,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("calendar")
 @Tag("smoke")
-public class CAL_Event_EditTestIT extends Base{
+public class CALEventEditTestIT extends Base{
 
 
     HomePagePlatform homePagePlatform;

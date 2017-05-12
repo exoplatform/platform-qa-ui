@@ -20,7 +20,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("calendar")
 @Tag("smoke")
-public class Calendar_EventTestIT extends Base {
+public class CalendarEventTestIT extends Base {
 	HomePagePlatform homePagePlatform;
 	ManageLogInOut manageLogInOut;
 	CalendarHomePage calendarHomePage;

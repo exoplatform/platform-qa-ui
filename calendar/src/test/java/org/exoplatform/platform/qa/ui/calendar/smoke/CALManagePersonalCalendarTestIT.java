@@ -20,7 +20,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("calendar")
 @Tag("smoke")
-public class CAL_Manage_Personal_CalendarTestIT extends Base{
+public class CALManagePersonalCalendarTestIT extends Base{
 
     HomePagePlatform homePagePlatform;
     CalendarManagement calendarManagement;
