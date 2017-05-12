@@ -1,11 +1,17 @@
 package org.exoplatform.platform.qa.ui.social.smoke;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
@@ -19,7 +25,15 @@ public class SOC_Space_Management extends Base {
 	HomePagePlatform homePagePlatform;
 	SpaceManagement spaceManagement;
 
-
+	@BeforeEach
+	public void setupBeforeMethod() {
+		info("Start setUpBeforeMethod");
+		navigationToolbar=new NavigationToolbar(this);
+		homePagePlatform =new HomePagePlatform(this);
+		addUsers=new AddUsers(this);
+		manageLogInOut=new ManageLogInOut(this);
+		spaceManagement=new SpaceManagement(this);
+	}
 	/**
 	 *<li> Case ID:121897.</li>
 	 *<li> Test Case Name: Create a new Space.</li>
@@ -27,6 +41,7 @@ public class SOC_Space_Management extends Base {
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
+	@Tag("smoke")
 	public  void test04_CreateNewSpace() {
 		info("Test 04: Create a new Space");
 		String space = "space"+getRandomNumber();
@@ -62,13 +77,19 @@ public class SOC_Space_Management extends Base {
 		manageLogInOut.signIn(username2,password);
 		homePagePlatform.goToAllSpace();
 		spaceManagement.searchSpace(space,"");
-		waitForAndGetElement(ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_TO_JOIN_BTN.replace("${space}", space),2000,1);
-
+		$(byText(space)).waitUntil(Condition.appears, Configuration.timeout);
 		manageLogInOut.signIn(username1, password);
 		homePagePlatform.goToMySpaces();
 		spaceManagement.searchSpace(space,"");
-		waitForAndGetElement(ELEMENT_SPACE_TITLE.replace("${space}",space),2000,1);
-
+		$(byClassName("tab-content")).find(byText(space)).waitUntil(Condition.appears, Configuration.timeout);
+		manageLogInOut.signIn(username1, password);
+		homePagePlatform.goToMySpaces();
+		spaceManagement.searchSpace(space,"");
+		spaceManagement.deleteSpace(space,false);
+		manageLogInOut.signIn("root","gtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+		addUsers.deleteUser(username2);
 	}
 
 
@@ -79,6 +100,7 @@ public class SOC_Space_Management extends Base {
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
+	@Tag("smoke")
 	public  void test06_DeleteASpace() {
 		info("Test 06:Delete a space");
 		String space = "space"+getRandomNumber();
@@ -119,7 +141,11 @@ public class SOC_Space_Management extends Base {
 		manageLogInOut.signIn(username2,password);
 		homePagePlatform.goToAllSpace();
 		spaceManagement.searchSpace(space,"");
-		waitForElementNotPresent(ELEMENT_SPACE_TITLE.replace("${space}",space),2000,1);
+		$(byText(space)).shouldNot(Condition.exist);
+		manageLogInOut.signIn("root","gtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+		addUsers.deleteUser(username2);
 
 	}
 

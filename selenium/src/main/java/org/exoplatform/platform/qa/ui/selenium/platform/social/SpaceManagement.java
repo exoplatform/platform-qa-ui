@@ -59,7 +59,10 @@ public class SpaceManagement {
         alert.verifyAlertMessage(ELEMENT_SPACE_CONFIRM_DELETE);
       $(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON).click();
       $(byText(spaceName)).waitUntil(Condition.disappears,Configuration.timeout);    }
-  }
+        evt.click(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON);
+        $(byText(spaceName)).waitUntil(Condition.disappears,Configuration.timeout);
+    }
+
 
   /**
    * Leave a space
@@ -224,19 +227,12 @@ public class SpaceManagement {
    */
   public void searchSpace(String name, String number) {
     info("Waiting my space is shown");
-    evt.waitForAndGetElement(ELEMENT_MY_SPACE_SEARCH_TEXT_BOX, 3000, 0);
+    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.appears,Configuration.timeout);
     info("Input the space into search text box");
-    evt.type(ELEMENT_MY_SPACE_SEARCH_TEXT_BOX, name, true);
+    ELEMENT_MY_SPACE_SEARCH_TEXT.setValue(name);
     info("evt.click on Search button");
-    evt.click(ELEMENT_MY_SPACE_SEARCH_BTN);
-    if (!name.isEmpty()) {
-      info("Verify that the space is shown in the search result");
-      evt.waitForAndGetElement(ELEMENT_MY_SPACE_SEARCH_RESULT.replace("${name}", name), 3000, 0);
-    }
-    if (!number.isEmpty()) {
-      info("Verify that the number of search result is shown correctly");
-      evt.waitForAndGetElement(ELEMENT_MY_SPACE_SEARCH_RESULT_NUMBER.replace("${number}", number), 3000, 0);
-    }
+    $(ELEMENT_MY_SPACE_SEARCH_BTN).click();
+
   }
 
   /**
