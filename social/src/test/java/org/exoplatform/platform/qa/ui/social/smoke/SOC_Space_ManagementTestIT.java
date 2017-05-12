@@ -19,7 +19,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("smoke")
 @Tag("social")
-public class SOC_Space_Management extends Base {
+public class SOC_Space_ManagementTestIT extends Base {
 	NavigationToolbar navigationToolbar;
 	AddUsers addUsers;
 	ManageLogInOut manageLogInOut;

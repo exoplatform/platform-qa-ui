@@ -166,7 +166,6 @@ $(byText("Connect")).click();
     // With user confirmed the invitation, user becomes friend and user's name
     // is displayed on user's network list
     searchPeople(username, null, null, null);
-
     if (accept)
     $(byText("Remove Connection")).should(Condition.exist);
     else
@@ -214,7 +213,7 @@ $(byText("Connect")).click();
   public void searchPeople(String peopleName, String position, String skills, String directory) {
     info("-- Searching people ... --");
     if (peopleName != "" && peopleName != null) {
-     // $(byClassName("selectize-input")).click();
+
       ELEMENT_NAME_OF_PEOPLE.setValue(peopleName);
     } else {
       evt.type(ELEMENT_NAME_OF_PEOPLE, "", true);

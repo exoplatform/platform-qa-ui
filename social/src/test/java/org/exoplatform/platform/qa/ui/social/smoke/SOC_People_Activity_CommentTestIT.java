@@ -21,7 +21,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLoca
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 @Tag("smoke")
 @Tag("social")
-public class SOC_People_Activity_Comment extends Base{
+public class SOC_People_Activity_CommentTestIT extends Base{
 	NavigationToolbar navigationToolbar;
 	AddUsers addUsers;
 	ManageLogInOut manageLogInOut;

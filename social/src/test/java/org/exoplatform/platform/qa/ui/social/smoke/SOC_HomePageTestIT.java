@@ -30,7 +30,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("smoke")
 @Tag("social")
-public class SOC_HomePage extends Base {
+public class SOC_HomePageTestIT extends Base {
 	NavigationToolbar navigationToolbar;
 
 	HomePagePlatform homePagePlatform;
