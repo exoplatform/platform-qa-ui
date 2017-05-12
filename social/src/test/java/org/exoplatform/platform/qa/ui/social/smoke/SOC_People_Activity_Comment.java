@@ -19,7 +19,8 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
+@Tag("smoke")
+@Tag("social")
 public class SOC_People_Activity_Comment extends Base{
 	NavigationToolbar navigationToolbar;
 	AddUsers addUsers;
@@ -46,7 +47,6 @@ public class SOC_People_Activity_Comment extends Base{
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
-	@Tag("smoke")
 	public  void test01_CommentOnYourActivity() {
 		info("Test 1: Comment on your activity");
 		/*Step Number: 1
@@ -120,7 +120,6 @@ public class SOC_People_Activity_Comment extends Base{
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
-	@Tag("smoke")
 	public  void test02_CommentOnYourFriendsActivity() {
 		/*Create data test*/
 		String username1 = "usernamea" + getRandomString();
@@ -234,7 +233,6 @@ public class SOC_People_Activity_Comment extends Base{
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
-	@Tag("smoke")
 	public  void test03_DeleteComment() {
 		info("Test 3: Delete comment");
 		/*Step Number: 1

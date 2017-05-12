@@ -28,7 +28,8 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLoca
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-
+@Tag("smoke")
+@Tag("social")
 public class SOC_HomePage extends Base {
 	NavigationToolbar navigationToolbar;
 
@@ -54,8 +55,6 @@ public class SOC_HomePage extends Base {
 	 */
 
 	@Test
-	@Smoke
-	@Tag("smoke")
 	public  void test01_LikeActivity() {
 		info("Test 1: Like Activity");
 
@@ -118,8 +117,6 @@ public class SOC_HomePage extends Base {
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
-	@Smoke
-	@Tag("smoke")
 	public  void test02_15_AddDeleteComment() {
 		info("Test 2: Add comment");
 
@@ -184,7 +181,6 @@ public class SOC_HomePage extends Base {
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
-	@Tag("smoke")
 	public  void test03_DeleteYourActivity() {
 		info("Test 3: Delete your activity");
 		//Actions actions = new Actions(driver);

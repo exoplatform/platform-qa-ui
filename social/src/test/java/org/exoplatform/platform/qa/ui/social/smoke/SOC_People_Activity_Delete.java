@@ -18,7 +18,8 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
+@Tag("smoke")
+@Tag("social")
 public class SOC_People_Activity_Delete extends Base{
 	NavigationToolbar navigationToolbar;
 	AddUsers addUsers;
@@ -40,7 +41,6 @@ public class SOC_People_Activity_Delete extends Base{
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
-	@Tag("smoke")
 	public  void test01_DeleteYourActivityByUser() {
 		info("Test 1: Delete your activity");
 		/*Step Number: 1

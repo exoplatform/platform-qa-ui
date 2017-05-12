@@ -22,6 +22,8 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLoca
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+@Tag("smoke")
+@Tag("social")
 public class SOC_People_Activity_Add extends Base{
 	NavigationToolbar navigationToolbar;
 	AddUsers addUsers;
@@ -50,8 +52,6 @@ public class SOC_People_Activity_Add extends Base{
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
-	@Smoke
-	@Tag("smoke")
 	public  void test03_AddNewYourActivity() {
 		/*Create data test*/
 		String username1 = "usernamea" + getRandomString();

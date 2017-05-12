@@ -17,7 +17,8 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-
+@Tag("smoke")
+@Tag("social")
 public class SOC_Space_Management extends Base {
 	NavigationToolbar navigationToolbar;
 	AddUsers addUsers;
@@ -41,7 +42,6 @@ public class SOC_Space_Management extends Base {
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
-	@Tag("smoke")
 	public  void test04_CreateNewSpace() {
 		info("Test 04: Create a new Space");
 		String space = "space"+getRandomNumber();
@@ -100,7 +100,6 @@ public class SOC_Space_Management extends Base {
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
-	@Tag("smoke")
 	public  void test06_DeleteASpace() {
 		info("Test 06:Delete a space");
 		String space = "space"+getRandomNumber();

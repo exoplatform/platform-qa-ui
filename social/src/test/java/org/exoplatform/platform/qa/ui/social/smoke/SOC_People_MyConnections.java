@@ -19,7 +19,8 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-
+@Tag("smoke")
+@Tag("social")
 public class SOC_People_MyConnections extends Base{
 	NavigationToolbar navigationToolbar;
 	AddUsers addUsers;
@@ -46,7 +47,6 @@ public class SOC_People_MyConnections extends Base{
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
-	@Tag("smoke")
 	public  void test01_06_AcceptTheInvitation() {
 		/*Create data test*/
 		String username1 = "usernamea" + getRandomString();
@@ -119,7 +119,6 @@ public class SOC_People_MyConnections extends Base{
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
-	@Tag("smoke")
 	public  void test02_CancelAInvitationRequest() {
 		info("Test 2: Cancel a invitation request");
 		/*Create data test*/
