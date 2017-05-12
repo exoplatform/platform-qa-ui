@@ -1,7 +1,21 @@
 package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
+import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_USER_CLOSE_BUTTON;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -9,19 +23,6 @@ import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$$;
-import static com.codeborne.selenide.Selenide.refresh;
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_USER_CLOSE_BUTTON;
-import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class CalendarManagement {
 
@@ -29,13 +30,13 @@ public class CalendarManagement {
 
   public PlatformPermission    pPer;
 
-  public EventManagement evMg;
+  public EventManagement       evMg;
 
   public ManageAlert           alert;
 
   public Button                button;
 
-  public CalendarHomePage cHome;
+  public CalendarHomePage      cHome;
 
   private ElementEventTestBase evt;
 
@@ -70,7 +71,7 @@ public class CalendarManagement {
       Utils.pause(2000);
       $(ELEMENT_CALENDAR_MENU_ACTIONS_ADD).waitUntil(Condition.appears, Configuration.timeout);
       $(ELEMENT_CALENDAR_MENU_ACTIONS_ADD).click();
-      $(ELEMENT_CALENDAR_ADD_FORM).waitUntil(Condition.appears,Configuration.timeout);
+      $(ELEMENT_CALENDAR_ADD_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case REMOTECAL:
       info("Go to remote calendar");
@@ -80,7 +81,7 @@ public class CalendarManagement {
     case ADDCATEGORY:
       info("Go to add category calendar");
       $(ELEMENT_CALENDAR_MENU_ACTIONS_ADD_EVENT_CATEGORY).click();
-      $(ELEMENT_ADD_EVENT_CATEGORY_FORM).waitUntil(Condition.appears,Configuration.timeout);
+      $(ELEMENT_ADD_EVENT_CATEGORY_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case CALSETTING:
       info("Go to calendar setting");
@@ -169,7 +170,7 @@ public class CalendarManagement {
       $(ELEMENT_CALENDAR_DESC_INPUT).setValue(description);
     if (color != null && color != "") {
       $(ELEMENT_CALENDAR_COLOR).click();
-      $(byId("UICalendarPopupWindow")).find(byClassName(color)).waitUntil(Condition.appears,Configuration.timeout);
+      $(byId("UICalendarPopupWindow")).find(byClassName(color)).waitUntil(Condition.appears, Configuration.timeout);
       $(byId("UICalendarPopupWindow")).find(byClassName(color)).click();
 
     }
@@ -227,7 +228,8 @@ public class CalendarManagement {
         break;
       case 1:
         $(ELEMENT_CALENDAR_GROUP_SELECT_USER_BTN).click();
-        //evt.click(ELEMENT_CALENDAR_GROUP_USER_IN_SELECT_FORM.replace("$user", user[i]));
+        // evt.click(ELEMENT_CALENDAR_GROUP_USER_IN_SELECT_FORM.replace("$user",
+        // user[i]));
         $(byText(user[i])).click();
         break;
       case 2:
@@ -308,7 +310,7 @@ public class CalendarManagement {
     $(ELEMENT_ADD_EVENT_CATEGORY_INPUT).setValue(categoryName);
     evt.click(ELEMENT_ADD_EVENT_CATEGORY_BUTTON_ADD);
     info("----Verify if event category is added in Category List or not----");
-    $(byText(categoryName)).waitUntil(Condition.appears,Configuration.timeout);
+    $(byText(categoryName)).waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE.click();
   }
 
@@ -320,11 +322,11 @@ public class CalendarManagement {
   public void deleteEventCategory(String categoryName) {
     info("Delete category");
     goToMenuFromMainCalendar(menuOfMainCalendar.ADDCATEGORY);
-    $(byText(categoryName)).waitUntil(Condition.appears,Configuration.timeout);
+    $(byText(categoryName)).waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_LIST_DELETE_EVENT_BUTTON.click();
     alert.acceptAlert();
     button.yes();
-    $(byText(categoryName)).waitUntil(Condition.disappears,Configuration.timeout);
+    $(byText(categoryName)).waitUntil(Condition.disappears, Configuration.timeout);
     ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE.click();
   }
 
@@ -351,12 +353,12 @@ public class CalendarManagement {
    */
   public void openMenuOfCalendar(String calendar) {
     info("Open menu of a calendar");
-if (ELEMENT_CALENDAR_ITEM_PERSONAL_CALENDAR.has(Condition.text(calendar)))
-      {ELEMENT_CONTAINER_CALENDAR.find(byText(calendar)).hover();
-        ELEMENT_CALENDAR_ICON_SETTINGS_OF_PERSONAL_CALENDAR.click();}
-    else {
-  ELEMENT_CONTAINER_CALENDAR.find(byText(calendar)).hover();
-  ELEMENT_CALENDAR_ICON_SETTINGS_OF_GROUP_CALENDAR.click();
+    if (ELEMENT_CALENDAR_ITEM_PERSONAL_CALENDAR.has(Condition.text(calendar))) {
+      ELEMENT_CONTAINER_CALENDAR.find(byText(calendar)).hover();
+      ELEMENT_CALENDAR_ICON_SETTINGS_OF_PERSONAL_CALENDAR.click();
+    } else {
+      ELEMENT_CONTAINER_CALENDAR.find(byText(calendar)).hover();
+      ELEMENT_CALENDAR_ICON_SETTINGS_OF_GROUP_CALENDAR.click();
     }
   }
 
@@ -373,20 +375,20 @@ if (ELEMENT_CALENDAR_ITEM_PERSONAL_CALENDAR.has(Condition.text(calendar)))
     switch (action) {
     case ADDTASK:
       $(ELEMENT_CALENDAR_ADD_TASK_MENU).click();
-      $(ELEMENT_CALENDAR_QUICK_ADD_TASK_FORM).waitUntil(Condition.appears,Configuration.timeout);
+      $(ELEMENT_CALENDAR_QUICK_ADD_TASK_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case ADDEVENT:
       $(ELEMENT_CALENDAR_ADD_EVENT_MENU).click();
-      $(ELEMENT_CALENDAR_QUICK_ADD_EVENT_FORM).waitUntil(Condition.appears,Configuration.timeout);
+      $(ELEMENT_CALENDAR_QUICK_ADD_EVENT_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case EDIT:
       evt.clickByJavascript(ELEMENT_CALENDAR_EDIT_MENU, 2);
       evt.waitForAndGetElement(ELEMENT_CALENDAR_ADD_FORM);
       break;
     case REMOVE:
-     // evt.clickByJavascript(ELEMENT_CALENDAR_REMOVE_MENU, 2);
+      // evt.clickByJavascript(ELEMENT_CALENDAR_REMOVE_MENU, 2);
       $(ELEMENT_CALENDAR_REMOVE_MENU).click();
-      $(ELEMENT_CALENDAR_REMOVE_FORM).waitUntil(Condition.appears,Configuration.timeout);
+      $(ELEMENT_CALENDAR_REMOVE_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case SHARE:
       evt.clickByJavascript(ELEMENT_CALENDAR_SHARE_MENU, 2);
@@ -505,7 +507,8 @@ if (ELEMENT_CALENDAR_ITEM_PERSONAL_CALENDAR.has(Condition.text(calendar)))
   public void uploadCalendar(String path) {
     info("--Upload Calendar--");
     WebElement element = evt.waitForAndGetElement(ELEMENT_CALENDAR_IMPORT_SELECT_FILE, testBase.getDefaultTimeout(), 1, 2);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';", element);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';",
+                                                                                   element);
     element.sendKeys(testBase.getAbsoluteFilePath(path));
     String[] links = path.split("/");
     evt.waitForAndGetElement(".//*[contains(@class,'selectFileFrame')]//*[contains(text(),'" + links[links.length - 1] + "')]");
@@ -895,12 +898,14 @@ if (ELEMENT_CALENDAR_ITEM_PERSONAL_CALENDAR.has(Condition.text(calendar)))
 
     } else {
       info("Double click on the event");
-     // scrollElementIntoView(this.testBase.getExoWebDriver().getWebDriver()
-       //                                  .findElement(By.xpath(ELEMENT_EVENT_TASK_TITLE.replace("${name}", name))));
-     // action.moveToElement(evt.waitForAndGetElement(ELEMENT_EVENT_TASK_TITLE.replace("${name}", name))).doubleClick().perform();
-    $(byClassName("spliterResizableListArea")).find(byText(name)).doubleClick();
+      // scrollElementIntoView(this.testBase.getExoWebDriver().getWebDriver()
+      // .findElement(By.xpath(ELEMENT_EVENT_TASK_TITLE.replace("${name}",
+      // name))));
+      // action.moveToElement(evt.waitForAndGetElement(ELEMENT_EVENT_TASK_TITLE.replace("${name}",
+      // name))).doubleClick().perform();
+      $(byClassName("spliterResizableListArea")).find(byText(name)).doubleClick();
     }
-    $(ELEMENT_ADD_EDIT_EVENT_POPUP).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_ADD_EDIT_EVENT_POPUP).waitUntil(Condition.appears, Configuration.timeout);
     info("The edit form is shown");
   }
 
@@ -926,11 +931,13 @@ if (ELEMENT_CALENDAR_ITEM_PERSONAL_CALENDAR.has(Condition.text(calendar)))
   public void deleteTaskEvent(String name) {
     info("Right click on an Event/Task");
     // scrollElementIntoView(this.driver.findElement(By.xpath(ELEMENT_EVENT_TASK_TITLE.replace("${name}",name))));
-    //evt.rightClickOnElement(By.xpath(ELEMENT_EVENT_TASK_TITLE.replace("${name}", name)));
+    // evt.rightClickOnElement(By.xpath(ELEMENT_EVENT_TASK_TITLE.replace("${name}",
+    // name)));
     $(byText(name)).contextClick();
     selectOptionByRightclickOnEvent(contextMenuEditEvenOption.DELETE);
     $(ELEMENT_YES_BUTTON).click();
-    //evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_TITLE.replace("${name}", name));
+    // evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_TITLE.replace("${name}",
+    // name));
     $(byText(name)).shouldNot(Condition.exist);
   }
 
@@ -1009,7 +1016,8 @@ if (ELEMENT_CALENDAR_ITEM_PERSONAL_CALENDAR.has(Condition.text(calendar)))
    */
   public void scrollElementIntoView(WebElement element) {
     info("Scroll to the element to view");
-    ((JavascriptExecutor) this.testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
+    ((JavascriptExecutor) this.testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].scrollIntoView(true);",
+                                                                                        element);
   }
 
   /**

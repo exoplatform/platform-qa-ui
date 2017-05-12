@@ -1,23 +1,25 @@
 package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selectors.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class CalendarHomePage {
 
@@ -57,7 +59,7 @@ public class CalendarHomePage {
       break;
     case LIST:
       ELEMENT_CALENDAR_LIST_BUTTON.click();
-           break;
+      break;
     case MONTH:
       evt.waitForAndGetElement(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"), testBase.getDefaultTimeout(), 1);
       evt.clickByJavascript(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"));
@@ -119,7 +121,8 @@ public class CalendarHomePage {
       case DETAILTIME:
         evt.scrollBarToGetElement(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$name", name)
                                                                                            .replace("$date", date)));
-//        evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date", date));
+        // evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$name",
+        // name).replace("$date", date));
         $(byText(name)).contextClick();
         break;
       case ALLDAY:
@@ -312,7 +315,7 @@ public class CalendarHomePage {
       break;
     }
     $(ELEMENT_CONTEXT_MENU_EDIT).click();
-   $(ELEMENT_ADD_EDIT_TASK_POPUP).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_ADD_EDIT_TASK_POPUP).waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**
@@ -411,8 +414,9 @@ public class CalendarHomePage {
     case DAY:
       switch (optionDay) {
       case DETAILTIME:
-        //evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
-        $(byText(name)).waitUntil(Condition.appears,Configuration.timeout);
+        // evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name",
+        // name));
+        $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
         break;
       case ALLDAY:
         evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY.replace("$name", name));
@@ -446,7 +450,7 @@ public class CalendarHomePage {
         evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
         evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
       } else {
-       $(byText(name)).waitUntil(Condition.appears,Configuration.timeout);
+        $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
       }
       break;
     case MONTH:
@@ -468,7 +472,7 @@ public class CalendarHomePage {
     default:
       switch (optionDay) {
       case DETAILTIME:
-        $(byText(name)).waitUntil(Condition.appears,Configuration.timeout);
+        $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
         break;
       case ALLDAY:
         evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name));
@@ -963,7 +967,7 @@ public class CalendarHomePage {
     info("Delete event/tak: " + name);
     Button button = new Button(this.testBase);
     goToRightMenuTaskEventFromAnyView(name, view, optionDay, date);
-   $(ELEMENT_CONTEXT_MENU_DELETE).click();
+    $(ELEMENT_CONTEXT_MENU_DELETE).click();
     if (isVerify) {
       if (isEvent)
         alert.verifyAlertMessage(ELEMENT_CONFIRM_DELETE_EVENT_MSG);
@@ -973,7 +977,7 @@ public class CalendarHomePage {
       Utils.pause(1000);
       verifyIsNotPresentEventTask(name, view, optionDay);
     } else
-     button.yes();
+      button.yes();
   }
 
   /**

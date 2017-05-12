@@ -1,32 +1,34 @@
 package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
-import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
-import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.openqa.selenium.By;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import static com.codeborne.selenide.Selenide.$;
 import static org.bouncycastle.crypto.tls.ConnectionEnd.server;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_USER_CLOSE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.openqa.selenium.By;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+
+import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.Utils;
+import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
+import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+
 public class EventManagement {
   private final TestBase       testBase;
 
   public PlatformPermission    pPer;
 
-  public CalendarHomePage cHome;
+  public CalendarHomePage      cHome;
 
   public ManageAlert           alert;
 
@@ -711,9 +713,9 @@ public class EventManagement {
    */
   public void saveQuickAddEvent() {
     info("Save quick add event");
-    $(ELEMENT_BUTTON_EVENT_SAVE).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_BUTTON_EVENT_SAVE).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_BUTTON_EVENT_SAVE).click();
-    $(ELEMENT_BUTTON_EVENT_SAVE).waitUntil(Condition.disappears,Configuration.timeout);
+    $(ELEMENT_BUTTON_EVENT_SAVE).waitUntil(Condition.disappears, Configuration.timeout);
   }
 
   /**
@@ -721,7 +723,7 @@ public class EventManagement {
    */
   public void saveAddEventDetails() {
     info("Sae add event details");
-    $(ELEMENT_BUTTON_EVENT_SAVE_DETAILS).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_BUTTON_EVENT_SAVE_DETAILS).waitUntil(Condition.appears, Configuration.timeout);
     // click(ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
     // waitForElementNotPresent(ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
     $(ELEMENT_BUTTON_EVENT_SAVE_DETAILS).click();
