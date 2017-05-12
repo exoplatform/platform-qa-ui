@@ -71,7 +71,7 @@ public class PLFNavigationSpaceNavigationTestIT extends Base {
 
     info("Delete the space");
     homePagePlatform.goToMySpaces();
-    // spaceManagement.deleteSpace(space1, false);
+    spaceManagement.deleteSpace(space1, false);
 
   }
 

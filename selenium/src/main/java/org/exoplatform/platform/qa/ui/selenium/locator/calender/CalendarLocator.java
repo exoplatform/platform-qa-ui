@@ -20,7 +20,14 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.locator.calender;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byId;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
 
 public class CalendarLocator {
 
@@ -374,14 +381,12 @@ public class CalendarLocator {
   public static final By     ELEMENT_ADD_EVENT_CATEGORY_BUTTON_ADD                            =
                                                                    By.id("btnEventCategoryFormContainer");
 
-  public static final String ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE                          =
-                                                                     "//*[@id='UIEventCategoryForm']//button[contains(text(),'Close')]";
+  public static final SelenideElement ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE                          =$(byId("UICalendarPopupWindow")).find(byText("Close"));
+
 
   public static final String ELEMENT_LIST_EVENT_CATEGORY                                      =
                                                          "//*[@id='UIEventCategoryList']//span[contains(text(),'${categoryName}')]";
 
-  public static final String ELEMENT_LIST_DELETE_EVENT_BUTTON                                 =
-                                                              "//*[@id='UIEventCategoryList']//span[contains(text(),'${categoryName}')]/parent::td/parent::tr//a[@data-original-title='Delete']/i[@class='uiIconDelete uiIconLightGray']";
 
   public static final String ELEMENT_LIST_EDIT_EVENT_BUTTON                                   =
                                                             ".//*[@id='UIEventCategoryList']//span[contains(text(),'${categoryName}')]/parent::td/parent::tr//a[@data-original-title='Edit']/i[@class='uiIconEdit uiIconLightGray']";
@@ -1613,4 +1618,15 @@ public class CalendarLocator {
   public static final String ELEMENT_GMAIL_CONTENT_REMINDER_EVENT                             =
                                                                   "//span[contains(text(),'Event Summary: $event')]";
 
+  public static final SelenideElement ELEMENT_LIST_DELETE_EVENT_BUTTON                                 =$(byId("UIEventCategoryList")).findAll(byClassName("uiIconDelete")).get(6);
+
+public static final SelenideElement ELEMENT_CALENDAR_LIST_BUTTON= $(byId("UIActionBar")).find(byText("List")).waitUntil(Condition.appears,10000);
+  public static final SelenideElement ELEMENT_CALENDAR_WEEK_BUTTON= $(byId("UIActionBar")).find(byText("Week")).waitUntil(Condition.appears,10000);
+public static final SelenideElement ELEMENT_CALENDAR_DAY_BUTTON= $(byId("UIActionBar")).find(byText("Day")).waitUntil(Condition.appears,10000);
+public static final SelenideElement ELEMENT_CALENDAR_ITEM_PERSONAL_CALENDAR =$(byClassName("contentContainer")).findAll(byClassName("calendarItem")).get(1);
+public static final SelenideElement ELEMENT_CONTAINER_CALENDAR= $(byClassName("contentContainer"));
+public static final SelenideElement ELEMENT_CALENDAR_ICON_SETTINGS_OF_PERSONAL_CALENDAR= $(byClassName("contentContainer")).findAll(byClassName("uiIconCalSettingMini")).get(1);
+public static final SelenideElement ELEMENT_CALENDAR_ICON_SETTINGS_OF_GROUP_CALENDAR=$(byClassName("contentContainer")).findAll(byClassName("uiIconCalSettingMini")).get(2);
+
 }
+

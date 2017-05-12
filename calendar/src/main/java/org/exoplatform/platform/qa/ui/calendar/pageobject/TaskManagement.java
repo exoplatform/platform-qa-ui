@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.calendar;
+package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
 import static org.bouncycastle.crypto.tls.ConnectionEnd.server;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_USER_CLOSE_BUTTON;

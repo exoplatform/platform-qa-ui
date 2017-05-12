@@ -105,6 +105,7 @@ public  void test01_EditPage() {
    wikiManagement.saveAddPage();
     wikiValidattions.verifyTitleWikiPage(newTitle);
     arrayPage.add(newTitle);
+    wikiHomePage.deleteWiki(newTitle);
 
  }
 

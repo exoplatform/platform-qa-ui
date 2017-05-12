@@ -102,6 +102,8 @@ public class Wiki_BasicAction_Add_RichTextTestIT extends Base {
     info("Page is shown successfully");
     wikiHomePage.goToAPage(title2);
     wikiValidattions.verifyInsertedExistLink(label, title1);
+    wikiHomePage.deleteWiki(title1);
+    wikiHomePage.deleteWiki(title2);
 
   }
 

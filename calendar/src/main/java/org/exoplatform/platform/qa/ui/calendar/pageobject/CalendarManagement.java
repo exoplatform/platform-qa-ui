@@ -1,5 +1,8 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.calendar;
+package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_USER_CLOSE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -9,6 +12,9 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
@@ -63,9 +69,9 @@ public class CalendarManagement {
     case ADDCAL:
       info("Go to add calendar");
       Utils.pause(2000);
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_MENU_ACTIONS_ADD, testBase.getDefaultTimeout(), 1);
-      evt.click(ELEMENT_CALENDAR_MENU_ACTIONS_ADD, 0, true);
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_ADD_FORM, testBase.getDefaultTimeout(), 1);
+      $(ELEMENT_CALENDAR_MENU_ACTIONS_ADD).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_CALENDAR_MENU_ACTIONS_ADD).click();
+      $(ELEMENT_CALENDAR_ADD_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case REMOTECAL:
       info("Go to remote calendar");
@@ -74,8 +80,8 @@ public class CalendarManagement {
       break;
     case ADDCATEGORY:
       info("Go to add category calendar");
-      evt.click(ELEMENT_CALENDAR_MENU_ACTIONS_ADD_EVENT_CATEGORY, 0, true);
-      evt.waitForAndGetElement(ELEMENT_ADD_EVENT_CATEGORY_FORM);
+      $(ELEMENT_CALENDAR_MENU_ACTIONS_ADD_EVENT_CATEGORY).click();
+      $(ELEMENT_ADD_EVENT_CATEGORY_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case CALSETTING:
       info("Go to calendar setting");
@@ -116,15 +122,15 @@ public class CalendarManagement {
    *          is deleted, = false: not verify that calendar is deleted,
    */
   public void deleteCalendar(String name, boolean... verify) {
-    if (evt.waitForAndGetElement(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar", name), 2000, 0) != null) {
+    if ($(byId("UICalendars")).find(byText(name)).is(Condition.exist)) {
       boolean isVerify = (verify.length > 0 ? verify[0] : false);
       info("Remove calendar");
-      testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+      refresh();
       executeActionCalendar(name, menuOfCalendarOption.REMOVE);
       if (isVerify)
         alert.verifyAlertMessage(ELEMENT_CONFIRM_REMOVE_CALENDAR_MSG);
       else
-        evt.click(ELEMENT_YES_BUTTON);
+        $(ELEMENT_YES_BUTTON).click();
       evt.waitForElementNotPresent(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar", name));
     }
 
@@ -157,14 +163,16 @@ public class CalendarManagement {
    */
   public void inputDataInDetailTabCalendarForm(String name, String description, String color) {
     info("Input into tab Detail of Add calendar form");
-    evt.click(ELEMENT_CALENDAR_DETAIL_TAB);
+    $(ELEMENT_CALENDAR_DETAIL_TAB).click();
     if (name != null && name != "")
-      evt.type(ELEMENT_CALENDAR_DISPLAY_NAME_INPUT, name, true);
+      $(ELEMENT_CALENDAR_DISPLAY_NAME_INPUT).setValue(name);
     if (description != null && description != "")
-      evt.type(ELEMENT_CALENDAR_DESC_INPUT, description, true);
+      $(ELEMENT_CALENDAR_DESC_INPUT).setValue(description);
     if (color != null && color != "") {
-      evt.click(ELEMENT_CALENDAR_COLOR);
-      evt.click(ELEMENT_CALENDAR_COLOR_SELECT.replace("${color}", color));
+      $(ELEMENT_CALENDAR_COLOR).click();
+      $(byId("UICalendarPopupWindow")).find(byClassName(color)).waitUntil(Condition.appears, Configuration.timeout);
+      $(byId("UICalendarPopupWindow")).find(byClassName(color)).click();
+
     }
   }
 
@@ -179,16 +187,16 @@ public class CalendarManagement {
    */
   public void selectGroupInGroupTabCalendarForm(String group, boolean isType) {
     info("Input into tab Show in Group of Add calendar form");
-    evt.click(ELEMENT_CALENDAR_GROUP_TAB);
+    $(ELEMENT_CALENDAR_GROUP_TAB).click();
     if (group != null && group != "") {
       if (isType) {
-        evt.type(ELEMENT_CALENDAR_GROUP_INPUT, group, true);
+        $(ELEMENT_CALENDAR_GROUP_INPUT).setValue(group);
       } else {
         evt.click(ELEMENT_CALENDAR_SELECT_GROUP_ICON);
         evt.click(group);
       }
     }
-    evt.click(ELEMENT_CALENDAR_ADD_GROUP_BUTTON);
+    $(ELEMENT_CALENDAR_ADD_GROUP_BUTTON).click();
   }
 
   /**
@@ -219,8 +227,10 @@ public class CalendarManagement {
         evt.type(ELEMENT_CALENDAR_GROUP_INPUT_USER, user[i], true);
         break;
       case 1:
-        evt.click(ELEMENT_CALENDAR_GROUP_SELECT_USER_BTN);
-        evt.click(ELEMENT_CALENDAR_GROUP_USER_IN_SELECT_FORM.replace("$user", user[i]));
+        $(ELEMENT_CALENDAR_GROUP_SELECT_USER_BTN).click();
+        // evt.click(ELEMENT_CALENDAR_GROUP_USER_IN_SELECT_FORM.replace("$user",
+        // user[i]));
+        $(byText(user[i])).click();
         break;
       case 2:
         String[] groupMem = user[i].split(":");
@@ -276,7 +286,7 @@ public class CalendarManagement {
    */
   public void saveAddCalendar() {
     info("Save add calendar");
-    evt.click(ELEMENT_CALENDAR_ADD_SAVE_BUTTON);
+    $(ELEMENT_CALENDAR_ADD_SAVE_BUTTON).click();
     Utils.pause(2000);
   }
 
@@ -297,11 +307,11 @@ public class CalendarManagement {
   public void addEventCategory(String categoryName) {
     info("----Add new event category----");
     goToMenuFromMainCalendar(menuOfMainCalendar.ADDCATEGORY);
-    evt.type(ELEMENT_ADD_EVENT_CATEGORY_INPUT, categoryName, true);
+    $(ELEMENT_ADD_EVENT_CATEGORY_INPUT).setValue(categoryName);
     evt.click(ELEMENT_ADD_EVENT_CATEGORY_BUTTON_ADD);
     info("----Verify if event category is added in Category List or not----");
-    evt.waitForAndGetElement(ELEMENT_LIST_EVENT_CATEGORY.replace("${categoryName}", categoryName));
-    evt.click(ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE);
+    $(byText(categoryName)).waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE.click();
   }
 
   /**
@@ -312,12 +322,12 @@ public class CalendarManagement {
   public void deleteEventCategory(String categoryName) {
     info("Delete category");
     goToMenuFromMainCalendar(menuOfMainCalendar.ADDCATEGORY);
-    evt.waitForAndGetElement(ELEMENT_LIST_DELETE_EVENT_BUTTON.replace("${categoryName}", categoryName));
-    evt.click(ELEMENT_LIST_DELETE_EVENT_BUTTON.replace("${categoryName}", categoryName));
+    $(byText(categoryName)).waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_LIST_DELETE_EVENT_BUTTON.click();
     alert.acceptAlert();
     button.yes();
-    evt.waitForElementNotPresent(ELEMENT_LIST_DELETE_EVENT_BUTTON.replace("${categoryName}", categoryName));
-    evt.click(ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE);
+    $(byText(categoryName)).waitUntil(Condition.disappears, Configuration.timeout);
+    ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE.click();
   }
 
   /**
@@ -343,11 +353,13 @@ public class CalendarManagement {
    */
   public void openMenuOfCalendar(String calendar) {
     info("Open menu of a calendar");
-    Utils.pause(2000);
-    evt.mouseHoverByJavaScript(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar", calendar), 2);
-    evt.clickByJavascript(ELEMENT_CALENDAR_SETTING_ICON.replace("$calendar", calendar), 2);
-    evt.waitForAndGetElement(ELEMENT_CALENDAR_RIGHT_MENU);
-    Utils.pause(1000);
+    if (ELEMENT_CALENDAR_ITEM_PERSONAL_CALENDAR.has(Condition.text(calendar))) {
+      ELEMENT_CONTAINER_CALENDAR.find(byText(calendar)).hover();
+      ELEMENT_CALENDAR_ICON_SETTINGS_OF_PERSONAL_CALENDAR.click();
+    } else {
+      ELEMENT_CONTAINER_CALENDAR.find(byText(calendar)).hover();
+      ELEMENT_CALENDAR_ICON_SETTINGS_OF_GROUP_CALENDAR.click();
+    }
   }
 
   /**
@@ -362,20 +374,21 @@ public class CalendarManagement {
     openMenuOfCalendar(calendar);
     switch (action) {
     case ADDTASK:
-      evt.clickByJavascript(ELEMENT_CALENDAR_ADD_TASK_MENU, 2);
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_QUICK_ADD_TASK_FORM);
+      $(ELEMENT_CALENDAR_ADD_TASK_MENU).click();
+      $(ELEMENT_CALENDAR_QUICK_ADD_TASK_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case ADDEVENT:
-      evt.clickByJavascript(ELEMENT_CALENDAR_ADD_EVENT_MENU, 2);
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_QUICK_ADD_EVENT_FORM);
+      $(ELEMENT_CALENDAR_ADD_EVENT_MENU).click();
+      $(ELEMENT_CALENDAR_QUICK_ADD_EVENT_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case EDIT:
       evt.clickByJavascript(ELEMENT_CALENDAR_EDIT_MENU, 2);
       evt.waitForAndGetElement(ELEMENT_CALENDAR_ADD_FORM);
       break;
     case REMOVE:
-      evt.clickByJavascript(ELEMENT_CALENDAR_REMOVE_MENU, 2);
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_REMOVE_FORM);
+      // evt.clickByJavascript(ELEMENT_CALENDAR_REMOVE_MENU, 2);
+      $(ELEMENT_CALENDAR_REMOVE_MENU).click();
+      $(ELEMENT_CALENDAR_REMOVE_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case SHARE:
       evt.clickByJavascript(ELEMENT_CALENDAR_SHARE_MENU, 2);
@@ -494,7 +507,8 @@ public class CalendarManagement {
   public void uploadCalendar(String path) {
     info("--Upload Calendar--");
     WebElement element = evt.waitForAndGetElement(ELEMENT_CALENDAR_IMPORT_SELECT_FILE, testBase.getDefaultTimeout(), 1, 2);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';", element);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';",
+                                                                                   element);
     element.sendKeys(testBase.getAbsoluteFilePath(path));
     String[] links = path.split("/");
     evt.waitForAndGetElement(".//*[contains(@class,'selectFileFrame')]//*[contains(text(),'" + links[links.length - 1] + "')]");
@@ -812,7 +826,7 @@ public class CalendarManagement {
       break;
     case DELETE:
       info("Select Delete option");
-      evt.click(ELEMENT_CONTEXT_MENU_DELETE);
+      $(ELEMENT_CONTEXT_MENU_DELETE).click();
       // click(ELEMENT_CONFIRM_POPUP_OK);
       break;
     case DELETE_RECURRING:
@@ -884,11 +898,14 @@ public class CalendarManagement {
 
     } else {
       info("Double click on the event");
-      scrollElementIntoView(this.testBase.getExoWebDriver().getWebDriver()
-                                         .findElement(By.xpath(ELEMENT_EVENT_TASK_TITLE.replace("${name}", name))));
-      action.moveToElement(evt.waitForAndGetElement(ELEMENT_EVENT_TASK_TITLE.replace("${name}", name))).doubleClick().perform();
+      // scrollElementIntoView(this.testBase.getExoWebDriver().getWebDriver()
+      // .findElement(By.xpath(ELEMENT_EVENT_TASK_TITLE.replace("${name}",
+      // name))));
+      // action.moveToElement(evt.waitForAndGetElement(ELEMENT_EVENT_TASK_TITLE.replace("${name}",
+      // name))).doubleClick().perform();
+      $(byClassName("spliterResizableListArea")).find(byText(name)).doubleClick();
     }
-    evt.waitForAndGetElement(ELEMENT_ADD_EDIT_EVENT_POPUP, 4000, 0);
+    $(ELEMENT_ADD_EDIT_EVENT_POPUP).waitUntil(Condition.appears, Configuration.timeout);
     info("The edit form is shown");
   }
 
@@ -914,10 +931,14 @@ public class CalendarManagement {
   public void deleteTaskEvent(String name) {
     info("Right click on an Event/Task");
     // scrollElementIntoView(this.driver.findElement(By.xpath(ELEMENT_EVENT_TASK_TITLE.replace("${name}",name))));
-    evt.rightClickOnElement(By.xpath(ELEMENT_EVENT_TASK_TITLE.replace("${name}", name)));
+    // evt.rightClickOnElement(By.xpath(ELEMENT_EVENT_TASK_TITLE.replace("${name}",
+    // name)));
+    $(byText(name)).contextClick();
     selectOptionByRightclickOnEvent(contextMenuEditEvenOption.DELETE);
-    evt.click(ELEMENT_YES_BUTTON);
-    evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_TITLE.replace("${name}", name));
+    $(ELEMENT_YES_BUTTON).click();
+    // evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_TITLE.replace("${name}",
+    // name));
+    $(byText(name)).shouldNot(Condition.exist);
   }
 
   /**
@@ -995,7 +1016,8 @@ public class CalendarManagement {
    */
   public void scrollElementIntoView(WebElement element) {
     info("Scroll to the element to view");
-    ((JavascriptExecutor) this.testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
+    ((JavascriptExecutor) this.testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].scrollIntoView(true);",
+                                                                                        element);
   }
 
   /**
