@@ -10,11 +10,11 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.core.context.Smoke;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.PortalGroupNavigation;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
+
 @Tag("gatein")
 @Tag("smoke")
 public class GateinGroupNavigationManageNavigationTestIT extends Base {

@@ -1,14 +1,15 @@
 package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+
 import org.exoplatform.platform.qa.ui.selenium.*;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import static com.codeborne.selenide.Selectors.*;
 
 /**
  * Path: Administration-->Portal-->Pages
@@ -57,8 +58,9 @@ public class PortalManagePages {
     }
    $(ELEMENT_MANAGEPAGES_TITLE_FIELD).waitUntil(Condition.appears,10000);
    $(ELEMENT_MANAGEPAGES_TITLE_FIELD).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_MANAGEPAGES_TITLE_FIELD).waitUntil(Condition.appears, Configuration.timeout);
     info("Input a new title");
-   $(ELEMENT_MANAGEPAGES_TITLE_FIELD).scrollTo().setValue(title);
+    $(ELEMENT_MANAGEPAGES_TITLE_FIELD).scrollTo().setValue(title);
     info("Select a type");
     $(ELEMENT_MANAGEPAGES_TYPE_DROPBOX).selectOption("group");
     info("Click on Search button");
@@ -89,6 +91,7 @@ public class PortalManagePages {
 
     //evt.click(ELEMENT_MANGEPAGES_INFORM_POPUP_CLOSE, 2);
     $(ELEMENT_MANGEPAGES_INFORM_POPUP_CLOSE).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_MANGEPAGES_INFORM_POPUP_CLOSE).waitUntil(Condition.appears, Configuration.timeout);
 
     $(ELEMENT_MANGEPAGES_INFORM_POPUP_CLOSE).click();
     $(byText(titlePage)).shouldNot(Condition.exist);
@@ -123,8 +126,7 @@ public class PortalManagePages {
     $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_TITLE).setValue(title);
     $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_TYPE_DROPBOX).selectOption("group");
     $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGES_POPUP_SAVE_BTN).click();
-    }
-
+  }
 
   /**
    * Open page

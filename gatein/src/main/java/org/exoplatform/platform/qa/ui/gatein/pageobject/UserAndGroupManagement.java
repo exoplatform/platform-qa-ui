@@ -20,9 +20,8 @@
  */
 package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_NEXT_PAGE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -30,9 +29,10 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 
 import java.util.ArrayList;
 
+import org.openqa.selenium.By;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import org.openqa.selenium.By;
 
 import org.exoplatform.platform.qa.ui.selenium.Dialog;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
@@ -134,7 +134,7 @@ public class UserAndGroupManagement {
    */
   public void addGroup(String groupName, String groupLabel, String groupDesc, boolean verify) {
     info("--Add a new group--");
-   $(byClassName("uiIconPlus")).click();
+    $(byClassName("uiIconPlus")).click();
 
     inputDataGroup(groupName, groupLabel, groupDesc);
     $(byText("Save")).click();
@@ -205,18 +205,20 @@ public class UserAndGroupManagement {
    */
   public void inputDataGroup(String groupName, String groupLabel, String groupDesc) {
 
-    $(ELEMENT_INPUT_GROUP_NAME).waitUntil(Condition.appears,10000);
+    $(ELEMENT_INPUT_GROUP_NAME).waitUntil(Condition.appears, 10000);
     $(ELEMENT_INPUT_GROUP_NAME).setValue(groupName);
     $(ELEMENT_INPUT_LABEL).setValue(groupLabel);
     $(ELEMENT_TEXTAREA_DESCRIPTION).setValue(groupDesc);
   }
+
   public void inputDataGroupForEdit(String groupLabel, String groupDesc) {
 
-    $(ELEMENT_INPUT_GROUP_NAME).waitUntil(Condition.appears,10000);
+    $(ELEMENT_INPUT_GROUP_NAME).waitUntil(Condition.appears, 10000);
 
     $(ELEMENT_INPUT_LABEL).setValue(groupLabel);
     $(ELEMENT_TEXTAREA_DESCRIPTION).setValue(groupDesc);
   }
+
   /**
    * function: Edit group
    *
@@ -310,8 +312,9 @@ public class UserAndGroupManagement {
     $(ELEMENT_GROUP_SEARCH_USER_OPTION).selectOption(searchOption);
     $(ELEMENT_GROUP_SEARCH_USER_SEARCH_ICON).click();
     if (verify) {
-      //evt.waitForAndGetElement(ELEMENT_SEARCH_GROUP_USER_IN_TABLE.replace("${username}", user));
-$(byText(user)).should(Condition.exist);
+      // evt.waitForAndGetElement(ELEMENT_SEARCH_GROUP_USER_IN_TABLE.replace("${username}",
+      // user));
+      $(byText(user)).should(Condition.exist);
     }
   }
 
@@ -328,7 +331,7 @@ $(byText(user)).should(Condition.exist);
     $(byClassName("uiIconTrash")).click();
     alert.acceptAlert();
     if (verify) {
-$(byText(groupName)).shouldNot(Condition.exist);
+      $(byText(groupName)).shouldNot(Condition.exist);
     }
   }
 
@@ -478,8 +481,8 @@ $(byText(groupName)).shouldNot(Condition.exist);
     $(ELEMENT_EMAIL).setValue(email);
 
     $(byText("Save")).click();
-    $(byText("Save")).waitUntil(Condition.disappears,Configuration.timeout);
-    $(byText("The user profile has been updated.")).waitUntil(Condition.appears,Configuration.timeout);
+    $(byText("Save")).waitUntil(Condition.disappears, Configuration.timeout);
+    $(byText("The user profile has been updated.")).waitUntil(Condition.appears, Configuration.timeout);
     $(byText("OK")).click();
   }
 
@@ -679,13 +682,12 @@ $(byText(groupName)).shouldNot(Condition.exist);
 
     $(byTitle("Quick Search")).click();
 
-      $(byClassName("uiIconDeleteUser")).click();
-      alert.acceptAlert();
-      $(ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);
+    $(byClassName("uiIconDeleteUser")).click();
+    alert.acceptAlert();
+    $(ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);
     $(byTitle("Quick Search")).click();
-    $(byText("No result found.")).waitUntil(Condition.appears,Configuration.timeout);
-      dialog.closeMessageDialog();
-
+    $(byText("No result found.")).waitUntil(Condition.appears, Configuration.timeout);
+    dialog.closeMessageDialog();
 
   }
 

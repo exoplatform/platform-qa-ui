@@ -1,20 +1,17 @@
 package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
-
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.SelenideElement;
+
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.openqa.selenium.interactions.Actions;
 
 /**
  * Path: Navigation Management popup
@@ -88,7 +85,7 @@ public class NavigationManagement {
       break;
     case EDIT_NODE_PAGE:
       info("Click on Edit node page");
-    $(byText("Edit Node's Page")).click();
+      $(byText("Edit Node's Page")).click();
       Utils.pause(2000);
       break;
     case EDIT_THIS_NODE:
@@ -167,7 +164,6 @@ public class NavigationManagement {
     $(byClassName("uiNavigationManagement")).find(byText(title)).scrollTo().contextClick();
     info("Select Delete link");
     selectItem(specifiContextMenu.DELETE_NODE);
-
 
     info("Click on Save button");
     $(ELEMENT_NAVIGATION_MANAGEMENT_SAVE).click();

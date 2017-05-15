@@ -1,7 +1,9 @@
 package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byTitle;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -14,6 +16,10 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.SelenideElement;
 
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
@@ -395,7 +401,7 @@ public class PageCreationWizard {
   public void saveChangesPageEditor() {
     info("Save change Page Editor");
     $(ELEMENT_PAGEEDITOR_FINISHBTN).waitUntil(Condition.appears, Configuration.timeout);
-   $(ELEMENT_PAGEEDITOR_FINISHBTN).click();
+    $(ELEMENT_PAGEEDITOR_FINISHBTN).click();
   }
 
   /**
@@ -484,7 +490,7 @@ public class PageCreationWizard {
     info("Click on Switch view mode button");
     $(ELEMENT_VIEW_PROPERTIES).click();
 
-    $(ELEMENT_VIEW_PROPERTIES_POPUP).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_VIEW_PROPERTIES_POPUP).waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**
@@ -523,7 +529,7 @@ public class PageCreationWizard {
 
       $(ELEMENT_VIEW_PROPERTIES_PERMISSION_TAB).click();
       if (isAccessPermision == true) {
-        //evt.click(ELEMENT_VIEW_PROPERTIES_ADD_PERMISSION_BTN);
+        // evt.click(ELEMENT_VIEW_PROPERTIES_ADD_PERMISSION_BTN);
         $(ELEMENT_VIEW_PROPERTIES_ADD_PERMISSION_BTN).click();
         info("Select a group");
         selectGroup(groupsPath);
@@ -547,7 +553,6 @@ public class PageCreationWizard {
     }
     saveChangeProperties();
 
-
   }
 
   /**
@@ -565,10 +570,11 @@ public class PageCreationWizard {
    */
   public void selectGroup(String groupsPath) {
     info("Select a group with the path:" + groupsPath);
-   String[] groups = groupsPath.split("/");
+    String[] groups = groupsPath.split("/");
     for (String groupSelect : groups) {
       info("Select group:" + groupSelect);
-      //evt.click(ELEMENT_ADD_PERMISSION_SELECTOR_POPUP_GROUP.replace("${group}", groupSelect), 0, true);
+      // evt.click(ELEMENT_ADD_PERMISSION_SELECTOR_POPUP_GROUP.replace("${group}",
+      // groupSelect), 0, true);
       $(byTitle(groupSelect)).click();
     }
     Utils.pause(2000);
@@ -597,7 +603,8 @@ public class PageCreationWizard {
    */
   public void selectMemberShip(String memberShip) {
     info("Select a membership:" + memberShip);
-//    evt.click(ELEMENT_ADD_PERMISSION_SELECTOR_POPUP_MEMEBRSHIP.replace("${member}", memberShip), 0, true);
+    // evt.click(ELEMENT_ADD_PERMISSION_SELECTOR_POPUP_MEMEBRSHIP.replace("${member}",
+    // memberShip), 0, true);
     $(byText(memberShip)).click();
     Utils.pause(2000);
   }
