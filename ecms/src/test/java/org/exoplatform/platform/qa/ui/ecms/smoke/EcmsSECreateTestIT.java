@@ -19,7 +19,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.administration.Adm
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 @Tag("ecms")
 @Tag("smoke")
-public class Ecms_SE_CreateTestIT extends Base{
+public class EcmsSECreateTestIT extends Base{
 	ContentAdministration contentAdministration;
 	NavigationToolbar navigationToolbar;
 	SiteExplorerHome siteExplorerHome;

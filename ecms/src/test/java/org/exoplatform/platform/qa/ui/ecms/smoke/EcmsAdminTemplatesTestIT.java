@@ -22,7 +22,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;/**
 */
 @Tag("ecms")
 @Tag("smoke")
-public class Ecms_AdminTemplatesTestIT extends Base{
+public class EcmsAdminTemplatesTestIT extends Base{
     ContentAdministration contentAdministration;
     NavigationToolbar navigationToolbar;
     TestBase testBase;

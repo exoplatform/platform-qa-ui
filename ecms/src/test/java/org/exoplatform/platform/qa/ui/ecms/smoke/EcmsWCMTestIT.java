@@ -33,7 +33,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("ecms")
 @Tag("smoke")
-public class Ecms_WCMTestIT extends Base {
+public class EcmsWCMTestIT extends Base {
 
 
 	NavigationToolbar navigationToolbar;
