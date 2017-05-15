@@ -23,7 +23,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 */
 @Tag("gatein")
 @Tag("smoke")
-public class Gatein_Portal_Navigation_Edit_NavigationTestIT extends Base{
+public class GateinPortalNavigationEditNavigationTestIT extends Base{
     NavigationToolbar navigationToolbar;
     PortalManageSites portalmanagesites;
     NavigationManagement navigationmanagement;

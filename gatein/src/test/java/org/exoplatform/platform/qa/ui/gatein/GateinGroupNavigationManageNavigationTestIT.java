@@ -17,7 +17,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 @Tag("gatein")
 @Tag("smoke")
-public class Gatein_Group_Navigation_Manage_NavigationTestIT extends Base {
+public class GateinGroupNavigationManageNavigationTestIT extends Base {
 
   HomePagePlatform       homePagePlatform;
 
