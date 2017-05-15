@@ -1,7 +1,10 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.gatein;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -25,20 +28,16 @@ public class ContentList {
    * @param content
    */
   public void selectFolderContent(String path, String content) {
-    evt.waitForAndGetElement(ELEMENT_CONTENT_LIST_ADDPATH_BTN);
-    evt.click(ELEMENT_CONTENT_LIST_ADDPATH_BTN);
-    Utils.pause(2000);
+
     String[] arrayPath = path.split("/");
-    for (String arrayElement : arrayPath) {
-      evt.click(ELEMENT_MULTIPLE_CONTENT_POPUP_NODE_FOLDER.replace("${node}", arrayElement));
+    if ($(byText(arrayPath[1])).waitUntil(Condition.appears,10000).is(Condition.appears) )
+      $(byId("UIContentBrowsePanelOne")).findAll(byClassName("OddItem")).get(1).find(byClassName("Item")).click();
+    else {
+      for (String arrayElement : arrayPath) {
+        $(byText(arrayElement)).click();
+      }
     }
 
-    if (content != "" || content != null) {
-      evt.waitForAndGetElement(ELEMENT_MULTIPLE_CONTENT_POPUP_FILE.replace("${content}", content));
-      // click(ELEMENT_MULTIPLE_CONTENT_POPUP_FILE.replace("${content}",content));
-      evt.clickByJavascript(ELEMENT_MULTIPLE_CONTENT_POPUP_FILE.replace("${content}", content), 2);
-    }
-    Utils.pause(2000);
   }
 
 }

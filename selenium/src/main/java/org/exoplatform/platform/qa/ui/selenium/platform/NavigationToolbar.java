@@ -20,10 +20,15 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_PAGE_CREATION_WIZARD;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
@@ -61,13 +66,10 @@ public class NavigationToolbar {
    */
   public void goToAddPage() {
     info("Go to add page form");
-    Utils.pause(3000);
-    evt.waitForAndGetElement(ELEMENT_LINK_EDIT);
-    evt.click(ELEMENT_LINK_EDIT);
-    evt.mouseOver(ELEMENT_MENU_PAGE_LINK, true);
-    evt.click(ELEMENT_MENU_ADD_PAGE_LINK, 2, true);
-    Utils.pause(3000);
-    evt.waitForAndGetElement(GateinLocator.ELEMENT_PAGE_CREATION_WIZARD, 3000, 0);
+    $(ELEMENT_LINK_EDIT).click();
+    $(ELEMENT_MENU_PAGE_LINK).hover();
+    $(ELEMENT_MENU_ADD_PAGE_LINK).click();
+    $(ELEMENT_PAGE_CREATION_WIZARD).waitUntil(Condition.appears,Configuration.timeout);
   }
 
   /**
@@ -105,23 +107,11 @@ public class NavigationToolbar {
    */
   public void goToPotalPages() {
     info("-- Go to Page Management page --");
-    Utils.pause(2000);
-    for (int repeat = 0;; repeat++) {
-      if (repeat > 1) {
-        evt.mouseOverAndClick(ELEMENT_LINK_SETUP);
-        break;
-      }
-      // evt.mouseOver(ELEMENT_LINK_SETUP, true);
-      evt.clickByJavascript(ELEMENT_LINK_SETUP, 2);
-      if (evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL, 5000, 0) != null) {
-        info("Element " + ELEMENT_ADMINISTRATION_PORTAL + "... is displayed");
-        break;
-      }
-      info("Retry...[" + repeat + "]");
-    }
-    evt.mouseOverAndClick(ELEMENT_ADMINISTRATION_PORTAL);
-    Utils.pause(2000);
+
     info("Page Managements is shown successfully");
+    $(ELEMENT_LINK_SETUP).click();
+    $(ELEMENT_ADMINISTRATION_PORTAL).click();
+
   }
 
   /**
@@ -218,28 +208,14 @@ public class NavigationToolbar {
    */
   public void goToSiteExplorer() {
     info("-- Go to site explorer home page --");
-    Utils.pause(500);
-    for (int repeat = 0;; repeat++) {
-      if (repeat > 1) {
-        evt.mouseOverAndClick(ELEMENT_LINK_SETUP);
-        break;
-      }
+
       if (testBase.getExoWebDriver().isIEDriver()) {
-        evt.waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION, testBase.getDefaultTimeout(), 1, 2);
-        evt.clickByJavascript(ELEMENT_TOOLBAR_ADMINISTRATION, 2);
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,Configuration.timeout);
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
       } else
-        evt.click(ELEMENT_LINK_SETUP, 2);
-      if (evt.waitForAndGetElement(ELEMENT_MENU_CONTENT_LINK, 5000, 0) != null) {
+       $(ELEMENT_LINK_SETUP).click();
         info("Element " + ELEMENT_MENU_CONTENT_LINK + "... is displayed");
-        evt.mouseOver(ELEMENT_MENU_CONTENT_LINK, true);
-        if (evt.waitForAndGetElement(ELEMENT_MENU_SITE_EXPLORER, 5000, 0) != null) {
-          evt.click(ELEMENT_MENU_SITE_EXPLORER);
-          break;
-        }
-      }
-      info("Retry...[" + repeat + "]");
-    }
-    Utils.pause(2000);
+        $(ELEMENT_MENU_CONTENT_LINK).click();
     info("Site Explorer is shown successfully");
   }
 
@@ -263,10 +239,9 @@ public class NavigationToolbar {
    */
   public void goToEditContent() {
     info("Go to Edit content");
-    evt.waitForAndGetElement(ELEMENT_LINK_EDIT);
-    evt.click(ELEMENT_LINK_EDIT);
-    if (evt.waitForAndGetElement(ELEMENT_EDIT_CONTENT, 5000, 0) != null)
-      evt.click(ELEMENT_EDIT_CONTENT);
+    $(ELEMENT_LINK_EDIT).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_LINK_EDIT).click();
+    $(ELEMENT_EDIT_CONTENT).click();
   }
 
   /**
@@ -299,26 +274,12 @@ public class NavigationToolbar {
     info("Base url is " + testBase.getExoWebDriver().getBaseUrl());
     String url = testBase.getExoWebDriver().getBaseUrl() + "/g/:platform:web-contributors/wcmAdmin";
     info("base url of content admin is " + url);
-    for (int repeat = 0;; repeat++) {
-      if (repeat > 1) {
-        testBase.getExoWebDriver().getWebDriver().get(url);
-        break;
-      }
-      if (testBase.getExoWebDriver().isIEDriver()) {
-        evt.waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION, testBase.getDefaultTimeout(), 1, 2);
-        evt.clickByJavascript(ELEMENT_TOOLBAR_ADMINISTRATION, 2);
-      } else
-        evt.click(ELEMENT_LINK_SETUP, 2);
-      if (evt.waitForAndGetElement(ELEMENT_MENU_CONTENT_LINK, 5000, 0) != null) {
-        evt.mouseOver(ELEMENT_MENU_CONTENT_LINK, true);
-        if (evt.waitForAndGetElement(ELEMENT_LINK_CONTENT_ADMIN, 5000, 0) != null) {
-          evt.click(ELEMENT_LINK_CONTENT_ADMIN);
-          break;
-        }
-      }
-      info("Retry...[" + repeat + "]");
-    }
-    Utils.pause(1000);
+
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    $(byText("Content")).hover();
+    $(ELEMENT_LINK_CONTENT_ADMIN).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_LINK_CONTENT_ADMIN).click();
   }
 
   /**

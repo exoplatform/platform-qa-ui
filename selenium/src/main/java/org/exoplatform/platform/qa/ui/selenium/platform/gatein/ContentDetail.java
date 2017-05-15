@@ -1,5 +1,8 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.gatein;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -26,17 +29,17 @@ public class ContentDetail {
    */
   public void selectFolderContent(String path, String content) {
     evt.waitForAndGetElement(ELEMENT_CONTENT_DETAIL_ADDPATH_BTN);
-    evt.click(ELEMENT_CONTENT_DETAIL_ADDPATH_BTN);
-    Utils.pause(2000);
+    $(byClassName("uiIconAddPath")).click();
     String[] arrayPath = path.split("/");
     for (String arrayElement : arrayPath) {
-      evt.click(ELEMENT_SELECT_CONTENT_POPUP_NODE_FOLDER.replace("${node}", arrayElement));
+      $(byText("Name")).click();
+      $(byText(arrayElement)).click();
+
     }
     if (content != "" || content != null) {
-      evt.waitForAndGetElement(ELEMENT_SELECT_CONTENT_POPUP_FILE.replace("${content}", content));
-      evt.click(ELEMENT_SELECT_CONTENT_POPUP_FILE.replace("${content}", content));
+
+     $(byClassName("Item")).click();
     }
-    Utils.pause(2000);
   }
 
 }

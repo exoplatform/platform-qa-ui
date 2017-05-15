@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.gatein;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -48,7 +49,7 @@ public class PortalManagePages {
     }
     if (!type.isEmpty()) {
       info("Select a type");
-      evt.select(ELEMENT_MANAGEPAGES_TYPE_DROPBOX, type, 2);
+      $(ELEMENT_MANAGEPAGES_TYPE_DROPBOX).selectOption(type);
     }
     info("Click on Search button");
     evt.click(ELEMENT_MANAGEPAGES_SEARCH_BUTTON);
@@ -73,16 +74,11 @@ public class PortalManagePages {
   public void deletePage(String titlePage, String type) {
     info("Delete a page");
     searchPage(titlePage, "", type);
-    evt.click(ELEMENT_MAGEPAGES_CONTENT_ACTION_COLUMN_DELETE);
+    $(ELEMENT_MAGEPAGES_CONTENT_ACTION_COLUMN_DELETE).click();
     alert.acceptAlert();
-    /*
-     * waitForAndGetElement(ELEMENT_MANGEPAGES_INFORM_POPUP_OK, 4000, 0);
-     * click(ELEMENT_MANGEPAGES_INFORM_POPUP_OK, 2);
-     */
+
     evt.waitForAndGetElement(ELEMENT_MANGEPAGES_INFORM_POPUP_CLOSE, 4000, 0);
-    evt.click(ELEMENT_MANGEPAGES_INFORM_POPUP_CLOSE, 2);
-    evt.waitForElementNotPresent(ELEMENT_MANAGEPAGES_CONTENT_TITLE_COLUMN.replace("${tilte}", titlePage));
-    Utils.pause(2000);
+    $(ELEMENT_MANGEPAGES_INFORM_POPUP_CLOSE).click();
   }
 
   /**

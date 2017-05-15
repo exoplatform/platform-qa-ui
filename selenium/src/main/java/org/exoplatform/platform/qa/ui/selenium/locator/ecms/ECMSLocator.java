@@ -20,7 +20,11 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.locator.ecms;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 
 public class ECMSLocator {
 
@@ -85,8 +89,7 @@ public class ECMSLocator {
 
   // public static final By ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE =
   // By.xpath("//*[@class='btn' and text()='Save & Close']");
-  public static final By     ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE                                 =
-                                                                  By.xpath("//*[@class='btn' and contains(@onclick,'SaveAndClose')]");
+  public static final SelenideElement ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE                                 = $(byId("UIDocumentForm")).find(byText("Save & Close"));
 
   public static final By     ELEMENT_FILEFORM_LANGUAGE                                            =
                                                        By.xpath("//*[@name='content-lang']");
@@ -1066,5 +1069,6 @@ public class ECMSLocator {
   public static final String SHARE_ACCESS_CAN_VIEW                                                = "Can View";
 
   public static final String SHARE_ACCESS_CAN_EDIT                                                = "Can Edit";
-
+public static final SelenideElement ElEMENT_PRESENTATION_CONTAINER= $(byClassName("UIPresentationContainer"));
+public static final SelenideElement ELEMENT_INCON_ADD_PATH=$(byClassName("uiIconAddPath"));
 }

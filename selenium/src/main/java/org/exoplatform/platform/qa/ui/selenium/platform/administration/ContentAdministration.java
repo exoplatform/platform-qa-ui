@@ -1,10 +1,15 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.administration;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.getElement;
 import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import org.exoplatform.platform.qa.ui.selenium.platform.ecms.ECMS_Permission;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -16,14 +21,13 @@ import org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator
 import org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
-import org.exoplatform.platform.qa.ui.selenium.platform.ecms.ECMS_Permission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class ContentAdministration {
 
   private final TestBase       testBase;
 
-  public ECMS_Permission       ecmsPerm;
+  public ECMS_Permission ecmsPerm;
 
   public PlatformPermission    plfPerm;
 
@@ -54,9 +58,10 @@ public class ContentAdministration {
     switch (main) {
     case EXPLORER:
       info("Select Explorer tab");
-      if (evt.waitForAndGetElement(ELEMENT_EXPLORER_CATEGORIES_ECM_FUNCTIONS, 5000, 0) != null)
-        evt.click(ELEMENT_EXPLORER_CATEGORIES_ECM_FUNCTIONS);
+
+      $(ELEMENT_EXPLORER_CATEGORIES_ECM_FUNCTIONS).click();
       break;
+
     case ADVANCED:
       info("Select Advanced tab");
       if (evt.waitForAndGetElement(ELEMENT_ADVANCED_CATEGORIES_ECM_FUNCTIONS, 5000, 0) != null)
@@ -65,7 +70,7 @@ public class ContentAdministration {
     case TEMPLATES:
       info("Select Templates tab");
       if (evt.waitForAndGetElement(ELEMENT_TEMPLATE_CATEGORIES_ECM_FUNCTIONS, 5000, 0) != null)
-        evt.click(ELEMENT_TEMPLATE_CATEGORIES_ECM_FUNCTIONS);
+        $(byText("Templates")).click();
       break;
     case REPOSITORY:
       info("Select Repository tab");
@@ -102,11 +107,11 @@ public class ContentAdministration {
       break;
     case DRIVES:
       info("Select Drives function");
-      evt.click(ELEMENT_ECMS_FUNCTIONS_DRIVES);
+      $(ELEMENT_ECMS_FUNCTIONS_DRIVES).click();
       break;
     case VIEW:
       info("Select Views function");
-      evt.click(ELEMENT_ECMS_FUNCTIONS_VIEWS);
+      $(ELEMENT_ECMS_FUNCTIONS_VIEWS).click();
       break;
     case TAGS:
       info("Select Tags function");
@@ -126,7 +131,13 @@ public class ContentAdministration {
       break;
     case DOCUMENTS:
       info("Select Documents function");
-      evt.click(ELEMENT_ECMS_FUNCTIONS_DOCUMENTS);
+      if ($(ELEMENT_ECMS_FUNCTIONS_DOCUMENTS).isDisplayed())
+      {      $(ELEMENT_ECMS_FUNCTIONS_DOCUMENTS).click();}
+      else
+      {$(byId("accordion")).find(byText("Templates")).click();
+        $(ELEMENT_ECMS_FUNCTIONS_DOCUMENTS).click();
+
+      }
       break;
     case LIST:
       info("Select List function");
@@ -149,24 +160,33 @@ public class ContentAdministration {
    * @param userNamePermission
    */
   public void addView(String name, String tabName, String[] tab, String... perm) {
-    evt.click(ELEMENT_ECM_EXPLORER_VIEWS_ADD_VIEWS);
+    /*evt.click(ELEMENT_ECM_EXPLORER_VIEWS_ADD_VIEWS);
     evt.type(ELEMENT_ECM_EXPLORER_NAME_VIEW_FORM, name, true);
     evt.click(ELEMENT_ECM_EXPLORER_GO_TO_ACTION_FORM);
     evt.click(ELEMENT_ECM_EXPLORER_ADD_ACTION_VIEW_FORM);
-    evt.type(ELEMENT_ECM_EXPLORE_TAB_NAME_VIEW_FORM, tabName, true);
+    evt.type(ELEMENT_ECM_EXPLORE_TAB_NAME_VIEW_FORM, tabName, true);*/
+    $(ELEMENT_ECM_EXPLORER_VIEWS_ADD_VIEWS).click();
+    $(ELEMENT_ECM_EXPLORER_NAME_VIEW_FORM).setValue(name);
+    $(ELEMENT_ECM_EXPLORER_GO_TO_ACTION_FORM).click();
+    $(ELEMENT_ECM_EXPLORER_ADD_ACTION_VIEW_FORM).click();
+    $(ELEMENT_ECM_EXPLORE_TAB_NAME_VIEW_FORM).setValue(tabName);
     for (String arrayElement : tab) {
-      evt.check(By.xpath(ELEMENT_ECM_EXPLORER_CHOOSE_TAB_CATEGORY_VIEW_FORM.replace("{$tab}", arrayElement)), 2);
+      //evt.check(By.xpath(ELEMENT_ECM_EXPLORER_CHOOSE_TAB_CATEGORY_VIEW_FORM.replace("{$tab}", arrayElement)), 2);
+      $(byText(arrayElement)).click();
     }
-    evt.click(ELEMENT_ECM_EXPLORE_SAVE_TAB_VIEW_FORM);
-    evt.click(ELEMENT_ECM_EXPLORER_GO_TO_PERMISSION_FORM);
+    $(ELEMENT_ECM_EXPLORE_SAVE_TAB_VIEW_FORM).click();
+    $(ELEMENT_ECM_EXPLORER_GO_TO_PERMISSION_FORM).click();
     if (perm.length < 2) {
-      evt.click(ELEMENT_ECM_EXPLORER_USER_PERMISSION_ADD);
-      evt.click(By.xpath(ELEMENT_ECM_EXPLORER_SELECT_USER_LIST_PERMISSION.replace("{$user}", perm[0])));
+      $(ELEMENT_ECM_EXPLORER_USER_PERMISSION_ADD).click();
+//      evt.click(By.xpath(ELEMENT_ECM_EXPLORER_SELECT_USER_LIST_PERMISSION.replace("{$user}", perm[0])));
+      $(byId("Quick Search")).setValue(perm[0]);
+      $(byClassName("btnSearchUser")).click();
+      $(byClassName("uiIconPlus")).click();
     } else {
       ecmsPerm.selectGroupMembershipOfTag(perm[0], perm[1]);
     }
-    evt.click(ELEMENT_ECM_EXPLORER_ADD_PERMISSION_FORM);
-    evt.click(ELEMENT_ECM_EXPLORER_SAVE_FORM_ADD_VIEW);
+    $(ELEMENT_ECM_EXPLORER_ADD_PERMISSION_FORM).click();
+    $(ELEMENT_ECM_EXPLORER_SAVE_FORM_ADD_VIEW).click();
   }
 
   /**
@@ -177,14 +197,17 @@ public class ContentAdministration {
    * @param newName
    */
   public void editViewPermissionUser(String viewName, String oldName, String newName) {
-    evt.click(By.xpath(ELEMENT_ECM_EXPLORER_VIEW_EDIT_LIST.replace("{$name}", viewName)));
-    evt.click(ELEMENT_ECM_EXPLORER_GO_TO_PERMISSION_FORM);
-    evt.click(ELEMENT_ECM_EXPLORER_USER_PERMISSION_ADD);
-    evt.click(By.xpath(ELEMENT_ECM_EXPLORER_SELECT_USER_LIST_PERMISSION.replace("{$user}", newName)));
-    evt.click(ELEMENT_ECM_EXPLORER_ADD_PERMISSION_FORM);
-    evt.click(By.xpath(ELEMENT_ECM_EXPLORER_DELETE_PERMISSION_USER.replace("{$name}", oldName)));
+$(byClassName("uiIconEditInfo")).click();
+    $(ELEMENT_ECM_EXPLORER_GO_TO_PERMISSION_FORM).click();
+    $(ELEMENT_ECM_EXPLORER_USER_PERMISSION_ADD).click();
+    $(byId("Quick Search")).setValue(newName);
+    $(byClassName("btnSearchUser")).click();
+    $(byClassName("uiIconPlus")).click();
+    $(ELEMENT_ECM_EXPLORER_ADD_PERMISSION_FORM).click();
+    $(byText("Demo")).hover();
+    $(byId("UIViewPermissionContainer")).find(byClassName("uiIconDelete")).click();
     alert.acceptAlert();
-    evt.click(ELEMENT_ECM_EXPLORER_SAVE_FORM_ADD_VIEW);
+    $(ELEMENT_ECM_EXPLORER_SAVE_FORM_ADD_VIEW).click();
   }
 
   /**
@@ -193,9 +216,10 @@ public class ContentAdministration {
    * @param viewName
    */
   public void deleteView(String viewName) {
-    evt.click(By.xpath(ELEMENT_ECM_EXPLORER_VIEW_DELETE_LIST.replace("{$name}", viewName)));
+    $(By.xpath(ELEMENT_ECM_EXPLORER_VIEW_DELETE_LIST.replace("{$name}", viewName))).click();
     alert.acceptAlert();
-    evt.waitForElementNotPresent(By.xpath(ELEMENT_ECM_EXPLORER_VIEW_EDIT_LIST.replace("{$name}", viewName)));
+    //evt.waitForElementNotPresent(By.xpath(ELEMENT_ECM_EXPLORER_VIEW_EDIT_LIST.replace("{$name}", viewName)));
+    $(byText(viewName)).shouldNot(Condition.exist);
   }
 
   /**
@@ -207,17 +231,17 @@ public class ContentAdministration {
    */
   public void addDrives(String name, String permission, specificView[] applyViews) {
     info("Click on Add button of the drive in the list");
-    evt.click(ELEMENT_ECM_EXPLORER_DRIVES_ADD_DRIVES);
+    $(ELEMENT_ECM_EXPLORER_DRIVES_ADD_DRIVES).scrollTo().click();
     info("Type a name for the drive");
-    evt.type(ELEMENT_ECM_EXPLORER_NAME_DRIVES_FORM, name, true);
+    $(ELEMENT_ECM_EXPLORER_NAME_DRIVES_FORM).setValue(name);
     info("Click on Add Permission button for the drive");
-    evt.click(ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON);
+    $(ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON).click();
     if (permission == "any") {
       info("Set 'any' permission for the drive");
-      evt.click(ELEMENT_ECM_COMMON_ANY_PERMISSION);
+      $(ELEMENT_ECM_COMMON_ANY_PERMISSION).click();
     }
     info("Click on Aplly Views tab");
-    evt.click(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_FORM);
+    $(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_FORM).click();
     for (specificView arrayElement : applyViews) {
       info("Select a view type for the drive");
       switch (arrayElement) {
@@ -264,8 +288,8 @@ public class ContentAdministration {
    *          other will be uncheck)
    */
   public void editDrives(String name, specificView[] applyViews, String... views) {
-    evt.click(By.xpath(ELEMENT_ECM_EXPLORER_DRIVES_EDIT_LIST.replace("{$name}", name)));
-    evt.click(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_FORM);
+    $(byClassName("actionIcon")).click();
+   $(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_FORM).click();
     evt.uncheck(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ADMIN, 2);
     evt.uncheck(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_CATEGORIES, 2);
     evt.uncheck(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ICONS, 2);
@@ -305,10 +329,13 @@ public class ContentAdministration {
    * @param name
    */
   public void deleteDrives(String name) {
-    evt.click(By.xpath(ELEMENT_ECM_EXPLORER_DRIVES_DELETE_LIST.replace("{$name}", name)));
+   // evt.click(By.xpath(ELEMENT_ECM_EXPLORER_DRIVES_DELETE_LIST.replace("{$name}", name)));
+    $(byTitle("Delete")).click();
     alert.acceptAlert();
-    evt.waitForElementNotPresent(By.xpath(ELEMENT_ECM_EXPLORER_DRIVES_DELETE_LIST.replace("{$name}", name)));
+    //evt.waitForElementNotPresent(By.xpath(ELEMENT_ECM_EXPLORER_DRIVES_DELETE_LIST.replace("{$name}", name)));
+    $(byText(name)).shouldNot(Condition.exist);
   }
+
 
   /**
    * Add a Tags
@@ -361,11 +388,11 @@ public class ContentAdministration {
   public void deleteCategories(String name) {
     info("Delete the category");
     info("Click on Delete button of the category");
-    evt.click(By.xpath(ELEMENT_ECM_ADVANCED_CATEGORIES_DELETE.replace("{$name}", name)));
+    $(byClassName("uiIconDelete")).click();
     info("Click on Ok button of the alert popup");
     alert.acceptAlert();
     info("Verify that the category is deleted");
-    evt.waitForElementNotPresent(By.xpath(ELEMENT_ECM_ADVANCED_CATEGORIES_DELETE.replace("{$name}", name)));
+    $(byText(name)).shouldNot(Condition.exist);
     info("The category is deleted succcessfully");
   }
 
@@ -786,17 +813,16 @@ public class ContentAdministration {
    * @param permission
    */
   public void addDocumentInTemplates(String label, String... permission) {
-    evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_ADD_DOCUMENT);
-    evt.type(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LABEL_FORM, label, true);
-    evt.click(ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON);
+    $(ELEMENT_ECM_TEMPLATES_DOCUMENTS_ADD_DOCUMENT).scrollTo().click();
+    $(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LABEL_FORM).setValue(label);
+    $(ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON).click();
     if (permission[0] == "any")
-      evt.click(AdministrationLocator.ELEMENT_PERMISSION_ANY);
+      $(AdministrationLocator.ELEMENT_PERMISSION_ANY).click();
     else {
       ecmsPerm.selectGroupMembershipOfLock(permission[0], permission[1]);
 
     }
-    Utils.pause(1000);
-    evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_SAVE_FORM);
+    $(ELEMENT_ECM_TEMPLATES_DOCUMENTS_SAVE_FORM).scrollTo().click();
   }
 
   /**
@@ -806,10 +832,11 @@ public class ContentAdministration {
    * @param newName
    */
   public void editDocumentInTemplates(String oldName, String newName) {
-    evt.click(By.xpath(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LIST_EDIT.replace("{$name}", oldName)));
-    evt.type(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LABEL_FORM, newName, true);
-    evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_SAVE_EDIT_FORM);
-    evt.waitForAndGetElement(By.xpath(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LIST.replace("{$name}", newName)));
+    $(byClassName("uiIconEdit ")).click();
+    $(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LABEL_FORM).setValue(newName);
+    $(ELEMENT_ECM_TEMPLATES_DOCUMENTS_SAVE_EDIT_FORM).scrollTo().click();
+    $(byText(newName)).waitUntil(Condition.appears, Configuration.timeout);
+
   }
 
   /**

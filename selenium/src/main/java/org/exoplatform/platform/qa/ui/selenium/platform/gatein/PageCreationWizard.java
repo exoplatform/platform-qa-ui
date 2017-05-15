@@ -1,8 +1,11 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.gatein;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
@@ -58,36 +61,37 @@ public class PageCreationWizard {
     info("Input data in page info page at step 1");
     if (name != null && name != "") {
       info("Input name");
-      evt.type(ELEMENT_PAGE_NAME_INPUT, name, true);
+      $(ELEMENT_PAGE_NAME_INPUT).setValue(name);
+
     }
     if (isMode != null) {
       info("Input mode");
       if (isMode)
-        evt.check(ELEMENT_PAGE_MODE_CHECKBOX, 2);
+        $(ELEMENT_PAGE_MODE_CHECKBOX).setSelected(true);
       else
         evt.uncheck(ELEMENT_PAGE_MODE_CHECKBOX, 2);
     }
     if (lang != null && lang != "") {
       info("Input language");
-      evt.select(ELEMENT_PAGE_LANGUAGE_SELECT_BOX, lang);
+      $(ELEMENT_PAGE_LANGUAGE_SELECT_BOX).selectOption(lang);
     }
     if (disName != null && disName != "") {
       info("Input display name");
-      evt.type(ELEMENT_PAGE_DISPLAY_NAME_INPUT, name, true);
+      $(ELEMENT_PAGE_DISPLAY_NAME_INPUT).setValue(name);
     }
     if (isVis != null) {
       info("Input Visible");
       if (isVis)
-        evt.check(ELEMENT_PAGE_VISIBLE_CHECKBOX, 2);
+      $(ELEMENT_PAGE_VISIBLE_CHECKBOX).setSelected(true);
       else
-        evt.uncheck(ELEMENT_PAGE_VISIBLE_CHECKBOX, 2);
+      $(ELEMENT_PAGE_VISIBLE_CHECKBOX).setSelected(false);
     }
     if (isPub != null) {
       info("Input publication date");
       if (isPub)
-        evt.check(ELEMENT_PAGE_PUBLICATION_DATE_CHECKBOX, 2);
+      $(ELEMENT_PAGE_PUBLICATION_DATE_CHECKBOX).setSelected(true);
       else
-        evt.uncheck(ELEMENT_PAGE_PUBLICATION_DATE_CHECKBOX, 2);
+        $(ELEMENT_PAGE_PUBLICATION_DATE_CHECKBOX).setSelected(false);
     }
   }
 
@@ -97,11 +101,12 @@ public class PageCreationWizard {
    * @param tab
    * @param element
    */
-  public void addApplication(Object tab, Object element) {
-    evt.click(ELEMENT_APPLICATION_TAB_ACTIVE);
-    evt.click(tab);
+  public void addApplication(SelenideElement tab, SelenideElement element) {
+    $(ELEMENT_APPLICATION_TAB_ACTIVE).click();
+    $(tab).click();
     Utils.pause(1000);
-    evt.dragAndDropToObject(element, ELEMENT_PAGEEDITOR_VIEWPAGE);
+    //evt.dragAndDropToObject(element, ELEMENT_PAGEEDITOR_VIEWPAGE);
+    $(element).dragAndDropTo($(byClassName("VIEW-PAGE")));
   }
 
   /**
@@ -132,7 +137,7 @@ public class PageCreationWizard {
    * @param folder
    */
   public void addContentlistByFolder(String path, String folder) {
-    addApplication(ELEMENT_APPLICATION_CONTENT_TAB, ELEMENT_APPLICATION_CONTENT_LIST);
+    //addApplication(ELEMENT_APPLICATION_CONTENT_TAB, ELEMENT_APPLICATION_CONTENT_LIST);
     evt.mouseOver(ELEMENT_PAGEEDITOR_VIEWPAGE, true);
     evt.click(ELEMENT_CONTENT_LIST_EDIT_BTN);
     contList.selectFolderContent(path, folder);
@@ -149,7 +154,7 @@ public class PageCreationWizard {
    * @param content
    */
   public void addContentListByContent(String path, String content) {
-    addApplication(ELEMENT_APPLICATION_CONTENT_TAB, ELEMENT_APPLICATION_CONTENT_LIST);
+    //addApplication(ELEMENT_APPLICATION_CONTENT_TAB, ELEMENT_APPLICATION_CONTENT_LIST);
     evt.mouseOver(ELEMENT_PAGEEDITOR_VIEWPAGE, true);
     evt.click(ELEMENT_CONTENT_LIST_EDIT_BTN);
     evt.check(ELEMENT_CONTENT_LIST_BY_CONTENT_MODE, 2);
@@ -167,13 +172,14 @@ public class PageCreationWizard {
    * @param content
    */
   public void addContentDetail(String path, String content) {
-    addApplication(ELEMENT_APPLICATION_CONTENT_TAB, ELEMENT_APPLICATION_CONTENT_DETAIL);
-    evt.mouseOver(ELEMENT_PAGEEDITOR_VIEWPAGE, true);
-    evt.click(ELEMENT_CONTENT_DETAIL_EDIT_BTN);
+    addApplication($(byTitle("Content")), $(byId("Content/portlet_SingleContentViewer")));
+
+    $(ELEMENT_PAGEEDITOR_VIEWPAGE).hover();
+    $(ELEMENT_CONTENT_DETAIL_EDIT_BTN).click();
     contDetail.selectFolderContent(path, content);
-    evt.click(ELEMENT_CONTENT_DETAIL_SAVE_BTN);
-    evt.click(ELEMENT_CONTENT_DETAIL_CLOSE_BTN);
-    evt.click(ELEMENT_PAGE_FINISH_BTN);
+    $(ELEMENT_CONTENT_DETAIL_SAVE_BTN).click();
+    $(ELEMENT_CONTENT_DETAIL_CLOSE_BTN).click();
+    $(ELEMENT_PAGE_FINISH_BTN).click();
   }
 
   /**

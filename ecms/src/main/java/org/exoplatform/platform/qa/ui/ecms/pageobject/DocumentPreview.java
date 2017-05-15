@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.ecms;
+package org.exoplatform.platform.qa.ui.ecms.pageobject;
 
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
