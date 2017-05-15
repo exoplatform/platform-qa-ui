@@ -119,9 +119,9 @@ public class NavigationToolbar {
     if ($(byText("No result found.")).is(Condition.exist)){
       $(byText("OK")).click();
     }
-   $(ELEMENT_LINK_SETUP).click();
-   $(ELEMENT_ADMINISTRATION_PORTAL).waitUntil(Condition.appears, Configuration.timeout);
-   $(ELEMENT_ADMINISTRATION_PORTAL).click();
+    $(ELEMENT_LINK_SETUP).click();
+    $(ELEMENT_ADMINISTRATION_PORTAL).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_ADMINISTRATION_PORTAL).click();
     info("Page Managements is shown successfully");
 
   }
@@ -211,13 +211,13 @@ public class NavigationToolbar {
   public void goToSiteExplorer() {
     info("-- Go to site explorer home page --");
 
-      if (testBase.getExoWebDriver().isIEDriver()) {
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,Configuration.timeout);
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-      } else
-       $(ELEMENT_LINK_SETUP).click();
-        info("Element " + ELEMENT_MENU_CONTENT_LINK + "... is displayed");
-        $(ELEMENT_MENU_CONTENT_LINK).click();
+    if (testBase.getExoWebDriver().isIEDriver()) {
+      $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,Configuration.timeout);
+      $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    } else
+      $(ELEMENT_LINK_SETUP).click();
+    info("Element " + ELEMENT_MENU_CONTENT_LINK + "... is displayed");
+    $(ELEMENT_MENU_CONTENT_LINK).click();
 
     info("Site Explorer is shown successfully");
   }
@@ -401,10 +401,10 @@ public class NavigationToolbar {
     $(ELEMENT_NEXT_BUTTON).click();
     info("Select a forum for topic");
     if(ELEMENT_SELECT_FORUM_COMBOBOX.is(Condition.exist)){
-    ELEMENT_SELECT_FORUM_COMBOBOX.waitUntil(Condition.appears,Configuration.timeout).click();
-    $(byText(forum)).waitUntil(Condition.appears,Configuration.timeout).click();
-    info("Click on next button");
-    $(ELEMENT_NEXT_BUTTON).click();}
+      ELEMENT_SELECT_FORUM_COMBOBOX.waitUntil(Condition.appears,Configuration.timeout).click();
+      $(byText(forum)).waitUntil(Condition.appears,Configuration.timeout).click();
+      info("Click on next button");
+      $(ELEMENT_NEXT_BUTTON).click();}
 
   }
 
@@ -424,13 +424,13 @@ public class NavigationToolbar {
     $(ELEMENT_ADD_TITLE).setValue(name);
     $(ELEMENT_SAVE_BUTTON).click();
   }
-public void gotoAddTask(String name){
-  $(ELEMENT_ADD_TOOTLBAR).click();
-  ELEMENT_ADD_TASK_CLASS_TOOLBAR.click();
-  ELEMENT_TASK_ADD_TITLE.setValue(name);
-  ELEMENT_TASK_BUTTON_ADD.click();
+  public void gotoAddTask(String name){
+    $(ELEMENT_ADD_TOOTLBAR).click();
+    ELEMENT_ADD_TASK_CLASS_TOOLBAR.click();
+    ELEMENT_TASK_ADD_TITLE.setValue(name);
+    ELEMENT_TASK_BUTTON_ADD.click();
 
-}
+  }
   /**
    * Go to upload file fron the toolbar
    *
@@ -559,14 +559,14 @@ public void gotoAddTask(String name){
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
     ELEMENT_ADMINISTRATION_ADD_USERS.click();
   }
-public void goToManageCommunity(){
-  $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,10000);
-  $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-  ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears,10000);
-  ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-  ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.click();
+  public void goToManageCommunity(){
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,10000);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears,10000);
+    ELEMENT_ADMINISTRATION_COMMUNITY.hover();
+    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.click();
 
-}
+  }
   /**
    * Open Notification list
    */

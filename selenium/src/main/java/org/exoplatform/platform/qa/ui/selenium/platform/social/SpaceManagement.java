@@ -60,7 +60,7 @@ public class SpaceManagement {
       $(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON).click();
       $(byText(spaceName)).waitUntil(Condition.disappears,Configuration.timeout);    }
 
-    }
+  }
 
 
   /**
@@ -254,7 +254,7 @@ public class SpaceManagement {
    */
   public void goToInvitationsReceivedTab() {
     info("Open Invitation Received tab");
-   $(ELEMENT_MY_SPACE_INVITATION_RECEIVED).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_MY_SPACE_INVITATION_RECEIVED).waitUntil(Condition.appears,Configuration.timeout);
     $(ELEMENT_MY_SPACE_INVITATION_RECEIVED).click();
 
 
