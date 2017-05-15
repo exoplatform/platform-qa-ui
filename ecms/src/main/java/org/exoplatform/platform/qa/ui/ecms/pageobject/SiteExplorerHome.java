@@ -1,7 +1,26 @@
 package org.exoplatform.platform.qa.ui.ecms.pageobject;
 
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_SELECT_USER_ICON1;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
+import java.util.ArrayList;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.*;
 import org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator;
@@ -11,24 +30,6 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ManageFileTestBase;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.ArrayList;
-
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_SELECT_USER_ICON1;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class SiteExplorerHome {
   private final TestBase       testBase;
@@ -37,7 +38,7 @@ public class SiteExplorerHome {
 
   public Button                button;
 
-  public CreateNewDocument CreNewDoc;
+  public CreateNewDocument     CreNewDoc;
 
   public Dialog                dialog;
 
@@ -71,14 +72,14 @@ public class SiteExplorerHome {
   public void goToPath(String path, String drive) {
     info("Go to selected Drive");
     $(byId("uiActionsBarContainer")).find(byText("Site Management")).click();
-    $(byText(drive)).waitUntil(Condition.appears,Configuration.timeout);
+    $(byText(drive)).waitUntil(Condition.appears, Configuration.timeout);
     $(byText(drive)).click();
-    $(ELEMENT_SIDE_BAR_MAINTAB).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_SIDE_BAR_MAINTAB).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
     info("Go to folder");
-    if(!path.isEmpty()){
+    if (!path.isEmpty()) {
       String[] arrayPath = path.split("/");
-      for (String arrayElement : arrayPath){
+      for (String arrayElement : arrayPath) {
         selectNode(arrayElement);
       }
     }
@@ -134,7 +135,7 @@ public class SiteExplorerHome {
     info("Click on New Document on Action Bar");
     $(ELEMENT_ACTIONBAR_ADDDOCUMENT).click();
     info("Verify that New content page is shown");
-    $(ELEMENT_ADDDOCUMENT_CHOICETYPE).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_ADDDOCUMENT_CHOICETYPE).waitUntil(Condition.appears, Configuration.timeout);
     info("New content page is shown successfully");
   }
 
@@ -157,18 +158,18 @@ public class SiteExplorerHome {
   public void deleteData(String title, boolean... destination) {
     boolean verify = (destination.length > 0 ? destination[0] : false);
     info("Click on File Explorer icon");
-    //scroll de 10 pixel
-    executeJavaScript("window.scrollBy(0,50);","");
+    // scroll de 10 pixel
+    executeJavaScript("window.scrollBy(0,50);", "");
     $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
 
     info("Right click on nodename");
-    $(byId("UITreeExplorer")).find(byLinkText(title)).waitUntil(Condition.appears,Configuration.timeout).contextClick();
+    $(byId("UITreeExplorer")).find(byLinkText(title)).waitUntil(Condition.appears, Configuration.timeout).contextClick();
     info("Click on Delete link");
     $(ELEMENT_SITEEXPLORER_ACTION_DELETE).click();
     info("Click on Delete button on Confirm popup");
     $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).click();
     info("Verify that the node is deleted");
-      info("the node is deleted successfully");
+    info("the node is deleted successfully");
   }
 
   /**
@@ -349,8 +350,9 @@ public class SiteExplorerHome {
     evt.click(ELEMENT_SIDEBAR_TAGCLOUD_POPUP_EDIT.replace("${name}", oldName));
     evt.waitForAndGetElement(ELEMENT_TAG_POPUP_NAME_FIELD);
     info("Input new name of tag");
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].setAttribute('value', '" + newName + "')",
-                                                                      evt.waitForAndGetElement(ELEMENT_TAG_POPUP_NAME_FIELD));
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].setAttribute('value', '"
+        + newName + "')",
+                                                                                   evt.waitForAndGetElement(ELEMENT_TAG_POPUP_NAME_FIELD));
     info("Save all changes");
     evt.clickByJavascript(ELEMENT_TAG_POPUP_SAVE);
     info("Verify that the new name of tag is changed");
@@ -392,8 +394,9 @@ public class SiteExplorerHome {
 
     $(ELEMENT_ACTIONBAR_MORE).click();
     $(ELEMENT_ACTIONBAR_EDIT).click();
-    if ($(ELEMENT_FILE_FORM_TITLE).is(Condition.enabled)){
-    $(ELEMENT_FILE_FORM_TITLE).setValue(newTitle);}
+    if ($(ELEMENT_FILE_FORM_TITLE).is(Condition.enabled)) {
+      $(ELEMENT_FILE_FORM_TITLE).setValue(newTitle);
+    }
     $(ELEMENT_FILEFORM_BLANK_CONTENT).click();
     $(ELEMENT_FILEFORM_BLANK_CONTENT).sendKeys(content);
   }
@@ -480,7 +483,7 @@ public class SiteExplorerHome {
    */
   public void selectNode(String nodeName) {
     info("Verify that nodeName:" + nodeName + " is shown");
-    $(byText(nodeName)).waitUntil(Condition.appears,Configuration.timeout);
+    $(byText(nodeName)).waitUntil(Condition.appears, Configuration.timeout);
     info("Click on the nodeName:" + nodeName);
     $(byText(nodeName)).click();
     info("Finished selecting nodeName:" + nodeName);
@@ -686,7 +689,8 @@ public class SiteExplorerHome {
     // upload the file
     WebElement upload = evt.waitForAndGetElement(ELEMENT_IMPORT_NODE_POPUP_UPLOAD_BUTTON, testBase.getDefaultTimeout(), 1, 2);
 
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';", upload);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';",
+                                                                                   upload);
     upload.sendKeys(testBase.getAbsoluteFilePath(linkFile));
     String[] nameFile = linkFile.split("/");
     evt.waitForAndGetElement(ELEMENT_IMPORT_NODE_POPUP_UPLOAD_FILE_LABEL.replace("${fileName}", nameFile[1]));
@@ -699,7 +703,8 @@ public class SiteExplorerHome {
                                                           testBase.getDefaultTimeout(),
                                                           1,
                                                           2);
-      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';", uploadVersion);
+      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';",
+                                                                                     uploadVersion);
       uploadVersion.sendKeys(testBase.getAbsoluteFilePath(linkVersion));
       String[] namefile = linkVersion.split("/");
       evt.waitForAndGetElement(ELEMENT_IMPORT_NODE_POPUP_UPLOAD_FILE_LABEL.replace("${fileName}", namefile[1]));
@@ -1496,7 +1501,7 @@ public class SiteExplorerHome {
    */
   public void verifyContentCreatedSuccessfully(String title) {
     info("Verify Content was created successfully");
-    $(byText(title)).waitUntil(Condition.appears,Configuration.timeout);
+    $(byText(title)).waitUntil(Condition.appears, Configuration.timeout);
     info("Content was created successfully");
   }
 

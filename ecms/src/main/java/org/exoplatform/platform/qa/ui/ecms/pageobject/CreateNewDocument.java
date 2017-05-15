@@ -1,27 +1,25 @@
 package org.exoplatform.platform.qa.ui.ecms.pageobject;
 
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_NAME;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
+import org.openqa.selenium.WebElement;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.awt.*;
-
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_NAME;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class CreateNewDocument {
 
@@ -33,7 +31,7 @@ public class CreateNewDocument {
 
   public PlatformBase          plf;
 
-  public SiteExplorerHome SEHome;
+  public SiteExplorerHome      SEHome;
 
   private ElementEventTestBase evt;
 
@@ -58,16 +56,17 @@ public class CreateNewDocument {
       break;
     case WEBCONTENT:
       info("Select WebContent type");
-      if ($(ELEMENT_ADDDOCUMENT_WEBCONTENT).is(Condition.exist))
-      {$(ELEMENT_ADDDOCUMENT_WEBCONTENT).click();}
-      else
-      {executeJavaScript("window.scrollBy(0,100);","");
-        //move ti page 2 for the list of template
+      if ($(ELEMENT_ADDDOCUMENT_WEBCONTENT).is(Condition.exist)) {
+        $(ELEMENT_ADDDOCUMENT_WEBCONTENT).click();
+      } else {
+        executeJavaScript("window.scrollBy(0,100);", "");
+        // move ti page 2 for the list of template
         $(byClassName("pagination")).find(byText("2")).click();
-        //scroll up
-        executeJavaScript("window.scrollBy(0,-400);","");
-        $(ELEMENT_ADDDOCUMENT_WEBCONTENT).click();}
-       break;
+        // scroll up
+        executeJavaScript("window.scrollBy(0,-400);", "");
+        $(ELEMENT_ADDDOCUMENT_WEBCONTENT).click();
+      }
+      break;
     case ACCESSIBLEMEDIA:
       info("Select Accessiblemedia type");
       $(ELEMENT_ADDDOCUMENT_ACCESSIBLE_MEDIA).click();
@@ -97,7 +96,7 @@ public class CreateNewDocument {
       if ((evt.waitForAndGetElement(ELEMENT_ADDDOCUMENT_WEBLINK, 3000, 0) == null)
           && (evt.waitForAndGetElement(ELEMENT_ADDDOCUMENT_NEXT_PAGE, 3000, 0) != null)) {
         $(ELEMENT_ADDDOCUMENT_NEXT_PAGE).click();
-        $(ELEMENT_ADDDOCUMENT_WEBLINK).waitUntil(Condition.appears,Configuration.timeout);
+        $(ELEMENT_ADDDOCUMENT_WEBLINK).waitUntil(Condition.appears, Configuration.timeout);
         $(ELEMENT_ADDDOCUMENT_WEBLINK).click();
       } else
         $(ELEMENT_ADDDOCUMENT_WEBLINK).click();
@@ -197,7 +196,7 @@ public class CreateNewDocument {
 
   public void saveAndClose() {
     info("save and close");
-    //scroll up
+    // scroll up
     executeJavaScript("window.scrollBy(0,-250)");
     $(ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE).click();
 
