@@ -24,7 +24,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 
-public class Plf_HomepageGadget_SuggestionGadget extends Base{
+public class PlfHomepageGadgetSuggestionGadget extends Base{
 
    ManageLogInOut manageLogInOut;
    SpaceManagement spaceManagement;
