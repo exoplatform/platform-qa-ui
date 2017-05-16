@@ -36,7 +36,7 @@ public class AddUsers {
    */
   public void addUser(String userName, String password, String email, String firstname, String lastName) {
     info("Add an user");
-    $(ELEMENT_USERNAME).waitUntil(appears, 10000);
+    $(ELEMENT_USERNAME).waitUntil(appears, Configuration.timeout);
     $(ELEMENT_USERNAME).setValue(userName);
     $(ELEMENT_PASSWORD).setValue(password);
     $(ELEMENT_CONFIRM_PASSWORD).setValue(password);
@@ -44,7 +44,7 @@ public class AddUsers {
     $(ELEMENT_FIRSTNAME).setValue(firstname);
     $(ELEMENT_LASTNAME).setValue(lastName);
     $(ELEMENT_SAVE).click();
-    $(byText("You have registered a new account.")).waitUntil(appears, 10000);
+    $(byText("You have registered a new account.")).waitUntil(appears, Configuration.timeout);
     $(byText("OK")).click();
     info("Finish adding an user");
   }
