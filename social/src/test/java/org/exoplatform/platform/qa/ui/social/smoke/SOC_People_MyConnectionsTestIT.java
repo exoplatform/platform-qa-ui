@@ -9,6 +9,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -47,6 +48,7 @@ public class SOC_People_MyConnectionsTestIT extends Base{
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
+	@Disabled
 	public  void test01_06_AcceptTheInvitation() {
 		/*Create data test*/
 		String username1 = "usernamea" + getRandomString();
@@ -119,6 +121,7 @@ public class SOC_People_MyConnectionsTestIT extends Base{
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
+	@Disabled
 	public  void test02_CancelAInvitationRequest() {
 		info("Test 2: Cancel a invitation request");
 		/*Create data test*/

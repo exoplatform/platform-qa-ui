@@ -140,7 +140,7 @@ public class SOC_Space_ManagementTestIT extends Base {
 		manageLogInOut.signIn(username2,password);
 		homePagePlatform.goToAllSpace();
 		spaceManagement.searchSpace(space,"");
-		$(byText(space)).shouldNot(Condition.exist);
+		$(byClassName("boxSpaceList")).find(byText(space)).shouldNot(Condition.exist);
 		manageLogInOut.signIn("root","gtn");
 		navigationToolbar.goToManageCommunity();
 		addUsers.deleteUser(username1);

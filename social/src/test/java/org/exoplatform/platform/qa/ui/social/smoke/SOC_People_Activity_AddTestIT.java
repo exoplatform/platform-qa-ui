@@ -11,6 +11,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.ecms.SiteExplorerHome;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selectors.*;
@@ -52,6 +53,7 @@ public class SOC_People_Activity_AddTestIT extends Base{
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
+	@Disabled
 	public  void test03_AddNewYourActivity() {
 		/*Create data test*/
 		String username1 = "usernamea" + getRandomString();

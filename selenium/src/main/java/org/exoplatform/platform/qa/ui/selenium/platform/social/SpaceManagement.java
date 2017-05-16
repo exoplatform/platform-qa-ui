@@ -59,8 +59,7 @@ public class SpaceManagement {
         alert.verifyAlertMessage(ELEMENT_SPACE_CONFIRM_DELETE);
       $(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON).click();
       $(byText(spaceName)).waitUntil(Condition.disappears,Configuration.timeout);    }
-        evt.click(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON);
-        $(byText(spaceName)).waitUntil(Condition.disappears,Configuration.timeout);
+
     }
 
 

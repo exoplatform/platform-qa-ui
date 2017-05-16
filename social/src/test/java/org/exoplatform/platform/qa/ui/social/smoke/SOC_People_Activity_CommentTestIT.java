@@ -9,6 +9,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -120,6 +121,7 @@ public class SOC_People_Activity_CommentTestIT extends Base{
 	 *<li> Post-Condition: </li>
 	 */
 	@Test
+	@Disabled
 	public  void test02_CommentOnYourFriendsActivity() {
 		/*Create data test*/
 		String username1 = "usernamea" + getRandomString();
