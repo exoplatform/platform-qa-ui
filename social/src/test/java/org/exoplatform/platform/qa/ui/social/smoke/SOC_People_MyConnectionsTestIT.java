@@ -49,6 +49,7 @@ public class SOC_People_MyConnectionsTestIT extends Base{
 	 */
 	@Test
 	@Disabled
+	//this test case is disabled until resolving this bug:  https://jira.exoplatform.org/browse/SOC-5738
 	public  void test01_06_AcceptTheInvitation() {
 		/*Create data test*/
 		String username1 = "usernamea" + getRandomString();
@@ -122,6 +123,7 @@ public class SOC_People_MyConnectionsTestIT extends Base{
 	 */
 	@Test
 	@Disabled
+	//this test case is disabled until resolving this bug:  https://jira.exoplatform.org/browse/SOC-5738
 	public  void test02_CancelAInvitationRequest() {
 		info("Test 2: Cancel a invitation request");
 		/*Create data test*/

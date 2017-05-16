@@ -54,6 +54,7 @@ public class SOC_People_Activity_AddTestIT extends Base{
 	 */
 	@Test
 	@Disabled
+	//this test case is disabled until resolving this bug:  https://jira.exoplatform.org/browse/SOC-5738
 	public  void test03_AddNewYourActivity() {
 		/*Create data test*/
 		String username1 = "usernamea" + getRandomString();

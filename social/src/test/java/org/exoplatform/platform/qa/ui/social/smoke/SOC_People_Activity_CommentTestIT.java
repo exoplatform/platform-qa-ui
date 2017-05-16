@@ -122,6 +122,7 @@ public class SOC_People_Activity_CommentTestIT extends Base{
 	 */
 	@Test
 	@Disabled
+	//this test case is disabled until resolving this bug:  https://jira.exoplatform.org/browse/SOC-5738
 	public  void test02_CommentOnYourFriendsActivity() {
 		/*Create data test*/
 		String username1 = "usernamea" + getRandomString();
