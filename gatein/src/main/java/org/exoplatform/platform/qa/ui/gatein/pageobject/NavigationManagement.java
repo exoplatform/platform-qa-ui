@@ -284,7 +284,6 @@ public class NavigationManagement {
     $(ELEMENT_NAVIGATION_MANAGEMENT_SAVE).waitUntil(Condition.appears, Configuration.timeout);
     info("Click on Save button");
     $(ELEMENT_NAVIGATION_MANAGEMENT_SAVE).click();
-    Utils.pause(Configuration.timeout);
     closeNavigationManagementPopup();
   }
 

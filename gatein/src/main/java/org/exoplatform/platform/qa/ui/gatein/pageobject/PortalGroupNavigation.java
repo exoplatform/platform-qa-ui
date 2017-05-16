@@ -37,6 +37,7 @@ public class PortalGroupNavigation {
   public void addNewNavigationForGroup(String groupName) {
     info("Add navigation for group " + groupName);
     $(byText("Add Navigation")).click();
+    $(byText("/"+groupName)).waitUntil(Condition.appears,Configuration.timeout);
     /*
      * the order of the groups in the add navigation page is random, so we
      * defined this condition to fix the location of the linkText
