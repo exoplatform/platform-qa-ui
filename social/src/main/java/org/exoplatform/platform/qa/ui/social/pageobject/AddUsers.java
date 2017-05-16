@@ -1,30 +1,28 @@
 package org.exoplatform.platform.qa.ui.social.pageobject;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-
 import static com.codeborne.selenide.Condition.appears;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_GMAIL_CONTENT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+
+import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+
 public class AddUsers {
   private final TestBase       testBase;
-
+  public ManageAlert           manageAlert;
   private ElementEventTestBase evt;
-  public ManageAlert manageAlert;
 
   public AddUsers(TestBase testBase) {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
-    this.manageAlert=new ManageAlert(testBase);
+    this.manageAlert = new ManageAlert(testBase);
   }
 
   /**
@@ -38,7 +36,7 @@ public class AddUsers {
    */
   public void addUser(String userName, String password, String email, String firstname, String lastName) {
     info("Add an user");
-    $(ELEMENT_USERNAME).waitUntil(appears,10000);
+    $(ELEMENT_USERNAME).waitUntil(appears, 10000);
     $(ELEMENT_USERNAME).setValue(userName);
     $(ELEMENT_PASSWORD).setValue(password);
     $(ELEMENT_CONFIRM_PASSWORD).setValue(password);
@@ -46,10 +44,11 @@ public class AddUsers {
     $(ELEMENT_FIRSTNAME).setValue(firstname);
     $(ELEMENT_LASTNAME).setValue(lastName);
     $(ELEMENT_SAVE).click();
-    $(byText("You have registered a new account.")).waitUntil(appears,10000);
+    $(byText("You have registered a new account.")).waitUntil(appears, 10000);
     $(byText("OK")).click();
     info("Finish adding an user");
   }
+
   public void deleteUser(String username) {
     info("--Deleting user " + username + "--");
     info("--Search user " + username + "--");
@@ -60,14 +59,14 @@ public class AddUsers {
     $(byTitle("Quick Search")).click();
 
     $(byClassName("uiIconDeleteUser")).click();
-  manageAlert.acceptAlert();
+    manageAlert.acceptAlert();
     $(ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);
     $(byTitle("Quick Search")).click();
     $(byText("No result found.")).waitUntil(Condition.appears, Configuration.timeout);
     $(byText("OK")).click();
 
-
   }
+
   /**
    * function: check content of mail then delete mail
    * 

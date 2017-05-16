@@ -1,20 +1,23 @@
 package org.exoplatform.platform.qa.ui.social.pageobject;
 
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
+import java.util.ArrayList;
+
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
-import java.util.ArrayList;
-
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
 public class IntranetNotification {
   private final TestBase       testBase;
-  SpaceHomePage spaceHome;
-  UserProfilePage userPro;
+
+  SpaceHomePage                spaceHome;
+
+  UserProfilePage              userPro;
+
   private ElementEventTestBase evt;
 
   /**
