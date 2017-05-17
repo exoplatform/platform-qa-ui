@@ -44,19 +44,7 @@ public class PortalGroupNavigation {
      * "add navigation" that we should clic on it
      */
 
-    for (int i = 1; i < 15; i++) {
-      // xpath of the tr that have text groupName
-      if ($(byXpath("//*[@id=\"UIAddGroupNavigationGrid\"]/table/tbody/tr[" + i + "]/td[1]")).has(Condition.text("/"
-          + groupName)))
-      /*
-       * (i-1) is the order of the linkText add navigation of the groupName
-       * (i-1) because the function get(X) sould have arguments 0=< X=< n
-       */
-      {
-        $(byClassName("uiAddGroupNavigation")).findAll(byLinkText("Add Navigation")).get(i - 1).click();
-
-      }
-    }
+   $(byText("/"+groupName)).parent().find(byText("Add Navigation")).click();
 
     $(ELEMENT_CANCEL_BUTON).click();
     $(byText(groupName)).waitUntil(Condition.appears, Configuration.timeout);
@@ -76,20 +64,9 @@ public class PortalGroupNavigation {
      * $(ELEMENT_DELETE_NAVIGATION_ICON.replace("${groupName}",
      * groupName)).waitUntil(Condition.disappears,10000);
      */
-    for (int i = 0; i < 10; i++) {
-      for (int j = 0; j < 4; j++) {
-        // search the location of groupName by xpath
-        if ($(byXpath("//*[@id=\"UIGroupNavigationGrid\"]/table[" + (i + 1) + "]/tbody/tr[" + (j + 1)
-            + "]/td[1]")).has(Condition.text(groupName))) {
-          // clic by xpath on delete navigation corresponding to the groupName
-          $(byXpath("//*[@id=\"UIGroupNavigationGrid\"]/table[" + (i + 1) + "]/tbody/tr[" + (j + 1) + "]/td[4]")).scrollTo()
-                                                                                                                 .click();
-          alert.acceptAlert();
-
-        }
-      }
-
-    }
+    //clic on delete navigation
+    $(byText(groupName)).parent().find(byXpath("//*[@id=\"UIGroupNavigationGrid\"]/table[1]/tbody/tr[1]/td[4]/a")).click();
+    alert.acceptAlert();
     $(byText(groupName)).shouldNot(Condition.exist);
   }
 
