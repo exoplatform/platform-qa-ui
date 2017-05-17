@@ -44,10 +44,7 @@ public class PortalManagePages {
 
     info("waiting the page is loaded full");
     evt.waitForAndGetElement(ELEMENT_MANAGEPAGES_TITLE_FIELD);
-    if (!title.isEmpty()) {
-      info("Input a new title");
-      evt.type(ELEMENT_MANAGEPAGES_TITLE_FIELD, title, true);
-    }
+
     if (!siteName.isEmpty()) {
       info("Input a new site Name");
       evt.type(ELEMENT_MANAGEPAGES_SITES_NAME_FIELD, siteName, true);
@@ -56,9 +53,7 @@ public class PortalManagePages {
       info("Select a type");
       $(ELEMENT_MANAGEPAGES_TYPE_DROPBOX).selectOption(type);
     }
-   $(ELEMENT_MANAGEPAGES_TITLE_FIELD).waitUntil(Condition.appears,10000);
    $(ELEMENT_MANAGEPAGES_TITLE_FIELD).waitUntil(Condition.appears,Configuration.timeout);
-    $(ELEMENT_MANAGEPAGES_TITLE_FIELD).waitUntil(Condition.appears, Configuration.timeout);
     info("Input a new title");
     $(ELEMENT_MANAGEPAGES_TITLE_FIELD).scrollTo().setValue(title);
     info("Select a type");
@@ -80,21 +75,7 @@ public class PortalManagePages {
     $(ELEMENT_MAGEPAGES_CONTENT_ACTION_COLUMN_DELETE).click();
     alert.acceptAlert();
 
-    evt.waitForAndGetElement(ELEMENT_MANGEPAGES_INFORM_POPUP_CLOSE, 4000, 0);
-    $(ELEMENT_MANGEPAGES_INFORM_POPUP_CLOSE).click();
-    /*
-     * waitForAndGetElement(ELEMENT_MANGEPAGES_INFORM_POPUP_OK, 4000, 0);
-     * click(ELEMENT_MANGEPAGES_INFORM_POPUP_OK, 2);
-     */
-    //evt.waitForAndGetElement(ELEMENT_MANGEPAGES_INFORM_POPUP_CLOSE, 4000, 0);
-    $(ELEMENT_MANGEPAGES_INFORM_POPUP_CLOSE).waitUntil(Condition.appears,10000);
 
-    //evt.click(ELEMENT_MANGEPAGES_INFORM_POPUP_CLOSE, 2);
-    $(ELEMENT_MANGEPAGES_INFORM_POPUP_CLOSE).waitUntil(Condition.appears,Configuration.timeout);
-    $(ELEMENT_MANGEPAGES_INFORM_POPUP_CLOSE).waitUntil(Condition.appears, Configuration.timeout);
-
-    $(ELEMENT_MANGEPAGES_INFORM_POPUP_CLOSE).click();
-    $(byText(titlePage)).shouldNot(Condition.exist);
   }
 
   /**
