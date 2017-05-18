@@ -354,6 +354,7 @@ public class CalendarManagement {
   public void openMenuOfCalendar(String calendar) {
     info("Open menu of a calendar");
     $(byText(calendar)).hover().parent().parent().find(ELEMENT_CALENDAR_ICON_SETTINGS_OF_CALENDAR).click();
+
   }
 
   /**

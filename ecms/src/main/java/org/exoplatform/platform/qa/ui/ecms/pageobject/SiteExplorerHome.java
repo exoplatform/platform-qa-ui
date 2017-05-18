@@ -71,6 +71,7 @@ public class SiteExplorerHome {
    */
   public void goToPath(String path, String drive) {
     info("Go to selected Drive");
+
     $(byId("uiActionsBarContainer")).find(byText("Site Management")).click();
     $(byText(drive)).waitUntil(Condition.appears, Configuration.timeout);
     $(byText(drive)).click();

@@ -74,7 +74,9 @@ public class PortalManagePages {
     searchPage(titlePage, "", type);
     $(ELEMENT_MAGEPAGES_CONTENT_ACTION_COLUMN_DELETE).click();
     alert.acceptAlert();
-
+    if ($(byText("No result found.")).waitUntil(Condition.appears,Configuration.timeout).is(Condition.exist)){
+      $(byText("OK")).click();
+    }
 
   }
 
