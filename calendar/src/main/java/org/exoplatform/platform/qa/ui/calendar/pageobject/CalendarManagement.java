@@ -353,13 +353,7 @@ public class CalendarManagement {
    */
   public void openMenuOfCalendar(String calendar) {
     info("Open menu of a calendar");
-    if (ELEMENT_CALENDAR_ITEM_PERSONAL_CALENDAR.has(Condition.text(calendar))) {
-      ELEMENT_CONTAINER_CALENDAR.find(byText(calendar)).hover();
-      ELEMENT_CALENDAR_ICON_SETTINGS_OF_PERSONAL_CALENDAR.click();
-    } else {
-      ELEMENT_CONTAINER_CALENDAR.find(byText(calendar)).hover();
-      ELEMENT_CALENDAR_ICON_SETTINGS_OF_GROUP_CALENDAR.click();
-    }
+    $(byText(calendar)).hover().parent().parent().find(ELEMENT_CALENDAR_ICON_SETTINGS_OF_CALENDAR).click();
   }
 
   /**
