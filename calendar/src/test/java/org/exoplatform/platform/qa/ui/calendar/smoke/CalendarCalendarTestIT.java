@@ -35,6 +35,7 @@ public class CalendarCalendarTestIT extends Base {
    * Personal Calendar. Pre-Condition: Post-Condition:
    */
   @Test
+  @Tag("smoke")
   public void test02_03_04_AddEditDeletePersonalCalendar() {
     String calendarName = "calendarName" + getRandomNumber();
     String newCalendar = "newCalendar" + getRandomNumber();
