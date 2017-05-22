@@ -9,6 +9,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.E
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_ADDNEWPAGE_BTNNEXT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.gatein.pageobject.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,6 @@ import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.CreateNewDocument;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.SiteExplorerHome;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
-import org.exoplatform.platform.qa.ui.selenium.platform.gatein.*;
 
 /**
  * @date 15-January-2015
@@ -37,7 +37,7 @@ public class EcmsWCMTestIT extends Base {
 
   CreateNewDocument    createNewDoc;
 
-  PageCreationWizard   pageCreationWizard;
+  PageCreationWizard pageCreationWizard;
 
   PortalManagePages    paMang;
 

@@ -20,7 +20,11 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.locator.gatein;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 
 public final class GateinLocator {
   /*************************************
@@ -1711,4 +1715,6 @@ public final class GateinLocator {
 
   // Layout
   public static final By            ELEMENT_PAGEEDITOR_VIEWPAGE                             = By.xpath("//*[@class='VIEW-PAGE']");
+
+
 }

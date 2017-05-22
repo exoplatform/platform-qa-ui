@@ -24,6 +24,8 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_PAGE_CREATION_WIZARD;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_ADD_NAVIGATION_BUTTON;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_MANAGESITES_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
@@ -38,6 +40,9 @@ import org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator;
 import org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator;
 import org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 
 public class NavigationToolbar {
 
@@ -77,15 +82,21 @@ public class NavigationToolbar {
    */
   public void goToPotalSites() {
     info("--Go to Portal-->Sites--");
-    // evt.waitElementAndTryGetElement(ELEMENT_TOOLBAR_ADMINISTRATION);
-    evt.waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION, testBase.getDefaultTimeout(), 1);
-    evt.click(ELEMENT_TOOLBAR_ADMINISTRATION);
-    evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL, 6000, 0);
+
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,Configuration.timeout);
+
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+
+    $(ELEMENT_ADMINISTRATION_PORTAL).waitUntil(Condition.appears,Configuration.timeout);
+
     evt.mouseOver(ELEMENT_ADMINISTRATION_PORTAL, true);
-    evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL_SITES, testBase.getDefaultTimeout(), 0);
-    evt.click(ELEMENT_ADMINISTRATION_PORTAL_SITES);
-    Utils.pause(3000);
-    evt.waitForAndGetElement(GateinLocator.ELEMENT_MANAGESITES_TITLE, 3000, 0);
+
+    $(ELEMENT_ADMINISTRATION_PORTAL_SITES).waitUntil(Condition.appears,Configuration.timeout);
+
+    $(ELEMENT_ADMINISTRATION_PORTAL_SITES).click();
+
+
+    $(ELEMENT_MANAGESITES_TITLE).waitUntil(Condition.appears,Configuration.timeout);
   }
 
   /**
@@ -94,23 +105,24 @@ public class NavigationToolbar {
   public void goToGroupSites() {
     info("--Go to Portal-->Sites--");
     evt.waitElementAndTryGetElement(ELEMENT_TOOLBAR_ADMINISTRATION);
-    evt.click(ELEMENT_TOOLBAR_ADMINISTRATION);
-    evt.mouseOver(ELEMENT_ADMINISTRATION_PORTAL, true);
-    evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL_GROUP_SITES, 3000, 0);
-    evt.click(ELEMENT_ADMINISTRATION_PORTAL_GROUP_SITES);
-    Utils.pause(3000);
-    evt.waitForAndGetElement(GateinLocator.ELEMENT_ADD_NAVIGATION_BUTTON, 3000, 0);
-  }
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    $(ELEMENT_ADMINISTRATION_PORTAL).hover();
+    $(ELEMENT_ADMINISTRATION_PORTAL_GROUP_SITES).waitUntil(Condition.appears,10000);
+    $(ELEMENT_ADMINISTRATION_PORTAL_GROUP_SITES).click();
+    $(byText("Add Navigation")).should(Condition.exist);  }
 
   /**
    * Go to Manage Sites page: administration-->Portal->Pages
    */
   public void goToPotalPages() {
     info("-- Go to Page Management page --");
-
+    if ($(byText("No result found.")).is(Condition.exist)){
+      $(byText("OK")).click();
+    }
+   $(ELEMENT_LINK_SETUP).click();
+   $(ELEMENT_ADMINISTRATION_PORTAL).waitUntil(Condition.appears, Configuration.timeout);
+   $(ELEMENT_ADMINISTRATION_PORTAL).click();
     info("Page Managements is shown successfully");
-    $(ELEMENT_LINK_SETUP).click();
-    $(ELEMENT_ADMINISTRATION_PORTAL).click();
 
   }
 
@@ -120,21 +132,11 @@ public class NavigationToolbar {
    */
   public void goToUsersAndGroupsManagement() {
     info("--Go to Users and groups management--");
-    Utils.pause(3000);
-    if (testBase.getExoWebDriver().isIEDriver()) {
-      evt.waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION, testBase.getDefaultTimeout(), 1, 2);
-      evt.clickByJavascript(ELEMENT_TOOLBAR_ADMINISTRATION, 2);
-      evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_USERS, testBase.getDefaultTimeout(), 1);
-    } else
-      evt.click(ELEMENT_LINK_SETUP, 2);
-    evt.mouseOver(ELEMENT_ADMINISTRATION_USERS, true);
-    if (evt.waitForAndGetElement(ELEMENT_GROUP_AND_ROLE_LINK, 2000, 0) != null)
-      evt.click(ELEMENT_GROUP_AND_ROLE_LINK);
-    else {
-      testBase.getExoWebDriver().getWebDriver()
-              .get(testBase.getExoWebDriver().getBaseUrl() + "/g/:platform:administrators/administration/management");
-    }
-    Utils.pause(3000);
+
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    $(ELEMENT_ADMINISTRATION_USERS).hover();
+    $(ELEMENT_GROUP_AND_ROLE_LINK).click();
+
   }
 
   /**
@@ -546,24 +548,14 @@ public class NavigationToolbar {
    */
   public void goToAddUser() {
     info("Go to add user page");
-    int repeat = 0;
-    while (evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_USERS, 3000, 0) == null) {
-      if (repeat > 5)
-        break;
+
       info("Click on administration icon");
-      evt.click(ELEMENT_TOOLBAR_ADMINISTRATION);
-      repeat++;
-    }
-    info("add user page is shown");
-    info("evt.mouse over on community link");
-    evt.mouseOver(ELEMENT_ADMINISTRATION_USERS, true);
-    if (evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL_ADD_USERS, 3000, 0) != null) {
-      info("evt.click on Add user link");
-      evt.click(ELEMENT_ADMINISTRATION_PORTAL_ADD_USERS);
-    } else {
-      info("Cannot evt.click on add user link. Go to this page by link");
-      testBase.getExoWebDriver().getWebDriver().get(testBase.getExoWebDriver().getBaseUrl() + "/g/:platform:administrators/administration/newStaff");
-    }
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,10000);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    $(byText("Community")).waitUntil(Condition.appears,10000);
+    $(byText("Community")).hover();
+    $(byText("Add Users")).click();
+
   }
 
   /**

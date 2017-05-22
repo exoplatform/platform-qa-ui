@@ -8,7 +8,6 @@ import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
-import org.exoplatform.platform.qa.ui.selenium.platform.gatein.NavigationManagement;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class SpaceSettingManagement {
@@ -17,7 +16,6 @@ public class SpaceSettingManagement {
 
   public ManageAlert           alert;
 
-  public NavigationManagement  naviManage;
 
   public Button                button;
 
@@ -28,13 +26,12 @@ public class SpaceSettingManagement {
   /**
    * constructor
    * 
-   * @param dr
+   * @param testBase
    */
   public SpaceSettingManagement(TestBase testBase) {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
     this.alert = new ManageAlert(testBase);
-    this.naviManage = new NavigationManagement(testBase);
     this.button = new Button(testBase);
     this.plfPerm = new PlatformPermission(testBase);
   }
@@ -593,7 +590,8 @@ public class SpaceSettingManagement {
       info("Select Page");
       Utils.pause(500);
       evt.click(ELEMENT_SEARCH_SELECTOR_PAGE_LINK);
-      naviManage.selectPage(pageTitleSearch);
+      // @FIXME Dependency problem
+      //naviManage.selectPage(pageTitleSearch);
     }
     info("Save to add node");
     Utils.pause(2000);
@@ -729,7 +727,6 @@ public class SpaceSettingManagement {
    * Check user selector of Invite Space
    * 
    * @param user
-   * @param space
    * @param isPresent
    */
   public void checkUserSelectorInviteSpace(String user, boolean isPresent) {
@@ -742,7 +739,6 @@ public class SpaceSettingManagement {
    * Check search user of Invite Space
    * 
    * @param user
-   * @param space
    * @param isPresent
    */
   public void checkSearchUserInviteSpace(String user, boolean isPresent) {

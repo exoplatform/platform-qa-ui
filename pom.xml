@@ -46,6 +46,9 @@
     <module>forum</module>
 
     <module>wiki</module>
+    
+    <module>gatein</module>
+
 
   </modules>
   <scm>
