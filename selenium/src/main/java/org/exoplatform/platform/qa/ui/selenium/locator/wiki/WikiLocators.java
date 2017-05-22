@@ -1349,4 +1349,5 @@ public class WikiLocators {
                                                                                         "//*[@id='UIListUsers']//span[contains(text(),'${username}')]";
 public static final SelenideElement ELEMENT_SAVE_BUTTON_ADD_PAGE=$(byId("UISubmitToolBarUpper_SavePage_"));
 public static final SelenideElement ELEMENT_DELETE_LINK2= $(byText("Delete Page"));
+public static final SelenideElement ELEMENT_POPUP_SELECT_WIKI_PAGE= $(byId("isc_2"));
 }

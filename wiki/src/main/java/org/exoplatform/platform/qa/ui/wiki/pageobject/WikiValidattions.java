@@ -1,11 +1,15 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static com.codeborne.selenide.Selenide.$;
+
+import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.util.ArrayList;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -389,8 +393,7 @@ public class WikiValidattions {
    */
   public void verifyInsertedExistLink(String label, String pageLink) {
     info("The page link is shown");
-    evt.waitForAndGetElement(ELEMENT_TITLE_INFO.replace("${title}", pageLink));
-  }
+    $(byText(pageLink)).waitUntil(Condition.appears, Configuration.timeout);  }
 
   /**
    * Verify that the system redirects to the wiki page that is created
