@@ -89,8 +89,8 @@ $(byText("Connect")).click();
     info("--Remove a connection of a user--");
     info("Click on remove button");
     searchPeople(username, null, null, null);
-    evt.clickByJavascript(ELEMENT_CONNECTION_REVOVE_BTN.replace("${user}", username));
-    evt.waitForElementNotPresent(ELEMENT_CONNECTION_REVOVE_BTN.replace("${user}", username));
+    evt.clickByJavascript(ELEMENT_CONNECTION_REVOVE_BTN);
+    evt.waitForElementNotPresent(ELEMENT_CONNECTION_REVOVE_BTN);
     info("Removed to the user");
   }
 
@@ -129,9 +129,9 @@ $(byText("Connect")).click();
    */
   public void resetConnection(String username) {
     searchPeople(username, null, null, null);
-    if (evt.waitForAndGetElement(ELEMENT_CONNECTION_REVOVE_BTN.replace("${user}", username), 3000, 0) != null)
+    if (evt.waitForAndGetElement(ELEMENT_CONNECTION_REVOVE_BTN, 3000, 0) != null)
       removeConnection(username);
-    if (evt.waitForAndGetElement(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}", username), 3000, 0) != null)
+    if (evt.waitForAndGetElement(ELEMENT_CONNECTION_CANCEL_BTN, 3000, 0) != null)
       cancelConnection(username);
     if (evt.waitForAndGetElement(ELEMENT_CONNECTION_IGNORE_BTN.replace("${user}", username), 3000, 0) != null)
       ignoreConnection(username);
@@ -169,7 +169,7 @@ $(byText("Connect")).click();
     if (accept)
     $(byText("Remove Connection")).should(Condition.exist);
     else
-      evt.waitForElementNotPresent(ELEMENT_CONNECTION_REVOVE_BTN.replace("${user}", username));
+      evt.waitForElementNotPresent(ELEMENT_CONNECTION_REVOVE_BTN);
   }
 
   /**
@@ -182,11 +182,11 @@ $(byText("Connect")).click();
     searchPeople(userName, null, null, null);
     if (isSent) {
       info("Verify that connection request is sent to the user");
-      evt.waitForAndGetElement(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}", userName));
+      evt.waitForAndGetElement(ELEMENT_CONNECTION_CANCEL_BTN);
       info("The request is sent successfully");
     } else {
       info("Verify that connection request isnot sent to the user");
-      evt.waitForElementNotPresent(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}", userName));
+      evt.waitForElementNotPresent(ELEMENT_CONNECTION_CANCEL_BTN);
       info("The request isnot sent successfully");
     }
   }

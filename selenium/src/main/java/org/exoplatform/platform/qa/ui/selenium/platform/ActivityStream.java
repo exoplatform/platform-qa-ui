@@ -314,7 +314,7 @@ public class ActivityStream {
       if (repeat > 5)
         break;
       // if comment box is shown, break the loop
-      if (evt.waitForAndGetElement(ELEMENT_COMMENT_BUTTON.replace("${activityText}", filename), 3000, 0) != null)
+      if (evt.waitForAndGetElement(ELEMENT_COMMENT_BUTTON, 3000, 0) != null)
         break;
 
       info("Click on icon comment with repeat " + repeat);
@@ -340,7 +340,7 @@ public class ActivityStream {
         Actions action = new Actions(testBase.getExoWebDriver().getWebDriver());
         action.moveToElement(input).sendKeys(textContent).build().perform();
         info("Click on comment button to add comment to the activity");
-        evt.click(ELEMENT_COMMENT_BUTTON.replace("${activityText}", filename));
+        evt.click(ELEMENT_COMMENT_BUTTON);
       }
       Utils.pause(2000);
       info("Repeat " + repeat1);
@@ -359,7 +359,7 @@ public class ActivityStream {
     info("add comment using javascript");
     evt.click(ELEMENT_ICON_COMMENT.replace("${title}", activityText));
     WebElement commentText = evt.waitForAndGetElement(ELEMENT_COMMENTBOX.replace("${title}", activityText));
-    WebElement commentButton = evt.waitForAndGetElement(ELEMENT_COMMENT_BUTTON.replace("${activityText}", activityText));
+    WebElement commentButton = evt.waitForAndGetElement(ELEMENT_COMMENT_BUTTON);
     WebElement workingLabel = evt.waitForAndGetElement(ELEMENT_ACTIVITY_ADD_YOUR_COMMENTLABEL.replace("${activityText}",
                                                                                                       activityText));
 
@@ -369,7 +369,7 @@ public class ActivityStream {
     ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].disabled = false;", commentButton);
     ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].className = 'btn pull-right btn-primary';",
                                                                       commentButton);
-    evt.click(ELEMENT_COMMENT_BUTTON.replace("${activityText}", activityText));
+    evt.click(ELEMENT_COMMENT_BUTTON);
     info("Verify comment successfully");
     evt.waitForAndGetElement(ELEMENT_DELETE_COMMENT_BUTTON.replace("${activityText}", activityText).replace("${commentText}",
                                                                                                             contentOfComment),
@@ -451,7 +451,7 @@ public class ActivityStream {
    */
   public void addText(String text) {
     info("----Add text into activity text box-----");
-    $(byId("cke_1_contents")).click();
+    ELEMENT_ACTIVITY_INPUT_TEXT.click();
     executeJavaScript(" CKEDITOR.instances.composerInput.insertText(\""+text+"\")","");
   }
 
@@ -745,7 +745,7 @@ public class ActivityStream {
       Utils.pause(2000);
       if (!textContent.isEmpty())
         evt.type(ELEMENT_COMMENTBOX.replace("${title}", activity), textContent, false);
-      evt.click(ELEMENT_COMMENT_BUTTON.replace("${activityText}", activity));
+      evt.click(ELEMENT_COMMENT_BUTTON);
     }
     evt.waitForAndGetElement(ELEMENT_PUBLICATION_COMMENTPOSTED_MENTION.replace("$activity", activity).replace("$username",
                                                                                                               username));
