@@ -97,7 +97,9 @@ public class SOC_HomePageTestIT extends Base {
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"test\")", "");
     // click on the button comment
     ELEMENT_COMMENT_BUTTON.waitUntil(Condition.enabled, Configuration.timeout).click();
-    executeJavaScript("window.scrollBy(0,-250)","");
+    ELEMENT_COMMENT_BUTTON.waitUntil(Condition.disappears, Configuration.timeout);
+    //scroll up
+    executeJavaScript("window.scrollBy(0,-550)");
     info("Test 15: Delete comment");
 
     // hover on the comment to appear the delete button
