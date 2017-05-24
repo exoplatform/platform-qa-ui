@@ -553,16 +553,16 @@ public class NavigationToolbar {
     info("Click on administration icon");
     $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,10000);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-    $(byText("Community")).waitUntil(Condition.appears,10000);
-    $(byText("Community")).hover();
-    $(byText("Add Users")).click();
+    ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears,10000);
+    ELEMENT_ADMINISTRATION_COMMUNITY.hover();
+    ELEMENT_ADMINISTRATION_ADD_USERS.click();
   }
 public void goToManageCommunity(){
   $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,10000);
   $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-  $(byText("Community")).waitUntil(Condition.appears,10000);
-  $(byText("Community")).hover();
-  $(byText("Manage Community")).click();
+  ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears,10000);
+  ELEMENT_ADMINISTRATION_COMMUNITY.hover();
+  ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.click();
 
 }
   /**
