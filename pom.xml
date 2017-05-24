@@ -43,6 +43,7 @@
 
       <module>ecms</module>
 
+      <module>social</module>
     <module>forum</module>
 
     <module>wiki</module>

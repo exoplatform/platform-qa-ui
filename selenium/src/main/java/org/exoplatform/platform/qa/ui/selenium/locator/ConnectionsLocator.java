@@ -19,53 +19,36 @@
  * 02110-1301 USA, or see <http://www.gnu.org/licenses/>.
  */
 package org.exoplatform.platform.qa.ui.selenium.locator;
-
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selenide.$;
 public class ConnectionsLocator {
-
   public static final By ELEMENT_CONNECTION_EVERYONE_TITLE =
-          By.xpath(".//*[@id='UIAllPeople']//*[contains(text(),'Contacts Directory')]");
-
-  public static final String ELEMENT_CONNECTION_CONNECT_BTN = "//a[contains(@href,'${user}')]/../..//*[text()='Connect']";
-
-  public static final String ELEMENT_CONNECTION_CANCEL_BTN =
-          "//a[contains(@href,'${user}')]/../..//*[text()='Cancel Request']";
-
-  public static final String ELEMENT_CONNECTION_REVOVE_BTN =
-          "//a[contains(@href,'${user}')]/../..//*[text()='Remove Connection']";
-
+          By.xpath(".//*[@id='UIAllPeople']//*[contains(text(),'Everyone')]");
+  public static final SelenideElement ELEMENT_CONNECTION_CONNECT_BTN = $(byText("Connect"));
+  public static final SelenideElement ELEMENT_CONNECTION_CANCEL_BTN =$(byText("Cancel Request"));
+  public static final SelenideElement ELEMENT_CONNECTION_REVOVE_BTN =
+          $(byText("Remove Connection"));
   public static final String ELEMENT_CONNECTION_IGNORE_BTN = " //a[contains(@href,'${user}')]/../..//*[text()='Ignore']";
-
-  public static final String ELEMENT_CONNECTION_CONFIRM_BTN = " //a[contains(@href,'${user}')]/../..//*[text()='Confirm']";
-
+  public static final SelenideElement ELEMENT_CONNECTION_CONFIRM_BTN = $(byText("Confirm"));
   public static final String ELEMENT_CONNECTION_USER_AVARTAR = "//a[contains(@href,'${user}')]/img";
-
   public static final String ELEMENT_CONNECTION_USER_NAME = "//a[contains(@href,'${user}') and @data-key='title']";
-
   public static final By ELEMENT_ALL_CONNECTIONS_TAB =
           By.xpath("//*[@id='UIConnectionsPortlet' or @id='UIAllPeoplePortlet']//*[contains(@href,'all-people')]");
-
   public static final By ELEMENT_MY_CONNECTIONS_TAB =
           By.xpath("//*[@id='UIConnectionsPortlet' or @id='UIAllPeoplePortlet']//*[contains(@href,'network')]");
-
   public static final By ELEMENT_REQUEST_RECEIVE_CONNECTIONS_TAB =
           By.xpath("//*[@id='UIConnectionsPortlet' or @id='UIAllPeoplePortlet']//*[contains(@href,'receivedInvitations')]");
-
   public static final By ELEMENT_REQUEST_PENDING_CONNECTIONS_TAB =
           By.xpath("//*[@id='UIConnectionsPortlet' or @id='UIAllPeoplePortlet']//*[contains(@href,'pendingRequests')]");
-
   public static final By ELEMENT_ALL_RESULTS = By.id("searchAll");
-
-  public static final By ELEMENT_NAME_OF_PEOPLE = By.id("name");
-
+  //public static final By ELEMENT_NAME_OF_PEOPLE = By.id("name");
   public static final By ELEMENT_POSITIONS_OF_PEOPLE = By.id("position");
-
   public static final By ELEMENT_SKILL_OF_PEOPLE = By.id("skills");
-
   public static final By ELEMENT_SEARCH_BUTTON = By.id("SearchButton");
-
   public static final String ELEMENT_USER_LINK = "//*[@class='spaceTitle']//*[contains(@href,'${userName}')]";
-
   public static final String ELEMENT_USER_AVATAR = ".//*[@alt='${fullname}']";
+  public static final SelenideElement ELEMENT_NAME_OF_PEOPLE= $(byXpath("//*[@id=\"uiTableProfileUserSearchInput\"]/div[1]/div/div/div[1]/input"));
 }

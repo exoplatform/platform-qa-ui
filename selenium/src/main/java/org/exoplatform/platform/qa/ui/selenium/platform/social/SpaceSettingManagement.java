@@ -1,14 +1,14 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class SpaceSettingManagement {
 

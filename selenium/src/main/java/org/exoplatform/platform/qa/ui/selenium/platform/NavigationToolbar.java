@@ -164,34 +164,34 @@ public class NavigationToolbar {
   public void selectALinkOfUserMenu(specifUserToolBar link) {
     openUserMenu();
     switch (link) {
-    case MY_PROFILE:
-      evt.click(ELEMENT_MY_PROFILE_LINK);
-      Utils.pause(2000);
-      evt.waitForAndGetElement(SocialLocator.ELEMENT_MY_PROFILE_TAB, 3000, 1);
-      break;
-    case MY_ACTIVITY:
-      info("Go to Activities of User");
-      evt.waitForAndGetElement(ELEMENT_ACTIVITIES_LINK);
-      evt.click(ELEMENT_ACTIVITIES_LINK);
-      evt.waitForAndGetElement(ELEMENT_ACTIVITIES_PORTLET, 2000, 1);
-      break;
-    case MY_CONNECTIONS:
-      evt.click(ELEMENT_MY_CONNECTION_LINK);
-      break;
-    case MY_WIKI:
-      evt.click(ELEMENT_MY_WIKI_LINK);
-      break;
-    case MY_DASHBOARD:
-      evt.click(ELEMENT_MY_DASHBOARD_LINK);
-      break;
-    case MY_NOTIFICATION:
-      evt.click(ELEMENT_MY_NOTIFICATIONS_LINK);
-      break;
-    case SETTINGS:
-      evt.click(ELEMENT_MY_SETTINGS_LINK);
-      break;
-    case CHANGE_LANGUAGE:
-      break;
+      case MY_PROFILE:
+        evt.click(ELEMENT_MY_PROFILE_LINK);
+        Utils.pause(2000);
+        evt.waitForAndGetElement(SocialLocator.ELEMENT_MY_PROFILE_TAB, 3000, 1);
+        break;
+      case MY_ACTIVITY:
+        info("Go to Activities of User");
+        $(ELEMENT_ACTIVITIES_LINK).waitUntil(Condition.appears,Configuration.timeout);
+        $(ELEMENT_ACTIVITIES_LINK).click();
+        $(ELEMENT_ACTIVITIES_PORTLET).waitUntil(Condition.appears,Configuration.timeout);
+        break;
+      case MY_CONNECTIONS:
+        evt.click(ELEMENT_MY_CONNECTION_LINK);
+        break;
+      case MY_WIKI:
+        evt.click(ELEMENT_MY_WIKI_LINK);
+        break;
+      case MY_DASHBOARD:
+        evt.click(ELEMENT_MY_DASHBOARD_LINK);
+        break;
+      case MY_NOTIFICATION:
+        evt.click(ELEMENT_MY_NOTIFICATIONS_LINK);
+        break;
+      case SETTINGS:
+        evt.click(ELEMENT_MY_SETTINGS_LINK);
+        break;
+      case CHANGE_LANGUAGE:
+        break;
     }
   }
 
@@ -218,6 +218,7 @@ public class NavigationToolbar {
        $(ELEMENT_LINK_SETUP).click();
         info("Element " + ELEMENT_MENU_CONTENT_LINK + "... is displayed");
         $(ELEMENT_MENU_CONTENT_LINK).click();
+
     info("Site Explorer is shown successfully");
   }
 
@@ -504,7 +505,6 @@ public class NavigationToolbar {
    */
   public void goToMyActivities() {
     selectALinkOfUserMenu(specifUserToolBar.MY_ACTIVITY);
-    Utils.pause(2000);
   }
 
   /**
@@ -549,15 +549,22 @@ public class NavigationToolbar {
   public void goToAddUser() {
     info("Go to add user page");
 
-      info("Click on administration icon");
+
+    info("Click on administration icon");
     $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,10000);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-    $(byText("Community")).waitUntil(Condition.appears,10000);
-    $(byText("Community")).hover();
-    $(byText("Add Users")).click();
-
+    ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears,10000);
+    ELEMENT_ADMINISTRATION_COMMUNITY.hover();
+    ELEMENT_ADMINISTRATION_ADD_USERS.click();
   }
+public void goToManageCommunity(){
+  $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,10000);
+  $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+  ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears,10000);
+  ELEMENT_ADMINISTRATION_COMMUNITY.hover();
+  ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.click();
 
+}
   /**
    * Open Notification list
    */

@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.social;
+package org.exoplatform.platform.qa.ui.social.pageobject;
 
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_TREE_WIKI_NAME;
@@ -18,7 +18,7 @@ import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 public class NotificationActivity {
   private final TestBase       testBase;
 
-  //public WikiHomePage          wikiHome;
+  // public WikiHomePage wikiHome;
 
   public PlatformBase          plf;
 
@@ -32,7 +32,7 @@ public class NotificationActivity {
   public NotificationActivity(TestBase testBase) {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
-    //this.wikiHome = new WikiHomePage(testBase);
+    // this.wikiHome = new WikiHomePage(testBase);
     this.plf = new PlatformBase(testBase);
   }
 
@@ -205,12 +205,15 @@ public class NotificationActivity {
       WebElement commentButton = evt.waitForAndGetElement(ELEMENT_COMMENT_BUTTON);
       WebElement workingLabel = evt.waitForAndGetElement(ELEMENT_ACTIVITY_ADD_YOUR_COMMENTLABEL);
 
-      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].textContent = '';", workingLabel);
-      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].textContent = '" + comment + "';",
-                                                                        commentText);
-      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].disabled = false;", commentButton);
-      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].className = 'btn pull-right btn-primary';",
-                                                                        commentButton);
+      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].textContent = '';",
+                                                                                     workingLabel);
+      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].textContent = '" + comment
+          + "';", commentText);
+      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].disabled = false;",
+                                                                                     commentButton);
+      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript(
+                                                                                     "arguments[0].className = 'btn pull-right btn-primary';",
+                                                                                     commentButton);
       evt.click(ELEMENT_COMMENT_BUTTON);
       info("Verify comment successfully");
       evt.waitForAndGetElement(ELEMENT_DELETE_COMMENT_BUTTON.replace("${commentText}", comment),

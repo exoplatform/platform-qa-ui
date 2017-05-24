@@ -1,35 +1,34 @@
 package org.exoplatform.platform.qa.ui.ecms.pageobject;
 
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_SELECT_USER_ICON1;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+        import com.codeborne.selenide.Condition;
+        import com.codeborne.selenide.Configuration;
+        import org.exoplatform.platform.qa.ui.core.PLFData;
+        import org.exoplatform.platform.qa.ui.selenium.*;
+        import org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator;
+        import org.exoplatform.platform.qa.ui.selenium.platform.*;
+        import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
+        import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
+        import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
+        import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+        import org.exoplatform.platform.qa.ui.selenium.testbase.ManageFileTestBase;
+        import org.openqa.selenium.By;
+        import org.openqa.selenium.JavascriptExecutor;
+        import org.openqa.selenium.Keys;
+        import org.openqa.selenium.WebElement;
+        import org.openqa.selenium.interactions.Actions;
+        import org.openqa.selenium.support.ui.ExpectedConditions;
+        import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.ArrayList;
+        import java.util.ArrayList;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-
-import org.exoplatform.platform.qa.ui.core.PLFData;
-import org.exoplatform.platform.qa.ui.selenium.*;
-import org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator;
-import org.exoplatform.platform.qa.ui.selenium.platform.*;
-import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
-import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
-import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ManageFileTestBase;
+        import static com.codeborne.selenide.Selenide.$;
+        import static com.codeborne.selenide.Selectors.*;
+        import static com.codeborne.selenide.Selenide.executeJavaScript;
+        import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
+        import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
+        import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_SELECT_USER_ICON1;
+        import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
+        import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class SiteExplorerHome {
   private final TestBase       testBase;
@@ -38,7 +37,7 @@ public class SiteExplorerHome {
 
   public Button                button;
 
-  public CreateNewDocument     CreNewDoc;
+  public CreateNewDocument CreNewDoc;
 
   public Dialog                dialog;
 
@@ -65,7 +64,7 @@ public class SiteExplorerHome {
   /**
    * Go to a folder by a path in SE Example: go to Site management drive-->a
    * folder
-   * 
+   *
    * @param path
    * @param drive
    */
@@ -73,14 +72,15 @@ public class SiteExplorerHome {
     info("Go to selected Drive");
 
     $(byId("uiActionsBarContainer")).find(byText("Site Management")).click();
-    $(byText(drive)).waitUntil(Condition.appears, Configuration.timeout);
+
+    $(byText(drive)).waitUntil(Condition.appears,Configuration.timeout);
     $(byText(drive)).click();
-    $(ELEMENT_SIDE_BAR_MAINTAB).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_SIDE_BAR_MAINTAB).waitUntil(Condition.appears,Configuration.timeout);
     $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
     info("Go to folder");
-    if (!path.isEmpty()) {
+    if(!path.isEmpty()){
       String[] arrayPath = path.split("/");
-      for (String arrayElement : arrayPath) {
+      for (String arrayElement : arrayPath){
         selectNode(arrayElement);
       }
     }
@@ -109,7 +109,7 @@ public class SiteExplorerHome {
 
   /**
    * Create a new folder. Input the title and folder type
-   * 
+   *
    * @param title
    * @param folderType
    */
@@ -136,13 +136,14 @@ public class SiteExplorerHome {
     info("Click on New Document on Action Bar");
     $(ELEMENT_ACTIONBAR_ADDDOCUMENT).click();
     info("Verify that New content page is shown");
-    $(ELEMENT_ADDDOCUMENT_CHOICETYPE).waitUntil(Condition.appears, Configuration.timeout);
+
+    $(ELEMENT_ADDDOCUMENT_CHOICETYPE).waitUntil(Condition.appears,Configuration.timeout);
     info("New content page is shown successfully");
   }
 
   /**
    * Add Symlink for a node
-   * 
+   *
    * @param node
    */
   public void addSymlink(String node) {
@@ -153,7 +154,7 @@ public class SiteExplorerHome {
 
   /**
    * Delete data by title
-   * 
+   *
    * @param title
    */
   public void deleteData(String title, boolean... destination) {
@@ -164,7 +165,8 @@ public class SiteExplorerHome {
     $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
 
     info("Right click on nodename");
-    $(byId("UITreeExplorer")).find(byLinkText(title)).waitUntil(Condition.appears, Configuration.timeout).contextClick();
+
+    $(byId("UITreeExplorer")).find(byLinkText(title)).waitUntil(Condition.appears,Configuration.timeout).contextClick();
     info("Click on Delete link");
     $(ELEMENT_SITEEXPLORER_ACTION_DELETE).click();
     info("Click on Delete button on Confirm popup");
@@ -212,7 +214,7 @@ public class SiteExplorerHome {
 
   /**
    * Cut and paste node
-   * 
+   *
    * @param title
    * @param destination
    */
@@ -228,7 +230,7 @@ public class SiteExplorerHome {
 
   /**
    * Rename a node
-   * 
+   *
    * @param node
    * @param newName
    */
@@ -244,7 +246,7 @@ public class SiteExplorerHome {
 
   /**
    * Upload a file
-   * 
+   *
    * @param link
    * @param params
    */
@@ -279,7 +281,7 @@ public class SiteExplorerHome {
 
   /**
    * Upload a file
-   * 
+   *
    * @param link
    * @param params
    */
@@ -316,7 +318,7 @@ public class SiteExplorerHome {
 
   /**
    * Add tag to a Content
-   * 
+   *
    * @param tag
    */
   public void addTag(String tag) {
@@ -336,7 +338,7 @@ public class SiteExplorerHome {
 
   /**
    * Edit a Tag
-   * 
+   *
    * @param oldName
    * @param newName
    */
@@ -351,9 +353,9 @@ public class SiteExplorerHome {
     evt.click(ELEMENT_SIDEBAR_TAGCLOUD_POPUP_EDIT.replace("${name}", oldName));
     evt.waitForAndGetElement(ELEMENT_TAG_POPUP_NAME_FIELD);
     info("Input new name of tag");
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].setAttribute('value', '"
-        + newName + "')",
-                                                                                   evt.waitForAndGetElement(ELEMENT_TAG_POPUP_NAME_FIELD));
+
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].setAttribute('value', '" + newName + "')",
+            evt.waitForAndGetElement(ELEMENT_TAG_POPUP_NAME_FIELD));
     info("Save all changes");
     evt.clickByJavascript(ELEMENT_TAG_POPUP_SAVE);
     info("Verify that the new name of tag is changed");
@@ -365,7 +367,7 @@ public class SiteExplorerHome {
 
   /**
    * Delete a tag
-   * 
+   *
    * @param tag
    */
   public void deleteTag(String tag) {
@@ -388,16 +390,16 @@ public class SiteExplorerHome {
 
   /**
    * Edit a Document
-   * 
+   *
    * @param content
    */
   public void editDocument(String newTitle, String content) {
 
     $(ELEMENT_ACTIONBAR_MORE).click();
     $(ELEMENT_ACTIONBAR_EDIT).click();
-    if ($(ELEMENT_FILE_FORM_TITLE).is(Condition.enabled)) {
-      $(ELEMENT_FILE_FORM_TITLE).setValue(newTitle);
-    }
+
+    if ($(ELEMENT_FILE_FORM_TITLE).is(Condition.enabled)){
+      $(ELEMENT_FILE_FORM_TITLE).setValue(newTitle);}
     $(ELEMENT_FILEFORM_BLANK_CONTENT).click();
     $(ELEMENT_FILEFORM_BLANK_CONTENT).sendKeys(content);
   }
@@ -427,7 +429,7 @@ public class SiteExplorerHome {
 
   /**
    * Open Setting drive page
-   * 
+   *
    * @param type
    * @param order
    */
@@ -435,32 +437,32 @@ public class SiteExplorerHome {
     evt.click(ELEMENT_ACTIONBAR_SETTINGS);
     info("Go to type " + type);
     switch (type) {
-    case ALPHABETICAL:
-      evt.select(ELEMENT_DRIVERSETTINGS_SORTBY, "Alphabetical");
-      break;
+      case ALPHABETICAL:
+        evt.select(ELEMENT_DRIVERSETTINGS_SORTBY, "Alphabetical");
+        break;
 
-    case TYPE:
-      evt.select(ELEMENT_DRIVERSETTINGS_SORTBY, "Type");
-      break;
+      case TYPE:
+        evt.select(ELEMENT_DRIVERSETTINGS_SORTBY, "Type");
+        break;
 
-    case CREATEDDATE:
-      evt.select(ELEMENT_DRIVERSETTINGS_SORTBY, "Created Date");
-      break;
+      case CREATEDDATE:
+        evt.select(ELEMENT_DRIVERSETTINGS_SORTBY, "Created Date");
+        break;
 
-    case MODIFIEDDATE:
-      evt.select(ELEMENT_DRIVERSETTINGS_SORTBY, "Modified Date");
-      break;
+      case MODIFIEDDATE:
+        evt.select(ELEMENT_DRIVERSETTINGS_SORTBY, "Modified Date");
+        break;
     }
 
     info("Go to type " + order);
     switch (order) {
-    case ASCENDING:
-      evt.select(ELEMENT_DRIVERSETTINGS_ORDER, "Ascending");
-      break;
+      case ASCENDING:
+        evt.select(ELEMENT_DRIVERSETTINGS_ORDER, "Ascending");
+        break;
 
-    case DESCENDING:
-      evt.select(ELEMENT_DRIVERSETTINGS_ORDER, "Descending");
-      break;
+      case DESCENDING:
+        evt.select(ELEMENT_DRIVERSETTINGS_ORDER, "Descending");
+        break;
     }
 
     evt.click(ELEMENT_DRIVERSETTINGS_SAVE);
@@ -479,12 +481,13 @@ public class SiteExplorerHome {
 
   /**
    * Select a node by name
-   * 
+   *
    * @param nodeName
    */
   public void selectNode(String nodeName) {
     info("Verify that nodeName:" + nodeName + " is shown");
-    $(byText(nodeName)).waitUntil(Condition.appears, Configuration.timeout);
+
+    $(byText(nodeName)).waitUntil(Condition.appears,Configuration.timeout);
     info("Click on the nodeName:" + nodeName);
     $(byText(nodeName)).click();
     info("Finished selecting nodeName:" + nodeName);
@@ -501,7 +504,7 @@ public class SiteExplorerHome {
 
   /**
    * Lock a Node
-   * 
+   *
    * @param name
    */
   public void lockNode(String name) {
@@ -513,7 +516,7 @@ public class SiteExplorerHome {
 
   /**
    * Unlock a Node
-   * 
+   *
    * @param name
    */
   public void unlockNode(String name) {
@@ -533,7 +536,7 @@ public class SiteExplorerHome {
 
   /**
    * Add a Relation for many files
-   * 
+   *
    * @param nameContent
    * @param path
    */
@@ -555,7 +558,7 @@ public class SiteExplorerHome {
 
   /**
    * Add category for a file in SE
-   * 
+   *
    * @param categoryTreeName
    * @param arrayCatePath
    * @param nameSelectedCategory
@@ -586,7 +589,7 @@ public class SiteExplorerHome {
 
   /**
    * Go to the path that include content files to create relation
-   * 
+   *
    * @param path
    */
   public void goToPathHasFiles(String path) {
@@ -617,7 +620,7 @@ public class SiteExplorerHome {
 
   /**
    * Delete Relation By QuynhPT
-   * 
+   *
    * @param nameContent
    */
   public void deleteRelation(String nameContent) {
@@ -629,7 +632,7 @@ public class SiteExplorerHome {
   /**
    * Delete a category that is added to the file in SE By QuynhPT date
    * 16/01/2015
-   * 
+   *
    * @param nameCategory
    */
   public void deleteCategory(String nameCategory) {
@@ -655,29 +658,29 @@ public class SiteExplorerHome {
 
   /**
    * Select a value for behavior
-   * 
+   *
    * @param value
    */
   public void selectBehavior(defineValueBehavior value) {
     switch (value) {
-    case CREATE_NEW:
-      evt.click(ELEMENT_IMPORT_NODE_POPUP_BEHAVIOR_CREATE_NEW);
-      break;
-    case REMOVE_EXISTING:
-      evt.click(ELEMENT_IMPORT_NODE_POPUP_BEHAVIOR_REMOVE_EXISTING);
-      break;
-    case REPLACE_EXISTING:
-      evt.click(ELEMENT_IMPORT_NODE_POPUP_BEHAVIOR_REPLACE_EXISTING);
-      break;
-    case THROW_EXEPTION:
-      evt.click(ELEMENT_IMPORT_NODE_POPUP_BEHAVIOR_THROW_EXCEPTION);
-      break;
+      case CREATE_NEW:
+        evt.click(ELEMENT_IMPORT_NODE_POPUP_BEHAVIOR_CREATE_NEW);
+        break;
+      case REMOVE_EXISTING:
+        evt.click(ELEMENT_IMPORT_NODE_POPUP_BEHAVIOR_REMOVE_EXISTING);
+        break;
+      case REPLACE_EXISTING:
+        evt.click(ELEMENT_IMPORT_NODE_POPUP_BEHAVIOR_REPLACE_EXISTING);
+        break;
+      case THROW_EXEPTION:
+        evt.click(ELEMENT_IMPORT_NODE_POPUP_BEHAVIOR_THROW_EXCEPTION);
+        break;
     }
   }
 
   /**
    * Import a Node By QuynhPt date 16/01/2015
-   * 
+   *
    * @param linkFile
    * @param behavior
    * @param version
@@ -701,11 +704,11 @@ public class SiteExplorerHome {
 
     if (version) {
       WebElement uploadVersion = evt.waitForAndGetElement(ELEMENT_IMPORT_NODE_POPUP_VERSION_HISTORY_BUTTON,
-                                                          testBase.getDefaultTimeout(),
-                                                          1,
-                                                          2);
-      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';",
-                                                                                     uploadVersion);
+
+              testBase.getDefaultTimeout(),
+              1,
+              2);
+      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';", uploadVersion);
       uploadVersion.sendKeys(testBase.getAbsoluteFilePath(linkVersion));
       String[] namefile = linkVersion.split("/");
       evt.waitForAndGetElement(ELEMENT_IMPORT_NODE_POPUP_UPLOAD_FILE_LABEL.replace("${fileName}", namefile[1]));
@@ -721,7 +724,7 @@ public class SiteExplorerHome {
 
   /**
    * Export node By QuynhPT date 16/01/2015
-   * 
+   *
    * @param systemView
    * @param zip
    */
@@ -749,7 +752,7 @@ public class SiteExplorerHome {
 
   /**
    * Go to Properties popup By QuynhPT
-   * 
+   *
    * @param property
    * @param value
    */
@@ -777,7 +780,7 @@ public class SiteExplorerHome {
 
   /**
    * Manage Publication popup By thunt Update QuynhPT
-   * 
+   *
    * @param state
    * @param date
    */
@@ -837,7 +840,7 @@ public class SiteExplorerHome {
 
   /**
    * Add a document translation
-   * 
+   *
    * @param path
    * @param content
    */
@@ -869,7 +872,7 @@ public class SiteExplorerHome {
 
   /**
    * Add a category for a node
-   * 
+   *
    * @param node
    * @param category
    */
@@ -923,7 +926,7 @@ public class SiteExplorerHome {
 
   /**
    * Add/Edit a comment
-   * 
+   *
    * @param content
    */
   public void addEditComment(String content, boolean isAdd) {
@@ -948,7 +951,7 @@ public class SiteExplorerHome {
 
   /**
    * Delete a file or node in SE by clicking a checkbox of that file
-   * 
+   *
    * @param file
    */
   public void selectAndDeleteByCheckBox(String file) {
@@ -973,7 +976,7 @@ public class SiteExplorerHome {
 
   /**
    * Go to a drive
-   * 
+   *
    * @param nameDrive
    */
   public void selectADrive(String nameDrive) {
@@ -985,7 +988,7 @@ public class SiteExplorerHome {
 
   /**
    * Go to a folder
-   * 
+   *
    * @param path
    */
   public void goToAFolder(String path) {
@@ -1003,7 +1006,7 @@ public class SiteExplorerHome {
 
   /**
    * Go to a folder in Admin view
-   * 
+   *
    * @param name
    */
   public void openAFolder(String name) {
@@ -1050,7 +1053,7 @@ public class SiteExplorerHome {
   public void selectFileExplorer() {
     info("Select File Explorer");
     WebElement el = (new WebDriverWait(testBase.getExoWebDriver().getWebDriver(),
-                                       30)).until(ExpectedConditions.presenceOfElementLocated(ELEMENT_FILE_EXPLORER_ICON));
+            30)).until(ExpectedConditions.presenceOfElementLocated(ELEMENT_FILE_EXPLORER_ICON));
     el.click();
     Utils.pause(3000);
   }
@@ -1074,7 +1077,7 @@ public class SiteExplorerHome {
 
   /**
    * Open a file from right panel
-   * 
+   *
    * @param filename
    */
   public void selectAFile(String filename) {
@@ -1092,8 +1095,8 @@ public class SiteExplorerHome {
   public void selectAllFiles() {
     info("Select all file");
     WebElement el =
-                  (new WebDriverWait(testBase.getExoWebDriver().getWebDriver(),
-                                     30)).until(ExpectedConditions.presenceOfElementLocated(ELEMENT_SITE_EXPLORER_ALL_CHECKBOX));
+            (new WebDriverWait(testBase.getExoWebDriver().getWebDriver(),
+                    30)).until(ExpectedConditions.presenceOfElementLocated(ELEMENT_SITE_EXPLORER_ALL_CHECKBOX));
     if (evt.waitForAndGetElement(ELEMENT_DOCUMENT_LIST_ROW_CONTENT, 5000, 0) != null) {
       info("check on the checkbox");
       // el.click();
@@ -1107,15 +1110,15 @@ public class SiteExplorerHome {
 
   /**
    * Select a new content in list
-   * 
+   *
    * @param nameContent
    */
   public void selectAContentType(String nameContent) {
     info("Select a content");
     WebElement el =
-                  (new WebDriverWait(testBase.getExoWebDriver().getWebDriver(),
-                                     30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(ELEMENT_SITE_EXPLORER_CONTENT_NAME.replace("${nameContent}",
-                                                                                                                                                nameContent))));
+            (new WebDriverWait(testBase.getExoWebDriver().getWebDriver(),
+                    30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(ELEMENT_SITE_EXPLORER_CONTENT_NAME.replace("${nameContent}",
+                    nameContent))));
     el.click();
     Utils.pause(3000);
   }
@@ -1132,7 +1135,7 @@ public class SiteExplorerHome {
 
   /**
    * <<<<<<< HEAD Check display of drive
-   * 
+   *
    * @param drive
    * @param isDisplay
    */
@@ -1147,7 +1150,7 @@ public class SiteExplorerHome {
 
   /**
    * Check action in view
-   * 
+   *
    * @param view
    * @param action
    */
@@ -1163,7 +1166,7 @@ public class SiteExplorerHome {
 
   /**
    * Check query in saved query
-   * 
+   *
    * @param queries list of queries
    */
   public void checkQueryInSavedQuery(String... queries) {
@@ -1177,7 +1180,7 @@ public class SiteExplorerHome {
 
   /**
    * Check user selector of Documents/Permission
-   * 
+   *
    * @param user
    * @param isPresent
    */
@@ -1194,7 +1197,7 @@ public class SiteExplorerHome {
 
   /**
    * Check personal file
-   * 
+   *
    * @param file
    * @param isPresent
    */
@@ -1205,7 +1208,7 @@ public class SiteExplorerHome {
 
   /**
    * Check SE file
-   * 
+   *
    * @param file
    * @param isPresent
    */
@@ -1239,7 +1242,7 @@ public class SiteExplorerHome {
 
   /**
    * Upload file/files to a specific folder
-   * 
+   *
    * @param folderName
    * @param uploadFiles
    * @throws Exception
@@ -1255,7 +1258,7 @@ public class SiteExplorerHome {
 
   /**
    * Share one document to many spaces
-   * 
+   *
    * @param fileName
    * @param spaceList
    * @param comment
@@ -1280,7 +1283,7 @@ public class SiteExplorerHome {
   /**
    * Activity about shared document is displayed in Intranet Activity Stream &
    * Space Activity Stream
-   * 
+   *
    * @param shareOwner
    * @param fileName
    * @param spaceName
@@ -1299,7 +1302,7 @@ public class SiteExplorerHome {
 
   /**
    * Symlink of shared file is displayed in shared folder
-   * 
+   *
    * @param fileName
    * @param spaceName
    */
@@ -1312,12 +1315,12 @@ public class SiteExplorerHome {
     evt.doubleClickOnElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER);
     // Find the shared file
     evt.waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK.replace("${spaceName}", spaceName)
-                                                                               .replace("${fileName}", fileName));
+            .replace("${fileName}", fileName));
   }
 
   /**
    * Create a space with 2 users
-   * 
+   *
    * @param spaceName
    * @param user1
    * @param user2
@@ -1362,7 +1365,7 @@ public class SiteExplorerHome {
 
   /**
    * Upload and Share a document to a space
-   * 
+   *
    * @param fileName
    * @param spaceName
    * @param comment
@@ -1409,17 +1412,17 @@ public class SiteExplorerHome {
     evt.doubleClickOnElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER);
     // Find the shared file
     evt.waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK.replace("${spaceName}", spaceName)
-                                                                               .replace("${fileName}", fileName));
+            .replace("${fileName}", fileName));
     // Delete symlink
     evt.rightClickOnElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK.replace("${spaceName}", spaceName)
-                                                                              .replace("${fileName}", fileName));
+            .replace("${fileName}", fileName));
     evt.waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE);
     evt.click(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE);
     // confirm
     evt.waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE_OPTION.replace("${action}", "Delete"));
     evt.click(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE_OPTION.replace("${action}", "Delete"));
     evt.waitForElementNotPresent(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK.replace("${spaceName}", spaceName)
-                                                                                   .replace("${fileName}", fileName));
+            .replace("${fileName}", fileName));
   }
 
   public void checkShareActivityAfterDeleted(String spaceName, boolean verifyInSpace) {
@@ -1427,7 +1430,7 @@ public class SiteExplorerHome {
     SpaceManagement spaceManage = new SpaceManagement(testBase);
 
     evt.waitForElementNotPresent(ELEMENT_SHARE_DOCUMENT_CONTENT.replace("${author}", PLFData.DATA_NAME_USER1)
-                                                               .replace("${spaceName}", spaceName));
+            .replace("${spaceName}", spaceName));
     if (verifyInSpace) {
       homepage.goToSpecificSpace(spaceName);
       spaceManage.goToActivityStreamTab();
@@ -1457,7 +1460,7 @@ public class SiteExplorerHome {
     evt.doubleClickOnElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER);
     // Find the shared file
     evt.waitForElementNotPresent(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK.replace("${spaceName}", spaceName)
-                                                                                   .replace("${fileName}", fileName));
+            .replace("${fileName}", fileName));
   }
 
   /**
@@ -1497,12 +1500,13 @@ public class SiteExplorerHome {
 
   /**
    * Delete all files in a folder under Admin view
-   * 
+   *
    * @param title
    */
   public void verifyContentCreatedSuccessfully(String title) {
     info("Verify Content was created successfully");
-    $(byText(title)).waitUntil(Condition.appears, Configuration.timeout);
+
+    $(byText(title)).waitUntil(Condition.appears,Configuration.timeout);
     info("Content was created successfully");
   }
 

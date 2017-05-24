@@ -124,9 +124,9 @@ public class HomePagePlatform {
     info("--Go to Connections page---");
     Utils.pause(2000);
     info("Click on Connection link");
-    evt.click(ELEMENT_CONNECTIONS_LINK_PLF, 2);
+    $(ELEMENT_CONNECTIONS_LINK_PLF).click();
     info("Verify that the connections portlet is shown");
-    evt.waitForAndGetElement(ELEMENT_CONNECTION_EVERYONE_TITLE, 2000, 0);
+    $(ELEMENT_CONNECTION_EVERYONE_TITLE).waitUntil(Condition.appears,Configuration.timeout);
     info("The connections portlet is shown successfully");
   }
 

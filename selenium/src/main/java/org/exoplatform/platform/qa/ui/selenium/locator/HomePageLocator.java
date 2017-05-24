@@ -558,5 +558,8 @@ public final class HomePageLocator {
   // confirm popup
   public static final By ELEMENT_DELETE_POPUP_OK =
           By.xpath(".//*[@id='UISocialPopupConfirmation']//*[contains(text(),'OK')]");
-
+  public static final SelenideElement ELEMENT_WHO_LIKED_POPUP=$(byClassName("listLikedBox "));
+  public static final String ELEMENT_CONTAINER_ACTIVITY="activityContainer{id}";
+  public static final String ELEMENT_DATE_ACTIVITY="dateTime";
+  public static final String ELEMENT_DELETE_ACTIVITY="DeleteActivityButton{id}";
 }

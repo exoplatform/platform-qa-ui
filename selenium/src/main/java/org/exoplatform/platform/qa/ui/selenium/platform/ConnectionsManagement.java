@@ -1,15 +1,21 @@
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_NAME_OF_PROFILE_TOP_LEFT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.WebDriver;
 
 ;
 
@@ -42,11 +48,11 @@ public class ConnectionsManagement {
       break;
     case RECEIVE:
       info("Go to receive tab");
-      evt.click(ELEMENT_REQUEST_RECEIVE_CONNECTIONS_TAB, 0, true);
+      $(ELEMENT_REQUEST_RECEIVE_CONNECTIONS_TAB).click();
       break;
     case PENDING:
       info("Go to pending tab");
-      evt.click(ELEMENT_REQUEST_PENDING_CONNECTIONS_TAB, 0, true);
+      $(ELEMENT_REQUEST_PENDING_CONNECTIONS_TAB).click();
       break;
     default:
       info("Go to all tab");
@@ -69,8 +75,8 @@ public class ConnectionsManagement {
       searchPeople(name[0], null, null, null);
     else
       searchPeople(username, null, null, null);
-    evt.clickByJavascript(ELEMENT_CONNECTION_CONNECT_BTN.replace("${user}", username));
-    evt.waitForAndGetElement(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}", username), 2000, 1);
+$(byText("Connect")).click();
+    //evt.waitForAndGetElement(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}", username), 2000, 1);
     info("Connected to the user");
   }
 
@@ -83,8 +89,8 @@ public class ConnectionsManagement {
     info("--Remove a connection of a user--");
     info("Click on remove button");
     searchPeople(username, null, null, null);
-    evt.clickByJavascript(ELEMENT_CONNECTION_REVOVE_BTN.replace("${user}", username));
-    evt.waitForElementNotPresent(ELEMENT_CONNECTION_REVOVE_BTN.replace("${user}", username));
+    evt.clickByJavascript(ELEMENT_CONNECTION_REVOVE_BTN);
+    evt.waitForElementNotPresent(ELEMENT_CONNECTION_REVOVE_BTN);
     info("Removed to the user");
   }
 
@@ -97,8 +103,8 @@ public class ConnectionsManagement {
     info("--Cancel a connection of a user--");
     info("Click on Cancel button");
     searchPeople(username, null, null, null);
-    evt.clickByJavascript(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}", username));
-    evt.waitForElementNotPresent(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}", username));
+    $(byText("Cancel Request")).click();
+    $(byText("Cancel Request")).waitUntil(Condition.disappears,Configuration.timeout);
     info("Canceled to the user");
   }
 
@@ -123,9 +129,9 @@ public class ConnectionsManagement {
    */
   public void resetConnection(String username) {
     searchPeople(username, null, null, null);
-    if (evt.waitForAndGetElement(ELEMENT_CONNECTION_REVOVE_BTN.replace("${user}", username), 3000, 0) != null)
+    if (evt.waitForAndGetElement(ELEMENT_CONNECTION_REVOVE_BTN, 3000, 0) != null)
       removeConnection(username);
-    if (evt.waitForAndGetElement(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}", username), 3000, 0) != null)
+    if (evt.waitForAndGetElement(ELEMENT_CONNECTION_CANCEL_BTN, 3000, 0) != null)
       cancelConnection(username);
     if (evt.waitForAndGetElement(ELEMENT_CONNECTION_IGNORE_BTN.replace("${user}", username), 3000, 0) != null)
       ignoreConnection(username);
@@ -143,9 +149,8 @@ public class ConnectionsManagement {
       searchPeople(fullName[0], null, null, null);
     else
       searchPeople(username, null, null, null);
-    evt.waitForAndGetElement(ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}", username));
-    evt.clickByJavascript(ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}", username));
-    evt.waitForElementNotPresent(ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}", username));
+    $(byText("Confirm")).click();
+    $(byText("Confirm")).waitUntil(Condition.disappears, Configuration.timeout);
     info("Accepted to the user");
   }
 
@@ -156,14 +161,15 @@ public class ConnectionsManagement {
    * @param accept (true: if user accept invitation)
    */
   public void verifyConnection(String username, Boolean accept) {
-    evt.click(ELEMENT_MY_CONNECTIONS_TAB);
+
+    $(ELEMENT_MY_CONNECTIONS_TAB).click();
     // With user confirmed the invitation, user becomes friend and user's name
     // is displayed on user's network list
     searchPeople(username, null, null, null);
     if (accept)
-      evt.waitForAndGetElement(ELEMENT_CONNECTION_REVOVE_BTN.replace("${user}", username));
+    $(byText("Remove Connection")).should(Condition.exist);
     else
-      evt.waitForElementNotPresent(ELEMENT_CONNECTION_REVOVE_BTN.replace("${user}", username));
+      evt.waitForElementNotPresent(ELEMENT_CONNECTION_REVOVE_BTN);
   }
 
   /**
@@ -176,11 +182,11 @@ public class ConnectionsManagement {
     searchPeople(userName, null, null, null);
     if (isSent) {
       info("Verify that connection request is sent to the user");
-      evt.waitForAndGetElement(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}", userName));
+      evt.waitForAndGetElement(ELEMENT_CONNECTION_CANCEL_BTN);
       info("The request is sent successfully");
     } else {
       info("Verify that connection request isnot sent to the user");
-      evt.waitForElementNotPresent(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}", userName));
+      evt.waitForElementNotPresent(ELEMENT_CONNECTION_CANCEL_BTN);
       info("The request isnot sent successfully");
     }
   }
@@ -207,24 +213,24 @@ public class ConnectionsManagement {
   public void searchPeople(String peopleName, String position, String skills, String directory) {
     info("-- Searching people ... --");
     if (peopleName != "" && peopleName != null) {
-      evt.type(ELEMENT_NAME_OF_PEOPLE, peopleName, true);
+
+      ELEMENT_NAME_OF_PEOPLE.setValue(peopleName);
     } else {
       evt.type(ELEMENT_NAME_OF_PEOPLE, "", true);
     }
     if (position != "" && position != null) {
-      evt.type(ELEMENT_POSITIONS_OF_PEOPLE, position, true);
+      $(ELEMENT_POSITIONS_OF_PEOPLE).setValue(position);
     } else {
       evt.type(ELEMENT_POSITIONS_OF_PEOPLE, "", true);
     }
     if (skills != "" && skills != null) {
-      evt.type(ELEMENT_SKILL_OF_PEOPLE, skills, true);
+      $(ELEMENT_SKILL_OF_PEOPLE).setValue(skills);
     } else {
       evt.type(ELEMENT_SKILL_OF_PEOPLE, "", true);
     }
-    evt.clickByJavascript(ELEMENT_SEARCH_BUTTON);
+    $(ELEMENT_SEARCH_BUTTON).click();
     if (directory != "" && directory != null)
-      evt.click(By.linkText(directory));
-    Utils.pause(1000);
+      $(byLinkText(directory)).click();
   }
 
   /**
