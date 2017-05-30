@@ -9,6 +9,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_ALL_CONNECTIONS_TAB;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
@@ -57,7 +58,7 @@ public class SOC_People_Activity_AddTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
-  @Disabled
+  @BugInPLF("SOC-5738")
   // this test case is disabled until resolving this bug:
   // https://jira.exoplatform.org/browse/SOC-5738
   public void test03_AddNewYourActivity() {

@@ -6,8 +6,10 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -51,6 +53,7 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
    * <li>Test Case Name:Edit node.</li>
    */
   @Test
+  @BugInPLF("No issue")
   public void test04_EditNode() {
     info("Test 04: Edit Node");
     String portalName = "portalName" + getRandomNumber();
