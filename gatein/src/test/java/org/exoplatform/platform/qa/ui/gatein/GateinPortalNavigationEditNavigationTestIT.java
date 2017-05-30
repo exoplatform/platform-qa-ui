@@ -6,6 +6,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
