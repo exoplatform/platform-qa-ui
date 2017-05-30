@@ -53,7 +53,7 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
    * <li>Test Case Name:Edit node.</li>
    */
   @Test
-  @Disabled
+  @BugInPLF("No issue")
   public void test04_EditNode() {
     info("Test 04: Edit Node");
     String portalName = "portalName" + getRandomNumber();
