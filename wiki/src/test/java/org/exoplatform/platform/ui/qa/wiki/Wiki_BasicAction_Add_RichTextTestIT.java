@@ -55,6 +55,7 @@ public class Wiki_BasicAction_Add_RichTextTestIT extends Base {
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li>
    */
+  @Test
   public void test01_AddAPageWithLinkWikiPageExisted() {
     info("Test 1: Add a page with link wiki page existed");
     /*

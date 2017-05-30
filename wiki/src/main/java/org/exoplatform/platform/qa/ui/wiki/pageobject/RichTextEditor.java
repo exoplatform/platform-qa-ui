@@ -1,12 +1,15 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.awt.event.KeyEvent;
 import java.io.File;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 
@@ -1302,13 +1305,13 @@ $(ELEMENT_CONTENT_WIKI_FRAME).sendKeys(content);    }
    * @param page
    */
   public void selectPageInAllPagesTab(String page) {
-    WebElement el = evt.waitForAndGetElement(ELEMENT_ALL_PAGE_TAB_PAGE_SELECTED.replace("$title", page), 5000, 1, 2);
-    evt.scrollToElement(el, this.testBase.getExoWebDriver().getWebDriver());
-    if (evt.waitForAndGetElement(ELEMENT_ALL_PAGE_TAB_PAGE_SELECTED.replace("$title", page), 5000, 0) != null) {
+//    WebElement el = evt.waitForAndGetElement(ELEMENT_ALL_PAGE_TAB_PAGE_SELECTED.replace("$title", page), 5000, 1, 2);
+   // evt.scrollToElement(el, this.testBase.getExoWebDriver().getWebDriver());
+    if ($(byText(page)).is(Condition.exist)) {
       info("Select the page");
-      evt.click(ELEMENT_ALL_PAGE_TAB_PAGE_SELECTED.replace("$title", page));
+      ELEMENT_POPUP_SELECT_WIKI_PAGE.find(byText(page)).waitUntil(Condition.appears, Configuration.timeout).click();
       info("Click on Select button");
-      evt.click(ELEMENT_SELECT_BUTTON);
+      $(ELEMENT_SELECT_BUTTON).click();
     }
 
   }
