@@ -65,7 +65,7 @@ public class ManageAlert {
       evt.switchToParentWindow();
     } catch (NoAlertPresentException e) {
     }
-    Utils.pause(1000);
+
   }
 
   /**
@@ -78,7 +78,7 @@ public class ManageAlert {
       evt.switchToParentWindow();
     } catch (NoAlertPresentException e) {
     }
-    Utils.pause(1000);
+
   }
 
   /**
@@ -87,7 +87,7 @@ public class ManageAlert {
    * @return text from alert
    */
   public String getTextFromAlert() {
-    Utils.pause(1000);
+
     try {
       Alert alert = seleniumWebDriver.switchTo().alert();
       return alert.getText();
@@ -111,7 +111,7 @@ public class ManageAlert {
       if (testBase.loopCount > timeOut / 500) {
         Assert.fail("Message is empty");
       }
-      Utils.pause(500);
+
       testBase.loopCount++;
       waitForConfirmation(confirmationText);
       return;
@@ -125,11 +125,11 @@ public class ManageAlert {
         break;
       }
 
-      Utils.pause(100);
+
     }
     Alert alert = seleniumWebDriver.switchTo().alert();
     alert.accept();
-    Utils.pause(3000);
+
   }
 
   /**
@@ -138,7 +138,7 @@ public class ManageAlert {
    * @param message
    */
   public void verifyAlertMessage(String message) {
-    Utils.pause(1000);
+
     if (evt.isElementPresent(ELEMENT_MESSAGE)) {
       assert evt.getText(ELEMENT_MESSAGE).contains(message) : "Message is wrong. Actual msg is " + evt.getText(ELEMENT_MESSAGE);
     } else if (evt.isElementPresent(ELEMENT_INFO)) {
@@ -152,7 +152,7 @@ public class ManageAlert {
     if ($(button.ELEMENT_YES_BUTTON).is(Condition.exist)) {
       $(button.ELEMENT_YES_BUTTON).click();
     }
-    Utils.pause(1000);
+
   }
 
   /**
@@ -168,6 +168,6 @@ public class ManageAlert {
       evt.switchToParentWindow();
     } catch (NoAlertPresentException e) {
     }
-    Utils.pause(1000);
+
   }
 }

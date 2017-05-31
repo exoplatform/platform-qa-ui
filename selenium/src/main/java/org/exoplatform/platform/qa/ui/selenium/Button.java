@@ -132,7 +132,7 @@ public class Button {
   public void confirm() {
     evt.waitForAndGetElement(ELEMENT_CONFIRM_BUTTON);
     evt.click(ELEMENT_CONFIRM_BUTTON);
-    Utils.pause(500);
+
   }
 
   /**
@@ -141,7 +141,7 @@ public class Button {
   public void save() {
     evt.waitForAndGetElement(ELEMENT_SAVE_BUTTON);
     evt.click(ELEMENT_SAVE_BUTTON);
-    Utils.pause(500);
+
   }
 
   /**
@@ -153,7 +153,7 @@ public class Button {
     } else if (evt.waitForAndGetElement(ELEMENT_OK_BUTTON_LINK, 5000, 0) != null) {
       evt.click(ELEMENT_OK_BUTTON_LINK);
     }
-    Utils.pause(500);
+
   }
 
   /**
@@ -162,7 +162,7 @@ public class Button {
   public void no() {
     evt.waitForAndGetElement(ELEMENT_NO_BUTTON);
     evt.click(ELEMENT_NO_BUTTON);
-    Utils.pause(500);
+
   }
 
   /**
@@ -174,7 +174,7 @@ public class Button {
     } else if (evt.waitForAndGetElement(ELEMENT_YES_BUTTON_AUX, 3000, 0) != null) {
       evt.clickByJavascript(ELEMENT_YES_BUTTON_AUX);
     }
-    Utils.pause(500);
+
   }
 
   /**
@@ -183,7 +183,7 @@ public class Button {
   public void close() {
     evt.waitForAndGetElement(ELEMENT_CLOSE_BUTTON);
     evt.click(ELEMENT_CLOSE_BUTTON);
-    Utils.pause(500);
+
   }
 
   /**
@@ -204,7 +204,7 @@ public class Button {
     evt.waitForAndGetElement(ELEMENT_ADD_BUTTON);
     evt.click(ELEMENT_ADD_BUTTON);
     evt.waitForElementNotPresent(ELEMENT_ADD_BUTTON);
-    Utils.pause(500);
+
   }
 
   /**
@@ -216,7 +216,7 @@ public class Button {
     } else if (evt.waitForAndGetElement(ELEMENT_SAVE_CLOSE_BUTTON_2, 3000, 0) != null) {
       evt.click(ELEMENT_SAVE_CLOSE_BUTTON_2);
     }
-    Utils.pause(500);
+
   }
 
   /**
@@ -233,7 +233,7 @@ public class Button {
   public void next() {
     evt.waitForAndGetElement(ELEMENT_NEXT_BUTTON);
     evt.click(ELEMENT_NEXT_BUTTON);
-    Utils.pause(500);
+
   }
 
   /**
@@ -242,7 +242,7 @@ public class Button {
   public void refresh() {
     evt.waitForAndGetElement(ELEMENT_REFRESH_BUTTON);
     evt.click(ELEMENT_REFRESH_BUTTON);
-    Utils.pause(500);
+
   }
 
   /**
@@ -251,7 +251,7 @@ public class Button {
   public void rename() {
     evt.waitForAndGetElement(ELEMENT_RENAME_BUTTON);
     evt.click(ELEMENT_RENAME_BUTTON);
-    Utils.pause(500);
+
   }
 
   /**
@@ -260,7 +260,7 @@ public class Button {
   public void previous() {
     evt.waitForAndGetElement(ELEMENT_PREVIOUS_BUTTON);
     evt.click(ELEMENT_PREVIOUS_BUTTON);
-    Utils.pause(500);
+
   }
 
   /**
@@ -272,7 +272,7 @@ public class Button {
     } else if (evt.isElementPresent(By.xpath("//*[contains(@class, 'wikiPreviewHeader')]//*[contains(@class, 'uiIconClose')]"))) {
       evt.click(By.xpath("//*[contains(@class, 'wikiPreviewHeader')]//*[contains(@class, 'uiIconClose')]"));
     }
-    Utils.pause(1000);
+
   }
 
 }

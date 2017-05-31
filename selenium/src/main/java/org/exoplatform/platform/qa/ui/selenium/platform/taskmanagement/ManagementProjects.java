@@ -101,7 +101,7 @@ public class ManagementProjects {
     goToContMenuGivenProject(project);
     info("Select " + color + " in color list");
     evt.click(ELEMENT_COLOR_TABLE_ITEM.replace("$project", project).replace("$color", color));
-    Utils.pause(2000);
+
   }
 
   /**
@@ -160,7 +160,7 @@ public class ManagementProjects {
       info("Click on " + project + " on left panel");
       evt.click(ELEMENT_LEFT_PANEL_PROJECT_NAME.replace("$project", project));
     }
-    Utils.pause(2000);
+
 
   }
 
@@ -233,7 +233,7 @@ public class ManagementProjects {
     info("Click on Parent project field");
     evt.click(ELEMENT_ADD_PROJECT_PARENT_PROJECT);
     evt.click(ELEMENT_ADD_PROJECT_PARENT_PROJECT_DROP_MENU.replace("$project", project));
-    Utils.pause(2000);
+
   }
 
   /**

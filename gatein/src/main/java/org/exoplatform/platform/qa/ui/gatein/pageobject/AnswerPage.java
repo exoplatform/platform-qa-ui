@@ -59,7 +59,7 @@ public class AnswerPage {
     evt.check(ELEMENT_PUBLIC_MODE, 2);
     evt.click(ELEMENT_PAGE_EDITOR_SAVE_BUTTON);
     pagEditor.finishEditLayout();
-    Utils.pause(2000);
+
   }
 
   /**
@@ -70,7 +70,7 @@ public class AnswerPage {
     info("Go to edit answer portlet");
     navTool.goToEditLayout();
     pagEditor.goToEditPortlet(ELEMENT_FRAME_CONTAIN_PORTLET);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -85,7 +85,7 @@ public class AnswerPage {
       else
         evt.uncheck(ELEMENT_ANSWER_PERMISSION_TAB_PUBLIC_MODE, 2);
     }
-    Utils.pause(2000);
+
   }
 
   /**
@@ -150,7 +150,7 @@ public class AnswerPage {
     }
     evt.click(ELEMENT_EDIT_SAVE_BUTTON);
     evt.click(ELEMENT_PAGE_OK_BUTTON);
-    Utils.pause(1000);
+
   }
 
   /**

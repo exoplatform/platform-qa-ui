@@ -160,7 +160,7 @@ public class CreateNewDocument {
     }
     info("Save the changes");
     evt.click(ELEMENT_CREATE_FOLDER_BUTTON);
-    Utils.pause(2000);
+
   }
 
   /**

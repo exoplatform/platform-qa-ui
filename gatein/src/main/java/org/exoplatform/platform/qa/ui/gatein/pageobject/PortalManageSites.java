@@ -53,7 +53,7 @@ public class PortalManageSites {
   public void goToEditLayout(String site) {
     info("Click on Edit layout button");
     evt.click(ELEMENT_MANAGESITES_EDIT_LAYOUT_ICON.replace("${site}", site));
-    Utils.pause(3000);
+
   }
 
   /**
@@ -65,7 +65,7 @@ public class PortalManageSites {
     goToEditLayout(site);
     info("Click on site's config button");
     evt.click(ELEMENT_MANAGESITES_EDIT_LAYOUT_SITE_CONFIG_BTN);
-    Utils.pause(3000);
+
   }
 
   /**
@@ -76,7 +76,7 @@ public class PortalManageSites {
   public void goToEditSiteConfig(String site) {
     info("Click on Edit Site Configuration button");
     evt.click(ELEMENT_MANAGESITES_EDIT_CONFIG_ICON.replace("${site}", site));
-    Utils.pause(2000);
+
   }
 
   /**
@@ -132,7 +132,7 @@ public class PortalManageSites {
       info("Select group:" + groupSelect);
       evt.click(ELEMENT_PERMISSION_SELECTOR_POPUP_GROUP.replace("${group}", groupSelect));
     }
-    Utils.pause(2000);
+
   }
 
   /**
@@ -143,7 +143,7 @@ public class PortalManageSites {
   public void selectMemberShip(String memberShip) {
     info("Select a membership:" + memberShip);
     evt.click(ELEMENT_PERMISSION_SELECTOR_POPUP_MEMEBRSHIP.replace("${member}", memberShip));
-    Utils.pause(2000);
+
   }
 
   /**
@@ -152,7 +152,7 @@ public class PortalManageSites {
   public void saveNewPortal() {
     info("click on Save button");
     evt.click(ELEMENT_ADD_NEW_PORTAL_POPUP_SAVE_BTN);
-    Utils.pause(3000);
+
   }
 
   /**
@@ -301,7 +301,7 @@ public class PortalManageSites {
       temp.click();
     }
     evt.click(ELEMENT_SAVE_BUTTON);
-    Utils.pause(2000);
+
     evt.waitForElementNotPresent(ELEMENT_POPUP_ADD_PORTAL, 180000, 0);
     if (evt.waitForAndGetElement(ELEMENT_POPUP_ADD_PORTAL, 10000, 0) == null)
       evt.waitForElementNotPresent(ELEMENT_EDIT_PERMISSION_SETTING, 120000);
@@ -320,15 +320,15 @@ public class PortalManageSites {
 
     info("--Setting view permission to " + groupId + ", " + membership + "--");
     String[] groups = groupId.split("/");
-    Utils.pause(500);
+
     evt.click(ELEMENT_ADD_PERMISSION_BUTTON, 0, true);
     for (String group : groups) {
       String groupToSelect = ELEMENT_SELECT_ACCESS_GROUP_ITEM.replace("${group}", group);
       evt.click(groupToSelect);
     }
-    Utils.pause(500);
+
     evt.click(membershipToSelect);
-    Utils.pause(500);
+
     evt.waitForAndGetElement(selectedMembership);
   }
 
@@ -344,7 +344,7 @@ public class PortalManageSites {
     info("--Setting edit permission to " + groupId + ", " + membership + "--");
     String[] groups = groupId.split("/");
     evt.click(ELEMENT_SELECT_PERMISSION_BUTTON);
-    Utils.pause(500);
+
     evt.waitForTextPresent("Permission Selector");
     for (String group : groups) {
       String groupToSelect = ELEMENT_SELECT_EDIT_PERMISSION_MEMBERSHIP.replace("${membership}", group);

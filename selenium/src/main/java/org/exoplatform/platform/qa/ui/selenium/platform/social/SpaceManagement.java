@@ -40,7 +40,7 @@ public class SpaceManagement {
   public void goToCreateSpace() {
     info("Open create space form");
     evt.click(ELEMENT_ADD_NEW_SPACE_BUTTON);
-    Utils.pause(3000);
+
     evt.waitForAndGetElement(ELEMENT_ADD_SPACE_FORM);
   }
 
@@ -133,7 +133,7 @@ public class SpaceManagement {
         for (String group : arrayGroup) {
           if (!group.isEmpty()) {
             evt.click(ELEMENT_SPACE_INVITE_USERS_FROM_GROUP_CHECKBOX);
-            Utils.pause(2000);
+
             info("Select a group:" + group);
             evt.click(ELEMENT_SPACE_INVITE_USERS_FROM_GROUP_SELECT_GROUP.replace("${name}", group));
           }
@@ -197,13 +197,13 @@ public class SpaceManagement {
       evt.click(ELEMENT_SPACE_CHANGE_AVATAR_BTN);
       info("evt.click on upload button");
       evt.click(ELEMENT_UPLOAD_POPUP_SELECT_FILE_BTN);
-      Utils.pause(2000);
+
       info("filepath:" + filepath);
       testBase.uploadFileUsingRobot(filepath);
-      Utils.pause(2000);
+
       evt.click(ELEMENT_SPACE_UPLOAD_CONFIRM_BTN);
       evt.click(ELEMENT_SPACE_UPLOAD_SAVE_BTN);
-      Utils.pause(2000);
+
     }
 
   }
@@ -215,7 +215,7 @@ public class SpaceManagement {
     info("evt.click on Save button");
     evt.clickByJavascript(ELEMENT_SPACE_SAVE_BTN);
     info("Save all changes");
-    Utils.pause(2000);
+
   }
 
   /**
@@ -256,7 +256,7 @@ public class SpaceManagement {
     info("Open Invitation Received tab");
     evt.waitForAndGetElement(ELEMENT_MY_SPACE_INVITATION_RECEIVED, 3000, 0);
     evt.click(ELEMENT_MY_SPACE_INVITATION_RECEIVED);
-    Utils.pause(2000);
+
 
   }
 
@@ -267,7 +267,7 @@ public class SpaceManagement {
     info("Open All spaces tab");
     evt.waitForAndGetElement(ELEMENT_MY_SPACE_ALL_SPACES_TAB, 3000, 0);
     evt.click(ELEMENT_MY_SPACE_ALL_SPACES_TAB);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -324,7 +324,7 @@ public class SpaceManagement {
   public void goToRequestPendingTab() {
     info("Open Request pending tab");
     evt.click(ELEMENT_MY_SPACE_REQUEST_PENDING_TAB);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -404,7 +404,7 @@ public class SpaceManagement {
   public void goToActivityStreamTab() {
     info("Open Activity STream Tab");
     evt.click(ELEMENT_ACTIVITY_STREAM_TAB);
-    Utils.pause(2000);
+
     info("Activity STream portlet is shown");
   }
 
@@ -445,7 +445,7 @@ public class SpaceManagement {
     info("Open Agenda Tab");
     evt.click(ELEMENT_AGENDA_TAB);
     evt.waitForAndGetElement(ELEMENT_AGENDA_EVENT_ADD_BTN, 2000, 0);
-    Utils.pause(2000);
+
     info("Agenda portlet is shown");
   }
 
@@ -467,7 +467,7 @@ public class SpaceManagement {
   public void goToUserProfilePage(String fullName) {
     info("Open User profile page");
     evt.click(ELEMENT_MEMBER_USER_NAME.replace("${fullName}", fullName));
-    Utils.pause(2000);
+
   }
 
   /**

@@ -307,7 +307,7 @@ public class WikiHomePage {
    */
   public void DeleteAttachFiles(String fileName) {
     info("Delete attach files");
-    Utils.pause(2000);
+
     if (evt.waitForAndGetElement(ELEMENT_PAGE_DELETEATTACHFILE_VIEW_MODE.replace("${fileName}", fileName), 5000, 0) != null) {
       $(ELEMENT_PAGE_DELETEATTACHFILE_VIEW_MODE.replace("${fileName}", fileName)).click();
     } else {

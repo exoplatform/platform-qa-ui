@@ -113,7 +113,7 @@ public class PageCreationWizard {
   public void addApplication(SelenideElement tab, SelenideElement element) {
     $(ELEMENT_APPLICATION_TAB_ACTIVE).click();
     $(tab).click();
-    Utils.pause(1000);
+
     //evt.dragAndDropToObject(element, ELEMENT_PAGEEDITOR_VIEWPAGE);
     $(element).dragAndDropTo($(byClassName("VIEW-PAGE")));
   }
@@ -152,7 +152,7 @@ public class PageCreationWizard {
     evt.click(ELEMENT_CONTENT_LIST_SAVE_BTN);
     evt.click(ELEMENT_CONTENT_LIST_CLOSE_BTN);
     evt.click(ELEMENT_PAGE_FINISH_BTN);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -225,7 +225,7 @@ public class PageCreationWizard {
     }
     evt.click(By.linkText("Rows Layout"));
     evt.dragAndDropToObject(By.id(numRow), By.className("UIRowContainer"));
-    Utils.pause(2000);
+
     if (isVerify) {
       evt.mouseOver(ELEMENT_DROP_SOURCE_HAS_LAYOUT, true);
       evt.waitForAndGetElement(ELEMENT_CONTAINER_TITLE.replace("${title}", "Container"));
@@ -249,7 +249,7 @@ public class PageCreationWizard {
       evt.mouseOver(ELEMENT_DROP_SOURCE_HAS_LAYOUT_BY_NAME.replace("${name}", oldTitle), true);
     else
       evt.mouseOver(ELEMENT_DROP_SOURCE_HAS_LAYOUT, true);
-    Utils.pause(3000);
+
     if (!oldTitle.isEmpty())
       evt.click(ELEMENT_EDIT_CONTAINER_ICON_BY_NAME.replace("${name}", oldTitle));
     else
@@ -290,11 +290,11 @@ public class PageCreationWizard {
     }
     if (!title.isEmpty()) {
       evt.mouseOver(ELEMENT_DROP_SOURCE_HAS_LAYOUT_BY_NAME.replace("${name}", title), true);
-      Utils.pause(3000);
+
 
     } else {
       evt.mouseOver(ELEMENT_DROP_SOURCE_HAS_LAYOUT, true);
-      Utils.pause(3000);
+
     }
 
     WebElement elSource = evt.waitForAndGetElement(sourceLocator, 2000, 0);
@@ -313,10 +313,10 @@ public class PageCreationWizard {
     Action actionMove1 = builder.moveByOffset(-(size.width / 2), -(size.height / 2) + heightTarget).build();
     actionMove1.perform();
     info("Drop the source");
-    Utils.pause(3000);
+
     Action actiondrop = builder.release().build();
     actiondrop.perform();
-    Utils.pause(2000);
+
 
     saveChangesPageEditor();
     info("the container is moved succefully");
@@ -351,10 +351,10 @@ public class PageCreationWizard {
     }
     if (!name.isEmpty()) {
       evt.mouseOver(ELEMENT_DROP_SOURCE_HAS_LAYOUT_BY_NAME.replace("${name}", name), true);
-      Utils.pause(3000);
+
       evt.click(ELEMENT_DELETE_CONTAINER_ICON_BY_NAME.replace("${name}", name));
       magAlert.acceptAlert();
-      Utils.pause(2000);
+
       evt.waitForElementNotPresent(ELEMENT_DELETE_CONTAINER_ICON_BY_NAME.replace("${name}", name));
     }
     saveChangesPageEditor();
@@ -371,7 +371,7 @@ public class PageCreationWizard {
    */
   public void editApplication(String oldTitle, String newTitle, String width, String height) {
     // TODO Auto-generated method stub
-    Utils.pause(3000);
+
     info("Edit application");
     evt.mouseOver(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}", oldTitle), true);
     evt.click(ELEMENT_APPLICATION_EDIT_ICON.replace("${name}", oldTitle));
@@ -382,7 +382,7 @@ public class PageCreationWizard {
       evt.type(ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_WIDTH, width, true);
     if (!height.isEmpty())
       evt.type(ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_HEIGHT, height, true);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -392,7 +392,7 @@ public class PageCreationWizard {
   public void saveChangesApplication() {
     info("Save all changes of an application");
     evt.click(ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_SAVE);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -420,7 +420,7 @@ public class PageCreationWizard {
       info("titleSource:" + titleSource);
       info("titleTarget:" + titleTarget);
       evt.mouseOver(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}", titleSource), true);
-      Utils.pause(3000);
+
     }
     WebElement elSource = evt.waitForAndGetElement(ELEMENT_APPLICATION_HOLDER_MOVE.replace("${name}", titleSource), 2000, 1);
     WebElement elTarget = evt.waitForAndGetElement(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}", titleTarget), 2000, 0);
@@ -440,10 +440,10 @@ public class PageCreationWizard {
     Action actionMove1 = builder.moveByOffset(-(size.width / 2), -(size.height / 2) + heightTarget).build();
     actionMove1.perform();
     info("Drop the source");
-    Utils.pause(3000);
+
     Action actiondrop = builder.release().build();
     actiondrop.perform();
-    Utils.pause(2000);
+
 
     saveChangesPageEditor();
     info("the application is moved succefully");
@@ -459,10 +459,10 @@ public class PageCreationWizard {
     evt.click(ELEMENT_APPLICATION_TAB);
     if (!name.isEmpty()) {
       evt.mouseOver(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}", name), true);
-      Utils.pause(3000);
+
       evt.click(ELEMENT_APPLICATION_DELETE_ICON.replace("${name}", name));
       magAlert.acceptAlert();
-      Utils.pause(2000);
+
       evt.waitForElementNotPresent(ELEMENT_APPLICATION_DELETE_ICON.replace("${name}", name));
     }
     saveChangesPageEditor();
@@ -577,7 +577,7 @@ public class PageCreationWizard {
       // groupSelect), 0, true);
       $(byTitle(groupSelect)).click();
     }
-    Utils.pause(2000);
+
 
   }
 
@@ -593,7 +593,7 @@ public class PageCreationWizard {
       info("Select group:" + groupSelect);
       evt.click(ELEMENT_EDIT_PERMISSION_SELECTOR_POPUP_GROUP.replace("${group}", groupSelect), 0, true);
     }
-    Utils.pause(2000);
+
   }
 
   /**
@@ -606,7 +606,7 @@ public class PageCreationWizard {
     // evt.click(ELEMENT_ADD_PERMISSION_SELECTOR_POPUP_MEMEBRSHIP.replace("${member}",
     // memberShip), 0, true);
     $(byText(memberShip)).click();
-    Utils.pause(2000);
+
   }
 
   /**
@@ -617,7 +617,7 @@ public class PageCreationWizard {
   public void selectMemberShipEditTab(String memberShip) {
     info("Select a membership:" + memberShip);
     evt.click(ELEMENT_EDIT_PERMISSION_SELECTOR_POPUP_MEMEBRSHIP.replace("${member}", memberShip), 0, true);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -667,7 +667,7 @@ public class PageCreationWizard {
   public void deleteEditPermission() {
     info("Click on Delete Permission");
     evt.click(ELEMENT_VIEW_PROPERTIES_DELETE_EDIT_PERMISSION_BTN);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -762,7 +762,7 @@ public class PageCreationWizard {
     else
       evt.mouseOver(ELEMENT_DROP_SOURCE_HAS_LAYOUT, true);
     evt.click(ELEMENT_EDIT_CONTAINER_ICON, 0, true);
-    Utils.pause(3000);
+
     evt.click(ELEMENT_CONTAINER_PERMISSION_SETTING_TAB, 0, true);
     if (isAccess) {
 
@@ -787,7 +787,7 @@ public class PageCreationWizard {
     info("--Setting edit permission to " + groupId + ", " + membership + "--");
     String[] groups = groupId.split("/");
     evt.click(ELEMENT_PERMISSION_SELECTOR_BUTTON);
-    Utils.pause(500);
+
     evt.waitForTextPresent("Permission Selector");
     for (String group : groups) {
       String groupToSelect = ELEMENT_SELECT_EDIT_GROUP_ITEM.replace("${group}", group);
@@ -812,7 +812,7 @@ public class PageCreationWizard {
     info("--Setting edit permission to " + groupId + ", " + membership + "--");
     String[] groups = groupId.split("/");
     evt.click(ELEMENT_SELECT_PERMISSION_BUTTON);
-    Utils.pause(500);
+
     evt.waitForTextPresent("Permission Selector");
     for (String group : groups) {
       String groupToSelect = ELEMENT_SELECT_EDIT_GROUP_ITEM.replace("${group}", group);
@@ -920,7 +920,7 @@ public class PageCreationWizard {
     }
     evt.click(By.linkText("Rows Layout"));
     evt.dragAndDropToObject(By.id(numRow), By.className("UIRowContainer"));
-    Utils.pause(2000);
+
     evt.mouseOver(ELEMENT_DROP_SOURCE_HAS_LAYOUT, true);
     if (isVerify) {
       evt.waitForAndGetElement(ELEMENT_CONTAINER_TITLE.replace("${title}", "Container"));
@@ -939,14 +939,14 @@ public class PageCreationWizard {
   public void addAppWithoutPermission(String tabName, String nameApp, Object appLocator, Object layoutLocator) {
     info("Add an application to the layout");
     evt.click(ELEMENT_APPLICATION_TAB);
-    Utils.pause(1000);
+
     if (!tabName.isEmpty())
       evt.click(ELEMENT_APPLICATION_SUB_TAB.replace("${tabName}", tabName));
     evt.dragAndDropToObject(appLocator, layoutLocator);
     info("Verify that the application is NOT shown in the layout");
     evt.waitForElementNotPresent(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}", nameApp), 3000, 1);
 
-    Utils.pause(2000);
+
     saveChangesPageEditor();
   }
 
@@ -957,14 +957,14 @@ public class PageCreationWizard {
     info("Delete the container");
     try {
       evt.click(ELEMENT_CONTAINER_TAB);
-      Utils.pause(3000);
+
     } catch (org.openqa.selenium.UnhandledAlertException e) {
       magAlert.waitForConfirmation("The target block ID to update is not found : EmptyAjaxBlock", 40000);
       testBase.clearCache();
     }
     if (!id.isEmpty()) {
       evt.mouseOver(ELEMENT_DROP_SOURCE_HAS_LAYOUT_BY_ID.replace("${id}", id), true, 1);
-      Utils.pause(3000);
+
       evt.waitForElementNotPresent(ELEMENT_DELETE_CONTAINER_ICON_BY_ID.replace("${id}", id), 1);
     }
     saveChangesPageEditor();
@@ -1012,14 +1012,14 @@ public class PageCreationWizard {
     info("Delete the container");
     try {
       evt.click(ELEMENT_CONTAINER_TAB);
-      Utils.pause(3000);
+
     } catch (org.openqa.selenium.UnhandledAlertException e) {
       magAlert.waitForConfirmation("The target block ID to update is not found : EmptyAjaxBlock", 40000);
       testBase.clearCache();
     }
     if (!containerId.isEmpty()) {
       evt.mouseOver(ELEMENT_DROP_SOURCE_HAS_LAYOUT_BY_ID.replace("${id}", containerId), true, 1);
-      Utils.pause(3000);
+
       evt.waitForElementNotPresent(ELEMENT_DELETE_CONTAINER_ICON_BY_ID.replace("${id}", containerDeleteId), 1);
     }
     saveChangesPageEditor();

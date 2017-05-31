@@ -114,7 +114,7 @@ public class ECMS_Permission {
       info("Remove right is true, click on Remove checkbox");
       evt.check(ELEMENT_PERMISSION_CHECKBOXREMOVE, 2);
     }
-    Utils.pause(5000);
+
     info("Finished selecting right checkbox");
   }
 
@@ -195,7 +195,7 @@ public class ECMS_Permission {
       evt.click(ELEMENT_TAG_SELECT_RIGHT_PARENT_GROUP.replace("$group", temp[i]));
     }
     evt.click(ELEMENT_TAG_SELECT_RIGHT_PARENT_GROUP.replace("$group", membership));
-    Utils.pause(1000);
+
   }
 
   /**
@@ -214,7 +214,7 @@ public class ECMS_Permission {
       evt.click(ELEMENT_TAG_SELECT_RIGHT_PARENT_GROUP.replace("$group", temp[i]));
     }
     evt.click(ELEMENT_TAG_SELECT_RIGHT_PARENT_GROUP.replace("$group", membership));
-    Utils.pause(1000);
+
   }
 
 }

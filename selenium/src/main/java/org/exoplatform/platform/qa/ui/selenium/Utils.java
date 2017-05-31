@@ -36,18 +36,6 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 public class Utils {
 
   /**
-   * Pause
-   *
-   * @param timeInMillis
-   */
-  public static void pause(long timeInMillis) {
-    /*
-     * try { Thread.sleep(timeInMillis); } catch (InterruptedException e) {
-     * e.printStackTrace(); }
-     */
-  }
-
-  /**
    * Capture the screen of the current graphics device
    *
    * @param fileName input an image name (String)
@@ -56,7 +44,6 @@ public class Utils {
     String path;
     BufferedImage screenCapture;
     // Thread.sleep(3000);
-    pause(3000);
     try {
       Robot robot = new Robot();
       Rectangle screenSize = getScreenSize();
@@ -108,7 +95,6 @@ public class Utils {
         robot.keyPress(secondKey);
       if (params.length > 1)
         robot.keyPress(thirdKey);
-      pause(3000);
       if (params.length > 0)
         robot.keyRelease(secondKey);
       robot.keyRelease(firstKey);

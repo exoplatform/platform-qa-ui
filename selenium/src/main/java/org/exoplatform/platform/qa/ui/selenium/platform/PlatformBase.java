@@ -127,11 +127,11 @@ public class PlatformBase {
         if (option.equals(select.getFirstSelectedOption().getAttribute("value"))) {
           break;
         }
-        Utils.pause(evt.getWaitInterval());
+
       }
     } catch (StaleElementReferenceException e) {
       evt.checkCycling(e, testBase.getDefaultTimeout() / evt.getWaitInterval());
-      Utils.pause(evt.getWaitInterval());
+
       evt.select(locator, option);
     } finally {
       testBase.loopCount = 0;
@@ -169,7 +169,7 @@ public class PlatformBase {
         info("-- User.logIn: " + user);
       }
       magAcc.signIn(user, pass);
-      Utils.pause(1000);
+
     }
   }
 
@@ -259,13 +259,13 @@ public class PlatformBase {
     }
     evt.type(ELEMENT_GMAIL_USERNAME, email, true);
     evt.click(ELEMENT_GMAIL_NEXT_BTN);
-    Utils.pause(1000);
+
     evt.type(ELEMENT_GMAIL_PASS, pass, true);
     evt.click(ELEMENT_GMAIL_SIGN_IN);
     // clearCache();
-    Utils.pause(2000);
+
     evt.click(ELEMENT_GMAIL_INBOX);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -279,9 +279,9 @@ public class PlatformBase {
     info("Go to gmail");
     testBase.getExoWebDriver().getWebDriver().navigate().to(GMAIL_URL);
     testBase.getExoWebDriver().getWebDriver().manage().window().maximize();
-    Utils.pause(2000);
+
     evt.click(ELEMENT_GMAIL_INBOX);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -308,13 +308,13 @@ public class PlatformBase {
     }
     evt.type(ELEMENT_GMAIL_USERNAME, email, true);
     evt.click(ELEMENT_GMAIL_NEXT_BTN);
-    Utils.pause(1000);
+
     evt.type(ELEMENT_GMAIL_PASS, pass, true);
     evt.click(ELEMENT_GMAIL_SIGN_IN);
     testBase.clearCache();
-    Utils.pause(2000);
+
     evt.click(ELEMENT_GMAIL_INBOX);
-    Utils.pause(2000);
+
 
   }
 
@@ -342,7 +342,7 @@ public class PlatformBase {
       info("Delete 2");
     }
     evt.waitForElementNotPresent(mail);
-    Utils.pause(1000);
+
   }
 
   /**
@@ -371,7 +371,7 @@ public class PlatformBase {
       // If it is not the parent window it will close the child window
       if (!windowHandle.contains(parentWindow)) {
         info("close testBase.getExoWebDriver().getWebDriver().title:" + testBase.getExoWebDriver().getWebDriver().getTitle());
-        Utils.pause(2000);
+
         testBase.getExoWebDriver().getWebDriver().close();
       }
 
@@ -418,7 +418,7 @@ public class PlatformBase {
 
     if (evt.waitForAndGetElement(page1, 5000, 0) != null)
       evt.click(page1);
-    Utils.pause(500);
+
     int totalPages = 0;
     if (evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE, 3000, 0) != null) {
       totalPages = evt.isElementPresent(ELEMENT_TOTAL_PAGE) ? Integer.valueOf(testBase.getText(ELEMENT_TOTAL_PAGE)) : 1;
@@ -433,7 +433,7 @@ public class PlatformBase {
       if (evt.waitForAndGetElement(ELEMENT_NEXT_PAGE, 3000, 0) != null) {
         evt.click(ELEMENT_NEXT_PAGE);
       }
-      Utils.pause(500);
+
     }
   }
 
@@ -462,7 +462,7 @@ public class PlatformBase {
         break;
       }
       evt.click(ELEMENT_QUICK_SEARCH_BUTTON);
-      Utils.pause(2000);
+
       info("the user is shown in searched result list");
     }
 

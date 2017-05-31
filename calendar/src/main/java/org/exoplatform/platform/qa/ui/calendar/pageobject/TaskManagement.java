@@ -40,7 +40,7 @@ public class TaskManagement {
   public void goToRemindersTab() {
     info("Click on Reminders tab");
     evt.click(ELEMENT_EVENT_REMINDER_TAB);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -89,7 +89,7 @@ public class TaskManagement {
    */
   public void goToAddTaskFromActionBar() {
     info("Go to Add Task page from action bar");
-    Utils.pause(2000);
+
     // waitForAndGetElement(ELEMENT_BUTTON_TASK, DEFAULT_TIMEOUT, 1);
     evt.click(ELEMENT_BUTTON_TASK);
     // clickByJavascript(ELEMENT_BUTTON_TASK, 2);
@@ -449,7 +449,7 @@ public class TaskManagement {
     // click(ELEMENT_BUTTON_TASK_SAVE);
     evt.clickByJavascript(ELEMENT_BUTTON_TASK_SAVE, 2);
     evt.waitForElementNotPresent(ELEMENT_BUTTON_TASK_SAVE);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -477,7 +477,7 @@ public class TaskManagement {
     evt.clickByJavascript(ELEMENT_BUTTON_TASK_SAVE_DETAILS, 2);
     // click(ELEMENT_BUTTON_TASK_SAVE_DETAILS);
     evt.waitForElementNotPresent(ELEMENT_BUTTON_TASK_SAVE_DETAILS);
-    Utils.pause(500);
+
   }
 
   /**

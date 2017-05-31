@@ -80,7 +80,7 @@ public class Dialog {
     } else {
       $(byTitle("Close Window")).click();
     }
-    Utils.pause(1000);
+
   }
 
   /**
@@ -89,6 +89,6 @@ public class Dialog {
   public void deleteInDialog() {
     evt.waitForAndGetElement(ELEMENT_DELETE_IN_DIALOG);
     evt.click(ELEMENT_DELETE_IN_DIALOG);
-    Utils.pause(3000);
+
   }
 }

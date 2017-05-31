@@ -27,7 +27,7 @@ public class QuickSearchResult {
   public void search(String textSearch) {
     if (!textSearch.isEmpty()) {
       evt.waitForAndGetElement(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).sendKeys(textSearch);
-      Utils.pause(5000);
+
       testBase.getExoWebDriver().getWebDriver().findElement(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).sendKeys(Keys.ENTER);
     } else
       assert false : "Not input a text to search";

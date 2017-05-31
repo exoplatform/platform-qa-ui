@@ -36,18 +36,18 @@ public class Branding {
         + "arguments[0].style.width = '1px'; arguments[0].style.opacity = 1", upload);
     ((JavascriptExecutor) testBase).executeScript("arguments[0].style.display = 'block'; arguments[0].style.visibility = 'visible'",
                                                   upload);
-    Utils.pause(10000);
+
     info("Select a file to upload");
     upload.sendKeys(testBase.getAbsoluteFilePath(link));
     info("Upload file " + testBase.getAbsoluteFilePath(link));
     info("Switch to Parent window");
     evt.switchToParentWindow();
     if (verify) {
-      Utils.pause(2000);
+
       evt.waitForAndGetElement(By.xpath("//*[@id='PreviewImg']"));
     }
     info("Upload file successfully");
-    Utils.pause(2000);
+
     return new Branding(testBase);
   }
 }

@@ -106,7 +106,7 @@ public class ApplicationRegistry {
     info("click on the import Applications button");
     evt.click(ELEMENT_IMPORT_ALL_APPLICATION);
     alert.acceptAlert();
-    Utils.pause(2000);
+
     info("All applications are imported");
   }
 
@@ -115,9 +115,9 @@ public class ApplicationRegistry {
    */
   public void goToGadgetPage() {
     info("Show Gadget page");
-    Utils.pause(3000);
+
     evt.clickByJavascript(ELEMENT_APPLICATION_GADGETBTN);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -153,7 +153,7 @@ public class ApplicationRegistry {
     evt.check(ELEMENT_RIGHT_PANEL_ADD_APPLICATION_RADIOBTN.replace("${des}", des).replace("${name}", nameApp), 2);
     info("Save all changes");
     evt.click(ELEMENT_RIGHT_PANEL_ADD_APPLICATION_SAVE_BTN);
-    Utils.pause(2000);
+
     info("Verify that the app is added to correct category");
     evt.waitForAndGetElement(ELEMENT_LEFT_PANEL_APPLICATION_NAME.replace("${category}", category).replace("${application}",
                                                                                                           nameApp),
@@ -207,7 +207,7 @@ public class ApplicationRegistry {
    */
   public void addACategory(String categoryName, String displayName, String des) {
     info("Click on Add Category button");
-    Utils.pause(2000);
+
     evt.click(ELEMENT_APPLICATION_REGISTRY_ADD_CATEGORY_BTN);
     info("Input category name");
     evt.type(ELEMENT_ADD_CATEGORY_NAME, categoryName, true);
@@ -259,7 +259,7 @@ public class ApplicationRegistry {
       selectGroupMembership(group, member);
     }
     evt.click(ELEMENT_ADD_CATEGORY_SAVE_BTN);
-    Utils.pause(2000);
+
     info("Verify that the new category is edit successfully");
     evt.waitForAndGetElement(ELEMENT_LEFT_PANEL_APPLICATION_CATEGORY_TAB.replace("${category}", newDisplayName), 2000, 0);
   }
@@ -277,7 +277,7 @@ public class ApplicationRegistry {
     evt.waitForElementNotPresent(ELEMENT_LEFT_PANEL_APPLICATION_CATEGORY_DELETE_BTN.replace("${category}", nameCategory),
                                  2000,
                                  0);
-    Utils.pause(3000);
+
   }
 
   /**
@@ -292,7 +292,7 @@ public class ApplicationRegistry {
       evt.click(ELEMENT_LEFT_PANEL_APPLICATION_CATEGORY_TAB.replace("${category}", category));
     info("Select an application");
     evt.click(ELEMENT_LEFT_PANEL_APPLICATION_NAME.replace("${category}", category).replace("${application}", displayName));
-    Utils.pause(2000);
+
   }
 
   /**
@@ -341,7 +341,7 @@ public class ApplicationRegistry {
     info("Input permission");
     evt.click(ELEMENT_ADD_CATEGORY_ADD_PERMISSION_BTN);
     selectGroupMembership(group, member);
-    Utils.pause(2000);
+
     assert testBase.isTextPresent(group) || testBase.isTextPresent(group.toLowerCase());
   }
 
@@ -354,6 +354,6 @@ public class ApplicationRegistry {
     info("Delete permission of group");
     evt.click(ELEMENT_EDIT_PORTLET_DELETE_PERMISSION_ICON.replace("$group", group), 0, true);
     alert.acceptAlert();
-    Utils.pause(1000);
+
   }
 }

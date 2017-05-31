@@ -108,13 +108,13 @@ public class EcmsSECreateTestIT extends Base {
     createNewDoc.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
     createNewDoc.addNewWebContent(name, content);
     createNewDoc.saveAndClose();
-    Utils.pause(5000);
+
 
     info("Edit the content");
     siteExplorerHome.selectNode(name);
     siteExplorerHome.editDocument("", content2);
     createNewDoc.saveAndClose();
-    Utils.pause(5000);
+
 
     info("Delete file document");
     navigationToolbar.goToSiteExplorer();

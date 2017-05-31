@@ -52,7 +52,7 @@ public class IntranetNotification {
    */
   public void goToNotificationSettings() {
     info("go to notification settings");
-    Utils.pause(1000);
+
     evt.click(ELEMENT_NOTIFICATION_SETTINGS_LINK);
     info("Verify that Notification setting page is shown");
     evt.waitForAndGetElement(ELEMENT_NOTIFICATION_SETTINGS_TITLE);
@@ -66,7 +66,7 @@ public class IntranetNotification {
    *          Notification page
    */
   public void goToDetailCommentNotification(String activity, boolean isPopup) {
-    Utils.pause(500);
+
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         if (evt.waitForAndGetElement(ELEMENT_NOTIFICATION_UI_ACTIVITY_LOADER, 3000, 0) != null)
@@ -85,7 +85,7 @@ public class IntranetNotification {
         info("View detail notification when comments an activity from all notification page");
         evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_COMMENT.replace("$activity", activity));
       }
-      Utils.pause(2000);
+
     }
   }
 
@@ -97,7 +97,7 @@ public class IntranetNotification {
    *          notification page
    */
   public void goToDetailRequestConnectionUser(String fullName, boolean isPopup) {
-    Utils.pause(500);
+
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         if (evt.waitForAndGetElement(ELEMENT_UIBASICPROFILEPORTLET, 3000, 0) != null)
@@ -116,7 +116,7 @@ public class IntranetNotification {
         info("View detail of request connection to new user from all notification page");
         evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_REQUEST_CONNECT.replace("$name", fullName));
       }
-      Utils.pause(2000);
+
     }
   }
 
@@ -128,7 +128,7 @@ public class IntranetNotification {
    *          notification page
    */
   public void goToDetailAcceptRequestConnectionUser(String fullName, boolean isPopup) {
-    Utils.pause(500);
+
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         if (evt.waitForAndGetElement(ELEMENT_UIBASICPROFILEPORTLET, 3000, 0) != null)
@@ -147,7 +147,7 @@ public class IntranetNotification {
         info("View detail of accept connection to new user from all notification page");
         evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_ACCEPT_REQUEST_CONNECT.replace("$name", fullName));
       }
-      Utils.pause(2000);
+
     }
   }
 
@@ -159,7 +159,7 @@ public class IntranetNotification {
    *          notification page
    */
   public void goToDetailAcceptInvitationSpace(String space, boolean isPopup) {
-    Utils.pause(500);
+
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         if (evt.waitForAndGetElement(ELEMENT_SPACE_MENU_ACTIVITY_STREAM, 3000, 0) != null)
@@ -178,7 +178,7 @@ public class IntranetNotification {
         info("View detail of accept invitation to new space from all notification page");
         evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_ACCEPT_INVITE_SPACE.replace("$space", space));
       }
-      Utils.pause(2000);
+
     }
   }
 
@@ -190,7 +190,7 @@ public class IntranetNotification {
    *          notification page
    */
   public void goToDetailLikeNotification(String fullName, boolean isPopup) {
-    Utils.pause(500);
+
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         if (evt.waitForAndGetElement(ELEMENT_NOTIFICATION_UI_ACTIVITY_LOADER, 3000, 0) != null)
@@ -209,7 +209,7 @@ public class IntranetNotification {
         info("View detail notification when like an activity from all notification page");
         evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_LIKE.replace("$user", fullName));
       }
-      Utils.pause(2000);
+
     }
   }
 
@@ -221,7 +221,7 @@ public class IntranetNotification {
    *          notification page
    */
   public void goToDetailMentionNotification(String fullName, boolean isPopup) {
-    Utils.pause(500);
+
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         if (evt.waitForAndGetElement(ELEMENT_NOTIFICATION_UI_ACTIVITY_LOADER, 3000, 0) != null)
@@ -240,7 +240,7 @@ public class IntranetNotification {
         info("View detail notification when mention a user in an activity from all notification page");
         evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_MENTION.replace("$name", fullName));
       }
-      Utils.pause(2000);
+
     }
   }
 
@@ -252,7 +252,7 @@ public class IntranetNotification {
    *          notification page
    */
   public void goToDetailPostInMyActivity(String fullName, boolean isPopup) {
-    Utils.pause(500);
+
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         if (evt.waitForAndGetElement(ELEMENT_NOTIFICATION_UI_ACTIVITY_LOADER, 3000, 0) != null)
@@ -271,7 +271,7 @@ public class IntranetNotification {
         info("View detail notification when post an activity in friend's activity stream from all notification page");
         evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_POST_IN_MY_ACTIVITY.replace("$name", fullName));
       }
-      Utils.pause(2000);
+
     }
   }
 
@@ -283,7 +283,7 @@ public class IntranetNotification {
    *          notification page
    */
   public void goToDetailPostInSpace(String space, boolean isPopup) {
-    Utils.pause(500);
+
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         if (evt.waitForAndGetElement(ELEMENT_NOTIFICATION_UI_ACTIVITY_LOADER, 3000, 0) != null)
@@ -302,7 +302,7 @@ public class IntranetNotification {
         info("View detail notification when post an activity in space's activity stream from all notification page");
         evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_POST_IN_SPACE.replace("$space", space));
       }
-      Utils.pause(2000);
+
     }
   }
 
@@ -314,7 +314,7 @@ public class IntranetNotification {
    *          notification page
    */
   public void goToDetailInvitationSpace(String space, boolean isPopup) {
-    Utils.pause(500);
+
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         if (evt.waitForAndGetElement(ELEMENT_NOTIFICATION_UI_SPACE_ACCESS_PORTLET, 3000, 0) != null)
@@ -333,7 +333,7 @@ public class IntranetNotification {
         info("View detail notification when invited to join a space from all notification page");
         evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_INVITE_SPACE.replace("$name", space));
       }
-      Utils.pause(2000);
+
     }
   }
 
@@ -345,7 +345,7 @@ public class IntranetNotification {
    *          notification page
    */
   public void goToDetailJoinSpace(String fullName, boolean isPopup) {
-    Utils.pause(500);
+
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         if (evt.waitForAndGetElement(ELEMENT_SPACE_MENU_ACTIVITY_STREAM, 3000, 0) != null)
@@ -364,7 +364,7 @@ public class IntranetNotification {
         info("View detail notification when joined new space from all notification page");
         evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_JOIN_SPACE.replace("$name", fullName));
       }
-      Utils.pause(2000);
+
     }
   }
 
@@ -376,7 +376,7 @@ public class IntranetNotification {
    *          notification page
    */
   public void goToDetailRequestJoinSpace(String fullName, boolean isPopup) {
-    Utils.pause(500);
+
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         if (evt.waitForAndGetElement(ELEMENT_SPACE_MENU_ACTIVITY_STREAM, 3000, 0) != null)
@@ -395,7 +395,7 @@ public class IntranetNotification {
         info("View detail of asking to join new space from all notification page");
         evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_REQUEST_JOIN_SPACE.replace("$name", fullName));
       }
-      Utils.pause(2000);
+
     }
 
   }
@@ -408,7 +408,7 @@ public class IntranetNotification {
    *          notification page
    */
   public void goToDetailNewUserJoinIntranet(String fullName, boolean isPopup) {
-    Utils.pause(500);
+
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         if (evt.waitForAndGetElement(ELEMENT_UIBASICPROFILEPORTLET, 3000, 0) != null)
@@ -427,7 +427,7 @@ public class IntranetNotification {
         info("View detail notification when new user joined to intranet from all notificaiton page");
         evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_NEW_USER_JOIN_INTRANET.replace("$name", fullName));
       }
-      Utils.pause(2000);
+
     }
   }
 
@@ -437,7 +437,7 @@ public class IntranetNotification {
    * @param fullName is fullName of user that want to connect
    */
   public void acceptRqConnection(String fullName) {
-    Utils.pause(500);
+
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         if (evt.waitForAndGetElement(ELEMENT_CONNECT_ACCEPT_BUTTON.replace("$name", fullName), 3000, 0) == null)
@@ -450,7 +450,7 @@ public class IntranetNotification {
       info("Retry...[" + repeat + "]");
       info("Click on Accept button");
       evt.click(ELEMENT_CONNECT_ACCEPT_BUTTON.replace("$name", fullName));
-      Utils.pause(5000);
+
     }
   }
 
@@ -460,7 +460,7 @@ public class IntranetNotification {
    * @param fullName
    */
   public void refuseRqConnection(String fullName) {
-    Utils.pause(500);
+
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         if (evt.waitForAndGetElement(ELEMENT_CONNECT_REFUSE_BUTTON.replace("$name", fullName), 3000, 0) == null)
@@ -474,7 +474,7 @@ public class IntranetNotification {
       info("Retry...[" + repeat + "]");
       info("Click on Refuse button");
       evt.click(ELEMENT_CONNECT_REFUSE_BUTTON.replace("$name", fullName));
-      Utils.pause(2000);
+
     }
   }
 
@@ -565,7 +565,7 @@ public class IntranetNotification {
    * @param user is full name or name of the user
    */
   public void checkStatus(String status, String user) {
-    Utils.pause(500);
+
     info("Verify that the status is shown");
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
@@ -584,7 +584,7 @@ public class IntranetNotification {
       }
       info("Retry...[" + repeat + "]");
       this.testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-      Utils.pause(2000);
+
     }
   }
 
@@ -627,7 +627,7 @@ public class IntranetNotification {
     evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_STATUS_ORDER.replace("$num", String.valueOf(num))
                                                                        .replace("$status", status)
                                                                        .replace("$fullName", fullName));
-    Utils.pause(3000);
+
   }
 
   /**
@@ -658,7 +658,7 @@ public class IntranetNotification {
   public void markAllAsRead() {
     info("Click on Mark all as Read link");
     evt.click(ELEMENT_INTRANET_NOTIFICATION_MARK_ALL_AS_READ);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -669,7 +669,7 @@ public class IntranetNotification {
   public void removeNotificationByIndex(int num) {
     info("click on remove icon of the notification with an index:" + num);
     evt.click(ELEMENT_INTRANET_NOTIFICATION_REMOVE_ICON.replace("$num", String.valueOf(num)));
-    Utils.pause(3000);
+
   }
 
   /**

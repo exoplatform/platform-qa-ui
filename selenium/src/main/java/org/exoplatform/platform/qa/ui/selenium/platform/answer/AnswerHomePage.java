@@ -65,6 +65,6 @@ public class AnswerHomePage {
   public void goToQuestion(String question) {
     info("Click on Question link");
     evt.click(ELEMENT_QUESTION_LINK.replace("$question", question));
-    Utils.pause(2000);
+
   }
 }

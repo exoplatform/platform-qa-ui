@@ -82,7 +82,7 @@ public class WikiManagement {
     info("Input a content for the page");
     if (!content.isEmpty())
       plf.inputFrame(ELEMENT_CONTENT_WIKI_FRAME, content);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -124,7 +124,7 @@ public class WikiManagement {
    */
   public void unPublishPageWhenEditPage() {
     evt.uncheck(ELEMENT_PUBLISH_ACTIVITY_CHECKBOX, 2);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -145,14 +145,14 @@ public class WikiManagement {
    */
   public void editParagraph(String paragraphTitle, String paragraphContent) {
     info("-- Editing a paragraph... " + paragraphTitle);
-    Utils.pause(2000);
+
     String ELEMENT_PARAGRAPH_ID = "H" + paragraphTitle;
     evt.mouseOver(By.id(ELEMENT_PARAGRAPH_ID), true);
     WebElement element = evt.waitForAndGetElement(By.xpath("//*[@data-original-title='Edit Section: " + paragraphTitle + "']"));
     ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].click();", element);
-    Utils.pause(500);
+
     testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-    Utils.pause(2000);
+
     evt.type(ELEMENT_CONTENT_WIKI_INPUT, paragraphContent, true);
     evt.switchToParentWindow();
   }
@@ -262,7 +262,7 @@ public class WikiManagement {
   public void goToSpaceSwitcher() {
     info("Click on Drop down");
     evt.click(ELEMENT_MOVE_SPACESWITCHER);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -321,9 +321,9 @@ public class WikiManagement {
     info("Verify that the layout is shown");
     evt.waitForAndGetElement(ELEMENT_PREVIEW_TEMPLATE_CONTENT.replace("${template}", template), 2000, 0);
     evt.click(ELEMENT_TEMPLATE_PREVIEW_PAGE_CLOSE_BTN);
-    Utils.pause(2000);
+
     evt.click(ELEMENT_TEMPLATE_CANCEL_BTN);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -340,7 +340,7 @@ public class WikiManagement {
     Actions actionEnter = new Actions(this.testBase.getExoWebDriver().getWebDriver());
     actionEnter.sendKeys(Keys.ENTER).perform();
     actionEnter.release();
-    Utils.pause(20000);
+
   }
 
   /**
@@ -354,7 +354,7 @@ public class WikiManagement {
     info("Show message :'You started watching this page now.'");
     evt.waitForAndGetElement(ELEMENT_POPUP_MESSAGE_CONTENT.replace("${message}", mess), 2000, 0);
     evt.click(ELEMENT_BTN_OK);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -368,7 +368,7 @@ public class WikiManagement {
     info("Show message : 'You stopped watching this page now.'");
     evt.waitForAndGetElement(ELEMENT_POPUP_MESSAGE_CONTENT.replace("${message}", mess), 2000, 0);
     evt.click(ELEMENT_BTN_OK);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -422,7 +422,7 @@ public class WikiManagement {
       assert true;
     else
       assert false : "the link's format is incorrect";
-    Utils.pause(2000);
+
 
   }
 
@@ -449,13 +449,13 @@ public class WikiManagement {
   public void renameFromAlertMessageOfOnePage() {
     info("Click on Rename link on the alert message area");
     evt.click(EMENENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_RENAME);
-    Utils.pause(2000);
+
   }
 
   public void renameFromAlertMessageOfManyPages(String mess, String page) {
     info("Click on Rename link of the page");
     evt.click(EMENENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_RENAME_LINK.replace("$message", mess).replace("$page", page));
-    Utils.pause(2000);
+
   }
 
   /**
@@ -476,7 +476,7 @@ public class WikiManagement {
   public void goToViewChangesLinkOnStatus() {
     info("Click on View Changes link on the status");
     evt.click(ELEMENT_WIKI_STATUS_VERSION_VIEW_CHANGES_LINK);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -506,7 +506,7 @@ public class WikiManagement {
   public void goToResumDrafLinkOnStatus() {
     info("Click on Resume the Draf link");
     evt.click(ELEMENT_WIKI_STATUS_RESUME_THE_DRAF_LINK);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -520,7 +520,7 @@ public class WikiManagement {
     evt.click(ELEMENT_TEMPLATE_SELECT_BTN);
     if (!newTitle.isEmpty())
       evt.type(ELEMENT_TITLE_WIKI_INPUT, newTitle, true);
-    Utils.pause(2000);
+
     info("Save all changes");
     saveAddPage();
   }
@@ -534,7 +534,7 @@ public class WikiManagement {
     info("Select a template");
     selectTemplateWikiPage(template);
     evt.click(ELEMENT_TEMPLATE_SELECT_BTN);
-    Utils.pause(2000);
+
     if (!newTitle.isEmpty())
       evt.type(ELEMENT_TITLE_WIKI_INPUT, newTitle, true);
     info("Waiting 30s before saved all changes");

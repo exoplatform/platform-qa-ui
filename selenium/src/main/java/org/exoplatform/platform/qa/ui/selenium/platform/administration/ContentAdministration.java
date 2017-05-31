@@ -423,7 +423,7 @@ $(byClassName("uiIconEditInfo")).click();
     }
     info("Click on Next button of the step 1");
     evt.click(ELEMENT_ECM_ADVANCED_CATEGORIES_NEXT_1STPAGE_FORM);
-    Utils.pause(500);
+
     info("select permission");
     if (params.length > 2) {
       Boolean read = (Boolean) params[2];
@@ -516,7 +516,7 @@ $(byClassName("uiIconEditInfo")).click();
       info("Select group:" + groups[i]);
       evt.click(ELEMENT_SELECT_CATEGORY.replace("${name}", groups[i]));
     }
-    Utils.pause(2000);
+
   }
 
   /**
@@ -543,7 +543,7 @@ $(byClassName("uiIconEditInfo")).click();
     evt.click(ELEMENT_ADD_SUB_CAT_BUTTON);
     evt.type(ELEMENT_NAME_CAT_TEXTBOX, sub, true);
     evt.click(ELEMENT_ADD_CAT_SAVE_BUTTON);
-    Utils.pause(1000);
+
     evt.click(ELEMENT_ECM_ADVANCED_CATEGORIES_CLOSE_FORM);
   }
 
@@ -851,15 +851,15 @@ $(byClassName("uiIconEditInfo")).click();
     goToSpecificMainFunctions(mainEcmFunctions.TEMPLATES);
     goToSpecificFunctions(specificEcmFunctions.DOCUMENTS);
     evt.click(By.xpath(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LIST_EDIT.replace("{$name}", label)));
-    Utils.pause(500);
+
     evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_TAB, 0, true);
     evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_EDIT, 0, true);
-    Utils.pause(500);
+
     evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_REMOVE_PERM, 0, true);
     evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_ADD_PERM, 0, true);
     ecmsPerm.selectGroupMembershipOfLock(group, member);
     evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_SAVE, 0, true);
-    Utils.pause(500);
+
   }
 
   /**
@@ -874,15 +874,15 @@ $(byClassName("uiIconEditInfo")).click();
     goToSpecificMainFunctions(mainEcmFunctions.TEMPLATES);
     goToSpecificFunctions(specificEcmFunctions.DOCUMENTS);
     evt.click(By.xpath(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LIST_EDIT.replace("{$name}", label)));
-    Utils.pause(500);
+
     evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_TAB, 0, true);
     evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_EDIT, 0, true);
-    Utils.pause(500);
+
     evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_REMOVE_PERM, 0, true);
     evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_ADD_PERM, 0, true);
     ecmsPerm.selectGroupMembershipOfLock(group, member);
     evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_SAVE, 0, true);
-    Utils.pause(500);
+
   }
 
   /**
@@ -980,22 +980,22 @@ $(byClassName("uiIconEditInfo")).click();
     goToSpecificFunctions(specificEcmFunctions.VIEW);
     info("Click on Edit button of the View type");
     evt.click(By.xpath(ELEMENT_ECM_EXPLORER_EDIT.replace("${nameView}", nameView)));
-    Utils.pause(2000);
+
     info("Open Action tab");
     evt.click(ELEMENT_ECM_EXPLORER_GO_TO_ACTION_FORM);
-    Utils.pause(1000);
+
     info("Click on Add action button");
     evt.click(ELEMENT_ECM_EXPLORER_EDIT_ACTION_VIEW_FORM);
-    Utils.pause(2000);
+
     info("Select the action");
     goTospecificEcmActionstypes(action);
-    Utils.pause(2000);
+
     info("Click on Save button of Action popup");
     evt.click(ELEMENT_ECM_EXPORER_ACTIONS_POPUP_SAVE_BUTTON);
-    Utils.pause(2000);
+
     info("Save all changes");
     evt.click(ELEMENT_ECM_EXPLORER_EDIT_VIEWS_SAVE_BUTTON);
-    Utils.pause(1000);
+
     info("Finished Adding action for a view");
   }
 
@@ -1109,25 +1109,25 @@ $(byClassName("uiIconEditInfo")).click();
     goToSpecificFunctions(specificEcmFunctions.VIEW);
     info("Click on Edit button of the View type");
     evt.click(ELEMENT_ECM_EXPLORER_EDIT.replace("${nameView}", "Web"));
-    Utils.pause(2000);
+
     info("Open Action tab");
     evt.click(ELEMENT_ECM_EXPLORER_GO_TO_ACTION_FORM);
-    Utils.pause(1000);
+
     info("Click on Add action button");
     evt.click(ELEMENT_ECM_EXPLORER_EDIT_ACTION_VIEW_FORM);
-    Utils.pause(2000);
+
     info("Select the actions");
     for (specificEcmActionstypes type : specificEcmActionstypes.values())
       goTospecificEcmActionstypes(type);
-    Utils.pause(2000);
+
     info("Click on Save button of Action popup");
     // click(ELEMENT_ECM_EXPORER_ACTIONS_POPUP_SAVE_BUTTON);
     evt.clickByJavascript(ELEMENT_ECM_EXPORER_ACTIONS_POPUP_SAVE_BUTTON, 2);
-    Utils.pause(2000);
+
     info("Save all changes");
     // click(ELEMENT_ECM_EXPLORER_EDIT_VIEWS_SAVE_BUTTON);
     evt.clickByJavascript(ELEMENT_ECM_EXPLORER_EDIT_VIEWS_SAVE_BUTTON, 2);
-    Utils.pause(1000);
+
     info("Finished Adding action for a view");
   }
 
@@ -1143,11 +1143,11 @@ $(byClassName("uiIconEditInfo")).click();
     goToSpecificMainFunctions(mainEcmFunctions.EXPLORER);
     goToSpecificFunctions(specificEcmFunctions.DRIVES);
     evt.click(By.xpath(ELEMENT_ECM_EXPLORER_DRIVES_EDIT_LIST.replace("{$name}", drive)), 0, true);
-    Utils.pause(500);
+
     evt.click(ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON, 0, true);
     ecmsPerm.selectGroupMembershipOfDrive(group, membership);
     evt.click(ELEMENT_ECM_EXPLORER_DRIVES_SAVE_FORM, 0, true);
-    Utils.pause(1000);
+
   }
 
   /**
@@ -1163,7 +1163,7 @@ $(byClassName("uiIconEditInfo")).click();
     goToSpecificFunctions(specificEcmFunctions.LOCKS);
     evt.click(ELEMENT_ECM_REPOSITORY_MANAGE_LOCK);
     ecmsPerm.selectGroupMembershipOfLock(group, membership);
-    Utils.pause(1000);
+
   }
 
   /**
@@ -1179,7 +1179,7 @@ $(byClassName("uiIconEditInfo")).click();
     goToSpecificFunctions(specificEcmFunctions.TAGS);
     evt.click(ELEMENT_ECM_EXPLORER_TAGS_TAG_PERM_TAB);
     ecmsPerm.selectGroupMembershipOfTag(group, membership);
-    Utils.pause(1000);
+
     evt.click(ELEMENT_TAG_SELECT_MEMBERSHIP_ADD_BTN, 0, true);
   }
 
@@ -1195,7 +1195,7 @@ $(byClassName("uiIconEditInfo")).click();
     ecmsPerm.selectGroupMembershipOfTag(group, membership);
     ecmsPerm.selectCheckBoxRight(read, modify, remove);
     evt.click(ELEMENT_PERMISSION_SAVE, 0, true);
-    Utils.pause(1000);
+
     evt.click(ELEMENT_PERMISSION_CLOSE, 0, true);
   }
 
@@ -1260,7 +1260,7 @@ $(byClassName("uiIconEditInfo")).click();
   public void addViewTypeToDrive(String driveName, specificView[] applyViews) {
     NavigationToolbar navTool = new NavigationToolbar(testBase);
 
-    Utils.pause(3000);
+
 
     info("Go to Explorer tab");
     navTool.goToContentAdministration();
@@ -1272,7 +1272,7 @@ $(byClassName("uiIconEditInfo")).click();
     goToSpecificFunctions(specificEcmFunctions.DRIVES);
 
     editDrives(driveName, applyViews);
-    Utils.pause(3000);
+
   }
 
   /**
@@ -1283,7 +1283,7 @@ $(byClassName("uiIconEditInfo")).click();
   public void addPermissionToDrive(String driveName, String permissionToAdd) {
     NavigationToolbar navTool = new NavigationToolbar(testBase);
 
-    Utils.pause(3000);
+
 
     info("Go to Explorer tab");
     navTool.goToContentAdministration();
@@ -1305,7 +1305,7 @@ $(byClassName("uiIconEditInfo")).click();
 
     evt.type(ELEMENT_ECM_DRIVE_PERMISSION, permissionValue, true);
 
-    Utils.pause(3000);
+
     evt.click(ELEMENT_ECM_EXPLORER_DRIVES_SAVE_FORM);
   }
 

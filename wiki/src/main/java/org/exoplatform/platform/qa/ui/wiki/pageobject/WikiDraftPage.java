@@ -48,6 +48,6 @@ public class WikiDraftPage {
   public void resumeADraft(String title) {
     info("Click on the title of the draf in the list");
     evt.waitForAndGetElement(ELEMENT_DRAFT_OF_NEW_PAGE.replace("${title}", title), 3000, 0).click();
-    Utils.pause(3000);
+
   }
 }

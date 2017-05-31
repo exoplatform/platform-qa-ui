@@ -47,7 +47,7 @@ public class ActivityStream {
    */
   public void selectOptMenuActivity(optionMenuActivity opt) {
     evt.click(ELEMENT_ACTIVITY_ARROWDOWN_MENU, 0, true);
-    Utils.pause(500);
+
     switch (opt) {
     case All_Activities:
       info("Select All Activities");
@@ -342,7 +342,7 @@ public class ActivityStream {
         info("Click on comment button to add comment to the activity");
         evt.click(ELEMENT_COMMENT_BUTTON);
       }
-      Utils.pause(2000);
+
       info("Repeat " + repeat1);
       repeat1++;
     }
@@ -422,7 +422,7 @@ public class ActivityStream {
       evt.mouseOver(ELEMENT_PUBLICATION_LASTCOMMENT.replace("${title}", name), true);
       evt.click(ELEMENT_PUBLICATION_DELETE_LASTCOMMENT.replace("${title}", comment));
       evt.click(button.ELEMENT_OK_BUTTON);
-      Utils.pause(2000);
+
     }
     evt.waitForElementNotPresent(ELEMENT_PUBLICATION_COMMENTPOSTED.replace("$activity", name).replace("${content}", comment));
     info("The comment is deleted successfully");
@@ -441,7 +441,7 @@ public class ActivityStream {
       evt.click(ELEMENT_ACTIVITY_PUBLICATION_VIEW_LASTCOMMENT.replace("$comment", comment).replace("$comment", value));
     else
       evt.click(ELEMENT_ACTIVITY_PUBLICATION_VIEW_LASTCOMMENT.replace("$comment", comment));
-    Utils.pause(3000);
+
   }
 
   /**
@@ -490,7 +490,7 @@ public class ActivityStream {
     info("----Click share button----");
     if (testBase.getBrowser().contains("iexplorer")) {
       info("mouse over and click");
-      Utils.pause(2000);
+
       WebElement el = evt.waitForAndGetElement(ELEMENT_COMPOSER_SHARE_BUTTON, 2000, 1, 2);
       el.sendKeys("\n");
     } else
@@ -508,7 +508,7 @@ public class ActivityStream {
    */
   public void addActivity(String text, String link) {
     info("-- Adding an activity--");
-    Utils.pause(3000);
+
     if (text != "" && text != null) {
       info("----Add text into activity text box-----");
       addText(text);
@@ -518,7 +518,7 @@ public class ActivityStream {
       addLink(link);
     }
     shareActivity();
-    Utils.pause(3000);
+
     info("-- Verify that an activity has been added --");
     $(byText(text)).should(Condition.exist);
     $(ELEMENT_COMPOSER_SHARE_BUTTON).shouldBe(Condition.disabled);
@@ -532,7 +532,7 @@ public class ActivityStream {
   public void openMorelist() {
     info("Click on More button");
     evt.click(ELEMENT_SPACE_MENU_MORE_BTN);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -553,7 +553,7 @@ public class ActivityStream {
                                          boolean... Doc) {
     boolean prev = (Doc.length > 0 ? Doc[0] : false);
     info("-- Adding an activity--");
-    Utils.pause(3000);
+
     openUploadPopup(nameDrive, pathFolder);
     uploadFileFromAS(pathData, nameFile, prev);
     shareFileActivity(nameDrive, pathFolder, nameFile, text);
@@ -569,7 +569,7 @@ public class ActivityStream {
    */
   public void shareFileActivity(String nameDrive, String pathFolder, String nameFile, String textDes) {
     info("-- Adding an activity--");
-    Utils.pause(3000);
+
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         if (evt.waitForAndGetElement(ELEMENT_COMPOSER_FILE_ATTACHMENT_ACTIVITY, 3000, 0) != null)
@@ -583,7 +583,7 @@ public class ActivityStream {
       this.testBase.getExoWebDriver().getWebDriver().navigate().refresh();
       openUploadPopup(nameDrive, pathFolder);
       evt.waitForAndGetElement(By.linkText(nameFile)).click();
-      Utils.pause(2000);
+
       info("click on Select button");
       // click(ELEMENT_SELECT_BUTTON);
       evt.click(ELEMENT_SELECT_BUTTON, 2);
@@ -604,7 +604,7 @@ public class ActivityStream {
    */
   public void openUploadPopup(String nameDrive, String path) {
     info("----Click on file icon----");
-    Utils.pause(500);
+
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         if (evt.waitForAndGetElement(ELEMENT_COMPOSER_FILE_BUTTON, 3000, 0) != null) {
@@ -647,7 +647,7 @@ public class ActivityStream {
     String[] arrayPath = path.split("/");
     for (String arrayElement : arrayPath) {
       evt.clickByJavascript(ELEMENT_ACTIVITY_UPLOAD_POPUP_NODE.replace("${nameNode}", arrayElement));
-      Utils.pause(2000);
+
     }
   }
 
@@ -674,7 +674,7 @@ public class ActivityStream {
     evt.switchToParentWindow();
     evt.waitForElementNotPresent(ELEMENT_ACTIVITY_UPLOAD_POPUP_PROGRESS_UPLOAD, 3000, 0);
     evt.clickByJavascript(ELEMENT_ACTIVITY_UPLOAD_POPUP_CLOSE_BTN);
-    Utils.pause(2000);
+
     info("Upload finished");
   }
 
@@ -692,16 +692,16 @@ public class ActivityStream {
     robot.delay(1000);
     robot.keyPress(KeyEvent.VK_ENTER);
     robot.keyRelease(KeyEvent.VK_ENTER);
-    Utils.pause(2000);
+
     if (!text.isEmpty())
       evt.type(ELEMENT_COMPOSER_INPUT_FILED, text, false);
 
     info("Click share button");
     evt.waitForAndGetElement(ELEMENT_COMPOSER_SHARE_BUTTON, testBase.getDefaultTimeout(), 1);
-    Utils.pause(2000);
+
     WebElement el = evt.waitForAndGetElement(ELEMENT_COMPOSER_SHARE_BUTTON, testBase.getDefaultTimeout(), 0);
     el.sendKeys("\n");
-    Utils.pause(2000);
+
   }
 
   /**
@@ -742,7 +742,7 @@ public class ActivityStream {
       evt.click(ELEMENT_ICON_COMMENT.replace("${title}", activity));
       evt.type(ELEMENT_COMMENTBOX.replace("${title}", activity), "@" + username, false);
       evt.click(ELEMENT_SUGGEST_USER_IN_COMMENT.replace("${userName}", username));
-      Utils.pause(2000);
+
       if (!textContent.isEmpty())
         evt.type(ELEMENT_COMMENTBOX.replace("${title}", activity), textContent, false);
       evt.click(ELEMENT_COMMENT_BUTTON);
@@ -787,7 +787,7 @@ public class ActivityStream {
       info("Not type for your format.Please check your type");
       break;
     }
-    Utils.pause(2000);
+
   }
 
   /**
@@ -821,7 +821,7 @@ public class ActivityStream {
       info("Not type for your format.Please check your type");
       break;
     }
-    Utils.pause(2000);
+
   }
 
   /**
@@ -843,7 +843,7 @@ public class ActivityStream {
                                          .getText()
                                          .trim());
     assert (newNumLike == (numLike + 1)) : "Number of like is updated";
-    Utils.pause(2000);
+
   }
 
   /**
@@ -865,7 +865,7 @@ public class ActivityStream {
                                          .getText()
                                          .trim());
     assert (newNumLike == (numLike - 1)) : "Number of like is updated";
-    Utils.pause(2000);
+
   }
 
   /**
@@ -881,7 +881,7 @@ public class ActivityStream {
         break;
       evt.mouseOver(ELEMENT_ACTIVITY_BOX.replace("${name}", name), true);
       evt.click(ELEMENT_ACTIVITY_BOX_DELETE_BUTTON.replace("${name}", name), 2);
-      Utils.pause(500);
+
       evt.click(button.ELEMENT_OK_BUTTON);
       if (evt.waitForAndGetElement(ELEMENT_ACTIVITY_BOX.replace("${name}", name), 3000, 0) == null)
         break;

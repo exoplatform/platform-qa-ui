@@ -103,7 +103,7 @@ public class NotificationActivity {
    */
   public void checkCommentInActivityViewer(String comment, String userName, boolean highlighted) {
     info("Check comment in activity viewer");
-    Utils.pause(1000);
+
     if (highlighted) {
       info("Check comment in Activity viewer to make sure it's highlighted");
       evt.waitForAndGetElement(ELEMENT_COMMENT_HIGHLIGHTED.replace("${comment}", comment));
@@ -120,7 +120,7 @@ public class NotificationActivity {
    */
   public void checkLikeInActivityViewer(String number) {
     info("Check like in Activity viewer");
-    Utils.pause(1000);
+
     assert (evt.waitForAndGetElement(ELEMENT_LIKE_IN_ACTIVITY_VIEWER).getText().contains(number));
   }
 
@@ -131,7 +131,7 @@ public class NotificationActivity {
    */
   public void checkMentionInActivityViewer(String Activity) {
     info("Check Mention notification in Activity Viewr");
-    Utils.pause(1000);
+
     evt.waitForTextPresent(Activity);
   }
 
@@ -282,7 +282,7 @@ public class NotificationActivity {
   public void viewDetailActivityByViewBtn() {
     info("Click on View button");
     evt.click(ELEMENT_ACTIVITY_UPLOAD_FILE_VIEW_ICON);
-    Utils.pause(5000);
+
   }
 
   /**
@@ -291,7 +291,7 @@ public class NotificationActivity {
   public void viewDetailActivityByImageThumbnail() {
     info("Click on Image Thumbnail");
     evt.click(ELEMENT_ACTIVITY_UPLOAD_FILE_THUMBNAIL);
-    Utils.pause(5000);
+
   }
 
   /**
@@ -335,7 +335,7 @@ public class NotificationActivity {
   public void goToReplyBtnTopicActivity() {
     info("Click on Reply button");
     evt.click(ELEMENT_ACTIVITY_TOPIC_REPLY_ICON);
-    Utils.pause(3000);
+
   }
 
   /**
@@ -381,7 +381,7 @@ public class NotificationActivity {
   public void goToViewLastReplyBtnTopicActivity() {
     info("Click on view last reply button");
     evt.click(ELEMENT_ACTIVITY_TOPIC_VIEW_LAST_REPLY_ICON);
-    Utils.pause(3000);
+
   }
 
   /**

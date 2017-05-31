@@ -119,7 +119,7 @@ public class PortalManagePages {
   public void openPage(String url) {
     info("open page:" + url);
     testBase.getExoWebDriver().getWebDriver().get(url);
-    Utils.pause(1000);
+
   }
 
 }

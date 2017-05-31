@@ -46,7 +46,7 @@ public class UserAddManagement {
    */
   public void addUser(String userName, String password, String email, String firstname, String lastName) {
     info("Add an user");
-    Utils.pause(3000);
+
     $(ELEMENT_USERNAME).waitUntil(appears, 10000);
     $(ELEMENT_USERNAME).setValue(userName);
     $(ELEMENT_PASSWORD).setValue(password);

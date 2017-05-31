@@ -158,7 +158,7 @@ public class ForumCategoryManagement {
   public void cancelChangeCategory() {
     evt.waitForAndGetElement(ELEMENT_ADDCATEGORY_POPUP_CANCEL_BUTTON);
     evt.click(ELEMENT_ADDCATEGORY_POPUP_CANCEL_BUTTON);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -275,7 +275,7 @@ public class ForumCategoryManagement {
   public void closeUserSelector() {
     info("-- Go to User Selector page --");
     evt.click(ELEMENT_RESTRICTED_AUDIENCE_CLOSE_USER_SELETOR);
-    Utils.pause(2000);
+
   }
 
   /**

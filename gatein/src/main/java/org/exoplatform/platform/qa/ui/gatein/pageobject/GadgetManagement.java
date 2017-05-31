@@ -31,14 +31,14 @@ public class GadgetManagement {
    */
   public void addRemoteGadget(String url) {
     info("Click on Gadgets button");
-    Utils.pause(3000);
+
     evt.click(ELEMENT_REMOTE_GADGETBTN);
     evt.waitForAndGetElement(ELEMENT_REMOTE_GADGET_URL);
     info("input a url");
     evt.type(ELEMENT_REMOTE_GADGET_URL, url, true);
     info("Click on Add button");
     evt.click(ELEMENT_REMOTE_GADGET_ADDBTN);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -56,7 +56,7 @@ public class GadgetManagement {
     evt.check(ELEMENT_REMOTE_GADGET_TABLE_CATEGORIES_CHECKBOX.replace("${category}", category), 2);
     info("Save all changes");
     evt.click(ELEMENT_REMOTE_GADGET_TABLE_CATEGORIES_SAVEBTN);
-    Utils.pause(2000);
+
   }
 
   /**

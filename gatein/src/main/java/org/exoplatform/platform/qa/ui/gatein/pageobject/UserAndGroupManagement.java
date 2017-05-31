@@ -72,7 +72,7 @@ public class UserAndGroupManagement {
     info("-- Choose Users Management tab--");
     evt.click(ELEMENT_USER_MANAGEMENT_TAB, 0, true);
     evt.waitForAndGetElement(GateinLocator.ELEMENT_SEARCH_ICON_USERS_MANAGEMENT);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -89,10 +89,10 @@ public class UserAndGroupManagement {
    */
   public void goToMembershipTab() {
     info("-- Choose Membership Management tab--");
-    Utils.pause(500);
+
     evt.click(ELEMENT_TAB_MEMBERSHIP_MANAGEMENT);
     evt.waitForAndGetElement(ELEMENT_MEMBERSHIP_MANAGEMENT_GRID);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -106,7 +106,7 @@ public class UserAndGroupManagement {
       info("Select a group:" + group);
       evt.click(ELEMENT_GROUP_MANAGEMENT_SELECT_GROUP.replace("${name}", group));
     }
-    Utils.pause(2000);
+
   }
 
   /**
@@ -121,7 +121,7 @@ public class UserAndGroupManagement {
       info("Select group:" + groupSelect);
       evt.click(ELEMENT_GROUP_MANAGEMENT_SELECT_GROUP.replace("${name}", groupSelect));
     }
-    Utils.pause(2000);
+
   }
 
   /**
@@ -264,7 +264,7 @@ public class UserAndGroupManagement {
         $(byClassName("uiCheckbox")).click();
       }
       $(byText("Add")).click();
-      Utils.pause(500);
+
       Assert.assertEquals(testBase.getValue(ELEMENT_INPUT_USERNAME), userNames);
     } else {
       $(ELEMENT_INPUT_USERNAME).setValue(userNames);
@@ -376,7 +376,7 @@ public class UserAndGroupManagement {
     String editIcon = ELEMENT_MEMBERSHIP_EDIT_ICON.replace("${membership}", membershipName);
     String membershipInput = ELEMENT_MEMBERSHIP_INPUT.replace("${membershipName}", membershipName);
     evt.click(editIcon);
-    Utils.pause(1000);
+
     evt.waitForAndGetElement(membershipInput);
     evt.type(ELEMENT_TEXTAREA_DESCRIPTION, newDesc, true);
     evt.click(ELEMENT_SAVE_BUTTON);
@@ -620,7 +620,7 @@ public class UserAndGroupManagement {
     if (!option.isEmpty()) {
       evt.select(GateinLocator.ELEMENT_DISABLE_USER_DROP_BOX, option);
     }
-    Utils.pause(2000);
+
   }
 
   /**
@@ -633,7 +633,7 @@ public class UserAndGroupManagement {
   public void enableDisableUser(String userName, boolean isEnabled) {
     info("---Enable a user---");
     evt.click(ELEMENT_DISABLE_USER_HANDLE_BTN.replace("$userName", userName));
-    Utils.pause(1000);
+
     if (isEnabled) {
       info("Verify that user is enabled");
       selectDisableStatus("Enabled");
@@ -780,10 +780,10 @@ public class UserAndGroupManagement {
   public void deleteUser() {
     info("--Deleting user ");
     if (evt.waitForAndGetElement(ELEMENT_USER_DELETE_ICON1, 2000, 0) != null) {
-      Utils.pause(2000);
+
       evt.click(ELEMENT_USER_DELETE_ICON1);
       alert.waitForConfirmation(ELEMENT_MSG_CONFIRM_DELETE1);
-      Utils.pause(1000);
+
       evt.waitForElementNotPresent(ELEMENT_USER_DELETE_ICON1);
     }
   }
@@ -794,7 +794,7 @@ public class UserAndGroupManagement {
   public void gotoUserTab() {
     info("Open Users tab");
     evt.click(ELEMENT_USER_TAB);
-    Utils.pause(2000);
+
   }
 
   /**

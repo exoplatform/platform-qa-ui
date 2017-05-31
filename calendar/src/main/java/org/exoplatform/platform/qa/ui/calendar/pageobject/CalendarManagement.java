@@ -62,13 +62,13 @@ public class CalendarManagement {
    */
   public void goToMenuFromMainCalendar(menuOfMainCalendar action) {
     info("Select action from menu");
-    Utils.pause(3000);
+
     evt.click(ELEMENT_CALENDAR_MENU_ACTIONS_ICON, 0, true);
     evt.waitForAndGetElement(ELEMENT_CALENDAR_MENU);
     switch (action) {
     case ADDCAL:
       info("Go to add calendar");
-      Utils.pause(2000);
+
       $(ELEMENT_CALENDAR_MENU_ACTIONS_ADD).waitUntil(Condition.appears, Configuration.timeout);
       $(ELEMENT_CALENDAR_MENU_ACTIONS_ADD).click();
       $(ELEMENT_CALENDAR_ADD_FORM).waitUntil(Condition.appears, Configuration.timeout);
@@ -85,7 +85,7 @@ public class CalendarManagement {
       break;
     case CALSETTING:
       info("Go to calendar setting");
-      Utils.pause(2000);
+
       evt.waitForAndGetElement(ELEMENT_CALENDAR_MENU_ACTIONS_CALENDAR_SETTING, testBase.getDefaultTimeout(), 1);
       evt.click(ELEMENT_CALENDAR_MENU_ACTIONS_CALENDAR_SETTING, 0, true);
       evt.waitForAndGetElement(ELEMENT_CALENDAR_SETTING_FORM, testBase.getDefaultTimeout(), 1);
@@ -255,12 +255,12 @@ public class CalendarManagement {
     evt.click(ELEMENT_CALENDAR_GROUP_SELECT_LIST.replace("$group", group));
     evt.waitForElementNotPresent(ELEMENT_CALENDAR_GROUP_SELECT_FORM);
     evt.click(ELEMENT_CALENDAR_ADD_GROUP_BUTTON, 0, true);
-    Utils.pause(1000);
+
     evt.click(ELEMENT_CALENDAR_GROUP_SELECT_ROLE_BTN);
     evt.waitForAndGetElement(ELEMENT_CALENDAR_GROUP_SELECT_FORM);
     evt.click(ELEMENT_CALENDAR_GROUP_SELECT_LIST.replace("$group", membership));
     evt.waitForElementNotPresent(ELEMENT_CALENDAR_GROUP_SELECT_FORM);
-    Utils.pause(1000);
+
 
   }
 
@@ -287,7 +287,7 @@ public class CalendarManagement {
   public void saveAddCalendar() {
     info("Save add calendar");
     $(ELEMENT_CALENDAR_ADD_SAVE_BUTTON).click();
-    Utils.pause(2000);
+
   }
 
   /**
@@ -296,7 +296,7 @@ public class CalendarManagement {
   public void cancelAddCalendar() {
     info("Click on Cancel button");
     evt.click(ELEMENT_CALENDAR_ADD_CANCEL_BUTTON);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -473,7 +473,7 @@ public class CalendarManagement {
   public void checkUserSelectorOfShareCalendar(String cal, String user, boolean isPresent) {
     executeActionCalendar(cal, menuOfCalendarOption.SHARE);
     evt.click(ELEMENT_CALENDAR_SELECT_USER_ICON);
-    Utils.pause(500);
+
     pPer.checkUserSelector(user, isPresent);
     evt.click(ELEMENT_USER_CLOSE_BUTTON);
   }
@@ -523,7 +523,7 @@ public class CalendarManagement {
    */
   public void importCalendar(String path, String name, String description, String color) {
     /*
-     * click(ELEMENT_CALENDAR_MENU_ACTIONS_ICON); Utils.pause(3000);
+     * click(ELEMENT_CALENDAR_MENU_ACTIONS_ICON);
      * click(ELEMENT_CALENDAR_MENU_ACTIONS_IMPORT);
      */
     goToMenuFromMainCalendar(menuOfMainCalendar.IMPORT);
@@ -727,7 +727,7 @@ public class CalendarManagement {
   public void showHideEventTask(String calendar) {
     info("Show/Hide event/task");
     evt.click(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar", calendar));
-    Utils.pause(2000);
+
   }
 
   /**
@@ -866,14 +866,14 @@ public class CalendarManagement {
       case WEEK:
         WebElement el_week = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$date", opt[0])
                                                                                                       .replace("$name", name));
-        Utils.pause(1000);
+
         scrollElementIntoView(el_week);
         action.moveToElement(el_week).doubleClick().perform();
         break;
       case MONTH:
         WebElement el_month = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$date", opt[0])
                                                                                                 .replace("$name", name));
-        Utils.pause(1000);
+
         scrollElementIntoView(el_month);
         action.moveToElement(el_month).doubleClick().perform();
         break;
@@ -881,7 +881,7 @@ public class CalendarManagement {
         WebElement el_workweek =
                                evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$date", opt[0])
                                                                                                         .replace("$name", name));
-        Utils.pause(1000);
+
         scrollElementIntoView(el_workweek);
         action.moveToElement(el_workweek).doubleClick().perform();
         break;
@@ -960,7 +960,7 @@ public class CalendarManagement {
     info("Click on Delete button");
     evt.click(ELEMENT_EVENT_TASK_DELETE_BUTTON);
     confirmDeleteEventTask();
-    Utils.pause(2000);
+
   }
 
   /**
@@ -1000,7 +1000,7 @@ public class CalendarManagement {
       if (evt.waitForAndGetElement(ELEMENT_CONFIRM_POPUP_DELETE, 2000, 0) != null)
         evt.click(ELEMENT_CONFIRM_POPUP_DELETE);
     }
-    Utils.pause(2000);
+
 
   }
 
@@ -1046,7 +1046,7 @@ public class CalendarManagement {
     if (opParams.length > 1) {
       info("Click on the email");
       evt.click(ELEMENT_GMAIL_CONTENT_INVITATION_EMAIL.replace("$eventTask", titleEventTask));
-      Utils.pause(2000);
+
       for (String windowHandle : testBase.getExoWebDriver().getWebDriver().getWindowHandles()) {
         testBase.getExoWebDriver().getWebDriver().switchTo().window(windowHandle);
         info("driver.title:" + testBase.getExoWebDriver().getWebDriver().getTitle());
@@ -1081,7 +1081,7 @@ public class CalendarManagement {
   public void goToDisplayCalendarTab() {
     info("Click on the Display calendar tab");
     evt.click(ELEMENT_CALENDAR_SETTING_DISPLAY_TAB);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -1090,7 +1090,7 @@ public class CalendarManagement {
   public void goToFeedTab() {
     info("Click on the Display calendar tab");
     evt.click(ELEMENT_CALENDAR_SETTING_FEED_TAB);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -1164,7 +1164,7 @@ public class CalendarManagement {
       info("Type a description");
       evt.type(ELEMENT_REMOTE_CALENDAR_DES, des, true);
     }
-    Utils.pause(2000);
+
   }
 
   public void changeColorRemoteCalendar(String color) {
@@ -1209,7 +1209,7 @@ public class CalendarManagement {
       evt.type(ELEMENT_REMOTE_CALENDAR_PASSWORD_FIELD_ENABLED, password, true);
     }
 
-    Utils.pause(2000);
+
   }
 
   /**
@@ -1218,7 +1218,7 @@ public class CalendarManagement {
   public void saveRemoteCalendar() {
     info("Click on Save button");
     evt.click(ELEMENT_REMOTE_CALENDAR_SAVE_BTN);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -1227,7 +1227,7 @@ public class CalendarManagement {
   public void cancelRemoteCalendar() {
     info("Click on Cancel button");
     evt.click(ELEMENT_REMOTE_CALENDAR_CANCEL_BTN);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -1236,7 +1236,7 @@ public class CalendarManagement {
   public void backRemoteCalendar() {
     info("Click on Back button");
     evt.click(ELEMENT_REMOTE_CALENDAR_BACK_BTN);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -1250,7 +1250,7 @@ public class CalendarManagement {
       info("Input key search");
       evt.type(ELEMENT_EVENT_TASK_QUICK_SEARCH, name, true);
       evt.click(ELEMENT_EVENT_TASK_SEARCH_BTN);
-      Utils.pause(2000);
+
       evt.waitForAndGetElement(ELEMENT_EVENT_TASK_TITLE.replace("${name}", name));
     }
   }
@@ -1261,7 +1261,7 @@ public class CalendarManagement {
   public void closeSearch() {
     info("click on Close search button");
     evt.click(ELEMENT_EVENT_TASK_CLOSE_SEARCH_BTN);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -1288,7 +1288,7 @@ public class CalendarManagement {
     rightClickEventTaskInMonth(name, date);
     selectOptionByRightclickOnEvent(contextMenuEditEvenOption.DELETE);
     confirmDeleteEventTask();
-    Utils.pause(2000);
+
   }
 
   /***
@@ -1326,7 +1326,7 @@ public class CalendarManagement {
       } else
         assert false : "Large image is not shown";
     }
-    Utils.pause(2000);
+
     info("Large image is shown");
   }
 
@@ -1347,7 +1347,7 @@ public class CalendarManagement {
       else
         assert false : "Large image can not closed";
     }
-    Utils.pause(2000);
+
   }
 
   /**
@@ -1358,7 +1358,7 @@ public class CalendarManagement {
       info("Click on large image");
       evt.click(ELEMENT_EVENT_TASK_LARGE_IMAGE_DOWNLOAD);
     }
-    Utils.pause(2000);
+
   }
 
   /**

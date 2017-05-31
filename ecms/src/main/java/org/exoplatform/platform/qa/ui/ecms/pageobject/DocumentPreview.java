@@ -30,7 +30,7 @@ public class DocumentPreview {
     Actions action = new Actions(this.testBase.getExoWebDriver().getWebDriver());
     action.sendKeys(Keys.ESCAPE).build().perform();
     action.release();
-    Utils.pause(2000);
+
     evt.waitForElementNotPresent(ELEMENT_PREVIEW_MODE_CROSS_ICON, 3000, 1);
   }
 

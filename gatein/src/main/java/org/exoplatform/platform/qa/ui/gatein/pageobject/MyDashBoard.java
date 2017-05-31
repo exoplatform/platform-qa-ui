@@ -40,7 +40,7 @@ public class MyDashBoard {
     info("The popup is shown");
     evt.dragAndDropToObject(ELEMENT_MYDASH_GADGET_NAME.replace("${name}", name),
                             ELEMENT_MYDASH_GADGET_COLUMN.replace("${number}", numberCol));
-    Utils.pause(2000);
+
     evt.click(ELEMENT_DASHBOARD_WORKSPACE_POPUP_CLOSE);
     evt.waitForAndGetElement(ELEMENT_MYDASH_ADDED_GADGET_IN_DASHBOARD.replace("${name}", name), 2000, 0);
     info("The gadget is added to dashboard");
@@ -80,7 +80,7 @@ public class MyDashBoard {
     evt.click(ELEMENT_DASHBOARD_WORKSPACE_POPUP_CLOSE);
     info("Verify that the remote gadget is shown on the page");
     evt.waitForAndGetElement(ELEMENT_MYDASH_ADDED_GADGET_IN_DASHBOARD.replace("${name}", name), 2000, 1);
-    Utils.pause(2000);
+
   }
 
   /**

@@ -34,13 +34,13 @@ public class SpaceHomePage {
   public void goToSpaceSettingTab() {
     info("--Open Setting tab of the space");
     info("Click on the tab");
-    Utils.pause(2000);
+
     if (evt.waitForAndGetElement(ELEMENT_SPACE_SPACE_SETTINGS, 5000, 0) == null) {
       evt.click(ELEMENT_SPACE_MENU_MORE, 2);
       evt.clickByJavascript(ELEMENT_SPACE_SPACE_SETTINGS);
     } else
       evt.clickByJavascript(ELEMENT_SPACE_SPACE_SETTINGS);
-    Utils.pause(3000);
+
     evt.waitForAndGetElement(ELEMENT_SPACE_SPACE_SETTINGS_TITLE, 3000, 1);
     info("Space setting page is shown");
   }

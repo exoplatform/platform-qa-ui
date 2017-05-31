@@ -42,18 +42,18 @@ public class PortalBranding {
     ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript(
                                                                                    "arguments[0].style.display = 'block'; arguments[0].style.visibility = 'visible'",
                                                                                    upload);
-    Utils.pause(10000);
+
     info("Select a file to upload");
     upload.sendKeys(mftb.getAbsoluteFilePath(link));
     info("Upload file " + mftb.getAbsoluteFilePath(link));
     info("Switch to Parent window");
     evt.switchToParentWindow();
     if (verify) {
-      Utils.pause(2000);
+
       evt.waitForAndGetElement(By.xpath("//*[@id='PreviewImg']"));
     }
     info("Upload file successfully");
-    Utils.pause(2000);
+
     return new PortalBranding((TestBase) testBase.getExoWebDriver().getWebDriver());
   }
 }

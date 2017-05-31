@@ -26,7 +26,7 @@ public class PageEditor {
    */
   public void goToEditPortlet(Object locatorPortlet) {
     info("Go to edit portlet");
-    Utils.pause(3000);
+
     evt.mouseOver(locatorPortlet, true);
     evt.click(ELEMENT_EDIT_PORTLET_ICON);
     evt.waitForAndGetElement(ELEMENT_EDIT_PORTLET_FORM);

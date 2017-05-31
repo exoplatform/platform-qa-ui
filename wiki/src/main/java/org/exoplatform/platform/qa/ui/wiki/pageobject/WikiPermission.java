@@ -50,7 +50,7 @@ public class WikiPermission {
       evt.click(bDelete);
       evt.waitForElementNotPresent(bDelete);
     }
-    Utils.pause(1000);
+
   }
 
   /**
@@ -129,7 +129,7 @@ public class WikiPermission {
   public void goToSelectUser() {
     info("Click on select user button");
     evt.click(ELEMENT_PERMISSION_SELECT_USER);
-    Utils.pause(1000);
+
   }
 
   /**
@@ -138,7 +138,7 @@ public class WikiPermission {
   public void goToSelectMemberShip() {
     info("Click on select membership button");
     evt.click(ELEMENT_PERMISSION_SELECT_MEMBERSHIP);
-    Utils.pause(1000);
+
   }
 
   /**
@@ -147,7 +147,7 @@ public class WikiPermission {
   public void goToGroup() {
     info("Click on select membership button");
     evt.click(ELEMENT_PERMISSION_SELECT_GROUP);
-    Utils.pause(1000);
+
   }
 
   /**
@@ -187,7 +187,7 @@ public class WikiPermission {
     }
     info("Click on Add button");
     evt.click(ELEMENT_PERMISSION_ADD_BUTTON);
-    Utils.pause(2000);
+
     info("The group/user/membership is added successfully");
   }
 
@@ -200,7 +200,7 @@ public class WikiPermission {
     evt.click(ELEMENT_PERMISSION_BUTTON_SAVE, 0, true);
     if (!savePresent)
       evt.waitForElementNotPresent(ELEMENT_PERMISSION_BUTTON_SAVE);
-    Utils.pause(3000);
+
   }
 
   /**

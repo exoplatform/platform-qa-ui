@@ -49,7 +49,7 @@ public class CalendarHomePage {
    */
   public void goToView(selectViewOption view) {
     info("Go to view " + view);
-    Utils.pause(2000);
+
     switch (view) {
     case DAY:
       ELEMENT_CALENDAR_DAY_BUTTON.click();
@@ -64,7 +64,7 @@ public class CalendarHomePage {
       evt.waitForAndGetElement(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"), testBase.getDefaultTimeout(), 1);
       evt.clickByJavascript(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"));
       evt.waitForAndGetElement(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Month"), testBase.getDefaultTimeout(), 1, 2);
-      Utils.pause(2000);
+
       break;
     case WORKWEEK:
       evt.waitForAndGetElement(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Work Week"), testBase.getDefaultTimeout(), 1);
@@ -77,7 +77,7 @@ public class CalendarHomePage {
       evt.waitForAndGetElement(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Week"), testBase.getDefaultTimeout(), 1, 2);
       break;
     }
-    Utils.pause(500);
+
   }
 
   /**
@@ -716,7 +716,7 @@ public class CalendarHomePage {
       info("You don't select a datetime.Please select a datetime.");
       break;
     }
-    Utils.pause(2000);
+
 
   }
 
@@ -736,48 +736,48 @@ public class CalendarHomePage {
     switch (view) {
     case DAY:
       evt.rightClickOnElement(ELEMENT_EVENT_TASK_DAY_ONE_DAY.replace("$time", date));
-      Utils.pause(2000);
+
       selectOptionByRightclickOnDateTime(option);
       break;
     case WEEK:
       switch (optionDay) {
       case DETAILTIME:
         evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ONE_DAY.replace("$date", date));
-        Utils.pause(2000);
+
         selectOptionByRightclickOnDateTime(option);
         break;
       case ALLDAY:
         evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ALL_DAY.replace("$date", date));
-        Utils.pause(2000);
+
         selectOptionByRightclickOnDateTime(option);
         break;
       default:
         evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ONE_DAY.replace("$date", date));
-        Utils.pause(2000);
+
         selectOptionByRightclickOnDateTime(option);
         break;
       }
       break;
     case MONTH:
       evt.rightClickOnElement(ELEMENT_EVENT_TASK_MONTH_DATE.replace("$date", date));
-      Utils.pause(2000);
+
       selectOptionByRightclickOnDateTime(option);
       break;
     case WORKWEEK:
       switch (optionDay) {
       case DETAILTIME:
         evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ONE_DAY.replace("$date", date));
-        Utils.pause(2000);
+
         selectOptionByRightclickOnDateTime(option);
         break;
       case ALLDAY:
         evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ALL_DAY.replace("$date", date));
-        Utils.pause(2000);
+
         selectOptionByRightclickOnDateTime(option);
         break;
       default:
         evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ONE_DAY.replace("$date", date));
-        Utils.pause(2000);
+
         selectOptionByRightclickOnDateTime(option);
         break;
       }
@@ -786,7 +786,7 @@ public class CalendarHomePage {
       info("You don't select a optionDay.Please select other optionDay.");
       break;
     }
-    Utils.pause(2000);
+
 
   }
 
@@ -974,7 +974,7 @@ public class CalendarHomePage {
       else
         alert.verifyAlertMessage(ELEMENT_CONFIRM_DELETE_TASK_MSG);
       testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-      Utils.pause(1000);
+
       verifyIsNotPresentEventTask(name, view, optionDay);
     } else
       button.yes();
@@ -1041,7 +1041,7 @@ public class CalendarHomePage {
     evt.type(ELEMENT_INPUT_TEXT_ADVANCE_SEARCH, keyword, true);
     evt.click(ELEMENT_BUTTON_SEARCH_ADVANCE_SEARCH);
     info("----Confirm search result displayed----");
-    Utils.pause(3000);
+
     evt.waitForAndGetElement(ELEMENT_BUTTON_CLOSE_QUICK_SEARCH_RESULT);
   }
 
@@ -1056,7 +1056,7 @@ public class CalendarHomePage {
       info("Select the events/tasks:" + names[i]);
       evt.check(ELEMENT_EVENT_TASK_CHECKBOX.replace("$name", names[i]), 2);
     }
-    Utils.pause(2000);
+
   }
 
   /**
@@ -1087,7 +1087,7 @@ public class CalendarHomePage {
       info("Click on check box of event's number:" + number);
       evt.check(ELEMENT_EVENT_TASK_NUMBER_RECURRING_MONTH_VIEW_CHECKBOX.replace("$name", name).replace("$number", number), 2);
     }
-    Utils.pause(2000);
+
   }
 
   /**
@@ -1099,7 +1099,7 @@ public class CalendarHomePage {
   public void checkBoxEventTaskInMonthView(String name, String date) {
     info("Select the event/task");
     evt.check(ELEMENT_EVENT_TASK_NUMBER_RECURRING_MONTH_VIEW_CHECKBOX_DATE.replace("$date", date).replace("$name", name), 2);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -1113,7 +1113,7 @@ public class CalendarHomePage {
       for (int i = 0; i < number; i++) {
         info("Click on Next arrow");
         evt.click(ELEMENT_NEXT_BUTTON_ANY_VIEW);
-        Utils.pause(2000);
+
       }
     }
   }
@@ -1129,7 +1129,7 @@ public class CalendarHomePage {
       for (int i = 0; i < number; i++) {
         info("Click on Next arrow");
         evt.click(ELEMENT_CALENDAR_MINI_NEXT_MONTH);
-        Utils.pause(2000);
+
       }
     }
   }
@@ -1145,7 +1145,7 @@ public class CalendarHomePage {
       for (int i = 0; i < number; i++) {
         info("Click on Previous arrow");
         evt.click(ELEMENT_PREVIOUS_BUTTON_ANY_VIEW);
-        Utils.pause(2000);
+
       }
     }
   }
@@ -1161,7 +1161,7 @@ public class CalendarHomePage {
       for (int i = 0; i < number; i++) {
         info("Click on Previous arrow");
         evt.click(ELEMENT_CALENDAR_MINI_PREVIOUS_MONTH);
-        Utils.pause(2000);
+
       }
     }
   }

@@ -60,12 +60,12 @@ public class EditorPortlet {
     String[] groups = groupPath.split("/");
     for (String group : groups) {
       evt.click(ELEMENT_PORTLET_SELECT_PERMISSION_GROUP_MEMBERSHIP_NAME.replace("$name", group));
-      Utils.pause(2000);
+
     }
     if (!membership.isEmpty()) {
       info("Select membership");
       evt.click(ELEMENT_PORTLET_SELECT_PERMISSION_GROUP_MEMBERSHIP_NAME.replace("$name", membership));
-      Utils.pause(2000);
+
     }
     evt.waitForAndGetElement(ELEMENT_PORTLET_ACCESS_PERMISSION_GROUP_NAME.replace("$group", addedGroup));
     info("Access group is added successfully");

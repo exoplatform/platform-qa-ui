@@ -89,6 +89,6 @@ public class DownloadFileControl {
       assert false;
       System.out.println("Download failed!");
     }
-    Utils.pause(3000);
+
   }
 }

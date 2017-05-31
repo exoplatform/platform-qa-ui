@@ -101,7 +101,7 @@ public class WikiSettingPage {
   public void goToTemplateTab() {
     info("click on the template tab");
     evt.click(ELEMENT_WIKI_SETTING_TEMPLATE_TAB);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -110,7 +110,7 @@ public class WikiSettingPage {
   public void goToPermissionTab() {
     info("Click on Permission tab");
     evt.click(ELEMENT_WIKI_SETTING_PERMISSION_TAB);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -128,7 +128,7 @@ public class WikiSettingPage {
   public void cancelTemplate() {
     info("Click on Cancel template");
     evt.click(ELEMENT_CANCEL_TEMPLATE);
-    Utils.pause(3000);
+
   }
 
   /**

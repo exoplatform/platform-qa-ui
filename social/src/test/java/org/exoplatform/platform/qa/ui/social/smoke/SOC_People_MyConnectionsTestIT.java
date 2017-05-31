@@ -70,7 +70,7 @@ public class SOC_People_MyConnectionsTestIT extends Base {
     addUsers.addUser(username1, password, email1, username1, username1);
     addUsers.addUser(username2, password, email2, username2, username2);
     manageLogInOut.signIn(username1, password);
-    Utils.pause(3000);
+
 
     info("Test 6: Check request pending after inviting an user");
     /*
@@ -134,7 +134,7 @@ public class SOC_People_MyConnectionsTestIT extends Base {
     addUsers.addUser(username1, password, email1, username1, username1);
     addUsers.addUser(username2, password, email2, username2, username2);
     manageLogInOut.signIn(username1, password);
-    Utils.pause(3000);
+
     /*
      * Step Number: 1 Step Name: Step 1: Go to Connections page Step
      * Description: - Login as User1 - Go to Connections page Input Data:

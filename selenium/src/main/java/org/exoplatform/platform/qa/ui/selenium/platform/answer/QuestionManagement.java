@@ -37,7 +37,7 @@ public class QuestionManagement {
    */
   public void goToManageQuestionForm() {
     info("Go to mange question");
-    Utils.pause(2000);
+
     evt.waitForAndGetElement(ELEMENT_MANAGE_QUESTION_BUTTON, testBase.getDefaultTimeout(), 1);
     evt.click(ELEMENT_MANAGE_QUESTION_BUTTON);
     evt.waitForAndGetElement(ELEMENT_MANAGE_QUESTION_FORM);
@@ -48,7 +48,7 @@ public class QuestionManagement {
    */
   public void goToSubmitQuestion() {
     info("Open submin question form");
-    Utils.pause(2000);
+
     evt.waitForAndGetElement(ELEMENT_SUBMIT_QUESTION, testBase.getDefaultTimeout(), 1);
     evt.clickByJavascript(ELEMENT_SUBMIT_QUESTION);
     evt.waitForAndGetElement(ELEMENT_SUBMIT_QUESTION_FORM);
@@ -90,7 +90,7 @@ public class QuestionManagement {
       evt.waitForAndGetElement(ELEMENT_ATTACH_FILE_NAME.replace("$fileName", links[links.length - 1]));
       evt.switchToParentWindow();
     }
-    Utils.pause(2000);
+
   }
 
   /**
@@ -101,7 +101,7 @@ public class QuestionManagement {
    */
   public void goToActionOfQuestionByRightClick(String question, actionQuestionOption action) {
     info("Select action from menu");
-    Utils.pause(3000);
+
     evt.rightClickOnElement(ELEMENT_QUESTION_LIST_ITEM.replace("$question", question));
     switch (action) {
     case COMMENT:

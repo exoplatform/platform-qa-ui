@@ -44,7 +44,7 @@ public class PlatformPermission {
       break;
 
     }
-    Utils.pause(500);
+
     evt.click(ELEMENT_QUICK_SEARCH_BUTTON);
     // clickByJavascript(ELEMENT_QUICK_SEARCH_BUTTON);
     evt.waitForAndGetElement((ELEMENT_USER_CHECKBOX.replace("${user}", keySearch)), 5000, 1, 2);
@@ -65,7 +65,7 @@ public class PlatformPermission {
         if (evt.waitForAndGetElement(ELEMENT_SELECT_USER_ICON, 5000, 0) != null)
           evt.click(ELEMENT_SELECT_USER_ICON);
         searchUser(temp[i], type);
-        Utils.pause(1000);
+
         // check((ELEMENT_USER_CHECKBOX.replace("${user}", temp[i])), 2);
         evt.clickByJavascript(ELEMENT_USER_CHECKBOX.replace("${user}", temp[i]), 2);
         evt.click(ELEMENT_ADD_USERS_BUTTON);
@@ -130,7 +130,7 @@ public class PlatformPermission {
    */
   public void searchUser(String keySearch, boolean isPresent) {
     evt.type(ELEMENT_SEARCH_USER_INPUT, keySearch, true);
-    Utils.pause(500);
+
     evt.click(ELEMENT_QUICK_SEARCH_BUTTON);
     if (isPresent)
       evt.waitForAndGetElement((ELEMENT_USER_CHECKBOX.replace("${user}", keySearch)), 5000, 1, 2);

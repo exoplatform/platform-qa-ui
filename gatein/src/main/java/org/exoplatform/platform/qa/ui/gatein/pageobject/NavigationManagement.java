@@ -48,7 +48,7 @@ public class NavigationManagement {
   public void goToEditLayout(String site) {
     info("Click on Edit layout button");
     evt.click(ELEMENT_MANAGESITES_EDIT_LAYOUT_ICON.replace("${site}", site));
-    Utils.pause(3000);
+
   }
 
   /**
@@ -60,7 +60,7 @@ public class NavigationManagement {
     goToEditLayout(site);
     info("Click on site's config button");
     evt.click(ELEMENT_MANAGESITES_EDIT_LAYOUT_SITE_CONFIG_BTN);
-    Utils.pause(3000);
+
   }
 
   /**
@@ -71,7 +71,7 @@ public class NavigationManagement {
   public void goToEditSiteConfig(String site) {
     info("Click on Edit Site Configuration button");
     evt.click(ELEMENT_MANAGESITES_EDIT_CONFIG_ICON.replace("${site}", site));
-    Utils.pause(2000);
+
   }
 
   /**
@@ -86,32 +86,32 @@ public class NavigationManagement {
     case EDIT_NODE_PAGE:
       info("Click on Edit node page");
       $(byText("Edit Node's Page")).click();
-      Utils.pause(2000);
+
       break;
     case EDIT_THIS_NODE:
       info("Click on Edit icon");
       $(ELEMENT_MANAGESITES_CONTEXTMENU_EDIT_ICON).click();
-      Utils.pause(2000);
+
       break;
     case COPY_NODE:
       info("Click on Copy node");
       evt.click(ELEMENT_MANAGESITES_CONTEXTMENU_COPY_ICON);
-      Utils.pause(2000);
+
       break;
     case CLONE_NODE:
       info("Click on Clone node");
       evt.click(ELEMENT_MANAGESITES_CONTEXTMENU_CLONE_ICON);
-      Utils.pause(2000);
+
       break;
     case CUT_NODE:
       info("Click on Cut node");
       evt.click(ELEMENT_MANAGESITES_CONTEXTMENU_CUT_ICON);
-      Utils.pause(2000);
+
       break;
     case PASTE_NODE:
       info("Click on Paste node");
       evt.clickByJavascript(ELEMENT_MANAGESITES_CONTEXTMENU_PASTE_ICON);
-      Utils.pause(2000);
+
       break;
     case DELETE_NODE:
       info("Click on Delete node");
@@ -121,12 +121,12 @@ public class NavigationManagement {
     case MOVE_UP:
       info("Click on Moveup node");
       evt.clickByJavascript(ELEMENT_MANAGESITES_CONTEXTMENU_MOVE_UP_ICON);
-      Utils.pause(2000);
+
       break;
     case MOVE_DOWN:
       info("Click on Move down node");
       evt.clickByJavascript(ELEMENT_MANAGESITES_CONTEXTMENU_MOVE_DOWN_ICON);
-      Utils.pause(2000);
+
       break;
     }
   }
@@ -167,7 +167,7 @@ public class NavigationManagement {
 
     info("Click on Save button");
     $(ELEMENT_NAVIGATION_MANAGEMENT_SAVE).click();
-    Utils.pause(2000);
+
   }
 
   /**
@@ -292,7 +292,7 @@ public class NavigationManagement {
    */
   public void closeNavigationManagementPopup() {
     $(ELEMENT_SAVE_NODE).click();
-    Utils.pause(2000);
+
   }
 
   /**
@@ -428,7 +428,7 @@ public class NavigationManagement {
     searchPage(title, "", "");
     info("Select a page");
     evt.click(ELEMENT_NODE_PAGE_SELECTOR_SELECT_PAGES_BTN);
-    Utils.pause(2000);
+
   }
 
   /**

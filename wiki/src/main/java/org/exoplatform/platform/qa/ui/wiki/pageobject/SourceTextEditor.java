@@ -92,7 +92,7 @@ public class SourceTextEditor {
     info("Cancel adding page");
     evt.click(ELEMENT_CANCEL_BUTTON_ADD_PAGE, 0, true);
     evt.click(ELEMENT_CONFIRMATION_POPUP_YES_BTN);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -143,7 +143,7 @@ public class SourceTextEditor {
         }
       }
     }
-    Utils.pause(2000);
+
   }
 
   /**
@@ -188,17 +188,17 @@ public class SourceTextEditor {
     info("path in uploadRobot:" + path);
     // doubleClickOnElement(ELEMENT_UPLOAD_NAME);
 
-    Utils.pause(2000);
+
     ((JavascriptExecutor) testBase.getExoWebDriver()
                                   .getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
-    Utils.pause(2000);
+
     testBase.getExoWebDriver().getWebDriver().findElement(ELEMENT_UPLOAD_NAME).sendKeys(path);
     /*
      * scrollToElement(elem, driver); click(elem, 2, true);
      * uploadFileUsingRobot(link); waitForAndGetElement(By
      * .linkText(link.substring(link.lastIndexOf(fs) + 1)));
      */
-    Utils.pause(3000);
+
   }
 
   /**

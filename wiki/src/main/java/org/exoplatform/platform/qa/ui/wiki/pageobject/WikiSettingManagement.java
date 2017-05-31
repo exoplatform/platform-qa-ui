@@ -123,6 +123,6 @@ public class WikiSettingManagement {
   public void closeUserSelector() {
     info("-- Go to User Selector page --");
     evt.click(ELEMENT_WIKI_SETTINGS_CLOSE_USER_SELETOR);
-    Utils.pause(2000);
+
   }
 }

@@ -59,7 +59,7 @@ public class ConnectionsManagement {
       evt.click(ELEMENT_ALL_CONNECTIONS_TAB, 0, true);
       break;
     }
-    Utils.pause(1000);
+
 
   }
 

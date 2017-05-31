@@ -101,7 +101,7 @@ public class ForumTopicManagement {
     case DELETE:
       info("Click on Delete topic button");
       evt.click(ELEMENT_DELETE_TOPIC);
-      Utils.pause(1000);
+
       info("Verify that confirm popup is shown");
       evt.waitForMessage("Are you sure you want to delete this topic ?");
       info("Click on OK on Confirm popup");
@@ -295,7 +295,7 @@ public class ForumTopicManagement {
     evt.click(ELEMENT_POLL_SUBMIT);
     evt.waitForElementNotPresent(ELEMENT_POLL_SUBMIT);
     info("Finished adding poll");
-    Utils.pause(2000);
+
   }
 
   /**
@@ -393,7 +393,7 @@ public class ForumTopicManagement {
    */
   public void addPostSimple(String name, String message) {
     info("Add post simple");
-    Utils.pause(2000);
+
     evt.click(ELEMENT_FORUM_ADDPOST);
     evt.waitForAndGetElement(ELEMENT_FORUM_POST_TITLE, testBase.getDefaultTimeout(), 1);
     evt.type(ELEMENT_FORUM_POST_TITLE, name, true);
@@ -510,7 +510,7 @@ public class ForumTopicManagement {
   public void rateTopic(String name, String starType) {
     evt.click(ELEMENT_ACTIONBAR_TOPIC_RATE);
     evt.click(ELEMENT_FORUM_VOTE_MARK.replace("${star}", starType));
-    Utils.pause(1000);
+
   }
 
   /**
@@ -645,7 +645,7 @@ public class ForumTopicManagement {
   public void closeUserSelector() {
     info("-- Go to User Selector page --");
     evt.click(ELEMENT_TOPIC_PERMISSION_CLOSE_USER_SELETOR);
-    Utils.pause(2000);
+
   }
 
   /**

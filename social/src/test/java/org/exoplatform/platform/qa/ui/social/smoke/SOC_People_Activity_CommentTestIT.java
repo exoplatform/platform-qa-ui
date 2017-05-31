@@ -76,7 +76,7 @@ public class SOC_People_Activity_CommentTestIT extends Base {
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);
     manageLogInOut.signIn(username1, password);
-    Utils.pause(3000);
+
 
     String activity1 = "activity1" + getRandomNumber();
     activityStream.addActivity(activity1, "");
@@ -134,7 +134,7 @@ public class SOC_People_Activity_CommentTestIT extends Base {
     addUsers.addUser(username1, password, email1, username1, username1);
     addUsers.addUser(username2, password, email2, username2, username2);
     manageLogInOut.signIn(username1, password);
-    Utils.pause(3000);
+
 
     info("Test 2: Comment on your friends activity");
     /*
@@ -235,7 +235,7 @@ public class SOC_People_Activity_CommentTestIT extends Base {
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);
     manageLogInOut.signIn(username1, password);
-    Utils.pause(3000);
+
 
     String activity1 = "activity1" + getRandomNumber();
     activityStream.addActivity(activity1, "");

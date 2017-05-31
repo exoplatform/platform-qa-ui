@@ -158,7 +158,7 @@ public class EventManagement {
    */
   public void goToAddEventFromActionBar() {
     info("Go to Add Event page from action bar");
-    Utils.pause(2000);
+
     $(ELEMENT_BUTTON_EVENT).click();
     $(ELEMENT_QUICK_ADD_EVENT_POPUP).waitUntil(Condition.appears, Configuration.timeout);
   }
@@ -184,7 +184,7 @@ public class EventManagement {
     if (opt.length > 1 && opt[1] != null) {
       $(ELEMENT_QUICK_INPUT_EVENT_CALENDAR).selectOption(opt[1]);
     }
-    Utils.pause(2000);
+
   }
 
   /**
@@ -359,11 +359,11 @@ public class EventManagement {
     evt.click(ELEMENT_SELECT_FILE_BUTTON);
     testBase.uploadFileUsingRobot(fullPath);
     info("opt.length:" + opt.length);
-    Utils.pause(1000);
+
     if (opt.length == 0) {
       evt.waitForAndGetElement(ELEMENT_ATTACHMENT_FORM_FILE_NAME.replace("$fileName", path));
       evt.click(ELEMENT_ATTACHMENT_SAVE_BUTTON, 0, true);
-      Utils.pause(500);
+
       evt.waitForAndGetElement(ELEMENT_ATTACH_FILE_NAME.replace("$fileName", path));
     }
   }
@@ -700,7 +700,7 @@ public class EventManagement {
       }
     } else {
       evt.click(ELEMENT_PICK_USER_PARTICIPANTS_TAB);
-      Utils.pause(2000);
+
       pPer.selectUserPermission(users, type);
     }
     if (content != null && content != "") {
@@ -738,7 +738,7 @@ public class EventManagement {
    */
   public void moreDetailsEvent() {
     info("Go to More Details");
-    Utils.pause(2000);
+
     evt.waitForAndGetElement(ELEMENT_BUTTON_EVENT_MORE_DETAILS, testBase.getDefaultTimeout(), 1);
     // click(ELEMENT_BUTTON_EVENT_MORE_DETAILS);
     evt.clickByJavascript(ELEMENT_BUTTON_EVENT_MORE_DETAILS, 2);
@@ -829,7 +829,7 @@ public class EventManagement {
       evt.check(ELEMENT_REPEAT_BY_DAY_OF_MONTH, 2);
     else
       evt.check(ELEMENT_REPEAT_BY_DAY_OF_WEEK, 2);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -959,7 +959,7 @@ public class EventManagement {
       evt.click(ELEMENT_EDIT_DELETE_ALL_EVENT, 2);
       break;
     }
-    Utils.pause(2000);
+
     evt.click(ELEMENT_CONFIRM_DELETE_BUTTON);
     evt.waitForElementNotPresent(ELEMENT_CONFIRM_DELETE_BUTTON);
   }
@@ -1031,7 +1031,7 @@ public class EventManagement {
   public void selectReminderEmailBox(String option) {
     info("Select an option");
     evt.select(ELEMENT_REMINDER_DROP_BOX, option);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -1040,7 +1040,7 @@ public class EventManagement {
   public void goToScheduleTab() {
     info("Click on Schedule tab");
     evt.click(ELEMENT_EVENT_SCHEDULE_TAB);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -1049,7 +1049,7 @@ public class EventManagement {
   public void goToDetailsTab() {
     info("Click on Detail tab");
     evt.click(ELEMENT_EVENT_DETAILS_TAB);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -1058,7 +1058,7 @@ public class EventManagement {
   public void goToParticipantsTab() {
     info("Click on Participants tab");
     evt.click(ELEMENT_EVENT_PARTICIPANTS_TAB);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -1067,7 +1067,7 @@ public class EventManagement {
   public void goToRemindersTab() {
     info("Click on Reminders tab");
     evt.click(ELEMENT_EVENT_REMINDER_TAB);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -1076,7 +1076,7 @@ public class EventManagement {
   public void goToInvitationParticipantForm() {
     info("Click on invitation Participants button");
     evt.click(ELEMENT_INVITATION_PARTICITPANT_USER);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -1085,7 +1085,7 @@ public class EventManagement {
   public void saveInvitationParticipantForm() {
     info("Click on save button");
     evt.click(ELEMETN_INVITATION_SAVE_BUTTON);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -1117,7 +1117,7 @@ public class EventManagement {
     info("check participant");
     goToParticipantsTab();
     evt.click(ELEMENT_ADD_PARTICIPANTS_BUTTON_IN_PARTICIPANT_TAB);
-    Utils.pause(500);
+
     evt.click(ELEMENT_PICK_USER_PARTICIPANTS_TAB);
     pPer.checkUserSelector(user, isPresent);
     evt.click(ELEMENT_USER_CLOSE_BUTTON);

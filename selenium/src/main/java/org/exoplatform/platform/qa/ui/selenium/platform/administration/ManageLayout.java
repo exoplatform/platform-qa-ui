@@ -178,7 +178,7 @@ public class ManageLayout {
   public void goToContainerTab() {
     info("Click on Container tab");
     evt.click(ELEMENT_PAGE_EDIT_LAYOUT_CONTAINER_TAB);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -306,13 +306,13 @@ public class ManageLayout {
     for (String group : groups) {
       evt.click(ELEMENT_PORTLET_SELECT_PERMISSION_GROUP_MEMBERSHIP_NAME.replace("${tabName}", popupName).replace("${name}",
                                                                                                                  group));
-      Utils.pause(2000);
+
     }
     if (!membership.isEmpty()) {
       info("Select membership");
       evt.click(ELEMENT_PORTLET_SELECT_PERMISSION_GROUP_MEMBERSHIP_NAME.replace("${tabName}", popupName).replace("${name}",
                                                                                                                  membership));
-      Utils.pause(2000);
+
     }
     evt.waitForAndGetElement(ELEMENT_PORTLET_ACCESS_PERMISSION_GROUP_NAME.replace("${tabName}", permissionSelector)
                                                                          .replace("${group}", addedGroup));
@@ -349,13 +349,13 @@ public class ManageLayout {
     for (String group : groups) {
       evt.click(ELEMENT_PORTLET_SELECT_PERMISSION_GROUP_MEMBERSHIP_NAME.replace("${tabName}", popupName).replace("${name}",
                                                                                                                  group));
-      Utils.pause(2000);
+
     }
     if (!membership.isEmpty()) {
       info("Select membership");
       evt.click(ELEMENT_PORTLET_SELECT_PERMISSION_GROUP_MEMBERSHIP_NAME.replace("${tabName}", popupName).replace("${name}",
                                                                                                                  membership));
-      Utils.pause(2000);
+
     }
     evt.waitForAndGetElement(ELEMENT_PORTLET_ACCESS_PERMISSION_GROUP_NAME.replace("${tabName}", permissionSelector)
                                                                          .replace("${group}", addedGroup));
@@ -390,7 +390,7 @@ public class ManageLayout {
   public void addApplication(Object tab, Object element, By container) {
     evt.click(ELEMENT_APPLICATION_TAB_ACTIVE);
     evt.click(tab);
-    Utils.pause(1000);
+
     evt.dragAndDropToObject(element, container);
   }
 

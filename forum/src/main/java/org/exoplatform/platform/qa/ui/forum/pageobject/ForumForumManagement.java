@@ -63,7 +63,7 @@ public class ForumForumManagement {
     $(ELEMENT_ADDFORUM_POPUP_DESCRIPTION).val(description);
     info("Click on Save button");
     $(ELEMENT_ADDFORUM_POPUP_SAVE_BUTTON).click();
-    Utils.pause(2000);
+
     info("Finish adding new forum");
   }
 
@@ -73,7 +73,7 @@ public class ForumForumManagement {
   public void cancelChangeAddForum() {
     evt.waitForAndGetElement(ELEMENT_ADDFORUM_POPUP_CANCEL_BUTTON);
     evt.click(ELEMENT_ADDFORUM_POPUP_CANCEL_BUTTON);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -109,7 +109,7 @@ public class ForumForumManagement {
       info("click on Delete link");
       evt.waitForAndGetElement(ELEMENT_DELETE_FORUM, 2000, 0);
       evt.click(ELEMENT_DELETE_FORUM);
-      Utils.pause(1000);
+
       info("Verify that Confirm popup is shown");
       $(byText("Are you sure you want to delete this forum ?")).waitUntil(Condition.appears,10000);
       info("Click on OK button of Confirm popup");
@@ -172,7 +172,7 @@ public class ForumForumManagement {
       evt.type(ELEMENT_ADDFORUM_POPUP_DESCRIPTION, newDescription, true);
     info("Click on Save button");
     evt.click(ELEMENT_ADDFORUM_POPUP_SAVE_BUTTON);
-    Utils.pause(2000);
+
     info("Finish edting new forum");
 
   }
@@ -332,7 +332,7 @@ $(byText(name)).shouldNot(Condition.exist);
   public void closeUserSelector() {
     info("-- Go to User Selector page --");
     evt.click(ELEMENT_FORUM_PERMISSION_CLOSE_USER_SELETOR);
-    Utils.pause(2000);
+
   }
 
   /**

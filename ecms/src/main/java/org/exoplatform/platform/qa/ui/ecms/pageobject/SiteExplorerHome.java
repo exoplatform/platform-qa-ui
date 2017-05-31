@@ -149,7 +149,7 @@ public class SiteExplorerHome {
   public void addSymlink(String node) {
     evt.rightClickOnElement(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", node)));
     evt.click(ELEMENT_SITEEXPLORER_ACTION_ADDSYMLINK);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -186,7 +186,7 @@ public class SiteExplorerHome {
     evt.click(ELEMENT_SITEEXPLORER_ACTION_PASTE);
     testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     evt.click(ELEMENT_SIDEBAR_SITES_MANAGEMENT);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -201,7 +201,7 @@ public class SiteExplorerHome {
       if (evt.waitForAndGetElement(ELEMENT_WORKING_AREA_TEMPLATE_DOCUMENTS, 2000, 0) != null)
         break;
       evt.rightClickOnElement(ELEMENT_THUMBNAIL_VIEW_ADMIN_VIEW);
-      Utils.pause(2000);
+
       // Actions action = new Actions(this.driver);
       // action.moveToElement(waitForAndGetElement(ELEMENT_CONTEXT_MENU_ADD_DOCUMENT))
       // .doubleClick().perform();
@@ -225,7 +225,7 @@ public class SiteExplorerHome {
     evt.click(ELEMENT_SITEEXPLORER_ACTION_PASTE);
     testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     evt.click(ELEMENT_SIDEBAR_SITES_MANAGEMENT);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -239,7 +239,7 @@ public class SiteExplorerHome {
     evt.click(ELEMENT_SITEEXPLORER_ACTION_RENAME);
     evt.type(ELEMENT_SITEEXPLORER_RENAME_FIELD, newName, true);
     evt.click(ELEMENT_SITEEXPLORER_RENAME_SAVE);
-    Utils.pause(2000);
+
     evt.click(ELEMENT_SIDEBAR_SITES_MANAGEMENT);
 
   }
@@ -271,12 +271,12 @@ public class SiteExplorerHome {
     if (verify) {
       String links[] = link.split("/");
       int length = links.length;
-      Utils.pause(2000);
+
       evt.waitForAndGetElement(By.xpath("//*[contains(text(),'" + links[length - 1] + "')]"));
     }
 
     info("Upload file successfully");
-    Utils.pause(2000);
+
   }
 
   /**
@@ -290,7 +290,7 @@ public class SiteExplorerHome {
     if (evt.waitForAndGetElement(ELEMENT_UPLOAD_BUTTON, testBase.getDefaultTimeout(), 0) == null) {
       evt.click(ELEMENT_MORE_LINK_WITHOUT_BLOCK);
     }
-    Utils.pause(2000);
+
     evt.click(ELEMENT_UPLOAD_LINK);
     MFTB.uploadFileUsingRobot(link);
     // waitForElementNotPresent(ELEMENT_UPLOAD_PROGRESS_BAR);
@@ -299,12 +299,12 @@ public class SiteExplorerHome {
     if (verify) {
       String links[] = link.split("/");
       int length = links.length;
-      Utils.pause(2000);
+
       evt.waitForAndGetElement(By.xpath("//*[contains(text(),'" + links[length - 1] + "')]"), 3000, 1);
     }
 
     info("Upload file successfully");
-    Utils.pause(2000);
+
   }
 
   /**
@@ -313,7 +313,7 @@ public class SiteExplorerHome {
 
   public void goToEditDocument() {
     evt.click(ELEMENT_ACTIONBAR_EDIT);
-    Utils.pause(3000);
+
   }
 
   /**
@@ -498,7 +498,7 @@ public class SiteExplorerHome {
    */
   public void goToAdvancedSearch() {
     evt.click(ELEMENT_SITEEXPLORER_LEFTBOX_SAVEDSEARCH);
-    Utils.pause(2000);
+
     evt.click(ELEMENT_SITEEXPLORER_LEFTBOX_ADVANCEDSEARCH);
   }
 
@@ -531,7 +531,7 @@ public class SiteExplorerHome {
    */
   public void goToManageRelation() {
     evt.click(ELEMENT_ACTIONBAR_RELATION);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -544,7 +544,7 @@ public class SiteExplorerHome {
     for (String arrayElement : nameContent) {
       goToPathHasFiles(path);
       evt.click(ELEMENT_RELATION_POPUP_SELECT_RELATION_TAB_SELECT_CONTENT_RIGHT_TREE.replace("${nameContent}", arrayElement));
-      Utils.pause(2000);
+
     }
   }
 
@@ -553,7 +553,7 @@ public class SiteExplorerHome {
    */
   public void goToAddCategory() {
     evt.click(ELEMENT_ACTIONBAR_CATEGORY);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -566,17 +566,17 @@ public class SiteExplorerHome {
   public void addCategory(String categoryTreeName, String[] arrayCatePath, String nameSelectedCategory) {
     info("select category");
     evt.click(ELEMENT_ADD_CATEGORY_POPUP_SELECT_CATEGORY_TAB);
-    Utils.pause(2000);
+
     evt.select(ELEMENT_ADD_CATEGORY_POPUP_MENU, categoryTreeName);
-    Utils.pause(2000);
+
     for (String cateName : arrayCatePath) {
       // click(ELEMENT_ADD_CATEGORY_POPUP_CATEGORY_NAME_LEFT_SIDE.replace("${nameTitle}",
       // cateName));
       evt.clickByJavascript(ELEMENT_ADD_CATEGORY_POPUP_CATEGORY_NAME_LEFT_SIDE.replace("${nameTitle}", cateName), 2);
-      Utils.pause(2000);
+
     }
     evt.click(ELEMENT_ADD_CATEGORY_POPUP_SELECT_CATEGORY_RIGHT_SIDE.replace("${nameCategory}", nameSelectedCategory));
-    Utils.pause(3000);
+
   }
 
   /**
@@ -584,7 +584,7 @@ public class SiteExplorerHome {
    */
   public void closeAddCategoryPopup() {
     evt.click(ELEMENT_ADD_CATEGORY_POPUP_CLOSED_BUTTON);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -595,7 +595,7 @@ public class SiteExplorerHome {
   public void goToPathHasFiles(String path) {
     // Open "Select Relation" tab
     evt.click(ELEMENT_RELATION_POPUP_SELECT_RELATION_TAB);
-    Utils.pause(500);
+
     String[] arrayPath = path.split("/");
     for (String arrayElement : arrayPath) {
       evt.click(ELEMENT_RELATION_POPUP_SELECT_RELATION_TAB_NODE_LEFT_TREE.replace("${nameNode}", arrayElement));
@@ -607,7 +607,7 @@ public class SiteExplorerHome {
    */
   public void closeAddRelationPopup() {
     evt.click(ELEMENT_RELATION_POPUP_SELECT_RELATION_TAB_CLOSE_BUTTON);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -615,7 +615,7 @@ public class SiteExplorerHome {
    */
   public void goToRelationSideBar() {
     evt.click(ELEMENT_SIDE_BAR_RELATION_ICON);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -645,7 +645,7 @@ public class SiteExplorerHome {
    */
   public void goToImportNode() {
     evt.click(ELEMENT_ACTIONBAR_IMPORT_BUTTON);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -653,7 +653,7 @@ public class SiteExplorerHome {
    */
   public void goToExportNode() {
     evt.click(ELEMENT_ACTIONBAR_EXPORT_BUTTON);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -718,7 +718,7 @@ public class SiteExplorerHome {
 
     evt.waitForMessage("Imported successfully.");
     evt.click(button.ELEMENT_OK_BUTTON);
-    Utils.pause(2000);
+
 
   }
 
@@ -759,7 +759,7 @@ public class SiteExplorerHome {
   public void addProperty(String property, String value) {
     evt.waitForAndGetElement(ELEMENT_VIEWPROPERTIES_PROPERTIES_TAB);
     evt.click(ELEMENT_VIEWPROPERTIES_ADD_PROPERTY_TAB);
-    Utils.pause(1000);
+
     evt.select(ELEMENT_VIEWPROPERTIES_ADD_PROPERTY_INPUT, property);
     evt.type(ELEMENT_VIEWPROPERTIES_VALUE_INPUT, value, true);
     button.save();
@@ -775,7 +775,7 @@ public class SiteExplorerHome {
   public void goToManagePublishtation() {
     evt.waitForAndGetElement(ELEMENT_ACTIONBAR_MANAGER_PUBLISHTATION);
     evt.click(ELEMENT_ACTIONBAR_MANAGER_PUBLISHTATION);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -848,7 +848,7 @@ public class SiteExplorerHome {
     addTranslation();
     evt.waitForAndGetElement(ELEMENT_ADDTRANSLATION_SELECTDOC);
     evt.click(ELEMENT_ADDTRANSLATION_SELECTDOC);
-    Utils.pause(2000);
+
     String[] arrayPath = path.split("/");
     for (String arrayElement : arrayPath) {
       evt.click(ELEMENT_SELECT_DOCUMENT_NODE_FOLDER.replace("${node}", arrayElement));
@@ -859,7 +859,7 @@ public class SiteExplorerHome {
       evt.click(ELEMENT_SELECT_DOCUMENT_NODE_FILE.replace("${content}", content));
     }
     evt.click(ELEMENT_SAVE_BTN);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -879,15 +879,15 @@ public class SiteExplorerHome {
   public void addCategoryForNode(String node, String category) {
     info("Click on More menu");
     evt.click(ELEMENT_ACTIONBAR_MORE);
-    Utils.pause(2000);
+
     evt.click(ELEMENT_ACTIONBAR_CATEGORY);
-    Utils.pause(2000);
+
     evt.click(ELEMENT_CATEGORY_CHANGE_FORM_SELECT_CATEGORY);
-    Utils.pause(2000);
+
     evt.select(ELEMENT_CATEGORY_SELECT_CATEGORY_TREE, category);
-    Utils.pause(2000);
+
     evt.click(ELEMENT_CATEGORY_ADD_ROOT_NODE);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -896,7 +896,7 @@ public class SiteExplorerHome {
   public void changeStatusPulication(String status) {
     evt.waitForAndGetElement(ELEMENT_PUBLICATION_STATUS.replace("${status}", status));
     evt.click((ELEMENT_PUBLICATION_STATUS).replace("${status}", status));
-    Utils.pause(2000);
+
   }
 
   /**
@@ -905,7 +905,7 @@ public class SiteExplorerHome {
   public void goToRootDrive() {
     evt.waitForAndGetElement(ELEMENT_SIDE_BAR_MAINTAB);
     evt.click(ELEMENT_SIDE_BAR_MAINTAB);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -966,12 +966,12 @@ public class SiteExplorerHome {
    * Open drive area
    */
   public void openDrives() {
-    Utils.pause(500);
+
     if (evt.waitForAndGetElement(ELEMENT_SHOW_DRIVES, 3000, 0) != null)
       evt.click(ELEMENT_SHOW_DRIVES);
     else
       evt.click(By.xpath("//*[@title = 'Show Drives']"));
-    Utils.pause(1000);
+
   }
 
   /**
@@ -983,7 +983,7 @@ public class SiteExplorerHome {
     info("Go to a folder of a drive");
     evt.waitForAndGetElement(ELEMENT_SELECTED_DRIVE.replace("${nameDrive}", nameDrive));
     evt.click(ELEMENT_SELECTED_DRIVE.replace("${nameDrive}", nameDrive));
-    Utils.pause(2000);
+
   }
 
   /**
@@ -993,7 +993,7 @@ public class SiteExplorerHome {
    */
   public void goToAFolder(String path) {
     info("Go to a folder of a drive");
-    Utils.pause(1000);
+
     WebElement pathInput = evt.waitForAndGetElement(ELEMENT_SITE_PATH, 2000, 1, 2);
     pathInput.clear();
     pathInput.sendKeys(path);
@@ -1001,7 +1001,7 @@ public class SiteExplorerHome {
     Actions action = new Actions(this.testBase.getExoWebDriver().getWebDriver());
     action.moveToElement(pathInput).sendKeys(Keys.ENTER).build().perform();
     action.moveToElement(pathInput).release();
-    Utils.pause(2000);
+
   }
 
   /**
@@ -1012,7 +1012,7 @@ public class SiteExplorerHome {
   public void openAFolder(String name) {
     info("Click on the folder");
     evt.click(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", name)));
-    Utils.pause(2000);
+
   }
 
   /**
@@ -1020,11 +1020,11 @@ public class SiteExplorerHome {
    */
   public void clickWebView() {
     info("Select a view type");
-    Utils.pause(3000);
+
     evt.waitForAndGetElement(ELEMENT_WEB_VIEW);
     // click(ELEMENT_WEB_VIEW);
     evt.clickByJavascript(ELEMENT_WEB_VIEW, 2);
-    Utils.pause(3000);
+
   }
 
   /**
@@ -1034,7 +1034,7 @@ public class SiteExplorerHome {
     info("Select a view type");
     evt.waitForAndGetElement(ELEMENT_ADMIN_VIEW_ICON);
     evt.click(ELEMENT_ADMIN_VIEW_ICON);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -1044,7 +1044,7 @@ public class SiteExplorerHome {
     info("Select a view type");
     evt.waitForAndGetElement(ELEMENT_LIST_VIEW_ICON);
     evt.click(ELEMENT_LIST_VIEW_ICON);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -1055,7 +1055,7 @@ public class SiteExplorerHome {
     WebElement el = (new WebDriverWait(testBase.getExoWebDriver().getWebDriver(),
             30)).until(ExpectedConditions.presenceOfElementLocated(ELEMENT_FILE_EXPLORER_ICON));
     el.click();
-    Utils.pause(3000);
+
   }
 
   /**
@@ -1072,7 +1072,7 @@ public class SiteExplorerHome {
      */
     el.click();
     dialog.deleteInDialog();
-    Utils.pause(3000);
+
   }
 
   /**
@@ -1085,7 +1085,7 @@ public class SiteExplorerHome {
     evt.waitForAndGetElement(ELEMENT_FILE_TITLE_RIGHT_PANEL.replace("${fileName}", filename), 5000, 1);
     info("Select the file");
     evt.click(ELEMENT_FILE_TITLE_RIGHT_PANEL.replace("${fileName}", filename));
-    Utils.pause(3000);
+
     info("The document is opened");
   }
 
@@ -1101,7 +1101,7 @@ public class SiteExplorerHome {
       info("check on the checkbox");
       // el.click();
       evt.clickByJavascript(el, 2);
-      Utils.pause(3000);
+
       info("Click on Delete button");
       clickDeleteButton();
     }
@@ -1120,7 +1120,7 @@ public class SiteExplorerHome {
                     30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(ELEMENT_SITE_EXPLORER_CONTENT_NAME.replace("${nameContent}",
                     nameContent))));
     el.click();
-    Utils.pause(3000);
+
   }
 
   /**
@@ -1189,7 +1189,7 @@ public class SiteExplorerHome {
       evt.click(ELEMENT_MORE_LINK_WITHOUT_BLOCK);
     }
     evt.click(ELEMENT_ACTIONBAR_PERMISSION, 0, true);
-    Utils.pause(1000);
+
     info("check user selector");
     evt.click(ELEMENT_SELECT_USER_ICON1, 0, true);
     plfPerm.checkUserSelector(user, isPresent);
@@ -1223,11 +1223,11 @@ public class SiteExplorerHome {
   public void watchDocument() {
     info("watch a document");
     evt.click(ELEMENT_ACTIONBAR_WATCH, 0, true);
-    Utils.pause(500);
+
     evt.click(ELEMENT_ACTIONBAR_WATCH_RADIO, 0, true);
     evt.click(ELEMENT_ACTIONBAR_WATCH_BUTTON, 0, true);
     evt.waitForAndGetElement(ELEMENT_ACTIONBAR_WATCH_NOTICE);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -1336,11 +1336,11 @@ public class SiteExplorerHome {
 
     info("User A login");
     manageLoginOut.signIn(user1, password);
-    Utils.pause(3000);
+
 
     info("User A creates a space");
     homepage.goToAllSpace();
-    Utils.pause(3000);
+
     spaceManage.goToCreateSpace();
     spaceManage.addNewSpaceSimple(spaceName, "");
 
@@ -1353,11 +1353,11 @@ public class SiteExplorerHome {
     info("User B login");
     manageLoginOut.signOut();
     manageLoginOut.signIn(user2, password);
-    Utils.pause(3000);
+
 
     info("User B accepted to join the space");
     homepage.goToAllSpace();
-    Utils.pause(3000);
+
     spaceManage.acceptAInvitation(spaceName);
 
     manageLoginOut.signOut();
@@ -1375,10 +1375,10 @@ public class SiteExplorerHome {
 
     info("Share document to space");
     navTool.goToSiteExplorer();
-    Utils.pause(3000);
+
 
     uploadFile("TestData/" + fileName);
-    Utils.pause(3000);
+
     evt.waitForAndGetElement(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", fileName));
     // Share file to space
     evt.click(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", fileName));
@@ -1445,7 +1445,7 @@ public class SiteExplorerHome {
     info("Select a view type");
     evt.waitForAndGetElement(ELEMENT_ADDRESS_BAR_ICON_VIEW);
     evt.click(ELEMENT_ADDRESS_BAR_ICON_VIEW);
-    Utils.pause(2000);
+
   }
 
   /**

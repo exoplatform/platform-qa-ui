@@ -292,7 +292,7 @@ public class ManageFileTestBase {
     uploadFileUsingRobot(pathFile + "/" + fileName);
     testBase.waitForAndGetElement(LocatorTestBase.ELEMENT_UPLOAD_POPUP_NAMEFILE.replace("${fileName}", fileName));
     testBase.click(LocatorTestBase.ELEMENT_SAVE_BTN);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -377,7 +377,7 @@ public class ManageFileTestBase {
     Logger.info("Click on Save button");
     testBase.click(LocatorTestBase.ELEMENT_UPLOAD_POPUP_ATTACHMENT_FILE_SAVE_BUTTON);
     $(LocatorTestBase.ELEMENT_UPLOAD_POPUP_ATTACHMENT_FILE_SAVE_BUTTON).click();
-    Utils.pause(2000);
+
   }
 
   /**
@@ -444,7 +444,7 @@ public class ManageFileTestBase {
     robot.keyRelease(KeyEvent.VK_ENTER);
 
     // Wait for the download manager to open
-    Utils.pause(2000);
+
     // Switch to download manager tray via Alt+N
     robot.keyPress(KeyEvent.VK_ALT);
     robot.keyPress(KeyEvent.VK_N);
@@ -492,7 +492,7 @@ public class ManageFileTestBase {
     robot.keyRelease(KeyEvent.VK_ENTER);
 
     // Wait for the download manager to open
-    Utils.pause(2000);
+
     // Switch to download manager tray via Alt+N
     robot.keyPress(KeyEvent.VK_ALT);
     robot.keyPress(KeyEvent.VK_N);
@@ -531,7 +531,7 @@ public class ManageFileTestBase {
    * @param fileLocation
    */
   public void uploadFileUsingRobot(String fileLocation) {
-    Utils.pause(3000);
+
     Logger.info("Upload file using Robot");
     String fs = File.separator;
     String path = getAbsoluteFilePath(fileLocation.replace("/", fs));
@@ -560,7 +560,7 @@ public class ManageFileTestBase {
       robot.delay(1000);
       robot.keyPress(KeyEvent.VK_ENTER);
       robot.keyRelease(KeyEvent.VK_ENTER);
-      Utils.pause(1000);
+
     } catch (Exception exp) {
       exp.printStackTrace();
     }
@@ -572,7 +572,7 @@ public class ManageFileTestBase {
    * @param fileLocation
    */
   public void uploadFileUsingRobotDocumentPreview(String fileLocation) {
-    Utils.pause(3000);
+
     Logger.info("Upload file using Robot");
     String fs = File.separator;
     // String path=getAbsoluteFilePath(fileLocation.replace("/", fs));
@@ -602,7 +602,7 @@ public class ManageFileTestBase {
       robot.delay(1000);
       robot.keyPress(KeyEvent.VK_ENTER);
       robot.keyRelease(KeyEvent.VK_ENTER);
-      Utils.pause(1000);
+
     } catch (Exception exp) {
       exp.printStackTrace();
     }

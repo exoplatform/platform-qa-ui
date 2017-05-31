@@ -52,7 +52,7 @@ public class TermsAndConditionsTestBase {
     if (evt.waitForAndGetElement(ELEMENT_REGISTER_SKIP_BTN, testBase.getDefaultTimeout(), 2) != null) {
       info("Skipp register");
       evt.clickByJavascript(ELEMENT_REGISTER_SKIP_BTN, 2);
-      Utils.pause(5000);
+
     }
     if (evt.waitForAndGetElement(ELEMENT_AGREEMENT_CHECKBOX, 3000, 0, 2) != null) {
       info("-- Checking the terms and conditions agreement... --");
@@ -86,7 +86,7 @@ public class TermsAndConditionsTestBase {
         testBase.getExoWebDriver().getWebDriver().navigate().refresh();
       }
     }
-    Utils.pause(3000);
+
     info("End of term and conditions");
   }
 }

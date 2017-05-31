@@ -83,7 +83,7 @@ public class PrivateMessageManagement {
     plf.inputFrame(ELEMENT_MESSAGE_CONTENT, content);
     evt.click(ELEMENT_SEND_BUTTON);
     button.ok();
-    Utils.pause(2000);
+
   }
 
   /**
@@ -100,7 +100,7 @@ public class PrivateMessageManagement {
     plf.inputFrame(ELEMENT_MESSAGE_CONTENT, content);
     evt.click(ELEMENT_SEND_BUTTON);
     button.ok();
-    Utils.pause(2000);
+
   }
 
   /**
@@ -220,7 +220,7 @@ public class PrivateMessageManagement {
     evt.click(ELEMENT_SEND_BUTTON);
     evt.waitForMessage(ELEMENT_PRIVATE_MESSAGE_SEND_SUCCESSFULLY);
     button.ok();
-    Utils.pause(2000);
+
   }
 
   /**
@@ -237,7 +237,7 @@ public class PrivateMessageManagement {
     evt.click(ELEMENT_SEND_BUTTON);
     evt.waitForMessage(ELEMENT_PRIVATE_MESSAGE_SEND_SUCCESSFULLY);
     button.ok();
-    Utils.pause(2000);
+
   }
 
   /**

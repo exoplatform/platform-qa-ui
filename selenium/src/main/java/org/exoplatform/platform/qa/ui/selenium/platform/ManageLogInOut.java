@@ -95,7 +95,7 @@ public class ManageLogInOut {
     evt.type(ELEMENT_INPUT_USERNAME_OPENAM, username, true);
     evt.type(ELEMENT_INPUT_PASSWORD_OPENAM, password, true);
     evt.click(ELEMENT_SIGN_IN_BUTTON_OPENAM);
-    Utils.pause(3000);
+
     // waitForElementNotPresent(ELEMENT_SIGN_IN_BUTTON_OPENAM,3000);
 
   }
@@ -111,7 +111,7 @@ public class ManageLogInOut {
     evt.type(ELEMENT_INPUT_USERNAME_CAS, username, true);
     evt.type(ELEMENT_INPUT_PASSWORD_CAS, password, true);
     evt.click(ELEMENT_SIGN_IN_BUTTON_CAS);
-    Utils.pause(3000);
+
     // waitForElementNotPresent(ELEMENT_SIGN_IN_BUTTON_CAS,3000);
 
   }
@@ -142,7 +142,7 @@ public class ManageLogInOut {
       testBase.getExoWebDriver().getWebDriver();
     }
 
-    Utils.pause(3000);
+
     if (ExpectedConditions.alertIsPresent() != null) {
       alt = new ManageAlert(testBase);
       alt.acceptAlert();
@@ -203,7 +203,7 @@ public class ManageLogInOut {
       if (verify)
         evt.waitForElementNotPresent(ManageLogInOutLocator.ELEMENT_SIGN_IN_BUTTON);
     }
-    Utils.pause(3000);
+
   }
 
   /**
@@ -268,7 +268,7 @@ public class ManageLogInOut {
 
     evt.type(ManageLogInOutLocator.ELEMENT_FACEBOOK_LOGIN_FORM_USERNAME, userName, true);
     evt.type(ManageLogInOutLocator.ELEMENT_FACEBOOK_LOGIN_FORM_PASSWORD, password, true);
-    Utils.pause(3000);
+
     evt.click(ManageLogInOutLocator.ELEMENT_FACEBOOK_LOGIN_FORM_LOGIN_BUTTON);
   }
 

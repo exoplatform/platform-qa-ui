@@ -42,7 +42,7 @@ public class HomePagePlatform {
   public void goToDocuments() {
     info("--Go to Documents--");
     evt.click(ELEMENT_DOCUMENTS_LINK_PLF);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -81,7 +81,7 @@ public class HomePagePlatform {
   public void goToAllSpace() {
     info("Click on Join a space link");
     evt.click(ELEMENT_ALL_SPACE_JOIN_LINK, 0, true);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -89,13 +89,13 @@ public class HomePagePlatform {
    */
   public void goToAnswer() {
     info("-- Go to answer page --");
-    Utils.pause(2000);
+
     evt.waitForAndGetElement(ELEMENT_ANSWER_LINK_PLF);
     evt.click(ELEMENT_ANSWER_LINK_PLF, 0, true);
     if (evt.waitForAndGetElement(ELEMENT_ANSWER_PORTLET, 5000, 0) == null)
       testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     evt.waitForAndGetElement(ELEMENT_ANSWER_PORTLET);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -122,7 +122,7 @@ public class HomePagePlatform {
    */
   public void goToConnections() {
     info("--Go to Connections page---");
-    Utils.pause(2000);
+
     info("Click on Connection link");
     $(ELEMENT_CONNECTIONS_LINK_PLF).click();
     info("Verify that the connections portlet is shown");
@@ -138,7 +138,7 @@ public class HomePagePlatform {
   public void goToSpecificSpace(String space) {
     info("Go to space " + space);
     evt.click(ELEMENT_SPECIFIC_PANEL.replace("{$space}", space), 2);
-    Utils.pause(3000);
+
   }
 
   /**
@@ -149,7 +149,7 @@ public class HomePagePlatform {
   public void goToFriendProfilePage(String username) {
     info("Go to Friend profile page");
     testBase.getExoWebDriver().getWebDriver().get(testBase.getExoWebDriver().getBaseUrl() + "/intranet/profile/" + username);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -199,7 +199,7 @@ public class HomePagePlatform {
    * Load More Activities
    */
   public void loadMoreActivities() {
-    Utils.pause(2000);
+
     info("Load more activities");
     evt.waitForAndGetElement(ELEMENT_PLF_HOMEPAGE_LOAD_MORE_BUTTON, testBase.getDefaultTimeout(), 1);
     evt.click(ELEMENT_PLF_HOMEPAGE_LOAD_MORE_BUTTON);

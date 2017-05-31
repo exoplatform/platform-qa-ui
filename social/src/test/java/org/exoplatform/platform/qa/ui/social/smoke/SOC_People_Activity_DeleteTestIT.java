@@ -64,7 +64,7 @@ public class SOC_People_Activity_DeleteTestIT extends Base {
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);
     manageLogInOut.signIn(username1, password);
-    Utils.pause(3000);
+
 
     navigationToolbar.goToMyActivities();
     String activity1 = "activity1" + getRandomNumber();

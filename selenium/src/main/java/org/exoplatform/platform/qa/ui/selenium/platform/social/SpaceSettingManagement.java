@@ -78,7 +78,7 @@ public class SpaceSettingManagement {
     info("--Search user " + testBase.getUser() + "--");
     evt.type(ELEMENT_SEARCH_INPUT_USER_NAME, userName, true);
     evt.click(ELEMENT_SEARCH_USERS_ICON, 2);
-    Utils.pause(2000);
+
     info("Select a user");
     evt.click(ELEMENT_SPACE_SELECT_USER_IN_FORM.replace("{$name}", userName), 2);
     info("click on Add button");
@@ -101,7 +101,7 @@ public class SpaceSettingManagement {
     evt.click(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB);
     info("Click on change role button of manager column");
     evt.click(ELEMENT_SPACE_CHANGE_ROLE_USER_MEMBER.replace("${user}", user), 2);
-    Utils.pause(2000);
+
 
   }
 
@@ -221,7 +221,7 @@ public class SpaceSettingManagement {
   public void saveInfoSpace() {
     info("Click on Save button");
     evt.click(ELEMENET_SPACE_UPDATE_SAVE_BTN);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -233,7 +233,7 @@ public class SpaceSettingManagement {
     info("The tab is opened succcessfully");
     evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON);
     // waitForAndGetElement(ELEMENT_APPLICATION_TAB_ADD_APPLICATION_BTN,3000,0);
-    Utils.pause(1000);
+
   }
 
   /**
@@ -280,7 +280,7 @@ public class SpaceSettingManagement {
     evt.clickByJavascript(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE, 2);
     info("Verify that the node is added successfully");
     evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", name), 3000, 0);
-    Utils.pause(1000);
+
   }
 
   /**
@@ -307,7 +307,7 @@ public class SpaceSettingManagement {
                                                                                    .replace("${parentNode}", parentNode),
                              3000,
                              0);
-    Utils.pause(1000);
+
   }
 
   /**
@@ -367,7 +367,7 @@ public class SpaceSettingManagement {
       evt.click(ELEMENT_ACCESS_INFO_OK_BTN);
     } else
       evt.click(ELEMENT_ACCESS_AND_EDIT_TAB_OF_POPUP_CREATE_BTN);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -416,7 +416,7 @@ public class SpaceSettingManagement {
     evt.rightClickOnElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
     info("Select copy link");
     evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_COPY_NODE, 2000, 0).click();
-    Utils.pause(1000);
+
   }
 
   /**
@@ -431,7 +431,7 @@ public class SpaceSettingManagement {
     evt.rightClickOnElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
     info("Select copy link");
     evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_CUT_NODE, 2000, 0).click();
-    Utils.pause(1000);
+
   }
 
   /**
@@ -451,7 +451,7 @@ public class SpaceSettingManagement {
       info("can not find paste button");
       evt.waitForElementNotPresent(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_PASTE_NODE, 2000, 0);
     }
-    Utils.pause(1000);
+
   }
 
   /**
@@ -529,14 +529,14 @@ public class SpaceSettingManagement {
    * @param nodeName
    */
   public void goToEditNodePage(String nodeName) {
-    Utils.pause(1000);
+
     info("Go to Edit Node's Page");
     info("Right click on the node");
     evt.rightClickOnElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
     info("Select edit node's page link");
     evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_EDIT_NODE_PAGE, 2000, 0);
     evt.click(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_EDIT_NODE_PAGE);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -568,7 +568,7 @@ public class SpaceSettingManagement {
     evt.type(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_NAME, nodeName, true);
     if (extendedLabelMode) {
       evt.select(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_LANGUAGE, languages);
-      Utils.pause(500);
+
     } else {
       evt.uncheck(ELEMENT_CHECKBOX_EXTENDED_LABEL_MODE);
     }
@@ -588,15 +588,15 @@ public class SpaceSettingManagement {
       }
     } else {
       info("Select Page");
-      Utils.pause(500);
+
       evt.click(ELEMENT_SEARCH_SELECTOR_PAGE_LINK);
       // @FIXME Dependency problem
       //naviManage.selectPage(pageTitleSearch);
     }
     info("Save to add node");
-    Utils.pause(2000);
+
     evt.click(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -642,7 +642,7 @@ public class SpaceSettingManagement {
     evt.click(ELEMENT_SPACE_INVITED_SELECT_GROUP);
     info("click on Invite button");
     evt.click(ELEMENT_SPACE_MEMBERS_INVITE);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -657,7 +657,7 @@ public class SpaceSettingManagement {
       info("Save all changes by click on Create button");
       evt.click(ELEMENT_ACCESS_AND_EDIT_TAB_OF_POPUP_CREATE_BTN);
     }
-    Utils.pause(2000);
+
   }
 
   /**

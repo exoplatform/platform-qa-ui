@@ -294,7 +294,7 @@ public class MyNotificationsSetting {
    * @param notifToEnable
    */
   public void enableNotification(myNotiType notifToEnable, Object... opParams) {
-    Utils.pause(3000);
+
     String opt = (String) (opParams.length > 0 ? opParams[0] : "");
     int repeat = 0;
     switch (notifToEnable) {
@@ -617,7 +617,7 @@ public class MyNotificationsSetting {
     evt.click(ELEMENT_RESET_BTN);
     info("Click on Confirm button");
     evt.click(ELEMENT_RESET_CONFIRM);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -628,7 +628,7 @@ public class MyNotificationsSetting {
     evt.click(ELEMENT_RESET_BTN);
     info("click on cancel button");
     evt.click(ELEMENT_RESET_CANCEL);
-    Utils.pause(2000);
+
   }
 
   /**

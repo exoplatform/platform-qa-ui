@@ -133,7 +133,7 @@ public class WikiValidattions {
   public void verifyWarningMessage(String mess) {
     info("Verify that the warning message is shown");
     evt.waitForAndGetElement(ELEMENT_MESSAGES_TEXT.replace("$mess", mess));
-    Utils.pause(2000);
+
   }
 
   /**
@@ -672,7 +672,7 @@ public class WikiValidattions {
    */
   public void VerifyAttachFilesAreDisplayedInAttachListOrNot(String fileName, boolean display) {
     info("Verify attach files are displayed in attach list");
-    Utils.pause(2000);
+
     if (display) {
       if (evt.waitForAndGetElement(ELEMENT_PAGE_ATTACHFILE_1.replace("${fileName}", fileName), 5000, 0) != null)
         evt.waitForAndGetElement(ELEMENT_PAGE_ATTACHFILE_2.replace("${fileName}", fileName), 5000, 0);

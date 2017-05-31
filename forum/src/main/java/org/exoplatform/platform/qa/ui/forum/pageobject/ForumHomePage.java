@@ -60,7 +60,7 @@ public class ForumHomePage {
     evt.waitForAndGetElement(ELEMENT_ACTIONBAR_ADMINISTRATION);
     info("Click on Manage menu");
     evt.click(ELEMENT_ACTIONBAR_ADMINISTRATION);
-    Utils.pause(1000);
+
     switch (item) {
     case SORT_SETTING:
       break;
@@ -153,7 +153,7 @@ public class ForumHomePage {
   public void goToForum(String name) {
     info("Click on the forum with the name:" + name);
     evt.click(ELEMENT_SELECT_FORUM_TOPIC.replace("${link}", name));
-    Utils.pause(2000);
+
   }
 
   /**
@@ -174,7 +174,7 @@ public class ForumHomePage {
     info("The file is attached successfully");
     info("Click on Save button");
     evt.click(ELEMENT_UPLOAD_POPUP_ATTACHMENT_FILE_SAVE_BUTTON);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -265,7 +265,7 @@ public class ForumHomePage {
   public void bookmark(String name) {
     info("Click on Bookmark link on Action bar");
     evt.clickByJavascript(ELEMENT_ACTIONBAR_BOOKMARK_ICON);
-    Utils.pause(3000);
+
     info("Click on Bookmark link on Action bar to open Bookmark popup");
     evt.clickByJavascript(ELEMENT_ACTIONBAR_BOOKMARK_MANAGER);
     info("Verify that the topic is bookmarked");
@@ -321,7 +321,7 @@ public class ForumHomePage {
   public void goToComposeNewMessageTab() {
     info("Click on Compose New Message tab");
     evt.click(ELEMENT_PRIVATE_MESSAGE_COMPOSE_MESSAGE_TAB);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -367,7 +367,7 @@ public class ForumHomePage {
   public void closeUserSelector() {
     info("-- Go to User Selector page --");
     evt.click(ELEMENT_COMPOSE_NEW_MESSAGE_CLOSE_USER_SELETOR);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -377,7 +377,7 @@ public class ForumHomePage {
     // TODO Auto-generated method stub
     info("Click on Users button on Forum administration bar");
     evt.click(ELEMENT_FORUM_USER_LIST);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -404,7 +404,7 @@ public class ForumHomePage {
   public void closeUserForm() {
     info("-- Go to User form --");
     evt.click(ELEMENT_USER_FORM_CLOSE);
-    Utils.pause(2000);
+
   }
 
   /**

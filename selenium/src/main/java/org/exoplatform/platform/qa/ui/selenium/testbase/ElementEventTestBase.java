@@ -106,7 +106,7 @@ public class ElementEventTestBase {
     } catch (NoSuchElementException ex) {
     } catch (StaleElementReferenceException ex) {
       checkCycling(ex, 10);
-      Utils.pause(WAIT_INTERVAL);
+
       getDisplayedElement(locator);
     } finally {
       testBase.setLoopCount(0);
@@ -167,7 +167,7 @@ public class ElementEventTestBase {
       }
       if (null == elem)
         return null;
-      Utils.pause(WAIT_INTERVAL);
+
     }
 
     if (isAssert == 1)
@@ -183,7 +183,7 @@ public class ElementEventTestBase {
    */
   public boolean isTextPresent(String text, int... opts) {
     int display = opts.length > 0 ? opts[0] : 1;
-    Utils.pause(500);
+
     String allVisibleTexts = getText(By.xpath("//body"), display);
     return allVisibleTexts.contains(text);
   }
@@ -203,7 +203,7 @@ public class ElementEventTestBase {
       return element.getText();
     } catch (StaleElementReferenceException e) {
       checkCycling(e, testBase.getDefaultTimeout() / WAIT_INTERVAL);
-      Utils.pause(WAIT_INTERVAL);
+
       return getText(locator);
     } finally {
       testBase.setLoopCount(0);
@@ -221,7 +221,7 @@ public class ElementEventTestBase {
       return testBase.getExoWebDriver().getWebDriver().findElements(By.xpath(xpath));
     } catch (StaleElementReferenceException e) {
       checkCycling(e, 5);
-      Utils.pause(1000);
+
       return getElements(xpath);
     } finally {
       testBase.setLoopCount(0);
@@ -254,7 +254,7 @@ public class ElementEventTestBase {
       action.dragAndDrop(source, target).build().perform();
     } catch (StaleElementReferenceException e) {
       checkCycling(e, testBase.getDefaultTimeout() / WAIT_INTERVAL);
-      Utils.pause(WAIT_INTERVAL);
+
       dragAndDropToObject(sourceLocator, targetLocator);
     } catch (UnhandledAlertException e) {
       try {
@@ -266,7 +266,7 @@ public class ElementEventTestBase {
     } finally {
       testBase.setLoopCount(0);
     }
-    Utils.pause(1000);
+
   }
 
   /**
@@ -285,7 +285,7 @@ public class ElementEventTestBase {
       action.clickAndHold(source).moveToElement(target).release().build().perform();
     } catch (StaleElementReferenceException e) {
       checkCycling(e, testBase.getDefaultTimeout() / WAIT_INTERVAL);
-      Utils.pause(WAIT_INTERVAL);
+
       action.clickAndHold(source).moveToElement(target).release().build().perform();
     } catch (UnhandledAlertException e) {
       try {
@@ -297,7 +297,7 @@ public class ElementEventTestBase {
     } finally {
       testBase.setLoopCount(0);
     }
-    Utils.pause(1000);
+
   }
 
   /**
@@ -326,7 +326,7 @@ public class ElementEventTestBase {
    * @param opParams
    */
   public void typeByJavascript(Object locatorById, String value, Object... opParams) {
-    Utils.pause(3000);
+
     ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("document.getElementById('" + locatorById + "').value='"
                                                                               + value + "'");
   }
@@ -386,12 +386,12 @@ public class ElementEventTestBase {
       }
     } catch (StaleElementReferenceException e) {
       checkCycling(e, testBase.getDefaultTimeout() / WAIT_INTERVAL);
-      Utils.pause(WAIT_INTERVAL);
+
       check(locator, opParams);
     } finally {
       testBase.setLoopCount(0);
     }
-    Utils.pause(2000);
+
   }
 
   /**
@@ -405,7 +405,7 @@ public class ElementEventTestBase {
       return waitForAndGetElement(locator).getAttribute("value");
     } catch (StaleElementReferenceException e) {
       checkCycling(e, testBase.getDefaultTimeout() / WAIT_INTERVAL);
-      Utils.pause(WAIT_INTERVAL);
+
       return getValue(locator);
     } finally {
       testBase.setLoopCount(0);
@@ -448,7 +448,7 @@ public class ElementEventTestBase {
             element = (WebElement) locator;
           }
           if (element == null) {
-            Utils.pause(WAIT_INTERVAL);
+
           } else {
             actions.moveToElement(element).perform();
             break;
@@ -464,7 +464,7 @@ public class ElementEventTestBase {
       }
     } catch (StaleElementReferenceException e) {
       checkCycling(e, testBase.getDefaultTimeout() / WAIT_INTERVAL);
-      Utils.pause(WAIT_INTERVAL);
+
       mouseOver(locator, safeToSERE);
     } finally {
       testBase.setLoopCount(0);
@@ -503,7 +503,7 @@ public class ElementEventTestBase {
       if (isTextPresent(text, display)) {
         break;
       }
-      Utils.pause(WAIT_INTERVAL);
+
     }
   }
 
@@ -522,7 +522,7 @@ public class ElementEventTestBase {
       if (isTextNotPresent(text)) {
         break;
       }
-      Utils.pause(WAIT_INTERVAL);
+
     }
   }
 
@@ -534,7 +534,7 @@ public class ElementEventTestBase {
    */
   public void waitForMessage(String message, int... wait) {
     int waitTime = wait.length > 0 ? wait[0] : testBase.getDefaultTimeout();
-    Utils.pause(500);
+
     waitForAndGetElement("//*[contains(text(),'" + message + "')]", waitTime);
   }
 
@@ -580,16 +580,16 @@ public class ElementEventTestBase {
         if (option.equals(select.getFirstSelectedOption().getText())) {
           break;
         }
-        Utils.pause(WAIT_INTERVAL);
+
       }
     } catch (StaleElementReferenceException e) {
       checkCycling(e, testBase.getDefaultTimeout() / WAIT_INTERVAL);
-      Utils.pause(WAIT_INTERVAL);
+
       select(locator, option);
     } finally {
       testBase.setLoopCount(0);
     }
-    Utils.pause(500);
+
   }
 
   /**
@@ -616,12 +616,12 @@ public class ElementEventTestBase {
       }
     } catch (StaleElementReferenceException e) {
       checkCycling(e, 5);
-      Utils.pause(1000);
+
       uncheck(locator, opParams);
     } finally {
       testBase.setLoopCount(0);
     }
-    Utils.pause(2000);
+
   }
 
   /**
@@ -633,17 +633,17 @@ public class ElementEventTestBase {
   public void rightClickOnElement(Object locator, int... opParams) {
     int display = opParams.length > 0 ? opParams[0] : 0;
     Actions actions = new Actions(testBase.getExoWebDriver().getWebDriver());
-    Utils.pause(500);
+
     try {
       WebElement element = waitForAndGetElement(locator, testBase.getDefaultTimeout(), 1, display);
       actions.contextClick(element).perform();
     } catch (StaleElementReferenceException e) {
       checkCycling(e, testBase.getDefaultTimeout() / WAIT_INTERVAL);
-      Utils.pause(WAIT_INTERVAL);
+
       rightClickOnElement(locator);
     } catch (ElementNotVisibleException e) {
       checkCycling(e, testBase.getDefaultTimeout() / WAIT_INTERVAL);
-      Utils.pause(WAIT_INTERVAL);
+
       click(locator);
     } finally {
       testBase.setLoopCount(0);
@@ -667,7 +667,7 @@ public class ElementEventTestBase {
       actions.doubleClick(element).perform();
     } catch (StaleElementReferenceException e) {
       checkCycling(e, 5);
-      Utils.pause(1000);
+
       doubleClickOnElement(locator);
     } finally {
       testBase.setLoopCount(0);
@@ -704,7 +704,7 @@ public class ElementEventTestBase {
         counter++;
       }
       testBase.getExoWebDriver().getWebDriver().switchTo().window(WindowIdParent);
-      Utils.pause(1000);
+
     } catch (WebDriverException e) {
       e.printStackTrace();
     }
@@ -724,7 +724,7 @@ public class ElementEventTestBase {
         bool = e.isDisplayed();
     } catch (StaleElementReferenceException ex) {
       checkCycling(ex, 10);
-      Utils.pause(WAIT_INTERVAL);
+
       isDisplay(locator);
     } finally {
       testBase.setLoopCount(0);
@@ -796,7 +796,7 @@ public class ElementEventTestBase {
   public WebElement getElementFromTextByJquery(String text) {
 
     JavascriptExecutor js = (JavascriptExecutor) testBase.getExoWebDriver().getWebDriver();
-    Utils.pause(2000);
+
     try {
       WebElement web = (WebElement) js.executeScript("return $(\"a:contains('" + text + "')\").get(0);");
       return web;
@@ -828,7 +828,7 @@ public class ElementEventTestBase {
    */
   public void inputDataToCKEditor(By framelocator, String data) {
     Logger.info("input data to ckeditor");
-    Utils.pause(2000);
+
     try {
       WebElement inputsummary = null;
       WebElement e = waitForAndGetElement(framelocator, testBase.getDefaultTimeout(), 1, 2);
@@ -853,17 +853,17 @@ public class ElementEventTestBase {
       }
     } catch (StaleElementReferenceException e) {
       checkCycling(e, testBase.getDefaultTimeout() / WAIT_INTERVAL);
-      Utils.pause(WAIT_INTERVAL);
+
       testBase.getExoWebDriver().getWebDriver().switchTo().defaultContent();
       inputDataToCKEditor(framelocator, data);
     } catch (ElementNotVisibleException e) {
       checkCycling(e, testBase.getDefaultTimeout() / WAIT_INTERVAL);
-      Utils.pause(WAIT_INTERVAL);
+
       testBase.getExoWebDriver().getWebDriver().switchTo().defaultContent();
       inputDataToCKEditor(framelocator, data);
     } catch (WebDriverException e) {
       checkCycling(e, testBase.getDefaultTimeout() / WAIT_INTERVAL);
-      Utils.pause(WAIT_INTERVAL);
+
       testBase.getExoWebDriver().getWebDriver().switchTo().defaultContent();
       inputDataToCKEditor(framelocator, data);
     }
@@ -905,7 +905,7 @@ public class ElementEventTestBase {
    */
   public void waitElementAndTryGetElement(Object element, Boolean... isClicked) {
     Logger.info("-- Starting finding element --");
-    Utils.pause(500);
+
     for (int repeat = 0; ; repeat++) {
       if (repeat > 1) {
         if (waitForAndGetElement(element, 3000, 0) != null)
@@ -921,7 +921,7 @@ public class ElementEventTestBase {
       Logger.info("Retry...[" + repeat + "]");
       testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     }
-    Utils.pause(2000);
+
     Logger.info("The elemnt is shown successfully");
   }
 

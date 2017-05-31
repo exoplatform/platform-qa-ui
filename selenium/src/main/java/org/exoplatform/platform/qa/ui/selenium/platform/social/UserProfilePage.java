@@ -35,9 +35,9 @@ public class UserProfilePage {
     if (pos != "" && pos != null) {
       evt.waitForAndGetElement(ELEMENT_EDIT_POSITION);
       evt.click(ELEMENT_EDIT_POSITION);
-      Utils.pause(2000);
+
       evt.click(ELEMENT_EDIT_POSITION_SAVE_BUTTON);
-      Utils.pause(2000);
+
     }
   }
 
@@ -97,7 +97,7 @@ public class UserProfilePage {
    */
   public void changeAvatar(String linkfile) {
     info("-- changeAvatar --");
-    Utils.pause(2000);
+
     if (testBase.getBrowser().contains("iexplorer"))
       evt.clickByJavascript(ELEMENT_CHANGE_AVATAR_LINK);
     else
@@ -107,7 +107,7 @@ public class UserProfilePage {
     evt.clickByJavascript(ELEMENT_CONFIRM);
     evt.waitForElementNotPresent(ELEMENT_CONFIRM);
     evt.clickByJavascript(ELEMENT_SAVE_AVATAR);
-    Utils.pause(1000);
+
   }
 
   /**
@@ -265,14 +265,14 @@ public class UserProfilePage {
     evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     if (isSave == null || isSave) {
       info("Save updating information");
-      Utils.pause(2000);
+
       evt.clickByJavascript(ELEMENT_CONTACT_SAVE_BUTTON, 2);
-      Utils.pause(2000);
+
     } else {
       info("Cancel updating information");
-      Utils.pause(2000);
+
       evt.clickByJavascript(ELEMENT_CONTACT_CANCEL_BUTTON, 2);
-      Utils.pause(2000);
+
     }
   }
 
@@ -282,7 +282,7 @@ public class UserProfilePage {
   public void goToActivity() {
     info("Click on Activity tab");
     evt.click(ELEMETN_ACTIVITY_TAB);
-    Utils.pause(3000);
+
   }
 
   /**

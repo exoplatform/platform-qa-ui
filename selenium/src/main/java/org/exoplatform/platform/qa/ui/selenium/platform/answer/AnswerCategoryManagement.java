@@ -47,7 +47,7 @@ public class AnswerCategoryManagement {
    */
   public void goToActionOfCategoryFromActionBar(actionCategoryOption action) {
     info("Select action from menu");
-    Utils.pause(2000);
+
     evt.waitForAndGetElement(ELEMENT_CATEGORY_BUTTON, testBase.getDefaultTimeout(), 1);
     evt.click(ELEMENT_CATEGORY_BUTTON);
     switch (action) {
@@ -343,7 +343,7 @@ public class AnswerCategoryManagement {
   public void checkPermUserList(String user, boolean isPresent) {
     goToActionOfCategoryFromActionBar(actionCategoryOption.ADD);
     evt.click(ELEMENT_CATEGORY_TAB_PERMISSIONS, 0, true);
-    Utils.pause(500);
+
     evt.click(ELEMENT_CATEGORY_USER_ICON_SELECTOR, 0, true);
     if (isPresent) {
       evt.waitForAndGetElement(ELEMENT_CATEGORY_LIST_USER.replace("$user", user));

@@ -60,7 +60,7 @@ public class NavigationToolbar {
    */
   public void goToEditLayout() {
     info("--Go to Edit Layout--");
-    Utils.pause(3000);
+
     evt.clickByJavascript(ELEMENT_LINK_EDIT);
     evt.mouseOver(ELEMENT_MENU_PAGE_LINK, true);
     evt.click(ELEMENT_MENU_EDIT_LAYOUT, 2, true);
@@ -153,7 +153,7 @@ public class NavigationToolbar {
       testBase.getExoWebDriver().getWebDriver()
               .get(testBase.getExoWebDriver().getBaseUrl() + "/g/:platform:administrators/administration/management");
     }
-    Utils.pause(2000);
+
   }
 
   /**
@@ -166,7 +166,7 @@ public class NavigationToolbar {
     switch (link) {
       case MY_PROFILE:
         evt.click(ELEMENT_MY_PROFILE_LINK);
-        Utils.pause(2000);
+
         evt.waitForAndGetElement(SocialLocator.ELEMENT_MY_PROFILE_TAB, 3000, 1);
         break;
       case MY_ACTIVITY:
@@ -202,7 +202,7 @@ public class NavigationToolbar {
     info("--Open User Menu--");
     evt.waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK);
     evt.click(ELEMENT_ACCOUNT_NAME_LINK);
-    Utils.pause(1000);
+
   }
 
   /**
@@ -234,7 +234,7 @@ public class NavigationToolbar {
     info("Click on Seo Menu");
     WebElement seoMenu = evt.waitForAndGetElement(ELEMENT_MENU_SEO_LINK, 10000, 1, 2);
     ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].evt.click()", seoMenu);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -266,7 +266,7 @@ public class NavigationToolbar {
     evt.waitForAndGetElement(ELEMENT_TOPBAR_AVATAR);
     evt.click(ELEMENT_TOPBAR_AVATAR);
     evt.click(ELEMENT_AVATAR_CHANGELANGUAGE);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -290,7 +290,7 @@ public class NavigationToolbar {
    */
   public void goToIDE() {
     info("-- Go to IDE home page --");
-    Utils.pause(500);
+
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         evt.mouseOverAndClick(ELEMENT_LINK_SETUP);
@@ -304,7 +304,7 @@ public class NavigationToolbar {
       info("Retry...[" + repeat + "]");
     }
     evt.mouseOverAndClick(ELEMENT_ADMINISTRATION_PORTAL_IDE);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -312,7 +312,7 @@ public class NavigationToolbar {
    */
   public void goToApplication() {
     info("-- Go to Application home page --");
-    Utils.pause(500);
+
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         evt.mouseOverAndClick(ELEMENT_LINK_SETUP);
@@ -326,7 +326,7 @@ public class NavigationToolbar {
       info("Retry...[" + repeat + "]");
     }
     evt.mouseOverAndClick(ELEMENT_ADMINISTRATION_APPLICATION);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -374,13 +374,13 @@ public class NavigationToolbar {
     }
     info("evt.click on Next button");
     evt.click(ELEMENT_NEXT_BUTTON);
-    Utils.pause(2000);
+
     info("Select a forum for poll");
     evt.waitForAndGetElement(ELEMENT_SELECT_FORUM_COMBOBOX, 3000, 0).click();
     evt.waitForAndGetElement(ELEMENT_SELECT_FORUM_NAME.replace("${forum}", forum), 2000, 0).click();
     info("Click on next button");
     evt.click(ELEMENT_NEXT_BUTTON);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -404,7 +404,7 @@ public class NavigationToolbar {
     evt.click(ELEMENT_SELECT_FORUM_NAME.replace("${forum}", forum));
     info("Click on next button");
     evt.click(ELEMENT_NEXT_BUTTON);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -454,13 +454,13 @@ public class NavigationToolbar {
     WebElement frame = evt.waitForAndGetElement(ELEMENT_UPLOAD_FILE_FRAME_XPATH);
     testBase.getExoWebDriver().getWebDriver().switchTo().frame(frame);
     info(testBase.getAbsoluteFilePath(linkFile));
-    Utils.pause(2000);
+
     ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
-    Utils.pause(2000);
+
     testBase.getExoWebDriver().getWebDriver()
             .findElement(ELEMENT_ACTIVITY_UPLOAD_POPUP_UPLOAD_BUTTON)
             .sendKeys(testBase.getAbsoluteFilePath(linkFile));
-    Utils.pause(1000);
+
     evt.switchToParentWindow();
     info("Upload finished");
   }
@@ -481,7 +481,7 @@ public class NavigationToolbar {
   public void goToQuickSearch() {
     info("Click on Quick search icon");
     evt.click(ELEMENT_TOOLBAR_QUICKSEARCH);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -489,7 +489,7 @@ public class NavigationToolbar {
    */
   public void goToMyProfile() {
     selectALinkOfUserMenu(specifUserToolBar.MY_PROFILE);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -497,7 +497,7 @@ public class NavigationToolbar {
    */
   public void goToMyDashboard() {
     selectALinkOfUserMenu(specifUserToolBar.MY_DASHBOARD);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -519,7 +519,7 @@ public class NavigationToolbar {
    */
   public void goToMyConnection() {
     selectALinkOfUserMenu(specifUserToolBar.MY_CONNECTIONS);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -527,7 +527,7 @@ public class NavigationToolbar {
    */
   public void goToMyWiki() {
     selectALinkOfUserMenu(specifUserToolBar.MY_WIKI);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -540,7 +540,7 @@ public class NavigationToolbar {
     evt.mouseOver(ELEMENT_ADMINISTRATION_PORTAL, true);
     evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL_EMAIL_NOTIFICATIONS, 3000, 1);
     evt.click(ELEMENT_ADMINISTRATION_PORTAL_EMAIL_NOTIFICATIONS);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -581,7 +581,7 @@ public void goToManageCommunity(){
    */
   public void goToMyNotifications() {
     selectALinkOfUserMenu(specifUserToolBar.MY_NOTIFICATION);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -590,7 +590,7 @@ public void goToManageCommunity(){
   public void goToIntranetNotification() {
     info("Go to Intranet Notification");
     testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-    Utils.pause(2000);
+
     evt.click(ELEMENT_INTRANET_NOTIFICATION_BELL);
     evt.waitForAndGetElement(ELEMENT_NOTIFICATION_DROPDOWN);
     info("The elemnt is shown successfully");
@@ -618,12 +618,12 @@ public void goToManageCommunity(){
         String editPageRequest = "ajaxGet(eXo.env.server.createPortalURL('UIWorkingWorkspace', 'EditInline', true))";
         info("editPageRequest:" + editPageRequest);
         ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript(editPageRequest);
-        Utils.pause(1000);
+
         break;
       }
       info("Retry...[" + repeat + "]");
     }
-    Utils.pause(1000);
+
   }
 
   /**
@@ -645,7 +645,7 @@ public void goToManageCommunity(){
       evt.click(ELEMENT_MENU_EDIT_SITES_NAV);
       repeat++;
     }
-    Utils.pause(1000);
+
   }
 
   /**
@@ -667,7 +667,7 @@ public void goToManageCommunity(){
       evt.click(ELEMENT_MENU_EDIT_ADDSITE);
       repeat++;
     }
-    Utils.pause(1000);
+
   }
 
   /**

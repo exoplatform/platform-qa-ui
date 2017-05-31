@@ -35,7 +35,7 @@ public class WikiPageInformation {
   public void addRelations(String location, String page) {
     info("Click on Drop down");
     evt.click(ELEMENT_ADD_RELATED_PAGE_POPUP_DROPDOWN);
-    Utils.pause(2000);
+
     if (!location.isEmpty()) {
       info("Select a location");
       evt.click(ELEMENT_ADD_RELATED_POPUP_DROPDOWN_LOCATION.replace("${location}", location));
@@ -127,7 +127,7 @@ public class WikiPageInformation {
       info("Click on Next button");
       evt.click(ELEMENT_VIEW_VERSION_NEXT_BTN);
     }
-    Utils.pause(2000);
+
 
   }
 
@@ -139,7 +139,7 @@ public class WikiPageInformation {
       info("Click on Previous button");
       evt.click(ELEMENT_VIEW_VERSION_PREVIOUS_BTN);
     }
-    Utils.pause(2000);
+
   }
 
   /**
@@ -148,7 +148,7 @@ public class WikiPageInformation {
   public void viewCurrentVersion() {
     info("View current version");
     evt.click(ELEMENT_PAGE_INFO_VIEW_CONTENT_CURRENT_VERSION_LINK);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -184,11 +184,11 @@ public class WikiPageInformation {
     } else {
       evt.click(ELEMENT_REVISION_LINK);
     }
-    Utils.pause(500);
+
     testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-    Utils.pause(2000);
+
     evt.click(versionLink);
-    Utils.pause(1000);
+
   }
 
   /**
@@ -198,7 +198,7 @@ public class WikiPageInformation {
    * @param secondNumberVersion second version to compare
    */
   public void changeCompareVersions(String firstNumberVersion, String secondNumberVersion) {
-    Utils.pause(1000);
+
     evt.click(ELEMENT_CHANGES_COMPARE_VERSION.replace("${1stNumber}", firstNumberVersion).replace("${2ndNumber}",
                                                                                                   secondNumberVersion));
     evt.waitForElementNotPresent(ELEMENT_CHANGES_COMPARE_VERSION.replace("${1stNumber}", firstNumberVersion)

@@ -27,7 +27,7 @@ public class AnswerManagement {
    */
   public void goToAnswerQuestion(String question) {
     info("Go to answer a question");
-    Utils.pause(3000);
+
     if (evt.waitForAndGetElement(ELEMENT_QUESTION_LIST_ITEM.replace("$question", question), 5000, 0) != null)
       evt.click(ELEMENT_QUESTION_LIST_ITEM.replace("$question", question));
     evt.waitForAndGetElement(ELEMENT_QUESTION_SELECTED_ITEM.replace("$question", question));

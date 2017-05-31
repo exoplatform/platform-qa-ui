@@ -29,7 +29,7 @@ public class WikiSearch {
   public void goToAdvancedSearchSpaceSwitcher() {
     info("Click on Drop donw");
     evt.click(ELEMENET_ADVANCED_SEARCH_DROP_DOWN);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -60,10 +60,10 @@ public class WikiSearch {
       info("Type a text to search");
       evt.type(ELEMENT_WIKI_ADVANCED_SEARCH_SEARCH_FIELD, text, true);
     }
-    Utils.pause(2000);
+
     info("Click on Search button");
     evt.click(ELEMENT_SEARCH_ADVANCED_SEARCH_BTN);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -78,7 +78,7 @@ public class WikiSearch {
     }
     info("Click on Search button");
     evt.click(ELEMENT_WIKI_QUICK_SEARCH_BTN);
-    Utils.pause(2000);
+
   }
 
   /**

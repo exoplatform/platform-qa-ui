@@ -68,7 +68,7 @@ public class EmailNotifications {
       // If it is not the parent window it will close the child window
       if (!windowHandle.contains(parentWindow)) {
         info("close driver.title:" + testBase.getExoWebDriver().getWebDriver().getTitle());
-        Utils.pause(2000);
+
         testBase.getExoWebDriver().getWebDriver().close();
       }
 
@@ -146,7 +146,7 @@ public class EmailNotifications {
   public void clickOnReplyBtnActivity() {
     info("Click on Reply button");
     evt.click(ELEMENT_GMAIL_REPLY_BTN);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -155,7 +155,7 @@ public class EmailNotifications {
   public void clickOnViewDiscussBtn() {
     info("Click on View Full Discusion button");
     evt.click(ELEMENT_GMAIL_VIEW_FULL_BTN);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -297,7 +297,7 @@ public class EmailNotifications {
       info("Go to detail detail Activity via email notification");
       evt.click(ELEMENT_GMAIL_TITLE.replace("$title", title).replace("$fullName", fullName));
     }
-    Utils.pause(2000);
+
   }
 
   /**
@@ -317,7 +317,7 @@ public class EmailNotifications {
       info("Go to detail detail Activity via email notification");
       evt.click(ELEMENT_GMAIL_TITLE.replace("$title", title).replace("$spaceName", spaceName).replace("$fullName", fullName));
     }
-    Utils.pause(2000);
+
   }
 
   /**
@@ -339,7 +339,7 @@ public class EmailNotifications {
   public void goToPreviousPage() {
     info("Back to the previous page");
     testBase.getExoWebDriver().getWebDriver().navigate().back();
-    Utils.pause(2000);
+
   }
 
   /**
@@ -604,7 +604,7 @@ public class EmailNotifications {
   public void clickAcceptBtnSpaceInvitation() {
     info("Click on Accept button");
     evt.click(ELEMENT_GMAIL_ACCEPT_SPACE_BTN);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -613,7 +613,7 @@ public class EmailNotifications {
   public void clickRefuseBtnSpaceInvitation() {
     info("Click on Accept button");
     evt.click(ELEMENT_GMAIL_REFUSE_SPACE_INVITATION_BTN);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -622,7 +622,7 @@ public class EmailNotifications {
   public void clickAcceptBtnSpaceJoinReqest() {
     info("Click on Accept button");
     evt.click(ELEMENT_GMAIL_ACCEPT_BTN_SPACE_JOIN_REQUEST);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -631,7 +631,7 @@ public class EmailNotifications {
   public void clickRefuseBtnSpaceJoinRequest() {
     info("Click on Accept button");
     evt.click(ELEMENT_GMAIL_REFUSE_JOIN_SPACE_BTN);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -640,7 +640,7 @@ public class EmailNotifications {
   public void clickAcceptBtnActivity() {
     info("Click on Accept button");
     evt.click(ELEMENT_GMAIL_ACCEPT_BTN);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -649,7 +649,7 @@ public class EmailNotifications {
   public void clickRefuseBtn() {
     info("Click on Refuse button");
     evt.click(ELEMENT_GMAIL_REFUSE_BTN);
-    Utils.pause(2000);
+
   }
 
   /**
@@ -675,7 +675,7 @@ public class EmailNotifications {
   public void clickConnectNowBtn() {
     info("Click on Connect Now button");
     evt.click(ELEMENT_GMAIL_CONNECT_NOW);
-    Utils.pause(2000);
+
   }
 
   public enum linkEmailNotification {
