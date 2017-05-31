@@ -38,19 +38,12 @@
     <module>core</module>
     <module>selenium</module>
     <module>commons</module>
-
-      <module>calendar</module>
-
-      <module>ecms</module>
-
-      <module>social</module>
+    <module>calendar</module>
+    <module>ecms</module>
+    <module>social</module>
     <module>forum</module>
-
     <module>wiki</module>
-    
     <module>gatein</module>
-
-
   </modules>
   <scm>
     <connection>scm:git:git://github.com/exoplatform/platform-qa-ui.git</connection>
