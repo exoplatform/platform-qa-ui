@@ -1247,7 +1247,7 @@ $(ELEMENT_CONTENT_WIKI_FRAME).sendKeys(content);    }
    */
   public void goToExplorerWikiHome() {
     info("click on Wiki Home note");
-    $(ELEMENT_EXPLORER_WIKIHOME).click();
+    ELEMENT_EXPLORER_WIKIHOME.click();
   }
 
   /**
