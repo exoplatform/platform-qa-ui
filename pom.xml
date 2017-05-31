@@ -26,7 +26,7 @@
   <parent>
     <artifactId>maven-parent-pom</artifactId>
     <groupId>org.exoplatform</groupId>
-    <version>17-SNAPSHOT</version>
+    <version>17-M01</version>
     <relativePath />
   </parent>
   <groupId>org.exoplatform.platform.qa.ui</groupId>
@@ -55,10 +55,12 @@
   <properties>
     <!-- PLF dependencies -->
     <org.exoplatform.depmgt.version>13-SNAPSHOT</org.exoplatform.depmgt.version>
+    <!-- Override Maven Surefire/Failsafe plugins versions -->
+    <version.surefire.plugin>2.19.1</version.surefire.plugin>
     <!-- Dependencies for UI Tests -->
     <!-- JUnit5 stack -->
-    <org.junit.platform.version>1.0.0-M3</org.junit.platform.version>
-    <org.junit.jupiter.version>5.0.0-M3</org.junit.jupiter.version>
+    <org.junit.platform.version>1.0.0-M4</org.junit.platform.version>
+    <org.junit.jupiter.version>5.0.0-M4</org.junit.jupiter.version>
     <!-- Selenium/Selenide Stack -->
     <selenide.version>4.3</selenide.version>
     <guava.version>21.0</guava.version>
@@ -122,6 +124,19 @@
     </dependency>
   </dependencies>
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-report-plugin</artifactId>
+          <version>${version.surefire.plugin}</version>
+          <configuration>
+            <aggregate>true</aggregate>
+            <alwaysGenerateFailsafeReport>true</alwaysGenerateFailsafeReport>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <artifactId>maven-failsafe-plugin</artifactId>
@@ -145,6 +160,8 @@
           <detail>true</detail>
           <forkCount>1</forkCount>
           <reuseForks>true</reuseForks>
+          <failIfNoSpecifiedTests>true</failIfNoSpecifiedTests>
+          <skipAfterFailureCount>15</skipAfterFailureCount>
           <systemPropertyVariables>
             <!-- Common configuration for all tests -->
             <holdBrowserOpen>${selenide.holdBrowserOpen}</holdBrowserOpen>
@@ -157,6 +174,55 @@
       </plugin>
     </plugins>
   </build>
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <reportSets>
+          <reportSet>
+            <id>unit-tests</id>
+            <reports>
+              <report>report-only</report>
+            </reports>
+            <configuration>
+              <alwaysGenerateSurefireReport>true</alwaysGenerateSurefireReport>
+            </configuration>
+          </reportSet>
+          <reportSet>
+            <id>unit-tests-aggregate</id>
+            <inherited>false</inherited>
+            <reports>
+              <report>report-only</report>
+            </reports>
+          </reportSet>
+          <reportSet>
+            <id>integration-tests</id>
+            <reports>
+              <report>failsafe-report-only</report>
+            </reports>
+            <configuration>
+              <alwaysGenerateFailsafeReport>true</alwaysGenerateFailsafeReport>
+            </configuration>
+          </reportSet>
+          <reportSet>
+            <id>integration-tests-aggregate</id>
+            <inherited>false</inherited>
+            <reports>
+              <report>failsafe-report-only</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+        <configuration>
+          <aggregate>true</aggregate>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </reporting>
   <profiles>
     <profile>
       <id>chrome</id>
