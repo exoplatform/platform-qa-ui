@@ -86,11 +86,41 @@ public void startNewTopicInSpace(){
         homePagePlatform.goToSpecificSpace(space);
         spaceHomePage.goToForumsTab();
         forumHomePage.goToTopic(topic);
+        info("edit topic");
         forumTopicManagement.editTopic(newtopic,newtopic);
         $(byText(newtopic)).waitUntil(Condition.appears, Configuration.timeout);
 
         homePagePlatform.goToHomePage();
         homePagePlatform.goToAllSpace();
         spaceManagement.deleteSpace(space,false);
+    }
+
+    @Test
+    public void deleteTopicInSpace(){
+        String space = "space"+getRandomNumber();
+        String topic="topic"+getRandomNumber();
+        String newtopic="newtopic"+getRandomNumber();
+        info("Create a space");
+        homePagePlatform.goToAllSpace();
+        spaceManagement.addNewSpaceSimple(space,space,6000);
+        info("start topic");
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToSpecificSpace(space);
+        spaceHomePage.goToForumsTab();
+        forumForumManagement.goToStartTopic();
+        forumTopicManagement.startTopic(topic, topic,"","");
+        info("verify topic");
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToSpecificSpace(space);
+        spaceHomePage.goToForumsTab();
+        forumHomePage.goToTopic(topic);
+        info("Delete Topic");
+        forumTopicManagement.deleteTopic();
+        $(byText(topic)).shouldNot(Condition.exist);
+        info("Delete Space");
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToAllSpace();
+        spaceManagement.deleteSpace(space,false);
+
     }
 }

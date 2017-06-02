@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.forum.pageobject;
 
 import static com.codeborne.selenide.Condition.appears;
 import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
@@ -102,12 +103,12 @@ public class ForumTopicManagement {
       break;
     case DELETE:
       info("Click on Delete topic button");
-      evt.click(ELEMENT_DELETE_TOPIC);
+      $(ELEMENT_DELETE_TOPIC).click();
 
       info("Verify that confirm popup is shown");
-      evt.waitForMessage("Are you sure you want to delete this topic ?");
+      $(byText("Are you sure you want to delete this topic ?")).waitUntil(appears,Configuration.timeout);
       info("Click on OK on Confirm popup");
-      evt.click(ELEMENT_OK_DELETE);
+      $(ELEMENT_OK_DELETE).click();
       break;
     case WATCHES:
       break;
