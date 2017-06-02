@@ -20,9 +20,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_BOX;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_BOX_DELETE_BUTTON;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_SOURCE_EDITOR_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("smoke")
@@ -172,4 +174,42 @@ public  void test11_AddAWikisActivityAfterCreateAWikiPageInSpace() {
         homePagePlatform.goToAllSpace();
         spaceManagement.deleteSpace(space,false);
 
-    }}
+    }
+
+    @Test
+    public void test01_editPageWikionSpace(){
+        info("Edit page wiki on space");
+        info("Create a space");
+        String space = "space"+getRandomNumber();
+        homePagePlatform.goToAllSpace();
+        spaceManagement.addNewSpaceSimple(space,space,6000);
+
+        info("Create a wiki page");
+        String title= "title"+getRandomNumber();
+        String content= "content"+getRandomNumber();
+        homePagePlatform.goToSpecificSpace(space);
+        spaceHomePage.goToWikiTab();
+        wikiHomePage.goToAddBlankPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.addSimplePage(title, content);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(title);
+        homePagePlatform.goToHomePage();
+        activityStream.checkActivity(title);
+        info("Edit wiki page");
+        wikiHomePage.goToAPage(title);
+        wikiHomePage.goToEditPage();
+        if ($(ELEMENT_SOURCE_EDITOR_BUTTON).isDisplayed()) {
+            wikiManagement.goToSourceEditor();
+        }
+        String newTitle= "newTitle"+getRandomNumber();
+        String newContent= "newContent"+getRandomNumber();
+        sourceTextEditor.editSimplePage(newTitle, newContent);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(newTitle);
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToAllSpace();
+        spaceManagement.deleteSpace(space,false);
+
+    }
+}
