@@ -17,7 +17,7 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
 @Tag("wiki")
 @Tag("smoke")
-public class Wiki_BasicAction_Add_RichTextTestIT extends Base {
+public class WikiBasicActionAddRichTextTestIT extends Base {
 
   HomePagePlatform  homePagePlatform;
 

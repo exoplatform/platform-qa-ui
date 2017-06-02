@@ -19,7 +19,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("wiki")
 @Tag("smoke")
-public class Wiki_Basic_Action_Manage_Page_Add_DeleteTestIT extends Base {
+public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
 	HomePagePlatform homePagePlatform;
 
 	WikiHomePage wikiHomePage;

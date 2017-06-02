@@ -21,7 +21,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("wiki")
 @Tag("smoke")
-public class Wiki_Publish_ActivityTestIT extends Base {
+public class WikiPublishActivityTestIT extends Base {
 
 	HomePagePlatform homePagePlatform;
 	WikiHomePage wikiHomePage;

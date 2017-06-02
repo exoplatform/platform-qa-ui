@@ -24,7 +24,7 @@ import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
 
 @Tag("smoke")
 @Tag("social")
-public class SOC_People_Activity_CommentTestIT extends Base {
+public class SOCPeopleActivityCommentTestIT extends Base {
   NavigationToolbar     navigationToolbar;
 
   AddUsers              addUsers;

@@ -18,7 +18,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 @Tag("smoke")
 @Tag("social")
-public class SOC_HomePageTestIT extends Base {
+public class SOCHomePageTestIT extends Base {
   NavigationToolbar navigationToolbar;
   HomePagePlatform  homePagePlatform;
   ActivityStream    activityStream;

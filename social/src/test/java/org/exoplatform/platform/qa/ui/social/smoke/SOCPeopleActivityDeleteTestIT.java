@@ -21,7 +21,7 @@ import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 
 @Tag("smoke")
 @Tag("social")
-public class SOC_People_Activity_DeleteTestIT extends Base {
+public class SOCPeopleActivityDeleteTestIT extends Base {
   NavigationToolbar navigationToolbar;
 
   AddUsers          addUsers;
