@@ -1525,4 +1525,5 @@ public final class SocialLocator {
   public static final String ELEMENT_SPACE_LEFT_MENU_SPACE_NAME                                =
           ".//*[@id='UISpaceNavigationPortlet']//*[contains(text(),'${name}')]";
   public static final SelenideElement ELEMENT_MY_SPACE_SEARCH_TEXT=$(byXpath("//*[@id=\"UISpaceSearch\"]/div[2]/div/div/div[1]/input"));
+  public static final SelenideElement ELEMENT_SPACES_LIST=$(byClassName("tab-content"));
 }

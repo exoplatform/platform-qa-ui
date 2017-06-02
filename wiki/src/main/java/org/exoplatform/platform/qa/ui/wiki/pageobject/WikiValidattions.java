@@ -277,7 +277,7 @@ public class WikiValidattions {
    */
   public void verifyNotTitleWikiPage(String title) {
     info("Verify that the wiki page isnot created and shown in the list");
-    evt.waitForElementNotPresent(ELEMENT_WIKI_PAGE_LINK.replace("${pageTitle}", title));
+    ELEMENT_WIKI_PAGE_LINK.find(byText(title)).shouldNot(Condition.exist);
     info("The wiki page isnot created successfully");
   }
 
@@ -691,7 +691,7 @@ public class WikiValidattions {
    */
   public void verifyTitleWikiPage(String title) {
     info("Verify that the wiki page is created and shown in the list");
-    $(ELEMENT_WIKI_PAGE_LINK.replace("${pageTitle}", title));
+    ELEMENT_WIKI_PAGE_LINK.find(byText(title)).should(Condition.exist);
     info("The wiki page is created successfully");
   }
 
@@ -702,7 +702,7 @@ public class WikiValidattions {
    */
   public void verifyWikiPageNotDisplayedInWikiHome(String title) {
     info("Verify the page is not displayed in Wiki Home");
-    evt.waitForElementNotPresent(ELEMENT_WIKI_PAGE_LINK.replace("${pageTitle}", title));
+    ELEMENT_WIKI_PAGE_LINK.find(byText(title)).shouldNot(Condition.exist);
     info("The wiki page is not displayed in Wiki Home");
   }
 

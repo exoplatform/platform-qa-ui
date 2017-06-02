@@ -5,11 +5,13 @@ import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.MyDashBoard;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.PageCreationWizard;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.PortalManagePages;
+import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.SourceTextEditor;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
@@ -19,6 +21,8 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_BOX;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_BOX_DELETE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("smoke")
@@ -33,6 +37,7 @@ public class Wiki_Activities extends Base {
     WikiValidattions wikiValidattions;
     SpaceHomePage spaceHomePage;
     ActivityStream activityStream;
+    SpaceSettingManagement spaceSettingManagement;
     @BeforeEach
     public void setupBeforeMethod() {
         info("Start setUpBeforeMethod");
@@ -115,4 +120,56 @@ public  void test11_AddAWikisActivityAfterCreateAWikiPageInSpace() {
 
 
 
- }}
+ }
+    /**
+     *<li> Case ID:139203.</li>
+     *<li> Test Case Name: Remove wiki's page of space.</li>
+     *<li> Pre-Condition: Have a space</li>
+     *<li> Post-Condition: </li>
+     */
+    @Test
+    public  void test13_RemoveWikisPageOfSpace() {
+        info("Test 13 Remove wiki's page of space");
+		/*Step Number: 1
+		*Step Name: Step 1: Add wiki for space
+		*Step Description:
+			- Connect to [Intranet]
+			- Add a Wiki activity for space
+		*Input Data:
+
+		*Expected Outcome:
+			- The Wiki activity for spaceis displayed in the activity stream*/
+        info("Create a space");
+        String space = "space"+getRandomNumber();
+        homePagePlatform.goToAllSpace();
+        spaceManagement.addNewSpaceSimple(space,space,6000);
+
+        info("Create a wiki page");
+        String title= "title"+getRandomNumber();
+        String content= "content"+getRandomNumber();
+        homePagePlatform.goToSpecificSpace(space);
+        spaceHomePage.goToWikiTab();
+        wikiHomePage.goToAddBlankPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.addSimplePage(title, content);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(title);
+
+		/*Step number: 2
+		*Step Name: Step 2: Check show delete icon
+		*Step Description:
+			- Back to activity stream
+			- Move the mouse over the Wiki activity for space
+		*Input Data:
+
+		*Expected Outcome:
+			A (X) icon is displayed in the top right panel of the activity*/
+        homePagePlatform.goToSpecificSpace(space);
+        spaceHomePage.goToWikiTab();
+        wikiHomePage.deleteWiki(title);
+        wikiValidattions.verifyWikiPageNotDisplayedInWikiHome(title);
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToAllSpace();
+        spaceManagement.deleteSpace(space,false);
+
+    }}

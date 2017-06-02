@@ -82,8 +82,8 @@ public class HomePagePlatform {
   public void goToAllSpace() {
     info("Click on Join a space link");
 
-    $(ELEMENT_ALL_SPACE_JOIN_LINK).click();
-
+    $(ELEMENT_ALL_SPACE_JOIN_LINK).waitUntil(Condition.appears,Configuration.timeout).click();
+    
   }
 
   /**
