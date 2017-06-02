@@ -87,9 +87,10 @@ public void startNewTopicInSpace(){
         spaceHomePage.goToForumsTab();
         forumHomePage.goToTopic(topic);
         forumTopicManagement.editTopic(newtopic,newtopic);
+        $(byText(newtopic)).waitUntil(Condition.appears, Configuration.timeout);
 
-       /* homePagePlatform.goToHomePage();
+        homePagePlatform.goToHomePage();
         homePagePlatform.goToAllSpace();
-        spaceManagement.deleteSpace(space,false);*/
+        spaceManagement.deleteSpace(space,false);
     }
 }
