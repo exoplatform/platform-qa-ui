@@ -200,7 +200,7 @@ public class SOC_People_Activity_CommentTestIT extends Base {
     $(byId("cke_CommentTextarea" + id)).waitUntil(Condition.appears, Configuration.timeout).click();
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
     // click on the button comment
-    Utils.pause(2000);
+
     $(byText("Comment")).waitUntil(Condition.enabled, Configuration.timeout).click();
     $(byText("Comment")).waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
@@ -258,7 +258,7 @@ public class SOC_People_Activity_CommentTestIT extends Base {
     $(byId("cke_CommentTextarea" + id)).waitUntil(Condition.appears, Configuration.timeout).click();
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
     // click on the button comment
-    Utils.pause(2000);
+
     $(byText("Comment")).waitUntil(Condition.enabled, Configuration.timeout).click();
     $(byText("Comment")).waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
