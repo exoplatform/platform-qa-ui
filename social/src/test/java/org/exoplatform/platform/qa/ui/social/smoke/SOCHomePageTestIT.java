@@ -94,10 +94,10 @@ public class SOCHomePageTestIT extends Base {
     $(byXpath(ELEMENT_COMMENT_LINK.replace("{id}",id))).click();
     // insert comment
     $(byId(ELEMENT_COMMENT_INPUT.replace("{id}",id))).waitUntil(Condition.appears, Configuration.timeout).click();
-    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"test\")", "");
+    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"test sorftware is a very funny \")", "");
     // click on the button comment
-    ELEMENT_COMMENT_BUTTON.waitUntil(Condition.enabled, Configuration.timeout).click();
-    ELEMENT_COMMENT_BUTTON.waitUntil(Condition.disappears, Configuration.timeout);
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}",id))).waitUntil(Condition.enabled, Configuration.timeout).click();
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}",id))).waitUntil(Condition.disappears, Configuration.timeout);
     //scroll up
     executeJavaScript("window.scrollBy(0,-550)");
     info("Test 15: Delete comment");

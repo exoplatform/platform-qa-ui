@@ -5,6 +5,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_COMMENT_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
@@ -201,8 +202,8 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
     // click on the button comment
 
-    $(byText("Comment")).waitUntil(Condition.enabled, Configuration.timeout).click();
-    $(byText("Comment")).waitUntil(Condition.disappears, Configuration.timeout);
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}",id))).waitUntil(Condition.enabled, Configuration.timeout).click();
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}",id))).waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
     manageLogInOut.signIn("root", "gtn");
     navigationToolbar.goToManageCommunity();
@@ -259,8 +260,8 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
     // click on the button comment
 
-    $(byText("Comment")).waitUntil(Condition.enabled, Configuration.timeout).click();
-    $(byText("Comment")).waitUntil(Condition.disappears, Configuration.timeout);
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}",id))).waitUntil(Condition.enabled, Configuration.timeout).click();
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}",id))).waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
 
     /*
