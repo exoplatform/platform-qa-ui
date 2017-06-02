@@ -57,7 +57,12 @@ public class SpaceHomePage {
     $(ELEMENT_SPACE_WIKI_TAB).waitUntil(Condition.appears, Configuration.timeout).click();
     info("wiki page is shown");
   }
-
+  public void goToForumsTab() {
+    info("--Open Wiki tab of the space");
+    info("Click on the tab");
+    $(ELEMENT_SPACE_FORUMS_TAB).waitUntil(Condition.appears, Configuration.timeout).click();
+    info("wiki page is shown");
+  }
   /**
    * Open a space from left menu
    * 

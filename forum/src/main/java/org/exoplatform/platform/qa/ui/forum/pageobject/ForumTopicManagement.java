@@ -1,7 +1,9 @@
 package org.exoplatform.platform.qa.ui.forum.pageobject;
 
+import static com.codeborne.selenide.Condition.appears;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -76,9 +78,9 @@ public class ForumTopicManagement {
    */
   public void openMoreActionMenu() {
     info("Wait More link is shown");
-    evt.waitForAndGetElement(ELEMENT_MORE_ACTION);
+    $(ELEMENT_MORE_ACTION).waitUntil(appears,Configuration.timeout);
     info("Click on More link");
-    evt.click(ELEMENT_MORE_ACTION);
+    $(ELEMENT_MORE_ACTION).click();
   }
 
   /**
@@ -96,7 +98,7 @@ public class ForumTopicManagement {
       break;
     case EDIT:
       info("Click on Edit topic button");
-      evt.click(ELEMENT_EDIT_TOPIC);
+      $(ELEMENT_EDIT_TOPIC).click();
       break;
     case DELETE:
       info("Click on Delete topic button");
@@ -522,12 +524,13 @@ public class ForumTopicManagement {
   public void editTopic(String newTitle, String newContent) {
     selectItemMoreActionMenuTopic(specifMoreActionMenuTopic.EDIT);
     if (!newTitle.isEmpty())
-      evt.type(ELEMENT_START_TOPIC_POPUP_TITLE_FILED, newTitle, true);
+      $(ELEMENT_START_TOPIC_POPUP_TITLE_FILED).setValue(newTitle);
     if (!newContent.isEmpty())
-      plf.inputFrame(ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR, newContent);
+      $(ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR).click();
+    $(ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR).clear();
+    $(ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR).sendKeys(newContent);
     info("Click on Submit button");
-    evt.waitForAndGetElement(ELEMENT_SUBMIT_BUTTON, testBase.getDefaultTimeout(), 1);
-    evt.clickByJavascript(ELEMENT_SUBMIT_BUTTON, 2);
+   $(ELEMENT_SUBMIT_BUTTON).click();
     // click(ELEMENT_SUBMIT_BUTTON);
     info("All changes are saved");
   }

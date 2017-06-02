@@ -83,7 +83,7 @@ public class HomePagePlatform {
     info("Click on Join a space link");
 
     $(ELEMENT_ALL_SPACE_JOIN_LINK).waitUntil(Condition.appears,Configuration.timeout).click();
-    
+
   }
 
   /**

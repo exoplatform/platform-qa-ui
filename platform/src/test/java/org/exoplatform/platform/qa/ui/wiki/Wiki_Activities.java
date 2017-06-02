@@ -39,7 +39,6 @@ public class Wiki_Activities extends Base {
     WikiValidattions wikiValidattions;
     SpaceHomePage spaceHomePage;
     ActivityStream activityStream;
-    SpaceSettingManagement spaceSettingManagement;
     @BeforeEach
     public void setupBeforeMethod() {
         info("Start setUpBeforeMethod");
