@@ -15,6 +15,7 @@ import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 
 public class HomePagePlatform {
 
@@ -80,7 +81,8 @@ public class HomePagePlatform {
    */
   public void goToAllSpace() {
     info("Click on Join a space link");
-    evt.click(ELEMENT_ALL_SPACE_JOIN_LINK, 0, true);
+
+    $(ELEMENT_ALL_SPACE_JOIN_LINK).click();
 
   }
 
@@ -137,8 +139,9 @@ public class HomePagePlatform {
    */
   public void goToSpecificSpace(String space) {
     info("Go to space " + space);
-    evt.click(ELEMENT_SPECIFIC_PANEL.replace("{$space}", space), 2);
 
+    ELEMENT_SPECIFIC_PANEL.find(byText(space)).click();
+   
   }
 
   /**

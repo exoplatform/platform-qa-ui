@@ -1,10 +1,13 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -51,7 +54,7 @@ public class SpaceHomePage {
   public void goToWikiTab() {
     info("--Open Wiki tab of the space");
     info("Click on the tab");
-    evt.waitForAndGetElement(ELEMENT_SPACE_WIKI_TAB, 3000, 0).click();
+    $(ELEMENT_SPACE_WIKI_TAB).waitUntil(Condition.appears, Configuration.timeout).click();
     info("wiki page is shown");
   }
 

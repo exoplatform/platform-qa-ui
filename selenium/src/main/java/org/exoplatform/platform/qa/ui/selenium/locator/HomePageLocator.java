@@ -84,8 +84,8 @@ public final class HomePageLocator {
   public static final String ELEMENT_LEFT_PANEL =
           "//*[@class='uiCompanyNavigations']//*[contains(text(),'{$name}')]";
 
-  public static final String ELEMENT_SPECIFIC_PANEL =
-          "//*[@id='UISpaceNavigationPortlet']//*[contains(text(),'{$space}')]";
+  public static final SelenideElement ELEMENT_SPECIFIC_PANEL =$(byId("UISpaceNavigationPortlet"));
+
 
   // right panel
   public static final String ELEMENT_SUGGESTIONS_USER =
