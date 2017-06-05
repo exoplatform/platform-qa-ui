@@ -1063,8 +1063,7 @@ public class WikiLocators {
 
   public static final By     ELEMENT_SEARCH_TAB                                         = By.xpath("//div[text()='Search']");
 
-  public static final By     ELEMENT_EXPLORER_WIKIHOME                                  =
-                                                       By.xpath(".//*[contains(text(),'WikiHome')]/..//*[contains(@src,'opener_closed.gif')]");
+  public static final SelenideElement     ELEMENT_EXPLORER_WIKIHOME                                  =$(byText("WikiHome")).parent().find(byId("isc_1open_icon_2"));
 
   public static final String ELEMENT_ALL_PAGE_TAB_PAGE_SELECTED                         =
                                                                 ".//*[@class='listTable']//*[contains(text(),'$title')]";

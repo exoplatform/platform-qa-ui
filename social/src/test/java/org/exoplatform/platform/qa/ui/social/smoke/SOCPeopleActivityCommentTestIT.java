@@ -5,11 +5,10 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_COMMENT_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -17,14 +16,14 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
 
 @Tag("smoke")
 @Tag("social")
-public class SOC_People_Activity_CommentTestIT extends Base {
+public class SOCPeopleActivityCommentTestIT extends Base {
   NavigationToolbar     navigationToolbar;
 
   AddUsers              addUsers;
@@ -77,7 +76,6 @@ public class SOC_People_Activity_CommentTestIT extends Base {
     addUsers.addUser(username1, password, email1, username1, username1);
     manageLogInOut.signIn(username1, password);
 
-
     String activity1 = "activity1" + getRandomNumber();
     activityStream.addActivity(activity1, "");
 
@@ -104,7 +102,7 @@ public class SOC_People_Activity_CommentTestIT extends Base {
     $(byId("cke_CommentTextarea" + id)).waitUntil(Condition.appears, Configuration.timeout).click();
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
     // click on the button comment
-    $(byText("Comment")).waitUntil(Condition.enabled, Configuration.timeout).click();
+    $(byText("Comment")).waitUntil(Condition.not(Condition.disabled), Configuration.timeout).click();
     $(byText("Comment")).waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
     manageLogInOut.signIn("root", "gtn");
@@ -134,7 +132,6 @@ public class SOC_People_Activity_CommentTestIT extends Base {
     addUsers.addUser(username1, password, email1, username1, username1);
     addUsers.addUser(username2, password, email2, username2, username2);
     manageLogInOut.signIn(username1, password);
-
 
     info("Test 2: Comment on your friends activity");
     /*
@@ -200,8 +197,9 @@ public class SOC_People_Activity_CommentTestIT extends Base {
     $(byId("cke_CommentTextarea" + id)).waitUntil(Condition.appears, Configuration.timeout).click();
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
     // click on the button comment
-    $(byText("Comment")).waitUntil(Condition.enabled, Configuration.timeout).click();
-    $(byText("Comment")).waitUntil(Condition.disappears, Configuration.timeout);
+
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.enabled, Configuration.timeout).click();
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
     manageLogInOut.signIn("root", "gtn");
     navigationToolbar.goToManageCommunity();
@@ -236,7 +234,6 @@ public class SOC_People_Activity_CommentTestIT extends Base {
     addUsers.addUser(username1, password, email1, username1, username1);
     manageLogInOut.signIn(username1, password);
 
-
     String activity1 = "activity1" + getRandomNumber();
     activityStream.addActivity(activity1, "");
 
@@ -257,8 +254,10 @@ public class SOC_People_Activity_CommentTestIT extends Base {
     $(byId("cke_CommentTextarea" + id)).waitUntil(Condition.appears, Configuration.timeout).click();
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
     // click on the button comment
-    $(byText("Comment")).waitUntil(Condition.enabled, Configuration.timeout).click();
-    $(byText("Comment")).waitUntil(Condition.disappears, Configuration.timeout);
+
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.not(Condition.disabled), Configuration.timeout)
+                                                          .click();
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
 
     /*

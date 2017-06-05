@@ -547,7 +547,7 @@ public final class ActivityStreamLocator {
   public static final String ELEMENT_UNLIKE_BUTTON="//*[@id=\"UnLikeLink{id}\"]";
   public static final String ELEMENT_COMMENT_LINK="//*[@id=\"CommentLink{id}\"]";
   public static final String ELEMENT_COMMENT_INPUT="cke_CommentTextarea{id}";
-  public static final SelenideElement ELEMENT_COMMENT_BUTTON=$(byText("Comment"));
+  public static final String ELEMENT_COMMENT_BUTTON="//*[@id=\"CommentButton{id}\"]";
   public static final SelenideElement ELEMENT_COMMENT_DESCRIPTION=$(byClassName("commentRight"));
   public static final String ELEMENT_COMMENT_DELETE="DeleteCommentButtoncomment{id}";
   public static final String ELEMENT_DATE_COMMENT="dateTime";

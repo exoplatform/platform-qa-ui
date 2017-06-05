@@ -5,9 +5,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +13,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.selenium.platform.ConnectionsManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
@@ -24,7 +22,7 @@ import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 
 @Tag("smoke")
 @Tag("social")
-public class SOC_People_MyConnectionsTestIT extends Base {
+public class SOCPeopleMyConnectionsTestIT extends Base {
   NavigationToolbar     navigationToolbar;
 
   AddUsers              addUsers;
@@ -70,7 +68,6 @@ public class SOC_People_MyConnectionsTestIT extends Base {
     addUsers.addUser(username1, password, email1, username1, username1);
     addUsers.addUser(username2, password, email2, username2, username2);
     manageLogInOut.signIn(username1, password);
-
 
     info("Test 6: Check request pending after inviting an user");
     /*

@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.calendar.smoke;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -45,6 +46,7 @@ public class CalendarEventTestIT extends Base {
    * Pre-Condition: Post-Condition:
    */
   @Test
+  @BugInPLF("CAL-1280")
   public void test13_14_15_AddEditDeleteAnEventInPersonalCalendar() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String calendar = "calendar" + getRandomNumber();

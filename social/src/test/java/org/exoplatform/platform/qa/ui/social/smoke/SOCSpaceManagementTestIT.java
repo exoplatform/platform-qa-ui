@@ -23,7 +23,7 @@ import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 
 @Tag("smoke")
 @Tag("social")
-public class SOC_Space_ManagementTestIT extends Base {
+public class SOCSpaceManagementTestIT extends Base {
   NavigationToolbar navigationToolbar;
 
   AddUsers          addUsers;

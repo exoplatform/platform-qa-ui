@@ -1,4 +1,5 @@
 package org.exoplatform.platform.qa.ui.social.smoke;
+
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
@@ -6,22 +7,28 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+
 import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
+
 @Tag("smoke")
 @Tag("social")
-public class SOC_HomePageTestIT extends Base {
+public class SOCHomePageTestIT extends Base {
   NavigationToolbar navigationToolbar;
+
   HomePagePlatform  homePagePlatform;
+
   ActivityStream    activityStream;
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
@@ -29,6 +36,7 @@ public class SOC_HomePageTestIT extends Base {
     homePagePlatform = new HomePagePlatform(this);
     activityStream = new ActivityStream(this);
   }
+
   /**
    * <li>Case ID:121888.</li>
    * <li>Test Case Name: Like Activity.</li>
@@ -49,8 +57,8 @@ public class SOC_HomePageTestIT extends Base {
     // get the id of the activity created
     String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];
     // click on the like button of the activity
-    $(byXpath(ELEMENT_LIKE_BUTTON.replace("{id}",id))).click();
-    $(byXpath(ELEMENT_UNLIKE_BUTTON.replace("{id}",id))).waitUntil(Condition.appears, Configuration.timeout);
+    $(byXpath(ELEMENT_LIKE_BUTTON.replace("{id}", id))).click();
+    $(byXpath(ELEMENT_UNLIKE_BUTTON.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout);
     /*
      * Step number: 2 Step Name: Check Likes part Step Description: - Check
      * avatar - Mouse over the avatar Input Data: Expected Outcome: - Avatar of
@@ -60,14 +68,15 @@ public class SOC_HomePageTestIT extends Base {
 
     ELEMENT_WHO_LIKED_POPUP.waitUntil(Condition.appears, Configuration.timeout);
     // hover on the activity to appear the delete button
-    $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}",id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).hover();
+    $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).hover();
     // click on delete button
-    $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}",id))).click();
+    $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
     $(ELEMENT_DELETE_POPUP_OK).click();
     // verify that the activity doesn't exist
     $(byText(activity1)).shouldNot(Condition.exist);
     info("the activity is removed successfully");
   }
+
   /**
    * <li>Case ID:121909.</li>
    * <li>Test Case Name: Add comment.</li>
@@ -88,38 +97,46 @@ public class SOC_HomePageTestIT extends Base {
      * Outcome: - Comment will be shown in comment section of activity
      */
     String activity1 = "activity1" + getRandomNumber();
+    String comment = "comment" + getRandomNumber();
     activityStream.addActivity(activity1, "");
     // get the id of activity created
-    String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];    // click on comment icon
-    $(byXpath(ELEMENT_COMMENT_LINK.replace("{id}",id))).click();
+    String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1]; // click
+                                                                                                           // on
+                                                                                                           // comment
+                                                                                                           // icon
+    $(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
     // insert comment
-    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}",id))).waitUntil(Condition.appears, Configuration.timeout).click();
-    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"test\")", "");
+    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
+    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
     // click on the button comment
-    ELEMENT_COMMENT_BUTTON.waitUntil(Condition.enabled, Configuration.timeout).click();
-    ELEMENT_COMMENT_BUTTON.waitUntil(Condition.disappears, Configuration.timeout);
-    //scroll up
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.not(Condition.disabled), Configuration.timeout)
+                                                          .click();
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears, Configuration.timeout);
+    // scroll up
     executeJavaScript("window.scrollBy(0,-550)");
     info("Test 15: Delete comment");
 
     // hover on the comment to appear the delete button
-    ELEMENT_COMMENT_DESCRIPTION.find(byClassName(ELEMENT_DATE_COMMENT)).waitUntil(Condition.appears,Configuration.timeout).hover();
+    ELEMENT_COMMENT_DESCRIPTION.find(byClassName(ELEMENT_DATE_COMMENT))
+                               .waitUntil(Condition.appears, Configuration.timeout)
+                               .hover();
     // the id of the comment is id of the activity+1
     Integer idComment = Integer.parseInt(id) + 1;
-    $(byId(ELEMENT_COMMENT_DELETE.replace("{id}",idComment.toString()))).click();
+    $(byId(ELEMENT_COMMENT_DELETE.replace("{id}", idComment.toString()))).click();
     // Confirm
     $(ELEMENT_DELETE_POPUP_OK).click();
     // verify that the comment is deleted
     $(byText("test")).shouldNot(Condition.exist);
     // hover on the activity to appear the delete button
-    $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}",id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).hover();
+    $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).hover();
     // click on delete button
-    $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}",id))).click();
+    $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
     $(ELEMENT_DELETE_POPUP_OK).click();
     // verify that the activity doesn't exist
     $(byText(activity1)).shouldNot(Condition.exist);
     info("the activity is removed successfully");
   }
+
   /**
    * <li>Case ID:121910.</li>
    * <li>Test Case Name: Delete your activity.</li>
@@ -141,9 +158,9 @@ public class SOC_HomePageTestIT extends Base {
     activityStream.addActivity(activity1, "");
     String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];
     // hover on the activity to appear the delete button
-    $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}",id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).hover();
+    $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).hover();
     // click on delete button
-    $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}",id))).click();
+    $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
     $(ELEMENT_DELETE_POPUP_OK).click();
     // verify that the activity doesn't exist
     $(byText(activity1)).shouldNot(Condition.exist);

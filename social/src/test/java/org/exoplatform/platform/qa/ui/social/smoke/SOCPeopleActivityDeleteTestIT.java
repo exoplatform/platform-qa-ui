@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import com.codeborne.selenide.Condition;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
@@ -21,7 +20,7 @@ import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 
 @Tag("smoke")
 @Tag("social")
-public class SOC_People_Activity_DeleteTestIT extends Base {
+public class SOCPeopleActivityDeleteTestIT extends Base {
   NavigationToolbar navigationToolbar;
 
   AddUsers          addUsers;
@@ -64,7 +63,6 @@ public class SOC_People_Activity_DeleteTestIT extends Base {
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);
     manageLogInOut.signIn(username1, password);
-
 
     navigationToolbar.goToMyActivities();
     String activity1 = "activity1" + getRandomNumber();

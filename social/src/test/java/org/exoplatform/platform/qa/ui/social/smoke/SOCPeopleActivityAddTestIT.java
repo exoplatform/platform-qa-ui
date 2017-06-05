@@ -9,22 +9,21 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_ALL_CONNECTIONS_TAB;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
 
 @Tag("smoke")
 @Tag("social")
-public class SOC_People_Activity_AddTestIT extends Base {
+public class SOCPeopleActivityAddTestIT extends Base {
   NavigationToolbar     navigationToolbar;
 
   AddUsers              addUsers;
