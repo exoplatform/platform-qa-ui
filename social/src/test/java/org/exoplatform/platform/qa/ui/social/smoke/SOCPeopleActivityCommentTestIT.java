@@ -105,7 +105,7 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     $(byId("cke_CommentTextarea" + id)).waitUntil(Condition.appears, Configuration.timeout).click();
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
     // click on the button comment
-    $(byText("Comment")).waitUntil(Condition.enabled, Configuration.timeout).click();
+    $(byText("Comment")).waitUntil(Condition.not(Condition.disabled), Configuration.timeout).click();
     $(byText("Comment")).waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
     manageLogInOut.signIn("root", "gtn");
@@ -260,7 +260,7 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
     // click on the button comment
 
-    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}",id))).waitUntil(Condition.enabled, Configuration.timeout).click();
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}",id))).waitUntil(Condition.not(Condition.disabled), Configuration.timeout).click();
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}",id))).waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
 
