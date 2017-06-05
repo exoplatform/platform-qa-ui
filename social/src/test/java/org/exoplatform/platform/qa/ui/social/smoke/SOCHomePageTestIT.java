@@ -88,13 +88,14 @@ public class SOCHomePageTestIT extends Base {
      * Outcome: - Comment will be shown in comment section of activity
      */
     String activity1 = "activity1" + getRandomNumber();
+    String comment="comment"+getRandomNumber();
     activityStream.addActivity(activity1, "");
     // get the id of activity created
     String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];    // click on comment icon
     $(byXpath(ELEMENT_COMMENT_LINK.replace("{id}",id))).click();
     // insert comment
     $(byId(ELEMENT_COMMENT_INPUT.replace("{id}",id))).waitUntil(Condition.appears, Configuration.timeout).click();
-    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"test sorftware is a very funny \")", "");
+    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\""+comment+ "\")", "");
     // click on the button comment
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}",id))).waitUntil(Condition.not(Condition.disabled), Configuration.timeout).click();
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}",id))).waitUntil(Condition.disappears, Configuration.timeout);
