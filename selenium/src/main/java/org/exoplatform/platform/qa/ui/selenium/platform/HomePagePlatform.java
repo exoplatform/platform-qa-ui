@@ -66,6 +66,9 @@ public class HomePagePlatform {
     $(ELEMENT_CALENDAR_WORKING_PANEL).waitUntil(Condition.appears,10000);
     info("The calendar page is shown successfully");
   }
+  public void goToTaskPage(){
+    ELEMENT_TASKS_LINK_PLF.waitUntil(Condition.appears,Configuration.timeout).click();
+  }
 
   /**
    * Go to my spaces

@@ -64,6 +64,7 @@ public final class HomePageLocator {
 
   public static final By ELEMENT_CALENDAR_LINK_PLF =
           By.xpath("//*[@data-original-title='Calendar']");
+  public static final SelenideElement ELEMENT_TASKS_LINK_PLF= $(byClassName("uiCompanyNavigations")).find(byText("Tasks"));
 
   public static final By ELEMENT_CONNECTION_LINK_PLF =
           By.xpath("//*[@data-original-title='Connections']");

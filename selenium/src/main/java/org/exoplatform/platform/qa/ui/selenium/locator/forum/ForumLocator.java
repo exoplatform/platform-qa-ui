@@ -20,7 +20,11 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.locator.forum;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 
 public class ForumLocator {
 
@@ -671,8 +675,8 @@ public class ForumLocator {
   public static final String ELEMENT_TOPIC_PERMISSION_SEARCH_ICON               =
                                                                   ".//*[@id='UIUserSelector']//*[contains(@class,'uiIconSearch uiIconLightGray')]";
 
-  public static final By     ELEMENT_TOPIC_CANCEL                               =
-                                                  By.xpath(".//*[@id='UITopicForm']//*[contains(text(),'Cancel')]");
+  public static final SelenideElement     ELEMENT_TOPIC_CANCEL                               =
+                                                  $(byId("UIForumPopupWindow")).find(byText("Cancel"));
 
   public static final By     ELEMENT_TOPIC_PERMISSION_CLOSE_USER_SELETOR        =
                                                                          By.xpath(".//*[@id='UIUserSelector']//*[contains(text(),'Close')]");
@@ -842,5 +846,5 @@ public class ForumLocator {
 
   public static final By     ELEMENT_CONFIRM                                    =
                                              By.xpath("//*[@id='UIForumPopupConfirmation']//*[contains(text(),'OK')]");
-
+public static final SelenideElement ELEMENT_POLL_CANCEL=$(byXpath("//*[@id=\"UIPollForm\"]/div[3]/button[3]"));
 }

@@ -348,8 +348,8 @@ public class NavigationToolbar {
    */
   public void goToCreateWikiPage(String location) {
     info("Go to create wiki page");
-    evt.click(ELEMENT_ADD_TOOTLBAR);
-    evt.click(ELEMENT_ADD_WIKI_TOOLBAR);
+    $(ELEMENT_ADD_TOOTLBAR).click();
+    $(ELEMENT_ADD_WIKI_TOOLBAR).click();
     if (!location.isEmpty()) {
       evt.click(ELEMENT_ADD_WIKI_SET_LOCATION);
       evt.click(ELEMENT_ADD_WIKI_CHOOSE_LOCATION.replace("{$location}", location));
@@ -365,21 +365,22 @@ public class NavigationToolbar {
    */
   public void goToAddPoll(String location, String forum) {
     info("Go to add poll from tootlbar");
-    evt.waitForAndGetElement(ELEMENT_ADD_TOOTLBAR, 3000, 0).click();
+    $(ELEMENT_ADD_TOOTLBAR).waitUntil(Condition.appears,Configuration.timeout).click();
     info("Click on Poll link");
-    evt.waitForAndGetElement(ELEMENT_ADD_POOL_TOOLBAR, 3000, 0).click();
+    $(ELEMENT_ADD_POOL_TOOLBAR).waitUntil(Condition.appears,Configuration.timeout).click();
     if (location != "" && location != null) {
       info("Set location for the poll");
-      evt.click(ELEMENT_ADD_POLL_SET_LOCATION);
+      $(ELEMENT_ADD_POLL_SET_LOCATION).click();
     }
     info("evt.click on Next button");
-    evt.click(ELEMENT_NEXT_BUTTON);
+    $(ELEMENT_NEXT_BUTTON).click();
 
     info("Select a forum for poll");
-    evt.waitForAndGetElement(ELEMENT_SELECT_FORUM_COMBOBOX, 3000, 0).click();
-    evt.waitForAndGetElement(ELEMENT_SELECT_FORUM_NAME.replace("${forum}", forum), 2000, 0).click();
+    $(ELEMENT_SELECT_FORUM_COMBOBOX).waitUntil(Condition.appears,Configuration.timeout).click();
+    $(byText(forum)).click();
     info("Click on next button");
-    evt.click(ELEMENT_NEXT_BUTTON);
+    $(ELEMENT_NEXT_BUTTON).waitUntil(Condition.not(Condition.disabled),Configuration.timeout);
+    $(ELEMENT_NEXT_BUTTON).click();
 
   }
 
@@ -391,19 +392,19 @@ public class NavigationToolbar {
    */
   public void goToAddTopic(String location, String forum) {
     info("Go to add a topic from toolbar");
-    evt.click(ELEMENT_ADD_TOOTLBAR);
-    evt.click(ELEMENT_ADD_TOPIC_TOOLBAR);
+    $(ELEMENT_ADD_TOOTLBAR).click();
+    $(ELEMENT_ADD_TOPIC_TOOLBAR).click();
     if (location != "") {
-      evt.click(ELEMENT_ADD_POLL_SET_LOCATION);
+      $(ELEMENT_ADD_POLL_SET_LOCATION).click();
     }
-    evt.click(ELEMENT_NEXT_BUTTON);
     info("evt.click on Next button");
-    evt.click(ELEMENT_NEXT_BUTTON);
+    $(ELEMENT_NEXT_BUTTON).click();
     info("Select a forum for topic");
-    evt.click(ELEMENT_SELECT_FORUM_COMBOBOX);
-    evt.click(ELEMENT_SELECT_FORUM_NAME.replace("${forum}", forum));
+    if(ELEMENT_SELECT_FORUM_COMBOBOX.is(Condition.exist)){
+    ELEMENT_SELECT_FORUM_COMBOBOX.waitUntil(Condition.appears,Configuration.timeout).click();
+    $(byText(forum)).waitUntil(Condition.appears,Configuration.timeout).click();
     info("Click on next button");
-    evt.click(ELEMENT_NEXT_BUTTON);
+    $(ELEMENT_NEXT_BUTTON).click();}
 
   }
 
@@ -416,19 +417,20 @@ public class NavigationToolbar {
    * @param to
    * @param calendar
    */
-  public void goToAddEventTask(String eventTask, String name, String from, String to, String calendar) {
-    evt.click(ELEMENT_ADD_TOOTLBAR);
-    evt.click(ELEMENT_ADD_EVENT_CLASS_TOOLBAR);
-    if (eventTask == "event") {
-      evt.check(ELEMENT_ADD_EVENT_RADIO_BUTTON, 2);
-    }
-    if (eventTask == "task") {
-      evt.check(ELEMENT_ADD_TASK_RADIO_BUTTON, 2);
-    }
-    evt.type(ELEMENT_ADD_TITLE, name, true);
-    evt.click(ELEMENT_SAVE_BUTTON);
-  }
+  public void goToAddEvent( String name, String from, String to, String calendar) {
+    $(ELEMENT_ADD_TOOTLBAR).click();
+    $(ELEMENT_ADD_EVENT_CLASS_TOOLBAR).click();
 
+    $(ELEMENT_ADD_TITLE).setValue(name);
+    $(ELEMENT_SAVE_BUTTON).click();
+  }
+public void gotoAddTask(String name){
+  $(ELEMENT_ADD_TOOTLBAR).click();
+  ELEMENT_ADD_TASK_CLASS_TOOLBAR.click();
+  ELEMENT_TASK_ADD_TITLE.setValue(name);
+  ELEMENT_TASK_BUTTON_ADD.click();
+
+}
   /**
    * Go to upload file fron the toolbar
    *

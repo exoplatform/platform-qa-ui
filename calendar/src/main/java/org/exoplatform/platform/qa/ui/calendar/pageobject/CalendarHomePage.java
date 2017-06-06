@@ -429,7 +429,7 @@ public class CalendarHomePage {
     case WEEK:
       switch (optionDay) {
       case DETAILTIME:
-        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        $(byText(name)).waitUntil(Condition.appears,Configuration.timeout);
         break;
       case ALLDAY:
         evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WEEK_VIEW_ALL_DAY.replace("$name", name));
