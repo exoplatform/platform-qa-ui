@@ -1,5 +1,7 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -7,6 +9,8 @@ import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -59,8 +63,8 @@ public class SpaceSettingManagement {
    */
   public void goToMemberTab() {
     info("Open members tab");
-    evt.click(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB);
-    evt.waitForAndGetElement(ELEMENT_SPACE_MEMBERS_SELECT_USER, 2000, 1);
+    $(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB).click();
+    $(byClassName("uiGrayLightBox")).waitUntil(Condition.appears,Configuration.timeout);
   }
 
   /**
@@ -73,11 +77,9 @@ public class SpaceSettingManagement {
    */
   public void inviteUser(String userName, boolean verify, String fullName) {
     goToMemberTab();
-    info("Click on select user button");
-    evt.click(ELEMENT_SPACE_MEMBERS_SELECT_USER, 2);
-    info("--Search user " + testBase.getUser() + "--");
-    evt.type(ELEMENT_SEARCH_INPUT_USER_NAME, userName, true);
-    evt.click(ELEMENT_SEARCH_USERS_ICON, 2);
+    info("--Search user " );
+    ELEMENT_INPUT_INVITE_USER.sendKeys(userName);
+    $(ELEMENT_SEARCH_USERS_ICON).click();
 
     info("Select a user");
     evt.click(ELEMENT_SPACE_SELECT_USER_IN_FORM.replace("{$name}", userName), 2);

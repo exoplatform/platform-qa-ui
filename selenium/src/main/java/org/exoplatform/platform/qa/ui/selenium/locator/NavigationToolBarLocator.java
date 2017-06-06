@@ -266,4 +266,5 @@ public final class NavigationToolBarLocator {
   public static final SelenideElement ELEMENT_ADMINISTRATION_ADD_USERS=$(byText("Add Users"));
 public  static final SelenideElement ELEMENT_TASK_ADD_TITLE=$(byId("title"));
 public static final SelenideElement ELEMENT_TASK_BUTTON_ADD=$(byXpath("//*[@id=\"QuickAddTaskContainer\"]/div[2]/a[1]"));
+public static final SelenideElement ELEMENT_ALERT_EXIST_NOTIFICATION=$(byXpath("//*[@id=\\\"UINotificationPopoverToolbarPortlet\\\"]/div[2]/a/i/span"));
 }
