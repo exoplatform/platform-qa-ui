@@ -126,7 +126,7 @@ public class SOCHomePageTestIT extends Base {
     // Confirm
     $(ELEMENT_DELETE_POPUP_OK).click();
     // verify that the comment is deleted
-    $(byText("test")).shouldNot(Condition.exist);
+    $(byText(comment)).shouldNot(Condition.exist);
     // hover on the activity to appear the delete button
     $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).hover();
     // click on delete button

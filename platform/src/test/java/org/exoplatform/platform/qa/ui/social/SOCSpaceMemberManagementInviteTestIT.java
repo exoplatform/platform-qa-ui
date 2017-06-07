@@ -155,9 +155,6 @@ public  void test12_SendRequestToSpaceAtVisibleModeAndValidationForRegistration(
     *Expected Outcome:
         Create a new space successfully*/
     String space = "space"+getRandomNumber();
-    //String regist =spRegisData.getSpaceRegistration(1);
-   // String visib = spVisiData.getSpaceVisible(0);
-    //String[] arrayRight ={regist,visib};
 
     info("Create a space");
     homePagePlatform.goToMySpaces();
