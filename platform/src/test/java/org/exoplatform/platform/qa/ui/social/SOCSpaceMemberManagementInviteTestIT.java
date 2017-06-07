@@ -29,7 +29,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("social")
 @Tag("smoke")
-public class SOC_Space_MemberManagement_Invite extends Base{
+public class SOCSpaceMemberManagementInviteTestIT extends Base{
 
 NavigationToolbar navigationToolbar;
 AddUsers addUsers;
