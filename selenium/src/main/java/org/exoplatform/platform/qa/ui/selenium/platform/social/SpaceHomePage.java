@@ -42,9 +42,9 @@ public class SpaceHomePage {
       evt.click(ELEMENT_SPACE_MENU_MORE, 2);
       evt.clickByJavascript(ELEMENT_SPACE_SPACE_SETTINGS);
     } else
-      evt.clickByJavascript(ELEMENT_SPACE_SPACE_SETTINGS);
+      $(ELEMENT_SPACE_SPACE_SETTINGS).click();
 
-    evt.waitForAndGetElement(ELEMENT_SPACE_SPACE_SETTINGS_TITLE, 3000, 1);
+    $(ELEMENT_SPACE_SPACE_SETTINGS_TITLE).waitUntil(Condition.appears,Configuration.timeout);
     info("Space setting page is shown");
   }
 

@@ -66,6 +66,9 @@ public class SpaceSettingManagement {
     $(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB).click();
     $(byClassName("uiGrayLightBox")).waitUntil(Condition.appears,Configuration.timeout);
   }
+  public void goToMemverTabInSpaceSettingTab(){
+    ELEMENT_SPACE_SETTINGS_MEMBERS_TAB_IN_SETTING_TAB.click();
+  }
 
   /**
    * Invite a user in the space
