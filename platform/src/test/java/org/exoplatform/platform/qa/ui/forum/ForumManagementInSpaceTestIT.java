@@ -23,7 +23,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
  */
 @Tag("forum")
 @Tag("smoke")
-public class ForumManagementInSpace extends Base {
+public class ForumManagementInSpaceTestIT extends Base {
     HomePagePlatform homePagePlatform;
     SpaceManagement spaceManagement;
     SpaceHomePage spaceHomePage;

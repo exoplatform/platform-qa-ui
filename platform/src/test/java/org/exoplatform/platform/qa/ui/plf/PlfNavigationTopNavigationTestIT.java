@@ -40,7 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 */
 @Tag("smoke")
 @Tag("plf")
-public class PlfNavigationTopNavigation extends Base{
+public class PlfNavigationTopNavigationTestIT extends Base{
 
 NavigationToolbar navigationToolbar;
 HomePagePlatform homePagePlatform;
