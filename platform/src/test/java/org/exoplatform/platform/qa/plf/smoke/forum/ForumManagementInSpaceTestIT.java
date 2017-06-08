@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.forum;
+package org.exoplatform.platform.qa.plf.smoke.forum;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -23,6 +23,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
  */
 @Tag("forum")
 @Tag("smoke")
+
 public class ForumManagementInSpaceTestIT extends Base {
     HomePagePlatform homePagePlatform;
     SpaceManagement spaceManagement;

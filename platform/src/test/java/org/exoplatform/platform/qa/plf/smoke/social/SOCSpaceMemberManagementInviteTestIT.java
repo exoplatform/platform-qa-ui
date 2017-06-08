@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.social;
+package org.exoplatform.platform.qa.plf.smoke.social;
 
 
 import com.codeborne.selenide.Condition;
@@ -137,6 +137,7 @@ public  void test12_SendRequestToSpaceAtVisibleModeAndValidationForRegistration(
     String password="123456";
 
     info("Add new user");
+    manageLogInOut.signIn("root","gtn");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);
     addUsers.addUser(username2, password, email2, username2, username2);
@@ -159,9 +160,7 @@ public  void test12_SendRequestToSpaceAtVisibleModeAndValidationForRegistration(
     info("Create a space");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space,space,60000);
-    info("Set permission for the space");
-    spaceHomePage.goToSpaceSettingTab();
-    spaceSettingManagement.goToAccessEditTab();
+
  //   spaceSettingManagement.setPermissionForSpace(arrayRight);
 
     /*Step number: 2
@@ -177,10 +176,9 @@ public  void test12_SendRequestToSpaceAtVisibleModeAndValidationForRegistration(
         Send request successfully: The space is move out Public space and added into pending space*/
     manageLogInOut.signIn(username2,password);
     homePagePlatform.goToAllSpace();
-    spaceManagement.requestToJoinSpace(space,true);
+    spaceManagement.sendARequestToASpace(space);
     spaceManagement.goToRequestPendingTab();
-     waitForAndGetElement(ELEMENT_SPACE_TITLE.replace("${space}",space),2000,1);
-
+    $(byText(space)).waitUntil(Condition.appears,Configuration.timeout);
     /*Step number: 3
     *Step Name: -
     *Step Description:
@@ -196,8 +194,14 @@ public  void test12_SendRequestToSpaceAtVisibleModeAndValidationForRegistration(
     manageLogInOut.signIn(username1,password);
     homePagePlatform.goToSpecificSpace(space);
     spaceHomePage.goToSpaceSettingTab();
-    spaceSettingManagement.goToMemberTab();
+    spaceSettingManagement.goToMemberTabInSpaceSettingTab();
     spaceSettingManagement.acceptRequest(username2);
+    spaceSettingManagement.goToMemberTab();
+    $(byText(username2+" "+username2)).scrollTo().should(Condition.exist);
+    manageLogInOut.signIn("root","gtn");
+    navigationToolbar.goToUsersAndGroupsManagement();
+    userAndGroupManagement.deleteUser(username1);
+    userAndGroupManagement.deleteUser(username2);
 
  }
 

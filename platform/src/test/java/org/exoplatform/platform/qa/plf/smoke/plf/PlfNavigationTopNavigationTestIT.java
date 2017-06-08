@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.plf;
+package org.exoplatform.platform.qa.plf.smoke.plf;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -29,6 +29,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_ADD_TOOTLBAR;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_CHECK_NAME_UPLOADED_FILE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_TITLE_WIKI_INPUT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_WIKI_HOME_PAGE_TEXT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -89,7 +90,7 @@ public  void test01_CreateANewWikiPageViaTheTopNavigation() {
     info("Go to Create Wiki page from Navigation toolbar");
     navigationToolbar.goToCreateWikiPage("");
     info("Verify that wiki home page is shown");
-    $(ELEMENT_WIKI_HOME_PAGE_TEXT).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
 
  }
 

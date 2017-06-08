@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.social;
+package org.exoplatform.platform.qa.plf.smoke.social;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;

@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.wiki;
+package org.exoplatform.platform.qa.plf.smoke.wiki;
 
 
 import org.exoplatform.platform.qa.ui.commons.Base;

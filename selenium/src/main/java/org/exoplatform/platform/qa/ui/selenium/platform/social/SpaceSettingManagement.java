@@ -66,7 +66,7 @@ public class SpaceSettingManagement {
     $(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB).click();
     $(byClassName("uiGrayLightBox")).waitUntil(Condition.appears,Configuration.timeout);
   }
-  public void goToMemverTabInSpaceSettingTab(){
+  public void goToMemberTabInSpaceSettingTab(){
     ELEMENT_SPACE_SETTINGS_MEMBERS_TAB_IN_SETTING_TAB.click();
   }
 
@@ -155,12 +155,11 @@ public class SpaceSettingManagement {
    */
   public void acceptRequest(String user) {
     info("OPen members tab");
-    evt.click(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB);
+    $(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB_IN_SETTING_TAB).click();
     info("Click on join button to remove user");
-    evt.click(ELEMENT_SPACE_MEMBERS_TAB_VALIDATE_REQUEST_jOINT.replace("${user}", user));
+    $(byText(user+" "+user)).parent().find(ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB).click();
     info("Verify that the member is shown in member list");
-    evt.waitForAndGetElement(ELEMENT_SPACE_DELETE_USER_BTN.replace("${user}", user), 2000, 1);
-  }
+    $(byText(user+" "+user)).waitUntil(Condition.appears,Configuration.timeout);  }
 
   /**
    * Decline a pending request to a space
@@ -258,7 +257,7 @@ public class SpaceSettingManagement {
   public void goToAccessEditTab() {
     info("Select Application tab");
     if (evt.waitForAndGetElement(ELEMENT_ACCESS_AND_EDIT_TAB, 3000, 0) != null)
-      evt.click(ELEMENT_ACCESS_AND_EDIT_TAB);
+      $(ELEMENT_ACCESS_AND_EDIT_TAB).click();
     else
       evt.click(ELEMENT_ACCESS_AND_EDIT_TAB_OF_POPUP);
     info("The tab is opened succcessfully");
