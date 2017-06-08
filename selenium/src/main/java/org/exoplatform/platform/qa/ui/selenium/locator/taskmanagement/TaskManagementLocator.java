@@ -33,7 +33,7 @@ public class TaskManagementLocator {
   public static final SelenideElement ELEMENT_TASK_FORM_ICOND_DROP_DOWN_MENU=$(byXpath("//*[@id=\"taskManagement\"]/div[3]/div[2]/div[1]/div/div[1]/div[1]/a[1]"));
   public static final SelenideElement ELEMENT_TASK_BUTTON_DELETE=$(byClassName("action-delete-task"));
   public static final SelenideElement  ELEMENT_TASK_BUTTON_DELETE_OK=$(byClassName("confirmDeleteTask")).find(byText("OK"));
- public static final By ELEMENT_ICON_MARK_AS_COMPLETED=byClassName("actionIcon");
+  public static final By ELEMENT_ICON_MARK_AS_COMPLETED=byClassName("actionIcon");
   // Project area-->General
   public static final String ELEMENT_LEFT_PANEL_PROJECT_NAME              =
           ".//*[contains(@class,'project-name')][contains(.,'$project')]";
