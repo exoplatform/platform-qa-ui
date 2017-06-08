@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.taskmanagement;
+package org.exoplatform.platform.qa.ui.task.pageobject;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;

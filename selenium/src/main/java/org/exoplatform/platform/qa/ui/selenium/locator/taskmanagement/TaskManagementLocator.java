@@ -1,6 +1,11 @@
 package org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement;
 
+import com.codeborne.selenide.SelenideElement;
+import org.omg.CORBA.PUBLIC_MEMBER;
 import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
 
 /**
  * This class will be define locators for Task Management feature The feature
@@ -15,7 +20,17 @@ public class TaskManagementLocator {
   // General
 
   // Task area
-
+          public static final SelenideElement ELEMENT_BUTTON_ADD_TASK=$(byXpath("//*[@id=\"taskManagement\"]/div[2]/div[2]/div/div[2]/div/div[1]/div[1]/div[1]/a"));
+  public static final SelenideElement ELEMENT_INPUT_TASK_TITLE=$(byName("taskTitle"));
+  public static final SelenideElement ELEMENT_TEXT_INCOMING=$(byText("Incoming"));
+  public static final SelenideElement ELEMENT_TASK_FORM= $(byClassName("rightPanelContent "));
+  public static final SelenideElement ELEMENT_TASK_FORM_INPUT_TITLE=$(byXpath("//*[@id=\"taskManagement\"]/div[3]/div[2]/div[1]/div/div[3]/div/span[2]/div/form/div/div[1]/div/input"));
+  public static final SelenideElement ELEMENT_TASK_FORM_PRIORITY=$(byClassName("priority"));
+  public static final SelenideElement ELEMENT_TASKS_LIST=$(byClassName("centerPanel"));
+  public static final SelenideElement ELEMENT_TASK_SELECT_PRIORITY= $(byClassName("selectboxMini"));
+  public static final SelenideElement ELEMENT_TASK_FORM_ICOND_DROP_DOWN_MENU=$(byXpath("//*[@id=\"taskManagement\"]/div[3]/div[2]/div[1]/div/div[1]/div[1]/a[1]"));
+  public static final SelenideElement ELEMENT_TASK_BUTTON_DELETE=$(byClassName("action-delete-task"));
+  public static final SelenideElement  ELEMENT_TASK_BUTTON_DELETE_OK=$(byClassName("confirmDeleteTask")).find(byText("OK"));
   // Project area-->General
   public static final String ELEMENT_LEFT_PANEL_PROJECT_NAME              =
                                                              ".//*[contains(@class,'project-name')][contains(.,'$project')]";

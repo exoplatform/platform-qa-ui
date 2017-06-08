@@ -1,9 +1,15 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.taskmanagement;
+package org.exoplatform.platform.qa.ui.task.pageobject;
 
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 /**
  * This class will define actions about management project
@@ -12,7 +18,7 @@ public class ManagementTasks {
 
   private final TestBase       testBase;
 
-  public TaskManagementHome    tasHome;
+  public TaskManagementHome tasHome;
 
   private ElementEventTestBase evt;
 
@@ -75,5 +81,26 @@ public class ManagementTasks {
   public enum optionTask {
     Incoming, All_Tasks, Overdue, Today, Tommorrow, Upcoming;
   }
+  public void addTask(String task){
 
+    ELEMENT_BUTTON_ADD_TASK.click();
+    ELEMENT_INPUT_TASK_TITLE.setValue(task);
+    ELEMENT_TEXT_INCOMING.click();
+    ELEMENT_TASK_FORM.waitUntil(Condition.appears, Configuration.timeout);
+  }
+  public void editTask(String task,String newTask, String priority){
+    ELEMENT_TASKS_LIST.find(byText(task)).click();
+    ELEMENT_TASK_FORM.waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_TASK_FORM.find(byText(task)).click();
+    ELEMENT_TASK_FORM_INPUT_TITLE.setValue(newTask);
+    ELEMENT_TASK_FORM_PRIORITY.click();
+    ELEMENT_TASK_SELECT_PRIORITY.waitUntil(Condition.appears,Configuration.timeout).selectOption(priority);
+  }
+public void deleteTask(String task){
+  ELEMENT_TASKS_LIST.find(byText(task)).click();
+ ELEMENT_TASK_FORM.waitUntil(Condition.appears, Configuration.timeout);
+  ELEMENT_TASK_FORM_ICOND_DROP_DOWN_MENU.click();
+  ELEMENT_TASK_BUTTON_DELETE.click();
+  ELEMENT_TASK_BUTTON_DELETE_OK.click();
+}
 }

@@ -41,6 +41,7 @@ public class HomePagePlatform {
     $(byClassName("notif-chat-open-link")).waitUntil(Condition.appears, Configuration.timeout).click();
   }
 
+
   /**
    * Go to Documents
    */

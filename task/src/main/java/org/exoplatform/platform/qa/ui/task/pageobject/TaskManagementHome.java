@@ -1,9 +1,9 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.taskmanagement;
-
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+package org.exoplatform.platform.qa.ui.task.pageobject;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 /**
  * This class will define all actions on Home page of the feature
