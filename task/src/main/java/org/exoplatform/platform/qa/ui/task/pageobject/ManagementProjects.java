@@ -125,7 +125,7 @@ public class ManagementProjects {
     }
     if (des != null || des != "") {
       info("Input description");
-      // $(ELEMENT_ADD_PROJECT_DES).setValue(des);
+    // $(ELEMENT_ADD_PROJECT_DES).setValue(des);
     }
     if (enableCalendar) {
       info("Enable Calendar intergration");
