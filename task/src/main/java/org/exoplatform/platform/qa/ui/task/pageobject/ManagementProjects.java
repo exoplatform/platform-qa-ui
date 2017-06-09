@@ -1,8 +1,12 @@
 package org.exoplatform.platform.qa.ui.task.pageobject;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -112,14 +116,16 @@ public class ManagementProjects {
    *          project in Calendar application = false if don't want.
    */
   public void addProject(String title, String des, boolean enableCalendar) {
+    ELEMENT_PROJECT_ICON_ADD_PROJECT.click();
+    ELEMENT_ADD_PROJECT.click();
     info("Create a new project");
     if (title != null || title != "") {
       info("Input title");
-      evt.type(ELEMENT_ADD_PROJECT_TITLE, title, true);
+      $(ELEMENT_ADD_PROJECT_TITLE).setValue(title);
     }
     if (des != null || des != "") {
       info("Input description");
-      evt.type(ELEMENT_ADD_PROJECT_DES, des, true);
+    // $(ELEMENT_ADD_PROJECT_DES).setValue(des);
     }
     if (enableCalendar) {
       info("Enable Calendar intergration");
@@ -128,7 +134,7 @@ public class ManagementProjects {
       info("Disable Calendar intergration");
       evt.uncheck(ELEMETN_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX, 2);
     }
-
+    ELEMENT_SAVE_PROJECT.click();
   }
 
   /**
@@ -176,7 +182,10 @@ public class ManagementProjects {
    *          want to disable or uncheck calendar integration
    */
   public void editProject(String projectPath, String title, String des, boolean... opt) {
-    selectProject(projectPath);
+    $(byText(projectPath)).click();
+    $(byText(projectPath)).parent().parent().find(byClassName("uiIconRightMenu")).click();
+    $(byClassName("uiDropdownWithIcon")).waitUntil(Condition.appears,Configuration.timeout);
+    $(byId("taskManagement")).find(byText("Edit")).click();
     if (title != null || title != "") {
       info("Input title");
       if (opt.length > 0 && opt[0] == true)
@@ -184,7 +193,7 @@ public class ManagementProjects {
                                                           // with keeping old
                                                           // title
       else
-        evt.type(ELEMENT_ADD_PROJECT_TITLE, title, true);// Input a new title
+        $(ELEMENT_ADD_PROJECT_TITLE).setValue(title);// Input a new title
                                                          // with clearing all
                                                          // old title
     }
@@ -207,6 +216,12 @@ public class ManagementProjects {
       info("Disable Calendar intergration");
       evt.uncheck(ELEMETN_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX, 2);
     }
+  }
+  public void deleteProject(String title){
+    $(byText(title)).click();
+    $(byText(title)).parent().parent().find(byClassName("uiIconRightMenu")).click();
+    $(byText("Delete")).click();
+
   }
 
   /**

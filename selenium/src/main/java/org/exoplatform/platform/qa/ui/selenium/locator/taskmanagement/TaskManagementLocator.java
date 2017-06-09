@@ -22,7 +22,7 @@ public class TaskManagementLocator {
   // Task area
           public static final SelenideElement ELEMENT_BUTTON_ADD_TASK=$(byXpath("//*[@id=\"taskManagement\"]/div[2]/div[2]/div/div[2]/div/div[1]/div[1]/div[1]/a"));
   public static final SelenideElement ELEMENT_INPUT_TASK_TITLE=$(byName("taskTitle"));
-  public static final SelenideElement ELEMENT_TEXT_INCOMING=$(byText("Incoming"));
+  public static final SelenideElement ELEMENT_TEXT_Projects=$(byText("Projects"));
   public static final SelenideElement ELEMENT_TASK_FORM= $(byClassName("rightPanelContent "));
   public static final SelenideElement ELEMENT_TASK_FORM_INPUT_TITLE=$(byXpath("//*[@id=\"taskManagement\"]/div[3]/div[2]/div[1]/div/div[3]/div/span[2]/div/form/div/div[1]/div/input"));
   public static final SelenideElement ELEMENT_TASK_FORM_PRIORITY=$(byClassName("priority"));
@@ -36,7 +36,8 @@ public class TaskManagementLocator {
                                                              ".//*[contains(@class,'project-name')][contains(.,'$project')]";
 
   // Project area-->Context Menu
-
+public static final SelenideElement ELEMENT_PROJECT_ICON_ADD_PROJECT=$(byXpath("//*[@id=\"taskManagement\"]/div[1]/ul/li[2]/div/a[2]"));
+public static final SelenideElement ELEMENT_ADD_PROJECT=$(byText("Add Project"));
   // Labels area
 
   /**********************************************************
@@ -82,7 +83,7 @@ public class TaskManagementLocator {
 
   public static final By     ELEMETN_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX =
                                                                           By.xpath(".//*[contains(@class,'addProject')]//*[contains(@class,'checkbox')]");
-
+public static final SelenideElement ELEMENT_SAVE_PROJECT=$(byXpath("//*[@id=\"taskManagement\"]/div[4]/div/div[2]/form/div[7]/button[1]"));
   // Edit project form
 
   // Share project form
