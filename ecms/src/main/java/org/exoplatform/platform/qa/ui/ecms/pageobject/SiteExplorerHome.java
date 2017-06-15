@@ -165,8 +165,9 @@ public class SiteExplorerHome {
     $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
 
     info("Right click on nodename");
-
-    $(byId("UITreeExplorer")).find(byLinkText(title)).waitUntil(Condition.appears,Configuration.timeout).contextClick();
+    ELEMENT_CONTENT_LIST.find(byLinkText(title)).click();
+    $(ELEMENT_ACTIONBAR_MORE).click();
+    ELEMENT_CONTENT_LIST.find(byLinkText(title)).contextClick();
     info("Click on Delete link");
     $(ELEMENT_SITEEXPLORER_ACTION_DELETE).click();
     info("Click on Delete button on Confirm popup");
