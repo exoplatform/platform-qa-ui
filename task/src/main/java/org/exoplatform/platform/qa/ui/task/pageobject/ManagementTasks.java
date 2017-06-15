@@ -84,8 +84,7 @@ public class ManagementTasks {
   public void addTask(String task){
 
     ELEMENT_BUTTON_ADD_TASK.click();
-    ELEMENT_INPUT_TASK_TITLE.setValue(task);
-    ELEMENT_TEXT_Projects.click();
+    ELEMENT_INPUT_TASK_TITLE.setValue(task).pressEnter();
     ELEMENT_TASK_FORM.waitUntil(Condition.appears, Configuration.timeout);
   }
   public void editTask(String task,String newTask, String priority){
