@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_ICON_MARK_AS_COMPLETED;
+import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_TASKS_LIST;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 /**
@@ -43,6 +45,16 @@ public class TaskManagement extends Base {
         managementTasks.deleteTask(newTask);
 
 
+
+    }
+    @Test
+    public void test04_MarkTaskAsCompleted(){
+        String task="task"+getRandomNumber();
+        info("add task");
+        homePagePlatform.goToTaskPage();
+        managementTasks.addTask(task);
+        ELEMENT_TASKS_LIST.find(byText(task)).parent().find(ELEMENT_ICON_MARK_AS_COMPLETED).click();
+        $(byText(task)).shouldNot(Condition.exist);
 
     }
 }
