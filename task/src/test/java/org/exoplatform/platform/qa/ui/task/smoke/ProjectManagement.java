@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.task.smoke;
 
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.task.pageobject.ManagementProjects;
@@ -34,10 +35,20 @@ public class ProjectManagement extends Base {
     public  void test01_02_03_Add_Edit_DeleteProject(){
         String title="title"+getRandomNumber();
     String newTitle="newTitle"+getRandomNumber();
+   ;
         homePagePlatform.goToTaskPage();
+    info("add project");
         managementProjects.addProject(title,"",false);
-        managementProjects.editProject(title,newTitle,"",false);
+    info("verify project added");
+    $(byText(title)).should(Condition.exist);
+    info("edit project");
+        managementProjects.editProject(title,title,newTitle,"",true);
+    info("verify project edited");
+        $(byText(newTitle)).should(Condition.exist);
+      info("delete project");
         managementProjects.deleteProject(newTitle);
+    info("verify project deleted");
+        $(byText(newTitle)).shouldNot(Condition.exist);
 
         }
 
