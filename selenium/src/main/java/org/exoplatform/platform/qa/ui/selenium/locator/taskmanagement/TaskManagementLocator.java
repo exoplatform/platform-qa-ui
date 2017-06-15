@@ -47,9 +47,12 @@ public class TaskManagementLocator {
   public static final SelenideElement ELEMENT_LABEL_ICON_ADD_LABEL=$(byXpath("//*[@id=\"taskManagement\"]/div[1]/ul/li[3]/div[1]/a[2]/i"));
   public static final SelenideElement ELEMENT_ADD_LABEL=$(byText("Add Label"));
   public static final SelenideElement ELEMENT_INPUT_LABEL=$(byClassName("addLabelInput"));
-    public static final SelenideElement ELEMENT_LABEL_BUTTON_CONFIRM_DELETE=$(byClassName("confirmDelete"));
+  public static final SelenideElement ELEMENT_LABEL_BUTTON_CONFIRM_DELETE=$(byClassName("confirmDelete"));
 
     /**********************************************************
+=======
+  /**********************************************************
+>>>>>>> add label to task
    * CENTRAL PANEL
    ******************************************************/
 

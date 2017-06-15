@@ -9,6 +9,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
 import static com.codeborne.selenide.Selectors.*;
 
+
 /**
  * This class will define actions about management tasks
  */
@@ -44,5 +45,6 @@ public void addLabel(String label){
     $(byText(label)).waitUntil(Condition.disappears,Configuration.timeout);
 
   }
+
 }
 
