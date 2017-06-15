@@ -20,7 +20,7 @@ public class TaskManagementLocator {
   // General
 
   // Task area
-          public static final SelenideElement ELEMENT_BUTTON_ADD_TASK=$(byXpath("//*[@id=\"taskManagement\"]/div[2]/div[2]/div/div[2]/div/div[1]/div[1]/div[1]/a"));
+  public static final SelenideElement ELEMENT_BUTTON_ADD_TASK=$(byXpath("//*[@id=\"taskManagement\"]/div[2]/div[2]/div/div[2]/div/div[1]/div[1]/div[1]/a"));
   public static final SelenideElement ELEMENT_INPUT_TASK_TITLE=$(byName("taskTitle"));
   public static final SelenideElement ELEMENT_TEXT_Projects=$(byText("Projects"));
   public static final SelenideElement ELEMENT_TASK_FORM= $(byClassName("rightPanelContent "));
@@ -33,11 +33,11 @@ public class TaskManagementLocator {
   public static final SelenideElement  ELEMENT_TASK_BUTTON_DELETE_OK=$(byClassName("confirmDeleteTask")).find(byText("OK"));
   // Project area-->General
   public static final String ELEMENT_LEFT_PANEL_PROJECT_NAME              =
-                                                             ".//*[contains(@class,'project-name')][contains(.,'$project')]";
+          ".//*[contains(@class,'project-name')][contains(.,'$project')]";
 
   // Project area-->Context Menu
-public static final SelenideElement ELEMENT_PROJECT_ICON_ADD_PROJECT=$(byXpath("//*[@id=\"taskManagement\"]/div[1]/ul/li[2]/div/a[2]"));
-public static final SelenideElement ELEMENT_ADD_PROJECT=$(byText("Add Project"));
+  public static final SelenideElement ELEMENT_PROJECT_ICON_ADD_PROJECT=$(byXpath("//*[@id=\"taskManagement\"]/div[1]/ul/li[2]/div/a[2]"));
+  public static final SelenideElement ELEMENT_ADD_PROJECT=$(byText("Add Project"));
   // Labels area
 
   /**********************************************************
@@ -70,34 +70,41 @@ public static final SelenideElement ELEMENT_ADD_PROJECT=$(byText("Add Project"))
 
   // Add project form
   public static final By     ELEMENT_ADD_PROJECT_PARENT_PROJECT           =
-                                                                By.xpath("(.//*[contains(@class,'addProject')]//*[contains(@class,'hoverStatusBlock')])[1]");
+          By.xpath("(.//*[contains(@class,'addProject')]//*[contains(@class,'hoverStatusBlock')])[1]");
 
   public static final String ELEMENT_ADD_PROJECT_PARENT_PROJECT_DROP_MENU =
-                                                                          ".//*[contains(@class,'uiDropdownMenu')]//*[contains(text(),'$project')]";
+          ".//*[contains(@class,'uiDropdownMenu')]//*[contains(text(),'$project')]";
 
   public static final By     ELEMENT_ADD_PROJECT_TITLE                    =
-                                                       By.xpath(".//*[contains(@class,'addProject')]//*[contains(@name,'name')]");
+          By.xpath(".//*[contains(@class,'addProject')]//*[contains(@name,'name')]");
 
   public static final By     ELEMENT_ADD_PROJECT_DES                      =
-                                                     By.xpath(".//*[contains(@class,'addProject')]//*[contains(@name,'description')]");
+          By.xpath(".//*[contains(@class,'addProject')]//*[contains(@name,'description')]");
 
   public static final By     ELEMETN_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX =
-                                                                          By.xpath(".//*[contains(@class,'addProject')]//*[contains(@class,'checkbox')]");
-public static final SelenideElement ELEMENT_SAVE_PROJECT=$(byXpath("//*[@id=\"taskManagement\"]/div[4]/div/div[2]/form/div[7]/button[1]"));
+          By.xpath(".//*[contains(@class,'addProject')]//*[contains(@class,'checkbox')]");
+  public static final SelenideElement ELEMENT_SAVE_PROJECT=$(byXpath("//*[@id=\"taskManagement\"]/div[4]/div/div[2]/form/div[7]/button[1]"));
   // Edit project form
-
+  public static final SelenideElement ELEMENT_POPUB_EDIT_PROJECT=$(byClassName("PopupContent"));
+  public static final By ELEMENT_ICON_PROJECT=byClassName("uiIconRightMenu");
+  public static final SelenideElement ELEMENT_EDIT_PROJECT_OPTION=$(byId("taskManagement")).find(byText("Edit"));
+  public static final SelenideElement ELEMENT_MENU_PROJECT=$(byClassName("uiDropdownWithIcon"));
+  public static final SelenideElement ELEMENT_BUTTON_SAVE=$(byXpath("//*[@id=\"taskManagement\"]/div[4]/div/div[2]/div[7]/button[1]"));
+  public static final SelenideElement ELEMETN_EDIT_PROJECT_ENABLE_CALENDAR_CHECKBOX=$(byClassName("uiCheckbox"));
+  public static final SelenideElement ELEMENT_EDIT_PROJECT =$(byXpath("//*[@id=\"taskManagement\"]/div[4]/div/div[2]/div[2]/span/div/form/div/div[1]/div/input"));
   // Share project form
 
   // Color
   public static final String ELEMENT_COLOR_TABLE_ITEM                     =
-                                                      ".//*[contains(@class,'project-name')][contains(.,'$project')]/..//*[contains(@class,'$color')]";
+          ".//*[contains(@class,'project-name')][contains(.,'$project')]/..//*[contains(@class,'$color')]";
 
   // Clone project
 
   // Show and Hide project
 
   // Delete project
-
+public static final SelenideElement ELEMENT_DELETE_PROJECT_OPTION=$(byId("taskManagement")).find(byText("Delete"));
+public static final SelenideElement ELEMENT_CONFIRM_DELETE=$(byClassName("confirmDeleteProject")).find(byText("Delete"));
   // *************************************Labels
   // Management*****************************************//
 

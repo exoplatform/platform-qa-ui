@@ -33,27 +33,27 @@ public class ManagementProjects {
 
   /**
    * Select an option in Context Menu of Projects
-   * 
+   *
    * @param op is an option in Context Menu as:Add Project, Show hidden project.
    */
   public void selectOpContMenuProject(optionContMenuProject op) {
     goToContMenuProject();
     switch (op) {
-    case Add_Project:
-      info("Select Add Project option");
-      break;
-    case Show_Hidden_Project:
-      info("Select Show hide Project");
-      break;
-    default:
-      info("No option in the list. Please select correct option.");
-      break;
+      case Add_Project:
+        info("Select Add Project option");
+        break;
+      case Show_Hidden_Project:
+        info("Select Show hide Project");
+        break;
+      default:
+        info("No option in the list. Please select correct option.");
+        break;
     }
   }
 
   /**
    * Open Context menu of a given project
-   * 
+   *
    * @param project is a project's name in the list
    */
   public void goToContMenuGivenProject(String project) {
@@ -62,40 +62,40 @@ public class ManagementProjects {
 
   /**
    * Select an option in Context Menu of a Given Project in Project list
-   * 
+   *
    * @param project is project's name of a given project in the list
    * @param op is an option in Context Menu as Edit,Share,Clone,...
    */
   public void selectOpContMenuGivenProject(String project, optionContMenuGivenProject op) {
     goToContMenuGivenProject(project);
     switch (op) {
-    case Edit:
-      info("Select Edit option");
-      break;
-    case Share:
-      info("Select Share option");
-      break;
-    case Clone:
-      info("Select Clone option");
-      break;
-    case Hide:
-      info("Select Hide option");
-      break;
-    case Delete:
-      info("Select Delete option");
-      break;
-    case Add_Project:
-      info("Select Add Project option");
-      break;
-    default:
-      info("No option in the list. Please select correct option");
-      break;
+      case Edit:
+        info("Select Edit option");
+        break;
+      case Share:
+        info("Select Share option");
+        break;
+      case Clone:
+        info("Select Clone option");
+        break;
+      case Hide:
+        info("Select Hide option");
+        break;
+      case Delete:
+        info("Select Delete option");
+        break;
+      case Add_Project:
+        info("Select Add Project option");
+        break;
+      default:
+        info("No option in the list. Please select correct option");
+        break;
     }
   }
 
   /**
    * Change color of a given project
-   * 
+   *
    * @param project is project's name
    * @param color is a color in color list as pink, red,sky_blue,... these
    *          colors will be read from ColorDatabase.java file
@@ -109,7 +109,7 @@ public class ManagementProjects {
 
   /**
    * Add a new project
-   * 
+   *
    * @param title is project's name
    * @param des is project's description
    * @param enableCalendar = true if want to create a task calendar for the
@@ -125,7 +125,7 @@ public class ManagementProjects {
     }
     if (des != null || des != "") {
       info("Input description");
-    // $(ELEMENT_ADD_PROJECT_DES).setValue(des);
+      // $(ELEMENT_ADD_PROJECT_DES).setValue(des);
     }
     if (enableCalendar) {
       info("Enable Calendar intergration");
@@ -155,7 +155,7 @@ public class ManagementProjects {
 
   /**
    * Open a project
-   * 
+   *
    * @param projectPath is project's names as Project1/sub_Project1
    */
   public void selectProject(String projectPath) {
@@ -171,7 +171,7 @@ public class ManagementProjects {
 
   /**
    * Edit a project
-   * 
+   *
    * @param projectPath is project's names as Project1/sub_Project1
    * @param title is a new project's title to edit
    * @param des is a new description of the project to edit
@@ -181,46 +181,38 @@ public class ManagementProjects {
    *          opt[1]==true if want to enable calendar integration >0 and <1 if
    *          want to disable or uncheck calendar integration
    */
-  public void editProject(String projectPath, String title, String des, boolean... opt) {
+  public void editProject(String projectPath, String title,String newTitle, String des, boolean... opt) {
     $(byText(projectPath)).click();
-    $(byText(projectPath)).parent().parent().find(byClassName("uiIconRightMenu")).click();
-    $(byClassName("uiDropdownWithIcon")).waitUntil(Condition.appears,Configuration.timeout);
-    $(byId("taskManagement")).find(byText("Edit")).click();
-    if (title != null || title != "") {
+    $(byText(projectPath)).parent().parent().find(ELEMENT_ICON_PROJECT).click();
+    ELEMENT_MENU_PROJECT.waitUntil(Condition.appears,Configuration.timeout);
+    ELEMENT_EDIT_PROJECT_OPTION.click();
+    if (title != null && title != "") {
       info("Input title");
-      if (opt.length > 0 && opt[0] == true)
-        evt.type(ELEMENT_ADD_PROJECT_TITLE, title, false);// Input a new title
-                                                          // with keeping old
-                                                          // title
-      else
-        $(ELEMENT_ADD_PROJECT_TITLE).setValue(title);// Input a new title
-                                                         // with clearing all
-                                                         // old title
+      ELEMENT_POPUB_EDIT_PROJECT.find(byText(title)).click();
+      ELEMENT_EDIT_PROJECT.setValue(newTitle).pressEnter();// Input a new title
+      // with clearing all
+      // old title
     }
-    if (des != null || des != "") {
+    if (des != null && des != "") {
       info("Input description");
-      if (opt.length > 0 && opt[0] == true)
-        evt.type(ELEMENT_ADD_PROJECT_DES, des, false);// Input a new description
-                                                      // with keeping old
-                                                      // description
-      else
-        evt.type(ELEMENT_ADD_PROJECT_DES, des, true);// Input a new description
-                                                     // with clearing all old
-                                                     // description
+      $(byClassName("prjDescription")).click();
     }
 
-    if (opt.length > 1 && opt[1] == true) {
+    if (opt.length >= 1 && opt[0] == true) {
       info("Enable Calendar intergration");
-      evt.check(ELEMETN_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX, 2);
+      ELEMETN_EDIT_PROJECT_ENABLE_CALENDAR_CHECKBOX.click();
     } else {
       info("Disable Calendar intergration");
       evt.uncheck(ELEMETN_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX, 2);
     }
+    saveEditProject();
   }
   public void deleteProject(String title){
     $(byText(title)).click();
-    $(byText(title)).parent().parent().find(byClassName("uiIconRightMenu")).click();
-    $(byText("Delete")).click();
+    $(byText(title)).parent().parent().find(ELEMENT_ICON_PROJECT).click();
+    ELEMENT_DELETE_PROJECT_OPTION.click();
+    ELEMENT_CONFIRM_DELETE.click();
+
 
   }
 
@@ -229,6 +221,7 @@ public class ManagementProjects {
    */
   public void saveEditProject() {
     info("Click on Save button");
+    ELEMENT_BUTTON_SAVE.click();
   }
 
   /**
@@ -240,7 +233,7 @@ public class ManagementProjects {
 
   /**
    * Change Project Parent
-   * 
+   *
    * @param project
    */
   public void changeParentProject(String project) {
