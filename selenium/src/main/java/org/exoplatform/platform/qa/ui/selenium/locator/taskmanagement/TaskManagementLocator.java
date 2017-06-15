@@ -40,7 +40,9 @@ public class TaskManagementLocator {
   public static final SelenideElement ELEMENT_PROJECT_ICON_ADD_PROJECT=$(byXpath("//*[@id=\"taskManagement\"]/div[1]/ul/li[2]/div/a[2]"));
   public static final SelenideElement ELEMENT_ADD_PROJECT=$(byText("Add Project"));
   // Labels area
-
+  public static final SelenideElement ELEMENT_LABEL_ICON_ADD_LABEL=$(byXpath("//*[@id=\"taskManagement\"]/div[1]/ul/li[3]/div[1]/a[2]/i"));
+  public static final SelenideElement ELEMENT_ADD_LABEL=$(byText("Add Label"));
+  public static final SelenideElement ELEMENT_INPUT_LABEL=$(byClassName("addLabelInput"));
   /**********************************************************
    * CENTRAL PANEL
    ******************************************************/
