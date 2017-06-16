@@ -111,16 +111,19 @@ public class SOCHomePageTestIT extends Base {
     // click on the button comment
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitWhile(Condition.disabled,Configuration.timeout);
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).doubleClick();
+    if($(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).isDisplayed()){
+      $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).click();
+    }
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears,Configuration.timeout);
     info("Test 15: Delete comment");
     // scroll up
     executeJavaScript("window.scrollBy(0,-550)");
     // hover on the comment to appear the delete button
-    ELEMENT_COMMENT_DESCRIPTION.find(byClassName(ELEMENT_DATE_COMMENT))
-                               .waitUntil(Condition.appears, Configuration.timeout)
-                               .hover();
+    $(byText(comment)).hover();
+
+
     // the id of the comment is id of the activity+1
-    Integer idComment = Integer.parseInt(id) + 1;
+    Integer idComment = Integer.parseInt(id)+1;
     $(byId(ELEMENT_COMMENT_DELETE.replace("{id}", idComment.toString()))).click();
     // Confirm
     $(ELEMENT_DELETE_POPUP_OK).click();

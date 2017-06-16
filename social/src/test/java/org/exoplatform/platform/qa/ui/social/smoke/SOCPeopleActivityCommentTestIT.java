@@ -199,6 +199,9 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     // click on the button comment
 
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.enabled, Configuration.timeout).doubleClick();
+    if ($(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).isDisplayed()){
+      $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).click();
+    }
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
     manageLogInOut.signIn("root", "gtn");
