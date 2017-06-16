@@ -110,6 +110,7 @@ public class SOCHomePageTestIT extends Base {
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
     $(byText(activity1)).click(); //click on text while waiting for comment button will be enabled because there is a problem with disabled/enabled condition
     // click on the button comment
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitWhile(Condition.disabled,Configuration.timeout);
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).click();
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears,Configuration.timeout);
     info("Test 15: Delete comment");
