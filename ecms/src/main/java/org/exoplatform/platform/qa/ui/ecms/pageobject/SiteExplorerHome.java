@@ -160,7 +160,7 @@ public class SiteExplorerHome {
   public void deleteData(String title, boolean... destination) {
     boolean verify = (destination.length > 0 ? destination[0] : false);
     info("Click on File Explorer icon");
-    // scroll de 10 pixel
+    // scroll de 50 pixel
     executeJavaScript("window.scrollBy(0,50);", "");
     $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
 
