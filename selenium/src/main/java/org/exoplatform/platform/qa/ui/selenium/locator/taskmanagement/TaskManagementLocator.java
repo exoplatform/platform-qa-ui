@@ -1,5 +1,7 @@
 package org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.openqa.selenium.By;
@@ -43,7 +45,9 @@ public class TaskManagementLocator {
   public static final SelenideElement ELEMENT_LABEL_ICON_ADD_LABEL=$(byXpath("//*[@id=\"taskManagement\"]/div[1]/ul/li[3]/div[1]/a[2]/i"));
   public static final SelenideElement ELEMENT_ADD_LABEL=$(byText("Add Label"));
   public static final SelenideElement ELEMENT_INPUT_LABEL=$(byClassName("addLabelInput"));
-  /**********************************************************
+    public static final SelenideElement ELEMENT_LABEL_BUTTON_CONFIRM_DELETE=$(byClassName("confirmDelete"));
+
+    /**********************************************************
    * CENTRAL PANEL
    ******************************************************/
 
@@ -112,8 +116,12 @@ public static final SelenideElement ELEMENT_CONFIRM_DELETE=$(byClassName("confir
   // Management*****************************************//
 
   // Labels-->General
+public static final SelenideElement ELEMENT_SAVE_EDIT_LABEL=$(byXpath("//*[@id=\"taskManagement\"]/div[4]/div/div[2]/div/div[2]/button[1]"));
+ public static final By ELEMENT_ICON_OPEN_MENU_LABEL=byClassName("uiIconRightMenu");
+ public static final SelenideElement ELEMENT_OPEN_MENU_EDIT_LABEL=$(byId("taskManagement")).waitUntil(Condition.appears, Configuration.timeout).find(byText("Edit"));
+    public static final SelenideElement ELEMENT_OPEN_MENU_DELETE_LABEL=$(byId("taskManagement")).waitUntil(Condition.appears, Configuration.timeout).find(byText("Delete"));
 
-  // Add labels form
+ // Add labels form
 
   // Edit labels form
 
