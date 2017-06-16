@@ -50,9 +50,7 @@ public class TaskManagementLocator {
   public static final SelenideElement ELEMENT_LABEL_BUTTON_CONFIRM_DELETE=$(byClassName("confirmDelete"));
 
     /**********************************************************
-=======
   /**********************************************************
->>>>>>> add label to task
    * CENTRAL PANEL
    ******************************************************/
 
