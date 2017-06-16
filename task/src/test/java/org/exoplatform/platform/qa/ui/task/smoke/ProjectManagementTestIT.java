@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.task.smoke;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.task.pageobject.ManagementProjects;
@@ -19,7 +20,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
  */
 @Tag("smoke")
 @Tag("task")
-public class ProjectManagement extends Base {
+public class ProjectManagementTestIT extends Base {
     HomePagePlatform homePagePlatform;
     ManagementProjects managementProjects;
     ManagementTasks managementTasks;
@@ -48,7 +49,7 @@ public class ProjectManagement extends Base {
       info("delete project");
         managementProjects.deleteProject(newTitle);
     info("verify project deleted");
-        $(byText(newTitle)).shouldNot(Condition.exist);
+        $(byText(newTitle)).waitUntil(Condition.disappears, Configuration.timeout);
 
         }
 
@@ -65,6 +66,7 @@ public class ProjectManagement extends Base {
         managementTasks.editTask(task,newTask,"High");
         info("delete task");
         managementTasks.deleteTask(newTask);
+        managementProjects.deleteProject(title);
 
     }
 }

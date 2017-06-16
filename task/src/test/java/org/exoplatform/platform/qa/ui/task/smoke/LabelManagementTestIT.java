@@ -20,7 +20,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
  */
 @Tag("smoke")
 @Tag("task")
-public class LabelManagement extends Base {
+public class LabelManagementTestIT extends Base {
 
     ManagementLabels managementLabels;
     HomePagePlatform homePagePlatform;
@@ -48,7 +48,7 @@ public class LabelManagement extends Base {
     }
 
     @Test
-    public void test04_addLabelToTask(){
+    public void test04_addTaskInLabel(){
         String task="task"+getRandomNumber();
         String label="label"+getRandomNumber();
         info("add task");
@@ -57,6 +57,9 @@ public class LabelManagement extends Base {
         $(byText(label)).click();
         managementTasks.addTask(task);
         ELEMENT_TASKS_LIST.find(byText(task)).parent().find(byText(label)).should(Condition.exist);
+        homePagePlatform.goToTaskPage();
+        managementTasks.deleteTask(task);
+        managementLabels.deleteLabel(label);
 
     }
 }
