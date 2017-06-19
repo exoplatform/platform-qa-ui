@@ -1532,6 +1532,6 @@ public final class SocialLocator {
   public static final SelenideElement ELEMENT_MY_SPACE_SEARCH_TEXT=$(byXpath("//*[@id=\"UISpaceSearch\"]/div[2]/div/div/div[1]/input"));
   public static final SelenideElement ELEMENT_SPACES_LIST=$(byClassName("tab-content"));
   public static final SelenideElement ELEMENT_SPACE_FORUMS_TAB=$(byId("spaceMenuTab")).find(byText("Forums"));
-public static final SelenideElement ELEMENT_INPUT_INVITE_USER=$(byXpath("//*[@id=\"UIUserInvitation\"]/div[2]/div[2]/div/div[1]/input"));
-public static final SelenideElement ELEMENT_ALERT_NOTIFICATION_EXIST=$(byXpath("//*[@id=\"UINotificationPopoverToolbarPortlet\"]/div[2]/a/i/span"));
+  public static final SelenideElement ELEMENT_INPUT_INVITE_USER=$(byXpath("//*[@id=\"UIUserInvitation\"]/div[2]/div[2]/div/div[1]/input"));
+  public static final SelenideElement ELEMENT_ALERT_NOTIFICATION_EXIST=$(byXpath("//*[@id=\"UINotificationPopoverToolbarPortlet\"]/div[2]/a/i/span"));
 }

@@ -50,8 +50,8 @@ public class HomePagePlatform {
    * Go to Home page
    */
   public void goToHomePage() {
-      info("Click on Home link of intranet page");
-      $(ELEMENT_HOME_LINK_PLF).click();
+    info("Click on Home link of intranet page");
+    $(ELEMENT_HOME_LINK_PLF).click();
   }
 
   /**
@@ -144,7 +144,7 @@ public class HomePagePlatform {
     info("Go to space " + space);
 
     ELEMENT_SPECIFIC_PANEL.find(byText(space)).click();
-   
+
   }
 
   /**
@@ -167,22 +167,22 @@ public class HomePagePlatform {
     info("Open drop menu");
     evt.click(ELEMENT_HOMEPAGE_DROP_MENU_ARROW);
     switch (type) {
-    case My_Activities:
-      info("Select My Activities");
-      evt.click(ELEMENT_HOMEPAGE_DROP_MENU_MY_ACTIVITIES);
-      break;
-    case All_Activities:
-      info("Select All Activities");
-      evt.click(ELEMENT_HOMEPAGE_DROP_MENU_ALL_ACTIVITIES);
-      break;
-    case My_Spaces:
-      info("Select My Spaces");
-      evt.click(ELEMENT_HOMEPAGE_DROP_MENU_MY_SPACES);
-      break;
-    case Connections:
-      info("Select Connections");
-      evt.click(ELEMENT_HOMEPAGE_DROP_MENU_CONNECTIONS);
-      break;
+      case My_Activities:
+        info("Select My Activities");
+        evt.click(ELEMENT_HOMEPAGE_DROP_MENU_MY_ACTIVITIES);
+        break;
+      case All_Activities:
+        info("Select All Activities");
+        evt.click(ELEMENT_HOMEPAGE_DROP_MENU_ALL_ACTIVITIES);
+        break;
+      case My_Spaces:
+        info("Select My Spaces");
+        evt.click(ELEMENT_HOMEPAGE_DROP_MENU_MY_SPACES);
+        break;
+      case Connections:
+        info("Select Connections");
+        evt.click(ELEMENT_HOMEPAGE_DROP_MENU_CONNECTIONS);
+        break;
     }
   }
 
