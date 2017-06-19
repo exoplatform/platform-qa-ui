@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.plf.smoke.social;
+package org.exoplatform.platform.qa.ui.platform.social;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;

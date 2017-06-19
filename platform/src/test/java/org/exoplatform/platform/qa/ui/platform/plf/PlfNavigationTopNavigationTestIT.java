@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.plf.smoke.plf;
+package org.exoplatform.platform.qa.ui.platform.plf;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;

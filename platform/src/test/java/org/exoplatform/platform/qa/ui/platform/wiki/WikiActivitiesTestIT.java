@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.plf.smoke.wiki;
+package org.exoplatform.platform.qa.ui.platform.wiki;
 
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
