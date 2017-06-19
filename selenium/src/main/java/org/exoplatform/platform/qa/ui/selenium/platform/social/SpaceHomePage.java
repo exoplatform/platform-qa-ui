@@ -1,10 +1,13 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -39,9 +42,9 @@ public class SpaceHomePage {
       evt.click(ELEMENT_SPACE_MENU_MORE, 2);
       evt.clickByJavascript(ELEMENT_SPACE_SPACE_SETTINGS);
     } else
-      evt.clickByJavascript(ELEMENT_SPACE_SPACE_SETTINGS);
+      $(ELEMENT_SPACE_SPACE_SETTINGS).click();
 
-    evt.waitForAndGetElement(ELEMENT_SPACE_SPACE_SETTINGS_TITLE, 3000, 1);
+    $(ELEMENT_SPACE_SPACE_SETTINGS_TITLE).waitUntil(Condition.appears,Configuration.timeout);
     info("Space setting page is shown");
   }
 
@@ -51,10 +54,15 @@ public class SpaceHomePage {
   public void goToWikiTab() {
     info("--Open Wiki tab of the space");
     info("Click on the tab");
-    evt.waitForAndGetElement(ELEMENT_SPACE_WIKI_TAB, 3000, 0).click();
+    $(ELEMENT_SPACE_WIKI_TAB).waitUntil(Condition.appears, Configuration.timeout).click();
     info("wiki page is shown");
   }
-
+  public void goToForumsTab() {
+    info("--Open Wiki tab of the space");
+    info("Click on the tab");
+    $(ELEMENT_SPACE_FORUMS_TAB).waitUntil(Condition.appears, Configuration.timeout).click();
+    info("wiki page is shown");
+  }
   /**
    * Open a space from left menu
    * 

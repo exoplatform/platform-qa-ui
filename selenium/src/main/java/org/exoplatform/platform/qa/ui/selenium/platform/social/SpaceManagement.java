@@ -54,7 +54,7 @@ public class SpaceManagement {
   public void deleteSpace(String spaceName, Boolean isVerify) {
     if ($(byText(spaceName)).is(Condition.exist)) {
       info("Do delete space");
-      $(byText("Delete")).click();
+      ELEMENT_SPACES_LIST.find(byText(spaceName)).parent().parent().parent().find(byText("Delete")).click();
       if (isVerify)
         alert.verifyAlertMessage(ELEMENT_SPACE_CONFIRM_DELETE);
       $(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON).click();
@@ -254,8 +254,8 @@ public class SpaceManagement {
    */
   public void goToInvitationsReceivedTab() {
     info("Open Invitation Received tab");
-    evt.waitForAndGetElement(ELEMENT_MY_SPACE_INVITATION_RECEIVED, 3000, 0);
-    evt.click(ELEMENT_MY_SPACE_INVITATION_RECEIVED);
+   $(ELEMENT_MY_SPACE_INVITATION_RECEIVED).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_MY_SPACE_INVITATION_RECEIVED).click();
 
 
   }
@@ -277,7 +277,7 @@ public class SpaceManagement {
    */
   public void sendARequestToASpace(String space, boolean... isVerify) {
     info("Send a request to a space");
-    evt.waitForAndGetElement(ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_TO_JOIN_BTN.replace("${space}", space), 2000, 0).click();
+    $(byText(space)).parent().parent().parent().find(ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_TO_JOIN_BTN).waitUntil(Condition.appears,Configuration.timeout).click();
     if (isVerify.length > 0) {
       info("Verify that request to join button is hidden and request pending status is shown");
       evt.waitForAndGetElement(ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_PENDING.replace("${space}", space), 3000, 1);

@@ -276,6 +276,7 @@ public final class SocialLocator {
   // Request to join space
   public static final String ELEMENT_REQUEST_JOIN_SPACE_JUST_NOW                               =
           "//*[contains(@alt,'${userName}')]/../..//*[contains(text(),'has requested access to')]//*[contains(text(),'${space}')]/../..//*[@class='lastUpdatedTime' and contains(text(),'Just Now')]";
+  public static final String ELEMENT_RESQUEST_JOIN_SPACE="{username} has requested access to {space} space.";
   public static final String ELEMENT_REQUEST_JOIN_SPACE_NO_TIME                                =
           "//*[contains(@alt,'${userName}')]/../..//*[contains(text(),'has requested access to')]//*[contains(text(),'${space}')]";
   public static final String ELEMENT_LIKE_IN_ACTIVITY_VIEWER                                   = "//*[contains(@id,'LikeLink')]";
@@ -1062,8 +1063,8 @@ public final class SocialLocator {
   // All Spaces tab
   public static final By     ELEMENT_MY_SPACE_ALL_SPACES_TAB                                   =
           By.xpath(".//*[@id='UIPage']//*[contains(@href,'all-spaces')]");
-  public static final String ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_TO_JOIN_BTN                   =
-          ".//*[contains(text(),'${space}')]/../../..//button[text()='Request to Join']";
+  public static final By ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_TO_JOIN_BTN                   =
+          byText("Request to Join");
   public static final String ELEMENT_MY_SPACE_ALL_SPACES_JOIN_BTN                              =
           ".//*[contains(text(),'${space}')]/../../..//button[text()='Join']";
   public static final String ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_PENDING                       =
@@ -1143,7 +1144,7 @@ public final class SocialLocator {
   public static final By     ELEMENT_SEARCH_INPUT_USER_NAME                                    =
           By.xpath(".//*[@id='Quick Search']");
   public static final By     ELEMENT_SEARCH_USERS_ICON                                         =
-          By.xpath(".//*[@id='UIUserSelector']//*[contains(@class,'uiIconSearch')]");
+          By.xpath("//*[@id=\"SearchButton\"]");
   public static final By     ELEMENT_INPUT_USER                                                = By.xpath(".//*[@id='user']");
   public static final By     ELEMENT_SELECT_USER_FROM_GROUP                                    =
           By.xpath(".//*[@id='UISpaceMember']//*[contains(@class,'uiIconGroup')]");
@@ -1413,8 +1414,12 @@ public final class SocialLocator {
   public static final By     ELEMENT_SPACE_SPACE_SETTINGS_TITLE                                =
           By.xpath(".//*[@id='UISpaceSettingPortlet']/h3[text()='Space Configuration']");
   // Members tab
-  public static final By     ELEMENT_SPACE_SETTINGS_MEMBERS_TAB                                =
-          By.xpath(".//*[contains(@data-target,'#UISpaceMember-tab')]");
+  public static final SelenideElement     ELEMENT_SPACE_SETTINGS_MEMBERS_TAB                                =
+          $(byId("UISpaceMenu")).find(byText("Members"));
+  public static final SelenideElement     ELEMENT_SPACE_SETTINGS_MEMBERS_TAB_IN_SETTING_TAB                                =
+          $(byId("UISpaceSettingPortlet")).find(byText("Members"));
+  public static final By ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB=byClassName("uiIconValidate");
+  public static final By ELEMENT_ICON_DECLINE_SPACE_REQUEST_IN_MEMBERS_TAB=byClassName("uiIconRemove");
   public static final By     ELEMENT_SPACE_MEMBERS_SELECT_USER                                 =
           By.xpath("//*[@id='UISpaceMember']//*[@class='uiIconUser uiIconLightGray']");
   public static final By     ELEMENT_ADD                                                       =
@@ -1525,4 +1530,8 @@ public final class SocialLocator {
   public static final String ELEMENT_SPACE_LEFT_MENU_SPACE_NAME                                =
           ".//*[@id='UISpaceNavigationPortlet']//*[contains(text(),'${name}')]";
   public static final SelenideElement ELEMENT_MY_SPACE_SEARCH_TEXT=$(byXpath("//*[@id=\"UISpaceSearch\"]/div[2]/div/div/div[1]/input"));
+  public static final SelenideElement ELEMENT_SPACES_LIST=$(byClassName("tab-content"));
+  public static final SelenideElement ELEMENT_SPACE_FORUMS_TAB=$(byId("spaceMenuTab")).find(byText("Forums"));
+public static final SelenideElement ELEMENT_INPUT_INVITE_USER=$(byXpath("//*[@id=\"UIUserInvitation\"]/div[2]/div[2]/div/div[1]/input"));
+public static final SelenideElement ELEMENT_ALERT_NOTIFICATION_EXIST=$(byXpath("//*[@id=\"UINotificationPopoverToolbarPortlet\"]/div[2]/a/i/span"));
 }

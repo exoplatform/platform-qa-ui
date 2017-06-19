@@ -44,6 +44,7 @@
     <module>forum</module>
     <module>wiki</module>
     <module>gatein</module>
+    <module>platform</module>
   </modules>
   <scm>
     <connection>scm:git:git://github.com/exoplatform/platform-qa-ui.git</connection>

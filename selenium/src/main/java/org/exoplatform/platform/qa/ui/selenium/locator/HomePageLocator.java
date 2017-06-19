@@ -64,6 +64,7 @@ public final class HomePageLocator {
 
   public static final By ELEMENT_CALENDAR_LINK_PLF =
           By.xpath("//*[@data-original-title='Calendar']");
+  public static final SelenideElement ELEMENT_TASKS_LINK_PLF= $(byClassName("uiCompanyNavigations")).find(byText("Tasks"));
 
   public static final By ELEMENT_CONNECTION_LINK_PLF =
           By.xpath("//*[@data-original-title='Connections']");
@@ -84,8 +85,8 @@ public final class HomePageLocator {
   public static final String ELEMENT_LEFT_PANEL =
           "//*[@class='uiCompanyNavigations']//*[contains(text(),'{$name}')]";
 
-  public static final String ELEMENT_SPECIFIC_PANEL =
-          "//*[@id='UISpaceNavigationPortlet']//*[contains(text(),'{$space}')]";
+  public static final SelenideElement ELEMENT_SPECIFIC_PANEL =$(byId("UISpaceNavigationPortlet"));
+
 
   // right panel
   public static final String ELEMENT_SUGGESTIONS_USER =

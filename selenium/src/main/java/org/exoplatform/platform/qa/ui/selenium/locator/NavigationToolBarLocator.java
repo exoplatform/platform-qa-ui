@@ -21,7 +21,8 @@
 package org.exoplatform.platform.qa.ui.selenium.locator;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import static com.codeborne.selenide.Selectors.byText;
+
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 public final class NavigationToolBarLocator {
   // Tool bar
@@ -220,6 +221,7 @@ public final class NavigationToolBarLocator {
           By.xpath("//*[@id='UICreateList']//*[@class='uiIconUIForms']");
   public static final By ELEMENT_ADD_EVENT_CLASS_TOOLBAR =
           By.xpath("//*[@id='UICreateList']//*[@class='uiIconPLFEventTask']");
+  public static final SelenideElement ELEMENT_ADD_TASK_CLASS_TOOLBAR=$(byXpath("//*[@id=\"UICreateList\"]/li[1]/a"));
   public static final By ELEMENT_UPLOAD_FILE_TOOLBAR =
           By.xpath("//*[@id='UICreateList']//*[@class='uiIconUpload']");
   public static final By ELEMENT_NEXT_BUTTON =
@@ -234,8 +236,8 @@ public final class NavigationToolBarLocator {
   // add poll/topic
   public static final By ELEMENT_ADD_POLL_SET_LOCATION =
           By.xpath("//*[@id='ScrollSelectlocation']//*[@class='btn dropdown-toggle']");
-  public static final By ELEMENT_SELECT_FORUM_COMBOBOX =
-          By.xpath(".//*[@id='uiForumFilterforumId']//div[@class='btn dropdown-toggle']");
+  public static final SelenideElement ELEMENT_SELECT_FORUM_COMBOBOX =
+          $(byId("uiForumFilterforumId"));
   public static final String ELEMENT_SELECT_FORUM_NAME =
           ".//*[@id='uiForumFilterforumId']//*[contains(text(),'${forum}')]";
   // event or task
@@ -262,4 +264,7 @@ public final class NavigationToolBarLocator {
   public static final SelenideElement ELEMENT_ADMINISTRATION_COMMUNITY=$(byText("Community"));
   public static final SelenideElement ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY=$(byText("Manage Community"));
   public static final SelenideElement ELEMENT_ADMINISTRATION_ADD_USERS=$(byText("Add Users"));
+public  static final SelenideElement ELEMENT_TASK_ADD_TITLE=$(byId("title"));
+public static final SelenideElement ELEMENT_TASK_BUTTON_ADD=$(byXpath("//*[@id=\"QuickAddTaskContainer\"]/div[2]/a[1]"));
+public static final SelenideElement ELEMENT_ALERT_EXIST_NOTIFICATION=$(byXpath("//*[@id=\\\"UINotificationPopoverToolbarPortlet\\\"]/div[2]/a/i/span"));
 }

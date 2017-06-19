@@ -1071,4 +1071,5 @@ public class ECMSLocator {
   public static final String SHARE_ACCESS_CAN_EDIT                                                = "Can Edit";
 public static final SelenideElement ElEMENT_PRESENTATION_CONTAINER= $(byClassName("UIPresentationContainer"));
 public static final SelenideElement ELEMENT_INCON_ADD_PATH=$(byClassName("uiIconAddPath"));
+public static final SelenideElement ELEMENT_CONTENT_LIST=$(byId("UITreeExplorer"));
 }

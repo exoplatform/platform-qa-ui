@@ -1,5 +1,7 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -7,6 +9,8 @@ import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -59,8 +63,11 @@ public class SpaceSettingManagement {
    */
   public void goToMemberTab() {
     info("Open members tab");
-    evt.click(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB);
-    evt.waitForAndGetElement(ELEMENT_SPACE_MEMBERS_SELECT_USER, 2000, 1);
+    $(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB).click();
+    $(byClassName("uiGrayLightBox")).waitUntil(Condition.appears,Configuration.timeout);
+  }
+  public void goToMemberTabInSpaceSettingTab(){
+    ELEMENT_SPACE_SETTINGS_MEMBERS_TAB_IN_SETTING_TAB.click();
   }
 
   /**
@@ -73,11 +80,9 @@ public class SpaceSettingManagement {
    */
   public void inviteUser(String userName, boolean verify, String fullName) {
     goToMemberTab();
-    info("Click on select user button");
-    evt.click(ELEMENT_SPACE_MEMBERS_SELECT_USER, 2);
-    info("--Search user " + testBase.getUser() + "--");
-    evt.type(ELEMENT_SEARCH_INPUT_USER_NAME, userName, true);
-    evt.click(ELEMENT_SEARCH_USERS_ICON, 2);
+    info("--Search user " );
+    ELEMENT_INPUT_INVITE_USER.sendKeys(userName);
+    $(ELEMENT_SEARCH_USERS_ICON).click();
 
     info("Select a user");
     evt.click(ELEMENT_SPACE_SELECT_USER_IN_FORM.replace("{$name}", userName), 2);
@@ -150,12 +155,11 @@ public class SpaceSettingManagement {
    */
   public void acceptRequest(String user) {
     info("OPen members tab");
-    evt.click(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB);
+    $(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB_IN_SETTING_TAB).click();
     info("Click on join button to remove user");
-    evt.click(ELEMENT_SPACE_MEMBERS_TAB_VALIDATE_REQUEST_jOINT.replace("${user}", user));
+    $(byText(user+" "+user)).parent().find(ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB).click();
     info("Verify that the member is shown in member list");
-    evt.waitForAndGetElement(ELEMENT_SPACE_DELETE_USER_BTN.replace("${user}", user), 2000, 1);
-  }
+    $(byText(user+" "+user)).waitUntil(Condition.appears,Configuration.timeout);  }
 
   /**
    * Decline a pending request to a space
@@ -253,7 +257,7 @@ public class SpaceSettingManagement {
   public void goToAccessEditTab() {
     info("Select Application tab");
     if (evt.waitForAndGetElement(ELEMENT_ACCESS_AND_EDIT_TAB, 3000, 0) != null)
-      evt.click(ELEMENT_ACCESS_AND_EDIT_TAB);
+      $(ELEMENT_ACCESS_AND_EDIT_TAB).click();
     else
       evt.click(ELEMENT_ACCESS_AND_EDIT_TAB_OF_POPUP);
     info("The tab is opened succcessfully");

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>platform-qa-ui</artifactId>
+    <groupId>org.exoplatform.platform.qa.ui</groupId>
+    <version>1.0.x-SNAPSHOT</version>
+  </parent>
+  <artifactId>platform-qa-ui-platform</artifactId>
+  <packaging>jar</packaging>
+  <name>eXo PLF:: QA - UI - Platform</name>
+  <description>UI Tests for Platform</description>
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>platform-qa-ui-commons</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>platform-qa-ui-calendar</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>platform-qa-ui-ecms</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>platform-qa-ui-forum</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>platform-qa-ui-gatein</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>platform-qa-ui-social</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>platform-qa-ui-wiki</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+</project>

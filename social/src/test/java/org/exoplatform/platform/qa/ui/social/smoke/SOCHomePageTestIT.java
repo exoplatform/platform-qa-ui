@@ -109,24 +109,25 @@ public class SOCHomePageTestIT extends Base {
     $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
     // click on the button comment
-    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.not(Condition.disabled), Configuration.timeout)
-                                                          .click();
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitWhile(Condition.disabled, Configuration.timeout);
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).doubleClick();
+    if ($(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).isDisplayed()) {
+      $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).click();
+    }
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears, Configuration.timeout);
+    info("Test 15: Delete comment");
     // scroll up
     executeJavaScript("window.scrollBy(0,-550)");
-    info("Test 15: Delete comment");
-
     // hover on the comment to appear the delete button
-    ELEMENT_COMMENT_DESCRIPTION.find(byClassName(ELEMENT_DATE_COMMENT))
-                               .waitUntil(Condition.appears, Configuration.timeout)
-                               .hover();
+    $(byText(comment)).hover();
+
     // the id of the comment is id of the activity+1
     Integer idComment = Integer.parseInt(id) + 1;
     $(byId(ELEMENT_COMMENT_DELETE.replace("{id}", idComment.toString()))).click();
     // Confirm
     $(ELEMENT_DELETE_POPUP_OK).click();
     // verify that the comment is deleted
-    $(byText("test")).shouldNot(Condition.exist);
+    $(byText(comment)).shouldNot(Condition.exist);
     // hover on the activity to appear the delete button
     $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).hover();
     // click on delete button

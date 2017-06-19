@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.selenium.locator.wiki;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
@@ -11,8 +12,7 @@ public class WikiLocators {
 
   // *====================================================HOME
   // PAGE=================================================================*\\
-  public static final String ELEMENT_WIKI_PAGE_LINK                                     =
-                                                    ".//*[@class='uiLeftContainerArea']//div[@id='UITreeExplorer']//*[@id='iconTreeExplorer']//a[contains(text(),'${pageTitle}')]";
+  public static final SelenideElement ELEMENT_WIKI_PAGE_LINK                                     = $(byId("UITreeExplorer"));
 
   public static final By     ELEMENT_WIKI_HOME_PAGE_LINK                                =
                                                          By.xpath(".//*[@id='UIWikiBreadCrumb']//*[contains(text(),'Wiki Home')]");
