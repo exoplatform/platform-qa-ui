@@ -76,6 +76,7 @@ public class HomePagePlatform {
     ELEMENT_TASKS_LINK_PLF.waitUntil(Condition.appears, Configuration.timeout).click();
   }
 
+
   /**
    * Go to my spaces
    */
