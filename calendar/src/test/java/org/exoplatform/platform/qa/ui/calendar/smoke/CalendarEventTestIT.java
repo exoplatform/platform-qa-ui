@@ -46,7 +46,6 @@ public class CalendarEventTestIT extends Base {
    * Pre-Condition: Post-Condition:
    */
   @Test
-  @BugInPLF("CAL-1280")
   public void test13_14_15_AddEditDeleteAnEventInPersonalCalendar() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String calendar = "calendar" + getRandomNumber();

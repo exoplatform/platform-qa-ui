@@ -17,7 +17,6 @@ import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
@@ -119,11 +118,8 @@ public class CalendarHomePage {
     if (date != null && date != "") {
       switch (optionDay) {
       case DETAILTIME:
-        evt.scrollBarToGetElement(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$name", name)
-                                                                                           .replace("$date", date)));
-        // evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$name",
-        // name).replace("$date", date));
-        $(byText(name)).contextClick();
+
+        $(byText(name)).waitUntil(Condition.appears, Configuration.timeout).contextClick();
         break;
       case ALLDAY:
         evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ALL_DAY.replace("$name", name).replace("$date", date));
@@ -429,7 +425,7 @@ public class CalendarHomePage {
     case WEEK:
       switch (optionDay) {
       case DETAILTIME:
-        $(byText(name)).waitUntil(Condition.appears,Configuration.timeout);
+        $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
         break;
       case ALLDAY:
         evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WEEK_VIEW_ALL_DAY.replace("$name", name));
@@ -717,7 +713,6 @@ public class CalendarHomePage {
       break;
     }
 
-
   }
 
   /**
@@ -786,7 +781,6 @@ public class CalendarHomePage {
       info("You don't select a optionDay.Please select other optionDay.");
       break;
     }
-
 
   }
 
@@ -969,9 +963,10 @@ public class CalendarHomePage {
     goToRightMenuTaskEventFromAnyView(name, view, optionDay, date);
     $(ELEMENT_CONTEXT_MENU_DELETE).click();
     if (isVerify) {
-      if (isEvent)
+      if (isEvent) {
         alert.verifyAlertMessage(ELEMENT_CONFIRM_DELETE_EVENT_MSG);
-      else
+        $(ELEMENT_CONFIRM_DELETE_EVENT_MSG).waitUntil(Condition.disappears, Configuration.timeout);
+      } else
         alert.verifyAlertMessage(ELEMENT_CONFIRM_DELETE_TASK_MSG);
       testBase.getExoWebDriver().getWebDriver().navigate().refresh();
 
