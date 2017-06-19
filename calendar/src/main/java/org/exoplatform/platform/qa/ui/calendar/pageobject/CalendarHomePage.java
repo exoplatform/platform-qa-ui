@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
+import static com.codeborne.selenide.Selectors.byName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
@@ -119,11 +120,12 @@ public class CalendarHomePage {
     if (date != null && date != "") {
       switch (optionDay) {
       case DETAILTIME:
-        evt.scrollBarToGetElement(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$name", name)
-                                                                                           .replace("$date", date)));
+        //evt.scrollBarToGetElement(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$name", name)
+                                                                                           //.replace("$date", date)));
         // evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$name",
         // name).replace("$date", date));
-        $(byText(name)).contextClick();
+        $(byText(name)).scrollTo();
+        $(byText(name)).waitUntil(Condition.appears,Configuration.timeout).contextClick();
         break;
       case ALLDAY:
         evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ALL_DAY.replace("$name", name).replace("$date", date));
@@ -970,7 +972,8 @@ public class CalendarHomePage {
     $(ELEMENT_CONTEXT_MENU_DELETE).click();
     if (isVerify) {
       if (isEvent)
-        alert.verifyAlertMessage(ELEMENT_CONFIRM_DELETE_EVENT_MSG);
+      {alert.verifyAlertMessage(ELEMENT_CONFIRM_DELETE_EVENT_MSG);
+      $(ELEMENT_CONFIRM_DELETE_EVENT_MSG).waitUntil(Condition.disappears,Configuration.timeout);}
       else
         alert.verifyAlertMessage(ELEMENT_CONFIRM_DELETE_TASK_MSG);
       testBase.getExoWebDriver().getWebDriver().navigate().refresh();
