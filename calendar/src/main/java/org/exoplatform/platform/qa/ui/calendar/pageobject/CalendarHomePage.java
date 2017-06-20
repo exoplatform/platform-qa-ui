@@ -119,8 +119,8 @@ public class CalendarHomePage {
     if (date != null && date != "") {
       switch (optionDay) {
       case DETAILTIME:
-
         ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name)).waitUntil(Condition.appears, Configuration.timeout).contextClick();
+
         break;
       case ALLDAY:
         evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ALL_DAY.replace("$name", name).replace("$date", date));
