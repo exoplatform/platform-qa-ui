@@ -266,8 +266,6 @@ public class SOCPeopleActivityCommentTestIT extends Base {
 // click on the button comment
 
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter();
-
-
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
     $(ELEMENT_ADD_TOOTLBAR).click();
@@ -277,9 +275,10 @@ public class SOCPeopleActivityCommentTestIT extends Base {
      * deleting Expected Outcome: This comment is deleted.
      */
     // scroll up
-    executeJavaScript("window.scrollBy(0,-250);", "");
+    executeJavaScript("window.scrollBy(0,-550)");
     // hover on the comment to appear the delete button
     $(byId(ELEMENT_COMMENT_BLOC.replace("{id}",id))).hover();
+
     // the id of the comment is id of the activity+1
     Integer idComment = Integer.parseInt(id) + 1;
     $(byId("DeleteCommentButtoncomment" + idComment.toString())).click();
