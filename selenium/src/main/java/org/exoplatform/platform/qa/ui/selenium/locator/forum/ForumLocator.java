@@ -847,4 +847,6 @@ public class ForumLocator {
   public static final By     ELEMENT_CONFIRM                                    =
                                              By.xpath("//*[@id='UIForumPopupConfirmation']//*[contains(text(),'OK')]");
 public static final SelenideElement ELEMENT_POLL_CANCEL=$(byXpath("//*[@id=\"UIPollForm\"]/div[3]/button[3]"));
+public static final SelenideElement ELEMENT_ICON_SEARCH=$(byXpath("//*[@id=\"QuickSearchForm\"]/div[2]/a/i"));
+public static final SelenideElement ELEMENT_CONTENT_SEARCH_RESULT=$(byClassName("searchResult"));
 }

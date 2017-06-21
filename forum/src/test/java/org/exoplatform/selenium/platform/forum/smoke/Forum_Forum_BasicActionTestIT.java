@@ -1,13 +1,19 @@
 package org.exoplatform.selenium.platform.forum.smoke;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_DETAIL_FORUM_CATEGORY_TITLE;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_ICON_SEARCH;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_SEARCH_INPUT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_SEARCH_RESULT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.Selectors.*;
+import org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -158,5 +164,32 @@ public class Forum_Forum_BasicActionTestIT extends Base {
     forumCategoryManagement.deleteCategory(category2);
     forumCategoryManagement.deleteCategory(category1);
   }
+  @Test
+public void test05_SearchForum(){
 
+    String nameCat = "categorya" + getRandomString();
+    String nameForum = "foruma" + getRandomString();
+    String nameForum1 = "forumb" + getRandomString();
+    String nameForum2 = "forumc" + getRandomString();
+
+    info("go to Forum home page");
+    homePagePlatform.goToForum();
+    info("Add a category");
+    forumCategoryManagement.addCategorySimple(nameCat, "", nameCat);
+    info("Add a forum in the category");
+    forumForumManagement.addForumSimple(nameForum, "", nameForum);
+    forumForumManagement.addForumSimple(nameForum1, "", nameForum1);
+    forumForumManagement.addForumSimple(nameForum2, "", nameForum2);
+    info("search forum");
+    homePagePlatform.goToForum();
+    $(ELEMENT_SEARCH_TEXTBOX).setValue(nameForum);
+    ForumLocator.ELEMENT_ICON_SEARCH.click();
+    ELEMENT_CONTENT_SEARCH_RESULT.find(byText(nameForum)).should(Condition.exist);
+    ELEMENT_CONTENT_SEARCH_RESULT.find(byText(nameForum1)).shouldNot(Condition.exist);
+    ELEMENT_CONTENT_SEARCH_RESULT.find(byText(nameForum2)).shouldNot(Condition.exist);
+    info("delete data");
+    homePagePlatform.goToForum();
+    forumHomePage.goToHomeCategory();
+    forumCategoryManagement.deleteCategory(nameCat);
+}
 }
