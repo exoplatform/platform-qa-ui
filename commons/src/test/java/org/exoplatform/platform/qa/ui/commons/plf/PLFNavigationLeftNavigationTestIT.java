@@ -12,8 +12,8 @@ import org.openqa.selenium.By;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_RESULT_SEARCH_SPACE;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_SEARCH_SPACE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_SEARCH_RESULT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACE_NAME_INPUT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACE_PANEL;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -21,6 +21,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 /**
  * @author eXo
  */
+@Tag("smoke")
 public class PLFNavigationLeftNavigationTestIT extends Base {
 
   HomePagePlatform homePagePlatform;
@@ -40,7 +41,7 @@ public class PLFNavigationLeftNavigationTestIT extends Base {
    * <li> Test Case Name: Open a Space.</li>
    */
   @Test
-  @Tag("smoke")
+
   public void test03_OpenASpace() {
     info("Test 3: Open a Space");
     /*Step Number: 1
@@ -78,7 +79,6 @@ public class PLFNavigationLeftNavigationTestIT extends Base {
    * <li> Pre-Condition: spaces exists</li>
    */
   @Test
-  @Tag("smoke")
   public void test05_SearchSpaceInMYSPACES() {
     info("Test 5: Search space in MY SPACES");
     String space1 = "space1" + getRandomNumber();
@@ -136,5 +136,28 @@ public class PLFNavigationLeftNavigationTestIT extends Base {
     spaceManagement.deleteSpace(space1, false);
     spaceManagement.deleteSpace(space2, false);
 
+  }
+  @Test
+  public void test02_SearchSpaceFromHomeSearchBar(){
+    String space = "space" + getRandomNumber();
+    String space2 = "space" + getRandomNumber();
+    String space3 = "space" + getRandomNumber();
+    info("add 3 spaces");
+    homePagePlatform.goToMySpaces();
+    spaceManagement.addNewSpaceSimple(space, space);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.addNewSpaceSimple(space2, space2);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.addNewSpaceSimple(space3, space3);
+    info("search space");
+    homePagePlatform.goToHomePage();
+    ELEMENT_ICON_SEARCH.click();
+    ELEMENT_SEARCH_INPUT.setValue(space2);
+    ELEMENT_SEARCH_RESULT.shouldHave(Condition.exactText(space2));
+    info("delete data");
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
+    spaceManagement.deleteSpace(space2, false);
+    spaceManagement.deleteSpace(space3, false);
   }
 }
