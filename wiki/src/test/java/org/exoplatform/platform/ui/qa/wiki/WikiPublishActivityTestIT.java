@@ -4,6 +4,10 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_ICON_SEARCH;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_SEARCH_INPUT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_SEARCH_RESULT;
+
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Configuration;
@@ -136,5 +140,35 @@ public class WikiPublishActivityTestIT extends Base {
     homePagePlatform.goToHomePage();
     $(byText(title)).shouldNot(Condition.exist);
   }
+  @Test
+public void test03_SearchWikiPageFromHomeSearchBar(){
+    String title = "title" + getRandomNumber();
+    String content = "content" + getRandomNumber();
+    String title1 = "title" + getRandomNumber();
+    String content1 = "content" + getRandomNumber();
+    String title2 = "title" + getRandomNumber();
+    String content2 = "content" + getRandomNumber();
+    info("Create a new wiki page");
+    homePagePlatform.goToWiki();
+    wikiHomePage.goToAddBlankPage();
+    richTextEditor.addSimplePage(title, content);
+    wikiManagement.saveAddPage();
+    homePagePlatform.goToWiki();
+    wikiHomePage.goToAddBlankPage();
+    richTextEditor.addSimplePage(title1, content1);
+    wikiManagement.saveAddPage();
+    homePagePlatform.goToWiki();
+    wikiHomePage.goToAddBlankPage();
+    richTextEditor.addSimplePage(title2, content2);
+    wikiManagement.saveAddPage();
 
+    homePagePlatform.goToHomePage();
+    ELEMENT_ICON_SEARCH.click();
+    ELEMENT_SEARCH_INPUT.setValue(title);
+    ELEMENT_SEARCH_RESULT.shouldHave(Condition.exactText(title));
+    homePagePlatform.goToWiki();
+    wikiHomePage.deleteWiki(title);
+    wikiHomePage.deleteWiki(title1);
+    wikiHomePage.deleteWiki(title2);
+}
 }
