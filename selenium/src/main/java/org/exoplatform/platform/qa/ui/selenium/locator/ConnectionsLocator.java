@@ -51,4 +51,5 @@ public class ConnectionsLocator {
   public static final String ELEMENT_USER_LINK = "//*[@class='spaceTitle']//*[contains(@href,'${userName}')]";
   public static final String ELEMENT_USER_AVATAR = ".//*[@alt='${fullname}']";
   public static final SelenideElement ELEMENT_NAME_OF_PEOPLE= $(byXpath("//*[@id=\"uiTableProfileUserSearchInput\"]/div[1]/div/div/div[1]/input"));
+  public static final SelenideElement ELEMENT_CONTENT_PEOPLE=$(byXpath("//*[@id=\"UIAllPeople\"]/div[2]/div"));
 }
