@@ -1,11 +1,15 @@
 package org.exoplatform.platform.qa.ui.gatein;
 
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.conditions.Text;
+import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -31,6 +35,8 @@ public class GateinUserAndGroupManagementTestIT extends Base {
 
   UserAddManagement      useraddmanagement;
 
+  HomePagePlatform homePagePlatform;
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
@@ -38,6 +44,7 @@ public class GateinUserAndGroupManagementTestIT extends Base {
     navigationToolbar = new NavigationToolbar(this);
     userandgroupmanagement = new UserAndGroupManagement(this);
     useraddmanagement = new UserAddManagement(this);
+    homePagePlatform=new HomePagePlatform(this);
   }
 
   /**
@@ -175,4 +182,37 @@ public class GateinUserAndGroupManagementTestIT extends Base {
     userandgroupmanagement.deleteUser(username);
   }
 
+  @Test
+public void test11_SearchUserFromHomeSearchBar(){
+  String username = "username" + getRandomNumber();
+  String password = "password" + getRandomNumber();
+  String firstName = getRandomString();
+  String lastName = getRandomString();
+  String email = firstName + getRandomNumber() + "@gmail.com";
+
+  String username1 = "username1" + getRandomNumber();
+  String password1 = "password1" + getRandomNumber();
+  String firstName1 = getRandomString();
+  String lastName1 = getRandomString();
+  String email1 = firstName + getRandomNumber() + "@gmail.com";
+
+  String username2 = "username" + getRandomNumber();
+  String password2 = "password" + getRandomNumber();
+  String firstName2 = getRandomString();
+  String lastName2 = getRandomString();
+  String email2 = firstName + getRandomNumber() + "@gmail.com";
+  navigationToolbar.goToAddUser();
+  useraddmanagement.addUser(username, password, email, firstName, lastName);
+  useraddmanagement.addUser(username1, password1, email1, firstName1, lastName1);
+  useraddmanagement.addUser(username2, password2, email2, firstName2, lastName2);
+  homePagePlatform.goToHomePage();
+    ELEMENT_ICON_SEARCH.click();
+    ELEMENT_SEARCH_INPUT.setValue(firstName+" "+lastName);
+    ELEMENT_SEARCH_RESULT.shouldHave(Condition.exactText(firstName+" "+lastName));
+    navigationToolbar.goToManageCommunity();
+    userandgroupmanagement.deleteUser(username);
+    userandgroupmanagement.deleteUser(username1);
+    userandgroupmanagement.deleteUser(username2);
+
+}
 }
