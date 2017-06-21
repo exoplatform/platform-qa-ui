@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.calendar.pageobject;
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -120,6 +121,7 @@ public class CalendarHomePage {
       switch (optionDay) {
       case DETAILTIME:
         ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name)).waitUntil(Condition.appears, Configuration.timeout).contextClick();
+
 
         break;
       case ALLDAY:
@@ -965,6 +967,7 @@ public class CalendarHomePage {
     $(ELEMENT_CONTEXT_MENU_DELETE).click();
     if (isVerify) {
       if (isEvent) {
+        $(ELEMENT_CONFIRM_DELETE_EVENT_MSG).waitUntil(Condition.appears,Configuration.timeout);
         alert.verifyAlertMessage(ELEMENT_CONFIRM_DELETE_EVENT_MSG);
         $(ELEMENT_CONFIRM_DELETE_EVENT_MSG).waitUntil(Condition.disappears, Configuration.timeout);
       } else
