@@ -6,7 +6,6 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
-
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_ADMINISTRATION_COMMUNITY;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -100,6 +99,7 @@ public class SOCHomePageTestIT extends Base {
      * text field - input the comment and click comment Input Data: Expected
      * Outcome: - Comment will be shown in comment section of activity
      */
+
 
         String activity1 = "activity1" + getRandomNumber();
         String comment = "comment" + getRandomNumber();
