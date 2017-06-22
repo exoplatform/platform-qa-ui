@@ -1,12 +1,15 @@
 package org.exoplatform.platform.qa.ui.answer.pageobject;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -47,9 +50,9 @@ public class QuestionManagement {
   public void goToSubmitQuestion() {
     info("Open submin question form");
 
-    evt.waitForAndGetElement(ELEMENT_SUBMIT_QUESTION, testBase.getDefaultTimeout(), 1);
-    evt.clickByJavascript(ELEMENT_SUBMIT_QUESTION);
-    evt.waitForAndGetElement(ELEMENT_SUBMIT_QUESTION_FORM);
+    $(ELEMENT_SUBMIT_QUESTION).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_SUBMIT_QUESTION).click();
+    $(ELEMENT_SUBMIT_QUESTION_FORM).waitUntil(Condition.appears,Configuration.timeout);
   }
 
   /**
@@ -63,7 +66,7 @@ public class QuestionManagement {
   public void inputDataToQuestionForm(String title, String content, String language, String pathFile) {
     if (title != null && title != "") {
       info("input title");
-      evt.type(ELEMENT_SUBMIT_QUESTION_FORM_TITLE_INPUT, title, true);
+      $(ELEMENT_SUBMIT_QUESTION_FORM_TITLE_INPUT).setValue(title);
     }
 
     if (content != null && content != "") {
@@ -73,7 +76,7 @@ public class QuestionManagement {
 
     if (language != null && language != "") {
       info("input language");
-      evt.select(ELEMENT_SUBMIT_QUESTION_FORM_LANGUAGE_SELECT_BOX, language);
+     $(ELEMENT_SUBMIT_QUESTION_FORM_LANGUAGE_SELECT_BOX).selectOption(language);
     }
 
     if (pathFile != null && pathFile != "") {
@@ -100,7 +103,7 @@ public class QuestionManagement {
   public void goToActionOfQuestionByRightClick(String question, actionQuestionOption action) {
     info("Select action from menu");
 
-    evt.rightClickOnElement(ELEMENT_QUESTION_LIST_ITEM.replace("$question", question));
+    $(byText(question)).contextClick();
     switch (action) {
     case COMMENT:
       info("Comment question");
@@ -114,17 +117,17 @@ public class QuestionManagement {
       break;
     case EDIT:
       info("Edit question");
-      evt.click(ELEMENT_QUESTION_EDIT.replace("$question", question));
-      evt.waitForAndGetElement(ELEMENT_QUESTION_EDIT_FORM);
+      ELEMENT_QUESTION_EDIT.click();
+      $(ELEMENT_QUESTION_EDIT_FORM).waitUntil(Condition.appears,Configuration.timeout);
       break;
     case DELETE:
       info("Delete question");
-      evt.click(ELEMENT_QUESTION_DELETE.replace("$question", question));
-      evt.waitForAndGetElement(ELEMENT_QUESTION_DELETE_FORM);
+      ELEMENT_QUESTION_DELETE.click();
+      $(ELEMENT_QUESTION_DELETE_FORM).waitUntil(Condition.appears,Configuration.timeout);
       break;
     case MOVE:
       info("Move question");
-      evt.click(ELEMENT_QUESTION_MOVE.replace("$question", question));
+      $(ELEMENT_QUESTION_MOVE.replace("$question", question));
       evt.waitForAndGetElement(ELEMENT_QUESTION_MOVE_FORM);
       break;
     case SEND:
@@ -185,9 +188,9 @@ public class QuestionManagement {
   public void deleteQuestion(String question) {
     info("Delete question");
     goToActionOfQuestionByRightClick(question, actionQuestionOption.DELETE);
-    evt.waitForAndGetElement(ELEMENT_QUESTION_CONFIRM_DELETE);
-    evt.clickByJavascript(ELEMENT_QUESTION_DELETE_FORM_OK_BUTTON, 2);
-    evt.waitForElementNotPresent(ELEMENT_QUESTION_LIST_ITEM.replace("$question", question));
+   $(ELEMENT_QUESTION_CONFIRM_DELETE).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_QUESTION_DELETE_FORM_OK_BUTTON).click();
+    $(byText(question)).waitUntil(Condition.disappears,Configuration.timeout);
   }
 
   /**

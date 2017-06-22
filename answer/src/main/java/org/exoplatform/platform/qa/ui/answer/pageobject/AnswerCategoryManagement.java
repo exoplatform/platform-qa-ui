@@ -1,5 +1,7 @@
 package org.exoplatform.platform.qa.ui.answer.pageobject;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -8,7 +10,8 @@ import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_ADD_USERS_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -46,8 +49,8 @@ public class AnswerCategoryManagement {
   public void goToActionOfCategoryFromActionBar(actionCategoryOption action) {
     info("Select action from menu");
 
-    evt.waitForAndGetElement(ELEMENT_CATEGORY_BUTTON, testBase.getDefaultTimeout(), 1);
-    evt.click(ELEMENT_CATEGORY_BUTTON);
+    $(ELEMENT_CATEGORY_BUTTON).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_CATEGORY_BUTTON).click();
     switch (action) {
     case EDIT:
       info("Edit category");
@@ -57,9 +60,9 @@ public class AnswerCategoryManagement {
       break;
     case ADD:
       info("ADD category");
-      evt.waitForAndGetElement(ELEMENT_CATEGORY_ADD_BUTTON, testBase.getDefaultTimeout(), 1);
-      evt.click(ELEMENT_CATEGORY_ADD_BUTTON);
-      evt.waitForAndGetElement(ELEMENT_CATEGORY_ADD_FORM);
+      $(ELEMENT_CATEGORY_ADD_BUTTON).waitUntil(Condition.appears,Configuration.timeout);
+      $(ELEMENT_CATEGORY_ADD_BUTTON).click();
+      $(ELEMENT_CATEGORY_ADD_FORM).waitUntil(Condition.appears,Configuration.timeout);
       break;
     case EXPORT:
       info("EXPORT category");
@@ -94,7 +97,7 @@ public class AnswerCategoryManagement {
    */
   public void goToActionOfCategoryFromRightClick(String cat, actionCategoryOption action) {
     info("Select action from menu");
-    evt.rightClickOnElement(ELEMENT_CATEGORY_LIST_ITEM.replace("$category", cat));
+    $(byText(cat)).contextClick();
     switch (action) {
     case EDIT:
       info("Edit category");
@@ -137,8 +140,8 @@ public class AnswerCategoryManagement {
       break;
     case SUBMITQUESTION:
       info("SUBMITQUESTION category");
-      evt.click(ELEMENT_CATEGORY_RIGHT_SUBMIT_QUESTION_BUTTON);
-      evt.waitForAndGetElement(ELEMENT_SUBMIT_QUESTION_FORM);
+      $(ELEMENT_CATEGORY_RIGHT_SUBMIT_QUESTION_BUTTON).click();
+      $(ELEMENT_SUBMIT_QUESTION_FORM).waitUntil(Condition.appears,Configuration.timeout);
       break;
     case RSS:
       info("RSS category");
@@ -172,36 +175,36 @@ public class AnswerCategoryManagement {
     info("Input data to setting tab of category form");
     info("input category name");
     if (cat != null && cat != "") {
-      evt.type(ELEMENT_CATEGORY_ADD_CATEGORY_INPUT, cat, true);
+      $(ELEMENT_CATEGORY_ADD_CATEGORY_INPUT).setValue(cat);
     }
     info("input category order");
     if (order != null && order != "") {
-      evt.type(ELEMENT_CATEGORY_ADD_ORDER_INPUT, cat, true);
+      $(ELEMENT_CATEGORY_ADD_ORDER_INPUT).setValue(order);
     }
     info("input category des");
     if (des != null && des != "") {
-      evt.type(ELEMENT_CATEGORY_ADD_DESCRIPTION_INPUT, cat, true);
+      $(ELEMENT_CATEGORY_ADD_DESCRIPTION_INPUT).setValue(des);
     }
     info("input category moderator question");
     if (modQues != null) {
       if (modQues)
-        evt.check(ELEMENT_CATEGORY_ADD_MOD_QUES_CHECKBOX, 2);
+        $(ELEMENT_CATEGORY_ADD_MOD_QUES_CHECKBOX).click();
       else
-        evt.uncheck(ELEMENT_CATEGORY_ADD_MOD_QUES_CHECKBOX, 2);
+        $(ELEMENT_CATEGORY_ADD_MOD_QUES_CHECKBOX).click();
     }
     info("input category viewAuthor");
     if (viewAuthor != null) {
       if (viewAuthor)
-        evt.check(ELEMENT_CATEGORY_ADD_MOD_VIEW_CHECKBOX, 2);
+        $(ELEMENT_CATEGORY_ADD_MOD_VIEW_CHECKBOX).click();
       else
-        evt.uncheck(ELEMENT_CATEGORY_ADD_MOD_VIEW_CHECKBOX, 2);
+        $(ELEMENT_CATEGORY_ADD_MOD_VIEW_CHECKBOX).click();
     }
     info("input category modAnswer");
     if (modAnswer != null) {
       if (modAnswer)
-        evt.check(ELEMENT_CATEGORY_ADD_MOD_ANS_CHECKBOX, 2);
+        $(ELEMENT_CATEGORY_ADD_MOD_ANS_CHECKBOX).click();
       else
-        evt.uncheck(ELEMENT_CATEGORY_ADD_MOD_ANS_CHECKBOX, 2);
+        $(ELEMENT_CATEGORY_ADD_MOD_ANS_CHECKBOX).click();
     }
   }
 

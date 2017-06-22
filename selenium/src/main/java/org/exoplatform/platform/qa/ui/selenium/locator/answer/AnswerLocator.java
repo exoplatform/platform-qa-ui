@@ -20,7 +20,12 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.locator.answer;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byId;
+import static com.codeborne.selenide.Selenide.$;
 
 public class AnswerLocator {
 
@@ -344,12 +349,10 @@ public class AnswerLocator {
   public static final String ELEMENT_QUESTION_ANSWER                               =
                                                      "//*[@class='rightContent']//*[text()='$question']//ancestor::*[@class='rightContent']//*[@class='uiIconAnsAnswer uiIconLightGray']";
 
-  public static final String ELEMENT_QUESTION_EDIT                                 =
-                                                   "//*[@class='rightContent']//*[text()='$question']//ancestor::*[@class='rightContent']//*[@class='uiIconEdit uiIconLightGray']";
-
-  public static final String ELEMENT_QUESTION_DELETE                               =
-                                                     "//*[@class='rightContent']//*[text()='$question']//ancestor::*[@class='rightContent']//*[@class='uiIconTrash uiIconLightGray']";
-
+  public static final SelenideElement ELEMENT_QUESTION_EDIT                                 =
+          $(byId("UIQuestions")).find(byClassName("uiIconEdit "));
+  public static final SelenideElement ELEMENT_QUESTION_DELETE                               =
+          $(byId("UIQuestions")).find(byClassName("uiIconTrash  "));
   public static final String ELEMENT_QUESTION_MOVE                                 =
                                                    "//*[@class='rightContent']//*[text()='$question']//ancestor::*[@class='rightContent']//*[@class='uiIconMove uiIconLightGray']";
 
