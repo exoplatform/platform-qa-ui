@@ -89,8 +89,8 @@ services:
     environment:
       HUB_PORT_4444_TCP_ADDR: selenium_hub
       HUB_PORT_4444_TCP_PORT: 4444
-      NODE_MAX_SESSION: 1
-      NODE_MAX_INSTANCES: 1
+      NODE_MAX_SESSION: 5
+      NODE_MAX_INSTANCES: 5
     networks:
       - front
 networks:
