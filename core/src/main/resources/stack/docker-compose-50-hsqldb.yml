@@ -23,7 +23,7 @@ version: '2'
 services:
   web:
     extends:
-      file: common-plf44-stack.yml
+      file: common-plf50-stack.yml
       service: web
     ports:
       - "80:80"
@@ -34,7 +34,7 @@ services:
       - mail
   exo:
     extends:
-      file: common-plf44-stack.yml
+      file: common-plf50-stack.yml
       service: exo
     container_name: exo
     environment:
@@ -56,11 +56,11 @@ services:
       - mail
   mongo:
     extends:
-      file: common-plf44-stack.yml
+      file: common-plf50-stack.yml
       service: mongo
   mail:
     extends:
-      file: common-plf44-stack.yml
+      file: common-plf50-stack.yml
       service: mail
     depends_on:
       - mongo
@@ -78,6 +78,8 @@ services:
     environment:
       HUB_PORT_4444_TCP_ADDR: selenium_hub
       HUB_PORT_4444_TCP_PORT: 4444
+      NODE_MAX_SESSION: 1
+      NODE_MAX_INSTANCES: 1
     networks:
       - front
   selenium_node_chrome:
@@ -87,6 +89,8 @@ services:
     environment:
       HUB_PORT_4444_TCP_ADDR: selenium_hub
       HUB_PORT_4444_TCP_PORT: 4444
+      NODE_MAX_SESSION: 1
+      NODE_MAX_INSTANCES: 1
     networks:
       - front
 networks:

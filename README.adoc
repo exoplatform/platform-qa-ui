@@ -34,7 +34,7 @@ Technical stacks required:
 --
 Actually we use :
 
-* *PLF 4.4.0* ont Tomcat with HSQLDB database
+* *PLF 5.0.0-Mxx* ont Tomcat with HSQLDB database
 * *Selenium Grid 3.0.1*
 --
 
@@ -42,7 +42,7 @@ Actually we use :
 [source, shell]
 ----
 $ git clone git@github.com:exoplatform/platform-qa-ui.git
-$ docker-compose -f core/src/main/resources/stack/docker-compose-44-hsqldb.yml -p qa_ui up
+$ docker-compose -f core/src/main/resources/stack/docker-compose-50-hsqldb.yml -p qa_ui up
 
 # Check that the PLF instance is running
 $ open http://localhost:8080
@@ -168,13 +168,13 @@ mvn  clean verify -Prun-its,firefox \
 
 [IMPORTANT]
 --
-*c-maven* is an alias to run Maven in Docker *connected to the the network qa_ui*
+*mvncw* is an alias to run Maven in Docker *connected to the the network qa_ui*
 --
 
 [source,shell]
 .Run All in containers: test with Maven and Selenium Grid
 ----
-c-mvn  clean verify -Prun-its,grid \
+mvncw  clean verify -Prun-its,grid \
     -Dselenide.baseUrl=http://exo:8080 \
     -Dremote=http://hub:4444/wd/hub \
     -Dselenide.browser=chrome  \

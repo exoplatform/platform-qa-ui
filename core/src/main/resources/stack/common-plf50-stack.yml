@@ -26,7 +26,7 @@ services:
     expose:
       - "80"
     volumes:
-      - ./conf/nginx-plf44.conf:/etc/nginx/nginx.conf:ro
+      - ./conf/nginx-plf50.conf:/etc/nginx/nginx.conf:ro
     networks:
       - front
       - mail
@@ -78,7 +78,7 @@ services:
     networks:
       - back
   es:
-    image: exoplatform/elasticsearch:0.3
+    image: exoplatform/elasticsearch:1.0.2
     networks:
       - back
   mail:
