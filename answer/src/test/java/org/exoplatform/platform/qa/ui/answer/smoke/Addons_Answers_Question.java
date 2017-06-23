@@ -20,6 +20,7 @@ import org.openqa.selenium.By;
 import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
+import static org.exoplatform.platform.qa.ui.selenium.Button.ELEMENT_OK_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.Button.ELEMENT_OK_BUTTON_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.DownloadFileControl.driver;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -116,7 +117,7 @@ AnswerHomePage answerHomePage;
 	 */
 @Test
 	public  void test07_MoveAQuestion() {
-		String title = "title"+getRandomNumber();
+		String question = "question"+getRandomNumber();
 		String content = "content"+getRandomNumber();;
 		String paCat1 = "paCat1"+getRandomNumber();;
 		String paDes1 = "paDes1"+getRandomNumber();;
@@ -124,60 +125,25 @@ AnswerHomePage answerHomePage;
 		String paCat2 = "paCat2"+getRandomNumber();;
 		String paDes2 = "paDes2"+getRandomNumber();;
 
-		info("Create parent categories");
-		homePagePlatform.goToAnswer();
-		answerCategoryManagement.goToActionOfCategoryFromActionBar(AnswerCategoryManagement.actionCategoryOption.ADD);
-		answerCategoryManagement.inputDataToSettingTab(paCat1, null, paDes1, null, null, null);
-		$(ELEMENT_CATEGORY_ADD_FORM_SAVE_BUTTON).click();
-		$(byId("UIAnswersPortlet")).find(byText(paCat1)).should(Condition.exist);
-		answerCategoryManagement.goToActionOfCategoryFromActionBar(AnswerCategoryManagement.actionCategoryOption.ADD);
-		answerCategoryManagement.inputDataToSettingTab(paCat2, null, paDes2, null, null, null);
-		$(ELEMENT_CATEGORY_ADD_FORM_SAVE_BUTTON).click();
-	    $(byText(paCat2)).waitUntil(Condition.appears, Configuration.timeout);
-		info("Test 7: Move a question");
-		/*Step Number: 1
-		 *Step Name: Add a question
-		 *Step Description: 
-			- Select 1 category and click on Submit question
-			- Put values
-			- Save
-		 *Input Data: 
+	homePagePlatform.goToAnswer();
+	questionManagement.goToSubmitQuestion();
+	questionManagement.inputDataToQuestionForm(question, "", null, "");
+	$(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
+	$(ELEMENT_OK_BUTTON_LINK).click();
+	$(byText(question)).should(Condition.exist);
+	homePagePlatform.goToAnswer();
+	answerCategoryManagement.goToActionOfCategoryFromActionBar(AnswerCategoryManagement.actionCategoryOption.ADD);
+	answerCategoryManagement.inputDataToSettingTab(paCat1, null, paDes1, null, null, null);
+	$(ELEMENT_CATEGORY_ADD_FORM_SAVE_BUTTON).click();
+	homePagePlatform.goToAnswer();
+	$(byText(question)).click();
+	questionManagement.goToActionOfQuestionFromMoreAction(QuestionManagement.actionQuestionOption.MOVE);
+	$(byId("UIMoveQuestionForm")).find(byText(paCat1)).doubleClick();
 
-		 *Expected Outcome: 
-			- Question is added new and shown in selected category*/
-		homePagePlatform.goToAnswer();
-		answerCategoryManagement.goToActionOfCategoryFromRightClick(paCat1, AnswerCategoryManagement.actionCategoryOption.SUBMITQUESTION);
-		questionManagement.inputDataToQuestionForm(title, content, null, null);
-		//click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
-		$(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
-		$(ELEMENT_OK_BUTTON_LINK).click();
-		
-		/*Step number: 2
-		 *Step Name: Move a question
-		 *Step Description: 
-			- Right click on question and select Move to 
-			- Select destination category
-		 *Input Data: 
-
-		 *Expected Outcome: 
-			- Question is moved to destination category*/ 
-	    $(byText(paCat1)).click();
-		/*questionManagement.goToActionOfQuestionByRightClick(title, QuestionManagement.actionQuestionOption.MOVE);
-		answerCategoryManagement.moveCategory(paCat2);
-		answerHomePage.goToHomeCategory();
-		click(ELEMENT_CATEGORY_LIST_ITEM.replace("$category", paCat2));
-		waitForAndGetElement(By.xpath(ELEMENT_QUESTION_LIST_ITEM.replace("$question", title)));
-		answerHomePage.goToHomeCategory();
-		click(ELEMENT_CATEGORY_LIST_ITEM.replace("$category", paCat1));
-		waitForElementNotPresent(By.xpath(ELEMENT_QUESTION_LIST_ITEM.replace("$question", title)));
-		
-		info("Clear data");
-		answerHomePage.goToHomeCategory();
-		click(ELEMENT_CATEGORY_LIST_ITEM.replace("$category", paCat1));
-		answerCategoryManagement.deleteCategory(paCat1);
-		click(ELEMENT_CATEGORY_LIST_ITEM.replace("$category", paCat2));
-		answerCategoryManagement.deleteCategory(paCat2);*/
+	$(withText(paCat1)).click();
+	$(byText(question)).should(Condition.exist);
+	answerCategoryManagement.goToActionOfCategoryFromActionBar(AnswerCategoryManagement.actionCategoryOption.DELETE);
+	$(ELEMENT_CATEGORY_DELETE_OK_BUTTON).waitUntil(Condition.appears,Configuration.timeout).click();
 	}
-
 
 }

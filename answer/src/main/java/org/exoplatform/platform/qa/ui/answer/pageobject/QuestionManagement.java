@@ -166,8 +166,8 @@ public class QuestionManagement {
       break;
     case MOVE:
       info("MOVE question");
-      evt.click(ELEMENT_QUESTION_MOVE_BUTTON);
-      evt.waitForAndGetElement(ELEMENT_QUESTION_MOVE_FORM);
+      $(ELEMENT_QUESTION_MOVE_BUTTON).click();
+      $(ELEMENT_QUESTION_MOVE_FORM).waitUntil(Condition.appears,Configuration.timeout);
       break;
     case SEND:
       info("SEND question");

@@ -78,9 +78,9 @@ public class AnswerCategoryManagement {
       break;
     case DELETE:
       info("DELETE category");
-      evt.waitForAndGetElement(ELEMENT_CATEGORY_DELETE_BUTTON, testBase.getDefaultTimeout(), 1);
-      evt.click(ELEMENT_CATEGORY_DELETE_BUTTON);
-      evt.waitForAndGetElement(ELEMENT_CATEGORY_DELETE_CONFIRM_POPUP);
+      $(ELEMENT_CATEGORY_DELETE_BUTTON).waitUntil(Condition.appears,Configuration.timeout);
+      $(ELEMENT_CATEGORY_DELETE_BUTTON).click();
+      $(ELEMENT_CATEGORY_DELETE_CONFIRM_POPUP).click();
       break;
     default:
       info("Do nothing");
@@ -97,7 +97,7 @@ public class AnswerCategoryManagement {
    */
   public void goToActionOfCategoryFromRightClick(String cat, actionCategoryOption action) {
     info("Select action from menu");
-    $(byText(cat)).contextClick();
+    $(withText(cat)).find(byText(cat)).contextClick();
     switch (action) {
     case EDIT:
       info("Edit category");
@@ -121,8 +121,8 @@ public class AnswerCategoryManagement {
       break;
     case DELETE:
       info("DELETE category");
-      evt.click(ELEMENT_CATEGORY_RIGHT_DELETE_BUTTON);
-      evt.waitForAndGetElement(ELEMENT_CATEGORY_DELETE_CONFIRM_POPUP);
+      $(ELEMENT_CATEGORY_RIGHT_DELETE_BUTTON).click();
+      $(ELEMENT_CATEGORY_DELETE_CONFIRM_POPUP).waitUntil(Condition.appears,Configuration.timeout);
       break;
     case MOVE:
       info("MOVE category");
