@@ -1,11 +1,11 @@
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
-
 
 public class RoomManagement {
     private final TestBase testBase;
@@ -37,4 +37,5 @@ public void editTitleofAroom(String room,String newroom){
     ELEMENT_CHAT_BUTTON_SAVE_ADD_ROOM.click();
 
 }
+
 }
