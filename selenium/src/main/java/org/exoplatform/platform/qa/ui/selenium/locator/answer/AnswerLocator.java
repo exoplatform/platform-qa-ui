@@ -543,4 +543,6 @@ public class AnswerLocator {
 
   public static final String ELEMENT_FAQ_ANSWER                                    =
                                                 "//*[@class='viewerAnswer']//*[text()='$answer']";
+  public static final SelenideElement ELEMENT_ANSWER_MORE_ACTION=$(byClassName("responseContainer")).find(byClassName("uiDropdownWithIcon"));
+public static final SelenideElement ELEMENT_ANSWER_EDIT=ELEMENT_ANSWER_MORE_ACTION.find(byClassName("uiIconEdit"));
 }

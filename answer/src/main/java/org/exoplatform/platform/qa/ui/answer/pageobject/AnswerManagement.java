@@ -1,13 +1,18 @@
 package org.exoplatform.platform.qa.ui.answer.pageobject;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static com.codeborne.selenide.Selectors.*;
 
 public class AnswerManagement {
-  private final TestBase       testBase;
+  private final TestBase testBase;
 
   private ElementEventTestBase evt;
 
@@ -15,6 +20,8 @@ public class AnswerManagement {
    * constructor
    * 
    * @param dr
+   *
+   *
    */
   public AnswerManagement(TestBase testBase) {
     this.testBase = testBase;
@@ -26,12 +33,7 @@ public class AnswerManagement {
    */
   public void goToAnswerQuestion(String question) {
     info("Go to answer a question");
-
-    if (evt.waitForAndGetElement(ELEMENT_QUESTION_LIST_ITEM.replace("$question", question), 5000, 0) != null)
-      evt.click(ELEMENT_QUESTION_LIST_ITEM.replace("$question", question));
-    evt.waitForAndGetElement(ELEMENT_QUESTION_SELECTED_ITEM.replace("$question", question));
-    evt.click(ELEMENT_ANSWER_BUTTON);
-    evt.waitForAndGetElement(ELEMENT_ANSWER_FORM);
+  $(byText(question)).parent().parent().parent().find(byText("Answer")).click();
   }
 
   /**
@@ -47,23 +49,23 @@ public class AnswerManagement {
 
     if (content != null && content != "") {
       info("input content");
-      evt.inputDataToCKEditor(ELEMENT_ANSWER_FORM_DATA_FRAME_INPUT, content);
+      evt.inputDataToCKEditor(ELEMENT_ANSWER_FORM_DATA_FRAME_INPUT,content);
     }
 
     if (isApprove != null) {
       info("approve or not");
       if (isApprove)
-        evt.check(ELEMENT_ANSWER_APPROVE_CHECKBOX, 2);
+        $(ELEMENT_ANSWER_APPROVE_CHECKBOX).click();
       else
-        evt.uncheck(ELEMENT_ANSWER_APPROVE_CHECKBOX, 2);
+        $(ELEMENT_ANSWER_APPROVE_CHECKBOX).click();
     }
 
     if (isActive != null) {
       info("active or not");
       if (isActive)
-        evt.check(ELEMENT_ANSWER_ACTIVATE_CHECKBOX, 2);
+        $(ELEMENT_ANSWER_ACTIVATE_CHECKBOX).click();
       else
-        evt.uncheck(ELEMENT_ANSWER_ACTIVATE_CHECKBOX, 2);
+        $(ELEMENT_ANSWER_ACTIVATE_CHECKBOX).click();
     }
 
     if (related != null && related != "") {
@@ -81,12 +83,13 @@ public class AnswerManagement {
    */
   public void goToActionOfAnswerFromMoreAction(String answer, actionAnswerOption action) {
     info("Select action from menu");
-    evt.click(ELEMENT_ANSWER_MORE_ACTION_BUTTON.replace("$answer", answer));
+    ELEMENT_ANSWER_MORE_ACTION.click();
+
     switch (action) {
     case EDIT:
       info("EDIT answer");
-      evt.click(ELEMENT_ANSWER_EDIT_BUTTON.replace("$answer", answer));
-      evt.waitForAndGetElement(ELEMENT_ANSWER_FORM);
+      ELEMENT_ANSWER_EDIT.parent().click();
+      $(ELEMENT_ANSWER_FORM).waitUntil(Condition.appears,Configuration.timeout);
       break;
     case APPROVE:
       info("APPROVE answer");
@@ -114,8 +117,8 @@ public class AnswerManagement {
       break;
     case DELETE:
       info("DELETE answer");
-      evt.click(ELEMENT_ANSWER_DELETE_BUTTON.replace("$answer", answer));
-      evt.waitForAndGetElement(ELEMENT_ANSWER_DELETE_CONFIRM_POPUP);
+      $(byClassName("confirm")).click();
+      $(ELEMENT_ANSWER_DELETE_CONFIRM_POPUP).waitUntil(Condition.appears,Configuration.timeout);
       break;
     default:
       info("Do nothing");

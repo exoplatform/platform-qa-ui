@@ -148,7 +148,7 @@ public class QuestionManagement {
    */
   public void goToActionOfQuestionFromMoreAction(actionQuestionOption action) {
     info("Select action from menu");
-    evt.click(ELEMENT_QUESTION_MORE_ACTION_BUTTON);
+    $(ELEMENT_QUESTION_MORE_ACTION_BUTTON).click();
     switch (action) {
     case PRINT:
       info("PRINT question");
@@ -161,8 +161,8 @@ public class QuestionManagement {
       break;
     case DELETE:
       info("DELETE question");
-      evt.click(ELEMENT_QUESTION_DELETE_BUTTON);
-      evt.waitForAndGetElement(ELEMENT_QUESTION_DELETE_FORM);
+      $(ELEMENT_QUESTION_DELETE_BUTTON).click();
+      $(ELEMENT_QUESTION_DELETE_FORM).waitUntil(Condition.disappears,Configuration.timeout);
       break;
     case MOVE:
       info("MOVE question");
@@ -187,8 +187,8 @@ public class QuestionManagement {
    */
   public void deleteQuestion(String question) {
     info("Delete question");
-    goToActionOfQuestionByRightClick(question, actionQuestionOption.DELETE);
-   $(ELEMENT_QUESTION_CONFIRM_DELETE).waitUntil(Condition.appears,Configuration.timeout);
+    goToActionOfQuestionFromMoreAction(actionQuestionOption.DELETE);
+    $(ELEMENT_QUESTION_CONFIRM_DELETE).waitUntil(Condition.appears,Configuration.timeout);
     $(ELEMENT_QUESTION_DELETE_FORM_OK_BUTTON).click();
     $(byText(question)).waitUntil(Condition.disappears,Configuration.timeout);
   }
