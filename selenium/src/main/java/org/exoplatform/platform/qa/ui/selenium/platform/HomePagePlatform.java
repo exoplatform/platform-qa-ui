@@ -36,7 +36,11 @@ public class HomePagePlatform {
     $(ELEMENT_WIKI_LINK_PLF).waitUntil(Condition.appears,Configuration.timeout);
     $(ELEMENT_WIKI_LINK_PLF).click();
   }
-
+  public void goToChat() {
+    info("--Go to chat--");
+    $(byId("chat-status")).click();
+    $(byClassName("notif-chat-open-link")).waitUntil(Condition.appears,Configuration.timeout).click();
+  }
   /**
    * Go to Documents
    */
