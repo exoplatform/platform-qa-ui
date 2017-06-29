@@ -1,12 +1,15 @@
 package org.exoplatform.platform.qa.ui.calendar.smoke;
 
 import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_CONTEXT_MENU_VIEW;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.nextrightlistdaybutton;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -51,7 +54,7 @@ public class CALEventEditTestIT extends Base {
    * <li>Post-Condition:</li>
    */
 
-  public void test03_EditEventOfGroupCalendar() {
+  public void Malek2013() {
     info("Test 3: Edit event of group calendar");
     /*
      * Step Number: 1 Step Name: Step 1: Add event Step Description: - Add new
@@ -172,7 +175,10 @@ public class CALEventEditTestIT extends Base {
     eventManagement.inputDataEventInDetailForm(titleEvent2, titleEvent2, null, null, false, null, categoryName);
     eventManagement.saveAddEventDetails();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.LIST);
-    $(byText(titleEvent2)).waitUntil(Condition.appears, 10000);
+    if (($(byText(titleEvent2)).is(Condition.not(Condition.exist))))
+    {nextrightlistdaybutton.click();
+      $(byText(titleEvent2)).waitUntil(Condition.appears, Configuration.timeout);}
+    else {$(byText(titleEvent2)).waitUntil(Condition.appears, Configuration.timeout);}
     calendarManagement.deleteCalendar(calendar);
     calendarManagement.deleteEventCategory(categoryName);
   }

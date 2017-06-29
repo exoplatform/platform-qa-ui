@@ -323,7 +323,7 @@ public class CalendarManagement {
     info("Delete category");
     goToMenuFromMainCalendar(menuOfMainCalendar.ADDCATEGORY);
     $(byText(categoryName)).waitUntil(Condition.appears, Configuration.timeout);
-    ELEMENT_LIST_DELETE_EVENT_BUTTON.click();
+    ELEMENT_LIST_CATEGORY .find(byText(categoryName)).parent().parent().find(ELEMENT_DELETE_CATEGORY).click();
     alert.acceptAlert();
     button.yes();
     $(byText(categoryName)).waitUntil(Condition.disappears, Configuration.timeout);
@@ -898,7 +898,10 @@ public class CalendarManagement {
       // name))));
       // action.moveToElement(evt.waitForAndGetElement(ELEMENT_EVENT_TASK_TITLE.replace("${name}",
       // name))).doubleClick().perform();
-      $(byClassName("spliterResizableListArea")).find(byText(name)).doubleClick();
+      if (($(byText(name)).is(Condition.not(Condition.exist))))
+      {nextrightlistdaybutton.click();
+        $(byClassName("spliterResizableListArea")).find(byText(name)).doubleClick();}
+      else {$(byClassName("spliterResizableListArea")).find(byText(name)).doubleClick();}
     }
     $(ELEMENT_ADD_EDIT_EVENT_POPUP).waitUntil(Condition.appears, Configuration.timeout);
     info("The edit form is shown");

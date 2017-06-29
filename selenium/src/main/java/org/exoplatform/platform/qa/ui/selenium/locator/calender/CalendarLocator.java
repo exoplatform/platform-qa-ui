@@ -1619,12 +1619,13 @@ public class CalendarLocator {
   public static final String ELEMENT_GMAIL_CONTENT_REMINDER_EVENT                             =
                                                                   "//span[contains(text(),'Event Summary: $event')]";
 
-  public static final SelenideElement ELEMENT_LIST_DELETE_EVENT_BUTTON                                 =$(byId("UIEventCategoryList")).findAll(byClassName("uiIconDelete")).get(6);
+  public static final SelenideElement ELEMENT_LIST_CATEGORY                                =$(byId("UIEventCategoryList"));
+  public static final By ELEMENT_DELETE_CATEGORY= byClassName("uiIconDelete ");
 
 public static final SelenideElement ELEMENT_CALENDAR_LIST_BUTTON= $(byId("UIActionBar")).find(byText("List")).waitUntil(Condition.appears,10000);
   public static final SelenideElement ELEMENT_CALENDAR_WEEK_BUTTON= $(byId("UIActionBar")).find(byText("Week")).waitUntil(Condition.appears,10000);
 public static final SelenideElement ELEMENT_CALENDAR_DAY_BUTTON= $(byId("UIActionBar")).find(byText("Day")).waitUntil(Condition.appears,10000);
 public static final By ELEMENT_CALENDAR_ICON_SETTINGS_OF_CALENDAR=  byClassName("uiIconCalSettingMini");
-
+public static final SelenideElement nextrightlistdaybutton= $(byId("UIListContainer")).find(byClassName("uiIconMiniArrowRight"));
 }
 
