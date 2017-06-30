@@ -1,5 +1,7 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
+import static com.codeborne.selenide.Selectors.byId;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -174,19 +176,18 @@ public class WikiManagement {
    */
   public void movePage(String page1, String page2) {
     info("Open a wiki page 1");
-    evt.waitForAndGetElement(ELEMENT_TREE_WIKI_NAME.replace("${name}", page1), 2000, 0).click();
+    $(byText(page1)).waitUntil(Condition.appears,Configuration.timeout).click();
+
     info("Click on More link");
-    evt.click(ELEMENT_MORE_LINK);
+    $(ELEMENT_MORE_LINK).click();
     info("Click on Move page link");
-    if (evt.waitForAndGetElement(ELEMENT_MOVE_PAGE, 5000, 0) == null) {
-      evt.mouseOverAndClick(ELEMENT_MOVE_PAGE);
-    } else {
-      evt.click(ELEMENT_MOVE_PAGE);
-    }
+      $(ELEMENT_MOVE_PAGE).hover().click();
+
     info("Move page popup is shown");
-    evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_MOVE_POPUP_NODE.replace("${name}", page2), 2000, 0).click();
-    evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_MOVE_POPUP_SAVE, 2000, 0).click();
-    evt.waitForAndGetElement(ELEMENT_TREE_WIKI_NAME.replace("${name}", page1), 2000);
+    $(byText(page2)).waitUntil(Condition.appears,Configuration.timeout);
+    $(byId("UIMoveTree")).find(byText(page2)).click();
+    $(ELEMENT_WIKI_PAGE_MOVE_POPUP_SAVE).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_WIKI_PAGE_MOVE_POPUP_SAVE).click();
     info("The page 1 is moved to page 2");
   }
 

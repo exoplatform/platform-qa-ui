@@ -9,6 +9,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,6 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_SOURCE_EDITOR_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
 
 @Tag("wiki")
 public class WikiBasicTestWithUser extends Base {
@@ -91,7 +91,7 @@ public class WikiBasicTestWithUser extends Base {
         String content1 = "content" + getRandomNumber();
 
         manageLogInOut.signInCas("john","gtngtn");
-        navigationToolbar.goToMyWiki();
+        homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(title1, content1);
         wikiManagement.saveAddPage();
@@ -104,7 +104,7 @@ public class WikiBasicTestWithUser extends Base {
         String label = "label" + getRandomNumber();
         String tooltip = "tooltip" + getRandomNumber();
 
-        navigationToolbar.goToMyWiki();
+        homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(title2, content2);
         richTextEditor.goToWikiPageLink();
@@ -131,7 +131,7 @@ public class WikiBasicTestWithUser extends Base {
         String tooltip = "tooltip" + getRandomNumber();
         String address = "www.google.com";
         manageLogInOut.signInCas("john","gtngtn");
-        navigationToolbar.goToMyWiki();
+        homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(title1, content1);
         richTextEditor.goToWebPageLink();
@@ -160,7 +160,7 @@ public class WikiBasicTestWithUser extends Base {
         String title = "title" + getRandomNumber();
         String content = "content" + getRandomNumber();
         manageLogInOut.signInCas("john","gtngtn");
-        navigationToolbar.goToMyWiki();
+        homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         wikiManagement.goToSourceEditor();
         sourcetexteditor.addSimplePage(title, content);
@@ -189,12 +189,12 @@ public class WikiBasicTestWithUser extends Base {
         info("Test 4: Create page using Source Editor");
         String wiki = "wiki" + getRandomNumber();
         manageLogInOut.signInCas("john","gtngtn");
-        navigationToolbar.goToMyWiki();
+        homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(wiki, wiki);
         wikiManagement.saveAddPage();
         $(byText(wiki)).should(Condition.exist);
-        navigationToolbar.goToMyWiki();
+        homePagePlatform.goToWiki();
         wikiHomePage.deleteWiki(wiki);
     }
 

@@ -378,10 +378,11 @@ public class WikiHomePage {
   /**
    * Open Page information
    */
-  public void goToPageInformation() {
+  public void goToPageInformation(String wiki) {
     info("Go to Page Information");
-    evt.mouseOverAndClick(ELEMENT_MORE_LINK);
-    evt.mouseOverAndClick(ELEMENT_PAGE_INFO);
+    $(byText(wiki)).click();
+    $(ELEMENT_MORE_LINK).click();
+    $(ELEMENT_PAGE_INFO).click();
   }
 
   /**

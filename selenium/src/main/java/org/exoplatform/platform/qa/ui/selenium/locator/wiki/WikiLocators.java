@@ -155,6 +155,7 @@ public class WikiLocators {
   public static final By              ELEMENT_PAGE_INFO                                          =
                                                         By.xpath(".//*[text()='Page Info']");
 
+
   public static final By              ELEMENT_MOVE_LINK                                          =
                                                         By.xpath("//*[@class='uiIconMovePage']");
 
