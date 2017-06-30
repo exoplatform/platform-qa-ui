@@ -295,7 +295,6 @@ public class ContentAdministration {
     executeJavaScript("window.scrollBy(0,-250);");
     $(byText(name)).parent().parent().find(byClassName("uiIconEditInfo")).click();
     ELEMENT_ECM_EXPLORER_APPLY_VIEWS_FORM_EDIT.click();
-
     $(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ADMIN).click();
     evt.uncheck(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_CATEGORIES, 2);
     evt.uncheck(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ICONS, 2);
