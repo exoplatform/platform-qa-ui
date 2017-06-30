@@ -539,6 +539,7 @@ public class RichTextEditor {
       switchTo().defaultContent();
     }
 
+
   }
 
   /**
