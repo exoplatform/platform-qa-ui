@@ -27,7 +27,6 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 
 @Tag("wiki")
-@Tag("smoke")
 public class WikiBasicTestWithUser extends Base {
 
     HomePagePlatform homePagePlatform;
@@ -52,7 +51,7 @@ public class WikiBasicTestWithUser extends Base {
 
     UserAndGroupManagement userAndGroupManagement;
 
-    ActivityStream activityStream;
+
 
     @BeforeEach
     public void setupBeforeMethod() {
@@ -62,7 +61,7 @@ public class WikiBasicTestWithUser extends Base {
         wikiValidattions = new WikiValidattions(this);
         wikiManagement = new WikiManagement(this);
         wikiHomePage = new WikiHomePage(this);
-        activityStream = new ActivityStream(this);
+
 
         try {
             sourcetexteditor = new SourceTextEditor(this);
@@ -91,7 +90,7 @@ public class WikiBasicTestWithUser extends Base {
         String title1 = "title" + getRandomNumber();
         String content1 = "content" + getRandomNumber();
 
-        manageLogInOut.signIn("john","gtngtn");
+        manageLogInOut.signInCas("john","gtngtn");
         navigationToolbar.goToMyWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(title1, content1);
@@ -131,7 +130,7 @@ public class WikiBasicTestWithUser extends Base {
         String label = "label" + getRandomNumber();
         String tooltip = "tooltip" + getRandomNumber();
         String address = "www.google.com";
-        manageLogInOut.signIn("john","gtngtn");
+        manageLogInOut.signInCas("john","gtngtn");
         navigationToolbar.goToMyWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(title1, content1);
@@ -160,7 +159,7 @@ public class WikiBasicTestWithUser extends Base {
         info("Create a wiki page");
         String title = "title" + getRandomNumber();
         String content = "content" + getRandomNumber();
-        manageLogInOut.signIn("john","gtngtn");
+        manageLogInOut.signInCas("john","gtngtn");
         navigationToolbar.goToMyWiki();
         wikiHomePage.goToAddBlankPage();
         wikiManagement.goToSourceEditor();
@@ -189,7 +188,7 @@ public class WikiBasicTestWithUser extends Base {
     public void test04_Create_Delete_PageUsingSourceEditor() {
         info("Test 4: Create page using Source Editor");
         String wiki = "wiki" + getRandomNumber();
-        manageLogInOut.signIn("john","gtngtn");
+        manageLogInOut.signInCas("john","gtngtn");
         navigationToolbar.goToMyWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(wiki, wiki);

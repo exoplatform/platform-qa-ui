@@ -111,9 +111,9 @@ public class ManageLogInOut {
    */
   public void signInCas(String username, String password) {
     testBase.getExoWebDriver().getWebDriver();
-    evt.type(ELEMENT_INPUT_USERNAME_CAS, username, true);
-    evt.type(ELEMENT_INPUT_PASSWORD_CAS, password, true);
-    evt.click(ELEMENT_SIGN_IN_BUTTON_CAS);
+    $(ELEMENT_INPUT_USERNAME_CAS).setValue(username);
+    $(ELEMENT_INPUT_PASSWORD_CAS).setValue(password);
+     ELEMENT_SIGN_IN_BUTTON_CAS.click();
 
     // waitForElementNotPresent(ELEMENT_SIGN_IN_BUTTON_CAS,3000);
 
