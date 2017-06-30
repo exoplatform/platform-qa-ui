@@ -538,6 +538,7 @@ public class RichTextEditor {
       $(byId("body")).sendKeys(content);
       switchTo().defaultContent();
     }
+
   }
 
   /**
