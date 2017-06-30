@@ -12,7 +12,6 @@ public class ChatManagement {
         this.testBase = testBase;}
 
         public void sendMessageInRoomOrSpace(String room,String message){
-
             $(byText(room)).click();
             ELEMENT_CHAT_MESSAGE_INPUT.setValue(message).pressEnter();
             ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.exist);

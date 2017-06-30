@@ -144,7 +144,7 @@ public class RoomBaseAction extends Base {
         switchTo().window("Chat");
         info("add room");
         roomManagement.addRoom(room,1,usernamea);
-        chatManagement.sendMessageInRoom(room,message);
+        chatManagement.sendMessageInRoomOrSpace(room,message);
         switchTo().window("Home Page");
         manageLogInOut.signIn(usernamea,password);
         homePagePlatform.goToChat();
@@ -159,5 +159,26 @@ public class RoomBaseAction extends Base {
         switchTo().window("Home Page");
         navigationToolbar.goToManageCommunity();
         userandgroupmanagement.deleteUser(usernamea);
+    }
+@Test
+    public void test04_modifyTheTittleOfAroom(){
+    String usernamea = "usernamea" + getRandomString();
+    String password = "123456" ;
+    String emaila = usernamea + "@gmail.com";
+    String room="room"+getRandomNumber();
+    String newroom="newroom"+getRandomNumber();
+    navigationToolbar.goToAddUser();
+    info("Create new user");
+    userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
+    manageLogInOut.signIn(usernamea,password);
+    homePagePlatform.goToChat();
+    manageLogInOut.signIn("root","gtn");
+    homePagePlatform.goToChat();
+    switchTo().window("Chat");
+    info("add room");
+    roomManagement.addRoom(room,1,usernamea);
+    roomManagement.editTitleofAroom(room,newroom);
+    $(byText(newroom)).should(Condition.exist);
+    roomManagement.deleteRomm(newroom);
     }
 }
