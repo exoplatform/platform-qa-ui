@@ -46,4 +46,6 @@ public static final SelenideElement ELEMENT_CHAT_RESULT_SEARCH_USER=$(byXpath("/
 public static final SelenideElement ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN=$(byId("chat-team-button-dropdown"));
 public static final SelenideElement ELEMENT_CHAT_ROOM_DELETE=$(byId("team-delete-button"));
 public static final SelenideElement ELEMENT_CHAT_CONFIRM_DELETE_ROOM=$(byId("team-delete-button-ok"));
+public static final SelenideElement ELEMENT_CHAT_MESSAGE_INPUT= $(byId("msg"));
+public static final SelenideElement ELEMENT_CHAT_LIST_MSG=$(byId("chats"));
 }
