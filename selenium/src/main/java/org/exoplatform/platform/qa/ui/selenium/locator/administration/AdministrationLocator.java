@@ -249,6 +249,7 @@ $(byXpath("//*[@id=\"UIDriveList\"]/div[4]/button"));
   public static final SelenideElement ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ADMIN              =$(byXpath("//*[@id=\"ViewsInputSet-tab\"]/div/div/div/div[1]/div/span"));
 
 
+
   public static final By     ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_CATEGORIES         =
                                                                                   By.xpath("//*[@class='UIFormInputSet']//*[@id='Categories']");
 
