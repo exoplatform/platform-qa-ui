@@ -17,6 +17,7 @@ import static com.codeborne.selenide.Selenide.close;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_CHAT_LIST_MSG;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 
@@ -29,6 +30,7 @@ public class RoomBaseAction extends Base {
     UserAddManagement userAddManagement;
     ManageLogInOut manageLogInOut;
     UserAndGroupManagement userandgroupmanagement;
+    ChatManagement chatManagement;
 
     @BeforeEach
     public void setupBeforeMethod() {
@@ -39,6 +41,7 @@ public class RoomBaseAction extends Base {
         userAddManagement=new UserAddManagement(this);
         manageLogInOut=new ManageLogInOut(this);
         userandgroupmanagement=new UserAndGroupManagement(this);
+        chatManagement=new ChatManagement(this);
     }
     @Test
     public void Test01_AddRoomWithSeveralUsers(){
@@ -99,5 +102,62 @@ public class RoomBaseAction extends Base {
         userandgroupmanagement.deleteUser(usernameb);
         userandgroupmanagement.deleteUser(usernamec);
 
+    }
+    @Test
+    public void test02_deleteRoom(){
+        String usernamea = "usernamea" + getRandomString();
+
+        String password = "123456" ;
+        String room="room"+getRandomNumber();
+        String emaila = usernamea + "@gmail.com";
+        navigationToolbar.goToAddUser();
+        info("Create new user");
+        userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
+        manageLogInOut.signIn(usernamea,password);
+        homePagePlatform.goToChat();
+        manageLogInOut.signIn("root","gtn");
+        homePagePlatform.goToChat();
+        switchTo().window("Chat");
+        info("add room");
+        roomManagement.addRoom(room,1,usernamea);
+        info("delete room");
+        roomManagement.deleteRomm(room);
+        info("delete data");
+        switchTo().window("Home Page");
+        navigationToolbar.goToManageCommunity();
+        userandgroupmanagement.deleteUser(usernamea);
+    }
+    @Test
+    public void test03_SendMessageInAROOM(){
+        String usernamea = "usernamea" + getRandomString();
+        String password = "123456" ;
+        String emaila = usernamea + "@gmail.com";
+        String room="room"+getRandomNumber();
+        String message="message"+getRandomNumber();
+        navigationToolbar.goToAddUser();
+        info("Create new user");
+        userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
+        manageLogInOut.signIn(usernamea,password);
+        homePagePlatform.goToChat();
+        manageLogInOut.signIn("root","gtn");
+        homePagePlatform.goToChat();
+        switchTo().window("Chat");
+        info("add room");
+        roomManagement.addRoom(room,1,usernamea);
+        chatManagement.sendMessageInRoom(room,message);
+        switchTo().window("Home Page");
+        manageLogInOut.signIn(usernamea,password);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        $(byText(room)).click();
+        ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.exist);
+        switchTo().window("Home Page");
+        manageLogInOut.signIn("root","gtn");
+        homePagePlatform.goToChat();
+        switchTo().window("Chat");
+        roomManagement.deleteRomm(room);
+        switchTo().window("Home Page");
+        navigationToolbar.goToManageCommunity();
+        userandgroupmanagement.deleteUser(usernamea);
     }
 }
