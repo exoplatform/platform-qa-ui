@@ -130,7 +130,11 @@ public class ManageLogInOut {
         evt.mouseOverAndClick(ELEMENT_ACCOUNT_NAME_LINK);
         break;
       }
+<<<<<<< 37f031655d18ce0e9167f6f70191bb098fbfba3b
       $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.appears, Configuration.timeout).click();
+=======
+      $(ELEMENT_ACCOUNT_NAME_LINK).click();
+>>>>>>> move page
       if (evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_SIGN_OUT_LINK, 5000, 0) != null) {
         info("Element " + ManageLogInOutLocator.ELEMENT_SIGN_OUT_LINK + "... is displayed");
         break;
