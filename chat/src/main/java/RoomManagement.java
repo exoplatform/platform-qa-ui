@@ -29,5 +29,12 @@ public void deleteRomm(String room){
     ELEMENT_CHAT_CONFIRM_DELETE_ROOM.click();
     $(byText(room)).shouldNot(Condition.exist);
 }
+public void editTitleofAroom(String room,String newroom){
+    $(byText(room)).click();
+    ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
+    ELEMENT_CHAT_ROOM_EDIT.click();
+    ELEMENT_CHAT_INPUT_ROOM_NAME.setValue(newroom);
+    ELEMENT_CHAT_BUTTON_SAVE_ADD_ROOM.click();
 
+}
 }

@@ -20,9 +20,12 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -127,7 +130,7 @@ public class ManageLogInOut {
         evt.mouseOverAndClick(ELEMENT_ACCOUNT_NAME_LINK);
         break;
       }
-      evt.click(ELEMENT_ACCOUNT_NAME_LINK);
+      $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.appears, Configuration.timeout).click();
       if (evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_SIGN_OUT_LINK, 5000, 0) != null) {
         info("Element " + ManageLogInOutLocator.ELEMENT_SIGN_OUT_LINK + "... is displayed");
         break;
