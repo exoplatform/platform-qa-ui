@@ -5,6 +5,8 @@ import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.RichTextEditor;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
@@ -30,6 +32,8 @@ public class Wiki_Basic_Action_OtherActions extends Base{
 	WikiManagement wikiManagement;
 	RichTextEditor richTextEditor;
 	NavigationToolbar navigationToolbar;
+	SpaceManagement spaceManagement;
+	SpaceHomePage spaceHomePage;
 
 	@BeforeEach
 	public void setupBeforeMethod() {
@@ -39,6 +43,10 @@ public class Wiki_Basic_Action_OtherActions extends Base{
 		manageLogInOut = new ManageLogInOut(this);
 		wikiManagement = new WikiManagement(this);
 		navigationToolbar=new NavigationToolbar(this);
+		spaceManagement = new SpaceManagement(this);
+		spaceHomePage = new SpaceHomePage(this);
+
+
 		try {
 			richTextEditor = new RichTextEditor(this);
 		} catch (Exception e) {
@@ -134,6 +142,40 @@ public class Wiki_Basic_Action_OtherActions extends Base{
 		$(byClassName("uiTreeExplorer")).find(byText(title1)).should(Condition.exist);
 		wikiHomePage.deleteWiki(title1);
 	}
+
+
+	@Test
+	public  void test04_MovePage_MyWiki_Space () {
+
+		info("Create a space");
+		String space = "space" + getRandomNumber();
+
+		manageLogInOut.signInCas("john", "gtngtn");
+		homePagePlatform.goToAllSpace();
+		spaceManagement.addNewSpaceSimple(space, space, 6000);
+
+		info("Create a wiki page");
+		String title1 = "title1" + getRandomNumber();
+		navigationToolbar.goToMyWiki();
+		wikiHomePage.goToAddBlankPage();
+		richTextEditor.addSimplePage(title1, title1);
+		wikiManagement.saveAddPage();
+		$(byText(title1)).should(Condition.exist);
+
+		info("Move page to Space");
+		wikiManagement.selectSpaceDestination(space);
+		homePagePlatform.goToSpecificSpace(space);
+		spaceHomePage.goToWikiTab();
+		$(byClassName("uiTreeExplorer")).find(byText(title1)).should(Condition.exist);
+		homePagePlatform.goToHomePage();
+		homePagePlatform.goToAllSpace();
+		spaceManagement.deleteSpace(space, false);
+
+	}
+
+
+
+
 
 
 	}
