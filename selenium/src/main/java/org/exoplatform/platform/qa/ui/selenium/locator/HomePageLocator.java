@@ -550,29 +550,14 @@ public final class HomePageLocator {
                                                                          By.xpath("//*[@class='uiIconUpload uiIconLightGray']");
 
   // confirm popup
-  public static final SelenideElement ELEMENT_DELETE_POPUP_OK                                              =
-                                                              $(byXpath("//*[@id=\"UISocialPopupConfirmation\"]/div[2]/div[2]/div/a[1]"));
 
-  public static final String          ELEMENT_COMMENT_BLOC                                                 = "CommentBlock{id}1";
-
-  public static final SelenideElement ELEMENT_WHO_LIKED_POPUP                                              =
-                                                              $(byClassName("listLikedBox "));
-
-  public static final String          ELEMENT_CONTAINER_ACTIVITY                                           =
-                                                                 "activityContainer{id}";
-
-  public static final String          ELEMENT_DATE_ACTIVITY                                                = "dateTime";
-
-  public static final String          ELEMENT_DELETE_ACTIVITY                                              =
-                                                              "DeleteActivityButton{id}";
-
-  public static final SelenideElement ELEMENT_ICON_SEARCH                                                  =
-                                                          $(byClassName("TRContainer")).find(byClassName("uiIconPLF24x24Search"));
-
-  public static final SelenideElement ELEMENT_SEARCH_INPUT                                                 =
-                                                           $(byClassName("showInputSearch"));
-
-  public static final SelenideElement ELEMENT_SEARCH_RESULT                                                =
-                                                            $(byId("quickSearchResult1"));
-
+  public static final By ELEMENT_DELETE_POPUP_OK =
+          By.xpath(".//*[@id='UISocialPopupConfirmation']//*[contains(text(),'OK')]");
+  public static final SelenideElement ELEMENT_WHO_LIKED_POPUP=$(byClassName("listLikedBox "));
+  public static final String ELEMENT_CONTAINER_ACTIVITY="activityContainer{id}";
+  public static final String ELEMENT_DATE_ACTIVITY="dateTime";
+  public static final String ELEMENT_DELETE_ACTIVITY="DeleteActivityButton{id}";
+  public static final SelenideElement ELEMENT_ICON_SEARCH=$(byClassName("TRContainer")).find(byClassName("uiIconPLF24x24Search"));
+  public static final SelenideElement ELEMENT_SEARCH_INPUT=$(byClassName("showInputSearch"));
+  public static final SelenideElement ELEMENT_SEARCH_RESULT=$(byId("quickSearchResult1"));
 }
