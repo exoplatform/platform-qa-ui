@@ -201,4 +201,44 @@ public class Wiki_Basic_Action_OtherActions extends Base{
 
 	}
 
+	@Test
+	public  void test06_MovePage_Intranet_Space () {
+
+		info("Create a space");
+		String space = "space" + getRandomNumber();
+		manageLogInOut.signInCas("john", "gtngtn");
+		homePagePlatform.goToAllSpace();
+		spaceManagement.addNewSpaceSimple(space, space, 6000);
+
+		info("Create a wiki page ");
+		String title1 = "title1" +getRandomNumber();
+		homePagePlatform.goToWiki();
+		wikiHomePage.goToAddBlankPage();
+		richTextEditor.addSimplePage(title1,title1);
+		wikiManagement.saveAddPage();
+		$(byText(title1)).should(Condition.exist);
+
+		info("Move page to Space");
+		wikiManagement.selectSpaceDestination(space);
+		homePagePlatform.goToSpecificSpace(space);
+		spaceHomePage.goToWikiTab();
+		$(byClassName("uiTreeExplorer")).find(byText(title1)).should(Condition.exist);
+		homePagePlatform.goToHomePage();
+		homePagePlatform.goToAllSpace();
+		spaceManagement.deleteSpace(space, false);
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
