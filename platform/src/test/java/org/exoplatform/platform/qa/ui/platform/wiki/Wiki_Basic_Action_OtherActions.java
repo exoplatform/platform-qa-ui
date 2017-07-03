@@ -99,9 +99,8 @@ public class Wiki_Basic_Action_OtherActions extends Base{
 	public  void test02_MovePage_Intranet_MyWiki () {
 
 		String title1 = "title1" +getRandomNumber();
-		String dest = "dest" +getRandomNumber();
- 		manageLogInOut.signInCas("john","gtngtn");
 
+ 		manageLogInOut.signInCas("john","gtngtn");
 		homePagePlatform.goToWiki();
 		wikiHomePage.goToAddBlankPage();
 		richTextEditor.addSimplePage(title1,title1);
@@ -117,17 +116,24 @@ public class Wiki_Basic_Action_OtherActions extends Base{
 	}
 
 
+	@Test
+	public  void test03_MovePage_MyWiki_Intranet () {
 
+		String title1 = "title1" +getRandomNumber();
 
+		manageLogInOut.signInCas("john","gtngtn");
+		navigationToolbar.goToMyWiki();
+		wikiHomePage.goToAddBlankPage();
+		richTextEditor.addSimplePage(title1,title1);
+		wikiManagement.saveAddPage();
+		$(byText(title1)).should(Condition.exist);
 
-
-
-
-
-
-
-
-
+		info("Move page to Intranet");
+		wikiManagement.selectSpaceDestination("Intranet");
+		homePagePlatform.goToWiki();
+		$(byClassName("uiTreeExplorer")).find(byText(title1)).should(Condition.exist);
+		wikiHomePage.deleteWiki(title1);
+	}
 
 
 	}
