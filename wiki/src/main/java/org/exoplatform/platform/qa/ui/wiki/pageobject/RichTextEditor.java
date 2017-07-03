@@ -28,8 +28,8 @@ public class RichTextEditor {
   public Button                but;
 
   public PlatformBase          plf;
-  WikiManagement               wikiManagement;
   private ElementEventTestBase evt;
+  WikiManagement wikiManagement;
 
   /**
    * constructor
@@ -43,6 +43,7 @@ public class RichTextEditor {
     this.but = new Button(testBase);
     this.plf = new PlatformBase(testBase);
     this.wikiManagement = new WikiManagement(testBase);
+
   }
 
   /**
@@ -528,6 +529,7 @@ public class RichTextEditor {
         && (ELEMENT_BUTTON_WIKI_RITCH_TEXT.is(Condition.exist))) {
       ELEMENT_BUTTON_WIKI_RITCH_TEXT.click();
     }
+
     if (!title.isEmpty()) {
       $(ELEMENT_TITLE_WIKI_INPUT).val(title);
     }

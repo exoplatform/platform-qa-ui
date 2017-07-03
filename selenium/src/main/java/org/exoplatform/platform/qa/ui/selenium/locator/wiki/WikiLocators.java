@@ -1348,5 +1348,8 @@ public static final SelenideElement ELEMENT_SAVE_BUTTON_ADD_PAGE=$(byId("UISubmi
 public static final SelenideElement ELEMENT_DELETE_LINK2= $(byText("Delete Page"));
 public static final SelenideElement ELEMENT_POPUP_SELECT_WIKI_PAGE= $(byId("isc_2"));
 public static final SelenideElement ELEMENT_BUTTON_WIKI_RITCH_TEXT=$(byId("UIEditorTabs")).find(byText("Rich Text"));
+<<<<<<< 9e4cdf8a682d1e40825c352c1ff106041406fb3d
 public static final SelenideElement ELEMENT_WIKI_UNPUT_LINK_EXISTED_PAGE=$(byXpath("//*[@id=\"isc_Class_S1398_0_Input\"]"));
+=======
+>>>>>>> add condition in wiki to test mode if it ritch or source
 }

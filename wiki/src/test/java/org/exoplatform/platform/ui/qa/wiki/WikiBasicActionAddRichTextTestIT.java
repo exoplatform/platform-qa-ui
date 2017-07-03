@@ -8,6 +8,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.util.ArrayList;
 
+import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -97,6 +98,7 @@ public class WikiBasicActionAddRichTextTestIT extends Base {
     if ($(ELEMENT_CONTENT_WIKI_INPUT).is((Condition.exist))) {
       ELEMENT_BUTTON_WIKI_RITCH_TEXT.click();
     }
+
     richTextEditor.addSimplePage(title2, content2);
     richTextEditor.goToWikiPageLink();
     richTextEditor.insertExistWikiPageLink(title1, label, tooltip, RichTextEditor.wikiPageLinkTab.All_pages);
