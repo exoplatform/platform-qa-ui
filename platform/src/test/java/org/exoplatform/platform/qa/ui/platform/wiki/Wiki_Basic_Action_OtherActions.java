@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 @Tag("wiki")
 
-public class Wiki_Basic_Action_OtherActions extends Base{
+public class Wiki_Basic_Action_OtherActions extends Base {
 
 	HomePagePlatform homePagePlatform;
 	WikiHomePage wikiHomePage;
@@ -42,7 +42,7 @@ public class Wiki_Basic_Action_OtherActions extends Base{
 		wikiHomePage = new WikiHomePage(this);
 		manageLogInOut = new ManageLogInOut(this);
 		wikiManagement = new WikiManagement(this);
-		navigationToolbar=new NavigationToolbar(this);
+		navigationToolbar = new NavigationToolbar(this);
 		spaceManagement = new SpaceManagement(this);
 		spaceHomePage = new SpaceHomePage(this);
 
@@ -53,21 +53,22 @@ public class Wiki_Basic_Action_OtherActions extends Base{
 			e.printStackTrace();
 		}
 	}
+
 	/**
-	 *<li> Case ID:122810.</li>
-	 *<li> Test Case Name: Move Page.</li>
-	 *<li> Pre-Condition: </li>
-	 *<li> Post-Condition: </li>
+	 * <li> Case ID:122810.</li>
+	 * <li> Test Case Name: Move Page.</li>
+	 * <li> Pre-Condition: </li>
+	 * <li> Post-Condition: </li>
 	 * issue WIKI-976, wrong address in the mail notification
 	 */
 	@Test
-	public  void test01_MovePage() {
+	public void test01_MovePage() {
 
 		info("Test 1: Move Page");
 
-		manageLogInOut.signInCas("john","gtngtn");
-		String title1 = "title1" +getRandomNumber();
-		String title2 =  "title2" +getRandomNumber();
+		manageLogInOut.signInCas("john", "gtngtn");
+		String title1 = "title1" + getRandomNumber();
+		String title2 = "title2" + getRandomNumber();
 
 		/*Step Number: 1
 		 *Step Name: Step 1: Move Page
@@ -78,40 +79,40 @@ public class Wiki_Basic_Action_OtherActions extends Base{
 		 *Input Data: 
 
 		 *Expected Outcome: 
-			Selected Page is moved and displayed in new location*/ 
+			Selected Page is moved and displayed in new location*/
 
 		info("Create first new wiki pages");
 		homePagePlatform.goToWiki();
 		wikiHomePage.goToAddBlankPage();
-		richTextEditor.addSimplePage(title1,title1);
+		richTextEditor.addSimplePage(title1, title1);
 		wikiManagement.saveAddPage();
 		$(byText(title1)).should(Condition.exist);
-		
+
 		info("Create second new wiki pages");
 		homePagePlatform.goToWiki();
 		wikiHomePage.goToAddBlankPage();
-		richTextEditor.addSimplePage(title2,title2);
+		richTextEditor.addSimplePage(title2, title2);
 		wikiManagement.saveAddPage();
 		$(byText(title2)).should(Condition.exist);
-		
+
 		info("Move page 1 to page 2");
 		wikiManagement.movePage(title1, title2);
 		wikiHomePage.goToPageInformation(title2);
 		$(byClassName("uiPageInfoHierarchy")).find(byText(title1)).should(Condition.exist);
 		homePagePlatform.goToWiki();
 		wikiHomePage.deleteWiki(title2);
-		
+
 	}
 
 	@Test
-	public  void test02_MovePage_Intranet_MyWiki () {
+	public void test02_MovePage_Intranet_MyWiki() {
 
-		String title1 = "title1" +getRandomNumber();
+		String title1 = "title1" + getRandomNumber();
 
- 		manageLogInOut.signInCas("john","gtngtn");
+		manageLogInOut.signInCas("john", "gtngtn");
 		homePagePlatform.goToWiki();
 		wikiHomePage.goToAddBlankPage();
-		richTextEditor.addSimplePage(title1,title1);
+		richTextEditor.addSimplePage(title1, title1);
 		wikiManagement.saveAddPage();
 		$(byText(title1)).should(Condition.exist);
 
@@ -125,14 +126,14 @@ public class Wiki_Basic_Action_OtherActions extends Base{
 
 
 	@Test
-	public  void test03_MovePage_MyWiki_Intranet () {
+	public void test03_MovePage_MyWiki_Intranet() {
 
-		String title1 = "title1" +getRandomNumber();
+		String title1 = "title1" + getRandomNumber();
 
-		manageLogInOut.signInCas("john","gtngtn");
+		manageLogInOut.signInCas("john", "gtngtn");
 		navigationToolbar.goToMyWiki();
 		wikiHomePage.goToAddBlankPage();
-		richTextEditor.addSimplePage(title1,title1);
+		richTextEditor.addSimplePage(title1, title1);
 		wikiManagement.saveAddPage();
 		$(byText(title1)).should(Condition.exist);
 
@@ -145,7 +146,7 @@ public class Wiki_Basic_Action_OtherActions extends Base{
 
 
 	@Test
-	public  void test04_MovePage_MyWiki_Space () {
+	public void test04_MovePage_MyWiki_Space() {
 
 		info("Create a space");
 		String space = "space" + getRandomNumber();
@@ -174,7 +175,7 @@ public class Wiki_Basic_Action_OtherActions extends Base{
 	}
 
 	@Test
-	public  void test05_MovePage_Space_MyWiki () {
+	public void test05_MovePage_Space_MyWiki() {
 
 		info("Create a space");
 		String space = "space" + getRandomNumber();
@@ -203,7 +204,7 @@ public class Wiki_Basic_Action_OtherActions extends Base{
 	}
 
 	@Test
-	public  void test06_MovePage_Intranet_Space () {
+	public void test06_MovePage_Intranet_Space() {
 
 		info("Create a space");
 		String space = "space" + getRandomNumber();
@@ -212,10 +213,10 @@ public class Wiki_Basic_Action_OtherActions extends Base{
 		spaceManagement.addNewSpaceSimple(space, space, 6000);
 
 		info("Create a wiki page ");
-		String title1 = "title1" +getRandomNumber();
+		String title1 = "title1" + getRandomNumber();
 		homePagePlatform.goToWiki();
 		wikiHomePage.goToAddBlankPage();
-		richTextEditor.addSimplePage(title1,title1);
+		richTextEditor.addSimplePage(title1, title1);
 		wikiManagement.saveAddPage();
 		$(byText(title1)).should(Condition.exist);
 
@@ -231,7 +232,7 @@ public class Wiki_Basic_Action_OtherActions extends Base{
 	}
 
 	@Test
-	public  void test07_MovePage_Space_Intranet () {
+	public void test07_MovePage_Space_Intranet() {
 
 		info("Create a space");
 		String space = "space" + getRandomNumber();
@@ -239,6 +240,7 @@ public class Wiki_Basic_Action_OtherActions extends Base{
 		manageLogInOut.signInCas("john", "gtngtn");
 		homePagePlatform.goToAllSpace();
 		spaceManagement.addNewSpaceSimple(space, space, 6000);
+
 
 		info("Create a wiki page in space");
 		String title1 = "title1" + getRandomNumber();
@@ -259,13 +261,37 @@ public class Wiki_Basic_Action_OtherActions extends Base{
 	}
 
 
+	@Test
+	public void test08_MovePage_Space2_Space1() {
 
+		info("Create a space");
+		String space1 = "space" + getRandomNumber();
+		String space2 = "space" + getRandomNumber();
 
+		manageLogInOut.signInCas("john", "gtngtn");
+		homePagePlatform.goToAllSpace();
+		spaceManagement.addNewSpaceSimple(space1, space1, 6000);
+		homePagePlatform.goToAllSpace();
+		spaceManagement.addNewSpaceSimple(space2, space2, 6000);
 
+		info("Create a wiki page in space2");
+		String title1 = "title1" + getRandomNumber();
+		spaceManagement.goToWikiTab();
+		wikiHomePage.goToAddBlankPage();
+		richTextEditor.addSimplePage(title1, title1);
+		wikiManagement.saveAddPage();
+		$(byText(title1)).should(Condition.exist);
 
+		info("Move page to Space1");
 
-
-
-
+		wikiManagement.selectSpaceDestination(space1);
+		homePagePlatform.goToSpecificSpace(space1);
+		spaceHomePage.goToWikiTab();
+		$(byClassName("uiTreeExplorer")).find(byText(title1)).should(Condition.exist);
+		homePagePlatform.goToHomePage();
+		homePagePlatform.goToAllSpace();
+		spaceManagement.deleteSpace(space1, false);
+		spaceManagement.deleteSpace(space2, false);
 
 	}
+}
