@@ -56,7 +56,7 @@ public class WikiBasicTestWithUser extends Base {
 
     SpaceManagement spaceManagement;
 
-    SpaceHomePage spaceHomePage;
+   gti
 
 
     @BeforeEach
@@ -381,7 +381,7 @@ public class WikiBasicTestWithUser extends Base {
         String content2 = "content" + getRandomNumber();
 
         info("Create a new wiki page");
-        manageLogInOut.signInCas("john", "gtngtn");
+
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(title, content);
