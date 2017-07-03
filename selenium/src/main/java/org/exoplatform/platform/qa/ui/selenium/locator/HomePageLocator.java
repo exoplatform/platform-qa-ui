@@ -574,4 +574,5 @@ public final class HomePageLocator {
 
   public static final SelenideElement ELEMENT_SEARCH_RESULT                                                =
                                                             $(byId("quickSearchResult1"));
+
 }

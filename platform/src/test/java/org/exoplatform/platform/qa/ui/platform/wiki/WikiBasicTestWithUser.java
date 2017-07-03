@@ -8,21 +8,22 @@ import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_ICON_SEARCH;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_SEARCH_INPUT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_SEARCH_RESULT;
+
 import java.util.ArrayList;
 
-import static com.codeborne.selenide.Condition.appears;
-import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
-import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_SOURCE_EDITOR_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -35,7 +36,7 @@ public class WikiBasicTestWithUser extends Base {
 
     RichTextEditor richTextEditor;
 
-    SourceTextEditor sourcetexteditor;
+    SourceTextEditor sourceTextEditor;
 
     WikiValidattions wikiValidattions;
 
@@ -51,6 +52,11 @@ public class WikiBasicTestWithUser extends Base {
 
     UserAndGroupManagement userAndGroupManagement;
 
+    ActivityStream activityStream;
+
+    SpaceManagement spaceManagement;
+
+    SpaceHomePage spaceHomePage;
 
 
     @BeforeEach
@@ -61,10 +67,14 @@ public class WikiBasicTestWithUser extends Base {
         wikiValidattions = new WikiValidattions(this);
         wikiManagement = new WikiManagement(this);
         wikiHomePage = new WikiHomePage(this);
+        activityStream = new ActivityStream(this);
+        spaceManagement = new SpaceManagement(this);
+        spaceHomePage = new SpaceHomePage(this);
+        sourceTextEditor = new SourceTextEditor(this);
 
 
         try {
-            sourcetexteditor = new SourceTextEditor(this);
+            sourceTextEditor = new SourceTextEditor(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -76,10 +86,10 @@ public class WikiBasicTestWithUser extends Base {
         }
 
         arrayPage = new ArrayList<String>();
-        userAddManagement=new UserAddManagement(this);
-        navigationToolbar=new NavigationToolbar(this);
-        manageLogInOut=new ManageLogInOut(this);
-        userAndGroupManagement=new UserAndGroupManagement(this);
+        userAddManagement = new UserAddManagement(this);
+        navigationToolbar = new NavigationToolbar(this);
+        manageLogInOut = new ManageLogInOut(this);
+        userAndGroupManagement = new UserAndGroupManagement(this);
     }
 
     @Test
@@ -90,7 +100,7 @@ public class WikiBasicTestWithUser extends Base {
         String title1 = "title" + getRandomNumber();
         String content1 = "content" + getRandomNumber();
 
-        manageLogInOut.signInCas("john","gtngtn");
+        manageLogInOut.signInCas("john", "gtngtn");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(title1, content1);
@@ -130,7 +140,7 @@ public class WikiBasicTestWithUser extends Base {
         String label = "label" + getRandomNumber();
         String tooltip = "tooltip" + getRandomNumber();
         String address = "www.google.com";
-        manageLogInOut.signInCas("john","gtngtn");
+        manageLogInOut.signInCas("john", "gtngtn");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(title1, content1);
@@ -159,11 +169,11 @@ public class WikiBasicTestWithUser extends Base {
         info("Create a wiki page");
         String title = "title" + getRandomNumber();
         String content = "content" + getRandomNumber();
-        manageLogInOut.signInCas("john","gtngtn");
+        manageLogInOut.signInCas("john", "gtngtn");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         wikiManagement.goToSourceEditor();
-        sourcetexteditor.addSimplePage(title, content);
+        sourceTextEditor.addSimplePage(title, content);
         wikiManagement.saveAddPage();
 
         wikiValidattions.verifyTitleWikiPage(title);
@@ -177,18 +187,19 @@ public class WikiBasicTestWithUser extends Base {
         if ($(ELEMENT_SOURCE_EDITOR_BUTTON).isDisplayed()) {
             wikiManagement.goToSourceEditor();
         }
-        sourcetexteditor.editSimplePage(newTitle, newContent);
+        sourceTextEditor.editSimplePage(newTitle, newContent);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(newTitle);
         arrayPage.add(newTitle);
         wikiHomePage.deleteWiki(newTitle);
 
     }
+
     @Test
-    public void test04_Create_Delete_PageUsingSourceEditor() {
+    public void test04_05_CreateDeletePageUsingSourceEditor() {
         info("Test 4: Create page using Source Editor");
         String wiki = "wiki" + getRandomNumber();
-        manageLogInOut.signInCas("john","gtngtn");
+        manageLogInOut.signInCas("john", "gtngtn");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(wiki, wiki);
@@ -199,4 +210,203 @@ public class WikiBasicTestWithUser extends Base {
     }
 
 
+    @Test
+    public void test06_CreateNewWikiPage() {
+        info("Test 6: Create new wiki page");
+        String title = "title" + getRandomNumber();
+        String line1 = "line1" + getRandomNumber();
+        String line2 = "line2" + getRandomNumber();
+        String line3 = "line3" + getRandomNumber();
+        String line4 = "line4" + getRandomNumber();
+        String line5 = "line5" + getRandomNumber();
+        String content = line1 + "</br>" + line2 + "</br>" + line3 + "</br>" + line4 + "</br>" + line5;
+
+
+        info("Create a new wiki page");
+        manageLogInOut.signInCas("john", "gtngtn");
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        richTextEditor.addSimplePage(title, content);
+        wikiManagement.saveAddPage();
+        info("Verify that the new wiki page is created successfully");
+        $(byText(title)).should(Condition.exist);
+
+        homePagePlatform.goToHomePage();
+        activityStream.checkActivityAddWikiPage(title, content, null);
+
+        info("Delete the page");
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(title);
+    }
+
+    @Test
+    public void test07_DeleteWikiPage() {
+        info("Test 07: Delete wiki page");
+        String title = "title" + getRandomNumber();
+        String content = "content" + getRandomNumber();
+
+        info("Create a new wiki page");
+        manageLogInOut.signInCas("john", "gtngtn");
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        richTextEditor.addSimplePage(title, content);
+        wikiManagement.saveAddPage();
+        info("Verify that the new wiki page is created successfully");
+        $(byText(title)).should(Condition.exist);
+        info("Verify that an activity is added to the activity stream");
+        homePagePlatform.goToHomePage();
+        activityStream.checkActivity(title);
+
+        info("Delete the page");
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(title);
+        homePagePlatform.goToHomePage();
+        $(byText(title)).shouldNot(Condition.exist);
+    }
+
+
+    @Test
+    public void test08_AddAWikisActivityAfterCreateAWikiPageInSpace() {
+        info("Test 08 Add a wiki's activity after create a wiki page in space");
+    /*
+     * Step Number: 1 Step Name: Step 1: Add new space Step Description: -
+     * Connect to Intranet - Click [Join a space] - Click [Add New Space] Input
+     * Data: Expected Outcome: The new space is created successfully
+     */
+
+        info("Create a space");
+        String space = "space" + getRandomNumber();
+        manageLogInOut.signInCas("john", "gtngtn");
+        homePagePlatform.goToAllSpace();
+        spaceManagement.addNewSpaceSimple(space, space, 6000);
+
+        info("Create a wiki page");
+        String title = "title" + getRandomNumber();
+        String content = "content" + getRandomNumber();
+        homePagePlatform.goToSpecificSpace(space);
+        spaceHomePage.goToWikiTab();
+        wikiHomePage.goToAddBlankPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.addSimplePage(title, content);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(title);
+
+        info("Check the Activity");
+        homePagePlatform.goToHomePage();
+        activityStream.checkActivity(title);
+        homePagePlatform.goToAllSpace();
+        spaceManagement.deleteSpace(space, false);
+
+    }
+
+    @Test
+    public void test09_RemoveWikisPageOfSpace() {
+        info("Test 09 Remove wiki's page of space");
+
+        info("Create a space");
+        String space = "space" + getRandomNumber();
+
+        manageLogInOut.signInCas("john", "gtngtn");
+        homePagePlatform.goToAllSpace();
+        spaceManagement.addNewSpaceSimple(space, space, 6000);
+
+        info("Create a wiki page");
+        String title = "title" + getRandomNumber();
+        String content = "content" + getRandomNumber();
+        homePagePlatform.goToSpecificSpace(space);
+        spaceHomePage.goToWikiTab();
+        wikiHomePage.goToAddBlankPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.addSimplePage(title, content);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(title);
+
+        homePagePlatform.goToSpecificSpace(space);
+        spaceHomePage.goToWikiTab();
+        wikiHomePage.deleteWiki(title);
+        wikiValidattions.verifyWikiPageNotDisplayedInWikiHome(title);
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToAllSpace();
+        spaceManagement.deleteSpace(space, false);
+
+    }
+
+    @Test
+    public void test10_editPageWikionSpace() {
+        info("Edit page wiki on space");
+        info("Create a space");
+        String space = "space" + getRandomNumber();
+
+        manageLogInOut.signInCas("john", "gtngtn");
+        homePagePlatform.goToAllSpace();
+        spaceManagement.addNewSpaceSimple(space, space, 6000);
+
+        info("Create a wiki page");
+        String title = "title" + getRandomNumber();
+        String content = "content" + getRandomNumber();
+        homePagePlatform.goToSpecificSpace(space);
+        spaceHomePage.goToWikiTab();
+        wikiHomePage.goToAddBlankPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.addSimplePage(title, content);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(title);
+        homePagePlatform.goToHomePage();
+        activityStream.checkActivity(title);
+
+        info("Edit wiki page");
+        wikiHomePage.goToAPage(title);
+        wikiHomePage.goToEditPage();
+        if ($(ELEMENT_SOURCE_EDITOR_BUTTON).isDisplayed()) {
+            wikiManagement.goToSourceEditor();
+        }
+        String newTitle = "newTitle" + getRandomNumber();
+        String newContent = "newContent" + getRandomNumber();
+        sourceTextEditor.editSimplePage(newTitle, newContent);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(newTitle);
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToAllSpace();
+        spaceManagement.deleteSpace(space, false);
+
+    }
+
+    @Test
+    public void test11_SearchWikiPageFromHomeSearchBar(){
+        String title = "title" + getRandomNumber();
+        String content = "content" + getRandomNumber();
+        String title1 = "title" + getRandomNumber();
+        String content1 = "content" + getRandomNumber();
+        String title2 = "title" + getRandomNumber();
+        String content2 = "content" + getRandomNumber();
+
+        info("Create a new wiki page");
+        manageLogInOut.signInCas("john", "gtngtn");
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        richTextEditor.addSimplePage(title, content);
+        wikiManagement.saveAddPage();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        richTextEditor.addSimplePage(title1, content1);
+        wikiManagement.saveAddPage();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        richTextEditor.addSimplePage(title2, content2);
+        wikiManagement.saveAddPage();
+
+        homePagePlatform.goToHomePage();
+        ELEMENT_ICON_SEARCH.click();
+        ELEMENT_SEARCH_INPUT.setValue(title);
+        ELEMENT_SEARCH_RESULT.shouldHave(Condition.exactText(title));
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(title);
+        wikiHomePage.deleteWiki(title1);
+        wikiHomePage.deleteWiki(title2);
+    }
 }
+
+
+
+
+
