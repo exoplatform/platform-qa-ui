@@ -173,9 +173,32 @@ public class Wiki_Basic_Action_OtherActions extends Base{
 
 	}
 
+	@Test
+	public  void test05_MovePage_Space_MyWiki () {
 
+		info("Create a space");
+		String space = "space" + getRandomNumber();
 
+		manageLogInOut.signInCas("john", "gtngtn");
+		homePagePlatform.goToAllSpace();
+		spaceManagement.addNewSpaceSimple(space, space, 6000);
 
+		info("Create a wiki page in space");
+		String title1 = "title1" + getRandomNumber();
+		spaceManagement.goToWikiTab();
+		wikiHomePage.goToAddBlankPage();
+		richTextEditor.addSimplePage(title1, title1);
+		wikiManagement.saveAddPage();
+		$(byText(title1)).should(Condition.exist);
 
+		info("Move page to MyWiki");
+		wikiManagement.selectSpaceDestination("My Wiki");
+		navigationToolbar.goToMyWiki();
+		$(byClassName("uiTreeExplorer")).find(byText(title1)).should(Condition.exist);
+		homePagePlatform.goToHomePage();
+		homePagePlatform.goToAllSpace();
+		spaceManagement.deleteSpace(space, false);
 
 	}
+
+}

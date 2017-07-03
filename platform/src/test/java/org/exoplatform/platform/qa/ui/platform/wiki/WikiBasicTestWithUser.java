@@ -56,7 +56,7 @@ public class WikiBasicTestWithUser extends Base {
 
     SpaceManagement spaceManagement;
 
-   gti
+    SpaceHomePage spaceHomePage;
 
 
     @BeforeEach
