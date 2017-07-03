@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
+import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
@@ -271,8 +272,13 @@ public class WikiManagement {
    */
   public void selectSpaceDestination(String destination) {
     info("Select a space destination in the list");
-    evt.click(ELEMENT_MOVE_PAGE_POPUP_DROP_DOWN_LOCATOR.replace("${locator}", destination));
-    evt.waitForAndGetElement(ELEMENT_MOVE_PAGE_SPACE_SWITCHER_DROP_DOWN_VALUE_SELECTED.replace("$destination", destination));
+    info("Click on More link");
+    $(ELEMENT_MORE_LINK).click();
+    info("Click on Move page link");
+    $(ELEMENT_MOVE_PAGE).hover().click();
+    ELEMENT_SELECT_DESTINATION.click();
+    ELEMENT_POPUP_SELECT_DESTINATION.find(byText(destination)).click();
+    $(ELEMENT_WIKI_PAGE_MOVE_POPUP_SAVE).click();
   }
 
   /**
