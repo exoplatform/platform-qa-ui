@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.wiki;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
@@ -14,17 +15,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
-import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS;
-import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_TREE_WIKI_NAME;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import org.junit.jupiter.api.Test;
 
 
 @Tag("wiki")
 
-public class Wiki_Basic_Action_OtherActions extends Base {
+public class Wiki_Basic_Action_OtherActionsTestIT extends Base {
 
 	HomePagePlatform homePagePlatform;
 	WikiHomePage wikiHomePage;
@@ -69,17 +67,6 @@ public class Wiki_Basic_Action_OtherActions extends Base {
 		manageLogInOut.signInCas("john", "gtngtn");
 		String title1 = "title1" + getRandomNumber();
 		String title2 = "title2" + getRandomNumber();
-
-		/*Step Number: 1
-		 *Step Name: Step 1: Move Page
-		 *Step Description: 
-			- Open an existing page by clicking on page name in navigation tree.
-			- Click on More icon on toolbar and select Move Page action in menu
-			- In Move form: Select new location and click on Move button
-		 *Input Data: 
-
-		 *Expected Outcome: 
-			Selected Page is moved and displayed in new location*/
 
 		info("Create first new wiki pages");
 		homePagePlatform.goToWiki();
@@ -294,4 +281,78 @@ public class Wiki_Basic_Action_OtherActions extends Base {
 		spaceManagement.deleteSpace(space2, false);
 
 	}
+
+	@Test
+	public  void test09_MovePageInSameSpace() {
+		info("Test 09 Move page in same space");
+
+		String space = "space" + getRandomNumber();
+
+		String wiki1 =  "wiki1" + getRandomNumber();
+		String wiki2 = "wiki2" + getRandomNumber();
+
+		manageLogInOut.signInCas("john", "gtngtn");
+
+		info("Create space 1 and wiki page ");
+		homePagePlatform.goToMySpaces();
+		spaceManagement.addNewSpaceSimple(space,space);
+
+		info("Add new wiki page 1 for space 1");
+		spaceHomePage.goToWikiTab();
+		wikiHomePage.goToAddBlankPage();
+		richTextEditor.addSimplePage(wiki1,wiki1);
+		wikiManagement.saveAddPage();
+		$(byText(wiki1)).should(Condition.exist);
+
+		info("Add new wiki page 2 for space ");
+		wikiHomePage.goToHomeWikiPage();
+		wikiHomePage.goToAddBlankPage();
+		richTextEditor.addSimplePage(wiki2,wiki2);
+		wikiManagement.saveAddPage();
+		$(byText(wiki2)).should(Condition.exist);
+
+		info("Move wiki page 1 to wiki page 2");
+		homePagePlatform.goToSpecificSpace(space);
+		spaceHomePage.goToWikiTab();
+		wikiManagement.movePage(wiki1, wiki2);
+		homePagePlatform.goToHomePage();
+		homePagePlatform.goToAllSpace();
+		spaceManagement.deleteSpace(space, false);
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
