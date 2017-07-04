@@ -106,6 +106,7 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     // insert comment
     $(byId("cke_CommentTextarea" + id)).waitUntil(Condition.appears, Configuration.timeout).click();
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
+    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
     // click on the button comment
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter();
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears,Configuration.timeout);
@@ -275,14 +276,13 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     executeJavaScript("window.scrollBy(0,-550)");
     // hover on the comment to appear the delete button
     $(byId(ELEMENT_COMMENT_BLOC.replace("{id}",id))).hover();
-
     // the id of the comment is id of the activity+1
     Integer idComment = Integer.parseInt(id) + 1;
     $(byId("DeleteCommentButtoncomment" + idComment.toString())).click();
     // Confirm
     ELEMENT_DELETE_POPUP_OK.click();
     // verify that the comment is deleted
-    $(byText(comment)).shouldNot(Condition.exist);
+    $(byText(comment+comment)).shouldNot(Condition.exist);
     manageLogInOut.signIn("root", "gtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
