@@ -28,7 +28,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("wiki")
-public class WikiBasicTestWithUser extends Base {
+public class WikiBasicTestWithUserTestIT extends Base {
 
     HomePagePlatform homePagePlatform;
 
