@@ -167,7 +167,6 @@ public class SpaceActivitiesTestIT extends Base {
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
 // click on the button comment
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter();
-
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears, Configuration.timeout);
     info("Test 15: Delete comment");
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();

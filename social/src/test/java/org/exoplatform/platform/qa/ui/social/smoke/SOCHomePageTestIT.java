@@ -99,28 +99,6 @@ public class SOCHomePageTestIT extends Base {
      * text field - input the comment and click comment Input Data: Expected
      * Outcome: - Comment will be shown in comment section of activity
      */
-<<<<<<< bd4372a435b67ef6741474b42306ee25ba9f6e1a
-=======
-    String activity1 = "activity1" + getRandomNumber();
-    String comment = "comment" + getRandomNumber();
-    activityStream.addActivity(activity1, "");
-    // get the id of activity created
-    String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1]; // click
-                                                                                                           // on
-                                                                                                           // comment
-                                                                                                           // icon
-    $(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
-    // insert comment
-    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
-    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
-    // click on the button comment
-    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitWhile(Condition.disabled, Configuration.timeout);
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-    ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears,Configuration.timeout);
-      $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).click();
->>>>>>> add waitUntil
-
-
         String activity1 = "activity1" + getRandomNumber();
         String comment = "comment" + getRandomNumber();
         activityStream.addActivity(activity1, "");
