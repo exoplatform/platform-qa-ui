@@ -135,7 +135,6 @@ public class SOCHomePageTestIT extends Base {
     }
 
 
-
   /**
    * <li>Case ID:121910.</li>
    * <li>Test Case Name: Delete your activity.</li>
