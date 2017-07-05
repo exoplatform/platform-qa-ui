@@ -280,6 +280,7 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     $(byId("DeleteCommentButtoncomment" + idComment.toString())).click();
     // Confirm
     ELEMENT_DELETE_POPUP_OK.click();
+
     // verify that the comment is deleted
     $(byText(comment)).shouldNot(Condition.exist);
     manageLogInOut.signIn("root", "gtn");
