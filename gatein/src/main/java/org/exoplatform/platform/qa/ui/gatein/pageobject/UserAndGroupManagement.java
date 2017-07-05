@@ -456,6 +456,7 @@ public class UserAndGroupManagement {
     info("--Search user " + username + "--");
     if (ELEMENT_BTN_SEARCH_USER.is(Condition.not(Condition.exist))) {
       ELEMENT_BTN_USER_TAB.click();
+
     }
     if (testBase.isTextPresent("Search")) {
       $(ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);

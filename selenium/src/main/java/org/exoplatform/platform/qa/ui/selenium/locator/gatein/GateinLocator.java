@@ -1718,5 +1718,8 @@ public static final SelenideElement ELEMENT_BTN_USER_TAB=$(byXpath("//*[@id=\"UI
   public static final By            ELEMENT_PAGEEDITOR_VIEWPAGE                             = By.xpath("//*[@class='VIEW-PAGE']");
 public static final SelenideElement ELEMENT_GROUP_TAB=$(byXpath("//*[@id=\"UIOrganizationPortlet\"]/div[2]/div[1]/ul/li[2]/a"));
 public static final SelenideElement ELEMENT_TITLE_GROUP_INFO= $(byXpath("//*[@id=\"UIOrganizationPortlet\"]/div[2]/div[2]/div/div[2]/div[2]/div/div/div/h5"));
+<<<<<<< f97281b684afee44d18450fdeb6b0359bfec1874
 public static final By ELEMENT_ICON_EDIT_USER=byClassName("uiIconViewUserInfo");
+=======
+>>>>>>> change locators and add condition
 }
