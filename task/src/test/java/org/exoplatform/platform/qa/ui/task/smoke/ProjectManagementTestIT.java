@@ -1,21 +1,19 @@
 package org.exoplatform.platform.qa.ui.task.smoke;
 
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.task.pageobject.ManagementProjects;
 import org.exoplatform.platform.qa.ui.task.pageobject.ManagementTasks;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 /**
  * Created by exo on 08/06/17.
@@ -23,56 +21,56 @@ import org.exoplatform.platform.qa.ui.task.pageobject.ManagementTasks;
 @Tag("smoke")
 @Tag("task")
 public class ProjectManagementTestIT extends Base {
-  HomePagePlatform   homePagePlatform;
+    HomePagePlatform homePagePlatform;
 
-  ManagementProjects managementProjects;
+    ManagementProjects managementProjects;
 
-  ManagementTasks    managementTasks;
+    ManagementTasks managementTasks;
 
-  @BeforeEach
-  public void setupBeforeMethod() {
-    info("Start setUpBeforeMethod");
+    @BeforeEach
+    public void setupBeforeMethod() {
+        info("Start setUpBeforeMethod");
 
-    homePagePlatform = new HomePagePlatform(this);
-    managementProjects = new ManagementProjects(this);
-    managementTasks = new ManagementTasks(this);
-  }
+        homePagePlatform = new HomePagePlatform(this);
+        managementProjects = new ManagementProjects(this);
+        managementTasks = new ManagementTasks(this);
+    }
 
-  @Test
-  public void test01_02_03_Add_Edit_DeleteProject() {
-    String title = "title" + getRandomNumber();
-    String newTitle = "newTitle" + getRandomNumber();
-    ;
-    homePagePlatform.goToTaskPage();
-    info("add project");
-    managementProjects.addProject(title, "", false);
-    info("verify project added");
-    $(byText(title)).should(Condition.exist);
-    info("edit project");
-    managementProjects.editProject(title, title, newTitle, "", true);
-    info("verify project edited");
-    $(byText(newTitle)).should(Condition.exist);
-    info("delete project");
-    managementProjects.deleteProject(newTitle);
-    info("verify project deleted");
-    $(byText(newTitle)).waitUntil(Condition.disappears, Configuration.timeout);
+    @Test
+    public void test01_02_03_Add_Edit_DeleteProject() {
+        String title = "title" + getRandomNumber();
+        String newTitle = "newTitle" + getRandomNumber();
+        ;
+        homePagePlatform.goToTaskPage();
+        info("add project");
+        managementProjects.addProject(title, "", false);
+        info("verify project added");
+        $(byText(title)).should(Condition.exist);
+        info("edit project");
+        managementProjects.editProject(title, title, newTitle, "", true);
+        info("verify project edited");
+        $(byText(newTitle)).should(Condition.exist);
+        info("delete project");
+        managementProjects.deleteProject(newTitle);
+        info("verify project deleted");
+        $(byText(newTitle)).waitUntil(Condition.disappears, Configuration.timeout);
 
-  }
+    }
 
-  @Test
-  public void test04_05_06_Add_Edit_DeleteTaskInProject() {
-    String title = "title" + getRandomNumber();
-    String task = "task" + getRandomNumber();
-    String newTask = "newTask" + getRandomNumber();
-    homePagePlatform.goToTaskPage();
-    managementProjects.addProject(title, "", false);
-    $(byText(title)).click();
-    managementTasks.addTask(task);
-    info("edit task");
-    managementTasks.editTask(task, newTask, "High");
-    info("delete task");
-    managementTasks.deleteTask(newTask);
-    managementProjects.deleteProject(title);
+    @Test
+    public void test04_05_06_Add_Edit_DeleteTaskInProject() {
+        String title = "title" + getRandomNumber();
+        String task = "task" + getRandomNumber();
+        String newTask = "newTask" + getRandomNumber();
+        homePagePlatform.goToTaskPage();
+        managementProjects.addProject(title, "", false);
+        $(byText(title)).click();
+        managementTasks.addTask(task);
+        info("edit task");
+        managementTasks.editTask(task, newTask, "High");
+        info("delete task");
+        managementTasks.deleteTask(newTask);
+        managementProjects.deleteProject(title);
 
-  }
+    }
 }
