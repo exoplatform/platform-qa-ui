@@ -137,6 +137,7 @@ public class NavigationToolbar {
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
     ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.click();
 
+
   }
 
   /**

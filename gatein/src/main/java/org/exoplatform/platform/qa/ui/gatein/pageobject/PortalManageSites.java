@@ -40,6 +40,7 @@ public class PortalManageSites {
 
     ELEMENT_BUTTON_EDIT_NAVIGATION.click();
 
+
     $(ELEMENT_NAVIGATION_MANAGEMENT_POPUP_TITLE).waitUntil(Condition.appears, Configuration.timeout);
   }
 
