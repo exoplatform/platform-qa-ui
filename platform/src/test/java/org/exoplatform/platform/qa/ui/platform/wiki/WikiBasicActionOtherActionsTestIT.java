@@ -22,9 +22,9 @@ import org.junit.jupiter.api.Test;
 
 
 @Tag("wiki")
+@Tag("test")
 
-
-public class Wiki_Basic_Action_OtherActionsTestIT extends Base {
+public class WikiBasicActionOtherActionsTestIT extends Base {
 
 	HomePagePlatform homePagePlatform;
 	WikiHomePage wikiHomePage;
