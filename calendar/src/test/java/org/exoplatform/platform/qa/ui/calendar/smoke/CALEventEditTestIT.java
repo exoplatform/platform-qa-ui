@@ -54,7 +54,7 @@ public class CALEventEditTestIT extends Base {
    * <li>Post-Condition:</li>
    */
 
-  public void Malek2013() {
+  public void test03_EditEventOfGroupCalendar() {
     info("Test 3: Edit event of group calendar");
     /*
      * Step Number: 1 Step Name: Step 1: Add event Step Description: - Add new
