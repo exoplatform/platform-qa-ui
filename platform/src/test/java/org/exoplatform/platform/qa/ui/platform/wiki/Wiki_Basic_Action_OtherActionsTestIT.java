@@ -11,6 +11,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.RichTextEditor;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import static com.codeborne.selenide.Selectors.*;
@@ -21,6 +22,7 @@ import org.junit.jupiter.api.Test;
 
 
 @Tag("wiki")
+
 
 public class Wiki_Basic_Action_OtherActionsTestIT extends Base {
 
@@ -43,14 +45,19 @@ public class Wiki_Basic_Action_OtherActionsTestIT extends Base {
 		navigationToolbar = new NavigationToolbar(this);
 		spaceManagement = new SpaceManagement(this);
 		spaceHomePage = new SpaceHomePage(this);
+		manageLogInOut.signInCas("john", "gtngtn");
 
 
 		try {
 			richTextEditor = new RichTextEditor(this);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
+	@AfterEach
+	public void signout(){manageLogInOut.signOut();}
 
 	/**
 	 * <li> Case ID:122810.</li>
@@ -64,7 +71,6 @@ public class Wiki_Basic_Action_OtherActionsTestIT extends Base {
 
 		info("Test 1: Move Page");
 
-		manageLogInOut.signInCas("john", "gtngtn");
 		String title1 = "title1" + getRandomNumber();
 		String title2 = "title2" + getRandomNumber();
 
@@ -96,7 +102,6 @@ public class Wiki_Basic_Action_OtherActionsTestIT extends Base {
 
 		String title1 = "title1" + getRandomNumber();
 
-		manageLogInOut.signInCas("john", "gtngtn");
 		homePagePlatform.goToWiki();
 		wikiHomePage.goToAddBlankPage();
 		richTextEditor.addSimplePage(title1, title1);
@@ -117,7 +122,6 @@ public class Wiki_Basic_Action_OtherActionsTestIT extends Base {
 
 		String title1 = "title1" + getRandomNumber();
 
-		manageLogInOut.signInCas("john", "gtngtn");
 		navigationToolbar.goToMyWiki();
 		wikiHomePage.goToAddBlankPage();
 		richTextEditor.addSimplePage(title1, title1);
@@ -138,7 +142,7 @@ public class Wiki_Basic_Action_OtherActionsTestIT extends Base {
 		info("Create a space");
 		String space = "space" + getRandomNumber();
 
-		manageLogInOut.signInCas("john", "gtngtn");
+
 		homePagePlatform.goToAllSpace();
 		spaceManagement.addNewSpaceSimple(space, space, 6000);
 
@@ -167,7 +171,6 @@ public class Wiki_Basic_Action_OtherActionsTestIT extends Base {
 		info("Create a space");
 		String space = "space" + getRandomNumber();
 
-		manageLogInOut.signInCas("john", "gtngtn");
 		homePagePlatform.goToAllSpace();
 		spaceManagement.addNewSpaceSimple(space, space, 6000);
 
@@ -195,7 +198,6 @@ public class Wiki_Basic_Action_OtherActionsTestIT extends Base {
 
 		info("Create a space");
 		String space = "space" + getRandomNumber();
-		manageLogInOut.signInCas("john", "gtngtn");
 		homePagePlatform.goToAllSpace();
 		spaceManagement.addNewSpaceSimple(space, space, 6000);
 
@@ -224,7 +226,6 @@ public class Wiki_Basic_Action_OtherActionsTestIT extends Base {
 		info("Create a space");
 		String space = "space" + getRandomNumber();
 
-		manageLogInOut.signInCas("john", "gtngtn");
 		homePagePlatform.goToAllSpace();
 		spaceManagement.addNewSpaceSimple(space, space, 6000);
 
@@ -255,7 +256,6 @@ public class Wiki_Basic_Action_OtherActionsTestIT extends Base {
 		String space1 = "space" + getRandomNumber();
 		String space2 = "space" + getRandomNumber();
 
-		manageLogInOut.signInCas("john", "gtngtn");
 		homePagePlatform.goToAllSpace();
 		spaceManagement.addNewSpaceSimple(space1, space1, 6000);
 		homePagePlatform.goToAllSpace();
@@ -291,7 +291,6 @@ public class Wiki_Basic_Action_OtherActionsTestIT extends Base {
 		String wiki1 =  "wiki1" + getRandomNumber();
 		String wiki2 = "wiki2" + getRandomNumber();
 
-		manageLogInOut.signInCas("john", "gtngtn");
 
 		info("Create space 1 and wiki page ");
 		homePagePlatform.goToMySpaces();
@@ -320,8 +319,6 @@ public class Wiki_Basic_Action_OtherActionsTestIT extends Base {
 		spaceManagement.deleteSpace(space, false);
 
 	}
-
-
 
 
 
