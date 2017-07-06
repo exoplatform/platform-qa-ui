@@ -11,6 +11,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -28,6 +29,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("wiki")
+
 public class WikiBasicTestWithUserTestIT extends Base {
 
     HomePagePlatform homePagePlatform;
@@ -90,7 +92,10 @@ public class WikiBasicTestWithUserTestIT extends Base {
         navigationToolbar = new NavigationToolbar(this);
         manageLogInOut = new ManageLogInOut(this);
         userAndGroupManagement = new UserAndGroupManagement(this);
+        manageLogInOut.signInCas("john", "gtngtn");
     }
+    @AfterEach
+    public void signout(){manageLogInOut.signOut();}
 
     @Test
     public void test01_AddAPageWithLinkWikiPageExisted() {
@@ -100,7 +105,6 @@ public class WikiBasicTestWithUserTestIT extends Base {
         String title1 = "title" + getRandomNumber();
         String content1 = "content" + getRandomNumber();
 
-        manageLogInOut.signInCas("john", "gtngtn");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(title1, content1);
@@ -140,7 +144,6 @@ public class WikiBasicTestWithUserTestIT extends Base {
         String label = "label" + getRandomNumber();
         String tooltip = "tooltip" + getRandomNumber();
         String address = "www.google.com";
-        manageLogInOut.signInCas("john", "gtngtn");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(title1, content1);
@@ -169,7 +172,6 @@ public class WikiBasicTestWithUserTestIT extends Base {
         info("Create a wiki page");
         String title = "title" + getRandomNumber();
         String content = "content" + getRandomNumber();
-        manageLogInOut.signInCas("john", "gtngtn");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         wikiManagement.goToSourceEditor();
@@ -199,7 +201,6 @@ public class WikiBasicTestWithUserTestIT extends Base {
     public void test04_05_CreateDeletePageUsingSourceEditor() {
         info("Test 4: Create page using Source Editor");
         String wiki = "wiki" + getRandomNumber();
-        manageLogInOut.signInCas("john", "gtngtn");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(wiki, wiki);
@@ -223,7 +224,6 @@ public class WikiBasicTestWithUserTestIT extends Base {
 
 
         info("Create a new wiki page");
-        manageLogInOut.signInCas("john", "gtngtn");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(title, content);
@@ -246,7 +246,6 @@ public class WikiBasicTestWithUserTestIT extends Base {
         String content = "content" + getRandomNumber();
 
         info("Create a new wiki page");
-        manageLogInOut.signInCas("john", "gtngtn");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(title, content);
@@ -276,7 +275,6 @@ public class WikiBasicTestWithUserTestIT extends Base {
 
         info("Create a space");
         String space = "space" + getRandomNumber();
-        manageLogInOut.signInCas("john", "gtngtn");
         homePagePlatform.goToAllSpace();
         spaceManagement.addNewSpaceSimple(space, space, 6000);
 
@@ -306,7 +304,6 @@ public class WikiBasicTestWithUserTestIT extends Base {
         info("Create a space");
         String space = "space" + getRandomNumber();
 
-        manageLogInOut.signInCas("john", "gtngtn");
         homePagePlatform.goToAllSpace();
         spaceManagement.addNewSpaceSimple(space, space, 6000);
 
@@ -337,7 +334,6 @@ public class WikiBasicTestWithUserTestIT extends Base {
         info("Create a space");
         String space = "space" + getRandomNumber();
 
-        manageLogInOut.signInCas("john", "gtngtn");
         homePagePlatform.goToAllSpace();
         spaceManagement.addNewSpaceSimple(space, space, 6000);
 
@@ -381,7 +377,6 @@ public class WikiBasicTestWithUserTestIT extends Base {
         String content2 = "content" + getRandomNumber();
 
         info("Create a new wiki page");
-
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(title, content);
