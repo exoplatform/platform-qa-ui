@@ -368,12 +368,12 @@ public class WikiManagement {
    */
   public void watchAPage(String mess) {
     info("Click on More link");
-    evt.click(ELEMENT_MORE_LINK);
+    $(ELEMENT_MORE_LINK).click();
     info("Click on watch link");
-    evt.click(ELEMENT_WATCH_LINK);
+    $(ELEMENT_WATCH_LINK).click();
     info("Show message :'You started watching this page now.'");
-    evt.waitForAndGetElement(ELEMENT_POPUP_MESSAGE_CONTENT.replace("${message}", mess), 2000, 0);
-    evt.click(ELEMENT_BTN_OK);
+    $(ELEMENT_POPUP_MESSAGE_CONTENT).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_BTN_OK).click();
 
   }
 
