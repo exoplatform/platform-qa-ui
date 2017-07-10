@@ -499,6 +499,11 @@ public class WikiLocators {
   public static final By              ELEMENT_PREVIEW_SCREEN                                     =
                                                              By.xpath("//div[@class='popupTitle' and text()='Preview']");
 
+<<<<<<< 9b86c991b9e485143f1cb7a6b876629b220ff95b
+=======
+  public static final SelenideElement     ELEMENT_WIKI_PAGE_TOOL_BAR_AUTO_SAVE_TEXT                  =
+                                                                       $(byXpath("//*[@id=\"UIWikiPageEditForm\"]/div[2]/div[2]/div[2]/div[2]"));
+>>>>>>> Adding test case for wiki draft using templates
 
   public static final SelenideElement     ELEMENT_WIKI_PAGE_TOOL_BAR_AUTO_SAVE_TEXT                  =
                                                                        $(byXpath("//*[@id=\"UIWikiPageEditForm\"]/div[2]/div[2]/div[2]/div[2]"));
