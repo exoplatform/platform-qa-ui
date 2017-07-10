@@ -16,6 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Selenide.back;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_ICON_SEARCH;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_SEARCH_INPUT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_SEARCH_RESULT;
@@ -27,6 +28,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_SOURCE_EDITOR_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 
 @Tag("wiki")
 
@@ -92,6 +94,8 @@ public class WikiBasicTestWithUserTestIT extends Base {
         navigationToolbar = new NavigationToolbar(this);
         manageLogInOut = new ManageLogInOut(this);
         userAndGroupManagement = new UserAndGroupManagement(this);
+        if ( $(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist)))
+        {manageLogInOut.signOut();}
         manageLogInOut.signInCas("john", "gtngtn");
     }
     @AfterEach
@@ -162,7 +166,8 @@ public class WikiBasicTestWithUserTestIT extends Base {
             assert true;
         else
             assert false;
-
+        back();
+        wikiHomePage.deleteWiki(title1);
     }
 
     @Test
