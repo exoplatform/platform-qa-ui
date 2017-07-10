@@ -23,7 +23,8 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.E
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 @Tag("smoke")
-public class SpaceManageMessage extends Base{
+@Tag("chat")
+public class SpaceManageMessageTestIT extends Base{
     HomePagePlatform homePagePlatform;
     NavigationToolbar navigationToolbar;
     UserAddManagement userAddManagement;

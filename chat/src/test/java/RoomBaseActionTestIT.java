@@ -23,7 +23,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("chat")
 @Tag("smoke")
-public class RoomBaseAction extends Base {
+public class RoomBaseActionTestIT extends Base {
     HomePagePlatform homePagePlatform;
     RoomManagement roomManagement;
     NavigationToolbar navigationToolbar;
