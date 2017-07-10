@@ -436,6 +436,50 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
 		spaceManagement.deleteSpace(space2, false);
 	}
 
+	@Test
+	public  void test12_MoveWikisPageOfPortalToSpace() {
+		info("Test 12 Move wiki's page of Portal to Space");
+
+		String space = "space" + getRandomNumber();
+
+		String wiki1 ="wiki1" + getRandomNumber();
+		String wiki2 = "wiki2" + getRandomNumber();
+
+		info("Create space 1 and wiki page 1");
+		homePagePlatform.goToMySpaces();
+		spaceManagement.addNewSpaceSimple(space,space);
+
+		info("Add new wiki page 1 for space 1");
+		spaceHomePage.goToWikiTab();
+		wikiHomePage.goToAddBlankPage();
+		richTextEditor.addSimplePage(wiki1,wiki1);
+		wikiManagement.saveAddPage();
+		$(byText(wiki1)).should(Condition.exist);
+
+		homePagePlatform.goToWiki();
+		wikiHomePage.goToAddBlankPage();
+		richTextEditor.addSimplePage(wiki2,wiki2);
+		wikiManagement.saveAddPage();
+		$(byText(wiki2)).should(Condition.exist);
+
+		info("Open Wiki page of portal");
+		homePagePlatform.goToWiki();
+		wikiManagement.movePageDiffDestination(wiki2,wiki1,space);
+
+		info("Open wiki page 1");
+		homePagePlatform.goToSpecificSpace(space);
+		spaceHomePage.goToWikiTab();
+		wikiHomePage.goToAPage(wiki1);
+		$(byText(wiki2)).should(Condition.exist);
+
+		homePagePlatform.goToWiki();
+		$(byText(wiki2)).shouldNot(Condition.exist);
+
+		homePagePlatform.goToHomePage();
+		homePagePlatform.goToAllSpace();
+		spaceManagement.deleteSpace(space, false);
+	}
+
 
 
 
