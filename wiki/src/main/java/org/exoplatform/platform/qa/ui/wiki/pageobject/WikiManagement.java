@@ -1,12 +1,13 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
-
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -48,12 +49,21 @@ public class WikiManagement {
   /**
    * Select template to create page
    */
-  public void selectTemplateWikiPage(String template) {
-    info("--Select a template--");
-    evt.waitForAndGetElement(ELEMENT_TEMPLATE_SELECT_FORM);
-    By eTemplate = By.xpath(ELEMENT_SELECT_TEMPLATE_LINK.replace("${template}", template));
-    info("eTemplate:" + eTemplate.toString());
-    evt.click(eTemplate, 2, true);
+  public void selectTemplateWikiPage(SelenideElement eTemplate) {
+    info("--Select  template--");
+    $(ELEMENT_TEMPLATE_SELECT_FORM).waitUntil(Condition.appears,Configuration.timeout);
+    switch (eTemplate.getValue()){
+        case "HOW-TO_Guide": eTemplate.selectRadio("HOW-TO_Guide");
+        break;
+        case "Three-Column_Layout": eTemplate.selectRadio("Three-Column_Layout");
+        break;
+        case "Status_Meeting": eTemplate.selectRadio("Status_Meeting");
+        break;
+        case "Leave_Planning": eTemplate.selectRadio("Leave_Planning");
+        break;
+        case "Two-Column_Layout": eTemplate.selectRadio("Two-Column_Layout");
+        break;
+    }
   }
 
   /**
@@ -523,31 +533,33 @@ public class WikiManagement {
    *
    * @param template
    */
-  public void addSimpleWikiPageByTemplate(String template, String newTitle) {
+  public void addSimpleWikiPageByTemplate(SelenideElement template, String newTitle) {
     info("Select a template");
     selectTemplateWikiPage(template);
     evt.click(ELEMENT_TEMPLATE_SELECT_BTN);
     if (!newTitle.isEmpty())
       evt.type(ELEMENT_TITLE_WIKI_INPUT, newTitle, true);
-
     info("Save all changes");
     saveAddPage();
   }
 
   /**
-   * Add a simple wiki page with template with auto save status
+   * Add a simple wiki page with How To Guide template with auto save status
    *
    * @param template
    */
-  public void addSimplePageByTemplateWithAutoSave(String template, String newTitle) {
+  public void addSimplePageByTemplateWithAutoSave(SelenideElement template, String newTitle) {
     info("Select a template");
     selectTemplateWikiPage(template);
-    evt.click(ELEMENT_TEMPLATE_SELECT_BTN);
-
+   $(ELEMENT_TEMPLATE_SELECT_BTN).click();
     if (!newTitle.isEmpty())
-      evt.type(ELEMENT_TITLE_WIKI_INPUT, newTitle, true);
+      $(ELEMENT_TITLE_WIKI_INPUT).setValue(newTitle);
     info("Waiting 30s before saved all changes");
-    evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_TOOL_BAR_AUTO_SAVE_TEXT, 31000, 0);
+      try {
+          Thread.sleep(31000);
+      } catch (InterruptedException e) {
+          e.printStackTrace();
+      }
     info("Save all changes");
     saveAddPage();
   }
