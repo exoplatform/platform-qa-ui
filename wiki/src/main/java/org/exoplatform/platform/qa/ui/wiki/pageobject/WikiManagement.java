@@ -232,28 +232,33 @@ public class WikiManagement {
   public void movePageDiffDestination(String page1, String page2, String locator, Boolean... checkLocation) {
     boolean check = (checkLocation.length > 0 ? checkLocation[0] : false);
     info("Open a wiki page 1");
-    evt.waitForAndGetElement(ELEMENT_TREE_WIKI_NAME.replace("${name}", page1), 2000, 0).click();
+
+    $(byText(page1)).waitUntil(Condition.appears,Configuration.timeout).click();
+
     info("Click on More link");
-    evt.click(ELEMENT_MORE_LINK);
+    $(ELEMENT_MORE_LINK).click();
     info("Click on Move page link");
-    if (evt.waitForAndGetElement(ELEMENT_MOVE_PAGE, 5000, 0) == null) {
-      evt.mouseOverAndClick(ELEMENT_MOVE_PAGE);
-    } else {
-      evt.click(ELEMENT_MOVE_PAGE);
-    }
+    $(ELEMENT_MOVE_PAGE).click();
+
     info("Move page popup is shown");
     info("Click on Drop down");
-    evt.waitForAndGetElement(ELEMENT_MOVE_SPACESWITCHER, 2000, 0).click();
+    $(ELEMENT_MOVE_SPACESWITCHER).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_MOVE_SPACESWITCHER).click();
+
     info("Select a location");
-    evt.click(ELEMENT_MOVE_PAGE_POPUP_DROP_DOWN_LOCATOR.replace("${locator}", locator));
+
     info("Select a page in the list");
-    evt.waitForAndGetElement(ELEMENT_MOVE_PAGE_TREE_SELECTED_PAGE.replace("$page", page2), 2000, 0).click();
+
+    $(byId("UIWikiMovePageForm")).find(byText(locator)).waitUntil(Condition.appears,Configuration.timeout).click();
+    $(byClassName("sideBarContent")).find(byText(page2)).waitUntil(Condition.appears,Configuration.timeout).click();
+
     info("Save all changes");
     if (check) {
       info("Check New Location Home");
-      evt.waitForAndGetElement(ELEMENT_MOVE_PAGE_POPUP_NEW_LOCATION_HOME.replace("${spaceName}", locator), 5000);
+      $(byId("newLocation")).find(byText(locator)).find(byText("Wiki Home")).find(byText(page2)).should(Condition.exist);
     }
-    evt.waitForAndGetElement(ELEMENT_MOVE_BTNMOVE, 2000, 0).click();
+      $(ELEMENT_MOVE_BTNMOVE).waitUntil(Condition.appears,Configuration.timeout);
+      $(ELEMENT_MOVE_BTNMOVE).click();
   }
 
   /**
@@ -452,7 +457,7 @@ public class WikiManagement {
    */
   public void renameFromAlertMessageOfOnePage() {
     info("Click on Rename link on the alert message area");
-    evt.click(EMENENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_RENAME);
+    $(EMENENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_RENAME).click();
 
   }
 

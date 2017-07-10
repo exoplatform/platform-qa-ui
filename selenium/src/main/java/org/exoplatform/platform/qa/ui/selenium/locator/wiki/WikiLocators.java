@@ -1442,7 +1442,7 @@ public class WikiLocators {
 
   public static final SelenideElement ELEMENT_BUTTON_WIKI_RITCH_TEXT                             =
                                                                      $(byId("UIEditorTabs")).find(byText("Rich Text"));
-
   public static final SelenideElement ELEMENT_WIKI_UNPUT_LINK_EXISTED_PAGE                       =
                                                                            $(byXpath("//*[@id=\"isc_Class_S1398_0_Input\"]"));
+
 }

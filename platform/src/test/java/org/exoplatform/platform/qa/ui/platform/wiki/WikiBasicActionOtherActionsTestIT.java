@@ -17,12 +17,15 @@ import org.junit.jupiter.api.Tag;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_ALERT_MESSAGE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_SAME_NAME;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
+
 import org.junit.jupiter.api.Test;
 
 
 @Tag("wiki")
-@Tag("test")
 
 public class WikiBasicActionOtherActionsTestIT extends Base {
 
@@ -45,6 +48,8 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
 		navigationToolbar = new NavigationToolbar(this);
 		spaceManagement = new SpaceManagement(this);
 		spaceHomePage = new SpaceHomePage(this);
+		if ( $(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist)))
+		{manageLogInOut.signOut();}
 		manageLogInOut.signInCas("john", "gtngtn");
 
 
@@ -320,8 +325,116 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
 
 	}
 
+	@Test
+	public  void test10_MovePageInTheCases2DifferentSpaces() {
+
+		info("Test 10 Move page in the cases 2 different spaces");
+		String space1 = "space1" + getRandomNumber();
+		String space2 = "space2" + getRandomNumber();
+
+		String wiki1 = "wiki1" + getRandomNumber();
+		String wiki2 = "wiki2" + getRandomNumber();
 
 
+		info("Create space 1 and wiki page 1");
+		homePagePlatform.goToMySpaces();
+		spaceManagement.addNewSpaceSimple(space1,space1);
+		spaceHomePage.goToWikiTab();
+		wikiHomePage.goToAddBlankPage();
+		richTextEditor.addSimplePage(wiki1,wiki1);
+		wikiManagement.saveAddPage();
+		$(byText(wiki1)).should(Condition.exist);
+
+		info("Create space 2 and wiki page 2");
+		homePagePlatform.goToMySpaces();
+		spaceManagement.addNewSpaceSimple(space2,space2);
+		spaceHomePage.goToWikiTab();
+		wikiHomePage.goToAddBlankPage();
+		richTextEditor.addSimplePage(wiki2,wiki2);
+		wikiManagement.saveAddPage();
+		$(byText(wiki2)).should(Condition.exist);
+
+		info("Open wiki page 1");
+		homePagePlatform.goToSpecificSpace(space1);
+		spaceHomePage.goToWikiTab();
+
+
+		info("Move page 1 to page 2");
+		wikiManagement.movePageDiffDestination(wiki1,wiki2,space2);
+
+		info("Open wiki page 1");
+		homePagePlatform.goToSpecificSpace(space1);
+		spaceHomePage.goToWikiTab();
+		$(byText(wiki1)).shouldNot(Condition.exist);
+
+		info("Open wiki page 2");
+		homePagePlatform.goToSpecificSpace(space2);
+		spaceHomePage.goToWikiTab();
+		wikiHomePage.goToAPage(wiki2);
+		$(byText(wiki1)).should(Condition.exist);
+
+		homePagePlatform.goToHomePage();
+		homePagePlatform.goToAllSpace();
+		spaceManagement.deleteSpace(space1, false);
+		spaceManagement.deleteSpace(space2, false);
+	}
+
+	@Test
+	public  void test11_MovePageHasTheSameNameWithPageInTargetSpace() {
+		info("Test 11 Move page has the same name with page in target space");
+
+		String space1 = "space1" + getRandomNumber();
+		String space2 = "space2" + getRandomNumber();
+		String wiki1 = "wiki1" + getRandomNumber();
+		String wiki2 = "wiki2" + getRandomNumber();
+		String newTitle ="newTitle" + getRandomNumber();
+
+		info("mess:");
+
+		info("Create space 1 and wiki page 1");
+		homePagePlatform.goToMySpaces();
+		spaceManagement.addNewSpaceSimple(space1,space1);
+		info("Add new wiki page 1 for space 1");
+		spaceManagement.goToWikiTab();
+		wikiHomePage.goToAddBlankPage();
+		richTextEditor.addSimplePage(wiki1,wiki1);
+		wikiManagement.saveAddPage();
+		$(byText(wiki1)).should(Condition.exist);
+
+		info("Create space 2 and wiki page 2");
+		homePagePlatform.goToMySpaces();
+		spaceManagement.addNewSpaceSimple(space2,space2);
+		info("Add new wiki page 2 for space 2");
+		spaceHomePage.goToWikiTab();
+		wikiHomePage.goToAddBlankPage();
+		richTextEditor.addSimplePage(wiki2,wiki2);
+		wikiManagement.saveAddPage();
+		$(byText(wiki2)).should(Condition.exist);
+
+		info("Add new wiki page 1 for space 2");
+		wikiHomePage.goToHomeWikiPage();
+		wikiHomePage.goToAddBlankPage();
+		richTextEditor.addSimplePage(wiki1,wiki1);
+		wikiManagement.saveAddPage();
+		$(byText(wiki1)).should(Condition.exist);
+
+		info("Open wiki page 1");
+		homePagePlatform.goToSpecificSpace(space1);
+		spaceManagement.goToWikiTab();
+
+		info("Move page 1 to page 2");
+		wikiManagement.movePageDiffDestination(wiki1,wiki2,space2);
+		ELEMENT_ALERT_MESSAGE.should(Condition.exist);
+		wikiManagement.renameFromAlertMessageOfOnePage();
+		richTextEditor.editSimplePage(newTitle, "");
+		wikiManagement.saveAddPage();
+		$(byText(newTitle)).should(Condition.exist);
+
+		homePagePlatform.goToHomePage();
+		homePagePlatform.goToAllSpace();
+		spaceManagement.deleteSpace(space1, false);
+		spaceManagement.deleteSpace(space2, false);
+	}
 
 
 
