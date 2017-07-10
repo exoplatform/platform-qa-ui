@@ -19,7 +19,6 @@ import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -261,7 +260,6 @@ public class CalendarManagement {
     evt.click(ELEMENT_CALENDAR_GROUP_SELECT_LIST.replace("$group", membership));
     evt.waitForElementNotPresent(ELEMENT_CALENDAR_GROUP_SELECT_FORM);
 
-
   }
 
   /**
@@ -323,7 +321,7 @@ public class CalendarManagement {
     info("Delete category");
     goToMenuFromMainCalendar(menuOfMainCalendar.ADDCATEGORY);
     $(byText(categoryName)).waitUntil(Condition.appears, Configuration.timeout);
-    ELEMENT_LIST_CATEGORY .find(byText(categoryName)).parent().parent().find(ELEMENT_DELETE_CATEGORY).click();
+    ELEMENT_LIST_CATEGORY.find(byText(categoryName)).parent().parent().find(ELEMENT_DELETE_CATEGORY).click();
     alert.acceptAlert();
     button.yes();
     $(byText(categoryName)).waitUntil(Condition.disappears, Configuration.timeout);
@@ -353,7 +351,12 @@ public class CalendarManagement {
    */
   public void openMenuOfCalendar(String calendar) {
     info("Open menu of a calendar");
-    $(byText(calendar)).waitUntil(Condition.appears,Configuration.timeout).hover().parent().parent().find(ELEMENT_CALENDAR_ICON_SETTINGS_OF_CALENDAR).click();
+    $(byText(calendar)).waitUntil(Condition.appears, Configuration.timeout)
+                       .hover()
+                       .parent()
+                       .parent()
+                       .find(ELEMENT_CALENDAR_ICON_SETTINGS_OF_CALENDAR)
+                       .click();
 
   }
 
@@ -898,10 +901,12 @@ public class CalendarManagement {
       // name))));
       // action.moveToElement(evt.waitForAndGetElement(ELEMENT_EVENT_TASK_TITLE.replace("${name}",
       // name))).doubleClick().perform();
-      if (($(byText(name)).is(Condition.not(Condition.exist))))
-      {nextrightlistdaybutton.click();
-        $(byClassName("spliterResizableListArea")).find(byText(name)).doubleClick();}
-      else {$(byClassName("spliterResizableListArea")).find(byText(name)).doubleClick();}
+      if (($(byText(name)).is(Condition.not(Condition.exist)))) {
+        ELEMENT_NEXT_RIGHT_LIST_DAY_BUTTON.click();
+        ELEMENT_POUPUP_LIST_EVENT.find(byText(name)).doubleClick();
+      } else {
+        ELEMENT_POUPUP_LIST_EVENT.find(byText(name)).doubleClick();
+      }
     }
     $(ELEMENT_ADD_EDIT_EVENT_POPUP).waitUntil(Condition.appears, Configuration.timeout);
     info("The edit form is shown");
@@ -1003,7 +1008,6 @@ public class CalendarManagement {
       if (evt.waitForAndGetElement(ELEMENT_CONFIRM_POPUP_DELETE, 2000, 0) != null)
         evt.click(ELEMENT_CONFIRM_POPUP_DELETE);
     }
-
 
   }
 
@@ -1211,7 +1215,6 @@ public class CalendarManagement {
       info("Input password");
       evt.type(ELEMENT_REMOTE_CALENDAR_PASSWORD_FIELD_ENABLED, password, true);
     }
-
 
   }
 

@@ -1,20 +1,19 @@
 package org.exoplatform.platform.qa.ui.calendar.smoke;
 
 import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_CONTEXT_MENU_VIEW;
-import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.nextrightlistdaybutton;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_NEXT_RIGHT_LIST_DAY_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarHomePage;
 import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarManagement;
@@ -175,10 +174,12 @@ public class CALEventEditTestIT extends Base {
     eventManagement.inputDataEventInDetailForm(titleEvent2, titleEvent2, null, null, false, null, categoryName);
     eventManagement.saveAddEventDetails();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.LIST);
-    if (($(byText(titleEvent2)).is(Condition.not(Condition.exist))))
-    {nextrightlistdaybutton.click();
-      $(byText(titleEvent2)).waitUntil(Condition.appears, Configuration.timeout);}
-    else {$(byText(titleEvent2)).waitUntil(Condition.appears, Configuration.timeout);}
+    if (($(byText(titleEvent2)).is(Condition.not(Condition.exist)))) {
+      ELEMENT_NEXT_RIGHT_LIST_DAY_BUTTON.click();
+      $(byText(titleEvent2)).waitUntil(Condition.appears, Configuration.timeout);
+    } else {
+      $(byText(titleEvent2)).waitUntil(Condition.appears, Configuration.timeout);
+    }
     calendarManagement.deleteCalendar(calendar);
     calendarManagement.deleteEventCategory(categoryName);
   }

@@ -1626,6 +1626,7 @@ public static final SelenideElement ELEMENT_CALENDAR_LIST_BUTTON= $(byId("UIActi
   public static final SelenideElement ELEMENT_CALENDAR_WEEK_BUTTON= $(byId("UIActionBar")).find(byText("Week")).waitUntil(Condition.appears,10000);
 public static final SelenideElement ELEMENT_CALENDAR_DAY_BUTTON= $(byId("UIActionBar")).find(byText("Day")).waitUntil(Condition.appears,10000);
 public static final By ELEMENT_CALENDAR_ICON_SETTINGS_OF_CALENDAR=  byClassName("uiIconCalSettingMini");
-public static final SelenideElement nextrightlistdaybutton= $(byId("UIListContainer")).find(byClassName("uiIconMiniArrowRight"));
+public static final SelenideElement ELEMENT_NEXT_RIGHT_LIST_DAY_BUTTON= $(byId("UIListContainer")).find(byClassName("uiIconMiniArrowRight"));
+public static final SelenideElement ELEMENT_POUPUP_LIST_EVENT= $(byClassName("spliterResizableListArea"));
 }
 
