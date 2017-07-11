@@ -144,8 +144,8 @@ public class RichTextEditor {
    * @param columns Number of columns that will be added in the table
    */
   public void insertTable2WikiPage(String rows, String columns) {
-    evt.mouseOverAndClick(ELEMENT_TABLE_LINK);
-    evt.mouseOverAndClick(ELEMENT_INSERT_TABLE_LINK);
+    $(ELEMENT_TABLE_LINK).click();
+    $(ELEMENT_INSERT_TABLE_LINK).click();
     evt.type(ELEMENT_ROW_TEXTBOX, rows, true);
     evt.type(ELEMENT_COLUMN_TEXTBOX, columns, true);
     evt.click(but.ELEMENT_INSERT_TABLE);
@@ -1302,13 +1302,10 @@ public class RichTextEditor {
   public void addSimplePageWithAutoSaveStatus(String title, String content) {
     info("Input a title for the page");
     if (!title.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).val(title);
-    info("Input a content for the page");
-    if (!content.isEmpty()) {
-      plf.inputFrame(ELEMENT_CONTENT_WIKI_FRAME, content);
-    }
+      $(ELEMENT_TITLE_WIKI_INPUT).setValue(title);
     info("Waiting 30s before saved all changes");
-    evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_TOOL_BAR_AUTO_SAVE_TEXT, 31000, 1);
+    $(ELEMENT_DRAFT_NOTIFY).waitUntil(Condition.appears,31000,1);
+    info("Save all changes");
 
   }
 

@@ -120,7 +120,7 @@ public class WikiManagement {
    */
   public void cancelAddPage() {
     info("Click on Cancel button");
-    evt.click(ELEMENT_CANCEL_BUTTON_ADD_PAGE, 0, true);
+    $(ELEMENT_CANCEL_BUTTON_ADD_PAGE).click();
   }
 
   /**
@@ -337,10 +337,10 @@ public class WikiManagement {
    */
   public void previewATemplate(String template) {
     info("Preview the template");
-    evt.click(ELEMENT_TEMPLATE_PREVIEW_BTN.replace("${template}", template));
+    $(ELEMENT_TEMPLATE_PREVIEW_BTN).click();
     info("Verify that the layout is shown");
-    evt.waitForAndGetElement(ELEMENT_PREVIEW_TEMPLATE_CONTENT.replace("${template}", template), 2000, 0);
-    evt.click(ELEMENT_TEMPLATE_PREVIEW_PAGE_CLOSE_BTN);
+    $(ELEMENT_PREVIEW_TEMPLATE_CONTENT).waitUntil(Condition.appears,2000);
+    $(ELEMENT_TEMPLATE_PREVIEW_PAGE_CLOSE_BTN).click();
 
     evt.click(ELEMENT_TEMPLATE_CANCEL_BTN);
 
@@ -574,7 +574,7 @@ public class WikiManagement {
   public void PreviewASimplePage(String title, String content) {
     info("Preview a simple page");
     goToPreviewPage();
-    evt.waitForAndGetElement(ELEMENT_PREVIEW_TEMPLATE_CONTENT.replace("${template}", title), testBase.getDefaultTimeout(), 1);
+//    evt.waitForAndGetElement(ELEMENT_PREVIEW_TEMPLATE_CONTENT.replace("${template}", title), testBase.getDefaultTimeout(), 1);
     evt.waitForAndGetElement(ELEMENT_PREVIEW_PAGE_CONTENT.replace("${content}", content), testBase.getDefaultTimeout(), 1);
   }
 }
