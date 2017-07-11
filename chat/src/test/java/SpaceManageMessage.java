@@ -76,15 +76,18 @@ public class SpaceManageMessage extends Base{
         homePagePlatform.goToHomePage();
         homePagePlatform.goToChat();
         switchTo().window("Chat");
+        info("send message on space");
         chatManagement.sendMessageInRoomOrSpace(space,message);
         switchTo().window("Home Page");
         manageLogInOut.signIn(usernamea,password);
         homePagePlatform.goToChat();
         switchTo().window("Chat");
         $(byText(space)).click();
+        info("verify message");
         ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.exist);
         switchTo().window("Home Page");
         manageLogInOut.signIn("root","gtn");
+        info("delete data");
         homePagePlatform.goToAllSpace();
         spaceManagement.deleteSpace(space,false);
         navigationToolbar.goToManageCommunity();
@@ -98,12 +101,14 @@ public class SpaceManageMessage extends Base{
         homePagePlatform.goToHomePage();
         homePagePlatform.goToChat();
         switchTo().window("Chat");
+        info("check that space exist");
         $(byText(space)).should(Condition.exist);
         switchTo().window("Home Page");
         homePagePlatform.goToAllSpace();
         spaceManagement.deleteSpace(space,false);
         switchTo().window("Chat");
         refresh();
+        info("check that space chat deleted");
         $(byText(space)).shouldNot(Condition.exist);
     }
 @Test
@@ -125,6 +130,7 @@ public class SpaceManageMessage extends Base{
     refresh();
     ELEMENT_CHAT_INPUT_SEARCH_USER.setValue("@"+usernamea);
     $(byText(usernamea+" "+usernamea)).click();
+    info("root send message to user");
     chatManagement.sendMessageInRoomOrSpace(usernamea+" "+usernamea,message);
     switchTo().window("Home Page");
     manageLogInOut.signIn(usernamea,password);
@@ -132,6 +138,7 @@ public class SpaceManageMessage extends Base{
     switchTo().window(1);
     $(byText("Root Root")).click();
     $(byText(message)).should(Condition.exist);
+    info("user check message and answer root");
     chatManagement.sendMessageInRoomOrSpace("Root Root",message2);
     switchTo().window("Home Page");
     manageLogInOut.signIn("root","gtn");
@@ -140,8 +147,10 @@ public class SpaceManageMessage extends Base{
     refresh();
     ELEMENT_CHAT_INPUT_SEARCH_USER.setValue("@"+usernamea);
     $(byText(usernamea+" "+usernamea)).click();
+    info("root check the answer");
     $(byText(message2)).should(Condition.exist);
     switchTo().window("Home Page");
+    info("delete data");
     navigationToolbar.goToManageCommunity();
     userandgroupmanagement.deleteUser(usernamea);
 

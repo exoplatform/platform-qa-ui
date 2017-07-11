@@ -55,7 +55,7 @@ public class RoomBaseAction extends Base {
         String emailb = usernameb + getRandomNumber() + "@gmail.com";
         String emailc = usernamec + getRandomNumber() + "@gmail.com";
         navigationToolbar.goToAddUser();
-        info("Create new user");
+        info("Create 3 users");
         userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
         userAddManagement.addUser(usernameb, password, emailb, usernameb, usernamec);
         userAddManagement.addUser(usernamec, password, emailc, usernamec, usernamec);
@@ -67,7 +67,7 @@ public class RoomBaseAction extends Base {
         homePagePlatform.goToChat();
         manageLogInOut.signIn("root","gtn");
         homePagePlatform.goToChat();
-
+        info("Add room with users");
         switchTo().window("Chat");
         roomManagement.addRoom(room,3,usernamea,usernameb,usernamec);
 
@@ -88,7 +88,7 @@ public class RoomBaseAction extends Base {
         homePagePlatform.goToChat();
         switchTo().window("Chat");
         $(byText(room)).should(Condition.exist);
-
+        info("delete data");
         switchTo().window("Home Page");
         manageLogInOut.signIn("root","gtn");
         homePagePlatform.goToChat();
@@ -144,12 +144,14 @@ public class RoomBaseAction extends Base {
         switchTo().window("Chat");
         info("add room");
         roomManagement.addRoom(room,1,usernamea);
+        info("send message");
         chatManagement.sendMessageInRoomOrSpace(room,message);
         switchTo().window("Home Page");
         manageLogInOut.signIn(usernamea,password);
         homePagePlatform.goToChat();
         switchTo().window(1);
         $(byText(room)).click();
+        info("verify message");
         ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.exist);
         switchTo().window("Home Page");
         manageLogInOut.signIn("root","gtn");
@@ -177,6 +179,7 @@ public class RoomBaseAction extends Base {
     switchTo().window("Chat");
     info("add room");
     roomManagement.addRoom(room,1,usernamea);
+    info("edit title");
     roomManagement.editTitleofAroom(room,newroom);
     $(byText(newroom)).should(Condition.exist);
     roomManagement.deleteRomm(newroom);

@@ -40,9 +40,9 @@ public class ChatLocator {
   public static final By     ELEMENT_CHAT_ICON                   = By.xpath(".//*[@id='chat-status']/a");
   public static final SelenideElement ELEMENT_CHAT_ICON_ADD_ROOM= $(byXpath("//*[@id=\"chat-users\"]/table/tbody/tr[4]/td")).parent().parent().find(byClassName("uiIconChatSimplePlusMini"));
   public static final SelenideElement ELEMENT_CHAT_INPUT_ROOM_NAME=$(byXpath("//*[@id=\"team-modal-name\"]"));
-public static final SelenideElement ELEMENT_CHAT_INPUT_ROOM_USERS=$(byId("team-add-user"));
+public static final SelenideElement ELEMENT_CHAT_INPUT_ROOM_USERS=$(byXpath("//*[@id=\"team-modal-form\"]/div[2]/div[1]/div/div[2]/div/div/div/input"));
 public static final SelenideElement ELEMENT_CHAT_BUTTON_SAVE_ADD_ROOM=$(byXpath("//*[@id=\"team-modal-form\"]/div[2]/div[2]/a[1]"));
-public static final SelenideElement ELEMENT_CHAT_RESULT_SEARCH_USER=$(byXpath("//*[@id=\"team-modal-form\"]/div[2]/div[1]/div/div[3]"));
+public static final SelenideElement ELEMENT_CHAT_RESULT_SEARCH_USER=$(byXpath("/html/body/div[6]"));
 public static final SelenideElement ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN=$(byId("chat-team-button-dropdown"));
 public static final SelenideElement ELEMENT_CHAT_ROOM_DELETE=$(byId("team-delete-button"));
 public static final SelenideElement ELEMENT_CHAT_ROOM_EDIT=$(byId("team-edit-button"));
