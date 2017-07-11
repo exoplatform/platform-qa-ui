@@ -3,8 +3,12 @@ package org.exoplatform.platform.ui.qa.wiki;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_SOURCE_EDITOR_BUTTON;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_TITLE_WIKI_INPUT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Configuration;
+import org.exoplatform.platform.qa.ui.wiki.pageobject.SourceTextEditor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -26,7 +30,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
 
   WikiManagement   wikiManagement;
 
-  RichTextEditor   richTextEditor;
+  SourceTextEditor sourceTextEditor;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -35,7 +39,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
     wikiHomePage = new WikiHomePage(this);
     wikiManagement = new WikiManagement(this);
     try {
-      richTextEditor = new RichTextEditor(this);
+      sourceTextEditor = new SourceTextEditor(this);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -66,7 +70,11 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
      */
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddBlankPage();
-    richTextEditor.addSimplePage(wiki, wiki);
+    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
+    if ($(ELEMENT_SOURCE_EDITOR_BUTTON).isDisplayed()) {
+      wikiManagement.goToSourceEditor();
+    }
+    sourceTextEditor.addSimplePage(wiki, wiki);
     wikiManagement.saveAddPage();
     $(byText(wiki)).should(Condition.exist);
     info("Test 08: Delete the page that is created by using source editor");

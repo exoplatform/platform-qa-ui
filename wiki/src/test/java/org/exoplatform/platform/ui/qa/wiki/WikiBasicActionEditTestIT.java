@@ -4,11 +4,11 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_CONTENT_WIKI_INPUT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_SOURCE_EDITOR_BUTTON;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_TITLE_WIKI_INPUT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
 import java.util.ArrayList;
-
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -75,7 +75,8 @@ public class WikiBasicActionEditTestIT extends Base {
     String content = "content" + getRandomNumber();
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddBlankPage();
-    if ($(ELEMENT_CONTENT_WIKI_INPUT).is(Condition.not(Condition.exist))) {
+    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
+    if ($(ELEMENT_SOURCE_EDITOR_BUTTON).isDisplayed()) {
       wikiManagement.goToSourceEditor();
     }
     sourcetexteditor.addSimplePage(title, content);
