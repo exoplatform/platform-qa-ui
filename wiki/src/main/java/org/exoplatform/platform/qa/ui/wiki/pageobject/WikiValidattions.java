@@ -265,7 +265,7 @@ public class WikiValidattions {
       evt.click(ELEMENT_MORE_LINK, 0, true);
       evt.waitForElementNotPresent(ELEMENT_PERMISSION_LINK);
     } else {
-      evt.waitForElementNotPresent(ELEMENT_TREE_WIKI_NAME.replace("${name}", title));
+    //  evt.waitForElementNotPresent(ELEMENT_TREE_WIKI_NAME.replace("${name}", title));
     }
   }
 

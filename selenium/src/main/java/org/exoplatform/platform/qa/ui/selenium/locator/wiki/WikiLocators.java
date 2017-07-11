@@ -457,8 +457,11 @@ public class WikiLocators {
   public static final String          ELEMENT_TREE_WIKI_NAME                                     =
                                                              ".//*[@id='iconTreeExplorer']//*[contains(text(),'${name}')]";
 
-  public static final String          ELEMENT_TREE_WIKI_PARENT_NODE_CHILD_NODE                   =
-                                                                               ".//*[@id='iconTreeExplorer']//*[contains(text(),'$parent')]/../../..//*[contains(text(),'$child')]";
+
+  public static final SelenideElement ELEMENT_TREE_NAME_WIKI =
+                                                 $(byClassName("uiLeftContainerArea"));
+  public static final String ELEMENT_TREE_WIKI_PARENT_NODE_CHILD_NODE                   =
+                                                                      ".//*[@id='iconTreeExplorer']//*[contains(text(),'$parent')]/../../..//*[contains(text(),'$child')]";
 
   // Permission
   public static final By              ELEMENT_PERMISSION_NAMEORGROUP                             =

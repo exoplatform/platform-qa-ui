@@ -222,10 +222,10 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
         richTextEditor.editSimplePage(newTitle, newTitle);
         wikiManagement.saveAddPage();
         info("Verify that the new page is added");
-        $(byClassName("uiLeftContainerArea")).find(byText(newTitle)).should(Condition.exist);
+        ELEMENT_TREE_NAME_WIKI.find(byText(newTitle)).should(Condition.exist);
         info("Verify that the new page is not shown in my draft list");
         wikiHomePage.goToMyDraft();
-        $(byId("UIWikiDraftGrid")).find(byText(title+"(New Page)")).shouldNot(Condition.exist);
+        ELEMENT_DRAFT_NEW_PAGE.find(byText(title+"(New Page)")).shouldNot(Condition.exist);
 
         info("Test 11: Delete a draft");
 		/*Step Number: 1
