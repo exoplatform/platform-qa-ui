@@ -355,8 +355,9 @@ public class WikiManagement {
   public void renamePageByDoubleClick(String title, String newTitle) {
     info("Open the page");
     Actions action = new Actions(this.testBase.getExoWebDriver().getWebDriver());
-    action.doubleClick(evt.waitForAndGetElement(ELEMENT_PAGE_TITLE.replace("${title}", title), 2000, 0)).perform();
-    evt.type(ELEMENT_WIKI_PAGE_TITLE_RENAME_FIELD, newTitle, true);
+    $(byText(title)).waitUntil(Condition.appears,Configuration.timeout);
+    $(byId("UIWikiPageControlArea")).find(byText(title)).doubleClick();
+    $(ELEMENT_WIKI_PAGE_TITLE_RENAME_FIELD).setValue(newTitle);
     Actions actionEnter = new Actions(this.testBase.getExoWebDriver().getWebDriver());
     actionEnter.sendKeys(Keys.ENTER).perform();
     actionEnter.release();
