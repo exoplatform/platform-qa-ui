@@ -1,5 +1,10 @@
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -21,13 +26,15 @@ public class RoomManagement {
         ELEMENT_CHAT_BUTTON_SAVE_ADD_ROOM.click();}
 
 public void deleteRomm(String room){
+
     $(byText(room)).click();
     ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
     ELEMENT_CHAT_ROOM_DELETE.click();
     ELEMENT_CHAT_CONFIRM_DELETE_ROOM.click();
     $(byText(room)).shouldNot(Condition.exist);
-}
-public void editTitleofAroom(String room,String newroom){
+  }
+
+  public void editTitleofAroom(String room, String newroom) {
     $(byText(room)).click();
     ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
     ELEMENT_CHAT_ROOM_EDIT.click();
@@ -36,6 +43,7 @@ public void editTitleofAroom(String room,String newroom){
 
 
 }
+
 
 
 }

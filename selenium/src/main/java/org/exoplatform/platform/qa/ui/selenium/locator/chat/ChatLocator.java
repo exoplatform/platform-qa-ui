@@ -20,13 +20,12 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.locator.chat;
 
-import com.codeborne.selenide.SelenideElement;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
+
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
+import com.codeborne.selenide.SelenideElement;
 
 public class ChatLocator {
   public static final String ELEMENT_CHAT_UISTATUSPROFILEPORTLET =
@@ -50,4 +49,5 @@ public static final SelenideElement ELEMENT_CHAT_CONFIRM_DELETE_ROOM=$(byId("tea
 public static final SelenideElement ELEMENT_CHAT_MESSAGE_INPUT= $(byId("msg"));
 public static final SelenideElement ELEMENT_CHAT_LIST_MSG=$(byId("chats"));
 public static final SelenideElement ELEMENT_CHAT_INPUT_SEARCH_USER=$(byId("chat-search"));
+
 }
