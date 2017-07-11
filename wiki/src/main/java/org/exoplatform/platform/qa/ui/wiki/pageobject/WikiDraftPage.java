@@ -5,6 +5,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_DRAFT_OF_NEW_PAGE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -46,7 +47,7 @@ public class WikiDraftPage {
    */
   public void resumeADraft(String title) {
     info("Click on the title of the draf in the list");
-    evt.waitForAndGetElement(ELEMENT_DRAFT_OF_NEW_PAGE.replace("${title}", title), 3000, 0).click();
+    $(ELEMENT_DRAFT_OF_NEW_PAGE).waitUntil(Condition.appears,2000);
 
   }
 }

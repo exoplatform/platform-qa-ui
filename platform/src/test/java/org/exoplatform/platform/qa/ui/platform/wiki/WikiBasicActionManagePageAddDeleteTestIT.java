@@ -169,4 +169,5 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
 		homePagePlatform.goToWiki();
 		wikiHomePage.deleteWiki(title);
 	}
+
 }
