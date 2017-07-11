@@ -862,6 +862,7 @@ public class WikiLocators {
                                                                 "//*[@id='UIWikiDraftGrid']//*[contains(text(),'${title}')]";
 
 
+
   public static final By ELEMENT_DELETE_DRAFT                                       =
                                                  By.xpath("//*[@id=\"UIWikiDraftGrid\"]/table/tbody/tr/td[4]/a[2]/i");
 

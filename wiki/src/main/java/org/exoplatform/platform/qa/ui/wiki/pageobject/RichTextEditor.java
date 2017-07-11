@@ -1400,10 +1400,11 @@ public class RichTextEditor {
       plf.inputFrame(ELEMENT_CONTENT_WIKI_FRAME, content);
     }
     info("Waiting 30s before saved all changes");
-    evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_TOOL_BAR_AUTO_SAVE_TEXT, 31000, 1);
+    $(ELEMENT_DRAFT_NOTIFY).waitUntil(Condition.appears,31000,1);
+    info("Save all changes");
     info("Cancel adding page");
-    evt.click(ELEMENT_CANCEL_BUTTON_ADD_PAGE, 0, true);
-    evt.click(ELEMENT_CONFIRMATION_POPUP_YES_BTN);
+    $(ELEMENT_CANCEL_BUTTON_ADD_PAGE).click();
+    $(ELEMENT_CONFIRMATION_POPUP_YES_BTN).click();
   }
 
   /**
