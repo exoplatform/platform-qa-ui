@@ -1378,15 +1378,16 @@ public class RichTextEditor {
    * @param newContent
    */
   public void editSimplePageWithAutoSave(String newTitle, String newContent) {
-    info("Input a title for the page");
+    info("Input a new title for the page");
     if (!newTitle.isEmpty())
-      evt.type(ELEMENT_TITLE_WIKI_INPUT, newTitle, true);
-    info("Input a content for the page");
+      $(ELEMENT_TITLE_WIKI_INPUT).val(newTitle);
+    info("Input a new content for the page");
     if (!newContent.isEmpty()) {
       plf.inputFrame(ELEMENT_CONTENT_WIKI_FRAME, newContent);
     }
     info("Waiting 30s before saved all changes");
-    evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_TOOL_BAR_AUTO_SAVE_TEXT, 31000, 0);
+    $(ELEMENT_DRAFT_NOTIFY).waitUntil(Condition.appears,31000,1);
+    info("Save all changes");
   }
 
   /**
