@@ -19,7 +19,8 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("wiki")
 @Tag("smoke")
-public class WikiBasicActionManagePageRename extends Base {
+
+public class WikiBasicActionManagePageRenameTestIT extends Base {
 
 	HomePagePlatform homePagePlatform;
 	WikiHomePage wikiHomePage;

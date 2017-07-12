@@ -17,6 +17,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
 @Tag("wiki")
 @Tag("smoke")
 public class WikiBasicActionManagePageAddDeleteTestIT extends Base {

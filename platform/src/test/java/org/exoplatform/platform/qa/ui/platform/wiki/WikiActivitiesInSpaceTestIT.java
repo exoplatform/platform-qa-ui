@@ -21,7 +21,7 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
 
 @Tag("smoke")
 @Tag("wiki")
-public class WikiActivitiesTestIT extends Base {
+public class WikiActivitiesInSpaceTestIT extends Base {
 
   HomePagePlatform homePagePlatform;
 

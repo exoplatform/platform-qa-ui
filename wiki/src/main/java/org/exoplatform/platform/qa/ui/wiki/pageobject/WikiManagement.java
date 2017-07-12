@@ -1,7 +1,5 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -313,21 +311,28 @@ public class WikiManagement {
    * @param spaces
    */
   public void checkAddRelationDropDownList(String spaces) {
+
     info("Click on Drop down");
-    evt.waitForAndGetElement(ELEMENT_ADD_RELATED_PAGE_POPUP_DROPDOWN, 2000, 0).click();
+    $(ELEMENT_ADD_RELATED_PAGE_POPUP_DROPDOWN).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_ADD_RELATED_PAGE_POPUP_DROPDOWN).click();
+
     info("Verify that Intranet location is shown is the list");
-    evt.waitForAndGetElement(ELEMENT_ADD_RELATED_POPUP_DROPDOWN_LOCATION.replace("${location}", "Intranet"), 2000, 0);
+    $(byId("UISpaceSwitcher_/portal/intranet")).should(Condition.exist);
+
     info("Verify that My wiki location is shown is the list");
-    evt.waitForAndGetElement(ELEMENT_ADD_RELATED_POPUP_DROPDOWN_LOCATION.replace("${location}", "My Wiki"), 2000, 0);
+    $(byId("UISpaceSwitcher_/user/root")).should(Condition.exist);
+
     if (!spaces.isEmpty()) {
       String[] arraySpace = spaces.split("/");
       for (String space : arraySpace) {
         info("Verify that " + space + " location is shown is the list");
-        evt.waitForAndGetElement(ELEMENT_ADD_RELATED_POPUP_DROPDOWN_LOCATION.replace("${location}", space), 2000, 0);
+        $(byClassName("spaceChooserPopup")).find(byText(space));
+
       }
 
     }
-    evt.waitForAndGetElement(ELEMENT_SPACE_SWITHCHER_DROPDOWN_CLOSE, 2000, 0).click();
+    $(ELEMENT_SPACE_SWITHCHER_DROPDOWN_CLOSE).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_SPACE_SWITHCHER_DROPDOWN_CLOSE).click();
     info("All options are checked");
   }
 

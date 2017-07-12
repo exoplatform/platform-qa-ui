@@ -1,8 +1,13 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -18,6 +23,7 @@ public class WikiPageInformation {
    * constructor
    *
    * @param dr
+   *
    */
   public WikiPageInformation(TestBase testBase) {
     this.testBase = testBase;
@@ -33,18 +39,19 @@ public class WikiPageInformation {
    */
   public void addRelations(String location, String page) {
     info("Click on Drop down");
-    evt.click(ELEMENT_ADD_RELATED_PAGE_POPUP_DROPDOWN);
+    $(ELEMENT_ADD_RELATED_PAGE_POPUP_DROPDOWN).click();
 
     if (!location.isEmpty()) {
       info("Select a location");
-      evt.click(ELEMENT_ADD_RELATED_POPUP_DROPDOWN_LOCATION.replace("${location}", location));
+      $(byClassName("spaceChooserPopup")).find(byText(location)).click();
+
     }
     if (!page.isEmpty()) {
       info("Select a page in the list");
-      evt.click(ELEMENT_ADD_RELATED_POPUP_CONTENT.replace("${page}", page));
+      $(ELEMENT_ADD_RELATED_POPUP_CONTENT).click();
     }
     info("Save all changes");
-    evt.click(ELEMENT_ADD_RELATED_POPUP_SELECT_BTN);
+    $(ELEMENT_ADD_RELATED_POPUP_SELECT_BTN).click();
   }
 
   /**
@@ -52,8 +59,8 @@ public class WikiPageInformation {
    */
   public void goToAddRelations() {
     info("Click on Add more relations");
-    evt.click(ELEMENT_PAGE_INFO_ADD_MORE_RELATIONS);
-    evt.waitForAndGetElement(ELEMENT_ADD_RELATED_PAGE_POPUP_TITLE);
+    $(ELEMENT_PAGE_INFO_ADD_MORE_RELATIONS).click();
+    $(ELEMENT_ADD_RELATED_PAGE_POPUP_TITLE).waitUntil(Condition.appears, Configuration.timeout);
     info("Add related page popup is shown");
   }
 
