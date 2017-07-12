@@ -33,7 +33,6 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
  * Created by dmardassi on 12/07/2017.
  */
 @Tag("forum")
-@Tag("test")
 
 public class ForumBasicTestWithUserTestIT extends Base{
 
