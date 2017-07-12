@@ -20,12 +20,14 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.testbase;
 
+import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 
 import org.openqa.selenium.By;
 
 import com.codeborne.selenide.SelenideElement;
+
 
 /**
  * Created by mgreau on 03/02/2017.
@@ -113,12 +115,14 @@ public class LocatorTestBase {
 
   // SSO Login with CAS
 
+
   public static final By              ELEMENT_INPUT_PASSWORD_CAS                       = By.id("UIPortalLoginFormControl");
 
   public static final By              ELEMENT_INPUT_USERNAME_CAS                       = By.id("username");
 
   public static final SelenideElement ELEMENT_SIGN_IN_BUTTON_CAS                       =
                                                                  $(byXpath("//*[@id=\"UIPortalLoginFormAction\"]/button"));
+
 
   // Upload file popup
   public static final By              ELEMENT_UPLOAD_SELECT_BUTTON                     =
