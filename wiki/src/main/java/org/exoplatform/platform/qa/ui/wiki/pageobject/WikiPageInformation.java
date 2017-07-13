@@ -8,6 +8,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -23,7 +24,6 @@ public class WikiPageInformation {
    * constructor
    *
    * @param dr
-   *
    */
   public WikiPageInformation(TestBase testBase) {
     this.testBase = testBase;

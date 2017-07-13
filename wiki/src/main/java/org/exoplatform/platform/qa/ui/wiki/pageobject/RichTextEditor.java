@@ -3,10 +3,7 @@ package org.exoplatform.platform.qa.ui.wiki.pageobject;
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-<<<<<<< 9f1b84f22fc253d7609ce7bb68f84442d9e230ab
-=======
 import static com.codeborne.selenide.Selectors.*;
->>>>>>> edit wiki page
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -43,7 +40,7 @@ public class RichTextEditor {
    * @param testBase
    * @throws Exception
    */
-  public RichTextEditor(TestBase testBase) throws Exception {
+  public RichTextEditor(TestBase testBase) {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
     this.but = new Button(testBase);
@@ -542,6 +539,7 @@ public class RichTextEditor {
       $(byId("body")).sendKeys(content);
       switchTo().defaultContent();
     }
+
 
 
   }
@@ -1308,7 +1306,7 @@ public class RichTextEditor {
     if (!title.isEmpty())
       $(ELEMENT_TITLE_WIKI_INPUT).setValue(title);
     info("Waiting 30s before saved all changes");
-    $(ELEMENT_DRAFT_NOTIFY).waitUntil(Condition.appears,31000,1);
+    $(ELEMENT_DRAFT_NOTIFY).waitUntil(Condition.appears, 31000, 1);
     info("Save all changes");
 
   }
@@ -1327,6 +1325,7 @@ public class RichTextEditor {
     ELEMENT_POPUP_SELECT_WIKI_PAGE.find(byText(page)).click();
     info("Click on Select button");
     $(ELEMENT_SELECT_BUTTON).click();
+
 
   }
 
@@ -1386,7 +1385,7 @@ public class RichTextEditor {
       plf.inputFrame(ELEMENT_CONTENT_WIKI_FRAME, newContent);
     }
     info("Waiting 30s before saved all changes");
-    $(ELEMENT_DRAFT_NOTIFY).waitUntil(Condition.appears,31000,1);
+    $(ELEMENT_DRAFT_NOTIFY).waitUntil(Condition.appears, 31000, 1);
     info("Save all changes");
   }
 
@@ -1407,7 +1406,7 @@ public class RichTextEditor {
       switchTo().defaultContent();
     }
     info("Waiting 30s before saved all changes");
-    $(ELEMENT_DRAFT_NOTIFY).waitUntil(Condition.appears,31000,1);
+    $(ELEMENT_DRAFT_NOTIFY).waitUntil(Condition.appears, 31000, 1);
     info("Save all changes");
     info("Cancel adding page");
     $(ELEMENT_CANCEL_BUTTON_ADD_PAGE).click();

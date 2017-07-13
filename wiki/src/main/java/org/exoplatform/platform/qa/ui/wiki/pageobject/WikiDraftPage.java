@@ -1,9 +1,9 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
+import static com.codeborne.selenide.Selectors.byId;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_DELETE_DRAFT;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_DRAFT_OF_NEW_PAGE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
@@ -47,7 +47,7 @@ public class WikiDraftPage {
    */
   public void resumeADraft(String title) {
     info("Click on the title of the draf in the list");
-    $(byId("UIWikiDraftGrid")).find(byText(title+"(New Page)")).click();
+    $(byId("UIWikiDraftGrid")).find(byText(title + "(New Page)")).click();
 
   }
 }

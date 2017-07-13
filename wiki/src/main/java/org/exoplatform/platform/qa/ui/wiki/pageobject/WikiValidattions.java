@@ -44,7 +44,8 @@ public class WikiValidattions {
    */
   public void verifyTitleDrafPage(String title) {
     info("Verify that a draf page with the title:" + title + " is shown in draf table");
-//    evt.waitForAndGetElement(ELEMENT_DRAFT_OF_NEW_PAGE.replace("${title}", title));
+    // evt.waitForAndGetElement(ELEMENT_DRAFT_OF_NEW_PAGE.replace("${title}",
+    // title));
   }
 
   /**
@@ -54,7 +55,8 @@ public class WikiValidattions {
    */
   public void verifyNotTitleDrafPage(String title) {
     info("Verify that a draf page with the title:" + title + " is shown in draf table");
-//    evt.waitForElementNotPresent(ELEMENT_DRAFT_OF_NEW_PAGE.replace("${title}", title));
+    // evt.waitForElementNotPresent(ELEMENT_DRAFT_OF_NEW_PAGE.replace("${title}",
+    // title));
   }
 
   /**
@@ -265,7 +267,8 @@ public class WikiValidattions {
       evt.click(ELEMENT_MORE_LINK, 0, true);
       evt.waitForElementNotPresent(ELEMENT_PERMISSION_LINK);
     } else {
-    //  evt.waitForElementNotPresent(ELEMENT_TREE_WIKI_NAME.replace("${name}", title));
+      // evt.waitForElementNotPresent(ELEMENT_TREE_WIKI_NAME.replace("${name}",
+      // title));
     }
   }
 
@@ -1016,10 +1019,12 @@ public class WikiValidattions {
   public void verifyDraftExistsInDraftListOrNot(String title, boolean exist) {
     info("Verify that Draft exists in Draft list or Not");
     if (exist) {
-//      evt.waitForAndGetElement(ELEMENT_DRAFT_OF_NEW_PAGE.replace("${title}", title));
+      // evt.waitForAndGetElement(ELEMENT_DRAFT_OF_NEW_PAGE.replace("${title}",
+      // title));
       info("Draft exists in Draft list");
     } else {
-//      evt.waitForElementNotPresent(ELEMENT_DRAFT_OF_NEW_PAGE.replace("${title}", title));
+      // evt.waitForElementNotPresent(ELEMENT_DRAFT_OF_NEW_PAGE.replace("${title}",
+      // title));
       info("Draft does not exist in Draft list");
     }
 

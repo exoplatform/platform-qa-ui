@@ -412,9 +412,8 @@ public class WikiHomePage {
     $(byClassName("txtFeed")).find(byText(version)).should(Condition.exist);
     $(byClassName("txtFeed")).find(byText(version)).click();
 
-
     info("Verify that the table is shown");
-    $(ELEMENT_WIKI_PAGE_INFORMATION_TABLE_TITLE).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_WIKI_PAGE_INFORMATION_TABLE_TITLE).waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**
