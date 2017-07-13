@@ -6,6 +6,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
 
+import com.codeborne.selenide.Condition;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
@@ -56,9 +57,10 @@ public class ForumHomePage {
    */
   public void selectItemAdministrationMenu(specifAdministrationMenu item) {
     info("Waiting administration menu is shown");
-    evt.waitForAndGetElement(ELEMENT_ACTIONBAR_ADMINISTRATION);
+    $(ELEMENT_ACTIONBAR_ADMINISTRATION).should(Condition.appears);
+  //  evt.waitForAndGetElement(ELEMENT_ACTIONBAR_ADMINISTRATION);
     info("Click on Manage menu");
-    evt.click(ELEMENT_ACTIONBAR_ADMINISTRATION);
+    $(ELEMENT_ACTIONBAR_ADMINISTRATION).click();
 
     switch (item) {
     case SORT_SETTING:
@@ -67,7 +69,7 @@ public class ForumHomePage {
       break;
     case BBCODE:
       info("Click on BBCode link");
-      evt.click(ELEMENT_ACTIONBAR_ADMIN_BBCODE);
+      $(ELEMENT_ACTIONBAR_ADMIN_BBCODE).click();
       break;
     case NOTIFICATIONS:
       break;
@@ -77,11 +79,11 @@ public class ForumHomePage {
       break;
     case EXPORT:
       info("Export a category");
-      evt.click(ELEMENT_ACTIONBAR_ADMIN_EXPORT);
+      $(ELEMENT_ACTIONBAR_ADMIN_EXPORT).click();
       break;
     case IMPORT:
       info("Import a category");
-      evt.click(ELEMENT_ACTIONBAR_ADMIN_IMPORT);
+      $(ELEMENT_ACTIONBAR_ADMIN_IMPORT).click();
       break;
     default:
       break;
@@ -188,23 +190,23 @@ public class ForumHomePage {
   public void addBBCode(String tag, String replacement, String description, String example, boolean use) {
     selectItemAdministrationMenu(specifAdministrationMenu.BBCODE);
     info("Click on Add button of Add BBCode popup");
-    evt.click(ELEMENT_ADMIN_BBCODE_ADDBBCODE);
+    $(ELEMENT_ADMIN_BBCODE_ADDBBCODE).click();
     info("Input new tag");
-    evt.type(ELEMENT_BBCODE_ADDBBCODEFORM_TAG, tag, true);
+    $(ELEMENT_BBCODE_ADDBBCODEFORM_TAG).setValue(tag);
     info("Input new replacement");
-    evt.type(ELEMENT_BBCODE_ADDBBCODEFORM_REPLACEMENT, replacement, true);
+    $(ELEMENT_BBCODE_ADDBBCODEFORM_REPLACEMENT).setValue(replacement);
     info("Input new description");
-    evt.type(ELEMENT_BBCODE_ADDBBCODEFORM_DESCRIPTION, description, true);
+    $(ELEMENT_BBCODE_ADDBBCODEFORM_DESCRIPTION).setValue(description);
     info("Input new example");
-    evt.type(ELEMENT_BBCODE_ADDBBCODEFORM_EXAMPLE, example, true);
+    $(ELEMENT_BBCODE_ADDBBCODEFORM_EXAMPLE).setValue(example);
     if (use == true)
-      evt.check(ELEMENT_BBCODE_USE_OPTION);
+      $(ELEMENT_BBCODE_USE_OPTION).click();
     info("Click on Save button and save all changes");
-    evt.click(ELEMENT_EDITSITE_SAVEBTN);
+    $(ELEMENT_SAVE_BBCODE).click();
     info("Verify that BBcode is created");
-    evt.waitForAndGetElement(ELEMENT_BBCODE_TAG_VERIFY.replace("${tag}", tag.toUpperCase()));
+    $(byText(tag.toUpperCase())).should(Condition.exist);
     info("Close the popup");
-    evt.click(ELEMENT_BBCODE_POPUP_CLOSEBTN);
+    $(ELEMENT_BBCODE_POPUP_CLOSEBTN).click();
   }
 
   /**
@@ -219,23 +221,23 @@ public class ForumHomePage {
   public void editBBCode(String newTag, String newReplacement, String newDescription, String newExample, boolean use) {
     selectItemAdministrationMenu(specifAdministrationMenu.BBCODE);
     info("Click on Edit BBcode");
-    evt.click(ELEMENT_BBCODE_EDITBBCODE.replace("${tag}", newTag.toUpperCase()));
+    $(ELEMENT_BBCODE_EDITBBCODE).click();
     info("Input new tag");
-    evt.type(ELEMENT_BBCODE_ADDBBCODEFORM_TAG, newTag, true);
+    $(ELEMENT_BBCODE_ADDBBCODEFORM_TAG).setValue(newTag);
     info("Input new replacement");
-    evt.type(ELEMENT_BBCODE_ADDBBCODEFORM_REPLACEMENT, newReplacement, true);
+    $(ELEMENT_BBCODE_ADDBBCODEFORM_REPLACEMENT).setValue(newReplacement);
     info("Input new description");
-    evt.type(ELEMENT_BBCODE_ADDBBCODEFORM_DESCRIPTION, newDescription, true);
+    $(ELEMENT_BBCODE_ADDBBCODEFORM_DESCRIPTION).setValue(newDescription);
     info("Input new example");
-    evt.type(ELEMENT_BBCODE_ADDBBCODEFORM_EXAMPLE, newExample, true);
+    $(ELEMENT_BBCODE_ADDBBCODEFORM_EXAMPLE).setValue(newExample);
     if (use == true)
-      evt.check(ELEMENT_BBCODE_USE_OPTION);
+      $(ELEMENT_BBCODE_USE_OPTION).click();
     info("Click on Save button and save all changes");
-    evt.click(ELEMENT_EDITSITE_SAVEBTN);
+    $(ELEMENT_EDITSITE_SAVEBTN).click();
     info("Verify that BBcode is edited with changes");
-    evt.waitForAndGetElement(ELEMENT_BBCODE_TAG_VERIFY.replace("${tag}", newTag.toUpperCase()));
+   $(byText(newTag.toUpperCase())).should(Condition.exist);
     info("Close the popup");
-    evt.click(ELEMENT_BBCODE_POPUP_CLOSEBTN);
+    $(ELEMENT_BBCODE_POPUP_CLOSEBTN).click();
   }
 
   /**
@@ -246,13 +248,13 @@ public class ForumHomePage {
   public void deleteBBcode(String tag) {
     selectItemAdministrationMenu(specifAdministrationMenu.BBCODE);
     info("Click on Delete of the tag");
-    evt.click(ELEMENT_BBCODE_DELETEBBCODE.replace("${tag}", tag.toUpperCase()));
+    $(ELEMENT_BBCODE_DELETEBBCODE).click();
     info("Click on OK buton of Confirm popup");
-    evt.click(ELEMENT_BBCODE_CONFIRM_DELETETAG);
+    $(ELEMENT_BBCODE_CONFIRM_DELETETAG).click();
     info("Verify that BBcode is closed");
-    evt.waitForElementNotPresent(ELEMENT_BBCODE_TAG_VERIFY.replace("${tag}", tag.toUpperCase()));
+    $(byText(tag.toUpperCase())).should(Condition.exist);
     info("Close the popup");
-    evt.click(ELEMENT_BBCODE_POPUP_CLOSEBTN);
+    $(ELEMENT_BBCODE_POPUP_CLOSEBTN).click();
   }
 
   /**

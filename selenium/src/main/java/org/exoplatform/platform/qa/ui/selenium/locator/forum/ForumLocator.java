@@ -213,11 +213,11 @@ public class ForumLocator {
 
   public static final By              ELEMENT_BBCODE_ADDBBCODEFORM_EXAMPLE               = By.xpath("//*[@id='Example']");
 
-  public static final String          ELEMENT_BBCODE_EDITBBCODE                          =
-                                                                "//*[contains(text(),'${tag}')]/../..//*[ @class='uiIconEdit uiIconLightGray']";
 
-  public static final String          ELEMENT_BBCODE_DELETEBBCODE                        =
-                                                                  "//*[contains(text(),'${tag}')]/../..//*[ @class='uiIconDelete uiIconLightGray']";
+  public static final By ELEMENT_BBCODE_EDITBBCODE                          =
+                                                       By.xpath("//*[@id=\"UIBBCodeManagerForm\"]/div[2]/table/tbody/tr[28]/td[4]/a[1]/i");
+  public static final By ELEMENT_BBCODE_DELETEBBCODE                        =
+                                                         By.xpath("//*[@id=\"UIBBCodeManagerFormConfirm27\"]/i");
 
   // Breadcumb
   public static final By              ELEMENT_CATEGORY_BREADCUMB_HOME                    =
@@ -272,7 +272,8 @@ public class ForumLocator {
 
   public static final String          ELEMENT_BBCODE_TAG_VERIFY                          = "//*[contains(text(),'${tag}')]";
 
-  public static final By              ELEMENT_BBCODE_USE_OPTION                          = By.xpath("//*[@id='UseOption']");
+
+  public static final By     ELEMENT_BBCODE_USE_OPTION                          = By.id("UseOption']");
 
   public static final By              ELEMENT_BBCODE_CONFIRM_DELETETAG                   =
                                                                        By.xpath("//*[text()='Are you sure you want to delete this BB Code ?']/../../..//*[@class='btn actionOK']");
@@ -373,8 +374,11 @@ public class ForumLocator {
   public static final By              ELEMENT_EDITSITE_SAVEBTN                           =
                                                                By.xpath("//*[@class='btn' and text()='Save']");
 
-  public static final By              ELEMENT_BBCODE_POPUP_CLOSEBTN                      =
-                                                                    By.xpath(".//*[@id='BBCodeManagerForm']//button[text()='Close']");
+
+  public static final By ELEMENT_SAVE_BBCODE = By.xpath("//*[@id=\"UIAddBBCodeForm\"]/div[3]/button[1]");
+
+  public static final By     ELEMENT_BBCODE_POPUP_CLOSEBTN                      =
+                                                           By.xpath("//*[@id=\"BBCodeManagerForm\"]/div/div[2]/button[3]");
 
   /***************************************************
    * FORUM MANAGEMENT
