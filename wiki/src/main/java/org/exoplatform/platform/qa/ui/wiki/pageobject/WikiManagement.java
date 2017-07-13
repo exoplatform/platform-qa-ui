@@ -298,11 +298,11 @@ public class WikiManagement {
   /**
    * Delete an attachment file
    */
-  public void deleteAttachmentFile() {
+  public void deleteAttachmentFile(String file) {
     info("Click on detele button");
-    evt.click(ELEMENT_PAGE_DELETEATTACHFILE);
+    $(byText(file)).parent().parent().find(byClassName("uiIconDelete ")).click();
     info("Verify that the file is removed");
-    evt.waitForElementNotPresent(ELEMENT_PAGE_DOWNLOADATTACHFILE);
+    $(ELEMENT_PAGE_DOWNLOADATTACHFILE).waitUntil(Condition.disappears,Configuration.timeout);
   }
 
   /**

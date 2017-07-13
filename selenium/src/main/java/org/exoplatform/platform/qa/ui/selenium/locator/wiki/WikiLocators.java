@@ -1467,6 +1467,7 @@ public class WikiLocators {
 public  static final By  ELEMENT_VIEW_PAGE_HISTORY     =
         By.xpath("//*[@id='UIWikiPageInfo']/div[2]/div[2]/table/tbody/tr[2]/td/div/button");
 
-
+  public static final SelenideElement ELEMENT_DRAFT_NEW_PAGE                                     = $(byId("UIWikiDraftGrid"));
+  public static final SelenideElement ELEMENT_ALERT_MESSAGE                                      = $(byClassName("alert"));
 
 }
