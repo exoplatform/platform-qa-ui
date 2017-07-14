@@ -63,13 +63,9 @@ public final class HomePageLocator {
   public static final By              ELEMENT_HOME_LINK_PLF                                                =
                                                             By.xpath("//*[@data-original-title='Home']");
 
-<<<<<<< adf01cea52ee6f6f54b6a4c8eb4c509f185dec62
   public static final SelenideElement ELEMENT_CALENDAR_LINK_PLF                                            =
                                                                 $(byClassName("uiIconPLFCalendar"));
-=======
-  public static final By              ELEMENT_CALENDAR_LINK_PLF                                            =
-                                                                By.xpath("//*[@data-original-title='Calendar']");
->>>>>>> Correct Test
+
 
   public static final SelenideElement ELEMENT_TASKS_LINK_PLF                                               =
                                                              $(byClassName("uiCompanyNavigations")).find(byText("Tasks"));
@@ -105,7 +101,6 @@ public final class HomePageLocator {
   // Wiki activity
   public static final String          ELEMENT_WIKI_COMMENT_EDIT_TITLE                                      =
                                                                       "//*[text()='${title}']/../../../..//*[@class='contentComment' and contains(text(), 'title has been updated to: ${title}')]";
-<<<<<<< adf01cea52ee6f6f54b6a4c8eb4c509f185dec62
 
   public static final String          ELEMENT_WIKI_COMMENT_EDIT_CONTENT                                    =
                                                                         "//*[text()='${title}']/../../../..//*[@class='contentComment' and contains(text(), 'content has been edited')]";
@@ -131,33 +126,7 @@ public final class HomePageLocator {
   public static final String          ELEMENT_SPECIFIC_SPACE_LINK_PLF                                      =
                                                                       "//*[@id='UISpaceNavigationPortlet']//*[contains(text(),'{$space}')]";
 
-=======
 
-  public static final String          ELEMENT_WIKI_COMMENT_EDIT_CONTENT                                    =
-                                                                        "//*[text()='${title}']/../../../..//*[@class='contentComment' and contains(text(), 'content has been edited')]";
-
-  public static final String          ELEMENT_ACTIVITY_WIKI_TITLE                                          =
-                                                                  "//*[@class='linkTitle' and text()='${title}']";
-
-  public static final String          ELEMENT_ACTIVITY_WIKI_CONTENT                                        =
-                                                                    "//*[@class='linkTitle' and text()='${title}']/../../..//*[@class='contentWiki theContent']/*[@class='text']";
-
-  public static final String          ELEMENT_ACTIVITY_WIKI_VERSION                                        =
-                                                                    "//*[@class='linkTitle' and text()='${title}']/../..//*[@class = 'pull-right versionLabel' and contains(text(), 'Version: ${version}')]";
-
-  public static final String          ELEMENT_ACTIVITY_MOVE_WIKI_PAGE                                      =
-                                                                      "//*[text()='${title}']/../../../..//*[@class='contentComment' and contains(text(), 'Page has been moved to: ${path}')]";
-
-  public static final SelenideElement ELEMENT_MY_SPACE_LINK_PLF                                            =
-                                                                $(byClassName("uiSpaceNavigationPortlet")).find(byLinkText("MY SPACES"));
-
-  public static final By              ELEMENT_ALL_SPACE_JOIN_LINK                                          =
-                                                                  By.cssSelector("#UISpaceNavigationPortlet .uiIconPLFMan");
-
-  public static final String          ELEMENT_SPECIFIC_SPACE_LINK_PLF                                      =
-                                                                      "//*[@id='UISpaceNavigationPortlet']//*[contains(text(),'{$space}')]";
-
->>>>>>> Correct Test
   public static final String          ELEMENT_NUMBER_OF_SPACE_IN_LIST_LINK                                 =
                                                                            "//*[@class='spaceNavigation']/li[{$number}]/a";
 

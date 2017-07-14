@@ -1,14 +1,13 @@
 package org.exoplatform.platform.qa.ui.platform.wiki;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_PAGE_INFO_ADD_MORE_RELATIONS;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_VIEW_PAGE_HISTORY;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.File;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -24,9 +23,6 @@ import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
-import org.openqa.selenium.By;
-
-import java.io.File;
 
 @Tag("wiki")
 @Tag("smoke")
@@ -63,12 +59,7 @@ public class WikiInformationTestIT extends Base {
     wikiPageInformation = new WikiPageInformation(this);
     sourceTextEditor = new SourceTextEditor(this);
 
-    try {
-      richTextEditor = new RichTextEditor(this);
-
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    richTextEditor = new RichTextEditor(this);
 
   }
 
@@ -138,7 +129,6 @@ public class WikiInformationTestIT extends Base {
 
   @Test
   @BugInPLF("WIKI-1313")
-
   public void test02_AddRelationWithIntranetPortal() {
     info("Test 02: Add relations with Intranet portal");
     String space1 = "space1" + getRandomNumber();
@@ -237,7 +227,7 @@ public class WikiInformationTestIT extends Base {
     String newTitle = "newTitle" + getRandomNumber();
     String link = "link" + getRandomNumber();
 
-    /*
+    /**
      * Step Number: 1 Step Name: Step 1: Create new wiki page Step Description: -
      * Add new wiki page Input Data: Expected Outcome: New wiki page is created with
      * version is V1
@@ -276,23 +266,80 @@ public class WikiInformationTestIT extends Base {
      * Outcome: No version is created
      */
     info("Click on attachment icon at information area at the top of page");
-	  $(byClassName("uiIconAttach")).waitUntil(Condition.appears,Configuration.timeout);
-	  $(byClassName("uiIconAttach")).click();
-	  $(byId("UIAttachmentContainer")).scrollTo().waitUntil(Condition.appears,Configuration.timeout);
+    $(byClassName("uiIconAttach")).waitUntil(Condition.appears, Configuration.timeout);
+    $(byClassName("uiIconAttach")).click();
+    $(byId("UIAttachmentContainer")).scrollTo().waitUntil(Condition.appears, Configuration.timeout);
 
-	  info("Add new attachment");
-	  File file = $(byClassName("uploadInput")).find(byName("file")).uploadFromClasspath("wiki_attachment.txt");
-	  assertTrue(file.exists());
+    info("Add new attachment");
+    File file = $(byClassName("uploadInput")).find(byName("file")).uploadFromClasspath("wiki_attachment.txt");
+    assertTrue(file.exists());
 
-	  info("Delete attachment");
-      wikiManagement.deleteAttachmentFile("wiki_attachment.txt");
+    info("Delete attachment");
+    wikiManagement.deleteAttachmentFile("wiki_attachment.txt");
 
-     info("Verify that New wiki page is created with version still is V2. No version is created");
-     wikiHomePage.viewInformationTable(newTitle, "V2");
+    info("Verify that New wiki page is created with version still is V2. No version is created");
+    wikiHomePage.viewInformationTable(newTitle, "V2");
 
-     info("Delete the page");
-     homePagePlatform.goToWiki();
-     wikiHomePage.deleteWiki(newTitle);
+    info("Delete the page");
+    homePagePlatform.goToWiki();
+    wikiHomePage.deleteWiki(newTitle);
+  }
+
+  @Test
+  public void test03_ViewGeneralPageInformation() {
+    info("Test 03: View General Page information");
+    String title = "title" + getRandomNumber();
+    String content = "content" + getRandomNumber();
+    String newTitle = "newTitle" + getRandomNumber();
+
+    /*
+     * Step Number: 1 Step Name: Step 1: Check Page info Step Description: - Create
+     * a new page - Edit this page - Open this page - Focus Page info at top area
+     * Input Data: Expected Outcome: - The total number of revisions (eg V1, V2, V3)
+     * and this reversion is clickable to open page history - Show full name of the
+     * original creator of the page and time page is created (eg, Added by John
+     * Smith at Mar 3, 2014 3:09 PM) - Last time the page was edited with a link to
+     * view changes (Eg, Last modified by John Smith at Mar 4, 2014 3:09 PM ) -
+     * Restricted link by default - The total number of attachments as a link to
+     * open the attachments
+     */
+
+    info("Create a new wiki page");
+    homePagePlatform.goToWiki();
+    wikiHomePage.goToAddBlankPage();
+    richTextEditor.addSimplePage(title, content);
+    wikiManagement.saveAddPage();
+    $(byText(title)).should(Condition.exist);
+
+    info("Verify that The total number of revisions (eg V1, V2, V3) and this reversion is clickable to open page history  ");
+    wikiHomePage.viewInformationTable(title, "V1");
+
+    info("Show full name of the original creator of the page");
+    $(ELEMENT_WIKI_PAGE_INFORMATION_TABLE_CONTENT).$(byText("Root Root")).should(Condition.exist);
+
+    // info("time page is created");
+    // String date = getDateByTextFormat("MM dd, yyyy");
+    // $(ELEMENT_WIKI_PAGE_INFORMATION_TABLE_CONTENT).$(byText(date)).should(Condition.exist);;
+
+    info("Edit the title of the wiki page");
+    wikiHomePage.goToEditPage();
+    richTextEditor.editSimplePage(newTitle, "");
+    wikiManagement.saveAddPage();
+    $(byText(newTitle)).should(Condition.exist);
+
+    // info("Last time the page was edited with a link to view changes");
+    // String info = "Last modified by Root Root at " + date + "";
+    // waitForAndGetElement(wikiMg.ELEMENT_WIKI_PAGE_INFORMATION_AREA_EDIT_INFOR.replace("${info}",info),2000,0);
+
+    info("Restricted link by default: Restricted");
+      $(ELEMENT_RESTRICTED_LINK).shouldHave(Condition.text("Restricted"));
+
+    info("The total number of attachments as a link to open the attachments");
+      $(ELEMENT_ATTACHMENT_TOTAL_NUMBER ).shouldHave(Condition.text("0"));
+
+    info("Delete the page");
+    homePagePlatform.goToWiki();
+    wikiHomePage.deleteWiki(newTitle);
   }
 
 }
