@@ -79,7 +79,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
     String title = "Wiki" + getRandomNumber();
     String content = "Content" + getRandomNumber();
 
-    /*
+    /**
      * Step Number: 1 Step Name: Step 1: Check auto save when add page Step
      * Description: - Go to wiki - Click [Add Page] -> [Blank Page] in toolbar
      * action - Input valid data for Title page and Page's content (Ex: Title -Auto

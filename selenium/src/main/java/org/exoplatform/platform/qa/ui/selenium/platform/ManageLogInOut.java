@@ -113,7 +113,7 @@ public class ManageLogInOut {
     testBase.getExoWebDriver().getWebDriver();
     $(ELEMENT_INPUT_USERNAME_CAS).setValue(username);
     $(ELEMENT_INPUT_PASSWORD_CAS).setValue(password);
-     ELEMENT_SIGN_IN_BUTTON_CAS.click();
+    ELEMENT_SIGN_IN_BUTTON_CAS.click();
 
     // waitForElementNotPresent(ELEMENT_SIGN_IN_BUTTON_CAS,3000);
 

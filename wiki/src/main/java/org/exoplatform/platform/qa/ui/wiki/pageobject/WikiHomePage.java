@@ -383,7 +383,7 @@ public class WikiHomePage {
     info("Go to Page Information");
     $(byText(wiki)).click();
     $(ELEMENT_MORE_LINK).click();
-    $(ELEMENT_PAGE_INFO).click();
+    ELEMENT_PAGE_INFO.click();
   }
 
   /**
