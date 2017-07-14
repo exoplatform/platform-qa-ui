@@ -26,7 +26,6 @@ import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
  */
 @Tag("forum")
 @Tag("smoke")
-@Tag("test")
 
 public class ForumBookMarkTestIT extends Base {
 
