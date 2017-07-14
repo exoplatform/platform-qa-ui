@@ -1,5 +1,6 @@
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
 
 import com.codeborne.selenide.Condition;
@@ -26,7 +27,6 @@ public class RoomManagement {
         ELEMENT_CHAT_BUTTON_SAVE_ADD_ROOM.click();}
 
 public void deleteRomm(String room){
-
     $(byText(room)).click();
     ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
     ELEMENT_CHAT_ROOM_DELETE.click();

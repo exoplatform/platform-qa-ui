@@ -74,7 +74,7 @@ public class RoomBaseActionTestIT extends Base {
     homePagePlatform.goToChat();
     info("Add room with users");
     switchTo().window("Chat");
-    roomManagement.addRoom(room, 3, usernamea, usernameb, usernamec);
+    roomManagement.addRoom(room,usernamea, usernameb, usernamec);
 
     switchTo().window("Home Page");
     manageLogInOut.signIn(usernamea, password);
@@ -124,7 +124,7 @@ public class RoomBaseActionTestIT extends Base {
     homePagePlatform.goToChat();
     switchTo().window("Chat");
     info("add room");
-    roomManagement.addRoom(room, 1, usernamea);
+    roomManagement.addRoom(room,usernamea);
     info("delete room");
     roomManagement.deleteRomm(room);
     info("delete data");
@@ -149,7 +149,7 @@ public class RoomBaseActionTestIT extends Base {
     homePagePlatform.goToChat();
     switchTo().window("Chat");
     info("add room");
-    roomManagement.addRoom(room, 1, usernamea);
+    roomManagement.addRoom(room,usernamea);
     info("send message");
     chatManagement.sendMessageInRoomOrSpace(room, message);
     switchTo().window("Home Page");
@@ -185,7 +185,7 @@ public class RoomBaseActionTestIT extends Base {
     homePagePlatform.goToChat();
     switchTo().window("Chat");
     info("add room");
-    roomManagement.addRoom(room, 1, usernamea);
+    roomManagement.addRoom(room,usernamea);
     info("edit title");
     roomManagement.editTitleofAroom(room, newroom);
     $(byText(newroom)).should(Condition.exist);
