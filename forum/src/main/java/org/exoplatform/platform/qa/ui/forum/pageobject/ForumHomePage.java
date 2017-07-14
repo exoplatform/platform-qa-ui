@@ -7,6 +7,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
 
 import com.codeborne.selenide.Condition;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
@@ -258,24 +259,44 @@ public class ForumHomePage {
   }
 
   /**
-   * Bookmark a topic, a category and a forum
+   * Bookmark a category and a forum
    *
    * @param name
    */
   public void bookmark(String name) {
     info("Click on Bookmark link on Action bar");
-    evt.clickByJavascript(ELEMENT_ACTIONBAR_BOOKMARK_ICON);
-
+    $(ELEMENT_ACTIONBAR_BOOKMARK_ICON).click();
     info("Click on Bookmark link on Action bar to open Bookmark popup");
-    evt.clickByJavascript(ELEMENT_ACTIONBAR_BOOKMARK_MANAGER);
+    $(ELEMENT_ACTIONBAR_BOOKMARK_MANAGER).click();
     info("Verify that the topic is bookmarked");
-    evt.waitForAndGetElement(ELEMENT_FORUM_BOOKMARK_NAME.replace("${name}", name));
+    $(byText(name)).should(Condition.exist);
     info("Delete the bookmark of the topic");
-    evt.click(ELEMENT_FORUM_BOOKMARK_DELETE.replace("${name}", name));
+    $(ELEMENT_FORUM_BOOKMARK_DELETE).click();
     info("Verify that the bookmark is deleted");
-    evt.waitForElementNotPresent(ELEMENT_FORUM_BOOKMARK_NAME.replace("${name}", name));
+    $(By.className("uiShowBookMarkForm")).find(byText(name)).shouldNot(Condition.exist);
     info("Close the popup");
-    evt.click(ELEMENT_FORUM_BOOKMARK_CLOSE_ICON);
+    $(ELEMENT_FORUM_BOOKMARK_CLOSE_ICON).click();
+  }
+  /**
+   * Bookmark a topic
+   *
+   * @param name
+   */
+  public void topicbookmark(String name) {
+    info("Click on More actions button");
+    $(MORE_ACTIONS_TOPIC).click();
+    info("Click on Bookmark buton in Topic more actions list");
+    $(ELEMENT_TOPIC_BOOKMARK).click();
+    info("Click on Bookmark link on Action bar to open Bookmark popup");
+    $(ELEMENT_ACTIONBAR_BOOKMARK_MANAGER).click();
+    info("Verify that the topic is bookmarked");
+    $(byText(name)).should(Condition.exist);
+    info("Delete the bookmark of the topic");
+    $(ELEMENT_FORUM_BOOKMARK_DELETE).click();
+    info("Verify that the bookmark is deleted");
+    $(By.className("uiShowBookMarkForm")).find(byText(name)).shouldNot(Condition.exist);
+    info("Close the popup");
+    $(ELEMENT_FORUM_BOOKMARK_CLOSE_ICON).click();
   }
 
   /**

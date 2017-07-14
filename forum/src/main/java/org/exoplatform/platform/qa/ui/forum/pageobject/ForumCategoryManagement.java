@@ -5,9 +5,13 @@ import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.page;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.selenium.Button;
@@ -70,21 +74,21 @@ public class ForumCategoryManagement {
    */
   public void selectItemManageCategoryMenu(specifManageCategoryMenu item) {
     info("Waiting manage menu is shown");
-    evt.waitForAndGetElement(ELEMENT_MENU_MANAGE_CATEGORY);
+    $(ELEMENT_MENU_MANAGE_CATEGORY).should(appears);
     info("Click on Manage menu");
-    evt.click(ELEMENT_MENU_MANAGE_CATEGORY, 0, true);
+    $(ELEMENT_MENU_MANAGE_CATEGORY).click();
     switch (item) {
     case EDIT_CATEGORY:
       info("click on Edit link");
-      evt.click(ELEMENT_EDIT_CATEGORY);
+      $(ELEMENT_EDIT_CATEGORY).click();
       break;
     case EXPORT_FORUM:
       info("Click on Export link");
-      evt.click(ELEMENT_EXPORT_FORUM);
+      $(ELEMENT_EXPORT_FORUM).click();
       break;
     case IMPORT_FORUM:
       info("Click on Import link");
-      evt.click(ELEMENT_IMPORT_FORUM);
+      $(ELEMENT_IMPORT_FORUM).click();
       break;
     case DELETE:
       info("Click on Delete link");
@@ -121,7 +125,6 @@ public class ForumCategoryManagement {
     selectItemManageCategoryMenu(specifManageCategoryMenu.EDIT_CATEGORY);
     info("Imput a new name");
     $(ELEMENT_ADDCATEGORY_POPUP_TITLE).val(newName);
-
     info("Save all changes");
     $(ELEMENT_ADDCATEGORY_POPUP_SAVE_BUTTON).click();
 
@@ -135,14 +138,11 @@ public class ForumCategoryManagement {
   public void deleteCategory(String nameCat) {
     // TODO Auto-generated method stub
     info("Wait the category is shown");
-
     $(byText(nameCat)).waitUntil(appears, Configuration.timeout);
-
-    info("Click on the category");
-    $(byText(nameCat)).click();
+    info("Refresh the page");
+    refresh();
     info("Select Delete link");
-    selectItemManageCategoryMenu(specifManageCategoryMenu.DELETE);
-
+        selectItemManageCategoryMenu(specifManageCategoryMenu.DELETE);
     info("Verify that the category is deleted");
     $(withText(nameCat)).shouldNot(exist);
     info("The category is deleted successfully");
