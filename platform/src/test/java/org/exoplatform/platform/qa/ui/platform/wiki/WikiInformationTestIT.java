@@ -1,10 +1,12 @@
 package org.exoplatform.platform.qa.ui.platform.wiki;
 
+import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
@@ -332,14 +334,87 @@ public class WikiInformationTestIT extends Base {
     // waitForAndGetElement(wikiMg.ELEMENT_WIKI_PAGE_INFORMATION_AREA_EDIT_INFOR.replace("${info}",info),2000,0);
 
     info("Restricted link by default: Restricted");
-      $(ELEMENT_RESTRICTED_LINK).shouldHave(Condition.text("Restricted"));
+    $(ELEMENT_RESTRICTED_LINK).shouldHave(Condition.text("Restricted"));
 
     info("The total number of attachments as a link to open the attachments");
-      $(ELEMENT_ATTACHMENT_TOTAL_NUMBER ).shouldHave(Condition.text("0"));
+    $(ELEMENT_ATTACHMENT_TOTAL_NUMBER).shouldHave(Condition.text("0"));
 
     info("Delete the page");
     homePagePlatform.goToWiki();
     wikiHomePage.deleteWiki(newTitle);
+  }
+
+  @Test
+  public void test03_ViewHistoryToCompareVersions() {
+    info("Test 03: View Page history to compare versions");
+    String title = "title" + getRandomNumber();
+    String content = "content" + getRandomNumber();
+    String newTitle = "newTitle" + getRandomNumber();
+    String newTitle1 = "newTitle1" + getRandomNumber();
+    String newTitle2 = "newTitle2" + getRandomNumber();
+
+    /*
+     * Step Number: 1 Step Name: Step 1: Check page history Step Description: - Add
+     * new page - Edit this page some times - Open an existing page by clicking on
+     * page name in navigation tree - Click More -> [Page info] - Click [View Page
+     * History] - To compare two versions, select two check boxes corresponding to
+     * each relevant version, click [Compare the selected versions] Input Data:
+     * Expected Outcome: - A page which shows the changes between these two versions
+     * will be displayed. - The changes between two versions will be marked with
+     * colours: + Words/lines which are red-highlighted with strike-throughs
+     * indicate that they were removed. + Words/lines highlighted in green indicate
+     * that they were added.
+     */
+
+    info("Create a new wiki page");
+    homePagePlatform.goToWiki();
+    wikiHomePage.goToAddBlankPage();
+    richTextEditor.addSimplePage(title, content);
+    wikiManagement.saveAddPage();
+    $(byText(title)).should(Condition.exist);
+
+    info("Edit the page first time");
+    wikiHomePage.goToEditPage();
+    richTextEditor.editSimplePage(newTitle, newTitle);
+    wikiManagement.saveAddPage();
+    $(byText(newTitle)).should(Condition.exist);
+
+    info("Edit the page second time");
+    wikiHomePage.goToEditPage();
+    richTextEditor.editSimplePage(newTitle1, newTitle1);
+    wikiManagement.saveAddPage();
+    $(byText(newTitle1)).should(Condition.exist);
+
+    info("Edit the page third time");
+    wikiHomePage.goToEditPage();
+    richTextEditor.editSimplePage(newTitle2, newTitle2);
+    wikiManagement.saveAddPage();
+    $(byText(newTitle2)).should(Condition.exist);
+
+    info("Open Page info");
+    wikiHomePage.goToPageInformation(newTitle2);
+
+    info("Open Page history");
+    wikiPageInformation.goToPageHistory();
+
+    info("Open Compare reversion page");
+    wikiPageInformation.compareTwoReversion("v.1", "Current Version ( v.4)");
+
+    info("Compare reversion page is shown");
+    $(ELEMENT_WIKI_PAGE_COMPARE_REVERSION_TITLE).waitUntil(Condition.appears, Configuration.timeout);
+
+
+     info("Verify that Words/lines which are red-highlighted with strike-throughs indicate that they were removed");
+
+     assertEquals($(byClassName("diffmodifiedline")).find(byText(title)).getCssValue("background-color"),"rgba(237, 156, 149, 1)");
+
+     info("Verify that Words/lines highlighted in green indicate that they were added");
+
+     assertEquals($(byClassName("diffmodifiedline")).find(byText(newTitle2)).getCssValue("background-color"),"rgba(215, 248, 213, 1)");
+
+     info("Delete the page");
+     homePagePlatform.goToWiki();
+     wikiHomePage.deleteWiki(newTitle2);
   }
 
 }

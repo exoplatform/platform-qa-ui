@@ -995,6 +995,7 @@ public class WikiValidattions {
     evt.waitForAndGetElement(ELEMENT_PAGE_HISTORY_COMPARE_CONTENT.replace("${text}", newContent), 2000, 0)
        .getCssValue("background-color")
        .contains("rgb(219,245,209)");
+
   }
 
   /**
