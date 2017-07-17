@@ -406,7 +406,7 @@ public class WikiInformationTestIT extends Base {
 
      info("Verify that Words/lines which are red-highlighted with strike-throughs indicate that they were removed");
 
-     assertEquals($(byClassName("diffmodifiedline")).find(byText(title)).getCssValue("background-color"),"rgba(237, 156, 149, 1)");
+     assertEquals($(byClassName("diffmodifiedline")).find(byText(content)).getCssValue("background-color"),"rgba(237, 156, 149, 1)");
 
      info("Verify that Words/lines highlighted in green indicate that they were added");
 
