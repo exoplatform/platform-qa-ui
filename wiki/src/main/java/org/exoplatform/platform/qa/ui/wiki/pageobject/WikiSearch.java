@@ -1,8 +1,12 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
@@ -27,7 +31,7 @@ public class WikiSearch {
    */
   public void goToAdvancedSearchSpaceSwitcher() {
     info("Click on Drop donw");
-    evt.click(ELEMENET_ADVANCED_SEARCH_DROP_DOWN);
+    $(ELEMENET_ADVANCED_SEARCH_DROP_DOWN).click();
 
   }
 
@@ -39,7 +43,7 @@ public class WikiSearch {
   public void searchSpaces(String text) {
     if (!text.isEmpty()) {
       info("Type a text to search");
-      evt.type(ELEMENT_ADVANCED_SEARCH_FILTER, text, true);
+      $(ELEMENT_ADVANCED_SEARCH_FILTER).setValue(text);
     }
   }
 
@@ -53,15 +57,17 @@ public class WikiSearch {
       goToAdvancedSearchSpaceSwitcher();
       searchSpaces(location);
       info("Select a location");
-      evt.click(ELEMENT_ADVANCED_SEARCH_SPACE_SWITCHER.replace("$space", location));
+      //$(ELEMENT_ADVANCED_SEARCH_SPACE_SWITCHER).click();
+      $(byClassName("wikis")).find(byText(location)).click();
+
     }
     if (!text.isEmpty()) {
       info("Type a text to search");
-      evt.type(ELEMENT_WIKI_ADVANCED_SEARCH_SEARCH_FIELD, text, true);
+      $(ELEMENT_WIKI_ADVANCED_SEARCH_SEARCH_FIELD).setValue(text);
     }
 
     info("Click on Search button");
-    evt.click(ELEMENT_SEARCH_ADVANCED_SEARCH_BTN);
+    $(ELEMENT_SEARCH_ADVANCED_SEARCH_BTN).click();
 
   }
 

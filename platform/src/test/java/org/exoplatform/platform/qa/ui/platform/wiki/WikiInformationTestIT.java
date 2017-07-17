@@ -287,7 +287,7 @@ public class WikiInformationTestIT extends Base {
     wikiHomePage.deleteWiki(newTitle);
   }
 
-  @Test
+   @Test
   public void test03_ViewGeneralPageInformation() {
     info("Test 03: View General Page information");
     String title = "title" + getRandomNumber();
@@ -343,7 +343,7 @@ public class WikiInformationTestIT extends Base {
     homePagePlatform.goToWiki();
     wikiHomePage.deleteWiki(newTitle);
   }
-
+  @Tag("test")
   @Test
   public void test03_ViewHistoryToCompareVersions() {
     info("Test 03: View Page history to compare versions");

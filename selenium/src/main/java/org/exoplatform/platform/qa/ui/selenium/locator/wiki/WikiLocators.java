@@ -808,7 +808,7 @@ public class WikiLocators {
   public static final String          ELEMENT_SEARCH_DROPDOWNSPACE_LOCATION                      = "//*[@title='${location}']";
 
   public static final By              ELEMENT_SEARCH_NORESULT                                    =
-                                                              By.xpath("//*[@class='resultInfo noResult']");
+                                                              By.xpath("//*[@id=\"UIWikiAdvanceSearchResult\"]/div");
 
   public static final By              ELEMENT_SEARCH_ADVANCED_SEARCH_BTN                         =
                                                                          By.xpath(".//*[@id='UIWikiAdvanceSearchForm']/button[text()='Search']");
