@@ -191,10 +191,10 @@
           </reportSet>
           <reportSet>
             <id>unit-tests-aggregate</id>
-            <inherited>false</inherited>
             <reports>
               <report>report-only</report>
             </reports>
+            <inherited>false</inherited>
           </reportSet>
           <reportSet>
             <id>integration-tests</id>
@@ -207,10 +207,10 @@
           </reportSet>
           <reportSet>
             <id>integration-tests-aggregate</id>
-            <inherited>false</inherited>
             <reports>
               <report>failsafe-report-only</report>
             </reports>
+            <inherited>false</inherited>
           </reportSet>
         </reportSets>
         <configuration>
