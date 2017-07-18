@@ -1488,4 +1488,5 @@ public class WikiLocators {
   public static final By              ELEMENT_VIEW_PAGE_HISTORY                                  =
                                                                 By.xpath("//*[@id='UIWikiPageInfo']/div[2]/div[2]/table/tbody/tr[2]/td/div/button");
 
+
 }
