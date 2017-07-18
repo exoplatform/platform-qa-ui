@@ -160,8 +160,8 @@ public class WikiSearchTestIT extends Base {
 	}
 
 	@Test
-	public void test03_SearchTemplate() {
-		info("Test 3: Search template");
+	public void test04_SearchTemplate() {
+		info("Test 4: Search template");
 
 		String template = "HOW-TO Guide" ;
 
