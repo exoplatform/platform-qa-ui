@@ -119,7 +119,7 @@ public class ForumPostTestIT extends Base {
 
   @Test
   public void test02_Edit__Post() {
-    info("Test 1: Add a post");
+    info("Test 2: Edit a post");
     String title = "Title" + getRandomNumber();
     String content = "Content" + getRandomNumber();
     prepareData();
@@ -144,7 +144,7 @@ public class ForumPostTestIT extends Base {
 
   @Test
   public void test03_Quote__Post() {
-    info("Test 1: Add a post");
+    info("Test 3: Quote a post");
     String title = "Title" + getRandomNumber();
     String content = "Content" + getRandomNumber();
     String newTitle = "NewTitle" + getRandomNumber();
@@ -172,7 +172,7 @@ public class ForumPostTestIT extends Base {
 
   @Test
   public void test04_Private__Post_For_Topic() {
-    info("Test 1: Add a post");
+    info("Test 4: Add a Private post");
     String title = "Title" + getRandomNumber();
     String content = "Content" + getRandomNumber();
     String newTitle = "NewTitle" + getRandomNumber();
@@ -180,7 +180,7 @@ public class ForumPostTestIT extends Base {
     info("Reply a topic");
     {
       forumTopicManagement.privatePostfortopic(newTitle, content);
-      info("Test 4: Delete a post");
+      info("Test 4: Add a Private post");
       info("Click on delete button of the post that is replied");
       $(byText(content)).parent().parent().parent().parent().find(byText("Delete")).click();
       info("Click on OK button of the confirm popup");
@@ -193,8 +193,8 @@ public class ForumPostTestIT extends Base {
   }
 
   @Test
-  public void test04_Private__Post_from_Post() {
-    info("Test 1: Add a post");
+  public void test05_Private__Post_from_Post() {
+    info("Test 1: Add a Private post from post");
     String title = "Title" + getRandomNumber();
     String content = "Content" + getRandomNumber();
     String newTitle = "NewTitle" + getRandomNumber();
@@ -202,8 +202,8 @@ public class ForumPostTestIT extends Base {
     info("Reply a topic");
     forumTopicManagement.postReply(title, content);
     {
+      info("Test 5: Add a Private post from post");
       forumTopicManagement.privatePostFromPost(newTitle, content);
-      info("Test 4: Delete a post");
       info("Click on delete button of the post that is replied");
       $(byText(content)).parent().parent().parent().parent().find(byText("Delete")).click();
       info("Click on OK button of the confirm popup");
