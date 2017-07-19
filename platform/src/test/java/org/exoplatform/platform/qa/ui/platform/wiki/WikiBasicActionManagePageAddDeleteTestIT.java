@@ -237,4 +237,19 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
     wikiHomePage.deleteWiki(newTitle);
   }
 
+
+  @Test
+  public void Auto_save_message() {
+    info("Test: Check auto save message");
+    String title = "title" + getRandomNumber();
+    homePagePlatform.goToWiki();
+    wikiHomePage.goToAddBlankPage();
+    richTextEditor.checkAutoSaveMessage(title, title);
+    wikiHomePage.goToMyDraft();
+    info("The draft is displayed in the list");
+    info("Test 11: Delete a draft");
+    wikidraftpage.deleteDraft(title);
+    info("Delete the page ");
+    homePagePlatform.goToWiki();
+  }
 }

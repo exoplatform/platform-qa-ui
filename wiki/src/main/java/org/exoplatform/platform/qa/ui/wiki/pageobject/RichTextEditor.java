@@ -1328,7 +1328,28 @@ public class RichTextEditor {
 
 
   }
+  /**
+   * Check auto save essage
+   *
+   */
 
+  public void checkAutoSaveMessage(String title, String content) {
+    info("Input a title for the page");
+    if (!title.isEmpty())
+      $(ELEMENT_TITLE_WIKI_INPUT).val(title);
+    info("Input a content for the page");
+    if (!content.isEmpty()) {
+      switchTo().frame(0);
+      $(byId("body")).sendKeys(content);
+      switchTo().defaultContent();
+    }
+    info("Waiting 30s before saved all changes");
+    $(ELEMENT_DRAFT_NOTIFY).waitUntil(Condition.appears,31000,1);
+    info("Save all changes");
+    info("Cancel adding page");
+    $(ELEMENT_CANCEL_BUTTON_ADD_PAGE).click();
+    $(ELEMENT_CONFIRMATION_POPUP_YES_BTN).click();
+  }
   /**
    * Select a page in Search Tab
    *
