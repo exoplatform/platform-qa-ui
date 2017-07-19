@@ -24,6 +24,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
 
 @Tag("smoke")
+@Tag("chat")
 public class SpaceManageMessageTestIT extends Base {
   HomePagePlatform       homePagePlatform;
 
@@ -62,7 +63,7 @@ public class SpaceManageMessageTestIT extends Base {
     String space = "space" + getRandomNumber();
     String usernamea = "usernamea" + getRandomString();
     String password = "123456";
-    String emaila = usernamea + "@gmail.com";
+    String emaila = usernamea + "@test.com";
     String message = "message" + getRandomNumber();
     info("Create new user");
     navigationToolbar.goToAddUser();
@@ -128,7 +129,7 @@ public class SpaceManageMessageTestIT extends Base {
   public void test03_sendMessageAndItsAnswerFromOtherUser() {
     String usernamea = "usernamea" + getRandomString();
     String password = "123456";
-    String emaila = usernamea + getRandomNumber() + "@gmail.com";
+    String emaila = usernamea + getRandomNumber() + "@test.com";
     String message = "message" + getRandomNumber();
     String message2 = "messagee" + getRandomNumber();
     navigationToolbar.goToAddUser();

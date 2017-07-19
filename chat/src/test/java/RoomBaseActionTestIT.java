@@ -56,9 +56,9 @@ public class RoomBaseActionTestIT extends Base {
     String password = "123456";
     String room = "room" + getRandomNumber();
 
-    String emaila = usernamea + getRandomNumber() + "@gmail.com";
-    String emailb = usernameb + getRandomNumber() + "@gmail.com";
-    String emailc = usernamec + getRandomNumber() + "@gmail.com";
+    String emaila = usernamea + getRandomNumber() + "@test.com";
+    String emailb = usernameb + getRandomNumber() + "@test.com";
+    String emailc = usernamec + getRandomNumber() + "@test.com";
     navigationToolbar.goToAddUser();
     info("Create 3 users");
     userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
@@ -74,7 +74,7 @@ public class RoomBaseActionTestIT extends Base {
     homePagePlatform.goToChat();
     info("Add room with users");
     switchTo().window("Chat");
-    roomManagement.addRoom(room,usernamea, usernameb, usernamec);
+    roomManagement.addRoom(room, usernamea, usernameb, usernamec);
 
     switchTo().window("Home Page");
     manageLogInOut.signIn(usernamea, password);
@@ -114,7 +114,7 @@ public class RoomBaseActionTestIT extends Base {
 
     String password = "123456";
     String room = "room" + getRandomNumber();
-    String emaila = usernamea + "@gmail.com";
+    String emaila = usernamea + "@test.com";
     navigationToolbar.goToAddUser();
     info("Create new user");
     userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
@@ -124,7 +124,7 @@ public class RoomBaseActionTestIT extends Base {
     homePagePlatform.goToChat();
     switchTo().window("Chat");
     info("add room");
-    roomManagement.addRoom(room,usernamea);
+    roomManagement.addRoom(room, usernamea);
     info("delete room");
     roomManagement.deleteRomm(room);
     info("delete data");
@@ -137,7 +137,7 @@ public class RoomBaseActionTestIT extends Base {
   public void test03_SendMessageInAROOM() {
     String usernamea = "usernamea" + getRandomString();
     String password = "123456";
-    String emaila = usernamea + "@gmail.com";
+    String emaila = usernamea + "@test.com";
     String room = "room" + getRandomNumber();
     String message = "message" + getRandomNumber();
     navigationToolbar.goToAddUser();
@@ -149,7 +149,7 @@ public class RoomBaseActionTestIT extends Base {
     homePagePlatform.goToChat();
     switchTo().window("Chat");
     info("add room");
-    roomManagement.addRoom(room,usernamea);
+    roomManagement.addRoom(room, usernamea);
     info("send message");
     chatManagement.sendMessageInRoomOrSpace(room, message);
     switchTo().window("Home Page");
@@ -173,7 +173,7 @@ public class RoomBaseActionTestIT extends Base {
   public void test04_modifyTheTittleOfAroom() {
     String usernamea = "usernamea" + getRandomString();
     String password = "123456";
-    String emaila = usernamea + "@gmail.com";
+    String emaila = usernamea + "@test.com";
     String room = "room" + getRandomNumber();
     String newroom = "newroom" + getRandomNumber();
     navigationToolbar.goToAddUser();
@@ -185,7 +185,7 @@ public class RoomBaseActionTestIT extends Base {
     homePagePlatform.goToChat();
     switchTo().window("Chat");
     info("add room");
-    roomManagement.addRoom(room,usernamea);
+    roomManagement.addRoom(room, usernamea);
     info("edit title");
     roomManagement.editTitleofAroom(room, newroom);
     $(byText(newroom)).should(Condition.exist);
