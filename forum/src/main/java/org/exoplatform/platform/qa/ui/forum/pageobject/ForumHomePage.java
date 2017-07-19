@@ -273,7 +273,7 @@ public class ForumHomePage {
     info("Delete the bookmark of the topic");
     $(ELEMENT_FORUM_BOOKMARK_DELETE).click();
     info("Verify that the bookmark is deleted");
-    $(By.className("uiShowBookMarkForm")).find(byText(name)).shouldNot(Condition.exist);
+    $(ELEMENT_FORUM_BOOKMARK_NAME).find(byText(name)).shouldNot(Condition.exist);
     info("Close the popup");
     $(ELEMENT_FORUM_BOOKMARK_CLOSE_ICON).click();
   }
@@ -294,7 +294,7 @@ public class ForumHomePage {
     info("Delete the bookmark of the topic");
     $(ELEMENT_FORUM_BOOKMARK_DELETE).click();
     info("Verify that the bookmark is deleted");
-    $(By.className("uiShowBookMarkForm")).find(byText(name)).shouldNot(Condition.exist);
+    $(ELEMENT_FORUM_BOOKMARK_NAME).find(byText(name)).shouldNot(Condition.exist);
     info("Close the popup");
     $(ELEMENT_FORUM_BOOKMARK_CLOSE_ICON).click();
   }

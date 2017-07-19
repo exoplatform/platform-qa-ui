@@ -251,8 +251,8 @@ public class ForumLocator {
   public static final By ELEMENT_TOPIC_BOOKMARK                                 =
                                                     By.xpath("//*[@id=\"UITopicDetail\"]/div[4]/div[1]/ul/li[3]/div/ul/li[12]/a");
 
-  public static final String ELEMENT_FORUM_BOOKMARK_NAME                        =
-                                                         "//*[@class='uiShowBookMarkForm resizable']//*[text()='${name}']";
+  public static final By ELEMENT_FORUM_BOOKMARK_NAME                        =
+                                                    By.className("uiShowBookMarkForm");
 
   public static final By ELEMENT_FORUM_BOOKMARK_DELETE                      =
                                                        By.xpath("//*[@id=\"UIShowBookMarkForm\"]/div[2]/div/table/tbody/tr/td[3]/a/i")    ;
@@ -718,8 +718,9 @@ public class ForumLocator {
   public static final By              ELEMENT_POST_FORM_SUBMIT                           =
                                                                By.xpath("//*[@id='UIPostForm']//*[contains(text(),'Submit')]");
 
-  public static final String          ELEMENT_POST_IN_TOPIC                              =
-                                                            "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@class='postContent']//*[contains(text(),'{$content}')]";
+
+  public static final By ELEMENT_POST_IN_TOPIC                              =
+                                             By.xpath("//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@class='postContent']//*[contains(text(),'{$content}')]");
 
   public static final String          ELEMENT_POST_IN_TOPIC_QUOTE                        =
                                                                   "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@class='contentQuote']//*[contains(text(),'{$content}')]";
@@ -751,14 +752,17 @@ public class ForumLocator {
   public static final String          ELEMENT_TOPIC_REPPLY_CONTENT                       = ".//*[contains(text(),'${content}')]";
 
   // foot page of post
-  public static final String          ELEMENT_EDIT_POST                                  =
-                                                        "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@data-original-title='Edit This Post']";
+
+
+  public final String ELEMENT_EDIT_POST = "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@data-original-title='Edit This Post']";
+
 
   public static final String          ELEMENT_QUOTE_POST                                 =
                                                          "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@data-original-title='Reply with Quote']";
 
-  public static final String          ELEMENT_DELETE_POST                                =
-                                                          "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@data-original-title='Delete This Post']";
+  public static final By ELEMENT_DELETE_POST                                =
+                                                        By.xpath ("//*[@id=\"UITopicDetailConfirm6\"]");
+
 
   public static final String          ELEMENT_PRIVATE_POST                               =
                                                            "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@data-original-title='Private Reply']";
