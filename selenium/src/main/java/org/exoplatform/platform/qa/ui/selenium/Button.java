@@ -20,8 +20,14 @@
  */
 package org.exoplatform.platform.qa.ui.selenium;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 
 /**
  * This class provides simple way to manage all type of buttons in PLF4
@@ -41,7 +47,7 @@ public class Button {
   public final By ELEMENT_NO_BUTTON_AUX =
           By.xpath("//*[contains(@class, 'popup')]//*[contains(text(),'No')]");
 
-  public final By ELEMENT_YES_BUTTON = By.xpath("//*[normalize-space(text())='Yes']");
+  public final SelenideElement ELEMENT_YES_BUTTON = $(byXpath("//*[@id=\"UIConfirmation\"]/div[2]/div/a[1]"));
 
   public final By ELEMENT_YES_BUTTON_AUX =
           By.xpath("//*[contains(@class, 'popup')]//*[contains(text(),'Yes')]");
@@ -169,8 +175,8 @@ public class Button {
    * Click button yes
    */
   public void yes() {
-    if (evt.waitForAndGetElement(ELEMENT_YES_BUTTON, 3000, 0) != null) {
-      evt.clickByJavascript(ELEMENT_YES_BUTTON);
+    if (ELEMENT_YES_BUTTON.waitUntil(Condition.appears,Configuration.timeout).is(Condition.exist)) {
+      ELEMENT_YES_BUTTON.click();
     } else if (evt.waitForAndGetElement(ELEMENT_YES_BUTTON_AUX, 3000, 0) != null) {
       evt.clickByJavascript(ELEMENT_YES_BUTTON_AUX);
     }

@@ -713,9 +713,9 @@ public class EventManagement {
    */
   public void saveQuickAddEvent() {
     info("Save quick add event");
-    $(ELEMENT_BUTTON_EVENT_SAVE).waitUntil(Condition.appears, Configuration.timeout);
-    $(ELEMENT_BUTTON_EVENT_SAVE).click();
-    $(ELEMENT_BUTTON_EVENT_SAVE).waitUntil(Condition.disappears, Configuration.timeout);
+    ELEMENT_BUTTON_EVENT_SAVE.waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_BUTTON_EVENT_SAVE.click();
+    ELEMENT_BUTTON_EVENT_SAVE.waitUntil(Condition.disappears, Configuration.timeout);
   }
 
   /**
@@ -723,10 +723,10 @@ public class EventManagement {
    */
   public void saveAddEventDetails() {
     info("Sae add event details");
-    $(ELEMENT_BUTTON_EVENT_SAVE_DETAILS).waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_BUTTON_EVENT_SAVE_DETAILS.waitUntil(Condition.appears, Configuration.timeout);
     // click(ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
     // waitForElementNotPresent(ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
-    $(ELEMENT_BUTTON_EVENT_SAVE_DETAILS).click();
+    ELEMENT_BUTTON_EVENT_SAVE_DETAILS.click();
   }
 
   /**

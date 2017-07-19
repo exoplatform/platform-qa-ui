@@ -129,8 +129,8 @@ public class CalendarManagement {
       if (isVerify)
         alert.verifyAlertMessage(ELEMENT_CONFIRM_REMOVE_CALENDAR_MSG);
       else
-        $(ELEMENT_YES_BUTTON).click();
-      evt.waitForElementNotPresent(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar", name));
+        ELEMENT_YES_BUTTON.click();
+      $(byText(name)).waitUntil(Condition.disappears,Configuration.timeout);
     }
 
   }
@@ -162,7 +162,7 @@ public class CalendarManagement {
    */
   public void inputDataInDetailTabCalendarForm(String name, String description, String color) {
     info("Input into tab Detail of Add calendar form");
-    $(ELEMENT_CALENDAR_DETAIL_TAB).click();
+    ELEMENT_CALENDAR_DETAIL_TAB.click();
     if (name != null && name != "")
       $(ELEMENT_CALENDAR_DISPLAY_NAME_INPUT).setValue(name);
     if (description != null && description != "")

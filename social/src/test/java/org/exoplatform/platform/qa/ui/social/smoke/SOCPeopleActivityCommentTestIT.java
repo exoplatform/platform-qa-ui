@@ -6,6 +6,12 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_COMMENT_BUTTON;
+
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_COMMENT_BLOC;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DELETE_POPUP_OK;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_ADD_EVENT_CLASS_TOOLBAR;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_ADD_TOOTLBAR;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -102,8 +108,9 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     $(byId("cke_CommentTextarea" + id)).waitUntil(Condition.appears, Configuration.timeout).click();
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
     // click on the button comment
-    $(byText("Comment")).waitUntil(Condition.not(Condition.disabled), Configuration.timeout).click();
-    $(byText("Comment")).waitUntil(Condition.disappears, Configuration.timeout);
+
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter();
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears,Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
     manageLogInOut.signIn("root", "gtn");
     navigationToolbar.goToManageCommunity();
@@ -256,13 +263,14 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     // insert comment
     $(byId("cke_CommentTextarea" + id)).waitUntil(Condition.appears, Configuration.timeout).click();
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
-    // click on the button comment
+// click on the button comment
 
-    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.not(Condition.disabled), Configuration.timeout)
-                                                          .doubleClick();
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter();
+
+
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
-
+    $(ELEMENT_ADD_TOOTLBAR).click();
     /*
      * Step number: 3 Step Name: - Step Description: Step 3: Delete comment
      * Input Data: - Select an comment - Click on Delete - Click OK to confirm
@@ -271,12 +279,12 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     // scroll up
     executeJavaScript("window.scrollBy(0,-250);", "");
     // hover on the comment to appear the delete button
-    $(byClassName("commentRight")).waitUntil(Condition.appears, Configuration.timeout).hover();
+    $(byId(ELEMENT_COMMENT_BLOC.replace("{id}",id))).hover();
     // the id of the comment is id of the activity+1
     Integer idComment = Integer.parseInt(id) + 1;
     $(byId("DeleteCommentButtoncomment" + idComment.toString())).click();
     // Confirm
-    $(byText("OK")).click();
+    ELEMENT_DELETE_POPUP_OK.click();
     // verify that the comment is deleted
     $(byText(comment)).shouldNot(Condition.exist);
     manageLogInOut.signIn("root", "gtn");

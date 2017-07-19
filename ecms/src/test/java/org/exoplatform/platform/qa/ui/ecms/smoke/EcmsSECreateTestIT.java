@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.ecms.smoke;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -44,6 +45,7 @@ public class EcmsSECreateTestIT extends Base {
    * <li>Test Case Name: Edit File document.</li>
    */
   @Test
+  @BugInPLF("NO ID")
   public void test02_06_07_Create_Edit_DeleteFileDocument() {
     info("Test 2: Delete File document");
     info("Create data test");

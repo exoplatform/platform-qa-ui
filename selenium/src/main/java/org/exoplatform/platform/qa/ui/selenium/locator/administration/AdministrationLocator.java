@@ -20,7 +20,11 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.locator.administration;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 
 public class AdministrationLocator {
 
@@ -30,9 +34,8 @@ public class AdministrationLocator {
   public static final By     ELEMENT_ADVANCED_CATEGORIES_ECM_FUNCTIONS                    =
                                                                        By.xpath("//*[@class='ecmAdminPanel pull-left']//*[@class='accordion-toggle collapsed']/a[contains(text(),'Advanced')]");
 
-  public static final By     ELEMENT_EXPLORER_CATEGORIES_ECM_FUNCTIONS                    =
-                                                                       By.xpath("//*[@class='ecmAdminPanel pull-left']//*[@class='accordion-toggle collapsed']/a[contains(text(),'Explorer')]");
-
+  public static final SelenideElement     ELEMENT_EXPLORER_CATEGORIES_ECM_FUNCTIONS                    =
+$(byXpath("//*[@id=\"accordion\"]/div[2]/div[1]/div/a"));
   public static final By     ELEMENT_TEMPLATE_CATEGORIES_ECM_FUNCTIONS                    =
                                                                        By.xpath("//*[@class='ecmAdminPanel pull-left']//*[@class='accordion-toggle collapsed']/a[contains(text(),'Templates')]");
 
@@ -235,16 +238,16 @@ public class AdministrationLocator {
                                                              By.xpath("//*[@class='uiIconEcmsMetadataManager uiIconEcmsLightGray']");
 
   // Explorer, drives
-  public static final By     ELEMENT_ECM_EXPLORER_DRIVES_ADD_DRIVES                       =
-                                                                    By.xpath("//*[@id='UIDriveList']//*[contains(text(),'Add Drive')]");
-
+  public static final SelenideElement     ELEMENT_ECM_EXPLORER_DRIVES_ADD_DRIVES                       =
+$(byXpath("//*[@id=\"UIDriveList\"]/div[4]/button"));
   public static final By     ELEMENT_ECM_EXPLORER_NAME_DRIVES_FORM                        = By.xpath("//*[@id='name']");
 
-  public static final By     ELEMENT_ECM_EXPLORER_APPLY_VIEWS_FORM                        =
-                                                                   By.xpath("//a[contains(text(),'Apply Views')]");
+  public static final SelenideElement     ELEMENT_ECM_EXPLORER_APPLY_VIEWS_FORM                        =
+                                                                   $(byXpath("//*[@id=\"AddDriveManagerPopup\"]/div[2]/div/ul/li[2]"));
+  public static final SelenideElement     ELEMENT_ECM_EXPLORER_APPLY_VIEWS_FORM_EDIT=$(byXpath("//*[@id=\"EditDriveManagerPopup\"]/div[2]/div/ul/li[2]"));
 
-  public static final By     ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ADMIN              =
-                                                                             By.xpath("//*[@class='UIFormInputSet']//*[@id='Admin']");
+  public static final SelenideElement ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ADMIN              =$(byXpath("//*[@id=\"ViewsInputSet-tab\"]/div/div/div/div[1]/div/span"));
+
 
   public static final By     ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_CATEGORIES         =
                                                                                   By.xpath("//*[@class='UIFormInputSet']//*[@id='Categories']");
@@ -261,8 +264,8 @@ public class AdministrationLocator {
   public static final String ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ITEM               =
                                                                             "//*[@class='UIFormInputSet']//*[@id='$item']";
 
-  public static final By     ELEMENT_ECM_EXPLORER_DRIVES_SAVE_FORM                        =
-                                                                   By.xpath("//*[@id='UIDriveForm']//*[contains(text(),'Save')]");
+  public static final SelenideElement     ELEMENT_ECM_EXPLORER_DRIVES_SAVE_FORM                        =
+                                                                   $(byXpath("//*[@id=\"UIDriveForm\"]/div[4]/button[1]"));
 
   public static final String ELEMENT_ECM_EXPLORER_DRIVES_EDIT_LIST                        =
                                                                    "//*[@id='UIDriveList']//*[contains(text(),'{$name}')]/../..//*[@class='uiIconEditInfo uiIconLightGray']";
@@ -509,13 +512,11 @@ public class AdministrationLocator {
                                                                      "//*[@id='UILockNodeList']//*[contains(text(),'{$name}')]/../..//*[@class='uiIconUnlockMini uiIconLightGray']";
 
   // templates, Documents
-  public static final By     ELEMENT_ECM_TEMPLATES_DOCUMENTS_ADD_DOCUMENT                 =
-                                                                          By.xpath("//*[@id='UITemplateContainer']//*[contains(text(),'Add Template')]");
+  public static final SelenideElement     ELEMENT_ECM_TEMPLATES_DOCUMENTS_ADD_DOCUMENT                 =$(byXpath("//*[@id=\"UITemplateContainer\"]/div[2]/div/button"));
 
   public static final By     ELEMENT_ECM_TEMPLATES_DOCUMENTS_LABEL_FORM                   = By.xpath("//*[@id='label']");
 
-  public static final By     ELEMENT_ECM_TEMPLATES_DOCUMENTS_SAVE_FORM                    =
-                                                                       By.xpath("//*[@id='UITemplateForm']//*[contains(text(),'Save')]");
+  public static final SelenideElement     ELEMENT_ECM_TEMPLATES_DOCUMENTS_SAVE_FORM                    =$(byXpath("//*[@id=\"UITemplateForm\"]/div[3]/button[1]"));
 
   public static final String ELEMENT_ECM_TEMPLATES_DOCUMENTS_LIST                         =
                                                                   "//*[@id='UITemplateList']//*[contains(text(),'{$name}')]";
@@ -523,8 +524,7 @@ public class AdministrationLocator {
   public static final String ELEMENT_ECM_TEMPLATES_DOCUMENTS_LIST_EDIT                    =
                                                                        "//*[@id='UITemplateList']//*[contains(text(),'{$name}')]/../..//*[@class='uiIconEdit uiIconLightGray']";
 
-  public static final By     ELEMENT_ECM_TEMPLATES_DOCUMENTS_SAVE_EDIT_FORM               =
-                                                                            By.xpath("//*[@id='UITemplateEditForm']//*[contains(text(),'Save')]");
+  public static final SelenideElement     ELEMENT_ECM_TEMPLATES_DOCUMENTS_SAVE_EDIT_FORM               =$(byXpath("//*[@id=\"UITemplateEditForm\"]/div[3]/button[1]"));
 
   public static final String ELEMENT_ECM_TEMPLATES_DOCUMENTS_LIST_DELETE                  =
                                                                          "//*[@id='UITemplateList']//*[contains(text(),'{$name}')]/../..//*[@class='uiIconDelete uiIconLightGray']";
@@ -852,4 +852,5 @@ public class AdministrationLocator {
 
   public static final String ELEMENT_PERMISSION_TABLE_BY_TAB                              =
                                                              "//*[contains(@id,'${tabName}')]//*[@id='PermissionGrid']";
+  public static final By ELEMENT_BTN_DELETE_DRIVE=byClassName("uiIconDelete");
 }

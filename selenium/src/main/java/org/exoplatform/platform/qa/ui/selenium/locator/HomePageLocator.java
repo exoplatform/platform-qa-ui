@@ -62,8 +62,8 @@ public final class HomePageLocator {
   public static final By ELEMENT_HOME_LINK_PLF =
           By.xpath("//*[@data-original-title='Home']");
 
-  public static final By ELEMENT_CALENDAR_LINK_PLF =
-          By.xpath("//*[@data-original-title='Calendar']");
+  public static final SelenideElement ELEMENT_CALENDAR_LINK_PLF =
+          $(byClassName("uiIconPLFCalendar"));
   public static final SelenideElement ELEMENT_TASKS_LINK_PLF= $(byClassName("uiCompanyNavigations")).find(byText("Tasks"));
 
   public static final By ELEMENT_CONNECTION_LINK_PLF =
@@ -557,8 +557,8 @@ public final class HomePageLocator {
           By.xpath("//*[@class='uiIconUpload uiIconLightGray']");
 
   // confirm popup
-  public static final By ELEMENT_DELETE_POPUP_OK =
-          By.xpath(".//*[@id='UISocialPopupConfirmation']//*[contains(text(),'OK')]");
+  public static final SelenideElement ELEMENT_DELETE_POPUP_OK =$(byXpath("//*[@id=\"UISocialPopupConfirmation\"]/div[2]/div[2]/div/a[1]"));
+public static final String ELEMENT_COMMENT_BLOC="CommentBlock{id}1";
   public static final SelenideElement ELEMENT_WHO_LIKED_POPUP=$(byClassName("listLikedBox "));
   public static final String ELEMENT_CONTAINER_ACTIVITY="activityContainer{id}";
   public static final String ELEMENT_DATE_ACTIVITY="dateTime";

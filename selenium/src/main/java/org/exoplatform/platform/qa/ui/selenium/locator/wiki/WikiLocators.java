@@ -3,9 +3,7 @@ package org.exoplatform.platform.qa.ui.selenium.locator.wiki;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 
 public class WikiLocators {
@@ -1349,4 +1347,5 @@ public class WikiLocators {
 public static final SelenideElement ELEMENT_SAVE_BUTTON_ADD_PAGE=$(byId("UISubmitToolBarUpper_SavePage_"));
 public static final SelenideElement ELEMENT_DELETE_LINK2= $(byText("Delete Page"));
 public static final SelenideElement ELEMENT_POPUP_SELECT_WIKI_PAGE= $(byId("isc_2"));
+public static final SelenideElement ELEMENT_BUTTON_WIKI_RITCH_TEXT=$(byId("UIEditorTabs")).find(byText("Rich Text"));
 }

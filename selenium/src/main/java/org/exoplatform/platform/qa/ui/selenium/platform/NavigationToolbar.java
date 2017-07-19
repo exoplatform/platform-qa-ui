@@ -134,8 +134,8 @@ public class NavigationToolbar {
     info("--Go to Users and groups management--");
 
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-    $(ELEMENT_ADMINISTRATION_USERS).hover();
-    $(ELEMENT_GROUP_AND_ROLE_LINK).click();
+    ELEMENT_ADMINISTRATION_COMMUNITY.hover();
+    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.click();
 
   }
 
@@ -280,9 +280,9 @@ public class NavigationToolbar {
 
     $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-    $(byText("Content")).hover();
-    $(ELEMENT_LINK_CONTENT_ADMIN).waitUntil(Condition.appears,Configuration.timeout);
-    $(ELEMENT_LINK_CONTENT_ADMIN).click();
+    $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[3]/a")).hover();
+    ELEMENT_LINK_CONTENT_ADMIN.waitUntil(Condition.appears,Configuration.timeout);
+    ELEMENT_LINK_CONTENT_ADMIN.click();
   }
 
   /**

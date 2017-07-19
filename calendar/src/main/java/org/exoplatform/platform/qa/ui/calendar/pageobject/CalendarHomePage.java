@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
+import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
@@ -119,7 +120,7 @@ public class CalendarHomePage {
       switch (optionDay) {
       case DETAILTIME:
 
-        $(byText(name)).waitUntil(Condition.appears, Configuration.timeout).contextClick();
+        ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name)).waitUntil(Condition.appears, Configuration.timeout).contextClick();
         break;
       case ALLDAY:
         evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ALL_DAY.replace("$name", name).replace("$date", date));
@@ -311,7 +312,7 @@ public class CalendarHomePage {
       break;
     }
     $(ELEMENT_CONTEXT_MENU_EDIT).click();
-    $(ELEMENT_ADD_EDIT_TASK_POPUP).waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_ADD_EDIT_TASK_POPUP.waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**
@@ -973,6 +974,7 @@ public class CalendarHomePage {
       verifyIsNotPresentEventTask(name, view, optionDay);
     } else
       button.yes();
+    $(byText(name)).waitUntil(Condition.disappears,Configuration.timeout);
   }
 
   /**

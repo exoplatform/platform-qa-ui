@@ -121,6 +121,6 @@ public class CalendarEventTestIT extends Base {
                                      CalendarHomePage.selectViewOption.LIST,
                                      CalendarHomePage.selectDayOption.DETAILTIME,
                                      getDate(0, "MM/dd/yyyy"));
-    calendarManagement.deleteCalendar(calendar, true);
+    calendarManagement.deleteCalendar(calendar, false);
   }
 }

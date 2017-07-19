@@ -1,6 +1,9 @@
 package org.exoplatform.platform.ui.qa.wiki;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_BUTTON_WIKI_RITCH_TEXT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_CONTENT_WIKI_INPUT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.util.ArrayList;
@@ -9,12 +12,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import com.codeborne.selenide.Condition;
+
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.RichTextEditor;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
+
 @Tag("wiki")
 @Tag("smoke")
 public class WikiBasicActionAddRichTextTestIT extends Base {
@@ -88,6 +94,9 @@ public class WikiBasicActionAddRichTextTestIT extends Base {
     String tooltip = "tooltip" + getRandomNumber();
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddBlankPage();
+    if ($(ELEMENT_CONTENT_WIKI_INPUT).is((Condition.exist))) {
+      ELEMENT_BUTTON_WIKI_RITCH_TEXT.click();
+    }
     richTextEditor.addSimplePage(title2, content2);
     richTextEditor.goToWikiPageLink();
     richTextEditor.insertExistWikiPageLink(title1, label, tooltip, RichTextEditor.wikiPageLinkTab.All_pages);

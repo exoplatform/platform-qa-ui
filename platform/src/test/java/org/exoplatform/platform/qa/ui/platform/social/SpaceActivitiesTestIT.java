@@ -6,6 +6,9 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
+
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_ADMINISTRATION_COMMUNITY;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -107,7 +110,7 @@ public class SpaceActivitiesTestIT extends Base {
     $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).hover();
     // click on delete button
     $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
-    $(ELEMENT_DELETE_POPUP_OK).click();
+    ELEMENT_DELETE_POPUP_OK.click();
     // verify that the activity doesn't exist
     $(byText(activity1)).shouldNot(Condition.exist);
     info("the activity is removed successfully");
@@ -134,13 +137,8 @@ public class SpaceActivitiesTestIT extends Base {
     $(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
     // insert comment
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
-
     // click on the button comment
-    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitWhile(Condition.disabled, Configuration.timeout);
-    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).doubleClick();
-    if ($(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).isDisplayed()) {
-      $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).click();
-    }
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter();
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears, Configuration.timeout);
 
     homePagePlatform.goToAllSpace();
@@ -167,25 +165,21 @@ public class SpaceActivitiesTestIT extends Base {
     // insert comment
     $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
-    // click on the button comment
-    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitWhile(Condition.disabled, Configuration.timeout);
-    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).doubleClick();
-    if ($(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).isDisplayed()) {
-      $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).click();
-    }
+
+// click on the button comment
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter();
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears, Configuration.timeout);
     info("Test 15: Delete comment");
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     // scroll up
     executeJavaScript("window.scrollBy(0,-550)");
     // hover on the comment to appear the delete button
-    ELEMENT_COMMENT_DESCRIPTION.find(byClassName(ELEMENT_DATE_COMMENT))
-                               .waitUntil(Condition.appears, Configuration.timeout)
-                               .hover();
+    $(byId(ELEMENT_COMMENT_BLOC.replace("{id}",id))).hover();
     // the id of the comment is id of the activity+1
     Integer idComment = Integer.parseInt(id) + 1;
     $(byId(ELEMENT_COMMENT_DELETE.replace("{id}", idComment.toString()))).click();
     // Confirm
-    $(ELEMENT_DELETE_POPUP_OK).click();
+    ELEMENT_DELETE_POPUP_OK.click();
     // verify that the comment is deleted
     $(byText(comment)).shouldNot(Condition.exist);
     homePagePlatform.goToAllSpace();

@@ -425,8 +425,8 @@ public final class GateinLocator {
 
   // Navigation Management popup
   public static final By     ELEMENT_NAVIGATION_MANAGEMENT_POPUP_TITLE               =
-                                                                       By.xpath(".//*[@class='PopupTitle popupTitle'][text()='Navigation Management']");
-
+          By.xpath(".//*[@class='PopupTitle popupTitle'][text()='Navigation Management']");
+public static final SelenideElement ELEMENT_BUTTON_EDIT_NAVIGATION=$(byXpath("//*[@id=\"UISiteManagement\"]/table/tbody/tr[2]/td[3]/a"));
   public static final String ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME                 = ".//*[@title='${name}']";
 
   public static final By     ELEMENT_NAVIGATION_MANAGEMENT_SAVE                      = By.xpath(".//*[text()='Save']");
@@ -1208,7 +1208,8 @@ public final class GateinLocator {
                                                    By.xpath(".//*[@id='UIAccountChangePass']//*[text()='Save']");
 
   public static final By     ELEMENT_INPUT_SEARCH_USER_NAME                          = By.id("searchTerm");
-
+  public static final SelenideElement ELEMENT_BTN_SEARCH_USER=$(byTitle("Quick Search"));
+public static final SelenideElement ELEMENT_BTN_USER_TAB=$(byXpath("//*[@id=\"UIOrganizationPortlet\"]/div[2]/div[1]/ul/li[1]/a"));
   public static final String ELEMENT_SEARCH_ICON_USERS_MANAGEMENT                    = "//*[contains(@title,'Quick Search')]";
 
   public static final String ELEMENT_CLOSE_MESSAGE                                   = "//*[contains(@title,'Close Window')]";
@@ -1712,9 +1713,10 @@ public final class GateinLocator {
   public static final By     ELEMENT_LASTNAME                                        = By.id("lastName");
 
   public static final By     ELEMENT_DISPLAY_NAME                                    = By.id("displayName");
-
+  public static final SelenideElement ELEMENT_BTN_SAVE_EDIT_USER=$(byXpath("//*[@id=\"UIUserInfo\"]/div[4]/button[1]"));
   // Layout
   public static final By            ELEMENT_PAGEEDITOR_VIEWPAGE                             = By.xpath("//*[@class='VIEW-PAGE']");
-
-
+public static final SelenideElement ELEMENT_GROUP_TAB=$(byXpath("//*[@id=\"UIOrganizationPortlet\"]/div[2]/div[1]/ul/li[2]/a"));
+public static final SelenideElement ELEMENT_TITLE_GROUP_INFO= $(byXpath("//*[@id=\"UIOrganizationPortlet\"]/div[2]/div[2]/div/div[2]/div[2]/div/div/div/h5"));
+public static final By ELEMENT_ICON_EDIT_USER=byClassName("uiIconViewUserInfo");
 }

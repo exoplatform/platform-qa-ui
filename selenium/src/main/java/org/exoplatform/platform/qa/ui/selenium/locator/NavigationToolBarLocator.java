@@ -149,7 +149,7 @@ public final class NavigationToolBarLocator {
   public static final By ELEMENT_ADMINISTRATION_PORTAL_IDE = By.xpath("//*[text()='IDE']");
   public static final By ELEMENT_ADMINISTRATION_PORTAL_GROUP_SITES = By.xpath("//*[text()='Group Sites']");
   // Administation-->Content
-  public static final By ELEMENT_LINK_CONTENT_ADMIN = By.xpath("//*[text()='Content Administration']");
+  public static final SelenideElement ELEMENT_LINK_CONTENT_ADMIN = $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[3]/ul/li[2]/a"));
   public static final By ELEMENT_MENU_CONTENT_LINK =
           By.xpath("//li[@class='dropdown-submenu']/a[text()='Content']");
   public static final By ELEMENT_MENU_SITE_EXPLORER = By.linkText("Sites Explorer");
@@ -261,9 +261,9 @@ public final class NavigationToolBarLocator {
           By.xpath("//*[@id='ListRecords']//*[contains(text(),'Personal Documents')]");
   public static final By ELEMENT_UPLOAD_FILE_GO_TO_UPLOAD =
           By.xpath("//*[@id='UIDocumentSelector']//*[@class='UIDSUploadInput']");
-  public static final SelenideElement ELEMENT_ADMINISTRATION_COMMUNITY=$(byText("Community"));
-  public static final SelenideElement ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY=$(byText("Manage Community"));
-  public static final SelenideElement ELEMENT_ADMINISTRATION_ADD_USERS=$(byText("Add Users"));
+  public static final SelenideElement ELEMENT_ADMINISTRATION_COMMUNITY=$(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/a"));
+  public static final SelenideElement ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY=$(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/ul/li[2]/a"));
+  public static final SelenideElement ELEMENT_ADMINISTRATION_ADD_USERS=$(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/ul/li[1]/a"));
 public  static final SelenideElement ELEMENT_TASK_ADD_TITLE=$(byId("title"));
 public static final SelenideElement ELEMENT_TASK_BUTTON_ADD=$(byXpath("//*[@id=\"QuickAddTaskContainer\"]/div[2]/a[1]"));
 public static final SelenideElement ELEMENT_ALERT_EXIST_NOTIFICATION=$(byXpath("//*[@id=\\\"UINotificationPopoverToolbarPortlet\\\"]/div[2]/a/i/span"));

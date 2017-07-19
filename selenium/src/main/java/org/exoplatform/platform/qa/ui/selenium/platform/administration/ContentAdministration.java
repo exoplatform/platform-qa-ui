@@ -1,33 +1,32 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.administration;
 
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.getElement;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import org.exoplatform.platform.qa.ui.selenium.platform.ecms.ECMS_Permission;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator;
 import org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
+import org.exoplatform.platform.qa.ui.selenium.platform.ecms.ECMS_Permission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class ContentAdministration {
 
   private final TestBase       testBase;
 
-  public ECMS_Permission ecmsPerm;
+  public ECMS_Permission       ecmsPerm;
 
   public PlatformPermission    plfPerm;
 
@@ -59,7 +58,7 @@ public class ContentAdministration {
     case EXPLORER:
       info("Select Explorer tab");
 
-      $(ELEMENT_EXPLORER_CATEGORIES_ECM_FUNCTIONS).click();
+      ELEMENT_EXPLORER_CATEGORIES_ECM_FUNCTIONS.click();
       break;
 
     case ADVANCED:
@@ -131,10 +130,10 @@ public class ContentAdministration {
       break;
     case DOCUMENTS:
       info("Select Documents function");
-      if ($(ELEMENT_ECMS_FUNCTIONS_DOCUMENTS).isDisplayed())
-      {      $(ELEMENT_ECMS_FUNCTIONS_DOCUMENTS).click();}
-      else
-      {$(byId("accordion")).find(byText("Templates")).click();
+      if ($(ELEMENT_ECMS_FUNCTIONS_DOCUMENTS).isDisplayed()) {
+        $(ELEMENT_ECMS_FUNCTIONS_DOCUMENTS).click();
+      } else {
+        $(byId("accordion")).find(byText("Templates")).click();
         $(ELEMENT_ECMS_FUNCTIONS_DOCUMENTS).click();
 
       }
@@ -160,25 +159,29 @@ public class ContentAdministration {
    * @param userNamePermission
    */
   public void addView(String name, String tabName, String[] tab, String... perm) {
-    /*evt.click(ELEMENT_ECM_EXPLORER_VIEWS_ADD_VIEWS);
-    evt.type(ELEMENT_ECM_EXPLORER_NAME_VIEW_FORM, name, true);
-    evt.click(ELEMENT_ECM_EXPLORER_GO_TO_ACTION_FORM);
-    evt.click(ELEMENT_ECM_EXPLORER_ADD_ACTION_VIEW_FORM);
-    evt.type(ELEMENT_ECM_EXPLORE_TAB_NAME_VIEW_FORM, tabName, true);*/
+    /*
+     * evt.click(ELEMENT_ECM_EXPLORER_VIEWS_ADD_VIEWS);
+     * evt.type(ELEMENT_ECM_EXPLORER_NAME_VIEW_FORM, name, true);
+     * evt.click(ELEMENT_ECM_EXPLORER_GO_TO_ACTION_FORM);
+     * evt.click(ELEMENT_ECM_EXPLORER_ADD_ACTION_VIEW_FORM);
+     * evt.type(ELEMENT_ECM_EXPLORE_TAB_NAME_VIEW_FORM, tabName, true);
+     */
     $(ELEMENT_ECM_EXPLORER_VIEWS_ADD_VIEWS).click();
     $(ELEMENT_ECM_EXPLORER_NAME_VIEW_FORM).setValue(name);
     $(ELEMENT_ECM_EXPLORER_GO_TO_ACTION_FORM).click();
     $(ELEMENT_ECM_EXPLORER_ADD_ACTION_VIEW_FORM).click();
     $(ELEMENT_ECM_EXPLORE_TAB_NAME_VIEW_FORM).setValue(tabName);
     for (String arrayElement : tab) {
-      //evt.check(By.xpath(ELEMENT_ECM_EXPLORER_CHOOSE_TAB_CATEGORY_VIEW_FORM.replace("{$tab}", arrayElement)), 2);
+      // evt.check(By.xpath(ELEMENT_ECM_EXPLORER_CHOOSE_TAB_CATEGORY_VIEW_FORM.replace("{$tab}",
+      // arrayElement)), 2);
       $(byText(arrayElement)).click();
     }
     $(ELEMENT_ECM_EXPLORE_SAVE_TAB_VIEW_FORM).click();
     $(ELEMENT_ECM_EXPLORER_GO_TO_PERMISSION_FORM).click();
     if (perm.length < 2) {
       $(ELEMENT_ECM_EXPLORER_USER_PERMISSION_ADD).click();
-//      evt.click(By.xpath(ELEMENT_ECM_EXPLORER_SELECT_USER_LIST_PERMISSION.replace("{$user}", perm[0])));
+      // evt.click(By.xpath(ELEMENT_ECM_EXPLORER_SELECT_USER_LIST_PERMISSION.replace("{$user}",
+      // perm[0])));
       $(byId("Quick Search")).setValue(perm[0]);
       $(byClassName("btnSearchUser")).click();
       $(byClassName("uiIconPlus")).click();
@@ -197,7 +200,7 @@ public class ContentAdministration {
    * @param newName
    */
   public void editViewPermissionUser(String viewName, String oldName, String newName) {
-$(byClassName("uiIconEditInfo")).click();
+    $(byClassName("uiIconEditInfo")).click();
     $(ELEMENT_ECM_EXPLORER_GO_TO_PERMISSION_FORM).click();
     $(ELEMENT_ECM_EXPLORER_USER_PERMISSION_ADD).click();
     $(byId("Quick Search")).setValue(newName);
@@ -218,7 +221,8 @@ $(byClassName("uiIconEditInfo")).click();
   public void deleteView(String viewName) {
     $(By.xpath(ELEMENT_ECM_EXPLORER_VIEW_DELETE_LIST.replace("{$name}", viewName))).click();
     alert.acceptAlert();
-    //evt.waitForElementNotPresent(By.xpath(ELEMENT_ECM_EXPLORER_VIEW_EDIT_LIST.replace("{$name}", viewName)));
+    // evt.waitForElementNotPresent(By.xpath(ELEMENT_ECM_EXPLORER_VIEW_EDIT_LIST.replace("{$name}",
+    // viewName)));
     $(byText(viewName)).shouldNot(Condition.exist);
   }
 
@@ -231,7 +235,7 @@ $(byClassName("uiIconEditInfo")).click();
    */
   public void addDrives(String name, String permission, specificView[] applyViews) {
     info("Click on Add button of the drive in the list");
-    $(ELEMENT_ECM_EXPLORER_DRIVES_ADD_DRIVES).scrollTo().click();
+    ELEMENT_ECM_EXPLORER_DRIVES_ADD_DRIVES.scrollTo().click();
     info("Type a name for the drive");
     $(ELEMENT_ECM_EXPLORER_NAME_DRIVES_FORM).setValue(name);
     info("Click on Add Permission button for the drive");
@@ -241,14 +245,14 @@ $(byClassName("uiIconEditInfo")).click();
       $(ELEMENT_ECM_COMMON_ANY_PERMISSION).click();
     }
     info("Click on Aplly Views tab");
-    $(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_FORM).click();
+    ELEMENT_ECM_EXPLORER_APPLY_VIEWS_FORM.click();
     for (specificView arrayElement : applyViews) {
       info("Select a view type for the drive");
       switch (arrayElement) {
       case ADMIN:
         info("Add Admin view type");
         // check(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ADMIN,2);
-        evt.clickByJavascript(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ADMIN, 2);
+        ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ADMIN.click();
         break;
       case CATEGORY:
         info("Add Category view type");
@@ -278,7 +282,7 @@ $(byClassName("uiIconEditInfo")).click();
       }
     }
     info("Save all changes");
-    evt.click(ELEMENT_ECM_EXPLORER_DRIVES_SAVE_FORM);
+    ELEMENT_ECM_EXPLORER_DRIVES_SAVE_FORM.click();
     info("Finished adding a drive");
   }
 
@@ -288,9 +292,10 @@ $(byClassName("uiIconEditInfo")).click();
    *          other will be uncheck)
    */
   public void editDrives(String name, specificView[] applyViews, String... views) {
-    $(byClassName("actionIcon")).click();
-   $(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_FORM).click();
-    evt.uncheck(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ADMIN, 2);
+    executeJavaScript("window.scrollBy(0,-250);");
+    $(byText(name)).parent().parent().find(byClassName("uiIconEditInfo")).click();
+    ELEMENT_ECM_EXPLORER_APPLY_VIEWS_FORM_EDIT.click();
+    $(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ADMIN).click();
     evt.uncheck(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_CATEGORIES, 2);
     evt.uncheck(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ICONS, 2);
     evt.uncheck(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_LIST, 2);
@@ -320,7 +325,7 @@ $(byClassName("uiIconEditInfo")).click();
         break;
       }
     }
-    evt.click(ELEMENT_ECM_EXPLORER_DRIVES_SAVE_FORM);
+    ELEMENT_ECM_EXPLORER_DRIVES_SAVE_FORM.click();
   }
 
   /**
@@ -329,13 +334,12 @@ $(byClassName("uiIconEditInfo")).click();
    * @param name
    */
   public void deleteDrives(String name) {
-   // evt.click(By.xpath(ELEMENT_ECM_EXPLORER_DRIVES_DELETE_LIST.replace("{$name}", name)));
-    $(byTitle("Delete")).click();
+    $(byText(name)).parent().parent().find((ELEMENT_BTN_DELETE_DRIVE)).click();
     alert.acceptAlert();
-    //evt.waitForElementNotPresent(By.xpath(ELEMENT_ECM_EXPLORER_DRIVES_DELETE_LIST.replace("{$name}", name)));
+    // evt.waitForElementNotPresent(By.xpath(ELEMENT_ECM_EXPLORER_DRIVES_DELETE_LIST.replace("{$name}",
+    // name)));
     $(byText(name)).shouldNot(Condition.exist);
   }
-
 
   /**
    * Add a Tags
@@ -813,7 +817,7 @@ $(byClassName("uiIconEditInfo")).click();
    * @param permission
    */
   public void addDocumentInTemplates(String label, String... permission) {
-    $(ELEMENT_ECM_TEMPLATES_DOCUMENTS_ADD_DOCUMENT).scrollTo().click();
+    ELEMENT_ECM_TEMPLATES_DOCUMENTS_ADD_DOCUMENT.scrollTo().click();
     $(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LABEL_FORM).setValue(label);
     $(ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON).click();
     if (permission[0] == "any")
@@ -822,7 +826,7 @@ $(byClassName("uiIconEditInfo")).click();
       ecmsPerm.selectGroupMembershipOfLock(permission[0], permission[1]);
 
     }
-    $(ELEMENT_ECM_TEMPLATES_DOCUMENTS_SAVE_FORM).scrollTo().click();
+    ELEMENT_ECM_TEMPLATES_DOCUMENTS_SAVE_FORM.scrollTo().click();
   }
 
   /**
@@ -1260,8 +1264,6 @@ $(byClassName("uiIconEditInfo")).click();
   public void addViewTypeToDrive(String driveName, specificView[] applyViews) {
     NavigationToolbar navTool = new NavigationToolbar(testBase);
 
-
-
     info("Go to Explorer tab");
     navTool.goToContentAdministration();
 
@@ -1283,8 +1285,6 @@ $(byClassName("uiIconEditInfo")).click();
   public void addPermissionToDrive(String driveName, String permissionToAdd) {
     NavigationToolbar navTool = new NavigationToolbar(testBase);
 
-
-
     info("Go to Explorer tab");
     navTool.goToContentAdministration();
 
@@ -1304,7 +1304,6 @@ $(byClassName("uiIconEditInfo")).click();
     permissionValue += "," + permissionToAdd;
 
     evt.type(ELEMENT_ECM_DRIVE_PERMISSION, permissionValue, true);
-
 
     evt.click(ELEMENT_ECM_EXPLORER_DRIVES_SAVE_FORM);
   }

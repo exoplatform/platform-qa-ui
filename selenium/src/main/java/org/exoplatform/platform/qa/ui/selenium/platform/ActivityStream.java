@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -451,7 +452,7 @@ public class ActivityStream {
    */
   public void addText(String text) {
     info("----Add text into activity text box-----");
-    ELEMENT_ACTIVITY_INPUT_TEXT.click();
+    ELEMENT_ACTIVITY_INPUT_TEXT.waitUntil(Condition.appears, Configuration.timeout).click();
     executeJavaScript(" CKEDITOR.instances.composerInput.insertText(\""+text+"\")","");
   }
 

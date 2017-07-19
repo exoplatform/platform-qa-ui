@@ -4,6 +4,7 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DELETE_POPUP_OK;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -80,7 +81,7 @@ public class SOCPeopleActivityDeleteTestIT extends Base {
     $(byId("ActivityContextBox" + id)).find(byClassName("dateTime")).hover();
     // click on delete button
     $(byId("DeleteActivityButton" + id)).click();
-    $(byText("OK")).click();
+    ELEMENT_DELETE_POPUP_OK.click();
     // verify that the activity doesn't exist
     $(byText(activity1)).shouldNot(Condition.exist);
     info("the activity is removed successfully");

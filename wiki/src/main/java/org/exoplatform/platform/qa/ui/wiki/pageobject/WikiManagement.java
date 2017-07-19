@@ -66,11 +66,11 @@ public class WikiManagement {
    * Change to Rich Text Mode
    */
   public void goToRichTextEditor() {
-    if (evt.waitForAndGetElement(ELEMENT_RICHTEXT_BUTTON, 5000, 0) != null) {
+    if (ELEMENT_BUTTON_WIKI_RITCH_TEXT.waitUntil(Condition.appears,Configuration.timeout).is(Condition.exist)) {
       info("Go to Rich Text Mode");
-      evt.click(ELEMENT_RICHTEXT_BUTTON, 0, true);
+      ELEMENT_BUTTON_WIKI_RITCH_TEXT.click();
     }
-    evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME);
+    $(ELEMENT_CONTENT_WIKI_FRAME).waitUntil(Condition.appears,Configuration.timeout);
   }
 
   /**

@@ -37,7 +37,6 @@ import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.Dialog;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -80,8 +79,8 @@ public class UserAndGroupManagement {
    */
   public void goToGroupTab() {
     info("-- Choose Group Management tab--");
-    $(byText("Groups")).click();
-    $(byText("Group Info")).waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_GROUP_TAB.click();
+    ELEMENT_TITLE_GROUP_INFO.waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**
@@ -455,12 +454,15 @@ public class UserAndGroupManagement {
    */
   public void goToEditUserInfo(String username) {
     info("--Search user " + username + "--");
+    if (ELEMENT_BTN_SEARCH_USER.is(Condition.not(Condition.exist))) {
+      ELEMENT_BTN_USER_TAB.click();
+    }
     if (testBase.isTextPresent("Search")) {
       $(ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);
     }
-    $(byTitle("Quick Search")).click();
+    ELEMENT_BTN_SEARCH_USER.click();
     info("--Editing user " + username + "--");
-    $(byClassName("actionIcon")).click();
+    $(byText(username)).parent().parent().find(ELEMENT_ICON_EDIT_USER).click();
   }
 
   /**
@@ -474,14 +476,13 @@ public class UserAndGroupManagement {
   public void editUserInfo_AccountTab(String first, String last, String displayName, String email) {
     info("--editUserInfo_AccountTab--");
 
-    $(byClassName("uiIconViewUserInfo")).click();
     $(ELEMENT_FIRSTNAME).setValue(first);
     $(ELEMENT_LASTNAME).setValue(last);
     $(ELEMENT_DISPLAY_NAME).setValue(displayName);
     $(ELEMENT_EMAIL).setValue(email);
 
-    $(byText("Save")).click();
-    $(byText("Save")).waitUntil(Condition.disappears, Configuration.timeout);
+    ELEMENT_BTN_SAVE_EDIT_USER.click();
+    ELEMENT_BTN_SAVE_EDIT_USER.waitUntil(Condition.disappears, Configuration.timeout);
     $(byText("The user profile has been updated.")).waitUntil(Condition.appears, Configuration.timeout);
     $(byText("OK")).click();
   }
@@ -680,12 +681,12 @@ public class UserAndGroupManagement {
       $(ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);
     }
 
-    $(byTitle("Quick Search")).click();
+    ELEMENT_BTN_SEARCH_USER.click();
 
     $(byClassName("uiIconDeleteUser")).click();
     alert.acceptAlert();
     $(ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);
-    $(byTitle("Quick Search")).click();
+    ELEMENT_BTN_SEARCH_USER.click();
     $(byText("No result found.")).waitUntil(Condition.appears, Configuration.timeout);
     dialog.closeMessageDialog();
 

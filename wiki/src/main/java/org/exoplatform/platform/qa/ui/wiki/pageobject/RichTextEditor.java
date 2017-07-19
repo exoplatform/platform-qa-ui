@@ -1,17 +1,20 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
+import static com.codeborne.selenide.Selectors.byId;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.awt.event.KeyEvent;
 import java.io.File;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -25,7 +28,7 @@ public class RichTextEditor {
   public Button                but;
 
   public PlatformBase          plf;
-
+  WikiManagement               wikiManagement;
   private ElementEventTestBase evt;
 
   /**
@@ -39,6 +42,7 @@ public class RichTextEditor {
     this.evt = testBase.getElementEventTestBase();
     this.but = new Button(testBase);
     this.plf = new PlatformBase(testBase);
+    this.wikiManagement = new WikiManagement(testBase);
   }
 
   /**
@@ -519,12 +523,20 @@ public class RichTextEditor {
    */
   public void addSimplePage(String title, String content) {
     info("Input a title for the page");
+    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
+    if ($(ELEMENT_SOURCE_EDITOR_BUTTON).is(Condition.not(Condition.exist))
+        && (ELEMENT_BUTTON_WIKI_RITCH_TEXT.is(Condition.exist))) {
+      ELEMENT_BUTTON_WIKI_RITCH_TEXT.click();
+    }
     if (!title.isEmpty()) {
       $(ELEMENT_TITLE_WIKI_INPUT).val(title);
     }
     info("Input a content for the page");
     if (!content.isEmpty()) {
-$(ELEMENT_CONTENT_WIKI_FRAME).sendKeys(content);    }
+      switchTo().frame(0);
+      $(byId("body")).sendKeys(content);
+      switchTo().defaultContent();
+    }
   }
 
   /**
@@ -1305,10 +1317,13 @@ $(ELEMENT_CONTENT_WIKI_FRAME).sendKeys(content);    }
    * @param page
    */
   public void selectPageInAllPagesTab(String page) {
-//    WebElement el = evt.waitForAndGetElement(ELEMENT_ALL_PAGE_TAB_PAGE_SELECTED.replace("$title", page), 5000, 1, 2);
-   // evt.scrollToElement(el, this.testBase.getExoWebDriver().getWebDriver());
+    // WebElement el =
+    // evt.waitForAndGetElement(ELEMENT_ALL_PAGE_TAB_PAGE_SELECTED.replace("$title",
+    // page), 5000, 1, 2);
+    // evt.scrollToElement(el, this.testBase.getExoWebDriver().getWebDriver());
     if ($(byText(page)).is(Condition.exist)) {
       info("Select the page");
+      ELEMENT_POPUP_SELECT_WIKI_PAGE.click();
       ELEMENT_POPUP_SELECT_WIKI_PAGE.find(byText(page)).waitUntil(Condition.appears, Configuration.timeout).click();
       info("Click on Select button");
       $(ELEMENT_SELECT_BUTTON).click();
