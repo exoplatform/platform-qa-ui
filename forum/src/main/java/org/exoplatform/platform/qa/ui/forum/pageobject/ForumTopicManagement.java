@@ -384,10 +384,10 @@ public class ForumTopicManagement {
    * @param name
    */
   public void addATag(String name) {
-    evt.click(ELEMENT_ACTIONBAR_TOPIC_TAG);
-    evt.type(ELEMENT_ACTIONBAR_TOPIC_TAGNAME, name, true);
-    evt.click(ELEMENT_FORUM_TOPIC_ADD_TAG);
-    evt.waitForAndGetElement(ELEMENT_ACTIONBAR_TOPIC_TAGPRESENT.replace("${tag}", name));
+    $(ELEMENT_ACTIONBAR_TOPIC_TAG).click();
+    $(ELEMENT_ACTIONBAR_TOPIC_TAGNAME).val(name);
+    $(ELEMENT_FORUM_TOPIC_ADD_TAG).click();
+    $(byText(name)).should(Condition.exist);
   }
 
   /**

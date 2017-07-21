@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_ACTIONBAR_TOPIC_TAGDELETE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("smoke")
@@ -48,7 +49,54 @@ public class ForumTopicTestIT extends Base {
      * <li> Pre-Condition: </li>
      * <li> Post-Condition: </li>
      */
-    @Tag("test")
+    /**
+     * <li> Case ID:116702.</li>
+     * <li> Test Case Name: Tag for topic.</li>
+     * <li> Pre-Condition: </li>
+     * <li> Post-Condition: </li>
+     */
+    @Test
+    public void test03_TagForTopic() {
+        info("Test 3: Tag for topic");
+
+        String name = "Category" + getRandomNumber();
+        String name2 = "Forum" + getRandomNumber();
+        String desc = "Description" + getRandomNumber();
+        String topic = "Topic" + getRandomNumber();
+
+		/*Step Number: 1
+         *Step Name: -
+		 *Step Description:
+			Step 1: Manage tag on Topic
+		 *Input Data:
+			- Open 1 topicAdd tag
+			- Click on Tag
+			- Put tag's name
+		 *Expected Outcome:
+			- Topic is added tag successful
+			- Topic is displayed when view tag
+			- Topic is untagged successful
+			- Topic is auto
+			-suggest tag when type first character of an existing tag name*/
+        info("Open Forum portlet");
+        homePagePlatform.goToForum();
+        info("Add a category");
+        forumCategoryManagement.addCategorySimple(name, "", desc);
+        info("Add a forum in the category");
+        forumForumManagement.addForumSimple(name2, "", desc);
+        info("Add and go to a topic in the forums");
+        forumForumManagement.goToStartTopic();
+        forumTopicManagement.startTopic(topic, topic, "", "");
+        forumHomePage.goToTopic(topic);
+        info("Add and verify a tag");
+        forumTopicManagement.addATag(name);
+        info("Delete the tag");
+        $(ELEMENT_ACTIONBAR_TOPIC_TAGDELETE).click();
+        info("Delete data");
+        forumHomePage.goToHomeCategory();
+        forumCategoryManagement.deleteCategory(name);
+    }
+
     @Test
     public void test02_RateTopic() {
         info("Test 2: Rate topic");
@@ -95,7 +143,6 @@ public class ForumTopicTestIT extends Base {
      * <li>Pre-Condition: A topic is existed</li>
      * <li>Post-Condition:</li>
      */
-    @Tag("test")
     @Test
     public void test09_CreateDeleteNewTopic() {
         info("Test 9: Create new Topic");
