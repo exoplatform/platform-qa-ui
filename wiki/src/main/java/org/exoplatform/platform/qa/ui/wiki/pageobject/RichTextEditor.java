@@ -1,6 +1,6 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
-import static com.codeborne.selenide.Selectors.byId;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
@@ -1323,8 +1323,9 @@ public class RichTextEditor {
     // evt.scrollToElement(el, this.testBase.getExoWebDriver().getWebDriver());
     if ($(byText(page)).is(Condition.exist)) {
       info("Select the page");
-      ELEMENT_POPUP_SELECT_WIKI_PAGE.click();
+      goToAllPagesTab();
       ELEMENT_POPUP_SELECT_WIKI_PAGE.find(byText(page)).waitUntil(Condition.appears, Configuration.timeout).click();
+      ELEMENT_WIKI_UNPUT_LINK_EXISTED_PAGE.setValue("intranet:"+page);
       info("Click on Select button");
       $(ELEMENT_SELECT_BUTTON).click();
     }
