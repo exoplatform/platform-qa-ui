@@ -513,9 +513,10 @@ public class ForumTopicManagement {
    *
    * @param name
    */
-  public void rateTopic(String name, String starType) {
-    evt.click(ELEMENT_ACTIONBAR_TOPIC_RATE);
-    evt.click(ELEMENT_FORUM_VOTE_MARK.replace("${star}", starType));
+  public void rateTopic(String name) {
+    $(ELEMENT_MORE_ACTION).click();
+    $(ELEMENT_TOPIC_RATE).click();
+    $(ELEMENT_FORUM_VOTE_MARK).click();
 
   }
 

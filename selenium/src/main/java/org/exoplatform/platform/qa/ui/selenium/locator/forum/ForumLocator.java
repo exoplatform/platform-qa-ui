@@ -626,8 +626,11 @@ public class ForumLocator {
 
   public static final By              ELEMENT_ACTIONBAR_TOPIC_TAGNAME                    = By.xpath("//*[@id='AddTag']");
 
-  public static final By              ELEMENT_ACTIONBAR_TOPIC_RATE                       =
-                                                                   By.xpath("//*[@class='uiIconForumStar uiIconForumLightGray']");
+
+  public static final By     ELEMENT_ACTIONBAR_TOPIC_RATE                       =
+                                                          By.xpath("//*[@class='uiIconForumStar uiIconForumLightGray']");
+  public static final By ELEMENT_TOPIC_RATE                                     =
+                                                          By.xpath("//*[@id=\"UITopicDetail\"]/div[4]/div[1]/ul/li[3]/div/ul/li[13]/a/i");
 
   public static final String          ELEMENT_ACTIONBAR_TOPIC_TAGPRESENT                 =
                                                                          ".//*[@id='UITopicDetail']//a[@data-original-title='${tag}']";
@@ -637,7 +640,9 @@ public class ForumLocator {
                                                                   By.xpath(".//*[@id='UITopicDetail']//a[contains(text(),'Add Tag')]");
 
   // Rate
-  public static final String          ELEMENT_FORUM_VOTE_MARK                            = "//*[@data-original-title='${star}']";
+
+  public static final By ELEMENT_FORUM_VOTE_MARK                                =
+                                                         By.xpath("//*[@id=\"UIRatingForm\"]/div[2]/div/div[1]/i[3]");
 
   public static final String          ELEMENT_POST_TITLE                                 =
                                                          ".//*[@class='postViewTitle'][contains(text(),'${title}')]";
