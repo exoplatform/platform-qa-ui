@@ -174,6 +174,7 @@ public class SpaceActivitiesTestIT extends Base {
     // scroll up
     executeJavaScript("window.scrollBy(0,-550)");
     // hover on the comment to appear the delete button
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     $(byId(ELEMENT_COMMENT_BLOC.replace("{id}",id))).hover();
     // the id of the comment is id of the activity+1
     Integer idComment = Integer.parseInt(id) + 1;
