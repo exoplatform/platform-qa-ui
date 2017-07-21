@@ -38,7 +38,7 @@ Actually we use :
 * *Selenium Grid 3.0.1*
 --
 
-.Start PLF instance and Selenium Grid
+.Start PLF instance, Selenium Grid and MailHog
 [source, shell]
 ----
 $ git clone git@github.com:exoplatform/platform-qa-ui.git
@@ -49,6 +49,9 @@ $ open http://localhost:8080
 
 # Check that the Selenium Grid is UP
 $ open http://localhost:4444/grid/console
+
+# Check that MailHog is UP
+$ open http://localhost:8025/mail/
 ----
 
 

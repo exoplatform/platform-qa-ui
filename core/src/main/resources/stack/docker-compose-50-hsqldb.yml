@@ -62,6 +62,8 @@ services:
     extends:
       file: common-plf50-stack.yml
       service: mail
+    ports:
+    - '8025:8025'
     depends_on:
       - mongo
   selenium_hub:
