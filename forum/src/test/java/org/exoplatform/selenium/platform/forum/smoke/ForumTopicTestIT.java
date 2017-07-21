@@ -16,6 +16,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_ACTIONBAR_TOPIC_TAGDELETE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_FORUM_POLL_GRID;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("smoke")
@@ -42,6 +43,40 @@ public class ForumTopicTestIT extends Base {
         forumForumManagement = new ForumForumManagement(this);
         forumTopicManagement = new ForumTopicManagement(this);
     }
+    @Test
+    public void test02_RateTopic() {
+        info("Test 2: Rate topic");
+        String name = "Category" + getRandomNumber();
+        String name2 = "Forum" + getRandomNumber();
+        String desc = "Description" + getRandomNumber();
+        String topic = "Topic" + getRandomNumber();
+
+		/*Step Number: 1
+         *Step Name: -
+		 *Step Description:
+			Step 1: Rate Topic
+		 *Input Data:
+			- Open 1 topic
+			- Click on Rate
+			- Move mouse over stars
+		 *Expected Outcome:
+			Topic is rated successfully. The number of stars are selected set yellow.*/
+        info("Open Forum portlet");
+        homePagePlatform.goToForum();
+        info("Add a category");
+        forumCategoryManagement.addCategorySimple(name, "", desc);
+        info("Add a forum in the category");
+        forumForumManagement.addForumSimple(name2, "", desc);
+        info("Add and go to a topic in the forums");
+        forumForumManagement.goToStartTopic();
+        forumTopicManagement.startTopic(topic, topic, "", "");
+        info("Rate the topic");
+        forumHomePage.goToTopic(topic);
+        forumTopicManagement.rateTopic(name2);
+        info("Delete data");
+        forumHomePage.goToHomeCategory();
+        forumCategoryManagement.deleteCategory(name);
+    }
 
     /**
      * <li> Case ID:116695.</li>
@@ -58,7 +93,6 @@ public class ForumTopicTestIT extends Base {
     @Test
     public void test03_TagForTopic() {
         info("Test 3: Tag for topic");
-
         String name = "Category" + getRandomNumber();
         String name2 = "Forum" + getRandomNumber();
         String desc = "Description" + getRandomNumber();
@@ -97,26 +131,40 @@ public class ForumTopicTestIT extends Base {
         forumCategoryManagement.deleteCategory(name);
     }
 
+    /**
+     * <li> Case ID:116776.</li>
+     * <li> Test Case Name: Add a new poll.</li>
+     * <li> Pre-Condition: </li>
+     * <li> Post-Condition: </li>
+     * <p>
+     * *<li> Case ID:116760.</li>
+     * <li> Test Case Name: Edit a poll.</li>
+     * <li> Pre-Condition: </li>
+     * <li> Post-Condition: </li>
+     * <p>
+     * <li> Case ID:116761.</li>
+     * <li> Test Case Name: Close / Reopen a poll.</li>
+     * <li> Pre-Condition: </li>
+     * <li> Post-Condition: </li>
+     * <p>
+     * *<li> Case ID:116777.</li>
+     * <li> Test Case Name: Delete a poll.</li>
+     * <li> Pre-Condition: a poll's activity is shared in the activity stream</li>
+     * <li> Post-Condition: </li>
+     */
     @Test
-    public void test02_RateTopic() {
-        info("Test 2: Rate topic");
-
+    public void test05_AddANewPoll() {
+        info("Test 5: Add a new poll");
         String name = "Category" + getRandomNumber();
         String name2 = "Forum" + getRandomNumber();
+        String name3 = "Poll" + getRandomNumber();
+        String name4 = "Poll" + getRandomNumber();
+        String name5 = "Poll" + getRandomNumber();
+        String name6 = "Poll" + getRandomNumber();
         String desc = "Description" + getRandomNumber();
         String topic = "Topic" + getRandomNumber();
 
-		/*Step Number: 1
-         *Step Name: -
-		 *Step Description:
-			Step 1: Rate Topic
-		 *Input Data:
-			- Open 1 topic
-			- Click on Rate
-			- Move mouse over stars
-		 *Expected Outcome:
-			Topic is rated successfully. The number of stars are selected set yellow.*/
-        info("Open Forum portlet");
+        info("Open forum portlet");
         homePagePlatform.goToForum();
         info("Add a category");
         forumCategoryManagement.addCategorySimple(name, "", desc);
@@ -125,13 +173,120 @@ public class ForumTopicTestIT extends Base {
         info("Add and go to a topic in the forums");
         forumForumManagement.goToStartTopic();
         forumTopicManagement.startTopic(topic, topic, "", "");
-        info("Rate the topic");
+        info("Add a new poll to the topic");
         forumHomePage.goToTopic(topic);
-        forumTopicManagement.rateTopic(name2);
+        forumTopicManagement.addPoll(name3, name3, name4);
+        $(ELEMENT_FORUM_POLL_GRID).should(Condition.exist);
+        info("delete poll");
+        forumTopicManagement.deletePoll();
         info("Delete data");
         forumHomePage.goToHomeCategory();
         forumCategoryManagement.deleteCategory(name);
     }
+
+    @Test
+    public void test06_EditANewPoll() {
+        info("Test 6: Edit a poll");
+        String name = "Category" + getRandomNumber();
+        String name2 = "Forum" + getRandomNumber();
+        String name3 = "Poll" + getRandomNumber();
+        String name4 = "Poll" + getRandomNumber();
+        String name5 = "Poll" + getRandomNumber();
+        String name6 = "Poll" + getRandomNumber();
+        String desc = "Description" + getRandomNumber();
+        String topic = "Topic" + getRandomNumber();
+
+        info("Open forum portlet");
+        homePagePlatform.goToForum();
+        info("Add a category");
+        forumCategoryManagement.addCategorySimple(name, "", desc);
+        info("Add a forum in the category");
+        forumForumManagement.addForumSimple(name2, "", desc);
+        info("Add and go to a topic in the forums");
+        forumForumManagement.goToStartTopic();
+        forumTopicManagement.startTopic(topic, topic, "", "");
+        info("Add a new poll to the topic");
+        forumHomePage.goToTopic(topic);
+        forumTopicManagement.addPoll(name3, name3, name4);
+        $(ELEMENT_FORUM_POLL_GRID).should(Condition.exist);
+        info("Edit a poll");
+        forumTopicManagement.editPoll(name5, name5, name6);
+        info("delete poll");
+        forumTopicManagement.deletePoll();
+        info("Delete data");
+        forumHomePage.goToHomeCategory();
+        forumCategoryManagement.deleteCategory(name);
+    }
+
+    @Test
+    public void test13_CloseReopenANewPoll() {
+        info("Test 13: Close and open a poll");
+        String name = "Category" + getRandomNumber();
+        String name2 = "Forum" + getRandomNumber();
+        String name3 = "Poll" + getRandomNumber();
+        String name4 = "Poll" + getRandomNumber();
+        String name5 = "Poll" + getRandomNumber();
+        String name6 = "Poll" + getRandomNumber();
+        String desc = "Description" + getRandomNumber();
+        String topic = "Topic" + getRandomNumber();
+
+        info("Open forum portlet");
+        homePagePlatform.goToForum();
+        info("Add a category");
+        forumCategoryManagement.addCategorySimple(name, "", desc);
+        info("Add a forum in the category");
+        forumForumManagement.addForumSimple(name2, "", desc);
+        info("Add and go to a topic in the forums");
+        forumForumManagement.goToStartTopic();
+        forumTopicManagement.startTopic(topic, topic, "", "");
+        info("Add a new poll to the topic");
+        forumHomePage.goToTopic(topic);
+        forumTopicManagement.addPoll(name3, name3, name4);
+        $(ELEMENT_FORUM_POLL_GRID).should(Condition.exist);
+        info("Close the poll");
+        forumTopicManagement.closeOpenPoll(true);
+        info("Open the poll");
+        forumTopicManagement.closeOpenPoll(false);
+        info("delete poll");
+        forumTopicManagement.deletePoll();
+        info("Delete data");
+        forumHomePage.goToHomeCategory();
+        forumCategoryManagement.deleteCategory(name);
+
+    }
+
+    @Test
+    public void test14_DeleteaPoll() {
+        info("Test 14: Delete a poll");
+        String name = "Category" + getRandomNumber();
+        String name2 = "Forum" + getRandomNumber();
+        String name3 = "Poll" + getRandomNumber();
+        String name4 = "Poll" + getRandomNumber();
+        String name5 = "Poll" + getRandomNumber();
+        String name6 = "Poll" + getRandomNumber();
+        String desc = "Description" + getRandomNumber();
+        String topic = "Topic" + getRandomNumber();
+
+        info("Open forum portlet");
+        homePagePlatform.goToForum();
+        info("Add a category");
+        forumCategoryManagement.addCategorySimple(name, "", desc);
+        info("Add a forum in the category");
+        forumForumManagement.addForumSimple(name2, "", desc);
+        info("Add and go to a topic in the forums");
+        forumForumManagement.goToStartTopic();
+        forumTopicManagement.startTopic(topic, topic, "", "");
+        info("Add a new poll to the topic");
+        forumHomePage.goToTopic(topic);
+        forumTopicManagement.addPoll(name3, name3, name4);
+        $(ELEMENT_FORUM_POLL_GRID).should(Condition.exist);
+        info("delete poll");
+        forumTopicManagement.deletePoll();
+        info("Delete data");
+        forumHomePage.goToHomeCategory();
+        forumCategoryManagement.deleteCategory(name);
+    }
+
 
     /**
      * <li>Case ID:116764.</li>
@@ -146,7 +301,6 @@ public class ForumTopicTestIT extends Base {
     @Test
     public void test09_CreateDeleteNewTopic() {
         info("Test 9: Create new Topic");
-
         String name = "name" + getRandomNumber();
         String name2 = "name2" + getRandomNumber();
         String desc = "desc" + getRandomNumber();

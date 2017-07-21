@@ -93,7 +93,7 @@ public class ForumTopicManagement {
     switch (item) {
     case ADD_POLL:
       info("Click on Add poll button");
-      evt.click(ELEMENT_ADD_POLL);
+      $(ELEMENT_ADD_POLL).click();
       break;
     case EDIT:
       info("Click on Edit topic button");
@@ -112,25 +112,25 @@ public class ForumTopicManagement {
       break;
     case LOCK:
       info("Click on lock topic button");
-      evt.click(ELEMENT_LOCK_TOPIC);
+      $(ELEMENT_LOCK_TOPIC).click();
       break;
     case UNLOCK:
       info("Click on unlock topic button");
-      evt.click(ELEMENT_UNLOCK_TOPIC);
+      $(ELEMENT_UNLOCK_TOPIC).click();
       break;
     case MOVE:
       info("Wait Move topic link is shown");
       evt.waitForAndGetElement(ELEMENT_MOVE_TOPIC);
       info("Click on move topic link");
-      evt.click(ELEMENT_MOVE_TOPIC);
+      $(ELEMENT_MOVE_TOPIC).click();
       break;
     case CLOSE:
       info("Click on Close");
-      evt.click(ELEMENT_CLOSE_TOPIC);
+      $(ELEMENT_CLOSE_TOPIC).click();
       break;
     case OPEN:
       info("Click on Close");
-      evt.click(ELEMENT_OPEN_TOPIC);
+      $(ELEMENT_OPEN_TOPIC).click();
       break;
     case STICK:
       break;
@@ -147,9 +147,9 @@ public class ForumTopicManagement {
    */
   public void openMoreActionMenuPoll() {
     info("Wait More link is shown");
-    evt.waitForAndGetElement(ELEMENT_MORE_ACTIONS_POLL);
+    $(ELEMENT_MORE_ACTIONS_POLL).should(Condition.exist);
     info("Click on More link");
-    evt.click(ELEMENT_MORE_ACTIONS_POLL);
+    $(ELEMENT_MORE_ACTIONS_POLL).click();
   }
 
   /**
@@ -163,19 +163,19 @@ public class ForumTopicManagement {
     switch (item) {
     case EDIT:
       info("Click on Edit link");
-      evt.click(ELEMENT_EDIT_POLL);
+      $(ELEMENT_EDIT_POLL).click();
       break;
     case CLOSE:
       info("Click on Close link");
-      evt.click(ELEMENT_CLOSE_POLL);
+      $(ELEMENT_CLOSE_POLL).click();
       break;
     case OPEN:
       info("Click on Open link");
-      evt.click(ELEMENT_OPEN_POLL);
+      $(ELEMENT_OPEN_POLL).click();
       break;
     case REMOVE:
       info("Click on Remove link");
-      evt.click(ELEMENT_REMOVE_POLL);
+      $(ELEMENT_REMOVE_POLL).click();
       break;
     default:
       break;
@@ -192,11 +192,11 @@ public class ForumTopicManagement {
     if (isClose) {
       info("Close the poll");
       selectItemMoreActionMenuPoll(specifMoreActionMenuPoll.CLOSE);
-      evt.waitForAndGetElement(ELEMENT_FORUM_POLL_GRIDCLOSE);
+      $(ELEMENT_FORUM_POLL_GRIDCLOSE).should(Condition.exist);
     } else {
       info("Open the poll");
       selectItemMoreActionMenuPoll(specifMoreActionMenuPoll.OPEN);
-      evt.waitForAndGetElement(ELEMENT_FORUM_POLL_GRID);
+      $(ELEMENT_FORUM_POLL_GRID).should(Condition.exist);
     }
 
   }
@@ -291,14 +291,15 @@ public class ForumTopicManagement {
   public void addPoll(String question, String option1, String option2) {
     selectItemMoreActionMenuTopic(specifMoreActionMenuTopic.ADD_POLL);
     info("Input a question to poll");
-    evt.type(ELEMENT_POLL_QUESTION, question, true);
+    $(ELEMENT_POLL_QUESTION).val(question);
     info("Input an option 1 to poll");
-    evt.type(ELEMENT_POLL_OPTIONS0, option1, true);
+    $(ELEMENT_POLL_OPTIONS0).val(option1);
     info("Input an option 2 to poll");
-    evt.type(ELEMENT_POLL_OPTIONS1, option2, true);
+    $(ELEMENT_POLL_OPTIONS1).val(option2);
     info("Click on Submit button");
-    evt.click(ELEMENT_POLL_SUBMIT);
-    evt.waitForElementNotPresent(ELEMENT_POLL_SUBMIT);
+    $(ELEMENT_POLL_SUBMIT).click();
+    info("Verify Poll is added");
+    $(byText(question)).should(Condition.exist);
     info("Finished adding poll");
 
   }
@@ -342,21 +343,15 @@ public class ForumTopicManagement {
    * @param option2
    */
   public void editPoll(String question, String option1, String option2) {
+    info("Click on More Actions and Select Edit button");
     selectItemMoreActionMenuPoll(specifMoreActionMenuPoll.EDIT);
-    info("Refresh the page");
-    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-    evt.waitForAndGetElement(ELEMENT_POLL_POPUP_TITLE);
-    info("Input a question to poll");
-    evt.waitForAndGetElement(ELEMENT_POLL_QUESTION).clear();
-    evt.type(ELEMENT_POLL_QUESTION, question, true);
+    $(ELEMENT_FORUM_ADDPOLL_QUESTION).val(question);
     info("Input an option 1 to poll");
-    evt.waitForAndGetElement(ELEMENT_POLL_OPTIONS0).clear();
-    evt.type(ELEMENT_POLL_OPTIONS0, option1, true);
+    $(ELEMENT_POLL_OPTIONS0).val(option1);
     info("Input an option 2 to poll");
-    evt.waitForAndGetElement(ELEMENT_POLL_OPTIONS1).clear();
-    evt.type(ELEMENT_POLL_OPTIONS1, option2, true);
+    $(ELEMENT_POLL_OPTIONS1).val(option2);
     info("Click on Submit button");
-    evt.click(ELEMENT_POLL_SUBMIT);
+    $(ELEMENT_POLL_SUBMIT).click();
     info("Finished adding poll");
   }
 
@@ -535,7 +530,6 @@ public class ForumTopicManagement {
     $(ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR).sendKeys(newContent);
     info("Click on Submit button");
     $(ELEMENT_SUBMIT_BUTTON).click();
-    // click(ELEMENT_SUBMIT_BUTTON);
     info("All changes are saved");
   }
 

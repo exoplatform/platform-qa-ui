@@ -787,8 +787,9 @@ public class ForumLocator {
 
   public static final By              ELEMENT_POLL_OPTIONS1                              = By.id("Option1");
 
-  public static final By              ELEMENT_POLL_SUBMIT                                =
-                                                          By.xpath("//*[@id='UIPollForm']//*[contains(text(),'Submit Poll')]");
+
+  public static final By     ELEMENT_POLL_SUBMIT                                =
+                                                 By.xpath("//*[@id=\"UIPollForm\"]/div[3]/button[1]");
 
   public static final By              ELEMENT_MORE_ACTIONS_POLL                          =
                                                                 By.xpath("//*[@class='uiIconPoll uiIconLightGray']/../..//*[@class='uiIconSettings uiIconLightGray']");
