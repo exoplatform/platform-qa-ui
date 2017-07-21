@@ -32,7 +32,10 @@ import com.codeborne.selenide.SelenideElement;
 
 public class Login {
 
-  private final SelenideElement container = $(By.cssSelector("loginContainer"));
+  public final SelenideElement container = $(By.cssSelector("loginContainer"));
+
+  /** HTML container to display information when the signin action has failed **/
+  public final SelenideElement signinFailContainer = $(By.cssSelector("signinFail"));
 
   public Login() {
   }
@@ -51,12 +54,14 @@ public class Login {
   }
 
   /**
-   * @param user
-   * @param password
+   * SignIn with a specific User and Password
+   *
+   * @param user the username to use to sign-in PLF
+   * @param password the password associated with the user
    */
   public Login signIn(final String user, final String password) {
-    $(byId("username")).setValue("root");
-    $(byId("UIPortalLoginFormControl")).setValue("gtn");
+    $(byId("username")).setValue(user);
+    $(byId("UIPortalLoginFormControl")).setValue(password);
     $(byClassName("button")).click();
 
     return this;

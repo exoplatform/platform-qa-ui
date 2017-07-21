@@ -22,6 +22,9 @@ package org.exoplatform.platform.qa.ui.commons.pageobject;
 
 import com.codeborne.selenide.Selenide;
 
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.error;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
 /**
  * Created by mgreau on 23/01/2017.
  */
@@ -46,10 +49,10 @@ public class Platform {
     try {
       alreadySkipped = !License.element.exists();
     } catch (Exception ex) {
-      System.out.print("License skip exception " + ex.getStackTrace());
+      error("License skip exception " + ex.getStackTrace());
     }
     if (alreadySkipped == false) {
-      System.out.print("Skip the License ");
+      info("Skip the License ");
       new License().accept();
     }
 
@@ -66,10 +69,10 @@ public class Platform {
     try {
       alreadySkipped = !RegisterSoftware.element.exists();
     } catch (Exception ex) {
-      System.out.print("RG skip exception " + ex.getStackTrace());
+      error("RG skip exception " + ex.getStackTrace());
     }
     if (alreadySkipped == false) {
-      System.out.print("Skip the UI ");
+      info("Skip the UI ");
       new RegisterSoftware().skip();
     }
 
@@ -86,10 +89,10 @@ public class Platform {
     try {
       alreadySkipped = !AccountSetup.element.exists();
     } catch (Exception ex) {
-      System.out.print(" ");
+      error("Account setup skip error.",ex);
     }
     if (alreadySkipped == false) {
-      System.out.print("Skip the Account ");
+      info("Skip the Account ");
       new AccountSetup().skip();
     }
 
@@ -102,10 +105,10 @@ public class Platform {
     try {
       alreadyLogged = new Login().isUserLogged();
     } catch (Exception ex) {
-      System.out.print(" ");
+      error("Error while checking if user is logged", ex);
     }
     if (alreadyLogged == false) {
-      System.out.print("Log in ");
+      info("Log in ");
       new Login().signIn();
     }
 
