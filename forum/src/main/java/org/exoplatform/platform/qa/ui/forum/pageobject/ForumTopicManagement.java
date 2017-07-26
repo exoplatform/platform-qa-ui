@@ -120,7 +120,7 @@ public class ForumTopicManagement {
       break;
     case MOVE:
       info("Wait Move topic link is shown");
-      evt.waitForAndGetElement(ELEMENT_MOVE_TOPIC);
+      $(ELEMENT_MOVE_TOPIC).waitUntil(Condition.appears,Configuration.timeout);
       info("Click on move topic link");
       $(ELEMENT_MOVE_TOPIC).click();
       break;
@@ -312,10 +312,10 @@ public class ForumTopicManagement {
   public void lockUnlockTopic(boolean islock) {
     if (islock) {
       selectItemMoreActionMenuTopic(specifMoreActionMenuTopic.LOCK);
-      evt.waitForAndGetElement(ELEMENT_TOPIC_POST_REPLY_BUTTON_DISABLE);
+      $(ELEMENT_TOPIC_POST_REPLY_BUTTON_DISABLE).waitUntil(Condition.appears,Configuration.timeout);
     } else {
       selectItemMoreActionMenuTopic(specifMoreActionMenuTopic.UNLOCK);
-      evt.waitForAndGetElement(ELEMENT_TOPIC_POST_REPLY_BOTTOM);
+      $(ELEMENT_TOPIC_POST_REPLY_BOTTOM).waitUntil(Condition.appears,Configuration.timeout);
     }
   }
 

@@ -3,7 +3,6 @@ package org.exoplatform.platform.qa.ui.platform.forum;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.forum.pageobject.ForumCategoryManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumTopicManagement;
@@ -36,133 +35,137 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 public class ForumManagementInSpaceUsingNormalUserTestIT extends Base {
 
 
-  UserAddManagement userAddManagement;
+    UserAddManagement userAddManagement;
 
-  ArrayList<String> arrayPage;
+    ArrayList<String> arrayPage;
 
-  NavigationToolbar navigationToolbar;
+    NavigationToolbar navigationToolbar;
 
-  ManageLogInOut manageLogInOut;
+    ManageLogInOut manageLogInOut;
 
-  UserAndGroupManagement userAndGroupManagement;
+    UserAndGroupManagement userAndGroupManagement;
 
-  HomePagePlatform     homePagePlatform;
+    HomePagePlatform homePagePlatform;
 
-  SpaceManagement      spaceManagement;
+    SpaceManagement spaceManagement;
 
-  SpaceHomePage        spaceHomePage;
+    SpaceHomePage spaceHomePage;
 
-  ForumForumManagement forumForumManagement;
+    ForumForumManagement forumForumManagement;
 
-  ForumTopicManagement forumTopicManagement;
+    ForumTopicManagement forumTopicManagement;
 
-  ForumHomePage        forumHomePage;
+    ForumHomePage forumHomePage;
 
-  @BeforeEach
-  public void setupBeforeMethod() {
-    info("Start setUpBeforeMethod");
+    @BeforeEach
+    public void setupBeforeMethod() {
+        info("Start setUpBeforeMethod");
 
-    homePagePlatform = new HomePagePlatform(this);
-    spaceHomePage = new SpaceHomePage(this);
-    spaceManagement = new SpaceManagement(this);
-    forumForumManagement = new ForumForumManagement(this);
-    forumTopicManagement = new ForumTopicManagement(this);
-    forumHomePage = new ForumHomePage(this);
+        homePagePlatform = new HomePagePlatform(this);
+        spaceHomePage = new SpaceHomePage(this);
+        spaceManagement = new SpaceManagement(this);
+        forumForumManagement = new ForumForumManagement(this);
+        forumTopicManagement = new ForumTopicManagement(this);
+        forumHomePage = new ForumHomePage(this);
 
-    arrayPage = new ArrayList<String>();
-    userAddManagement = new UserAddManagement(this);
-    navigationToolbar = new NavigationToolbar(this);
-    manageLogInOut = new ManageLogInOut(this);
-    userAndGroupManagement = new UserAndGroupManagement(this);
-    forumTopicManagement = new ForumTopicManagement(this);
-    if ( $(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist)))
-    {manageLogInOut.signOut();}
-    manageLogInOut.signInCas("john", "gtngtn");
-  }
-  @AfterEach
-  public void signout(){manageLogInOut.signOut();}
+        arrayPage = new ArrayList<String>();
+        userAddManagement = new UserAddManagement(this);
+        navigationToolbar = new NavigationToolbar(this);
+        manageLogInOut = new ManageLogInOut(this);
+        userAndGroupManagement = new UserAndGroupManagement(this);
+        forumTopicManagement = new ForumTopicManagement(this);
+        if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
+            manageLogInOut.signOut();
+        }
+        manageLogInOut.signInCas("john", "gtngtn");
+    }
 
-  @Test
-  public void startNewTopicInSpace() {
+    @AfterEach
+    public void signout() {
+        manageLogInOut.signOut();
+    }
 
-    String space = "space" + getRandomNumber();
-    String topic = "topic" + getRandomNumber();
-    info("Create a space");
-    homePagePlatform.goToAllSpace();
-    spaceManagement.addNewSpaceSimple(space, space, 6000);
-    info("start topic");
-    homePagePlatform.goToHomePage();
-    homePagePlatform.goToSpecificSpace(space);
-    spaceHomePage.goToForumsTab();
-    forumForumManagement.goToStartTopic();
-    forumTopicManagement.startTopic(topic, topic, "", "");
-    info("verify topic");
-    homePagePlatform.goToHomePage();
-    homePagePlatform.goToSpecificSpace(space);
-    spaceHomePage.goToForumsTab();
-    forumHomePage.goToTopic(topic);
-    $(byText(topic)).waitUntil(Condition.appears, Configuration.timeout);
-    homePagePlatform.goToHomePage();
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
+    @Test
+    public void startNewTopicInSpace() {
 
-  }
+        String space = "space" + getRandomNumber();
+        String topic = "topic" + getRandomNumber();
+        info("Create a space");
+        homePagePlatform.goToAllSpace();
+        spaceManagement.addNewSpaceSimple(space, space, 6000);
+        info("start topic");
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToSpecificSpace(space);
+        spaceHomePage.goToForumsTab();
+        forumForumManagement.goToStartTopic();
+        forumTopicManagement.startTopic(topic, topic, "", "");
+        info("verify topic");
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToSpecificSpace(space);
+        spaceHomePage.goToForumsTab();
+        forumHomePage.goToTopic(topic);
+        $(byText(topic)).waitUntil(Condition.appears, Configuration.timeout);
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToAllSpace();
+        spaceManagement.deleteSpace(space, false);
 
-  @Test
-  public void editTopicInSpace() {
+    }
 
-    String space = "space" + getRandomNumber();
-    String topic = "topic" + getRandomNumber();
-    String newtopic = "newtopic" + getRandomNumber();
-    info("Create a space");
-    homePagePlatform.goToAllSpace();
-    spaceManagement.addNewSpaceSimple(space, space, 6000);
-    info("start topic");
-    homePagePlatform.goToHomePage();
-    homePagePlatform.goToSpecificSpace(space);
-    spaceHomePage.goToForumsTab();
-    forumForumManagement.goToStartTopic();
-    forumTopicManagement.startTopic(topic, topic, "", "");
-    info("verify topic");
-    homePagePlatform.goToHomePage();
-    homePagePlatform.goToSpecificSpace(space);
-    spaceHomePage.goToForumsTab();
-    forumHomePage.goToTopic(topic);
-    info("edit topic");
-    forumTopicManagement.editTopic(newtopic, newtopic);
-    $(byText(newtopic)).waitUntil(Condition.appears, Configuration.timeout);
+    @Test
+    public void editTopicInSpace() {
 
-    homePagePlatform.goToHomePage();
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
-  }
+        String space = "space" + getRandomNumber();
+        String topic = "topic" + getRandomNumber();
+        String newtopic = "newtopic" + getRandomNumber();
+        info("Create a space");
+        homePagePlatform.goToAllSpace();
+        spaceManagement.addNewSpaceSimple(space, space, 6000);
+        info("start topic");
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToSpecificSpace(space);
+        spaceHomePage.goToForumsTab();
+        forumForumManagement.goToStartTopic();
+        forumTopicManagement.startTopic(topic, topic, "", "");
+        info("verify topic");
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToSpecificSpace(space);
+        spaceHomePage.goToForumsTab();
+        forumHomePage.goToTopic(topic);
+        info("edit topic");
+        forumTopicManagement.editTopic(newtopic, newtopic);
+        $(byText(newtopic)).waitUntil(Condition.appears, Configuration.timeout);
 
-  @Test
-  public void deleteTopicInSpace() {
-    String space = "space" + getRandomNumber();
-    String topic = "topic" + getRandomNumber();
-    String newtopic = "newtopic" + getRandomNumber();
-    info("Create a space");
-    homePagePlatform.goToAllSpace();
-    spaceManagement.addNewSpaceSimple(space, space, 6000);
-    info("start topic");
-    homePagePlatform.goToHomePage();
-    homePagePlatform.goToSpecificSpace(space);
-    spaceHomePage.goToForumsTab();
-    forumForumManagement.goToStartTopic();
-    forumTopicManagement.startTopic(topic, topic, "", "");
-    info("verify topic");
-    homePagePlatform.goToHomePage();
-    homePagePlatform.goToSpecificSpace(space);
-    spaceHomePage.goToForumsTab();
-    forumHomePage.goToTopic(topic);
-    info("Delete Topic");
-    forumTopicManagement.deleteTopic();
-    $(byText(topic)).shouldNot(Condition.exist);
-    info("Delete Space");
-    homePagePlatform.goToHomePage();
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToAllSpace();
+        spaceManagement.deleteSpace(space, false);
+    }
 
-  }
+    @Test
+    public void deleteTopicInSpace() {
+        String space = "space" + getRandomNumber();
+        String topic = "topic" + getRandomNumber();
+        String newtopic = "newtopic" + getRandomNumber();
+        info("Create a space");
+        homePagePlatform.goToAllSpace();
+        spaceManagement.addNewSpaceSimple(space, space, 6000);
+        info("start topic");
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToSpecificSpace(space);
+        spaceHomePage.goToForumsTab();
+        forumForumManagement.goToStartTopic();
+        forumTopicManagement.startTopic(topic, topic, "", "");
+        info("verify topic");
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToSpecificSpace(space);
+        spaceHomePage.goToForumsTab();
+        forumHomePage.goToTopic(topic);
+        info("Delete Topic");
+        forumTopicManagement.deleteTopic();
+        $(byText(topic)).shouldNot(Condition.exist);
+        info("Delete Space");
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToAllSpace();
+        spaceManagement.deleteSpace(space, false);
+
+    }
 }

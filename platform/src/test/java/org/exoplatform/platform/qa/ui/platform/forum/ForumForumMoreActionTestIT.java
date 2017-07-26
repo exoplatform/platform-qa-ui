@@ -1,7 +1,6 @@
 package org.exoplatform.platform.qa.ui.platform.forum;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selectors;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumCategoryManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
@@ -17,193 +16,194 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_FORUM_START_TOPIC_BUTTON;
+import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_FORUM_START_TOPIC_DISABLE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 /**
  * @author dmardassi
- * Date 24/07/2017
+ *         Date 24/07/2017
  */
 @Tag("forum")
 @Tag("smoke")
 public class ForumForumMoreActionTestIT extends Base {
 
-		HomePagePlatform homePagePlatform;
+    HomePagePlatform homePagePlatform;
 
-		ForumForumManagement forumForumManagement;
+    ForumForumManagement forumForumManagement;
 
-		ForumTopicManagement forumTopicManagement;
+    ForumTopicManagement forumTopicManagement;
 
-		ForumHomePage forumHomePage;
+    ForumHomePage forumHomePage;
 
-		ForumCategoryManagement forumCategoryManagement;
-		ManageLogInOut manageLogInOut;
+    ForumCategoryManagement forumCategoryManagement;
+    ManageLogInOut manageLogInOut;
 
-		@BeforeEach
-		public void setupBeforeMethod() {
-			info("Start setUpBeforeMethod");
+    @BeforeEach
+    public void setupBeforeMethod() {
+        info("Start setUpBeforeMethod");
 
-			homePagePlatform = new HomePagePlatform(this);
-			forumForumManagement = new ForumForumManagement(this);
-			forumTopicManagement = new ForumTopicManagement(this);
-			forumHomePage = new ForumHomePage(this);
-			forumCategoryManagement = new ForumCategoryManagement(this);
-			manageLogInOut = new ManageLogInOut(this);
-		}
-	
-		/**
-	 * CaseID: 116747
-	 * Case_name: Lock / Unlock a forum
-	 * Steps:
-	 * 1. Prepare data: create a caterory, forum:
-	 * - Create a category
-	 * - Create a forum
-	 * 2. Lock a forum
-	 * - Open this forum
-	 * - Click on More Action, then click on Lock
-	 * ==> Forum is locked successfully. Normal user can not add topic into locked forum
-	 * 3. Unlock a forum
-	 * - Open this forum
-	 * - Click on More Action, then click on Unlock
-	 * ==> Forum is unlocked successfully 
-	 */
-	@Test
-	public void test02_LockUnlockForum() {
-		info("Lock / Unlock a forum");
-		String cate = "Category"+getRandomNumber();
-		String forum  = "Forum"+getRandomNumber();
-		
-		info("go to Forum home page");
-		homePagePlatform.goToForum();
-		
-		info("Add a category");
-		forumCategoryManagement.addCategorySimple(cate, "", cate);
-		
-		info("Add a forum in the category");
-		forumForumManagement.addForumSimple(forum, "", forum);
-		
-		info("lock the forum");
-		forumForumManagement.lockAndUnlock(true);
-		
-		info("sign out and log in with user2");
-		//manageLogInOut.signOut();
-		manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-		info("go to Forum home page");
-		homePagePlatform.goToForum();
-		info("Go to the forum");
-		//forumHomePage.goToForum(forum);
-		$(byText(forum)).click();
-		$(ELEMENT_FORUM_START_TOPIC_DISABLE).should(Condition.exist);
-		info("sign out and log in with user1");
-		//manageLogInOut.signOut();
-		manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
-		
-		info("go to Forum home page");
-		homePagePlatform.goToForum();
-		info("Go to the forum");
+        homePagePlatform = new HomePagePlatform(this);
+        forumForumManagement = new ForumForumManagement(this);
+        forumTopicManagement = new ForumTopicManagement(this);
+        forumHomePage = new ForumHomePage(this);
+        forumCategoryManagement = new ForumCategoryManagement(this);
+        manageLogInOut = new ManageLogInOut(this);
+    }
+
+    /**
+     * CaseID: 116747
+     * Case_name: Lock / Unlock a forum
+     * Steps:
+     * 1. Prepare data: create a caterory, forum:
+     * - Create a category
+     * - Create a forum
+     * 2. Lock a forum
+     * - Open this forum
+     * - Click on More Action, then click on Lock
+     * ==> Forum is locked successfully. Normal user can not add topic into locked forum
+     * 3. Unlock a forum
+     * - Open this forum
+     * - Click on More Action, then click on Unlock
+     * ==> Forum is unlocked successfully
+     */
+    @Test
+    public void test02_LockUnlockForum() {
+        info("Lock / Unlock a forum");
+        String cate = "Category" + getRandomNumber();
+        String forum = "Forum" + getRandomNumber();
+
+        info("go to Forum home page");
+        homePagePlatform.goToForum();
+
+        info("Add a category");
+        forumCategoryManagement.addCategorySimple(cate, "", cate);
+
+        info("Add a forum in the category");
+        forumForumManagement.addForumSimple(forum, "", forum);
+
+        info("lock the forum");
+        forumForumManagement.lockAndUnlock(true);
+
+        info("sign out and log in with user2");
+        //manageLogInOut.signOut();
+        manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+        info("go to Forum home page");
+        homePagePlatform.goToForum();
+        info("Go to the forum");
+        //forumHomePage.goToForum(forum);
+        $(byText(forum)).click();
+        $(ELEMENT_FORUM_START_TOPIC_DISABLE).should(Condition.exist);
+        info("sign out and log in with user1");
+        //manageLogInOut.signOut();
+        manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+
+        info("go to Forum home page");
+        homePagePlatform.goToForum();
+        info("Go to the forum");
 //		forumHomePage.goToForum(forum);
-		$(byText(forum)).click();
-		info("unlock the forum");
-		forumForumManagement.lockAndUnlock(false);
-		
-		info("sign out and log in with user2");
-		//manageLogInOut.signOut();
-		manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-	    
-		info("go to Forum home page");
-		homePagePlatform.goToForum();
-		info("Go to the forum");
-		//forumHomePage.goToForum(forum);
-		$(byText(forum)).click();
-		info("Verify that the forum is enabled");
-		$(ELEMENT_FORUM_START_TOPIC_BUTTON).should(Condition.exist);
-		
-		info("log in back USER1");
-		//manageLogInOut.signOut();
-		manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
-	    info("go to Forum home page");
-		homePagePlatform.goToForum();
-		info("Delete category");
-		forumHomePage.goToHomeCategory();
-		forumCategoryManagement.deleteCategory(cate);
+        $(byText(forum)).click();
+        info("unlock the forum");
+        forumForumManagement.lockAndUnlock(false);
 
-	}
-	
-	/**
-	 * CaseID: 116748
-	 * Case_name: Open / Close a forum
-	 * Steps:
-	 * 1. Prepare data: create a caterory, forum:
-	 * - Create a category
-	 * - Create a forum
-	 * 2. Close a forum
-	 * - Access 1 forum
-	 * - Click on More Action, click on Close
-	 * ==> Normal user can not view closed forum 
-	 * 3. Open a forum
-	 * - Access a closed forum
-	 * - Click on More Action, click on Open
-	 * ==> This forum is opened, normal user can view this
-	 */
-	@Test
-	public void test03_OpenCloseForum() {
-		info("Open / Close a forum");
-		String cate = "Category"+getRandomNumber();
-		String forum  = "Forum"+getRandomNumber();
-		
-		info("go to Forum home page");
-		homePagePlatform.goToForum();
+        info("sign out and log in with user2");
+        //manageLogInOut.signOut();
+        manageLogInOut.signIn(DATA_USER2, DATA_PASS);
 
-		info("Add a category");
-		forumCategoryManagement.addCategorySimple(cate, "", cate);
+        info("go to Forum home page");
+        homePagePlatform.goToForum();
+        info("Go to the forum");
+        //forumHomePage.goToForum(forum);
+        $(byText(forum)).click();
+        info("Verify that the forum is enabled");
+        $(ELEMENT_FORUM_START_TOPIC_BUTTON).should(Condition.exist);
 
-		info("Add a forum in the category");
-		forumForumManagement.addForumSimple(forum, "", forum);
+        info("log in back USER1");
+        //manageLogInOut.signOut();
+        manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+        info("go to Forum home page");
+        homePagePlatform.goToForum();
+        info("Delete category");
+        forumHomePage.goToHomeCategory();
+        forumCategoryManagement.deleteCategory(cate);
 
-		info("Close the forum");
-		forumForumManagement.closeAndOpen(true);
-		
-		info("sign out and log in with user2");
-		//manageLogInOut.signOut();
-		manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    }
 
-		info("go to Forum home page");
-		homePagePlatform.goToForum();
-		info("Verify that the forum is hided");
-		//$(ELEMENT_FORUM_TITLE_LINK.replace("${name}",forum)).click();
-		$(byText(cate)).click();
-		$(byText(forum)).shouldNot(Condition.exist);
-		
-		info("sign out and log in with user1");
-		//manageLogInOut.signOut();
-		manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+    /**
+     * CaseID: 116748
+     * Case_name: Open / Close a forum
+     * Steps:
+     * 1. Prepare data: create a caterory, forum:
+     * - Create a category
+     * - Create a forum
+     * 2. Close a forum
+     * - Access 1 forum
+     * - Click on More Action, click on Close
+     * ==> Normal user can not view closed forum
+     * 3. Open a forum
+     * - Access a closed forum
+     * - Click on More Action, click on Open
+     * ==> This forum is opened, normal user can view this
+     */
+    @Test
+    public void test03_OpenCloseForum() {
+        info("Open / Close a forum");
+        String cate = "Category" + getRandomNumber();
+        String forum = "Forum" + getRandomNumber();
 
-		info("go to Forum home page");
-		homePagePlatform.goToForum();
-		info("Go to the forum");
-	    //forumHomePage.goToForum(forum);
-		info("open the forum");
-		$(byText(forum)).click();
-		forumForumManagement.closeAndOpen(false);
+        info("go to Forum home page");
+        homePagePlatform.goToForum();
 
-		info("sign out and log in with user2");
-		//manageLogInOut.signOut();
-		manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+        info("Add a category");
+        forumCategoryManagement.addCategorySimple(cate, "", cate);
 
-		info("go to Forum home page");
-		homePagePlatform.goToForum();
-		info("Go to the forum");
-		//$(ELEMENT_FORUM_TITLE_LINK.replace("${name}",forum)).click();
-		$(byText(forum)).click();
-		info("log in back USER1");
-	    //manageLogInOut.signOut();
-		manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
-		info("go to Forum home page");
-		homePagePlatform.goToForum();
+        info("Add a forum in the category");
+        forumForumManagement.addForumSimple(forum, "", forum);
 
-		info("Delete category");
-		forumHomePage.goToHomeCategory();
-		forumCategoryManagement.deleteCategory(cate);
+        info("Close the forum");
+        forumForumManagement.closeAndOpen(true);
 
-	}
+        info("sign out and log in with user2");
+        //manageLogInOut.signOut();
+        manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+
+        info("go to Forum home page");
+        homePagePlatform.goToForum();
+        info("Verify that the forum is hided");
+        //$(ELEMENT_FORUM_TITLE_LINK.replace("${name}",forum)).click();
+        $(byText(cate)).click();
+        $(byText(forum)).shouldNot(Condition.exist);
+
+        info("sign out and log in with user1");
+        //manageLogInOut.signOut();
+        manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+
+        info("go to Forum home page");
+        homePagePlatform.goToForum();
+        info("Go to the forum");
+        //forumHomePage.goToForum(forum);
+        info("open the forum");
+        $(byText(forum)).click();
+        forumForumManagement.closeAndOpen(false);
+
+        info("sign out and log in with user2");
+        //manageLogInOut.signOut();
+        manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+
+        info("go to Forum home page");
+        homePagePlatform.goToForum();
+        info("Go to the forum");
+        //$(ELEMENT_FORUM_TITLE_LINK.replace("${name}",forum)).click();
+        $(byText(forum)).click();
+        info("log in back USER1");
+        //manageLogInOut.signOut();
+        manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+        info("go to Forum home page");
+        homePagePlatform.goToForum();
+
+        info("Delete category");
+        forumHomePage.goToHomeCategory();
+        forumCategoryManagement.deleteCategory(cate);
+
+    }
 }

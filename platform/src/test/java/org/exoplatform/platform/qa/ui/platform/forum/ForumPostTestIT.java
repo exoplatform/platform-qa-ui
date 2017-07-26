@@ -25,193 +25,193 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 @Tag("smoke")
 public class ForumPostTestIT extends Base {
 
-  HomePagePlatform        homePagePlatform;
+    HomePagePlatform homePagePlatform;
 
-  ForumForumManagement    forumForumManagement;
+    ForumForumManagement forumForumManagement;
 
-  ForumTopicManagement    forumTopicManagement;
+    ForumTopicManagement forumTopicManagement;
 
-  ForumHomePage           forumHomePage;
+    ForumHomePage forumHomePage;
 
-  ForumCategoryManagement forumCategoryManagement;
+    ForumCategoryManagement forumCategoryManagement;
 
-  String                  nameCat;
+    String nameCat;
 
-  String                  nameForum;
+    String nameForum;
 
-  String                  nameTopic;
+    String nameTopic;
 
-  @BeforeEach
-  public void setupBeforeMethod() {
-    info("Start setUpBeforeMethod");
+    @BeforeEach
+    public void setupBeforeMethod() {
+        info("Start setUpBeforeMethod");
 
-    homePagePlatform = new HomePagePlatform(this);
-    forumForumManagement = new ForumForumManagement(this);
-    forumTopicManagement = new ForumTopicManagement(this);
-    forumHomePage = new ForumHomePage(this);
-    forumCategoryManagement = new ForumCategoryManagement(this);
-  }
-
-  /**
-   * Create a category, forum and topic
-   */
-  public void prepareData() {
-    info("Create data test");
-    nameCat = "Category" + getRandomNumber();
-    nameForum = "Forum" + getRandomNumber();
-    nameTopic = "Topic" + getRandomNumber();
-    String description = "Description" + getRandomNumber();
-    info("Finished creating data test");
-    info("Open forum portlet");
-    homePagePlatform.goToForum();
-    info("Add a new category");
-    forumCategoryManagement.addCategorySimple(nameCat, "", description);
-    info("Add a new forum");
-    forumForumManagement.addForumSimple(nameForum, "", description);
-    info("Add a new topic");
-    forumForumManagement.goToStartTopic();
-    forumTopicManagement.startTopic(nameTopic, description, "", "");
-    forumHomePage.goToTopic(nameTopic);
-  }
-
-  /**
-   * Delete data test
-   */
-  public void deletaData() {
-    info("Open forum portlet");
-    homePagePlatform.goToForum();
-    info("Go to Forum home page");
-    forumHomePage.goToHomeCategory();
-    info("Delete category");
-    forumCategoryManagement.deleteCategory(nameCat);
-  }
-
-  /**
-   * <li>Case ID:116750.</li>
-   * <li>Test Case Name: Add a post.</li>
-   * <li>Case ID:116751.</li>
-   * <li>Test Case Name: Edit a post.</li>
-   * <li>Case ID:116753.</li>
-   * <li>Test Case Name: Quote a post.</li>
-   * <li>Case ID:116752.</li>
-   * <li>Test Case Name: Delete a post.</li>
-   * <li>Case ID:116754.</li>
-   * <li>Test Case Name: Add a private post.</li>
-   */
-  @Test
-  public void test01_Add__Post() {
-    info("Test 1: Add a post");
-    String title = "Title" + getRandomNumber();
-    String content = "Content" + getRandomNumber();
-    prepareData();
-    info("Reply a topic");
-    forumTopicManagement.postReply(title, content);
-    info("Test 4: Delete a post");
-    info("Click on delete button of the post that is replied");
-    $(byText(content)).parent().parent().parent().parent().find(byText("Delete")).click();
-    info("Click on OK button of the confirm popup");
-    $(ELEMENT_DELETE_BOX_CONFIRMATION).click();
-    info("Verify that the replied post is deleted");
-    $(ELEMENT_POST_IN_TOPIC).find(byText(title)).shouldNot(Condition.exist);
-    info("Delete data");
-    deletaData();
-  }
-
-  @Test
-  public void test02_Edit__Post() {
-    info("Test 2: Edit a post");
-    String title = "Title" + getRandomNumber();
-    String content = "Content" + getRandomNumber();
-    prepareData();
-    info("Reply a topic");
-    forumTopicManagement.postReply(title, content);
-    {
-      info("Test 2: Edit a post");
-      forumTopicManagement.editPost(title, content);
-      info("Verify that the post is edited");
-      $(byText(content)).should(Condition.exist);
-      info("Test 4: Delete a post");
-      info("Click on delete button of the post that is replied");
-      $(byText(content)).parent().parent().parent().parent().find(byText("Delete")).click();
-      info("Click on OK button of the confirm popup");
-      $(ELEMENT_DELETE_BOX_CONFIRMATION).click();
-      info("Verify that the replied post is deleted");
-      $(ELEMENT_POST_IN_TOPIC).find(byText(title)).shouldNot(Condition.exist);
-      info("Delete data");
-      deletaData();
+        homePagePlatform = new HomePagePlatform(this);
+        forumForumManagement = new ForumForumManagement(this);
+        forumTopicManagement = new ForumTopicManagement(this);
+        forumHomePage = new ForumHomePage(this);
+        forumCategoryManagement = new ForumCategoryManagement(this);
     }
-  }
 
-  @Test
-  public void test03_Quote__Post() {
-    info("Test 3: Quote a post");
-    String title = "Title" + getRandomNumber();
-    String content = "Content" + getRandomNumber();
-    String newTitle = "NewTitle" + getRandomNumber();
-
-    prepareData();
-    info("Reply a topic");
-    forumTopicManagement.postReply(title, content);
-    {
-      info("Test 3: Quote a post");
-      info("Quote a post");
-      forumTopicManagement.quotePost(title, content);
-      info("Verify that quote a post successfully");
-      $(byText(content)).should(Condition.exist);
-      info("Test 4: Delete a post");
-      info("Click on delete button of the post that is replied");
-      $(byText(content)).parent().parent().parent().parent().find(byText("Delete")).click();
-      info("Click on OK button of the confirm popup");
-      $(ELEMENT_DELETE_BOX_CONFIRMATION).click();
-      info("Verify that the replied post is deleted");
-      $(ELEMENT_POST_IN_TOPIC).find(byText(title)).shouldNot(Condition.exist);
-      info("Delete data");
-      deletaData();
+    /**
+     * Create a category, forum and topic
+     */
+    public void prepareData() {
+        info("Create data test");
+        nameCat = "Category" + getRandomNumber();
+        nameForum = "Forum" + getRandomNumber();
+        nameTopic = "Topic" + getRandomNumber();
+        String description = "Description" + getRandomNumber();
+        info("Finished creating data test");
+        info("Open forum portlet");
+        homePagePlatform.goToForum();
+        info("Add a new category");
+        forumCategoryManagement.addCategorySimple(nameCat, "", description);
+        info("Add a new forum");
+        forumForumManagement.addForumSimple(nameForum, "", description);
+        info("Add a new topic");
+        forumForumManagement.goToStartTopic();
+        forumTopicManagement.startTopic(nameTopic, description, "", "");
+        forumHomePage.goToTopic(nameTopic);
     }
-  }
 
-  @Test
-  public void test04_Private__Post_For_Topic() {
-    info("Test 4: Add a Private post");
-    String title = "Title" + getRandomNumber();
-    String content = "Content" + getRandomNumber();
-    String newTitle = "NewTitle" + getRandomNumber();
-    prepareData();
-    info("Reply a topic");
-    {
-      forumTopicManagement.privatePostfortopic(newTitle, content);
-      info("Test 4: Add a Private post");
-      info("Click on delete button of the post that is replied");
-      $(byText(content)).parent().parent().parent().parent().find(byText("Delete")).click();
-      info("Click on OK button of the confirm popup");
-      $(ELEMENT_DELETE_BOX_CONFIRMATION).click();
-      info("Verify that the replied post is deleted");
-      $(ELEMENT_POST_IN_TOPIC).find(byText(title)).shouldNot(Condition.exist);
-      info("Delete data");
-      deletaData();
+    /**
+     * Delete data test
+     */
+    public void deletaData() {
+        info("Open forum portlet");
+        homePagePlatform.goToForum();
+        info("Go to Forum home page");
+        forumHomePage.goToHomeCategory();
+        info("Delete category");
+        forumCategoryManagement.deleteCategory(nameCat);
     }
-  }
 
-  @Test
-  public void test05_Private__Post_from_Post() {
-    info("Test 1: Add a Private post from post");
-    String title = "Title" + getRandomNumber();
-    String content = "Content" + getRandomNumber();
-    String newTitle = "NewTitle" + getRandomNumber();
-    prepareData();
-    info("Reply a topic");
-    forumTopicManagement.postReply(title, content);
-    {
-      info("Test 5: Add a Private post from post");
-      forumTopicManagement.privatePostFromPost(newTitle, content);
-      info("Click on delete button of the post that is replied");
-      $(byText(content)).parent().parent().parent().parent().find(byText("Delete")).click();
-      info("Click on OK button of the confirm popup");
-      $(ELEMENT_DELETE_BOX_CONFIRMATION).click();
-      info("Verify that the replied post is deleted");
-      $(ELEMENT_POST_IN_TOPIC).find(byText(title)).shouldNot(Condition.exist);
-      info("Delete data");
-      deletaData();
+    /**
+     * <li>Case ID:116750.</li>
+     * <li>Test Case Name: Add a post.</li>
+     * <li>Case ID:116751.</li>
+     * <li>Test Case Name: Edit a post.</li>
+     * <li>Case ID:116753.</li>
+     * <li>Test Case Name: Quote a post.</li>
+     * <li>Case ID:116752.</li>
+     * <li>Test Case Name: Delete a post.</li>
+     * <li>Case ID:116754.</li>
+     * <li>Test Case Name: Add a private post.</li>
+     */
+    @Test
+    public void test01_Add__Post() {
+        info("Test 1: Add a post");
+        String title = "Title" + getRandomNumber();
+        String content = "Content" + getRandomNumber();
+        prepareData();
+        info("Reply a topic");
+        forumTopicManagement.postReply(title, content);
+        info("Test 4: Delete a post");
+        info("Click on delete button of the post that is replied");
+        $(byText(content)).parent().parent().parent().parent().find(byText("Delete")).click();
+        info("Click on OK button of the confirm popup");
+        $(ELEMENT_DELETE_BOX_CONFIRMATION).click();
+        info("Verify that the replied post is deleted");
+        $(ELEMENT_POST_IN_TOPIC).find(byText(title)).shouldNot(Condition.exist);
+        info("Delete data");
+        deletaData();
     }
-  }
+
+    @Test
+    public void test02_Edit__Post() {
+        info("Test 2: Edit a post");
+        String title = "Title" + getRandomNumber();
+        String content = "Content" + getRandomNumber();
+        prepareData();
+        info("Reply a topic");
+        forumTopicManagement.postReply(title, content);
+        {
+            info("Test 2: Edit a post");
+            forumTopicManagement.editPost(title, content);
+            info("Verify that the post is edited");
+            $(byText(content)).should(Condition.exist);
+            info("Test 4: Delete a post");
+            info("Click on delete button of the post that is replied");
+            $(byText(content)).parent().parent().parent().parent().find(byText("Delete")).click();
+            info("Click on OK button of the confirm popup");
+            $(ELEMENT_DELETE_BOX_CONFIRMATION).click();
+            info("Verify that the replied post is deleted");
+            $(ELEMENT_POST_IN_TOPIC).find(byText(title)).shouldNot(Condition.exist);
+            info("Delete data");
+            deletaData();
+        }
+    }
+
+    @Test
+    public void test03_Quote__Post() {
+        info("Test 3: Quote a post");
+        String title = "Title" + getRandomNumber();
+        String content = "Content" + getRandomNumber();
+        String newTitle = "NewTitle" + getRandomNumber();
+
+        prepareData();
+        info("Reply a topic");
+        forumTopicManagement.postReply(title, content);
+        {
+            info("Test 3: Quote a post");
+            info("Quote a post");
+            forumTopicManagement.quotePost(title, content);
+            info("Verify that quote a post successfully");
+            $(byText(content)).should(Condition.exist);
+            info("Test 4: Delete a post");
+            info("Click on delete button of the post that is replied");
+            $(byText(content)).parent().parent().parent().parent().find(byText("Delete")).click();
+            info("Click on OK button of the confirm popup");
+            $(ELEMENT_DELETE_BOX_CONFIRMATION).click();
+            info("Verify that the replied post is deleted");
+            $(ELEMENT_POST_IN_TOPIC).find(byText(title)).shouldNot(Condition.exist);
+            info("Delete data");
+            deletaData();
+        }
+    }
+
+    @Test
+    public void test04_Private__Post_For_Topic() {
+        info("Test 4: Add a Private post");
+        String title = "Title" + getRandomNumber();
+        String content = "Content" + getRandomNumber();
+        String newTitle = "NewTitle" + getRandomNumber();
+        prepareData();
+        info("Reply a topic");
+        {
+            forumTopicManagement.privatePostfortopic(newTitle, content);
+            info("Test 4: Add a Private post");
+            info("Click on delete button of the post that is replied");
+            $(byText(content)).parent().parent().parent().parent().find(byText("Delete")).click();
+            info("Click on OK button of the confirm popup");
+            $(ELEMENT_DELETE_BOX_CONFIRMATION).click();
+            info("Verify that the replied post is deleted");
+            $(ELEMENT_POST_IN_TOPIC).find(byText(title)).shouldNot(Condition.exist);
+            info("Delete data");
+            deletaData();
+        }
+    }
+
+    @Test
+    public void test05_Private__Post_from_Post() {
+        info("Test 1: Add a Private post from post");
+        String title = "Title" + getRandomNumber();
+        String content = "Content" + getRandomNumber();
+        String newTitle = "NewTitle" + getRandomNumber();
+        prepareData();
+        info("Reply a topic");
+        forumTopicManagement.postReply(title, content);
+        {
+            info("Test 5: Add a Private post from post");
+            forumTopicManagement.privatePostFromPost(newTitle, content);
+            info("Click on delete button of the post that is replied");
+            $(byText(content)).parent().parent().parent().parent().find(byText("Delete")).click();
+            info("Click on OK button of the confirm popup");
+            $(ELEMENT_DELETE_BOX_CONFIRMATION).click();
+            info("Verify that the replied post is deleted");
+            $(ELEMENT_POST_IN_TOPIC).find(byText(title)).shouldNot(Condition.exist);
+            info("Delete data");
+            deletaData();
+        }
+    }
 }

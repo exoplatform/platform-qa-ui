@@ -3,12 +3,14 @@ package org.exoplatform.platform.qa.ui.platform.forum;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import org.junit.jupiter.api.*;
-
-import org.openqa.selenium.By;
 
 
 @Tag("forum")
@@ -24,12 +26,13 @@ public class ForumSettings extends Base {
         homePagePlatform = new HomePagePlatform(this);
 
     }
+
     @Test
     public void test01_UserSettings() {
         info("Test 1: User Settings");
 
         homePagePlatform.goToForum();
-		/*Step Number: 1
+        /*Step Number: 1
 		 *Step Name: User Setting
 		 *Step Description:
 		- Click on SettingsChange profile information

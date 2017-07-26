@@ -2,7 +2,6 @@ package org.exoplatform.selenium.platform.forum.smoke;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selectors;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumCategoryManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
@@ -18,7 +17,8 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_ACTIONBAR_TOPIC_TAGDELETE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_FORUM_POLL_GRID;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("smoke")
@@ -47,6 +47,7 @@ public class ForumTopicTestIT extends Base {
         forumTopicManagement = new ForumTopicManagement(this);
         manageLogInOut = new ManageLogInOut(this);
     }
+
     @Test
     public void test02_RateTopic() {
         info("Test 2: Rate topic");
@@ -221,20 +222,84 @@ public class ForumTopicTestIT extends Base {
         forumHomePage.goToHomeCategory();
         forumCategoryManagement.deleteCategory(name);
     }
+
     /**
-     *<li> Case ID:116763.</li>
-     *<li> Test Case Name: Open/ Close a topic.</li>
-     *<li> Pre-Condition: </li>
-     *<li> Post-Condition: </li>
+     * <li> Case ID:116762.</li>
+     * <li> Test Case Name: Lock/ Unlock a topic.</li>
+     * <li> Pre-Condition: </li>
+     * <li> Post-Condition: </li>
      */
     @Test
-    public  void test08_OpenCloseATopic() {
+    public void test07_LockUnlockATopic() {
+        info("Test 7: Lock/ Unlock a topic");
+
+        String name = "Category" + getRandomNumber();
+        String name2 = "Forum" + getRandomNumber();
+        String desc = "Description" + getRandomNumber();
+        String topic = "Topic" + getRandomNumber();
+
+		/*Step Number: 1
+         *Step Name: Prepare data: create a caterory, forum, topic
+		 *Step Description:
+			- Create a category
+			- Create a forum
+			- Create a topic
+		 *Input Data:
+
+		 *Expected Outcome:
+			Category, forum, topic are created successfully*/
+
+        homePagePlatform.goToForum();
+        info("Add a category");
+        forumCategoryManagement.addCategorySimple(name, "", desc);
+        info("Add a forum in the category");
+        forumForumManagement.addForumSimple(name2, "", desc);
+
+        info("Add and go to a topic in the forums");
+        forumForumManagement.goToStartTopic();
+        forumTopicManagement.startTopic(topic, topic, "", "");
+        forumHomePage.goToTopic(topic);
+		/*Step number: 2
+		 *Step Name: Lock a topic
+		 *Step Description:
+			- Click on More action> Lock
+		 *Input Data:
+
+		 *Expected Outcome:
+			Topic is locked successfully. Users cannot post to this.*/
+        info("Lock the topic");
+        forumTopicManagement.lockUnlockTopic(true);
+
+		/*Step number: 3
+		 *Step Name: Unlock a topic
+		 *Step Description:
+			- Open a locked topic
+			- Click on More action> Unlock
+		 *Input Data:
+
+		 *Expected Outcome:
+			Topic is unlocked successfully.*/
+        info("Unlock the topic");
+        forumTopicManagement.lockUnlockTopic(false);
+        info("Delete data");
+        forumHomePage.goToHomeCategory();
+        forumCategoryManagement.deleteCategory(name);
+    }
+
+    /**
+     * <li> Case ID:116763.</li>
+     * <li> Test Case Name: Open/ Close a topic.</li>
+     * <li> Pre-Condition: </li>
+     * <li> Post-Condition: </li>
+     */
+    @Test
+    public void test08_OpenCloseATopic() {
         info("Test 8: Open/ Close a topic");
 
-        String name = "Category"+getRandomNumber();
-        String name2 = "Forum"+getRandomNumber();
-        String desc = "Description"+getRandomNumber();
-        String topic = "Topic"+getRandomNumber();
+        String name = "Category" + getRandomNumber();
+        String name2 = "Forum" + getRandomNumber();
+        String desc = "Description" + getRandomNumber();
+        String topic = "Topic" + getRandomNumber();
 
 		/*Step Number: 1
 		 *Step Name: Prepare data: create a caterory, forum, topic
@@ -248,13 +313,13 @@ public class ForumTopicTestIT extends Base {
 			Category, forum, topic are created successfully*/
         homePagePlatform.goToForum();
         info("Add a category");
-        forumCategoryManagement.addCategorySimple(name,"",desc);
+        forumCategoryManagement.addCategorySimple(name, "", desc);
         info("Add a forum in the category");
-        forumForumManagement.addForumSimple(name2,"",desc);
+        forumForumManagement.addForumSimple(name2, "", desc);
 
         info("Add and go to a topic in the forums");
         forumForumManagement.goToStartTopic();
-        forumTopicManagement.startTopic(topic, topic,"","");
+        forumTopicManagement.startTopic(topic, topic, "", "");
 
 		/*Step number: 2
 		 *Step Name: Close a topic
@@ -319,26 +384,26 @@ public class ForumTopicTestIT extends Base {
     }
 
     /**
-     *<li> Case ID:116766.</li>
-     *<li> Test Case Name: Update topic content.</li>
-     *<li> Pre-Condition: - A topic exists</li>
-     *<li> Post-Condition: </li>
-     *
-     *	 *<li> Case ID:116765.</li>
-     *<li> Test Case Name: Update topic title.</li>
-     *<li> Pre-Condition: - A topic exists</li>
-     *<li> Post-Condition: </li>
+     * <li> Case ID:116766.</li>
+     * <li> Test Case Name: Update topic content.</li>
+     * <li> Pre-Condition: - A topic exists</li>
+     * <li> Post-Condition: </li>
+     * <p>
+     * *<li> Case ID:116765.</li>
+     * <li> Test Case Name: Update topic title.</li>
+     * <li> Pre-Condition: - A topic exists</li>
+     * <li> Post-Condition: </li>
      */
     @Test
-    public  void test10_11_UpdateTopicContentTitle() {
+    public void test10_11_UpdateTopicContentTitle() {
         info("Test 11 Update topic content");
 
-        String name = "Category"+getRandomNumber();
-        String name2 = "Forum"+getRandomNumber();
-        String name3 = "Topic"+getRandomNumber();
-        String content = "NewContent"+getRandomNumber();
-        String desc = "Description"+getRandomNumber();
-        String topic = "Topic"+getRandomNumber();
+        String name = "Category" + getRandomNumber();
+        String name2 = "Forum" + getRandomNumber();
+        String name3 = "Topic" + getRandomNumber();
+        String content = "NewContent" + getRandomNumber();
+        String desc = "Description" + getRandomNumber();
+        String topic = "Topic" + getRandomNumber();
 
 		/*Step Number: 1
 		 *Step Name: - Edit Topic content
@@ -357,12 +422,12 @@ public class ForumTopicTestIT extends Base {
 			- Topic content is updated*/
         homePagePlatform.goToForum();
         info("Add a topic");
-        forumCategoryManagement.addCategorySimple(name,"",desc);
-        forumForumManagement.addForumSimple(name2,"",desc);
+        forumCategoryManagement.addCategorySimple(name, "", desc);
+        forumForumManagement.addForumSimple(name2, "", desc);
         forumForumManagement.goToStartTopic();
-        forumTopicManagement.startTopic(topic, topic,"","");
+        forumTopicManagement.startTopic(topic, topic, "", "");
         forumHomePage.goToTopic(topic);
-        forumTopicManagement.editTopic(name3,content);
+        forumTopicManagement.editTopic(name3, content);
         info("Open forum portlet");
         homePagePlatform.goToForum();
         info("Go to Forum home page");
@@ -439,6 +504,7 @@ public class ForumTopicTestIT extends Base {
         forumHomePage.goToHomeCategory();
         forumCategoryManagement.deleteCategory(name);
     }
+
     /**
      * <li>Case ID:116764.</li>
      * <li>Test Case Name: Create new Topic.</li>
