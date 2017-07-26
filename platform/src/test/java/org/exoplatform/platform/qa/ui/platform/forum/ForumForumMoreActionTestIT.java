@@ -24,7 +24,6 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
  * @author dmardassi
  * Date 24/07/2017
  */
-@Tag("test")
 @Tag("forum")
 @Tag("smoke")
 public class ForumForumMoreActionTestIT extends Base {
