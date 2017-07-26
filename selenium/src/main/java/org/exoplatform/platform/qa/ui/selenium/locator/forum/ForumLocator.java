@@ -226,7 +226,7 @@ public class ForumLocator {
   // Breadcumb
 
   public static final By     ELEMENT_CATEGORY_BREADCUMB_HOME                    =
-                                                             By.xpath("//*[@id=\"UIBreadcumbs\"]/div[1]/ul/li[2]/a");
+                                                             By.xpath("//*[@id=\"UIContextPopupMenu1\"]");
 
   public static final String          ELEMENT_CATEGORY_FORUM_BREAD                       =
                                                                    "//*[text()='${category}']/../..//*[text()='${forum}']";

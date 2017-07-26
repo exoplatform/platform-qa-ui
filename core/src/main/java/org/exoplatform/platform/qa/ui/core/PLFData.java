@@ -43,6 +43,8 @@ public class PLFData {
 
   public static String DATA_PASS            = "gtn";
 
+  public static String DATA_PASS2           ="gtngtn";
+
   public static String DATA_NAME_USER1      = "John Smith";
 
   public static String DATA_NAME_USER2      = "Mary Williams";
