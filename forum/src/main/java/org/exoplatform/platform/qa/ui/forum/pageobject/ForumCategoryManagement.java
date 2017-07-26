@@ -142,7 +142,7 @@ public class ForumCategoryManagement {
     info("Refresh the page");
     refresh();
     info("Select Delete link");
-        selectItemManageCategoryMenu(specifManageCategoryMenu.DELETE);
+     selectItemManageCategoryMenu(specifManageCategoryMenu.DELETE);
     info("Verify that the category is deleted");
     $(withText(nameCat)).shouldNot(exist);
     info("The category is deleted successfully");

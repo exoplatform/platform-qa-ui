@@ -2,6 +2,7 @@ package org.exoplatform.selenium.platform.forum.smoke;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selectors;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumCategoryManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
@@ -15,8 +16,7 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_ACTIONBAR_TOPIC_TAGDELETE;
-import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_FORUM_POLL_GRID;
+import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("smoke")
@@ -215,6 +215,59 @@ public class ForumTopicTestIT extends Base {
         forumTopicManagement.deletePoll();
         info("Delete data");
         forumHomePage.goToHomeCategory();
+        forumCategoryManagement.deleteCategory(name);
+    }
+
+    /**
+     *<li> Case ID:116766.</li>
+     *<li> Test Case Name: Update topic content.</li>
+     *<li> Pre-Condition: - A topic exists</li>
+     *<li> Post-Condition: </li>
+     *
+     *	 *<li> Case ID:116765.</li>
+     *<li> Test Case Name: Update topic title.</li>
+     *<li> Pre-Condition: - A topic exists</li>
+     *<li> Post-Condition: </li>
+     */
+    @Test
+    public  void test10_11_UpdateTopicContentTitle() {
+        info("Test 11 Update topic content");
+
+        String name = "Category"+getRandomNumber();
+        String name2 = "Forum"+getRandomNumber();
+        String name3 = "Topic"+getRandomNumber();
+        String content = "NewContent"+getRandomNumber();
+        String desc = "Description"+getRandomNumber();
+        String topic = "Topic"+getRandomNumber();
+
+		/*Step Number: 1
+		 *Step Name: - Edit Topic content
+		 *Step Description:
+			- Login and goto Forum
+			- Goto Category
+			-> Forum
+			->Topic
+			- Click [More Action]
+			-> Edit
+			- Update content of topic with new value
+			- click [Submit]
+		 *Input Data:
+
+		 *Expected Outcome:
+			- Topic content is updated*/
+        homePagePlatform.goToForum();
+        info("Add a topic");
+        forumCategoryManagement.addCategorySimple(name,"",desc);
+        forumForumManagement.addForumSimple(name2,"",desc);
+        forumForumManagement.goToStartTopic();
+        forumTopicManagement.startTopic(topic, topic,"","");
+        forumHomePage.goToTopic(topic);
+        forumTopicManagement.editTopic(name3,content);
+        info("Open forum portlet");
+        homePagePlatform.goToForum();
+        info("Go to Forum home page");
+        forumHomePage.goToHomeCategory();
+        info("Delete category");
         forumCategoryManagement.deleteCategory(name);
     }
 
