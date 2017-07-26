@@ -70,10 +70,10 @@ public class WikiPublishActivityTestIT extends Base {
     String content = line1 + "</br>" + line2 + "</br>" + line3 + "</br>" + line4 + "</br>" + line5;
 
     /*
-     * Step Number: 1 Step Name: Step 1: Add new wiki page Step Description: -
-     * Login and goto intranet - Click Wiki on left Navigation to go to Wiki
-     * Application - Click add page-> Blank page - Fill the title and content
-     * and click save Input Data: Expected Outcome: Wiki page is created.
+     * Step Number: 1 Step Name: Step 1: Add new wiki page Step Description: - Login
+     * and goto intranet - Click Wiki on left Navigation to go to Wiki Application -
+     * Click add page-> Blank page - Fill the title and content and click save Input
+     * Data: Expected Outcome: Wiki page is created.
      */
     info("Create a new wiki page");
     homePagePlatform.goToWiki();
@@ -83,11 +83,11 @@ public class WikiPublishActivityTestIT extends Base {
     info("Verify that the new wiki page is created successfully");
     $(byText(title)).should(Condition.exist);
     /*
-     * Step Number: 2 Step Name: Step 2: Check activity stream Step Description:
-     * - Goto homepage and check stream Input Data: Expected Outcome: - An
-     * activity is added into stream for wiki page - Informations that are
-     * displayed in the featured content : 1. Wiki page's title 2. Wiki page's
-     * version 3. First 4 lines of the wiki page
+     * Step Number: 2 Step Name: Step 2: Check activity stream Step Description: -
+     * Goto homepage and check stream Input Data: Expected Outcome: - An activity is
+     * added into stream for wiki page - Informations that are displayed in the
+     * featured content : 1. Wiki page's title 2. Wiki page's version 3. First 4
+     * lines of the wiki page
      */
     homePagePlatform.goToHomePage();
     activityStream.checkActivityAddWikiPage(title, content, null);
@@ -111,11 +111,11 @@ public class WikiPublishActivityTestIT extends Base {
     String content = "content" + getRandomNumber();
 
     /*
-     * Step Number: 1 Step Name: Step 1: Add new wiki page Step Description: -
-     * Login and goto intranet - Click Wiki on left Navigation to go to Wiki
-     * Application - Click add page-> Blank page - Fill the title and content
-     * and click save Input Data: Expected Outcome: Wiki page is created and an
-     * activity is added into activity stream.
+     * Step Number: 1 Step Name: Step 1: Add new wiki page Step Description: - Login
+     * and goto intranet - Click Wiki on left Navigation to go to Wiki Application -
+     * Click add page-> Blank page - Fill the title and content and click save Input
+     * Data: Expected Outcome: Wiki page is created and an activity is added into
+     * activity stream.
      */
     info("Create a new wiki page");
     homePagePlatform.goToWiki();
@@ -129,10 +129,10 @@ public class WikiPublishActivityTestIT extends Base {
     activityStream.checkActivity(title);
 
     /*
-     * Step number: 2 Step Name: Step 2: Delete Wiki Page Step Description: -
-     * Goto Wiki page and click [More] -> [Delete Page] - Go to the Homepage to
-     * check Input Data: Expected Outcome: Activity of the wiki page is removed
-     * from the activity stream
+     * Step number: 2 Step Name: Step 2: Delete Wiki Page Step Description: - Goto
+     * Wiki page and click [More] -> [Delete Page] - Go to the Homepage to check
+     * Input Data: Expected Outcome: Activity of the wiki page is removed from the
+     * activity stream
      */
     info("Delete the page");
     homePagePlatform.goToWiki();
@@ -140,8 +140,9 @@ public class WikiPublishActivityTestIT extends Base {
     homePagePlatform.goToHomePage();
     $(byText(title)).shouldNot(Condition.exist);
   }
+
   @Test
-public void test03_SearchWikiPageFromHomeSearchBar(){
+  public void test03_SearchWikiPageFromHomeSearchBar() {
     String title = "title" + getRandomNumber();
     String content = "content" + getRandomNumber();
     String title1 = "title" + getRandomNumber();
@@ -170,5 +171,5 @@ public void test03_SearchWikiPageFromHomeSearchBar(){
     wikiHomePage.deleteWiki(title);
     wikiHomePage.deleteWiki(title1);
     wikiHomePage.deleteWiki(title2);
-}
+  }
 }
