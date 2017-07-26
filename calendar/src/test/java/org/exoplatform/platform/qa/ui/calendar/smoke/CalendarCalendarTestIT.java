@@ -35,7 +35,7 @@ public class CalendarCalendarTestIT extends Base {
    * Personal Calendar. Pre-Condition: Post-Condition:
    */
   @Test
-  public void test02_03_04_AddEditDeletePersonalCalendar() {
+  public void test02_AddPersonalCalendar() {
     String calendarName = "calendarName" + getRandomNumber();
     String newCalendar = "newCalendar" + getRandomNumber();
     String calendarColor = "light_purple";
@@ -81,6 +81,108 @@ public class CalendarCalendarTestIT extends Base {
    * Case Name: Edit Group Calendar. Case ID:115697. Test Case Name: Delete
    * Group Calendar. Pre-Condition: Post-Condition:
    */
+
+
+
+  @Test
+  public void test03_EditPersonalCalendar() {
+    String calendarName = "calendarName" + getRandomNumber();
+    String newCalendar = "newCalendar" + getRandomNumber();
+    String calendarColor = "light_purple";
+
+    info("Test 2: Add Personal Calendar");
+    /*
+     * Step Number: 1 Step Name: - Step Description: Step 1: Add a personal
+     * calendar Input Data: - Click + iconon the top left pane and selectAdd
+     * Calendar - Fill required fields in Calendar Details tab - Save Expected
+     * Outcome: - The calendar is added into Personal Calendar
+     */
+    homePagePlatform.goToCalendarPage();
+    calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.ADDCAL);
+    calendarManagement.inputDataInDetailTabCalendarForm(calendarName, calendarName, calendarColor);
+    calendarManagement.saveAddCalendar();
+    $(byText(calendarName)).waitUntil(Condition.appears, 10000);
+    info("Test 3: Edit Personal Calendar");
+    /*
+     * Step Number: 1 Step Name: - Step Description: Step 1: Edit Personal
+     * Calendar Input Data: - Add a personal calendar or choose an existing one.
+     * - Mouse over calendar then click on wheelicon of an existing calendar and
+     * select Edit - Edit some value - Save Expected Outcome: - The calendar is
+     * updated with the changed value
+     */
+    calendarManagement.editCalendar(calendarName, newCalendar, newCalendar, calendarColor, null);
+    calendarManagement.saveAddCalendar();
+    $(byText(newCalendar)).waitUntil(Condition.appears, 10000);
+
+    info("Test 4 Delete Personal Calendar");
+    /*
+     * Step Number: 1 Step Name: - Step Description: Step 1: Delete Personal
+     * Calendar Input Data: - Create a personal calendar or choose an existing
+     * one - Mouse over calendar then click on wheelicon of an existing calendar
+     * and select Remove - Click OK at confirmation Expected Outcome: - The
+     * calendar is removed from the personal calendar group
+     */
+    homePagePlatform.goToCalendarPage();
+    calendarManagement.deleteCalendar(newCalendar, true);
+  }
+
+  /**
+   * Case ID:115673. Test Case Name: Add Group Calendar. Case ID:115674. Test
+   * Case Name: Edit Group Calendar. Case ID:115697. Test Case Name: Delete
+   * Group Calendar. Pre-Condition: Post-Condition:
+   */
+
+
+  @Test
+  public void test04_DeletePersonalCalendar() {
+    String calendarName = "calendarName" + getRandomNumber();
+    String newCalendar = "newCalendar" + getRandomNumber();
+    String calendarColor = "light_purple";
+
+    info("Test 2: Add Personal Calendar");
+    /*
+     * Step Number: 1 Step Name: - Step Description: Step 1: Add a personal
+     * calendar Input Data: - Click + iconon the top left pane and selectAdd
+     * Calendar - Fill required fields in Calendar Details tab - Save Expected
+     * Outcome: - The calendar is added into Personal Calendar
+     */
+    homePagePlatform.goToCalendarPage();
+    calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.ADDCAL);
+    calendarManagement.inputDataInDetailTabCalendarForm(calendarName, calendarName, calendarColor);
+    calendarManagement.saveAddCalendar();
+    $(byText(calendarName)).waitUntil(Condition.appears, 10000);
+    info("Test 3: Edit Personal Calendar");
+    /*
+     * Step Number: 1 Step Name: - Step Description: Step 1: Edit Personal
+     * Calendar Input Data: - Add a personal calendar or choose an existing one.
+     * - Mouse over calendar then click on wheelicon of an existing calendar and
+     * select Edit - Edit some value - Save Expected Outcome: - The calendar is
+     * updated with the changed value
+     */
+    calendarManagement.editCalendar(calendarName, newCalendar, newCalendar, calendarColor, null);
+    calendarManagement.saveAddCalendar();
+    $(byText(newCalendar)).waitUntil(Condition.appears, 10000);
+
+    info("Test 4 Delete Personal Calendar");
+    /*
+     * Step Number: 1 Step Name: - Step Description: Step 1: Delete Personal
+     * Calendar Input Data: - Create a personal calendar or choose an existing
+     * one - Mouse over calendar then click on wheelicon of an existing calendar
+     * and select Remove - Click OK at confirmation Expected Outcome: - The
+     * calendar is removed from the personal calendar group
+     */
+    homePagePlatform.goToCalendarPage();
+    calendarManagement.deleteCalendar(newCalendar, true);
+  }
+
+  /**
+   * Case ID:115673. Test Case Name: Add Group Calendar. Case ID:115674. Test
+   * Case Name: Edit Group Calendar. Case ID:115697. Test Case Name: Delete
+   * Group Calendar. Pre-Condition: Post-Condition:
+   */
+
+
+
   @Test
   public void test05_06_07_AddEditDeleteGroupCalendar() {
     String groupCalendar = "/platform/users";
