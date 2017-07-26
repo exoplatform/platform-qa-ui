@@ -45,20 +45,17 @@ public class EcmsAdminExplorerTestIT extends Base {
   /**
    * <li>Case ID:116587.</li>
    * <li>Test Case Name: Add Drive.</li>
-   * <li>Case ID:116623.</li>
-   * <li>Test Case Name: Edit Drive.</li>
-   * <li>Case ID:116624.</li>
-   * <li>Test Case Name: Delete Drive.</li>
+
    */
   @Test
-  public void test01_02_03_Add_Edit_Delete_Drive() {
+  public void test01_Add_Drive() {
     info("Test 01: Add Drive");
     info("Get data test");
     String title = "Atitle" + getRandomNumber();
     String permission = "any";
-    ContentAdministration.specificView[] view = { ContentAdministration.specificView.ADMIN };
-    ContentAdministration.specificView[] newView = { ContentAdministration.specificView.WEB };
-    String[] newV = { "Web" };
+    ContentAdministration.specificView[] view = {ContentAdministration.specificView.ADMIN};
+    ContentAdministration.specificView[] newView = {ContentAdministration.specificView.WEB};
+    String[] newV = {"Web"};
     info("Finished getting data test");
     navigationToolbar.goToContentAdministration();
     contentAdministration.goToSpecificMainFunctions(ContentAdministration.mainEcmFunctions.EXPLORER);
@@ -68,6 +65,7 @@ public class EcmsAdminExplorerTestIT extends Base {
     $(byText(title)).waitUntil(Condition.appears, 10000);
     // delete drive
     contentAdministration.deleteDrives(title);
+  }
     /*
      * Step Number: 1 Step Name: - Step Description: Step 1:Add Drive Input
      * Data: - Go to Content Administration/Explorer/ Drives - Click on Add
@@ -76,7 +74,74 @@ public class EcmsAdminExplorerTestIT extends Base {
      * you can see new drive
      */
 
-  }
+
+  /**
+   *  * <li>Case ID:116623.</li>
+   * <li>Test Case Name: Edit Drive.</li>
+   */
+
+  @Test
+    public void test02_Edit_Drive() {
+      info("Test 01: Add Drive");
+      info("Get data test");
+      String title = "Atitle" + getRandomNumber();
+      String permission = "any";
+      ContentAdministration.specificView[] view = {ContentAdministration.specificView.ADMIN};
+      ContentAdministration.specificView[] newView = {ContentAdministration.specificView.WEB};
+      String[] newV = {"Web"};
+      info("Finished getting data test");
+      navigationToolbar.goToContentAdministration();
+      contentAdministration.goToSpecificMainFunctions(ContentAdministration.mainEcmFunctions.EXPLORER);
+      contentAdministration.goToSpecificFunctions(ContentAdministration.specificEcmFunctions.DRIVES);
+      contentAdministration.addDrives(title, permission, view);
+      contentAdministration.editDrives(title, newView);
+      $(byText(title)).waitUntil(Condition.appears, 10000);
+      // delete drive
+      contentAdministration.deleteDrives(title);}
+    /*
+     * Step Number: 1 Step Name: - Step Description: Step 1:Add Drive Input
+     * Data: - Go to Content Administration/Explorer/ Drives - Click on Add
+     * Drive button - Put value in required fields - Click Save button Expected
+     * Outcome: - A drive is created successfully, when go to Site Explorer ,
+     * you can see new drive
+     */
+
+
+
+    /**
+
+    * <li>Case ID:116624.</li>
+          * <li>Test Case Name: Delete Drive.</li>
+     *   */
+      @Test
+      public void test03_Delete_Drive() {
+        info("Test 01: Add Drive");
+        info("Get data test");
+        String title = "Atitle" + getRandomNumber();
+        String permission = "any";
+        ContentAdministration.specificView[] view = {ContentAdministration.specificView.ADMIN};
+        ContentAdministration.specificView[] newView = {ContentAdministration.specificView.WEB};
+        String[] newV = {"Web"};
+        info("Finished getting data test");
+        navigationToolbar.goToContentAdministration();
+        contentAdministration.goToSpecificMainFunctions(ContentAdministration.mainEcmFunctions.EXPLORER);
+        contentAdministration.goToSpecificFunctions(ContentAdministration.specificEcmFunctions.DRIVES);
+        contentAdministration.addDrives(title, permission, view);
+        contentAdministration.editDrives(title, newView);
+        $(byText(title)).waitUntil(Condition.appears, 10000);
+        // delete drive
+        contentAdministration.deleteDrives(title);
+      }
+    /*
+     * Step Number: 1 Step Name: - Step Description: Step 1:Add Drive Input
+     * Data: - Go to Content Administration/Explorer/ Drives - Click on Add
+     * Drive button - Put value in required fields - Click Save button Expected
+     * Outcome: - A drive is created successfully, when go to Site Explorer ,
+     * you can see new drive
+     */
+
+
+
 
   /**
    * <li>Case ID:116627.</li>
