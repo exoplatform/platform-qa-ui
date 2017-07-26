@@ -82,27 +82,16 @@ public class EcmsSECreateTestIT extends Base {
   /**
    * <li>Case ID:116573.</li>
    * <li>Test Case Name: Create Web Content document.</li>
-   * <li>Case ID:116643.</li>
-   * <li>Test Case Name: Edit Web Content document.</li>
-   * <li>Pre-Condition: A Web Content document is already created.</li>
-   * <li>Case ID:116644.</li>
-   * <li>Test Case Name: Delete Web Content document.</li>
-   * <li>Pre-Condition: A Web Content document is already created.</li>
-   */
+  */
   @Test
-  public void test03_08_09_Create_Edit_Delete_WebContentDocument() {
+  public void test03_Create_WebContentDocument() {
     info("Test 3: Create Web Content document");
     info("Create data test");
     String name = "name" + getRandomNumber();
     String content = "content" + getRandomNumber();
     String content2 = "content2" + getRandomNumber();
     info("Finished creating data test");
-    /*
-     * Step Number: 1 Step Name: Step 1: Edit Web Content document Step
-     * Description: - Click Edit on action bar, perform to edit it - Click Save
-     * & Close Input Data: Expected Outcome: The Web Content document is edited
-     * successfully
-     */
+
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     siteExplorerHome.goToAddNewContent();
@@ -123,5 +112,79 @@ public class EcmsSECreateTestIT extends Base {
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     siteExplorerHome.deleteData(name);
   }
+    /**
+  * <li>Case ID:116643.</li>
+          * <li>Test Case Name: Edit Web Content document.</li>
+          * <li>Pre-Condition: A Web Content document is already created.</li>
+     */
+
+    @Test
+  public void test08_Edit_WebContentDocument() {
+    info("Test 3: Create Web Content document");
+    info("Create data test");
+    String name = "name" + getRandomNumber();
+    String content = "content" + getRandomNumber();
+    String content2 = "content2" + getRandomNumber();
+    info("Finished creating data test");
+
+    navigationToolbar.goToSiteExplorer();
+    siteExplorerHome.goToPath("intranet/documents", "Site Management");
+    siteExplorerHome.goToAddNewContent();
+    info("Create new file document");
+    createNewDoc.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
+    createNewDoc.addNewWebContent(name, content);
+    createNewDoc.saveAndClose();
+
+
+    info("Edit the content");
+    siteExplorerHome.selectNode(name);
+    siteExplorerHome.editDocument("", content2);
+    createNewDoc.saveAndClose();
+
+
+    info("Delete file document");
+    navigationToolbar.goToSiteExplorer();
+    siteExplorerHome.goToPath("intranet/documents", "Site Management");
+    siteExplorerHome.deleteData(name);
+  }
+
+/**
+   * <li>Case ID:116644.</li>
+        * <li>Test Case Name: Delete Web Content document.</li>
+        * <li>Pre-Condition: A Web Content document is already created.</li>
+        */
+
+  @Test
+  public void test09_Delete_WebContentDocument() {
+    info("Test 3: Create Web Content document");
+    info("Create data test");
+    String name = "name" + getRandomNumber();
+    String content = "content" + getRandomNumber();
+    String content2 = "content2" + getRandomNumber();
+    info("Finished creating data test");
+
+    navigationToolbar.goToSiteExplorer();
+    siteExplorerHome.goToPath("intranet/documents", "Site Management");
+    siteExplorerHome.goToAddNewContent();
+    info("Create new file document");
+    createNewDoc.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
+    createNewDoc.addNewWebContent(name, content);
+    createNewDoc.saveAndClose();
+
+
+    info("Edit the content");
+    siteExplorerHome.selectNode(name);
+    siteExplorerHome.editDocument("", content2);
+    createNewDoc.saveAndClose();
+
+
+    info("Delete file document");
+    navigationToolbar.goToSiteExplorer();
+    siteExplorerHome.goToPath("intranet/documents", "Site Management");
+    siteExplorerHome.deleteData(name);
+  }
+
+
+
 
 }
