@@ -9,12 +9,14 @@ import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumTopicManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -32,6 +34,7 @@ public class ForumTopicTestIT extends Base {
     ForumForumManagement forumForumManagement;
 
     ForumTopicManagement forumTopicManagement;
+    ManageLogInOut manageLogInOut;
 
     @BeforeEach
     public void setupBeforeMethod() {
@@ -42,6 +45,7 @@ public class ForumTopicTestIT extends Base {
         forumCategoryManagement = new ForumCategoryManagement(this);
         forumForumManagement = new ForumForumManagement(this);
         forumTopicManagement = new ForumTopicManagement(this);
+        manageLogInOut = new ManageLogInOut(this);
     }
     @Test
     public void test02_RateTopic() {
@@ -215,6 +219,102 @@ public class ForumTopicTestIT extends Base {
         forumTopicManagement.deletePoll();
         info("Delete data");
         forumHomePage.goToHomeCategory();
+        forumCategoryManagement.deleteCategory(name);
+    }
+    /**
+     *<li> Case ID:116763.</li>
+     *<li> Test Case Name: Open/ Close a topic.</li>
+     *<li> Pre-Condition: </li>
+     *<li> Post-Condition: </li>
+     */
+    @Test
+    public  void test08_OpenCloseATopic() {
+        info("Test 8: Open/ Close a topic");
+
+        String name = "Category"+getRandomNumber();
+        String name2 = "Forum"+getRandomNumber();
+        String desc = "Description"+getRandomNumber();
+        String topic = "Topic"+getRandomNumber();
+
+		/*Step Number: 1
+		 *Step Name: Prepare data: create a caterory, forum, topic
+		 *Step Description:
+			- Create a category
+			- Create a forum
+			- Create a topic
+		 *Input Data:
+
+		 *Expected Outcome:
+			Category, forum, topic are created successfully*/
+        homePagePlatform.goToForum();
+        info("Add a category");
+        forumCategoryManagement.addCategorySimple(name,"",desc);
+        info("Add a forum in the category");
+        forumForumManagement.addForumSimple(name2,"",desc);
+
+        info("Add and go to a topic in the forums");
+        forumForumManagement.goToStartTopic();
+        forumTopicManagement.startTopic(topic, topic,"","");
+
+		/*Step number: 2
+		 *Step Name: Close a topic
+		 *Step Description:
+			Click on More action > Close
+		 *Input Data:
+
+		 *Expected Outcome:
+			Normal user can not view closed topic*/
+
+        info("Close the topic");
+        forumHomePage.goToTopic(topic);
+        forumTopicManagement.closeOpenTopic(true);
+        info("sign out and log in with user2");
+        //manageLogInOut.signOut();
+        manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+
+        info("go to Forum home page");
+        homePagePlatform.goToForum();
+        $(byText(name2)).click();
+        $(byText(topic)).should(Condition.exist);
+
+		/*Step number: 3
+		 *Step Name: Open a topic
+		 *Step Description:
+			Access a closed topic, Click on More action > Open
+		 *Input Data:
+
+		 *Expected Outcome:
+			Open topic successfully.*/
+
+        info("sign out and log in with user1");
+        //manageLogInOut.signOut();
+        manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+
+        info("go to Forum home page");
+        homePagePlatform.goToForum();
+        info("Go to the forum");
+        $(byText(name2)).click();
+        info("Go to the topic");
+        forumHomePage.goToTopic(topic);
+        info("open the topic");
+        forumTopicManagement.closeOpenTopic(false);
+
+        info("sign out and log in with user2");
+        //manageLogInOut.signOut();
+        manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+
+        info("go to Forum home page");
+        homePagePlatform.goToForum();
+        info("Verify that the topic is shown again");
+        $(byText(topic)).should(Condition.exist);
+
+        info("log in back USER1");
+        //manageLogInOut.signOut();
+        manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+        info("go to Forum home page");
+        homePagePlatform.goToForum();
+        info("Delete data");
+        $(byText(name)).click();
         forumCategoryManagement.deleteCategory(name);
     }
 

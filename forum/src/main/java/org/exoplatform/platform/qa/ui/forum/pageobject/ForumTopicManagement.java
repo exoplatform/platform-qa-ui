@@ -527,7 +527,6 @@ public class ForumTopicManagement {
       $(ELEMENT_START_TOPIC_POPUP_TITLE_FILED).setValue(newTitle);
     if (!newContent.isEmpty())
     plf.inputFrame(ELEMENT_POST_CONTENT, newContent);
-    $(ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR).sendKeys(newContent);
     info("Click on Submit button");
     $(ELEMENT_SUBMIT_BUTTON).click();
     info("All changes are saved");
