@@ -821,8 +821,10 @@ public class ForumLocator {
   public static final String          ELEMENT_UI_POPUP_MOVE_TOPIC                        =
                                                                   "//*[@id='MoveTopicForm']//*[@class='node']//*[contains(text(),'{$forum}')]";
 
-  public static final String          ELEMENT_MOVE_POPUP_COLLASPE_NODE                   =
-                                                                       ".//*[@class='uiIconNode collapseIcon'][contains(.,'${category}')]";
+
+  public static final String ELEMENT_MOVE_POPUP_COLLASPE_NODE                   =
+                                                              ".//*[@class='uiIconNode collapseIcon'][contains(.,'${category}')]";
+  public final By ELEMENT_MOVE_TOPIC_POPUP = By.id("UIForumPopupWindow");
 
   /***************************************************
    * PRIVATE MESSAGE MANAGEMENT

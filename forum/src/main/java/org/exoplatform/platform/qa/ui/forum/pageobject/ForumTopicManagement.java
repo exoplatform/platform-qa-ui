@@ -1,26 +1,22 @@
 package org.exoplatform.platform.qa.ui.forum.pageobject;
 
-import static com.codeborne.selenide.Condition.appears;
-import static com.codeborne.selenide.Condition.exist;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
-
-import org.openqa.selenium.By;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.By;
 
 public class ForumTopicManagement {
 
@@ -60,16 +56,17 @@ public class ForumTopicManagement {
    */
   public void moveTopicToForum(String category, String forum) {
     info("if not found forum");
-    if (evt.waitForAndGetElement(ELEMENT_UI_POPUP_MOVE_TOPIC.replace("{$forum}", forum), 3000, 0) == null) {
-      info("Click on Category to expand tree");
-      evt.click(ELEMENT_MOVE_POPUP_COLLASPE_NODE.replace("${category}", category));
+     if($(ELEMENT_UI_POPUP_MOVE_TOPIC.replace("{$forum}",forum))==null){
+     info("Click on Category to expand tree");
+      $(ELEMENT_MOVE_POPUP_COLLASPE_NODE.replace("${category}",category)).click();
       info("Select the forum");
-      evt.click(ELEMENT_UI_POPUP_MOVE_TOPIC.replace("{$forum}", forum));
-    } else {
+      $(byXpath("//*[@id=\"UIMoveTopicForm\"]/div[2]/div[1]/div/div/ul/li[1]/ul/li/a")).click();
+    }else{
       info("Select the forum");
-      evt.click(ELEMENT_UI_POPUP_MOVE_TOPIC.replace("{$forum}", forum));
+      $(byXpath("//*[@id=\"UIMoveTopicForm\"]/div[2]/div[1]/div/div/ul/li[1]/ul/li/a")).click();
     }
     info("Finish moving");
+
   }
 
   /**

@@ -135,6 +135,67 @@ public class ForumTopicTestIT extends Base {
         forumHomePage.goToHomeCategory();
         forumCategoryManagement.deleteCategory(name);
     }
+    /**
+     *<li> Case ID:116759.</li>
+     *<li> Test Case Name: Move a topic.</li>
+     *<li> Pre-Condition: </li>
+     *<li> Post-Condition: </li>
+     */
+    @Test
+    public void test04_MoveATopic() {
+        info("Test 4: Move a topic");
+
+        String name = "Category" + getRandomNumber();
+        String name2 = "Forum" + getRandomNumber();
+        String name3 = "Forum" + getRandomNumber();
+        String desc = "Description" + getRandomNumber();
+        String topic = "Topic" + getRandomNumber();
+
+		/*Step Number: 1
+         *Step Name: Prepare data: create a caterory, forum, topic
+		 *Step Description:
+			- Create a category
+			- Create a forum
+			- Create a topic
+		 *Input Data:
+
+		 *Expected Outcome:
+			Category, forum, topic are created successfully*/
+        info("Open forum portlet");
+        homePagePlatform.goToForum();
+        info("Add a category");
+        forumCategoryManagement.addCategorySimple(name, "", desc);
+        info("Add a forum in the category");
+        forumForumManagement.addForumSimple(name2, "", desc);
+
+        forumHomePage.goToHomeCategory();
+        info("Add a forum in the category");
+        forumForumManagement.addForumSimple(name3, "", desc);
+        info("Add and go to a topic in the forums");
+        forumForumManagement.goToStartTopic();
+        forumTopicManagement.startTopic(topic, topic, "", "");
+        forumHomePage.goToTopic(topic);
+		/*Step number: 2
+		 *Step Name: Move a topic
+		 *Step Description:
+			- Open topic above
+			- Click More Action >’ Move
+			- Choose the destination forum
+		 *Input Data:
+
+		 *Expected Outcome:
+			- Topic is moved to destination Forum successfully*/
+
+        info("Move Topic:" + topic);
+        forumHomePage.goToTopic(topic);
+        forumTopicManagement.selectItemMoreActionMenuTopic(ForumTopicManagement.specifMoreActionMenuTopic.MOVE);
+        info("Move the topic to a forum");
+        forumTopicManagement.moveTopicToForum(name, name2);
+        info("Verify that the forum is moved to new category");
+        info("Delete data");
+        forumHomePage.goToHomeCategory();
+        forumCategoryManagement.deleteCategory(name);
+    }
 
     /**
      * <li> Case ID:116776.</li>
