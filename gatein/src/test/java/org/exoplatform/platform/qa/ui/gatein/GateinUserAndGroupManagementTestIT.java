@@ -50,7 +50,7 @@ public class GateinUserAndGroupManagementTestIT extends Base {
    * <li>Case ID:123095.</li>
    * <li>Test Case Name: Delete group.</li>
    */
-  @Test
+
   public void test01_02_03_04_AddEditDeleteGroupAddUsersToGroup() {
     String groupName = "groupName" + getRandomNumber();
     String groupLabel = "groupLabel" + getRandomNumber();
