@@ -43,7 +43,7 @@ public class GateinGroupNavigationManageNavigationTestIT extends Base {
    * Test Case Name: Manage Navigation of group.
    */
   @Test
-  public void test01_ManageGroupNavigation() {
+  public void test01_ShowGroupNavigation() {
     String groupName = "group-" + getRandomNumber();
     String group1 = "group1-" + getRandomNumber();
     String group2 = "group2-" + getRandomNumber();
