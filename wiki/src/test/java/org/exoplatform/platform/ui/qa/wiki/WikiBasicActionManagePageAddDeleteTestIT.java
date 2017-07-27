@@ -48,7 +48,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
      */
 
     @Test
-    public void test02_09_CreatePageUsingSourceEditor() {
+    public void test02_CreatePageUsingSourceEditor() {
         info("Test 02: Create page using Source Editor");
         String wiki = "wiki" + getRandomNumber();
 
@@ -84,7 +84,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
      */
 
     @Test
-    public void test02_10_DeletePageUsingSourceEditor() {
+    public void test09_DeletePageUsingSourceEditor() {
         info("Test 02: Create page using Source Editor");
         String wiki = "wiki" + getRandomNumber();
 
