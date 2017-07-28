@@ -142,7 +142,6 @@ public class GateinGroupNavigationManageNavigationTestIT extends Base {
   }
 
 
-
   /**
    * Test Case ID:123103. Test Case Name: Show group navigation list Test Case
    * ID:123104. Test Case Name: Add Navigation of group. Test Case ID:123043.
