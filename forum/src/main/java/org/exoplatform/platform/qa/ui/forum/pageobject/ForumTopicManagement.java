@@ -296,7 +296,7 @@ public class ForumTopicManagement {
     info("Click on Submit button");
     $(ELEMENT_POLL_SUBMIT).click();
     info("Verify Poll is added");
-    $(byText(question)).should(Condition.exist);
+    $(byText(option1)).should(Condition.exist);
     info("Finished adding poll");
 
   }
@@ -433,15 +433,15 @@ public class ForumTopicManagement {
   public void replyTopic(String newTitle, String newMessg, String pathFile, String fileName) {
     info("Click on Post Reply button");
     // click(ELEMENT_TOPIC_POST_REPLY_BOTTOM);
-    evt.clickByJavascript(ELEMENT_TOPIC_POST_REPLY_BOTTOM, 2);
+    $(ELEMENT_TOPIC_POST_REPLY_BOTTOM).click();
     info("Verify that the pop up is shown");
-    evt.waitForAndGetElement(ELEMENT_TOPIC_NEW_POST_TITLE);
+    $(ELEMENT_TOPIC_NEW_POST_TITLE).should(Condition.exist);
     info("Refresh the page");
-    this.testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+    refresh();
     if (!newTitle.isEmpty()) {
       info("Input the title:" + newTitle);
-      evt.waitForAndGetElement(ELEMENT_TOPIC_NEW_POST_TITLE_FIELD).clear();
-      evt.type(ELEMENT_TOPIC_NEW_POST_TITLE_FIELD, newTitle, true);
+      $(ELEMENT_TOPIC_NEW_POST_TITLE_FIELD).clear();
+      $(ELEMENT_TOPIC_NEW_POST_TITLE_FIELD).val(newTitle);
     }
 
     if (!newMessg.isEmpty()) {
@@ -451,19 +451,18 @@ public class ForumTopicManagement {
 
     if (!pathFile.isEmpty() || !fileName.isEmpty()) {
       info("click on Attached file button");
-      evt.click(ELEMENT_START_TOPIC_ATTACH_FILE);
+      $(ELEMENT_START_TOPIC_ATTACH_FILE).click();
       info("Verify that upload button is shown");
-      evt.waitForAndGetElement(ELEMENT_UPLOAD_POPUP_FILE);
+      $(ELEMENT_UPLOAD_POPUP_FILE).should(Condition.exist);
       info("Attached file");
       testBase.attachFile(pathFile, fileName);
       info("Verify that upload popup is closed");
-      evt.waitForElementNotPresent(ELEMENT_UPLOAD_POPUP_FILE);
+      $(ELEMENT_UPLOAD_POPUP_FILE).shouldNot(Condition.exist);
     }
     info("click on Submit button");
-    // click(ELEMENT_SUBMIT_BUTTON);
-    evt.clickByJavascript(ELEMENT_SUBMIT_BUTTON, 2);
+   $(ELEMENT_SUBMIT_BUTTON).click();
     info("Verify that the replying is created");
-    evt.waitForAndGetElement(ELEMENT_TOPIC_REPPLY_CONTENT.replace("${content}", newMessg));
+    $(byText(newMessg)).should(Condition.exist);
     info("Reply topic successfully");
   }
 
