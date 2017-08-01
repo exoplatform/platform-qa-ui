@@ -180,6 +180,7 @@ public class GateinUserAndGroupManagementTestIT extends Base {
   }
 
   @Test
+  @Tag("search")
   public void test11_SearchUserFromHomeSearchBar() {
     String username = "username" + getRandomNumber();
     String password = "password" + getRandomNumber();
@@ -214,6 +215,7 @@ public class GateinUserAndGroupManagementTestIT extends Base {
   }
 
   @Test
+  @Tag("search")
   public void test12_SearchUserFromPeopleSearchByName() {
     String username = "username" + getRandomNumber();
     String password = "password" + getRandomNumber();

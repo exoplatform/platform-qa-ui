@@ -163,6 +163,7 @@ public class ForumForumBasicActionTestIT extends Base {
   }
 
   @Test
+  @Tag("search")
   public void test05_SearchForum() {
 
     String nameCat = "categorya" + getRandomString();

@@ -142,6 +142,7 @@ public class WikiPublishActivityTestIT extends Base {
   }
 
   @Test
+  @Tag("search")
   public void test03_SearchWikiPageFromHomeSearchBar() {
     String title = "title" + getRandomNumber();
     String content = "content" + getRandomNumber();

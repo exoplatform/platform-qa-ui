@@ -122,6 +122,7 @@ public class PLFNavigationLeftNavigationTestIT extends Base {
   }
 
   @Test
+  @Tag("search")
   public void test02_SearchSpaceFromHomeSearchBar() {
     String space = "space" + getRandomNumber();
     String space2 = "space" + getRandomNumber();
