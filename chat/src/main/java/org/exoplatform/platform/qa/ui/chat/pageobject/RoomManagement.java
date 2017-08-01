@@ -1,3 +1,5 @@
+package org.exoplatform.platform.qa.ui.chat.pageobject;
+
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;

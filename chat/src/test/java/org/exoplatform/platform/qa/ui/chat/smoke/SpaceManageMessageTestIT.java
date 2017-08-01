@@ -1,3 +1,5 @@
+package org.exoplatform.platform.qa.ui.chat.smoke;
+
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -7,6 +9,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.E
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.chat.pageobject.ChatManagement;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -37,7 +40,7 @@ public class SpaceManageMessageTestIT extends Base {
 
   UserAndGroupManagement userandgroupmanagement;
 
-  ChatManagement         chatManagement;
+  ChatManagement chatManagement;
 
   SpaceManagement        spaceManagement;
 
