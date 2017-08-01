@@ -1,21 +1,19 @@
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_CONNECTION_EVERYONE_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.ELEMENT_ANSWER_PORTLET;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.ELEMENT_FAQ_QUESTION_LIST;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_CALENDAR_WORKING_PANEL;
-import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_FORUM_PORTLET;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selectors.*;
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class HomePagePlatform {
 
@@ -33,8 +31,14 @@ public class HomePagePlatform {
    */
   public void goToWiki() {
     info("--Go to Wiki--");
-    $(ELEMENT_WIKI_LINK_PLF).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_WIKI_LINK_PLF).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_WIKI_LINK_PLF).click();
+  }
+
+  public void goToChat() {
+    info("--Go to chat--");
+    $(byId("chat-status")).click();
+    $(byClassName("notif-chat-open-link")).waitUntil(Condition.appears, Configuration.timeout).click();
   }
 
   /**
@@ -50,8 +54,8 @@ public class HomePagePlatform {
    * Go to Home page
    */
   public void goToHomePage() {
-      info("Click on Home link of intranet page");
-      $(ELEMENT_HOME_LINK_PLF).click();
+    info("Click on Home link of intranet page");
+    $(ELEMENT_HOME_LINK_PLF).click();
   }
 
   /**
@@ -66,8 +70,9 @@ public class HomePagePlatform {
     $(ELEMENT_CALENDAR_WORKING_PANEL).waitUntil(Condition.appears,Configuration.timeout);
     info("The calendar page is shown successfully");
   }
-  public void goToTaskPage(){
-    ELEMENT_TASKS_LINK_PLF.waitUntil(Condition.appears,Configuration.timeout).click();
+
+  public void goToTaskPage() {
+    ELEMENT_TASKS_LINK_PLF.waitUntil(Condition.appears, Configuration.timeout).click();
   }
 
   /**
@@ -85,7 +90,7 @@ public class HomePagePlatform {
   public void goToAllSpace() {
     info("Click on Join a space link");
 
-    $(ELEMENT_ALL_SPACE_JOIN_LINK).waitUntil(Condition.appears,Configuration.timeout).click();
+    $(ELEMENT_ALL_SPACE_JOIN_LINK).waitUntil(Condition.appears, Configuration.timeout).click();
 
   }
 
@@ -131,7 +136,7 @@ public class HomePagePlatform {
     info("Click on Connection link");
     $(ELEMENT_CONNECTIONS_LINK_PLF).click();
     info("Verify that the connections portlet is shown");
-    $(ELEMENT_CONNECTION_EVERYONE_TITLE).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_CONNECTION_EVERYONE_TITLE).waitUntil(Condition.appears, Configuration.timeout);
     info("The connections portlet is shown successfully");
   }
 
@@ -144,7 +149,7 @@ public class HomePagePlatform {
     info("Go to space " + space);
 
     ELEMENT_SPECIFIC_PANEL.find(byText(space)).click();
-   
+
   }
 
   /**
