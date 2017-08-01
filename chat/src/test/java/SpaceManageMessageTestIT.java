@@ -138,16 +138,16 @@ public class SpaceManageMessageTestIT extends Base {
     userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
     manageLogInOut.signIn(usernamea, password);
     homePagePlatform.goToChat();
-    switchTo().window("Home Page");
+    switchTo().window(0);
     manageLogInOut.signIn(PLFData.username, PLFData.password);
     homePagePlatform.goToHomePage();
-    switchTo().window("Chat");
+    switchTo().window(1);
     refresh();
     ELEMENT_CHAT_INPUT_SEARCH_USER.setValue("@" + usernamea);
     $(byText(usernamea + " " + usernamea)).click();
     info("root send message to user");
     chatManagement.sendMessageInRoomOrSpace(usernamea + " " + usernamea, message);
-    switchTo().window("Home Page");
+    switchTo().window(0);
     manageLogInOut.signIn(usernamea, password);
     homePagePlatform.goToChat();
     switchTo().window(1);
@@ -155,7 +155,7 @@ public class SpaceManageMessageTestIT extends Base {
     $(byText(message)).should(Condition.exist);
     info("user check message and answer root");
     chatManagement.sendMessageInRoomOrSpace("Root Root", message2);
-    switchTo().window("Home Page");
+    switchTo().window(0);
     manageLogInOut.signIn(PLFData.username, PLFData.password);
     homePagePlatform.goToChat();
     switchTo().window(1);
@@ -164,7 +164,7 @@ public class SpaceManageMessageTestIT extends Base {
     $(byText(usernamea + " " + usernamea)).click();
     info("root check the answer");
     $(byText(message2)).should(Condition.exist);
-    switchTo().window("Home Page");
+    switchTo().window(0);
     info("delete data");
     navigationToolbar.goToManageCommunity();
     userandgroupmanagement.deleteUser(usernamea);
