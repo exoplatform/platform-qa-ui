@@ -1,18 +1,17 @@
 package org.exoplatform.platform.qa.ui.commons.plf;
 
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACE_NAME_INPUT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import org.exoplatform.platform.qa.ui.core.context.Smoke;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
@@ -52,22 +51,24 @@ public class PLFNavigationSpaceNavigationTestIT extends Base {
     ELEMENT_SPACE_NAME_INPUT.waitUntil(Condition.disappears, Configuration.timeout);
 
     /*
-     * Step Number: 1 Step Name: Show space applications Step Description: -
-     * Connect to Intranet - Open a Space Input Data: Expected Outcome: - The
-     * Horizontal toolbar is displayed - On the left of the Space toolbar, we
-     * display the icon and name of the current space. - All applications
-     * dedicated to the space are shown on space menu - Click on each
-     * applications, the application will show up in the main page
+     * Step Number: 1 Step Name: Show space applications Step Description: - Connect
+     * to Intranet - Open a Space Input Data: Expected Outcome: - The Horizontal
+     * toolbar is displayed - On the left of the Space toolbar, we display the icon
+     * and name of the current space. - All applications dedicated to the space are
+     * shown on space menu - Click on each applications, the application will show
+     * up in the main page
      */
     info("Verify the expected outcome");
-   /* waitForAndGetElement(ELEMENT_SPACE_MENU_ACTIVITY_STREAM).isDisplayed();
-    waitForAndGetElement(ELEMENT_SPACE_MENU_AGENDA);
-    waitForAndGetElement(ELEMENT_SPACE_MENU_WIKI).isDisplayed();
-    waitForAndGetElement(ELEMENT_SPACE_MENU_DOCUMENTS).isDisplayed();
-    waitForAndGetElement(ELEMENT_SPACE_MENU_SETTINGS).isDisplayed();
-    waitForAndGetElement(ELEMENT_SPACE_MENU_ANSWER).isDisplayed();
-    waitForAndGetElement(ELEMENT_SPACE_MENU_FORUMS).isDisplayed();*/
-   $(byText("Activity Stream")).should(Condition.exist);
+    /*
+     * waitForAndGetElement(ELEMENT_SPACE_MENU_ACTIVITY_STREAM).isDisplayed();
+     * waitForAndGetElement(ELEMENT_SPACE_MENU_AGENDA);
+     * waitForAndGetElement(ELEMENT_SPACE_MENU_WIKI).isDisplayed();
+     * waitForAndGetElement(ELEMENT_SPACE_MENU_DOCUMENTS).isDisplayed();
+     * waitForAndGetElement(ELEMENT_SPACE_MENU_SETTINGS).isDisplayed();
+     * waitForAndGetElement(ELEMENT_SPACE_MENU_ANSWER).isDisplayed();
+     * waitForAndGetElement(ELEMENT_SPACE_MENU_FORUMS).isDisplayed();
+     */
+    $(byText("Activity Stream")).should(Condition.exist);
 
     info("Delete the space");
     homePagePlatform.goToMySpaces();

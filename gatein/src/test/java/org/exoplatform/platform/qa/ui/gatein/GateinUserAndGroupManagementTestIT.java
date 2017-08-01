@@ -4,6 +4,9 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_CONTENT_PEOPLE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_NAME_OF_PEOPLE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +18,7 @@ import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
+import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 
 /**
@@ -31,6 +35,8 @@ public class GateinUserAndGroupManagementTestIT extends Base {
 
   UserAddManagement      useraddmanagement;
 
+  HomePagePlatform       homePagePlatform;
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
@@ -38,6 +44,7 @@ public class GateinUserAndGroupManagementTestIT extends Base {
     navigationToolbar = new NavigationToolbar(this);
     userandgroupmanagement = new UserAndGroupManagement(this);
     useraddmanagement = new UserAddManagement(this);
+    homePagePlatform = new HomePagePlatform(this);
   }
 
   /**
@@ -63,9 +70,9 @@ public class GateinUserAndGroupManagementTestIT extends Base {
     String membership2 = "editor";
     /*
      * Step Number: 1 Step Name: Step 1: Add new Group Step Description: - Go to
-     * Group/Organization/ User and group management - Click Add new group icon
-     * - Input some filed required and click Save Input Data: Expected Outcome:
-     * - Add group successfully
+     * Group/Organization/ User and group management - Click Add new group icon -
+     * Input some filed required and click Save Input Data: Expected Outcome: - Add
+     * group successfully
      */
     info("Test Case 01: Add new group");
     navigationToolbar.goToUsersAndGroupsManagement();
@@ -94,8 +101,8 @@ public class GateinUserAndGroupManagementTestIT extends Base {
     /*
      * Step Number: 4 Step Name: Step 4: Delete Group Step Description: - Go to
      * Group/Organization/ User and group management - Select a group and click
-     * [Delete selected group] icon - Click Save Input Data: Expected Outcome: -
-     * The group is removed from the list
+     * [Delete selected group] icon - Click Save Input Data: Expected Outcome: - The
+     * group is removed from the list
      */
     info("Test Case 04: Delete group");
     userandgroupmanagement.deleteGroup(groupLabel, true);
@@ -115,21 +122,20 @@ public class GateinUserAndGroupManagementTestIT extends Base {
     String password = "password" + getRandomNumber();
     String firstName = getRandomString();
     String lastName = getRandomString();
-    String email = firstName + getRandomNumber() + "@gmail.com";
+    String email = firstName + getRandomNumber() + "@test.com";
 
     String newFirstName = getRandomString();
     String newLastName = getRandomString();
     String newDisplayName = "newDisplayName" + getRandomNumber();
-    String newEmail = newFirstName + getRandomNumber() + "@gmail.com";
+    String newEmail = newFirstName + getRandomNumber() + "@test.com";
 
     /*
-     * String searchUserName =
-     * userSearchOptionData.getUserSearchOptionByIndex(0); String searchLastName
-     * = userSearchOptionData.getUserSearchOptionByIndex(1); String
-     * searchFirstName = userSearchOptionData.getUserSearchOptionByIndex(2);
+     * String searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
+     * String searchLastName = userSearchOptionData.getUserSearchOptionByIndex(1);
+     * String searchFirstName = userSearchOptionData.getUserSearchOptionByIndex(2);
      * String searchEmail = userSearchOptionData.getUserSearchOptionByIndex(3);
-     * String searchUser1 = userInfoData.getLastNameByIndex(2); String
-     * searchUser2 = userInfoData.getFirstNameByIndex(4);
+     * String searchUser1 = userInfoData.getLastNameByIndex(2); String searchUser2 =
+     * userInfoData.getFirstNameByIndex(4);
      */
 
     navigationToolbar.goToAddUser();
@@ -137,17 +143,17 @@ public class GateinUserAndGroupManagementTestIT extends Base {
     useraddmanagement.addUser(username, password, email, firstName, lastName);
 
     /*
-     * Step Number: 1 Step Name: Step 1: Edit User information Step Description:
-     * - Go to Group/Organization/ User and group management - Select a user and
-     * click [Edit user info] icon - Change some fields and click Save Input
-     * Data: Expected Outcome: - Users list is shown properly - User is updated
-     * with the change value
+     * Step Number: 1 Step Name: Step 1: Edit User information Step Description: -
+     * Go to Group/Organization/ User and group management - Select a user and click
+     * [Edit user info] icon - Change some fields and click Save Input Data:
+     * Expected Outcome: - Users list is shown properly - User is updated with the
+     * change value
      */
     info("Test Case 08: Edit user information");
     navigationToolbar.goToUsersAndGroupsManagement();
     /*
-     * if(waitForAndGetElement(ELEMENT_USER_MANAGEMENT_ACTIVE_TAB, 3000, 0) ==
-     * null) click(ELEMENT_USER_MANAGEMENT_TAB);
+     * if(waitForAndGetElement(ELEMENT_USER_MANAGEMENT_ACTIVE_TAB, 3000, 0) == null)
+     * click(ELEMENT_USER_MANAGEMENT_TAB);
      */
     userandgroupmanagement.goToEditUserInfo(username);
     userandgroupmanagement.editUserInfo_AccountTab(newFirstName, newLastName, newDisplayName, newEmail);
@@ -155,24 +161,90 @@ public class GateinUserAndGroupManagementTestIT extends Base {
     $(byText(newFirstName)).should(Condition.exist);
 
     /*
-     * Step Number: 2 Step Name: Step 2: Search User Step Description: - Search
-     * user by: + User name + Last Name + First Name + Email Input Data:
-     * Expected Outcome: - The results are displayed matching with the search
-     * keyword
+     * Step Number: 2 Step Name: Step 2: Search User Step Description: - Search user
+     * by: + User name + Last Name + First Name + Email Input Data: Expected
+     * Outcome: - The results are displayed matching with the search keyword
      */
     /*
      * info("Test Case 09: Search user follow username, last name, first name, email"
      * ); userandgroupmanagement.searchUser(DATA_USER1, searchUserName);
      * userandgroupmanagement.searchUser(searchUser1, searchLastName);
      * userandgroupmanagement.searchUser(searchUser2, searchFirstName);
-     * userandgroupmanagement.searchUser(newEmail, searchEmail); /*Step Number:
-     * 3 Step Name: Step 3: Delete User Step Description: - Go to
-     * Group/Organization/ User and group management - Select a user in list and
-     * click [Delete user] icon Input Data: Expected Outcome: - - The user will
-     * be removed from the list
+     * userandgroupmanagement.searchUser(newEmail, searchEmail); /*Step Number: 3
+     * Step Name: Step 3: Delete User Step Description: - Go to Group/Organization/
+     * User and group management - Select a user in list and click [Delete user]
+     * icon Input Data: Expected Outcome: - - The user will be removed from the list
      */
     info("Test Case 10: Delete user");
     userandgroupmanagement.deleteUser(username);
   }
 
+  @Test
+  @Tag("search")
+  public void test11_SearchUserFromHomeSearchBar() {
+    String username = "username" + getRandomNumber();
+    String password = "password" + getRandomNumber();
+    String firstName = getRandomString();
+    String lastName = getRandomString();
+    String email = firstName + getRandomNumber() + "@test.com";
+
+    String username1 = "username1" + getRandomNumber();
+    String password1 = "password1" + getRandomNumber();
+    String firstName1 = getRandomString();
+    String lastName1 = getRandomString();
+    String email1 = firstName + getRandomNumber() + "@test.com";
+
+    String username2 = "username" + getRandomNumber();
+    String password2 = "password" + getRandomNumber();
+    String firstName2 = getRandomString();
+    String lastName2 = getRandomString();
+    String email2 = firstName + getRandomNumber() + "@test.com";
+    navigationToolbar.goToAddUser();
+    useraddmanagement.addUser(username, password, email, firstName, lastName);
+    useraddmanagement.addUser(username1, password1, email1, firstName1, lastName1);
+    useraddmanagement.addUser(username2, password2, email2, firstName2, lastName2);
+    homePagePlatform.goToHomePage();
+    ELEMENT_ICON_SEARCH.click();
+    ELEMENT_SEARCH_INPUT.setValue(firstName + " " + lastName);
+    ELEMENT_SEARCH_RESULT.shouldHave(Condition.exactText(firstName + " " + lastName));
+    navigationToolbar.goToManageCommunity();
+    userandgroupmanagement.deleteUser(username);
+    userandgroupmanagement.deleteUser(username1);
+    userandgroupmanagement.deleteUser(username2);
+
+  }
+
+  @Test
+  @Tag("search")
+  public void test12_SearchUserFromPeopleSearchByName() {
+    String username = "username" + getRandomNumber();
+    String password = "password" + getRandomNumber();
+    String firstName = getRandomString();
+    String lastName = getRandomString();
+    String email = firstName + getRandomNumber() + "@test.com";
+
+    String username1 = "username1" + getRandomNumber();
+    String password1 = "password1" + getRandomNumber();
+    String firstName1 = getRandomString();
+    String lastName1 = getRandomString();
+    String email1 = firstName + getRandomNumber() + "@test.com";
+
+    String username2 = "username" + getRandomNumber();
+    String password2 = "password" + getRandomNumber();
+    String firstName2 = getRandomString();
+    String lastName2 = getRandomString();
+    String email2 = firstName + getRandomNumber() + "@test.com";
+    navigationToolbar.goToAddUser();
+    useraddmanagement.addUser(username, password, email, firstName, lastName);
+    useraddmanagement.addUser(username1, password1, email1, firstName1, lastName1);
+    useraddmanagement.addUser(username2, password2, email2, firstName2, lastName2);
+    homePagePlatform.goToConnections();
+    ELEMENT_NAME_OF_PEOPLE.setValue(firstName + " " + lastName);
+    ELEMENT_CONTENT_PEOPLE.find(byText(firstName + " " + lastName)).should(Condition.exist);
+    navigationToolbar.goToManageCommunity();
+    userandgroupmanagement.deleteUser(username);
+    userandgroupmanagement.deleteUser(username1);
+    userandgroupmanagement.deleteUser(username2);
+
+  }
 }

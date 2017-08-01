@@ -1,22 +1,25 @@
 package org.exoplatform.selenium.platform.forum.smoke;
 
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_DETAIL_FORUM_CATEGORY_TITLE;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_CONTENT_SEARCH_RESULT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_SEARCH_TEXTBOX;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selectors;
-import com.codeborne.selenide.Selectors.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selectors.WithText;
+
 import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.core.context.Smoke;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumCategoryManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
+import org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 
 /**
@@ -24,7 +27,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
  */
 @Tag("smoke")
 @Tag("forum")
-public class Forum_Forum_BasicActionTestIT extends Base {
+public class ForumForumBasicActionTestIT extends Base {
 
   HomePagePlatform        homePagePlatform;
 
@@ -35,13 +38,13 @@ public class Forum_Forum_BasicActionTestIT extends Base {
   ForumForumManagement    forumForumManagement;
 
   @BeforeEach
-    public void setupBeforeMethod() {
-      info("Start setUpBeforeMethod");
+  public void setupBeforeMethod() {
+    info("Start setUpBeforeMethod");
 
-      homePagePlatform = new HomePagePlatform(this);
-      forumHomePage = new ForumHomePage(this);
-      forumCategoryManagement = new ForumCategoryManagement(this);
-      forumForumManagement = new ForumForumManagement(this);
+    homePagePlatform = new HomePagePlatform(this);
+    forumHomePage = new ForumHomePage(this);
+    forumCategoryManagement = new ForumCategoryManagement(this);
+    forumForumManagement = new ForumForumManagement(this);
   }
 
   /**
@@ -73,8 +76,8 @@ public class Forum_Forum_BasicActionTestIT extends Base {
 
   /**
    * CaseID: 116736 Case_name: Edid a forum Steps: 1. Prepare data: create a
-   * caterory 2. Add a forum: - Click on Add forum icon - Put values - Click
-   * Save Expected: Forum is added successfully.
+   * caterory 2. Add a forum: - Click on Add forum icon - Put values - Click Save
+   * Expected: Forum is added successfully.
    */
   @Test
   public void test02_EditForum() {
@@ -101,8 +104,8 @@ public class Forum_Forum_BasicActionTestIT extends Base {
 
   /**
    * CaseID: 116736 Case_name: Edid a forum Steps: 1. Prepare data: create a
-   * caterory 2. Add a forum: - Click on Add forum icon - Put values - Click
-   * Save Expected: Forum is added successfully.
+   * caterory 2. Add a forum: - Click on Add forum icon - Put values - Click Save
+   * Expected: Forum is added successfully.
    */
   @Test
   public void test03_DeleteForum() {
@@ -125,9 +128,9 @@ public class Forum_Forum_BasicActionTestIT extends Base {
 
   /**
    * CaseID: 116738 Case_name: Move a forum Steps: 1. Prepare data: create a
-   * caterory 2. Add a forum: - Select 1 forum - Click on More Action, select
-   * Move - Choose destination category Expected: This forum is moved to a
-   * destination category
+   * caterory 2. Add a forum: - Select 1 forum - Click on More Action, select Move
+   * - Choose destination category Expected: This forum is moved to a destination
+   * category
    */
   @Test
   public void test04_MoveForum() {
@@ -159,4 +162,33 @@ public class Forum_Forum_BasicActionTestIT extends Base {
     forumCategoryManagement.deleteCategory(category1);
   }
 
+  @Test
+  @Tag("search")
+  public void test05_SearchForum() {
+
+    String nameCat = "categorya" + getRandomString();
+    String nameForum = "foruma" + getRandomString();
+    String nameForum1 = "forumb" + getRandomString();
+    String nameForum2 = "forumc" + getRandomString();
+
+    info("go to Forum home page");
+    homePagePlatform.goToForum();
+    info("Add a category");
+    forumCategoryManagement.addCategorySimple(nameCat, "", nameCat);
+    info("Add a forum in the category");
+    forumForumManagement.addForumSimple(nameForum, "", nameForum);
+    forumForumManagement.addForumSimple(nameForum1, "", nameForum1);
+    forumForumManagement.addForumSimple(nameForum2, "", nameForum2);
+    info("search forum");
+    homePagePlatform.goToForum();
+    $(ELEMENT_SEARCH_TEXTBOX).setValue(nameForum);
+    ForumLocator.ELEMENT_ICON_SEARCH.click();
+    ELEMENT_CONTENT_SEARCH_RESULT.find(byText(nameForum)).should(Condition.exist);
+    ELEMENT_CONTENT_SEARCH_RESULT.find(byText(nameForum1)).shouldNot(Condition.exist);
+    ELEMENT_CONTENT_SEARCH_RESULT.find(byText(nameForum2)).shouldNot(Condition.exist);
+    info("delete data");
+    homePagePlatform.goToForum();
+    forumHomePage.goToHomeCategory();
+    forumCategoryManagement.deleteCategory(nameCat);
+  }
 }

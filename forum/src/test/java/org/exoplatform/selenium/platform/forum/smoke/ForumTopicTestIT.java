@@ -21,7 +21,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 
 @Tag("smoke")
 @Tag("forum")
-public class Forum_TopicTestIT extends Base {
+public class ForumTopicTestIT extends Base {
   HomePagePlatform        homePagePlatform;
 
   ForumCategoryManagement forumCategoryManagement;
@@ -63,26 +63,26 @@ public class Forum_TopicTestIT extends Base {
     String topic = "topic" + getRandomNumber();
 
     /*
-     * Step Number: 1 Step Name: - Create new category Step Description: - Login
-     * and goto Forum application - Click [Add Category] - Fill the information
-     * and click [Save] Input Data: Expected Outcome: - New category is created
-     * - No activity is added in activity stream
+     * Step Number: 1 Step Name: - Create new category Step Description: - Login and
+     * goto Forum application - Click [Add Category] - Fill the information and
+     * click [Save] Input Data: Expected Outcome: - New category is created - No
+     * activity is added in activity stream
      */
     homePagePlatform.goToForum();
     info("Add a category");
     forumCategoryManagement.addCategorySimple(name, "", desc);
 
     /*
-     * Step number: 2 Step Name: - Create new Forum Step Description: - Click
-     * [Add Forum] - Fill the information and click [Save] Input Data: Expected
-     * Outcome: - New forum is created - No activity is added in activity stream
+     * Step number: 2 Step Name: - Create new Forum Step Description: - Click [Add
+     * Forum] - Fill the information and click [Save] Input Data: Expected Outcome:
+     * - New forum is created - No activity is added in activity stream
      */
     info("Add a forum in the category");
     forumForumManagement.addForumSimple(name2, "", desc);
     /*
-     * Step number: 3 Step Name: - Create new Topic Step Description: - Click
-     * [start Topic] - input the information and click [Save] Input Data:
-     * Expected Outcome: - New Topic is created
+     * Step number: 3 Step Name: - Create new Topic Step Description: - Click [start
+     * Topic] - input the information and click [Save] Input Data: Expected Outcome:
+     * - New Topic is created
      */
     info("Add and go to a topic in the forums");
     forumForumManagement.goToStartTopic();
