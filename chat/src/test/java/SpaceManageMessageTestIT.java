@@ -7,6 +7,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.E
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -79,7 +80,7 @@ public class SpaceManageMessageTestIT extends Base {
     info("send request");
     spaceManagement.sendARequestToASpace(space);
     homePagePlatform.goToHomePage();
-    manageLogInOut.signIn("root", "gtn");
+    manageLogInOut.signIn(PLFData.username, PLFData.password);
     homePagePlatform.goToSpecificSpace(space);
     spaceHomePage.goToSpaceSettingTab();
     info("accept request by user 1");
@@ -98,7 +99,7 @@ public class SpaceManageMessageTestIT extends Base {
     info("verify message");
     ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.exist);
     switchTo().window("Home Page");
-    manageLogInOut.signIn("root", "gtn");
+    manageLogInOut.signIn(PLFData.username, PLFData.password);
     info("delete data");
     homePagePlatform.goToAllSpace();
     spaceManagement.deleteSpace(space, false);
@@ -138,7 +139,7 @@ public class SpaceManageMessageTestIT extends Base {
     manageLogInOut.signIn(usernamea, password);
     homePagePlatform.goToChat();
     switchTo().window("Home Page");
-    manageLogInOut.signIn("root", "gtn");
+    manageLogInOut.signIn(PLFData.username, PLFData.password);
     homePagePlatform.goToHomePage();
     switchTo().window("Chat");
     refresh();
@@ -155,7 +156,7 @@ public class SpaceManageMessageTestIT extends Base {
     info("user check message and answer root");
     chatManagement.sendMessageInRoomOrSpace("Root Root", message2);
     switchTo().window("Home Page");
-    manageLogInOut.signIn("root", "gtn");
+    manageLogInOut.signIn(PLFData.username, PLFData.password);
     homePagePlatform.goToChat();
     switchTo().window(1);
     refresh();

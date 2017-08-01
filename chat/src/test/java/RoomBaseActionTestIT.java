@@ -6,6 +6,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_CHAT_LIST_MSG;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -70,7 +71,7 @@ public class RoomBaseActionTestIT extends Base {
     homePagePlatform.goToChat();
     manageLogInOut.signIn(usernamec, password);
     homePagePlatform.goToChat();
-    manageLogInOut.signIn("root", "gtn");
+    manageLogInOut.signIn(PLFData.username, PLFData.password);
     homePagePlatform.goToChat();
     info("Add room with users");
     switchTo().window("Chat");
@@ -95,7 +96,7 @@ public class RoomBaseActionTestIT extends Base {
     $(byText(room)).should(Condition.exist);
     info("delete data");
     switchTo().window("Home Page");
-    manageLogInOut.signIn("root", "gtn");
+    manageLogInOut.signIn(PLFData.username, PLFData.password);
     homePagePlatform.goToChat();
     switchTo().window("Chat");
     roomManagement.deleteRomm(room);
@@ -120,7 +121,7 @@ public class RoomBaseActionTestIT extends Base {
     userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
     manageLogInOut.signIn(usernamea, password);
     homePagePlatform.goToChat();
-    manageLogInOut.signIn("root", "gtn");
+    manageLogInOut.signIn(PLFData.username, PLFData.password);
     homePagePlatform.goToChat();
     switchTo().window("Chat");
     info("add room");
@@ -145,7 +146,7 @@ public class RoomBaseActionTestIT extends Base {
     userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
     manageLogInOut.signIn(usernamea, password);
     homePagePlatform.goToChat();
-    manageLogInOut.signIn("root", "gtn");
+    manageLogInOut.signIn(PLFData.username, PLFData.password);
     homePagePlatform.goToChat();
     switchTo().window("Chat");
     info("add room");
@@ -160,7 +161,7 @@ public class RoomBaseActionTestIT extends Base {
     info("verify message");
     ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.exist);
     switchTo().window("Home Page");
-    manageLogInOut.signIn("root", "gtn");
+    manageLogInOut.signIn(PLFData.username, PLFData.password);
     homePagePlatform.goToChat();
     switchTo().window("Chat");
     roomManagement.deleteRomm(room);
@@ -181,7 +182,7 @@ public class RoomBaseActionTestIT extends Base {
     userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
     manageLogInOut.signIn(usernamea, password);
     homePagePlatform.goToChat();
-    manageLogInOut.signIn("root", "gtn");
+    manageLogInOut.signIn(PLFData.username, PLFData.password);
     homePagePlatform.goToChat();
     switchTo().window("Chat");
     info("add room");
