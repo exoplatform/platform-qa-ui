@@ -29,7 +29,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("smoke")
 @Tag("answer")
-public class Addons_Answers_Question extends Base {
+public class AddonsAnswersQuestionTestIT extends Base {
 
 HomePagePlatform homePagePlatform;
 QuestionManagement questionManagement;
