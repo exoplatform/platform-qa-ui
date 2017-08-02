@@ -43,7 +43,7 @@ public class GateinGroupNavigationManageNavigationTestIT extends Base {
    * Test Case Name: Manage Navigation of group.
    */
   @Test
-  public void test01_02_03_Show_Add_ManageGroupNavigation() {
+  public void test01_ShowGroupNavigation() {
     String groupName = "group-" + getRandomNumber();
     String group1 = "group1-" + getRandomNumber();
     String group2 = "group2-" + getRandomNumber();
@@ -56,11 +56,7 @@ public class GateinGroupNavigationManageNavigationTestIT extends Base {
     userAndGroupManagement.goToGroupTab();
     userAndGroupManagement.addGroup(groupName, groupName, groupName, true);
 
-    /*
-     * Step Number: 1 Step Name: Show Navigation list for group Step
-     * Description: - Go to Administration/Portal/Group Sites Input Data:
-     * Expected Outcome: - Show group navigation list
-     */
+
     info("Test Case 01: Show navigation list default of user John");
     navigationToolbar.goToGroupSites();
     waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group1))).isDisplayed();
@@ -69,12 +65,7 @@ public class GateinGroupNavigationManageNavigationTestIT extends Base {
     waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group4))).isDisplayed();
     waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group5))).isDisplayed();
 
-    /*
-     * Step Number: 2 Step Name: Add Navigation of group Step Description: - Go
-     * to Administration/ Portal / Group Sites - Click Add Navigation button -
-     * Select a navigation in list and click Add navigation icon Input Data:
-     * Expected Outcome: - Add Navigation successfully
-     */
+
     info("TestCase 02: Add new navigation for new group");
     portalGroupNavigation.addNewNavigationForGroup(groupName);
 
@@ -86,12 +77,7 @@ public class GateinGroupNavigationManageNavigationTestIT extends Base {
     waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group4))).isDisplayed();
     waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group5))).isDisplayed();
 
-    /*
-     * Step Number: 3 Step Name: Delete Navigation of group Step Description: -
-     * Go to Administration/ Portal / Group Sites - Click Delete Navigation
-     * button of a Group Input Data: Expected Outcome: - The navigation group is
-     * removed successfully
-     */
+
     info("Delete navigation of group");
     portalGroupNavigation.deleteNavigationForGroup(groupName);
 
@@ -101,4 +87,113 @@ public class GateinGroupNavigationManageNavigationTestIT extends Base {
     click(By.linkText(groupName));
     userAndGroupManagement.deleteGroup(groupName, true, 60000);
   }
+
+
+  /**
+   * Test Case ID:123103. Test Case Name: Show group navigation list Test Case
+   * ID:123104. Test Case Name: Add Navigation of group. Test Case ID:123043.
+   * Test Case Name: Manage Navigation of group.
+   */
+
+  @Test
+  public void test02_AddGroupNavigation() {
+    String groupName = "group-" + getRandomNumber();
+    String group1 = "group1-" + getRandomNumber();
+    String group2 = "group2-" + getRandomNumber();
+    String group3 = "group3-" + getRandomNumber();
+    String group4 = "group4-" + getRandomNumber();
+    String group5 = "group5-" + getRandomNumber();
+
+    info("Create new group with John");
+    navigationToolbar.goToUsersAndGroupsManagement();
+    userAndGroupManagement.goToGroupTab();
+    userAndGroupManagement.addGroup(groupName, groupName, groupName, true);
+
+
+    info("Test Case 01: Show navigation list default of user John");
+    navigationToolbar.goToGroupSites();
+    waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group1))).isDisplayed();
+    waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group2))).isDisplayed();
+    waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group3))).isDisplayed();
+    waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group4))).isDisplayed();
+    waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group5))).isDisplayed();
+
+
+    info("TestCase 02: Add new navigation for new group");
+    portalGroupNavigation.addNewNavigationForGroup(groupName);
+
+    info("Show navigation list after add a new group of user John");
+    waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", groupName))).isDisplayed();
+    waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group1))).isDisplayed();
+    waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group2))).isDisplayed();
+    waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group3))).isDisplayed();
+    waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group4))).isDisplayed();
+    waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group5))).isDisplayed();
+
+
+    info("Delete navigation of group");
+    portalGroupNavigation.deleteNavigationForGroup(groupName);
+
+    info("Delete group");
+    navigationToolbar.goToUsersAndGroupsManagement();
+    userAndGroupManagement.goToGroupTab();
+    click(By.linkText(groupName));
+    userAndGroupManagement.deleteGroup(groupName, true, 60000);
+  }
+
+
+  /**
+   * Test Case ID:123103. Test Case Name: Show group navigation list Test Case
+   * ID:123104. Test Case Name: Add Navigation of group. Test Case ID:123043.
+   * Test Case Name: Manage Navigation of group.
+   */
+
+  @Test
+  public void test03_ManageGroupNavigation() {
+    String groupName = "group-" + getRandomNumber();
+    String group1 = "group1-" + getRandomNumber();
+    String group2 = "group2-" + getRandomNumber();
+    String group3 = "group3-" + getRandomNumber();
+    String group4 = "group4-" + getRandomNumber();
+    String group5 = "group5-" + getRandomNumber();
+
+    info("Create new group with John");
+    navigationToolbar.goToUsersAndGroupsManagement();
+    userAndGroupManagement.goToGroupTab();
+    userAndGroupManagement.addGroup(groupName, groupName, groupName, true);
+
+
+    info("Test Case 01: Show navigation list default of user John");
+    navigationToolbar.goToGroupSites();
+    waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group1))).isDisplayed();
+    waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group2))).isDisplayed();
+    waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group3))).isDisplayed();
+    waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group4))).isDisplayed();
+    waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group5))).isDisplayed();
+
+
+    info("TestCase 02: Add new navigation for new group");
+    portalGroupNavigation.addNewNavigationForGroup(groupName);
+
+    info("Show navigation list after add a new group of user John");
+    waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", groupName))).isDisplayed();
+    waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group1))).isDisplayed();
+    waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group2))).isDisplayed();
+    waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group3))).isDisplayed();
+    waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group4))).isDisplayed();
+    waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group5))).isDisplayed();
+
+
+    info("Delete navigation of group");
+    portalGroupNavigation.deleteNavigationForGroup(groupName);
+
+    info("Delete group");
+    navigationToolbar.goToUsersAndGroupsManagement();
+    userAndGroupManagement.goToGroupTab();
+    click(By.linkText(groupName));
+    userAndGroupManagement.deleteGroup(groupName, true, 60000);
+  }
+
+
+
 }
