@@ -81,9 +81,8 @@ public class WikiBasicActionEditTestIT extends Base {
     }
     sourcetexteditor.addSimplePage(title, content);
     wikiManagement.saveAddPage();
-
     wikiValidattions.verifyTitleWikiPage(title);
-    arrayPage.add(title);
+      arrayPage.add(title);
 
     /*
      * Step number: 2 Step Name: Step 2: Edit page Step Description: - Select
@@ -91,20 +90,21 @@ public class WikiBasicActionEditTestIT extends Base {
      * Data: Expected Outcome: - The [Edit Page] is shown in [Source Editor]
      * mode - Page is edited
      */
-    info("Edit a wiki page");
-    String newTitle = "newTitle" + getRandomNumber();
-    String newContent = "newContent" + getRandomNumber();
-    wikiHomePage.goToAPage(title);
-    wikiHomePage.goToEditPage();
-    if ($(ELEMENT_SOURCE_EDITOR_BUTTON).isDisplayed()) {
-      wikiManagement.goToSourceEditor();
+      info("Edit a wiki page");
+      String newTitle = "newTitle" + getRandomNumber();
+      String newContent = "newContent" + getRandomNumber();
+      wikiHomePage.goToAPage(title);
+      wikiHomePage.goToEditPage();
+      if ($(ELEMENT_SOURCE_EDITOR_BUTTON).isDisplayed()) {
+        wikiManagement.goToSourceEditor();
+      }
+      sourcetexteditor.editSimplePage(newTitle, newContent);
+      wikiManagement.saveAddPage();
+      wikiValidattions.verifyTitleWikiPage(newTitle);
+      arrayPage.add(newTitle);
+      wikiHomePage.deleteWiki(newTitle);
+
     }
-    sourcetexteditor.editSimplePage(newTitle, newContent);
-    wikiManagement.saveAddPage();
-    wikiValidattions.verifyTitleWikiPage(newTitle);
-    arrayPage.add(newTitle);
-    wikiHomePage.deleteWiki(newTitle);
 
   }
 
-}
