@@ -40,7 +40,17 @@ public class TaskManagementTestIT extends Base {
   }
 
   @Test
-  public void test01_02_03_AddEditDeleteTask() {
+  public void test01_AddTask() {
+    String task = "task" + getRandomNumber();
+    info("add task");
+    homePagePlatform.goToTaskPage();
+    managementTasks.addTask(task);
+    info("delete task");
+    managementTasks.deleteTask(task);
+
+  }
+  @Test
+  public void test02_EditTask() {
     String task = "task" + getRandomNumber();
     String newTask = "newTask" + getRandomNumber();
     info("add task");
@@ -53,6 +63,16 @@ public class TaskManagementTestIT extends Base {
 
   }
 
+  @Test
+  public void test03_DeleteTask() {
+    String task = "task" + getRandomNumber();
+    info("add task");
+    homePagePlatform.goToTaskPage();
+    managementTasks.addTask(task);
+    info("delete task");
+    managementTasks.deleteTask(task);
+
+  }
   @Test
   public void test04_MarkTaskAsCompleted() {
     String task = "task" + getRandomNumber();

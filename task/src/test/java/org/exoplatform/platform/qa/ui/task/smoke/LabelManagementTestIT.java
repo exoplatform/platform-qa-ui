@@ -38,7 +38,18 @@ public class LabelManagementTestIT extends Base {
     }
 
     @Test
-    public void test01_02_03Add_Edit_DeleteLabel() {
+    public void test01_Add_Label() {
+        String label = "label" + getRandomNumber();
+        info("add task");
+        homePagePlatform.goToTaskPage();
+        info("Add label");
+        managementLabels.addLabel(label);
+       ;
+        info("delete label");
+        managementLabels.deleteLabel(label);
+    }
+    @Test
+    public void test02_Edit_Label() {
         String label = "label" + getRandomNumber();
         String Newlabel = "Newlabel" + getRandomNumber();
         info("add task");
@@ -49,6 +60,16 @@ public class LabelManagementTestIT extends Base {
         managementLabels.editLabel(label, Newlabel);
         info("delete label");
         managementLabels.deleteLabel(Newlabel);
+    }
+    @Test
+    public void test03DeleteLabel() {
+        String label = "label" + getRandomNumber();
+        info("add task");
+        homePagePlatform.goToTaskPage();
+        info("Add label");
+        managementLabels.addLabel(label);
+        info("delete label");
+        managementLabels.deleteLabel(label);
     }
 
     @Test

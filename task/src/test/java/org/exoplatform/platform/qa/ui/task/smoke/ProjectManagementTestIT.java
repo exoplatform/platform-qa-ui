@@ -37,7 +37,22 @@ public class ProjectManagementTestIT extends Base {
     }
 
     @Test
-    public void test01_02_03_Add_Edit_DeleteProject() {
+    public void test01_Add_Project() {
+        String title = "title" + getRandomNumber();
+        ;
+        homePagePlatform.goToTaskPage();
+        info("add project");
+        managementProjects.addProject(title, "", false);
+        info("verify project added");
+        $(byText(title)).should(Condition.exist);
+        info("delete project");
+        managementProjects.deleteProject(title);
+        info("verify project deleted");
+        $(byText(title)).waitUntil(Condition.disappears, Configuration.timeout);
+
+    }
+    @Test
+    public void test02Edit_Project() {
         String title = "title" + getRandomNumber();
         String newTitle = "newTitle" + getRandomNumber();
         ;
@@ -56,9 +71,37 @@ public class ProjectManagementTestIT extends Base {
         $(byText(newTitle)).waitUntil(Condition.disappears, Configuration.timeout);
 
     }
+    @Test
+    public void test03_DeleteProject() {
+        String title = "title" + getRandomNumber();
+        ;
+        homePagePlatform.goToTaskPage();
+        info("add project");
+        managementProjects.addProject(title, "", false);
+        info("verify project added");
+        $(byText(title)).should(Condition.exist);
+        info("delete project");
+        managementProjects.deleteProject(title);
+        info("verify project deleted");
+        $(byText(title)).waitUntil(Condition.disappears, Configuration.timeout);
+
+    }
 
     @Test
-    public void test04_05_06_Add_Edit_DeleteTaskInProject() {
+    public void test04_Add_TaskInProject() {
+        String title = "title" + getRandomNumber();
+        String task = "task" + getRandomNumber();
+        homePagePlatform.goToTaskPage();
+        managementProjects.addProject(title, "", false);
+        $(byText(title)).click();
+        managementTasks.addTask(task);
+        info("delete task");
+        managementTasks.deleteTask(task);
+        managementProjects.deleteProject(title);
+
+    }
+    @Test
+    public void test05_Edit_TaskInProject() {
         String title = "title" + getRandomNumber();
         String task = "task" + getRandomNumber();
         String newTask = "newTask" + getRandomNumber();
@@ -70,6 +113,20 @@ public class ProjectManagementTestIT extends Base {
         managementTasks.editTask(task, newTask, "High");
         info("delete task");
         managementTasks.deleteTask(newTask);
+        managementProjects.deleteProject(title);
+
+    }
+
+    @Test
+    public void test06_DeleteTaskInProject() {
+        String title = "title" + getRandomNumber();
+        String task = "task" + getRandomNumber();
+        homePagePlatform.goToTaskPage();
+        managementProjects.addProject(title, "", false);
+        $(byText(title)).click();
+        managementTasks.addTask(task);
+        info("delete task");
+        managementTasks.deleteTask(task);
         managementProjects.deleteProject(title);
 
     }
