@@ -50,6 +50,7 @@ public class AnswerManagement {
     if (content != null && content != "") {
       info("input content");
       evt.inputDataToCKEditor(ELEMENT_ANSWER_FORM_DATA_FRAME_INPUT,content);
+      $(ELEMENT_ANSWER_FORM_DATA_FRAME_INPUT).click();
     }
 
     if (isApprove != null) {

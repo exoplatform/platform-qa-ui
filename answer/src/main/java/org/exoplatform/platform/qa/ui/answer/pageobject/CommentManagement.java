@@ -56,6 +56,7 @@ public class CommentManagement {
     if (content != null && content != "") {
       info("input content");
       evt.inputDataToCKEditor(ELEMENT_COMMENT_FORM_DATA_FRAME_INPUT, content);
+      $(ELEMENT_COMMENT_FORM_DATA_FRAME_INPUT).click();
     }
   }
 

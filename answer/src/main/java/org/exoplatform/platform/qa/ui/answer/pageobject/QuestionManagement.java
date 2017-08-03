@@ -71,6 +71,7 @@ public class QuestionManagement {
 
     if (content != null && content != "") {
       info("input content");
+      $(ELEMENT_SUBMIT_QUESTION_FORM_DATA_FRAME_INPUT).click();
       evt.inputDataToCKEditor(ELEMENT_SUBMIT_QUESTION_FORM_DATA_FRAME_INPUT, content);
     }
 
@@ -148,7 +149,7 @@ public class QuestionManagement {
    */
   public void goToActionOfQuestionFromMoreAction(actionQuestionOption action) {
     info("Select action from menu");
-    $(ELEMENT_QUESTION_MORE_ACTION_BUTTON).click();
+    $(ELEMENT_QUESTION_MORE_ACTION_BUTTON).waitUntil(Condition.appears,Configuration.timeout).click();
     switch (action) {
     case PRINT:
       info("PRINT question");
@@ -187,6 +188,8 @@ public class QuestionManagement {
    */
   public void deleteQuestion(String question) {
     info("Delete question");
+    if( $(ELEMENT_QUESTION_MORE_ACTION_BUTTON).is(Condition.not(Condition.exist)))
+    { $(byText(question)).click();}
     goToActionOfQuestionFromMoreAction(actionQuestionOption.DELETE);
     $(ELEMENT_QUESTION_CONFIRM_DELETE).waitUntil(Condition.appears,Configuration.timeout);
     $(ELEMENT_QUESTION_DELETE_FORM_OK_BUTTON).click();

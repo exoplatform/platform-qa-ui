@@ -47,19 +47,11 @@ AnswerHomePage answerHomePage;
 	/**
 	 * Case ID:116828.
 	 * Test Case Name: Add a question.
-	 * Case ID:116829.
-	 * Test Case Name: Edit a question.
-	 * Case ID:116830.
-	 * Test Case Name: Delete a question.
-	 * Pre-Condition: 
-	 * Post-Condition: 
 	 */
 @Test
-	public  void test02_03_04_AddEditDeleteAQuestion() {
+	public  void test02_AddAQuestion() {
 		String question = "question"+getRandomNumber();
 		String content = "content"+getRandomNumber();
-		String newquestion = "newquestion"+getRandomNumber();
-		String newcontent ="newcontent"+getRandomNumber();
 
 		info("Test 2: Add a question");
 		/*Step Number: 1
@@ -79,16 +71,58 @@ AnswerHomePage answerHomePage;
 		$(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
 		$(ELEMENT_OK_BUTTON_LINK).click();
 		$(byText(question)).should(Condition.exist);
-		info("Test 3: Edit a question");
+
+		info("Test 4: Delete a question");
 		/*Step number: 2
-		 *Step Name: Edit a question
+		 *Step Name: Delete a question
 		 *Step Description: 
-			- Right click on this question, select Edit
-			- Put values into fields
-			- Save
+			- Right click on a question and select Delete
 		 *Input Data: 
 
 		 *Expected Outcome: 
+			- Question is deleted and disappear in Answers page*/
+		questionManagement.deleteQuestion(question);
+	}
+
+	/**.
+	 * Case ID:116829.
+	 * Test Case Name: Edit a question.
+	 */
+	@Test
+	public  void test_03EditAQuestion() {
+		String question = "question"+getRandomNumber();
+		String content = "content"+getRandomNumber();
+		String newquestion = "newquestion"+getRandomNumber();
+		String newcontent ="newcontent"+getRandomNumber();
+
+		info("Test 2: Add a question");
+		/*Step Number: 1
+		 *Step Name: Add a question
+		 *Step Description:
+			- Select 1 category and click on Submit question
+			- Put values
+			- Save
+		 *Input Data:
+
+		 *Expected Outcome:
+			- Question is added new and shown in selected category*/
+		homePagePlatform.goToAnswer();
+		questionManagement.goToSubmitQuestion();
+		questionManagement.inputDataToQuestionForm(question, content, null, "");
+		//click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		$(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
+		$(ELEMENT_OK_BUTTON_LINK).click();
+		$(byText(question)).should(Condition.exist);
+		info("Test 3: Edit a question");
+		/*Step number: 2
+		 *Step Name: Edit a question
+		 *Step Description:
+			- Right click on this question, select Edit
+			- Put values into fields
+			- Save
+		 *Input Data:
+
+		 *Expected Outcome:
 			- Edit Question form is shown
 			- This question is updated successfully.*/
 		questionManagement.goToActionOfQuestionByRightClick(question, QuestionManagement.actionQuestionOption.EDIT);
@@ -100,13 +134,56 @@ AnswerHomePage answerHomePage;
 		info("Test 4: Delete a question");
 		/*Step number: 2
 		 *Step Name: Delete a question
-		 *Step Description: 
+		 *Step Description:
 			- Right click on a question and select Delete
-		 *Input Data: 
+		 *Input Data:
 
-		 *Expected Outcome: 
+		 *Expected Outcome:
 			- Question is deleted and disappear in Answers page*/
 		questionManagement.deleteQuestion(newquestion);
+	}
+
+	/**
+	 * Case ID:116830.
+	 * Test Case Name: Delete a question.
+	 * Pre-Condition:
+	 * Post-Condition:
+	 */
+	@Test
+	public  void test04_DeleteAQuestion() {
+		String question = "question"+getRandomNumber();
+		String content = "content"+getRandomNumber();
+
+
+		info("Test 2: Add a question");
+		/*Step Number: 1
+		 *Step Name: Add a question
+		 *Step Description:
+			- Select 1 category and click on Submit question
+			- Put values
+			- Save
+		 *Input Data:
+
+		 *Expected Outcome:
+			- Question is added new and shown in selected category*/
+		homePagePlatform.goToAnswer();
+		questionManagement.goToSubmitQuestion();
+		questionManagement.inputDataToQuestionForm(question, content, null, "");
+		//click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		$(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
+		$(ELEMENT_OK_BUTTON_LINK).click();
+		$(byText(question)).should(Condition.exist);
+
+		info("Test 4: Delete a question");
+		/*Step number: 2
+		 *Step Name: Delete a question
+		 *Step Description:
+			- Right click on a question and select Delete
+		 *Input Data:
+
+		 *Expected Outcome:
+			- Question is deleted and disappear in Answers page*/
+		questionManagement.deleteQuestion(question);
 	}
 
 	/**
