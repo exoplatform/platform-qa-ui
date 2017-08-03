@@ -163,7 +163,6 @@ public class QuestionManagement {
     case DELETE:
       info("DELETE question");
       $(ELEMENT_QUESTION_DELETE_BUTTON).click();
-      $(ELEMENT_QUESTION_DELETE_FORM).waitUntil(Condition.disappears,Configuration.timeout);
       break;
     case MOVE:
       info("MOVE question");
