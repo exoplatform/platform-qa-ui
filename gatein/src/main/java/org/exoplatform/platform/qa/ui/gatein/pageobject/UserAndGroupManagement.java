@@ -242,8 +242,8 @@ public class UserAndGroupManagement {
    *
    * @param userNames name of user you want to add to group
    * @param memberShip membership of user in group
-   * @param select (True: if you want to search user by selecting user / False:
-   *          If you want to search user by typing user name)
+   * @param select (True: if you want to search user by selecting user / False: If
+   *          you want to search user by typing user name)
    * @param verify (True: if you want to verify new user added successfully)
    */
   public void addUsersToGroup(String userNames, String memberShip, boolean select, boolean verify) {
@@ -551,8 +551,8 @@ public class UserAndGroupManagement {
    *
    * @param user (Can be: User name, Last name, First name or Email of the user
    *          you want to search)
-   * @param searchOption (Can be: User name, Last name, First name or Email
-   *          option corresponding with information you input in "Search")
+   * @param searchOption (Can be: User name, Last name, First name or Email option
+   *          corresponding with information you input in "Search")
    */
   public void searchUser(String user, String searchOption) {
     info("--Search user " + user + "--");
@@ -628,8 +628,8 @@ public class UserAndGroupManagement {
    * Enable or disable a User
    *
    * @param userName is username of the user
-   * @param isEnabled = true if want to check the user that is enabled = false
-   *          if want to check the user that is disabled
+   * @param isEnabled = true if want to check the user that is enabled = false if
+   *          want to check the user that is disabled
    */
   public void enableDisableUser(String userName, boolean isEnabled) {
     info("---Enable a user---");

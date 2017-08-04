@@ -335,6 +335,7 @@ public class ContentAdministration {
    */
   public void deleteDrives(String name) {
     $(byText(name)).parent().parent().find((ELEMENT_BTN_DELETE_DRIVE)).click();
+
     alert.acceptAlert();
     // evt.waitForElementNotPresent(By.xpath(ELEMENT_ECM_EXPLORER_DRIVES_DELETE_LIST.replace("{$name}",
     // name)));

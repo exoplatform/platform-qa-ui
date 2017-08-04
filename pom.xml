@@ -46,6 +46,7 @@
     <module>gatein</module>
     <module>platform</module>
     <module>chat</module>
+    <module>task</module>
   </modules>
   <scm>
     <connection>scm:git:git://github.com/exoplatform/platform-qa-ui.git</connection>

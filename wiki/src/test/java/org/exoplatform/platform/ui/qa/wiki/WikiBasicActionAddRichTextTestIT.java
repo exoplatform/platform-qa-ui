@@ -66,15 +66,15 @@ public class WikiBasicActionAddRichTextTestIT extends Base {
     info("Test 1: Add a page with link wiki page existed");
     /*
      * Step Number: 1 Step Name: Step 1: Add a page with link wiki page Step
-     * Description: - Go to [Intranet] - -> [Wiki] - Click [Add Page] - ->
-     * [Blank Page] - Ensure the page is in the [Rich Text]editor - Input data
-     * valid for Title page and Page's content - Click [Link] in menu - Select
-     * [Wiki Page] - Select [All pages] tab - Choose a page in list and click
-     * [Select] - Input label and tooltip for link - Check or uncheck [Open in
-     * new window] - Click [Create Link] - Click [Save] icon in toolbar Input
-     * Data: Expected Outcome: - By default, the [Create Wiki page] is displayed
-     * in the [Rich Text] mode - A new page is added successful and displayed
-     * with properties - This page is listed with page containing the link
+     * Description: - Go to [Intranet] - -> [Wiki] - Click [Add Page] - -> [Blank
+     * Page] - Ensure the page is in the [Rich Text]editor - Input data valid for
+     * Title page and Page's content - Click [Link] in menu - Select [Wiki Page] -
+     * Select [All pages] tab - Choose a page in list and click [Select] - Input
+     * label and tooltip for link - Check or uncheck [Open in new window] - Click
+     * [Create Link] - Click [Save] icon in toolbar Input Data: Expected Outcome: -
+     * By default, the [Create Wiki page] is displayed in the [Rich Text] mode - A
+     * new page is added successful and displayed with properties - This page is
+     * listed with page containing the link
      */
 
     info("Create a wiki page 1");
@@ -97,6 +97,7 @@ public class WikiBasicActionAddRichTextTestIT extends Base {
     if ($(ELEMENT_CONTENT_WIKI_INPUT).is((Condition.exist))) {
       ELEMENT_BUTTON_WIKI_RITCH_TEXT.click();
     }
+
     richTextEditor.addSimplePage(title2, content2);
     richTextEditor.goToWikiPageLink();
     richTextEditor.insertExistWikiPageLink(title1, label, tooltip, RichTextEditor.wikiPageLinkTab.All_pages);
@@ -129,14 +130,13 @@ public class WikiBasicActionAddRichTextTestIT extends Base {
     /*
      * Step Number: 1 Step Name: Step 1: Add web page Step Description: - Go to
      * [Intranet] - -> [Wiki] - Click Click [Add Page] - -> [Blank Page] - Input
-     * data valid for Title page and Page's content -Click [Link] in menu -
-     * Select [Web Page...] - Type the address of the web page to create the
-     * link to. (ex: www.google.com) - Input label and tooltip for link - Check
-     * or uncheck [Open in new window] - Click [Create Link] - Click [Save] icon
-     * in toolbar Input Data: Expected Outcome: - By default, the [Create Wiki
-     * page] is displayed in the [Rich Text] mode - A new page is added
-     * successfully and displayed with properties - This page is listed with
-     * page containing the link
+     * data valid for Title page and Page's content -Click [Link] in menu - Select
+     * [Web Page...] - Type the address of the web page to create the link to. (ex:
+     * www.google.com) - Input label and tooltip for link - Check or uncheck [Open
+     * in new window] - Click [Create Link] - Click [Save] icon in toolbar Input
+     * Data: Expected Outcome: - By default, the [Create Wiki page] is displayed in
+     * the [Rich Text] mode - A new page is added successfully and displayed with
+     * properties - This page is listed with page containing the link
      */
     info("Create a wiki page 2");
     String title1 = "title1" + getRandomNumber();
@@ -156,8 +156,7 @@ public class WikiBasicActionAddRichTextTestIT extends Base {
 
     /*
      * Step number: 2 Step Name: Step 2: View link after add Step Description: -
-     * Click on name of link Input Data: Expected Outcome: - Show page
-     * successfully
+     * Click on name of link Input Data: Expected Outcome: - Show page successfully
      */
     info("Page is shown successfully");
     wikiHomePage.goToAPage(title1);

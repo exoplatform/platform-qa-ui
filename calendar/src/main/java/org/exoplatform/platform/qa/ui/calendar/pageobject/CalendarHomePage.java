@@ -1,6 +1,5 @@
 package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
-import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
@@ -119,8 +118,10 @@ public class CalendarHomePage {
     if (date != null && date != "") {
       switch (optionDay) {
       case DETAILTIME:
+        ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name))
+                                            .waitUntil(Condition.appears, Configuration.timeout)
+                                            .contextClick();
 
-        ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name)).waitUntil(Condition.appears, Configuration.timeout).contextClick();
         break;
       case ALLDAY:
         evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ALL_DAY.replace("$name", name).replace("$date", date));
@@ -953,8 +954,8 @@ public class CalendarHomePage {
    * @param date date of event: format (MMM dd yyyy)
    * @param opParams opParams[0]: false - Don't verify confirm message to delete
    *          task/event true - Verify confirm message to delete task/event
-   *          opParms[1]: true - Confirm message of event false - Confirm
-   *          message of task
+   *          opParms[1]: true - Confirm message of event false - Confirm message
+   *          of task
    */
   public void deleteEventTask(String name, selectViewOption view, selectDayOption optionDay, String date, Object... opParams) {
     boolean isVerify = (Boolean) (opParams.length > 0 ? opParams[0] : false);
@@ -965,6 +966,7 @@ public class CalendarHomePage {
     $(ELEMENT_CONTEXT_MENU_DELETE).click();
     if (isVerify) {
       if (isEvent) {
+        $(ELEMENT_CONFIRM_DELETE_EVENT_MSG).waitUntil(Condition.appears, Configuration.timeout);
         alert.verifyAlertMessage(ELEMENT_CONFIRM_DELETE_EVENT_MSG);
         $(ELEMENT_CONFIRM_DELETE_EVENT_MSG).waitUntil(Condition.disappears, Configuration.timeout);
       } else
@@ -974,7 +976,7 @@ public class CalendarHomePage {
       verifyIsNotPresentEventTask(name, view, optionDay);
     } else
       button.yes();
-    $(byText(name)).waitUntil(Condition.disappears,Configuration.timeout);
+    $(byText(name)).waitUntil(Condition.disappears, Configuration.timeout);
   }
 
   /**
@@ -1060,9 +1062,9 @@ public class CalendarHomePage {
    * check on check boxes of recurring event that have same name in Monthview
    * 
    * @param name the name of recurring event
-   * @param number the event's number of recurring event as first event =1,
-   *          second event =2,.. Example: number="2". This means that second
-   *          recurring event will be checked
+   * @param number the event's number of recurring event as first event =1, second
+   *          event =2,.. Example: number="2". This means that second recurring
+   *          event will be checked
    * @param opt the summary of recurring event instances of the same series that
    *          will be checked. Example:opt=3. This means that 3 recurring events
    *          will be checked

@@ -1,22 +1,27 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.taskmanagement;
+package org.exoplatform.platform.qa.ui.task.pageobject;
 
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 /**
  * This class will define actions about management tasks
  */
 
-public class ManagementProjects {
+public class ProjectsManagement {
   private final TestBase       testBase;
 
   private ElementEventTestBase evt;
 
-  public ManagementProjects(TestBase testBase) {
+  public ProjectsManagement(TestBase testBase) {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
   }
@@ -30,7 +35,7 @@ public class ManagementProjects {
 
   /**
    * Select an option in Context Menu of Projects
-   * 
+   *
    * @param op is an option in Context Menu as:Add Project, Show hidden project.
    */
   public void selectOpContMenuProject(optionContMenuProject op) {
@@ -50,7 +55,7 @@ public class ManagementProjects {
 
   /**
    * Open Context menu of a given project
-   * 
+   *
    * @param project is a project's name in the list
    */
   public void goToContMenuGivenProject(String project) {
@@ -59,7 +64,7 @@ public class ManagementProjects {
 
   /**
    * Select an option in Context Menu of a Given Project in Project list
-   * 
+   *
    * @param project is project's name of a given project in the list
    * @param op is an option in Context Menu as Edit,Share,Clone,...
    */
@@ -92,10 +97,10 @@ public class ManagementProjects {
 
   /**
    * Change color of a given project
-   * 
+   *
    * @param project is project's name
-   * @param color is a color in color list as pink, red,sky_blue,... these
-   *          colors will be read from ColorDatabase.java file
+   * @param color is a color in color list as pink, red,sky_blue,... these colors
+   *          will be read from ColorDatabase.java file
    */
   public void selectColor(String project, String color) {
     goToContMenuGivenProject(project);
@@ -106,21 +111,23 @@ public class ManagementProjects {
 
   /**
    * Add a new project
-   * 
+   *
    * @param title is project's name
    * @param des is project's description
    * @param enableCalendar = true if want to create a task calendar for the
    *          project in Calendar application = false if don't want.
    */
   public void addProject(String title, String des, boolean enableCalendar) {
+    ELEMENT_PROJECT_ICON_ADD_PROJECT.click();
+    ELEMENT_ADD_PROJECT.click();
     info("Create a new project");
     if (title != null || title != "") {
       info("Input title");
-      evt.type(ELEMENT_ADD_PROJECT_TITLE, title, true);
+      $(ELEMENT_ADD_PROJECT_TITLE).setValue(title);
     }
     if (des != null || des != "") {
       info("Input description");
-      evt.type(ELEMENT_ADD_PROJECT_DES, des, true);
+      // $(ELEMENT_ADD_PROJECT_DES).setValue(des);
     }
     if (enableCalendar) {
       info("Enable Calendar intergration");
@@ -129,7 +136,7 @@ public class ManagementProjects {
       info("Disable Calendar intergration");
       evt.uncheck(ELEMETN_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX, 2);
     }
-
+    ELEMENT_SAVE_PROJECT.click();
   }
 
   /**
@@ -150,7 +157,7 @@ public class ManagementProjects {
 
   /**
    * Open a project
-   * 
+   *
    * @param projectPath is project's names as Project1/sub_Project1
    */
   public void selectProject(String projectPath) {
@@ -161,12 +168,11 @@ public class ManagementProjects {
       evt.click(ELEMENT_LEFT_PANEL_PROJECT_NAME.replace("$project", project));
     }
 
-
   }
 
   /**
    * Edit a project
-   * 
+   *
    * @param projectPath is project's names as Project1/sub_Project1
    * @param title is a new project's title to edit
    * @param des is a new description of the project to edit
@@ -176,38 +182,38 @@ public class ManagementProjects {
    *          opt[1]==true if want to enable calendar integration >0 and <1 if
    *          want to disable or uncheck calendar integration
    */
-  public void editProject(String projectPath, String title, String des, boolean... opt) {
-    selectProject(projectPath);
-    if (title != null || title != "") {
+  public void editProject(String projectPath, String title, String newTitle, String des, boolean... opt) {
+    $(byText(projectPath)).click();
+    $(byText(projectPath)).parent().parent().find(ELEMENT_ICON_PROJECT).click();
+    ELEMENT_MENU_PROJECT.waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_EDIT_PROJECT_OPTION.click();
+    if (title != null && title != "") {
       info("Input title");
-      if (opt.length > 0 && opt[0] == true)
-        evt.type(ELEMENT_ADD_PROJECT_TITLE, title, false);// Input a new title
-                                                          // with keeping old
-                                                          // title
-      else
-        evt.type(ELEMENT_ADD_PROJECT_TITLE, title, true);// Input a new title
-                                                         // with clearing all
-                                                         // old title
+      ELEMENT_POPUB_EDIT_PROJECT.find(byText(title)).click();
+      // Input a new title with clearing an old title
+      ELEMENT_EDIT_PROJECT.setValue(newTitle).pressEnter();
     }
-    if (des != null || des != "") {
+    if (des != null && des != "") {
       info("Input description");
-      if (opt.length > 0 && opt[0] == true)
-        evt.type(ELEMENT_ADD_PROJECT_DES, des, false);// Input a new description
-                                                      // with keeping old
-                                                      // description
-      else
-        evt.type(ELEMENT_ADD_PROJECT_DES, des, true);// Input a new description
-                                                     // with clearing all old
-                                                     // description
+      $(byClassName("prjDescription")).click();
     }
 
-    if (opt.length > 1 && opt[1] == true) {
+    if (opt.length >= 1 && opt[0] == true) {
       info("Enable Calendar intergration");
-      evt.check(ELEMETN_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX, 2);
+      ELEMETN_EDIT_PROJECT_ENABLE_CALENDAR_CHECKBOX.click();
     } else {
       info("Disable Calendar intergration");
       evt.uncheck(ELEMETN_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX, 2);
     }
+    saveEditProject();
+  }
+
+  public void deleteProject(String title) {
+    $(byText(title)).click();
+    $(byText(title)).parent().parent().find(ELEMENT_ICON_PROJECT).click();
+    ELEMENT_DELETE_PROJECT_OPTION.click();
+    ELEMENT_CONFIRM_DELETE.click();
+
   }
 
   /**
@@ -215,6 +221,7 @@ public class ManagementProjects {
    */
   public void saveEditProject() {
     info("Click on Save button");
+    ELEMENT_BUTTON_SAVE.click();
   }
 
   /**
@@ -226,7 +233,7 @@ public class ManagementProjects {
 
   /**
    * Change Project Parent
-   * 
+   *
    * @param project
    */
   public void changeParentProject(String project) {

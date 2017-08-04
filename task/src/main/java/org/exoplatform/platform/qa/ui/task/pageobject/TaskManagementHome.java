@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.taskmanagement;
+package org.exoplatform.platform.qa.ui.task.pageobject;
 
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 

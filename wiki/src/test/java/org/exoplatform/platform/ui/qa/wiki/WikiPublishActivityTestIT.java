@@ -59,6 +59,7 @@ public class WikiPublishActivityTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
+  @Tag("test")
   public void test01_CreateNewWikiPage() {
     info("Test 01: Create new wiki page");
     String title = "title" + getRandomNumber();

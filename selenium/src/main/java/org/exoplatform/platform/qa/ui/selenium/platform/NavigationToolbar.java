@@ -20,29 +20,25 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
-import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_PAGE_CREATION_WIZARD;
-import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_ADD_NAVIGATION_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_MANAGESITES_TITLE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_PAGE_CREATION_WIZARD;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator;
-import org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator;
 import org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selectors.*;
 
 public class NavigationToolbar {
 
@@ -74,7 +70,7 @@ public class NavigationToolbar {
     $(ELEMENT_LINK_EDIT).click();
     $(ELEMENT_MENU_PAGE_LINK).hover();
     $(ELEMENT_MENU_ADD_PAGE_LINK).click();
-    $(ELEMENT_PAGE_CREATION_WIZARD).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_PAGE_CREATION_WIZARD).waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**
@@ -83,20 +79,19 @@ public class NavigationToolbar {
   public void goToPotalSites() {
     info("--Go to Portal-->Sites--");
 
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
 
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
 
-    $(ELEMENT_ADMINISTRATION_PORTAL).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_ADMINISTRATION_PORTAL).waitUntil(Condition.appears, Configuration.timeout);
 
     evt.mouseOver(ELEMENT_ADMINISTRATION_PORTAL, true);
 
-    $(ELEMENT_ADMINISTRATION_PORTAL_SITES).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_ADMINISTRATION_PORTAL_SITES).waitUntil(Condition.appears, Configuration.timeout);
 
     $(ELEMENT_ADMINISTRATION_PORTAL_SITES).click();
 
-
-    $(ELEMENT_MANAGESITES_TITLE).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_MANAGESITES_TITLE).waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**
@@ -107,21 +102,22 @@ public class NavigationToolbar {
     evt.waitElementAndTryGetElement(ELEMENT_TOOLBAR_ADMINISTRATION);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     $(ELEMENT_ADMINISTRATION_PORTAL).hover();
-    $(ELEMENT_ADMINISTRATION_PORTAL_GROUP_SITES).waitUntil(Condition.appears,10000);
+    $(ELEMENT_ADMINISTRATION_PORTAL_GROUP_SITES).waitUntil(Condition.appears, 10000);
     $(ELEMENT_ADMINISTRATION_PORTAL_GROUP_SITES).click();
-    $(byText("Add Navigation")).should(Condition.exist);  }
+    $(byText("Add Navigation")).should(Condition.exist);
+  }
 
   /**
    * Go to Manage Sites page: administration-->Portal->Pages
    */
   public void goToPotalPages() {
     info("-- Go to Page Management page --");
-    if ($(byText("No result found.")).is(Condition.exist)){
+    if ($(byText("No result found.")).is(Condition.exist)) {
       $(byText("OK")).click();
     }
-   $(ELEMENT_LINK_SETUP).click();
-   $(ELEMENT_ADMINISTRATION_PORTAL).waitUntil(Condition.appears, Configuration.timeout);
-   $(ELEMENT_ADMINISTRATION_PORTAL).click();
+    $(ELEMENT_LINK_SETUP).click();
+    $(ELEMENT_ADMINISTRATION_PORTAL).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_ADMINISTRATION_PORTAL).click();
     info("Page Managements is shown successfully");
 
   }
@@ -140,8 +136,8 @@ public class NavigationToolbar {
   }
 
   /**
-   * function: Go to Users and Group management (administration --> Community
-   * --> Manage Community)
+   * function: Go to Users and Group management (administration --> Community -->
+   * Manage Community)
    */
   public void goToCommunityManagement() {
     info("--Go to Users and groups management--");
@@ -150,7 +146,8 @@ public class NavigationToolbar {
     if (evt.waitForAndGetElement(ELEMENT_GROUP_AND_ROLE_LINK, 2000, 0) != null)
       evt.click(ELEMENT_GROUP_AND_ROLE_LINK);
     else {
-      testBase.getExoWebDriver().getWebDriver()
+      testBase.getExoWebDriver()
+              .getWebDriver()
               .get(testBase.getExoWebDriver().getBaseUrl() + "/g/:platform:administrators/administration/management");
     }
 
@@ -164,34 +161,34 @@ public class NavigationToolbar {
   public void selectALinkOfUserMenu(specifUserToolBar link) {
     openUserMenu();
     switch (link) {
-      case MY_PROFILE:
-        evt.click(ELEMENT_MY_PROFILE_LINK);
+    case MY_PROFILE:
+      evt.click(ELEMENT_MY_PROFILE_LINK);
 
-        evt.waitForAndGetElement(SocialLocator.ELEMENT_MY_PROFILE_TAB, 3000, 1);
-        break;
-      case MY_ACTIVITY:
-        info("Go to Activities of User");
-        $(ELEMENT_ACTIVITIES_LINK).waitUntil(Condition.appears,Configuration.timeout);
-        $(ELEMENT_ACTIVITIES_LINK).click();
-        $(ELEMENT_ACTIVITIES_PORTLET).waitUntil(Condition.appears,Configuration.timeout);
-        break;
-      case MY_CONNECTIONS:
-        evt.click(ELEMENT_MY_CONNECTION_LINK);
-        break;
-      case MY_WIKI:
-        evt.click(ELEMENT_MY_WIKI_LINK);
-        break;
-      case MY_DASHBOARD:
-        evt.click(ELEMENT_MY_DASHBOARD_LINK);
-        break;
-      case MY_NOTIFICATION:
-        evt.click(ELEMENT_MY_NOTIFICATIONS_LINK);
-        break;
-      case SETTINGS:
-        evt.click(ELEMENT_MY_SETTINGS_LINK);
-        break;
-      case CHANGE_LANGUAGE:
-        break;
+      evt.waitForAndGetElement(SocialLocator.ELEMENT_MY_PROFILE_TAB, 3000, 1);
+      break;
+    case MY_ACTIVITY:
+      info("Go to Activities of User");
+      $(ELEMENT_ACTIVITIES_LINK).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_ACTIVITIES_LINK).click();
+      $(ELEMENT_ACTIVITIES_PORTLET).waitUntil(Condition.appears, Configuration.timeout);
+      break;
+    case MY_CONNECTIONS:
+      evt.click(ELEMENT_MY_CONNECTION_LINK);
+      break;
+    case MY_WIKI:
+      evt.click(ELEMENT_MY_WIKI_LINK);
+      break;
+    case MY_DASHBOARD:
+      evt.click(ELEMENT_MY_DASHBOARD_LINK);
+      break;
+    case MY_NOTIFICATION:
+      evt.click(ELEMENT_MY_NOTIFICATIONS_LINK);
+      break;
+    case SETTINGS:
+      evt.click(ELEMENT_MY_SETTINGS_LINK);
+      break;
+    case CHANGE_LANGUAGE:
+      break;
     }
   }
 
@@ -211,13 +208,13 @@ public class NavigationToolbar {
   public void goToSiteExplorer() {
     info("-- Go to site explorer home page --");
 
-      if (testBase.getExoWebDriver().isIEDriver()) {
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,Configuration.timeout);
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-      } else
-       $(ELEMENT_LINK_SETUP).click();
-        info("Element " + ELEMENT_MENU_CONTENT_LINK + "... is displayed");
-        $(ELEMENT_MENU_CONTENT_LINK).click();
+    if (testBase.getExoWebDriver().isIEDriver()) {
+      $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    } else
+      $(ELEMENT_LINK_SETUP).click();
+    info("Element " + ELEMENT_MENU_CONTENT_LINK + "... is displayed");
+    $(ELEMENT_MENU_CONTENT_LINK).click();
 
     info("Site Explorer is shown successfully");
   }
@@ -281,7 +278,7 @@ public class NavigationToolbar {
     $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[3]/a")).hover();
-    ELEMENT_LINK_CONTENT_ADMIN.waitUntil(Condition.appears,Configuration.timeout);
+    ELEMENT_LINK_CONTENT_ADMIN.waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_LINK_CONTENT_ADMIN.click();
   }
 
@@ -365,9 +362,9 @@ public class NavigationToolbar {
    */
   public void goToAddPoll(String location, String forum) {
     info("Go to add poll from tootlbar");
-    $(ELEMENT_ADD_TOOTLBAR).waitUntil(Condition.appears,Configuration.timeout).click();
+    $(ELEMENT_ADD_TOOTLBAR).waitUntil(Condition.appears, Configuration.timeout).click();
     info("Click on Poll link");
-    $(ELEMENT_ADD_POOL_TOOLBAR).waitUntil(Condition.appears,Configuration.timeout).click();
+    $(ELEMENT_ADD_POOL_TOOLBAR).waitUntil(Condition.appears, Configuration.timeout).click();
     if (location != "" && location != null) {
       info("Set location for the poll");
       $(ELEMENT_ADD_POLL_SET_LOCATION).click();
@@ -376,10 +373,10 @@ public class NavigationToolbar {
     $(ELEMENT_NEXT_BUTTON).click();
 
     info("Select a forum for poll");
-    $(ELEMENT_SELECT_FORUM_COMBOBOX).waitUntil(Condition.appears,Configuration.timeout).click();
+    $(ELEMENT_SELECT_FORUM_COMBOBOX).waitUntil(Condition.appears, Configuration.timeout).click();
     $(byText(forum)).click();
     info("Click on next button");
-    $(ELEMENT_NEXT_BUTTON).waitUntil(Condition.not(Condition.disabled),Configuration.timeout);
+    $(ELEMENT_NEXT_BUTTON).waitUntil(Condition.not(Condition.disabled), Configuration.timeout);
     $(ELEMENT_NEXT_BUTTON).click();
 
   }
@@ -400,11 +397,12 @@ public class NavigationToolbar {
     info("evt.click on Next button");
     $(ELEMENT_NEXT_BUTTON).click();
     info("Select a forum for topic");
-    if(ELEMENT_SELECT_FORUM_COMBOBOX.is(Condition.exist)){
-    ELEMENT_SELECT_FORUM_COMBOBOX.waitUntil(Condition.appears,Configuration.timeout).click();
-    $(byText(forum)).waitUntil(Condition.appears,Configuration.timeout).click();
-    info("Click on next button");
-    $(ELEMENT_NEXT_BUTTON).click();}
+    if (ELEMENT_SELECT_FORUM_COMBOBOX.is(Condition.exist)) {
+      ELEMENT_SELECT_FORUM_COMBOBOX.waitUntil(Condition.appears, Configuration.timeout).click();
+      $(byText(forum)).waitUntil(Condition.appears, Configuration.timeout).click();
+      info("Click on next button");
+      $(ELEMENT_NEXT_BUTTON).click();
+    }
 
   }
 
@@ -417,20 +415,22 @@ public class NavigationToolbar {
    * @param to
    * @param calendar
    */
-  public void goToAddEvent( String name, String from, String to, String calendar) {
+  public void goToAddEvent(String name, String from, String to, String calendar) {
     $(ELEMENT_ADD_TOOTLBAR).click();
     $(ELEMENT_ADD_EVENT_CLASS_TOOLBAR).click();
 
     $(ELEMENT_ADD_TITLE).setValue(name);
     $(ELEMENT_SAVE_BUTTON).click();
   }
-public void gotoAddTask(String name){
-  $(ELEMENT_ADD_TOOTLBAR).click();
-  ELEMENT_ADD_TASK_CLASS_TOOLBAR.click();
-  ELEMENT_TASK_ADD_TITLE.setValue(name);
-  ELEMENT_TASK_BUTTON_ADD.click();
 
-}
+  public void gotoAddTask(String name) {
+    $(ELEMENT_ADD_TOOTLBAR).click();
+    ELEMENT_ADD_TASK_CLASS_TOOLBAR.click();
+    ELEMENT_TASK_ADD_TITLE.setValue(name);
+    ELEMENT_TASK_BUTTON_ADD.click();
+
+  }
+
   /**
    * Go to upload file fron the toolbar
    *
@@ -457,9 +457,11 @@ public void gotoAddTask(String name){
     testBase.getExoWebDriver().getWebDriver().switchTo().frame(frame);
     info(testBase.getAbsoluteFilePath(linkFile));
 
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
+    ((JavascriptExecutor) testBase.getExoWebDriver()
+                                  .getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
 
-    testBase.getExoWebDriver().getWebDriver()
+    testBase.getExoWebDriver()
+            .getWebDriver()
             .findElement(ELEMENT_ACTIVITY_UPLOAD_POPUP_UPLOAD_BUTTON)
             .sendKeys(testBase.getAbsoluteFilePath(linkFile));
 
@@ -551,22 +553,23 @@ public void gotoAddTask(String name){
   public void goToAddUser() {
     info("Go to add user page");
 
-
     info("Click on administration icon");
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,10000);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-    ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears,10000);
+    ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, 10000);
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
     ELEMENT_ADMINISTRATION_ADD_USERS.click();
   }
-public void goToManageCommunity(){
-  $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,10000);
-  $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-  ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears,10000);
-  ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-  ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.click();
 
-}
+  public void goToManageCommunity() {
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, 10000);
+    ELEMENT_ADMINISTRATION_COMMUNITY.hover();
+    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.click();
+
+  }
+
   /**
    * Open Notification list
    */
@@ -682,8 +685,8 @@ public void goToManageCommunity(){
     info("verify edit page permission");
     /*
      * @FIXME
-     * portMg.openPage(testBase.getExoWebDriver().getBaseUrl()+"/intranet/home/"+title
-     * );
+     * portMg.openPage(testBase.getExoWebDriver().getBaseUrl()+"/intranet/home/"+
+     * title );
      */
     if (isEnable) {
       evt.click(ELEMENT_LINK_EDIT, 0, true);

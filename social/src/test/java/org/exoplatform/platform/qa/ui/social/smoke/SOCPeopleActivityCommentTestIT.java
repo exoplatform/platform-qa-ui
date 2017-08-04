@@ -6,7 +6,6 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_COMMENT_BUTTON;
-
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_COMMENT_BLOC;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DELETE_POPUP_OK;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_ADD_EVENT_CLASS_TOOLBAR;
@@ -108,7 +107,6 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     $(byId("cke_CommentTextarea" + id)).waitUntil(Condition.appears, Configuration.timeout).click();
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
     // click on the button comment
-
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter();
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears,Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
@@ -264,10 +262,7 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     $(byId("cke_CommentTextarea" + id)).waitUntil(Condition.appears, Configuration.timeout).click();
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
 // click on the button comment
-
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter();
-
-
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
     $(ELEMENT_ADD_TOOTLBAR).click();
@@ -277,7 +272,7 @@ public class SOCPeopleActivityCommentTestIT extends Base {
      * deleting Expected Outcome: This comment is deleted.
      */
     // scroll up
-    executeJavaScript("window.scrollBy(0,-250);", "");
+    executeJavaScript("window.scrollBy(0,-550)");
     // hover on the comment to appear the delete button
     $(byId(ELEMENT_COMMENT_BLOC.replace("{id}",id))).hover();
     // the id of the comment is id of the activity+1
