@@ -60,9 +60,6 @@ public final class HomePageLocator {
   public static final By              ELEMENT_DOCUMENTS_LINK_PLF                                           =
                                                                  By.xpath("//*[@data-original-title='Documents']");
 
-
-  
-
   public static final By              ELEMENT_HOME_LINK_PLF                                                =
                                                             By.xpath("//*[@data-original-title='Home']");
 

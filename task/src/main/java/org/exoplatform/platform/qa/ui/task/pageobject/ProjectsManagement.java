@@ -1,25 +1,27 @@
 package org.exoplatform.platform.qa.ui.task.pageobject;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 /**
  * This class will define actions about management tasks
  */
 
-public class ManagementProjects {
+public class ProjectsManagement {
   private final TestBase       testBase;
 
   private ElementEventTestBase evt;
 
-  public ManagementProjects(TestBase testBase) {
+  public ProjectsManagement(TestBase testBase) {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
   }
@@ -39,15 +41,15 @@ public class ManagementProjects {
   public void selectOpContMenuProject(optionContMenuProject op) {
     goToContMenuProject();
     switch (op) {
-      case Add_Project:
-        info("Select Add Project option");
-        break;
-      case Show_Hidden_Project:
-        info("Select Show hide Project");
-        break;
-      default:
-        info("No option in the list. Please select correct option.");
-        break;
+    case Add_Project:
+      info("Select Add Project option");
+      break;
+    case Show_Hidden_Project:
+      info("Select Show hide Project");
+      break;
+    default:
+      info("No option in the list. Please select correct option.");
+      break;
     }
   }
 
@@ -69,27 +71,27 @@ public class ManagementProjects {
   public void selectOpContMenuGivenProject(String project, optionContMenuGivenProject op) {
     goToContMenuGivenProject(project);
     switch (op) {
-      case Edit:
-        info("Select Edit option");
-        break;
-      case Share:
-        info("Select Share option");
-        break;
-      case Clone:
-        info("Select Clone option");
-        break;
-      case Hide:
-        info("Select Hide option");
-        break;
-      case Delete:
-        info("Select Delete option");
-        break;
-      case Add_Project:
-        info("Select Add Project option");
-        break;
-      default:
-        info("No option in the list. Please select correct option");
-        break;
+    case Edit:
+      info("Select Edit option");
+      break;
+    case Share:
+      info("Select Share option");
+      break;
+    case Clone:
+      info("Select Clone option");
+      break;
+    case Hide:
+      info("Select Hide option");
+      break;
+    case Delete:
+      info("Select Delete option");
+      break;
+    case Add_Project:
+      info("Select Add Project option");
+      break;
+    default:
+      info("No option in the list. Please select correct option");
+      break;
     }
   }
 
@@ -97,8 +99,8 @@ public class ManagementProjects {
    * Change color of a given project
    *
    * @param project is project's name
-   * @param color is a color in color list as pink, red,sky_blue,... these
-   *          colors will be read from ColorDatabase.java file
+   * @param color is a color in color list as pink, red,sky_blue,... these colors
+   *          will be read from ColorDatabase.java file
    */
   public void selectColor(String project, String color) {
     goToContMenuGivenProject(project);
@@ -166,7 +168,6 @@ public class ManagementProjects {
       evt.click(ELEMENT_LEFT_PANEL_PROJECT_NAME.replace("$project", project));
     }
 
-
   }
 
   /**
@@ -181,17 +182,16 @@ public class ManagementProjects {
    *          opt[1]==true if want to enable calendar integration >0 and <1 if
    *          want to disable or uncheck calendar integration
    */
-  public void editProject(String projectPath, String title,String newTitle, String des, boolean... opt) {
+  public void editProject(String projectPath, String title, String newTitle, String des, boolean... opt) {
     $(byText(projectPath)).click();
     $(byText(projectPath)).parent().parent().find(ELEMENT_ICON_PROJECT).click();
-    ELEMENT_MENU_PROJECT.waitUntil(Condition.appears,Configuration.timeout);
+    ELEMENT_MENU_PROJECT.waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_EDIT_PROJECT_OPTION.click();
     if (title != null && title != "") {
       info("Input title");
       ELEMENT_POPUB_EDIT_PROJECT.find(byText(title)).click();
-      ELEMENT_EDIT_PROJECT.setValue(newTitle).pressEnter();// Input a new title
-      // with clearing all
-      // old title
+      // Input a new title with clearing an old title
+      ELEMENT_EDIT_PROJECT.setValue(newTitle).pressEnter();
     }
     if (des != null && des != "") {
       info("Input description");
@@ -207,12 +207,12 @@ public class ManagementProjects {
     }
     saveEditProject();
   }
-  public void deleteProject(String title){
+
+  public void deleteProject(String title) {
     $(byText(title)).click();
     $(byText(title)).parent().parent().find(ELEMENT_ICON_PROJECT).click();
     ELEMENT_DELETE_PROJECT_OPTION.click();
     ELEMENT_CONFIRM_DELETE.click();
-
 
   }
 

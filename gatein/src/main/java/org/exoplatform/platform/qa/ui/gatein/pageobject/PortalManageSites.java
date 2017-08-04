@@ -40,7 +40,6 @@ public class PortalManageSites {
 
     ELEMENT_BUTTON_EDIT_NAVIGATION.click();
 
-
     $(ELEMENT_NAVIGATION_MANAGEMENT_POPUP_TITLE).waitUntil(Condition.appears, Configuration.timeout);
   }
 
@@ -75,7 +74,6 @@ public class PortalManageSites {
   public void goToEditSiteConfig(String site) {
     info("Click on Edit Site Configuration button");
     evt.click(ELEMENT_MANAGESITES_EDIT_CONFIG_ICON.replace("${site}", site));
-
   }
 
   /**

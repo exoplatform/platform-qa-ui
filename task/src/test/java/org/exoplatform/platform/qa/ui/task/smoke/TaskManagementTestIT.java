@@ -15,8 +15,8 @@ import com.codeborne.selenide.Condition;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
-import org.exoplatform.platform.qa.ui.task.pageobject.ManagementLabels;
-import org.exoplatform.platform.qa.ui.task.pageobject.ManagementTasks;
+import org.exoplatform.platform.qa.ui.task.pageobject.LabelsManagement;
+import org.exoplatform.platform.qa.ui.task.pageobject.TasksManagement;
 
 /**
  * Created by exo on 08/06/17.
@@ -26,17 +26,17 @@ import org.exoplatform.platform.qa.ui.task.pageobject.ManagementTasks;
 public class TaskManagementTestIT extends Base {
   HomePagePlatform homePagePlatform;
 
-  ManagementTasks  managementTasks;
+  TasksManagement tasksManagement;
 
-  ManagementLabels managementLabels;
+  LabelsManagement labelsManagement;
 
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
 
     homePagePlatform = new HomePagePlatform(this);
-    managementTasks = new ManagementTasks(this);
-    managementLabels = new ManagementLabels(this);
+    tasksManagement = new TasksManagement(this);
+    labelsManagement = new LabelsManagement(this);
   }
 
   @Test
@@ -44,9 +44,10 @@ public class TaskManagementTestIT extends Base {
     String task = "task" + getRandomNumber();
     info("add task");
     homePagePlatform.goToTaskPage();
-    managementTasks.addTask(task);
+    tasksManagement.addTask(task);
+    $(byText(task)).should(Condition.exist);
     info("delete task");
-    managementTasks.deleteTask(task);
+    tasksManagement.deleteTask(task);
 
   }
   @Test
@@ -55,11 +56,12 @@ public class TaskManagementTestIT extends Base {
     String newTask = "newTask" + getRandomNumber();
     info("add task");
     homePagePlatform.goToTaskPage();
-    managementTasks.addTask(task);
+    tasksManagement.addTask(task);
     info("edit task");
-    managementTasks.editTask(task, newTask, "High");
+    tasksManagement.editTask(task, newTask, "High");
+    $(byText(newTask)).should(Condition.exist);
     info("delete task");
-    managementTasks.deleteTask(newTask);
+    tasksManagement.deleteTask(newTask);
 
   }
 
@@ -68,9 +70,10 @@ public class TaskManagementTestIT extends Base {
     String task = "task" + getRandomNumber();
     info("add task");
     homePagePlatform.goToTaskPage();
-    managementTasks.addTask(task);
+    tasksManagement.addTask(task);
     info("delete task");
-    managementTasks.deleteTask(task);
+    tasksManagement.deleteTask(task);
+    $(byText(task)).shouldNot(Condition.exist);
 
   }
   @Test
@@ -78,7 +81,7 @@ public class TaskManagementTestIT extends Base {
     String task = "task" + getRandomNumber();
     info("add task");
     homePagePlatform.goToTaskPage();
-    managementTasks.addTask(task);
+    tasksManagement.addTask(task);
     info("mark task as completed");
     ELEMENT_TASKS_LIST.find(byText(task)).parent().find(ELEMENT_ICON_MARK_AS_COMPLETED).click();
     $(byText(task)).shouldNot(Condition.exist);

@@ -41,7 +41,6 @@ public class HomePagePlatform {
     $(byClassName("notif-chat-open-link")).waitUntil(Condition.appears, Configuration.timeout).click();
   }
 
-
   /**
    * Go to Documents
    */
@@ -64,18 +63,17 @@ public class HomePagePlatform {
    */
   public void goToCalendarPage() {
     info("-- Go to calendar home page --");
-    ELEMENT_CALENDAR_LINK_PLF.waitUntil(Condition.appears,Configuration.timeout);
+    ELEMENT_CALENDAR_LINK_PLF.waitUntil(Condition.appears, Configuration.timeout);
     info("click on Calendar link");
     ELEMENT_CALENDAR_LINK_PLF.click();
     info("Verify that Calendar page is shown");
-    $(ELEMENT_CALENDAR_WORKING_PANEL).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_CALENDAR_WORKING_PANEL).waitUntil(Condition.appears, Configuration.timeout);
     info("The calendar page is shown successfully");
   }
 
   public void goToTaskPage() {
     ELEMENT_TASKS_LINK_PLF.waitUntil(Condition.appears, Configuration.timeout).click();
   }
-
 
   /**
    * Go to my spaces

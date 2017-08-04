@@ -1,10 +1,11 @@
 package org.exoplatform.platform.qa.ui.task.smoke;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
-import org.exoplatform.platform.qa.ui.task.pageobject.ManagementLabels;
-import org.exoplatform.platform.qa.ui.task.pageobject.ManagementTasks;
+import org.exoplatform.platform.qa.ui.task.pageobject.LabelsManagement;
+import org.exoplatform.platform.qa.ui.task.pageobject.TasksManagement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -22,69 +23,68 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 @Tag("task")
 public class LabelManagementTestIT extends Base {
 
-    ManagementLabels managementLabels;
+    LabelsManagement labelsManagement;
 
     HomePagePlatform homePagePlatform;
 
-    ManagementTasks managementTasks;
+    TasksManagement tasksManagement;
 
     @BeforeEach
     public void setupBeforeMethod() {
         info("Start setUpBeforeMethod");
 
         homePagePlatform = new HomePagePlatform(this);
-        managementLabels = new ManagementLabels(this);
-        managementTasks = new ManagementTasks(this);
+        labelsManagement = new LabelsManagement(this);
+        tasksManagement = new TasksManagement(this);
     }
 
     @Test
     public void test01_Add_Label() {
         String label = "label" + getRandomNumber();
-        info("add task");
         homePagePlatform.goToTaskPage();
         info("Add label");
-        managementLabels.addLabel(label);
-       ;
+        labelsManagement.addLabel(label);
+        $(byText(label)).should(Condition.exist);
         info("delete label");
-        managementLabels.deleteLabel(label);
+        labelsManagement.deleteLabel(label);
     }
     @Test
     public void test02_Edit_Label() {
         String label = "label" + getRandomNumber();
         String Newlabel = "Newlabel" + getRandomNumber();
-        info("add task");
         homePagePlatform.goToTaskPage();
         info("Add label");
-        managementLabels.addLabel(label);
+        labelsManagement.addLabel(label);
         info("edit label");
-        managementLabels.editLabel(label, Newlabel);
+        labelsManagement.editLabel(label, Newlabel);
+        $(byText(Newlabel)).should(Condition.exist);
         info("delete label");
-        managementLabels.deleteLabel(Newlabel);
+        labelsManagement.deleteLabel(Newlabel);
     }
     @Test
     public void test03DeleteLabel() {
         String label = "label" + getRandomNumber();
-        info("add task");
         homePagePlatform.goToTaskPage();
         info("Add label");
-        managementLabels.addLabel(label);
+        labelsManagement.addLabel(label);
         info("delete label");
-        managementLabels.deleteLabel(label);
+        labelsManagement.deleteLabel(label);
+        $(byText(label)).waitUntil(Condition.disappears, Configuration.timeout);
     }
 
     @Test
     public void test04_addTaskInLabel() {
         String task = "task" + getRandomNumber();
         String label = "label" + getRandomNumber();
-        info("add task");
+        info("add task in label");
         homePagePlatform.goToTaskPage();
-        managementLabels.addLabel(label);
+        labelsManagement.addLabel(label);
         $(byText(label)).click();
-        managementTasks.addTask(task);
+        tasksManagement.addTask(task);
         ELEMENT_TASKS_LIST.find(byText(task)).parent().find(byText(label)).should(Condition.exist);
         homePagePlatform.goToTaskPage();
-        managementTasks.deleteTask(task);
-        managementLabels.deleteLabel(label);
+        tasksManagement.deleteTask(task);
+        labelsManagement.deleteLabel(label);
 
     }
 }
