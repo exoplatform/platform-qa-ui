@@ -1,10 +1,13 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
+
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -66,6 +69,7 @@ public class WikiManagement {
     case "Two-Column_Layout":
       eTemplate.selectRadio("Two-Column_Layout");
       break;
+
     }
   }
 
@@ -164,15 +168,9 @@ public class WikiManagement {
   public void editParagraph(String paragraphTitle, String paragraphContent) {
     info("-- Editing a paragraph... " + paragraphTitle);
 
-    String ELEMENT_PARAGRAPH_ID = "H" + paragraphTitle;
-    evt.mouseOver(By.id(ELEMENT_PARAGRAPH_ID), true);
-    WebElement element = evt.waitForAndGetElement(By.xpath("//*[@data-original-title='Edit Section: " + paragraphTitle + "']"));
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].click();", element);
-
-    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-
-    evt.type(ELEMENT_CONTENT_WIKI_INPUT, paragraphContent, true);
-    evt.switchToParentWindow();
+   $(byText(paragraphTitle)).click();
+    ELEMENT_WIKI_CONTENT_PAGE.find(byText(paragraphTitle)).hover().parent().find(ELEMENT_WIKI_PAGE_EDIT_PARAGRAPH_BTN).click();
+    $(ELEMENT_CONTENT_WIKI_INPUT).setValue(paragraphContent);
   }
 
   /**
@@ -550,9 +548,9 @@ public class WikiManagement {
   public void addSimpleWikiPageByTemplate(SelenideElement template, String newTitle) {
     info("Select a template");
     selectTemplateWikiPage(template);
-    evt.click(ELEMENT_TEMPLATE_SELECT_BTN);
+    $(ELEMENT_TEMPLATE_SELECT_BTN).click();
     if (!newTitle.isEmpty())
-      evt.type(ELEMENT_TITLE_WIKI_INPUT, newTitle, true);
+      $(ELEMENT_TITLE_WIKI_INPUT).setValue(newTitle);
     info("Save all changes");
     saveAddPage();
   }

@@ -871,7 +871,7 @@ public class RichTextEditor {
   public void editSimplePage(String newTitle, String newContent) {
     $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
     if ($(ELEMENT_SOURCE_EDITOR_BUTTON).is(Condition.not(Condition.exist))
-        && (ELEMENT_BUTTON_WIKI_RITCH_TEXT.is(Condition.exist))) {
+            && (ELEMENT_BUTTON_WIKI_RITCH_TEXT.is(Condition.exist))) {
       ELEMENT_BUTTON_WIKI_RITCH_TEXT.click();
     }
     info("Input a new title for the page");

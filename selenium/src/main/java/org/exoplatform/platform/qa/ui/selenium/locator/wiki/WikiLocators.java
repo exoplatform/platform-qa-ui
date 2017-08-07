@@ -133,8 +133,10 @@ public class WikiLocators {
                                                                    By.xpath("//button[text()='No']");
 
   // More menu
-  public static final By              ELEMENT_MORE_LINK                                         =
-                                                        By.xpath("//*[@id='UIWikiPageControlArea_PageToolBar']//div[contains(text(), 'More')]");
+
+
+  public static final SelenideElement     ELEMENT_MORE_LINK                                          =
+                                               $(byXpath("//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li[3]/div"));
 
   public static final By              ELEMENT_DELETE_LINK                                       =
                                                           By.xpath(".//*[text()='Delete']");
@@ -764,9 +766,10 @@ public class WikiLocators {
   public static final String          ELEMENT_WIKI_PAGE_CONTENT                                 =
                                                                 ".//*[@id='UIViewContentDisplay']//*[contains(text(),'${text}')]";
 
-  public static final String          ELEMENT_WIKI_PAGE_EDIT_PARAGRAPH_BTN                      =
-                                                                           ".//*[@id='UIViewContentDisplay']//*[contains(text(),'${text}')]/../..//*[@class='uiIconEdit uiIconLightGray wikimodel-freestanding']";
 
+
+  public static final By ELEMENT_WIKI_PAGE_EDIT_PARAGRAPH_BTN                       =
+byClassName("uiIconEdit");
   // Email notification
   public static final By              ELEMENT_GMAIL_PREVIOUS_EMAIL                              =
                                                                    By.xpath(".//*[@class='gE hI']");
@@ -1472,5 +1475,6 @@ public class WikiLocators {
   public static final SelenideElement ELEMENT_BUTTON_WIKI_RITCH_TEXT                            =
                                                                      $(byId("UIEditorTabs")).find(byText("Rich Text"));
   public static final SelenideElement ELEMENT_WIKI_PAGE_CONTAINER=$(byId("UIWikiPageContainer"));
+  public static final SelenideElement ELEMENT_WIKI_CONTENT_PAGE=$(byId("UIViewContentDisplay"));
 
 }

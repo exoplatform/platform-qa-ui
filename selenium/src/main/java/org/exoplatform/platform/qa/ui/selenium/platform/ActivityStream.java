@@ -129,7 +129,11 @@ public class ActivityStream {
    */
   public void checkCommentOfActivity(String activity, String comment) {
     info("Verify that the comment is added");
+<<<<<<< ca2b0a624e755255b415d6e6b9216cf8e877171a
     ELEMENT_ACTIVITY_STREAM_CONTAINER.find(byText(comment)).should(Condition.exist);
+=======
+    $(byText(activity)).parent().parent().parent().parent().find(byText(comment)).should(Condition.exist);
+>>>>>>> WikiBasicActionManagePageEdit tests
     info("The comment is added successfully");
   }
 
