@@ -890,14 +890,21 @@ public class ForumLocator {
   public static final String          ELEMENT_FORWARD_MESSAGE                            =
                                                               "//*[@id='UIListSentPrivateMessage']//*[contains(text(),'{$title}')]/../../..//*[contains(text(),'{$contact}')]/../..//*[@class='uiIconForumForward uiIconForumLightGray']";
 
-  public static final By              ELEMENT_CONFIRM                                    =
-                                                      By.xpath("//*[@id='UIForumPopupConfirmation']//*[contains(text(),'OK')]");
-
-  public static final SelenideElement ELEMENT_POLL_CANCEL                                =
-                                                          $(byXpath("//*[@id=\"UIPollForm\"]/div[3]/button[3]"));
 
   public static final SelenideElement ELEMENT_ICON_SEARCH                                =
                                                           $(byXpath("//*[@id=\"QuickSearchForm\"]/div[2]/a/i"));
 
-  public static final SelenideElement ELEMENT_CONTENT_SEARCH_RESULT                      = $(byClassName("searchResult"));
+
+  public static final By     ELEMENT_CONFIRM                                    =
+                                             By.xpath("//*[@id='UIForumPopupConfirmation']//*[contains(text(),'OK')]");
+ public static final SelenideElement ELEMENT_POLL_CANCEL=$(byXpath("//*[@id=\"UIPollForm\"]/div[3]/button[3]"));
+
+ public static final SelenideElement ELEMENT_SEARCH_RESULT =$(byXpath("//*[@id=\"UIForumListSearch\"]/div[3]/table"));
+
+ public static final SelenideElement ELEMENT_CLOSE_POPUP  =$(byXpath("//*[@id=\"UIViewPost\"]/div[3]/button[1]"));
+
+ public static final SelenideElement ELEMENT_HOME_FORUM  =$(byId("UIBreadcumbs")).find(byText("Home"));
+
+
+
 }

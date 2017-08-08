@@ -15,7 +15,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("forum")
 @Tag("smoke")
-public class ForumSettings extends Base {
+public class ForumSettingsTestIT extends Base {
 
     HomePagePlatform homePagePlatform;
 
