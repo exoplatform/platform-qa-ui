@@ -192,7 +192,8 @@ public class WikiLocators {
   public static final By              ELEMENT_MAKE_RESTRICT_BUTTON                              =
                                                                    By.xpath("//*[contains(@onclick,'Restrict')]");
 
-  public static final By              ELEMENT_PERMALINK_NOTIFY                                  =
+
+  public static final By              ELEMENT_PERMALINK_NOTIFY                                   =
                                                                By.xpath("//*[@id='UIWikiPermalinkForm']/*[@class='permalinkNotify']");
 
   public static final By              ELEMENT_PERMALINK_TEXT                                    = By.id("PermalinkText");
@@ -1471,9 +1472,11 @@ public class WikiLocators {
   public static final SelenideElement ELEMENT_BUTTON_WIKI_RITCH_TEXT                            =
                                                                      $(byId("UIEditorTabs")).find(byText("Rich Text"));
 
-  public static final SelenideElement ELEMENT_WIKI_PAGE_CONTAINER                               = $(byId("UIWikiPageContainer"));
 
   public static final SelenideElement ELEMENT_WIKI_CONTENT_PAGE                                 = $(byId("UIViewContentDisplay"));
 
 
+  public static final SelenideElement ELEMENT_WIKI_PAGE_CONTAINER=$(byId("UIWikiPageContainer"));
+  public static final SelenideElement ELEMENT_MSG_MAKE_PUBLIC_RESTRICTED=$(byXpath("//*[@id=\"UIWikiPermalinkForm\"]/div[3]/b"));
+  public static final SelenideElement ELEMENT_WIKI_PERMELINK=$(byId("PermalinkText"));
 }

@@ -111,9 +111,15 @@ public class ManageLogInOut {
    */
   public void signInCas(String username, String password) {
     testBase.getExoWebDriver().getWebDriver();
+<<<<<<< ca2b0a624e755255b415d6e6b9216cf8e877171a
     $(ELEMENT_INPUT_USERNAME_CAS).setValue(username);
     $(ELEMENT_INPUT_PASSWORD_CAS).setValue(password);
     ELEMENT_SIGN_IN_BUTTON_CAS.click();
+=======
+    evt.type(ELEMENT_INPUT_USERNAME_CAS, username, true);
+    evt.type(ELEMENT_INPUT_PASSWORD_CAS, password, true);
+    $(ELEMENT_SIGN_IN_BUTTON_CAS).click();
+>>>>>>> WikiBasicActionOtherActionsTestIT
 
     // waitForElementNotPresent(ELEMENT_SIGN_IN_BUTTON_CAS,3000);
 
