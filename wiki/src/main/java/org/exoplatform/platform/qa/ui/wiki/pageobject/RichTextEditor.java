@@ -39,7 +39,7 @@ public class RichTextEditor {
    * @param testBase
    * @throws Exception
    */
-  public RichTextEditor(TestBase testBase) throws Exception {
+  public RichTextEditor(TestBase testBase)  {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
     this.but = new Button(testBase);

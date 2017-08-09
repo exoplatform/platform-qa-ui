@@ -381,7 +381,7 @@ public class WikiHomePage {
   public void goToPageInformation() {
     info("Go to Page Information");
     evt.mouseOverAndClick(ELEMENT_MORE_LINK);
-    evt.mouseOverAndClick(ELEMENT_PAGE_INFO);
+    $(ELEMENT_PAGE_INFO).click();
   }
 
   /**

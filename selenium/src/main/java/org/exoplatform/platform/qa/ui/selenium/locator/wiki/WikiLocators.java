@@ -152,8 +152,8 @@ public class WikiLocators {
   public static final By              ELEMENT_MOVE_PAGE                                          =
                                                         By.xpath(".//*[text()='Move Page']");
 
-  public static final By              ELEMENT_PAGE_INFO                                          =
-                                                        By.xpath(".//*[text()='Page Info']");
+
+  public static final By     ELEMENT_PAGE_INFO                                          = byXpath("//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li[3]/ul/li[6]/a[1]");
 
   public static final By              ELEMENT_MOVE_LINK                                          =
                                                         By.xpath("//*[@class='uiIconMovePage']");
@@ -612,8 +612,9 @@ public class WikiLocators {
   public static final By              ELEMENT_PAGE_INFOR_RELATED                                 =
                                                                  By.xpath(".//*[@id='UIWikiPageInfo']//*[contains(text(),'Wiki')]/..//*[contains(text(),'Related Pages')]/..//*[contains(text(),'Actions')]");
 
-  public static final By              ELEMENT_PAGE_INFO_ADD_MORE_RELATIONS                       =
-                                                                           By.xpath(".//*[@id='UIWikiPageInfo']//button[text()='Add More Relations']");
+
+  public static final By     ELEMENT_PAGE_INFO_ADD_MORE_RELATIONS                       =
+                                                                 byXpath("//*[@id=\"UIWikiPageInfo\"]/div[1]/div[2]/table/tbody/tr[2]/td/div/button");
 
   public static final String          ELEMENT_PAGE_INFO_RELATED_TABLE_CONTENT                    =
                                                                               ".//*[@id='UIWikiPageInfo']//*[contains(text(),'${col1}')]/..//*[contains(text(),'${col2}')]";

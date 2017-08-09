@@ -1,8 +1,11 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -52,8 +55,8 @@ public class WikiPageInformation {
    */
   public void goToAddRelations() {
     info("Click on Add more relations");
-    evt.click(ELEMENT_PAGE_INFO_ADD_MORE_RELATIONS);
-    evt.waitForAndGetElement(ELEMENT_ADD_RELATED_PAGE_POPUP_TITLE);
+    $(ELEMENT_PAGE_INFO_ADD_MORE_RELATIONS).click();
+    $(ELEMENT_ADD_RELATED_PAGE_POPUP_TITLE).waitUntil(Condition.appears, Configuration.timeout);
     info("Add related page popup is shown");
   }
 

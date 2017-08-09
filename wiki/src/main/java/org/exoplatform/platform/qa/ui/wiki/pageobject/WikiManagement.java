@@ -291,7 +291,7 @@ public class WikiManagement {
    */
   public void checkAddRelationDropDownList(String spaces) {
     info("Click on Drop down");
-    evt.waitForAndGetElement(ELEMENT_ADD_RELATED_PAGE_POPUP_DROPDOWN, 2000, 0).click();
+    $(ELEMENT_ADD_RELATED_PAGE_POPUP_DROPDOWN).click();
     info("Verify that Intranet location is shown is the list");
     evt.waitForAndGetElement(ELEMENT_ADD_RELATED_POPUP_DROPDOWN_LOCATION.replace("${location}", "Intranet"), 2000, 0);
     info("Verify that My wiki location is shown is the list");
