@@ -167,13 +167,13 @@ public class ForumCategoryManagement {
   public void exportForum(String forumName, String fileName) {
     selectItemManageCategoryMenu(specifManageCategoryMenu.EXPORT_FORUM);
     info("Uncheck All check boxes");
-    evt.uncheck(ELEMENT_EXPORT_FORUM_EXPORTALL, 2);
+    $(byId("checkAll")).parent().click();
     info("Select check box of the forum");
-    evt.check((ELEMENT_EXPORT_FORUM_EXPORT).replace("${title}", forumName), 2);
+    $(byId("UIExportForm")).findAll(byClassName("uiCheckbox")).get(1).click();
     info("input name");
-    evt.type(ELEMENT_FILENAME_INPUT, fileName, true);
+    $(ELEMENT_FILENAME_INPUT).setValue(fileName);
     info("Save all changes");
-    evt.click(ELEMENT_SAVE_BTN);
+    $(ELEMENT_SAVE_BTN).click();
   }
 
   /**

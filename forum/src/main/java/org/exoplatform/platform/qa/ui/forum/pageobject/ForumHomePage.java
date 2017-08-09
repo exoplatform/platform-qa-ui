@@ -1,8 +1,11 @@
 package org.exoplatform.platform.qa.ui.forum.pageobject;
 
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_SAVE_BTN;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
 
@@ -34,6 +37,7 @@ public class ForumHomePage {
    * constructor
    *
    * @param dr
+   *
    */
   public ForumHomePage(TestBase testBase) {
     this.testBase = testBase;
@@ -153,8 +157,7 @@ public class ForumHomePage {
    */
   public void goToForum(String name) {
     info("Click on the forum with the name:" + name);
-    $(ELEMENT_SELECT_FORUM_TOPIC.replace("${link}", name)).click();
-
+    ELEMENT_CATEGORY_CONTAINER.find(byText(name)).click();
   }
 
   /**
@@ -308,13 +311,13 @@ public class ForumHomePage {
   public void exportCategory(String catName, String fileName) {
     selectItemAdministrationMenu(specifAdministrationMenu.EXPORT);
     info("Uncheck all category");
-    evt.uncheck(ELEMENT_EXPORTCAT_EXPORTALL, 2);
+    $(byId("checkAll")).parent().click();
     info("Select the category:" + catName);
-    evt.check(ELEMENT_EXPORTCAT_EXPORT.replace("${title}", catName), 2);
+    $(byId("UIExportForm")).findAll(byClassName("uiCheckbox")).get(1).click();
     info("input name");
-    evt.type(ELEMENT_FILENAME_INPUT, fileName, true);
+    $(ELEMENT_FILENAME_INPUT).setValue(fileName);
     info("Save all changes");
-    evt.click(ForumLocator.ELEMENT_SAVE_BTN);
+    $(ELEMENT_SAVE_BTN).click();
   }
 
   /**

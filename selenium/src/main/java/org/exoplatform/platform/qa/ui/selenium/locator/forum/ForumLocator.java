@@ -377,7 +377,11 @@ public class ForumLocator {
 
   public static final By              ELEMENT_SAVE_BTN                                   = By.xpath("//*[text()='Save']");
 
-  public static final By              ELEMENT_SUBMIT_BUTTON                              = By.xpath("//*[text()='Submit']");
+
+  public static final By     ELEMENT_SAVE_IMPORT                                = By.xpath("//*[@id=\"UIImportForm\"]/div[3]/button[1]");
+
+public static final SelenideElement ELEMENT_BUTTON_OK_IMPORT=$(byClassName("UIPopupWindow")).find(byClassName("btn"));
+  public static final By     ELEMENT_SUBMIT_BUTTON                              = By.xpath("//*[text()='Submit']");
 
   // BBcode popup
   public static final By              ELEMENT_EDITSITE_SAVEBTN                           =
@@ -905,6 +909,12 @@ public class ForumLocator {
 
  public static final SelenideElement ELEMENT_HOME_FORUM  =$(byId("UIBreadcumbs")).find(byText("Home"));
 
+ public static final SelenideElement ELEMENT_CATEGORY_CONTAINER =$(byId("UICategory"));
 
+  public static final SelenideElement ELEMENT_BTN_OK  =$(byClassName("infoIcon")).parent().parent().parent().find(byClassName("btn"));
+
+  public static final SelenideElement ELEMENT_CAT_CONTAINER = $(byId("UICategoryContainer"));
+
+  public static final SelenideElement ELEMENT_PROGRESS_BAR = $((byClassName("progressBarFrame")));
 
 }
