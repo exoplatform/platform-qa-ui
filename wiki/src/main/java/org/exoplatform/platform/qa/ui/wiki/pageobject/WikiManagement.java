@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
+
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -182,7 +183,7 @@ public class WikiManagement {
    */
   public void addComment(String comment) {
     info("Input a comment to wiki page");
-    evt.type(ELEMENT_WIKI_PAGE_INPUT_COMMENT, comment, true);
+    $(ELEMENT_WIKI_PAGE_INPUT_COMMENT).setValue(comment);
   }
 
   /**

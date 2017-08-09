@@ -129,7 +129,7 @@ public class ActivityStream {
    */
   public void checkCommentOfActivity(String activity, String comment) {
     info("Verify that the comment is added");
-    evt.waitForAndGetElement(ELEMENT_ACTIVITY_COMMENT.replace("${title}", activity).replace("${comment}", comment), 3000, 1);
+    ELEMENT_ACTIVITY_STREAM_CONTAINER.find(byText(comment)).should(Condition.exist);
     info("The comment is added successfully");
   }
 
