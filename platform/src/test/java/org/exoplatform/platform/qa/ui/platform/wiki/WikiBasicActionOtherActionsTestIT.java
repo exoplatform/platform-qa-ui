@@ -1265,6 +1265,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     homePagePlatform.goToAllSpace();
     spaceManagement.deleteSpace(space, false);
 
+
   }
 }
 
