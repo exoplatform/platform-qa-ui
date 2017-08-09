@@ -1,27 +1,31 @@
 package org.exoplatform.platform.qa.ui.answer.pageobject;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import org.exoplatform.platform.qa.ui.selenium.Button;
-import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_ADD_USERS_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+
+import org.exoplatform.platform.qa.ui.selenium.Button;
+import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+
 public class AnswerCategoryManagement {
   private final TestBase       testBase;
 
-  public AnswerHomePage aHome;
+  public AnswerHomePage        aHome;
 
-  public QuestionManagement qMang;
+  public QuestionManagement    qMang;
 
   public ManageAlert           alert;
 
@@ -60,9 +64,9 @@ public class AnswerCategoryManagement {
       break;
     case ADD:
       info("ADD category");
-      $(ELEMENT_CATEGORY_ADD_BUTTON).waitUntil(Condition.appears,Configuration.timeout);
+      $(ELEMENT_CATEGORY_ADD_BUTTON).waitUntil(Condition.appears, Configuration.timeout);
       $(ELEMENT_CATEGORY_ADD_BUTTON).click();
-      $(ELEMENT_CATEGORY_ADD_FORM).waitUntil(Condition.appears,Configuration.timeout);
+      $(ELEMENT_CATEGORY_ADD_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case EXPORT:
       info("EXPORT category");
@@ -78,7 +82,7 @@ public class AnswerCategoryManagement {
       break;
     case DELETE:
       info("DELETE category");
-      $(ELEMENT_CATEGORY_DELETE_BUTTON).waitUntil(Condition.appears,Configuration.timeout);
+      $(ELEMENT_CATEGORY_DELETE_BUTTON).waitUntil(Condition.appears, Configuration.timeout);
       $(ELEMENT_CATEGORY_DELETE_BUTTON).click();
       $(ELEMENT_CATEGORY_DELETE_CONFIRM_POPUP).click();
       break;
@@ -122,7 +126,7 @@ public class AnswerCategoryManagement {
     case DELETE:
       info("DELETE category");
       $(ELEMENT_CATEGORY_RIGHT_DELETE_BUTTON).click();
-      $(ELEMENT_CATEGORY_DELETE_CONFIRM_POPUP).waitUntil(Condition.appears,Configuration.timeout);
+      $(ELEMENT_CATEGORY_DELETE_CONFIRM_POPUP).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case MOVE:
       info("MOVE category");
@@ -141,7 +145,7 @@ public class AnswerCategoryManagement {
     case SUBMITQUESTION:
       info("SUBMITQUESTION category");
       $(ELEMENT_CATEGORY_RIGHT_SUBMIT_QUESTION_BUTTON).click();
-      $(ELEMENT_SUBMIT_QUESTION_FORM).waitUntil(Condition.appears,Configuration.timeout);
+      $(ELEMENT_SUBMIT_QUESTION_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case RSS:
       info("RSS category");
@@ -159,12 +163,11 @@ public class AnswerCategoryManagement {
    * @param cat category name
    * @param order order of category
    * @param des description of category
-   * @param modQues true: check Moderate New Questions false: uncheck Moderate
-   *          New Questions
+   * @param modQues true: check Moderate New Questions false: uncheck Moderate New
+   *          Questions
    * @param viewAuthor true: check View Question Authors false: uncheck View
    *          Question Authors
-   * @param modAnswer true: check Moderate Answers false: uncheck Moderate
-   *          Answers
+   * @param modAnswer true: check Moderate Answers false: uncheck Moderate Answers
    */
   public void inputDataToSettingTab(String cat,
                                     String order,
@@ -261,7 +264,8 @@ public class AnswerCategoryManagement {
     String[] links = path.split("/");
     goToActionOfCategoryFromActionBar(actionCategoryOption.IMPORT);
     WebElement eFile = evt.waitForAndGetElement(ELEMENT_IMPORT_CATEGORY_INPUT, testBase.getDefaultTimeout(), 1, 2);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';", eFile);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';",
+                                                                                   eFile);
     eFile.sendKeys(testBase.getAbsoluteFilePath(path));
     evt.waitForAndGetElement(ELEMENT_ATTACHMENT_FORM_FILE_NAME.replace("$fileName", links[links.length - 1]));
     evt.switchToParentWindow();

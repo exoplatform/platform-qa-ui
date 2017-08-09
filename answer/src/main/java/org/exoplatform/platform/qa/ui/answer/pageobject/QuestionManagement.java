@@ -1,18 +1,21 @@
 package org.exoplatform.platform.qa.ui.answer.pageobject;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import org.exoplatform.platform.qa.ui.selenium.Button;
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+
+import org.exoplatform.platform.qa.ui.selenium.Button;
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class QuestionManagement {
   private final TestBase       testBase;
@@ -52,7 +55,7 @@ public class QuestionManagement {
 
     $(ELEMENT_SUBMIT_QUESTION).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_SUBMIT_QUESTION).click();
-    $(ELEMENT_SUBMIT_QUESTION_FORM).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_SUBMIT_QUESTION_FORM).waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**
@@ -77,7 +80,7 @@ public class QuestionManagement {
 
     if (language != null && language != "") {
       info("input language");
-     $(ELEMENT_SUBMIT_QUESTION_FORM_LANGUAGE_SELECT_BOX).selectOption(language);
+      $(ELEMENT_SUBMIT_QUESTION_FORM_LANGUAGE_SELECT_BOX).selectOption(language);
     }
 
     if (pathFile != null && pathFile != "") {
@@ -85,7 +88,8 @@ public class QuestionManagement {
       String[] links = pathFile.split("/");
       evt.click(ELEMENT_SUBMIT_QUESTION_FORM_ATTACHMENT_BUTTON);
       WebElement eFile = evt.waitForAndGetElement(ELEMENT_QUESTION_FILE_INPUT, testBase.getDefaultTimeout(), 1, 2);
-      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';", eFile);
+      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';",
+                                                                                     eFile);
       eFile.sendKeys(testBase.getAbsoluteFilePath(pathFile));
       evt.waitForAndGetElement(ELEMENT_ATTACHMENT_FORM_FILE_NAME.replace("$fileName", links[links.length - 1]));
       evt.click(ELEMENT_ATTACH_SAVE_BUTTON);
@@ -119,12 +123,12 @@ public class QuestionManagement {
     case EDIT:
       info("Edit question");
       ELEMENT_QUESTION_EDIT.click();
-      $(ELEMENT_QUESTION_EDIT_FORM).waitUntil(Condition.appears,Configuration.timeout);
+      $(ELEMENT_QUESTION_EDIT_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case DELETE:
       info("Delete question");
       ELEMENT_QUESTION_DELETE.click();
-      $(ELEMENT_QUESTION_DELETE_FORM).waitUntil(Condition.appears,Configuration.timeout);
+      $(ELEMENT_QUESTION_DELETE_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case MOVE:
       info("Move question");
@@ -149,7 +153,7 @@ public class QuestionManagement {
    */
   public void goToActionOfQuestionFromMoreAction(actionQuestionOption action) {
     info("Select action from menu");
-    $(ELEMENT_QUESTION_MORE_ACTION_BUTTON).waitUntil(Condition.appears,Configuration.timeout).click();
+    $(ELEMENT_QUESTION_MORE_ACTION_BUTTON).waitUntil(Condition.appears, Configuration.timeout).click();
     switch (action) {
     case PRINT:
       info("PRINT question");
@@ -167,7 +171,7 @@ public class QuestionManagement {
     case MOVE:
       info("MOVE question");
       $(ELEMENT_QUESTION_MOVE_BUTTON).click();
-      $(ELEMENT_QUESTION_MOVE_FORM).waitUntil(Condition.appears,Configuration.timeout);
+      $(ELEMENT_QUESTION_MOVE_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case SEND:
       info("SEND question");
@@ -187,12 +191,13 @@ public class QuestionManagement {
    */
   public void deleteQuestion(String question) {
     info("Delete question");
-    if( $(ELEMENT_QUESTION_MORE_ACTION_BUTTON).is(Condition.not(Condition.exist)))
-    { $(byText(question)).click();}
+    if ($(ELEMENT_QUESTION_MORE_ACTION_BUTTON).is(Condition.not(Condition.exist))) {
+      $(byText(question)).click();
+    }
     goToActionOfQuestionFromMoreAction(actionQuestionOption.DELETE);
-    $(ELEMENT_QUESTION_CONFIRM_DELETE).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_QUESTION_CONFIRM_DELETE).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_QUESTION_DELETE_FORM_OK_BUTTON).click();
-    $(byText(question)).waitUntil(Condition.disappears,Configuration.timeout);
+    $(byText(question)).waitUntil(Condition.disappears, Configuration.timeout);
   }
 
   /**

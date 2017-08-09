@@ -1,18 +1,19 @@
 package org.exoplatform.platform.qa.ui.answer.pageobject;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.SelenideElement;
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static com.codeborne.selenide.Selectors.*;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class AnswerManagement {
-  private final TestBase testBase;
+  private final TestBase       testBase;
 
   private ElementEventTestBase evt;
 
@@ -20,8 +21,6 @@ public class AnswerManagement {
    * constructor
    * 
    * @param dr
-   *
-   *
    */
   public AnswerManagement(TestBase testBase) {
     this.testBase = testBase;
@@ -33,7 +32,7 @@ public class AnswerManagement {
    */
   public void goToAnswerQuestion(String question) {
     info("Go to answer a question");
-  $(byText(question)).parent().parent().parent().find(byText("Answer")).click();
+    $(byText(question)).parent().parent().parent().find(byText("Answer")).click();
   }
 
   /**
@@ -49,7 +48,7 @@ public class AnswerManagement {
 
     if (content != null && content != "") {
       info("input content");
-      evt.inputDataToCKEditor(ELEMENT_ANSWER_FORM_DATA_FRAME_INPUT,content);
+      evt.inputDataToCKEditor(ELEMENT_ANSWER_FORM_DATA_FRAME_INPUT, content);
       $(ELEMENT_ANSWER_FORM_DATA_FRAME_INPUT).click();
     }
 
@@ -76,8 +75,7 @@ public class AnswerManagement {
   }
 
   /**
-   * Execute action of answer: EDIT, APPROVE, DISAPPROVE, ACTIVE, DEACTIVE,
-   * DELETE
+   * Execute action of answer: EDIT, APPROVE, DISAPPROVE, ACTIVE, DEACTIVE, DELETE
    * 
    * @param answer
    * @param action action that needs to be done
@@ -90,7 +88,7 @@ public class AnswerManagement {
     case EDIT:
       info("EDIT answer");
       ELEMENT_ANSWER_EDIT.parent().click();
-      $(ELEMENT_ANSWER_FORM).waitUntil(Condition.appears,Configuration.timeout);
+      $(ELEMENT_ANSWER_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case APPROVE:
       info("APPROVE answer");
@@ -119,7 +117,7 @@ public class AnswerManagement {
     case DELETE:
       info("DELETE answer");
       $(byClassName("confirm")).click();
-      $(ELEMENT_ANSWER_DELETE_CONFIRM_POPUP).waitUntil(Condition.appears,Configuration.timeout);
+      $(ELEMENT_ANSWER_DELETE_CONFIRM_POPUP).waitUntil(Condition.appears, Configuration.timeout);
       break;
     default:
       info("Do nothing");

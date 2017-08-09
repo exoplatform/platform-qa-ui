@@ -1,22 +1,22 @@
 package org.exoplatform.platform.qa.ui.answer.pageobject;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.openqa.selenium.By;
-
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class CommentManagement {
   private final TestBase       testBase;
 
   public AnswerHomePage        aHome;
 
-  public AnswerManagement aMang;
+  public AnswerManagement      aMang;
 
   private ElementEventTestBase evt;
 
@@ -24,7 +24,6 @@ public class CommentManagement {
    * constructor
    *
    * @param dr
-   *
    */
   public CommentManagement(TestBase testBase) {
     this.testBase = testBase;
@@ -39,8 +38,8 @@ public class CommentManagement {
   public void goToCommentQuestion(String question) {
     info("Go to COMMENT a question");
 
-      $(ELEMENT_COMMENT_BUTTON).click();
-      $(ELEMENT_COMMENT_FORM).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_COMMENT_BUTTON).click();
+    $(ELEMENT_COMMENT_FORM).waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**
@@ -75,7 +74,7 @@ public class CommentManagement {
     case EDIT:
       info("EDIT COMMENT");
       ELEMENT_COMMENT_EDIT.parent().click();
-      $(ELEMENT_COMMENT_FORM).waitUntil(Condition.appears,Configuration.timeout);
+      $(ELEMENT_COMMENT_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case PROMOTE:
       info("PROMOTE COMMENT");
@@ -85,7 +84,7 @@ public class CommentManagement {
     case DELETE:
       info("DELETE COMMENT");
       $(byClassName("confirm")).click();
-      $(ELEMENT_COMMENT_DELETE_CONFIRM_POPUP).waitUntil(Condition.appears,Configuration.timeout);
+      $(ELEMENT_COMMENT_DELETE_CONFIRM_POPUP).waitUntil(Condition.appears, Configuration.timeout);
       break;
     default:
       info("Do nothing");
