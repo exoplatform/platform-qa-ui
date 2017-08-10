@@ -27,7 +27,6 @@ public class WikiAttachmentTestIT extends Base {
 
 	HomePagePlatform homePagePlatform;
 
-	SpaceManagement spaceManagement;
 
 	WikiHomePage wikiHomePage;
 
@@ -35,24 +34,15 @@ public class WikiAttachmentTestIT extends Base {
 
 	SourceTextEditor sourceTextEditor;
 
-	WikiValidattions wikiValidattions;
-
-	SpaceHomePage spaceHomePage;
-
-	ActivityStream activityStream;
 
 	@BeforeEach
 	public void setupBeforeMethod() {
 		info("Start setUpBeforeMethod");
 
 		homePagePlatform = new HomePagePlatform(this);
-		spaceHomePage = new SpaceHomePage(this);
 		wikiHomePage = new WikiHomePage(this);
 		wikiManagement = new WikiManagement(this);
 		sourceTextEditor = new SourceTextEditor(this);
-		wikiValidattions = new WikiValidattions(this);
-		spaceManagement = new SpaceManagement(this);
-		activityStream = new ActivityStream(this);
 	}
 	/**
 	 *<li> Case ID:122812.</li>
