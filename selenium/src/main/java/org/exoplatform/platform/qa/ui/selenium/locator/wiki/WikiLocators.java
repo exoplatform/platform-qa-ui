@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.selenium.locator.wiki;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_NAME_USER2;
 
 import org.openqa.selenium.By;
 
@@ -1491,4 +1492,5 @@ public class WikiLocators {
   public static final SelenideElement ELEMENT_DRAFT_NEW_PAGE                                     = $(byId("UIWikiDraftGrid"));
 
   public static final SelenideElement ELEMENT_MORE_LINK_WITH_USER=$(byXpath("//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li[2]/div"));
+
 }
