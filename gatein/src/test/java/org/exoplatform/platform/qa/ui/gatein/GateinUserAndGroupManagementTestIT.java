@@ -117,7 +117,7 @@ public class GateinUserAndGroupManagementTestIT extends Base {
    * <li>Test Case Name: Delete user.</li>
    */
   @Test
-  public void test08_09_10_EditSearchDeleteUser() {
+  public void test08EditUser() {
     String username = "username" + getRandomNumber();
     String password = "password" + getRandomNumber();
     String firstName = getRandomString();
@@ -160,6 +160,135 @@ public class GateinUserAndGroupManagementTestIT extends Base {
     // waitForTextPresent(newFirstName);
     $(byText(newFirstName)).should(Condition.exist);
 
+    /*
+     * Step Number: 2 Step Name: Step 2: Search User Step Description: - Search user
+     * by: + User name + Last Name + First Name + Email Input Data: Expected
+     * Outcome: - The results are displayed matching with the search keyword
+     */
+    /*
+     * info("Test Case 09: Search user follow username, last name, first name, email"
+     * ); userandgroupmanagement.searchUser(DATA_USER1, searchUserName);
+     * userandgroupmanagement.searchUser(searchUser1, searchLastName);
+     * userandgroupmanagement.searchUser(searchUser2, searchFirstName);
+     * userandgroupmanagement.searchUser(newEmail, searchEmail); /*Step Number: 3
+     * Step Name: Step 3: Delete User Step Description: - Go to Group/Organization/
+     * User and group management - Select a user in list and click [Delete user]
+     * icon Input Data: Expected Outcome: - - The user will be removed from the list
+     */
+    info("Test Case 10: Delete user");
+    userandgroupmanagement.deleteUser(username);
+  }
+
+  /**
+   * <li>Case ID:123098.</li>
+   * <li>Test Case Name: Edit User information.</li>
+   * <li>Case ID:123071.</li>
+   * <li>Test Case Name: Search user.</li>
+   * <li>Case ID:123070.</li>
+   * <li>Test Case Name: Delete user.</li>
+   */
+  @Test
+  public void test09_SearchUser() {
+    String username = "username" + getRandomNumber();
+    String password = "password" + getRandomNumber();
+    String firstName = getRandomString();
+    String lastName = getRandomString();
+    String email = firstName + getRandomNumber() + "@test.com";
+
+    String newFirstName = getRandomString();
+    String newLastName = getRandomString();
+    String newDisplayName = "newDisplayName" + getRandomNumber();
+    String newEmail = newFirstName + getRandomNumber() + "@test.com";
+
+    /*
+     * String searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
+     * String searchLastName = userSearchOptionData.getUserSearchOptionByIndex(1);
+     * String searchFirstName = userSearchOptionData.getUserSearchOptionByIndex(2);
+     * String searchEmail = userSearchOptionData.getUserSearchOptionByIndex(3);
+     * String searchUser1 = userInfoData.getLastNameByIndex(2); String searchUser2 =
+     * userInfoData.getFirstNameByIndex(4);
+     */
+
+    navigationToolbar.goToAddUser();
+    info("Create new user");
+    useraddmanagement.addUser(username, password, email, firstName, lastName);
+
+    /*
+     * Step Number: 1 Step Name: Step 1: Edit User information Step Description: -
+     * Go to Group/Organization/ User and group management - Select a user and click
+     * [Edit user info] icon - Change some fields and click Save Input Data:
+     * Expected Outcome: - Users list is shown properly - User is updated with the
+     * change value
+     */
+    info("Test Case 08: Edit user information");
+    navigationToolbar.goToUsersAndGroupsManagement();
+    /*
+     * if(waitForAndGetElement(ELEMENT_USER_MANAGEMENT_ACTIVE_TAB, 3000, 0) == null)
+     * click(ELEMENT_USER_MANAGEMENT_TAB);
+     */
+
+    /*
+     * Step Number: 2 Step Name: Step 2: Search User Step Description: - Search user
+     * by: + User name + Last Name + First Name + Email Input Data: Expected
+     * Outcome: - The results are displayed matching with the search keyword
+     */
+    /*
+     * info("Test Case 09: Search user follow username, last name, first name, email"
+     * ); userandgroupmanagement.searchUser(DATA_USER1, searchUserName);
+     * userandgroupmanagement.searchUser(searchUser1, searchLastName);
+     * userandgroupmanagement.searchUser(searchUser2, searchFirstName);
+     * userandgroupmanagement.searchUser(newEmail, searchEmail); /*Step Number: 3
+     * Step Name: Step 3: Delete User Step Description: - Go to Group/Organization/
+     * User and group management - Select a user in list and click [Delete user]
+     * icon Input Data: Expected Outcome: - - The user will be removed from the list
+     */
+    info("Test Case 10: Delete user");
+    userandgroupmanagement.deleteUser(username);
+  }
+
+  /**
+   * <li>Case ID:123098.</li>
+   * <li>Test Case Name: Edit User information.</li>
+   * <li>Case ID:123071.</li>
+   * <li>Test Case Name: Search user.</li>
+   * <li>Case ID:123070.</li>
+   * <li>Test Case Name: Delete user.</li>
+   */
+  @Test
+  public void test10_DeleteUser() {
+    String username = "username" + getRandomNumber();
+    String password = "password" + getRandomNumber();
+    String firstName = getRandomString();
+    String lastName = getRandomString();
+    String email = firstName + getRandomNumber() + "@test.com";
+
+    String newFirstName = getRandomString();
+    String newLastName = getRandomString();
+    String newDisplayName = "newDisplayName" + getRandomNumber();
+    String newEmail = newFirstName + getRandomNumber() + "@test.com";
+
+    /*
+     * String searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
+     * String searchLastName = userSearchOptionData.getUserSearchOptionByIndex(1);
+     * String searchFirstName = userSearchOptionData.getUserSearchOptionByIndex(2);
+     * String searchEmail = userSearchOptionData.getUserSearchOptionByIndex(3);
+     * String searchUser1 = userInfoData.getLastNameByIndex(2); String searchUser2 =
+     * userInfoData.getFirstNameByIndex(4);
+     */
+
+    navigationToolbar.goToAddUser();
+    info("Create new user");
+    useraddmanagement.addUser(username, password, email, firstName, lastName);
+
+    /*
+     * Step Number: 1 Step Name: Step 1: Edit User information Step Description: -
+     * Go to Group/Organization/ User and group management - Select a user and click
+     * [Edit user info] icon - Change some fields and click Save Input Data:
+     * Expected Outcome: - Users list is shown properly - User is updated with the
+     * change value
+     */
+    info("Test Case 08: Edit user information");
+    navigationToolbar.goToUsersAndGroupsManagement();
     /*
      * Step Number: 2 Step Name: Step 2: Search User Step Description: - Search user
      * by: + User name + Last Name + First Name + Email Input Data: Expected

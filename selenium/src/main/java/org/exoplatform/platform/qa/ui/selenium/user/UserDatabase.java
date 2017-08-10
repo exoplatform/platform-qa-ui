@@ -25,11 +25,11 @@ import java.util.ArrayList;
 public class UserDatabase {
   public ArrayList<Integer> type;
 
-  public ArrayList<String> userName;
+  public ArrayList<String>  userName;
 
-  public ArrayList<String> password;
+  public ArrayList<String>  password;
 
-  public ArrayList<String> fullName;
+  public ArrayList<String>  fullName;
 
   /**
    * UserDatabase

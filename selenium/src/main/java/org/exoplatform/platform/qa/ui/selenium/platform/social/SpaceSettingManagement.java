@@ -1,25 +1,25 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selectors.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class SpaceSettingManagement {
 
   private final TestBase       testBase;
 
   public ManageAlert           alert;
-
 
   public Button                button;
 
@@ -45,8 +45,8 @@ public class SpaceSettingManagement {
    * 
    * @param user (Can be: User name, Last name, First name or Email of the user
    *          you want to search)
-   * @param searchOption (Can be: User name, Last name, First name or Email
-   *          option corresponding with information you input in "Search")
+   * @param searchOption (Can be: User name, Last name, First name or Email option
+   *          corresponding with information you input in "Search")
    */
   public void searchUser(String user, String searchOption) {
     info("--Search user " + user + "--");
@@ -64,9 +64,10 @@ public class SpaceSettingManagement {
   public void goToMemberTab() {
     info("Open members tab");
     $(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB).click();
-    $(byClassName("uiGrayLightBox")).waitUntil(Condition.appears,Configuration.timeout);
+    $(byClassName("uiGrayLightBox")).waitUntil(Condition.appears, Configuration.timeout);
   }
-  public void goToMemberTabInSpaceSettingTab(){
+
+  public void goToMemberTabInSpaceSettingTab() {
     ELEMENT_SPACE_SETTINGS_MEMBERS_TAB_IN_SETTING_TAB.click();
   }
 
@@ -74,13 +75,13 @@ public class SpaceSettingManagement {
    * Invite a user in the space
    * 
    * @param userName
-   * @param verify is true if want to verify user in invited table. False if
-   *          don't want.
+   * @param verify is true if want to verify user in invited table. False if don't
+   *          want.
    * @param fullName
    */
   public void inviteUser(String userName, boolean verify, String fullName) {
     goToMemberTab();
-    info("--Search user " );
+    info("--Search user ");
     ELEMENT_INPUT_INVITE_USER.sendKeys(userName);
     $(ELEMENT_SEARCH_USERS_ICON).click();
 
@@ -98,15 +99,14 @@ public class SpaceSettingManagement {
   }
 
   /**
-   * Change role of a user in the list if role's status is NO, this will change
-   * to YES if role's status is YES, this will change to NO
+   * Change role of a user in the list if role's status is NO, this will change to
+   * YES if role's status is YES, this will change to NO
    */
   public void changeRole(String user) {
     info("Open members tab");
     evt.click(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB);
     info("Click on change role button of manager column");
     evt.click(ELEMENT_SPACE_CHANGE_ROLE_USER_MEMBER.replace("${user}", user), 2);
-
 
   }
 
@@ -157,9 +157,10 @@ public class SpaceSettingManagement {
     info("OPen members tab");
     $(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB_IN_SETTING_TAB).click();
     info("Click on join button to remove user");
-    $(byText(user+" "+user)).parent().find(ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB).click();
+    $(byText(user + " " + user)).parent().find(ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB).click();
     info("Verify that the member is shown in member list");
-    $(byText(user+" "+user)).waitUntil(Condition.appears,Configuration.timeout);  }
+    $(byText(user + " " + user)).waitUntil(Condition.appears, Configuration.timeout);
+  }
 
   /**
    * Decline a pending request to a space
@@ -595,7 +596,7 @@ public class SpaceSettingManagement {
 
       evt.click(ELEMENT_SEARCH_SELECTOR_PAGE_LINK);
       // @FIXME Dependency problem
-      //naviManage.selectPage(pageTitleSearch);
+      // naviManage.selectPage(pageTitleSearch);
     }
     info("Save to add node");
 

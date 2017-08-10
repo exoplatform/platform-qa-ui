@@ -2,13 +2,17 @@ package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
-import org.exoplatform.platform.qa.ui.selenium.*;
+import org.exoplatform.platform.qa.ui.selenium.Button;
+import org.exoplatform.platform.qa.ui.selenium.Dialog;
+import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 /**
@@ -53,12 +57,14 @@ public class PortalManagePages {
       info("Select a type");
       $(ELEMENT_MANAGEPAGES_TYPE_DROPBOX).selectOption(type);
     }
-   $(ELEMENT_MANAGEPAGES_TITLE_FIELD).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_MANAGEPAGES_TITLE_FIELD).waitUntil(Condition.appears, Configuration.timeout);
     info("Input a new title");
     $(ELEMENT_MANAGEPAGES_TITLE_FIELD).scrollTo().setValue(title);
     info("Select a type");
     $(ELEMENT_MANAGEPAGES_TYPE_DROPBOX).selectOption("group");
     info("Click on Search button");
+    // scroll up
+    executeJavaScript("window.scrollBy(0,-350);", "");
     $(ELEMENT_MANAGEPAGES_SEARCH_BUTTON).click();
     info("Verify that the search page is shown with correct results");
     $(byText(title)).should(Condition.exist);
@@ -74,7 +80,7 @@ public class PortalManagePages {
     searchPage(titlePage, "", type);
     $(ELEMENT_MAGEPAGES_CONTENT_ACTION_COLUMN_DELETE).click();
     alert.acceptAlert();
-    if ($(byText("No result found.")).waitUntil(Condition.appears,Configuration.timeout).is(Condition.exist)){
+    if ($(byText("No result found.")).waitUntil(Condition.appears, Configuration.timeout).is(Condition.exist)) {
       $(byText("OK")).click();
     }
 

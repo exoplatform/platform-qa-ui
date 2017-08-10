@@ -116,9 +116,9 @@ public class CalendarManagement {
    * Delete a calendar
    * 
    * @param name name of calendar
-   * @param verify optional parameter. If not be set, by default, it is
-   *          considered that calendar is deleted = true: verify that calendar
-   *          is deleted, = false: not verify that calendar is deleted,
+   * @param verify optional parameter. If not be set, by default, it is considered
+   *          that calendar is deleted = true: verify that calendar is deleted, =
+   *          false: not verify that calendar is deleted,
    */
   public void deleteCalendar(String name, boolean... verify) {
     if ($(byId("UICalendars")).find(byText(name)).is(Condition.exist)) {
@@ -130,7 +130,7 @@ public class CalendarManagement {
         alert.verifyAlertMessage(ELEMENT_CONFIRM_REMOVE_CALENDAR_MSG);
       else
         ELEMENT_YES_BUTTON.click();
-      $(byText(name)).waitUntil(Condition.disappears,Configuration.timeout);
+      $(byText(name)).waitUntil(Condition.disappears, Configuration.timeout);
     }
 
   }
@@ -181,8 +181,8 @@ public class CalendarManagement {
    * @param group group: example (/developers, /platform/administrators,
    *          /platform/users, /platform/web-contributors,
    *          /organization/management/executive-board, /organization/employees
-   * @param isType true: select a group by typing false: select a group by
-   *          select group icon
+   * @param isType true: select a group by typing false: select a group by select
+   *          group icon
    */
   public void selectGroupInGroupTabCalendarForm(String group, boolean isType) {
     info("Input into tab Show in Group of Add calendar form");
@@ -214,8 +214,8 @@ public class CalendarManagement {
    * Select a user/role who has edit permission in a group
    * 
    * @param user
-   * @param mode way to input users, groups. =0: type directly =1: select user
-   *          =2: select role
+   * @param mode way to input users, groups. =0: type directly =1: select user =2:
+   *          select role
    */
   public void selectUserEditPermissionInGroup(String[] user, int... mode) {
     for (int i = 0; i < user.length; i++) {
@@ -419,10 +419,10 @@ public class CalendarManagement {
    * 
    * @param calendar name of calendar
    * @param userGroup array of users or groups that are shared with
-   * @param canEdit array of "canEdit" permissions for users, groups
-   *          respectively inputed by userGroup variable
-   * @param mode way to input users, groups. =0: type directly =1: select user
-   *          =2: select group =3: select membership
+   * @param canEdit array of "canEdit" permissions for users, groups respectively
+   *          inputed by userGroup variable
+   * @param mode way to input users, groups. =0: type directly =1: select user =2:
+   *          select group =3: select membership
    */
   public void shareCalendar(String calendar, String[] userGroup, boolean[] canEdit, int... mode) {
     info("Share calendar");
@@ -596,14 +596,13 @@ public class CalendarManagement {
   /**
    * change values in setting tab of calendar setting form
    * 
-   * @param viewtype default view fof calendar: Week, Day, Month, List, Work
-   *          Week
+   * @param viewtype default view fof calendar: Week, Day, Month, List, Work Week
    * @param timezone time zone of calendar, e.g.: (GMT -11:00) Pacific/Samoa *
-   * @param dateformat date format of calendar:dd/mm/yyyy, dd-mm-yyyy,
-   *          mm/dd/yyyy, mm-dd-yyyy
+   * @param dateformat date format of calendar:dd/mm/yyyy, dd-mm-yyyy, mm/dd/yyyy,
+   *          mm-dd-yyyy
    * @param timeformat time format of calendar: AM/PM, 24 Hours
-   * @param day start day of week: monday, tuesday, wednesday, thursday,
-   *          saturday, sunday
+   * @param day start day of week: monday, tuesday, wednesday, thursday, saturday,
+   *          sunday
    * @param isShow true: show working time false: don't show working time
    * @param option option to send mail inviatation: NEVER, ASK, ALWAYS
    */
@@ -1139,8 +1138,8 @@ public class CalendarManagement {
    * Add Remote Calendar
    * 
    * @param url url of the remote calendar
-   * @param isChangeType true: if want to change type of remote calendar false:
-   *          if want to keep default type of remote calendar
+   * @param isChangeType true: if want to change type of remote calendar false: if
+   *          want to keep default type of remote calendar
    * @param name the display name of remote calendar
    * @param des the description of remote calendar
    * @param type the mode radio of remote calendar

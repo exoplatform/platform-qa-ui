@@ -20,33 +20,35 @@
  */
 package org.exoplatform.platform.qa.ui.selenium;
 
-import com.codeborne.selenide.Condition;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import static com.codeborne.selenide.Selenide.$;
+
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 
-import static com.codeborne.selenide.Selenide.$;
+import com.codeborne.selenide.Condition;
+
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class ManageAlert {
   // ECMS > Symlink
-  public final By ELEMENT_ALERT = By.xpath("//*[contains(@class, 'popupTitle') and contains(text(), 'Warning')]");
+  public final By              ELEMENT_ALERT   = By.xpath("//*[contains(@class, 'popupTitle') and contains(text(), 'Warning')]");
 
-  public final By ELEMENT_MESSAGE = By.xpath("//*[contains(@class, 'warningIcon')]");
+  public final By              ELEMENT_MESSAGE = By.xpath("//*[contains(@class, 'warningIcon')]");
 
-  public final By ELEMENT_INFO = By.xpath("//*[contains(@class, 'infoIcon')]");
+  public final By              ELEMENT_INFO    = By.xpath("//*[contains(@class, 'infoIcon')]");
 
-  public final By ELEMENT_CONFIRM = By.xpath("//*[contains(@class, 'confirmationIcon')]");
+  public final By              ELEMENT_CONFIRM = By.xpath("//*[contains(@class, 'confirmationIcon')]");
 
-  private final TestBase testBase;
+  private final TestBase       testBase;
 
-  private Button button;
+  private Button               button;
 
   private ElementEventTestBase evt;
 
-  private WebDriver seleniumWebDriver;
+  private WebDriver            seleniumWebDriver;
 
   public ManageAlert(TestBase testBase) {
     this.testBase = testBase;
@@ -100,7 +102,7 @@ public class ManageAlert {
    * wait for confirmation
    *
    * @param confirmationText
-   * @param wait             wait[0]: timeout
+   * @param wait wait[0]: timeout
    */
   public void waitForConfirmation(String confirmationText, int... wait) {
     String message = getTextFromAlert();
@@ -117,14 +119,13 @@ public class ManageAlert {
       return;
     }
 
-    for (int second = 0; ; second++) {
+    for (int second = 0;; second++) {
       if (second >= timeOut) {
         Assert.fail("Timeout at waitForConfirmation: " + confirmationText);
       }
       if (message.contains(confirmationText)) {
         break;
       }
-
 
     }
     Alert alert = seleniumWebDriver.switchTo().alert();

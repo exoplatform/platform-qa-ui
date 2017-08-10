@@ -236,6 +236,7 @@ public class ContentAdministration {
   public void addDrives(String name, String permission, specificView[] applyViews) {
     info("Click on Add button of the drive in the list");
     ELEMENT_ECM_EXPLORER_DRIVES_ADD_DRIVES.scrollTo().click();
+    ELEMENT_TAB_ADD_DRIVE_POPUP.click();
     info("Type a name for the drive");
     $(ELEMENT_ECM_EXPLORER_NAME_DRIVES_FORM).setValue(name);
     info("Click on Add Permission button for the drive");
@@ -974,8 +975,7 @@ public class ContentAdministration {
   /**
    * Add more actions for a View type By QuynhPT date 09/01/2015
    * 
-   * @param nameView the name of View type as: Web, Admin, Icon, List,
-   *          Categories
+   * @param nameView the name of View type as: Web, Admin, Icon, List, Categories
    * @param applyActions the name of actions that list in the popup
    */
   public void addActionsForAView(String nameView, specificEcmActionstypes action) {

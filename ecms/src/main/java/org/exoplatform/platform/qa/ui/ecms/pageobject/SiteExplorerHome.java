@@ -360,8 +360,7 @@ public class SiteExplorerHome {
     info("Input new name of tag");
 
     ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].setAttribute('value', '"
-        + newName + "')",
-                                                                                   evt.waitForAndGetElement(ELEMENT_TAG_POPUP_NAME_FIELD));
+        + newName + "')", evt.waitForAndGetElement(ELEMENT_TAG_POPUP_NAME_FIELD));
     info("Save all changes");
     evt.clickByJavascript(ELEMENT_TAG_POPUP_SAVE);
     info("Verify that the new name of tag is changed");
@@ -637,8 +636,7 @@ public class SiteExplorerHome {
   }
 
   /**
-   * Delete a category that is added to the file in SE By QuynhPT date
-   * 16/01/2015
+   * Delete a category that is added to the file in SE By QuynhPT date 16/01/2015
    *
    * @param nameCategory
    */
@@ -1124,8 +1122,7 @@ public class SiteExplorerHome {
     info("Select a content");
     WebElement el =
                   (new WebDriverWait(testBase.getExoWebDriver().getWebDriver(),
-                                     30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(ELEMENT_SITE_EXPLORER_CONTENT_NAME.replace("${nameContent}",
-                                                                                                                                                nameContent))));
+                                     30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(ELEMENT_SITE_EXPLORER_CONTENT_NAME.replace("${nameContent}", nameContent))));
     el.click();
 
   }

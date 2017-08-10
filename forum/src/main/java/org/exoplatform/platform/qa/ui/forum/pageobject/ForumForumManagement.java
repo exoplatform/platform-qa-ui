@@ -1,17 +1,17 @@
 package org.exoplatform.platform.qa.ui.forum.pageobject;
 
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.openqa.selenium.By;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import org.openqa.selenium.By;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class ForumForumManagement {
@@ -49,7 +49,8 @@ public class ForumForumManagement {
   public void addForumSimple(String nameForum, String order, String description) {
     // TODO Auto-generated method stub
     info("Add forum simple");
-    //evt.waitForAndGetElement(ELEMENT_ACTIONBAR_ADDFORUM, testBase.getDefaultTimeout(), 1);
+    // evt.waitForAndGetElement(ELEMENT_ACTIONBAR_ADDFORUM,
+    // testBase.getDefaultTimeout(), 1);
     $(ELEMENT_ACTIONBAR_ADDFORUM).waitUntil(Condition.appears, Configuration.timeout);
     info("click on Add forum button");
     $(ELEMENT_ACTIONBAR_ADDFORUM).click();
@@ -57,7 +58,7 @@ public class ForumForumManagement {
     $(ELEMENT_ADDFORUM_POPUP_TITLE).val(nameForum);
     info("check and input Oder field");
 
-   $(ELEMENT_ADDFORUM_POPUP_ORDER).val(order);
+    $(ELEMENT_ADDFORUM_POPUP_ORDER).val(order);
     info("check and input description");
 
     $(ELEMENT_ADDFORUM_POPUP_DESCRIPTION).val(description);
@@ -111,7 +112,7 @@ public class ForumForumManagement {
       evt.click(ELEMENT_DELETE_FORUM);
 
       info("Verify that Confirm popup is shown");
-      $(byText("Are you sure you want to delete this forum ?")).waitUntil(Condition.appears,10000);
+      $(byText("Are you sure you want to delete this forum ?")).waitUntil(Condition.appears, 10000);
       info("Click on OK button of Confirm popup");
       $(ELEMENT_OK_DELETE).click();
       info("Finish deleting the forum");
@@ -200,8 +201,9 @@ public class ForumForumManagement {
   public void deleteForum(String name) {
     selectItemMoreActionMenu(specifMoreActionMenu.DELETE);
     info("Verify that the forum is deleted");
-    //evt.waitForElementNotPresent(ELEMENT_FORUM_FORUM_NAME_LINK.replace("${name}", name));
-$(byText(name)).shouldNot(Condition.exist);
+    // evt.waitForElementNotPresent(ELEMENT_FORUM_FORUM_NAME_LINK.replace("${name}",
+    // name));
+    $(byText(name)).shouldNot(Condition.exist);
   }
 
   /**
@@ -216,7 +218,7 @@ $(byText(name)).shouldNot(Condition.exist);
     evt.click(By.linkText(destination));
     evt.waitForElementNotPresent(ELEMENT_POPUP_MOVE_FORUM);
     forumHP.goToCategory(destination);
-    $(byText(forum)).waitUntil(Condition.appears,Configuration.timeout);
+    $(byText(forum)).waitUntil(Condition.appears, Configuration.timeout);
     info("Move forum successfully");
   }
 

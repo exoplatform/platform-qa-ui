@@ -2,16 +2,18 @@ package org.exoplatform.platform.ui.qa.wiki;
 
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_CONTENT_WIKI_INPUT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_SOURCE_EDITOR_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_TITLE_WIKI_INPUT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
 import java.util.ArrayList;
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
@@ -65,10 +67,10 @@ public class WikiBasicActionEditTestIT extends Base {
     info("Test 1: Edit page");
     /*
      * Step Number: 1 Step Name: Step 1: Create a page Step Description: - Click
-     * [Add Page] - -> [Blank Page]/[From Template...] - Select [Source Editor]
-     * to switch to [Source Editor] mode - Put title, content - Click [Save]
-     * Input Data: Expected Outcome: - By default, the [Create Wiki page] is
-     * displayed in the [Rich Text] mode -New page is created successfully
+     * [Add Page] - -> [Blank Page]/[From Template...] - Select [Source Editor] to
+     * switch to [Source Editor] mode - Put title, content - Click [Save] Input
+     * Data: Expected Outcome: - By default, the [Create Wiki page] is displayed in
+     * the [Rich Text] mode -New page is created successfully
      */
     info("Create a wiki page");
     String title = "title" + getRandomNumber();
@@ -82,29 +84,28 @@ public class WikiBasicActionEditTestIT extends Base {
     sourcetexteditor.addSimplePage(title, content);
     wikiManagement.saveAddPage();
     wikiValidattions.verifyTitleWikiPage(title);
-      arrayPage.add(title);
+    arrayPage.add(title);
 
     /*
-     * Step number: 2 Step Name: Step 2: Edit page Step Description: - Select
-     * the page above - Click [Edit] - Change properties - Click [Save] Input
-     * Data: Expected Outcome: - The [Edit Page] is shown in [Source Editor]
-     * mode - Page is edited
+     * Step number: 2 Step Name: Step 2: Edit page Step Description: - Select the
+     * page above - Click [Edit] - Change properties - Click [Save] Input Data:
+     * Expected Outcome: - The [Edit Page] is shown in [Source Editor] mode - Page
+     * is edited
      */
-      info("Edit a wiki page");
-      String newTitle = "newTitle" + getRandomNumber();
-      String newContent = "newContent" + getRandomNumber();
-      wikiHomePage.goToAPage(title);
-      wikiHomePage.goToEditPage();
-      if ($(ELEMENT_SOURCE_EDITOR_BUTTON).isDisplayed()) {
-        wikiManagement.goToSourceEditor();
-      }
-      sourcetexteditor.editSimplePage(newTitle, newContent);
-      wikiManagement.saveAddPage();
-      wikiValidattions.verifyTitleWikiPage(newTitle);
-      arrayPage.add(newTitle);
-      wikiHomePage.deleteWiki(newTitle);
-
+    info("Edit a wiki page");
+    String newTitle = "newTitle" + getRandomNumber();
+    String newContent = "newContent" + getRandomNumber();
+    wikiHomePage.goToAPage(title);
+    wikiHomePage.goToEditPage();
+    if ($(ELEMENT_SOURCE_EDITOR_BUTTON).isDisplayed()) {
+      wikiManagement.goToSourceEditor();
     }
+    sourcetexteditor.editSimplePage(newTitle, newContent);
+    wikiManagement.saveAddPage();
+    wikiValidattions.verifyTitleWikiPage(newTitle);
+    arrayPage.add(newTitle);
+    wikiHomePage.deleteWiki(newTitle);
 
   }
 
+}

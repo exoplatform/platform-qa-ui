@@ -6,7 +6,6 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import org.openqa.selenium.By;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class PageEditor {

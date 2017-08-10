@@ -69,9 +69,9 @@ public class SOCSpaceManagementTestIT extends Base {
     /*
      * Step Number: 1 Step Name: Step 1: Create a new Space Step Description: -
      * Login Intranet - Click on My space on Admin bar - Click Add new space and
-     * input valid value into create space form - Click on Create button Input
-     * Data: Expected Outcome: - New space is displayed on My space list of user
-     * and Publics space list of other user..
+     * input valid value into create space form - Click on Create button Input Data:
+     * Expected Outcome: - New space is displayed on My space list of user and
+     * Publics space list of other user..
      */
     info("Create a space");
     homePagePlatform.goToMySpaces();
@@ -117,12 +117,11 @@ public class SOCSpaceManagementTestIT extends Base {
     addUsers.addUser(username2, password, email2, username2, username2);
     manageLogInOut.signIn(username1, password);
     /*
-     * Step Number: 1 Step Name: Step 1: Delete a space Step Description: -
-     * Login Intranet - Click on My space on Admin bar - Add new space - Go to
-     * My Space page, select the space - Click on Delete Space icon - Click on
-     * OK button to confirm Input Data: Expected Outcome: - Space is removed. It
-     * doesn't display on My space list of user and all spaces list of other
-     * user.
+     * Step Number: 1 Step Name: Step 1: Delete a space Step Description: - Login
+     * Intranet - Click on My space on Admin bar - Add new space - Go to My Space
+     * page, select the space - Click on Delete Space icon - Click on OK button to
+     * confirm Input Data: Expected Outcome: - Space is removed. It doesn't display
+     * on My space list of user and all spaces list of other user.
      */
     info("Create a space");
     homePagePlatform.goToMySpaces();

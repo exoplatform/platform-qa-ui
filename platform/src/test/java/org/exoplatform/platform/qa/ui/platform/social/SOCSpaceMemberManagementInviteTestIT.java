@@ -74,10 +74,10 @@ public class SOCSpaceMemberManagementInviteTestIT extends Base {
     manageLogInOut.signIn(username1, password);
 
     /*
-     * Step Number: 1 Step Name: Step 1: Create a new Space Step Description: -
-     * Sign in system - Select space page to view - Click on [Add new Space] -
-     * Enter all valid data - Click [Create] Input Data: Expected Outcome: -
-     * Create new Space successfully.
+     * Step Number: 1 Step Name: Step 1: Create a new Space Step Description: - Sign
+     * in system - Select space page to view - Click on [Add new Space] - Enter all
+     * valid data - Click [Create] Input Data: Expected Outcome: - Create new Space
+     * successfully.
      */
     String space = "space" + getRandomNumber();
 
@@ -86,12 +86,11 @@ public class SOCSpaceMemberManagementInviteTestIT extends Base {
     spaceManagement.addNewSpaceSimple(space, space);
 
     /*
-     * Step number: 2 Step Name: Step 2: Send invitation Step Description: -
-     * Creator selects the Space which he/she has created at step 1.1. - Click
-     * on [Edit space] icon or access the Space and select space settings
-     * portlet - Select [Members] tab - Enter valid user name or select a user
-     * from list - Click [invite] Input Data: Expected Outcome: Send invitation
-     * successfully:
+     * Step number: 2 Step Name: Step 2: Send invitation Step Description: - Creator
+     * selects the Space which he/she has created at step 1.1. - Click on [Edit
+     * space] icon or access the Space and select space settings portlet - Select
+     * [Members] tab - Enter valid user name or select a user from list - Click
+     * [invite] Input Data: Expected Outcome: Send invitation successfully:
      */
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.goToMemberTab();
@@ -115,8 +114,8 @@ public class SOCSpaceMemberManagementInviteTestIT extends Base {
 
   /**
    * <li>Case ID:122496.</li>
-   * <li>Test Case Name: Send request to Space at Visible mode and Validation
-   * for registration.</li>
+   * <li>Test Case Name: Send request to Space at Visible mode and Validation for
+   * registration.</li>
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li>
    */
@@ -137,11 +136,11 @@ public class SOCSpaceMemberManagementInviteTestIT extends Base {
     addUsers.addUser(username2, password, email2, username2, username2);
     manageLogInOut.signIn(username1, password);
     /*
-     * Step Number: 1 Step Name: - Step Description: Step 1: create a new space
-     * at the visible and validation mode Input Data: - Sign in system - Select
-     * space page - Click on [Add new space] button - Enter valid name - Select
-     * visibility and check in visible and Validation - Click on [create]
-     * button. Expected Outcome: Create a new space successfully
+     * Step Number: 1 Step Name: - Step Description: Step 1: create a new space at
+     * the visible and validation mode Input Data: - Sign in system - Select space
+     * page - Click on [Add new space] button - Enter valid name - Select visibility
+     * and check in visible and Validation - Click on [create] button. Expected
+     * Outcome: Create a new space successfully
      */
     String space = "space" + getRandomNumber();
 
@@ -164,13 +163,12 @@ public class SOCSpaceMemberManagementInviteTestIT extends Base {
     spaceManagement.goToRequestPendingTab();
     $(byText(space)).waitUntil(Condition.appears, Configuration.timeout);
     /*
-     * Step number: 3 Step Name: - Step Description: Step 3: Check request
-     * sending successfully Input Data: - User created the space sign in - Go to
-     * space page - Select the space and click [edit space] or access the space
-     * and access the space setting portlet - Select [members] tab Expected
-     * Outcome: Name of user at step 3, is in pending list of the space. Click
-     * on [validate] if manager accept the request else click on [decline]
-     * button
+     * Step number: 3 Step Name: - Step Description: Step 3: Check request sending
+     * successfully Input Data: - User created the space sign in - Go to space page
+     * - Select the space and click [edit space] or access the space and access the
+     * space setting portlet - Select [members] tab Expected Outcome: Name of user
+     * at step 3, is in pending list of the space. Click on [validate] if manager
+     * accept the request else click on [decline] button
      */
     manageLogInOut.signIn(username1, password);
     homePagePlatform.goToSpecificSpace(space);

@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class ManageLayout {
@@ -328,12 +327,12 @@ public class ManageLayout {
    * @param permissionSelector
    * @param popupName <<<<<<< HEAD is tab name: Access/Move Apps/Move Containers
    *          <<<<<<< HEAD ======= <<<<<<< HEAD By: QuyenNT =======
-   * @Author: QuyenNT >>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted
-   *          Page Editor/Container Permissions Date: Oct 30, 2015 >>>>>>>
-   *          FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page
-   *          Editor/Container Permissions =======
-   * @param popupTitle >>>>>>> FQA-2759:PLF43 - Write High Fnc/PLF/Restricted
-   *          Page Editor/Site Permissions
+   * @Author: QuyenNT >>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page
+   *          Editor/Container Permissions Date: Oct 30, 2015 >>>>>>>
+   *          FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Container
+   *          Permissions =======
+   * @param popupTitle >>>>>>> FQA-2759:PLF43 - Write High Fnc/PLF/Restricted Page
+   *          Editor/Site Permissions
    */
   public void addPremission(String groupPath,
                             String membership,
@@ -448,8 +447,8 @@ public class ManageLayout {
   }
 
   /**
-   * <<<<<<< HEAD Select a container -> Set permission for Move Containers
-   * ======= Select a container -> Set permission for Move Containers >>>>>>>
+   * <<<<<<< HEAD Select a container -> Set permission for Move Containers =======
+   * Select a container -> Set permission for Move Containers >>>>>>>
    * FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Container
    * Permissions
    * 
@@ -459,11 +458,11 @@ public class ManageLayout {
    */
   public void setMoveContainersPermission(String groupPath, String membership, String addedGroup) {
 
-    WebElement permissionTable = evt.waitForAndGetElement(
-                                                          ELEMENT_PERMISSION_TABLE.replace("${tabName}",
-                                                                                           ELEMENT_PERMISSION_MOVE_CONTAINERS_TAB_ID),
-                                                          2000,
-                                                          0);
+    WebElement permissionTable =
+                               evt.waitForAndGetElement(ELEMENT_PERMISSION_TABLE.replace("${tabName}",
+                                                                                         ELEMENT_PERMISSION_MOVE_CONTAINERS_TAB_ID),
+                                                        2000,
+                                                        0);
 
     info("Set PERMISSION");
     if (permissionTable == null) {// public mode is check
@@ -487,11 +486,11 @@ public class ManageLayout {
    * Select a container -> Set move container permission to No-one
    */
   public void uncheckMoveContainerPublicMode() {
-    WebElement permissionTable = evt.waitForAndGetElement(
-                                                          ELEMENT_PERMISSION_TABLE.replace("${tabName}",
-                                                                                           ELEMENT_PERMISSION_MOVE_CONTAINERS_TAB_ID),
-                                                          2000,
-                                                          0);
+    WebElement permissionTable =
+                               evt.waitForAndGetElement(ELEMENT_PERMISSION_TABLE.replace("${tabName}",
+                                                                                         ELEMENT_PERMISSION_MOVE_CONTAINERS_TAB_ID),
+                                                        2000,
+                                                        0);
 
     info("Set PERMISSION");
     if (permissionTable == null) {// public mode is check
@@ -508,11 +507,11 @@ public class ManageLayout {
    */
   public void checkMoveContainerPublicMode() {
     // Check permission table
-    WebElement permissionTable = evt.waitForAndGetElement(
-                                                          ELEMENT_PERMISSION_TABLE.replace("${tabName}",
-                                                                                           ELEMENT_PERMISSION_MOVE_CONTAINERS_TAB_ID),
-                                                          2000,
-                                                          0);
+    WebElement permissionTable =
+                               evt.waitForAndGetElement(ELEMENT_PERMISSION_TABLE.replace("${tabName}",
+                                                                                         ELEMENT_PERMISSION_MOVE_CONTAINERS_TAB_ID),
+                                                        2000,
+                                                        0);
 
     info("Set PERMISSION");
     if (permissionTable != null) {// public mode is unchecked

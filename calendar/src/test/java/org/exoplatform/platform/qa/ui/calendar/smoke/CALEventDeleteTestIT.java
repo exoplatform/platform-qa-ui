@@ -51,11 +51,11 @@ public class CALEventDeleteTestIT extends Base {
 
     info("Test 5: Delete event of group calendar");
     /*
-     * Step Number: 1 Step Name: Step 1: Add event Step Description: - Add new
-     * group calendar - Assign calendar for an user with edit right - Add new
-     * event on this group calendar Input Data: Expected Outcome: - Event is
-     * added successfully - Group calendar and its event(s) are displayed for
-     * all member of its group(s)
+     * Step Number: 1 Step Name: Step 1: Add event Step Description: - Add new group
+     * calendar - Assign calendar for an user with edit right - Add new event on
+     * this group calendar Input Data: Expected Outcome: - Event is added
+     * successfully - Group calendar and its event(s) are displayed for all member
+     * of its group(s)
      */
 
     info("Create a new calendar");
@@ -80,11 +80,10 @@ public class CALEventDeleteTestIT extends Base {
     eventManagement.saveQuickAddEvent();
 
     /*
-     * Step number: 2 Step Name: Step 2: Edit event by member of group without
-     * edit right Step Description: - Login by a member of group calendar who
-     * does not have edit right on that calendar - Right click on group
-     * calendar's event Input Data: Expected Outcome: Only View action is
-     * displayed
+     * Step number: 2 Step Name: Step 2: Edit event by member of group without edit
+     * right Step Description: - Login by a member of group calendar who does not
+     * have edit right on that calendar - Right click on group calendar's event
+     * Input Data: Expected Outcome: Only View action is displayed
      */
 
     // manageLogInOut.signOut();
@@ -97,9 +96,9 @@ public class CALEventDeleteTestIT extends Base {
 
     /*
      * Step number: 3 Step Name: Step 3: Edit event by member of group with edit
-     * right Step Description: - Login by member who is assign edit right on
-     * above group calendar - Right click on event of shared calendar and select
-     * Delete Input Data: Expected Outcome: Event is removed from group calendar
+     * right Step Description: - Login by member who is assign edit right on above
+     * group calendar - Right click on event of shared calendar and select Delete
+     * Input Data: Expected Outcome: Event is removed from group calendar
      */
     // manageLogInOut.signOut();
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);

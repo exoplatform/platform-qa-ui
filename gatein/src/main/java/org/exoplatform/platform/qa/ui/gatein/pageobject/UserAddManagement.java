@@ -9,7 +9,10 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.util.ArrayList;
 
-import org.exoplatform.platform.qa.ui.selenium.*;
+import org.exoplatform.platform.qa.ui.selenium.Button;
+import org.exoplatform.platform.qa.ui.selenium.Dialog;
+import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 

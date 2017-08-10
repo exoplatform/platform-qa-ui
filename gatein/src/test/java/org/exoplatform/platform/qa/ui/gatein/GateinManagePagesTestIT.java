@@ -57,10 +57,10 @@ public class GateinManagePagesTestIT extends Base {
     String pageName = "pageName" + num;
     String title = "title" + num;
     /*
-     * Step Number: 1 Step Name: Step 1: Add page of portal Step Description: -
-     * Go to Administration/Portal/Pages - Click Add new page - Choose Owner
-     * type is portal - Add some fields required - Click Save Input Data:
-     * Expected Outcome: - Add page successfully
+     * Step Number: 1 Step Name: Step 1: Add page of portal Step Description: - Go
+     * to Administration/Portal/Pages - Click Add new page - Choose Owner type is
+     * portal - Add some fields required - Click Save Input Data: Expected Outcome:
+     * - Add page successfully
      */
     navigationToolbar.goToPotalPages();
     portalmanagepages.addPage(pageName, title, "");
@@ -81,16 +81,14 @@ public class GateinManagePagesTestIT extends Base {
     String title = "title" + num;
     /*
      * int index = appLayData.getRandomIndexByType(1); String idName =
-     * appLayData.newId.get(index); String name =
-     * appLayData.newTitle.get(index);
+     * appLayData.newId.get(index); String name = appLayData.newTitle.get(index);
      */
     /*
-     * Step Number: 1 Step Name: Step 1: Edit page of portal Step Description: -
-     * Go to Administration/Portal/Pages - Select a page of portal and click
-     * [Edit page] icon - Change something + Edit portlet, + View page
-     * properties + Drag & drop container and application + Switch view mode -
-     * Click Save Input Data: Expected Outcome: - The page is updated with the
-     * change value
+     * Step Number: 1 Step Name: Step 1: Edit page of portal Step Description: - Go
+     * to Administration/Portal/Pages - Select a page of portal and click [Edit
+     * page] icon - Change something + Edit portlet, + View page properties + Drag &
+     * drop container and application + Switch view mode - Click Save Input Data:
+     * Expected Outcome: - The page is updated with the change value
      */
     navigationToolbar.goToPotalPages();
     portalmanagepages.addPage(pageName, title, "");
@@ -117,10 +115,10 @@ public class GateinManagePagesTestIT extends Base {
     String pageName = "pageName" + num;
     String title = "title" + num;
     /*
-     * Step Number: 1 Step Name: Step 1: Delete page of portal Step Description:
-     * - Go to Group/Administration/Page Management - Select a page of portal
-     * and click [Delete page] Input Data: Expected Outcome: - The page is
-     * removed from the list
+     * Step Number: 1 Step Name: Step 1: Delete page of portal Step Description: -
+     * Go to Group/Administration/Page Management - Select a page of portal and
+     * click [Delete page] Input Data: Expected Outcome: - The page is removed from
+     * the list
      */
     navigationToolbar.goToPotalPages();
     portalmanagepages.addPage(pageName, title, "");

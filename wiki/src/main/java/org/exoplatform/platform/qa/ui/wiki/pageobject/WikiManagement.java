@@ -1,22 +1,21 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
-import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
@@ -66,11 +65,11 @@ public class WikiManagement {
    * Change to Rich Text Mode
    */
   public void goToRichTextEditor() {
-    if (ELEMENT_BUTTON_WIKI_RITCH_TEXT.waitUntil(Condition.appears,Configuration.timeout).is(Condition.exist)) {
+    if (ELEMENT_BUTTON_WIKI_RITCH_TEXT.waitUntil(Condition.appears, Configuration.timeout).is(Condition.exist)) {
       info("Go to Rich Text Mode");
       ELEMENT_BUTTON_WIKI_RITCH_TEXT.click();
     }
-    $(ELEMENT_CONTENT_WIKI_FRAME).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_CONTENT_WIKI_FRAME).waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**
@@ -91,7 +90,7 @@ public class WikiManagement {
   public void saveAddPage() {
     info("Save all changes");
     ELEMENT_SAVE_BUTTON_ADD_PAGE.click();
-    ELEMENT_SAVE_BUTTON_ADD_PAGE.waitUntil(Condition.disappears,Configuration.timeout);
+    ELEMENT_SAVE_BUTTON_ADD_PAGE.waitUntil(Condition.disappears, Configuration.timeout);
     info("Wiki page simple is created successfully");
   }
 
@@ -138,8 +137,8 @@ public class WikiManagement {
   /**
    * Edit paragraph in a Wiki page
    *
-   * @param paragraphTitle input paragraph title without space character. Can
-   *          not be <code>null</code>.
+   * @param paragraphTitle input paragraph title without space character. Can not
+   *          be <code>null</code>.
    * @param paragraphContent input paragraph content with heading followed help
    *          tips. Can not be <code>null</code>.
    */
@@ -192,8 +191,7 @@ public class WikiManagement {
   }
 
   /**
-   * Move page 1 to page 2 when user does not have edit permission in
-   * destination
+   * Move page 1 to page 2 when user does not have edit permission in destination
    *
    * @param page1
    * @param page2
@@ -422,7 +420,6 @@ public class WikiManagement {
       assert true;
     else
       assert false : "the link's format is incorrect";
-
 
   }
 

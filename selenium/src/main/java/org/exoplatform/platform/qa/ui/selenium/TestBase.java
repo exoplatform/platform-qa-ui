@@ -155,7 +155,8 @@ public class TestBase {
    * @param opParams
    */
   public void initSeleniumTest(Object... opParams) {
-    // Now the Selenium Driver and the eXo Platform screens are initialize in the core project.
+    // Now the Selenium Driver and the eXo Platform screens are initialize in the
+    // core project.
   }
 
   public void initSeleniumTestWithOutTermAndCondition(Object... opParams) {
@@ -323,8 +324,8 @@ public class TestBase {
   }
 
   /**
-   * Use this function to verify if a check-box is checked (using when creating
-   * a portal/publicMode)
+   * Use this function to verify if a check-box is checked (using when creating a
+   * portal/publicMode)
    *
    * @param locator
    * @param opParams

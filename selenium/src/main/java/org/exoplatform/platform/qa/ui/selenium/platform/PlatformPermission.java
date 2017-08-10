@@ -3,7 +3,6 @@ package org.exoplatform.platform.qa.ui.selenium.platform;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.*;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class PlatformPermission {
@@ -20,9 +19,8 @@ public class PlatformPermission {
    * Search user by key search
    * 
    * @param keySearch
-   * @param type type of search 1: search by user name 2: search by first name
-   *          3: search by last name 4: search by email default: search by user
-   *          name
+   * @param type type of search 1: search by user name 2: search by first name 3:
+   *          search by last name 4: search by email default: search by user name
    */
   public void searchUser(String keySearch, int type) {
     evt.type(ELEMENT_SEARCH_USER_INPUT, keySearch, true);
@@ -54,9 +52,8 @@ public class PlatformPermission {
    * Select user permission
    * 
    * @param user list of user: john/mary
-   * @param type type of search 1: search by user name 2: search by first name
-   *          3: search by last name 4: search by email default: search by user
-   *          name
+   * @param type type of search 1: search by user name 2: search by first name 3:
+   *          search by last name 4: search by email default: search by user name
    */
   public void selectUserPermission(String user, int type) {
     String[] temp = user.split("/");

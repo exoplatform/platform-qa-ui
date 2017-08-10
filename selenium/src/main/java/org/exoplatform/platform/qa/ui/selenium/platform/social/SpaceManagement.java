@@ -1,24 +1,19 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.Actions;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.Actions;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.Actions;
-
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selectors.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class SpaceManagement {
 
@@ -48,20 +43,20 @@ public class SpaceManagement {
    * delete Space
    *
    * @param spaceName name of space
-   * @param isVerify true: verify content of confirm msg false: not verify
-   *          content of confirm msg
+   * @param isVerify true: verify content of confirm msg false: not verify content
+   *          of confirm msg
    */
   public void deleteSpace(String spaceName, Boolean isVerify) {
     if ($(byText(spaceName)).is(Condition.exist)) {
       info("Do delete space");
       ELEMENT_SPACES_LIST.find(byText(spaceName)).parent().parent().parent().find(byText("Delete")).click();
       if (isVerify)
-      alert.verifyAlertMessage(ELEMENT_SPACE_CONFIRM_DELETE);
+        alert.verifyAlertMessage(ELEMENT_SPACE_CONFIRM_DELETE);
       $(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON).click();
-      $(byText(spaceName)).waitUntil(Condition.disappears,Configuration.timeout);    }
-
+      $(byText(spaceName)).waitUntil(Condition.disappears, Configuration.timeout);
     }
 
+  }
 
   /**
    * Leave a space
@@ -226,7 +221,7 @@ public class SpaceManagement {
    */
   public void searchSpace(String name, String number) {
     info("Waiting my space is shown");
-    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.appears,Configuration.timeout);
+    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.appears, Configuration.timeout);
     info("Input the space into search text box");
     ELEMENT_MY_SPACE_SEARCH_TEXT.setValue(name);
     info("evt.click on Search button");
@@ -254,9 +249,8 @@ public class SpaceManagement {
    */
   public void goToInvitationsReceivedTab() {
     info("Open Invitation Received tab");
-   $(ELEMENT_MY_SPACE_INVITATION_RECEIVED).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_MY_SPACE_INVITATION_RECEIVED).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_MY_SPACE_INVITATION_RECEIVED).click();
-
 
   }
 
@@ -277,7 +271,12 @@ public class SpaceManagement {
    */
   public void sendARequestToASpace(String space, boolean... isVerify) {
     info("Send a request to a space");
-    $(byText(space)).parent().parent().parent().find(ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_TO_JOIN_BTN).waitUntil(Condition.appears,Configuration.timeout).click();
+    $(byText(space)).parent()
+                    .parent()
+                    .parent()
+                    .find(ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_TO_JOIN_BTN)
+                    .waitUntil(Condition.appears, Configuration.timeout)
+                    .click();
     if (isVerify.length > 0) {
       info("Verify that request to join button is hidden and request pending status is shown");
       evt.waitForAndGetElement(ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_PENDING.replace("${space}", space), 3000, 1);
@@ -308,8 +307,8 @@ public class SpaceManagement {
   }
 
   /**
-   * Verify the message when a user accesses to a space if the user is not
-   * member of that space
+   * Verify the message when a user accesses to a space if the user is not member
+   * of that space
    *
    * @param space
    */
@@ -474,8 +473,8 @@ public class SpaceManagement {
    * Verify that a user is a member of the space or not
    *
    * @param fullName is full name of the user
-   * @param isDisplay =true if user is a member of the space =false if user is
-   *          not a memebr of the space
+   * @param isDisplay =true if user is a member of the space =false if user is not
+   *          a memebr of the space
    */
   public void verifyMember(String fullName, Boolean isDisplay) {
     goToMemberTab();

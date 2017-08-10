@@ -58,18 +58,17 @@ public class PlfNavigationTopNavigationTestIT extends Base {
   public void test01_CreateANewWikiPageViaTheTopNavigation() {
     info("Test 1: Create a new Wiki page via the top navigation");
     /*
-     * Step Number: 1 Step Name: Connect to intranet Step Description: - Login
-     * as normal user - Connect to Intranet Input Data: Expected Outcome: - The
-     * Top Navigation bar is displayed
+     * Step Number: 1 Step Name: Connect to intranet Step Description: - Login as
+     * normal user - Connect to Intranet Input Data: Expected Outcome: - The Top
+     * Navigation bar is displayed
      */
 
     /*
-     * Step number: 2 Step Name: Open wiki application Step Description: - Click
-     * on the button "Create" (+) - Select "Wiki Page" - Choose a location to
-     * add a new wiki page from the space switcher - Click on the button "Next"
-     * Input Data: Expected Outcome: - The menu is updated to
-     * "Create a new Wiki Page:" - The wiki application is opened with the New
-     * Page editor opened
+     * Step number: 2 Step Name: Open wiki application Step Description: - Click on
+     * the button "Create" (+) - Select "Wiki Page" - Choose a location to add a new
+     * wiki page from the space switcher - Click on the button "Next" Input Data:
+     * Expected Outcome: - The menu is updated to "Create a new Wiki Page:" - The
+     * wiki application is opened with the New Page editor opened
      */
     info("Go to Create Wiki page from Navigation toolbar");
     navigationToolbar.goToCreateWikiPage("");
@@ -101,9 +100,9 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     forumForumManagement.addForumSimple(forum1, "", forum1);
 
     /*
-     * Step Number: 1 Step Name: Connect to intranet Step Description: - Login
-     * as normal user - Connect to Intranet Input Data: - The Top Navigation bar
-     * is displayed
+     * Step Number: 1 Step Name: Connect to intranet Step Description: - Login as
+     * normal user - Connect to Intranet Input Data: - The Top Navigation bar is
+     * displayed
      */
     navigationToolbar.goToAddPoll("", forum);
     info("Verify that the poll popup is shown");
@@ -113,10 +112,10 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     homePagePlatform.goToForum();
     forumCategoryManagement.deleteCategory(category);
     /*
-     * Step number: 2 Step Name: Open poll application Step Description: - Click
-     * on the button "Create" (+) - Select "Poll" - Click on the button "Next"
-     * Input Data: Expected Outcome: - Form to create new Poll is displayed - A
-     * new Post editor is opened ready to create a new poll
+     * Step number: 2 Step Name: Open poll application Step Description: - Click on
+     * the button "Create" (+) - Select "Poll" - Click on the button "Next" Input
+     * Data: Expected Outcome: - Form to create new Poll is displayed - A new Post
+     * editor is opened ready to create a new poll
      */
 
   }
@@ -143,16 +142,16 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     info("Add a forum in the category1");
     forumForumManagement.addForumSimple(forum, "", forum);
     /*
-     * Step Number: 1 Step Name: - Connect to intranet Step Description: - Login
-     * as a normal user - Connect to Intranet Input Data: Expected Outcome: -
-     * The Top Navigation bar is displayed
+     * Step Number: 1 Step Name: - Connect to intranet Step Description: - Login as
+     * a normal user - Connect to Intranet Input Data: Expected Outcome: - The Top
+     * Navigation bar is displayed
      */
 
     /*
-     * Step number: 2 Step Name: - Open Topic application Step Description: -
-     * Click on the button "Create" (+) - Select "Topic" - Click on the button
-     * "Next" Input Data: Expected Outcome: - Form to create new Topic is
-     * displayed - A new Post editor is opened
+     * Step number: 2 Step Name: - Open Topic application Step Description: - Click
+     * on the button "Create" (+) - Select "Topic" - Click on the button "Next"
+     * Input Data: Expected Outcome: - Form to create new Topic is displayed - A new
+     * Post editor is opened
      */
     navigationToolbar.goToAddTopic("", forum);
     info("Verify that the topic is shown");
@@ -174,9 +173,9 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     info("Test 4: Create a new Event via the top navigation");
     String name = "name" + getRandomNumber();
     /*
-     * Step Number: 1 Step Name: - Connect to intranet Step Description: - Login
-     * as a normal user - Connect to Intranet Input Data: Expected Outcome: -
-     * The Top Navigation bar is displayed
+     * Step Number: 1 Step Name: - Connect to intranet Step Description: - Login as
+     * a normal user - Connect to Intranet Input Data: Expected Outcome: - The Top
+     * Navigation bar is displayed
      */
     navigationToolbar.goToAddEvent(name, "", "", "");
 
@@ -189,11 +188,10 @@ public class PlfNavigationTopNavigationTestIT extends Base {
 
     /*
      * Step number: 3 Step Name: - Create an event Step Description: - Select
-     * "event" from "Add new" - Input available data of date and times - Select
-     * the calendar - Click on the button "Next" - Wait 2 second Input Data:
-     * Expected Outcome: - A message is displayed:
-     * "The event was added to $calendar_name" - The message disappears with a
-     * fadeout effect
+     * "event" from "Add new" - Input available data of date and times - Select the
+     * calendar - Click on the button "Next" - Wait 2 second Input Data: Expected
+     * Outcome: - A message is displayed: "The event was added to $calendar_name" -
+     * The message disappears with a fadeout effect
      */
     homePagePlatform.goToCalendarPage();
     calendarHomePage.verifyIsPresentEventTask(name,
@@ -215,24 +213,24 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     info("Test 5: Create a new Task via the top navigation");
     String name = "name" + getRandomNumber();
     /*
-     * Step Number: 1 Step Name: - Connect to intranet Step Description: - Login
-     * as a normal user - Connect to Intranet Input Data: Expected Outcome: -
-     * The Top Navigation bar is displayed
+     * Step Number: 1 Step Name: - Connect to intranet Step Description: - Login as
+     * a normal user - Connect to Intranet Input Data: Expected Outcome: - The Top
+     * Navigation bar is displayed
      */
     navigationToolbar.gotoAddTask(name);
 
     /*
-     * Step number: 2 Step Name: Open form "Add new Task" Step Description: -
-     * Click on the button "Create" (+) - Select the item "Event/Task" Input
-     * Data: Expected Outcome: - Form to create new Event/Task is displayed
+     * Step number: 2 Step Name: Open form "Add new Task" Step Description: - Click
+     * on the button "Create" (+) - Select the item "Event/Task" Input Data:
+     * Expected Outcome: - Form to create new Event/Task is displayed
      */
 
     /*
      * Step number: 3 Step Name: Create a task Step Description: - Select "Task"
-     * from "Add new" - Input available data of date and times - Select the
-     * calendar - Click on the button "Next" Input Data: Expected Outcome: - A
-     * message is displayed: "The task was added to $calendar_name" - The
-     * message disappears with a fadeout effect
+     * from "Add new" - Input available data of date and times - Select the calendar
+     * - Click on the button "Next" Input Data: Expected Outcome: - A message is
+     * displayed: "The task was added to $calendar_name" - The message disappears
+     * with a fadeout effect
      */
     homePagePlatform.goToTaskPage();
     $(byText(name)).should(Condition.exist);

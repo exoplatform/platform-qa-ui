@@ -1,17 +1,18 @@
 package org.exoplatform.platform.qa.ui.forum.pageobject;
 
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.appears;
+import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selectors;
+
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ManageFileTestBase;
 
@@ -52,15 +53,14 @@ public class ForumCategoryManagement {
    */
   public void addCategorySimple(String nameCat, String order, String description) {
 
-
     info("click on Add Category button");
-   $(ELEMENT_ACTIONBAR_ADDCATEGORY).click();
+    $(ELEMENT_ACTIONBAR_ADDCATEGORY).click();
     info("input the title for the category");
-   $(ELEMENT_ADDCATEGORY_POPUP_TITLE).val(nameCat);
+    $(ELEMENT_ADDCATEGORY_POPUP_TITLE).val(nameCat);
     info("check and input description");
-   $(ELEMENT_ADDCATEGORY_POPUP_DESCRIPTION).val(description);
+    $(ELEMENT_ADDCATEGORY_POPUP_DESCRIPTION).val(description);
     info("Click on Save button");
-   $(ELEMENT_ADDCATEGORY_POPUP_SAVE_BUTTON).click();
+    $(ELEMENT_ADDCATEGORY_POPUP_SAVE_BUTTON).click();
   }
 
   /**
@@ -125,7 +125,6 @@ public class ForumCategoryManagement {
     info("Save all changes");
     $(ELEMENT_ADDCATEGORY_POPUP_SAVE_BUTTON).click();
 
-
   }
 
   /**
@@ -147,8 +146,6 @@ public class ForumCategoryManagement {
     info("Verify that the category is deleted");
     $(withText(nameCat)).shouldNot(exist);
     info("The category is deleted successfully");
-
-
 
   }
 

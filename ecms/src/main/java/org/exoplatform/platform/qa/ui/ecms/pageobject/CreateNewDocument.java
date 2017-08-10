@@ -16,24 +16,9 @@ import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.awt.*;
-
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_NAME;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class CreateNewDocument {
 
@@ -45,7 +30,7 @@ public class CreateNewDocument {
 
   public PlatformBase          plf;
 
-  public SiteExplorerHome SEHome;
+  public SiteExplorerHome      SEHome;
 
   private ElementEventTestBase evt;
 
@@ -123,7 +108,7 @@ public class CreateNewDocument {
       info("Select Javascript file type");
       $(ELEMENT_ADDDOCUMENT_JAVASCRIPT_FILE).click();
       break;
- }
+    }
   }
 
   /**
@@ -145,18 +130,18 @@ public class CreateNewDocument {
     }
     info("Select a type of new folder");
     switch (type) {
-      case Content:
-        info("Type a text to title field of Content type");
-        evt.type(ELEMENT_FOLDER_TITLE_TEXTBOX, title, true);
-        break;
-      case Document:
-        info("Type a text to title field of Document type");
-        evt.type(ELEMENT_FOLDER_TITLE_TEXTBOX, title, true);
-        info("Select Document type");
-        plf.selectOption(ELEMENT_FOLDER_TYPE_OPTION, ELEMENT_DOCUMENT_FOLDER_TYPE);
-        break;
-      default:
-        break;
+    case Content:
+      info("Type a text to title field of Content type");
+      evt.type(ELEMENT_FOLDER_TITLE_TEXTBOX, title, true);
+      break;
+    case Document:
+      info("Type a text to title field of Document type");
+      evt.type(ELEMENT_FOLDER_TITLE_TEXTBOX, title, true);
+      info("Select Document type");
+      plf.selectOption(ELEMENT_FOLDER_TYPE_OPTION, ELEMENT_DOCUMENT_FOLDER_TYPE);
+      break;
+    default:
+      break;
     }
     info("Save the changes");
     evt.click(ELEMENT_CREATE_FOLDER_BUTTON);
@@ -175,7 +160,7 @@ public class CreateNewDocument {
     $(ELEMENT_FILEFORM_BLANK_NAME).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_FILEFORM_BLANK_NAME).setValue(title);
     $(ELEMENT_FILEFORM_BLANK_CONTENT).click();
-    $(ELEMENT_FILEFORM_BLANK_CONTENT).waitUntil(Condition.appears,Configuration.timeout).sendKeys(content);
+    $(ELEMENT_FILEFORM_BLANK_CONTENT).waitUntil(Condition.appears, Configuration.timeout).sendKeys(content);
   }
 
   /**
@@ -185,6 +170,7 @@ public class CreateNewDocument {
    * @param content
    */
   public void addNewWebContent(String title, String content) {
+    $(ELEMENT_FILEFORM_BLANK_NAME).click();
     $(ELEMENT_FILEFORM_BLANK_NAME).setValue(title);
     $(ELEMENT_FILEFORM_BLANK_CONTENT).click();
     $(ELEMENT_FILEFORM_BLANK_CONTENT).sendKeys(content);
@@ -210,7 +196,7 @@ public class CreateNewDocument {
 
   public void saveAndClose() {
     info("save and close");
-    //scroll up
+    // scroll up
     executeJavaScript("window.scrollBy(0,-250)");
     $(ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE).click();
 

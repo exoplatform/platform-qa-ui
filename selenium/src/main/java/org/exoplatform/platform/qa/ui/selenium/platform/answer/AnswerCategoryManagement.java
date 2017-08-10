@@ -11,7 +11,6 @@ import org.openqa.selenium.WebElement;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
@@ -158,12 +157,11 @@ public class AnswerCategoryManagement {
    * @param cat category name
    * @param order order of category
    * @param des description of category
-   * @param modQues true: check Moderate New Questions false: uncheck Moderate
-   *          New Questions
+   * @param modQues true: check Moderate New Questions false: uncheck Moderate New
+   *          Questions
    * @param viewAuthor true: check View Question Authors false: uncheck View
    *          Question Authors
-   * @param modAnswer true: check Moderate Answers false: uncheck Moderate
-   *          Answers
+   * @param modAnswer true: check Moderate Answers false: uncheck Moderate Answers
    */
   public void inputDataToSettingTab(String cat,
                                     String order,
@@ -260,7 +258,8 @@ public class AnswerCategoryManagement {
     String[] links = path.split("/");
     goToActionOfCategoryFromActionBar(actionCategoryOption.IMPORT);
     WebElement eFile = evt.waitForAndGetElement(ELEMENT_IMPORT_CATEGORY_INPUT, testBase.getDefaultTimeout(), 1, 2);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';", eFile);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';",
+                                                                                   eFile);
     eFile.sendKeys(testBase.getAbsoluteFilePath(path));
     evt.waitForAndGetElement(ELEMENT_ATTACHMENT_FORM_FILE_NAME.replace("$fileName", links[links.length - 1]));
     evt.switchToParentWindow();

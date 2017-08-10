@@ -20,7 +20,9 @@
  */
 package org.exoplatform.platform.qa.ui.selenium;
 
-import javax.imageio.ImageIO;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.error;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -30,8 +32,7 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.*;
 
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.error;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import javax.imageio.ImageIO;
 
 public class Utils {
 
@@ -82,7 +83,7 @@ public class Utils {
    * Simulating keyboard presses
    *
    * @param firstKey send the first key (type: KeyEvent)
-   * @param params   send the second key (type: KeyEvent)
+   * @param params send the second key (type: KeyEvent)
    */
   public static void javaSimulateKeyPress(int firstKey, Object... params) {
     int secondKey = (Integer) (params.length > 0 ? params[0] : KeyEvent.VK_ENTER);

@@ -9,7 +9,6 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.E
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_ADDNEWPAGE_BTNNEXT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-import org.exoplatform.platform.qa.ui.gatein.pageobject.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -20,6 +19,7 @@ import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.CreateNewDocument;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.SiteExplorerHome;
+import org.exoplatform.platform.qa.ui.gatein.pageobject.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 
 /**
@@ -37,7 +37,7 @@ public class EcmsWCMTestIT extends Base {
 
   CreateNewDocument    createNewDoc;
 
-  PageCreationWizard pageCreationWizard;
+  PageCreationWizard   pageCreationWizard;
 
   PortalManagePages    paMang;
 
@@ -83,12 +83,12 @@ public class EcmsWCMTestIT extends Base {
     /*
      * Step Number: 1 Step Name: Step 1: Create Single Content Viewer page Step
      * Description: - Login acme by Admin/Web contributor - Choose Edit/Page/Add
-     * Page+ Fill name+ Next+ Next+ Drag and drop Content/ Content Detail
-     * portlet to this Page+ Click Edit icon to edit this porlet+ Select
-     * [Content Path] where stores these web contents/documents+ Click icon in
-     * Action column in the right to select one of them+ Click Save+ Click
-     * Close+ Click Finish icon in page editor Input Data: Expected Outcome: -
-     * The selected web content/document is displayed
+     * Page+ Fill name+ Next+ Next+ Drag and drop Content/ Content Detail portlet to
+     * this Page+ Click Edit icon to edit this porlet+ Select [Content Path] where
+     * stores these web contents/documents+ Click icon in Action column in the right
+     * to select one of them+ Click Save+ Click Close+ Click Finish icon in page
+     * editor Input Data: Expected Outcome: - The selected web content/document is
+     * displayed
      */
     // this.getExoWebDriver().getWebDriver().get(baseUrl+"/intranet");
     navigationToolbar.goToAddPage();
@@ -97,9 +97,6 @@ public class EcmsWCMTestIT extends Base {
     $(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
     $(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
     pageCreationWizard.addContentDetail("General Drives/Sites Management/intranet", content);
-
-    navigationToolbar.goToEditContent();
-
     info("Delete Data test");
     info("Delete created file");
     navigationToolbar.goToSiteExplorer();
@@ -126,12 +123,12 @@ public class EcmsWCMTestIT extends Base {
     /*
      * Step Number: 1 Step Name: Step 1: Create Single Content Viewer page Step
      * Description: - Login acme by Admin/Web contributor - Choose Edit/Page/Add
-     * Page+ Fill name+ Next+ Next+ Drag and drop Content/ Content Detail
-     * portlet to this Page+ Click Edit icon to edit this porlet+ Select
-     * [Content Path] where stores these web contents/documents+ Click icon in
-     * Action column in the right to select one of them+ Click Save+ Click
-     * Close+ Click Finish icon in page editor Input Data: Expected Outcome: -
-     * The selected web content/document is displayed
+     * Page+ Fill name+ Next+ Next+ Drag and drop Content/ Content Detail portlet to
+     * this Page+ Click Edit icon to edit this porlet+ Select [Content Path] where
+     * stores these web contents/documents+ Click icon in Action column in the right
+     * to select one of them+ Click Save+ Click Close+ Click Finish icon in page
+     * editor Input Data: Expected Outcome: - The selected web content/document is
+     * displayed
      */
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet", "Site Management");
@@ -163,12 +160,12 @@ public class EcmsWCMTestIT extends Base {
 
     /*
      * Step number: 2 Step Name: Step 2: Edit Single Content Viewer page Step
-     * Description: - Login acme by Admin/Web contributor - Open page above -
-     * Click Edit/ Page/ Page Layout+ Click Edit icon to edit this porlet+
-     * Select [Content Path] where stores these web contents/documents+ Click
-     * icon in Action column in the right to select one of them+ Click Save+
-     * Click Close+ Click Finish icon in page editor Input Data: Expected
-     * Outcome: - The new selected web content/document is displayed
+     * Description: - Login acme by Admin/Web contributor - Open page above - Click
+     * Edit/ Page/ Page Layout+ Click Edit icon to edit this porlet+ Select [Content
+     * Path] where stores these web contents/documents+ Click icon in Action column
+     * in the right to select one of them+ Click Save+ Click Close+ Click Finish
+     * icon in page editor Input Data: Expected Outcome: - The new selected web
+     * content/document is displayed
      */
     $(byTitle("Portlet Mode")).click();
     $(byTitle("Edit")).click();

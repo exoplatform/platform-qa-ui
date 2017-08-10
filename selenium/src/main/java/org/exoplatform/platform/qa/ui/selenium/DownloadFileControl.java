@@ -20,6 +20,8 @@
  */
 package org.exoplatform.platform.qa.ui.selenium;
 
+import java.util.Set;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.methods.HttpGet;
@@ -28,8 +30,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
-
-import java.util.Set;
 
 @SuppressWarnings("deprecation")
 public class DownloadFileControl {

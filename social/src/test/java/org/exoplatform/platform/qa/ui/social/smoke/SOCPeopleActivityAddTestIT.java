@@ -89,20 +89,20 @@ public class SOCPeopleActivityAddTestIT extends Base {
 
     info("Test 3: Add new your activity");
     /*
-     * Step Number: 1 Step Name: - Step Description: Step 1: Go to my profile
-     * page Input Data: - Sign in system - Select Activities page on User
-     * Toolbar portlet in the upper right corner of the screen Expected Outcome:
-     * - Show content of People page. It focus on activity list
+     * Step Number: 1 Step Name: - Step Description: Step 1: Go to my profile page
+     * Input Data: - Sign in system - Select Activities page on User Toolbar portlet
+     * in the upper right corner of the screen Expected Outcome: - Show content of
+     * People page. It focus on activity list
      */
     manageLogInOut.signIn(username1, password);
     navigationToolbar.goToMyActivities();
 
     /*
      * Step number: 2 Step Name: - Step Description: Step 2: Add new activities
-     * Input Data: - Select activity - Enter some text into text box - Click on
-     * Add button Expected Outcome: Add an activity successfully: - This
-     * activity is added into users activities list.User who is in your contact,
-     * can view your active on his/her activity list
+     * Input Data: - Select activity - Enter some text into text box - Click on Add
+     * button Expected Outcome: Add an activity successfully: - This activity is
+     * added into users activities list.User who is in your contact, can view your
+     * active on his/her activity list
      */
     String activity1 = "activity1" + getRandomNumber();
     activityStream.addActivity(activity1, "");

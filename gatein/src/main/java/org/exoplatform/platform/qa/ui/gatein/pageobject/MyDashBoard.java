@@ -7,7 +7,6 @@ import org.openqa.selenium.Keys;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class MyDashBoard {
@@ -29,9 +28,8 @@ public class MyDashBoard {
    *
    * @param name the name of gadget that will be added to dashboard
    * @param numberCol the number of column that will put the gadget. We have 3
-   *          columns as: + numberCol= 1: this is for left column + numberCol=
-   *          2: this is for middle column + numberCol =3: this is for right
-   *          column
+   *          columns as: + numberCol= 1: this is for left column + numberCol= 2:
+   *          this is for middle column + numberCol =3: this is for right column
    */
   public void addGadget(String name, String numberCol) {
     info("Click on GadGet button");

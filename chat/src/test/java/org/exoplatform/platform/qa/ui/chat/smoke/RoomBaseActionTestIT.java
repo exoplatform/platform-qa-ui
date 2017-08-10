@@ -8,16 +8,16 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_CHAT_LIST_MSG;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-import org.exoplatform.platform.qa.ui.chat.pageobject.ChatManagement;
-import org.exoplatform.platform.qa.ui.chat.pageobject.RoomManagement;
-import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
 
+import org.exoplatform.platform.qa.ui.chat.pageobject.ChatManagement;
+import org.exoplatform.platform.qa.ui.chat.pageobject.RoomManagement;
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
@@ -29,7 +29,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 public class RoomBaseActionTestIT extends Base {
   HomePagePlatform       homePagePlatform;
 
-  RoomManagement roomManagement;
+  RoomManagement         roomManagement;
 
   NavigationToolbar      navigationToolbar;
 
@@ -39,7 +39,7 @@ public class RoomBaseActionTestIT extends Base {
 
   UserAndGroupManagement userandgroupmanagement;
 
-  ChatManagement chatManagement;
+  ChatManagement         chatManagement;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -195,5 +195,8 @@ public class RoomBaseActionTestIT extends Base {
     roomManagement.editTitleofAroom(room, newroom);
     $(byText(newroom)).should(Condition.exist);
     roomManagement.deleteRomm(newroom);
+    switchTo().window(0);
+    navigationToolbar.goToManageCommunity();
+    userandgroupmanagement.deleteUser(usernamea);
   }
 }

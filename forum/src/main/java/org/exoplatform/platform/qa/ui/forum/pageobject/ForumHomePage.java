@@ -12,7 +12,6 @@ import org.openqa.selenium.WebElement;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ManageFileTestBase;
@@ -114,8 +113,7 @@ public class ForumHomePage {
   }
 
   /**
-   * Watch or UnWatch true is for watching false is for un-watching Update
-   * QuynhPT
+   * Watch or UnWatch true is for watching false is for un-watching Update QuynhPT
    *
    * @param watch
    */
@@ -333,8 +331,7 @@ public class ForumHomePage {
   }
 
   /**
-   * function: Search user in User Selection Form when Compose New Private
-   * Message
+   * function: Search user in User Selection Form when Compose New Private Message
    */
 
   public void searchUser(String user, String searchOption) {

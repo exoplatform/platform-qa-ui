@@ -4,7 +4,6 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocat
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class AnswerManagement {
@@ -74,8 +73,7 @@ public class AnswerManagement {
   }
 
   /**
-   * Execute action of answer: EDIT, APPROVE, DISAPPROVE, ACTIVE, DEACTIVE,
-   * DELETE
+   * Execute action of answer: EDIT, APPROVE, DISAPPROVE, ACTIVE, DEACTIVE, DELETE
    * 
    * @param answer
    * @param action action that needs to be done

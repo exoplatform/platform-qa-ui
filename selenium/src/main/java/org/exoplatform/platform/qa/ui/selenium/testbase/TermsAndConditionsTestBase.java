@@ -20,14 +20,13 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.testbase;
 
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
-
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
 
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+
 public class TermsAndConditionsTestBase {
-  private final TestBase testBase;
+  private final TestBase       testBase;
 
   private ElementEventTestBase evt;
 

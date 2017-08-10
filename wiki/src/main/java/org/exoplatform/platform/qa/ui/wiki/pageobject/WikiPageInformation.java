@@ -5,7 +5,6 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class WikiPageInformation {
@@ -127,7 +126,6 @@ public class WikiPageInformation {
       info("Click on Next button");
       evt.click(ELEMENT_VIEW_VERSION_NEXT_BTN);
     }
-
 
   }
 

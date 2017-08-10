@@ -1,20 +1,19 @@
 package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.byTitle;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.SelenideElement;
 
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
@@ -85,14 +84,14 @@ public class PageCreationWizard {
     if (isVis != null) {
       info("Input Visible");
       if (isVis)
-      $(ELEMENT_PAGE_VISIBLE_CHECKBOX).setSelected(true);
+        $(ELEMENT_PAGE_VISIBLE_CHECKBOX).setSelected(true);
       else
-      $(ELEMENT_PAGE_VISIBLE_CHECKBOX).setSelected(false);
+        $(ELEMENT_PAGE_VISIBLE_CHECKBOX).setSelected(false);
     }
     if (isPub != null) {
       info("Input publication date");
       if (isPub)
-      $(ELEMENT_PAGE_PUBLICATION_DATE_CHECKBOX).setSelected(true);
+        $(ELEMENT_PAGE_PUBLICATION_DATE_CHECKBOX).setSelected(true);
       else
         $(ELEMENT_PAGE_PUBLICATION_DATE_CHECKBOX).setSelected(false);
     }
@@ -108,7 +107,7 @@ public class PageCreationWizard {
     $(ELEMENT_APPLICATION_TAB_ACTIVE).click();
     $(tab).click();
 
-    //evt.dragAndDropToObject(element, ELEMENT_PAGEEDITOR_VIEWPAGE);
+    // evt.dragAndDropToObject(element, ELEMENT_PAGEEDITOR_VIEWPAGE);
     $(element).dragAndDropTo($(byClassName("VIEW-PAGE")));
   }
 
@@ -139,7 +138,8 @@ public class PageCreationWizard {
    * @param folder
    */
   public void addContentlistByFolder(String path, String folder) {
-    //addApplication(ELEMENT_APPLICATION_CONTENT_TAB, ELEMENT_APPLICATION_CONTENT_LIST);
+    // addApplication(ELEMENT_APPLICATION_CONTENT_TAB,
+    // ELEMENT_APPLICATION_CONTENT_LIST);
     evt.mouseOver(ELEMENT_PAGEEDITOR_VIEWPAGE, true);
     evt.click(ELEMENT_CONTENT_LIST_EDIT_BTN);
     contList.selectFolderContent(path, folder);
@@ -156,7 +156,8 @@ public class PageCreationWizard {
    * @param content
    */
   public void addContentListByContent(String path, String content) {
-    //addApplication(ELEMENT_APPLICATION_CONTENT_TAB, ELEMENT_APPLICATION_CONTENT_LIST);
+    // addApplication(ELEMENT_APPLICATION_CONTENT_TAB,
+    // ELEMENT_APPLICATION_CONTENT_LIST);
     evt.mouseOver(ELEMENT_PAGEEDITOR_VIEWPAGE, true);
     evt.click(ELEMENT_CONTENT_LIST_EDIT_BTN);
     evt.check(ELEMENT_CONTENT_LIST_BY_CONTENT_MODE, 2);
@@ -176,7 +177,7 @@ public class PageCreationWizard {
   public void addContentDetail(String path, String content) {
     addApplication($(byTitle("Content")), $(byId("Content/portlet_SingleContentViewer")));
 
-    $(ELEMENT_PAGEEDITOR_VIEWPAGE).hover();
+    $(ELEMENT_PAGEEDITOR_VIEWPAGE).waitUntil(Condition.appears, Configuration.timeout).click();
     $(ELEMENT_CONTENT_DETAIL_EDIT_BTN).click();
     contDetail.selectFolderContent(path, content);
     $(ELEMENT_CONTENT_DETAIL_SAVE_BTN).click();
@@ -267,12 +268,12 @@ public class PageCreationWizard {
    * Move a container to new place in layout
    *
    * @param title is the name of container that will be dragged and dropped
-   * @param sourceLocator is the locator of the container that will be moved up
-   *          or down targetLocator
-   * @param targetLocator is the locator of the portlet or the container that
-   *          will be replaced position by sourceLocator
-   * @param heightTarget is height size of the portlet or the container that
-   *          will be replaced position by sourceLocator
+   * @param sourceLocator is the locator of the container that will be moved up or
+   *          down targetLocator
+   * @param targetLocator is the locator of the portlet or the container that will
+   *          be replaced position by sourceLocator
+   * @param heightTarget is height size of the portlet or the container that will
+   *          be replaced position by sourceLocator
    */
   public void moveContainer(String title, Object sourceLocator, Object targetLocator, int heightTarget) {
     info("Move container to new place");
@@ -284,7 +285,6 @@ public class PageCreationWizard {
     }
     if (!title.isEmpty()) {
       evt.mouseOver(ELEMENT_DROP_SOURCE_HAS_LAYOUT_BY_NAME.replace("${name}", title), true);
-
 
     } else {
       evt.mouseOver(ELEMENT_DROP_SOURCE_HAS_LAYOUT, true);
@@ -311,14 +311,13 @@ public class PageCreationWizard {
     Action actiondrop = builder.release().build();
     actiondrop.perform();
 
-
     saveChangesPageEditor();
     info("the container is moved succefully");
   }
 
   /**
-   * Check the positions of containers or portlets before and after changed
-   * their position in the layout
+   * Check the positions of containers or portlets before and after changed their
+   * position in the layout
    *
    * @param positionFirst is the position before changed
    * @param positionEnd is the position after changed
@@ -380,8 +379,8 @@ public class PageCreationWizard {
   }
 
   /**
-   * Save and close application popup after finishing editing Save and close
-   * page editor
+   * Save and close application popup after finishing editing Save and close page
+   * editor
    */
   public void saveChangesApplication() {
     info("Save all changes of an application");
@@ -401,10 +400,10 @@ public class PageCreationWizard {
   /**
    * Move an application to new place
    *
-   * @param titleSource is the title of applicattion source that will be moved
-   *          to new place
-   * @param titleTarget is the title of application target that application
-   *          source will be followed
+   * @param titleSource is the title of applicattion source that will be moved to
+   *          new place
+   * @param titleTarget is the title of application target that application source
+   *          will be followed
    * @param heightTarget is the height of application target
    */
   public void moveApplication(String titleSource, String titleTarget, int heightTarget) {
@@ -437,7 +436,6 @@ public class PageCreationWizard {
 
     Action actiondrop = builder.release().build();
     actiondrop.perform();
-
 
     saveChangesPageEditor();
     info("the application is moved succefully");
@@ -571,7 +569,6 @@ public class PageCreationWizard {
       // groupSelect), 0, true);
       $(byTitle(groupSelect)).click();
     }
-
 
   }
 
@@ -940,7 +937,6 @@ public class PageCreationWizard {
     info("Verify that the application is NOT shown in the layout");
     evt.waitForElementNotPresent(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}", nameApp), 3000, 1);
 
-
     saveChangesPageEditor();
   }
 
@@ -971,13 +967,13 @@ public class PageCreationWizard {
    * @param containerEditLocation ======= ======= >>>>>>> FQA-2759:PLF43 - Write
    *          High Fnc/PLF/Restricted Page Editor/Site Permissions <<<<<<< HEAD
    *          By: QuyenNT =======
-   * @Author: QuyenNT >>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted
-   *          Page Editor/Container Permissions ======= By: QuyenNT >>>>>>>
+   * @Author: QuyenNT >>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page
+   *          Editor/Container Permissions ======= By: QuyenNT >>>>>>>
    *          FQA-2759:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Site
    *          Permissions Date: Nov 11, 2015 <<<<<<< HEAD
    * @param: >>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page
-   *           Editor/Container Permissions ======= >>>>>>> FQA-2759:PLF43 -
-   *           Write High Fnc/PLF/Restricted Page Editor/Site Permissions
+   *           Editor/Container Permissions ======= >>>>>>> FQA-2759:PLF43 - Write
+   *           High Fnc/PLF/Restricted Page Editor/Site Permissions
    */
   public void openContainerEditForm(String containerLocation, String containerEditLocation) {
     info("Select Container tab");
@@ -994,13 +990,13 @@ public class PageCreationWizard {
    * @param containerId
    * @param containerDeleteId ======= Delete a container without permission
    *          <<<<<<< HEAD <<<<<<< HEAD By: QuyenNT =======
-   * @Author: QuyenNT >>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted
-   *          Page Editor/Container Permissions ======= By: QuyenNT >>>>>>>
+   * @Author: QuyenNT >>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page
+   *          Editor/Container Permissions ======= By: QuyenNT >>>>>>>
    *          FQA-2759:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Site
    *          Permissions Date: Nov 11, 2015 <<<<<<< HEAD
    * @param: >>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page
-   *           Editor/Container Permissions ======= >>>>>>> FQA-2759:PLF43 -
-   *           Write High Fnc/PLF/Restricted Page Editor/Site Permissions
+   *           Editor/Container Permissions ======= >>>>>>> FQA-2759:PLF43 - Write
+   *           High Fnc/PLF/Restricted Page Editor/Site Permissions
    */
   public void deleteContainerWithoutPermission(String containerId, String containerDeleteId) {
     info("Delete the container");

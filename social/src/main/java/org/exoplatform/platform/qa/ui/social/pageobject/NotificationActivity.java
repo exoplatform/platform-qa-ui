@@ -11,7 +11,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
@@ -207,13 +206,15 @@ public class NotificationActivity {
 
       ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].textContent = '';",
                                                                                      workingLabel);
-      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].textContent = '" + comment
-          + "';", commentText);
+      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript(
+                                                                                     "arguments[0].textContent = '" + comment
+                                                                                         + "';",
+                                                                                     commentText);
       ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].disabled = false;",
                                                                                      commentButton);
-      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript(
-                                                                                     "arguments[0].className = 'btn pull-right btn-primary';",
-                                                                                     commentButton);
+      ((JavascriptExecutor) testBase.getExoWebDriver()
+                                    .getWebDriver()).executeScript("arguments[0].className = 'btn pull-right btn-primary';",
+                                                                   commentButton);
       evt.click(ELEMENT_COMMENT_BUTTON);
       info("Verify comment successfully");
       evt.waitForAndGetElement(ELEMENT_DELETE_COMMENT_BUTTON.replace("${commentText}", comment),
@@ -455,8 +456,8 @@ public class NotificationActivity {
   }
 
   /**
-   * Verify that many comments are expanded and the last comment is highlighted
-   * or not highlighted
+   * Verify that many comments are expanded and the last comment is highlighted or
+   * not highlighted
    * 
    * @param comments is an array of comments
    * @param isHighlight = true to check last comment that is highlighted = false

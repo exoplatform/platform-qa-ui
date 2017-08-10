@@ -74,10 +74,10 @@ public class SOCSpaceMemberManagementRequestTestIT extends Base {
     manageLogInOut.signIn(username1, password);
 
     /*
-     * Step Number: 1 Step Name: Step 1: Create a new Space Step Description: -
-     * Sign in system - Select space page to view - Click on [Add new Space] -
-     * Enter all valid data - Click [Create] Input Data: Expected Outcome: -
-     * Create new Space successfully.
+     * Step Number: 1 Step Name: Step 1: Create a new Space Step Description: - Sign
+     * in system - Select space page to view - Click on [Add new Space] - Enter all
+     * valid data - Click [Create] Input Data: Expected Outcome: - Create new Space
+     * successfully.
      */
     String space = "space" + getRandomNumber();
 
@@ -118,10 +118,10 @@ public class SOCSpaceMemberManagementRequestTestIT extends Base {
     manageLogInOut.signIn(username1, password);
 
     /*
-     * Step Number: 1 Step Name: Step 1: Create a new Space Step Description: -
-     * Sign in system - Select space page to view - Click on [Add new Space] -
-     * Enter all valid data - Click [Create] Input Data: Expected Outcome: -
-     * Create new Space successfully.
+     * Step Number: 1 Step Name: Step 1: Create a new Space Step Description: - Sign
+     * in system - Select space page to view - Click on [Add new Space] - Enter all
+     * valid data - Click [Create] Input Data: Expected Outcome: - Create new Space
+     * successfully.
      */
     String space = "space" + getRandomNumber();
 
@@ -164,10 +164,10 @@ public class SOCSpaceMemberManagementRequestTestIT extends Base {
     manageLogInOut.signIn(username1, password);
 
     /*
-     * Step Number: 1 Step Name: Step 1: Create a new Space Step Description: -
-     * Sign in system - Select space page to view - Click on [Add new Space] -
-     * Enter all valid data - Click [Create] Input Data: Expected Outcome: -
-     * Create new Space successfully.
+     * Step Number: 1 Step Name: Step 1: Create a new Space Step Description: - Sign
+     * in system - Select space page to view - Click on [Add new Space] - Enter all
+     * valid data - Click [Create] Input Data: Expected Outcome: - Create new Space
+     * successfully.
      */
     String space = "space" + getRandomNumber();
 

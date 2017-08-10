@@ -56,11 +56,11 @@ public class CALEventEditTestIT extends Base {
   public void test03_EditEventOfGroupCalendar() {
     info("Test 3: Edit event of group calendar");
     /*
-     * Step Number: 1 Step Name: Step 1: Add event Step Description: - Add new
-     * group calendar - Assign calendar for an user with edit right - Add new
-     * event on this group calendar Input Data: Expected Outcome: - Event is
-     * added successfully - Group calendar and its event(s) are displayed for
-     * all member of its group(s)
+     * Step Number: 1 Step Name: Step 1: Add event Step Description: - Add new group
+     * calendar - Assign calendar for an user with edit right - Add new event on
+     * this group calendar Input Data: Expected Outcome: - Event is added
+     * successfully - Group calendar and its event(s) are displayed for all member
+     * of its group(s)
      */
     String DATA_USER2 = "mary1";
     String DATA_USER1 = "john";
@@ -84,11 +84,10 @@ public class CALEventEditTestIT extends Base {
     eventManagement.saveQuickAddEvent();
 
     /*
-     * Step number: 2 Step Name: Step 2: Edit event by member of group without
-     * edit right Step Description: - Login by a member of group calendar who
-     * does not have edit right on that calendar - Right click on group
-     * calendar's event Input Data: Expected Outcome: Only "View" action is
-     * displayed.
+     * Step number: 2 Step Name: Step 2: Edit event by member of group without edit
+     * right Step Description: - Login by a member of group calendar who does not
+     * have edit right on that calendar - Right click on group calendar's event
+     * Input Data: Expected Outcome: Only "View" action is displayed.
      */
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.goToCalendarPage();
@@ -100,12 +99,12 @@ public class CALEventEditTestIT extends Base {
 
     /*
      * Step number: 3 Step Name: Step 3: Edit event by member of group with edit
-     * right Step Description: - Login by member who is assign edit right on
-     * above group calendar - Right click on event of shared calendar and select
-     * Edit or drag and drop event in working pane Input Data: Expected Outcome:
-     * - Edit event form appears with current information of event in form (if
-     * select Edit) or event is changed date/time as drag and drop - Edit event
-     * successfully by shared user with edit right
+     * right Step Description: - Login by member who is assign edit right on above
+     * group calendar - Right click on event of shared calendar and select Edit or
+     * drag and drop event in working pane Input Data: Expected Outcome: - Edit
+     * event form appears with current information of event in form (if select Edit)
+     * or event is changed date/time as drag and drop - Edit event successfully by
+     * shared user with edit right
      */
     manageLogInOut.signIn(DATA_USER1, DATA_PASS);
     info("Edit the Event");
@@ -130,10 +129,9 @@ public class CALEventEditTestIT extends Base {
   public void test19_EditEventWithValidData() {
     info("Test 19 Edit event with valid data");
     /*
-     * Step Number: 1 Step Name: - Step Description: Step 1: Add event Input
-     * Data: - Add category [ Details ] - calendar [ Details ] - event [ Details
-     * ] Expected Outcome: All events/tasks of selecting calendar are displayed
-     * in list
+     * Step Number: 1 Step Name: - Step Description: Step 1: Add event Input Data: -
+     * Add category [ Details ] - calendar [ Details ] - event [ Details ] Expected
+     * Outcome: All events/tasks of selecting calendar are displayed in list
      */
     info("Create a new category");
     String categoryName = "categoryName" + getRandomNumber();
@@ -156,18 +154,17 @@ public class CALEventEditTestIT extends Base {
     eventManagement.saveQuickAddEvent();
 
     /*
-     * Step number: 2 Step Name: - Step Description: Step 2: Show form to edit
-     * event Input Data: - Select view type - Right click on event that you have
-     * edit right from list/working pane and select Edit Expected Outcome: -
-     * Edit event form appears with current information of event in form - all
-     * events/tasks in list are kept in alphabetical order if they was sorted
-     * before
+     * Step number: 2 Step Name: - Step Description: Step 2: Show form to edit event
+     * Input Data: - Select view type - Right click on event that you have edit
+     * right from list/working pane and select Edit Expected Outcome: - Edit event
+     * form appears with current information of event in form - all events/tasks in
+     * list are kept in alphabetical order if they was sorted before
      */
 
     /*
-     * Step number: 3 Step Name: - Step Description: Step 3: Edit event Input
-     * Data: Do some valid changes and clickSave Expected Outcome: Event is
-     * changed and updated in list/working pane
+     * Step number: 3 Step Name: - Step Description: Step 3: Edit event Input Data:
+     * Do some valid changes and clickSave Expected Outcome: Event is changed and
+     * updated in list/working pane
      */
     String titleEvent2 = "titleEvent2" + getRandomNumber();
     calendarManagement.openEditEventTaskPopup(titleEvent, CalendarHomePage.selectViewOption.LIST);

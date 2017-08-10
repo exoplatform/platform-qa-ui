@@ -1,21 +1,18 @@
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
+import static com.codeborne.selenide.Selectors.byLinkText;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_NAME_OF_PROFILE_TOP_LEFT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import org.openqa.selenium.By;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.openqa.selenium.WebDriver;
 
 ;
 
@@ -60,7 +57,6 @@ public class ConnectionsManagement {
       break;
     }
 
-
   }
 
   /**
@@ -75,8 +71,9 @@ public class ConnectionsManagement {
       searchPeople(name[0], null, null, null);
     else
       searchPeople(username, null, null, null);
-$(byText("Connect")).click();
-    //evt.waitForAndGetElement(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}", username), 2000, 1);
+    $(byText("Connect")).click();
+    // evt.waitForAndGetElement(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}",
+    // username), 2000, 1);
     info("Connected to the user");
   }
 
@@ -104,7 +101,7 @@ $(byText("Connect")).click();
     info("Click on Cancel button");
     searchPeople(username, null, null, null);
     $(byText("Cancel Request")).click();
-    $(byText("Cancel Request")).waitUntil(Condition.disappears,Configuration.timeout);
+    $(byText("Cancel Request")).waitUntil(Condition.disappears, Configuration.timeout);
     info("Canceled to the user");
   }
 
@@ -167,7 +164,7 @@ $(byText("Connect")).click();
     // is displayed on user's network list
     searchPeople(username, null, null, null);
     if (accept)
-    $(byText("Remove Connection")).should(Condition.exist);
+      $(byText("Remove Connection")).should(Condition.exist);
     else
       evt.waitForElementNotPresent(ELEMENT_CONNECTION_REVOVE_BTN);
   }

@@ -5,7 +5,6 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.QuickSearchResultL
 import org.openqa.selenium.Keys;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class QuickSearchResult {

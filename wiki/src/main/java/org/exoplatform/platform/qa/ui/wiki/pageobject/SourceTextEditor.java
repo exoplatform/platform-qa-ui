@@ -12,7 +12,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class SourceTextEditor {
@@ -108,15 +107,13 @@ public class SourceTextEditor {
     info("Input a content for the page");
     $(ELEMENT_CONTENT_WIKI_INPUT).sendKeys(newContent);
 
-
   }
 
   /**
    * Modify Wiki content with Source editor
    *
    * @param title updated title of the wiki page. Can not be <code>null</code>
-   * @param content updated content of the wiki page. Can not be
-   *          <code>null</code>
+   * @param content updated content of the wiki page. Can not be <code>null</code>
    */
   public void inputDataToPage(String title, String content, Boolean isClearTitle, Boolean isClearContent) {
     String[] text;
@@ -187,7 +184,6 @@ public class SourceTextEditor {
     String path = testBase.getAbsoluteFilePath(link.replace("/", fs));
     info("path in uploadRobot:" + path);
     // doubleClickOnElement(ELEMENT_UPLOAD_NAME);
-
 
     ((JavascriptExecutor) testBase.getExoWebDriver()
                                   .getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");

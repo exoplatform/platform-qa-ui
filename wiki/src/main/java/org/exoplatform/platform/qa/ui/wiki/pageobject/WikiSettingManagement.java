@@ -8,7 +8,6 @@ import org.openqa.selenium.Keys;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class WikiSettingManagement {
@@ -87,8 +86,8 @@ public class WikiSettingManagement {
    *
    * @param user (Can be: User name, Last name, First name or Email of the user
    *          you want to search)
-   * @param searchOption (Can be: User name, Last name, First name or Email
-   *          option corresponding with information you input in "Search")
+   * @param searchOption (Can be: User name, Last name, First name or Email option
+   *          corresponding with information you input in "Search")
    */
   public void searchUser(String user, String searchOption) {
     info("--Search user " + user + "--");

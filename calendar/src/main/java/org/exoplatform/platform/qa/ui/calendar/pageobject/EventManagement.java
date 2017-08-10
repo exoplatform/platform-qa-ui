@@ -18,7 +18,6 @@ import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -218,8 +217,8 @@ public class EventManagement {
   }
 
   /**
-   * Input into "From, To" and check/uncheck allday checkbox fields of a EVENT
-   * in quick form
+   * Input into "From, To" and check/uncheck allday checkbox fields of a EVENT in
+   * quick form
    *
    * @param from From date, time of a EVENT i.e.: 11/06/2013 14:00
    * @param to To date, time of a EVENT, i.e.: 11/06/2013 14:00
@@ -264,8 +263,8 @@ public class EventManagement {
   }
 
   /**
-   * Input into "From, To" and check/uncheck allday checkbox fields of a EVENT
-   * in detail form
+   * Input into "From, To" and check/uncheck allday checkbox fields of a EVENT in
+   * detail form
    *
    * @param from From date, time of a EVENT i.e.: 11/06/2013 14:00
    * @param to To date, time of a EVENT, i.e.: 11/06/2013 14:00
@@ -840,9 +839,9 @@ public class EventManagement {
    * @param optionDay ONEDAY or ALLDAY
    * @param optDeleteType ONLY_EVENT, FOLLOW_EVENT or ALL_EVENT
    * @param date date of event: format (MMM dd yyyy)
-   * @param opParams isVerify, if not be set, the event/task will be
-   *          automatically set as verify delete confirm message = true: verify
-   *          delete confirm message = false: not verify delete confirm message
+   * @param opParams isVerify, if not be set, the event/task will be automatically
+   *          set as verify delete confirm message = true: verify delete confirm
+   *          message = false: not verify delete confirm message
    */
   public void deleteRecurringEvent(String name,
                                    CalendarHomePage.selectViewOption view,
@@ -903,9 +902,9 @@ public class EventManagement {
    * edit recurring event
    * 
    * @param optEditType type of edit recurring
-   * @param opParams isVerify, if not be set, the event/task will be
-   *          automatically set as verify edit confirm message = true: verify
-   *          edit confirm message = false: not verify edit confirm message
+   * @param opParams isVerify, if not be set, the event/task will be automatically
+   *          set as verify edit confirm message = true: verify edit confirm
+   *          message = false: not verify edit confirm message
    */
   public void editRecurringEvent(recurringType optEditType, Object... opParams) {
     boolean isVerify = (Boolean) (opParams.length > 0 ? opParams[0] : false);
@@ -1200,8 +1199,7 @@ public class EventManagement {
   }
 
   /**
-   * Define a type of delete recurring Only this event Following events All
-   * events
+   * Define a type of delete recurring Only this event Following events All events
    */
   public enum recurringType {
     ONLY_EVENT, FOLLOW_EVENT, ALL_EVENT;

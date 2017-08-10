@@ -24,9 +24,9 @@ import org.openqa.selenium.By;
 
 public final class IDELocator {
 
-  public static final By ELEMENT_PLF_IDE_DISPLAY = By.xpath("//*[@class='navItemSelected' and text()='IDE']");
+  public static final By ELEMENT_PLF_IDE_DISPLAY   = By.xpath("//*[@class='navItemSelected' and text()='IDE']");
 
-  public static final By ELEMENT_PLF_IDE_FOLDER = By.xpath("//*[@class='treeCellSelected']//*[contains(text(),'dev-monit')]");
+  public static final By ELEMENT_PLF_IDE_FOLDER    = By.xpath("//*[@class='treeCellSelected']//*[contains(text(),'dev-monit')]");
 
   public static final By ELEMENT_PLF_IDE_WORKSPACE = By.xpath("//*[contains(text(),'Workspace')]");
 }

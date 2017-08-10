@@ -189,7 +189,7 @@ public class ApplicationRegistry {
       if (categoryList.get(i) != categoryList.get(0))
         // if the category is a new category
         if (categoryList.get(i) != categoryList.get(i - 1))
-        evt.click(ELEMENT_LEFT_PANEL_APPLICATION_CATEGORY_TAB.replace("${category}", categoryList.get(i)));
+          evt.click(ELEMENT_LEFT_PANEL_APPLICATION_CATEGORY_TAB.replace("${category}", categoryList.get(i)));
       info("Verify that the imported application is shown in correct category");
       evt.waitForAndGetElement(ELEMENT_LEFT_PANEL_APPLICATION_NAME.replace("${category}", categoryList.get(i))
                                                                   .replace("${application}", nameList.get(i)));

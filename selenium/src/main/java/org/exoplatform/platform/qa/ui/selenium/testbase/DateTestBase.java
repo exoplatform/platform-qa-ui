@@ -20,14 +20,14 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.testbase;
 
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.logger.Logger;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
+
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.logger.Logger;
 
 /**
  * @TODO: Use {@link java.util.Formatter.DateTime} instead.

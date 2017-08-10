@@ -50,12 +50,12 @@ public class SOCPeopleActivityDeleteTestIT extends Base {
     info("Test 1: Delete your activity");
     /*
      * Step Number: 1 Step Name: - Step Description: Step 1: Add new activities
-     * Input Data: - Sign in system - Select Activities page on User Toolbar
-     * portlet in the upper right corner of the screen - Select activity in the
-     * left pane - Enter some text into text box - Click on [Share] button
-     * Expected Outcome: Add an activity successfully: - This activity is added
-     * into users activities list.User who is in your contact, can view your
-     * active on his/her activity list
+     * Input Data: - Sign in system - Select Activities page on User Toolbar portlet
+     * in the upper right corner of the screen - Select activity in the left pane -
+     * Enter some text into text box - Click on [Share] button Expected Outcome: Add
+     * an activity successfully: - This activity is added into users activities
+     * list.User who is in your contact, can view your active on his/her activity
+     * list
      */
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@gmail.com";
@@ -70,10 +70,10 @@ public class SOCPeopleActivityDeleteTestIT extends Base {
     activityStream.addActivity(activity1, "");
 
     /*
-     * Step number: 2 Step Name: - Step Description: Step 2: Delete activity
-     * Input Data: - Select an activity - Click on Delete - Click OK to confirm
-     * deleting Expected Outcome: The activity is deleted. All comments of
-     * activity are deleted too.
+     * Step number: 2 Step Name: - Step Description: Step 2: Delete activity Input
+     * Data: - Select an activity - Click on Delete - Click OK to confirm deleting
+     * Expected Outcome: The activity is deleted. All comments of activity are
+     * deleted too.
      */
     // get the id of the webContent created
     String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];

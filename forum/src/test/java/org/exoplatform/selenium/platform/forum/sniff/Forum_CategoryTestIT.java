@@ -39,26 +39,48 @@ public class Forum_CategoryTestIT extends Base {
    * <li>Test Case Name: Add a category.</li>
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li>
+   */
+  @Test
+  public void test02_AddACategory() {
+    info("Test 2: Add a category");
+
+    String nameCat = "nameCat" + getRandomNumber();
+
+    /*
+     * Step Number: 1 Step Name: Add a category Step Description: - Go to Forum page
+     * - Click on Add Category - Put values - Save Input Data: Expected Outcome: -
+     * Category is added successfully and shown in Forum home
+     */
+    info("go to Forum home page");
+    homePagePlatform.goToForum();
+    info("Add a category");
+    forumCategoryManagement.addCategorySimple(nameCat, "", nameCat);
+
+    ;
+
+    info("Test 04: Delete a category");
+    info("delete category");
+    forumHomePage.goToHomeCategory();
+    forumCategoryManagement.deleteCategory(nameCat);
+  }
+
+  /**
    * <li>Case ID:116743.</li>
    * <li>Test Case Name: Edit a category.</li>
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li>
-   * <li>Case ID:116744.</li>
-   * <li>Test Case Name: Delete a category.</li>
-   * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
    */
   @Test
-  public void test02_03_04_AddEditDeleteACategory() {
+  public void test03_EditACategory() {
     info("Test 2: Add a category");
 
     String nameCat = "nameCat" + getRandomNumber();
     String nameCat2 = "nameCat2" + getRandomNumber();
 
     /*
-     * Step Number: 1 Step Name: Add a category Step Description: - Go to Forum
-     * page - Click on Add Category - Put values - Save Input Data: Expected
-     * Outcome: - Category is added successfully and shown in Forum home
+     * Step Number: 1 Step Name: Add a category Step Description: - Go to Forum page
+     * - Click on Add Category - Put values - Save Input Data: Expected Outcome: -
+     * Category is added successfully and shown in Forum home
      */
     info("go to Forum home page");
     homePagePlatform.goToForum();
@@ -73,6 +95,33 @@ public class Forum_CategoryTestIT extends Base {
     info("delete category");
     forumHomePage.goToHomeCategory();
     forumCategoryManagement.deleteCategory(nameCat2);
+  }
+
+  /**
+   * <li>Test Case Name: Delete a category.</li>
+   * <li>Pre-Condition:</li>
+   * <li>Post-Condition:</li>
+   */
+  @Test
+  public void test04DeleteACategory() {
+    info("Test 2: Add a category");
+
+    String nameCat = "nameCat" + getRandomNumber();
+    String nameCat2 = "nameCat2" + getRandomNumber();
+
+    /*
+     * Step Number: 1 Step Name: Add a category Step Description: - Go to Forum page
+     * - Click on Add Category - Put values - Save Input Data: Expected Outcome: -
+     * Category is added successfully and shown in Forum home
+     */
+    info("go to Forum home page");
+    homePagePlatform.goToForum();
+    info("Add a category");
+    forumCategoryManagement.addCategorySimple(nameCat, "", nameCat);
+    info("Test 04: Delete a category");
+    info("delete category");
+    forumHomePage.goToHomeCategory();
+    forumCategoryManagement.deleteCategory(nameCat);
   }
 
 }

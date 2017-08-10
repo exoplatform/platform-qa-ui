@@ -46,15 +46,15 @@ public class CALManagePersonalCalendarTestIT extends Base {
     info("Test 3: Add new calendar with valid information");
     /*
      * Step Number: 1 Step Name: Step 1: Add calendar Step Description: Click
-     * Calendar action icon and select Add calendar Input Data: Expected
-     * Outcome: Add new calendar form is shown
+     * Calendar action icon and select Add calendar Input Data: Expected Outcome:
+     * Add new calendar form is shown
      */
 
     /*
-     * Step number: 2 Step Name: Step 2: Add calendar with valid information
-     * Step Description: - Input valid values for all fields in Calendar details
-     * tab - Click Save Input Data: Expected Outcome: Calendar is saved
-     * successfully and listed in personal calendar box
+     * Step number: 2 Step Name: Step 2: Add calendar with valid information Step
+     * Description: - Input valid values for all fields in Calendar details tab -
+     * Click Save Input Data: Expected Outcome: Calendar is saved successfully and
+     * listed in personal calendar box
      */
     info("Create a new calendar");
     String calendar = "calendar" + getRandomNumber();
@@ -79,10 +79,10 @@ public class CALManagePersonalCalendarTestIT extends Base {
     info("Test 4: Edit a personal calendar with valid value");
     /*
      * Step Number: 1 Step Name: - Step Description: Step 1: Show edit personal
-     * calendar form Input Data: - Create new personal calendar[ Details ] -
-     * Right click on the calendar and select Edit Expected Outcome: - Edit
-     * personal calendar form is shown Calendar details tab only, Groups tab is
-     * hidden - Current informations of that calendar are displayed in form
+     * calendar form Input Data: - Create new personal calendar[ Details ] - Right
+     * click on the calendar and select Edit Expected Outcome: - Edit personal
+     * calendar form is shown Calendar details tab only, Groups tab is hidden -
+     * Current informations of that calendar are displayed in form
      */
 
     info("Create a new calendar");

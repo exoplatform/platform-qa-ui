@@ -24,14 +24,14 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.locator.ManageLogInOutLocator;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
@@ -144,7 +144,6 @@ public class ManageLogInOut {
       testBase.getExoWebDriver().getWebDriver().manage().deleteAllCookies();
       testBase.getExoWebDriver().getWebDriver();
     }
-
 
     if (ExpectedConditions.alertIsPresent() != null) {
       alt = new ManageAlert(testBase);

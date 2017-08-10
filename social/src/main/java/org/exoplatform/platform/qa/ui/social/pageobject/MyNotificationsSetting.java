@@ -4,7 +4,6 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocat
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class MyNotificationsSetting {

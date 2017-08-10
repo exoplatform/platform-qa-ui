@@ -10,7 +10,6 @@ import org.openqa.selenium.WebElement;
 
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class QuestionManagement {
@@ -83,7 +82,8 @@ public class QuestionManagement {
       String[] links = pathFile.split("/");
       evt.click(ELEMENT_SUBMIT_QUESTION_FORM_ATTACHMENT_BUTTON);
       WebElement eFile = evt.waitForAndGetElement(ELEMENT_QUESTION_FILE_INPUT, testBase.getDefaultTimeout(), 1, 2);
-      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';", eFile);
+      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';",
+                                                                                     eFile);
       eFile.sendKeys(testBase.getAbsoluteFilePath(pathFile));
       evt.waitForAndGetElement(ELEMENT_ATTACHMENT_FORM_FILE_NAME.replace("$fileName", links[links.length - 1]));
       evt.click(ELEMENT_ATTACH_SAVE_BUTTON);

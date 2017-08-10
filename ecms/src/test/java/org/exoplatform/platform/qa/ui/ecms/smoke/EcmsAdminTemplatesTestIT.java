@@ -47,20 +47,46 @@ public class EcmsAdminTemplatesTestIT extends Base {
    * <li>Test Case Name: Delete Document Template.</li>
    */
   @Test
-  public void test04_05_06_AddDocument_Edit_DeleteTemplate() {
+  public void test04_AddDocumentTemplate() {
+    info("Test 1: Add, edit and delete Document Template");
+    String title = "title" + getRandomNumber();
+    String permission = "any";
+    /*
+     * Step Number: 1 Step Name: - Step Description: Step 1: AddTemplate Input Data:
+     * Create new template when put valid value in fields - Go to Content
+     * Administration/ Templates/ Documents - Click Add Template button - Put value
+     * in required fields - Click Save button Expected Outcome: - Form to manage
+     * template is shown with: + 3 tabs are added to categorize templates by their
+     * nature : Documents, Actions and Others - Template list is displayed with 4
+     * columns: Icon, Template, Type, Actions - A new template is created
+     * successfully
+     */
+    navigationToolbar.goToContentAdministration();
+    contentAdministration.goToSpecificFunctions(ContentAdministration.specificEcmFunctions.DOCUMENTS);
+    contentAdministration.addDocumentInTemplates(title, permission);
+    $(byText(title)).waitUntil(Condition.appears, Configuration.timeout);
+    contentAdministration.deleteCategories(title);
+  }
+
+  /**
+   * <li>Case ID:116632.</li>
+   * <li>Test Case Name: Edit Document Template.</li>
+   */
+  @Test
+  public void test05_EditTemplate() {
     info("Test 1: Add, edit and delete Document Template");
     String title = "title" + getRandomNumber();
     String permission = "any";
     String newTitle = "newTitle" + getRandomNumber();
     /*
-     * Step Number: 1 Step Name: - Step Description: Step 1: AddTemplate Input
-     * Data: Create new template when put valid value in fields - Go to Content
-     * Administration/ Templates/ Documents - Click Add Template button - Put
-     * value in required fields - Click Save button Expected Outcome: - Form to
-     * manage template is shown with: + 3 tabs are added to categorize templates
-     * by their nature : Documents, Actions and Others - Template list is
-     * displayed with 4 columns: Icon, Template, Type, Actions - A new template
-     * is created successfully
+     * Step Number: 1 Step Name: - Step Description: Step 1: AddTemplate Input Data:
+     * Create new template when put valid value in fields - Go to Content
+     * Administration/ Templates/ Documents - Click Add Template button - Put value
+     * in required fields - Click Save button Expected Outcome: - Form to manage
+     * template is shown with: + 3 tabs are added to categorize templates by their
+     * nature : Documents, Actions and Others - Template list is displayed with 4
+     * columns: Icon, Template, Type, Actions - A new template is created
+     * successfully
      */
     navigationToolbar.goToContentAdministration();
     contentAdministration.goToSpecificFunctions(ContentAdministration.specificEcmFunctions.DOCUMENTS);
@@ -68,6 +94,32 @@ public class EcmsAdminTemplatesTestIT extends Base {
     $(byText(title)).waitUntil(Condition.appears, Configuration.timeout);
     contentAdministration.editDocumentInTemplates(title, newTitle);
     contentAdministration.deleteCategories(newTitle);
+  }
+
+  /**
+   * <li>Case ID:116633.</li>
+   * <li>Test Case Name: Delete Document Template.</li>
+   */
+  @Test
+  public void test06_DeleteDocumentTemplate() {
+    info("Test 1: Add, edit and delete Document Template");
+    String title = "title" + getRandomNumber();
+    String permission = "any";
+    /*
+     * Step Number: 1 Step Name: - Step Description: Step 1: AddTemplate Input Data:
+     * Create new template when put valid value in fields - Go to Content
+     * Administration/ Templates/ Documents - Click Add Template button - Put value
+     * in required fields - Click Save button Expected Outcome: - Form to manage
+     * template is shown with: + 3 tabs are added to categorize templates by their
+     * nature : Documents, Actions and Others - Template list is displayed with 4
+     * columns: Icon, Template, Type, Actions - A new template is created
+     * successfully
+     */
+    navigationToolbar.goToContentAdministration();
+    contentAdministration.goToSpecificFunctions(ContentAdministration.specificEcmFunctions.DOCUMENTS);
+    contentAdministration.addDocumentInTemplates(title, permission);
+    $(byText(title)).waitUntil(Condition.appears, Configuration.timeout);
+    contentAdministration.deleteCategories(title);
   }
 
 }

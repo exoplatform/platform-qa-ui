@@ -8,7 +8,6 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import java.util.Set;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
@@ -168,9 +167,8 @@ public class EmailNotifications {
   public void verifyPresentEmailActivityNotifications(String title, String fullName, String content, String... isParams) {
     if (!content.isEmpty()) {
       info("Verify that email notificaiton is sent to user's inbox");
-      evt.waitForAndGetElement(ELEMENT_GMAIL_TITLE.replace("$title", title)
-                                                  .replace("$fullName", fullName)
-                                                  .replace("$content", content),
+      evt.waitForAndGetElement(ELEMENT_GMAIL_TITLE.replace("$title", title).replace("$fullName", fullName).replace("$content",
+                                                                                                                   content),
                                30000,
                                1);
     } else {
@@ -198,9 +196,8 @@ public class EmailNotifications {
   public void verifyNotPresentEmailActivityNotifications(String title, String fullName, String content, String... isParams) {
     if (!content.isEmpty()) {
       info("Verify that email notificaiton is sent to user's inbox");
-      evt.waitForElementNotPresent(ELEMENT_GMAIL_TITLE.replace("$title", title)
-                                                      .replace("$fullName", fullName)
-                                                      .replace("$content", content),
+      evt.waitForElementNotPresent(ELEMENT_GMAIL_TITLE.replace("$title", title).replace("$fullName", fullName).replace("$content",
+                                                                                                                       content),
                                    30000,
                                    1);
     } else {

@@ -1,13 +1,13 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.ecms;
 
-import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.openqa.selenium.By;
-
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
+import org.openqa.selenium.By;
+
+import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class ECMS_Permission {
 

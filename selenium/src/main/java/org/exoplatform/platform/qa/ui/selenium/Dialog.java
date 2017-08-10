@@ -20,47 +20,45 @@
  */
 package org.exoplatform.platform.qa.ui.selenium;
 
-import org.exoplatform.platform.qa.ui.selenium.logger.Logger;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import static com.codeborne.selenide.Selectors.byTitle;
+import static com.codeborne.selenide.Selenide.$;
+
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selectors.*;
+import org.exoplatform.platform.qa.ui.selenium.logger.Logger;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class Dialog {
 
   // Dialog warning
-  public final String
-          ELEMENT_POPUP_WARNING =
-          "//*[@class='UIPopupWindow UIDragObject uiPopup']//*[@class='warningIcon' and contains(text(),'${message}')]";
+  public final String          ELEMENT_POPUP_WARNING                =
+                                                     "//*[@class='UIPopupWindow UIDragObject uiPopup']//*[@class='warningIcon' and contains(text(),'${message}')]";
 
   // Close Message
-  public final String ELEMENT_MESSAGE_TEXT =
-          "//li[@class='MessageContainer']/span[contains(@class, 'PopupIcon')]";
+  public final String          ELEMENT_MESSAGE_TEXT                 =
+                                                    "//li[@class='MessageContainer']/span[contains(@class, 'PopupIcon')]";
 
-  public final String ELEMENT_MESSAGE_DIALOG_CLOSE_ICON_IE = ELEMENT_MESSAGE_TEXT + "/../../../../../..//a";
+  public final String          ELEMENT_MESSAGE_DIALOG_CLOSE_ICON_IE = ELEMENT_MESSAGE_TEXT + "/../../../../../..//a";
 
-  public final String
-          ELEMENT_MESSAGE_DIALOG_CLOSE_ICON =
-          "//div[contains(@class, 'UIPopupWindow') and contains(@style, 'visibility: visible')]//a[contains(@class, 'uiIconClose')]";
+  public final String          ELEMENT_MESSAGE_DIALOG_CLOSE_ICON    =
+                                                                 "//div[contains(@class, 'UIPopupWindow') and contains(@style, 'visibility: visible')]//a[contains(@class, 'uiIconClose')]";
 
   // ECMS > Admin > Repository > Manage Lock Tabs
-  public final String
-          MESSAGE_UNLOCK_WITHOUT_PERMISSION =
-          "You do not have permission to unlock this node. Please contact the administrator to get the correct right.";
+  public final String          MESSAGE_UNLOCK_WITHOUT_PERMISSION    =
+                                                                 "You do not have permission to unlock this node. Please contact the administrator to get the correct right.";
 
-  public final String MESSAGE_CANNOT_DELETE_ADMIN_GROUP = "Cannot delete the group *:/platform/administrators.";
+  public final String          MESSAGE_CANNOT_DELETE_ADMIN_GROUP    = "Cannot delete the group *:/platform/administrators.";
 
   // ECMS > Delete a document
-  public final By ELEMENT_DELETE_IN_DIALOG =
-          By.xpath("//*[contains(@class, 'uiAction')]//*[text()='Delete']");
+  public final By              ELEMENT_DELETE_IN_DIALOG             =
+                                                        By.xpath("//*[contains(@class, 'uiAction')]//*[text()='Delete']");
 
-  public final By ELEMENT_CANCEL_IN_DIALOG =
-          By.xpath("//*[contains(@class, 'uiAction')]//*[text()='Cancel']");
+  public final By              ELEMENT_CANCEL_IN_DIALOG             =
+                                                        By.xpath("//*[contains(@class, 'uiAction')]//*[text()='Cancel']");
 
-  private final TestBase testBase;
+  private final TestBase       testBase;
 
-  public ManageAlert alt;
+  public ManageAlert           alt;
 
   private ElementEventTestBase evt;
 
@@ -76,7 +74,7 @@ public class Dialog {
   public void closeMessageDialog() {
     Logger.info("--Closing message dialog--");
     if (testBase.ieFlag) {
-     $(ELEMENT_MESSAGE_DIALOG_CLOSE_ICON_IE).click();
+      $(ELEMENT_MESSAGE_DIALOG_CLOSE_ICON_IE).click();
     } else {
       $(byTitle("Close Window")).click();
     }

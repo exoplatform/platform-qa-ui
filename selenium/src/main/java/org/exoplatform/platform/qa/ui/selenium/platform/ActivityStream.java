@@ -1,7 +1,7 @@
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -9,16 +9,16 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class ActivityStream {
@@ -182,7 +182,7 @@ public class ActivityStream {
     $(byText(arrayline[2])).isDisplayed();
     $(byText(arrayline[3])).isDisplayed();
     info("Check line 5 of the wiki page is not shown");
-   $(byText(arrayline[4])).shouldNot(Condition.exist);
+    $(byText(arrayline[4])).shouldNot(Condition.exist);
   }
 
   /**
@@ -364,12 +364,17 @@ public class ActivityStream {
     WebElement workingLabel = evt.waitForAndGetElement(ELEMENT_ACTIVITY_ADD_YOUR_COMMENTLABEL.replace("${activityText}",
                                                                                                       activityText));
 
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].textContent = '';", workingLabel);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].textContent = '" + contentOfComment + "';",
-                                                                      commentText);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].disabled = false;", commentButton);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].className = 'btn pull-right btn-primary';",
-                                                                      commentButton);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].textContent = '';",
+                                                                                   workingLabel);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript(
+                                                                                   "arguments[0].textContent = '"
+                                                                                       + contentOfComment + "';",
+                                                                                   commentText);
+    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].disabled = false;",
+                                                                                   commentButton);
+    ((JavascriptExecutor) testBase.getExoWebDriver()
+                                  .getWebDriver()).executeScript("arguments[0].className = 'btn pull-right btn-primary';",
+                                                                 commentButton);
     evt.click(ELEMENT_COMMENT_BUTTON);
     info("Verify comment successfully");
     evt.waitForAndGetElement(ELEMENT_DELETE_COMMENT_BUTTON.replace("${activityText}", activityText).replace("${commentText}",
@@ -453,7 +458,7 @@ public class ActivityStream {
   public void addText(String text) {
     info("----Add text into activity text box-----");
     ELEMENT_ACTIVITY_INPUT_TEXT.waitUntil(Condition.appears, Configuration.timeout).click();
-    executeJavaScript(" CKEDITOR.instances.composerInput.insertText(\""+text+"\")","");
+    executeJavaScript(" CKEDITOR.instances.composerInput.insertText(\"" + text + "\")", "");
   }
 
   /**
@@ -710,8 +715,7 @@ public class ActivityStream {
    *
    * @param user
    * @param text
-   * @param isPresent true if user is in the list false if user is not in the
-   *          list
+   * @param isPresent true if user is in the list false if user is not in the list
    */
   public void checkMentionListUser(String user, String text, boolean isPresent) {
     if (!text.isEmpty())
@@ -758,8 +762,8 @@ public class ActivityStream {
    *
    * @param nameDocument
    * @param type if type=1, this is for office document files and media files if
-   *          type=2, this is for webcontent files if type=3, this is for
-   *          embedded medias as: youtube, vimeo, slideshared...
+   *          type=2, this is for webcontent files if type=3, this is for embedded
+   *          medias as: youtube, vimeo, slideshared...
    * @param link
    */
   public void openPreviewModeOnViewLink(String nameDocument, int type, String link) {
@@ -797,8 +801,8 @@ public class ActivityStream {
    * @param fileName
    * @param link
    * @param type if type=1, this is for office document files and media files if
-   *          type=2, this is for webcontent files if type=3, this is for
-   *          embedded medias as: youtube, vimeo, slideshared...
+   *          type=2, this is for webcontent files if type=3, this is for embedded
+   *          medias as: youtube, vimeo, slideshared...
    */
   public void openPreviewModeOnFileName(String fileName, String link, int type) {
     info("Open Preview mode");

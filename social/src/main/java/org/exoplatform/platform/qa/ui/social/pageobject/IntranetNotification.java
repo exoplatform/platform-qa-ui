@@ -6,7 +6,6 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import java.util.ArrayList;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -494,9 +493,9 @@ public class IntranetNotification {
    * Check users that are shown their names in notification list
    * 
    * @param users is array of users
-   * @param isPopUp =true, if the notification list is shown in Notification
-   *          list popup =false, if the notification list is shown in All
-   *          notification list
+   * @param isPopUp =true, if the notification list is shown in Notification list
+   *          popup =false, if the notification list is shown in All notification
+   *          list
    */
   public void checkUsers(ArrayList<String> users, boolean isPopUp) {
     int lastIndex = users.size() - 1;
@@ -698,9 +697,9 @@ public class IntranetNotification {
    * @param users is array of users
    * @param status is as: has commented on your activity,...
    * @param actTitle is the title of the activity that is commented
-   * @param isPopUp =true, if the notification list is shown in Notification
-   *          list popup =false, if the notification list is shown in All
-   *          notification list
+   * @param isPopUp =true, if the notification list is shown in Notification list
+   *          popup =false, if the notification list is shown in All notification
+   *          list
    */
   public void checkFormatStatusCommentNotification(ArrayList<String> users, String status, String actTitle, boolean isPopUp) {
     info("users.size():" + users.size());
@@ -731,9 +730,9 @@ public class IntranetNotification {
    * Check avatar of notification list
    * 
    * @param users is array of users
-   * @param isPopUp =true, if the notification list is shown in Notification
-   *          list popup =false, if the notification list is shown in All
-   *          notification list
+   * @param isPopUp =true, if the notification list is shown in Notification list
+   *          popup =false, if the notification list is shown in All notification
+   *          list
    */
   public void checkAvatarInStatus(ArrayList<String> users, boolean isPopUp) {
     int lastIndex = users.size() - 1;
@@ -749,9 +748,9 @@ public class IntranetNotification {
    * Check avatar of notification list
    * 
    * @param user is the username
-   * @param isPopUp =true, if the notification list is shown in Notification
-   *          list popup =false, if the notification list is shown in All
-   *          notification list
+   * @param isPopUp =true, if the notification list is shown in Notification list
+   *          popup =false, if the notification list is shown in All notification
+   *          list
    */
   public void checkAvatarInStatus(String user, boolean isPopUp) {
     info("Verify that last user's avatar is shown in list");

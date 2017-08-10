@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
-import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -37,14 +38,14 @@ public class PortalGroupNavigation {
   public void addNewNavigationForGroup(String groupName) {
     info("Add navigation for group " + groupName);
     $(byText("Add Navigation")).click();
-    $(byText("/"+groupName)).waitUntil(Condition.appears,Configuration.timeout);
+    $(byText("/" + groupName)).waitUntil(Condition.appears, Configuration.timeout);
     /*
-     * the order of the groups in the add navigation page is random, so we
-     * defined this condition to fix the location of the linkText
-     * "add navigation" that we should clic on it
+     * the order of the groups in the add navigation page is random, so we defined
+     * this condition to fix the location of the linkText "add navigation" that we
+     * should clic on it
      */
 
-   $(byText("/"+groupName)).parent().find(byText("Add Navigation")).click();
+    $(byText("/" + groupName)).parent().find(byText("Add Navigation")).click();
 
     $(ELEMENT_CANCEL_BUTON).click();
     $(byText(groupName)).waitUntil(Condition.appears, Configuration.timeout);
@@ -59,12 +60,11 @@ public class PortalGroupNavigation {
 
     /*
      * info("Delete navigation of group " + groupName);
-     * $(ELEMENT_DELETE_NAVIGATION_ICON.replace("${groupName}",
-     * groupName)).click(); alert.acceptAlert();
-     * $(ELEMENT_DELETE_NAVIGATION_ICON.replace("${groupName}",
+     * $(ELEMENT_DELETE_NAVIGATION_ICON.replace("${groupName}", groupName)).click();
+     * alert.acceptAlert(); $(ELEMENT_DELETE_NAVIGATION_ICON.replace("${groupName}",
      * groupName)).waitUntil(Condition.disappears,10000);
      */
-    //clic on delete navigation
+    // clic on delete navigation
     $(byText(groupName)).parent().find(byXpath("//*[@id=\"UIGroupNavigationGrid\"]/table[1]/tbody/tr[1]/td[4]/a")).click();
     alert.acceptAlert();
     $(byText(groupName)).shouldNot(Condition.exist);

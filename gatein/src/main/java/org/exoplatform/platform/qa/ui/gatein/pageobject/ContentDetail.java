@@ -1,12 +1,14 @@
 package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.refresh;
-import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_CONTENT_DETAIL_ADDPATH_BTN;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class ContentDetail {
@@ -21,15 +23,14 @@ public class ContentDetail {
   }
 
   /**
-   * Select a folder or a content or both in Multiple Content Selector Pane
-   * popup
+   * Select a folder or a content or both in Multiple Content Selector Pane popup
    *
    * @param arrayPath
    * @param content
    */
   public void selectFolderContent(String path, String content) {
     evt.waitForAndGetElement(ELEMENT_CONTENT_DETAIL_ADDPATH_BTN);
-    $(byClassName("uiIconAddPath")).click();
+    $(byClassName("uiIconAddPath")).waitUntil(Condition.appears, Configuration.timeout).click();
     String[] arrayPath = path.split("/");
     for (String arrayElement : arrayPath) {
       $(byText("Name")).click();
@@ -38,7 +39,7 @@ public class ContentDetail {
     }
     if (content != "" || content != null) {
 
-     $(byClassName("Item")).click();
+      $(byClassName("Item")).click();
     }
   }
 

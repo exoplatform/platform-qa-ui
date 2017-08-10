@@ -35,7 +35,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.exoplatform.platform.qa.ui.selenium.user.UserDatabase;
 
@@ -314,7 +313,6 @@ public class PlatformBase {
     testBase.clearCache();
 
     evt.click(ELEMENT_GMAIL_INBOX);
-
 
   }
 

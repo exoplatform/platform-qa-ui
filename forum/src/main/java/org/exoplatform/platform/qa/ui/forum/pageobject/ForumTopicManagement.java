@@ -4,22 +4,20 @@ import static com.codeborne.selenide.Condition.appears;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 
-import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -79,7 +77,7 @@ public class ForumTopicManagement {
    */
   public void openMoreActionMenu() {
     info("Wait More link is shown");
-    $(ELEMENT_MORE_ACTION).waitUntil(appears,Configuration.timeout);
+    $(ELEMENT_MORE_ACTION).waitUntil(appears, Configuration.timeout);
     info("Click on More link");
     $(ELEMENT_MORE_ACTION).click();
   }
@@ -106,7 +104,7 @@ public class ForumTopicManagement {
       $(ELEMENT_DELETE_TOPIC).click();
 
       info("Verify that confirm popup is shown");
-      $(byText("Are you sure you want to delete this topic ?")).waitUntil(appears,Configuration.timeout);
+      $(byText("Are you sure you want to delete this topic ?")).waitUntil(appears, Configuration.timeout);
       info("Click on OK on Confirm popup");
       $(ELEMENT_OK_DELETE).click();
       break;
@@ -530,7 +528,7 @@ public class ForumTopicManagement {
       $(ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR).click();
     $(ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR).sendKeys(newContent);
     info("Click on Submit button");
-   $(ELEMENT_SUBMIT_BUTTON).click();
+    $(ELEMENT_SUBMIT_BUTTON).click();
     // click(ELEMENT_SUBMIT_BUTTON);
     info("All changes are saved");
   }

@@ -9,15 +9,15 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.E
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-import org.exoplatform.platform.qa.ui.chat.pageobject.ChatManagement;
-import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
 
+import org.exoplatform.platform.qa.ui.chat.pageobject.ChatManagement;
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
@@ -40,7 +40,7 @@ public class SpaceManageMessageTestIT extends Base {
 
   UserAndGroupManagement userandgroupmanagement;
 
-  ChatManagement chatManagement;
+  ChatManagement         chatManagement;
 
   SpaceManagement        spaceManagement;
 

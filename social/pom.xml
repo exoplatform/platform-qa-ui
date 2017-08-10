@@ -15,22 +15,23 @@
     Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
     02110-1301 USA, or see <http://www.gnu.org/licenses/>.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>platform-qa-ui</artifactId>
-    <groupId>org.exoplatform.platform.qa.ui</groupId>
-    <version>1.0.x-SNAPSHOT</version>
-  </parent>
-  <artifactId>platform-qa-ui-social</artifactId>
-  <packaging>jar</packaging>
-  <name>eXo PLF:: QA - UI - Social</name>
-  <description>UI Tests for Social</description>
-  <dependencies>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>platform-qa-ui-commons</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-  </dependencies>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>platform-qa-ui</artifactId>
+        <groupId>org.exoplatform.platform.qa.ui</groupId>
+        <version>1.0.x-SNAPSHOT</version>
+    </parent>
+    <artifactId>platform-qa-ui-social</artifactId>
+    <packaging>jar</packaging>
+    <name>eXo PLF:: QA - UI - Social</name>
+    <description>UI Tests for Social</description>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>platform-qa-ui-commons</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>

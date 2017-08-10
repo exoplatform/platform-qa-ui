@@ -20,15 +20,8 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.testbase;
 
-import static com.codeborne.selenide.Selectors.*;
-
-import com.codeborne.selenide.Condition;
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
-import org.exoplatform.platform.qa.ui.selenium.logger.Logger;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
@@ -36,151 +29,157 @@ import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.Scanner;
 
-import static com.codeborne.selenide.Selenide.$;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_UPLOAD_POPUP_ATTACHMENT_FILE_INPUT;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import com.codeborne.selenide.Condition;
+
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.logger.Logger;
 
 public class ManageFileTestBase {
 
   private final TestBase testBase;
 
-  protected String siteExpDrivePath;
+  protected String       siteExpDrivePath;
 
-  protected String siteExpPathPath;
+  protected String       siteExpPathPath;
 
-  protected String siteExpContentTypeFilePath;
+  protected String       siteExpContentTypeFilePath;
 
-  protected String videoLinksFilePath;
+  protected String       videoLinksFilePath;
 
-  protected String dataTestFilePath;
+  protected String       dataTestFilePath;
 
-  protected String userDataFilePath;
+  protected String       userDataFilePath;
 
-  protected String userInfoFilePath;
+  protected String       userInfoFilePath;
 
-  protected String mailSuffixFilePath;
+  protected String       mailSuffixFilePath;
 
-  protected String userSearchOptionFilePath;
+  protected String       userSearchOptionFilePath;
 
-  protected String attachmentFilePath;
+  protected String       attachmentFilePath;
 
-  protected String texboxFilePath;
+  protected String       texboxFilePath;
 
-  protected String permissionPath;
+  protected String       permissionPath;
 
-  protected String linkPath;
+  protected String       linkPath;
 
-  protected String changLangDataPath;
+  protected String       changLangDataPath;
 
-  protected String contactIMFilePath;
+  protected String       contactIMFilePath;
 
-  protected String contactPhoneFilePath;
+  protected String       contactPhoneFilePath;
 
-  protected String activityMesFilePath;
+  protected String       activityMesFilePath;
 
-  protected String conStatusFilePath;
+  protected String       conStatusFilePath;
 
-  protected String chatStatusFilePath;
+  protected String       chatStatusFilePath;
 
-  protected String groupsCalenderFilePath;
+  protected String       groupsCalenderFilePath;
 
-  protected String remoteGadgetDataFilePath;
+  protected String       remoteGadgetDataFilePath;
 
-  protected String languageFilePath;
+  protected String       languageFilePath;
 
-  protected String appGateinDataFilePath;
+  protected String       appGateinDataFilePath;
 
-  protected String getStartFilePath;
+  protected String       getStartFilePath;
 
-  protected String gadgetFilePath;
+  protected String       gadgetFilePath;
 
-  protected String containerFilePath;
+  protected String       containerFilePath;
 
-  protected String appLayoutFilePath;
+  protected String       appLayoutFilePath;
 
-  protected String groupNameDataFilePath;
+  protected String       groupNameDataFilePath;
 
-  protected String appListGateinFilePath;
+  protected String       appListGateinFilePath;
 
-  protected String appAddGateinFilePath;
+  protected String       appAddGateinFilePath;
 
-  protected String createNewGateinFilePath;
+  protected String       createNewGateinFilePath;
 
-  protected String categoriesGateinFilePath;
+  protected String       categoriesGateinFilePath;
 
-  protected String pageMagListFilePath;
+  protected String       pageMagListFilePath;
 
-  protected String portalDefaultFilePath;
+  protected String       portalDefaultFilePath;
 
-  protected String portalPermisGroupFilePath;
+  protected String       portalPermisGroupFilePath;
 
-  protected String portalPermisMemFilePath;
+  protected String       portalPermisMemFilePath;
 
-  protected String gateinDefaultGroupsFilePath;
+  protected String       gateinDefaultGroupsFilePath;
 
-  protected String gateinNodesFilePath;
+  protected String       gateinNodesFilePath;
 
   // Social
-  protected String spaceUIFilePath;
+  protected String       spaceUIFilePath;
 
-  protected String spaceVisibleFilePath;
+  protected String       spaceVisibleFilePath;
 
-  protected String spaceRegistrationFilePath;
+  protected String       spaceRegistrationFilePath;
 
-  protected String spaceappFilePath;
+  protected String       spaceappFilePath;
 
-  protected String spaceNavigationDefaultNodesFilePath;
+  protected String       spaceNavigationDefaultNodesFilePath;
 
-  protected String spaceGroupsFilePath;
+  protected String       spaceGroupsFilePath;
 
-  protected String spaceWarnMessageFilePath;
+  protected String       spaceWarnMessageFilePath;
 
   // Calendar
-  protected String calGroupNameFilePath;
+  protected String       calGroupNameFilePath;
 
-  protected String calTabNameFilePath;
+  protected String       calTabNameFilePath;
 
-  protected String calCommentsFilePath;
+  protected String       calCommentsFilePath;
 
-  protected String calRemoteFilePath;
+  protected String       calRemoteFilePath;
 
   // Task Management
-  protected String colorNamefilePath;
+  protected String       colorNamefilePath;
 
-  protected String notiIntranetFilePath;
+  protected String       notiIntranetFilePath;
 
-  protected String notiEmailFilePath;
+  protected String       notiEmailFilePath;
 
-  protected String actCommentFilePath;
+  protected String       actCommentFilePath;
 
-  protected String notiCatFilePath;
+  protected String       notiCatFilePath;
 
-  protected String notiFormatEmailFilePath;
+  protected String       notiFormatEmailFilePath;
 
-  protected String notiLabelFilePath;
+  protected String       notiLabelFilePath;
 
-  protected String notiMessageFilePath;
+  protected String       notiMessageFilePath;
 
   // Wiki
-  protected String imageLinksFilePath;
+  protected String       imageLinksFilePath;
 
-  protected String wikiTemplateFilePath;
+  protected String       wikiTemplateFilePath;
 
-  protected String wikiMessageFilePath;
+  protected String       wikiMessageFilePath;
 
-  protected String wikiRichTextFilePath;
+  protected String       wikiRichTextFilePath;
 
-  protected String wikiWarningsFilePath;
+  protected String       wikiWarningsFilePath;
 
-  protected String sourceTextEffectFilePath;
+  protected String       sourceTextEffectFilePath;
 
-  protected String wikiMacroFilePath;
+  protected String       wikiMacroFilePath;
 
   // Permission
-  protected String permisGroupFilePath;
+  protected String       permisGroupFilePath;
 
-  protected String permisMemFilePath;
+  protected String       permisMemFilePath;
 
-  private Scanner scanner;
+  private Scanner        scanner;
 
   public ManageFileTestBase(TestBase testBase) {
     this.testBase = testBase;
@@ -366,13 +365,14 @@ public class ManageFileTestBase {
   public void attachFile(String pathFile, String fileName, final int timeout, WebDriver driver) {
     Logger.info("Attach a file");
     WebElement element = testBase.waitForAndGetElement(LocatorTestBase.ELEMENT_UPLOAD_POPUP_ATTACHMENT_FILE_INPUT, timeout, 1, 2);
-    $(byText("Select File")) .click();
+    $(byText("Select File")).click();
     ((JavascriptExecutor) driver).executeScript("arguments[0].style.display = 'block';", element);
     Logger.info("Get the file to attach");
     element.sendKeys(getAbsoluteFilePath(pathFile + fileName));
     Logger.info("Verify that the file is attached");
-//    testBase.waitForAndGetElement(LocatorTestBase.ELEMENT_UPLOAD_POPUP_NAMEFILE.replace("${fileName}", fileName));
-    $(byText(fileName)).waitUntil(Condition.appears,10000);
+    // testBase.waitForAndGetElement(LocatorTestBase.ELEMENT_UPLOAD_POPUP_NAMEFILE.replace("${fileName}",
+    // fileName));
+    $(byText(fileName)).waitUntil(Condition.appears, 10000);
     Logger.info("The file is attached successfully");
     Logger.info("Click on Save button");
     testBase.click(LocatorTestBase.ELEMENT_UPLOAD_POPUP_ATTACHMENT_FILE_SAVE_BUTTON);
@@ -792,7 +792,7 @@ public class ManageFileTestBase {
       spaceappFilePath = DefaultDataTestBase.DEFAULT_SPACEAPPLICATIONURL;
     if (spaceNavigationDefaultNodesFilePath == null)
       spaceNavigationDefaultNodesFilePath = DefaultDataTestBase.DEFAULT_SPACE_NAVIGATION_DEFAULT_NODES_URL
-              + DefaultDataTestBase.DEFAULT_SPACE_NAVIGATION_DEFAULT_NODES_URL;
+          + DefaultDataTestBase.DEFAULT_SPACE_NAVIGATION_DEFAULT_NODES_URL;
     if (spaceGroupsFilePath == null)
       spaceGroupsFilePath = DefaultDataTestBase.DEFAULT_SPACE_GROUPS_URL;
     if (spaceWarnMessageFilePath == null)
