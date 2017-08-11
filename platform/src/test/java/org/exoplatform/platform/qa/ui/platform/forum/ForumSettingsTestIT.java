@@ -1,15 +1,27 @@
 package org.exoplatform.platform.qa.ui.platform.forum;
 
 
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.forum.pageobject.ForumCategoryManagement;
+import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
+import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.core.PLFData.*;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_EDIT_BUTTON;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_EDIT_PAGE_EDITLAYOUT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_EDIT_PAGE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 
@@ -19,11 +31,26 @@ public class ForumSettingsTestIT extends Base {
 
     HomePagePlatform homePagePlatform;
 
+    ForumHomePage forumHomePage;
+
+    ManageLogInOut manageLogInOut;
+
+    ForumCategoryManagement forumCategoryManagement;
+
+    ForumForumManagement forumForumManagement;
+
+
     @BeforeEach
     public void setupBeforeMethod() {
         info("Start setUpBeforeMethod");
 
         homePagePlatform = new HomePagePlatform(this);
+        forumHomePage = new ForumHomePage(this);
+        manageLogInOut = new ManageLogInOut(this);
+        forumCategoryManagement = new ForumCategoryManagement(this);
+        forumForumManagement = new ForumForumManagement(this);
+
+
 
     }
 
@@ -48,7 +75,7 @@ public class ForumSettingsTestIT extends Base {
 		- Forum is setting successful
 		- Allow get Feed URL of category/forum/topic and update email of user watched*/
 
-        $(ELEMENT_ACTIONBAR_SETTINGS).click();
+       $(ELEMENT_ACTIONBAR_SETTINGS).click();
         $(ELEMENT_FORUM_SETTINGS_SCREENNAME).val("testscreen");
 
         $(ELEMENT_FORUM_SETTINGS_FORUMSETTINGS).click();
@@ -59,8 +86,92 @@ public class ForumSettingsTestIT extends Base {
 
         $(ELEMENT_FORUM_SETTINGS_UPDATE).click();
         $(ELEMENT_FORUM_SETTINGS_SAVE).click();
-        //waitForAndGetElement(By.xpath((forumHomePage.ELEMENT_FORUM_VERIFY_USER).replace("${user}", "UserJohn")));
-        $(By.xpath((ELEMENT_FORUM_VERIFY_USER).replace("${user}", "testscreen")));
 
     }
+    /**
+     *<li> Case ID:116698.</li>
+     *<li> Test Case Name: User management.</li>
+     *<li> Pre-Condition: </li>
+     *<li> Post-Condition: </li>
+     */
+     @Test
+    public void test02_UserManagement() {
+        info("Test 2: User management");
+		/*Step Number: 1
+		 *Step Name: Step 1: Manage users
+		 *Step Description:
+		- Click on Uses
+		- Click Edit icon corresponding with 1 userChange user profile
+		- Click on Profile tab
+		- Change informationChange user setting
+		- Click on Setting tab
+		- Change informationBan User
+		- Click on Ban Uses tab
+		- Change informationView all topics of User
+		- Click on Topic tabView add posts by User
+		- Click on Posts tab
+		 *Input Data:
+		 *Expected Outcome:
+		User information is updated successfully*/
+        homePagePlatform.goToForum();
+        $(ELEMENT_ACTIONBAR_USER).click();
+        $(ELEMENT_FORUM_USERS_POPUP_SEARCH_FIELD).setValue(DATA_USER2).pressEnter();
+        ELEMENT_FORUM_EDIT_PROFILE.click();
+        $(ELEMENT_FORUM_SETTINGS_SCREENNAME);
+        $(ELEMENT_FORUM_USERS_FORUMSETTINGS).click();
+        select(ELEMENT_FORUM_SETTINGS_MAXTHREADS, "5", 2);
+        $(ELEMENT_FORUM_USERS_BAN).click();
+        $(ELEMENT_FORUM_USERS_TOPICS).click();
+        $(ELEMENT_FORUM_USERS_POSTS).click();
+        $(ELEMENT_FORUM_SETTINGS_SAVE).click();
+        $(ELEMENT_FORUM_CLOSEBTN).click();
+
+         manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+         homePagePlatform.goToForum();
+         $(byText(DATA_NAME_USER2)).should(Condition.exist);
+    }
+
+    /**
+     *<li> Case ID:116691.</li>
+     *<li> Test Case Name: Setting Forum portlet.</li>
+     *<li> Pre-Condition: </li>
+     *<li> Post-Condition: </li>
+     */
+    @Test
+    public void test03_SettingForumPortlet() {
+        info("Test 3: Setting Forum portlet");
+
+        String name = "name" + getRandomNumber();
+
+        String name2 = "name2" + getRandomNumber();
+
+
+        homePagePlatform.goToForum();
+        forumCategoryManagement.addCategorySimple(name,"","");
+        forumForumManagement.addForumSimple(name2,"","");
+		/*Step Number: 1
+		 *Step Name: Setting Forum porlet from edit mode
+		 *Step Description:
+		- Show/hide category
+		- enable/disable panel
+		- Use/not use ajax
+		 *Input Data:
+		 *Expected Outcome:
+		Setting porlet is successful with properties*/
+
+        $(ELEMENT_EDIT_BUTTON).click();
+        $(ELEMENT_EDIT_PAGE).hover();
+        $(ELEMENT_EDIT_PAGE_EDITLAYOUT).click();
+        $(ELEMENT_PAGEEDITOR_FORUM).hover();
+        $(ELEMENT_PAGEEDITOR_EDITELEMENT).click();
+        $((byText(name))).parent().parent().find(byClassName("uiCheckbox")).click();
+        $(ELEMENT_PAGEEDITOR_SAVEBTN).click();
+        $(ELEMENT_PAGEEDITOR_OKBTN).click();
+        $(ELEMENT_PAGEEDITOR_CLOSEBTN).click();
+        $(ELEMENT_PAGEEDITOR_FINISHLIGHTBTN).click();
+        $(byText(name)).shouldNot(Condition.exist);
+        ELEMENT_CAT_CONTAINER.find(byText(name)).click();
+        forumCategoryManagement.deleteCategory(name);
+    }
+
 }

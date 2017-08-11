@@ -340,7 +340,10 @@ public class ForumLocator {
   public static final String          ELEMENT_FORUM_USERS_EDIT                           =
                                                                "//*[text()='${name}']/..//*[@class='uiIconEdit uiIconLightGray']";
 
-  public static final By              ELEMENT_FORUM_USERS_POPUP_SEARCH_FIELD             = By.xpath(".//*[@id='SearchUser']");
+
+  public static final SelenideElement ELEMENT_FORUM_EDIT_PROFILE = $(By.xpath("//*[@id=\"PermissionInfo\"]/tbody/tr/td[5]/a[1]/i"));
+
+  public static final By     ELEMENT_FORUM_USERS_POPUP_SEARCH_FIELD             = By.xpath(".//*[@id='SearchUser']");
 
   public static final By              ELEMENT_FORUM_MESSAGE                              =
                                                             By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");
@@ -916,5 +919,6 @@ public static final SelenideElement ELEMENT_BUTTON_OK_IMPORT=$(byClassName("UIPo
   public static final SelenideElement ELEMENT_CAT_CONTAINER = $(byId("UICategoryContainer"));
 
   public static final SelenideElement ELEMENT_PROGRESS_BAR = $((byClassName("progressBarFrame")));
+
 
 }
