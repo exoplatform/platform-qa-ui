@@ -22,6 +22,8 @@ import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
@@ -34,7 +36,8 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -145,6 +148,104 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
 		wikiHomePage.goToAddTemplateWikiPage();
 		wikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_TwoColumnLayout, title);
 		info("Delete the page");
+		homePagePlatform.goToAllSpace();
+		spaceManagement.deleteSpace(space, false);
+	}
+
+	/**
+	 *<li> Case ID:122834.</li>
+	 *<li> Test Case Name: Create page from template.</li>
+	 *<li> Pre-Condition: </li>
+	 *<li> Post-Condition: </li>
+	 */
+	@Test
+	public  void test04CreatePageFromTemplateOnSpace() {
+		info("Test 04: Create page from template");
+		SelenideElement template =ELEMENT_SELECT_TEMPLATE_StatusMeeting ;
+		String title = "title1" + getRandomNumber();
+		String space = "space" + getRandomNumber();
+		/*Step Number: 1
+		 *Step Name: Step 1: Create Page from template
+		 *Step Description:
+			- Go to wiki porlet
+			- Click on Add Page -> From Template icon in toolbar action
+			- Choose a template in list and click Select
+			- Click on Save icon in toolbar
+
+
+		 *Input Data:
+
+		 *Expected Outcome:
+			Page is added successful and listed in navigation tree*/
+		homePagePlatform.goToAllSpace();
+		spaceManagement.addNewSpaceSimple(space, space, 6000);
+		homePagePlatform.goToSpecificSpace(space);
+		spaceHomePage.goToWikiTab();
+		wikiHomePage.goToAddTemplateWikiPage();
+		wikiManagement.addSimpleWikiPageByTemplate(template,title);
+		$(byText(title)).should(Condition.exist);
+
+		info("Test 10: Delete data");
+		/*Step Number: 1
+		 *Step Name: Step 1: Delete page with template layout
+		 *Step Description:
+			- Open an existing page by clicking on page name in navigation tree.
+			- Click on More icon on toolbar and select Delete page action in menu
+			- Click on OK button on Confirm message form
+
+		 *Input Data:
+
+		 *Expected Outcome:
+			Delete page successfully*/
+		homePagePlatform.goToAllSpace();
+		spaceManagement.deleteSpace(space, false);
+	}
+	/**
+	 *<li> Case ID:122834.</li>
+	 *<li> Test Case Name: Create page from template.</li>
+	 *<li> Pre-Condition: </li>
+	 *<li> Post-Condition: </li>
+	 */
+	@Test
+	public  void test10DeteyePageFromTemplateOnSpace() {
+		info("Test 04: Create page from template");
+		SelenideElement template =ELEMENT_SELECT_TEMPLATE_StatusMeeting ;
+		String title = "title1" + getRandomNumber();
+		String space = "space" + getRandomNumber();
+		/*Step Number: 1
+		 *Step Name: Step 1: Create Page from template
+		 *Step Description:
+			- Go to wiki porlet
+			- Click on Add Page -> From Template icon in toolbar action
+			- Choose a template in list and click Select
+			- Click on Save icon in toolbar
+
+
+		 *Input Data:
+
+		 *Expected Outcome:
+			Page is added successful and listed in navigation tree*/
+		homePagePlatform.goToAllSpace();
+		spaceManagement.addNewSpaceSimple(space, space, 6000);
+		homePagePlatform.goToSpecificSpace(space);
+		spaceHomePage.goToWikiTab();
+		wikiHomePage.goToAddTemplateWikiPage();
+		wikiManagement.addSimpleWikiPageByTemplate(template,title);
+		$(byText(title)).should(Condition.exist);
+		wikiHomePage.deleteWiki(title);
+
+		info("Test 10: Delete data");
+		/*Step Number: 1
+		 *Step Name: Step 1: Delete page with template layout
+		 *Step Description:
+			- Open an existing page by clicking on page name in navigation tree.
+			- Click on More icon on toolbar and select Delete page action in menu
+			- Click on OK button on Confirm message form
+
+		 *Input Data:
+
+		 *Expected Outcome:
+			Delete page successfully*/
 		homePagePlatform.goToAllSpace();
 		spaceManagement.deleteSpace(space, false);
 	}
