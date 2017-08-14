@@ -41,6 +41,7 @@ public class RichTextEditor {
    */
 
   public RichTextEditor(TestBase testBase) {
+
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
     this.but = new Button(testBase);

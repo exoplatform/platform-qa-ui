@@ -510,8 +510,8 @@ public class WikiLocators {
   public static final SelenideElement ELEMENT_WIKI_PAGE_TOOL_BAR_AUTO_SAVE_TEXT                  =
                                                                                 $(byXpath("//*[@id=\"UIWikiPageEditForm\"]/div[2]/div[2]/div[2]/div[2]"));
 
-  // public static final By ELEMENT_SAVE_BUTTON_ADD_PAGE =
-  // By.id("UISubmitToolBarUpper_SavePage_");
+   public static final By ELEMENT_SAVE_BUTTON_ADD_PAGE =
+   By.id("UISubmitToolBarUpper_SavePage_");
 
   public static final By              ELEMENT_CANCEL_BUTTON_ADD_PAGE                             =
                                                                      By.id("UISubmitToolBarBottom_Cancel_");
@@ -1463,11 +1463,7 @@ public class WikiLocators {
   public static final By              ELEMENT_WIKI_SETTINGS_CLOSE_USER_SELETOR                   =
                                                                                By.xpath(".//*[@id='UIUserSelector']//*[contains(text(),'Close')]");
 
-  public static final String          ELEMENT_WIKI_SETTING_PERMISSION_SEARCH_GROUP_USER_IN_TABLE =
-                                                                                                 "//*[@id='UIListUsers']//span[contains(text(),'${username}')]";
 
-  public static final SelenideElement ELEMENT_SAVE_BUTTON_ADD_PAGE                               =
-                                                                   $(byId("UISubmitToolBarUpper_SavePage_"));
 
   public static final SelenideElement ELEMENT_DELETE_LINK2                                       = $(byText("Delete Page"));
 

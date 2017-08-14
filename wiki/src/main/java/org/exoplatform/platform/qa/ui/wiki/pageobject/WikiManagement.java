@@ -4,7 +4,9 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -51,21 +53,21 @@ public class WikiManagement {
     info("--Select  template--");
     $(ELEMENT_TEMPLATE_SELECT_FORM).waitUntil(Condition.appears, Configuration.timeout);
     switch (eTemplate.getValue()) {
-    case "HOW-TO_Guide":
-      eTemplate.selectRadio("HOW-TO_Guide");
-      break;
-    case "Three-Column_Layout":
-      eTemplate.selectRadio("Three-Column_Layout");
-      break;
-    case "Status_Meeting":
-      eTemplate.selectRadio("Status_Meeting");
-      break;
-    case "Leave_Planning":
-      eTemplate.selectRadio("Leave_Planning");
-      break;
-    case "Two-Column_Layout":
-      eTemplate.selectRadio("Two-Column_Layout");
-      break;
+      case "HOW-TO_Guide":
+        eTemplate.selectRadio("HOW-TO_Guide");
+        break;
+      case "Three-Column_Layout":
+        eTemplate.selectRadio("Three-Column_Layout");
+        break;
+      case "Status_Meeting":
+        eTemplate.selectRadio("Status_Meeting");
+        break;
+      case "Leave_Planning":
+        eTemplate.selectRadio("Leave_Planning");
+        break;
+      case "Two-Column_Layout":
+        eTemplate.selectRadio("Two-Column_Layout");
+        break;
     }
   }
 
