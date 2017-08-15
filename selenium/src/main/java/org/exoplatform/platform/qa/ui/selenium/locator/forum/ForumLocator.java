@@ -919,6 +919,8 @@ public static final SelenideElement ELEMENT_BUTTON_OK_IMPORT=$(byClassName("UIPo
   public static final SelenideElement ELEMENT_CAT_CONTAINER = $(byId("UICategoryContainer"));
 
   public static final SelenideElement ELEMENT_PROGRESS_BAR = $((byClassName("progressBarFrame")));
+  public static final SelenideElement ELEMENT_CANCEL_PRIVATE_MSG=$(byXpath("//*[@id=\"UIPrivateMessageForm\"]/div[3]/button"));
+  public static final SelenideElement ELEMENT_FORUM_OK_SEND_MSG=$(byText("Your message was sent successfully.")).parent().parent().parent().find(byClassName("btn"));
 
 
 }
