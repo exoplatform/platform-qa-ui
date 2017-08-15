@@ -10,6 +10,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -128,10 +129,10 @@ public class ForumHomePage {
     if (watch) {
       if (evt.waitForAndGetElement(ELEMENT_WATCH, testBase.getDefaultTimeout(), 0) != null) {
         info("Watch item");
-        evt.click(ELEMENT_WATCH);
-        evt.waitForMessage(MESSAGE_WATCH);
-        evt.click(ELEMENT_OK_INFOR_POPUP);
-        evt.waitForAndGetElement(ELEMENT_UNWATCH);
+       $(ELEMENT_WATCH).click();
+        $(byText(MESSAGE_WATCH)).waitUntil(Condition.appears, Configuration.timeout);
+        $(ELEMENT_OK_INFOR_POPUP).click();
+        $(ELEMENT_UNWATCH).waitUntil(Condition.appears,Configuration.timeout);
         info("Watch item successfully");
       } else {
         info("Not found watch link");
@@ -139,10 +140,10 @@ public class ForumHomePage {
     } else {
       if (evt.waitForAndGetElement(ELEMENT_UNWATCH, testBase.getDefaultTimeout(), 0) != null) {
         info("Unwatch item");
-        evt.click(ELEMENT_UNWATCH);
-        evt.waitForMessage(MESSAGE_UNWATCH);
-        evt.click(ELEMENT_OK_INFOR_POPUP);
-        evt.waitForAndGetElement(ELEMENT_WATCH);
+        $(ELEMENT_UNWATCH).click();
+        $(byText(MESSAGE_UNWATCH)).waitUntil(Condition.appears,Configuration.timeout);
+        $(ELEMENT_OK_INFOR_POPUP).click();
+        $(ELEMENT_WATCH).waitUntil(Condition.appears,Configuration.timeout);
         info("Unwatch item successfully");
       } else {
         info("Not found unwatch link");
