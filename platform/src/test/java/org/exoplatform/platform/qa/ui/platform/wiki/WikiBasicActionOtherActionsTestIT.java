@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ManageLogInOutLocator.ELEMENT_SIGN_OUT_LINK;
@@ -650,6 +651,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     info("Test 5: Check permalink when user is not member of page");
     String title = "title"+getRandomNumber();
 
+
 		/*Step Number: 1
 		 *Step Name: Step 1: Add new page when set permission for page
 		 *Step Description:
@@ -708,6 +710,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     info("Test 6: Check permalink when user is member of space");
     String space = "space"+getRandomNumber();
     String wiki = "wiki"+getRandomNumber();
+
 
 		/*Step Number: 1
 		 *Step Name: Step 1: Add wiki page for space
@@ -801,6 +804,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     wikiHomePage.goToPermalink();
     String perLink=ELEMENT_WIKI_PERMELINK.getValue();
 
+
 		/*Step number: 2
 		 *Step Name: Step 2: Check permalink when user is not member of space
 		 *Step Description:
@@ -836,6 +840,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     info("mess1:"+mess1);
     String mess = "You have stopped watching this page now.";
     info("mess:"+mess);
+
 
 		/*Step Number: 1
 		 *Step Name: Step 1: Unwatch Page
@@ -873,6 +878,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
   public  void test09_CheckWhenChangeLinkIsRestricted() {
     info("Test 9: Check when change link is restricted");
     String title = "title"+getRandomNumber();
+
 
 		/*Step Number: 1
 		 *Step Name: Step 1: Add new page is public
@@ -1014,6 +1020,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     info("Test 11 Change permission for page in Permalink page");
     String title = "title"+getRandomNumber();
 
+
 		/*Step Number: 1
 		 *Step Name: Step 1: Change permission for page in Permalink page
 		 *Step Description:
@@ -1061,6 +1068,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
 
     String wiki1 = "wiki1"+getRandomNumber();
     String wiki2 = "wiki2"+getRandomNumber();
+
 		/*Step Number: 1
 		 *Step Name: Step 1: Add new space
 		 *Step Description:
@@ -1093,6 +1101,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     richTextEditor.addSimplePage(wiki2,wiki2);
     wikiManagement.saveAddPage();
 
+
 		/*Step number: 3
 		 *Step Name: Step 3: Open Page1
 		 *Step Description:
@@ -1104,6 +1113,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     info("Open wiki page 1");
     homePagePlatform.goToSpecificSpace(space);
     spaceHomePage.goToWikiTab();
+
 		/*Step number: 4
 		 *Step Name: Step 4: Go to Move page
 		 *Step Description:
@@ -1155,6 +1165,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     String wiki2 = "wiki2"+getRandomNumber();
     String mess = "";
     info("mess:"+mess);
+
 		/*Step Number: 1
 		 *Step Name: Step 1: Add new space
 		 *Step Description:
