@@ -1483,5 +1483,6 @@ public class WikiLocators {
 
   public static final SelenideElement ELEMENT_BUTTON_WIKI_RITCH_TEXT                             =
                                                                      $(byId("UIEditorTabs")).find(byText("Rich Text"));
+  public static final SelenideElement ELEMENT_WIKI_PAGE_CONTAINER=$(byId("UIWikiPageContainer"));
 
 }
