@@ -1,7 +1,9 @@
 package org.exoplatform.platform.qa.ui.answer.pageobject;
 
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -74,8 +76,10 @@ public class QuestionManagement {
 
     if (content != null && content != "") {
       info("input content");
-      $(ELEMENT_SUBMIT_QUESTION_FORM_DATA_FRAME_INPUT).click();
-      evt.inputDataToCKEditor(ELEMENT_SUBMIT_QUESTION_FORM_DATA_FRAME_INPUT, content);
+      switchTo().frame(0);
+      ELEMENT_QUESTION_ANSWER_CONTENT_INPUT.click();
+      ELEMENT_QUESTION_ANSWER_CONTENT_INPUT.sendKeys(content);
+      switchTo().defaultContent();
     }
 
     if (language != null && language != "") {
@@ -122,7 +126,8 @@ public class QuestionManagement {
       break;
     case EDIT:
       info("Edit question");
-      ELEMENT_QUESTION_EDIT.click();
+      String idEdit=$(byText(question)).parent().parent().parent().parent().getAttribute("id").split("Question")[1];
+      $(byXpath(ELEMENT_QUESTION_EDIT.replace("{idEdit}",idEdit))).click();
       $(ELEMENT_QUESTION_EDIT_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case DELETE:

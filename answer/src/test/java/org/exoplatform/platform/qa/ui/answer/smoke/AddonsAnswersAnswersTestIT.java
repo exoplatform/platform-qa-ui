@@ -106,14 +106,14 @@ public class AddonsAnswersAnswersTestIT extends Base {
     answerManagement.goToAnswerQuestion(question);
     answerManagement.inputDataToAnswer(answer, null, null, null);
     /// click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
-    $(ELEMENT_ANSWER_FORM_SAVE_BUTTON).click();
+    $(ELEMENT_ANSWER_FORM_SAVE_BUTTON).scrollTo().click();
     $(byText(answer)).waitUntil(Condition.appears, Configuration.timeout);
 
     answerManagement.goToActionOfAnswerFromMoreAction(answer, AnswerManagement.actionAnswerOption.EDIT);
     answerManagement.inputDataToAnswer(newanswer, null, null, null);
 
-    $(ELEMENT_ANSWER_FORM_SAVE_BUTTON).click();
-    $(byText(newanswer)).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_ANSWER_FORM_SAVE_BUTTON).scrollTo().click();
+    $(byText(answer+newanswer)).waitUntil(Condition.appears, Configuration.timeout);
     questionManagement.deleteQuestion(question);
   }
 

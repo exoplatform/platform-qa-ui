@@ -2,7 +2,9 @@ package org.exoplatform.platform.qa.ui.answer.pageobject;
 
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -32,7 +34,8 @@ public class AnswerManagement {
    */
   public void goToAnswerQuestion(String question) {
     info("Go to answer a question");
-    $(byText(question)).parent().parent().parent().find(byText("Answer")).click();
+    String idQuestion=$(byText(question)).parent().parent().parent().parent().parent().getAttribute("id");
+    $(byXpath(ELEMENT_ANSWER_QUESTION.replace("{IdQuestion}",idQuestion))).click();
   }
 
   /**
@@ -48,8 +51,11 @@ public class AnswerManagement {
 
     if (content != null && content != "") {
       info("input content");
-      evt.inputDataToCKEditor(ELEMENT_ANSWER_FORM_DATA_FRAME_INPUT, content);
-      $(ELEMENT_ANSWER_FORM_DATA_FRAME_INPUT).click();
+      switchTo().frame(0);
+      ELEMENT_QUESTION_ANSWER_CONTENT_INPUT.click();
+      ELEMENT_QUESTION_ANSWER_CONTENT_INPUT.sendKeys(content);
+      switchTo().defaultContent();
+
     }
 
     if (isApprove != null) {

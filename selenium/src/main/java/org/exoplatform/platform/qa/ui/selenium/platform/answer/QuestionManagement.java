@@ -116,12 +116,12 @@ public class QuestionManagement {
       break;
     case EDIT:
       info("Edit question");
-      evt.click(ELEMENT_QUESTION_EDIT.replace("$question", question));
+      evt.click(ELEMENT_QUESTION_EDIT);
       evt.waitForAndGetElement(ELEMENT_QUESTION_EDIT_FORM);
       break;
     case DELETE:
       info("Delete question");
-      evt.click(ELEMENT_QUESTION_DELETE.replace("$question", question));
+      evt.click(ELEMENT_QUESTION_DELETE);
       evt.waitForAndGetElement(ELEMENT_QUESTION_DELETE_FORM);
       break;
     case MOVE:

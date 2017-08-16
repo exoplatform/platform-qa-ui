@@ -100,7 +100,7 @@ public class AddonsAnswersCommentTestIT extends Base {
     commentManagement.goToActionOfCommentFromMoreAction(comment, CommentManagement.actionCommentOption.EDIT);
     commentManagement.inputDataToComment(newcomment);
     $(ELEMENT_COMMENT_FORM_SAVE_BUTTON).click();
-    $(byText(newcomment)).waitUntil(Condition.appears, Configuration.timeout);
+    $(byText(comment+newcomment)).waitUntil(Condition.appears, Configuration.timeout);
     executeJavaScript("window.scrollBy(0,-250)");
     questionManagement.deleteQuestion(question);
   }
