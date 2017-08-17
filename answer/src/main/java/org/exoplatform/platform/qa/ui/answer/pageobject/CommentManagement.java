@@ -1,9 +1,13 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.answer;
+package org.exoplatform.platform.qa.ui.answer.pageobject;
 
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-import org.openqa.selenium.By;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -19,7 +23,7 @@ public class CommentManagement {
 
   /**
    * constructor
-   * 
+   *
    * @param dr
    */
   public CommentManagement(TestBase testBase) {
@@ -34,11 +38,9 @@ public class CommentManagement {
    */
   public void goToCommentQuestion(String question) {
     info("Go to COMMENT a question");
-    if (evt.waitForAndGetElement(ELEMENT_QUESTION_LIST_ITEM.replace("$question", question), 5000, 0) != null)
-      evt.click(By.xpath(ELEMENT_QUESTION_LIST_ITEM.replace("$question", question)));
-    evt.waitForAndGetElement(By.xpath(ELEMENT_QUESTION_SELECTED_ITEM.replace("$question", question)));
-    evt.click(ELEMENT_COMMENT_BUTTON);
-    evt.waitForAndGetElement(ELEMENT_COMMENT_FORM);
+
+    $(ELEMENT_COMMENT_BUTTON).click();
+    $(ELEMENT_COMMENT_FORM).waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**
@@ -53,7 +55,10 @@ public class CommentManagement {
     info("Input data to COMMENT form");
     if (content != null && content != "") {
       info("input content");
-      evt.inputDataToCKEditor(ELEMENT_COMMENT_FORM_DATA_FRAME_INPUT, content);
+      switchTo().frame(0);
+      ELEMENT_QUESTION_ANSWER_CONTENT_INPUT.click();
+      ELEMENT_QUESTION_ANSWER_CONTENT_INPUT.sendKeys(content);
+      switchTo().defaultContent();
     }
   }
 
@@ -66,12 +71,13 @@ public class CommentManagement {
    */
   public void goToActionOfCommentFromMoreAction(String comment, actionCommentOption action) {
     info("Select action from menu");
-    evt.click(ELEMENT_COMMENT_MORE_ACTION_BUTTON.replace("$comment", comment));
+    ELEMENT_COMMENT_MORE_ACTION.click();
+
     switch (action) {
     case EDIT:
       info("EDIT COMMENT");
-      evt.click(ELEMENT_COMMENT_EDIT_BUTTON.replace("$comment", comment));
-      evt.waitForAndGetElement(ELEMENT_COMMENT_FORM);
+      ELEMENT_COMMENT_EDIT.parent().click();
+      $(ELEMENT_COMMENT_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case PROMOTE:
       info("PROMOTE COMMENT");
@@ -80,9 +86,8 @@ public class CommentManagement {
       break;
     case DELETE:
       info("DELETE COMMENT");
-      evt.waitForAndGetElement(ELEMENT_COMMENT_DELETE_BUTTON, testBase.getDefaultTimeout(), 1);
-      evt.click(ELEMENT_COMMENT_DELETE_BUTTON.replace("$comment", comment));
-      evt.waitForAndGetElement(ELEMENT_COMMENT_DELETE_CONFIRM_POPUP);
+      $(byClassName("confirm")).click();
+      $(ELEMENT_COMMENT_DELETE_CONFIRM_POPUP).waitUntil(Condition.appears, Configuration.timeout);
       break;
     default:
       info("Do nothing");

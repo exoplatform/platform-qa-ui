@@ -42,7 +42,7 @@ public class Button {
 
   public final By              ELEMENT_OK_BUTTON                 = By.xpath("//*[text()='OK']");
 
-  public final By              ELEMENT_OK_BUTTON_LINK            = By.linkText("OK");
+  public static final By ELEMENT_OK_BUTTON_LINK = By.linkText("OK");
 
   public final By              ELEMENT_NO_BUTTON                 = By.xpath("//*[text()='No']");
 

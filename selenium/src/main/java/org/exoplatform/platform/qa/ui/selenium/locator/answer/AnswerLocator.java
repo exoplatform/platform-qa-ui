@@ -20,7 +20,13 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.locator.answer;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byId;
+import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selenide.$;
 
 public class AnswerLocator {
 
@@ -345,11 +351,9 @@ public class AnswerLocator {
                                                      "//*[@class='rightContent']//*[text()='$question']//ancestor::*[@class='rightContent']//*[@class='uiIconAnsAnswer uiIconLightGray']";
 
   public static final String ELEMENT_QUESTION_EDIT                                 =
-                                                   "//*[@class='rightContent']//*[text()='$question']//ancestor::*[@class='rightContent']//*[@class='uiIconEdit uiIconLightGray']";
-
-  public static final String ELEMENT_QUESTION_DELETE                               =
-                                                     "//*[@class='rightContent']//*[text()='$question']//ancestor::*[@class='rightContent']//*[@class='uiIconTrash uiIconLightGray']";
-
+         "//*[@id=\"{idEdit}Context\"]/li[3]/a";
+  public static final SelenideElement ELEMENT_QUESTION_DELETE                               =
+          $(byId("UIQuestions")).find(byClassName("uiIconTrash"));
   public static final String ELEMENT_QUESTION_MOVE                                 =
                                                    "//*[@class='rightContent']//*[text()='$question']//ancestor::*[@class='rightContent']//*[@class='uiIconMove uiIconLightGray']";
 
@@ -540,4 +544,16 @@ public class AnswerLocator {
 
   public static final String ELEMENT_FAQ_ANSWER                                    =
                                                 "//*[@class='viewerAnswer']//*[text()='$answer']";
+
+  public static final SelenideElement ELEMENT_ANSWER_MORE_ACTION=$(byClassName("responseContainer")).find(byClassName("uiDropdownWithIcon"));
+
+  public static final SelenideElement ELEMENT_ANSWER_EDIT=ELEMENT_ANSWER_MORE_ACTION.find(byClassName("uiIconEdit"));
+
+  public static final SelenideElement ELEMENT_COMMENT_MORE_ACTION=$(byClassName("responseContainer")).find(byClassName("uiDropdownWithIcon"));
+
+  public static final SelenideElement ELEMENT_COMMENT_EDIT=ELEMENT_COMMENT_MORE_ACTION.find(byClassName("uiIconEdit"));
+  public static final String ELEMENT_ANSWER_QUESTION="//*[@id=\"{IdQuestion}\"]/div/div[2]/div[2]/div[2]/div[2]/a[1]";
+  public static final SelenideElement ELEMENT_QUESTION_ANSWER_CONTENT_INPUT=$(byXpath("/html/body"));
+
 }
+

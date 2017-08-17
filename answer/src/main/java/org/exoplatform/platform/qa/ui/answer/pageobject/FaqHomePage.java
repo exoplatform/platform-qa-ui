@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.selenium.platform.answer;
+package org.exoplatform.platform.qa.ui.answer.pageobject;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
