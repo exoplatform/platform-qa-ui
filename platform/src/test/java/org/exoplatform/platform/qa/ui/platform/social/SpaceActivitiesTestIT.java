@@ -105,7 +105,7 @@ public class SpaceActivitiesTestIT extends Base {
     activityStream.addActivity(activity1, "");
     String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];
     // hover on the activity to appear the delete button
-    $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).hover();
+    $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).hover().click();
     // click on delete button
     $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
     ELEMENT_DELETE_POPUP_OK.click();
