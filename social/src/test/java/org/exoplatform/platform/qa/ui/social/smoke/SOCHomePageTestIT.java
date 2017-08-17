@@ -69,7 +69,7 @@ public class SOCHomePageTestIT extends Base {
 
         ELEMENT_WHO_LIKED_POPUP.waitUntil(Condition.appears, Configuration.timeout);
         // hover on the activity to appear the delete button
-        $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).hover();
+        $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).hover().click();
         // click on delete button
         $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
         ELEMENT_DELETE_POPUP_OK.click();
@@ -106,7 +106,7 @@ public class SOCHomePageTestIT extends Base {
         $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
         $(byText(comment)).should(Condition.exist);
         // hover on the activity to appear the delete button
-        $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).hover();
+        $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).hover().click();
         // click on delete button
         $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
         ELEMENT_DELETE_POPUP_OK.click();
@@ -157,7 +157,7 @@ public class SOCHomePageTestIT extends Base {
         // verify that the comment is deleted
         $(byText(comment)).shouldNot(Condition.exist);
         // hover on the activity to appear the delete button
-        $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).hover();
+        $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).hover().click();
         // click on delete button
         $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
         ELEMENT_DELETE_POPUP_OK.click();
@@ -187,7 +187,7 @@ public class SOCHomePageTestIT extends Base {
         activityStream.addActivity(activity1, "");
         String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];
         // hover on the activity to appear the delete button
-        $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).hover();
+        $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).hover().click();
         // click on delete button
         $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
         $(ELEMENT_DELETE_POPUP_OK).click();
