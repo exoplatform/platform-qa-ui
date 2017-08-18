@@ -57,8 +57,9 @@ public class ContentAdministration {
     switch (main) {
     case EXPLORER:
       info("Select Explorer tab");
-
-      ELEMENT_EXPLORER_CATEGORIES_ECM_FUNCTIONS.click();
+      if ($(ELEMENT_ECMS_FUNCTIONS_DRIVES).is(Condition.not(Condition.visible))) {
+        ELEMENT_EXPLORER_CATEGORIES_ECM_FUNCTIONS.click();
+      }
       break;
 
     case ADVANCED:
