@@ -13,6 +13,9 @@ import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.Keys;
+
+import java.security.Key;
 
 public class SpaceSettingManagement {
 
@@ -80,12 +83,12 @@ public class SpaceSettingManagement {
    */
   public void inviteUser(String userName, boolean verify, String fullName) {
 
-    info("--Search user " );
+    goToMemberTab();
+    info("--Search user ");
     ELEMENT_INPUT_INVITE_USER.click();
-    $(byXpath("//*[@id=\"UIUserInvitation\"]/div[2]/div[2]/div[1]/div[1]/input")).setValue(userName).pressEnter();
-    $(byText(fullName)).waitUntil(Condition.appears,Configuration.timeout);
-    $(byXpath("//*[@id=\"UIUserInvitation\"]/div[2]/div[2]/div[1]/div[1]/input")).pressEnter();
-    $(ELEMENT_SPACE_BTN_INVITE).click();
+    ELEMENT_INPUT_INVITE_USER.sendKeys(userName);
+    info("click on Invite button");
+    $(byXpath("//*[@id=\"UIUserInvitation\"]/div[2]/div[1]/button")).click();
     if (verify) {
       info("Verify that user is shown in invitation table");
       if (fullName != "" && fullName != null)
