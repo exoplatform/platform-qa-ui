@@ -1488,5 +1488,8 @@ public class WikiLocators {
   public static final By              ELEMENT_VIEW_PAGE_HISTORY                                  =
                                                                 By.xpath("//*[@id='UIWikiPageInfo']/div[2]/div[2]/table/tbody/tr[2]/td/div/button");
 
-
+  public static final SelenideElement ELEMENT_WIKI_UNPUT_LINK_EXISTED_PAGE                       =
+          $(byXpath("//*[@id=\"isc_Class_S1398_0_Input\"]"));
+  public static final SelenideElement ELEMENT_BUTTON_WIKI_RITCH_TEXT                             =
+          $(byId("UIEditorTabs")).find(byText("Rich Text"));
 }
