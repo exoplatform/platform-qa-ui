@@ -22,6 +22,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 
 @Tag("wiki")
 @Tag("smoke")
+@Tag("test")
 public class WikiSearchTestIT extends Base {
 	/**
 	 * <li>Case ID:122814.</li>

@@ -30,7 +30,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
 
 @Tag("wiki")
-
+@Tag("test")
 public class WikiBasicTestWithUserTestIT extends Base {
 
   HomePagePlatform       homePagePlatform;
