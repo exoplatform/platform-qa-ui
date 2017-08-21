@@ -1,7 +1,6 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
@@ -25,7 +24,6 @@ public class WikiPageInformation {
    * constructor
    *
    * @param dr
-   *
    */
   public WikiPageInformation(TestBase testBase) {
     this.testBase = testBase;
@@ -71,11 +69,11 @@ public class WikiPageInformation {
    */
   public void goToPageHistory() {
     info("Click on View page info button");
-    $(ELEMENT_PAGE_INFO_VIEW_PAGE_INFO_BTN).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_PAGE_INFO_VIEW_PAGE_INFO_BTN).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_PAGE_INFO_VIEW_PAGE_INFO_BTN).click();
 
     info("Page history is shown");
-    $(ELEMENT_WIKI_PAGE_PAGE_HISTORY_TITLE).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_WIKI_PAGE_PAGE_HISTORY_TITLE).waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**

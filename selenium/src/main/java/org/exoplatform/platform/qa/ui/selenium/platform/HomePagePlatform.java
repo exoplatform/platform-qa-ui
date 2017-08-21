@@ -100,7 +100,7 @@ public class HomePagePlatform {
   public void goToAnswer() {
     info("-- Go to answer page --");
 
-    $(ELEMENT_ANSWER_LINK_PLF).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_ANSWER_LINK_PLF).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_ANSWER_LINK_PLF).click();
     if (evt.waitForAndGetElement(ELEMENT_ANSWER_PORTLET, 5000, 0) == null)
       testBase.getExoWebDriver().getWebDriver().navigate().refresh();

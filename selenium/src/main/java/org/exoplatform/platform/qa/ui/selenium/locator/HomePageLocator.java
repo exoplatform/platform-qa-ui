@@ -66,7 +66,6 @@ public final class HomePageLocator {
   public static final SelenideElement ELEMENT_CALENDAR_LINK_PLF                                            =
                                                                 $(byClassName("uiIconPLFCalendar"));
 
-
   public static final SelenideElement ELEMENT_TASKS_LINK_PLF                                               =
                                                              $(byClassName("uiCompanyNavigations")).find(byText("Tasks"));
 
@@ -125,7 +124,6 @@ public final class HomePageLocator {
 
   public static final String          ELEMENT_SPECIFIC_SPACE_LINK_PLF                                      =
                                                                       "//*[@id='UISpaceNavigationPortlet']//*[contains(text(),'{$space}')]";
-
 
   public static final String          ELEMENT_NUMBER_OF_SPACE_IN_LIST_LINK                                 =
                                                                            "//*[@class='spaceNavigation']/li[{$number}]/a";
@@ -553,8 +551,8 @@ public final class HomePageLocator {
 
   // confirm popup
 
-  public static final By              ELEMENT_DELETE_POPUP_OK                                              =
-                                                              By.xpath(".//*[@id='UISocialPopupConfirmation']//*[contains(text(),'OK')]");
+  public static final SelenideElement ELEMENT_DELETE_POPUP_OK                                              =
+                                                              $(byXpath("//*[@id=\"UISocialPopupConfirmation\"]/div[2]/div[2]/div/a[1]"));
 
   public static final SelenideElement ELEMENT_WHO_LIKED_POPUP                                              =
                                                               $(byClassName("listLikedBox "));
@@ -575,4 +573,6 @@ public final class HomePageLocator {
 
   public static final SelenideElement ELEMENT_SEARCH_RESULT                                                =
                                                             $(byId("quickSearchResult1"));
+
+  public static final String          ELEMENT_COMMENT_BLOC                                                 = "CommentBlock{id}1";
 }

@@ -1,16 +1,15 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+
+import com.codeborne.selenide.Condition;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -50,8 +49,7 @@ public class WikiSettingPage {
 
     info("Verify that the search results is shown that matchs with keyword");
 
-   $(byClassName("TemplateGrid")).find(byText(template)).should(Condition.exist);
-
+    $(byClassName("TemplateGrid")).find(byText(template)).should(Condition.exist);
 
   }
 

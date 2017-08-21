@@ -16,8 +16,7 @@ import com.codeborne.selenide.SelenideElement;
 
 public class TaskManagementLocator {
 
-
-   //LEFT PANEL
+  // LEFT PANEL
   // General
 
   // Task area
@@ -55,20 +54,21 @@ public class TaskManagementLocator {
   public static final SelenideElement ELEMENT_PROJECT_ICON_ADD_PROJECT              =
                                                                        $(byXpath("//*[@id=\"taskManagement\"]/div[1]/ul/li[2]/div/a[2]"));
 
-  public static final SelenideElement ELEMENT_ADD_PROJECT                           = $(byXpath("//*[@id=\"taskManagement\"]/div[1]/ul/li[2]/div/div/ul/li[1]/a/i"));
+  public static final SelenideElement ELEMENT_ADD_PROJECT                           =
+                                                          $(byXpath("//*[@id=\"taskManagement\"]/div[1]/ul/li[2]/div/div/ul/li[1]/a/i"));
 
   // Labels area
   public static final SelenideElement ELEMENT_LABEL_ICON_ADD_LABEL                  =
                                                                    $(byXpath("//*[@id=\"taskManagement\"]/div[1]/ul/li[3]/div[1]/a[2]/i"));
 
-  public static final SelenideElement ELEMENT_ADD_LABEL                             = $(byXpath("//*[@id=\"taskManagement\"]/div[1]/ul/li[3]/div[1]/div/ul/li[1]/a"));
+  public static final SelenideElement ELEMENT_ADD_LABEL                             =
+                                                        $(byXpath("//*[@id=\"taskManagement\"]/div[1]/ul/li[3]/div[1]/div/ul/li[1]/a"));
 
   public static final SelenideElement ELEMENT_INPUT_LABEL                           = $(byClassName("addLabelInput"));
 
   public static final SelenideElement ELEMENT_LABEL_BUTTON_CONFIRM_DELETE           = $(byClassName("confirmDelete"));
 
-   // CENTRAL PANEL
-
+  // CENTRAL PANEL
 
   // Task
   // Management
@@ -196,8 +196,6 @@ public class TaskManagementLocator {
 
   // List View - Sort by Created Date
 
-
-    //RIGHT PANEL
-
+  // RIGHT PANEL
 
 }

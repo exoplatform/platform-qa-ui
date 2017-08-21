@@ -23,8 +23,7 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 
 @Tag("wiki")
 @Tag("smoke")
-
-public class WikiBasicActionManagePageEditIT extends Base {
+public class WikiBasicActionManagePageEditTestIT extends Base {
 
   HomePagePlatform  homePagePlatform;
 

@@ -1,6 +1,5 @@
 package org.exoplatform.platform.qa.ui.platform.wiki;
 
-import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -28,7 +27,6 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
 
 @Tag("wiki")
 @Tag("smoke")
-
 public class WikiInformationTestIT extends Base {
 
   HomePagePlatform    homePagePlatform;
@@ -107,7 +105,10 @@ public class WikiInformationTestIT extends Base {
     wikiHomePage.goToPageInformation(title);
 
     info("Summary: Title, author, Last changed by");
-    $(byText("Title")).parent().parent().find(byText(title)).should(Condition.exist);
+    $(byXpath("//*[@id=\"UIWikiPageInfo\"]/div[1]/div[1]/table/tbody/tr[1]/td[1]")).parent()
+                                                                                   .parent()
+                                                                                   .find(byText(title))
+                                                                                   .should(Condition.exist);
     $(byText("Author")).parent().parent().find(byText("Root Root")).should(Condition.exist);
     $(byText("Last changed by")).parent().parent().find(byText("Root Root")).should(Condition.exist);
 
@@ -287,7 +288,7 @@ public class WikiInformationTestIT extends Base {
     wikiHomePage.deleteWiki(newTitle);
   }
 
-   @Test
+  @Test
   public void test03_ViewGeneralPageInformation() {
     info("Test 03: View General Page information");
     String title = "title" + getRandomNumber();
@@ -403,18 +404,19 @@ public class WikiInformationTestIT extends Base {
     info("Compare reversion page is shown");
     $(ELEMENT_WIKI_PAGE_COMPARE_REVERSION_TITLE).waitUntil(Condition.appears, Configuration.timeout);
 
+    info("Verify that Words/lines which are red-highlighted with strike-throughs indicate that they were removed");
 
-     info("Verify that Words/lines which are red-highlighted with strike-throughs indicate that they were removed");
+    assertEquals($(byClassName("diffmodifiedline")).find(byText(content)).getCssValue("background-color"),
+                 "rgba(237, 156, 149, 1)");
 
-     assertEquals($(byClassName("diffmodifiedline")).find(byText(content)).getCssValue("background-color"),"rgba(237, 156, 149, 1)");
+    info("Verify that Words/lines highlighted in green indicate that they were added");
 
-     info("Verify that Words/lines highlighted in green indicate that they were added");
+    assertEquals($(byClassName("diffmodifiedline")).find(byText(newTitle2)).getCssValue("background-color"),
+                 "rgba(215, 248, 213, 1)");
 
-     assertEquals($(byClassName("diffmodifiedline")).find(byText(newTitle2)).getCssValue("background-color"),"rgba(215, 248, 213, 1)");
-
-     info("Delete the page");
-     homePagePlatform.goToWiki();
-     wikiHomePage.deleteWiki(newTitle2);
+    info("Delete the page");
+    homePagePlatform.goToWiki();
+    wikiHomePage.deleteWiki(newTitle2);
   }
 
 }

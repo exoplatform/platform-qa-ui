@@ -4,18 +4,17 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.SelenideElement;
-import org.junit.rules.Timeout;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
+
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -351,7 +350,7 @@ public class WikiManagement {
     info("Preview the template");
     $(ELEMENT_TEMPLATE_PREVIEW_BTN).click();
     info("Verify that the layout is shown");
-    $(ELEMENT_PREVIEW_TEMPLATE_CONTENT).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_PREVIEW_TEMPLATE_CONTENT).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_TEMPLATE_PREVIEW_PAGE_CLOSE_BTN).click();
     evt.click(ELEMENT_TEMPLATE_CANCEL_BTN);
 

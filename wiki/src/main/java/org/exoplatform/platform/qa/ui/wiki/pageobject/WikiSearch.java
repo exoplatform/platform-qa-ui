@@ -6,7 +6,6 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
@@ -57,7 +56,7 @@ public class WikiSearch {
       goToAdvancedSearchSpaceSwitcher();
       searchSpaces(location);
       info("Select a location");
-      //$(ELEMENT_ADVANCED_SEARCH_SPACE_SWITCHER).click();
+      // $(ELEMENT_ADVANCED_SEARCH_SPACE_SWITCHER).click();
       $(byClassName("wikis")).find(byText(location)).click();
 
     }

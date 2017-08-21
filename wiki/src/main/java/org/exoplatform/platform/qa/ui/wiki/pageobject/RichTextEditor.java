@@ -3,7 +3,6 @@ package org.exoplatform.platform.qa.ui.wiki.pageobject;
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -237,25 +236,25 @@ public class RichTextEditor {
     }
 
     switch (descendantType) {
-      case yes:
-        info("Select yes");
-        plf.selectOption(ELEMENT_MACRO_CHILD_DESCENDANT_FIELD, "true");
-        break;
-      case no:
-        info("Select no");
-        plf.selectOption(ELEMENT_MACRO_CHILD_DESCENDANT_FIELD, "false");
-        break;
+    case yes:
+      info("Select yes");
+      plf.selectOption(ELEMENT_MACRO_CHILD_DESCENDANT_FIELD, "true");
+      break;
+    case no:
+      info("Select no");
+      plf.selectOption(ELEMENT_MACRO_CHILD_DESCENDANT_FIELD, "false");
+      break;
     }
 
     switch (excerptType) {
-      case yes:
-        info("Select yes");
-        plf.selectOption(ELEMENT_MACRO_CHILD_EXCERPT_FIELD, "true");
-        break;
-      case no:
-        info("Select no");
-        plf.selectOption(ELEMENT_MACRO_CHILD_EXCERPT_FIELD, "false");
-        break;
+    case yes:
+      info("Select yes");
+      plf.selectOption(ELEMENT_MACRO_CHILD_EXCERPT_FIELD, "true");
+      break;
+    case no:
+      info("Select no");
+      plf.selectOption(ELEMENT_MACRO_CHILD_EXCERPT_FIELD, "false");
+      break;
     }
 
     if (!parent.isEmpty()) {
@@ -312,14 +311,14 @@ public class RichTextEditor {
    */
   public void insertMacroExcerpt(acceptType hideMode, String content) {
     switch (hideMode) {
-      case yes:
-        info("Select yes");
-        plf.selectOption(ELEMENT_MACRO_EXCERPT_DROPBOX, "true");
-        break;
-      case no:
-        info("Select no");
-        plf.selectOption(ELEMENT_MACRO_EXCERPT_DROPBOX, "false");
-        break;
+    case yes:
+      info("Select yes");
+      plf.selectOption(ELEMENT_MACRO_EXCERPT_DROPBOX, "true");
+      break;
+    case no:
+      info("Select no");
+      plf.selectOption(ELEMENT_MACRO_EXCERPT_DROPBOX, "false");
+      break;
     }
 
     if (!content.isEmpty()) {
@@ -370,25 +369,25 @@ public class RichTextEditor {
     }
 
     switch (numberedMode) {
-      case yes:
-        info("Select yes");
-        plf.selectOption(ELEMENT_MACRO_TABLE_OF_CONTENT_NUMBERED_FIELD, "true");
-        break;
-      case no:
-        info("Select no");
-        plf.selectOption(ELEMENT_MACRO_TABLE_OF_CONTENT_NUMBERED_FIELD, "false");
-        break;
+    case yes:
+      info("Select yes");
+      plf.selectOption(ELEMENT_MACRO_TABLE_OF_CONTENT_NUMBERED_FIELD, "true");
+      break;
+    case no:
+      info("Select no");
+      plf.selectOption(ELEMENT_MACRO_TABLE_OF_CONTENT_NUMBERED_FIELD, "false");
+      break;
     }
 
     switch (scope) {
-      case PAGE:
-        info("Select Page");
-        plf.selectOption(ELEMENT_MACRO_TABLE_OF_CONTENT_SCOPE_FIELD, scopeMode.PAGE.name());
-        break;
-      case LOCAL:
-        info("Select Local");
-        plf.selectOption(ELEMENT_MACRO_TABLE_OF_CONTENT_SCOPE_FIELD, scopeMode.LOCAL.name());
-        break;
+    case PAGE:
+      info("Select Page");
+      plf.selectOption(ELEMENT_MACRO_TABLE_OF_CONTENT_SCOPE_FIELD, scopeMode.PAGE.name());
+      break;
+    case LOCAL:
+      info("Select Local");
+      plf.selectOption(ELEMENT_MACRO_TABLE_OF_CONTENT_SCOPE_FIELD, scopeMode.LOCAL.name());
+      break;
     }
 
     if (!start.isEmpty()) {
@@ -469,25 +468,25 @@ public class RichTextEditor {
    */
   public void insertMacroHtml(acceptType cleanMode, acceptType wikiMode, String content) {
     switch (cleanMode) {
-      case yes:
-        info("Select yes");
-        plf.selectOption(ELEMENT_MACRO_HTML_CLEAN_FIELD, "true");
-        break;
-      case no:
-        info("Select no");
-        plf.selectOption(ELEMENT_MACRO_HTML_CLEAN_FIELD, "false");
-        break;
+    case yes:
+      info("Select yes");
+      plf.selectOption(ELEMENT_MACRO_HTML_CLEAN_FIELD, "true");
+      break;
+    case no:
+      info("Select no");
+      plf.selectOption(ELEMENT_MACRO_HTML_CLEAN_FIELD, "false");
+      break;
     }
 
     switch (wikiMode) {
-      case yes:
-        info("Select yes");
-        plf.selectOption(ELEMENT_MACRO_HTML_WIKI_NAMES_FIELD, "true");
-        break;
-      case no:
-        info("Select no");
-        plf.selectOption(ELEMENT_MACRO_HTML_WIKI_NAMES_FIELD, "false");
-        break;
+    case yes:
+      info("Select yes");
+      plf.selectOption(ELEMENT_MACRO_HTML_WIKI_NAMES_FIELD, "true");
+      break;
+    case no:
+      info("Select no");
+      plf.selectOption(ELEMENT_MACRO_HTML_WIKI_NAMES_FIELD, "false");
+      break;
     }
 
     if (!content.isEmpty()) {
@@ -527,7 +526,7 @@ public class RichTextEditor {
     info("Input a title for the page");
     $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
     if ($(ELEMENT_SOURCE_EDITOR_BUTTON).is(Condition.not(Condition.exist))
-            && (ELEMENT_BUTTON_WIKI_RITCH_TEXT.is(Condition.exist))) {
+        && (ELEMENT_BUTTON_WIKI_RITCH_TEXT.is(Condition.exist))) {
       ELEMENT_BUTTON_WIKI_RITCH_TEXT.click();
     }
     if (!title.isEmpty()) {
@@ -539,8 +538,6 @@ public class RichTextEditor {
       $(byId("body")).sendKeys(content);
       switchTo().defaultContent();
     }
-
-
 
   }
 
@@ -609,21 +606,21 @@ public class RichTextEditor {
     info("Go to Attached file Link");
     goToAttachedFileLink();
     switch (tab) {
-      case Current_page:
-        info("Open Current page tab");
-        goToCurrentPageTab();
-        info("Input attached file link");
-        uploadAttachedFile(attachedFile);
-        goToLinkSetting();
-        break;
-      case All_pages:
-        info("Open All pages tab");
-        goToAllPagesTab();
-        info("Expand WikiHome node");
-        goToExplorerWikiHome();
-        info("Select attached file");
-        selectAttachedFile(page, attachedFile);
-        break;
+    case Current_page:
+      info("Open Current page tab");
+      goToCurrentPageTab();
+      info("Input attached file link");
+      uploadAttachedFile(attachedFile);
+      goToLinkSetting();
+      break;
+    case All_pages:
+      info("Open All pages tab");
+      goToAllPagesTab();
+      info("Expand WikiHome node");
+      goToExplorerWikiHome();
+      info("Select attached file");
+      selectAttachedFile(page, attachedFile);
+      break;
     }
     info("Input the tooltip of the link");
     inputToolTip(tooltip);
@@ -714,26 +711,26 @@ public class RichTextEditor {
    */
   public void insertExistWikiPageLink(String page, String label, String tooltip, wikiPageLinkTab tab) {
     switch (tab) {
-      case My_Recent_Changes:
-        info("Select My recent changes tab");
-        goToMyRecentChangesTab();
-        info("Select a page in the list");
-        selectPageInMyRecentChangesTab(page);
-        break;
-      case All_pages:
-        info("Select All pages tab");
-        goToAllPagesTab();
-        info("Expand WikiHome node");
-        goToExplorerWikiHome();
-        info("Select a page in the list");
-        selectPageInAllPagesTab(page);
-        break;
-      case Search:
-        info("Select Search tab and search the page");
-        searchPage(page);
-        info("Select a page");
-        selectPageInSearchTab(page);
-        break;
+    case My_Recent_Changes:
+      info("Select My recent changes tab");
+      goToMyRecentChangesTab();
+      info("Select a page in the list");
+      selectPageInMyRecentChangesTab(page);
+      break;
+    case All_pages:
+      info("Select All pages tab");
+      goToAllPagesTab();
+      info("Expand WikiHome node");
+      goToExplorerWikiHome();
+      info("Select a page in the list");
+      selectPageInAllPagesTab(page);
+      break;
+    case Search:
+      info("Select Search tab and search the page");
+      searchPage(page);
+      info("Select a page");
+      selectPageInSearchTab(page);
+      break;
     }
     info("Input the label of the link");
     inputLabel(label);
@@ -757,26 +754,26 @@ public class RichTextEditor {
     info("Open Wiki Page link popup");
     goToWikiPageLink();
     switch (tab) {
-      case My_Recent_Changes:
-        info("Select My recent changes tab");
-        goToMyRecentChangesTab();
-        info("Select a page in the list");
-        addNewPageInMyRecentChangesTab(page);
-        goToLinkSetting();
-        break;
-      case All_pages:
-        info("Select All pages tab");
-        goToAllPagesTab();
-        info("Double click on Add New Page button");
-        evt.doubleClickOnElement(ELEMENT_ALL_PAGES_TAB_ADD_NEW_PAGE_BTN);
-        break;
-      case Search:
-        info("Open Seach tab");
-        goToSearchTab();
-        info("Create a new wiki page");
-        addNewPageInSearchTab(page);
-        goToLinkSetting();
-        break;
+    case My_Recent_Changes:
+      info("Select My recent changes tab");
+      goToMyRecentChangesTab();
+      info("Select a page in the list");
+      addNewPageInMyRecentChangesTab(page);
+      goToLinkSetting();
+      break;
+    case All_pages:
+      info("Select All pages tab");
+      goToAllPagesTab();
+      info("Double click on Add New Page button");
+      evt.doubleClickOnElement(ELEMENT_ALL_PAGES_TAB_ADD_NEW_PAGE_BTN);
+      break;
+    case Search:
+      info("Open Seach tab");
+      goToSearchTab();
+      info("Create a new wiki page");
+      addNewPageInSearchTab(page);
+      goToLinkSetting();
+      break;
     }
     info("Input the label of the link");
     inputLabel(label);
@@ -1049,32 +1046,32 @@ public class RichTextEditor {
    */
   public void selectAlign(alignType type) {
     switch (type) {
-      case None:
-        break;
-      case Left:
-        info("Select left align");
-        evt.check(ELEMENT_IMAGE_ALIGN_LEFT, 2);
-        break;
-      case Center:
-        info("Select center align");
-        evt.check(ELEMENT_IMAGE_ALIGN_CENTER, 2);
-        break;
-      case Right:
-        info("Select right align");
-        evt.check(ELEMENT_IMAGE_ALIGN_RIGHT, 2);
-        break;
-      case Top:
-        info("Select top align");
-        evt.check(ELEMENT_IMAGE_ALIGN_TOP, 2);
-        break;
-      case Middle:
-        info("Select middle align");
-        evt.check(ELEMENT_IMAGE_ALIGN_MIDDLE, 2);
-        break;
-      case Bottom:
-        info("Select bottom align");
-        evt.check(ELEMENT_IMAGE_ALIGN_BOTTOM, 2);
-        break;
+    case None:
+      break;
+    case Left:
+      info("Select left align");
+      evt.check(ELEMENT_IMAGE_ALIGN_LEFT, 2);
+      break;
+    case Center:
+      info("Select center align");
+      evt.check(ELEMENT_IMAGE_ALIGN_CENTER, 2);
+      break;
+    case Right:
+      info("Select right align");
+      evt.check(ELEMENT_IMAGE_ALIGN_RIGHT, 2);
+      break;
+    case Top:
+      info("Select top align");
+      evt.check(ELEMENT_IMAGE_ALIGN_TOP, 2);
+      break;
+    case Middle:
+      info("Select middle align");
+      evt.check(ELEMENT_IMAGE_ALIGN_MIDDLE, 2);
+      break;
+    case Bottom:
+      info("Select bottom align");
+      evt.check(ELEMENT_IMAGE_ALIGN_BOTTOM, 2);
+      break;
     }
   }
 
@@ -1167,7 +1164,7 @@ public class RichTextEditor {
     evt.doubleClickOnElement(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_NEW_FILE_BTN);
 
     ((JavascriptExecutor) testBase.getExoWebDriver()
-            .getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
+                                  .getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
     testBase.getExoWebDriver().getWebDriver().findElement(By.xpath("//*[@name='filepath']")).sendKeys(path);
     /*
      * WebElement elem =
@@ -1237,7 +1234,7 @@ public class RichTextEditor {
     evt.doubleClickOnElement(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_IMAGE_BTN);
 
     ((JavascriptExecutor) testBase.getExoWebDriver()
-            .getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
+                                  .getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
     testBase.getExoWebDriver().getWebDriver().findElement(By.xpath("//*[@name='filepath']")).sendKeys(path);
 
     /*
@@ -1326,11 +1323,10 @@ public class RichTextEditor {
     info("Click on Select button");
     $(ELEMENT_SELECT_BUTTON).click();
 
-
   }
+
   /**
    * Check auto save essage
-   *
    */
 
   public void checkAutoSaveMessage(String title, String content) {
@@ -1344,12 +1340,13 @@ public class RichTextEditor {
       switchTo().defaultContent();
     }
     info("Waiting 30s before saved all changes");
-    $(ELEMENT_DRAFT_NOTIFY).waitUntil(Condition.appears,31000,1);
+    $(ELEMENT_DRAFT_NOTIFY).waitUntil(Condition.appears, 31000, 1);
     info("Save all changes");
     info("Cancel adding page");
     $(ELEMENT_CANCEL_BUTTON_ADD_PAGE).click();
     $(ELEMENT_CONFIRMATION_POPUP_YES_BTN).click();
   }
+
   /**
    * Select a page in Search Tab
    *
@@ -1455,8 +1452,8 @@ public class RichTextEditor {
     info("Focus on the frame");
     plf.switchFrame(ELEMENT_CONTENT_WIKI_FRAME);
     WebElement element = testBase.getExoWebDriver()
-            .getWebDriver()
-            .findElement(By.xpath(ELEMENT_WIKI_CONTENT_IMAGE_ALT.replace("$alt", altTextImage)));
+                                 .getWebDriver()
+                                 .findElement(By.xpath(ELEMENT_WIKI_CONTENT_IMAGE_ALT.replace("$alt", altTextImage)));
     selectItems(element);
     evt.switchToParentWindow();
   }
@@ -1530,14 +1527,14 @@ public class RichTextEditor {
                              acceptType image,
                              String width) {
     switch (content) {
-      case yes:
-        info("Select yes");
-        plf.selectOption(ELEMENT_MACRO_RSSS_CONTENT_FIELD, "true");
-        break;
-      case no:
-        info("Select no");
-        plf.selectOption(ELEMENT_MACRO_RSSS_CONTENT_FIELD, "false");
-        break;
+    case yes:
+      info("Select yes");
+      plf.selectOption(ELEMENT_MACRO_RSSS_CONTENT_FIELD, "true");
+      break;
+    case no:
+      info("Select no");
+      plf.selectOption(ELEMENT_MACRO_RSSS_CONTENT_FIELD, "false");
+      break;
     }
 
     if (!count.isEmpty()) {
@@ -1546,14 +1543,14 @@ public class RichTextEditor {
     }
 
     switch (decoration) {
-      case yes:
-        info("Select yes");
-        plf.selectOption(ELEMENT_MACRO_RSS_DECORATION_FIELD, "true");
-        break;
-      case no:
-        info("Select no");
-        plf.selectOption(ELEMENT_MACRO_RSS_DECORATION_FIELD, "false");
-        break;
+    case yes:
+      info("Select yes");
+      plf.selectOption(ELEMENT_MACRO_RSS_DECORATION_FIELD, "true");
+      break;
+    case no:
+      info("Select no");
+      plf.selectOption(ELEMENT_MACRO_RSS_DECORATION_FIELD, "false");
+      break;
     }
 
     if (!feed.isEmpty()) {
@@ -1562,14 +1559,14 @@ public class RichTextEditor {
     }
 
     switch (image) {
-      case yes:
-        info("Select yes");
-        plf.selectOption(ELEMENT_MACRO_RSS_IMAGE_FIELD, "true");
-        break;
-      case no:
-        info("Select no");
-        plf.selectOption(ELEMENT_MACRO_RSS_IMAGE_FIELD, "false");
-        break;
+    case yes:
+      info("Select yes");
+      plf.selectOption(ELEMENT_MACRO_RSS_IMAGE_FIELD, "true");
+      break;
+    case no:
+      info("Select no");
+      plf.selectOption(ELEMENT_MACRO_RSS_IMAGE_FIELD, "false");
+      break;
     }
 
     if (!width.isEmpty()) {
@@ -1688,14 +1685,14 @@ public class RichTextEditor {
     String color = (Content.length > 1 ? Content[1] : null);
     info("Verify collapse macro");
     switch (macroCate) {
-      case COLOR:
-        info("Verify Color macro when expanding");
-        evt.waitForAndGetElement(ELEMENT_MACRO_TEXT.replace("${text}", content).replace("${color}", color));
-        break;
-      case JIRA:
-        info("Verify Jira macro when expanding");
-        evt.waitForAndGetElement(ELEMENT_JIRA_MACRO_LINK.replace("${content}", content));
-        break;
+    case COLOR:
+      info("Verify Color macro when expanding");
+      evt.waitForAndGetElement(ELEMENT_MACRO_TEXT.replace("${text}", content).replace("${color}", color));
+      break;
+    case JIRA:
+      info("Verify Jira macro when expanding");
+      evt.waitForAndGetElement(ELEMENT_JIRA_MACRO_LINK.replace("${content}", content));
+      break;
     }
   }
 

@@ -20,19 +20,10 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.RichTextEditor;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiDraftPage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("wiki")
 @Tag("smoke")
 public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
-
 
   HomePagePlatform  homePagePlatform;
 
@@ -236,7 +227,6 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
     homePagePlatform.goToWiki();
     wikiHomePage.deleteWiki(newTitle);
   }
-
 
   @Test
   public void Auto_save_message() {
