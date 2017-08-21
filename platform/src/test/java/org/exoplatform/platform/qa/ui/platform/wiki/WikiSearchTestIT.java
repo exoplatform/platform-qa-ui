@@ -3,10 +3,14 @@ package org.exoplatform.platform.qa.ui.platform.wiki;
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.core.PLFData.password;
+import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_SEARCH_NORESULT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -17,11 +21,12 @@ import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
 
 @Tag("wiki")
-@Tag("smoke")
+@Tag("sniff")
 public class WikiSearchTestIT extends Base {
   /**
    * <li>Case ID:122814.</li>
@@ -45,6 +50,8 @@ public class WikiSearchTestIT extends Base {
 
   WikiSettingPage   wikiSettingPage;
 
+  ManageLogInOut    manageLogInOut;
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
@@ -55,7 +62,16 @@ public class WikiSearchTestIT extends Base {
     wikiSearch = new WikiSearch(this);
     navigationToolbar = new NavigationToolbar(this);
     wikiSettingPage = new WikiSettingPage(this);
+    manageLogInOut = new ManageLogInOut(this);
+    if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
+      manageLogInOut.signOut();
+    }
+    manageLogInOut.signInCas(username, password);
+  }
 
+  @AfterEach
+  public void signout() {
+    manageLogInOut.signOut();
   }
 
   @Test

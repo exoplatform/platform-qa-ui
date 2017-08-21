@@ -26,7 +26,7 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 
 @Tag("wiki")
-
+@Tag("sniff")
 public class WikiBasicActionOtherActionsTestIT extends Base {
 
   HomePagePlatform  homePagePlatform;
@@ -60,14 +60,11 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     }
     manageLogInOut.signInCas("john", "gtngtn");
 
-    try {
       richTextEditor = new RichTextEditor(this);
 
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-
   }
+
+
 
   @AfterEach
   public void signout() {

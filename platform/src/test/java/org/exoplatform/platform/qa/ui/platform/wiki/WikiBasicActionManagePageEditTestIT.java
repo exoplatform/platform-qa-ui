@@ -1,11 +1,16 @@
 package org.exoplatform.platform.qa.ui.platform.wiki;
 
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.core.PLFData.password;
+import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_DRAFT_NEW_PAGE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_TREE_NAME_WIKI;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -22,7 +27,7 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 
 @Tag("wiki")
-@Tag("smoke")
+@Tag("sniff")
 public class WikiBasicActionManagePageEditTestIT extends Base {
 
   HomePagePlatform  homePagePlatform;
@@ -47,13 +52,18 @@ public class WikiBasicActionManagePageEditTestIT extends Base {
     manageLogInOut = new ManageLogInOut(this);
     wikiManagement = new WikiManagement(this);
     navigationToolbar = new NavigationToolbar(this);
-
     wikidraftpage = new WikiDraftPage(this);
-    try {
-      richTextEditor = new RichTextEditor(this);
-    } catch (Exception e) {
-      e.printStackTrace();
+    richTextEditor = new RichTextEditor(this);
+
+    if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
+      manageLogInOut.signOut();
     }
+    manageLogInOut.signInCas(username, password);
+  }
+
+  @AfterEach
+  public void signout() {
+    manageLogInOut.signOut();
   }
 
   /**

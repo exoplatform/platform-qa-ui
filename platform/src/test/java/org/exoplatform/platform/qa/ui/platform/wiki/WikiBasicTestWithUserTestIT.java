@@ -30,7 +30,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
 
 @Tag("wiki")
-
+@Tag("sniff")
 public class WikiBasicTestWithUserTestIT extends Base {
 
   HomePagePlatform       homePagePlatform;
@@ -73,19 +73,7 @@ public class WikiBasicTestWithUserTestIT extends Base {
     spaceManagement = new SpaceManagement(this);
     spaceHomePage = new SpaceHomePage(this);
     sourceTextEditor = new SourceTextEditor(this);
-
-    try {
-      sourceTextEditor = new SourceTextEditor(this);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-
-    try {
-      richTextEditor = new RichTextEditor(this);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-
+    richTextEditor = new RichTextEditor(this);
     arrayPage = new ArrayList<String>();
     userAddManagement = new UserAddManagement(this);
     navigationToolbar = new NavigationToolbar(this);

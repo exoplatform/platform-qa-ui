@@ -2,14 +2,18 @@ package org.exoplatform.platform.qa.ui.platform.wiki;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.core.PLFData.password;
+import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -26,7 +30,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
 
 @Tag("wiki")
-@Tag("smoke")
+@Tag("sniff")
 public class WikiInformationTestIT extends Base {
 
   HomePagePlatform    homePagePlatform;
@@ -58,9 +62,17 @@ public class WikiInformationTestIT extends Base {
     spaceHomePage = new SpaceHomePage(this);
     wikiPageInformation = new WikiPageInformation(this);
     sourceTextEditor = new SourceTextEditor(this);
-
     richTextEditor = new RichTextEditor(this);
 
+    if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
+      manageLogInOut.signOut();
+    }
+    manageLogInOut.signInCas(username, password);
+  }
+
+  @AfterEach
+  public void signout() {
+    manageLogInOut.signOut();
   }
 
   @Test
