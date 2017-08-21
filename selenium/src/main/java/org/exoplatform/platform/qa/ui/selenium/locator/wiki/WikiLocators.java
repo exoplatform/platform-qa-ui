@@ -1493,4 +1493,33 @@ public class WikiLocators {
 
   public static final SelenideElement ELEMENT_MORE_LINK_WITH_USER=$(byXpath("//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li[2]/div"));
 
+  public static final SelenideElement ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE                      =
+                                                                            $(byXpath("//*[@id=\"UIWikiSettingContainer_TemplateSetting_\"]/div[2]/button"));
+
+  public static final SelenideElement ELEMENT_WIKI_OK_SAVE_TEMPLATE                              =
+                                                                    $(byClassName("infoIcon")).parent()
+                                                                                              .parent()
+                                                                                              .parent()
+                                                                                              .find(byClassName("btn"));
+
+  public static final SelenideElement ELEMENT_WIKI_LISTE_TEMPLATE                                = $(byId("myTabContent"));
+
+  public static final By              ELEMENT_WIKI_ICON_DELETE_TEMPLATE                          =
+                                                                        byClassName("uiIconDeleteTemplate");
+
+  public static final By              ELEMENT_WIKI_ICON_EDIT_TEMPLATE                            =
+                                                                      byClassName("uiIconEditTemplate");
+
+  public static final SelenideElement ELEMENT_WIKI_PREVIEW_TEMPLATE                              =
+                                                                    $(byXpath("//*[@id=\"UIEditorTabs\"]/button[1]"));
+
+  public static final By              ELEMENT_WIKI_ICON_DELETE_PERMISSION                        = byClassName("uiIconDelete");
+
+  public static final SelenideElement ELEMENT_WIKI_ICON_EDIT_PERMISSION_FOR_MARY                 =
+                                                                                 $(byText(DATA_NAME_USER2)).parent()
+                                                                                                           .parent()
+                                                                                                           .findAll(byClassName("uiCheckbox"))
+                                                                                                           .get(1);
+
+  public static final SelenideElement ELEMENT_WIKI_PERMELINK                                     = $(byId("PermalinkText"));
 }
