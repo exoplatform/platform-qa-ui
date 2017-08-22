@@ -9,6 +9,8 @@ import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumTopicManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -20,15 +22,22 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.refresh;
+import static org.exoplatform.platform.qa.ui.core.PLFData.password;
+import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_COMMENT_BLOC;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
+
 /**
 * @author eXo
 *
 */
+@Tag("forum")
+@Tag("sniff")
 public class ForumPublishActivityTestIT extends Base{
 
     HomePagePlatform homePagePlatform;
@@ -42,6 +51,7 @@ public class ForumPublishActivityTestIT extends Base{
     ForumCategoryManagement forumCategoryManagement;
 
     ActivityStream activityStream;
+    ManageLogInOut manageLogInOut;
 
     @BeforeEach
     public void setupBeforeMethod() {
@@ -53,6 +63,23 @@ public class ForumPublishActivityTestIT extends Base{
         forumHomePage = new ForumHomePage(this);
         forumCategoryManagement = new ForumCategoryManagement(this);
         activityStream = new ActivityStream(this);
+        manageLogInOut=new ManageLogInOut(this);
+        if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist))
+        {
+            $(ELEMENT_SKIP_BUTTON).click();
+        }
+        if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
+            manageLogInOut.signOut();
+        }
+
+        manageLogInOut.signInCas(username, password);
+    }
+
+
+
+    @AfterEach
+    public void signout() {
+        manageLogInOut.signOut();
     }
 
     String nameCat ;

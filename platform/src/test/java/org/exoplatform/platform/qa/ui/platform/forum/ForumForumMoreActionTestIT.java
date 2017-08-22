@@ -8,6 +8,7 @@ import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumTopicManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -16,16 +17,19 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_CAT_CONTAINER;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_FORUM_START_TOPIC_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_FORUM_START_TOPIC_DISABLE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 /**
  * @author dmardassi
  *         Date 24/07/2017
  */
 @Tag("forum")
-@Tag("smoke")
+@Tag("sniff")
 public class ForumForumMoreActionTestIT extends Base {
 
     HomePagePlatform homePagePlatform;
@@ -49,6 +53,23 @@ public class ForumForumMoreActionTestIT extends Base {
         forumHomePage = new ForumHomePage(this);
         forumCategoryManagement = new ForumCategoryManagement(this);
         manageLogInOut = new ManageLogInOut(this);
+        manageLogInOut=new ManageLogInOut(this);
+        if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist))
+        {
+            $(ELEMENT_SKIP_BUTTON).click();
+        }
+        if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
+            manageLogInOut.signOut();
+        }
+
+        manageLogInOut.signInCas(username, password);
+    }
+
+
+
+    @AfterEach
+    public void signout() {
+        manageLogInOut.signOut();
     }
 
     /**
@@ -124,7 +145,7 @@ public class ForumForumMoreActionTestIT extends Base {
         info("go to Forum home page");
         homePagePlatform.goToForum();
         info("Delete category");
-        forumHomePage.goToHomeCategory();
+        ELEMENT_CAT_CONTAINER.find(byText(cate)).click();
         forumCategoryManagement.deleteCategory(cate);
 
     }
@@ -202,7 +223,7 @@ public class ForumForumMoreActionTestIT extends Base {
         homePagePlatform.goToForum();
 
         info("Delete category");
-        forumHomePage.goToHomeCategory();
+        ELEMENT_CAT_CONTAINER.find(byText(cate)).click();
         forumCategoryManagement.deleteCategory(cate);
 
     }

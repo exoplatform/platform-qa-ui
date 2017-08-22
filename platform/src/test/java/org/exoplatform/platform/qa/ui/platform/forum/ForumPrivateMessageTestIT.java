@@ -1,10 +1,12 @@
 package org.exoplatform.platform.qa.ui.platform.forum;
 
 
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.forum.pageobject.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -14,13 +16,15 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_CANCEL_PRIVATE_MSG;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 /**
 * @author eXo
 *
 */
 @Tag("smoke")
-@Tag("forum")
+@Tag("sniff")
 public class ForumPrivateMessageTestIT extends Base{
     HomePagePlatform homePagePlatform;
 
@@ -45,6 +49,23 @@ public class ForumPrivateMessageTestIT extends Base{
         forumCategoryManagement = new ForumCategoryManagement(this);
         privateMessageManagement=new PrivateMessageManagement(this);
         manageLogInOut=new ManageLogInOut(this);
+        manageLogInOut=new ManageLogInOut(this);
+        if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist))
+        {
+            $(ELEMENT_SKIP_BUTTON).click();
+        }
+        if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
+            manageLogInOut.signOut();
+        }
+
+        manageLogInOut.signInCas(username, password);
+    }
+
+
+
+    @AfterEach
+    public void signout() {
+        manageLogInOut.signOut();
     }
 /**
 *<li> Case ID:116755.</li>

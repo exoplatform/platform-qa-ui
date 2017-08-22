@@ -8,6 +8,7 @@ import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -23,10 +24,12 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarL
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 
 @Tag("forum")
-@Tag("smoke")
+@Tag("sniff")
 public class ForumSettingsTestIT extends Base {
 
     HomePagePlatform homePagePlatform;
@@ -52,6 +55,23 @@ public class ForumSettingsTestIT extends Base {
 
 
 
+        manageLogInOut=new ManageLogInOut(this);
+        if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist))
+        {
+            $(ELEMENT_SKIP_BUTTON).click();
+        }
+        if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
+            manageLogInOut.signOut();
+        }
+
+        manageLogInOut.signInCas(username, password);
+    }
+
+
+
+    @AfterEach
+    public void signout() {
+        manageLogInOut.signOut();
     }
 
     @Test
@@ -129,6 +149,7 @@ public class ForumSettingsTestIT extends Base {
          manageLogInOut.signIn(DATA_USER2, DATA_PASS);
          homePagePlatform.goToForum();
          $(byText(DATA_NAME_USER2)).should(Condition.exist);
+
     }
 
     /**

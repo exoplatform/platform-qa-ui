@@ -7,16 +7,22 @@ import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumTopicManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.core.PLFData.password;
+import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 /**
  * Created by exo on 02/06/17.
@@ -36,6 +42,7 @@ public class ForumManagementInSpaceTestIT extends Base {
     ForumTopicManagement forumTopicManagement;
 
     ForumHomePage forumHomePage;
+    ManageLogInOut manageLogInOut;
 
     @BeforeEach
     public void setupBeforeMethod() {
@@ -48,7 +55,6 @@ public class ForumManagementInSpaceTestIT extends Base {
         forumTopicManagement = new ForumTopicManagement(this);
         forumHomePage = new ForumHomePage(this);
     }
-
     @Test
     public void startNewTopicInSpace() {
 

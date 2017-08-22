@@ -7,18 +7,24 @@ import org.exoplatform.platform.qa.ui.forum.pageobject.ForumCategoryManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.core.PLFData.password;
+import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 @Tag("smoke")
-@Tag("forum")
+@Tag("sniff")
 public class ForumCategoryTestIT extends Base {
     HomePagePlatform homePagePlatform;
 
@@ -28,6 +34,8 @@ public class ForumCategoryTestIT extends Base {
 
     ForumForumManagement forumForumManagement;
 
+    ManageLogInOut manageLogInOut;
+
     @BeforeEach
     public void setupBeforeMethod() {
         info("Start setUpBeforeMethod");
@@ -36,6 +44,23 @@ public class ForumCategoryTestIT extends Base {
         forumHomePage = new ForumHomePage(this);
         forumCategoryManagement = new ForumCategoryManagement(this);
         forumForumManagement = new ForumForumManagement(this);
+        manageLogInOut=new ManageLogInOut(this);
+        if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist))
+        {
+            $(ELEMENT_SKIP_BUTTON).click();
+        }
+        if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
+            manageLogInOut.signOut();
+        }
+
+        manageLogInOut.signInCas(username, password);
+    }
+
+
+
+    @AfterEach
+    public void signout() {
+        manageLogInOut.signOut();
     }
     /**
      *<li> Case ID:116745.</li>
@@ -109,8 +134,8 @@ public class ForumCategoryTestIT extends Base {
         ELEMENT_BTN_OK.click();
 
         info("delete category");
-        ELEMENT_CAT_CONTAINER.find(byText("nameCat681051")).click();
-        forumCategoryManagement.deleteCategory("nameCat681051");
+        ELEMENT_CAT_CONTAINER.find(byText("categorieTest")).click();
+        forumCategoryManagement.deleteCategory("categorieTest");
     }
     /**
      *<li> Case ID:116746.</li>
@@ -175,7 +200,7 @@ public class ForumCategoryTestIT extends Base {
 
         info("Import forum");
         forumCategoryManagement.selectItemManageCategoryMenu(ForumCategoryManagement.specifManageCategoryMenu.IMPORT_FORUM);
-        $(byId("FileUpload")).find(byClassName("file")).uploadFromClasspath("fileNameFor.zip");
+        $(byId("FileUpload")).find(byClassName("file")).uploadFromClasspath("ks-export-forum.xml");
         ELEMENT_PROGRESS_BAR .waitUntil(Condition.disappears,Configuration.timeout);
         $(ELEMENT_SAVE_IMPORT).click();
         ELEMENT_BTN_OK.click();

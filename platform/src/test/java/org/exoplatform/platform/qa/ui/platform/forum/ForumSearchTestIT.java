@@ -7,22 +7,28 @@ import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumTopicManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.core.PLFData.password;
+import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 /**
  * @author cmugnier
  * @date 20/01/2015
  */
 @Tag("forum")
-@Tag("smoke")
+@Tag("sniff")
 
 public class ForumSearchTestIT extends Base {
 
@@ -42,6 +48,7 @@ public class ForumSearchTestIT extends Base {
   ForumCategoryManagement forumCategoryManagement;
 
   ForumHomePage           forumHomePage;
+  ManageLogInOut manageLogInOut;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -52,7 +59,24 @@ public class ForumSearchTestIT extends Base {
     forumTopicManagement = new ForumTopicManagement(this);
     forumHomePage = new ForumHomePage(this);
     forumCategoryManagement = new ForumCategoryManagement(this);
+	  manageLogInOut=new ManageLogInOut(this);
+	  if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist))
+	  {
+		  $(ELEMENT_SKIP_BUTTON).click();
+	  }
+	  if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
+		  manageLogInOut.signOut();
+	  }
+
+	  manageLogInOut.signInCas(username, password);
   }
+
+
+
+	@AfterEach
+	public void signout() {
+		manageLogInOut.signOut();
+	}
 @Test
   public void test01_QuickSearch() {
     info("Test 1: Quick search");
@@ -91,7 +115,7 @@ public class ForumSearchTestIT extends Base {
 	ELEMENT_CLOSE_POPUP.click();
 	ELEMENT_HOME_FORUM.click();
     $(byText(name)).click();
-     forumCategoryManagement.deleteCategory(name);
+	forumCategoryManagement.deleteCategory(name);
   }
 
 	@Test
@@ -204,6 +228,8 @@ public class ForumSearchTestIT extends Base {
 		$(ELEMENT_SEARCH__ADVANCEDSEARCH_TEXTBOX).setValue(name);
 		$(ELEMENT_SEARCH_FORUM_ADVANCEDSEARCH_SEARCH).click();
 		ELEMENT_SEARCH_RESULT.find(byText(name)).should(Condition.exist);
+		$(byText(name)).click();
+		forumCategoryManagement.deleteCategory(name);
 	}
 
 }

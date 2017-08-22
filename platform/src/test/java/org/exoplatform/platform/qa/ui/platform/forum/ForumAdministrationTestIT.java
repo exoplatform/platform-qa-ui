@@ -1,25 +1,35 @@
 package org.exoplatform.platform.qa.ui.platform.forum;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumTopicManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.core.PLFData.password;
+import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 /**
  * @author cmugnier
  * @date 20/01/2015
  */
 @Tag("forum")
-@Tag("smoke")
+@Tag("sniff")
 public class ForumAdministrationTestIT extends Base {
 
     HomePagePlatform homePagePlatform;
@@ -34,6 +44,7 @@ public class ForumAdministrationTestIT extends Base {
 
     ForumHomePage forumHomePage;
 
+    ManageLogInOut manageLogInOut;
     @BeforeEach
     public void setupBeforeMethod() {
         info("Start setUpBeforeMethod");
@@ -44,6 +55,23 @@ public class ForumAdministrationTestIT extends Base {
         forumForumManagement = new ForumForumManagement(this);
         forumTopicManagement = new ForumTopicManagement(this);
         forumHomePage = new ForumHomePage(this);
+        manageLogInOut=new ManageLogInOut(this);
+        if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist))
+        {
+            $(ELEMENT_SKIP_BUTTON).click();
+        }
+        if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
+            manageLogInOut.signOut();
+        }
+
+        manageLogInOut.signInCas(username, password);
+    }
+
+
+
+    @AfterEach
+    public void signout() {
+        manageLogInOut.signOut();
     }
 
     /**
