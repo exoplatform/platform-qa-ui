@@ -8,6 +8,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -63,7 +64,10 @@ public class WikiInformationTestIT extends Base {
     wikiPageInformation = new WikiPageInformation(this);
     sourceTextEditor = new SourceTextEditor(this);
     richTextEditor = new RichTextEditor(this);
-
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist))
+    {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
     if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
       manageLogInOut.signOut();
     }

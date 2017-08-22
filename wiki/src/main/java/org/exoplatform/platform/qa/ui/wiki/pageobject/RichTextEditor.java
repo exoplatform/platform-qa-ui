@@ -530,7 +530,7 @@ public class RichTextEditor {
       ELEMENT_BUTTON_WIKI_RITCH_TEXT.click();
     }
     if (!title.isEmpty()) {
-      $(ELEMENT_TITLE_WIKI_INPUT).val(title);
+      $(ELEMENT_TITLE_WIKI_INPUT).setValue(title);
     }
     info("Input a content for the page");
     if (!content.isEmpty()) {

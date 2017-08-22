@@ -8,6 +8,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_SOURCE_EDITOR_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 import java.util.ArrayList;
 
@@ -79,6 +80,10 @@ public class WikiBasicTestWithUserTestIT extends Base {
     navigationToolbar = new NavigationToolbar(this);
     manageLogInOut = new ManageLogInOut(this);
     userAndGroupManagement = new UserAndGroupManagement(this);
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist))
+    {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
     if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
       manageLogInOut.signOut();
     }
