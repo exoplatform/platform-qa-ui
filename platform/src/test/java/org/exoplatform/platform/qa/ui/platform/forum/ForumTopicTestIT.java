@@ -14,6 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.username;
@@ -124,6 +125,7 @@ public class ForumTopicTestIT extends Base {
 		forumHomePage.watchItem(false);
 		info("Delete Category");
 		forumHomePage.goToHomeCategory();
+		$(byText(name)).click();
 		forumCategoryManagement.deleteCategory(name);
 	}
 	}

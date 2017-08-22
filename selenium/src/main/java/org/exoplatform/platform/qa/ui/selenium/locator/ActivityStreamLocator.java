@@ -692,4 +692,5 @@ public final class ActivityStreamLocator {
   public static final String ELEMENT_COMMENT_DELETE="DeleteCommentButtoncomment{id}";
   public static final String ELEMENT_DATE_COMMENT="dateTime";
   public static final SelenideElement ELEMENT_ACTIVITY_STREAM_CONTAINER=$(byId("UIActivitiesLoader"));
+
 }

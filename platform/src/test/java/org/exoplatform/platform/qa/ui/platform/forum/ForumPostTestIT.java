@@ -108,6 +108,7 @@ public class ForumPostTestIT extends Base {
         homePagePlatform.goToForum();
         info("Go to Forum home page");
         forumHomePage.goToHomeCategory();
+        $(byText(nameCat)).click();
         info("Delete category");
         forumCategoryManagement.deleteCategory(nameCat);
     }

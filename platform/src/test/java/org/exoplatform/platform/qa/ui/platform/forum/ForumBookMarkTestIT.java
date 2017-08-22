@@ -143,6 +143,7 @@ public class ForumBookMarkTestIT extends Base {
         refresh();
         info("Delete the category");
         forumHomePage.goToHomeCategory();
+        $(byText(nameCat)).click();
         forumCategoryManagement.deleteCategory(nameCat);
 
     }
@@ -188,6 +189,7 @@ public class ForumBookMarkTestIT extends Base {
         info("Refresh page");
         refresh();
         $(ELEMENT_CATEGORY_BREADCUMB_HOME).click();
+        $(byText(nameCat)).click();
         forumCategoryManagement.deleteCategory(nameCat);
     }
 }

@@ -106,12 +106,11 @@ public class ForumPublishActivityTestIT extends Base{
         homePagePlatform.goToForum();
         forumHomePage.goToHomeCategory();
         info("Delete catefory");
+        $(byText(nameCat)).click();
         forumCategoryManagement.deleteCategory(nameCat);
         info("Finished deleting data test");
     }
 
-@Tag("smoke")
-@Tag("forum")
 /**
 *<li> Case ID:116778.</li>
 *<li> Test Case Name: Check activity after move a topic.</li>
@@ -171,18 +170,21 @@ public  void test01_CheckActivityAfterMoveATopic() {
     info("Move the topic to a forum");
     forumTopicManagement.moveTopicToForum(nameCat,nameForum);
     info("Verify that the forum is moved to new category");
-    $(ELEMENT_CATEGORY_FORUM_BREAD.replace("${forum}",nameForum).replace("${category}",nameCat)).should(Condition.exist);
-
+    $(byText(Forum)).should(Condition.exist);
+    $(byText(nameCat)).should(Condition.exist);
+    $(byText(Topic)).should(Condition.exist);
     homePagePlatform.goToHomePage();
     info("Verify that the topic's activity is shown on intranet");
-    $(By.xpath(ELEMENT_ACTIVITY_COMMENT.replace("${title}",Topic).replace("${comment}",comment))).should(Condition.exist);
+    $(byText(comment)).should(Condition.exist);
     info("The activity is shown successfully");
-
-    info("Delete topic");
+    $(byText(Topic)).should(Condition.exist);
+    info("Delete Catégorie");
     homePagePlatform.goToForum();
     forumHomePage.goToHomeCategory();
+    $(byText(Cat)).click();
     forumCategoryManagement.deleteCategory(Cat);
-    deleteDataTest();
+    $(byText(nameCat)).click();
+    forumCategoryManagement.deleteCategory(nameCat);
     info("Test01: finished testing");
  }
 

@@ -1,8 +1,6 @@
 package org.exoplatform.platform.qa.ui.forum.pageobject;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_SAVE_BTN;
@@ -52,8 +50,8 @@ public class ForumHomePage {
    * Go to home category
    */
   public void goToHomeCategory() {
-
-    $(ELEMENT_CATEGORY_BREADCUMB_HOME).click();
+if($(ELEMENT_CATEGORY_BREADCUMB_HOME).is(Condition.exist))
+{$(ELEMENT_CATEGORY_BREADCUMB_HOME).click();}
   }
 
   /**

@@ -315,9 +315,9 @@ public class ForumLocator {
 
   public static final By              ELEMENT_FORUM_USERS_BAN                            = By.xpath("//*[text()='Ban User']");
 
-  public static final By              ELEMENT_FORUM_USERS_TOPICS                         = By.xpath("//*[text()='Topics']");
+  public static final By              ELEMENT_FORUM_USERS_TOPICS                         = By.xpath("//*[@id=\"UIModeratorManagementForm\"]/ul/li[4]/a");
 
-  public static final By              ELEMENT_FORUM_USERS_POSTS                          = By.xpath("//*[text()='Posts']");
+  public static final By              ELEMENT_FORUM_USERS_POSTS                          = By.xpath("//*[@id=\"UIModeratorManagementForm\"]/ul/li[5]/a");
 
   public static final By              ELEMENT_FORUM_CLOSEBTN                             =
                                                              By.xpath("//*[@class='btn' and text()='Close']");

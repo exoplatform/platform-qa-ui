@@ -23,7 +23,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 * @author eXo
 *
 */
-@Tag("smoke")
+@Tag("forum")
 @Tag("sniff")
 public class ForumPrivateMessageTestIT extends Base{
     HomePagePlatform homePagePlatform;

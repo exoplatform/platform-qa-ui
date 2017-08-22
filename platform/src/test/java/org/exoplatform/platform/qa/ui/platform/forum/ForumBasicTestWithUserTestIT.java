@@ -110,6 +110,7 @@ public class ForumBasicTestWithUserTestIT extends Base {
 
         info("Delete category");
         forumHomePage.goToHomeCategory();
+        $(byText(nameCat)).click();
         forumCategoryManagement.deleteCategory(nameCat);
     }
 
@@ -133,6 +134,7 @@ public class ForumBasicTestWithUserTestIT extends Base {
 
         info("Delete category");
         forumHomePage.goToHomeCategory();
+        $(byText(nameCat)).click();
         forumCategoryManagement.deleteCategory(nameCat);
     }
 
@@ -157,6 +159,7 @@ public class ForumBasicTestWithUserTestIT extends Base {
         forumForumManagement.deleteForum(nameForum);
         info("Delete category");
         forumHomePage.goToHomeCategory();
+        $(byText(nameCat)).click();
         forumCategoryManagement.deleteCategory(nameCat);
     }
 
@@ -192,7 +195,9 @@ public class ForumBasicTestWithUserTestIT extends Base {
 
         info("Delete data");
         forumHomePage.goToHomeCategory();
+        $(byText(category2)).click();
         forumCategoryManagement.deleteCategory(category2);
+        $(byText(category1)).click();
         forumCategoryManagement.deleteCategory(category1);
     }
 
@@ -220,6 +225,7 @@ public class ForumBasicTestWithUserTestIT extends Base {
         info("Test 04: Delete a category");
         info("delete category");
         forumHomePage.goToHomeCategory();
+        $(byText(nameCat2)).click();
         forumCategoryManagement.deleteCategory(nameCat2);
     }
 
@@ -261,6 +267,7 @@ public class ForumBasicTestWithUserTestIT extends Base {
         $(byText(name2)).waitUntil(Condition.appears, Configuration.timeout);
         info("Delete data");
         forumHomePage.goToHomeCategory();
+        $(byText(name)).click();
         forumCategoryManagement.deleteCategory(name);
     }
 
