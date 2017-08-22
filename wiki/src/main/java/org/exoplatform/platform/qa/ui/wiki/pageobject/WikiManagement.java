@@ -73,6 +73,7 @@ public class WikiManagement {
    * Change to Source Editor mode
    */
   public void goToSourceEditor() {
+    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears,Configuration.timeout);
     if ($(ELEMENT_SOURCE_EDITOR_BUTTON).is(Condition.exist)) {
       $(ELEMENT_SOURCE_EDITOR_BUTTON).click();
       $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
