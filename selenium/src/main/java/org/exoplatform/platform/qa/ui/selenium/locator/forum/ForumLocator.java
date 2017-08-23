@@ -922,5 +922,5 @@ public static final SelenideElement ELEMENT_BUTTON_OK_IMPORT=$(byClassName("UIPo
   public static final SelenideElement ELEMENT_CANCEL_PRIVATE_MSG=$(byXpath("//*[@id=\"UIPrivateMessageForm\"]/div[3]/button"));
   public static final SelenideElement ELEMENT_FORUM_OK_SEND_MSG=$(byText("Your message was sent successfully.")).parent().parent().parent().find(byClassName("btn"));
   public static final SelenideElement ELEMENT_CONTENT_SEARCH_RESULT                      = $(byClassName("searchResult"));
-
+  public static final By ELEMENT_ICON_REPLAY_POST_FROM_ACTIVITY=byClassName("uiIconReply");
 }

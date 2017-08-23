@@ -19,6 +19,7 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.core.PLFData.password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_DELETE_BOX_CONFIRMATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_POST_IN_TOPIC;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -140,6 +141,7 @@ public class ForumPostTestIT extends Base {
         $(ELEMENT_DELETE_BOX_CONFIRMATION).click();
         info("Verify that the replied post is deleted");
         $(ELEMENT_POST_IN_TOPIC).find(byText(title)).shouldNot(Condition.exist);
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
         info("Delete data");
         deletaData();
     }
@@ -152,7 +154,7 @@ public class ForumPostTestIT extends Base {
         prepareData();
         info("Reply a topic");
         forumTopicManagement.postReply(title, content);
-        {
+
             info("Test 2: Edit a post");
             forumTopicManagement.editPost(title, content);
             info("Verify that the post is edited");
@@ -164,9 +166,10 @@ public class ForumPostTestIT extends Base {
             $(ELEMENT_DELETE_BOX_CONFIRMATION).click();
             info("Verify that the replied post is deleted");
             $(ELEMENT_POST_IN_TOPIC).find(byText(title)).shouldNot(Condition.exist);
+            $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
             info("Delete data");
             deletaData();
-        }
+
     }
 
     @Test
@@ -179,7 +182,6 @@ public class ForumPostTestIT extends Base {
         prepareData();
         info("Reply a topic");
         forumTopicManagement.postReply(title, content);
-        {
             info("Test 3: Quote a post");
             info("Quote a post");
             forumTopicManagement.quotePost(title, content);
@@ -192,9 +194,10 @@ public class ForumPostTestIT extends Base {
             $(ELEMENT_DELETE_BOX_CONFIRMATION).click();
             info("Verify that the replied post is deleted");
             $(ELEMENT_POST_IN_TOPIC).find(byText(title)).shouldNot(Condition.exist);
+            $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
             info("Delete data");
             deletaData();
-        }
+
     }
 
     @Test
@@ -205,7 +208,7 @@ public class ForumPostTestIT extends Base {
         String newTitle = "NewTitle" + getRandomNumber();
         prepareData();
         info("Reply a topic");
-        {
+
             forumTopicManagement.privatePostfortopic(newTitle, content);
             info("Test 4: Add a Private post");
             info("Click on delete button of the post that is replied");
@@ -214,9 +217,10 @@ public class ForumPostTestIT extends Base {
             $(ELEMENT_DELETE_BOX_CONFIRMATION).click();
             info("Verify that the replied post is deleted");
             $(ELEMENT_POST_IN_TOPIC).find(byText(title)).shouldNot(Condition.exist);
+            $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
             info("Delete data");
             deletaData();
-        }
+
     }
 
     @Test
@@ -237,6 +241,7 @@ public class ForumPostTestIT extends Base {
             $(ELEMENT_DELETE_BOX_CONFIRMATION).click();
             info("Verify that the replied post is deleted");
             $(ELEMENT_POST_IN_TOPIC).find(byText(title)).shouldNot(Condition.exist);
+            $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
             info("Delete data");
             deletaData();
         }

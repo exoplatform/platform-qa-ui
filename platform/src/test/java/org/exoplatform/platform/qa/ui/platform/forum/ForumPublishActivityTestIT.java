@@ -527,10 +527,10 @@ public  void test11_JumpIntoReplyFormByClickingOnReplyAction() {
 
     forumForumManagement.goToStartTopic();
     forumTopicManagement.startTopic(topic1, topic1, "", "");
-
     homePagePlatform.goToHomePage();
     info("Click on Reply button of the topic:"+topic1);
-    $(By.xpath(ELEMENT_ACTIVITY_TOPIC_REPLY.replace("{$name}",topic1))).click();
+    homePagePlatform.goToHomePage();
+    $(byText(topic1)).parent().parent().parent().parent().find(ELEMENT_ICON_REPLAY_POST_FROM_ACTIVITY).click();
     info("Verify that Reply popup of the topic is shown");
     $(ELEMENT_TOPIC_POST_A_REPLY_TITLE).should(Condition.exist);
     info("Reply popup of the topic is shown successfully");

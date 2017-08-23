@@ -482,7 +482,10 @@ public class ForumTopicManagement {
 
     info("Input the message:" + message);
     $(ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR).click();
-    plf.inputFrame(ELEMENT_POST_CONTENT, message);
+    switchTo().frame(0);
+    $(byXpath("/html/body")).sendKeys(message);
+    switchTo().defaultContent();
+    //plf.inputFrame(ELEMENT_POST_CONTENT, message);
     // $(ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR).sendKeys(message);
 
     info("click on Attached file button");
