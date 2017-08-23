@@ -55,8 +55,7 @@ public class WikiBasicActionManagePageEditTestIT extends Base {
     navigationToolbar = new NavigationToolbar(this);
     wikidraftpage = new WikiDraftPage(this);
     richTextEditor = new RichTextEditor(this);
-    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist))
-    {
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
       $(ELEMENT_SKIP_BUTTON).click();
     }
     if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
@@ -76,19 +75,18 @@ public class WikiBasicActionManagePageEditTestIT extends Base {
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li>
    */
-
+  /*
+   * Step Number: 1 Step Name: Step 1: Edit page with Source Editor Step
+   * Description: - Open an existing page by clicking on page name in navigation
+   * tree - Click on Edit icon in toolbar - Change content in full page and click
+   * on Save icon in toolbar Input Data: Expected Outcome: Edit page successfully
+   */
   @Test
   public void test02_EditPageUsingSourceEditor() {
     info("Test 02: Edit page with Source Editor");
     String title = "Wiki1" + getRandomNumber();
     String title2 = "Wiki2" + getRandomNumber();
 
-    /*
-     * Step Number: 1 Step Name: Step 1: Edit page with Source Editor Step
-     * Description: - Open an existing page by clicking on page name in navigation
-     * tree - Click on Edit icon in toolbar - Change content in full page and click
-     * on Save icon in toolbar Input Data: Expected Outcome: Edit page successfully
-     */
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddBlankPage();
     richTextEditor.addSimplePage(title, title);
@@ -105,6 +103,13 @@ public class WikiBasicActionManagePageEditTestIT extends Base {
     wikiHomePage.deleteWiki(title2);
   }
 
+  /*
+   * Step Number: 1 Step Name: Step 1: Check auto save when editing page Step
+   * Description: - Go to Browser -> My draft - Select a page and click open it -
+   * Edit title or content for it Input Data: Expected Outcome: While editing the
+   * draft will be saved automatically after 30 seconds (default value) only if
+   * there's any modifications in the content or page title.
+   */
   @Test
   public void test03_AutoSaveWhenEditingPage() {
     info("Test 3: Auto save when editing page");
@@ -112,13 +117,6 @@ public class WikiBasicActionManagePageEditTestIT extends Base {
     String title = "Wiki1" + getRandomNumber();
     String title2 = "Wiki2" + getRandomNumber();
 
-    /*
-     * Step Number: 1 Step Name: Step 1: Check auto save when editing page Step
-     * Description: - Go to Browser -> My draft - Select a page and click open it -
-     * Edit title or content for it Input Data: Expected Outcome: While editing the
-     * draft will be saved automatically after 30 seconds (default value) only if
-     * there's any modifications in the content or page title.
-     */
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddBlankPage();
     richTextEditor.addSimplePageHasAutoSaveWithoutSave(title, title2);
