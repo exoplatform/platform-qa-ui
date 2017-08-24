@@ -196,16 +196,12 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
    * Step Number: 1 Step Name: Step 1: Add new page Step Description: - Go to
    * Intranet/Wiki - Add a page Input Data: Expected Outcome: A draft version is
    * saved after 30s
-   */
-  /*
    * Step Number: 2 Step Name: Step 2: Resume a draft with save as normal Step
    * Description: - Close a window of the browser without saving of the page - Go
    * to "My drafts" - Click on the link "title" of the draft - Change title or
    * content of page and click Save Input Data: Expected Outcome: - The draft is
    * displayed in the list - The page in edit mode is displayed - New page is
    * added and don't show in "My draft" list
-   */
-  /*
    * Step Number: 1 Step Name: Step 1: Delete a draft Step Description: - Go to
    * Browser -> My drafts - Select a page and click delete draft - A pop up is
    * displayed "Are you sure to delete this draft?" - Click OK button Input Data:
