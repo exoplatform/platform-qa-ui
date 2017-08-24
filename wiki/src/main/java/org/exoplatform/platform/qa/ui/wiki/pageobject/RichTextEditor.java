@@ -1268,11 +1268,12 @@ public class RichTextEditor {
    */
   public void goToExplorerWikiHome() {
     info("click on Wiki Home note");
-    $(ELEMENT_ICON_OPEN_INTRANET_IN_ALL_PAGE_TAB.waitUntil(Condition.appears,Configuration.timeout));
-    if(ELEMENT_EXPLORER_WIKIHOME.is(Condition.not(Condition.exist)))
-    {ELEMENT_ICON_OPEN_INTRANET_IN_ALL_PAGE_TAB.click();}
+    $(ELEMENT_ICON_OPEN_INTRANET_IN_ALL_PAGE_TAB.waitUntil(Condition.appears, Configuration.timeout));
+    if (ELEMENT_EXPLORER_WIKIHOME.is(Condition.not(Condition.exist))) {
+      ELEMENT_ICON_OPEN_INTRANET_IN_ALL_PAGE_TAB.click();
+    }
     goToAllPagesTab();
-    ELEMENT_EXPLORER_WIKIHOME.waitUntil(Condition.appears,Configuration.timeout).click();
+    ELEMENT_EXPLORER_WIKIHOME.waitUntil(Condition.appears, Configuration.timeout).click();
   }
 
   /**

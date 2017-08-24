@@ -60,8 +60,8 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
     navigationToolbar = new NavigationToolbar(this);
     wikidraftpage = new WikiDraftPage(this);
     richTextEditor = new RichTextEditor(this);
-    spaceManagement= new SpaceManagement(this);
-    spaceHomePage=new SpaceHomePage(this);
+    spaceManagement = new SpaceManagement(this);
+    spaceHomePage = new SpaceHomePage(this);
     if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
       $(ELEMENT_SKIP_BUTTON).click();
     }
