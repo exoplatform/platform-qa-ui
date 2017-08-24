@@ -30,7 +30,7 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 
 @Tag("wiki")
-@Tag("sniff")
+@Tag("test")
 public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
   HomePagePlatform  homePagePlatform;
 
