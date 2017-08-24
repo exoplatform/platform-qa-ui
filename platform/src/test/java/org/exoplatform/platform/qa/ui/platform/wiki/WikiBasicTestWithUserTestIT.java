@@ -80,8 +80,7 @@ public class WikiBasicTestWithUserTestIT extends Base {
     navigationToolbar = new NavigationToolbar(this);
     manageLogInOut = new ManageLogInOut(this);
     userAndGroupManagement = new UserAndGroupManagement(this);
-    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist))
-    {
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
       $(ELEMENT_SKIP_BUTTON).click();
     }
     if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {

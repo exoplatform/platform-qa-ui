@@ -64,8 +64,7 @@ public class WikiInformationTestIT extends Base {
     wikiPageInformation = new WikiPageInformation(this);
     sourceTextEditor = new SourceTextEditor(this);
     richTextEditor = new RichTextEditor(this);
-    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist))
-    {
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
       $(ELEMENT_SKIP_BUTTON).click();
     }
     if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
@@ -79,22 +78,22 @@ public class WikiInformationTestIT extends Base {
     manageLogInOut.signOut();
   }
 
+  /*
+   * Step Number: 1 Step Name: Step 1: Check page history Step Description: -
+   * Create a new page under wiki home, eg WikiPage1 - Edit this page - Create 2
+   * child page for it, child 1 and child 2 - Open this page - Click [More][Page
+   * Info] Input Data: Expected Outcome: Page information is shown - Summary:
+   * Title, author, Last changed by - Related page: list all related page. A
+   * button [Add More Relation] - Hierarchy: list parent page and child - Recent
+   * changes: list all revisions and a button [View Page History]
+   */
+
   @Test
   public void test01_ViewPageInfo() {
     info("Test 01: View Page info");
     String title = "title" + getRandomNumber();
     String child1 = "child1" + getRandomNumber();
     String child2 = "child2" + getRandomNumber();
-
-    /*
-     * Step Number: 1 Step Name: Step 1: Check page history Step Description: -
-     * Create a new page under wiki home, eg WikiPage1 - Edit this page - Create 2
-     * child page for it, child 1 and child 2 - Open this page - Click [More][Page
-     * Info] Input Data: Expected Outcome: Page information is shown - Summary:
-     * Title, author, Last changed by - Related page: list all related page. A
-     * button [Add More Relation] - Hierarchy: list parent page and child - Recent
-     * changes: list all revisions and a button [View Page History]
-     */
 
     info("Create a new wiki page");
     homePagePlatform.goToWiki();
@@ -145,6 +144,27 @@ public class WikiInformationTestIT extends Base {
     homePagePlatform.goToWiki();
     wikiHomePage.deleteWiki(title);
   }
+  /*
+   * Step Number: 1 Step Name: Step 1: Add new space Step Description: - Login
+   * portal - Click join a space - Add new space for "Space 1" and "Space 2" Input
+   * Data: Expected Outcome: New space is added successfully Step Number: 2 Step
+   * Name: Step 2: Add new page for wiki on space 1 and space 2 Step Description:
+   * - Go to Space 1/ wiki and Space2/wiki - Add new page for wiki with name
+   * "Page1" and "Page2" Input Data: Expected Outcome: Add new page successfully
+   * Step Number: 3 Step Name: Step 3: Open Page1 Step Description: - Open
+   * "Page 1" Input Data: Expected Outcome: Page 1 is displayed in the wiki Step
+   * Number: 4 Step Name: Step 4: Go to Page Info Step Description: - Open "More"
+   * Menu -> "Page Info" Input Data: Expected Outcome: Page infor of Page 1 are
+   * diplayed Step Number: 5 Step Name: Step 5: Go to Related page form Step
+   * Description: - Click "Add More Relations" on Related Page form Input Data:
+   * Expected Outcome: The popup to select a related page is displayed Step
+   * Number: 6 Step Name: Step 6: Check when add relations from intranet portal
+   * Step Description: - Open Space switcher component - Select "intranet" - Click
+   * on "Select" button Input Data: Expected Outcome: - The list of space switcher
+   * options is displayed - Wiki tree of "Space 2" is displayed on the container
+   * below the space switcher - Popup is closed - "intranet's portal" is added as
+   * a related pages on page info layout
+   */
 
   @Test
   @BugInPLF("WIKI-1313")
@@ -154,19 +174,6 @@ public class WikiInformationTestIT extends Base {
     String space2 = "space2" + getRandomNumber();
     String title1 = "title1" + getRandomNumber();
     String title2 = "title2" + getRandomNumber();
-
-    /*
-     * Step Number: 1 Step Name: Step 1: Add new space Step Description: - Login
-     * portal - Click join a space - Add new space for "Space 1" and "Space 2" Input
-     * Data: Expected Outcome: New space is added successfully
-     */
-
-    /*
-     * Step Number: 2 Step Name: Step 2: Add new page for wiki on space 1 and space
-     * 2 Step Description: - Go to Space 1/ wiki and Space2/wiki - Add new page for
-     * wiki with name "Page1" and "Page2" Input Data: Expected Outcome: Add new page
-     * successfully
-     */
 
     info("Create space 1 and wiki page 1");
     homePagePlatform.goToMySpaces();
@@ -188,17 +195,6 @@ public class WikiInformationTestIT extends Base {
     wikiManagement.saveAddPage();
     $(byText(title2)).should(Condition.exist);
 
-    /*
-     * Step Number: 3 Step Name: Step 3: Open Page1 Step Description: - Open
-     * "Page 1" Input Data: Expected Outcome: Page 1 is displayed in the wiki
-     */
-
-    /*
-     * Step Number: 4 Step Name: Step 4: Go to Page Info Step Description: - Open
-     * "More" Menu -> "Page Info" Input Data: Expected Outcome: Page infor of Page 1
-     * are diplayed
-     */
-
     info("Open wiki page 1");
     homePagePlatform.goToSpecificSpace(space1);
     spaceHomePage.goToWikiTab();
@@ -206,22 +202,8 @@ public class WikiInformationTestIT extends Base {
     wikiHomePage.goToAPage(title1);
     wikiHomePage.goToPageInformation(title1);
 
-    /*
-     * Step Number: 5 Step Name: Step 5: Go to Related page form Step Description: -
-     * Click "Add More Relations" on Related Page form Input Data: Expected Outcome:
-     * The popup to select a related page is displayed
-     */
     info("Go to Related page form");
     wikiPageInformation.goToAddRelations();
-
-    /*
-     * Step Number: 6 Step Name: Step 6: Check when add relations from intranet
-     * portal Step Description: - Open Space switcher component - Select "intranet"
-     * - Click on "Select" button Input Data: Expected Outcome: - The list of space
-     * switcher options is displayed - Wiki tree of "Space 2" is displayed on the
-     * container below the space switcher - Popup is closed - "intranet's portal" is
-     * added as a related pages on page info layout
-     */
 
     info("Wiki tree of 'Space 2' is displayed on the container below the space switcher");
     String spaces = space1 + "/" + space2;
@@ -239,18 +221,24 @@ public class WikiInformationTestIT extends Base {
 
   }
 
+  /**
+   * Step Number: 1 Step Name: Step 1: Create new wiki page Step Description: -
+   * Add new wiki page Input Data: Expected Outcome: New wiki page is created with
+   * version is V1 Step Number: 2 Step Name: Step 2: Edit title/wiki content by
+   * click [Edit] icon Step Description: - Click edit icon - Edit title or content
+   * or edit both - Save - View page version Input Data: Expected Outcome: New
+   * version is created Step Number: 3 Step Name: Step 3: upload/delete attachment
+   * Step Description: - Click attachment icon at information area at the top of
+   * page - Add new attachment - Delete attachment - View page version Input Data:
+   * Expected Outcome: No version is created
+   */
+
   @Test
   public void test02_VersionCreation() {
     info("Test 02: Version creation");
     String title = "title" + getRandomNumber();
     String newTitle = "newTitle" + getRandomNumber();
     String link = "link" + getRandomNumber();
-
-    /**
-     * Step Number: 1 Step Name: Step 1: Create new wiki page Step Description: -
-     * Add new wiki page Input Data: Expected Outcome: New wiki page is created with
-     * version is V1
-     */
 
     info("Create a new wiki page");
     homePagePlatform.goToWiki();
@@ -262,13 +250,6 @@ public class WikiInformationTestIT extends Base {
     info("Verify that New wiki page is created with version is V1");
     wikiHomePage.viewInformationTable(title, "V1");
 
-    /*
-     * Step Number: 2 Step Name: Step 2: Edit title/wiki content by click [Edit]
-     * icon Step Description: - Click edit icon - Edit title or content or edit both
-     * - Save - View page version Input Data: Expected Outcome: New version is
-     * created
-     */
-
     info("Edit the page");
     wikiHomePage.goToEditPage();
     richTextEditor.editSimplePage(newTitle, newTitle);
@@ -278,12 +259,6 @@ public class WikiInformationTestIT extends Base {
     info("Verify that New wiki page is created with version is V2");
     wikiHomePage.viewInformationTable(newTitle, "V2");
 
-    /*
-     * Step Number: 3 Step Name: Step 3: upload/delete attachment Step Description:
-     * - Click attachment icon at information area at the top of page - Add new
-     * attachment - Delete attachment - View page version Input Data: Expected
-     * Outcome: No version is created
-     */
     info("Click on attachment icon at information area at the top of page");
     $(byClassName("uiIconAttach")).waitUntil(Condition.appears, Configuration.timeout);
     $(byClassName("uiIconAttach")).click();
@@ -304,24 +279,24 @@ public class WikiInformationTestIT extends Base {
     wikiHomePage.deleteWiki(newTitle);
   }
 
+  /*
+   * Step Number: 1 Step Name: Step 1: Check Page info Step Description: - Create
+   * a new page - Edit this page - Open this page - Focus Page info at top area
+   * Input Data: Expected Outcome: - The total number of revisions (eg V1, V2, V3)
+   * and this reversion is clickable to open page history - Show full name of the
+   * original creator of the page and time page is created (eg, Added by John
+   * Smith at Mar 3, 2014 3:09 PM) - Last time the page was edited with a link to
+   * view changes (Eg, Last modified by John Smith at Mar 4, 2014 3:09 PM ) -
+   * Restricted link by default - The total number of attachments as a link to
+   * open the attachments
+   */
+
   @Test
   public void test03_ViewGeneralPageInformation() {
     info("Test 03: View General Page information");
     String title = "title" + getRandomNumber();
     String content = "content" + getRandomNumber();
     String newTitle = "newTitle" + getRandomNumber();
-
-    /*
-     * Step Number: 1 Step Name: Step 1: Check Page info Step Description: - Create
-     * a new page - Edit this page - Open this page - Focus Page info at top area
-     * Input Data: Expected Outcome: - The total number of revisions (eg V1, V2, V3)
-     * and this reversion is clickable to open page history - Show full name of the
-     * original creator of the page and time page is created (eg, Added by John
-     * Smith at Mar 3, 2014 3:09 PM) - Last time the page was edited with a link to
-     * view changes (Eg, Last modified by John Smith at Mar 4, 2014 3:09 PM ) -
-     * Restricted link by default - The total number of attachments as a link to
-     * open the attachments
-     */
 
     info("Create a new wiki page");
     homePagePlatform.goToWiki();
@@ -336,19 +311,11 @@ public class WikiInformationTestIT extends Base {
     info("Show full name of the original creator of the page");
     $(ELEMENT_WIKI_PAGE_INFORMATION_TABLE_CONTENT).$(byText("Root Root")).should(Condition.exist);
 
-    // info("time page is created");
-    // String date = getDateByTextFormat("MM dd, yyyy");
-    // $(ELEMENT_WIKI_PAGE_INFORMATION_TABLE_CONTENT).$(byText(date)).should(Condition.exist);;
-
     info("Edit the title of the wiki page");
     wikiHomePage.goToEditPage();
     richTextEditor.editSimplePage(newTitle, "");
     wikiManagement.saveAddPage();
     $(byText(newTitle)).should(Condition.exist);
-
-    // info("Last time the page was edited with a link to view changes");
-    // String info = "Last modified by Root Root at " + date + "";
-    // waitForAndGetElement(wikiMg.ELEMENT_WIKI_PAGE_INFORMATION_AREA_EDIT_INFOR.replace("${info}",info),2000,0);
 
     info("Restricted link by default: Restricted");
     $(ELEMENT_RESTRICTED_LINK).shouldHave(Condition.text("Restricted"));
@@ -360,6 +327,18 @@ public class WikiInformationTestIT extends Base {
     homePagePlatform.goToWiki();
     wikiHomePage.deleteWiki(newTitle);
   }
+  /*
+   * Step Number: 1 Step Name: Step 1: Check page history Step Description: - Add
+   * new page - Edit this page some times - Open an existing page by clicking on
+   * page name in navigation tree - Click More -> [Page info] - Click [View Page
+   * History] - To compare two versions, select two check boxes corresponding to
+   * each relevant version, click [Compare the selected versions] Input Data:
+   * Expected Outcome: - A page which shows the changes between these two versions
+   * will be displayed. - The changes between two versions will be marked with
+   * colours: + Words/lines which are red-highlighted with strike-throughs
+   * indicate that they were removed. + Words/lines highlighted in green indicate
+   * that they were added.
+   */
 
   @Test
   public void test03_ViewHistoryToCompareVersions() {
@@ -369,19 +348,6 @@ public class WikiInformationTestIT extends Base {
     String newTitle = "newTitle" + getRandomNumber();
     String newTitle1 = "newTitle1" + getRandomNumber();
     String newTitle2 = "newTitle2" + getRandomNumber();
-
-    /*
-     * Step Number: 1 Step Name: Step 1: Check page history Step Description: - Add
-     * new page - Edit this page some times - Open an existing page by clicking on
-     * page name in navigation tree - Click More -> [Page info] - Click [View Page
-     * History] - To compare two versions, select two check boxes corresponding to
-     * each relevant version, click [Compare the selected versions] Input Data:
-     * Expected Outcome: - A page which shows the changes between these two versions
-     * will be displayed. - The changes between two versions will be marked with
-     * colours: + Words/lines which are red-highlighted with strike-throughs
-     * indicate that they were removed. + Words/lines highlighted in green indicate
-     * that they were added.
-     */
 
     info("Create a new wiki page");
     homePagePlatform.goToWiki();

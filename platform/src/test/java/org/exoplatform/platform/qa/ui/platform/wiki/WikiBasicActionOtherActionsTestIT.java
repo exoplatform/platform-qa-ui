@@ -56,8 +56,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     navigationToolbar = new NavigationToolbar(this);
     spaceManagement = new SpaceManagement(this);
     spaceHomePage = new SpaceHomePage(this);
-    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist))
-    {
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
       $(ELEMENT_SKIP_BUTTON).click();
     }
     if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
@@ -65,11 +64,9 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     }
     manageLogInOut.signInCas("john", "gtngtn");
 
-      richTextEditor = new RichTextEditor(this);
+    richTextEditor = new RichTextEditor(this);
 
   }
-
-
 
   @AfterEach
   public void signout() {

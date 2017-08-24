@@ -46,8 +46,7 @@ public class WikiBasicActionManagePageRenameTestIT extends Base {
     manageLogInOut = new ManageLogInOut(this);
     wikiManagement = new WikiManagement(this);
     richTextEditor = new RichTextEditor(this);
-    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist))
-    {
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
       $(ELEMENT_SKIP_BUTTON).click();
     }
     if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
@@ -61,21 +60,20 @@ public class WikiBasicActionManagePageRenameTestIT extends Base {
     manageLogInOut.signOut();
   }
 
+  /*
+   * Step Number: 1 Step Name: Step 1: Rename Page Step Description: - Open an
+   * existing page by clicking on page name in navigation tree. Rename page by one
+   * of two ways 1. - Double-click on page name in toolbar - Page's title field is
+   * enable and allow edit. - Rename page and hit Enter key 2. - Click Edit icon
+   * to edit page - Fill new title - Click Save Input Data: Expected Outcome:
+   * Selected Page is renamed and new name is displayed in toolbar and navigation
+   * tree
+   */
   @Test
   public void test01_RenamePage() {
     info("Test 01: Rename Page");
     String wiki1 = "wiki1" + getRandomNumber();
     String wiki2 = "wiki2" + getRandomNumber();
-
-    /*
-     * Step Number: 1 Step Name: Step 1: Rename Page Step Description: - Open an
-     * existing page by clicking on page name in navigation tree. Rename page by one
-     * of two ways 1. - Double-click on page name in toolbar - Page's title field is
-     * enable and allow edit. - Rename page and hit Enter key 2. - Click Edit icon
-     * to edit page - Fill new title - Click Save Input Data: Expected Outcome:
-     * Selected Page is renamed and new name is displayed in toolbar and navigation
-     * tree
-     */
 
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddBlankPage();

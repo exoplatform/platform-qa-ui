@@ -1,7 +1,6 @@
 package org.exoplatform.platform.qa.ui.platform.wiki;
 
 import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.password;
@@ -9,8 +8,8 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_SEARCH_NORESULT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_REGISTER_SKIP_BUTTON;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -65,8 +64,7 @@ public class WikiSearchTestIT extends Base {
     navigationToolbar = new NavigationToolbar(this);
     wikiSettingPage = new WikiSettingPage(this);
     manageLogInOut = new ManageLogInOut(this);
-    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist))
-    {
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
       $(ELEMENT_SKIP_BUTTON).click();
     }
     if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
@@ -81,17 +79,17 @@ public class WikiSearchTestIT extends Base {
     manageLogInOut.signOut();
   }
 
+  /*
+   * Step Number: 1 Step Name: Step 1: Quick Search Step Description: - Log in and
+   * access Wiki app - Input the text "cluster"into Search box - Hit Enter key
+   * Input Data: Expected Outcome: The Search Screen is displayed and the results
+   * matching the keyword into search box are displayed.
+   */
   @Test
   public void test01_QuickSearch() {
     info("Test 1: Quick search");
     String wiki = "wiki" + getRandomNumber();
 
-    /*
-     * Step Number: 1 Step Name: Step 1: Quick Search Step Description: - Log in and
-     * access Wiki app - Input the text "cluster"into Search box - Hit Enter key
-     * Input Data: Expected Outcome: The Search Screen is displayed and the results
-     * matching the keyword into search box are displayed.
-     */
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddBlankPage();
     richTextEditor.addSimplePage(wiki, wiki);
@@ -106,17 +104,20 @@ public class WikiSearchTestIT extends Base {
     wikiHomePage.deleteWiki(wiki);
   }
 
+  /*
+   * Step Number: 1 Step Name: Step 1: Do quick search Step Description: - Log in
+   * and access Wiki app - Input the word "cluster" into the Search box - Press
+   * Enter key Input Data: Expected Outcome: The Search Screen is displayed and
+   * the results matching the keyword into search box are displayed. Step number:
+   * 2 Step Name: Step 2: Advanced Search Step Description: - In Search screen
+   * form: input keyword, select space in drop down list and click on Search
+   * button Input Data: Expected Outcome: Search results will list pages that
+   * matches with keyword and selected space
+   */
   @BugInPLF("WIKI-1296")
   @Test
   public void test02_AdvancedSearch() {
     info("Test 2: Advanced search");
-
-    /*
-     * Step Number: 1 Step Name: Step 1: Do quick search Step Description: - Log in
-     * and access Wiki app - Input the word "cluster" into the Search box - Press
-     * Enter key Input Data: Expected Outcome: The Search Screen is displayed and
-     * the results matching the keyword into search box are displayed.
-     */
 
     String wiki = "wiki" + getRandomNumber();
     homePagePlatform.goToWiki();
@@ -126,13 +127,6 @@ public class WikiSearchTestIT extends Base {
     wikiHomePage.goTosearchPage(wiki);
     info("Verify that search page is shown with the text");
     $(byClassName("resultInfo")).find(byText(wiki)).should(Condition.exist);
-
-    /*
-     * Step number: 2 Step Name: Step 2: Advanced Search Step Description: - In
-     * Search screen form: input keyword, select space in drop down list and click
-     * on Search button Input Data: Expected Outcome: Search results will list pages
-     * that matches with keyword and selected space
-     */
 
     wikiSearch.advancedSearch("", "My Wiki");
 
@@ -174,19 +168,19 @@ public class WikiSearchTestIT extends Base {
     wikiHomePage.deleteWiki(wiki);
   }
 
+  /*
+   * Step Number: 1 Step Name: Step 1: Search Template Step Description: - Log in
+   * and access Wiki app - Click on Browse at top right and select Wiki Settings
+   * action - Input keyword "test" for ex into Search box - Hit Enter key Input
+   * Data: Expected Outcome: The Search results matching keyword into search box
+   * are displayed.
+   */
+
   @Test
   public void test04_SearchTemplate() {
     info("Test 4: Search template");
 
     String template = "HOW-TO Guide";
-
-    /*
-     * Step Number: 1 Step Name: Step 1: Search Template Step Description: - Log in
-     * and access Wiki app - Click on Browse at top right and select Wiki Settings
-     * action - Input keyword "test" for ex into Search box - Hit Enter key Input
-     * Data: Expected Outcome: The Search results matching keyword into search box
-     * are displayed.
-     */
     homePagePlatform.goToWiki();
     wikiHomePage.goToWikiSettingPage();
     wikiSettingPage.searchTemplate(template);
