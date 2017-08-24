@@ -6,7 +6,6 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_SOURCE_EDITOR_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_TITLE_WIKI_INPUT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -19,6 +18,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.SourceTextEditor;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
+import org.openqa.selenium.By;
 
 @Tag("wiki")
 @Tag("smoke")
@@ -121,5 +121,6 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
     homePagePlatform.goToWiki();
     wikiHomePage.deleteWiki(wiki);
   }
+
 
 }

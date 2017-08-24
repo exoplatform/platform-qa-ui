@@ -1,11 +1,13 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
+import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 
 import org.exoplatform.platform.qa.ui.selenium.Dialog;
@@ -378,10 +380,11 @@ public class WikiHomePage {
   /**
    * Open Page information
    */
-  public void goToPageInformation() {
+  public void goToPageInformation(String wiki) {
     info("Go to Page Information");
-    evt.mouseOverAndClick(ELEMENT_MORE_LINK);
-    evt.mouseOverAndClick(ELEMENT_PAGE_INFO);
+    $(byText(wiki)).click();
+    $(ELEMENT_MORE_LINK).click();
+    ELEMENT_PAGE_INFO.click();
   }
 
   /**
@@ -404,11 +407,14 @@ public class WikiHomePage {
    */
   public void viewInformationTable(String page, String version) {
     info("Open a wiki page 1");
-    evt.waitForAndGetElement(ELEMENT_TREE_WIKI_NAME.replace("${name}", page), 2000, 0).click();
+    $(byText(page)).waitUntil(Condition.appears, Configuration.timeout);
+    $(byText(page)).click();
     info("Open information table");
-    evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_INFOMATION_VERSION.replace("${version}", version), 2000, 0).click();
+    $(byClassName("txtFeed")).find(byText(version)).should(Condition.exist);
+    $(byClassName("txtFeed")).find(byText(version)).click();
+
     info("Verify that the table is shown");
-    evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_INFORMATION_TABLE_TITLE, 2000, 1);
+    $(ELEMENT_WIKI_PAGE_INFORMATION_TABLE_TITLE).waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**

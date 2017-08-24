@@ -550,10 +550,9 @@ public final class HomePageLocator {
                                                                          By.xpath("//*[@class='uiIconUpload uiIconLightGray']");
 
   // confirm popup
+
   public static final SelenideElement ELEMENT_DELETE_POPUP_OK                                              =
                                                               $(byXpath("//*[@id=\"UISocialPopupConfirmation\"]/div[2]/div[2]/div/a[1]"));
-
-  public static final String          ELEMENT_COMMENT_BLOC                                                 = "CommentBlock{id}1";
 
   public static final SelenideElement ELEMENT_WHO_LIKED_POPUP                                              =
                                                               $(byClassName("listLikedBox "));
@@ -574,4 +573,6 @@ public final class HomePageLocator {
 
   public static final SelenideElement ELEMENT_SEARCH_RESULT                                                =
                                                             $(byId("quickSearchResult1"));
+
+  public static final String          ELEMENT_COMMENT_BLOC                                                 = "CommentBlock{id}1";
 }

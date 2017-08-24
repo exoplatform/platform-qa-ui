@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -12,6 +13,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.SelenideElement;
 
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
@@ -45,20 +47,37 @@ public class WikiManagement {
   /**
    * Select template to create page
    */
-  public void selectTemplateWikiPage(String template) {
-    info("--Select a template--");
-    evt.waitForAndGetElement(ELEMENT_TEMPLATE_SELECT_FORM);
-    By eTemplate = By.xpath(ELEMENT_SELECT_TEMPLATE_LINK.replace("${template}", template));
-    info("eTemplate:" + eTemplate.toString());
-    evt.click(eTemplate, 2, true);
+  public void selectTemplateWikiPage(SelenideElement eTemplate) {
+    info("--Select  template--");
+    $(ELEMENT_TEMPLATE_SELECT_FORM).waitUntil(Condition.appears, Configuration.timeout);
+    switch (eTemplate.getValue()) {
+    case "HOW-TO_Guide":
+      eTemplate.selectRadio("HOW-TO_Guide");
+      break;
+    case "Three-Column_Layout":
+      eTemplate.selectRadio("Three-Column_Layout");
+      break;
+    case "Status_Meeting":
+      eTemplate.selectRadio("Status_Meeting");
+      break;
+    case "Leave_Planning":
+      eTemplate.selectRadio("Leave_Planning");
+      break;
+    case "Two-Column_Layout":
+      eTemplate.selectRadio("Two-Column_Layout");
+      break;
+    }
   }
 
   /**
    * Change to Source Editor mode
    */
   public void goToSourceEditor() {
-    $(ELEMENT_SOURCE_EDITOR_BUTTON).click();
-    $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears,Configuration.timeout);
+    if ($(ELEMENT_SOURCE_EDITOR_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SOURCE_EDITOR_BUTTON).click();
+      $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
+    }
   }
 
   /**
@@ -107,7 +126,7 @@ public class WikiManagement {
    */
   public void cancelAddPage() {
     info("Click on Cancel button");
-    evt.click(ELEMENT_CANCEL_BUTTON_ADD_PAGE, 0, true);
+    $(ELEMENT_CANCEL_BUTTON_ADD_PAGE).click();
   }
 
   /**
@@ -174,19 +193,18 @@ public class WikiManagement {
    */
   public void movePage(String page1, String page2) {
     info("Open a wiki page 1");
-    evt.waitForAndGetElement(ELEMENT_TREE_WIKI_NAME.replace("${name}", page1), 2000, 0).click();
+    $(byText(page1)).waitUntil(Condition.appears, Configuration.timeout).click();
+
     info("Click on More link");
-    evt.click(ELEMENT_MORE_LINK);
+    $(ELEMENT_MORE_LINK).click();
     info("Click on Move page link");
-    if (evt.waitForAndGetElement(ELEMENT_MOVE_PAGE, 5000, 0) == null) {
-      evt.mouseOverAndClick(ELEMENT_MOVE_PAGE);
-    } else {
-      evt.click(ELEMENT_MOVE_PAGE);
-    }
+    ELEMENT_MOVE_PAGE.hover().click();
+
     info("Move page popup is shown");
-    evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_MOVE_POPUP_NODE.replace("${name}", page2), 2000, 0).click();
-    evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_MOVE_POPUP_SAVE, 2000, 0).click();
-    evt.waitForAndGetElement(ELEMENT_TREE_WIKI_NAME.replace("${name}", page1), 2000);
+    $(byText(page2)).waitUntil(Condition.appears, Configuration.timeout);
+    $(byId("UIMoveTree")).find(byText(page2)).click();
+    $(ELEMENT_WIKI_PAGE_MOVE_POPUP_SAVE).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_WIKI_PAGE_MOVE_POPUP_SAVE).click();
     info("The page 1 is moved to page 2");
   }
 
@@ -198,7 +216,8 @@ public class WikiManagement {
    */
   public void movePageWhenUserDoesNotHavePerMissionInDestination(String page1, String page2, boolean destination) {
     info("Open a wiki page 1");
-    evt.waitForAndGetElement(ELEMENT_TREE_WIKI_NAME.replace("${name}", page1), 2000, 0).click();
+    // evt.waitForAndGetElement(ELEMENT_TREE_WIKI_NAME.replace("${name}", page1),
+    // 2000, 0).click();
     info("Click on More link");
     evt.click(ELEMENT_MORE_LINK);
     if (destination) {
@@ -230,28 +249,33 @@ public class WikiManagement {
   public void movePageDiffDestination(String page1, String page2, String locator, Boolean... checkLocation) {
     boolean check = (checkLocation.length > 0 ? checkLocation[0] : false);
     info("Open a wiki page 1");
-    evt.waitForAndGetElement(ELEMENT_TREE_WIKI_NAME.replace("${name}", page1), 2000, 0).click();
+
+    $(byText(page1)).waitUntil(Condition.appears, Configuration.timeout).click();
+
     info("Click on More link");
-    evt.click(ELEMENT_MORE_LINK);
+    $(ELEMENT_MORE_LINK).click();
     info("Click on Move page link");
-    if (evt.waitForAndGetElement(ELEMENT_MOVE_PAGE, 5000, 0) == null) {
-      evt.mouseOverAndClick(ELEMENT_MOVE_PAGE);
-    } else {
-      evt.click(ELEMENT_MOVE_PAGE);
-    }
+    ELEMENT_MOVE_PAGE.click();
+
     info("Move page popup is shown");
     info("Click on Drop down");
-    evt.waitForAndGetElement(ELEMENT_MOVE_SPACESWITCHER, 2000, 0).click();
+    $(ELEMENT_MOVE_SPACESWITCHER).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_MOVE_SPACESWITCHER).click();
+
     info("Select a location");
-    evt.click(ELEMENT_MOVE_PAGE_POPUP_DROP_DOWN_LOCATOR.replace("${locator}", locator));
+
     info("Select a page in the list");
-    evt.waitForAndGetElement(ELEMENT_MOVE_PAGE_TREE_SELECTED_PAGE.replace("$page", page2), 2000, 0).click();
+
+    $(byId("UIWikiMovePageForm")).find(byText(locator)).waitUntil(Condition.appears, Configuration.timeout).click();
+    $(byClassName("sideBarContent")).find(byText(page2)).waitUntil(Condition.appears, Configuration.timeout).click();
+
     info("Save all changes");
     if (check) {
       info("Check New Location Home");
-      evt.waitForAndGetElement(ELEMENT_MOVE_PAGE_POPUP_NEW_LOCATION_HOME.replace("${spaceName}", locator), 5000);
+      $(byId("newLocation")).find(byText(locator)).find(byText("Wiki Home")).find(byText(page2)).should(Condition.exist);
     }
-    evt.waitForAndGetElement(ELEMENT_MOVE_BTNMOVE, 2000, 0).click();
+    $(ELEMENT_MOVE_BTNMOVE).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_MOVE_BTNMOVE).click();
   }
 
   /**
@@ -270,18 +294,23 @@ public class WikiManagement {
    */
   public void selectSpaceDestination(String destination) {
     info("Select a space destination in the list");
-    evt.click(ELEMENT_MOVE_PAGE_POPUP_DROP_DOWN_LOCATOR.replace("${locator}", destination));
-    evt.waitForAndGetElement(ELEMENT_MOVE_PAGE_SPACE_SWITCHER_DROP_DOWN_VALUE_SELECTED.replace("$destination", destination));
+    info("Click on More link");
+    $(ELEMENT_MORE_LINK).click();
+    info("Click on Move page link");
+    $(ELEMENT_MOVE_PAGE).hover().click();
+    ELEMENT_SELECT_DESTINATION.click();
+    ELEMENT_POPUP_SELECT_DESTINATION.find(byText(destination)).click();
+    $(ELEMENT_WIKI_PAGE_MOVE_POPUP_SAVE).click();
   }
 
   /**
    * Delete an attachment file
    */
-  public void deleteAttachmentFile() {
+  public void deleteAttachmentFile(String file) {
     info("Click on detele button");
-    evt.click(ELEMENT_PAGE_DELETEATTACHFILE);
+    $(byText(file)).parent().parent().find(byClassName("uiIconDelete ")).click();
     info("Verify that the file is removed");
-    evt.waitForElementNotPresent(ELEMENT_PAGE_DOWNLOADATTACHFILE);
+    $(ELEMENT_PAGE_DOWNLOADATTACHFILE).waitUntil(Condition.disappears, Configuration.timeout);
   }
 
   /**
@@ -290,21 +319,28 @@ public class WikiManagement {
    * @param spaces
    */
   public void checkAddRelationDropDownList(String spaces) {
+
     info("Click on Drop down");
-    evt.waitForAndGetElement(ELEMENT_ADD_RELATED_PAGE_POPUP_DROPDOWN, 2000, 0).click();
+    $(ELEMENT_ADD_RELATED_PAGE_POPUP_DROPDOWN).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_ADD_RELATED_PAGE_POPUP_DROPDOWN).click();
+
     info("Verify that Intranet location is shown is the list");
-    evt.waitForAndGetElement(ELEMENT_ADD_RELATED_POPUP_DROPDOWN_LOCATION.replace("${location}", "Intranet"), 2000, 0);
+    $(byId("UISpaceSwitcher_/portal/intranet")).should(Condition.exist);
+
     info("Verify that My wiki location is shown is the list");
-    evt.waitForAndGetElement(ELEMENT_ADD_RELATED_POPUP_DROPDOWN_LOCATION.replace("${location}", "My Wiki"), 2000, 0);
+    $(byId("UISpaceSwitcher_/user/root")).should(Condition.exist);
+
     if (!spaces.isEmpty()) {
       String[] arraySpace = spaces.split("/");
       for (String space : arraySpace) {
         info("Verify that " + space + " location is shown is the list");
-        evt.waitForAndGetElement(ELEMENT_ADD_RELATED_POPUP_DROPDOWN_LOCATION.replace("${location}", space), 2000, 0);
+        $(byClassName("spaceChooserPopup")).find(byText(space));
+
       }
 
     }
-    evt.waitForAndGetElement(ELEMENT_SPACE_SWITHCHER_DROPDOWN_CLOSE, 2000, 0).click();
+    $(ELEMENT_SPACE_SWITHCHER_DROPDOWN_CLOSE).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_SPACE_SWITHCHER_DROPDOWN_CLOSE).click();
     info("All options are checked");
   }
 
@@ -315,11 +351,10 @@ public class WikiManagement {
    */
   public void previewATemplate(String template) {
     info("Preview the template");
-    evt.click(ELEMENT_TEMPLATE_PREVIEW_BTN.replace("${template}", template));
+    $(ELEMENT_TEMPLATE_PREVIEW_BTN).click();
     info("Verify that the layout is shown");
-    evt.waitForAndGetElement(ELEMENT_PREVIEW_TEMPLATE_CONTENT.replace("${template}", template), 2000, 0);
-    evt.click(ELEMENT_TEMPLATE_PREVIEW_PAGE_CLOSE_BTN);
-
+    $(ELEMENT_PREVIEW_TEMPLATE_CONTENT).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_TEMPLATE_PREVIEW_PAGE_CLOSE_BTN).click();
     evt.click(ELEMENT_TEMPLATE_CANCEL_BTN);
 
   }
@@ -333,8 +368,9 @@ public class WikiManagement {
   public void renamePageByDoubleClick(String title, String newTitle) {
     info("Open the page");
     Actions action = new Actions(this.testBase.getExoWebDriver().getWebDriver());
-    action.doubleClick(evt.waitForAndGetElement(ELEMENT_PAGE_TITLE.replace("${title}", title), 2000, 0)).perform();
-    evt.type(ELEMENT_WIKI_PAGE_TITLE_RENAME_FIELD, newTitle, true);
+    $(byText(title)).waitUntil(Condition.appears, Configuration.timeout);
+    $(byId("UIWikiPageControlArea")).find(byText(title)).doubleClick();
+    $(ELEMENT_WIKI_PAGE_TITLE_RENAME_FIELD).setValue(newTitle);
     Actions actionEnter = new Actions(this.testBase.getExoWebDriver().getWebDriver());
     actionEnter.sendKeys(Keys.ENTER).perform();
     actionEnter.release();
@@ -346,12 +382,12 @@ public class WikiManagement {
    */
   public void watchAPage(String mess) {
     info("Click on More link");
-    evt.click(ELEMENT_MORE_LINK);
+    $(ELEMENT_MORE_LINK).click();
     info("Click on watch link");
-    evt.click(ELEMENT_WATCH_LINK);
+    $(ELEMENT_WATCH_LINK).click();
     info("Show message :'You started watching this page now.'");
-    evt.waitForAndGetElement(ELEMENT_POPUP_MESSAGE_CONTENT.replace("${message}", mess), 2000, 0);
-    evt.click(ELEMENT_BTN_OK);
+    $(ELEMENT_POPUP_MESSAGE_CONTENT).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_BTN_OK).click();
 
   }
 
@@ -445,7 +481,7 @@ public class WikiManagement {
    */
   public void renameFromAlertMessageOfOnePage() {
     info("Click on Rename link on the alert message area");
-    evt.click(EMENENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_RENAME);
+    $(EMENENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_RENAME).click();
 
   }
 
@@ -511,31 +547,33 @@ public class WikiManagement {
    *
    * @param template
    */
-  public void addSimpleWikiPageByTemplate(String template, String newTitle) {
+  public void addSimpleWikiPageByTemplate(SelenideElement template, String newTitle) {
     info("Select a template");
     selectTemplateWikiPage(template);
     evt.click(ELEMENT_TEMPLATE_SELECT_BTN);
     if (!newTitle.isEmpty())
       evt.type(ELEMENT_TITLE_WIKI_INPUT, newTitle, true);
-
     info("Save all changes");
     saveAddPage();
   }
 
   /**
-   * Add a simple wiki page with template with auto save status
+   * Add a simple wiki page with How To Guide template with auto save status
    *
    * @param template
    */
-  public void addSimplePageByTemplateWithAutoSave(String template, String newTitle) {
+  public void addSimplePageByTemplateWithAutoSave(SelenideElement template, String newTitle) {
     info("Select a template");
     selectTemplateWikiPage(template);
-    evt.click(ELEMENT_TEMPLATE_SELECT_BTN);
-
+    $(ELEMENT_TEMPLATE_SELECT_BTN).click();
     if (!newTitle.isEmpty())
-      evt.type(ELEMENT_TITLE_WIKI_INPUT, newTitle, true);
+      $(ELEMENT_TITLE_WIKI_INPUT).setValue(newTitle);
     info("Waiting 30s before saved all changes");
-    evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_TOOL_BAR_AUTO_SAVE_TEXT, 31000, 0);
+    try {
+      Thread.sleep(31000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     info("Save all changes");
     saveAddPage();
   }
@@ -549,7 +587,8 @@ public class WikiManagement {
   public void PreviewASimplePage(String title, String content) {
     info("Preview a simple page");
     goToPreviewPage();
-    evt.waitForAndGetElement(ELEMENT_PREVIEW_TEMPLATE_CONTENT.replace("${template}", title), testBase.getDefaultTimeout(), 1);
+    // evt.waitForAndGetElement(ELEMENT_PREVIEW_TEMPLATE_CONTENT.replace("${template}",
+    // title), testBase.getDefaultTimeout(), 1);
     evt.waitForAndGetElement(ELEMENT_PREVIEW_PAGE_CONTENT.replace("${content}", content), testBase.getDefaultTimeout(), 1);
   }
 }

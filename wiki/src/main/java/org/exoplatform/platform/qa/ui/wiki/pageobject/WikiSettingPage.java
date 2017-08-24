@@ -1,10 +1,15 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+
+import com.codeborne.selenide.Condition;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -35,12 +40,17 @@ public class WikiSettingPage {
    * @param template
    */
   public void searchTemplate(String template) {
+
     info("Input a template's name");
-    evt.type(ELEMENT_TEMPLATE_SEARCH_TEXTBOX, template, true);
+    $(ELEMENT_TEMPLATE_SEARCH_TEXTBOX).setValue(template);
+
     info("Press Enter key");
     testBase.getExoWebDriver().getWebDriver().findElement(ELEMENT_TEMPLATE_SEARCH_TEXTBOX).sendKeys(Keys.ENTER);
+
     info("Verify that the search results is shown that matchs with keyword");
-    evt.waitForAndGetElement(ELEMENT_WIKI_SETTINGS_RESULTS.replace("${tempalte}", template), 3000, 0);
+
+    $(byClassName("TemplateGrid")).find(byText(template)).should(Condition.exist);
+
   }
 
   /**

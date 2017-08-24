@@ -111,9 +111,9 @@ public class ManageLogInOut {
    */
   public void signInCas(String username, String password) {
     testBase.getExoWebDriver().getWebDriver();
-    evt.type(ELEMENT_INPUT_USERNAME_CAS, username, true);
-    evt.type(ELEMENT_INPUT_PASSWORD_CAS, password, true);
-    evt.click(ELEMENT_SIGN_IN_BUTTON_CAS);
+    $(ELEMENT_INPUT_USERNAME_CAS).setValue(username);
+    $(ELEMENT_INPUT_PASSWORD_CAS).setValue(password);
+    ELEMENT_SIGN_IN_BUTTON_CAS.click();
 
     // waitForElementNotPresent(ELEMENT_SIGN_IN_BUTTON_CAS,3000);
 
@@ -131,6 +131,7 @@ public class ManageLogInOut {
         break;
       }
       $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.appears, Configuration.timeout).click();
+
       if (evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_SIGN_OUT_LINK, 5000, 0) != null) {
         info("Element " + ManageLogInOutLocator.ELEMENT_SIGN_OUT_LINK + "... is displayed");
         break;

@@ -176,7 +176,7 @@ public class NavigationToolbar {
       evt.click(ELEMENT_MY_CONNECTION_LINK);
       break;
     case MY_WIKI:
-      evt.click(ELEMENT_MY_WIKI_LINK);
+      $(ELEMENT_MY_WIKI_LINK).click();
       break;
     case MY_DASHBOARD:
       evt.click(ELEMENT_MY_DASHBOARD_LINK);
@@ -189,6 +189,7 @@ public class NavigationToolbar {
       break;
     case CHANGE_LANGUAGE:
       break;
+
     }
   }
 
@@ -280,6 +281,7 @@ public class NavigationToolbar {
     $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[3]/a")).hover();
     ELEMENT_LINK_CONTENT_ADMIN.waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_LINK_CONTENT_ADMIN.click();
+
   }
 
   /**

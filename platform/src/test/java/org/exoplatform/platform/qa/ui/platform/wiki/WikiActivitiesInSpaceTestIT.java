@@ -21,7 +21,7 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
 
 @Tag("smoke")
 @Tag("wiki")
-public class WikiActivitiesTestIT extends Base {
+public class WikiActivitiesInSpaceTestIT extends Base {
 
   HomePagePlatform homePagePlatform;
 
@@ -60,28 +60,30 @@ public class WikiActivitiesTestIT extends Base {
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li>
    */
+  /*
+   * Step Number: 1 Step Name: Step 1: Add new space Step Description: - Connect
+   * to Intranet - Click [Join a space] - Click [Add New Space] Input Data:
+   * Expected Outcome: The new space is created successfully. Step number: 2 Step
+   * Name: Step 2: Add a wiki page for space Step Description: - Click the created
+   * space in the [My Spaces] panel - Click [Wiki] link on the space's top
+   * navigation bar - Click [Add Page] - -> [Blank Page]/[From Template...] -
+   * Enter title and content - Click [Save] Input Data: Expected Outcome: - By
+   * default, the [Create Wiki page] is displayed in the [Rich Text] mode - Wiki
+   * page is created for space. Step number: 3 Step Name: Step 3: Check wiki's
+   * activity after created page Step Description: - Back to the Homepage Input
+   * Data: Expected Outcome: - An activity of wikiis added to the activity stream
+   * - The content of the activity is displayed
+   */
+
   @Test
   public void test11_AddAWikisActivityAfterCreateAWikiPageInSpace() {
     info("Test 11 Add a wiki's activity after create a wiki page in space");
-    /*
-     * Step Number: 1 Step Name: Step 1: Add new space Step Description: - Connect
-     * to Intranet - Click [Join a space] - Click [Add New Space] Input Data:
-     * Expected Outcome: The new space is created successfully
-     */
 
     info("Create a space");
     String space = "space" + getRandomNumber();
     homePagePlatform.goToAllSpace();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
 
-    /*
-     * Step number: 2 Step Name: Step 2: Add a wiki page for space Step Description:
-     * - Click the created space in the [My Spaces] panel - Click [Wiki] link on the
-     * space's top navigation bar - Click [Add Page] - -> [Blank Page]/[From
-     * Template...] - Enter title and content - Click [Save] Input Data: Expected
-     * Outcome: - By default, the [Create Wiki page] is displayed in the [Rich Text]
-     * mode - Wiki page is created for space
-     */
     info("Create a wiki page");
     String title = "title" + getRandomNumber();
     String content = "content" + getRandomNumber();
@@ -92,13 +94,6 @@ public class WikiActivitiesTestIT extends Base {
     sourceTextEditor.addSimplePage(title, content);
     wikiManagement.saveAddPage();
     wikiValidattions.verifyTitleWikiPage(title);
-
-    /*
-     * Step number: 3 Step Name: Step 3: Check wiki's activity after created page
-     * Step Description: - Back to the Homepage Input Data: Expected Outcome: - An
-     * activity of wikiis added to the activity stream - The content of the activity
-     * is displayed
-     */
 
     info("Check the Activity");
     homePagePlatform.goToHomePage();
@@ -114,14 +109,19 @@ public class WikiActivitiesTestIT extends Base {
    * <li>Pre-Condition: Have a space</li>
    * <li>Post-Condition:</li>
    */
+  /*
+   * Step Number: 1 Step Name: Step 1: Add wiki for space Step Description: -
+   * Connect to [Intranet] - Add a Wiki activity for space Input Data: Expected
+   * Outcome: - The Wiki activity for spaceis displayed in the activity stream
+   * Step number: 2 Step Name: Step 2: Check show delete icon Step Description: -
+   * Back to activity stream - Move the mouse over the Wiki activity for space
+   * Input Data: Expected Outcome: A (X) icon is displayed in the top right panel
+   * of the activity
+   */
   @Test
   public void test13_RemoveWikisPageOfSpace() {
     info("Test 13 Remove wiki's page of space");
-    /*
-     * Step Number: 1 Step Name: Step 1: Add wiki for space Step Description: -
-     * Connect to [Intranet] - Add a Wiki activity for space Input Data: Expected
-     * Outcome: - The Wiki activity for spaceis displayed in the activity stream
-     */
+
     info("Create a space");
     String space = "space" + getRandomNumber();
     homePagePlatform.goToAllSpace();
@@ -138,12 +138,6 @@ public class WikiActivitiesTestIT extends Base {
     wikiManagement.saveAddPage();
     wikiValidattions.verifyTitleWikiPage(title);
 
-    /*
-     * Step number: 2 Step Name: Step 2: Check show delete icon Step Description: -
-     * Back to activity stream - Move the mouse over the Wiki activity for space
-     * Input Data: Expected Outcome: A (X) icon is displayed in the top right panel
-     * of the activity
-     */
     homePagePlatform.goToSpecificSpace(space);
     spaceHomePage.goToWikiTab();
     wikiHomePage.deleteWiki(title);

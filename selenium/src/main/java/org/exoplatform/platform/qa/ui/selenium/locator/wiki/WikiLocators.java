@@ -149,11 +149,11 @@ public class WikiLocators {
   public static final By              ELEMENT_CANCEL_WIKI_DELETE                                 =
                                                                  By.xpath(".//*[@id='UIWikiDeletePageConfirm']//button[text()='Cancel']");
 
-  public static final By              ELEMENT_MOVE_PAGE                                          =
-                                                        By.xpath(".//*[text()='Move Page']");
+  public static final SelenideElement ELEMENT_MOVE_PAGE                                          =
+                                                        $(byXpath("//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li[3]/ul/li[4]/a"));
 
-  public static final By              ELEMENT_PAGE_INFO                                          =
-                                                        By.xpath(".//*[text()='Page Info']");
+  public static final SelenideElement ELEMENT_PAGE_INFO                                          =
+                                                        $(byXpath("//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li[3]/ul/li[6]/a[1]"));
 
   public static final By              ELEMENT_MOVE_LINK                                          =
                                                         By.xpath("//*[@class='uiIconMovePage']");
@@ -313,6 +313,12 @@ public class WikiLocators {
   public static final String          ELEMENT_MOVE_PAGE_POPUP_DROP_DOWN_LOCATOR                  =
                                                                                 ".//*[@id='UIWikiPopupWindowL1']//*[contains(text(),'Move Page')]/../..//*[contains(text(),'${locator}')]";
 
+  public static final SelenideElement ELEMENT_POPUP_SELECT_DESTINATION                           =
+                                                                       $(byClassName(("uiWikiMovePageForm")));
+
+  public static final SelenideElement ELEMENT_SELECT_DESTINATION                                 =
+                                                                 $(byId("uiSpaceSwitcher_UIWikiMovePageForm"));
+
   public static final String          ELEMENT_MOVE_PAGE_TREE_SELECTED_PAGE                       =
                                                                            ".//*[@id='UIWikiMovePageForm']//*[@id='iconTreeExplorer']//*[contains(text(),'$page')]";
 
@@ -455,6 +461,9 @@ public class WikiLocators {
   public static final String          ELEMENT_TREE_WIKI_NAME                                     =
                                                              ".//*[@id='iconTreeExplorer']//*[contains(text(),'${name}')]";
 
+  public static final SelenideElement ELEMENT_TREE_NAME_WIKI                                     =
+                                                             $(byClassName("uiLeftContainerArea"));
+
   public static final String          ELEMENT_TREE_WIKI_PARENT_NODE_CHILD_NODE                   =
                                                                                ".//*[@id='iconTreeExplorer']//*[contains(text(),'$parent')]/../../..//*[contains(text(),'$child')]";
 
@@ -497,8 +506,8 @@ public class WikiLocators {
   public static final By              ELEMENT_PREVIEW_SCREEN                                     =
                                                              By.xpath("//div[@class='popupTitle' and text()='Preview']");
 
-  public static final By              ELEMENT_WIKI_PAGE_TOOL_BAR_AUTO_SAVE_TEXT                  =
-                                                                                By.xpath(".//*[@id='UIWikiPageEditForm']//*[contains(text(),'Draft saved')]");
+  public static final SelenideElement ELEMENT_WIKI_PAGE_TOOL_BAR_AUTO_SAVE_TEXT                  =
+                                                                                $(byXpath("//*[@id=\"UIWikiPageEditForm\"]/div[2]/div[2]/div[2]/div[2]"));
 
   // public static final By ELEMENT_SAVE_BUTTON_ADD_PAGE =
   // By.id("UISubmitToolBarUpper_SavePage_");
@@ -532,8 +541,8 @@ public class WikiLocators {
   public static final String          ELEMENT_SELECT_TEMPLATE_LINK                               =
                                                                    ".//*[contains(text(),'${template}')]/../..//input";
 
-  public static final String          ELEMENT_TEMPLATE_PREVIEW_BTN                               =
-                                                                   ".//*[contains(text(),'${template}')]/../..//*[@class='uiIconPreview uiIconLightGray']";
+  public static final By              ELEMENT_TEMPLATE_PREVIEW_BTN                               =
+                                                                   By.xpath("//*[@id=\"UIWikiTemplateGrid\"]/tbody/tr[2]/td[4]/a[2]/i");
 
   public static final By              ELEMENT_TEMPLATE_SELECT_FORM                               =
                                                                    By.id("UIWikiSelectTemplateForm");
@@ -544,9 +553,29 @@ public class WikiLocators {
   public static final By              ELEMENT_TEMPLATE_CANCEL_BTN                                =
                                                                   By.xpath(".//*[@id='UIWikiSelectTemplateForm']//*[text()='Cancel']");
 
+  // select HOW-TO Guide template
+  public static final SelenideElement ELEMENT_SELECT_TEMPLATE_HowToGuide                         =
+                                                                         $(byXpath("//*[@id=\"UIWikiTemplateGrid\"]/tbody/tr[2]/td[1]/div/input"));
+
+  // select Three-Column Layout template
+  public static final SelenideElement ELEMENT_SELECT_TEMPLATE_ThreeColumnLayout                  =
+                                                                                $(byXpath("//*[@id=\"UIWikiTemplateGrid\"]/tbody/tr[3]/td[1]/div/input"));
+
+  // select Status Meeting template
+  public static final SelenideElement ELEMENT_SELECT_TEMPLATE_StatusMeeting                      =
+                                                                            $(byXpath("//*[@id=\"UIWikiTemplateGrid\"]/tbody/tr[4]/td[1]/div/input"));
+
+  // select Leave Planning template
+  public static final SelenideElement ELEMENT_SELECT_TEMPLATE_LeavePlanning                      =
+                                                                            $(byXpath("//*[@id=\"UIWikiTemplateGrid\"]/tbody/tr[5]/td[1]/div/input"));
+
+  // select Two-Column Layout template
+  public static final SelenideElement ELEMENT_SELECT_TEMPLATE_TwoColumnLayout                    =
+                                                                              $(byXpath("//*[@id=\"UIWikiTemplateGrid\"]/tbody/tr[6]/td[1]/div/input"));
   // Preview page
-  public static final String          ELEMENT_PREVIEW_TEMPLATE_CONTENT                           =
-                                                                       "//*[@class='uiWikiPageTitlePreview' and contains(text(), '${template}')]";
+
+  public static final By              ELEMENT_PREVIEW_TEMPLATE_CONTENT                           =
+                                                                       By.xpath("//*[@id=\"UIWikiMaskWorkspace\"]/div[2]");
 
   public static final String          ELEMENT_PREVIEW_PAGE_CONTENT                               =
                                                                    ".//*[@id='UIPreviewContentDisplay']//*[contains(text(),'${content}')]";
@@ -574,15 +603,21 @@ public class WikiLocators {
   public static final By              ELEMENT_WIKI_PAGE_INFORMATION_TABLE_TITLE                  =
                                                                                 By.xpath(".//*[@id='UIWikiPageVersionsList2']//*[text()='Page History']");
 
-  public static final String          ELEMENT_WIKI_PAGE_INFORMATION_TABLE_CONTENT                =
-                                                                                  ".//a[text()='reversion']/../../..//td[contains(text(),'${text}')]";
+  public static final By              ELEMENT_WIKI_PAGE_INFORMATION_TABLE_CONTENT                =
+                                                                                  By.xpath("//*[@id='UIWikiPageInfoArea']/div");
+
+  public static final SelenideElement ELEMENT_RESTRICTED_LINK                                    =
+                                                              $(byId("UIWikiPageControlArea")).find(byXpath("//*[@id=\"UIWikiPageInfoArea\"]/div/a[5]"));
+
+  public static final SelenideElement ELEMENT_ATTACHMENT_TOTAL_NUMBER                            =
+                                                                      $(byId("UIWikiPageControlArea")).find(byXpath("//*[@id=\"UIWikiPageInfoArea\"]/div/a[6]"));
 
   // Information area
   public static final String          ELEMENT_WIKI_PAGE_INFORMATION_AREA_EDIT_INFOR              =
                                                                                     ".//*[@id='UIWikiPageInfoArea']//*[contains(.,'${info}')]";
 
-  public static final String          ELEMENT_WIKI_PAGE_INFORMATION_AREA_TOTAL_ATTACHEDFILES     =
-                                                                                             ".//*[@id='UIWikiPageInfoArea']//*[contains(text(),'${number}')]";
+  public static final By              ELEMENT_WIKI_PAGE_INFORMATION_AREA_TOTAL_ATTACHEDFILES     =
+                                                                                             By.xpath("//*[@id=\"UIWikiPageInfoArea\"]/div/a[4]");
 
   public static final String          ELEMENT_WIKI_PAGE_INFORMATION_AREA_RESTRICTED_STATUS       =
                                                                                            ".//*[@id='UIWikiPageInfoArea']//*[contains(text(),'${status}')]";
@@ -763,7 +798,7 @@ public class WikiLocators {
   public static final String          ELEMENT_SEARCH_DROPDOWNSPACE_LOCATION                      = "//*[@title='${location}']";
 
   public static final By              ELEMENT_SEARCH_NORESULT                                    =
-                                                              By.xpath("//*[@class='resultInfo noResult']");
+                                                              By.xpath("//*[@id=\"UIWikiAdvanceSearchResult\"]/div");
 
   public static final By              ELEMENT_SEARCH_ADVANCED_SEARCH_BTN                         =
                                                                          By.xpath(".//*[@id='UIWikiAdvanceSearchForm']/button[text()='Search']");
@@ -838,11 +873,13 @@ public class WikiLocators {
   public static final String          ELEMENT_DELETE_DRAFT_MESSAGE                               =
                                                                    "Are you sure you want to delete this draft?";
 
-  public static final String          ELEMENT_DRAFT_OF_NEW_PAGE                                  =
-                                                                "//*[@id='UIWikiDraftGrid']//*[contains(text(),'${title}')]";
+  public static final SelenideElement ELEMENT_DRAFT_NEW_PAGE                                     = $(byId("UIWikiDraftGrid"));
 
-  public static final String          ELEMENT_DELETE_DRAFT                                       =
-                                                           ".//*[@id='UIWikiDraftGrid']//*[contains(text(),'${title}')]/../../..//*[@class='uiIconDeleteDraft uiIconLightGray']";
+  public static final String          ELEMENT_DRAFT_OF_NEW_PAGE                                  =
+                                                                "//*[@id=\"UIWikiDraftGrid\"]/table/tbody/tr/td[1]/div/a";
+
+  public static final By              ELEMENT_DELETE_DRAFT                                       =
+                                                           By.xpath("//*[@id=\"UIWikiDraftGrid\"]/table/tbody/tr/td[4]/a[2]/i");
 
   public static final String          ELEMENT_DRAFT_OF_EDIT_PAGE                                 =
                                                                  "//*[@id='UIWikiDraftGrid']//*[text()='${title}']";
@@ -1435,9 +1472,14 @@ public class WikiLocators {
 
   public static final SelenideElement ELEMENT_POPUP_SELECT_WIKI_PAGE                             = $(byId("isc_2"));
 
-  public static final SelenideElement ELEMENT_BUTTON_WIKI_RITCH_TEXT                             =
-                                                                     $(byId("UIEditorTabs")).find(byText("Rich Text"));
+  public static final SelenideElement ELEMENT_ALERT_MESSAGE                                      = $(byClassName("alert"));
+
+  public static final By              ELEMENT_VIEW_PAGE_HISTORY                                  =
+                                                                By.xpath("//*[@id='UIWikiPageInfo']/div[2]/div[2]/table/tbody/tr[2]/td/div/button");
 
   public static final SelenideElement ELEMENT_WIKI_UNPUT_LINK_EXISTED_PAGE                       =
                                                                            $(byXpath("//*[@id=\"isc_Class_S1398_0_Input\"]"));
+
+  public static final SelenideElement ELEMENT_BUTTON_WIKI_RITCH_TEXT                             =
+                                                                     $(byId("UIEditorTabs")).find(byText("Rich Text"));
 }

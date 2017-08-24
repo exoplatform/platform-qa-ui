@@ -72,8 +72,9 @@ public class SpaceHomePage {
    */
   public void goToSpace(String name) {
     info("Go to the Space:" + name);
-    evt.waitForAndGetElement(ELEMENT_SPACE_LEFT_MENU_SPACE_NAME.replace("${name}", name), 2000, 0).click();
-    evt.waitForAndGetElement(ELEMENT_SPACE_NAME.replace("${name}", name), 2000, 0);
+    $(ELEMENT_SPACE_LEFT_MENU_SPACE_NAME).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_SPACE_LEFT_MENU_SPACE_NAME).click();
+    $(ELEMENT_SPACE_NAME).waitUntil(Condition.appears, Configuration.timeout);
     info("The space is shown");
   }
 
