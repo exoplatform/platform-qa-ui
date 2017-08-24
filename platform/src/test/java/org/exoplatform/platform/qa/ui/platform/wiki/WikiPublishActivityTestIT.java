@@ -2,11 +2,16 @@ package org.exoplatform.platform.qa.ui.platform.wiki;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.core.PLFData.password;
+import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_STREAM_CONTAINER;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_WIKI_PAGE_CONTAINER;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -17,6 +22,7 @@ import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.RichTextEditor;
@@ -24,7 +30,7 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
 
-@Tag("smoke")
+@Tag("sniff")
 @Tag("wiki")
 public class WikiPublishActivityTestIT extends Base {
   HomePagePlatform homePagePlatform;
@@ -43,6 +49,8 @@ public class WikiPublishActivityTestIT extends Base {
 
   ActivityStream   activityStream;
 
+  ManageLogInOut   manageLogInOut;
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
@@ -55,6 +63,19 @@ public class WikiPublishActivityTestIT extends Base {
     wikiValidattions = new WikiValidattions(this);
     spaceManagement = new SpaceManagement(this);
     activityStream = new ActivityStream(this);
+    manageLogInOut = new ManageLogInOut(this);
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
+      manageLogInOut.signOut();
+    }
+    manageLogInOut.signInCas(username, password);
+  }
+
+  @AfterEach
+  public void signout() {
+    manageLogInOut.signOut();
   }
 
   /**
