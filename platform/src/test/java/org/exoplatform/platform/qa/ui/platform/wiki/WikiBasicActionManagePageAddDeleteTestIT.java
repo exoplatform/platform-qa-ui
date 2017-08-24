@@ -30,7 +30,7 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 
 @Tag("wiki")
-@Tag("test")
+@Tag("sniff")
 public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
   HomePagePlatform  homePagePlatform;
 
@@ -60,6 +60,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
     navigationToolbar = new NavigationToolbar(this);
     wikidraftpage = new WikiDraftPage(this);
     richTextEditor = new RichTextEditor(this);
+    spaceManagement=new SpaceManagement(this);
     if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
       $(ELEMENT_SKIP_BUTTON).click();
     }
