@@ -667,4 +667,5 @@ public final class HomePageLocator {
   public static final SelenideElement ELEMENT_TAB_ADD_LINK=$(byXpath("//*[@id=\"ActivityComposerExt\"]/div[3]/a"));
   public static final SelenideElement ELEMENT_INPUT_LINK= $(byId("InputLink"));
   public static final SelenideElement ELEMENT_BUTTON_ATTACH_LINK=$(byId("AttachButton"));
+  public static final SelenideElement ELEMENT_SUGGETION_SPACE=$(byId("spaceSuggest"));
 }
