@@ -1478,6 +1478,6 @@ byClassName("uiIconEdit");
   public static final SelenideElement ELEMENT_WIKI_CONTENT_PAGE=$(byId("UIViewContentDisplay"));
 
 
- 
+
 
 }
