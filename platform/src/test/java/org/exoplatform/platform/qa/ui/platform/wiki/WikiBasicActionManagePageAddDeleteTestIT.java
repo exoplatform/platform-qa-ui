@@ -16,11 +16,14 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.RichTextEditor;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiDraftPage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
@@ -29,12 +32,9 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 @Tag("wiki")
 @Tag("sniff")
 public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
-
   HomePagePlatform  homePagePlatform;
 
   WikiHomePage      wikiHomePage;
-
-  ManageLogInOut    manageLogInOut;
 
   WikiManagement    wikiManagement;
 
@@ -43,6 +43,12 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
   RichTextEditor    richTextEditor;
 
   WikiDraftPage     wikidraftpage;
+
+  SpaceManagement   spaceManagement;
+
+  SpaceHomePage     spaceHomePage;
+
+  ManageLogInOut    manageLogInOut;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -54,6 +60,8 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
     navigationToolbar = new NavigationToolbar(this);
     wikidraftpage = new WikiDraftPage(this);
     richTextEditor = new RichTextEditor(this);
+    spaceManagement = new SpaceManagement(this);
+    spaceHomePage = new SpaceHomePage(this);
     if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
       $(ELEMENT_SKIP_BUTTON).click();
     }
@@ -195,13 +203,13 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
   /*
    * Step Number: 1 Step Name: Step 1: Add new page Step Description: - Go to
    * Intranet/Wiki - Add a page Input Data: Expected Outcome: A draft version is
-   * saved after 30s. Step Number: 2 Step Name: Step 2: Resume a draft with save as
-   * normal Step Description: - Close a window of the browser without saving of
+   * saved after 30s. Step Number: 2 Step Name: Step 2: Resume a draft with save
+   * as normal Step Description: - Close a window of the browser without saving of
    * the page - Go to "My drafts" - Click on the link "title" of the draft -
    * Change title or content of page and click Save Input Data: Expected Outcome:
    * - The draft is displayed in the list - The page in edit mode is displayed -
-   * New page is added and don't show in "My draft" list. Step Number: 1 Step Name:
-   * Step 1: Delete a draft Step Description: - Go to Browser -> My drafts -
+   * New page is added and don't show in "My draft" list. Step Number: 1 Step
+   * Name: Step 1: Delete a draft Step Description: - Go to Browser -> My drafts -
    * Select a page and click delete draft - A pop up is displayed
    * "Are you sure to delete this draft?" - Click OK button Input Data: Expected
    * Outcome: Delete draft successfully and don't show in draft list
@@ -248,5 +256,160 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
     wikidraftpage.deleteDraft(title);
     info("Delete the page ");
     homePagePlatform.goToWiki();
+  }
+
+  @Test
+  public void test06_1_AutoSaveWhenAddingPageFromHowToGuideTemplateOnSpace() {
+    info("Test 06: Auto Save when adding page from template");
+    String title = "title1" + getRandomNumber();
+    String space = "space" + getRandomNumber();
+    homePagePlatform.goToAllSpace();
+    spaceManagement.addNewSpaceSimple(space, space, 6000);
+    homePagePlatform.goToSpecificSpace(space);
+    spaceHomePage.goToWikiTab();
+    wikiHomePage.goToAddTemplateWikiPage();
+    wikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_HowToGuide, title);
+    info("Delete the page");
+    homePagePlatform.goToAllSpace();
+    spaceManagement.deleteSpace(space, false);
+  }
+
+  @Test
+  public void test06_2_AutoSaveWhenAddingPageFromThreeColumnLayoutTemplateOnSpace() {
+    info("Test 06: Auto Save when adding page from template");
+    String title = "title1" + getRandomNumber();
+    String space = "space" + getRandomNumber();
+    homePagePlatform.goToAllSpace();
+    spaceManagement.addNewSpaceSimple(space, space, 6000);
+    homePagePlatform.goToSpecificSpace(space);
+    spaceHomePage.goToWikiTab();
+    wikiHomePage.goToAddTemplateWikiPage();
+    wikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_ThreeColumnLayout, title);
+    info("Delete the page");
+    homePagePlatform.goToAllSpace();
+    spaceManagement.deleteSpace(space, false);
+  }
+
+  @Test
+  public void test06_3_AutoSaveWhenAddingPageFromStatusMeetingTemplateOnSpace() {
+    info("Test 06: Auto Save when adding page from template");
+    String title = "title1" + getRandomNumber();
+    String space = "space" + getRandomNumber();
+    homePagePlatform.goToAllSpace();
+    spaceManagement.addNewSpaceSimple(space, space, 6000);
+    homePagePlatform.goToSpecificSpace(space);
+    spaceHomePage.goToWikiTab();
+    wikiHomePage.goToAddTemplateWikiPage();
+    wikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_StatusMeeting, title);
+    info("Delete the page");
+    homePagePlatform.goToAllSpace();
+    spaceManagement.deleteSpace(space, false);
+  }
+
+  @Test
+  public void test06_4_AutoSaveWhenAddingPageFromLeavePlanningTemplateOnSpace() {
+    info("Test 06: Auto Save when adding page from template");
+    String title = "title1" + getRandomNumber();
+    String space = "space" + getRandomNumber();
+    homePagePlatform.goToAllSpace();
+    spaceManagement.addNewSpaceSimple(space, space, 6000);
+    homePagePlatform.goToSpecificSpace(space);
+    spaceHomePage.goToWikiTab();
+    wikiHomePage.goToAddTemplateWikiPage();
+    wikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_LeavePlanning, title);
+    info("Delete the page");
+    homePagePlatform.goToAllSpace();
+    spaceManagement.deleteSpace(space, false);
+  }
+
+  @Test
+  public void test06_5_AutoSaveWhenAddingPageFromTwoColumnLayoutOnSpace() {
+    info("Test 06: Auto Save when adding page from template");
+    String title = "title1" + getRandomNumber();
+    String space = "space" + getRandomNumber();
+    homePagePlatform.goToAllSpace();
+    spaceManagement.addNewSpaceSimple(space, space, 6000);
+    homePagePlatform.goToSpecificSpace(space);
+    spaceHomePage.goToWikiTab();
+    wikiHomePage.goToAddTemplateWikiPage();
+    wikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_TwoColumnLayout, title);
+    info("Delete the page");
+    homePagePlatform.goToAllSpace();
+    spaceManagement.deleteSpace(space, false);
+  }
+
+  /**
+   * <li>Case ID:122834.</li>
+   * <li>Test Case Name: Create page from template.</li>
+   * <li>Pre-Condition:</li>
+   * <li>Post-Condition:</li>
+   */
+  /*
+   * Step Number: 1 Step Name: Step 1: Create Page from template Step Description:
+   * - Go to wiki porlet - Click on Add Page -> From Template icon in toolbar
+   * action - Choose a template in list and click Select - Click on Save icon in
+   * toolbar Input Data: Expected Outcome: Page is added successful and listed in
+   * navigation tree Step Number: 1 Step Name: Step 1: Delete page with template
+   * layout Step Description: - Open an existing page by clicking on page name in
+   * navigation tree. - Click on More icon on toolbar and select Delete page
+   * action in menu - Click on OK button on Confirm message form Input Data:
+   * Expected Outcome: Delete page successfully
+   */
+
+  @Test
+  public void test04CreatePageFromTemplateOnSpace() {
+    info("Test 04: Create page from template");
+    SelenideElement template = ELEMENT_SELECT_TEMPLATE_StatusMeeting;
+    String title = "title1" + getRandomNumber();
+    String space = "space" + getRandomNumber();
+    homePagePlatform.goToAllSpace();
+    spaceManagement.addNewSpaceSimple(space, space, 6000);
+    homePagePlatform.goToSpecificSpace(space);
+    spaceHomePage.goToWikiTab();
+    wikiHomePage.goToAddTemplateWikiPage();
+    wikiManagement.addSimpleWikiPageByTemplate(template, title);
+    $(byText(title)).should(Condition.exist);
+
+    info("Test 10: Delete data");
+    homePagePlatform.goToAllSpace();
+    spaceManagement.deleteSpace(space, false);
+  }
+
+  /**
+   * <li>Case ID:122834.</li>
+   * <li>Test Case Name: Create page from template.</li>
+   * <li>Pre-Condition:</li>
+   * <li>Post-Condition:</li>
+   */
+  /*
+   * Step Number: 1 Step Name: Step 1: Create Page from template Step Description:
+   * - Go to wiki porlet - Click on Add Page -> From Template icon in toolbar
+   * action - Choose a template in list and click Select - Click on Save icon in
+   * toolbar Input Data: Expected Outcome: Page is added successful and listed in
+   * navigation tree Step Number: 1 Step Name: Step 1: Delete page with template
+   * layout Step Description: - Open an existing page by clicking on page name in
+   * navigation tree. - Click on More icon on toolbar and select Delete page
+   * action in menu - Click on OK button on Confirm message form Input Data:
+   * Expected Outcome: Delete page successfully
+   */
+
+  @Test
+  public void test10DeteyePageFromTemplateOnSpace() {
+    info("Test 04: Create page from template");
+    SelenideElement template = ELEMENT_SELECT_TEMPLATE_StatusMeeting;
+    String title = "title1" + getRandomNumber();
+    String space = "space" + getRandomNumber();
+    homePagePlatform.goToAllSpace();
+    spaceManagement.addNewSpaceSimple(space, space, 6000);
+    homePagePlatform.goToSpecificSpace(space);
+    spaceHomePage.goToWikiTab();
+    wikiHomePage.goToAddTemplateWikiPage();
+    wikiManagement.addSimpleWikiPageByTemplate(template, title);
+    $(byText(title)).should(Condition.exist);
+    wikiHomePage.deleteWiki(title);
+
+    info("Test 10: Delete data");
+    homePagePlatform.goToAllSpace();
+    spaceManagement.deleteSpace(space, false);
   }
 }

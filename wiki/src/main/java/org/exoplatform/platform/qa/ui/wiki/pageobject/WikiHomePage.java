@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.wiki.pageobject;
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -408,6 +409,7 @@ public class WikiHomePage {
   public void viewInformationTable(String page, String version) {
     info("Open a wiki page 1");
     $(byText(page)).waitUntil(Condition.appears, Configuration.timeout);
+    executeJavaScript("window.scrollBy(0,-550)");
     $(byText(page)).click();
     info("Open information table");
     $(byClassName("txtFeed")).find(byText(version)).should(Condition.exist);
