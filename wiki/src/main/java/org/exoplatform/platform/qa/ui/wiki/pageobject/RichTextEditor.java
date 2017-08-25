@@ -39,6 +39,7 @@ public class RichTextEditor {
    * @param testBase
    * @throws Exception
    */
+
   public RichTextEditor(TestBase testBase) {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
@@ -867,12 +868,19 @@ public class RichTextEditor {
    *          <code>null</code>
    */
   public void editSimplePage(String newTitle, String newContent) {
+    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
+    if ($(ELEMENT_SOURCE_EDITOR_BUTTON).is(Condition.not(Condition.exist))
+        && (ELEMENT_BUTTON_WIKI_RITCH_TEXT.is(Condition.exist))) {
+      ELEMENT_BUTTON_WIKI_RITCH_TEXT.click();
+    }
     info("Input a new title for the page");
     if (!newTitle.isEmpty())
       $(ELEMENT_TITLE_WIKI_INPUT).val(newTitle);
     info("Input a new content for the page");
     if (!newContent.isEmpty()) {
-      plf.inputFrame(ELEMENT_CONTENT_WIKI_FRAME, newContent);
+      switchTo().frame(0);
+      $(byId("body")).sendKeys(newContent);
+      switchTo().defaultContent();
     }
   }
 

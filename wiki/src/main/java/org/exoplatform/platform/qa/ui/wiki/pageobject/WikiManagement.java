@@ -73,7 +73,7 @@ public class WikiManagement {
    * Change to Source Editor mode
    */
   public void goToSourceEditor() {
-    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
     if ($(ELEMENT_SOURCE_EDITOR_BUTTON).is(Condition.exist)) {
       $(ELEMENT_SOURCE_EDITOR_BUTTON).click();
       $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
@@ -182,7 +182,7 @@ public class WikiManagement {
    */
   public void addComment(String comment) {
     info("Input a comment to wiki page");
-    evt.type(ELEMENT_WIKI_PAGE_INPUT_COMMENT, comment, true);
+    $(ELEMENT_WIKI_PAGE_INPUT_COMMENT).setValue(comment);
   }
 
   /**

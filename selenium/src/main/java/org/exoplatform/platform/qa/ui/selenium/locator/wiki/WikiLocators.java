@@ -149,8 +149,9 @@ public class WikiLocators {
   public static final By              ELEMENT_CANCEL_WIKI_DELETE                                 =
                                                                  By.xpath(".//*[@id='UIWikiDeletePageConfirm']//button[text()='Cancel']");
 
-  public static final SelenideElement ELEMENT_MOVE_PAGE                                          =
-                                                        $(byXpath("//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li[3]/ul/li[4]/a"));
+
+
+  public static final SelenideElement     ELEMENT_MOVE_PAGE                                          = $(byXpath("//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li[3]/ul/li[4]/a"));
 
   public static final SelenideElement ELEMENT_PAGE_INFO                                          =
                                                         $(byXpath("//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li[3]/ul/li[6]/a[1]"));
@@ -1482,4 +1483,6 @@ public class WikiLocators {
 
   public static final SelenideElement ELEMENT_BUTTON_WIKI_RITCH_TEXT                             =
                                                                      $(byId("UIEditorTabs")).find(byText("Rich Text"));
+  public static final SelenideElement ELEMENT_WIKI_PAGE_CONTAINER=$(byId("UIWikiPageContainer"));
+
 }

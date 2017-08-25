@@ -22,6 +22,7 @@ package org.exoplatform.platform.qa.ui.selenium.locator;
 
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byId;
+
 import static com.codeborne.selenide.Selenide.$;
 
 import org.openqa.selenium.By;
@@ -674,29 +675,21 @@ public final class ActivityStreamLocator {
                                                                             "//*[@class='uiIcon64x64Templateacme_product']/../..//*[@class='linkTitle' and contains(text(),'{$title}')]/..//*[@class='versionFile' and contains(text(),'- {$status}')]";
 
   // Activity upload file
-  public static final String          ELEMENT_ACTIVITY_FILE_UPLOAD_TITLE                   = "//*[contains(text(),'{$title}')]";
 
-  public static final String          ELEMENT_ACTIVITY_PREVIEW_FILE_WINDOW_NAME_OF_FILE    =
-                                                                                        "//*[@id='UISocialPopupWindow']//*[contains(text(),'{$title}')]";
-
-  public static final String          ELEMENT_ACTIVITY_EDIT_FROM_HOMEPAGE                  =
-                                                                          "//*[@id='UIDocumentForm']//*[contains(text(),'{$title}')]";
-
-  public static final SelenideElement ELEMENT_ACTIVITY_INPUT_TEXT                          = $(byId("cke_1_contents"));
-
-  public static final String          ELEMENT_LIKE_BUTTON                                  = "//*[@id=\"LikeLink{id}\"]";
-
-  public static final String          ELEMENT_UNLIKE_BUTTON                                = "//*[@id=\"UnLikeLink{id}\"]";
-
-  public static final String          ELEMENT_COMMENT_LINK                                 = "//*[@id=\"CommentLink{id}\"]";
-
-  public static final String          ELEMENT_COMMENT_INPUT                                = "cke_CommentTextarea{id}";
-
-  public static final String          ELEMENT_COMMENT_BUTTON                               = "//*[@id=\"CommentButton{id}\"]";
-
-  public static final SelenideElement ELEMENT_COMMENT_DESCRIPTION                          = $(byClassName("commentRight"));
-
-  public static final String          ELEMENT_COMMENT_DELETE                               = "DeleteCommentButtoncomment{id}";
-
-  public static final String          ELEMENT_DATE_COMMENT                                 = "dateTime";
+  public static final String ELEMENT_ACTIVITY_FILE_UPLOAD_TITLE = "//*[contains(text(),'{$title}')]";
+  public static final String
+          ELEMENT_ACTIVITY_PREVIEW_FILE_WINDOW_NAME_OF_FILE =
+          "//*[@id='UISocialPopupWindow']//*[contains(text(),'{$title}')]";
+  public static final String ELEMENT_ACTIVITY_EDIT_FROM_HOMEPAGE =
+          "//*[@id='UIDocumentForm']//*[contains(text(),'{$title}')]";
+  public static final SelenideElement ELEMENT_ACTIVITY_INPUT_TEXT=$(byId("cke_1_contents"));
+  public static final String ELEMENT_LIKE_BUTTON="//*[@id=\"LikeLink{id}\"]";
+  public static final String ELEMENT_UNLIKE_BUTTON="//*[@id=\"UnLikeLink{id}\"]";
+  public static final String ELEMENT_COMMENT_LINK="//*[@id=\"CommentLink{id}\"]";
+  public static final String ELEMENT_COMMENT_INPUT="cke_CommentTextarea{id}";
+  public static final String ELEMENT_COMMENT_BUTTON="//*[@id=\"CommentButton{id}\"]";
+  public static final SelenideElement ELEMENT_COMMENT_DESCRIPTION=$(byClassName("commentRight"));
+  public static final String ELEMENT_COMMENT_DELETE="DeleteCommentButtoncomment{id}";
+  public static final String ELEMENT_DATE_COMMENT="dateTime";
+  public static final SelenideElement ELEMENT_ACTIVITY_STREAM_CONTAINER=$(byId("UIActivitiesLoader"));
 }
