@@ -4,13 +4,9 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.SelenideElement;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import com.codeborne.selenide.Condition;
@@ -167,7 +163,7 @@ public class WikiManagement {
   public void editParagraph(String paragraphTitle, String paragraphContent) {
     info("-- Editing a paragraph... " + paragraphTitle);
 
-   $(byText(paragraphTitle)).click();
+    $(byText(paragraphTitle)).click();
     ELEMENT_WIKI_CONTENT_PAGE.find(byText(paragraphTitle)).hover().parent().find(ELEMENT_WIKI_PAGE_EDIT_PARAGRAPH_BTN).click();
     $(ELEMENT_CONTENT_WIKI_INPUT).setValue(paragraphContent);
   }

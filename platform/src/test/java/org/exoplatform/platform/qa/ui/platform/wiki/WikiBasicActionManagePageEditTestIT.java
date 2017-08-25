@@ -6,14 +6,11 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_SELECT_TEMPLATE_LeavePlanning;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_TREE_NAME_WIKI;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 import org.junit.jupiter.api.AfterEach;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -21,7 +18,6 @@ import org.junit.jupiter.api.Test;
 import com.codeborne.selenide.Condition;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
-
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
@@ -29,7 +25,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
 
 @Tag("wiki")
-@Tag("smoke")
+@Tag("test")
 
 public class WikiBasicActionManagePageEditTestIT extends Base {
 
@@ -61,6 +57,8 @@ public class WikiBasicActionManagePageEditTestIT extends Base {
     navigationToolbar = new NavigationToolbar(this);
     wikidraftpage = new WikiDraftPage(this);
     richTextEditor = new RichTextEditor(this);
+    sourceTextEditor = new SourceTextEditor(this);
+    activityStream = new ActivityStream(this);
     if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
       $(ELEMENT_SKIP_BUTTON).click();
     }
@@ -136,6 +134,7 @@ public class WikiBasicActionManagePageEditTestIT extends Base {
     wikiHomePage.goToMyDraft();
     wikidraftpage.deleteDraft(title2);
   }
+
   /**
    * <li>Case ID:122817.</li>
    * <li>Test Case Name: Edit Page with Rich Text Editor</li>
