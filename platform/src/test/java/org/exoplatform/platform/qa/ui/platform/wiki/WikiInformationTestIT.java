@@ -393,7 +393,7 @@ public class WikiInformationTestIT extends Base {
 
     info("Verify that Words/lines highlighted in green indicate that they were added");
 
-    assertEquals($(byClassName("diffmodifiedline")).find(byText(newTitle2)).getCssValue("background-color"),
+    assertEquals($(byClassName("diffmodifiedline")).find(byText(newTitle2+newTitle1+newTitle+content)).getCssValue("background-color"),
                  "rgba(215, 248, 213, 1)");
 
     info("Delete the page");

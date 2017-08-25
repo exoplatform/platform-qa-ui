@@ -78,6 +78,13 @@ public class WikiAttachmentTestIT extends Base {
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li>
    */
+  /*
+   * Step Number: 1 Step Name: Step 1: Upload Attachment in Page Step Description:
+   * - Open Add/Edit page form - Upload attachments Input Data: Expected Outcome:
+   * - Attachment(s) is uploaded successful and listed in Attachment table with
+   * properties
+   */
+
   @Test
   public void test01_UploadDownloadDeleteAttachment() {
     info("Test 1: Upload Attachment");
@@ -85,21 +92,11 @@ public class WikiAttachmentTestIT extends Base {
     String title = "title" + rand;
     String content = "content" + rand;
 
-    /*
-     * Step Number: 1 Step Name: Step 1: Upload Attachment in Page Step Description:
-     * - Open Add/Edit page form - Upload attachments Input Data: Expected Outcome:
-     * - Attachment(s) is uploaded successful and listed in Attachment table with
-     * properties
-     */
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddBlankPage();
     wikiManagement.goToSourceEditor();
     sourceTextEditor.addSimplePage(title, content);
     $(byClassName("uploadInput")).find(byName("file")).uploadFromClasspath("wiki_attachment.txt");
-    // sourceTextEditor.attachFile("TestData/"+link);
-    /*
-     * rtMode.addSimplePage(title, content); rtMode.attachFile("TestData/"+link);
-     */
     ELEMENT_SAVE_BUTTON_ADD_PAGE.waitUntil(Condition.enabled, Configuration.timeout);
     wikiManagement.saveAddPage();
     waitForAndGetElement(ELEMENT_PAGE_ATTACHFILE, 3000, 1);
