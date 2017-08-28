@@ -2353,4 +2353,5 @@ public final class SocialLocator {
 
   public static final SelenideElement ELEMENT_NAME_PROFILE_OF_USERS                                     =
                                                                     $(byId("UIBreadCrumbsNavigationPortlet"));
+
 }
