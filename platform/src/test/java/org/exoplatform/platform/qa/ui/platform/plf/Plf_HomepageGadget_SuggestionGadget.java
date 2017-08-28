@@ -4,6 +4,7 @@ package org.exoplatform.platform.qa.ui.platform.plf;
 import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarHomePage;
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumCategoryManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
@@ -24,11 +25,15 @@ import org.openqa.selenium.WebElement;
 
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_MY_SPACE_SEARCH_TEXT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACES_LIST;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
@@ -262,12 +267,12 @@ public class Plf_HomepageGadget_SuggestionGadget extends Base{
         navigationToolbar.goToAddUser();
         addUsers.addUser(username1,password,email,username1,username1);
         addUsers.addUser(username2,password,email2  ,username2,username2);
-        homePagePlatform.goToHomePage();
+        manageLogInOut.signIn(DATA_USER2,PLFData.password);
         info("Verify that The suggestion gadget always displays 2 people suggestions");
         $(ELEMENT_SUGGESTION_BOX).find(byText(username1+" "+username1)).should(Condition.exist);
         $(ELEMENT_SUGGESTION_BOX).find(byText(username2+" "+username2)).should(Condition.exist);
-        $(ELEMENT_SUGGESTION_BOX).find(byText("Mary Williams")).shouldNot(Condition.exist);
         info("Verify that The suggestion gadget always displays 2 last spaces suggestions");
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
         ELEMENT_SUGGETION_SPACE.find(byText(space2)).should(Condition.exist);
         ELEMENT_SUGGETION_SPACE.find(byText(space3)).should(Condition.exist);
         deleteDataTest();
@@ -276,4 +281,244 @@ public class Plf_HomepageGadget_SuggestionGadget extends Base{
         userAndGroupManagement.deleteUser(username1);
         userAndGroupManagement.deleteUser(username2);
     }
+    @Test
+    public  void test03_CheckDisplayOfSuggestionsGadgethigherNumberOfCommonConnections () {
+        String username1="usernamea"+getRandomString();
+        String username2="usernameb"+getRandomString();
+        String username3="usernamec"+getRandomString();
+        String username4="usernamed"+getRandomString();
+        String email2=username2+"@test.com";
+        String email=username1+"@test.com";
+        String email3=username3+"@test.com";
+        String email4=username4+"@test.com";
+        String password="123456";
+        info("Test 01: Check display of Suggestions Gadget");
+		/*Step Number: 1
+		*Step Name: - Check display of Suggestions gadget
+		*Step Description:
+			- Login as userA
+			- Open intranet home
+		*Input Data:
+
+		*Expected Outcome:
+			- This gadget is displayed at the right, as attachment SuggestionsGadget.png
+			- The suggestion gadget always displays 2 people suggestions and 2 space suggestions.
+			- The 2 people suggestions are people with the most common connections with the users and ordered by alphabet
+			- The 2 space suggestions are spaces that have the most members who are user's connections and ordered by creation date*/
+        info("--Create 3 spaces--");
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(username1,password,email,username1,username1);
+        addUsers.addUser(username2,password,email2  ,username2,username2);
+        addUsers.addUser(username3,password,email3  ,username3,username3);
+        addUsers.addUser(username4,password,email4  ,username4,username4);
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(username1);
+        manageLogInOut.signIn(username1,password);
+        ELEMENT_GADGET_INVITATION.find(byText("Root Root")).hover();
+        ELEMENT_GADGET_INVITATION.find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET).click();
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(username3);
+        connectionsManagement.connectToAUser(username4);
+        manageLogInOut.signIn(username3,password);
+        ELEMENT_GADGET_INVITATION.find(byText(username1+" "+username1)).hover();
+        ELEMENT_GADGET_INVITATION.find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET).click();
+        manageLogInOut.signIn(username4,password);
+        ELEMENT_GADGET_INVITATION.find(byText(username1+" "+username1)).hover();
+        ELEMENT_GADGET_INVITATION.find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET).click();
+        manageLogInOut.signIn(username, PLFData.password);
+        info("Verify that The suggestion gadget always displays 2 people suggestions");
+        $(ELEMENT_SUGGESTION_BOX).find(byText(username3+" "+username3)).should(Condition.exist);
+        $(ELEMENT_SUGGESTION_BOX).find(byText(username4+" "+username4)).should(Condition.exist);
+        navigationToolbar.goToUsersAndGroupsManagement();
+        userAndGroupManagement.deleteUser(username1);
+        userAndGroupManagement.deleteUser(username2);
+        userAndGroupManagement.deleteUser(username3);
+        userAndGroupManagement.deleteUser(username4);
+    }
+
+    @Test
+    public  void test04_CheckDisplayOfSuggestionsGadgethigherNumberOfMembersInSpace () {
+        String username1="usernamea"+getRandomString();
+        String username2="usernameb"+getRandomString();
+        String email2=username2+"@test.com";
+        String email=username1+"@test.com";
+        String password="123456";
+        space1="spaceA"+getRandomNumber();
+        space2="spaceB"+getRandomNumber();
+        space3="spaceC"+getRandomNumber();
+        info("Test 01: Check display of Suggestions Gadget");
+		/*Step Number: 1
+		*Step Name: - Check display of Suggestions gadget
+		*Step Description:
+			- Login as userA
+			- Open intranet home
+		*Input Data:
+
+		*Expected Outcome:
+			- This gadget is displayed at the right, as attachment SuggestionsGadget.png
+			- The suggestion gadget always displays 2 people suggestions and 2 space suggestions.
+			- The 2 people suggestions are people with the most common connections with the users and ordered by alphabet
+			- The 2 space suggestions are spaces that have the most members who are user's connections and ordered by creation date*/
+        info("--Create 3 spaces--");
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(username1,password,email,username1,username1);
+        addUsers.addUser(username2,password,email2,username2,username2);
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(space1,space1);
+        spaceManagement.goToMemberTab();
+        spaceSettingManagement.inviteUser(username1,false,"");
+        spaceSettingManagement.inviteUser(username2,false,"");
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(space2,space2);
+        spaceSettingManagement.inviteUser(username1,false,"");
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(space3,space3);
+        manageLogInOut.signIn(username1,password);
+        homePagePlatform.goToAllSpace();
+        ELEMENT_MY_SPACE_SEARCH_TEXT.setValue(space1).pressEnter();
+        $(ELEMENT_SPACES_LIST).find(byText(space1)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION).click();
+        homePagePlatform.goToAllSpace();
+        ELEMENT_MY_SPACE_SEARCH_TEXT.setValue(space2).pressEnter();
+        $(ELEMENT_SPACES_LIST).find(byText(space2)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION).click();
+        manageLogInOut.signIn(username2,password);
+        homePagePlatform.goToAllSpace();
+        ELEMENT_MY_SPACE_SEARCH_TEXT.setValue(space1).pressEnter();
+        $(ELEMENT_SPACES_LIST).find(byText(space1)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION).click();
+        manageLogInOut.signIn(DATA_USER2,PLFData.password);
+        $(ELEMENT_SUGGESTION_BOX).find(byText(space1)).should(Condition.exist);
+        $(ELEMENT_SUGGESTION_BOX).find(byText(space2)).should(Condition.exist);
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        homePagePlatform.goToMySpaces();
+        spaceManagement.deleteSpace(space1, false);
+        homePagePlatform.goToMySpaces();
+        spaceManagement.deleteSpace(space2, false);
+        homePagePlatform.goToMySpaces();
+        spaceManagement.deleteSpace(space3, false);
+        navigationToolbar.goToUsersAndGroupsManagement();
+        userAndGroupManagement.deleteUser(username1);
+        userAndGroupManagement.deleteUser(username2);
+
+    }
+    @Test
+    public void test05_checkDispalayOfSuggestionButtonWhenUserMovesTheMouseOnPeopleSuggestion(){
+    manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        ELEMENT_GADGET_USER_SUGGESTION.find(byText("Mary Williams")).hover();
+        ELEMENT_GADGET_USER_SUGGESTION.find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET).should(Condition.exist);
+        ELEMENT_GADGET_USER_SUGGESTION.find(ELEMENT_BUTTON_CANCEL_SUGGESTION_USER_FROM_GADGET).should(Condition.exist);
+
+    }
+
+    @Test
+    public void test06_checkDispalayOfButtonSuggestionWhenUserMovesTheMouseOnSpaceSuggestion(){
+        space1="spaceA"+getRandomNumber();
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(space1,space1);
+        manageLogInOut.signIn(DATA_USER2,DATA_PASS);
+        ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).hover();
+        String id=ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).parent().parent().getAttribute("id");
+        ELEMENT_GAGET_SUGGESTION_SPACE.find(byXpath(ELEMNT_BUTTON_REQUEST_SPACE_FROM_GADGET.replace("{id}",id))).should(Condition.exist);
+        ELEMENT_GAGET_SUGGESTION_SPACE.find(ELEMENT_BUTTON_CANCEL_SUGGESTION_USER_FROM_GADGET).should(Condition.exist);
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        homePagePlatform.goToMySpaces();
+        spaceManagement.deleteSpace(space1, false);
+    }
+
+    @Test
+    public void test07_checkHiddenOfSuggestionGadgetWhenUserAcceptSuggestionOfUser(){
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        ELEMENT_GADGET_USER_SUGGESTION.find(byText(DATA_NAME_USER2)).hover();
+        ELEMENT_GADGET_USER_SUGGESTION.find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET).click();
+        ELEMENT_GADGET_USER_SUGGESTION.find(byText(DATA_NAME_USER2)).shouldNot(Condition.exist);
+        homePagePlatform.goToConnections();
+        connectionsManagement.cancelConnection(DATA_USER2);
+    }
+
+    @Test
+    public void test08_checkHiddenOfSuggestionGadgetWhenUserRefuseSuggestionOfUser(){
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        ELEMENT_GADGET_USER_SUGGESTION.find(byText(DATA_NAME_USER2)).hover();
+        ELEMENT_GADGET_USER_SUGGESTION.find(ELEMENT_BUTTON_CANCEL_SUGGESTION_USER_FROM_GADGET).click();
+        ELEMENT_GADGET_USER_SUGGESTION.find(byText(DATA_NAME_USER2)).shouldNot(Condition.exist);
+
+    }
+    @Test
+    public void test09_checkHiddenOfSuggestionGadgetWhenUserAcceptSuggestionOfSpace(){
+        space1="spaceA"+getRandomNumber();
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(space1,space1);
+        manageLogInOut.signIn(DATA_USER2,DATA_PASS);
+        ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).hover();
+        String id=ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).parent().parent().getAttribute("id");
+        ELEMENT_GAGET_SUGGESTION_SPACE.find(byXpath(ELEMNT_BUTTON_REQUEST_SPACE_FROM_GADGET.replace("{id}",id))).click();
+        ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).shouldNot(Condition.exist);
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        homePagePlatform.goToMySpaces();
+        spaceManagement.deleteSpace(space1, false);
+    }
+    @Test
+    public void test10_checkHiddenOfSuggestionGadgetWhenUserCloseSuggestionOfSpace(){
+        space1="spaceA"+getRandomNumber();
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(space1,space1);
+        manageLogInOut.signIn(DATA_USER2,DATA_PASS);
+        ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).hover();
+        ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).parent().parent().find(ELEMENT_BUTTON_CANCEL_SUGGESTION_USER_FROM_GADGET).click();
+        ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).shouldNot(Condition.exist);
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        homePagePlatform.goToMySpaces();
+        spaceManagement.deleteSpace(space1, false);
+    }
+
+    @Test
+    public void test11_checkDisplayOfOtherSuggestionGadgetWhenUserCloseSuggestionOfSpace(){
+        space1="spaceA"+getRandomNumber();
+        space2="spaceB"+getRandomNumber();
+        space3="spaceC"+getRandomNumber();
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(space1,space1);
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(space2,space2);
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(space3,space3);
+        manageLogInOut.signIn(DATA_USER2,DATA_PASS);
+        ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).shouldNot(Condition.exist);
+        ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space2)).scrollTo().hover();
+        ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space2)).parent().parent().find(ELEMENT_BUTTON_CANCEL_SUGGESTION_USER_FROM_GADGET).click();
+        ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).should(Condition.exist);
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        homePagePlatform.goToMySpaces();
+        spaceManagement.deleteSpace(space1, false);
+        spaceManagement.deleteSpace(space2, false);
+        spaceManagement.deleteSpace(space3, false);
+    }
+    @Test
+    public void test12_checkDisplayOfOtherSuggestionGadgetWhenUserAcceptSuggestionOfSpace(){
+        space1="spaceA"+getRandomNumber();
+        space2="spaceB"+getRandomNumber();
+        space3="spaceC"+getRandomNumber();
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(space1,space1);
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(space2,space2);
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(space3,space3);
+        manageLogInOut.signIn(DATA_USER2,DATA_PASS);
+        ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).shouldNot(Condition.exist);
+        ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space2)).scrollTo().hover();
+        String id=ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space2)).parent().parent().getAttribute("id");
+        ELEMENT_GAGET_SUGGESTION_SPACE.find(byXpath(ELEMNT_BUTTON_REQUEST_SPACE_FROM_GADGET.replace("{id}",id))).click();
+        ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).should(Condition.exist);
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        homePagePlatform.goToMySpaces();
+        spaceManagement.deleteSpace(space1, false);
+        spaceManagement.deleteSpace(space2, false);
+        spaceManagement.deleteSpace(space3, false);
+    }
+
 }

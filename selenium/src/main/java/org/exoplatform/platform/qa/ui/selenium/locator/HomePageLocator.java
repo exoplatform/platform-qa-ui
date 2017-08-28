@@ -668,4 +668,10 @@ public final class HomePageLocator {
   public static final SelenideElement ELEMENT_INPUT_LINK= $(byId("InputLink"));
   public static final SelenideElement ELEMENT_BUTTON_ATTACH_LINK=$(byId("AttachButton"));
   public static final SelenideElement ELEMENT_SUGGETION_SPACE=$(byId("spaceSuggest"));
+  public static final SelenideElement ELEMENT_GADGET_INVITATION=$(byId("InvitationsPortlet"));
+  public static final By ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET=byClassName("connect");
+  public static final By ELEMENT_BUTTON_CANCEL_SUGGESTION_USER_FROM_GADGET=byClassName("uiIconClose");
+  public static final SelenideElement ELEMENT_GADGET_USER_SUGGESTION=$(byId("content"));
+  public static final String ELEMNT_BUTTON_REQUEST_SPACE_FROM_GADGET="//*[@id=\"{id}\"]/div[2]/div[2]/div[1]/a[1]";
+  public static final SelenideElement ELEMENT_GAGET_SUGGESTION_SPACE=$(byId("spaceSuggest"));
 }
