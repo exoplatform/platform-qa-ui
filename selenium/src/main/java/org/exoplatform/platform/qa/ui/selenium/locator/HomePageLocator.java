@@ -354,6 +354,7 @@ public final class HomePageLocator {
                                                                          By.xpath("//*[@class='gadgetTitle title center']//*[@class='uiIconClose pull-right']");
 
   // Who's online gadget
+  public static final SelenideElement ELEMENT_WHO_ON_LINE_GADGET=$(byId("onlineContent"));
   public static final String          ELEMENT_WHO_ONLINE_ICON_PEOPLE_NUMBER                                =
                                                                             "//*[@id='onlineList']/li[{$number}]/a";
 
