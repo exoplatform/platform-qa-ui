@@ -1,8 +1,21 @@
 package org.exoplatform.platform.qa.ui.platform.wiki;
 
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
+import static org.exoplatform.platform.qa.ui.core.PLFData.*;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
@@ -11,534 +24,459 @@ import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
-import static org.exoplatform.platform.qa.ui.core.PLFData.*;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
 
 /**
  * @author eXo
- *
  */
 @Tag("smoke")
 @Tag("wiki")
-public class WikiSettingsTestIT extends Base{
-	HomePagePlatform homePagePlatform;
+public class WikiSettingsTestIT extends Base {
+  HomePagePlatform      homePagePlatform;
 
-	SpaceManagement spaceManagement;
+  SpaceManagement       spaceManagement;
 
-	WikiHomePage wikiHomePage;
+  WikiHomePage          wikiHomePage;
 
-	WikiManagement wikiManagement;
+  WikiManagement        wikiManagement;
 
-	SourceTextEditor sourceTextEditor;
+  SourceTextEditor      sourceTextEditor;
 
-	WikiValidattions wikiValidattions;
+  WikiValidattions      wikiValidattions;
 
-	SpaceHomePage spaceHomePage;
+  SpaceHomePage         spaceHomePage;
 
-	ActivityStream activityStream;
-	WikiSettingManagement wikiSettingManagement;
-	RichTextEditor richTextEditor;
-	PlatformPermission platformPermission;
-	ManageLogInOut manageLogInOut;
-WikiPermission wikiPermission;
-	@BeforeEach
-	public void setupBeforeMethod() {
-		info("Start setUpBeforeMethod");
+  ActivityStream        activityStream;
 
-		homePagePlatform = new HomePagePlatform(this);
-		spaceHomePage = new SpaceHomePage(this);
-		wikiHomePage = new WikiHomePage(this);
-		wikiManagement = new WikiManagement(this);
-		sourceTextEditor = new SourceTextEditor(this);
-		wikiValidattions = new WikiValidattions(this);
-		spaceManagement = new SpaceManagement(this);
-		activityStream = new ActivityStream(this);
-		wikiSettingManagement=new WikiSettingManagement(this);
-		richTextEditor=new RichTextEditor(this);
-		platformPermission=new PlatformPermission(this);
-		manageLogInOut=new ManageLogInOut(this);
-		wikiPermission=new WikiPermission(this);
-	}
+  WikiSettingManagement wikiSettingManagement;
 
-	/**
-	 *<li> Case ID:122830.</li>
-	 *<li> Test Case Name: Add new template.</li>
-	 *Jira Issue : https://jira.exoplatform.org/browse/WIKI-991
-	 */
-	@Test
-	public  void test01_AddNewTemplate() {
-		info("Test 1: Add new template");
-		String title="title"+getRandomNumber();
-		String description="description"+getRandomNumber();
-		String content="content"+getRandomNumber();
-		/*Step Number: 1
-		 *Step Name: Step 1: Add new template
-		 *Step Description:
-			- Click on Browse at top right and select Wiki Settings action
-			- Click Template tab
-			-> Select Add More Templates button
-			- Input all fields required and click Save template
-		 *Input Data:
+  RichTextEditor        richTextEditor;
 
-		 *Expected Outcome:
-			- Template is added successfully and listed in Template table*/
-		homePagePlatform.goToWiki();
-		wikiHomePage.goToWikiSettingPage();
-		ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();
-		wikiSettingManagement.addTemplate(title,description,content);
-		ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(title)).should(Condition.exist);
-		wikiSettingManagement.deleteTemplate(title);
+  PlatformPermission    platformPermission;
 
-	}
+  ManageLogInOut        manageLogInOut;
 
-	/**
-	 *<li> Case ID:122832.</li>
-	 *<li> Test Case Name: Edit template.</li>
-	*/
-	@Test
-	public  void test02_EditTemplate() {
-		info("Test 2: Edit template");
-		String title="title"+getRandomNumber();
-		String newTitle="newTitle"+getRandomNumber();
-		String description="description"+getRandomNumber();
-		String content="content"+getRandomNumber();
-		/*Step Number: 1
-		 *Step Name: Step 1: Add new template
-		 *Step Description:
-			- Click on Browse at top right and select Wiki Settings action
-			- Click Template tab
-			-> Select Add More Templates button
-			- Input all fields required and click Save template
-		 *Input Data:
+  WikiPermission        wikiPermission;
 
-		 *Expected Outcome:
-			- Template is added successfully and listed in Template table*/
-		homePagePlatform.goToWiki();
-		wikiHomePage.goToWikiSettingPage();
-		ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();
-		wikiSettingManagement.addTemplate(title,description,content);
-		ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(title)).parent().parent().find(ELEMENT_WIKI_ICON_EDIT_TEMPLATE).click();
-		wikiSettingManagement.editTemplate("",newTitle,"","");
-		ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(newTitle)).should(Condition.exist);
-		wikiSettingManagement.deleteTemplate(newTitle);
+  @BeforeEach
+  public void setupBeforeMethod() {
+    info("Start setUpBeforeMethod");
 
-	}
-	/**
-	 *<li> Case ID:122830.</li>
-	 *<li> Test Case Name: Delete template.</li>
-	 *Jira Issue : https://jira.exoplatform.org/browse/WIKI-991
-	 */
-	@Test
-	public  void test03_DeleteTemplate() {
-		info("Test 1: Add new template");
-		String title="title"+getRandomNumber();
-		String description="description"+getRandomNumber();
-		String content="content"+getRandomNumber();
-		/*Step Number: 1
-		 *Step Name: Step 1: Add new template
-		 *Step Description:
-			- Click on Browse at top right and select Wiki Settings action
-			- Click Template tab
-			-> Select Add More Templates button
-			- Input all fields required and click Save template
-		 *Input Data:
+    homePagePlatform = new HomePagePlatform(this);
+    spaceHomePage = new SpaceHomePage(this);
+    wikiHomePage = new WikiHomePage(this);
+    wikiManagement = new WikiManagement(this);
+    sourceTextEditor = new SourceTextEditor(this);
+    wikiValidattions = new WikiValidattions(this);
+    spaceManagement = new SpaceManagement(this);
+    activityStream = new ActivityStream(this);
+    wikiSettingManagement = new WikiSettingManagement(this);
+    richTextEditor = new RichTextEditor(this);
+    platformPermission = new PlatformPermission(this);
+    manageLogInOut = new ManageLogInOut(this);
+    wikiPermission = new WikiPermission(this);
+  }
 
-		 *Expected Outcome:
-			- Template is added successfully and listed in Template table*/
-		homePagePlatform.goToWiki();
-		wikiHomePage.goToWikiSettingPage();
-		ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();
-		wikiSettingManagement.addTemplate(title,description,content);
-		ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(title)).should(Condition.exist);
-		wikiSettingManagement.deleteTemplate(title);
+  /**
+   * <li>Case ID:122830.</li>
+   * <li>Test Case Name: Add new template.</li> Jira Issue :
+   * https://jira.exoplatform.org/browse/WIKI-991
+   */
+  /*
+   * Step Number: 1 Step Name: Step 1: Add new template Step Description: - Click
+   * on Browse at top right and select Wiki Settings action - Click Template tab
+   * -> Select Add More Templates button - Input all fields required and click
+   * Save template Input Data: Expected Outcome: - Template is added successfully
+   * and listed in Template table
+   */
 
-	}
-	/**
-	 *<li> Case ID:122833.</li>
-	 *<li> Test Case Name: Preview new template.</li>
-	 *Jira issue : https://jira.exoplatform.org/browse/WIKI-991
-	 */
-	@Test
-	public  void test03_PreviewNewTemplate() {
-		info("Test 3: Preview new template");
-		String title="title"+getRandomNumber();
-		String description="description"+getRandomNumber();
-		String content="content"+getRandomNumber();
-		/*Step Number: 1
-		 *Step Name: Step 1: Preview new template
-		 *Step Description:
-			- Click on Browse at top right and select Wiki Settings action
-			- Click Template link
-			-> Add more Template
-			- Input all fields required and click Preview icon
-		 *Input Data:
+  @Test
+  public void test01_AddNewTemplate() {
+    info("Test 1: Add new template");
+    String title = "title" + getRandomNumber();
+    String description = "description" + getRandomNumber();
+    String content = "content" + getRandomNumber();
+    homePagePlatform.goToWiki();
+    wikiHomePage.goToWikiSettingPage();
+    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();
+    wikiSettingManagement.addTemplate(title, description, content);
+    ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(title)).should(Condition.exist);
+    wikiSettingManagement.deleteTemplate(title);
 
-		 *Expected Outcome:
-			- Display the preview mode of the currently template*/
-		homePagePlatform.goToWiki();
-		wikiHomePage.goToWikiSettingPage();
-		ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();
-		$(ELEMENT_TITLE_TEMPLATE).waitUntil(Condition.appears, Configuration.timeout).setValue(title);
-		$(ELEMENT_DESCRIPTION_TEMPLATE).setValue(description);
-		$(ELEMENT_CONTENT_TEMPLATE).setValue(content);
-		ELEMENT_WIKI_PREVIEW_TEMPLATE.click();
-		$(byText(title)).should(Condition.exist);
-		$(byText(content)).should(Condition.exist);
+  }
+  /*
+   * Step Number: 1 Step Name: Step 1: Add new template Step Description: - Click
+   * on Browse at top right and select Wiki Settings action - Click Template tab
+   * -> Select Add More Templates button - Input all fields required and click
+   * Save template Input Data: Expected Outcome: - Template is added successfully
+   * and listed in Template table
+   */
 
-	}
+  /**
+   * <li>Case ID:122832.</li>
+   * <li>Test Case Name: Edit template.</li>
+   */
+  @Test
+  public void test02_EditTemplate() {
+    info("Test 2: Edit template");
+    String title = "title" + getRandomNumber();
+    String newTitle = "newTitle" + getRandomNumber();
+    String description = "description" + getRandomNumber();
+    String content = "content" + getRandomNumber();
+    homePagePlatform.goToWiki();
+    wikiHomePage.goToWikiSettingPage();
+    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();
+    wikiSettingManagement.addTemplate(title, description, content);
+    ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(title)).parent().parent().find(ELEMENT_WIKI_ICON_EDIT_TEMPLATE).click();
+    wikiSettingManagement.editTemplate("", newTitle, "", "");
+    ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(newTitle)).should(Condition.exist);
+    wikiSettingManagement.deleteTemplate(newTitle);
 
-	/**
-	 *<li> Case ID:122840.</li>
-	 *<li> Test Case Name: Add Permission for Wiki.</li>
-	 */
-	@Test
-	public  void test05_AddPermissionForWiki() {
-		info("Test 5: Add Permission for Wiki");
-		String wiki = "wiki"+getRandomNumber();
+  }
 
-		homePagePlatform.goToWiki();
-		wikiHomePage.goToAddBlankPage();
-		richTextEditor.addSimplePage(wiki,wiki);
-		wikiManagement.saveAddPage();
+  /**
+   * <li>Case ID:122830.</li>
+   * <li>Test Case Name: Delete template.</li> Jira Issue :
+   * https://jira.exoplatform.org/browse/WIKI-991
+   */
+  @Test
+  public void test03_DeleteTemplate() {
+    info("Test 1: Add new template");
+    String title = "title" + getRandomNumber();
+    String description = "description" + getRandomNumber();
+    String content = "content" + getRandomNumber();
+    homePagePlatform.goToWiki();
+    wikiHomePage.goToWikiSettingPage();
+    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();
+    wikiSettingManagement.addTemplate(title, description, content);
+    ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(title)).should(Condition.exist);
+    wikiSettingManagement.deleteTemplate(title);
 
-		/*Step Number: 1
-		 *Step Name: Step 1: Add Permission
-		 *Step Description:
-			- Check the header (top bar) of the Wiki
-			- Click Browse button at top right and select Wiki Settings action, choose Permission tab
-			- Click select user/select group/select membership then click Add
-			- Tick permission for her/him
-			- Click Save
-		 *Input Data:
+  }
 
-		 *Expected Outcome:
-			New permission is added in list*/
-		wikiHomePage.goToPermissions();
-		$(byText("any")).parent().parent().find(byClassName("uiIconDelete")).click();
-		wikiPermission.addPermisisonByType(DATA_USER2);
-		click(ELEMENT_ADD_PERMISSION);
-		click(ELEMENT_SAVE_PERMISSION);
-		/*Step number: 2
-		 *Step Name: Step 2: Check permission of added user
-		 *Step Description:
-			- Login as user or member of the group above
-			- Go to wiki application
-			- Open the wiki page at step 1
-		 *Input Data:
+  /**
+   * <li>Case ID:122833.</li>
+   * <li>Test Case Name: Preview new template.</li> Jira issue :
+   * https://jira.exoplatform.org/browse/WIKI-991
+   */
+  /*
+   * Step Number: 1 Step Name: Step 1: Preview new template Step Description: -
+   * Click on Browse at top right and select Wiki Settings action - Click Template
+   * link -> Add more Template - Input all fields required and click Preview icon
+   * Input Data: Expected Outcome: - Display the preview mode of the currently
+   * template
+   */
 
-		 *Expected Outcome:
-			- This user can do actions as permission set in step 1.*/
-		manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-		info("Check if mary can see the page");
-		homePagePlatform.goToWiki();
-		wikiHomePage.selectAPage(wiki);
+  @Test
+  public void test03_PreviewNewTemplate() {
+    info("Test 3: Preview new template");
+    String title = "title" + getRandomNumber();
+    String description = "description" + getRandomNumber();
+    String content = "content" + getRandomNumber();
+    homePagePlatform.goToWiki();
+    wikiHomePage.goToWikiSettingPage();
+    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();
+    $(ELEMENT_TITLE_TEMPLATE).waitUntil(Condition.appears, Configuration.timeout).setValue(title);
+    $(ELEMENT_DESCRIPTION_TEMPLATE).setValue(description);
+    $(ELEMENT_CONTENT_TEMPLATE).setValue(content);
+    ELEMENT_WIKI_PREVIEW_TEMPLATE.click();
+    $(byText(title)).should(Condition.exist);
+    $(byText(content)).should(Condition.exist);
 
-			// delete data
-		manageLogInOut.signIn(username, DATA_PASS);
-		homePagePlatform.goToWiki();
-		wikiHomePage.selectAPage(wiki);
-		wikiHomePage.deleteWiki(wiki);
-	}
+  }
 
-	/**
-	 *<li> Case ID:122840.</li>
-	 *<li> Test Case Name: Add Permission for Wiki.</li>
-	 *<li> Pre-Condition: A wiki page is created at intranet wiki.</li>
-	 *<li> Case ID:122842.</li>
-	 *<li> Test Case Name: Edit permission for Wiki.</li>
-	 *<li> Case ID:122843.</li>
-	 *<li> Test Case Name: Delete permission for Wiki.</li>
-	 */
-	@Test
-	public  void test06_EditPermissionForWiki() {
-		info("Test 5: Add Permission for Wiki");
-		String wiki = "wiki"+getRandomNumber();
+  /**
+   * <li>Case ID:122840.</li>
+   * <li>Test Case Name: Add Permission for Wiki.</li>
+   */
+  /*
+   * Step Number: 1 Step Name: Step 1: Add Permission Step Description: - Check
+   * the header (top bar) of the Wiki - Click Browse button at top right and
+   * select Wiki Settings action, choose Permission tab - Click select user/select
+   * group/select membership then click Add - Tick permission for her/him - Click
+   * Save Input Data: Expected Outcome: New permission is added in list Step
+   * number: 2 Step Name: Step 2: Check permission of added user Step Description:
+   * - Login as user or member of the group above - Go to wiki application - Open
+   * the wiki page at step 1 Input Data: Expected Outcome: - This user can do
+   * actions as permission set in step 1.
+   */
 
-		homePagePlatform.goToWiki();
-		wikiHomePage.goToAddBlankPage();
-		richTextEditor.addSimplePage(wiki,wiki);
-		wikiManagement.saveAddPage();
+  @Test
+  public void test05_AddPermissionForWiki() {
+    info("Test 5: Add Permission for Wiki");
+    String wiki = "wiki" + getRandomNumber();
 
-		/*Step Number: 1
-		 *Step Name: Step 1: Add Permission
-		 *Step Description:
-			- Check the header (top bar) of the Wiki
-			- Click Browse button at top right and select Wiki Settings action, choose Permission tab
-			- Click select user/select group/select membership then click Add
-			- Tick permission for her/him
-			- Click Save
-		 *Input Data:
+    homePagePlatform.goToWiki();
+    wikiHomePage.goToAddBlankPage();
+    richTextEditor.addSimplePage(wiki, wiki);
+    wikiManagement.saveAddPage();
 
-		 *Expected Outcome:
-			New permission is added in list*/
-		wikiHomePage.goToPermissions();
-		$(byText("any")).parent().parent().find(byClassName("uiIconDelete")).click();
-		wikiPermission.addPermisisonByType(DATA_USER2);
-		ELEMENT_WIKI_ICON_EDIT_PERMISSION_FOR_MARY.click();
-		click(ELEMENT_SAVE_PERMISSION);
+    wikiHomePage.goToPermissions();
+    $(byText("any")).parent().parent().find(byClassName("uiIconDelete")).click();
+    wikiPermission.addPermisisonByType(DATA_USER2);
+    click(ELEMENT_ADD_PERMISSION);
+    click(ELEMENT_SAVE_PERMISSION);
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    info("Check if mary can see the page");
+    homePagePlatform.goToWiki();
+    wikiHomePage.selectAPage(wiki);
 
-		manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-		homePagePlatform.goToWiki();
-		wikiHomePage.selectAPage(wiki);
-		// check if mary has the rights
-		wikiHomePage.goToEditPage();
+    // delete data
+    manageLogInOut.signIn(username, DATA_PASS);
+    homePagePlatform.goToWiki();
+    wikiHomePage.selectAPage(wiki);
+    wikiHomePage.deleteWiki(wiki);
+  }
 
-		// delete data
-		manageLogInOut.signIn(username, DATA_PASS);
-		homePagePlatform.goToWiki();
-		wikiHomePage.selectAPage(wiki);
-		wikiHomePage.deleteWiki(wiki);
-	}
+  /**
+   * <li>Case ID:122840.</li>
+   * <li>Test Case Name: Add Permission for Wiki.</li>
+   * <li>Pre-Condition: A wiki page is created at intranet wiki.</li>
+   * <li>Case ID:122842.</li>
+   * <li>Test Case Name: Edit permission for Wiki.</li>
+   * <li>Case ID:122843.</li>
+   * <li>Test Case Name: Delete permission for Wiki.</li>
+   */
+  /*
+   * Step Number: 1 Step Name: Step 1: Add Permission Step Description: - Check
+   * the header (top bar) of the Wiki - Click Browse button at top right and
+   * select Wiki Settings action, choose Permission tab - Click select user/select
+   * group/select membership then click Add - Tick permission for her/him - Click
+   * Save Input Data: Expected Outcome: New permission is added in list
+   */
+  @Test
+  public void test06_EditPermissionForWiki() {
+    info("Test 5: Add Permission for Wiki");
+    String wiki = "wiki" + getRandomNumber();
 
-	/**
-	 *<li> Case ID:122840.</li>
-	 *<li> Test Case Name: Add Permission for Wiki.</li>
-	 *<li> Pre-Condition: A wiki page is created at intranet wiki.</li>
-	 *<li> Case ID:122842.</li>
-	 *<li> Test Case Name: Edit permission for Wiki.</li>
-	 *<li> Case ID:122843.</li>
-	 *<li> Test Case Name: Delete permission for Wiki.</li>
-	 */
-	@Test
-	public  void test07_DeletePermissionForWiki() {
-		info("Test 5: Add Permission for Wiki");
-		String wiki = "wiki"+getRandomNumber();
+    homePagePlatform.goToWiki();
+    wikiHomePage.goToAddBlankPage();
+    richTextEditor.addSimplePage(wiki, wiki);
+    wikiManagement.saveAddPage();
 
-		homePagePlatform.goToWiki();
-		wikiHomePage.goToAddBlankPage();
-		richTextEditor.addSimplePage(wiki,wiki);
-		wikiManagement.saveAddPage();
+    wikiHomePage.goToPermissions();
+    $(byText("any")).parent().parent().find(byClassName("uiIconDelete")).click();
+    wikiPermission.addPermisisonByType(DATA_USER2);
+    ELEMENT_WIKI_ICON_EDIT_PERMISSION_FOR_MARY.click();
+    click(ELEMENT_SAVE_PERMISSION);
 
-		/*Step Number: 1
-		 *Step Name: Step 1: Add Permission
-		 *Step Description:
-			- Check the header (top bar) of the Wiki
-			- Click Browse button at top right and select Wiki Settings action, choose Permission tab
-			- Click select user/select group/select membership then click Add
-			- Tick permission for her/him
-			- Click Save
-		 *Input Data:
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    homePagePlatform.goToWiki();
+    wikiHomePage.selectAPage(wiki);
+    // check if mary has the rights
+    wikiHomePage.goToEditPage();
 
-		 *Expected Outcome:
-			New permission is added in list*/
-		wikiHomePage.goToPermissions();
-		$(byText("any")).parent().parent().find(byClassName("uiIconDelete")).click();
-		wikiPermission.addPermisisonByType(DATA_USER2);
-		click(ELEMENT_ADD_PERMISSION);
-		click(ELEMENT_SAVE_PERMISSION);
-		/*Step number: 2
-		 *Step Name: Step 2: Check permission of added user
-		 *Step Description:
-			- Login as user or member of the group above
-			- Go to wiki application
-			- Open the wiki page at step 1
-		 *Input Data:
+    // delete data
+    manageLogInOut.signIn(username, DATA_PASS);
+    homePagePlatform.goToWiki();
+    wikiHomePage.selectAPage(wiki);
+    wikiHomePage.deleteWiki(wiki);
+  }
 
-		 *Expected Outcome:
-			- This user can do actions as permission set in step 1.*/
-		manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-		info("Check if mary can see the page");
-		homePagePlatform.goToWiki();
-		wikiHomePage.selectAPage(wiki);
-		info("Test 7: Delete permission for Wiki");
-		// remove the permission for mary
-		manageLogInOut.signIn(username, password);
-		homePagePlatform.goToWiki();
-		wikiHomePage.selectAPage(wiki);
-		wikiHomePage.goToPermissions();
-		$(byText(DATA_NAME_USER2)).parent().parent().find(ELEMENT_WIKI_ICON_DELETE_PERMISSION).click();
-		click(ELEMENT_SAVE_PERMISSION);
+  /**
+   * <li>Case ID:122840.</li>
+   * <li>Test Case Name: Add Permission for Wiki.</li>
+   * <li>Pre-Condition: A wiki page is created at intranet wiki.</li>
+   * <li>Case ID:122842.</li>
+   * <li>Test Case Name: Edit permission for Wiki.</li>
+   * <li>Case ID:122843.</li>
+   * <li>Test Case Name: Delete permission for Wiki.</li>
+   */
+  /*
+   * Step Number: 1 Step Name: Step 1: Add Permission Step Description: - Check
+   * the header (top bar) of the Wiki - Click Browse button at top right and
+   * select Wiki Settings action, choose Permission tab - Click select user/select
+   * group/select membership then click Add - Tick permission for her/him - Click
+   * Save Input Data: Expected Outcome: New permission is added in list Step
+   * number: 2 Step Name: Step 2: Check permission of added user Step Description:
+   * - Login as user or member of the group above - Go to wiki application - Open
+   * the wiki page at step 1 Input Data: Expected Outcome: - This user can do
+   * actions as permission set in step 1.
+   */
 
-		manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-		homePagePlatform.goToWiki();
-		$(byText(wiki)).shouldNot(Condition.exist);
+  @Test
+  public void test07_DeletePermissionForWiki() {
+    info("Test 5: Add Permission for Wiki");
+    String wiki = "wiki" + getRandomNumber();
 
-		// delete data
-		manageLogInOut.signIn(username, DATA_PASS);
-		homePagePlatform.goToWiki();
-		wikiHomePage.selectAPage(wiki);
-		wikiHomePage.deleteWiki(wiki);
-	}
-	/**
-	 *<li> Case ID:122844.</li>
-	 *<li> Test Case Name: Add Permission for space wiki.</li>
-	 */
-	@Test
-	public void test08_AddPermissionForSpaceWiki() {
-		info("Test 8: Add Permission for space wiki");
-		String space =""+getRandomNumber();
-		String wiki = ""+getRandomNumber();
-		homePagePlatform.goToMySpaces();
-		spaceManagement.addNewSpaceSimple(space, "");
-		spaceHomePage.goToWikiTab();
-		wikiHomePage.goToAddBlankPage();
-		richTextEditor.addSimplePage(wiki,wiki);
-		wikiManagement.saveAddPage();
-		wikiHomePage.goToPermalink();
-		String perLink=ELEMENT_WIKI_PERMELINK.getValue();
+    homePagePlatform.goToWiki();
+    wikiHomePage.goToAddBlankPage();
+    richTextEditor.addSimplePage(wiki, wiki);
+    wikiManagement.saveAddPage();
 
-		/*Step Number: 1
-		 *Step Name: Step 1: Add Permission
-		 *Step Description:
-			- Open a page of the space that you want to set the permissions.
-			- Click More
-			-> Page Permission
-			- Choose select user/select group/select membership then click Add
-			- Click Save
-		 *Input Data:
+    wikiHomePage.goToPermissions();
+    $(byText("any")).parent().parent().find(byClassName("uiIconDelete")).click();
+    wikiPermission.addPermisisonByType(DATA_USER2);
+    click(ELEMENT_ADD_PERMISSION);
+    click(ELEMENT_SAVE_PERMISSION);
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    info("Check if mary can see the page");
+    homePagePlatform.goToWiki();
+    wikiHomePage.selectAPage(wiki);
+    info("Test 7: Delete permission for Wiki");
+    // remove the permission for mary
+    manageLogInOut.signIn(username, password);
+    homePagePlatform.goToWiki();
+    wikiHomePage.selectAPage(wiki);
+    wikiHomePage.goToPermissions();
+    $(byText(DATA_NAME_USER2)).parent().parent().find(ELEMENT_WIKI_ICON_DELETE_PERMISSION).click();
+    click(ELEMENT_SAVE_PERMISSION);
 
-		 *Expected Outcome:
-			New permission is added in list*/
-		wikiHomePage.goToPermissions();
-		wikiPermission.addPermisisonByType(DATA_USER2);
-		click(ELEMENT_ADD_PERMISSION);
-		click(ELEMENT_SAVE_PERMISSION);
-		/*Step number: 2
-		 *Step Name: Step 2: Check permission of added user
-		 *Step Description:
-			- Login as user or member of the group above
-			- Open the wiki page at step 1
-		 *Input Data:
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    homePagePlatform.goToWiki();
+    $(byText(wiki)).shouldNot(Condition.exist);
 
-		 *Expected Outcome:
-			- This user can do actions as permission set in step 1.*/
-		manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-		open(perLink);
-		$(byText(wiki)).waitUntil(Condition.appears,Configuration.timeout);
+    // delete data
+    manageLogInOut.signIn(username, DATA_PASS);
+    homePagePlatform.goToWiki();
+    wikiHomePage.selectAPage(wiki);
+    wikiHomePage.deleteWiki(wiki);
+  }
 
-		info("Test 10 Edit permission for space wiki");
+  /**
+   * <li>Case ID:122844.</li>
+   * <li>Test Case Name: Add Permission for space wiki.</li>
+   */
+  /*
+   * Step Number: 1 Step Name: Step 1: Add Permission Step Description: - Open a
+   * page of the space that you want to set the permissions. - Click More -> Page
+   * Permission - Choose select user/select group/select membership then click Add
+   * - Click Save Input Data: Expected Outcome: New permission is added in list
+   * Step number: 2 Step Name: Step 2: Check permission of added user Step
+   * Description: - Login as user or member of the group above - Open the wiki
+   * page at step 1 Input Data: Expected Outcome: - This user can do actions as
+   * permission set in step 1.
+   */
 
-		// delete data
+  @Test
+  public void test08_AddPermissionForSpaceWiki() {
+    info("Test 8: Add Permission for space wiki");
+    String space = "" + getRandomNumber();
+    String wiki = "" + getRandomNumber();
+    homePagePlatform.goToMySpaces();
+    spaceManagement.addNewSpaceSimple(space, "");
+    spaceHomePage.goToWikiTab();
+    wikiHomePage.goToAddBlankPage();
+    richTextEditor.addSimplePage(wiki, wiki);
+    wikiManagement.saveAddPage();
+    wikiHomePage.goToPermalink();
+    String perLink = ELEMENT_WIKI_PERMELINK.getValue();
 
-		manageLogInOut.signIn(username, password);
-		homePagePlatform.goToMySpaces();
-		spaceManagement.deleteSpace(space, false);
-	}
+    wikiHomePage.goToPermissions();
+    wikiPermission.addPermisisonByType(DATA_USER2);
+    click(ELEMENT_ADD_PERMISSION);
+    click(ELEMENT_SAVE_PERMISSION);
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    open(perLink);
+    $(byText(wiki)).waitUntil(Condition.appears, Configuration.timeout);
 
-	/**
-	 *<li> Case ID:122844.</li>
-	 *<li> Test Case Name: Add Permission for space wiki.</li>
-	 *<li> Case ID:122846.</li>
-	 *<li> Test Case Name: Edit permission for space wiki.</li>
-	 *<li> Case ID:122845.</li>
-	 *<li> Test Case Name: Delete permission for space wiki.</li>
-	 */
-	@Test
-	public void test09_EditPermissionForSpaceWiki() {
-		info("Test 8: Add Permission for space wiki");
-		String space =""+getRandomNumber();
-		String wiki = ""+getRandomNumber();
-		homePagePlatform.goToMySpaces();
-		spaceManagement.addNewSpaceSimple(space, "");
-		spaceHomePage.goToWikiTab();
-		wikiHomePage.goToAddBlankPage();
-		richTextEditor.addSimplePage(wiki,wiki);
-		wikiManagement.saveAddPage();
-		wikiHomePage.goToPermalink();
-		String perLink=ELEMENT_WIKI_PERMELINK.getValue();
+    info("Test 10 Edit permission for space wiki");
 
-		/*Step Number: 1
-		 *Step Name: Step 1: Add Permission
-		 *Step Description:
-			- Open a page of the space that you want to set the permissions.
-			- Click More
-			-> Page Permission
-			- Choose select user/select group/select membership then click Add
-			- Click Save
-		 *Input Data:
+    // delete data
 
-		 *Expected Outcome:
-			New permission is added in list*/
-		wikiHomePage.goToPermissions();
-		wikiPermission.addPermisisonByType(DATA_USER2);
-		// mary can now edit the page
-		ELEMENT_WIKI_ICON_EDIT_PERMISSION_FOR_MARY.click();
-		click(ELEMENT_SAVE_PERMISSION);
-		manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-		open(perLink);
-		wikiHomePage.goToEditPage();
-		// delete data
+    manageLogInOut.signIn(username, password);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
+  }
 
-		manageLogInOut.signIn(username, password);
-		homePagePlatform.goToMySpaces();
-		spaceManagement.deleteSpace(space, false);
-	}
+  /**
+   * <li>Case ID:122844.</li>
+   * <li>Test Case Name: Add Permission for space wiki.</li>
+   * <li>Case ID:122846.</li>
+   * <li>Test Case Name: Edit permission for space wiki.</li>
+   * <li>Case ID:122845.</li>
+   * <li>Test Case Name: Delete permission for space wiki.</li>
+   */
+  /*
+   * Step Number: 1 Step Name: Step 1: Add Permission Step Description: - Open a
+   * page of the space that you want to set the permissions. - Click More -> Page
+   * Permission - Choose select user/select group/select membership then click Add
+   * - Click Save Input Data: Expected Outcome: New permission is added in list
+   */
 
-	/**
-	 *<li> Case ID:122845.</li>
-	 *<li> Test Case Name: Delete permission for space wiki.</li>
-	 */
-	@Test
-	public void test10_DeletePermissionForSpaceWiki() {
-		info("Test 8: Add Permission for space wiki");
-		String space =""+getRandomNumber();
-		String wiki = ""+getRandomNumber();
-		homePagePlatform.goToMySpaces();
-		spaceManagement.addNewSpaceSimple(space, "");
-		spaceHomePage.goToWikiTab();
-		wikiHomePage.goToAddBlankPage();
-		richTextEditor.addSimplePage(wiki,wiki);
-		wikiManagement.saveAddPage();
-		wikiHomePage.goToPermalink();
-		String perLink=ELEMENT_WIKI_PERMELINK.getValue();
+  @Test
+  public void test09_EditPermissionForSpaceWiki() {
+    info("Test 8: Add Permission for space wiki");
+    String space = "" + getRandomNumber();
+    String wiki = "" + getRandomNumber();
+    homePagePlatform.goToMySpaces();
+    spaceManagement.addNewSpaceSimple(space, "");
+    spaceHomePage.goToWikiTab();
+    wikiHomePage.goToAddBlankPage();
+    richTextEditor.addSimplePage(wiki, wiki);
+    wikiManagement.saveAddPage();
+    wikiHomePage.goToPermalink();
+    String perLink = ELEMENT_WIKI_PERMELINK.getValue();
 
-		/*Step Number: 1
-		 *Step Name: Step 1: Add Permission
-		 *Step Description:
-			- Open a page of the space that you want to set the permissions.
-			- Click More
-			-> Page Permission
-			- Choose select user/select group/select membership then click Add
-			- Click Save
-		 *Input Data:
+    wikiHomePage.goToPermissions();
+    wikiPermission.addPermisisonByType(DATA_USER2);
+    // mary can now edit the page
+    ELEMENT_WIKI_ICON_EDIT_PERMISSION_FOR_MARY.click();
+    click(ELEMENT_SAVE_PERMISSION);
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    open(perLink);
+    wikiHomePage.goToEditPage();
+    // delete data
 
-		 *Expected Outcome:
-			New permission is added in list*/
-		wikiHomePage.goToPermissions();
-		wikiPermission.addPermisisonByType(DATA_USER2);
-		click(ELEMENT_ADD_PERMISSION);
-		click(ELEMENT_SAVE_PERMISSION);
-		/*Step number: 2
-		 *Step Name: Step 2: Check permission of added user
-		 *Step Description:
-			- Login as user or member of the group above
-			- Open the wiki page at step 1
-		 *Input Data:
+    manageLogInOut.signIn(username, password);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
+  }
 
-		 *Expected Outcome:
-			- This user can do actions as permission set in step 1.*/
-		manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-		open(perLink);
-		$(byText(wiki)).waitUntil(Condition.appears,Configuration.timeout);
+  /**
+   * <li>Case ID:122845.</li>
+   * <li>Test Case Name: Delete permission for space wiki.</li>
+   */
+  /*
+   * Step Number: 1 Step Name: Step 1: Add Permission Step Description: - Open a
+   * page of the space that you want to set the permissions. - Click More -> Page
+   * Permission - Choose select user/select group/select membership then click Add
+   * - Click Save Input Data: Expected Outcome: New permission is added in list
+   * Step number: 2 Step Name: Step 2: Check permission of added user Step
+   * Description: - Login as user or member of the group above - Open the wiki
+   * page at step 1 Input Data: Expected Outcome: - This user can do actions as
+   * permission set in step 1.
+   */
 
-		info("Test 9: Delete permission for space wiki");
-		manageLogInOut.signIn(username, password);
+  @Test
+  public void test10_DeletePermissionForSpaceWiki() {
+    info("Test 8: Add Permission for space wiki");
+    String space = "" + getRandomNumber();
+    String wiki = "" + getRandomNumber();
+    homePagePlatform.goToMySpaces();
+    spaceManagement.addNewSpaceSimple(space, "");
+    spaceHomePage.goToWikiTab();
+    wikiHomePage.goToAddBlankPage();
+    richTextEditor.addSimplePage(wiki, wiki);
+    wikiManagement.saveAddPage();
+    wikiHomePage.goToPermalink();
+    String perLink = ELEMENT_WIKI_PERMELINK.getValue();
 
-		homePagePlatform.goToSpecificSpace(space);
-		spaceHomePage.goToWikiTab();
-		wikiHomePage.selectAPage(wiki);
-		wikiHomePage.goToPermissions();
-		$(byText(DATA_NAME_USER2)).parent().parent().find(ELEMENT_WIKI_ICON_DELETE_PERMISSION).click();
-		click(ELEMENT_SAVE_PERMISSION);
+    wikiHomePage.goToPermissions();
+    wikiPermission.addPermisisonByType(DATA_USER2);
+    click(ELEMENT_ADD_PERMISSION);
+    click(ELEMENT_SAVE_PERMISSION);
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    open(perLink);
+    $(byText(wiki)).waitUntil(Condition.appears, Configuration.timeout);
 
-		manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-		open(perLink);
-		$(ELEMENT_WIKI_PAGE_NOT_FOUND);
+    info("Test 9: Delete permission for space wiki");
+    manageLogInOut.signIn(username, password);
 
-		// delete data
+    homePagePlatform.goToSpecificSpace(space);
+    spaceHomePage.goToWikiTab();
+    wikiHomePage.selectAPage(wiki);
+    wikiHomePage.goToPermissions();
+    $(byText(DATA_NAME_USER2)).parent().parent().find(ELEMENT_WIKI_ICON_DELETE_PERMISSION).click();
+    click(ELEMENT_SAVE_PERMISSION);
 
-		manageLogInOut.signIn(username, password);
-		homePagePlatform.goToMySpaces();
-		spaceManagement.deleteSpace(space, false);
-	}
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    open(perLink);
+    $(ELEMENT_WIKI_PAGE_NOT_FOUND);
+
+    // delete data
+
+    manageLogInOut.signIn(username, password);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
+  }
 }
