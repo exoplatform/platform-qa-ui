@@ -2,13 +2,15 @@ package org.exoplatform.platform.qa.ui.platform.wiki;
 
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -28,7 +30,7 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
 /**
  * @author eXo
  */
-@Tag("smoke")
+@Tag("test")
 @Tag("wiki")
 public class WikiSettingsTestIT extends Base {
   HomePagePlatform      homePagePlatform;
@@ -74,6 +76,19 @@ public class WikiSettingsTestIT extends Base {
     platformPermission = new PlatformPermission(this);
     manageLogInOut = new ManageLogInOut(this);
     wikiPermission = new WikiPermission(this);
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
+      manageLogInOut.signOut();
+    }
+
+    manageLogInOut.signInCas(username, password);
+  }
+
+  @AfterEach
+  public void signout() {
+    manageLogInOut.signOut();
   }
 
   /**
@@ -181,6 +196,7 @@ public class WikiSettingsTestIT extends Base {
     ELEMENT_WIKI_PREVIEW_TEMPLATE.click();
     $(byText(title)).should(Condition.exist);
     $(byText(content)).should(Condition.exist);
+    $(ELEMENT_CLOSE_PREVIEW_WINDOW).click();
 
   }
 
@@ -367,6 +383,7 @@ public class WikiSettingsTestIT extends Base {
     click(ELEMENT_SAVE_PERMISSION);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     open(perLink);
+    refresh();
     $(byText(wiki)).waitUntil(Condition.appears, Configuration.timeout);
 
     info("Test 10 Edit permission for space wiki");
@@ -414,6 +431,7 @@ public class WikiSettingsTestIT extends Base {
     click(ELEMENT_SAVE_PERMISSION);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     open(perLink);
+    refresh();
     wikiHomePage.goToEditPage();
     // delete data
 
@@ -457,6 +475,7 @@ public class WikiSettingsTestIT extends Base {
     click(ELEMENT_SAVE_PERMISSION);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     open(perLink);
+    refresh();
     $(byText(wiki)).waitUntil(Condition.appears, Configuration.timeout);
 
     info("Test 9: Delete permission for space wiki");
