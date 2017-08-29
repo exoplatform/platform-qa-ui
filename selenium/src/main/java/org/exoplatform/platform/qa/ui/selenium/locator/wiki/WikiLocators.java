@@ -543,9 +543,8 @@ public class WikiLocators {
                                                                   By.xpath(".//*[@id='UIWikiSelectTemplateForm']//*[text()='Cancel']");
 
   // Preview page
-  public static final String          ELEMENT_PREVIEW_TEMPLATE_CONTENT                           =
-                                                                       "//*[@class='uiWikiPageTitlePreview' and contains(text(), '${template}')]";
-
+  public static final By              ELEMENT_PREVIEW_TEMPLATE_CONTENT                          =
+          By.xpath("//*[@id=\"UIWikiMaskWorkspace\"]/div[2]");
   public static final String          ELEMENT_PREVIEW_PAGE_CONTENT                               =
                                                                    ".//*[@id='UIPreviewContentDisplay']//*[contains(text(),'${content}')]";
 
