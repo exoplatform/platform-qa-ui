@@ -30,7 +30,7 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
 /**
  * @author eXo
  */
-@Tag("test")
+@Tag("sniff")
 @Tag("wiki")
 public class WikiSettingsTestIT extends Base {
   HomePagePlatform      homePagePlatform;
