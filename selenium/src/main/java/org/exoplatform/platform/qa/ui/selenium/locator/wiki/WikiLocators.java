@@ -1489,4 +1489,6 @@ public class WikiLocators {
                                                              $(byClassName("uiLeftContainerArea"));
 
   public static final SelenideElement ELEMENT_DRAFT_NEW_PAGE                                     = $(byId("UIWikiDraftGrid"));
+
+  public static final SelenideElement ELEMENT_MORE_LINK_WITH_USER=$(byXpath("//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li[2]/div"));
 }

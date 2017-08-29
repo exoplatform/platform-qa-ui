@@ -1,7 +1,6 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
-
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -202,7 +201,6 @@ public class WikiManagement {
     info("The page 1 is moved to page 2");
   }
 
-
   /**
    * Move page 1 to page 2 when user does not have edit permission in destination
    *
@@ -272,6 +270,7 @@ public class WikiManagement {
     $(ELEMENT_MOVE_BTNMOVE).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_MOVE_BTNMOVE).click();
   }
+
   /**
    * Open space switcher in move page popup
    */
@@ -376,11 +375,15 @@ public class WikiManagement {
    */
   public void watchAPage(String mess) {
     info("Click on More link");
-    $(ELEMENT_MORE_LINK).click();
+    if ($(ELEMENT_MORE_LINK).is(Condition.exist)) {
+      $(ELEMENT_MORE_LINK).click();
+    } else {
+      ELEMENT_MORE_LINK_WITH_USER.click();
+    }
     info("Click on watch link");
     $(ELEMENT_WATCH_LINK).click();
     info("Show message :'You started watching this page now.'");
-    $(byText(mess)).waitUntil(Condition.appears,Configuration.timeout);
+    $(byText(mess)).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_BTN_OK).click();
 
   }
@@ -390,11 +393,15 @@ public class WikiManagement {
    */
   public void unWatchAPage(String mess) {
     info("Click on More link");
-    $(ELEMENT_MORE_LINK).click();
+    if ($(ELEMENT_MORE_LINK).is(Condition.exist)) {
+      $(ELEMENT_MORE_LINK).click();
+    } else {
+      ELEMENT_MORE_LINK_WITH_USER.click();
+    }
     info("Click on watch link");
     $(ELEMENT_UNWATCH_LINK).click();
     info("Show message : 'You stopped watching this page now.'");
-    $(byText(mess)).waitUntil(Condition.appears,Configuration.timeout);
+    $(byText(mess)).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_BTN_OK).click();
 
   }
