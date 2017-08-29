@@ -95,8 +95,6 @@ public class WikiSettingsTestIT extends Base {
    * <li>Case ID:122830.</li>
    * <li>Test Case Name: Add new template.</li> Jira Issue :
    * https://jira.exoplatform.org/browse/WIKI-991
-   */
-  /*
    * Step Number: 1 Step Name: Step 1: Add new template Step Description: - Click
    * on Browse at top right and select Wiki Settings action - Click Template tab
    * -> Select Add More Templates button - Input all fields required and click
@@ -124,9 +122,6 @@ public class WikiSettingsTestIT extends Base {
    * -> Select Add More Templates button - Input all fields required and click
    * Save template Input Data: Expected Outcome: - Template is added successfully
    * and listed in Template table
-   */
-
-  /**
    * <li>Case ID:122832.</li>
    * <li>Test Case Name: Edit template.</li>
    */
@@ -172,8 +167,6 @@ public class WikiSettingsTestIT extends Base {
    * <li>Case ID:122833.</li>
    * <li>Test Case Name: Preview new template.</li> Jira issue :
    * https://jira.exoplatform.org/browse/WIKI-991
-   */
-  /*
    * Step Number: 1 Step Name: Step 1: Preview new template Step Description: -
    * Click on Browse at top right and select Wiki Settings action - Click Template
    * link -> Add more Template - Input all fields required and click Preview icon
@@ -203,8 +196,6 @@ public class WikiSettingsTestIT extends Base {
   /**
    * <li>Case ID:122840.</li>
    * <li>Test Case Name: Add Permission for Wiki.</li>
-   */
-  /*
    * Step Number: 1 Step Name: Step 1: Add Permission Step Description: - Check
    * the header (top bar) of the Wiki - Click Browse button at top right and
    * select Wiki Settings action, choose Permission tab - Click select user/select
@@ -251,8 +242,6 @@ public class WikiSettingsTestIT extends Base {
    * <li>Test Case Name: Edit permission for Wiki.</li>
    * <li>Case ID:122843.</li>
    * <li>Test Case Name: Delete permission for Wiki.</li>
-   */
-  /*
    * Step Number: 1 Step Name: Step 1: Add Permission Step Description: - Check
    * the header (top bar) of the Wiki - Click Browse button at top right and
    * select Wiki Settings action, choose Permission tab - Click select user/select
@@ -296,8 +285,6 @@ public class WikiSettingsTestIT extends Base {
    * <li>Test Case Name: Edit permission for Wiki.</li>
    * <li>Case ID:122843.</li>
    * <li>Test Case Name: Delete permission for Wiki.</li>
-   */
-  /*
    * Step Number: 1 Step Name: Step 1: Add Permission Step Description: - Check
    * the header (top bar) of the Wiki - Click Browse button at top right and
    * select Wiki Settings action, choose Permission tab - Click select user/select
@@ -351,8 +338,6 @@ public class WikiSettingsTestIT extends Base {
   /**
    * <li>Case ID:122844.</li>
    * <li>Test Case Name: Add Permission for space wiki.</li>
-   */
-  /*
    * Step Number: 1 Step Name: Step 1: Add Permission Step Description: - Open a
    * page of the space that you want to set the permissions. - Click More -> Page
    * Permission - Choose select user/select group/select membership then click Add
@@ -402,8 +387,6 @@ public class WikiSettingsTestIT extends Base {
    * <li>Test Case Name: Edit permission for space wiki.</li>
    * <li>Case ID:122845.</li>
    * <li>Test Case Name: Delete permission for space wiki.</li>
-   */
-  /*
    * Step Number: 1 Step Name: Step 1: Add Permission Step Description: - Open a
    * page of the space that you want to set the permissions. - Click More -> Page
    * Permission - Choose select user/select group/select membership then click Add
@@ -443,8 +426,6 @@ public class WikiSettingsTestIT extends Base {
   /**
    * <li>Case ID:122845.</li>
    * <li>Test Case Name: Delete permission for space wiki.</li>
-   */
-  /*
    * Step Number: 1 Step Name: Step 1: Add Permission Step Description: - Open a
    * page of the space that you want to set the permissions. - Click More -> Page
    * Permission - Choose select user/select group/select membership then click Add
