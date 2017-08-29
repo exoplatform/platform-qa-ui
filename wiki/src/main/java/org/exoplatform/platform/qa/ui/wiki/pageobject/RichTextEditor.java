@@ -40,7 +40,6 @@ public class RichTextEditor {
    * @throws Exception
    */
 
-
   public RichTextEditor(TestBase testBase) {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();

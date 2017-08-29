@@ -130,6 +130,7 @@ public class ActivityStream {
   public void checkCommentOfActivity(String activity, String comment) {
     info("Verify that the comment is added");
     ELEMENT_ACTIVITY_STREAM_CONTAINER.find(byText(comment)).should(Condition.exist);
+
     info("The comment is added successfully");
   }
 
