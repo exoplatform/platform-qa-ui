@@ -25,7 +25,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
 
 @Tag("wiki")
-@Tag("test")
+@Tag("sniff")
 
 public class WikiBasicActionManagePageEditTestIT extends Base {
 

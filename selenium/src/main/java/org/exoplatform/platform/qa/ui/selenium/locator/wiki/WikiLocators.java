@@ -530,8 +530,8 @@ public class WikiLocators {
   public static final String          ELEMENT_SELECT_TEMPLATE_LINK                               =
                                                                    ".//*[contains(text(),'${template}')]/../..//input";
 
-  public static final String          ELEMENT_TEMPLATE_PREVIEW_BTN                               =
-                                                                   ".//*[contains(text(),'${template}')]/../..//*[@class='uiIconPreview uiIconLightGray']";
+  public static final By              ELEMENT_TEMPLATE_PREVIEW_BTN                              =
+          By.xpath("//*[@id=\"UIWikiTemplateGrid\"]/tbody/tr[2]/td[4]/a[2]/i");
 
   public static final By              ELEMENT_TEMPLATE_SELECT_FORM                               =
                                                                    By.id("UIWikiSelectTemplateForm");
@@ -572,9 +572,8 @@ public class WikiLocators {
   public static final By              ELEMENT_WIKI_PAGE_INFORMATION_TABLE_TITLE                  =
                                                                                 By.xpath(".//*[@id='UIWikiPageVersionsList2']//*[text()='Page History']");
 
-  public static final String          ELEMENT_WIKI_PAGE_INFORMATION_TABLE_CONTENT                =
-                                                                                  ".//a[text()='reversion']/../../..//td[contains(text(),'${text}')]";
-
+  public static final By              ELEMENT_WIKI_PAGE_INFORMATION_TABLE_CONTENT               =
+          By.xpath("//*[@id='UIWikiPageInfoArea']/div");
   // Information area
   public static final String          ELEMENT_WIKI_PAGE_INFORMATION_AREA_EDIT_INFOR              =
                                                                                     ".//*[@id='UIWikiPageInfoArea']//*[contains(.,'${info}')]";
@@ -838,8 +837,8 @@ public class WikiLocators {
   public static final String          ELEMENT_DRAFT_OF_NEW_PAGE                                  =
                                                                 "//*[@id='UIWikiDraftGrid']//*[contains(text(),'${title}')]";
 
-  public static final String          ELEMENT_DELETE_DRAFT                                       =
-                                                           ".//*[@id='UIWikiDraftGrid']//*[contains(text(),'${title}')]/../../..//*[@class='uiIconDeleteDraft uiIconLightGray']";
+  public static final By              ELEMENT_DELETE_DRAFT                                      =
+          By.xpath("//*[@id=\"UIWikiDraftGrid\"]/table/tbody/tr/td[4]/a[2]/i");
 
   public static final String          ELEMENT_DRAFT_OF_EDIT_PAGE                                 =
                                                                  "//*[@id='UIWikiDraftGrid']//*[text()='${title}']";
