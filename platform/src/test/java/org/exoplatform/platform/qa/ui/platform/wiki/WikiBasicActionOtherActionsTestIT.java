@@ -516,8 +516,6 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
    * <li>Test Case Name: Watch a wiki page of intranet.</li>
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li> check issue WIKI-976 (wrong link in the mail)
-   */
-  /*
    * Step Number: 1 Step Name: Step 1: Watch Page Step Description: - Go to Wiki
    * application from Intranet - Open an existing page by clicking on page name in
    * navigation tree. - Click on More icon on toolbar and select Watch action in
@@ -564,8 +562,6 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     wikiManagement.saveAddPage();
 
     info("Check email notification and link's format of the page");
-    // goToMail(EMAIL_ADDRESS2, EMAIL_PASS);
-    // wikiManagement.checkEmailNotification(title);
 
     info("Delete page");
     homePagePlatform.goToWiki();
@@ -577,8 +573,6 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
    * <li>Test Case Name: Check permalink when user is member of page.</li>
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li>
-   */
-  /*
    * Step Number: 1 Step Name: Step 1: Check permalink when user is member of page
    * Step Description: - Go to wiki page - Add new page ( with permission default:
    * have view permission) - Select More -> choose Permalink - Copy the link -
@@ -614,8 +608,6 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
    * <li>Test Case Name: Check permalink when user is not member of page.</li>
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li>
-   */
-  /*
    * Step Number: 1 Step Name: Step 1: Add new page when set permission for page
    * Step Description: - Login by admin - Go to wiki page - Add new page - Set
    * permission for page: remove any permission - Select More -> choose Permalink
@@ -659,8 +651,6 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
    * <li>Test Case Name: Check permalink when user is member of space.</li>
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li>
-   */
-  /*
    * Step Number: 1 Step Name: Step 1: Add wiki page for space Step Description: -
    * Login with user A is space manager - Go to Space/wiki - Create a public page
    * Input Data: Expected Outcome: a public page is created by the manager of the
@@ -717,8 +707,6 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
    * <li>Test Case Name: Check permalink when user is not member of space.</li>
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li>
-   */
-  /*
    * Step Number: 1 Step Name: Step 1: Add new page for space when set permission
    * for page Step Description: - Login by admin<br /> - Add new space<br /> - Go
    * to space/wiki page<br /> - Add new page <br /> - Set permission for page:
@@ -765,8 +753,6 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
    * <li>Test Case Name: Unwatch Page.</li>
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li>
-   */
-  /*
    * Step Number: 1 Step Name: Step 1: Unwatch Page Step Description: - Open an
    * existing page by clicking on page name in navigation tree. - Click on More
    * icon on toolbar and select Unwatch action in menu Input Data: Expected
@@ -807,8 +793,6 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
    * <li>Test Case Name: Check when change link is restricted.</li>
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li>
-   */
-  /*
    * Step Number: 1 Step Name: Step 1: Add new page is public Step Description: -
    * Go to wiki page - Add new page ( with permission default: have view
    * permission) Input Data: Expected Outcome: The user B can view the page
@@ -867,8 +851,6 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
    * <li>Test Case Name: Check when change link is public.</li>
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li>
-   */
-  /*
    * Step Number: 1 Step Name: Step 1: Add new page is public Step Description: -
    * Go to wiki page - Add new page with restricted permission ( ex: remove any
    * permission of page) Input Data: Expected Outcome: Add new page successfully
@@ -921,8 +903,6 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
    * <li>Test Case Name: Change permission for page in Permalink page.</li>
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li>
-   */
-  /*
    * Step Number: 1 Step Name: Step 1: Change permission for page in Permalink
    * page Step Description: - Go to wiki page - Choose a page - Select More ->
    * choose Permalink - Click Manage Permission - Choose permission (
@@ -962,8 +942,6 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
    * <li>Test Case Name: Move wiki's page of space to portal.</li>
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li>
-   */
-  /*
    * Step Number: 1 Step Name: Step 1: Add new space Step Description: - Login
    * portal - Click join a space - Add new space for "Space 1" Input Data:
    * Expected Outcome: New spaceis added successfully
@@ -1031,8 +1009,6 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li> check issue WIKI-725 (bug -> the user mary can move
    * in the page without edit permission)
-   */
-  /*
    * Step Number: 1 Step Name: Step 1: Add new space Step Description: - Login by
    * admin - Click join a space - Add new space for "Space 1" Input Data: Expected
    * Outcome: New spaceis added successfully

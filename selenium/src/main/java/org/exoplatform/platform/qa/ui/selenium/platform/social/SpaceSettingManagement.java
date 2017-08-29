@@ -88,13 +88,6 @@ public class SpaceSettingManagement {
     $(byText(fullName)).waitUntil(Condition.appears,Configuration.timeout);
     $(byXpath("//*[@id=\"UIUserInvitation\"]/div[2]/div[2]/div[1]/div[1]/input")).pressEnter();
     $(ELEMENT_SPACE_BTN_INVITE).click();
-
-    info("Select a user");
-    //evt.click(ELEMENT_SPACE_SELECT_USER_IN_FORM.replace("{$name}", userName), 2);
-    info("click on Add button");
-    //evt.click(ELEMENT_ADD, 2);
-    info("click on Invite button");
-    //evt.click(ELEMENT_SPACE_MEMBERS_INVITE, 2);
     if (verify) {
       info("Verify that user is shown in invitation table");
       if (fullName != "" && fullName != null)
