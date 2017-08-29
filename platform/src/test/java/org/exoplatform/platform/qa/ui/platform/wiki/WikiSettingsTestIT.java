@@ -218,7 +218,7 @@ public class WikiSettingsTestIT extends Base {
     wikiManagement.saveAddPage();
 
     wikiHomePage.goToPermissions();
-    $(byText("any")).parent().parent().find(byClassName("uiIconDelete")).click();
+    $(byText("any")).parent().parent().find(ELEMENT_WIKI_ICON_DELETE_PERMISSION).click();
     wikiPermission.addPermisisonByType(DATA_USER2);
     click(ELEMENT_ADD_PERMISSION);
     click(ELEMENT_SAVE_PERMISSION);
@@ -259,7 +259,7 @@ public class WikiSettingsTestIT extends Base {
     wikiManagement.saveAddPage();
 
     wikiHomePage.goToPermissions();
-    $(byText("any")).parent().parent().find(byClassName("uiIconDelete")).click();
+    $(byText("any")).parent().parent().find(ELEMENT_WIKI_ICON_DELETE_PERMISSION).click();
     wikiPermission.addPermisisonByType(DATA_USER2);
     ELEMENT_WIKI_ICON_EDIT_PERMISSION_FOR_MARY.click();
     click(ELEMENT_SAVE_PERMISSION);
@@ -307,7 +307,7 @@ public class WikiSettingsTestIT extends Base {
     wikiManagement.saveAddPage();
 
     wikiHomePage.goToPermissions();
-    $(byText("any")).parent().parent().find(byClassName("uiIconDelete")).click();
+    $(byText("any")).parent().parent().find(ELEMENT_WIKI_ICON_DELETE_PERMISSION).click();
     wikiPermission.addPermisisonByType(DATA_USER2);
     click(ELEMENT_ADD_PERMISSION);
     click(ELEMENT_SAVE_PERMISSION);
