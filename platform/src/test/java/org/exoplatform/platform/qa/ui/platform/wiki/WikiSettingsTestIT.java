@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.wiki;
 
 import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
@@ -116,6 +117,45 @@ public class WikiSettingsTestIT extends Base {
     wikiSettingManagement.deleteTemplate(title);
 
   }
+
+  @Test
+  public void test01_1_AddNewTemplateWithoutTitle() {
+    info("Test 1: Add new template");
+    String title = "Sample Template Title...";
+    homePagePlatform.goToWiki();
+    wikiHomePage.goToWikiSettingPage();
+    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();
+    $(ELEMENT_SAVE_TEMPLATE).click();
+    ELEMENT_WIKI_OK_SAVE_TEMPLATE.waitUntil(Condition.appears,Configuration.timeout).click();
+    ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(title)).should(Condition.exist);
+    wikiSettingManagement.deleteTemplate(title);
+
+  }
+  @Test
+  public void test01_1_2_AddNewTemplateWithExistedTitle() {
+    info("Test 1: Add new template");
+    String title ="title" + getRandomNumber();;
+    String description = "description" + getRandomNumber();
+    String content = "content" + getRandomNumber();
+    String message="The page title already exists. Please select another one.";
+    homePagePlatform.goToWiki();
+    wikiHomePage.goToWikiSettingPage();
+    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();
+    wikiSettingManagement.addTemplate(title, description, content);
+    ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(title)).should(Condition.exist);
+    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();
+    $(ELEMENT_TITLE_TEMPLATE).waitUntil(Condition.appears, Configuration.timeout).setValue(title);
+    $(ELEMENT_DESCRIPTION_TEMPLATE).setValue(description);
+    $(ELEMENT_CONTENT_TEMPLATE).setValue(content);
+    $(ELEMENT_SAVE_TEMPLATE).click();
+    $(byText(message)).should(Condition.exist);
+    ELEMENT_BUTTON_OK_IN_WARNING_POPUB_TEMPLATE.click();
+    $(ELEMENT_CANCEL_TEMPLATE).click();
+    wikiHomePage.goToWikiSettingPage();
+    wikiSettingManagement.deleteTemplate(title);
+
+  }
+
   /*
    * Step Number: 1 Step Name: Step 1: Add new template Step Description: - Click
    * on Browse at top right and select Wiki Settings action - Click Template tab

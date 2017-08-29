@@ -1522,4 +1522,6 @@ public class WikiLocators {
                                                                                                            .get(1);
 
   public static final SelenideElement ELEMENT_WIKI_PERMELINK                                     = $(byId("PermalinkText"));
+
+  public static final SelenideElement ELEMENT_BUTTON_OK_IN_WARNING_POPUB_TEMPLATE=$(byClassName("warningIcon")).parent().parent().parent().find(byClassName("btn"));
 }
