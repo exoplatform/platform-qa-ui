@@ -375,11 +375,15 @@ public class WikiManagement {
    */
   public void watchAPage(String mess) {
     info("Click on More link");
-    $(ELEMENT_MORE_LINK).click();
+    if ($(ELEMENT_MORE_LINK).is(Condition.exist)) {
+      $(ELEMENT_MORE_LINK).click();
+    } else {
+      ELEMENT_MORE_LINK_WITH_USER.click();
+    }
     info("Click on watch link");
     $(ELEMENT_WATCH_LINK).click();
     info("Show message :'You started watching this page now.'");
-    $(ELEMENT_POPUP_MESSAGE_CONTENT).waitUntil(Condition.appears, Configuration.timeout);
+    $(byText(mess)).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_BTN_OK).click();
 
   }
@@ -389,12 +393,16 @@ public class WikiManagement {
    */
   public void unWatchAPage(String mess) {
     info("Click on More link");
-    evt.click(ELEMENT_MORE_LINK);
+    if ($(ELEMENT_MORE_LINK).is(Condition.exist)) {
+      $(ELEMENT_MORE_LINK).click();
+    } else {
+      ELEMENT_MORE_LINK_WITH_USER.click();
+    }
     info("Click on watch link");
-    evt.click(ELEMENT_UNWATCH_LINK);
+    $(ELEMENT_UNWATCH_LINK).click();
     info("Show message : 'You stopped watching this page now.'");
-    evt.waitForAndGetElement(ELEMENT_POPUP_MESSAGE_CONTENT.replace("${message}", mess), 2000, 0);
-    evt.click(ELEMENT_BTN_OK);
+    $(byText(mess)).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_BTN_OK).click();
 
   }
 
@@ -459,13 +467,13 @@ public class WikiManagement {
    */
   public void unCheckViewAUserOfPage(Object locator) {
     info("Click on More link");
-    evt.click(ELEMENT_MORE_LINK);
+    $(ELEMENT_MORE_LINK).click();
     info("Click on permission link");
-    evt.click(ELEMENT_PERMISSION_LINK);
+    $(ELEMENT_PERMISSION_LINK).click();
     info("Uncheck view permission checkbox");
     evt.uncheck(locator, 2);
     info("Click on save button");
-    evt.click(ELEMENT_PERMISSION_BUTTON_SAVE);
+    $(ELEMENT_PERMISSION_BUTTON_SAVE).click();
   }
 
   /**

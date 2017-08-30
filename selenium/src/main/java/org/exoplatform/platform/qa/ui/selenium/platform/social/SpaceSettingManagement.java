@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -80,17 +81,13 @@ public class SpaceSettingManagement {
    * @param fullName
    */
   public void inviteUser(String userName, boolean verify, String fullName) {
-    goToMemberTab();
-    info("--Search user ");
-    ELEMENT_INPUT_INVITE_USER.sendKeys(userName);
-    $(ELEMENT_SEARCH_USERS_ICON).click();
 
-    info("Select a user");
-    evt.click(ELEMENT_SPACE_SELECT_USER_IN_FORM.replace("{$name}", userName), 2);
-    info("click on Add button");
-    evt.click(ELEMENT_ADD, 2);
-    info("click on Invite button");
-    evt.click(ELEMENT_SPACE_MEMBERS_INVITE, 2);
+    info("--Search user " );
+    ELEMENT_INPUT_INVITE_USER.click();
+    $(byXpath("//*[@id=\"UIUserInvitation\"]/div[2]/div[2]/div[1]/div[1]/input")).setValue(userName).pressEnter();
+    $(byText(fullName)).waitUntil(Condition.appears,Configuration.timeout);
+    $(byXpath("//*[@id=\"UIUserInvitation\"]/div[2]/div[2]/div[1]/div[1]/input")).pressEnter();
+    $(ELEMENT_SPACE_BTN_INVITE).click();
     if (verify) {
       info("Verify that user is shown in invitation table");
       if (fullName != "" && fullName != null)

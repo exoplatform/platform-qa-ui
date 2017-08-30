@@ -179,8 +179,8 @@ public class WikiHomePage {
    */
   public void goToPermissions() {
     info("Permissions page");
-    evt.click(ELEMENT_MORE_LINK);
-    evt.click(ELEMENT_PERMISSION_LINK);
+    $(ELEMENT_MORE_LINK).click();
+    $(ELEMENT_PERMISSION_LINK).click();
     info("The permission popup is shown");
   }
 
@@ -233,8 +233,8 @@ public class WikiHomePage {
    */
   public void goToPermalink() {
     info("Go to permalink");
-    evt.mouseOverAndClick(ELEMENT_MORE_LINK);
-    evt.mouseOverAndClick(ELEMENT_PERMALINK_LINK);
+    $(ELEMENT_MORE_LINK).click();
+    $(ELEMENT_PERMALINK_LINK).click();
   }
 
   /**

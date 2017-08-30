@@ -1,5 +1,7 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -66,7 +68,7 @@ public class WikiPermission {
       break;
     case Edit_Pages:
       info("Select Edit pages permission");
-      evt.check(ELEMENT_PERMISSION_EDIT_CHECKBOX.replace("$userGroup", userGroup), 2);
+      $(byText(userGroup)).parent().parent().findAll(byClassName("uiCheckbox")).get(1).click();
       break;
     case Admin_Pages:
       info("Select View pages permission");
@@ -114,10 +116,9 @@ public class WikiPermission {
   public void addPermisisonByType(String groupUsers) {
     if (!groupUsers.isEmpty()) {
       info("Type a:" + groupUsers + " to the textbox");
-      evt.type(ELEMENT_PERMISSION_TYPE_INPUT, groupUsers, true);
+     $(ELEMENT_PERMISSION_TYPE_INPUT).setValue(groupUsers);
       info("Click on Add button");
-      evt.click(ELEMENT_PERMISSION_ADD_BUTTON);
-      evt.waitForAndGetElement(ELEMENT_DELETE_PERMISSION.replace("$user", groupUsers));
+      $(ELEMENT_PERMISSION_ADD_BUTTON).click();
       info("The group/user/membership is added successfully");
     }
   }
@@ -196,7 +197,7 @@ public class WikiPermission {
   public void savePermisison(Boolean... booleans) {
     boolean savePresent = (booleans.length > 0 ? booleans[0] : true);
     info("Click on Save button");
-    evt.click(ELEMENT_PERMISSION_BUTTON_SAVE, 0, true);
+    $(ELEMENT_PERMISSION_BUTTON_SAVE).click();
     if (!savePresent)
       evt.waitForElementNotPresent(ELEMENT_PERMISSION_BUTTON_SAVE);
 
