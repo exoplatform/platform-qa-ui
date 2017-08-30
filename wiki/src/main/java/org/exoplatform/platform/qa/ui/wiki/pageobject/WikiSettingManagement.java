@@ -1,8 +1,12 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
@@ -42,7 +46,13 @@ public class WikiSettingManagement {
     info("Verify that the search results is shown that matchs with keyword");
     evt.waitForAndGetElement(ELEMENT_WIKI_SETTINGS_RESULTS.replace("${tempalte}", template), 3000, 0);
   }
-
+public void addTemplate(String title,String description,String content){
+    $(ELEMENT_TITLE_TEMPLATE).waitUntil(Condition.appears, Configuration.timeout).setValue(title);
+    $(ELEMENT_DESCRIPTION_TEMPLATE).setValue(description);
+    $(ELEMENT_CONTENT_TEMPLATE).setValue(content);
+    $(ELEMENT_SAVE_TEMPLATE).click();
+    ELEMENT_WIKI_OK_SAVE_TEMPLATE.waitUntil(Condition.appears,Configuration.timeout).click();
+}
   /**
    * Edit a wiki template
    *
@@ -50,20 +60,18 @@ public class WikiSettingManagement {
    * @param text
    */
   public void editTemplate(String template, String title, String subTitle, String text) {
-    evt.click(By.xpath(ELEMENT_EDIT_TEMPLATE.replace("{$template}", template)));
     if (title != "") {
-      evt.type(ELEMENT_TITLE_TEMPLATE, title, true);
+      $(ELEMENT_TITLE_TEMPLATE).setValue(title);
     }
 
-    evt.click(ELEMENT_SAVE_TEMPLATE);
+    $(ELEMENT_SAVE_TEMPLATE).click();
   }
 
   public void deleteTemplate(String template) {
     info("Delete template " + template);
-    evt.click(By.xpath(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template)));
+    $(byText(template)).parent().parent().find(ELEMENT_WIKI_ICON_DELETE_TEMPLATE).click();
     alert.acceptAlert();
-    evt.waitForElementNotPresent(By.xpath(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template)));
-  }
+    ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(template)).shouldNot(Condition.exist);  }
 
   /**
    * Go to Wiki Setting Permission page
