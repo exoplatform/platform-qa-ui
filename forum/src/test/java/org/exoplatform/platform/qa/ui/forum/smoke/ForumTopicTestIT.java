@@ -1,4 +1,4 @@
-package org.exoplatform.selenium.platform.forum.smoke;
+package org.exoplatform.platform.qa.ui.forum.smoke;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;

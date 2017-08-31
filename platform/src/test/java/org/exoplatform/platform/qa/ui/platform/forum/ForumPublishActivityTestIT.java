@@ -27,6 +27,7 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_COMMENT_BLOC;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
@@ -103,6 +104,8 @@ public class ForumPublishActivityTestIT extends Base{
      */
     public void deleteDataTest(){
         info("Delete data test");
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+        executeJavaScript("window.scrollBy(0,-550)");
         homePagePlatform.goToForum();
         forumHomePage.goToHomeCategory();
         info("Delete catefory");
@@ -639,14 +642,12 @@ public  void test13_JumpToRelatedReply() {
     activityStream.addcomment_to_activity(id);
     info("Mouse over on the comment");
     //mouseOver(ELEMENT_COMMENT_TEXT.replace("${activityText}",topic).replace("${commentText}",comment),true);
-    $(byId(ELEMENT_COMMENT_BLOC.replace("{id}",id))).hover();
+    $(byId(ELEMENT_COMMENT_BLOC.replace("{id}",id))).click();
     info("Verifyt that View is shown");
-    Integer idComment = Integer.parseInt(id) + 1;
-    //$(byId(ELEMENT_COMMENT_BLOC.replace("{id}",id))).find(byClassName("uiIconWatch uiIconLightGray"));
-    info("Click on the View icon");
+   info("Click on the View icon");
     $(byClassName("viewComment")).click();
-    //$(byId(ELEMENT_ACTIVITY_COMMENT_VIEW_HOVEROVER.replace("{id}", id.toString()))).click();
     info("Verify that the page redirects to related reply in the forum");
+    executeJavaScript("window.scrollBy(0,-550)");
     $(byText(topic)).should(Condition.appears);
     info("The related reply is shown in forum successfully");
     deleteDataTest();

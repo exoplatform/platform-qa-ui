@@ -485,9 +485,6 @@ public class ForumTopicManagement {
     switchTo().frame(0);
     $(byXpath("/html/body")).sendKeys(message);
     switchTo().defaultContent();
-    //plf.inputFrame(ELEMENT_POST_CONTENT, message);
-    // $(ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR).sendKeys(message);
-
     info("click on Attached file button");
     $(ELEMENT_START_TOPIC_ATTACH_FILE).click();
     File file = $(By.className("file")).uploadFromClasspath("topic_attachment.txt");

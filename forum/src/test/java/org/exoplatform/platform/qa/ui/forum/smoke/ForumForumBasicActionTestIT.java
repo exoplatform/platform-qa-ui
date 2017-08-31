@@ -1,4 +1,4 @@
-package org.exoplatform.selenium.platform.forum.smoke;
+package org.exoplatform.platform.qa.ui.forum.smoke;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;

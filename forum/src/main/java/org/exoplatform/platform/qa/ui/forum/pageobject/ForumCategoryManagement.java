@@ -1,13 +1,13 @@
 package org.exoplatform.platform.qa.ui.forum.pageobject;
 
-import static com.codeborne.selenide.Condition.appears;
-import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.page;
 import static com.codeborne.selenide.Selenide.refresh;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -138,11 +138,10 @@ public class ForumCategoryManagement {
   public void deleteCategory(String nameCat) {
     // TODO Auto-generated method stub
     info("Wait the category is shown");
-    $(byText(nameCat)).waitUntil(appears, Configuration.timeout);
-    info("Refresh the page");
-    refresh();
+    if($(ELEMENT_MENU_MANAGE_CATEGORY).waitUntil(disappears,Configuration.timeout).is(not(exist)))
+    {ELEMENT_CAT_CONTAINER.find(byText(nameCat)).waitUntil(appears, Configuration.timeout).click();}
     info("Select Delete link");
-     selectItemManageCategoryMenu(specifManageCategoryMenu.DELETE);
+    selectItemManageCategoryMenu(specifManageCategoryMenu.DELETE);
     info("Verify that the category is deleted");
     $(withText(nameCat)).shouldNot(exist);
     info("The category is deleted successfully");

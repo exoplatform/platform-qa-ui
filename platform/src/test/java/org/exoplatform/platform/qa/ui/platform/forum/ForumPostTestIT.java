@@ -105,6 +105,7 @@ public class ForumPostTestIT extends Base {
      */
     public void deletaData() {
         info("Open forum portlet");
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
         executeJavaScript("window.scrollBy(0,-550)");
         homePagePlatform.goToForum();
         info("Go to Forum home page");
