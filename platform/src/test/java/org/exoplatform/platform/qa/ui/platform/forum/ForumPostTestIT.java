@@ -162,7 +162,7 @@ public class ForumPostTestIT extends Base {
             $(byText(content)).should(Condition.exist);
             info("Test 4: Delete a post");
             info("Click on delete button of the post that is replied");
-            $(byText(content)).parent().parent().parent().parent().find(byText("Delete")).click();
+            $(byText(content+content)).parent().parent().parent().parent().find(byText("Delete")).click();
             info("Click on OK button of the confirm popup");
             $(ELEMENT_DELETE_BOX_CONFIRMATION).click();
             info("Verify that the replied post is deleted");

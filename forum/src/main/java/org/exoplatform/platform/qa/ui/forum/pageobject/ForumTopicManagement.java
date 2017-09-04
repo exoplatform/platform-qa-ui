@@ -234,10 +234,10 @@ public class ForumTopicManagement {
   public void editPost(String newTitle, String newContent) {
     $(byText(newContent)).parent().parent().parent().parent().find(byText("Edit")).click();
     if (!newTitle.isEmpty())
-    $(ELEMENT_TITLE_POST).setValue(newTitle);
+    $(ELEMENT_TITLE_POST).sendKeys(newTitle);
     if (!newContent.isEmpty())
       switchTo().frame(0);
-    $(byXpath("/html/body")).setValue(newContent);
+    $(byXpath("/html/body")).sendKeys(newContent);
     switchTo().defaultContent();
 
     $(ELEMENT_POST_FORM_SUBMIT).click();
@@ -253,7 +253,7 @@ public class ForumTopicManagement {
     $(byText(newContent)).parent().parent().parent().parent().find(byText("Quote")).click();
     if (newContent != "")
       switchTo().frame(0);
-    $(byXpath("/html/body")).setValue(newContent);
+    $(byXpath("/html/body")).sendKeys(newContent);
     switchTo().defaultContent();
     $(ELEMENT_POST_FORM_SUBMIT).click();
   }
@@ -272,7 +272,7 @@ public class ForumTopicManagement {
 
     if (content != "")
       switchTo().frame(0);
-    $(byXpath("/html/body")).setValue(content);
+    $(byXpath("/html/body")).sendKeys(content);
     switchTo().defaultContent();
 
     $(ELEMENT_POST_FORM_SUBMIT).click();
