@@ -255,7 +255,7 @@ public class ForumTopicManagement {
       switchTo().frame(0);
     $(byXpath("/html/body")).sendKeys(newContent);
     switchTo().defaultContent();
-    $(ELEMENT_POST_FORM_SUBMIT).click();
+    $(ELEMENT_POST_FORM_SUBMIT).waitUntil(appears,Configuration.timeout).scrollTo().click();
   }
 
   /**
@@ -274,8 +274,7 @@ public class ForumTopicManagement {
       switchTo().frame(0);
     $(byXpath("/html/body")).sendKeys(content);
     switchTo().defaultContent();
-
-    $(ELEMENT_POST_FORM_SUBMIT).click();
+    $(ELEMENT_POST_FORM_SUBMIT).waitUntil(appears,Configuration.timeout).scrollTo().click();
   }
 
   public void privatePostFromPost(String newTitle, String content) {
