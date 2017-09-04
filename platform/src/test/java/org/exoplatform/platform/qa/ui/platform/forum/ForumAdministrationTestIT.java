@@ -113,6 +113,7 @@ public class ForumAdministrationTestIT extends Base {
      * <li>Post-Condition:</li>
      */
     @Test
+    @Tag("test")
     public void test02_03_04_AddEditDeleteBBCode() {
         info("Test 2: Add BB code");
         info("Create data test");

@@ -161,7 +161,6 @@ public class ForumTopicTestIT extends Base {
      *<li> Post-Condition: </li>
      */
     @Test
-    @Tag("test")
     public void test04_MoveATopic() {
         info("Test 4: Move a topic");
 

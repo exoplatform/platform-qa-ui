@@ -638,7 +638,7 @@ public  void test13_JumpToRelatedReply() {
     refresh();
     info("Add a comment to the topic's activity");
     activityStream.checkActivity(topic);
-    String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];
+    String id = $(byText(topic)).parent().parent().parent().parent().getAttribute("id").split("ActivityContextBox")[1];
     activityStream.addcomment_to_activity(id);
     info("Mouse over on the comment");
     //mouseOver(ELEMENT_COMMENT_TEXT.replace("${activityText}",topic).replace("${commentText}",comment),true);
