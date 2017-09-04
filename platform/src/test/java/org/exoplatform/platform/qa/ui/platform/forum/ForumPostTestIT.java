@@ -159,7 +159,7 @@ public class ForumPostTestIT extends Base {
             info("Test 2: Edit a post");
             forumTopicManagement.editPost(title, content);
             info("Verify that the post is edited");
-            $(byText(content)).should(Condition.exist);
+            $(byText(content+content)).should(Condition.exist);
             info("Test 4: Delete a post");
             info("Click on delete button of the post that is replied");
             $(byText(content+content)).parent().parent().parent().parent().find(byText("Delete")).click();

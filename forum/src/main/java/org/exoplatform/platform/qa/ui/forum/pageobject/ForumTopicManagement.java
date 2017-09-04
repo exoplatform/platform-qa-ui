@@ -219,7 +219,7 @@ public class ForumTopicManagement {
     if (!title.isEmpty())
       $(ELEMENT_TITLE_POST).setValue(title);
     switchTo().frame(0);
-    $(byXpath("/html/body")).setValue(content);
+    $(byXpath("/html/body")).sendKeys(content);
     switchTo().defaultContent();
     $(ELEMENT_POST_FORM_SUBMIT).click();
     info("Verify that the post is created");
@@ -285,7 +285,7 @@ public class ForumTopicManagement {
 
     if (content != "")
       switchTo().frame(0);
-    $(byXpath("/html/body")).setValue(content);
+    $(byXpath("/html/body")).sendKeys(content);
     switchTo().defaultContent();
 
     $(ELEMENT_POST_FORM_SUBMIT).click();
