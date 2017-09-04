@@ -88,10 +88,10 @@ public class ForumCategoryTestIT extends Base {
         info("Test 03: Edit a category");
         info("edit category");
         forumCategoryManagement.editCategory(nameCat2);
-
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToForum();
         info("Test 04: Delete a category");
         info("delete category");
-        forumHomePage.goToHomeCategory();
         forumCategoryManagement.deleteCategory(nameCat2);
     }
 

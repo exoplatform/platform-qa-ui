@@ -63,7 +63,7 @@ public class ForumTopicManagement {
       $(byXpath("//*[@id=\"UIMoveTopicForm\"]/div[2]/div[1]/div/div/ul/li[1]/ul/li/a")).click();
     }else{
       info("Select the forum");
-      $(byXpath("//*[@id=\"UIMoveTopicForm\"]/div[2]/div[1]/div/div/ul/li[1]/ul/li/a")).click();
+      $(byId("UIMoveTopicForm")).find(byXpath("//*[@id=\"UIMoveTopicForm\"]/div[2]/div[1]/div/div/ul/li/ul/li/a")).click();
     }
     info("Finish moving");
 
@@ -218,7 +218,9 @@ public class ForumTopicManagement {
   public void replyTopic(String title, String content) {
     if (!title.isEmpty())
       $(ELEMENT_TITLE_POST).setValue(title);
-    plf.inputFrame(ELEMENT_POST_CONTENT, content);
+    switchTo().frame(0);
+    $(byXpath("/html/body")).setValue(content);
+    switchTo().defaultContent();
     $(ELEMENT_POST_FORM_SUBMIT).click();
     info("Verify that the post is created");
   }
@@ -234,7 +236,10 @@ public class ForumTopicManagement {
     if (!newTitle.isEmpty())
     $(ELEMENT_TITLE_POST).setValue(newTitle);
     if (!newContent.isEmpty())
-    plf.inputFrame(ELEMENT_POST_CONTENT, newContent);
+      switchTo().frame(0);
+    $(byXpath("/html/body")).setValue(newContent);
+    switchTo().defaultContent();
+
     $(ELEMENT_POST_FORM_SUBMIT).click();
   }
 
@@ -247,7 +252,9 @@ public class ForumTopicManagement {
   public void quotePost(String title, String newContent) {
     $(byText(newContent)).parent().parent().parent().parent().find(byText("Quote")).click();
     if (newContent != "")
-    plf.inputFrame(ELEMENT_POST_CONTENT, newContent);
+      switchTo().frame(0);
+    $(byXpath("/html/body")).setValue(newContent);
+    switchTo().defaultContent();
     $(ELEMENT_POST_FORM_SUBMIT).click();
   }
 
@@ -264,7 +271,10 @@ public class ForumTopicManagement {
     $(ELEMENT_TITLE_POST).setValue(newTitle);
 
     if (content != "")
-    plf.inputFrame(ELEMENT_POST_CONTENT, content);
+      switchTo().frame(0);
+    $(byXpath("/html/body")).setValue(content);
+    switchTo().defaultContent();
+
     $(ELEMENT_POST_FORM_SUBMIT).click();
   }
 
@@ -274,7 +284,10 @@ public class ForumTopicManagement {
     $(ELEMENT_TITLE_POST).setValue(newTitle);
 
     if (content != "")
-    plf.inputFrame(ELEMENT_POST_CONTENT, content);
+      switchTo().frame(0);
+    $(byXpath("/html/body")).setValue(content);
+    switchTo().defaultContent();
+
     $(ELEMENT_POST_FORM_SUBMIT).click();
   }
 

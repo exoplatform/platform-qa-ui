@@ -131,7 +131,8 @@ public class ForumForumBasicActionTestIT extends Base {
         info("Delete forum");
         forumForumManagement.deleteForum(nameForum);
         info("Delete category");
-        forumHomePage.goToHomeCategory();
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToForum();
         forumCategoryManagement.deleteCategory(nameCat);
     }
 

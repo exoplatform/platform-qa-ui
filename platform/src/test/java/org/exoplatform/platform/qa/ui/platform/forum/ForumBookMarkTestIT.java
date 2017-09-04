@@ -101,7 +101,8 @@ public class ForumBookMarkTestIT extends Base {
         info("Bookmark the topic");
         forumHomePage.bookmark(nameCat);
         info("Delete the category");
-//        forumHomePage.goToHomeCategory();
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToForum();
         forumCategoryManagement.deleteCategory(nameCat);
     }
 

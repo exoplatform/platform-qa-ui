@@ -507,7 +507,7 @@ public static final SelenideElement ELEMENT_BUTTON_OK_IMPORT=$(byClassName("UIPo
   // Manage menu
 
   public static final By              ELEMENT_MENU_MANAGE_CATEGORY                       =
-                                                                   By.xpath("//*[@class='uiIconForumManageCategory uiIconForumLightGray']");
+                                                                   By.xpath("//*[@id=\"UICategory\"]/table/caption/ul/li[5]/div");
 
   public static final By              ELEMENT_EDIT_CATEGORY                              =
                                                             By.xpath("//*[@class='dropdown-menu uiCategoryPopupMenu']/li[1]/a");

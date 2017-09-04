@@ -233,7 +233,7 @@ public class ForumPostTestIT extends Base {
         prepareData();
         info("Reply a topic");
         forumTopicManagement.postReply(title, content);
-        {
+
             info("Test 5: Add a Private post from post");
             forumTopicManagement.privatePostFromPost(newTitle, content);
             info("Click on delete button of the post that is replied");
@@ -245,6 +245,6 @@ public class ForumPostTestIT extends Base {
             $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
             info("Delete data");
             deletaData();
-        }
+
     }
 }

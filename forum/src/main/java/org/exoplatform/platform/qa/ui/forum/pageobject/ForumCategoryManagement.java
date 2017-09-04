@@ -74,7 +74,7 @@ public class ForumCategoryManagement {
    */
   public void selectItemManageCategoryMenu(specifManageCategoryMenu item) {
     info("Waiting manage menu is shown");
-    $(ELEMENT_MENU_MANAGE_CATEGORY).should(appears);
+    $(ELEMENT_MENU_MANAGE_CATEGORY).waitUntil(appears,Configuration.timeout);
     info("Click on Manage menu");
     $(ELEMENT_MENU_MANAGE_CATEGORY).click();
     switch (item) {
@@ -138,7 +138,7 @@ public class ForumCategoryManagement {
   public void deleteCategory(String nameCat) {
     // TODO Auto-generated method stub
     info("Wait the category is shown");
-    if($(ELEMENT_MENU_MANAGE_CATEGORY).waitUntil(disappears,Configuration.timeout).is(not(exist)))
+    if($(ELEMENT_MENU_MANAGE_CATEGORY).is(not(exist)))
     {ELEMENT_CAT_CONTAINER.find(byText(nameCat)).waitUntil(appears, Configuration.timeout).click();}
     info("Select Delete link");
     selectItemManageCategoryMenu(specifManageCategoryMenu.DELETE);
