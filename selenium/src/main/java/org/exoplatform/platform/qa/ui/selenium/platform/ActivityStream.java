@@ -968,6 +968,7 @@ public class ActivityStream {
   public void addcomment_to_activity (String id) {
     info("Add Comment");
     String comment = "Comment" + getRandomNumber();
+    executeJavaScript("window.scrollBy(0,150)");
     $(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
     // insert comment
     $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();

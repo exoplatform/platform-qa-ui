@@ -255,7 +255,7 @@ if($(ELEMENT_CATEGORY_BREADCUMB_HOME).is(Condition.exist))
     info("Click on OK buton of Confirm popup");
     $(ELEMENT_BBCODE_CONFIRM_DELETETAG).click();
     info("Verify that BBcode is closed");
-    $(byText(tag.toUpperCase())).should(Condition.exist);
+    $(byText(tag.toUpperCase())).shouldNot(Condition.exist);
     info("Close the popup");
     $(ELEMENT_BBCODE_POPUP_CLOSEBTN).click();
   }
