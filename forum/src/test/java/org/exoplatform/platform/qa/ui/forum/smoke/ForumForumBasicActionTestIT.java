@@ -1,13 +1,16 @@
 package org.exoplatform.platform.qa.ui.forum.smoke;
 
+import static com.codeborne.selenide.Condition.appears;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_CAT_CONTAINER;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_CONTENT_SEARCH_RESULT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_SEARCH_TEXTBOX;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -168,7 +171,9 @@ public class ForumForumBasicActionTestIT extends Base {
 
         info("Delete data");
         forumHomePage.goToHomeCategory();
+        ELEMENT_CAT_CONTAINER.find(byText(category2)).waitUntil(appears, Configuration.timeout).click();
         forumCategoryManagement.deleteCategory(category2);
+         ELEMENT_CAT_CONTAINER.find(byText(category1)).waitUntil(appears, Configuration.timeout).click();
         forumCategoryManagement.deleteCategory(category1);
     }
 
