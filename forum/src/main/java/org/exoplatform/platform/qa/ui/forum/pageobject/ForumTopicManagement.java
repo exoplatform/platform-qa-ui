@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.forum.pageobject;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -221,6 +222,7 @@ public class ForumTopicManagement {
     switchTo().frame(0);
     $(byXpath("/html/body")).sendKeys(content);
     switchTo().defaultContent();
+    executeJavaScript("window.scrollBy(0,150)");
     $(ELEMENT_POST_FORM_SUBMIT).click();
     info("Verify that the post is created");
   }
@@ -239,7 +241,7 @@ public class ForumTopicManagement {
       switchTo().frame(0);
     $(byXpath("/html/body")).sendKeys(newContent);
     switchTo().defaultContent();
-
+    executeJavaScript("window.scrollBy(0,150)");
     $(ELEMENT_POST_FORM_SUBMIT).click();
   }
 
@@ -255,7 +257,8 @@ public class ForumTopicManagement {
       switchTo().frame(0);
     $(byXpath("/html/body")).sendKeys(newContent);
     switchTo().defaultContent();
-    $(ELEMENT_POST_FORM_SUBMIT).waitUntil(appears,Configuration.timeout).scrollTo().click();
+    executeJavaScript("window.scrollBy(0,150)");
+    $(ELEMENT_POST_FORM_SUBMIT).click();
   }
 
   /**
@@ -274,7 +277,8 @@ public class ForumTopicManagement {
       switchTo().frame(0);
     $(byXpath("/html/body")).sendKeys(content);
     switchTo().defaultContent();
-    $(ELEMENT_POST_FORM_SUBMIT).waitUntil(appears,Configuration.timeout).scrollTo().click();
+    executeJavaScript("window.scrollBy(0,150)");
+    $(ELEMENT_POST_FORM_SUBMIT).click();
   }
 
   public void privatePostFromPost(String newTitle, String content) {
@@ -286,7 +290,7 @@ public class ForumTopicManagement {
       switchTo().frame(0);
     $(byXpath("/html/body")).sendKeys(content);
     switchTo().defaultContent();
-
+    executeJavaScript("window.scrollBy(0,150)");
     $(ELEMENT_POST_FORM_SUBMIT).click();
   }
 

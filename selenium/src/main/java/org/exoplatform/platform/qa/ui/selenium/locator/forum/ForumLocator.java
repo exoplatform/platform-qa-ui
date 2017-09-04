@@ -733,7 +733,7 @@ public static final SelenideElement ELEMENT_BUTTON_OK_IMPORT=$(byClassName("UIPo
                                                            By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");
 
   public static final By              ELEMENT_POST_FORM_SUBMIT                           =
-                                                               By.xpath("//*[@id='UIPostForm']//*[contains(text(),'Submit')]");
+                                                               By.xpath("//*[@id=\"UIPostForm\"]/div[3]/button[1]");
 
 
   public static final By ELEMENT_POST_IN_TOPIC                              =
