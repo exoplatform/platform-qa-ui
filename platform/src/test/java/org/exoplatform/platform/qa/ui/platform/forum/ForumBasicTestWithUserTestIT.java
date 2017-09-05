@@ -202,7 +202,61 @@ public class ForumBasicTestWithUserTestIT extends Base {
     }
 
     @Test
-    public void test02_03_04_AddEditDeleteACategory() {
+    public void test02_AddACategory() {
+        info("Test 2: Add a category");
+
+        String nameCat = "nameCat" + getRandomNumber();
+        String nameCat2 = "nameCat2" + getRandomNumber();
+
+    /*
+     * Step Number: 1 Step Name: Add a category Step Description: - Go to Forum page
+     * - Click on Add Category - Put values - Save Input Data: Expected Outcome: -
+     * Category is added successfully and shown in Forum home
+     */
+        info("go to Forum home page");
+        homePagePlatform.goToForum();
+        info("Add a category");
+        forumCategoryManagement.addCategorySimple(nameCat, "", nameCat);
+
+        info("Test 03: Edit a category");
+        info("edit category");
+        forumCategoryManagement.editCategory(nameCat2);
+
+        info("Test 04: Delete a category");
+        info("delete category");
+        forumHomePage.goToHomeCategory();
+        $(byText(nameCat2)).click();
+        forumCategoryManagement.deleteCategory(nameCat2);
+    }
+    @Test
+    public void test_03EditACategory() {
+        info("Test 2: Add a category");
+
+        String nameCat = "nameCat" + getRandomNumber();
+        String nameCat2 = "nameCat2" + getRandomNumber();
+
+    /*
+     * Step Number: 1 Step Name: Add a category Step Description: - Go to Forum page
+     * - Click on Add Category - Put values - Save Input Data: Expected Outcome: -
+     * Category is added successfully and shown in Forum home
+     */
+        info("go to Forum home page");
+        homePagePlatform.goToForum();
+        info("Add a category");
+        forumCategoryManagement.addCategorySimple(nameCat, "", nameCat);
+
+        info("Test 03: Edit a category");
+        info("edit category");
+        forumCategoryManagement.editCategory(nameCat2);
+
+        info("Test 04: Delete a category");
+        info("delete category");
+        forumHomePage.goToHomeCategory();
+        $(byText(nameCat2)).click();
+        forumCategoryManagement.deleteCategory(nameCat2);
+    }
+    @Test
+    public void test04_DeleteACategory() {
         info("Test 2: Add a category");
 
         String nameCat = "nameCat" + getRandomNumber();
@@ -270,5 +324,45 @@ public class ForumBasicTestWithUserTestIT extends Base {
         $(byText(name)).click();
         forumCategoryManagement.deleteCategory(name);
     }
+    @Test
+    public void test09_DeleteNewTopic() {
+        info("Test 9: Create new Topic");
 
+        String name = "name" + getRandomNumber();
+        String name2 = "name2" + getRandomNumber();
+        String desc = "desc" + getRandomNumber();
+        String topic = "topic" + getRandomNumber();
+
+    /*
+     * Step Number: 1 Step Name: - Create new category Step Description: - Login and
+     * goto Forum application - Click [Add Category] - Fill the information and
+     * click [Save] Input Data: Expected Outcome: - New category is created - No
+     * activity is added in activity stream
+     */
+        homePagePlatform.goToForum();
+        info("Add a category");
+        forumCategoryManagement.addCategorySimple(name, "", desc);
+
+    /*
+     * Step number: 2 Step Name: - Create new Forum Step Description: - Click [Add
+     * Forum] - Fill the information and click [Save] Input Data: Expected Outcome:
+     * - New forum is created - No activity is added in activity stream
+     */
+        info("Add a forum in the category");
+        forumForumManagement.addForumSimple(name2, "", desc);
+    /*
+     * Step number: 3 Step Name: - Create new Topic Step Description: - Click [start
+     * Topic] - input the information and click [Save] Input Data: Expected Outcome:
+     * - New Topic is created
+     */
+        info("Add and go to a topic in the forums");
+        forumForumManagement.goToStartTopic();
+        forumTopicManagement.startTopic(topic, topic, "", "");
+        forumHomePage.goToTopic(topic);
+        $(byText(name2)).waitUntil(Condition.appears, Configuration.timeout);
+        info("Delete data");
+        forumHomePage.goToHomeCategory();
+        $(byText(name)).click();
+        forumCategoryManagement.deleteCategory(name);
+    }
 }

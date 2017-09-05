@@ -475,7 +475,48 @@ public class ForumTopicTestIT extends Base {
      * <li> Post-Condition: </li>
      */
     @Test
-    public void test10_11_UpdateTopicContentTitle() {
+    public void test10_UpdateTopicContent() {
+        info("Test 11 Update topic content");
+
+        String name = "Category" + getRandomNumber();
+        String name2 = "Forum" + getRandomNumber();
+        String name3 = "Topic" + getRandomNumber();
+        String content = "NewContent" + getRandomNumber();
+        String desc = "Description" + getRandomNumber();
+        String topic = "Topic" + getRandomNumber();
+
+		/*Step Number: 1
+		 *Step Name: - Edit Topic content
+		 *Step Description:
+			- Login and goto Forum
+			- Goto Category
+			-> Forum
+			->Topic
+			- Click [More Action]
+			-> Edit
+			- Update content of topic with new value
+			- click [Submit]
+		 *Input Data:
+
+		 *Expected Outcome:
+			- Topic content is updated*/
+        homePagePlatform.goToForum();
+        info("Add a topic");
+        forumCategoryManagement.addCategorySimple(name, "", desc);
+        forumForumManagement.addForumSimple(name2, "", desc);
+        forumForumManagement.goToStartTopic();
+        forumTopicManagement.startTopic(topic, topic, "", "");
+        forumHomePage.goToTopic(topic);
+        forumTopicManagement.editTopic(name3, content);
+        info("Open forum portlet");
+        homePagePlatform.goToForum();
+        info("Go to Forum home page");
+        forumHomePage.goToHomeCategory();
+        info("Delete category");
+        forumCategoryManagement.deleteCategory(name);
+    }
+    @Test
+    public void test11_UpdateTopicTitle() {
         info("Test 11 Update topic content");
 
         String name = "Category" + getRandomNumber();
@@ -596,7 +637,44 @@ public class ForumTopicTestIT extends Base {
      * <li>Post-Condition:</li>
      */
     @Test
-    public void test09_CreateDeleteNewTopic() {
+    public void test09_CreateNewTopic() {
+        info("Test 9: Create new Topic");
+        String name = "name" + getRandomNumber();
+        String name2 = "name2" + getRandomNumber();
+        String desc = "desc" + getRandomNumber();
+        String topic = "topic" + getRandomNumber();
+    /*
+     * Step Number: 1 Step Name: - Create new category Step Description: - Login and
+     * goto Forum application - Click [Add Category] - Fill the information and
+     * click [Save] Input Data: Expected Outcome: - New category is created - No
+     * activity is added in activity stream
+     */
+        homePagePlatform.goToForum();
+        info("Add a category");
+        forumCategoryManagement.addCategorySimple(name, "", desc);
+    /*
+     * Step number: 2 Step Name: - Create new Forum Step Description: - Click [Add
+     * Forum] - Fill the information and click [Save] Input Data: Expected Outcome:
+     * - New forum is created - No activity is added in activity stream
+     */
+        info("Add a forum in the category");
+        forumForumManagement.addForumSimple(name2, "", desc);
+    /*
+     * Step number: 3 Step Name: - Create new Topic Step Description: - Click [start
+     * Topic] - input the information and click [Save] Input Data: Expected Outcome:
+     * - New Topic is created
+     */
+        info("Add and go to a topic in the forums");
+        forumForumManagement.goToStartTopic();
+        forumTopicManagement.startTopic(topic, topic, "", "");
+        forumHomePage.goToTopic(topic);
+        $(byText(name2)).waitUntil(Condition.appears, Configuration.timeout);
+        info("Delete data");
+        forumHomePage.goToHomeCategory();
+        forumCategoryManagement.deleteCategory(name);
+    }
+    @Test
+    public void test09_DeleteNewTopic() {
         info("Test 9: Create new Topic");
         String name = "name" + getRandomNumber();
         String name2 = "name2" + getRandomNumber();

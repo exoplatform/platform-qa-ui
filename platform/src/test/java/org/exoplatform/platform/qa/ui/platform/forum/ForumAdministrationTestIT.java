@@ -113,8 +113,71 @@ public class ForumAdministrationTestIT extends Base {
      * <li>Post-Condition:</li>
      */
     @Test
-    @Tag("test")
-    public void test02_03_04_AddEditDeleteBBCode() {
+    public void test02_AddBBCode() {
+        info("Test 2: Add BB code");
+        info("Create data test");
+        String tag = "tag" + getRandomNumber();
+        String replacement = "<b>{param}</b>.";
+        String description = "<b>" + "tag" + getRandomNumber() + "</b>.";
+        String example = "<b>" + "tag" + getRandomNumber() + "</b>.";
+        info("Finished creating data test");
+    /*
+     * Step Number: 1 Step Name: Go To BB code manage Step Description: - Click on
+     * Administration menu and select"BB Code" Input Data: Expected Outcome: BB code
+     * management screen is shown.
+     */
+    /*
+     * Step number: 2 Step Name: Add BB Code Step Description: - Click on Add BBCode
+     * - Enter data into fields - Save Input Data: Expected Outcome: BB code is
+     * added successfully
+     */
+        info("Go to Forum portlet");
+        homePagePlatform.goToForum();
+        info("Add BBcode");
+        forumHomePage.addBBCode(tag, replacement, description, example, false);
+        info("BBcode is created successfully");
+        info("Test 03: Edit BB code");
+        info("Edit a BBCode");
+        forumHomePage.editBBCode(tag, replacement, description, example, false);
+        info("BBcode is edited with changes successfully");
+        info("Test 04: Delete BB code");
+        info("Delete BBcode");
+        forumHomePage.deleteBBcode(tag);
+    }
+    @Test
+    public void test03_EditBBCode() {
+        info("Test 2: Add BB code");
+        info("Create data test");
+        String tag = "tag" + getRandomNumber();
+        String replacement = "<b>{param}</b>.";
+        String description = "<b>" + "tag" + getRandomNumber() + "</b>.";
+        String example = "<b>" + "tag" + getRandomNumber() + "</b>.";
+        info("Finished creating data test");
+    /*
+     * Step Number: 1 Step Name: Go To BB code manage Step Description: - Click on
+     * Administration menu and select"BB Code" Input Data: Expected Outcome: BB code
+     * management screen is shown.
+     */
+    /*
+     * Step number: 2 Step Name: Add BB Code Step Description: - Click on Add BBCode
+     * - Enter data into fields - Save Input Data: Expected Outcome: BB code is
+     * added successfully
+     */
+        info("Go to Forum portlet");
+        homePagePlatform.goToForum();
+        info("Add BBcode");
+        forumHomePage.addBBCode(tag, replacement, description, example, false);
+        info("BBcode is created successfully");
+        info("Test 03: Edit BB code");
+        info("Edit a BBCode");
+        forumHomePage.editBBCode(tag, replacement, description, example, false);
+        info("BBcode is edited with changes successfully");
+        info("Test 04: Delete BB code");
+        info("Delete BBcode");
+        forumHomePage.deleteBBcode(tag);
+    }
+    @Test
+    public void test04_DeleteBBCode() {
         info("Test 2: Add BB code");
         info("Create data test");
         String tag = "tag" + getRandomNumber();
