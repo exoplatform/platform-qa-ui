@@ -176,13 +176,9 @@ public  void test01_CheckActivityAfterMoveATopic() {
     $(byText(Forum)).should(Condition.exist);
     $(byText(nameCat)).should(Condition.exist);
     $(byText(Topic)).should(Condition.exist);
-    try {
-        Thread.sleep(2000);
-    } catch (InterruptedException e) {
-        e.printStackTrace();
-    }
     info("Verify that the topic's activity is shown on intranet");
     homePagePlatform.goToHomePage();
+    executeJavaScript("location.reload(true);","");
     $(byText(comment)).should(Condition.exist);
     info("The activity is shown successfully");
     $(byText(Topic)).should(Condition.exist);
@@ -246,12 +242,8 @@ public  void test02_CheckTopicActivityWhenCreatingNewTopic() {
     prepareDataTest();
     forumForumManagement.goToStartTopic();
     forumTopicManagement.startTopic(topic1, topic1, "", "");
-    try {
-        Thread.sleep(2000);
-    } catch (InterruptedException e) {
-        e.printStackTrace();
-    }
-    homePagePlatform.goToHomePage();
+     homePagePlatform.goToHomePage();
+    executeJavaScript("location.reload(true);","");
     activityStream.checkActivity(topic1);
     deleteDataTest();
     info("Test 2: Finished testing");
@@ -276,13 +268,9 @@ public  void test03_CheckTopicActivityAfterUpdateTopicTitle(){
     info("Edit topic:"+topic1);
     forumHomePage.goToTopic(topic1);
     forumTopicManagement.editTopic(topicNewName,"");
-    try {
-        Thread.sleep(2000);
-    } catch (InterruptedException e) {
-        e.printStackTrace();
-    }
-    executeJavaScript("window.scrollBy(0,-400);", "");
+   executeJavaScript("window.scrollBy(0,-400);", "");
     homePagePlatform.goToHomePage();
+    executeJavaScript("location.reload(true);","");
     info("Verify that the topic's activity is updated");
     $(byText(topicNewName)).should(Condition.exist);
     info("The topic's activity is updated successfully");
@@ -309,12 +297,8 @@ public  void test04_CheckTopicActivityAfterUpdateTopicConent(){
     forumHomePage.goToTopic(topic1);
     forumTopicManagement.editTopic("", newContent);
     executeJavaScript("window.scrollBy(0,-400);", "");
-    try {
-        Thread.sleep(2000);
-    } catch (InterruptedException e) {
-        e.printStackTrace();
-    }
     homePagePlatform.goToHomePage();
+    executeJavaScript("location.reload(true);","");
     info("Verify that the new topic's activity is shown");
     $(byText(topic1)).should(Condition.exist);
     info("the new topic's activity is shown successfully");
@@ -344,6 +328,7 @@ public  void test05_CheckTopicActivityAfterLockUnlockTopic(){
     $(ELEMENT_POST_REPLY).should(Condition.exist);
     info("The topic is locked successfully");
     homePagePlatform.goToHomePage();
+    executeJavaScript("location.reload(true);","");
     info("Verify that the topic's activity is shown");
     $(byText(comment4)).should(Condition.exist);
     info("The topic's activity is shown successfully");
@@ -351,13 +336,9 @@ public  void test05_CheckTopicActivityAfterLockUnlockTopic(){
     forumTopicManagement.selectItemMoreActionMenuTopic(ForumTopicManagement.specifMoreActionMenuTopic.UNLOCK);
     info("Verify that Post reply button is shown when the topic is unlocked");
     $(ELEMENT_POST_REPLY).should(Condition.exist);
-    try {
-        Thread.sleep(2000);
-    } catch (InterruptedException e) {
-        e.printStackTrace();
-    }
-    info("The topic is unlocked successfully");
+     info("The topic is unlocked successfully");
     homePagePlatform.goToHomePage();
+    executeJavaScript("location.reload(true);","");
     info("Verify that topic's activity is shown");
     $(By.xpath(ELEMENT_ACTIVITY_COMMENT.replace("${title}",topic1).replace("${comment}",comment3))).should(Condition.exist);
     info("The topic's activity is shown successfully");
@@ -380,12 +361,8 @@ info("Create data test for test 6");
     info("Delete topic:"+topic1);
     forumHomePage.goToTopic(topic1);
     forumTopicManagement.deleteTopic();
-    try {
-        Thread.sleep(2000);
-    } catch (InterruptedException e) {
-        e.printStackTrace();
-    }
     homePagePlatform.goToHomePage();
+    executeJavaScript("location.reload(true);","");
     info("Verify that the topic's activity is deleted after the topic is deleted");
     $(byText(topic1)).shouldNot(Condition.exist);
     info("the topic's activity is deleted sucessfully");
@@ -426,12 +403,8 @@ public  void test07_AddPoll() {
     forumHomePage.goToTopic(topic1);
     info("Add a new poll to the topic");
     forumTopicManagement.addPoll(question, option1, option2);
-    try {
-        Thread.sleep(2000);
-    } catch (InterruptedException e) {
-        e.printStackTrace();
-    }
     homePagePlatform.goToHomePage();
+    executeJavaScript("location.reload(true);","");
     info("Verify that topic's activity is added to the stream");
     $(byText(comment)).should(Condition.exist);
     info("The topic's activity is added to the stream successfully");
@@ -459,12 +432,8 @@ public void test08_RedirectToThePollByClickingOnVote(){
     forumHomePage.goToTopic(topic1);
     info("Add a new poll to the topic");
     forumTopicManagement.addPoll(question, option1, option2);
-    try {
-        Thread.sleep(2000);
-    } catch (InterruptedException e) {
-        e.printStackTrace();
-    }
     homePagePlatform.goToHomePage();
+    executeJavaScript("location.reload(true);","");
     info("Click on Vote of Poll's activity on the stream");
     $(byText(question)).click();
     info("Verify that the page redirects to the poll");
@@ -495,15 +464,10 @@ public void test09_EditPoll(){
     forumHomePage.goToTopic(topic1);
     info("Add a new poll to the topic");
     forumTopicManagement.addPoll(question, option1, option2);
-
     info("Edit a poll");
     forumTopicManagement.editPoll(question, option1, option3);
-    try {
-        Thread.sleep(2000);
-    } catch (InterruptedException e) {
-        e.printStackTrace();
-    }
     homePagePlatform.goToHomePage();
+    executeJavaScript("location.reload(true);","");
     info("Verify that the poll's comment is shown on the stream");
     $(byText(question)).should(Condition.exist);
     $(byText(comment2)).should(Condition.exist);
@@ -535,12 +499,8 @@ public void test10_DeletePoll(){
 
     info("Delete the poll");
     forumTopicManagement.deletePoll();
-    try {
-        Thread.sleep(2000);
-    } catch (InterruptedException e) {
-        e.printStackTrace();
-    }
     homePagePlatform.goToHomePage();
+    executeJavaScript("location.reload(true);","");
     info("Verify that the comment is added to the topic on the stream after deleted poll");
     $(byText(topic1)).should(Condition.exist);
     $(byText(comment3)).should(Condition.exist);
@@ -576,12 +536,8 @@ public  void test11_JumpIntoReplyFormByClickingOnReplyAction() {
 
     forumForumManagement.goToStartTopic();
     forumTopicManagement.startTopic(topic1, topic1, "", "");
-    try {
-        Thread.sleep(2000);
-    } catch (InterruptedException e) {
-        e.printStackTrace();
-    }
     homePagePlatform.goToHomePage();
+    executeJavaScript("location.reload(true);","");
     info("Click on Reply button of the topic:"+topic1);
     $(byText(topic1)).parent().parent().parent().parent().find(ELEMENT_ICON_REPLAY_POST_FROM_ACTIVITY).click();
     info("Verify that Reply popup of the topic is shown");
@@ -629,12 +585,8 @@ public  void test12_JumpIntoLastReplyOfTopic() {
     info("Reply the topic");
     forumTopicManagement.replyTopic(reply, reply, "","");
     executeJavaScript("window.scrollBy(0,-600);", "");
-    try {
-        Thread.sleep(2000);
-    } catch (InterruptedException e) {
-        e.printStackTrace();
-    }
     homePagePlatform.goToHomePage();
+    executeJavaScript("location.reload(true);","");
     info("Verify that topic's activity with View Last reply icon is shown");
     $(byText(topic)).should(Condition.exist);
     info("The topic's activity with View Last reply icon is shown successfully");
@@ -686,14 +638,9 @@ public  void test13_JumpToRelatedReply() {
     info("Create a topic");
     forumForumManagement.goToStartTopic();
     forumTopicManagement.startTopic(topic, topic,"","");
-    try {
-        Thread.sleep(2000);
-    } catch (InterruptedException e) {
-        e.printStackTrace();
-    }
     info("Finished Creating a topic");
-
     homePagePlatform.goToHomePage();
+    executeJavaScript("location.reload(true);","");
     info("Add a comment to the topic's activity");
     activityStream.checkActivity(topic);
     String id = $(byText(topic)).parent().parent().parent().parent().getAttribute("id").split("ActivityContextBox")[1];
