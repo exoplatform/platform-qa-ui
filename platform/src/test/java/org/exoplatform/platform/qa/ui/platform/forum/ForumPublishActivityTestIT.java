@@ -3,8 +3,6 @@ package org.exoplatform.platform.qa.ui.platform.forum;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.core.config.driver.Driver;
-import org.exoplatform.platform.qa.ui.core.config.driver.ExoWebDriver;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumCategoryManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
@@ -29,7 +27,6 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_COMMENT_BLOC;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_HOME_LINK_PLF;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -429,6 +426,11 @@ public  void test07_AddPoll() {
     forumHomePage.goToTopic(topic1);
     info("Add a new poll to the topic");
     forumTopicManagement.addPoll(question, option1, option2);
+    try {
+        Thread.sleep(2000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
     homePagePlatform.goToHomePage();
     info("Verify that topic's activity is added to the stream");
     $(byText(comment)).should(Condition.exist);
@@ -614,12 +616,12 @@ public  void test12_JumpIntoLastReplyOfTopic() {
     forumHomePage.goToTopic(topic);
     info("Reply the topic");
     forumTopicManagement.replyTopic(reply, reply, "","");
+    executeJavaScript("window.scrollBy(0,-0);", "");
     try {
         Thread.sleep(2000);
     } catch (InterruptedException e) {
         e.printStackTrace();
     }
-    executeJavaScript("window.scrollBy(0,-600);", "");
     homePagePlatform.goToHomePage();
     info("Verify that topic's activity with View Last reply icon is shown");
     $(byText(topic)).should(Condition.exist);
