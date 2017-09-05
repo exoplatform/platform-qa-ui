@@ -538,6 +538,8 @@ public  void test11_JumpIntoReplyFormByClickingOnReplyAction() {
     forumTopicManagement.startTopic(topic1, topic1, "", "");
     homePagePlatform.goToHomePage();
     executeJavaScript("location.reload(true);","");
+    executeJavaScript("location.reload(true);","");
+    executeJavaScript("location.reload(true);","");
     info("Click on Reply button of the topic:"+topic1);
     $(byText(topic1)).parent().parent().parent().parent().find(ELEMENT_ICON_REPLAY_POST_FROM_ACTIVITY).click();
     info("Verify that Reply popup of the topic is shown");
