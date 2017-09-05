@@ -4,14 +4,9 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.page;
-import static com.codeborne.selenide.Selenide.refresh;
-import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.selenium.Button;
@@ -74,7 +69,7 @@ public class ForumCategoryManagement {
    */
   public void selectItemManageCategoryMenu(specifManageCategoryMenu item) {
     info("Waiting manage menu is shown");
-    $(ELEMENT_MENU_MANAGE_CATEGORY).waitUntil(appears,Configuration.timeout);
+    $(ELEMENT_MENU_MANAGE_CATEGORY).waitUntil(appears, Configuration.timeout);
     info("Click on Manage menu");
     $(ELEMENT_MENU_MANAGE_CATEGORY).click();
     switch (item) {
@@ -138,8 +133,9 @@ public class ForumCategoryManagement {
   public void deleteCategory(String nameCat) {
     // TODO Auto-generated method stub
     info("Wait the category is shown");
-    if($(ELEMENT_MENU_MANAGE_CATEGORY).is(not(exist)))
-    {ELEMENT_CAT_CONTAINER.find(byText(nameCat)).waitUntil(appears, Configuration.timeout).click();}
+    if ($(ELEMENT_MENU_MANAGE_CATEGORY).is(not(exist))) {
+      ELEMENT_CAT_CONTAINER.find(byText(nameCat)).waitUntil(appears, Configuration.timeout).click();
+    }
     info("Select Delete link");
     selectItemManageCategoryMenu(specifManageCategoryMenu.DELETE);
     info("Verify that the category is deleted");
@@ -166,9 +162,9 @@ public class ForumCategoryManagement {
   public void exportForum(String forumName, String fileName) {
     selectItemManageCategoryMenu(specifManageCategoryMenu.EXPORT_FORUM);
     info("Uncheck All check boxes");
-    $(byId("checkAll")).parent().click();
+    ELEMENT_CHECKBOX_ALL_FORUM_CATEGORIE.click();
     info("Select check box of the forum");
-    $(byId("UIExportForm")).findAll(byClassName("uiCheckbox")).get(1).click();
+    ELEMENT_CHECKBOX_SELECT_ONE_FORUM_CATEGORIE.click();
     info("input name");
     $(ELEMENT_FILENAME_INPUT).setValue(fileName);
     info("Save all changes");

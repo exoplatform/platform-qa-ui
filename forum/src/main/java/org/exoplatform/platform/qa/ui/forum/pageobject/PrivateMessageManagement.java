@@ -1,13 +1,14 @@
 package org.exoplatform.platform.qa.ui.forum.pageobject;
 
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 
+import org.openqa.selenium.By;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import org.openqa.selenium.By;
 
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
@@ -172,7 +173,7 @@ public class PrivateMessageManagement {
    * @param newContent
    */
   public void forwardMessage(String contact, String title, String newContact, String newTitle, String newContent) {
-    $(byText(title)).parent().parent().parent().find(byClassName("uiIconForumForward")).click();
+    $(byText(title)).parent().parent().parent().find(ELEMENT_BUTTON_FORWARD_MESSAGE).click();
 
     $(ELEMENT_SEND_TO_MESSAGE).setValue(newContact);
     if (newTitle != "")
@@ -191,9 +192,10 @@ public class PrivateMessageManagement {
    * @param contact
    */
   public void deleteMessage(String title, String contact) {
-    $(byText(title)).parent().parent().parent().find(byClassName("uiIconDelete")).click();
+    $(byText(title)).parent().parent().parent().find(ELEMENT_BUTTON_DELETE_MESSAGE).click();
     $(ELEMENT_CONFIRM).click();
-    $(byText(title)).waitUntil(Condition.disappears,Configuration.timeout);  }
+    $(byText(title)).waitUntil(Condition.disappears, Configuration.timeout);
+  }
 
   /**
    * Open Select Group Form

@@ -182,10 +182,10 @@ public class ForumForumManagement {
   public void closeAndOpen(boolean isClose) {
     if (isClose) {
       selectItemMoreActionMenu(specifMoreActionMenu.CLOSE);
-      $(ELEMENT_FORUM_START_TOPIC_DISABLE).waitUntil(Condition.appear,Configuration.timeout);
+      $(ELEMENT_FORUM_START_TOPIC_DISABLE).waitUntil(Condition.appear, Configuration.timeout);
     } else {
       selectItemMoreActionMenu(specifMoreActionMenu.OPEN);
-      $(ELEMENT_FORUM_START_TOPIC_BUTTON).waitUntil(Condition.appear,Configuration.timeout);
+      $(ELEMENT_FORUM_START_TOPIC_BUTTON).waitUntil(Condition.appear, Configuration.timeout);
     }
   }
 

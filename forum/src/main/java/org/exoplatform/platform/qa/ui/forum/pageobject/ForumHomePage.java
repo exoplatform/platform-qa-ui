@@ -1,22 +1,21 @@
 package org.exoplatform.platform.qa.ui.forum.pageobject;
 
-import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_SAVE_BTN;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ManageFileTestBase;
 
@@ -36,7 +35,6 @@ public class ForumHomePage {
    * constructor
    *
    * @param dr
-   *
    */
   public ForumHomePage(TestBase testBase) {
     this.testBase = testBase;
@@ -50,8 +48,9 @@ public class ForumHomePage {
    * Go to home category
    */
   public void goToHomeCategory() {
-if($(ELEMENT_CATEGORY_BREADCUMB_HOME).is(Condition.exist))
-{$(ELEMENT_CATEGORY_BREADCUMB_HOME).click();}
+    if ($(ELEMENT_CATEGORY_BREADCUMB_HOME).is(Condition.exist)) {
+      $(ELEMENT_CATEGORY_BREADCUMB_HOME).click();
+    }
   }
 
   /**
@@ -62,7 +61,7 @@ if($(ELEMENT_CATEGORY_BREADCUMB_HOME).is(Condition.exist))
   public void selectItemAdministrationMenu(specifAdministrationMenu item) {
     info("Waiting administration menu is shown");
     $(ELEMENT_ACTIONBAR_ADMINISTRATION).should(Condition.appears);
-  //  evt.waitForAndGetElement(ELEMENT_ACTIONBAR_ADMINISTRATION);
+    // evt.waitForAndGetElement(ELEMENT_ACTIONBAR_ADMINISTRATION);
     info("Click on Manage menu");
     $(ELEMENT_ACTIONBAR_ADMINISTRATION).click();
 
@@ -127,10 +126,10 @@ if($(ELEMENT_CATEGORY_BREADCUMB_HOME).is(Condition.exist))
     if (watch) {
       if (evt.waitForAndGetElement(ELEMENT_WATCH, testBase.getDefaultTimeout(), 0) != null) {
         info("Watch item");
-       $(ELEMENT_WATCH).click();
+        $(ELEMENT_WATCH).click();
         $(byText(MESSAGE_WATCH)).waitUntil(Condition.appears, Configuration.timeout);
         $(ELEMENT_OK_INFOR_POPUP).click();
-        $(ELEMENT_UNWATCH).waitUntil(Condition.appears,Configuration.timeout);
+        $(ELEMENT_UNWATCH).waitUntil(Condition.appears, Configuration.timeout);
         info("Watch item successfully");
       } else {
         info("Not found watch link");
@@ -139,9 +138,9 @@ if($(ELEMENT_CATEGORY_BREADCUMB_HOME).is(Condition.exist))
       if (evt.waitForAndGetElement(ELEMENT_UNWATCH, testBase.getDefaultTimeout(), 0) != null) {
         info("Unwatch item");
         $(ELEMENT_UNWATCH).click();
-        $(byText(MESSAGE_UNWATCH)).waitUntil(Condition.appears,Configuration.timeout);
+        $(byText(MESSAGE_UNWATCH)).waitUntil(Condition.appears, Configuration.timeout);
         $(ELEMENT_OK_INFOR_POPUP).click();
-        $(ELEMENT_WATCH).waitUntil(Condition.appears,Configuration.timeout);
+        $(ELEMENT_WATCH).waitUntil(Condition.appears, Configuration.timeout);
         info("Unwatch item successfully");
       } else {
         info("Not found unwatch link");
@@ -238,7 +237,7 @@ if($(ELEMENT_CATEGORY_BREADCUMB_HOME).is(Condition.exist))
     info("Click on Save button and save all changes");
     $(ELEMENT_EDITSITE_SAVEBTN).click();
     info("Verify that BBcode is edited with changes");
-   $(byText(newTag.toUpperCase())).should(Condition.exist);
+    $(byText(newTag.toUpperCase())).should(Condition.exist);
     info("Close the popup");
     $(ELEMENT_BBCODE_POPUP_CLOSEBTN).click();
   }
@@ -279,6 +278,7 @@ if($(ELEMENT_CATEGORY_BREADCUMB_HOME).is(Condition.exist))
     info("Close the popup");
     $(ELEMENT_FORUM_BOOKMARK_CLOSE_ICON).click();
   }
+
   /**
    * Bookmark a topic
    *
@@ -310,9 +310,9 @@ if($(ELEMENT_CATEGORY_BREADCUMB_HOME).is(Condition.exist))
   public void exportCategory(String catName, String fileName) {
     selectItemAdministrationMenu(specifAdministrationMenu.EXPORT);
     info("Uncheck all category");
-    $(byId("checkAll")).parent().click();
+    ELEMENT_CHECKBOX_ALL_FORUM_CATEGORIE.click();
     info("Select the category:" + catName);
-    $(byId("UIExportForm")).findAll(byClassName("uiCheckbox")).get(1).click();
+    ELEMENT_CHECKBOX_SELECT_ONE_FORUM_CATEGORIE.click();
     info("input name");
     $(ELEMENT_FILENAME_INPUT).setValue(fileName);
     info("Save all changes");

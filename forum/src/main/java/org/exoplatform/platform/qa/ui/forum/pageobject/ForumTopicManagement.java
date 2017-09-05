@@ -1,23 +1,27 @@
 package org.exoplatform.platform.qa.ui.forum.pageobject;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Condition.appears;
+import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+
+import org.openqa.selenium.By;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.openqa.selenium.By;
 
 public class ForumTopicManagement {
 
@@ -57,14 +61,14 @@ public class ForumTopicManagement {
    */
   public void moveTopicToForum(String category, String forum) {
     info("if not found forum");
-     if($(ELEMENT_UI_POPUP_MOVE_TOPIC.replace("{$forum}",forum))==null){
-     info("Click on Category to expand tree");
-      $(ELEMENT_MOVE_POPUP_COLLASPE_NODE.replace("${category}",category)).click();
+    if ($(ELEMENT_UI_POPUP_MOVE_TOPIC.replace("{$forum}", forum)) == null) {
+      info("Click on Category to expand tree");
+      $(ELEMENT_MOVE_POPUP_COLLASPE_NODE.replace("${category}", category)).click();
       info("Select the forum");
-      $(byXpath("//*[@id=\"UIMoveTopicForm\"]/div[2]/div[1]/div/div/ul/li[1]/ul/li/a")).click();
-    }else{
+      ELEMENT_SELECT_FORUM_TO_MOVE.click();
+    } else {
       info("Select the forum");
-      $(byId("UIMoveTopicForm")).find(byXpath("//*[@id=\"UIMoveTopicForm\"]/div[2]/div[1]/div/div/ul/li/ul/li/a")).click();
+      ELEMENT_SELECT_FORUM_TO_MOVE.click();
     }
     info("Finish moving");
 
@@ -118,7 +122,7 @@ public class ForumTopicManagement {
       break;
     case MOVE:
       info("Wait Move topic link is shown");
-      $(ELEMENT_MOVE_TOPIC).waitUntil(Condition.appears,Configuration.timeout);
+      $(ELEMENT_MOVE_TOPIC).waitUntil(Condition.appears, Configuration.timeout);
       info("Click on move topic link");
       $(ELEMENT_MOVE_TOPIC).click();
       break;
@@ -236,7 +240,7 @@ public class ForumTopicManagement {
   public void editPost(String newTitle, String newContent) {
     $(byText(newContent)).parent().parent().parent().parent().find(byText("Edit")).click();
     if (!newTitle.isEmpty())
-    $(ELEMENT_TITLE_POST).sendKeys(newTitle);
+      $(ELEMENT_TITLE_POST).sendKeys(newTitle);
     if (!newContent.isEmpty())
       switchTo().frame(0);
     $(byXpath("/html/body")).sendKeys(newContent);
@@ -271,7 +275,7 @@ public class ForumTopicManagement {
   public void privatePostfortopic(String newTitle, String content) {
     $(byText("Private")).click();
     if (newTitle != "")
-    $(ELEMENT_TITLE_POST).setValue(newTitle);
+      $(ELEMENT_TITLE_POST).setValue(newTitle);
 
     if (content != "")
       switchTo().frame(0);
@@ -284,7 +288,7 @@ public class ForumTopicManagement {
   public void privatePostFromPost(String newTitle, String content) {
     $(byText(content)).parent().parent().parent().parent().find(byText("Private")).click();
     if (newTitle != "")
-    $(ELEMENT_TITLE_POST).setValue(newTitle);
+      $(ELEMENT_TITLE_POST).setValue(newTitle);
 
     if (content != "")
       switchTo().frame(0);
@@ -325,10 +329,10 @@ public class ForumTopicManagement {
   public void lockUnlockTopic(boolean islock) {
     if (islock) {
       selectItemMoreActionMenuTopic(specifMoreActionMenuTopic.LOCK);
-      $(ELEMENT_TOPIC_POST_REPLY_BUTTON_DISABLE).waitUntil(Condition.appears,Configuration.timeout);
+      $(ELEMENT_TOPIC_POST_REPLY_BUTTON_DISABLE).waitUntil(Condition.appears, Configuration.timeout);
     } else {
       selectItemMoreActionMenuTopic(specifMoreActionMenuTopic.UNLOCK);
-      $(ELEMENT_TOPIC_POST_REPLY_BOTTOM).waitUntil(Condition.appears,Configuration.timeout);
+      $(ELEMENT_TOPIC_POST_REPLY_BOTTOM).waitUntil(Condition.appears, Configuration.timeout);
     }
   }
 
@@ -476,7 +480,7 @@ public class ForumTopicManagement {
       $(ELEMENT_UPLOAD_POPUP_FILE).shouldNot(Condition.exist);
     }
     info("click on Submit button");
-   $(ELEMENT_SUBMIT_BUTTON).click();
+    $(ELEMENT_SUBMIT_BUTTON).click();
     info("Verify that the replying is created");
     $(byText(newMessg)).should(Condition.exist);
     info("Reply topic successfully");
@@ -538,7 +542,7 @@ public class ForumTopicManagement {
     if (!newTitle.isEmpty())
       $(ELEMENT_START_TOPIC_POPUP_TITLE_FILED).setValue(newTitle);
     if (!newContent.isEmpty())
-    plf.inputFrame(ELEMENT_POST_CONTENT, newContent);
+      plf.inputFrame(ELEMENT_POST_CONTENT, newContent);
     info("Click on Submit button");
     $(ELEMENT_SUBMIT_BUTTON).click();
     info("All changes are saved");
