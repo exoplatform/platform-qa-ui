@@ -376,6 +376,11 @@ info("Create data test for test 6");
     info("Delete topic:"+topic1);
     forumHomePage.goToTopic(topic1);
     forumTopicManagement.deleteTopic();
+    try {
+        Thread.sleep(2000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
     homePagePlatform.goToHomePage();
     info("clear cache and reconnect");
     executeJavaScript("location.reload(true);","");
