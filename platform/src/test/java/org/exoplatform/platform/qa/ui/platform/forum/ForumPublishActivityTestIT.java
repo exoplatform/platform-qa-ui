@@ -459,7 +459,11 @@ public void test08_RedirectToThePollByClickingOnVote(){
     forumHomePage.goToTopic(topic1);
     info("Add a new poll to the topic");
     forumTopicManagement.addPoll(question, option1, option2);
-
+    try {
+        Thread.sleep(2000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
     homePagePlatform.goToHomePage();
     info("Click on Vote of Poll's activity on the stream");
     $(byText(question)).click();
@@ -494,7 +498,11 @@ public void test09_EditPoll(){
 
     info("Edit a poll");
     forumTopicManagement.editPoll(question, option1, option3);
-
+    try {
+        Thread.sleep(2000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
     homePagePlatform.goToHomePage();
     info("Verify that the poll's comment is shown on the stream");
     $(byText(question)).should(Condition.exist);
@@ -527,7 +535,11 @@ public void test10_DeletePoll(){
 
     info("Delete the poll");
     forumTopicManagement.deletePoll();
-
+    try {
+        Thread.sleep(2000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
     homePagePlatform.goToHomePage();
     info("Verify that the comment is added to the topic on the stream after deleted poll");
     $(byText(topic1)).should(Condition.exist);
