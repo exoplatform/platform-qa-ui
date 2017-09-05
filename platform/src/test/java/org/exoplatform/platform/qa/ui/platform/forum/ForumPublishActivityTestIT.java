@@ -3,6 +3,8 @@ package org.exoplatform.platform.qa.ui.platform.forum;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.config.driver.Driver;
+import org.exoplatform.platform.qa.ui.core.config.driver.ExoWebDriver;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumCategoryManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
@@ -27,6 +29,7 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_COMMENT_BLOC;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_HOME_LINK_PLF;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -176,8 +179,13 @@ public  void test01_CheckActivityAfterMoveATopic() {
     $(byText(Forum)).should(Condition.exist);
     $(byText(nameCat)).should(Condition.exist);
     $(byText(Topic)).should(Condition.exist);
-    homePagePlatform.goToHomePage();
+    try {
+        Thread.sleep(2000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
     info("Verify that the topic's activity is shown on intranet");
+    homePagePlatform.goToHomePage();
     $(byText(comment)).should(Condition.exist);
     info("The activity is shown successfully");
     $(byText(Topic)).should(Condition.exist);
@@ -241,7 +249,11 @@ public  void test02_CheckTopicActivityWhenCreatingNewTopic() {
     prepareDataTest();
     forumForumManagement.goToStartTopic();
     forumTopicManagement.startTopic(topic1, topic1, "", "");
-
+    try {
+        Thread.sleep(2000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
     homePagePlatform.goToHomePage();
     activityStream.checkActivity(topic1);
     deleteDataTest();
@@ -267,6 +279,11 @@ public  void test03_CheckTopicActivityAfterUpdateTopicTitle(){
     info("Edit topic:"+topic1);
     forumHomePage.goToTopic(topic1);
     forumTopicManagement.editTopic(topicNewName,"");
+    try {
+        Thread.sleep(2000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
     executeJavaScript("window.scrollBy(0,-400);", "");
     homePagePlatform.goToHomePage();
     info("Verify that the topic's activity is updated");
@@ -295,6 +312,11 @@ public  void test04_CheckTopicActivityAfterUpdateTopicConent(){
     forumHomePage.goToTopic(topic1);
     forumTopicManagement.editTopic("", newContent);
     executeJavaScript("window.scrollBy(0,-400);", "");
+    try {
+        Thread.sleep(2000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
     homePagePlatform.goToHomePage();
     info("Verify that the new topic's activity is shown");
     $(byText(topic1)).should(Condition.exist);
@@ -332,6 +354,11 @@ public  void test05_CheckTopicActivityAfterLockUnlockTopic(){
     forumTopicManagement.selectItemMoreActionMenuTopic(ForumTopicManagement.specifMoreActionMenuTopic.UNLOCK);
     info("Verify that Post reply button is shown when the topic is unlocked");
     $(ELEMENT_POST_REPLY).should(Condition.exist);
+    try {
+        Thread.sleep(2000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
     info("The topic is unlocked successfully");
     homePagePlatform.goToHomePage();
     info("Verify that topic's activity is shown");
@@ -356,6 +383,11 @@ info("Create data test for test 6");
     info("Delete topic:"+topic1);
     forumHomePage.goToTopic(topic1);
     forumTopicManagement.deleteTopic();
+    try {
+        Thread.sleep(2000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
     homePagePlatform.goToHomePage();
     info("Verify that the topic's activity is deleted after the topic is deleted");
     $(byText(topic1)).shouldNot(Condition.exist);
@@ -530,10 +562,13 @@ public  void test11_JumpIntoReplyFormByClickingOnReplyAction() {
 
     forumForumManagement.goToStartTopic();
     forumTopicManagement.startTopic(topic1, topic1, "", "");
+    try {
+        Thread.sleep(2000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
     homePagePlatform.goToHomePage();
     info("Click on Reply button of the topic:"+topic1);
-    homePagePlatform.goToHomePage();
-    refresh();
     $(byText(topic1)).parent().parent().parent().parent().find(ELEMENT_ICON_REPLAY_POST_FROM_ACTIVITY).click();
     info("Verify that Reply popup of the topic is shown");
     $(ELEMENT_TOPIC_POST_A_REPLY_TITLE).should(Condition.exist);
@@ -579,8 +614,12 @@ public  void test12_JumpIntoLastReplyOfTopic() {
     forumHomePage.goToTopic(topic);
     info("Reply the topic");
     forumTopicManagement.replyTopic(reply, reply, "","");
-
-    executeJavaScript("window.scrollBy(0,-400);", "");
+    try {
+        Thread.sleep(2000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+    executeJavaScript("window.scrollBy(0,-600);", "");
     homePagePlatform.goToHomePage();
     info("Verify that topic's activity with View Last reply icon is shown");
     $(byText(topic)).should(Condition.exist);
@@ -633,10 +672,14 @@ public  void test13_JumpToRelatedReply() {
     info("Create a topic");
     forumForumManagement.goToStartTopic();
     forumTopicManagement.startTopic(topic, topic,"","");
+    try {
+        Thread.sleep(2000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
     info("Finished Creating a topic");
 
     homePagePlatform.goToHomePage();
-    refresh();
     info("Add a comment to the topic's activity");
     activityStream.checkActivity(topic);
     String id = $(byText(topic)).parent().parent().parent().parent().getAttribute("id").split("ActivityContextBox")[1];
