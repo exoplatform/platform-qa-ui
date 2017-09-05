@@ -106,7 +106,6 @@ public class ForumCategoryTestIT extends Base {
     }
 
     @Test
-    @Disabled
     public  void test02_ImportACategory() {
         info("Test 1: Import a category");
 
