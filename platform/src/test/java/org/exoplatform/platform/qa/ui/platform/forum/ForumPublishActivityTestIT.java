@@ -616,7 +616,7 @@ public  void test12_JumpIntoLastReplyOfTopic() {
     forumHomePage.goToTopic(topic);
     info("Reply the topic");
     forumTopicManagement.replyTopic(reply, reply, "","");
-    executeJavaScript("window.scrollBy(0,-0);", "");
+    executeJavaScript("window.scrollBy(0,-600);", "");
     try {
         Thread.sleep(2000);
     } catch (InterruptedException e) {
