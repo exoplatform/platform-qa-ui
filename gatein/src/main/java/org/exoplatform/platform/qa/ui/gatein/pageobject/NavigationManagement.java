@@ -139,15 +139,15 @@ public class NavigationManagement {
   public void addNode(String title, String subTitle) {
     if (subTitle.isEmpty()) {
       info("Add parent node");
-      evt.click(ELEMENT_UP_LEVEL_PATH_NODE);
-      evt.click(ELEMENT_ADD_NODE);
-      evt.type(ELEMENT_NODE_NAME, title, true);
+      $(ELEMENT_UP_LEVEL_PATH_NODE).click();
+      $(ELEMENT_ADD_NODE).click();
+      $(ELEMENT_NODE_NAME).setValue(title);
     } else {
       info("Add sub node");
-      evt.waitForAndGetElement(ELEMENT_NAVIGATION_SPECIFIC_NODE.replace("${name}", title));
-      evt.click(ELEMENT_NAVIGATION_SPECIFIC_NODE.replace("${name}", title));
-      evt.click(ELEMENT_ADD_NODE);
-      evt.type(ELEMENT_NODE_NAME, subTitle, true);
+      $(byText(title)).waitUntil(Condition.appears,Configuration.timeout);
+      $(byClassName("uiNavigationManagement")).find(byText(title)).scrollTo().click();
+      $(ELEMENT_ADD_NODE).click();
+      $(ELEMENT_NODE_NAME).setValue(subTitle);
     }
   }
 
@@ -188,6 +188,7 @@ public class NavigationManagement {
    *
    * @param oldName
    * @param newName
+   *
    */
   public void editThisNode(String name) {
     info("Edit a node");
