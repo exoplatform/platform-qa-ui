@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.platform.plf;
 
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarHomePage;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumCategoryManagement;
@@ -18,14 +19,15 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_WHO_ONLINE_ICON_PEOPLE_NUMBER;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_WHO_ON_LINE_GADGET;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_NAME_OF_PROFILE_TOP_LEFT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_NAME_PROFILE_OF_USERS;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 
-public class Plf_HomepageGadget_WhoIsOnlineGadget extends Base{
+public class PlfHomepageGadgetWhoIsOnlineGadgetTestIT extends Base{
 ManageLogInOut manageLogInOut;
     @BeforeEach
     public void setupBeforeMethod() {
@@ -95,5 +97,74 @@ public  void test01_CheckDisplayOfWhosOnlineGadget() {
         ELEMENT_WHO_ON_LINE_GADGET.find(byId("3")).hover();
         $(byId("tiptip_content")).find(byText(DATA_NAME_USER2)).should(Condition.exist);
 
+    }
+    /**
+     *<li> Case ID:120866.</li>
+     *<li> Test Case Name: Connect to users.</li>
+     *<li> Pre-Condition: mary and demo are connected to intranet in different browsers.</li>
+     */
+    @Test
+    public  void test03_ConnectToUsers() {
+        info("Test 3: Connect to users");
+        //initBrowsers();
+        //magAc3.signOut();
+		/*Step Number: 1
+		*Step Name: Connect to users
+		*Step Description:
+			- Login as John for example
+			- Open intranet home
+			- Hover the mouse on avatar of Mary at Who's Online Gadget
+			- Click on Connect
+		*Input Data:
+
+		*Expected Outcome:
+			- Who's online is at the right
+			- Connect button is shown
+			- Connection request is sent to mary*/
+        manageLogInOut.signIn(DATA_USER2,DATA_PASS);
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        //3 is the id of mary in who on line gadget
+        ELEMENT_WHO_ON_LINE_GADGET.scrollTo().find(byId("3")).hover();
+        $(byId("tiptip_content")).find(byText(DATA_NAME_USER2)).should(Condition.exist);
+        $(ELEMENT_WHO_ONLINE_CONNECT).waitUntil(Condition.appears, Configuration.timeout).click();
+		/*Step number: 2
+		*Step Name: Verify if connection request is sent
+		*Step Description:
+			- Login as mary
+			- Open intranet home
+		*Input Data:
+
+		*Expected Outcome:
+			- Invitation of John is shown at Invitation gadget*/
+        manageLogInOut.signIn(DATA_USER2,DATA_PASS);
+        ELEMENT_GADGET_INVITATION.find(byText(DATA_NAME_USER1)).should(Condition.exist);
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        ELEMENT_WHO_ON_LINE_GADGET.find(byId("3")).hover();
+        $(ELEMENT_WHO_ONLINE_CANCEL_CONNECT).click();
+        //closeBrowsers();
+    }
+    /**
+     *<li> Case ID:120867.</li>
+     *<li> Test Case Name: Access activity's stream of users.</li>
+     *<li> Pre-Condition: mary and demo are connected to intranet in different browsers.</li>
+     */
+    @Test
+    public  void test04_AccessActivitysStreamOfUsers() {
+        info("Test 4: Access activity's stream of users");
+		/*Step Number: 1
+		*Step Name: Access to activity stream of other users
+		*Step Description:
+			- Login as Demo and open intranet home
+			- Click on Avatar of Mary
+		*Input Data:
+
+		*Expected Outcome:
+			- Who's online gadget is shown with Mary
+			- Browser redirect to Mary's activity stream*/
+        manageLogInOut.signIn(DATA_USER2,DATA_PASS);
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        ELEMENT_WHO_ON_LINE_GADGET.find(byId("3")).click();
+        ELEMENT_NAME_PROFILE_OF_USERS.find(byText(DATA_NAME_USER2)).should(Condition.exist);
+        //closeBrowsers();
     }
 }
