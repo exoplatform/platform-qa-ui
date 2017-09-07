@@ -47,5 +47,10 @@
             <artifactId>platform-qa-ui-wiki</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>platform-qa-ui-answer</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>
