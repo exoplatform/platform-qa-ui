@@ -12,6 +12,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
@@ -29,6 +30,8 @@ import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 /**
  * Created by ilyes on 07/09/17.
  */
+@Tag("answer")
+@Tag("sniff")
 public class AnswerBasicTestsWithUserTestIT extends Base {
   HomePagePlatform         homePagePlatform;
 
