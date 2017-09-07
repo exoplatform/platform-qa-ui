@@ -68,7 +68,14 @@ public class AnswerBasicTestsWithUserTestIT extends Base {
   /**
    * Case ID:116817. Test Case Name: Answer a question. Case ID:116818. Test Case
    * Name: Edit an answer. Case ID:116819. Test Case Name: Delete an answer.
-   * Pre-Condition: Post-Condition:
+   * Pre-Condition: Post-Condition: Step Number: 1 Step Name: Prepare data: Create
+   * a category, a question, Step Description: - Login as john - Go to Answers -
+   * Create a category - Create a question in this category Input Data: Expected
+   * Outcome: - Category is created successfully. - Question is created
+   * successfully Step number: 2 Step Name: Answer a question Step Description: -
+   * Open that question -Click on Answer, - Put data into editor - Set other
+   * fields - Save Input Data: Expected Outcome: - Answer a question successfully,
+   * - Show the answer below this question
    */
   @Test
   public void test04_AddAnswerAQuestion() {
@@ -79,19 +86,7 @@ public class AnswerBasicTestsWithUserTestIT extends Base {
     String content = "content" + getRandomNumber();
 
     info("Test 4: Answer a question");
-    /*
-     * Step Number: 1 Step Name: Prepare data: Create a category, a question, Step
-     * Description: - Login as john - Go to Answers - Create a category - Create a
-     * question in this category Input Data: Expected Outcome: - Category is created
-     * successfully. - Question is created successfully
-     */
 
-    /*
-     * Step number: 2 Step Name: Answer a question Step Description: - Open that
-     * question -Click on Answer, - Put data into editor - Set other fields - Save
-     * Input Data: Expected Outcome: - Answer a question successfully, - Show the
-     * answer below this question
-     */
     homePagePlatform.goToAnswer();
     questionManagement.goToSubmitQuestion();
     questionManagement.inputDataToQuestionForm(question, "", null, "");
@@ -106,6 +101,12 @@ public class AnswerBasicTestsWithUserTestIT extends Base {
     questionManagement.deleteQuestion(question);
   }
 
+  /*
+   * Step number: 3 Step Name: Edit an answer Step Description: - Open that
+   * answer, click More Actions - -> Edit Answer - Input data into editor - Save
+   * Input Data: Expected Outcome: - An "Edit answer" popup is shown. - New
+   * content of answer is saved
+   */
   @Test
   public void test05_EditAnswerAQuestion() {
     String newanswer = "newanswer" + getRandomNumber();
@@ -114,12 +115,7 @@ public class AnswerBasicTestsWithUserTestIT extends Base {
     String question = "question" + getRandomNumber();
 
     info("Test 5: Edit an answer");
-    /*
-     * Step number: 3 Step Name: Edit an answer Step Description: - Open that
-     * answer, click More Actions - -> Edit Answer - Input data into editor - Save
-     * Input Data: Expected Outcome: - An "Edit answer" popup is shown. - New
-     * content of answer is saved
-     */
+
     homePagePlatform.goToAnswer();
     questionManagement.goToSubmitQuestion();
     questionManagement.inputDataToQuestionForm(question, "", null, "");
@@ -128,7 +124,6 @@ public class AnswerBasicTestsWithUserTestIT extends Base {
     $(byText(question)).click();
     answerManagement.goToAnswerQuestion(question);
     answerManagement.inputDataToAnswer(answer, null, null, null);
-    /// click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
     $(ELEMENT_ANSWER_FORM_SAVE_BUTTON).scrollTo().click();
     $(byText(answer)).waitUntil(Condition.appears, Configuration.timeout);
 
@@ -140,6 +135,11 @@ public class AnswerBasicTestsWithUserTestIT extends Base {
     questionManagement.deleteQuestion(question);
   }
 
+  /*
+   * Step number: 3 Step Name: Delete an answer Step Description: - Open that
+   * answer - Click More Actions - -> Delete Answer Input Data: Expected Outcome:
+   * The answer is deleted successfully
+   */
   @Test
   public void test06_DeleteAnswerAQuestion() {
     String newanswer = "newanswer" + getRandomNumber();
@@ -148,11 +148,6 @@ public class AnswerBasicTestsWithUserTestIT extends Base {
     String question = "question" + getRandomNumber();
 
     info("Test 6: Delete an answer");
-    /*
-     * Step number: 3 Step Name: Delete an answer Step Description: - Open that
-     * answer - Click More Actions - -> Delete Answer Input Data: Expected Outcome:
-     * The answer is deleted successfully
-     */
     homePagePlatform.goToAnswer();
     questionManagement.goToSubmitQuestion();
     questionManagement.inputDataToQuestionForm(question, "", null, "");
@@ -169,18 +164,17 @@ public class AnswerBasicTestsWithUserTestIT extends Base {
 
   }
 
+  /*
+   * Step number: 2 Step Name: Comment on a question Step Description: - Open that
+   * question - Click on Comment link - Put values - Click on save Input Data:
+   * Expected Outcome: - Comment successfully
+   */
   @Test
   public void test07_AddAComment() {
     String comment = "comment" + getRandomNumber();
     String question = "question" + getRandomNumber();
 
     info("Test 7: Add a comment");
-
-    /*
-     * Step number: 2 Step Name: Comment on a question Step Description: - Open that
-     * question - Click on Comment link - Put values - Click on save Input Data:
-     * Expected Outcome: - Comment successfully
-     */
 
     homePagePlatform.goToAnswer();
     questionManagement.goToSubmitQuestion();
@@ -196,6 +190,12 @@ public class AnswerBasicTestsWithUserTestIT extends Base {
 
   }
 
+  /*
+   * Step number: 3 Step Name: Edit a comment Step Description: - Open a comment -
+   * Click More Actions - -> Edit Comment - Input data into fields - Save Input
+   * Data: Expected Outcome: - Edit comment successfully - New content of comment
+   * is saved
+   */
   @Test
   public void test08_EditAComment() {
     String comment = "comment" + getRandomNumber();
@@ -203,12 +203,6 @@ public class AnswerBasicTestsWithUserTestIT extends Base {
     String newcomment = "newcomment" + getRandomNumber();
 
     info("Test 8: Edit a comment");
-    /*
-     * Step number: 3 Step Name: Edit a comment Step Description: - Open a comment -
-     * Click More Actions - -> Edit Comment - Input data into fields - Save Input
-     * Data: Expected Outcome: - Edit comment successfully - New content of comment
-     * is saved
-     */
 
     homePagePlatform.goToAnswer();
     questionManagement.goToSubmitQuestion();
@@ -228,17 +222,18 @@ public class AnswerBasicTestsWithUserTestIT extends Base {
     questionManagement.deleteQuestion(question);
   }
 
+  /*
+   * Step number: 3 Step Name: Delete a comment Step Description: - Open a comment
+   * - Click More Actions - -> Delete Comment - Click OK in the confirmation
+   * message Input Data: Expected Outcome: - Delete a comment successfully
+   */
   @Test
   public void test09_DeleteAComment() {
     String comment = "comment" + getRandomNumber();
     String question = "question" + getRandomNumber();
 
     info("Test 9: Delete a comment");
-    /*
-     * Step number: 3 Step Name: Delete a comment Step Description: - Open a comment
-     * - Click More Actions - -> Delete Comment - Click OK in the confirmation
-     * message Input Data: Expected Outcome: - Delete a comment successfully
-     */
+
     homePagePlatform.goToAnswer();
     questionManagement.goToSubmitQuestion();
     questionManagement.inputDataToQuestionForm(question, "", null, "");
@@ -256,7 +251,12 @@ public class AnswerBasicTestsWithUserTestIT extends Base {
   }
 
   /**
-   * Case ID:116828. Test Case Name: Add a question.
+   * Case ID:116828. Test Case Name: Add a question. Step Number: 1 Step Name: Add
+   * a question Step Description: - Select 1 category and click on Submit question
+   * - Put values - Save Input Data: Expected Outcome: - Question is added new and
+   * shown in selected category Step number: 2 Step Name: Delete a question Step
+   * Description: - Right click on a question and select Delete Input Data:
+   * Expected Outcome: - Question is deleted and disappear in Answers page
    */
   @Test
   public void test02_AddAQuestion() {
@@ -264,30 +264,30 @@ public class AnswerBasicTestsWithUserTestIT extends Base {
     String content = "content" + getRandomNumber();
 
     info("Test 2: Add a question");
-    /*
-     * Step Number: 1 Step Name: Add a question Step Description: - Select 1
-     * category and click on Submit question - Put values - Save Input Data:
-     * Expected Outcome: - Question is added new and shown in selected category
-     */
+
     homePagePlatform.goToAnswer();
     questionManagement.goToSubmitQuestion();
     questionManagement.inputDataToQuestionForm(question, content, null, "");
-    // click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
     $(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
     $(ELEMENT_OK_BUTTON_LINK).click();
     $(byText(question)).should(Condition.exist);
 
     info("Test 4: Delete a question");
-    /*
-     * Step number: 2 Step Name: Delete a question Step Description: - Right click
-     * on a question and select Delete Input Data: Expected Outcome: - Question is
-     * deleted and disappear in Answers page
-     */
+
     questionManagement.deleteQuestion(question);
   }
 
   /**
-   * . Case ID:116829. Test Case Name: Edit a question.
+   * . Case ID:116829. Test Case Name: Edit a question. Step Number: 1 Step Name:
+   * Add a question Step Description: - Select 1 category and click on Submit
+   * question - Put values - Save Input Data: Expected Outcome: - Question is
+   * added new and shown in selected category Step number: 2 Step Name: Edit a
+   * question Step Description: - Right click on this question, select Edit - Put
+   * values into fields - Save Input Data: Expected Outcome: - Edit Question form
+   * is shown - This question is updated successfully. Step number: 2 Step Name:
+   * Delete a question Step Description: - Right click on a question and select
+   * Delete Input Data: Expected Outcome: - Question is deleted and disappear in
+   * Answers page
    */
   @Test
   public void test_03EditAQuestion() {
@@ -297,43 +297,33 @@ public class AnswerBasicTestsWithUserTestIT extends Base {
     String newcontent = "newcontent" + getRandomNumber();
 
     info("Test 2: Add a question");
-    /*
-     * Step Number: 1 Step Name: Add a question Step Description: - Select 1
-     * category and click on Submit question - Put values - Save Input Data:
-     * Expected Outcome: - Question is added new and shown in selected category
-     */
+
     homePagePlatform.goToAnswer();
     questionManagement.goToSubmitQuestion();
     questionManagement.inputDataToQuestionForm(question, content, null, "");
-    // click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
     $(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
     $(ELEMENT_OK_BUTTON_LINK).click();
     $(byText(question)).should(Condition.exist);
     info("Test 3: Edit a question");
-    /*
-     * Step number: 2 Step Name: Edit a question Step Description: - Right click on
-     * this question, select Edit - Put values into fields - Save Input Data:
-     * Expected Outcome: - Edit Question form is shown - This question is updated
-     * successfully.
-     */
+
     questionManagement.goToActionOfQuestionByRightClick(question, QuestionManagement.actionQuestionOption.EDIT);
     questionManagement.inputDataToQuestionForm(newquestion, newcontent, null, "");
-    // click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
     $(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
     $(byText(question)).shouldNot(Condition.exist);
     $(byText(newquestion)).should(Condition.exist);
     info("Test 4: Delete a question");
-    /*
-     * Step number: 2 Step Name: Delete a question Step Description: - Right click
-     * on a question and select Delete Input Data: Expected Outcome: - Question is
-     * deleted and disappear in Answers page
-     */
+
     questionManagement.deleteQuestion(newquestion);
   }
 
   /**
    * Case ID:116830. Test Case Name: Delete a question. Pre-Condition:
-   * Post-Condition:
+   * Post-Condition: Step Number: 1 Step Name: Add a question Step Description: -
+   * Select 1 category and click on Submit question - Put values - Save Input
+   * Data: Expected Outcome: - Question is added new and shown in selected
+   * category Step number: 2 Step Name: Delete a question Step Description: -
+   * Right click on a question and select Delete Input Data: Expected Outcome: -
+   * Question is deleted and disappear in Answers page
    */
   @Test
   public void test04_DeleteAQuestion() {
@@ -341,11 +331,7 @@ public class AnswerBasicTestsWithUserTestIT extends Base {
     String content = "content" + getRandomNumber();
 
     info("Test 2: Add a question");
-    /*
-     * Step Number: 1 Step Name: Add a question Step Description: - Select 1
-     * category and click on Submit question - Put values - Save Input Data:
-     * Expected Outcome: - Question is added new and shown in selected category
-     */
+
     homePagePlatform.goToAnswer();
     questionManagement.goToSubmitQuestion();
     questionManagement.inputDataToQuestionForm(question, content, null, "");
@@ -355,11 +341,7 @@ public class AnswerBasicTestsWithUserTestIT extends Base {
     $(byText(question)).should(Condition.exist);
 
     info("Test 4: Delete a question");
-    /*
-     * Step number: 2 Step Name: Delete a question Step Description: - Right click
-     * on a question and select Delete Input Data: Expected Outcome: - Question is
-     * deleted and disappear in Answers page
-     */
+
     questionManagement.deleteQuestion(question);
   }
 
