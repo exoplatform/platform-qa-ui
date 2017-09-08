@@ -1,16 +1,22 @@
 package org.exoplatform.platform.qa.ui.social.smoke;
 
 import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.refresh;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
+import static org.junit.Assert.assertEquals;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_COMMENT_BUTTON;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_COMMENT_INPUT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_COMMENT_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_COMMENT_BLOC;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DELETE_POPUP_OK;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_ADD_TOOTLBAR;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -40,6 +46,7 @@ public class SOCPeopleActivityCommentTestIT extends Base {
   ActivityStream        activityStream;
 
   UserPageBase          userPageBase;
+
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -201,11 +208,7 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
     // click on the button comment
 
-    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.enabled, Configuration.timeout).doubleClick();
-    if ($(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).isDisplayed()) {
-      $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).click();
-    }
-    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears, Configuration.timeout);
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
     manageLogInOut.signIn("root", "gtn");
     navigationToolbar.goToManageCommunity();
@@ -287,4 +290,126 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     addUsers.deleteUser(username1);
   }
 
-}
+
+  @Test
+  public void test04_LikeComment() {
+    info("Test 4: Like comment");
+
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@gmail.com";
+    String username2 = "usernameab" + getRandomString();
+    String email2 = username2 + "@gmail.com";
+    String password = "123456";
+    info("Add new user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+    addUsers.addUser(username2, password, email2, username2, username2);
+    manageLogInOut.signIn(username1, password);
+
+    //navigationToolbar.goToMyActivities();
+    String activity1 = "activity1" + getRandomNumber();
+    activityStream.addActivity(activity1, "");
+
+    info("Click on Connections on the left panel");
+    homePagePlatform.goToConnections();
+
+
+    info("Access people list, invite an user");
+    connectionsManagement.connectToAUser(username2);
+    info("Invited user accept invitation");
+    manageLogInOut.signIn(username2, password);
+    homePagePlatform.goToConnections();
+    connectionsManagement.acceptAConnection(username1);
+    homePagePlatform.goToHomePage();
+    String comment = "comment" + getRandomNumber();
+    // get the id of activity created
+    String id = $(byText(activity1)).parent().parent().parent().parent().parent().parent().parent().getAttribute("id").split("UIActivityLoader")[1];
+    // click on comment link
+    $(byText(activity1)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
+    // insert comment
+    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
+    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
+    // click on the button comment
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
+    $(byText(comment)).should(Condition.exist);
+    manageLogInOut.signIn(username2,password);
+    String idBlocComment=$(byText(activity1)).parent().parent().parent().find(byText(comment)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
+    $(byId("LikeCommentLinkcomment"+idBlocComment)).click();
+    $(byId("LikeCommentLinkcomment"+idBlocComment)).parent().shouldHave(Condition.text("(1)"));
+    assertEquals("rgba(51, 51, 51, 1)",$(byId("LikeCommentLinkcomment"+idBlocComment)).parent().getCssValue("color"));
+    $(byId("LikeCommentLinkcomment"+idBlocComment)).hover();
+    $(byClassName("tooltip")).shouldHave(Condition.text("Unlike"));
+    manageLogInOut.signIn("root","gtn");
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
+    addUsers.deleteUser(username2);
+
+
+  }
+
+
+  @Test
+  public void test05_UnlikeComment() {
+    info("Test 5: Like comment");
+
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@gmail.com";
+    String username2 = "usernameab" + getRandomString();
+    String email2 = username2 + "@gmail.com";
+    String password = "123456";
+    info("Add new user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+    addUsers.addUser(username2, password, email2, username2, username2);
+    manageLogInOut.signIn(username1, password);
+
+    //navigationToolbar.goToMyActivities();
+    String activity1 = "activity1" + getRandomNumber();
+    activityStream.addActivity(activity1, "");
+
+    info("Click on Connections on the left panel");
+    homePagePlatform.goToConnections();
+
+
+    info("Access people list, invite an user");
+    connectionsManagement.connectToAUser(username2);
+    info("Invited user accept invitation");
+    manageLogInOut.signIn(username2, password);
+    homePagePlatform.goToConnections();
+    connectionsManagement.acceptAConnection(username1);
+    homePagePlatform.goToHomePage();
+    String comment = "comment" + getRandomNumber();
+    // get the id of activity created
+    String id = $(byText(activity1)).parent().parent().parent().parent().parent().parent().parent().getAttribute("id").split("UIActivityLoader")[1];
+    // click on comment link
+    $(byText(activity1)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
+    // insert comment
+    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
+    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
+    // click on the button comment
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
+    $(byText(comment)).should(Condition.exist);
+    manageLogInOut.signIn(username2,password);
+    String idBlocComment=$(byText(activity1)).parent().parent().parent().find(byText(comment)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
+    $(byId("LikeCommentLinkcomment"+idBlocComment)).click();
+    $(byId("LikeCommentLinkcomment"+idBlocComment)).parent().shouldHave(Condition.text("(1)"));
+    assertEquals("rgba(47, 94, 146, 1)",$(byId("LikeCommentLinkcomment"+idBlocComment)).find(byClassName("uiIconThumbUp")).getCssValue("color"));
+    $(byId("LikeCommentLinkcomment"+idBlocComment)).hover();
+    $(byClassName("tooltip")).shouldHave(Condition.text("Unlike"));
+
+    $(byId("LikeCommentLinkcomment"+idBlocComment)).click();
+    refresh();
+    $(byId("LikeCommentLinkcomment"+idBlocComment)).parent().shouldHave(Condition.text(""));
+    assertEquals("rgba(153, 153, 153, 1)",$(byId("LikeCommentLinkcomment"+idBlocComment)).find(byClassName("uiIconThumbUp")).getCssValue("color"));
+    $(byId("LikeCommentLinkcomment"+idBlocComment)).hover();
+    $(byClassName("tooltip")).shouldHave(Condition.text("Like"));
+
+
+    manageLogInOut.signIn("root","gtn");
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
+    addUsers.deleteUser(username2);
+    
+  }
+
+ }
