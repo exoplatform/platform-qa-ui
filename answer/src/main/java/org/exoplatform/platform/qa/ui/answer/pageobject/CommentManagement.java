@@ -2,20 +2,26 @@ package org.exoplatform.platform.qa.ui.answer.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
 
-
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+
 public class CommentManagement {
   private final TestBase       testBase;
+
   public AnswerHomePage        aHome;
+
   public AnswerManagement      aMang;
+
   private ElementEventTestBase evt;
+
   /**
    * constructor
    *
@@ -27,6 +33,7 @@ public class CommentManagement {
     this.aMang = new AnswerManagement(testBase);
     this.evt = testBase.getElementEventTestBase();
   }
+
   /**
    * Go to COMMENT a question
    */
@@ -40,6 +47,7 @@ public class CommentManagement {
     $(ELEMENT_COMMENT_BUTTON).click();
     $(ELEMENT_COMMENT_FORM).waitUntil(Condition.appears, Configuration.timeout);
   }
+
   /**
    * Input data to COMMENT form
    *
@@ -55,6 +63,7 @@ public class CommentManagement {
       switchTo().defaultContent();
     }
   }
+
   /**
    * Execute action of COMMENT: EDIT, APPROVE, DISAPPROVE, ACTIVE, DEACTIVE,
    * DELETE
@@ -84,8 +93,10 @@ public class CommentManagement {
       default:
         info("Do nothing");
         break;
+
     }
   }
+
   /**
    * Delete comment
    *
@@ -98,6 +109,7 @@ public class CommentManagement {
     evt.click(ELEMENT_COMMENT_DELETE_FORM_OK_BUTTON);
     evt.waitForElementNotPresent(ELEMENT_COMMENT_CONTENT.replace("$comment", comment));
   }
+
   /**
    * action menu of comment
    */

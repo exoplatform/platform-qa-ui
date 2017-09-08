@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.answer.pageobject;
 
 import static com.codeborne.selenide.Condition.attribute;
 
+
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
@@ -11,18 +12,25 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocat
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+
 public class QuestionManagement {
   private final TestBase       testBase;
+
   public Button                button;
+
   private ElementEventTestBase evt;
+
   /**
    * constructor
    *
@@ -33,6 +41,7 @@ public class QuestionManagement {
     this.button = new Button(testBase);
     this.evt = testBase.getElementEventTestBase();
   }
+
   /**
    * Go to mange question form
    */
@@ -44,6 +53,7 @@ public class QuestionManagement {
     $(ELEMENT_MANAGE_QUESTION_FORM).waitUntil(Condition.appears, Configuration.timeout);
 
   }
+
   /**
    * goToSubmitQuestion
    */
@@ -53,6 +63,7 @@ public class QuestionManagement {
     $(ELEMENT_SUBMIT_QUESTION).click();
     $(ELEMENT_SUBMIT_QUESTION_FORM).waitUntil(Condition.appears, Configuration.timeout);
   }
+
   /**
    * input data to question form
    *
@@ -83,7 +94,7 @@ public class QuestionManagement {
       evt.click(ELEMENT_SUBMIT_QUESTION_FORM_ATTACHMENT_BUTTON);
       WebElement eFile = evt.waitForAndGetElement(ELEMENT_QUESTION_FILE_INPUT, testBase.getDefaultTimeout(), 1, 2);
       ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';",
-              eFile);
+                                                                                     eFile);
       eFile.sendKeys(testBase.getAbsoluteFilePath(pathFile));
       evt.waitForAndGetElement(ELEMENT_ATTACHMENT_FORM_FILE_NAME.replace("$fileName", links[links.length - 1]));
       evt.click(ELEMENT_ATTACH_SAVE_BUTTON);
@@ -91,6 +102,7 @@ public class QuestionManagement {
       evt.switchToParentWindow();
     }
   }
+
   /**
    * Execute action of question: COMMENT, ANSWER, EDIT, DELETE, MOVE, SEND
    *
@@ -138,6 +150,7 @@ public class QuestionManagement {
 
     }
   }
+
   /**
    * Execute action of question: PRINT, EDIT, DELETE, MOVE, SEND
    *
@@ -147,34 +160,35 @@ public class QuestionManagement {
     info("Select action from menu");
     $(ELEMENT_QUESTION_MORE_ACTION_BUTTON).waitUntil(Condition.appears, Configuration.timeout).click();
     switch (action) {
-      case PRINT:
-        info("PRINT question");
-        evt.click(ELEMENT_QUESTION_PRINT_BUTTON);
-        break;
-      case EDIT:
-        info("EDIT question");
-        evt.click(ELEMENT_QUESTION_EDIT_BUTTON);
-        evt.waitForAndGetElement(ELEMENT_QUESTION_EDIT_FORM);
-        break;
-      case DELETE:
-        info("DELETE question");
-        $(ELEMENT_QUESTION_DELETE_BUTTON).click();
-        break;
-      case MOVE:
-        info("MOVE question");
-        $(ELEMENT_QUESTION_MOVE_BUTTON).click();
-        $(ELEMENT_QUESTION_MOVE_FORM).waitUntil(Condition.appears, Configuration.timeout);
-        break;
-      case SEND:
-        info("SEND question");
-        evt.click(ELEMENT_QUESTION_SEND_BUTTON);
-        evt.waitForAndGetElement(ELEMENT_QUESTION_SEND_FORM);
-        break;
-      default:
-        info("Do nothing");
-        break;
+    case PRINT:
+      info("PRINT question");
+      evt.click(ELEMENT_QUESTION_PRINT_BUTTON);
+      break;
+    case EDIT:
+      info("EDIT question");
+      evt.click(ELEMENT_QUESTION_EDIT_BUTTON);
+      evt.waitForAndGetElement(ELEMENT_QUESTION_EDIT_FORM);
+      break;
+    case DELETE:
+      info("DELETE question");
+      $(ELEMENT_QUESTION_DELETE_BUTTON).click();
+      break;
+    case MOVE:
+      info("MOVE question");
+      $(ELEMENT_QUESTION_MOVE_BUTTON).click();
+      $(ELEMENT_QUESTION_MOVE_FORM).waitUntil(Condition.appears, Configuration.timeout);
+      break;
+    case SEND:
+      info("SEND question");
+      evt.click(ELEMENT_QUESTION_SEND_BUTTON);
+      evt.waitForAndGetElement(ELEMENT_QUESTION_SEND_FORM);
+      break;
+    default:
+      info("Do nothing");
+      break;
     }
   }
+
   /**
    * Delete question
    *
@@ -182,7 +196,11 @@ public class QuestionManagement {
    */
   public void deleteQuestion(String question) {
     info("Delete question");
-    if ($(byText(question)).parent().parent().parent().find(ELEMENT_QUESTION_MORE_ACTION_BUTTON).is(Condition.not(Condition.exist))) {
+    if ($(byText(question)).parent()
+                           .parent()
+                           .parent()
+                           .find(ELEMENT_QUESTION_MORE_ACTION_BUTTON)
+                           .is(Condition.not(Condition.exist))) {
       $(byText(question)).click();
     }
     goToActionOfQuestionFromMoreAction(actionQuestionOption.DELETE);
@@ -190,6 +208,7 @@ public class QuestionManagement {
     $(ELEMENT_QUESTION_DELETE_FORM_OK_BUTTON).click();
     $(byText(question)).waitUntil(Condition.disappears, Configuration.timeout);
   }
+
   /**
    * Cancel to Delete question
    *
@@ -202,6 +221,7 @@ public class QuestionManagement {
     evt.click(ELEMENT_QUESTION_DELETE_FORM_CANCEL_BUTTON);
     evt.waitForAndGetElement(ELEMENT_QUESTION_LIST_ITEM.replace("$question", question));
   }
+
   /**
    * Go to edit question from manage question form
    *
@@ -214,7 +234,9 @@ public class QuestionManagement {
                                                   .find(ELEMENT_ICON_EDIT_QUESTION_IN_MANAGE_QUESTION)
                                                   .click();
 
+
   }
+
   /**
    * Go to delete question from manage question form
    *
@@ -227,7 +249,9 @@ public class QuestionManagement {
                                                   .find(ELEMENT_ICON_DELETE_QUESTION_IN_MANAGE_QUESTION)
                                                   .click();
 
+
   }
+
   /**
    * Approve question or not from manage question form
    * @param question string
@@ -263,8 +287,10 @@ public class QuestionManagement {
                                                       .click();
 
 
+
     }
   }
+
   /**
    * Active question or not from manage question form
    *
@@ -277,12 +303,12 @@ public class QuestionManagement {
       if ($(ELEMENT_TOTAL_PAGE).is(Condition.visible)) {
         evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
         while ((evt.waitForAndGetElement(ELEMENT_MANAGE_QUESTION_ACTIVE_QUESTION_CHECKBOX.replace("$question", question),
-                5000,
-                0,
-                2) == null)
-                && !(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
-                .getText()
-                .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText())))
+                                         5000,
+                                         0,
+                                         2) == null)
+            && !(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
+                    .getText()
+                    .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText())))
           evt.click(ELEMENT_NEXT_PAGE);
       }
       ELEMENT_POPUB_MANAGE_QUESTION.find(byText(question))
@@ -296,12 +322,12 @@ public class QuestionManagement {
       if ($(ELEMENT_TOTAL_PAGE).is(Condition.visible)) {
         evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
         while ((evt.waitForAndGetElement(ELEMENT_MANAGE_QUESTION_ACTIVE_QUESTION_CHECKBOX.replace("$question", question),
-                5000,
-                0,
-                2) == null)
-                && !(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
-                .getText()
-                .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText())))
+                                         5000,
+                                         0,
+                                         2) == null)
+            && !(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
+                    .getText()
+                    .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText())))
           evt.click(ELEMENT_NEXT_PAGE);
       }
       ELEMENT_POPUB_MANAGE_QUESTION.find(byText(question))
@@ -312,6 +338,7 @@ public class QuestionManagement {
                                    .click();
     }
   }
+
   /**
    * Approve question or not
    *
@@ -326,6 +353,7 @@ public class QuestionManagement {
       evt.uncheck(ELEMENT_SUBMIET_QUESTION_APPROVE_CHECKBOX, 2);
     }
   }
+
   /**
    * Active question or not
    *
@@ -340,6 +368,7 @@ public class QuestionManagement {
       evt.uncheck(ELEMENT_SUBMIET_QUESTION_ACTIVE_CHECKBOX, 2);
     }
   }
+
   /**
    * Rate question
    *
@@ -379,8 +408,10 @@ public class QuestionManagement {
       assertEquals("rgba(255, 196, 13, 1)", ELEMENT_RATE_QUESTION_5_VOTED.getCssValue("color"));
       break;
 
+
     }
   }
+
   /**
    * Save or cancel all change of submit question form
    *
@@ -399,6 +430,7 @@ public class QuestionManagement {
     evt.waitForElementNotPresent(ELEMENT_SUBMIT_QUESTION_FORM);
     info("Submint question form is closed");
   }
+
   /**
    * Open Answer form
    *
@@ -413,6 +445,7 @@ public class QuestionManagement {
       info("Answer form is shown successfully");
     }
   }
+
   /**
    * Check manage question form
    *
@@ -430,6 +463,7 @@ public class QuestionManagement {
     } else
       evt.waitForElementNotPresent(ELEMENT_MANAGE_QUESTION_BUTTON);
   }
+
   /**
    * action menu of question
    */

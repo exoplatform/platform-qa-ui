@@ -1,19 +1,23 @@
 package org.exoplatform.platform.qa.ui.answer.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
-
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+
 public class AnswerManagement {
   private final TestBase       testBase;
+
   private ElementEventTestBase evt;
+
   /**
    * constructor
    *
@@ -23,6 +27,7 @@ public class AnswerManagement {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
   }
+
   /**
    * Go to answer a question
    */
@@ -31,6 +36,7 @@ public class AnswerManagement {
     String idQuestion = $(byText(question)).parent().parent().parent().parent().parent().getAttribute("id");
     $(byXpath(ELEMENT_ANSWER_QUESTION.replace("{IdQuestion}", idQuestion))).click();
   }
+
   /**
    * Input data to answer form
    *
@@ -66,6 +72,7 @@ public class AnswerManagement {
       info("input related questions");
     }
   }
+
   /**
    * Execute action of answer: EDIT, APPROVE, DISAPPROVE, ACTIVE, DEACTIVE, DELETE
    *
@@ -108,6 +115,7 @@ public class AnswerManagement {
     case DELETE:
       info("DELETE answer");
       $(byText(answer)).parent().parent().parent().parent().parent().find(ELEMENT_ANSWER_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
+
       $(ELEMENT_ANSWER_DELETE_CONFIRM_POPUP).waitUntil(Condition.appears, Configuration.timeout);
       break;
     default:
@@ -116,6 +124,7 @@ public class AnswerManagement {
 
     }
   }
+
   /**
    * Delete answer
    *
@@ -128,6 +137,7 @@ public class AnswerManagement {
     evt.click(ELEMENT_ANSWER_DELETE_FORM_OK_BUTTON);
     evt.waitForElementNotPresent(ELEMENT_ANSWER_CONTENT.replace("$answer", answer));
   }
+
   /**
    * function vote/unvote an answer
    *
@@ -143,6 +153,7 @@ public class AnswerManagement {
       $(byText(answer)).parent().parent().parent().find(ELEMENT_ICON_UNLIKE_ANSWER).click();
     }
   }
+
   /**
    * Save or Cancel all changes of Answer form
    *
@@ -160,6 +171,7 @@ public class AnswerManagement {
     evt.waitForElementNotPresent(ELEMENT_ANSWER_FORM);
     info("Answer form is closed");
   }
+
   /**
    * Verify the answer that is added
    */
@@ -168,6 +180,7 @@ public class AnswerManagement {
     evt.waitForAndGetElement(ELEMENT_ANSWER_CONTENT.replace("$answer", answer));
     info("The answer is added successfully");
   }
+
   /**
    * action menu of answer
    */
