@@ -2311,4 +2311,10 @@ public final class SocialLocator {
 
   public static final SelenideElement ELEMENT_ALERT_NOTIFICATION_EXIST                                  =
                                                                        $(byXpath("//*[@id=\"UINotificationPopoverToolbarPortlet\"]/div[2]/a/i/span"));
+
+
+  public static final By ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION=byXpath("//*[@id=\"UIManageInvitationSpaces\"]/div[2]/div/div/div[2]/div/div/div[3]/button[2]");
+
+public static final SelenideElement ELEMENT_LIST_MY_SPACES_IN_LEFT_NAVIGATION=$(byId("UISpaceNavigationPortlet"));
+public static final By ELEMENT_BUTTON_JOIN_SPACE=byClassName("btn");
 }

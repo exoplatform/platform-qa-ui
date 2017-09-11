@@ -2,15 +2,13 @@ package org.exoplatform.platform.qa.ui.social.smoke;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.refresh;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.junit.Assert.assertEquals;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_COMMENT_BUTTON;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_COMMENT_INPUT;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_COMMENT_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_COMMENT_BLOC;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DELETE_POPUP_OK;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_ADD_TOOTLBAR;
@@ -333,12 +331,14 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
     manageLogInOut.signIn(username2,password);
+    //get the id of the comment which is the same id of like comment
     String idBlocComment=$(byText(activity1)).parent().parent().parent().find(byText(comment)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
-    $(byId("LikeCommentLinkcomment"+idBlocComment)).click();
-    $(byId("LikeCommentLinkcomment"+idBlocComment)).parent().shouldHave(Condition.text("(1)"));
-    assertEquals("rgba(51, 51, 51, 1)",$(byId("LikeCommentLinkcomment"+idBlocComment)).parent().getCssValue("color"));
-    $(byId("LikeCommentLinkcomment"+idBlocComment)).hover();
-    $(byClassName("tooltip")).shouldHave(Condition.text("Unlike"));
+    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).click();
+    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).parent().shouldHave(Condition.text("(1)"));
+    //rgba(47, 94, 146, 1) is the css value of blyue
+    assertEquals("rgba(47, 94, 146, 1)",$(byId("LikeCommentLinkcomment"+idBlocComment)).find(byClassName("uiIconThumbUp")).getCssValue("color"));
+    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).hover();
+    ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.shouldHave(Condition.text("Unlike"));
     manageLogInOut.signIn("root","gtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -391,18 +391,18 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     $(byText(comment)).should(Condition.exist);
     manageLogInOut.signIn(username2,password);
     String idBlocComment=$(byText(activity1)).parent().parent().parent().find(byText(comment)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
-    $(byId("LikeCommentLinkcomment"+idBlocComment)).click();
-    $(byId("LikeCommentLinkcomment"+idBlocComment)).parent().shouldHave(Condition.text("(1)"));
+    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).click();
+    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).parent().shouldHave(Condition.text("(1)"));
     assertEquals("rgba(47, 94, 146, 1)",$(byId("LikeCommentLinkcomment"+idBlocComment)).find(byClassName("uiIconThumbUp")).getCssValue("color"));
-    $(byId("LikeCommentLinkcomment"+idBlocComment)).hover();
-    $(byClassName("tooltip")).shouldHave(Condition.text("Unlike"));
+    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).hover();
+    ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.shouldHave(Condition.text("Unlike"));
 
-    $(byId("LikeCommentLinkcomment"+idBlocComment)).click();
+    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).click();
     refresh();
-    $(byId("LikeCommentLinkcomment"+idBlocComment)).parent().shouldHave(Condition.text(""));
+    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).parent().shouldHave(Condition.text(""));
     assertEquals("rgba(153, 153, 153, 1)",$(byId("LikeCommentLinkcomment"+idBlocComment)).find(byClassName("uiIconThumbUp")).getCssValue("color"));
-    $(byId("LikeCommentLinkcomment"+idBlocComment)).hover();
-    $(byClassName("tooltip")).shouldHave(Condition.text("Like"));
+    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).hover();
+    ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.shouldHave(Condition.text("Like"));
 
 
     manageLogInOut.signIn("root","gtn");
