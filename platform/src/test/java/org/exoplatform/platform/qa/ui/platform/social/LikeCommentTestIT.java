@@ -12,6 +12,7 @@ import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.*;
@@ -33,6 +34,8 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by exo on 11/09/17.
  */
+@Tag("social")
+@Tag("sniff")
 public class LikeCommentTestIT extends Base {
     NavigationToolbar navigationToolbar;
 
@@ -125,8 +128,7 @@ public class LikeCommentTestIT extends Base {
         ELEMENT_DELETE_POPUP_OK.click();
         ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears,Configuration.timeout);
         // scroll up
-        executeJavaScript("window.scrollBy(0,-950)","");
-        homePagePlatform.goToAllSpace();
+        executeJavaScript("window.scrollBy(0,-2000)","");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
         connectionsManagement.removeConnection(DATA_USER3);
@@ -187,8 +189,7 @@ public class LikeCommentTestIT extends Base {
         ELEMENT_DELETE_POPUP_OK.click();
         ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears,Configuration.timeout);
         // scroll up
-        executeJavaScript("window.scrollBy(0,-950)","");
-        homePagePlatform.goToAllSpace();
+        executeJavaScript("window.scrollBy(0,-2000)","");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
         connectionsManagement.removeConnection(DATA_USER3);
@@ -249,8 +250,7 @@ public class LikeCommentTestIT extends Base {
         ELEMENT_DELETE_POPUP_OK.click();
         ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears,Configuration.timeout);
         // scroll up
-        executeJavaScript("window.scrollBy(0,-950)","");
-        homePagePlatform.goToAllSpace();
+        executeJavaScript("window.scrollBy(0,-2000)","");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
         connectionsManagement.removeConnection(DATA_USER3);
@@ -311,8 +311,7 @@ public class LikeCommentTestIT extends Base {
         ELEMENT_DELETE_POPUP_OK.click();
         ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears,Configuration.timeout);
         // scroll up
-        executeJavaScript("window.scrollBy(0,-950)","");
-        homePagePlatform.goToAllSpace();
+        executeJavaScript("window.scrollBy(0,-2000)","");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
         connectionsManagement.removeConnection(DATA_USER3);
@@ -361,9 +360,9 @@ public class LikeCommentTestIT extends Base {
 
         manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
         $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).parent().find(byText("(3)")).click();
-        ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Jack Miller")).parent().parent().find(byClassName("uiActionLike")).shouldHave(Condition.text("Remove Connection"));
-        ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("James David")).parent().parent().find(byClassName("uiActionLike")).shouldHave(Condition.text("Remove Connection"));
-        ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Mary Williams")).parent().parent().find(byClassName("uiActionLike")).shouldHave(Condition.text("Remove Connection"));
+        ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Jack Miller")).parent().parent().find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT).shouldHave(Condition.text("Remove Connection"));
+        ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("James David")).parent().parent().find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT).shouldHave(Condition.text("Remove Connection"));
+        ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Mary Williams")).parent().parent().find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT).shouldHave(Condition.text("Remove Connection"));
         ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT.click();
         executeJavaScript("window.scrollBy(0,-950)","");
         // click on the activity to appear the delete button
@@ -373,8 +372,7 @@ public class LikeCommentTestIT extends Base {
         ELEMENT_DELETE_POPUP_OK.click();
         ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears,Configuration.timeout);
         // scroll up
-        executeJavaScript("window.scrollBy(0,-950)","");
-        homePagePlatform.goToAllSpace();
+        executeJavaScript("window.scrollBy(0,-2000)","");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
         connectionsManagement.removeConnection(DATA_USER3);
@@ -592,7 +590,7 @@ public class LikeCommentTestIT extends Base {
         ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.find(byText(username4+" "+username4)).should(Condition.exist);
         ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.find(byText(username3+" "+username3)).should(Condition.exist);
         ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.find(byText("2 more...")).should(Condition.exist);
-        executeJavaScript("window.scrollBy(0,-550)","");
+        executeJavaScript("window.scrollBy(0,-2000)","");
         homePagePlatform.goToMySpaces();
         spaceManagement.deleteSpace(space,false);
         navigationToolbar.goToManageCommunity();
@@ -641,8 +639,7 @@ public class LikeCommentTestIT extends Base {
         ELEMENT_DELETE_POPUP_OK.click();
         ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears,Configuration.timeout);
         // scroll up
-        executeJavaScript("window.scrollBy(0,-950)","");
-        homePagePlatform.goToAllSpace();
+        executeJavaScript("window.scrollBy(0,-2000)","");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
 
@@ -653,6 +650,7 @@ public class LikeCommentTestIT extends Base {
     public void test10_likeComentAfterPreviewDocument(){
         String activity1 = "activity1" + getRandomNumber();
         String comment = "comment" + getRandomNumber();
+        ELEMENT_TAB_LINK.click();
         ELEMENT_TAB_LINK.click();
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears,Configuration.timeout);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
@@ -680,6 +678,7 @@ public class LikeCommentTestIT extends Base {
         String activity1 = "activity1" + getRandomNumber();
         String comment = "comment" + getRandomNumber();
 
+        ELEMENT_TAB_LINK.click();
         ELEMENT_TAB_LINK.click();
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible),Configuration.timeout);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
@@ -736,5 +735,365 @@ public class LikeCommentTestIT extends Base {
         connectionsManagement.removeConnection(DATA_USER2);
         connectionsManagement.removeConnection(DATA_USER3);
         connectionsManagement.removeConnection(DATA_USER4);
+    }
+
+
+    @Test
+    public void test12_CheckNumberOfUsersUnlikeComentAfterPreviewDocument(){
+        String activity1 = "activity1" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+
+        ELEMENT_TAB_LINK.click();
+        ELEMENT_TAB_LINK.click();
+        ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible),Configuration.timeout);
+        ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
+        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears,Configuration.timeout);
+        activityStream.addActivity(activity1, "");
+        String id=$(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        switchTo().frame(11);
+        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.sendKeys(comment);
+        switchTo().defaultContent();
+        ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled,Configuration.timeout).click();
+        $(byText(comment)).should(Condition.exist);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        connectionsManagement.connectToAUser(DATA_USER3);
+        connectionsManagement.connectToAUser(DATA_USER4);
+
+        manageLogInOut.signIn(DATA_USER2,PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+
+        manageLogInOut.signIn(DATA_USER3,PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        $(byXpath("//*[@id=\"$uicomponent.id\"]/div[2]")).find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+
+        manageLogInOut.signIn(DATA_USER4,PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).parent().parent().shouldHave(Condition.text("(3)"));
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+
+        manageLogInOut.signIn(DATA_USER4,PLFData.DATA_PASS);
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).parent().parent().shouldHave(Condition.text("(2)"));
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+
+        $(byText(activity1)).parent().parent().find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
+        $(byText(activity1)).parent().parent().find(ELEMENT_DELETE_ACTIVITY_CONTAINS_DOC).click();
+        ELEMENT_DELETE_POPUP_OK.click();
+        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears,Configuration.timeout);
+        // scroll up
+        executeJavaScript("window.scrollBy(0,-2000)","");
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+        connectionsManagement.removeConnection(DATA_USER3);
+        connectionsManagement.removeConnection(DATA_USER4);
+    }
+
+    @Test
+    public void test13_CheckListOfUserslikeComentAfterPreviewDocument(){
+        String activity1 = "activity1" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+
+        ELEMENT_TAB_LINK.click();
+        ELEMENT_TAB_LINK.click();
+        ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible),Configuration.timeout);
+        ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
+        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears,Configuration.timeout);
+        activityStream.addActivity(activity1, "");
+        String id=$(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        switchTo().frame(11);
+        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.sendKeys(comment);
+        switchTo().defaultContent();
+        ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled,Configuration.timeout).click();
+        $(byText(comment)).should(Condition.exist);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        connectionsManagement.connectToAUser(DATA_USER3);
+        connectionsManagement.connectToAUser(DATA_USER4);
+
+        manageLogInOut.signIn(DATA_USER2,PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+
+        manageLogInOut.signIn(DATA_USER3,PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        $(byXpath("//*[@id=\"$uicomponent.id\"]/div[2]")).find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+
+        manageLogInOut.signIn(DATA_USER4,PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).parent().parent().find(byText("(3)")).click();
+        ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Jack Miller")).should(Condition.exist);
+        ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("James David")).should(Condition.exist);
+        ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Mary Williams")).should(Condition.exist);
+        ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT.click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        $(byText(activity1)).parent().parent().find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
+        $(byText(activity1)).parent().parent().find(ELEMENT_DELETE_ACTIVITY_CONTAINS_DOC).click();
+        ELEMENT_DELETE_POPUP_OK.click();
+        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears,Configuration.timeout);
+        // scroll up
+        executeJavaScript("window.scrollBy(0,-2000)","");
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+        connectionsManagement.removeConnection(DATA_USER3);
+        connectionsManagement.removeConnection(DATA_USER4);
+    }
+
+    @Test
+    public void test14_DisplayListOfUsersOrderedByTheMostRecentLikeAfterPreviewDocument(){
+        String activity1 = "activity1" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+
+        ELEMENT_TAB_LINK.click();
+        ELEMENT_TAB_LINK.click();
+        ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible),Configuration.timeout);
+        ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
+        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears,Configuration.timeout);
+        activityStream.addActivity(activity1, "");
+        String id=$(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        switchTo().frame(11);
+        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.sendKeys(comment);
+        switchTo().defaultContent();
+        ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled,Configuration.timeout).click();
+        $(byText(comment)).should(Condition.exist);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        connectionsManagement.connectToAUser(DATA_USER3);
+        connectionsManagement.connectToAUser(DATA_USER4);
+
+        manageLogInOut.signIn(DATA_USER2,PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+
+        manageLogInOut.signIn(DATA_USER3,PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        $(byXpath("//*[@id=\"$uicomponent.id\"]/div[2]")).find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+
+        manageLogInOut.signIn(DATA_USER4,PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).parent().parent().find(byText("(3)")).click();
+        ELEMENT_FIRST_USER_IN_POPUP_WHO_LIKE_COMMENT.shouldHave(Condition.text("Jack Miller"));
+        ELEMENT_SECOND_USER_IN_POPUP_WHO_LIKE_COMMENT.shouldHave(Condition.text("James David"));
+        ELEMENT_THIRD_USER_IN_POPUP_WHO_LIKE_COMMENT.shouldHave(Condition.text("Mary Williams"));
+        ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT.click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        $(byText(activity1)).parent().parent().find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
+        $(byText(activity1)).parent().parent().find(ELEMENT_DELETE_ACTIVITY_CONTAINS_DOC).click();
+        ELEMENT_DELETE_POPUP_OK.click();
+        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears,Configuration.timeout);
+        // scroll up
+        executeJavaScript("window.scrollBy(0,-2000)","");
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+        connectionsManagement.removeConnection(DATA_USER3);
+        connectionsManagement.removeConnection(DATA_USER4);
+    }
+
+    @Test
+    public void test15_CheckConnectionStatusAfterPreviewDocument(){
+        String activity1 = "activity1" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+
+        ELEMENT_TAB_LINK.click();
+        ELEMENT_TAB_LINK.click();
+        ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible),Configuration.timeout);
+        ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
+        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears,Configuration.timeout);
+        activityStream.addActivity(activity1, "");
+        String id=$(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        switchTo().frame(11);
+        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.sendKeys(comment);
+        switchTo().defaultContent();
+        ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled,Configuration.timeout).click();
+        $(byText(comment)).should(Condition.exist);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        connectionsManagement.connectToAUser(DATA_USER3);
+        connectionsManagement.connectToAUser(DATA_USER4);
+
+        manageLogInOut.signIn(DATA_USER2,PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+
+        manageLogInOut.signIn(DATA_USER3,PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        $(byXpath("//*[@id=\"$uicomponent.id\"]/div[2]")).find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+
+        manageLogInOut.signIn(DATA_USER4,PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).parent().parent().find(byText("(3)")).click();
+        ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Jack Miller")).parent().parent().find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT).shouldHave(Condition.text("Remove Connection"));
+        ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("James David")).parent().parent().find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT).shouldHave(Condition.text("Remove Connection"));
+        ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Mary Williams")).parent().parent().find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT).shouldHave(Condition.text("Remove Connection"));
+        ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT.click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        $(byText(activity1)).parent().parent().find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
+        $(byText(activity1)).parent().parent().find(ELEMENT_DELETE_ACTIVITY_CONTAINS_DOC).click();
+        ELEMENT_DELETE_POPUP_OK.click();
+        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears,Configuration.timeout);
+        // scroll up
+        executeJavaScript("window.scrollBy(0,-2000)","");
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+        connectionsManagement.removeConnection(DATA_USER3);
+        connectionsManagement.removeConnection(DATA_USER4);
+    }
+
+    @Test
+    public void test16_CheckConnectionStatusAfterPreviewDocumentInspace(){
+        String activity1 = "activity1" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+        String space="space"+getRandomNumber();
+
+        homePagePlatform.goToAllSpace();
+        spaceManagement.addNewSpaceSimple(space, space);
+        ELEMENT_TAB_LINK.click();
+        ELEMENT_TAB_LINK.click();
+        ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible),Configuration.timeout);
+        ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
+        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears,Configuration.timeout);
+        activityStream.addActivity(activity1, "");
+        String id=$(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        switchTo().frame(3);
+        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.sendKeys(comment);
+        switchTo().defaultContent();
+        ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled,Configuration.timeout).click();
+        $(byText(comment)).should(Condition.exist);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        executeJavaScript("window.scrollBy(0,-2000)","");
+        spaceSettingManagement.goToMemberTab();
+        ELEMENT_INPUT_INVITE_USER.sendKeys(DATA_USER2);
+        $(ELEMENT_SPACE_BTN_INVITE).click();
+        refresh();
+        ELEMENT_INPUT_INVITE_USER.sendKeys(DATA_USER3);
+        $(ELEMENT_SPACE_BTN_INVITE).click();
+        refresh();
+        ELEMENT_INPUT_INVITE_USER.sendKeys(DATA_USER4);
+        $(ELEMENT_SPACE_BTN_INVITE).click();
+
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        connectionsManagement.connectToAUser(DATA_USER3);
+
+        manageLogInOut.signIn(DATA_USER2,PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToAllSpace();
+        spaceManagement.acceptAInvitation(space);
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+
+        manageLogInOut.signIn(DATA_USER3,PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToAllSpace();
+        spaceManagement.acceptAInvitation(space);
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        $(byXpath("//*[@id=\"$uicomponent.id\"]/div[2]")).find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+
+        manageLogInOut.signIn(DATA_USER4,PLFData.DATA_PASS);
+        homePagePlatform.goToAllSpace();
+        spaceManagement.acceptAInvitation(space);
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).parent().parent().find(byText("(3)")).click();
+        ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Jack Miller")).parent().parent().find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT).shouldHave(Condition.text("Connect"));
+        ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("James David")).parent().parent().find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT).shouldHave(Condition.text("Remove Connection"));
+        ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Mary Williams")).parent().parent().find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT).shouldHave(Condition.text("Remove Connection"));
+        ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT.click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        executeJavaScript("window.scrollBy(0,-2000)","");
+        homePagePlatform.goToMySpaces();
+        spaceManagement.deleteSpace(space,false);
+        // scroll up
+        executeJavaScript("window.scrollBy(0,-2000)","");
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+        connectionsManagement.removeConnection(DATA_USER3);
     }
 }

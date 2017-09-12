@@ -700,5 +700,6 @@ public final class ActivityStreamLocator {
   public static final SelenideElement ELEMENT_FIRST_USER_IN_POPUP_WHO_LIKE_COMMENT=ELEMENT_POPUP_WHO_LIKED_COMMENT.findAll(".likerName").get(0);
   public static final SelenideElement ELEMENT_SECOND_USER_IN_POPUP_WHO_LIKE_COMMENT=ELEMENT_POPUP_WHO_LIKED_COMMENT.findAll(".likerName").get(1);
   public static final SelenideElement ELEMENT_THIRD_USER_IN_POPUP_WHO_LIKE_COMMENT=ELEMENT_POPUP_WHO_LIKED_COMMENT.findAll(".likerName").get(2);
+  public static final By ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT=byClassName("uiActionLike");
 
 }
