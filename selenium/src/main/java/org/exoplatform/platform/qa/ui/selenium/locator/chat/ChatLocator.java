@@ -66,4 +66,6 @@ public class ChatLocator {
 
   public static final SelenideElement ELEMENT_CHAT_INPUT_SEARCH_USER      = $(byId("chat-search"));
 
+  public static final SelenideElement ELEMENT_CHAT_RESULT_SEARCH_USER     = $(byAttribute("class","selectize-dropdown multi plugin-remove_button"));
+
 }
