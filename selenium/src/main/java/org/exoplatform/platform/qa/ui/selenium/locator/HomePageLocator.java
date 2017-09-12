@@ -23,6 +23,7 @@ package org.exoplatform.platform.qa.ui.selenium.locator;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
 import org.openqa.selenium.By;
 
 import com.codeborne.selenide.SelenideElement;
@@ -575,4 +576,16 @@ public final class HomePageLocator {
                                                             $(byId("quickSearchResult1"));
 
   public static final String          ELEMENT_COMMENT_BLOC                                                 = "CommentBlock{id}1";
+  public static final SelenideElement ELEMENT_TAB_LINK=$(byXpath("//*[@id=\"ActivityComposerExt\"]/div[2]"));
+  public static final SelenideElement ELEMENT_CONTAINER_DOCUMENT=$(byId("UIActivityComposerContainer_DOC_ACTIVITY_"));
+  public static final SelenideElement ELEMENT_INPUT_DOCUMENT=$(byClassName("multiploadFilesSelector")).find(byClassName("file"));
+  public static final SelenideElement ELEMENT_BAR_PROGRESS= $(byClassName("progress-striped"));
+  public static final String ELEMENT_DOCUMENT_PREVIEW="Preview{id}-0";
+  public static final SelenideElement ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW= $(byXpath("/html/body"));
+  public static final SelenideElement ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW= $(byId("CommentButton"));
+  public static final By ELEMENT_ICON_LIKE_COMMENT=byClassName("uiIconThumbUp");
+  public static final SelenideElement ELEMENT_CLOSE_DOCUMENT_PREVIEW= $(byXpath("//*[@id=\"uiDocumentPreview\"]/div[1]/a"));
+  public static final By ELEMENT_DELETE_ACTIVITY_CONTAINS_DOC=byClassName("uiIconClose");
+  public static final SelenideElement ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW=$(byXpath("//*[@id=\"$uicomponent.id\"]/div[2]"));
+
 }

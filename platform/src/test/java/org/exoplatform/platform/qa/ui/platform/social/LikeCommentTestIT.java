@@ -15,9 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
@@ -30,6 +28,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocat
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by exo on 11/09/17.
@@ -649,46 +648,93 @@ public class LikeCommentTestIT extends Base {
 
     }
     
-    public void test10_checkFullNameWhenNameIsLong(){
+   
+    @Test
+    public void test10_likeComentAfterPreviewDocument(){
         String activity1 = "activity1" + getRandomNumber();
         String comment = "comment" + getRandomNumber();
-        String username1 ="aaaaaaaaaaaaaaaaaaaaaaaaaaaa"+getRandomString();
-        String username=username1.substring(0,29);
-        String email=username1.substring(25,29)+"@test.com";
-        String password="123456";
-        navigationToolbar.goToAddUser();
-        addUsers.addUser(username, password, email, username, username1);
-        homePagePlatform.goToConnections();
-        connectionsManagement.connectToAUser(username);
-        homePagePlatform.goToHomePage();
-        activityStream.addActivity(activity1, ""); // get the id of activity created
-        String id = $(byText(activity1)).parent().parent().parent().parent().parent().parent().parent().getAttribute("id").split("UIActivityLoader")[1];
-        // click on comment link
-        $(byText(activity1)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
-        // insert comment
-        $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
-        executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
-        // click on the button comment
-        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
+        ELEMENT_TAB_LINK.click();
+        ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears,Configuration.timeout);
+        ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
+        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears,Configuration.timeout);
+        activityStream.addActivity(activity1, "");
+        String id=$(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        switchTo().frame(11);
+        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.sendKeys(comment);
+        switchTo().defaultContent();
+        ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled,Configuration.timeout).click();
         $(byText(comment)).should(Condition.exist);
-        String idBlocComment=$(byText(activity1)).parent().parent().parent().find(byText(comment)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
-        manageLogInOut.signIn(username,password);
+        $(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
+        $(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).parent().parent().shouldHave(Condition.text("(1)"));
+        assertEquals("rgba(47, 94, 146, 1)",$(byText(comment)).parent().parent().find(byClassName("uiIconThumbUp")).getCssValue("color"));
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        $(byText(activity1)).parent().parent().find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
+        $(byText(activity1)).parent().parent().find(ELEMENT_DELETE_ACTIVITY_CONTAINS_DOC).click();
+        ELEMENT_DELETE_POPUP_OK.click();
+        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears,Configuration.timeout);
+    }
+
+    @Test
+    public void test11_CheckNumberOfUserslikeComentAfterPreviewDocument(){
+        String activity1 = "activity1" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+
+        ELEMENT_TAB_LINK.click();
+        ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible),Configuration.timeout);
+        ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
+        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears,Configuration.timeout);
+        activityStream.addActivity(activity1, "");
+        String id=$(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        switchTo().frame(11);
+        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.sendKeys(comment);
+        switchTo().defaultContent();
+        ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled,Configuration.timeout).click();
+        $(byText(comment)).should(Condition.exist);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        connectionsManagement.connectToAUser(DATA_USER3);
+        connectionsManagement.connectToAUser(DATA_USER4);
+
+        manageLogInOut.signIn(DATA_USER2,PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+
+        manageLogInOut.signIn(DATA_USER3,PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        $(byXpath("//*[@id=\"$uicomponent.id\"]/div[2]")).find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+
+        manageLogInOut.signIn(DATA_USER4,PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+
         manageLogInOut.signIn(DATA_USER1,"gtngtn");
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).parent().find(byText("(1)")).scrollTo().hover();
-        ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.shouldHave(Condition.text("aaaaaaaaaaaaaaaaaaaaaaaaaaaa..."));
-        // click on the activity to appear the delete button
-        $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-        // click on delete button
-        $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).parent().parent().shouldHave(Condition.text("(3)"));
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        $(byText(activity1)).parent().parent().find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
+        $(byText(activity1)).parent().parent().find(ELEMENT_DELETE_ACTIVITY_CONTAINS_DOC).click();
         ELEMENT_DELETE_POPUP_OK.click();
         ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears,Configuration.timeout);
         // scroll up
-        navigationToolbar.goToManageCommunity();
-        addUsers.deleteUser(username);
-
+        executeJavaScript("window.scrollBy(0,-2000)","");
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+        connectionsManagement.removeConnection(DATA_USER3);
+        connectionsManagement.removeConnection(DATA_USER4);
     }
 }
