@@ -52,8 +52,6 @@ public class ChatLocator {
   public static final SelenideElement ELEMENT_CHAT_BUTTON_SAVE_ADD_ROOM   =
                                                                         $(byXpath("//*[@id=\"team-modal-form\"]/div[2]/div[2]/a[1]"));
 
-  public static final SelenideElement ELEMENT_CHAT_RESULT_SEARCH_USER     = $(byXpath("/html/body/div[6]"));
-
   public static final SelenideElement ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN  = $(byId("chat-team-button-dropdown"));
 
   public static final SelenideElement ELEMENT_CHAT_ROOM_DELETE            = $(byId("team-delete-button"));
@@ -67,5 +65,7 @@ public class ChatLocator {
   public static final SelenideElement ELEMENT_CHAT_LIST_MSG               = $(byId("chats"));
 
   public static final SelenideElement ELEMENT_CHAT_INPUT_SEARCH_USER      = $(byId("chat-search"));
+
+  public static final SelenideElement ELEMENT_CHAT_RESULT_SEARCH_USER     = $(byAttribute("class","selectize-dropdown multi plugin-remove_button"));
 
 }

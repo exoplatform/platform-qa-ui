@@ -21,7 +21,7 @@ public class RoomManagement {
     ELEMENT_CHAT_INPUT_ROOM_NAME.setValue(name);
     for (int i = 0; i <= users.length - 1; i++) {
       ELEMENT_CHAT_INPUT_ROOM_USERS.setValue(users[i]);
-      ELEMENT_CHAT_RESULT_SEARCH_USER.waitUntil(Condition.appears, Configuration.timeout);
+      ELEMENT_CHAT_RESULT_SEARCH_USER.waitUntil(Condition.be(Condition.visible),Configuration.timeout);
       ELEMENT_CHAT_INPUT_ROOM_USERS.pressEnter();
     }
     ELEMENT_CHAT_BUTTON_SAVE_ADD_ROOM.click();
