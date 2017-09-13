@@ -104,11 +104,11 @@ public class ForumTopicManagement {
     case DELETE:
       info("Click on Delete topic button");
       $(ELEMENT_DELETE_TOPIC).click();
-
       info("Verify that confirm popup is shown");
       $(byText("Are you sure you want to delete this topic ?")).waitUntil(appears, Configuration.timeout);
       info("Click on OK on Confirm popup");
       $(ELEMENT_OK_DELETE).click();
+      $(ELEMENT_OK_DELETE).waitUntil(Condition.disappears,Configuration.timeout);
       break;
     case WATCHES:
       break;
