@@ -1,8 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.forum;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -159,11 +158,19 @@ public class ForumPublishActivityTestIT extends Base {
     $(byText(Forum)).should(Condition.exist);
     $(byText(nameCat)).should(Condition.exist);
     $(byText(Topic)).should(Condition.exist);
-    info("clear cache and recconnect");
-    executeJavaScript("location.reload(true);", "");
-    manageLogInOut.signIn(username,password);
     info("Verify that the topic's activity is shown on intranet");
     homePagePlatform.goToHomePage();
+    for (int i = 0; i <= 10; i++) {
+      refresh();
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      if ($(byText(comment)).is(Condition.exist)) {
+        break;
+      }
+    }
     $(byText(comment)).should(Condition.exist);
     info("The activity is shown successfully");
     $(byText(Topic)).should(Condition.exist);
@@ -205,11 +212,19 @@ public class ForumPublishActivityTestIT extends Base {
     prepareDataTest();
     forumForumManagement.goToStartTopic();
     forumTopicManagement.startTopic(topic1, topic1, "", "");
-    info("clear cache and recconnect");
-    executeJavaScript("location.reload(true);", "");
-    manageLogInOut.signIn(username,password);
     homePagePlatform.goToHomePage();
     info("clear cache and reconnect");
+    for (int i = 0; i <= 10; i++) {
+      refresh();
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      if ($(byText(topic1)).is(Condition.exist)) {
+        break;
+      }
+    }
     activityStream.checkActivity(topic1);
     deleteDataTest();
     info("Test 2: Finished testing");
@@ -236,10 +251,18 @@ public class ForumPublishActivityTestIT extends Base {
     forumHomePage.goToTopic(topic1);
     forumTopicManagement.editTopic(topicNewName, "");
     executeJavaScript("window.scrollBy(0,-400);", "");
-    info("clear cache and recconnect");
-    executeJavaScript("location.reload(true);", "");
-    manageLogInOut.signIn(username,password);
     homePagePlatform.goToHomePage();
+    for (int i = 0; i <= 10; i++) {
+      refresh();
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      if ($(byText(topicNewName)).is(Condition.exist)) {
+        break;
+      }
+    }
     info("Verify that the topic's activity is updated");
     $(byText(topicNewName)).should(Condition.exist);
     info("The topic's activity is updated successfully");
@@ -267,12 +290,21 @@ public class ForumPublishActivityTestIT extends Base {
     forumHomePage.goToTopic(topic1);
     forumTopicManagement.editTopic("", newContent);
     executeJavaScript("window.scrollBy(0,-400);", "");
-    info("clear cache and recconnect");
-    executeJavaScript("location.reload(true);", "");
-    manageLogInOut.signIn(username,password);
     homePagePlatform.goToHomePage();
+    for (int i = 0; i <= 10; i++) {
+      refresh();
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      if ($(byText(topic1)).is(Condition.exist)) {
+        break;
+      }
+    }
     info("Verify that the new topic's activity is shown");
     $(byText(topic1)).should(Condition.exist);
+    $(byText(comment2)).should(Condition.exist);
     info("the new topic's activity is shown successfully");
     deleteDataTest();
     info("Test 04: finished testing");
@@ -299,11 +331,19 @@ public class ForumPublishActivityTestIT extends Base {
     forumTopicManagement.selectItemMoreActionMenuTopic(ForumTopicManagement.specifMoreActionMenuTopic.LOCK);
     info("Verify that Post reply button is not shown when the topic is locked");
     $(ELEMENT_POST_REPLY).should(Condition.exist);
-    info("clear cache and recconnect");
-    executeJavaScript("location.reload(true);", "");
-    manageLogInOut.signIn(username,password);
     info("The topic is locked successfully");
     homePagePlatform.goToHomePage();
+    for (int i = 0; i <= 10; i++) {
+      refresh();
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      if ($(byText(topic1)).is(Condition.exist)) {
+        break;
+      }
+    }
     info("Verify that the topic's activity is shown");
     $(byText(comment4)).should(Condition.exist);
     info("The topic's activity is shown successfully");
@@ -314,11 +354,19 @@ public class ForumPublishActivityTestIT extends Base {
     forumTopicManagement.selectItemMoreActionMenuTopic(ForumTopicManagement.specifMoreActionMenuTopic.UNLOCK);
     info("Verify that Post reply button is shown when the topic is unlocked");
     $(ELEMENT_POST_REPLY).should(Condition.exist);
-    info("clear cache and recconnect");
-    executeJavaScript("location.reload(true);", "");
-    manageLogInOut.signIn(username,password);
     info("The topic is unlocked successfully");
     homePagePlatform.goToHomePage();
+    for (int i = 0; i <= 10; i++) {
+      refresh();
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      if ($(byText(topic1)).is(Condition.exist)) {
+        break;
+      }
+    }
     info("Verify that topic's activity is shown");
     $(By.xpath(ELEMENT_ACTIVITY_COMMENT.replace("${title}", topic1).replace("${comment}", comment3))).should(Condition.exist);
     info("The topic's activity is shown successfully");
@@ -342,10 +390,18 @@ public class ForumPublishActivityTestIT extends Base {
     info("Delete topic:" + topic1);
     forumHomePage.goToTopic(topic1);
     forumTopicManagement.deleteTopic();
-    info("clear cache and recconnect");
-    executeJavaScript("location.reload(true);", "");
-    manageLogInOut.signIn(username,password);
     homePagePlatform.goToHomePage();
+    for (int i = 0; i <= 15; i++) {
+      refresh();
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      if ($(byText(topic1)).is(Condition.not(Condition.exist))) {
+        break;
+      }
+    }
     info("Verify that the topic's activity is deleted after the topic is deleted");
     $(byText(topic1)).shouldNot(Condition.exist);
     info("the topic's activity is deleted sucessfully");
@@ -379,9 +435,18 @@ public class ForumPublishActivityTestIT extends Base {
     info("Add a new poll to the topic");
     forumTopicManagement.addPoll(question, option1, option2);
     info("clear cache and recconnect");
-    executeJavaScript("location.reload(true);", "");
-    manageLogInOut.signIn(username,password);
     homePagePlatform.goToHomePage();
+    for (int i = 0; i <= 10; i++) {
+      refresh();
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      if ($(byText(comment)).is(Condition.exist)) {
+        break;
+      }
+    }
     info("Verify that topic's activity is added to the stream");
     $(byText(comment)).should(Condition.exist);
     info("The topic's activity is added to the stream successfully");
@@ -404,17 +469,25 @@ public class ForumPublishActivityTestIT extends Base {
     String option2 = "Option2" + getRandomNumber();
     info("Finish Creating data test for test 8");
     prepareDataTest();
-
     forumForumManagement.goToStartTopic();
     forumTopicManagement.startTopic(topic1, topic1, "", "");
     forumHomePage.goToTopic(topic1);
     info("Add a new poll to the topic");
     forumTopicManagement.addPoll(question, option1, option2);
     info("clear cache and recconnect");
-    executeJavaScript("location.reload(true);", "");
-    manageLogInOut.signIn(username,password);
     homePagePlatform.goToHomePage();
     info("Click on Vote of Poll's activity on the stream");
+    for (int i = 0; i <= 10; i++) {
+      refresh();
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      if ($(byText(question)).is(Condition.exist)) {
+        break;
+      }
+    }
     $(byText(question)).click();
     info("Verify that the page redirects to the poll");
     $(ELEMENT_MORE_ACTIONS_POLL).should(Condition.exist);
@@ -448,9 +521,18 @@ public class ForumPublishActivityTestIT extends Base {
     info("Edit a poll");
     forumTopicManagement.editPoll(question, option1, option3);
     info("clear cache and recconnect");
-    executeJavaScript("location.reload(true);", "");
-    manageLogInOut.signIn(username,password);
     homePagePlatform.goToHomePage();
+    for (int i = 0; i <= 10; i++) {
+      refresh();
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      if ($(byText(question)).is(Condition.exist)) {
+        break;
+      }
+    }
     info("Verify that the poll's comment is shown on the stream");
     $(byText(question)).should(Condition.exist);
     $(byText(comment2)).should(Condition.exist);
@@ -483,11 +565,19 @@ public class ForumPublishActivityTestIT extends Base {
 
     info("Delete the poll");
     forumTopicManagement.deletePoll();
-    info("clear cache and recconnect");
-    executeJavaScript("location.reload(true);", "");
-    manageLogInOut.signIn(username,password);
     homePagePlatform.goToHomePage();
     info("Verify that the comment is added to the topic on the stream after deleted poll");
+    for (int i = 0; i <= 10; i++) {
+      refresh();
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      if ($(byText(topic1)).is(Condition.exist)) {
+        break;
+      }
+    }
     $(byText(topic1)).should(Condition.exist);
     $(byText(comment3)).should(Condition.exist);
     info("The comment is added to the topic on the stream successfully after deleted poll");
@@ -518,10 +608,18 @@ public class ForumPublishActivityTestIT extends Base {
 
     forumForumManagement.goToStartTopic();
     forumTopicManagement.startTopic(topic1, topic1, "", "");
-    info("clear cache and recconnect");
-    executeJavaScript("location.reload(true);", "");
-    manageLogInOut.signIn(username,password);
     homePagePlatform.goToHomePage();
+    for (int i = 0; i <= 10; i++) {
+      refresh();
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      if ($(byText(topic1)).is(Condition.exist)) {
+        break;
+      }
+    }
     info("Click on Reply button of the topic:" + topic1);
     $(byText(topic1)).parent().parent().parent().parent().find(ELEMENT_ICON_REPLAY_POST_FROM_ACTIVITY).click();
     info("Verify that Reply popup of the topic is shown");
@@ -564,10 +662,18 @@ public class ForumPublishActivityTestIT extends Base {
     info("Reply the topic");
     forumTopicManagement.replyTopic(reply, reply, "", "");
     executeJavaScript("window.scrollBy(0,-600);", "");
-    info("clear cache and recconnect");
-    executeJavaScript("location.reload(true);", "");
-    manageLogInOut.signIn(username,password);
     homePagePlatform.goToHomePage();
+    for (int i = 0; i <= 10; i++) {
+      refresh();
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      if ($(byText(topic)).is(Condition.exist)) {
+        break;
+      }
+    }
     info("Verify that topic's activity with View Last reply icon is shown");
     $(byText(topic)).should(Condition.exist);
     info("The topic's activity with View Last reply icon is shown successfully");
@@ -607,11 +713,19 @@ public class ForumPublishActivityTestIT extends Base {
     info("Create a topic");
     forumForumManagement.goToStartTopic();
     forumTopicManagement.startTopic(topic, topic, "", "");
-    info("clear cache and recconnect");
-    executeJavaScript("location.reload(true);", "");
-    manageLogInOut.signIn(username,password);
     info("Finished Creating a topic");
     homePagePlatform.goToHomePage();
+    for (int i = 0; i <= 10; i++) {
+      refresh();
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      if ($(byText(topic)).is(Condition.exist)) {
+        break;
+      }
+    }
     info("Add a comment to the topic's activity");
     activityStream.checkActivity(topic);
     String id = $(byText(topic)).parent().parent().parent().parent().getAttribute("id").split("ActivityContextBox")[1];
