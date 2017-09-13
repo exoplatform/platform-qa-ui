@@ -6,8 +6,6 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DELETE_ACTIVITY;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DELETE_POPUP_OK;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -955,17 +953,7 @@ public class ActivityStream {
     evt.waitForAndGetElement(ELEMENT_ACTIVITY_NOT_ANY_COMMENT.replace("$title", title));
   }
 
-  /**
-   * Define options of menu activity
-   */
-  public enum optionMenuActivity {
-    All_Activities, My_Spaces, My_Activities, Connections;
-  }
-
-  public enum changeTypes {
-    No_Value, Has_One_Value;
-  }
-  public void addcomment_to_activity (String id) {
+  public void addcomment_to_activity(String id) {
     info("Add Comment");
     String comment = "Comment" + getRandomNumber();
     executeJavaScript("window.scrollBy(0,150)");
@@ -979,8 +967,70 @@ public class ActivityStream {
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
   }
 
+  public void commentActivity(String activity, String comment) {
+    // get the id of activity created
+    String id = $(byText(activity)).parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .getAttribute("id")
+                                   .split("UIActivityLoader")[1];
+    // click on comment link
+    $(byText(activity)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
+    // insert comment
+    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
+    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
+    // click on the button comment
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
+    $(byText(comment)).should(Condition.exist);
   }
 
+  public void deleteactivity(String activity) {
+    // get the id of activity created
+    String id = $(byText(activity)).parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .getAttribute("id")
+                                   .split("UIActivityLoader")[1];
+    // click on the activity to appear the delete button
+    $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
+    // click on delete button
+    $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
+    ELEMENT_DELETE_POPUP_OK.click();
+    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears, Configuration.timeout);
 
+  }
 
+  public void likeUnlikeComment(String activity, String comment) {
+    // get the id of the comment which is the same id of like comment
+    String idBlocComment = $(byText(activity)).parent()
+                                              .parent()
+                                              .parent()
+                                              .find(byText(comment))
+                                              .parent()
+                                              .parent()
+                                              .parent()
+                                              .parent()
+                                              .getAttribute("id")
+                                              .split("commentContainercomment")[1];
+    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).click();
+  }
 
+  /**
+   * Define options of menu activity
+   */
+  public enum optionMenuActivity {
+    All_Activities, My_Spaces, My_Activities, Connections;
+  }
+
+  public enum changeTypes {
+    No_Value, Has_One_Value;
+  }
+}

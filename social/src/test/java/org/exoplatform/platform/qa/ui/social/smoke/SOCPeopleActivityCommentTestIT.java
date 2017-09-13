@@ -298,6 +298,7 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     String username2 = "usernameab" + getRandomString();
     String email2 = username2 + "@gmail.com";
     String password = "123456";
+    String comment = "comment" + getRandomNumber();
     info("Add new user");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);
@@ -319,23 +320,12 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(username1);
     homePagePlatform.goToHomePage();
-    String comment = "comment" + getRandomNumber();
-    // get the id of activity created
-    String id = $(byText(activity1)).parent().parent().parent().parent().parent().parent().parent().getAttribute("id").split("UIActivityLoader")[1];
-    // click on comment link
-    $(byText(activity1)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
-    // insert comment
-    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
-    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
-    // click on the button comment
-    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
-    $(byText(comment)).should(Condition.exist);
-    manageLogInOut.signIn(username2,password);
-    //get the id of the comment which is the same id of like comment
+    activityStream.commentActivity(activity1,comment);
     String idBlocComment=$(byText(activity1)).parent().parent().parent().find(byText(comment)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
-    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).click();
+    manageLogInOut.signIn(username2,password);
+    activityStream.likeUnlikeComment(activity1,comment);
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).parent().shouldHave(Condition.text("(1)"));
-    //rgba(47, 94, 146, 1) is the css value of blyue
+    //rgba(47, 94, 146, 1) is the css value of blue
     assertEquals("rgba(47, 94, 146, 1)",$(byId("LikeCommentLinkcomment"+idBlocComment)).find(byClassName("uiIconThumbUp")).getCssValue("color"));
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).hover();
     ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.shouldHave(Condition.text("Unlike"));
@@ -379,32 +369,20 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     connectionsManagement.acceptAConnection(username1);
     homePagePlatform.goToHomePage();
     String comment = "comment" + getRandomNumber();
-    // get the id of activity created
-    String id = $(byText(activity1)).parent().parent().parent().parent().parent().parent().parent().getAttribute("id").split("UIActivityLoader")[1];
-    // click on comment link
-    $(byText(activity1)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
-    // insert comment
-    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
-    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
-    // click on the button comment
-    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
-    $(byText(comment)).should(Condition.exist);
+    activityStream.commentActivity(activity1,comment);
     manageLogInOut.signIn(username2,password);
     String idBlocComment=$(byText(activity1)).parent().parent().parent().find(byText(comment)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
-    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).click();
+    activityStream.likeUnlikeComment(activity1,comment);
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).parent().shouldHave(Condition.text("(1)"));
     assertEquals("rgba(47, 94, 146, 1)",$(byId("LikeCommentLinkcomment"+idBlocComment)).find(byClassName("uiIconThumbUp")).getCssValue("color"));
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).hover();
     ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.shouldHave(Condition.text("Unlike"));
-
-    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).click();
+    activityStream.likeUnlikeComment(activity1,comment);
     refresh();
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).parent().shouldHave(Condition.text(""));
     assertEquals("rgba(153, 153, 153, 1)",$(byId("LikeCommentLinkcomment"+idBlocComment)).find(byClassName("uiIconThumbUp")).getCssValue("color"));
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).hover();
     ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.shouldHave(Condition.text("Like"));
-
-
     manageLogInOut.signIn("root","gtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);

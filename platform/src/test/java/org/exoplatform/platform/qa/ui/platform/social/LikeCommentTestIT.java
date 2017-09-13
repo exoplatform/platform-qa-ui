@@ -23,9 +23,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_BUTTON_JOIN_SPACE;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_INPUT_INVITE_USER;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACE_BTN_INVITE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
@@ -88,46 +86,32 @@ public class LikeCommentTestIT extends Base {
         connectionsManagement.connectToAUser(DATA_USER3);
         connectionsManagement.connectToAUser(DATA_USER4);
         homePagePlatform.goToHomePage();
-        activityStream.addActivity(activity1, ""); // get the id of activity created
-        String id = $(byText(activity1)).parent().parent().parent().parent().parent().parent().parent().getAttribute("id").split("UIActivityLoader")[1];
-        // click on comment link
-        $(byText(activity1)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
-        // insert comment
-        $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
-        executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
-        // click on the button comment
-        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
-        $(byText(comment)).should(Condition.exist);
+        activityStream.addActivity(activity1, "");
+        activityStream.commentActivity(activity1,comment);
         String idBlocComment=$(byText(activity1)).parent().parent().parent().find(byText(comment)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
 
         manageLogInOut.signIn(DATA_USER2,PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(PLFData.DATA_USER3,PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(PLFData.DATA_USER4,PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
         $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).parent().shouldHave(Condition.text("(3)"));
-
-        // click on the activity to appear the delete button
-        $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-        // click on delete button
-        $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
-        ELEMENT_DELETE_POPUP_OK.click();
-        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears,Configuration.timeout);
-        // scroll up
+        activityStream.deleteactivity(activity1);
+         // scroll up
         executeJavaScript("window.scrollBy(0,-2000)","");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
@@ -146,49 +130,35 @@ public class LikeCommentTestIT extends Base {
         connectionsManagement.connectToAUser(DATA_USER4);
         homePagePlatform.goToHomePage();
         activityStream.addActivity(activity1, ""); // get the id of activity created
-        String id = $(byText(activity1)).parent().parent().parent().parent().parent().parent().parent().getAttribute("id").split("UIActivityLoader")[1];
-        // click on comment link
-        $(byText(activity1)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
-        // insert comment
-        $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
-        executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
-        // click on the button comment
-        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
-        $(byText(comment)).should(Condition.exist);
+        activityStream.commentActivity(activity1,comment);
         String idBlocComment=$(byText(activity1)).parent().parent().parent().find(byText(comment)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
 
         manageLogInOut.signIn(DATA_USER2,PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(PLFData.DATA_USER3,PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(PLFData.DATA_USER4,PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
         $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).parent().shouldHave(Condition.text("(3)"));
         //connect with user 4 and unlike comment
         manageLogInOut.signIn(PLFData.DATA_USER4,PLFData.DATA_PASS);
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
         manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
         $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).parent().shouldHave(Condition.text("(2)"));
-        // click on the activity to appear the delete button
-        $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-        // click on delete button
-        $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
-        ELEMENT_DELETE_POPUP_OK.click();
-        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears,Configuration.timeout);
-        // scroll up
+        activityStream.deleteactivity(activity1);
         executeJavaScript("window.scrollBy(0,-2000)","");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
@@ -207,34 +177,26 @@ public class LikeCommentTestIT extends Base {
         connectionsManagement.connectToAUser(DATA_USER4);
         homePagePlatform.goToHomePage();
         activityStream.addActivity(activity1, ""); // get the id of activity created
-        String id = $(byText(activity1)).parent().parent().parent().parent().parent().parent().parent().getAttribute("id").split("UIActivityLoader")[1];
-        // click on comment link
-        $(byText(activity1)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
-        // insert comment
-        $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
-        executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
-        // click on the button comment
-        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
-        $(byText(comment)).should(Condition.exist);
+        activityStream.commentActivity(activity1,comment);
         String idBlocComment=$(byText(activity1)).parent().parent().parent().find(byText(comment)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
 
         manageLogInOut.signIn(DATA_USER2,PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(PLFData.DATA_USER3,PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(PLFData.DATA_USER4,PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
         $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).parent().find(byText("(3)")).click();
@@ -243,12 +205,7 @@ public class LikeCommentTestIT extends Base {
         ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Mary Williams")).should(Condition.exist);
         ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT.click();
         executeJavaScript("window.scrollBy(0,-950)","");
-        // click on the activity to appear the delete button
-        $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-        // click on delete button
-        $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
-        ELEMENT_DELETE_POPUP_OK.click();
-        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears,Configuration.timeout);
+        activityStream.deleteactivity(activity1);
         // scroll up
         executeJavaScript("window.scrollBy(0,-2000)","");
         homePagePlatform.goToConnections();
@@ -268,34 +225,26 @@ public class LikeCommentTestIT extends Base {
         connectionsManagement.connectToAUser(DATA_USER4);
         homePagePlatform.goToHomePage();
         activityStream.addActivity(activity1, ""); // get the id of activity created
-        String id = $(byText(activity1)).parent().parent().parent().parent().parent().parent().parent().getAttribute("id").split("UIActivityLoader")[1];
-        // click on comment link
-        $(byText(activity1)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
-        // insert comment
-        $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
-        executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
-        // click on the button comment
-        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
-        $(byText(comment)).should(Condition.exist);
+        activityStream.commentActivity(activity1,comment);
         String idBlocComment=$(byText(activity1)).parent().parent().parent().find(byText(comment)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
 
         manageLogInOut.signIn(DATA_USER2,PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(PLFData.DATA_USER3,PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(PLFData.DATA_USER4,PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
         $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).parent().find(byText("(3)")).click();
@@ -304,12 +253,7 @@ public class LikeCommentTestIT extends Base {
         ELEMENT_THIRD_USER_IN_POPUP_WHO_LIKE_COMMENT.shouldHave(Condition.text("Mary Williams"));
         ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT.click();
         executeJavaScript("window.scrollBy(0,-950)","");
-        // click on the activity to appear the delete button
-        $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-        // click on delete button
-        $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
-        ELEMENT_DELETE_POPUP_OK.click();
-        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears,Configuration.timeout);
+        activityStream.deleteactivity(activity1);
         // scroll up
         executeJavaScript("window.scrollBy(0,-2000)","");
         homePagePlatform.goToConnections();
@@ -329,34 +273,26 @@ public class LikeCommentTestIT extends Base {
         connectionsManagement.connectToAUser(DATA_USER4);
         homePagePlatform.goToHomePage();
         activityStream.addActivity(activity1, ""); // get the id of activity created
-        String id = $(byText(activity1)).parent().parent().parent().parent().parent().parent().parent().getAttribute("id").split("UIActivityLoader")[1];
-        // click on comment link
-        $(byText(activity1)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
-        // insert comment
-        $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
-        executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
-        // click on the button comment
-        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
-        $(byText(comment)).should(Condition.exist);
+        activityStream.commentActivity(activity1,comment);
         String idBlocComment=$(byText(activity1)).parent().parent().parent().find(byText(comment)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
 
         manageLogInOut.signIn(DATA_USER2,PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(PLFData.DATA_USER3,PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(PLFData.DATA_USER4,PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
         $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).parent().find(byText("(3)")).click();
@@ -365,12 +301,7 @@ public class LikeCommentTestIT extends Base {
         ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Mary Williams")).parent().parent().find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT).shouldHave(Condition.text("Remove Connection"));
         ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT.click();
         executeJavaScript("window.scrollBy(0,-950)","");
-        // click on the activity to appear the delete button
-        $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-        // click on delete button
-        $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
-        ELEMENT_DELETE_POPUP_OK.click();
-        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears,Configuration.timeout);
+        activityStream.deleteactivity(activity1);
         // scroll up
         executeJavaScript("window.scrollBy(0,-2000)","");
         homePagePlatform.goToConnections();
@@ -400,31 +331,22 @@ public class LikeCommentTestIT extends Base {
         $(ELEMENT_SPACE_BTN_INVITE).click();
         spaceManagement.goToActivityStreamTab();
         activityStream.addActivity(activity1, "");
-        // get the id of activity created
-        String id = $(byText(activity1)).parent().parent().parent().parent().parent().parent().parent().getAttribute("id").split("UIActivityLoader")[1];
-        // click on comment link
-        $(byText(activity1)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
-        // insert comment
-        $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
-        executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
-        // click on the button comment
-        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
-        $(byText(comment)).should(Condition.exist);
+        activityStream.commentActivity(activity1,comment);
         executeJavaScript("window.scrollBy(0,-550)","");
         String idBlocComment=$(byText(activity1)).parent().parent().parent().find(byText(comment)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
 
         manageLogInOut.signIn(DATA_USER2,DATA_PASS);
         homePagePlatform.goToAllSpace();
         spaceManagement.acceptAInvitation(space);
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
         manageLogInOut.signIn(DATA_USER3,DATA_PASS);
         homePagePlatform.goToAllSpace();
         spaceManagement.acceptAInvitation(space);
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
         manageLogInOut.signIn(DATA_USER4,DATA_PASS);
         homePagePlatform.goToAllSpace();
         spaceManagement.acceptAInvitation(space);
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
         manageLogInOut.signIn(DATA_USER1,"gtngtn");
         homePagePlatform.goToSpecificSpace(space);
         $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).parent().find(byText("(3)")).click();
@@ -480,23 +402,14 @@ public class LikeCommentTestIT extends Base {
         homePagePlatform.goToAllSpace();
         spaceManagement.addNewSpaceSimple(space, space);
         spaceHomePage.goToSpaceSettingTab();
-        $(byXpath("//*[@id=\"UITabPane\"]/ul/li[2]/a")).click();
+        ELEMENT_TAB_ACCESS_AND_EDIT.click();
         $(byId("UIRegistration")).selectRadio("open");
-        $(byXpath("//*[@id=\"UISpacePermission\"]/div[3]/button")).click();
-        $(byClassName("infoIcon")).parent().parent().parent().find(byClassName("btn")).click();
-        $(byClassName("infoIcon")).parent().parent().parent().find(byClassName("btn")).waitUntil(Condition.disappears,Configuration.timeout);
+        ELEMENT_BUTTON_SAVE_IN_ACCESS_AND_EDIT_TAB.click();
+        ELEMENT_OK_BUTTON.click();
+        ELEMENT_OK_BUTTON.waitUntil(Condition.disappears,Configuration.timeout);
         spaceManagement.goToActivityStreamTab();
         activityStream.addActivity(activity1, "");
-        // get the id of activity created
-        String id = $(byText(activity1)).parent().parent().parent().parent().parent().parent().parent().getAttribute("id").split("UIActivityLoader")[1];
-        // click on comment link
-        $(byText(activity1)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
-        // insert comment
-        $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
-        executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
-        // click on the button comment
-        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
-        $(byText(comment)).should(Condition.exist);
+        activityStream.commentActivity(activity1,comment);
         String idBlocComment=$(byText(activity1)).parent().parent().parent().find(byText(comment)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
 
         manageLogInOut.signIn(username1,password);
@@ -504,63 +417,63 @@ public class LikeCommentTestIT extends Base {
         $(byText(space)).parent().parent().parent().find(ELEMENT_BUTTON_JOIN_SPACE).click();
         $(byText(space)).parent().parent().parent().find(byText("Leave")).waitUntil(Condition.appears,Configuration.timeout);
         $(byText(space)).click();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(username2,password);
         homePagePlatform.goToAllSpace();
         $(byText(space)).parent().parent().parent().find(ELEMENT_BUTTON_JOIN_SPACE).click();
         $(byText(space)).parent().parent().parent().find(byText("Leave")).waitUntil(Condition.appears,Configuration.timeout);
         $(byText(space)).click();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(username3,password);
         homePagePlatform.goToAllSpace();
         $(byText(space)).parent().parent().parent().find(ELEMENT_BUTTON_JOIN_SPACE).click();
         $(byText(space)).parent().parent().parent().find(byText("Leave")).waitUntil(Condition.appears,Configuration.timeout);
         $(byText(space)).click();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(username4,password);
         homePagePlatform.goToAllSpace();
         $(byText(space)).parent().parent().parent().find(ELEMENT_BUTTON_JOIN_SPACE).click();
         $(byText(space)).parent().parent().parent().find(byText("Leave")).waitUntil(Condition.appears,Configuration.timeout);
         $(byText(space)).click();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(username5,password);
         homePagePlatform.goToAllSpace();
         $(byText(space)).parent().parent().parent().find(ELEMENT_BUTTON_JOIN_SPACE).click();
         $(byText(space)).parent().parent().parent().find(byText("Leave")).waitUntil(Condition.appears,Configuration.timeout);
         $(byText(space)).click();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(username6,password);
         homePagePlatform.goToAllSpace();
         $(byText(space)).parent().parent().parent().find(ELEMENT_BUTTON_JOIN_SPACE).click();
         $(byText(space)).parent().parent().parent().find(byText("Leave")).waitUntil(Condition.appears,Configuration.timeout);
         $(byText(space)).click();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(username7,password);
         homePagePlatform.goToAllSpace();
         $(byText(space)).parent().parent().parent().find(ELEMENT_BUTTON_JOIN_SPACE).click();
         $(byText(space)).parent().parent().parent().find(byText("Leave")).waitUntil(Condition.appears,Configuration.timeout);
         $(byText(space)).click();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(username8,password);
         homePagePlatform.goToAllSpace();
         $(byText(space)).parent().parent().parent().find(ELEMENT_BUTTON_JOIN_SPACE).click();
         $(byText(space)).parent().parent().parent().find(byText("Leave")).waitUntil(Condition.appears,Configuration.timeout);
         $(byText(space)).click();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(username9,password);
         homePagePlatform.goToAllSpace();
         $(byText(space)).parent().parent().parent().find(ELEMENT_BUTTON_JOIN_SPACE).click();
         $(byText(space)).parent().parent().parent().find(byText("Leave")).waitUntil(Condition.appears,Configuration.timeout);
         $(byText(space)).click();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(username10,password);
         homePagePlatform.goToAllSpace();
@@ -568,14 +481,14 @@ public class LikeCommentTestIT extends Base {
         $(byText(space)).parent().parent().parent().find(byText("Leave")).waitUntil(Condition.appears,Configuration.timeout);
         homePagePlatform.goToMySpaces();
         $(byText(space)).click();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(username11,password);
         homePagePlatform.goToAllSpace();
         $(byText(space)).parent().parent().parent().find(ELEMENT_BUTTON_JOIN_SPACE).click();
         $(byText(space)).parent().parent().parent().find(byText("Leave")).waitUntil(Condition.appears,Configuration.timeout);
         $(byText(space)).click();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
 
         manageLogInOut.signIn(DATA_USER1,"gtngtn");
         homePagePlatform.goToSpecificSpace(space);
@@ -614,30 +527,17 @@ public class LikeCommentTestIT extends Base {
         connectionsManagement.connectToAUser(DATA_USER2);
         homePagePlatform.goToHomePage();
         activityStream.addActivity(activity1, ""); // get the id of activity created
-        String id = $(byText(activity1)).parent().parent().parent().parent().parent().parent().parent().getAttribute("id").split("UIActivityLoader")[1];
-        // click on comment link
-        $(byText(activity1)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
-        // insert comment
-        $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
-        executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
-        // click on the button comment
-        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
-        $(byText(comment)).should(Condition.exist);
+        activityStream.commentActivity(activity1,comment);
         String idBlocComment=$(byText(activity1)).parent().parent().parent().find(byText(comment)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
         manageLogInOut.signIn(DATA_USER2,PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).find(byClassName("uiIconThumbUp")).scrollTo().click();
+        activityStream.likeUnlikeComment(activity1,comment);
         manageLogInOut.signIn(DATA_USER1,"gtngtn");
         $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).parent().find(byText("(1)")).hover();
         ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.find(byText("Mary Williams")).should(Condition.exist);
-        // click on the activity to appear the delete button
-        $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-        // click on delete button
-        $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
-        ELEMENT_DELETE_POPUP_OK.click();
-        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears,Configuration.timeout);
+        activityStream.deleteactivity(activity1);
         // scroll up
         executeJavaScript("window.scrollBy(0,-2000)","");
         homePagePlatform.goToConnections();
@@ -667,10 +567,7 @@ public class LikeCommentTestIT extends Base {
         $(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).parent().parent().shouldHave(Condition.text("(1)"));
         assertEquals("rgba(47, 94, 146, 1)",$(byText(comment)).parent().parent().find(byClassName("uiIconThumbUp")).getCssValue("color"));
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-        $(byText(activity1)).parent().parent().find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-        $(byText(activity1)).parent().parent().find(ELEMENT_DELETE_ACTIVITY_CONTAINS_DOC).click();
-        ELEMENT_DELETE_POPUP_OK.click();
-        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears,Configuration.timeout);
+        activityStream.deleteactivity(activity1);
     }
 
     @Test
@@ -725,10 +622,7 @@ public class LikeCommentTestIT extends Base {
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
         ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).parent().parent().shouldHave(Condition.text("(3)"));
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-        $(byText(activity1)).parent().parent().find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-        $(byText(activity1)).parent().parent().find(ELEMENT_DELETE_ACTIVITY_CONTAINS_DOC).click();
-        ELEMENT_DELETE_POPUP_OK.click();
-        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears,Configuration.timeout);
+        activityStream.deleteactivity(activity1);
         // scroll up
         executeJavaScript("window.scrollBy(0,-2000)","");
         homePagePlatform.goToConnections();
@@ -801,10 +695,7 @@ public class LikeCommentTestIT extends Base {
         ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).parent().parent().shouldHave(Condition.text("(2)"));
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
-        $(byText(activity1)).parent().parent().find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-        $(byText(activity1)).parent().parent().find(ELEMENT_DELETE_ACTIVITY_CONTAINS_DOC).click();
-        ELEMENT_DELETE_POPUP_OK.click();
-        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears,Configuration.timeout);
+        activityStream.deleteactivity(activity1);
         // scroll up
         executeJavaScript("window.scrollBy(0,-2000)","");
         homePagePlatform.goToConnections();
@@ -869,10 +760,7 @@ public class LikeCommentTestIT extends Base {
         ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Mary Williams")).should(Condition.exist);
         ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT.click();
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-        $(byText(activity1)).parent().parent().find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-        $(byText(activity1)).parent().parent().find(ELEMENT_DELETE_ACTIVITY_CONTAINS_DOC).click();
-        ELEMENT_DELETE_POPUP_OK.click();
-        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears,Configuration.timeout);
+        activityStream.deleteactivity(activity1);
         // scroll up
         executeJavaScript("window.scrollBy(0,-2000)","");
         homePagePlatform.goToConnections();
@@ -937,10 +825,7 @@ public class LikeCommentTestIT extends Base {
         ELEMENT_THIRD_USER_IN_POPUP_WHO_LIKE_COMMENT.shouldHave(Condition.text("Mary Williams"));
         ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT.click();
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-        $(byText(activity1)).parent().parent().find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-        $(byText(activity1)).parent().parent().find(ELEMENT_DELETE_ACTIVITY_CONTAINS_DOC).click();
-        ELEMENT_DELETE_POPUP_OK.click();
-        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears,Configuration.timeout);
+        activityStream.deleteactivity(activity1);
         // scroll up
         executeJavaScript("window.scrollBy(0,-2000)","");
         homePagePlatform.goToConnections();
@@ -1005,10 +890,7 @@ public class LikeCommentTestIT extends Base {
         ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Mary Williams")).parent().parent().find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT).shouldHave(Condition.text("Remove Connection"));
         ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT.click();
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-        $(byText(activity1)).parent().parent().find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-        $(byText(activity1)).parent().parent().find(ELEMENT_DELETE_ACTIVITY_CONTAINS_DOC).click();
-        ELEMENT_DELETE_POPUP_OK.click();
-        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears,Configuration.timeout);
+        activityStream.deleteactivity(activity1);
         // scroll up
         executeJavaScript("window.scrollBy(0,-2000)","");
         homePagePlatform.goToConnections();
