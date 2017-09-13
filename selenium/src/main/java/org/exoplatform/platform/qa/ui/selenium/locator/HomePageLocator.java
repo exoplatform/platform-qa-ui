@@ -581,7 +581,7 @@ public final class HomePageLocator {
   public static final SelenideElement ELEMENT_INPUT_DOCUMENT=$(byClassName("multiploadFilesSelector")).find(byClassName("file"));
   public static final SelenideElement ELEMENT_BAR_PROGRESS= $(byClassName("progress-striped"));
   public static final String ELEMENT_DOCUMENT_PREVIEW="Preview{id}-0";
-  public static final SelenideElement ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW= $(byXpath("/html/body"));
+  public static final SelenideElement ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW= $(byId("cke_commentInput"));
   public static final SelenideElement ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW= $(byId("CommentButton"));
   public static final By ELEMENT_ICON_LIKE_COMMENT=byClassName("uiIconThumbUp");
   public static final SelenideElement ELEMENT_CLOSE_DOCUMENT_PREVIEW= $(byXpath("//*[@id=\"uiDocumentPreview\"]/div[1]/a"));

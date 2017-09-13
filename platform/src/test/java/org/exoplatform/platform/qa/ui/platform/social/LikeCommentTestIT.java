@@ -33,7 +33,7 @@ import static org.junit.Assert.assertEquals;
  * Created by exo on 11/09/17.
  */
 @Tag("social")
-@Tag("sniff")
+@Tag("debug")
 public class LikeCommentTestIT extends Base {
     NavigationToolbar navigationToolbar;
 
@@ -558,9 +558,8 @@ public class LikeCommentTestIT extends Base {
         activityStream.addActivity(activity1, "");
         String id=$(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
-        switchTo().frame(11);
-        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.sendKeys(comment);
-        switchTo().defaultContent();
+        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
+        executeJavaScript("CKEDITOR.instances.commentInput. insertText(\""+comment+"\")","");
         ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled,Configuration.timeout).click();
         $(byText(comment)).should(Condition.exist);
         $(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
@@ -583,9 +582,8 @@ public class LikeCommentTestIT extends Base {
         activityStream.addActivity(activity1, "");
         String id=$(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
-        switchTo().frame(11);
-        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.sendKeys(comment);
-        switchTo().defaultContent();
+        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
+        executeJavaScript("CKEDITOR.instances.commentInput. insertText(\""+comment+"\")","");
         ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled,Configuration.timeout).click();
         $(byText(comment)).should(Condition.exist);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
@@ -645,9 +643,8 @@ public class LikeCommentTestIT extends Base {
         activityStream.addActivity(activity1, "");
         String id=$(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
-        switchTo().frame(11);
-        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.sendKeys(comment);
-        switchTo().defaultContent();
+        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
+        executeJavaScript("CKEDITOR.instances.commentInput. insertText(\""+comment+"\")","");
         ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled,Configuration.timeout).click();
         $(byText(comment)).should(Condition.exist);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
@@ -717,9 +714,8 @@ public class LikeCommentTestIT extends Base {
         activityStream.addActivity(activity1, "");
         String id=$(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
-        switchTo().frame(11);
-        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.sendKeys(comment);
-        switchTo().defaultContent();
+        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
+        executeJavaScript("CKEDITOR.instances.commentInput. insertText(\""+comment+"\")","");
         ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled,Configuration.timeout).click();
         $(byText(comment)).should(Condition.exist);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
@@ -782,9 +778,8 @@ public class LikeCommentTestIT extends Base {
         activityStream.addActivity(activity1, "");
         String id=$(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
-        switchTo().frame(11);
-        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.sendKeys(comment);
-        switchTo().defaultContent();
+        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
+        executeJavaScript("CKEDITOR.instances.commentInput. insertText(\""+comment+"\")","");
         ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled,Configuration.timeout).click();
         $(byText(comment)).should(Condition.exist);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
@@ -847,9 +842,8 @@ public class LikeCommentTestIT extends Base {
         activityStream.addActivity(activity1, "");
         String id=$(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
-        switchTo().frame(11);
-        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.sendKeys(comment);
-        switchTo().defaultContent();
+        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
+        executeJavaScript("CKEDITOR.instances.commentInput. insertText(\""+comment+"\")","");
         ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled,Configuration.timeout).click();
         $(byText(comment)).should(Condition.exist);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
@@ -915,9 +909,8 @@ public class LikeCommentTestIT extends Base {
         activityStream.addActivity(activity1, "");
         String id=$(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
-        switchTo().frame(3);
-        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.sendKeys(comment);
-        switchTo().defaultContent();
+        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
+        executeJavaScript("CKEDITOR.instances.commentInput. insertText(\""+comment+"\")","");
         ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled,Configuration.timeout).click();
         $(byText(comment)).should(Condition.exist);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
@@ -1074,9 +1067,10 @@ public class LikeCommentTestIT extends Base {
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
         connectionsManagement.removeConnection(DATA_USER3);
+        connectionsManagement.removeConnection(DATA_USER4);
     }
 
-   
+
     public void test20_checkNotificationWhenOneUserLikeCommentInDocumentPreviw(){
         String activity1 = "activity1" + getRandomNumber();
         String comment = "comment" + getRandomNumber();
