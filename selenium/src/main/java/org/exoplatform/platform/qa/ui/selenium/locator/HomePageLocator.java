@@ -587,5 +587,8 @@ public final class HomePageLocator {
   public static final SelenideElement ELEMENT_CLOSE_DOCUMENT_PREVIEW= $(byXpath("//*[@id=\"uiDocumentPreview\"]/div[1]/a"));
   public static final By ELEMENT_DELETE_ACTIVITY_CONTAINS_DOC=byClassName("uiIconClose");
   public static final SelenideElement ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW=$(byXpath("//*[@id=\"$uicomponent.id\"]/div[2]"));
+  public static final SelenideElement ELEMENT_ICON_NOTIFICATION=$(byXpath("//*[@id=\"UINotificationPopoverToolbarPortlet\"]/div[2]/a"));
+  public static final SelenideElement ELEMENT_ALERT_NOTIFICATION= $(byClassName("badgeNotification"));
+  public static final SelenideElement ELEMENT_NOTIFICATION_POPUP= $(byId("NotificationPopup"));
 
 }

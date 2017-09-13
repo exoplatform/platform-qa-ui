@@ -978,4 +978,144 @@ public class LikeCommentTestIT extends Base {
         connectionsManagement.removeConnection(DATA_USER2);
         connectionsManagement.removeConnection(DATA_USER3);
     }
+    @Test
+    public void test17_checkNotificationWhenOneUserLikeComment(){
+        String activity1 = "activity1" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+        String comment1=" likes your comment.";
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        homePagePlatform.goToHomePage();
+        activityStream.addActivity(activity1, "");
+        activityStream.commentActivity(activity1,comment);
+        String idBlocComment=$(byText(activity1)).parent().parent().parent().find(byText(comment)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
+        manageLogInOut.signIn(DATA_USER2,PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        activityStream.likeUnlikeComment(activity1,comment);
+        manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
+        ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.appears,Configuration.timeout);
+        ELEMENT_ICON_NOTIFICATION.click();
+        ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears,Configuration.timeout).find(byText(comment)).parent().parent().shouldHave(Condition.text(DATA_NAME_USER2+comment1));
+        ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears,Configuration.timeout).find(byText(DATA_NAME_USER2)).parent().parent().find(byText(comment)).should(Condition.exist);
+        activityStream.deleteactivity(activity1);
+        executeJavaScript("window.scrollBy(0,-2000)","");
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+    }
+
+    @Test
+    public void test18_checkNotificationWhenTWOUserLikeComment(){
+        String activity1 = "activity1" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+        String comment1=" like your comment.";
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        connectionsManagement.connectToAUser(DATA_USER3);
+        homePagePlatform.goToHomePage();
+        activityStream.addActivity(activity1, "");
+        activityStream.commentActivity(activity1,comment);
+        manageLogInOut.signIn(DATA_USER2,PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        activityStream.likeUnlikeComment(activity1,comment);
+        manageLogInOut.signIn(DATA_USER3,PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        activityStream.likeUnlikeComment(activity1,comment);
+        manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
+        ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.appears,Configuration.timeout);
+        ELEMENT_ICON_NOTIFICATION.click();
+        ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears,Configuration.timeout).find(byText(comment)).parent().parent().shouldHave(Condition.text("James David"+" and "+DATA_NAME_USER2+comment1));
+        ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears,Configuration.timeout).find(byText(DATA_NAME_USER2)).parent().parent().find(byText(comment)).should(Condition.exist);
+        activityStream.deleteactivity(activity1);
+        executeJavaScript("window.scrollBy(0,-2000)","");
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+        connectionsManagement.removeConnection(DATA_USER3);
+    }
+
+    @Test
+    public void test19_checkNotificationWhenManyUserLikeComment(){
+        String activity1 = "activity1" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+        String comment1=" and 1 more like your comment.";
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        connectionsManagement.connectToAUser(DATA_USER3);
+        connectionsManagement.connectToAUser(DATA_USER4);
+        homePagePlatform.goToHomePage();
+        activityStream.addActivity(activity1, "");
+        activityStream.commentActivity(activity1,comment);
+        manageLogInOut.signIn(DATA_USER2,PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        activityStream.likeUnlikeComment(activity1,comment);
+        manageLogInOut.signIn(DATA_USER3,PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        activityStream.likeUnlikeComment(activity1,comment);
+        manageLogInOut.signIn(DATA_USER4,PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        activityStream.likeUnlikeComment(activity1,comment);
+        manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
+        ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.appears,Configuration.timeout);
+        ELEMENT_ICON_NOTIFICATION.click();
+        ELEMENT_NOTIFICATION_POPUP.find(byText(comment)).parent().parent().shouldHave(Condition.text(DATA_NAME_USER4+", James David"+comment1));
+        activityStream.deleteactivity(activity1);
+        executeJavaScript("window.scrollBy(0,-2000)","");
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+        connectionsManagement.removeConnection(DATA_USER3);
+    }
+
+   
+    public void test20_checkNotificationWhenOneUserLikeCommentInDocumentPreviw(){
+        String activity1 = "activity1" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+        String comment1=" likes your comment.";
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        homePagePlatform.goToHomePage();
+        ELEMENT_TAB_LINK.click();
+        ELEMENT_TAB_LINK.click();
+        ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible),Configuration.timeout);
+        ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
+        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears,Configuration.timeout);
+        activityStream.addActivity(activity1, "");
+        String id=$(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        switchTo().frame(11);
+        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.sendKeys(comment);
+        switchTo().defaultContent();
+        ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled,Configuration.timeout).click();
+        $(byText(comment)).should(Condition.exist);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+
+        manageLogInOut.signIn(DATA_USER2,PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToHomePage();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}",id))).click();
+        ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+
+        manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
+        ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.appears,Configuration.timeout);
+        ELEMENT_ICON_NOTIFICATION.click();
+        ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears,Configuration.timeout).find(byText(comment)).parent().parent().shouldHave(Condition.text(DATA_NAME_USER2+comment1));
+        ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears,Configuration.timeout).find(byText(DATA_NAME_USER2)).parent().parent().find(byText(comment)).should(Condition.exist);
+        activityStream.deleteactivity(activity1);
+        executeJavaScript("window.scrollBy(0,-2000)","");
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+    }
 }
