@@ -80,20 +80,17 @@ public class Plf_GettintStartedGadgetTestIT extends Base {
    * <li>Case ID:120844.</li>
    * <li>Test Case Name: Check display of Getting started Gadget.</li>
    * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
+   * <li>Post-Condition:</li> Step Number: 1 Step Name: Check display of Getting
+   * Started Gadget Step Description: - Login and Open intranet homepage - Check
+   * getting started gadget Input Data: Expected Outcome: This gadget is displayed
+   * at the first gadget level (top right), from the first user's connection - The
+   * gadget should have the following tasks:+ Add a profile picture+ Connect to
+   * coworkers+Join a space+ Post an activity+ Upload a document
    */
   @Test
   public void test01_CheckDisplayOfGettingStartedGadget() {
     info("Test 1: Check display of Getting started Gadget");
 
-    /*
-     * Step Number: 1 Step Name: Check display of Getting Started Gadget Step
-     * Description: - Login and Open intranet homepage - Check getting started
-     * gadget Input Data: Expected Outcome: This gadget is displayed at the first
-     * gadget level (top right), from the first user's connection - The gadget
-     * should have the following tasks:+ Add a profile picture+ Connect to
-     * coworkers+Join a space+ Post an activity+ Upload a document
-     */
     info("Verify that getting started is shown with full tasks");
     waitForAndGetElement(ELEMENT_HP_GETTINGSTARTED_BOX);
     ELEMENT_HP_GETTING_STARTED_SET_YOUR_PROFILE_PICTURE.waitUntil(Condition.appears, Configuration.timeout);
@@ -107,24 +104,21 @@ public class Plf_GettintStartedGadgetTestIT extends Base {
    * <li>Case ID:120845.</li>
    * <li>Test Case Name: Perform an action on Getting started Gadget.</li>
    * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
+   * <li>Post-Condition:</li> Step Number: 1 Step Name: Connect to intranet home
+   * page Step Description: - Login and connect to intranet home page Input Data:
+   * Expected Outcome: - Intranet home page is shown with Getting started gadget
+   * Step number: 2 Step Name: Perform an action Step Description: - Click on an
+   * action, for example, Upload a profile picture - Complete to upload a profile
+   * picture Input Data: Expected Outcome: - The arrow is transformed into a check
+   * icon - The action is strikedthrough - The completion percentage is updated
    */
   @Test
   public void test02_PerformAnActionOnGettingStartedGadget() {
     info("Test 2: Perform an action on Getting started Gadget");
-    /*
-     * Step Number: 1 Step Name: Connect to intranet home page Step Description: -
-     * Login and connect to intranet home page Input Data: Expected Outcome: -
-     * Intranet home page is shown with Getting started gadget
-     */
+
     info("Verify that getting started is shown");
     waitForAndGetElement(ELEMENT_HP_GETTINGSTARTED_BOX);
-    /*
-     * Step number: 2 Step Name: Perform an action Step Description: - Click on an
-     * action, for example, Upload a profile picture - Complete to upload a profile
-     * picture Input Data: Expected Outcome: - The arrow is transformed into a check
-     * icon - The action is strikedthrough - The completion percentage is updated
-     */
+
     info("click on connect to coworker link");
     ELEMENT_HP_GETTING_STARTED_CONNECT_WITH_OTHERS.click();
     info("Connect to a coworker");
@@ -148,60 +142,49 @@ public class Plf_GettintStartedGadgetTestIT extends Base {
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li>
    */
+  /*
+   * Step Number: 1 Step Name: Connect to intranet home page Step Description: -
+   * Login and connect to intranet home page Input Data: Expected Outcome: -
+   * Intranet home page is shown Step number: 2 Step Name: Perform a task: Add a
+   * picture Step Description: - Click on "Add a picture" Input Data: Expected
+   * Outcome: Open Profile page Step number: 3 Step Name: Perform a task: Connect
+   * to coworkers Step Description: - Click on "Connect to coworkers" Input Data:
+   * Expected Outcome: Open Employee Directory Step number: 4 Step Name: Perform a
+   * task: Join a space Step Description: - Click on "Join a space" Input Data:
+   * Expected Outcome: Open Space directory Step number: 5 Step Name: Perform a
+   * task: Post an activity Step Description: - Click on "Post an activity" Input
+   * Data: Expected Outcome: Open Homepage (use #) Step number: 6 Step Name:
+   * Perform a task: Upload a document Step Description: Click on
+   * "Upload a document" Input Data: Expected Outcome: Open Document Explorer (in
+   * Personal Documents Folders)
+   */
   @Test
   public void test03_CheckDirectionWhenPerformingAnAction() {
     info("Test 3: Check direction when performing an action");
-    /*
-     * Step Number: 1 Step Name: Connect to intranet home page Step Description: -
-     * Login and connect to intranet home page Input Data: Expected Outcome: -
-     * Intranet home page is shown
-     */
 
-    /*
-     * Step number: 2 Step Name: Perform a task: Add a picture Step Description: -
-     * Click on "Add a picture" Input Data: Expected Outcome: Open Profile page
-     */
     info("Click on add a picture link");
     ELEMENT_HP_GETTING_STARTED_SET_YOUR_PROFILE_PICTURE.click();
     info("Verify that the profile page is shown");
     waitForAndGetElement(ELEMENT_HP_GETTINGSTARTED_PROFILEPAGE);
 
-    /*
-     * Step number: 3 Step Name: Perform a task: Connect to coworkers Step
-     * Description: - Click on "Connect to coworkers" Input Data: Expected Outcome:
-     * Open Employee Directory
-     */
     info("click o connect to coworker link");
     homePagePlatform.goToHomePage();
     ELEMENT_HP_GETTING_STARTED_CONNECT_WITH_OTHERS.click();
     info("Verify that connection page is shown");
     waitForAndGetElement(ELEMENT_HP_GETTINGSTARTED_CONNECTIONPAGE);
 
-    /*
-     * Step number: 4 Step Name: Perform a task: Join a space Step Description: -
-     * Click on "Join a space" Input Data: Expected Outcome: Open Space directory
-     */
     info("Click on join to space link");
     homePagePlatform.goToHomePage();
     ELEMENT_HP_GETTING_STARTED_JOIN_A_SPACE.click();
     info("Verify that check join space page is shown");
     waitForAndGetElement(ELEMENT_HP_GETTINGSTARTED_CHECKJOINSPACE);
 
-    /*
-     * Step number: 5 Step Name: Perform a task: Post an activity Step Description:
-     * - Click on "Post an activity" Input Data: Expected Outcome: Open Homepage
-     * (use #)
-     */
     info("Click on post an activity link");
     homePagePlatform.goToHomePage();
     ELEMENT_HP_GETTING_STARTED_POST_A_MESSAGE.click();
     info("Verify that the activity page is shown");
     waitForAndGetElement(ELEMENT_HOMPAGE_MIDDLE_PANEL);
-    /*
-     * Step number: 6 Step Name: Perform a task: Upload a document Step Description:
-     * Click on "Upload a document" Input Data: Expected Outcome: Open Document
-     * Explorer (in Personal Documents Folders)
-     */
+
     info("Click on upload a document link");
     ELEMENT_HP_GETTING_STARTED_UPLOAD_A_DOCUMENT.click();
     info("Verify that upload document page is shown");
@@ -212,7 +195,12 @@ public class Plf_GettintStartedGadgetTestIT extends Base {
    * <li>Case ID:120848.</li>
    * <li>Test Case Name: Complete this Getting Started gadget.</li>
    * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
+   * <li>Post-Condition:</li> Step Number: 1 Step Name: Connect to intranet home
+   * page Step Description: - Login and connect to intranet home page Input Data:
+   * Expected Outcome: - Intranet home page is shown Step number: 2 Step Name:
+   * Complete the Getting Started Gadget Step Description: - Perform all tasks of
+   * this gadget Input Data: Expected Outcome: - The progress is 100% - A link
+   * labelled "Close" is displayed to invite the user to remove the gadget
    */
   @Test
   public void test04_CompleteThisGettingStartedGadget() {
@@ -221,18 +209,6 @@ public class Plf_GettintStartedGadgetTestIT extends Base {
     String text = "text" + getRandomNumber();
     String spacename = "spacename" + getRandomNumber();
 
-    /*
-     * Step Number: 1 Step Name: Connect to intranet home page Step Description: -
-     * Login and connect to intranet home page Input Data: Expected Outcome: -
-     * Intranet home page is shown
-     */
-
-    /*
-     * Step number: 2 Step Name: Complete the Getting Started Gadget Step
-     * Description: - Perform all tasks of this gadget Input Data: Expected Outcome:
-     * - The progress is 100% - A link labelled "Close" is displayed to invite the
-     * user to remove the gadget
-     */
     info("add an avatar");
     ELEMENT_HP_GETTING_STARTED_SET_YOUR_PROFILE_PICTURE.click();
     ELEMENT_BUTTON_EDIT_PROFILE.click();
@@ -256,23 +232,18 @@ public class Plf_GettintStartedGadgetTestIT extends Base {
    * <li>Case ID:120847.</li>
    * <li>Test Case Name: Remove Getting Started gadget.</li>
    * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
+   * <li>Post-Condition:</li> Step Number: 1 Step Name: Connect to intranet home
+   * page Step Description: - Login and connect to intranet home page Input Data:
+   * Expected Outcome: - Intranet home page is shown Step number: 2 Step Name:
+   * Remove Getting Started gadget Step Description: - Click the close icon in
+   * upper right corner of Getting Started gadget Input Data: Expected Outcome: -
+   * Getting Started gadget is removed permanently - Once the gadget is removed,
+   * there is no way to bring it back.
    */
   @Test
   public void test05_RemoveGettingStartedGadget() {
     info("Test 05: Remove Getting Started gadget");
-    /*
-     * Step Number: 1 Step Name: Connect to intranet home page Step Description: -
-     * Login and connect to intranet home page Input Data: Expected Outcome: -
-     * Intranet home page is shown
-     */
 
-    /*
-     * Step number: 2 Step Name: Remove Getting Started gadget Step Description: -
-     * Click the close icon in upper right corner of Getting Started gadget Input
-     * Data: Expected Outcome: - Getting Started gadget is removed permanently -
-     * Once the gadget is removed, there is no way to bring it back.
-     */
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
     String password = "123456";
