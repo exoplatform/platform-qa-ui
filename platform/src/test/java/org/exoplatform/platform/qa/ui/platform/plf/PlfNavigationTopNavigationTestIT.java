@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -26,6 +27,7 @@ import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
+
 
 /**
  * @author eXo
@@ -45,6 +47,7 @@ public class PlfNavigationTopNavigationTestIT extends Base {
   CalendarHomePage        calendarHomePage;
 
   ForumHomePage           forumHomePage;
+
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -249,23 +252,21 @@ public class PlfNavigationTopNavigationTestIT extends Base {
 
   /**
    * <li>Case ID:120895.</li>
-   * <li>Test Case Name: Open user guide.</li>
+   * <li>Test Case Name: Open user guide.</li> /*Step Number: 1 Step Name: Connect
+   * to intranet Step Description: - Login as normal user - Connect to Intranet
+   * Input Data: Expected Outcome: - The Homepage is displayed - The Help button
+   * is displayed in the right of the bar
+   */
+
+  /*
+   * Step number: 2 Step Name: Open user guide Step Description: - Click on the
+   * button "?" Input Data: Expected Outcome: - A new tab in the internet browser
+   * is opened - The user guide is opened and the chapter displayed matched with
+   * the current navigation of the user.
    */
   @Test
   public void test07_OpenUserGuide() {
     info("Test 7: Open user guide");
-    /*
-     * Step Number: 1 Step Name: Connect to intranet Step Description: - Login as
-     * normal user - Connect to Intranet Input Data: Expected Outcome: - The
-     * Homepage is displayed - The Help button is displayed in the right of the bar
-     */
-
-    /*
-     * Step number: 2 Step Name: Open user guide Step Description: - Click on the
-     * button "?" Input Data: Expected Outcome: - A new tab in the internet browser
-     * is opened - The user guide is opened and the chapter displayed matched with
-     * the current navigation of the user.
-     */
     homePagePlatform.goToHomePage();
     click(ELEMENT_HELP_TOOLBAR);
     switchTo().window(1);
