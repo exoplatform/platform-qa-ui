@@ -135,7 +135,7 @@ public class HomePagePlatform {
     info("--Go to Connections page---");
 
     info("Click on Connection link");
-    $(ELEMENT_CONNECTIONS_LINK_PLF).click();
+    $(ELEMENT_CONNECTIONS_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout).click();
     info("Verify that the connections portlet is shown");
     $(ELEMENT_CONNECTION_EVERYONE_TITLE).waitUntil(Condition.appears, Configuration.timeout);
     info("The connections portlet is shown successfully");

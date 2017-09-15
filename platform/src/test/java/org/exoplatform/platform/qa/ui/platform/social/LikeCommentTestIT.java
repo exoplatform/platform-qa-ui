@@ -651,7 +651,7 @@ public class LikeCommentTestIT extends Base {
     String activity1 = "activity1" + getRandomNumber();
     String comment = "comment" + getRandomNumber();
     ELEMENT_TAB_LINK.click();
-    ELEMENT_TAB_LINK.click();
+    refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
@@ -676,7 +676,7 @@ public class LikeCommentTestIT extends Base {
     String comment = "comment" + getRandomNumber();
 
     ELEMENT_TAB_LINK.click();
-    ELEMENT_TAB_LINK.click();
+    refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
@@ -697,7 +697,7 @@ public class LikeCommentTestIT extends Base {
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
@@ -705,7 +705,7 @@ public class LikeCommentTestIT extends Base {
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
     $(byXpath("//*[@id=\"$uicomponent.id\"]/div[2]")).find(byText(comment))
                                                      .parent()
                                                      .parent()
@@ -717,7 +717,7 @@ public class LikeCommentTestIT extends Base {
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
@@ -746,7 +746,7 @@ public class LikeCommentTestIT extends Base {
     String comment = "comment" + getRandomNumber();
 
     ELEMENT_TAB_LINK.click();
-    ELEMENT_TAB_LINK.click();
+    refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
@@ -767,7 +767,7 @@ public class LikeCommentTestIT extends Base {
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
@@ -775,19 +775,15 @@ public class LikeCommentTestIT extends Base {
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-    $(byXpath("//*[@id=\"$uicomponent.id\"]/div[2]")).find(byText(comment))
-                                                     .parent()
-                                                     .parent()
-                                                     .find(ELEMENT_ICON_LIKE_COMMENT)
-                                                     .click();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
     manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
@@ -803,7 +799,7 @@ public class LikeCommentTestIT extends Base {
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
     manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
@@ -833,7 +829,7 @@ public class LikeCommentTestIT extends Base {
     String comment = "comment" + getRandomNumber();
 
     ELEMENT_TAB_LINK.click();
-    ELEMENT_TAB_LINK.click();
+    refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
@@ -854,7 +850,7 @@ public class LikeCommentTestIT extends Base {
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
@@ -862,19 +858,15 @@ public class LikeCommentTestIT extends Base {
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-    $(byXpath("//*[@id=\"$uicomponent.id\"]/div[2]")).find(byText(comment))
-                                                     .parent()
-                                                     .parent()
-                                                     .find(ELEMENT_ICON_LIKE_COMMENT)
-                                                     .click();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
     manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
@@ -908,7 +900,7 @@ public class LikeCommentTestIT extends Base {
     String comment = "comment" + getRandomNumber();
 
     ELEMENT_TAB_LINK.click();
-    ELEMENT_TAB_LINK.click();
+    refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
@@ -929,7 +921,7 @@ public class LikeCommentTestIT extends Base {
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
@@ -937,19 +929,15 @@ public class LikeCommentTestIT extends Base {
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-    $(byXpath("//*[@id=\"$uicomponent.id\"]/div[2]")).find(byText(comment))
-                                                     .parent()
-                                                     .parent()
-                                                     .find(ELEMENT_ICON_LIKE_COMMENT)
-                                                     .click();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
     manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
@@ -983,7 +971,7 @@ public class LikeCommentTestIT extends Base {
     String comment = "comment" + getRandomNumber();
 
     ELEMENT_TAB_LINK.click();
-    ELEMENT_TAB_LINK.click();
+    refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
@@ -1004,7 +992,7 @@ public class LikeCommentTestIT extends Base {
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
@@ -1012,19 +1000,15 @@ public class LikeCommentTestIT extends Base {
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-    $(byXpath("//*[@id=\"$uicomponent.id\"]/div[2]")).find(byText(comment))
-                                                     .parent()
-                                                     .parent()
-                                                     .find(ELEMENT_ICON_LIKE_COMMENT)
-                                                     .click();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
     manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
@@ -1073,7 +1057,7 @@ public class LikeCommentTestIT extends Base {
     homePagePlatform.goToAllSpace();
     spaceManagement.addNewSpaceSimple(space, space);
     ELEMENT_TAB_LINK.click();
-    ELEMENT_TAB_LINK.click();
+    refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
@@ -1105,7 +1089,7 @@ public class LikeCommentTestIT extends Base {
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToAllSpace();
     spaceManagement.acceptAInvitation(space);
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
@@ -1114,18 +1098,14 @@ public class LikeCommentTestIT extends Base {
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToAllSpace();
     spaceManagement.acceptAInvitation(space);
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-    $(byXpath("//*[@id=\"$uicomponent.id\"]/div[2]")).find(byText(comment))
-                                                     .parent()
-                                                     .parent()
-                                                     .find(ELEMENT_ICON_LIKE_COMMENT)
-                                                     .click();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
     manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
     homePagePlatform.goToAllSpace();
     spaceManagement.acceptAInvitation(space);
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
