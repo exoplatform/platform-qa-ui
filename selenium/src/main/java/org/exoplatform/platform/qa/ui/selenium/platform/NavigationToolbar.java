@@ -486,7 +486,7 @@ public class NavigationToolbar {
    */
   public void goToQuickSearch() {
     info("Click on Quick search icon");
-    evt.click(ELEMENT_TOOLBAR_QUICKSEARCH);
+    $(ELEMENT_TOOLBAR_QUICKSEARCH).click();
 
   }
 
