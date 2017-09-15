@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.selenium.platform;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_CONNECTION_EVERYONE_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.ELEMENT_ANSWER_PORTLET;
@@ -214,6 +215,17 @@ public class HomePagePlatform {
     info("Load more activities");
     evt.waitForAndGetElement(ELEMENT_PLF_HOMEPAGE_LOAD_MORE_BUTTON, testBase.getDefaultTimeout(), 1);
     evt.click(ELEMENT_PLF_HOMEPAGE_LOAD_MORE_BUTTON);
+  }
+
+  public void refreshUntil(String text, Condition condition, long time) throws Exception {
+
+    for (int i = 0; i <= 15; i++) {
+      refresh();
+      Thread.sleep(time);
+      if ($(byText(text)).is(condition)) {
+        break;
+      }
+    }
   }
 
   /**

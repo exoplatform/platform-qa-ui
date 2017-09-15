@@ -1,4 +1,4 @@
-package org.exoplatform.selenium.platform.forum.sniff;
+package org.exoplatform.platform.qa.ui.forum.smoke;
 
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -15,7 +15,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 
 @Tag("smoke")
 @Tag("forum")
-public class Forum_CategoryTestIT extends Base {
+public class ForumCategoryTestIT extends Base {
   HomePagePlatform        homePagePlatform;
 
   ForumCategoryManagement forumCategoryManagement;
@@ -90,10 +90,10 @@ public class Forum_CategoryTestIT extends Base {
     info("Test 03: Edit a category");
     info("edit category");
     forumCategoryManagement.editCategory(nameCat2);
-
+    homePagePlatform.goToHomePage();
+    homePagePlatform.goToForum();
     info("Test 04: Delete a category");
     info("delete category");
-    forumHomePage.goToHomeCategory();
     forumCategoryManagement.deleteCategory(nameCat2);
   }
 

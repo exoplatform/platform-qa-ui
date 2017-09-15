@@ -3,7 +3,8 @@ package org.exoplatform.platform.qa.ui.forum.pageobject;
 import static com.codeborne.selenide.Condition.appears;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -60,16 +61,17 @@ public class ForumTopicManagement {
    */
   public void moveTopicToForum(String category, String forum) {
     info("if not found forum");
-    if (evt.waitForAndGetElement(ELEMENT_UI_POPUP_MOVE_TOPIC.replace("{$forum}", forum), 3000, 0) == null) {
+    if ($(ELEMENT_UI_POPUP_MOVE_TOPIC.replace("{$forum}", forum)) == null) {
       info("Click on Category to expand tree");
-      evt.click(ELEMENT_MOVE_POPUP_COLLASPE_NODE.replace("${category}", category));
+      $(ELEMENT_MOVE_POPUP_COLLASPE_NODE.replace("${category}", category)).click();
       info("Select the forum");
-      evt.click(ELEMENT_UI_POPUP_MOVE_TOPIC.replace("{$forum}", forum));
+      ELEMENT_SELECT_FORUM_TO_MOVE.click();
     } else {
       info("Select the forum");
-      evt.click(ELEMENT_UI_POPUP_MOVE_TOPIC.replace("{$forum}", forum));
+      ELEMENT_SELECT_FORUM_TO_MOVE.click();
     }
     info("Finish moving");
+
   }
 
   /**
@@ -93,7 +95,7 @@ public class ForumTopicManagement {
     switch (item) {
     case ADD_POLL:
       info("Click on Add poll button");
-      evt.click(ELEMENT_ADD_POLL);
+      $(ELEMENT_ADD_POLL).click();
       break;
     case EDIT:
       info("Click on Edit topic button");
@@ -102,35 +104,35 @@ public class ForumTopicManagement {
     case DELETE:
       info("Click on Delete topic button");
       $(ELEMENT_DELETE_TOPIC).click();
-
       info("Verify that confirm popup is shown");
       $(byText("Are you sure you want to delete this topic ?")).waitUntil(appears, Configuration.timeout);
       info("Click on OK on Confirm popup");
       $(ELEMENT_OK_DELETE).click();
+      $(ELEMENT_OK_DELETE).waitUntil(Condition.disappears,Configuration.timeout);
       break;
     case WATCHES:
       break;
     case LOCK:
       info("Click on lock topic button");
-      evt.click(ELEMENT_LOCK_TOPIC);
+      $(ELEMENT_LOCK_TOPIC).click();
       break;
     case UNLOCK:
       info("Click on unlock topic button");
-      evt.click(ELEMENT_UNLOCK_TOPIC);
+      $(ELEMENT_UNLOCK_TOPIC).click();
       break;
     case MOVE:
       info("Wait Move topic link is shown");
-      evt.waitForAndGetElement(ELEMENT_MOVE_TOPIC);
+      $(ELEMENT_MOVE_TOPIC).waitUntil(Condition.appears, Configuration.timeout);
       info("Click on move topic link");
-      evt.click(ELEMENT_MOVE_TOPIC);
+      $(ELEMENT_MOVE_TOPIC).click();
       break;
     case CLOSE:
       info("Click on Close");
-      evt.click(ELEMENT_CLOSE_TOPIC);
+      $(ELEMENT_CLOSE_TOPIC).click();
       break;
     case OPEN:
       info("Click on Close");
-      evt.click(ELEMENT_OPEN_TOPIC);
+      $(ELEMENT_OPEN_TOPIC).click();
       break;
     case STICK:
       break;
@@ -147,9 +149,9 @@ public class ForumTopicManagement {
    */
   public void openMoreActionMenuPoll() {
     info("Wait More link is shown");
-    evt.waitForAndGetElement(ELEMENT_MORE_ACTIONS_POLL);
+    $(ELEMENT_MORE_ACTIONS_POLL).should(Condition.exist);
     info("Click on More link");
-    evt.click(ELEMENT_MORE_ACTIONS_POLL);
+    $(ELEMENT_MORE_ACTIONS_POLL).click();
   }
 
   /**
@@ -163,19 +165,19 @@ public class ForumTopicManagement {
     switch (item) {
     case EDIT:
       info("Click on Edit link");
-      evt.click(ELEMENT_EDIT_POLL);
+      $(ELEMENT_EDIT_POLL).click();
       break;
     case CLOSE:
       info("Click on Close link");
-      evt.click(ELEMENT_CLOSE_POLL);
+      $(ELEMENT_CLOSE_POLL).click();
       break;
     case OPEN:
       info("Click on Open link");
-      evt.click(ELEMENT_OPEN_POLL);
+      $(ELEMENT_OPEN_POLL).click();
       break;
     case REMOVE:
       info("Click on Remove link");
-      evt.click(ELEMENT_REMOVE_POLL);
+      $(ELEMENT_REMOVE_POLL).click();
       break;
     default:
       break;
@@ -192,11 +194,11 @@ public class ForumTopicManagement {
     if (isClose) {
       info("Close the poll");
       selectItemMoreActionMenuPoll(specifMoreActionMenuPoll.CLOSE);
-      evt.waitForAndGetElement(ELEMENT_FORUM_POLL_GRIDCLOSE);
+      $(ELEMENT_FORUM_POLL_GRIDCLOSE).should(Condition.exist);
     } else {
       info("Open the poll");
       selectItemMoreActionMenuPoll(specifMoreActionMenuPoll.OPEN);
-      evt.waitForAndGetElement(ELEMENT_FORUM_POLL_GRID);
+      $(ELEMENT_FORUM_POLL_GRID).should(Condition.exist);
     }
 
   }
@@ -208,7 +210,7 @@ public class ForumTopicManagement {
    * @param content
    */
   public void postReply(String title, String content) {
-    evt.click(ELEMENT_POST_REPLY);
+    $(ELEMENT_POST_REPLY).click();
     replyTopic(title, content);
   }
 
@@ -220,27 +222,31 @@ public class ForumTopicManagement {
    */
   public void replyTopic(String title, String content) {
     if (!title.isEmpty())
-      evt.type(ELEMENT_TITLE_POST, title, true);
-    plf.inputFrame(ELEMENT_POST_CONTENT, content);
-    evt.click(ELEMENT_POST_FORM_SUBMIT);
+      $(ELEMENT_TITLE_POST).setValue(title);
+    switchTo().frame(0);
+    $(byXpath("/html/body")).sendKeys(content);
+    switchTo().defaultContent();
+    executeJavaScript("window.scrollBy(0,150)");
+    $(ELEMENT_POST_FORM_SUBMIT).click();
     info("Verify that the post is created");
-    evt.waitForAndGetElement(ELEMENT_POST_IN_TOPIC.replace("{$title}", title).replace("{$content}", content));
   }
 
   /**
    * Edit a post
    *
-   * @param title
    * @param newTitle
    * @param newContent
    */
-  public void editPost(String title, String newTitle, String newContent) {
-    evt.click(ELEMENT_EDIT_POST.replace("{$title}", title));
+  public void editPost(String newTitle, String newContent) {
+    $(byText(newContent)).parent().parent().parent().parent().find(byText("Edit")).click();
     if (!newTitle.isEmpty())
-      evt.type(ELEMENT_TITLE_POST, newTitle, true);
+      $(ELEMENT_TITLE_POST).sendKeys(newTitle);
     if (!newContent.isEmpty())
-      plf.inputFrame(ELEMENT_POST_CONTENT, newContent);
-    evt.click(ELEMENT_POST_FORM_SUBMIT);
+      switchTo().frame(0);
+    $(byXpath("/html/body")).sendKeys(newContent);
+    switchTo().defaultContent();
+    executeJavaScript("window.scrollBy(0,150)");
+    $(ELEMENT_POST_FORM_SUBMIT).click();
   }
 
   /**
@@ -250,12 +256,13 @@ public class ForumTopicManagement {
    * @param newContent
    */
   public void quotePost(String title, String newContent) {
-    evt.click(By.xpath(ELEMENT_QUOTE_POST.replace("{$title}", title)));
-
+    $(byText(newContent)).parent().parent().parent().parent().find(byText("Quote")).click();
     if (newContent != "")
-      plf.inputFrame(ELEMENT_POST_CONTENT, newContent);
-
-    evt.click(ELEMENT_POST_FORM_SUBMIT);
+      switchTo().frame(0);
+    $(byXpath("/html/body")).sendKeys(newContent);
+    switchTo().defaultContent();
+    executeJavaScript("window.scrollBy(0,150)");
+    $(ELEMENT_POST_FORM_SUBMIT).click();
   }
 
   /**
@@ -265,16 +272,30 @@ public class ForumTopicManagement {
    * @param newTitle
    * @param content
    */
-  public void privatePost(String titlePost, String newTitle, String content) {
-    evt.click(By.xpath(ELEMENT_PRIVATE_POST.replace("{$title}", titlePost)));
-
+  public void privatePostfortopic(String newTitle, String content) {
+    $(byText("Private")).click();
     if (newTitle != "")
-      evt.type(ELEMENT_TITLE_POST, newTitle, true);
+      $(ELEMENT_TITLE_POST).setValue(newTitle);
 
     if (content != "")
-      plf.inputFrame(ELEMENT_POST_CONTENT, content);
+      switchTo().frame(0);
+    $(byXpath("/html/body")).sendKeys(content);
+    switchTo().defaultContent();
+    executeJavaScript("window.scrollBy(0,150)");
+    $(ELEMENT_POST_FORM_SUBMIT).click();
+  }
 
-    evt.click(ELEMENT_POST_FORM_SUBMIT);
+  public void privatePostFromPost(String newTitle, String content) {
+    $(byText(content)).parent().parent().parent().parent().find(byText("Private")).click();
+    if (newTitle != "")
+      $(ELEMENT_TITLE_POST).setValue(newTitle);
+
+    if (content != "")
+      switchTo().frame(0);
+    $(byXpath("/html/body")).sendKeys(content);
+    switchTo().defaultContent();
+    executeJavaScript("window.scrollBy(0,150)");
+    $(ELEMENT_POST_FORM_SUBMIT).click();
   }
 
   /**
@@ -287,14 +308,15 @@ public class ForumTopicManagement {
   public void addPoll(String question, String option1, String option2) {
     selectItemMoreActionMenuTopic(specifMoreActionMenuTopic.ADD_POLL);
     info("Input a question to poll");
-    evt.type(ELEMENT_POLL_QUESTION, question, true);
+    $(ELEMENT_POLL_QUESTION).val(question);
     info("Input an option 1 to poll");
-    evt.type(ELEMENT_POLL_OPTIONS0, option1, true);
+    $(ELEMENT_POLL_OPTIONS0).val(option1);
     info("Input an option 2 to poll");
-    evt.type(ELEMENT_POLL_OPTIONS1, option2, true);
+    $(ELEMENT_POLL_OPTIONS1).val(option2);
     info("Click on Submit button");
-    evt.click(ELEMENT_POLL_SUBMIT);
-    evt.waitForElementNotPresent(ELEMENT_POLL_SUBMIT);
+    $(ELEMENT_POLL_SUBMIT).click();
+    info("Verify Poll is added");
+    $(byText(option1)).should(Condition.exist);
     info("Finished adding poll");
 
   }
@@ -307,10 +329,10 @@ public class ForumTopicManagement {
   public void lockUnlockTopic(boolean islock) {
     if (islock) {
       selectItemMoreActionMenuTopic(specifMoreActionMenuTopic.LOCK);
-      evt.waitForAndGetElement(ELEMENT_TOPIC_POST_REPLY_BUTTON_DISABLE);
+      $(ELEMENT_TOPIC_POST_REPLY_BUTTON_DISABLE).waitUntil(Condition.appears, Configuration.timeout);
     } else {
       selectItemMoreActionMenuTopic(specifMoreActionMenuTopic.UNLOCK);
-      evt.waitForAndGetElement(ELEMENT_TOPIC_POST_REPLY_BOTTOM);
+      $(ELEMENT_TOPIC_POST_REPLY_BOTTOM).waitUntil(Condition.appears, Configuration.timeout);
     }
   }
 
@@ -338,21 +360,15 @@ public class ForumTopicManagement {
    * @param option2
    */
   public void editPoll(String question, String option1, String option2) {
+    info("Click on More Actions and Select Edit button");
     selectItemMoreActionMenuPoll(specifMoreActionMenuPoll.EDIT);
-    info("Refresh the page");
-    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-    evt.waitForAndGetElement(ELEMENT_POLL_POPUP_TITLE);
-    info("Input a question to poll");
-    evt.waitForAndGetElement(ELEMENT_POLL_QUESTION).clear();
-    evt.type(ELEMENT_POLL_QUESTION, question, true);
+    $(ELEMENT_FORUM_ADDPOLL_QUESTION).val(question);
     info("Input an option 1 to poll");
-    evt.waitForAndGetElement(ELEMENT_POLL_OPTIONS0).clear();
-    evt.type(ELEMENT_POLL_OPTIONS0, option1, true);
+    $(ELEMENT_POLL_OPTIONS0).val(option1);
     info("Input an option 2 to poll");
-    evt.waitForAndGetElement(ELEMENT_POLL_OPTIONS1).clear();
-    evt.type(ELEMENT_POLL_OPTIONS1, option2, true);
+    $(ELEMENT_POLL_OPTIONS1).val(option2);
     info("Click on Submit button");
-    evt.click(ELEMENT_POLL_SUBMIT);
+    $(ELEMENT_POLL_SUBMIT).click();
     info("Finished adding poll");
   }
 
@@ -380,10 +396,10 @@ public class ForumTopicManagement {
    * @param name
    */
   public void addATag(String name) {
-    evt.click(ELEMENT_ACTIONBAR_TOPIC_TAG);
-    evt.type(ELEMENT_ACTIONBAR_TOPIC_TAGNAME, name, true);
-    evt.click(ELEMENT_FORUM_TOPIC_ADD_TAG);
-    evt.waitForAndGetElement(ELEMENT_ACTIONBAR_TOPIC_TAGPRESENT.replace("${tag}", name));
+    $(ELEMENT_ACTIONBAR_TOPIC_TAG).click();
+    $(ELEMENT_ACTIONBAR_TOPIC_TAGNAME).val(name);
+    $(ELEMENT_FORUM_TOPIC_ADD_TAG).click();
+    $(byText(name)).should(Condition.exist);
   }
 
   /**
@@ -437,15 +453,15 @@ public class ForumTopicManagement {
   public void replyTopic(String newTitle, String newMessg, String pathFile, String fileName) {
     info("Click on Post Reply button");
     // click(ELEMENT_TOPIC_POST_REPLY_BOTTOM);
-    evt.clickByJavascript(ELEMENT_TOPIC_POST_REPLY_BOTTOM, 2);
+    $(ELEMENT_TOPIC_POST_REPLY_BOTTOM).click();
     info("Verify that the pop up is shown");
-    evt.waitForAndGetElement(ELEMENT_TOPIC_NEW_POST_TITLE);
+    $(ELEMENT_TOPIC_NEW_POST_TITLE).should(Condition.exist);
     info("Refresh the page");
-    this.testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+    refresh();
     if (!newTitle.isEmpty()) {
       info("Input the title:" + newTitle);
-      evt.waitForAndGetElement(ELEMENT_TOPIC_NEW_POST_TITLE_FIELD).clear();
-      evt.type(ELEMENT_TOPIC_NEW_POST_TITLE_FIELD, newTitle, true);
+      $(ELEMENT_TOPIC_NEW_POST_TITLE_FIELD).clear();
+      $(ELEMENT_TOPIC_NEW_POST_TITLE_FIELD).val(newTitle);
     }
 
     if (!newMessg.isEmpty()) {
@@ -455,19 +471,18 @@ public class ForumTopicManagement {
 
     if (!pathFile.isEmpty() || !fileName.isEmpty()) {
       info("click on Attached file button");
-      evt.click(ELEMENT_START_TOPIC_ATTACH_FILE);
+      $(ELEMENT_START_TOPIC_ATTACH_FILE).click();
       info("Verify that upload button is shown");
-      evt.waitForAndGetElement(ELEMENT_UPLOAD_POPUP_FILE);
+      $(ELEMENT_UPLOAD_POPUP_FILE).should(Condition.exist);
       info("Attached file");
       testBase.attachFile(pathFile, fileName);
       info("Verify that upload popup is closed");
-      evt.waitForElementNotPresent(ELEMENT_UPLOAD_POPUP_FILE);
+      $(ELEMENT_UPLOAD_POPUP_FILE).shouldNot(Condition.exist);
     }
     info("click on Submit button");
-    // click(ELEMENT_SUBMIT_BUTTON);
-    evt.clickByJavascript(ELEMENT_SUBMIT_BUTTON, 2);
+    $(ELEMENT_SUBMIT_BUTTON).click();
     info("Verify that the replying is created");
-    evt.waitForAndGetElement(ELEMENT_TOPIC_REPPLY_CONTENT.replace("${content}", newMessg));
+    $(byText(newMessg)).should(Condition.exist);
     info("Reply topic successfully");
   }
 
@@ -487,8 +502,9 @@ public class ForumTopicManagement {
 
     info("Input the message:" + message);
     $(ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR).click();
-    $(ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR).sendKeys(message);
-
+    switchTo().frame(0);
+    $(byXpath("/html/body")).sendKeys(message);
+    switchTo().defaultContent();
     info("click on Attached file button");
     $(ELEMENT_START_TOPIC_ATTACH_FILE).click();
     File file = $(By.className("file")).uploadFromClasspath("topic_attachment.txt");
@@ -508,9 +524,10 @@ public class ForumTopicManagement {
    *
    * @param name
    */
-  public void rateTopic(String name, String starType) {
-    evt.click(ELEMENT_ACTIONBAR_TOPIC_RATE);
-    evt.click(ELEMENT_FORUM_VOTE_MARK.replace("${star}", starType));
+  public void rateTopic(String name) {
+    $(ELEMENT_MORE_ACTION).click();
+    $(ELEMENT_TOPIC_RATE).click();
+    $(ELEMENT_FORUM_VOTE_MARK).click();
 
   }
 
@@ -525,11 +542,9 @@ public class ForumTopicManagement {
     if (!newTitle.isEmpty())
       $(ELEMENT_START_TOPIC_POPUP_TITLE_FILED).setValue(newTitle);
     if (!newContent.isEmpty())
-      $(ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR).click();
-    $(ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR).sendKeys(newContent);
+      plf.inputFrame(ELEMENT_POST_CONTENT, newContent);
     info("Click on Submit button");
     $(ELEMENT_SUBMIT_BUTTON).click();
-    // click(ELEMENT_SUBMIT_BUTTON);
     info("All changes are saved");
   }
 

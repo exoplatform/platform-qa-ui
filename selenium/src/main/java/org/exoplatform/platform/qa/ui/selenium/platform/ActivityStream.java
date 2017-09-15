@@ -1,9 +1,14 @@
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DELETE_ACTIVITY;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DELETE_POPUP_OK;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.awt.*;
@@ -93,7 +98,7 @@ public class ActivityStream {
    */
   public void checkActivity(String name) {
     info("Verify that the activity of the name:" + name + " is shown");
-    $(byText(name)).should(Condition.exist);
+    $(byText(name)).isDisplayed();
     info("The activity of the name:" + name + " is shown successfully");
   }
 
@@ -359,8 +364,8 @@ public class ActivityStream {
    */
   public void addCommentUsingJavascript(String activityText, String contentOfComment) {
     info("add comment using javascript");
-    evt.click(ELEMENT_ICON_COMMENT.replace("${title}", activityText));
-    WebElement commentText = evt.waitForAndGetElement(ELEMENT_COMMENTBOX.replace("${title}", activityText));
+    $(By.xpath(ELEMENT_ICON_COMMENT.replace("${title}", activityText))).click();
+    WebElement commentText = $(byText(activityText)).should(Condition.exist);
     WebElement commentButton = evt.waitForAndGetElement(ELEMENT_COMMENT_BUTTON);
     WebElement workingLabel = evt.waitForAndGetElement(ELEMENT_ACTIVITY_ADD_YOUR_COMMENTLABEL.replace("${activityText}",
                                                                                                       activityText));
@@ -960,5 +965,22 @@ public class ActivityStream {
   public enum changeTypes {
     No_Value, Has_One_Value;
   }
+  public void addcomment_to_activity (String id) {
+    info("Add Comment");
+    String comment = "Comment" + getRandomNumber();
+    executeJavaScript("window.scrollBy(0,150)");
+    $(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
+    // insert comment
+    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
+    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
+    // click on the button comment
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
+    info("Test 15: Delete comment");
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+  }
 
-}
+  }
+
+
+
+

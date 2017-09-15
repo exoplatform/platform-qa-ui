@@ -43,7 +43,7 @@ public class ForumLocator {
                                                                        By.xpath(".//*[@id='Administrations']//div[@data-toggle='dropdown']");
 
   public static final By              ELEMENT_ACTIONBAR_BOOKMARK_MANAGER                 =
-                                                                         By.xpath(".//*[@id='OpenBookMark']//*[@class='uiIconBookmark uiIconLightGray']");
+                                                                         By.xpath("//*[@id=\"OpenBookMark\"]/a");
 
   public static final By              ELEMENT_ACTIONBAR_BOOKMARK_ICON                    =
                                                                       By.xpath(".//*[@id='UITopicDetail' or @id='UITopicContent' or @id='UICategory']//*[@class='actionIcon']/*[@class='uiIconBookmark uiIconLightGray']");
@@ -54,8 +54,8 @@ public class ForumLocator {
   public static final By              ELEMENT_ACTIONBAR_PRIVATE_MESSAGE                  =
                                                                         By.xpath(".//*[@id='uiRightActionBar']//a[contains(.,'Private Messages')]");
 
-  public static final String          ELEMENT_ACTIONBAR_TOPIC_TAGDELETE                  =
-                                                                        ".//*[@id='UITopicDetail']//a[@data-original-title='${tag}']/..//*[@class='uiIconClose uiIconLightGray']";
+  public static final By              ELEMENT_ACTIONBAR_TOPIC_TAGDELETE                  =
+                                                                        By.xpath("//*[@id=\"UITopicDetail\"]/div[2]/div[2]/ul[1]/li/span/i");
 
   public static final By              ELEMENT_FORUM_TOPIC_LOCK                           =
                                                                By.xpath("//*[@class='uiIconLockMedium']");
@@ -183,6 +183,9 @@ public class ForumLocator {
   public static final String          ELEMENT_TOPIC_PRIVATE_BUTTON                       =
                                                                    ".//*[contains(text(),'${post}')]/../../../.././/*[contains(@class,'btn')]//*[contains(text(),'Private')]";
 
+  public static final By              MORE_ACTIONS_TOPIC                                 =
+                                                         By.xpath("//*[@id=\"UITopicDetail\"]/div[4]/div[1]/ul/li[3]/div");
+
   // administration
   public static final By              ELEMENT_ACTIONBAR_ADMIN_BANIP                      =
                                                                     By.xpath(".//*[@id='Administrations']//a[contains(.,'Banned IPs')]");
@@ -213,15 +216,16 @@ public class ForumLocator {
 
   public static final By              ELEMENT_BBCODE_ADDBBCODEFORM_EXAMPLE               = By.xpath("//*[@id='Example']");
 
-  public static final String          ELEMENT_BBCODE_EDITBBCODE                          =
-                                                                "//*[contains(text(),'${tag}')]/../..//*[ @class='uiIconEdit uiIconLightGray']";
+  public static final By              ELEMENT_BBCODE_EDITBBCODE                          =
+                                                                By.xpath("//*[@id=\"UIBBCodeManagerForm\"]/div[2]/table/tbody/tr[28]/td[4]/a[1]/i");
 
-  public static final String          ELEMENT_BBCODE_DELETEBBCODE                        =
-                                                                  "//*[contains(text(),'${tag}')]/../..//*[ @class='uiIconDelete uiIconLightGray']";
+  public static final By              ELEMENT_BBCODE_DELETEBBCODE                        =
+                                                                  By.xpath("//*[@id=\"UIBBCodeManagerFormConfirm27\"]/i");
 
   // Breadcumb
+
   public static final By              ELEMENT_CATEGORY_BREADCUMB_HOME                    =
-                                                                      By.xpath("//*[@id='UIBreadcumbs']//*[text()='Home']");
+                                                                      By.xpath("//*[@id=\"UIBreadcumbs\"]/div[1]/ul/li[1]/a");
 
   public static final String          ELEMENT_CATEGORY_FORUM_BREAD                       =
                                                                    "//*[text()='${category}']/../..//*[text()='${forum}']";
@@ -243,14 +247,17 @@ public class ForumLocator {
                                                       "You are no longer watching this item.";
 
   // Bookmark
-  public static final String          ELEMENT_FORUM_BOOKMARK_NAME                        =
-                                                                  "//*[@class='uiShowBookMarkForm resizable']//*[text()='${name}']";
 
-  public static final String          ELEMENT_FORUM_BOOKMARK_DELETE                      =
-                                                                    "//*[@class='uiShowBookMarkForm resizable']//*[text()='${name}']/../..//*[@class='uiIconDelete uiIconLightGray']";
+  public static final By              ELEMENT_TOPIC_BOOKMARK                             =
+                                                             By.xpath("//*[@id=\"UITopicDetail\"]/div[4]/div[1]/ul/li[3]/div/ul/li[12]/a");
+
+  public static final By              ELEMENT_FORUM_BOOKMARK_NAME                        = By.className("uiShowBookMarkForm");
+
+  public static final By              ELEMENT_FORUM_BOOKMARK_DELETE                      =
+                                                                    By.xpath("//*[@id=\"UIShowBookMarkForm\"]/div[2]/div/table/tbody/tr/td[3]/a/i");
 
   public static final By              ELEMENT_FORUM_BOOKMARK_CLOSE_ICON                  =
-                                                                        By.xpath(".//*[@id='UIForumPopupWindow']//div[@class='ClosePopup']");
+                                                                        By.xpath("//*[@id=\"UIForumPopupWindow\"]/div[1]/a");
 
   // Category right click option
   public static final String          ELEMENT_FORUM_CONTEXT_MENU_BOOKMARK                =
@@ -272,7 +279,7 @@ public class ForumLocator {
 
   public static final String          ELEMENT_BBCODE_TAG_VERIFY                          = "//*[contains(text(),'${tag}')]";
 
-  public static final By              ELEMENT_BBCODE_USE_OPTION                          = By.xpath("//*[@id='UseOption']");
+  public static final By              ELEMENT_BBCODE_USE_OPTION                          = By.id("UseOption']");
 
   public static final By              ELEMENT_BBCODE_CONFIRM_DELETETAG                   =
                                                                        By.xpath("//*[text()='Are you sure you want to delete this BB Code ?']/../../..//*[@class='btn actionOK']");
@@ -305,9 +312,11 @@ public class ForumLocator {
 
   public static final By              ELEMENT_FORUM_USERS_BAN                            = By.xpath("//*[text()='Ban User']");
 
-  public static final By              ELEMENT_FORUM_USERS_TOPICS                         = By.xpath("//*[text()='Topics']");
+  public static final By              ELEMENT_FORUM_USERS_TOPICS                         =
+                                                                 By.xpath("//*[@id=\"UIModeratorManagementForm\"]/ul/li[4]/a");
 
-  public static final By              ELEMENT_FORUM_USERS_POSTS                          = By.xpath("//*[text()='Posts']");
+  public static final By              ELEMENT_FORUM_USERS_POSTS                          =
+                                                                By.xpath("//*[@id=\"UIModeratorManagementForm\"]/ul/li[5]/a");
 
   public static final By              ELEMENT_FORUM_CLOSEBTN                             =
                                                              By.xpath("//*[@class='btn' and text()='Close']");
@@ -329,6 +338,9 @@ public class ForumLocator {
   // users
   public static final String          ELEMENT_FORUM_USERS_EDIT                           =
                                                                "//*[text()='${name}']/..//*[@class='uiIconEdit uiIconLightGray']";
+
+  public static final SelenideElement ELEMENT_FORUM_EDIT_PROFILE                         =
+                                                                 $(By.xpath("//*[@id=\"PermissionInfo\"]/tbody/tr/td[5]/a[1]/i"));
 
   public static final By              ELEMENT_FORUM_USERS_POPUP_SEARCH_FIELD             = By.xpath(".//*[@id='SearchUser']");
 
@@ -367,14 +379,23 @@ public class ForumLocator {
 
   public static final By              ELEMENT_SAVE_BTN                                   = By.xpath("//*[text()='Save']");
 
+  public static final By              ELEMENT_SAVE_IMPORT                                =
+                                                          By.xpath("//*[@id=\"UIImportForm\"]/div[3]/button[1]");
+
+  public static final SelenideElement ELEMENT_BUTTON_OK_IMPORT                           =
+                                                               $(byClassName("UIPopupWindow")).find(byClassName("btn"));
+
   public static final By              ELEMENT_SUBMIT_BUTTON                              = By.xpath("//*[text()='Submit']");
 
   // BBcode popup
   public static final By              ELEMENT_EDITSITE_SAVEBTN                           =
                                                                By.xpath("//*[@class='btn' and text()='Save']");
 
+  public static final By              ELEMENT_SAVE_BBCODE                                =
+                                                          By.xpath("//*[@id=\"UIAddBBCodeForm\"]/div[3]/button[1]");
+
   public static final By              ELEMENT_BBCODE_POPUP_CLOSEBTN                      =
-                                                                    By.xpath(".//*[@id='BBCodeManagerForm']//button[text()='Close']");
+                                                                    By.xpath("//*[@id=\"BBCodeManagerForm\"]/div/div[2]/button[3]");
 
   /***************************************************
    * FORUM MANAGEMENT
@@ -487,7 +508,7 @@ public class ForumLocator {
   // Manage menu
 
   public static final By              ELEMENT_MENU_MANAGE_CATEGORY                       =
-                                                                   By.xpath("//*[@class='uiIconForumManageCategory uiIconForumLightGray']");
+                                                                   By.xpath("//*[@id=\"UICategory\"]/table/caption/ul/li[5]/div");
 
   public static final By              ELEMENT_EDIT_CATEGORY                              =
                                                             By.xpath("//*[@class='dropdown-menu uiCategoryPopupMenu']/li[1]/a");
@@ -621,16 +642,23 @@ public class ForumLocator {
                                                                          ".//*[@id='UITopicDetail']//a[@data-original-title='${tag}']";
 
   // Tag of topic
+
   public static final By              ELEMENT_FORUM_TOPIC_ADD_TAG                        =
-                                                                  By.xpath(".//*[@id='UITopicDetail']//a[contains(text(),'Add Tag')]");
+                                                                  By.xpath("//*[@id=\"UITopicDetail\"]/div[4]/div[1]/ul/li[2]/div/ul/li/div/a");
 
   // Rate
-  public static final String          ELEMENT_FORUM_VOTE_MARK                            = "//*[@data-original-title='${star}']";
+
+  public static final By              ELEMENT_FORUM_VOTE_MARK                            =
+                                                              By.xpath("//*[@id=\"UIRatingForm\"]/div[2]/div/div[1]/i[3]");
 
   public static final String          ELEMENT_POST_TITLE                                 =
                                                          ".//*[@class='postViewTitle'][contains(text(),'${title}')]";
 
   // More Action menu
+
+  public static final By              ELEMENT_TOPIC_RATE                                 =
+                                                         By.xpath("//*[@id=\"UITopicDetail\"]/div[4]/div[1]/ul/li[3]/div/ul/li[13]/a/i");
+
   public static final By              ELEMENT_EDIT_TOPIC                                 =
                                                          By.xpath(".//*[@id='UITopicDetail']//a[contains(text(),'Edit')]");
 
@@ -704,10 +732,10 @@ public class ForumLocator {
                                                            By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");
 
   public static final By              ELEMENT_POST_FORM_SUBMIT                           =
-                                                               By.xpath("//*[@id='UIPostForm']//*[contains(text(),'Submit')]");
+                                                               By.xpath("//*[@id=\"UIPostForm\"]/div[3]/button[1]");
 
-  public static final String          ELEMENT_POST_IN_TOPIC                              =
-                                                            "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@class='postContent']//*[contains(text(),'{$content}')]";
+  public static final By              ELEMENT_POST_IN_TOPIC                              =
+                                                            By.xpath("//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@class='postContent']//*[contains(text(),'{$content}')]");
 
   public static final String          ELEMENT_POST_IN_TOPIC_QUOTE                        =
                                                                   "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@class='contentQuote']//*[contains(text(),'{$content}')]";
@@ -739,135 +767,126 @@ public class ForumLocator {
   public static final String          ELEMENT_TOPIC_REPPLY_CONTENT                       = ".//*[contains(text(),'${content}')]";
 
   // foot page of post
-  public static final String          ELEMENT_EDIT_POST                                  =
-                                                        "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@data-original-title='Edit This Post']";
-
   public static final String          ELEMENT_QUOTE_POST                                 =
                                                          "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@data-original-title='Reply with Quote']";
-
-  public static final String          ELEMENT_DELETE_POST                                =
-                                                          "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@data-original-title='Delete This Post']";
-
+  public static final By              ELEMENT_DELETE_POST                                =
+                                                          By.xpath("//*[@id=\"UITopicDetailConfirm6\"]");
   public static final String          ELEMENT_PRIVATE_POST                               =
                                                            "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@data-original-title='Private Reply']";
-
   public static final By              ELEMENT_DELETE_BOX_CONFIRMATION                    =
                                                                       By.xpath("//*[@id='UIForumPopupConfirmation']//*[contains(text(),'OK')]");
-
   // Poll
   public static final By              ELEMENT_POLL_QUESTION                              = By.id("Question");
-
   public static final By              ELEMENT_POLL_OPTIONS0                              = By.id("Option0");
-
   public static final By              ELEMENT_POLL_OPTIONS1                              = By.id("Option1");
-
   public static final By              ELEMENT_POLL_SUBMIT                                =
-                                                          By.xpath("//*[@id='UIPollForm']//*[contains(text(),'Submit Poll')]");
-
+                                                          By.xpath("//*[@id=\"UIPollForm\"]/div[3]/button[1]");
   public static final By              ELEMENT_MORE_ACTIONS_POLL                          =
-                                                                By.xpath("//*[@class='uiIconPoll uiIconLightGray']/../..//*[@class='uiIconSettings uiIconLightGray']");
-
+                                                                By.xpath("//*[@id=\"UITopicPoll\"]/div[2]/div[1]/ul/li[2]/div/div/i");
   public static final By              ELEMENT_EDIT_POLL                                  =
                                                         By.xpath("//*[@id='UITopicPoll']//*[contains(text(),'Edit')]");
-
   public static final By              ELEMENT_REMOVE_POLL                                =
                                                           By.xpath("//*[@id='UITopicPoll']//*[contains(text(),'Remove')]");
-
   public static final By              ELEMENT_CLOSE_POLL                                 =
                                                          By.xpath(".//*[@id='UITopicPoll']//a[contains(text(),'Close')]");
-
   public static final By              ELEMENT_OPEN_POLL                                  =
                                                         By.xpath(".//*[@id='UITopicPoll']//a[contains(text(),'Reopen')]");
-
   public static final By              ELEMENT_POLL_POPUP_TITLE                           =
                                                                By.xpath(".//*[@id='UIForumPopupWindow']//span[text()='Poll']");
-
   public static final String          ELEMENT_FORUM_POLL_DISPLAYOPT                      = "//*[contains(text(),'${opt}')]";
-
   public static final By              ELEMENT_FORUM_POLL_GRID                            =
                                                               By.xpath("//*[@class='uiGrid table no-border-cell rounded-corners table-striped tableVoting']");
-
   public static final By              ELEMENT_FORUM_POLL_GRIDCLOSE                       =
                                                                    By.xpath("//*[@class='uiGrid table rounded-corners table-striped tableVoted']");
-
   // move a topic
   public static final String          ELEMENT_UI_POPUP_MOVE_TOPIC                        =
                                                                   "//*[@id='MoveTopicForm']//*[@class='node']//*[contains(text(),'{$forum}')]";
-
   public static final String          ELEMENT_MOVE_POPUP_COLLASPE_NODE                   =
                                                                        ".//*[@class='uiIconNode collapseIcon'][contains(.,'${category}')]";
-
   /***************************************************
    * PRIVATE MESSAGE MANAGEMENT
    ************************************************************************/
   // tab elements
   public static final By              ELEMENT_TABS_SENT_MESSAGES                         =
                                                                  By.xpath("//*[@id='UIPrivateMessageForm']//*[@class='nav nav-tabs']//*[contains(text(),'Sent Messages')]");
-
   public static final By              ELEMENT_TABS_INBOX                                 =
                                                          By.xpath("//*[@id='UIPrivateMessageForm']//*[@class='nav nav-tabs']//*[contains(text(),'Inbox')]");
-
   public static final By              ELEMENT_TABS_COMPOSE_MESSAGE                       =
                                                                    By.xpath("//*[@id='UIPrivateMessageForm']//*[@class='nav nav-tabs']//*[contains(text(),'Compose New Message')]");
-
   public static final By              ELEMENT_PRIVATE_MESSAGE_CANCEL_BUTTON              =
                                                                             By.xpath("//*[@id='UIPrivateMessageForm']//*[contains(text(),'Cancel')]");
-
   // send messages
   public static final By              ELEMENT_SEND_TO_MESSAGE                            = By.id("SendTo");
-
   public static final By              ELEMENT_TITLE_MESSAGE                              = By.id("MailTitle");
-
   public static final By              ELEMENT_MESSAGE_CONTENT                            =
                                                               By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");
-
   public static final By              ELEMENT_SEND_BUTTON                                =
                                                           By.xpath("//*[@id='UIPrivateMessageForm']//*[@class='uiAction']//*[contains(text(),'Send')]");
-
   public static final By              ELEMENT_COMPOSE_NEW_MESSAGE_GROUP_SELECTOR         =
                                                                                  By.xpath(".//*[@id='MessageTab']//*[contains(@class,'uiIconGroup')]");
-
   public static final String          ELEMENT_PRIVATE_MESSAGE_SELECT_GROUP               = ".//*[contains(@title,'${name}')]";
-
   public static final String          ELEMENT_PRIVATE_MESSAGE_SELECT_A_GROUP             =
                                                                              ".//*[@id='UIGroupSelector']//*[contains(text(),'Select this Group')]";
-
   public static final String          ELEMENT_PRIVATE_MESSAGE_SEND_SUCCESSFULLY          = "Your message was sent successfully.";
-
   public static final By              ELEMENT_COMPOSE_NEW_MESSAGE_MEMBERSHIP_SELECTOR    =
                                                                                       By.xpath(".//*[@id='MessageTab']//*[contains(@class,'uiIconMembership uiIconLightGray')]");
-
   public static final String          ELEMENT_PRIVATE_MESSAGE_SELECT_A_MEMBERSHIP        =
                                                                                   ".//*[@id='UIMemberShipSelector']//*[contains(text(),'${membership}')]";
-
   // inbox
   public static final String          ELEMENT_TITLE_AUTHORS_INBOX                        =
                                                                   "//*[@id='UIListInBoxPrivateMessage']//*[contains(text(),'{$author}')]/../..//*[contains(text(),'{$title}')]";
-
   public static final String          ELEMENT_CONTACT_INBOX                              =
                                                             "//*[@id='PermissionInfo']//*[contains(text(),'{$contact}')]";
-
   public static final String          ELEMENT_CONTENT_INBOX                              =
                                                             "//*[@id='uiViewPrivateMessage']//*[contains(text(),'{$content}')]";
-
   public static final By              ELEMENT_REPLY                                      =
                                                     By.xpath("//*[@id='uiViewPrivateMessage']//*[@class='uiIconReply uiIconLightGray']");
-
   public static final String          ELEMENT_DELETE_MESSAGE                             =
                                                              "//*[@id='UIListInBoxPrivateMessage']//*[contains(text(),'{$title}')]/../../..//*[contains(text(),'{$contact}')]/../..//*[@class='uiIconDelete uiIconLightGray']";
-
   // outbox
   public static final String          ELEMENT_FORWARD_MESSAGE                            =
                                                               "//*[@id='UIListSentPrivateMessage']//*[contains(text(),'{$title}')]/../../..//*[contains(text(),'{$contact}')]/../..//*[@class='uiIconForumForward uiIconForumLightGray']";
-
-  public static final By              ELEMENT_CONFIRM                                    =
-                                                      By.xpath("//*[@id='UIForumPopupConfirmation']//*[contains(text(),'OK')]");
-
-  public static final SelenideElement ELEMENT_POLL_CANCEL                                =
-                                                          $(byXpath("//*[@id=\"UIPollForm\"]/div[3]/button[3]"));
-
   public static final SelenideElement ELEMENT_ICON_SEARCH                                =
                                                           $(byXpath("//*[@id=\"QuickSearchForm\"]/div[2]/a/i"));
-
+  public static final By              ELEMENT_CONFIRM                                    =
+                                                      By.xpath("//*[@id='UIForumPopupConfirmation']//*[contains(text(),'OK')]");
+  public static final SelenideElement ELEMENT_POLL_CANCEL                                =
+                                                          $(byXpath("//*[@id=\"UIPollForm\"]/div[3]/button[3]"));
+  public static final SelenideElement ELEMENT_SEARCH_RESULT                              =
+                                                            $(byXpath("//*[@id=\"UIForumListSearch\"]/div[3]/table"));
+  public static final SelenideElement ELEMENT_CLOSE_POPUP                                =
+                                                          $(byXpath("//*[@id=\"UIViewPost\"]/div[3]/button[1]"));
+  public static final SelenideElement ELEMENT_HOME_FORUM                                 =
+                                                         $(byId("UIBreadcumbs")).find(byText("Home"));
+  public static final SelenideElement ELEMENT_CATEGORY_CONTAINER                         = $(byId("UICategory"));
+  public static final SelenideElement ELEMENT_BTN_OK                                     =
+                                                     $(byClassName("infoIcon")).parent()
+                                                                               .parent()
+                                                                               .parent()
+                                                                               .find(byClassName("btn"));
+  public static final SelenideElement ELEMENT_CAT_CONTAINER                              = $(byId("UICategoryContainer"));
+  public static final SelenideElement ELEMENT_PROGRESS_BAR                               = $((byClassName("progressBarFrame")));
+  public static final SelenideElement ELEMENT_CANCEL_PRIVATE_MSG                         =
+                                                                 $(byXpath("//*[@id=\"UIPrivateMessageForm\"]/div[3]/button"));
+  public static final SelenideElement ELEMENT_FORUM_OK_SEND_MSG                          =
+                                                                $(byText("Your message was sent successfully.")).parent()
+                                                                                                                .parent()
+                                                                                                                .parent()
+                                                                                                                .find(byClassName("btn"));
   public static final SelenideElement ELEMENT_CONTENT_SEARCH_RESULT                      = $(byClassName("searchResult"));
+  public static final By              ELEMENT_ICON_REPLAY_POST_FROM_ACTIVITY             = byClassName("uiIconReply");
+  public static final By              ELEMENT_BUTTON_DELETE_POST                         = byClassName("btn");
+  public static final SelenideElement ELEMENT_CHECKBOX_ALL_FORUM_CATEGORIE               = $(byId("checkAll")).parent();
+  public static final SelenideElement ELEMENT_CHECKBOX_SELECT_ONE_FORUM_CATEGORIE        =
+                                                                                  $(byId("UIExportForm")).findAll(byClassName("uiCheckbox"))
+                                                                                                         .get(1);
+  public static final SelenideElement ELEMENT_SELECT_FORUM_TO_MOVE                       =
+                                                                   $(byXpath("//*[@id=\"UIMoveTopicForm\"]/div[2]/div[1]/div/div/ul/li[1]/ul/li/a"));
+  public static final By              ELEMENT_BUTTON_FORWARD_MESSAGE                     = byClassName("uiIconForumForward");
+  public static final By              ELEMENT_BUTTON_DELETE_MESSAGE                      = byClassName("uiIconDelete");
+  public static final SelenideElement ELEMENT_UPLOAD_CATEGORIE_FORUM                     =
+                                                                     $(byId("FileUpload")).find(byClassName("file"));
+  public final String                 ELEMENT_EDIT_POST                                  =
+                                                        "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@data-original-title='Edit This Post']";
+  public final By                     ELEMENT_MOVE_TOPIC_POPUP                           = By.id("UIForumPopupWindow");
 }

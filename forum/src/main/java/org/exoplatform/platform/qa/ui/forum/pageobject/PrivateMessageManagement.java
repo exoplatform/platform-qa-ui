@@ -1,8 +1,14 @@
 package org.exoplatform.platform.qa.ui.forum.pageobject;
 
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 
 import org.openqa.selenium.By;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
@@ -45,7 +51,7 @@ public class PrivateMessageManagement {
    * Go send message tab
    */
   public void goSendMessages() {
-    evt.click(ELEMENT_TABS_SENT_MESSAGES);
+    $(ELEMENT_TABS_SENT_MESSAGES).click();
   }
 
   /**
@@ -59,7 +65,7 @@ public class PrivateMessageManagement {
    * Go compose tab
    */
   public void goComposeMessage() {
-    evt.click(ELEMENT_TABS_COMPOSE_MESSAGE);
+    $(ELEMENT_TABS_COMPOSE_MESSAGE).click();
   }
 
   /**
@@ -77,11 +83,12 @@ public class PrivateMessageManagement {
    * @param content
    */
   public void writeMessage(String contact, String title, String content) {
-    evt.type(ELEMENT_SEND_TO_MESSAGE, contact, true);
-    evt.type(ELEMENT_TITLE_MESSAGE, title, true);
+    refresh();
+    $(ELEMENT_SEND_TO_MESSAGE).setValue(contact);
+    $(ELEMENT_TITLE_MESSAGE).setValue(title);
     plf.inputFrame(ELEMENT_MESSAGE_CONTENT, content);
-    evt.click(ELEMENT_SEND_BUTTON);
-    button.ok();
+    $(ELEMENT_SEND_BUTTON).click();
+    ELEMENT_FORUM_OK_SEND_MSG.click();
 
   }
 
@@ -110,8 +117,8 @@ public class PrivateMessageManagement {
    * @param content
    */
   public void checkInboxMessage(String contact, String title, String content) {
-    evt.click(By.xpath(ELEMENT_TITLE_AUTHORS_INBOX.replace("{$title}", title).replace("{$author}", contact)));
-    evt.waitForAndGetElement(By.xpath(ELEMENT_CONTENT_INBOX.replace("{$content}", content)));
+    $(byText(title)).click();
+    $(byText(content)).scrollTo().waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**
@@ -147,12 +154,13 @@ public class PrivateMessageManagement {
    * @param content
    */
   public void replyMessage(String contact, String title, String newTitle, String content) {
-    evt.click(By.xpath(ELEMENT_TITLE_AUTHORS_INBOX.replace("{$title}", title).replace("{$author}", contact)));
-    evt.click(ELEMENT_REPLY);
-    evt.type(ELEMENT_TITLE_MESSAGE, newTitle, true);
+    $(byText(title)).click();
+    $(ELEMENT_REPLY).click();
+    refresh();
+    $(ELEMENT_TITLE_MESSAGE).setValue(newTitle);
     plf.inputFrame(ELEMENT_MESSAGE_CONTENT, content);
-    evt.click(ELEMENT_SEND_BUTTON);
-    button.ok();
+    $(ELEMENT_SEND_BUTTON).click();
+    ELEMENT_FORUM_OK_SEND_MSG.click();
   }
 
   /**
@@ -165,16 +173,16 @@ public class PrivateMessageManagement {
    * @param newContent
    */
   public void forwardMessage(String contact, String title, String newContact, String newTitle, String newContent) {
-    evt.click(By.xpath(ELEMENT_FORWARD_MESSAGE.replace("{$title}", title).replace("{$contact}", contact)));
+    $(byText(title)).parent().parent().parent().find(ELEMENT_BUTTON_FORWARD_MESSAGE).click();
 
-    evt.type(ELEMENT_SEND_TO_MESSAGE, newContact, true);
+    $(ELEMENT_SEND_TO_MESSAGE).setValue(newContact);
     if (newTitle != "")
-      evt.type(ELEMENT_TITLE_MESSAGE, newTitle, true);
+      $(ELEMENT_TITLE_MESSAGE).setValue(newTitle);
 
     if (newContent != "")
       plf.inputFrame(ELEMENT_MESSAGE_CONTENT, newContent);
-    evt.click(ELEMENT_SEND_BUTTON);
-    button.ok();
+    $(ELEMENT_SEND_BUTTON).click();
+    ELEMENT_FORUM_OK_SEND_MSG.click();
   }
 
   /**
@@ -184,9 +192,9 @@ public class PrivateMessageManagement {
    * @param contact
    */
   public void deleteMessage(String title, String contact) {
-    evt.click(By.xpath(ELEMENT_DELETE_MESSAGE.replace("{$title}", title).replace("{$contact}", contact)));
-    evt.click(ELEMENT_CONFIRM);
-    evt.waitForElementNotPresent(By.xpath(ELEMENT_TITLE_AUTHORS_INBOX.replace("{$title}", title).replace("{$author}", contact)));
+    $(byText(title)).parent().parent().parent().find(ELEMENT_BUTTON_DELETE_MESSAGE).click();
+    $(ELEMENT_CONFIRM).click();
+    $(byText(title)).waitUntil(Condition.disappears, Configuration.timeout);
   }
 
   /**

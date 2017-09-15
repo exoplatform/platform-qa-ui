@@ -49,22 +49,18 @@ public class ForumForumManagement {
   public void addForumSimple(String nameForum, String order, String description) {
     // TODO Auto-generated method stub
     info("Add forum simple");
-    // evt.waitForAndGetElement(ELEMENT_ACTIONBAR_ADDFORUM,
-    // testBase.getDefaultTimeout(), 1);
+
     $(ELEMENT_ACTIONBAR_ADDFORUM).waitUntil(Condition.appears, Configuration.timeout);
     info("click on Add forum button");
     $(ELEMENT_ACTIONBAR_ADDFORUM).click();
     info("input the title for the forum");
     $(ELEMENT_ADDFORUM_POPUP_TITLE).val(nameForum);
     info("check and input Oder field");
-
     $(ELEMENT_ADDFORUM_POPUP_ORDER).val(order);
     info("check and input description");
-
     $(ELEMENT_ADDFORUM_POPUP_DESCRIPTION).val(description);
     info("Click on Save button");
     $(ELEMENT_ADDFORUM_POPUP_SAVE_BUTTON).click();
-
     info("Finish adding new forum");
   }
 
@@ -84,35 +80,35 @@ public class ForumForumManagement {
    */
   public void selectItemMoreActionMenu(specifMoreActionMenu item) {
     info("Wait More link is shown");
-    evt.waitForAndGetElement(ELEMENT_MORE_ACTION);
+    $(ELEMENT_MORE_ACTION).should(Condition.exist);
     info("Click on More link");
-    evt.click(ELEMENT_MORE_ACTION);
+    $(ELEMENT_MORE_ACTION).click();
     info("Select a link on More menu");
     switch (item) {
     case START_TOPIC:
       info("wait Start Topic button is shown");
-      evt.waitForAndGetElement(ELEMENT_START_TOPIC_BUTTON, 2000, 0);
+      $(ELEMENT_START_TOPIC_BUTTON).waitUntil(Condition.appears, Configuration.timeout);
       info("click on Start Topic button");
-      evt.click(ELEMENT_START_TOPIC_BUTTON);
+      $(ELEMENT_START_TOPIC_BUTTON).click();
       info("Verify that the popup is shown");
-      evt.waitForAndGetElement(ELEMENT_START_TOPIC_POPUP_TITLE);
+      $(ELEMENT_START_TOPIC_POPUP_TITLE).should(Condition.exist);
       info("The popup is shown successfully");
       break;
     case EDIT:
       info("click on Edit link");
-      evt.waitForAndGetElement(ELEMENT_EDIT_FORUM, 2000, 0);
-      evt.click(ELEMENT_EDIT_FORUM);
+      $(ELEMENT_EDIT_FORUM).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_EDIT_FORUM).click();
       info("Verify that Edit popup is shown");
-      evt.waitForAndGetElement(ELEMENT_EDITFORUM_POPUP_TITLE);
+      $(ELEMENT_EDITFORUM_POPUP_TITLE).should(Condition.exist);
       info("The popup is shown successfully");
       break;
     case DELETE:
       info("click on Delete link");
-      evt.waitForAndGetElement(ELEMENT_DELETE_FORUM, 2000, 0);
-      evt.click(ELEMENT_DELETE_FORUM);
+      $(ELEMENT_DELETE_FORUM).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_DELETE_FORUM).click();
 
       info("Verify that Confirm popup is shown");
-      $(byText("Are you sure you want to delete this forum ?")).waitUntil(Condition.appears, 10000);
+      $(byText("Are you sure you want to delete this forum ?")).waitUntil(Condition.appears, Configuration.timeout);
       info("Click on OK button of Confirm popup");
       $(ELEMENT_OK_DELETE).click();
       info("Finish deleting the forum");
@@ -120,30 +116,30 @@ public class ForumForumManagement {
     case WATCHES:
       break;
     case LOCK:
-      evt.waitForAndGetElement(ELEMENT_LOCK_FORUM, 2000, 0);
-      evt.click(ELEMENT_LOCK_FORUM);
+      $(ELEMENT_LOCK_FORUM).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_LOCK_FORUM).click();
       break;
     case UNLOCK:
-      evt.waitForAndGetElement(ELEMENT_UNLOCK_FORUM, 2000, 0);
-      evt.click(ELEMENT_UNLOCK_FORUM);
+      $(ELEMENT_UNLOCK_FORUM).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_UNLOCK_FORUM).click();
       break;
     case CLOSE:
-      evt.waitForAndGetElement(ELEMENT_CLOSE_FORUM, 2000, 0);
-      evt.click(ELEMENT_CLOSE_FORUM);
+      $(ELEMENT_CLOSE_FORUM).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_CLOSE_FORUM).click();
       break;
     case OPEN:
-      evt.waitForAndGetElement(ELEMENT_OPEN_FORUM, 2000, 0);
-      evt.click(ELEMENT_OPEN_FORUM);
+      $(ELEMENT_OPEN_FORUM).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_OPEN_FORUM).click();
       break;
     case EXPORT_FORUM:
       break;
     case MOVE:
       info("Wait Move link is shown");
-      evt.waitForAndGetElement(ELEMENT_MOVE_FORUM, 2000, 0);
+      $(ELEMENT_MOVE_FORUM).waitUntil(Condition.appears, Configuration.timeout);
       info("Click on Move link");
-      evt.click(ELEMENT_MOVE_FORUM);
+      $(ELEMENT_MOVE_FORUM).click();
       info("Verify that Move popup is shown");
-      evt.waitForAndGetElement(ELEMENT_POPUP_MOVE_FORUM);
+      $(ELEMENT_POPUP_MOVE_FORUM).should(Condition.exist);
       info("The popup is shown successfully");
       break;
     case BANNED_IPS:
@@ -186,10 +182,10 @@ public class ForumForumManagement {
   public void closeAndOpen(boolean isClose) {
     if (isClose) {
       selectItemMoreActionMenu(specifMoreActionMenu.CLOSE);
-      evt.waitForAndGetElement(ELEMENT_FORUM_START_TOPIC_DISABLE);
+      $(ELEMENT_FORUM_START_TOPIC_DISABLE).waitUntil(Condition.appear, Configuration.timeout);
     } else {
       selectItemMoreActionMenu(specifMoreActionMenu.OPEN);
-      evt.waitForAndGetElement(ELEMENT_FORUM_START_TOPIC_BUTTON);
+      $(ELEMENT_FORUM_START_TOPIC_BUTTON).waitUntil(Condition.appear, Configuration.timeout);
     }
   }
 
@@ -238,10 +234,10 @@ public class ForumForumManagement {
   public void lockAndUnlock(boolean islock) {
     if (islock) {
       selectItemMoreActionMenu(specifMoreActionMenu.LOCK);
-      evt.waitForAndGetElement(ELEMENT_FORUM_START_TOPIC_DISABLE);
+      $(ELEMENT_FORUM_START_TOPIC_DISABLE).should(Condition.exist);
     } else {
       selectItemMoreActionMenu(specifMoreActionMenu.UNLOCK);
-      evt.waitForAndGetElement(ELEMENT_FORUM_START_TOPIC_BUTTON);
+      $(ELEMENT_FORUM_START_TOPIC_BUTTON).should(Condition.exist);
     }
   }
 

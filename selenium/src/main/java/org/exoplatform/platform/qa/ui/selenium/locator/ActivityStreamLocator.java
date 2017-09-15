@@ -336,72 +336,72 @@ public final class ActivityStreamLocator {
                                                         "//*[@id='boxContainer']//*[contains(text(),\"${title}\")]/../..//*[@class='linkTitle']";
 
   // Comment box
-  public static final String          ELEMENT_COMMENTBOX                                   =
-                                                         "//*[contains(text(),\"${title}\")]/../../../..//*[contains(@class,'replaceTextArea')]";
+ public static final String ELEMENT_COMMENTBOX =
+          "//*[contains(text(),\"${title}\")]/../../../..//*[contains(@class,'replaceTextArea')]";
+  public static final String
+          ELEMENT_ICON_COMMENT =
+          "//*[contains(text(),\"${title}\")]/../../../..//i[@class='uiIconComment uiIconLightGray']";
+  public static final String
+          ELEMENT_ICON_LIKE =
+          "//*[contains(text(),\"${title}\")]/../../../..//i[@class='uiIconThumbUp uiIconLightGray']";
+  public static final String ELEMENT_ICON_UNLIKE =
+          "//*[contains(text(),\"${title}\")]/../../../..//i[@class='uiIconThumbUp uiIconBlue']";
+  public static final String ELEMENT_LIKE_NUMBER =
+          "//*[contains(text(),\"${title}\")]/../../../..//*[contains(@class,'uiIconThumbUp')]/..";
 
-  public static final String          ELEMENT_ICON_COMMENT                                 =
-                                                           "//*[contains(text(),\"${title}\")]/../../../..//i[@class='uiIconComment uiIconLightGray']";
+  public static final String
+          ELEMENT_ACTIVITY_ADD_YOUR_COMMENTLABEL =
+          "//*[contains(text(),\"${activityText}\")]/../../../..//*[contains(@id,'DisplayCommentTextarea')]/../div[@class='placeholder']";
+  public static final String
+          ELEMENT_DELETE_COMMENT_BUTTON =
+          "//*[contains(text(),'${activityText}')]/..//*[@class='contentComment'  and contains(text(),\"${commentText}\")]/../..//*[contains(@id,'DeleteCommentButton')]";
+  public static final String
+          ELEMENT_COMMENT_TEXT =
+          "//*[contains(text(),\"${activityText}\")]/../../../..//p[@class='contentComment'  and contains(.,\"${commentText}\")]";
+  public static final String
+          ELEMENT_COMMENT_TEXT_QUOTES =
+          "//*[contains(text(),\"${activityText}\")]/../../../..//p[@class='contentComment'  and contains(.,'${commentText}')]";
+  public static final String
+          ELEMENT_ACTIVITY_LIKE_ICON_BLUE =
+          ".//*[contains(text(),'${nameFile}')]/../../../..//*[@class='uiIconThumbUp uiIconBlue']";
 
-  public static final String          ELEMENT_ICON_LIKE                                    =
-                                                        "//*[contains(text(),\"${title}\")]/../../../..//i[@class='uiIconThumbUp uiIconLightGray']";
 
-  public static final String          ELEMENT_ICON_UNLIKE                                  =
-                                                          "//*[contains(text(),\"${title}\")]/../../../..//i[@class='uiIconThumbUp uiIconBlue']";
+  //  public static final String ELEMENT_COMMENT_DELETE="DeleteCommentButtoncomment{id}";
 
-  public static final String          ELEMENT_LIKE_NUMBER                                  =
-                                                          "//*[contains(text(),\"${title}\")]/../../../..//*[contains(@class,'uiIconThumbUp')]/..";
-
-  public static final String          ELEMENT_ACTIVITY_ADD_YOUR_COMMENTLABEL               =
-                                                                             "//*[contains(text(),\"${activityText}\")]/../../../..//*[contains(@id,'DisplayCommentTextarea')]/../div[@class='placeholder']";
-
-  public static final String          ELEMENT_DELETE_COMMENT_BUTTON                        =
-                                                                    "//*[contains(text(),'${activityText}')]/..//*[@class='contentComment'  and contains(text(),\"${commentText}\")]/../..//*[contains(@id,'DeleteCommentButton')]";
-
-  public static final String          ELEMENT_COMMENT_TEXT                                 =
-                                                           "//*[contains(text(),\"${activityText}\")]/../../../..//p[@class='contentComment'  and contains(.,\"${commentText}\")]";
-
-  public static final String          ELEMENT_COMMENT_TEXT_QUOTES                          =
-                                                                  "//*[contains(text(),\"${activityText}\")]/../../../..//p[@class='contentComment'  and contains(.,'${commentText}')]";
-
-  public static final String          ELEMENT_ACTIVITY_LIKE_ICON_BLUE                      =
-                                                                      ".//*[contains(text(),'${nameFile}')]/../../../..//*[@class='uiIconThumbUp uiIconBlue']";
-
-  public static final String          ELEMENT_ACTIVITY_COMMENT_VIEW_HOVEROVER              =
-                                                                              ".//*[contains(text(),'${comment}')]/../..//*[@class='uiIconWatch uiIconLightGray']";
-
-  public static final String          ELEMENT_PUBLICATION_COMMENTPOSTED                    =
-                                                                        ".//*[contains(text(),'$activity')]/../../..//*[contains(text(),'${content}')]";
-
-  public static final String          ELEMENT_PUBLICATION_COMMENTPOSTED_MENTION            =
-                                                                                ".//*[contains(text(),'$activity')]/../../..//*[contains(@href,'$username')]";
-
-  public static final String          ELEMENT_PUBLICATION_SEEALLCOMMENTBTN                 =
-                                                                           "//*[contains(text(),'${activity}')]/../..//*[contains(@class,'commentListInfo')]//a[@href and contains(text(),'View')]";
-
-  public static final String          ELEMENT_PUBLICATION_HIDEALLCOMMENTBTN                =
-                                                                            "//*[contains(text(),'${activity}')]/../..//*[contains(@class,'commentListInfo')]//a[@href and contains(text(),'Hide')]";
-
-  public static final String          ELEMENT_SUGGEST_USER_IN_COMMENT                      =
-                                                                      ".//*[contains(@class,'autocomplete-menu')]//*[contains(@data-ref-id,'${userName}')]";
-
-  public static final String          ELEMENT_PUBLICATION_COMMENT_NAMEAUTHOR               =
-                                                                             "//*[contains(text(),'${comment}')]/../..//*[@class='author']/*[contains(text(),'${name}')]";
-
-  public static final String          ELEMENT_PUBLICATION_COMMENT_TIMESTAMP                =
-                                                                            "//*[contains(text(),'${comment}')]/../..//*[@class='author']/*[contains(@class,'dateTime')]";
-
-  public static final String          ELEMENT_PUBLICATION_COMMENT_AVATAR                   =
-                                                                         "//*[contains(text(),'${comment}')]/../..//*[@class='avatarXSmall']/*[@alt='${name}']";
-
-  public static final String          ELEMENT_COMMENT_AVATAR_USER                          =
-                                                                  "//*[contains(text(),'$activity')]/../../../..//*[contains(text(),'$comment')]/../..//*[contains(@src,'UserAvtDefault.png')][contains(@alt,'$fullName')]";
-
-  public static final String          ELEMENT_COMMENT_AUTHOR                               =
-                                                             "//*[contains(text(),'$activity')]/../../../..//*[contains(text(),'$comment')]/../..//*[contains(@class,'author')]//*[contains(text(),'$fullName')]";
-
-  public static final String          ELMEMENT_COMMENT_TIME                                =
-                                                            "//*[contains(text(),'$activity')]/../../../..//*[contains(text(),'$comment')]/../..//*[contains(text(),'less than a minute ago')]";
-
+  public static final String ELEMENT_ACTIVITY_COMMENT_VIEW_HOVEROVER ="/portal/intranet/forum/topic/{id}";
+  public static final String
+          ELEMENT_PUBLICATION_COMMENTPOSTED =
+          ".//*[contains(text(),'$activity')]/../../..//*[contains(text(),'${content}')]";
+  public static final String
+          ELEMENT_PUBLICATION_COMMENTPOSTED_MENTION =
+          ".//*[contains(text(),'$activity')]/../../..//*[contains(@href,'$username')]";
+  public static final String
+          ELEMENT_PUBLICATION_SEEALLCOMMENTBTN =
+          "//*[contains(text(),'${activity}')]/../..//*[contains(@class,'commentListInfo')]//a[@href and contains(text(),'View')]";
+  public static final String
+          ELEMENT_PUBLICATION_HIDEALLCOMMENTBTN =
+          "//*[contains(text(),'${activity}')]/../..//*[contains(@class,'commentListInfo')]//a[@href and contains(text(),'Hide')]";
+  public static final String
+          ELEMENT_SUGGEST_USER_IN_COMMENT =
+          ".//*[contains(@class,'autocomplete-menu')]//*[contains(@data-ref-id,'${userName}')]";
+  public static final String
+          ELEMENT_PUBLICATION_COMMENT_NAMEAUTHOR =
+          "//*[contains(text(),'${comment}')]/../..//*[@class='author']/*[contains(text(),'${name}')]";
+  public static final String
+          ELEMENT_PUBLICATION_COMMENT_TIMESTAMP =
+          "//*[contains(text(),'${comment}')]/../..//*[@class='author']/*[contains(@class,'dateTime')]";
+  public static final String
+          ELEMENT_PUBLICATION_COMMENT_AVATAR =
+          "//*[contains(text(),'${comment}')]/../..//*[@class='avatarXSmall']/*[@alt='${name}']";
+  public static final String
+          ELEMENT_COMMENT_AVATAR_USER =
+          "//*[contains(text(),'$activity')]/../../../..//*[contains(text(),'$comment')]/../..//*[contains(@src,'UserAvtDefault.png')][contains(@alt,'$fullName')]";
+  public static final String
+          ELEMENT_COMMENT_AUTHOR =
+          "//*[contains(text(),'$activity')]/../../../..//*[contains(text(),'$comment')]/../..//*[contains(@class,'author')]//*[contains(text(),'$fullName')]";
+  public static final String
+          ELMEMENT_COMMENT_TIME =
+          "//*[contains(text(),'$activity')]/../../../..//*[contains(text(),'$comment')]/../..//*[contains(text(),'less than a minute ago')]";
   // Activity for Forum
   public static final String          ELEMENT_ACTIVITY_POLL_VOTE_FOR_POLL                  =
                                                                           "//*[@id='boxContainer']//*[contains(text(),'{$name}')]/../../../..//*[@class='uiIconSocVote uiIconSocLightGray']";
@@ -692,4 +692,5 @@ public final class ActivityStreamLocator {
   public static final String ELEMENT_COMMENT_DELETE="DeleteCommentButtoncomment{id}";
   public static final String ELEMENT_DATE_COMMENT="dateTime";
   public static final SelenideElement ELEMENT_ACTIVITY_STREAM_CONTAINER=$(byId("UIActivitiesLoader"));
+
 }

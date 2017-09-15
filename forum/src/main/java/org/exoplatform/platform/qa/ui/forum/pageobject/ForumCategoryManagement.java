@@ -1,7 +1,6 @@
 package org.exoplatform.platform.qa.ui.forum.pageobject;
 
-import static com.codeborne.selenide.Condition.appears;
-import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
@@ -70,21 +69,21 @@ public class ForumCategoryManagement {
    */
   public void selectItemManageCategoryMenu(specifManageCategoryMenu item) {
     info("Waiting manage menu is shown");
-    evt.waitForAndGetElement(ELEMENT_MENU_MANAGE_CATEGORY);
+    $(ELEMENT_MENU_MANAGE_CATEGORY).waitUntil(appears, Configuration.timeout);
     info("Click on Manage menu");
-    evt.click(ELEMENT_MENU_MANAGE_CATEGORY, 0, true);
+    $(ELEMENT_MENU_MANAGE_CATEGORY).click();
     switch (item) {
     case EDIT_CATEGORY:
       info("click on Edit link");
-      evt.click(ELEMENT_EDIT_CATEGORY);
+      $(ELEMENT_EDIT_CATEGORY).click();
       break;
     case EXPORT_FORUM:
       info("Click on Export link");
-      evt.click(ELEMENT_EXPORT_FORUM);
+      $(ELEMENT_EXPORT_FORUM).click();
       break;
     case IMPORT_FORUM:
       info("Click on Import link");
-      evt.click(ELEMENT_IMPORT_FORUM);
+      $(ELEMENT_IMPORT_FORUM).click();
       break;
     case DELETE:
       info("Click on Delete link");
@@ -121,7 +120,6 @@ public class ForumCategoryManagement {
     selectItemManageCategoryMenu(specifManageCategoryMenu.EDIT_CATEGORY);
     info("Imput a new name");
     $(ELEMENT_ADDCATEGORY_POPUP_TITLE).val(newName);
-
     info("Save all changes");
     $(ELEMENT_ADDCATEGORY_POPUP_SAVE_BUTTON).click();
 
@@ -135,14 +133,11 @@ public class ForumCategoryManagement {
   public void deleteCategory(String nameCat) {
     // TODO Auto-generated method stub
     info("Wait the category is shown");
-
-    $(byText(nameCat)).waitUntil(appears, Configuration.timeout);
-
-    info("Click on the category");
-    $(byText(nameCat)).click();
+    if ($(ELEMENT_MENU_MANAGE_CATEGORY).is(not(exist))) {
+      ELEMENT_CAT_CONTAINER.find(byText(nameCat)).waitUntil(appears, Configuration.timeout).click();
+    }
     info("Select Delete link");
     selectItemManageCategoryMenu(specifManageCategoryMenu.DELETE);
-
     info("Verify that the category is deleted");
     $(withText(nameCat)).shouldNot(exist);
     info("The category is deleted successfully");
@@ -167,13 +162,13 @@ public class ForumCategoryManagement {
   public void exportForum(String forumName, String fileName) {
     selectItemManageCategoryMenu(specifManageCategoryMenu.EXPORT_FORUM);
     info("Uncheck All check boxes");
-    evt.uncheck(ELEMENT_EXPORT_FORUM_EXPORTALL, 2);
+    ELEMENT_CHECKBOX_ALL_FORUM_CATEGORIE.click();
     info("Select check box of the forum");
-    evt.check((ELEMENT_EXPORT_FORUM_EXPORT).replace("${title}", forumName), 2);
+    ELEMENT_CHECKBOX_SELECT_ONE_FORUM_CATEGORIE.click();
     info("input name");
-    evt.type(ELEMENT_FILENAME_INPUT, fileName, true);
+    $(ELEMENT_FILENAME_INPUT).setValue(fileName);
     info("Save all changes");
-    evt.click(ELEMENT_SAVE_BTN);
+    $(ELEMENT_SAVE_BTN).click();
   }
 
   /**

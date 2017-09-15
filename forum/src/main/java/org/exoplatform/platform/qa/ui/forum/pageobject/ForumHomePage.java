@@ -3,16 +3,19 @@ package org.exoplatform.platform.qa.ui.forum.pageobject;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_SAVE_BTN;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ManageFileTestBase;
 
@@ -45,8 +48,9 @@ public class ForumHomePage {
    * Go to home category
    */
   public void goToHomeCategory() {
-
-    $(ELEMENT_CATEGORY_BREADCUMB_HOME).click();
+    if ($(ELEMENT_CATEGORY_BREADCUMB_HOME).is(Condition.exist)) {
+      $(ELEMENT_CATEGORY_BREADCUMB_HOME).click();
+    }
   }
 
   /**
@@ -56,9 +60,10 @@ public class ForumHomePage {
    */
   public void selectItemAdministrationMenu(specifAdministrationMenu item) {
     info("Waiting administration menu is shown");
-    evt.waitForAndGetElement(ELEMENT_ACTIONBAR_ADMINISTRATION);
+    $(ELEMENT_ACTIONBAR_ADMINISTRATION).should(Condition.appears);
+    // evt.waitForAndGetElement(ELEMENT_ACTIONBAR_ADMINISTRATION);
     info("Click on Manage menu");
-    evt.click(ELEMENT_ACTIONBAR_ADMINISTRATION);
+    $(ELEMENT_ACTIONBAR_ADMINISTRATION).click();
 
     switch (item) {
     case SORT_SETTING:
@@ -67,7 +72,7 @@ public class ForumHomePage {
       break;
     case BBCODE:
       info("Click on BBCode link");
-      evt.click(ELEMENT_ACTIONBAR_ADMIN_BBCODE);
+      $(ELEMENT_ACTIONBAR_ADMIN_BBCODE).click();
       break;
     case NOTIFICATIONS:
       break;
@@ -77,11 +82,11 @@ public class ForumHomePage {
       break;
     case EXPORT:
       info("Export a category");
-      evt.click(ELEMENT_ACTIONBAR_ADMIN_EXPORT);
+      $(ELEMENT_ACTIONBAR_ADMIN_EXPORT).click();
       break;
     case IMPORT:
       info("Import a category");
-      evt.click(ELEMENT_ACTIONBAR_ADMIN_IMPORT);
+      $(ELEMENT_ACTIONBAR_ADMIN_IMPORT).click();
       break;
     default:
       break;
@@ -121,10 +126,10 @@ public class ForumHomePage {
     if (watch) {
       if (evt.waitForAndGetElement(ELEMENT_WATCH, testBase.getDefaultTimeout(), 0) != null) {
         info("Watch item");
-        evt.click(ELEMENT_WATCH);
-        evt.waitForMessage(MESSAGE_WATCH);
-        evt.click(ELEMENT_OK_INFOR_POPUP);
-        evt.waitForAndGetElement(ELEMENT_UNWATCH);
+        $(ELEMENT_WATCH).click();
+        $(byText(MESSAGE_WATCH)).waitUntil(Condition.appears, Configuration.timeout);
+        $(ELEMENT_OK_INFOR_POPUP).click();
+        $(ELEMENT_UNWATCH).waitUntil(Condition.appears, Configuration.timeout);
         info("Watch item successfully");
       } else {
         info("Not found watch link");
@@ -132,10 +137,10 @@ public class ForumHomePage {
     } else {
       if (evt.waitForAndGetElement(ELEMENT_UNWATCH, testBase.getDefaultTimeout(), 0) != null) {
         info("Unwatch item");
-        evt.click(ELEMENT_UNWATCH);
-        evt.waitForMessage(MESSAGE_UNWATCH);
-        evt.click(ELEMENT_OK_INFOR_POPUP);
-        evt.waitForAndGetElement(ELEMENT_WATCH);
+        $(ELEMENT_UNWATCH).click();
+        $(byText(MESSAGE_UNWATCH)).waitUntil(Condition.appears, Configuration.timeout);
+        $(ELEMENT_OK_INFOR_POPUP).click();
+        $(ELEMENT_WATCH).waitUntil(Condition.appears, Configuration.timeout);
         info("Unwatch item successfully");
       } else {
         info("Not found unwatch link");
@@ -150,8 +155,7 @@ public class ForumHomePage {
    */
   public void goToForum(String name) {
     info("Click on the forum with the name:" + name);
-    evt.click(ELEMENT_SELECT_FORUM_TOPIC.replace("${link}", name));
-
+    ELEMENT_CATEGORY_CONTAINER.find(byText(name)).click();
   }
 
   /**
@@ -188,23 +192,23 @@ public class ForumHomePage {
   public void addBBCode(String tag, String replacement, String description, String example, boolean use) {
     selectItemAdministrationMenu(specifAdministrationMenu.BBCODE);
     info("Click on Add button of Add BBCode popup");
-    evt.click(ELEMENT_ADMIN_BBCODE_ADDBBCODE);
+    $(ELEMENT_ADMIN_BBCODE_ADDBBCODE).click();
     info("Input new tag");
-    evt.type(ELEMENT_BBCODE_ADDBBCODEFORM_TAG, tag, true);
+    $(ELEMENT_BBCODE_ADDBBCODEFORM_TAG).setValue(tag);
     info("Input new replacement");
-    evt.type(ELEMENT_BBCODE_ADDBBCODEFORM_REPLACEMENT, replacement, true);
+    $(ELEMENT_BBCODE_ADDBBCODEFORM_REPLACEMENT).setValue(replacement);
     info("Input new description");
-    evt.type(ELEMENT_BBCODE_ADDBBCODEFORM_DESCRIPTION, description, true);
+    $(ELEMENT_BBCODE_ADDBBCODEFORM_DESCRIPTION).setValue(description);
     info("Input new example");
-    evt.type(ELEMENT_BBCODE_ADDBBCODEFORM_EXAMPLE, example, true);
+    $(ELEMENT_BBCODE_ADDBBCODEFORM_EXAMPLE).setValue(example);
     if (use == true)
-      evt.check(ELEMENT_BBCODE_USE_OPTION);
+      $(ELEMENT_BBCODE_USE_OPTION).click();
     info("Click on Save button and save all changes");
-    evt.click(ELEMENT_EDITSITE_SAVEBTN);
+    $(ELEMENT_SAVE_BBCODE).click();
     info("Verify that BBcode is created");
-    evt.waitForAndGetElement(ELEMENT_BBCODE_TAG_VERIFY.replace("${tag}", tag.toUpperCase()));
+    $(byText(tag.toUpperCase())).should(Condition.exist);
     info("Close the popup");
-    evt.click(ELEMENT_BBCODE_POPUP_CLOSEBTN);
+    $(ELEMENT_BBCODE_POPUP_CLOSEBTN).click();
   }
 
   /**
@@ -219,23 +223,23 @@ public class ForumHomePage {
   public void editBBCode(String newTag, String newReplacement, String newDescription, String newExample, boolean use) {
     selectItemAdministrationMenu(specifAdministrationMenu.BBCODE);
     info("Click on Edit BBcode");
-    evt.click(ELEMENT_BBCODE_EDITBBCODE.replace("${tag}", newTag.toUpperCase()));
+    $(ELEMENT_BBCODE_EDITBBCODE).click();
     info("Input new tag");
-    evt.type(ELEMENT_BBCODE_ADDBBCODEFORM_TAG, newTag, true);
+    $(ELEMENT_BBCODE_ADDBBCODEFORM_TAG).setValue(newTag);
     info("Input new replacement");
-    evt.type(ELEMENT_BBCODE_ADDBBCODEFORM_REPLACEMENT, newReplacement, true);
+    $(ELEMENT_BBCODE_ADDBBCODEFORM_REPLACEMENT).setValue(newReplacement);
     info("Input new description");
-    evt.type(ELEMENT_BBCODE_ADDBBCODEFORM_DESCRIPTION, newDescription, true);
+    $(ELEMENT_BBCODE_ADDBBCODEFORM_DESCRIPTION).setValue(newDescription);
     info("Input new example");
-    evt.type(ELEMENT_BBCODE_ADDBBCODEFORM_EXAMPLE, newExample, true);
+    $(ELEMENT_BBCODE_ADDBBCODEFORM_EXAMPLE).setValue(newExample);
     if (use == true)
-      evt.check(ELEMENT_BBCODE_USE_OPTION);
+      $(ELEMENT_BBCODE_USE_OPTION).click();
     info("Click on Save button and save all changes");
-    evt.click(ELEMENT_EDITSITE_SAVEBTN);
+    $(ELEMENT_EDITSITE_SAVEBTN).click();
     info("Verify that BBcode is edited with changes");
-    evt.waitForAndGetElement(ELEMENT_BBCODE_TAG_VERIFY.replace("${tag}", newTag.toUpperCase()));
+    $(byText(newTag.toUpperCase())).should(Condition.exist);
     info("Close the popup");
-    evt.click(ELEMENT_BBCODE_POPUP_CLOSEBTN);
+    $(ELEMENT_BBCODE_POPUP_CLOSEBTN).click();
   }
 
   /**
@@ -246,34 +250,55 @@ public class ForumHomePage {
   public void deleteBBcode(String tag) {
     selectItemAdministrationMenu(specifAdministrationMenu.BBCODE);
     info("Click on Delete of the tag");
-    evt.click(ELEMENT_BBCODE_DELETEBBCODE.replace("${tag}", tag.toUpperCase()));
+    $(ELEMENT_BBCODE_DELETEBBCODE).click();
     info("Click on OK buton of Confirm popup");
-    evt.click(ELEMENT_BBCODE_CONFIRM_DELETETAG);
+    $(ELEMENT_BBCODE_CONFIRM_DELETETAG).click();
     info("Verify that BBcode is closed");
-    evt.waitForElementNotPresent(ELEMENT_BBCODE_TAG_VERIFY.replace("${tag}", tag.toUpperCase()));
+    $(byText(tag.toUpperCase())).shouldNot(Condition.exist);
     info("Close the popup");
-    evt.click(ELEMENT_BBCODE_POPUP_CLOSEBTN);
+    $(ELEMENT_BBCODE_POPUP_CLOSEBTN).click();
   }
 
   /**
-   * Bookmark a topic, a category and a forum
+   * Bookmark a category and a forum
    *
    * @param name
    */
   public void bookmark(String name) {
     info("Click on Bookmark link on Action bar");
-    evt.clickByJavascript(ELEMENT_ACTIONBAR_BOOKMARK_ICON);
-
+    $(ELEMENT_ACTIONBAR_BOOKMARK_ICON).click();
     info("Click on Bookmark link on Action bar to open Bookmark popup");
-    evt.clickByJavascript(ELEMENT_ACTIONBAR_BOOKMARK_MANAGER);
+    $(ELEMENT_ACTIONBAR_BOOKMARK_MANAGER).click();
     info("Verify that the topic is bookmarked");
-    evt.waitForAndGetElement(ELEMENT_FORUM_BOOKMARK_NAME.replace("${name}", name));
+    $(byText(name)).should(Condition.exist);
     info("Delete the bookmark of the topic");
-    evt.click(ELEMENT_FORUM_BOOKMARK_DELETE.replace("${name}", name));
+    $(ELEMENT_FORUM_BOOKMARK_DELETE).click();
     info("Verify that the bookmark is deleted");
-    evt.waitForElementNotPresent(ELEMENT_FORUM_BOOKMARK_NAME.replace("${name}", name));
+    $(ELEMENT_FORUM_BOOKMARK_NAME).find(byText(name)).shouldNot(Condition.exist);
     info("Close the popup");
-    evt.click(ELEMENT_FORUM_BOOKMARK_CLOSE_ICON);
+    $(ELEMENT_FORUM_BOOKMARK_CLOSE_ICON).click();
+  }
+
+  /**
+   * Bookmark a topic
+   *
+   * @param name
+   */
+  public void topicbookmark(String name) {
+    info("Click on More actions button");
+    $(MORE_ACTIONS_TOPIC).click();
+    info("Click on Bookmark buton in Topic more actions list");
+    $(ELEMENT_TOPIC_BOOKMARK).click();
+    info("Click on Bookmark link on Action bar to open Bookmark popup");
+    $(ELEMENT_ACTIONBAR_BOOKMARK_MANAGER).click();
+    info("Verify that the topic is bookmarked");
+    $(byText(name)).should(Condition.exist);
+    info("Delete the bookmark of the topic");
+    $(ELEMENT_FORUM_BOOKMARK_DELETE).click();
+    info("Verify that the bookmark is deleted");
+    $(ELEMENT_FORUM_BOOKMARK_NAME).find(byText(name)).shouldNot(Condition.exist);
+    info("Close the popup");
+    $(ELEMENT_FORUM_BOOKMARK_CLOSE_ICON).click();
   }
 
   /**
@@ -285,13 +310,13 @@ public class ForumHomePage {
   public void exportCategory(String catName, String fileName) {
     selectItemAdministrationMenu(specifAdministrationMenu.EXPORT);
     info("Uncheck all category");
-    evt.uncheck(ELEMENT_EXPORTCAT_EXPORTALL, 2);
+    ELEMENT_CHECKBOX_ALL_FORUM_CATEGORIE.click();
     info("Select the category:" + catName);
-    evt.check(ELEMENT_EXPORTCAT_EXPORT.replace("${title}", catName), 2);
+    ELEMENT_CHECKBOX_SELECT_ONE_FORUM_CATEGORIE.click();
     info("input name");
-    evt.type(ELEMENT_FILENAME_INPUT, fileName, true);
+    $(ELEMENT_FILENAME_INPUT).setValue(fileName);
     info("Save all changes");
-    evt.click(ForumLocator.ELEMENT_SAVE_BTN);
+    $(ELEMENT_SAVE_BTN).click();
   }
 
   /**
@@ -310,7 +335,7 @@ public class ForumHomePage {
   public void goToPrivateMessage() {
     // TODO Auto-generated method stub
     info("Click on Private Message button");
-    evt.click(ELEMENT_ACTIONBAR_PRIVATE_MESSAGE);
+    $(ELEMENT_ACTIONBAR_PRIVATE_MESSAGE).click();
   }
 
   /**
