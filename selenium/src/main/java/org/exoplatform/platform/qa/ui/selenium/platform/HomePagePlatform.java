@@ -216,19 +216,18 @@ public class HomePagePlatform {
     evt.waitForAndGetElement(ELEMENT_PLF_HOMEPAGE_LOAD_MORE_BUTTON, testBase.getDefaultTimeout(), 1);
     evt.click(ELEMENT_PLF_HOMEPAGE_LOAD_MORE_BUTTON);
   }
-public void refreshUntil(String text, Condition condition,long time){
-  for (int i = 0; i <= 15; i++) {
-    refresh();
-    try {
+
+  public void refreshUntil(String text, Condition condition, long time) throws Exception {
+
+    for (int i = 0; i <= 15; i++) {
+      refresh();
       Thread.sleep(time);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    if ($(byText(text)).is(condition)) {
-      break;
+      if ($(byText(text)).is(condition)) {
+        break;
+      }
     }
   }
-}
+
   /**
    * Check display of user in Suggestion gadget
    *
