@@ -128,7 +128,7 @@ public class ForumPublishActivityTestIT extends Base {
    */
 
   @Test
-  public void test01_CheckActivityAfterMoveATopic() {
+  public void test01_CheckActivityAfterMoveATopic() throws Exception {
     info("Test 01: Check activity after move a topic");
     info("Create data test");
     prepareDataTest();
@@ -193,7 +193,7 @@ public class ForumPublishActivityTestIT extends Base {
    */
 
   @Test
-  public void test02_CheckTopicActivityWhenCreatingNewTopic() {
+  public void test02_CheckTopicActivityWhenCreatingNewTopic() throws Exception {
     info("Test 2: Check topic activity when creating new topic");
     info("Create data test for test 2");
     String topic1 = "Topic" + getRandomNumber();
@@ -217,7 +217,7 @@ public class ForumPublishActivityTestIT extends Base {
    * <li>Pre-Condition: - Topic activity is existed</li>
    */
   @Test
-  public void test03_CheckTopicActivityAfterUpdateTopicTitle() {
+  public void test03_CheckTopicActivityAfterUpdateTopicTitle() throws Exception {
     info("Test 3: Check activity after update topic title");
     info("Create data test for test 3");
     String topic1 = "Topic1" + getRandomNumber();
@@ -246,7 +246,7 @@ public class ForumPublishActivityTestIT extends Base {
    * <li>Pre-Condition: - Topic activity is existed</li>
    */
   @Test
-  public void test04_CheckTopicActivityAfterUpdateTopicConent() {
+  public void test04_CheckTopicActivityAfterUpdateTopicConent() throws Exception {
     info("Test 4: Check activity after update topic content");
     info("Create data test for test 4");
     String topic1 = "Topic1" + getRandomNumber();
@@ -276,7 +276,7 @@ public class ForumPublishActivityTestIT extends Base {
    * <li>Pre-Condition: Topic activity is existed</li>
    */
   @Test
-  public void test05_CheckTopicActivityAfterLockUnlockTopic() {
+  public void test05_CheckTopicActivityAfterLockUnlockTopic() throws Exception {
     info("Test 5: Check topic activity after lock/unlock a topic");
     info("Create data test for test 5");
     String topic1 = "Topic1" + getRandomNumber();
@@ -319,7 +319,7 @@ public class ForumPublishActivityTestIT extends Base {
    * <li>Test Case Name: Check topic activity after delete topic.</li>
    */
   @Test
-  public void test06_CheckActivityAfterDeleteTopic() {
+  public void test06_CheckActivityAfterDeleteTopic() throws Exception {
     info("Test 6: Check topic activity after delete topic");
     info("Create data test for test 6");
     String topic1 = "Topic1" + getRandomNumber();
@@ -348,7 +348,7 @@ public class ForumPublishActivityTestIT extends Base {
    * to topic - A Poll's activity is added to the activity stream
    */
   @Test
-  public void test07_AddPoll() {
+  public void test07_AddPoll() throws Exception {
     info("Test 7: Add a new poll");
     info("Create data test for test 7");
     String topic1 = "Topic1" + getRandomNumber();
@@ -380,7 +380,7 @@ public class ForumPublishActivityTestIT extends Base {
    ** <li>Test Case Name: Redirect to the poll by clicking on "Vote".</li>
    */
   @Test
-  public void test08_RedirectToThePollByClickingOnVote() {
+  public void test08_RedirectToThePollByClickingOnVote() throws Exception {
     info("Test 08:Redirect to the poll by clicking on Vote");
     info("Create data test for test 8");
     String topic1 = "Topic1" + getRandomNumber();
@@ -411,7 +411,7 @@ public class ForumPublishActivityTestIT extends Base {
    * <li>Test Case Name: Edit a poll.</li>
    */
   @Test
-  public void test09_EditPoll() {
+  public void test09_EditPoll() throws Exception {
     info("Test 09: Edit a poll");
     info("Create data test for test 9");
     String topic1 = "Topic1" + getRandomNumber();
@@ -446,7 +446,7 @@ public class ForumPublishActivityTestIT extends Base {
    * <li>Test Case Name: Delete a poll.</li>
    */
   @Test
-  public void test10_DeletePoll() {
+  public void test10_DeletePoll() throws Exception {
     info("Test 10: Delete a poll");
     info("Create data test for test 10");
     String topic1 = "Topic1" + getRandomNumber();
@@ -488,7 +488,7 @@ public class ForumPublishActivityTestIT extends Base {
    * forum application is displayed with the reply form opened
    */
   @Test
-  public void test11_JumpIntoReplyFormByClickingOnReplyAction() {
+  public void test11_JumpIntoReplyFormByClickingOnReplyAction() throws Exception {
     info("Test 11 Jump into Reply form by clicking on Reply action");
 
     info("Create test data");
@@ -524,7 +524,7 @@ public class ForumPublishActivityTestIT extends Base {
    * The lastest reply of the topic is displayed
    */
   @Test
-  public void test12_JumpIntoLastReplyOfTopic() {
+  public void test12_JumpIntoLastReplyOfTopic() throws Exception {
     info("Test 12 Jump into last Reply of Topic");
 
     info("Create test data for test 12");
@@ -572,7 +572,7 @@ public class ForumPublishActivityTestIT extends Base {
    * - The related reply in the forum is displayed
    */
   @Test
-  public void test13_JumpToRelatedReply() {
+  public void test13_JumpToRelatedReply() throws Exception {
     info("Test 13 Jump to related reply");
 
     info("Create test data for test 13");
