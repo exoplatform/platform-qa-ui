@@ -19,6 +19,7 @@ import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumCategoryManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
+import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 
@@ -39,6 +40,8 @@ public class PlfNavigationTopNavigationTestIT extends Base {
 
   CalendarHomePage        calendarHomePage;
 
+  ForumHomePage           forumHomePage;
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
@@ -48,6 +51,7 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     forumCategoryManagement = new ForumCategoryManagement(this);
     forumForumManagement = new ForumForumManagement(this);
     calendarHomePage = new CalendarHomePage(this);
+    forumHomePage = new ForumHomePage(this);
   }
 
   /**
@@ -110,6 +114,7 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     info("Delete data");
     ELEMENT_POLL_CANCEL.click();
     homePagePlatform.goToForum();
+    forumHomePage.goToHomeCategory();
     forumCategoryManagement.deleteCategory(category);
     /*
      * Step number: 2 Step Name: Open poll application Step Description: - Click on
@@ -159,6 +164,7 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     info("Delete data");
     ELEMENT_TOPIC_CANCEL.scrollTo().click();
     homePagePlatform.goToForum();
+    forumHomePage.goToHomeCategory();
     forumCategoryManagement.deleteCategory(category);
 
   }
