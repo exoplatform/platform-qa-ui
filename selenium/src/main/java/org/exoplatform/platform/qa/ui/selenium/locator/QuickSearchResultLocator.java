@@ -20,7 +20,12 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.locator;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byId;
+import static com.codeborne.selenide.Selenide.$;
 
 public final class QuickSearchResultLocator {
 
@@ -35,12 +40,12 @@ public final class QuickSearchResultLocator {
   public static final String ELEMENT_QUICKSEARCHRESULT_ICONDOC                        =
                                                                "//*[@class='uiIcon64x64TemplateFolderDefault uiIcon64x64Templateacme_product']/../..//*[text()='${title}']";
 
-  public static final By     ELEMENT_QUICKSEARCHRESULT_SEE_ALL_SEARCH                 =
-                                                                      By.xpath(".//*[@class='message']/*[contains(text(),'See All Search Results')]");
+  public static final SelenideElement ELEMENT_QUICKSEARCHRESULT_SEE_ALL_SEARCH                 =
+                                                                      $(byClassName("seeAllmsg"));
 
   // filter box
   public static final By     ELEMENT_SEARCHRESULT_ALLTYPECHECK                        =
-                                                               By.xpath("//*[@value='all' and @name='contentType' and @checked='checked']");
+                                                               By.xpath("//*[@id=\"facetsFilter\"]/div/div/div[2]/h6/span");
 
   public static final By     ELEMENT_SEARCHRESULT_FILESTYPECHECK                      =
                                                                  By.xpath("//*[@value='file' and @name='contentType']");
@@ -58,7 +63,7 @@ public final class QuickSearchResultLocator {
                                                                   By.xpath("//*[@value='event' and @name='contentType']");
 
   public static final By     ELEMENT_SEARCHRESULT_WIKITYPECHECK                       =
-                                                                By.xpath("//*[@value='wiki' and @name='contentType']");
+                                                                By.xpath("//*[@id=\"lstContentTypes\"]/li[3]/span");
 
   public static final By     ELEMENT_SEARCHRESULT_SPACETYPECHECK                      =
                                                                  By.xpath("//*[@value='space' and @name='contentType']");
@@ -213,5 +218,5 @@ public final class QuickSearchResultLocator {
 
   public static final String ELEMENT_SEARCHRESULT_CONTENT_ANSWER_RATING               =
                                                                         ".//h6//*[contains(text(),'${name}')]/../../..//*[@class='avgRatingImages clearfix']";
-
+public static final SelenideElement ELEMENT_RESULT_SEARCH=$(byId("result"));
 }
