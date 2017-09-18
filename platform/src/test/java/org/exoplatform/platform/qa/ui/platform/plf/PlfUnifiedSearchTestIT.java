@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumCategoryManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
@@ -24,8 +25,10 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.confirm;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.core.PLFData.password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.locator.QuickSearchResultLocator.*;
@@ -141,15 +144,18 @@ RichTextEditor richTextEditor;
 			- Quick search settings screen is shown.
 			- value is save*/
 		navigationToolbar.goToQuickSearch();
-		quickSearchResult.search("log");
+		$(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).setValue("log");
+		$(byClassName("uiQuickSearchResult")).waitUntil(Condition.visible, Configuration.timeout);
+		$(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).pressEnter();
 		navigationToolbar.goToEditLayout();
 		pageEditor.goToEditPortlet(ELEMENT_FRAME_CONTAIN_PORTLET);
 		$(ELEMENT_EDIT_PORTLET_FORM_RESULTPERPAGE).selectOption("5");
 		click(ELEMENT_EDIT_PORTLET_FORM_SAVESETTINGS_BUTTON);
-		manageAlert.acceptAlert();
-		click(ELEMENT_EDIT_PORTLET_FORM_CLOSE_BUTTON);
-		click(ELEMENT_EDIT_PORTLET_FINISH);
-		waitForAndGetElement(ELEMENT_QUICKSEARCHRESULT_NUMBEROFRESULT,5000,0);
+		switchTo().alert();
+		confirm();
+		switchToParentWindow();
+		$(ELEMENT_EDIT_PORTLET_FORM_CLOSE_BUTTON).click();
+		ELEMENT_CLOSE_PORTLET.click();
 	}
 	
 }
