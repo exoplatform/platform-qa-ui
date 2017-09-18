@@ -1,6 +1,6 @@
 package org.exoplatform.platform.qa.ui.platform.forum;
 
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.core.PLFData.password;
@@ -236,7 +236,7 @@ public class ForumPostTestIT extends Base {
     info("Test 5: Add a Private post from post");
     forumTopicManagement.privatePostFromPost(newTitle, content);
     info("Click on delete button of the post that is replied");
-    $(byText(content)).parent().parent().parent().parent().parent().findAll(ELEMENT_BUTTON_DELETE_POST).get(2).click();
+    $(byText(content)).parent().parent().parent().parent().find(ELEMENT_BUTTON_DELETE_POST).click();
     info("Click on OK button of the confirm popup");
     $(ELEMENT_DELETE_BOX_CONFIRMATION).click();
     info("Verify that the replied post is deleted");
