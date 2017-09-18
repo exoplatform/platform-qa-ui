@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -335,9 +336,9 @@ public class SpaceManagement {
     info("Open invitation received tab");
     goToInvitationsReceivedTab();
     info("evt.click on Accept button of the space");
-    evt.clickByJavascript(ELEMENT_MY_SPACE_INVITATION_RECEIVED_ACCEPT_BTN.replace("${space}", space));
+    $(byText(space)).parent().parent().parent().find(ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION).click();
     info("Verify that the user joijed to the space");
-    evt.waitForAndGetElement(ELEMENT_SPACE_NAME.replace("${name}", space), 3000, 1);
+    ELEMENT_LIST_MY_SPACES_IN_LEFT_NAVIGATION.find(byText(space)).should(Condition.exist);
   }
 
   /**
@@ -402,7 +403,7 @@ public class SpaceManagement {
    */
   public void goToActivityStreamTab() {
     info("Open Activity STream Tab");
-    evt.click(ELEMENT_ACTIVITY_STREAM_TAB);
+    $(ELEMENT_ACTIVITY_STREAM_TAB).click();
 
     info("Activity STream portlet is shown");
   }

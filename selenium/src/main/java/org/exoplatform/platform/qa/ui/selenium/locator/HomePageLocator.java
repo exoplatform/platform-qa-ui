@@ -575,4 +575,46 @@ public final class HomePageLocator {
                                                             $(byId("quickSearchResult1"));
 
   public static final String          ELEMENT_COMMENT_BLOC                                                 = "CommentBlock{id}1";
+
+  public static final SelenideElement ELEMENT_TAB_LINK                                                     =
+                                                       $(byXpath("//*[@id=\"ActivityComposerExt\"]/div[2]"));
+
+  public static final SelenideElement ELEMENT_CONTAINER_DOCUMENT                                           =
+                                                                 $(byId("UIActivityComposerContainer_DOC_ACTIVITY_"));
+
+  public static final SelenideElement ELEMENT_INPUT_DOCUMENT                                               =
+                                                             $(byClassName("multiploadFilesSelector")).find(byClassName("file"));
+
+  public static final SelenideElement ELEMENT_BAR_PROGRESS                                                 =
+                                                           $(byClassName("progress-striped"));
+
+  public static final String          ELEMENT_DOCUMENT_PREVIEW                                             = "Preview{id}-0";
+
+  public static final SelenideElement ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW                            =
+                                                                                $(byId("cke_commentInput"));
+
+  public static final SelenideElement ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW                           =
+                                                                                 $(byId("CommentButton"));
+
+  public static final By              ELEMENT_ICON_LIKE_COMMENT                                            =
+                                                                byClassName("uiIconThumbUp");
+
+  public static final SelenideElement ELEMENT_CLOSE_DOCUMENT_PREVIEW                                       =
+                                                                     $(byXpath("//*[@id=\"uiDocumentPreview\"]/div[1]/a"));
+
+  public static final By              ELEMENT_DELETE_ACTIVITY_CONTAINS_DOC                                 =
+                                                                           byClassName("uiIconClose");
+
+  public static final SelenideElement ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW                         =
+                                                                                   $(byXpath("//*[@id=\"$uicomponent.id\"]/div[2]"));
+
+  public static final SelenideElement ELEMENT_ICON_NOTIFICATION                                            =
+                                                                $(byXpath("//*[@id=\"UINotificationPopoverToolbarPortlet\"]/div[2]/a"));
+
+  public static final SelenideElement ELEMENT_ALERT_NOTIFICATION                                           =
+                                                                 $(byClassName("badgeNotification"));
+
+  public static final SelenideElement ELEMENT_NOTIFICATION_POPUP                                           =
+                                                                 $(byId("NotificationPopup"));
+
 }

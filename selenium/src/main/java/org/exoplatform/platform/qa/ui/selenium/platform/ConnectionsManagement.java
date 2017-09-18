@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.selenium.platform;
 import static com.codeborne.selenide.Selectors.byLinkText;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_NAME_OF_PROFILE_TOP_LEFT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -71,6 +72,13 @@ public class ConnectionsManagement {
       searchPeople(name[0], null, null, null);
     else
       searchPeople(username, null, null, null);
+    refresh();
+    if ($(ELEMENT_CONNECTION_REVOVE_BTN).is(Condition.exist)) {
+      $(ELEMENT_CONNECTION_REVOVE_BTN).click();
+    }
+    if ($(ELEMENT_CONNECTION_CANCEL_BTN).is(Condition.exist)) {
+      $(ELEMENT_CONNECTION_CANCEL_BTN).click();
+    }
     $(byText("Connect")).click();
     // evt.waitForAndGetElement(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}",
     // username), 2000, 1);
@@ -86,8 +94,8 @@ public class ConnectionsManagement {
     info("--Remove a connection of a user--");
     info("Click on remove button");
     searchPeople(username, null, null, null);
-    evt.clickByJavascript(ELEMENT_CONNECTION_REVOVE_BTN);
-    evt.waitForElementNotPresent(ELEMENT_CONNECTION_REVOVE_BTN);
+    $(ELEMENT_CONNECTION_REVOVE_BTN).click();
+    $(ELEMENT_CONNECTION_REVOVE_BTN).waitUntil(Condition.disappears, Configuration.timeout);
     info("Removed to the user");
   }
 

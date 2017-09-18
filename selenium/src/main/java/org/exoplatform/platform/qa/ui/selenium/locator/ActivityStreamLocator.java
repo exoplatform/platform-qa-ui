@@ -693,4 +693,13 @@ public final class ActivityStreamLocator {
   public static final String ELEMENT_DATE_COMMENT="dateTime";
   public static final SelenideElement ELEMENT_ACTIVITY_STREAM_CONTAINER=$(byId("UIActivitiesLoader"));
 
+  public static final String ELEMENT_INCON_LIKE_COMMENT="LikeCommentLinkcomment{id}";
+  public static final SelenideElement ELEMENT_TOLLTIP_WHO_LIKE_COMMENT=$(byClassName("tooltip"));
+  public static final SelenideElement ELEMENT_POPUP_WHO_LIKED_COMMENT= $(byId("likersPopup"));
+  public static final SelenideElement ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT= $(byId("likersPopup")).find(byClassName("uiIconClose"));
+  public static final SelenideElement ELEMENT_FIRST_USER_IN_POPUP_WHO_LIKE_COMMENT=ELEMENT_POPUP_WHO_LIKED_COMMENT.findAll(".likerName").get(0);
+  public static final SelenideElement ELEMENT_SECOND_USER_IN_POPUP_WHO_LIKE_COMMENT=ELEMENT_POPUP_WHO_LIKED_COMMENT.findAll(".likerName").get(1);
+  public static final SelenideElement ELEMENT_THIRD_USER_IN_POPUP_WHO_LIKE_COMMENT=ELEMENT_POPUP_WHO_LIKED_COMMENT.findAll(".likerName").get(2);
+  public static final By ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT=byClassName("uiActionLike");
+
 }
