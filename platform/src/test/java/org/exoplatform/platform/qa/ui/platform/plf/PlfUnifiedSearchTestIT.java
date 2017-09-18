@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.*;
 import static org.junit.Assert.*;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -305,4 +306,80 @@ Step number: 2
 		ELEMENT_CLOSE_PORTLET.click();
 
 	}
+	/**
+	 *<li> Case ID:120876.</li>
+	 *<li> Test Case Name: Administrate the unified search engine.</li>
+	 *<li> Pre-Condition: </li>
+	 *<li> Post-Condition: </li>
+
+	Step Number: 1
+		 *Step Name: Open Search Administration
+		 *Step Description:
+			- Login and go to intranet home page
+			- Click Administration > Content > Search menu of the navigation bar
+		 *Input Data:
+
+		 *Expected Outcome:
+			The search admin has a table with 3 columns : Content Type, Description, and Actions, as attachment searchAdmin.png*
+   *Step number: 2
+		 *Step Name: Enable a content type
+		 *Step Description:
+			Click on Enable button matching a content type
+		 *Input Data:
+
+		 *Expected Outcome:
+		    - Disable button label is changed into Enable
+			- This content type will no longer appear in the search results, nor in the search apps settings
+			*/
+	@Test
+	public  void test06_AdministrateTheUnifiedSearchEngine() {
+		info("Test 6: Administrate the unified search engine");
+		String wiki="wiki"+getRandomNumber();
+		info("Test 4: Filter search");
+		homePagePlatform.goToWiki();
+		wikiHomePage.goToAddBlankPage();
+		richTextEditor.addSimplePage(wiki, "");
+		wikiManagement.saveAddPage();
+		homePagePlatform.goToHomePage();
+		refresh();
+		navigationToolbar.goToAdminSearch();
+		info("Content type is shown");
+		$(ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_TITLE).waitUntil(Condition.appears,Configuration.timeout).click();
+		info("Description is shown");
+		$(ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_DESCRIPTION).waitUntil(Condition.appears,Configuration.timeout);
+		info("Action is shown");
+		$(ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_ACTION).waitUntil(Condition.appears,Configuration.timeout);
+
+		info("Click on Disable button");
+		$(byId("wiki")).click();
+		info("Open Search page");
+		navigationToolbar.goToQuickSearch();
+		$(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).setValue(wiki);
+		$(byClassName("uiQuickSearchResult")).waitUntil(Condition.visible, Configuration.timeout);
+		$(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).pressEnter();
+		info("Verify that File checkbox is not shown");
+		$(ELEMENT_SEARCHRESULT_WIKITYPECHECK).shouldNot(Condition.exist);
+		/*Step number: 3
+		 *Step Name: Disable a content type
+		 *Step Description:
+			Click on Disable button matching a content type
+		 *Input Data:
+
+		 *Expected Outcome:
+			- The Enable button label is changed into Disable
+			- The content type will reappear in the search results, and in the search apps settings.*/
+		navigationToolbar.goToAdminSearch();
+		$(ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_TITLE).waitUntil(Condition.appears,Configuration.timeout).click();
+		info("Click on Enable button");
+		$(byId("wiki")).click();
+		info("Open Search page");
+		navigationToolbar.goToQuickSearch();
+		$(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).setValue(wiki);
+		$(byClassName("uiQuickSearchResult")).waitUntil(Condition.visible, Configuration.timeout);
+		$(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).pressEnter();
+		$(ELEMENT_SEARCHRESULT_WIKITYPECHECK).should(Condition.exist);
+		homePagePlatform.goToWiki();
+		wikiHomePage.deleteWiki(wiki);
+	}
+
 }
