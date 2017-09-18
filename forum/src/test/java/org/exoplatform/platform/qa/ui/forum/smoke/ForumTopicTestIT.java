@@ -579,6 +579,7 @@ public class ForumTopicTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
+  @Tag("smoke")
   public void test09_CreateNewTopic() {
     info("Test 9: Create new Topic");
     String name = "name" + getRandomNumber();
@@ -617,6 +618,7 @@ public class ForumTopicTestIT extends Base {
   }
 
   @Test
+  @Tag("smoke")
   public void test09_DeleteNewTopic() {
     info("Test 9: Create new Topic");
     String name = "name" + getRandomNumber();
