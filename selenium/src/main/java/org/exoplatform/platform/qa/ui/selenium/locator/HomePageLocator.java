@@ -118,6 +118,8 @@ public final class HomePageLocator {
 
   public static final SelenideElement ELEMENT_MY_SPACE_LINK_PLF                                            =
                                                                 $(byClassName("uiSpaceNavigationPortlet")).find(byLinkText("MY SPACES"));
+  public static final SelenideElement ELEMENT_SECOND_SPACE_MY_SPACE  =
+                        $(byClassName("spaceNavigation")).findAll(byClassName("spaceItem")).get(1);
 
   public static final By              ELEMENT_ALL_SPACE_JOIN_LINK                                          =
                                                                   By.cssSelector("#UISpaceNavigationPortlet .uiIconPLFMan");
