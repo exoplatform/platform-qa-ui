@@ -67,15 +67,15 @@ public class AnswerCategoryManagement {
       break;
     case EXPORT:
       info("EXPORT category");
-      $(ELEMENT_CATEGORY_EXPORT_BUTTON).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_CATEGORY_EXPORT_BUTTON).waitUntil(Condition.appears,Configuration.timeout);
       $(ELEMENT_CATEGORY_EXPORT_BUTTON).click();
-      $(ELEMENT_CATEGORY_EXPORT_FORM).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_CATEGORY_EXPORT_FORM).waitUntil(Condition.appears,Configuration.timeout);
       break;
     case IMPORT:
       info("IMPORT category");
-      $(ELEMENT_CATEGORY_IMPORT_BUTTON).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_CATEGORY_IMPORT_BUTTON).waitUntil(Condition.appears,Configuration.timeout);
       $(ELEMENT_CATEGORY_IMPORT_BUTTON).click();
-      $(ELEMENT_CATEGORY_IMPORT_FORM).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_CATEGORY_IMPORT_FORM).waitUntil(Condition.appears,Configuration.timeout);
       break;
     case DELETE:
       info("DELETE category");
@@ -98,7 +98,8 @@ public class AnswerCategoryManagement {
    */
   public void goToActionOfCategoryFromRightClick(String cat, actionCategoryOption action) {
     info("Select action from menu");
-    ELEMENT_LIST_CATEGORIE.find(byLinkText(" " + cat)).contextClick();
+
+    ELEMENT_LIST_CATEGORIE.find(byLinkText(" "+cat)).contextClick();
     switch (action) {
     case EDIT:
       info("Edit category");
@@ -257,12 +258,12 @@ public class AnswerCategoryManagement {
    * @param path
    */
   public void importAnswerCategory() {
-    info("Import category from file ");
+    info("Import category from file " );
     goToActionOfCategoryFromActionBar(actionCategoryOption.IMPORT);
     $(byClassName("uploadContainer")).find(byClassName("file")).uploadFromClasspath("AnswerCategorie.zip");
-    $(byClassName("progressBarFrame")).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    $(byClassName("progressBarFrame")).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     $(ELEMENT_ATTACHMENT_SAVE_BUTTON).click();
-    $(byText(ELEMENT_IMPORT_SUCCESS_MESSAGE)).waitUntil(Condition.appears, Configuration.timeout);
+    $(byText(ELEMENT_IMPORT_SUCCESS_MESSAGE)).waitUntil(Condition.appears,Configuration.timeout);
     $(ELEMENT_CATEGORY_OK_BUTTON).click();
   }
 

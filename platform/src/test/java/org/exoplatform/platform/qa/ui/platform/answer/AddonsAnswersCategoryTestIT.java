@@ -92,11 +92,11 @@ public class AddonsAnswersCategoryTestIT extends Base {
 		answerCategoryManagement.goToActionOfCategoryFromActionBar(AnswerCategoryManagement.actionCategoryOption.ADD);
 		answerCategoryManagement.inputDataToSettingTab(paCat1, null, paDes1, null, null, null);
 		click(ELEMENT_CATEGORY_ADD_FORM_SAVE_BUTTON);
-		$(byId("UICategories")).find(byLinkText(" "+paCat1)).should(Condition.exist);
+		ELEMENT_LIST_CATEGORIE.find(byLinkText(" "+paCat1)).should(Condition.exist);
 		answerCategoryManagement.goToActionOfCategoryFromActionBar(AnswerCategoryManagement.actionCategoryOption.ADD);
 		answerCategoryManagement.inputDataToSettingTab(paCat2, null, paDes2, null, null, null);
 		click(ELEMENT_CATEGORY_ADD_FORM_SAVE_BUTTON);
-		$(byId("UICategories")).find(byLinkText(" "+paCat2)).should(Condition.exist);
+		ELEMENT_LIST_CATEGORIE.find(byLinkText(" "+paCat2)).should(Condition.exist);
 
 		info("Test 1: Drag and Drop category");
 		/*Step Number: 1
@@ -109,14 +109,97 @@ public class AddonsAnswersCategoryTestIT extends Base {
 		 *Expected Outcome: 
 			Category is dragged and dropped successfully to selected category*/ 
 		//dragAndDropToObject(ELEMENT_CATEGORY_LIST_ITEM.replace("$category", paCat1), ELEMENT_CATEGORY_LIST_ITEM.replace("$category", paCat2));
-		$(byId("UICategories")).find(byLinkText(" "+paCat1)).dragAndDropTo($(byId("UICategories")).find(byLinkText(" "+paCat2)));
-		$(byId("UICategories")).find(byLinkText(" "+paCat2)).click();
-		$(byId("UICategories")).find(byLinkText(" "+paCat2)).should(Condition.exist);
+		ELEMENT_LIST_CATEGORIE.find(byLinkText(" "+paCat1)).dragAndDropTo(ELEMENT_LIST_CATEGORIE.find(byLinkText(" "+paCat2)));
+		ELEMENT_LIST_CATEGORIE.find(byLinkText(" "+paCat2)).click();
+		ELEMENT_LIST_CATEGORIE.find(byLinkText(" "+paCat1)).should(Condition.exist);
 		
 		info("Clear data");
 		answerHomePage.goToHomeCategory();
-		$(byId("UICategories")).find(byLinkText(" "+paCat2)).click();
+		ELEMENT_LIST_CATEGORIE.find(byLinkText(" "+paCat2)).click();
 		answerCategoryManagement.deleteCategory(paCat2);
 	}
+	/**
+	 * Case ID:116810.
+	 * Test Case Name: Export/Import category.
+	 * Pre-Condition:
+	 * Post-Condition:
+	 */
+	@Test
+	public  void test02_ExportImportCategory() {
+		String paCat1 = "paCat1"+getRandomNumber();
+		String paDes1 = "paDes1"+getRandomNumber();
+		String question1 = "question1"+getRandomNumber();
+		String content1 ="content1"+getRandomNumber();
+		String paCat2 = "paCat2"+getRandomNumber();
+		String paDes2 = "paDes2"+getRandomNumber();
+		String fileName = getRandomNumber();
+		info("Test 2: Export/Import category");
+		/*Step Number: 1
+		 *Step Name: Create categories, questions
+		 *Step Description:
+			- Create some categories
+			- Create some questions in categories
+		 *Input Data:
 
+		 *Expected Outcome:
+			Category and its questions are exported/imported successfully*/
+		info("Create category 1");
+		homePagePlatform.goToAnswer();
+		answerCategoryManagement.goToActionOfCategoryFromActionBar(AnswerCategoryManagement.actionCategoryOption.ADD);
+		answerCategoryManagement.inputDataToSettingTab(paCat1, null, paDes1, null, null, null);
+		click(ELEMENT_CATEGORY_ADD_FORM_SAVE_BUTTON);
+		ELEMENT_LIST_CATEGORIE.find(byLinkText(" "+paCat1)).should(Condition.exist);
+
+		info("Create question 1");
+		answerCategoryManagement.goToActionOfCategoryFromRightClick(paCat1, AnswerCategoryManagement.actionCategoryOption.SUBMITQUESTION);
+		questionManagement.inputDataToQuestionForm(question1, content1, null, null);
+		//click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		clickByJavascript(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
+		$(button.ELEMENT_OK_BUTTON_LINK).click();
+
+		info("Create category 2");
+		answerHomePage.goToHomeCategory();
+		answerCategoryManagement.goToActionOfCategoryFromActionBar(AnswerCategoryManagement.actionCategoryOption.ADD);
+		answerCategoryManagement.inputDataToSettingTab(paCat2, null, paDes2, null, null, null);
+		click(ELEMENT_CATEGORY_ADD_FORM_SAVE_BUTTON);
+		ELEMENT_LIST_CATEGORIE.find(byLinkText(" "+paCat2)).should(Condition.exist);
+
+		/*Step number: 2
+		 *Step Name: Export categories
+		 *Step Description:
+			- Right click on 1 category and select Export
+			- Put file's name and Export
+		 *Input Data:
+
+		 *Expected Outcome:
+			Category and its questions are exported successfully*/
+		answerHomePage.goToHomeCategory();
+		ELEMENT_LIST_CATEGORIE.find(byLinkText(" "+paCat1)).click();
+		answerCategoryManagement.exportAnswerCategory(fileName);
+		answerCategoryManagement.deleteCategory(paCat1);
+
+		/*Step number: 3
+		 *Step Name: Import categories
+		 *Step Description:
+			- Remove the above category
+			- Right click on another category and select Import
+			- Choose the file which is exported above
+		 *Input Data:
+
+		 *Expected Outcome:
+			- The category is removed successfully.
+			- That category and its questions are imported successfully*/
+		answerHomePage.goToHomeCategory();
+		ELEMENT_LIST_CATEGORIE.find(byLinkText(" "+paCat2)).click();
+		answerCategoryManagement.importAnswerCategory();
+		answerHomePage.goToHomeCategory();
+		ELEMENT_LIST_CATEGORIE.find(byLinkText(" "+paCat2)).click();
+		ELEMENT_LIST_CATEGORIE.find(byLinkText(" paCat1504411")).click();
+		$(byText("question1125877")).should(Condition.exist);
+		info("Clear data");
+		answerHomePage.goToHomeCategory();
+		answerHomePage.goToHomeCategory();
+		ELEMENT_LIST_CATEGORIE.find(byLinkText(" "+paCat2)).click();
+		answerCategoryManagement.deleteCategory(paCat2);
+	}
 	}

@@ -598,9 +598,7 @@ public class AnswerLocator {
   public static final SelenideElement ELEMENT_TABLE_RESULT_SEARCH                           = $(byId("ResultQuickSearch"));
 
 
-  public static final SelenideElement ELEMENT_LIST_CATEGORIE                                = $(byId("UICategories"));
 
-  public static final SelenideElement ELEMENT_ICON_GO_TO_HOME_CATEGORIE                     = $(byClassName("uiIconUpLevel"));
 
   public static final SelenideElement ELEMENT_FORM_MOVE_CATEGORIE                           = $(byId("UIMoveCategoryForm"));
 
@@ -610,5 +608,9 @@ public class AnswerLocator {
   public static final By              ELEMENT_CHECKBOX_ACTIVATE_UNACTIVATE_QUESTION         = byId("allDay");
 
   public static final SelenideElement ELEMENT_QUESTION_CONTAINER                            = $(byClassName("questionContainer"));
+
+  public static final SelenideElement ELEMENT_LIST_CATEGORIE=$(byId("UICategories"));
+
+  public static final SelenideElement ELEMENT_ICON_GO_TO_HOME_CATEGORIE=$(byClassName("uiIconUpLevel"));
 
 }
