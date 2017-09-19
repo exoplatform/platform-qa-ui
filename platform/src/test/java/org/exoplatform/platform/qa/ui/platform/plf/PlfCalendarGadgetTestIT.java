@@ -185,8 +185,6 @@ public class PlfCalendarGadgetTestIT extends Base {
    * <li>Test Case Name: Filter calendars in settings.</li>
    * <li>Pre-Condition: - Create some Calendars: "calendar new", "old cal"</li>
    * <li>Post-Condition:</li>
-   */
-  /*
    * Step Number: 1 Step Name: -Go into gadget's settings Step Description: -
    * Login and Open intranet home - Move mouse over Calendar gadget - Clicks on
    * Setting button Input Data: Expected Outcome: - Settings are displayed. Step
