@@ -330,12 +330,12 @@ public class ForumPublishActivityTestIT extends Base {
     info("Delete topic:" + topic1);
     forumHomePage.goToTopic(topic1);
     forumTopicManagement.deleteTopic();
+    deleteDataTest();
     homePagePlatform.goToHomePage();
     homePagePlatform.refreshUntil(topic1,Condition.not(Condition.exist),2000);
     info("Verify that the topic's activity is deleted after the topic is deleted");
     $(byText(topic1)).shouldNot(Condition.exist);
     info("the topic's activity is deleted sucessfully");
-    deleteDataTest();
     info("Test 06: Finish testing");
   }
 
