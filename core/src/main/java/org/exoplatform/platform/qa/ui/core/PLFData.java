@@ -49,7 +49,7 @@ public class PLFData {
 
   public static String DATA_NAME_USER2      = "Mary Williams";
 
-  public static String DATA_NAME_USER3      = "James Davis";
+  public static String DATA_NAME_USER3      = "James David";
 
   public static String DATA_NAME_USER4      = "Jack Miller";
 
