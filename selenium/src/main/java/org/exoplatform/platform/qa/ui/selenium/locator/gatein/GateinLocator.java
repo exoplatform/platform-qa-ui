@@ -462,6 +462,10 @@ public final class GateinLocator {
   public static final String          ELEMENT_NAVIGATION_SUB_NODE_CHECK                       =
                                                                         "//*[@id='UINavigationNodeSelector']//*[@class='uiIconNode collapseIcon' and contains(text(),'{$node}')]";
 
+  public static final SelenideElement  ELEMENT_NAVIGATION_NODE_CHECK = $(byId("UINavigationNodeSelector"));
+
+  public static final SelenideElement  ELEMENT_LEFT_NAVIGATION_NODE_CHECK= $(byClassName("uiCompanyNavigations"));
+
   public static final String          ELEMENT_NAVIGATION_PARENT_CHILD_NODE                    =
                                                                            ".//*[contains(@class,'uiIconNode')][@title='${parent}']/..//*[contains(@class,'childrenContainer')]//*[contains(@title,'${child}')]";
 
