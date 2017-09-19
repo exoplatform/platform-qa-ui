@@ -20,7 +20,11 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.locator;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selectors.byId;
+import static com.codeborne.selenide.Selenide.$;
 
 public final class BrandingLocator {
 
@@ -61,5 +65,9 @@ public final class BrandingLocator {
   public static final By ELEMENT_BUTTON_CANCEL                            = By.xpath(".//*[@id='cancel']");
 
   public static final By ELEMENT_BUTTON_UPLOAD                            = By.xpath("//*[@id='btUpload']");
+
+  public static final SelenideElement ELEMENT_BUTTON_APPLY =$(byId("save"));
+
+  public static final SelenideElement ELEMENT_UPLOAD_LOGO=$(byId("btUpload")).parent().parent().find(byId("file"));
 
 }

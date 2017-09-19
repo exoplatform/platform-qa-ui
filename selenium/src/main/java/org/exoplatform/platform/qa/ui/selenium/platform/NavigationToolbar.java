@@ -333,11 +333,11 @@ public class NavigationToolbar {
    */
   public void goToBanding() {
     info("-- Go to Banding page --");
-    evt.waitElementAndTryGetElement(ELEMENT_TOOLBAR_ADMINISTRATION);
-    evt.click(ELEMENT_TOOLBAR_ADMINISTRATION);
-    evt.mouseOver(ELEMENT_ADMINISTRATION_PORTAL, true);
-    evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL_BRANDING, 5000, 0);
-    evt.click(ELEMENT_ADMINISTRATION_PORTAL_BRANDING);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    $(ELEMENT_ADMINISTRATION_PORTAL).hover();
+    $(ELEMENT_ADMINISTRATION_PORTAL_BRANDING).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_ADMINISTRATION_PORTAL_BRANDING).click();
   }
 
   /**
