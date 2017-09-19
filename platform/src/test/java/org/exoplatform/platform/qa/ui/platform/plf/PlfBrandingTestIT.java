@@ -104,12 +104,7 @@ public class PlfBrandingTestIT extends Base {
    * new logo image is uploaded Step number: 3 Step Name: Preview Step
    * Description: - Check preview boxes Input Data: Expected Outcome: - The logo
    * must be displayed in :* preview boxe for the logo* preview of the full
-   * navigation bar
-   */
-
-  // done in the upload function
-
-  /*
+   * navigation bar done in the upload function
    * Step number: 4 Step Name: Save Step Description: -Click on Save Input Data:
    * Expected Outcome: New Logo is shown as preview
    */
