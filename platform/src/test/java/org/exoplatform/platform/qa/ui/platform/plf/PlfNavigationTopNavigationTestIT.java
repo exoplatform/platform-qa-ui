@@ -256,15 +256,13 @@ public class PlfNavigationTopNavigationTestIT extends Base {
    * to intranet Step Description: - Login as normal user - Connect to Intranet
    * Input Data: Expected Outcome: - The Homepage is displayed - The Help button
    * is displayed in the right of the bar
-   */
-
-  /*
    * Step number: 2 Step Name: Open user guide Step Description: - Click on the
    * button "?" Input Data: Expected Outcome: - A new tab in the internet browser
    * is opened - The user guide is opened and the chapter displayed matched with
    * the current navigation of the user.
    */
   @Test
+  @Tag("sniff")
   public void test07_OpenUserGuide() {
     info("Test 7: Open user guide");
     homePagePlatform.goToHomePage();
