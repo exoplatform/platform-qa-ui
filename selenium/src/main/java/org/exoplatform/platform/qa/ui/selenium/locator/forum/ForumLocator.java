@@ -875,7 +875,7 @@ public class ForumLocator {
                                                                                                                 .find(byClassName("btn"));
   public static final SelenideElement ELEMENT_CONTENT_SEARCH_RESULT                      = $(byClassName("searchResult"));
   public static final By              ELEMENT_ICON_REPLAY_POST_FROM_ACTIVITY             = byClassName("uiIconReply");
-  public static final By              ELEMENT_BUTTON_DELETE_POST                         = byClassName("btn");
+  public static final By              ELEMENT_BUTTON_DELETE_POST                         = byAttribute("data-original-title","Delete This Post");
   public static final SelenideElement ELEMENT_CHECKBOX_ALL_FORUM_CATEGORIE               = $(byId("checkAll")).parent();
   public static final SelenideElement ELEMENT_CHECKBOX_SELECT_ONE_FORUM_CATEGORIE        =
                                                                                   $(byId("UIExportForm")).findAll(byClassName("uiCheckbox"))
