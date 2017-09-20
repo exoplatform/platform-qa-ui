@@ -2,17 +2,22 @@ package org.exoplatform.platform.qa.ui.platform.plf;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_HELP_TOOLBAR;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_TITLE_WIKI_INPUT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.WebDriverRunner;
 
 import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarHomePage;
 import org.exoplatform.platform.qa.ui.commons.Base;
@@ -22,6 +27,7 @@ import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
+
 
 /**
  * @author eXo
@@ -42,6 +48,7 @@ public class PlfNavigationTopNavigationTestIT extends Base {
 
   ForumHomePage           forumHomePage;
 
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
@@ -52,6 +59,7 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     forumForumManagement = new ForumForumManagement(this);
     calendarHomePage = new CalendarHomePage(this);
     forumHomePage = new ForumHomePage(this);
+
   }
 
   /**
@@ -242,4 +250,26 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     $(byText(name)).should(Condition.exist);
   }
 
+  /**
+   * <li>Case ID:120895.</li>
+   * <li>Test Case Name: Open user guide.</li> /*Step Number: 1 Step Name: Connect
+   * to intranet Step Description: - Login as normal user - Connect to Intranet
+   * Input Data: Expected Outcome: - The Homepage is displayed - The Help button
+   * is displayed in the right of the bar
+   * Step number: 2 Step Name: Open user guide Step Description: - Click on the
+   * button "?" Input Data: Expected Outcome: - A new tab in the internet browser
+   * is opened - The user guide is opened and the chapter displayed matched with
+   * the current navigation of the user.
+   */
+  @Test
+  @Tag("sniff")
+  public void test07_OpenUserGuide() {
+    info("Test 7: Open user guide");
+    homePagePlatform.goToHomePage();
+    click(ELEMENT_HELP_TOOLBAR);
+    switchTo().window(1);
+    String url = WebDriverRunner.url();
+    assertEquals(url,
+                 "https://docs.exoplatform.org/public/index.jsp?topic=/PLF44/PLFUserGuide.GettingStarted.SocialIntranetHomepage.html");
+  }
 }
