@@ -13,9 +13,6 @@ import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.openqa.selenium.Keys;
-
-import java.security.Key;
 
 public class SpaceSettingManagement {
 
@@ -141,8 +138,13 @@ public class SpaceSettingManagement {
    */
   public void removeApplication(String app) {
     info("Click on Remove icon");
-    ELEMENT_LIST_OF_EXISTED_APPLICATION_IN_APPLICATION_TAB.find(byText(app)).parent().parent().find(ELEMENT_ICON_DELETE_APPLICATION_FROM_SPACE).click();
-    ELEMENT_LIST_OF_EXISTED_APPLICATION_IN_APPLICATION_TAB.find(byText(app)).waitUntil(Condition.disappears,Configuration.timeout);
+    ELEMENT_LIST_OF_EXISTED_APPLICATION_IN_APPLICATION_TAB.find(byText(app))
+                                                          .parent()
+                                                          .parent()
+                                                          .find(ELEMENT_ICON_DELETE_APPLICATION_FROM_SPACE)
+                                                          .click();
+    ELEMENT_LIST_OF_EXISTED_APPLICATION_IN_APPLICATION_TAB.find(byText(app)).waitUntil(Condition.disappears,
+                                                                                       Configuration.timeout);
     info("the application is removed");
   }
 
@@ -244,10 +246,10 @@ public class SpaceSettingManagement {
    */
   public void goToApplicationTab() {
     info("Select Application tab");
-    $(ELEMENT_SETTINGS_APP_TAB).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_SETTINGS_APP_TAB).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_SETTINGS_APP_TAB).click();
     info("The tab is opened succcessfully");
-    $(ELEMENT_APPLICATION_TAB_ADD_APPLICATION_BTN).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_APPLICATION_TAB_ADD_APPLICATION_BTN).waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**
@@ -323,7 +325,7 @@ public class SpaceSettingManagement {
     info("Click on Add application button");
     $(ELEMENT_APPLICATION_TAB_ADD_APPLICATION_BTN).click();
     info("the popup is shown");
-    $(ELEMENT_ADD_APPLICATION_POPUP_TITLE).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_ADD_APPLICATION_POPUP_TITLE).waitUntil(Condition.appears, Configuration.timeout);
     info("Select a category");
     if (!category.isEmpty())
       $(byId("UIApplicationCategorySelector")).find(byText(category)).click();
@@ -331,7 +333,7 @@ public class SpaceSettingManagement {
       $(byId("UIApplicationListSelector")).find(byText(application)).parent().parent().find(byClassName("btn-mini")).click();
     info("Close the popup after installed application");
     $(ELEMENT_ADD_APPLICATION_POPUP_CLOSE_BTN).click();
-    $(ELEMENT_ADD_APPLICATION_POPUP_TITLE).waitUntil(Condition.disappears,Configuration.timeout);
+    $(ELEMENT_ADD_APPLICATION_POPUP_TITLE).waitUntil(Condition.disappears, Configuration.timeout);
   }
 
   /**
