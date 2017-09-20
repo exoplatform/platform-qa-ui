@@ -663,4 +663,5 @@ public final class HomePageLocator {
   public static final SelenideElement ELEMENT_CONTAINER_NO_DISPALYED_CALENDAR =$(byId("nonDisplayedCalendarContainer"));
   public static final SelenideElement ELEMENT_GADGET_INVITATION                                            =
                                                                 $(byId("InvitationsPortlet"));
+  public static final By ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET=byClassName("connect");
 }

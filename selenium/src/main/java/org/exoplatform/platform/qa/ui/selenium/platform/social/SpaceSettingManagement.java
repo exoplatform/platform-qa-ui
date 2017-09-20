@@ -80,12 +80,12 @@ public class SpaceSettingManagement {
    */
   public void inviteUser(String userName, boolean verify, String fullName) {
 
-    info("--Search user " );
+    goToMemberTab();
+    info("--Search user ");
     ELEMENT_INPUT_INVITE_USER.click();
-    $(byXpath("//*[@id=\"UIUserInvitation\"]/div[2]/div[2]/div[1]/div[1]/input")).setValue(userName).pressEnter();
-    $(byText(fullName)).waitUntil(Condition.appears,Configuration.timeout);
-    $(byXpath("//*[@id=\"UIUserInvitation\"]/div[2]/div[2]/div[1]/div[1]/input")).pressEnter();
-    $(ELEMENT_SPACE_BTN_INVITE).click();
+    ELEMENT_INPUT_INVITE_USER.sendKeys(userName);
+    info("click on Invite button");
+    $(byXpath("//*[@id=\"UIUserInvitation\"]/div[2]/div[1]/button")).click();
     if (verify) {
       info("Verify that user is shown in invitation table");
       if (fullName != "" && fullName != null)
@@ -138,8 +138,13 @@ public class SpaceSettingManagement {
    */
   public void removeApplication(String app) {
     info("Click on Remove icon");
-    ELEMENT_LIST_OF_EXISTED_APPLICATION_IN_APPLICATION_TAB.find(byText(app)).parent().parent().find(ELEMENT_ICON_DELETE_APPLICATION_FROM_SPACE).click();
-    ELEMENT_LIST_OF_EXISTED_APPLICATION_IN_APPLICATION_TAB.find(byText(app)).waitUntil(Condition.disappears,Configuration.timeout);
+    ELEMENT_LIST_OF_EXISTED_APPLICATION_IN_APPLICATION_TAB.find(byText(app))
+                                                          .parent()
+                                                          .parent()
+                                                          .find(ELEMENT_ICON_DELETE_APPLICATION_FROM_SPACE)
+                                                          .click();
+    ELEMENT_LIST_OF_EXISTED_APPLICATION_IN_APPLICATION_TAB.find(byText(app)).waitUntil(Condition.disappears,
+                                                                                       Configuration.timeout);
     info("the application is removed");
   }
 
@@ -241,10 +246,10 @@ public class SpaceSettingManagement {
    */
   public void goToApplicationTab() {
     info("Select Application tab");
-    $(ELEMENT_SETTINGS_APP_TAB).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_SETTINGS_APP_TAB).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_SETTINGS_APP_TAB).click();
     info("The tab is opened succcessfully");
-    $(ELEMENT_APPLICATION_TAB_ADD_APPLICATION_BTN).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_APPLICATION_TAB_ADD_APPLICATION_BTN).waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**
@@ -320,7 +325,7 @@ public class SpaceSettingManagement {
     info("Click on Add application button");
     $(ELEMENT_APPLICATION_TAB_ADD_APPLICATION_BTN).click();
     info("the popup is shown");
-    $(ELEMENT_ADD_APPLICATION_POPUP_TITLE).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_ADD_APPLICATION_POPUP_TITLE).waitUntil(Condition.appears, Configuration.timeout);
     info("Select a category");
     if (!category.isEmpty())
       $(byId("UIApplicationCategorySelector")).find(byText(category)).click();
@@ -328,7 +333,7 @@ public class SpaceSettingManagement {
       $(byId("UIApplicationListSelector")).find(byText(application)).parent().parent().find(byClassName("btn-mini")).click();
     info("Close the popup after installed application");
     $(ELEMENT_ADD_APPLICATION_POPUP_CLOSE_BTN).click();
-    $(ELEMENT_ADD_APPLICATION_POPUP_TITLE).waitUntil(Condition.disappears,Configuration.timeout);
+    $(ELEMENT_ADD_APPLICATION_POPUP_TITLE).waitUntil(Condition.disappears, Configuration.timeout);
   }
 
   /**
