@@ -39,7 +39,11 @@ public class CommentManagement {
    */
   public void goToCommentQuestion(String question) {
     info("Go to COMMENT a question");
-    $(byText(question)).parent().parent().find(ELEMENT_COMMENT_BUTTON).click();
+
+    if ($(ELEMENT_QUESTION_MORE_ACTION_BUTTON).is(Condition.not(Condition.exist))) {
+      $(byText(question)).click();
+    }
+    $(ELEMENT_COMMENT_BUTTON).click();
     $(ELEMENT_COMMENT_FORM).waitUntil(Condition.appears, Configuration.timeout);
   }
 
