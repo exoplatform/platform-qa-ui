@@ -600,7 +600,6 @@ public class AnswerLocator {
 
 
 
-  public static final SelenideElement ELEMENT_FORM_MOVE_CATEGORIE                           = $(byId("UIMoveCategoryForm"));
 
 
   public static final SelenideElement ELEMENT_POPUB_MANAGE_QUESTION                         = $(byId("UIAnswersPopupWindow"));
@@ -609,8 +608,10 @@ public class AnswerLocator {
 
   public static final SelenideElement ELEMENT_QUESTION_CONTAINER                            = $(byClassName("questionContainer"));
 
-  public static final SelenideElement ELEMENT_LIST_CATEGORIE=$(byId("UICategories"));
+  public static final SelenideElement ELEMENT_LIST_CATEGORIE                                = $(byId("UICategories"));
 
-  public static final SelenideElement ELEMENT_ICON_GO_TO_HOME_CATEGORIE=$(byClassName("uiIconUpLevel"));
+  public static final SelenideElement ELEMENT_ICON_GO_TO_HOME_CATEGORIE                     = $(byClassName("uiIconUpLevel"));
+
+  public static final SelenideElement ELEMENT_FORM_MOVE_CATEGORIE                           = $(byId("UIMoveCategoryForm"));
 
 }
