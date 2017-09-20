@@ -354,6 +354,9 @@ public final class HomePageLocator {
                                                                          By.xpath("//*[@class='gadgetTitle title center']//*[@class='uiIconClose pull-right']");
 
   // Who's online gadget
+  public static final SelenideElement ELEMENT_WHO_ON_LINE_GADGET                                           =
+                                                                 $(byId("onlineContent"));
+
   public static final String          ELEMENT_WHO_ONLINE_ICON_PEOPLE_NUMBER                                =
                                                                             "//*[@id='onlineList']/li[{$number}]/a";
 
@@ -658,4 +661,6 @@ public final class HomePageLocator {
   public static final SelenideElement ELEMENT_ICON_DELETE_CALENDAR_GADGET_CONTENT_MANAGEMENT =$(byClassName("DisplayedCalendarContainer")).findAll(byClassName("uiIconDel")).get(5);
 
   public static final SelenideElement ELEMENT_CONTAINER_NO_DISPALYED_CALENDAR =$(byId("nonDisplayedCalendarContainer"));
+  public static final SelenideElement ELEMENT_GADGET_INVITATION                                            =
+                                                                $(byId("InvitationsPortlet"));
 }
