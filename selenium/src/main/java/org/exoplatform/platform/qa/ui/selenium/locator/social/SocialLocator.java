@@ -2322,4 +2322,5 @@ public static final SelenideElement ELEMENT_BUTTON_SAVE_IN_ACCESS_AND_EDIT_TAB=$
 public static final SelenideElement ELEMENT_OK_BUTTON=$(byClassName("infoIcon")).parent().parent().parent().find(byClassName("btn"));
   public static  final SelenideElement ELEMENT_SPACE_NAME_LEFT_NAVIGATION = $(byId("UIBreadCrumbsNavigationPortlet"));
 
+public static final SelenideElement ELEMENT_CONTENT_NAME_PROFILE=$(byId("UIBreadCrumbsNavigationPortlet"));
 }
