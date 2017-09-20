@@ -2317,19 +2317,9 @@ public final class SocialLocator {
   public static final SelenideElement ELEMENT_LIST_MY_SPACES_IN_LEFT_NAVIGATION                         =
                                                                                 $(byId("UISpaceNavigationPortlet"));
 
-  public static final By              ELEMENT_BUTTON_JOIN_SPACE                                         = byClassName("btn");
 
-  public static final SelenideElement ELEMENT_TAB_ACCESS_AND_EDIT                                       =
-                                                                  $(byXpath("//*[@id=\"UITabPane\"]/ul/li[2]/a"));
 
-  public static final SelenideElement ELEMENT_BUTTON_SAVE_IN_ACCESS_AND_EDIT_TAB                        =
-                                                                                 $(byXpath("//*[@id=\"UISpacePermission\"]/div[3]/button"));
 
-  public static final SelenideElement ELEMENT_OK_BUTTON                                                 =
-                                                        $(byClassName("infoIcon")).parent()
-                                                                                  .parent()
-                                                                                  .parent()
-                                                                                  .find(byClassName("btn"));
 
   public static final SelenideElement ELEMENT_SPACE_NAME_LEFT_NAVIGATION                                =
                                                                          $(byId("UIBreadCrumbsNavigationPortlet"));
@@ -2346,4 +2336,21 @@ public final class SocialLocator {
   public static final By              ELEMENT_ICON_DELETE_APPLICATION_FROM_SPACE                        =
                                                                                  byClassName("uiIconClose");
 
+
+  public static final By              ELEMENT_BUTTON_JOIN_SPACE                                         = byClassName("btn");
+
+  public static final SelenideElement ELEMENT_TAB_ACCESS_AND_EDIT                                       =
+                                                                  $(byXpath("//*[@id=\"UITabPane\"]/ul/li[2]/a"));
+
+  public static final SelenideElement ELEMENT_BUTTON_SAVE_IN_ACCESS_AND_EDIT_TAB                        =
+                                                                                 $(byXpath("//*[@id=\"UISpacePermission\"]/div[3]/button"));
+
+  public static final SelenideElement ELEMENT_OK_BUTTON                                                 =
+                                                        $(byClassName("infoIcon")).parent()
+                                                                                  .parent()
+                                                                                  .parent()
+                                                                                  .find(byClassName("btn"));
+
+  public static final SelenideElement ELEMENT_NAME_PROFILE_OF_USERS                                     =
+                                                                    $(byId("UIBreadCrumbsNavigationPortlet"));
 }
