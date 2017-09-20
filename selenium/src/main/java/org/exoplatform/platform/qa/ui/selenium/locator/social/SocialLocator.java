@@ -1718,7 +1718,7 @@ public final class SocialLocator {
                                                                            "//*[contains(@class,'uiIconSearch uiIconLightGray')]";
 
   public static final By              ELEMENT_APPLICATION_TAB_ADD_APPLICATION_BTN                       =
-                                                                                  By.xpath(".//*[@id='UISpaceApplication-tab']//button[text()='Add Application']");
+                                                                                  By.xpath("//*[@id=\"UITabPanetab3\"]/div/button");
 
   public static final String          ELEMENT_APPLICATION_TAB_APPLICATION_LIST_CONTENT                  =
                                                                                        ".//*[@id='UISpaceApplication']//strong[contains(text(),'${app}')]";
@@ -2149,7 +2149,7 @@ public final class SocialLocator {
 
   // Application tab
   public static final By              ELEMENT_SETTINGS_APP_TAB                                          =
-                                                               By.xpath(".//*[contains(@data-target,'#UISpaceApplication-tab')]");
+                                                               By.xpath("//*[@id=\"UITabPane\"]/ul/li[4]");
 
   public static final String          ELEMENT_DELETE_APP_FROM_TOPBAR                                    =
                                                                      ".//*[@id='UISpaceApplication']//*[contains(text(),'{$application}')]/../..//*[@class='uiIconClose pull-right']";
@@ -2290,8 +2290,7 @@ public final class SocialLocator {
   public static final String          ELEMENT_NOTIFICATION_EMAIL_FEEDBACK_MESSAGE_SPACE                 =
                                                                                         ".//*[@id='feedbackMessageInline']//*[contains(@class,'message')][contains(text(),\"$mess\")]";
 
-  public static final String          ELEMENT_SPACE_MENU_TAB                                            =
-                                                             ".//*[@id='spaceMenuTab']//*[@id='${tab}']";
+  public static final SelenideElement ELEMENT_SPACE_MENU_TAB                                            = $(byId("spaceMenuTab"));
 
   // left menu
   public static final String          ELEMENT_SPACE_LEFT_MENU_SPACE_NAME                                =
@@ -2312,15 +2311,39 @@ public final class SocialLocator {
   public static final SelenideElement ELEMENT_ALERT_NOTIFICATION_EXIST                                  =
                                                                        $(byXpath("//*[@id=\"UINotificationPopoverToolbarPortlet\"]/div[2]/a/i/span"));
 
+  public static final By              ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION                            =
+                                                                             byXpath("//*[@id=\"UIManageInvitationSpaces\"]/div[2]/div/div/div[2]/div/div/div[3]/button[2]");
 
-  public static final By ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION=byXpath("//*[@id=\"UIManageInvitationSpaces\"]/div[2]/div/div/div[2]/div/div/div[3]/button[2]");
+  public static final SelenideElement ELEMENT_LIST_MY_SPACES_IN_LEFT_NAVIGATION                         =
+                                                                                $(byId("UISpaceNavigationPortlet"));
 
-public static final SelenideElement ELEMENT_LIST_MY_SPACES_IN_LEFT_NAVIGATION=$(byId("UISpaceNavigationPortlet"));
-public static final By ELEMENT_BUTTON_JOIN_SPACE=byClassName("btn");
-public static final SelenideElement ELEMENT_TAB_ACCESS_AND_EDIT= $(byXpath("//*[@id=\"UITabPane\"]/ul/li[2]/a"));
-public static final SelenideElement ELEMENT_BUTTON_SAVE_IN_ACCESS_AND_EDIT_TAB=$(byXpath("//*[@id=\"UISpacePermission\"]/div[3]/button"));
-public static final SelenideElement ELEMENT_OK_BUTTON=$(byClassName("infoIcon")).parent().parent().parent().find(byClassName("btn"));
-  public static  final SelenideElement ELEMENT_SPACE_NAME_LEFT_NAVIGATION = $(byId("UIBreadCrumbsNavigationPortlet"));
+  public static final By              ELEMENT_BUTTON_JOIN_SPACE                                         = byClassName("btn");
 
-public static final SelenideElement ELEMENT_CONTENT_NAME_PROFILE=$(byId("UIBreadCrumbsNavigationPortlet"));
+  public static final SelenideElement ELEMENT_TAB_ACCESS_AND_EDIT                                       =
+                                                                  $(byXpath("//*[@id=\"UITabPane\"]/ul/li[2]/a"));
+
+  public static final SelenideElement ELEMENT_BUTTON_SAVE_IN_ACCESS_AND_EDIT_TAB                        =
+                                                                                 $(byXpath("//*[@id=\"UISpacePermission\"]/div[3]/button"));
+
+  public static final SelenideElement ELEMENT_OK_BUTTON                                                 =
+                                                        $(byClassName("infoIcon")).parent()
+                                                                                  .parent()
+                                                                                  .parent()
+                                                                                  .find(byClassName("btn"));
+
+  public static final SelenideElement ELEMENT_SPACE_NAME_LEFT_NAVIGATION                                =
+                                                                         $(byId("UIBreadCrumbsNavigationPortlet"));
+
+  public static final SelenideElement ELEMENT_CONTENT_NAME_PROFILE                                      =
+                                                                   $(byId("UIBreadCrumbsNavigationPortlet"));
+
+  public static final SelenideElement ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE                         =
+                                                                                $(byXpath("//*[@id=\"spaceMenuTab\"]/li[8]/ul"));
+
+  public static final SelenideElement ELEMENT_LIST_OF_EXISTED_APPLICATION_IN_APPLICATION_TAB            =
+                                                                                             $(byId("UITabPanetab3"));
+
+  public static final By              ELEMENT_ICON_DELETE_APPLICATION_FROM_SPACE                        =
+                                                                                 byClassName("uiIconClose");
+
 }
