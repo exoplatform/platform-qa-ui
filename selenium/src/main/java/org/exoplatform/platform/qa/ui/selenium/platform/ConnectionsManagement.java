@@ -234,6 +234,7 @@ public class ConnectionsManagement {
       evt.type(ELEMENT_SKILL_OF_PEOPLE, "", true);
     }
     $(ELEMENT_SEARCH_BUTTON).click();
+    refresh();
     if (directory != "" && directory != null)
       $(byLinkText(directory)).click();
   }

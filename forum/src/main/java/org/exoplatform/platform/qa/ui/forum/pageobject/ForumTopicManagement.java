@@ -5,6 +5,7 @@ import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -294,8 +295,10 @@ public class ForumTopicManagement {
       switchTo().frame(0);
     $(byXpath("/html/body")).sendKeys(content);
     switchTo().defaultContent();
-    executeJavaScript("window.scrollBy(0,150)");
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    executeJavaScript("window.scrollBy(0,1000)");
     $(ELEMENT_POST_FORM_SUBMIT).click();
+    executeJavaScript("window.scrollBy(0,-1000)");
   }
 
   /**
