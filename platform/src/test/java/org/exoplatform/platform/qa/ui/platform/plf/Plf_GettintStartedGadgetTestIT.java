@@ -226,6 +226,8 @@ public class Plf_GettintStartedGadgetTestIT extends Base {
     info("Verify that the progress is completed 100%");
     homePagePlatform.goToHomePage();
     waitForAndGetElement(ELEMENT_HP_GETTINGSTARTED_PROGRESSRATE);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(spacename,false);
   }
 
   /**

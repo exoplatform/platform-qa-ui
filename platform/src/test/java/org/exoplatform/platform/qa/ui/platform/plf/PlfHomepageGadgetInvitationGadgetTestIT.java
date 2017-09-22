@@ -200,7 +200,7 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
     connectionsManagement.connectToAUser(username);
 
     manageLogInOut.signIn(username, PLFData.password);
-    ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).hover();
+    ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().hover();
     ELEMENT_GADGET_INVITATION.find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET).click();
     ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).shouldNot(Condition.exist);
     ELEMENT_GADGET_INVITATION.find(byText(username1 + " " + username1)).should(Condition.exist);
@@ -250,7 +250,7 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
 
     info("Sign in with ROOT account");
     manageLogInOut.signIn(username, PLFData.password);
-    ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).hover();
+    ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().hover();
     ELEMENT_GADGET_INVITATION.find(byClassName("uiIconClose")).click();
     ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).shouldNot(Condition.exist);
     ELEMENT_GADGET_INVITATION.find(byText(username1 + " " + username1)).should(Condition.exist);
