@@ -53,39 +53,39 @@ public class AnswerCategoryManagement {
     $(ELEMENT_CATEGORY_BUTTON).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_CATEGORY_BUTTON).click();
     switch (action) {
-      case EDIT:
-        info("Edit category");
-        $(ELEMENT_CATEGORY_EDIT_BUTTON).waitUntil(Condition.appears, Configuration.timeout);
-        $(ELEMENT_CATEGORY_EDIT_BUTTON).click();
-        $(ELEMENT_CATEGORY_EDIT_FORM).waitUntil(Condition.appears, Configuration.timeout);
-        break;
-      case ADD:
-        info("ADD category");
-        $(ELEMENT_CATEGORY_ADD_BUTTON).waitUntil(Condition.appears, Configuration.timeout);
-        $(ELEMENT_CATEGORY_ADD_BUTTON).click();
-        $(ELEMENT_CATEGORY_ADD_FORM).waitUntil(Condition.appears, Configuration.timeout);
-        break;
-      case EXPORT:
-        info("EXPORT category");
-        $(ELEMENT_CATEGORY_EXPORT_BUTTON).waitUntil(Condition.appears, Configuration.timeout);
-        $(ELEMENT_CATEGORY_EXPORT_BUTTON).click();
-        $(ELEMENT_CATEGORY_EXPORT_FORM).waitUntil(Condition.appears, Configuration.timeout);
-        break;
-      case IMPORT:
-        info("IMPORT category");
-        $(ELEMENT_CATEGORY_IMPORT_BUTTON).waitUntil(Condition.appears, Configuration.timeout);
-        $(ELEMENT_CATEGORY_IMPORT_BUTTON).click();
-        $(ELEMENT_CATEGORY_IMPORT_FORM).waitUntil(Condition.appears, Configuration.timeout);
-        break;
-      case DELETE:
-        info("DELETE category");
-        $(ELEMENT_CATEGORY_DELETE_BUTTON).waitUntil(Condition.appears, Configuration.timeout);
-        $(ELEMENT_CATEGORY_DELETE_BUTTON).click();
-        $(ELEMENT_CATEGORY_DELETE_CONFIRM_POPUP).click();
-        break;
-      default:
-        info("Do nothing");
-        break;
+    case EDIT:
+      info("Edit category");
+      $(ELEMENT_CATEGORY_EDIT_BUTTON).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_CATEGORY_EDIT_BUTTON).click();
+      $(ELEMENT_CATEGORY_EDIT_FORM).waitUntil(Condition.appears, Configuration.timeout);
+      break;
+    case ADD:
+      info("ADD category");
+      $(ELEMENT_CATEGORY_ADD_BUTTON).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_CATEGORY_ADD_BUTTON).click();
+      $(ELEMENT_CATEGORY_ADD_FORM).waitUntil(Condition.appears, Configuration.timeout);
+      break;
+    case EXPORT:
+      info("EXPORT category");
+      $(ELEMENT_CATEGORY_EXPORT_BUTTON).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_CATEGORY_EXPORT_BUTTON).click();
+      $(ELEMENT_CATEGORY_EXPORT_FORM).waitUntil(Condition.appears, Configuration.timeout);
+      break;
+    case IMPORT:
+      info("IMPORT category");
+      $(ELEMENT_CATEGORY_IMPORT_BUTTON).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_CATEGORY_IMPORT_BUTTON).click();
+      $(ELEMENT_CATEGORY_IMPORT_FORM).waitUntil(Condition.appears, Configuration.timeout);
+      break;
+    case DELETE:
+      info("DELETE category");
+      $(ELEMENT_CATEGORY_DELETE_BUTTON).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_CATEGORY_DELETE_BUTTON).click();
+      $(ELEMENT_CATEGORY_DELETE_CONFIRM_POPUP).click();
+      break;
+    default:
+      info("Do nothing");
+      break;
     }
   }
 
@@ -100,57 +100,57 @@ public class AnswerCategoryManagement {
     info("Select action from menu");
     ELEMENT_LIST_CATEGORIE.find(byLinkText(" " + cat)).contextClick();
     switch (action) {
-      case EDIT:
-        info("Edit category");
-        evt.click(ELEMENT_CATEGORY_RIGHT_EDIT_BUTTON);
-        evt.waitForAndGetElement(ELEMENT_CATEGORY_EDIT_FORM);
-        break;
-      case ADD:
-        info("ADD category");
-        evt.click(ELEMENT_CATEGORY_RIGHT_ADD_BUTTON);
-        evt.waitForAndGetElement(ELEMENT_CATEGORY_ADD_FORM);
-        break;
-      case EXPORT:
-        info("EXPORT category");
-        evt.click(ELEMENT_CATEGORY_RIGHT_EXPORT_BUTTON);
-        evt.waitForAndGetElement(ELEMENT_CATEGORY_EXPORT_FORM);
-        break;
-      case IMPORT:
-        info("IMPORT category");
-        evt.click(ELEMENT_CATEGORY_RIGHT_IMPORT_BUTTON);
-        evt.waitForAndGetElement(ELEMENT_CATEGORY_IMPORT_FORM);
-        break;
-      case DELETE:
-        info("DELETE category");
-        $(ELEMENT_CATEGORY_RIGHT_DELETE_BUTTON).click();
-        $(ELEMENT_CATEGORY_DELETE_CONFIRM_POPUP).waitUntil(Condition.appears, Configuration.timeout);
-        break;
-      case MOVE:
-        info("MOVE category");
-        $(ELEMENT_CATEGORY_RIGHT_MOVE_BUTTON).click();
-        $(ELEMENT_CATEGORY_MOVE_FORM).waitUntil(Condition.appears, Configuration.timeout);
-        break;
-      case WATCH:
-        info("WATCH category");
-        evt.click(ELEMENT_CATEGORY_RIGHT_WATCH_BUTTON);
-        evt.click(ELEMENT_CATEGORY_WATCH_OK_BUTTON);
-        break;
-      case UNWATCH:
-        info("UNWATCH category");
-        evt.click(ELEMENT_CATEGORY_RIGHT_UNWATCH_BUTTON);
-        break;
-      case SUBMITQUESTION:
-        info("SUBMITQUESTION category");
-        $(ELEMENT_CATEGORY_RIGHT_SUBMIT_QUESTION_BUTTON).click();
-        $(ELEMENT_SUBMIT_QUESTION_FORM).waitUntil(Condition.appears, Configuration.timeout);
-        break;
-      case RSS:
-        info("RSS category");
-        evt.click(ELEMENT_CATEGORY_RIGHT_RSS_BUTTON);
-        break;
-      default:
-        info("Do nothing");
-        break;
+    case EDIT:
+      info("Edit category");
+      evt.click(ELEMENT_CATEGORY_RIGHT_EDIT_BUTTON);
+      evt.waitForAndGetElement(ELEMENT_CATEGORY_EDIT_FORM);
+      break;
+    case ADD:
+      info("ADD category");
+      evt.click(ELEMENT_CATEGORY_RIGHT_ADD_BUTTON);
+      evt.waitForAndGetElement(ELEMENT_CATEGORY_ADD_FORM);
+      break;
+    case EXPORT:
+      info("EXPORT category");
+      evt.click(ELEMENT_CATEGORY_RIGHT_EXPORT_BUTTON);
+      evt.waitForAndGetElement(ELEMENT_CATEGORY_EXPORT_FORM);
+      break;
+    case IMPORT:
+      info("IMPORT category");
+      evt.click(ELEMENT_CATEGORY_RIGHT_IMPORT_BUTTON);
+      evt.waitForAndGetElement(ELEMENT_CATEGORY_IMPORT_FORM);
+      break;
+    case DELETE:
+      info("DELETE category");
+      $(ELEMENT_CATEGORY_RIGHT_DELETE_BUTTON).click();
+      $(ELEMENT_CATEGORY_DELETE_CONFIRM_POPUP).waitUntil(Condition.appears, Configuration.timeout);
+      break;
+    case MOVE:
+      info("MOVE category");
+      $(ELEMENT_CATEGORY_RIGHT_MOVE_BUTTON).click();
+      $(ELEMENT_CATEGORY_MOVE_FORM).waitUntil(Condition.appears, Configuration.timeout);
+      break;
+    case WATCH:
+      info("WATCH category");
+      evt.click(ELEMENT_CATEGORY_RIGHT_WATCH_BUTTON);
+      evt.click(ELEMENT_CATEGORY_WATCH_OK_BUTTON);
+      break;
+    case UNWATCH:
+      info("UNWATCH category");
+      evt.click(ELEMENT_CATEGORY_RIGHT_UNWATCH_BUTTON);
+      break;
+    case SUBMITQUESTION:
+      info("SUBMITQUESTION category");
+      $(ELEMENT_CATEGORY_RIGHT_SUBMIT_QUESTION_BUTTON).click();
+      $(ELEMENT_SUBMIT_QUESTION_FORM).waitUntil(Condition.appears, Configuration.timeout);
+      break;
+    case RSS:
+      info("RSS category");
+      evt.click(ELEMENT_CATEGORY_RIGHT_RSS_BUTTON);
+      break;
+    default:
+      info("Do nothing");
+      break;
     }
   }
 
@@ -217,8 +217,8 @@ public class AnswerCategoryManagement {
     info("Delete category");
     goToActionOfCategoryFromActionBar(actionCategoryOption.DELETE);
     assert evt.getText(ELEMENT_CATEGORY_DELETE_CONFIRM)
-            .contains(ELEMENT_CATEGORY_DELETE_CONFIRM_MSG) : "Message is wrong. Actual msg is "
-            + testBase.getText(ELEMENT_CATEGORY_DELETE_CONFIRM);
+              .contains(ELEMENT_CATEGORY_DELETE_CONFIRM_MSG) : "Message is wrong. Actual msg is "
+                  + testBase.getText(ELEMENT_CATEGORY_DELETE_CONFIRM);
     evt.click(ELEMENT_CATEGORY_DELETE_OK_BUTTON);
     evt.waitForElementNotPresent(ELEMENT_CATEGORY_LIST_ITEM.replace("$category", cat));
   }

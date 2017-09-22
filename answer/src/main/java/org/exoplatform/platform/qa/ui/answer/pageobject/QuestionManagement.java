@@ -293,7 +293,7 @@ public class QuestionManagement {
   public void activeQuestionFromManageQuestionForm(String question, Boolean isActive) {
     if (isActive) {
       info("Active question");
-      if (evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE, 5000, 0) != null) {
+      if ($(ELEMENT_TOTAL_PAGE).is(Condition.visible)) {
         evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
         while ((evt.waitForAndGetElement(ELEMENT_MANAGE_QUESTION_ACTIVE_QUESTION_CHECKBOX.replace("$question", question),
                                          5000,
@@ -304,10 +304,15 @@ public class QuestionManagement {
                     .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText())))
           evt.click(ELEMENT_NEXT_PAGE);
       }
-      evt.check(By.xpath(ELEMENT_MANAGE_QUESTION_ACTIVE_QUESTION_CHECKBOX.replace("$question", question)), 2);
+      ELEMENT_POPUB_MANAGE_QUESTION.find(byText(question))
+                                   .parent()
+                                   .findAll(ELEMENT_CHECKBOX_ACTIVATE_UNACTIVATE_QUESTION)
+                                   .get(1)
+                                   .parent()
+                                   .click();
     } else {
       info("Un-active question");
-      if (evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE, 5000, 0) != null) {
+      if ($(ELEMENT_TOTAL_PAGE).is(Condition.visible)) {
         evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
         while ((evt.waitForAndGetElement(ELEMENT_MANAGE_QUESTION_ACTIVE_QUESTION_CHECKBOX.replace("$question", question),
                                          5000,
@@ -318,7 +323,12 @@ public class QuestionManagement {
                     .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText())))
           evt.click(ELEMENT_NEXT_PAGE);
       }
-      evt.uncheck(By.xpath(ELEMENT_MANAGE_QUESTION_ACTIVE_QUESTION_CHECKBOX.replace("$question", question)), 2);
+      ELEMENT_POPUB_MANAGE_QUESTION.find(byText(question))
+                                   .parent()
+                                   .findAll(ELEMENT_CHECKBOX_ACTIVATE_UNACTIVATE_QUESTION)
+                                   .get(1)
+                                   .parent()
+                                   .click();
     }
   }
 
