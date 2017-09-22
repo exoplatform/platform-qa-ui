@@ -11,8 +11,6 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
-import org.exoplatform.platform.qa.ui.core.config.driver.Driver;
-import org.exoplatform.platform.qa.ui.core.config.driver.ExoWebDriver;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -27,7 +25,6 @@ import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
  * @author eXo
@@ -152,7 +149,6 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
   }
 
   @Test
-  @Tag("test")
   public void test05_RemoveToolsApplicationToolbar() {
     info("Test 02: Remove application of space's toolbar");
     String space1 = "space1" + getRandomNumber();
@@ -168,10 +164,10 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     spaceSettingManagement.goToApplicationTab();
     spaceSettingManagement.addApplication(category, app);
     info("Verify that Application is added to space");
-    if ($(ELEMENT_SPACE_MENU_MORE).is(Condition.exist))
-    {$(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
-    ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("Bookmark")).should(Condition.exist);}
-    else {
+    if ($(ELEMENT_SPACE_MENU_MORE).is(Condition.exist)) {
+      $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
+      ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("Bookmark")).should(Condition.exist);
+    } else {
       ELEMENT_SPACE_MENU_TAB.find(byId("Bookmark")).should(Condition.exist);
     }
     spaceSettingManagement.removeApplication(app);
@@ -323,10 +319,10 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     spaceSettingManagement.goToApplicationTab();
     spaceSettingManagement.addApplication(category, app);
     info("Verify that Application is added to space");
-    if ($(ELEMENT_SPACE_MENU_MORE).is(Condition.exist))
-    {$(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
-      ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("Bookmark")).should(Condition.exist);}
-    else {
+    if ($(ELEMENT_SPACE_MENU_MORE).is(Condition.exist)) {
+      $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
+      ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("Bookmark")).should(Condition.exist);
+    } else {
       ELEMENT_SPACE_MENU_TAB.find(byId("Bookmark")).should(Condition.exist);
     }
     ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("Bookmark")).should(Condition.exist);
