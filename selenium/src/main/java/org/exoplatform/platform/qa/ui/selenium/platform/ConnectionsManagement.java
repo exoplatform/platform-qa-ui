@@ -219,7 +219,7 @@ public class ConnectionsManagement {
     info("-- Searching people ... --");
     if (peopleName != "" && peopleName != null) {
 
-      ELEMENT_NAME_OF_PEOPLE.waitUntil(Condition.appears,Configuration.timeout).setValue(peopleName);
+      ELEMENT_NAME_OF_PEOPLE.waitUntil(Condition.appears,Configuration.timeout).setValue(peopleName).pressEnter();
     } else {
       evt.type(ELEMENT_NAME_OF_PEOPLE, "", true);
     }
