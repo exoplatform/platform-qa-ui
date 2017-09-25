@@ -1,6 +1,6 @@
 package org.exoplatform.platform.qa.ui.answer.pageobject;
 
-import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
@@ -86,7 +86,7 @@ public class CommentManagement {
       break;
     case DELETE:
       info("DELETE COMMENT");
-      $(byClassName("confirm")).click();
+      $(byText(comment)).parent().parent().parent().parent().parent().find(ELEMENT_COMMENT_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
       $(ELEMENT_COMMENT_DELETE_CONFIRM_POPUP).waitUntil(Condition.appears, Configuration.timeout);
       break;
     default:
