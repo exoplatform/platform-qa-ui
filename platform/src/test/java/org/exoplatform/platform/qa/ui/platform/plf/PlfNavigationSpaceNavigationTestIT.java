@@ -325,7 +325,6 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     } else {
       ELEMENT_SPACE_MENU_TAB.find(byId("Bookmark")).should(Condition.exist);
     }
-    ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("Bookmark")).should(Condition.exist);
     info("Delete the space");
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space1, false);
