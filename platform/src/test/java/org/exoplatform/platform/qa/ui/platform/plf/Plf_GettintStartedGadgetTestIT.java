@@ -166,7 +166,7 @@ public class Plf_GettintStartedGadgetTestIT extends Base {
     ELEMENT_HP_GETTING_STARTED_SET_YOUR_PROFILE_PICTURE.click();
     info("Verify that the profile page is shown");
     waitForAndGetElement(ELEMENT_HP_GETTINGSTARTED_PROFILEPAGE);
-
+    refresh();
     info("click o connect to coworker link");
     homePagePlatform.goToHomePage();
     ELEMENT_HP_GETTING_STARTED_CONNECT_WITH_OTHERS.click();
