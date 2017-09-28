@@ -173,11 +173,10 @@ public class PlfUnifiedSearchTestIT extends Base {
    * top navigation bar - Click on Search icon or press Enter key Input Data:
    * Expected Outcome: - By default, quick search returns results for items
    * located in the current site only, as attachment SearchResult.png*
-   * action.sendKeys(Keys.ENTER); action.perform(); action.release();
-   * Step number: 2 Step Name: Sort search results Step Description: - Click on
-   * Sort By combo, select one of sets "Relevance", "Date", "Title" Input Data:
-   * Expected Outcome: Search result will sorted by Relevance, or Date, or Title
-   * respectively
+   * action.sendKeys(Keys.ENTER); action.perform(); action.release(); Step number:
+   * 2 Step Name: Sort search results Step Description: - Click on Sort By combo,
+   * select one of sets "Relevance", "Date", "Title" Input Data: Expected Outcome:
+   * Search result will sorted by Relevance, or Date, or Title respectively
    */
   @Test
   public void test03_SortSearchResult() {
@@ -288,11 +287,11 @@ public class PlfUnifiedSearchTestIT extends Base {
    * content type Step Description: Click on Enable button matching a content type
    * Input Data: Expected Outcome: - Disable button label is changed into Enable -
    * This content type will no longer appear in the search results, nor in the
-   * search apps settings
-   * Step number: 3 Step Name: Disable a content type Step Description: Click on
-   * Disable button matching a content type Input Data: Expected Outcome: - The
-   * Enable button label is changed into Disable - The content type will reappear
-   * in the search results, and in the search apps settings.
+   * search apps settings Step number: 3 Step Name: Disable a content type Step
+   * Description: Click on Disable button matching a content type Input Data:
+   * Expected Outcome: - The Enable button label is changed into Disable - The
+   * content type will reappear in the search results, and in the search apps
+   * settings.
    */
   @Test
   public void test06_AdministrateTheUnifiedSearchEngine() {
