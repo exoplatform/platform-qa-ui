@@ -368,14 +368,14 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     manageLogInOut.signIn(username1, password);
     homePagePlatform.goToAllSpace();
     ELEMENT_MY_SPACE_SEARCH_TEXT.setValue(space1).pressEnter();
-    $(ELEMENT_SPACES_LIST).find(byText(space1)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION).click();
+    $(ELEMENT_SPACES_LIST).find(byText(space1)).parent().parent().parent().find(ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION).click();
     homePagePlatform.goToAllSpace();
     ELEMENT_MY_SPACE_SEARCH_TEXT.setValue(space2).pressEnter();
-    $(ELEMENT_SPACES_LIST).find(byText(space2)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION).click();
+    $(ELEMENT_SPACES_LIST).find(byText(space2)).parent().parent().parent().find(ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION).click();
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToAllSpace();
     ELEMENT_MY_SPACE_SEARCH_TEXT.setValue(space1).pressEnter();
-    $(ELEMENT_SPACES_LIST).find(byText(space1)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION).click();
+    $(ELEMENT_SPACES_LIST).find(byText(space1)).parent().parent().parent().find(ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION).click();
     manageLogInOut.signIn(DATA_USER2, PLFData.password);
     $(ELEMENT_SUGGESTION_BOX).find(byText(space1)).should(Condition.exist);
     $(ELEMENT_SUGGESTION_BOX).find(byText(space2)).should(Condition.exist);
