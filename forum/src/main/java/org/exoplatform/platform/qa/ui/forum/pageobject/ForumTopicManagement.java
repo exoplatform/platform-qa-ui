@@ -298,6 +298,7 @@ public class ForumTopicManagement {
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     executeJavaScript("window.scrollBy(0,1000)");
     $(ELEMENT_POST_FORM_SUBMIT).click();
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     executeJavaScript("window.scrollBy(0,-1000)");
   }
 
