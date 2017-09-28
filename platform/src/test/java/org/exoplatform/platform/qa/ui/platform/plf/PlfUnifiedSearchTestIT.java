@@ -174,8 +174,6 @@ public class PlfUnifiedSearchTestIT extends Base {
    * Expected Outcome: - By default, quick search returns results for items
    * located in the current site only, as attachment SearchResult.png*
    * action.sendKeys(Keys.ENTER); action.perform(); action.release();
-   */
-  /*
    * Step number: 2 Step Name: Sort search results Step Description: - Click on
    * Sort By combo, select one of sets "Relevance", "Date", "Title" Input Data:
    * Expected Outcome: Search result will sorted by Relevance, or Date, or Title
@@ -289,6 +287,10 @@ public class PlfUnifiedSearchTestIT extends Base {
    * Input Data: Expected Outcome: - Disable button label is changed into Enable -
    * This content type will no longer appear in the search results, nor in the
    * search apps settings
+   * Step number: 3 Step Name: Disable a content type Step Description: Click on
+   * Disable button matching a content type Input Data: Expected Outcome: - The
+   * Enable button label is changed into Disable - The content type will reappear
+   * in the search results, and in the search apps settings.
    */
   @Test
   public void test06_AdministrateTheUnifiedSearchEngine() {
@@ -318,12 +320,6 @@ public class PlfUnifiedSearchTestIT extends Base {
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).pressEnter();
     info("Verify that File checkbox is not shown");
     $(ELEMENT_SEARCHRESULT_WIKITYPECHECK).shouldNot(Condition.exist);
-    /*
-     * Step number: 3 Step Name: Disable a content type Step Description: Click on
-     * Disable button matching a content type Input Data: Expected Outcome: - The
-     * Enable button label is changed into Disable - The content type will reappear
-     * in the search results, and in the search apps settings.
-     */
     navigationToolbar.goToAdminSearch();
     $(ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_TITLE).waitUntil(Condition.appears, Configuration.timeout).click();
     info("Click on Enable button");
