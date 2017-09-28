@@ -2,10 +2,12 @@ package org.exoplatform.platform.qa.ui.platform.plf;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
@@ -458,9 +460,10 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    executeJavaScript("window.scrollBy(0,300)");
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).hover();
     String id = ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).parent().parent().getAttribute("id");
-    ELEMENT_GAGET_SUGGESTION_SPACE.find(byXpath(ELEMNT_BUTTON_REQUEST_SPACE_FROM_GADGET.replace("{id}", id))).click();
+    ELEMENT_GAGET_SUGGESTION_SPACE.find(byXpath(ELEMNT_BUTTON_REQUEST_SPACE_FROM_GADGET.replace("{id}", id))).waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).shouldNot(Condition.exist);
     manageLogInOut.signIn(username, PLFData.password);
     homePagePlatform.goToMySpaces();
@@ -473,11 +476,12 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    executeJavaScript("window.scrollBy(0,300)");
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).hover();
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1))
                                   .parent()
                                   .parent()
-                                  .find(ELEMENT_BUTTON_CANCEL_SUGGESTION_USER_FROM_GADGET)
+                                  .find(ELEMENT_BUTTON_CANCEL_SUGGESTION_USER_FROM_GADGET).waitUntil(Condition.visible,Configuration.timeout)
                                   .click();
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).shouldNot(Condition.exist);
     manageLogInOut.signIn(username, PLFData.password);
@@ -497,8 +501,9 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space3, space3);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    executeJavaScript("window.scrollBy(0,300)");
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).shouldNot(Condition.exist);
-    ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space2)).scrollTo().hover();
+    ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space2)).hover();
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space2))
                                   .parent()
                                   .parent()
@@ -524,8 +529,9 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space3, space3);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    executeJavaScript("window.scrollBy(0,300)");
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).shouldNot(Condition.exist);
-    ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space2)).scrollTo().hover();
+    ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space2)).hover();
     String id = ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space2)).parent().parent().getAttribute("id");
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byXpath(ELEMNT_BUTTON_REQUEST_SPACE_FROM_GADGET.replace("{id}", id))).click();
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).should(Condition.exist);
