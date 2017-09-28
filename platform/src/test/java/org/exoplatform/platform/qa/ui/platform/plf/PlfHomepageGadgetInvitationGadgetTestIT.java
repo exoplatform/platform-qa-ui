@@ -7,6 +7,7 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
@@ -200,6 +201,7 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
     connectionsManagement.connectToAUser(username);
 
     manageLogInOut.signIn(username, PLFData.password);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().hover();
     ELEMENT_GADGET_INVITATION.find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET).click();
     ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).shouldNot(Condition.exist);
@@ -250,6 +252,7 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
 
     info("Sign in with ROOT account");
     manageLogInOut.signIn(username, PLFData.password);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().hover();
     ELEMENT_GADGET_INVITATION.find(byClassName("uiIconClose")).click();
     ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).shouldNot(Condition.exist);
