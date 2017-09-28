@@ -224,7 +224,6 @@ public class ForumPostTestIT extends Base {
   }
 
   @Test
-  @Tag("test")
   public void test05_Private__Post_from_Post() {
     info("Test 1: Add a Private post from post");
     String title = "Title" + getRandomNumber();

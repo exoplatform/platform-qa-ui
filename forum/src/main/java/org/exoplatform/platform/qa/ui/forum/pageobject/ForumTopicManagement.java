@@ -109,7 +109,7 @@ public class ForumTopicManagement {
       $(byText("Are you sure you want to delete this topic ?")).waitUntil(appears, Configuration.timeout);
       info("Click on OK on Confirm popup");
       $(ELEMENT_OK_DELETE).click();
-      $(ELEMENT_OK_DELETE).waitUntil(Condition.disappears,Configuration.timeout);
+      $(ELEMENT_OK_DELETE).waitUntil(Condition.disappears, Configuration.timeout);
       break;
     case WATCHES:
       break;
@@ -279,7 +279,7 @@ public class ForumTopicManagement {
       $(ELEMENT_TITLE_POST).setValue(newTitle);
 
     if (content != "")
-        switchTo().frame(0);
+      switchTo().frame(0);
     $(byXpath("/html/body")).sendKeys(content);
     switchTo().defaultContent();
     executeJavaScript("window.scrollBy(0,150)");
@@ -291,15 +291,16 @@ public class ForumTopicManagement {
     if (newTitle != "")
       $(ELEMENT_TITLE_POST).setValue(newTitle);
 
-    if (content != "")
-    {switchTo().frame(0);
-    $(byXpath("/html/body")).sendKeys(content);
-    switchTo().defaultContent();
-    executeJavaScript("window.scrollBy(0,1000)");
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-    $(ELEMENT_POST_FORM_SUBMIT).click();
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-    executeJavaScript("window.scrollBy(0,-1000)");}
+    if (content != "") {
+      switchTo().frame(0);
+      $(byXpath("/html/body")).sendKeys(content);
+      switchTo().defaultContent();
+      executeJavaScript("window.scrollBy(0,1000)");
+      $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+      $(ELEMENT_POST_FORM_SUBMIT).click();
+      $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+      executeJavaScript("window.scrollBy(0,-1000)");
+    }
   }
 
   /**
