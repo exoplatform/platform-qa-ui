@@ -193,6 +193,7 @@ public class PlfUnifiedSearchTestIT extends Base {
     homePagePlatform.goToHomePage();
     refresh();
     navigationToolbar.goToQuickSearch();
+    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).click();
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).setValue(wiki);
     ELEMENT_QUICKSEARCHRESULT_SEE_ALL_SEARCH.waitUntil(Condition.visible, Configuration.timeout).click();
     $(ELEMENT_QUICKSEARCHRESULT_SORTBY).click();
@@ -230,6 +231,7 @@ public class PlfUnifiedSearchTestIT extends Base {
     homePagePlatform.goToHomePage();
     refresh();
     navigationToolbar.goToQuickSearch();
+    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).click();
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).setValue(wiki);
     ELEMENT_QUICKSEARCHRESULT_SEE_ALL_SEARCH.waitUntil(Condition.visible, Configuration.timeout).click();
     $(ELEMENT_SEARCHRESULT_ALLTYPECHECK).click();
