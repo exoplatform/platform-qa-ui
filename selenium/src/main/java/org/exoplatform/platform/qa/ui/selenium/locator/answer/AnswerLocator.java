@@ -226,7 +226,7 @@ public class AnswerLocator {
                                                                        "//*[@id='UIResultQuickSearchs']//*[contains(text(),'$name')]";
 
   public static final String          ELEMENT_QUICK_SEARCH_CLOSE                            =
-                                                                 "//*[@id='UIResultQuickSearchs']//*[text()='Close']";
+                                                                 "//*[@id=\"UIResultQuickSearchs\"]/div/div[2]/button";
 
   public static final String          ELEMENT_QUICK_SEARCH_ADVANCE_SEARCH_BUTTON            =
                                                                                  "//*[@id='UIResultQuickSearchs']//*[text()='Advanced Search']";
@@ -575,5 +575,12 @@ public class AnswerLocator {
 
   public static final By ELEMENT_ANSWER_DELETE=byClassName("confirm");
   public static final By ELEMENT_COMMENT_DELETE= byClassName("confirm");
+  public static final SelenideElement ELEMENT_LIST_CATEGORIE                                = $(byId("UICategories"));
+
+  public static final SelenideElement ELEMENT_ICON_GO_TO_HOME_CATEGORIE                     = $(byClassName("uiIconUpLevel"));
+
+  public static final By              ELEMENT_ICON_MORE_ACTIONS_QUESTION                    = byClassName("uiIconSettings");
+
+  public static final SelenideElement ELEMENT_TABLE_RESULT_SEARCH                           = $(byId("ResultQuickSearch"));
 
 }
