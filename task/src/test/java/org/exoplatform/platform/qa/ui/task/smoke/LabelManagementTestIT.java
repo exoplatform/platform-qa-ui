@@ -48,29 +48,6 @@ public class LabelManagementTestIT extends Base {
         info("delete label");
         labelsManagement.deleteLabel(label);
     }
-    @Test
-    public void test02_Edit_Label() {
-        String label = "label" + getRandomNumber();
-        String Newlabel = "Newlabel" + getRandomNumber();
-        homePagePlatform.goToTaskPage();
-        info("Add label");
-        labelsManagement.addLabel(label);
-        info("edit label");
-        labelsManagement.editLabel(label, Newlabel);
-        $(byText(Newlabel)).should(Condition.exist);
-        info("delete label");
-        labelsManagement.deleteLabel(Newlabel);
-    }
-    @Test
-    public void test03DeleteLabel() {
-        String label = "label" + getRandomNumber();
-        homePagePlatform.goToTaskPage();
-        info("Add label");
-        labelsManagement.addLabel(label);
-        info("delete label");
-        labelsManagement.deleteLabel(label);
-        $(byText(label)).waitUntil(Condition.disappears, Configuration.timeout);
-    }
 
     @Test
     public void test04_addTaskInLabel() {

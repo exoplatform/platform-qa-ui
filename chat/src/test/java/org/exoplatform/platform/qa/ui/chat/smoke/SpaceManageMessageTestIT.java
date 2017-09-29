@@ -110,24 +110,6 @@ public class SpaceManageMessageTestIT extends Base {
     userandgroupmanagement.deleteUser(usernamea);
   }
 
-  @Test
-  public void test02_checkSpaceChatDeletedAfterDelete() {
-    String space = "space" + getRandomNumber();
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space);
-    homePagePlatform.goToHomePage();
-    homePagePlatform.goToChat();
-    switchTo().window("Chat");
-    info("check that space exist");
-    $(byText(space)).should(Condition.exist);
-    switchTo().window("Home Page");
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
-    switchTo().window("Chat");
-    refresh();
-    info("check that space chat deleted");
-    $(byText(space)).shouldNot(Condition.exist);
-  }
 
   @Test
   public void test03_sendMessageAndItsAnswerFromOtherUser() {

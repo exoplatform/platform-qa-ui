@@ -50,42 +50,5 @@ public class TaskManagementTestIT extends Base {
     tasksManagement.deleteTask(task);
 
   }
-  @Test
-  public void test02_EditTask() {
-    String task = "task" + getRandomNumber();
-    String newTask = "newTask" + getRandomNumber();
-    info("add task");
-    homePagePlatform.goToTaskPage();
-    tasksManagement.addTask(task);
-    info("edit task");
-    tasksManagement.editTask(task, newTask, "High");
-    $(byText(newTask)).should(Condition.exist);
-    info("delete task");
-    tasksManagement.deleteTask(newTask);
-
-  }
-
-  @Test
-  public void test03_DeleteTask() {
-    String task = "task" + getRandomNumber();
-    info("add task");
-    homePagePlatform.goToTaskPage();
-    tasksManagement.addTask(task);
-    info("delete task");
-    tasksManagement.deleteTask(task);
-    $(byText(task)).shouldNot(Condition.exist);
-
-  }
-  @Test
-  public void test04_MarkTaskAsCompleted() {
-    String task = "task" + getRandomNumber();
-    info("add task");
-    homePagePlatform.goToTaskPage();
-    tasksManagement.addTask(task);
-    info("mark task as completed");
-    ELEMENT_TASKS_LIST.find(byText(task)).parent().find(ELEMENT_ICON_MARK_AS_COMPLETED).click();
-    $(byText(task)).shouldNot(Condition.exist);
-
-  }
 
 }

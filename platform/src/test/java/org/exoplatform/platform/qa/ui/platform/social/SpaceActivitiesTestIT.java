@@ -93,31 +93,7 @@ public class SpaceActivitiesTestIT extends Base {
 
   }
 
-  @Test
-  public void test03_DeleteYourActivityOnSpace() {
-    String space = "space" + getRandomNumber();
-
-    info("Create a space");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space, 60000);
-    homePagePlatform.goToSpecificSpace(space);
-    String activity1 = "activity1" + getRandomNumber();
-    activityStream.addActivity(activity1, "");
-    String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];
-    // click on the activity to appear the delete button
-    $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-    // click on delete button
-    $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
-    ELEMENT_DELETE_POPUP_OK.click();
-    // verify that the activity doesn't exist
-    $(byText(activity1)).shouldNot(Condition.exist);
-    info("the activity is removed successfully");
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
-
-  }
-
-  @Test
+   @Test
   public void test04_AddCommentOnYourActivityOnSpace() {
     String space = "space" + getRandomNumber();
 
@@ -144,43 +120,4 @@ public class SpaceActivitiesTestIT extends Base {
 
   }
 
-  @Test
-  public void test05_DeleteCommentOnYourActivityOnSpace() {
-    String space = "space" + getRandomNumber();
-
-    info("Create a space");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space, 60000);
-    homePagePlatform.goToSpecificSpace(space);
-    String activity1 = "activity1" + getRandomNumber();
-    activityStream.addActivity(activity1, "");
-    String comment = "comment" + getRandomNumber();
-    String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1]; // click
-    // on
-    // comment
-    // icon
-    $(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
-    // insert comment
-    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
-    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
-// click on the button comment
-    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter();
-    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears, Configuration.timeout);
-    info("Test 15: Delete comment");
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-    // scroll up
-    executeJavaScript("window.scrollBy(0,-550)");
-    // the id of the comment is id of the activity+1
-    Integer idComment = Integer.parseInt(id) + 1;
-    // hover on the comment to appear the delete button
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-    $(byId(ELEMENT_COMMENT_BLOC.replace("{id}", id))).hover().click();
-    $(byId(ELEMENT_COMMENT_DELETE.replace("{id}", idComment.toString()))).click();
-    // Confirm
-    ELEMENT_DELETE_POPUP_OK.click();
-    // verify that the comment is deleted
-    $(byText(comment)).shouldNot(Condition.exist);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
-  }
 }

@@ -113,30 +113,6 @@ public class RoomBaseActionTestIT extends Base {
 
   }
 
-  @Test
-  public void test02_deleteRoom() {
-    String usernamea = "usernamea" + getRandomString();
-
-    String password = "123456";
-    String room = "room" + getRandomNumber();
-    String emaila = usernamea + "@test.com";
-    navigationToolbar.goToAddUser();
-    info("Create new user");
-    userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
-    manageLogInOut.signIn(usernamea, password);
-    homePagePlatform.goToChat();
-    manageLogInOut.signIn(PLFData.username, PLFData.password);
-    homePagePlatform.goToChat();
-    switchTo().window("Chat");
-    info("add room");
-    roomManagement.addRoom(room, usernamea);
-    info("delete room");
-    roomManagement.deleteRomm(room);
-    info("delete data");
-    switchTo().window("Home Page");
-    navigationToolbar.goToManageCommunity();
-    userandgroupmanagement.deleteUser(usernamea);
-  }
 
   @Test
   public void test03_SendMessageInAROOM() {
@@ -174,29 +150,5 @@ public class RoomBaseActionTestIT extends Base {
     userandgroupmanagement.deleteUser(usernamea);
   }
 
-  @Test
-  public void test04_modifyTheTittleOfAroom() {
-    String usernamea = "usernamea" + getRandomString();
-    String password = "123456";
-    String emaila = usernamea + "@test.com";
-    String room = "room" + getRandomNumber();
-    String newroom = "newroom" + getRandomNumber();
-    navigationToolbar.goToAddUser();
-    info("Create new user");
-    userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
-    manageLogInOut.signIn(usernamea, password);
-    homePagePlatform.goToChat();
-    manageLogInOut.signIn(PLFData.username, PLFData.password);
-    homePagePlatform.goToChat();
-    switchTo().window("Chat");
-    info("add room");
-    roomManagement.addRoom(room, usernamea);
-    info("edit title");
-    roomManagement.editTitleofAroom(room, newroom);
-    $(byText(newroom)).should(Condition.exist);
-    roomManagement.deleteRomm(newroom);
-    switchTo().window(0);
-    navigationToolbar.goToManageCommunity();
-    userandgroupmanagement.deleteUser(usernamea);
-  }
+
 }

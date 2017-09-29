@@ -74,39 +74,5 @@ public class CALManagePersonalCalendarTestIT extends Base {
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li>
    */
-  @Test
-  public void test04_EditAPersonalCalendarWithValidValue() {
-    info("Test 4: Edit a personal calendar with valid value");
-    /*
-     * Step Number: 1 Step Name: - Step Description: Step 1: Show edit personal
-     * calendar form Input Data: - Create new personal calendar[ Details ] - Right
-     * click on the calendar and select Edit Expected Outcome: - Edit personal
-     * calendar form is shown Calendar details tab only, Groups tab is hidden -
-     * Current informations of that calendar are displayed in form
-     */
-
-    info("Create a new calendar");
-    String calendar = "calendar" + getRandomNumber();
-    homePagePlatform.goToCalendarPage();
-    calendarHomePage.goToView(CalendarHomePage.selectViewOption.WEEK);
-    calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.ADDCAL);
-    calendarManagement.inputDataInDetailTabCalendarForm(calendar, calendar, null);
-    calendarManagement.saveAddCalendar();
-    homePagePlatform.goToCalendarPage();
-    $(byText(calendar)).waitUntil(Condition.appears, 10000);
-    /*
-     * Step number: 2 Step Name: - Step Description: Step 2: Complete editing
-     * personal calendar Input Data: - Make changes (name, description color) -
-     * Click Save Expected Outcome: - Changes are saved - The calendar will be
-     * updated with new value
-     */
-    String calendar1 = "calendar1" + getRandomNumber();
-    calendarManagement.editCalendar(calendar, calendar1, calendar1, "light_blue", null);
-    calendarManagement.saveAddCalendar();
-    homePagePlatform.goToCalendarPage();
-    $(byText(calendar1)).waitUntil(Condition.appears, 10000);
-    $(byClassName("light_blue")).waitUntil(Condition.appears, 10000);
-    calendarManagement.deleteCalendar(calendar1, true);
-  }
 
 }

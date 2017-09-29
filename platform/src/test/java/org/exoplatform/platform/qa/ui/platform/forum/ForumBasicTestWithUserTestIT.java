@@ -116,92 +116,7 @@ public class ForumBasicTestWithUserTestIT extends Base {
     forumCategoryManagement.deleteCategory(nameCat);
   }
 
-  @Test
-  public void test02_EditForum() {
-    info("test02: Edit Forum");
-    String nameCat = "category-" + getRandomNumber();
-    String nameForum = "forum-" + getRandomNumber();
-    String newNameForum = "newforum-" + getRandomNumber();
 
-    info("go to Forum home page");
-    homePagePlatform.goToForum();
-    info("Add a category");
-    forumCategoryManagement.addCategorySimple(nameCat, "", nameCat);
-    info("Add a forum in the category");
-    forumForumManagement.addForumSimple(nameForum, "", nameForum);
-    info("Edit the forum");
-    forumForumManagement.editForum(newNameForum, "", newNameForum);
-    info("Verify that the forum is edit successfully");
-    $(new Selectors.WithText(newNameForum)).should(Condition.exist);
-
-    info("Delete category");
-    forumHomePage.goToHomeCategory();
-    $(byText(nameCat)).click();
-    forumCategoryManagement.deleteCategory(nameCat);
-  }
-
-  /**
-   * CaseID: 116736 Case_name: Edid a forum Steps: 1. Prepare data: create a
-   * caterory 2. Add a forum: - Click on Add forum icon - Put values - Click Save
-   * Expected: Forum is added successfully.
-   */
-  @Test
-  public void test03_DeleteForum() {
-    info("test03: Delete Forum");
-    String nameCat = "category-" + getRandomNumber();
-    String nameForum = "forum-" + getRandomNumber();
-
-    info("go to Forum home page");
-    homePagePlatform.goToForum();
-    info("Add a category");
-    forumCategoryManagement.addCategorySimple(nameCat, "", nameCat);
-    info("Add a forum in the category");
-    forumForumManagement.addForumSimple(nameForum, "", nameForum);
-    info("Delete forum");
-    forumForumManagement.deleteForum(nameForum);
-    info("Delete category");
-    forumHomePage.goToHomeCategory();
-    $(byText(nameCat)).click();
-    forumCategoryManagement.deleteCategory(nameCat);
-  }
-
-  /**
-   * CaseID: 116738 Case_name: Move a forum Steps: 1. Prepare data: create a
-   * caterory 2. Add a forum: - Select 1 forum - Click on More Action, select Move
-   * - Choose destination category Expected: This forum is moved to a destination
-   * category
-   */
-  @Test
-  public void test04_MoveForum() {
-    info("Move a forum");
-    String category1 = "category1-" + getRandomNumber();
-    String category2 = "category2-" + getRandomNumber();
-    String forum = "forum1-" + getRandomNumber();
-
-    info("go to Forum home page");
-    homePagePlatform.goToForum();
-    info("Add a category 1");
-    forumCategoryManagement.addCategorySimple(category1, "", category1);
-    info("go to Home page of category");
-    forumHomePage.goToHomeCategory();
-    info("Add a category 2");
-    forumCategoryManagement.addCategorySimple(category2, "", category2);
-
-    forumHomePage.goToHomeCategory();
-    forumHomePage.goToCategory(category1);
-    info(" Add a forum in the category1");
-    forumForumManagement.addForumSimple(forum, "", forum);
-
-    info("Move forum");
-    forumForumManagement.moveForum(forum, category2);
-
-    info("Delete data");
-    forumHomePage.goToHomeCategory();
-    $(byText(category2)).click();
-    forumCategoryManagement.deleteCategory(category2);
-    $(byText(category1)).click();
-    forumCategoryManagement.deleteCategory(category1);
-  }
   /*
    * Step Number: 1 Step Name: Add a category Step Description: - Go to Forum page
    * - Click on Add Category - Put values - Save Input Data: Expected Outcome: -
@@ -236,56 +151,7 @@ public class ForumBasicTestWithUserTestIT extends Base {
    * Category is added successfully and shown in Forum home
    */
 
-  @Test
-  public void test_03EditACategory() {
-    info("Test 2: Add a category");
 
-    String nameCat = "nameCat" + getRandomNumber();
-    String nameCat2 = "nameCat2" + getRandomNumber();
-
-    info("go to Forum home page");
-    homePagePlatform.goToForum();
-    info("Add a category");
-    forumCategoryManagement.addCategorySimple(nameCat, "", nameCat);
-
-    info("Test 03: Edit a category");
-    info("edit category");
-    forumCategoryManagement.editCategory(nameCat2);
-
-    info("Test 04: Delete a category");
-    info("delete category");
-    forumHomePage.goToHomeCategory();
-    $(byText(nameCat2)).click();
-    forumCategoryManagement.deleteCategory(nameCat2);
-  }
-  /*
-   * Step Number: 1 Step Name: Add a category Step Description: - Go to Forum page
-   * - Click on Add Category - Put values - Save Input Data: Expected Outcome: -
-   * Category is added successfully and shown in Forum home
-   */
-
-  @Test
-  public void test04_DeleteACategory() {
-    info("Test 2: Add a category");
-
-    String nameCat = "nameCat" + getRandomNumber();
-    String nameCat2 = "nameCat2" + getRandomNumber();
-
-    info("go to Forum home page");
-    homePagePlatform.goToForum();
-    info("Add a category");
-    forumCategoryManagement.addCategorySimple(nameCat, "", nameCat);
-
-    info("Test 03: Edit a category");
-    info("edit category");
-    forumCategoryManagement.editCategory(nameCat2);
-
-    info("Test 04: Delete a category");
-    info("delete category");
-    forumHomePage.goToHomeCategory();
-    $(byText(nameCat2)).click();
-    forumCategoryManagement.deleteCategory(nameCat2);
-  }
   /*
    * Step Number: 1 Step Name: - Create new category Step Description: - Login and
    * goto Forum application - Click [Add Category] - Fill the information and
@@ -324,40 +190,4 @@ public class ForumBasicTestWithUserTestIT extends Base {
     forumCategoryManagement.deleteCategory(name);
   }
 
-  /*
-   * Step Number: 1 Step Name: - Create new category Step Description: - Login and
-   * goto Forum application - Click [Add Category] - Fill the information and
-   * click [Save] Input Data: Expected Outcome: - New category is created - No
-   * activity is added in activity stream Step number: 2 Step Name: - Create new
-   * Forum Step Description: - Click [Add Forum] - Fill the information and click
-   * [Save] Input Data: Expected Outcome: - New forum is created - No activity is
-   * added in activity stream Step number: 3 Step Name: - Create new Topic Step
-   * Description: - Click [start Topic] - input the information and click [Save]
-   * Input Data: Expected Outcome: - New Topic is created
-   */
-
-  @Test
-  public void test09_DeleteNewTopic() {
-    info("Test 9: Create new Topic");
-
-    String name = "name" + getRandomNumber();
-    String name2 = "name2" + getRandomNumber();
-    String desc = "desc" + getRandomNumber();
-    String topic = "topic" + getRandomNumber();
-    homePagePlatform.goToForum();
-    info("Add a category");
-    forumCategoryManagement.addCategorySimple(name, "", desc);
-
-    info("Add a forum in the category");
-    forumForumManagement.addForumSimple(name2, "", desc);
-    info("Add and go to a topic in the forums");
-    forumForumManagement.goToStartTopic();
-    forumTopicManagement.startTopic(topic, topic, "", "");
-    forumHomePage.goToTopic(topic);
-    $(byText(name2)).waitUntil(Condition.appears, Configuration.timeout);
-    info("Delete data");
-    forumHomePage.goToHomeCategory();
-    $(byText(name)).click();
-    forumCategoryManagement.deleteCategory(name);
-  }
 }

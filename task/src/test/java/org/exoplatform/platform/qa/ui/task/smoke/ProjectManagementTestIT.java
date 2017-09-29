@@ -51,41 +51,7 @@ public class ProjectManagementTestIT extends Base {
         $(byText(title)).waitUntil(Condition.disappears, Configuration.timeout);
 
     }
-    @Test
-    public void test02Edit_Project() {
-        String title = "title" + getRandomNumber();
-        String newTitle = "newTitle" + getRandomNumber();
-        ;
-        homePagePlatform.goToTaskPage();
-        info("add project");
-        projectsManagement.addProject(title, "", false);
-        info("verify project added");
-        $(byText(title)).should(Condition.exist);
-        info("edit project");
-        projectsManagement.editProject(title, title, newTitle, "", true);
-        info("verify project edited");
-        $(byText(newTitle)).should(Condition.exist);
-        info("delete project");
-        projectsManagement.deleteProject(newTitle);
-        info("verify project deleted");
-        $(byText(newTitle)).waitUntil(Condition.disappears, Configuration.timeout);
 
-    }
-    @Test
-    public void test03_DeleteProject() {
-        String title = "title" + getRandomNumber();
-        ;
-        homePagePlatform.goToTaskPage();
-        info("add project");
-        projectsManagement.addProject(title, "", false);
-        info("verify project added");
-        $(byText(title)).should(Condition.exist);
-        info("delete project");
-        projectsManagement.deleteProject(title);
-        info("verify project deleted");
-        $(byText(title)).waitUntil(Condition.disappears, Configuration.timeout);
-
-    }
 
     @Test
     public void test04_Add_TaskInProject() {
@@ -101,36 +67,5 @@ public class ProjectManagementTestIT extends Base {
         projectsManagement.deleteProject(title);
 
     }
-    @Test
-    public void test05_Edit_TaskInProject() {
-        String title = "title" + getRandomNumber();
-        String task = "task" + getRandomNumber();
-        String newTask = "newTask" + getRandomNumber();
-        homePagePlatform.goToTaskPage();
-        projectsManagement.addProject(title, "", false);
-        $(byText(title)).click();
-        tasksManagement.addTask(task);
-        info("edit task");
-        tasksManagement.editTask(task, newTask, "High");
-        $(byText(newTask)).should(Condition.exist);
-        info("delete task");
-        tasksManagement.deleteTask(newTask);
-        projectsManagement.deleteProject(title);
 
-    }
-
-    @Test
-    public void test06_DeleteTaskInProject() {
-        String title = "title" + getRandomNumber();
-        String task = "task" + getRandomNumber();
-        homePagePlatform.goToTaskPage();
-        projectsManagement.addProject(title, "", false);
-        $(byText(title)).click();
-        tasksManagement.addTask(task);
-        info("delete task");
-        tasksManagement.deleteTask(task);
-        $(byText(task)).shouldNot(Condition.exist);
-        projectsManagement.deleteProject(title);
-
-    }
 }

@@ -75,33 +75,6 @@ public class ForumForumBasicActionTestIT extends Base {
     forumCategoryManagement.deleteCategory(nameCat);
   }
 
-  /**
-   * CaseID: 116736 Case_name: Edid a forum Steps: 1. Prepare data: create a
-   * caterory 2. Add a forum: - Click on Add forum icon - Put values - Click Save
-   * Expected: Forum is added successfully.
-   */
-  @Test
-  public void test02_EditForum() {
-    info("test02: Edit Forum");
-    String nameCat = "category-" + getRandomNumber();
-    String nameForum = "forum-" + getRandomNumber();
-    String newNameForum = "newforum-" + getRandomNumber();
-
-    info("go to Forum home page");
-    homePagePlatform.goToForum();
-    info("Add a category");
-    forumCategoryManagement.addCategorySimple(nameCat, "", nameCat);
-    info("Add a forum in the category");
-    forumForumManagement.addForumSimple(nameForum, "", nameForum);
-    info("Edit the forum");
-    forumForumManagement.editForum(newNameForum, "", newNameForum);
-    info("Verify that the forum is edit successfully");
-    $(new WithText(newNameForum)).should(Condition.exist);
-
-    info("Delete category");
-    forumHomePage.goToHomeCategory();
-    forumCategoryManagement.deleteCategory(nameCat);
-  }
 
   /**
    * CaseID: 116736 Case_name: Edid a forum Steps: 1. Prepare data: create a
@@ -125,74 +98,6 @@ public class ForumForumBasicActionTestIT extends Base {
     info("Delete category");
     homePagePlatform.goToHomePage();
     homePagePlatform.goToForum();
-    forumCategoryManagement.deleteCategory(nameCat);
-  }
-
-  /**
-   * CaseID: 116738 Case_name: Move a forum Steps: 1. Prepare data: create a
-   * caterory 2. Add a forum: - Select 1 forum - Click on More Action, select Move
-   * - Choose destination category Expected: This forum is moved to a destination
-   * category
-   */
-  @Test
-  public void test04_MoveForum() {
-    info("Move a forum");
-    String category1 = "category1-" + getRandomNumber();
-    String category2 = "category2-" + getRandomNumber();
-    String forum = "forum1-" + getRandomNumber();
-
-    info("go to Forum home page");
-    homePagePlatform.goToForum();
-    info("Add a category 1");
-    forumCategoryManagement.addCategorySimple(category1, "", category1);
-    info("go to Home page of category");
-    forumHomePage.goToHomeCategory();
-    info("Add a category 2");
-    forumCategoryManagement.addCategorySimple(category2, "", category2);
-
-    forumHomePage.goToHomeCategory();
-    forumHomePage.goToCategory(category1);
-    info(" Add a forum in the category1");
-    forumForumManagement.addForumSimple(forum, "", forum);
-
-    info("Move forum");
-    forumForumManagement.moveForum(forum, category2);
-
-    info("Delete data");
-    forumHomePage.goToHomeCategory();
-    ELEMENT_CAT_CONTAINER.find(byText(category2)).waitUntil(appears, Configuration.timeout).click();
-    forumCategoryManagement.deleteCategory(category2);
-    ELEMENT_CAT_CONTAINER.find(byText(category1)).waitUntil(appears, Configuration.timeout).click();
-    forumCategoryManagement.deleteCategory(category1);
-  }
-
-  @Test
-  @Tag("search")
-  public void test05_SearchForum() {
-
-    String nameCat = "categorya" + getRandomString();
-    String nameForum = "foruma" + getRandomString();
-    String nameForum1 = "forumb" + getRandomString();
-    String nameForum2 = "forumc" + getRandomString();
-
-    info("go to Forum home page");
-    homePagePlatform.goToForum();
-    info("Add a category");
-    forumCategoryManagement.addCategorySimple(nameCat, "", nameCat);
-    info("Add a forum in the category");
-    forumForumManagement.addForumSimple(nameForum, "", nameForum);
-    forumForumManagement.addForumSimple(nameForum1, "", nameForum1);
-    forumForumManagement.addForumSimple(nameForum2, "", nameForum2);
-    info("search forum");
-    homePagePlatform.goToForum();
-    $(ELEMENT_SEARCH_TEXTBOX).setValue(nameForum);
-    ForumLocator.ELEMENT_ICON_SEARCH.click();
-    ELEMENT_CONTENT_SEARCH_RESULT.find(byText(nameForum)).should(Condition.exist);
-    ELEMENT_CONTENT_SEARCH_RESULT.find(byText(nameForum1)).shouldNot(Condition.exist);
-    ELEMENT_CONTENT_SEARCH_RESULT.find(byText(nameForum2)).shouldNot(Condition.exist);
-    info("delete data");
-    homePagePlatform.goToForum();
-    forumHomePage.goToHomeCategory();
     forumCategoryManagement.deleteCategory(nameCat);
   }
 }
