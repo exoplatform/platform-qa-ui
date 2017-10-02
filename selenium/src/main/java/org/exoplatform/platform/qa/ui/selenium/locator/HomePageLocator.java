@@ -663,4 +663,5 @@ public final class HomePageLocator {
   public static final SelenideElement ELEMENT_GADGET_INVITATION                                            =
                                                                 $(byId("InvitationsPortlet"));
   public static final By ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET=byClassName("connect");
+  public static final By ELEMENT_ICON_DELETE_ACTIVITY= byClassName("uiIconClose");
 }

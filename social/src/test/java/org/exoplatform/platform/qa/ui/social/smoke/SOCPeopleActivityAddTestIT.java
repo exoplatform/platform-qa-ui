@@ -1,14 +1,18 @@
 package org.exoplatform.platform.qa.ui.social.smoke;
 
+import static com.codeborne.selenide.Selectors.byAttribute;
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_ALL_CONNECTIONS_TAB;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -120,6 +124,34 @@ public class SOCPeopleActivityAddTestIT extends Base {
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
 
+  }
+  @Test
+  public void test02_Upload_File_Without_Text() {
+    ELEMENT_TAB_LINK.click();
+    refresh();
+    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
+    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).should(Condition.be(Condition.visible));
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
+    $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
+            .parent()
+            .parent()
+            .parent()
+            .find(byClassName(ELEMENT_DATE_ACTIVITY))
+            .hover();
+    $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
+            .parent()
+            .parent()
+            .parent()
+            .find(ELEMENT_ICON_DELETE_ACTIVITY)
+            .click();
+    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.timeout).click();
+    $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
+            .parent()
+            .parent()
+            .parent()
+            .waitUntil(Condition.disappears, Configuration.timeout);
   }
 
 }
