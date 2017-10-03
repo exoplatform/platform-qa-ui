@@ -296,9 +296,7 @@ public class ForumTopicManagement {
       $(byXpath("/html/body")).sendKeys(content);
       switchTo().defaultContent();
       executeJavaScript("window.scrollBy(0,1000)");
-      $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-      $(ELEMENT_POST_FORM_SUBMIT).click();
-      $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+      ELEMENT_BUTTON_SUBMIT_POST.scrollTo().click();
       executeJavaScript("window.scrollBy(0,-1000)");
     }
   }

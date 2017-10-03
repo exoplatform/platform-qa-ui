@@ -889,4 +889,6 @@ public class ForumLocator {
   public final String                 ELEMENT_EDIT_POST                                  =
                                                         "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@data-original-title='Edit This Post']";
   public final By                     ELEMENT_MOVE_TOPIC_POPUP                           = By.id("UIForumPopupWindow");
+
+  public static final SelenideElement ELEMENT_BUTTON_SUBMIT_POST= $(byXpath("//*[@id=\"UIPostForm\"]/div[3]/button[1]"));
 }
