@@ -205,7 +205,7 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
     manageLogInOut.signIn(DATA_USER1,"gtngtn");
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().hover();
-    ELEMENT_GADGET_INVITATION.find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET).waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().parent().find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).shouldNot(Condition.exist);
     ELEMENT_GADGET_INVITATION.find(byText(username1 + " " + username1)).should(Condition.exist);
 
@@ -256,7 +256,7 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().hover();
-    ELEMENT_GADGET_INVITATION.find(byClassName("uiIconClose")).click();
+    ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().parent().find(byClassName("uiIconClose")).click();
     ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).shouldNot(Condition.exist);
     ELEMENT_GADGET_INVITATION.find(byText(username1 + " " + username1)).should(Condition.exist);
 
