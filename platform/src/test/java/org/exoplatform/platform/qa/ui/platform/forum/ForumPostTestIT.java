@@ -32,7 +32,6 @@ import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
  */
 @Tag("forum")
 @Tag("sniff")
-@Tag("test")
 public class ForumPostTestIT extends Base {
 
   HomePagePlatform        homePagePlatform;
