@@ -233,9 +233,9 @@ public class ConnectionsManagement {
     } else {
       evt.type(ELEMENT_SKILL_OF_PEOPLE, "", true);
     }
-    $(ELEMENT_SEARCH_BUTTON).click();
+    $(ELEMENT_SEARCH_BUTTON).pressEnter();
     refresh();
-    $(ELEMENT_SEARCH_BUTTON).click();
+    $(ELEMENT_SEARCH_BUTTON).pressEnter();
     if (directory != "" && directory != null)
       $(byLinkText(directory)).click();
   }
