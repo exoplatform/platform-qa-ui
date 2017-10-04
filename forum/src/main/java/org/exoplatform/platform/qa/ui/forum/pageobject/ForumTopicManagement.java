@@ -297,7 +297,7 @@ public class ForumTopicManagement {
       switchTo().defaultContent();
       executeJavaScript("window.scrollBy(0,1000)");
       executeJavaScript("window.scrollBy(0,1000)");
-      ELEMENT_BUTTON_SUBMIT_POST.click();
+      ELEMENT_BUTTON_SUBMIT_POST.pressEnter();
     }
   }
 
