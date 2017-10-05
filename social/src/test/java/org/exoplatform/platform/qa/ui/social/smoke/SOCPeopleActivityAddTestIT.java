@@ -1,19 +1,22 @@
 package org.exoplatform.platform.qa.ui.social.smoke;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_COMPOSER_SHARE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_ALL_CONNECTIONS_TAB;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
@@ -122,4 +125,60 @@ public class SOCPeopleActivityAddTestIT extends Base {
 
   }
 
+  @Test
+  public void test02_Upload_File_Without_Text() {
+    ELEMENT_TAB_LINK.click();
+    refresh();
+    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
+    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).should(Condition.be(Condition.enabled));
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
+    $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
+                                                             .parent()
+                                                             .parent()
+                                                             .parent()
+                                                             .find(byClassName(ELEMENT_DATE_ACTIVITY))
+                                                             .hover();
+    $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
+                                                             .parent()
+                                                             .parent()
+                                                             .parent()
+                                                             .find(ELEMENT_ICON_DELETE_ACTIVITY)
+                                                             .click();
+    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.timeout).click();
+    $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
+                                                             .parent()
+                                                             .parent()
+                                                             .parent()
+                                                             .waitUntil(Condition.disappears, Configuration.timeout);
+  }
+
+  @Test
+  public void test03_add_link_without_text() {
+    String link = "http://www.google.fr";
+    ELEMENT_TAB_ADD_LINK.click();
+    ELEMENT_INPUT_LINK.setValue(link);
+    ELEMENT_BUTTON_ATTACH_LINK.click();
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.be(Condition.enabled), Configuration.timeout);
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
+    $(byText(link)).should(Condition.exist);
+    $(byText(link)).click();
+    switchTo().window(1);
+    String title = "Google";
+    assertEquals(title, Selenide.title());
+    switchTo().window(0);
+    $(byText(link)).parent()
+                   .parent()
+                   .parent()
+                   .parent()
+                   .parent()
+                   .find(byClassName(ELEMENT_DATE_ACTIVITY))
+                   .waitUntil(Condition.visible, Configuration.timeout)
+                   .hover();
+    $(byText(link)).parent().parent().parent().parent().parent().find(ELEMENT_ICON_DELETE_ACTIVITY).click();
+    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.timeout).click();
+    $(byText(link)).parent().parent().parent().parent().parent().waitUntil(Condition.disappear, Configuration.timeout);
+
+  }
 }
