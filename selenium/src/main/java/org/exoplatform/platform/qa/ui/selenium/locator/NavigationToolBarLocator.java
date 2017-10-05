@@ -197,7 +197,7 @@ public final class NavigationToolBarLocator {
                                                               By.xpath("//*[@class='actionIcon']//*[contains(@class, 'uiIconEcmsAddFolder')]");
 
   public static final By              ELEMENT_SEARCH_LINK                                 =
-                                                          By.xpath("//*[@class='dropdown-menu']//*[text()='Search']");
+                                                          By.xpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[3]/ul/li[3]/a");
 
   // administration panel
   public static final By              ELEMENT_TOPBAR_ADMINISTRATION_BUTTON                =
