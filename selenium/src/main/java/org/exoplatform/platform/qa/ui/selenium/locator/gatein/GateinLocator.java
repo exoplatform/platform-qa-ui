@@ -260,8 +260,8 @@ public final class GateinLocator {
                                                                               By.xpath("//*[@id='tab-UIPortletForm']//*[text()='Cancel']");
 
   public static final By              ELEMENT_EDIT_PORTLET_FORM_RESULTPERPAGE                 =
-                                                                              By.xpath("//*[@id='resultsPerPage']");
-
+                                                                                By.xpath("//*[@id='resultsPerPage']");
+public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconClose"));
   // Permission tab
   public static final By              ELEMENT_PORTLET_ACCESS_PERMISSION_TAB                   =
                                                                             By.xpath(".//*[@id='tab-UIPortletForm']//*[@data-target='#PortletPermission-tab']");

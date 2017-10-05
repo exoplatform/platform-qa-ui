@@ -475,10 +475,10 @@ public class NavigationToolbar {
    * Open search administration
    */
   public void goToAdminSearch() {
-    evt.waitElementAndTryGetElement(ELEMENT_TOOLBAR_ADMINISTRATION);
-    evt.click(ELEMENT_TOOLBAR_ADMINISTRATION);
-    evt.mouseOver(ELEMENT_MENU_CONTENT_LINK, true);
-    evt.click(ELEMENT_SEARCH_LINK);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    $(ELEMENT_MENU_CONTENT_LINK).hover();
+    $(ELEMENT_SEARCH_LINK).click();
   }
 
   /**
@@ -486,7 +486,7 @@ public class NavigationToolbar {
    */
   public void goToQuickSearch() {
     info("Click on Quick search icon");
-    evt.click(ELEMENT_TOOLBAR_QUICKSEARCH);
+    $(ELEMENT_TOOLBAR_QUICKSEARCH).click();
 
   }
 
