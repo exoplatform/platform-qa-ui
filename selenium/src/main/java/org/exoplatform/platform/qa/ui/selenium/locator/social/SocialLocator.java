@@ -2312,7 +2312,7 @@ public final class SocialLocator {
                                                                        $(byXpath("//*[@id=\"UINotificationPopoverToolbarPortlet\"]/div[2]/a/i/span"));
 
   public static final By              ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION                            =
-                                                                             byXpath("//*[@id=\"UIManageInvitationSpaces\"]/div[2]/div/div/div[2]/div/div/div[3]/button[2]");
+          byAttribute("class","btn btn-primary pull-right");
 
   public static final SelenideElement ELEMENT_LIST_MY_SPACES_IN_LEFT_NAVIGATION                         =
                                                                                 $(byId("UISpaceNavigationPortlet"));
@@ -2353,4 +2353,5 @@ public final class SocialLocator {
 
   public static final SelenideElement ELEMENT_NAME_PROFILE_OF_USERS                                     =
                                                                     $(byId("UIBreadCrumbsNavigationPortlet"));
+
 }
