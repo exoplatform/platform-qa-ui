@@ -172,7 +172,7 @@ public class CreateNewDocument {
   public void addNewWebContent(String title, String content) {
     $(ELEMENT_FILEFORM_BLANK_NAME).click();
     $(ELEMENT_FILEFORM_BLANK_NAME).setValue(title);
-    $(ELEMENT_FILEFORM_BLANK_CONTENT).click();
+    $(ELEMENT_FILEFORM_BLANK_CONTENT).scrollTo().click();
     $(ELEMENT_FILEFORM_BLANK_CONTENT).sendKeys(content);
 
   }
