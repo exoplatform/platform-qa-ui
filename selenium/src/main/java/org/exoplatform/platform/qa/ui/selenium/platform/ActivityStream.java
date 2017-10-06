@@ -5,6 +5,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_ACTIVITY_STREAM_CONTAINER;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
@@ -491,17 +492,11 @@ public class ActivityStream {
    */
   public void addLink(String link) {
     info("----Click on Link----");
-    // waitForAndGetElement( ELEMENT_COMPOSER_LINK_BUTTON).click();
-    evt.waitForAndGetElement(ELEMENT_COMPOSER_LINK_BUTTON, testBase.getDefaultTimeout(), 1);
-    evt.clickByJavascript(ELEMENT_COMPOSER_LINK_BUTTON, 2);
+    ELEMENT_TAB_ADD_LINK.click();
+
     info("----Input link into link box-----");
-    evt.waitForAndGetElement(ELEMENT_COMPOSER_INPUT_LINK_FIELD);
-    WebElement input = evt.waitForAndGetElement(ELEMENT_COMPOSER_INPUT_LINK_FIELD, testBase.getDefaultTimeout(), 1);
-    Actions action = new Actions(testBase.getExoWebDriver().getWebDriver());
-    action.moveToElement(input).click().perform();
-    action.sendKeys(link).perform();
-    // type(ELEMENT_COMPOSER_INPUT_LINK_FIELD, link, true);
-    evt.waitForAndGetElement(ELEMENT_COMPOSER_ATTACH_LINK_BUTTON);
+    ELEMENT_INPUT_LINK.setValue(link);
+
     info("----Click attach button-----");
     $(ELEMENT_COMPOSER_ATTACH_LINK_BUTTON).click();
     evt.waitForAndGetElement(By.id("LinkTitle"));
@@ -613,7 +608,7 @@ public class ActivityStream {
 
       info("click on Select button");
       // click(ELEMENT_SELECT_BUTTON);
-      evt.click(ELEMENT_SELECT_BUTTON, 2);
+      $(ELEMENT_SELECT_BUTTON).click();
     }
 
     info("add a text to composer box of AS");
@@ -731,7 +726,6 @@ public class ActivityStream {
     info("Click share button");
     $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
     $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.disabled,Configuration.timeout);
-
   }
 
   /**

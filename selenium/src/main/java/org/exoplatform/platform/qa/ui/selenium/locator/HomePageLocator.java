@@ -713,4 +713,17 @@ public final class HomePageLocator {
   public static final SelenideElement ELEMENT_BUTTON_SHOW_MORE_SPACES_IN_LEFT_NAVIGATION=$(byId("LeftNavigation")).find(byClassName("moreSpace")).find(byClassName("btn"));
 
   public static final SelenideElement ELEMENT_ICON_LIKE_IN_PREVIEW_MODE=$(byId("previewLikeLink"));
+  public static final SelenideElement ELEMENT_LINK_TEXT_SELECT_FROM_EXISTING_UPLOAD=$(byXpath("//*[@id=\"DropFileBox\"]/span[5]/a"));
+
+  public static final SelenideElement ELEMENT_TEXT_DOCUMENT_IN_DOC_ACTIVITY_POPUP=$(byXpath("//*[@id=\"BreadcumbsContainer\"]/li[2]/a"));
+
+  public static final SelenideElement ELEMENT_SITE_MANAGEMENT_IN_DOC_ACTIVITY_POPUP=$(byClassName("uiIconEcms24x24DriveManagedSites"));
+
+  public static final SelenideElement ELEMENT_POPUP_DOC_ACTIVITY=$(byId("UIDocumentSelectorTab"));
+
+  public static final SelenideElement ELEMENT_BUTTON_ATTASH_FILE_IN_DOC_ACTIVITY_POPUP=$(byXpath("//*[@id=\"UIDocActivityPopup\"]/div[2]/div[2]/button[1]"));
+
+public static final SelenideElement ELEMENT_ACTIVITY_STREAM_CONTAINER= $(byClassName("uiUserActivitiesContainer"));
+
+public static final By ELEMENT_BOX_ACTIVITY=byId("boxContainer");
 }
