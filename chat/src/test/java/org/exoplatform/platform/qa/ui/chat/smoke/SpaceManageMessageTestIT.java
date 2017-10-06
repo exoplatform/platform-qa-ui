@@ -103,11 +103,7 @@ public class SpaceManageMessageTestIT extends Base {
     ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.exist);
     switchTo().window(0);
     manageLogInOut.signIn(PLFData.username, PLFData.password);
-    info("delete data");
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
-    navigationToolbar.goToManageCommunity();
-    userandgroupmanagement.deleteUser(usernamea);
+
   }
 
 
@@ -150,9 +146,7 @@ public class SpaceManageMessageTestIT extends Base {
     info("root check the answer");
     $(byText(message2)).should(Condition.exist);
     switchTo().window(0);
-    info("delete data");
-    navigationToolbar.goToManageCommunity();
-    userandgroupmanagement.deleteUser(usernamea);
+
 
   }
 }

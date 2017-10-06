@@ -56,12 +56,6 @@ public class ForumCategoryTestIT extends Base {
     info("Add a category");
     forumCategoryManagement.addCategorySimple(nameCat, "", nameCat);
 
-    ;
-
-    info("Test 04: Delete a category");
-    info("delete category");
-    forumHomePage.goToHomeCategory();
-    forumCategoryManagement.deleteCategory(nameCat);
   }
 
 }

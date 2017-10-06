@@ -133,9 +133,7 @@ public class ForumAdministrationTestIT extends Base {
     info("Edit a BBCode");
     forumHomePage.editBBCode(tag, replacement, description, example, false);
     info("BBcode is edited with changes successfully");
-    info("Test 04: Delete BB code");
-    info("Delete BBcode");
-    forumHomePage.deleteBBcode(tag);
+
   }
 
 }

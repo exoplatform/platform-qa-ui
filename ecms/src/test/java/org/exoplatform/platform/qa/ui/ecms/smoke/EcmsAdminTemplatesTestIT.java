@@ -65,7 +65,6 @@ public class EcmsAdminTemplatesTestIT extends Base {
     contentAdministration.goToSpecificFunctions(ContentAdministration.specificEcmFunctions.DOCUMENTS);
     contentAdministration.addDocumentInTemplates(title, permission);
     $(byText(title)).waitUntil(Condition.appears, Configuration.timeout);
-    contentAdministration.deleteCategories(title);
   }
 
 }

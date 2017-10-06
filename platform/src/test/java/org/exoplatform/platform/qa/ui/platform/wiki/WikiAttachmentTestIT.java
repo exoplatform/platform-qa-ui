@@ -105,11 +105,5 @@ public class WikiAttachmentTestIT extends Base {
     refresh();
     click(ELEMENT_PAGE_DOWNLOADATTACHFILE);
 
-    click(ELEMENT_PAGE_DELETEATTACHFILE);
-    waitForElementNotPresent(ELEMENT_PAGE_DOWNLOADATTACHFILE);
-
-    info("Delete the page");
-    homePagePlatform.goToWiki();
-    wikiHomePage.deleteWiki(title);
   }
 }

@@ -86,9 +86,7 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     info("Verify that Application is added to space");
     $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
     ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byText("ForumsStatistic")).should(Condition.exist);
-    info("Delete the space");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space1, false);
+
   }
 
   @Test
@@ -109,9 +107,7 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
 
     info("Verify that Application is added to space");
     ELEMENT_SPACE_MENU_TAB.find(byText("Answer")).should(Condition.exist);
-    info("Delete the space");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space1, false);
+
   }
 
   @Test
@@ -132,9 +128,7 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     info("Verify that Application is added to space");
     $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
     ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("BlogArticlesPortlet")).should(Condition.exist);
-    info("Delete the space");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space1, false);
+
   }
 
   @Test
@@ -155,9 +149,7 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     info("Verify that Application is added to space");
     $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
     ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("Bookmark")).should(Condition.exist);
-    info("Delete the space");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space1, false);
+
   }
 
   @Test
@@ -177,9 +169,7 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     info("Verify that Application is added to space");
     $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
     ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("GoogleMapPortlet")).should(Condition.exist);
-    info("Delete the space");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space1, false);
+
   }
 
   @Test
@@ -200,9 +190,7 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     info("Verify that Application is added to space");
     $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
     ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("FriendSuggestion")).should(Condition.exist);
-    info("Delete the space");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space1, false);
+
   }
 
   @Test
@@ -229,9 +217,7 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("FriendSuggestion")).should(Condition.exist);
     ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("GoogleMapPortlet")).should(Condition.exist);
     ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("Bookmark")).should(Condition.exist);
-    info("Delete the space");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space1, false);
+
   }
 
 }

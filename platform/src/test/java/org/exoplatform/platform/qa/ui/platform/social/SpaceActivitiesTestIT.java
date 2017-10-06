@@ -68,8 +68,6 @@ public class SpaceActivitiesTestIT extends Base {
     homePagePlatform.goToSpecificSpace(space);
     String activity1 = "activity1" + getRandomNumber();
     activityStream.addActivity(activity1, "");
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
 
   }
 
@@ -88,8 +86,7 @@ public class SpaceActivitiesTestIT extends Base {
     $(byXpath(ELEMENT_LIKE_BUTTON.replace("{id}", id))).click();
     $(byXpath(ELEMENT_UNLIKE_BUTTON.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_WHO_LIKED_POPUP.waitUntil(Condition.appears, Configuration.timeout);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
+
 
   }
 
@@ -115,8 +112,7 @@ public class SpaceActivitiesTestIT extends Base {
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter();
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears, Configuration.timeout);
 
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
+
 
   }
 

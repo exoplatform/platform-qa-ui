@@ -98,8 +98,7 @@ public class WikiActivitiesInSpaceTestIT extends Base {
     info("Check the Activity");
     homePagePlatform.goToHomePage();
     activityStream.checkActivity(title);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
+
 
   }
 

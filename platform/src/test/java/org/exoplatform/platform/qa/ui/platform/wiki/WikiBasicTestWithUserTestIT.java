@@ -126,8 +126,7 @@ public class WikiBasicTestWithUserTestIT extends Base {
     info("Page is shown successfully");
     wikiHomePage.goToAPage(title2);
     wikiValidattions.verifyInsertedExistLink(label, title1);
-    wikiHomePage.deleteWiki(title1);
-    wikiHomePage.deleteWiki(title2);
+
 
   }
 
@@ -160,7 +159,7 @@ public class WikiBasicTestWithUserTestIT extends Base {
     else
       assert false;
     back();
-    wikiHomePage.deleteWiki(title1);
+
   }
 
   @Test
@@ -191,7 +190,7 @@ public class WikiBasicTestWithUserTestIT extends Base {
     wikiManagement.saveAddPage();
     wikiValidattions.verifyTitleWikiPage(newTitle);
     arrayPage.add(newTitle);
-    wikiHomePage.deleteWiki(newTitle);
+
 
   }
 
@@ -204,8 +203,7 @@ public class WikiBasicTestWithUserTestIT extends Base {
     richTextEditor.addSimplePage(wiki, wiki);
     wikiManagement.saveAddPage();
     $(byText(wiki)).should(Condition.exist);
-    homePagePlatform.goToWiki();
-    wikiHomePage.deleteWiki(wiki);
+
   }
 
   @Test
@@ -230,9 +228,7 @@ public class WikiBasicTestWithUserTestIT extends Base {
     homePagePlatform.goToHomePage();
     activityStream.checkActivityAddWikiPage(title, content, null);
 
-    info("Delete the page");
-    homePagePlatform.goToWiki();
-    wikiHomePage.deleteWiki(title);
+
   }
 }
 

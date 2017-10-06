@@ -63,19 +63,7 @@ public class AddonsAnswersQuestionTestIT extends Base {
     $(ELEMENT_OK_BUTTON_LINK).click();
     $(byText(question)).should(Condition.exist);
 
-    info("Test 4: Delete a question");
-    /*
-     * Step number: 2 Step Name: Delete a question Step Description: - Right click
-     * on a question and select Delete Input Data: Expected Outcome: - Question is
-     * deleted and disappear in Answers page
-     */
-    questionManagement.deleteQuestion(question);
   }
-
-  /**
-   * . Case ID:116829. Test Case Name: Edit a question.
-   */
-
 
   /**
    * Case ID:116830. Test Case Name: Delete a question. Pre-Condition:

@@ -60,22 +60,7 @@ public class SOCHomePageTestIT extends Base {
         // click on the like button of the activity
         $(byXpath(ELEMENT_LIKE_BUTTON.replace("{id}", id))).click();
         $(byXpath(ELEMENT_UNLIKE_BUTTON.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout);
-    /*
-     * Step number: 2 Step Name: Check Likes part Step Description: - Check avatar -
-     * Mouse over the avatar Input Data: Expected Outcome: - Avatar of liker is
-     * added into likes part, the oldest liker is displayed at the right and the
-     * newest at the left. - Profile pictures of users popup
-     */
 
-        ELEMENT_WHO_LIKED_POPUP.waitUntil(Condition.appears, Configuration.timeout);
-        // click on the activity to appear the delete button
-        $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-        // click on delete button
-        $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
-        ELEMENT_DELETE_POPUP_OK.click();
-        // verify that the activity doesn't exist
-        $(byText(activity1)).shouldNot(Condition.exist);
-        info("the activity is removed successfully");
     }
 
     /**
@@ -105,14 +90,7 @@ public class SOCHomePageTestIT extends Base {
         // click on the button comment
         $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
         $(byText(comment)).should(Condition.exist);
-        // click on the activity to appear the delete button
-        $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-        // click on delete button
-        $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
-        ELEMENT_DELETE_POPUP_OK.click();
-        // verify that the activity doesn't exist
-        $(byText(activity1)).shouldNot(Condition.exist);
-        info("the activity is removed successfully");
+
     }
 
 }

@@ -61,10 +61,7 @@ public class EcmsSECreateTestIT extends Base {
     createNewDoc.createNewDoc(CreateNewDocument.selectDocumentType.FILE);
     createNewDoc.addNewFile(name, content);
     createNewDoc.saveAndClose();
-    info("Delete file document");
-    navigationToolbar.goToSiteExplorer();
-    siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.deleteData(name);
+
   }
 
 
@@ -92,10 +89,7 @@ public class EcmsSECreateTestIT extends Base {
     createNewDoc.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
     createNewDoc.addNewWebContent(name, content);
     createNewDoc.saveAndClose();
-    info("Delete file document");
-    navigationToolbar.goToSiteExplorer();
-    siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.deleteData(name);
+
   }
 
 }

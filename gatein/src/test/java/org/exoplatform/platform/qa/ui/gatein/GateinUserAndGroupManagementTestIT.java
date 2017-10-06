@@ -96,15 +96,6 @@ public class GateinUserAndGroupManagementTestIT extends Base {
     info("Test Case 03: Add some users into group");
     userandgroupmanagement.addUsersToGroup("mary", membership1, true, true);
     userandgroupmanagement.addUsersToGroup("demo", membership2, false, true);
-
-    /*
-     * Step Number: 4 Step Name: Step 4: Delete Group Step Description: - Go to
-     * Group/Organization/ User and group management - Select a group and click
-     * [Delete selected group] icon - Click Save Input Data: Expected Outcome: - The
-     * group is removed from the list
-     */
-    info("Test Case 04: Delete group");
-    userandgroupmanagement.deleteGroup(groupLabel, true);
   }
 
 }

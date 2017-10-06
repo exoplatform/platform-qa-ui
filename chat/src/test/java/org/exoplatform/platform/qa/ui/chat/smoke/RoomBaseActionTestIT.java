@@ -98,18 +98,7 @@ public class RoomBaseActionTestIT extends Base {
     homePagePlatform.goToChat();
     switchTo().window("Chat");
     $(byText(room)).should(Condition.exist);
-    info("delete data");
-    switchTo().window("Home Page");
-    manageLogInOut.signIn(PLFData.username, PLFData.password);
-    homePagePlatform.goToChat();
-    switchTo().window("Chat");
-    roomManagement.deleteRomm(room);
 
-    switchTo().window("Home Page");
-    navigationToolbar.goToManageCommunity();
-    userandgroupmanagement.deleteUser(usernamea);
-    userandgroupmanagement.deleteUser(usernameb);
-    userandgroupmanagement.deleteUser(usernamec);
 
   }
 
@@ -140,15 +129,7 @@ public class RoomBaseActionTestIT extends Base {
     $(byText(room)).click();
     info("verify message");
     ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.exist);
-    switchTo().window("Home Page");
-    manageLogInOut.signIn(PLFData.username, PLFData.password);
-    homePagePlatform.goToChat();
-    switchTo().window("Chat");
-    roomManagement.deleteRomm(room);
-    switchTo().window("Home Page");
-    navigationToolbar.goToManageCommunity();
-    userandgroupmanagement.deleteUser(usernamea);
-  }
 
+  }
 
 }

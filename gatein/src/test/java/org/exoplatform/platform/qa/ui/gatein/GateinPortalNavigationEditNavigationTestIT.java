@@ -115,16 +115,6 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
     navigationToolbar.goToPotalSites();
     portalmanagesites.goToEditNavigation();
 
-    info("Test 03: Delete node");
-    /*
-     * Step Number: 1 Step Name: Step 1: Delete Node Step Description: - Go to
-     * Administration/Portal/ Sites/Edit navigation - Select a node and choose
-     * Delete node by right click - Click OK in the confirmation message to accept
-     * your deletion. - Click Save Input Data: Expected Outcome: - The node is
-     * removed from the list
-     */
-    navigationmanagement.deleteNode(nodeName);
-
   }
 
 }

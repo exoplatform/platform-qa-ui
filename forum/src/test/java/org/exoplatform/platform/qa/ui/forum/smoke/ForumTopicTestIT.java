@@ -92,9 +92,7 @@ public class ForumTopicTestIT extends Base {
     info("Rate the topic");
     forumHomePage.goToTopic(topic);
     forumTopicManagement.rateTopic(name2);
-    info("Delete data");
-    forumHomePage.goToHomeCategory();
-    forumCategoryManagement.deleteCategory(name);
+
   }
 
   /**
@@ -136,11 +134,7 @@ public class ForumTopicTestIT extends Base {
     forumHomePage.goToTopic(topic);
     info("Add and verify a tag");
     forumTopicManagement.addATag(name);
-    info("Delete the tag");
-    $(ELEMENT_ACTIONBAR_TOPIC_TAGDELETE).click();
-    info("Delete data");
-    forumHomePage.goToHomeCategory();
-    forumCategoryManagement.deleteCategory(name);
+
   }
 
 
@@ -175,28 +169,8 @@ public class ForumTopicTestIT extends Base {
     forumHomePage.goToTopic(topic);
     forumTopicManagement.addPoll(name3, name3, name4);
     $(ELEMENT_FORUM_POLL_GRID).should(Condition.exist);
-    info("delete poll");
-    forumTopicManagement.deletePoll();
-    info("Delete data");
-    forumHomePage.goToHomeCategory();
-    forumCategoryManagement.deleteCategory(name);
+
   }
-
-
-  /**
-   * <li>Case ID:116762.</li>
-   * <li>Test Case Name: Lock/ Unlock a topic.</li>
-   * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
-   */
-
-
-  /**
-   * <li>Case ID:116763.</li>
-   * <li>Test Case Name: Open/ Close a topic.</li>
-   * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
-   */
 
   /**
    * <li>Case ID:116764.</li>
@@ -242,8 +216,6 @@ public class ForumTopicTestIT extends Base {
     forumTopicManagement.startTopic(topic, topic, "", "");
     forumHomePage.goToTopic(topic);
     $(byText(name2)).waitUntil(Condition.appears, Configuration.timeout);
-    info("Delete data");
-    forumHomePage.goToHomeCategory();
-    forumCategoryManagement.deleteCategory(name);
+
   }
 }

@@ -86,20 +86,6 @@ public class GateinGroupNavigationManageNavigationTestIT extends Base {
     waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group4))).isDisplayed();
     waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group5))).isDisplayed();
 
-    /*
-     * Step Number: 3 Step Name: Delete Navigation of group Step Description: - Go
-     * to Administration/ Portal / Group Sites - Click Delete Navigation button of a
-     * Group Input Data: Expected Outcome: - The navigation group is removed
-     * successfully
-     */
-    info("Delete navigation of group");
-    portalGroupNavigation.deleteNavigationForGroup(groupName);
-
-    info("Delete group");
-    navigationToolbar.goToUsersAndGroupsManagement();
-    userAndGroupManagement.goToGroupTab();
-    click(By.linkText(groupName));
-    userAndGroupManagement.deleteGroup(groupName, true, 60000);
   }
 
 }

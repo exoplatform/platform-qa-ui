@@ -115,10 +115,7 @@ public class SOCPeopleActivityAddTestIT extends Base {
     $(byClassName("uiTabNormal")).find(byClassName("limitText")).click();
     userPageBase.goToActivityTab();
     $(byText(activity1)).should(Condition.exist);
-    manageLogInOut.signIn("root", "gtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
+
 
   }
 

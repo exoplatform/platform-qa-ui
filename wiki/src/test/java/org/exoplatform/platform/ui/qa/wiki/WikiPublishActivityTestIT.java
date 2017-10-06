@@ -87,9 +87,7 @@ public class WikiPublishActivityTestIT extends Base {
     homePagePlatform.goToHomePage();
     activityStream.checkActivityAddWikiPage(title, content, null);
 
-    info("Delete the page");
-    homePagePlatform.goToWiki();
-    wikiHomePage.deleteWiki(title);
+
   }
 
 }

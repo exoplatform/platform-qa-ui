@@ -85,14 +85,7 @@ public class SOCSpaceManagementTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.searchSpace(space, "");
     $(byClassName("tab-content")).find(byText(space)).waitUntil(Condition.appears, Configuration.timeout);
-    manageLogInOut.signIn(username1, password);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.searchSpace(space, "");
-    spaceManagement.deleteSpace(space, false);
-    manageLogInOut.signIn("root", "gtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
+
   }
 
 }

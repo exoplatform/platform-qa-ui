@@ -110,10 +110,7 @@ public class ForumBasicTestWithUserTestIT extends Base {
     info("Verify that the forum is shown successfully");
     $(new Selectors.WithText(nameForum)).should(Condition.exist);
 
-    info("Delete category");
-    forumHomePage.goToHomeCategory();
-    $(byText(nameCat)).click();
-    forumCategoryManagement.deleteCategory(nameCat);
+
   }
 
 
@@ -139,31 +136,7 @@ public class ForumBasicTestWithUserTestIT extends Base {
     info("edit category");
     forumCategoryManagement.editCategory(nameCat2);
 
-    info("Test 04: Delete a category");
-    info("delete category");
-    forumHomePage.goToHomeCategory();
-    $(byText(nameCat2)).click();
-    forumCategoryManagement.deleteCategory(nameCat2);
   }
-  /*
-   * Step Number: 1 Step Name: Add a category Step Description: - Go to Forum page
-   * - Click on Add Category - Put values - Save Input Data: Expected Outcome: -
-   * Category is added successfully and shown in Forum home
-   */
-
-
-  /*
-   * Step Number: 1 Step Name: - Create new category Step Description: - Login and
-   * goto Forum application - Click [Add Category] - Fill the information and
-   * click [Save] Input Data: Expected Outcome: - New category is created - No
-   * activity is added in activity stream Step number: 2 Step Name: - Create new
-   * Forum Step Description: - Click [Add Forum] - Fill the information and click
-   * [Save] Input Data: Expected Outcome: - New forum is created - No activity is
-   * added in activity stream Step number: 3 Step Name: - Create new Topic Step
-   * Description: - Click [start Topic] - input the information and click [Save]
-   * Input Data: Expected Outcome: - New Topic is created
-   */
-
   @Test
   public void test09_CreateDeleteNewTopic() {
     info("Test 9: Create new Topic");
@@ -184,10 +157,7 @@ public class ForumBasicTestWithUserTestIT extends Base {
     forumTopicManagement.startTopic(topic, topic, "", "");
     forumHomePage.goToTopic(topic);
     $(byText(name2)).waitUntil(Condition.appears, Configuration.timeout);
-    info("Delete data");
-    forumHomePage.goToHomeCategory();
-    $(byText(name)).click();
-    forumCategoryManagement.deleteCategory(name);
+
   }
 
 }

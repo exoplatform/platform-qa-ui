@@ -69,7 +69,6 @@ public class AddonsAnswersCommentTestIT extends Base {
     commentManagement.inputDataToComment(comment);
     $(ELEMENT_COMMENT_FORM_SAVE_BUTTON).click();
     $(byText(comment)).waitUntil(Condition.appears, Configuration.timeout);
-    questionManagement.deleteQuestion(question);
 
   }
 

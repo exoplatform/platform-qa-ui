@@ -80,7 +80,6 @@ public class AddonsAnswersAnswersTestIT extends Base {
     /// click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
     $(ELEMENT_ANSWER_FORM_SAVE_BUTTON).click();
     $(byText(answer)).waitUntil(Condition.appears, Configuration.timeout);
-    questionManagement.deleteQuestion(question);
   }
 
 

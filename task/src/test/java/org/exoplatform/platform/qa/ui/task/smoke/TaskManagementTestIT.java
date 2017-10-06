@@ -46,8 +46,6 @@ public class TaskManagementTestIT extends Base {
     homePagePlatform.goToTaskPage();
     tasksManagement.addTask(task);
     $(byText(task)).should(Condition.exist);
-    info("delete task");
-    tasksManagement.deleteTask(task);
 
   }
 

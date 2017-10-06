@@ -61,8 +61,7 @@ public class EcmsAdminExplorerTestIT extends Base {
     contentAdministration.goToSpecificFunctions(ContentAdministration.specificEcmFunctions.DRIVES);
     contentAdministration.addDrives(title, permission, view);
     $(byText(title)).waitUntil(Condition.appears, Configuration.timeout);
-    // delete drive
-    contentAdministration.deleteDrives(title);
+
     /*
      * Step Number: 1 Step Name: - Step Description: Step 1:Add Drive Input Data: -
      * Go to Content Administration/Explorer/ Drives - Click on Add Drive button -

@@ -51,8 +51,6 @@ public class CalendarCalendarTestIT extends Base {
     calendarManagement.saveAddCalendar();
     $(byText(calendarName)).waitUntil(Condition.appears, 10000);
 
-    homePagePlatform.goToCalendarPage();
-    calendarManagement.deleteCalendar(calendarName, true);
   }
 
    /**
@@ -81,17 +79,7 @@ public class CalendarCalendarTestIT extends Base {
     calendarManagement.selectGroupInGroupTabCalendarForm(groupCalendar, true);
     calendarManagement.saveAddCalendar();
     $(byText(calendarName)).waitUntil(Condition.appears, 10000);
-    info("Test 7 Delete Group Calendar");
-    /*
-     * Step Number: 1 Step Name: - Step Description: Step 1: Delete Group Calendar
-     * Input Data: - Add a group calendar - Delete a public calendar by mouse over
-     * then click wheel icon of existing group calendar and select Remove - Click OK
-     * at confirmation message Expected Outcome: - The group calendar is removed
-     * from the group calendar
-     */
 
-    homePagePlatform.goToCalendarPage();
-    calendarManagement.deleteCalendar(calendarName, true);
   }
 
 

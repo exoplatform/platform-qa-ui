@@ -106,9 +106,7 @@ public class ForumManagementInSpaceUsingNormalUserTestIT extends Base {
     spaceHomePage.goToForumsTab();
     forumHomePage.goToTopic(topic);
     $(byText(topic)).waitUntil(Condition.appears, Configuration.timeout);
-    homePagePlatform.goToHomePage();
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
+
 
   }
 

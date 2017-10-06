@@ -45,10 +45,6 @@ public class ProjectManagementTestIT extends Base {
         projectsManagement.addProject(title, "", false);
         info("verify project added");
         $(byText(title)).should(Condition.exist);
-        info("delete project");
-        projectsManagement.deleteProject(title);
-        info("verify project deleted");
-        $(byText(title)).waitUntil(Condition.disappears, Configuration.timeout);
 
     }
 
@@ -62,9 +58,7 @@ public class ProjectManagementTestIT extends Base {
         $(byText(title)).click();
         tasksManagement.addTask(task);
         $(byText(task)).should(Condition.exist);
-        info("delete task");
-        tasksManagement.deleteTask(task);
-        projectsManagement.deleteProject(title);
+
 
     }
 

@@ -75,19 +75,6 @@ public class CalendarEventTestIT extends Base {
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
                                               CalendarHomePage.selectViewOption.LIST,
                                               CalendarHomePage.selectDayOption.DETAILTIME);
-
-    info("Test 15 Delete an Event in personal calendar");
-    /*
-     * Step Number: 1 Step Name: - Step Description: Step 1: Delete an event Input
-     * Data: - Add an event - Delete an event right click on an existing event and
-     * select Delete - Click OK at confirmation message Expected Outcome: - The
-     * event is removed normally.
-     */
-    calendarHomePage.deleteEventTask(titleEvent,
-                                     CalendarHomePage.selectViewOption.LIST,
-                                     CalendarHomePage.selectDayOption.DETAILTIME,
-                                     getDate(0, "MM/dd/yyyy"));
-    calendarManagement.deleteCalendar(calendar, false);
   }
 
 
