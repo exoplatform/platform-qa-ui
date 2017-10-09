@@ -3,6 +3,9 @@ package org.exoplatform.platform.qa.ui.platform.plf;
 import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.selenium.platform.ConnectionsManagement;
 import org.junit.jupiter.api.Test;
+
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import org.junit.jupiter.api.BeforeEach;
@@ -52,7 +55,7 @@ public class PlfPeopleSearchTestIT extends Base {
       info("Search user on People");
         getHomePagePlatform().goToConnections();
         getConnectionsManagement().searchPeople(firstName, "","", "");
-        getHomePagePlatform().refreshUntil(firstName+" "+lastName,Condition.visible,1000);
+        getHomePagePlatform().refreshUntil($(byText(firstName+" "+lastName)),Condition.visible,1000);
       info("Test Case 10: Delete user");
         getNavigationToolbar().goToManageCommunity();
         getUserandgroupmanagement().deleteUser(username);
@@ -70,7 +73,7 @@ public class PlfPeopleSearchTestIT extends Base {
       info("Search user on People");
         getHomePagePlatform().goToConnections();
         getConnectionsManagement().searchPeople(firstName, "", "", "");
-        getHomePagePlatform().refreshUntil(firstName+" "+lastName,Condition.visible,1000);
+        getHomePagePlatform().refreshUntil($(byText(firstName+" "+lastName)),Condition.visible,1000);
       info("Test Case 10: Delete user");
         getNavigationToolbar().goToManageCommunity();
         getUserandgroupmanagement().deleteUser(username);

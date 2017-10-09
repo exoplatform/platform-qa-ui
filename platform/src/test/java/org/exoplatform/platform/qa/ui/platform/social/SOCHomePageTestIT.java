@@ -29,6 +29,8 @@ import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.openqa.selenium.JavascriptExecutor;
 
+import java.awt.*;
+
 @Tag("sniff")
 @Tag("social")
 public class SOCHomePageTestIT extends Base {
@@ -608,5 +610,33 @@ public class SOCHomePageTestIT extends Base {
         executeJavaScript("window.scrollBy(0,-1500)", "");
         activityStream.deleteactivity(name);
 
+    }
+
+    /**
+     *<li> Case ID:121936.</li>
+     *<li> Test Case Name: Mention a user in comment.</li>
+     *<li> Pre-Condition: </li>
+     *<li> Post-Condition: </li>
+     * @throws AWTException
+     Step Number: 1
+		 *Step Name: Add comment with mention
+		 *Step Description:
+			- Select the activity that has some comments
+			- input the comment with mention and click comment
+		 *Input Data:
+
+		 *Expected Outcome:
+			- Input text field is displayed in activity, click comment button to show comment textbox
+			- Comment will be added into comment section of activity*/
+    @Test
+    public  void test18_MentionAUserInComment() throws AWTException {
+        info("Test 18 Mention a user in comment");
+        String name = "name"+getRandomNumber();
+        String text = "text"+getRandomNumber();
+
+        homePagePlatform.goToHomePage();
+        activityStream.addActivity(name,null);
+        activityStream.addCommentWithMentionUser(name,DATA_USER2,text);
+        activityStream.deleteactivity(name);
     }
 }
