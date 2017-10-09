@@ -114,6 +114,7 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter();
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
+    manageLogInOut.signOut();
 
   }
 
@@ -207,9 +208,7 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
     manageLogInOut.signIn("root", "gtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
+    manageLogInOut.signOut();
 
   }
 }

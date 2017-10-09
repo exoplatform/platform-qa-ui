@@ -98,6 +98,7 @@ public class SOCSpaceMemberManagementRequestTestIT extends Base {
     $(byText(username2 + " " + username2)).parent().find(ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB).click();
     spaceSettingManagement.goToMemberTab();
     $(byText(username2 + " " + username2)).scrollTo().should(Condition.exist);
+    manageLogInOut.signOut();
 
 
   }
