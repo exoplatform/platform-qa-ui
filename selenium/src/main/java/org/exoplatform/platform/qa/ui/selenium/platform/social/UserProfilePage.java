@@ -2,6 +2,10 @@ package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_BUTTON_CONFIRM_UPLOAD;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_INPUT_UPLOAD_AVATAR;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -77,7 +81,6 @@ public class UserProfilePage {
   public void updateBasicInformation(String firstName, String lastName, String email) {
     info("Update basic information");
     evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
-
     if (firstName != "" && firstName != null) {
       info("update firstname");
       $(ELEMENT_FIRST_NAME_TEXTBOX_EDIT).setValue(firstName);
@@ -95,20 +98,17 @@ public class UserProfilePage {
   /**
    * Change avatar
    *
-   * @param linkfile : File path of new avatar
    */
-  public void changeAvatar(String linkfile) {
+  public void changeAvatar() {
     info("-- changeAvatar --");
 
     if (testBase.getBrowser().contains("iexplorer"))
       evt.clickByJavascript(ELEMENT_CHANGE_AVATAR_LINK);
     else
-      evt.click(ELEMENT_CHANGE_AVATAR_LINK);
-    evt.click(ELEMENT_SELECT_AVATAR);
-    testBase.uploadFileUsingRobot(linkfile);
-    evt.clickByJavascript(ELEMENT_CONFIRM);
-    evt.waitForElementNotPresent(ELEMENT_CONFIRM);
-    evt.clickByJavascript(ELEMENT_SAVE_AVATAR);
+      $(ELEMENT_CHANGE_AVATAR_LINK).click();
+    ELEMENT_INPUT_UPLOAD_AVATAR.uploadFromClasspath("testavatar.png");
+    ELEMENT_BUTTON_CONFIRM_UPLOAD.click();
+    ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR.click();
 
   }
 

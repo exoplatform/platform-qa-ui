@@ -4,10 +4,12 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_ACTIVITY_STREAM_CONTAINER;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_SITEEXPLORER_LEFTBOX_ROOTNODE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
@@ -17,7 +19,11 @@ import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.CreateNewDocument;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.SiteExplorerHome;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
+import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -46,10 +52,16 @@ public class SOCHomePageTestIT extends Base {
     CreateNewDocument createNewDocument;
     SpaceManagement spaceManagement;
     ConnectionsManagement connectionsManagement;
+    UserProfilePage userProfilePage;
+    AddUsers addUsers;
+    SpaceHomePage spaceHomePage;
+    SpaceSettingManagement spaceSettingManagement;
 
     @BeforeEach
     public void setupBeforeMethod() {
         info("Start setUpBeforeMethod");
+        spaceSettingManagement=new SpaceSettingManagement(this);
+        spaceHomePage=new SpaceHomePage(this);
         spaceManagement=new SpaceManagement(this);
         navigationToolbar = new NavigationToolbar(this);
         homePagePlatform = new HomePagePlatform(this);
@@ -58,6 +70,8 @@ public class SOCHomePageTestIT extends Base {
         siteExplorerHome=new SiteExplorerHome(this);
         createNewDocument=new CreateNewDocument(this);
         connectionsManagement=new ConnectionsManagement(this);
+        userProfilePage=new UserProfilePage(this);
+        addUsers=new AddUsers(this);
         if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
             $(ELEMENT_SKIP_BUTTON).click();
         }
@@ -629,7 +643,7 @@ public class SOCHomePageTestIT extends Base {
 			- Input text field is displayed in activity, click comment button to show comment textbox
 			- Comment will be added into comment section of activity*/
     @Test
-    public  void test18_MentionAUserInComment() throws AWTException {
+    public  void test18_MentionAUserInComment()  {
         info("Test 18 Mention a user in comment");
         String name = "name"+getRandomNumber();
         String text = "text"+getRandomNumber();
@@ -638,5 +652,291 @@ public class SOCHomePageTestIT extends Base {
         activityStream.addActivity(name,null);
         activityStream.addCommentWithMentionUser(name,DATA_USER2,text);
         activityStream.deleteactivity(name);
+    }
+
+    /**
+     *<li> Case ID:121937.</li>
+     *<li> Test Case Name: Relation Activity.</li>
+     *<li> Pre-Condition: </li>
+     *<li> Post-Condition: </li>
+   Step Number: 1
+		 *Step Name: - Invite another user
+		 *Step Description:
+			- Login with User A and go to Intranet
+			- Go to Connections
+			- Find user B and send a request
+		 *Input Data:
+
+		 *Expected Outcome:
+			- Request is sent to the user B
+    Step number: 2
+		 *Step Name: - Accept request
+		 *Step Description:
+			- Login as user B and goto my Connection
+			- Accept the request from user A
+		 *Input Data:
+
+		 *Expected Outcome:
+			- A Relation activity is displayed to the activity stream*/
+
+    @Test
+    public  void test19_RelationActivity() {
+        info("Test 19 Relation Activity");
+
+        String comment="I'm now connected with 1 user(s)";
+
+
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+
+
+        manageLogInOut.signIn(DATA_USER2,password);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        $(byText(DATA_NAME_USER1)).parent().parent().parent().parent().find(byText(comment)).should(Condition.exist);
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER1);
+    }
+
+    /**
+     *<li> Case ID:121938.</li>
+     *<li> Test Case Name: Create a new space.</li>
+     *<li> Pre-Condition: </li>
+     *<li> Post-Condition: </li>
+     *
+   Step Number: 1
+		 *Step Name: - Create a new Space
+		 *Step Description:
+			- Goto homepage
+			- Click [Join a space] on left Navigation
+			- Click [Add new space] button
+			- Fill the information and click create
+			- Check homepage
+		 *Input Data:
+
+		 *Expected Outcome:
+			- a new space is created
+			- an activity is added into activity stream
+			- Informations displayed in the featured content are :
+			1. Space's avatar
+			2. Space's description
+			3. Number of members.*/
+    @Test
+    public  void test20_CreateASpace() {
+        info("Test 20 Create a new space");
+
+        String space = "space"+getRandomNumber();
+        String contentSpace="contentSpace"+getRandomNumber();
+        String comment="1 Member";
+
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(space,contentSpace);
+
+        homePagePlatform.goToHomePage();
+        $(byText(space)).should(Condition.exist);
+        ELEMENT_ACTIVITY_STREAM_CONTAINER.find(byText(contentSpace)).should(Condition.exist);
+        ELEMENT_ACTIVITY_STREAM_CONTAINER.find(byText(comment)).should(Condition.exist);
+        homePagePlatform.goToMySpaces();
+        spaceManagement.deleteSpace(space,false);
+    }
+
+    /**
+     *<li> Case ID:121942.</li>
+     *<li> Test Case Name: Update Profile - change of avatar.</li>
+     *<li> Pre-Condition: </li>
+     *<li> Post-Condition: </li>
+     */
+    @Test
+    public  void test24_UpdateProfileChangeOfAvatar() {
+        info("Test 24: Update Profile - change of avatar");
+        String comment="Avatar has been updated.";
+        manageLogInOut.signIn(DATA_USER2,password);
+
+		/*Step Number: 1
+		 *Step Name: - Change Avatar
+		 *Step Description:
+			- Connect to Intranet
+			- Click username on Top Navitgation
+			-> My Profile
+			- Click [Change the avatar] and upload new avatar
+			- Check homepage
+		 *Input Data:
+
+		 *Expected Outcome:
+			- A user profile activity is updated in the activity stream
+			- A comment is added: Avatar has been updated.*/
+        navigationToolbar.goToMyProfile();
+        userProfilePage.goToEditProfile();
+        userProfilePage.changeAvatar();
+
+        homePagePlatform.goToHomePage();
+        $(byText(comment)).should(Condition.exist);
+    }
+
+    /**
+     *<li> Case ID:121943.</li>
+     *<li> Test Case Name: Update Profile - Update Basic information.</li>
+     *<li> Pre-Condition: </li>
+     *<li> Post-Condition: </li>
+     Step Number: 1
+		 *Step Name: - Change Avatar
+		 *Step Description:
+			- Connect to Intranet
+			- Click username on Top Navitgation
+			-> My Profile
+			- Click Edit to edit basic information
+			- Check homepage
+		 *Input Data:
+
+		 *Expected Outcome:
+			- A user profile activity is updated in the activity stream
+			- A comment is added: 	Basic informations has been updated.*/
+    @Test
+    public  void test25_UpdateProfileUpdateBasicInformation() {
+        info("Test 25 Update Profile - Update Basic information");
+        String username = "username" + getRandomString();
+        String email = username+"@test.com";
+        String email1 = getRandomString()+"@test.com";
+        String password="123456";
+        String comment="Contact information has been updated.";
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(username, password, email, username, username);
+
+
+        manageLogInOut.signIn(username,password);
+        navigationToolbar.goToMyProfile();
+        userProfilePage.goToEditProfile();
+        userProfilePage.updateBasicInformation("","",email1);
+        userProfilePage.saveCancelUpdateInfo(true);
+        homePagePlatform.goToHomePage();
+        ELEMENT_ACTIVITY_STREAM_CONTAINER.find(byText(comment)).should(Condition.exist);
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username);
+    }
+
+    /**
+     *<li> Case ID:121944.</li>
+     *<li> Test Case Name: Check order of the activities.</li>
+     *<li> Pre-Condition: </li>
+     *<li> Post-Condition: </li>
+     Step Number: 1
+		 *Step Name: Check the order of activities
+		 *Step Description:
+			- Login to the platform
+			- Create activities of different kinds (ECMS webcontents, ECMS symlinks, share files to Personal Documents/Public, create space ...etc), at least 10 activities
+		 *Input Data:
+
+		 *Expected Outcome:
+			- The activities should be displayed in the good order (newest at the top)
+			- We have only 1 activity per kind (no duplication*/
+    @Test
+    public  void test26_CheckOrderOfTheActivities() {
+        info("Test 26 Check order of the activities");
+
+        String name = "name"+getRandomNumber();
+        String content = "content"+getRandomNumber();
+        String name2 = "name2"+getRandomNumber();
+        String content2 = "content2"+getRandomNumber();
+        String name3 ="name3"+getRandomNumber();
+        String content3 = "content3"+getRandomNumber();
+
+        navigationToolbar.goToSiteExplorer();
+        siteExplorerHome.goToAddNewContent();
+        info("Create new file document");
+        createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
+        createNewDocument.addNewWebContent(name, content);
+        createNewDocument.saveAndClose();
+        click(ELEMENT_SITEEXPLORER_LEFTBOX_ROOTNODE);
+        navigationToolbar.goToSiteExplorer();
+        siteExplorerHome.goToAddNewContent();
+        info("Create new file document");
+        createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.FILE);
+        createNewDocument.addNewFile(name2, content2);
+        createNewDocument.saveAndClose();
+        click(ELEMENT_SITEEXPLORER_LEFTBOX_ROOTNODE);
+        navigationToolbar.goToSiteExplorer();
+        siteExplorerHome.goToAddNewContent();
+        info("Create new file document");
+        homePagePlatform.goToAllSpace();
+        spaceManagement.addNewSpaceSimple(name3,content3);
+        homePagePlatform.goToHomePage();
+        ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_BOX_ACTIVITY).get(0).find(byText(content3)).should(Condition.exist);
+        ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_BOX_ACTIVITY).get(1).find(byText(name2)).should(Condition.exist);
+        ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_BOX_ACTIVITY).get(2).find(byText(name)).should(Condition.exist);
+        navigationToolbar.goToSiteExplorer();
+        siteExplorerHome.deleteData(name);
+        siteExplorerHome.deleteData(name2);
+        homePagePlatform.goToMySpaces();
+        spaceManagement.deleteSpace(name3,false);
+
+            }
+    /**
+     *<li> Case ID:121941.</li>
+     *<li> Test Case Name: Promote a member as manager.</li>
+     *<li> Pre-Condition: a space activity is shared in the activity stream</li>
+     *<li> Post-Condition: </li>
+    Step Number: 1
+		 *Step Name: - Promote a member as manager
+		 *Step Description:
+			- Connect to Intranet
+			- Open a space
+			- Click [Settings] -> Members
+			- Click Grant Manager to promote the user we want
+			- Back to the Homepage
+		 *Input Data:
+
+		 *Expected Outcome:
+			- The Space activity content isn't updated in the activity stream
+			- A comment is added: $user has been promoted as space's manager.*/
+    @Test
+    public  void test23_PromoteAMemberAsManager() {
+        info("Test 23: Promote a member as manager");
+
+        String space = "space"+getRandomNumber();
+        String contentSpace = "contentSpace"+getRandomNumber();
+
+        String username = "username" + getRandomString();
+        String email = username+"@gmail.com";
+        String username1 ="usernameb" + getRandomString();
+        String email1 = username1+"@gmail.com";
+        String fullName1=username1+" "+username1;
+        String password="123456";
+        String comment="has been promoted as the space's manager.";
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(username, password, email, username, username);
+        addUsers.addUser(username1, password, email1, username1, username1);
+        manageLogInOut.signIn(username,password);
+
+
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(space,contentSpace);
+
+
+        spaceHomePage.goToSpaceSettingTab();
+        spaceSettingManagement.inviteUser(username1,false,"");
+
+        manageLogInOut.signIn(username1,password);
+        homePagePlatform.goToMySpaces();
+        spaceManagement.acceptAInvitation(space);
+
+        manageLogInOut.signIn(username,password);
+        homePagePlatform.goToSpecificSpace(space);
+        spaceHomePage.goToSpaceSettingTab();
+        spaceSettingManagement.changeRole(fullName1);
+
+        homePagePlatform.goToHomePage();
+        $(byText(comment)).should(Condition.exist);
+        manageLogInOut.signIn(DATA_USER1,"gtngtn");
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username);
+        addUsers.deleteUser(username1);
+
     }
 }

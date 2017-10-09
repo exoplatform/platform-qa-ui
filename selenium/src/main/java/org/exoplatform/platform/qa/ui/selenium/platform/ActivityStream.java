@@ -755,7 +755,6 @@ public class ActivityStream {
    * @param activity String
    * @throws AWTException AWTException
    */
-
   public void addCommentWithMentionUser(String activity, String username, String textContent) {
     // get the id of activity created
     String id = $(byText(activity)).parent()
