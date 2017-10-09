@@ -98,6 +98,7 @@ public class RoomBaseActionTestIT extends Base {
     homePagePlatform.goToChat();
     switchTo().window("Chat");
     $(byText(room)).should(Condition.exist);
+    switchTo().window("Home Page");
     manageLogInOut.signOut();
 
 
@@ -130,6 +131,7 @@ public class RoomBaseActionTestIT extends Base {
     $(byText(room)).click();
     info("verify message");
     ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.exist);
+    switchTo().window("Home Page");
     manageLogInOut.signOut();
 
   }

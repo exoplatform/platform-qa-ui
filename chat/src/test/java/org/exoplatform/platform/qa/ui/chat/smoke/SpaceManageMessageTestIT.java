@@ -146,6 +146,7 @@ public class SpaceManageMessageTestIT extends Base {
     info("root check the answer");
     $(byText(message2)).should(Condition.exist);
     switchTo().window(0);
+    manageLogInOut.signOut();
 
 
   }

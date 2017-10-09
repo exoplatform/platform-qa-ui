@@ -197,7 +197,7 @@ public class CreateNewDocument {
   public void saveAndClose() {
     info("save and close");
     // scroll up
-    executeJavaScript("window.scrollBy(0,-250)");
+    executeJavaScript("window.scrollBy(0,-550)");
     $(ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE).click();
 
   }
