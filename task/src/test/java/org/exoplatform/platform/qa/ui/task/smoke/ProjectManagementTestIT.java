@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -55,7 +56,8 @@ public class ProjectManagementTestIT extends Base {
         String task = "task" + getRandomNumber();
         homePagePlatform.goToTaskPage();
         projectsManagement.addProject(title, "", false);
-        $(byText(title)).click();
+        $(byText(title)).scrollTo().click();
+        executeJavaScript("window.scrollBy(0,-1550)");
         tasksManagement.addTask(task);
         $(byText(task)).should(Condition.exist);
 
