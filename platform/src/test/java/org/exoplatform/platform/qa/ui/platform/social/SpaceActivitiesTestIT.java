@@ -60,7 +60,7 @@ public class SpaceActivitiesTestIT extends Base {
 
   @Test
   public void test01_AddNewYourActivityOnSpace() {
-    String space = "space AddNewYourActivityOnSpace" ;
+    String space = "space SpaceActivity" ;
 
     info("Create a space");
     homePagePlatform.goToMySpaces();
@@ -92,7 +92,7 @@ public class SpaceActivitiesTestIT extends Base {
 
    @Test
   public void test04_AddCommentOnYourActivityOnSpace() {
-    String space = "space AddCommentOnYourActivityOnSpace";
+    String space = "space AddCommentActivity";
 
     info("Create a space");
     homePagePlatform.goToMySpaces();
