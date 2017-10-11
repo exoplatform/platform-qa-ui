@@ -22,6 +22,7 @@ package org.exoplatform.platform.qa.ui.selenium.locator.answer;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 import org.openqa.selenium.By;
 
@@ -571,5 +572,8 @@ public class AnswerLocator {
                                                               "//*[@id=\"{IdQuestion}\"]/div/div[2]/div[2]/div[2]/div[2]/a[1]";
 
   public static final SelenideElement ELEMENT_QUESTION_ANSWER_CONTENT_INPUT                 = $(byXpath("/html/body"));
+
+  public static final By ELEMENT_ANSWER_DELETE=byClassName("confirm");
+  public static final By ELEMENT_COMMENT_DELETE= byClassName("confirm");
 
 }

@@ -8,6 +8,7 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
@@ -166,7 +167,7 @@ public class Plf_GettintStartedGadgetTestIT extends Base {
     ELEMENT_HP_GETTING_STARTED_SET_YOUR_PROFILE_PICTURE.click();
     info("Verify that the profile page is shown");
     waitForAndGetElement(ELEMENT_HP_GETTINGSTARTED_PROFILEPAGE);
-
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     info("click o connect to coworker link");
     homePagePlatform.goToHomePage();
     ELEMENT_HP_GETTING_STARTED_CONNECT_WITH_OTHERS.click();
@@ -226,6 +227,8 @@ public class Plf_GettintStartedGadgetTestIT extends Base {
     info("Verify that the progress is completed 100%");
     homePagePlatform.goToHomePage();
     waitForAndGetElement(ELEMENT_HP_GETTINGSTARTED_PROGRESSRATE);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(spacename,false);
   }
 
   /**

@@ -1,8 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.plf;
 
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.switchTo;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_HELP_TOOLBAR;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
@@ -13,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -27,7 +25,7 @@ import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
-
+import org.exoplatform.platform.qa.ui.task.pageobject.TasksManagement;
 
 /**
  * @author eXo
@@ -48,6 +46,7 @@ public class PlfNavigationTopNavigationTestIT extends Base {
 
   ForumHomePage           forumHomePage;
 
+  TasksManagement         tasksManagement;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -59,6 +58,7 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     forumForumManagement = new ForumForumManagement(this);
     calendarHomePage = new CalendarHomePage(this);
     forumHomePage = new ForumHomePage(this);
+    tasksManagement = new TasksManagement(this);
 
   }
 
@@ -248,6 +248,8 @@ public class PlfNavigationTopNavigationTestIT extends Base {
      */
     homePagePlatform.goToTaskPage();
     $(byText(name)).should(Condition.exist);
+    tasksManagement.deleteTask(name);
+    $(byText(name)).shouldNot(Condition.exist);
   }
 
   /**
@@ -255,11 +257,11 @@ public class PlfNavigationTopNavigationTestIT extends Base {
    * <li>Test Case Name: Open user guide.</li> /*Step Number: 1 Step Name: Connect
    * to intranet Step Description: - Login as normal user - Connect to Intranet
    * Input Data: Expected Outcome: - The Homepage is displayed - The Help button
-   * is displayed in the right of the bar
-   * Step number: 2 Step Name: Open user guide Step Description: - Click on the
-   * button "?" Input Data: Expected Outcome: - A new tab in the internet browser
-   * is opened - The user guide is opened and the chapter displayed matched with
-   * the current navigation of the user.
+   * is displayed in the right of the bar Step number: 2 Step Name: Open user
+   * guide Step Description: - Click on the button "?" Input Data: Expected
+   * Outcome: - A new tab in the internet browser is opened - The user guide is
+   * opened and the chapter displayed matched with the current navigation of the
+   * user.
    */
   @Test
   @Tag("sniff")
@@ -271,5 +273,6 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     String url = WebDriverRunner.url();
     assertEquals(url,
                  "https://docs.exoplatform.org/public/index.jsp?topic=/PLF44/PLFUserGuide.GettingStarted.SocialIntranetHomepage.html");
+    close();
   }
 }

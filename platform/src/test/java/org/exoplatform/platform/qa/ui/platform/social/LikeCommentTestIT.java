@@ -657,6 +657,7 @@ public class LikeCommentTestIT extends Base {
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
     activityStream.addActivity(activity1, "");
     String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
     $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
     ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
     executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
@@ -722,6 +723,7 @@ public class LikeCommentTestIT extends Base {
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
     $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment))
                                                 .parent()
@@ -804,6 +806,7 @@ public class LikeCommentTestIT extends Base {
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
     $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment))
                                                 .parent()
@@ -871,6 +874,7 @@ public class LikeCommentTestIT extends Base {
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
     $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment))
                                                 .parent()
@@ -942,6 +946,7 @@ public class LikeCommentTestIT extends Base {
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
     $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment))
                                                 .parent()
@@ -1013,6 +1018,7 @@ public class LikeCommentTestIT extends Base {
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
     $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment))
                                                 .parent()
@@ -1110,6 +1116,7 @@ public class LikeCommentTestIT extends Base {
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
     $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment))
                                                 .parent()
