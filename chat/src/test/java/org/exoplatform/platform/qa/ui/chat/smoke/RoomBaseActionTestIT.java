@@ -55,9 +55,9 @@ public class RoomBaseActionTestIT extends Base {
 
   @Test
   public void Test01_AddRoomWithSeveralUsers() {
-    String usernamea = "usernamea AddRoomWithSeveralUsers" ;
-    String usernameb = "usernameb AddRoomWithSeveralUsers" ;
-    String usernamec = "usernamec AddRoomWithSeveralUsers" ;
+    String usernamea = "usernameaaddroom" ;
+    String usernameb = "usernamebaddroom" ;
+    String usernamec = "usernamecaddroom" ;
     String password = "123456";
     String room = "room AddRoomWithSeveralUsers" ;
 
@@ -107,7 +107,7 @@ public class RoomBaseActionTestIT extends Base {
 
   @Test
   public void test03_SendMessageInAROOM() {
-    String usernamea = "usernamea SendMessageInAROOM" ;
+    String usernamea = "usernameasendmessage" ;
     String password = "123456";
     String emaila = usernamea + "@test.com";
     String room = "room SendMessageInAROOM";

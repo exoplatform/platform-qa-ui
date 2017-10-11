@@ -80,12 +80,12 @@ public class WikiActivitiesInSpaceTestIT extends Base {
     info("Test 11 Add a wiki's activity after create a wiki page in space");
 
     info("Create a space");
-    String space = "space AddAWikisActivityAfterCreateAWikiPageInSpace" ;
+    String space = "spaceAddAWikiASWikiPageInSpace" ;
     homePagePlatform.goToAllSpace();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
 
     info("Create a wiki page");
-    String title = "title AddAWikisActivityAfterCreateAWikiPageInSpace" ;
+    String title = "title AddAWikiAS_WikiPageInSpace" ;
     String content = "content AddAWikisActivityAfterCreateAWikiPageInSpace" ;
     homePagePlatform.goToSpecificSpace(space);
     spaceHomePage.goToWikiTab();

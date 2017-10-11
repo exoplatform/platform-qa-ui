@@ -64,8 +64,8 @@ public class SpaceManageMessageTestIT extends Base {
 
   @Test
   public void test01_SendMessageOnSpaceChat() {
-    String space = "space SendMessageOnSpaceChat" ;
-    String usernamea = "usernamea SendMessageOnSpaceChat" ;
+    String space = "spaceSendMessageOnSpaceChat" ;
+    String usernamea = "usernamesendmessageonchat" ;
     String password = "123456";
     String emaila = usernamea + "@test.com";
     String message = "message SendMessageOnSpaceChat" ;
@@ -109,7 +109,7 @@ public class SpaceManageMessageTestIT extends Base {
 
   @Test
   public void test03_sendMessageAndItsAnswerFromOtherUser() {
-    String usernamea = "usernamea sendMessageAndItsAnswerFromOtherUser" ;
+    String usernamea = "usernameanswerfromotheruser" ;
     String password = "123456";
     String emaila = usernamea + getRandomNumber() + "@test.com";
     String message = "message sendMessageAndItsAnswerFromOtherUser" ;
