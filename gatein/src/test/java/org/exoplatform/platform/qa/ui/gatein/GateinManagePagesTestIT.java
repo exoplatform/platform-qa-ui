@@ -53,9 +53,9 @@ public class GateinManagePagesTestIT extends Base {
   @Test
   public void test02_AddPageOfPortalUsingPageManagement() {
     info("Test 02:Add page of portal using Page Management");
-    String num = getRandomNumber();
-    String pageName = "pageName" + num;
-    String title = "title" + num;
+
+    String pageName = "AddPageOfPortal" ;
+    String title = "title AddPageOfPortalUsingPageManagement" ;
     /*
      * Step Number: 1 Step Name: Step 1: Add page of portal Step Description: - Go
      * to Administration/Portal/Pages - Click Add new page - Choose Owner type is

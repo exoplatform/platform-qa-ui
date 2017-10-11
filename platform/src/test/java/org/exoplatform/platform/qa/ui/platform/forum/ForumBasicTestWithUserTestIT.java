@@ -98,8 +98,8 @@ public class ForumBasicTestWithUserTestIT extends Base {
   @Test
   public void test01_AddForum() {
     info("test01: Add Forum");
-    String nameCat = "category-" + getRandomNumber();
-    String nameForum = "forum-" + getRandomNumber();
+    String nameCat = "category-Add Forum" ;
+    String nameForum = "forum-Add Forum";
 
     info("go to Forum home page");
     homePagePlatform.goToForum();
@@ -124,8 +124,8 @@ public class ForumBasicTestWithUserTestIT extends Base {
   public void test02_AddACategory() {
     info("Test 2: Add a category");
 
-    String nameCat = "nameCat" + getRandomNumber();
-    String nameCat2 = "nameCat2" + getRandomNumber();
+    String nameCat = "nameCat Add a category" ;
+    String nameCat2 = "nameCat2 Add a category" ;
 
     info("go to Forum home page");
     homePagePlatform.goToForum();
@@ -141,10 +141,10 @@ public class ForumBasicTestWithUserTestIT extends Base {
   public void test09_CreateDeleteNewTopic() {
     info("Test 9: Create new Topic");
 
-    String name = "name" + getRandomNumber();
-    String name2 = "name2" + getRandomNumber();
-    String desc = "desc" + getRandomNumber();
-    String topic = "topic" + getRandomNumber();
+    String name = "name Create new Topic" ;
+    String name2 = "name2 Create new Topic" ;
+    String desc = "desc Create new Topic" ;
+    String topic = "topic Create new Topic" ;
 
     homePagePlatform.goToForum();
     info("Add a category");

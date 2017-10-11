@@ -58,8 +58,8 @@ public class ForumForumBasicActionTestIT extends Base {
 
   public void test01_AddForum() {
     info("test01: Add Forum");
-    String nameCat = "category-" + getRandomNumber();
-    String nameForum = "forum-" + getRandomNumber();
+    String nameCat = "category-AddForum" ;
+    String nameForum = "forum-AddForum" ;
 
     info("go to Forum home page");
     homePagePlatform.goToForum();

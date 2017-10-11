@@ -46,8 +46,8 @@ public class AddonsAnswersQuestionTestIT extends Base {
    */
   @Test
   public void test02_AddAQuestion() {
-    String question = "question" + getRandomNumber();
-    String content = "content" + getRandomNumber();
+    String question = "question AddAQuestion" ;
+    String content = "content AddAQuestion" ;
 
     info("Test 2: Add a question");
     /*

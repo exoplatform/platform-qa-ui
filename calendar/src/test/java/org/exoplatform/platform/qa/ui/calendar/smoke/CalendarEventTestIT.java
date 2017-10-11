@@ -44,9 +44,9 @@ public class CalendarEventTestIT extends Base {
    */
   @Test
   public void test13_AddnEventInPersonalCalendar() {
-    String titleEvent = "titleEvent" + getRandomNumber();
-    String calendar = "calendar" + getRandomNumber();
-    String contentEvent = "contentEvent" + getRandomNumber();
+    String titleEvent = "titleEvent AddnEventInPersonalCalendar" ;
+    String calendar = "calendar AddnEventInPersonalCalendar" ;
+    String contentEvent = "contentEvent AddnEventInPersonalCalendar" ;
     info("Test 13 Add an event in personal calendar");
     /*
      * Step Number: 1 Step Name: - Step Description: Step 1: Add an event Input

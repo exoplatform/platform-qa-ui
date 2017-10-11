@@ -50,7 +50,7 @@ public class EcmsAdminExplorerTestIT extends Base {
   public void test01_AddDrive() {
     info("Test 01: Add Drive");
     info("Get data test");
-    String title = "Atitle" + getRandomNumber();
+    String title = "title AddDrive" ;
     String permission = "any";
     ContentAdministration.specificView[] view = { ContentAdministration.specificView.ADMIN };
     ContentAdministration.specificView[] newView = { ContentAdministration.specificView.WEB };

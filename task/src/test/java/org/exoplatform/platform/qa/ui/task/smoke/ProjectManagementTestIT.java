@@ -39,7 +39,7 @@ public class ProjectManagementTestIT extends Base {
 
     @Test
     public void test01_Add_Project() {
-        String title = "title" + getRandomNumber();
+        String title = "title Add_Project" ;
         ;
         homePagePlatform.goToTaskPage();
         info("add project");
@@ -52,8 +52,8 @@ public class ProjectManagementTestIT extends Base {
 
     @Test
     public void test04_Add_TaskInProject() {
-        String title = "title" + getRandomNumber();
-        String task = "task" + getRandomNumber();
+        String title = "title Add_TaskInProject";
+        String task = "task Add_TaskInProject" + getRandomNumber();
         homePagePlatform.goToTaskPage();
         projectsManagement.addProject(title, "", false);
         $(byText(title)).scrollTo().click();

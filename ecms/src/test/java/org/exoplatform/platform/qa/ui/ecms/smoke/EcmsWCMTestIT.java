@@ -70,7 +70,7 @@ public class EcmsWCMTestIT extends Base {
   @Test
   public void test03_CreateSingleContentViewerPage() {
     info("Test 3: Create Single Content Viewer page");
-    String content = "content" + getRandomNumber();
+    String content = "SingleContent" ;
 
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet", "Site Management");

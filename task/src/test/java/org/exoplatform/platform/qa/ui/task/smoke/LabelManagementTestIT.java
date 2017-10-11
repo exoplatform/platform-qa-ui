@@ -40,7 +40,7 @@ public class LabelManagementTestIT extends Base {
 
     @Test
     public void test01_Add_Label() {
-        String label = "label" + getRandomNumber();
+        String label = "label Add_Label" ;
         homePagePlatform.goToTaskPage();
         info("Add label");
         labelsManagement.addLabel(label);
@@ -50,8 +50,8 @@ public class LabelManagementTestIT extends Base {
 
     @Test
     public void test04_addTaskInLabel() {
-        String task = "task" + getRandomNumber();
-        String label = "label" + getRandomNumber();
+        String task = "task addTaskInLabel" ;
+        String label = "label addTaskInLabel" ;
         info("add task in label");
         homePagePlatform.goToTaskPage();
         labelsManagement.addLabel(label);

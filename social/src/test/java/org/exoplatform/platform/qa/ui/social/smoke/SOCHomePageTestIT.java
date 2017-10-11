@@ -47,7 +47,7 @@ public class SOCHomePageTestIT extends Base {
     @Test
     public void test01_LikeActivity() {
         info("Test 1: Like Activity");
-        String activity1 = "activity1" + getRandomNumber();
+        String activity1 = "activity1 Like Activity" ;
         activityStream.addActivity(activity1, "");
     /*
      * Step Number: 1 Step Name: Step 1: Like/Unlike Activity Step Description: - Go
@@ -77,8 +77,8 @@ public class SOCHomePageTestIT extends Base {
      * Comment will be shown in comment section of activity
      */
 
-        String activity1 = "activity1" + getRandomNumber();
-        String comment = "comment" + getRandomNumber();
+        String activity1 = "activity1 Add comment" ;
+        String comment = "comment Add comment" ;
         activityStream.addActivity(activity1, "");
         // get the id of activity created
         String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];

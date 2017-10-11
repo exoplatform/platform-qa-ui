@@ -55,11 +55,11 @@ public class RoomBaseActionTestIT extends Base {
 
   @Test
   public void Test01_AddRoomWithSeveralUsers() {
-    String usernamea = "usernamea" + getRandomString();
-    String usernameb = "usernameb" + getRandomString();
-    String usernamec = "usernamec" + getRandomString();
+    String usernamea = "usernamea AddRoomWithSeveralUsers" ;
+    String usernameb = "usernameb AddRoomWithSeveralUsers" ;
+    String usernamec = "usernamec AddRoomWithSeveralUsers" ;
     String password = "123456";
-    String room = "room" + getRandomNumber();
+    String room = "room AddRoomWithSeveralUsers" ;
 
     String emaila = usernamea + getRandomNumber() + "@test.com";
     String emailb = usernameb + getRandomNumber() + "@test.com";
@@ -107,11 +107,11 @@ public class RoomBaseActionTestIT extends Base {
 
   @Test
   public void test03_SendMessageInAROOM() {
-    String usernamea = "usernamea" + getRandomString();
+    String usernamea = "usernamea SendMessageInAROOM" ;
     String password = "123456";
     String emaila = usernamea + "@test.com";
-    String room = "room" + getRandomNumber();
-    String message = "message" + getRandomNumber();
+    String room = "room SendMessageInAROOM";
+    String message = "message SendMessageInAROOM" ;
     navigationToolbar.goToAddUser();
     info("Create new user");
     userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);

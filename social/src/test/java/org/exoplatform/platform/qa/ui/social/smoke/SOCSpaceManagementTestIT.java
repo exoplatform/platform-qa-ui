@@ -53,10 +53,10 @@ public class SOCSpaceManagementTestIT extends Base {
   @Test
   public void test04_CreateNewSpace() {
     info("Test 04: Create a new Space");
-    String space = "space" + getRandomNumber();
-    String username1 = "usernamea" + getRandomString();
+    String space = "space CreateNewSpace" ;
+    String username1 = "usernameacreatenewspace" ;
     String email1 = username1 + "@gmail.com";
-    String username2 = "usernameb" + getRandomString();
+    String username2 = "usernamebcreatenewspace" ;
     String email2 = username2 + "@gmail.com";
     String password = "123456";
 

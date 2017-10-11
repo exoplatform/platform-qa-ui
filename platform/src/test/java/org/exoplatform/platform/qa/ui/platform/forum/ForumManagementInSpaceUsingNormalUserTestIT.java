@@ -89,8 +89,8 @@ public class ForumManagementInSpaceUsingNormalUserTestIT extends Base {
   @Test
   public void startNewTopicInSpace() {
 
-    String space = "space" + getRandomNumber();
-    String topic = "topic" + getRandomNumber();
+    String space = "space startNewTopicInSpaceNU" ;
+    String topic = "topic startNewTopicInSpaceNU";
     info("Create a space");
     homePagePlatform.goToAllSpace();
     spaceManagement.addNewSpaceSimple(space, space, 6000);

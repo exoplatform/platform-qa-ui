@@ -82,10 +82,10 @@ public class ForumPostTestIT extends Base {
    */
   public void prepareData() {
     info("Create data test");
-    nameCat = "Category" + getRandomNumber();
-    nameForum = "Forum" + getRandomNumber();
-    nameTopic = "Topic" + getRandomNumber();
-    String description = "Description" + getRandomNumber();
+    nameCat = "Category prepareData" ;
+    nameForum = "Forum prepareData" ;
+    nameTopic = "Topic prepareData" ;
+    String description = "Description prepareData" ;
     info("Finished creating data test");
     info("Open forum portlet");
     homePagePlatform.goToForum();
@@ -97,21 +97,6 @@ public class ForumPostTestIT extends Base {
     forumForumManagement.goToStartTopic();
     forumTopicManagement.startTopic(nameTopic, description, "", "");
     forumHomePage.goToTopic(nameTopic);
-  }
-
-  /**
-   * Delete data test
-   */
-  public void deletaData() {
-    info("Open forum portlet");
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-    executeJavaScript("window.scrollBy(0,-550)");
-    homePagePlatform.goToForum();
-    info("Go to Forum home page");
-    forumHomePage.goToHomeCategory();
-    $(byText(nameCat)).click();
-    info("Delete category");
-    forumCategoryManagement.deleteCategory(nameCat);
   }
 
   /**
@@ -129,8 +114,8 @@ public class ForumPostTestIT extends Base {
   @Test
   public void test01_Add__Post() {
     info("Test 1: Add a post");
-    String title = "Title" + getRandomNumber();
-    String content = "Content" + getRandomNumber();
+    String title = "Title Add Post" ;
+    String content = "Content Add Post";
     prepareData();
     info("Reply a topic");
     forumTopicManagement.postReply(title, content);

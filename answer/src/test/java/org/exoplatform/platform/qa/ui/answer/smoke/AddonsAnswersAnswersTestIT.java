@@ -50,10 +50,10 @@ public class AddonsAnswersAnswersTestIT extends Base {
   @Test
   public void test04_AddAnswerAQuestion() {
     String answer = "answer" + getRandomNumber();
-    String newanswer = "newanswer" + getRandomNumber();
-    String question = "question" + getRandomNumber();
-    String fullName = "fullName" + getRandomNumber();
-    String content = "content" + getRandomNumber();
+    String newanswer = "newanswer AddAnswerAQuestion" ;
+    String question = "question AddAnswerAQuestion" ;
+    String fullName = "fullName AddAnswerAQuestion" ;
+    String content = "content AddAnswerAQuestion" ;
 
     info("Test 4: Answer a question");
     /*

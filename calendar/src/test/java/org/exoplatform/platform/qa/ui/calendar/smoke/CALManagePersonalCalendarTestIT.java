@@ -57,7 +57,7 @@ public class CALManagePersonalCalendarTestIT extends Base {
      * listed in personal calendar box
      */
     info("Create a new calendar");
-    String calendar = "calendar" + getRandomNumber();
+    String calendar = "calendar AddNewCalendarWithValidInformation" ;
     homePagePlatform.goToCalendarPage();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.WEEK);
     calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.ADDCAL);

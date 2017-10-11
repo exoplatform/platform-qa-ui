@@ -44,12 +44,12 @@ public class GateinGroupNavigationManageNavigationTestIT extends Base {
    */
   @Test
   public void test02AddGroupNavigation() {
-    String groupName = "group-" + getRandomNumber();
-    String group1 = "group1-" + getRandomNumber();
-    String group2 = "group2-" + getRandomNumber();
-    String group3 = "group3-" + getRandomNumber();
-    String group4 = "group4-" + getRandomNumber();
-    String group5 = "group5-" + getRandomNumber();
+    String groupName = "group-AddGroupNavigation" ;
+    String group1 = "group1-AddGroupNavigation";
+    String group2 = "group2-AddGroupNavigation" ;
+    String group3 = "group3-AddGroupNavigation" ;
+    String group4 = "group4-AddGroupNavigation" ;
+    String group5 = "group5-AddGroupNavigation" ;
 
     info("Create new group with John");
     navigationToolbar.goToUsersAndGroupsManagement();

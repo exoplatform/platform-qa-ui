@@ -49,7 +49,7 @@ public class EcmsAdminTemplatesTestIT extends Base {
   @Test
   public void test04_AddDocumentTemplate() {
     info("Test 1: Add, edit and delete Document Template");
-    String title = "title" + getRandomNumber();
+    String title = "title AddDocumentTemplate" ;
     String permission = "any";
     /*
      * Step Number: 1 Step Name: - Step Description: Step 1: AddTemplate Input Data:

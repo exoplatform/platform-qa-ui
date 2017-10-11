@@ -53,7 +53,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
   @Test
   public void test02Create_PageUsingSourceEditor() {
     info("Test 02: Create page using Source Editor");
-    String wiki = "wiki" + getRandomNumber();
+    String wiki = "wiki Create page using Source Editor " ;
 
     /*
      * Step Number: 1 Step Name: Step 1: Create Page with Source Editor Step

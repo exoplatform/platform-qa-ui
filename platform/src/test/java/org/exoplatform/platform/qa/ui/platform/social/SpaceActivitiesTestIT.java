@@ -60,26 +60,26 @@ public class SpaceActivitiesTestIT extends Base {
 
   @Test
   public void test01_AddNewYourActivityOnSpace() {
-    String space = "space" + getRandomNumber();
+    String space = "space AddNewYourActivityOnSpace" ;
 
     info("Create a space");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 60000);
     homePagePlatform.goToSpecificSpace(space);
-    String activity1 = "activity1" + getRandomNumber();
+    String activity1 = "activity1 AddNewYourActivityOnSpace" ;
     activityStream.addActivity(activity1, "");
 
   }
 
   @Test
   public void test02_likeYourActivityOnSpace() {
-    String space = "space" + getRandomNumber();
+    String space = "space likeYourActivityOnSpace" ;
 
     info("Create a space");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 60000);
     homePagePlatform.goToSpecificSpace(space);
-    String activity1 = "activity1" + getRandomNumber();
+    String activity1 = "activity1 likeYourActivityOnSpace" ;
     activityStream.addActivity(activity1, "");
     String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];
     // click on the like button of the activity
@@ -92,15 +92,15 @@ public class SpaceActivitiesTestIT extends Base {
 
    @Test
   public void test04_AddCommentOnYourActivityOnSpace() {
-    String space = "space" + getRandomNumber();
+    String space = "space AddCommentOnYourActivityOnSpace";
 
     info("Create a space");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 60000);
     homePagePlatform.goToSpecificSpace(space);
-    String activity1 = "activity1" + getRandomNumber();
+    String activity1 = "activity1 AddCommentOnYourActivityOnSpace";
     activityStream.addActivity(activity1, "");
-    String comment = "comment" + getRandomNumber();
+    String comment = "comment AddCommentOnYourActivityOnSpace" ;
     String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1]; // click
     // on
     // comment

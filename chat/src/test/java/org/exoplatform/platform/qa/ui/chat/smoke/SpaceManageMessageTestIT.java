@@ -64,11 +64,11 @@ public class SpaceManageMessageTestIT extends Base {
 
   @Test
   public void test01_SendMessageOnSpaceChat() {
-    String space = "space" + getRandomNumber();
-    String usernamea = "usernamea" + getRandomString();
+    String space = "space SendMessageOnSpaceChat" ;
+    String usernamea = "usernamea SendMessageOnSpaceChat" ;
     String password = "123456";
     String emaila = usernamea + "@test.com";
-    String message = "message" + getRandomNumber();
+    String message = "message SendMessageOnSpaceChat" ;
     info("Create new user");
     navigationToolbar.goToAddUser();
     userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
@@ -109,11 +109,11 @@ public class SpaceManageMessageTestIT extends Base {
 
   @Test
   public void test03_sendMessageAndItsAnswerFromOtherUser() {
-    String usernamea = "usernamea" + getRandomString();
+    String usernamea = "usernamea sendMessageAndItsAnswerFromOtherUser" ;
     String password = "123456";
     String emaila = usernamea + getRandomNumber() + "@test.com";
-    String message = "message" + getRandomNumber();
-    String message2 = "messagee" + getRandomNumber();
+    String message = "message sendMessageAndItsAnswerFromOtherUser" ;
+    String message2 = "message2 sendMessageAndItsAnswerFromOtherUser" ;
     navigationToolbar.goToAddUser();
     info("Create new user");
     userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);

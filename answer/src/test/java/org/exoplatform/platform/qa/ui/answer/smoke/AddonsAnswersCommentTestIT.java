@@ -48,8 +48,8 @@ public class AddonsAnswersCommentTestIT extends Base {
 
   @Test
   public void test07_AddAComment() {
-    String comment = "comment" + getRandomNumber();
-    String question = "question" + getRandomNumber();
+    String comment = "comment AddAComment" ;
+    String question = "question AddAComment" ;
 
     info("Test 7: Add a comment");
 

@@ -35,7 +35,7 @@ public class CalendarCalendarTestIT extends Base {
    */
   @Test
   public void test02_AddPersonalCalendar() {
-    String calendarName = "calendarName" + getRandomNumber();
+    String calendarName = "calendarName AddPersonalCalendar" ;
     String calendarColor = "light_purple";
 
     info("Test 2: Add Personal Calendar");
@@ -61,8 +61,8 @@ public class CalendarCalendarTestIT extends Base {
   @Test
   public void test05_AddGroupCalendar() {
     String groupCalendar = "/platform/users";
-    String calendarName = "calendarName" + getRandomNumber();
-    String newCalendar = "newCalendar" + getRandomNumber();
+    String calendarName = "calendarName AddGroupCalendar";
+    String newCalendar = "newCalendar AddGroupCalendar" ;
     String calendarColor = "light_purple";
 
     info("Test 5: Add Group Calendar");

@@ -41,7 +41,7 @@ public class TaskManagementTestIT extends Base {
 
   @Test
   public void test01_AddTask() {
-    String task = "task" + getRandomNumber();
+    String task = "task AddTask" ;
     info("add task");
     homePagePlatform.goToTaskPage();
     tasksManagement.addTask(task);

@@ -57,14 +57,14 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
    * <li>Test Case Name:Edit node's page properties.</li>
    */
   @Test
-  public void test01_Add_Edit_Delete_NodePage() {
+  public void test01_Add_Edit_NodePage() {
     info("Test 01: Add new node");
-    String portalName = "portalName" + getRandomNumber();
-    String nodeName = "nodeName" + getRandomNumber();
-    String namePage = "namePage" + getRandomNumber();
-    String titlePage = "titlePage" + getRandomNumber();
+    String portalName = "portalName Add_Edit_NodePage";
+    String nodeName = "nodeNameAdd_Edit_NodePage";
+    String namePage = "namePageAdd_Edit_NodePage" ;
+    String titlePage = "titlePageAdd_Edit_NodePage" ;
 
-    String newTitlePage = "newTitlePage" + getRandomNumber();
+    String newTitlePage = "newTitlePage Add_Edit_NodePage";
     String groupPath = "Development";
     String memberships = "author";
     /*
