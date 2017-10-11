@@ -57,8 +57,8 @@ public class ForumManagementInSpaceTestIT extends Base {
   @Test
   public void startNewTopicInSpace() {
 
-    String space = "space startNewTopicInSpace" ;
-    String topic = "topic startNewTopicInSpace" ;
+    String space = "space startTopicInSpace" ;
+    String topic = "topic startTopicInSpace" ;
     info("Create a space");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);

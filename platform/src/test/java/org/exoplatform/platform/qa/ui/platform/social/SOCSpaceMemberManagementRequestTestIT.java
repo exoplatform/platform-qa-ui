@@ -62,9 +62,9 @@ public class SOCSpaceMemberManagementRequestTestIT extends Base {
 
    @Test
   public void test02_AcceptUserRequestToJoinASpace() {
-    String username1 = "usernamea AcceptUserRequestToJoinASpace" ;
+    String username1 = "usernameaaccepttojoinspace" ;
     String email1 = username1 + "@gmail.com";
-    String username2 = "usernameb AcceptUserRequestToJoinASpace" ;
+    String username2 = "usernamebaccepttojoinspace" ;
     String email2 = username2 + "@gmail.com";
     String password = "123456";
     info("Add new user");
@@ -80,7 +80,7 @@ public class SOCSpaceMemberManagementRequestTestIT extends Base {
      * valid data - Click [Create] Input Data: Expected Outcome: - Create new Space
      * successfully.
      */
-    String space = "space AcceptUserRequestToJoinASpace" ;
+    String space = "space AcceptToJoinASpace" ;
 
     info("Create a space by user 1");
     homePagePlatform.goToAllSpace();

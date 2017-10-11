@@ -64,11 +64,11 @@ public class SpaceManageMessageTestIT extends Base {
 
   @Test
   public void test01_SendMessageOnSpaceChat() {
-    String space = "spaceSendMessageOnSpaceChat" ;
+    String space = "spaceMessageonChat" ;
     String usernamea = "usernamesendmessageonchat" ;
     String password = "123456";
     String emaila = usernamea + "@test.com";
-    String message = "message SendMessageOnSpaceChat" ;
+    String message = "messageOnSpaceChat" ;
     info("Create new user");
     navigationToolbar.goToAddUser();
     userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
