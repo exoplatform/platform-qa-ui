@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.chat.smoke;
 
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -64,8 +65,8 @@ public class SpaceManageMessageTestIT extends Base {
 
   @Test
   public void test01_SendMessageOnSpaceChat() {
-    String space = "spaceMessageonChat" ;
-    String usernamea = "usersendmessageonchat" ;
+    String space = "spaceChat" ;
+    String usernamea = "sendmsgnchat" ;
     String password = "123456";
     String emaila = usernamea + "@test.com";
     String message = "messageOnSpaceChat" ;
@@ -93,6 +94,9 @@ public class SpaceManageMessageTestIT extends Base {
     homePagePlatform.goToChat();
     switchTo().window(1);
     info("send message on space");
+    if($(byText(space)).is(Condition.not(Condition.visible))){
+      $$(byClassName("uiIconChatClock")).get(2).click();
+    }
     chatManagement.sendMessageInRoomOrSpace(space, message);
     switchTo().window(0);
     manageLogInOut.signIn(usernamea, password);
