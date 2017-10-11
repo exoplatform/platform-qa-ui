@@ -3,14 +3,17 @@ package org.exoplatform.platform.qa.ui.platform.plf;
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.core.PLFData.password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -73,7 +76,7 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
     if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
       manageLogInOut.signOut();
     }
-    manageLogInOut.signInCas(username, password);
+    manageLogInOut.signInCas(DATA_USER1, "gtngtn");
   }
 
   @AfterEach
@@ -135,19 +138,19 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
     info("Sign in with username1 account");
     manageLogInOut.signIn(usernamea, password);
     homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(username);
+    connectionsManagement.connectToAUser(DATA_USER1);
 
     info("Sign in with username2 account");
     manageLogInOut.signIn(usernameb, password);
     homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(username);
+    connectionsManagement.connectToAUser(DATA_USER1);
 
     info("Sign in with username3 account");
     manageLogInOut.signIn(usernamec, password);
     homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(username);
+    connectionsManagement.connectToAUser(DATA_USER1);
 
-    manageLogInOut.signIn(username, PLFData.password);
+    manageLogInOut.signIn(DATA_USER1, "gtngtn");
     info("Verify that the maximum number of displayed requests is 4");
     info("Verify that for user request, the portlet will displayes the profile picture of the user, his name");
 
@@ -192,16 +195,17 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
     info("Sign in with mary account");
     manageLogInOut.signIn(username1, password);
     homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(username);
+    connectionsManagement.connectToAUser(DATA_USER1);
 
     info("--Send request 2 to John");
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(username);
+    connectionsManagement.connectToAUser(DATA_USER1);
 
-    manageLogInOut.signIn(username, PLFData.password);
-    ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).hover();
-    ELEMENT_GADGET_INVITATION.find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET).click();
+    manageLogInOut.signIn(DATA_USER1,"gtngtn");
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().hover();
+    ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().parent().find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).shouldNot(Condition.exist);
     ELEMENT_GADGET_INVITATION.find(byText(username1 + " " + username1)).should(Condition.exist);
 
@@ -241,17 +245,18 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
     info("Sign in with mary account");
     manageLogInOut.signIn(username1, password);
     homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(username);
+    connectionsManagement.connectToAUser(DATA_USER1);
 
     info("--Send request 2 to John");
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(username);
+    connectionsManagement.connectToAUser(DATA_USER1);
 
     info("Sign in with ROOT account");
-    manageLogInOut.signIn(username, PLFData.password);
-    ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).hover();
-    ELEMENT_GADGET_INVITATION.find(byClassName("uiIconClose")).click();
+    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().hover();
+    ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().parent().find(byClassName("uiIconClose")).click();
     ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).shouldNot(Condition.exist);
     ELEMENT_GADGET_INVITATION.find(byText(username1 + " " + username1)).should(Condition.exist);
 

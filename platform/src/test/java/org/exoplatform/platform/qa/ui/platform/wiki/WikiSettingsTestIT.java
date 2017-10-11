@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.platform.wiki;
 
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
@@ -77,10 +78,10 @@ public class WikiSettingsTestIT extends Base {
     platformPermission = new PlatformPermission(this);
     manageLogInOut = new ManageLogInOut(this);
     wikiPermission = new WikiPermission(this);
-    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+    if ($(ELEMENT_SKIP_BUTTON).is(exist)) {
       $(ELEMENT_SKIP_BUTTON).click();
     }
-    if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
+    if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(exist))) {
       manageLogInOut.signOut();
     }
 
@@ -113,7 +114,7 @@ public class WikiSettingsTestIT extends Base {
     wikiHomePage.goToWikiSettingPage();
     ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();
     wikiSettingManagement.addTemplate(title, description, content);
-    ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(title)).should(Condition.exist);
+    ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(title)).should(exist);
     wikiSettingManagement.deleteTemplate(title);
 
   }
@@ -127,7 +128,7 @@ public class WikiSettingsTestIT extends Base {
     ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();
     $(ELEMENT_SAVE_TEMPLATE).click();
     ELEMENT_WIKI_OK_SAVE_TEMPLATE.waitUntil(Condition.appears,Configuration.timeout).click();
-    ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(title)).should(Condition.exist);
+    ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(title)).should(exist);
     wikiSettingManagement.deleteTemplate(title);
 
   }
@@ -142,13 +143,13 @@ public class WikiSettingsTestIT extends Base {
     wikiHomePage.goToWikiSettingPage();
     ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();
     wikiSettingManagement.addTemplate(title, description, content);
-    ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(title)).should(Condition.exist);
+    ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(title)).should(exist);
     ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();
     $(ELEMENT_TITLE_TEMPLATE).waitUntil(Condition.appears, Configuration.timeout).setValue(title);
     $(ELEMENT_DESCRIPTION_TEMPLATE).setValue(description);
     $(ELEMENT_CONTENT_TEMPLATE).setValue(content);
     $(ELEMENT_SAVE_TEMPLATE).click();
-    $(byText(message)).should(Condition.exist);
+    $(byText(message)).should(exist);
     ELEMENT_BUTTON_OK_IN_WARNING_POPUB_TEMPLATE.click();
     $(ELEMENT_CANCEL_TEMPLATE).click();
     wikiHomePage.goToWikiSettingPage();
@@ -178,7 +179,7 @@ public class WikiSettingsTestIT extends Base {
     wikiSettingManagement.addTemplate(title, description, content);
     ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(title)).parent().parent().find(ELEMENT_WIKI_ICON_EDIT_TEMPLATE).click();
     wikiSettingManagement.editTemplate("", newTitle, "", "");
-    ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(newTitle)).should(Condition.exist);
+    ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(newTitle)).should(exist);
     wikiSettingManagement.deleteTemplate(newTitle);
 
   }
@@ -198,7 +199,7 @@ public class WikiSettingsTestIT extends Base {
     wikiHomePage.goToWikiSettingPage();
     ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();
     wikiSettingManagement.addTemplate(title, description, content);
-    ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(title)).should(Condition.exist);
+    ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(title)).should(exist);
     wikiSettingManagement.deleteTemplate(title);
 
   }
@@ -227,8 +228,8 @@ public class WikiSettingsTestIT extends Base {
     $(ELEMENT_DESCRIPTION_TEMPLATE).setValue(description);
     $(ELEMENT_CONTENT_TEMPLATE).setValue(content);
     ELEMENT_WIKI_PREVIEW_TEMPLATE.click();
-    $(byText(title)).should(Condition.exist);
-    $(byText(content)).should(Condition.exist);
+    $(byText(title)).should(exist);
+    $(byText(content)).should(exist);
     $(ELEMENT_CLOSE_PREVIEW_WINDOW).click();
 
   }
@@ -366,7 +367,7 @@ public class WikiSettingsTestIT extends Base {
 
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.goToWiki();
-    $(byText(wiki)).shouldNot(Condition.exist);
+    $(byText(wiki)).shouldNot(exist);
 
     // delete data
     manageLogInOut.signIn(username, DATA_PASS);
@@ -477,7 +478,7 @@ public class WikiSettingsTestIT extends Base {
    */
 
   @Test
-  public void test10_DeletePermissionForSpaceWiki() {
+  public void test10_DeletePermissionForSpaceWiki() throws Exception {
     info("Test 8: Add Permission for space wiki");
     String space = "" + getRandomNumber();
     String wiki = "" + getRandomNumber();
@@ -496,8 +497,7 @@ public class WikiSettingsTestIT extends Base {
     click(ELEMENT_SAVE_PERMISSION);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     open(perLink);
-    refresh();
-    $(byText(wiki)).waitUntil(Condition.appears, Configuration.timeout);
+    homePagePlatform.refreshUntil(wiki,exist,2000);
 
     info("Test 9: Delete permission for space wiki");
     manageLogInOut.signIn(username, password);
@@ -511,8 +511,7 @@ public class WikiSettingsTestIT extends Base {
 
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     open(perLink);
-    $(ELEMENT_WIKI_PAGE_NOT_FOUND);
-
+    homePagePlatform.refreshUntil($(ELEMENT_WIKI_PAGE_NOT_FOUND).find(byText("Page Not Found")).getText(),exist,2000);
     // delete data
 
     manageLogInOut.signIn(username, password);

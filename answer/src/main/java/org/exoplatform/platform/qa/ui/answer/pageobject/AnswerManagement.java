@@ -1,9 +1,8 @@
 package org.exoplatform.platform.qa.ui.answer.pageobject;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -88,8 +87,7 @@ public class AnswerManagement {
    */
   public void goToActionOfAnswerFromMoreAction(String answer, actionAnswerOption action) {
     info("Select action from menu");
-    ELEMENT_ANSWER_MORE_ACTION.click();
-
+    ELEMENT_ANSWER_MORE_ACTION.waitUntil(Condition.visible,Configuration.timeout).click();
     switch (action) {
     case EDIT:
       info("EDIT answer");
@@ -122,7 +120,7 @@ public class AnswerManagement {
       break;
     case DELETE:
       info("DELETE answer");
-      $(byClassName("confirm")).click();
+      $(byText(answer)).parent().parent().parent().parent().parent().find(ELEMENT_ANSWER_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
       $(ELEMENT_ANSWER_DELETE_CONFIRM_POPUP).waitUntil(Condition.appears, Configuration.timeout);
       break;
     default:

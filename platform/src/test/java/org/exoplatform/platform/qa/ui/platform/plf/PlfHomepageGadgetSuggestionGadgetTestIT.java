@@ -427,7 +427,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     addUsers.addUser(username1, password, email, username1, username1);
     manageLogInOut.signIn(username1, password);
     ELEMENT_GADGET_USER_SUGGESTION.find(byText(DATA_NAME_USER1)).hover();
-    ELEMENT_GADGET_USER_SUGGESTION.find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET)
+    ELEMENT_GADGET_USER_SUGGESTION.find(byText(DATA_NAME_USER1)).parent().parent().find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET)
                                   .waitUntil(Condition.appears, Configuration.timeout)
                                   .click();
     ELEMENT_GADGET_USER_SUGGESTION.find(byText(DATA_NAME_USER1)).shouldNot(Condition.exist);
@@ -445,7 +445,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     addUsers.addUser(username1, password, email, username1, username1);
     manageLogInOut.signIn(username1, password);
     ELEMENT_GADGET_USER_SUGGESTION.find(byText(DATA_NAME_USER1)).waitUntil(Condition.visible, Configuration.timeout).hover();
-    ELEMENT_GADGET_USER_SUGGESTION.find(ELEMENT_BUTTON_CANCEL_SUGGESTION_USER_FROM_GADGET)
+    ELEMENT_GADGET_USER_SUGGESTION.find(byText(DATA_NAME_USER1)).parent().parent().find(ELEMENT_BUTTON_CANCEL_SUGGESTION_USER_FROM_GADGET)
                                   .waitUntil(Condition.visible, Configuration.timeout)
                                   .click();
     ELEMENT_GADGET_USER_SUGGESTION.find(byText(DATA_NAME_USER1)).shouldNot(Condition.exist);

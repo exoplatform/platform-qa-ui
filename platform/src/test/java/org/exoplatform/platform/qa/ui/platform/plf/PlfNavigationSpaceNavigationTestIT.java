@@ -164,8 +164,12 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     spaceSettingManagement.goToApplicationTab();
     spaceSettingManagement.addApplication(category, app);
     info("Verify that Application is added to space");
-    $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
-    ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("Bookmark")).should(Condition.exist);
+    if ($(ELEMENT_SPACE_MENU_MORE).is(Condition.exist)) {
+      $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
+      ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("Bookmark")).should(Condition.exist);
+    } else {
+      ELEMENT_SPACE_MENU_TAB.find(byId("Bookmark")).should(Condition.exist);
+    }
     spaceSettingManagement.removeApplication(app);
     $(ELEMENT_SPACE_MENU_MORE).shouldNot(Condition.exist);
     ELEMENT_SPACE_MENU_TAB.find(byText(app)).shouldNot(Condition.exist);
@@ -315,8 +319,12 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     spaceSettingManagement.goToApplicationTab();
     spaceSettingManagement.addApplication(category, app);
     info("Verify that Application is added to space");
-    $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
-    ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("Bookmark")).should(Condition.exist);
+    if ($(ELEMENT_SPACE_MENU_MORE).is(Condition.exist)) {
+      $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
+      ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("Bookmark")).should(Condition.exist);
+    } else {
+      ELEMENT_SPACE_MENU_TAB.find(byId("Bookmark")).should(Condition.exist);
+    }
     info("Delete the space");
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space1, false);

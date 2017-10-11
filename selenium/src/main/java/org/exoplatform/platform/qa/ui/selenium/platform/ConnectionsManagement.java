@@ -211,7 +211,7 @@ public class ConnectionsManagement {
     info("-- Searching people ... --");
     if (peopleName != "" && peopleName != null) {
 
-      ELEMENT_NAME_OF_PEOPLE.setValue(peopleName);
+      ELEMENT_NAME_OF_PEOPLE.waitUntil(Condition.appears,Configuration.timeout).setValue(peopleName).pressEnter();
     } else {
       evt.type(ELEMENT_NAME_OF_PEOPLE, "", true);
     }
@@ -225,7 +225,9 @@ public class ConnectionsManagement {
     } else {
       evt.type(ELEMENT_SKILL_OF_PEOPLE, "", true);
     }
-    $(ELEMENT_SEARCH_BUTTON).click();
+    $(ELEMENT_SEARCH_BUTTON).pressEnter();
+    refresh();
+    $(ELEMENT_SEARCH_BUTTON).pressEnter();
     if (directory != "" && directory != null)
       $(byLinkText(directory)).click();
   }

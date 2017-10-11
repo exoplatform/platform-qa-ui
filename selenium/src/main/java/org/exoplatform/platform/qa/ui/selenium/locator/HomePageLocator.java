@@ -658,7 +658,7 @@ public final class HomePageLocator {
 
   public static final SelenideElement ELEMENT_CALENDAR_CONTAINER=$(byClassName("currentDateContainer"));
 
-  public static final SelenideElement ELEMENT_ICON_DELETE_CALENDAR_GADGET_CONTENT_MANAGEMENT =$(byClassName("DisplayedCalendarContainer")).findAll(byClassName("uiIconDel")).get(5);
+  public static final SelenideElement ELEMENT_ICON_DELETE_CALENDAR_GADGET_CONTENT_MANAGEMENT =$(byClassName("DisplayedCalendarContainer")).find(byAttribute("data-original-title","Content Management")).parent().find(byClassName("uiIconDel"));
 
   public static final SelenideElement ELEMENT_CONTAINER_NO_DISPALYED_CALENDAR =$(byId("nonDisplayedCalendarContainer"));
 

@@ -5,6 +5,7 @@ import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -108,7 +109,7 @@ public class ForumTopicManagement {
       $(byText("Are you sure you want to delete this topic ?")).waitUntil(appears, Configuration.timeout);
       info("Click on OK on Confirm popup");
       $(ELEMENT_OK_DELETE).click();
-      $(ELEMENT_OK_DELETE).waitUntil(Condition.disappears,Configuration.timeout);
+      $(ELEMENT_OK_DELETE).waitUntil(Condition.disappears, Configuration.timeout);
       break;
     case WATCHES:
       break;
@@ -290,12 +291,14 @@ public class ForumTopicManagement {
     if (newTitle != "")
       $(ELEMENT_TITLE_POST).setValue(newTitle);
 
-    if (content != "")
+    if (content != "") {
       switchTo().frame(0);
-    $(byXpath("/html/body")).sendKeys(content);
-    switchTo().defaultContent();
-    executeJavaScript("window.scrollBy(0,150)");
-    $(ELEMENT_POST_FORM_SUBMIT).click();
+      $(byXpath("/html/body")).sendKeys(content);
+      switchTo().defaultContent();
+      executeJavaScript("window.scrollBy(0,1000)");
+      executeJavaScript("window.scrollBy(0,1000)");
+      ELEMENT_BUTTON_SUBMIT_POST.pressEnter();
+    }
   }
 
   /**
