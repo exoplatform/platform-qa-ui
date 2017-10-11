@@ -65,7 +65,7 @@ public class SpaceManageMessageTestIT extends Base {
   @Test
   public void test01_SendMessageOnSpaceChat() {
     String space = "spaceMessageonChat" ;
-    String usernamea = "usernamesendmessageonchat" ;
+    String usernamea = "usersendmessageonchat" ;
     String password = "123456";
     String emaila = usernamea + "@test.com";
     String message = "messageOnSpaceChat" ;

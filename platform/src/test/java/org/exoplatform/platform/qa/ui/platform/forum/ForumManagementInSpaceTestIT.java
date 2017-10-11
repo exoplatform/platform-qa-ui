@@ -2,6 +2,8 @@ package org.exoplatform.platform.qa.ui.platform.forum;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -69,6 +71,8 @@ public class ForumManagementInSpaceTestIT extends Base {
     forumForumManagement.goToStartTopic();
     forumTopicManagement.startTopic(topic, topic, "", "");
     info("verify topic");
+    refresh();
+    executeJavaScript("window.scrollBy(0,-5500)","");
     homePagePlatform.goToHomePage();
     homePagePlatform.goToSpecificSpace(space);
     spaceHomePage.goToForumsTab();
