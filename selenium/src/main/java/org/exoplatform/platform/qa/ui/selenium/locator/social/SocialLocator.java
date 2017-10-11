@@ -1916,7 +1916,7 @@ public final class SocialLocator {
                                                                     By.xpath(".//*[@title='Join']");
 
   public static final By              ELEMENT_SPACE_ACCESS_REQUEST_JOIN_BTN                             =
-                                                                            By.xpath(".//*[@title='Request to Join']");
+                                                                            byClassName("btn");
 
   public static final By              ELEMENT_SPACE_ACCESS_SPACE_NOT_FOUND_TITLE                        =
                                                                                  By.xpath(".//*[@id='UISpaceAccessPortlet']//h3[text()='Space not found']");

@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.selenium.platform;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
@@ -697,20 +698,21 @@ public class ActivityStream {
    */
   public void mentionUserActivity(String username, String text) throws AWTException {
     info("mention user in activity");
-    evt.type(ELEMENT_COMPOSER_INPUT_FILED, "@" + username, false);
-    Robot robot = new Robot();
-    robot.delay(1000);
-    robot.keyPress(KeyEvent.VK_ENTER);
-    robot.keyRelease(KeyEvent.VK_ENTER);
-
+    ELEMENT_ACTIVITY_INPUT_TEXT.waitUntil(Condition.appears, Configuration.timeout).click();
+    switchTo().frame(0);
+    $(byXpath("/html/body")).setValue("@"+username);
+    switchTo().defaultContent();
+    $(byXpath("//*[@id=\"at-view-64\"]")).waitUntil(Condition.visible,Configuration.timeout);
+    switchTo().frame(0);
+    $(byXpath("/html/body")).pressEnter();
+    switchTo().defaultContent();
     if (!text.isEmpty())
-      evt.type(ELEMENT_COMPOSER_INPUT_FILED, text, false);
+      switchTo().frame(0);
+    $(byXpath("/html/body")).sendKeys(text);
+    switchTo().defaultContent();
 
     info("Click share button");
-    evt.waitForAndGetElement(ELEMENT_COMPOSER_SHARE_BUTTON, testBase.getDefaultTimeout(), 1);
-
-    WebElement el = evt.waitForAndGetElement(ELEMENT_COMPOSER_SHARE_BUTTON, testBase.getDefaultTimeout(), 0);
-    el.sendKeys("\n");
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
 
   }
 
@@ -841,17 +843,7 @@ public class ActivityStream {
   public void likeActivity(String activityText) {
     info("-- Action: Like or Unlike an activity --");
     info("-- Like activity --");
-    int numLike = Integer.parseInt(evt.waitForAndGetElement(ELEMENT_LIKE_NUMBER.replace("${title}", activityText))
-                                      .getText()
-                                      .trim());
-    evt.click(ELEMENT_ICON_LIKE.replace("${title}", activityText));
-    info("-- Verify Like button is highlighted --");
-    evt.waitForAndGetElement(ELEMENT_ICON_UNLIKE.replace("${title}", activityText));
-    info("-- Like successfully and Verify number of like is updated --");
-    int newNumLike = Integer.parseInt(evt.waitForAndGetElement(ELEMENT_LIKE_NUMBER.replace("${title}", activityText))
-                                         .getText()
-                                         .trim());
-    assert (newNumLike == (numLike + 1)) : "Number of like is updated";
+    $(byText(activityText)).parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).click();
 
   }
 

@@ -1,10 +1,14 @@
 package org.exoplatform.platform.qa.ui.social.pageobject;
 
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.util.ArrayList;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
@@ -38,7 +42,7 @@ public class IntranetNotification {
     info("Go to all notification");
     if (evt.waitForAndGetElement(ELEMENT_VIEW_ALL, 3000, 0) != null) {
       info("Click on View All button");
-      evt.click(ELEMENT_VIEW_ALL);
+      $(ELEMENT_VIEW_ALL).waitUntil(Condition.appears, Configuration.timeout).click();
     } else {
       info("Open All page by link");
       testBase.getExoWebDriver().getWebDriver().get(testBase.getExoWebDriver().getBaseUrl() + "/intranet/allNotifications/");
@@ -79,7 +83,8 @@ public class IntranetNotification {
       info("Retry...[" + repeat + "]");
       if (isPopup) {
         info("View detail notification when comments an activity from the popup");
-        evt.click(ELEMENT_NOTIFICATION_POPUP_COMMENT.replace("$activity", activity));
+        $(byText(activity)).hover();
+        $(byText(activity)).click();
       } else {
         info("View detail notification when comments an activity from all notification page");
         evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_COMMENT.replace("$activity", activity));
@@ -203,7 +208,7 @@ public class IntranetNotification {
       info("Retry...[" + repeat + "]");
       if (isPopup) {
         info("View detail notification when like an activity from the popup");
-        evt.click(ELEMENT_NOTIFICATION_POPUP_LIKE.replace("$user", fullName));
+        $(byText(fullName)).parent().hover().click();
       } else {
         info("View detail notification when like an activity from all notification page");
         evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_LIKE.replace("$user", fullName));

@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
+import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
@@ -363,7 +364,7 @@ public class SpaceManagement {
   public void requestToJoinSpace(String space, boolean... isVerify) {
     info("Request to join a space");
     searchSpace(space, "");
-    evt.click(ELEMENT_REQUEST_TO_JOIN_SPACE_BTN.replace("${space}", space));
+    ELEMENT_SPACES_LIST.find(byText(space)).parent().parent().parent().parent().find(ELEMENT_SPACE_ACCESS_REQUEST_JOIN_BTN).click();
     if (isVerify.length > 0) {
       evt.waitForAndGetElement(ELEMENT_REQUEST_PENDING.replace("${space}", space), 2000, 1);
     }

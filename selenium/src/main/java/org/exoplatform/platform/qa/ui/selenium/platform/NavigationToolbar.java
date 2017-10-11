@@ -598,8 +598,8 @@ public class NavigationToolbar {
     info("Go to Intranet Notification");
     testBase.getExoWebDriver().getWebDriver().navigate().refresh();
 
-    evt.click(ELEMENT_INTRANET_NOTIFICATION_BELL);
-    evt.waitForAndGetElement(ELEMENT_NOTIFICATION_DROPDOWN);
+    $(ELEMENT_INTRANET_NOTIFICATION_BELL).click();
+    $(ELEMENT_NOTIFICATION_DROPDOWN).waitUntil(Condition.appears,Configuration.timeout);
     info("The elemnt is shown successfully");
   }
 
