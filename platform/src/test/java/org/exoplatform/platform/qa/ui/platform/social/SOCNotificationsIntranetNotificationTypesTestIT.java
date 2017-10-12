@@ -18,7 +18,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.refresh;
@@ -27,7 +27,10 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_ALERT_NOTIFICATION;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_BUTTON_ACCEPT_INVITATION_IN_NOTIFICATION;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_BUTTON_CANCEL_INVITATION_IN_NOTIFICATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_NOTIFICATION_DROPDOWN;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_CONTENT_NAME_PROFILE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
@@ -449,7 +452,172 @@ String password="123456";
 		addUsers.deleteUser(username3);
 		addUsers.deleteUser(username4);
 
+	}
+	/**
+	 *<li> Case ID:122982.</li>
+	 *<li> Test Case Name: Connection Request Intranet notification (Accept).</li>
+	 */
+	@Test
+	public  void test04_ConnectionRequestIntranetNotification_Accept() {
+		//Setup data test
+		String username1 = "usernamea" + getRandomString();
+		String email1 = username1+ "@test.com";
+		String username2 ="usernameb" + getRandomString();
+		String email2 = username2+ "@test.com";
+		String password="123456";
+		/*Precondition:
+		 	- The notification "Someone sends me a connection request" is activated in User Settings
+			- User A sent a connection request to User B*/
+		info("Add a user");
+		navigationToolbar.goToAddUser();
+		addUsers.addUser(username1, password, email1, username1, username1);
+		addUsers.addUser(username2, password, email2, username2, username2);
+		manageLogInOut.signIn(username1, password);
+		info ("Connect with user");
+		homePagePlatform.goToConnections();
+		connectionsManagement.connectToAUser(username2);
 
+
+		/*Step Number: 1
+		 *Step Name: Step 1: Check notification list
+		 *Step Description:
+			- Login with User B
+			- Click the notifications icon
+			- Check the notification list
+		 *Input Data:
+		 *Expected Outcome:
+			- The list includes a Connection Request notifications.*/
+		/*Step Number: 2
+		 *Step Name: Step 2: Check notification message
+		 *Step Description:
+			- Check the notification message
+		 *Input Data:
+		 *Expected Outcome:
+			- The notification message is :
+				- $AVATAR
+				- $USER wants to connect with you
+				- $DATE
+				- 2 actions : [Accept] | [Refuse]
+			Where :
+				- $AVATAR is thumbnail of User A
+				- $USER is User A
+				- $DATE is the date of the notification*/
+		info("Check connection request notification in notification list");
+		manageLogInOut.signIn(username2, password);
+		ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
+		ELEMENT_ALERT_NOTIFICATION.click();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1+" "+username1)).parent().shouldHave(Condition.text(username1+" "+username1+" wants to connect with you"));
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1+" "+username1)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_INVITATION_IN_NOTIFICATION).should(Condition.exist);
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1+" "+username1)).parent().parent().find(ELEMENT_BUTTON_CANCEL_INVITATION_IN_NOTIFICATION).should(Condition.exist);
+		/*Step Number: 3
+		 *Step Name: Step 3: Check notification area
+		 *Step Description:
+			- Click the notification area
+		 *Input Data:
+		 *Expected Outcome:
+			- User B is redirected to the profile of User A*/
+		/*Step Number: 4
+		 *Step Name: Step 4: Accept
+		 *Step Description:
+			- Click [Accept]
+		 *Input Data:
+		 *Expected Outcome:
+			- The connection request is accepted (User A and User B are connected)
+			- The notification message is updated to :
+				$AVATAR
+				You are connected with $USER
+				$DATE*/
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1+" "+username1)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_INVITATION_IN_NOTIFICATION).click();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1+" "+username1)).parent().shouldHave(Condition.text("You are connected with "+username1+" "+username1)).click();
+		ELEMENT_CONTENT_NAME_PROFILE.find(byText(username1 + " " + username1)).should(Condition.exist);
+		manageLogInOut.signIn(DATA_USER1,"gtngtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+		addUsers.deleteUser(username2);
+
+	}
+
+
+	/**
+	 *<li> Case ID:122983.</li>
+	 *<li> Test Case Name: Connection Request Intranet notification (Accept).</li>
+	 */
+	@Test
+	public  void test05_ConnectionRequestIntranetNotification_Refuse() {
+		//Setup data test
+		String username1 = "usernamea" + getRandomString();
+		String email1 = username1+ "@test.com";
+		String username2 ="usernameb" + getRandomString();
+		String email2 = username2+ "@test.com";
+		String password="123456";
+		/*Precondition:
+		 	- The notification "Someone sends me a connection request" is activated in User Settings
+			- User A sent a connection request to User B*/
+		info("Add a user");
+		navigationToolbar.goToAddUser();
+		addUsers.addUser(username1, password, email1, username1, username1);
+		addUsers.addUser(username2, password, email2, username2, username2);
+		manageLogInOut.signIn(username1, password);
+		info ("Connect with user");
+		homePagePlatform.goToConnections();
+		connectionsManagement.connectToAUser(username2);
+
+
+		/*Step Number: 1
+		 *Step Name: Step 1: Check notification list
+		 *Step Description:
+			- Login with User B
+			- Click the notifications icon
+			- Check the notification list
+		 *Input Data:
+		 *Expected Outcome:
+			- The list includes a Connection Request notifications.*/
+		/*Step Number: 2
+		 *Step Name: Step 2: Check notification message
+		 *Step Description:
+			- Check the notification message
+		 *Input Data:
+		 *Expected Outcome:
+			- The notification message is :
+				- $AVATAR
+				- $USER wants to connect with you
+				- $DATE
+				- 2 actions : [Accept] | [Refuse]
+			Where :
+				- $AVATAR is thumbnail of User A
+				- $USER is User A
+				- $DATE is the date of the notification*/
+		info("Check connection request notification in notification list");
+		manageLogInOut.signIn(username2, password);
+		ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
+		ELEMENT_ALERT_NOTIFICATION.click();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1+" "+username1)).parent().shouldHave(Condition.text(username1+" "+username1+" wants to connect with you"));
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1+" "+username1)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_INVITATION_IN_NOTIFICATION).should(Condition.exist);
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1+" "+username1)).parent().parent().find(ELEMENT_BUTTON_CANCEL_INVITATION_IN_NOTIFICATION).should(Condition.exist);
+		/*Step Number: 3
+		 *Step Name: Step 3: Check notification area
+		 *Step Description:
+			- Click the notification area
+		 *Input Data:
+		 *Expected Outcome:
+			- User B is redirected to the profile of User A*/
+		/*Step Number: 4
+		 *Step Name: Step 4: Accept
+		 *Step Description:
+			- Click [Accept]
+		 *Input Data:
+		 *Expected Outcome:
+			- The connection request is accepted (User A and User B are connected)
+			- The notification message is updated to :
+				$AVATAR
+				You are connected with $USER
+				$DATE*/
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1+" "+username1)).parent().parent().find(ELEMENT_BUTTON_CANCEL_INVITATION_IN_NOTIFICATION).click();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1+" "+username1)).parent().shouldNot(Condition.exist);
+		manageLogInOut.signIn(DATA_USER1,"gtngtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+		addUsers.deleteUser(username2);
 
 	}
 }
