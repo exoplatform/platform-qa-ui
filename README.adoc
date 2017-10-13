@@ -183,3 +183,100 @@ mvncw  clean verify -Prun-its,grid \
     -Dselenide.browser=chrome  \
     -Dselenide.timeout=20000
 ----
+
+== Data for sniff tests
+
+Data for sniff tests, such as Office documents or images, are stored in https://github.com/exoplatform/platform-qa-ui-data[a dedicated Github repository].
+These data are included in the project `platform-qa-ui` thanks to https://git-scm.com/docs/git-submodule[Git submodules].
+
+All data pushed in the project `platform-qa-ui-data` are available in the folder `platform/src/test/resources/data` of the project `platform-qa-ui`, 
+with the same path.
+For example the file `forum/topic_attachment.txt` of the project `platform-qa-ui-data` is available 
+at `platform/src/test/resources/data/forum/topic_attachment.txt` in the project `platform-qa-ui`.
+
+=== Getting started
+
+The first time the submodule is used (after a git clone for example), the submodule must be initialized.
+Run the following commands at the root level of the project `platform-qa-ui`:
+[source,shell]
+----
+git submodule init
+git submodule update
+----
+
+You should now see the data files in the folder `platform/src/test/resources/data`.
+
+=== How to add new files ?
+
+The parent project is not aware of changes done in the submodule project automatically.
+Each time new files are pushed in the submodule project, an update must be explicitly done on parent project.
+
+NOTE: It is important to understand that the link between the parent project and the submodule is based on a *commit id*,
+not on a branch or a tag. And this commit id in stored in the git index files of parent project.
+So if new files are committed and pushed in the submodule project, if nothing is done on parent project and
+if you run again a `git submodule update`, new files will not come up.
+You have to add the option `--remote` to fetch the latest changes of the submodule.
+
+So here is how you basically add new files and use them:
+
+* commit new files in the project `platform-qa-ui-data`
+* in the project `platform-qa-ui`, at the root level, run
+[source,shell]
+----
+git submodule update --remote
+----
+
+At this point, you should see the new files from `platform-qa-ui-data`.
+You will notice that the working dir in not clean anymore, there are some uncommitted changes. Example:
+
+$ git status
+On branch feature/external-data-sets
+Your branch is up-to-date with 'origin/feature/external-data-sets'.
+[source,shell]
+----
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   platform/src/test/resources/data (new commits)
+
+no changes added to commit (use "git add" and/or "git commit -a")
+----
+
+Since we pulled the latest changes from the branch and not from the linked commit id of the submodule,
+the commits ids are not the same, which explains the status message.
+You must commit these changes (you probably want to do it as part of the fix/improvements you are working on). 
+
+=== How to add new files in branches/PR ?
+
+If you want to add new files as part of new branches/PR, the new branch must be created in both project and the submodule configuration must be updated.
+Here are the steps to follow:
+
+* in the project `platform-qa-ui-data`, create the new branch and push it:
+[source,shell]
+----
+git checkout -b new-branch
+git push -u origin new-branch
+----
+* create any new files and push them
+
+* in the project `platform-qa-ui`, create the new branch and push it:
+[source,shell]
+----
+git checkout -b new-branch
+git push -u origin new-branch
+----
+* update the value of branch attribute in the file `.gitmodules` with the name of the new branch:
+[source,shell]
+----
+[submodule "platform/src/test/resources/data"]
+        path = platform/src/test/resources/data
+        url = git@github.com:exoplatform/platform-qa-ui-data.git
+        branch = new-branch
+----
+WARNING: do not commit and push that change. It is only used during the branch life and must not be merged in master branch.
+* update the submodule:
+[source,shell]
+----
+git submodule update --remote
+----
