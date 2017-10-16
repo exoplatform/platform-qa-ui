@@ -20,6 +20,7 @@
  */
 package org.exoplatform.platform.qa.ui.commons;
 
+import com.codeborne.selenide.Screenshots;
 import org.exoplatform.platform.qa.ui.core.context.Smoke;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.junit.jupiter.api.AfterEach;
@@ -42,7 +43,14 @@ public class Base extends TestBase {
 
   }
 
-   @BeforeEach
+  @BeforeEach
+  public void beforeEach(TestInfo testInfo) {
+    // Set context from better naming of screenshots in case of test failure
+    Screenshots.startContext(testInfo.getTestClass().get().getName(), testInfo.getTestMethod().get().getName());
+
+    openPlatform(testInfo);
+  }
+
   public void openPlatform(TestInfo testInfo) {
     Platform plf = new Platform();
     plf.open();
@@ -54,8 +62,10 @@ public class Base extends TestBase {
   }
 
   @AfterEach
-  public void signout() {
+  public void afterEach() {
     ManageLogInOut manageLogInOut=new ManageLogInOut(this);
     manageLogInOut.signOut();
+
+    Screenshots.finishContext();
   }
 }
