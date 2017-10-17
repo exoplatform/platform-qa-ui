@@ -42,15 +42,7 @@ public class Base extends TestBase {
 
   }
 
-  @AfterEach
-  public void signout() {
-    ManageLogInOut manageLogInOut;
-    manageLogInOut=new ManageLogInOut(this);
-    manageLogInOut.signOut();
-  }
-
-  
-  @BeforeEach
+   @BeforeEach
   public void openPlatform(TestInfo testInfo) {
     Platform plf = new Platform();
     plf.open();
@@ -59,5 +51,11 @@ public class Base extends TestBase {
     if (testInfo.getTags().contains(Smoke.class.getSimpleName().toLowerCase())){
       plf.ensureLicenseIsAccepted().ensureRegisterSoftwareIsSkipped().ensureAccountSetupIsSkipped().ensureUserIsLoggedIn();
     }
+  }
+
+  @AfterEach
+  public void signout() {
+    ManageLogInOut manageLogInOut; manageLogInOut=new ManageLogInOut(this);
+    manageLogInOut.signOut();
   }
 }
