@@ -55,7 +55,7 @@ public class Base extends TestBase {
 
   @AfterEach
   public void signout() {
-    ManageLogInOut manageLogInOut; manageLogInOut=new ManageLogInOut(this);
+    ManageLogInOut manageLogInOut=new ManageLogInOut(this);
     manageLogInOut.signOut();
   }
 }
