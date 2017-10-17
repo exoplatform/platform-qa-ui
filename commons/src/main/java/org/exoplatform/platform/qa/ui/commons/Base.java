@@ -21,6 +21,8 @@
 package org.exoplatform.platform.qa.ui.commons;
 
 import org.exoplatform.platform.qa.ui.core.context.Smoke;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -40,6 +42,14 @@ public class Base extends TestBase {
 
   }
 
+  @AfterEach
+  public void signout() {
+    ManageLogInOut manageLogInOut;
+    manageLogInOut=new ManageLogInOut(this);
+    manageLogInOut.signOut();
+  }
+
+  
   @BeforeEach
   public void openPlatform(TestInfo testInfo) {
     Platform plf = new Platform();
