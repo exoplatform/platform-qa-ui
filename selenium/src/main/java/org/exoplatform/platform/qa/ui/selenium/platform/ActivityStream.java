@@ -10,6 +10,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.awt.*;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -775,8 +776,6 @@ public class ActivityStream {
     // click on the button comment
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(textContent)).should(Condition.exist);
-    info("The comment is added successfully");
-
     info("The comment is added successfully");
   }
 

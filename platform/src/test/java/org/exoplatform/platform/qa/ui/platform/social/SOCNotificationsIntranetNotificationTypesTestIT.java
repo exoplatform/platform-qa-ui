@@ -7,18 +7,15 @@ import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
-import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
-import org.exoplatform.platform.qa.ui.social.pageobject.IntranetNotification;
-import org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting;
-import org.exoplatform.platform.qa.ui.social.pageobject.NotificationActivity;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
+import org.exoplatform.platform.qa.ui.social.pageobject.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-import static com.codeborne.selenide.Condition.exist;
-import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -29,7 +26,9 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ICON_LIKE_ACTIVITY;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_PUBLICATION_ACTIVITYTEXT_CONNECTED;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_ALERT_NOTIFICATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_BUTTON_ACCEPT_INVITATION_IN_NOTIFICATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_BUTTON_CANCEL_INVITATION_IN_NOTIFICATION;
@@ -50,6 +49,8 @@ HomePagePlatform homePagePlatform;
 ActivityStream activityStream;
 IntranetNotification intranetNotification;
 NotificationActivity notificationActivity;
+SpaceManagement spaceManagement;
+UserPageBase userPageBase;
 
 	@BeforeEach
 	public void setupBeforeMethod() {
@@ -63,6 +64,8 @@ NotificationActivity notificationActivity;
 	activityStream=new ActivityStream(this);
 	intranetNotification=new IntranetNotification(this);
 	notificationActivity=new NotificationActivity(this);
+	spaceManagement=new SpaceManagement(this);
+	userPageBase=new UserPageBase(this);
 		if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
 			$(ELEMENT_SKIP_BUTTON).click();
 		}
@@ -993,7 +996,47 @@ String password="123456";
 	 *<li> Case ID:122995.</li>
 	 *<li> Test Case Name: Mention Intranet notifications (in activity message).</li>
 	 * @throws AWTException
-	 */
+	 Precondition:
+		 	- User A has mentioned User B directly in the activity message*
+	*Step Number: 1
+		 *Step Name: Step 1:
+		 *Step Description:
+			- Login with User B
+			- Click the notification icons in the top navigation
+			- Check the notification list
+		 *Input Data:
+		 *Expected Outcome:
+			- The Mention notification is displayed in the list
+			- The notification message is : $AVATAR
+				$USER has mentioned you $ACTIVITY
+				$DATE
+			Where :
+				- $AVATAR is the thumbnail of User A
+				- $USER is User A
+				- $ACTIVITY is the activity title/message
+				- $DATE is the date of the notification*
+	*Step Number: 2
+		 *Step Name: Step 2:
+		 *Step Description:
+			- Click the notification message
+		 *Input Data:
+		 *Expected Outcome:
+			- The activity is displayed in the activity viewer with all comments expanded.*
+	*Step Number: 3
+		 *Step Name: Step 3:
+		 *Step Description:
+			- Click [View All]
+		 *Input Data:
+		 *Expected Outcome:
+			- The activity is displayed in View All page
+			- The notification message is : $AVATAR
+				$USER has mentioned you $ACTIVITY
+				$DATE
+			Where :
+				- $AVATAR is the thumbnail of User A
+				- $USER is User A
+				- $ACTIVITY is the activity title/message
+				- $DATE is the date of the notification.*/
 	@Test
 	public  void test09_MentionIntranetNotification_InactivityMessage() throws AWTException {
 		String activity = "activity" + getRandomNumber();
@@ -1010,8 +1053,7 @@ String password="123456";
 		addUsers.addUser(username2, password, email2, username2, username2);
 		manageLogInOut.signIn(username1, password);
 
-		/*Precondition:
-		 	- User A has mentioned User B directly in the activity message*/
+
 
 		info ("Connect with user");
 		homePagePlatform.goToConnections();
@@ -1029,7 +1071,38 @@ String password="123456";
 		activityStream.mentionUserActivity(username1, activity);
 		activityStream.checkActivity(activity);
 
-		/*Step Number: 1
+
+		info ("Check Mention Intranet Notification in notification list");
+		manageLogInOut.signIn(username1,password);
+		ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
+		ELEMENT_ALERT_NOTIFICATION.click();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username2+" "+username2)).parent().shouldHave(text(username2+" "+username2+" has mentioned you."));
+
+
+		info("check notification in activity viewer");
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username2+" "+username2)).parent().click();
+		$(byClassName("uiActivityLoader")).find(byText(username1+" "+username1)).parent().shouldHave(Condition.text(username1+" "+username1+" "+activity));
+		$(byClassName("uiActivityLoader")).find(byText(username1+" "+username1)).parent().parent().parent().find(byText(username2+" "+username2)).should(exist);
+
+		info("Check notification in view all");
+		refresh();
+		navigationToolbar.goToIntranetNotification();
+		intranetNotification.goToAllNotification();
+		$(byId("UIIntranetNotificationsPortlet")).find(byText(username1+" "+username1)).parent().shouldHave(Condition.text(username1+" "+username1+" "+activity));
+		$(byId("UIIntranetNotificationsPortlet")).find(byText(username1+" "+username1)).parent().parent().parent().find(byText(username2+" "+username2)).should(exist);
+		manageLogInOut.signIn(DATA_USER1,"gtngtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+		addUsers.deleteUser(username2);
+	}
+	/**
+	 *<li> Case ID:122996.</li>
+	 *<li> Test Case Name: Mention Intranet notifications (in comment).</li>
+	 * @throws AWTException
+	Precondition:
+		 	- A wiki activity is generated (create a new page) or a content activity or an event activity
+			- User A has mentioned User B directly in a comment
+	*Step Number: 1
 		 *Step Name: Step 1:
 		 *Step Description:
 			- Login with User B
@@ -1044,50 +1117,287 @@ String password="123456";
 			Where :
 				- $AVATAR is the thumbnail of User A
 				- $USER is User A
-				- $ACTIVITY is the activity title/message
-				- $DATE is the date of the notification*/
-		info ("Check Mention Intranet Notification in notification list");
-		manageLogInOut.signIn(username1,password);
-		ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
-		ELEMENT_ALERT_NOTIFICATION.click();
-		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username2+" "+username2)).parent().shouldHave(text(username2+" "+username2+" has mentioned you."));
-
-		/*Step Number: 2
+				- $ACTIVITY is the name of the wiki page
+				- $DATE is the date of the notification.
+		*Step Number: 2
 		 *Step Name: Step 2:
 		 *Step Description:
-			- Click the notification message
+			- Click the notification
 		 *Input Data:
 		 *Expected Outcome:
-			- The activity is displayed in the activity viewer with all comments expanded.*/
-		info("check notification in activity viewer");
-		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username2+" "+username2)).parent().click();
-		$(byClassName("uiActivityLoader")).find(byText(username1+" "+username1)).parent().shouldHave(Condition.text(username1+" "+username1+" "+activity));
-		$(byClassName("uiActivityLoader")).find(byText(username1+" "+username1)).parent().parent().parent().find(byText(username2+" "+username2)).should(exist);
-		/*Step Number: 3
+			- The activity is displayed in the activity viewer with all comments expanded. As the mention is made in a comment, this comment is highlighted.
+Step Number: 3
 		 *Step Name: Step 3:
 		 *Step Description:
-			- Click [View All]
+			- Go to [View All]
 		 *Input Data:
 		 *Expected Outcome:
-			- The activity is displayed in View All page
+			- The Mention notification is displayed in the page View All
 			- The notification message is : $AVATAR
 				$USER has mentioned you $ACTIVITY
 				$DATE
 			Where :
 				- $AVATAR is the thumbnail of User A
 				- $USER is User A
-				- $ACTIVITY is the activity title/message
+				- $ACTIVITY is the name of the wiki page
 				- $DATE is the date of the notification.*/
-		info("Check notification in view all");
-		refresh();
-		navigationToolbar.goToIntranetNotification();
-		intranetNotification.goToAllNotification();
-		$(byId("UIIntranetNotificationsPortlet")).find(byText(username1+" "+username1)).parent().shouldHave(Condition.text(username1+" "+username1+" "+activity));
-		$(byId("UIIntranetNotificationsPortlet")).find(byText(username1+" "+username1)).parent().parent().parent().find(byText(username2+" "+username2)).should(exist);
+	@Test
+	public  void test10_MentionIntranetNotification_InComment()  {
+		String activity = "activity" + getRandomNumber();
+		String comment = "comment" + getRandomNumber();
+
+		String username1 = "usernamea" + getRandomString();
+		String email1 = username1+ "@test.com";
+		String username2 = "usernameb" + getRandomString();
+		String email2 = username2+ "@test.com";
+		String password="123456";
+
+		info("Add user");
+		navigationToolbar.goToAddUser();
+		addUsers.addUser(username1, password, email1, username1, username1);
+		addUsers.addUser(username2, password, email2, username2, username2);
+		manageLogInOut.signIn(username1, password);
+		info("Enable the notifications");
+		navigationToolbar.goToMyNotifications();
+		myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.AS_Mention_intranet);
+		info ("Connect with user");
+		executeJavaScript("window.scrollBy(0,-5500)","");
+		homePagePlatform.goToConnections();
+		connectionsManagement.connectToAUser(username2);
+		info("User accepts Request notification and mention John in comment");
+		manageLogInOut.signIn(username2, password);
+		homePagePlatform.goToConnections();
+		connectionsManagement.acceptAConnection(username1);
+		homePagePlatform.goToHomePage();
+		activityStream.addActivity(activity, "");
+		activityStream.checkActivity(activity);
+		activityStream.addCommentWithMentionUser(activity,username1, comment);
+		info ("Check Mention Intranet Notification in notification list");
+		manageLogInOut.signIn(username1, password);
+		ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
+		ELEMENT_ALERT_NOTIFICATION.click();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username2+" "+username2)).parent().shouldHave(text(username2+" "+username2+" has mentioned you."));
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username2+" "+username2)).parent().click();
+		$(byClassName("uiActivityLoader")).find(byText(username1+" "+username1)).parent().shouldHave(Condition.text(username1+" "+username1+" "+comment));
+
+
+		for(int i=0;i<=100;i++){
+			navigationToolbar.goToIntranetNotification();
+			if($(ELEMENT_NOTIFICATION_DROPDOWN).is(visible)){
+				intranetNotification.goToAllNotification();
+				break;
+			}
+		}
+		$(byId("UIIntranetNotificationsPortlet")).find(byText(activity)).should(exist);
 		manageLogInOut.signIn(DATA_USER1,"gtngtn");
 		navigationToolbar.goToManageCommunity();
 		addUsers.deleteUser(username1);
 		addUsers.deleteUser(username2);
+	}
+	/**
+	 *<li> Case ID:121937.</li>
+	 *<li> Test Case Name: Relation Activity.</li>
+	 *<li> Pre-Condition: </li>
+	 *<li> Post-Condition: </li>
+	 *Step Number: 1
+		 *Step Name: - Invite another user
+		 *Step Description:
+			- Login with User A and go to Intranet
+			- Go to Connections
+			- Find user B and send a request
+		 *Input Data:
 
+		 *Expected Outcome:
+			- Request is sent to the user B*
+
+		*Step number: 2
+		 *Step Name: - Accept request
+		 *Step Description:
+			- Login as user B and goto my Connection
+			- Accept the request from user A
+		 *Input Data:
+
+		 *Expected Outcome:
+			- A Relation activity is displayed to the activity stream*/
+
+	@Test
+	public  void test19_RelationActivity() {
+		info("Test 19 Relation Activity");
+		String username = "username" + getRandomString();
+		String email = username+"@test.com";
+		String username1 = "usernamea" + getRandomString();
+		String email1 = username1+"@test.com";
+		String password="123456";
+
+		info("Add new user");
+		navigationToolbar.goToAddUser();
+		addUsers.addUser(username, password, email, username, username);
+		addUsers.addUser(username1, password, email1, username1, username1);
+
+		manageLogInOut.signIn(username,password);
+
+		homePagePlatform.goToConnections();
+		connectionsManagement.connectToAUser(username1);
+
+		manageLogInOut.signIn(username1,password);
+		homePagePlatform.goToConnections();
+		connectionsManagement.acceptAConnection(username);
+		homePagePlatform.goToHomePage();
+		$(byText("I'm now connected with 1 user(s)")).parent().find(byText(username+" "+username)).should(exist);
+		manageLogInOut.signIn(DATA_USER1,"gtngtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username);
+		addUsers.deleteUser(username1);
+	}
+	/**
+	 *<li> Case ID:121938.</li>
+	 *<li> Test Case Name: Create a new space.</li>
+	 *<li> Pre-Condition: </li>
+	 *<li> Post-Condition: </li>
+	 *
+	 Step Number: 1
+		 *Step Name: - Create a new Space
+		 *Step Description:
+			- Goto homepage
+			- Click [Join a space] on left Navigation
+			- Click [Add new space] button
+			- Fill the information and click create
+			- Check homepage
+		 *Input Data:
+
+		 *Expected Outcome:
+			- a new space is created
+			- an activity is added into activity stream
+			- Informations displayed in the featured content are :
+			1. Space's avatar
+			2. Space's description
+			3. Number of members.*/
+	@Test
+	public  void test20_CreateASpace() {
+		info("Test 20 Create a new space");
+
+		String space = "space"+getRandomNumber();
+		String contentSpace="contentSpace"+getRandomNumber();
+
+
+		homePagePlatform.goToHomePage();
+		homePagePlatform.goToMySpaces();
+		spaceManagement.addNewSpaceSimple(space,contentSpace);
+		homePagePlatform.goToHomePage();
+		activityStream.checkActivity(contentSpace);
+		$(byText(contentSpace)).parent().parent().find(byAttribute("alt",space)).should(exist);
+		$(byText(contentSpace)).parent().parent().find(byText("1 Member")).should(exist);
+		homePagePlatform.goToMySpaces();
+		spaceManagement.deleteSpace(space,false);
+	}
+
+	/**
+	 *<li> Case ID:123003.</li>
+	 *<li> Test Case Name: Post on my Stream Intranet notification.</li>
+	 Precondition:
+		 	- User A has posted an activity on User B activity stream
+			- The notification "Someone posts a message on my activity stream" is activated in the user settings
+	*Step Number: 1
+		 *Step Name: Step 1: Check notification list
+		 *Step Description:
+			- Login with User B
+			- Click the notifications icon in the top navigation
+			- Check the notifications list
+		 *Input Data:
+		 *Expected Outcome:
+			- A Post on my Stream notifications is displayed in the list
+			- The notification message is :
+				$AVATAR
+				$USER has posted on your activity stream
+				$ACTIVITY
+				$DATE
+			Where :
+				- $AVATAR is the thumbnail of User A
+				- $USER is User A
+				- $ACTIVITY is the activity title / message
+				- $DATE is the date of the notification.*
+	*Step Number: 2
+		 *Step Name: Step 2: Click notification message
+		 *Step Description:
+			- Click the notification message
+		 *Input Data:
+		 *Expected Outcome:
+			- The activity is displayed in the activity viewer with all comments expanded.*
+	*Step Number: 3
+		 *Step Name: Step 3: Check View All
+		 *Step Description:
+			-  Click [View All] in the notification list
+		 *Input Data:
+		 *Expected Outcome:
+			- A Post on my Stream notifications is displayed in View All page
+			- The notification message is :
+				$AVATAR
+				$USER has posted on your activity stream
+				$ACTIVITY
+				$DATE
+			Where :
+				- $AVATAR is the thumbnail of User A
+				- $USER is User A
+				- $ACTIVITY is the activity title / message
+				- $DATE is the date of the notification*/
+	@Test
+	public  void test11_PostOnMyStreamIntranetNotification() {
+		String activity = "activity" + getRandomNumber();
+
+		String username1 = "usernamea" + getRandomString();
+		String email1 = username1+ "@test.com";
+		String username2 = "usernameb" + getRandomString();
+		String email2 = username2+ "@test.com";
+		String password="123456";
+
+		info("Add user");
+		navigationToolbar.goToAddUser();
+		addUsers.addUser(username1, password, email1, username1, username1);
+		addUsers.addUser(username2, password, email2, username2, username2);
+		manageLogInOut.signIn(username1, password);
+
+		info("Enable the notifications");
+		navigationToolbar.goToMyNotifications();
+		myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.AS_Post_intranet);
+
+		info ("Connect with user");
+		executeJavaScript("window.scrollBy(0,-5500)","");
+		homePagePlatform.goToConnections();
+		connectionsManagement.connectToAUser(username2);
+
+		info("User accepts Request notification and post an activity in John's activity stream");
+		manageLogInOut.signIn(username2, password);
+		homePagePlatform.goToConnections();
+		connectionsManagement.acceptAConnection(username1);
+		connectionsManagement.goToUserByFullName(username1+" "+username1);
+		userPageBase.goToActivityTab();
+		activityStream.addActivity(activity, "");
+		activityStream.checkActivity(activity);
+
+
+		info ("Check Notification in notification list");
+		manageLogInOut.signIn(username1, password);
+		ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
+		ELEMENT_ALERT_NOTIFICATION.click();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username2+" "+username2)).parent().shouldHave(text(username2+" "+username2+" has posted on your activity stream."));
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username2+" "+username2)).parent().click();
+
+		info("Check in activity viewer");
+		$(byText(activity)).should(exist);
+
+		info("Check notification in view all");
+		for(int i=0;i<=100;i++){
+			navigationToolbar.goToIntranetNotification();
+			if($(ELEMENT_NOTIFICATION_DROPDOWN).is(visible)){
+				intranetNotification.goToAllNotification();
+				break;
+			}
+		}
+		$(byText(activity)).parent().parent().parent().find(byText(username2+" "+username2)).should(exist);
+		$(byText(activity)).parent().parent().parent().parent().parent().find(byAttribute("alt",username2+" "+username2)).should(exist);
+		manageLogInOut.signIn(DATA_USER1,"gtngtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+		addUsers.deleteUser(username2);
 	}
 }

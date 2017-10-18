@@ -6,6 +6,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_CONTENT_NAME_PROFILE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_NAME_OF_PROFILE_TOP_LEFT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -252,9 +253,8 @@ public class ConnectionsManagement {
   public void goToUserByFullName(String fullName) {
     info("Go to User profile page");
     searchPeople(fullName, "", "", "");
-    evt.click(ELEMENT_USER_AVATAR.replace("${fullname}", fullName));
-    evt.waitForAndGetElement(ELEMENT_NAME_OF_PROFILE_TOP_LEFT.replace("${name}", fullName));
-  }
+    ELEMENT_CONTENT_PEOPLE.find(byText(fullName)).click();
+    ELEMENT_CONTENT_NAME_PROFILE.find(byText(fullName)).should(Condition.exist);  }
 
   /**
    * Go to User

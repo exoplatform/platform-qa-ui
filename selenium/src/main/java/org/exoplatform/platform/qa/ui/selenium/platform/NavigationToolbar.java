@@ -596,7 +596,6 @@ public class NavigationToolbar {
   public void goToIntranetNotification() {
     info("Go to Intranet Notification");
     $(ELEMENT_INTRANET_NOTIFICATION_BELL).click();
-    $(ELEMENT_NOTIFICATION_DROPDOWN).waitUntil(Condition.appears,Configuration.timeout);
     info("The elemnt is shown successfully");
   }
 
