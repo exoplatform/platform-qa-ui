@@ -7,7 +7,9 @@ import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
 import org.exoplatform.platform.qa.ui.social.pageobject.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -51,7 +53,8 @@ IntranetNotification intranetNotification;
 NotificationActivity notificationActivity;
 SpaceManagement spaceManagement;
 UserPageBase userPageBase;
-
+SpaceHomePage spaceHomePage;
+SpaceSettingManagement spaceSettingManagement;
 	@BeforeEach
 	public void setupBeforeMethod() {
 		info("Start setUpBeforeMethod");
@@ -66,6 +69,8 @@ UserPageBase userPageBase;
 	notificationActivity=new NotificationActivity(this);
 	spaceManagement=new SpaceManagement(this);
 	userPageBase=new UserPageBase(this);
+	spaceHomePage=new SpaceHomePage(this);
+	spaceSettingManagement=new SpaceSettingManagement(this);
 		if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
 			$(ELEMENT_SKIP_BUTTON).click();
 		}
@@ -1400,4 +1405,126 @@ Step Number: 3
 		addUsers.deleteUser(username1);
 		addUsers.deleteUser(username2);
 	}
+
+	/**
+	 *<li> Case ID:123004.</li>
+	 *<li> Test Case Name: Post on my Space Intranet notification.</li>
+	Precondition:
+		 	- User A and User B are members of Space 1
+			- User B has posted in Space 1
+			- The notification "An activity is posted on one of my spaces" is activated in the user settings*
+			*Step Number: 1
+		 *Step Name: Step 1: Check notification list
+		 *Step Description:
+			- Login with User B
+			- Click the notifications icon in the top navigation
+			- Check the notifications list
+		 *Input Data:
+		 *Expected Outcome:
+			- A Post on my Space notifications is displayed in the list
+			- The notification message is :
+				$AVATAR
+				$USER has posted an activity in the $SPACE space.
+				$ACTIVITY
+				$DATE
+			Where :
+				- $AVATAR is the thumbnail of User B
+				- $USER is User B
+				- $SPACE is Space 1
+				- $ACTIVITY is the activity title / message
+				- $DATE is the date of the notification
+
+		Step Number: 2
+		 *Step Name: Step 2: Check notification message
+		 *Step Description:
+			- Check the notification message
+		 *Input Data:
+		 *Expected Outcome:
+			- The activity is displayed in the activity viewer with all comments expanded.
+			Step Number: 3
+		 *Step Name: Step 3: Check View All
+		 *Step Description:
+			- Click [View All] in the notifications list
+		 *Input Data:
+		 *Expected Outcome:
+			- A Post on my Space notifications is displayed in the View All page
+			- The notification message is :
+				$AVATAR
+				$USER has posted an activity in the $SPACE space.
+				$ACTIVITY
+				$DATE
+			Where :
+				- $AVATAR is the thumbnail of User B
+				- $USER is User B
+				- $SPACE is Space 1
+				- $ACTIVITY is the activity title / message
+				- $DATE is the date of the notification*/
+	@Test
+	public  void test12_PostOnMySpaceIntranetNotification() {
+		//Setup data test
+		String space = "space" + getRandomNumber();
+		String activity = "activity" + getRandomNumber();
+
+		String username1 = "usernamea" + getRandomString();
+		String email1 = username1+ "@test.com";
+		String username2 = "usernameb" + getRandomString();
+		String email2 = username2+ "@test.com";
+		String password="123456";
+		info("Add user");
+		navigationToolbar.goToAddUser();
+		addUsers.addUser(username1, password, email1, username1, username1);
+		addUsers.addUser(username2, password, email2, username2, username2);
+		manageLogInOut.signIn(username1, password);
+
+		info("Enable the notifications");
+		navigationToolbar.goToMyNotifications();
+		myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.Space_Post_intranet);
+
+
+
+		info("Add new space and ivite user");
+		homePagePlatform.goToAllSpace();
+		spaceManagement.goToCreateSpace();
+		spaceManagement.addNewSpaceSimple(space, space);
+		spaceHomePage.goToSpaceSettingTab();
+		spaceSettingManagement.inviteUser(username2,false,"");
+
+		info("User accepts Request notification and mention John in activity");
+		manageLogInOut.signIn(username2, password);
+		homePagePlatform.goToAllSpace();
+		spaceManagement.acceptAInvitation(space);
+
+		info("user posted an activity inspace");
+		activityStream.addActivity(activity, "");
+		activityStream.checkActivity(activity);
+
+
+		info ("Check Notification in notification list");
+		manageLogInOut.signIn(username1, password);
+		ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
+		ELEMENT_ALERT_NOTIFICATION.click();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).parent().shouldHave(text(username2+" "+username2+" has posted an activity in the "+space+" space."));
+
+
+		info("check notification in activity viewer");
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).click();
+		$(byText(activity)).should(exist);
+		refresh();
+
+		info("Check in view all");
+		for(int i=0;i<=100;i++){
+			navigationToolbar.goToIntranetNotification();
+			if($(ELEMENT_NOTIFICATION_DROPDOWN).is(visible)){
+				intranetNotification.goToAllNotification();
+				break;
+			}
+		}
+		$(byId("UIIntranetNotificationsPortlet")).find(byText(space)).parent().shouldHave(text(username2+" "+username2+" has posted an activity in the "+space+" space."));
+		manageLogInOut.signIn(DATA_USER1,"gtngtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+		addUsers.deleteUser(username2);
+
+	}
+
 }
