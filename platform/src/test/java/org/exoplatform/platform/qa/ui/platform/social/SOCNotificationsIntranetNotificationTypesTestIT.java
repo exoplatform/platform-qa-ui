@@ -1677,4 +1677,199 @@ Step Number: 3
 		addUsers.deleteUser(username1);
 		addUsers.deleteUser(username2);
 	}
+	/**
+	 *<li> Case ID:122986.</li>
+	 *<li> Test Case Name: Space Join Request Intranet notification (Accept).</li>
+	 */
+	@Test
+	public  void test15_SpaceJoinRequestIntranetNotification_Accept() {
+		String space = "space" + getRandomNumber();
+
+		String username1 ="usernamea" + getRandomString();
+		String email1 = username1+ "@test.com";
+		String username2 ="usernameb" + getRandomString();
+		String email2 = username2+ "@test.com";
+		String password="123456";
+
+		info("Add user");
+		navigationToolbar.goToAddUser();
+		addUsers.addUser(username1, password, email1, username1, username1);
+		addUsers.addUser(username2, password, email2, username2, username2);
+		manageLogInOut.signIn(username1, password);
+
+		info("Enable the notifications");
+		navigationToolbar.goToMyNotifications();
+		myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.Space_Join_Req_intranet);
+
+		/*Precondition:
+		 	- User A requested to join Space 1
+			- User B is manager of Space 1
+			- Space Join Request notification is activated in User's B settings*/
+		info("Add a new space");
+		homePagePlatform.goToAllSpace();
+		spaceManagement.goToCreateSpace();
+		spaceManagement.addNewSpaceSimple(space, space);
+
+		info("user requests to join space");
+		manageLogInOut.signIn(username2, password);
+		homePagePlatform.goToAllSpace();
+		spaceManagement.sendARequestToASpace(space);
+
+		/*Step Number: 1
+		 *Step Name: Step 1: check notification list
+		 *Step Description:
+			- Login with User B
+			- Click the notification icon
+			- Check the notification list
+		 *Expected Outcome:
+			- The Space Join Request notification is displayed in the list*/
+		/*Step Number: 2
+		 *Step Name: Step 2: Check content of notification
+		 *Step Description:
+			- Check the notification message
+		 *Expected Outcome:
+			- The notification message is :<br />- $AVATAR<br />- $USER has requested access to $SPACE space.<br />- [Accept] | [Refuse]<br />- $DATE<br /><br />Where : <br />- $AVATAR is the thumbnail of User A<br />- $USER is User A<br />- $DATE is the date of the notification*/
+		info("check notification in notification list");
+		manageLogInOut.signIn(username1, password);
+		ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
+		ELEMENT_ALERT_NOTIFICATION.click();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).parent().shouldHave(text(username2+" "+username2+" has requested access to "+space+" space."));
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_INVITATION).click();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).parent().shouldHave(text(username2+" "+username2+" joined "+space+" space."));
+		/*Step Number: 3
+		 *Step Name: Step 3: Accept from View all
+		 *Step Description:
+			- Click [View All] at the bottom of the notification list
+			- Click [Accept]
+		 *Expected Outcome:
+			- The request is accepted (User A is member of Space 1)
+			- The notification message is updated to :
+				$AVATAR
+				$USER joined $SPACE space.
+				$DATE*/
+		intranetNotification.goToAllNotification();
+		$(byId("UIIntranetNotificationsPortlet")).find(byText(space)).parent().shouldHave(text(username2+" "+username2+" joined "+space+" space."));
+		manageLogInOut.signIn(DATA_USER1,"gtngtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+		addUsers.deleteUser(username2);
+	}
+	/**
+	 *<li> Case ID:122987.</li>
+	 *<li> Test Case Name: Space Join Request Intranet notification (Refuse).</li>
+	 */
+	@Test
+	public  void test16_SpaceJoinRequestIntranetNotification_Refuse() {
+		String space = "space" + getRandomNumber();
+
+		String username1 ="usernamea" + getRandomString();
+		String email1 = username1+ "@test.com";
+		String username2 ="usernameb" + getRandomString();
+		String email2 = username2+ "@test.com";
+		String password="123456";
+
+		info("Add user");
+		navigationToolbar.goToAddUser();
+		addUsers.addUser(username1, password, email1, username1, username1);
+		addUsers.addUser(username2, password, email2, username2, username2);
+		manageLogInOut.signIn(username1, password);
+
+		info("Enable the notifications");
+		navigationToolbar.goToMyNotifications();
+		myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.Space_Join_Req_intranet);
+
+		/*Precondition:
+		 	- User A requested to join Space 1
+			- User B is manager of Space 1
+			- Space Join Request notification is activated in User's B settings*/
+		info("Add a new space");
+		homePagePlatform.goToAllSpace();
+		spaceManagement.goToCreateSpace();
+		spaceManagement.addNewSpaceSimple(space, space);
+
+		info("user requests to join space");
+		manageLogInOut.signIn(username2, password);
+		homePagePlatform.goToAllSpace();
+		spaceManagement.sendARequestToASpace(space);
+
+		/*Step Number: 1
+		 *Step Name: Step 1: check notification list
+		 *Step Description:
+			- Login with User B
+			- Click the notification icon
+			- Check the notification list
+		 *Expected Outcome:
+			- The Space Join Request notification is displayed in the list*/
+		/*Step Number: 2
+		 *Step Name: Step 2: Check content of notification
+		 *Step Description:
+			- Check the notification message
+		 *Expected Outcome:
+			- The notification message is :<br />- $AVATAR<br />- $USER has requested access to $SPACE space.<br />- [Accept] | [Refuse]<br />- $DATE<br /><br />Where : <br />- $AVATAR is the thumbnail of User A<br />- $USER is User A<br />- $DATE is the date of the notification*/
+		info("check notification in notification list");
+		manageLogInOut.signIn(username1, password);
+		ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
+		ELEMENT_ALERT_NOTIFICATION.click();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).parent().shouldHave(text(username2+" "+username2+" has requested access to "+space+" space."));
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).parent().parent().find(ELEMENT_BUTTON_CANCEL_INVITATION).click();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).shouldNot(exist);
+		manageLogInOut.signIn(DATA_USER1,"gtngtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+		addUsers.deleteUser(username2);
+	}
+	/**
+	 *<li> Case ID:122981.</li>
+	 *<li> Test Case Name: New User Intranet notification.</li>
+	 Precondition:
+		 	- The settings "Someone joins the social intranet" is activated in User Settings for User A
+			- A new user has joined the Intranet*/
+
+		/*Step Number: 1
+		 *Step Name: Step 1: Check notification list
+		 *Step Description:
+			- Login to the platform with User A
+			- Click the notifications icon
+			- Check the list
+		 *Input Data:
+		 *Expected Outcome:
+			- A New User notification is displayed in the list.*/
+		/*Step Number: 2
+		 *Step Name: Step 2: Check notification message
+		 *Step Description:
+			- Check the notification message
+		 *Input Data:
+		 *Expected Outcome:
+			- The notification message is :
+				$AVATAR
+				$USER has joined $PORTAL_NAME.
+				$DATE
+			Where :
+				- $USER is the new user
+				- $AVATAR is the thumbnail of the new user
+				- $DATE is the date of the notification.*/
+	@Test
+	public void test17_NewUserIntranetNotification(){
+		String username1 = "usernamea" + getRandomString();
+		String email1 = username1+ "@test.com";
+		String password="123456";
+		info("Enable the notifications");
+		navigationToolbar.goToMyNotifications();
+		myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.NewUser_intranet);
+		info("Add user");
+		navigationToolbar.goToAddUser();
+		addUsers.addUser(username1, password, email1, username1, username1);
+		ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
+		ELEMENT_ALERT_NOTIFICATION.click();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1+" "+username1)).parent().shouldHave(text(username1+" "+username1+" has joined eXo."));
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1+" "+username1)).parent().click();
+		ELEMENT_CONTENT_NAME_PROFILE.find(byText(username1+" "+username1)).click();
+		navigationToolbar.goToIntranetNotification();
+		intranetNotification.goToAllNotification();
+		$(byText(username1+" "+username1)).parent().shouldHave(text(username1+" "+username1+" has joined eXo."));
+		manageLogInOut.signIn(DATA_USER1,"gtngtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+
+	}
 }
