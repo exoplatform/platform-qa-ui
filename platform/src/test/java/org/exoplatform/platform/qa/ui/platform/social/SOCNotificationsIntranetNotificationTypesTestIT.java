@@ -1870,6 +1870,261 @@ Step Number: 3
 		manageLogInOut.signIn(DATA_USER1,"gtngtn");
 		navigationToolbar.goToManageCommunity();
 		addUsers.deleteUser(username1);
+	}
+	@Test
+	public  void test01_2CommentIntranetNotificationWhenNotificationIsDisabled() {
+		//Setup data test
+		String username1 = "usernamea" + getRandomString();
+		String email1 = username1+ "@test.com";
 
+		String username2 = "usernameb" + getRandomString();
+		String email2 = username2+ "@test.com";
+
+		String activity = "activity" + getRandomNumber();
+		String comment1 = "comment1" + getRandomNumber();
+		String password="123456";
+
+
+		info("Add new user");
+		navigationToolbar.goToAddUser();
+		addUsers.addUser(username1, password, email1, username1, username1);
+		addUsers.addUser(username2, password, email2, username2, username2);
+		manageLogInOut.signIn(username1, password);
+		info ("Connect with user");
+		homePagePlatform.goToConnections();
+		connectionsManagement.connectToAUser(username2);
+
+		info("Enable like and new user notifications");
+		navigationToolbar.goToMyNotifications();
+		myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.AS_Comment_intranet);
+
+		info("Add a activity");
+		executeJavaScript("window.scrollBy(0,-5500)","");
+		homePagePlatform.goToHomePage();
+		activityStream.addActivity(activity, "");
+		activityStream.checkActivity(activity);
+
+		info("user comments in John's activity");
+		manageLogInOut.signIn(username2, password);
+		homePagePlatform.goToConnections();
+		connectionsManagement.acceptAConnection(username1);
+		homePagePlatform.goToHomePage();
+		activityStream.commentActivity(activity,comment1);
+
+
+		info("noy Check comment notification in the notification list");
+		manageLogInOut.signIn(username1, password);
+		ELEMENT_ALERT_NOTIFICATION.shouldNot(visible);
+
+		navigationToolbar.goToIntranetNotification();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(comment1)).shouldNot(exist);
+		manageLogInOut.signIn(DATA_USER1,"gtngtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+		addUsers.deleteUser(username2);
+	}
+
+	/**
+	 *<li> Case ID:123000.</li>
+	 *<li> Test Case Name: Like Intranet Notification.</li>
+	 */
+	@Test
+	public  void test06_2_LikeIntranetNotificationWhenNotificationLikeIS_DISABLED() {
+		//Setup data test
+		String username1 = "usernamea" + getRandomString();
+		String email1 = username1+ "@test.com";
+		String username2 = "usernameb" + getRandomString();
+		String email2 = username2+"@test.com";
+		String password="123456";
+		String activity ="activity" + getRandomNumber();
+
+		/*Precondition:
+		 	- User A and User B are connected
+			- User A has posted an activity
+			- User B has liked User A activity
+			- The notification "Someone likes one of my activities" is activated in the user settings*/
+		info("Add User");
+		navigationToolbar.goToAddUser();
+		addUsers.addUser(username1, password, email1, username1, username1);
+		addUsers.addUser(username2, password, email2, username2, username2);
+		manageLogInOut.signIn(username1, password);
+		info ("Connect with user");
+		homePagePlatform.goToConnections();
+		connectionsManagement.connectToAUser(username2);
+		info("Enable like and new user notifications");
+		navigationToolbar.goToMyNotifications();
+		myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.AS_Like_intranet);
+
+		info("Add a activity");
+		executeJavaScript("window.scrollBy(0,-5500)","");
+		homePagePlatform.goToHomePage();
+		activityStream.addActivity(activity, "");
+		activityStream.checkActivity(activity);
+
+		info("user likes John's activity");
+		manageLogInOut.signIn(username2, password);
+		homePagePlatform.goToConnections();
+		connectionsManagement.acceptAConnection(username1);
+		homePagePlatform.goToHomePage();
+		activityStream.likeActivity(activity);
+
+		/*Step Number: 1
+		 *Step Name: Step 1: Check notifications list
+		 *Step Description:
+			- Login with User A
+			- Click the notifications icon in the top navigation
+			- Check the notification list
+		 *Input Data:
+		 *Expected Outcome:
+			- A Like notification is displayed in the list
+			- The activity message is :
+				$AVATAR
+				$USER likes your activity.
+				$ACTIVITY
+					$DATE
+			Where :
+				- $AVATAR is the thumbnail of User B
+				- $USER is User B
+				- $ACTIVITY is the activity title/message
+				- $DATE is the date of the activity*/
+		info("NOT Check Like notification in intranet notification");
+		manageLogInOut.signIn(username1, password);
+		ELEMENT_ALERT_NOTIFICATION.shouldNot(visible);
+		navigationToolbar.goToIntranetNotification();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).shouldNot(exist);
+		manageLogInOut.signIn(DATA_USER1,"gtngtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+		addUsers.deleteUser(username2);
+	}
+	@Test
+	public  void test09_2_MentionIntranetNotification_InactivityMessageWhenNotificationIsDisabled() throws AWTException {
+		String activity = "activity" + getRandomNumber();
+
+		String username1 = "usernamea" + getRandomString();
+		String email1 = username1+ "@test.com";
+		String username2 = "usernameb" + getRandomString();
+		String email2 = username2+ "@test.com";
+		String password="123456";
+
+		info("Add user");
+		navigationToolbar.goToAddUser();
+		addUsers.addUser(username1, password, email1, username1, username1);
+		addUsers.addUser(username2, password, email2, username2, username2);
+		manageLogInOut.signIn(username1, password);
+
+
+
+		info ("Connect with user");
+		homePagePlatform.goToConnections();
+		connectionsManagement.connectToAUser(username2);
+
+		info("Enable the notifications");
+		navigationToolbar.goToMyNotifications();
+		myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.AS_Mention_intranet);
+
+		info("User accepts Request notification and mention John in activity");
+		manageLogInOut.signIn(username2, password);
+		homePagePlatform.goToConnections();
+		connectionsManagement.acceptAConnection(username1);
+		homePagePlatform.goToHomePage();
+		activityStream.mentionUserActivity(username1, activity);
+		activityStream.checkActivity(activity);
+
+
+		info ("Not Check Mention Intranet Notification in notification list");
+		manageLogInOut.signIn(username1,password);
+		ELEMENT_ALERT_NOTIFICATION.shouldNot(visible);
+		navigationToolbar.goToIntranetNotification();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).shouldNot(exist);
+	    manageLogInOut.signIn(DATA_USER1,"gtngtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+		addUsers.deleteUser(username2);
+	}
+	@Test
+	public  void test10_2_MentionIntranetNotification_InCommentWhenNotificationIsDisabled()  {
+		String activity = "activity" + getRandomNumber();
+		String comment = "comment" + getRandomNumber();
+
+		String username1 = "usernamea" + getRandomString();
+		String email1 = username1+ "@test.com";
+		String username2 = "usernameb" + getRandomString();
+		String email2 = username2+ "@test.com";
+		String password="123456";
+
+		info("Add user");
+		navigationToolbar.goToAddUser();
+		addUsers.addUser(username1, password, email1, username1, username1);
+		addUsers.addUser(username2, password, email2, username2, username2);
+		manageLogInOut.signIn(username1, password);
+		info("Enable the notifications");
+		navigationToolbar.goToMyNotifications();
+		myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.AS_Mention_intranet);
+		info ("Connect with user");
+		executeJavaScript("window.scrollBy(0,-5500)","");
+		homePagePlatform.goToConnections();
+		connectionsManagement.connectToAUser(username2);
+		info("User accepts Request notification and mention John in comment");
+		manageLogInOut.signIn(username2, password);
+		homePagePlatform.goToConnections();
+		connectionsManagement.acceptAConnection(username1);
+		homePagePlatform.goToHomePage();
+		activityStream.addActivity(activity, "");
+		activityStream.checkActivity(activity);
+		activityStream.addCommentWithMentionUser(activity,username1, comment);
+		info ("Check Mention Intranet Notification in notification list");
+		manageLogInOut.signIn(username1, password);
+		ELEMENT_ALERT_NOTIFICATION.shouldNot(visible);
+		navigationToolbar.goToIntranetNotification();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(comment)).shouldNot(exist);
+		manageLogInOut.signIn(DATA_USER1,"gtngtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+		addUsers.deleteUser(username2);
+	}
+
+	@Test
+	public  void test11_2_PostOnMyStreamIntranetNotificationWhenNotificationIsDisabled() {
+		String activity = "activity" + getRandomNumber();
+
+		String username1 = "usernamea" + getRandomString();
+		String email1 = username1+ "@test.com";
+		String username2 = "usernameb" + getRandomString();
+		String email2 = username2+ "@test.com";
+		String password="123456";
+
+		info("Add user");
+		navigationToolbar.goToAddUser();
+		addUsers.addUser(username1, password, email1, username1, username1);
+		addUsers.addUser(username2, password, email2, username2, username2);
+		manageLogInOut.signIn(username1, password);
+
+		info("Enable the notifications");
+		navigationToolbar.goToMyNotifications();
+		myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.AS_Post_intranet);
+
+		info ("Connect with user");
+		executeJavaScript("window.scrollBy(0,-5500)","");
+		homePagePlatform.goToConnections();
+		connectionsManagement.connectToAUser(username2);
+
+		info("User accepts Request notification and post an activity in John's activity stream");
+		manageLogInOut.signIn(username2, password);
+		homePagePlatform.goToConnections();
+		connectionsManagement.acceptAConnection(username1);
+		connectionsManagement.goToUserByFullName(username1+" "+username1);
+		userPageBase.goToActivityTab();
+		activityStream.addActivity(activity, "");
+		activityStream.checkActivity(activity);
+		info ("Not Check Notification in notification list");
+		manageLogInOut.signIn(username1, password);
+		ELEMENT_ALERT_NOTIFICATION.shouldNot(visible);
+		navigationToolbar.goToIntranetNotification();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).shouldNot(exist);
+		manageLogInOut.signIn(DATA_USER1,"gtngtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+		addUsers.deleteUser(username2);
 	}
 }
