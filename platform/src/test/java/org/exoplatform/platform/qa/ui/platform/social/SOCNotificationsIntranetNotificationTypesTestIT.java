@@ -32,11 +32,12 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLoca
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ICON_LIKE_ACTIVITY;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_PUBLICATION_ACTIVITYTEXT_CONNECTED;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_ALERT_NOTIFICATION;
-import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_BUTTON_ACCEPT_INVITATION_IN_NOTIFICATION;
-import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_BUTTON_CANCEL_INVITATION_IN_NOTIFICATION;
-import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_NOTIFICATION_DROPDOWN;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_BUTTON_ACCEPT_INVITATION;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_BUTTON_CANCEL_INVITATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_CONTENT_NAME_PROFILE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
@@ -1526,5 +1527,154 @@ Step Number: 3
 		addUsers.deleteUser(username2);
 
 	}
+	/**
+	 *<li> Case ID:122984.</li>
+	 *<li> Test Case Name: Space Invitation Intranet notification (Accept).</li>
+	 */
+	@Test
+	public  void test13_SpaceInvitationIntranetNotification_Accept() {
+		//Setup data test
+		String space = "space" + getRandomNumber();
 
+		String username1 = "usernamea" + getRandomString();
+		String email1 = username1+ "@test.com";
+		String username2 = "usernameb" + getRandomString();
+		String email2 = username2+ "@test.com";
+		String password="123456";
+
+		info("Add user");
+		navigationToolbar.goToAddUser();
+		addUsers.addUser(username1, password, email1, username1, username1);
+		addUsers.addUser(username2, password, email2, username2, username2);
+		manageLogInOut.signIn(username1, password);
+
+		info("Enable the notifications");
+		navigationToolbar.goToMyNotifications();
+		myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.Space_Invitation_Intranet);
+
+		/*Precondition:
+		 	- User A is manager of the space 1
+			- User A invite User B to join the space 1
+			- Space Invitation notification is activated in the settings of User B*/
+		info("Add new space and ivite an user");
+		homePagePlatform.goToAllSpace();
+		spaceManagement.addNewSpaceSimple(space, space);
+		spaceHomePage.goToSpaceSettingTab();
+		spaceSettingManagement.inviteUser(username2,false,"");
+
+		/*Step Number: 1
+		 *Step Name: Step 1: Check notification list
+		 *Step Description:
+			- Login with User B
+			- Click Notifications icon
+			- Check the notifications list
+		 *Input Data:
+		 *Expected Outcome:
+			- A Space Invitation notifications is displayed in the list*/
+		/*Step Number: 2
+		 *Step Name: Step 2: Check notification message
+		 *Step Description:
+			- Check the notification message
+		 *Input Data:
+		 *Expected Outcome:
+			The notification message is :  <br />- $AVATAR<br />- You're invited to join $SPACE space<br />- [Accept] | [Refuse]<br />- $DATE<br /><br />Where : <br />- $AVATAR is the thumbnail of the space<br />- $SPACE is space 1<br />- $DATE is the date of the notification*/
+		info("Check in notification list");
+		manageLogInOut.signIn(username2, password);
+		ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
+		ELEMENT_ALERT_NOTIFICATION.click();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).parent().shouldHave(text("You're invited to join "+space+" space."));
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_INVITATION).click();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).parent().waitUntil(have(Condition.text("You joined "+space+" space.")),Configuration.timeout);
+
+		/*Step Number: 3
+		 *Step Name: Step 3: Check View all
+		 *Step Description:
+			- Click [View All] from the bottom of the notification list
+			- Check View All page
+		 *Input Data:
+		 *Expected Outcome:
+			- The notification is displayed in the View All page*/
+		intranetNotification.goToAllNotification();
+		$(byId("UIIntranetNotificationsPortlet")).find(byText(space)).parent().find(byText("You joined "+space+" space."));
+
+		/*Step Number: 4
+		 *Step Name: Step 4: Accept
+		 *Step Description:
+			- Click [Accept]
+		 *Input Data:
+		 *Expected Outcome:
+			- The invitation is approved (User B is member of the space)
+			- The notifications message is updated to :
+				$AVATAR
+				You joined $SPACE space.
+				$DATE*/
+		manageLogInOut.signIn(DATA_USER1,"gtngtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+		addUsers.deleteUser(username2);
+	}
+
+	/**
+	 *<li> Case ID:122985.</li>
+	 *<li> Test Case Name: Space Invitation Intranet notification (Refuse).</li>
+	 */
+	@Test
+	public  void test14_SpaceInvitationIntranetNotification_Refuse() {
+		//Setup data test
+		String space = "space" + getRandomNumber();
+
+		String username1 = "usernamea" + getRandomString();
+		String email1 = username1+ "@test.com";
+		String username2 = "usernameb" + getRandomString();
+		String email2 = username2+ "@test.com";
+		String password="123456";
+
+		info("Add user");
+		navigationToolbar.goToAddUser();
+		addUsers.addUser(username1, password, email1, username1, username1);
+		addUsers.addUser(username2, password, email2, username2, username2);
+		manageLogInOut.signIn(username1, password);
+
+		info("Enable the notifications");
+		navigationToolbar.goToMyNotifications();
+		myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.Space_Invitation_Intranet);
+
+		/*Precondition:
+		 	- User A is manager of the space 1
+			- User A invite User B to join the space 1
+			- Space Invitation notification is activated in the settings of User B*/
+		info("Add new space and ivite an user");
+		homePagePlatform.goToAllSpace();
+		spaceManagement.addNewSpaceSimple(space, space);
+		spaceHomePage.goToSpaceSettingTab();
+		spaceSettingManagement.inviteUser(username2,false,"");
+
+		/*Step Number: 1
+		 *Step Name: Step 1: Check notification list
+		 *Step Description:
+			- Login with User B
+			- Click Notifications icon
+			- Check the notifications list
+		 *Input Data:
+		 *Expected Outcome:
+			- A Space Invitation notifications is displayed in the list*/
+		/*Step Number: 2
+		 *Step Name: Step 2: Check notification message
+		 *Step Description:
+			- Check the notification message
+		 *Input Data:
+		 *Expected Outcome:
+			The notification message is :  <br />- $AVATAR<br />- You're invited to join $SPACE space<br />- [Accept] | [Refuse]<br />- $DATE<br /><br />Where : <br />- $AVATAR is the thumbnail of the space<br />- $SPACE is space 1<br />- $DATE is the date of the notification*/
+		info("Check in notification list");
+		manageLogInOut.signIn(username2, password);
+		ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
+		ELEMENT_ALERT_NOTIFICATION.click();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).parent().shouldHave(text("You're invited to join "+space+" space."));
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).parent().parent().find(ELEMENT_BUTTON_CANCEL_INVITATION).click();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).shouldNot(exist);
+		manageLogInOut.signIn(DATA_USER1,"gtngtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+		addUsers.deleteUser(username2);
+	}
 }

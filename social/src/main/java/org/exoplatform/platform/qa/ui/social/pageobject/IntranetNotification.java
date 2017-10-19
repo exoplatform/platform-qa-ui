@@ -448,12 +448,12 @@ public class IntranetNotification {
           ;
         break;
       }
-      if (evt.waitForAndGetElement(ELEMENT_CONNECT_ACCEPT_BUTTON.replace("$name", fullName), 5000, 0) == null) {
+      if ($(byText(fullName)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_INVITATION).is(Condition.not(Condition.exist))) {
         break;
       }
       info("Retry...[" + repeat + "]");
       info("Click on Accept button");
-      evt.click(ELEMENT_CONNECT_ACCEPT_BUTTON.replace("$name", fullName));
+      $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(fullName)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_INVITATION).click();
 
     }
   }

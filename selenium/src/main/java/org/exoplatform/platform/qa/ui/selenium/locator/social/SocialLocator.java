@@ -2348,6 +2348,8 @@ public final class SocialLocator {
 
   public static final SelenideElement ELEMENT_NAME_PROFILE_OF_USERS                                     =
                                                                     $(byId("UIBreadCrumbsNavigationPortlet"));
+  public static final By ELEMENT_BUTTON_ACCEPT_INVITATION=byClassName("action-item");
+  public static final By ELEMENT_BUTTON_CANCEL_INVITATION=byClassName("cancel-item");
 
   public static final SelenideElement ELEMENT_MINI_CONNECTION_PORTLET= $(byId("UIMiniConnectionsPortlet"));
   public static final By              ELEMENT_TASK_TAB                                                  =
