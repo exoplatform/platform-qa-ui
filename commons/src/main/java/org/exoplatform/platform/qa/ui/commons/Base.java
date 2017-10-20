@@ -20,6 +20,7 @@
  */
 package org.exoplatform.platform.qa.ui.commons;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Screenshots;
 import org.exoplatform.platform.qa.ui.core.context.Smoke;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
@@ -47,7 +48,7 @@ public class Base extends TestBase {
   public void beforeEach(TestInfo testInfo) {
     // Set context from better naming of screenshots in case of test failure
     Screenshots.startContext(testInfo.getTestClass().get().getName(), testInfo.getTestMethod().get().getName());
-
+    Configuration.pageLoadStrategy="normal";
     openPlatform(testInfo);
   }
 
