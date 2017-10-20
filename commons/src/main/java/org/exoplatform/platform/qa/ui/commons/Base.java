@@ -60,7 +60,6 @@ public class Base extends TestBase {
   }
 
   public void openPlatform(TestInfo testInfo) {
-    Configuration.pageLoadStrategy="normal";
     Platform plf = new Platform();
     plf.open();
 
