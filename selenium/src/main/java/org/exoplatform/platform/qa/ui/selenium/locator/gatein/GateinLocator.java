@@ -1808,4 +1808,10 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
 
   public static final By              ELEMENT_ICON_EDIT_USER                                  = byClassName("uiIconViewUserInfo");
 
+  public static final SelenideElement ELEMENT_SELECT_BOX_USERS=$(byId("searchOption"));
+
+  public static final SelenideElement ELEMENT_TABLE_LIST_USERS=$(byXpath("//*[@id=\"UIListUsersGird\"]/table"));
+
+  public static final By ELEMENT_LINE_IN_TABLE_LIST_USERS=byClassName("enabled");
+
 }
