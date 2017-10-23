@@ -88,10 +88,6 @@ public class WikiSettingsTestIT extends Base {
     manageLogInOut.signInCas(username, password);
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
 
   /**
    * <li>Case ID:122830.</li>

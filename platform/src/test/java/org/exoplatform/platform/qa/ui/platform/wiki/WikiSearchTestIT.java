@@ -74,10 +74,6 @@ public class WikiSearchTestIT extends Base {
     manageLogInOut.signInCas(username, password);
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
 
   /*
    * Step Number: 1 Step Name: Step 1: Quick Search Step Description: - Log in and

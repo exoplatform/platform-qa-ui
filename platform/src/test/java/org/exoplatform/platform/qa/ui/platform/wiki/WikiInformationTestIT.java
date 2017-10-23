@@ -73,10 +73,6 @@ public class WikiInformationTestIT extends Base {
     manageLogInOut.signInCas(username, password);
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
 
   /*
    * Step Number: 1 Step Name: Step 1: Check page history Step Description: -

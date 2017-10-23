@@ -73,10 +73,6 @@ public class ForumSearchTestIT extends Base {
     manageLogInOut.signInCas(username, password);
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
 
   @Test
   /*

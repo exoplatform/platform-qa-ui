@@ -40,10 +40,6 @@ public class PlfHomepageGadgetWhoIsOnlineGadgetTestIT extends Base {
     manageLogInOut.signInCas(username, password);
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
 
   /**
    * <li>Case ID:120864.</li>

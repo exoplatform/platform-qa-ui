@@ -73,10 +73,6 @@ public class WikiPublishActivityTestIT extends Base {
     manageLogInOut.signInCas(username, password);
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
 
   /**
    * <li>Case ID:122869.</li>

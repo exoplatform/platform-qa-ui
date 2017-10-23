@@ -67,10 +67,6 @@ public class ForumAdministrationTestIT extends Base {
     manageLogInOut.signInCas(username, password);
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
 
   /**
    * <li>Case ID:116690.</li>

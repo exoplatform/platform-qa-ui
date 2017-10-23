@@ -77,10 +77,7 @@ public class ForumPublishActivityTestIT extends Base {
     manageLogInOut.signInCas(username, password);
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
+
 
   /**
    * Prepare data test Create a new category,a new forum

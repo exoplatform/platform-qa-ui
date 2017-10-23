@@ -68,10 +68,6 @@ public class WikiBasicActionManagePageEditTestIT extends Base {
     manageLogInOut.signInCas(username, password);
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
 
   /**
    * <li>Case ID:122819.</li>

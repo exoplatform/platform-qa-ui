@@ -71,10 +71,6 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
     manageLogInOut.signInCas(username, password);
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
 
   /**
    * <li>Case ID:122841.</li>

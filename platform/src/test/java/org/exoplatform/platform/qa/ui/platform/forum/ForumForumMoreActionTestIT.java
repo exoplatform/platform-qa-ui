@@ -64,10 +64,7 @@ public class ForumForumMoreActionTestIT extends Base {
     manageLogInOut.signInCas(username, password);
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
+
 
   /**
    * CaseID: 116747 Case_name: Lock / Unlock a forum Steps: 1. Prepare data:

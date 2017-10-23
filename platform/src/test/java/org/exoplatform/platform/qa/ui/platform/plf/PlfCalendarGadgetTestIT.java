@@ -37,11 +37,6 @@ public class PlfCalendarGadgetTestIT extends Base {
     manageLogInOut.signInCas(PLFData.username, PLFData.password);
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
-
   /**
    * <li>Case ID:120849.</li>
    * <li>Test Case Name: Switch between days.</li>

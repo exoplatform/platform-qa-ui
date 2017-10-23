@@ -88,10 +88,6 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     manageLogInOut.signInCas(username, password);
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
 
   /**
    * Create 3 spaces
@@ -479,7 +475,6 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).hover();
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1))
                                   .parent()
-                                  .parent()
                                   .find(ELEMENT_BUTTON_CANCEL_SUGGESTION_USER_FROM_GADGET).waitUntil(Condition.visible,Configuration.timeout)
                                   .click();
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).shouldNot(Condition.visible);
@@ -501,7 +496,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     spaceManagement.addNewSpaceSimple(space3, space3);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     executeJavaScript("window.scrollBy(0,300)");
-    ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).shouldNot(Condition.exist);
+    ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).shouldNot(Condition.visible);
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space2)).hover();
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space2))
                                   .parent()

@@ -79,11 +79,6 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
     manageLogInOut.signInCas(DATA_USER1, "gtngtn");
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
-
   /**
    * <li>Case ID:120861.</li>
    * <li>Test Case Name: Not show Invitation gadget.</li>

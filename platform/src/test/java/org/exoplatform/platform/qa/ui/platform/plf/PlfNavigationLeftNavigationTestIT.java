@@ -67,10 +67,6 @@ public class PlfNavigationLeftNavigationTestIT extends Base {
     manageLogInOut.signInCas(username, password);
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
 
   /*
    * Step Number: 1 Step Name: - Connect to Intranet Step Description: - Login as

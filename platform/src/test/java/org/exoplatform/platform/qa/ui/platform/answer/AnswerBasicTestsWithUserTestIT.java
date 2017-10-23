@@ -63,11 +63,6 @@ public class AnswerBasicTestsWithUserTestIT extends Base {
     manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
-
   /**
    * Case ID:116817. Test Case Name: Answer a question. Case ID:116818. Test Case
    * Name: Edit an answer. Case ID:116819. Test Case Name: Delete an answer.

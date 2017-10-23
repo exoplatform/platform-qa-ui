@@ -79,10 +79,6 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
 
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
 
   /**
    * <li>Case ID:122810.</li>

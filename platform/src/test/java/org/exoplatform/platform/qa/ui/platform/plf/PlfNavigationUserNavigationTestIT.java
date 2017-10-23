@@ -42,11 +42,6 @@ public class PlfNavigationUserNavigationTestIT extends Base {
     manageLogInOut.signInCas(DATA_USER1, "gtngtn");
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
-
   /**
    * <li>Case ID:120903.</li>
    * <li>Test Case Name: User navigate another user's personal pages.</li> /*Step

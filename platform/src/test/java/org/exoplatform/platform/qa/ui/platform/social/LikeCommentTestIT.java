@@ -75,10 +75,6 @@ public class LikeCommentTestIT extends Base {
     manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
 
   @Test
   public void test02_CheckNumberWhenUserLikeComment() {

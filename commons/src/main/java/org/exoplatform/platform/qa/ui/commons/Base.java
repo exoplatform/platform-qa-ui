@@ -50,6 +50,8 @@ public class Base extends TestBase {
     Screenshots.startContext(testInfo.getTestClass().get().getName(), testInfo.getTestMethod().get().getName());
     Configuration.pageLoadStrategy="normal";
     openPlatform(testInfo);
+
+    Configuration.pageLoadStrategy="normal";
   }
 
   public void openPlatform(TestInfo testInfo) {

@@ -72,10 +72,6 @@ public class Plf_GettintStartedGadgetTestIT extends Base {
     manageLogInOut.signInCas(username, password);
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
 
   /**
    * <li>Case ID:120844.</li>

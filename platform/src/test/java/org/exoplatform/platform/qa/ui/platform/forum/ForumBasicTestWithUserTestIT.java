@@ -84,10 +84,6 @@ public class ForumBasicTestWithUserTestIT extends Base {
     manageLogInOut.signInCas("john", "gtngtn");
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
 
   /**
    * CaseID: 116735 Case_name: Add a forum Steps: 1. Prepare data: create a
