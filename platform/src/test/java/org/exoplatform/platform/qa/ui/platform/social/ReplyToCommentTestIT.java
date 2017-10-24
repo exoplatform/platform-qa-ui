@@ -17,8 +17,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER2;
@@ -283,6 +282,217 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         activityStream.deleteactivity(activity1);
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+    }
+
+    //Check that quote a post in forum turns to reply to a comment in activity stream
+    @Test
+    public void test08_CheckQuoteInForumTurnsToReplyToCommentInAS() {
+        String title = "Title" + getRandomNumber();
+        String content = "Content" + getRandomNumber();
+        String nameCat = "Category" + getRandomNumber();
+        String nameForum = "Forum" + getRandomNumber();
+        String nameTopic = "Topic" + getRandomNumber();
+        String description = "Description" + getRandomNumber();
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        info("Open forum portlet");
+        homePagePlatform.goToForum();
+        info("Add a new category");
+        forumCategoryManagement.addCategorySimple(nameCat, "", description);
+        info("Add a new forum");
+        forumForumManagement.addForumSimple(nameForum, "", description);
+        info("Add a new topic");
+        forumForumManagement.goToStartTopic();
+        forumTopicManagement.startTopic(nameTopic, description, "", "");
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToForum();
+        forumHomePage.goToTopic(nameTopic);
+        forumTopicManagement.postReply(title, content);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToForum();
+        forumHomePage.goToTopic(nameTopic);
+        forumTopicManagement.quotePost(title, content);
+        homePagePlatform.goToHomePage();
+        String comment_parent_id = $(byText(content)).parent().parent().parent().parent().getAttribute("data-comment-id");
+        assertEquals($(byText(content + "quote")).parent().parent().parent().parent().getAttribute("data-parent-comment"), comment_parent_id);
+        homePagePlatform.goToForum();
+        info("Go to Forum home page");
+        forumHomePage.goToHomeCategory();
+        $(byText(nameCat)).click();
+        info("Delete category");
+        forumCategoryManagement.deleteCategory(nameCat);
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+    }
+
+    //Check attachment
+    @Test
+    public void test09_CheckReplyToCommentInForumBelongsToParentComment() {
+        String nameCat = "Category" + getRandomNumber();
+        String nameForum = "Forum" + getRandomNumber();
+        String nameTopic = "Topic" + getRandomNumber();
+        String description = "Description" + getRandomNumber();
+        String reply = "Reply" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        info("Open forum portlet");
+        homePagePlatform.goToForum();
+        info("Add a new category");
+        forumCategoryManagement.addCategorySimple(nameCat, "", description);
+        info("Add a new forum");
+        forumForumManagement.addForumSimple(nameForum, "", description);
+        info("Add a new topic");
+        forumForumManagement.goToStartTopic();
+        forumTopicManagement.startTopic(nameTopic, description, "", "");
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        activityStream.commentTopicActivity(description, comment);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+        activityStream.replytocomment(comment, reply);
+        $(byText(nameTopic)).click();
+        $(byText(reply)).parent().shouldHave(Condition.text(comment));
+        forumHomePage.goToHomeCategory();
+        $(byText(nameCat)).click();
+        info("Delete category");
+        forumCategoryManagement.deleteCategory(nameCat);
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+    }
+
+    //Check reply turns to quote
+    @Test
+    public void test10_CheckReplyToCommentTurnsToQuoteInForum() {
+        String nameCat = "Category" + getRandomNumber();
+        String nameForum = "Forum" + getRandomNumber();
+        String nameTopic = "Topic" + getRandomNumber();
+        String description = "Description" + getRandomNumber();
+        String reply = "Reply" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        info("Open forum portlet");
+        homePagePlatform.goToForum();
+        info("Add a new category");
+        forumCategoryManagement.addCategorySimple(nameCat, "", description);
+        info("Add a new forum");
+        forumForumManagement.addForumSimple(nameForum, "", description);
+        info("Add a new topic");
+        forumForumManagement.goToStartTopic();
+        forumTopicManagement.startTopic(nameTopic, description, "", "");
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        activityStream.commentTopicActivity(description, comment);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+        activityStream.replytocomment(comment, reply);
+        $(byText(nameTopic)).click();
+        $(byClassName("contentQuote")).shouldHave(Condition.text(comment));
+        $(byClassName("contentQuote")).shouldHave(Condition.text(DATA_USER2));
+        homePagePlatform.goToForum();
+        forumHomePage.goToHomeCategory();
+        $(byText(nameCat)).click();
+        info("Delete category");
+        forumCategoryManagement.deleteCategory(nameCat);
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+    }
+
+    //Check that each reply is attached to its parent comment
+    @Test
+    public void test11_CheckReplyToCommentBelongsToParentCommentInForum() {
+        String nameCat = "Category" + getRandomNumber();
+        String nameForum = "Forum" + getRandomNumber();
+        String nameTopic = "Topic" + getRandomNumber();
+        String description = "Description" + getRandomNumber();
+        String reply1 = "Reply1" + getRandomNumber();
+        String reply2 = "Reply2" + getRandomNumber();
+        String comment1 = "Comment1" + getRandomNumber();
+        String comment2 = "Comment2" + getRandomNumber();
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        info("Open forum portlet");
+        homePagePlatform.goToForum();
+        info("Add a new category");
+        forumCategoryManagement.addCategorySimple(nameCat, "", description);
+        info("Add a new forum");
+        forumForumManagement.addForumSimple(nameForum, "", description);
+        info("Add a new topic");
+        forumForumManagement.goToStartTopic();
+        forumTopicManagement.startTopic(nameTopic, description, "", "");
+        forumHomePage.goToTopic(nameTopic);
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        activityStream.commentTopicActivity(description, comment1);
+        activityStream.commentTopicActivity(description, comment2);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+        activityStream.replytocomment(comment1, reply1);
+        activityStream.replytocomment(comment2, reply2);
+        $(byText(nameTopic)).click();
+        $(byText(reply1)).parent().shouldHave(Condition.text(comment1));
+        $(byText(reply2)).parent().shouldHave(Condition.text(comment2));
+        forumHomePage.goToHomeCategory();
+        $(byText(nameCat)).click();
+        info("Delete category");
+        forumCategoryManagement.deleteCategory(nameCat);
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+    }
+
+    //Check when replying to same comment for two times
+    @Test
+    public void test12_CheckTwoRepliesBelongsToSameParentCommentInForum() {
+        String nameCat = "Category" + getRandomNumber();
+        String nameForum = "Forum" + getRandomNumber();
+        String nameTopic = "Topic" + getRandomNumber();
+        String description = "Description" + getRandomNumber();
+        String reply1 = "Reply1" + getRandomNumber();
+        String reply2 = "Reply2" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
+        info("Finished creating data test");
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        info("Open forum portlet");
+        homePagePlatform.goToForum();
+        info("Add a new category");
+        forumCategoryManagement.addCategorySimple(nameCat, "", description);
+        info("Add a new forum");
+        forumForumManagement.addForumSimple(nameForum, "", description);
+        info("Add a new topic");
+        forumForumManagement.goToStartTopic();
+        forumTopicManagement.startTopic(nameTopic, description, "", "");
+        forumHomePage.goToTopic(nameTopic);
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        activityStream.commentTopicActivity(description, comment);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+        activityStream.replytocomment(comment, reply1);
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        activityStream.replytocomment(comment, reply2);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+        $(byText(nameTopic)).click();
+        $(byText(reply1)).parent().shouldHave(Condition.text(comment));
+        $(byText(reply2)).parent().shouldHave(Condition.text(comment));
+        forumHomePage.goToHomeCategory();
+        $(byText(nameCat)).click();
+        info("Delete category");
+        forumCategoryManagement.deleteCategory(nameCat);
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
     }
