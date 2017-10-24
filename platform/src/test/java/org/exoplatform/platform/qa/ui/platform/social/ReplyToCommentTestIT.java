@@ -23,6 +23,7 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER2;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_VIEW_ALL_REPLIES_LINK;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
@@ -332,7 +333,7 @@ public class ReplyToCommentTestIT extends Base {
 
     //Check attachment
     @Test
-    public void test09_CheckReplyToCommentInForumBelongsToParentComment() {
+    public void test09_CheckReplyToCommentInForum() {
         String nameCat = "Category" + getRandomNumber();
         String nameForum = "Forum" + getRandomNumber();
         String nameTopic = "Topic" + getRandomNumber();
@@ -370,7 +371,7 @@ public class ReplyToCommentTestIT extends Base {
 
     //Check reply turns to quote
     @Test
-    public void test10_CheckReplyToCommentTurnsToQuoteInForum() {
+    public void test10_CheckReplyToCommentInForum() {
         String nameCat = "Category" + getRandomNumber();
         String nameForum = "Forum" + getRandomNumber();
         String nameTopic = "Topic" + getRandomNumber();
@@ -410,7 +411,7 @@ public class ReplyToCommentTestIT extends Base {
 
     //Check that each reply is attached to its parent comment
     @Test
-    public void test11_CheckReplyToCommentBelongsToParentCommentInForum() {
+    public void test11_CheckReplyToCommentInForum() {
         String nameCat = "Category" + getRandomNumber();
         String nameForum = "Forum" + getRandomNumber();
         String nameTopic = "Topic" + getRandomNumber();
@@ -454,7 +455,7 @@ public class ReplyToCommentTestIT extends Base {
 
     //Check when replying to same comment for two times
     @Test
-    public void test12_CheckTwoRepliesBelongsToSameParentCommentInForum() {
+    public void test12_CheckReplyToCommentInForum() {
         String nameCat = "Category" + getRandomNumber();
         String nameForum = "Forum" + getRandomNumber();
         String nameTopic = "Topic" + getRandomNumber();
@@ -496,4 +497,203 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
     }
+
+
+    @Test
+    public void test13_CheckReplyToCommentInPreviewMode() {
+        String activity1 = "Activity1" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
+        String reply = "Reply" + getRandomNumber();
+        ELEMENT_TAB_LINK.click();
+        refresh();
+        ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
+        ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
+        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
+        activityStream.addActivity(activity1, "");
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
+        executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
+        ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
+        $(byText(comment)).should(Condition.exist);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        activityStream.replytocommentinPreview(comment, reply);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        activityStream.deleteactivity(activity1);
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+    }
+
+    @Test
+    public void test14_CheckReplyToCommentInPreviewMode() {
+        String activity1 = "Activity1" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
+        String reply = "Reply" + getRandomNumber();
+        String replytoreply = "ReplyToReply" + getRandomNumber();
+        ELEMENT_TAB_LINK.click();
+        refresh();
+        ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
+        ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
+        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
+        activityStream.addActivity(activity1, "");
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
+        executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
+        ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
+        $(byText(comment)).should(Condition.exist);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        activityStream.replytocommentinPreview(comment, reply);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(DATA_USER2, PLFData.DATA_PASS);
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        activityStream.replytoreplyinpreviewmode(reply);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+        activityStream.deleteactivity(activity1);
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+    }
+
+
+    @Test
+    public void test15_ReplyToCommentShortenSectionInPreview() {
+        String activity1 = "activity1" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+        String reply1 = "Reply" + getRandomNumber();
+        String reply2 = "Reply" + getRandomNumber();
+        String reply3 = "Reply" + getRandomNumber();
+        ELEMENT_TAB_LINK.click();
+        refresh();
+        ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
+        ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
+        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
+        activityStream.addActivity(activity1, "");
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        //mary comments
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
+        executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
+        ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
+        $(byText(comment)).should(Condition.exist);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        manageLogInOut.signOut();
+        //john replys
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToHomePage();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        activityStream.replytocommentinPreview(comment, reply1);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        //mary replys
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        activityStream.replytocommentinPreview(comment, reply2);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        //john replys
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToHomePage();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        activityStream.replytocommentinPreview(comment, reply3);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        //Check that the replies number in show reply link
+        activityStream.showallreplies(comment);
+        //Check that replies are well added
+        $(byText(reply1)).waitUntil(Condition.appears, Configuration.timeout);
+        $(byText(reply2)).waitUntil(Condition.appears, Configuration.timeout);
+        $(byText(reply3)).waitUntil(Condition.appears, Configuration.timeout);
+        //Check that replies are displayed under the parent comment
+        String data_comment = $(byText(comment)).parent().parent().parent().getAttribute("data-comment");
+        assertEquals($(byText(reply1)).parent().parent().parent().getAttribute("data-parent-comment"), data_comment);
+        assertEquals($(byText(reply2)).parent().parent().parent().getAttribute("data-parent-comment"), data_comment);
+        assertEquals($(byText(reply3)).parent().parent().parent().getAttribute("data-parent-comment"), data_comment);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        activityStream.deleteactivity(activity1);
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+    }
+
+    @Test
+    public void test16_CheckReplyNumberInPreview() {
+        String activity1 = "activity1" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+        String reply1 = "Reply1" + getRandomNumber();
+        String reply2 = "Reply2" + getRandomNumber();
+        String reply3 = "Reply3" + getRandomNumber();
+        String reply4 = "Reply4" + getRandomNumber();
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        homePagePlatform.goToHomePage();
+        ELEMENT_TAB_LINK.click();
+        refresh();
+        ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
+        ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
+        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
+        activityStream.addActivity(activity1, "");
+        //login mary comment
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
+        executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
+        ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
+        $(byText(comment)).should(Condition.exist);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        manageLogInOut.signOut();
+        //login john
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToHomePage();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        activityStream.replytocommentinPreview(comment, reply1);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        activityStream.replytocommentinPreview(comment, reply2);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        activityStream.replytocommentinPreview(comment, reply3);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        activityStream.replytocommentinPreview(comment, reply4);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        refresh();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        //Check that the replies number in show reply link
+        $(byId("commentArea")).find(byClassName("subCommentShowAllLink")).shouldHave(Condition.text("4"));
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        activityStream.deleteactivity(activity1);
+        executeJavaScript("window.scrollBy(0,-2000)", "");
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+    }
+
 }
