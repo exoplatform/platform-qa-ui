@@ -1,13 +1,16 @@
 package org.exoplatform.platform.qa.ui.gatein;
 
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_CONTENT_PEOPLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_NAME_OF_PEOPLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_INPUT_SEARCH_USER_NAME;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -374,5 +377,26 @@ public class GateinUserAndGroupManagementTestIT extends Base {
     userandgroupmanagement.deleteUser(username1);
     userandgroupmanagement.deleteUser(username2);
 
+  }
+  @Test
+  @Tag("search")
+  public void test09_SearchUserWithDashInFirstName() {
+    String username = "username" + getRandomNumber();
+    String password = "password" + getRandomNumber();
+    String firstName = "user-name"+getRandomString();
+    String lastName = getRandomString();
+    String email = firstName + getRandomNumber() + "@test.com";
+    navigationToolbar.goToAddUser();
+    info("Create new user");
+    useraddmanagement.addUser(username, password, email, firstName, lastName);
+    info("Test Case 08: Edit user information");
+    navigationToolbar.goToUsersAndGroupsManagement();
+    $(ELEMENT_INPUT_SEARCH_USER_NAME).setValue(firstName);
+    ELEMENT_SELECT_BOX_USERS.selectOptionByValue("firstName");
+    ELEMENT_BTN_SEARCH_USER.click();
+    ELEMENT_TABLE_LIST_USERS.find(byText(username)).should(Condition.exist);
+    assertEquals(1,ELEMENT_TABLE_LIST_USERS.findAll(ELEMENT_LINE_IN_TABLE_LIST_USERS).size());
+    info("Test Case 10: Delete user");
+    userandgroupmanagement.deleteUser(firstName);
   }
 }
