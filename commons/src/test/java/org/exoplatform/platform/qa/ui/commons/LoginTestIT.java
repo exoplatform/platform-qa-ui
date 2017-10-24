@@ -72,24 +72,4 @@ public final class LoginTestIT extends Base {
     assertTrue("SignIn with unknown user should display a message.", lg.signinFailContainer.exists());
   }
 
-  /**
-   * Check that the user is not logged anymore after signout.
-   *
-   * <p>This method requires @Tag("smoke") to login before trying to sign out.</p>
-   */
-  @Test
-  @Tag("smoke")
-  @Disabled
-  public void signOut() {
-    // Init instance for signInTest
-    Platform plf = new Platform();
-    plf.open();
-    plf.ensureLicenseIsAccepted()
-       .ensureRegisterSoftwareIsSkipped()
-       .ensureAccountSetupIsSkipped()
-       .ensureUserIsLoggedIn();
-
-    assertTrue("User should not be logged anymore!", !new Login().signOut().isUserLogged());
-  }
-
 }

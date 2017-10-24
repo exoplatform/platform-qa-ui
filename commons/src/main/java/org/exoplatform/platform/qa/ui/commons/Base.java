@@ -20,7 +20,6 @@
  */
 package org.exoplatform.platform.qa.ui.commons;
 
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Screenshots;
 import org.exoplatform.platform.qa.ui.core.context.Smoke;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
@@ -64,7 +63,7 @@ public class Base extends TestBase {
   }
 
   @AfterEach
-  public void afterEach() {
+  public void signOut() {
     ManageLogInOut manageLogInOut=new ManageLogInOut(this);
     manageLogInOut.signOut();
 
