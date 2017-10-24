@@ -5,14 +5,18 @@ import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.forum.pageobject.*;
+import org.exoplatform.platform.qa.ui.forum.pageobject.ForumCategoryManagement;
+import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
+import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
+import org.exoplatform.platform.qa.ui.forum.pageobject.ForumTopicManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.task.pageobject.ProjectsManagement;
 import org.exoplatform.platform.qa.ui.task.pageobject.TasksManagement;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
@@ -22,6 +26,16 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_VIEW_ALL_REPLIES_LINK_TASK;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
+import static com.codeborne.selenide.Selectors.byId;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
+import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER2;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_VIEW_ALL_REPLIES_LINK;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -96,7 +110,7 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
-        activityStream.replytocomment(comment, reply,DATA_NAME_USER1);
+        activityStream.replyToComment(comment, reply,DATA_NAME_USER1);
         refresh();
         executeJavaScript("window.scrollBy(0,-2000)", "");
         activityStream.deleteactivity(activity1);
@@ -106,25 +120,26 @@ public class ReplyToCommentTestIT extends Base {
 
     @Test
     public void test02_DeleteReplyToCommentInAS() {
-        String activity1 = "activity1" + getRandomNumber();
-        String comment = "comment" + getRandomNumber();
+        String activity = "Activity" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
         String reply = "Reply" + getRandomNumber();
         homePagePlatform.goToConnections();
         connectionsManagement.connectToAUser(DATA_USER2);
         homePagePlatform.goToHomePage();
-        activityStream.addActivity(activity1, "");
+        activityStream.addActivity(activity, "");
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        activityStream.commentActivity(activity1, comment);
+        activityStream.commentActivity(activity, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
-        activityStream.replytocomment(comment, reply,DATA_NAME_USER1);
-        activityStream.deletereplyinAS(reply);
+        activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
+        activityStream.deleteReplyInAS(reply);
         executeJavaScript("window.scrollBy(0,-2000)", "");
-        activityStream.deleteactivity(activity1);
+        activityStream.deleteActivity(activity);
+        executeJavaScript("window.scrollBy(0,-2000)", "");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
     }
@@ -148,12 +163,12 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
-        activityStream.replytocomment(comment,reply1,DATA_NAME_USER1);
-        activityStream.replytocomment(comment,reply2,DATA_NAME_USER1);
-        activityStream.replytocomment(comment,reply3,DATA_NAME_USER1);
+        activityStream.replyToComment(comment,reply1,DATA_NAME_USER1);
+        activityStream.replyToComment(comment,reply2,DATA_NAME_USER1);
+        activityStream.replyToComment(comment,reply3,DATA_NAME_USER1);
         refresh();
         //Check that the replies number in show reply link
-        activityStream.showallreplies(comment);
+        activityStream.showallReplies(comment);
         //Check that replies are well added
         $(byText(reply1)).waitUntil(Condition.appears, Configuration.timeout);
         $(byText(reply2)).waitUntil(Condition.appears, Configuration.timeout);
@@ -186,10 +201,10 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
-        activityStream.replytocomment(comment,reply,DATA_NAME_USER1);
-        activityStream.replytocomment(comment,reply,DATA_NAME_USER1);
-        activityStream.replytocomment(comment,reply,DATA_NAME_USER1);
-        activityStream.replytocomment(comment,reply,DATA_NAME_USER1);
+        activityStream.replyToComment(comment,reply,DATA_NAME_USER1);
+        activityStream.replyToComment(comment,reply,DATA_NAME_USER1);
+        activityStream.replyToComment(comment,reply,DATA_NAME_USER1);
+        activityStream.replyToComment(comment,reply,DATA_NAME_USER1);
         refresh();
         //Check that the replies number in show reply link
         String idBlocComment = $(byText(comment)).parent()
@@ -228,13 +243,15 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
-        activityStream.replytocomment(comment,reply1,DATA_NAME_USER1);
-        activityStream.replytocomment(comment,reply2,DATA_NAME_USER1);
+        activityStream.replyToComment(comment,reply1,DATA_NAME_USER1);
+        activityStream.replyToComment(comment,reply2,DATA_NAME_USER1);
         refresh();
         $(byText(reply1)).waitUntil(Condition.appears, Configuration.timeout);
         $(byText(reply2)).waitUntil(Condition.appears, Configuration.timeout);
         executeJavaScript("window.scrollBy(0,-2000)", "");
         activityStream.deleteactivity(activity1);
+        activityStream.deleteactivity(activity1);
+        executeJavaScript("window.scrollBy(0,-2000)", "");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
     }
@@ -258,10 +275,10 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
-        activityStream.replytocomment(comment,reply,DATA_NAME_USER1);
+        activityStream.replyToComment(comment,reply,DATA_NAME_USER1);
         $(byText(reply)).waitUntil(Condition.appears, Configuration.timeout);
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-        activityStream.replytoreply(activity1, reply, replytoreply);
+        activityStream.replyToReply(activity1, reply, replytoreply);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         activityStream.deleteactivity(activity1);
@@ -289,10 +306,10 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
-        activityStream.replytocomment(comment,reply,DATA_NAME_USER1);
+        activityStream.replyToComment(comment,reply,DATA_NAME_USER1);
         $(byText(reply)).waitUntil(Condition.appears, Configuration.timeout);
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-        activityStream.replytoreply(activity1, reply, replytoreply);
+        activityStream.replyToReply(activity1, reply, replytoreply);
         activityStream.deletecomment(activity1, comment);
         $(byText(reply)).shouldNot(Condition.exist);
         $(byText(replytoreply)).shouldNot(Condition.exist);
@@ -303,7 +320,6 @@ public class ReplyToCommentTestIT extends Base {
         connectionsManagement.removeConnection(DATA_USER2);
     }
 
-    //Check that quote a post in forum turns to reply to a comment in activity stream
     @Test
     public void test08_CheckQuoteInForumTurnsToReplyToCommentInAS() {
         String title = "Title" + getRandomNumber();
@@ -378,7 +394,7 @@ public class ReplyToCommentTestIT extends Base {
         activityStream.commentTopicActivity(description, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
-        activityStream.replytocomment(comment,reply,DATA_NAME_USER1);
+        activityStream.replyToComment(comment,reply,DATA_NAME_USER1);
         $(byText(nameTopic)).click();
         $(byText(reply)).parent().shouldHave(Condition.text(comment));
         forumHomePage.goToHomeCategory();
@@ -416,7 +432,7 @@ public class ReplyToCommentTestIT extends Base {
         activityStream.commentTopicActivity(description, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
-        activityStream.replytocomment(comment,reply,DATA_NAME_USER1);
+        activityStream.replyToComment(comment,reply,DATA_NAME_USER1);
         $(byText(nameTopic)).click();
         $(byClassName("contentQuote")).shouldHave(Condition.text(comment));
         $(byClassName("contentQuote")).shouldHave(Condition.text(DATA_USER2));
@@ -460,8 +476,8 @@ public class ReplyToCommentTestIT extends Base {
         activityStream.commentTopicActivity(description, comment2);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
-        activityStream.replytocomment(comment1,reply1,DATA_NAME_USER1);
-        activityStream.replytocomment(comment2,reply2,DATA_NAME_USER1);
+        activityStream.replyToComment(comment1,reply1,DATA_NAME_USER1);
+        activityStream.replyToComment(comment2,reply2,DATA_NAME_USER1);
         $(byText(nameTopic)).click();
         $(byText(reply1)).parent().shouldHave(Condition.text(comment1));
         $(byText(reply2)).parent().shouldHave(Condition.text(comment2));
@@ -503,9 +519,9 @@ public class ReplyToCommentTestIT extends Base {
         activityStream.commentTopicActivity(description, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
-        activityStream.replytocomment(comment,reply1,DATA_NAME_USER1);
+        activityStream.replyToComment(comment,reply1,DATA_NAME_USER1);
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-        activityStream.replytocomment(comment,reply2,DATA_NAME_USER2);
+        activityStream.replyToComment(comment,reply2,DATA_NAME_USER2);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         $(byText(nameTopic)).click();
@@ -546,7 +562,7 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-        activityStream.replytocommentinPreview(comment, reply);
+        activityStream.replyToCommentInPreview(comment, reply);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         activityStream.deleteactivity(activity1);
         homePagePlatform.goToConnections();
@@ -581,12 +597,12 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-        activityStream.replytocommentinPreview(comment, reply);
+        activityStream.replyToCommentInPreview(comment, reply);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         manageLogInOut.signOut();
         manageLogInOut.signInCas(DATA_USER2, PLFData.DATA_PASS);
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-        activityStream.replytoreplyinpreviewmode(reply);
+        activityStream.replyToReplyInPreviewMode(reply);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
@@ -627,23 +643,23 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-        activityStream.replytocommentinPreview(comment, reply1);
+        activityStream.replyToCommentInPreview(comment, reply1);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         //mary replys
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-        activityStream.replytocommentinPreview(comment, reply2);
+        activityStream.replyToCommentInPreview(comment, reply2);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         //john replys
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-        activityStream.replytocommentinPreview(comment, reply3);
+        activityStream.replyToCommentInPreview(comment, reply3);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
         //Check that the replies number in show reply link
-        activityStream.showallreplies(comment);
+        activityStream.showallReplies(comment);
         //Check that replies are well added
         $(byText(reply1)).waitUntil(Condition.appears, Configuration.timeout);
         $(byText(reply2)).waitUntil(Condition.appears, Configuration.timeout);
@@ -693,16 +709,16 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-        activityStream.replytocommentinPreview(comment, reply1);
+        activityStream.replyToCommentInPreview(comment, reply1);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-        activityStream.replytocommentinPreview(comment, reply2);
+        activityStream.replyToCommentInPreview(comment, reply2);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-        activityStream.replytocommentinPreview(comment, reply3);
+        activityStream.replyToCommentInPreview(comment, reply3);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-        activityStream.replytocommentinPreview(comment, reply4);
+        activityStream.replyToCommentInPreview(comment, reply4);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         refresh();
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();

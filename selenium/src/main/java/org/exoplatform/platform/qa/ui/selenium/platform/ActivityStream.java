@@ -1054,7 +1054,7 @@ public class ActivityStream {
   public enum changeTypes {
     No_Value, Has_One_Value;
   }
-  public void replytocomment(String comment, String reply,String user) {
+  public void replyToComment(String comment, String reply,String user) {
     String id = $(byText(comment)).parent()
             .parent()
             .parent()
@@ -1087,7 +1087,7 @@ public class ActivityStream {
     $(byText(reply)).parent().parent().find(byText(user)).should(Condition.exist);
   }
 
-  public void deletereplyinAS (String reply){
+  public void deleteReplyInAS (String reply){
     String idCommentContainer = $(byText(reply)).parent()
                                                 .parent()
                                                 .parent()
@@ -1101,7 +1101,7 @@ public class ActivityStream {
     $(byText(reply)).shouldNot(Condition.exist);
   }
 
-  public void replytocommentinPreview(String comment, String reply) {
+  public void replyToCommentInPreview(String comment, String reply) {
     // Click on reply link
     $(byId("commentArea")).find(byText(comment)).parent()
             .parent()
@@ -1113,8 +1113,7 @@ public class ActivityStream {
 
   }
 
-
-  public void showallreplies(String comment) {
+  public void showallReplies(String comment) {
     String idBlocComment = $(byText(comment)).parent()
             .parent()
             .parent()
@@ -1129,7 +1128,7 @@ public class ActivityStream {
     executeJavaScript("window.scrollBy(0,-250)");
     $(byId(ELEMENT_VIEW_ALL_REPLIES_LINK.replace("{id}", idBlocComment))).waitUntil(Condition.appears, Configuration.timeout).findElementByClassName("subCommentShowAllLink").click();
   }
-  public void replytoreply(String activity, String reply, String replytoreply) {
+  public void replyToReply(String activity, String reply, String replytoreply) {
     String idBlocReply = $(byText(reply)).parent()
             .parent()
             .parent()
@@ -1155,7 +1154,7 @@ public class ActivityStream {
     $(byId(ELEMENT_lABEL_REPLY_COMMENT.replace("{id}", idBlocReply))).click();
     // Insert the reply
     $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
-    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + reply + "\")", "");
+    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + replytoreply + "\")", "");
     info("Verify that the reply is added");
     // click on the button comment
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
@@ -1165,7 +1164,7 @@ public class ActivityStream {
   }
 
 
-  public void replytoreplyinpreviewmode(String reply) {
+  public void replyToReplyInPreviewMode(String reply) {
     String replytoreply = "ReplyToReply"+getRandomNumber();
     $(byId("commentArea")).find(byText(reply)).parent()
             .parent()
@@ -1176,7 +1175,6 @@ public class ActivityStream {
     ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
 
   }
-
   public void deletecomment (String activity, String comment){
     String idBlocComment = $(byText(activity)).parent()
             .parent()
