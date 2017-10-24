@@ -28,6 +28,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER2;
@@ -358,6 +359,7 @@ public class ReplyToCommentTestIT extends Base {
                                        .parent()
                                        .parent()
                                        .getAttribute("data-parent-comment"), comment_parent_id);
+        homePagePlatform.goToHomePage();
         homePagePlatform.goToForum();
         info("Go to Forum home page");
         forumHomePage.goToHomeCategory();
@@ -491,7 +493,7 @@ public class ReplyToCommentTestIT extends Base {
 
     //Check when replying to same comment for two times
     @Test
-    public void test12_CheckTwoRepiesyBelongsToSameParentCommentInForum() {
+    public void test12_CheckTwoRepliesBelongsToSameParentCommentInForum() {
         String nameCat = "Category" + getRandomNumber();
         String nameForum = "Forum" + getRandomNumber();
         String nameTopic = "Topic" + getRandomNumber();
