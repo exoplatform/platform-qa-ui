@@ -1,13 +1,12 @@
 package org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement;
 
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-
-import org.openqa.selenium.By;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
 
 /**
  * This class will be define locators for Task Management feature The feature
@@ -164,6 +163,13 @@ public class TaskManagementLocator {
                                                                      $(byId("taskManagement")).waitUntil(Condition.appears,
                                                                                                          Configuration.timeout)
                                                                                               .find(byXpath("//*[@id=\"taskManagement\"]/div[1]/ul/li[3]/div[2]/ul/li[1]/div/div/ul/li[3]/a"));
+public static final SelenideElement ELEMENT_INPUT_COMMENT_TASK=$(byClassName("rightPanelContent")).find(byClassName("cke_wysiwyg_frame"));
+public static final SelenideElement ELEMENT_EDIT_ASSIGNEE = $(byClassName("editAssignee"));
+public static final SelenideElement COMMENT_INPUT_AREA = $(byXpath("/html/body"));
+public static final SelenideElement COMMENT_BUTTON = $(byId("taskCommentButton"));
+public static final SelenideElement COWORKER_INPUT_FIELD = $(byXpath("//*[@id=\"taskManagement\"]/div[3]/div[2]/div[1]/div/div[4]/div[2]/div/div/div/div[2]/div[2]/div[1]/input"));
+public static final SelenideElement COWORKER_FILED = $(byXpath("//*[@id=\"taskManagement\"]/div[3]/div[2]/div[1]/div/div[4]/div[2]/div/div/div/div[2]/div[2]/div[3]"));
+public static final SelenideElement ELEMENT_LABEL_REPLY_TASK=$(byClassName("replyCommentLink"));
 
   // Add labels form
 

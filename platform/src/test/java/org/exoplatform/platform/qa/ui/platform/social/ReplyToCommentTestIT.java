@@ -12,7 +12,6 @@ import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.task.pageobject.ProjectsManagement;
 import org.exoplatform.platform.qa.ui.task.pageobject.TasksManagement;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -82,12 +81,6 @@ public class ReplyToCommentTestIT extends Base {
         }
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
     }
-
-    @AfterEach
-    public void signout() {
-        manageLogInOut.signOut();
-    }
-
 
     @Test
     public void test01_ReplyToCommentInAS() {
@@ -695,5 +688,24 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
     }
+    @Test
+    public void test17_ReplyToCommentInTasks() {
+        String task = "task" + getRandomNumber();
+        String reply = "Reply" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+        homePagePlatform.goToTaskPage();
+        tasksManagement.addTask(task);
+        $(byText(task)).should(Condition.exist);
+        tasksManagement.addCowroker(task);
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToTaskPage();
+        tasksManagement.commentTask(task,comment);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToTaskPage();
+        tasksManagement.replytocommentTask(task,reply);
+        tasksManagement.deleteTask(task);
+    }
+
 
 }

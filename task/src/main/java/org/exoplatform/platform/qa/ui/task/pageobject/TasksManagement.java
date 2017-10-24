@@ -1,14 +1,16 @@
 package org.exoplatform.platform.qa.ui.task.pageobject;
 
-import static com.codeborne.selenide.Selectors.byText;
-import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
+import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.switchTo;
+import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 /**
  * This class will define actions about management project
@@ -98,6 +100,32 @@ public class TasksManagement {
     ELEMENT_TASK_BUTTON_DELETE_OK.click();
   }
 
+  public void addCowroker(String task) {
+    $(byText(task)).click();
+    ELEMENT_EDIT_ASSIGNEE.click();
+    COWORKER_INPUT_FIELD.setValue("Mary");
+    COWORKER_FILED.waitUntil(Condition.visible,Configuration.timeout);
+    COWORKER_INPUT_FIELD.pressEnter();
+  }
+
+  public void commentTask(String task, String comment) {
+    $(byText(task)).click();
+    SelenideElement frame= ELEMENT_INPUT_COMMENT_TASK;
+    switchTo().frame(frame);
+    COMMENT_INPUT_AREA.sendKeys(comment);
+    switchTo().defaultContent();
+    COMMENT_BUTTON.click();
+  }
+
+  public void replytocommentTask(String task, String reply) {
+    $(byText(task)).click();
+    ELEMENT_LABEL_REPLY_TASK.click();
+    SelenideElement frame= ELEMENT_INPUT_COMMENT_TASK;
+    switchTo().frame(frame);
+    COMMENT_INPUT_AREA.sendKeys(reply);
+    switchTo().defaultContent();
+    COMMENT_BUTTON.click();
+  }
   /**
    * Define options in Task list
    */
