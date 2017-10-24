@@ -34,6 +34,7 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER2;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_VIEW_ALL_REPLIES_LINK;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
@@ -371,7 +372,7 @@ public class ReplyToCommentTestIT extends Base {
     }
 
     @Test
-    public void test09_CheckReplyToCommentInForumBelongsToParentComment() {
+    public void test09_CheckReplyToCommentInForum() {
         String nameCat = "Category" + getRandomNumber();
         String nameForum = "Forum" + getRandomNumber();
         String nameTopic = "Topic" + getRandomNumber();
@@ -409,7 +410,7 @@ public class ReplyToCommentTestIT extends Base {
 
     //Check reply turns to quote
     @Test
-    public void test10_CheckReplyToCommentTurnsToQuoteInForum() {
+    public void test10_CheckReplyToCommentInForum() {
         String nameCat = "Category" + getRandomNumber();
         String nameForum = "Forum" + getRandomNumber();
         String nameTopic = "Topic" + getRandomNumber();
@@ -450,6 +451,7 @@ public class ReplyToCommentTestIT extends Base {
     //Check that each reply is attached to its parent comment
     @Test
     public void test11_CheckAllRepliesBelongsToSameParentCommentInTpoicActivity() {
+
         String nameCat = "Category" + getRandomNumber();
         String nameForum = "Forum" + getRandomNumber();
         String nameTopic = "Topic" + getRandomNumber();
@@ -493,7 +495,7 @@ public class ReplyToCommentTestIT extends Base {
 
     //Check when replying to same comment for two times
     @Test
-    public void test12_CheckTwoRepliesBelongsToSameParentCommentInForum() {
+    public void test12_CheckReplyToCommentInForum() {
         String nameCat = "Category" + getRandomNumber();
         String nameForum = "Forum" + getRandomNumber();
         String nameTopic = "Topic" + getRandomNumber();
@@ -600,6 +602,7 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
         activityStream.replyToCommentInPreview(comment, reply);
+
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         manageLogInOut.signOut();
         manageLogInOut.signInCas(DATA_USER2, PLFData.DATA_PASS);
