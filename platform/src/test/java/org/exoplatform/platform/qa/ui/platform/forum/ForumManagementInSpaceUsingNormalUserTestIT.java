@@ -75,9 +75,6 @@ public class ForumManagementInSpaceUsingNormalUserTestIT extends Base {
     manageLogInOut = new ManageLogInOut(this);
     userAndGroupManagement = new UserAndGroupManagement(this);
     forumTopicManagement = new ForumTopicManagement(this);
-    if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
-      manageLogInOut.signOut();
-    }
     manageLogInOut.signInCas("john", "gtngtn");
   }
 

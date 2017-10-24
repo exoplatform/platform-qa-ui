@@ -51,7 +51,6 @@ public class Base extends TestBase {
     Configuration.pageLoadStrategy="normal";
     openPlatform(testInfo);
 
-    Configuration.pageLoadStrategy="normal";
   }
 
   public void openPlatform(TestInfo testInfo) {

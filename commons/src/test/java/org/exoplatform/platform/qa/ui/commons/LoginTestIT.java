@@ -22,6 +22,7 @@ package org.exoplatform.platform.qa.ui.commons;
 
 import org.exoplatform.platform.qa.ui.commons.pageobject.Login;
 import org.exoplatform.platform.qa.ui.commons.pageobject.Platform;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -78,6 +79,7 @@ public final class LoginTestIT extends Base {
    */
   @Test
   @Tag("smoke")
+  @Disabled
   public void signOut() {
     // Init instance for signInTest
     Platform plf = new Platform();

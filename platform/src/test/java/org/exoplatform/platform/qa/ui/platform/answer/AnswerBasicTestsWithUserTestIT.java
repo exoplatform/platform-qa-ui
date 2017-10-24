@@ -57,9 +57,6 @@ public class AnswerBasicTestsWithUserTestIT extends Base {
     if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
       $(ELEMENT_SKIP_BUTTON).click();
     }
-    if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
-      manageLogInOut.signOut();
-    }
     manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
   }
 
