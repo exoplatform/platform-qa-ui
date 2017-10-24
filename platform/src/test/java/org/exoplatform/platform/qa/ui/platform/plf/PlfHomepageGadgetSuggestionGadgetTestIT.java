@@ -430,7 +430,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     ELEMENT_GADGET_USER_SUGGESTION.find(byText(DATA_NAME_USER1)).parent().parent().find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET)
                                   .waitUntil(Condition.appears, Configuration.timeout)
                                   .click();
-    ELEMENT_GADGET_USER_SUGGESTION.find(byText(DATA_NAME_USER1)).shouldNot(Condition.exist);
+    ELEMENT_GADGET_USER_SUGGESTION.find(byText(DATA_NAME_USER1)).shouldNot(Condition.visible);
     manageLogInOut.signIn(username, PLFData.password);
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -448,7 +448,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     ELEMENT_GADGET_USER_SUGGESTION.find(byText(DATA_NAME_USER1)).parent().parent().find(ELEMENT_BUTTON_CANCEL_SUGGESTION_USER_FROM_GADGET)
                                   .waitUntil(Condition.visible, Configuration.timeout)
                                   .click();
-    ELEMENT_GADGET_USER_SUGGESTION.find(byText(DATA_NAME_USER1)).shouldNot(Condition.exist);
+    ELEMENT_GADGET_USER_SUGGESTION.find(byText(DATA_NAME_USER1)).shouldNot(Condition.visible);
     manageLogInOut.signIn(username, PLFData.password);
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -462,9 +462,8 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     executeJavaScript("window.scrollBy(0,300)");
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).hover();
-    String id = ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).parent().parent().getAttribute("id");
-    ELEMENT_GAGET_SUGGESTION_SPACE.find(byXpath(ELEMNT_BUTTON_REQUEST_SPACE_FROM_GADGET.replace("{id}", id))).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).shouldNot(Condition.exist);
+    ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).parent().find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET).click();
+    ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).shouldNot(Condition.visible);
     manageLogInOut.signIn(username, PLFData.password);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space1, false);
@@ -483,7 +482,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
                                   .parent()
                                   .find(ELEMENT_BUTTON_CANCEL_SUGGESTION_USER_FROM_GADGET).waitUntil(Condition.visible,Configuration.timeout)
                                   .click();
-    ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).shouldNot(Condition.exist);
+    ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).shouldNot(Condition.visible);
     manageLogInOut.signIn(username, PLFData.password);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space1, false);
@@ -509,7 +508,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
                                   .parent()
                                   .find(ELEMENT_BUTTON_CANCEL_SUGGESTION_USER_FROM_GADGET)
                                   .click();
-    ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).should(Condition.exist);
+    ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).shouldNot(Condition.visible);
     manageLogInOut.signIn(username, PLFData.password);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space1, false);
@@ -530,11 +529,10 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     spaceManagement.addNewSpaceSimple(space3, space3);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     executeJavaScript("window.scrollBy(0,300)");
-    ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).shouldNot(Condition.exist);
+    ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).shouldNot(Condition.visible);
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space2)).hover();
-    String id = ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space2)).parent().parent().getAttribute("id");
-    ELEMENT_GAGET_SUGGESTION_SPACE.find(byXpath(ELEMNT_BUTTON_REQUEST_SPACE_FROM_GADGET.replace("{id}", id))).click();
-    ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).should(Condition.exist);
+    ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space2)).parent().find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET).click();
+    ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).should(Condition.visible);
     manageLogInOut.signIn(username, PLFData.password);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space1, false);
