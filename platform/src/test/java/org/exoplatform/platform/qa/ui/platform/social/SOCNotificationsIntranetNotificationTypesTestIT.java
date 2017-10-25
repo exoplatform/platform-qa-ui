@@ -3636,4 +3636,233 @@ Step Number: 3
 		addUsers.deleteUser(username1);
 		addUsers.deleteUser(username2);
 	}
+
+	@Test
+	public void test18_OtherUserPuplishActivityInSpace(){
+		String space = "space" + getRandomNumber();
+		String activity = "activity" + getRandomNumber();
+
+		String username1 = "usernamea" + getRandomString();
+		String email1 = username1+ "@test.com";
+		String username2 = "usernameb" + getRandomString();
+		String email2 = username2+ "@test.com";
+		String username3 = "usernamec" + getRandomString();
+		String email3 = username3+ "@test.com";
+		String password="123456";
+		info("Add user");
+		navigationToolbar.goToAddUser();
+		addUsers.addUser(username1, password, email1, username1, username1);
+		addUsers.addUser(username2, password, email2, username2, username2);
+		addUsers.addUser(username3, password, email3, username3, username3);
+		manageLogInOut.signIn(username1, password);
+		info("Add new space and ivite user");
+		homePagePlatform.goToAllSpace();
+		spaceManagement.goToCreateSpace();
+		spaceManagement.addNewSpaceSimple(space, space);
+		spaceHomePage.goToSpaceSettingTab();
+		spaceSettingManagement.inviteUser(username2,false,"");
+		spaceSettingManagement.inviteUser(username3,false,"");
+
+		manageLogInOut.signIn(username2, password);
+		info("Enable the notifications");
+		navigationToolbar.goToMyNotifications();
+		myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.Space_Post_intranet);
+		homePagePlatform.goToAllSpace();
+		spaceManagement.acceptAInvitation(space);
+
+		manageLogInOut.signIn(username3, password);
+		info("Enable the notifications");
+		navigationToolbar.goToMyNotifications();
+		myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.Space_Post_intranet);
+		homePagePlatform.goToAllSpace();
+		spaceManagement.acceptAInvitation(space);
+
+		manageLogInOut.signIn(username1, password);
+		info("Enable the notifications");
+		homePagePlatform.goToSpecificSpace(space);
+		activityStream.addActivity(activity,"");
+		manageLogInOut.signIn(username2, password);
+		ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
+		ELEMENT_ALERT_NOTIFICATION.click();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1+" "+username1)).parent().shouldHave(text(username1+" "+username1+" has posted an activity in the "+space+" space."));
+		manageLogInOut.signIn(username3, password);
+		ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
+		ELEMENT_ALERT_NOTIFICATION.click();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1+" "+username1)).parent().shouldHave(text(username1+" "+username1+" has posted an activity in the "+space+" space."));
+		manageLogInOut.signIn(DATA_USER1,"gtngtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+		addUsers.deleteUser(username2);
+		addUsers.deleteUser(username3);
+		homePagePlatform.goToAllSpace();
+		spaceManagement.deleteSpace(space,false);
+
+	}
+	@Test
+	public void test18_1_OtherUserPuplishActivityInSpaceWhenNotificationIsDisabled(){
+		String space = "space" + getRandomNumber();
+		String activity = "activity" + getRandomNumber();
+		String username1 = "usernamea" + getRandomString();
+		String email1 = username1+ "@test.com";
+		String username2 = "usernameb" + getRandomString();
+		String email2 = username2+ "@test.com";
+		String username3 = "usernamec" + getRandomString();
+		String email3 = username3+ "@test.com";
+		String password="123456";
+		info("Add user");
+		navigationToolbar.goToAddUser();
+		addUsers.addUser(username1, password, email1, username1, username1);
+		addUsers.addUser(username2, password, email2, username2, username2);
+		addUsers.addUser(username3, password, email3, username3, username3);
+		manageLogInOut.signIn(username1, password);
+		info("Add new space and ivite user");
+		homePagePlatform.goToAllSpace();
+		spaceManagement.goToCreateSpace();
+		spaceManagement.addNewSpaceSimple(space, space);
+		spaceHomePage.goToSpaceSettingTab();
+		spaceSettingManagement.inviteUser(username2,false,"");
+		spaceSettingManagement.inviteUser(username3,false,"");
+		manageLogInOut.signIn(username2, password);
+		info("Enable the notifications");
+		navigationToolbar.goToMyNotifications();
+		myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.Space_Post_intranet);
+		homePagePlatform.goToAllSpace();
+		spaceManagement.acceptAInvitation(space);
+		manageLogInOut.signIn(username3, password);
+		info("Disable the notifications");
+		navigationToolbar.goToMyNotifications();
+		myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.Space_Post_intranet);
+		homePagePlatform.goToAllSpace();
+		spaceManagement.acceptAInvitation(space);
+		manageLogInOut.signIn(username1, password);
+		info("Enable the notifications");
+		homePagePlatform.goToSpecificSpace(space);
+		activityStream.addActivity(activity,"");
+		manageLogInOut.signIn(username2, password);
+		ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
+		ELEMENT_ALERT_NOTIFICATION.click();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1+" "+username1)).parent().shouldHave(text(username1+" "+username1+" has posted an activity in the "+space+" space."));
+		manageLogInOut.signIn(username3, password);
+		ELEMENT_ALERT_NOTIFICATION.shouldNot(visible);
+		navigationToolbar.goToIntranetNotification();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1+" "+username1)).shouldNot(exist);
+		manageLogInOut.signIn(DATA_USER1,"gtngtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+		addUsers.deleteUser(username2);
+		addUsers.deleteUser(username3);
+		homePagePlatform.goToAllSpace();
+		spaceManagement.deleteSpace(space,false);
+
+	}
+
+	@Test
+	public void test19_OtherUserCommentOnActivity(){
+		String username1 = "usernamea" + getRandomString();
+		String email1 = username1+ "@test.com";
+
+		String username2 = "usernameb" + getRandomString();
+		String email2 = username2+ "@test.com";
+		String username3 = "usernameb" + getRandomString();
+		String email3 = username3+ "@test.com";
+		String activity = "activity" + getRandomNumber();
+		String comment1 = "comment1" + getRandomNumber();
+		String password="123456";
+		info("Add new user");
+		navigationToolbar.goToAddUser();
+		addUsers.addUser(username1, password, email1, username1, username1);
+		addUsers.addUser(username2, password, email2, username2, username2);
+		addUsers.addUser(username3, password, email3, username3, username3);
+		manageLogInOut.signIn(username1, password);
+		info ("Connect with user");
+		homePagePlatform.goToConnections();
+		connectionsManagement.connectToAUser(username2);
+		connectionsManagement.connectToAUser(username3);
+
+		homePagePlatform.goToHomePage();
+		activityStream.addActivity(activity, "");
+		activityStream.checkActivity(activity);
+
+		info("user comments in John's activity");
+		manageLogInOut.signIn(username2, password);
+		info("Enable like and new user notifications");
+		navigationToolbar.goToMyNotifications();
+		myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.AS_Comment_intranet);
+		executeJavaScript("window.scrollBy(0,-5500)","");
+		homePagePlatform.goToConnections();
+		connectionsManagement.acceptAConnection(username1);
+		homePagePlatform.goToHomePage();
+		activityStream.commentActivity(activity,comment1);
+
+		manageLogInOut.signIn(username3, password);
+		homePagePlatform.goToConnections();
+		connectionsManagement.acceptAConnection(username1);
+		homePagePlatform.goToHomePage();
+		activityStream.commentActivity(activity,comment1);
+		manageLogInOut.signIn(username2, password);
+		ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
+		ELEMENT_ALERT_NOTIFICATION.click();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(comment1)).should(Condition.exist);
+		info("Check comment notification in activity Viewer");
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(comment1)).click();
+		$(byText(activity)).parent().parent().parent().parent().find(byText(comment1)).should(Condition.exist);
+		manageLogInOut.signIn(DATA_USER1,"gtngtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+		addUsers.deleteUser(username2);
+		addUsers.deleteUser(username3);
+
+	}
+
+	@Test
+	public void test19_1_OtherUserCommentOnActivityWhenNotificationIsDisabled(){
+		String username1 = "usernamea" + getRandomString();
+		String email1 = username1+ "@test.com";
+		String username2 = "usernameb" + getRandomString();
+		String email2 = username2+ "@test.com";
+		String username3 = "usernameb" + getRandomString();
+		String email3 = username3+ "@test.com";
+		String activity = "activity" + getRandomNumber();
+		String comment1 = "comment1" + getRandomNumber();
+		String password="123456";
+		info("Add new user");
+		navigationToolbar.goToAddUser();
+		addUsers.addUser(username1, password, email1, username1, username1);
+		addUsers.addUser(username2, password, email2, username2, username2);
+		addUsers.addUser(username3, password, email3, username3, username3);
+		manageLogInOut.signIn(username1, password);
+		info ("Connect with user");
+		homePagePlatform.goToConnections();
+		connectionsManagement.connectToAUser(username2);
+		connectionsManagement.connectToAUser(username3);
+		homePagePlatform.goToHomePage();
+		activityStream.addActivity(activity, "");
+		activityStream.checkActivity(activity);
+		info("user comments in John's activity");
+		manageLogInOut.signIn(username2, password);
+		info("Enable like and new user notifications");
+		navigationToolbar.goToMyNotifications();
+		myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.AS_Comment_intranet);
+		executeJavaScript("window.scrollBy(0,-5500)","");
+		homePagePlatform.goToConnections();
+		connectionsManagement.acceptAConnection(username1);
+		homePagePlatform.goToHomePage();
+		ELEMENT_ALERT_NOTIFICATION.click();
+		activityStream.commentActivity(activity,comment1);
+		manageLogInOut.signIn(username3, password);
+		homePagePlatform.goToConnections();
+		connectionsManagement.acceptAConnection(username1);
+		homePagePlatform.goToHomePage();
+		activityStream.commentActivity(activity,comment1);
+		manageLogInOut.signIn(username2, password);
+		ELEMENT_ALERT_NOTIFICATION.shouldNot(not(visible));
+		navigationToolbar.goToIntranetNotification();
+		$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(comment1)).shouldNot(Condition.exist);
+		manageLogInOut.signIn(DATA_USER1,"gtngtn");
+		navigationToolbar.goToManageCommunity();
+		addUsers.deleteUser(username1);
+		addUsers.deleteUser(username2);
+		addUsers.deleteUser(username3);
+
+	}
 }
