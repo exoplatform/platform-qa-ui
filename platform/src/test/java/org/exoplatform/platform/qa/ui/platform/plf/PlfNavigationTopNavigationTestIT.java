@@ -272,7 +272,7 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     switchTo().window(1);
     String url = WebDriverRunner.url();
     assertEquals(url,
-                 "https://docs.exoplatform.org/public/index.jsp?topic=/PLF44/PLFUserGuide.GettingStarted.SocialIntranetHomepage.html");
-    close();
+                 "https://docs.exoplatform.org/public/index.jsp?topic=/PLF50/PLFUserGuide.GettingStarted.SocialIntranetHomepage.html");
+    switchTo().window(0);
   }
 }
