@@ -11,6 +11,7 @@ import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -154,7 +155,7 @@ public class TasksManagement {
     COMMENT_BUTTON.click();
   }
 
-  public void showallreplies(String task, String comment) {
+  public void showAllReplies(String task, String comment) {
     $(byText(task)).click();
     String idDataComment = $(byText(comment)).parent().parent().getAttribute("data-commentid");
     // Get id Comment button

@@ -172,6 +172,7 @@ public static final SelenideElement COWORKER_FILED = $(byXpath("//*[@id=\"taskMa
 public static final SelenideElement ELEMENT_LABEL_REPLY_TASK=$(byClassName("replyCommentLink"));
 public static final String ELEMENT_VIEW_ALL_REPLIES_LINK_TASK="SubCommentShowAll_{id}";
 
+
   // Add labels form
 
   // Edit labels form

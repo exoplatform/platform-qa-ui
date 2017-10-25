@@ -32,7 +32,6 @@ import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER2;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_VIEW_ALL_REPLIES_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
@@ -601,12 +600,11 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
         activityStream.replyToCommentInPreview(comment, reply);
-
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         manageLogInOut.signOut();
         manageLogInOut.signInCas(DATA_USER2, PLFData.DATA_PASS);
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-        activityStream.replyToReplyInPreviewMode(reply);
+        activityStream.replyToReplyInPreviewMode(replytoreply);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
@@ -752,9 +750,32 @@ public class ReplyToCommentTestIT extends Base {
         tasksManagement.replytocommentTask(task,reply);
         tasksManagement.deleteTask(task);
     }
+    @Test
+    public void test18_ReplyToReplyInTasks() {
+        String task = "task" + getRandomNumber();
+        String reply = "Reply" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
+        String replytoreply = "ReplyToReply" + getRandomNumber();
+        homePagePlatform.goToTaskPage();
+        tasksManagement.addTask(task);
+        $(byText(task)).should(Condition.exist);
+        tasksManagement.addCowroker(task);
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToTaskPage();
+        tasksManagement.commentTask(task,comment);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToTaskPage();
+        tasksManagement.replytocommentTask(task,reply);
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToTaskPage();
+        tasksManagement.replytoreply(task,reply,replytoreply);
+        executeJavaScript("window.scrollBy(0,-2000)", "");
+        tasksManagement.deleteTask(task);
+    }
 
     @Test
-    public void test18_DeleteReplyInTaks() {
+    public void test19_DeleteReplyInTaks() {
         String task = "Task" + getRandomNumber();
         String comment = "comment" + getRandomNumber();
         String reply = "Reply" + getRandomNumber();
@@ -770,30 +791,6 @@ public class ReplyToCommentTestIT extends Base {
         tasksManagement.replytocommentTask(task, reply);
         $(byText(reply)).waitUntil(Condition.appears, Configuration.timeout);
         tasksManagement.deletereply(task, reply);
-        tasksManagement.deleteTask(task);
-    }
-
-    @Test
-    public void test19_ReplyToReplyInTasks() {
-        String task = "task" + getRandomNumber();
-        String reply = "Reply" + getRandomNumber();
-        String comment = "Comment" + getRandomNumber();
-        String replytoreply = "ReplyToReply" + getRandomNumber();
-        homePagePlatform.goToTaskPage();
-        tasksManagement.addTask(task);
-        $(byText(task)).should(Condition.exist);
-        tasksManagement.addCowroker(task);
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-        homePagePlatform.goToTaskPage();
-        tasksManagement.commentTask(task, comment);
-        manageLogInOut.signOut();
-        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
-        homePagePlatform.goToTaskPage();
-        tasksManagement.replytocommentTask(task, reply);
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-        homePagePlatform.goToTaskPage();
-        tasksManagement.replytoreply(task, reply, replytoreply);
-        executeJavaScript("window.scrollBy(0,-2000)", "");
         tasksManagement.deleteTask(task);
     }
 
@@ -821,7 +818,7 @@ public class ReplyToCommentTestIT extends Base {
         tasksManagement.replytocommentTask(task, reply3);
         refresh();
         //Check that the replies number in show reply link
-        tasksManagement.showallreplies(task, comment);
+        tasksManagement.showAllReplies(task, comment);
         //Check that replies are well added
         $(byText(reply1)).waitUntil(Condition.appears, Configuration.timeout);
         $(byText(reply2)).waitUntil(Condition.appears, Configuration.timeout);
@@ -867,6 +864,7 @@ public class ReplyToCommentTestIT extends Base {
 
     @Test
     public void test22_ChecktworepliesnotcollapsedInTasks() {
+
         String task = "Task" + getRandomNumber();
         String comment = "comment" + getRandomNumber();
         String reply1 = "Reply1" + getRandomNumber();
@@ -883,6 +881,13 @@ public class ReplyToCommentTestIT extends Base {
         tasksManagement.replytocommentTask(task, reply1);
         refresh();
         tasksManagement.replytocommentTask(task, reply2);
+        tasksManagement.commentTask(task,comment);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToTaskPage();
+        tasksManagement.replytocommentTask(task,reply1);
+        refresh();
+        tasksManagement.replytocommentTask(task,reply2);
         refresh();
         $(byText(task)).click();
         $(byText(reply1)).waitUntil(Condition.appears, Configuration.timeout);
