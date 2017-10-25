@@ -6,8 +6,11 @@ import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -125,6 +128,23 @@ public class TasksManagement {
     COMMENT_INPUT_AREA.sendKeys(reply);
     switchTo().defaultContent();
     COMMENT_BUTTON.click();
+  }
+
+  public void replytoreply(String task,String reply,String replytoreply) {
+    $(byText(task)).click();
+    $(byText(reply)).parent().parent().find(byClassName("replyCommentLink")).click();
+    SelenideElement frame= ELEMENT_INPUT_COMMENT_TASK;
+    switchTo().frame(frame);
+    COMMENT_INPUT_AREA.sendKeys(reply);
+    switchTo().defaultContent();
+    COMMENT_BUTTON.click();
+  }
+
+  public void showallreplies(String task, String comment) {
+    $(byText(task)).click();
+    String idDataComment = $(byText(comment)).parent().parent().getAttribute("data-commentid");
+    // Get id Comment button
+    $(byId(ELEMENT_VIEW_ALL_REPLIES_LINK.replace("{id}", idDataComment))).waitUntil(Condition.appears, Configuration.timeout).findElementByClassName("subCommentShowAllLink").click();
   }
   /**
    * Define options in Task list

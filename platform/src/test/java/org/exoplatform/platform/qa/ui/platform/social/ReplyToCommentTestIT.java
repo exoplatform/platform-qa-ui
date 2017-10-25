@@ -21,8 +21,8 @@ import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER2;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_VIEW_ALL_REPLIES_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_VIEW_ALL_REPLIES_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
@@ -706,6 +706,120 @@ public class ReplyToCommentTestIT extends Base {
         tasksManagement.replytocommentTask(task,reply);
         tasksManagement.deleteTask(task);
     }
+    @Test
+    public void test18_ReplyToReplyInTasks() {
+        String task = "task" + getRandomNumber();
+        String reply = "Reply" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
+        String replytoreply = "ReplyToReply" + getRandomNumber();
+        homePagePlatform.goToTaskPage();
+        tasksManagement.addTask(task);
+        $(byText(task)).should(Condition.exist);
+        tasksManagement.addCowroker(task);
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToTaskPage();
+        tasksManagement.commentTask(task,comment);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToTaskPage();
+        tasksManagement.replytocommentTask(task,reply);
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToTaskPage();
+        tasksManagement.replytoreply(task,reply,replytoreply);
+        executeJavaScript("window.scrollBy(0,-2000)", "");
+        tasksManagement.deleteTask(task);
+    }
 
+    @Test
+    public void test19_ReplyToCommentShortenSectionInTask() {
+        String task = "Task" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+        String reply1 = "Reply1" + getRandomNumber();
+        String reply2 = "Reply2" + getRandomNumber();
+        String reply3 = "Reply3" + getRandomNumber();
+        homePagePlatform.goToTaskPage();
+        tasksManagement.addTask(task);
+        tasksManagement.addCowroker(task);
+        //login mary
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToTaskPage();
+        tasksManagement.commentTask(task,comment);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToTaskPage();
+        tasksManagement.replytocommentTask(task,reply1);
+        refresh();
+        tasksManagement.replytocommentTask(task,reply2);
+        refresh();
+        tasksManagement.replytocommentTask(task,reply3);
+        refresh();
+        //Check that the replies number in show reply link
+        tasksManagement.showallreplies(task,comment);
+        //Check that replies are well added
+        $(byText(reply1)).waitUntil(Condition.appears, Configuration.timeout);
+        $(byText(reply2)).waitUntil(Condition.appears, Configuration.timeout);
+        $(byText(reply3)).waitUntil(Condition.appears, Configuration.timeout);
+        //Check that replies are displayed under the parent comment
+        String idDataComment = $(byText(comment)).parent().parent().getAttribute("data-commentid");
+        assertEquals($(byText(reply1)).parent().parent().getAttribute("data-parent-comment"), idDataComment);
+        assertEquals($(byText(reply2)).parent().parent().getAttribute("data-parent-comment"), idDataComment);
+        assertEquals($(byText(reply3)).parent().parent().getAttribute("data-parent-comment"), idDataComment);
+        executeJavaScript("window.scrollBy(0,-2000)", "");
+        tasksManagement.deleteTask(task);
+    }
 
+    @Test
+    public void test19_CheckReplyNumberInTask() {
+        String task = "Task" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+        String reply = "Reply" + getRandomNumber();
+        homePagePlatform.goToTaskPage();
+        tasksManagement.addTask(task);
+        tasksManagement.addCowroker(task);
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToTaskPage();
+        tasksManagement.commentTask(task, comment);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToTaskPage();
+        tasksManagement.replytocommentTask(task, reply);
+        refresh();
+        tasksManagement.replytocommentTask(task, reply);
+        refresh();
+        tasksManagement.replytocommentTask(task, reply);
+        refresh();
+        tasksManagement.replytocommentTask(task, reply);
+        refresh();
+        $(byText(task)).click();
+        //Check that the replies number in show reply link
+        String idDataComment = $(byText(comment)).parent().parent().getAttribute("data-commentid");
+        $(byId(ELEMENT_VIEW_ALL_REPLIES_LINK.replace("{id}", idDataComment))).waitUntil(Condition.appears, Configuration.timeout).shouldHave(Condition.text("4"));
+        executeJavaScript("window.scrollBy(0,-2000)", "");
+        tasksManagement.deleteTask(task);
+    }
+    @Test
+    public void test20_Checktworepliesnotcollapsed() {
+        String task = "Task" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+        String reply1 = "Reply1" + getRandomNumber();
+        String reply2 = "Reply2" + getRandomNumber();
+        homePagePlatform.goToTaskPage();
+        tasksManagement.addTask(task);
+        tasksManagement.addCowroker(task);
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToTaskPage();
+        tasksManagement.commentTask(task,comment);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToTaskPage();
+        tasksManagement.replytocommentTask(task,reply1);
+        refresh();
+        tasksManagement.replytocommentTask(task,reply2);
+        refresh();
+        $(byText(task)).click();
+        $(byText(reply1)).waitUntil(Condition.appears, Configuration.timeout);
+        $(byText(reply2)).waitUntil(Condition.appears, Configuration.timeout);
+        executeJavaScript("window.scrollBy(0,-2000)", "");
+        tasksManagement.deleteTask(task);
+    }
 }
