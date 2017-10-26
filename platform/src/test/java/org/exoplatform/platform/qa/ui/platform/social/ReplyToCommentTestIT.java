@@ -370,7 +370,7 @@ public class ReplyToCommentTestIT extends Base {
     }
 
     @Test
-    public void test09_CheckReplyToCommentInForum() {
+    public void test09_CheckReplyToCommentInForumBelongsToParentComment() {
         String nameCat = "Category" + getRandomNumber();
         String nameForum = "Forum" + getRandomNumber();
         String nameTopic = "Topic" + getRandomNumber();
@@ -408,7 +408,7 @@ public class ReplyToCommentTestIT extends Base {
 
     //Check reply turns to quote
     @Test
-    public void test10_CheckReplyToCommentInForum() {
+    public void test10_CheckReplyToCommentTurnsToQuoteInForum() {
         String nameCat = "Category" + getRandomNumber();
         String nameForum = "Forum" + getRandomNumber();
         String nameTopic = "Topic" + getRandomNumber();
@@ -493,7 +493,7 @@ public class ReplyToCommentTestIT extends Base {
 
     //Check when replying to same comment for two times
     @Test
-    public void test12_CheckReplyToCommentInForum() {
+    public void test12_CheckTwoRepiesyBelongsToSameParentCommentInForum() {
         String nameCat = "Category" + getRandomNumber();
         String nameForum = "Forum" + getRandomNumber();
         String nameTopic = "Topic" + getRandomNumber();
@@ -923,3 +923,4 @@ public class ReplyToCommentTestIT extends Base {
         tasksManagement.deleteTask(task);
     }
 }
+

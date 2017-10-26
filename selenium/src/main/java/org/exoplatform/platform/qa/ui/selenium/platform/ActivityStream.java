@@ -1175,6 +1175,7 @@ public class ActivityStream {
     ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
 
   }
+
   public void deletecomment (String activity, String comment){
     String idBlocComment = $(byText(activity)).parent()
             .parent()
