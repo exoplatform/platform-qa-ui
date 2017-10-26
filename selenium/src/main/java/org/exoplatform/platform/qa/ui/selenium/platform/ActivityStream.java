@@ -742,24 +742,41 @@ public class ActivityStream {
    * @param activity String
    * @throws AWTException AWTException
    */
-  public void addCommentWithMentionUser(String activity, String username, String textContent) throws AWTException {
-    for (int repeat = 0; repeat < 5; repeat++) {
-      info("Add comment with mention user");
-      if (evt.waitForAndGetElement(ELEMENT_PUBLICATION_COMMENTPOSTED_MENTION.replace("$activity", activity)
-                                                                            .replace("$username", username),
-                                   3000,
-                                   0) != null)
-        break;
-      evt.click(ELEMENT_ICON_COMMENT.replace("${title}", activity));
-      evt.type(ELEMENT_COMMENTBOX.replace("${title}", activity), "@" + username, false);
-      evt.click(ELEMENT_SUGGEST_USER_IN_COMMENT.replace("${userName}", username));
 
-      if (!textContent.isEmpty())
-        evt.type(ELEMENT_COMMENTBOX.replace("${title}", activity), textContent, false);
-      evt.click(ELEMENT_COMMENT_BUTTON);
-    }
-    evt.waitForAndGetElement(ELEMENT_PUBLICATION_COMMENTPOSTED_MENTION.replace("$activity", activity).replace("$username",
-                                                                                                              username));
+  public void addCommentWithMentionUser(String activity, String username, String textContent) {
+    // get the id of activity created
+    String id = $(byText(activity)).parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .getAttribute("id")
+                                   .split("UIActivityLoader")[1];
+    // click on comment link
+    $(byText(activity)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
+    // insert comment
+    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
+    SelenideElement frame = $(byText(activity)).parent()
+                                               .parent()
+                                               .parent()
+                                               .find(byAttribute("class", "cke_wysiwyg_frame cke_reset"));
+    switchTo().frame(frame);
+    $(byXpath("/html/body")).setValue("@" + username);
+    switchTo().defaultContent();
+    $(byAttribute("data-value", username)).waitUntil(Condition.visible, Configuration.timeout);
+    switchTo().frame(frame);
+    $(byXpath("/html/body")).pressEnter();
+    $(byXpath("/html/body")).sendKeys(textContent);
+    switchTo().defaultContent();
+    // executeJavaScript("CKEDITOR.instances.CommentTextarea" + id +
+    // ".insertText(\"" +"@"+username+ "\")", "");
+    // click on the button comment
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
+    $(byText(textContent)).should(Condition.exist);
+    info("The comment is added successfully");
+
     info("The comment is added successfully");
   }
 
@@ -843,17 +860,7 @@ public class ActivityStream {
   public void likeActivity(String activityText) {
     info("-- Action: Like or Unlike an activity --");
     info("-- Like activity --");
-    int numLike = Integer.parseInt(evt.waitForAndGetElement(ELEMENT_LIKE_NUMBER.replace("${title}", activityText))
-                                      .getText()
-                                      .trim());
-    evt.click(ELEMENT_ICON_LIKE.replace("${title}", activityText));
-    info("-- Verify Like button is highlighted --");
-    evt.waitForAndGetElement(ELEMENT_ICON_UNLIKE.replace("${title}", activityText));
-    info("-- Like successfully and Verify number of like is updated --");
-    int newNumLike = Integer.parseInt(evt.waitForAndGetElement(ELEMENT_LIKE_NUMBER.replace("${title}", activityText))
-                                         .getText()
-                                         .trim());
-    assert (newNumLike == (numLike + 1)) : "Number of like is updated";
+    $(byText(activityText)).parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).click();
 
   }
 
