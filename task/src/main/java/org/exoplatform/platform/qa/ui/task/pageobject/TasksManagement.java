@@ -120,6 +120,11 @@ public class TasksManagement {
     COMMENT_BUTTON.click();
   }
 
+  public void deletecomment (String task, String comment) {
+    $(byText(task)).click();
+    $(byText(comment)).hover();
+    $(byText(comment)).parent().parent().parent().find(byClassName("uiIconTrashMini")).click();
+  }
   public void replytocommentTask(String task, String reply) {
     $(byText(task)).click();
     ELEMENT_LABEL_REPLY_TASK.click();

@@ -1086,6 +1086,20 @@ public class ActivityStream {
     $(byText(reply)).should(Condition.exist);
   }
 
+  public void deletereplyinAS (String reply){
+    String idCommentContainer = $(byText(reply)).parent()
+                                                .parent()
+                                                .parent()
+                                                .parent()
+                                                .getAttribute("id")
+                                                .split("commentContainercomment")[1];
+    $(byId(ELEMENT_REPLY_CONTAINER.replace("{id}", idCommentContainer))).hover();
+    $(byId(ELEMENT_INCON_DELETE_COMMENT.replace("{id}", idCommentContainer))).click();
+    //Confirm delete
+    ELEMENT_DELETE_POPUP_OK.click();
+    $(byText(reply)).shouldNot(Condition.exist);
+  }
+
   public void replytocommentinPreview(String comment, String reply) {
     // Click on reply link
     $(byId("commentArea")).find(byText(comment)).parent()
@@ -1161,9 +1175,6 @@ public class ActivityStream {
     ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
 
   }
-
-
-
 
   public void deletecomment (String activity, String comment){
     String idBlocComment = $(byText(activity)).parent()

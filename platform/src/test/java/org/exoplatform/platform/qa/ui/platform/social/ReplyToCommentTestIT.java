@@ -100,11 +100,35 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
         activityStream.replytocomment(comment, reply);
-
         activityStream.deleteactivity(activity1);
         executeJavaScript("window.scrollBy(0,-2000)", "");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
+    }
+
+    @Test
+    public void test02_DeleteReplyToCommentInAS() {
+        String activity1 = "activity1" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+        String reply = "Reply" + getRandomNumber();
+//        homePagePlatform.goToConnections();
+//        connectionsManagement.connectToAUser(DATA_USER2);
+//        homePagePlatform.goToHomePage();
+        activityStream.addActivity(activity1, "");
+//        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+//        homePagePlatform.goToConnections();
+//        connectionsManagement.acceptAConnection(DATA_USER1);
+//        homePagePlatform.goToHomePage();
+        activityStream.commentActivity(activity1, comment);
+//        manageLogInOut.signOut();
+//        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+//        homePagePlatform.goToHomePage();
+        activityStream.replytocomment(comment, reply);
+        activityStream.deletereplyinAS(reply);
+        activityStream.deleteactivity(activity1);
+        executeJavaScript("window.scrollBy(0,-2000)", "");
+//        homePagePlatform.goToConnections();
+//        connectionsManagement.removeConnection(DATA_USER2);
     }
 
     @Test
@@ -324,9 +348,8 @@ public class ReplyToCommentTestIT extends Base {
         connectionsManagement.removeConnection(DATA_USER2);
     }
 
-    //Check attachment
     @Test
-    public void test09_CheckReplyToCommentInForum() {
+    public void test09_CheckReplyToCommentInForumBelongsToParentComment() {
         String nameCat = "Category" + getRandomNumber();
         String nameForum = "Forum" + getRandomNumber();
         String nameTopic = "Topic" + getRandomNumber();
@@ -364,7 +387,7 @@ public class ReplyToCommentTestIT extends Base {
 
     //Check reply turns to quote
     @Test
-    public void test10_CheckReplyToCommentInForum() {
+    public void test10_CheckReplyToCommentTurnsToQuoteInForum() {
         String nameCat = "Category" + getRandomNumber();
         String nameForum = "Forum" + getRandomNumber();
         String nameTopic = "Topic" + getRandomNumber();
@@ -404,7 +427,7 @@ public class ReplyToCommentTestIT extends Base {
 
     //Check that each reply is attached to its parent comment
     @Test
-    public void test11_CheckReplyToCommentInForum() {
+    public void test11_CheckAllRepliesBelongsToSameParentCommentInTpoicActivity() {
         String nameCat = "Category" + getRandomNumber();
         String nameForum = "Forum" + getRandomNumber();
         String nameTopic = "Topic" + getRandomNumber();
@@ -448,7 +471,7 @@ public class ReplyToCommentTestIT extends Base {
 
     //Check when replying to same comment for two times
     @Test
-    public void test12_CheckReplyToCommentInForum() {
+    public void test12_CheckTwoRepiesyBelongsToSameParentCommentInForum() {
         String nameCat = "Category" + getRandomNumber();
         String nameForum = "Forum" + getRandomNumber();
         String nameTopic = "Topic" + getRandomNumber();
@@ -491,7 +514,6 @@ public class ReplyToCommentTestIT extends Base {
         connectionsManagement.removeConnection(DATA_USER2);
     }
 
-
     @Test
     public void test13_CheckReplyToCommentInPreviewMode() {
         String activity1 = "Activity1" + getRandomNumber();
@@ -527,7 +549,7 @@ public class ReplyToCommentTestIT extends Base {
     }
 
     @Test
-    public void test14_CheckReplyToCommentInPreviewMode() {
+    public void test14_CheckReplyToReplyInPreviewMode() {
         String activity1 = "Activity1" + getRandomNumber();
         String comment = "Comment" + getRandomNumber();
         String reply = "Reply" + getRandomNumber();
@@ -567,7 +589,6 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
     }
-
 
     @Test
     public void test15_ReplyToCommentShortenSectionInPreview() {
@@ -798,7 +819,7 @@ public class ReplyToCommentTestIT extends Base {
         tasksManagement.deleteTask(task);
     }
     @Test
-    public void test20_Checktworepliesnotcollapsed() {
+    public void test20_ChecktworepliesnotcollapsedInTasks() {
         String task = "Task" + getRandomNumber();
         String comment = "comment" + getRandomNumber();
         String reply1 = "Reply1" + getRandomNumber();
@@ -822,4 +843,31 @@ public class ReplyToCommentTestIT extends Base {
         executeJavaScript("window.scrollBy(0,-2000)", "");
         tasksManagement.deleteTask(task);
     }
+
+    @Test
+    public void test21_CheckReplyAfterDeleteParentCommentInTasks() {
+
+        String task = "Task" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+        String reply = "Reply" + getRandomNumber();
+        String replytoreply = "ReplyToReply" + getRandomNumber();
+        homePagePlatform.goToTaskPage();
+        tasksManagement.addTask(task);
+        tasksManagement.addCowroker(task);
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToTaskPage();
+        tasksManagement.commentTask(task,comment);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToTaskPage();
+        tasksManagement.replytocommentTask(task,reply);
+        $(byText(reply)).waitUntil(Condition.appears, Configuration.timeout);
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToTaskPage();
+        tasksManagement.replytoreply(task,reply,replytoreply);
+        tasksManagement.deletecomment(task,comment);
+        $(byText(reply)).shouldNot(Condition.exist);
+        $(byText(replytoreply)).shouldNot(Condition.exist);
+        tasksManagement.deleteTask(task);
+        }
 }
