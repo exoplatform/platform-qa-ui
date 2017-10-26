@@ -124,6 +124,14 @@ public class TasksManagement {
     $(byText(task)).click();
     $(byText(comment)).hover();
     $(byText(comment)).parent().parent().parent().find(byClassName("uiIconTrashMini")).click();
+    $(byText(comment)).shouldNot(Condition.exist);
+  }
+
+  public void deletereply (String task, String reply){
+    $(byText(task)).click();
+    $(byText(reply)).hover();
+    $(byText(reply)).parent().parent().find(byClassName("uiIconTrashMini")).click();
+    $(byText(reply)).shouldNot(Condition.exist);
   }
   public void replytocommentTask(String task, String reply) {
     $(byText(task)).click();

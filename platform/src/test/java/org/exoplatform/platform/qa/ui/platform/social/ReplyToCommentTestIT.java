@@ -4,10 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
-import org.exoplatform.platform.qa.ui.forum.pageobject.ForumCategoryManagement;
-import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
-import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
-import org.exoplatform.platform.qa.ui.forum.pageobject.ForumTopicManagement;
+import org.exoplatform.platform.qa.ui.forum.pageobject.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.task.pageobject.ProjectsManagement;
@@ -24,8 +21,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_VIEW_ALL_REPLIES_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -36,6 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ReplyToCommentTestIT extends Base {
 
     ForumTopicManagement forumTopicManagement;
+
     TasksManagement tasksManagement;
 
     ForumForumManagement forumForumManagement;
@@ -111,24 +108,24 @@ public class ReplyToCommentTestIT extends Base {
         String activity1 = "activity1" + getRandomNumber();
         String comment = "comment" + getRandomNumber();
         String reply = "Reply" + getRandomNumber();
-//        homePagePlatform.goToConnections();
-//        connectionsManagement.connectToAUser(DATA_USER2);
-//        homePagePlatform.goToHomePage();
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        homePagePlatform.goToHomePage();
         activityStream.addActivity(activity1, "");
-//        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-//        homePagePlatform.goToConnections();
-//        connectionsManagement.acceptAConnection(DATA_USER1);
-//        homePagePlatform.goToHomePage();
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
         activityStream.commentActivity(activity1, comment);
-//        manageLogInOut.signOut();
-//        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
-//        homePagePlatform.goToHomePage();
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToHomePage();
         activityStream.replytocomment(comment, reply);
         activityStream.deletereplyinAS(reply);
         activityStream.deleteactivity(activity1);
         executeJavaScript("window.scrollBy(0,-2000)", "");
-//        homePagePlatform.goToConnections();
-//        connectionsManagement.removeConnection(DATA_USER2);
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
     }
 
     @Test
@@ -709,6 +706,7 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
     }
+
     @Test
     public void test17_ReplyToCommentInTasks() {
         String task = "task" + getRandomNumber();
@@ -720,15 +718,36 @@ public class ReplyToCommentTestIT extends Base {
         tasksManagement.addCowroker(task);
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToTaskPage();
-        tasksManagement.commentTask(task,comment);
+        tasksManagement.commentTask(task, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToTaskPage();
-        tasksManagement.replytocommentTask(task,reply);
+        tasksManagement.replytocommentTask(task, reply);
         tasksManagement.deleteTask(task);
     }
+
     @Test
-    public void test18_ReplyToReplyInTasks() {
+    public void test18_DeleteReplyInTaks() {
+        String task = "Task" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+        String reply = "Reply" + getRandomNumber();
+        homePagePlatform.goToTaskPage();
+        tasksManagement.addTask(task);
+        tasksManagement.addCowroker(task);
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToTaskPage();
+        tasksManagement.commentTask(task, comment);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToTaskPage();
+        tasksManagement.replytocommentTask(task, reply);
+        $(byText(reply)).waitUntil(Condition.appears, Configuration.timeout);
+        tasksManagement.deletereply(task, reply);
+        tasksManagement.deleteTask(task);
+    }
+
+    @Test
+    public void test19_ReplyToReplyInTasks() {
         String task = "task" + getRandomNumber();
         String reply = "Reply" + getRandomNumber();
         String comment = "Comment" + getRandomNumber();
@@ -739,20 +758,20 @@ public class ReplyToCommentTestIT extends Base {
         tasksManagement.addCowroker(task);
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToTaskPage();
-        tasksManagement.commentTask(task,comment);
+        tasksManagement.commentTask(task, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToTaskPage();
-        tasksManagement.replytocommentTask(task,reply);
+        tasksManagement.replytocommentTask(task, reply);
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToTaskPage();
-        tasksManagement.replytoreply(task,reply,replytoreply);
+        tasksManagement.replytoreply(task, reply, replytoreply);
         executeJavaScript("window.scrollBy(0,-2000)", "");
         tasksManagement.deleteTask(task);
     }
 
     @Test
-    public void test19_ReplyToCommentShortenSectionInTask() {
+    public void test20_ReplyToCommentShortenSectionInTask() {
         String task = "Task" + getRandomNumber();
         String comment = "comment" + getRandomNumber();
         String reply1 = "Reply1" + getRandomNumber();
@@ -764,18 +783,18 @@ public class ReplyToCommentTestIT extends Base {
         //login mary
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToTaskPage();
-        tasksManagement.commentTask(task,comment);
+        tasksManagement.commentTask(task, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToTaskPage();
-        tasksManagement.replytocommentTask(task,reply1);
+        tasksManagement.replytocommentTask(task, reply1);
         refresh();
-        tasksManagement.replytocommentTask(task,reply2);
+        tasksManagement.replytocommentTask(task, reply2);
         refresh();
-        tasksManagement.replytocommentTask(task,reply3);
+        tasksManagement.replytocommentTask(task, reply3);
         refresh();
         //Check that the replies number in show reply link
-        tasksManagement.showallreplies(task,comment);
+        tasksManagement.showallreplies(task, comment);
         //Check that replies are well added
         $(byText(reply1)).waitUntil(Condition.appears, Configuration.timeout);
         $(byText(reply2)).waitUntil(Condition.appears, Configuration.timeout);
@@ -790,7 +809,7 @@ public class ReplyToCommentTestIT extends Base {
     }
 
     @Test
-    public void test19_CheckReplyNumberInTask() {
+    public void test21_CheckReplyNumberInTask() {
         String task = "Task" + getRandomNumber();
         String comment = "comment" + getRandomNumber();
         String reply = "Reply" + getRandomNumber();
@@ -818,8 +837,9 @@ public class ReplyToCommentTestIT extends Base {
         executeJavaScript("window.scrollBy(0,-2000)", "");
         tasksManagement.deleteTask(task);
     }
+
     @Test
-    public void test20_ChecktworepliesnotcollapsedInTasks() {
+    public void test22_ChecktworepliesnotcollapsedInTasks() {
         String task = "Task" + getRandomNumber();
         String comment = "comment" + getRandomNumber();
         String reply1 = "Reply1" + getRandomNumber();
@@ -829,13 +849,13 @@ public class ReplyToCommentTestIT extends Base {
         tasksManagement.addCowroker(task);
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToTaskPage();
-        tasksManagement.commentTask(task,comment);
+        tasksManagement.commentTask(task, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToTaskPage();
-        tasksManagement.replytocommentTask(task,reply1);
+        tasksManagement.replytocommentTask(task, reply1);
         refresh();
-        tasksManagement.replytocommentTask(task,reply2);
+        tasksManagement.replytocommentTask(task, reply2);
         refresh();
         $(byText(task)).click();
         $(byText(reply1)).waitUntil(Condition.appears, Configuration.timeout);
@@ -845,7 +865,7 @@ public class ReplyToCommentTestIT extends Base {
     }
 
     @Test
-    public void test21_CheckReplyAfterDeleteParentCommentInTasks() {
+    public void test23_CheckReplyAfterDeleteParentCommentInTasks() {
 
         String task = "Task" + getRandomNumber();
         String comment = "comment" + getRandomNumber();
@@ -856,18 +876,18 @@ public class ReplyToCommentTestIT extends Base {
         tasksManagement.addCowroker(task);
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToTaskPage();
-        tasksManagement.commentTask(task,comment);
+        tasksManagement.commentTask(task, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToTaskPage();
-        tasksManagement.replytocommentTask(task,reply);
+        tasksManagement.replytocommentTask(task, reply);
         $(byText(reply)).waitUntil(Condition.appears, Configuration.timeout);
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToTaskPage();
-        tasksManagement.replytoreply(task,reply,replytoreply);
-        tasksManagement.deletecomment(task,comment);
+        tasksManagement.replytoreply(task, reply, replytoreply);
+        tasksManagement.deletecomment(task, comment);
         $(byText(reply)).shouldNot(Condition.exist);
         $(byText(replytoreply)).shouldNot(Condition.exist);
         tasksManagement.deleteTask(task);
-        }
+    }
 }
