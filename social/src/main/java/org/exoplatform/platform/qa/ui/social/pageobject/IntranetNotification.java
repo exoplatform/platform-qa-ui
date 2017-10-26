@@ -1,10 +1,15 @@
 package org.exoplatform.platform.qa.ui.social.pageobject;
 
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_NOTIFICATION_DROPDOWN;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.util.ArrayList;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
@@ -484,9 +489,9 @@ public class IntranetNotification {
    */
   public void checkBtnConnectJoinRequest(String name) {
     info("Verify that Accept button are shown on the popup");
-    evt.waitForAndGetElement(ELEMENT_CONNECT_ACCEPT_BUTTON.replace("$name", name));
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(name)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_INVITATION).should(Condition.exist);
     info("Verify that Refuse button are shown on the popup");
-    evt.waitForAndGetElement(ELEMENT_CONNECT_REFUSE_BUTTON.replace("$name", name));
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(name)).parent().parent().find(ELEMENT_BUTTON_CANCEL_INVITATION).should(Condition.exist);
   }
 
   /**
@@ -656,7 +661,8 @@ public class IntranetNotification {
    */
   public void markAllAsRead() {
     info("Click on Mark all as Read link");
-    evt.click(ELEMENT_INTRANET_NOTIFICATION_MARK_ALL_AS_READ);
+    $(ELEMENT_INTRANET_NOTIFICATION_MARK_ALL_AS_READ).click();
+    $(ELEMENT_INTRANET_NOTIFICATION_MARK_ALL_AS_READ).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
 
   }
 
@@ -678,7 +684,7 @@ public class IntranetNotification {
    */
   public void checkBadgeNoti(int num) {
     info("Check number of badge notification");
-    evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_BADGE_NUMBER.replace("$num", String.valueOf(num)));
+    ELEMENT_ALERT_NOTIFICATION_EXIST.parent().shouldHave(Condition.text(String.valueOf(num)));
   }
 
   /**
