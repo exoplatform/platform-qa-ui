@@ -24,7 +24,7 @@ import org.exoplatform.platform.qa.ui.forum.pageobject.ForumTopicManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 
-@Tag("smoke")
+@Tag("forum")
 @Tag("sniff")
 public class ForumTopicTestIT extends Base {
   HomePagePlatform        homePagePlatform;
