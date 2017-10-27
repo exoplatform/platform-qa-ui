@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
+import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byLinkText;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
@@ -23,11 +24,13 @@ public class ConnectionsManagement {
   public UserProfilePage       myProf;
 
   private ElementEventTestBase evt;
+  public HomePagePlatform homePagePlatform;
 
   public ConnectionsManagement(TestBase testBase) {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
     this.myProf = new UserProfilePage(testBase);
+    this.homePagePlatform=new HomePagePlatform(testBase);
   }
 
   /**
@@ -95,6 +98,7 @@ public class ConnectionsManagement {
     info("Click on remove button");
     searchPeople(username, null, null, null);
     $(ELEMENT_CONNECTION_REVOVE_BTN).click();
+    refresh();
     $(ELEMENT_CONNECTION_REVOVE_BTN).waitUntil(Condition.disappears, Configuration.timeout);
     info("Removed to the user");
   }
@@ -122,8 +126,8 @@ public class ConnectionsManagement {
     info("--Ignore a connection of a user--");
     info("Click on Ignore button");
     searchPeople(username, null, null, null);
-    evt.clickByJavascript(ELEMENT_CONNECTION_IGNORE_BTN.replace("${user}", username));
-    evt.waitForElementNotPresent(ELEMENT_CONNECTION_IGNORE_BTN.replace("${user}", username));
+    ELEMENT_CONTENT_PEOPLE.find(byText(username)).parent().parent().parent().findAll(byClassName("actionLabel")).get(0).click();
+    $(byText(username)).parent().parent().parent().find(byText("Ignore")).waitUntil(Condition.disappears,Configuration.timeout);
     info("Connected to the user");
   }
 
@@ -171,8 +175,10 @@ public class ConnectionsManagement {
     // With user confirmed the invitation, user becomes friend and user's name
     // is displayed on user's network list
     searchPeople(username, null, null, null);
-    if (accept)
-      $(byText("Remove Connection")).should(Condition.exist);
+    if (accept){
+
+      ELEMENT_CONNECTION_REVOVE_BTN.should(Condition.exist);
+    }
     else
       evt.waitForElementNotPresent(ELEMENT_CONNECTION_REVOVE_BTN);
   }
