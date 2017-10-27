@@ -15,11 +15,11 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
-import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
-import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER2;
+import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_VIEW_ALL_REPLIES_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_VIEW_ALL_REPLIES_LINK;
+import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_VIEW_ALL_REPLIES_LINK_TASK;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -96,9 +96,10 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
-        activityStream.replytocomment(comment, reply);
-        activityStream.deleteactivity(activity1);
+        activityStream.replytocomment(comment, reply,DATA_NAME_USER1);
+        refresh();
         executeJavaScript("window.scrollBy(0,-2000)", "");
+        activityStream.deleteactivity(activity1);
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
     }
@@ -120,10 +121,10 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
-        activityStream.replytocomment(comment, reply);
+        activityStream.replytocomment(comment, reply,DATA_NAME_USER1);
         activityStream.deletereplyinAS(reply);
-        activityStream.deleteactivity(activity1);
         executeJavaScript("window.scrollBy(0,-2000)", "");
+        activityStream.deleteactivity(activity1);
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
     }
@@ -147,9 +148,9 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
-        activityStream.replytocomment(comment, reply1);
-        activityStream.replytocomment(comment, reply2);
-        activityStream.replytocomment(comment, reply3);
+        activityStream.replytocomment(comment,reply1,DATA_NAME_USER1);
+        activityStream.replytocomment(comment,reply2,DATA_NAME_USER1);
+        activityStream.replytocomment(comment,reply3,DATA_NAME_USER1);
         refresh();
         //Check that the replies number in show reply link
         activityStream.showallreplies(comment);
@@ -185,10 +186,10 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
-        activityStream.replytocomment(comment, reply);
-        activityStream.replytocomment(comment, reply);
-        activityStream.replytocomment(comment, reply);
-        activityStream.replytocomment(comment, reply);
+        activityStream.replytocomment(comment,reply,DATA_NAME_USER1);
+        activityStream.replytocomment(comment,reply,DATA_NAME_USER1);
+        activityStream.replytocomment(comment,reply,DATA_NAME_USER1);
+        activityStream.replytocomment(comment,reply,DATA_NAME_USER1);
         refresh();
         //Check that the replies number in show reply link
         String idBlocComment = $(byText(comment)).parent()
@@ -202,6 +203,7 @@ public class ReplyToCommentTestIT extends Base {
                 .getAttribute("id")
                 .split("commentContainercomment")[1];
         $(byId(ELEMENT_VIEW_ALL_REPLIES_LINK.replace("{id}", idBlocComment))).waitUntil(Condition.appears, Configuration.timeout).shouldHave(Condition.text("4"));
+        executeJavaScript("window.scrollBy(0,-2000)", "");
         activityStream.deleteactivity(activity1);
         executeJavaScript("window.scrollBy(0,-2000)", "");
         homePagePlatform.goToConnections();
@@ -226,13 +228,13 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
-        activityStream.replytocomment(comment, reply1);
-        activityStream.replytocomment(comment, reply2);
+        activityStream.replytocomment(comment,reply1,DATA_NAME_USER1);
+        activityStream.replytocomment(comment,reply2,DATA_NAME_USER1);
         refresh();
         $(byText(reply1)).waitUntil(Condition.appears, Configuration.timeout);
         $(byText(reply2)).waitUntil(Condition.appears, Configuration.timeout);
-        activityStream.deleteactivity(activity1);
         executeJavaScript("window.scrollBy(0,-2000)", "");
+        activityStream.deleteactivity(activity1);
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
     }
@@ -256,7 +258,7 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
-        activityStream.replytocomment(comment, reply);
+        activityStream.replytocomment(comment,reply,DATA_NAME_USER1);
         $(byText(reply)).waitUntil(Condition.appears, Configuration.timeout);
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         activityStream.replytoreply(activity1, reply, replytoreply);
@@ -287,7 +289,7 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
-        activityStream.replytocomment(comment, reply);
+        activityStream.replytocomment(comment,reply,DATA_NAME_USER1);
         $(byText(reply)).waitUntil(Condition.appears, Configuration.timeout);
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         activityStream.replytoreply(activity1, reply, replytoreply);
@@ -332,9 +334,14 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToForum();
         forumHomePage.goToTopic(nameTopic);
         forumTopicManagement.quotePost(title, content);
+        executeJavaScript("window.scrollBy(0,-2000)", "");
         homePagePlatform.goToHomePage();
         String comment_parent_id = $(byText(content)).parent().parent().parent().parent().getAttribute("data-comment-id");
-        assertEquals($(byText(content + "quote")).parent().parent().parent().parent().getAttribute("data-parent-comment"), comment_parent_id);
+        assertEquals($(byText(content)).parent()
+                                       .parent()
+                                       .parent()
+                                       .parent()
+                                       .getAttribute("data-parent-comment"), comment_parent_id);
         homePagePlatform.goToForum();
         info("Go to Forum home page");
         forumHomePage.goToHomeCategory();
@@ -371,7 +378,7 @@ public class ReplyToCommentTestIT extends Base {
         activityStream.commentTopicActivity(description, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
-        activityStream.replytocomment(comment, reply);
+        activityStream.replytocomment(comment,reply,DATA_NAME_USER1);
         $(byText(nameTopic)).click();
         $(byText(reply)).parent().shouldHave(Condition.text(comment));
         forumHomePage.goToHomeCategory();
@@ -409,7 +416,7 @@ public class ReplyToCommentTestIT extends Base {
         activityStream.commentTopicActivity(description, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
-        activityStream.replytocomment(comment, reply);
+        activityStream.replytocomment(comment,reply,DATA_NAME_USER1);
         $(byText(nameTopic)).click();
         $(byClassName("contentQuote")).shouldHave(Condition.text(comment));
         $(byClassName("contentQuote")).shouldHave(Condition.text(DATA_USER2));
@@ -453,8 +460,8 @@ public class ReplyToCommentTestIT extends Base {
         activityStream.commentTopicActivity(description, comment2);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
-        activityStream.replytocomment(comment1, reply1);
-        activityStream.replytocomment(comment2, reply2);
+        activityStream.replytocomment(comment1,reply1,DATA_NAME_USER1);
+        activityStream.replytocomment(comment2,reply2,DATA_NAME_USER1);
         $(byText(nameTopic)).click();
         $(byText(reply1)).parent().shouldHave(Condition.text(comment1));
         $(byText(reply2)).parent().shouldHave(Condition.text(comment2));
@@ -492,12 +499,13 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
         activityStream.commentTopicActivity(description, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
-        activityStream.replytocomment(comment, reply1);
+        activityStream.replytocomment(comment,reply1,DATA_NAME_USER1);
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-        activityStream.replytocomment(comment, reply2);
+        activityStream.replytocomment(comment,reply2,DATA_NAME_USER2);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         $(byText(nameTopic)).click();
@@ -833,7 +841,7 @@ public class ReplyToCommentTestIT extends Base {
         $(byText(task)).click();
         //Check that the replies number in show reply link
         String idDataComment = $(byText(comment)).parent().parent().getAttribute("data-commentid");
-        $(byId(ELEMENT_VIEW_ALL_REPLIES_LINK.replace("{id}", idDataComment))).waitUntil(Condition.appears, Configuration.timeout).shouldHave(Condition.text("4"));
+        $(byId(ELEMENT_VIEW_ALL_REPLIES_LINK_TASK.replace("{id}", idDataComment))).waitUntil(Condition.appears, Configuration.timeout).shouldHave(Condition.text("4"));
         executeJavaScript("window.scrollBy(0,-2000)", "");
         tasksManagement.deleteTask(task);
     }

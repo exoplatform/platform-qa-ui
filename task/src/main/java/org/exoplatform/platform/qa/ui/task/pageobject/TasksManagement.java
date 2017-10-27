@@ -9,9 +9,7 @@ import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static com.codeborne.selenide.Selenide.switchTo;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -124,6 +122,7 @@ public class TasksManagement {
     $(byText(task)).click();
     $(byText(comment)).hover();
     $(byText(comment)).parent().parent().parent().find(byClassName("uiIconTrashMini")).click();
+    refresh();
     $(byText(comment)).shouldNot(Condition.exist);
   }
 
@@ -157,7 +156,7 @@ public class TasksManagement {
     $(byText(task)).click();
     String idDataComment = $(byText(comment)).parent().parent().getAttribute("data-commentid");
     // Get id Comment button
-    $(byId(ELEMENT_VIEW_ALL_REPLIES_LINK.replace("{id}", idDataComment))).waitUntil(Condition.appears, Configuration.timeout).findElementByClassName("subCommentShowAllLink").click();
+    $(byId(ELEMENT_VIEW_ALL_REPLIES_LINK_TASK.replace("{id}", idDataComment))).waitUntil(Condition.appears, Configuration.timeout).findElementByClassName("subCommentShowAllLink").click();
   }
   /**
    * Define options in Task list

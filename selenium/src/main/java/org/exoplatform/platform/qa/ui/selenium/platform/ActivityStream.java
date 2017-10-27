@@ -1054,7 +1054,7 @@ public class ActivityStream {
   public enum changeTypes {
     No_Value, Has_One_Value;
   }
-  public void replytocomment(String comment, String reply) {
+  public void replytocomment(String comment, String reply,String user) {
     String id = $(byText(comment)).parent()
             .parent()
             .parent()
@@ -1084,6 +1084,7 @@ public class ActivityStream {
     // click on the button comment
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(reply)).should(Condition.exist);
+    $(byText(reply)).parent().parent().find(byText(user)).should(Condition.exist);
   }
 
   public void deletereplyinAS (String reply){
