@@ -25,6 +25,8 @@ import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
+import com.codeborne.selenide.SelenideElement;
+
 public class ActivityStream {
   private final TestBase       testBase;
 
@@ -462,10 +464,12 @@ public class ActivityStream {
    */
   public void addText(String text) {
     info("----Add text into activity text box-----");
-    SelenideElement frame = $(byClassName("cke_wysiwyg_frame"));
+    SelenideElement frame=$(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible,Configuration.timeout);
     switchTo().frame(frame);
-    $(byXpath("/html/body")).sendKeys(text);
+    ELEMENT_INPUT_ACTIVITY.click();
+    ELEMENT_INPUT_ACTIVITY.sendKeys(text);
     switchTo().defaultContent();
+
   }
 
   /**

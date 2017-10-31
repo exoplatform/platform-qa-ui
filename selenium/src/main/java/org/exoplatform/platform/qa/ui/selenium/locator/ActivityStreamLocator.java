@@ -25,6 +25,8 @@ import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byId;
+
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 
 public final class ActivityStreamLocator {
@@ -692,6 +694,7 @@ public final class ActivityStreamLocator {
     public static final String ELEMENT_DATE_COMMENT="dateTime";
     public static final SelenideElement ELEMENT_ACTIVITY_STREAM_CONTAINER=$(byId("UIActivitiesLoader"));
     public static final By ELEMENT_ICON_LIKE_ACTIVITY=byClassName("uiIconThumbUp");
+    public static final SelenideElement ELEMENT_INPUT_ACTIVITY=$(byXpath("/html/body"));
     public static final String ELEMENT_INCON_LIKE_COMMENT="LikeCommentLinkcomment{id}";
     public static final String ELEMENT_INCON_LIKE_REPLY="likeCommentLink_comment{id}";
     public static final String ELEMENT_INCON_DELETE_COMMENT="DeleteCommentButtoncomment{id}";
