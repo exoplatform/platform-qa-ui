@@ -22,6 +22,7 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_VIEW_ALL_REPLIES_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_VIEW_ALL_REPLIES_LINK_TASK;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
@@ -167,7 +168,7 @@ public class ReplyToCommentTestIT extends Base {
         activityStream.replyToComment(comment, reply3, DATA_NAME_USER1);
         refresh();
         //Check that the replies number in show reply link
-        activityStream.showallReplies(comment);
+        activityStream.showAllReplies(comment);
         //Check that replies are well added
         $(byText(reply1)).waitUntil(Condition.appears, Configuration.timeout);
         $(byText(reply2)).waitUntil(Condition.appears, Configuration.timeout);
@@ -660,7 +661,7 @@ public class ReplyToCommentTestIT extends Base {
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
         //Check that the replies number in show reply link
-        activityStream.showallReplies(comment);
+        activityStream.showAllReplies(comment);
         //Check that replies are well added
         $(byText(reply1)).waitUntil(Condition.appears, Configuration.timeout);
         $(byText(reply2)).waitUntil(Condition.appears, Configuration.timeout);
@@ -923,5 +924,50 @@ public class ReplyToCommentTestIT extends Base {
         $(byText(replytoreply)).shouldNot(Condition.exist);
         tasksManagement.deleteTask(task);
     }
+    @Test
+    public void test24_CheckReplyWithImage () {
+        String activity1 = "activity1" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
+        String reply1 = "Reply" + getRandomNumber();
+        String reply2 = "Reply" + getRandomNumber();
+        String reply3 = "Reply" + getRandomNumber();
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        homePagePlatform.goToHomePage();
+        ELEMENT_TAB_LINK.click();
+        refresh();
+        ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
+        ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
+        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
+        activityStream.addActivity(activity1, "");
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        activityStream.commentActivity(activity1, comment);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToHomePage();
+        activityStream.replyToComment(comment,reply1,DATA_NAME_USER1);
+        String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        OPEN_IN_DOCUMENT_ICON.click();
+        GO_BACK_ICON.click();
+        ELEMENT_ADDRESS_BAR_ICON_VIEW.click();
+        $(byText("eXo-Platform.png")).contextClick();
+        COPY_URL_TO_CLIPBOARD_BUTTON.click();
+        executeJavaScript("window.scrollBy(0,-2000)", "");
+        homePagePlatform.goToHomePage();
+        activityStream.replyToCommentUsingImage(comment,reply2,DATA_NAME_USER1);
+        activityStream.replyToComment(comment,reply3,DATA_NAME_USER1);
+        refresh();
+        activityStream.showAllReplies(comment);
+        $(byText(reply1)).waitUntil(Condition.appears, Configuration.timeout);
+        $(byText(reply2)).waitUntil(Condition.appears, Configuration.timeout);
+        $(byText(reply3)).waitUntil(Condition.appears, Configuration.timeout);
+        executeJavaScript("window.scrollBy(0,-2000)", "");
+        activityStream.deleteactivity(activity1);
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+    }
 }
-

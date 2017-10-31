@@ -7,6 +7,7 @@ import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
@@ -15,6 +16,7 @@ import java.awt.event.KeyEvent;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
@@ -1087,6 +1089,45 @@ public class ActivityStream {
     $(byText(reply)).parent().parent().find(byText(user)).should(Condition.exist);
   }
 
+  public void replyToCommentUsingImage(String comment, String reply,String user) {
+        String id = $(byText(comment)).parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .getAttribute("id")
+            .split("CommentBlockBound")[1];
+    String idBlocComment = $(byText(comment)).parent()
+            .parent()
+            .parent()
+            .find(byText(comment))
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .getAttribute("id")
+            .split("commentContainercomment")[1];
+    executeJavaScript("window.scrollBy(0,-250)");
+    // Click on reply link
+    $(byId(ELEMENT_lABEL_REPLY_COMMENT.replace("{id}", idBlocComment))).click();
+    // Insert the reply
+    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
+    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + reply + "\")", "");
+    info("Verify that the reply is added");
+    //Click on the Insert image icon
+    $(byText(comment)).parent().parent().parent().parent().parent().find(byClassName("cke_button__simpleimage ")).click();
+    //insert URL
+   // $(byClassName("cke_dialog_ui_input_text")).findElementByClassName("cke_dialog_ui_input_text").sendKeys("http://qa-ui03.acceptance7.exoplatform.org/rest/private/jcr/repository/collaboration/Users/j___/jo___/joh___/john/Public/Activity Stream Documents/eXo-Platform.png");
+    $$(byClassName("cke_dialog_ui_input_text")).get(1).sendKeys(Keys.CONTROL,"v");
+    $$(byClassName("cke_dialog_ui_input_text")).get(1).pressEnter();
+    //Validate
+    // click on the button comment
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
+    $(byText(reply)).should(Condition.exist);
+    $(byText(reply)).parent().parent().find(byText(user)).should(Condition.exist);
+  }
+
   public void deleteReplyInAS (String reply){
     String idCommentContainer = $(byText(reply)).parent()
                                                 .parent()
@@ -1113,7 +1154,7 @@ public class ActivityStream {
 
   }
 
-  public void showallReplies(String comment) {
+  public void showAllReplies(String comment) {
     String idBlocComment = $(byText(comment)).parent()
             .parent()
             .parent()

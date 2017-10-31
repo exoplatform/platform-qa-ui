@@ -248,8 +248,10 @@ public class ECMSLocator {
                                                                         By.xpath(".//*[@id='UIDocumentNodeList']//*[contains(@class,'rowView')]");
 
   // Address Bar
-  public static final By              ELEMENT_ADDRESS_BAR_ICON_VIEW                                        =
-                                                                    By.xpath(".//*[@id='UIAddressBar']//*[@class='uiIconEcmsViewDefault uiIconEcmsViewIcons uiIconEcmsLightGray']");
+  public static final SelenideElement ELEMENT_ADDRESS_BAR_ICON_VIEW = $(byClassName("uiIconEcmsViewIcons"));
+  public static final SelenideElement COPY_URL_TO_CLIPBOARD_BUTTON = $(byClassName("uiIconEcmsCopyUrlToClipboard"));
+  public static final SelenideElement OPEN_IN_DOCUMENT_ICON = $(byClassName("uiIconGotoFolder"));
+  public static final SelenideElement GO_BACK_ICON = $(byClassName("uiIconEcmsGoBack"));
 
   public static final By              ELEMENT_ADDRESS_BAR_LIST_VIEW                                        =
                                                                     By.xpath(".//*[@id='UIAddressBar']//*[@class='uiIconEcmsViewDefault uiIconEcmsViewList uiIconEcmsLightGray']");
