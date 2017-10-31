@@ -513,9 +513,9 @@ public class ForumTopicManagement {
     $(ELEMENT_START_TOPIC_ATTACH_FILE).click();
     File file = $(By.className("file")).uploadFromClasspath("data/forum/topic_attachment.txt");
     assertTrue(file.exists());
-    $(ELEMENT_SAVE_BTN).click();
+    $(ELEMENT_SAVE_BTN).pressEnter();
 
-    $(ELEMENT_SUBMIT_BUTTON).click();
+    $(ELEMENT_SUBMIT_BUTTON).pressEnter();
     $(ELEMENT_SUBMIT_BUTTON).waitUntil(Condition.disappear, Configuration.timeout);
     info("Verify that the topic is created");
 

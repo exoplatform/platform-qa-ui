@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.selenium.platform;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_CONNECTION_EVERYONE_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
@@ -56,6 +57,7 @@ public class HomePagePlatform {
    */
   public void goToHomePage() {
     info("Click on Home link of intranet page");
+    executeJavaScript("window.scrollBy(0,-5500)", "");
     $(ELEMENT_HOME_LINK_PLF).click();
   }
 
