@@ -104,7 +104,7 @@ public class TasksManagement {
     ELEMENT_TASK_BUTTON_DELETE_OK.click();
   }
 
-  public void addCowroker(String task) {
+  public void addCoworker(String task) {
     $(byText(task)).click();
     ELEMENT_EDIT_ASSIGNEE.click();
     COWORKER_INPUT_FIELD.setValue("Mary");
@@ -121,7 +121,7 @@ public class TasksManagement {
     COMMENT_BUTTON.click();
   }
 
-  public void deletecomment (String task, String comment) {
+  public void deleteComment (String task, String comment) {
     $(byText(task)).click();
     $(byText(comment)).hover();
     $(byText(comment)).parent().parent().parent().find(byClassName("uiIconTrashMini")).click();
@@ -129,13 +129,13 @@ public class TasksManagement {
     $(byText(comment)).shouldNot(Condition.exist);
   }
 
-  public void deletereply (String task, String reply){
+  public void deleteReply (String task, String reply){
     $(byText(task)).click();
     $(byText(reply)).hover();
     $(byText(reply)).parent().parent().find(byClassName("uiIconTrashMini")).click();
     $(byText(reply)).shouldNot(Condition.exist);
   }
-  public void replytocommentTask(String task, String reply) {
+  public void replyToCommentTask(String task, String reply, String user) {
     $(byText(task)).click();
     ELEMENT_LABEL_REPLY_TASK.click();
     SelenideElement frame= ELEMENT_INPUT_COMMENT_TASK;
@@ -143,16 +143,18 @@ public class TasksManagement {
     COMMENT_INPUT_AREA.sendKeys(reply);
     switchTo().defaultContent();
     COMMENT_BUTTON.click();
+    $(byText(reply)).parent().parent().parent().parent().find(byText(user)).should(Condition.exist);
   }
 
-  public void replytoreply(String task,String reply,String replytoreply) {
+  public void replyToReply(String task,String reply,String replytoreply, String user) {
     $(byText(task)).click();
     $(byText(reply)).parent().parent().find(byClassName("replyCommentLink")).click();
     SelenideElement frame= ELEMENT_INPUT_COMMENT_TASK;
     switchTo().frame(frame);
-    COMMENT_INPUT_AREA.sendKeys(reply);
+    COMMENT_INPUT_AREA.sendKeys(replytoreply);
     switchTo().defaultContent();
     COMMENT_BUTTON.click();
+    $(byText(replytoreply)).parent().parent().parent().parent().find(byText(user)).should(Condition.exist);
   }
 
   public void showAllReplies(String task, String comment) {

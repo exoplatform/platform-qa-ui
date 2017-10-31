@@ -4,7 +4,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
-import org.exoplatform.platform.qa.ui.forum.pageobject.*;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumCategoryManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
@@ -16,6 +15,7 @@ import org.exoplatform.platform.qa.ui.task.pageobject.TasksManagement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
@@ -24,16 +24,6 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLoca
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_VIEW_ALL_REPLIES_LINK_TASK;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.*;
-import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
-import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER2;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -95,25 +85,26 @@ public class ReplyToCommentTestIT extends Base {
 
     @Test
     public void test01_ReplyToCommentInAS() {
-        String activity1 = "activity1" + getRandomNumber();
-        String comment = "comment" + getRandomNumber();
+        String activity = "Activity" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
         String reply = "Reply" + getRandomNumber();
         homePagePlatform.goToConnections();
         connectionsManagement.connectToAUser(DATA_USER2);
         homePagePlatform.goToHomePage();
-        activityStream.addActivity(activity1, "");
+        activityStream.addActivity(activity, "");
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        activityStream.commentActivity(activity1, comment);
+        activityStream.commentActivity(activity, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
         activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
         refresh();
         executeJavaScript("window.scrollBy(0,-2000)", "");
-        activityStream.deleteactivity(activity1);
+        activityStream.deleteActivity(activity);
+        executeJavaScript("window.scrollBy(0,-2000)", "");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
     }
@@ -146,20 +137,20 @@ public class ReplyToCommentTestIT extends Base {
 
     @Test
     public void test03_ReplyToCommentShortenSection() {
-        String activity1 = "activity1" + getRandomNumber();
-        String comment = "comment" + getRandomNumber();
+        String activity = "Activity" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
         String reply1 = "Reply" + getRandomNumber();
         String reply2 = "Reply" + getRandomNumber();
         String reply3 = "Reply" + getRandomNumber();
         homePagePlatform.goToConnections();
         connectionsManagement.connectToAUser(DATA_USER2);
         homePagePlatform.goToHomePage();
-        activityStream.addActivity(activity1, "");
+        activityStream.addActivity(activity, "");
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        activityStream.commentActivity(activity1, comment);
+        activityStream.commentActivity(activity, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
@@ -178,7 +169,7 @@ public class ReplyToCommentTestIT extends Base {
         assertEquals($(byText(reply1)).parent().parent().parent().parent().getAttribute("data-parent-comment"), comment_parent_id);
         assertEquals($(byText(reply2)).parent().parent().parent().parent().getAttribute("data-parent-comment"), comment_parent_id);
         assertEquals($(byText(reply3)).parent().parent().parent().parent().getAttribute("data-parent-comment"), comment_parent_id);
-        activityStream.deleteactivity(activity1);
+        activityStream.deleteActivity(activity);
         executeJavaScript("window.scrollBy(0,-2000)", "");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
@@ -186,18 +177,18 @@ public class ReplyToCommentTestIT extends Base {
 
     @Test
     public void test04_CheckReplyNumberInAS() {
-        String activity1 = "activity1" + getRandomNumber();
-        String comment = "comment" + getRandomNumber();
+        String activity = "Activity" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
         String reply = "Reply" + getRandomNumber();
         homePagePlatform.goToConnections();
         connectionsManagement.connectToAUser(DATA_USER2);
         homePagePlatform.goToHomePage();
-        activityStream.addActivity(activity1, "");
+        activityStream.addActivity(activity, "");
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        activityStream.commentActivity(activity1, comment);
+        activityStream.commentActivity(activity, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
@@ -205,6 +196,7 @@ public class ReplyToCommentTestIT extends Base {
         activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
         activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
         activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
+
         refresh();
         //Check that the replies number in show reply link
         String idBlocComment = $(byText(comment)).parent()
@@ -219,7 +211,7 @@ public class ReplyToCommentTestIT extends Base {
                 .split("commentContainercomment")[1];
         $(byId(ELEMENT_VIEW_ALL_REPLIES_LINK.replace("{id}", idBlocComment))).waitUntil(Condition.appears, Configuration.timeout).shouldHave(Condition.text("4"));
         executeJavaScript("window.scrollBy(0,-2000)", "");
-        activityStream.deleteactivity(activity1);
+        activityStream.deleteActivity(activity);
         executeJavaScript("window.scrollBy(0,-2000)", "");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
@@ -227,19 +219,19 @@ public class ReplyToCommentTestIT extends Base {
 
     @Test
     public void test05_Checktworepliesnotcollapsed() {
-        String activity1 = "activity1" + getRandomNumber();
-        String comment = "comment" + getRandomNumber();
+        String activity = "Activity" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
         String reply1 = "Reply" + getRandomNumber();
         String reply2 = "Reply" + getRandomNumber();
         homePagePlatform.goToConnections();
         connectionsManagement.connectToAUser(DATA_USER2);
         homePagePlatform.goToHomePage();
-        activityStream.addActivity(activity1, "");
+        activityStream.addActivity(activity, "");
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        activityStream.commentActivity(activity1, comment);
+        activityStream.commentActivity(activity, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
@@ -249,8 +241,7 @@ public class ReplyToCommentTestIT extends Base {
         $(byText(reply1)).waitUntil(Condition.appears, Configuration.timeout);
         $(byText(reply2)).waitUntil(Condition.appears, Configuration.timeout);
         executeJavaScript("window.scrollBy(0,-2000)", "");
-        activityStream.deleteactivity(activity1);
-        activityStream.deleteactivity(activity1);
+        activityStream.deleteActivity(activity);
         executeJavaScript("window.scrollBy(0,-2000)", "");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
@@ -259,29 +250,29 @@ public class ReplyToCommentTestIT extends Base {
     @Test
     public void test06_ReplyToReply() {
 
-        String activity1 = "activity1" + getRandomNumber();
-        String comment = "comment" + getRandomNumber();
+        String activity = "Activity" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
         String reply = "Reply" + getRandomNumber();
         String replytoreply = "ReplyToReply" + getRandomNumber();
         homePagePlatform.goToConnections();
         connectionsManagement.connectToAUser(DATA_USER2);
         homePagePlatform.goToHomePage();
-        activityStream.addActivity(activity1, "");
+        activityStream.addActivity(activity, "");
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        activityStream.commentActivity(activity1, comment);
+        activityStream.commentActivity(activity, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
         activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
         $(byText(reply)).waitUntil(Condition.appears, Configuration.timeout);
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-        activityStream.replyToReply(activity1, reply, replytoreply);
+        activityStream.replyToReply(activity, reply, replytoreply);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
-        activityStream.deleteactivity(activity1);
+        activityStream.deleteActivity(activity);
         executeJavaScript("window.scrollBy(0,-2000)", "");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
@@ -290,36 +281,37 @@ public class ReplyToCommentTestIT extends Base {
     @Test
     public void test07_CheckReplyAfterDeleteParentComment() {
 
-        String activity1 = "activity1" + getRandomNumber();
-        String comment = "comment" + getRandomNumber();
+        String activity = "Activity" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
         String reply = "Reply" + getRandomNumber();
         String replytoreply = "ReplyToReply" + getRandomNumber();
         homePagePlatform.goToConnections();
         connectionsManagement.connectToAUser(DATA_USER2);
         homePagePlatform.goToHomePage();
-        activityStream.addActivity(activity1, "");
+        activityStream.addActivity(activity, "");
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        activityStream.commentActivity(activity1, comment);
+        activityStream.commentActivity(activity, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
         activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
         $(byText(reply)).waitUntil(Condition.appears, Configuration.timeout);
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-        activityStream.replyToReply(activity1, reply, replytoreply);
-        activityStream.deletecomment(activity1, comment);
+        activityStream.replyToReply(activity, reply, replytoreply);
+        activityStream.deletecomment(activity, comment);
         $(byText(reply)).shouldNot(Condition.exist);
         $(byText(replytoreply)).shouldNot(Condition.exist);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
-        activityStream.deleteactivity(activity1);
+        activityStream.deleteActivity(activity);
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
     }
 
+    //Check that quote a post in forum turns to reply to a comment in activity stream
     @Test
     public void test08_CheckQuoteInForumTurnsToReplyToCommentInAS() {
         String title = "Title" + getRandomNumber();
@@ -396,12 +388,14 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
+        activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
         $(byText(nameTopic)).click();
         $(byText(reply)).parent().shouldHave(Condition.text(comment));
         forumHomePage.goToHomeCategory();
         $(byText(nameCat)).click();
         info("Delete category");
         forumCategoryManagement.deleteCategory(nameCat);
+        executeJavaScript("window.scrollBy(0,-2000)", "");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
     }
@@ -434,9 +428,11 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
+        activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
         $(byText(nameTopic)).click();
         $(byClassName("contentQuote")).shouldHave(Condition.text(comment));
         $(byClassName("contentQuote")).shouldHave(Condition.text(DATA_USER2));
+        executeJavaScript("window.scrollBy(0,-2000)", "");
         homePagePlatform.goToForum();
         forumHomePage.goToHomeCategory();
         $(byText(nameCat)).click();
@@ -449,7 +445,6 @@ public class ReplyToCommentTestIT extends Base {
     //Check that each reply is attached to its parent comment
     @Test
     public void test11_CheckAllRepliesBelongsToSameParentCommentInTpoicActivity() {
-
         String nameCat = "Category" + getRandomNumber();
         String nameForum = "Forum" + getRandomNumber();
         String nameTopic = "Topic" + getRandomNumber();
@@ -480,6 +475,7 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         activityStream.replyToComment(comment1, reply1, DATA_NAME_USER1);
         activityStream.replyToComment(comment2, reply2, DATA_NAME_USER1);
+        executeJavaScript("window.scrollBy(0,-2000)", "");
         $(byText(nameTopic)).click();
         $(byText(reply1)).parent().shouldHave(Condition.text(comment1));
         $(byText(reply2)).parent().shouldHave(Condition.text(comment2));
@@ -539,7 +535,7 @@ public class ReplyToCommentTestIT extends Base {
 
     @Test
     public void test13_CheckReplyToCommentInPreviewMode() {
-        String activity1 = "Activity1" + getRandomNumber();
+        String activity = "Activity" + getRandomNumber();
         String comment = "Comment" + getRandomNumber();
         String reply = "Reply" + getRandomNumber();
         ELEMENT_TAB_LINK.click();
@@ -547,14 +543,14 @@ public class ReplyToCommentTestIT extends Base {
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
         ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
-        activityStream.addActivity(activity1, "");
+        activityStream.addActivity(activity, "");
         homePagePlatform.goToConnections();
         connectionsManagement.connectToAUser(DATA_USER2);
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        String id = $(byText(activity)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
         ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
         executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
@@ -564,16 +560,16 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-        activityStream.replyToCommentInPreview(comment, reply);
+        activityStream.replyToCommentInPreview(comment, reply, DATA_NAME_USER1);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-        activityStream.deleteactivity(activity1);
+        activityStream.deleteActivity(activity);
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
     }
 
     @Test
     public void test14_CheckReplyToReplyInPreviewMode() {
-        String activity1 = "Activity1" + getRandomNumber();
+        String activity = "Activity" + getRandomNumber();
         String comment = "Comment" + getRandomNumber();
         String reply = "Reply" + getRandomNumber();
         String replytoreply = "ReplyToReply" + getRandomNumber();
@@ -582,14 +578,14 @@ public class ReplyToCommentTestIT extends Base {
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
         ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
-        activityStream.addActivity(activity1, "");
+        activityStream.addActivity(activity, "");
         homePagePlatform.goToConnections();
         connectionsManagement.connectToAUser(DATA_USER2);
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        String id = $(byText(activity)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
         ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
         executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
@@ -599,7 +595,7 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-        activityStream.replyToCommentInPreview(comment, reply);
+        activityStream.replyToCommentInPreview(comment, reply, DATA_NAME_USER1);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         manageLogInOut.signOut();
         manageLogInOut.signInCas(DATA_USER2, PLFData.DATA_PASS);
@@ -608,24 +604,24 @@ public class ReplyToCommentTestIT extends Base {
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
-        activityStream.deleteactivity(activity1);
+        activityStream.deleteActivity(activity);
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
     }
 
     @Test
     public void test15_ReplyToCommentShortenSectionInPreview() {
-        String activity1 = "activity1" + getRandomNumber();
-        String comment = "comment" + getRandomNumber();
-        String reply1 = "Reply" + getRandomNumber();
-        String reply2 = "Reply" + getRandomNumber();
-        String reply3 = "Reply" + getRandomNumber();
+        String activity = "Activity" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
+        String reply1 = "Reply1" + getRandomNumber();
+        String reply2 = "Reply2" + getRandomNumber();
+        String reply3 = "Reply3" + getRandomNumber();
         ELEMENT_TAB_LINK.click();
         refresh();
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
         ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
-        activityStream.addActivity(activity1, "");
+        activityStream.addActivity(activity, "");
         homePagePlatform.goToConnections();
         connectionsManagement.connectToAUser(DATA_USER2);
         //mary comments
@@ -633,7 +629,7 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        String id = $(byText(activity)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
         ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
         executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
@@ -645,19 +641,19 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-        activityStream.replyToCommentInPreview(comment, reply1);
+        activityStream.replyToCommentInPreview(comment, reply1, DATA_NAME_USER1);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         //mary replys
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-        activityStream.replyToCommentInPreview(comment, reply2);
+        activityStream.replyToCommentInPreview(comment, reply2, DATA_NAME_USER2);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         //john replys
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-        activityStream.replyToCommentInPreview(comment, reply3);
+        activityStream.replyToCommentInPreview(comment, reply3, DATA_NAME_USER1);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
         //Check that the replies number in show reply link
@@ -672,15 +668,15 @@ public class ReplyToCommentTestIT extends Base {
         assertEquals($(byText(reply2)).parent().parent().parent().getAttribute("data-parent-comment"), data_comment);
         assertEquals($(byText(reply3)).parent().parent().parent().getAttribute("data-parent-comment"), data_comment);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-        activityStream.deleteactivity(activity1);
+        activityStream.deleteActivity(activity);
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
     }
 
     @Test
     public void test16_CheckReplyNumberInPreview() {
-        String activity1 = "activity1" + getRandomNumber();
-        String comment = "comment" + getRandomNumber();
+        String activity = "Activity" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
         String reply1 = "Reply1" + getRandomNumber();
         String reply2 = "Reply2" + getRandomNumber();
         String reply3 = "Reply3" + getRandomNumber();
@@ -693,13 +689,12 @@ public class ReplyToCommentTestIT extends Base {
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
         ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
-        activityStream.addActivity(activity1, "");
-        //login mary comment
+        activityStream.addActivity(activity, "");
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        String id = $(byText(activity)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
         ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
         executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
@@ -707,27 +702,25 @@ public class ReplyToCommentTestIT extends Base {
         $(byText(comment)).should(Condition.exist);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         manageLogInOut.signOut();
-        //login john
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-        activityStream.replyToCommentInPreview(comment, reply1);
+        activityStream.replyToCommentInPreview(comment, reply1, DATA_NAME_USER1);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-        activityStream.replyToCommentInPreview(comment, reply2);
+        activityStream.replyToCommentInPreview(comment, reply2, DATA_NAME_USER1);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-        activityStream.replyToCommentInPreview(comment, reply3);
+        activityStream.replyToCommentInPreview(comment, reply3, DATA_NAME_USER1);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-        activityStream.replyToCommentInPreview(comment, reply4);
+        activityStream.replyToCommentInPreview(comment, reply4, DATA_NAME_USER1);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         refresh();
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-        //Check that the replies number in show reply link
         $(byId("commentArea")).find(byClassName("subCommentShowAllLink")).shouldHave(Condition.text("4"));
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-        activityStream.deleteactivity(activity1);
+        activityStream.deleteActivity(activity);
         executeJavaScript("window.scrollBy(0,-2000)", "");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
@@ -741,57 +734,58 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToTaskPage();
         tasksManagement.addTask(task);
         $(byText(task)).should(Condition.exist);
-        tasksManagement.addCowroker(task);
+        tasksManagement.addCoworker(task);
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToTaskPage();
         tasksManagement.commentTask(task, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToTaskPage();
-        tasksManagement.replytocommentTask(task, reply);
+        tasksManagement.replyToCommentTask(task, reply, DATA_NAME_USER1);
+
         tasksManagement.deleteTask(task);
     }
 
     @Test
     public void test18_DeleteReplyInTaks() {
         String task = "Task" + getRandomNumber();
-        String comment = "comment" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
         String reply = "Reply" + getRandomNumber();
         homePagePlatform.goToTaskPage();
         tasksManagement.addTask(task);
-        tasksManagement.addCowroker(task);
+        tasksManagement.addCoworker(task);
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToTaskPage();
         tasksManagement.commentTask(task, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToTaskPage();
-        tasksManagement.replytocommentTask(task, reply);
+        tasksManagement.replyToCommentTask(task, reply, DATA_NAME_USER1);
         $(byText(reply)).waitUntil(Condition.appears, Configuration.timeout);
-        tasksManagement.deletereply(task, reply);
+        tasksManagement.deleteReply(task, reply);
         tasksManagement.deleteTask(task);
     }
 
     @Test
     public void test19_ReplyToReplyInTasks() {
-        String task = "task" + getRandomNumber();
+        String task = "Task" + getRandomNumber();
         String reply = "Reply" + getRandomNumber();
         String comment = "Comment" + getRandomNumber();
         String replytoreply = "ReplyToReply" + getRandomNumber();
         homePagePlatform.goToTaskPage();
         tasksManagement.addTask(task);
         $(byText(task)).should(Condition.exist);
-        tasksManagement.addCowroker(task);
+        tasksManagement.addCoworker(task);
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToTaskPage();
         tasksManagement.commentTask(task, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToTaskPage();
-        tasksManagement.replytocommentTask(task, reply);
+        tasksManagement.replyToCommentTask(task, reply, DATA_NAME_USER1);
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToTaskPage();
-        tasksManagement.replytoreply(task, reply, replytoreply);
+        tasksManagement.replyToReply(task, reply, replytoreply, DATA_NAME_USER2);
         executeJavaScript("window.scrollBy(0,-2000)", "");
         tasksManagement.deleteTask(task);
     }
@@ -799,13 +793,13 @@ public class ReplyToCommentTestIT extends Base {
     @Test
     public void test20_ReplyToCommentShortenSectionInTask() {
         String task = "Task" + getRandomNumber();
-        String comment = "comment" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
         String reply1 = "Reply1" + getRandomNumber();
         String reply2 = "Reply2" + getRandomNumber();
         String reply3 = "Reply3" + getRandomNumber();
         homePagePlatform.goToTaskPage();
         tasksManagement.addTask(task);
-        tasksManagement.addCowroker(task);
+        tasksManagement.addCoworker(task);
         //login mary
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToTaskPage();
@@ -813,11 +807,11 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToTaskPage();
-        tasksManagement.replytocommentTask(task, reply1);
+        tasksManagement.replyToCommentTask(task, reply1, DATA_NAME_USER1);
         refresh();
-        tasksManagement.replytocommentTask(task, reply2);
+        tasksManagement.replyToCommentTask(task, reply2, DATA_NAME_USER1);
         refresh();
-        tasksManagement.replytocommentTask(task, reply3);
+        tasksManagement.replyToCommentTask(task, reply3, DATA_NAME_USER1);
         refresh();
         //Check that the replies number in show reply link
         tasksManagement.showAllReplies(task, comment);
@@ -837,24 +831,24 @@ public class ReplyToCommentTestIT extends Base {
     @Test
     public void test21_CheckReplyNumberInTask() {
         String task = "Task" + getRandomNumber();
-        String comment = "comment" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
         String reply = "Reply" + getRandomNumber();
         homePagePlatform.goToTaskPage();
         tasksManagement.addTask(task);
-        tasksManagement.addCowroker(task);
+        tasksManagement.addCoworker(task);
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToTaskPage();
         tasksManagement.commentTask(task, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToTaskPage();
-        tasksManagement.replytocommentTask(task, reply);
+        tasksManagement.replyToCommentTask(task, reply, DATA_NAME_USER1);
         refresh();
-        tasksManagement.replytocommentTask(task, reply);
+        tasksManagement.replyToCommentTask(task, reply, DATA_NAME_USER1);
         refresh();
-        tasksManagement.replytocommentTask(task, reply);
+        tasksManagement.replyToCommentTask(task, reply, DATA_NAME_USER1);
         refresh();
-        tasksManagement.replytocommentTask(task, reply);
+        tasksManagement.replyToCommentTask(task, reply, DATA_NAME_USER1);
         refresh();
         $(byText(task)).click();
         //Check that the replies number in show reply link
@@ -865,31 +859,23 @@ public class ReplyToCommentTestIT extends Base {
     }
 
     @Test
-    public void test22_CheckTwoRepliesNotCollapsedInTasks() {
-
+    public void test22_ChecktworepliesnotcollapsedInTasks() {
         String task = "Task" + getRandomNumber();
-        String comment = "comment" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
         String reply1 = "Reply1" + getRandomNumber();
         String reply2 = "Reply2" + getRandomNumber();
         homePagePlatform.goToTaskPage();
         tasksManagement.addTask(task);
-        tasksManagement.addCowroker(task);
+        tasksManagement.addCoworker(task);
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToTaskPage();
         tasksManagement.commentTask(task, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToTaskPage();
-        tasksManagement.replytocommentTask(task, reply1);
+        tasksManagement.replyToCommentTask(task, reply1, DATA_NAME_USER1);
         refresh();
-        tasksManagement.replytocommentTask(task, reply2);
-        tasksManagement.commentTask(task, comment);
-        manageLogInOut.signOut();
-        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
-        homePagePlatform.goToTaskPage();
-        tasksManagement.replytocommentTask(task, reply1);
-        refresh();
-        tasksManagement.replytocommentTask(task, reply2);
+        tasksManagement.replyToCommentTask(task, reply2, DATA_NAME_USER1);
         refresh();
         $(byText(task)).click();
         $(byText(reply1)).waitUntil(Condition.appears, Configuration.timeout);
@@ -902,35 +888,36 @@ public class ReplyToCommentTestIT extends Base {
     public void test23_CheckReplyAfterDeleteParentCommentInTasks() {
 
         String task = "Task" + getRandomNumber();
-        String comment = "comment" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
         String reply = "Reply" + getRandomNumber();
         String replytoreply = "ReplyToReply" + getRandomNumber();
         homePagePlatform.goToTaskPage();
         tasksManagement.addTask(task);
-        tasksManagement.addCowroker(task);
+        tasksManagement.addCoworker(task);
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToTaskPage();
         tasksManagement.commentTask(task, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToTaskPage();
-        tasksManagement.replytocommentTask(task, reply);
+        tasksManagement.replyToCommentTask(task, reply, DATA_NAME_USER1);
         $(byText(reply)).waitUntil(Condition.appears, Configuration.timeout);
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToTaskPage();
-        tasksManagement.replytoreply(task, reply, replytoreply);
-        tasksManagement.deletecomment(task, comment);
+        tasksManagement.replyToReply(task, reply, replytoreply, DATA_NAME_USER2);
+        tasksManagement.deleteComment(task, comment);
         $(byText(reply)).shouldNot(Condition.exist);
         $(byText(replytoreply)).shouldNot(Condition.exist);
         tasksManagement.deleteTask(task);
     }
+
     @Test
-    public void test24_CheckReplyWithImage () {
-        String activity1 = "activity1" + getRandomNumber();
+    public void test24_CheckReplyWithImage() {
+        String activity = "Activity" + getRandomNumber();
         String comment = "Comment" + getRandomNumber();
-        String reply1 = "Reply" + getRandomNumber();
-        String reply2 = "Reply" + getRandomNumber();
-        String reply3 = "Reply" + getRandomNumber();
+        String reply1 = "Reply1" + getRandomNumber();
+        String reply2 = "Reply2" + getRandomNumber();
+        String reply3 = "Reply3" + getRandomNumber();
         homePagePlatform.goToConnections();
         connectionsManagement.connectToAUser(DATA_USER2);
         homePagePlatform.goToHomePage();
@@ -939,17 +926,17 @@ public class ReplyToCommentTestIT extends Base {
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
         ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
-        activityStream.addActivity(activity1, "");
+        activityStream.addActivity(activity, "");
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        activityStream.commentActivity(activity1, comment);
+        activityStream.commentActivity(activity, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
-        activityStream.replyToComment(comment,reply1,DATA_NAME_USER1);
-        String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        activityStream.replyToComment(comment, reply1, DATA_NAME_USER1);
+        String id = $(byText(activity)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
         OPEN_IN_DOCUMENT_ICON.click();
         GO_BACK_ICON.click();
@@ -958,16 +945,349 @@ public class ReplyToCommentTestIT extends Base {
         COPY_URL_TO_CLIPBOARD_BUTTON.click();
         executeJavaScript("window.scrollBy(0,-2000)", "");
         homePagePlatform.goToHomePage();
-        activityStream.replyToCommentUsingImage(comment,reply2,DATA_NAME_USER1);
-        activityStream.replyToComment(comment,reply3,DATA_NAME_USER1);
+        activityStream.replyToCommentUsingImage(comment, reply2, DATA_NAME_USER1);
+        activityStream.replyToComment(comment, reply3, DATA_NAME_USER1);
         refresh();
         activityStream.showAllReplies(comment);
         $(byText(reply1)).waitUntil(Condition.appears, Configuration.timeout);
         $(byText(reply2)).waitUntil(Condition.appears, Configuration.timeout);
         $(byText(reply3)).waitUntil(Condition.appears, Configuration.timeout);
         executeJavaScript("window.scrollBy(0,-2000)", "");
-        activityStream.deleteactivity(activity1);
+        activityStream.deleteActivity(activity);
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
+    }
+
+    @Test
+    public void test25_checkNotificationWhenOneUserLikeReply() {
+        String activity = "Activity" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
+        String reply = "Reply" + getRandomNumber();
+        String notifContent = " likes your comment.";
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        homePagePlatform.goToHomePage();
+        activityStream.addActivity(activity, "");
+        activityStream.commentActivity(activity, comment);
+        activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        activityStream.likeReply(reply);
+        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+        ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.appears, Configuration.timeout);
+        ELEMENT_ICON_NOTIFICATION.click();
+        ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
+                .find(byText(reply))
+                .parent()
+                .parent()
+                .shouldHave(Condition.text(DATA_NAME_USER2 + notifContent));
+        ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
+                .find(byText(DATA_NAME_USER2))
+                .parent()
+                .parent()
+                .find(byText(reply))
+                .should(Condition.exist);
+        assertEquals("rgba(227, 236, 246, 1)",ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().getCssValue("background-color"));
+        ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().click();
+        refresh();
+        ELEMENT_ICON_NOTIFICATION.click();
+        assertEquals("rgba(0, 0, 0, 0)",ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().getCssValue("background-color"));
+        homePagePlatform.goToHomePage();
+        activityStream.deleteActivity(activity);
+        executeJavaScript("window.scrollBy(0,-2000)", "");
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+    }
+
+    @Test
+    public void test26_checkNotificationWhenTwoUserLikeReply() {
+        String activity = "Activity" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
+        String reply = "Reply" + getRandomNumber();
+        String notifContent = " like your comment.";
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        connectionsManagement.connectToAUser(DATA_USER3);
+        homePagePlatform.goToHomePage();
+        activityStream.addActivity(activity, "");
+        activityStream.commentActivity(activity, comment);
+        activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        activityStream.likeReply(reply);
+        manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        activityStream.likeReply(reply);
+        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+        ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.appears, Configuration.timeout);
+        ELEMENT_ICON_NOTIFICATION.click();
+        ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
+                .find(byText(reply))
+                .parent()
+                .parent()
+                .shouldHave(Condition.text(DATA_NAME_USER3 + "and" + DATA_NAME_USER2 + notifContent));
+        assertEquals("rgba(227, 236, 246, 1)",ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().getCssValue("background-color"));
+        ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().click();
+        refresh();
+        ELEMENT_ICON_NOTIFICATION.click();
+        assertEquals("rgba(0, 0, 0, 0)",ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().getCssValue("background-color"));
+        homePagePlatform.goToHomePage();
+        activityStream.deleteActivity(activity);
+        executeJavaScript("window.scrollBy(0,-2000)", "");
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+        connectionsManagement.removeConnection(DATA_USER3);
+    }
+
+    @Test
+    public void test27_checkNotificationWhenManyUserLikeReply() {
+        String activity = "Activity" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
+        String reply = "Reply" + getRandomNumber();
+        String notifContent = " and 1 more like your comment.";
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        connectionsManagement.connectToAUser(DATA_USER3);
+        connectionsManagement.connectToAUser(DATA_USER4);
+        homePagePlatform.goToHomePage();
+        activityStream.addActivity(activity, "");
+        activityStream.commentActivity(activity, comment);
+        activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        activityStream.likeReply(reply);
+        manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        activityStream.likeReply(reply);
+        manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        activityStream.likeReply(reply);
+        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+        ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.appears, Configuration.timeout);
+        ELEMENT_ICON_NOTIFICATION.click();
+        ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
+                .find(byText(reply))
+                .parent()
+                .parent()
+                .shouldHave(Condition.text(DATA_NAME_USER4 + "and" + DATA_NAME_USER3 + notifContent));
+        assertEquals("rgba(227, 236, 246, 1)",ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().getCssValue("background-color"));
+        ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().click();
+        refresh();
+        ELEMENT_ICON_NOTIFICATION.click();
+        assertEquals("rgba(0, 0, 0, 0)",ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().getCssValue("background-color"));
+        homePagePlatform.goToHomePage();
+        activityStream.deleteActivity(activity);
+        executeJavaScript("window.scrollBy(0,-2000)", "");
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+        connectionsManagement.removeConnection(DATA_USER3);
+        connectionsManagement.removeConnection(DATA_USER4);
+    }
+
+    @Test
+    public void test28_checkNotificationWhenOneUserLikeCommentInDocumentPreview() {
+        String activity = "Activity" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
+        String reply = "Reply" + getRandomNumber();
+        String notifContent = " likes your comment.";
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        homePagePlatform.goToHomePage();
+        ELEMENT_TAB_LINK.click();
+        ELEMENT_TAB_LINK.click();
+        ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
+        ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
+        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
+        activityStream.addActivity(activity, "");
+        String id = $(byText(activity)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
+        executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
+        ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
+        $(byText(comment)).should(Condition.exist);
+        activityStream.replyToCommentInPreview(comment, reply, DATA_NAME_USER1);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        $(byId("commentArea")).find(byText(reply)).parent().find(byClassName("likeCommentLink")).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+        ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.appears, Configuration.timeout);
+        ELEMENT_ICON_NOTIFICATION.click();
+        ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
+                .find(byText(reply))
+                .parent()
+                .parent()
+                .shouldHave(Condition.text(DATA_NAME_USER2 + notifContent));
+        ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
+                .find(byText(DATA_NAME_USER2))
+                .parent()
+                .parent()
+                .find(byText(reply))
+                .should(Condition.exist);
+        assertEquals("rgba(227, 236, 246, 1)",ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().getCssValue("background-color"));
+        ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().click();
+        refresh();
+        ELEMENT_ICON_NOTIFICATION.click();
+        assertEquals("rgba(0, 0, 0, 0)",ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().getCssValue("background-color"));
+        homePagePlatform.goToHomePage();
+        activityStream.deleteActivity(activity);
+        executeJavaScript("window.scrollBy(0,-2000)", "");
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+    }
+
+    @Test
+    public void test29_checkNotificationWhenTwoUsersLikeCommentInDocumentPreview() {
+        String activity = "Activity" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
+        String reply = "Reply" + getRandomNumber();
+        String notifContent = " like your comment.";
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        connectionsManagement.connectToAUser(DATA_USER3);
+        homePagePlatform.goToHomePage();
+        ELEMENT_TAB_LINK.click();
+        ELEMENT_TAB_LINK.click();
+        ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
+        ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
+        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
+        activityStream.addActivity(activity, "");
+        String id = $(byText(activity)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
+        executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
+        ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
+        $(byText(comment)).should(Condition.exist);
+        activityStream.replyToCommentInPreview(comment, reply, DATA_NAME_USER1);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        $(byId("commentArea")).find(byText(reply)).parent().find(byClassName("likeCommentLink")).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        $(byId("commentArea")).find(byText(reply)).parent().find(byClassName("likeCommentLink")).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+        ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.appears, Configuration.timeout);
+        ELEMENT_ICON_NOTIFICATION.click();
+        ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
+                .find(byText(reply))
+                .parent()
+                .parent()
+                .shouldHave(Condition.text(DATA_NAME_USER2 + notifContent));
+        ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
+                .find(byText(DATA_NAME_USER2))
+                .parent()
+                .parent()
+                .find(byText(reply))
+                .should(Condition.exist);
+        assertEquals("rgba(227, 236, 246, 1)",ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().getCssValue("background-color"));
+        ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().click();
+        refresh();
+        ELEMENT_ICON_NOTIFICATION.click();
+        assertEquals("rgba(0, 0, 0, 0)",ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().getCssValue("background-color"));
+        homePagePlatform.goToHomePage();
+        activityStream.deleteActivity(activity);
+        executeJavaScript("window.scrollBy(0,-2000)", "");
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+        connectionsManagement.removeConnection(DATA_USER3);
+    }
+
+    @Test
+    public void test30_checkNotificationWhenManyUsersLikeCommentInDocumentPreview() {
+        String activity = "Activity" + getRandomNumber();
+        String comment = "Comment" + getRandomNumber();
+        String reply = "Reply" + getRandomNumber();
+        String notifContent = " and 1 more like your comment.";
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(DATA_USER2);
+        connectionsManagement.connectToAUser(DATA_USER3);
+        connectionsManagement.connectToAUser(DATA_USER4);
+        homePagePlatform.goToHomePage();
+        ELEMENT_TAB_LINK.click();
+        ELEMENT_TAB_LINK.click();
+        ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
+        ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
+        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
+        activityStream.addActivity(activity, "");
+        String id = $(byText(activity)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
+        executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
+        ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
+        $(byText(comment)).should(Condition.exist);
+        activityStream.replyToCommentInPreview(comment, reply, DATA_NAME_USER1);
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        $(byId("commentArea")).find(byText(reply)).parent().find(byClassName("likeCommentLink")).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        $(byId("commentArea")).find(byText(reply)).parent().find(byClassName("likeCommentLink")).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(DATA_USER1);
+        homePagePlatform.goToHomePage();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        $(byId("commentArea")).find(byText(reply)).parent().find(byClassName("likeCommentLink")).click();
+        ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+        ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.appears, Configuration.timeout);
+        ELEMENT_ICON_NOTIFICATION.click();
+        ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
+                .find(byText(reply))
+                .parent()
+                .parent()
+                .shouldHave(Condition.text(DATA_NAME_USER4 + "and" + DATA_NAME_USER3 + notifContent));
+        ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
+                .find(byText(DATA_NAME_USER2))
+                .parent()
+                .parent()
+                .find(byText(reply))
+                .should(Condition.exist);
+        assertEquals("rgba(227, 236, 246, 1)",ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().getCssValue("background-color"));
+        ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().click();
+        refresh();
+        ELEMENT_ICON_NOTIFICATION.click();
+        assertEquals("rgba(0, 0, 0, 0)",ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().getCssValue("background-color"));
+        homePagePlatform.goToHomePage();
+        activityStream.deleteActivity(activity);
+        executeJavaScript("window.scrollBy(0,-2000)", "");
+        homePagePlatform.goToConnections();
+        connectionsManagement.removeConnection(DATA_USER2);
+        connectionsManagement.removeConnection(DATA_USER3);
+        connectionsManagement.removeConnection(DATA_USER4);
     }
 }

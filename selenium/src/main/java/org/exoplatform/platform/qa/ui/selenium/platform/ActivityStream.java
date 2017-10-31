@@ -1142,7 +1142,7 @@ public class ActivityStream {
     $(byText(reply)).shouldNot(Condition.exist);
   }
 
-  public void replyToCommentInPreview(String comment, String reply) {
+  public void replyToCommentInPreview(String comment, String reply, String user) {
     // Click on reply link
     $(byId("commentArea")).find(byText(comment)).parent()
             .parent()
@@ -1151,7 +1151,7 @@ public class ActivityStream {
     ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
     executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + reply + "\")", "");
     ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
-
+    $(byText(reply)).parent().parent().parent().find(byText(user)).should(Condition.exist);
   }
 
   public void showAllReplies(String comment) {
@@ -1234,6 +1234,16 @@ public class ActivityStream {
     //Confirm delete
     ELEMENT_DELETE_POPUP_OK.click();
     $(byText(comment)).shouldNot(Condition.exist);
+  }
+
+  public void likeReply(String reply) {
+    String idReplyContainer = $(byText(reply)).parent()
+            .parent()
+            .parent()
+            .parent()
+            .getAttribute("id")
+            .split("commentContainercomment")[1];
+    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idReplyContainer))).click();
   }
 
 }
