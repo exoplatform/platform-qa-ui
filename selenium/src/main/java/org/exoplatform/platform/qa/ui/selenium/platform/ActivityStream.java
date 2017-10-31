@@ -7,6 +7,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLoca
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 import java.awt.*;
 
@@ -24,7 +25,6 @@ import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-
 import com.codeborne.selenide.SelenideElement;
 
 public class ActivityStream {
@@ -465,6 +465,7 @@ public class ActivityStream {
   public void addText(String text) {
     info("----Add text into activity text box-----");
     SelenideElement frame=$(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
     switchTo().frame(frame);
     ELEMENT_INPUT_ACTIVITY.click();
     ELEMENT_INPUT_ACTIVITY.sendKeys(text);
