@@ -80,11 +80,11 @@ public class UserProfilePage {
 
     if (firstName != "" && firstName != null) {
       info("update firstname");
-      evt.type(ELEMENT_FIRST_NAME_TEXTBOX_EDIT, firstName, true);
+      $(ELEMENT_FIRST_NAME_TEXTBOX_EDIT).setValue(firstName);
     }
     if (lastName != "" && lastName != null) {
       info("update lastName");
-      evt.type(ELEMENT_LAST_NAME_TEXTBOX_EDIT, lastName, true);
+      $(ELEMENT_LAST_NAME_TEXTBOX_EDIT).setValue(lastName);
     }
     if (email != "" && email != null) {
       info("update email");
