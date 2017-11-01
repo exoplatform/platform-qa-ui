@@ -1,10 +1,12 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
-import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -19,7 +21,7 @@ public class UserProfilePage {
 
   /**
    * constructor
-   * 
+   *
    * @param testBase
    */
   public UserProfilePage(TestBase testBase) {
@@ -29,7 +31,7 @@ public class UserProfilePage {
 
   /**
    * Update Current position By QuynhPT
-   * 
+   *
    * @param pos
    */
   public void updateCurrentPosition(String pos) {
@@ -54,20 +56,20 @@ public class UserProfilePage {
 
   /**
    * Update About me section
-   * 
+   *
    * @param pos
    */
   public void updateAboutMe(String pos) {
     info("Update About me");
     if (pos != "") {
-      evt.type(ELEMENT_ABOUTME_TEXTAREA_EDIT, pos, true);
+      $(ELEMENT_ABOUTME_TEXTAREA_EDIT).setValue(pos);
     }
 
   }
 
   /**
    * Update Basic information By QuynhPT
-   * 
+   *
    * @param firstName
    * @param lastName
    * @param email
@@ -75,9 +77,7 @@ public class UserProfilePage {
   public void updateBasicInformation(String firstName, String lastName, String email) {
     info("Update basic information");
     evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
-    if (evt.waitForAndGetElement(ELEMENT_EDIT_BASIC_INFORMATION, 5000, 0) != null) {
-      evt.click(ELEMENT_EDIT_BASIC_INFORMATION);
-    }
+
     if (firstName != "" && firstName != null) {
       info("update firstname");
       evt.type(ELEMENT_FIRST_NAME_TEXTBOX_EDIT, firstName, true);
@@ -88,13 +88,13 @@ public class UserProfilePage {
     }
     if (email != "" && email != null) {
       info("update email");
-      evt.type(ELEMENT_EMAIL_TEXTBOX_EDIT, email, true);
+      $(ELEMENT_EMAIL_TEXTBOX_EDIT).setValue(email);
     }
   }
 
   /**
    * Change avatar
-   * 
+   *
    * @param linkfile : File path of new avatar
    */
   public void changeAvatar(String linkfile) {
@@ -114,47 +114,44 @@ public class UserProfilePage {
 
   /**
    * Update information of contact of a user
-   * 
+   *
    * @param gender
    * @param job
    */
   public void updateGenderJob(String gender, String job) {
     evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
-    if (evt.waitForAndGetElement(ELEMENT_CONTACT_EDIT_ICON, 5000, 0) != null)
-      evt.click(ELEMENT_CONTACT_EDIT_ICON);
+
     if (gender != "" && gender != null) {
       info("update gender");
-      evt.select(ELEMENT_CONTACT_GENDER_SELECTION, gender);
+      $(ELEMENT_CONTACT_GENDER_SELECTION).selectOptionByValue(gender);
     }
     if (job != "" && job != null) {
       info("update job");
-      evt.type(ELEMENT_CONTACT_JOB_TITLE, job, true);
+      $(ELEMENT_CONTACT_JOB_TITLE).setValue(job);
     }
 
   }
 
   /**
    * Update ims
-   * 
+   *
    * @param type
    * @param ims
-   * @param opParams
    */
-  public void updateIms(String type, String ims, Object... opParams) {
+  public void updateIms(String type, String ims, int nb) {
     info("Update ims");
-    evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
-    String index = (String) (opParams.length > 0 ? opParams[0] : "0");
-    Integer xpathCount = testBase.getElements(ELEMENT_CONTACT_IMS_INPUT_LIST).size();
-    if (Integer.valueOf(index) >= xpathCount) {
-      evt.click(ELEMENT_CONTACT_IMS_ADD_ICON);
+
+    if ($(byId("ims")).find(byClassName("selectInput")).is(Condition.not(Condition.empty))) {
+      $(ELEMENT_CONTACT_IMS_ADD_ICON).click();
     }
     if (type != null && !type.isEmpty()) {
       info("select type of ims");
-      evt.select(ELEMENT_CONTACT_IMS_OPTION.replace("${index}", index), type);
+      $(byId("ims")).findAll(byClassName("selectbox")).get(nb).selectOptionByValue(type);
     }
     if (ims != null && !ims.isEmpty()) {
       info("update ims " + ims);
-      evt.type(ELEMENT_CONTACT_IMS_INPUT.replace("${index}", index), ims, true);
+      $(byId("ims")).findAll(byClassName("selectInput")).get(nb).setValue(ims);
+      $(byId("ims")).findAll(byClassName("selectInput")).get(nb).click();
     }
   }
 
@@ -172,8 +169,8 @@ public class UserProfilePage {
     if (url != null && !url.isEmpty()) {
       info("update url");
       WebElement input = evt.waitForAndGetElement(By.xpath(ELEMENT_CONTACT_URL_INPUT.replace("${index}", index)),
-                                                  testBase.getDefaultTimeout(),
-                                                  1);
+              testBase.getDefaultTimeout(),
+              1);
       Actions action = new Actions(testBase.getExoWebDriver().getWebDriver());
       action.moveToElement(input).click().perform();
       action.sendKeys(url).perform();
@@ -184,32 +181,29 @@ public class UserProfilePage {
 
   /**
    * Update phone
-   * 
+   *
    * @param type
    * @param phone
-   * @param opParams
    */
-  public void updatePhone(String type, String phone, Object... opParams) {
+  public void updatePhone(String type, String phone, int nb) {
     info("Update phone");
-    evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
-    String index = (String) (opParams.length > 0 ? opParams[0] : "1");
-    Integer xpathCount = testBase.getElements(ELEMENT_CONTACT_PHONE_INPUT_LIST).size();
-    if (Integer.valueOf(index) >= xpathCount) {
-      evt.click(ELEMENT_CONTACT_PHONE_ADD_ICON);
+    if ($(byId("phones")).find(byClassName("selectInput")).is(Condition.not(Condition.empty))) {
+      $(ELEMENT_CONTACT_PHONE_ADD_ICON).click();
     }
     if (type != null && !type.isEmpty()) {
       info("select type of phone");
-      evt.select(ELEMENT_CONTACT_PHONE_OPTION.replace("${index}", index), type);
+      $(byId("phones")).findAll(byClassName("selectbox")).get(nb).selectOptionByValue(type);
     }
     if (phone != null && !phone.isEmpty()) {
       info("update phone");
-      evt.type(ELEMENT_CONTACT_PHONE_INPUT.replace("${index}", index), phone, true);
+      $(byId("phones")).findAll(byClassName("selectInput")).get(nb).setValue(phone);
+      $(byId("phones")).findAll(byClassName("selectInput")).get(nb).click();
     }
   }
 
   /**
    * update experience
-   * 
+   *
    * @param organization
    * @param jobTitle
    * @param jobDetail
@@ -219,6 +213,7 @@ public class UserProfilePage {
    * @param curPos
    * @param opParams
    */
+
   public void updateExperience(String organization,
                                String jobTitle,
                                String jobDetail,
@@ -260,7 +255,7 @@ public class UserProfilePage {
 
   /**
    * Save or cancle update info
-   * 
+   *
    * @param isSave null or true: save updating false: cancel
    */
   public void saveCancelUpdateInfo(Boolean isSave) {
@@ -289,7 +284,7 @@ public class UserProfilePage {
 
   /**
    * Connect in profile page
-   * 
+   *
    * @param user
    */
   public void connectToUserInProfilePage(String user) {
@@ -302,7 +297,7 @@ public class UserProfilePage {
 
   /**
    * Disconnect in profile page
-   * 
+   *
    * @param user
    */
   public void disconnectInProfilePage(String user) {
