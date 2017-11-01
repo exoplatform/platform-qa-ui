@@ -1154,10 +1154,10 @@ public class ReplyToCommentTestIT extends Base {
 
     @Test
     public void test29_checkNotificationWhenTwoUsersLikeCommentInDocumentPreview() {
-        String activity = "Activity" + getRandomNumber();
+        String activity1 = "Activity1" + getRandomNumber();
         String comment = "Comment" + getRandomNumber();
         String reply = "Reply" + getRandomNumber();
-        String notifContent = " like your comment.";
+        String notifcontent = " like your comment.";
         homePagePlatform.goToConnections();
         connectionsManagement.connectToAUser(DATA_USER2);
         connectionsManagement.connectToAUser(DATA_USER3);
@@ -1167,8 +1167,8 @@ public class ReplyToCommentTestIT extends Base {
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
         ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
-        activityStream.addActivity(activity, "");
-        String id = $(byText(activity)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        activityStream.addActivity(activity1, "");
+        String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
         ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
         executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
@@ -1197,7 +1197,7 @@ public class ReplyToCommentTestIT extends Base {
                 .find(byText(reply))
                 .parent()
                 .parent()
-                .shouldHave(Condition.text(DATA_NAME_USER2 + notifContent));
+                .shouldHave(Condition.text(DATA_NAME_USER2 + notifcontent));
         ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
                 .find(byText(DATA_NAME_USER2))
                 .parent()
@@ -1210,7 +1210,7 @@ public class ReplyToCommentTestIT extends Base {
         ELEMENT_ICON_NOTIFICATION.click();
         assertEquals("rgba(0, 0, 0, 0)",ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().getCssValue("background-color"));
         homePagePlatform.goToHomePage();
-        activityStream.deleteActivity(activity);
+        activityStream.deleteactivity(activity1);
         executeJavaScript("window.scrollBy(0,-2000)", "");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
@@ -1219,10 +1219,10 @@ public class ReplyToCommentTestIT extends Base {
 
     @Test
     public void test30_checkNotificationWhenManyUsersLikeCommentInDocumentPreview() {
-        String activity = "Activity" + getRandomNumber();
+        String activity1 = "Activity1" + getRandomNumber();
         String comment = "Comment" + getRandomNumber();
         String reply = "Reply" + getRandomNumber();
-        String notifContent = " and 1 more like your comment.";
+        String notifcontent = " and 1 more like your comment.";
         homePagePlatform.goToConnections();
         connectionsManagement.connectToAUser(DATA_USER2);
         connectionsManagement.connectToAUser(DATA_USER3);
@@ -1233,8 +1233,8 @@ public class ReplyToCommentTestIT extends Base {
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
         ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
-        activityStream.addActivity(activity, "");
-        String id = $(byText(activity)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        activityStream.addActivity(activity1, "");
+        String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
         ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
         executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
@@ -1270,7 +1270,7 @@ public class ReplyToCommentTestIT extends Base {
                 .find(byText(reply))
                 .parent()
                 .parent()
-                .shouldHave(Condition.text(DATA_NAME_USER4 + "and" + DATA_NAME_USER3 + notifContent));
+                .shouldHave(Condition.text(DATA_NAME_USER4 + "and" + DATA_NAME_USER3 + notifcontent));
         ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
                 .find(byText(DATA_NAME_USER2))
                 .parent()
@@ -1283,7 +1283,7 @@ public class ReplyToCommentTestIT extends Base {
         ELEMENT_ICON_NOTIFICATION.click();
         assertEquals("rgba(0, 0, 0, 0)",ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().getCssValue("background-color"));
         homePagePlatform.goToHomePage();
-        activityStream.deleteActivity(activity);
+        activityStream.deleteactivity(activity1);
         executeJavaScript("window.scrollBy(0,-2000)", "");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
