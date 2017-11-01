@@ -2355,5 +2355,6 @@ public final class SocialLocator {
                                                                     $(byId("UIBreadCrumbsNavigationPortlet"));
 
   public static final By ELEMENT_TASK_TAB=byClassName("uiIconAppTaskManagementApplication");
+  public static final SelenideElement ELEMENT_MINI_CONNECTION_PORTLET= $(byId("UIMiniConnectionsPortlet"));
 
 }
