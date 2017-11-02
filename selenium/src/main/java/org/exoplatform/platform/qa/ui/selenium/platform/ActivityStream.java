@@ -1,28 +1,28 @@
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import org.exoplatform.platform.qa.ui.selenium.Button;
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
+import java.awt.*;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import java.awt.*;
-import java.awt.event.KeyEvent;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import org.exoplatform.platform.qa.ui.selenium.Button;
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class ActivityStream {
   private final TestBase       testBase;
@@ -53,25 +53,25 @@ public class ActivityStream {
     evt.click(ELEMENT_ACTIVITY_ARROWDOWN_MENU, 0, true);
 
     switch (opt) {
-      case All_Activities:
-        info("Select All Activities");
-        evt.click(ELEMENT_ACTIVITY_ALL_ACTIVITIES, 0, true);
-        break;
-      case My_Spaces:
-        info("Select My Spaces");
-        evt.click(ELEMENT_ACTIVITY_MY_SPACES, 0, true);
-        break;
-      case My_Activities:
-        info("Select My Activities");
-        evt.click(ELEMENT_ACTIVITY_MY_ACTIVITIES, 0, true);
-        break;
-      case Connections:
-        info("Select Connections");
-        evt.click(ELEMENT_ACTIVITY_CONNECTIONS, 0, true);
-        break;
-      default:
-        info("No option in the list. Please select correct option.");
-        break;
+    case All_Activities:
+      info("Select All Activities");
+      evt.click(ELEMENT_ACTIVITY_ALL_ACTIVITIES, 0, true);
+      break;
+    case My_Spaces:
+      info("Select My Spaces");
+      evt.click(ELEMENT_ACTIVITY_MY_SPACES, 0, true);
+      break;
+    case My_Activities:
+      info("Select My Activities");
+      evt.click(ELEMENT_ACTIVITY_MY_ACTIVITIES, 0, true);
+      break;
+    case Connections:
+      info("Select Connections");
+      evt.click(ELEMENT_ACTIVITY_CONNECTIONS, 0, true);
+      break;
+    default:
+      info("No option in the list. Please select correct option.");
+      break;
     }
   }
 
@@ -108,8 +108,8 @@ public class ActivityStream {
   public void checkNotShownActivity(String name) {
     info("Verify that the activity of the name:" + name + " isnot shown");
     evt.waitForElementNotPresent(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("${title}", name),
-            testBase.getDefaultTimeout(),
-            1);
+                                 testBase.getDefaultTimeout(),
+                                 1);
     info("The activity of the name:" + name + " isnot shown successfully");
   }
 
@@ -139,15 +139,15 @@ public class ActivityStream {
 
   public void checkComment(String title, String comment, String value, changeTypes type) {
     switch (type) {
-      case Has_One_Value:
-        info("Verify that the comment is added");
-        evt.waitForAndGetElement(ELEMENT_ACTIVITY_COMMENT.replace("${title}", title)
-                .replace("${comment}", comment)
-                .replace("$value", value));
-        break;
-      case No_Value:
-        evt.waitForAndGetElement(ELEMENT_ACTIVITY_COMMENT.replace("${title}", title).replace("${comment}", comment));
-        break;
+    case Has_One_Value:
+      info("Verify that the comment is added");
+      evt.waitForAndGetElement(ELEMENT_ACTIVITY_COMMENT.replace("${title}", title)
+                                                       .replace("${comment}", comment)
+                                                       .replace("$value", value));
+      break;
+    case No_Value:
+      evt.waitForAndGetElement(ELEMENT_ACTIVITY_COMMENT.replace("${title}", title).replace("${comment}", comment));
+      break;
 
     }
 
@@ -242,9 +242,9 @@ public class ActivityStream {
     // check icon and title
     evt.waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_WEBCONTENT_TITLE.replace("${title}", title)));
     evt.waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_WEBCONTENT_CHECK_VERSION.replace("${title}", title).replace("{$version}",
-            version)));
+                                                                                                                   version)));
     evt.waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_WEBCONTENT_CHECK_STATUS.replace("${title}", title).replace("{$status}",
-            status)));
+                                                                                                                  status)));
   }
 
   /**
@@ -262,9 +262,9 @@ public class ActivityStream {
     // check icon and title
     evt.waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_PRODUCT_TITLE.replace("{$title}", title)));
     evt.waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_PRODUCT_CHECK_VERSION.replace("{$title}", title).replace("{$version}",
-            version)));
+                                                                                                                version)));
     evt.waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_PRODUCT_CHECK_STATUS.replace("{$title}", title).replace("{$status}",
-            status)));
+                                                                                                               status)));
   }
 
   /**
@@ -329,15 +329,15 @@ public class ActivityStream {
     info("Put a comment to comment box");
     int repeat1 = 0;
     while (evt.waitForAndGetElement(ELEMENT_PUBLICATION_COMMENTPOSTED.replace("${content}", textContent)
-                    .replace("$activity", filename),
-            2000,
-            0) == null) {
+                                                                     .replace("$activity", filename),
+                                    2000,
+                                    0) == null) {
       if (repeat1 > 5)
         break;
       if (evt.waitForAndGetElement(ELEMENT_PUBLICATION_COMMENTPOSTED.replace("${content}", textContent)
-                      .replace("$activity", filename),
-              2000,
-              0) != null)
+                                                                    .replace("$activity", filename),
+                                   2000,
+                                   0) != null)
         break;
       else {
         evt.switchToParentWindow();
@@ -366,26 +366,26 @@ public class ActivityStream {
     WebElement commentText = $(byText(activityText)).should(Condition.exist);
     WebElement commentButton = evt.waitForAndGetElement(ELEMENT_COMMENT_BUTTON);
     WebElement workingLabel = evt.waitForAndGetElement(ELEMENT_ACTIVITY_ADD_YOUR_COMMENTLABEL.replace("${activityText}",
-            activityText));
+                                                                                                      activityText));
 
     ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].textContent = '';",
-            workingLabel);
+                                                                                   workingLabel);
     ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript(
-            "arguments[0].textContent = '"
-                    + contentOfComment + "';",
-            commentText);
+                                                                                   "arguments[0].textContent = '"
+                                                                                       + contentOfComment + "';",
+                                                                                   commentText);
     ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].disabled = false;",
-            commentButton);
+                                                                                   commentButton);
     ((JavascriptExecutor) testBase.getExoWebDriver()
-            .getWebDriver()).executeScript("arguments[0].className = 'btn pull-right btn-primary';",
-            commentButton);
+                                  .getWebDriver()).executeScript("arguments[0].className = 'btn pull-right btn-primary';",
+                                                                 commentButton);
     evt.click(ELEMENT_COMMENT_BUTTON);
     info("Verify comment successfully");
     evt.waitForAndGetElement(ELEMENT_DELETE_COMMENT_BUTTON.replace("${activityText}", activityText).replace("${commentText}",
-            contentOfComment),
-            testBase.getDefaultTimeout(),
-            1,
-            2);
+                                                                                                            contentOfComment),
+                             testBase.getDefaultTimeout(),
+                             1,
+                             2);
     info("Add comment successfully");
   }
 
@@ -420,13 +420,13 @@ public class ActivityStream {
   public void deleteComment(String name, String comment) {
     int repeat = 0;
     while (evt.waitForAndGetElement(ELEMENT_PUBLICATION_COMMENTPOSTED.replace("$activity", name).replace("${content}", comment),
-            2000,
-            0) != null) {
+                                    2000,
+                                    0) != null) {
       if (repeat > 5)
         break;
       if (evt.waitForAndGetElement(ELEMENT_PUBLICATION_COMMENTPOSTED.replace("$activity", name).replace("${content}", comment),
-              2000,
-              0) == null)
+                                   2000,
+                                   0) == null)
         break;
       info("Hover over on the comment");
       evt.mouseOver(ELEMENT_PUBLICATION_LASTCOMMENT.replace("${title}", name), true);
@@ -461,8 +461,10 @@ public class ActivityStream {
    */
   public void addText(String text) {
     info("----Add text into activity text box-----");
-    ELEMENT_ACTIVITY_INPUT_TEXT.waitUntil(Condition.appears, Configuration.timeout).click();
-    executeJavaScript(" CKEDITOR.instances.composerInput.insertText(\"" + text + "\")", "");
+    SelenideElement frame = $(byClassName("cke_wysiwyg_frame"));
+    switchTo().frame(frame);
+    $(byXpath("/html/body")).sendKeys(text);
+    switchTo().defaultContent();
   }
 
   /**
@@ -696,20 +698,21 @@ public class ActivityStream {
    */
   public void mentionUserActivity(String username, String text) throws AWTException {
     info("mention user in activity");
-    evt.type(ELEMENT_COMPOSER_INPUT_FILED, "@" + username, false);
-    Robot robot = new Robot();
-    robot.delay(1000);
-    robot.keyPress(KeyEvent.VK_ENTER);
-    robot.keyRelease(KeyEvent.VK_ENTER);
-
+    ELEMENT_ACTIVITY_INPUT_TEXT.waitUntil(Condition.appears, Configuration.timeout).click();
+    switchTo().frame(0);
+    $(byXpath("/html/body")).setValue("@" + username);
+    switchTo().defaultContent();
+    $(byXpath("//*[@id=\"at-view-64\"]")).waitUntil(Condition.visible, Configuration.timeout);
+    switchTo().frame(0);
+    $(byXpath("/html/body")).pressEnter();
+    switchTo().defaultContent();
     if (!text.isEmpty())
-      evt.type(ELEMENT_COMPOSER_INPUT_FILED, text, false);
+      switchTo().frame(0);
+    $(byXpath("/html/body")).sendKeys(text);
+    switchTo().defaultContent();
 
     info("Click share button");
-    evt.waitForAndGetElement(ELEMENT_COMPOSER_SHARE_BUTTON, testBase.getDefaultTimeout(), 1);
-
-    WebElement el = evt.waitForAndGetElement(ELEMENT_COMPOSER_SHARE_BUTTON, testBase.getDefaultTimeout(), 0);
-    el.sendKeys("\n");
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
 
   }
 
@@ -737,15 +740,15 @@ public class ActivityStream {
    * @param username String
    * @param textContent String
    * @param activity String
-   * @throws AWTException  AWTException
+   * @throws AWTException AWTException
    */
   public void addCommentWithMentionUser(String activity, String username, String textContent) throws AWTException {
     for (int repeat = 0; repeat < 5; repeat++) {
       info("Add comment with mention user");
       if (evt.waitForAndGetElement(ELEMENT_PUBLICATION_COMMENTPOSTED_MENTION.replace("$activity", activity)
-                      .replace("$username", username),
-              3000,
-              0) != null)
+                                                                            .replace("$username", username),
+                                   3000,
+                                   0) != null)
         break;
       evt.click(ELEMENT_ICON_COMMENT.replace("${title}", activity));
       evt.type(ELEMENT_COMMENTBOX.replace("${title}", activity), "@" + username, false);
@@ -756,7 +759,7 @@ public class ActivityStream {
       evt.click(ELEMENT_COMMENT_BUTTON);
     }
     evt.waitForAndGetElement(ELEMENT_PUBLICATION_COMMENTPOSTED_MENTION.replace("$activity", activity).replace("$username",
-            username));
+                                                                                                              username));
     info("The comment is added successfully");
   }
 
@@ -772,28 +775,28 @@ public class ActivityStream {
   public void openPreviewModeOnViewLink(String nameDocument, int type, String link) {
     info("Open Preview mode");
     switch (type) {
-      case 1:
-        info("this is a documents or medias");
-        evt.waitElementAndTryGetElement(ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}", nameDocument));
-        // waitForAndGetElement(ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}",
-        // nameDocument));
-        evt.click(ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}", nameDocument));
-        break;
-      case 2:
-        info("this is a content");
-        evt.waitElementAndTryGetElement(ELEMENT_ACTIVITY_WEBCONTENT_VIEW_LINK.replace("${nameContent}", nameDocument));
-        // waitForAndGetElement(ELEMENT_ACTIVITY_WEBCONTENT_VIEW_LINK.replace("${nameContent}",
-        // nameDocument));
-        evt.click(ELEMENT_ACTIVITY_WEBCONTENT_VIEW_LINK.replace("${nameContent}", nameDocument));
-        break;
-      case 3:
-        info("this is a embedded media");
-        evt.waitElementAndTryGetElement(ELEMENT_ACTIVITY_EMBBED_MEDIA_VIEW_LINK.replace("${linkFile}", link));
-        evt.click(ELEMENT_ACTIVITY_EMBBED_MEDIA_VIEW_LINK.replace("${linkFile}", link));
-        break;
-      default:
-        info("Not type for your format.Please check your type");
-        break;
+    case 1:
+      info("this is a documents or medias");
+      evt.waitElementAndTryGetElement(ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}", nameDocument));
+      // waitForAndGetElement(ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}",
+      // nameDocument));
+      evt.click(ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}", nameDocument));
+      break;
+    case 2:
+      info("this is a content");
+      evt.waitElementAndTryGetElement(ELEMENT_ACTIVITY_WEBCONTENT_VIEW_LINK.replace("${nameContent}", nameDocument));
+      // waitForAndGetElement(ELEMENT_ACTIVITY_WEBCONTENT_VIEW_LINK.replace("${nameContent}",
+      // nameDocument));
+      evt.click(ELEMENT_ACTIVITY_WEBCONTENT_VIEW_LINK.replace("${nameContent}", nameDocument));
+      break;
+    case 3:
+      info("this is a embedded media");
+      evt.waitElementAndTryGetElement(ELEMENT_ACTIVITY_EMBBED_MEDIA_VIEW_LINK.replace("${linkFile}", link));
+      evt.click(ELEMENT_ACTIVITY_EMBBED_MEDIA_VIEW_LINK.replace("${linkFile}", link));
+      break;
+    default:
+      info("Not type for your format.Please check your type");
+      break;
     }
 
   }
@@ -810,24 +813,24 @@ public class ActivityStream {
   public void openPreviewModeOnFileName(String fileName, String link, int type) {
     info("Open Preview mode");
     switch (type) {
-      case 1:
-        info("this is a documents or medias");
-        evt.waitElementAndTryGetElement(ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}", fileName));
-        evt.click(ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}", fileName));
-        break;
-      case 2:
-        info("this is a content");
-        evt.waitElementAndTryGetElement(ELEMENT_ACTIVITY_WEBCONTENT_TITLE.replace("${title}", fileName));
-        evt.click(ELEMENT_ACTIVITY_WEBCONTENT_TITLE.replace("${title}", fileName));
-        break;
-      case 3:
-        info("this is a embedded media");
-        evt.waitElementAndTryGetElement(ELEMENT_ACTIVITY_AUDIO_VIDEO_TITLE.replace("${link}", link));
-        evt.click(ELEMENT_ACTIVITY_AUDIO_VIDEO_TITLE.replace("${link}", link));
-        break;
-      default:
-        info("Not type for your format.Please check your type");
-        break;
+    case 1:
+      info("this is a documents or medias");
+      evt.waitElementAndTryGetElement(ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}", fileName));
+      evt.click(ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}", fileName));
+      break;
+    case 2:
+      info("this is a content");
+      evt.waitElementAndTryGetElement(ELEMENT_ACTIVITY_WEBCONTENT_TITLE.replace("${title}", fileName));
+      evt.click(ELEMENT_ACTIVITY_WEBCONTENT_TITLE.replace("${title}", fileName));
+      break;
+    case 3:
+      info("this is a embedded media");
+      evt.waitElementAndTryGetElement(ELEMENT_ACTIVITY_AUDIO_VIDEO_TITLE.replace("${link}", link));
+      evt.click(ELEMENT_ACTIVITY_AUDIO_VIDEO_TITLE.replace("${link}", link));
+      break;
+    default:
+      info("Not type for your format.Please check your type");
+      break;
     }
 
   }
@@ -841,15 +844,15 @@ public class ActivityStream {
     info("-- Action: Like or Unlike an activity --");
     info("-- Like activity --");
     int numLike = Integer.parseInt(evt.waitForAndGetElement(ELEMENT_LIKE_NUMBER.replace("${title}", activityText))
-            .getText()
-            .trim());
+                                      .getText()
+                                      .trim());
     evt.click(ELEMENT_ICON_LIKE.replace("${title}", activityText));
     info("-- Verify Like button is highlighted --");
     evt.waitForAndGetElement(ELEMENT_ICON_UNLIKE.replace("${title}", activityText));
     info("-- Like successfully and Verify number of like is updated --");
     int newNumLike = Integer.parseInt(evt.waitForAndGetElement(ELEMENT_LIKE_NUMBER.replace("${title}", activityText))
-            .getText()
-            .trim());
+                                         .getText()
+                                         .trim());
     assert (newNumLike == (numLike + 1)) : "Number of like is updated";
 
   }
@@ -863,15 +866,15 @@ public class ActivityStream {
     info("-- Action: Like or Unlike an activity --");
     info("-- Unlike activity --");
     int numLike = Integer.parseInt(evt.waitForAndGetElement(ELEMENT_LIKE_NUMBER.replace("${title}", activityText))
-            .getText()
-            .trim());
+                                      .getText()
+                                      .trim());
     evt.click(ELEMENT_ICON_UNLIKE.replace("${title}", activityText));
     info("-- Verify UnLike button is gray --");
     evt.waitForAndGetElement(ELEMENT_ICON_LIKE.replace("${title}", activityText));
     info("-- Unlike successfully and Verify number of like is updated --");
     int newNumLike = Integer.parseInt(evt.waitForAndGetElement(ELEMENT_LIKE_NUMBER.replace("${title}", activityText))
-            .getText()
-            .trim());
+                                         .getText()
+                                         .trim());
     assert (newNumLike == (numLike - 1)) : "Number of like is updated";
 
   }
@@ -921,12 +924,12 @@ public class ActivityStream {
   public void checkFormatComment(String activity, String comment, String fullName) {
     info("Avatar and content of user comment");
     evt.waitElementAndTryGetElement(ELEMENT_COMMENT_AVATAR_USER.replace("$activity", activity)
-            .replace("$comment", comment)
-            .replace("$fullName", fullName));
+                                                               .replace("$comment", comment)
+                                                               .replace("$fullName", fullName));
     info("Name of user comment");
     evt.waitElementAndTryGetElement(ELEMENT_COMMENT_AUTHOR.replace("$activity", activity)
-            .replace("$comment", comment)
-            .replace("$fullName", fullName));
+                                                          .replace("$comment", comment)
+                                                          .replace("$fullName", fullName));
     info("Time comment is posted");
     evt.waitElementAndTryGetElement(ELMEMENT_COMMENT_TIME.replace("$activity", activity).replace("$comment", comment));
   }
@@ -969,14 +972,14 @@ public class ActivityStream {
   public void commentActivity(String activity, String comment) {
     // get the id of activity created
     String id = $(byText(activity)).parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .getAttribute("id")
-            .split("UIActivityLoader")[1];
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .getAttribute("id")
+                                   .split("UIActivityLoader")[1];
     // click on comment link
     $(byText(activity)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
     // insert comment
@@ -990,15 +993,15 @@ public class ActivityStream {
   public void commentTopicActivity(String description, String comment) {
     // get the id of activity created
     String id = $(byText(description)).parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .getAttribute("id")
-            .split("UIActivityLoader")[1];
+                                      .parent()
+                                      .parent()
+                                      .parent()
+                                      .parent()
+                                      .parent()
+                                      .parent()
+                                      .parent()
+                                      .getAttribute("id")
+                                      .split("UIActivityLoader")[1];
     // click on comment link
     $(byText(description)).parent().parent().parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
     // insert comment
@@ -1012,14 +1015,14 @@ public class ActivityStream {
   public void deleteActivity(String activity) {
     // get the id of activity created
     String id = $(byText(activity)).parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .getAttribute("id")
-            .split("UIActivityLoader")[1];
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .getAttribute("id")
+                                   .split("UIActivityLoader")[1];
     // click on the activity to appear the delete button
     $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
     // click on delete button
@@ -1032,48 +1035,37 @@ public class ActivityStream {
   public void likeUnlikeComment(String activity, String comment) {
     // get the id of the comment which is the same id of like comment
     String idBlocComment = $(byText(activity)).parent()
-            .parent()
-            .parent()
-            .find(byText(comment))
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .getAttribute("id")
-            .split("commentContainercomment")[1];
+                                              .parent()
+                                              .parent()
+                                              .find(byText(comment))
+                                              .parent()
+                                              .parent()
+                                              .parent()
+                                              .parent()
+                                              .getAttribute("id")
+                                              .split("commentContainercomment")[1];
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).click();
   }
 
-  /**
-   * Define options of menu activity
-   */
-  public enum optionMenuActivity {
-    All_Activities, My_Spaces, My_Activities, Connections;
-  }
-
-  public enum changeTypes {
-    No_Value, Has_One_Value;
-  }
-
-  public void replyToComment(String comment, String reply,String user) {
+  public void replyToComment(String comment, String reply, String user) {
     String id = $(byText(comment)).parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .getAttribute("id")
-            .split("CommentBlockBound")[1];
+                                  .parent()
+                                  .parent()
+                                  .parent()
+                                  .parent()
+                                  .parent()
+                                  .getAttribute("id")
+                                  .split("CommentBlockBound")[1];
     String idBlocComment = $(byText(comment)).parent()
-            .parent()
-            .parent()
-            .find(byText(comment))
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .getAttribute("id")
-            .split("commentContainercomment")[1];
+                                             .parent()
+                                             .parent()
+                                             .find(byText(comment))
+                                             .parent()
+                                             .parent()
+                                             .parent()
+                                             .parent()
+                                             .getAttribute("id")
+                                             .split("commentContainercomment")[1];
     // Get id Comment button
     executeJavaScript("window.scrollBy(0,-250)");
     // Click on reply link
@@ -1088,25 +1080,25 @@ public class ActivityStream {
     $(byText(reply)).parent().parent().find(byText(user)).should(Condition.exist);
   }
 
-  public void replyToCommentUsingImage(String comment, String reply,String user) {
-        String id = $(byText(comment)).parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .getAttribute("id")
-            .split("CommentBlockBound")[1];
+  public void replyToCommentUsingImage(String comment, String reply, String user) {
+    String id = $(byText(comment)).parent()
+                                  .parent()
+                                  .parent()
+                                  .parent()
+                                  .parent()
+                                  .parent()
+                                  .getAttribute("id")
+                                  .split("CommentBlockBound")[1];
     String idBlocComment = $(byText(comment)).parent()
-            .parent()
-            .parent()
-            .find(byText(comment))
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .getAttribute("id")
-            .split("commentContainercomment")[1];
+                                             .parent()
+                                             .parent()
+                                             .find(byText(comment))
+                                             .parent()
+                                             .parent()
+                                             .parent()
+                                             .parent()
+                                             .getAttribute("id")
+                                             .split("commentContainercomment")[1];
     executeJavaScript("window.scrollBy(0,-250)");
     // Click on reply link
     $(byId(ELEMENT_lABEL_REPLY_COMMENT.replace("{id}", idBlocComment))).click();
@@ -1114,20 +1106,21 @@ public class ActivityStream {
     $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + reply + "\")", "");
     info("Verify that the reply is added");
-    //Click on the Insert image icon
+    // Click on the Insert image icon
     $(byText(comment)).parent().parent().parent().parent().parent().find(byClassName("cke_button__simpleimage ")).click();
-    //insert URL
-   // $(byClassName("cke_dialog_ui_input_text")).findElementByClassName("cke_dialog_ui_input_text").sendKeys("http://qa-ui03.acceptance7.exoplatform.org/rest/private/jcr/repository/collaboration/Users/j___/jo___/joh___/john/Public/Activity Stream Documents/eXo-Platform.png");
-    $$(byClassName("cke_dialog_ui_input_text")).get(1).sendKeys(Keys.CONTROL,"v");
+    // insert URL
+    // $(byClassName("cke_dialog_ui_input_text")).findElementByClassName("cke_dialog_ui_input_text").sendKeys("http://qa-ui03.acceptance7.exoplatform.org/rest/private/jcr/repository/collaboration/Users/j___/jo___/joh___/john/Public/Activity
+    // Stream Documents/eXo-Platform.png");
+    $$(byClassName("cke_dialog_ui_input_text")).get(1).sendKeys(Keys.CONTROL, "v");
     $$(byClassName("cke_dialog_ui_input_text")).get(1).pressEnter();
-    //Validate
+    // Validate
     // click on the button comment
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(reply)).should(Condition.exist);
     $(byText(reply)).parent().parent().find(byText(user)).should(Condition.exist);
   }
 
-  public void deleteReplyInAS (String reply){
+  public void deleteReplyInAS(String reply) {
     String idCommentContainer = $(byText(reply)).parent()
                                                 .parent()
                                                 .parent()
@@ -1136,16 +1129,14 @@ public class ActivityStream {
                                                 .split("commentContainercomment")[1];
     $(byId(ELEMENT_REPLY_CONTAINER.replace("{id}", idCommentContainer))).hover();
     $(byId(ELEMENT_INCON_DELETE_COMMENT.replace("{id}", idCommentContainer))).click();
-    //Confirm delete
+    // Confirm delete
     ELEMENT_DELETE_POPUP_OK.click();
     $(byText(reply)).shouldNot(Condition.exist);
   }
 
   public void replyToCommentInPreview(String comment, String reply, String user) {
     // Click on reply link
-    $(byId("commentArea")).find(byText(comment)).parent()
-            .parent()
-            .parent().find(byClassName("replyCommentLink")).click();
+    $(byId("commentArea")).find(byText(comment)).parent().parent().parent().find(byClassName("replyCommentLink")).click();
 
     ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
     executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + reply + "\")", "");
@@ -1155,42 +1146,44 @@ public class ActivityStream {
 
   public void showAllReplies(String comment) {
     String idBlocComment = $(byText(comment)).parent()
-            .parent()
-            .parent()
-            .find(byText(comment))
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .getAttribute("id")
-            .split("commentContainercomment")[1];
+                                             .parent()
+                                             .parent()
+                                             .find(byText(comment))
+                                             .parent()
+                                             .parent()
+                                             .parent()
+                                             .parent()
+                                             .getAttribute("id")
+                                             .split("commentContainercomment")[1];
     // Get id Comment button
     executeJavaScript("window.scrollBy(0,-250)");
-    $(byId(ELEMENT_VIEW_ALL_REPLIES_LINK.replace("{id}", idBlocComment))).waitUntil(Condition.appears, Configuration.timeout).findElementByClassName("subCommentShowAllLink").click();
+    $(byId(ELEMENT_VIEW_ALL_REPLIES_LINK.replace("{id}", idBlocComment))).waitUntil(Condition.appears, Configuration.timeout)
+                                                                         .findElementByClassName("subCommentShowAllLink")
+                                                                         .click();
   }
 
   public void replyToReply(String activity, String reply, String replytoreply) {
     String idBlocReply = $(byText(reply)).parent()
-            .parent()
-            .parent()
-            .find(byText(reply))
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .getAttribute("id")
-            .split("commentContainercomment")[1];
+                                         .parent()
+                                         .parent()
+                                         .find(byText(reply))
+                                         .parent()
+                                         .parent()
+                                         .parent()
+                                         .parent()
+                                         .getAttribute("id")
+                                         .split("commentContainercomment")[1];
     // Get id Reply button
     executeJavaScript("window.scrollBy(0,-250)");
     String id = $(byText(activity)).parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .getAttribute("id")
-            .split("UIActivityLoader")[1];
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .getAttribute("id")
+                                   .split("UIActivityLoader")[1];
     // Click on reply link
     $(byId(ELEMENT_lABEL_REPLY_COMMENT.replace("{id}", idBlocReply))).click();
     // Insert the reply
@@ -1203,42 +1196,51 @@ public class ActivityStream {
   }
 
   public void replyToReplyInPreviewMode(String reply) {
-    String replytoreply = "ReplyToReply"+getRandomNumber();
-    $(byId("commentArea")).find(byText(reply)).parent()
-            .parent()
-            .parent().find(byClassName("replyCommentLink")).click();
+    String replytoreply = "ReplyToReply" + getRandomNumber();
+    $(byId("commentArea")).find(byText(reply)).parent().parent().parent().find(byClassName("replyCommentLink")).click();
 
     ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
     executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + replytoreply + "\")", "");
     ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
   }
 
-  public void deletecomment (String activity, String comment){
+  public void deletecomment(String activity, String comment) {
     String idBlocComment = $(byText(activity)).parent()
-            .parent()
-            .parent()
-            .find(byText(comment))
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .getAttribute("id")
-            .split("commentContainercomment")[1];
+                                              .parent()
+                                              .parent()
+                                              .find(byText(comment))
+                                              .parent()
+                                              .parent()
+                                              .parent()
+                                              .parent()
+                                              .getAttribute("id")
+                                              .split("commentContainercomment")[1];
 
     $(byId(ELEMENT_COMMENT_BLOC_AS.replace("{id}", idBlocComment))).hover().click();
     $(byId(ELEMENT_INCON_DELETE_COMMENT.replace("{id}", idBlocComment))).click();
-    //Confirm delete
+    // Confirm delete
     ELEMENT_DELETE_POPUP_OK.click();
     $(byText(comment)).shouldNot(Condition.exist);
   }
 
   public void likeReply(String reply) {
     String idReplyContainer = $(byText(reply)).parent()
-            .parent()
-            .parent()
-            .parent()
-            .getAttribute("id")
-            .split("commentContainercomment")[1];
+                                              .parent()
+                                              .parent()
+                                              .parent()
+                                              .getAttribute("id")
+                                              .split("commentContainercomment")[1];
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idReplyContainer))).click();
+  }
+
+  /**
+   * Define options of menu activity
+   */
+  public enum optionMenuActivity {
+    All_Activities, My_Spaces, My_Activities, Connections;
+  }
+
+  public enum changeTypes {
+    No_Value, Has_One_Value;
   }
 }
