@@ -1,5 +1,7 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
+import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -228,31 +230,31 @@ public class UserProfilePage {
     String index = (String) (opParams.length > 0 ? opParams[0] : "0");
     Integer xpathCount = testBase.getElements(ELEMENT_EXPERIENCE_LIST).size();
     if (Integer.valueOf(index) >= xpathCount) {
-      evt.click(ELEMENT_ADD_MORE_EXP_ICON, 0, true);
+      $(ELEMENT_ADD_MORE_EXP_ICON).click();
     }
     info("-- update experience --");
     if (organization != null && organization != "") {
-      evt.type(ELEMENT_EXPERIENCE_COMPANY_INPUT.replace("${index}", index), organization, true);
+      $(byXpath(ELEMENT_EXPERIENCE_COMPANY_INPUT.replace("${index}", index))).setValue(organization);
     }
     if (jobTitle != null && jobTitle != "") {
-      evt.type(ELEMENT_EXPERIENCE_POSITION_INPUT.replace("${index}", index), jobTitle, true);
+      $(byXpath(ELEMENT_EXPERIENCE_POSITION_INPUT.replace("${index}", index))).setValue(jobTitle);
     }
     if (jobDetail != null && jobDetail != "") {
-      evt.type(ELEMENT_EXPERIENCE_DESCRIPTION_INPUT.replace("${index}", index), jobDetail, true);
+      $(byXpath(ELEMENT_EXPERIENCE_DESCRIPTION_INPUT.replace("${index}", index))).setValue(jobDetail);
     }
     if (skill != null && skill != "") {
-      evt.type(ELEMENT_EXPERIENCE_SKILL_INPUT.replace("${index}", index), skill, true);
+      $(byXpath(ELEMENT_EXPERIENCE_SKILL_INPUT.replace("${index}", index))).setValue(skill);
     }
     if (startDate != null && startDate != "") {
-      evt.type(ELEMENT_EXPERIENCE_START_DATE_INPUT.replace("${index}", index), startDate, true);
+      $(byXpath(ELEMENT_EXPERIENCE_START_DATE_INPUT.replace("${index}", index))).setValue(startDate);
     }
     if (endDate != null && endDate != "") {
-      evt.type(ELEMENT_EXPERIENCE_END_DATE_INPUT.replace("${index}", index), endDate, true);
+      $(byXpath(ELEMENT_EXPERIENCE_END_DATE_INPUT.replace("${index}", index))).setValue(endDate);
     }
     if (curPos != null && curPos) {
-      evt.check(ELEMENT_EXPERIENCE_CURRENT_CHECKBOX.replace("${index}", index), 2);
+      evt.check(byXpath(ELEMENT_EXPERIENCE_CURRENT_CHECKBOX.replace("${index}", index)));
     } else {
-      evt.uncheck(ELEMENT_EXPERIENCE_CURRENT_CHECKBOX.replace("${index}", index), 2);
+      evt.uncheck(byXpath(ELEMENT_EXPERIENCE_CURRENT_CHECKBOX.replace("${index}", index)));
     }
   }
 
