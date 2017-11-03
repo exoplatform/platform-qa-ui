@@ -365,14 +365,14 @@ public class SpaceSettingManagement {
     for (String right : arrayRight) {
       info("Select a permission for space:" + right);
       // check(ELEMENT_ACCESS_PERMISSION_RADIO.replace("${right}", right),2);
-      evt.clickByJavascript(ELEMENT_ACCESS_PERMISSION_RADIO.replace("${right}", right), 2);
+      $(byXpath(ELEMENT_ACCESS_PERMISSION_RADIO.replace("${right}", right))).parent().click();
     }
     info("Save all changes");
-    if (evt.waitForAndGetElement(ELEMENT_ACCESS_PERMISSION_SAVE_BTN, 3000, 0) != null) {
-      evt.click(ELEMENT_ACCESS_PERMISSION_SAVE_BTN);
-      evt.click(ELEMENT_ACCESS_INFO_OK_BTN);
+    if ($(ELEMENT_ACCESS_PERMISSION_SAVE_BTN).is(Condition.visible)) {
+      $(ELEMENT_ACCESS_PERMISSION_SAVE_BTN).click();
+      $(ELEMENT_ACCESS_INFO_OK_BTN).click();
     } else
-      evt.click(ELEMENT_ACCESS_AND_EDIT_TAB_OF_POPUP_CREATE_BTN);
+      $(ELEMENT_ACCESS_AND_EDIT_TAB_OF_POPUP_CREATE_BTN).click();
 
   }
 

@@ -1731,7 +1731,7 @@ public final class SocialLocator {
 
   // Access and Edit tab
   public static final By              ELEMENT_ACCESS_AND_EDIT_TAB                                       =
-                                                                  By.xpath(".//*[contains(@data-target,'#UISpacePermission-tab')]");
+                                                                  By.xpath(".//*[contains(@data-target,'#UITabPanetab1-tab')]");
 
   public static final By              ELEMENT_ACCESS_AND_EDIT_TAB_OF_POPUP                              =
                                                                            By.xpath(".//*[contains(@data-target,'#UISpaceVisibility-tab')]");
