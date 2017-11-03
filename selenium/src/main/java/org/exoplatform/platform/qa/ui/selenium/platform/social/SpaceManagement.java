@@ -326,7 +326,7 @@ public class SpaceManagement {
    */
   public void goToRequestPendingTab() {
     info("Open Request pending tab");
-    evt.click(ELEMENT_MY_SPACE_REQUEST_PENDING_TAB);
+    $(ELEMENT_MY_SPACE_REQUEST_PENDING_TAB).click();
 
   }
 
