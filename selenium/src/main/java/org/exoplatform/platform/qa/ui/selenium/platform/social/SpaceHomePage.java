@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -72,9 +73,9 @@ public class SpaceHomePage {
    */
   public void goToSpace(String name) {
     info("Go to the Space:" + name);
-    $(ELEMENT_SPACE_LEFT_MENU_SPACE_NAME).waitUntil(Condition.appears, Configuration.timeout);
-    $(ELEMENT_SPACE_LEFT_MENU_SPACE_NAME).click();
-    $(ELEMENT_SPACE_NAME).waitUntil(Condition.appears, Configuration.timeout);
+    $(byXpath(ELEMENT_SPACE_LEFT_MENU_SPACE_NAME.replace("${name}",name))).waitUntil(Condition.appears, Configuration.timeout);
+    $(byXpath(ELEMENT_SPACE_LEFT_MENU_SPACE_NAME.replace("${name}",name))).click();
+    $(byXpath(ELEMENT_SPACE_NAME.replace("${name}",name))).waitUntil(Condition.appears, Configuration.timeout);
     info("The space is shown");
   }
 

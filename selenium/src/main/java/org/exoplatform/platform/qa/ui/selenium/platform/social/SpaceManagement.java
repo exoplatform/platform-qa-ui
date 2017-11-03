@@ -68,8 +68,8 @@ public class SpaceManagement {
    */
   public void leaveSpace(String space) {
     info("Do leave space");
-    evt.click(ELEMENT_SPACE_LEAVE_BTN.replace("${space}", space));
-    evt.waitForElementNotPresent(ELEMENT_SPACE_LEAVE_BTN.replace("${space}", space));
+    $(byXpath(ELEMENT_SPACE_LEAVE_BTN.replace("${space}", space))).click();
+    $(byXpath(ELEMENT_SPACE_LEAVE_BTN.replace("${space}", space))).shouldNot(Condition.visible);
   }
 
   /**
@@ -353,9 +353,9 @@ public class SpaceManagement {
     info("Open invitation received tab");
     goToInvitationsReceivedTab();
     info("evt.click on Ignore button of the space");
-    evt.click(ELEMENT_MY_SPACE_INVITATION_RECEIVED_CANCEL_BTN.replace("${space}", space));
+    $(byXpath(ELEMENT_MY_SPACE_INVITATION_RECEIVED_CANCEL_BTN.replace("${space}", space))).click();
     info("Verify that the user didn't join to the space");
-    evt.waitForElementNotPresent(ELEMENT_MY_SPACE_INVITATION_RECEIVED_CANCEL_BTN.replace("${space}", space));
+    $(byXpath(ELEMENT_MY_SPACE_INVITATION_RECEIVED_CANCEL_BTN.replace("${space}", space))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**

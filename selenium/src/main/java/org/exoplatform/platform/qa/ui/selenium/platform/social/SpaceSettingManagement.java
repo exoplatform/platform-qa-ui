@@ -100,9 +100,9 @@ public class SpaceSettingManagement {
    */
   public void changeRole(String user) {
     info("Open members tab");
-    evt.click(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB);
+    ELEMENT_SPACE_SETTINGS_MEMBERS_TAB_IN_SETTING_TAB.click();
     info("Click on change role button of manager column");
-    evt.click(ELEMENT_SPACE_CHANGE_ROLE_USER_MEMBER.replace("${user}", user), 2);
+    $(byXpath(ELEMENT_SPACE_CHANGE_ROLE_USER_MEMBER.replace("${user}", user))).click();
 
   }
 
@@ -113,10 +113,10 @@ public class SpaceSettingManagement {
    */
   public void removeUser(String user) {
     info("OPen members tab");
-    evt.click(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB);
+    ELEMENT_SPACE_SETTINGS_MEMBERS_TAB_IN_SETTING_TAB.click();
     info("Click on Delete button to remove user");
-    evt.click(ELEMENT_SPACE_DELETE_USER_BTN.replace("${user}", user));
-    evt.waitForElementNotPresent(ELEMENT_SPACE_DELETE_USER_BTN.replace("${user}", user));
+    $(byText(user)).parent().find(byClassName("uiIconDelete")).click();
+    $(byText(user)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
@@ -156,7 +156,7 @@ public class SpaceSettingManagement {
    */
   public void acceptRequest(String user) {
     info("OPen members tab");
-    $(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB_IN_SETTING_TAB).click();
+   ELEMENT_SPACE_SETTINGS_MEMBERS_TAB_IN_SETTING_TAB.click();
     info("Click on join button to remove user");
     $(byText(user + " " + user)).parent().find(ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB).click();
     info("Verify that the member is shown in member list");
