@@ -235,9 +235,9 @@ public class SpaceSettingManagement {
    */
   public void goToNavigationTab() {
     info("Select Navigation tab");
-    evt.waitForAndGetElement(ELEMENT_SPACE_SETTING_NAVIGATION_TAB, 3000, 0).click();
+    $(ELEMENT_SPACE_SETTING_NAVIGATION_TAB).waitUntil(Condition.visible,Configuration.timeout).click();
     info("The tab is opened succcessfully");
-    evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON);
+    $(ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON).waitUntil(Condition.visible,Configuration.timeout);
     // waitForAndGetElement(ELEMENT_APPLICATION_TAB_ADD_APPLICATION_BTN,3000,0);
 
   }
@@ -274,18 +274,18 @@ public class SpaceSettingManagement {
   public void addANodeSimple(String name) {
     info("Click on Add node button");
     // waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON,3000,0).click();
-    evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON, testBase.getDefaultTimeout(), 1);
-    evt.clickByJavascript(ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON, 2);
+    $(ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON).click();
     info("The popup is shown");
-    evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_NODE_TITLE, 2000, 0);
+    $(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_NODE_TITLE).waitUntil(Condition.visible,Configuration.timeout);
     info("Input a new name for the node");
-    evt.type(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_NAME, name, true);
+    $(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_NAME).setValue(name);
     info("Save all changes");
     // waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE,2000,0).click();
-    evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE, testBase.getDefaultTimeout(), 1);
-    evt.clickByJavascript(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE, 2);
+    $(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE).waitUntil(Condition.visible,Configuration.timeout);
+   $(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE).click();
     info("Verify that the node is added successfully");
-    evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", name), 3000, 0);
+    $(byXpath(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", name))).waitUntil(Condition.visible,Configuration.timeout);
 
   }
 
@@ -345,15 +345,15 @@ public class SpaceSettingManagement {
    */
   public void editANodeSimple(String nodeName, String label) {
     info("Right click on the node");
-    evt.rightClickOnElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
+    $(byXpath(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName))).contextClick();
     info("Select edit link");
-    evt.click(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_EDIT);
+    $(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_EDIT).click();
     info("Input a new name for lable field");
-    evt.type(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_LABEL, label, true);
+    $(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_LABEL).setValue(label);
     info("Save all changes");
-    evt.click(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE);
+    $(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE).click();
     info("Verify that the node is edited successfully");
-    evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", label), 3000, 1);
+    $(byXpath(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", label))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -396,7 +396,7 @@ public class SpaceSettingManagement {
   public void deleteANode(String nodeName) {
     info("Right click on the node");
     // Actions actions = new Actions(driver);
-    evt.rightClickOnElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
+    $(byXpath(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName))).contextClick();
     /*
      * WebElement el =
      * waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace(
@@ -404,10 +404,10 @@ public class SpaceSettingManagement {
      * actions.moveToElement(el).contextClick().perform();
      */
     info("Select delete link");
-    evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_DELETE, 2000, 0).click();
+    $(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
     alert.acceptAlert();
     info("Verify that the node is deleted successfully");
-    evt.waitForElementNotPresent(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
+    $(byXpath(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName))).waitUntil(Condition.disappears,Configuration.timeout);
   }
 
   /**
