@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.answer.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
+
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
@@ -38,8 +39,7 @@ public class CommentManagement {
    */
   public void goToCommentQuestion(String question) {
     info("Go to COMMENT a question");
-
-    $(ELEMENT_COMMENT_BUTTON).click();
+    $(byText(question)).parent().parent().find(ELEMENT_COMMENT_BUTTON).click();
     $(ELEMENT_COMMENT_FORM).waitUntil(Condition.appears, Configuration.timeout);
   }
 
@@ -56,7 +56,7 @@ public class CommentManagement {
     if (content != null && content != "") {
       info("input content");
       switchTo().frame(0);
-      ELEMENT_QUESTION_ANSWER_CONTENT_INPUT.click();
+      ELEMENT_QUESTION_ANSWER_CONTENT_INPUT.waitUntil(Condition.visible, Configuration.timeout).click();
       ELEMENT_QUESTION_ANSWER_CONTENT_INPUT.sendKeys(content);
       switchTo().defaultContent();
     }
