@@ -205,7 +205,7 @@ public class CalendarHomePage {
           ELEMENT_NEXT_RIGHT_LIST_DAY_BUTTON.click();
         }
         $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
-        $(byText(name)).contextClick();
+        $(byText(name)).waitUntil(Condition.visible,Configuration.timeout).contextClick();
       }
     } else {
       if ($(ELEMENT_TOTAL_PAGE).is(Condition.visible)) {
