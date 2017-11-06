@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
+import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
@@ -90,12 +91,11 @@ public class CalendarHomePage {
   public void goToRightMenuTaskEventFromDayView(String name, selectDayOption optionDay) {
     info("Got to edit task from day view");
     goToView(selectViewOption.DAY);
-    evt.click(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Day"));
-    evt.waitForAndGetElement(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Day"));
+    $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Day"))).click();
+    $(byXpath(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Day"))).waitUntil(Condition.visible,Configuration.timeout);
     switch (optionDay) {
     case DETAILTIME:
-      evt.scrollBarToGetElement(By.xpath(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name)));
-      evt.rightClickOnElement(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
+      $(byXpath(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name))).scrollTo().contextClick();
       break;
     case ALLDAY:
       evt.rightClickOnElement(ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY.replace("$name", name));
@@ -204,6 +204,9 @@ public class CalendarHomePage {
         evt.waitForAndGetElement(ELEMENT_EVENT_TASK_START_DETAIL_DATE_LIST_VIEW.replace("$name", name).replace("$date", date));
         evt.rightClickOnElement(ELEMENT_EVENT_TASK_START_DETAIL_DATE_LIST_VIEW.replace("$name", name).replace("$date", date));
       } else {
+        if( $(byId("UIListUsers")).find(byText(name)).is(Condition.not(Condition.exist))){
+          ELEMENT_NEXT_RIGHT_LIST_DAY_BUTTON.click();
+        }
         $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
         $(byText(name)).contextClick();
       }

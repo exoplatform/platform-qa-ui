@@ -21,7 +21,7 @@ public class PlatformPermission {
 
   /**
    * Search user by key search
-   * 
+   *
    * @param keySearch
    * @param type type of search 1: search by user name 2: search by first name 3:
    *          search by last name 4: search by email default: search by user name
@@ -54,7 +54,7 @@ public class PlatformPermission {
 
   /**
    * Select user permission
-   * 
+   *
    * @param user list of user: john/mary
    * @param type type of search 1: search by user name 2: search by first name 3:
    *          search by last name 4: search by email default: search by user name
@@ -74,7 +74,7 @@ public class PlatformPermission {
 
   /**
    * Check display of user selector
-   * 
+   *
    * @param user
    * @param isPresent
    */
@@ -87,7 +87,7 @@ public class PlatformPermission {
 
   /**
    * Select group permission
-   * 
+   *
    * @param grouppath path group: (Ex: Organization/Employees)
    */
   public void selectGroupPermission(String grouppath) {
@@ -107,7 +107,7 @@ public class PlatformPermission {
 
   /**
    * Select group membership
-   * 
+   *
    * @param groupPath path group: (Ex: Organization/Employees)
    * @param membership membership: (Ex: author)
    */
@@ -125,7 +125,7 @@ public class PlatformPermission {
 
   /**
    * Check search result
-   * 
+   *
    * @param keySearch
    * @param isPresent true if it has result false if it doesn't have result
    */

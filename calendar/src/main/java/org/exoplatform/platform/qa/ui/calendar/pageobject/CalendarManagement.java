@@ -202,6 +202,7 @@ public class CalendarManagement {
   /**
    * Remove a group in group table of Calendar form
    *
+
    * @param groupName String
    */
   public void removeGroupInGroupTabCalendarForm(String groupName) {
@@ -214,7 +215,7 @@ public class CalendarManagement {
   /**
    * Select a user/role who has edit permission in a group
    *
-   * @param user String
+   * @param user Stringt
    * @param mode way to input users, groups. =0: type directly =1: select user =2:
    *          select role
    */
@@ -412,6 +413,7 @@ public class CalendarManagement {
       evt.click(ELEMENT_CALENDAR_ADD_TASK_MENU, 2);
       evt.waitForAndGetElement(ELEMENT_CALENDAR_QUICK_ADD_TASK_FORM);
       break;
+
 
     }
   }
@@ -641,6 +643,7 @@ public class CalendarManagement {
       case NEVER:
         // check(ELEMENT_CALENDAR_SETTING_NEVER_SEND_INVITE_CHECKBOX,2);
         $(ELEMENT_CALENDAR_SETTING_NEVER_SEND_INVITE_CHECKBOX).click();
+        break;
       case ALWAYS:
         // check(ELEMENT_CALENDAR_SETTING_ALWAYS_SEND_INVITE_CHECKBOX,2);
         $(ELEMENT_CALENDAR_SETTING_ALWAYS_SEND_INVITE_CHECKBOX).click();
@@ -653,6 +656,7 @@ public class CalendarManagement {
         // check(ELEMENT_CALENDAR_SETTING_NEVER_SEND_INVITE_CHECKBOX,2);
         $(ELEMENT_CALENDAR_SETTING_NEVER_SEND_INVITE_CHECKBOX).click();
         break;
+
 
       }
     }
@@ -1196,7 +1200,7 @@ public class CalendarManagement {
    * Input username and password of user authentication in remote calendar
    *
    * @param username String
-   * @param password String
+   * @param password Stringent
    */
   public void addUserAuthentication(String username, String password) {
     if (!username.isEmpty()) {
