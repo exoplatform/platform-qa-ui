@@ -132,7 +132,7 @@ public class AnswerLocator {
   public static final By              ELEMENT_ATTACHMENT_SAVE_BUTTON                        =
                                                                      By.xpath("//*[@id='FAQImportForm']//*[text()='Save']");
 
-  public static final String          ELEMENT_IMPORT_SUCCESS_MESSAGE                        = "The file has been imported";
+  public static final String          ELEMENT_IMPORT_SUCCESS_MESSAGE                        = "The file has been imported.";
 
   public static final By              ELEMENT_CATEGORY_OK_BUTTON                            =
                                                                  By.xpath("//*[contains(@class,'UIPopupWindow')]//a[text()='OK']");
@@ -227,6 +227,8 @@ public class AnswerLocator {
 
   public static final String          ELEMENT_QUICK_SEARCH_CLOSE                            =
                                                                  "//*[@id=\"UIResultQuickSearchs\"]/div/div[2]/button";
+
+
 
   public static final String          ELEMENT_QUICK_SEARCH_ADVANCE_SEARCH_BUTTON            =
                                                                                  "//*[@id='UIResultQuickSearchs']//*[text()='Advanced Search']";
@@ -572,7 +574,6 @@ public class AnswerLocator {
                                                               "//*[@id=\"{IdQuestion}\"]/div/div[2]/div[2]/div[2]/div[2]/a[1]";
 
   public static final SelenideElement ELEMENT_QUESTION_ANSWER_CONTENT_INPUT                 = $(byXpath("/html/body"));
-  public static final SelenideElement ELEMENT_QUESTION_CONTAINER                            = $(byClassName("questionContainer"));
   public static final SelenideElement ELEMENT_RATE_QUESTION_1_UNVOTED=$(byId("faqVoteSpace")).findAll(byClassName("unvoted")).get(0);
   public static final SelenideElement ELEMENT_RATE_QUESTION_2_UNVOTED=$(byId("faqVoteSpace")).findAll(byClassName("unvoted")).get(1);
   public static final SelenideElement ELEMENT_RATE_QUESTION_3_UNVOTED=$(byId("faqVoteSpace")).findAll(byClassName("unvoted")).get(2);
@@ -590,12 +591,24 @@ public class AnswerLocator {
 
   public static final By ELEMENT_ANSWER_DELETE=byClassName("confirm");
   public static final By ELEMENT_COMMENT_DELETE= byClassName("confirm");
-  public static final SelenideElement ELEMENT_LIST_CATEGORIE                                = $(byId("UICategories"));
 
-  public static final SelenideElement ELEMENT_ICON_GO_TO_HOME_CATEGORIE                     = $(byClassName("uiIconUpLevel"));
 
   public static final By              ELEMENT_ICON_MORE_ACTIONS_QUESTION                    = byClassName("uiIconSettings");
 
   public static final SelenideElement ELEMENT_TABLE_RESULT_SEARCH                           = $(byId("ResultQuickSearch"));
+
+
+  public static final SelenideElement ELEMENT_LIST_CATEGORIE                                = $(byId("UICategories"));
+
+  public static final SelenideElement ELEMENT_ICON_GO_TO_HOME_CATEGORIE                     = $(byClassName("uiIconUpLevel"));
+
+  public static final SelenideElement ELEMENT_FORM_MOVE_CATEGORIE                           = $(byId("UIMoveCategoryForm"));
+
+
+  public static final SelenideElement ELEMENT_POPUB_MANAGE_QUESTION                         = $(byId("UIAnswersPopupWindow"));
+
+  public static final By              ELEMENT_CHECKBOX_ACTIVATE_UNACTIVATE_QUESTION         = byId("allDay");
+
+  public static final SelenideElement ELEMENT_QUESTION_CONTAINER                            = $(byClassName("questionContainer"));
 
 }

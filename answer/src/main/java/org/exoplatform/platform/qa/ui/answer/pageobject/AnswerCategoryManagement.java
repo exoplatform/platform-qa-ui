@@ -1,15 +1,12 @@
 package org.exoplatform.platform.qa.ui.answer.pageobject;
 
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.withText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_ADD_USERS_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -47,7 +44,7 @@ public class AnswerCategoryManagement {
 
   /**
    * Execute action of category from action bar: EDIT, ADD, EXPORT, IMPORT
-   * 
+   *
    * @param action action that needs to be done
    */
   public void goToActionOfCategoryFromActionBar(actionCategoryOption action) {
@@ -58,9 +55,9 @@ public class AnswerCategoryManagement {
     switch (action) {
     case EDIT:
       info("Edit category");
-      evt.waitForAndGetElement(ELEMENT_CATEGORY_EDIT_BUTTON, testBase.getDefaultTimeout(), 1);
-      evt.click(ELEMENT_CATEGORY_EDIT_BUTTON);
-      evt.waitForAndGetElement(ELEMENT_CATEGORY_EDIT_FORM);
+      $(ELEMENT_CATEGORY_EDIT_BUTTON).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_CATEGORY_EDIT_BUTTON).click();
+      $(ELEMENT_CATEGORY_EDIT_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case ADD:
       info("ADD category");
@@ -70,15 +67,15 @@ public class AnswerCategoryManagement {
       break;
     case EXPORT:
       info("EXPORT category");
-      evt.waitForAndGetElement(ELEMENT_CATEGORY_EXPORT_BUTTON, testBase.getDefaultTimeout(), 1);
-      evt.click(ELEMENT_CATEGORY_EXPORT_BUTTON);
-      evt.waitForAndGetElement(ELEMENT_CATEGORY_EXPORT_FORM);
+      $(ELEMENT_CATEGORY_EXPORT_BUTTON).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_CATEGORY_EXPORT_BUTTON).click();
+      $(ELEMENT_CATEGORY_EXPORT_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case IMPORT:
       info("IMPORT category");
-      evt.waitForAndGetElement(ELEMENT_CATEGORY_IMPORT_BUTTON, testBase.getDefaultTimeout(), 1);
-      evt.click(ELEMENT_CATEGORY_IMPORT_BUTTON);
-      evt.waitForAndGetElement(ELEMENT_CATEGORY_IMPORT_FORM);
+      $(ELEMENT_CATEGORY_IMPORT_BUTTON).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_CATEGORY_IMPORT_BUTTON).click();
+      $(ELEMENT_CATEGORY_IMPORT_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case DELETE:
       info("DELETE category");
@@ -95,13 +92,13 @@ public class AnswerCategoryManagement {
   /**
    * Execute action of category from right click: EDIT, ADD, EXPORT, IMPORT,
    * DELETE, MOVE, WATCH, RSS, SUBMITQUESTION
-   * 
+   *
    * @param cat name of category
    * @param action action that needs to be done
    */
   public void goToActionOfCategoryFromRightClick(String cat, actionCategoryOption action) {
     info("Select action from menu");
-    $(withText(cat)).find(byText(cat)).contextClick();
+    ELEMENT_LIST_CATEGORIE.find(byLinkText(" " + cat)).contextClick();
     switch (action) {
     case EDIT:
       info("Edit category");
@@ -130,8 +127,8 @@ public class AnswerCategoryManagement {
       break;
     case MOVE:
       info("MOVE category");
-      evt.click(ELEMENT_CATEGORY_RIGHT_MOVE_BUTTON);
-      evt.waitForAndGetElement(ELEMENT_CATEGORY_MOVE_FORM);
+      $(ELEMENT_CATEGORY_RIGHT_MOVE_BUTTON).click();
+      $(ELEMENT_CATEGORY_MOVE_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case WATCH:
       info("WATCH category");
@@ -159,7 +156,7 @@ public class AnswerCategoryManagement {
 
   /**
    * Input data to setting tab of category form
-   * 
+   *
    * @param cat category name
    * @param order order of category
    * @param des description of category
@@ -213,7 +210,7 @@ public class AnswerCategoryManagement {
 
   /**
    * delete Category
-   * 
+   *
    * @param cat
    */
   public void deleteCategory(String cat) {
@@ -228,7 +225,7 @@ public class AnswerCategoryManagement {
 
   /**
    * move Category to target
-   * 
+   *
    * @param target target category (Ex: cat1/cat2/cat3...)
    */
   public void moveCategory(String target) {
@@ -239,44 +236,39 @@ public class AnswerCategoryManagement {
         evt.click(ELEMENT_CATEGORY_MOVE_TARGET_ITEM.replace("$category", nodes[i]));
       }
     }
-    evt.doubleClickOnElement(ELEMENT_CATEGORY_MOVE_TARGET_ITEM.replace("$category", nodes[nodes.length - 1]));
+    ELEMENT_FORM_MOVE_CATEGORIE.find(byText(target)).doubleClick();
   }
 
   /**
    * function export category in answer
-   * 
+   *
    * @param fileName
    */
   public void exportAnswerCategory(String fileName) {
     info("Export category to file " + fileName);
     goToActionOfCategoryFromActionBar(actionCategoryOption.EXPORT);
-    evt.type(ELEMENT_FILE_NAME_EXPORT, fileName, true);
+    $(ELEMENT_FILE_NAME_EXPORT).setValue(fileName);
     button.save();
   }
 
   /**
    * function import category in answer
-   * 
+   *
    * @param path
    */
-  public void importAnswerCategory(String path) {
-    info("Import category from file " + path);
-    String[] links = path.split("/");
+  public void importAnswerCategory() {
+    info("Import category from file ");
     goToActionOfCategoryFromActionBar(actionCategoryOption.IMPORT);
-    WebElement eFile = evt.waitForAndGetElement(ELEMENT_IMPORT_CATEGORY_INPUT, testBase.getDefaultTimeout(), 1, 2);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';",
-                                                                                   eFile);
-    eFile.sendKeys(testBase.getAbsoluteFilePath(path));
-    evt.waitForAndGetElement(ELEMENT_ATTACHMENT_FORM_FILE_NAME.replace("$fileName", links[links.length - 1]));
-    evt.switchToParentWindow();
-    evt.click(ELEMENT_ATTACHMENT_SAVE_BUTTON);
-    alert.verifyAlertMessage(ELEMENT_IMPORT_SUCCESS_MESSAGE);
-    evt.click(ELEMENT_CATEGORY_OK_BUTTON);
+    $(byClassName("uploadContainer")).find(byClassName("file")).uploadFromClasspath("AnswerCategorie.zip");
+    $(byClassName("progressBarFrame")).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    $(ELEMENT_ATTACHMENT_SAVE_BUTTON).click();
+    $(byText(ELEMENT_IMPORT_SUCCESS_MESSAGE)).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_CATEGORY_OK_BUTTON).click();
   }
 
   /**
    * <<<<<<< HEAD Set permission
-   * 
+   *
    * @param cat
    * @param group
    * @param isRestricted
@@ -312,7 +304,7 @@ public class AnswerCategoryManagement {
 
   /**
    * create category
-   * 
+   *
    * @param cat
    */
   public void createCategory(String cat) {
@@ -324,7 +316,7 @@ public class AnswerCategoryManagement {
 
   /**
    * check accessibility of category
-   * 
+   *
    * @param cat
    * @param isAccess
    * @param ques
@@ -341,7 +333,7 @@ public class AnswerCategoryManagement {
 
   /**
    * Check user list
-   * 
+   *
    * @param user
    * @param isPresent
    */

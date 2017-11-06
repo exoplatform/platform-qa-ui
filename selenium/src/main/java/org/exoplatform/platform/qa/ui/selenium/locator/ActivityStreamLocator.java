@@ -247,9 +247,9 @@ public final class ActivityStreamLocator {
   public static final String          ELEMENT_QUESTION_ACTIVITY_NUMBER_COMMENT             =
                                                                                "//*[@class='author']/*[contains(@href,'$user')]/../../..//*[contains(@class,'titleAnswer')]/*[@class='linkTitle' and text()='$question']/../../../..//*[contains(@id,'CommentLink')]";
 
-  public static final String          ELEMENT_QUESTION_ACTIVITY_UNACTIVATE_COMMENT         = "Question has been unactivated";
+  public static final String          ELEMENT_QUESTION_ACTIVITY_UNACTIVATE_COMMENT         = "Question has been unactivated.";
 
-  public static final String          ELEMENT_QUESTION_ACTIVITY_ACTIVATE_COMMENT           = "Question has been activated";
+  public static final String          ELEMENT_QUESTION_ACTIVITY_ACTIVATE_COMMENT           = "Question has been activated.";
 
   public static final String          ELEMENT_QUESTION_ACTIVITY_UPDAT_TITLE_COMMENT        = "Title has been updated to: $value";
 
