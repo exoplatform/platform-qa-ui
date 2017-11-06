@@ -63,7 +63,7 @@ public class CalendarManagement {
     info("Select action from menu");
 
     $(ELEMENT_CALENDAR_MENU_ACTIONS_ICON).click();
-    $(ELEMENT_CALENDAR_MENU).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_CALENDAR_MENU).waitUntil(Condition.visible, Configuration.timeout);
     switch (action) {
     case ADDCAL:
       info("Go to add calendar");
@@ -390,7 +390,7 @@ public class CalendarManagement {
       break;
     case SHARE:
       $(ELEMENT_CALENDAR_SHARE_MENU).click();
-      $(ELEMENT_CALENDAR_SHARE_FORM).waitUntil(Condition.visible,Configuration.timeout);
+      $(ELEMENT_CALENDAR_SHARE_FORM).waitUntil(Condition.visible, Configuration.timeout);
       break;
     case IMPORT:
       evt.clickByJavascript(ELEMENT_CALENDAR_IMPORT_MENU, 2);
@@ -463,7 +463,7 @@ public class CalendarManagement {
       }
     }
     $(ELEMENT_CALENDAR_SHARE_SAVE_BUTTON).click();
-    $(ELEMENT_CALENDAR_SHARE_SAVE_BUTTON).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    $(ELEMENT_CALENDAR_SHARE_SAVE_BUTTON).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
   }
 
   /**
@@ -494,7 +494,7 @@ public class CalendarManagement {
       $(byXpath(ELEMENT_DELETE_SHARE_USER.replace("{$user}", userGroup[i]))).click();
     }
     $(ELEMENT_CALENDAR_SHARE_SAVE_BUTTON).click();
-    $(ELEMENT_CALENDAR_SHARE_SAVE_BUTTON).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    $(ELEMENT_CALENDAR_SHARE_SAVE_BUTTON).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
   }
 
   /**
@@ -504,9 +504,9 @@ public class CalendarManagement {
    */
   public void uploadCalendar() {
     info("--Upload Calendar--");
-   $(byClassName("uploadContainer")).find(byClassName("file")).uploadFromClasspath("testCalendar.ics");
-   $(byClassName("progressBarFrame")).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
-    $(ELEMENT_CALENDAR_IMPORT_DELETE_ICON).waitUntil(Condition.visible,Configuration.timeout);
+    $(byClassName("uploadContainer")).find(byClassName("file")).uploadFromClasspath("testCalendar.ics");
+    $(byClassName("progressBarFrame")).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    $(ELEMENT_CALENDAR_IMPORT_DELETE_ICON).waitUntil(Condition.visible, Configuration.timeout);
   }
 
   /**
@@ -564,7 +564,7 @@ public class CalendarManagement {
   public void exportCalendar(String calendar, String name) {
     info("Export calendar");
     executeActionCalendar(calendar, menuOfCalendarOption.EXPORT);
-    $(ELEMENT_CALENDAR_EXPORT_POPUP_FORM).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_CALENDAR_EXPORT_POPUP_FORM).waitUntil(Condition.visible, Configuration.timeout);
     $(ELEMENT_CALENDAR_EXPORT_FILE_NAME).setValue(name);
     $(ELEMENT_CALENDAR_EXPORT_SAVE_BUTTON).click();
     $(ELEMENT_CALENDAR_EXPORT_POPUP_FORM).shouldNot(Condition.visible);

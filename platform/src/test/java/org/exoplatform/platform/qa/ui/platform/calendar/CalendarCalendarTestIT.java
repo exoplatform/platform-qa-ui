@@ -68,7 +68,7 @@ public class CalendarCalendarTestIT extends Base {
     info("Test 1: Check collapse/expand on left panel");
     homePagePlatform.goToCalendarPage();
     calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.CALSETTING);
-    calendarManagement.changeSettingCalendar(null, "(GMT +07:00) Asia/Ho_Chi_Minh", null, null, null, null, null);
+    calendarManagement.changeSettingCalendar(null, "(GMT +01:00) Africa/Tunis", null, null, null, null, null);
     calendarManagement.saveSetting();
     $(ELEMENT_SHOW_HIDE_LEFT_PANEL).click();
     $(ELEMENT_CALENDAR_PANEL).shouldNot(Condition.visible);
