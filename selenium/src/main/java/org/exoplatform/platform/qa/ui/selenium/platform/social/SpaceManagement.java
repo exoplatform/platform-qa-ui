@@ -241,11 +241,11 @@ public class SpaceManagement {
    */
   public void searchByLetterList(String alpha, String name) {
     info("Waiting my space is shown");
-    evt.waitForAndGetElement(ELEMENT_MY_SPACE_LETTER_LIST.replace("${alpha}", alpha), 3000, 0);
+    $(byXpath(ELEMENT_MY_SPACE_LETTER_LIST.replace("${alpha}", alpha))).waitUntil(Condition.visible,Configuration.timeout);
     info("evt.click on the alpha");
-    evt.click(ELEMENT_MY_SPACE_LETTER_LIST.replace("${alpha}", alpha));
+    $(byXpath(ELEMENT_MY_SPACE_LETTER_LIST.replace("${alpha}", alpha))).click();
     info("Verify that the space is shown in the search result");
-    evt.waitForAndGetElement(ELEMENT_MY_SPACE_SEARCH_RESULT.replace("${name}", name), 3000, 0);
+    $(byXpath(ELEMENT_MY_SPACE_SEARCH_RESULT.replace("${name}", name))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
