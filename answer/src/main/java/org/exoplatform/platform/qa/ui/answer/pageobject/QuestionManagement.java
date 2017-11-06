@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.answer.pageobject;
 
+import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
@@ -7,6 +8,7 @@ import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -44,9 +46,9 @@ public class QuestionManagement {
   public void goToManageQuestionForm() {
     info("Go to mange question");
 
-    evt.waitForAndGetElement(ELEMENT_MANAGE_QUESTION_BUTTON, testBase.getDefaultTimeout(), 1);
-    evt.click(ELEMENT_MANAGE_QUESTION_BUTTON);
-    evt.waitForAndGetElement(ELEMENT_MANAGE_QUESTION_FORM);
+    $(ELEMENT_MANAGE_QUESTION_BUTTON).waitUntil(Condition.visible, Configuration.timeout);
+    $(ELEMENT_MANAGE_QUESTION_BUTTON).click();
+    $(ELEMENT_MANAGE_QUESTION_FORM).waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**
@@ -126,8 +128,8 @@ public class QuestionManagement {
       break;
     case EDIT:
       info("Edit question");
-      String idEdit=$(byText(question)).parent().parent().parent().parent().getAttribute("id").split("Question")[1];
-      $(byXpath(ELEMENT_QUESTION_EDIT.replace("{idEdit}",idEdit))).click();
+      String idEdit = $(byText(question)).parent().parent().parent().parent().getAttribute("id").split("Question")[1];
+      $(byXpath(ELEMENT_QUESTION_EDIT.replace("{idEdit}", idEdit))).click();
       $(ELEMENT_QUESTION_EDIT_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case DELETE:
@@ -225,16 +227,10 @@ public class QuestionManagement {
    */
   public void goToEditQuestionFromManageQuestionForm(String question) {
     info("Go to edit question from manage question form");
-    if (evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE, 5000, 0) != null) {
-      evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
-      while ((evt.waitForAndGetElement(ELEMENT_MANAGE_QUESTION_EDIT_QUESTION.replace("$question", question), 5000, 0) == null)
-          && !(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
-                  .getText()
-                  .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText())))
-        evt.click(ELEMENT_NEXT_PAGE);
-    }
-    evt.click(ELEMENT_MANAGE_QUESTION_EDIT_QUESTION.replace("$question", question));
-    evt.waitForAndGetElement(ELEMENT_QUESTION_EDIT_FORM);
+    ELEMENT_CONTAINER_QUESTIONS_IN_MANAGE_QUESTION.find(byText(question))
+                                                  .parent()
+                                                  .find(ELEMENT_ICON_EDIT_QUESTION_IN_MANAGE_QUESTION)
+                                                  .click();
   }
 
   /**
@@ -244,16 +240,10 @@ public class QuestionManagement {
    */
   public void goToDeleteQuestionFromManageQuestionForm(String question) {
     info("Go to delete question from manage question form");
-    if (evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE, 5000, 0) != null) {
-      evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
-      while ((evt.waitForAndGetElement(ELEMENT_MANAGE_QUESTION_DELETE_QUESTION.replace("$question", question), 5000, 0) == null)
-          && !(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
-                  .getText()
-                  .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText())))
-        evt.click(ELEMENT_NEXT_PAGE);
-    }
-    evt.click(ELEMENT_MANAGE_QUESTION_DELETE_QUESTION.replace("$question", question));
-    evt.waitForAndGetElement(ELEMENT_QUESTION_DELETE_FORM);
+    ELEMENT_CONTAINER_QUESTIONS_IN_MANAGE_QUESTION.find(byText(question))
+                                                  .parent()
+                                                  .find(ELEMENT_ICON_DELETE_QUESTION_IN_MANAGE_QUESTION)
+                                                  .click();
   }
 
   /**
@@ -265,32 +255,32 @@ public class QuestionManagement {
   public void approveQuestionFromManageQuestionForm(String question, Boolean isApprove) {
     if (isApprove) {
       info("Approve question");
-      if (evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE, 5000, 0) != null) {
-        evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
-        while ((evt.waitForAndGetElement(ELEMENT_MANAGE_QUESTION_APPROVE_QUESTION_CHECKBOX.replace("$question", question),
-                                         5000,
-                                         0,
-                                         2) == null)
-            && !(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
-                    .getText()
-                    .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText())))
-          evt.click(ELEMENT_NEXT_PAGE);
-      }
-      evt.check(By.xpath(ELEMENT_MANAGE_QUESTION_APPROVE_QUESTION_CHECKBOX.replace("$question", question)), 2);
+      // vérify if element is not checked
+      if (ELEMENT_CONTAINER_QUESTIONS_IN_MANAGE_QUESTION.find(byText(question))
+                                                        .parent()
+                                                        .findAll(ELEMENT_CHECBOX_IN_MANAGE_QUESTION)
+                                                        .get(0)
+                                                        .has(Condition.not(attribute("checked"))))
+        ELEMENT_CONTAINER_QUESTIONS_IN_MANAGE_QUESTION.find(byText(question))
+                                                      .parent()
+                                                      .findAll(ELEMENT_CHECBOX_IN_MANAGE_QUESTION)
+                                                      .get(0)
+                                                      .parent()
+                                                      .click();
     } else {
       info("Dis-approve question");
-      if (evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE, 5000, 0) != null) {
-        evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
-        while ((evt.waitForAndGetElement(ELEMENT_MANAGE_QUESTION_APPROVE_QUESTION_CHECKBOX.replace("$question", question),
-                                         5000,
-                                         0,
-                                         2) == null)
-            && !(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
-                    .getText()
-                    .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText())))
-          evt.click(ELEMENT_NEXT_PAGE);
-      }
-      evt.uncheck(By.xpath(ELEMENT_MANAGE_QUESTION_APPROVE_QUESTION_CHECKBOX.replace("$question", question)), 2);
+      if (ELEMENT_CONTAINER_QUESTIONS_IN_MANAGE_QUESTION.find(byText(question))
+                                                        .parent()
+                                                        .findAll(ELEMENT_CHECBOX_IN_MANAGE_QUESTION)
+                                                        .get(0)
+                                                        .has(Condition.attribute("checked")))
+        ELEMENT_CONTAINER_QUESTIONS_IN_MANAGE_QUESTION.find(byText(question))
+                                                      .parent()
+                                                      .findAll(ELEMENT_CHECBOX_IN_MANAGE_QUESTION)
+                                                      .get(0)
+                                                      .parent()
+                                                      .click();
+
     }
   }
 
@@ -369,14 +359,37 @@ public class QuestionManagement {
    */
   public void rateQuestion(int number) {
     info("Rate a question");
-    String st = Integer.toString(number);
-    if (number != 0) {
-      WebElement e1 = evt.waitForAndGetElement(By.xpath(ELEMENT_QUESTION_RATE_ITEM.replace("$index", st)),
-                                               testBase.getDefaultTimeout(),
-                                               1,
-                                               2);
-      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].click();", e1);
-      evt.waitForAndGetElement(ELEMENT_QUESTION_RATE_NUMBER.replace("$index", st));
+    switch (number) {
+    case 1:
+      ELEMENT_RATE_QUESTION_1_UNVOTED.click();
+      assertEquals("rgba(255, 196, 13, 1)", ELEMENT_RATE_QUESTION_1_VOTED.getCssValue("color"));
+      break;
+    case 2:
+      ELEMENT_RATE_QUESTION_2_UNVOTED.click();
+      assertEquals("rgba(255, 196, 13, 1)", ELEMENT_RATE_QUESTION_1_VOTED.getCssValue("color"));
+      assertEquals("rgba(255, 196, 13, 1)", ELEMENT_RATE_QUESTION_2_VOTED.getCssValue("color"));
+      break;
+    case 3:
+      ELEMENT_RATE_QUESTION_3_UNVOTED.click();
+      assertEquals("rgba(255, 196, 13, 1)", ELEMENT_RATE_QUESTION_1_VOTED.getCssValue("color"));
+      assertEquals("rgba(255, 196, 13, 1)", ELEMENT_RATE_QUESTION_2_VOTED.getCssValue("color"));
+      assertEquals("rgba(255, 196, 13, 1)", ELEMENT_RATE_QUESTION_3_VOTED.getCssValue("color"));
+      break;
+    case 4:
+      ELEMENT_RATE_QUESTION_4_UNVOTED.click();
+      assertEquals("rgba(255, 196, 13, 1)", ELEMENT_RATE_QUESTION_1_VOTED.getCssValue("color"));
+      assertEquals("rgba(255, 196, 13, 1)", ELEMENT_RATE_QUESTION_2_VOTED.getCssValue("color"));
+      assertEquals("rgba(255, 196, 13, 1)", ELEMENT_RATE_QUESTION_3_VOTED.getCssValue("color"));
+      assertEquals("rgba(255, 196, 13, 1)", ELEMENT_RATE_QUESTION_4_VOTED.getCssValue("color"));
+      break;
+    case 5:
+      ELEMENT_RATE_QUESTION_5_UNVOTED.click();
+      assertEquals("rgba(255, 196, 13, 1)", ELEMENT_RATE_QUESTION_1_VOTED.getCssValue("color"));
+      assertEquals("rgba(255, 196, 13, 1)", ELEMENT_RATE_QUESTION_2_VOTED.getCssValue("color"));
+      assertEquals("rgba(255, 196, 13, 1)", ELEMENT_RATE_QUESTION_3_VOTED.getCssValue("color"));
+      assertEquals("rgba(255, 196, 13, 1)", ELEMENT_RATE_QUESTION_4_VOTED.getCssValue("color"));
+      assertEquals("rgba(255, 196, 13, 1)", ELEMENT_RATE_QUESTION_5_VOTED.getCssValue("color"));
+      break;
     }
   }
 
