@@ -572,6 +572,21 @@ public class AnswerLocator {
                                                               "//*[@id=\"{IdQuestion}\"]/div/div[2]/div[2]/div[2]/div[2]/a[1]";
 
   public static final SelenideElement ELEMENT_QUESTION_ANSWER_CONTENT_INPUT                 = $(byXpath("/html/body"));
+  public static final SelenideElement ELEMENT_QUESTION_CONTAINER                            = $(byClassName("questionContainer"));
+  public static final SelenideElement ELEMENT_RATE_QUESTION_1_UNVOTED=$(byId("faqVoteSpace")).findAll(byClassName("unvoted")).get(0);
+  public static final SelenideElement ELEMENT_RATE_QUESTION_2_UNVOTED=$(byId("faqVoteSpace")).findAll(byClassName("unvoted")).get(1);
+  public static final SelenideElement ELEMENT_RATE_QUESTION_3_UNVOTED=$(byId("faqVoteSpace")).findAll(byClassName("unvoted")).get(2);
+  public static final SelenideElement ELEMENT_RATE_QUESTION_4_UNVOTED=$(byId("faqVoteSpace")).findAll(byClassName("unvoted")).get(3);
+  public static final SelenideElement ELEMENT_RATE_QUESTION_5_UNVOTED=$(byId("faqVoteSpace")).findAll(byClassName("unvoted")).get(4);
+  public static final SelenideElement ELEMENT_RATE_QUESTION_1_VOTED=$(byClassName("voteResult")).findAll(byClassName("voted")).get(0);
+  public static final SelenideElement ELEMENT_RATE_QUESTION_2_VOTED=$(byClassName("voteResult")).findAll(byClassName("voted")).get(1);
+  public static final SelenideElement ELEMENT_RATE_QUESTION_3_VOTED=$(byClassName("voteResult")).findAll(byClassName("voted")).get(2);
+  public static final SelenideElement ELEMENT_RATE_QUESTION_4_VOTED=$(byClassName("voteResult")).findAll(byClassName("voted")).get(3);
+  public static final SelenideElement ELEMENT_RATE_QUESTION_5_VOTED=$(byClassName("voteResult")).findAll(byClassName("voted")).get(4);
+  public static final SelenideElement ELEMENT_CONTAINER_QUESTIONS_IN_MANAGE_QUESTION=$(byId("QuestionManagerment-tab"));
+  public static final By ELEMENT_ICON_EDIT_QUESTION_IN_MANAGE_QUESTION=byClassName("uiIconEdit");
+  public static final By ELEMENT_ICON_DELETE_QUESTION_IN_MANAGE_QUESTION=byClassName("uiIconEdit");
+  public static final By ELEMENT_CHECBOX_IN_MANAGE_QUESTION=byId("allDay");
 
   public static final By ELEMENT_ANSWER_DELETE=byClassName("confirm");
   public static final By ELEMENT_COMMENT_DELETE= byClassName("confirm");
