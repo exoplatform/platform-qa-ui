@@ -98,6 +98,7 @@ public class AnswerCategoryManagement {
    */
   public void goToActionOfCategoryFromRightClick(String cat, actionCategoryOption action) {
     info("Select action from menu");
+
     ELEMENT_LIST_CATEGORIE.find(byLinkText(" " + cat)).contextClick();
     switch (action) {
     case EDIT:

@@ -1,14 +1,16 @@
 package org.exoplatform.platform.qa.ui.answer.pageobject;
 
 import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selenide.$;
+
 import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
