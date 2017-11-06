@@ -33,8 +33,8 @@ public class AnswerManagement {
    */
   public void goToAnswerQuestion(String question) {
     info("Go to answer a question");
-    String idQuestion=$(byText(question)).parent().parent().parent().parent().parent().getAttribute("id");
-    $(byXpath(ELEMENT_ANSWER_QUESTION.replace("{IdQuestion}",idQuestion))).click();
+    String idQuestion = $(byText(question)).parent().parent().parent().parent().parent().getAttribute("id");
+    $(byXpath(ELEMENT_ANSWER_QUESTION.replace("{IdQuestion}", idQuestion))).click();
   }
 
   /**
