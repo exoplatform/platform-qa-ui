@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
@@ -354,8 +355,8 @@ public class CalendarHomePage {
         break;
       }
     case LIST:
-      if (evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE, 10000, 0) != null) {
-        evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
+      if ($(ELEMENT_TOTAL_PAGE).is(Condition.visible)) {
+        $(byXpath(ELEMENT_ANY_PAGE.replace("$page", "1"))).click();
         while (!(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
                     .getText()
                     .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText()))) {
@@ -364,7 +365,7 @@ public class CalendarHomePage {
         }
         evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
       } else {
-        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
+        $(byXpath(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name))).shouldNot(Condition.visible);
       }
       break;
     case MONTH:

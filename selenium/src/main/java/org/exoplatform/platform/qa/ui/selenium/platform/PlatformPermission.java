@@ -1,7 +1,11 @@
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
+import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.*;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
@@ -23,29 +27,29 @@ public class PlatformPermission {
    *          search by last name 4: search by email default: search by user name
    */
   public void searchUser(String keySearch, int type) {
-    evt.type(ELEMENT_SEARCH_USER_INPUT, keySearch, true);
+    $(ELEMENT_SEARCH_USER_INPUT).setValue(keySearch);
     switch (type) {
     case 1: // search by user name
-      evt.select(ELEMENT_SELECT_SEARCH, "User Name");
+      $(ELEMENT_SELECT_SEARCH).selectOption("User Name");
       break;
     case 2: // search by first name
-      evt.select(ELEMENT_SELECT_SEARCH, "First Name");
+      $(ELEMENT_SELECT_SEARCH).selectOption("First Name");
       break;
     case 3: // search by last name
-      evt.select(ELEMENT_SELECT_SEARCH, "Last Name");
+      $(ELEMENT_SELECT_SEARCH).selectOption("Last Name");
       break;
     case 4: // search by email
-      evt.select(ELEMENT_SELECT_SEARCH, "Email");
+      $(ELEMENT_SELECT_SEARCH).selectOption("Email");
       break;
     default: // search by user name
-      evt.select(ELEMENT_SELECT_SEARCH, "User Name");
+      $(ELEMENT_SELECT_SEARCH).selectOption("User Name");
       break;
 
     }
 
-    evt.click(ELEMENT_QUICK_SEARCH_BUTTON);
+    $(ELEMENT_QUICK_SEARCH_BUTTON).click();
     // clickByJavascript(ELEMENT_QUICK_SEARCH_BUTTON);
-    evt.waitForAndGetElement((ELEMENT_USER_CHECKBOX.replace("${user}", keySearch)), 5000, 1, 2);
+   $(byXpath(ELEMENT_USER_CHECKBOX.replace("${user}", keySearch))).parent().waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -59,13 +63,11 @@ public class PlatformPermission {
     String[] temp = user.split("/");
     if (temp.length > 0) {
       for (int i = 0; i < temp.length; i++) {
-        if (evt.waitForAndGetElement(ELEMENT_SELECT_USER_ICON, 5000, 0) != null)
-          evt.click(ELEMENT_SELECT_USER_ICON);
         searchUser(temp[i], type);
 
         // check((ELEMENT_USER_CHECKBOX.replace("${user}", temp[i])), 2);
-        evt.clickByJavascript(ELEMENT_USER_CHECKBOX.replace("${user}", temp[i]), 2);
-        evt.click(ELEMENT_ADD_USERS_BUTTON);
+        $(byXpath(ELEMENT_USER_CHECKBOX.replace("${user}", temp[i]))).parent().click();
+        $(ELEMENT_ADD_USERS_BUTTON).click();
       }
     }
   }
@@ -90,15 +92,17 @@ public class PlatformPermission {
    */
   public void selectGroupPermission(String grouppath) {
     String[] temp;
-    evt.click(ELEMENT_SELECT_GROUP_ICON);
-    evt.waitForAndGetElement(ELEMENT_SELECT_GROUP_POPUP);
+    if($(ELEMENT_SELECT_GROUP_ICON).is(Condition.visible)) {
+      $(ELEMENT_SELECT_GROUP_ICON).click();
+    }
+    $(ELEMENT_SELECT_GROUP_POPUP).waitUntil(Condition.visible, Configuration.timeout);
     temp = grouppath.split("/");
     for (int i = 0; i < temp.length; i++) {
-      evt.click(ELEMENT_SELECT_RIGHT_PARENT_GROUP.replace("$group", temp[i]));
+      $(byXpath(ELEMENT_SELECT_RIGHT_PARENT_GROUP.replace("$group", temp[i]))).click();
     }
-    if (evt.waitForAndGetElement(ELEMENT_SELECT_THIS_GROUP, testBase.getDefaultTimeout(), 0) != null)
-      evt.click(ELEMENT_SELECT_THIS_GROUP);
-    evt.waitForElementNotPresent(ELEMENT_SELECT_GROUP_POPUP);
+    if ($(ELEMENT_SELECT_THIS_GROUP).is(Condition.visible))
+      $(ELEMENT_SELECT_THIS_GROUP).click();
+    $(ELEMENT_SELECT_GROUP_POPUP).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
@@ -109,14 +113,14 @@ public class PlatformPermission {
    */
   public void selectGroupMembership(String groupPath, String membership) {
     String[] temp;
-    evt.click(ELEMENT_SELECT_MEMBERSHIP_ICON);
-    evt.waitForAndGetElement(ELEMENT_SELECT_MEMBERSHIP_POPUP);
+    $(ELEMENT_SELECT_MEMBERSHIP_ICON).click();
+    $(ELEMENT_SELECT_MEMBERSHIP_POPUP).waitUntil(Condition.visible,Configuration.timeout);
     temp = groupPath.split("/");
     for (int i = 0; i < temp.length; i++) {
-      evt.click(ELEMENT_SELECT_RIGHT_PARENT_GROUP.replace("$group", temp[i]));
+      $(byXpath(ELEMENT_SELECT_RIGHT_PARENT_GROUP.replace("$group", temp[i]))).click();
     }
-    evt.click(ELEMENT_SELECT_RIGHT_PARENT_GROUP.replace("$group", membership));
-    evt.waitForElementNotPresent(ELEMENT_SELECT_MEMBERSHIP_POPUP);
+    $(byXpath(ELEMENT_SELECT_RIGHT_PARENT_GROUP.replace("$group", membership))).click();
+    $(ELEMENT_SELECT_MEMBERSHIP_POPUP).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
