@@ -395,8 +395,8 @@ public class GateinUserAndGroupManagementTestIT extends Base {
     ELEMENT_SELECT_BOX_USERS.selectOptionByValue("firstName");
     ELEMENT_BTN_SEARCH_USER.click();
     ELEMENT_TABLE_LIST_USERS.find(byText(username)).should(Condition.exist);
-    assertEquals(1,ELEMENT_TABLE_LIST_USERS.findAll(ELEMENT_LINE_IN_TABLE_LIST_USERS).size());
+    ELEMENT_TABLE_LIST_USERS.findAll(ELEMENT_LINE_IN_TABLE_LIST_USERS).shouldHaveSize(1);
     info("Test Case 10: Delete user");
-    userandgroupmanagement.deleteUser(firstName);
+    userandgroupmanagement.deleteUser(username);
   }
 }
