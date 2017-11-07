@@ -78,8 +78,8 @@ public class EventManagement {
     }
     String cell = ELEMENT_CELL_TO_WORKING_PANEL.replace("$date", tempDate2).replace("$time", tempTime);
     info(cell);
-    evt.waitForAndGetElement(cell).click();
-    evt.waitForAndGetElement(ELEMENT_QUICK_ADD_EVENT_POPUP);
+    $(byXpath(cell)).click();
+    $(ELEMENT_QUICK_ADD_EVENT_POPUP).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -117,9 +117,9 @@ public class EventManagement {
       info("Selected date is current date" + tempTime);
     }
     String cell = ELEMENT_CELL_TO_WORKING_PANEL.replace("$date", tempDate2).replace("$time", tempTime);
-    testBase.rightClickOnElement(cell);
-    evt.click(ELEMENT_CONTEXT_MENU_ADD_EVENT);
-    evt.waitForAndGetElement(ELEMENT_QUICK_ADD_EVENT_POPUP);
+    $(byXpath(cell)).contextClick();
+    $(ELEMENT_CONTEXT_MENU_ADD_EVENT).click();
+    $(ELEMENT_QUICK_ADD_EVENT_POPUP).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -696,15 +696,15 @@ public class EventManagement {
     if (type == 0) {
       String[] temp = users.split("/");
       for (int i = 0; i < temp.length; i++) {
-        evt.type(ELEMENT_INVITATION_PARTICIPANT_TEXTBOX, "," + temp[i], false);
+        $(ELEMENT_INVITATION_PARTICIPANT_TEXTBOX).setValue(temp[i]);
       }
     } else {
-      evt.click(ELEMENT_PICK_USER_PARTICIPANTS_TAB);
+      $(ELEMENT_PICK_USER_PARTICIPANTS_TAB).click();
 
       pPer.selectUserPermission(users, type);
     }
     if (content != null && content != "") {
-      evt.type(ELEMENT_INVITATION_PARTICITPANT_MSG, content, true);
+      $(ELEMENT_INVITATION_PARTICITPANT_MSG).setValue(content);
     }
   }
 

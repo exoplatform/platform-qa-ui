@@ -63,9 +63,9 @@ public class CalendarHomePage {
       ELEMENT_CALENDAR_LIST_BUTTON.click();
       break;
     case MONTH:
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"), testBase.getDefaultTimeout(), 1);
-      evt.clickByJavascript(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"));
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Month"), testBase.getDefaultTimeout(), 1, 2);
+     $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"))).waitUntil(Condition.visible,Configuration.timeout);
+      $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"))).click();
+      $(byXpath(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Month"))).waitUntil(Condition.visible,Configuration.timeout);
 
       break;
     case WORKWEEK:
@@ -161,21 +161,20 @@ public class CalendarHomePage {
     info("Got to edit task from month view");
     goToView(selectViewOption.MONTH);
     if (date != null && date != "") {
-      if (evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date),
-                                   5000,
-                                   0) == null
-          && evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE_ICON.replace("$date", date),
-                                      5000,
-                                      0) != null) {
+      if ($(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))).is(Condition.not(Condition.visible))
+
+          && $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE_ICON.replace("$date", date))).is(Condition.visible)
+                                      ) {
         info("Click more button");
-        evt.click(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE_ICON.replace("$date", date), 2);
-        evt.scrollBarToGetElement(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE.replace("$name", name).replace("$date",
-                                                                                                                         date)));
-        evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE.replace("$name", name).replace("$date", date));
+        $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE_ICON.replace("$date", date))).click();
+        $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE.replace("$name", name).replace("$date",
+                                                                                                                         date))).scrollTo().contextClick();
       } else {
-        evt.scrollBarToGetElement(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date",
-                                                                                                                    date)));
-        evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date));
+        if ($(byText(name)).is(Condition.not(Condition.visible)))
+        {$(byText(name)).scrollTo().contextClick();}
+        else {
+          $(byText(name)).contextClick();
+        }
       }
     } else {
       evt.scrollBarToGetElement(By.xpath(ELEMENT_EVENT_TASK_MONTH_VIEW.replace("$name", name)));
@@ -330,6 +329,7 @@ public class CalendarHomePage {
    */
   public void verifyIsNotPresentEventTask(String name, selectViewOption view, selectDayOption optionDay) {
     info("Verify task and event is not displayed on calendar panel");
+    executeJavaScript("window.scrollBy(0,-5500)", "");
     goToView(view);
     switch (view) {
     case DAY:
@@ -348,7 +348,7 @@ public class CalendarHomePage {
     case WEEK:
       switch (optionDay) {
       case DETAILTIME:
-        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        $(byXpath(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name))).shouldNot(Condition.visible);
         break;
       case ALLDAY:
         evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WEEK_VIEW_ALL_DAY.replace("$name", name));
@@ -357,6 +357,7 @@ public class CalendarHomePage {
         evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name));
         break;
       }
+        break;
     case LIST:
       if ($(ELEMENT_TOTAL_PAGE).is(Condition.visible)) {
         $(byXpath(ELEMENT_ANY_PAGE.replace("$page", "1"))).click();
@@ -412,6 +413,7 @@ public class CalendarHomePage {
    */
   public void verifyIsPresentEventTask(String name, selectViewOption view, selectDayOption optionDay) {
     info("Verify task and event is not displayed on calendar panel");
+    executeJavaScript("window.scrollBy(0,-5500)", "");
     goToView(view);
     switch (view) {
     case DAY:
