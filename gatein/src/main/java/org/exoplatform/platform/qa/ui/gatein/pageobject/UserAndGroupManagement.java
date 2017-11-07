@@ -460,6 +460,7 @@ public class UserAndGroupManagement {
     if (testBase.isTextPresent("Search")) {
       $(ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);
     }
+    ELEMENT_SELECT_BOX_USERS.selectOptionByValue("userName");
     ELEMENT_BTN_SEARCH_USER.click();
     info("--Editing user " + username + "--");
     $(byText(username)).parent().parent().find(ELEMENT_ICON_EDIT_USER).click();
@@ -677,6 +678,7 @@ public class UserAndGroupManagement {
   public void deleteUser(String username) {
     info("--Deleting user " + username + "--");
     info("--Search user " + username + "--");
+    ELEMENT_SELECT_BOX_USERS.selectOptionByValue("userName");
     if (testBase.isTextPresent("Search")) {
       $(ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);
     }
