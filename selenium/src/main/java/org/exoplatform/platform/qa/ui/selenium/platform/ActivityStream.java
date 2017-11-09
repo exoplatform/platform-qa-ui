@@ -536,6 +536,11 @@ public class ActivityStream {
 
   }
 
+  public void addActivityWithPngImageFromMicroblog(String text){
+    addText(text);
+    $(byClassName("cke_button_icon cke_button__selectimage_icon")).click();
+  }
+
   /**
    * Open More menu of Space menu
    */
