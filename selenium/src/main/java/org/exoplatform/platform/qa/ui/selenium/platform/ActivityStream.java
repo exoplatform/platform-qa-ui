@@ -20,7 +20,6 @@ import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_COMMENT_BLOC;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -883,7 +882,7 @@ public class ActivityStream {
    *
    * @param name
    */
-  public void deleteActivity(String name) {
+  public void deleteactivity(String name) {
     info("remove activity");
     int repeat = 0;
     while (evt.waitForAndGetElement(ELEMENT_ACTIVITY_BOX.replace("${name}", name), 3000, 0) != null) {
@@ -1011,7 +1010,7 @@ public class ActivityStream {
     $(byText(comment)).should(Condition.exist);
   }
 
-  public void deleteactivity(String activity) {
+  public void deleteActivity(String activity) {
     // get the id of activity created
     String id = $(byText(activity)).parent()
             .parent()
@@ -1056,6 +1055,7 @@ public class ActivityStream {
   public enum changeTypes {
     No_Value, Has_One_Value;
   }
+
   public void replyToComment(String comment, String reply,String user) {
     String id = $(byText(comment)).parent()
             .parent()
@@ -1169,6 +1169,7 @@ public class ActivityStream {
     executeJavaScript("window.scrollBy(0,-250)");
     $(byId(ELEMENT_VIEW_ALL_REPLIES_LINK.replace("{id}", idBlocComment))).waitUntil(Condition.appears, Configuration.timeout).findElementByClassName("subCommentShowAllLink").click();
   }
+
   public void replyToReply(String activity, String reply, String replytoreply) {
     String idBlocReply = $(byText(reply)).parent()
             .parent()
@@ -1199,11 +1200,8 @@ public class ActivityStream {
     info("Verify that the reply is added");
     // click on the button comment
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
-    $(byText(reply)).should(Condition.exist);
-    // Insert the reply
-
+    $(byText(replytoreply)).should(Condition.exist);
   }
-
 
   public void replyToReplyInPreviewMode(String reply) {
     String replytoreply = "ReplyToReply"+getRandomNumber();
@@ -1214,7 +1212,6 @@ public class ActivityStream {
     ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
     executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + replytoreply + "\")", "");
     ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
-
   }
 
   public void deletecomment (String activity, String comment){
@@ -1229,7 +1226,7 @@ public class ActivityStream {
             .getAttribute("id")
             .split("commentContainercomment")[1];
 
-    $(byId(ELEMENT_COMMENT_BLOC.replace("{id}", idBlocComment))).hover().click();
+    $(byId(ELEMENT_COMMENT_BLOC_AS.replace("{id}", idBlocComment))).hover().click();
     $(byId(ELEMENT_INCON_DELETE_COMMENT.replace("{id}", idBlocComment))).click();
     //Confirm delete
     ELEMENT_DELETE_POPUP_OK.click();
@@ -1245,5 +1242,4 @@ public class ActivityStream {
             .split("commentContainercomment")[1];
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idReplyContainer))).click();
   }
-
 }

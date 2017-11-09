@@ -80,24 +80,24 @@ public class TasksManagement {
     info("Click on Group list");
   }
 
-  public void addTask(String task) {
+  public void addTask(String taskContent) {
 
     ELEMENT_BUTTON_ADD_TASK.click();
-    ELEMENT_INPUT_TASK_TITLE.setValue(task).pressEnter();
+    ELEMENT_INPUT_TASK_TITLE.setValue(taskContent).pressEnter();
     ELEMENT_TASK_FORM.waitUntil(Condition.appears, Configuration.timeout);
   }
 
-  public void editTask(String task, String newTask, String priority) {
-    ELEMENT_TASKS_LIST.find(byText(task)).click();
+  public void editTask(String taskContent, String newTask, String priority) {
+    ELEMENT_TASKS_LIST.find(byText(taskContent)).click();
     ELEMENT_TASK_FORM.waitUntil(Condition.appears, Configuration.timeout);
-    ELEMENT_TASK_FORM.find(byText(task)).click();
+    ELEMENT_TASK_FORM.find(byText(taskContent)).click();
     ELEMENT_TASK_FORM_INPUT_TITLE.setValue(newTask);
     ELEMENT_TASK_FORM_PRIORITY.click();
     ELEMENT_TASK_SELECT_PRIORITY.waitUntil(Condition.appears, Configuration.timeout).selectOption(priority);
   }
 
-  public void deleteTask(String task) {
-    ELEMENT_TASKS_LIST.find(byText(task)).click();
+  public void deleteTask(String taskContent) {
+    ELEMENT_TASKS_LIST.find(byText(taskContent)).click();
     ELEMENT_TASK_FORM.waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_TASK_FORM_ICOND_DROP_DOWN_MENU.click();
     ELEMENT_TASK_BUTTON_DELETE.click();
@@ -112,8 +112,8 @@ public class TasksManagement {
     COWORKER_INPUT_FIELD.pressEnter();
   }
 
-  public void commentTask(String task, String comment) {
-    $(byText(task)).click();
+  public void commentTask(String taskContent, String comment) {
+    $(byText(taskContent)).click();
     SelenideElement frame= ELEMENT_INPUT_COMMENT_TASK;
     switchTo().frame(frame);
     COMMENT_INPUT_AREA.sendKeys(comment);
@@ -135,8 +135,9 @@ public class TasksManagement {
     $(byText(reply)).parent().parent().find(byClassName("uiIconTrashMini")).click();
     $(byText(reply)).shouldNot(Condition.exist);
   }
-  public void replyToCommentTask(String task, String reply, String user) {
-    $(byText(task)).click();
+
+  public void replyToCommentTask(String taskContent, String reply, String user) {
+    $(byText(taskContent)).click();
     ELEMENT_LABEL_REPLY_TASK.click();
     SelenideElement frame= ELEMENT_INPUT_COMMENT_TASK;
     switchTo().frame(frame);
@@ -170,4 +171,5 @@ public class TasksManagement {
   public enum optionTask {
     Incoming, All_Tasks, Overdue, Today, Tommorrow, Upcoming;
   }
+
 }

@@ -163,7 +163,7 @@ public class TaskManagementLocator {
                                                                      $(byId("taskManagement")).waitUntil(Condition.appears,
                                                                                                          Configuration.timeout)
                                                                                               .find(byXpath("//*[@id=\"taskManagement\"]/div[1]/ul/li[3]/div[2]/ul/li[1]/div/div/ul/li[3]/a"));
-public static final SelenideElement ELEMENT_INPUT_COMMENT_TASK=$(byClassName("rightPanelContent")).find(byClassName("cke_wysiwyg_frame"));
+public static final SelenideElement ELEMENT_INPUT_COMMENT_TASK = $(byClassName("rightPanelContent")).find(byClassName("cke_wysiwyg_frame"));
 public static final SelenideElement ELEMENT_EDIT_ASSIGNEE = $(byClassName("editAssignee"));
 public static final SelenideElement COMMENT_INPUT_AREA = $(byXpath("/html/body"));
 public static final SelenideElement COMMENT_BUTTON = $(byId("taskCommentButton"));

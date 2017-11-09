@@ -695,7 +695,7 @@ public final class ActivityStreamLocator {
     public static final String ELEMENT_INCON_LIKE_COMMENT="LikeCommentLinkcomment{id}";
     public static final String ELEMENT_INCON_LIKE_REPLY="likeCommentLink_comment{id}";
     public static final String ELEMENT_INCON_DELETE_COMMENT="DeleteCommentButtoncomment{id}";
-    public static final String ELEMENT_COMMENT_BLOC = "CommentBlockcomment{id}";
+    public static final String ELEMENT_COMMENT_BLOC_AS = "CommentBlockcomment{id}";
     public static final String ELEMENT_lABEL_REPLY_COMMENT="CommentLinkcomment{id}";
     public static final String ELEMENT_VIEW_ALL_REPLIES_LINK="SubCommentShowAll_comment{id}";
     public static final SelenideElement ELEMENT_TOLLTIP_WHO_LIKE_COMMENT=$(byClassName("tooltip"));
