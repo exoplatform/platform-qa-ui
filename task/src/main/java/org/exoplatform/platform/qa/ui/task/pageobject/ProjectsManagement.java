@@ -7,7 +7,6 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.Tas
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -137,6 +136,7 @@ public class ProjectsManagement {
       evt.uncheck(ELEMETN_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX, 2);
     }
     ELEMENT_SAVE_PROJECT.click();
+    $(byText(title)).should(Condition.visible);
   }
 
   /**
@@ -185,8 +185,7 @@ public class ProjectsManagement {
   public void editProject(String projectPath, String title, String newTitle, String des, boolean... opt) {
     $(byText(projectPath)).click();
     $(byText(projectPath)).parent().parent().find(ELEMENT_ICON_PROJECT).click();
-    ELEMENT_MENU_PROJECT.waitUntil(Condition.appears, Configuration.timeout);
-    ELEMENT_EDIT_PROJECT_OPTION.click();
+    $(byText(projectPath)).parent().parent().find(ELEMENT_EDIT_PROJECT_OPTION).click();
     if (title != null && title != "") {
       info("Input title");
       ELEMENT_POPUB_EDIT_PROJECT.find(byText(title)).click();
@@ -211,9 +210,9 @@ public class ProjectsManagement {
   public void deleteProject(String title) {
     $(byText(title)).click();
     $(byText(title)).parent().parent().find(ELEMENT_ICON_PROJECT).click();
-    ELEMENT_DELETE_PROJECT_OPTION.click();
+    $(byText(title)).parent().parent().find(ELEMENT_DELETE_PROJECT_OPTION).click();
     ELEMENT_CONFIRM_DELETE.click();
-
+    $(byText(title)).should(Condition.not(Condition.visible));
   }
 
   /**

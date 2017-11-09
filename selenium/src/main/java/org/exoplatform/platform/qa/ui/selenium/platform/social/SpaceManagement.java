@@ -5,6 +5,7 @@ import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_PROJECT_ICON_ADD_PROJECT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.openqa.selenium.By;
@@ -428,6 +429,11 @@ public class SpaceManagement {
     evt.click(ELEMENT_WIKI_TAB);
     evt.waitForAndGetElement(ELEMENT_WIKI_HOME_TITLE, 2000, 0);
     info("Wiki portlet is shown");
+  }
+
+  public void goToTaskTab(){
+    ELEMENT_SPACE_MENU_TAB.find(ELEMENT_TASK_TAB).click();
+    ELEMENT_PROJECT_ICON_ADD_PROJECT.waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**

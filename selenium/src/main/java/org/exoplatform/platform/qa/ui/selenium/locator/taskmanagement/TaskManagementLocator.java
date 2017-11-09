@@ -51,17 +51,17 @@ public class TaskManagementLocator {
 
   // Project area-->Context Menu
   public static final SelenideElement ELEMENT_PROJECT_ICON_ADD_PROJECT              =
-                                                                       $(byXpath("//*[@id=\"taskManagement\"]/div[1]/ul/li[2]/div/a[2]"));
+                                                                       $(byAttribute("data-id","0")).parent().find(byClassName("addProject"));
 
   public static final SelenideElement ELEMENT_ADD_PROJECT                           =
-                                                          $(byXpath("//*[@id=\"taskManagement\"]/div[1]/ul/li[2]/div/div/ul/li[1]/a/i"));
+          ELEMENT_PROJECT_ICON_ADD_PROJECT.parent().parent().find(byClassName("uiIconAddProject"));
 
   // Labels area
   public static final SelenideElement ELEMENT_LABEL_ICON_ADD_LABEL                  =
-                                                                   $(byXpath("//*[@id=\"taskManagement\"]/div[1]/ul/li[3]/div[1]/a[2]/i"));
+          $(byAttribute("data-labelid","0")).parent().find(byClassName("addLabel"));
 
   public static final SelenideElement ELEMENT_ADD_LABEL                             =
-                                                        $(byXpath("//*[@id=\"taskManagement\"]/div[1]/ul/li[3]/div[1]/div/ul/li[1]/a"));
+          $(byClassName("uiIconAddLabel"));
 
   public static final SelenideElement ELEMENT_INPUT_LABEL                           = $(byClassName("addLabelInput"));
 
@@ -117,8 +117,9 @@ public class TaskManagementLocator {
 
   public static final By              ELEMENT_ICON_PROJECT                          = byClassName("uiIconRightMenu");
 
-  public static final SelenideElement ELEMENT_EDIT_PROJECT_OPTION                   =
-                                                                  $(byId("taskManagement")).find(byText("Edit"));
+  public static final By ELEMENT_EDIT_PROJECT_OPTION                   =
+          byClassName("uiIconEdit");
+
 
   public static final SelenideElement ELEMENT_MENU_PROJECT                          = $(byClassName("uiDropdownWithIcon"));
 
@@ -140,9 +141,8 @@ public class TaskManagementLocator {
   // Show and Hide project
 
   // Delete project
-  public static final SelenideElement ELEMENT_DELETE_PROJECT_OPTION                 =
-                                                                    $(byXpath("//*[@id=\"taskManagement\"]/div[1]/ul/li[2]/ul/ul/li[1]/div/div/ul/li[5]/a"));
-
+  public static final By ELEMENT_DELETE_PROJECT_OPTION                 =
+          byClassName("uiIconTrash");
   public static final SelenideElement ELEMENT_CONFIRM_DELETE                        =
                                                              $(byClassName("confirmDeleteProject")).find(byXpath("//*[@id=\"taskManagement\"]/div[4]/div/div[2]/div[2]/button[1]"));
   // *************************************Labels
@@ -154,10 +154,8 @@ public class TaskManagementLocator {
 
   public static final By              ELEMENT_ICON_OPEN_MENU_LABEL                  = byClassName("uiIconRightMenu");
 
-  public static final SelenideElement ELEMENT_OPEN_MENU_EDIT_LABEL                  =
-                                                                   $(byId("taskManagement")).waitUntil(Condition.appears,
-                                                                                                       Configuration.timeout)
-                                                                                            .find(byXpath("//*[@id=\"taskManagement\"]/div[1]/ul/li[3]/div[2]/ul/li[1]/div/div/ul/li[1]/a"));
+  public static final By ELEMENT_OPEN_MENU_EDIT_LABEL                  =byClassName("uiIconEdit");
+
 
   public static final SelenideElement ELEMENT_OPEN_MENU_DELETE_LABEL                =
                                                                      $(byId("taskManagement")).waitUntil(Condition.appears,
@@ -173,6 +171,8 @@ public static final SelenideElement ELEMENT_LABEL_REPLY_TASK=$(byClassName("repl
 public static final String ELEMENT_VIEW_ALL_REPLIES_LINK_TASK="SubCommentShowAll_{id}";
 
 
+
+  public static final SelenideElement ELEMENT_LEFT_PANEL_IN_TASK_PAGE=$(byClassName("left-menu"));
   // Add labels form
 
   // Edit labels form

@@ -29,13 +29,14 @@ public class LabelsManagement {
     ELEMENT_LABEL_ICON_ADD_LABEL.click();
     ELEMENT_ADD_LABEL.click();
     ELEMENT_INPUT_LABEL.setValue(label).pressEnter();
+    $(byText(label)).should(Condition.visible);
 
   }
 
   public void editLabel(String label, String newLabel) {
     $(byText(label)).click();
     $(byText(label)).parent().parent().find(ELEMENT_ICON_OPEN_MENU_LABEL).click();
-    ELEMENT_OPEN_MENU_EDIT_LABEL.click();
+    $(byText(label)).parent().parent().find(ELEMENT_OPEN_MENU_EDIT_LABEL).click();
     $(byId("lblName")).setValue(newLabel);
     ELEMENT_SAVE_EDIT_LABEL.click();
     $(byText(newLabel)).should(Condition.exist);
@@ -44,7 +45,7 @@ public class LabelsManagement {
   public void deleteLabel(String label) {
     $(byText(label)).click();
     $(byText(label)).parent().parent().find(ELEMENT_ICON_OPEN_MENU_LABEL).click();
-    ELEMENT_OPEN_MENU_DELETE_LABEL.click();
+    $(byText(label)).parent().parent().find(ELEMENT_OPEN_MENU_DELETE_LABEL).click();
     ELEMENT_LABEL_BUTTON_CONFIRM_DELETE.click();
     $(byText(label)).waitUntil(Condition.disappears, Configuration.timeout);
 
