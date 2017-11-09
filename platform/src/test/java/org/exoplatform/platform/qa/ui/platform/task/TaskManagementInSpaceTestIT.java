@@ -7,6 +7,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.Tas
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
@@ -24,6 +25,8 @@ import org.exoplatform.platform.qa.ui.task.pageobject.TasksManagement;
 /**
  * Created by ilyes on 09/11/17.
  */
+@Tag("smoke")
+@Tag("task")
 public class TaskManagementInSpaceTestIT extends Base {
   HomePagePlatform   homePagePlatform;
 
