@@ -176,7 +176,7 @@ public class AnswerBasicTestsWithUserTestIT extends Base {
     questionManagement.inputDataToQuestionForm(question, "", null, "");
     $(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
     $(ELEMENT_OK_BUTTON_LINK).click();
-    $(byText(question)).click();
+
     commentManagement.goToCommentQuestion(question);
     commentManagement.inputDataToComment(comment);
     $(ELEMENT_COMMENT_FORM_SAVE_BUTTON).click();
@@ -204,7 +204,6 @@ public class AnswerBasicTestsWithUserTestIT extends Base {
     questionManagement.inputDataToQuestionForm(question, "", null, "");
     $(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
     $(ELEMENT_OK_BUTTON_LINK).click();
-    $(byText(question)).click();
     commentManagement.goToCommentQuestion(question);
     commentManagement.inputDataToComment(comment);
     $(ELEMENT_COMMENT_FORM_SAVE_BUTTON).click();
@@ -234,7 +233,6 @@ public class AnswerBasicTestsWithUserTestIT extends Base {
     questionManagement.inputDataToQuestionForm(question, "", null, "");
     $(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
     $(ELEMENT_OK_BUTTON_LINK).click();
-    $(byText(question)).click();
     commentManagement.goToCommentQuestion(question);
     commentManagement.inputDataToComment(comment);
     $(ELEMENT_COMMENT_FORM_SAVE_BUTTON).click();
