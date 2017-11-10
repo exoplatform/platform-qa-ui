@@ -20,6 +20,7 @@
  */
 package org.exoplatform.platform.qa.ui.commons;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Screenshots;
 import org.exoplatform.platform.qa.ui.core.context.Smoke;
@@ -31,6 +32,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.exoplatform.platform.qa.ui.commons.pageobject.Platform;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.junit.jupiter.api.TestInfo;
+
+import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_PASSWORD_CAS;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 
 public class Base extends TestBase {
 
@@ -64,9 +69,12 @@ public class Base extends TestBase {
   }
 
   @AfterEach
-  public void signOut() {
+  public void afterEach() {
     ManageLogInOut manageLogInOut=new ManageLogInOut(this);
-    manageLogInOut.signOut();
+    if($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.visible)) && $(ELEMENT_INPUT_PASSWORD_CAS).is(Condition.not(Condition.visible))){
+      manageLogInOut.signOut();
+    }
+
 
     Screenshots.finishContext();
   }
