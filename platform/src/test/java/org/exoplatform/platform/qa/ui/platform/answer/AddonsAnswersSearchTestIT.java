@@ -11,6 +11,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
@@ -21,7 +22,8 @@ import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
-
+@Tag("sniff")
+@Tag("answer")
 public class AddonsAnswersSearchTestIT extends Base {
   HomePagePlatform         homePagePlatform;
 

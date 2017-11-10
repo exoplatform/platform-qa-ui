@@ -9,8 +9,10 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
@@ -27,7 +29,8 @@ import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
-
+@Tag("sniff")
+@Tag("answer")
 public class AddonsAnswersCategoryTestIT extends Base {
   HomePagePlatform         homePagePlatform;
 
@@ -75,15 +78,12 @@ public class AddonsAnswersCategoryTestIT extends Base {
    * dragged and dropped successfully to selected category
    */
   @Test
+  @BugInPLF("ANS-122")
   public void test01_DragAndDropCategory() {
     String paCat1 = "paCat1" + getRandomNumber();
     String paDes1 = "paDes1" + getRandomNumber();
-    ;
-
     String paCat2 = "paCat2" + getRandomNumber();
-    ;
     String paDes2 = "paDes2" + getRandomNumber();
-    ;
 
     info("Create parent categories");
     homePagePlatform.goToAnswer();
