@@ -127,6 +127,7 @@ public class SpaceManageMessageTestIT extends Base {
     refresh();
     info("check that space chat deleted");
     $(byText(space)).shouldNot(Condition.exist);
+    switchTo().window(0);
   }
 
   @Test

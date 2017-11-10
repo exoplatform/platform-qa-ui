@@ -933,7 +933,25 @@ public class ActivityStream {
     info("Time comment is posted");
     evt.waitElementAndTryGetElement(ELMEMENT_COMMENT_TIME.replace("$activity", activity).replace("$comment", comment));
   }
+  public void deleteactivity(String activity) {
+    // get the id of activity created
+    String id = $(byText(activity)).parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .getAttribute("id")
+            .split("UIActivityLoader")[1];
+    // click on the activity to appear the delete button
+    $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
+    // click on delete button
+    $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
+    ELEMENT_DELETE_POPUP_OK.click();
+    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears, Configuration.timeout);
 
+  }
   /**
    * Click on View Change link on action bar
    *

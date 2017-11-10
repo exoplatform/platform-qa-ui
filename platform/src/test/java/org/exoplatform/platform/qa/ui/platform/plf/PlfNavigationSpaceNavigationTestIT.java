@@ -55,16 +55,9 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
       $(ELEMENT_SKIP_BUTTON).click();
     }
-    if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
-      manageLogInOut.signOut();
-    }
     manageLogInOut.signInCas(username, password);
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
 
   @Test
   public void test02_RemoveAdoptionApplicationToolbar() {

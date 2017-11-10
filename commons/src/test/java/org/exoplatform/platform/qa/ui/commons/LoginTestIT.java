@@ -22,6 +22,7 @@ package org.exoplatform.platform.qa.ui.commons;
 
 import org.exoplatform.platform.qa.ui.commons.pageobject.Login;
 import org.exoplatform.platform.qa.ui.commons.pageobject.Platform;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -69,25 +70,6 @@ public final class LoginTestIT extends Base {
 
     assertTrue("User should not be logged", !lg.isUserLogged());
     assertTrue("SignIn with unknown user should display a message.", lg.signinFailContainer.exists());
-  }
-
-  /**
-   * Check that the user is not logged anymore after signout.
-   *
-   * <p>This method requires @Tag("smoke") to login before trying to sign out.</p>
-   */
-  @Test
-  @Tag("smoke")
-  public void signOut() {
-    // Init instance for signInTest
-    Platform plf = new Platform();
-    plf.open();
-    plf.ensureLicenseIsAccepted()
-       .ensureRegisterSoftwareIsSkipped()
-       .ensureAccountSetupIsSkipped()
-       .ensureUserIsLoggedIn();
-
-    assertTrue("User should not be logged anymore!", !new Login().signOut().isUserLogged());
   }
 
 }

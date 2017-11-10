@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.selenium.platform;
 import static com.codeborne.selenide.Selectors.byLinkText;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_NAME_OF_PROFILE_TOP_LEFT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
