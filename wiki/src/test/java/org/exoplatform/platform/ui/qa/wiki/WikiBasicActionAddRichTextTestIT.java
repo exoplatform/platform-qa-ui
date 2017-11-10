@@ -168,6 +168,7 @@ public class WikiBasicActionAddRichTextTestIT extends Base {
     else
       assert false;
     back();
+    wikiHomePage.deleteWiki(title1);
   }
 
 }
