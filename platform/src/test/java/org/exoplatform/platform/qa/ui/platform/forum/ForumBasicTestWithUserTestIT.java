@@ -78,16 +78,9 @@ public class ForumBasicTestWithUserTestIT extends Base {
     manageLogInOut = new ManageLogInOut(this);
     userAndGroupManagement = new UserAndGroupManagement(this);
     forumTopicManagement = new ForumTopicManagement(this);
-    if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
-      manageLogInOut.signOut();
-    }
     manageLogInOut.signInCas("john", "gtngtn");
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
 
   /**
    * CaseID: 116735 Case_name: Add a forum Steps: 1. Prepare data: create a

@@ -124,36 +124,6 @@ public class SOCPeopleActivityAddTestIT extends Base {
     addUsers.deleteUser(username2);
 
   }
-
-  @Test
-  public void test02_Upload_File_Without_Text() {
-    ELEMENT_TAB_LINK.click();
-    refresh();
-    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.timeout);
-    ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
-    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
-    $(ELEMENT_COMPOSER_SHARE_BUTTON).should(Condition.be(Condition.enabled));
-    $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
-    $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
-                                                             .parent()
-                                                             .parent()
-                                                             .parent()
-                                                             .find(byClassName(ELEMENT_DATE_ACTIVITY))
-                                                             .hover();
-    $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
-                                                             .parent()
-                                                             .parent()
-                                                             .parent()
-                                                             .find(ELEMENT_ICON_DELETE_ACTIVITY)
-                                                             .click();
-    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.timeout).click();
-    $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
-                                                             .parent()
-                                                             .parent()
-                                                             .parent()
-                                                             .waitUntil(Condition.disappears, Configuration.timeout);
-  }
-
   @Test
   public void test03_add_link_without_text() {
     String link = "http://www.google.fr";

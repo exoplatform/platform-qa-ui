@@ -20,17 +20,24 @@
  */
 package org.exoplatform.platform.qa.ui.commons;
 
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Screenshots;
-import org.exoplatform.platform.qa.ui.core.context.Smoke;
-import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.switchTo;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_PASSWORD_CAS;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.TestInfo;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Screenshots;
 
 import org.exoplatform.platform.qa.ui.commons.pageobject.Platform;
+import org.exoplatform.platform.qa.ui.core.context.Smoke;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.junit.jupiter.api.TestInfo;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 
 public class Base extends TestBase {
 
@@ -41,15 +48,15 @@ public class Base extends TestBase {
   @BeforeAll
   public static void setup() {
 
-
   }
 
   @BeforeEach
   public void beforeEach(TestInfo testInfo) {
     // Set context from better naming of screenshots in case of test failure
     Screenshots.startContext(testInfo.getTestClass().get().getName(), testInfo.getTestMethod().get().getName());
-    Configuration.pageLoadStrategy="normal";
+    Configuration.pageLoadStrategy = "normal";
     openPlatform(testInfo);
+
   }
 
   public void openPlatform(TestInfo testInfo) {
@@ -57,16 +64,21 @@ public class Base extends TestBase {
     plf.open();
 
     // Smoke tests use default data
-    if (testInfo.getTags().contains(Smoke.class.getSimpleName().toLowerCase())){
+    if (testInfo.getTags().contains(Smoke.class.getSimpleName().toLowerCase())) {
       plf.ensureLicenseIsAccepted().ensureRegisterSoftwareIsSkipped().ensureAccountSetupIsSkipped().ensureUserIsLoggedIn();
     }
   }
 
   @AfterEach
   public void afterEach() {
-    ManageLogInOut manageLogInOut=new ManageLogInOut(this);
-    manageLogInOut.signOut();
-
+    switchTo().window(0);
+    ManageLogInOut manageLogInOut = new ManageLogInOut(this);
+    if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.visible))
+        && $(ELEMENT_INPUT_PASSWORD_CAS).is(Condition.not(Condition.visible))) {
+      manageLogInOut.signOut();
+      $(ELEMENT_INPUT_USERNAME_CAS).shouldBe(Condition.visible);
+      $(ELEMENT_INPUT_PASSWORD_CAS).shouldBe(Condition.visible);
+    }
     Screenshots.finishContext();
   }
 }

@@ -62,20 +62,10 @@ public class AddonsAnswersCategoryTestIT extends Base {
     questionManagement = new QuestionManagement(this);
     answerManagement = new AnswerManagement(this);
     manageAlert = new ManageAlert(this);
-
-    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
-      $(ELEMENT_SKIP_BUTTON).click();
-    }
-    if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
-      manageLogInOut.signOut();
-    }
     manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
+
 
   /**
    * Case ID:116809. Test Case Name: Drag and Drop category. Pre-Condition:
