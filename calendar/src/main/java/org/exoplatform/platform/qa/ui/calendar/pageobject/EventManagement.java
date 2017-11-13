@@ -384,9 +384,9 @@ public class EventManagement {
     String dateFrom = $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).getValue();
     String dateTo = $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).getValue();
     String fromTime = evt.waitForAndGetElement(ELEMENT_QUICK_INPUT_EVENT_FROM_TIME, testBase.getDefaultTimeout(), 1, 2)
-            .getAttribute("value");
+                         .getAttribute("value");
     String toTime = evt.waitForAndGetElement(ELEMENT_QUICK_INPUT_EVENT_TO_TIME, testBase.getDefaultTimeout(), 1, 2)
-            .getAttribute("value");
+                       .getAttribute("value");
 
     info("Check default suggestion EVENT time");
     if (fromDateTime == null || fromDateTime == "") {
@@ -446,9 +446,9 @@ public class EventManagement {
     String dateFrom = testBase.getValue(ELEMENT_ADD_EDIT_EVENT_FROM_DATE);
     String dateTo = testBase.getValue(ELEMENT_ADD_EDIT_EVENT_TO_DATE);
     String fromTime = evt.waitForAndGetElement(ELEMENT_ADD_EDIT_INPUT_EVENT_FROM_TIME, testBase.getDefaultTimeout(), 1, 2)
-            .getAttribute("value");
+                         .getAttribute("value");
     String toTime = evt.waitForAndGetElement(ELEMENT_ADD_EDIT_INPUT_EVENT_TO_TIME, testBase.getDefaultTimeout(), 1, 2)
-            .getAttribute("value");
+                       .getAttribute("value");
 
     info("Check default suggestion EVENT time");
     if (fromDateTime == null || fromDateTime == "") {
@@ -548,6 +548,7 @@ public class EventManagement {
     for (int i = fromIndex; i <= toIndex - 1; i++) {
       info("index:" + i);
       assert $(byXpath(ELEMENT_SCHEDULE_BUSY_TIME.replace("${user}", user).replace("${index}", String.valueOf(i))))
+
                 .getAttribute("class")
                 .contains("busyDotTime") : "Wrong busy time";
     }
@@ -639,22 +640,22 @@ public class EventManagement {
    */
   public void selectAvailable(selectAvailableOption option) {
     switch (option) {
-      case AVAILABLE:
-        info("Select AVAILABLE");
-        evt.check(ELEMENT_AVAILABLE_CHECKBOX, 2);
-        break;
-      case BUSY:
-        info("Select BUSY");
-        evt.check(ELEMENT_BUSY_CHECKBOX, 2);
-        break;
-      case OUTSIDE:
-        info("Select OUTSIDE");
-        evt.check(ELEMENT_OUTSIDE_CHECKBOX, 2);
-        break;
-      default:
-        info("Select AVAILABLE");
-        evt.check(ELEMENT_AVAILABLE_CHECKBOX, 2);
-        break;
+    case AVAILABLE:
+      info("Select AVAILABLE");
+      evt.check(ELEMENT_AVAILABLE_CHECKBOX, 2);
+      break;
+    case BUSY:
+      info("Select BUSY");
+      evt.check(ELEMENT_BUSY_CHECKBOX, 2);
+      break;
+    case OUTSIDE:
+      info("Select OUTSIDE");
+      evt.check(ELEMENT_OUTSIDE_CHECKBOX, 2);
+      break;
+    default:
+      info("Select AVAILABLE");
+      evt.check(ELEMENT_AVAILABLE_CHECKBOX, 2);
+      break;
     }
   }
 
@@ -665,22 +666,22 @@ public class EventManagement {
    */
   public void selectSendInvitation(PlatformBase.selectInvitationOption option) {
     switch (option) {
-      case ALWAYS:
-        info("Select ALWAYS");
-        evt.check(ELEMENT_SEND_INVITATION_ALWAYS_CHECKBOX, 2);
-        break;
-      case NEVER:
-        info("Select NEVER");
-        evt.check(ELEMENT_SEND_INVITATION_NEVER_CHECKBOX, 2);
-        break;
-      case ASK:
-        info("Select ASK");
-        evt.check(ELEMENT_SEND_INVITATION_ASK_CHECKBOX, 2);
-        break;
-      default:
-        info("Select NEVER");
-        evt.check(ELEMENT_SEND_INVITATION_NEVER_CHECKBOX, 2);
-        break;
+    case ALWAYS:
+      info("Select ALWAYS");
+      evt.check(ELEMENT_SEND_INVITATION_ALWAYS_CHECKBOX, 2);
+      break;
+    case NEVER:
+      info("Select NEVER");
+      evt.check(ELEMENT_SEND_INVITATION_NEVER_CHECKBOX, 2);
+      break;
+    case ASK:
+      info("Select ASK");
+      evt.check(ELEMENT_SEND_INVITATION_ASK_CHECKBOX, 2);
+      break;
+    default:
+      info("Select NEVER");
+      evt.check(ELEMENT_SEND_INVITATION_NEVER_CHECKBOX, 2);
+      break;
     }
 
   }
@@ -800,22 +801,22 @@ public class EventManagement {
     }
     if (endRepeat != null) {
       switch (endRepeat) {
-        case After:
-          info("Check After option");
-          evt.check(ELEMENT_AFTER_END_RECURRING_EVENT, 2);
-          if (occurence != "")
-            evt.type(ELEMENT_END_AFTER_NUMBER, option[0], true);
-          break;
-        case ByThisDate:
-          info("Check By this date option");
-          evt.check(ELEMENT_BY_THIS_DATE_END_RECURRING_EVENT, 2);
-          if (occurence != "")
-            evt.type(ELEMENT_DATE_TIME_PICKER, option[0], true);
-          break;
-        case Never:
-          info("Check never option");
-          evt.check(ELEMENT_NEVER_END_RECURRING_EVENT, 2);
-          break;
+      case After:
+        info("Check After option");
+        evt.check(ELEMENT_AFTER_END_RECURRING_EVENT, 2);
+        if (occurence != "")
+          evt.type(ELEMENT_END_AFTER_NUMBER, option[0], true);
+        break;
+      case ByThisDate:
+        info("Check By this date option");
+        evt.check(ELEMENT_BY_THIS_DATE_END_RECURRING_EVENT, 2);
+        if (occurence != "")
+          evt.type(ELEMENT_DATE_TIME_PICKER, option[0], true);
+        break;
+      case Never:
+        info("Check never option");
+        evt.check(ELEMENT_NEVER_END_RECURRING_EVENT, 2);
+        break;
       }
     }
   }
@@ -861,43 +862,43 @@ public class EventManagement {
       $(ELEMENT_EDIT_DELETE_ONE_EVENT).parent().waitUntil(Condition.visible, Configuration.timeout);
       info(evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT).getText());
       assert evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT)
-              .getText()
-              .contains(ELEMENT_CONFIRM_DELETE_MESSAGE);
+                .getText()
+                .contains(ELEMENT_CONFIRM_DELETE_MESSAGE);
       assert evt.waitForAndGetElement(ELEMENT_EDIT_DELETE_ONE_EVENT, testBase.getDefaultTimeout(), 1, 2).isSelected();
     }
     switch (optDeleteType) {
-      case ONLY_EVENT:
-        info("Delete only event recurring");
-        if (testBase.getBrowser().contains("iexplorer"))
-          evt.clickByJavascript(ELEMENT_EDIT_DELETE_ONE_EVENT, 2);
-        else
-          evt.check(ELEMENT_EDIT_DELETE_ONE_EVENT, 2);
-        break;
-      case FOLLOW_EVENT:
-        info("Delete following event recurring");
-        if (testBase.getBrowser().contains("iexplorer"))
-          evt.clickByJavascript(ELEMENT_EDIT_DELETE_FOLLOWING_EVENT, 2);
-        else
-          evt.check(ELEMENT_EDIT_DELETE_FOLLOWING_EVENT, 2);
-        break;
-      case ALL_EVENT:
-        info("Delete all event recurring");
-        if (testBase.getBrowser().contains("iexplorer"))
-          evt.clickByJavascript(ELEMENT_EDIT_DELETE_ALL_EVENT, 2);
-        else
-          evt.check(ELEMENT_EDIT_DELETE_ALL_EVENT, 2);
-        break;
-      default:
-        info("Delete only event recurring");
-        if (testBase.getBrowser().contains("iexplorer"))
-          evt.clickByJavascript(ELEMENT_EDIT_DELETE_ONE_EVENT, 2);
-        else
-          evt.check(ELEMENT_EDIT_DELETE_ONE_EVENT, 2);
-        break;
+    case ONLY_EVENT:
+      info("Delete only event recurring");
+      if (testBase.getBrowser().contains("iexplorer"))
+        evt.clickByJavascript(ELEMENT_EDIT_DELETE_ONE_EVENT, 2);
+      else
+        evt.check(ELEMENT_EDIT_DELETE_ONE_EVENT, 2);
+      break;
+    case FOLLOW_EVENT:
+      info("Delete following event recurring");
+      if (testBase.getBrowser().contains("iexplorer"))
+        evt.clickByJavascript(ELEMENT_EDIT_DELETE_FOLLOWING_EVENT, 2);
+      else
+        evt.check(ELEMENT_EDIT_DELETE_FOLLOWING_EVENT, 2);
+      break;
+    case ALL_EVENT:
+      info("Delete all event recurring");
+      if (testBase.getBrowser().contains("iexplorer"))
+        evt.clickByJavascript(ELEMENT_EDIT_DELETE_ALL_EVENT, 2);
+      else
+        evt.check(ELEMENT_EDIT_DELETE_ALL_EVENT, 2);
+      break;
+    default:
+      info("Delete only event recurring");
+      if (testBase.getBrowser().contains("iexplorer"))
+        evt.clickByJavascript(ELEMENT_EDIT_DELETE_ONE_EVENT, 2);
+      else
+        evt.check(ELEMENT_EDIT_DELETE_ONE_EVENT, 2);
+      break;
     }
     evt.waitForAndGetElement(ELEMENT_CONFIRM_DELETE_BUTTON, testBase.getDefaultTimeout(), 1);
-   $(ELEMENT_CONFIRM_DELETE_BUTTON).click();
-    $(ELEMENT_DELETE_RECURRING_EVENT_FORM).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    $(ELEMENT_CONFIRM_DELETE_BUTTON).click();
+    $(ELEMENT_DELETE_RECURRING_EVENT_FORM).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
   }
 
   /**
@@ -917,23 +918,23 @@ public class EventManagement {
       evt.waitForAndGetElement(ELEMENT_EDIT_DELETE_ONE_EVENT, testBase.getDefaultTimeout(), 1, 2);
       info(evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT).getText());
       assert evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT)
-              .getText()
-              .contains(ELEMENT_CONFIRM_EDIT_MESSAGE);
+                .getText()
+                .contains(ELEMENT_CONFIRM_EDIT_MESSAGE);
       assert evt.waitForAndGetElement(ELEMENT_EDIT_DELETE_ONE_EVENT, testBase.getDefaultTimeout(), 1, 2).isSelected();
     }
     switch (optEditType) {
-      case ONLY_EVENT:
-        info("Edit only event recurring");
-        evt.check(ELEMENT_EDIT_DELETE_ONE_EVENT, 2);
-        break;
-      case FOLLOW_EVENT:
-        info("Edit following event recurring");
-        evt.check(ELEMENT_EDIT_DELETE_FOLLOWING_EVENT, 2);
-        break;
-      case ALL_EVENT:
-        info("Edit all event recurring");
-        evt.check(ELEMENT_EDIT_DELETE_ALL_EVENT, 2);
-        break;
+    case ONLY_EVENT:
+      info("Edit only event recurring");
+      evt.check(ELEMENT_EDIT_DELETE_ONE_EVENT, 2);
+      break;
+    case FOLLOW_EVENT:
+      info("Edit following event recurring");
+      evt.check(ELEMENT_EDIT_DELETE_FOLLOWING_EVENT, 2);
+      break;
+    case ALL_EVENT:
+      info("Edit all event recurring");
+      evt.check(ELEMENT_EDIT_DELETE_ALL_EVENT, 2);
+      break;
     }
     evt.click(ELEMENT_CONFIRM_EDIT_BUTTON);
     evt.waitForElementNotPresent(ELEMENT_CONFIRM_EDIT_RECURRING_FORM);
@@ -952,18 +953,18 @@ public class EventManagement {
   public void deleteRecurringConfirm(recurringType optEditType) {
     evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_RECURRING_FORM);
     switch (optEditType) {
-      case ONLY_EVENT:
-        info("Edit only event recurring");
-        evt.check(ELEMENT_EDIT_DELETE_ONE_EVENT, 2);
-        break;
-      case FOLLOW_EVENT:
-        info("Edit following event recurring");
-        evt.check(ELEMENT_EDIT_DELETE_FOLLOWING_EVENT, 2);
-        break;
-      case ALL_EVENT:
-        info("Edit all event recurring");
-        evt.click(ELEMENT_EDIT_DELETE_ALL_EVENT, 2);
-        break;
+    case ONLY_EVENT:
+      info("Edit only event recurring");
+      evt.check(ELEMENT_EDIT_DELETE_ONE_EVENT, 2);
+      break;
+    case FOLLOW_EVENT:
+      info("Edit following event recurring");
+      evt.check(ELEMENT_EDIT_DELETE_FOLLOWING_EVENT, 2);
+      break;
+    case ALL_EVENT:
+      info("Edit all event recurring");
+      evt.click(ELEMENT_EDIT_DELETE_ALL_EVENT, 2);
+      break;
     }
 
     evt.click(ELEMENT_CONFIRM_DELETE_BUTTON);

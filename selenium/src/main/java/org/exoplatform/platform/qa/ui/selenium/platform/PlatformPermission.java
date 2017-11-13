@@ -48,7 +48,6 @@ public class PlatformPermission {
     }
 
     $(ELEMENT_QUICK_SEARCH_BUTTON).click();
-    // clickByJavascript(ELEMENT_QUICK_SEARCH_BUTTON);
    $(byXpath(ELEMENT_USER_CHECKBOX.replace("${user}", keySearch))).parent().waitUntil(Condition.visible,Configuration.timeout);
   }
 
