@@ -8,9 +8,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarL
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -61,13 +59,14 @@ public class CalendarHomePage {
       ELEMENT_CALENDAR_LIST_BUTTON.click();
       break;
     case MONTH:
-     $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"))).waitUntil(Condition.visible,Configuration.timeout);
+      $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"))).waitUntil(Condition.visible, Configuration.timeout);
       $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"))).click();
-      $(byXpath(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Month"))).waitUntil(Condition.visible,Configuration.timeout);
+      $(byXpath(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Month"))).waitUntil(Condition.visible, Configuration.timeout);
       break;
     case WORKWEEK:
-      $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Work Week"))).waitUntil(Condition.visible,Configuration.timeout).click();
-     $(byXpath(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Work Week"))).waitUntil(Condition.visible,Configuration.timeout);
+      $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Work Week"))).waitUntil(Condition.visible, Configuration.timeout)
+                                                                            .click();
+      $(byXpath(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Work Week"))).waitUntil(Condition.visible, Configuration.timeout);
       break;
     default:
       evt.waitForAndGetElement(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Week"), testBase.getDefaultTimeout(), 1);
@@ -88,7 +87,7 @@ public class CalendarHomePage {
     info("Got to edit task from day view");
     goToView(selectViewOption.DAY);
     $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Day"))).click();
-    $(byXpath(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Day"))).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Day"))).waitUntil(Condition.visible, Configuration.timeout);
     switch (optionDay) {
     case DETAILTIME:
       $(byXpath(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name))).scrollTo().contextClick();
@@ -116,36 +115,36 @@ public class CalendarHomePage {
     goToView(selectViewOption.WEEK);
     if (date != null && date != "") {
       switch (optionDay) {
-        case DETAILTIME:
-          ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name))
-                  .waitUntil(Condition.appears, Configuration.timeout)
-                  .contextClick();
-          break;
-        case ALLDAY:
-          ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name))
-                  .waitUntil(Condition.appears, Configuration.timeout)
-                  .contextClick();
-          break;
-        default:
-          evt.scrollBarToGetElement(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$name", name)
-                  .replace("$date", date)));
-          evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date", date));
-          break;
+      case DETAILTIME:
+        ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name))
+                                            .waitUntil(Condition.appears, Configuration.timeout)
+                                            .contextClick();
+        break;
+      case ALLDAY:
+        ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name))
+                                            .waitUntil(Condition.appears, Configuration.timeout)
+                                            .contextClick();
+        break;
+      default:
+        evt.scrollBarToGetElement(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$name", name)
+                                                                                           .replace("$date", date)));
+        evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date", date));
+        break;
 
       }
     } else {
       switch (optionDay) {
-        case DETAILTIME:
-          evt.scrollBarToGetElement(By.xpath(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name)));
-          evt.rightClickOnElement(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name));
-          break;
-        case ALLDAY:
-          evt.rightClickOnElement(ELEMENT_EVENT_TASK_WEEK_VIEW_ALL_DAY.replace("$name", name));
-          break;
-        default:
-          evt.scrollBarToGetElement(By.xpath(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name)));
-          evt.rightClickOnElement(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name));
-          break;
+      case DETAILTIME:
+        evt.scrollBarToGetElement(By.xpath(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name)));
+        evt.rightClickOnElement(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        break;
+      case ALLDAY:
+        evt.rightClickOnElement(ELEMENT_EVENT_TASK_WEEK_VIEW_ALL_DAY.replace("$name", name));
+        break;
+      default:
+        evt.scrollBarToGetElement(By.xpath(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name)));
+        evt.rightClickOnElement(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        break;
       }
     }
   }
@@ -160,16 +159,16 @@ public class CalendarHomePage {
     info("Got to edit task from month view");
     goToView(selectViewOption.MONTH);
     if (date != null && date != "") {
-      if ($(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))).is(Condition.not(Condition.visible))
-              && $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE_ICON.replace("$date", date))).is(Condition.visible)
-                                      ) {
+      if ($(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name)
+                                                             .replace("$date", date))).is(Condition.not(Condition.visible))
+          && $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE_ICON.replace("$date", date))).is(Condition.visible)) {
         info("Click more button");
         $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE_ICON.replace("$date", date))).click();
-        $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE.replace("$name", name).replace("$date",
-                                                                                                                         date))).scrollTo().contextClick();
-        if ($(byText(name)).is(Condition.not(Condition.visible)))
-        {$(byText(name)).scrollTo().contextClick();}
-        else {
+        $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE.replace("$name", name).replace("$date", date))).scrollTo()
+                                                                                                                .contextClick();
+        if ($(byText(name)).is(Condition.not(Condition.visible))) {
+          $(byText(name)).scrollTo().contextClick();
+        } else {
           $(byText(name)).contextClick();
         }
       }
@@ -192,31 +191,32 @@ public class CalendarHomePage {
         info("paginator page in calendar list view");
         evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
         while ((evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name), 5000, 0) == null)
-                && !(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
-                .getText()
-                .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText())))
+            && !(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
+                    .getText()
+                    .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText())))
           evt.click(ELEMENT_NEXT_PAGE);
         evt.waitForAndGetElement(ELEMENT_EVENT_TASK_START_DETAIL_DATE_LIST_VIEW.replace("$name", name).replace("$date", date));
         evt.rightClickOnElement(ELEMENT_EVENT_TASK_START_DETAIL_DATE_LIST_VIEW.replace("$name", name).replace("$date", date));
       } else {
-        if( $(byId("UIListUsers")).find(byText(name)).is(Condition.not(Condition.exist))){
+        if ($(byId("UIListUsers")).find(byText(name)).is(Condition.not(Condition.exist))) {
           ELEMENT_NEXT_RIGHT_LIST_DAY_BUTTON.click();
         }
         $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
-        $(byText(name)).waitUntil(Condition.visible,Configuration.timeout).contextClick();
+        $(byText(name)).waitUntil(Condition.visible, Configuration.timeout).contextClick();
       }
     } else {
       if ($(ELEMENT_TOTAL_PAGE).is(Condition.visible)) {
         evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
         while ((evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name), 5000, 0) == null)
-                && !(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
-                .getText()
-                .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText())))
+            && !(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
+                    .getText()
+                    .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText())))
           evt.click(ELEMENT_NEXT_PAGE);
         evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
         evt.rightClickOnElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
       } else {
-        $(byXpath(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name))).waitUntil(Condition.visible,Configuration.timeout).contextClick();
+        $(byXpath(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name))).waitUntil(Condition.visible, Configuration.timeout)
+                                                                       .contextClick();
       }
     }
   }
@@ -233,36 +233,36 @@ public class CalendarHomePage {
     goToView(selectViewOption.WORKWEEK);
     if (date != null && date != "") {
       switch (optionDay) {
-        case DETAILTIME:
-          evt.scrollBarToGetElement(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name)
-                  .replace("$date", date)));
-          evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date",
-                  date));
-          break;
-        case ALLDAY:
-          evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name).replace("$date",
-                  date));
-          break;
-        default:
-          evt.scrollBarToGetElement(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name)
-                  .replace("$date", date)));
-          evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date",
-                  date));
-          break;
+      case DETAILTIME:
+        evt.scrollBarToGetElement(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name)
+                                                                                                .replace("$date", date)));
+        evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date",
+                                                                                                                     date));
+        break;
+      case ALLDAY:
+        evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name).replace("$date",
+                                                                                                                     date));
+        break;
+      default:
+        evt.scrollBarToGetElement(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name)
+                                                                                                .replace("$date", date)));
+        evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date",
+                                                                                                                     date));
+        break;
       }
     } else {
       switch (optionDay) {
-        case DETAILTIME:
-          evt.scrollBarToGetElement(By.xpath(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name)));
-          evt.rightClickOnElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
-          break;
-        case ALLDAY:
-          evt.rightClickOnElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name));
-          break;
-        default:
-          evt.scrollBarToGetElement(By.xpath(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name)));
-          evt.rightClickOnElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
-          break;
+      case DETAILTIME:
+        evt.scrollBarToGetElement(By.xpath(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name)));
+        evt.rightClickOnElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        break;
+      case ALLDAY:
+        evt.rightClickOnElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name));
+        break;
+      default:
+        evt.scrollBarToGetElement(By.xpath(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name)));
+        evt.rightClickOnElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        break;
 
       }
     }
@@ -292,24 +292,24 @@ public class CalendarHomePage {
   public void goToEditEventTaskFormByRightClick(String name, selectViewOption view, selectDayOption optionDay, String date) {
     info("Open Edit Task Event form");
     switch (view) {
-      case DAY:
-        goToRightMenuTaskEventFromDayView(name, optionDay);
-        break;
-      case WEEK:
-        goToRightMenuTaskEventFromWeekView(name, optionDay, date);
-        break;
-      case LIST:
-        goToRightMenuTaskEventFromListView(name, date);
-        break;
-      case MONTH:
-        goToRightMenuTaskEventFromMonthView(name, date);
-        break;
-      case WORKWEEK:
-        goToRightMenuTaskEventFromWorkWeekView(name, optionDay, date);
-        break;
-      default:
-        goToRightMenuTaskEventFromDayView(name, optionDay);
-        break;
+    case DAY:
+      goToRightMenuTaskEventFromDayView(name, optionDay);
+      break;
+    case WEEK:
+      goToRightMenuTaskEventFromWeekView(name, optionDay, date);
+      break;
+    case LIST:
+      goToRightMenuTaskEventFromListView(name, date);
+      break;
+    case MONTH:
+      goToRightMenuTaskEventFromMonthView(name, date);
+      break;
+    case WORKWEEK:
+      goToRightMenuTaskEventFromWorkWeekView(name, optionDay, date);
+      break;
+    default:
+      goToRightMenuTaskEventFromDayView(name, optionDay);
+      break;
     }
     $(ELEMENT_CONTEXT_MENU_EDIT).click();
     ELEMENT_ADD_EDIT_TASK_POPUP.waitUntil(Condition.appears, Configuration.timeout);
@@ -327,81 +327,79 @@ public class CalendarHomePage {
     executeJavaScript("window.scrollBy(0,-5500)", "");
     goToView(view);
     switch (view) {
-      case DAY:
-        switch (optionDay) {
-          case DETAILTIME:
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
-            break;
-          case ALLDAY:
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY.replace("$name", name));
-            break;
-          default:
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
-            break;
-        }
-
+    case DAY:
+      switch (optionDay) {
+      case DETAILTIME:
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
         break;
-      case WEEK:
-        switch (optionDay) {
-          case DETAILTIME:
-            $(byXpath(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name))).shouldNot(Condition.visible);
-            break;
-          case ALLDAY:
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WEEK_VIEW_ALL_DAY.replace("$name", name));
-            break;
-          default:
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name));
-            break;
-        }
-        break;
-      case LIST:
-        if ($(ELEMENT_TOTAL_PAGE).is(Condition.visible)) {
-          $(byXpath(ELEMENT_ANY_PAGE.replace("$page", "1"))).click();
-          while (!(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
-                  .getText()
-                  .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText()))) {
-            evt.click(ELEMENT_NEXT_PAGE);
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
-          }
-          evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
-        } else {
-          evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
-        }
-
-
-        break;
-      case MONTH:
-        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_MONTH_VIEW.replace("$name", name));
-        break;
-      case WORKWEEK:
-        switch (optionDay) {
-          case DETAILTIME:
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
-            break;
-          case ALLDAY:
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name));
-            break;
-          default:
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
-            break;
-        }
+      case ALLDAY:
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY.replace("$name", name));
         break;
       default:
-        switch (optionDay) {
-          case DETAILTIME:
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
-            break;
-          case ALLDAY:
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name));
-            break;
-          default:
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
-            break;
-        }
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
         break;
+      }
+
+      break;
+    case WEEK:
+      switch (optionDay) {
+      case DETAILTIME:
+        $(byXpath(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name))).shouldNot(Condition.visible);
+        break;
+      case ALLDAY:
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WEEK_VIEW_ALL_DAY.replace("$name", name));
+        break;
+      default:
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        break;
+      }
+      break;
+    case LIST:
+      if ($(ELEMENT_TOTAL_PAGE).is(Condition.visible)) {
+        $(byXpath(ELEMENT_ANY_PAGE.replace("$page", "1"))).click();
+        while (!(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
+                    .getText()
+                    .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText()))) {
+          evt.click(ELEMENT_NEXT_PAGE);
+          evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
+        }
+        evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
+      } else {
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
+      }
+
+      break;
+    case MONTH:
+      evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_MONTH_VIEW.replace("$name", name));
+      break;
+    case WORKWEEK:
+      switch (optionDay) {
+      case DETAILTIME:
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        break;
+      case ALLDAY:
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name));
+        break;
+      default:
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        break;
+      }
+      break;
+    default:
+      switch (optionDay) {
+      case DETAILTIME:
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        break;
+      case ALLDAY:
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name));
+        break;
+      default:
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        break;
+      }
+      break;
     }
   }
-
 
   /**
    * Verify event or task is displayed on calendar panel
@@ -415,78 +413,78 @@ public class CalendarHomePage {
     executeJavaScript("window.scrollBy(0,-5500)", "");
     goToView(view);
     switch (view) {
-      case DAY:
-        switch (optionDay) {
-          case DETAILTIME:
-            // evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name",
-            // name));
-            $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
-            break;
-          case ALLDAY:
-            evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY.replace("$name", name));
-            break;
-          default:
-            evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
-            break;
-        }
-
+    case DAY:
+      switch (optionDay) {
+      case DETAILTIME:
+        // evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name",
+        // name));
+        $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
         break;
-      case WEEK:
-        switch (optionDay) {
-          case DETAILTIME:
-            $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
-            break;
-          case ALLDAY:
-            evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WEEK_VIEW_ALL_DAY.replace("$name", name));
-            break;
-          default:
-            evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name));
-            break;
-        }
-        break;
-      case LIST:
-        if ($(ELEMENT_TOTAL_PAGE).is(Condition.exist)) {
-          evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
-          while ((evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name), 5000, 0) == null)
-                  && !(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
-                  .getText()
-                  .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText())))
-            evt.click(ELEMENT_NEXT_PAGE);
-          evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
-          evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
-        } else {
-          $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
-        }
-        break;
-      case MONTH:
-        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_MONTH_VIEW.replace("$name", name));
-        break;
-      case WORKWEEK:
-        switch (optionDay) {
-          case DETAILTIME:
-            evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
-            break;
-          case ALLDAY:
-            evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name));
-            break;
-          default:
-            evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
-            break;
-        }
+      case ALLDAY:
+        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY.replace("$name", name));
         break;
       default:
-        switch (optionDay) {
-          case DETAILTIME:
-            $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
-            break;
-          case ALLDAY:
-            evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name));
-            break;
-          default:
-            evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
-            break;
-        }
+        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
         break;
+      }
+
+      break;
+    case WEEK:
+      switch (optionDay) {
+      case DETAILTIME:
+        $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
+        break;
+      case ALLDAY:
+        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WEEK_VIEW_ALL_DAY.replace("$name", name));
+        break;
+      default:
+        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        break;
+      }
+      break;
+    case LIST:
+      if ($(ELEMENT_TOTAL_PAGE).is(Condition.exist)) {
+        evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
+        while ((evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name), 5000, 0) == null)
+            && !(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
+                    .getText()
+                    .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText())))
+          evt.click(ELEMENT_NEXT_PAGE);
+        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
+        evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
+      } else {
+        $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
+      }
+      break;
+    case MONTH:
+      evt.waitForAndGetElement(ELEMENT_EVENT_TASK_MONTH_VIEW.replace("$name", name));
+      break;
+    case WORKWEEK:
+      switch (optionDay) {
+      case DETAILTIME:
+        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        break;
+      case ALLDAY:
+        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name));
+        break;
+      default:
+        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        break;
+      }
+      break;
+    default:
+      switch (optionDay) {
+      case DETAILTIME:
+        $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
+        break;
+      case ALLDAY:
+        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name));
+        break;
+      default:
+        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        break;
+      }
+      break;
     }
   }
 
@@ -502,75 +500,75 @@ public class CalendarHomePage {
     WebElement element = null;
     goToView(view);
     switch (view) {
-      case DAY:
-        switch (optionDay) {
-          case DETAILTIME:
-            element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
-            break;
-          case ALLDAY:
-            element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY.replace("$name", name));
-            break;
-          default:
-            element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
-            break;
-        }
+    case DAY:
+      switch (optionDay) {
+      case DETAILTIME:
+        element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
         break;
-      case WEEK:
-        switch (optionDay) {
-          case DETAILTIME:
-            element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name));
-            break;
-          case ALLDAY:
-            element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WEEK_VIEW_ALL_DAY.replace("$name", name));
-            break;
-          default:
-            element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name));
-            break;
-        }
-        break;
-      case LIST:
-        if (evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE, 5000, 0) != null) {
-          element = evt.waitForAndGetElement(ELEMENT_ANY_PAGE.replace("$page", "1"));
-          while ((evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name), 5000, 0) == null)
-                  && !(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
-                  .getText()
-                  .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText())))
-            evt.click(ELEMENT_NEXT_PAGE);
-          element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
-          element = evt.waitForAndGetElement(ELEMENT_ANY_PAGE.replace("$page", "1"));
-        } else {
-          element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
-        }
-        break;
-      case MONTH:
-        element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_MONTH_VIEW.replace("$name", name));
-        break;
-      case WORKWEEK:
-        switch (optionDay) {
-          case DETAILTIME:
-            element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
-            break;
-          case ALLDAY:
-            element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name));
-            break;
-          default:
-            element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
-            break;
-        }
+      case ALLDAY:
+        element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY.replace("$name", name));
         break;
       default:
-        switch (optionDay) {
-          case DETAILTIME:
-            element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
-            break;
-          case ALLDAY:
-            element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name));
-            break;
-          default:
-            element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
-            break;
-        }
+        element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
         break;
+      }
+      break;
+    case WEEK:
+      switch (optionDay) {
+      case DETAILTIME:
+        element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        break;
+      case ALLDAY:
+        element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WEEK_VIEW_ALL_DAY.replace("$name", name));
+        break;
+      default:
+        element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        break;
+      }
+      break;
+    case LIST:
+      if (evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE, 5000, 0) != null) {
+        element = evt.waitForAndGetElement(ELEMENT_ANY_PAGE.replace("$page", "1"));
+        while ((evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name), 5000, 0) == null)
+            && !(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
+                    .getText()
+                    .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText())))
+          evt.click(ELEMENT_NEXT_PAGE);
+        element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
+        element = evt.waitForAndGetElement(ELEMENT_ANY_PAGE.replace("$page", "1"));
+      } else {
+        element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
+      }
+      break;
+    case MONTH:
+      element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_MONTH_VIEW.replace("$name", name));
+      break;
+    case WORKWEEK:
+      switch (optionDay) {
+      case DETAILTIME:
+        element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        break;
+      case ALLDAY:
+        element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name));
+        break;
+      default:
+        element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        break;
+      }
+      break;
+    default:
+      switch (optionDay) {
+      case DETAILTIME:
+        element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        break;
+      case ALLDAY:
+        element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name));
+        break;
+      default:
+        element = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        break;
+      }
+      break;
     }
     return element;
   }
@@ -587,96 +585,98 @@ public class CalendarHomePage {
     info("Verify task and event is not displayed on calendar panel");
     goToView(view);
     switch (view) {
-      case DAY:
-        switch (optionDay) {
-          case DETAILTIME:
-            evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
-            break;
-          case ALLDAY:
-            evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY.replace("$name", name));
-            break;
-          default:
-            evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
-            break;
-        }
+    case DAY:
+      switch (optionDay) {
+      case DETAILTIME:
+        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
         break;
-      case WEEK:
-        switch (optionDay) {
-          case DETAILTIME:
-            evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date", date));
-            break;
-          case ALLDAY:
-            evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ALL_DAY.replace("$name", name).replace("$date", date));
-            break;
-          default:
-            evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date", date));
-            break;
-        }
-        break;
-      case LIST:
-        if ($(ELEMENT_TOTAL_PAGE).is(Condition.visible)) {
-
-          evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
-          while ((evt.waitForAndGetElement(ELEMENT_EVENT_TASK_START_DETAIL_DATE_LIST_VIEW.replace("$name", name)
-                          .replace("$date", date),
-                  5000,
-                  0) == null)
-                  && !(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
-                  .getText()
-                  .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText())))
-            evt.click(ELEMENT_NEXT_PAGE);
-          evt.waitForAndGetElement(ELEMENT_EVENT_TASK_START_DETAIL_DATE_LIST_VIEW.replace("$name", name).replace("$date", date));
-          evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
-        } else {
-          $(byXpath(ELEMENT_EVENT_TASK_START_DETAIL_DATE_LIST_VIEW.replace("$name", name).replace("$date", date))).waitUntil(Condition.visible,Configuration.timeout);
-        }
-        break;
-      case MONTH:
-        if (evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date),
-                5000,
-                0) == null
-                && evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE_ICON.replace("$date", date),
-                5000,
-                0) != null) {
-          evt.click(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE_ICON.replace("$date", date), 2);
-          evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE.replace("$name", name).replace("$date", date));
-        } else
-          evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date));
-
-        break;
-      case WORKWEEK:
-        switch (optionDay) {
-          case DETAILTIME:
-            evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date",
-                    date));
-            break;
-          case ALLDAY:
-            $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name).replace("$date",
-                    date))).waitUntil(Condition.visible,Configuration.timeout);
-            break;
-          default:
-            evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date",
-                    date));
-            break;
-        }
+      case ALLDAY:
+        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY.replace("$name", name));
         break;
       default:
-        switch (optionDay) {
-          case DETAILTIME:
-            evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
-
-            break;
-          case ALLDAY:
-            evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name));
-            break;
-          default:
-            evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
-            break;
-        }
+        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
         break;
+      }
+      break;
+    case WEEK:
+      switch (optionDay) {
+      case DETAILTIME:
+        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date", date));
+        break;
+      case ALLDAY:
+        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ALL_DAY.replace("$name", name).replace("$date", date));
+        break;
+      default:
+        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date", date));
+        break;
+      }
+      break;
+    case LIST:
+      if ($(ELEMENT_TOTAL_PAGE).is(Condition.visible)) {
+
+        evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
+        while ((evt.waitForAndGetElement(ELEMENT_EVENT_TASK_START_DETAIL_DATE_LIST_VIEW.replace("$name", name)
+                                                                                       .replace("$date", date),
+                                         5000,
+                                         0) == null)
+            && !(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
+                    .getText()
+                    .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText())))
+          evt.click(ELEMENT_NEXT_PAGE);
+        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_START_DETAIL_DATE_LIST_VIEW.replace("$name", name).replace("$date", date));
+        evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
+      } else {
+        $(byXpath(ELEMENT_EVENT_TASK_START_DETAIL_DATE_LIST_VIEW.replace("$name", name)
+                                                                .replace("$date", date))).waitUntil(Condition.visible,
+                                                                                                    Configuration.timeout);
+      }
+      break;
+    case MONTH:
+      if (evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date),
+                                   5000,
+                                   0) == null
+          && evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE_ICON.replace("$date", date),
+                                      5000,
+                                      0) != null) {
+        evt.click(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE_ICON.replace("$date", date), 2);
+        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE.replace("$name", name).replace("$date", date));
+      } else
+        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date));
+
+      break;
+    case WORKWEEK:
+      switch (optionDay) {
+      case DETAILTIME:
+        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date",
+                                                                                                                      date));
+        break;
+      case ALLDAY:
+        $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name)
+                                                                       .replace("$date", date))).waitUntil(Condition.visible,
+                                                                                                           Configuration.timeout);
+        break;
+      default:
+        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date",
+                                                                                                                      date));
+        break;
+      }
+      break;
+    default:
+      switch (optionDay) {
+      case DETAILTIME:
+        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+
+        break;
+      case ALLDAY:
+        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name));
+        break;
+      default:
+        evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        break;
+      }
+      break;
     }
   }
-
 
   /**
    * Open Add/Edit task/event by left clicking
@@ -689,41 +689,41 @@ public class CalendarHomePage {
     info("Open Quick Add/EDit task/event by left click");
     goToView(view);
     switch (view) {
-      case DAY:
+    case DAY:
+      evt.click(ELEMENT_EVENT_TASK_DAY_ONE_DAY.replace("$date", date));
+      break;
+    case WEEK:
+      switch (optionDay) {
+      case DETAILTIME:
         evt.click(ELEMENT_EVENT_TASK_DAY_ONE_DAY.replace("$date", date));
         break;
-      case WEEK:
-        switch (optionDay) {
-          case DETAILTIME:
-            evt.click(ELEMENT_EVENT_TASK_DAY_ONE_DAY.replace("$date", date));
-            break;
-          case ALLDAY:
-            evt.click(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ALL_DAY.replace("$date", date));
-            break;
-          default:
-            evt.click(ELEMENT_EVENT_TASK_DAY_ONE_DAY.replace("$date", date));
-            break;
-        }
-        break;
-      case MONTH:
-        evt.click(ELEMENT_EVENT_TASK_MONTH_DATE.replace("$date", date));
-        break;
-      case WORKWEEK:
-        switch (optionDay) {
-          case DETAILTIME:
-            evt.click(ELEMENT_EVENT_TASK_DAY_ONE_DAY.replace("$date", date));
-            break;
-          case ALLDAY:
-            evt.click(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ALL_DAY.replace("$date", date));
-            break;
-          default:
-            evt.click(ELEMENT_EVENT_TASK_DAY_ONE_DAY.replace("$date", date));
-            break;
-        }
+      case ALLDAY:
+        evt.click(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ALL_DAY.replace("$date", date));
         break;
       default:
-        info("You don't select a datetime.Please select a datetime.");
+        evt.click(ELEMENT_EVENT_TASK_DAY_ONE_DAY.replace("$date", date));
         break;
+      }
+      break;
+    case MONTH:
+      evt.click(ELEMENT_EVENT_TASK_MONTH_DATE.replace("$date", date));
+      break;
+    case WORKWEEK:
+      switch (optionDay) {
+      case DETAILTIME:
+        evt.click(ELEMENT_EVENT_TASK_DAY_ONE_DAY.replace("$date", date));
+        break;
+      case ALLDAY:
+        evt.click(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ALL_DAY.replace("$date", date));
+        break;
+      default:
+        evt.click(ELEMENT_EVENT_TASK_DAY_ONE_DAY.replace("$date", date));
+        break;
+      }
+      break;
+    default:
+      info("You don't select a datetime.Please select a datetime.");
+      break;
     }
 
   }
@@ -742,83 +742,81 @@ public class CalendarHomePage {
     info("Open Quick Add/EDit task/event by right click");
     goToView(view);
     switch (view) {
-      case DAY:
-        evt.rightClickOnElement(ELEMENT_EVENT_TASK_DAY_ONE_DAY.replace("$time", date));
+    case DAY:
+      evt.rightClickOnElement(ELEMENT_EVENT_TASK_DAY_ONE_DAY.replace("$time", date));
+
+      selectOptionByRightclickOnDateTime(option);
+      break;
+    case WEEK:
+      switch (optionDay) {
+      case DETAILTIME:
+        evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ONE_DAY.replace("$date", date));
 
         selectOptionByRightclickOnDateTime(option);
         break;
-      case WEEK:
-        switch (optionDay) {
-          case DETAILTIME:
-            evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ONE_DAY.replace("$date", date));
-
-            selectOptionByRightclickOnDateTime(option);
-            break;
-          case ALLDAY:
-            evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ALL_DAY.replace("$date", date));
-
-            selectOptionByRightclickOnDateTime(option);
-            break;
-          default:
-            evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ONE_DAY.replace("$date", date));
-
-            selectOptionByRightclickOnDateTime(option);
-            break;
-        }
-        break;
-      case MONTH:
-        evt.rightClickOnElement(ELEMENT_EVENT_TASK_MONTH_DATE.replace("$date", date));
+      case ALLDAY:
+        evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ALL_DAY.replace("$date", date));
 
         selectOptionByRightclickOnDateTime(option);
-        break;
-      case WORKWEEK:
-        switch (optionDay) {
-          case DETAILTIME:
-            evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ONE_DAY.replace("$date", date));
-
-            selectOptionByRightclickOnDateTime(option);
-            break;
-          case ALLDAY:
-            evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ALL_DAY.replace("$date", date));
-
-            selectOptionByRightclickOnDateTime(option);
-            break;
-          default:
-            evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ONE_DAY.replace("$date", date));
-
-            selectOptionByRightclickOnDateTime(option);
-            break;
-        }
         break;
       default:
-        info("You don't select a optionDay.Please select other optionDay.");
+        evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ONE_DAY.replace("$date", date));
+
+        selectOptionByRightclickOnDateTime(option);
         break;
+      }
+      break;
+    case MONTH:
+      evt.rightClickOnElement(ELEMENT_EVENT_TASK_MONTH_DATE.replace("$date", date));
+
+      selectOptionByRightclickOnDateTime(option);
+      break;
+    case WORKWEEK:
+      switch (optionDay) {
+      case DETAILTIME:
+        evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ONE_DAY.replace("$date", date));
+
+        selectOptionByRightclickOnDateTime(option);
+        break;
+      case ALLDAY:
+        evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ALL_DAY.replace("$date", date));
+
+        selectOptionByRightclickOnDateTime(option);
+        break;
+      default:
+        evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ONE_DAY.replace("$date", date));
+
+        selectOptionByRightclickOnDateTime(option);
+        break;
+      }
+      break;
+    default:
+      info("You don't select a optionDay.Please select other optionDay.");
+      break;
     }
 
   }
 
   /**
-   * Select an option in context menu
-   *
-<<<<<<< 22e0d6a7bd5e332e9fc007e5b11d1fcb01a14c10
-   * @param option  contextMenuAddEditEvenTaskOptiong
-=======
-   * @param option
->>>>>>> calendar settings
+   * Select an option in context menu <<<<<<<
+   * 22e0d6a7bd5e332e9fc007e5b11d1fcb01a14c10
+   * 
+   * @param option contextMenuAddEditEvenTaskOptiong =======
+   * @param option >>>>>>> calendar settings
    */
   public void selectOptionByRightclickOnDateTime(contextMenuAddEditEvenTaskOption option) {
     switch (option) {
-      case ADD_EVENT:
-        info("Select Add new event option");
-        evt.click(ELEMENT_CONTEXT_MENU_ADD_EVENT);
-        break;
-      case ADD_TASK:
-        info("Select Add new task option");
-        evt.click(ELEMENT_CONTEXT_MENU_ADD_TASK);
-        break;
-      default:
-        info("No option to select");
-        break;
+    case ADD_EVENT:
+      info("Select Add new event option");
+      evt.click(ELEMENT_CONTEXT_MENU_ADD_EVENT);
+      break;
+    case ADD_TASK:
+      info("Select Add new task option");
+      evt.click(ELEMENT_CONTEXT_MENU_ADD_TASK);
+      break;
+    default:
+      info("No option to select");
+      break;
     }
   }
 
@@ -838,94 +836,94 @@ public class CalendarHomePage {
     executeJavaScript("window.scrollBy(0,-5500)", "");
     goToView(view);
     switch (view) {
-      case DAY:
-        switch (optionDay) {
-          case DETAILTIME:
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
-            break;
-          case ALLDAY:
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY.replace("$name", name));
-            break;
-          default:
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
-            break;
-        }
+    case DAY:
+      switch (optionDay) {
+      case DETAILTIME:
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
         break;
-      case WEEK:
-        switch (optionDay) {
-          case DETAILTIME:
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date",
-                    date));
-            break;
-          case ALLDAY:
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ALL_DAY.replace("$name", name).replace("$date",
-                    date));
-            break;
-          default:
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date",
-                    date));
-            break;
-        }
-        break;
-      case LIST:
-        if (evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE, 5000, 0) != null) {
-          evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
-          while (!(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
-                  .getText()
-                  .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText()))) {
-            evt.click(ELEMENT_NEXT_PAGE);
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_START_DETAIL_DATE_LIST_VIEW.replace("$name", name).replace("$date",
-                    date));
-          }
-          evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
-        } else {
-          evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_START_DETAIL_DATE_LIST_VIEW.replace("$name", name).replace("$date",
-                  date));
-        }
-        break;
-      case MONTH:
-        if (evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date),
-                5000,
-                0) == null
-                && evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE_ICON.replace("$date", date),
-                5000,
-                0) != null) {
-          evt.click(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE_ICON.replace("$date", date), 2);
-          evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE.replace("$name", name).replace("$date",
-                  date));
-        } else
-          evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date));
-        break;
-      case WORKWEEK:
-        switch (optionDay) {
-          case DETAILTIME:
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DETAIL_DATE_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date",
-                    date));
-            break;
-          case ALLDAY:
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DETAIL_DATE_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name).replace("$date",
-                    date));
-
-            break;
-          default:
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DETAIL_DATE_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date",
-                    date));
-            break;
-        }
+      case ALLDAY:
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY.replace("$name", name));
         break;
       default:
-        switch (optionDay) {
-          case DETAILTIME:
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
-            break;
-          case ALLDAY:
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name));
-            break;
-          default:
-            evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
-            break;
-        }
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
         break;
+      }
+      break;
+    case WEEK:
+      switch (optionDay) {
+      case DETAILTIME:
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date",
+                                                                                                                     date));
+        break;
+      case ALLDAY:
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ALL_DAY.replace("$name", name).replace("$date",
+                                                                                                                     date));
+        break;
+      default:
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date",
+                                                                                                                     date));
+        break;
+      }
+      break;
+    case LIST:
+      if (evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE, 5000, 0) != null) {
+        evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
+        while (!(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
+                    .getText()
+                    .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText()))) {
+          evt.click(ELEMENT_NEXT_PAGE);
+          evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_START_DETAIL_DATE_LIST_VIEW.replace("$name", name).replace("$date",
+                                                                                                                     date));
+        }
+        evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
+      } else {
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_START_DETAIL_DATE_LIST_VIEW.replace("$name", name).replace("$date",
+                                                                                                                   date));
+      }
+      break;
+    case MONTH:
+      if (evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date),
+                                   5000,
+                                   0) == null
+          && evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE_ICON.replace("$date", date),
+                                      5000,
+                                      0) != null) {
+        evt.click(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE_ICON.replace("$date", date), 2);
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE.replace("$name", name).replace("$date",
+                                                                                                                   date));
+      } else
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date));
+      break;
+    case WORKWEEK:
+      switch (optionDay) {
+      case DETAILTIME:
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DETAIL_DATE_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date",
+                                                                                                                          date));
+        break;
+      case ALLDAY:
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DETAIL_DATE_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name).replace("$date",
+                                                                                                                          date));
+
+        break;
+      default:
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DETAIL_DATE_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name).replace("$date",
+                                                                                                                          date));
+        break;
+      }
+      break;
+    default:
+      switch (optionDay) {
+      case DETAILTIME:
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        break;
+      case ALLDAY:
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name));
+        break;
+      default:
+        evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+        break;
+      }
+      break;
     }
   }
 
@@ -940,24 +938,24 @@ public class CalendarHomePage {
   public void goToRightMenuTaskEventFromAnyView(String name, selectViewOption view, selectDayOption optionDay, String date) {
     info("click right menu task/event");
     switch (view) {
-      case DAY:
-        goToRightMenuTaskEventFromDayView(name, optionDay);
-        break;
-      case WEEK:
-        goToRightMenuTaskEventFromWeekView(name, optionDay, date);
-        break;
-      case LIST:
-        goToRightMenuTaskEventFromListView(name, date);
-        break;
-      case MONTH:
-        goToRightMenuTaskEventFromMonthView(name, date);
-        break;
-      case WORKWEEK:
-        goToRightMenuTaskEventFromWorkWeekView(name, optionDay, date);
-        break;
-      default:
-        goToRightMenuTaskEventFromDayView(name, optionDay);
-        break;
+    case DAY:
+      goToRightMenuTaskEventFromDayView(name, optionDay);
+      break;
+    case WEEK:
+      goToRightMenuTaskEventFromWeekView(name, optionDay, date);
+      break;
+    case LIST:
+      goToRightMenuTaskEventFromListView(name, date);
+      break;
+    case MONTH:
+      goToRightMenuTaskEventFromMonthView(name, date);
+      break;
+    case WORKWEEK:
+      goToRightMenuTaskEventFromWorkWeekView(name, optionDay, date);
+      break;
+    default:
+      goToRightMenuTaskEventFromDayView(name, optionDay);
+      break;
     }
 
   }
@@ -1005,26 +1003,26 @@ public class CalendarHomePage {
     info("Select category from list");
     if (option != null) {
       switch (option) {
-        case ALL:
-          evt.select(ELEMENT_CATEGORY_OPTION, "All", 2);
-          break;
-        case ANNIVERSARY:
-          evt.select(ELEMENT_CATEGORY_OPTION, "Anniversary", 2);
-          break;
-        case CALL:
-          evt.select(ELEMENT_CATEGORY_OPTION, "Calls", 2);
-          break;
-        case CLIENT:
-          evt.select(ELEMENT_CATEGORY_OPTION, "Clients", 2);
-          break;
-        case HOLIDAY:
-          evt.select(ELEMENT_CATEGORY_OPTION, "Holiday", 2);
-          break;
-        case MEETING:
-          evt.select(ELEMENT_CATEGORY_OPTION, "Meeting", 2);
-          break;
-        default:
-          break;
+      case ALL:
+        evt.select(ELEMENT_CATEGORY_OPTION, "All", 2);
+        break;
+      case ANNIVERSARY:
+        evt.select(ELEMENT_CATEGORY_OPTION, "Anniversary", 2);
+        break;
+      case CALL:
+        evt.select(ELEMENT_CATEGORY_OPTION, "Calls", 2);
+        break;
+      case CLIENT:
+        evt.select(ELEMENT_CATEGORY_OPTION, "Clients", 2);
+        break;
+      case HOLIDAY:
+        evt.select(ELEMENT_CATEGORY_OPTION, "Holiday", 2);
+        break;
+      case MEETING:
+        evt.select(ELEMENT_CATEGORY_OPTION, "Meeting", 2);
+        break;
+      default:
+        break;
 
       }
     }
@@ -1037,10 +1035,8 @@ public class CalendarHomePage {
    */
   public void quickSearchCalendar(String keyword) {
     info("----Type in quick search box----");
-    evt.type(ELEMENT_QUICK_SEARCH_INPUT, keyword, true);
-    Actions action = new Actions(testBase.getExoWebDriver().getWebDriver());
-    action.sendKeys(Keys.RETURN).build().perform();
-    evt.waitForAndGetElement(ELEMENT_BUTTON_CLOSE_QUICK_SEARCH_RESULT);
+    $(ELEMENT_QUICK_SEARCH_INPUT).setValue(keyword).pressEnter();
+    $(byXpath(ELEMENT_BUTTON_CLOSE_QUICK_SEARCH_RESULT)).waitUntil(Condition.visible, Configuration.timeout);
   }
 
   /**
@@ -1050,25 +1046,23 @@ public class CalendarHomePage {
    */
   public void advanceSearchCalendar(String keyword) {
     info("----Open Advance Search window----");
-    evt.waitForAndGetElement(ELEMENT_BUTTON_OPEN_ADVANCE_SEARCH_FORM);
-    evt.click(ELEMENT_BUTTON_OPEN_ADVANCE_SEARCH_FORM);
+    $(byXpath(ELEMENT_BUTTON_OPEN_ADVANCE_SEARCH_FORM)).waitUntil(Condition.visible, Configuration.timeout);
+    $(byXpath(ELEMENT_BUTTON_OPEN_ADVANCE_SEARCH_FORM)).click();
     info("----Input keyword----");
-    evt.waitForAndGetElement(ELEMENT_INPUT_TEXT_ADVANCE_SEARCH);
-    evt.type(ELEMENT_INPUT_TEXT_ADVANCE_SEARCH, keyword, true);
-    evt.click(ELEMENT_BUTTON_SEARCH_ADVANCE_SEARCH);
+    $(byXpath(ELEMENT_INPUT_TEXT_ADVANCE_SEARCH)).waitUntil(Condition.visible, Configuration.timeout);
+    $(byXpath(ELEMENT_INPUT_TEXT_ADVANCE_SEARCH)).setValue(keyword);
+    $(byXpath(ELEMENT_BUTTON_SEARCH_ADVANCE_SEARCH)).click();
     info("----Confirm search result displayed----");
 
-    evt.waitForAndGetElement(ELEMENT_BUTTON_CLOSE_QUICK_SEARCH_RESULT);
+    $(byXpath(ELEMENT_BUTTON_CLOSE_QUICK_SEARCH_RESULT)).waitUntil(Condition.visible, Configuration.timeout);
   }
 
   /**
    * check on checkboxes of events/tasks that has different name in Month view
-   *
-<<<<<<< 22e0d6a7bd5e332e9fc007e5b11d1fcb01a14c10
-   * @param names String
-=======
-   * @param names
->>>>>>> calendar settings
+   * <<<<<<< 22e0d6a7bd5e332e9fc007e5b11d1fcb01a14c10
+   * 
+   * @param names String =======
+   * @param names >>>>>>> calendar settings
    */
   public void checkBoxEventTaskInMonthView(String[] names) {
     // goToView(selectViewOption.MONTH);
@@ -1100,8 +1094,8 @@ public class CalendarHomePage {
       for (int i = event_Start; i < number_event; i++) {
         info("Click on check box of event's number:" + i);
         evt.check(ELEMENT_EVENT_TASK_NUMBER_RECURRING_MONTH_VIEW_CHECKBOX.replace("$name", name).replace("$number",
-                Integer.toString(i)),
-                2);
+                                                                                                         Integer.toString(i)),
+                  2);
       }
     } else {
       info("Click on check box of event's number:" + number);
@@ -1111,15 +1105,13 @@ public class CalendarHomePage {
   }
 
   /**
-   * Check box on Event/task by date of Month and Week view
-   *
-<<<<<<< 22e0d6a7bd5e332e9fc007e5b11d1fcb01a14c10
+   * Check box on Event/task by date of Month and Week view <<<<<<<
+   * 22e0d6a7bd5e332e9fc007e5b11d1fcb01a14c10
+   * 
    * @param name String
-   * @param date String
-=======
+   * @param date String =======
    * @param name
-   * @param date
->>>>>>> calendar settings
+   * @param date >>>>>>> calendar settings
    */
   public void checkBoxEventTaskInMonthView(String name, String date) {
     info("Select the event/task");
@@ -1128,13 +1120,11 @@ public class CalendarHomePage {
   }
 
   /**
-   * Click on Next arrow of header panel to jump to next days/weeks/months
-   *
-<<<<<<< 22e0d6a7bd5e332e9fc007e5b11d1fcb01a14c10
-   * @param number int
-=======
-   * @param number
->>>>>>> calendar settings
+   * Click on Next arrow of header panel to jump to next days/weeks/months <<<<<<<
+   * 22e0d6a7bd5e332e9fc007e5b11d1fcb01a14c10
+   * 
+   * @param number int =======
+   * @param number >>>>>>> calendar settings
    */
   public void nextDate(int number) {
     if (number != 0) {
@@ -1148,13 +1138,11 @@ public class CalendarHomePage {
   }
 
   /**
-   * Click on Next arrow to jump to next month in Calendar mini
-   *
-<<<<<<< 22e0d6a7bd5e332e9fc007e5b11d1fcb01a14c10
-   * @param number int
-=======
-   * @param number
->>>>>>> calendar settings
+   * Click on Next arrow to jump to next month in Calendar mini <<<<<<<
+   * 22e0d6a7bd5e332e9fc007e5b11d1fcb01a14c10
+   * 
+   * @param number int =======
+   * @param number >>>>>>> calendar settings
    */
   public void nextMonth(int number) {
     if (number != 0) {
@@ -1169,12 +1157,10 @@ public class CalendarHomePage {
 
   /**
    * Click on Previous arrow of header panel to back previous days/weeks/months
-   *
-<<<<<<< 22e0d6a7bd5e332e9fc007e5b11d1fcb01a14c10
-   * @param number int
-=======
-   * @param number
->>>>>>> calendar settings
+   * <<<<<<< 22e0d6a7bd5e332e9fc007e5b11d1fcb01a14c10
+   * 
+   * @param number int =======
+   * @param number >>>>>>> calendar settings
    */
   public void previousDate(int number) {
     if (number != 0) {
@@ -1188,13 +1174,11 @@ public class CalendarHomePage {
   }
 
   /**
-   * Click on previous arrow to jump to previous month in Calendar mini
-   *
-<<<<<<< 22e0d6a7bd5e332e9fc007e5b11d1fcb01a14c10
-   * @param number int
-=======
-   * @param number
->>>>>>> calendar settings
+   * Click on previous arrow to jump to previous month in Calendar mini <<<<<<<
+   * 22e0d6a7bd5e332e9fc007e5b11d1fcb01a14c10
+   * 
+   * @param number int =======
+   * @param number >>>>>>> calendar settings
    */
   public void previousMonth(int number) {
     if (number != 0) {
