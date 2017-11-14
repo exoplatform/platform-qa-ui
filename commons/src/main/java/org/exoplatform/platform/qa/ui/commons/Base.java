@@ -20,6 +20,7 @@
  */
 package org.exoplatform.platform.qa.ui.commons;
 
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.core.context.Smoke;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,7 +37,7 @@ public class Base extends TestBase {
 
   @BeforeAll
   public static void setup() {
-
+    Configuration.pageLoadStrategy="normal";
 
   }
 
