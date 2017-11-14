@@ -40,28 +40,25 @@ public class LabelManagementTestIT extends Base {
 
     @Test
     public void test01_Add_Label() {
-        String label = "label" + getRandomNumber();
+        String label = "label Add_Label" ;
         homePagePlatform.goToTaskPage();
         info("Add label");
         labelsManagement.addLabel(label);
         $(byText(label)).should(Condition.exist);
-        info("delete label");
-        labelsManagement.deleteLabel(label);
+
     }
 
     @Test
     public void test04_addTaskInLabel() {
-        String task = "task" + getRandomNumber();
-        String label = "label" + getRandomNumber();
+        String task = "task addTaskInLabel" ;
+        String label = "label addTaskInLabel" ;
         info("add task in label");
         homePagePlatform.goToTaskPage();
         labelsManagement.addLabel(label);
         $(byText(label)).click();
         tasksManagement.addTask(task);
         ELEMENT_TASKS_LIST.find(byText(task)).parent().find(byText(label)).should(Condition.exist);
-        homePagePlatform.goToTaskPage();
-        tasksManagement.deleteTask(task);
-        labelsManagement.deleteLabel(label);
+
 
     }
 }

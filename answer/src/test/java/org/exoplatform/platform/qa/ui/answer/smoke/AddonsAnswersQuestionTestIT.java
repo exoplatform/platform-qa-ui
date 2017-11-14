@@ -24,13 +24,13 @@ import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 @Tag("answer")
 public class AddonsAnswersQuestionTestIT extends Base {
 
-  HomePagePlatform         homePagePlatform;
+  HomePagePlatform homePagePlatform;
 
-  QuestionManagement       questionManagement;
+  QuestionManagement questionManagement;
 
   AnswerCategoryManagement answerCategoryManagement;
 
-  AnswerHomePage           answerHomePage;
+  AnswerHomePage answerHomePage;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -46,8 +46,8 @@ public class AddonsAnswersQuestionTestIT extends Base {
    */
   @Test
   public void test02_AddAQuestion() {
-    String question = "question" + getRandomNumber();
-    String content = "content" + getRandomNumber();
+    String question = "question AddAQuestion" ;
+    String content = "content AddAQuestion" ;
 
     info("Test 2: Add a question");
     /*
@@ -63,50 +63,6 @@ public class AddonsAnswersQuestionTestIT extends Base {
     $(ELEMENT_OK_BUTTON_LINK).click();
     $(byText(question)).should(Condition.exist);
 
-    info("Test 4: Delete a question");
-    /*
-     * Step number: 2 Step Name: Delete a question Step Description: - Right click
-     * on a question and select Delete Input Data: Expected Outcome: - Question is
-     * deleted and disappear in Answers page
-     */
-    questionManagement.deleteQuestion(question);
-  }
-
-  /**
-   * . Case ID:116829. Test Case Name: Edit a question.
-   */
-
-
-  /**
-   * Case ID:116830. Test Case Name: Delete a question. Pre-Condition:
-   * Post-Condition:
-   */
-  @Test
-  public void test04_DeleteAQuestion() {
-    String question = "question" + getRandomNumber();
-    String content = "content" + getRandomNumber();
-
-    info("Test 2: Add a question");
-    /*
-     * Step Number: 1 Step Name: Add a question Step Description: - Select 1
-     * category and click on Submit question - Put values - Save Input Data:
-     * Expected Outcome: - Question is added new and shown in selected category
-     */
-    homePagePlatform.goToAnswer();
-    questionManagement.goToSubmitQuestion();
-    questionManagement.inputDataToQuestionForm(question, content, null, "");
-    // click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
-    $(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
-    $(ELEMENT_OK_BUTTON_LINK).click();
-    $(byText(question)).should(Condition.exist);
-
-    info("Test 4: Delete a question");
-    /*
-     * Step number: 2 Step Name: Delete a question Step Description: - Right click
-     * on a question and select Delete Input Data: Expected Outcome: - Question is
-     * deleted and disappear in Answers page
-     */
-    questionManagement.deleteQuestion(question);
   }
 
 }

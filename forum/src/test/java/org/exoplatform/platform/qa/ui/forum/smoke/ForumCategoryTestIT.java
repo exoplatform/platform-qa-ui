@@ -44,7 +44,7 @@ public class ForumCategoryTestIT extends Base {
   public void test02_AddACategory() {
     info("Test 2: Add a category");
 
-    String nameCat = "nameCat" + getRandomNumber();
+    String nameCat = "nameCat AddACategory" ;
 
     /*
      * Step Number: 1 Step Name: Add a category Step Description: - Go to Forum page
@@ -56,12 +56,6 @@ public class ForumCategoryTestIT extends Base {
     info("Add a category");
     forumCategoryManagement.addCategorySimple(nameCat, "", nameCat);
 
-    ;
-
-    info("Test 04: Delete a category");
-    info("delete category");
-    forumHomePage.goToHomeCategory();
-    forumCategoryManagement.deleteCategory(nameCat);
   }
 
 }

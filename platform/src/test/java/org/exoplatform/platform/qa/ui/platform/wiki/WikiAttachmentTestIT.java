@@ -88,9 +88,9 @@ public class WikiAttachmentTestIT extends Base {
   @Test
   public void test01_UploadDownloadDeleteAttachment() {
     info("Test 1: Upload Attachment");
-    String rand = getRandomNumber();
-    String title = "title" + rand;
-    String content = "content" + rand;
+
+    String title = "title UploadDownloadDeleteAttachment" ;
+    String content = "content UploadDownloadDeleteAttachment";
 
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddBlankPage();
@@ -105,11 +105,5 @@ public class WikiAttachmentTestIT extends Base {
     refresh();
     click(ELEMENT_PAGE_DOWNLOADATTACHFILE);
 
-    click(ELEMENT_PAGE_DELETEATTACHFILE);
-    waitForElementNotPresent(ELEMENT_PAGE_DOWNLOADATTACHFILE);
-
-    info("Delete the page");
-    homePagePlatform.goToWiki();
-    wikiHomePage.deleteWiki(title);
   }
 }

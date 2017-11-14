@@ -70,10 +70,10 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
   @Test
   public void test07_AddAdoptionApplicationToolbar() {
     info("Test 02: Remove application of space's toolbar");
-    String space1 = "space1" + getRandomNumber();
-    String app = "Forum Statistics";
+    String space1 = "space1 AddAdoptionApplicationToolbar" ;
+    String app = "Forum Statistics AddAdoptionApplicationToolbar";
     info("app:" + app);
-    String category = "Adoption";
+    String category = "Adoption AddAdoptionApplicationToolbar";
     info("cate:" + category);
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1);
@@ -86,18 +86,16 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     info("Verify that Application is added to space");
     $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
     ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byText("ForumsStatistic")).should(Condition.exist);
-    info("Delete the space");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space1, false);
+
   }
 
   @Test
   public void test08_AddCollaborationApplicationToolbar() {
     info("Test 02: Remove application of space's toolbar");
-    String space1 = "space1" + getRandomNumber();
-    String app = "Answers";
+    String space1 = "space1 AddCollaborationApplicationToolbar";
+    String app = "Answers AddCollaborationApplicationToolbar";
     info("app:" + app);
-    String category = "Collaboration";
+    String category = "Collaboration AddCollaborationApplicationToolbar";
     info("cate:" + category);
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1);
@@ -109,18 +107,16 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
 
     info("Verify that Application is added to space");
     ELEMENT_SPACE_MENU_TAB.find(byText("Answer")).should(Condition.exist);
-    info("Delete the space");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space1, false);
+
   }
 
   @Test
   public void test09_AddComponentsApplicationToolbar() {
     info("Test 02: Remove application of space's toolbar");
-    String space1 = "space1" + getRandomNumber();
-    String app = "Blog Articles";
+    String space1 = "space1 AddComponentsApplicationToolbar" ;
+    String app = "Blog Articles AddComponentsApplicationToolbar";
     info("app:" + app);
-    String category = "Components";
+    String category = "Components AddComponentsApplicationToolbar";
     info("cate:" + category);
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1);
@@ -132,18 +128,16 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     info("Verify that Application is added to space");
     $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
     ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("BlogArticlesPortlet")).should(Condition.exist);
-    info("Delete the space");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space1, false);
+
   }
 
   @Test
   public void test10_AddToolsApplicationToolbar() {
     info("Test 02: Remove application of space's toolbar");
-    String space1 = "space1" + getRandomNumber();
-    String app = "Bookmarks";
+    String space1 = "space1 AddToolsApplicationToolbar" ;
+    String app = "Bookmarks AddToolsApplicationToolbar" ;
     info("app:" + app);
-    String category = "Tools";
+    String category = "Tools AddToolsApplicationToolbar";
     info("cate:" + category);
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1);
@@ -155,17 +149,15 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     info("Verify that Application is added to space");
     $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
     ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("Bookmark")).should(Condition.exist);
-    info("Delete the space");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space1, false);
+
   }
 
   @Test
   public void test11_AddToolsApplicationToolbar() {
     info("Test 02: Remove application of space's toolbar");
-    String space1 = "space1" + getRandomNumber();
-    String app = "Google Map";
-    String category = "Web";
+    String space1 = "space1 AddToolsApplicationToolbar";
+    String app = "Google Map AddToolsApplicationToolbar";
+    String category = "Web AddToolsApplicationToolbar";
     info("cate:" + category);
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1);
@@ -177,18 +169,16 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     info("Verify that Application is added to space");
     $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
     ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("GoogleMapPortlet")).should(Condition.exist);
-    info("Delete the space");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space1, false);
+
   }
 
   @Test
   public void test12_AddocialApplicationToolbar() {
     info("Test 02: Remove application of space's toolbar");
-    String space1 = "space1" + getRandomNumber();
-    String app = "Friend Suggestions";
+    String space1 = "space1 AddocialApplicationToolbar";
+    String app = "Friend Suggestions AddocialApplicationToolbar";
     info("app:" + app);
-    String category = "social";
+    String category = "social AddocialApplicationToolbar";
     info("cate:" + category);
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1);
@@ -200,21 +190,19 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     info("Verify that Application is added to space");
     $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
     ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("FriendSuggestion")).should(Condition.exist);
-    info("Delete the space");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space1, false);
+
   }
 
   @Test
   public void test13_AddManyApplicationToolbar() {
     info("Test 02: Remove application of space's toolbar");
-    String space1 = "space1" + getRandomNumber();
-    String app = "Friend Suggestions";
-    String category = "social";
-    String app1 = "Google Map";
-    String category1 = "Web";
-    String app2 = "Bookmarks";
-    String category2 = "Tools";
+    String space1 = "space1 AddManyApplicationToolbar" ;
+    String app = "Friend Suggestions AddManyApplicationToolbar";
+    String category = "social AddManyApplicationToolbar";
+    String app1 = "Google Map AddManyApplicationToolbar";
+    String category1 = "Web AddManyApplicationToolbar";
+    String app2 = "Bookmarks AddManyApplicationToolbar";
+    String category2 = "Tools AddManyApplicationToolbar";
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1);
 
@@ -229,9 +217,7 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("FriendSuggestion")).should(Condition.exist);
     ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("GoogleMapPortlet")).should(Condition.exist);
     ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("Bookmark")).should(Condition.exist);
-    info("Delete the space");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space1, false);
+
   }
 
 }

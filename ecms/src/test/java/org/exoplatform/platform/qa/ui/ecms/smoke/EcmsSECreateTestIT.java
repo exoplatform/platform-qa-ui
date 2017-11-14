@@ -1,6 +1,5 @@
 package org.exoplatform.platform.qa.ui.ecms.smoke;
 
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -8,7 +7,6 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.CreateNewDocument;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.SiteExplorerHome;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
@@ -36,39 +34,6 @@ public class EcmsSECreateTestIT extends Base {
   }
 
   /**
-   * <li>Case ID:116641.</li>
-   * <li>Test Case Name: Create File document.</li>
-   */
-  @Test
-  @BugInPLF("NO ID")
-  public void test02CreateFileDocument() {
-    info("Test 2: Delete File document");
-    info("Create data test");
-    String name = "name" + getRandomNumber();
-    String content = "content" + getRandomNumber();
-    info("Finished creating data test");
-
-    /*
-     * Step Number: 1 Step Name: - Step Description: Step 1: Edit File document
-     * Input Data: - Create a File - Click Edit on action bar, perform to edit it -
-     * Click Save & Close Expected Outcome: File is Edited successfully
-     */
-    info("Create a content");
-    navigationToolbar.goToSiteExplorer();
-    siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.goToAddNewContent();
-    info("Create new file document");
-    createNewDoc.createNewDoc(CreateNewDocument.selectDocumentType.FILE);
-    createNewDoc.addNewFile(name, content);
-    createNewDoc.saveAndClose();
-    info("Delete file document");
-    navigationToolbar.goToSiteExplorer();
-    siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.deleteData(name);
-  }
-
-
-  /**
    * <li>Case ID:116573.</li>
    * <li>Test Case Name: Create Web Content document.</li>
    */
@@ -76,9 +41,9 @@ public class EcmsSECreateTestIT extends Base {
   public void test03_CreateWebContentDocument() {
     info("Test 3: Create Web Content document");
     info("Create data test");
-    String name = "name" + getRandomNumber();
-    String content = "content" + getRandomNumber();
-    String content2 = "content2" + getRandomNumber();
+    String name = "name CreateWebContentDocument" ;
+    String content = "content CreateWebContentDocument" ;
+    String content2 = "content2 CreateWebContentDocument" ;
     info("Finished creating data test");
     /*
      * Step Number: 1 Step Name: Step 1: Edit Web Content document Step Description:
@@ -92,10 +57,6 @@ public class EcmsSECreateTestIT extends Base {
     createNewDoc.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
     createNewDoc.addNewWebContent(name, content);
     createNewDoc.saveAndClose();
-    info("Delete file document");
-    navigationToolbar.goToSiteExplorer();
-    siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.deleteData(name);
-  }
 
+  }
 }

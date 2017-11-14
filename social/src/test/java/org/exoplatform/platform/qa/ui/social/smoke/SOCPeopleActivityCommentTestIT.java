@@ -76,7 +76,7 @@ public class SOCPeopleActivityCommentTestIT extends Base {
      * list.User who is in your contact, can view your active on his/her activity
      * list
      */
-    String username1 = "usernamea" + getRandomString();
+    String username1 = "usernamecommentactivity" ;
     String email1 = username1 + "@gmail.com";
     String password = "123456";
     info("Add new user");
@@ -84,7 +84,7 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     addUsers.addUser(username1, password, email1, username1, username1);
     manageLogInOut.signIn(username1, password);
 
-    String activity1 = "activity1" + getRandomNumber();
+    String activity1 = "activity1 Comment on your activity" ;
     activityStream.addActivity(activity1, "");
 
     /*
@@ -101,7 +101,7 @@ public class SOCPeopleActivityCommentTestIT extends Base {
      * of user comment - Name of user comment - Content of comment - Time comment is
      * posted
      */
-    String comment = "comment" + getRandomNumber();
+    String comment = "comment Comment on your activity" ;
     // get the id of webContent created
     String id = $(byClassName("heading")).parent().getAttribute("id").split("ActivityContextBox")[1];
     // click on comment icon
@@ -114,9 +114,8 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter();
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
-    manageLogInOut.signIn("root", "gtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
+    manageLogInOut.signOut();
+
   }
 
   /**
@@ -131,9 +130,9 @@ public class SOCPeopleActivityCommentTestIT extends Base {
   // https://jira.exoplatform.org/browse/SOC-5738
   public void test02_CommentOnYourFriendsActivity() {
     /* Create data test */
-    String username1 = "usernamea" + getRandomString();
+    String username1 = "usernamea CommentOnYourFriendsActivity" + getRandomString();
     String email1 = username1 + "@gmail.com";
-    String username2 = "usernameab" + getRandomString();
+    String username2 = "usernameab CommentOnYourFriendsActivity" + getRandomString();
     String email2 = username2 + "@gmail.com";
     String password = "123456";
     info("Add new user");
@@ -149,7 +148,7 @@ public class SOCPeopleActivityCommentTestIT extends Base {
      * activities Expected Outcome: Activity is added successfully
      */
     navigationToolbar.goToMyActivities();
-    String activity1 = "activity1" + getRandomNumber();
+    String activity1 = "activity1 CommentOnYourFriendsActivity" ;
     activityStream.addActivity(activity1, "");
 
     /*
@@ -196,7 +195,7 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     // click on the username to join his profile
     $(byClassName("uiTabNormal")).find(byClassName("limitText")).click();
     userPageBase.goToActivityTab();
-    String comment = "comment" + getRandomNumber();
+    String comment = "comment CommentOnYourFriendsActivity" ;
     // get the id of webContent created
     String id = $(byClassName("heading")).parent().getAttribute("id").split("ActivityContextBox")[1];
     // click on comment icon
@@ -209,9 +208,7 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
     manageLogInOut.signIn("root", "gtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
+    manageLogInOut.signOut();
 
   }
 }

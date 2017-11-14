@@ -119,10 +119,10 @@ public class ForumAdministrationTestIT extends Base {
   public void test02_AddBBCode() {
     info("Test 2: Add BB code");
     info("Create data test");
-    String tag = "tag" + getRandomNumber();
+    String tag = "tag Add BB code" ;
     String replacement = "<b>{param}</b>.";
-    String description = "<b>" + "tag" + getRandomNumber() + "</b>.";
-    String example = "<b>" + "tag" + getRandomNumber() + "</b>.";
+    String description = "<b>" + "tag Add BB code" + "</b>.";
+    String example = "<b>" + "tag Add BB code" + "</b>.";
     info("Finished creating data test");
     info("Go to Forum portlet");
     homePagePlatform.goToForum();
@@ -133,9 +133,7 @@ public class ForumAdministrationTestIT extends Base {
     info("Edit a BBCode");
     forumHomePage.editBBCode(tag, replacement, description, example, false);
     info("BBcode is edited with changes successfully");
-    info("Test 04: Delete BB code");
-    info("Delete BBcode");
-    forumHomePage.deleteBBcode(tag);
+
   }
 
 }

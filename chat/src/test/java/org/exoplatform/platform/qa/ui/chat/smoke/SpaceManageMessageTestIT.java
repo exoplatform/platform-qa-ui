@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.chat.smoke;
 
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -64,11 +65,11 @@ public class SpaceManageMessageTestIT extends Base {
 
   @Test
   public void test01_SendMessageOnSpaceChat() {
-    String space = "space" + getRandomNumber();
-    String usernamea = "usernamea" + getRandomString();
+    String space = "spaceChat" ;
+    String usernamea = "sendmsgnchat" ;
     String password = "123456";
     String emaila = usernamea + "@test.com";
-    String message = "message" + getRandomNumber();
+    String message = "messageOnSpaceChat" ;
     info("Create new user");
     navigationToolbar.goToAddUser();
     userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
@@ -93,6 +94,9 @@ public class SpaceManageMessageTestIT extends Base {
     homePagePlatform.goToChat();
     switchTo().window(1);
     info("send message on space");
+    if($(byText(space)).is(Condition.not(Condition.visible))){
+      $$(byClassName("uiIconChatClock")).get(2).click();
+    }
     chatManagement.sendMessageInRoomOrSpace(space, message);
     switchTo().window(0);
     manageLogInOut.signIn(usernamea, password);
@@ -103,21 +107,17 @@ public class SpaceManageMessageTestIT extends Base {
     ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.exist);
     switchTo().window(0);
     manageLogInOut.signIn(PLFData.username, PLFData.password);
-    info("delete data");
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
-    navigationToolbar.goToManageCommunity();
-    userandgroupmanagement.deleteUser(usernamea);
+
   }
 
 
   @Test
   public void test03_sendMessageAndItsAnswerFromOtherUser() {
-    String usernamea = "usernamea" + getRandomString();
+    String usernamea = "usernameanswerfromotheruser" ;
     String password = "123456";
     String emaila = usernamea + getRandomNumber() + "@test.com";
-    String message = "message" + getRandomNumber();
-    String message2 = "messagee" + getRandomNumber();
+    String message = "message sendMessageAndItsAnswerFromOtherUser" ;
+    String message2 = "message2 sendMessageAndItsAnswerFromOtherUser" ;
     navigationToolbar.goToAddUser();
     info("Create new user");
     userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
@@ -150,9 +150,8 @@ public class SpaceManageMessageTestIT extends Base {
     info("root check the answer");
     $(byText(message2)).should(Condition.exist);
     switchTo().window(0);
-    info("delete data");
-    navigationToolbar.goToManageCommunity();
-    userandgroupmanagement.deleteUser(usernamea);
+    manageLogInOut.signOut();
+
 
   }
 }

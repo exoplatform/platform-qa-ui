@@ -70,7 +70,7 @@ public class EcmsWCMTestIT extends Base {
   @Test
   public void test03_CreateSingleContentViewerPage() {
     info("Test 3: Create Single Content Viewer page");
-    String content = "content" + getRandomNumber();
+    String content = "SingleContent" ;
 
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet", "Site Management");
@@ -97,13 +97,6 @@ public class EcmsWCMTestIT extends Base {
     $(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
     $(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
     pageCreationWizard.addContentDetail("General Drives/Sites Management/intranet", content);
-    info("Delete Data test");
-    info("Delete created file");
-    navigationToolbar.goToSiteExplorer();
-    siteExplorerHome.deleteData(content, true);
-    info("Delete created page");
-    navigationToolbar.goToPotalPages();
-    paMang.deletePage(content, "group");
 
   }
 

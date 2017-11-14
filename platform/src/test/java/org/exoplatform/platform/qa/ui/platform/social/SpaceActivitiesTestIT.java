@@ -60,50 +60,47 @@ public class SpaceActivitiesTestIT extends Base {
 
   @Test
   public void test01_AddNewYourActivityOnSpace() {
-    String space = "space" + getRandomNumber();
+    String space = "space SpaceActivity" ;
 
     info("Create a space");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 60000);
     homePagePlatform.goToSpecificSpace(space);
-    String activity1 = "activity1" + getRandomNumber();
+    String activity1 = "activity1 AddNewYourActivityOnSpace" ;
     activityStream.addActivity(activity1, "");
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
 
   }
 
   @Test
   public void test02_likeYourActivityOnSpace() {
-    String space = "space" + getRandomNumber();
+    String space = "space likeYourActivityOnSpace" ;
 
     info("Create a space");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 60000);
     homePagePlatform.goToSpecificSpace(space);
-    String activity1 = "activity1" + getRandomNumber();
+    String activity1 = "activity1 likeYourActivityOnSpace" ;
     activityStream.addActivity(activity1, "");
     String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];
     // click on the like button of the activity
     $(byXpath(ELEMENT_LIKE_BUTTON.replace("{id}", id))).click();
     $(byXpath(ELEMENT_UNLIKE_BUTTON.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_WHO_LIKED_POPUP.waitUntil(Condition.appears, Configuration.timeout);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
+
 
   }
 
    @Test
   public void test04_AddCommentOnYourActivityOnSpace() {
-    String space = "space" + getRandomNumber();
+    String space = "space AddCommentActivity";
 
     info("Create a space");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 60000);
     homePagePlatform.goToSpecificSpace(space);
-    String activity1 = "activity1" + getRandomNumber();
+    String activity1 = "activity1 AddCommentOnYourActivityOnSpace";
     activityStream.addActivity(activity1, "");
-    String comment = "comment" + getRandomNumber();
+    String comment = "comment AddCommentOnYourActivityOnSpace" ;
     String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1]; // click
     // on
     // comment
@@ -115,8 +112,7 @@ public class SpaceActivitiesTestIT extends Base {
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter();
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears, Configuration.timeout);
 
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
+
 
   }
 

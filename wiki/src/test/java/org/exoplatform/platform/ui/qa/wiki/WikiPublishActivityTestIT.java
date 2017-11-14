@@ -56,12 +56,12 @@ public class WikiPublishActivityTestIT extends Base {
   @Test
   public void test01_CreateNewWikiPage() {
     info("Test 01: Create new wiki page");
-    String title = "title" + getRandomNumber();
-    String line1 = "line1" + getRandomNumber();
-    String line2 = "line2" + getRandomNumber();
-    String line3 = "line3" + getRandomNumber();
-    String line4 = "line4" + getRandomNumber();
-    String line5 = "line5" + getRandomNumber();
+    String title = "title Create new wiki page" ;
+    String line1 = "line1 Create new wiki page" ;
+    String line2 = "line2 Create new wiki page" ;
+    String line3 = "line3 Create new wiki page" ;
+    String line4 = "line4 Create new wiki page" ;
+    String line5 = "line5 Create new wiki page" ;
     String content = line1 + "</br>" + line2 + "</br>" + line3 + "</br>" + line4 + "</br>" + line5;
 
     /*
@@ -87,9 +87,7 @@ public class WikiPublishActivityTestIT extends Base {
     homePagePlatform.goToHomePage();
     activityStream.checkActivityAddWikiPage(title, content, null);
 
-    info("Delete the page");
-    homePagePlatform.goToWiki();
-    wikiHomePage.deleteWiki(title);
+
   }
 
 }

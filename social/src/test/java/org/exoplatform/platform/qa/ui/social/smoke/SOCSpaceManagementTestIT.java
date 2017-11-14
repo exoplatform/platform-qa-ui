@@ -53,10 +53,10 @@ public class SOCSpaceManagementTestIT extends Base {
   @Test
   public void test04_CreateNewSpace() {
     info("Test 04: Create a new Space");
-    String space = "space" + getRandomNumber();
-    String username1 = "usernamea" + getRandomString();
+    String space = "space CreateNewSpace" ;
+    String username1 = "usernameacreatenewspace" ;
     String email1 = username1 + "@gmail.com";
-    String username2 = "usernameb" + getRandomString();
+    String username2 = "usernamebcreatenewspace" ;
     String email2 = username2 + "@gmail.com";
     String password = "123456";
 
@@ -85,14 +85,7 @@ public class SOCSpaceManagementTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.searchSpace(space, "");
     $(byClassName("tab-content")).find(byText(space)).waitUntil(Condition.appears, Configuration.timeout);
-    manageLogInOut.signIn(username1, password);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.searchSpace(space, "");
-    spaceManagement.deleteSpace(space, false);
-    manageLogInOut.signIn("root", "gtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
+    manageLogInOut.signOut();
   }
 
 }

@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -38,33 +39,28 @@ public class ProjectManagementTestIT extends Base {
 
     @Test
     public void test01_Add_Project() {
-        String title = "title" + getRandomNumber();
+        String title = "title Add_Project" ;
         ;
         homePagePlatform.goToTaskPage();
         info("add project");
         projectsManagement.addProject(title, "", false);
         info("verify project added");
         $(byText(title)).should(Condition.exist);
-        info("delete project");
-        projectsManagement.deleteProject(title);
-        info("verify project deleted");
-        $(byText(title)).waitUntil(Condition.disappears, Configuration.timeout);
 
     }
 
 
     @Test
     public void test04_Add_TaskInProject() {
-        String title = "title" + getRandomNumber();
-        String task = "task" + getRandomNumber();
+        String title = "title Add_TaskInProject";
+        String task = "task Add_TaskInProject" + getRandomNumber();
         homePagePlatform.goToTaskPage();
         projectsManagement.addProject(title, "", false);
-        $(byText(title)).click();
+        $(byText(title)).scrollTo().click();
+        executeJavaScript("window.scrollBy(0,-1550)");
         tasksManagement.addTask(task);
         $(byText(task)).should(Condition.exist);
-        info("delete task");
-        tasksManagement.deleteTask(task);
-        projectsManagement.deleteProject(title);
+
 
     }
 

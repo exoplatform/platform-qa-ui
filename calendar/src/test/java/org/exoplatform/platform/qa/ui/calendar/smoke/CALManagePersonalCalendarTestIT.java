@@ -57,7 +57,7 @@ public class CALManagePersonalCalendarTestIT extends Base {
      * listed in personal calendar box
      */
     info("Create a new calendar");
-    String calendar = "calendar" + getRandomNumber();
+    String calendar = "calendar AddNewCalendarWithValidInformation" ;
     homePagePlatform.goToCalendarPage();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.WEEK);
     calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.ADDCAL);
@@ -65,14 +65,7 @@ public class CALManagePersonalCalendarTestIT extends Base {
     calendarManagement.saveAddCalendar();
     homePagePlatform.goToCalendarPage();
     $(byText(calendar)).waitUntil(Condition.appears, 10000);
-    calendarManagement.deleteCalendar(calendar, true);
   }
 
-  /**
-   * <li>Case ID:116450.</li>
-   * <li>Test Case Name: Edit a personal calendar with valid value.</li>
-   * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
-   */
 
 }

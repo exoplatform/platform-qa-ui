@@ -55,11 +55,11 @@ public class RoomBaseActionTestIT extends Base {
 
   @Test
   public void Test01_AddRoomWithSeveralUsers() {
-    String usernamea = "usernamea" + getRandomString();
-    String usernameb = "usernameb" + getRandomString();
-    String usernamec = "usernamec" + getRandomString();
+    String usernamea = "usernameaaddroom" ;
+    String usernameb = "usernamebaddroom" ;
+    String usernamec = "usernamecaddroom" ;
     String password = "123456";
-    String room = "room" + getRandomNumber();
+    String room = "room AddRoomWithSeveralUsers" ;
 
     String emaila = usernamea + getRandomNumber() + "@test.com";
     String emailb = usernameb + getRandomNumber() + "@test.com";
@@ -98,29 +98,20 @@ public class RoomBaseActionTestIT extends Base {
     homePagePlatform.goToChat();
     switchTo().window("Chat");
     $(byText(room)).should(Condition.exist);
-    info("delete data");
     switchTo().window("Home Page");
-    manageLogInOut.signIn(PLFData.username, PLFData.password);
-    homePagePlatform.goToChat();
-    switchTo().window("Chat");
-    roomManagement.deleteRomm(room);
+    manageLogInOut.signOut();
 
-    switchTo().window("Home Page");
-    navigationToolbar.goToManageCommunity();
-    userandgroupmanagement.deleteUser(usernamea);
-    userandgroupmanagement.deleteUser(usernameb);
-    userandgroupmanagement.deleteUser(usernamec);
 
   }
 
 
   @Test
   public void test03_SendMessageInAROOM() {
-    String usernamea = "usernamea" + getRandomString();
+    String usernamea = "usernameasendmessage" ;
     String password = "123456";
     String emaila = usernamea + "@test.com";
-    String room = "room" + getRandomNumber();
-    String message = "message" + getRandomNumber();
+    String room = "room SendMessageInAROOM";
+    String message = "message SendMessageInAROOM" ;
     navigationToolbar.goToAddUser();
     info("Create new user");
     userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
@@ -141,14 +132,8 @@ public class RoomBaseActionTestIT extends Base {
     info("verify message");
     ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.exist);
     switchTo().window("Home Page");
-    manageLogInOut.signIn(PLFData.username, PLFData.password);
-    homePagePlatform.goToChat();
-    switchTo().window("Chat");
-    roomManagement.deleteRomm(room);
-    switchTo().window("Home Page");
-    navigationToolbar.goToManageCommunity();
-    userandgroupmanagement.deleteUser(usernamea);
-  }
+    manageLogInOut.signOut();
 
+  }
 
 }

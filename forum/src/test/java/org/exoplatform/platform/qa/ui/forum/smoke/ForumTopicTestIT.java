@@ -70,10 +70,10 @@ public class ForumTopicTestIT extends Base {
   @Test
   public void test02_RateTopic() {
     info("Test 2: Rate topic");
-    String name = "Category" + getRandomNumber();
-    String name2 = "Forum" + getRandomNumber();
-    String desc = "Description" + getRandomNumber();
-    String topic = "Topic" + getRandomNumber();
+    String name = "Category RateTopic" ;
+    String name2 = "Forum RateTopic" ;
+    String desc = "Description RateTopic" ;
+    String topic = "Topic RateTopic";
 
     /*
      * Step Number: 1 Step Name: - Step Description: Step 1: Rate Topic Input Data:
@@ -92,9 +92,7 @@ public class ForumTopicTestIT extends Base {
     info("Rate the topic");
     forumHomePage.goToTopic(topic);
     forumTopicManagement.rateTopic(name2);
-    info("Delete data");
-    forumHomePage.goToHomeCategory();
-    forumCategoryManagement.deleteCategory(name);
+
   }
 
   /**
@@ -112,10 +110,10 @@ public class ForumTopicTestIT extends Base {
   @Test
   public void test03_TagForTopic() {
     info("Test 3: Tag for topic");
-    String name = "Category" + getRandomNumber();
-    String name2 = "Forum" + getRandomNumber();
-    String desc = "Description" + getRandomNumber();
-    String topic = "Topic" + getRandomNumber();
+    String name = "Category TagForTopic";
+    String name2 = "Forum TagForTopic" ;
+    String desc = "Description TagForTopic" ;
+    String topic = "Topic TagForTopic" ;
 
     /*
      * Step Number: 1 Step Name: - Step Description: Step 1: Manage tag on Topic
@@ -136,11 +134,7 @@ public class ForumTopicTestIT extends Base {
     forumHomePage.goToTopic(topic);
     info("Add and verify a tag");
     forumTopicManagement.addATag(name);
-    info("Delete the tag");
-    $(ELEMENT_ACTIONBAR_TOPIC_TAGDELETE).click();
-    info("Delete data");
-    forumHomePage.goToHomeCategory();
-    forumCategoryManagement.deleteCategory(name);
+
   }
 
 
@@ -153,14 +147,14 @@ public class ForumTopicTestIT extends Base {
   @Test
   public void test05_AddANewPoll() {
     info("Test 5: Add a new poll");
-    String name = "Category" + getRandomNumber();
-    String name2 = "Forum" + getRandomNumber();
-    String name3 = "Poll" + getRandomNumber();
-    String name4 = "Poll" + getRandomNumber();
-    String name5 = "Poll" + getRandomNumber();
-    String name6 = "Poll" + getRandomNumber();
-    String desc = "Description" + getRandomNumber();
-    String topic = "Topic" + getRandomNumber();
+    String name = "Category AddANewPoll" ;
+    String name2 = "Forum AddANewPoll" ;
+    String name3 = "Poll AddANewPoll" ;
+    String name4 = "Poll AddANewPoll" ;
+    String name5 = "Poll AddANewPoll" ;
+    String name6 = "Poll AddANewPoll" ;
+    String desc = "Description AddANewPoll";
+    String topic = "Topic AddANewPoll" ;
 
     info("Open forum portlet");
     homePagePlatform.goToForum();
@@ -175,28 +169,8 @@ public class ForumTopicTestIT extends Base {
     forumHomePage.goToTopic(topic);
     forumTopicManagement.addPoll(name3, name3, name4);
     $(ELEMENT_FORUM_POLL_GRID).should(Condition.exist);
-    info("delete poll");
-    forumTopicManagement.deletePoll();
-    info("Delete data");
-    forumHomePage.goToHomeCategory();
-    forumCategoryManagement.deleteCategory(name);
+
   }
-
-
-  /**
-   * <li>Case ID:116762.</li>
-   * <li>Test Case Name: Lock/ Unlock a topic.</li>
-   * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
-   */
-
-
-  /**
-   * <li>Case ID:116763.</li>
-   * <li>Test Case Name: Open/ Close a topic.</li>
-   * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
-   */
 
   /**
    * <li>Case ID:116764.</li>
@@ -212,10 +186,10 @@ public class ForumTopicTestIT extends Base {
   @Tag("smoke")
   public void test09_CreateNewTopic() {
     info("Test 9: Create new Topic");
-    String name = "name" + getRandomNumber();
-    String name2 = "name2" + getRandomNumber();
-    String desc = "desc" + getRandomNumber();
-    String topic = "topic" + getRandomNumber();
+    String name = "name CreateNewTopic" ;
+    String name2 = "name2 CreateNewTopic";
+    String desc = "desc CreateNewTopic" ;
+    String topic = "topic CreateNewTopic" ;
     /*
      * Step Number: 1 Step Name: - Create new category Step Description: - Login and
      * goto Forum application - Click [Add Category] - Fill the information and
@@ -242,8 +216,6 @@ public class ForumTopicTestIT extends Base {
     forumTopicManagement.startTopic(topic, topic, "", "");
     forumHomePage.goToTopic(topic);
     $(byText(name2)).waitUntil(Condition.appears, Configuration.timeout);
-    info("Delete data");
-    forumHomePage.goToHomeCategory();
-    forumCategoryManagement.deleteCategory(name);
+
   }
 }

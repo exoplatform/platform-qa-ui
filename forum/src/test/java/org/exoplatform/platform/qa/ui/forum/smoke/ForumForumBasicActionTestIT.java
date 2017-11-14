@@ -58,8 +58,8 @@ public class ForumForumBasicActionTestIT extends Base {
 
   public void test01_AddForum() {
     info("test01: Add Forum");
-    String nameCat = "category-" + getRandomNumber();
-    String nameForum = "forum-" + getRandomNumber();
+    String nameCat = "category-AddForum" ;
+    String nameForum = "forum-AddForum" ;
 
     info("go to Forum home page");
     homePagePlatform.goToForum();
@@ -70,34 +70,6 @@ public class ForumForumBasicActionTestIT extends Base {
     info("Verify that the forum is shown successfully");
     $(new WithText(nameForum)).should(Condition.exist);
 
-    info("Delete category");
-    forumHomePage.goToHomeCategory();
-    forumCategoryManagement.deleteCategory(nameCat);
   }
 
-
-  /**
-   * CaseID: 116736 Case_name: Edid a forum Steps: 1. Prepare data: create a
-   * caterory 2. Add a forum: - Click on Add forum icon - Put values - Click Save
-   * Expected: Forum is added successfully.
-   */
-  @Test
-  public void test03_DeleteForum() {
-    info("test03: Delete Forum");
-    String nameCat = "category-" + getRandomNumber();
-    String nameForum = "forum-" + getRandomNumber();
-
-    info("go to Forum home page");
-    homePagePlatform.goToForum();
-    info("Add a category");
-    forumCategoryManagement.addCategorySimple(nameCat, "", nameCat);
-    info("Add a forum in the category");
-    forumForumManagement.addForumSimple(nameForum, "", nameForum);
-    info("Delete forum");
-    forumForumManagement.deleteForum(nameForum);
-    info("Delete category");
-    homePagePlatform.goToHomePage();
-    homePagePlatform.goToForum();
-    forumCategoryManagement.deleteCategory(nameCat);
-  }
 }

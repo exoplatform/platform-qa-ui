@@ -2,6 +2,8 @@ package org.exoplatform.platform.qa.ui.platform.forum;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -57,10 +59,10 @@ public class ForumManagementInSpaceTestIT extends Base {
   @Test
   public void startNewTopicInSpace() {
 
-    String space = "space" + getRandomNumber();
-    String topic = "topic" + getRandomNumber();
+    String space = "space startTopicInSpace" ;
+    String topic = "topic startTopicInSpace" ;
     info("Create a space");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
     info("start topic");
     homePagePlatform.goToHomePage();
@@ -69,14 +71,14 @@ public class ForumManagementInSpaceTestIT extends Base {
     forumForumManagement.goToStartTopic();
     forumTopicManagement.startTopic(topic, topic, "", "");
     info("verify topic");
+    refresh();
+    executeJavaScript("window.scrollBy(0,-5500)","");
     homePagePlatform.goToHomePage();
     homePagePlatform.goToSpecificSpace(space);
     spaceHomePage.goToForumsTab();
     forumHomePage.goToTopic(topic);
     $(byText(topic)).waitUntil(Condition.appears, Configuration.timeout);
-    homePagePlatform.goToHomePage();
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
+
 
   }
 

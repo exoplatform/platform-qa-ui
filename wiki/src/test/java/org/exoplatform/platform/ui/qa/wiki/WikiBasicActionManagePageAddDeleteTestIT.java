@@ -53,7 +53,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
   @Test
   public void test02Create_PageUsingSourceEditor() {
     info("Test 02: Create page using Source Editor");
-    String wiki = "wiki" + getRandomNumber();
+    String wiki = "WikipageusingSourceEditor" ;
 
     /*
      * Step Number: 1 Step Name: Step 1: Create Page with Source Editor Step
@@ -71,16 +71,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
     sourceTextEditor.addSimplePage(wiki, wiki);
     wikiManagement.saveAddPage();
     $(byText(wiki)).should(Condition.exist);
-    info("Test 08: Delete the page that is created by using source editor");
-    /*
-     * Step Number: 1 Step Name: Step 1: Delete page with Source Editor Step
-     * Description: - Open an existing page by clicking on page name in navigation
-     * tree. - Click on More icon on toolbar and select Delete page action in menu -
-     * Click on OK button on Confirm message form Input Data: Expected Outcome:
-     * Delete page successfully
-     */
-    homePagePlatform.goToWiki();
-    wikiHomePage.deleteWiki(wiki);
+
   }
 
 

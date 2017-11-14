@@ -4,6 +4,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -43,9 +44,9 @@ public class CalendarEventTestIT extends Base {
    */
   @Test
   public void test13_AddnEventInPersonalCalendar() {
-    String titleEvent = "titleEvent" + getRandomNumber();
-    String calendar = "calendar" + getRandomNumber();
-    String contentEvent = "contentEvent" + getRandomNumber();
+    String titleEvent = "titleEvent AddnEventInPersonalCalendar" ;
+    String calendar = "calendar AddnEventInPersonalCalendar" ;
+    String contentEvent = "contentEvent AddnEventInPersonalCalendar" ;
     info("Test 13 Add an event in personal calendar");
     /*
      * Step Number: 1 Step Name: - Step Description: Step 1: Add an event Input
@@ -75,19 +76,6 @@ public class CalendarEventTestIT extends Base {
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
                                               CalendarHomePage.selectViewOption.LIST,
                                               CalendarHomePage.selectDayOption.DETAILTIME);
-
-    info("Test 15 Delete an Event in personal calendar");
-    /*
-     * Step Number: 1 Step Name: - Step Description: Step 1: Delete an event Input
-     * Data: - Add an event - Delete an event right click on an existing event and
-     * select Delete - Click OK at confirmation message Expected Outcome: - The
-     * event is removed normally.
-     */
-    calendarHomePage.deleteEventTask(titleEvent,
-                                     CalendarHomePage.selectViewOption.LIST,
-                                     CalendarHomePage.selectDayOption.DETAILTIME,
-                                     getDate(0, "MM/dd/yyyy"));
-    calendarManagement.deleteCalendar(calendar, false);
   }
 
 

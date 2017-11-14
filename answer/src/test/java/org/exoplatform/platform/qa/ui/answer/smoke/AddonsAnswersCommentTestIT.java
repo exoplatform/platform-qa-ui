@@ -48,8 +48,8 @@ public class AddonsAnswersCommentTestIT extends Base {
 
   @Test
   public void test07_AddAComment() {
-    String comment = "comment" + getRandomNumber();
-    String question = "question" + getRandomNumber();
+    String comment = "comment AddAComment" ;
+    String question = "question AddAComment" ;
 
     info("Test 7: Add a comment");
 
@@ -69,7 +69,6 @@ public class AddonsAnswersCommentTestIT extends Base {
     commentManagement.inputDataToComment(comment);
     $(ELEMENT_COMMENT_FORM_SAVE_BUTTON).click();
     $(byText(comment)).waitUntil(Condition.appears, Configuration.timeout);
-    questionManagement.deleteQuestion(question);
 
   }
 

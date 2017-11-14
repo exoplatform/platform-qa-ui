@@ -172,7 +172,7 @@ public class CreateNewDocument {
   public void addNewWebContent(String title, String content) {
     $(ELEMENT_FILEFORM_BLANK_NAME).click();
     $(ELEMENT_FILEFORM_BLANK_NAME).setValue(title);
-    $(ELEMENT_FILEFORM_BLANK_CONTENT).click();
+    $(ELEMENT_FILEFORM_BLANK_CONTENT).scrollTo().click();
     $(ELEMENT_FILEFORM_BLANK_CONTENT).sendKeys(content);
 
   }
@@ -197,7 +197,7 @@ public class CreateNewDocument {
   public void saveAndClose() {
     info("save and close");
     // scroll up
-    executeJavaScript("window.scrollBy(0,-250)");
+    executeJavaScript("window.scrollBy(0,-550)");
     $(ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE).click();
 
   }

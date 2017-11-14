@@ -50,7 +50,7 @@ public class EcmsAdminExplorerTestIT extends Base {
   public void test01_AddDrive() {
     info("Test 01: Add Drive");
     info("Get data test");
-    String title = "Atitle" + getRandomNumber();
+    String title = "title AddDrive" ;
     String permission = "any";
     ContentAdministration.specificView[] view = { ContentAdministration.specificView.ADMIN };
     ContentAdministration.specificView[] newView = { ContentAdministration.specificView.WEB };
@@ -61,8 +61,7 @@ public class EcmsAdminExplorerTestIT extends Base {
     contentAdministration.goToSpecificFunctions(ContentAdministration.specificEcmFunctions.DRIVES);
     contentAdministration.addDrives(title, permission, view);
     $(byText(title)).waitUntil(Condition.appears, Configuration.timeout);
-    // delete drive
-    contentAdministration.deleteDrives(title);
+
     /*
      * Step Number: 1 Step Name: - Step Description: Step 1:Add Drive Input Data: -
      * Go to Content Administration/Explorer/ Drives - Click on Add Drive button -

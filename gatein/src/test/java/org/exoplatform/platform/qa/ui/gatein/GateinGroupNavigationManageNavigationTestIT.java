@@ -44,12 +44,12 @@ public class GateinGroupNavigationManageNavigationTestIT extends Base {
    */
   @Test
   public void test02AddGroupNavigation() {
-    String groupName = "group-" + getRandomNumber();
-    String group1 = "group1-" + getRandomNumber();
-    String group2 = "group2-" + getRandomNumber();
-    String group3 = "group3-" + getRandomNumber();
-    String group4 = "group4-" + getRandomNumber();
-    String group5 = "group5-" + getRandomNumber();
+    String groupName = "group-AddGroupNavigation" ;
+    String group1 = "group1-AddGroupNavigation";
+    String group2 = "group2-AddGroupNavigation" ;
+    String group3 = "group3-AddGroupNavigation" ;
+    String group4 = "group4-AddGroupNavigation" ;
+    String group5 = "group5-AddGroupNavigation" ;
 
     info("Create new group with John");
     navigationToolbar.goToUsersAndGroupsManagement();
@@ -86,20 +86,6 @@ public class GateinGroupNavigationManageNavigationTestIT extends Base {
     waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group4))).isDisplayed();
     waitForAndGetElement(By.xpath(ELEMENT_GROUP_NAME.replace("${groupName}", group5))).isDisplayed();
 
-    /*
-     * Step Number: 3 Step Name: Delete Navigation of group Step Description: - Go
-     * to Administration/ Portal / Group Sites - Click Delete Navigation button of a
-     * Group Input Data: Expected Outcome: - The navigation group is removed
-     * successfully
-     */
-    info("Delete navigation of group");
-    portalGroupNavigation.deleteNavigationForGroup(groupName);
-
-    info("Delete group");
-    navigationToolbar.goToUsersAndGroupsManagement();
-    userAndGroupManagement.goToGroupTab();
-    click(By.linkText(groupName));
-    userAndGroupManagement.deleteGroup(groupName, true, 60000);
   }
 
 }

@@ -35,7 +35,7 @@ public class CalendarCalendarTestIT extends Base {
    */
   @Test
   public void test02_AddPersonalCalendar() {
-    String calendarName = "calendarName" + getRandomNumber();
+    String calendarName = "calendarName AddPersonalCalendar" ;
     String calendarColor = "light_purple";
 
     info("Test 2: Add Personal Calendar");
@@ -51,8 +51,6 @@ public class CalendarCalendarTestIT extends Base {
     calendarManagement.saveAddCalendar();
     $(byText(calendarName)).waitUntil(Condition.appears, 10000);
 
-    homePagePlatform.goToCalendarPage();
-    calendarManagement.deleteCalendar(calendarName, true);
   }
 
    /**
@@ -63,8 +61,8 @@ public class CalendarCalendarTestIT extends Base {
   @Test
   public void test05_AddGroupCalendar() {
     String groupCalendar = "/platform/users";
-    String calendarName = "calendarName" + getRandomNumber();
-    String newCalendar = "newCalendar" + getRandomNumber();
+    String calendarName = "calendarName AddGroupCalendar";
+    String newCalendar = "newCalendar AddGroupCalendar" ;
     String calendarColor = "light_purple";
 
     info("Test 5: Add Group Calendar");
@@ -81,17 +79,7 @@ public class CalendarCalendarTestIT extends Base {
     calendarManagement.selectGroupInGroupTabCalendarForm(groupCalendar, true);
     calendarManagement.saveAddCalendar();
     $(byText(calendarName)).waitUntil(Condition.appears, 10000);
-    info("Test 7 Delete Group Calendar");
-    /*
-     * Step Number: 1 Step Name: - Step Description: Step 1: Delete Group Calendar
-     * Input Data: - Add a group calendar - Delete a public calendar by mouse over
-     * then click wheel icon of existing group calendar and select Remove - Click OK
-     * at confirmation message Expected Outcome: - The group calendar is removed
-     * from the group calendar
-     */
 
-    homePagePlatform.goToCalendarPage();
-    calendarManagement.deleteCalendar(calendarName, true);
   }
 
 

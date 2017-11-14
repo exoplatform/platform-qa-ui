@@ -77,10 +77,10 @@ public class WikiBasicActionAddRichTextTestIT extends Base {
      * properties - This page is listed with page containing the link
      */
     info("Create a wiki page 2");
-    String title1 = "title1" + getRandomNumber();
-    String content1 = "content1" + getRandomNumber();
-    String label = "label" + getRandomNumber();
-    String tooltip = "tooltip" + getRandomNumber();
+    String title1 = "title1 Add web page";
+    String content1 = "content1 Add web page";
+    String label = "label Add web page" + getRandomNumber();
+    String tooltip = "tooltip Add web page" + getRandomNumber();
     String address = "www.google.com";
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddBlankPage();

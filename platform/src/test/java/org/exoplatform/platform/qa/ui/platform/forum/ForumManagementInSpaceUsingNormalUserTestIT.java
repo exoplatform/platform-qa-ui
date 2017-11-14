@@ -89,8 +89,8 @@ public class ForumManagementInSpaceUsingNormalUserTestIT extends Base {
   @Test
   public void startNewTopicInSpace() {
 
-    String space = "space" + getRandomNumber();
-    String topic = "topic" + getRandomNumber();
+    String space = "space startNewTopicInSpaceNU" ;
+    String topic = "topic startNewTopicInSpaceNU";
     info("Create a space");
     homePagePlatform.goToAllSpace();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
@@ -106,9 +106,7 @@ public class ForumManagementInSpaceUsingNormalUserTestIT extends Base {
     spaceHomePage.goToForumsTab();
     forumHomePage.goToTopic(topic);
     $(byText(topic)).waitUntil(Condition.appears, Configuration.timeout);
-    homePagePlatform.goToHomePage();
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
+
 
   }
 

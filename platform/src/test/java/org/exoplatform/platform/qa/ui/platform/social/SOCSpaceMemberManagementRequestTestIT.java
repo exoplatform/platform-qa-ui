@@ -62,9 +62,9 @@ public class SOCSpaceMemberManagementRequestTestIT extends Base {
 
    @Test
   public void test02_AcceptUserRequestToJoinASpace() {
-    String username1 = "usernamea" + getRandomString();
+    String username1 = "usernameaaccepttojoinspace" ;
     String email1 = username1 + "@gmail.com";
-    String username2 = "usernameb" + getRandomString();
+    String username2 = "usernamebaccepttojoinspace" ;
     String email2 = username2 + "@gmail.com";
     String password = "123456";
     info("Add new user");
@@ -80,7 +80,7 @@ public class SOCSpaceMemberManagementRequestTestIT extends Base {
      * valid data - Click [Create] Input Data: Expected Outcome: - Create new Space
      * successfully.
      */
-    String space = "space" + getRandomNumber();
+    String space = "space AcceptToJoinASpace" ;
 
     info("Create a space by user 1");
     homePagePlatform.goToAllSpace();
@@ -98,11 +98,8 @@ public class SOCSpaceMemberManagementRequestTestIT extends Base {
     $(byText(username2 + " " + username2)).parent().find(ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB).click();
     spaceSettingManagement.goToMemberTab();
     $(byText(username2 + " " + username2)).scrollTo().should(Condition.exist);
-    info("delete data");
-    manageLogInOut.signIn("root", "gtn");
-    navigationToolbar.goToUsersAndGroupsManagement();
-    userAndGroupManagement.deleteUser(username1);
-    userAndGroupManagement.deleteUser(username2);
+    manageLogInOut.signOut();
+
 
   }
 
