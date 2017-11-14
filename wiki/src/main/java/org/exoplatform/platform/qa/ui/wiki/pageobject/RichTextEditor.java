@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
+import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
@@ -10,6 +11,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import java.awt.event.KeyEvent;
 import java.io.File;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 
@@ -535,7 +537,8 @@ public class RichTextEditor {
     }
     info("Input a content for the page");
     if (!content.isEmpty()) {
-      switchTo().frame(0);
+      SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.timeout);
+      switchTo().frame(frame);
       $(byId("body")).sendKeys(content);
       switchTo().defaultContent();
     }
