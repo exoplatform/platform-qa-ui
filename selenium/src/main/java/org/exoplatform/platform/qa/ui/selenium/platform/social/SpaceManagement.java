@@ -275,7 +275,7 @@ public class SpaceManagement {
     $(byText(space)).parent()
                     .parent()
                     .parent()
-                    .find(ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_TO_JOIN_BTN)
+                    .find(ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_TO_JOIN_BTN).scrollTo()
                     .waitUntil(Condition.appears, Configuration.timeout)
                     .click();
     if (isVerify.length > 0) {

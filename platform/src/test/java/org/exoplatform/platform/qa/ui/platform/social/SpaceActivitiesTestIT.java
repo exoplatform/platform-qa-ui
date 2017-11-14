@@ -65,7 +65,6 @@ public class SpaceActivitiesTestIT extends Base {
     info("Create a space");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 60000);
-    homePagePlatform.goToSpecificSpace(space);
     String activity1 = "activity1 AddNewYourActivityOnSpace" ;
     activityStream.addActivity(activity1, "");
 
@@ -78,7 +77,6 @@ public class SpaceActivitiesTestIT extends Base {
     info("Create a space");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 60000);
-    homePagePlatform.goToSpecificSpace(space);
     String activity1 = "activity1 likeYourActivityOnSpace" ;
     activityStream.addActivity(activity1, "");
     String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];
@@ -97,7 +95,6 @@ public class SpaceActivitiesTestIT extends Base {
     info("Create a space");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 60000);
-    homePagePlatform.goToSpecificSpace(space);
     String activity1 = "activity1 AddCommentOnYourActivityOnSpace";
     activityStream.addActivity(activity1, "");
     String comment = "comment AddCommentOnYourActivityOnSpace" ;

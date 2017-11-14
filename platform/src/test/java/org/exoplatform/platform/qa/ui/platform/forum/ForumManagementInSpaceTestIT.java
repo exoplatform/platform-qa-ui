@@ -65,18 +65,10 @@ public class ForumManagementInSpaceTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
     info("start topic");
-    homePagePlatform.goToHomePage();
-    homePagePlatform.goToSpecificSpace(space);
     spaceHomePage.goToForumsTab();
     forumForumManagement.goToStartTopic();
     forumTopicManagement.startTopic(topic, topic, "", "");
     info("verify topic");
-    refresh();
-    executeJavaScript("window.scrollBy(0,-5500)","");
-    homePagePlatform.goToHomePage();
-    homePagePlatform.goToSpecificSpace(space);
-    spaceHomePage.goToForumsTab();
-    forumHomePage.goToTopic(topic);
     $(byText(topic)).waitUntil(Condition.appears, Configuration.timeout);
 
 

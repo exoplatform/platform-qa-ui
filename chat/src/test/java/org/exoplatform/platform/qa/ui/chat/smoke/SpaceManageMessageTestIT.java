@@ -79,10 +79,11 @@ public class SpaceManageMessageTestIT extends Base {
     spaceManagement.addNewSpaceSimple(space, space);
     info("connect with user ");
     manageLogInOut.signIn(usernamea, password);
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.goToAllSpacesTab();
     info("send request");
     spaceManagement.sendARequestToASpace(space);
+    executeJavaScript("window.scrollBy(0,-5500)", "");
     homePagePlatform.goToHomePage();
     manageLogInOut.signIn(PLFData.username, PLFData.password);
     homePagePlatform.goToSpecificSpace(space);
@@ -90,6 +91,7 @@ public class SpaceManageMessageTestIT extends Base {
     info("accept request by user 1");
     spaceSettingManagement.goToMemberTabInSpaceSettingTab();
     $(byText(usernamea + " " + usernamea)).parent().find(ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB).click();
+    executeJavaScript("window.scrollBy(0,-5500)", "");
     homePagePlatform.goToHomePage();
     homePagePlatform.goToChat();
     switchTo().window(1);
@@ -97,7 +99,9 @@ public class SpaceManageMessageTestIT extends Base {
     if($(byText(space)).is(Condition.not(Condition.visible))){
       $$(byClassName("uiIconChatClock")).get(2).click();
     }
+    executeJavaScript("window.scrollBy(0,5500)", "");
     chatManagement.sendMessageInRoomOrSpace(space, message);
+    executeJavaScript("window.scrollBy(0,-5500)", "");
     switchTo().window(0);
     manageLogInOut.signIn(usernamea, password);
     homePagePlatform.goToChat();
@@ -150,7 +154,7 @@ public class SpaceManageMessageTestIT extends Base {
     info("root check the answer");
     $(byText(message2)).should(Condition.exist);
     switchTo().window(0);
-    manageLogInOut.signOut();
+    manageLogInOut.signIn(PLFData.username, PLFData.password);
 
 
   }
