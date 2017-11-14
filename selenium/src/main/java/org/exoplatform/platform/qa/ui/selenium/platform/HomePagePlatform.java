@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.selenium.platform;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_CONNECTION_EVERYONE_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
@@ -149,7 +150,8 @@ public class HomePagePlatform {
   public void goToSpecificSpace(String space) {
     info("Go to space " + space);
 
-    ELEMENT_SPECIFIC_PANEL.find(byText(space)).click();
+    ELEMENT_SPECIFIC_PANEL.find(byText(space)).scrollTo().click();
+    executeJavaScript("window.scrollBy(0,-2000)", "");
 
   }
 
