@@ -89,11 +89,6 @@ public class WikiBasicTestWithUserTestIT extends Base {
     manageLogInOut.signInCas("john", "gtngtn");
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
-
   @Test
   public void test01_AddAPageWithLinkWikiPageExisted() {
     info("Test 1: Add a page with link wiki page existed");

@@ -61,12 +61,6 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     manageLogInOut.signInCas(username, password);
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
-
-
   @Test
   public void test07_AddAdoptionApplicationToolbar() {
     info("Test 02: Remove application of space's toolbar");

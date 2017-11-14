@@ -67,36 +67,7 @@ public class ForumAdministrationTestIT extends Base {
     manageLogInOut.signInCas(username, password);
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
-
-  /**
-   * <li>Case ID:116690.</li>
-   * <li>Test Case Name: Ban IP.</li>
-   * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
-   */
-  // @Test(groups="pending")
-  // public void test01_BanIP() {
-  // info("Test 1: Ban IP");
-  // /*Step Number: 1
-  // *Step Name: -
-  // *Step Description:
-  // *Step 1: Add Ban IP
-  // *Input Data:
-  // *- click on Administration menu and select â€œBan IP
-  // *- Add IP into list and click on â€œAddâ€
-  // *Expected Outcome:
-  // *Ban IP is added successfully to listBan IP user can not add post/create
-  // topic*/
-  // homePagePlatform.goToForum();
-  // $(ELEMENT_ACTIONBAR_ADMINISTRATION).click();
-  // $(ELEMENT_ACTIONBAR_ADMIN_BANIP).click();
-  // }
-
-  /**
+   /**
    * <li>Case ID:116709.</li>
    * <li>Test Case Name: Add BB code.</li>
    * <li>Pre-Condition:</li>

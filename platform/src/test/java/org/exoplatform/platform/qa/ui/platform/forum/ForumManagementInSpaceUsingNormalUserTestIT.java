@@ -81,11 +81,6 @@ public class ForumManagementInSpaceUsingNormalUserTestIT extends Base {
     manageLogInOut.signInCas("john", "gtngtn");
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
-
   @Test
   public void startNewTopicInSpace() {
 
