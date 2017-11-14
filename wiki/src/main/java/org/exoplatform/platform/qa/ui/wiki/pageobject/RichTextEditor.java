@@ -4,6 +4,7 @@ import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -533,6 +534,7 @@ public class RichTextEditor {
       ELEMENT_BUTTON_WIKI_RITCH_TEXT.click();
     }
     if (!title.isEmpty()) {
+      refresh();
       $(ELEMENT_TITLE_WIKI_INPUT).setValue(title);
     }
     info("Input a content for the page");

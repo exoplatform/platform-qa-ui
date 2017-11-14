@@ -60,9 +60,9 @@ public class CreateNewDocument {
       } else {
         executeJavaScript("window.scrollBy(0,100);", "");
         // move ti page 2 for the list of template
-        $(byClassName("pagination")).find(byText("2")).click();
+        $(byClassName("pagination")).find(byText("2")).scrollTo().click();
         // scroll up
-        executeJavaScript("window.scrollBy(0,-400);", "");
+        executeJavaScript("window.scrollBy(0,-5500);", "");
         $(ELEMENT_ADDDOCUMENT_WEBCONTENT).click();
       }
       break;

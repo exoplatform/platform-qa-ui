@@ -62,7 +62,7 @@ public class WikiPublishActivityTestIT extends Base {
     String line3 = "line3 Create new wiki page" ;
     String line4 = "line4 Create new wiki page" ;
     String line5 = "line5 Create new wiki page" ;
-    String content = "test01_CreateNewWikiPage";
+    String content = line1 + "</br>" + line2 + "</br>" + line3 + "</br>" + line4 + "</br>" + line5;
 
     /*
      * Step Number: 1 Step Name: Step 1: Add new wiki page Step Description: - Login
