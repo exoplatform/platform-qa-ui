@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
-import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selectors.*;
+
 import static com.codeborne.selenide.Selenide.$;
 import static org.bouncycastle.crypto.tls.ConnectionEnd.server;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_USER_CLOSE_BUTTON;
@@ -179,10 +180,10 @@ public class EventManagement {
       $(ELEMENT_QUICK_INPUT_EVENT_NOTE).setValue(note);
     }
     if (opt.length > 0 && opt[0] != null) {
-      $(ELEMENT_QUICK_INPUT_EVENT_CALENDAR).selectOption(opt[0]);
+      $(byId("category")).selectOption(opt[0]);
     }
     if (opt.length > 1 && opt[1] != null) {
-      $(ELEMENT_QUICK_INPUT_EVENT_CALENDAR).selectOption(opt[1]);
+      $(byId("category")).selectOption(opt[1]);
     }
 
   }
