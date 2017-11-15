@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.forum.pageobject;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_SAVE_BTN;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -48,6 +49,7 @@ public class ForumHomePage {
    * Go to home category
    */
   public void goToHomeCategory() {
+    executeJavaScript("window.scrollBy(0,-2000)", "");
     if ($(ELEMENT_CATEGORY_BREADCUMB_HOME).is(Condition.exist)) {
       $(ELEMENT_CATEGORY_BREADCUMB_HOME).click();
     }

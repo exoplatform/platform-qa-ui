@@ -537,6 +537,7 @@ public class RichTextEditor {
     info("Input a content for the page");
     if (!content.isEmpty()) {
       SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.timeout);
+      $(byClassName("gwt-RichTextArea")).click();
       switchTo().frame(frame);
       $(byId("body")).sendKeys(content);
       switchTo().defaultContent();
@@ -745,8 +746,7 @@ public class RichTextEditor {
     inputToolTip(tooltip);
     info("Click on Create link button");
     goToCreateLink();
-    info("Move focus at the end of the line");
-    evt.pressEndKey(this.testBase.getExoWebDriver().getWebDriver());
+
   }
 
   /**

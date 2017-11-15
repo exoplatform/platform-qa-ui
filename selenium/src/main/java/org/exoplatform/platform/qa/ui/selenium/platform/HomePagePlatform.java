@@ -35,6 +35,7 @@ public class HomePagePlatform {
     info("--Go to Wiki--");
     $(ELEMENT_WIKI_LINK_PLF).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_WIKI_LINK_PLF).click();
+    refresh();
   }
 
   public void goToChat() {
@@ -69,6 +70,7 @@ public class HomePagePlatform {
     ELEMENT_CALENDAR_LINK_PLF.waitUntil(Condition.appears, Configuration.timeout);
     info("click on Calendar link");
     ELEMENT_CALENDAR_LINK_PLF.click();
+    refresh();
     info("Verify that Calendar page is shown");
     $(ELEMENT_CALENDAR_WORKING_PANEL).waitUntil(Condition.appears, Configuration.timeout);
     info("The calendar page is shown successfully");
@@ -85,6 +87,7 @@ public class HomePagePlatform {
     info("-- Go to my spaces --");
     ELEMENT_MY_SPACE_LINK_PLF.waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_MY_SPACE_LINK_PLF.click();
+    refresh();
   }
 
   /**
@@ -117,6 +120,7 @@ public class HomePagePlatform {
   public void goToForum() {
     info("-- Go to forum page --");
     $(ELEMENT_FORUM_LINK_PLF).click();
+    refresh();
   }
 
   /**
