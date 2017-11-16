@@ -23,6 +23,23 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLoca
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.io.File;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+
+import org.exoplatform.platform.qa.ui.selenium.Button;
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class ActivityStream {
   private final TestBase       testBase;
@@ -536,9 +553,14 @@ public class ActivityStream {
 
   }
 
-  public void addActivityWithPngImageFromMicroblog(String text){
+  public void addActivityWithImageUsingMicroblogFromDesktop (String text, String image){
     addText(text);
-    $(byClassName("cke_button_icon cke_button__selectimage_icon")).click();
+    $(byClassName("cke_button__selectimage_icon")).waitUntil(Condition.appears,Configuration.timeout).click();
+    File file = $(By.className("file")).uploadFromClasspath(image);
+    assertTrue(file.exists());
+    $(byClassName("cke_dialog_ui_hbox_first")).find(byClassName("btn")).waitUntil(Condition.not(Condition.attribute("disabled")),Configuration.timeout);
+    $(byClassName("cke_dialog_ui_hbox_first")).find(byClassName("btn")).click();
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
   }
 
   /**

@@ -5,10 +5,10 @@ import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
-import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -43,24 +43,16 @@ public class InsertImageInMicroblogTestIT extends Base{
         manageLogInOut = new ManageLogInOut(this);
         connectionsManagement = new ConnectionsManagement(this);
         activityStream = new ActivityStream(this);
-        if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
-            $(ELEMENT_SKIP_BUTTON).click();
-        }
-        if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
-            manageLogInOut.signOut();
-        }
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
     }
-    @AfterEach
-    public void signout() {
-        manageLogInOut.signOut();
-    }
+
 
     @Test
     public void test01_InsertPngImage() {
         String activity = "Activity" + getRandomNumber();
-        activityStream.addActivityWithPngImageFromMicroblog(activity);
-        //activityStream.deleteactivity(activity);
+        String image = "eXo-Platform.png";
+        activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity,image);
+        activityStream.deleteactivity(activity);
 
     }
 }
