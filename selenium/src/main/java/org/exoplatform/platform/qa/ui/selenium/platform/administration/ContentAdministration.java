@@ -64,8 +64,8 @@ public class ContentAdministration {
 
     case ADVANCED:
       info("Select Advanced tab");
-      if (evt.waitForAndGetElement(ELEMENT_ADVANCED_CATEGORIES_ECM_FUNCTIONS, 5000, 0) != null)
-        evt.click(ELEMENT_ADVANCED_CATEGORIES_ECM_FUNCTIONS);
+      if ($(ELEMENT_ADVANCED_CATEGORIES_ECM_FUNCTIONS).is(Condition.visible))
+        $(ELEMENT_ADVANCED_CATEGORIES_ECM_FUNCTIONS).click();
       break;
     case TEMPLATES:
       info("Select Templates tab");
@@ -91,19 +91,19 @@ public class ContentAdministration {
     switch (spec) {
     case ACTIONS:
       info("Select Actions function");
-      evt.click(ELEMENT_ECMS_FUNCTIONS_ACTIONS);
+      $(ELEMENT_ECMS_FUNCTIONS_ACTIONS).click();
       break;
     case SCRIPTS:
       info("Select Scripts function");
-      evt.click(ELEMENT_ECMS_FUNCTIONS_SCRIPTS);
+      $(ELEMENT_ECMS_FUNCTIONS_SCRIPTS).click();
       break;
     case QUERIES:
       info("Select Queries function");
-      evt.click(ELEMENT_ECMS_FUNCTIONS_QUERIES);
+      $(ELEMENT_ECMS_FUNCTIONS_QUERIES).click();
       break;
     case CATEGORIES:
       info("Select Categories function");
-      evt.click(ELEMENT_ECMS_FUNCTIONS_CATEGORIES);
+      $(ELEMENT_ECMS_FUNCTIONS_CATEGORIES).click();
       break;
     case DRIVES:
       info("Select Drives function");
@@ -395,7 +395,8 @@ public class ContentAdministration {
   public void deleteCategories(String name) {
     info("Delete the category");
     info("Click on Delete button of the category");
-    $(byClassName("uiIconDelete")).click();
+
+    $(byText(name)).parent().parent().find(byClassName("uiIconDelete")).click();
     info("Click on Ok button of the alert popup");
     alert.acceptAlert();
     info("Verify that the category is deleted");
@@ -413,23 +414,23 @@ public class ContentAdministration {
    */
   public void addCategories(String name, String nameAction, String lifeCycle, String targetPath, Object... params) {
     info("Add a category");
-    evt.click(ELEMENT_ECM_ADVANCED_CATEGORIES_ADD_CATEGORIES);
+    $(ELEMENT_ECM_ADVANCED_CATEGORIES_ADD_CATEGORIES).click();
     info("Type a name for the category");
-    evt.type(ELEMENT_ECM_ADVANCED_CATEGORIES_NAME_FORM, name, true);
+    $(ELEMENT_ECM_ADVANCED_CATEGORIES_NAME_FORM).setValue(name);
     if (params.length > 0) {
       String workspace = (String) params[0];
       String pathWorkspace = (String) params[1];
       info("Select the workspace:" + workspace + " for the category");
-      evt.select(ELEMENT_ECM_ADVANCED_CATEGORIES_WORKSPACE_SELECT_FORM, workspace);
+      $(ELEMENT_ECM_ADVANCED_CATEGORIES_WORKSPACE_SELECT_FORM).selectOption(workspace);
       info("Click on Add button of home path form");
-      evt.click(ELEMENT_ECM_ADVANCED_CATEGORIES_ADD_HOME_PATH_FORM);
+      $(ELEMENT_ECM_ADVANCED_CATEGORIES_ADD_HOME_PATH_FORM).click();
       if (pathWorkspace == "root") {
         info("if workspace is root, click on ROOT node");
-        evt.click(ELEMENT_ECM_ADVANCED_CATEGORIES_ROOT_NODE_ACTION_FORM);
+        $(ELEMENT_ECM_ADVANCED_CATEGORIES_ROOT_NODE_ACTION_FORM).click();
       }
     }
     info("Click on Next button of the step 1");
-    evt.click(ELEMENT_ECM_ADVANCED_CATEGORIES_NEXT_1STPAGE_FORM);
+   $(ELEMENT_ECM_ADVANCED_CATEGORIES_NEXT_1STPAGE_FORM).click();
 
     info("select permission");
     if (params.length > 2) {
@@ -438,7 +439,7 @@ public class ContentAdministration {
       Boolean remove = (Boolean) params[4];
       String group = (String) params[5];
       String mem = (String) params[6];
-      evt.click(ELEMENT_PERMISSION_SELECTMEMBERSHIP);
+      $(ELEMENT_PERMISSION_SELECTMEMBERSHIP).click();
       ecmsPerm.selectGroupMembershipOfCat(group, mem);
       ecmsPerm.selectCheckBoxRight(read, modify, remove);
       info("Click on Save button");
@@ -447,21 +448,21 @@ public class ContentAdministration {
       ecmsPerm.deletePermissionNode("*:/platform/users");
     }
     info("Click on Next button of the step 2");
-    evt.click(ELEMENT_ECM_ADVANCED_CATEGORIES_NEXT_2NDPAGE_FORM);
+    $(ELEMENT_ECM_ADVANCED_CATEGORIES_NEXT_2NDPAGE_FORM).click();
     info("Type a name for the action of the category");
-    evt.type(ELEMENT_ECM_ADVANCED_CATEGORIES_NAME_ACTION_FORM, nameAction, true);
+    $(ELEMENT_ECM_ADVANCED_CATEGORIES_NAME_ACTION_FORM).setValue(nameAction);
     info("Select a lifeCycle");
-    evt.select(ELEMENT_ECM_ADVANCED_CATEGORIES_LIFECYCLE_FORM, lifeCycle);
+    $(ELEMENT_ECM_ADVANCED_CATEGORIES_LIFECYCLE_FORM).selectOption(lifeCycle);
     info("Click on target path on action form");
-    evt.click(ELEMENT_ECM_ADVANCED_CATEGORIES_OPEN_TARGETPATH_ACTION_FORM);
+    $(ELEMENT_ECM_ADVANCED_CATEGORIES_OPEN_TARGETPATH_ACTION_FORM).click();
     if (targetPath == "root") {
       info("if targetPath is root, select ROOT node");
-      evt.click(ELEMENT_ECM_ADVANCED_CATEGORIES_ROOT_NODE_ACTION_FORM);
+      $(ELEMENT_ECM_ADVANCED_CATEGORIES_ROOT_NODE_ACTION_FORM).click();
     }
     info("Save all changes");
-    evt.click(ELEMENT_ECM_ADVANCED_CATEGORIES_SAVE_FORM);
+    $(ELEMENT_ECM_ADVANCED_CATEGORIES_SAVE_FORM).click();
     info("Close the form");
-    evt.click(ELEMENT_ECM_ADVANCED_CATEGORIES_CLOSE_FORM);
+    $(ELEMENT_ECM_ADVANCED_CATEGORIES_CLOSE_FORM).click();
     info("Finish adding the category");
   }
 
@@ -483,31 +484,31 @@ public class ContentAdministration {
                              String pathWorkspace) {
     info("Edit the Category");
     info("Click on Edit button of the category in the list");
-    evt.click(By.xpath(ELEMENT_ECM_ADVANCED_CATEGORIES_EDIT_FORM.replace("{$name}", name)));
+    $(byXpath(ELEMENT_ECM_ADVANCED_CATEGORIES_EDIT_FORM.replace("{$name}", name))).click();
     info("Click on Previous button of step4");
-    evt.click(ELEMENT_ECM_ADVANCED_CATEGORIES_PREVIOUS_4THPAGE);
+    $(ELEMENT_ECM_ADVANCED_CATEGORIES_PREVIOUS_4THPAGE).click();
     info("Click on Previous button of step3");
-    evt.click(ELEMENT_ECM_ADVANCED_CATEGORIES_PREVIOUS_3RDPAGE);
+    $(ELEMENT_ECM_ADVANCED_CATEGORIES_PREVIOUS_3RDPAGE).click();
     info("Click on Previous button of step2");
-    evt.click(ELEMENT_ECM_ADVANCED_CATEGORIES_PREVIOUS_2NDPAGE);
+    $(ELEMENT_ECM_ADVANCED_CATEGORIES_PREVIOUS_2NDPAGE).click();
     if (!workspace.isEmpty()) {
       info("Select the workspace:" + workspace + " for the category");
-      evt.select(ELEMENT_ECM_ADVANCED_CATEGORIES_WORKSPACE_SELECT_FORM, workspace);
+      $(ELEMENT_ECM_ADVANCED_CATEGORIES_WORKSPACE_SELECT_FORM).selectOption(workspace);
       info("Click on Add button of home path form");
-      evt.click(ELEMENT_ECM_ADVANCED_CATEGORIES_ADD_HOME_PATH_FORM);
+      $(ELEMENT_ECM_ADVANCED_CATEGORIES_ADD_HOME_PATH_FORM).click();
       if (pathWorkspace == "root") {
         info("if workspace is root, click on ROOT node");
-        evt.click(ELEMENT_ECM_ADVANCED_CATEGORIES_ROOT_NODE_ACTION_FORM);
+        $(ELEMENT_ECM_ADVANCED_CATEGORIES_ROOT_NODE_ACTION_FORM).click();
       }
     }
     info("Click on Next butotn of step 1");
-    evt.click(ELEMENT_ECM_ADVANCED_CATEGORIES_NEXT_1STPAGE_FORM);
+    $(ELEMENT_ECM_ADVANCED_CATEGORIES_NEXT_1STPAGE_FORM).click();
     info("Click on Next button of step 2");
-    evt.click(ELEMENT_ECM_ADVANCED_CATEGORIES_NEXT_2NDPAGE_FORM);
+    $(ELEMENT_ECM_ADVANCED_CATEGORIES_NEXT_2NDPAGE_FORM).click();
     info("Click on Save button");
-    evt.click(ELEMENT_ECM_ADVANCED_CATEGORIES_SAVE_FORM);
+    $(ELEMENT_ECM_ADVANCED_CATEGORIES_SAVE_FORM).click();
     info("Close the form");
-    evt.click(ELEMENT_ECM_ADVANCED_CATEGORIES_CLOSE_FORM);
+    $(ELEMENT_ECM_ADVANCED_CATEGORIES_CLOSE_FORM).click();
     info("Finished editing the category");
   }
 
@@ -563,20 +564,19 @@ public class ContentAdministration {
    */
   public void addActionType(String name, String script, String variables) {
     info("Add a action type");
-    evt.click(ELEMENT_ADD_ACTION_TYPE);
+    $(ELEMENT_ADD_ACTION_TYPE).click();
     info("Type a name");
-    evt.type(ELEMENT_ECM_ACTION_NAME_FORM, name, true);
+    $(ELEMENT_ECM_ACTION_NAME_FORM).setValue(name);
     if (!script.isEmpty()) {
       info("Select a script in form");
-      evt.select(ELEMENT_ECM_ACTION_SCRIPT_FORM, script);
+      $(ELEMENT_ECM_ACTION_SCRIPT_FORM).selectOption(script);
     }
     if (!variables.isEmpty()) {
       info("Type a variable in form");
-      evt.type(ELEMENT_ECM_ACTION_VARIABLES_FORM, variables, true);
+      $(ELEMENT_ECM_ACTION_VARIABLES_FORM).setValue(variables);
     }
     info("Save all changes");
-    evt.waitForAndGetElement(ELEMENT_ECM_ACTION_SAVE_FORM);
-    evt.click(ELEMENT_ECM_ACTION_SAVE_FORM);
+    $(ELEMENT_ECM_ACTION_SAVE_FORM).waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   /**
@@ -590,13 +590,23 @@ public class ContentAdministration {
   public void editActionType(String name, String newName, String script, String variables) {
     info("Edit a action type");
     info("Select a action in the list");
-    evt.click(By.xpath(ELEMENT_ECM_ACTION_EDIT_LIST.replace("{$name}", name)));
+    $(byXpath(ELEMENT_ECM_ACTION_EDIT_LIST.replace("{$name}", name))).click();
     info("Add a action type");
-    addActionType(newName, script, variables);
+    $(ELEMENT_ECM_ACTION_NAME_FORM).setValue(newName);
+    if (!script.isEmpty()) {
+      info("Select a script in form");
+      $(ELEMENT_ECM_ACTION_SCRIPT_FORM).selectOption(script);
+    }
+    if (!variables.isEmpty()) {
+      info("Type a variable in form");
+      $(ELEMENT_ECM_ACTION_VARIABLES_FORM).setValue(variables);
+    }
+    info("Save all changes");
+    $(ELEMENT_ECM_ACTION_SAVE_FORM).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Verify that the new action is added");
-    evt.waitForAndGetElement(ELEMENT_ECM_ACTION_LIST.replace("{$name}", newName));
+    $(byXpath(ELEMENT_ECM_ACTION_LIST.replace("{$name}", newName))).waitUntil(Condition.visible,Configuration.timeout);
     info("Verify that the old action is replaced");
-    evt.waitForElementNotPresent(ELEMENT_ECM_ACTION_LIST.replace("{$name}", name));
+    $(byXpath(ELEMENT_ECM_ACTION_LIST.replace("{$name}", name))).shouldNot(Condition.visible);
     info("End of Editing action type");
   }
 
@@ -608,11 +618,11 @@ public class ContentAdministration {
   public void deleteAction(String name) {
     info("Delete a action");
     info("Click on Delete button of the action");
-    evt.click(By.xpath(ELEMENT_ECM_ACTION_DELETE_LIST.replace("{$name}", name)));
+    $(byXpath(ELEMENT_ECM_ACTION_DELETE_LIST.replace("{$name}", name))).click();
     info("Click on OK button on Alert popup");
     alert.acceptAlert();
     info("Verify that the action is deleted");
-    evt.waitForElementNotPresent(ELEMENT_ECM_ACTION_LIST.replace("{$name}", name));
+    $(byXpath(ELEMENT_ECM_ACTION_LIST.replace("{$name}", name))).shouldNot(Condition.visible);
     info("The action is deleted successfully");
   }
 
@@ -625,21 +635,21 @@ public class ContentAdministration {
    */
   public void addScripts(String name, String content, String script) {
     info("Add a script");
-    evt.click(ELEMENT_ECM_ADVANCED_SCRIPT_ADD_SCRIPT);
+    $(ELEMENT_ECM_ADVANCED_SCRIPT_ADD_SCRIPT).click();
     info("Type a name for the script");
-    evt.type(ELEMENT_ECM_ADVANCED_SCRIPT_NAME_FORM, name, true);
+    $(ELEMENT_ECM_ADVANCED_SCRIPT_NAME_FORM).setValue(name);
     if (!script.isEmpty()) {
       info("Type a script on the form");
-      evt.type(ELEMENT_ECM_ADVANCED_SCRIPT_SCRIPT_FORM, script, true);
+      $(ELEMENT_ECM_ADVANCED_SCRIPT_SCRIPT_FORM).setValue(script);
     }
     if (!content.isEmpty()) {
       info("Type a content for the script");
-      evt.type(ELEMENT_ECM_ADVANCED_SCRIPT_CONTENT_FORM, content, true);
+      $(ELEMENT_ECM_ADVANCED_SCRIPT_CONTENT_FORM).setValue(content);
     }
     info("Save all changes");
-    evt.click(ELEMENT_ECM_ADVANCED_SCRIPT_SAVE_FORM);
+    $(ELEMENT_ECM_ADVANCED_SCRIPT_SAVE_FORM).click();
     info("Finish adding the script");
-    evt.waitForAndGetElement(ELEMENT_ECM_ADVANCED_SCRIPT_LIST.replace("{$name}", name));
+    $(byXpath(ELEMENT_ECM_ADVANCED_SCRIPT_LIST.replace("{$name}", name))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -653,23 +663,23 @@ public class ContentAdministration {
   public void EditScripts(String oldname, String name, String content, String script) {
     info("Edit the script");
     info("Click on Edit button of the script on the list");
-    evt.click(By.xpath(ELEMENT_ECM_ADVANCED_SCRIPT_EDIT_LIST.replace("{$name}", oldname)));
+    $(byXpath(ELEMENT_ECM_ADVANCED_SCRIPT_EDIT_LIST.replace("{$name}", oldname))).click();
     info("Type the mame for the script");
-    evt.type(ELEMENT_ECM_ADVANCED_SCRIPT_NAME_FORM, name, true);
+    $(ELEMENT_ECM_ADVANCED_SCRIPT_NAME_FORM).setValue(name);
     if (!script.isEmpty()) {
       info("Type a script: " + script + " on the script form");
-      evt.type(ELEMENT_ECM_ADVANCED_SCRIPT_SCRIPT_FORM, script, true);
+      $(ELEMENT_ECM_ADVANCED_SCRIPT_SCRIPT_FORM).setValue(script);
     }
     if (!content.isEmpty()) {
       info("Type a content: " + content + " for the script");
-      evt.type(ELEMENT_ECM_ADVANCED_SCRIPT_CONTENT_FORM, content, true);
+      $(ELEMENT_ECM_ADVANCED_SCRIPT_CONTENT_FORM).setValue(content);
     }
     info("Save all changes");
-    evt.click(ELEMENT_ECM_ADVANCED_SCRIPT_SAVE_FORM);
+    $(ELEMENT_ECM_ADVANCED_SCRIPT_SAVE_FORM).click();
     info("Verify that the script is saved with new changes");
-    evt.waitForAndGetElement(ELEMENT_ECM_ADVANCED_SCRIPT_LIST.replace("{$name}", name));
+    $(byXpath(ELEMENT_ECM_ADVANCED_SCRIPT_LIST.replace("{$name}", name))).waitUntil(Condition.visible,Configuration.timeout);
     info("Verify that old script is changed");
-    evt.waitForElementNotPresent(ELEMENT_ECM_ADVANCED_SCRIPT_LIST.replace("{$name}", oldname));
+    $(byXpath(ELEMENT_ECM_ADVANCED_SCRIPT_LIST.replace("{$name}", oldname))).shouldNot(Condition.visible);
     info("Editing the script is changed successfully");
   }
 
@@ -680,11 +690,11 @@ public class ContentAdministration {
    */
   public void deleteScripts(String name) {
     info("Click on Delete button of the script");
-    evt.click(By.xpath(ELEMENT_ECM_ADVANCED_SCRIPT_DELETE_LIST.replace("{$name}", name)));
+    $(byXpath(ELEMENT_ECM_ADVANCED_SCRIPT_DELETE_LIST.replace("{$name}", name))).click();
     info("Click on OK button of the alert popup");
     alert.acceptAlert();
     info("Verify that the script is deleted");
-    evt.waitForElementNotPresent(ELEMENT_ECM_ADVANCED_SCRIPT_LIST.replace("{$name}", name));
+    $(byXpath(ELEMENT_ECM_ADVANCED_SCRIPT_LIST.replace("{$name}", name))).shouldNot(Condition.visible);
     info("The script is deleted successfullyy");
   }
 
@@ -699,28 +709,28 @@ public class ContentAdministration {
   public void addQueries(String name, String queryType, String statement, String... permissions) {
     info("Add a query");
     info("Click on Add button");
-    evt.click(ELEMENT_ECM_ADVANCED_QUERIES_ADD_QUERIES);
+    $(ELEMENT_ECM_ADVANCED_QUERIES_ADD_QUERIES).click();
     info("Type a name for the query");
-    evt.type(ELEMENT_ECM_ADVANCED_QUERIES_NAME_FORM, name, true);
+    $(ELEMENT_ECM_ADVANCED_QUERIES_NAME_FORM).setValue(name);
     if (!queryType.isEmpty()) {
       info("Select the type:" + queryType + "for the query");
-      evt.select(ELEMENT_ECM_ADVANCED_QUERIES_QUERY_TYPE_FORM, queryType);
+      $(ELEMENT_ECM_ADVANCED_QUERIES_QUERY_TYPE_FORM).selectOption(queryType);
     }
     if (!statement.isEmpty()) {
       info("Type a text: " + statement + "for the statement of the query");
-      evt.type(ELEMENT_ECM_ADVANCED_QUERIES_STATEMENT_FORM, statement, true);
+      $(ELEMENT_ECM_ADVANCED_QUERIES_STATEMENT_FORM).setValue(statement);
     }
     info("Select permission form of the query");
-    evt.click(ELEMENT_ECM_ADVANCED_QUERIES_PERMISSION_FORM);
+    $(ELEMENT_ECM_ADVANCED_QUERIES_PERMISSION_FORM).click();
     if (permissions.length < 2) {
       info("Set permission of the query is:" + permissions[0]);
-      evt.click(AdministrationLocator.ELEMENT_PERMISSION_ANY);
+      $(AdministrationLocator.ELEMENT_PERMISSION_ANY).click();
     } else {
       info("select permission");
       ecmsPerm.selectGroupMembershipOfQuery(permissions[0], permissions[1]);
     }
     info("Save all changes");
-    evt.click(ELEMENT_ECM_ADVANCED_QUERIES_SAVE_FORM);
+    $(ELEMENT_ECM_ADVANCED_QUERIES_SAVE_FORM).click();
     info("Adding the query is success");
   }
 
@@ -734,21 +744,21 @@ public class ContentAdministration {
    */
   public void editQueries(String name, String queryType, String statement, String permission) {
     info("Click on Edit button of the query");
-    evt.click(ELEMENT_ECM_ADVANCED_QUERIES_EDIT_BUTTON.replace("{$name}", name));
+    $(byXpath(ELEMENT_ECM_ADVANCED_QUERIES_EDIT_BUTTON.replace("{$name}", name))).click();
     if (!queryType.isEmpty()) {
       info("Select a type for the query");
-      evt.select(ELEMENT_ECM_ADVANCED_QUERIES_QUERY_TYPE_FORM, queryType);
+      $(ELEMENT_ECM_ADVANCED_QUERIES_QUERY_TYPE_FORM).selectOption(queryType);
     }
     if (!statement.isEmpty()) {
       info("Type the statement: " + statement + " for the query");
-      evt.type(ELEMENT_ECM_ADVANCED_QUERIES_STATEMENT_FORM, statement, true);
+      $(ELEMENT_ECM_ADVANCED_QUERIES_STATEMENT_FORM).setValue(statement);
     }
     if (!permission.isEmpty()) {
       info("Select permission for the query");
-      evt.click(ELEMENT_ECM_ADVANCED_QUERIES_PERMISSION_FORM);
+      $(ELEMENT_ECM_ADVANCED_QUERIES_PERMISSION_FORM).click();
     }
     info("Save all changes");
-    evt.click(ELEMENT_ECM_ADVANCED_QUERIES_SAVE_FORM);
+    $(ELEMENT_ECM_ADVANCED_QUERIES_SAVE_FORM).click();
     info("Editing is finished");
   }
 
@@ -760,11 +770,11 @@ public class ContentAdministration {
   public void deleteQueries(String name) {
     info("Delete a query");
     info("Click on Delete button of the query");
-    evt.click(By.xpath(ELEMENT_ECM_ADVANCED_QUERIES_DELETE_BUTTON.replace("{$name}", name)));
+    $(byXpath(ELEMENT_ECM_ADVANCED_QUERIES_DELETE_BUTTON.replace("{$name}", name))).click();
     info("Click on OK button of the alert popup");
     alert.acceptAlert();
     info("Verify that the query is deleted");
-    evt.waitForElementNotPresent(ELEMENT_ECM_ADVANCED_QUERIES_LIST.replace("{$name}", name));
+    $(byXpath(ELEMENT_ECM_ADVANCED_QUERIES_LIST.replace("{$name}", name))).shouldNot(Condition.visible);
     info("The query is deleted successfully");
   }
 
