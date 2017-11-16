@@ -46,7 +46,6 @@ public class InsertImageInMicroblogTestIT extends Base{
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
     }
 
-
     @Test
     public void test01_InsertPngImage() {
         String activity = "Activity" + getRandomNumber();
