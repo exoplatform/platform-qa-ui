@@ -556,6 +556,8 @@ public final class HomePageLocator {
 
   // confirm popup
 
+  public static final By ELEMENT_INSERT_IMAGE_POPUP_OK = By.xpath("//*[text()='OK']");
+
   public static final SelenideElement ELEMENT_DELETE_POPUP_OK                                              =
                                                               $(byXpath("//*[@id=\"UISocialPopupConfirmation\"]/div[2]/div[2]/div/a[1]"));
 
@@ -666,10 +668,10 @@ public final class HomePageLocator {
 
   public static final SelenideElement ELEMENT_GADGET_INVITATION                                            =
                                                                 $(byId("InvitationsPortlet"));
-  public static final By ELEMENT_ICON_DELETE_ACTIVITY= byClassName("uiIconClose");
-  public static final SelenideElement ELEMENT_TAB_ADD_LINK=$(byXpath("//*[@id=\"ActivityComposerExt\"]/div[3]/a"));
-  public static final SelenideElement ELEMENT_INPUT_LINK= $(byId("InputLink"));
-  public static final SelenideElement ELEMENT_BUTTON_ATTACH_LINK=$(byId("AttachButton"));
+  public static final By ELEMENT_ICON_DELETE_ACTIVITY = byClassName("uiIconClose");
+  public static final SelenideElement ELEMENT_TAB_ADD_LINK = $(byXpath("//*[@id=\"ActivityComposerExt\"]/div[3]/a"));
+  public static final SelenideElement ELEMENT_INPUT_LINK = $(byId("InputLink"));
+  public static final SelenideElement ELEMENT_BUTTON_ATTACH_LINK = $(byId("AttachButton"));
 
   public static final By              ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET                              =
                                                                               byClassName("connect");
