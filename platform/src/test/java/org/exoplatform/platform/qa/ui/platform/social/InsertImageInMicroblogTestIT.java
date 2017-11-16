@@ -52,7 +52,7 @@ public class InsertImageInMicroblogTestIT extends Base{
         String activity = "Activity" + getRandomNumber();
         String image = "eXo-Platform.png";
         activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity,image);
-        activityStream.deleteactivity(activity);
+        activityStream.deleteActivity(activity);
 
     }
 }
