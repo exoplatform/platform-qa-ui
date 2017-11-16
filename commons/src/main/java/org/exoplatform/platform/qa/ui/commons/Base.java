@@ -47,7 +47,7 @@ public class Base extends TestBase {
   @BeforeAll
   public static void setup() {
     Configuration.pageLoadStrategy="normal";
-
+    Configuration.browserSize="1366x800";
   }
 
   @BeforeEach
