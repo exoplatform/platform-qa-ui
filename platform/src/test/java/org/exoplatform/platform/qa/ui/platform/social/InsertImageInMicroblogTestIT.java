@@ -50,9 +50,64 @@ public class InsertImageInMicroblogTestIT extends Base{
     @Test
     public void test01_InsertPngImage() {
         String activity = "Activity" + getRandomNumber();
-        String image = "eXo-Platform.png";
+        String image = "data/social/Image_png.png";
         activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity,image);
         activityStream.deleteActivity(activity);
+    }
 
+    @Test
+    public void test02_InsertPNGImage() {
+        String activity = "Activity" + getRandomNumber();
+        String image = "data/social/Image_PNG_Uppercase.PNG";
+        activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity,image);
+        activityStream.deleteActivity(activity);
+    }
+
+    @Test
+    public void test03_InsertJpgImage() {
+        String activity = "Activity" + getRandomNumber();
+        String image = "data/social/Image_jpg.jpg";
+        activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity,image);
+        activityStream.deleteActivity(activity);
+    }
+
+    @Test
+    public void test04_InsertJPGImage() {
+        String activity = "Activity" + getRandomNumber();
+        String image = "data/social/Image_JPG_Uppercase.JPG";
+        activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity,image);
+        activityStream.deleteActivity(activity);
+    }
+
+    @Test
+    public void test05_InsertJpegImage() {
+        String activity = "Activity" + getRandomNumber();
+        String image = "data/social/Image_jpeg.jpeg";
+        activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity,image);
+        activityStream.deleteActivity(activity);
+    }
+
+    @Test
+    public void test06_InsertJPEGImage() {
+        String activity = "Activity" + getRandomNumber();
+        String image = "data/social/Image_JPEG_Uppercase.JPEG";
+        activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity,image);
+        activityStream.deleteActivity(activity);
+    }
+
+    @Test
+    public void test07_InsertGifImage() {
+        String activity = "Activity" + getRandomNumber();
+        String image = "data/social/Image_gif.gif";
+        activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity,image);
+        activityStream.deleteActivity(activity);
+    }
+
+    @Test
+    public void test08_InsertGIFImage() {
+        String activity = "Activity" + getRandomNumber();
+        String image = "data/social/Image_GIF_Uppercase.GIF";
+        activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity,image);
+        activityStream.deleteActivity(activity);
     }
 }
