@@ -1,11 +1,14 @@
 package org.exoplatform.platform.qa.ui.platform.social;
 
+import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_ALERT_NOTIFICATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_GADGET_INVITATION;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_NOTIFICATION_DROPDOWN;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ICON_DECLINE_SPACE_REQUEST_IN_MEMBERS_TAB;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -83,7 +86,7 @@ public class SOCSpaceMemberManagementRequestTestIT extends Base {
      * valid data - Click [Create] Input Data: Expected Outcome: - Create new Space
      * successfully.
      */
-    String space = "space AcceptToJoinASpace" ;
+    String space = "space AcceptToJoinASpace1" ;
 
     info("Create a space by user 1");
     homePagePlatform.goToAllSpace();
@@ -94,9 +97,10 @@ public class SOCSpaceMemberManagementRequestTestIT extends Base {
     info("send request by user 2");
     spaceManagement.sendARequestToASpace(space);
     manageLogInOut.signIn(username1, password);
-     ELEMENT_GADGET_INVITATION.find(byText( space)).parent().hover();
-     ELEMENT_GADGET_INVITATION.find(byText(space)).parent().parent().find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET).waitUntil(Condition.visible, Configuration.timeout).click();
-    manageLogInOut.signOut();
+     ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
+     ELEMENT_ALERT_NOTIFICATION.click();
+     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).parent().parent().find(byClassName("action-item")).click();
+     manageLogInOut.signOut();
   }
 
 }
