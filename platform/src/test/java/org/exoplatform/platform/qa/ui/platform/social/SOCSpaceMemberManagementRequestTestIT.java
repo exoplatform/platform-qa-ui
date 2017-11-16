@@ -4,10 +4,13 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_GADGET_INVITATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ICON_DECLINE_SPACE_REQUEST_IN_MEMBERS_TAB;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -91,16 +94,9 @@ public class SOCSpaceMemberManagementRequestTestIT extends Base {
     info("send request by user 2");
     spaceManagement.sendARequestToASpace(space);
     manageLogInOut.signIn(username1, password);
-    homePagePlatform.goToSpecificSpace(space);
-    spaceHomePage.goToSpaceSettingTab();
-    info("accept request by user 1");
-    spaceSettingManagement.goToMemberTabInSpaceSettingTab();
-    $(byText(username2 + " " + username2)).parent().find(ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB).click();
-    spaceSettingManagement.goToMemberTab();
-    $(byText(username2 + " " + username2)).scrollTo().should(Condition.exist);
+     ELEMENT_GADGET_INVITATION.find(byText( space)).parent().hover();
+     ELEMENT_GADGET_INVITATION.find(byText(space)).parent().parent().find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET).waitUntil(Condition.visible, Configuration.timeout).click();
     manageLogInOut.signOut();
-
-
   }
 
 }
