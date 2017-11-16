@@ -260,7 +260,7 @@ public class ForumTopicManagement {
     $(byText(newContent)).parent().parent().parent().parent().find(byText("Quote")).click();
     if (newContent != "")
       switchTo().frame(0);
-    $(byXpath("/html/body")).sendKeys(newContent);
+    $(byXpath("/html/body")).sendKeys(newContent+"quote");
     switchTo().defaultContent();
     executeJavaScript("window.scrollBy(0,150)");
     $(ELEMENT_POST_FORM_SUBMIT).click();
