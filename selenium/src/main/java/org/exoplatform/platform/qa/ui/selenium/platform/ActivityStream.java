@@ -1164,6 +1164,7 @@ public class ActivityStream {
   }
 
   public void replyToCommentUsingImage(String comment, String reply,String user) {
+        String image = "eXo-Platform.png";
         String id = $(byText(comment)).parent()
             .parent()
             .parent()
@@ -1188,15 +1189,12 @@ public class ActivityStream {
     // Insert the reply
     $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + reply + "\")", "");
-    info("Verify that the reply is added");
     //Click on the Insert image icon
-    $(byText(comment)).parent().parent().parent().parent().parent().find(byClassName("cke_button__simpleimage ")).click();
-    //insert URL
-   // $(byClassName("cke_dialog_ui_input_text")).findElementByClassName("cke_dialog_ui_input_text").sendKeys("http://qa-ui03.acceptance7.exoplatform.org/rest/private/jcr/repository/collaboration/Users/j___/jo___/joh___/john/Public/Activity Stream Documents/eXo-Platform.png");
-    $$(byClassName("cke_dialog_ui_input_text")).get(1).sendKeys(Keys.CONTROL,"v");
-    $$(byClassName("cke_dialog_ui_input_text")).get(1).pressEnter();
-    //Validate
-    // click on the button comment
+    $(byText(comment)).parent().parent().parent().parent().parent().find(byClassName("cke_button__selectimage_icon")).click();
+    File file = $(By.className("file")).uploadFromClasspath(image);
+    assertTrue(file.exists());
+    $(byClassName("cke_dialog_ui_hbox_first")).find(byClassName("btn")).waitUntil(Condition.not(Condition.attribute("disabled")),Configuration.timeout);
+    $(byClassName("cke_dialog_ui_hbox_first")).find(byClassName("btn")).click();
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(reply)).should(Condition.exist);
     $(byText(reply)).parent().parent().find(byText(user)).should(Condition.exist);
