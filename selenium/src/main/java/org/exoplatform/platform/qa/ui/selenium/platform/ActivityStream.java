@@ -22,24 +22,15 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.DELETE_BUTTON;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_ADDRESS_BAR_ICON_VIEW;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.io.File;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-
-import org.exoplatform.platform.qa.ui.selenium.Button;
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 
 public class ActivityStream {
   private final TestBase       testBase;
@@ -551,14 +542,70 @@ public class ActivityStream {
 
   }
 
-  public void addActivityWithImageUsingMicroblogFromDesktop (String text, String image){
+  public void addActivityWithImageUsingMicroblogFromDesktop (String text, String imagePath){
     addText(text);
     $(byClassName("cke_button__selectimage_icon")).waitUntil(Condition.appears,Configuration.timeout).click();
-    File file = $(By.className("file")).uploadFromClasspath(image);
+    File file = $(By.className("file")).uploadFromClasspath(imagePath);
     assertTrue(file.exists());
     $(byClassName("cke_dialog_ui_hbox_first")).find(byClassName("btn")).waitUntil(Condition.not(Condition.attribute("disabled")),Configuration.timeout);
     $(byClassName("cke_dialog_ui_hbox_first")).find(byClassName("btn")).click();
     $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
+  }
+
+  public void insertImageWithInvalidExtension (String text, String image){
+    addText(text);
+    $(byClassName("cke_button__selectimage_icon")).waitUntil(Condition.appears,Configuration.timeout).click();
+    $(By.className("file")).uploadFromClasspath(image);
+    $(byText("Only images of type JPEG, PNG or GIF can be inserted")).should(Condition.appears);
+    $(byClassName("cke_dialog_ui_hbox_last")).click();
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
+  }
+
+  public void insertImageWithSizeMoreThan200Mo (String text, String image){
+    addText(text);
+    $(byClassName("cke_button__selectimage_icon")).waitUntil(Condition.appears,Configuration.timeout).click();
+    $(By.className("file")).uploadFromClasspath(image);
+    $(byText("The maximum size of images is 200 MB")).should(Condition.appears);
+    $(byClassName("cke_dialog_ui_hbox_last")).click();
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
+  }
+
+  public void verifyInsertedImageExistsInDocumentApp (String imageName) {
+    String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+    String month = String.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1);
+    ELEMENT_ADDRESS_BAR_ICON_VIEW.click();
+    $(byText("Public")).click();
+    $(byText("Activity Stream Documents")).click();
+    $(byText("Pictures")).click();
+    $(byText(year)).click();
+    $(byText(month)).click();
+    $(byText(imageName)).should(Condition.exist);
+  }
+
+  public void verifyInsertedImageWinthInvalidExtensionDoNotExistInDocumentApp (String imageName) {
+    String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+    String month = String.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1);
+    ELEMENT_ADDRESS_BAR_ICON_VIEW.click();
+    $(byText("Public")).click();
+    if ($(byText("Activity Stream Documents")).waitUntil(Condition.visible,Configuration.timeout)!=null) {
+    $(byText("Activity Stream Documents")).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byText("Pictures")).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byText(year)).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byText(month)).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byText(imageName)).shouldNot(Condition.visible);}
+  }
+
+  public void deleteImageFromDocumentApp (String imageName) {
+    String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+    String month = String.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1);
+    ELEMENT_ADDRESS_BAR_ICON_VIEW.click();
+    $(byText("Public")).click();
+    $(byText("Activity Stream Documents")).click();
+    $(byText("Pictures")).click();
+    $(byText(year)).click();
+    $(byText(month)).click();
+    $(byText(imageName)).contextClick();
+    DELETE_BUTTON.click();
   }
 
   /**
