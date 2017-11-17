@@ -22,7 +22,15 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.DELETE_BUTTON;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_ADDRESS_BAR_ICON_VIEW;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.File;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 
 public class ActivityStream {
   private final TestBase       testBase;
@@ -534,6 +542,72 @@ public class ActivityStream {
     $(ELEMENT_COMPOSER_SHARE_BUTTON).shouldBe(Condition.disabled);
     info("The activity is shared success");
 
+  }
+
+  public void addActivityWithImageUsingMicroblogFromDesktop (String text, String imagePath){
+    addText(text);
+    $(byClassName("cke_button__selectimage_icon")).waitUntil(Condition.appears,Configuration.timeout).click();
+    File file = $(By.className("file")).uploadFromClasspath(imagePath);
+    assertTrue(file.exists());
+    $(byClassName("cke_dialog_ui_hbox_first")).find(byClassName("btn")).waitUntil(Condition.not(Condition.attribute("disabled")),Configuration.timeout);
+    $(byClassName("cke_dialog_ui_hbox_first")).find(byClassName("btn")).click();
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
+  }
+
+  public void insertImageWithInvalidExtension (String text, String image){
+    addText(text);
+    $(byClassName("cke_button__selectimage_icon")).waitUntil(Condition.appears,Configuration.timeout).click();
+    $(By.className("file")).uploadFromClasspath(image);
+    $(byText("Only images of type JPEG, PNG or GIF can be inserted")).should(Condition.appears);
+    $(byClassName("cke_dialog_ui_hbox_last")).click();
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
+  }
+
+  public void insertImageWithSizeMoreThan200Mo (String text, String image){
+    addText(text);
+    $(byClassName("cke_button__selectimage_icon")).waitUntil(Condition.appears,Configuration.timeout).click();
+    $(By.className("file")).uploadFromClasspath(image);
+    $(byText("The maximum size of images is 200 MB")).should(Condition.appears);
+    $(byClassName("cke_dialog_ui_hbox_last")).click();
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
+  }
+
+  public void verifyInsertedImageExistsInDocumentApp (String imageName) {
+    String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+    String month = String.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1);
+    ELEMENT_ADDRESS_BAR_ICON_VIEW.click();
+    $(byText("Public")).click();
+    $(byText("Activity Stream Documents")).click();
+    $(byText("Pictures")).click();
+    $(byText(year)).click();
+    $(byText(month)).click();
+    $(byText(imageName)).should(Condition.exist);
+  }
+
+  public void verifyInsertedImageWinthInvalidExtensionDoNotExistInDocumentApp (String imageName) {
+    String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+    String month = String.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1);
+    ELEMENT_ADDRESS_BAR_ICON_VIEW.click();
+    $(byText("Public")).click();
+    if ($(byText("Activity Stream Documents")).waitUntil(Condition.visible,Configuration.timeout)!=null) {
+    $(byText("Activity Stream Documents")).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byText("Pictures")).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byText(year)).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byText(month)).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byText(imageName)).shouldNot(Condition.visible);}
+  }
+
+  public void deleteImageFromDocumentApp (String imageName) {
+    String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+    String month = String.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1);
+    ELEMENT_ADDRESS_BAR_ICON_VIEW.click();
+    $(byText("Public")).click();
+    $(byText("Activity Stream Documents")).click();
+    $(byText("Pictures")).click();
+    $(byText(year)).click();
+    $(byText(month)).click();
+    $(byText(imageName)).contextClick();
+    DELETE_BUTTON.click();
   }
 
   /**
@@ -1090,6 +1164,7 @@ public class ActivityStream {
   }
 
   public void replyToCommentUsingImage(String comment, String reply,String user) {
+        String image = "eXo-Platform.png";
         String id = $(byText(comment)).parent()
             .parent()
             .parent()
@@ -1114,15 +1189,12 @@ public class ActivityStream {
     // Insert the reply
     $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + reply + "\")", "");
-    info("Verify that the reply is added");
     //Click on the Insert image icon
-    $(byText(comment)).parent().parent().parent().parent().parent().find(byClassName("cke_button__simpleimage ")).click();
-    //insert URL
-   // $(byClassName("cke_dialog_ui_input_text")).findElementByClassName("cke_dialog_ui_input_text").sendKeys("http://qa-ui03.acceptance7.exoplatform.org/rest/private/jcr/repository/collaboration/Users/j___/jo___/joh___/john/Public/Activity Stream Documents/eXo-Platform.png");
-    $$(byClassName("cke_dialog_ui_input_text")).get(1).sendKeys(Keys.CONTROL,"v");
-    $$(byClassName("cke_dialog_ui_input_text")).get(1).pressEnter();
-    //Validate
-    // click on the button comment
+    $(byText(comment)).parent().parent().parent().parent().parent().find(byClassName("cke_button__selectimage_icon")).click();
+    File file = $(By.className("file")).uploadFromClasspath(image);
+    assertTrue(file.exists());
+    $(byClassName("cke_dialog_ui_hbox_first")).find(byClassName("btn")).waitUntil(Condition.not(Condition.attribute("disabled")),Configuration.timeout);
+    $(byClassName("cke_dialog_ui_hbox_first")).find(byClassName("btn")).click();
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(reply)).should(Condition.exist);
     $(byText(reply)).parent().parent().find(byText(user)).should(Condition.exist);

@@ -936,15 +936,6 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToHomePage();
         activityStream.replyToComment(comment, reply1, DATA_NAME_USER1);
-        String id = $(byText(activity)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
-        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
-        OPEN_IN_DOCUMENT_ICON.click();
-        GO_BACK_ICON.click();
-        ELEMENT_ADDRESS_BAR_ICON_VIEW.click();
-        $(byText("eXo-Platform.png")).contextClick();
-        COPY_URL_TO_CLIPBOARD_BUTTON.click();
-        executeJavaScript("window.scrollBy(0,-2000)", "");
-        homePagePlatform.goToHomePage();
         activityStream.replyToCommentUsingImage(comment, reply2, DATA_NAME_USER1);
         activityStream.replyToComment(comment, reply3, DATA_NAME_USER1);
         refresh();
