@@ -891,4 +891,6 @@ public class AdministrationLocator {
                                                                       "//*[contains(@id,'${tabName}')]//*[@id='PermissionGrid']";
 
   public static final By              ELEMENT_BTN_DELETE_DRIVE                                     = byClassName("uiIconDelete");
+
+  public static final By ELEMENT_ICON_NEXT_ARROW=byClassName("uiIconNextArrow");
 }
