@@ -551,7 +551,7 @@ public class SiteExplorerHome {
    * By QuynhPT Open Add Relation popup
    */
   public void goToManageRelation() {
-    evt.click(ELEMENT_ACTIONBAR_RELATION);
+    $(ELEMENT_ACTIONBAR_RELATION).click();
 
   }
 
@@ -564,7 +564,7 @@ public class SiteExplorerHome {
   public void addRelation(String[] nameContent, String path) {
     for (String arrayElement : nameContent) {
       goToPathHasFiles(path);
-      evt.click(ELEMENT_RELATION_POPUP_SELECT_RELATION_TAB_SELECT_CONTENT_RIGHT_TREE.replace("${nameContent}", arrayElement));
+      $(byXpath(ELEMENT_RELATION_POPUP_SELECT_RELATION_TAB_SELECT_CONTENT_RIGHT_TREE.replace("${nameContent}", arrayElement))).click();
 
     }
   }
@@ -615,11 +615,11 @@ public class SiteExplorerHome {
    */
   public void goToPathHasFiles(String path) {
     // Open "Select Relation" tab
-    evt.click(ELEMENT_RELATION_POPUP_SELECT_RELATION_TAB);
+    $(ELEMENT_RELATION_POPUP_SELECT_RELATION_TAB).click();
 
     String[] arrayPath = path.split("/");
     for (String arrayElement : arrayPath) {
-      evt.click(ELEMENT_RELATION_POPUP_SELECT_RELATION_TAB_NODE_LEFT_TREE.replace("${nameNode}", arrayElement));
+      $(byXpath(ELEMENT_RELATION_POPUP_SELECT_RELATION_TAB_NODE_LEFT_TREE.replace("${nameNode}", arrayElement))).click();
     }
   }
 
@@ -627,7 +627,7 @@ public class SiteExplorerHome {
    * By QuynhPT Close "Add Relation" popup
    */
   public void closeAddRelationPopup() {
-    evt.click(ELEMENT_RELATION_POPUP_SELECT_RELATION_TAB_CLOSE_BUTTON);
+    $(ELEMENT_RELATION_POPUP_SELECT_RELATION_TAB_CLOSE_BUTTON).click();
 
   }
 
@@ -635,7 +635,7 @@ public class SiteExplorerHome {
    * By QuynhPT Open Relation tab on SideBar
    */
   public void goToRelationSideBar() {
-    evt.click(ELEMENT_SIDE_BAR_RELATION_ICON);
+    $(ELEMENT_SIDE_BAR_RELATION_ICON).click();
 
   }
 
@@ -645,7 +645,7 @@ public class SiteExplorerHome {
    * @param nameContent String
    */
   public void deleteRelation(String nameContent) {
-    evt.click(By.xpath(ELEMENT_RELATION_POPUP_RELATION_LIST_DELETE_BUTTON.replace("${nameContent}", nameContent)));
+    $(byXpath(ELEMENT_RELATION_POPUP_RELATION_LIST_DELETE_BUTTON.replace("${nameContent}", nameContent))).click();
     alert.waitForConfirmation(MESSAGE_DELETE_RELATION);
     alert.acceptAlert();
   }
@@ -672,7 +672,7 @@ public class SiteExplorerHome {
    * Open Export Node popup By QuynhPT date 16/01/2015
    */
   public void goToExportNode() {
-    evt.click(ELEMENT_ACTIONBAR_EXPORT_BUTTON);
+    $(ELEMENT_ACTIONBAR_EXPORT_BUTTON).click();
 
   }
 
@@ -750,16 +750,16 @@ public class SiteExplorerHome {
    */
   public void exportNode(boolean systemView, boolean zip) {
     // Verify that the popup is shown
-    evt.waitForAndGetElement(ELEMENT_EXPORT_NODE_POPUP_TITLE);
+   $(ELEMENT_EXPORT_NODE_POPUP_TITLE).waitUntil(Condition.visible,Configuration.timeout);
     // select doc view type
     if (!systemView)
-      evt.click(ELEMENT_EXPORT_NODE_POPUP_DOC_VIEW, 2);
+      $(ELEMENT_EXPORT_NODE_POPUP_DOC_VIEW).click();
     // select zip type
     if (zip)
-      evt.click(ELEMENT_EXPORT_NODE_POPUP_ZIP, 2);
+      $(ELEMENT_EXPORT_NODE_POPUP_ZIP).click();
 
-    evt.click(ELEMENT_EXPORT_NODE_POPUP_EXPORT_BUTTON);
-    evt.waitForElementNotPresent(ELEMENT_EXPORT_NODE_POPUP_EXPORT_BUTTON);
+    $(ELEMENT_EXPORT_NODE_POPUP_EXPORT_BUTTON).click();
+    $(ELEMENT_EXPORT_NODE_POPUP_EXPORT_BUTTON).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
