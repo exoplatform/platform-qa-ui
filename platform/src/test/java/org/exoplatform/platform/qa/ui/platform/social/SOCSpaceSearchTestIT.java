@@ -5,6 +5,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
@@ -15,6 +16,8 @@ import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 
+@Tag("social")
+@Tag("sniff")
 public class SOCSpaceSearchTestIT extends Base {
   NavigationToolbar navigationToolbar;
 
