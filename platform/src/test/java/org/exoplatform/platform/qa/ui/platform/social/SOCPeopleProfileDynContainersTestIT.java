@@ -8,6 +8,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocat
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
@@ -16,7 +17,8 @@ import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
-
+@Tag("social")
+@Tag("sniff")
 public class SOCPeopleProfileDynContainersTestIT extends Base {
   ManageLogInOut    manageLogInOut;
 
@@ -38,10 +40,7 @@ public class SOCPeopleProfileDynContainersTestIT extends Base {
    * <li>Post-Condition:</li> Step Number: 1 Step Name: Step 1: Go to my profile
    * page Step Description: - Login - Go to User Menu > [My Profile] Input Data:
    * Expected Outcome: Show content of my profile page
-   */
-
-  /*
-   * Step number: 2 Step Name: Step 2: Open Edit Layout mode Step Description: -
+    Step number: 2 Step Name: Step 2: Open Edit Layout mode Step Description: -
    * On Admin toolbar, click on Edit>Page>Edit Layout Input Data: Expected
    * Outcome: Page Editor is on the right, page is in edit mode Step number: 3
    * Step Name: Step 3: Check righttop -profile -container in Edit Layout mode
