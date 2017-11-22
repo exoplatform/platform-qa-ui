@@ -13,6 +13,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
@@ -31,6 +32,8 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.SourceTextEditor;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 
+@Tag("sniff")
+@Tag("social")
 public class SOCSpaceManagementTestIT extends Base {
   NavigationToolbar      navigationToolbar;
 
