@@ -14,8 +14,10 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 
 import java.awt.*;
 
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
@@ -33,6 +35,8 @@ import org.exoplatform.platform.qa.ui.social.pageobject.IntranetNotification;
 import org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting;
 import org.exoplatform.platform.qa.ui.social.pageobject.NotificationActivity;
 
+@Tag("social")
+@Tag("sniff")
 public class SOCNotificationIntranetViewAllTestIT extends Base {
   NavigationToolbar      navigationToolbar;
 
@@ -105,6 +109,7 @@ public class SOCNotificationIntranetViewAllTestIT extends Base {
    * @throws AWTException
    */
   @Test
+  @BugInPLF("SOC-5868")
   public void test01_02_CheckTheWorkOfLinksOnViewAllPage_ChecUIOfTheViewAllPage() throws AWTException {
     // set Data test
     String username1 = "usernamea" + getRandomString();
