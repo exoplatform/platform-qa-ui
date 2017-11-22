@@ -39,16 +39,10 @@ public class CalendarViewTestIT extends Base {
    * Post-Condition: Step Number: 1 Step Name: Step 1: Add task/ event Step
    * Description: - Go to calendar - Add new task/event Input Data: Expected
    * Outcome: Task/ event are created
-   */
-
-  /*
    * Step number: 2 Step Name: Step 2: Select view Step Description: - Select view
    * (day/week/month/list/work week) which has not the current day Input Data:
    * Expected Outcome: - Calendar is displayed with the selected
    * view(day/week/month/list/work week)
-   */
-
-  /*
    * Step number: 3 Step Name: Step 3: Check displaying of task and event. Step
    * Description: - Click on Today on the main bar Input Data: Expected Outcome: -
    * Go to the current view which has the current day (today view). Mini calendar
@@ -211,15 +205,9 @@ public class CalendarViewTestIT extends Base {
    * view. Pre-Condition: Post-Condition: Step Number: 1 Step Name: Step 1: Add
    * task/ event Step Description: - Go to calendar - Add new task/event Input
    * Data: Expected Outcome: Task/ event are created
-   */
-
-  /*
    * Step number: 2 Step Name: Step 2: Check displaying of task and event. Step
    * Description: - Click on List on the main bar Input Data: Expected Outcome:
    * Event/ task is displayed in List view
-   */
-
-  /*
    * Step number: 3 Step Name: Step 3: Check next week/previous day Step
    * Description: - Click on next week/previous day icon Input Data: Expected
    * Outcome: - Next week/previous day is displayed correctly - Mini calendar is
@@ -408,15 +396,9 @@ public class CalendarViewTestIT extends Base {
    * view. Pre-Condition: Post-Condition: Step Number: 1 Step Name: Step 1: Add
    * task/ event Step Description: - Go to calendar - Add new task/event Input
    * Data: Expected Outcome: Task/ event are created
-   */
-
-  /*
    * Step number: 2 Step Name: Step 2: Check displaying of task and event. Step
    * Description: - Click on Week on the main bar Input Data: Expected Outcome:
    * Event/ task is displayed in Week view
-   */
-
-  /*
    * Step number: 3 Step Name: Step 3: Check next week/previous week Step
    * Description: - Click next week/previous week icon Input Data: Expected
    * Outcome: - Next week/previous week is displayed correctly - Mini calendar is
@@ -505,20 +487,12 @@ public class CalendarViewTestIT extends Base {
   /**
    * Case ID:115600. Test Case Name: Check displaying added task/event in day
    * view. Pre-Condition: Post-Condition:
-   */
-  /*
    * Step Number: 1 Step Name: Step 1: Add task/ event Step Description: - Go to
    * calendar - Add new task/event Input Data: Expected Outcome: Task/ event are
    * created
-   */
-
-  /*
    * Step number: 2 Step Name: Step 2: Check displaying of task and event. Step
    * Description: - Click on Day on the main bar Input Data: Expected Outcome:
    * Event/ task is displayed in Day view
-   */
-
-  /*
    * Step number: 3 Step Name: Step 3: Check next day/previous day Step
    * Description: - Click next day/ previous day icon Input Data: Expected
    * Outcome: - Next day/previous day is displayed correctly - Mini calendar is
