@@ -7,6 +7,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
@@ -20,6 +21,8 @@ import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 
+@Tag("social")
+@Tag("sniff")
 public class SOCPeopleSearchTestIT extends Base {
   NavigationToolbar     navigationToolbar;
 
