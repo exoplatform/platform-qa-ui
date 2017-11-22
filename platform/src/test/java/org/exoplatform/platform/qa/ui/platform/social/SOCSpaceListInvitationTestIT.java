@@ -9,6 +9,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocat
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
@@ -23,6 +24,8 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 
+@Tag("sniff")
+@Tag("social")
 public class SOCSpaceListInvitationTestIT extends Base {
 
   NavigationToolbar      navigationToolbar;
