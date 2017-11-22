@@ -13,6 +13,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
@@ -24,6 +25,8 @@ import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 
+@Tag("sniff")
+@Tag("social")
 public class SOCPeopleProfileUserStatusTestIT extends Base {
   NavigationToolbar     navigationToolbar;
 
@@ -50,8 +53,6 @@ public class SOCPeopleProfileUserStatusTestIT extends Base {
    * <li>Test Case Name: Check my Status when Chat is installed.</li>
    * <li>Pre-Condition: - The Chat add-on is installed in the platform</li>
    * <li>Post-Condition:</li>
-   */
-  /**
    * <li>Case ID:122960.</li>
    * <li>Test Case Name: Check the Status of another when Chat is installed.</li>
    * <li>Pre-Condition: - User A and User B are created - The Chat add-on is
