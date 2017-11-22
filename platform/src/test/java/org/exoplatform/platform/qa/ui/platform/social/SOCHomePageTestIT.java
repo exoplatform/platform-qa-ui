@@ -274,14 +274,12 @@ public class SOCHomePageTestIT extends Base {
    * <li>Case ID:121928.</li>
    * <li>Test Case Name: Check [All activities] filter.</li>
    * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
-   */
-  /*
-   * Step Number: 1 Step Name: - Goto social homepage Step Description: - Log in -
-   * Goto homepage Input Data: Expected Outcome: - Home page is displayed Step
-   * number: 2 Step Name: - Check [All activity] filter Step Description: - In the
-   * drop -down select box, select [All Activities] Input Data: Expected Outcome:
-   * - All activities are displayed in activity stream
+   * <li>Post-Condition:</li> Step Number: 1 Step Name: - Goto social homepage
+   * Step Description: - Log in - Goto homepage Input Data: Expected Outcome: -
+   * Home page is displayed Step number: 2 Step Name: - Check [All activity]
+   * filter Step Description: - In the drop -down select box, select [All
+   * Activities] Input Data: Expected Outcome: - All activities are displayed in
+   * activity stream
    */
   @Test
   public void test10_CheckAllActivitiesFilter() {
@@ -300,14 +298,12 @@ public class SOCHomePageTestIT extends Base {
    * <li>Case ID:121929.</li>
    * <li>Test Case Name: Check [My Spaces] filter.</li>
    * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
-   */
-  /*
-   * Step Number: 1 Step Name: - Goto social homepage Step Description: - Log in -
-   * Goto homepage Input Data: Expected Outcome: - Home page is displayed Step
-   * number: 2 Step Name: - Check [My Spaces] filter Step Description: - In the
-   * drop -down select box, select [My Space] Input Data: Expected Outcome: - It
-   * shows only activities created in space where the user is a member
+   * <li>Post-Condition:</li> Step Number: 1 Step Name: - Goto social homepage
+   * Step Description: - Log in - Goto homepage Input Data: Expected Outcome: -
+   * Home page is displayed Step number: 2 Step Name: - Check [My Spaces] filter
+   * Step Description: - In the drop -down select box, select [My Space] Input
+   * Data: Expected Outcome: - It shows only activities created in space where the
+   * user is a member
    */
   @Test
   public void test11_CheckMySpacesFilter() {
@@ -331,15 +327,12 @@ public class SOCHomePageTestIT extends Base {
    * <li>Case ID:121930.</li>
    * <li>Test Case Name: Check [Connections] filter.</li>
    * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
-   */
-  /*
-   * Step Number: 1 Step Name: - Goto intranet homepage Step Description: - Log in
-   * - Goto intranet homepage Input Data: Expected Outcome: - Home page is
-   * displayed Step number: 2 Step Name: - Check [Connections] filter Step
-   * Description: - In the drop -down select box, select [Connnection] Input Data:
-   * Expected Outcome: shows only activities created by the user's connections and
-   * by the user himself, outside a space
+   * <li>Post-Condition:</li> Step Number: 1 Step Name: - Goto intranet homepage
+   * Step Description: - Log in - Goto intranet homepage Input Data: Expected
+   * Outcome: - Home page is displayed Step number: 2 Step Name: - Check
+   * [Connections] filter Step Description: - In the drop -down select box, select
+   * [Connnection] Input Data: Expected Outcome: shows only activities created by
+   * the user's connections and by the user himself, outside a space
    */
   @Test
   public void test12_CheckConnectionsFilter() {
@@ -366,16 +359,13 @@ public class SOCHomePageTestIT extends Base {
    * <li>Case ID:121931.</li>
    * <li>Test Case Name: Check [My Activities] filter.</li>
    * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
-   */
-  /*
-   * Step Number: 1 Step Name: - Go to intranethomepage Step Description: - Log in
-   * - Go to intranet homepage Input Data: Expected Outcome: - Home page is
-   * displayed* Step number: 2 Step Name: - check [My Activities] filter Step
-   * Description: - In the drop -down select box, select [My Activities] Input
-   * Data: Expected Outcome: shows only activities where the user has
-   * been @mentionned, the user has commented or liked, and the user's activities
-   * (inside and outside a space)
+   * <li>Post-Condition:</li> Step Number: 1 Step Name: - Go to intranethomepage
+   * Step Description: - Log in - Go to intranet homepage Input Data: Expected
+   * Outcome: - Home page is displayed* Step number: 2 Step Name: - check [My
+   * Activities] filter Step Description: - In the drop -down select box, select
+   * [My Activities] Input Data: Expected Outcome: shows only activities where the
+   * user has been @mentionned, the user has commented or liked, and the user's
+   * activities (inside and outside a space)
    */
 
   @Test
@@ -652,7 +642,11 @@ public class SOCHomePageTestIT extends Base {
    * <li>Case ID:121942.</li>
    * <li>Test Case Name: Update Profile - change of avatar.</li>
    * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
+   * <li>Post-Condition:</li> Step Number: 1 Step Name: - Change Avatar Step
+   * Description: - Connect to Intranet - Click username on Top Navitgation -> My
+   * Profile - Click [Change the avatar] and upload new avatar - Check homepage
+   * Input Data: Expected Outcome: - A user profile activity is updated in the
+   * activity stream - A comment is added: Avatar has been updated.
    */
   @Test
   public void test24_UpdateProfileChangeOfAvatar() {
@@ -660,13 +654,6 @@ public class SOCHomePageTestIT extends Base {
     String comment = "Avatar has been updated.";
     manageLogInOut.signIn(DATA_USER2, password);
 
-    /*
-     * Step Number: 1 Step Name: - Change Avatar Step Description: - Connect to
-     * Intranet - Click username on Top Navitgation -> My Profile - Click [Change
-     * the avatar] and upload new avatar - Check homepage Input Data: Expected
-     * Outcome: - A user profile activity is updated in the activity stream - A
-     * comment is added: Avatar has been updated.
-     */
     navigationToolbar.goToMyProfile();
     userProfilePage.goToEditProfile();
     userProfilePage.changeAvatar();
