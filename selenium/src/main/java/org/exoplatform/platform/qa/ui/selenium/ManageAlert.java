@@ -101,7 +101,7 @@ public class ManageAlert {
   /**
    * wait for confirmation
    *
-   * @param confirmationText
+   * @param confirmationText confirmationText
    * @param wait wait[0]: timeout
    */
   public void waitForConfirmation(String confirmationText, int... wait) {
@@ -136,7 +136,7 @@ public class ManageAlert {
   /**
    * Verify Alert Message
    *
-   * @param message
+   * @param message Alertmessage
    */
   public void verifyAlertMessage(String message) {
 
@@ -159,7 +159,7 @@ public class ManageAlert {
   /**
    * Input Alert Text
    *
-   * @param text
+   * @param text text
    */
   public void inputAlertText(String text) {
     try {

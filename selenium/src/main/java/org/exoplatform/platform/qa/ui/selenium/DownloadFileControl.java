@@ -64,8 +64,7 @@ public class DownloadFileControl {
   /**
    * Check download link
    *
-   * @param downloadUrl
-   * @throws Exception
+   * @param downloadUrl download link
    */
   public void downloadFile(String downloadUrl) throws Exception {
 

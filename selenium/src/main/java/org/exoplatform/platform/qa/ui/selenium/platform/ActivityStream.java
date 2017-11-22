@@ -34,7 +34,7 @@ public class ActivityStream {
   /**
    * constructor
    *
-   * @param dr
+   * @param testBase
    */
 
   public ActivityStream(TestBase testBase) {
@@ -511,9 +511,7 @@ public class ActivityStream {
   /**
    * Add new activity for space
    *
-   * @param addText
    * @param text
-   * @param addLink
    * @param link
    */
   public void addActivity(String text, String link) {
@@ -552,7 +550,6 @@ public class ActivityStream {
    * @param pathFolder
    * @param pathData
    * @param nameFile
-   * @param addText
    * @param text
    */
   public void uploadAndShareFileActivity(String nameDrive,

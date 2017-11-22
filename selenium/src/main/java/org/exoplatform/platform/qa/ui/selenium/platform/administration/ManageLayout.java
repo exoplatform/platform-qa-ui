@@ -222,7 +222,7 @@ public class ManageLayout {
   }
 
   /**
-   * Permission -> Access/Move apps/Edit...
+   * Permission - Access/Move apps/Edit...
    * 
    * @param tabName
    */
@@ -325,13 +325,8 @@ public class ManageLayout {
    * @param membership
    * @param addedGroup
    * @param permissionSelector
-   * @param popupName <<<<<<< HEAD is tab name: Access/Move Apps/Move Containers
-   *          <<<<<<< HEAD ======= <<<<<<< HEAD By: QuyenNT =======
-   * @Author: QuyenNT >>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page
-   *          Editor/Container Permissions Date: Oct 30, 2015 >>>>>>>
-   *          FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Container
-   *          Permissions =======
-   * @param popupTitle >>>>>>> FQA-2759:PLF43 - Write High Fnc/PLF/Restricted Page
+   * @param popupName  HEAD is tab name: Access/Move Apps/Move Containers
+   * @param popupTitle FQA-2759:PLF43 - Write High Fnc/PLF/Restricted Page
    *          Editor/Site Permissions
    */
   public void addPremission(String groupPath,
@@ -394,7 +389,7 @@ public class ManageLayout {
   }
 
   /**
-   * Container permission -> Access/Move apps/Move containers
+   * Container permission - Access/Move apps/Move containers
    * 
    * @param tabName
    */
@@ -447,8 +442,8 @@ public class ManageLayout {
   }
 
   /**
-   * <<<<<<< HEAD Select a container -> Set permission for Move Containers =======
-   * Select a container -> Set permission for Move Containers >>>>>>>
+   * HEAD Select a container - Set permission for Move Containers
+   * Select a container -Set permission for Move Containers
    * FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Container
    * Permissions
    * 
@@ -483,7 +478,7 @@ public class ManageLayout {
   }
 
   /**
-   * Select a container -> Set move container permission to No-one
+   * Select a container - Set move container permission to No-one
    */
   public void uncheckMoveContainerPublicMode() {
     WebElement permissionTable =
@@ -520,7 +515,7 @@ public class ManageLayout {
   }
 
   /**
-   * Select a container -> Set move apps permission to No-one
+   * Select a container - Set move apps permission to No-one
    */
   public void uncheckMoveAppsPublicMode() {
     WebElement permissionTable = evt.waitForAndGetElement(
