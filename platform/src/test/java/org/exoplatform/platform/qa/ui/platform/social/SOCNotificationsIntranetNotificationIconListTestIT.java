@@ -15,7 +15,9 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.CollectionCondition;
@@ -28,7 +30,9 @@ import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.social.pageobject.IntranetNotification;
 import org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting;
-
+@Tag("social")
+@Tag("sniff")
+@BugInPLF("SOC-5868")
 public class SOCNotificationsIntranetNotificationIconListTestIT extends Base {
   NavigationToolbar      navigationToolbar;
 
