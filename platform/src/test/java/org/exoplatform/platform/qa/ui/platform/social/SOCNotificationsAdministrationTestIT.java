@@ -12,8 +12,10 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
@@ -31,6 +33,9 @@ import org.exoplatform.platform.qa.ui.social.pageobject.NotificationsAdminSeting
 /**
  * @author eXo
  */
+@Tag("social")
+@Tag("sniff")
+@BugInPLF("SOC-5868")
 public class SOCNotificationsAdministrationTestIT extends Base {
   NavigationToolbar        navigationToolbar;
 
