@@ -30,7 +30,7 @@ import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.logger.Logger;
 
 /**
- * @TODO: Use {@link java.util.Formatter.DateTime} instead.
+ *  Use {@link java.util.Formatter.DateTime} instead.
  */
 public class DateTestBase {
   private final TestBase testBase;

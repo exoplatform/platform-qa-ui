@@ -44,7 +44,7 @@ public class CreateNewDocument {
   /**
    * Create a new document
    *
-   * @param type
+   * @param type enum
    */
   public void createNewDoc(selectDocumentType type) {
     info("Go to type " + type);
@@ -114,8 +114,8 @@ public class CreateNewDocument {
   /**
    * Add and select the type of new Content Folder By QuynhPT Date 16/01/2015
    *
-   * @param title
-   * @param type
+   * @param title String
+   * @param type String
    */
   public void createNewFolder(String title, folderType type) {
     info("-- Creating a new folder --");
@@ -152,8 +152,8 @@ public class CreateNewDocument {
    * Add a new file only with title and content string update QuynhPT date
    * 13/01/2015
    *
-   * @param title
-   * @param content
+   * @param title String
+   * @param content String
    */
   public void addNewFile(String title, String content) {
     this.testBase.getExoWebDriver().getWebDriver().navigate().refresh();
@@ -166,8 +166,8 @@ public class CreateNewDocument {
   /**
    * Add a new Webcontent
    *
-   * @param title
-   * @param content
+   * @param title String
+   * @param content String
    */
   public void addNewWebContent(String title, String content) {
     $(ELEMENT_FILEFORM_BLANK_NAME).click();
@@ -180,8 +180,8 @@ public class CreateNewDocument {
   /**
    * Add a new product
    *
-   * @param title
-   * @param summary
+   * @param title String
+   * @param summary String
    */
   public void addNewProduct(String title, String summary) {
     testBase.getExoWebDriver().getWebDriver().navigate().refresh();
@@ -205,7 +205,7 @@ public class CreateNewDocument {
   /**
    * Add a link into webcontent
    *
-   * @param url
+   * @param url String
    */
   public void addLinkInWebContent(String url) {
     evt.click(ELEMENT_WEBCONTENTFORM_BUTTON_LINK);
@@ -216,12 +216,12 @@ public class CreateNewDocument {
   /**
    * Create a Advanced Document
    *
-   * @param name
-   * @param content
-   * @param title
-   * @param desc
-   * @param creator
-   * @param source
+   * @param name String
+   * @param content String
+   * @param title String
+   * @param desc String
+   * @param creator String
+   * @param source String
    */
   public void createAdvancedDocument(String name, String content, String title, String desc, String creator, String source) {
 

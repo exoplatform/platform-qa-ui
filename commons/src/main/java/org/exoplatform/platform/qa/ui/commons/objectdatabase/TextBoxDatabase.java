@@ -9,8 +9,8 @@ public class TextBoxDatabase {
 
 	/**
 	 * TextBoxDatabase
-	 * @param type
-	 * @param content
+	 * @param type String
+	 * @param content String
 	 */
 	public TextBoxDatabase(ArrayList<Integer> type, ArrayList<String> content){
 		this.type = type;
@@ -27,16 +27,16 @@ public class TextBoxDatabase {
 
 	/**
 	 * setContentData
-	 * @param userDataFile
-	 * @param userSheet
-	 * @param opParams
-	 * @throws Exception
+	 * @param userDataFile String
+	 * @param userSheet String
+	 * @param opParams String
+	 * @throws Exception String
 	 */
 
 
 	/**
 	 * Get file name by index
-	 * @param index
+	 * @param index int
 	 * @return content.get(index)
 	 */
 	public String getContentByIndex(int index){
@@ -56,7 +56,7 @@ public class TextBoxDatabase {
 
 	/**
 	 * getArrayContentByType
-	 * @param type
+	 * @param type int
 	 * @return arrayContent
 	 */
 	public ArrayList<String> getArrayContentByType(int type){
@@ -72,7 +72,7 @@ public class TextBoxDatabase {
 
 	/**
 	 * getArrayContentByArrayType
-	 * @param type
+	 * @param type int
 	 * @return arrayContent
 	 */
 	public ArrayList<String> getArrayContentByArrayType(int...type){
@@ -90,7 +90,7 @@ public class TextBoxDatabase {
 
 	/**
 	 * getContentByArrayTypeRandom
-	 * @param type
+	 * @param type int
 	 * @return Content
 	 */
 	public String getContentByArrayTypeRandom(int type){

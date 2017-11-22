@@ -741,7 +741,6 @@ public class TestBase {
   /**
    * Check if a checkbox is checked or not
    *
-   * @Author: QuyenNT Date: Oct 30, 2015
    * @param checkedElement string
    */
   public boolean checkCheckBoxAttribute(String checkedElement) {

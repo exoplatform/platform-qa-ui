@@ -315,11 +315,11 @@ public class EventManagement {
   /**
    * Input into basic fields of Quick EVENT form
    *
-   * @param name
+   * @param name String
    * @param from From date, time of a EVENT i.e.: 11/06/2013 14:00
    * @param to To date, time of a EVENT, i.e.: 11/06/2013 14:00
-   * @param allDay
-   * @param opt
+   * @param allDay boolean
+   * @param opt String
    */
   public void inputDataEventInQuickForm(String name, String note, String from, String to, boolean allDay, String... opt) {
     inputFromToQuickEvent(from, to, allDay);
@@ -330,12 +330,12 @@ public class EventManagement {
   /**
    * Input into basic fields of detail EVENT form
    *
-   * @param name
-   * @param note
+   * @param name String
+   * @param note String
    * @param from From date, time of a EVENT i.e.: 11/06/2013 14:00
    * @param to To date, time of a EVENT, i.e.: 11/06/2013 14:00
-   * @param allDay
-   * @param opt
+   * @param allDay boolean
+   * @param opt boolean
    */
   public void inputDataEventInDetailForm(String name, String note, String from, String to, boolean allDay, String... opt) {
     inputBasicDetailEvent(name, note, opt);
@@ -372,7 +372,7 @@ public class EventManagement {
    *
    * @param fromDateTime (Format: MM/dd/yyyy HH:mm)
    * @param toDateTime (Format: MM/dd/yyyy HH:mm)
-   * @param duration
+   * @param duration int
    */
   public void checkSuggestionEventTimeInQuickForm(String fromDateTime, String toDateTime, int duration) {
     info("Check date is current date");
@@ -434,7 +434,7 @@ public class EventManagement {
    *
    * @param fromDateTime (Format: MM/dd/yyyy HH:mm)
    * @param toDateTime (Format: MM/dd/yyyy HH:mm)
-   * @param duration
+   * @param duration int
    */
   public void checkSuggestionEventTimeInDetailForm(String fromDateTime, String toDateTime, int duration) {
     info("Check date is current date");
@@ -494,8 +494,8 @@ public class EventManagement {
   /**
    * add participants into schedule
    *
-   * @param user
-   * @param type
+   * @param user String
+   * @param type int
    */
   public void addParticipants(String user, int type) {
     evt.click(ELEMENT_ADD_PARTICIPANTS_BUTTON_IN_SCHEDULE_TAB);
@@ -531,7 +531,7 @@ public class EventManagement {
   /**
    * Check busy time of user
    *
-   * @param user
+   * @param user String
    * @param from (ex: HH:mm)
    * @param to (ex: HH:mm)
    */
@@ -589,9 +589,9 @@ public class EventManagement {
   /**
    * change time event from schedule tab
    *
-   * @param option
-   * @param fromTime
-   * @param toTime
+   * @param option String
+   * @param fromTime String
+   * @param toTime String
    */
   public void changeTimeEventFromScheduleTab(PlatformBase.selectArrowOption option, String fromTime, String toTime) {
     info("Change time event in schedule tab");
@@ -633,7 +633,7 @@ public class EventManagement {
   /**
    * selectAvailable on participant tab
    *
-   * @param option
+   * @param option enum
    */
   public void selectAvailable(selectAvailableOption option) {
     switch (option) {
@@ -659,7 +659,7 @@ public class EventManagement {
   /**
    * selectSendInvitation
    *
-   * @param option
+   * @param option enum
    */
   public void selectSendInvitation(PlatformBase.selectInvitationOption option) {
     switch (option) {
@@ -686,9 +686,9 @@ public class EventManagement {
   /**
    * select user participant
    *
-   * @param users
-   * @param content
-   * @param type
+   * @param users String
+   * @param content String
+   * @param type int
    */
   public void selectUserParticipants(String users, String content, int type) {
     info("Select User Participant");
@@ -771,9 +771,9 @@ public class EventManagement {
    * input recurring info event
    *
    * @param repeatType repeat type: Daily, Weekly, Monthly, Yearly;
-   * @param repeatInterval
-   * @param repeatOn
-   * @param endRepeat
+   * @param repeatInterval String
+   * @param repeatOn String
+   * @param endRepeat String
    * @param option occurrennumber if endRepeat.equals(repeatEndType.After) day
    *          format if endRepeat.equals(repeatEndType.ByThisDate) -- format:
    *          mm/dd/yyyy
@@ -821,7 +821,7 @@ public class EventManagement {
   /**
    * Add more Repeat By option
    *
-   * @param isMonthByMonth
+   * @param isMonthByMonth boolean
    */
   public void selectRepeatByOption(boolean isMonthByMonth) {
     if (isMonthByMonth)
@@ -940,7 +940,7 @@ public class EventManagement {
   /**
    * Delete recurring Confirm selection
    * 
-   * @param optEditType
+   * @param optEditType String
    */
   public void deleteRecurringConfirm(recurringType optEditType) {
     evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_RECURRING_FORM);
@@ -1025,7 +1025,7 @@ public class EventManagement {
   /**
    * Select an option as 5,10,15,20,...60 for reminder Email box
    * 
-   * @param option
+   * @param option String
    */
   public void selectReminderEmailBox(String option) {
     info("Select an option");
@@ -1130,8 +1130,8 @@ public class EventManagement {
   /**
    * Check display of event
    * 
-   * @param event
-   * @param isPresent
+   * @param event String
+   * @param isPresent boolean
    */
   public void checkDisplayOfEvent(String event, boolean isPresent) {
     if (isPresent)
@@ -1143,8 +1143,8 @@ public class EventManagement {
   /**
    * function: check content of mail then delete mail in email server
    * 
-   * @param titleEvent
-   * @param opParams
+   * @param titleEvent String
+   * @param opParams object
    */
   public void checkEmailNotificationReminderEvent(String titleEvent, Object... opParams) {
     info("Check and delete mail");

@@ -99,7 +99,7 @@ public class DocumentPreview {
   /**
    * press Enter to add comments to Comment area
    * 
-   * @param text
+   * @param text String
    * @param number is the number of comments that are added to the area
    */
   public void addComment(String text, int number) {

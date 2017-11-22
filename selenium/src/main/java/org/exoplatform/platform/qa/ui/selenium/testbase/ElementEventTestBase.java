@@ -927,7 +927,6 @@ public class ElementEventTestBase {
   /**
    * Check if a checkbox is checked or not
    *
-   * @Author: QuyenNT Date: Oct 30, 2015
    */
   public boolean checkCheckBoxAttribute(String checkedElement) {
     Logger.info("Check checkbox attribute");

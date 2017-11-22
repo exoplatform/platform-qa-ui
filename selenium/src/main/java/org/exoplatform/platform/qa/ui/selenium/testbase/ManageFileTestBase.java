@@ -216,7 +216,7 @@ public class ManageFileTestBase {
    * function: check a file existed in folder
    *
    * @param file file name (eg: export.zip)
-   * @return true -> file exist false-> file is not exist
+   * @return true -file exist false- file is not exist
    */
   public boolean checkFileExisted(String file) {
     String pathFile = System.getProperty("user.dir") + "/src/main/resources/TestData/" + file;

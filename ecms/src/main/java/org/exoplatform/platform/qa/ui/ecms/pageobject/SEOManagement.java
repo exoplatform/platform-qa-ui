@@ -23,7 +23,7 @@ public class SEOManagement {
   /**
    * Delete a added language
    * 
-   * @param language
+   * @param language String
    */
   public void deleteLanguage(String language) {
     evt.click(ELEMENT_SEO_SELECTED_LANGUAGE.replace("${language}", language));

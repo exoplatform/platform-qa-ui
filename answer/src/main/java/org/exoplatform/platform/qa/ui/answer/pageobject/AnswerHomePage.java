@@ -22,7 +22,7 @@ public class AnswerHomePage {
   /**
    * constructor
    * 
-   * @param dr
+   * @param testBase
    */
   public AnswerHomePage(TestBase testBase) {
     this.testBase = testBase;

@@ -25,7 +25,7 @@ public class CommentManagement {
   /**
    * constructor
    *
-   * @param dr
+   * @param testBase
    */
   public CommentManagement(TestBase testBase) {
     this.testBase = testBase;
@@ -51,9 +51,6 @@ public class CommentManagement {
    * Input data to COMMENT form
    * 
    * @param content
-   * @param isApprove
-   * @param isActive
-   * @param related
    */
   public void inputDataToComment(String content) {
     info("Input data to COMMENT form");
@@ -70,7 +67,6 @@ public class CommentManagement {
    * Execute action of COMMENT: EDIT, APPROVE, DISAPPROVE, ACTIVE, DEACTIVE,
    * DELETE
    * 
-   * @param COMMENT
    * @param action action that needs to be done
    */
   public void goToActionOfCommentFromMoreAction(String comment, actionCommentOption action) {
@@ -102,7 +98,7 @@ public class CommentManagement {
   /**
    * Delete comment
    * 
-   * @param comment
+   * @param comment string
    */
   public void deleteComment(String comment) {
     info("Delete COMMENT");

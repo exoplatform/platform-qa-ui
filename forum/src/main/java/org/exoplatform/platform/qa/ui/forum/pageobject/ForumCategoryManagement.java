@@ -65,7 +65,7 @@ public class ForumCategoryManagement {
   /**
    * select a item in Manage Category Menu By QuynhPT
    *
-   * @param item
+   * @param item enum
    */
   public void selectItemManageCategoryMenu(specifManageCategoryMenu item) {
     info("Waiting manage menu is shown");
@@ -114,7 +114,7 @@ public class ForumCategoryManagement {
   /**
    * Edit a category
    *
-   * @param newName
+   * @param newName String
    */
   public void editCategory(String newName) {
     selectItemManageCategoryMenu(specifManageCategoryMenu.EDIT_CATEGORY);
@@ -128,7 +128,7 @@ public class ForumCategoryManagement {
   /**
    * Delete Category By QuynhPT
    *
-   * @param nameCat
+   * @param nameCat String
    */
   public void deleteCategory(String nameCat) {
     // TODO Auto-generated method stub
@@ -156,8 +156,8 @@ public class ForumCategoryManagement {
   /**
    * Export a forum
    *
-   * @param forumName
-   * @param fileName
+   * @param forumName String
+   * @param fileName 
    */
   public void exportForum(String forumName, String fileName) {
     selectItemManageCategoryMenu(specifManageCategoryMenu.EXPORT_FORUM);
