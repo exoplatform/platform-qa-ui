@@ -42,8 +42,6 @@ public class CalendarEventRecurringTestIT extends Base {
    * Case ID:115634. Test Case Name: Edit a recurring event with "Following
    * events" option. Case ID:115632. Test Case Name: Delete Following events in
    * recurring event. Pre-Condition: A recurring events is created Post-Condition:
-   */
-  /*
    * Step number: 2 Step Name: Step 2: Show Edit an event form Step Description: -
    * Edit an even from the series Input Data: Expected Outcome: - The pop up
    * "Edit Recurring event" is displayed - The icon "Repeat" is checked Step
@@ -53,9 +51,6 @@ public class CalendarEventRecurringTestIT extends Base {
    * "Would you like to change only this event, all events in the series, or this and all following events in the series?"
    * - 3 options: + Only this event + Following events + All events - The option
    * "Only this Event" is selcted by Default
-   */
-
-  /*
    * Step number: 4 Step Name: Step 4: Choose option to change Step Description: -
    * Choose "Following events" - Click "Save" Input Data: Expected Outcome: -
    * Changes are appliyed for current & following events Step number: 2 Step Name:
@@ -66,9 +61,6 @@ public class CalendarEventRecurringTestIT extends Base {
    * event, all events in the series, or this and all following events in the
    * series?* The option 'Only this
    * event" is selected by default* A button "Delete"
-   */
-
-  /*
    * Step number: 3 Step Name: <p>Step 3: Delete only this event<br data -mce
    * -bogus="1"></p> Step Description: <p> - Choose the default option
    * "Following events"<br> - Click "Delete"</p> Input Data: Expected Outcome: <p>
@@ -245,9 +237,6 @@ public class CalendarEventRecurringTestIT extends Base {
    * Step Name: Step 2: Show Edit an event form Step Description: - Edit an even
    * from the series Input Data: Expected Outcome: - The pop up "Edit Recurring
    * event" is displayed - The icon "Repeat" is checked
-   */
-
-  /*
    * Step number: 3 Step Name: Step 3: Edit repeat option Step Description: - Edit
    * any information of event - Click "Save" Input Data: Expected Outcome: - A
    * confirmation pop up is displayed to ask user:
@@ -257,14 +246,9 @@ public class CalendarEventRecurringTestIT extends Base {
    * Choose option to change Step Description: - Choose the default option
    * "Only this event" - Click "Save" Input Data: Expected Outcome: - Changes are
    * restricted to the edited recurring event
-   */
-  /*
    * Step Number: 1 Step Name: <p>Step 1: Show calendar application<br data -mce
    * -bogus="1"></p> Step Description: - Connect to Intranet - Open "Calendar"
    * application Input Data: Expected Outcome: - A recurring events is displayed
-   */
-
-  /*
    * Step number: 2 Step Name: <p>Step 2: Select a recurring event<br data -mce
    * -bogus="1"></p> Step Description: - Right click on event from the series -
    * Choose the option "Delete" Input Data: Expected Outcome: - A pop upis
@@ -272,9 +256,6 @@ public class CalendarEventRecurringTestIT extends Base {
    * to delete only this event, all events in the series, or this and all
    * following events in the series?* The option 'Only this
    * event" is selected by default* A button "Delete"
-   */
-
-  /*
    * Step number: 3 Step Name: <p>Step 3: Delete only this event<br data -mce
    * -bogus="1"></p> Step Description: - Choose the default option
    * "Only this event" - Click "Delete" Input Data: Expected Outcome: - Only
@@ -405,9 +386,6 @@ public class CalendarEventRecurringTestIT extends Base {
    * Show Edit an event form Step Description: - Edit an even from the series
    * Input Data: Expected Outcome: - The pop up "Edit Recurring event" is
    * displayed - The icon "Repeat" is checked
-   */
-
-  /*
    * Step number: 3 Step Name: Step 3: Edit repeat option Step Description: - Edit
    * the repeat option - Click "Save" Input Data: Expected Outcome: - A
    * confirmation pop up is displayed to ask user:
@@ -416,8 +394,6 @@ public class CalendarEventRecurringTestIT extends Base {
    * "Only this Event" is selcted by Default Step number: 4 Step Name: Step 4:
    * Choose option to change Step Description: - Choose "All events" - Click
    * "Save" Input Data: Expected Outcome: - Changes are appliyed for all events
-   */
-  /*
    * Step number: 3 Step Name: <p>Step 3: Delete event<br data -mce
    * -bogus="1"></p> Step Description: <p> - Choose the default option
    * "All events"<br> - Click "Delete"</p> Input Data: Expected Outcome: <p> - All
