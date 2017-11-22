@@ -10,6 +10,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocat
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
@@ -21,7 +22,8 @@ import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
-
+@Tag("social")
+@Tag("sniff")
 public class SOCPeopleProfileExperienceTestIT extends Base {
 
   NavigationToolbar     navigationToolbar;
@@ -53,8 +55,6 @@ public class SOCPeopleProfileExperienceTestIT extends Base {
    * <li>Test Case Name: Check my Experience section.</li>
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li>
-   */
-  /**
    * <li>Case ID:122952.</li>
    * <li>Test Case Name: Check Experience section of another user.</li>
    * <li>Pre-Condition: - User A and User B are created - The section About me and
@@ -67,9 +67,6 @@ public class SOCPeopleProfileExperienceTestIT extends Base {
    * experience] Input Data: Expected Outcome: - The followings fields are
    * displayed : Organization* Job Title* Job details* Skills Used* Start Date*
    * End Date
-   */
-
-  /*
    * Step number: 3 Step Name: Step 3 : Fill experience Step Description: - Fill
    * all experience fields - Click save - Check display Input Data: Expected
    * Outcome: Respecting the order, the following fields can be displayed in the
