@@ -58,9 +58,6 @@ public class CalendarEventTestIT extends Base {
    * Outcome: - Attachment is added to event Step Number: 1 Step Name: Step 1:
    * Open edit event form Step Description: - Go to calendar - Select event which
    * has attachment and edit Input Data: Expected Outcome: - Edit form appears
-   */
-
-  /*
    * Step number: 2 Step Name: Step 2: Remove attachment Step Description: - Click
    * [Delete] icon - Click Save Input Data: Expected Outcome: - Attachment is
    * deleted
@@ -812,8 +809,6 @@ public class CalendarEventTestIT extends Base {
    * Step number: 4 Step Name: Step 4: Save Step Description: - Click Save to
    * finish Input Data: Expected Outcome: - Event in shared calendar is edited -
    * Sharing user can see updated event
-   */
-  /*
    * Step Number: 1 Step Name: - Step Description: Step 1: Create & share a
    * calendar Input Data: - Create personal calendar - Share added calendar with
    * edit right Expected Outcome: Calendar is created and shared Step number: 2
@@ -821,9 +816,6 @@ public class CalendarEventTestIT extends Base {
    * Data: - Log in as shared user - Click wheel icon of shared calendar then
    * choose Add event - Input Event summary and click Save Expected Outcome: - The
    * shared user can see the shared calendar and add event into it.
-   */
-
-  /*
    * Step number: 3 Step Name: - Step Description: Step 3: Delete an event to a
    * shared calendar Input Data: - Right click on event then choose Delete - Click
    * OK at confirmation - Save Expected Outcome: - Event is deleted - The sharing
