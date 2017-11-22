@@ -85,22 +85,15 @@ public class CalendarPublishActivityTestIT extends Base {
    * calendars for spaces - An edited recurring event is displayed, edited by drag
    * & drop or by only this event option - An activity of edited recurring event
    * is displayed in the activity stream Post-Condition:
-   */
-  /*
    * Step Number: 1 Step Name: <p>Step 1: Open calendar application<br data -mce
    * -bogus="1"></p> Step Description: <p> - Connect to Intranet<br> - Open
    * "Calendar" application</p> Input Data: Expected Outcome: <p> - The calendar
    * application is displayed</p><p> - An edited recurring event is
    * displayed&nbsp;</p><p><br></p>
-   */
-  /*
    * Step number: 2 Step Name: <p>Step 2: Delete the edited recurring event<br
    * data -mce -bogus="1"></p> Step Description: <p> - Right click on the edited
    * recurring event</p><p> - Click Delete</p> Input Data: Expected Outcome: <p> -
    * The edited recurring event is deleted</p>
-   */
-
-  /*
    * Step number: 3 Step Name: <p>Step 3: Check activity<br data -mce
    * -bogus="1"></p> Step Description: - Go to the Homepage Input Data: Expected
    * Outcome: <p> - In the activity stream: </p><p>Activity of the edited
@@ -213,9 +206,6 @@ public class CalendarPublishActivityTestIT extends Base {
    * <p>
    * - All events of the series are deleted
    * </p>
-   */
-
-  /*
    * Step number: 4 Step Name: <p>Step 4: Check activity after delete event<br
    * data -mce -bogus="1"></p> Step Description: - Go to the Homepage Input Data:
    * Expected Outcome: <p> - In the activity stream, the activity of recurring
@@ -562,24 +552,15 @@ public class CalendarPublishActivityTestIT extends Base {
    * Step Name: - Create a Group calendar Step Description: - Login and Click
    * [Join a Space] - Create a new space Input Data: Expected Outcome: - Space and
    * Group calendar of space is created succesfully
-   */
   // See function setUpBeforeTest()
-
-  /*
    * Step number: 2 Step Name: - Create new event Step Description: - Go to
    * Calendar - Click Add Event button - Input the info of event and click save
    * Input Data: Expected Outcome: - Event is created successfully
-   */
-  /*
    * Step number: 3 Step Name: - Check Activity stream Step Description: - Goto
    * Homepage and check activity stream Input Data: Expected Outcome: - The
    * activity of creating Event is added and displayed in the activity stream
-   */
-  /*
    * Step number: 2 Step Name: Step Description: - Click on Title of the event
    * Input Data: Expected Outcome: Space calendar opens with event details opened.
-   */
-  /*
    * Step number: 2 Step Name: - Delete event Step Description: - Right click on
    * event and select delete - Click ok to confirm - Check activity stream Input
    * Data: Expected Outcome: - The event's activity is removed from the activity
