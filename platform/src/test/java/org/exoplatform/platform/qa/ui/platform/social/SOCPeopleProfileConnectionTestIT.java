@@ -11,6 +11,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
@@ -22,7 +23,8 @@ import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
-
+@Tag("sniff")
+@Tag("social")
 public class SOCPeopleProfileConnectionTestIT extends Base {
   NavigationToolbar     navigationToolbar;
 
@@ -50,8 +52,6 @@ public class SOCPeopleProfileConnectionTestIT extends Base {
    * <li>Test Case Name: Check my Connections section when no connection.</li>
    * <li>Pre-Condition: User A doesn't have any connection</li>
    * <li>Post-Condition:</li>
-   */
-  /**
    * <li>Case ID:122971.</li>
    * <li>Test Case Name: Check the Connections of another user when no
    * connection.</li>
@@ -142,14 +142,10 @@ public class SOCPeopleProfileConnectionTestIT extends Base {
    * <li>Test Case Name: Check my Connections section.</li>
    * <li>Pre-Condition: User A has 13 connections</li>
    * <li>Post-Condition:</li>
-   */
-  /**
    * <li>Case ID:122956.</li>
    * <li>Test Case Name: Check the Connections section of another user.</li>
    * <li>Pre-Condition: User A has 3 connections</li>
    * <li>Post-Condition:</li> Issue: https://jira.exoplatform.org/browse/SOC-4789
-   */
-  /*
    * Step Number: 1 Step Name: Step 1 : check Connections in profile page Step
    * Description: - Login - Go to profile page of User A Input Data: Expected
    * Outcome: - A new section Connections is added in the right column of the
