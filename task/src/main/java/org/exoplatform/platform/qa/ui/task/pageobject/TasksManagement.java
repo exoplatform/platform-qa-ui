@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.task.pageobject;
 
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
@@ -85,6 +86,7 @@ public class TasksManagement {
     ELEMENT_BUTTON_ADD_TASK.click();
     ELEMENT_INPUT_TASK_TITLE.setValue(taskContent).pressEnter();
     ELEMENT_TASK_FORM.waitUntil(Condition.appears, Configuration.timeout);
+    $(byText(taskContent)).waitUntil(Condition.visible, Configuration.timeout);
   }
 
   public void editTask(String taskContent, String newTask, String priority) {
@@ -102,6 +104,7 @@ public class TasksManagement {
     ELEMENT_TASK_FORM_ICOND_DROP_DOWN_MENU.click();
     ELEMENT_TASK_BUTTON_DELETE.click();
     ELEMENT_TASK_BUTTON_DELETE_OK.click();
+    $(byText(taskContent)).should(Condition.exist);
   }
 
   public void addCoworker(String task) {
