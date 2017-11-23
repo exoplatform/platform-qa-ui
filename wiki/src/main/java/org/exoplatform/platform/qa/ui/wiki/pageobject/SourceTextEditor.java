@@ -175,6 +175,7 @@ public class SourceTextEditor {
     $(ELEMENT_WIKI_PAGE_TOOL_BAR_AUTO_SAVE_TEXT).waitUntil(Condition.visible,31000);
   }
 
+
   /**
    * Attach a file to a Wiki page
    *
@@ -202,7 +203,6 @@ public class SourceTextEditor {
 
   /**
    * Attach many files to a wiki page
-   * 
    * @param link String
    */
   public void attachMultiFiles(String link) {

@@ -755,7 +755,7 @@ public class ActivityStream {
    * @param username String
    * @param textContent String
    * @param activity String
-   * @throws AWTException AWTException
+   * @throws AWTException  AWTException
    */
   public void addCommentWithMentionUser(String activity, String username, String textContent) {
     // get the id of activity created
@@ -925,6 +925,7 @@ public class ActivityStream {
   /**
    * Remove an activity
    *
+   * @param name String
    */
   public void deleteActivity(String name) {
     info("remove activity");

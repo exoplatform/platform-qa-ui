@@ -123,8 +123,8 @@ public class NavigationToolbar {
   }
 
   /**
-   * function: Go to Users and Group management (administration - Users - Groups
-   * and Roles)
+   * function: Go to Users and Group management (administration - Users -
+   * Groups and Roles)
    */
   public void goToUsersAndGroupsManagement() {
     info("--Go to Users and groups management--");

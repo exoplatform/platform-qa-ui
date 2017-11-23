@@ -944,13 +944,8 @@ public class EventManagement {
 
   /**
    * Delete recurring Confirm selection
-<<<<<<< 90efa636f7e7a40852084c3df9f7aa8dc7aeb943
-   * 
-   * @param optEditType String
-=======
    *
-   * @param optEditType
->>>>>>> calendar publish activity
+   * @param optEditType String
    */
   public void deleteRecurringConfirm(recurringType optEditType) {
     evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_RECURRING_FORM);
@@ -1034,13 +1029,8 @@ public class EventManagement {
 
   /**
    * Select an option as 5,10,15,20,...60 for reminder Email box
-<<<<<<< 90efa636f7e7a40852084c3df9f7aa8dc7aeb943
-   * 
-   * @param option String
-=======
    *
-   * @param option
->>>>>>> calendar publish activity
+   * @param option String
    */
   public void selectReminderEmailBox(String option) {
     info("Select an option");
@@ -1144,15 +1134,9 @@ public class EventManagement {
 
   /**
    * Check display of event
-<<<<<<< 90efa636f7e7a40852084c3df9f7aa8dc7aeb943
-   * 
+   *
    * @param event String
    * @param isPresent boolean
-=======
-   *
-   * @param event
-   * @param isPresent
->>>>>>> calendar publish activity
    */
   public void checkDisplayOfEvent(String event, boolean isPresent) {
     if (isPresent)
@@ -1163,15 +1147,9 @@ public class EventManagement {
 
   /**
    * function: check content of mail then delete mail in email server
-<<<<<<< 90efa636f7e7a40852084c3df9f7aa8dc7aeb943
-   * 
+   *
    * @param titleEvent String
    * @param opParams object
-=======
-   *
-   * @param titleEvent
-   * @param opParams
->>>>>>> calendar publish activity
    */
   public void checkEmailNotificationReminderEvent(String titleEvent, Object... opParams) {
     info("Check and delete mail");

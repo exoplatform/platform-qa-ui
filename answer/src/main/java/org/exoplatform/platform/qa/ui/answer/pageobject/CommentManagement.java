@@ -69,6 +69,7 @@ public class CommentManagement {
    * Execute action of COMMENT: EDIT, APPROVE, DISAPPROVE, ACTIVE, DEACTIVE,
    * DELETE
    * @param comment String
+   *
    * @param action action that needs to be done
    */
   public void goToActionOfCommentFromMoreAction(String comment, actionCommentOption action) {
@@ -101,7 +102,7 @@ public class CommentManagement {
 
   /**
    * Delete comment
-   *
+   * 
    * @param comment string
    */
   public void deleteComment(String comment) {

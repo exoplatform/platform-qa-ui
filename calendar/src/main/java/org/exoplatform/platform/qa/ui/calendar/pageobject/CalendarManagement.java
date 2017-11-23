@@ -41,9 +41,8 @@ public class CalendarManagement {
 
   /**
    * constructor
-   *
+   * 
    * @param testBase
-
    */
   public CalendarManagement(TestBase testBase) {
     this.testBase = testBase;
@@ -201,8 +200,7 @@ public class CalendarManagement {
 
   /**
    * Remove a group in group table of Calendar form
-   *
-
+   * 
    * @param groupName String
    */
   public void removeGroupInGroupTabCalendarForm(String groupName) {
@@ -214,8 +212,8 @@ public class CalendarManagement {
 
   /**
    * Select a user/role who has edit permission in a group
-   *
-   * @param user Stringt
+   * 
+   * @param user String
    * @param mode way to input users, groups. =0: type directly =1: select user =2:
    *          select role
    */
@@ -245,7 +243,7 @@ public class CalendarManagement {
 
   /**
    * Select group permission
-   *
+   * 
    * @param group String
    * @param membership String
    */
@@ -266,7 +264,7 @@ public class CalendarManagement {
 
   /**
    * Check user selector in group calendar
-   *
+   * 
    * @param cal String
    * @param user String
    * @param isPresent boolean
@@ -301,7 +299,7 @@ public class CalendarManagement {
 
   /**
    * Go to Calendar Actions -Add Event Category
-   *
+   * 
    * @param categoryName category name of Calendar
    */
   public void addEventCategory(String categoryName) {
@@ -665,7 +663,7 @@ public class CalendarManagement {
 
   /**
    * change start and end time for working time in calendar setting form
-   *
+   * 
    * @param startTime String
    * @param endTime String
    */
@@ -722,7 +720,7 @@ public class CalendarManagement {
 
   /**
    * Show/Hide event/task from Calendar list
-   *
+   * 
    * @param calendar String
    */
   public void showHideEventTask(String calendar) {
@@ -807,7 +805,7 @@ public class CalendarManagement {
 
   /**
    * Select an option in context menu
-   *
+   * 
    * @param option String
    */
   public void selectOptionByRightclickOnEvent(contextMenuEditEvenOption option) {
@@ -841,7 +839,7 @@ public class CalendarManagement {
 
   /**
    * Open edit event form by right click on the event
-   *
+   * 
    * @param name String
    */
   public void openEditPopupEventByRightClick(String name) {
@@ -854,7 +852,7 @@ public class CalendarManagement {
 
   /**
    * Open add/edit event popup by double clicking
-   *
+   * 
    * @param name String
    * @param opt is an instance of a repeated event as 1,2,3,4....
    * @param view view
@@ -913,7 +911,7 @@ public class CalendarManagement {
 
   /**
    * Open quick Add Event/Task popup by index in Month View
-   *
+   * 
    * @param col String
    * @param row String
    */
@@ -927,8 +925,8 @@ public class CalendarManagement {
 
   /**
    * Remove an event or a task in any views by right Click
-   *
-   * @param name Stringrie
+   * 
+   * @param name String
    */
   public void deleteTaskEvent(String name) {
     info("Right click on an Event/Task");
@@ -945,8 +943,8 @@ public class CalendarManagement {
 
   /**
    * Delete task/event by selecting an task/event's checkbox in List View
-   *
-   * @param name Stringe
+   * 
+   * @param name String
    */
   public void deleteTaskEventInListView(String name) {
     if (!name.isEmpty()) {
@@ -991,7 +989,7 @@ public class CalendarManagement {
 
   /**
    * Remove an event or a task on List tab
-   *
+   * 
    */
   public void deleteAllTaskEvent() {
     if (evt.waitForAndGetElement(ELMENT_CALENDAR_TAB_LIST_EMPTY, 3000, 0) == null) {
@@ -1011,7 +1009,7 @@ public class CalendarManagement {
 
   /**
    * Scroll to element to view
-   *
+   * 
    * @param element WebElement
    */
   public void scrollElementIntoView(WebElement element) {
@@ -1022,7 +1020,7 @@ public class CalendarManagement {
 
   /**
    * function: check content of mail then delete mail in email server
-   *
+   * 
    * @param titleEventTask String
    * @param fileAttch String
    * @param link String
@@ -1100,7 +1098,7 @@ public class CalendarManagement {
 
   /**
    * Enabled or disabled public access for an calendar
-   *
+   * 
    * @param calendar String
    */
   public void enabledPublicAccess(String calendar) {
@@ -1200,9 +1198,9 @@ public class CalendarManagement {
 
   /**
    * Input username and password of user authentication in remote calendar
-   *
+   * 
    * @param username String
-   * @param password Stringent
+   * @param password String
    */
   public void addUserAuthentication(String username, String password) {
     if (!username.isEmpty()) {
@@ -1245,7 +1243,7 @@ public class CalendarManagement {
 
   /**
    * quick search an event/task
-   *
+   * 
    * @param name String
    */
   public void searchQuickEventTask(String name) {
@@ -1270,7 +1268,7 @@ public class CalendarManagement {
 
   /**
    * Right click on Event/Tasks
-   *
+   * 
    * @param name String
    * @param date String
    */
@@ -1283,7 +1281,7 @@ public class CalendarManagement {
 
   /**
    * Delete event/tasks in Month view by right click
-   *
+   * 
    * @param name String
    * @param date String
    */
@@ -1297,7 +1295,7 @@ public class CalendarManagement {
 
   /***
    * View detail of an event/task in List View
-   *
+   * 
    * @param name String
    */
   public void viewDetailsEventTaskInList(String name) {
@@ -1336,7 +1334,7 @@ public class CalendarManagement {
 
   /**
    * Close large image of task/event in list view
-   *
+   * 
    * @param verify String
    */
   public void closeViewLargeImageInList(boolean verify) {
@@ -1367,7 +1365,7 @@ public class CalendarManagement {
 
   /**
    * Open Quick Add Event/Tasks by drag and drop row's time in Day view
-   *
+   * 
    * @param sourceTimeHour String
    * @param targetTimeHour String
    */
@@ -1405,7 +1403,7 @@ public class CalendarManagement {
 
   /**
    * HEAD Check accessibility of share calendar
-   *
+   * 
    * @param isAccess true if user can view calendar
    * @param isEdit true if user can edit calendar
    * @param cal
@@ -1453,7 +1451,7 @@ public class CalendarManagement {
 
   /**
    * Share calendar to group
-   *
+   * 
    * @param calendar String
    * @param group String
    * @param membership String
@@ -1476,7 +1474,7 @@ public class CalendarManagement {
 
   /**
    * Check display of calendar
-   *
+   * 
    * @param cal String
    * @param isPresent String
    */
