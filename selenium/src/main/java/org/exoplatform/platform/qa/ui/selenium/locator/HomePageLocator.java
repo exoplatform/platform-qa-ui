@@ -58,7 +58,7 @@ public final class HomePageLocator {
                                                             By.xpath("//*[@data-original-title='Wiki']");
 
   public static final By              ELEMENT_DOCUMENTS_LINK_PLF                                           =
-                                                                 By.xpath("//*[@data-original-title='Documents']");
+                                                                 byClassName("uiIconPLFDocuments");
 
   public static final By              ELEMENT_HOME_LINK_PLF                                                =
                                                             By.xpath("//*[@data-original-title='Home']");

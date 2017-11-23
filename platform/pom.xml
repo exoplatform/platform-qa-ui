@@ -57,5 +57,10 @@
             <artifactId>platform-qa-ui-task</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>platform-qa-ui-ecms</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

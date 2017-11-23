@@ -47,7 +47,7 @@ public class HomePagePlatform {
    */
   public void goToDocuments() {
     info("--Go to Documents--");
-    evt.click(ELEMENT_DOCUMENTS_LINK_PLF);
+    $(ELEMENT_DOCUMENTS_LINK_PLF).click();
 
   }
 
