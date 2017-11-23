@@ -8,6 +8,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -92,11 +93,17 @@ public class ECMSManageProjectTestIT extends Base {
   public void test05_addfolderInIconsViewWithRighClick() {
     info("test05 add folder In Icons View With Righ Click");
     String folder = "folder" + getRandomNumber();
+    String folder1 = "folder" + getRandomNumber();
     homePagePlatform.goToDocuments();
     documentManagement.goToIconsView();
+    documentManagement.createFolder("/", folder1, false);
+    refresh();
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    ELEMENT_INPUT_PATH.setValue("/").pressEnter();
     documentManagement.createFolder("/", folder, true);
     ELEMENT_LIST_FOLDER_IN_DEFAULT_VIEW.find(byText(folder)).should(Condition.exist);
     documentManagement.deleteFolder("/", folder, true);
+    documentManagement.deleteFolder("/", folder1, true);
   }
 
   @Test
