@@ -1,6 +1,8 @@
 package org.exoplatform.platform.qa.ui.answer.pageobject;
 
 import static com.codeborne.selenide.Condition.attribute;
+
+
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
@@ -9,6 +11,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -30,14 +33,13 @@ public class QuestionManagement {
 
   /**
    * constructor
-   * 
+   *
    * @param testBase
    */
   public QuestionManagement(TestBase testBase) {
     this.testBase = testBase;
     this.button = new Button(testBase);
     this.evt = testBase.getElementEventTestBase();
-
   }
 
   /**
@@ -49,6 +51,7 @@ public class QuestionManagement {
     $(ELEMENT_MANAGE_QUESTION_BUTTON).waitUntil(Condition.visible, Configuration.timeout);
     $(ELEMENT_MANAGE_QUESTION_BUTTON).click();
     $(ELEMENT_MANAGE_QUESTION_FORM).waitUntil(Condition.appears, Configuration.timeout);
+
   }
 
   /**
@@ -56,7 +59,6 @@ public class QuestionManagement {
    */
   public void goToSubmitQuestion() {
     info("Open submin question form");
-
     $(ELEMENT_SUBMIT_QUESTION).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_SUBMIT_QUESTION).click();
     $(ELEMENT_SUBMIT_QUESTION_FORM).waitUntil(Condition.appears, Configuration.timeout);
@@ -64,7 +66,7 @@ public class QuestionManagement {
 
   /**
    * input data to question form
-   * 
+   *
    * @param title string
    * @param content string
    * @param language string
@@ -75,7 +77,6 @@ public class QuestionManagement {
       info("input title");
       $(ELEMENT_SUBMIT_QUESTION_FORM_TITLE_INPUT).setValue(title);
     }
-
     if (content != null && content != "") {
       info("input content");
       switchTo().frame(0);
@@ -83,12 +84,10 @@ public class QuestionManagement {
       ELEMENT_QUESTION_ANSWER_CONTENT_INPUT.sendKeys(content);
       switchTo().defaultContent();
     }
-
     if (language != null && language != "") {
       info("input language");
       $(ELEMENT_SUBMIT_QUESTION_FORM_LANGUAGE_SELECT_BOX).selectOption(language);
     }
-
     if (pathFile != null && pathFile != "") {
       info("input pathFile");
       String[] links = pathFile.split("/");
@@ -102,18 +101,16 @@ public class QuestionManagement {
       evt.waitForAndGetElement(ELEMENT_ATTACH_FILE_NAME.replace("$fileName", links[links.length - 1]));
       evt.switchToParentWindow();
     }
-
   }
 
   /**
    * Execute action of question: COMMENT, ANSWER, EDIT, DELETE, MOVE, SEND
-   * 
+   *
    * @param question string
    * @param action action that needs to be done
    */
   public void goToActionOfQuestionByRightClick(String question, actionQuestionOption action) {
     info("Select action from menu");
-
     $(byText(question)).contextClick();
     switch (action) {
     case COMMENT:
@@ -150,12 +147,13 @@ public class QuestionManagement {
     default:
       info("Do nothing");
       break;
+
     }
   }
 
   /**
    * Execute action of question: PRINT, EDIT, DELETE, MOVE, SEND
-   * 
+   *
    * @param action action that needs to be done
    */
   public void goToActionOfQuestionFromMoreAction(actionQuestionOption action) {
@@ -193,12 +191,16 @@ public class QuestionManagement {
 
   /**
    * Delete question
-   * 
+   *
    * @param question string
    */
   public void deleteQuestion(String question) {
     info("Delete question");
-    if ($(ELEMENT_QUESTION_MORE_ACTION_BUTTON).is(Condition.not(Condition.exist))) {
+    if ($(byText(question)).parent()
+                           .parent()
+                           .parent()
+                           .find(ELEMENT_QUESTION_MORE_ACTION_BUTTON)
+                           .is(Condition.not(Condition.exist))) {
       $(byText(question)).click();
     }
     goToActionOfQuestionFromMoreAction(actionQuestionOption.DELETE);
@@ -209,7 +211,7 @@ public class QuestionManagement {
 
   /**
    * Cancel to Delete question
-   * 
+   *
    * @param question string
    */
   public void cancelDeleteQuestion(String question) {
@@ -222,7 +224,7 @@ public class QuestionManagement {
 
   /**
    * Go to edit question from manage question form
-   * 
+   *
    * @param question string
    */
   public void goToEditQuestionFromManageQuestionForm(String question) {
@@ -231,11 +233,13 @@ public class QuestionManagement {
                                                   .parent()
                                                   .find(ELEMENT_ICON_EDIT_QUESTION_IN_MANAGE_QUESTION)
                                                   .click();
+
+
   }
 
   /**
    * Go to delete question from manage question form
-   * 
+   *
    * @param question string
    */
   public void goToDeleteQuestionFromManageQuestionForm(String question) {
@@ -244,11 +248,12 @@ public class QuestionManagement {
                                                   .parent()
                                                   .find(ELEMENT_ICON_DELETE_QUESTION_IN_MANAGE_QUESTION)
                                                   .click();
+
+
   }
 
   /**
    * Approve question or not from manage question form
-   * 
    * @param question string
    * @param isApprove true: check to approve false: uncheck to un-approve
    */
@@ -281,12 +286,14 @@ public class QuestionManagement {
                                                       .parent()
                                                       .click();
 
+
+
     }
   }
 
   /**
    * Active question or not from manage question form
-   * 
+   *
    * @param question string
    * @param isActive true: check to active false: uncheck to un-active
    */
@@ -334,7 +341,7 @@ public class QuestionManagement {
 
   /**
    * Approve question or not
-   * 
+   *
    * @param isApprove true: check to approve false: uncheck to un-approve
    */
   public void approveQuestion(Boolean isApprove) {
@@ -349,7 +356,7 @@ public class QuestionManagement {
 
   /**
    * Active question or not
-   * 
+   *
    * @param isActive true: check to active false: uncheck to un-active
    */
   public void activeQuestion(Boolean isActive) {
@@ -364,7 +371,7 @@ public class QuestionManagement {
 
   /**
    * Rate question
-   * 
+   *
    * @param number number of rating
    */
   public void rateQuestion(int number) {
@@ -400,12 +407,14 @@ public class QuestionManagement {
       assertEquals("rgba(255, 196, 13, 1)", ELEMENT_RATE_QUESTION_4_VOTED.getCssValue("color"));
       assertEquals("rgba(255, 196, 13, 1)", ELEMENT_RATE_QUESTION_5_VOTED.getCssValue("color"));
       break;
+
+
     }
   }
 
   /**
    * Save or cancel all change of submit question form
-   * 
+   *
    * @param isSave = true if want to save all changes = false if want to cancel
    *          all changes
    */
@@ -424,7 +433,7 @@ public class QuestionManagement {
 
   /**
    * Open Answer form
-   * 
+   *
    * @param question is the question that want to answer
    */
   public void goToAnswerForm(String question) {
@@ -439,7 +448,7 @@ public class QuestionManagement {
 
   /**
    * Check manage question form
-   * 
+   *
    * @param isDisplay
    * @param ques list of question
    */
@@ -461,5 +470,4 @@ public class QuestionManagement {
   public enum actionQuestionOption {
     COMMENT, ANSWER, EDIT, DELETE, MOVE, SEND, PRINT
   }
-
 }

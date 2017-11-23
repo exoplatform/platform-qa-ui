@@ -43,13 +43,14 @@ public class CommentManagement {
     if ($(ELEMENT_QUESTION_MORE_ACTION_BUTTON).is(Condition.not(Condition.exist))) {
       $(byText(question)).click();
     }
+
     $(ELEMENT_COMMENT_BUTTON).click();
     $(ELEMENT_COMMENT_FORM).waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**
    * Input data to COMMENT form
-   * 
+   *
    * @param content
    */
   public void inputDataToComment(String content) {
@@ -66,38 +67,39 @@ public class CommentManagement {
   /**
    * Execute action of COMMENT: EDIT, APPROVE, DISAPPROVE, ACTIVE, DEACTIVE,
    * DELETE
-   * 
+   * @param comment String
    * @param action action that needs to be done
    */
   public void goToActionOfCommentFromMoreAction(String comment, actionCommentOption action) {
     info("Select action from menu");
-    ELEMENT_COMMENT_MORE_ACTION.click();
-
+    $(byText(comment)).parent().parent().parent().parent().parent().find(ELEMENT_COMMENT_MORE_ACTION).click();
     switch (action) {
-    case EDIT:
-      info("EDIT COMMENT");
-      ELEMENT_COMMENT_EDIT.parent().click();
-      $(ELEMENT_COMMENT_FORM).waitUntil(Condition.appears, Configuration.timeout);
-      break;
-    case PROMOTE:
-      info("PROMOTE COMMENT");
-      evt.click(ELEMENT_COMMENT_PROMOTE_TO_ANSWER_BUTTON.replace("$comment", comment));
-      evt.waitForAndGetElement(ELEMENT_ANSWER_CONTENT.replace("$answer", comment));
-      break;
-    case DELETE:
-      info("DELETE COMMENT");
-      $(byText(comment)).parent().parent().parent().parent().parent().find(ELEMENT_COMMENT_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
-      $(ELEMENT_COMMENT_DELETE_CONFIRM_POPUP).waitUntil(Condition.appears, Configuration.timeout);
-      break;
-    default:
-      info("Do nothing");
-      break;
+
+      case EDIT:
+        info("EDIT COMMENT");
+        $(byText(comment)).parent().parent().parent().parent().parent().find(ELEMENT_COMMENT_MORE_ACTION).find(ELEMENT_COMMENT_EDIT).parent().click();
+        $(ELEMENT_COMMENT_FORM).waitUntil(Condition.appears, Configuration.timeout);
+        break;
+      case PROMOTE:
+        info("PROMOTE COMMENT");
+        $(ELEMENT_ICON_PROMOTE_COMMENT).parent().click();
+        ELEMENT_LIST_OF_ANSWERS.find(byText(comment)).should(Condition.exist);
+        break;
+      case DELETE:
+        info("DELETE COMMENT");
+        $(byClassName("confirm")).click();
+        $(ELEMENT_COMMENT_DELETE_CONFIRM_POPUP).waitUntil(Condition.appears, Configuration.timeout);
+        break;
+      default:
+        info("Do nothing");
+        break;
+
     }
   }
 
   /**
    * Delete comment
-   * 
+   *
    * @param comment string
    */
   public void deleteComment(String comment) {

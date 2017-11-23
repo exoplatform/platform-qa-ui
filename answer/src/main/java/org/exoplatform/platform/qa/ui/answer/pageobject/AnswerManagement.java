@@ -20,7 +20,7 @@ public class AnswerManagement {
 
   /**
    * constructor
-   * 
+   *
    * @param testBase testBase
    */
   public AnswerManagement(TestBase testBase) {
@@ -39,7 +39,7 @@ public class AnswerManagement {
 
   /**
    * Input data to answer form
-   * 
+   *
    * @param content string
    * @param isApprove string
    * @param isActive string
@@ -47,16 +47,13 @@ public class AnswerManagement {
    */
   public void inputDataToAnswer(String content, Boolean isApprove, Boolean isActive, String related) {
     info("Input data to answer form");
-
     if (content != null && content != "") {
       info("input content");
       switchTo().frame(0);
       ELEMENT_QUESTION_ANSWER_CONTENT_INPUT.click();
       ELEMENT_QUESTION_ANSWER_CONTENT_INPUT.sendKeys(content);
       switchTo().defaultContent();
-
     }
-
     if (isApprove != null) {
       info("approve or not");
       if (isApprove)
@@ -64,7 +61,6 @@ public class AnswerManagement {
       else
         $(ELEMENT_ANSWER_APPROVE_CHECKBOX).click();
     }
-
     if (isActive != null) {
       info("active or not");
       if (isActive)
@@ -72,16 +68,14 @@ public class AnswerManagement {
       else
         $(ELEMENT_ANSWER_ACTIVATE_CHECKBOX).click();
     }
-
     if (related != null && related != "") {
       info("input related questions");
-
     }
   }
 
   /**
    * Execute action of answer: EDIT, APPROVE, DISAPPROVE, ACTIVE, DEACTIVE, DELETE
-   * 
+   *
    * @param answer string
    * @param action action that needs to be done
    */
@@ -121,17 +115,19 @@ public class AnswerManagement {
     case DELETE:
       info("DELETE answer");
       $(byText(answer)).parent().parent().parent().parent().parent().find(ELEMENT_ANSWER_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
+
       $(ELEMENT_ANSWER_DELETE_CONFIRM_POPUP).waitUntil(Condition.appears, Configuration.timeout);
       break;
     default:
       info("Do nothing");
       break;
+
     }
   }
 
   /**
    * Delete answer
-   * 
+   *
    * @param answer string
    */
   public void deleteAnswer(String answer) {
@@ -144,23 +140,23 @@ public class AnswerManagement {
 
   /**
    * function vote/unvote an answer
-   * 
+   *
    * @param answer string
    * @param rate boolean
    */
   public void rateAnswer(String answer, boolean rate) {
     if (rate) {
       info("Vote answer");
-      evt.click(ELEMENT_ANSWER_VOTE_ICON.replace("$answer", answer));
+      $(byText(answer)).parent().parent().parent().find(ELEMENT_ICON_LIKE_ANSWER).click();
     } else {
       info("Unvote answer");
-      evt.click(ELEMENT_ANSWER_UNVOTE_ICON.replace("$answer", answer));
+      $(byText(answer)).parent().parent().parent().find(ELEMENT_ICON_UNLIKE_ANSWER).click();
     }
   }
 
   /**
    * Save or Cancel all changes of Answer form
-   * 
+   *
    * @param isSave = true if want to save all changes = false if want to cancel
    *          all changes
    */
