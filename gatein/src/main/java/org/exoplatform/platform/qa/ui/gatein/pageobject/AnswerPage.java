@@ -73,7 +73,7 @@ public class AnswerPage {
   }
 
   /**
-   * @param isCheckMode
+   * @param isCheckMode Boolean
    */
   public void doPublicMode(Boolean isCheckMode) {
     info("Check public mode or not");
@@ -90,8 +90,8 @@ public class AnswerPage {
   /**
    * function setting display for categories in answer portlet
    *
-   * @param categoryScope
-   * @param display
+   * @param categoryScope String
+   * @param display Boolean
    */
   public void setDisplayCategoryScoping(String categoryScope, Boolean display) {
     info("setting display for categories in answer portlet");
@@ -132,8 +132,8 @@ public class AnswerPage {
   /**
    * Function setting discussion in answer portlet
    *
-   * @param discuss
-   * @param forumPath
+   * @param discuss boolean
+   * @param forumPath String
    */
   public void settingDiscussion(Boolean discuss, String forumPath) {
     info("setting discussion in answer portlet");
@@ -155,8 +155,8 @@ public class AnswerPage {
   /**
    * function setting email template for answser portlet
    *
-   * @param tab
-   * @param content
+   * @param tab int
+   * @param content String
    */
   public void settingEmailTemplate(int tab, String content) {
     info("setting email template for answser portlet");
@@ -195,10 +195,14 @@ public class AnswerPage {
   /**
    * function setting display mode in answer portlet
    *
-   * @param all
-   * @param date
-   * @param ascending
-   * @param opts
+   * @param all Boolean
+   * @param date Boolean
+   * @param ascending Boolean
+   * @param isVote Boolean
+   * @param isSubmit Boolean
+   * @param rss Boolean
+   * @param avatar Boolean
+   * @param allowUser  Boolean
    */
   public void settingDisplayMode(Boolean all,
                                  Boolean date,

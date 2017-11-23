@@ -16,7 +16,7 @@ public class NotificationsAdminSeting {
   /**
    * constructor
    * 
-   * @param testBase
+   * @param testBase TestBase
    */
   public NotificationsAdminSeting(TestBase testBase) {
     this.testBase = testBase;
@@ -100,7 +100,7 @@ public class NotificationsAdminSeting {
   /**
    * Disable notification
    * 
-   * @param notifToDisable
+   * @param notifToDisable notificationType
    */
   public void disableNotification(notificationType notifToDisable) {
     switch (notifToDisable) {
@@ -257,7 +257,7 @@ public class NotificationsAdminSeting {
   /**
    * Enable notification
    * 
-   * @param notifToDisable
+   * @param notifToDisable notificationType
    */
   public void enableNotification(notificationType notifToDisable) {
     switch (notifToDisable) {
@@ -431,7 +431,7 @@ public class NotificationsAdminSeting {
   /**
    * Verify that notification's type is disabled all
    * 
-   * @param op
+   * @param op notiMode
    */
   public void veriftyNotificationTypeDisable(notiMode op) {
     switch (op) {
@@ -478,8 +478,8 @@ public class NotificationsAdminSeting {
   /**
    * Change information of Notification Sender area
    * 
-   * @param name
-   * @param address
+   * @param name String
+   * @param address String
    */
   public void changeNotificationSender(String name, String address) {
     evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());

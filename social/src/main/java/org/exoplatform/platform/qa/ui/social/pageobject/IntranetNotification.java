@@ -22,7 +22,7 @@ public class IntranetNotification {
   /**
    * constructor
    *
-   * @param dr
+   * @param testBase TestBase
    */
   public IntranetNotification(TestBase testBase) {
     this.testBase = testBase;
@@ -277,7 +277,7 @@ public class IntranetNotification {
   /**
    * Open a detail Post in Space activity Notification
    * 
-   * @param fullName is user's full name
+   * @param space is user's full name
    * @param isPopup =true if open from the pop up =false if open from all
    *          notification page
    */
@@ -308,7 +308,7 @@ public class IntranetNotification {
   /**
    * Open a detail Invitation to join a new space Notification
    * 
-   * @param fullName is space's name
+   * @param space is space's name
    * @param isPopup =true if open from the pop up =false if open from all
    *          notification page
    */
@@ -456,7 +456,7 @@ public class IntranetNotification {
   /**
    * Refuse an connection request in notificaiton list
    * 
-   * @param fullName
+   * @param fullName String
    */
   public void refuseRqConnection(String fullName) {
 
@@ -712,7 +712,7 @@ public class IntranetNotification {
   /**
    * Check Activity's title is shown in notification list
    * 
-   * @param actTitle
+   * @param actTitle String
    * @param isPopUp =true if want to check on notification list popup =false if
    *          want to check on notification list page
    */

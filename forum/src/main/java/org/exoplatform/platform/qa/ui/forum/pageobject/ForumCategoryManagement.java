@@ -65,7 +65,7 @@ public class ForumCategoryManagement {
   /**
    * select a item in Manage Category Menu By QuynhPT
    *
-   * @param item
+   * @param item enum
    */
   public void selectItemManageCategoryMenu(specifManageCategoryMenu item) {
     info("Waiting manage menu is shown");
@@ -114,7 +114,7 @@ public class ForumCategoryManagement {
   /**
    * Edit a category
    *
-   * @param newName
+   * @param newName String
    */
   public void editCategory(String newName) {
     selectItemManageCategoryMenu(specifManageCategoryMenu.EDIT_CATEGORY);
@@ -128,7 +128,7 @@ public class ForumCategoryManagement {
   /**
    * Delete Category By QuynhPT
    *
-   * @param nameCat
+   * @param nameCat String
    */
   public void deleteCategory(String nameCat) {
     // TODO Auto-generated method stub
@@ -156,8 +156,8 @@ public class ForumCategoryManagement {
   /**
    * Export a forum
    *
-   * @param forumName
-   * @param fileName
+   * @param forumName String
+   * @param fileName String
    */
   public void exportForum(String forumName, String fileName) {
     selectItemManageCategoryMenu(specifManageCategoryMenu.EXPORT_FORUM);
@@ -174,8 +174,8 @@ public class ForumCategoryManagement {
   /**
    * Import a forum
    *
-   * @param folderDowloadFile
-   * @param nameFile
+   * @param folderDowloadFile String
+   * @param nameFile String
    */
   public void importForum(String folderDowloadFile, String nameFile) {
     selectItemManageCategoryMenu(specifManageCategoryMenu.IMPORT_FORUM);
@@ -186,9 +186,13 @@ public class ForumCategoryManagement {
   /**
    * Edit permission of category
    *
-   * @param cat
-   * @param groupPath
-   * @param member
+   * @param cat String
+   * @param groupPath String
+   * @param member String
+   * @param isMod boolean
+   * @param isPostReply boolean
+   * @param isStartTop boolean
+   * @param isViewPost boolean
    */
   public void editPermOfCategory(String cat,
                                  String groupPath,
@@ -208,9 +212,9 @@ public class ForumCategoryManagement {
   /**
    * Edit permission of category
    *
-   * @param cat
-   * @param groupPath
-   * @param member
+   * @param cat String
+   * @param groupPath String
+   * @param member String
    */
   public void editRestrictedAudience(String cat, String groupPath, String member) {
     info("edit permission of category:" + cat);
@@ -223,8 +227,8 @@ public class ForumCategoryManagement {
   /**
    * Check display of category
    *
-   * @param cat
-   * @param isDisplay
+   * @param cat String
+   * @param isDisplay boolean
    */
   public void checkDisplayOfCat(String cat, boolean isDisplay) {
     info("check display of category:" + cat);
@@ -243,6 +247,8 @@ public class ForumCategoryManagement {
 
   /**
    * function: Search user in User Seletion Form in Restricted Audience
+   * @param searchOption String
+   * @param user String
    */
 
   public void searchUser(String user, String searchOption) {

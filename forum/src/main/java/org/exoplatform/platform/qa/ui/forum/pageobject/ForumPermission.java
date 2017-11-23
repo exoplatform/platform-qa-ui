@@ -18,7 +18,7 @@ public class ForumPermission {
   /**
    * constructor
    *
-   * @param dr
+   * @param testBase TestBase
    */
   public ForumPermission(TestBase testBase) {
     this.testBase = testBase;
@@ -29,10 +29,10 @@ public class ForumPermission {
   /**
    * select permission in category
    *
-   * @param isMod
-   * @param isStartTop
-   * @param isPostReply
-   * @param isViewPost
+   * @param isMod boolean
+   * @param isStartTop boolean
+   * @param isPostReply boolean
+   * @param isViewPost boolean
    */
   public void selectPermInCategory(boolean isMod, boolean isStartTop, boolean isPostReply, boolean isViewPost) {
     info("select permission");
@@ -61,12 +61,12 @@ public class ForumPermission {
   /**
    * Select permission group membership
    *
-   * @param groupPath
-   * @param member
-   * @param isMod
-   * @param isStartTop
-   * @param isPostReply
-   * @param isViewPost
+   * @param groupPath String
+   * @param member String
+   * @param isMod boolean
+   * @param isStartTop boolean
+   * @param isPostReply boolean
+   * @param isViewPost boolean
    */
   public void selectPermGroupMember(String groupPath,
                                     String member,
@@ -92,8 +92,8 @@ public class ForumPermission {
   /**
    * Select permission group membership
    *
-   * @param groupPath
-   * @param member
+   * @param groupPath String
+   * @param member String
    */
   public void selectPermGroupMemberRestricted(String groupPath, String member) {
     String[] temp;
@@ -111,8 +111,8 @@ public class ForumPermission {
   /**
    * select permission in topic
    *
-   * @param isView
-   * @param isPost
+   * @param isView boolean
+   * @param isPost boolean
    */
   public void selectPermInTopic(boolean isPost, boolean isView) {
     info("select permission");
@@ -131,10 +131,10 @@ public class ForumPermission {
   /**
    * Select permission group membership in topic
    *
-   * @param groupPath
-   * @param member
-   * @param isView
-   * @param isPost
+   * @param groupPath String
+   * @param member String
+   * @param isView boolean
+   * @param isPost boolean
    */
   public void selectPermGroupMemberInTopic(String groupPath, String member, boolean isView, boolean isPost) {
     String[] temp;
@@ -155,8 +155,8 @@ public class ForumPermission {
   /**
    * Select permission group membership
    *
-   * @param groupPath
-   * @param member
+   * @param groupPath String
+   * @param member String
    */
   public void selectPermGroupMemberMes(String groupPath, String member) {
     String[] temp;

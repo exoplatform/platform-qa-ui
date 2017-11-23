@@ -18,7 +18,7 @@ public class UserProfilePage {
   /**
    * constructor
    * 
-   * @param dr
+   * @param testBase
    */
   public UserProfilePage(TestBase testBase) {
     this.testBase = testBase;

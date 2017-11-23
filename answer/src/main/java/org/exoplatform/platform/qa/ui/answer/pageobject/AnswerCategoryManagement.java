@@ -243,7 +243,7 @@ public class AnswerCategoryManagement {
   /**
    * function export category in answer
    *
-   * @param fileName
+   * @param fileName string
    */
   public void exportAnswerCategory(String fileName) {
     info("Export category to file " + fileName);
@@ -255,7 +255,6 @@ public class AnswerCategoryManagement {
   /**
    * function import category in answer
    *
-   * @param path
    */
   public void importAnswerCategory() {
     info("Import category from file ");
@@ -268,7 +267,7 @@ public class AnswerCategoryManagement {
   }
 
   /**
-   * <<<<<<< HEAD Set permission
+   * HEAD Set permission
    *
    * @param cat
    * @param group
@@ -306,7 +305,7 @@ public class AnswerCategoryManagement {
   /**
    * create category
    *
-   * @param cat
+   * @param cat string
    */
   public void createCategory(String cat) {
     goToActionOfCategoryFromActionBar(actionCategoryOption.ADD);
@@ -318,9 +317,9 @@ public class AnswerCategoryManagement {
   /**
    * check accessibility of category
    *
-   * @param cat
-   * @param isAccess
-   * @param ques
+   * @param cat string
+   * @param isAccess boolean
+   * @param ques string
    */
   public void checkAccessibilityOfCat(String cat, boolean isAccess, String... ques) {
     if (isAccess) {
@@ -335,8 +334,8 @@ public class AnswerCategoryManagement {
   /**
    * Check user list
    *
-   * @param user
-   * @param isPresent
+   * @param user string
+   * @param isPresent boolean
    */
   public void checkPermUserList(String user, boolean isPresent) {
     goToActionOfCategoryFromActionBar(actionCategoryOption.ADD);

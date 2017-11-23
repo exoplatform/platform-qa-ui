@@ -66,11 +66,11 @@ public class SiteExplorerHome {
   }
 
   /**
-   * Go to a folder by a path in SE Example: go to Site management drive-->a
+   * Go to a folder by a path in SE Example: go to Site management drive--a
    * folder
    *
-   * @param path
-   * @param drive
+   * @param path String
+   * @param drive String
    */
   public void goToPath(String path, String drive) {
     info("Go to selected Drive");
@@ -114,8 +114,8 @@ public class SiteExplorerHome {
   /**
    * Create a new folder. Input the title and folder type
    *
-   * @param title
-   * @param folderType
+   * @param title String
+   * @param folderType String
    */
   public void createFolder(String title, String folderType) {
     info("Type a title:" + title + " for the folder");
@@ -148,7 +148,7 @@ public class SiteExplorerHome {
   /**
    * Add Symlink for a node
    *
-   * @param node
+   * @param node String
    */
   public void addSymlink(String node) {
     evt.rightClickOnElement(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", node)));
@@ -159,7 +159,8 @@ public class SiteExplorerHome {
   /**
    * Delete data by title
    *
-   * @param title
+   * @param title String
+   * @param destination boolean
    */
   public void deleteData(String title, boolean... destination) {
     boolean verify = (destination.length > 0 ? destination[0] : false);
@@ -181,8 +182,8 @@ public class SiteExplorerHome {
   }
 
   /**
-   * @param title
-   * @param destination
+   * @param title String
+   * @param destination String
    */
   public void copyPasteNode(String title, String destination) {
     evt.rightClickOnElement(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", title)));
@@ -220,8 +221,8 @@ public class SiteExplorerHome {
   /**
    * Cut and paste node
    *
-   * @param title
-   * @param destination
+   * @param title String
+   * @param destination String
    */
   public void cutPasteNode(String title, String destination) {
     evt.rightClickOnElement(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", title)));
@@ -236,8 +237,8 @@ public class SiteExplorerHome {
   /**
    * Rename a node
    *
-   * @param node
-   * @param newName
+   * @param node String
+   * @param newName String
    */
   public void renameNode(String node, String newName) {
     evt.rightClickOnElement(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", node)));
@@ -252,8 +253,8 @@ public class SiteExplorerHome {
   /**
    * Upload a file
    *
-   * @param link
-   * @param params
+   * @param link String
+   * @param params String
    */
   public void uploadFileWithDymanicPath(String link, Object... params) {
     Boolean verify = (Boolean) (params.length > 0 ? params[0] : true);
@@ -287,8 +288,8 @@ public class SiteExplorerHome {
   /**
    * Upload a file
    *
-   * @param link
-   * @param params
+   * @param link String
+   * @param params object
    */
   public void uploadFile(String link, Object... params) {
     Boolean verify = (Boolean) (params.length > 0 ? params[0] : true);
@@ -324,7 +325,7 @@ public class SiteExplorerHome {
   /**
    * Add tag to a Content
    *
-   * @param tag
+   * @param tag String
    */
   public void addTag(String tag) {
     evt.waitForAndGetElement(ELEMENT_ACTIONBAR_MORE);
@@ -344,8 +345,8 @@ public class SiteExplorerHome {
   /**
    * Edit a Tag
    *
-   * @param oldName
-   * @param newName
+   * @param oldName String
+   * @param newName String
    */
   public void editTag(String oldName, String newName) {
     info("Click on Tag Cloud tab of SE");
@@ -373,7 +374,7 @@ public class SiteExplorerHome {
   /**
    * Delete a tag
    *
-   * @param tag
+   * @param tag String
    */
   public void deleteTag(String tag) {
     info("Click on Tag Cloud tab of SE");
@@ -396,7 +397,8 @@ public class SiteExplorerHome {
   /**
    * Edit a Document
    *
-   * @param content
+   * @param content String
+   * @param newTitle String
    */
   public void editDocument(String newTitle, String content) {
 
@@ -436,8 +438,8 @@ public class SiteExplorerHome {
   /**
    * Open Setting drive page
    *
-   * @param type
-   * @param order
+   * @param type enum
+   * @param order enum
    */
   public void openSettingsDriver(selectDriverOption type, selectDriverOrder order) {
     evt.click(ELEMENT_ACTIONBAR_SETTINGS);
@@ -488,7 +490,7 @@ public class SiteExplorerHome {
   /**
    * Select a node by name
    *
-   * @param nodeName
+   * @param nodeName String
    */
   public void selectNode(String nodeName) {
     info("Verify that nodeName:" + nodeName + " is shown");
@@ -511,7 +513,7 @@ public class SiteExplorerHome {
   /**
    * Lock a Node
    *
-   * @param name
+   * @param name String
    */
   public void lockNode(String name) {
     info("lock node:" + name);
@@ -523,7 +525,7 @@ public class SiteExplorerHome {
   /**
    * Unlock a Node
    *
-   * @param name
+   * @param name String
    */
   public void unlockNode(String name) {
     info("unlock node:" + name);
@@ -543,8 +545,8 @@ public class SiteExplorerHome {
   /**
    * Add a Relation for many files
    *
-   * @param nameContent
-   * @param path
+   * @param nameContent String
+   * @param path String
    */
   public void addRelation(String[] nameContent, String path) {
     for (String arrayElement : nameContent) {
@@ -565,9 +567,9 @@ public class SiteExplorerHome {
   /**
    * Add category for a file in SE
    *
-   * @param categoryTreeName
-   * @param arrayCatePath
-   * @param nameSelectedCategory
+   * @param categoryTreeName String
+   * @param arrayCatePath String
+   * @param nameSelectedCategory String
    */
   public void addCategory(String categoryTreeName, String[] arrayCatePath, String nameSelectedCategory) {
     info("select category");
@@ -596,7 +598,7 @@ public class SiteExplorerHome {
   /**
    * Go to the path that include content files to create relation
    *
-   * @param path
+   * @param path String
    */
   public void goToPathHasFiles(String path) {
     // Open "Select Relation" tab
@@ -627,7 +629,7 @@ public class SiteExplorerHome {
   /**
    * Delete Relation By QuynhPT
    *
-   * @param nameContent
+   * @param nameContent String
    */
   public void deleteRelation(String nameContent) {
     evt.click(By.xpath(ELEMENT_RELATION_POPUP_RELATION_LIST_DELETE_BUTTON.replace("${nameContent}", nameContent)));
@@ -638,7 +640,7 @@ public class SiteExplorerHome {
   /**
    * Delete a category that is added to the file in SE By QuynhPT date 16/01/2015
    *
-   * @param nameCategory
+   * @param nameCategory String
    */
   public void deleteCategory(String nameCategory) {
     evt.click(By.xpath(ELEMENT_ADD_CATEGORY_POPUP_DELETE_CATEGORY.replace("${nameCategory}", nameCategory)));
@@ -664,7 +666,7 @@ public class SiteExplorerHome {
   /**
    * Select a value for behavior
    *
-   * @param value
+   * @param value String
    */
   public void selectBehavior(defineValueBehavior value) {
     switch (value) {
@@ -686,10 +688,10 @@ public class SiteExplorerHome {
   /**
    * Import a Node By QuynhPt date 16/01/2015
    *
-   * @param linkFile
-   * @param behavior
-   * @param version
-   * @param linkVersion
+   * @param linkFile String
+   * @param behavior String
+   * @param version boolean
+   * @param linkVersion String
    */
   public void importNode(String linkFile, String behavior, boolean version, String linkVersion) {
     // Verify that the popup is shown
@@ -730,8 +732,8 @@ public class SiteExplorerHome {
   /**
    * Export node By QuynhPT date 16/01/2015
    *
-   * @param systemView
-   * @param zip
+   * @param systemView boolean
+   * @param zip boolean
    */
   public void exportNode(boolean systemView, boolean zip) {
     // Verify that the popup is shown
@@ -758,8 +760,8 @@ public class SiteExplorerHome {
   /**
    * Go to Properties popup By QuynhPT
    *
-   * @param property
-   * @param value
+   * @param property String
+   * @param value String
    */
   public void addProperty(String property, String value) {
     evt.waitForAndGetElement(ELEMENT_VIEWPROPERTIES_PROPERTIES_TAB);
@@ -786,8 +788,8 @@ public class SiteExplorerHome {
   /**
    * Manage Publication popup By thunt Update QuynhPT
    *
-   * @param state
-   * @param date
+   * @param state String
+   * @param date String
    */
   public void managePublication(String state, String... date) {
     By bState = By.xpath(ELEMENT_MANAGEPUBLICATION_STATE.replace("{$state}", state));
@@ -846,8 +848,8 @@ public class SiteExplorerHome {
   /**
    * Add a document translation
    *
-   * @param path
-   * @param content
+   * @param path String
+   * @param content String
    */
   public void addDocumentTranslation(String path, String content) {
     addTranslation();
@@ -878,8 +880,8 @@ public class SiteExplorerHome {
   /**
    * Add a category for a node
    *
-   * @param node
-   * @param category
+   * @param node String
+   * @param category String
    */
   public void addCategoryForNode(String node, String category) {
     info("Click on More menu");
@@ -897,6 +899,7 @@ public class SiteExplorerHome {
 
   /**
    * Go to the publication status' form
+   * @param status String
    */
   public void changeStatusPulication(String status) {
     evt.waitForAndGetElement(ELEMENT_PUBLICATION_STATUS.replace("${status}", status));
@@ -932,7 +935,8 @@ public class SiteExplorerHome {
   /**
    * Add/Edit a comment
    *
-   * @param content
+   * @param content String
+   * @param  isAdd boolean
    */
   public void addEditComment(String content, boolean isAdd) {
     info("Add/Edit a comment");
@@ -957,7 +961,7 @@ public class SiteExplorerHome {
   /**
    * Delete a file or node in SE by clicking a checkbox of that file
    *
-   * @param file
+   * @param file String
    */
   public void selectAndDeleteByCheckBox(String file) {
     evt.waitForAndGetElement(ELEMENT_PERSONAL_DOCUMENT_FILE_CHECKBOX.replace("${file}", file));
@@ -982,7 +986,7 @@ public class SiteExplorerHome {
   /**
    * Go to a drive
    *
-   * @param nameDrive
+   * @param nameDrive String
    */
   public void selectADrive(String nameDrive) {
     info("Go to a folder of a drive");
@@ -994,7 +998,7 @@ public class SiteExplorerHome {
   /**
    * Go to a folder
    *
-   * @param path
+   * @param path String
    */
   public void goToAFolder(String path) {
     info("Go to a folder of a drive");
@@ -1012,7 +1016,7 @@ public class SiteExplorerHome {
   /**
    * Go to a folder in Admin view
    *
-   * @param name
+   * @param name String
    */
   public void openAFolder(String name) {
     info("Click on the folder");
@@ -1083,7 +1087,7 @@ public class SiteExplorerHome {
   /**
    * Open a file from right panel
    *
-   * @param filename
+   * @param filename String
    */
   public void selectAFile(String filename) {
     info("Waiting the file:" + filename + " is shown");
@@ -1116,7 +1120,7 @@ public class SiteExplorerHome {
   /**
    * Select a new content in list
    *
-   * @param nameContent
+   * @param nameContent String
    */
   public void selectAContentType(String nameContent) {
     info("Select a content");
@@ -1138,10 +1142,10 @@ public class SiteExplorerHome {
   }
 
   /**
-   * <<<<<<< HEAD Check display of drive
+   * HEAD Check display of drive
    *
-   * @param drive
-   * @param isDisplay
+   * @param drive String
+   * @param isDisplay boolean
    */
   public void checkDisplayOfDrive(String drive, boolean isDisplay) {
     info("check display of drive:" + drive);
@@ -1155,8 +1159,8 @@ public class SiteExplorerHome {
   /**
    * Check action in view
    *
-   * @param view
-   * @param action
+   * @param view String
+   * @param actions String
    */
   public void checkActionInView(String view, String[] actions) {
     info("check action:" + testBase.action + " in view" + view);
@@ -1185,8 +1189,8 @@ public class SiteExplorerHome {
   /**
    * Check user selector of Documents/Permission
    *
-   * @param user
-   * @param isPresent
+   * @param user String
+   * @param isPresent boolean
    */
   public void checkUserSelectorECM(String user, boolean isPresent) {
     if (evt.waitForAndGetElement(ELEMENT_ACTIONBAR_PERMISSION, testBase.getDefaultTimeout(), 0) == null) {
@@ -1202,8 +1206,8 @@ public class SiteExplorerHome {
   /**
    * Check personal file
    *
-   * @param file
-   * @param isPresent
+   * @param file String
+   * @param isPresent boolean
    */
   public void checkFileInPersonal(String file, boolean isPresent) {
     info("check file in personal document");
@@ -1213,8 +1217,8 @@ public class SiteExplorerHome {
   /**
    * Check SE file
    *
-   * @param file
-   * @param isPresent
+   * @param file String
+   * @param isPresent boolean
    */
   public void checkFileInSE(String file, boolean isPresent) {
     info("check file in SE");
@@ -1247,9 +1251,9 @@ public class SiteExplorerHome {
   /**
    * Upload file/files to a specific folder
    *
-   * @param folderName
-   * @param uploadFiles
-   * @throws Exception
+   * @param folderName String
+   * @param uploadFiles String
+   * @throws Exception exception
    */
   public void uploadFileToFolder(String folderName, ArrayList<String> uploadFiles) throws Exception {
     info("Upload file to folder");
@@ -1263,9 +1267,9 @@ public class SiteExplorerHome {
   /**
    * Share one document to many spaces
    *
-   * @param fileName
-   * @param spaceList
-   * @param comment
+   * @param fileName String
+   * @param spaceList String
+   * @param comment String
    */
   public void shareDocumentToManySpaces(String fileName, ArrayList<String> spaceList, String comment) {
     info("Share document to space");
@@ -1285,12 +1289,12 @@ public class SiteExplorerHome {
   }
 
   /**
-   * Activity about shared document is displayed in Intranet Activity Stream &
+   * Activity about shared document is displayed in Intranet Activity Stream and
    * Space Activity Stream
    *
-   * @param shareOwner
-   * @param fileName
-   * @param spaceName
+   * @param shareOwner String
+   * @param fileName String
+   * @param spaceName String
    */
   public void checkDisplayOfSharedDocument(String shareOwner, String fileName, String spaceName) {
     SocialLocator socLocator = new SocialLocator();
@@ -1307,8 +1311,8 @@ public class SiteExplorerHome {
   /**
    * Symlink of shared file is displayed in shared folder
    *
-   * @param fileName
-   * @param spaceName
+   * @param fileName String
+   * @param spaceName String
    */
   public void checkSharedFileSymlink(String fileName, String spaceName) {
     SpaceManagement spaceManage = new SpaceManagement(testBase);
@@ -1325,11 +1329,11 @@ public class SiteExplorerHome {
   /**
    * Create a space with 2 users
    *
-   * @param spaceName
-   * @param user1
-   * @param user2
-   * @param user2FullName
-   * @param password
+   * @param spaceName String
+   * @param user1 String
+   * @param user2 String
+   * @param user2FullName String
+   * @param password String
    */
   public void initSpaceWithUsers(String spaceName, String user1, String user2, String user2FullName, String password) {
     ManageLogInOut manageLoginOut = new ManageLogInOut(testBase);
@@ -1368,9 +1372,9 @@ public class SiteExplorerHome {
   /**
    * Upload and Share a document to a space
    *
-   * @param fileName
-   * @param spaceName
-   * @param comment
+   * @param fileName String
+   * @param spaceName String
+   * @param comment String
    */
   public void uploadAndShareDocumentToSpace(String fileName, String spaceName, String comment) {
     NavigationToolbar navTool = new NavigationToolbar(testBase);
@@ -1400,6 +1404,8 @@ public class SiteExplorerHome {
 
   /**
    * Date: Oct 7, 2015 Delete symlink of shared document in space documents
+   * @param spaceName String
+   * @param fileName String
    */
   public void deleteSymlink(String spaceName, String fileName) {
     HomePagePlatform homepage = new HomePagePlatform(testBase);
@@ -1440,7 +1446,7 @@ public class SiteExplorerHome {
   }
 
   /**
-   * Date: Oct 8, 2015 Documents -> Icons button
+   * Date: Oct 8, 2015 Documents -Icons button
    */
   public void clickIconView() {
     info("Select a view type");
@@ -1451,6 +1457,8 @@ public class SiteExplorerHome {
 
   /**
    * The symlink does not exist in Shared folder Date: Oct 21, 2015
+   * @param fileName String
+   * @param spaceName  String
    */
   public void checkSharedFileSymlinkAfterDeleted(String fileName, String spaceName) {
     SpaceManagement spaceManage = new SpaceManagement(testBase);
@@ -1466,6 +1474,9 @@ public class SiteExplorerHome {
 
   /**
    * Share document with access rights: Can view/Can edit Date: Oct 22, 2015
+   * @param spaceName String
+   * @param accessRight String
+   * @param comment  String
    */
   public void shareDocumentToSpaceWithAccessRight(String spaceName, String accessRight, String comment) {
     shareDocument();
@@ -1484,7 +1495,9 @@ public class SiteExplorerHome {
   }
 
   /**
-   * Go to drive -> folder Date: Oct 27, 2015
+   * Go to drive - folder Date: Oct 27, 2015
+   * @param path String
+   * @param drive  String
    */
   public void goToPathOfDrive(String path, String drive) {
     info("Go to selected Drive");
@@ -1502,7 +1515,7 @@ public class SiteExplorerHome {
   /**
    * Delete all files in a folder under Admin view
    *
-   * @param title
+   * @param title String
    */
   public void verifyContentCreatedSuccessfully(String title) {
     info("Verify Content was created successfully");

@@ -21,7 +21,7 @@ public class PageEditor {
   /**
    * Edit a Portlet with locator of the portlet
    *
-   * @param locatorPortlet
+   * @param locatorPortlet Object
    */
   public void goToEditPortlet(Object locatorPortlet) {
     info("Go to edit portlet");
@@ -34,7 +34,7 @@ public class PageEditor {
   /**
    * Edit a Portlet with the name of portlet
    *
-   * @param namePortlet
+   * @param namePortlet  String
    */
   public void goToEditPortlet(String namePortlet) {
     info("Go to edit portlet");
@@ -56,7 +56,7 @@ public class PageEditor {
    * Select an application and move to tagerget container
    *
    * @param portletPath (Format: catgory-porlets). Ex: answer-AnswersPortlet)
-   * @param targetLocator
+   * @param targetLocator Object
    */
   public void selectApplication(String portletPath, Object targetLocator) {
     info("Select an application and move to tagerget container");
@@ -77,9 +77,9 @@ public class PageEditor {
   /**
    * Verify application permission
    *
-   * @param cat
-   * @param app
-   * @param isEnable
+   * @param cat String
+   * @param app String
+   * @param isEnable boolean
    */
   public void verifyAppPermission(String cat, String app, boolean isEnable) {
     info("verify application permission");
@@ -96,8 +96,8 @@ public class PageEditor {
   /**
    * Verify category permission
    *
-   * @param cat
-   * @param isEnable
+   * @param cat String
+   * @param isEnable boolean
    */
   public void verifyCatPermission(String cat, boolean isEnable) {
     info("verify category permission");
@@ -111,8 +111,8 @@ public class PageEditor {
   /**
    * Verify permission edit delete application
    *
-   * @param app
-   * @param isEnable
+   * @param app String
+   * @param isEnable boolean
    */
   public void verifyEditDeleteAppPerm(String app, boolean isEnable) {
     evt.mouseOver(ELEMENT_EDITOR_PAGE_APPLICATION_PORTLET.replace("${name}", app), true);

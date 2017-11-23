@@ -87,7 +87,7 @@ public class PortalGroupNavigation {
   /**
    * function: Go to Edit navigation
    *
-   * @param currentNavigation
+   * @param currentNavigation String
    */
   public void editNavigation(String currentNavigation) {
     String navigation = ELEMENT_EDIT_NAVIGATION.replace("${groupName}", currentNavigation);
@@ -99,8 +99,8 @@ public class PortalGroupNavigation {
    * Verify Add Navigation permission
    *
    * @param title page's title
-   * @param isEnable
-   * @param groupName
+   * @param isEnable boolean
+   * @param groupName String
    */
   public void verifyAddNavigationPerm(String title, boolean isEnable, String groupName) {
     info("verify Add Navigation permission");
@@ -118,8 +118,8 @@ public class PortalGroupNavigation {
   /**
    * Verify Manage Group Site
    *
-   * @param group
-   * @param isEnable
+   * @param group String
+   * @param isEnable boolean
    */
   public void verifyManageGroupSitePerm(String group, boolean isEnable) {
     info("Verify Manage Group Site");

@@ -152,7 +152,7 @@ public class TestBase {
   /**
    * init browser
    *
-   * @param opParams
+   * @param opParams param to init test
    */
   public void initSeleniumTest(Object... opParams) {
     // Now the Selenium Driver and the eXo Platform screens are initialize in the
@@ -169,7 +169,7 @@ public class TestBase {
   /**
    * verify element exists or not
    *
-   * @param locator
+   * @param locator element html
    * @return true if element exists false if element doesn't exist
    */
   public boolean isElementPresent(Object locator) {
@@ -179,7 +179,7 @@ public class TestBase {
   /**
    * verify element exists or not
    *
-   * @param locator
+   * @param locator element html
    * @return true if element doesn't exists false if element exist
    */
   public boolean isElementNotPresent(Object locator) {
@@ -220,8 +220,8 @@ public class TestBase {
   }
 
   /**
-   * @param text
-   * @param opts
+   * @param text text
+   * @param opts opts
    * @return true if text exist false if test is not exist
    */
   public boolean isTextPresent(String text, int... opts) {
@@ -231,8 +231,8 @@ public class TestBase {
   /**
    * get text of element
    *
-   * @param locator
-   * @param opts
+   * @param locator element html
+   * @param opts opts
    * @return text of element
    */
   public String getText(Object locator, int... opts) {
@@ -242,7 +242,7 @@ public class TestBase {
   /**
    * get list of element
    *
-   * @param xpath
+   * @param xpath xpath
    * @return list of elements
    */
   public List<WebElement> getElements(String xpath) {
@@ -252,7 +252,7 @@ public class TestBase {
   /**
    * verify text exists or noet
    *
-   * @param text
+   * @param text text(string)
    * @return true if text exists false if text doesn't exits
    */
   public boolean isTextNotPresent(String text) {
@@ -262,8 +262,8 @@ public class TestBase {
   /**
    * drag and drop element
    *
-   * @param sourceLocator
-   * @param targetLocator
+   * @param sourceLocator source element html
+   * @param targetLocator target element html
    */
   public void dragAndDropToObject(Object sourceLocator, Object targetLocator) {
     elementEventTestBase.dragAndDropToObject(sourceLocator, targetLocator);
@@ -272,8 +272,8 @@ public class TestBase {
   /**
    * Drag an object
    *
-   * @param sourceLocator
-   * @param targetLocator
+   * @param sourceLocator source element html
+   * @param targetLocator target element html
    */
   public void dragObject(String sourceLocator, String targetLocator) {
     elementEventTestBase.dragObject(sourceLocator, targetLocator);
@@ -282,8 +282,8 @@ public class TestBase {
   /**
    * Click by using javascript
    *
-   * @param locator
-   * @param opParams
+   * @param locator element html
+   * @param opParams object
    */
   public void clickByJavascript(Object locator, Object... opParams) {
     elementEventTestBase.clickByJavascript(locator, opParams);
@@ -292,9 +292,9 @@ public class TestBase {
   /**
    * Type by java script
    *
-   * @param locatorById
-   * @param value
-   * @param opParams
+   * @param locatorById element html
+   * @param value string value
+   * @param opParams object
    */
   public void typeByJavascript(Object locatorById, String value, Object... opParams) {
     elementEventTestBase.typeByJavascript(locatorById, value, opParams);
@@ -303,8 +303,8 @@ public class TestBase {
   /**
    * click action
    *
-   * @param locator
-   * @param opParams
+   * @param locator element html
+   * @param opParams object
    */
   public void click(Object locator, Object... opParams) {
     elementEventTestBase.click(locator, opParams);
@@ -327,8 +327,8 @@ public class TestBase {
    * Use this function to verify if a check-box is checked (using when creating a
    * portal/publicMode)
    *
-   * @param locator
-   * @param opParams
+   * @param locator element html
+   * @param opParams object
    */
   public void check(Object locator, int... opParams) {
     elementEventTestBase.check(locator, opParams);
@@ -337,7 +337,7 @@ public class TestBase {
   /**
    * get value attribute
    *
-   * @param locator
+   * @param locator element html
    * @return value of element
    */
   public String getValue(Object locator) {
@@ -347,8 +347,8 @@ public class TestBase {
   /**
    * Mouse hover by Javascript
    *
-   * @param locator
-   * @param opParams
+   * @param locator element html
+   * @param opParams object
    */
   public void mouseHoverByJavaScript(Object locator, Object... opParams) {
     elementEventTestBase.mouseHoverByJavaScript(locator, opParams);
@@ -357,9 +357,9 @@ public class TestBase {
   /**
    * mouse over action
    *
-   * @param locator
-   * @param safeToSERE
-   * @param opParams
+   * @param locator element html
+   * @param safeToSERE true or false
+   * @param opParams object
    */
   public void mouseOver(Object locator, boolean safeToSERE, Object... opParams) {
     elementEventTestBase.mouseOver(locator, safeToSERE, opParams);
@@ -368,7 +368,7 @@ public class TestBase {
   /**
    * mouse over and clic
    *
-   * @param locator
+   * @param locator element html
    */
   public void mouseOverAndClick(Object locator) {
     elementEventTestBase.mouseOverAndClick(locator);
@@ -377,8 +377,8 @@ public class TestBase {
   /**
    * wait for text present
    *
-   * @param text
-   * @param opts
+   * @param text string(text)
+   * @param opts int opt
    */
   public void waitForTextPresent(String text, int... opts) {
     elementEventTestBase.waitForTextPresent(text, opts);
@@ -387,8 +387,8 @@ public class TestBase {
   /**
    * wait for text not present
    *
-   * @param text
-   * @param wait
+   * @param text text
+   * @param wait int
    */
   public void waitForTextNotPresent(String text, int... wait) {
     elementEventTestBase.waitForTextNotPresent(text, wait);
@@ -397,8 +397,8 @@ public class TestBase {
   /**
    * wait for msg
    *
-   * @param message
-   * @param wait
+   * @param message string message
+   * @param wait int wait
    */
   public void waitForMessage(String message, int... wait) {
     elementEventTestBase.waitForMessage(message, wait);
@@ -407,10 +407,10 @@ public class TestBase {
   /**
    * type to textbox
    *
-   * @param locator
-   * @param value
-   * @param validate
-   * @param opParams
+   * @param locator object
+   * @param value string
+   * @param validate boolean
+   * @param opParams object
    * @deprecated
    */
   public void type(Object locator, String value, boolean validate, Object... opParams) {
@@ -420,8 +420,8 @@ public class TestBase {
   /**
    * type to textbox
    *
-   * @param locator
-   * @param value
+   * @param locator object
+   * @param value string
    */
   public void type(Object locator, String value) {
     elementEventTestBase.type(locator, value);
@@ -430,9 +430,9 @@ public class TestBase {
   /**
    * Select option from combo box
    *
-   * @param locator
-   * @param option
-   * @param display
+   * @param locator object
+   * @param option string
+   * @param display int
    */
   public void select(Object locator, String option, int... display) {
     elementEventTestBase.select(locator, option, display);
@@ -441,8 +441,8 @@ public class TestBase {
   /**
    * un-check a checked-box
    *
-   * @param locator
-   * @param opParams
+   * @param locator object
+   * @param opParams int
    */
   public void uncheck(Object locator, int... opParams) {
     elementEventTestBase.uncheck(locator, opParams);
@@ -451,8 +451,8 @@ public class TestBase {
   /**
    * rightClickOnElement
    *
-   * @param locator
-   * @param opParams
+   * @param locator object
+   * @param opParams int
    */
   public void rightClickOnElement(Object locator, int... opParams) {
     elementEventTestBase.rightClickOnElement(locator, opParams);
@@ -461,7 +461,7 @@ public class TestBase {
   /**
    * doubleClickOnElement
    *
-   * @param locator
+   * @param locator object
    */
   public void doubleClickOnElement(Object locator) {
     elementEventTestBase.doubleClickOnElement(locator);
@@ -470,8 +470,8 @@ public class TestBase {
   /**
    * checkCycling
    *
-   * @param e
-   * @param loopCountAllowed
+   * @param e exception
+   * @param loopCountAllowed int
    */
   public void checkCycling(Exception e, int loopCountAllowed) {
     elementEventTestBase.checkCycling(e, loopCountAllowed);
@@ -487,7 +487,7 @@ public class TestBase {
   /**
    * check element displays or net
    *
-   * @param locator
+   * @param locator object
    * @return true if element displays false if element doesn't display
    */
   public boolean isDisplay(Object locator) {
@@ -507,7 +507,7 @@ public class TestBase {
   /**
    * set language
    *
-   * @param language
+   * @param language language
    */
   public void getDriverSetLanguage(Language language) {
     WebDriver seleniumWebDriver = exoWebDriver.getDriverSetLanguage(language.toString());
@@ -518,7 +518,7 @@ public class TestBase {
   /**
    * Change attribute "display" of HTML tag from "none" to "block"
    *
-   * @param locator
+   * @param locator object
    */
   public void changeDisplayAttributeHTML(Object locator) {
     elementEventTestBase.changeDisplayAttributeHTML(locator);
@@ -534,16 +534,16 @@ public class TestBase {
   /**
    * Copy and paste a string from one locator to other
    *
-   * @param origin
-   * @param target
-   * @param value
+   * @param origin By
+   * @param target By
+   * @param value string
    */
   public void copyPasteString(By origin, By target, String value) {
     elementEventTestBase.copyPasteString(origin, target, value);
   }
 
   /**
-   * @param object
+   * @param object object
    * @return = true: if there is not scroll bar on element = false: if there is
    *         scroll bar on element
    */
@@ -554,7 +554,7 @@ public class TestBase {
   /**
    * function get an element from link text when cannot get by text in xpath
    *
-   * @param text
+   * @param text string
    * @return an element from link text
    */
   public WebElement getElementFromTextByJquery(String text) {
@@ -564,8 +564,8 @@ public class TestBase {
   /**
    * scrollBarToGetElement
    *
-   * @param object
-   * @param opParams
+   * @param object By
+   * @param opParams int
    */
   public void scrollBarToGetElement(By object, int... opParams) {
     elementEventTestBase.scrollBarToGetElement(object, opParams);
@@ -574,8 +574,8 @@ public class TestBase {
   /**
    * inputDataToCKEditor
    *
-   * @param framelocator
-   * @param data
+   * @param framelocator By
+   * @param data String
    */
   public void inputDataToCKEditor(By framelocator, String data) {
     elementEventTestBase.inputDataToCKEditor(framelocator, data);
@@ -591,7 +591,7 @@ public class TestBase {
   /**
    * Press End Key
    *
-   * @param driver
+   * @param driver webDriver
    */
   public void pressEndKey(WebDriver driver) {
     elementEventTestBase.pressEndKey(driver);
@@ -604,7 +604,7 @@ public class TestBase {
   /**
    * This function returns a absolute path from a relative path
    *
-   * @param relativeFilePath
+   * @param relativeFilePath String
    * @return - FQA-2092: Run and check calendar smoke on IE and FF
    */
   public String getAbsoluteFilePath(String relativeFilePath) {
@@ -614,7 +614,7 @@ public class TestBase {
   /**
    * Get a File Content
    *
-   * @param filePath
+   * @param filePath String
    * @return fileContent
    */
   public String getFileContent(String filePath) {
@@ -624,8 +624,8 @@ public class TestBase {
   /**
    * Get a file name from current Url
    *
-   * @param driver
-   * @param params
+   * @param driver webDriver
+   * @param params object
    * @return fileName
    */
   public String getFileNameFromCurrentUrl(WebDriver driver, Object... params) {
@@ -635,8 +635,8 @@ public class TestBase {
   /**
    * Attach file in attach popup
    *
-   * @param pathFile
-   * @param fileName
+   * @param pathFile string
+   * @param fileName string
    */
   public void attachFile(String pathFile, String fileName) {
     manageFileTestBase.attachFile(pathFile, fileName, DEFAULT_TIMEOUT, exoWebDriver.getWebDriver());
@@ -645,7 +645,7 @@ public class TestBase {
   /**
    * Upload file using AutoIt
    *
-   * @param file
+   * @param file string
    */
   public void uploadFileUsingAutoIt(String file) {
     manageFileTestBase.uploadFileUsingAutoIt(file);
@@ -654,7 +654,7 @@ public class TestBase {
   /**
    * Download file using autoit
    *
-   * @param file
+   * @param file string
    */
   public void downloadFileUsingAutoIt(String file) {
     manageFileTestBase.downloadFileUsingAutoIt(file);
@@ -663,8 +663,8 @@ public class TestBase {
   /**
    * Download file using Robot class
    *
-   * @param element
-   * @throws Exception
+   * @param element webElement
+   * @throws Exception exception
    */
   public void downloadFileUsingRobot(WebElement element) throws Exception {
 
@@ -689,7 +689,7 @@ public class TestBase {
   /**
    * Download file using Robot class via URL download link
    *
-   * @throws Exception
+   * @throws Exception exception
    */
   public void downloadFileUsingRobotViaURL() throws Exception {
 
@@ -711,7 +711,7 @@ public class TestBase {
   /**
    * uploadFileUsingRobot
    *
-   * @param fileLocation
+   * @param fileLocation string
    */
   public void uploadFileUsingRobot(String fileLocation) {
     manageFileTestBase.uploadFileUsingRobot(fileLocation);
@@ -720,7 +720,7 @@ public class TestBase {
   /**
    * uploadFileUsingRobot using for Document preview
    *
-   * @param fileLocation
+   * @param fileLocation string
    */
   public void uploadFileUsingRobotDocumentPreview(String fileLocation) {
     // String path=getAbsoluteFilePath(fileLocation.replace("/", fs));
@@ -731,7 +731,8 @@ public class TestBase {
    * This function will try to get an element. if after timeout, the element is
    * not found. The function will refresh the page and find the element again.
    *
-   * @param element
+   * @param element object
+   * @param isClicked boolean
    */
   public void waitElementAndTryGetElement(Object element, Boolean... isClicked) {
     elementEventTestBase.waitElementAndTryGetElement(element, isClicked);
@@ -740,7 +741,8 @@ public class TestBase {
   /**
    * Check if a checkbox is checked or not
    *
-   * @Author: QuyenNT Date: Oct 30, 2015
+   * @param checkedElement string
+   * @return checkedElement String
    */
   public boolean checkCheckBoxAttribute(String checkedElement) {
     return elementEventTestBase.checkCheckBoxAttribute(checkedElement);
@@ -758,7 +760,8 @@ public class TestBase {
   /**
    * Get date by text format ex. Saturday, Febuary 16, 2015
    *
-   * @param format
+   * @param format string
+   * @return DateByTextFormat
    */
   public String getDateByTextFormat(String format) {
     return dateTestBase.getDateByTextFormat(format);
@@ -767,7 +770,7 @@ public class TestBase {
   /**
    * Get first day of week
    *
-   * @param format
+   * @param format string
    * @return firstDayOfWeek
    */
   public String getFirstDayOfWeek(String format) {
@@ -777,7 +780,7 @@ public class TestBase {
   /**
    * Get last day of week
    *
-   * @param format
+   * @param format string
    * @return firstDayOfWeek
    */
   public String getLastDayOfWeek(String format) {
@@ -787,7 +790,7 @@ public class TestBase {
   /**
    * function get current Date of system follow a format
    *
-   * @param format
+   * @param format string
    * @return current Date of system
    */
   public String getCurrentDate(String format) {
@@ -797,8 +800,8 @@ public class TestBase {
   /**
    * Get current date with time zone
    *
-   * @param format
-   * @param local
+   * @param format string
+   * @param local string
    * @return current Date with correct time zone
    */
   public String getCurrentDate(String format, String local) {
@@ -808,8 +811,8 @@ public class TestBase {
   /**
    * Add 1 minute to current date time
    *
-   * @param min
-   * @param format
+   * @param min int
+   * @param format string
    * @return string minute
    */
   public String addMinuteToCurrentDateTime(int min, String... format) {
@@ -820,6 +823,7 @@ public class TestBase {
    * Get date in format "dd"
    *
    * @param gap distance from current date
+   * @param format string
    * @return date in format "dd"
    */
   public String getDate(int gap, String format) {
@@ -829,8 +833,8 @@ public class TestBase {
   /**
    * Get date from firstDayOf Week
    *
-   * @param gap
-   * @param format
+   * @param gap distance from current date
+   * @param format string
    * @return date in format
    */
   public String getDateFromFirstDayOfWeek(int gap, String format) {
@@ -850,7 +854,9 @@ public class TestBase {
   /**
    * Get day of the next month
    *
-   * @param format
+   * @param format string
+   *  @param dayNum int
+   *@param weekNum int
    * @return date
    */
   public String getDayOfNextMonth(String format, int dayNum, int weekNum) {
@@ -860,8 +866,8 @@ public class TestBase {
   /**
    * Get the day of next year
    *
-   * @param format
-   * @param year
+   * @param format string
+   * @param year int
    * @return dayOfYear
    */
   public String getDayOfNextYear(String format, int year) {
@@ -871,8 +877,8 @@ public class TestBase {
   /**
    * Get the day of next week
    *
-   * @param format
-   * @return
+   * @param format string
+   * @return DayOfNextWeek
    */
   public String getDayOfNextWeek(String format) {
     return dateTestBase.getDayOfNextWeek(format);

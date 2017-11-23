@@ -236,11 +236,11 @@ public class TaskManagement {
   /**
    * Input into basic fields of Quick task form
    * 
-   * @param name
+   * @param name String
    * @param from From date, time of a task i.e.: 11/06/2013 14:00
    * @param to To date, time of a task, i.e.: 11/06/2013 14:00
-   * @param allDay
-   * @param opt
+   * @param allDay boolean
+   * @param opt String
    */
   public void inputDataTaskInQuickForm(String name, String note, String from, String to, boolean allDay, String... opt) {
     inputFromToQuickTask(from, to, allDay);
@@ -250,12 +250,12 @@ public class TaskManagement {
   /**
    * Input into basic fields of detail task form
    * 
-   * @param name
-   * @param note
+   * @param name String
+   * @param note String
    * @param from From date, time of a task i.e.: 11/06/2013 14:00
    * @param to To date, time of a task, i.e.: 11/06/2013 14:00
-   * @param allDay
-   * @param opt
+   * @param allDay boolean
+   * @param opt String
    */
   public void inputDataTaskInDetailForm(String name, String note, String from, String to, boolean allDay, String... opt) {
     inputBasicDetailTask(name, note, opt);
@@ -265,8 +265,8 @@ public class TaskManagement {
   /**
    * Attach file in "Add new task" form
    * 
-   * @param path
-   * @param opt
+   * @param path String
+   * @param opt boolean
    */
   public void attachFileToTask(String path, Boolean... opt) {
     String fullPath = "";
@@ -293,7 +293,7 @@ public class TaskManagement {
    * 
    * @param fromDateTime (Format: MM/dd/yyyy HH:mm)
    * @param toDateTime (Format: MM/dd/yyyy HH:mm)
-   * @param duration
+   * @param duration int
    */
   public void checkSuggestionTaskTimeInQuickForm(String fromDateTime, String toDateTime, int duration) {
     info("Check date is current date");
@@ -355,7 +355,7 @@ public class TaskManagement {
    * 
    * @param fromDateTime (Format: MM/dd/yyyy HH:mm)
    * @param toDateTime (Format: MM/dd/yyyy HH:mm)
-   * @param duration
+   * @param duration int
    */
   public void checkSuggestionTaskTimeInDetailForm(String fromDateTime, String toDateTime, int duration) {
     info("Check date is current date");
@@ -520,8 +520,8 @@ public class TaskManagement {
   /**
    * Check user selector of task
    * 
-   * @param user
-   * @param isPresent
+   * @param user String
+   * @param isPresent boolean
    */
   public void checkUserSelectorOfTask(String user, boolean isPresent) {
     goToAddTaskFromActionBar();
@@ -540,8 +540,8 @@ public class TaskManagement {
   /**
    * function: check content of mail then delete mail in email server
    * 
-   * @param titleTask
-   * @param opParams
+   * @param titleTask String
+   * @param opParams object
    */
   public void checkEmailNotificationReminderTask(String titleTask, Object... opParams) {
     info("Check and delete mail");

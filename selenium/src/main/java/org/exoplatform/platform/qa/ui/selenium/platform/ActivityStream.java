@@ -34,7 +34,7 @@ public class ActivityStream {
   /**
    * constructor
    *
-   * @param dr
+   * @param testBase testbase
    */
 
   public ActivityStream(TestBase testBase) {
@@ -47,7 +47,7 @@ public class ActivityStream {
   /**
    * Activity arrow menu
    *
-   * @param opt
+   * @param opt optionMenuActivity
    */
   public void selectOptMenuActivity(optionMenuActivity opt) {
     evt.click(ELEMENT_ACTIVITY_ARROWDOWN_MENU, 0, true);
@@ -78,7 +78,7 @@ public class ActivityStream {
   /**
    * Check activity after added a file
    *
-   * @param title
+   * @param title String
    */
   public void checkActivityAddFile(String title) {
     info("Verify that the file's title is shown");
@@ -92,7 +92,7 @@ public class ActivityStream {
   /**
    * Check if there is an activity in the stream
    *
-   * @param name
+   * @param name String
    */
   public void checkActivity(String name) {
     info("Verify that the activity of the name:" + name + " is shown");
@@ -103,7 +103,7 @@ public class ActivityStream {
   /**
    * Check if there is not an activity in the stream
    *
-   * @param name
+   * @param name String
    */
   public void checkNotShownActivity(String name) {
     info("Verify that the activity of the name:" + name + " isnot shown");
@@ -116,7 +116,7 @@ public class ActivityStream {
   /**
    * Check if there is no an activity in the stream
    *
-   * @param name
+   * @param name String
    */
   public void checkNoActivity(String name) {
     info("Verify that the activity of the name:" + name + " is not shown");
@@ -127,8 +127,8 @@ public class ActivityStream {
   /**
    * Check comment of an activity
    *
-   * @param activity
-   * @param comment
+   * @param activity String
+   * @param comment String
    */
   public void checkCommentOfActivity(String activity, String comment) {
     info("Verify that the comment is added");
@@ -156,8 +156,8 @@ public class ActivityStream {
   /**
    * Check number like of activity
    *
-   * @param activity
-   * @param num
+   * @param activity String
+   * @param num int
    */
   public void checkNumLikeOfActivity(String activity, int num) {
     info("Check number like of: " + activity);
@@ -167,9 +167,9 @@ public class ActivityStream {
   /**
    * Check activity of adding wiki page with 4 lines in the content
    *
-   * @param title
-   * @param content
-   * @param version
+   * @param title String
+   * @param content String
+   * @param version String
    */
   public void checkActivityAddWikiPage(String title, String content, String version) {
     if (version == null)
@@ -192,9 +192,9 @@ public class ActivityStream {
   /**
    * Check Activity of Wiki page
    *
-   * @param title
-   * @param content
-   * @param version
+   * @param title String
+   * @param content String
+   * @param version String
    * @param isEdit = true for checking View Change link is shown = false if not
    *          View change link
    */
@@ -230,9 +230,9 @@ public class ActivityStream {
   /**
    * Check activity after add a web content
    *
-   * @param title
-   * @param version
-   * @param status
+   * @param title String
+   * @param version String
+   * @param status String
    */
   public void checkActivityAddWebContent(String title, String version, String status) {
     if (version == null)
@@ -250,9 +250,9 @@ public class ActivityStream {
   /**
    * Check activity after add a product
    *
-   * @param title
-   * @param version
-   * @param status
+   * @param title String
+   * @param version String
+   * @param status String
    */
   public void checkActivityAddProduct(String title, String version, String status) {
     if (version == null)
@@ -270,8 +270,8 @@ public class ActivityStream {
   /**
    * Check content and number of lines of content on activity
    *
-   * @param activityContent
-   * @param content
+   * @param activityContent String
+   * @param content String
    */
   public void checkContentOfActivity(String activityContent, String content) {
     String[] sum;
@@ -308,8 +308,8 @@ public class ActivityStream {
   /**
    * Add a new comment on activity stream
    *
-   * @param filename
-   * @param textContent
+   * @param filename String
+   * @param textContent String
    */
   public void addComment(String filename, String textContent) {
     info("Click on icon comment");
@@ -357,8 +357,8 @@ public class ActivityStream {
   /**
    * Add a new comment on activity stream using javascript
    *
-   * @param activityText
-   * @param contentOfComment
+   * @param activityText String
+   * @param contentOfComment String
    */
   public void addCommentUsingJavascript(String activityText, String contentOfComment) {
     info("add comment using javascript");
@@ -392,7 +392,7 @@ public class ActivityStream {
   /**
    * Show all comment of activities
    *
-   * @param name
+   * @param name String
    */
   public void showComment(String name) {
     info("Show all comment");
@@ -403,7 +403,7 @@ public class ActivityStream {
   /**
    * Hide all comment of activities
    *
-   * @param name
+   * @param name String
    */
   public void hideComment(String name) {
     info("Show all comment");
@@ -414,8 +414,8 @@ public class ActivityStream {
   /**
    * Delete a comment of an activity
    *
-   * @param name
-   * @param comment
+   * @param name String
+   * @param comment String
    */
   public void deleteComment(String name, String comment) {
     int repeat = 0;
@@ -457,7 +457,7 @@ public class ActivityStream {
   /**
    * Add text into activity text box
    *
-   * @param text
+   * @param text String
    */
   public void addText(String text) {
     info("----Add text into activity text box-----");
@@ -468,7 +468,7 @@ public class ActivityStream {
   /**
    * Add link activity
    *
-   * @param link
+   * @param link String
    */
   public void addLink(String link) {
     info("----Click on Link----");
@@ -511,10 +511,8 @@ public class ActivityStream {
   /**
    * Add new activity for space
    *
-   * @param addText
-   * @param text
-   * @param addLink
-   * @param link
+   * @param text String
+   * @param link String
    */
   public void addActivity(String text, String link) {
     info("-- Adding an activity--");
@@ -548,12 +546,12 @@ public class ActivityStream {
   /**
    * Add an activity stream with a text and a attached file
    *
-   * @param nameDrive
-   * @param pathFolder
-   * @param pathData
-   * @param nameFile
-   * @param addText
-   * @param text
+   * @param nameDrive String
+   * @param pathFolder String
+   * @param pathData String
+   * @param nameFile String
+   * @param text String
+   * @param Doc boolean
    */
   public void uploadAndShareFileActivity(String nameDrive,
                                          String pathFolder,
@@ -572,10 +570,10 @@ public class ActivityStream {
   /**
    * Add an activity stream with selecting a document that existed in SE
    *
-   * @param nameDrive
-   * @param pathFolder
-   * @param nameFile
-   * @param textDes
+   * @param nameDrive String
+   * @param pathFolder String
+   * @param nameFile String
+   * @param textDes String
    */
   public void shareFileActivity(String nameDrive, String pathFolder, String nameFile, String textDes) {
     info("-- Adding an activity--");
@@ -609,7 +607,7 @@ public class ActivityStream {
   /**
    * Open Upload Popup from Activity Stream
    *
-   * @param nameDrive
+   * @param nameDrive String
    * @param path where put the upload file
    */
   public void openUploadPopup(String nameDrive, String path) {
@@ -665,7 +663,8 @@ public class ActivityStream {
    * Upload a file from Upload Popup
    *
    * @param path where put TestData folder
-   * @param nameFile
+   * @param nameFile String
+   * @param Doc
    */
   public void uploadFileFromAS(String path, String nameFile, boolean... Doc) {
     boolean prev = (Doc.length > 0 ? Doc[0] : false);
@@ -691,9 +690,9 @@ public class ActivityStream {
   /**
    * Post a activity with mention a user and description text
    *
-   * @param username
-   * @param text
-   * @throws AWTException
+   * @param username String
+   * @param text String
+   * @throws AWTException exception
    */
   public void mentionUserActivity(String username, String text) throws AWTException {
     info("mention user in activity");
@@ -717,8 +716,8 @@ public class ActivityStream {
   /**
    * Check mention list user
    *
-   * @param user
-   * @param text
+   * @param user String
+   * @param text String
    * @param isPresent true if user is in the list false if user is not in the list
    */
   public void checkMentionListUser(String user, String text, boolean isPresent) {
@@ -735,10 +734,10 @@ public class ActivityStream {
   /**
    * Post a comment with mention a user and description text
    *
-   * @param username
-   * @param textContent
-   * @param activity
-   * @throws AWTException
+   * @param username String
+   * @param textContent String
+   * @param activity String
+   * @throws AWTException  AWTException
    */
   public void addCommentWithMentionUser(String activity, String username, String textContent) throws AWTException {
     for (int repeat = 0; repeat < 5; repeat++) {
@@ -764,11 +763,11 @@ public class ActivityStream {
   /**
    * Open Preview mode by clicking on View link
    *
-   * @param nameDocument
+   * @param nameDocument String
    * @param type if type=1, this is for office document files and media files if
    *          type=2, this is for webcontent files if type=3, this is for embedded
    *          medias as: youtube, vimeo, slideshared...
-   * @param link
+   * @param link String
    */
   public void openPreviewModeOnViewLink(String nameDocument, int type, String link) {
     info("Open Preview mode");
@@ -802,8 +801,8 @@ public class ActivityStream {
   /**
    * Open Preview mode by clicking on file's name
    *
-   * @param fileName
-   * @param link
+   * @param fileName String
+   * @param link String
    * @param type if type=1, this is for office document files and media files if
    *          type=2, this is for webcontent files if type=3, this is for embedded
    *          medias as: youtube, vimeo, slideshared...
@@ -880,7 +879,7 @@ public class ActivityStream {
   /**
    * Remove an activity
    *
-   * @param name
+   * @param name String
    */
   public void deleteactivity(String name) {
     info("remove activity");
@@ -903,7 +902,7 @@ public class ActivityStream {
   /**
    * Open answer form from Activity Stream
    *
-   * @param question
+   * @param question String
    */
   public void goToReplyAnswerQuestion(String question) {
     info("Click on Answer link");
@@ -915,9 +914,9 @@ public class ActivityStream {
   /**
    * Check format of a comment
    *
-   * @param activity
-   * @param comment
-   * @param fullName
+   * @param activity String
+   * @param comment String
+   * @param fullName String
    */
   public void checkFormatComment(String activity, String comment, String fullName) {
     info("Avatar and content of user comment");
@@ -935,7 +934,7 @@ public class ActivityStream {
   /**
    * Click on View Change link on action bar
    *
-   * @param title
+   * @param title String
    */
   public void clickOnViewChange(String title) {
     info("Click on View change link");
@@ -946,7 +945,7 @@ public class ActivityStream {
   /**
    * Verify that has not any comment of an activity
    *
-   * @param title
+   * @param title String
    */
   public void checkNotComment(String title) {
     info("Verify that the activity hasn't any comment");

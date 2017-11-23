@@ -47,7 +47,7 @@ public class MyDashBoard {
   /**
    * Delete a Gadget in Dashboard page
    *
-   * @param name
+   * @param name String
    */
   public void deleteGadget(String name) {
     info("Click on Delete button");
@@ -61,8 +61,8 @@ public class MyDashBoard {
   /**
    * Add a remote gadget to the page
    *
-   * @param url
-   * @param name
+   * @param url String
+   * @param name String
    */
   public void addRemoteGadget(String url, String name) {
     info("Open add gadget popup");
@@ -84,7 +84,7 @@ public class MyDashBoard {
   /**
    * Add new tab
    *
-   * @param name
+   * @param name String
    */
   public void addTab(String name) {
     info("Click on add button");
@@ -100,8 +100,8 @@ public class MyDashBoard {
   /**
    * Rename a tab
    *
-   * @param oldName
-   * @param newName
+   * @param oldName String
+   * @param newName String
    */
   public void renameTab(String oldName, String newName) {
     info("Click on the tab");
@@ -117,7 +117,7 @@ public class MyDashBoard {
   /**
    * Delete a tab
    *
-   * @param name
+   * @param name String
    */
   public void deleteTab(String name) {
     info("Click on delete button");

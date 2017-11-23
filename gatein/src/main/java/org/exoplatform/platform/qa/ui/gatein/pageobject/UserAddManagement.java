@@ -41,11 +41,11 @@ public class UserAddManagement {
   /**
    * Add en user on the plf
    *
-   * @param userName
-   * @param Password
-   * @param email
-   * @param Firstname
-   * @param lastName
+   * @param userName String
+   * @param password String
+   * @param email String
+   * @param firstname String
+   * @param lastName String
    */
   public void addUser(String userName, String password, String email, String firstname, String lastName) {
     info("Add an user");
@@ -67,7 +67,7 @@ public class UserAddManagement {
    * Add many users at the same time
    *
    * @param number is the number of user that wants to create
-   * @param password
+   * @param password String
    * @return array
    */
   public ArrayList<String> addUsers(int number, String password) {
@@ -88,7 +88,7 @@ public class UserAddManagement {
    * function: check content of mail then delete mail
    *
    * @param title title of the page
-   * @object if true check it's present, false check if it's not present
+   * @param opParams object
    */
   public void checkEmailNotification(String title, Object... opParams) {
     info("Check and delete mail");

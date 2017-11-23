@@ -63,7 +63,7 @@ public class NavigationToolbar {
   }
 
   /**
-   * Go to add page form: Edit-->Page-->Add page
+   * Go to add page form: Edit- Page- Add page
    */
   public void goToAddPage() {
     info("Go to add page form");
@@ -74,7 +74,7 @@ public class NavigationToolbar {
   }
 
   /**
-   * Go to Manage Sites page: administration-->Portal->Sites By QuynhPT
+   * Go to Manage Sites page: administration- Portal-Sites By QuynhPT
    */
   public void goToPotalSites() {
     info("--Go to Portal-->Sites--");
@@ -95,7 +95,7 @@ public class NavigationToolbar {
   }
 
   /**
-   * Go to Manage Group Sites page: administration-->Portal->Group Sites
+   * Go to Manage Group Sites page: administration-Portal-Group Sites
    */
   public void goToGroupSites() {
     info("--Go to Portal-->Sites--");
@@ -108,7 +108,7 @@ public class NavigationToolbar {
   }
 
   /**
-   * Go to Manage Sites page: administration-->Portal->Pages
+   * Go to Manage Sites page: administration-Portal-Pages
    */
   public void goToPotalPages() {
     info("-- Go to Page Management page --");
@@ -123,7 +123,7 @@ public class NavigationToolbar {
   }
 
   /**
-   * function: Go to Users and Group management (administration --> Users -->
+   * function: Go to Users and Group management (administration - Users -
    * Groups and Roles)
    */
   public void goToUsersAndGroupsManagement() {
@@ -136,7 +136,7 @@ public class NavigationToolbar {
   }
 
   /**
-   * function: Go to Users and Group management (administration --> Community -->
+   * function: Go to Users and Group management (administration - Community -
    * Manage Community)
    */
   public void goToCommunityManagement() {
@@ -204,7 +204,7 @@ public class NavigationToolbar {
   }
 
   /**
-   * Go to Adinistration->Content->Site Explorer
+   * Go to Adinistration-Content-Site Explorer
    */
   public void goToSiteExplorer() {
     info("-- Go to site explorer home page --");
@@ -221,7 +221,7 @@ public class NavigationToolbar {
   }
 
   /**
-   * Go to Edit-->Page-->SEO
+   * Go to Edit-Page-SEO
    */
   public void goToSEO() {
     info("Go to SEO page");
@@ -246,7 +246,7 @@ public class NavigationToolbar {
   }
 
   /**
-   * Go to Un-edit content Edit-->Uncheck Content
+   * Go to Un-edit content Edit-Uncheck Content
    */
   public void goToUnEditContent() {
     info("Go to un Edit content");
@@ -257,7 +257,7 @@ public class NavigationToolbar {
   }
 
   /**
-   * Open Change language popup Username-->Change Language
+   * Open Change language popup Username-Change Language
    */
   public void goToChangeLanguage() {
     info("Open Change Language popup");
@@ -411,7 +411,6 @@ public class NavigationToolbar {
   /**
    * Add an event or a task from the toolbar
    *
-   * @param eventTask
    * @param name
    * @param from
    * @param to
@@ -634,7 +633,7 @@ public class NavigationToolbar {
   }
 
   /**
-   * go to Edit->Site->Navigation
+   * go to Edit-Site-Navigation
    */
   public void goToEditSiteNavigation() {
     info("Go to Edit layout form");
@@ -656,7 +655,7 @@ public class NavigationToolbar {
   }
 
   /**
-   * go to Edit->Site->Add Site
+   * go to Edit-Site-Add Site
    */
   public void goToEditSiteAddSite() {
     info("Go to Edit layout form");

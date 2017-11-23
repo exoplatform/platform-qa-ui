@@ -43,7 +43,7 @@ public class ForumTopicManagement {
   /**
    * constructor
    *
-   * @param dr
+   * @param testBase TestBase
    */
   public ForumTopicManagement(TestBase testBase) {
     this.testBase = testBase;
@@ -57,8 +57,8 @@ public class ForumTopicManagement {
   /**
    * Move a topic to a forum
    *
-   * @param category
-   * @param forum
+   * @param category String
+   * @param forum String
    */
   public void moveTopicToForum(String category, String forum) {
     info("if not found forum");
@@ -88,7 +88,7 @@ public class ForumTopicManagement {
   /**
    * select a item in More Action menu By QuynhPT
    *
-   * @param item
+   * @param item specifMoreActionMenuTopic
    */
   public void selectItemMoreActionMenuTopic(specifMoreActionMenuTopic item) {
     openMoreActionMenu();
@@ -158,7 +158,7 @@ public class ForumTopicManagement {
   /**
    * Select a action in More Action menu of Poll portlet
    *
-   * @param item
+   * @param item specifMoreActionMenuPoll
    */
   public void selectItemMoreActionMenuPoll(specifMoreActionMenuPoll item) {
     openMoreActionMenuPoll();
@@ -207,8 +207,8 @@ public class ForumTopicManagement {
   /**
    * Post a reply
    *
-   * @param title
-   * @param content
+   * @param title String
+   * @param content String
    */
   public void postReply(String title, String content) {
     $(ELEMENT_POST_REPLY).click();
@@ -218,8 +218,8 @@ public class ForumTopicManagement {
   /**
    * Input information for Reply form
    *
-   * @param title
-   * @param content
+   * @param title String
+   * @param content String
    */
   public void replyTopic(String title, String content) {
     if (!title.isEmpty())
@@ -235,8 +235,8 @@ public class ForumTopicManagement {
   /**
    * Edit a post
    *
-   * @param newTitle
-   * @param newContent
+   * @param newTitle String
+   * @param newContent String
    */
   public void editPost(String newTitle, String newContent) {
     $(byText(newContent)).parent().parent().parent().parent().find(byText("Edit")).click();
@@ -253,8 +253,8 @@ public class ForumTopicManagement {
   /**
    * Quote a post
    *
-   * @param title
-   * @param newContent
+   * @param title String
+   * @param newContent String
    */
   public void quotePost(String title, String newContent) {
     $(byText(newContent)).parent().parent().parent().parent().find(byText("Quote")).click();
@@ -269,9 +269,8 @@ public class ForumTopicManagement {
   /**
    * Create a private post
    *
-   * @param titlePost
-   * @param newTitle
-   * @param content
+   * @param newTitle String
+   * @param content String
    */
   public void privatePostfortopic(String newTitle, String content) {
     $(byText("Private")).click();
@@ -304,9 +303,9 @@ public class ForumTopicManagement {
   /**
    * Add poll
    *
-   * @param question
-   * @param option1
-   * @param option2
+   * @param question String
+   * @param option1 String
+   * @param option2 String
    */
   public void addPoll(String question, String option1, String option2) {
     selectItemMoreActionMenuTopic(specifMoreActionMenuTopic.ADD_POLL);
@@ -358,9 +357,9 @@ public class ForumTopicManagement {
   /**
    * Edit Poll
    *
-   * @param question
-   * @param option1
-   * @param option2
+   * @param question String
+   * @param option1 String
+   * @param option2 String
    */
   public void editPoll(String question, String option1, String option2) {
     info("Click on More Actions and Select Edit button");
@@ -396,7 +395,7 @@ public class ForumTopicManagement {
   /**
    * Add a tag gor topic
    *
-   * @param name
+   * @param name String
    */
   public void addATag(String name) {
     $(ELEMENT_ACTIONBAR_TOPIC_TAG).click();
@@ -408,8 +407,8 @@ public class ForumTopicManagement {
   /**
    * addPostSimple
    *
-   * @param name
-   * @param message
+   * @param name String
+   * @param message String
    */
   public void addPostSimple(String name, String message) {
     info("Add post simple");
@@ -427,8 +426,8 @@ public class ForumTopicManagement {
   /**
    * addTopicSimple
    *
-   * @param name
-   * @param message
+   * @param name String
+   * @param message String
    */
   public void addTopicSimple(String name, String message) {
     evt.click(ELEMENT_FORUM_ADDTOPIC);
@@ -448,10 +447,10 @@ public class ForumTopicManagement {
   /**
    * Reply the topic
    *
-   * @param newTitle
-   * @param newMessg
-   * @param pathFile
-   * @param fileName
+   * @param newTitle String
+   * @param newMessg String
+   * @param pathFile String
+   * @param fileName String
    */
   public void replyTopic(String newTitle, String newMessg, String pathFile, String fileName) {
     info("Click on Post Reply button");
@@ -492,8 +491,10 @@ public class ForumTopicManagement {
   /**
    * Start a Topic By QuynhPT
    *
-   * @param title
-   * @param message
+   * @param title String
+   * @param message String
+   *@param fileName String
+   * @param pathFile String
    */
   public void startTopic(String title, String message, String pathFile, String fileName) {
     info("Verify that the pop up is shown");
@@ -525,7 +526,7 @@ public class ForumTopicManagement {
   /**
    * Rate a topic
    *
-   * @param name
+   * @param name String
    */
   public void rateTopic(String name) {
     $(ELEMENT_MORE_ACTION).click();
@@ -537,8 +538,8 @@ public class ForumTopicManagement {
   /**
    * Edit a topic
    *
-   * @param newTitle
-   * @param newContent
+   * @param newTitle String
+   * @param newContent String
    */
   public void editTopic(String newTitle, String newContent) {
     selectItemMoreActionMenuTopic(specifMoreActionMenuTopic.EDIT);
@@ -554,9 +555,9 @@ public class ForumTopicManagement {
   /**
    * Check display of manage topic
    *
-   * @param forum
-   * @param topic
-   * @param isDisplay
+   * @param forum String
+   * @param topic String
+   * @param isDisplay boolean
    */
   public void checkDisplayOfTopicManage(String forum, String topic, boolean isDisplay) {
     info("check display of manage topic");
@@ -573,8 +574,8 @@ public class ForumTopicManagement {
   /**
    * Check enable of post reply
    *
-   * @param topic
-   * @param isEnable
+   * @param topic String
+   * @param isEnable boolean
    */
   public void checkEnableOfPostReply(String topic, boolean isEnable) {
     info("check enable of post reply");
@@ -589,9 +590,9 @@ public class ForumTopicManagement {
   /**
    * Check enable of view post
    *
-   * @param forum
-   * @param topic
-   * @param isEnable
+   * @param forum String
+   * @param topic String
+   * @param isEnable boolean
    */
   public void checkEnableOfViewPost(String forum, String topic, boolean isEnable) {
     info("check enable of view post");
@@ -608,11 +609,11 @@ public class ForumTopicManagement {
   /**
    * Edit permission of topic
    *
-   * @param topic
-   * @param groupPath
-   * @param member
-   * @param isView
-   * @param isPost
+   * @param topic String
+   * @param groupPath String
+   * @param member String
+   * @param isView boolean
+   * @param isPost boolean
    */
   public void editPermOfTopic(String topic, String groupPath, String member, boolean isView, boolean isPost) {
     info("edit permission of topic:" + topic);
@@ -640,6 +641,8 @@ public class ForumTopicManagement {
 
   /**
    * function: Search user in User Selection Form in Topic Permission
+   * @param searchOption String
+   * @param user String
    */
 
   public void searchUser(String user, String searchOption) {

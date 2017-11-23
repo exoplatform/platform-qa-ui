@@ -17,11 +17,7 @@ import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class WikiSettingPage {
 
-  /**
-   * constructor
-   *
-   * @param dr
-   */
+
   private final TestBase       testBase;
 
   public ManageAlert           alert;
@@ -37,7 +33,7 @@ public class WikiSettingPage {
   /**
    * Search a template
    *
-   * @param template
+   * @param template String
    */
   public void searchTemplate(String template) {
 
@@ -56,8 +52,10 @@ public class WikiSettingPage {
   /**
    * Edit a wiki template
    *
-   * @param template
-   * @param text
+   * @param template String
+   * @param newTitle String
+   * @param newContent  String
+   * @param newDes String
    */
   public void editTemplate(String template, String newTitle, String newDes, String newContent) {
     evt.click(By.xpath(ELEMENT_EDIT_TEMPLATE.replace("{$template}", template)));
@@ -81,7 +79,7 @@ public class WikiSettingPage {
   /**
    * Delete a template
    *
-   * @param template
+   * @param template String
    */
   public void deleteTemplate(String template) {
     if (evt.waitForAndGetElement(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template), 2000, 0) != null) {
@@ -95,7 +93,7 @@ public class WikiSettingPage {
   /**
    * Cancel deleting a template
    *
-   * @param template
+   * @param template String
    */
   public void deleteTemplateWithCanceling(String template) {
     info("Delete template " + template);
@@ -143,9 +141,9 @@ public class WikiSettingPage {
   /**
    * Add new a template
    *
-   * @param title
-   * @param des
-   * @param content
+   * @param title String
+   * @param des String
+   * @param content String
    */
   public void addTemplate(String title, String des, String content) {
     info("Click on Add more Template button");

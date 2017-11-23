@@ -157,7 +157,7 @@ public class ContentAdministration {
    * @param name
    * @param tabName
    * @param tab
-   * @param userNamePermission
+   * @param perm
    */
   public void addView(String name, String tabName, String[] tab, String... perm) {
     /*
@@ -694,7 +694,7 @@ public class ContentAdministration {
    * @param name
    * @param queryType
    * @param statement
-   * @param permission
+   * @param permissions
    */
   public void addQueries(String name, String queryType, String statement, String... permissions) {
     info("Add a query");
@@ -977,7 +977,7 @@ public class ContentAdministration {
    * Add more actions for a View type By QuynhPT date 09/01/2015
    * 
    * @param nameView the name of View type as: Web, Admin, Icon, List, Categories
-   * @param applyActions the name of actions that list in the popup
+   * @param action the name of actions that list in the popup
    */
   public void addActionsForAView(String nameView, specificEcmActionstypes action) {
     info("Go to Explorer tab");
@@ -1159,7 +1159,6 @@ public class ContentAdministration {
   /**
    * Add group permission to lock
    * 
-   * @param drive
    * @param group
    * @param membership
    */
@@ -1175,7 +1174,6 @@ public class ContentAdministration {
   /**
    * Add group permission to tag
    * 
-   * @param drive
    * @param group
    * @param membership
    */
@@ -1192,7 +1190,6 @@ public class ContentAdministration {
   /**
    * Add group permission to node
    * 
-   * @param drive
    * @param group
    * @param membership
    */
@@ -1244,7 +1241,7 @@ public class ContentAdministration {
   /**
    * Check select user in Explorer/View
    * 
-   * @param cat: name of view
+   * @param view: name of view
    * @param user
    * @param isPresent true if user is displayed false if user is NOT displayed
    */
@@ -1260,8 +1257,7 @@ public class ContentAdministration {
 
   /**
    * Add WebView type to drive
-   * 
-   * @Author: QuyenNT Date: Oct 20, 2015
+   *
    */
   public void addViewTypeToDrive(String driveName, specificView[] applyViews) {
     NavigationToolbar navTool = new NavigationToolbar(testBase);
@@ -1281,8 +1277,7 @@ public class ContentAdministration {
 
   /**
    * Add permission to Drive
-   * 
-   * @Author: QuyenNT Date: Oct 23, 2015
+   *
    */
   public void addPermissionToDrive(String driveName, String permissionToAdd) {
     NavigationToolbar navTool = new NavigationToolbar(testBase);

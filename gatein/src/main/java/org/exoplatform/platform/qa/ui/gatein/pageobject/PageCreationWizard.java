@@ -21,7 +21,7 @@ import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 /**
- * Path: Edit-->Page-->Add Pages
+ * Path: Edit-Page-Add Pages
  */
 public class PageCreationWizard {
 
@@ -52,12 +52,12 @@ public class PageCreationWizard {
   /**
    * Input data in page info page at step 1
    *
-   * @param name
-   * @param isMode
-   * @param lang
-   * @param disName
-   * @param isVis
-   * @param isPub
+   * @param name String
+   * @param isMode String
+   * @param lang String
+   * @param disName String
+   * @param isVis Boolean
+   * @param isPub Boolean
    */
   public void inputPageInfoStep1(String name, Boolean isMode, String lang, String disName, Boolean isVis, Boolean isPub) {
     info("Input data in page info page at step 1");
@@ -100,8 +100,8 @@ public class PageCreationWizard {
   /**
    * Add content in page editor
    *
-   * @param tab
-   * @param element
+   * @param tab SelenideElement
+   * @param element SelenideElement
    */
   public void addApplication(SelenideElement tab, SelenideElement element) {
     $(ELEMENT_APPLICATION_TAB_ACTIVE).click();
@@ -114,9 +114,10 @@ public class PageCreationWizard {
   /**
    * Add an application to a layout
    *
-   * @param nameApp
-   * @param appLocator
-   * @param layoutLocator
+   * @param nameApp String
+   * @param appLocator String
+   * @param layoutLocator SelenideElement
+   * @param tabName String
    */
   public void addApp(String tabName, String nameApp, SelenideElement appLocator, SelenideElement layoutLocator) {
     info("Add an application to the layout");
@@ -134,8 +135,8 @@ public class PageCreationWizard {
   /**
    * Add a Content list to a Page by folder
    *
-   * @param path
-   * @param folder
+   * @param path String
+   * @param folder String
    */
   public void addContentlistByFolder(String path, String folder) {
     // addApplication(ELEMENT_APPLICATION_CONTENT_TAB,
@@ -152,8 +153,8 @@ public class PageCreationWizard {
   /**
    * Add a Content list to a page by content
    *
-   * @param path
-   * @param content
+   * @param path String
+   * @param content String
    */
   public void addContentListByContent(String path, String content) {
     // addApplication(ELEMENT_APPLICATION_CONTENT_TAB,
@@ -171,8 +172,8 @@ public class PageCreationWizard {
   /**
    * Add a Cotent Detail to a page
    *
-   * @param path
-   * @param content
+   * @param path String
+   * @param content String
    */
   public void addContentDetail(String path, String content) {
     addApplication($(byTitle("Content")), $(byId("Content/portlet_SingleContentViewer")));
@@ -188,8 +189,8 @@ public class PageCreationWizard {
   /**
    * Create a simple page
    *
-   * @param title
-   * @param description
+   * @param title String
+   * @param description String
    */
   public void addAPageSimple(String title, String description) {
     info("Input the title and descript");
@@ -205,7 +206,7 @@ public class PageCreationWizard {
    * Add a Container
    *
    * @param numRow this name of containers as: oneRow,twoRow...
-   * @param verify
+   * @param verify boolean
    */
   public void addContainer(String numRow, boolean... verify) {
     evt.click(ELEMENT_CONTAINER_TAB);
@@ -232,9 +233,10 @@ public class PageCreationWizard {
   /**
    * Edit a container
    *
-   * @param newTitle
-   * @param width
-   * @param height
+   * @param newTitle String
+   * @param width String
+   * @param height String
+   * @param oldTitle String
    */
   public void editContainer(String oldTitle, String newTitle, String width, String height) {
     info("Edit container");
@@ -332,7 +334,7 @@ public class PageCreationWizard {
   /**
    * Delete a contain in the layout
    *
-   * @param name
+   * @param name String
    */
   public void deleteContainer(String name) {
     info("Delete the container");
@@ -357,10 +359,10 @@ public class PageCreationWizard {
   /**
    * Edit an application with changes about title, width and height
    *
-   * @param oldTitle
-   * @param newTitle
-   * @param width
-   * @param height
+   * @param oldTitle String
+   * @param newTitle String
+   * @param width String
+   * @param height String
    */
   public void editApplication(String oldTitle, String newTitle, String width, String height) {
     // TODO Auto-generated method stub
@@ -444,7 +446,7 @@ public class PageCreationWizard {
   /**
    * Delete an application
    *
-   * @param name
+   * @param name String
    */
   public void deleteApplication(String name) {
     info("Delete the application");
@@ -464,7 +466,7 @@ public class PageCreationWizard {
   /**
    * Change to Switch view mode
    *
-   * @param verify
+   * @param verify boolean
    */
   public void switchViewMode(boolean... verify) {
     info("Click on Switch view mode button");
@@ -476,7 +478,7 @@ public class PageCreationWizard {
   /**
    * View properties
    *
-   * @param verify
+   * @param verify boolean
    */
   public void viewProperties(boolean... verify) {
     info("Click on Switch view mode button");
@@ -500,10 +502,12 @@ public class PageCreationWizard {
   /**
    * Change Properties of a page
    *
-   * @param title
-   * @param groupsPath
-   * @param memberShips
-   * @param isShowMaxWindow
+   * @param title boolean
+   * @param groupsPath boolean
+   * @param memberShips boolean
+   * @param isShowMaxWindow boolean
+   * @param  isAccessPermision boolean
+   * @param isEditPermission boolean
    */
   public void changeProperties(String title,
                                String groupsPath,
@@ -590,7 +594,7 @@ public class PageCreationWizard {
   /**
    * Select a membership of a group
    *
-   * @param memberShip
+   * @param memberShip String
    */
   public void selectMemberShip(String memberShip) {
     info("Select a membership:" + memberShip);
@@ -603,7 +607,7 @@ public class PageCreationWizard {
   /**
    * Select a membership of a group
    *
-   * @param memberShip
+   * @param memberShip String
    */
   public void selectMemberShipEditTab(String memberShip) {
     info("Select a membership:" + memberShip);
@@ -614,10 +618,10 @@ public class PageCreationWizard {
   /**
    * Reset default values of Page's properties after changed
    *
-   * @param title
-   * @param groupPath
-   * @param editPermission
-   * @param isShowMaxWindow
+   * @param title String
+   * @param groupPath String
+   * @param editPermission String
+   * @param isShowMaxWindow boolean
    */
   public void resetValuesProperties(String title, String groupPath, String editPermission, boolean... isShowMaxWindow) {
     if (!title.isEmpty()) {
@@ -642,7 +646,7 @@ public class PageCreationWizard {
   /**
    * Remove a group permission
    *
-   * @param group
+   * @param group String
    */
   public void removeGroup(String group) {
     info("Click on Delete button of the group:" + group);
@@ -664,7 +668,6 @@ public class PageCreationWizard {
   /**
    * function: Edit view properties when edit layout
    *
-   * @param pageName name of page you want to edit
    * @param newtitle new Name of page you want to edit
    * @param groupId Group Id when select permission
    * @param membership membership when select permission
@@ -683,12 +686,12 @@ public class PageCreationWizard {
   /**
    * Edit permission when view properties
    *
-   * @param groupId
-   * @param membership
-   * @param isAccess
-   * @param isEdit
-   * @param isMoveApp
-   * @param isMoveCon
+   * @param groupId String
+   * @param membership String
+   * @param isAccess boolean
+   * @param isEdit boolean
+   * @param isMoveApp boolean
+   * @param isMoveCon boolean
    */
   public void editPermInViewProperties(String groupId,
                                        String membership,
@@ -732,12 +735,12 @@ public class PageCreationWizard {
   /**
    * edit permission in container permission
    *
-   * @param cont
-   * @param groupId
-   * @param membership
-   * @param isAccess
-   * @param isMoveApp
-   * @param isMoveCon
+   * @param cont String
+   * @param groupId String
+   * @param membership String
+   * @param isAccess boolean
+   * @param isMoveApp boolean
+   * @param isMoveCon boolean
    */
   public void editPermInContainer(String cont,
                                   String groupId,
@@ -820,8 +823,8 @@ public class PageCreationWizard {
   /**
    * Set access permission
    *
-   * @param groupId
-   * @param membership
+   * @param groupId String
+   * @param membership String
    */
   public void setAccessPermissions(String groupId, String membership) {
     String[] groups = groupId.split("/");
@@ -835,6 +838,8 @@ public class PageCreationWizard {
 
   /**
    * Set move apps permissions
+   * @param groupId String
+   * @param membership String
    */
   public void setMoveAppsPermissions(String groupId, String membership) {
     String[] groups = groupId.split("/");
@@ -849,6 +854,8 @@ public class PageCreationWizard {
 
   /**
    * Set move apps permissions
+   * @param groupId String
+   * @param membership String
    */
   public void setMoveContainersPermissions(String groupId, String membership) {
     String[] groups = groupId.split("/");
@@ -863,6 +870,8 @@ public class PageCreationWizard {
 
   /**
    * Select access permission
+   * @param group String
+   * @param member String
    */
   public void selectAccessPerm(String group, String member) {
     info("select group and membership");
@@ -879,11 +888,11 @@ public class PageCreationWizard {
   /**
    * Verify permission drag drop application
    *
-   * @param tabName
-   * @param nameApp
-   * @param appLocator
-   * @param layoutLocator
-   * @param isEnable
+   * @param tabName String
+   * @param nameApp String
+   * @param appLocator Object
+   * @param layoutLocator Object
+   * @param isEnable boolean
    */
   public void verifyDragDropAppPerm(String tabName, String nameApp, Object appLocator, Object layoutLocator, boolean isEnable) {
     info("verify drag drop application");
@@ -898,6 +907,8 @@ public class PageCreationWizard {
 
   /**
    * Verify permission drag drop container
+   * @param numRow String
+   * @param isVerify boolean
    */
   public void verifyDragDropConPerm(String numRow, boolean isVerify) {
     info("verify drag drop container");
@@ -922,10 +933,10 @@ public class PageCreationWizard {
 
   /**
    * Add an application to a layout with an user not having permission
-   *
-   * @param nameApp
-   * @param appLocator
-   * @param layoutLocator
+   *@param tabName String
+   * @param nameApp String
+   * @param appLocator Object
+   * @param layoutLocator Object
    */
   public void addAppWithoutPermission(String tabName, String nameApp, Object appLocator, Object layoutLocator) {
     info("Add an application to the layout");
@@ -942,6 +953,7 @@ public class PageCreationWizard {
 
   /**
    * Delete a contain in the layout by an user have no permission
+   * @param id string
    */
   public void deleteContainerWithoutPermission(String id) {
     info("Delete the container");
@@ -961,19 +973,11 @@ public class PageCreationWizard {
   }
 
   /**
-   * Select a container and open Edit form <<<<<<< HEAD <<<<<<< HEAD
+   * Select a container and open Edit form HEAD-HEAD
    *
-   * @param containerLocation
-   * @param containerEditLocation ======= ======= >>>>>>> FQA-2759:PLF43 - Write
-   *          High Fnc/PLF/Restricted Page Editor/Site Permissions <<<<<<< HEAD
-   *          By: QuyenNT =======
-   * @Author: QuyenNT >>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page
-   *          Editor/Container Permissions ======= By: QuyenNT >>>>>>>
-   *          FQA-2759:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Site
-   *          Permissions Date: Nov 11, 2015 <<<<<<< HEAD
-   * @param: >>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page
-   *           Editor/Container Permissions ======= >>>>>>> FQA-2759:PLF43 - Write
-   *           High Fnc/PLF/Restricted Page Editor/Site Permissions
+   * @param containerLocation String
+   * @param containerEditLocation - FQA-2759:PLF43 - Write
+   *          High Fnc/PLF/Restricted Page Editor/Site Permissions - HEAD
    */
   public void openContainerEditForm(String containerLocation, String containerEditLocation) {
     info("Select Container tab");
@@ -985,19 +989,11 @@ public class PageCreationWizard {
   }
 
   /**
-   * <<<<<<< HEAD Delete a container without permission
+   * Delete a container without permission
    *
-   * @param containerId
-   * @param containerDeleteId ======= Delete a container without permission
-   *          <<<<<<< HEAD <<<<<<< HEAD By: QuyenNT =======
-   * @Author: QuyenNT >>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page
-   *          Editor/Container Permissions ======= By: QuyenNT >>>>>>>
-   *          FQA-2759:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Site
-   *          Permissions Date: Nov 11, 2015 <<<<<<< HEAD
-   * @param: >>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page
-   *           Editor/Container Permissions ======= >>>>>>> FQA-2759:PLF43 - Write
-   *           High Fnc/PLF/Restricted Page Editor/Site Permissions
-   */
+   * @param containerId Object
+   * @param containerDeleteId Delete a container without permission
+     */
   public void deleteContainerWithoutPermission(String containerId, String containerDeleteId) {
     info("Delete the container");
     try {

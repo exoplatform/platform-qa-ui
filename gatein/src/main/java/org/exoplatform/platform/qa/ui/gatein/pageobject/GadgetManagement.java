@@ -26,7 +26,7 @@ public class GadgetManagement {
   /**
    * Add a Remote gadget
    *
-   * @param url
+   * @param url String
    */
   public void addRemoteGadget(String url) {
     info("Click on Gadgets button");
@@ -43,7 +43,7 @@ public class GadgetManagement {
   /**
    * Add a new gadget into a category
    *
-   * @param category
+   * @param category String
    */
   public void addIntoCategory(String category) {
     info("Click on the link: Click here to add into category");
@@ -61,7 +61,7 @@ public class GadgetManagement {
   /**
    * Delete a gadget
    *
-   * @param name
+   * @param name String
    */
   public void deleteGadget(String name) {
     info("Click on delete button");
@@ -73,8 +73,8 @@ public class GadgetManagement {
   /**
    * Create a new gadget
    *
-   * @param name
-   * @param xmlCode
+   * @param name String
+   * @param xmlCode String
    */
   public void createNewGadget(String name, String xmlCode) {
     info("Click on Create new gadget button");
@@ -99,9 +99,9 @@ public class GadgetManagement {
   /**
    * Edit a Gadget with newXmlCode that include newName
    *
-   * @param oldName
-   * @param newXmlCode
-   * @param newName
+   * @param oldName String
+   * @param newXmlCode String
+   * @param newName String
    */
   public void editAGadget(String oldName, String newXmlCode, String newName) {
     info("Select a Gadget");

@@ -26,7 +26,7 @@ public class NotificationActivity {
   /**
    * constructor
    * 
-   * @param dr
+   * @param testBase TestBase
    */
   public NotificationActivity(TestBase testBase) {
     this.testBase = testBase;
@@ -38,9 +38,9 @@ public class NotificationActivity {
   /**
    * Check notification's comment type in notification list popup
    * 
-   * @param users
-   * @param comment
-   * @param actTitle
+   * @param users String
+   * @param comment String
+   * @param actTitle String
    */
   public void checkCommentActivityNotificationFormat(ArrayList<String> users, String comment, String actTitle) {
     int lastIndex = users.size() - 1;
@@ -181,7 +181,7 @@ public class NotificationActivity {
   /**
    * Verify the title of the page
    * 
-   * @param titlePg is the title's content
+   * @param expectedTitle is the title's content
    */
   public void verifyTitlePage(String expectedTitle) {
     info("Verify that the title of the page is shown with correct data");
@@ -260,7 +260,6 @@ public class NotificationActivity {
    * Verify information of uploaded file activity
    * 
    * @param fileName
-   * @param activity
    */
   public void verifyActivityFileUpload(String fileName) {
     if (!fileName.isEmpty()) {
@@ -342,8 +341,8 @@ public class NotificationActivity {
   /**
    * Input information for Reply form
    * 
-   * @param title
-   * @param content
+   * @param title String
+   * @param content String
    */
   public void replyTopic(String title, String content) {
     String titleWindows = this.testBase.getExoWebDriver().getWebDriver().getTitle();
@@ -359,8 +358,9 @@ public class NotificationActivity {
   /**
    * Type a text to a Frame using for CKEDITOR By QuynhPT
    * 
-   * @param frameLocator
-   * @param content
+   * @param frameLocator By
+   * @param content  String
+   * @param titleWindow  String
    */
   public void inputFrame(By frameLocator, String content, String titleWindow) {
     info("Finding the frameLocator:" + frameLocator);
@@ -388,8 +388,8 @@ public class NotificationActivity {
   /**
    * Verify topic is shown
    * 
-   * @param title
-   * @param description
+   * @param title String
+   * @param description String
    */
   public void verifyReplyPostTopic(String title, String description) {
     if (!title.isEmpty() && !description.isEmpty()) {
@@ -401,8 +401,8 @@ public class NotificationActivity {
   /**
    * Verify activity's format of Topic activity
    * 
-   * @param desTopic
-   * @param numReply
+   * @param desTopic String
+   * @param numReply String
    */
   public void verifyActivityTopic(String desTopic, String numReply) {
     if (!desTopic.isEmpty()) {
@@ -428,7 +428,7 @@ public class NotificationActivity {
   /**
    * Check version and description of Wiki activity
    * 
-   * @param description
+   * @param description String
    */
   public void verifyActivityWiki(String description) {
     if (!description.isEmpty()) {
@@ -444,7 +444,7 @@ public class NotificationActivity {
   /**
    * Go to detail wiki page via clicking wiki's activity's title
    * 
-   * @param title
+   * @param title String
    */
   public void goToDetailWikiPage(String title) {
     if (!title.isEmpty()) {

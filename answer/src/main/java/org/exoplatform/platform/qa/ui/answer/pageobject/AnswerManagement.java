@@ -21,7 +21,7 @@ public class AnswerManagement {
   /**
    * constructor
    * 
-   * @param dr
+   * @param testBase testBase
    */
   public AnswerManagement(TestBase testBase) {
     this.testBase = testBase;
@@ -40,10 +40,10 @@ public class AnswerManagement {
   /**
    * Input data to answer form
    * 
-   * @param content
-   * @param isApprove
-   * @param isActive
-   * @param related
+   * @param content string
+   * @param isApprove string
+   * @param isActive string
+   * @param related string
    */
   public void inputDataToAnswer(String content, Boolean isApprove, Boolean isActive, String related) {
     info("Input data to answer form");
@@ -82,7 +82,7 @@ public class AnswerManagement {
   /**
    * Execute action of answer: EDIT, APPROVE, DISAPPROVE, ACTIVE, DEACTIVE, DELETE
    * 
-   * @param answer
+   * @param answer string
    * @param action action that needs to be done
    */
   public void goToActionOfAnswerFromMoreAction(String answer, actionAnswerOption action) {
@@ -132,7 +132,7 @@ public class AnswerManagement {
   /**
    * Delete answer
    * 
-   * @param answer
+   * @param answer string
    */
   public void deleteAnswer(String answer) {
     info("Delete answer");
@@ -145,8 +145,8 @@ public class AnswerManagement {
   /**
    * function vote/unvote an answer
    * 
-   * @param answer
-   * @param rate
+   * @param answer string
+   * @param rate boolean
    */
   public void rateAnswer(String answer, boolean rate) {
     if (rate) {

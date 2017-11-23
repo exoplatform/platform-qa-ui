@@ -11,7 +11,7 @@ public class FaqHomePage {
   /**
    * constructor
    * 
-   * @param dr
+   * @param testBase
    */
   public FaqHomePage(TestBase testBase) {
     this.testBase = testBase;

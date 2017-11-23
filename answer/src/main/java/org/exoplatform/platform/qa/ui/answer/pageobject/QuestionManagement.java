@@ -65,10 +65,10 @@ public class QuestionManagement {
   /**
    * input data to question form
    * 
-   * @param title
-   * @param content
-   * @param language
-   * @param pathFile
+   * @param title string
+   * @param content string
+   * @param language string
+   * @param pathFile string
    */
   public void inputDataToQuestionForm(String title, String content, String language, String pathFile) {
     if (title != null && title != "") {
@@ -108,7 +108,7 @@ public class QuestionManagement {
   /**
    * Execute action of question: COMMENT, ANSWER, EDIT, DELETE, MOVE, SEND
    * 
-   * @param question
+   * @param question string
    * @param action action that needs to be done
    */
   public void goToActionOfQuestionByRightClick(String question, actionQuestionOption action) {
@@ -194,7 +194,7 @@ public class QuestionManagement {
   /**
    * Delete question
    * 
-   * @param question
+   * @param question string
    */
   public void deleteQuestion(String question) {
     info("Delete question");
@@ -210,7 +210,7 @@ public class QuestionManagement {
   /**
    * Cancel to Delete question
    * 
-   * @param question
+   * @param question string
    */
   public void cancelDeleteQuestion(String question) {
     info("Delete question");
@@ -223,7 +223,7 @@ public class QuestionManagement {
   /**
    * Go to edit question from manage question form
    * 
-   * @param question
+   * @param question string
    */
   public void goToEditQuestionFromManageQuestionForm(String question) {
     info("Go to edit question from manage question form");
@@ -236,7 +236,7 @@ public class QuestionManagement {
   /**
    * Go to delete question from manage question form
    * 
-   * @param question
+   * @param question string
    */
   public void goToDeleteQuestionFromManageQuestionForm(String question) {
     info("Go to delete question from manage question form");
@@ -249,7 +249,7 @@ public class QuestionManagement {
   /**
    * Approve question or not from manage question form
    * 
-   * @param question
+   * @param question string
    * @param isApprove true: check to approve false: uncheck to un-approve
    */
   public void approveQuestionFromManageQuestionForm(String question, Boolean isApprove) {
@@ -287,7 +287,7 @@ public class QuestionManagement {
   /**
    * Active question or not from manage question form
    * 
-   * @param question
+   * @param question string
    * @param isActive true: check to active false: uncheck to un-active
    */
   public void activeQuestionFromManageQuestionForm(String question, Boolean isActive) {

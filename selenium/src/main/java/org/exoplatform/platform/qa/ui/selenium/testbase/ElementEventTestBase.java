@@ -46,8 +46,8 @@ public class ElementEventTestBase {
   /**
    * Scroll to a element on the website
    *
-   * @param element
-   * @param driver
+   * @param element webElement
+   * @param driver webDriver
    */
   public static void scrollToElement(WebElement element, WebDriver driver) {
     JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -57,7 +57,7 @@ public class ElementEventTestBase {
   /**
    * Scroll to bottom of the page of website
    *
-   * @param driver
+   * @param driver webDriver
    */
   public static void scrollToBottomPage(WebDriver driver) {
     Logger.info("Scroll to the bottom of the page");
@@ -69,8 +69,8 @@ public class ElementEventTestBase {
   /**
    * Get element
    *
-   * @param locator
-   * @param opParams
+   * @param locator object
+   * @param opParams object
    * @return an element
    */
   public WebElement getElement(Object locator, Object... opParams) {
@@ -88,8 +88,8 @@ public class ElementEventTestBase {
   /**
    * get an element
    *
-   * @param locator
-   * @param opParams
+   * @param locator object
+   * @param opParams object
    * @return element
    */
   public WebElement getDisplayedElement(Object locator, Object... opParams) {
@@ -117,7 +117,7 @@ public class ElementEventTestBase {
   /**
    * verify element exists or not
    *
-   * @param locator
+   * @param locator Object
    * @return true if element exists false if element doesn't exist
    */
   public boolean isElementPresent(Object locator) {
@@ -127,7 +127,7 @@ public class ElementEventTestBase {
   /**
    * verify element exists or not
    *
-   * @param locator
+   * @param locator Object
    * @return true if element doesn't exists false if element exist
    */
   public boolean isElementNotPresent(Object locator) {
@@ -177,8 +177,8 @@ public class ElementEventTestBase {
   }
 
   /**
-   * @param text
-   * @param opts
+   * @param text string
+   * @param opts int
    * @return true if text exist false if test is not exist
    */
   public boolean isTextPresent(String text, int... opts) {
@@ -191,8 +191,8 @@ public class ElementEventTestBase {
   /**
    * get text of element
    *
-   * @param locator
-   * @param opts
+   * @param locator Object
+   * @param opts int
    * @return text of element
    */
   public String getText(Object locator, int... opts) {
@@ -213,7 +213,7 @@ public class ElementEventTestBase {
   /**
    * get list of element
    *
-   * @param xpath
+   * @param xpath string
    * @return list of elements
    */
   public List<WebElement> getElements(String xpath) {
@@ -231,7 +231,7 @@ public class ElementEventTestBase {
   /**
    * verify text exists or noet
    *
-   * @param text
+   * @param text string
    * @return true if text exists false if text doesn't exits
    */
   public boolean isTextNotPresent(String text) {
@@ -241,8 +241,8 @@ public class ElementEventTestBase {
   /**
    * drag and drop element
    *
-   * @param sourceLocator
-   * @param targetLocator
+   * @param sourceLocator Object
+   * @param targetLocator Object
    */
   public void dragAndDropToObject(Object sourceLocator, Object targetLocator) {
     Logger.info("--Drag and drop to object--");
@@ -272,8 +272,8 @@ public class ElementEventTestBase {
   /**
    * Drag an object
    *
-   * @param sourceLocator
-   * @param targetLocator
+   * @param sourceLocator string
+   * @param targetLocator string
    */
   public void dragObject(String sourceLocator, String targetLocator) {
     Logger.info("--Drag an object--");
@@ -303,8 +303,8 @@ public class ElementEventTestBase {
   /**
    * Click by using javascript
    *
-   * @param locator
-   * @param opParams
+   * @param locator object
+   * @param opParams object
    */
   public void clickByJavascript(Object locator, Object... opParams) {
     int notDisplay = (Integer) (opParams.length > 0 ? opParams[0] : 0);
@@ -321,9 +321,9 @@ public class ElementEventTestBase {
   /**
    * Type by java script
    *
-   * @param locatorById
-   * @param value
-   * @param opParams
+   * @param locatorById object
+   * @param value string
+   * @param opParams object
    */
   public void typeByJavascript(Object locatorById, String value, Object... opParams) {
 
@@ -334,8 +334,8 @@ public class ElementEventTestBase {
   /**
    * click action
    *
-   * @param locator
-   * @param opParams
+   * @param locator Object
+   * @param opParams Object
    * @deprecated
    */
   public void click(Object locator, Object... opParams) {
@@ -345,7 +345,7 @@ public class ElementEventTestBase {
   /**
    * click action
    *
-   * @param locator
+   * @param locator Object
    */
   public void click(Object locator) {
     $((By) locator).click();
@@ -355,8 +355,8 @@ public class ElementEventTestBase {
    * Use this function to verify if a check-box is checked (using when creating a
    * portal/publicMode)
    *
-   * @param locator
-   * @param opParams
+   * @param locator Object
+   * @param opParams int
    */
   public void check(Object locator, int... opParams) {
     int notDisplayE = opParams.length > 0 ? opParams[0] : 0;
@@ -394,7 +394,7 @@ public class ElementEventTestBase {
   /**
    * get value attribute
    *
-   * @param locator
+   * @param locator Object
    * @return value of element
    */
   public String getValue(Object locator) {
@@ -412,8 +412,8 @@ public class ElementEventTestBase {
   /**
    * Mouse hover by Javascript
    *
-   * @param locator
-   * @param opParams
+   * @param locator Object
+   * @param opParams Object
    */
   public void mouseHoverByJavaScript(Object locator, Object... opParams) {
     int notDisplay = (Integer) (opParams.length > 0 ? opParams[0] : 0);
@@ -427,9 +427,9 @@ public class ElementEventTestBase {
   /**
    * mouse over action
    *
-   * @param locator
-   * @param safeToSERE
-   * @param opParams
+   * @param locator Object
+   * @param safeToSERE boolean
+   * @param opParams Object
    */
   public void mouseOver(Object locator, boolean safeToSERE, Object... opParams) {
     WebElement element;
@@ -470,7 +470,7 @@ public class ElementEventTestBase {
   /**
    * mouse over and clic
    *
-   * @param locator
+   * @param locator Object
    */
   public void mouseOverAndClick(Object locator) {
     WebElement element;
@@ -486,8 +486,8 @@ public class ElementEventTestBase {
   /**
    * wait for text present
    *
-   * @param text
-   * @param opts
+   * @param text string
+   * @param opts int
    */
   public void waitForTextPresent(String text, int... opts) {
     int waitTime = opts.length > 0 ? opts[0] : testBase.getDefaultTimeout();
@@ -506,8 +506,8 @@ public class ElementEventTestBase {
   /**
    * wait for text not present
    *
-   * @param text
-   * @param wait
+   * @param text string
+   * @param wait int
    */
   public void waitForTextNotPresent(String text, int... wait) {
     int waitTime = wait.length > 0 ? wait[0] : testBase.getDefaultTimeout();
@@ -525,8 +525,8 @@ public class ElementEventTestBase {
   /**
    * wait for msg
    *
-   * @param message
-   * @param wait
+   * @param message string
+   * @param wait int
    */
   public void waitForMessage(String message, int... wait) {
     int waitTime = wait.length > 0 ? wait[0] : testBase.getDefaultTimeout();
@@ -537,10 +537,10 @@ public class ElementEventTestBase {
   /**
    * type to textbox
    *
-   * @param locator
-   * @param value
-   * @param validate
-   * @param opParams
+   * @param locator Object
+   * @param value string
+   * @param validate boolean
+   * @param opParams object
    * @deprecated
    */
   public void type(Object locator, String value, boolean validate, Object... opParams) {
@@ -550,8 +550,8 @@ public class ElementEventTestBase {
   /**
    * type to textbox
    *
-   * @param locator
-   * @param value
+   * @param locator Object
+   * @param value string
    */
   public void type(Object locator, String value) {
     $((By) locator).val(value);
@@ -560,9 +560,9 @@ public class ElementEventTestBase {
   /**
    * Select option from combo box
    *
-   * @param locator
-   * @param option
-   * @param display
+   * @param locator Object
+   * @param option string
+   * @param display int
    */
   public void select(Object locator, String option, int... display) {
     int isDisplay = display.length > 0 ? display[0] : 1;
@@ -591,8 +591,8 @@ public class ElementEventTestBase {
   /**
    * un-check a checked-box
    *
-   * @param locator
-   * @param opParams
+   * @param locator Object
+   * @param opParams int
    */
   public void uncheck(Object locator, int... opParams) {
     int notDisplayE = opParams.length > 0 ? opParams[0] : 0;
@@ -623,8 +623,8 @@ public class ElementEventTestBase {
   /**
    * rightClickOnElement
    *
-   * @param locator
-   * @param opParams
+   * @param locator Object
+   * @param opParams int
    */
   public void rightClickOnElement(Object locator, int... opParams) {
     int display = opParams.length > 0 ? opParams[0] : 0;
@@ -649,7 +649,7 @@ public class ElementEventTestBase {
   /**
    * doubleClickOnElement
    *
-   * @param locator
+   * @param locator object
    */
   public void doubleClickOnElement(Object locator) {
     Actions actions = new Actions(testBase.getExoWebDriver().getWebDriver());
@@ -673,8 +673,8 @@ public class ElementEventTestBase {
   /**
    * checkCycling
    *
-   * @param e
-   * @param loopCountAllowed
+   * @param e exception
+   * @param loopCountAllowed int
    */
   public void checkCycling(Exception e, int loopCountAllowed) {
     Logger.info("Exception:" + e.getClass().getName());
@@ -709,7 +709,7 @@ public class ElementEventTestBase {
   /**
    * check element displays or net
    *
-   * @param locator
+   * @param locator Object
    * @return true if element displays false if element doesn't display
    */
   public boolean isDisplay(Object locator) {
@@ -731,7 +731,7 @@ public class ElementEventTestBase {
   /**
    * Change attribute "display" of HTML tag from "none" to "block"
    *
-   * @param locator
+   * @param locator Object
    */
   public void changeDisplayAttributeHTML(Object locator) {
     WebElement element = waitForAndGetElement(locator, testBase.getDefaultTimeout(), 1, 2);
@@ -742,9 +742,9 @@ public class ElementEventTestBase {
   /**
    * Copy and paste a string from one locator to other
    *
-   * @param origin
-   * @param target
-   * @param value
+   * @param origin By
+   * @param target By
+   * @param value string
    */
   public void copyPasteString(By origin, By target, String value) {
     WebElement element1 = testBase.getExoWebDriver().getWebDriver().findElement(origin);
@@ -765,7 +765,7 @@ public class ElementEventTestBase {
   }
 
   /**
-   * @param object
+   * @param object By
    * @return = true: if there is not scroll bar on element = false: if there is
    *         scroll bar on element
    */
@@ -789,7 +789,7 @@ public class ElementEventTestBase {
   /**
    * function get an element from link text when cannot get by text in xpath
    *
-   * @param text
+   * @param text string
    * @return an element from link text
    */
   public WebElement getElementFromTextByJquery(String text) {
@@ -808,8 +808,8 @@ public class ElementEventTestBase {
   /**
    * scrollBarToGetElement
    *
-   * @param object
-   * @param opParams
+   * @param object By
+   * @param opParams int
    */
   public void scrollBarToGetElement(By object, int... opParams) {
     int display = opParams.length > 0 ? opParams[0] : 0;
@@ -822,8 +822,8 @@ public class ElementEventTestBase {
   /**
    * inputDataToCKEditor
    *
-   * @param framelocator
-   * @param data
+   * @param framelocator By
+   * @param data string
    */
   public void inputDataToCKEditor(By framelocator, String data) {
     Logger.info("input data to ckeditor");
@@ -880,7 +880,7 @@ public class ElementEventTestBase {
   /**
    * Press End Key
    *
-   * @param driver
+   * @param driver WebDriver
    */
   public void pressEndKey(WebDriver driver) {
     Logger.info("Press End key");
@@ -900,7 +900,8 @@ public class ElementEventTestBase {
    * This function will try to get an element. if after timeout, the element is
    * not found. The function will refresh the page and find the element again.
    *
-   * @param element
+   * @param element Object
+   * @param isClicked boolean
    */
   public void waitElementAndTryGetElement(Object element, Boolean... isClicked) {
     Logger.info("-- Starting finding element --");
@@ -926,8 +927,8 @@ public class ElementEventTestBase {
 
   /**
    * Check if a checkbox is checked or not
-   *
-   * @Author: QuyenNT Date: Oct 30, 2015
+   * @param checkedElement String
+   * @return boolean
    */
   public boolean checkCheckBoxAttribute(String checkedElement) {
     Logger.info("Check checkbox attribute");

@@ -34,7 +34,7 @@ public class ForumHomePage {
   /**
    * constructor
    *
-   * @param dr
+   * @param testBase TestBase
    */
   public ForumHomePage(TestBase testBase) {
     this.testBase = testBase;
@@ -56,7 +56,7 @@ public class ForumHomePage {
   /**
    * select a item in Manage Category Menu By QuynhPT
    *
-   * @param item
+   * @param item specifAdministrationMenu
    */
   public void selectItemAdministrationMenu(specifAdministrationMenu item) {
     info("Waiting administration menu is shown");
@@ -96,8 +96,8 @@ public class ForumHomePage {
   /**
    * Import a category from Administration menu
    *
-   * @param folderDowloadFile
-   * @param nameFile
+   * @param folderDowloadFile String
+   * @param nameFile String
    */
   public void importCategory(String folderDowloadFile, String nameFile) {
     selectItemAdministrationMenu(specifAdministrationMenu.IMPORT);
@@ -109,7 +109,7 @@ public class ForumHomePage {
   /**
    * Go to a detail category in list By QuynhPT
    *
-   * @param name
+   * @param name String
    */
   public void goToCategory(String name) {
     // goToHomeCategory();
@@ -120,7 +120,7 @@ public class ForumHomePage {
   /**
    * Watch or UnWatch true is for watching false is for un-watching Update QuynhPT
    *
-   * @param watch
+   * @param watch String
    */
   public void watchItem(boolean watch) {
     if (watch) {
@@ -151,7 +151,7 @@ public class ForumHomePage {
   /**
    * Open a forum
    *
-   * @param name
+   * @param name String
    */
   public void goToForum(String name) {
     info("Click on the forum with the name:" + name);
@@ -161,8 +161,8 @@ public class ForumHomePage {
   /**
    * Attach file in attach popup
    *
-   * @param pathFile
-   * @param fileName
+   * @param pathFile String
+   * @param fileName String
    */
   public void attachFile(String pathFile, String fileName) {
     info("Attach a file");
@@ -182,12 +182,11 @@ public class ForumHomePage {
   /**
    * Add a BBcode Update QuynhPT
    *
-   * @param tag
-   * @param replacement
-   * @param description
-   * @param example
-   * @param use
-   *          <li>add a java doc</li>
+   * @param tag String
+   * @param replacement String
+   * @param description String
+   * @param example String
+   * @param use String
    */
   public void addBBCode(String tag, String replacement, String description, String example, boolean use) {
     selectItemAdministrationMenu(specifAdministrationMenu.BBCODE);
@@ -214,11 +213,11 @@ public class ForumHomePage {
   /**
    * Edit BBcode
    *
-   * @param newTag
-   * @param newReplacement
-   * @param newDescription
-   * @param newExample
-   * @param use
+   * @param newTag String
+   * @param newReplacement String
+   * @param newDescription  String
+   * @param newExample String
+   * @param use boolean
    */
   public void editBBCode(String newTag, String newReplacement, String newDescription, String newExample, boolean use) {
     selectItemAdministrationMenu(specifAdministrationMenu.BBCODE);
@@ -245,7 +244,7 @@ public class ForumHomePage {
   /**
    * Delete a BBcode
    *
-   * @param tag
+   * @param tag String
    */
   public void deleteBBcode(String tag) {
     selectItemAdministrationMenu(specifAdministrationMenu.BBCODE);
@@ -262,7 +261,7 @@ public class ForumHomePage {
   /**
    * Bookmark a category and a forum
    *
-   * @param name
+   * @param name String
    */
   public void bookmark(String name) {
     info("Click on Bookmark link on Action bar");
@@ -282,7 +281,7 @@ public class ForumHomePage {
   /**
    * Bookmark a topic
    *
-   * @param name
+   * @param name String
    */
   public void topicbookmark(String name) {
     info("Click on More actions button");
@@ -304,8 +303,8 @@ public class ForumHomePage {
   /**
    * Export a category from Action bar
    *
-   * @param catName
-   * @param fileName
+   * @param catName String
+   * @param fileName String
    */
   public void exportCategory(String catName, String fileName) {
     selectItemAdministrationMenu(specifAdministrationMenu.EXPORT);
@@ -322,7 +321,7 @@ public class ForumHomePage {
   /**
    * Open a topic
    *
-   * @param name
+   * @param name String
    */
   public void goToTopic(String name) {
     info("Click on the topic with the name:" + name);
@@ -404,6 +403,8 @@ public class ForumHomePage {
 
   /**
    * function: Search user in User Manage Form
+   * @param user String
+   * @param searchOption  String
    */
 
   public void searchUserInUserList(String user, String searchOption) {
@@ -439,6 +440,7 @@ public class ForumHomePage {
 
   /**
    * Update email in Sub-scriptions
+   * @param email String
    */
   public void updateEmailInMySubscriptions(String email) {
     info("Update Email in My Subscriptions ");

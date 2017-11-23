@@ -189,7 +189,7 @@ public class ManageFileTestBase {
   /**
    * setClipboardData
    *
-   * @param string
+   * @param string String
    */
   public static void setClipboardData(String string) {
     // StringSelection is a class that can be used for copy and paste
@@ -202,7 +202,7 @@ public class ManageFileTestBase {
    * This function returns a absolute path from a relative path that get from
    * excel file
    *
-   * @param relativeFilePath
+   * @param relativeFilePath String
    * @return absolutePath
    */
   public static String getAbsoluteFilePathFromFile(String relativeFilePath) {
@@ -216,7 +216,7 @@ public class ManageFileTestBase {
    * function: check a file existed in folder
    *
    * @param file file name (eg: export.zip)
-   * @return true -> file exist false-> file is not exist
+   * @return true -file exist false- file is not exist
    */
   public boolean checkFileExisted(String file) {
     String pathFile = System.getProperty("user.dir") + "/src/main/resources/TestData/" + file;
@@ -252,7 +252,7 @@ public class ManageFileTestBase {
   /**
    * cutPasteFileFromOutputToTestData
    *
-   * @param fileName
+   * @param fileName String
    */
   public void cutPasteFileFromOutputToTestData(String fileName) {
     String fs = File.separator;
@@ -282,8 +282,8 @@ public class ManageFileTestBase {
   /**
    * Import a Category
    *
-   * @param pathFile
-   * @param fileName
+   * @param pathFile String
+   * @param fileName String
    */
   public void importFile(String pathFile, String fileName) {
     Logger.info("Attach a file");
@@ -297,7 +297,7 @@ public class ManageFileTestBase {
   /**
    * This function returns a absolute path from a relative path
    *
-   * @param relativeFilePath
+   * @param relativeFilePath String
    * @return - FQA-2092: Run and check calendar smoke on IE and FF
    */
   public String getAbsoluteFilePath(String relativeFilePath) {
@@ -312,7 +312,7 @@ public class ManageFileTestBase {
   /**
    * Get a File Content
    *
-   * @param filePath
+   * @param filePath String
    * @return fileContent
    */
   public String getFileContent(String filePath) {
@@ -331,8 +331,8 @@ public class ManageFileTestBase {
   /**
    * Get a file name from current Url
    *
-   * @param driver
-   * @param params
+   * @param driver WebDriver
+   * @param params object
    * @return fileName
    */
   public String getFileNameFromCurrentUrl(WebDriver driver, Object... params) {
@@ -359,8 +359,10 @@ public class ManageFileTestBase {
   /**
    * Attach file in attach popup
    *
-   * @param pathFile
-   * @param fileName
+   * @param pathFile String
+   * @param fileName String
+   * @param timeout int
+   * @param driver WebDriver
    */
   public void attachFile(String pathFile, String fileName, final int timeout, WebDriver driver) {
     Logger.info("Attach a file");
@@ -383,7 +385,7 @@ public class ManageFileTestBase {
   /**
    * Upload file using AutoIt
    *
-   * @param file
+   * @param file String
    */
   public void uploadFileUsingAutoIt(String file) {
     Logger.info("Upload file using AutoIt");
@@ -402,7 +404,7 @@ public class ManageFileTestBase {
   /**
    * Download file using autoit
    *
-   * @param file
+   * @param file String
    */
   public void downloadFileUsingAutoIt(String file) {
     Logger.info("Download file using AutoIt");
@@ -427,9 +429,9 @@ public class ManageFileTestBase {
   /**
    * Download file using Robot class
    *
-   * @param element
-   * @throws AWTException
-   * @throws InterruptedException
+   * @param element WebElement
+   * @throws AWTException exception
+   * @throws InterruptedException exception
    */
   public void downloadFileUsingRobot(WebElement element) throws AWTException, InterruptedException {
     Logger.info("Upload file using Robot");
@@ -480,8 +482,8 @@ public class ManageFileTestBase {
   /**
    * Download file using Robot class via URL download link
    *
-   * @throws AWTException
-   * @throws InterruptedException
+   * @throws AWTException exception
+   * @throws InterruptedException exception
    */
   public void downloadFileUsingRobotViaURL() throws AWTException, InterruptedException {
     Logger.info("Upload file using Robot");
@@ -528,7 +530,7 @@ public class ManageFileTestBase {
   /**
    * uploadFileUsingRobot
    *
-   * @param fileLocation
+   * @param fileLocation String
    */
   public void uploadFileUsingRobot(String fileLocation) {
 
@@ -569,7 +571,7 @@ public class ManageFileTestBase {
   /**
    * uploadFileUsingRobot using for Document preview
    *
-   * @param fileLocation
+   * @param fileLocation String
    */
   public void uploadFileUsingRobotDocumentPreview(String fileLocation) {
 

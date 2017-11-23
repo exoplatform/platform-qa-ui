@@ -139,7 +139,7 @@ public class PlatformBase {
 
   /**
    * Add by @author vuna2
-   * <li>Switch to a new browser/ Popup window</li>
+   * Switch to a new browser/ Popup window
    */
   public void switchToNewWindow() {
     Set<String> windowids = testBase.getExoWebDriver().getWebDriver().getWindowHandles();

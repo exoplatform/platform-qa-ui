@@ -73,7 +73,7 @@ public class FaqPage {
   /**
    * setting template
    *
-   * @param data
+   * @param data String
    */
   public void settingFAQTemplate(String data) {
     evt.click(ELEMENT_FAQ_EDIT_TEMPLATE_TAB);

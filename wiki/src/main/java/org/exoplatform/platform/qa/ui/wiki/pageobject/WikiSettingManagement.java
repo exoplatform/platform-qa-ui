@@ -18,11 +18,7 @@ public class WikiSettingManagement {
 
   private final TestBase       testBase;
 
-  /**
-   * constructor
-   *
-   * @param dr
-   */
+
   public ManageAlert           alert;
 
   private ElementEventTestBase evt;
@@ -36,7 +32,7 @@ public class WikiSettingManagement {
   /**
    * Search a template
    *
-   * @param template
+   * @param template String
    */
   public void searchTemplate(String template) {
     info("Input a template's name");
@@ -56,8 +52,10 @@ public void addTemplate(String title,String description,String content){
   /**
    * Edit a wiki template
    *
-   * @param template
-   * @param text
+   * @param template String
+   * @param text String
+   * @param title String
+   * @param subTitle String
    */
   public void editTemplate(String template, String title, String subTitle, String text) {
     if (title != "") {

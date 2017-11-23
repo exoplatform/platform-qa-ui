@@ -26,10 +26,10 @@ public class ECMS_Permission {
   /**
    * Wrong path, ToCorrect
    * 
-   * @param user
-   * @param read
-   * @param modify
-   * @param remove
+   * @param user String
+   * @param read boolean
+   * @param modify boolean
+   * @param remove boolean
    */
   public void modifyRightCheckBox(String user, boolean read, boolean modify, boolean remove) {
     if (read == true) {
@@ -46,7 +46,7 @@ public class ECMS_Permission {
   /**
    * Delete permission of a node
    * 
-   * @param name
+   * @param name String
    */
   public void deletePermissionNode(String name) {
     if (evt.waitForAndGetElement(ELEMENT_PERMISSION_USER_OR_GROUP_NAME.replace("${name}", name), 3000, 0) != null) {
@@ -61,12 +61,12 @@ public class ECMS_Permission {
   /**
    * Change right
    * 
-   * @param user
-   * @param name
-   * @param read
-   * @param modify
-   * @param remove
-   * @param opt
+   * @param user String
+   * @param name String
+   * @param read boolean
+   * @param modify boolean
+   * @param remove boolean
+   * @param opt String
    */
   public void changeRight(String user, String name, boolean read, boolean modify, boolean remove, String... opt) {
     if (user == "user") {
@@ -96,9 +96,9 @@ public class ECMS_Permission {
   /**
    * Select a check box about right
    * 
-   * @param read
-   * @param modify
-   * @param remove
+   * @param read boolean
+   * @param modify boolean
+   * @param remove boolean
    */
   public void selectCheckBoxRight(boolean read, boolean modify, boolean remove) {
     info("Select check boxes right");

@@ -14,7 +14,7 @@ public class MyNotificationsSetting {
   /**
    * constructor
    * 
-   * @param dr
+   * @param testBase TestBase
    */
   public MyNotificationsSetting(TestBase testBase) {
     this.testBase = testBase;
@@ -25,7 +25,7 @@ public class MyNotificationsSetting {
   /**
    * Disable notification
    *
-   * @param notifToDisable
+   * @param notifToDisable myNotiType
    */
   public void disableNotification(myNotiType notifToDisable) {
     int repeat = 0;
@@ -290,7 +290,8 @@ public class MyNotificationsSetting {
   /**
    * Enable notification
    *
-   * @param notifToEnable
+   * @param notifToEnable myNotiType
+   * @param opParams  object
    */
   public void enableNotification(myNotiType notifToEnable, Object... opParams) {
 
@@ -574,6 +575,7 @@ public class MyNotificationsSetting {
 
   /**
    * turn on/off email notification true for on, false for off
+   * @param on boolean
    */
   public void turnOnOffNotiEmail(boolean on) {
     if (on) {
@@ -591,6 +593,7 @@ public class MyNotificationsSetting {
 
   /**
    * turn on/off intranet notification true for on, false for off
+   *  @param on boolean
    */
   public void turnOnOffNotiIntranet(boolean on) {
     if (on == true) {
@@ -807,7 +810,7 @@ public class MyNotificationsSetting {
   /**
    * Verify that notification's type is disabled all
    *
-   * @param type
+   * @param type enum
    */
   public void verifyNotificationTypeDisable(NotificationsAdminSeting.notificationType type) {
     switch (type) {
@@ -890,7 +893,7 @@ public class MyNotificationsSetting {
   /**
    * Verify that notification by default
    *
-   * @param type
+   * @param type enum
    */
   public void verifyNotificationDefault(NotificationsAdminSeting.notificationType type) {
     switch (type) {

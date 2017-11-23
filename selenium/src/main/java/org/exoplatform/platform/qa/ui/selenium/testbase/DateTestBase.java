@@ -29,9 +29,7 @@ import java.util.TimeZone;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.logger.Logger;
 
-/**
- * @TODO: Use {@link java.util.Formatter.DateTime} instead.
- */
+
 public class DateTestBase {
   private final TestBase testBase;
 
@@ -55,7 +53,8 @@ public class DateTestBase {
   /**
    * Get date by text format ex. Saturday, Febuary 16, 2015
    *
-   * @param format
+   * @param format String
+   * @return date
    */
   public String getDateByTextFormat(String format) {
     DateFormat dateFormat = new SimpleDateFormat(format);
@@ -68,7 +67,7 @@ public class DateTestBase {
   /**
    * Get first day of week
    *
-   * @param format
+   * @param format String
    * @return firstDayOfWeek
    */
   public String getFirstDayOfWeek(String format) {
@@ -86,7 +85,7 @@ public class DateTestBase {
   /**
    * Get last day of week
    *
-   * @param format
+   * @param format String
    * @return firstDayOfWeek
    */
   public String getLastDayOfWeek(String format) {
@@ -110,7 +109,7 @@ public class DateTestBase {
   /**
    * function get current Date of system follow a format
    *
-   * @param format
+   * @param format String
    * @return current Date of system
    */
   public String getCurrentDate(String format) {
@@ -122,8 +121,8 @@ public class DateTestBase {
   /**
    * Get current date with time zone
    *
-   * @param format
-   * @param local
+   * @param format String
+   * @param local String
    * @return current Date with correct time zone
    */
   public String getCurrentDate(String format, String local) {
@@ -137,8 +136,8 @@ public class DateTestBase {
   /**
    * Add 1 minute to current date time
    *
-   * @param min
-   * @param format
+   * @param min int
+   * @param format String
    * @return string minute
    */
   public String addMinuteToCurrentDateTime(int min, String... format) {
@@ -152,6 +151,7 @@ public class DateTestBase {
    * Get date in format "dd"
    *
    * @param gap distance from current date
+   * @param format String
    * @return date in format "dd"
    */
   public String getDate(int gap, String format) {
@@ -165,8 +165,8 @@ public class DateTestBase {
   /**
    * Get date from firstDayOf Week
    *
-   * @param gap
-   * @param format
+   * @param gap int
+   * @param format String
    * @return date in format
    */
   public String getDateFromFirstDayOfWeek(int gap, String format) {
@@ -196,8 +196,9 @@ public class DateTestBase {
 
   /**
    * Get day of the next month
-   *
-   * @param format
+   *@param dayNum int
+   * @param weekNum int
+   * @param format String
    * @return date
    */
   public String getDayOfNextMonth(String format, int dayNum, int weekNum) {
@@ -217,8 +218,8 @@ public class DateTestBase {
   /**
    * Get the day of next year
    *
-   * @param format
-   * @param year
+   * @param format String
+   * @param year int
    * @return dayOfYear
    */
   public String getDayOfNextYear(String format, int year) {
@@ -237,7 +238,7 @@ public class DateTestBase {
   /**
    * Get the day of next week
    *
-   * @param format
+   * @param format String
    * @return
    */
   public String getDayOfNextWeek(String format) {

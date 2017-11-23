@@ -15,7 +15,7 @@ public class UserPageBase {
   /**
    * constructor
    * 
-   * @param dr
+   * @param testBase TestBase
    */
   public UserPageBase(TestBase testBase) {
     this.testBase = testBase;

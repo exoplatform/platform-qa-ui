@@ -30,11 +30,11 @@ public class AddUsers {
   /**
    * Add en user on the plf
    *
-   * @param userName
-   * @param Password
-   * @param email
-   * @param Firstname
-   * @param lastName
+   * @param userName String
+   * @param password String
+   * @param email String
+   * @param firstname String
+   * @param lastName String
    */
   public void addUser(String userName, String password, String email, String firstname, String lastName) {
     info("Add an user");

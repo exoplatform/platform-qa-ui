@@ -16,7 +16,7 @@ import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 /**
- * Path: Administration-->Portal-->Pages
+ * Path: Administration-Portal-Pages
  */
 public class PortalManagePages {
 
@@ -40,9 +40,10 @@ public class PortalManagePages {
 
   /**
    * Search a page
-   *
-   * @param siteName
-   * @param type
+   *@param title String
+   * @param siteName String
+   * @param type String
+   * @param verify  boolean
    */
   public void searchPage(String title, String siteName, String type, boolean... verify) {
 
@@ -73,7 +74,8 @@ public class PortalManagePages {
   /**
    * Delete a page
    *
-   * @param titlePage
+   * @param titlePage String
+   * @param type String
    */
   public void deletePage(String titlePage, String type) {
     info("Delete a page");
@@ -89,7 +91,8 @@ public class PortalManagePages {
   /**
    * Go to edit a page
    *
-   * @param titlePage
+   * @param titlePage String
+   * @param type String
    */
   public void editPage(String titlePage, String type) {
     info("Go to edit a page");
@@ -101,10 +104,10 @@ public class PortalManagePages {
   /**
    * Add a new simple page
    *
-   * @param pageName
-   * @param title
-   * @param type
-   * @param isMaxWindow
+   * @param pageName String
+   * @param title String
+   * @param type String
+   * @param isMaxWindow boolean
    */
   public void addPage(String pageName, String title, String type, boolean... isMaxWindow) {
     info("Click on Add new Page button");
@@ -120,7 +123,7 @@ public class PortalManagePages {
   /**
    * Open page
    *
-   * @param url
+   * @param url boolean
    */
   public void openPage(String url) {
     info("open page:" + url);

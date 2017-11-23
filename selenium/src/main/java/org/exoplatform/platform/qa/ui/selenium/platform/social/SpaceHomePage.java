@@ -23,7 +23,7 @@ public class SpaceHomePage {
   /**
    * constructor
    * 
-   * @param dr
+   * @param testBase
    */
   public SpaceHomePage(TestBase testBase) {
     this.testBase = testBase;
