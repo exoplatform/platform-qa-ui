@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -114,6 +115,7 @@ public class CalendarHomePage {
    */
   public void goToRightMenuTaskEventFromWeekView(String name, selectDayOption optionDay, String date) {
     info("Got to edit task from week view");
+    executeJavaScript("window.scrollBy(0,-2000)", "");
     goToView(selectViewOption.WEEK);
     if (date != null && date != "") {
       switch (optionDay) {

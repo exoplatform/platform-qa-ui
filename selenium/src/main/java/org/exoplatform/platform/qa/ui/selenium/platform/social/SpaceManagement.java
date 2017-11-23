@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.selenium.platform.social;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -84,6 +85,7 @@ public class SpaceManagement {
     ELEMENT_SPACE_DESCRIPTION_INPUT.setValue(desc);
     info("Save all changes");
     ELEMENET_SPACE_CREATE_BUTTON.click();
+    ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
@@ -443,8 +445,9 @@ public class SpaceManagement {
    */
   public void goToAgendaTab() {
     info("Open Agenda Tab");
-    evt.click(ELEMENT_AGENDA_TAB);
-    evt.waitForAndGetElement(ELEMENT_AGENDA_EVENT_ADD_BTN, 2000, 0);
+    refresh();
+    $(ELEMENT_AGENDA_TAB).click();
+    $(ELEMENT_AGENDA_EVENT_ADD_BTN).waitUntil(Condition.visible,Configuration.timeout);
 
     info("Agenda portlet is shown");
   }
