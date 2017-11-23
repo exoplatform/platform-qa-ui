@@ -1671,4 +1671,8 @@ public class CalendarLocator {
 
   public static final SelenideElement ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW                             = $(byId("UIWeekView"));
 
+  public static final By ELEMENT_CHECK_CALENDAR=byClassName("iconCheckBox");
+
+  public static final By ELEMENT_UNCHECK_CALENDAR=byClassName("iconUnCheckBox");
+
 }
