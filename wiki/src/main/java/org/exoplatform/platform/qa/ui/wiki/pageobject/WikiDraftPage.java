@@ -15,11 +15,7 @@ public class WikiDraftPage {
 
   public ManageAlert           magAl;
 
-  /**
-   * constructor
-   *
-   * @param dr
-   */
+
   ManageAlert                  alert;
 
   private ElementEventTestBase evt;
@@ -43,7 +39,7 @@ public class WikiDraftPage {
   /**
    * resume a draft
    *
-   * @param title
+   * @param title String
    */
   public void resumeADraft(String title) {
     info("Click on the title of the draf in the list");

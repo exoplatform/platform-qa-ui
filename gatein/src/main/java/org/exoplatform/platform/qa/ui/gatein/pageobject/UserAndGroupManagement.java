@@ -97,7 +97,7 @@ public class UserAndGroupManagement {
   /**
    * Select a group by array
    *
-   * @param arrayGroupPath
+   * @param arrayGroupPath String
    */
   public void selectGroup(String[] arrayGroupPath) {
     info("Select a group in the list");
@@ -143,8 +143,8 @@ public class UserAndGroupManagement {
   /**
    * Add a user to administration group
    *
-   * @param user
-   * @param membership
+   * @param user String
+   * @param membership String
    */
   public void addUserAdmin(String user, String... membership) {
     info("Go to Group tab");
@@ -170,8 +170,8 @@ public class UserAndGroupManagement {
   /**
    * Add a user to content management group
    *
-   * @param user
-   * @param membership
+   * @param user String
+   * @param membership String
    */
   public void addUserContentManagement(String user, String... membership) {
     info("Go to Group tab");
@@ -284,9 +284,9 @@ public class UserAndGroupManagement {
   /**
    * Verify user-membership
    *
-   * @param user
-   * @param member
-   * @param isDisplay
+   * @param user String
+   * @param member String
+   * @param isDisplay boolean
    */
   public void verifyUserMemInTable(String user, String member, boolean isDisplay) {
     info("verify user -membership");
@@ -390,9 +390,9 @@ public class UserAndGroupManagement {
   /**
    * Verify membership
    *
-   * @param mem
-   * @param des
-   * @param isDisplay
+   * @param mem boolean
+   * @param des boolean
+   * @param isDisplay boolean
    */
   public void verifyMembership(String mem, String des, boolean isDisplay) {
     info("verify display of membership");
@@ -404,9 +404,9 @@ public class UserAndGroupManagement {
 
   /**
    * Verify membership in edit form
-   *
-   * @param mem
-   * @param isDisplay
+   *@param user String
+   * @param mem String
+   * @param isDisplay boolean
    */
   public void verifyMembershipInEditForm(String user, String mem, boolean isDisplay) {
     info("verify display of membership");
@@ -570,8 +570,8 @@ public class UserAndGroupManagement {
   /**
    * Search User is not found
    *
-   * @param user
-   * @param searchOption
+   * @param user  String
+   * @param searchOption String
    */
   public void searchUserNotFound(String user, String searchOption) {
     info("--Search user " + user + "--");
@@ -587,7 +587,7 @@ public class UserAndGroupManagement {
   /**
    * Find a user by clicking next arrow
    *
-   * @param user
+   * @param user String
    */
   public void findUsersBbyNextArrow(String user) {
     if (evt.waitForAndGetElement(ELEMENT_PAGINATION_CONTROL, 2000, 0) != null) {
@@ -697,7 +697,7 @@ public class UserAndGroupManagement {
   /**
    * Remove a user from a group
    *
-   * @param username
+   * @param username String
    */
   public void removeUser(String username) {
     info("Click on Delete button");
@@ -710,7 +710,7 @@ public class UserAndGroupManagement {
   /**
    * Delete many users at the same time
    *
-   * @param arrayUsers
+   * @param arrayUsers ArrayList
    */
   public void deleteAllUsers(ArrayList<String> arrayUsers) {
     for (int i = 0; i < arrayUsers.size(); i++) {
@@ -734,7 +734,7 @@ public class UserAndGroupManagement {
   /**
    * Check display of all enable and disable user
    *
-   * @param users
+   * @param users String
    */
   public void checkDisplayAllUsers(String... users) {
     info("check display of all users");
@@ -750,7 +750,7 @@ public class UserAndGroupManagement {
   /**
    * Check display of enable user
    *
-   * @param users
+   * @param users String
    */
   public void checkDisplayEnableUser(String... users) {
     info("check display of enable users");
@@ -765,7 +765,7 @@ public class UserAndGroupManagement {
   /**
    * Check display of disable user
    *
-   * @param users
+   * @param users String
    */
   public void checkDisplayDisableUser(String... users) {
     info("check display of disable users");
@@ -803,6 +803,9 @@ public class UserAndGroupManagement {
   /**
    * Check A link is established between the eXo Platform user account and the
    * social network account. By: QuyenNT Date: Dec 1, 2015
+   * @param element String
+   * @param placeHolder String
+   * @param accountValue  String
    */
   public void checkLinkedSocialAccount(String element, String placeHolder, String accountValue) {
     evt.waitForAndGetElement(ELEMENT_USER_SOCIAL_NETWORKS_TAB);
@@ -812,6 +815,7 @@ public class UserAndGroupManagement {
 
   /**
    * Unlink social network account By: QuyenNT Date: Dec 3, 2015
+   * @param unlinkElement object
    */
   public void unLinkedSocialAccount(Object unlinkElement) {
     evt.waitForAndGetElement(ELEMENT_USER_SOCIAL_NETWORKS_TAB);

@@ -41,7 +41,7 @@ public class TermsAndConditionsTestBase {
   /**
    * Check term and conditions
    *
-   * @param opParams
+   * @param opParams object
    */
   public void termsAndConditions(Object... opParams) {
     info("Term and conditions");

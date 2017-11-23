@@ -23,7 +23,7 @@ public class WikiPageInformation {
   /**
    * constructor
    *
-   * @param dr
+   * @param testBase TestBase
    */
   public WikiPageInformation(TestBase testBase) {
     this.testBase = testBase;
@@ -34,8 +34,8 @@ public class WikiPageInformation {
   /**
    * Add a relation to a page
    *
-   * @param location
-   * @param page
+   * @param location String
+   * @param page String
    */
   public void addRelations(String location, String page) {
     info("Click on Drop down");
@@ -79,7 +79,7 @@ public class WikiPageInformation {
   /**
    * Delete a relation of a page
    *
-   * @param relation
+   * @param relation String
    */
   public void deleteRelation(String relation) {
     info("Click on Delete button");
@@ -93,7 +93,7 @@ public class WikiPageInformation {
   /**
    * Delete a relation of a page
    *
-   * @param relation
+   * @param relation String
    */
   public void deleteRelationWithCancelDeleting(String relation) {
     info("Click on Delete button");
@@ -107,7 +107,7 @@ public class WikiPageInformation {
   /**
    * Verify that related page is viewed
    *
-   * @param page
+   * @param page String
    */
   public void viewRelatedPageContent(String page) {
     info("Click on related page");
@@ -119,7 +119,7 @@ public class WikiPageInformation {
   /**
    * View version's content of a Wiki page
    *
-   * @param num
+   * @param num int
    */
   public void viewVersion(int num) {
     info("--View a version of a page--");

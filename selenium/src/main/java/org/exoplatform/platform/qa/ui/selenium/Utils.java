@@ -161,7 +161,7 @@ public class Utils {
    * This function returns a absolute path from a relative path that get from
    * excel file
    *
-   * @param relativeFilePath
+   * @param relativeFilePath String
    * @return absolutePath
    */
   public static String getAbsoluteFilePathFromFile(String relativeFilePath) {
@@ -207,7 +207,7 @@ public class Utils {
    * Create a String list by size
    *
    * @param name is the name of array's members
-   * @param size
+   * @param size int
    * @return value
    */
   public static ArrayList<String> getListData(String name, int size) {

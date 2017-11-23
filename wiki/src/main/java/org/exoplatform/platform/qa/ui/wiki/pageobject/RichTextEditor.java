@@ -36,8 +36,7 @@ public class RichTextEditor {
   /**
    * constructor
    *
-   * @param testBase
-   * @throws Exception
+   * @param testBase TestBase
    */
 
   public RichTextEditor(TestBase testBase) {
@@ -104,7 +103,8 @@ public class RichTextEditor {
    * @param search parameter to choose whether to search page link or not
    * @param page Wiki page that will be the target link
    * @param label label of link that will be added into Wiki page
-   * @param tooltip
+   * @param tooltip String
+   * @param opParam Object
    */
   public void insertPageLink2WikiPage(boolean search, String page, String label, String tooltip, Object... opParam) {
     Boolean verify = (Boolean) (opParam.length > 0 ? opParam[0] : false);
@@ -168,11 +168,11 @@ public class RichTextEditor {
   /**
    * InsertMacroBox
    *
-   * @param cssClass
-   * @param image
-   * @param title
-   * @param width
-   * @param content
+   * @param cssClass String
+   * @param image String
+   * @param title String
+   * @param width String
+   * @param content String
    */
   public void insertMacroBox(String cssClass, String image, String title, String width, String content) {
     if (!cssClass.isEmpty()) {
@@ -215,11 +215,11 @@ public class RichTextEditor {
   /**
    * Insert Children macro
    *
-   * @param childNum
-   * @param depth
-   * @param descendantType
-   * @param excerptType
-   * @param parent
+   * @param childNum String
+   * @param depth String
+   * @param descendantType String
+   * @param excerptType String
+   * @param parent String
    */
   public void insertChildrenMacro(String childNum,
                                   String depth,
@@ -269,12 +269,12 @@ public class RichTextEditor {
   /**
    * Insert macro code
    *
-   * @param cssClass
-   * @param image
-   * @param language
-   * @param title
-   * @param width
-   * @param content
+   * @param cssClass String
+   * @param image String
+   * @param language String
+   * @param title String
+   * @param width String
+   * @param content String
    */
   public void insertMacroCode(String cssClass, String image, String language, String title, String width, String content) {
     if (!cssClass.isEmpty()) {
@@ -307,8 +307,8 @@ public class RichTextEditor {
   /**
    * Insert Macro excerpt
    *
-   * @param hideMode
-   * @param content
+   * @param hideMode String
+   * @param content String
    */
   public void insertMacroExcerpt(acceptType hideMode, String content) {
     switch (hideMode) {
@@ -332,7 +332,7 @@ public class RichTextEditor {
   /**
    * Insert Macro Tip message
    *
-   * @param content
+   * @param content String
    */
   public void insertMacroMessage(String content) {
     if (!content.isEmpty()) {
@@ -345,7 +345,7 @@ public class RichTextEditor {
   /**
    * Insert Macro FootNode
    *
-   * @param content
+   * @param content String
    */
   public void insertMacroFootNode(String content) {
     if (!content.isEmpty()) {
@@ -358,10 +358,10 @@ public class RichTextEditor {
   /**
    * Insert Macro table of content
    *
-   * @param depth
-   * @param numberedMode
-   * @param scope
-   * @param start
+   * @param depth String
+   * @param numberedMode String
+   * @param scope String
+   * @param start String
    */
   public void insertMacroTableOfContent(String depth, acceptType numberedMode, scopeMode scope, String start) {
     if (!depth.isEmpty()) {
@@ -402,9 +402,9 @@ public class RichTextEditor {
   /**
    * Insert Macro IFrame
    *
-   * @param height
-   * @param src
-   * @param width
+   * @param height String
+   * @param src String
+   * @param width String
    */
   public void insertMacroIFrame(String height, String src, String width) {
     if (!height.isEmpty()) {
@@ -425,12 +425,12 @@ public class RichTextEditor {
   /**
    * Insert Macro JIRA
    *
-   * @param url
-   * @param fieldNames
-   * @param fields
-   * @param source
-   * @param style
-   * @param content
+   * @param url String
+   * @param fieldNames String
+   * @param fields String
+   * @param source String
+   * @param style String
+   * @param content String
    */
   public void insertMacroJIRA(String url, String fieldNames, String fields, String source, String style, String content) {
     if (!url.isEmpty()) {
@@ -463,9 +463,9 @@ public class RichTextEditor {
   /**
    * Insert Macro HTML
    *
-   * @param cleanMode
-   * @param wikiMode
-   * @param content
+   * @param cleanMode acceptType
+   * @param wikiMode acceptType
+   * @param content String
    */
   public void insertMacroHtml(acceptType cleanMode, acceptType wikiMode, String content) {
     switch (cleanMode) {
@@ -545,9 +545,9 @@ public class RichTextEditor {
   /**
    * Edit an attached file link
    *
-   * @param fileName
-   * @param label
-   * @param tooltip
+   * @param fileName String
+   * @param label String
+   * @param tooltip String
    */
   public void editAttachedFileLink(String fileName, String label, String tooltip) {
     info("Go To Edit Link");
@@ -579,8 +579,8 @@ public class RichTextEditor {
   /**
    * Insert an attached file to the page
    *
-   * @param attachedFile
-   * @param isPreEndKey
+   * @param attachedFile String
+   * @param isPreEndKey Boolean
    */
   public void insertAttachedFileLink(String attachedFile, Boolean isPreEndKey) {
     info("Go to Attached file Link");
@@ -598,10 +598,10 @@ public class RichTextEditor {
   /**
    * Insert attached File link into the page
    *
-   * @param page
-   * @param attachedFile
-   * @param tooltip
-   * @param tab
+   * @param page Boolean
+   * @param attachedFile Boolean
+   * @param tooltip Boolean
+   * @param tab attachedFileTabType
    */
   public void insertAttachedFileLink(String page, String attachedFile, String tooltip, attachedFileTabType tab) {
     info("Go to Attached file Link");
@@ -634,8 +634,10 @@ public class RichTextEditor {
   /**
    * Modify Wiki content with rich text
    *
-   * @param title updated title of the wiki page. Can not be <code>null</code>
-   * @param content updated content of the wiki page. Can not be <code>null</code>
+   * @param title updated title of the wiki page.
+   * @param content updated content of the wiki page.
+   * @param isClearContent String
+   * @param isClearTitle String
    */
   public void inputDataToPage(String title, String content, Boolean isClearTitle, Boolean isClearContent) {
     if (title != null) {
@@ -669,7 +671,7 @@ public class RichTextEditor {
   /**
    * Input email address into EMail link popup
    *
-   * @param address
+   * @param address String
    */
   public void inputEmailAddress(String address) {
     if (!address.isEmpty()) {
@@ -681,9 +683,10 @@ public class RichTextEditor {
   /**
    * Insert email address into the page
    *
-   * @param address
-   * @param label
-   * @param tooltip
+   * @param address String
+   * @param label String
+   * @param tooltip String
+   * @param isPressEndKey Boolean
    */
   public void insertEmailLink(String address, String label, String tooltip, Boolean isPressEndKey) {
     info("Go to Email Link");
@@ -705,10 +708,10 @@ public class RichTextEditor {
   /**
    * Insert a exist wiki page link into other page
    *
-   * @param page
-   * @param label
-   * @param tooltip
-   * @param tab
+   * @param page String
+   * @param label String
+   * @param tooltip String
+   * @param tab wikiPageLinkTab
    */
   public void insertExistWikiPageLink(String page, String label, String tooltip, wikiPageLinkTab tab) {
     switch (tab) {
@@ -746,10 +749,11 @@ public class RichTextEditor {
   /**
    * Insert a new wiki page into other page
    *
-   * @param page
-   * @param label
-   * @param tooltip
-   * @param tab
+   * @param page String
+   * @param label String
+   * @param tooltip String
+   * @param tab wikiPageLinkTab
+   * @param isPressEndKey Boolean
    */
   public void insertNewWikiPageLink(String page, String label, String tooltip, wikiPageLinkTab tab, Boolean isPressEndKey) {
     info("Open Wiki Page link popup");
@@ -791,7 +795,7 @@ public class RichTextEditor {
   /**
    * Input web address
    *
-   * @param address
+   * @param address String
    */
   public void inputWebAddress(String address) {
     if (!address.isEmpty()) {
@@ -803,9 +807,10 @@ public class RichTextEditor {
   /**
    * Edit an image
    *
-   * @param imageName
-   * @param width
-   * @param height
+   * @param imageName String
+   * @param width String
+   * @param height String
+   * @param altText String
    */
   public void editInsertedImage(String imageName, String width, String height, String altText) {
     info("Go To Edit Image Link");
@@ -841,9 +846,10 @@ public class RichTextEditor {
   /**
    * Insert a web link into the page
    *
-   * @param address
-   * @param label
-   * @param tooltip
+   * @param address String
+   * @param label String
+   * @param tooltip String
+   * @param isPressEndKey Boolean
    */
   public void insertWebLink(String address, String label, String tooltip, Boolean isPressEndKey) {
     info("Input web address for the page");
@@ -863,9 +869,8 @@ public class RichTextEditor {
   /**
    * Edit a simple wiki page with rich editor
    *
-   * @param newTitle updated title of the wiki page. Can not be <code>null</code>
+   * @param newTitle updated title of the wiki page.
    * @param newContent updated content of the wiki page. Can not be
-   *          <code>null</code>
    */
   public void editSimplePage(String newTitle, String newContent) {
     $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
@@ -897,7 +902,7 @@ public class RichTextEditor {
   /**
    * Input a tooltip
    *
-   * @param tooltip
+   * @param tooltip String
    */
   public void inputToolTip(String tooltip) {
     if (tooltip != null && tooltip != "") {
@@ -908,7 +913,7 @@ public class RichTextEditor {
   /**
    * Input a label
    *
-   * @param label
+   * @param label String
    */
   public void inputLabel(String label) {
     if (label != null && label != "") {
@@ -929,10 +934,10 @@ public class RichTextEditor {
   /**
    * Input an external image into the content of the page
    *
-   * @param link
-   * @param width
-   * @param height
-   * @param altText
+   * @param link String
+   * @param width String
+   * @param height String
+   * @param altText String
    */
   public void insertExternalImageLink(String link, String width, String height, String altText) {
     info("Go to External Image Link");
@@ -958,7 +963,7 @@ public class RichTextEditor {
   /**
    * Input an external image link
    *
-   * @param link
+   * @param link String
    */
   public void inputExternalImageLink(String link) {
     if (!link.isEmpty()) {
@@ -980,10 +985,10 @@ public class RichTextEditor {
   /**
    * Insert an image into the content of the page
    *
-   * @param attachedFile
-   * @param width
-   * @param height
-   * @param altText
+   * @param attachedFile String
+   * @param width String
+   * @param height String
+   * @param altText String
    */
   public void insertImage(String attachedFile, String width, String height, String altText) {
     info("Open Current page tab");
@@ -1010,7 +1015,8 @@ public class RichTextEditor {
   /**
    * Insert an image into the content of the page
    *
-   * @param attachedFile
+   * @param attachedFile String
+   * @param isPressEndKey  Boolean
    */
   public void insertImage(String attachedFile, Boolean isPressEndKey) {
     info("Open Current page tab");
@@ -1028,7 +1034,7 @@ public class RichTextEditor {
   /**
    * Delete an image in wiki page
    *
-   * @param content
+   * @param content String
    */
   public void removeImage(String content) {
     info("Click on Image link");
@@ -1050,7 +1056,7 @@ public class RichTextEditor {
   /**
    * Select algin of Image
    *
-   * @param type
+   * @param type alignType
    */
   public void selectAlign(alignType type) {
     switch (type) {
@@ -1086,7 +1092,7 @@ public class RichTextEditor {
   /**
    * Remove a link in wiki page
    *
-   * @param content
+   * @param content alignType
    */
   public void removeLink(String content) {
     info("Click on link");
@@ -1112,7 +1118,7 @@ public class RichTextEditor {
   /**
    * Input a name for a new wiki page link
    *
-   * @param page
+   * @param page alignType
    */
   public void inputNameWikiPageLink(String page) {
     info("Input the name of the page");
@@ -1138,7 +1144,7 @@ public class RichTextEditor {
   /**
    * Add a new wiki page in My Recent changes tab
    *
-   * @param page
+   * @param page alignType
    */
   public void addNewPageInMyRecentChangesTab(String page) {
     info("Double click on Add New Page button");
@@ -1150,7 +1156,7 @@ public class RichTextEditor {
   /**
    * Add a new wiki page in Search tab
    *
-   * @param page
+   * @param page alignType
    */
   public void addNewPageInSearchTab(String page) {
     info("Double click on Add New Page button");
@@ -1162,7 +1168,7 @@ public class RichTextEditor {
   /**
    * Upload an attached file link in Attached File link popup
    *
-   * @param link
+   * @param link alignType
    */
   public void uploadAttachedFile(String link) {
     info("Double Click on Upload New file button");
@@ -1211,7 +1217,7 @@ public class RichTextEditor {
   /**
    * Search a page in Wiki page popup
    *
-   * @param page
+   * @param page alignType
    */
   public void searchPage(String page) {
     goToSearchTab();
@@ -1232,7 +1238,7 @@ public class RichTextEditor {
   /**
    * Upload an image file in Attached Image link popup
    *
-   * @param link
+   * @param link alignType
    */
   public void uploadImageFile(String link) {
     info("Double Click on Upload New file button");
@@ -1278,8 +1284,8 @@ public class RichTextEditor {
   /**
    * Select an attached file in list of All pages tab
    *
-   * @param page
-   * @param attachedFile
+   * @param page alignType
+   * @param attachedFile alignType
    */
   public void selectAttachedFile(String page, String attachedFile) {
     WebElement el = evt.waitForAndGetElement(ELEMENT_ALL_PAGE_TAB_PAGE_SELECTED.replace("$title", page), 5000, 1, 2);
@@ -1308,8 +1314,8 @@ public class RichTextEditor {
   /**
    * Add a page with checking auto save after 30s
    *
-   * @param title
-   * @param content
+   * @param title alignType
+   * @param content alignType
    */
   public void addSimplePageWithAutoSaveStatus(String title, String content) {
     info("Input a title for the page");
@@ -1324,7 +1330,7 @@ public class RichTextEditor {
   /**
    * Select a page from All pages tab
    *
-   * @param page
+   * @param page String
    */
   public void selectPageInAllPagesTab(String page) {
     info("Select the page");
@@ -1340,6 +1346,8 @@ public class RichTextEditor {
 
   /**
    * Check auto save essage
+   * @param title String
+   * @param content String
    */
 
   public void checkAutoSaveMessage(String title, String content) {
@@ -1363,7 +1371,7 @@ public class RichTextEditor {
   /**
    * Select a page in Search Tab
    *
-   * @param page
+   * @param page String
    */
   public void selectPageInSearchTab(String page) {
     if (evt.waitForAndGetElement(ELEMENT_SEARCH_TAB_PAGE_SELECTED.replace("${page}", page), 5000, 0) != null) {
@@ -1378,7 +1386,7 @@ public class RichTextEditor {
   /**
    * Select a page in My Recent Changes list
    *
-   * @param page
+   * @param page String
    */
   public void selectPageInMyRecentChangesTab(String page) {
     WebElement el = evt.waitForAndGetElement(ELEMENT_MY_RECENT_CHANGES_TAB_PAGE_SELECTED.replace("$title", page), 5000, 1, 2);
@@ -1404,8 +1412,8 @@ public class RichTextEditor {
   /**
    * Edit a wiki page with auto save status
    *
-   * @param newTitle
-   * @param newContent
+   * @param newTitle String
+   * @param newContent String
    */
   public void editSimplePageWithAutoSave(String newTitle, String newContent) {
     info("Input a new title for the page");
@@ -1423,8 +1431,8 @@ public class RichTextEditor {
   /**
    * Add a new page that has auto save without save
    *
-   * @param title
-   * @param content
+   * @param title String
+   * @param content String
    */
   public void addSimplePageHasAutoSaveWithoutSave(String title, String content) {
     info("Input a title for the page");
@@ -1447,7 +1455,7 @@ public class RichTextEditor {
   /**
    * Replace a new link for old link that inserted into the page
    *
-   * @param label
+   * @param label String
    */
   public void changeLink(String label) {
     info("Focus on the frame");
@@ -1459,7 +1467,7 @@ public class RichTextEditor {
   /**
    * Select the image
    *
-   * @param altTextImage
+   * @param altTextImage String
    */
   public void selectImage(String altTextImage) {
     info("Focus on the frame");
@@ -1474,7 +1482,7 @@ public class RichTextEditor {
   /**
    * Select the label's link that is inserted into the page
    *
-   * @param label
+   * @param label String
    */
   public void selectLabelLink(String label) {
     info("Select a line text");
@@ -1485,7 +1493,7 @@ public class RichTextEditor {
   /**
    * Select element by click and hold
    *
-   * @param el
+   * @param el WebElement
    */
   public void selectItems(WebElement el) {
     testBase.action = new Actions(testBase.getExoWebDriver().getWebDriver());
@@ -1526,12 +1534,12 @@ public class RichTextEditor {
   /**
    * Insert Macro RSS
    *
-   * @param content
-   * @param count
-   * @param decoration
-   * @param feed
-   * @param image
-   * @param width
+   * @param content acceptType
+   * @param count String
+   * @param decoration String
+   * @param feed String
+   * @param image acceptType
+   * @param width String
    */
   public void insertMacroRSS(acceptType content,
                              String count,
@@ -1629,11 +1637,7 @@ public class RichTextEditor {
     evt.mouseOverAndClick(ELEMENT_EDIT_MACRO_LINK);
   }
 
-  /**
-   * Attach a file to a Wiki page
-   *
-   * @param link link of file that will be attached
-   */
+
 
   /**
    * Collapse all macro
@@ -1680,7 +1684,7 @@ public class RichTextEditor {
   /**
    * Verify after collapse macro
    *
-   * @param macro
+   * @param macro String
    */
   public void verifyCollapsemacro(String macro) {
     info("Verify collapse macro");
@@ -1690,8 +1694,8 @@ public class RichTextEditor {
   /**
    * Verify after expand macro
    *
-   * @param macroCate
-   * @param Content
+   * @param macroCate macroCategories
+   * @param Content String
    */
   public void verifyExpandmacro(macroCategories macroCate, String... Content) {
     String content = (Content.length > 0 ? Content[0] : null);

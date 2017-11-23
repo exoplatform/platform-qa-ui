@@ -65,6 +65,8 @@ public class DocumentPreview {
 
   /**
    * Check properties of shadow mask display
+   * @param wd_br int
+   * @param wd_preview int
    */
   public void shadowMask(int wd_preview, int wd_br) {
     info("Check shadow Mask");

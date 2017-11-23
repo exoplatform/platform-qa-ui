@@ -29,7 +29,7 @@ public class WikiPermission {
   /**
    * constructor
    *
-   * @param dr
+   * @param testBase TestBase
    */
   public WikiPermission(TestBase testBase) {
     this.testBase = testBase;
@@ -42,7 +42,7 @@ public class WikiPermission {
   /**
    * Delete a group, users in permission popup
    *
-   * @param group
+   * @param groupUsers String
    */
   public void deletePermission(String groupUsers) {
     By bDelete = By.xpath(ELEMENT_DELETE_PERMISSION.replace("$user", groupUsers));
@@ -57,8 +57,8 @@ public class WikiPermission {
   /**
    * Select permission for a username/group/membership
    *
-   * @param userGroup
-   * @param type
+   * @param userGroup String
+   * @param type permissionType
    */
   public void selectPermission(String userGroup, permissionType type) {
     switch (type) {
@@ -84,8 +84,8 @@ public class WikiPermission {
   /**
    * Unselect permission for a username/group/membership
    *
-   * @param userGroup
-   * @param type
+   * @param userGroup String
+   * @param type permissionType
    */
   public void unSelectPermission(String userGroup, permissionType type) {
     switch (type) {
@@ -111,7 +111,7 @@ public class WikiPermission {
   /**
    * Add a group/user/membership to permission table by type
    *
-   * @param groupUsers
+   * @param groupUsers String
    */
   public void addPermisisonByType(String groupUsers) {
     if (!groupUsers.isEmpty()) {
@@ -153,10 +153,9 @@ public class WikiPermission {
   /**
    * Add permission for a user/group/membership by selecting
    *
-   * @param groupUsers
-   * @param membership
-   * @param type
-   * @param op
+   * @param groupUsers String
+   * @param membership String
+   * @param type String
    */
   public void addPermissionBySelect(String groupUsers, String membership, userGroupTypes type) {
     switch (type) {
@@ -193,6 +192,7 @@ public class WikiPermission {
 
   /**
    * Click on Save button in More/Permission
+   * @param booleans Boolean
    */
   public void savePermisison(Boolean... booleans) {
     boolean savePresent = (booleans.length > 0 ? booleans[0] : true);

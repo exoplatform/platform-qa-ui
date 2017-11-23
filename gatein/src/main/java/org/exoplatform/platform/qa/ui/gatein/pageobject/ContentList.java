@@ -23,7 +23,8 @@ public class ContentList {
   /**
    * Select a folder or a content or both in Multiple Content Selector Pane popup
    *
-   * @param content
+   * @param content String
+   * @param path String
    */
   public void selectFolderContent(String path, String content) {
 

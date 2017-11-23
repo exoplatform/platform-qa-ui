@@ -42,7 +42,7 @@ public class NavigationManagement {
   /**
    * Edit layout of a portal
    *
-   * @param site
+   * @param site String
    */
   public void goToEditLayout(String site) {
     info("Click on Edit layout button");
@@ -53,7 +53,7 @@ public class NavigationManagement {
   /**
    * change config of a portal
    *
-   * @param site
+   * @param site String
    */
   public void changeConfig(String site) {
     goToEditLayout(site);
@@ -65,7 +65,7 @@ public class NavigationManagement {
   /**
    * Go to Edit site configuration
    *
-   * @param site
+   * @param site String
    */
   public void goToEditSiteConfig(String site) {
     info("Click on Edit Site Configuration button");
@@ -76,7 +76,7 @@ public class NavigationManagement {
   /**
    * Select a item in ContextMenu
    *
-   * @param link
+   * @param link specifiContextMenu
    */
   public void selectItem(specifiContextMenu link) {
     switch (link) {
@@ -133,8 +133,8 @@ public class NavigationManagement {
   /**
    * Add a node
    *
-   * @param title
-   * @param subTitle
+   * @param title String
+   * @param subTitle String
    */
   public void addNode(String title, String subTitle) {
     if (subTitle.isEmpty()) {
@@ -154,7 +154,7 @@ public class NavigationManagement {
   /**
    * Delete a node
    *
-   * @param title
+   * @param title String
    */
   public void deleteNode(String title) {
     info("Delete a node");
@@ -172,7 +172,7 @@ public class NavigationManagement {
   /**
    * Edit Node page
    *
-   * @param name
+   * @param name String
    */
 
   public void editNodePage(String name) {
@@ -186,8 +186,7 @@ public class NavigationManagement {
   /**
    * Edit a Node
    *
-   * @param oldName
-   * @param newName
+   * @param name String
    *
    */
   public void editThisNode(String name) {
@@ -201,7 +200,7 @@ public class NavigationManagement {
   /**
    * Copy a node
    *
-   * @param name
+   * @param name String
    */
   public void copyNode(String name) {
     info("Copy a node");
@@ -214,7 +213,7 @@ public class NavigationManagement {
   /**
    * Clone a node
    *
-   * @param name
+   * @param name String
    */
   public void cloneNode(String name) {
     info("Clone a node");
@@ -227,7 +226,7 @@ public class NavigationManagement {
   /**
    * Cut a node
    *
-   * @param name
+   * @param name String
    */
   public void cutNode(String name) {
     info("Cut a node");
@@ -240,7 +239,7 @@ public class NavigationManagement {
   /**
    * Paste a node
    *
-   * @param name
+   * @param name String
    */
   public void pasteNode(String name) {
     info("Paste a node");
@@ -253,7 +252,7 @@ public class NavigationManagement {
   /**
    * Move up a node
    *
-   * @param name
+   * @param name String
    */
   public void moveUpNode(String name) {
     info("Move up a node");
@@ -266,7 +265,7 @@ public class NavigationManagement {
   /**
    * Move down a node
    *
-   * @param name
+   * @param name String
    */
   public void moveDownNode(String name) {
     info("Move down a node");
@@ -298,11 +297,11 @@ public class NavigationManagement {
   /**
    * Input information for Page Node Setting tab
    *
-   * @param language
-   * @param isLabelMode
-   * @param label
-   * @param isVisibale
-   * @param isPublishDateTime
+   * @param language String
+   * @param isNotLabelMode  boolean
+   * @param label String
+   * @param isVisibale boolean
+   * @param isPublishDateTime boolean
    */
   public void inputInfoNodeSetting(boolean isNotLabelMode,
                                    String language,
@@ -343,11 +342,11 @@ public class NavigationManagement {
   /**
    * Input information for Page Selector tab
    *
-   * @param namePage
-   * @param titlePage
-   * @param isCreatePage
-   * @param isSelectPage
-   * @param isCleanPage
+   * @param namePage String
+   * @param titlePage String
+   * @param isCreatePage boolean
+   * @param isSelectPage boolean
+   * @param isCleanPage boolean
    */
   public void inputInfoPageSelector(String namePage,
                                     String titlePage,
@@ -384,10 +383,10 @@ public class NavigationManagement {
   /**
    * Input information for Icon tab
    *
-   * @param isSizeIcon
-   * @param typeIcon
-   * @param nameIcon
-   * @param isGetDefault
+   * @param isSizeIcon boolean
+   * @param typeIcon boolean
+   * @param nameIcon boolean
+   * @param isGetDefault boolean
    */
   public void inputInfoIcon(boolean isSizeIcon, String typeIcon, String nameIcon, boolean isGetDefault) {
 
@@ -396,9 +395,9 @@ public class NavigationManagement {
   /**
    * Search a page
    *
-   * @param titlePage
-   * @param siteName
-   * @param type
+   * @param title  String
+   * @param siteName String
+   * @param type String
    */
   public void searchPage(String title, String siteName, String type) {
     info("waiting the page is loaded full");
@@ -421,7 +420,7 @@ public class NavigationManagement {
   /**
    * Select a page in pages list after searching the page
    *
-   * @param title
+   * @param title String
    */
   public void selectPage(String title) {
     info("Searching the page");
@@ -433,8 +432,8 @@ public class NavigationManagement {
 
   /**
    * verify Add Navigation permission
-   *
-   * @param isEnable
+   *@param title String
+   * @param isEnable boolean
    */
   public void verifyAddNavigationPerm(String title, boolean isEnable) {
     info("verify Add Navigation permission");

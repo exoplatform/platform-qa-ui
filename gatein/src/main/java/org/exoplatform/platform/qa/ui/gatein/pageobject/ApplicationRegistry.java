@@ -48,7 +48,7 @@ public class ApplicationRegistry {
   /**
    * Show import application
    *
-   * @param isShow
+   * @param isShow Boolean
    */
   public void showImportApplication(Boolean isShow) {
     info("Show import application");
@@ -122,8 +122,9 @@ public class ApplicationRegistry {
   /**
    * Add a application to a category for Portlet type
    *
-   * @param category
-   * @param nameApp
+   * @param category  String
+   * @param nameApp String
+   * @param des String
    */
   public void addApplicationToCategory(String category, String nameApp, String des) {
     info("Click on Add button");
@@ -163,8 +164,7 @@ public class ApplicationRegistry {
   /**
    * Delete an application of a category
    *
-   * @param category
-   * @param application
+   * @param application String
    */
   public void deleteApplication(String application) {
     info("click on Delete button");
@@ -177,8 +177,8 @@ public class ApplicationRegistry {
    * Check all imported Applications is shown in the left list after click on
    * Import Application button
    *
-   * @param categoryList
-   * @param nameList
+   * @param categoryList ArrayList
+   * @param nameList ArrayList
    */
   public void checkImportedApplications(ArrayList<String> categoryList, ArrayList<String> nameList) {
     info("Reading....from Category list");
@@ -200,9 +200,9 @@ public class ApplicationRegistry {
   /**
    * Add a new simple Category with public permission
    *
-   * @param categoryName
-   * @param displayName
-   * @param des
+   * @param categoryName String
+   * @param displayName String
+   * @param des String
    */
   public void addACategory(String categoryName, String displayName, String des) {
     info("Click on Add Category button");
@@ -233,9 +233,10 @@ public class ApplicationRegistry {
   /**
    * Edit a simple Category
    *
-   * @param name
-   * @param newDisplayName
-   * @param newDes
+   * @param name String
+   * @param newDisplayName String
+   * @param newDes String
+   *@param opParams object
    */
   public void editCategory(String name, String newDisplayName, String newDes, Object... opParams) {
     String group = (String) (opParams.length > 0 ? opParams[0] : "");
@@ -266,7 +267,7 @@ public class ApplicationRegistry {
   /**
    * Delete a category
    *
-   * @param nameCategory
+   * @param nameCategory String
    */
   public void deleteCategory(String nameCategory) {
     info("Click on Delete button");
@@ -282,8 +283,9 @@ public class ApplicationRegistry {
   /**
    * Select a portlet on the left panel
    *
-   * @param category
-   * @param displayName
+   * @param category String
+   * @param displayName String
+   * @param isOpenTab boolean
    */
   public void selectAPortlet(String category, String displayName, boolean isOpenTab) {
     info("Cick on the category tab");
@@ -297,9 +299,9 @@ public class ApplicationRegistry {
   /**
    * Checking a viewing detail of a portlet
    *
-   * @param displayName
-   * @param appName
-   * @param des
+   * @param displayName String
+   * @param appName String
+   * @param des String
    */
   public void viewDetailPortlet(String displayName, String appName, String des) {
     info("Check Bread crumb");
@@ -332,8 +334,10 @@ public class ApplicationRegistry {
   /**
    * Edit portlet permission
    *
-   * @param category
-   * @param portlet
+   * @param category String
+   * @param portlet String
+   * @param group String
+   * @param member String
    */
   public void editPortletPermission(String category, String portlet, String group, String member) {
     selectAPortlet(category, portlet, false);
@@ -347,7 +351,7 @@ public class ApplicationRegistry {
   /**
    * Delete permission
    *
-   * @param group
+   * @param group String
    */
   public void deletePortletPermission(String group) {
     info("Delete permission of group");

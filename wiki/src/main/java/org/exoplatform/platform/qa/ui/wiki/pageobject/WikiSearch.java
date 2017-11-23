@@ -18,7 +18,7 @@ public class WikiSearch {
   /**
    * constructor
    *
-   * @param dr
+   * @param testBase TestBase
    */
   public WikiSearch(TestBase testBase) {
     this.testBase = testBase;
@@ -37,7 +37,7 @@ public class WikiSearch {
   /**
    * Search a space in space switcher
    *
-   * @param text
+   * @param text String
    */
   public void searchSpaces(String text) {
     if (!text.isEmpty()) {
@@ -49,7 +49,8 @@ public class WikiSearch {
   /**
    * Advanced search
    *
-   * @param location
+   * @param location String
+   * @param text  String
    */
   public void advancedSearch(String text, String location) {
     if (!location.isEmpty()) {
@@ -73,7 +74,7 @@ public class WikiSearch {
   /**
    * Quick search a page
    *
-   * @param text
+   * @param text String
    */
   public void quickSeach(String text) {
     if (!text.isEmpty()) {
@@ -88,8 +89,8 @@ public class WikiSearch {
   /**
    * View detail of a page that is listed in searched results page
    *
-   * @param page
-   * @param contentPage
+   * @param page String
+   * @param contentPage String
    */
   public void viewContentOfSearchedPage(String page, String contentPage) {
     if (!page.isEmpty()) {

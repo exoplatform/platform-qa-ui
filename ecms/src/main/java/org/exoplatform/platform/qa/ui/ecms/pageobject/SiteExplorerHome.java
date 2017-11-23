@@ -160,6 +160,7 @@ public class SiteExplorerHome {
    * Delete data by title
    *
    * @param title String
+   * @param destination boolean
    */
   public void deleteData(String title, boolean... destination) {
     boolean verify = (destination.length > 0 ? destination[0] : false);
@@ -397,6 +398,7 @@ public class SiteExplorerHome {
    * Edit a Document
    *
    * @param content String
+   * @param newTitle String
    */
   public void editDocument(String newTitle, String content) {
 
@@ -897,6 +899,7 @@ public class SiteExplorerHome {
 
   /**
    * Go to the publication status' form
+   * @param status String
    */
   public void changeStatusPulication(String status) {
     evt.waitForAndGetElement(ELEMENT_PUBLICATION_STATUS.replace("${status}", status));
@@ -933,6 +936,7 @@ public class SiteExplorerHome {
    * Add/Edit a comment
    *
    * @param content String
+   * @param  isAdd boolean
    */
   public void addEditComment(String content, boolean isAdd) {
     info("Add/Edit a comment");
@@ -1249,6 +1253,7 @@ public class SiteExplorerHome {
    *
    * @param folderName String
    * @param uploadFiles String
+   * @throws Exception exception
    */
   public void uploadFileToFolder(String folderName, ArrayList<String> uploadFiles) throws Exception {
     info("Upload file to folder");
@@ -1284,7 +1289,7 @@ public class SiteExplorerHome {
   }
 
   /**
-   * Activity about shared document is displayed in Intranet Activity Stream &
+   * Activity about shared document is displayed in Intranet Activity Stream and
    * Space Activity Stream
    *
    * @param shareOwner String
@@ -1399,6 +1404,8 @@ public class SiteExplorerHome {
 
   /**
    * Date: Oct 7, 2015 Delete symlink of shared document in space documents
+   * @param spaceName String
+   * @param fileName String
    */
   public void deleteSymlink(String spaceName, String fileName) {
     HomePagePlatform homepage = new HomePagePlatform(testBase);
@@ -1450,6 +1457,8 @@ public class SiteExplorerHome {
 
   /**
    * The symlink does not exist in Shared folder Date: Oct 21, 2015
+   * @param fileName String
+   * @param spaceName  String
    */
   public void checkSharedFileSymlinkAfterDeleted(String fileName, String spaceName) {
     SpaceManagement spaceManage = new SpaceManagement(testBase);
@@ -1465,6 +1474,9 @@ public class SiteExplorerHome {
 
   /**
    * Share document with access rights: Can view/Can edit Date: Oct 22, 2015
+   * @param spaceName String
+   * @param accessRight String
+   * @param comment  String
    */
   public void shareDocumentToSpaceWithAccessRight(String spaceName, String accessRight, String comment) {
     shareDocument();
@@ -1484,6 +1496,8 @@ public class SiteExplorerHome {
 
   /**
    * Go to drive - folder Date: Oct 27, 2015
+   * @param path String
+   * @param drive  String
    */
   public void goToPathOfDrive(String path, String drive) {
     info("Go to selected Drive");
@@ -1501,7 +1515,7 @@ public class SiteExplorerHome {
   /**
    * Delete all files in a folder under Admin view
    *
-   * @param title
+   * @param title String
    */
   public void verifyContentCreatedSuccessfully(String title) {
     info("Verify Content was created successfully");

@@ -742,6 +742,7 @@ public class TestBase {
    * Check if a checkbox is checked or not
    *
    * @param checkedElement string
+   * @return checkedElement String
    */
   public boolean checkCheckBoxAttribute(String checkedElement) {
     return elementEventTestBase.checkCheckBoxAttribute(checkedElement);
@@ -760,6 +761,7 @@ public class TestBase {
    * Get date by text format ex. Saturday, Febuary 16, 2015
    *
    * @param format string
+   * @return DateByTextFormat
    */
   public String getDateByTextFormat(String format) {
     return dateTestBase.getDateByTextFormat(format);
@@ -876,7 +878,7 @@ public class TestBase {
    * Get the day of next week
    *
    * @param format string
-   * @return
+   * @return DayOfNextWeek
    */
   public String getDayOfNextWeek(String format) {
     return dateTestBase.getDayOfNextWeek(format);

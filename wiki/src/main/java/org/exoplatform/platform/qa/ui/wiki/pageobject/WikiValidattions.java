@@ -28,7 +28,7 @@ public class WikiValidattions {
   /**
    * constructor
    *
-   * @param testBase
+   * @param testBase TestBase
    */
 
   public WikiValidattions(TestBase testBase) {
@@ -40,7 +40,7 @@ public class WikiValidattions {
   /**
    * Verify a draf page
    *
-   * @param title
+   * @param title String
    */
   public void verifyTitleDrafPage(String title) {
     info("Verify that a draf page with the title:" + title + " is shown in draf table");
@@ -50,7 +50,7 @@ public class WikiValidattions {
   /**
    * Verify that Draf page is not shown
    *
-   * @param title
+   * @param title String
    */
   public void verifyNotTitleDrafPage(String title) {
     info("Verify that a draf page with the title:" + title + " is shown in draf table");
@@ -60,7 +60,7 @@ public class WikiValidattions {
   /**
    * Verify resuming a draf page
    *
-   * @param titleBeforeDraf
+   * @param titleBeforeDraf String
    */
   public void verifyResumADraf(String titleBeforeDraf) {
     info("Get current title in iput field");
@@ -78,8 +78,8 @@ public class WikiValidattions {
   /**
    * Verify that a wiki page link is inserted to the page
    *
-   * @param label
-   * @param tooltip
+   * @param label String
+   * @param tooltip String
    */
   public void verifyInsertedLinkIntoFrame(String label, String tooltip) {
     WebElement e = evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME, testBase.getDefaultTimeout(), 1, 2);
@@ -94,7 +94,7 @@ public class WikiValidattions {
   /**
    * Verify that a macro is inserted into the content of the page
    *
-   * @param macroType
+   * @param macroType String
    */
   public void verifyMacroIntoFrame(String macroType) {
     WebElement e = evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME, testBase.getDefaultTimeout(), 1, 2);
@@ -106,7 +106,7 @@ public class WikiValidattions {
   /**
    * Verify that macro Iframe is inserted into the content of the page
    *
-   * @param src
+   * @param src String
    */
   public void verifyMacroIFrame(String src) {
     info("Verify that IFrame is inserted");
@@ -116,8 +116,8 @@ public class WikiValidattions {
   /**
    * Verify the alert message when editing same page
    *
-   * @param status
-   * @param fullName
+   * @param status String
+   * @param fullName String
    */
   public void verifyMessageWhenEditingSamePage(String status, String fullName) {
     info("Verify the message");
@@ -127,7 +127,7 @@ public class WikiValidattions {
   /**
    * Verify Confirmation message
    *
-   * @param mess
+   * @param mess String
    */
   public void verifyWarningMessage(String mess) {
     info("Verify that the warning message is shown");
@@ -138,7 +138,8 @@ public class WikiValidattions {
   /**
    * Verify effects of Page's content
    *
-   * @param type
+   * @param type  String
+   * @param content String
    */
   public void verifyEffectsPageContent(effectTypes type, String content) {
     switch (type) {
@@ -201,7 +202,7 @@ public class WikiValidattions {
   /**
    * Check display of Admin Pages permission
    *
-   * @param isDisplay
+   * @param isDisplay boolean
    */
   public void checkDisplayOfAdmPage(boolean isDisplay) {
     info("check display of admin pages");
@@ -217,7 +218,7 @@ public class WikiValidattions {
   /**
    * Check display of Admin Wiki permission
    *
-   * @param isDisplay
+   * @param isDisplay boolean
    */
   public void checkDisplayOfAdmWiki(boolean isDisplay) {
     info("check display of admin wiki");
@@ -235,8 +236,8 @@ public class WikiValidattions {
   /**
    * Check display of edit page permission
    *
-   * @param title
-   * @param isDisplay
+   * @param title String
+   * @param isDisplay boolean
    */
   public void checkDisplayOfEditPage(String title, boolean isDisplay) {
     info("check display of edit page");
@@ -254,8 +255,8 @@ public class WikiValidattions {
   /**
    * Check display of view page permission
    *
-   * @param title
-   * @param isDisplay
+   * @param title String
+   * @param isDisplay boolean
    */
   public void checkDisplayOfViewPage(String title, boolean isDisplay) {
     info("check display of view page");
@@ -272,7 +273,7 @@ public class WikiValidattions {
   /**
    * Verify the page isnot created and shown in the list
    *
-   * @param title
+   * @param title String
    */
   public void verifyNotTitleWikiPage(String title) {
     info("Verify that the wiki page isnot created and shown in the list");
@@ -283,8 +284,8 @@ public class WikiValidattions {
   /**
    * Verify that the page is shown detail
    *
-   * @param pageName
-   * @param pageContent
+   * @param pageName String
+   * @param pageContent String
    */
   public void verifyPageContent(String pageName, String pageContent) {
     info("Verify the page's name");
@@ -295,6 +296,8 @@ public class WikiValidattions {
 
   /**
    * Verify that a table is added to the content of the page
+   * @param col int
+   * @param row int
    */
   public void verifyTableInContentPage(int col, int row) {
     info("Verify that the table is shown into the content of the page");
@@ -325,7 +328,7 @@ public class WikiValidattions {
   /**
    * Check versions on Compare version page
    *
-   * @param oldVersion
+   * @param oldVersion String
    */
   public void verifyCompareVersions(String oldVersion) {
     info("The compare version page is shown");
@@ -338,7 +341,7 @@ public class WikiValidattions {
   /**
    * Verify the content of a page after created successfully
    *
-   * @param content
+   * @param content String
    */
   public void verifyContentPage(String content) {
     info("Verify that the content page is added successfully");
@@ -351,7 +354,7 @@ public class WikiValidattions {
    * a version of this content has been updated by another user. You can [view
    * your changes] and [Continue Editing] or [delete] your draft."
    *
-   * @param message
+   * @param message String
    */
   public void verifyDraftInOutDateVersionStatus(String message) {
     info("Verify status text");
@@ -367,7 +370,7 @@ public class WikiValidattions {
   /**
    * Verify email format of the email link after inserted a email link to the page
    *
-   * @param address
+   * @param address String
    */
   public void verifyEmailFormatLink(String address) {
     info("Verify that email format of the link is correct");
@@ -386,8 +389,8 @@ public class WikiValidattions {
   /**
    * Verify that the system redirects to the wiki page link that is inserted
    *
-   * @param label
-   * @param pageLink
+   * @param label String
+   * @param pageLink String
    */
   public void verifyInsertedExistLink(String label, String pageLink) {
     info("The page link is shown");
@@ -397,8 +400,8 @@ public class WikiValidattions {
   /**
    * Verify that the system redirects to the wiki page that is created
    *
-   * @param label
-   * @param pageLink
+   * @param label String
+   * @param pageLink String
    */
   public void verifyInsertNewLink(String label, String pageLink) {
     info("The page link is shown");
@@ -416,8 +419,8 @@ public class WikiValidattions {
   /**
    * Verify the size of the image in the page's content
    *
-   * @param width
-   * @param height
+   * @param width String
+   * @param height String
    */
   public void verifySizeImageInContentPage(String width, String height) {
     info("Verify that the size of image is changed");
@@ -427,7 +430,8 @@ public class WikiValidattions {
   /**
    * Verify status when edit a page that has existing a draf
    *
-   * @param message
+   * @param message String
+   * @param date String
    */
   public void verifyStatusWhenEditPageHasExistingDraf(String message, String date) {
     info("Verify status text");
@@ -514,8 +518,8 @@ public class WikiValidattions {
   /**
    * Verify that the message for many pages have same title in moving page
    *
-   * @param mess
-   * @param pages
+   * @param mess String
+   * @param pages String
    */
   public void verifyMessageManyPagesHaveSameTitleInMovingPage(String mess, ArrayList<String> pages) {
     if (!pages.isEmpty()) {
@@ -542,7 +546,7 @@ public class WikiValidattions {
   /**
    * Verify the message for one page has same title in moving page
    *
-   * @param mess
+   * @param mess String
    */
   public void verifyMessageOnePageHasSameTitleInMovingPage(String mess) {
     if (!mess.isEmpty()) {
@@ -555,9 +559,9 @@ public class WikiValidattions {
   /**
    * Verify breadcrumb path of a page
    *
-   * @param locator1
-   * @param locator2
-   * @param page
+   * @param locator1 String
+   * @param locator2 String
+   * @param page String
    */
   public void verifyBreadCrumbePath(String locator1, String locator2, String page) {
     info("Verify that the page is at the path:" + locator1 + "->" + locator2 + "->" + page);
@@ -570,8 +574,8 @@ public class WikiValidattions {
   /**
    * Verify breadcrumb path of a page
    *
-   * @param locator1
-   * @param locator2
+   * @param locator1 String
+   * @param locator2 String
    */
   public void verifyBreadCrumbePath(String locator1, String locator2) {
     info("Verify that the page is at the path:" + locator1 + "->" + locator2);
@@ -584,7 +588,7 @@ public class WikiValidattions {
    * Verify that the tooltip of rename in the message is shown for one page has
    * same title in moving page
    *
-   * @param mess
+   * @param mess String
    */
   public void verifyToolTipMessageOnePageHasSameTitleInMovingPage(String mess) {
     if (!mess.isEmpty()) {
@@ -598,8 +602,8 @@ public class WikiValidattions {
    * Verify that the tooltip of the message for many pages have same title in
    * moving page
    *
-   * @param mess
-   * @param pages
+   * @param mess String
+   * @param pages String
    */
   public void verifyToolTipMessageManyPagesHaveSameTitleInMovingPage(String mess, ArrayList<String> pages) {
     if (!pages.isEmpty()) {
@@ -625,8 +629,8 @@ public class WikiValidattions {
   /**
    * Verify that a page is parent of other page
    *
-   * @param parentNode
-   * @param childNode
+   * @param parentNode String
+   * @param childNode String
    */
   public void verifyParentChildNode(String parentNode, String childNode) {
     info("Verify that page A is under page B or page A is parent of the page B");
@@ -638,7 +642,7 @@ public class WikiValidattions {
   /**
    * Verify that edit mode is opening
    *
-   * @param oldTitle
+   * @param oldTitle String
    */
   public void verifyEditModeOpenning(String oldTitle) {
     info("Verify that input tilte field is shown");
@@ -658,7 +662,7 @@ public class WikiValidattions {
   /**
    * Verify alt Text of image is changed
    *
-   * @param altText
+   * @param altText String
    */
   public void verifyAltTextImageInContentPage(String altText) {
     info("Verify that alt text is changed");
@@ -668,6 +672,8 @@ public class WikiValidattions {
   /**
    * Verify attach files are displayed in attach list or not when clicking in
    * attach files number
+   * @param fileName String
+   * @param display boolean
    */
   public void VerifyAttachFilesAreDisplayedInAttachListOrNot(String fileName, boolean display) {
     info("Verify attach files are displayed in attach list");
@@ -686,7 +692,7 @@ public class WikiValidattions {
   /**
    * Verify the page is created and shown in the list
    *
-   * @param title
+   * @param title String
    */
   public void verifyTitleWikiPage(String title) {
     info("Verify that the wiki page is created and shown in the list");
@@ -697,7 +703,7 @@ public class WikiValidattions {
   /**
    * Verify the page is not displayed in Wiki Home
    *
-   * @param title
+   * @param title String
    */
   public void verifyWikiPageNotDisplayedInWikiHome(String title) {
     info("Verify the page is not displayed in Wiki Home");
@@ -708,7 +714,7 @@ public class WikiValidattions {
   /**
    * Verify that a template is shown in the list
    *
-   * @param template
+   * @param template String
    */
   public void verifyTemplateInList(String template) {
     if (evt.waitForAndGetElement(ELEMENT_WIKI_SETTING_PAGE_TOTAL_NUMBER, 2000, 0) != null) {
@@ -735,7 +741,7 @@ public class WikiValidattions {
   /**
    * Verify that a template isnot shown in the list
    *
-   * @param template
+   * @param template String
    */
   public void verifyNotTemplateInList(String template) {
     if (evt.waitForAndGetElement(ELEMENT_WIKI_SETTING_PAGE_TOTAL_NUMBER, 2000, 0) != null) {
@@ -761,7 +767,7 @@ public class WikiValidattions {
   /**
    * Verify that the page is shown in searched results list
    *
-   * @param page
+   * @param page String
    */
   public void verifySearchResults(String page) {
     info("Verify that the page is shown in results searched");
@@ -772,7 +778,7 @@ public class WikiValidattions {
   /**
    * Verify that the page is not shown in searched results list
    *
-   * @param page
+   * @param page String
    */
   public void verifyNotSearchResults(String page) {
     info("Verify that the page isnot shown in results searched");
@@ -809,8 +815,8 @@ public class WikiValidattions {
   /**
    * Verify that spaces in space switcher lis are shown
    *
-   * @param spaces
-   * @param numIndex
+   * @param spaces ArrayList
+   * @param numIndex int
    */
   public void verifyPresentSpaceSwitcher(ArrayList<String> spaces, int... numIndex) {
     if (numIndex.length > 0) {
@@ -829,8 +835,8 @@ public class WikiValidattions {
   /**
    * Verify that spaces in space switcher are not shown
    *
-   * @param spaces
-   * @param numIndex
+   * @param spaces ArrayList
+   * @param numIndex int
    */
   public void verifyNotPresentSpaceSwitcher(ArrayList<String> spaces, int... numIndex) {
     if (numIndex.length > 0) {
@@ -849,7 +855,7 @@ public class WikiValidattions {
   /**
    * Verify that a space is shown in space switcher
    *
-   * @param space
+   * @param space String
    */
   public void verifyPresentSpaceSwitcher(String space) {
     if (!space.isEmpty()) {
@@ -862,7 +868,7 @@ public class WikiValidattions {
   /**
    * Verify that a space isnot shown in space switcher
    *
-   * @param space
+   * @param space String
    */
   public void verifyNotPresentSpaceSwitcher(String space) {
     if (!space.isEmpty()) {
@@ -882,8 +888,8 @@ public class WikiValidattions {
   /**
    * Verify that a space has a position in the list
    *
-   * @param i
-   * @param space
+   * @param i int
+   * @param space String
    */
   public void verifyPositionOfASpaceInList(int i, String space) {
     info("Verify that the space has:" + i + " position in the list");
@@ -908,8 +914,8 @@ public class WikiValidattions {
   /**
    * Verify that related page is added in Related table
    *
-   * @param locator
-   * @param relatedPage
+   * @param locator String
+   * @param relatedPage String
    */
   public void verifyRelatedPage(String locator, String relatedPage) {
     info("Verify that related page is added to the related table");
@@ -922,7 +928,7 @@ public class WikiValidattions {
    * Verify that a page is not shown in related page list of the related page
    * popup
    *
-   * @param page
+   * @param page String
    */
   public void verifyNotPageInRelatedPageList(String page) {
     info("Verify that a page is not listed in related page list to select it");
@@ -932,7 +938,7 @@ public class WikiValidattions {
   /**
    * Verify that a page is not shown in left related page list
    *
-   * @param page
+   * @param page String
    */
   public void verifyNotPageInLeftRelatePageList(String page) {
     info("Verify that a page is not shown in left related page list");
@@ -942,7 +948,7 @@ public class WikiValidattions {
   /**
    * Verify that a page is shown in left related page list
    *
-   * @param page
+   * @param page String
    */
   public void verifyPageInLeftRelatePageList(String page) {
     info("Verify that a page is shown in left related page list");
@@ -952,7 +958,7 @@ public class WikiValidattions {
   /**
    * Verify page's version
    *
-   * @param version
+   * @param version String
    */
   public void verifyVersionPage(String version) {
     info("Verify that page's version is:" + version);
@@ -962,7 +968,7 @@ public class WikiValidattions {
   /**
    * Verify that vesion is listed in recent changes table
    *
-   * @param num
+   * @param num int
    */
   public void verifyVersionsInPage(int num) {
     info("Verify that the version is list in recent changes table");
@@ -972,7 +978,7 @@ public class WikiValidattions {
   /**
    * Verify that the content of the version is shown
    *
-   * @param content
+   * @param content String
    */
   public void verifyContentOfVersion(String content) {
     info("Verify that the content of the version is shown");
@@ -982,8 +988,8 @@ public class WikiValidattions {
   /**
    * Verify compare version page's content
    *
-   * @param oldContent
-   * @param newContent
+   * @param oldContent String
+   * @param newContent String
    */
   public void verifyCompareVersionPage(String oldContent, String newContent) {
     info("Verify that  Words/lines which are red-highlighted with strike-throughs indicate that they were removed");
@@ -1001,7 +1007,7 @@ public class WikiValidattions {
   /**
    * Verify that version is listed in history page
    *
-   * @param version
+   * @param version String
    */
   public void verifyVersionsInHistoryPage(String version) {
     info("Verify that vesion is listed in history page");
@@ -1011,8 +1017,8 @@ public class WikiValidattions {
   /**
    * Verify that Draft exists n Draft list or not
    *
-   * @param title
-   * @param exist
+   * @param title String
+   * @param exist String
    */
   public void verifyDraftExistsInDraftListOrNot(String title, boolean exist) {
     info("Verify that Draft exists in Draft list or Not");
@@ -1041,9 +1047,9 @@ public class WikiValidattions {
   /**
    * Verify footNode intoFrame of Rich Text Mode
    *
-   * @param footNode1
-   * @param footNode2
-   * @param contentMacroBox
+   * @param footNode1 String
+   * @param footNode2 String
+   * @param contentMacroBox String
    */
   public void verifyMacroFootNodeIntoFrame(String footNode1, String footNode2, String contentMacroBox) {
     testBase.getExoWebDriver().getWebDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
@@ -1058,9 +1064,9 @@ public class WikiValidattions {
   /**
    * Verify footNode into the content of the page
    *
-   * @param footNode1
-   * @param footNode2
-   * @param contentMacroBox
+   * @param footNode1 String
+   * @param footNode2 String
+   * @param contentMacroBox String
    */
   public void verifyMacroFootNodeIntoContentPage(String footNode1, String footNode2, String contentMacroBox) {
     evt.waitForAndGetElement(By.linkText("1"));

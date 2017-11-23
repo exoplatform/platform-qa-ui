@@ -33,6 +33,7 @@ public class WikiManagement {
 
   /**
    * constructor
+   * @param testBase TestBase
    */
   public WikiManagement(TestBase testBase) {
     this.testBase = testBase;
@@ -44,6 +45,7 @@ public class WikiManagement {
 
   /**
    * Select template to create page
+   * @param eTemplate SelenideElement
    */
   public void selectTemplateWikiPage(SelenideElement eTemplate) {
     info("--Select  template--");
@@ -93,7 +95,7 @@ public class WikiManagement {
   /**
    * Add a content for a wiki page
    *
-   * @param content
+   * @param content String
    */
   public void addContentPage(String content) {
     info("Input a content for the page");
@@ -171,7 +173,7 @@ public class WikiManagement {
   /**
    * input a comment to new wiki page
    *
-   * @param comment
+   * @param comment String
    */
   public void addComment(String comment) {
     info("Input a comment to wiki page");
@@ -181,8 +183,8 @@ public class WikiManagement {
   /**
    * Move page 1 to page 2
    *
-   * @param page1
-   * @param page2
+   * @param page1 String
+   * @param page2 String
    */
   public void movePage(String page1, String page2) {
     info("Open a wiki page 1");
@@ -204,8 +206,9 @@ public class WikiManagement {
   /**
    * Move page 1 to page 2 when user does not have edit permission in destination
    *
-   * @param page1
-   * @param page2
+   * @param page1 String
+   * @param page2 String
+   * @param destination boolean
    */
   public void movePageWhenUserDoesNotHavePerMissionInDestination(String page1, String page2, boolean destination) {
     info("Open a wiki page 1");
@@ -235,9 +238,10 @@ public class WikiManagement {
   /**
    * Move a page1 of destination 1 to a page 2 of destination 2
    *
-   * @param page1
-   * @param page2
-   * @param locator
+   * @param page1 String
+   * @param page2 String
+   * @param locator Boolean
+   * @param checkLocation boolean
    */
   public void movePageDiffDestination(String page1, String page2, String locator, Boolean... checkLocation) {
     boolean check = (checkLocation.length > 0 ? checkLocation[0] : false);
@@ -283,7 +287,7 @@ public class WikiManagement {
   /**
    * Select a space destination in move page popup
    *
-   * @param destination
+   * @param destination String
    */
   public void selectSpaceDestination(String destination) {
     info("Select a space destination in the list");
@@ -298,6 +302,7 @@ public class WikiManagement {
 
   /**
    * Delete an attachment file
+   * @param file String
    */
   public void deleteAttachmentFile(String file) {
     info("Click on detele button");
@@ -309,7 +314,7 @@ public class WikiManagement {
   /**
    * Check options in Add Relations drop down list
    *
-   * @param spaces
+   * @param spaces String
    */
   public void checkAddRelationDropDownList(String spaces) {
 
@@ -340,7 +345,7 @@ public class WikiManagement {
   /**
    * Preview a template
    *
-   * @param template
+   * @param template String
    */
   public void previewATemplate(String template) {
     info("Preview the template");
@@ -355,8 +360,8 @@ public class WikiManagement {
   /**
    * Rename the title of the page by double-click on the title field
    *
-   * @param title
-   * @param newTitle
+   * @param title String
+   * @param newTitle String
    */
   public void renamePageByDoubleClick(String title, String newTitle) {
     info("Open the page");
@@ -372,6 +377,7 @@ public class WikiManagement {
 
   /**
    * Watch a page
+   * @param mess String
    */
   public void watchAPage(String mess) {
     info("Click on More link");
@@ -390,6 +396,7 @@ public class WikiManagement {
 
   /**
    * un-Watch a page
+   * @param mess String
    */
   public void unWatchAPage(String mess) {
     info("Click on More link");
@@ -463,7 +470,7 @@ public class WikiManagement {
   /**
    * Un check view permission for a user or a group
    *
-   * @param locator
+   * @param locator object
    */
   public void unCheckViewAUserOfPage(Object locator) {
     info("Click on More link");
@@ -495,7 +502,7 @@ public class WikiManagement {
   /**
    * Click on inserted link in the wiki page
    *
-   * @param label
+   * @param label String
    */
   public void viewInsertLink(String label) {
     info("Verify that the inserted link is shown in the page");
@@ -546,7 +553,8 @@ public class WikiManagement {
   /**
    * Add a simple wiki page by template format
    *
-   * @param template
+   * @param template SelenideElement
+   * @param newTitle String
    */
   public void addSimpleWikiPageByTemplate(SelenideElement template, String newTitle) {
     info("Select a template");
@@ -561,7 +569,8 @@ public class WikiManagement {
   /**
    * Add a simple wiki page with How To Guide template with auto save status
    *
-   * @param template
+   * @param template SelenideElement
+   * @param newTitle String
    */
   public void addSimplePageByTemplateWithAutoSave(SelenideElement template, String newTitle) {
     info("Select a template");
@@ -582,8 +591,8 @@ public class WikiManagement {
   /**
    * Preview a simple page
    *
-   * @param title
-   * @param content
+   * @param title String
+   * @param content String
    */
   public void PreviewASimplePage(String title, String content) {
     info("Preview a simple page");

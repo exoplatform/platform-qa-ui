@@ -30,7 +30,7 @@ public class EmailNotifications {
   /**
    * constructor
    *
-   * @param dr
+   * @param testBase TestBase
    */
   public EmailNotifications(TestBase testBase) {
     this.testBase = testBase;
@@ -55,7 +55,7 @@ public class EmailNotifications {
   /**
    * Close all child drivers
    *
-   * @param parentTitle is the tilte of parent browsers
+   * @param parentWindow is the tilte of parent browsers
    */
   public void closeChildBrowsers(String parentWindow) {
     info("parentWindow:" + parentWindow);
@@ -120,7 +120,6 @@ public class EmailNotifications {
    *
    * @param title is the title of email notification
    * @param fullName is full name of the user
-   * @param content is the title of email notification
    */
   public void verifyPresentTitleCommentASEmailNoti(String title, String fullName) {
     info("Verify that email notificaiton is sent to user's inbox");
@@ -132,7 +131,6 @@ public class EmailNotifications {
    *
    * @param title is the title of email notification
    * @param fullName is full name of the user
-   * @param content is the title of email notification
    */
   public void verifyNOTPresentTitleCommentASEmailNoti(String title, String fullName) {
     info("Verify that email notificaiton isnot sent to user's inbox");
@@ -163,6 +161,7 @@ public class EmailNotifications {
    * @param title is the title of email notification
    * @param fullName is full name of the user
    * @param content is the content of email notification
+   * @param isParams String
    */
   public void verifyPresentEmailActivityNotifications(String title, String fullName, String content, String... isParams) {
     if (!content.isEmpty()) {
@@ -221,6 +220,8 @@ public class EmailNotifications {
    * @param title is the title of email notification
    * @param fullName is full name of the user
    * @param content is the title of email notification
+   * @param spaceName String
+   * @param isParams String
    */
   public void verifyPresentEmailPostActivityInSpaceASNotifications(String title,
                                                                    String fullName,
@@ -261,6 +262,7 @@ public class EmailNotifications {
    * @param title is the title of email notification
    * @param fullName is full name of the user
    * @param content is the title of email notification
+   * @param isParams String
    */
   public void verifyNOTPresentTitleASEmailNoti(String title, String fullName, String content, String... isParams) {
     if (!content.isEmpty()) {
@@ -285,6 +287,7 @@ public class EmailNotifications {
    *
    * @param title is the title of email notification
    * @param fullName is full name of the user
+   * @param content  String
    */
   public void goToDetailEmailNoti(String title, String fullName, String content) {
     if (!content.isEmpty()) {
@@ -302,6 +305,8 @@ public class EmailNotifications {
    *
    * @param title is the title of email notification
    * @param fullName is full name of the user
+   * @param spaceName String
+   * @param content String
    */
   public void goToDetailEmailNotiOfSpacePost(String title, String fullName, String spaceName, String content) {
     if (!content.isEmpty()) {
@@ -320,8 +325,9 @@ public class EmailNotifications {
   /**
    * Ch detail an email Notification
    *
-   * @param title is the title of email notification
-   * @param fullName is full name of the user
+   * @param userName is the title of email notification
+   * @param spaceName is full name of the user
+   * @param content String
    */
   public void checkDetailEmailNotiOfSpacePost(String userName, String spaceName, String content) {
     evt.waitForAndGetElement(ELEMENT_GMAIL_HEADER_POST_IN_SPACE_AS.replace("$spaceName", spaceName));
@@ -342,11 +348,12 @@ public class EmailNotifications {
   /**
    * Verify email notificaiton's format for Activity
    *
-   * @param emailTitle
-   * @param firstName
-   * @param fullName
-   * @param emailContent
-   * @param actTitle
+   * @param emailTitle String
+   * @param firstName String
+   * @param fullName String
+   * @param emailContent String
+   * @param actTitle String
+   * @param link String
    */
   public void verifyFormatEmailNotifcation(String emailTitle,
                                            String firstName,
@@ -391,10 +398,11 @@ public class EmailNotifications {
   /**
    * Verify format of email notification for connection request
    *
-   * @param emailTitle
-   * @param firstName
-   * @param emailContent
-   * @param userName
+   * @param emailTitle String
+   * @param firstName String
+   * @param emailContent String
+   * @param userName String
+   * @param isNewUser boolean
    */
   public void verifyFormatEmailNotifcation(String emailTitle,
                                            String firstName,
@@ -435,7 +443,8 @@ public class EmailNotifications {
   /**
    * Verify Bottom Content of Email notification
    *
-   * @param contentBottom
+   * @param content1 String
+   * @param content2 String
    */
   public void verifyBottomContentOfEmailNotifcation(String content1, String content2) {
     info("Verify Bottom Content of Email notification");
@@ -450,6 +459,14 @@ public class EmailNotifications {
   /**
    * go To My Notification Setting By Clik Here in Bottom Cotnent of Email
    * Notification
+   * @param fullName String
+   * @param link String
+   * @param linkFile String
+   * @param space String
+   * @param spaceCase boolean
+   * @param textDes String
+   * @param userName String
+   *
    */
   public void checkLinkInEmailNotification(linkEmailNotification link,
                                            String userName,
@@ -503,9 +520,9 @@ public class EmailNotifications {
   /**
    * Verify Recipient and Sender Email Notification
    *
-   * @param recipient
-   * @param userName
-   * @param email
+   * @param recipient Boolean
+   * @param userName boolean
+   * @param email boolean
    */
   public void verifyRecipientAndSenderEmailNotifcation(Boolean recipient, String userName, String email) {
     info("Verify recipient or sender for email notification");
@@ -523,12 +540,12 @@ public class EmailNotifications {
   /**
    * Verify format email notification for space
    *
-   * @param emailTitle
-   * @param firstName
-   * @param userName
-   * @param emailContent
-   * @param space
-   * @param isNewUser
+   * @param emailTitle String
+   * @param firstName String
+   * @param userName String
+   * @param emailContent String
+   * @param space String
+   * @param isNewUser Boolean
    */
   public void verifyFormatEmailNotifcationForSpace(String emailTitle,
                                                    String firstName,
@@ -652,8 +669,9 @@ public class EmailNotifications {
   /**
    * Verify the feedback message refuse connection request
    *
-   * @param message
-   * @param fullName
+   * @param message Boolean
+   * @param fullName Boolean
+   * @param space String
    */
   public void verifyFeedBackMessageRefuseConnection(String message, String fullName, String... space) {
     info("Verify the feedback message refuse connection request");

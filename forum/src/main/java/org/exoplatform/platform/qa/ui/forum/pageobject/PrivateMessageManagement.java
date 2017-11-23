@@ -35,7 +35,7 @@ public class PrivateMessageManagement {
   /**
    * constructor
    *
-   * @param dr
+   * @param testBase TestBase
    */
   public PrivateMessageManagement(TestBase testBase) {
     this.testBase = testBase;
@@ -78,9 +78,9 @@ public class PrivateMessageManagement {
   /**
    * Write message
    *
-   * @param contact
-   * @param title
-   * @param content
+   * @param contact String
+   * @param title String
+   * @param content String
    */
   public void writeMessage(String contact, String title, String content) {
     refresh();
@@ -95,10 +95,10 @@ public class PrivateMessageManagement {
   /**
    * Write message to group
    *
-   * @param groupPath
-   * @param member
-   * @param title
-   * @param content
+   * @param groupPath String
+   * @param member String
+   * @param title String
+   * @param content String
    */
   public void writeMessageToGroup(String groupPath, String member, String title, String content) {
     forumPerm.selectPermGroupMemberMes(groupPath, member);
@@ -112,9 +112,9 @@ public class PrivateMessageManagement {
   /**
    * Check inbox message
    *
-   * @param contact
-   * @param title
-   * @param content
+   * @param contact String
+   * @param title String
+   * @param content String
    */
   public void checkInboxMessage(String contact, String title, String content) {
     $(byText(title)).click();
@@ -124,9 +124,9 @@ public class PrivateMessageManagement {
   /**
    * Check display of message
    *
-   * @param title
-   * @param author
-   * @param isDisplay
+   * @param title String
+   * @param author String
+   * @param isDisplay boolean
    */
   public void checkDisplayOfMessage(String title, String author, boolean isDisplay) {
     if (isDisplay) {
@@ -139,7 +139,7 @@ public class PrivateMessageManagement {
   /**
    * check inbox message not found
    *
-   * @param title
+   * @param title String
    */
   public void checkInboxMessageNotFound(String title) {
     evt.waitForElementNotPresent(By.xpath(ELEMENT_CONTACT_INBOX.replace("{$content}", title)));
@@ -148,10 +148,10 @@ public class PrivateMessageManagement {
   /**
    * Reply a message
    *
-   * @param contact
-   * @param title
-   * @param newTitle
-   * @param content
+   * @param contact String
+   * @param title String
+   * @param newTitle String
+   * @param content String
    */
   public void replyMessage(String contact, String title, String newTitle, String content) {
     $(byText(title)).click();
@@ -166,11 +166,11 @@ public class PrivateMessageManagement {
   /**
    * Forward a message
    *
-   * @param contact
-   * @param title
-   * @param newContact
-   * @param newTitle
-   * @param newContent
+   * @param contact String
+   * @param title String
+   * @param newContact String
+   * @param newTitle String
+   * @param newContent String
    */
   public void forwardMessage(String contact, String title, String newContact, String newTitle, String newContent) {
     $(byText(title)).parent().parent().parent().find(ELEMENT_BUTTON_FORWARD_MESSAGE).click();
@@ -188,8 +188,8 @@ public class PrivateMessageManagement {
   /**
    * Delete a message
    *
-   * @param title
-   * @param contact
+   * @param title String
+   * @param contact String
    */
   public void deleteMessage(String title, String contact) {
     $(byText(title)).parent().parent().parent().find(ELEMENT_BUTTON_DELETE_MESSAGE).click();
@@ -216,7 +216,10 @@ public class PrivateMessageManagement {
   /**
    * Write message to group
    *
-   * @param group
+   * @param group String
+   *
+   *  @param title String
+   *  @param content String
    */
 
   public void writeMessageToGroup(String group, String title, String content) {
@@ -233,7 +236,10 @@ public class PrivateMessageManagement {
   /**
    * Write message to group
    *
-   * @param group
+   * @param group String
+   * @param content String
+   * @param membership String
+   * @param title String
    */
 
   public void writeMessageToMembership(String group, String membership, String title, String content) {

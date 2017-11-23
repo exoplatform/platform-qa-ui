@@ -28,7 +28,7 @@ public class WikiHomePage {
   /**
    * constructor
    *
-   * @param testBase
+   * @param testBase TestBase
    */
   public WikiHomePage(TestBase testBase) {
     this.testBase = testBase;
@@ -75,7 +75,7 @@ public class WikiHomePage {
   /**
    * Select any page
    *
-   * @param title
+   * @param title String
    */
   public void goToAPage(String title) {
     info("-- Go to wiki page --");
@@ -86,7 +86,7 @@ public class WikiHomePage {
   /**
    * Select any page
    *
-   * @param title
+   * @param title String
    */
   public void deleteWiki(String title) {
 
@@ -104,7 +104,7 @@ public class WikiHomePage {
   /**
    * Select any page
    *
-   * @param title
+   * @param title String
    */
   public void cancelDeleteWiki(String title) {
     if (evt.waitForAndGetElement(ELEMENT_TREE_WIKI_NAME.replace("${name}", title), 3000, 0) != null) {
@@ -126,7 +126,7 @@ public class WikiHomePage {
   /**
    * Select a page
    *
-   * @param page
+   * @param page String
    */
   public void selectAPage(String page) {
     info("Go to a wiki page...");
@@ -148,7 +148,7 @@ public class WikiHomePage {
   /**
    * Open search page with a text
    *
-   * @param text
+   * @param text String
    */
   public void goTosearchPage(String text) {
     info("Input a text to search field");
@@ -229,7 +229,6 @@ public class WikiHomePage {
   /**
    * Get a permalink of the page
    *
-   * @return perLink
    */
   public void goToPermalink() {
     info("Go to permalink");
@@ -240,7 +239,7 @@ public class WikiHomePage {
   /**
    * Restricted a page from infor bar or More menu
    *
-   * @param opParams
+   * @param opParams Boolean
    */
   public void restrictedPage(Boolean... opParams) {
     info("Make Restricted page");
@@ -258,7 +257,7 @@ public class WikiHomePage {
   /**
    * Public a page from infor bar or More menu
    *
-   * @param opParams
+   * @param opParams Boolean
    */
   public void publicPage(Boolean... opParams) {
     info("Make Public page");
@@ -294,7 +293,7 @@ public class WikiHomePage {
   /**
    * Go to attach files in Wiki Home page
    *
-   * @param number
+   * @param number String
    */
   public void goToAttachFiles(String number) {
     info("Click attach file link");
@@ -305,7 +304,7 @@ public class WikiHomePage {
    * Delete attach file in View mode in Wiki Homepage or in edit mode when editing
    * a wiki page
    *
-   * @param fileName
+   * @param fileName String
    */
   public void DeleteAttachFiles(String fileName) {
     info("Delete attach files");
@@ -320,7 +319,8 @@ public class WikiHomePage {
   /**
    * Go to Wiki Home of the space
    *
-   * @param space
+   * @param space String
+   * @param userWiki String
    */
   public void goToWikiHomeOfSpaceFromBreadcrumb(String space, String userWiki) {
     goToSpaceSwitcher();
@@ -341,7 +341,7 @@ public class WikiHomePage {
   /**
    * Input and search a space in space switcher
    *
-   * @param text
+   * @param text String
    */
   public void inputSpaceSwitcher(String text) {
     SelenideElement spaceSwitcherInput = $(ELEMENT_SPACE_SWITCHER_INPUT);
@@ -380,6 +380,7 @@ public class WikiHomePage {
 
   /**
    * Open Page information
+   * @param wiki String
    */
   public void goToPageInformation(String wiki) {
     info("Go to Page Information");
@@ -391,7 +392,7 @@ public class WikiHomePage {
   /**
    * Open information version table
    *
-   * @param version
+   * @param version String
    */
   public void goToRevisions(String version) {
     info("Click on Version");
@@ -403,8 +404,8 @@ public class WikiHomePage {
   /**
    * Open information table
    *
-   * @param page
-   * @param version
+   * @param page String
+   * @param version String
    */
   public void viewInformationTable(String page, String version) {
     info("Open a wiki page 1");

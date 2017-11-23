@@ -73,7 +73,7 @@ public class EditorPortlet {
   /**
    * Save or close all changes
    *
-   * @param isSave
+   * @param isSave Boolean
    */
   public void saveCloseChange(Boolean isSave) {
     if (isSave) {

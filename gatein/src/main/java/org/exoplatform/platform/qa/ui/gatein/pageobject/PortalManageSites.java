@@ -32,7 +32,6 @@ public class PortalManageSites {
   /**
    * Open Navigation Management popup
    *
-   * @param site as acme or intranet
    */
   public void goToEditNavigation() {
 
@@ -46,7 +45,7 @@ public class PortalManageSites {
   /**
    * Edit layout of a portal
    *
-   * @param site
+   * @param site String
    */
   public void goToEditLayout(String site) {
     info("Click on Edit layout button");
@@ -57,7 +56,7 @@ public class PortalManageSites {
   /**
    * change config of a portal
    *
-   * @param site
+   * @param site String
    */
   public void changeConfig(String site) {
     goToEditLayout(site);
@@ -69,7 +68,7 @@ public class PortalManageSites {
   /**
    * Go to Edit site configuration
    *
-   * @param site
+   * @param site String
    */
   public void goToEditSiteConfig(String site) {
     info("Click on Edit Site Configuration button");
@@ -79,9 +78,9 @@ public class PortalManageSites {
   /**
    * Add a simple portal
    *
-   * @param portalName
-   * @param label
-   * @param des
+   * @param portalName String
+   * @param label String
+   * @param des String
    * @param groupsPath is as: Platform/Content Management
    * @param memberShips is as: author
    */
@@ -135,7 +134,7 @@ public class PortalManageSites {
   /**
    * Select a membership of a group
    *
-   * @param memberShip
+   * @param memberShip String
    */
   public void selectMemberShip(String memberShip) {
     info("Select a membership:" + memberShip);
@@ -155,9 +154,9 @@ public class PortalManageSites {
   /**
    * Edit a simple portal
    *
-   * @param portalName
-   * @param label
-   * @param des
+   * @param portalName String
+   * @param label String
+   * @param des String
    * @param groupsPath is as: Platform/Content Management
    * @param memberShips is as: author
    */
@@ -194,17 +193,17 @@ public class PortalManageSites {
   /**
    * Add New Portal
    *
-   * @param portalName
-   * @param label
-   * @param description
-   * @param portalLocale
-   * @param portalSkin
-   * @param portalSession
-   * @param publicMode
-   * @param permissions
-   * @param editGroupId
-   * @param editMembership
-   * @param template
+   * @param portalName String
+   * @param label String
+   * @param description String
+   * @param portalLocale String
+   * @param portalSkin String
+   * @param portalSession String
+   * @param publicMode boolean
+   * @param permissions String
+   * @param editGroupId String
+   * @param editMembership String
+   * @param template String
    */
 
   public void addNewPortal(String portalName,
@@ -236,17 +235,17 @@ public class PortalManageSites {
   /**
    * Configure Portal
    *
-   * @param portalName
-   * @param label
-   * @param description
-   * @param portalLocale
-   * @param portalSkin
-   * @param portalSession
-   * @param publicMode
-   * @param permissions
-   * @param editGroupId
-   * @param editMembership
-   * @param template
+   * @param portalName String
+   * @param label String
+   * @param description String
+   * @param portalLocale String
+   * @param portalSkin String
+   * @param portalSession String
+   * @param publicMode boolean
+   * @param permissions String
+   * @param editGroupId String
+   * @param editMembership String
+   * @param template String
    */
 
   public void configPortal(String portalName,
@@ -307,8 +306,8 @@ public class PortalManageSites {
   /**
    * Set View Permissions
    *
-   * @param groupId
-   * @param membership
+   * @param groupId String
+   * @param membership String
    */
 
   public void setViewPermissions(String groupId, String membership) {
@@ -332,8 +331,8 @@ public class PortalManageSites {
   /**
    * Set Edit Permissions
    *
-   * @param groupId
-   * @param membership
+   * @param groupId String
+   * @param membership String
    */
   public void setEditPermissions(String groupId, String membership) {
     String membershipToSelect = ELEMENT_SELECT_EDIT_PERMISSION_MEMBERSHIP.replace("${membership}", membership);
@@ -354,7 +353,7 @@ public class PortalManageSites {
   /**
    * Delete Portal
    *
-   * @param portalName
+   * @param portalName String
    */
   public void deletePortal(String portalName) {
     String portalDeleteIcon = ELEMENT_PORTAL_DELETE_ICON.replace("${portalName}", portalName);
@@ -366,8 +365,8 @@ public class PortalManageSites {
 
   /**
    * Verify permission on site
-   *
-   * @param isEnable
+   *@param portal string
+   * @param isEnable boolean
    */
   public void verifyPermOnSite(String portal, boolean isEnable) {
     info("check permission to access site: " + portal);

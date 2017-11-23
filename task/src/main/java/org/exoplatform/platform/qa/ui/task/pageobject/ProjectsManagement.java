@@ -176,10 +176,10 @@ public class ProjectsManagement {
    * @param projectPath is project's names as Project1/sub_Project1
    * @param title is a new project's title to edit
    * @param des is a new description of the project to edit
-   * @param opt >0 and opt[0]==true if want to input new title/description with
-   *          keeping all old title/description =0 or <0 if want to input new
-   *          title/description after cleared all old title/description >1 and
-   *          opt[1]==true if want to enable calendar integration >0 and <1 if
+   * @param opt 0 and opt[0]==true if want to input new title/description with
+   *          keeping all old title/description 0 or inf0 if want to input new
+   *          title/description after cleared all old title/description sup1 and
+   *          opt[1]eg true if want to enable calendar integration sup0 and inf1 if
    *          want to disable or uncheck calendar integration
    */
   public void editProject(String projectPath, String title, String newTitle, String des, boolean... opt) {
@@ -234,7 +234,7 @@ public class ProjectsManagement {
   /**
    * Change Project Parent
    *
-   * @param project
+   * @param project String
    */
   public void changeParentProject(String project) {
     info("Click on Parent project field");

@@ -29,7 +29,7 @@ public class ForumForumManagement {
   /**
    * constructor
    *
-   * @param dr
+   * @param testBase TestBase
    */
   public ForumForumManagement(TestBase testBase) {
     this.testBase = testBase;
@@ -42,9 +42,9 @@ public class ForumForumManagement {
   /**
    * Add a new forum By QuynhPT
    *
-   * @param nameForum
-   * @param order
-   * @param description
+   * @param nameForum String
+   * @param order String
+   * @param description String
    */
   public void addForumSimple(String nameForum, String order, String description) {
     // TODO Auto-generated method stub
@@ -76,7 +76,7 @@ public class ForumForumManagement {
   /**
    * select a item in More Action menu for a forum By QuynhPT
    *
-   * @param item
+   * @param item specifMoreActionMenu
    */
   public void selectItemMoreActionMenu(specifMoreActionMenu item) {
     info("Wait More link is shown");
@@ -152,9 +152,9 @@ public class ForumForumManagement {
   /**
    * Edit a forum
    *
-   * @param newName
-   * @param order
-   * @param newDescription
+   * @param newName String
+   * @param order String
+   * @param newDescription String
    */
   public void editForum(String newName, String order, String newDescription) {
     // TODO Auto-generated method stub
@@ -192,7 +192,7 @@ public class ForumForumManagement {
   /**
    * Delete a forum in the list By QuynhPT
    *
-   * @param name
+   * @param name String
    */
   public void deleteForum(String name) {
     selectItemMoreActionMenu(specifMoreActionMenu.DELETE);
@@ -205,8 +205,8 @@ public class ForumForumManagement {
   /**
    * function: move a forum from a category to another category
    *
-   * @param forum
-   * @param destination
+   * @param forum String
+   * @param destination String
    */
   public void moveForum(String forum, String destination) {
     info("move forum to category " + destination);
@@ -244,8 +244,8 @@ public class ForumForumManagement {
   /**
    * Check display of manage forum
    *
-   * @param forum
-   * @param isDisplay
+   * @param forum String
+   * @param isDisplay boolean
    */
   public void checkDisplayOfForumManage(String forum, boolean isDisplay) {
     info("check display of manage forum");
@@ -262,13 +262,13 @@ public class ForumForumManagement {
   /**
    * Edit permission of forum
    *
-   * @param cat
-   * @param groupPath
-   * @param member
-   * @param isMod
-   * @param isStartTop
-   * @param isPostReply
-   * @param isViewPost
+   * @param forum String
+   * @param groupPath String
+   * @param member String
+   * @param isMod boolean
+   * @param isStartTop boolean
+   * @param isPostReply boolean
+   * @param isViewPost boolean
    */
   public void editPermOfForum(String forum,
                               String groupPath,
@@ -287,8 +287,8 @@ public class ForumForumManagement {
   /**
    * Check enable of start topic
    *
-   * @param forum
-   * @param isEnable
+   * @param forum String
+   * @param isEnable boolean
    */
   public void checkEnableOfStartTopic(String forum, boolean isEnable) {
     info("check enable of start topic");
@@ -336,8 +336,8 @@ public class ForumForumManagement {
   /**
    * function: Search user in User Selection Form in Forum Permission
    *
-   * @param user
-   * @param searchOption
+   * @param user String
+   * @param searchOption String
    */
 
   public void searchUser(String user, String searchOption) {
@@ -351,8 +351,8 @@ public class ForumForumManagement {
   /**
    * Search user not found
    *
-   * @param user
-   * @param searchOption
+   * @param user String
+   * @param searchOption String
    */
   public void searchUserNotFound(String user, String searchOption) {
     info("--Search user " + user + "--");

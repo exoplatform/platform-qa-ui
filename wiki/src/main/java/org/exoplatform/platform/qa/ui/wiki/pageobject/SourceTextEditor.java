@@ -22,7 +22,7 @@ public class SourceTextEditor {
   /**
    * constructor
    *
-   * @param dr
+   * @param testBase TestBase
    */
   public SourceTextEditor(TestBase testBase) {
     this.testBase = testBase;
@@ -32,8 +32,8 @@ public class SourceTextEditor {
   /**
    * Add a simple wiki page with source editor
    *
-   * @param title
-   * @param content
+   * @param title String
+   * @param content String
    */
   public void addSimplePage(String title, String content) {
     info("Input a title for the page");
@@ -46,8 +46,8 @@ public class SourceTextEditor {
   /**
    * Add a page with checking auto save after 30s
    *
-   * @param title
-   * @param content
+   * @param title String
+   * @param content String
    */
   public void addSimplePageWithAutoSaveStatus(String title, String content) {
     info("Input a title for the page");
@@ -70,8 +70,8 @@ public class SourceTextEditor {
   /**
    * Add a new page that has auto save without save
    *
-   * @param title
-   * @param content
+   * @param title String
+   * @param content String
    */
   public void addSimplePageHasAutoSaveWithoutSave(String title, String content) {
     info("Input a title for the page");
@@ -97,8 +97,8 @@ public class SourceTextEditor {
   /**
    * Edit a simple wiki page with source editor
    *
-   * @param newTitle
-   * @param newContent
+   * @param newTitle String
+   * @param newContent String
    */
   public void editSimplePage(String newTitle, String newContent) {
     info("Input a title for the page");
@@ -112,8 +112,10 @@ public class SourceTextEditor {
   /**
    * Modify Wiki content with Source editor
    *
-   * @param title updated title of the wiki page. Can not be <code>null</code>
-   * @param content updated content of the wiki page. Can not be <code>null</code>
+   * @param title updated title of the wiki page.
+   * @param content updated content of the wiki page.
+   * @param isClearTitle Boolean
+   * @param isClearContent Boolean
    */
   public void inputDataToPage(String title, String content, Boolean isClearTitle, Boolean isClearContent) {
     String[] text;
@@ -146,8 +148,8 @@ public class SourceTextEditor {
   /**
    * Edit a wiki page with auto save status
    *
-   * @param newTitle
-   * @param newContent
+   * @param newTitle String
+   * @param newContent String
    */
   public void editSimplePageWithAutoSave(String newTitle, String newContent) {
     info("Input a title for the page");
@@ -166,16 +168,11 @@ public class SourceTextEditor {
     evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_TOOL_BAR_AUTO_SAVE_TEXT, 31000, 0);
   }
 
+
   /**
    * Attach a file to a Wiki page
    *
    * @param link link of file that will be attached
-   */
-  /**
-   * Attach a file to a Wiki page
-   *
-   * @param link link of file that will be attached
-   * @param type optional parameter of this method.
    */
   public void attachFile(String link) {
     // String fs = File.separator;
@@ -199,6 +196,7 @@ public class SourceTextEditor {
 
   /**
    * Attach many files to a wiki page
+   * @param link String
    */
   public void attachMultiFiles(String link) {
     String[] upload = link.split(";");
@@ -207,11 +205,7 @@ public class SourceTextEditor {
     }
   }
 
-  /**
-   * Attach a file to a Wiki page
-   *
-   * @param link link of file that will be attached
-   */
+
   /**
    * Attach a file to a Wiki page
    *
