@@ -20,8 +20,7 @@
  */
 package org.exoplatform.platform.qa.ui.commons;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.switchTo;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_PASSWORD_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 
@@ -33,6 +32,7 @@ import org.junit.jupiter.api.TestInfo;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Screenshots;
+import com.codeborne.selenide.Selenide;
 
 import org.exoplatform.platform.qa.ui.commons.pageobject.Platform;
 import org.exoplatform.platform.qa.ui.core.context.Smoke;
@@ -80,5 +80,12 @@ public class Base extends TestBase {
       $(ELEMENT_INPUT_PASSWORD_CAS).shouldBe(Condition.visible);
     }
     Screenshots.finishContext();
+  }
+
+  @AfterEach
+  public void close() {
+    if (!title().equals("Login")) {
+      Selenide.close();
+    }
   }
 }
