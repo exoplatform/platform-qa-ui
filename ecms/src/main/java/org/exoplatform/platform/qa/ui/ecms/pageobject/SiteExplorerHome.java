@@ -179,6 +179,7 @@ public class SiteExplorerHome {
     $(ELEMENT_SITEEXPLORER_ACTION_DELETE).click();
     info("Click on Delete button on Confirm popup");
     $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).click();
+    $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     info("Verify that the node is deleted");
     info("the node is deleted successfully");
   }
@@ -524,9 +525,9 @@ public class SiteExplorerHome {
    */
   public void lockNode(String name) {
     info("lock node:" + name);
-    evt.rightClickOnElement(By.xpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", name)));
-    evt.click(ELEMENT_SITEEXPLORER_LIST_LOCK_NODE);
-    evt.waitForAndGetElement(ELEMENT_SITEEXPLORER_LOCK_ICON.replace("$node", name));
+    $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", name))).contextClick();
+    $(ELEMENT_SITEEXPLORER_LIST_LOCK_NODE).click();
+    $(byXpath(ELEMENT_SITEEXPLORER_LOCK_ICON.replace("$node", name))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -536,9 +537,9 @@ public class SiteExplorerHome {
    */
   public void unlockNode(String name) {
     info("unlock node:" + name);
-    evt.rightClickOnElement(By.xpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", name)));
-    evt.click(ELEMENT_SITEEXPLORER_LIST_UNLOCK_NODE);
-    evt.waitForElementNotPresent(ELEMENT_SITEEXPLORER_LOCK_ICON.replace("$node", name));
+    $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", name))).contextClick();
+    $(ELEMENT_SITEEXPLORER_LIST_UNLOCK_NODE).click();
+    $(byXpath(ELEMENT_SITEEXPLORER_LOCK_ICON.replace("$node", name))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
