@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.answer.pageobject;
 import static com.codeborne.selenide.Selectors.*;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -72,6 +73,7 @@ public class CommentManagement {
    */
   public void goToActionOfCommentFromMoreAction(String comment, actionCommentOption action) {
     info("Select action from menu");
+    refresh();
     $(byText(comment)).parent().parent().parent().parent().parent().find(ELEMENT_COMMENT_MORE_ACTION).click();
     switch (action) {
 

@@ -6,6 +6,7 @@ import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
@@ -158,6 +159,7 @@ public class QuestionManagement {
    */
   public void goToActionOfQuestionFromMoreAction(actionQuestionOption action) {
     info("Select action from menu");
+    refresh();
     $(ELEMENT_QUESTION_MORE_ACTION_BUTTON).waitUntil(Condition.appears, Configuration.timeout).click();
     switch (action) {
     case PRINT:
