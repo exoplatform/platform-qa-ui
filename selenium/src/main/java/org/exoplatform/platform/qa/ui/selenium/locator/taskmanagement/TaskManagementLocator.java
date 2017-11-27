@@ -1,12 +1,11 @@
 package org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
-
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+
+import org.openqa.selenium.By;
+
+import com.codeborne.selenide.SelenideElement;
 
 /**
  * This class will be define locators for Task Management feature The feature
@@ -51,17 +50,21 @@ public class TaskManagementLocator {
 
   // Project area-->Context Menu
   public static final SelenideElement ELEMENT_PROJECT_ICON_ADD_PROJECT              =
-                                                                       $(byAttribute("data-id","0")).parent().find(byClassName("addProject"));
+                                                                       $(byAttribute("data-id",
+                                                                                     "0")).parent()
+                                                                                          .find(byClassName("addProject"));
 
   public static final SelenideElement ELEMENT_ADD_PROJECT                           =
-          ELEMENT_PROJECT_ICON_ADD_PROJECT.parent().parent().find(byClassName("uiIconAddProject"));
+                                                          ELEMENT_PROJECT_ICON_ADD_PROJECT.parent()
+                                                                                          .parent()
+                                                                                          .find(byClassName("uiIconAddProject"));
 
   // Labels area
   public static final SelenideElement ELEMENT_LABEL_ICON_ADD_LABEL                  =
-          $(byAttribute("data-labelid","0")).parent().find(byClassName("addLabel"));
+                                                                   $(byAttribute("data-labelid",
+                                                                                 "0")).parent().find(byClassName("addLabel"));
 
-  public static final SelenideElement ELEMENT_ADD_LABEL                             =
-          $(byClassName("uiIconAddLabel"));
+  public static final SelenideElement ELEMENT_ADD_LABEL                             = $(byClassName("uiIconAddLabel"));
 
   public static final SelenideElement ELEMENT_INPUT_LABEL                           = $(byClassName("addLabelInput"));
 
@@ -117,9 +120,7 @@ public class TaskManagementLocator {
 
   public static final By              ELEMENT_ICON_PROJECT                          = byClassName("uiIconRightMenu");
 
-  public static final By ELEMENT_EDIT_PROJECT_OPTION                   =
-          byClassName("uiIconEdit");
-
+  public static final By              ELEMENT_EDIT_PROJECT_OPTION                   = byClassName("uiIconEdit");
 
   public static final SelenideElement ELEMENT_MENU_PROJECT                          = $(byClassName("uiDropdownWithIcon"));
 
@@ -141,8 +142,8 @@ public class TaskManagementLocator {
   // Show and Hide project
 
   // Delete project
-  public static final By ELEMENT_DELETE_PROJECT_OPTION                 =
-          byClassName("uiIconTrash");
+  public static final By              ELEMENT_DELETE_PROJECT_OPTION                 = byClassName("uiIconTrash");
+
   public static final SelenideElement ELEMENT_CONFIRM_DELETE                        =
                                                              $(byClassName("confirmDeleteProject")).find(byXpath("//*[@id=\"taskManagement\"]/div[4]/div/div[2]/div[2]/button[1]"));
   // *************************************Labels
@@ -154,25 +155,30 @@ public class TaskManagementLocator {
 
   public static final By              ELEMENT_ICON_OPEN_MENU_LABEL                  = byClassName("uiIconRightMenu");
 
-  public static final By ELEMENT_OPEN_MENU_EDIT_LABEL                  =byClassName("uiIconEdit");
+  public static final By              ELEMENT_OPEN_MENU_EDIT_LABEL                  = byClassName("uiIconEdit");
 
+  public static final By              ELEMENT_OPEN_MENU_DELETE_LABEL                = byClassName("uiIconTrash");
 
-  public static final SelenideElement ELEMENT_OPEN_MENU_DELETE_LABEL                =
-                                                                     $(byId("taskManagement")).waitUntil(Condition.appears,
-                                                                                                         Configuration.timeout)
-                                                                                              .find(byXpath("//*[@id=\"taskManagement\"]/div[1]/ul/li[3]/div[2]/ul/li[1]/div/div/ul/li[3]/a"));
-public static final SelenideElement ELEMENT_INPUT_COMMENT_TASK = $(byClassName("rightPanelContent")).find(byClassName("cke_wysiwyg_frame"));
-public static final SelenideElement ELEMENT_EDIT_ASSIGNEE = $(byClassName("editAssignee"));
-public static final SelenideElement COMMENT_INPUT_AREA = $(byXpath("/html/body"));
-public static final SelenideElement COMMENT_BUTTON = $(byId("taskCommentButton"));
-public static final SelenideElement COWORKER_INPUT_FIELD = $(byXpath("//*[@id=\"taskManagement\"]/div[3]/div[2]/div[1]/div/div[4]/div[2]/div/div/div/div[2]/div[2]/div[1]/input"));
-public static final SelenideElement COWORKER_FILED = $(byXpath("//*[@id=\"taskManagement\"]/div[3]/div[2]/div[1]/div/div[4]/div[2]/div/div/div/div[2]/div[2]/div[3]"));
-public static final SelenideElement ELEMENT_LABEL_REPLY_TASK=$(byClassName("replyCommentLink"));
-public static final String ELEMENT_VIEW_ALL_REPLIES_LINK_TASK="SubCommentShowAll_{id}";
+  public static final SelenideElement ELEMENT_INPUT_COMMENT_TASK                    =
+                                                                 $(byClassName("rightPanelContent")).find(byClassName("cke_wysiwyg_frame"));
 
+  public static final SelenideElement ELEMENT_EDIT_ASSIGNEE                         = $(byClassName("editAssignee"));
 
+  public static final SelenideElement COMMENT_INPUT_AREA                            = $(byXpath("/html/body"));
 
-  public static final SelenideElement ELEMENT_LEFT_PANEL_IN_TASK_PAGE=$(byClassName("left-menu"));
+  public static final SelenideElement COMMENT_BUTTON                                = $(byId("taskCommentButton"));
+
+  public static final SelenideElement COWORKER_INPUT_FIELD                          =
+                                                           $(byXpath("//*[@id=\"taskManagement\"]/div[3]/div[2]/div[1]/div/div[4]/div[2]/div/div/div/div[2]/div[2]/div[1]/input"));
+
+  public static final SelenideElement COWORKER_FILED                                =
+                                                     $(byXpath("//*[@id=\"taskManagement\"]/div[3]/div[2]/div[1]/div/div[4]/div[2]/div/div/div/div[2]/div[2]/div[3]"));
+
+  public static final SelenideElement ELEMENT_LABEL_REPLY_TASK                      = $(byClassName("replyCommentLink"));
+
+  public static final String          ELEMENT_VIEW_ALL_REPLIES_LINK_TASK            = "SubCommentShowAll_{id}";
+
+  public static final SelenideElement ELEMENT_LEFT_PANEL_IN_TASK_PAGE               = $(byClassName("left-menu"));
   // Add labels form
 
   // Edit labels form
