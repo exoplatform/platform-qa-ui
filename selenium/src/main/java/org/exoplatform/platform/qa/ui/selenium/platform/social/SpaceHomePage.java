@@ -44,7 +44,9 @@ public class SpaceHomePage {
       evt.click(ELEMENT_SPACE_MENU_MORE, 2);
       evt.clickByJavascript(ELEMENT_SPACE_SPACE_SETTINGS);
     } else {
-      refresh();
+      if($(ELEMENT_SPACE_SPACE_SETTINGS).is(Condition.not(Condition.visible))){
+        refresh();
+      }
       $(ELEMENT_SPACE_SPACE_SETTINGS).click();
       $(ELEMENT_SPACE_SPACE_SETTINGS_TITLE).waitUntil(Condition.appears, Configuration.timeout);
       info("Space setting page is shown");

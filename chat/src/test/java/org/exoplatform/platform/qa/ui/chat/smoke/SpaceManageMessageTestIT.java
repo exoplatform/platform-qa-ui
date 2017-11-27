@@ -104,7 +104,7 @@ public class SpaceManageMessageTestIT extends Base {
     switchTo().window(0);
     manageLogInOut.signIn(PLFData.username, PLFData.password);
     info("delete data");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
     navigationToolbar.goToManageCommunity();
     userandgroupmanagement.deleteUser(usernamea);

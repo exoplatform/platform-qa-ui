@@ -510,11 +510,12 @@ public class ForumTopicManagement {
     $(byXpath("/html/body")).sendKeys(message);
     switchTo().defaultContent();
     info("click on Attached file button");
-    $(ELEMENT_START_TOPIC_ATTACH_FILE).click();
-    File file = $(By.className("file")).uploadFromClasspath("topic_attachment.txt");
-    assertTrue(file.exists());
-    $(ELEMENT_SAVE_BTN).pressEnter();
-
+    if (fileName!="") {
+      $(ELEMENT_START_TOPIC_ATTACH_FILE).click();
+      File file = $(By.className("file")).uploadFromClasspath(fileName);
+      assertTrue(file.exists());
+      $(ELEMENT_SAVE_BTN).pressEnter();
+    }
     $(ELEMENT_SUBMIT_BUTTON).pressEnter();
     $(ELEMENT_SUBMIT_BUTTON).waitUntil(Condition.disappear, Configuration.timeout);
     info("Verify that the topic is created");
