@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
@@ -21,7 +22,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
  */
 @Tag("social")
 @Tag("sniff")
-public class InsertImageInMicroblogTestIT extends Base{
+public class InsertImageInMicroblogTestIT extends Base {
     NavigationToolbar navigationToolbar;
 
     AddUsers addUsers;
@@ -51,9 +52,9 @@ public class InsertImageInMicroblogTestIT extends Base{
         String activity = "Activity" + getRandomNumber();
         String imagePath = "data/social/Image_png.png";
         String imageName = "Image_png.png";
-        activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity,imagePath);
+        activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity, imagePath);
         homePagePlatform.goToDocuments();
-        activityStream.verifyInsertedImageExistsInDocumentApp(imageName);
+        activityStream.verifyInsertedImageInDocumentApp(imageName,true);
         homePagePlatform.goToHomePage();
         activityStream.deleteActivity(activity);
     }
@@ -63,9 +64,9 @@ public class InsertImageInMicroblogTestIT extends Base{
         String activity = "Activity" + getRandomNumber();
         String imagePath = "data/social/Image_PNG_Uppercase.PNG";
         String imageName = "Image_PNG_Uppercase.PNG";
-        activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity,imagePath);
+        activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity, imagePath);
         homePagePlatform.goToDocuments();
-        activityStream.verifyInsertedImageExistsInDocumentApp(imageName);
+        activityStream.verifyInsertedImageInDocumentApp(imageName,true);
         homePagePlatform.goToHomePage();
         activityStream.deleteActivity(activity);
     }
@@ -75,9 +76,9 @@ public class InsertImageInMicroblogTestIT extends Base{
         String activity = "Activity" + getRandomNumber();
         String imagePath = "data/social/Image_jpg.jpg";
         String imageName = "Image_jpg.jpg";
-        activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity,imagePath);
+        activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity, imagePath);
         homePagePlatform.goToDocuments();
-        activityStream.verifyInsertedImageExistsInDocumentApp(imageName);
+        activityStream.verifyInsertedImageInDocumentApp(imageName,true);
         homePagePlatform.goToHomePage();
         activityStream.deleteActivity(activity);
     }
@@ -87,9 +88,9 @@ public class InsertImageInMicroblogTestIT extends Base{
         String activity = "Activity" + getRandomNumber();
         String imagePath = "data/social/Image_JPG_Uppercase.JPG";
         String imageName = "Image_JPG_Uppercase.JPG";
-        activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity,imagePath);
+        activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity, imagePath);
         homePagePlatform.goToDocuments();
-        activityStream.verifyInsertedImageExistsInDocumentApp(imageName);
+        activityStream.verifyInsertedImageInDocumentApp(imageName,true);
         homePagePlatform.goToHomePage();
         activityStream.deleteActivity(activity);
     }
@@ -99,9 +100,9 @@ public class InsertImageInMicroblogTestIT extends Base{
         String activity = "Activity" + getRandomNumber();
         String imagePath = "data/social/Image_jpeg.jpeg";
         String imageName = "Image_jpeg.jpeg";
-        activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity,imagePath);
+        activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity, imagePath);
         homePagePlatform.goToDocuments();
-        activityStream.verifyInsertedImageExistsInDocumentApp(imageName);
+        activityStream.verifyInsertedImageInDocumentApp(imageName,true);
         homePagePlatform.goToHomePage();
         activityStream.deleteActivity(activity);
     }
@@ -111,9 +112,9 @@ public class InsertImageInMicroblogTestIT extends Base{
         String activity = "Activity" + getRandomNumber();
         String imagePath = "data/social/Image_JPEG_Uppercase.JPEG";
         String imageName = "Image_JPEG_Uppercase.JPEG";
-        activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity,imagePath);
+        activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity, imagePath);
         homePagePlatform.goToDocuments();
-        activityStream.verifyInsertedImageExistsInDocumentApp(imageName);
+        activityStream.verifyInsertedImageInDocumentApp(imageName,true);
         homePagePlatform.goToHomePage();
         activityStream.deleteActivity(activity);
     }
@@ -123,9 +124,9 @@ public class InsertImageInMicroblogTestIT extends Base{
         String activity = "Activity" + getRandomNumber();
         String imagePath = "data/social/Image_gif.gif";
         String imageName = "Image_gif.gif";
-        activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity,imagePath);
+        activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity, imagePath);
         homePagePlatform.goToDocuments();
-        activityStream.verifyInsertedImageExistsInDocumentApp(imageName);
+        activityStream.verifyInsertedImageInDocumentApp(imageName,true);
         homePagePlatform.goToHomePage();
         activityStream.deleteActivity(activity);
     }
@@ -135,9 +136,9 @@ public class InsertImageInMicroblogTestIT extends Base{
         String activity = "Activity" + getRandomNumber();
         String imagePath = "data/social/Image_GIF_Uppercase.GIF";
         String imageName = "Image_GIF_Uppercase.GIF";
-        activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity,imagePath);
+        activityStream.addActivityWithImageUsingMicroblogFromDesktop(activity, imagePath);
         homePagePlatform.goToDocuments();
-        activityStream.verifyInsertedImageExistsInDocumentApp(imageName);
+        activityStream.verifyInsertedImageInDocumentApp(imageName,true);
         homePagePlatform.goToHomePage();
         activityStream.deleteActivity(activity);
     }
@@ -147,9 +148,9 @@ public class InsertImageInMicroblogTestIT extends Base{
         String activity = "Activity" + getRandomNumber();
         String imagePath = "data/social/Image_tif.tif";
         String imageName = "Image_tif.tif";
-        activityStream.insertImageWithInvalidExtension(activity,imagePath);
+        activityStream.insertImageWithInvalidExtension(activity, imagePath);
         homePagePlatform.goToDocuments();
-        activityStream.verifyInsertedImageWinthInvalidExtensionDoNotExistInDocumentApp(imageName);
+        activityStream.verifyInsertedImageInDocumentApp(imageName,false);
         homePagePlatform.goToHomePage();
         activityStream.deleteActivity(activity);
     }
@@ -159,10 +160,22 @@ public class InsertImageInMicroblogTestIT extends Base{
         String activity = "Activity" + getRandomNumber();
         String imagePath = "data/social/Image_More_Than_200MO.png";
         String imageName = "Image_More_Than_200MO.png";
-        activityStream.insertImageWithSizeMoreThan200Mo(activity,imagePath);
+        activityStream.insertImageWithSizeMoreThan200Mo(activity, imagePath);
         homePagePlatform.goToDocuments();
-        activityStream.verifyInsertedImageWinthInvalidExtensionDoNotExistInDocumentApp(imageName);
+        activityStream.verifyInsertedImageInDocumentApp(imageName,false);
         homePagePlatform.goToHomePage();
         activityStream.deleteActivity(activity);
+    }
+
+    @Test
+    public void test11_RemoveImagefromSelectImagePopup() {
+        String activity = "Activity" + getRandomNumber();
+        String imagePath = "data/social/Image_PNG_Uppercase.PNG";
+        String imageName = "Image_PNG_Uppercase.PNG";
+        activityStream.removeImage(activity,imagePath);
+        refresh();
+        homePagePlatform.goToDocuments();
+        activityStream.verifyInsertedImageInDocumentApp(imageName,false);
+        homePagePlatform.goToHomePage();
     }
 }

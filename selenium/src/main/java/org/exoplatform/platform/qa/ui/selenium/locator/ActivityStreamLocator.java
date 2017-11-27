@@ -706,4 +706,5 @@ public final class ActivityStreamLocator {
     public static final SelenideElement ELEMENT_THIRD_USER_IN_POPUP_WHO_LIKE_COMMENT=ELEMENT_POPUP_WHO_LIKED_COMMENT.findAll(".likerName").get(2);
     public static final By ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT=byClassName("uiActionLike");
     public static final String ELEMENT_REPLY_CONTAINER="commentContainercomment{id}";
+    public static final String REMOVE_IMAGE_LINK = "//*[@id=\"{id}\"]/div[3]/a";
 }

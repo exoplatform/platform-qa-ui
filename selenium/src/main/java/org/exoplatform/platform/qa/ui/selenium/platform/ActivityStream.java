@@ -570,45 +570,36 @@ public class ActivityStream {
     $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
   }
 
-  public void verifyInsertedImageExistsInDocumentApp (String imageName) {
+  public void verifyInsertedImageInDocumentApp (String imageName,Boolean isExist) {
     String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
     String month = String.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1);
     ELEMENT_ADDRESS_BAR_ICON_VIEW.click();
     $(byText("Public")).click();
-    $(byText("Activity Stream Documents")).click();
-    $(byText("Pictures")).click();
-    $(byText(year)).click();
-    $(byText(month)).click();
-    $(byText(imageName)).should(Condition.exist);
-  }
-
-  public void verifyInsertedImageWinthInvalidExtensionDoNotExistInDocumentApp (String imageName) {
-    String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-    String month = String.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1);
-    ELEMENT_ADDRESS_BAR_ICON_VIEW.click();
-    $(byText("Public")).click();
+    if(isExist){
     if ($(byText("Activity Stream Documents")).waitUntil(Condition.visible,Configuration.timeout)!=null) {
     $(byText("Activity Stream Documents")).waitUntil(Condition.visible,Configuration.timeout).click();
     $(byText("Pictures")).waitUntil(Condition.visible,Configuration.timeout).click();
     $(byText(year)).waitUntil(Condition.visible,Configuration.timeout).click();
     $(byText(month)).waitUntil(Condition.visible,Configuration.timeout).click();
     $(byText(imageName)).shouldNot(Condition.visible);}
+  }else {
+      $(byText("Activity Stream Documents")).shouldNot(Condition.visible);
+    }
   }
 
-  public void deleteImageFromDocumentApp (String imageName) {
-    String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-    String month = String.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1);
-    ELEMENT_ADDRESS_BAR_ICON_VIEW.click();
-    $(byText("Public")).click();
-    $(byText("Activity Stream Documents")).click();
-    $(byText("Pictures")).click();
-    $(byText(year)).click();
-    $(byText(month)).click();
-    $(byText(imageName)).contextClick();
-    DELETE_BUTTON.click();
+  public void removeImage(String text, String imagePath){
+    addText(text);
+    $(byClassName("cke_button__selectimage_icon")).waitUntil(Condition.appears,Configuration.timeout).click();
+    File file = $(By.className("file")).uploadFromClasspath(imagePath);
+    assertTrue(file.exists());
+    String id = $(byClassName("selectImageBox")).getAttribute("id");
+    $(byXpath(REMOVE_IMAGE_LINK.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
+    $(byClassName("selectedImagePreview")).shouldNot(Condition.visible);
+    $(byClassName("uiActionBorder")).find(byClassName("cke_dialog_ui_hbox_last")).waitUntil(Condition.not(Condition.attribute("disabled")),Configuration.timeout);
+    $(byClassName("uiActionBorder")).find(byClassName("cke_dialog_ui_hbox_last")).click();
   }
 
-  /**
+   /**
    * Open More menu of Space menu
    */
   public void openMorelist() {
