@@ -851,9 +851,9 @@ public class SiteExplorerHome {
    */
   public void voteDocument() {
     info("Click to vote document");
-    if (evt.waitForAndGetElement(ELEMENT_ACTIONBAR_VOTE, 5000, 0) == null)
-      evt.click(ELEMENT_ACTIONBAR_MORE);
-    evt.click(ELEMENT_ACTIONBAR_VOTE);
+    if ($(ELEMENT_ACTIONBAR_VOTE).is(Condition.not(Condition.visible)))
+      $(ELEMENT_ACTIONBAR_MORE).click();
+    $(ELEMENT_ACTIONBAR_VOTE).click();
   }
 
   /**
