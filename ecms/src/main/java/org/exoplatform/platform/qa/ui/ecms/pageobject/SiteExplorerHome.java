@@ -303,7 +303,7 @@ public class SiteExplorerHome {
     Boolean verify = (Boolean) (params.length > 0 ? params[0] : true);
     $(byId("MultiUploadInputFiles")).uploadFromClasspath(link);
     $(byClassName("progress")).waitUntil(Condition.visible, Configuration.timeout);
-    $(byClassName("progress")).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    $(byClassName("progress")).waitUntil(Condition.not(Condition.visible),60000);
     refresh();
 
     info("verify:" + verify);
