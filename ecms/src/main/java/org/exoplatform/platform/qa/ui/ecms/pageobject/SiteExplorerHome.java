@@ -179,7 +179,8 @@ public class SiteExplorerHome {
     $(ELEMENT_SITEEXPLORER_ACTION_DELETE).click();
     info("Click on Delete button on Confirm popup");
     $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).click();
-    $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    refresh();
+    $(byText(title)).shouldNot(Condition.exist);
     info("Verify that the node is deleted");
     info("the node is deleted successfully");
   }
