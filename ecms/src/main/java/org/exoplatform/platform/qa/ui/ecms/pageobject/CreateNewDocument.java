@@ -215,9 +215,9 @@ public class CreateNewDocument {
    * @param url String
    */
   public void addLinkInWebContent(String url) {
-    evt.click(ELEMENT_WEBCONTENTFORM_BUTTON_LINK);
-    evt.type(ELEMENT_WEBCONTENTFORM_LINK_ADRESS, url, true);
-    evt.click(ELEMENT_WEBCONTENTFORM_LINK_OK);
+    $(ELEMENT_WEBCONTENTFORM_BUTTON_LINK).click();
+    $(ELEMENT_WEBCONTENTFORM_LINK_ADRESS).setValue(url);
+    $(ELEMENT_WEBCONTENTFORM_LINK_OK).click();
   }
 
   /**

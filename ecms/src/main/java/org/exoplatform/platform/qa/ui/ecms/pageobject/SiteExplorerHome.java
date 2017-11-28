@@ -301,13 +301,10 @@ public class SiteExplorerHome {
    */
   public void uploadFile(String link, Object... params) {
     Boolean verify = (Boolean) (params.length > 0 ? params[0] : true);
-    if (evt.waitForAndGetElement(ELEMENT_UPLOAD_BUTTON, testBase.getDefaultTimeout(), 0) == null) {
-      evt.click(ELEMENT_MORE_LINK_WITHOUT_BLOCK);
-    }
-
-    evt.click(ELEMENT_UPLOAD_LINK);
-    MFTB.uploadFileUsingRobot(link);
-    // waitForElementNotPresent(ELEMENT_UPLOAD_PROGRESS_BAR);
+    $(byId("MultiUploadInputFiles")).uploadFromClasspath(link);
+    $(byClassName("progress")).waitUntil(Condition.visible, Configuration.timeout);
+    $(byClassName("progress")).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    refresh();
 
     info("verify:" + verify);
     if (verify) {
@@ -441,8 +438,9 @@ public class SiteExplorerHome {
    * Go to space
    */
   public void goToSpace(String spaceName) {
-    evt.click(ELEMENT_ACTIONBAR_SHOWDRIVES);
-    evt.click(By.xpath((ELEMENT_SELECTDRIVE_SPECIFICDRIVE).replace("${spaceName}", spaceName)));
+    $(ELEMENT_ACTIONBAR_SHOWDRIVES).click();
+    $(byXpath(ELEMENT_SELECTDRIVE_SPECIFICDRIVE.replace("${spaceName}", spaceName))).click();
+    $(ELEMENT_ACTIONBAR_SHOWDRIVES).waitUntil(Condition.have(Condition.text(spaceName)),Configuration.timeout);
   }
 
   /**
