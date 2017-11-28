@@ -47,14 +47,14 @@ public class Base extends TestBase {
 
   @BeforeAll
   public static void setup() {
-
+    Configuration.browserSize = "1366x768";
+    Configuration.pageLoadStrategy = "normal";
   }
 
   @BeforeEach
   public void beforeEach(TestInfo testInfo) {
     // Set context from better naming of screenshots in case of test failure
     Screenshots.startContext(testInfo.getTestClass().get().getName(), testInfo.getTestMethod().get().getName());
-    Configuration.pageLoadStrategy = "normal";
     openPlatform(testInfo);
 
   }
