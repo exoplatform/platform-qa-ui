@@ -137,6 +137,7 @@ public class SiteExplorerHome {
     info("The folder is created successfully");
   }
 
+
   /**
    * Go to New content page
    */
@@ -309,7 +310,7 @@ public class SiteExplorerHome {
     Boolean verify = (Boolean) (params.length > 0 ? params[0] : true);
     $(byId("MultiUploadInputFiles")).uploadFromClasspath(link);
     $(byClassName("progress")).waitUntil(Condition.visible, Configuration.timeout);
-    $(byClassName("progress")).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    $(byClassName("progress")).waitUntil(Condition.not(Condition.visible),60000);
     refresh();
 
     info("verify:" + verify);
@@ -494,9 +495,10 @@ public class SiteExplorerHome {
    */
   public void goToPermission() {
     info("Click on More link on Action bar");
-    evt.click(ELEMENT_ACTIONBAR_MORE);
+    if($(ELEMENT_ACTIONBAR_PERMISSION).is(Condition.not(Condition.visible)))
+    $(ELEMENT_ACTIONBAR_MORE).click();
     info("Click on Permission on Action bar");
-    evt.click(ELEMENT_ACTIONBAR_PERMISSION);
+    $(ELEMENT_ACTIONBAR_PERMISSION).click();
     info("Finished opening permission popup");
   }
 
@@ -933,13 +935,14 @@ public class SiteExplorerHome {
   public void viewMetadata() {
     info("View Metadata");
     info("Click on More link");
-    evt.click(ELEMENT_ACTIONBAR_MORE);
+    if ( $(ELEMENT_ACTIONBAR_METADATA).is(Condition.not(Condition.visible)))
+    $(ELEMENT_ACTIONBAR_MORE).click();
     info("Click on Metadata link");
-    evt.click(ELEMENT_ACTIONBAR_METADATA);
+    $(ELEMENT_ACTIONBAR_METADATA).click();
     info("Verify that View metadata popup is shown");
-    evt.waitForAndGetElement(ELEMENT_METADATA_POPUP);
+    $(ELEMENT_METADATA_POPUP).waitUntil(Condition.visible,Configuration.timeout);
     info("Close the popup");
-    evt.click(ELEMENT_METADATA_POPUP_CANCEL);
+    $(ELEMENT_METADATA_POPUP_CANCEL).click();
     info("Metadata popup is shown successfully");
   }
 
