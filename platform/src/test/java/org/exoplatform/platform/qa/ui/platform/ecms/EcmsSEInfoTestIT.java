@@ -59,7 +59,81 @@ public class EcmsSEInfoTestIT extends Base {
    * action on it as his rights
    */
   @Test
-  public void test01_02_03_AddEditDeletePermission() {
+  public void test01_AddPermission() {
+    info("Test 1: Add Permission");
+    info("Get data test");
+    String node1 = "node1" + getRandomNumber();
+    String folderType = "Content Folder";
+    info("Finished getting data test");
+    navigationToolbar.goToSiteExplorer();
+    siteExplorerHome.goToAddNewFolder();
+    info("Add permisison for a node");
+    // Create node1, node2
+    siteExplorerHome.createFolder(node1, folderType);
+    siteExplorerHome.selectNode(node1);
+    // Add permission "read", "write" for mary
+    siteExplorerHome.goToPermission();
+    ecms_permission.deletePermissionNode("mary");
+    ecms_permission.changeRight("user", "Mary", true, true, false, "");
+    ecms_permission.closePermission();
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    navigationToolbar.goToSiteExplorer();
+    // Check if mary has edit, read on node1
+    siteExplorerHome.selectNode(node1);
+    // Delete data
+    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    navigationToolbar.goToSiteExplorer();
+    info("Test 02: Edit Permission");
+    siteExplorerHome.selectNode(node1);
+    siteExplorerHome.goToPermission();
+    ecms_permission.changeRight("user", "Mary", false, false, true, "");
+    $(By.xpath("//*[@checked='' and @name='maryremove']/..")).waitUntil(Condition.visible, Configuration.timeout);
+    info("Test 03: Delete Permission");
+    ecms_permission.deletePermissionNode("mary");
+    ecms_permission.closePermission();
+    info("Delete data test");
+    siteExplorerHome.deleteData(node1);
+  }
+
+  @Test
+  public void test02_EditPermission() {
+    info("Test 1: Add Permission");
+    info("Get data test");
+    String node1 = "node1" + getRandomNumber();
+    String folderType = "Content Folder";
+    info("Finished getting data test");
+    navigationToolbar.goToSiteExplorer();
+    siteExplorerHome.goToAddNewFolder();
+    info("Add permisison for a node");
+    // Create node1, node2
+    siteExplorerHome.createFolder(node1, folderType);
+    siteExplorerHome.selectNode(node1);
+    // Add permission "read", "write" for mary
+    siteExplorerHome.goToPermission();
+    ecms_permission.deletePermissionNode("mary");
+    ecms_permission.changeRight("user", "Mary", true, true, false, "");
+    ecms_permission.closePermission();
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    navigationToolbar.goToSiteExplorer();
+    // Check if mary has edit, read on node1
+    siteExplorerHome.selectNode(node1);
+    // Delete data
+    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    navigationToolbar.goToSiteExplorer();
+    info("Test 02: Edit Permission");
+    siteExplorerHome.selectNode(node1);
+    siteExplorerHome.goToPermission();
+    ecms_permission.changeRight("user", "Mary", false, false, true, "");
+    $(By.xpath("//*[@checked='' and @name='maryremove']/..")).waitUntil(Condition.visible, Configuration.timeout);
+    info("Test 03: Delete Permission");
+    ecms_permission.deletePermissionNode("mary");
+    ecms_permission.closePermission();
+    info("Delete data test");
+    siteExplorerHome.deleteData(node1);
+  }
+
+  @Test
+  public void test_03DeletePermission() {
     info("Test 1: Add Permission");
     info("Get data test");
     String node1 = "node1" + getRandomNumber();
