@@ -82,11 +82,11 @@ public class ActivityStream {
    */
   public void checkActivityAddFile(String title) {
     info("Verify that the file's title is shown");
-    evt.waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_FILE_TITLE.replace("{$title}", title)));
+   $(byXpath(ELEMENT_ACTIVITY_FILE_TITLE.replace("{$title}", title))).waitUntil(Condition.visible,Configuration.timeout);
     info("Verify that file's icon is shown");
-    evt.waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_FILE_CHECK_ICON_FILE.replace("{$title}", title)));
+    $(byXpath(ELEMENT_ACTIVITY_FILE_CHECK_ICON_FILE.replace("{$title}", title))).waitUntil(Condition.visible,Configuration.timeout);
     info("Verify that file's size is shown");
-    evt.waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_FILE_TITLE_CHECK_FILE_SIZE.replace("{$title}", title)));
+    $(byXpath(ELEMENT_ACTIVITY_FILE_TITLE_CHECK_FILE_SIZE.replace("{$title}", title))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -240,11 +240,11 @@ public class ActivityStream {
     if (status == null)
       status = "Draft";
     // check icon and title
-    evt.waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_WEBCONTENT_TITLE.replace("${title}", title)));
-    evt.waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_WEBCONTENT_CHECK_VERSION.replace("${title}", title).replace("{$version}",
-                                                                                                                   version)));
-    evt.waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_WEBCONTENT_CHECK_STATUS.replace("${title}", title).replace("{$status}",
-                                                                                                                  status)));
+    $(byXpath(ELEMENT_ACTIVITY_WEBCONTENT_TITLE.replace("${title}", title))).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_ACTIVITY_WEBCONTENT_CHECK_VERSION.replace("${title}", title).replace("{$version}",
+            version))).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_ACTIVITY_WEBCONTENT_CHECK_STATUS.replace("${title}", title).replace("{$status}",
+            status))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
