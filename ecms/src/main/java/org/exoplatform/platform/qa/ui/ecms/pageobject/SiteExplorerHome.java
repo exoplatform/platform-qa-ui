@@ -446,7 +446,7 @@ public class SiteExplorerHome {
     info("Go to type " + type);
     switch (type) {
     case ALPHABETICAL:
-      evt.select(ELEMENT_DRIVERSETTINGS_SORTBY, "Alphabetical");
+      $(ELEMENT_DRIVERSETTINGS_SORTBY).selectOption("Alphabetical");
       break;
 
     case TYPE:
@@ -458,22 +458,22 @@ public class SiteExplorerHome {
       break;
 
     case MODIFIEDDATE:
-      evt.select(ELEMENT_DRIVERSETTINGS_SORTBY, "Modified Date");
+      $(ELEMENT_DRIVERSETTINGS_SORTBY).selectOption("Modified Date");
       break;
     }
 
     info("Go to type " + order);
     switch (order) {
     case ASCENDING:
-      evt.select(ELEMENT_DRIVERSETTINGS_ORDER, "Ascending");
+      $(ELEMENT_DRIVERSETTINGS_ORDER).selectOption("Ascending");
       break;
 
     case DESCENDING:
-      evt.select(ELEMENT_DRIVERSETTINGS_ORDER, "Descending");
+      $(ELEMENT_DRIVERSETTINGS_ORDER).selectOption("Descending");
       break;
     }
 
-    evt.click(ELEMENT_DRIVERSETTINGS_SAVE);
+    $(ELEMENT_DRIVERSETTINGS_SAVE).click();
   }
 
   /**
