@@ -185,16 +185,10 @@ public class CalendarCalendarTestIT extends Base {
     homePagePlatform.goToCalendarPage();
     calendarManagement.openMenuOfCalendar(newCalendar);
     $(ELEMENT_CALENDAR_REMOVE_SHARE_CALENDAR).should(Condition.visible);
-    ;
     $(ELEMENT_CALENDAR_IMPORT_MENU).should(Condition.visible);
-    ;
     $(ELEMENT_CALENDAR_EXPORT_MENU).should(Condition.visible);
-    ;
     $(ELEMENT_CALENDAR_REFRESH_MENU).should(Condition.visible);
-    ;
     $(ELEMENT_CALENDAR_ADD_EVENT_MENU).should(Condition.visible);
-    ;
-
     info("Clear data");
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     homePagePlatform.goToCalendarPage();
