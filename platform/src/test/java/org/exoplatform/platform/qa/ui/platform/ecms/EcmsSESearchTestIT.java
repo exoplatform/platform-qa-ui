@@ -7,6 +7,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
@@ -22,6 +23,8 @@ import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 
+@Tag("ecms")
+@Tag("sniff")
 public class EcmsSESearchTestIT extends Base {
   NavigationToolbar navigationToolbar;
 
