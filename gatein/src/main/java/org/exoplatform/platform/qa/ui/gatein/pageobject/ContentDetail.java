@@ -1,9 +1,10 @@
 package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_CONTENT_DETAIL_ADDPATH_BTN;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_SELECT_CONTENT_POPUP_FILE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_SELECT_CONTENT_POPUP_NODE_FOLDER;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -29,17 +30,13 @@ public class ContentDetail {
    * @param content String
    */
   public void selectFolderContent(String path, String content) {
-    evt.waitForAndGetElement(ELEMENT_CONTENT_DETAIL_ADDPATH_BTN);
-    $(byClassName("uiIconAddPath")).waitUntil(Condition.appears, Configuration.timeout).click();
+    $(byClassName("uiIconAddPath")).click();
     String[] arrayPath = path.split("/");
     for (String arrayElement : arrayPath) {
-      $(byText("Name")).click();
-      $(byText(arrayElement)).click();
-
+      $(byId("LeftWorkspace")).find(byText(arrayElement)).click();
     }
     if (content != "" || content != null) {
-
-      $(byClassName("Item")).click();
+      $(byXpath(ELEMENT_SELECT_CONTENT_POPUP_FILE.replace("${content}", content))).waitUntil(Condition.visible,Configuration.timeout).click();
     }
   }
 

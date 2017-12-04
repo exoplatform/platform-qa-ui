@@ -507,10 +507,8 @@ public class SiteExplorerHome {
    */
   public void selectNode(String nodeName) {
     info("Verify that nodeName:" + nodeName + " is shown");
-
-    $(byText(nodeName)).waitUntil(Condition.appears, Configuration.timeout);
     info("Click on the nodeName:" + nodeName);
-    $(byText(nodeName)).click();
+    ELEMENT_CONTENT_LIST.find(byText(nodeName)).waitUntil(Condition.appears, Configuration.timeout).click();
     info("Finished selecting nodeName:" + nodeName);
   }
 
@@ -884,8 +882,8 @@ public class SiteExplorerHome {
    * Go to publication
    */
   public void goToPublication() {
-    evt.click(ELEMENT_ACTIONBAR_MORE);
-    evt.click(ELEMENT_ACTIONBAR_PUBLICATION);
+    $(ELEMENT_ACTIONBAR_MORE).click();
+    $(ELEMENT_ACTIONBAR_PUBLICATION).click();
   }
 
   /**
@@ -916,6 +914,7 @@ public class SiteExplorerHome {
   public void changeStatusPulication(String status) {
     $(byXpath(ELEMENT_PUBLICATION_STATUS.replace("${status}", status))).waitUntil(Condition.visible,Configuration.timeout);
     $(byXpath(ELEMENT_PUBLICATION_STATUS.replace("${status}", status))).click();
+    $(Button.ELEMENT_CLOSE_BUTTON).click();
 
   }
 

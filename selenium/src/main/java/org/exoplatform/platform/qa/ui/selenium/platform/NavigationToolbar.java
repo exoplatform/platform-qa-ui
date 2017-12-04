@@ -250,10 +250,9 @@ public class NavigationToolbar {
    */
   public void goToUnEditContent() {
     info("Go to un Edit content");
-    evt.waitForAndGetElement(ELEMENT_LINK_EDIT);
-    evt.click(ELEMENT_LINK_EDIT);
-    if (evt.waitForAndGetElement(ELEMENT_EDIT_CONTENT_CHECK, 5000, 0) != null)
-      evt.click(ELEMENT_EDIT_CONTENT_CHECK);
+    $(ELEMENT_LINK_EDIT).waitUntil(Condition.visible,Configuration.timeout).click();
+    if ($(ELEMENT_EDIT_CONTENT_CHECK).is(Condition.visible))
+      $(ELEMENT_EDIT_CONTENT_CHECK).click();
   }
 
   /**
