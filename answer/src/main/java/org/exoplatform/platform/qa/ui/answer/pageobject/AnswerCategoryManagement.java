@@ -142,7 +142,7 @@ public class AnswerCategoryManagement {
       break;
     case SUBMITQUESTION:
       info("SUBMITQUESTION category");
-      ELEMENT_LIST_CATEGORIE.find(byLinkText(" " + cat)).parent().find(ELEMENT_ICON_SUBMIT_QUESTION).click();
+      ELEMENT_LIST_CATEGORIE.find(byLinkText(" " + cat)).parent().parent().find(ELEMENT_ICON_SUBMIT_QUESTION).click();
       $(ELEMENT_SUBMIT_QUESTION_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case RSS:

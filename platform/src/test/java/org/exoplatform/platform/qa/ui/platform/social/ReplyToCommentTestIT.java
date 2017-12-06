@@ -103,7 +103,7 @@ public class ReplyToCommentTestIT extends Base {
         activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
         refresh();
         executeJavaScript("window.scrollBy(0,-2000)", "");
-        activityStream.deleteActivity(activity);
+        activityStream.deleteactivity(activity);
         executeJavaScript("window.scrollBy(0,-2000)", "");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
@@ -129,7 +129,7 @@ public class ReplyToCommentTestIT extends Base {
         activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
         activityStream.deleteReplyInAS(reply);
         executeJavaScript("window.scrollBy(0,-2000)", "");
-        activityStream.deleteActivity(activity);
+        activityStream.deleteactivity(activity);
         executeJavaScript("window.scrollBy(0,-2000)", "");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
@@ -169,7 +169,7 @@ public class ReplyToCommentTestIT extends Base {
         assertEquals($(byText(reply1)).parent().parent().parent().parent().getAttribute("data-parent-comment"), comment_parent_id);
         assertEquals($(byText(reply2)).parent().parent().parent().parent().getAttribute("data-parent-comment"), comment_parent_id);
         assertEquals($(byText(reply3)).parent().parent().parent().parent().getAttribute("data-parent-comment"), comment_parent_id);
-        activityStream.deleteActivity(activity);
+        activityStream.deleteactivity(activity);
         executeJavaScript("window.scrollBy(0,-2000)", "");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
@@ -211,7 +211,7 @@ public class ReplyToCommentTestIT extends Base {
                 .split("commentContainercomment")[1];
         $(byId(ELEMENT_VIEW_ALL_REPLIES_LINK.replace("{id}", idBlocComment))).waitUntil(Condition.appears, Configuration.timeout).shouldHave(Condition.text("4"));
         executeJavaScript("window.scrollBy(0,-2000)", "");
-        activityStream.deleteActivity(activity);
+        activityStream.deleteactivity(activity);
         executeJavaScript("window.scrollBy(0,-2000)", "");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
@@ -241,7 +241,7 @@ public class ReplyToCommentTestIT extends Base {
         $(byText(reply1)).waitUntil(Condition.appears, Configuration.timeout);
         $(byText(reply2)).waitUntil(Condition.appears, Configuration.timeout);
         executeJavaScript("window.scrollBy(0,-2000)", "");
-        activityStream.deleteActivity(activity);
+        activityStream.deleteactivity(activity);
         executeJavaScript("window.scrollBy(0,-2000)", "");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
@@ -272,7 +272,7 @@ public class ReplyToCommentTestIT extends Base {
         activityStream.replyToReply(activity, reply, replytoreply);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
-        activityStream.deleteActivity(activity);
+        activityStream.deleteactivity(activity);
         executeJavaScript("window.scrollBy(0,-2000)", "");
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
@@ -306,7 +306,7 @@ public class ReplyToCommentTestIT extends Base {
         $(byText(replytoreply)).shouldNot(Condition.exist);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
-        activityStream.deleteActivity(activity);
+        activityStream.deleteactivity(activity);
         homePagePlatform.goToConnections();
         connectionsManagement.removeConnection(DATA_USER2);
     }

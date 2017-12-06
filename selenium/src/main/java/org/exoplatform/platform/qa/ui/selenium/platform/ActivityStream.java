@@ -895,7 +895,7 @@ public class ActivityStream {
    *
    * @param name String
    */
-  public void deleteactivity(String name) {
+  public void deleteActivity(String name) {
     info("remove activity");
     int repeat = 0;
     while (evt.waitForAndGetElement(ELEMENT_ACTIVITY_BOX.replace("${name}", name), 3000, 0) != null) {
@@ -1023,7 +1023,7 @@ public class ActivityStream {
     $(byText(comment)).should(Condition.exist);
   }
 
-  public void deleteActivity(String activity) {
+  public void deleteactivity(String activity) {
     // get the id of activity created
     String id = $(byText(activity)).parent()
                                    .parent()

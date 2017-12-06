@@ -93,7 +93,7 @@ public class AnswerLocator {
   public static final By              ELEMENT_ATTACHMENT_SAVE_BUTTON                        =
 
           By.xpath("//*[@id='FAQImportForm']//*[text()='Save']");
-  public static final String          ELEMENT_IMPORT_SUCCESS_MESSAGE                        = "The file has been imported";
+  public static final String          ELEMENT_IMPORT_SUCCESS_MESSAGE                        = "The file has been imported.";
   public static final By              ELEMENT_CATEGORY_OK_BUTTON                            =
           By.xpath("//*[contains(@class,'UIPopupWindow')]//a[text()='OK']");
   // Delete category
