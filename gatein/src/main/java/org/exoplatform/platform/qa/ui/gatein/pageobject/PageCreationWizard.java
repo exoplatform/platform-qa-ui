@@ -156,8 +156,7 @@ public class PageCreationWizard {
    * @param content String
    */
   public void addContentListByContent(String path, String content) {
-     addApplication($(ELEMENT_APPLICATION_CONTENT_TAB),
-    $(ELEMENT_APPLICATION_CONTENT_LIST));
+
     $(ELEMENT_PAGEEDITOR_VIEWPAGE).hover();
     $(ELEMENT_CONTENT_LIST_EDIT_BTN).click();
     evt.check(ELEMENT_CONTENT_LIST_BY_CONTENT_MODE, 2);

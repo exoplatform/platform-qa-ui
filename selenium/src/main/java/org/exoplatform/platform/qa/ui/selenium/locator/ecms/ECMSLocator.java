@@ -223,14 +223,14 @@ public class ECMSLocator {
   public static final By              ELEMENT_SEO_DELETE                                                   =
                                                          By.xpath("//*[@title='Delete']");
 
-  public static final By              ELEMENT_SEO_HELPDESC                                                 =
-                                                           By.xpath("//*[text()='Description: ']/..//*[@id='DescriptionHelp']");
+  public static final SelenideElement              ELEMENT_SEO_HELPDESC                                                 =
+          $(byId("description")).parent().find(byClassName("uiIconQuestion"));
 
-  public static final By              ELEMENT_SEO_HELPKEYWORD                                              =
-                                                              By.xpath("//*[text()='Keywords: ']/..//*[@id='DescriptionHelp']");
+  public static final SelenideElement              ELEMENT_SEO_HELPKEYWORD                                              =
+          $(byId("keywords")).parent().find(byClassName("uiIconQuestion"));
 
-  public static final By              ELEMENT_SEO_HELPPRIORITY                                             =
-                                                               By.xpath("//*[@id='PriorityHelp']");
+  public static final SelenideElement              ELEMENT_SEO_HELPPRIORITY                                             =
+          $(byId("priority")).parent().find(byClassName("uiIconQuestion"));
 
   public static final By              ELEMENT_SEO_HELP_POPOVER                                             =
                                                                By.xpath("//*[@class='popover-content']");

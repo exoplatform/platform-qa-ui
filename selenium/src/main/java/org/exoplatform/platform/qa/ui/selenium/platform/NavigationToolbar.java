@@ -230,8 +230,7 @@ public class NavigationToolbar {
     info("Hover over on Page link");
     evt.mouseOver(ELEMENT_MENU_PAGE_LINK, true);
     info("Click on Seo Menu");
-    WebElement seoMenu = evt.waitForAndGetElement(ELEMENT_MENU_SEO_LINK, 10000, 1, 2);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].evt.click()", seoMenu);
+    $(ELEMENT_MENU_SEO_LINK).click();
 
   }
 

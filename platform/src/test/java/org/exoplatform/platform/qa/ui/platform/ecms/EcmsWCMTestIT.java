@@ -3,28 +3,26 @@ package org.exoplatform.platform.qa.ui.platform.ecms;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.CreateNewDocument;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.SiteExplorerHome;
-import org.exoplatform.platform.qa.ui.gatein.pageobject.NavigationManagement;
-import org.exoplatform.platform.qa.ui.gatein.pageobject.PageCreationWizard;
-import org.exoplatform.platform.qa.ui.gatein.pageobject.PortalManagePages;
-import org.exoplatform.platform.qa.ui.gatein.pageobject.PortalManageSites;
+import org.exoplatform.platform.qa.ui.gatein.pageobject.*;
+import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -43,6 +41,8 @@ public class EcmsWCMTestIT extends Base {
 	PortalManagePages portalManagePages;
 	NavigationManagement navigationManagement;
 	ManageLogInOut manageLogInOut;
+	ContentList contentList;
+	ManageAlert manageAlert;
 	@BeforeEach
 	public void setupBeforeMethod() {
 		info("Start setUpBeforeMethod");
@@ -53,6 +53,8 @@ public class EcmsWCMTestIT extends Base {
 	portalManageSites=new PortalManageSites(this);
 	portalManagePages=new PortalManagePages(this);
 	navigationManagement=new NavigationManagement(this);
+	contentList=new ContentList(this);
+	manageAlert=new ManageAlert(this);
 	manageLogInOut=new ManageLogInOut(this);
 	manageLogInOut.signInCas(PLFData.DATA_USER1,"gtngtn");
 
@@ -277,4 +279,302 @@ public class EcmsWCMTestIT extends Base {
 		portalManagePages.deletePage(content,"");
 
 	}
+	/**
+	 *<li> Case ID:116612.</li>
+	 *<li> Test Case Name: Edit Content List Viewer page with mode "By Contents".</li>
+	 *<li> Pre-Condition: </li>
+	 *<li> Post-Condition: </li>
+	 Step Number: 1
+		 *Step Name: -
+		 *Step Description:
+			Step 1: Create new Content List Viewer page with mode "By Contents"
+		 *Input Data:
+			- Login acme by admin/web contributor
+			- Go to content explorer, add some web contents Sites Management/acme/web contents (or documents folder)
+			- Go to acme home page, click Edit/ Page/Add Page to create new page. +
+			 Fill node name+ Next+ Next + Drag and drop Content/Content list portlet from page editor+
+			 Click edit portlet icon of this Content list portlet+
+			 Choose By Contents option+ Click [Select folder path] icon to some web contents/documents that you want to view+
+			 Click [Save] button in Multiple content selector panel+
+			 Click [Save] button in Content list viewer configuration form+
+			 Click [Close] button inContent list viewer configuration form
+			-Click Finish icon in Page editor
+		 *Expected Outcome:
+			All selected web content/documents are displayed as list in List Content Viewer page
+	Step number: 2
+		 *Step Name:
+		 *Step Description:
+			Step 2: Edit Content List Viewer page with mode "By Contents"
+		 *Input Data:
+			- Open CLV above
+			- Click Edit/ Page/Page Layout to edit page +
+			Click edit portlet icon of this Content list portlet+
+			Choose By Contents option+ Click [Select folder path] icon to some web contents/documents that you want to view+
+			Click [Save] button in Multiple content selector panel+
+			Click [Save] button in Content list viewer configuration form+
+			Click [Close] button inContent list viewer configuration form
+			-Click Finish icon in Page editor
+		 *Expected Outcome:
+			All selected web content/documents you've chosen are displayed as list in List Content Viewer page*/
+	@Test
+	public  void test08_EditContentListViewerPageWithModeByContents() {
+		info("Test 8: Edit Content List Viewer page with mode By Contents");
+		String title ="title"+getRandomNumber();
+		String content1 = "content1"+getRandomNumber();
+		String content2 = "content2"+getRandomNumber();
+		navigationToolbar.goToSiteExplorer();
+		siteExplorerHome.goToPath("intranet", "Site Management");
+		info("Create webcontent1");
+		siteExplorerHome.goToAddNewContent();
+		createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
+		createNewDocument.addNewWebContent(content1 ,content1);
+		createNewDocument.saveAndClose();
+		siteExplorerHome.verifyContentCreatedSuccessfully(content1);
+		info("Select acme folder");
+		siteExplorerHome.selectNode("intranet");
+		info("Create webcontent2");
+		siteExplorerHome.goToAddNewContent();
+		createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
+		createNewDocument.addNewWebContent(content2,content2);
+		createNewDocument.saveAndClose();
+		siteExplorerHome.verifyContentCreatedSuccessfully(content2);
+		navigationToolbar.goToAddPage();
+		pageCreationWizard.inputPageInfoStep1(title, true, "English",title, true,false);
+		click(ELEMENT_ADDNEWPAGE_BTNNEXT);
+		click(ELEMENT_ADDNEWPAGE_BTNNEXT);
+		pageCreationWizard.addApplication($(ELEMENT_APPLICATION_CONTENT_TAB),$(byId("Content/portlet_ContentListViewerPortlet")));
+		pageCreationWizard.addContentlistByFolder("General Drives/Sites Management","intranet");
+		navigationToolbar.goToEditContent();
+		//Verify that all webcontents are shown in Content list View page
+		$(byXpath(ELEMENT_CONTENT_LIST_CONTENT_TITLE.replace("${title}",content1))).waitUntil(Condition.visible,Configuration.timeout);
+		$(byXpath(ELEMENT_CONTENT_LIST_CONTENT_TITLE.replace("${title}",content2))).waitUntil(Condition.visible,Configuration.timeout);
+		$(ELEMENT_EDIT_CLV).hover();
+		$(ELEMENT_EDIT_PREFERENCE).click();
+		check(ELEMENT_CONTENT_LIST_BY_CONTENT_MODE, 2);
+		contentList.selectFolderContent("General Drives/Sites Management/intranet",content1);
+		$(ELEMENT_MULTIPLE_CONTENT_POPUP_SAVE_BTN).click();
+		$(ELEMENT_CONTENT_LIST_PREFERENCE_SAVE_BTN).click();
+		//Verify that all webcontents are shown in Content list View page
+		$(byXpath(ELEMENT_CONTENT_LIST_CONTENT_TITLE.replace("${title}",content1))).waitUntil(Condition.visible,Configuration.timeout);
+		$(byXpath(ELEMENT_CONTENT_LIST_CONTENT_TITLE.replace("${title}",content2))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+		info("Delete create files");
+		navigationToolbar.goToSiteExplorer();
+		siteExplorerHome.deleteData(content1, true);
+		siteExplorerHome.deleteData(content2, true);
+		info("Delete created page");
+		navigationToolbar.goToPotalPages();
+		portalManagePages.deletePage(title,"");
+
+	}
+	/**
+	 *<li> Case ID:116613.</li>
+	 *<li> Test Case Name: Edit Content List viewer page with mode "By Folder".</li>
+	 *<li> Pre-Condition: </li>
+	 *<li> Post-Condition: </li>
+	 *Step Number: 1
+	 *Step Name: -
+	 *Step Description:
+	 Step 1: Create new Content List viewer page with mode "By Content"
+	 *Input Data:
+	 - Login acme by admin/web contributor
+	 - Go to content explorer, add some web contents Sites Management/acme/web contents (or documents folder)
+	 - Go to acme home page, select Edit/ Page/Add Page to create new page. + Fill node name+ Next+ Next + Drag and drop Content/Content list portlet from page editor+ Click edit portlet icon of this Content list portlet+ Choose By Folder option+ Click [Select folder path] icon to some folder that you want to view+ Click [Save] button in Multiple content selector panel+ Click [Save] button in Content list viewer configuration form+ Click [Close] button inContent list viewer configuration form
+	 -Click Finish icon in Page editor
+	 *Expected Outcome:
+	 - All web contents/documents in selected folder are listed in Content List Viewer portlet in this page
+	*Step number: 2
+		 *Step Name:
+		 *Step Description:
+			Step 2: Edit Content List viewer page with mode "By Folder"
+		 *Input Data:
+			- Open CLV above
+			- Click Edit/ Page/Page Layout to edit page+ Click edit portlet icon of this Content list portlet+ Choose By Folder option+ Click [Select folder path] icon to some folder that you want to view+ Click [Save] button in Multiple content selector panel+ Click [Save] button in Content list viewer configuration form+ Click [Close] button inContent list viewer configuration form
+			-Click Finish icon in Page editor
+		 *Expected Outcome:
+			- All web contents/documents in selected folder are listed in Content List Viewer portlet in this page*/
+
+	@Test
+	public  void test09_EditContentListViewerPageWithModeByFolder() {
+		info("Test 9: Edit Content List viewer page with mode By Folder");
+		String title = "title"+getRandomNumber();
+		String content1 = "content1"+getRandomNumber();
+		String content2 = "content2"+getRandomNumber();
+
+
+		navigationToolbar.goToSiteExplorer();
+		siteExplorerHome.goToPath("intranet", "Site Management");
+
+		info("Create webcontent1");
+		siteExplorerHome.goToAddNewContent();
+		createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
+		createNewDocument.addNewWebContent(content1 ,content1);
+		createNewDocument.saveAndClose();
+		siteExplorerHome.verifyContentCreatedSuccessfully(content1);
+
+		info("Select acme folder");
+		siteExplorerHome.selectNode("intranet");
+
+		info("Create webcontent2");
+		siteExplorerHome.goToAddNewContent();
+		createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
+		createNewDocument.addNewWebContent(content2 ,content2);
+		createNewDocument.saveAndClose();
+		siteExplorerHome.verifyContentCreatedSuccessfully(content2);
+		navigationToolbar.goToAddPage();
+		pageCreationWizard.inputPageInfoStep1(title, true, "English",title, true,false);
+		$(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
+		$(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
+		pageCreationWizard.addApplication($(ELEMENT_APPLICATION_CONTENT_TAB),$(byId("Content/portlet_ContentListViewerPortlet")));
+		pageCreationWizard.addContentListByContent("General Drives/Sites Management/intranet",content1);
+
+		navigationToolbar.goToEditContent();
+		ELEMENT_LIST_CONTENT.find(byText(content1)).waitUntil(Condition.visible,Configuration.timeout);
+		ELEMENT_LIST_CONTENT.find(byText(content2)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+		$(ELEMENT_EDIT_CLV).hover();
+		$(ELEMENT_EDIT_PREFERENCE).click();
+		check(ELEMENT_CONTENT_LIST_BY_FOLDER_MODE, 2);
+		contentList.selectFolderContent("General Drives/Sites Management","intranet");
+		click(ELEMENT_CONTENT_LIST_PREFERENCE_SAVE_BTN);
+		ELEMENT_LIST_CONTENT.find(byText(content1)).waitUntil(Condition.visible,Configuration.timeout);
+		ELEMENT_LIST_CONTENT.find(byText(content2)).waitUntil(Condition.visible,Configuration.timeout);
+		info("Delete created files");
+		navigationToolbar.goToSiteExplorer();
+		siteExplorerHome.deleteData(content1, true);
+		siteExplorerHome.deleteData(content2, true);
+		info("Delete created page");
+		navigationToolbar.goToPotalPages();
+		portalManagePages.deletePage(title,"");
+
+	}
+	/**
+	 * <li>Case ID:116614.</li>
+	 * <li>Test Case Name: Edit Single Content Viewer page.</li>
+	 * <li>Pre-Condition:</li>
+	 * <li>Post-Condition:</li>
+	 */
+	/*
+     * Step Number: 1 Step Name: Step 1: Create Single Content Viewer page Step
+     * Description: - Login acme by Admin/Web contributor - Choose Edit/Page/Add
+     * Page+ Fill name+ Next+ Next+ Drag and drop Content/ Content Detail portlet to
+     * this Page+ Click Edit icon to edit this porlet+ Select [Content Path] where
+     * stores these web contents/documents+ Click icon in Action column in the right
+     * to select one of them+ Click Save+ Click Close+ Click Finish icon in page
+     * editor Input Data: Expected Outcome: - The selected web content/document is
+     * displayed
+     */
+	 /*
+     * Step number: 2 Step Name: Step 2: Edit Single Content Viewer page Step
+     * Description: - Login acme by Admin/Web contributor - Open page above - Click
+     * Edit/ Page/ Page Layout+ Click Edit icon to edit this porlet+ Select [Content
+     * Path] where stores these web contents/documents+ Click icon in Action column
+     * in the right to select one of them+ Click Save+ Click Close+ Click Finish
+     * icon in page editor Input Data: Expected Outcome: - The new selected web
+     * content/document is displayed
+     */
+	@Test
+	public void test10_EditSingleContentViewerPage() {
+		info("Test 10 Edit Single Content Viewer page");
+		String title = "title" + getRandomNumber();
+		String content1 = "content1" + getRandomNumber();
+		String content2 = "content2" + getRandomNumber();
+
+		navigationToolbar.goToSiteExplorer();
+		siteExplorerHome.goToPath("intranet", "Site Management");
+		info("Create webcontent 1");
+		siteExplorerHome.goToAddNewContent();
+		createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
+		createNewDocument.addNewWebContent(content1, content1);
+		createNewDocument.saveAndClose();
+		siteExplorerHome.verifyContentCreatedSuccessfully(content1);
+		info("Select acme folder");
+		siteExplorerHome.selectNode("intranet");
+		info("Create webcontent2");
+		siteExplorerHome.goToAddNewContent();
+		createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
+		createNewDocument.addNewWebContent(content2, content2);
+		createNewDocument.saveAndClose();
+		siteExplorerHome.verifyContentCreatedSuccessfully(content2);
+		navigationToolbar.goToAddPage();
+		pageCreationWizard.inputPageInfoStep1(title, true, "English", title, true, false);
+		$(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
+		$(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
+		pageCreationWizard.addContentDetail("General Drives/Sites Management/intranet", content1);
+		$(byTitle("Portlet Mode")).click();
+		$(byTitle("Edit")).click();
+		contentList.selectFolderContent("intranet", content2);
+		executeJavaScript("window.scrollBy(0,-350);", "");
+		$(byText("Done")).waitUntil(Condition.appears, Configuration.timeout);
+		info("Delete created files");
+		navigationToolbar.goToSiteExplorer();
+		siteExplorerHome.deleteData(content1, true);
+		$(byText(content2)).waitUntil(Condition.appears, Configuration.timeout);
+		siteExplorerHome.deleteData(content2, true);
+		info("Delete create page");
+		navigationToolbar.goToPotalPages();
+		portalManagePages.deletePage(title, "group");
+
+	}
+	/**
+	 *<li> Case ID:116661.</li>
+	 *<li> Test Case Name: Manage the title.</li>
+	 *<li> Pre-Condition: </li>
+	 *<li> Post-Condition: </li>
+	 Step Number: 1
+		 *Step Name: Step 1: Manage the title
+		 *Step Description:
+			- Log in acme home page as admin
+			- Go to Edit/ Page/ SEO
+			- Enter the title that you want.
+			- Click Save
+		 *Input Data:
+
+		 *Expected Outcome:
+			You can see the new title will be displayed on TITLE element of your web page.*/
+	@Test
+	public  void test11_ManageTheTitle() {
+		info("Test 15 Manage the title");
+		String title = "title"+getRandomNumber();
+		navigationToolbar.goToSEO();
+		$(ELEMENT_SEO_TITLEBOX).setValue(title);
+		$(ELEMENT_SEO_SAVE).click();
+		$(ELEMENT_SEO_CLOSE).click();
+		refresh();
+		//Verify that the title of the page is changed
+		assertEquals(Selenide.title(),title);
+		navigationToolbar.goToSEO();
+		$(byClassName("uiIconDelete")).click();
+		switchTo().alert().accept();
+		$(ELEMENT_SEO_SAVE).click();
+		$(ELEMENT_SEO_CLOSE).click();
+		refresh();
+
+	}
+	/**
+	 *<li> Case ID:116662.</li>
+	 *<li> Test Case Name: Check SEO tool tips.</li>
+	 *<li> Pre-Condition: </li>
+	 *<li> Post-Condition: </li>
+	 *Step Number: 1
+	 *Step Name: Step 1: Check SEO tool tips
+	 *Step Description:
+	 - Log in acme home page as admin
+	 - Go to Edit/ Page/ SEO
+	 - Mouse over ? icon beside Description, Keywords, Priority
+	 *Input Data:
+
+	 *Expected Outcome:
+	 Tool tips is shown for user to understand the SEO*/
+	@Test
+	public  void test12_CheckSEOToolTips() {
+		info("Test 11 Check SEO tool tips");
+		navigationToolbar.goToSEO();
+		ELEMENT_SEO_HELPDESC.hover();
+		$(ELEMENT_SEO_HELP_POPOVER).waitUntil(Condition.visible,Configuration.timeout);
+		$(ELEMENT_SEO_HELPKEYWORD).hover();
+		$(ELEMENT_SEO_HELP_POPOVER).waitUntil(Condition.visible,Configuration.timeout);
+		$(ELEMENT_SEO_HELPPRIORITY).hover();
+		$(ELEMENT_SEO_HELP_POPOVER).waitUntil(Condition.visible,Configuration.timeout);
+		$(ELEMENT_SEO_CLOSE).click();
+	}
+
 }
