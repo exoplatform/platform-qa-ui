@@ -41,8 +41,9 @@ public class CalendarManagement {
 
   /**
    * constructor
-   * 
+   *
    * @param testBase
+
    */
   public CalendarManagement(TestBase testBase) {
     this.testBase = testBase;
@@ -56,7 +57,7 @@ public class CalendarManagement {
 
   /**
    * Execute action of calendar: Edit, Delete, Share, export....
-   * 
+   *
    * @param action action that needs to be done, e.g.: "ShareCalendar"
    */
   public void goToMenuFromMainCalendar(menuOfMainCalendar action) {
@@ -65,40 +66,40 @@ public class CalendarManagement {
     $(ELEMENT_CALENDAR_MENU_ACTIONS_ICON).click();
     $(ELEMENT_CALENDAR_MENU).waitUntil(Condition.visible, Configuration.timeout);
     switch (action) {
-    case ADDCAL:
-      info("Go to add calendar");
+      case ADDCAL:
+        info("Go to add calendar");
 
-      $(ELEMENT_CALENDAR_MENU_ACTIONS_ADD).waitUntil(Condition.appears, Configuration.timeout);
-      $(ELEMENT_CALENDAR_MENU_ACTIONS_ADD).click();
-      $(ELEMENT_CALENDAR_ADD_FORM).waitUntil(Condition.appears, Configuration.timeout);
-      break;
-    case REMOTECAL:
-      info("Go to remote calendar");
-      evt.click(ELEMENT_CALENDAR_MENU_ACTIONS_REMOTE, 0, true);
-      evt.waitForAndGetElement(ELEMENT_REMOTE_CALENDAR_FORM);
-      break;
-    case ADDCATEGORY:
-      info("Go to add category calendar");
-      $(ELEMENT_CALENDAR_MENU_ACTIONS_ADD_EVENT_CATEGORY).click();
-      $(ELEMENT_ADD_EVENT_CATEGORY_FORM).waitUntil(Condition.appears, Configuration.timeout);
-      break;
-    case CALSETTING:
-      info("Go to calendar setting");
+        $(ELEMENT_CALENDAR_MENU_ACTIONS_ADD).waitUntil(Condition.appears, Configuration.timeout);
+        $(ELEMENT_CALENDAR_MENU_ACTIONS_ADD).click();
+        $(ELEMENT_CALENDAR_ADD_FORM).waitUntil(Condition.appears, Configuration.timeout);
+        break;
+      case REMOTECAL:
+        info("Go to remote calendar");
+        evt.click(ELEMENT_CALENDAR_MENU_ACTIONS_REMOTE, 0, true);
+        evt.waitForAndGetElement(ELEMENT_REMOTE_CALENDAR_FORM);
+        break;
+      case ADDCATEGORY:
+        info("Go to add category calendar");
+        $(ELEMENT_CALENDAR_MENU_ACTIONS_ADD_EVENT_CATEGORY).click();
+        $(ELEMENT_ADD_EVENT_CATEGORY_FORM).waitUntil(Condition.appears, Configuration.timeout);
+        break;
+      case CALSETTING:
+        info("Go to calendar setting");
 
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_MENU_ACTIONS_CALENDAR_SETTING, testBase.getDefaultTimeout(), 1);
-      evt.click(ELEMENT_CALENDAR_MENU_ACTIONS_CALENDAR_SETTING, 0, true);
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_SETTING_FORM, testBase.getDefaultTimeout(), 1);
-      break;
-    case IMPORT:
-      info("Import calendar");
-      evt.click(ELEMENT_CALENDAR_MENU_ACTIONS_IMPORT, 0, true);
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_IMPORT_POPUP_FORM);
-      break;
-    default:
-      info("Go to add calendar");
-      evt.click(ELEMENT_CALENDAR_MENU_ACTIONS_ADD, 0, true);
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_QUICK_ADD_TASK_FORM);
-      break;
+        evt.waitForAndGetElement(ELEMENT_CALENDAR_MENU_ACTIONS_CALENDAR_SETTING, testBase.getDefaultTimeout(), 1);
+        evt.click(ELEMENT_CALENDAR_MENU_ACTIONS_CALENDAR_SETTING, 0, true);
+        evt.waitForAndGetElement(ELEMENT_CALENDAR_SETTING_FORM, testBase.getDefaultTimeout(), 1);
+        break;
+      case IMPORT:
+        info("Import calendar");
+        evt.click(ELEMENT_CALENDAR_MENU_ACTIONS_IMPORT, 0, true);
+        evt.waitForAndGetElement(ELEMENT_CALENDAR_IMPORT_POPUP_FORM);
+        break;
+      default:
+        info("Go to add calendar");
+        evt.click(ELEMENT_CALENDAR_MENU_ACTIONS_ADD, 0, true);
+        evt.waitForAndGetElement(ELEMENT_CALENDAR_QUICK_ADD_TASK_FORM);
+        break;
     }
   }
 
@@ -114,7 +115,7 @@ public class CalendarManagement {
 
   /**
    * Delete a calendar
-   * 
+   *
    * @param name name of calendar
    * @param verify optional parameter. If not be set, by default, it is considered
    *          that calendar is deleted = true: verify that calendar is deleted, =
@@ -137,7 +138,7 @@ public class CalendarManagement {
 
   /**
    * Edit a calendar
-   * 
+   *
    * @param oldName old name of calendar
    * @param name new name of calendar
    * @param description new description of calendar
@@ -155,7 +156,7 @@ public class CalendarManagement {
 
   /**
    * Input into tab Detail of Add calendar form
-   * 
+   *
    * @param name name of calendar
    * @param description description of calendar
    * @param color color of calendar
@@ -177,7 +178,7 @@ public class CalendarManagement {
 
   /**
    * selectGroupInGroupTabCalendarForm
-   * 
+   *
    * @param group group: example (/developers, /platform/administrators,
    *          /platform/users, /platform/web-contributors,
    *          /organization/management/executive-board, /organization/employees
@@ -200,7 +201,7 @@ public class CalendarManagement {
 
   /**
    * Remove a group in group table of Calendar form
-   * 
+   *
    * @param groupName String
    */
   public void removeGroupInGroupTabCalendarForm(String groupName) {
@@ -212,7 +213,7 @@ public class CalendarManagement {
 
   /**
    * Select a user/role who has edit permission in a group
-   * 
+   *
    * @param user String
    * @param mode way to input users, groups. =0: type directly =1: select user =2:
    *          select role
@@ -221,29 +222,29 @@ public class CalendarManagement {
     for (int i = 0; i < user.length; i++) {
       int modeUser = mode.length > i ? mode[i] : 0;
       switch (modeUser) {
-      case 0:
-        info("user" + user[i]);
-        evt.type(ELEMENT_CALENDAR_GROUP_INPUT_USER, user[i], true);
-        break;
-      case 1:
-        $(ELEMENT_CALENDAR_GROUP_SELECT_USER_BTN).click();
-        // evt.click(ELEMENT_CALENDAR_GROUP_USER_IN_SELECT_FORM.replace("$user",
-        // user[i]));
-        $(byText(user[i])).click();
-        break;
-      case 2:
-        String[] groupMem = user[i].split(":");
-        String[] membership = groupMem[1].split(".");
-        evt.click(ELEMENT_CALENDAR_GROUP_SELECT_ROLE_BTN);
-        pPer.selectGroupMembership(groupMem[0], membership[1]);
-        break;
+        case 0:
+          info("user" + user[i]);
+          evt.type(ELEMENT_CALENDAR_GROUP_INPUT_USER, user[i], true);
+          break;
+        case 1:
+          $(ELEMENT_CALENDAR_GROUP_SELECT_USER_BTN).click();
+          // evt.click(ELEMENT_CALENDAR_GROUP_USER_IN_SELECT_FORM.replace("$user",
+          // user[i]));
+          $(byText(user[i])).click();
+          break;
+        case 2:
+          String[] groupMem = user[i].split(":");
+          String[] membership = groupMem[1].split(".");
+          evt.click(ELEMENT_CALENDAR_GROUP_SELECT_ROLE_BTN);
+          pPer.selectGroupMembership(groupMem[0], membership[1]);
+          break;
       }
     }
   }
 
   /**
    * Select group permission
-   * 
+   *
    * @param group String
    * @param membership String
    */
@@ -264,7 +265,7 @@ public class CalendarManagement {
 
   /**
    * Check user selector in group calendar
-   * 
+   *
    * @param cal String
    * @param user String
    * @param isPresent boolean
@@ -299,7 +300,7 @@ public class CalendarManagement {
 
   /**
    * Go to Calendar Actions -Add Event Category
-   * 
+   *
    * @param categoryName category name of Calendar
    */
   public void addEventCategory(String categoryName) {
@@ -314,7 +315,7 @@ public class CalendarManagement {
 
   /**
    * Delete Event Category
-   * 
+   *
    * @param categoryName category name of calendar
    */
   public void deleteEventCategory(String categoryName) {
@@ -330,39 +331,39 @@ public class CalendarManagement {
 
   /**
    * Edit Event Category
-   * 
+   *
    * @param oldCategory old category name
    * @param newCategory new category name
    */
 
   public void editEventCategory(String oldCategory, String newCategory) {
-    evt.waitForAndGetElement(ELEMENT_LIST_EDIT_EVENT_BUTTON.replace("${categoryName}", oldCategory));
-    evt.click(ELEMENT_LIST_EDIT_EVENT_BUTTON.replace("${categoryName}", oldCategory));
-    evt.type(ELEMENT_ADD_EVENT_CATEGORY_INPUT, newCategory, true);
-    evt.click(ELEMENT_EDIT_EVENT_CATEGORY_BUTTON_UPDATE);
-    evt.waitForAndGetElement(ELEMENT_LIST_EDIT_EVENT_BUTTON.replace("${categoryName}", newCategory));
-    evt.click(ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE);
+    $(byXpath(ELEMENT_LIST_EDIT_EVENT_BUTTON.replace("${categoryName}", oldCategory))).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_LIST_EDIT_EVENT_BUTTON.replace("${categoryName}", oldCategory))).click();
+    $(ELEMENT_ADD_EVENT_CATEGORY_INPUT).setValue(newCategory);
+    $(ELEMENT_EDIT_EVENT_CATEGORY_BUTTON_UPDATE).click();
+    $(byXpath(ELEMENT_LIST_EDIT_EVENT_BUTTON.replace("${categoryName}", newCategory))).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE).click();
   }
 
   /**
    * Open menu an a calendar
-   * 
+   *
    * @param calendar name of calendar
    */
   public void openMenuOfCalendar(String calendar) {
     info("Open menu of a calendar");
     $(byText(calendar)).waitUntil(Condition.appears, Configuration.timeout)
-                       .hover()
-                       .parent()
-                       .parent()
-                       .find(ELEMENT_CALENDAR_ICON_SETTINGS_OF_CALENDAR)
-                       .click();
+            .hover()
+            .parent()
+            .parent()
+            .find(ELEMENT_CALENDAR_ICON_SETTINGS_OF_CALENDAR)
+            .click();
 
   }
 
   /**
    * Execute action of calendar: Edit, Delete, Share, export....
-   * 
+   *
    * @param calendar name of calendar
    * @param action action that needs to be done, e.g.: "ShareCalendar"
    * @param color color that is selected for calendar
@@ -411,12 +412,13 @@ public class CalendarManagement {
       evt.click(ELEMENT_CALENDAR_ADD_TASK_MENU, 2);
       evt.waitForAndGetElement(ELEMENT_CALENDAR_QUICK_ADD_TASK_FORM);
       break;
+
     }
   }
 
   /**
    * Share a calendar
-   * 
+   *
    * @param calendar name of calendar
    * @param userGroup array of users or groups that are shared with
    * @param canEdit array of "canEdit" permissions for users, groups respectively
@@ -450,6 +452,7 @@ public class CalendarManagement {
           $(ELEMENT_CALENDAR_SELECT_MEMBERSHIP_ICON).click();
           pPer.selectGroupMembership(groupMem[0], membership[1]);
           break;
+
         }
       }
       evt.click(ELEMENT_CALENDAR_SHARE_ADD_BUTTON);
@@ -468,7 +471,7 @@ public class CalendarManagement {
 
   /**
    * Check user selector of share calendar
-   * 
+   *
    * @param cal
    * @param user
    * @param isPresent
@@ -483,7 +486,7 @@ public class CalendarManagement {
 
   /**
    * Share a calendar
-   * 
+   *
    * @param calendar name of calendar
    * @param userGroup array of users or groups that are shared with
    */
@@ -499,8 +502,7 @@ public class CalendarManagement {
 
   /**
    * Upload calendar
-   * 
-   * @param path path of a file which will be uploaded.
+   *
    */
   public void uploadCalendar() {
     info("--Upload Calendar--");
@@ -511,8 +513,7 @@ public class CalendarManagement {
 
   /**
    * Import calendar
-   * 
-   * @param path path of a file which is for upload
+   *
    * @param name name of calendar
    * @param description description of calendar
    * @param color color of calendar
@@ -543,7 +544,7 @@ public class CalendarManagement {
 
   /**
    * Import event/task to an calendar
-   * 
+   *
    * @param calendar name of calendar will be imported
    * @param path path of a file which is for upload
    */
@@ -557,7 +558,7 @@ public class CalendarManagement {
 
   /**
    * Export calendar
-   * 
+   *
    * @param calendar name of calendar
    * @param name filename of exported calendar
    */
@@ -572,7 +573,7 @@ public class CalendarManagement {
 
   /**
    * Export Task/Event
-   * 
+   *
    * @param taskEvent name of task or event
    * @param name filenam of exported task/event
    */
@@ -588,7 +589,7 @@ public class CalendarManagement {
 
   /**
    * change values in setting tab of calendar setting form
-   * 
+   *
    * @param viewtype default view fof calendar: Week, Day, Month, List, Work Week
    * @param timezone time zone of calendar, e.g.: (GMT -11:00) Pacific/Samoa *
    * @param dateformat date format of calendar:dd/mm/yyyy, dd-mm-yyyy, mm/dd/yyyy,
@@ -652,13 +653,14 @@ public class CalendarManagement {
         // check(ELEMENT_CALENDAR_SETTING_NEVER_SEND_INVITE_CHECKBOX,2);
         $(ELEMENT_CALENDAR_SETTING_NEVER_SEND_INVITE_CHECKBOX).click();
         break;
+
       }
     }
   }
 
   /**
    * change start and end time for working time in calendar setting form
-   * 
+   *
    * @param startTime String
    * @param endTime String
    */
@@ -689,7 +691,7 @@ public class CalendarManagement {
   /**
    * show/hide personal calendar in tab displayed calendar of calendar setting
    * form
-   * 
+   *
    * @param calendarName name of calendar
    * @param isShow true: check show calendar false: hide calendar
    */
@@ -715,7 +717,7 @@ public class CalendarManagement {
 
   /**
    * Show/Hide event/task from Calendar list
-   * 
+   *
    * @param calendar String
    */
   public void showHideEventTask(String calendar) {
@@ -726,7 +728,7 @@ public class CalendarManagement {
 
   /**
    * Add/Edit new feed
-   * 
+   *
    * @param name name of feed
    * @param url url of feed
    * @param calendars calendar list (split by "/": ex: John Smith/Development)
@@ -766,7 +768,7 @@ public class CalendarManagement {
 
   /**
    * delete calendar from feed
-   * 
+   *
    * @param calendar name of calendar
    */
   public void deleteCalendarFromFeed(String calendar) {
@@ -779,7 +781,7 @@ public class CalendarManagement {
 
   /**
    * Delete Feed
-   * 
+   *
    * @param feed name of feed
    * @param isVerify true: verify confirm message false: not verify confirm
    *          message
@@ -800,41 +802,41 @@ public class CalendarManagement {
 
   /**
    * Select an option in context menu
-   * 
+   *
    * @param option String
    */
   public void selectOptionByRightclickOnEvent(contextMenuEditEvenOption option) {
     switch (option) {
-    case VIEW:
-      info("Select View option");
-      evt.click(ELEMENT_CONTEXT_MENU_VIEW);
-      break;
-    case EDIT:
-      info("Select Edit option");
-      evt.click(ELEMENT_CONTEXT_MENU_EDIT);
-      break;
-    case DELETE:
-      info("Select Delete option");
-      $(ELEMENT_CONTEXT_MENU_DELETE).click();
-      // click(ELEMENT_CONFIRM_POPUP_OK);
-      break;
-    case DELETE_RECURRING:
-      info("Select Delete option");
-      evt.click(ELEMENT_CONTEXT_MENU_DELETE);
-      break;
-    case EXPORT:
-      info("Select Export option");
-      evt.click(ELEMENT_CONTEXT_MENU_EXPORT);
-      break;
-    default:
-      info("No option to select");
-      break;
+      case VIEW:
+        info("Select View option");
+        evt.click(ELEMENT_CONTEXT_MENU_VIEW);
+        break;
+      case EDIT:
+        info("Select Edit option");
+        evt.click(ELEMENT_CONTEXT_MENU_EDIT);
+        break;
+      case DELETE:
+        info("Select Delete option");
+        $(ELEMENT_CONTEXT_MENU_DELETE).click();
+        // click(ELEMENT_CONFIRM_POPUP_OK);
+        break;
+      case DELETE_RECURRING:
+        info("Select Delete option");
+        evt.click(ELEMENT_CONTEXT_MENU_DELETE);
+        break;
+      case EXPORT:
+        info("Select Export option");
+        evt.click(ELEMENT_CONTEXT_MENU_EXPORT);
+        break;
+      default:
+        info("No option to select");
+        break;
     }
   }
 
   /**
    * Open edit event form by right click on the event
-   * 
+   *
    * @param name String
    */
   public void openEditPopupEventByRightClick(String name) {
@@ -847,7 +849,7 @@ public class CalendarManagement {
 
   /**
    * Open add/edit event popup by double clicking
-   * 
+   *
    * @param name String
    * @param opt is an instance of a repeated event as 1,2,3,4....
    */
@@ -857,31 +859,31 @@ public class CalendarManagement {
     cHome.goToView(view);
     if (opt.length > 0 && opt[0] != null) {
       switch (view) {
-      case WEEK:
-        WebElement el_week = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$date", opt[0])
-                                                                                                      .replace("$name", name));
+        case WEEK:
+          WebElement el_week = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$date", opt[0])
+                  .replace("$name", name));
 
-        scrollElementIntoView(el_week);
-        action.moveToElement(el_week).doubleClick().perform();
-        break;
-      case MONTH:
-        WebElement el_month = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$date", opt[0])
-                                                                                                .replace("$name", name));
+          scrollElementIntoView(el_week);
+          action.moveToElement(el_week).doubleClick().perform();
+          break;
+        case MONTH:
+          WebElement el_month = evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$date", opt[0])
+                  .replace("$name", name));
 
-        scrollElementIntoView(el_month);
-        action.moveToElement(el_month).doubleClick().perform();
-        break;
-      case WORKWEEK:
-        WebElement el_workweek =
-                               evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$date", opt[0])
-                                                                                                        .replace("$name", name));
+          scrollElementIntoView(el_month);
+          action.moveToElement(el_month).doubleClick().perform();
+          break;
+        case WORKWEEK:
+          WebElement el_workweek =
+                  evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ONE_DAY.replace("$date", opt[0])
+                          .replace("$name", name));
 
-        scrollElementIntoView(el_workweek);
-        action.moveToElement(el_workweek).doubleClick().perform();
-        break;
-      default:
-        info("Please input only Month, Week and WorkWeek view");
-        break;
+          scrollElementIntoView(el_workweek);
+          action.moveToElement(el_workweek).doubleClick().perform();
+          break;
+        default:
+          info("Please input only Month, Week and WorkWeek view");
+          break;
       }
       info("Double click on the event");
 
@@ -905,7 +907,7 @@ public class CalendarManagement {
 
   /**
    * Open quick Add Event/Task popup by index in Month View
-   * 
+   *
    * @param col String
    * @param row String
    */
@@ -919,8 +921,8 @@ public class CalendarManagement {
 
   /**
    * Remove an event or a task in any views by right Click
-   * 
-   * @param name String
+   *
+   * @param name Stringrie
    */
   public void deleteTaskEvent(String name) {
     info("Right click on an Event/Task");
@@ -937,8 +939,8 @@ public class CalendarManagement {
 
   /**
    * Delete task/event by selecting an task/event's checkbox in List View
-   * 
-   * @param name String
+   *
+   * @param name Stringe
    */
   public void deleteTaskEventInListView(String name) {
     if (!name.isEmpty()) {
@@ -983,7 +985,7 @@ public class CalendarManagement {
 
   /**
    * Remove an event or a task on List tab
-   * 
+   *
    */
   public void deleteAllTaskEvent() {
     if (evt.waitForAndGetElement(ELMENT_CALENDAR_TAB_LIST_EMPTY, 3000, 0) == null) {
@@ -1003,18 +1005,18 @@ public class CalendarManagement {
 
   /**
    * Scroll to element to view
-   * 
+   *
    * @param element WebElement
    */
   public void scrollElementIntoView(WebElement element) {
     info("Scroll to the element to view");
     ((JavascriptExecutor) this.testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].scrollIntoView(true);",
-                                                                                        element);
+            element);
   }
 
   /**
    * function: check content of mail then delete mail in email server
-   * 
+   *
    * @param titleEventTask String
    * @param fileAttch String
    * @param link String
@@ -1092,7 +1094,7 @@ public class CalendarManagement {
 
   /**
    * Enabled or disabled public access for an calendar
-   * 
+   *
    * @param calendar String
    */
   public void enabledPublicAccess(String calendar) {
@@ -1111,7 +1113,7 @@ public class CalendarManagement {
 
   /**
    * Get public access link of public calendar
-   * 
+   *
    * @return returnText
    */
   public String getPublicAccessLink(String calendar) {
@@ -1127,7 +1129,7 @@ public class CalendarManagement {
 
   /**
    * Add Remote Calendar
-   * 
+   *
    * @param url url of the remote calendar
    * @param isChangeType true: if want to change type of remote calendar false: if
    *          want to keep default type of remote calendar
@@ -1192,7 +1194,7 @@ public class CalendarManagement {
 
   /**
    * Input username and password of user authentication in remote calendar
-   * 
+   *
    * @param username String
    * @param password String
    */
@@ -1237,7 +1239,7 @@ public class CalendarManagement {
 
   /**
    * quick search an event/task
-   * 
+   *
    * @param name String
    */
   public void searchQuickEventTask(String name) {
@@ -1262,20 +1264,20 @@ public class CalendarManagement {
 
   /**
    * Right click on Event/Tasks
-   * 
+   *
    * @param name String
    * @param date String
    */
   public void rightClickEventTaskInMonth(String name, String date) {
     info("Right click on Event/Task");
     evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$date", testBase.getLastDayOfWeek("MMM dd yyyy"))
-                                                                     .replace("$name", name));
+            .replace("$name", name));
     evt.waitForAndGetElement(ELEMENT_CONTEXT_MENU);
   }
 
   /**
    * Delete event/tasks in Month view by right click
-   * 
+   *
    * @param name String
    * @param date String
    */
@@ -1289,7 +1291,7 @@ public class CalendarManagement {
 
   /***
    * View detail of an event/task in List View
-   * 
+   *
    * @param name String
    */
   public void viewDetailsEventTaskInList(String name) {
@@ -1302,7 +1304,7 @@ public class CalendarManagement {
 
   /**
    * View large image of Task/Event in List View
-   * 
+   *
    * @param number the number of images as: =1 is first image;=2 is second
    *          image;...
    */
@@ -1328,7 +1330,7 @@ public class CalendarManagement {
 
   /**
    * Close large image of task/event in list view
-   * 
+   *
    * @param verify String
    */
   public void closeViewLargeImageInList(boolean verify) {
@@ -1359,7 +1361,7 @@ public class CalendarManagement {
 
   /**
    * Open Quick Add Event/Tasks by drag and drop row's time in Day view
-   * 
+   *
    * @param sourceTimeHour String
    * @param targetTimeHour String
    */
@@ -1369,7 +1371,7 @@ public class CalendarManagement {
     if (sourceTimeHour != null || sourceTimeHour != "") {
       info("Drag and drop time row");
       evt.dragAndDropToObject(ELEMENT_EVENT_TASK_DATE_TIME_VALUE.replace("$time", sourceTimeHour + ":00"),
-                              ELEMENT_EVENT_TASK_DATE_TIME_VALUE.replace("$time", targetTimeHour + ":00"));
+              ELEMENT_EVENT_TASK_DATE_TIME_VALUE.replace("$time", targetTimeHour + ":00"));
       evt.waitForAndGetElement(ELEMENT_CALENDAR_QUICK_ADD_EVENT_FORM, 3000, 0);
       info("The quick add form is shown");
     }
@@ -1378,7 +1380,7 @@ public class CalendarManagement {
 
   /**
    * Open Quick Add Event/Tasks by drag and drop the time in Week view
-   * 
+   *
    * @param sourceDateTime has the format:Tue Jun 23 2015 15:30
    * @param targetDateTime has the format:Tue Jun 23 2015 15:30
    */
@@ -1388,7 +1390,7 @@ public class CalendarManagement {
     if (sourceDateTime != null || targetDateTime != "") {
       info("Drag and drop time row");
       evt.dragAndDropToObject(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ONE_DAY.replace("$date", sourceDateTime + ":00"),
-                              ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ONE_DAY.replace("$date", targetDateTime + ":00"));
+              ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_ONE_DAY.replace("$date", targetDateTime + ":00"));
       evt.waitForAndGetElement(ELEMENT_CALENDAR_QUICK_ADD_EVENT_FORM, 3000, 0);
       info("The quick add form is shown");
     }
@@ -1397,7 +1399,7 @@ public class CalendarManagement {
 
   /**
    * HEAD Check accessibility of share calendar
-   * 
+   *
    * @param isAccess true if user can view calendar
    * @param isEdit true if user can edit calendar
    * @param cal
@@ -1421,7 +1423,7 @@ public class CalendarManagement {
 
   /**
    * Check accessibility of calendar
-   * 
+   *
    * @param isAccess true if user can view calendar
    * @param isEdit true if user can edit calendar
    * @param cal String
@@ -1445,7 +1447,7 @@ public class CalendarManagement {
 
   /**
    * Share calendar to group
-   * 
+   *
    * @param calendar String
    * @param group String
    * @param membership String
@@ -1468,7 +1470,7 @@ public class CalendarManagement {
 
   /**
    * Check display of calendar
-   * 
+   *
    * @param cal String
    * @param isPresent String
    */
