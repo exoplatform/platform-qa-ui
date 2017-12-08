@@ -853,11 +853,11 @@ public class EventManagement {
     boolean isVerify = (Boolean) (opParams.length > 0 ? opParams[0] : false);
     info("Delete event/tak: " + name);
     cHome.goToRightMenuTaskEventFromAnyView(name, view, optionDay, date);
-    evt.click(ELEMENT_CONTEXT_MENU_DELETE);
-    evt.waitForAndGetElement(ELEMENT_DELETE_RECURRING_EVENT_FORM);
+    $(ELEMENT_CONTEXT_MENU_DELETE).click();
+    $(ELEMENT_DELETE_RECURRING_EVENT_FORM).waitUntil(Condition.visible, Configuration.timeout);
     if (isVerify) {
-      evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT);
-      evt.waitForAndGetElement(ELEMENT_EDIT_DELETE_ONE_EVENT, testBase.getDefaultTimeout(), 1, 2);
+      $(ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT).waitUntil(Condition.visible, Configuration.timeout);
+      $(ELEMENT_EDIT_DELETE_ONE_EVENT).parent().waitUntil(Condition.visible, Configuration.timeout);
       info(evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT).getText());
       assert evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT)
                 .getText()
