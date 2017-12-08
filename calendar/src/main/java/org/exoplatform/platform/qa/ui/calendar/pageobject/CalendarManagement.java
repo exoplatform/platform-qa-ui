@@ -62,8 +62,8 @@ public class CalendarManagement {
   public void goToMenuFromMainCalendar(menuOfMainCalendar action) {
     info("Select action from menu");
 
-    evt.click(ELEMENT_CALENDAR_MENU_ACTIONS_ICON, 0, true);
-    evt.waitForAndGetElement(ELEMENT_CALENDAR_MENU);
+    $(ELEMENT_CALENDAR_MENU_ACTIONS_ICON).click();
+    $(ELEMENT_CALENDAR_MENU).waitUntil(Condition.visible, Configuration.timeout);
     switch (action) {
     case ADDCAL:
       info("Go to add calendar");
@@ -389,8 +389,8 @@ public class CalendarManagement {
       $(ELEMENT_CALENDAR_REMOVE_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case SHARE:
-      evt.clickByJavascript(ELEMENT_CALENDAR_SHARE_MENU, 2);
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_SHARE_FORM);
+      $(ELEMENT_CALENDAR_SHARE_MENU).click();
+      $(ELEMENT_CALENDAR_SHARE_FORM).waitUntil(Condition.visible, Configuration.timeout);
       break;
     case IMPORT:
       evt.clickByJavascript(ELEMENT_CALENDAR_IMPORT_MENU, 2);
@@ -433,21 +433,21 @@ public class CalendarManagement {
         switch (modeUser) {
         case 0:
           info("userGroup[i]" + userGroup[i]);
-          evt.type(ELEMENT_CALENDAR_SHARE_INPUT, userGroup[i], true);
+          $(ELEMENT_CALENDAR_SHARE_INPUT).setValue(userGroup[i]);
           break;
         case 1:
-          evt.click(ELEMENT_CALENDAR_SELECT_USER_ICON);
+          $(ELEMENT_CALENDAR_SELECT_USER_ICON).click();
           pPer.selectUserPermission(userGroup[i], 1);
           break;
         case 2:
           String[] group = userGroup[i].split(":");
-          evt.click(ELEMENT_CALENDAR_SELECT_GROUP_ICON);
+          $(ELEMENT_CALENDAR_SELECT_GROUP_ICON).click();
           pPer.selectGroupPermission(group[0]);
           break;
         case 3:
           String[] groupMem = userGroup[i].split(":");
           String[] membership = groupMem[1].split(".");
-          evt.click(ELEMENT_CALENDAR_SELECT_MEMBERSHIP_ICON);
+          $(ELEMENT_CALENDAR_SELECT_MEMBERSHIP_ICON).click();
           pPer.selectGroupMembership(groupMem[0], membership[1]);
           break;
         }
@@ -457,13 +457,13 @@ public class CalendarManagement {
 
     for (int j = 0; j < canEdit.length; j++) {
       if (canEdit[j] == true) {
-        evt.check(ELEMENT_CALENDAR_SHARE_EDIT_PERMISSION.replace("${user}", userGroup[j]), 2);
+        evt.check(byXpath(ELEMENT_CALENDAR_SHARE_EDIT_PERMISSION.replace("${user}", userGroup[j])));
       } else {
-        evt.uncheck(ELEMENT_CALENDAR_SHARE_EDIT_PERMISSION.replace("${user}", userGroup[j]), 2);
+        evt.uncheck(byXpath(ELEMENT_CALENDAR_SHARE_EDIT_PERMISSION.replace("${user}", userGroup[j])));
       }
     }
-    evt.click(ELEMENT_CALENDAR_SHARE_SAVE_BUTTON);
-    evt.waitForElementNotPresent(ELEMENT_CALENDAR_SHARE_SAVE_BUTTON);
+    $(ELEMENT_CALENDAR_SHARE_SAVE_BUTTON).click();
+    $(ELEMENT_CALENDAR_SHARE_SAVE_BUTTON).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
   }
 
   /**
@@ -491,10 +491,10 @@ public class CalendarManagement {
     info("Share calendar");
     executeActionCalendar(calendar, menuOfCalendarOption.SHARE);
     for (int i = 0; i < userGroup.length; i++) {
-      evt.click(By.xpath(ELEMENT_DELETE_SHARE_USER.replace("{$user}", userGroup[i])));
+      $(byXpath(ELEMENT_DELETE_SHARE_USER.replace("{$user}", userGroup[i]))).click();
     }
-    evt.click(ELEMENT_CALENDAR_SHARE_SAVE_BUTTON);
-    evt.waitForElementNotPresent(ELEMENT_CALENDAR_SHARE_SAVE_BUTTON);
+    $(ELEMENT_CALENDAR_SHARE_SAVE_BUTTON).click();
+    $(ELEMENT_CALENDAR_SHARE_SAVE_BUTTON).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
   }
 
   /**
@@ -502,18 +502,11 @@ public class CalendarManagement {
    * 
    * @param path path of a file which will be uploaded.
    */
-  public void uploadCalendar(String path) {
+  public void uploadCalendar() {
     info("--Upload Calendar--");
-    WebElement element = evt.waitForAndGetElement(ELEMENT_CALENDAR_IMPORT_SELECT_FILE, testBase.getDefaultTimeout(), 1, 2);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';",
-                                                                                   element);
-    element.sendKeys(testBase.getAbsoluteFilePath(path));
-    String[] links = path.split("/");
-    evt.waitForAndGetElement(".//*[contains(@class,'selectFileFrame')]//*[contains(text(),'" + links[links.length - 1] + "')]");
-    // waitForAndGetElement("//*[text()='"+links[links.length-1]+"']");
-    info("import " + testBase.getAbsoluteFilePath(path));
-    evt.switchToParentWindow();
-    evt.waitForAndGetElement(ELEMENT_CALENDAR_IMPORT_DELETE_ICON);
+    $(byClassName("uploadContainer")).find(byClassName("file")).uploadFromClasspath("testCalendar.ics");
+    $(byClassName("progressBarFrame")).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    $(ELEMENT_CALENDAR_IMPORT_DELETE_ICON).waitUntil(Condition.visible, Configuration.timeout);
   }
 
   /**
@@ -524,26 +517,26 @@ public class CalendarManagement {
    * @param description description of calendar
    * @param color color of calendar
    */
-  public void importCalendar(String path, String name, String description, String color) {
+  public void importCalendar(String name, String description, String color) {
     /*
      * click(ELEMENT_CALENDAR_MENU_ACTIONS_ICON);
      * click(ELEMENT_CALENDAR_MENU_ACTIONS_IMPORT);
      */
     goToMenuFromMainCalendar(menuOfMainCalendar.IMPORT);
     // waitForAndGetElement(ELEMENT_CALENDAR_IMPORT_POPUP_FORM);
-    uploadCalendar(path);
+    uploadCalendar();
     if (name != null)
-      evt.type(ELEMENT_CALENDAR_IMPORT_NAME_INPUT, name, true);
+      $(ELEMENT_CALENDAR_IMPORT_NAME_INPUT).setValue(name);
     if (description != null)
-      evt.type(ELEMENT_CALENDAR_IMPORT_DESC_INPUT, description, true);
+      $(ELEMENT_CALENDAR_IMPORT_DESC_INPUT).setValue(description);
 
     if (color != null) {
-      evt.click(ELEMENT_CALENDAR_IMPORT_COLOR);
-      evt.click(ELEMENT_CALENDAR_COLOR_SELECT.replace("${color}", color));
+      $(ELEMENT_CALENDAR_IMPORT_COLOR).click();
+      $(byXpath(ELEMENT_CALENDAR_COLOR_SELECT.replace("${color}", color))).click();
     }
-    evt.click(ELEMENT_CALENDAR_IMPORT_SAVE_BUTTON);
-    evt.waitForElementNotPresent(ELEMENT_CALENDAR_IMPORT_POPUP_FORM);
-    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+    $(ELEMENT_CALENDAR_IMPORT_SAVE_BUTTON).click();
+    $(ELEMENT_CALENDAR_IMPORT_POPUP_FORM).shouldNot(Condition.visible);
+    refresh();
     evt.waitForAndGetElement(By.linkText(name));
     button.ok();
   }
@@ -556,7 +549,7 @@ public class CalendarManagement {
    */
   public void importTaskEvent(String calendar, String path) {
     executeActionCalendar(calendar, menuOfCalendarOption.IMPORT);
-    uploadCalendar(path);
+    uploadCalendar();
     evt.click(ELEMENT_CALENDAR_IMPORT_SAVE_BUTTON);
     evt.waitForElementNotPresent(ELEMENT_CALENDAR_IMPORT_POPUP_FORM);
     this.testBase.getExoWebDriver().getWebDriver().navigate().refresh();
@@ -571,10 +564,10 @@ public class CalendarManagement {
   public void exportCalendar(String calendar, String name) {
     info("Export calendar");
     executeActionCalendar(calendar, menuOfCalendarOption.EXPORT);
-    evt.waitForAndGetElement(ELEMENT_CALENDAR_EXPORT_POPUP_FORM);
-    evt.type(ELEMENT_CALENDAR_EXPORT_FILE_NAME, name, true);
-    evt.click(ELEMENT_CALENDAR_EXPORT_SAVE_BUTTON);
-    evt.waitForElementNotPresent(ELEMENT_CALENDAR_EXPORT_POPUP_FORM);
+    $(ELEMENT_CALENDAR_EXPORT_POPUP_FORM).waitUntil(Condition.visible, Configuration.timeout);
+    $(ELEMENT_CALENDAR_EXPORT_FILE_NAME).setValue(name);
+    $(ELEMENT_CALENDAR_EXPORT_SAVE_BUTTON).click();
+    $(ELEMENT_CALENDAR_EXPORT_POPUP_FORM).shouldNot(Condition.visible);
   }
 
   /**
@@ -615,23 +608,23 @@ public class CalendarManagement {
                                     PlatformBase.selectInvitationOption option) {
     if (viewtype != null && viewtype != "") {
       info("-- Select filter option of view type --");
-      evt.select(ELEMENT_CALENDAR_SETTING_VIEW_TYPE, viewtype);
+      $(ELEMENT_CALENDAR_SETTING_VIEW_TYPE).selectOption(viewtype);
     }
     if (timezone != null && timezone != "") {
       info("-- Select filter option of Timezone --");
-      evt.select(ELEMENT_CALENDAR_SETTING_TIME_ZONE, timezone);
+      $(ELEMENT_CALENDAR_SETTING_TIME_ZONE).selectOption(timezone);
     }
     if (dateformat != null && dateformat != "") {
       info("-- Select filter option of date format --");
-      evt.select(ELEMENT_CALENDAR_SETTING_DATE_FORMAT, dateformat);
+      $(ELEMENT_CALENDAR_SETTING_DATE_FORMAT).selectOption(dateformat);
     }
     if (timeformat != null && timeformat != "") {
       info("-- Select filter option of time format --");
-      evt.select(ELEMENT_CALENDAR_SETTING_TIME_FORMAT, timeformat);
+      $(ELEMENT_CALENDAR_SETTING_TIME_FORMAT).selectOption(timeformat);
     }
     if (day != null && day != "") {
       info("-- Select filter option of week start on --");
-      evt.select(ELEMENT_CALENDAR_SETTING_WEEK_START_ON, day);
+      $(ELEMENT_CALENDAR_SETTING_WEEK_START_ON).selectOption(day);
     }
     if (isShow != null) {
       info("-- Select show working time or not --");
@@ -646,19 +639,18 @@ public class CalendarManagement {
       switch (option) {
       case NEVER:
         // check(ELEMENT_CALENDAR_SETTING_NEVER_SEND_INVITE_CHECKBOX,2);
-        evt.clickByJavascript(ELEMENT_CALENDAR_SETTING_NEVER_SEND_INVITE_CHECKBOX, 2);
-        break;
+        $(ELEMENT_CALENDAR_SETTING_NEVER_SEND_INVITE_CHECKBOX).click();
       case ALWAYS:
         // check(ELEMENT_CALENDAR_SETTING_ALWAYS_SEND_INVITE_CHECKBOX,2);
-        evt.clickByJavascript(ELEMENT_CALENDAR_SETTING_ALWAYS_SEND_INVITE_CHECKBOX, 2);
+        $(ELEMENT_CALENDAR_SETTING_ALWAYS_SEND_INVITE_CHECKBOX).click();
         break;
       case ASK:
         // check(ELEMENT_CALENDAR_SETTING_ASK_SEND_INVITE_CHECKBOX,2);
-        evt.clickByJavascript(ELEMENT_CALENDAR_SETTING_ASK_SEND_INVITE_CHECKBOX, 2);
+        $(ELEMENT_CALENDAR_SETTING_ASK_SEND_INVITE_CHECKBOX).click();
         break;
       default:
         // check(ELEMENT_CALENDAR_SETTING_NEVER_SEND_INVITE_CHECKBOX,2);
-        evt.clickByJavascript(ELEMENT_CALENDAR_SETTING_NEVER_SEND_INVITE_CHECKBOX, 2);
+        $(ELEMENT_CALENDAR_SETTING_NEVER_SEND_INVITE_CHECKBOX).click();
         break;
       }
     }
