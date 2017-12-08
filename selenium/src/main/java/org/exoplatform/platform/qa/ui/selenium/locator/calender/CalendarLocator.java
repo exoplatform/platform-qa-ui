@@ -1667,12 +1667,13 @@ public class CalendarLocator {
                                                                          $(byId("UIListContainer")).find(byClassName("uiIconMiniArrowRight"));
 
   public static final SelenideElement ELEMENT_POUPUP_LIST_EVENT                                        =
-                                                                $(byClassName("spliterResizableListArea"));
+                                                                $(byClassName("uiIconMiniArrowRight"));
 
   public static final SelenideElement ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW                             = $(byId("UIWeekView"));
 
   public static final By ELEMENT_CHECK_CALENDAR=byClassName("iconCheckBox");
 
   public static final By ELEMENT_UNCHECK_CALENDAR=byClassName("iconUnCheckBox");
+  public static final SelenideElement ELEMENT_ICON_ADD_PARTICIPANT=$(byXpath("//*[@id=\"eventShare\"]/table/tbody/tr[3]/td[2]/a/i"));
 
 }

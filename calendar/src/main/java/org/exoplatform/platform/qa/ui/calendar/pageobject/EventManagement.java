@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.bouncycastle.crypto.tls.ConnectionEnd.server;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_USER_CLOSE_BUTTON;
@@ -77,8 +78,8 @@ public class EventManagement {
     }
     String cell = ELEMENT_CELL_TO_WORKING_PANEL.replace("$date", tempDate2).replace("$time", tempTime);
     info(cell);
-    evt.waitForAndGetElement(cell).click();
-    evt.waitForAndGetElement(ELEMENT_QUICK_ADD_EVENT_POPUP);
+    $(byXpath(cell)).click();
+    $(ELEMENT_QUICK_ADD_EVENT_POPUP).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -116,9 +117,9 @@ public class EventManagement {
       info("Selected date is current date" + tempTime);
     }
     String cell = ELEMENT_CELL_TO_WORKING_PANEL.replace("$date", tempDate2).replace("$time", tempTime);
-    testBase.rightClickOnElement(cell);
-    evt.click(ELEMENT_CONTEXT_MENU_ADD_EVENT);
-    evt.waitForAndGetElement(ELEMENT_QUICK_ADD_EVENT_POPUP);
+    $(byXpath(cell)).contextClick();
+    $(ELEMENT_CONTEXT_MENU_ADD_EVENT).click();
+    $(ELEMENT_QUICK_ADD_EVENT_POPUP).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -246,8 +247,8 @@ public class EventManagement {
         if (dateTimeFrom.length > 0)
           evt.type(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE, dateTimeFrom[0], true);
         if (dateTimeFrom.length > 1) {
-          evt.click(ELEMENT_QUICK_INPUT_EVENT_FROM_TIME_INPUT, 2);
-          evt.click(ELEMENT_QUICK_EVENT_SELECT_FROM_TIME.replace("${time}", dateTimeFrom[1]));
+          $(ELEMENT_QUICK_INPUT_EVENT_FROM_TIME_INPUT).click();
+          $(byXpath(ELEMENT_QUICK_EVENT_SELECT_FROM_TIME.replace("${time}", dateTimeFrom[1]))).click();
         }
       }
       if ((to != null) & (to != "")) {
@@ -255,8 +256,8 @@ public class EventManagement {
         if (dateTimeTo.length > 0)
           evt.type(ELEMENT_QUICK_INPUT_EVENT_TO_DATE, dateTimeTo[0], true);
         if (dateTimeTo.length > 1) {
-          evt.click(ELEMENT_QUICK_INPUT_EVENT_TO_TIME_INPUT, 2);
-          evt.click(ELEMENT_QUICK_EVENT_SELECT_TO_TIME.replace("${time}", dateTimeTo[1]));
+          $(ELEMENT_QUICK_INPUT_EVENT_TO_TIME_INPUT).click();
+          $(byXpath(ELEMENT_QUICK_EVENT_SELECT_TO_TIME.replace("${time}", dateTimeTo[1]))).click();
         }
       }
     }
@@ -498,12 +499,12 @@ public class EventManagement {
    * @param type int
    */
   public void addParticipants(String user, int type) {
-    evt.click(ELEMENT_ADD_PARTICIPANTS_BUTTON_IN_SCHEDULE_TAB);
+    $(ELEMENT_ADD_PARTICIPANTS_BUTTON_IN_SCHEDULE_TAB).click();
     pPer.selectUserPermission(user, type);
     if (type != 2 && type != 3 && type != 4)
-      evt.waitForAndGetElement(ELEMENT_USER_CHECKBOX_USERNAME.replace("${user}", user), 5000, 1, 2);
+      $(byXpath(ELEMENT_USER_CHECKBOX_USERNAME.replace("${user}", user))).parent().waitUntil(Condition.visible,Configuration.timeout);
     else
-      evt.waitForAndGetElement(ELEMENT_USER_CHECKBOX_FULLNAME.replace("${user}", user), 5000, 1, 2);
+      $(byXpath(ELEMENT_USER_CHECKBOX_FULLNAME.replace("${user}", user))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -545,7 +546,7 @@ public class EventManagement {
     info("To index is " + String.valueOf(toIndex));
     for (int i = fromIndex; i <= toIndex - 1; i++) {
       info("index:" + i);
-      assert evt.waitForAndGetElement(ELEMENT_SCHEDULE_BUSY_TIME.replace("${user}", user).replace("${index}", String.valueOf(i)))
+      assert $(byXpath(ELEMENT_SCHEDULE_BUSY_TIME.replace("${user}", user).replace("${index}", String.valueOf(i))))
                 .getAttribute("class")
                 .contains("busyDotTime") : "Wrong busy time";
     }
@@ -575,11 +576,11 @@ public class EventManagement {
       int fromIndex = convertFromTimeToIndex(timeFrom);
       int toIndex = convertFromTimeToIndex(timeTo);
       for (int i = fromIndex; i <= toIndex; i++) {
-        assert evt.waitForAndGetElement(ELEMENT_SCHEDULE_TIME.replace("${index}", String.valueOf(i)))
+        assert $(byXpath(ELEMENT_SCHEDULE_TIME.replace("${index}", String.valueOf(i))))
                   .getAttribute("class")
                   .contains("userSelection") : "Wrong schedule time";
       }
-      evt.waitForAndGetElement(ELEMENT_SCHEDULE_SELECTED_DATE.replace("$date", dateS));
+      $(byXpath(ELEMENT_SCHEDULE_SELECTED_DATE.replace("$date", dateS))).waitUntil(Condition.visible,Configuration.timeout);
     } catch (ParseException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
@@ -601,7 +602,7 @@ public class EventManagement {
     info("To is " + toIndex);
     switch (option) {
     case NEXT:
-      evt.click(ELEMENT_SCHEDULE_NEXT_DAY);
+      $(ELEMENT_SCHEDULE_NEXT_DAY).click();
       break;
     case PREVIOUS:
       evt.click(ELEMENT_SCHEDULE_PREVIOUS_DAY);
@@ -611,8 +612,8 @@ public class EventManagement {
     default:
       break;
     }
-    testBase.dragAndDropToObject(ELEMENT_SCHEDULE_DRAG.replace("${index}", String.valueOf(fromIndex)),
-                                 ELEMENT_SCHEDULE_DRAG.replace("${index}", String.valueOf(toIndex)));
+    $(byXpath(ELEMENT_SCHEDULE_DRAG.replace("${index}", String.valueOf(fromIndex)))).dragAndDropTo($(byXpath(ELEMENT_SCHEDULE_DRAG.replace("${index}", String.valueOf(toIndex)))));
+
   }
 
   /**
@@ -695,15 +696,15 @@ public class EventManagement {
     if (type == 0) {
       String[] temp = users.split("/");
       for (int i = 0; i < temp.length; i++) {
-        evt.type(ELEMENT_INVITATION_PARTICIPANT_TEXTBOX, "," + temp[i], false);
+        $(ELEMENT_INVITATION_PARTICIPANT_TEXTBOX).setValue(temp[i]);
       }
     } else {
-      evt.click(ELEMENT_PICK_USER_PARTICIPANTS_TAB);
+      $(ELEMENT_PICK_USER_PARTICIPANTS_TAB).click();
 
       pPer.selectUserPermission(users, type);
     }
     if (content != null && content != "") {
-      evt.type(ELEMENT_INVITATION_PARTICITPANT_MSG, content, true);
+      $(ELEMENT_INVITATION_PARTICITPANT_MSG).setValue(content);
     }
   }
 
@@ -738,10 +739,10 @@ public class EventManagement {
   public void moreDetailsEvent() {
     info("Go to More Details");
 
-    evt.waitForAndGetElement(ELEMENT_BUTTON_EVENT_MORE_DETAILS, testBase.getDefaultTimeout(), 1);
+    $(ELEMENT_BUTTON_EVENT_MORE_DETAILS).waitUntil(Condition.visible,Configuration.timeout);
     // click(ELEMENT_BUTTON_EVENT_MORE_DETAILS);
-    evt.clickByJavascript(ELEMENT_BUTTON_EVENT_MORE_DETAILS, 2);
-    evt.waitForElementNotPresent(ELEMENT_BUTTON_EVENT_MORE_DETAILS);
+    $(ELEMENT_BUTTON_EVENT_MORE_DETAILS).click();
+    $(ELEMENT_BUTTON_EVENT_MORE_DETAILS).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
@@ -763,8 +764,8 @@ public class EventManagement {
    * @param file name of file
    */
   public void removeAttachment(String file) {
-    evt.click(ELEMENT_EVENT_ATTACHMENT.replace("${file}", "Remove"));
-    evt.waitForElementNotPresent(ELEMENT_EVENT_ATTACHMENT.replace("${file}", file));
+    $(byXpath(ELEMENT_EVENT_ATTACHMENT.replace("${file}", "Remove"))).click();
+    $(byXpath(ELEMENT_EVENT_ATTACHMENT.replace("${file}", file))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
