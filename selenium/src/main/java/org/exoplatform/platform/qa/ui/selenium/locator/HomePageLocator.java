@@ -611,7 +611,7 @@ public final class HomePageLocator {
                                                                            byClassName("uiIconClose");
 
   public static final SelenideElement ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW                         =
-                                                                                   $(byXpath("//*[@id=\"$uicomponent.id\"]/div[2]"));
+                                                                                   $(byId("commentArea"));
 
   public static final SelenideElement ELEMENT_ICON_NOTIFICATION                                            =
                                                                 $(byXpath("//*[@id=\"UINotificationPopoverToolbarPortlet\"]/div[2]/a"));
