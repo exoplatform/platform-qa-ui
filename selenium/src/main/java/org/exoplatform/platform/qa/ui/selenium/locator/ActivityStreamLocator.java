@@ -492,7 +492,7 @@ public final class ActivityStreamLocator {
     public static final By              ELEMENT_ACTIONS_SCALE_SELECT_BOX                     = By.cssSelector("#scaleSelect");
 
     public static final By              ELEMENT_ACTIONS_DOWNLOAD_BTN                         =
-            By.cssSelector("#toolbarViewerRight .uiIconDownload.uiIconLightGray");
+            By.className("downloadBtn");
 
     public static final By              ELEMENT_ACTIONS_FULLSCREEN_BTN                       =
             By.cssSelector("#presentationMode .uiIconEcmsExpand.uiIconLightGray");
@@ -518,7 +518,7 @@ public final class ActivityStreamLocator {
             By.xpath(".//*[contains(@class,'profile')]//*[contains(@class,'dateTime')]");
 
     public static final By              ELEMENT_RIGHT_PANEL_COMMENT_INPUT_BOX                =
-            By.cssSelector("#commentTextAreaPreview");
+            By.className("commentTextInput");
 
     public static final By              ELEMENT_RIGHT_PANEL_COMMENT_AREA_BOX_WITH_NO_COMMENT = By.cssSelector(".noComment");
 

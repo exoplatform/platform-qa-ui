@@ -13,6 +13,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.Calendar;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -22,6 +23,8 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_ICON_DEFAULT_VIEW;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_INPUT_PATH;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class ActivityStream {
@@ -541,6 +544,23 @@ public class ActivityStream {
     info("Click on More button");
     evt.click(ELEMENT_SPACE_MENU_MORE_BTN);
 
+  }
+  public void verifyInsertedImageInDocumentApp (String imageName,Boolean isExist) {
+    String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+    String month = String.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1);
+    ELEMENT_ICON_DEFAULT_VIEW.click();
+    ELEMENT_INPUT_PATH.setValue("/").pressEnter();
+    $(byText("Public")).click();
+    if(isExist){
+      if ($(byText("Activity Stream Documents")).waitUntil(Condition.visible,Configuration.timeout)!=null) {
+        $(byText("Activity Stream Documents")).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(byText("Pictures")).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(byText(year)).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(byText(month)).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(byText(imageName)).shouldNot(Condition.visible);}
+    }else {
+      $(byText("Activity Stream Documents")).shouldNot(Condition.visible);
+    }
   }
 
   /**

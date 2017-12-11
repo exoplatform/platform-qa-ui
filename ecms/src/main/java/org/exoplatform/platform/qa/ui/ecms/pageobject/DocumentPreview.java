@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.ecms.pageobject;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -39,7 +40,7 @@ public class DocumentPreview {
   public void closeByClickCrossIcon() {
     info("Close preview mode by clicking on Cross (X) icon");
     evt.waitForAndGetElement(ELEMENT_PREVIEW_MODE_CROSS_ICON, 3000, 1);
-    evt.click(ELEMENT_PREVIEW_MODE_CROSS_ICON);
+    $(ELEMENT_PREVIEW_MODE_CROSS_ICON).click();
     evt.waitForElementNotPresent(ELEMENT_PREVIEW_MODE_CROSS_ICON, 3000, 1);
   }
 
