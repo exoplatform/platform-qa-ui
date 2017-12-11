@@ -1667,7 +1667,7 @@ public class CalendarLocator {
                                                                          $(byId("UIListContainer")).find(byClassName("uiIconMiniArrowRight"));
 
   public static final SelenideElement ELEMENT_POUPUP_LIST_EVENT                                        =
-                                                                $(byClassName("uiIconMiniArrowRight"));
+                                                              $(byClassName("spliterResizableListArea"));
 
   public static final SelenideElement ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW                             = $(byId("UIWeekView"));
 
