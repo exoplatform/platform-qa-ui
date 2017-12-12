@@ -40,9 +40,9 @@ public class SpaceHomePage {
     info("--Open Setting tab of the space");
     info("Click on the tab");
 
-    if (evt.waitForAndGetElement(ELEMENT_SPACE_SPACE_SETTINGS, 5000, 0) == null) {
-      evt.click(ELEMENT_SPACE_MENU_MORE, 2);
-      evt.clickByJavascript(ELEMENT_SPACE_SPACE_SETTINGS);
+    if ($(ELEMENT_SPACE_SPACE_SETTINGS).is(Condition.not(Condition.visible))) {
+      $(ELEMENT_SPACE_MENU_MORE).click();
+      $(ELEMENT_SPACE_SPACE_SETTINGS).click();
     } else {
       if($(ELEMENT_SPACE_SPACE_SETTINGS).is(Condition.not(Condition.visible))){
         refresh();
