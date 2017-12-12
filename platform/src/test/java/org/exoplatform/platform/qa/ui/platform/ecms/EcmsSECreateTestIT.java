@@ -112,8 +112,6 @@ public class EcmsSECreateTestIT extends Base {
    * <li>Test Case Name: Create File document.</li>
    * <li>Case ID:116642.</li>
    * <li>Test Case Name: Edit File document.</li>
-   */
-  /*
    * Step Number: 1 Step Name: - Step Description: Step 1: Edit File document
    * Input Data: - Create a File - Click Edit on action bar, perform to edit it -
    * Click Save & Close Expected Outcome: File is Edited successfully
