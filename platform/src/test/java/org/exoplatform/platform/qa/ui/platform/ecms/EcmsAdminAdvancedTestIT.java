@@ -9,6 +9,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.administration.Adm
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
@@ -22,6 +23,9 @@ import org.exoplatform.platform.qa.ui.selenium.platform.administration.ContentAd
 /**
  * @author ilyes
  */
+
+@Tag("sniff")
+@Tag("ecms")
 public class EcmsAdminAdvancedTestIT extends Base {
   NavigationToolbar     navigationToolbar;
 
