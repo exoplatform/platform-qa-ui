@@ -9,6 +9,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.administration.Adm
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
@@ -23,6 +24,9 @@ import org.exoplatform.platform.qa.ui.selenium.platform.administration.ContentAd
 /**
  * @author eXo
  */
+
+@Tag("sniff")
+@Tag("ecms")
 public class EcmsAdminTemplatesTestIT extends Base {
   NavigationToolbar     navigationToolbar;
 
@@ -46,8 +50,6 @@ public class EcmsAdminTemplatesTestIT extends Base {
    * <li>Test Case Name: View Metadata.</li>
    * <li>Case ID:116631.</li>
    * <li>Test Case Name: Delete Metadata.</li>
-   */
-  /*
    * Step Number: 1 Step Name: - Step Description: Step 1: Edit Metadata Input
    * Data: - Go to Content Administration/Template/ Metadata - Click corresponding
    * Edit icon of Metadata you want to edit - Perform to edit - Click Apply
