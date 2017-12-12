@@ -1,10 +1,14 @@
 package org.exoplatform.platform.qa.ui.platform.ecms;
 
-import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS;
+import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
+import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER2;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_SIDEBAR_SITES_MANAGEMENT;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
+
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
@@ -23,22 +27,12 @@ import org.exoplatform.platform.qa.ui.ecms.pageobject.SiteExplorerHome;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static org.exoplatform.platform.qa.ui.core.PLFData.*;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
-
 
 /**
  * @author eXo
  */
+@Tag("sniff")
+@Tag("ecms")
 public class EcmsSEBasicActionTestIT extends Base {
     NavigationToolbar navigationToolbar;
     SiteExplorerHome siteExplorerHome;
@@ -54,7 +48,7 @@ public class EcmsSEBasicActionTestIT extends Base {
         createNewDocument = new CreateNewDocument(this);
         manageLogInOut = new ManageLogInOut(this);
         manageAlert = new ManageAlert(this);
-        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+        manageLogInOut.signInCas(DATA_USER1, "gtngtn");
     }
 
     /**
@@ -372,4 +366,5 @@ public class EcmsSEBasicActionTestIT extends Base {
 
         siteExplorerHome.deleteData(titleCommonNode);
     }
+
 }
