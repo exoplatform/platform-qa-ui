@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
@@ -37,6 +38,8 @@ import org.exoplatform.platform.qa.ui.selenium.platform.administration.ChangeLan
  * @author exo update 26/01/2015
  */
 
+@Tag("ecms")
+@Tag("sniff")
 public class EcmsWCMTestIT extends Base {
   NavigationToolbar    navigationToolbar;
 
