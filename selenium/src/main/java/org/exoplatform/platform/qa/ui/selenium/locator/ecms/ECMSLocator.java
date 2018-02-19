@@ -248,10 +248,17 @@ public class ECMSLocator {
                                                                         By.xpath(".//*[@id='UIDocumentNodeList']//*[contains(@class,'rowView')]");
 
   // Address Bar
-  public static final SelenideElement ELEMENT_ADDRESS_BAR_ICON_VIEW = $(byClassName("uiIconEcmsViewIcons"));
-  public static final SelenideElement COPY_URL_TO_CLIPBOARD_BUTTON = $(byClassName("uiIconEcmsCopyUrlToClipboard"));
-  public static final SelenideElement OPEN_IN_DOCUMENT_ICON = $(byClassName("uiIconGotoFolder"));
-  public static final SelenideElement GO_BACK_ICON = $(byClassName("uiIconEcmsGoBack"));
+  public static final SelenideElement ELEMENT_ADDRESS_BAR_ICON_VIEW                                        =
+                                                                    $(byClassName("uiIconEcmsViewIcons"));
+
+  public static final SelenideElement COPY_URL_TO_CLIPBOARD_BUTTON                                         =
+                                                                   $(byClassName("uiIconEcmsCopyUrlToClipboard"));
+
+  public static final SelenideElement OPEN_IN_DOCUMENT_ICON                                                =
+                                                            $(byClassName("uiIconGotoFolder"));
+
+  public static final SelenideElement GO_BACK_ICON                                                         =
+                                                   $(byClassName("uiIconEcmsGoBack"));
 
   public static final By              ELEMENT_ADDRESS_BAR_LIST_VIEW                                        =
                                                                     By.xpath(".//*[@id='UIAddressBar']//*[@class='uiIconEcmsViewDefault uiIconEcmsViewList uiIconEcmsLightGray']");
@@ -1108,43 +1115,71 @@ public class ECMSLocator {
   public static final SelenideElement ELEMENT_CONTENT_LIST                                                 =
                                                            $(byId("UITreeExplorer"));
 
-  public static final SelenideElement ELEMENT_INPUT_PATH=$(byId("address"));
+  public static final SelenideElement ELEMENT_INPUT_PATH                                                   = $(byId("address"));
 
-  public static final SelenideElement ELEMENT_ACTION_BAR_MENU=$(byId("UIActionBar"));
+  public static final SelenideElement ELEMENT_ACTION_BAR_MENU                                              =
+                                                              $(byId("UIActionBar"));
 
-  public static final By ELEMENT_BUTTON_ADD_FOLDAR=byClassName("uiIconEcmsAddFolder");
+  public static final By              ELEMENT_BUTTON_ADD_FOLDAR                                            =
+                                                                byClassName("uiIconEcmsAddFolder");
 
-  public static final SelenideElement ELEMENT_INPUT_NAME_FOLDER=$(byId("titleTextBox"));
+  public static final SelenideElement ELEMENT_INPUT_NAME_FOLDER                                            =
+                                                                $(byId("titleTextBox"));
 
-  public static final SelenideElement ELEMENT_BUTTON_CONFIRM_ADD_FOLDER=$(byClassName("addFolderButton"));
+  public static final SelenideElement ELEMENT_BUTTON_CONFIRM_ADD_FOLDER                                    =
+                                                                        $(byClassName("addFolderButton"));
 
-  public static final SelenideElement ELEMENT_LIST_DOCUMENT_FOLDER=$(byId("UIDocumentNodeList"));
+  public static final SelenideElement ELEMENT_LIST_DOCUMENT_FOLDER                                         =
+                                                                   $(byId("UIDocumentNodeList"));
 
-  public static final By ELEMENT_ICON_CHECKBOX=byClassName("checkbox");
+  public static final By              ELEMENT_ICON_CHECKBOX                                                =
+                                                            byClassName("checkbox");
 
-  public static final SelenideElement ELEMENT_BUTTON_DELETE_FOLDER_DOCUMENT=$(byId("ECMContextMenu")).find(byClassName("uiIconEcmsDelete"));
+  public static final SelenideElement ELEMENT_BUTTON_DELETE_FOLDER_DOCUMENT                                =
+                                                                            $(byId("ECMContextMenu")).find(byClassName("uiIconEcmsDelete"));
 
-  public static final SelenideElement ELEMENT_BUTTON_CONFIRM_DELETE=$(byClassName("UIDeleteFolderConfirmMessage")).find(byClassName("OK"));
+  public static final SelenideElement ELEMENT_BUTTON_CONFIRM_DELETE                                        =
+                                                                    $(byClassName("UIDeleteFolderConfirmMessage")).find(byClassName("OK"));
 
-  public static final SelenideElement ELEMENT_BUTTON_RENAME_FOLDER= $(byId("ECMContextMenu")).find(byClassName("uiIconEcmsRename"));
+  public static final SelenideElement ELEMENT_BUTTON_RENAME_FOLDER                                         =
+                                                                   $(byId("ECMContextMenu")).find(byClassName("uiIconEcmsRename"));
 
-  public static final SelenideElement ELEMENT_BUTTON_COPY=$(byId("ECMContextMenu")).find(byClassName("uiIconEcmsCopy"));
+  public static final SelenideElement ELEMENT_BUTTON_COPY                                                  =
+                                                          $(byId("ECMContextMenu")).find(byClassName("uiIconEcmsCopy"));
 
-  public static final SelenideElement ELEMENT_INPUT_REMANE_FOLDER=$(byId("renameField"));
+  public static final SelenideElement ELEMENT_INPUT_REMANE_FOLDER                                          =
+                                                                  $(byId("renameField"));
 
-  public static final SelenideElement ELEMENT_BUTTON_CONFIRM_RENAME=$(byId("renameLink"));
+  public static final SelenideElement ELEMENT_BUTTON_CONFIRM_RENAME                                        =
+                                                                    $(byId("renameLink"));
 
-  public static final SelenideElement ELEMENT_ICON_LIST_VIEW=$(byClassName("uiIconEcmsViewList"));
+  public static final SelenideElement ELEMENT_ICON_LIST_VIEW                                               =
+                                                             $(byClassName("uiIconEcmsViewList"));
 
-  public static final SelenideElement ELEMENT_ICON_DEFAULT_VIEW=$(byClassName("uiIconEcmsViewIcons"));
+  public static final SelenideElement ELEMENT_ICON_DEFAULT_VIEW                                            =
+                                                                $(byClassName("uiIconEcmsViewIcons"));
 
-  public static final SelenideElement ELEMENT_POPUP_RIGHT_MENU_CONTAINER=$(byClassName("uiRightPopupMenuContainer"));
+  public static final SelenideElement ELEMENT_POPUP_RIGHT_MENU_CONTAINER                                   =
+                                                                         $(byClassName("uiRightPopupMenuContainer"));
 
-  public static final By ELEMENT_DELETE_BUTTON_IN_RIGHT_CLICK_CONTAINER=byClassName("uiIconEcmsDelete");
+  public static final By              ELEMENT_DELETE_BUTTON_IN_RIGHT_CLICK_CONTAINER                       =
+                                                                                     byClassName("uiIconEcmsDelete");
 
-  public static final By ELEMENT_RENAME_BUTTON_IN_RIGHT_CLICK=byClassName("uiIconEcmsRename");
+  public static final By              ELEMENT_RENAME_BUTTON_IN_RIGHT_CLICK                                 =
+                                                                           byClassName("uiIconEcmsRename");
 
-  public static final SelenideElement ELEMENT_LIST_FOLDER_IN_DEFAULT_VIEW=$(byId("UIDocumentWorkspace"));
+  public static final SelenideElement ELEMENT_LIST_FOLDER_IN_DEFAULT_VIEW                                  =
+                                                                          $(byId("UIDocumentWorkspace"));
 
-  public static final SelenideElement ELEMENT_BUTTON_CONFIRM_DELETE_FILE=$(byClassName("UIDeleteFileConfirmMessage")).find(byClassName("OK"));
+  public static final SelenideElement ELEMENT_BUTTON_CONFIRM_DELETE_FILE                                   =
+                                                                         $(byClassName("UIDeleteFileConfirmMessage")).find(byClassName("OK"));
+
+  public static final SelenideElement ELEMENT_FOLDER_DOCUMENT                                              =
+                                                              $(byXpath("//*[@id=\"UIDocumentNodeList\"]/div/div[1]/div[4]/a"));
+
+  public static final SelenideElement ELEMENT_LIST_DOCUMENTS                                               =
+                                                             $(byClassName("uiListGrid"));
+
+  public static final SelenideElement ELEMENT_LIST_DOCUMENTS_IN_SPACE                                      =
+                                                                      $(byId("UIDocumentContainer"));
 }

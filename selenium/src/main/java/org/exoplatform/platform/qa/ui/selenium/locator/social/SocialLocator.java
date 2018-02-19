@@ -2312,14 +2312,10 @@ public final class SocialLocator {
                                                                        $(byXpath("//*[@id=\"UINotificationPopoverToolbarPortlet\"]/div[2]/a/i/span"));
 
   public static final By              ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION                            =
-          byAttribute("class","btn btn-primary pull-right");
+                                                                             byAttribute("class", "btn btn-primary pull-right");
 
   public static final SelenideElement ELEMENT_LIST_MY_SPACES_IN_LEFT_NAVIGATION                         =
                                                                                 $(byId("UISpaceNavigationPortlet"));
-
-
-
-
 
   public static final SelenideElement ELEMENT_SPACE_NAME_LEFT_NAVIGATION                                =
                                                                          $(byId("UIBreadCrumbsNavigationPortlet"));
@@ -2335,7 +2331,6 @@ public final class SocialLocator {
 
   public static final By              ELEMENT_ICON_DELETE_APPLICATION_FROM_SPACE                        =
                                                                                  byClassName("uiIconClose");
-
 
   public static final By              ELEMENT_BUTTON_JOIN_SPACE                                         = byClassName("btn");
 
@@ -2354,7 +2349,11 @@ public final class SocialLocator {
   public static final SelenideElement ELEMENT_NAME_PROFILE_OF_USERS                                     =
                                                                     $(byId("UIBreadCrumbsNavigationPortlet"));
 
-  public static final By ELEMENT_TASK_TAB=byClassName("uiIconAppTaskManagementApplication");
   public static final SelenideElement ELEMENT_MINI_CONNECTION_PORTLET= $(byId("UIMiniConnectionsPortlet"));
+  public static final By              ELEMENT_TASK_TAB                                                  =
+                                                       byClassName("uiIconAppTaskManagementApplication");
+
+  public static final SelenideElement ELEMENT_CONTAINER_ACTIVITY                                        =
+                                                                 $(byClassName("MediaName"));
 
 }
