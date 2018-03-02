@@ -16,7 +16,6 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
 /**
  * This class will define actions about management project
  */
@@ -36,7 +35,7 @@ public class TasksManagement {
 
   /**
    * Select an option in Task List
-   * 
+   *
    * @param op is an option in the list as: Incoming,All tasks,...
    */
   public void selectOptionTask(optionTask op) {

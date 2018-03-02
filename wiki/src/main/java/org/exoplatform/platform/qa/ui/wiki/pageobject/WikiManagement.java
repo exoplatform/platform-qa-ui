@@ -110,7 +110,7 @@ public class WikiManagement {
   public void saveAddPage() {
     info("Save all changes");
     ELEMENT_SAVE_BUTTON_ADD_PAGE.click();
-    ELEMENT_SAVE_BUTTON_ADD_PAGE.waitUntil(Condition.disappears, Configuration.timeout);
+   ELEMENT_SAVE_BUTTON_ADD_PAGE.waitUntil(Condition.disappears, Configuration.timeout);
     info("Wiki page simple is created successfully");
   }
 

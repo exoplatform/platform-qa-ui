@@ -40,15 +40,15 @@ public class ProjectsManagement {
   public void selectOpContMenuProject(optionContMenuProject op) {
     goToContMenuProject();
     switch (op) {
-    case Add_Project:
-      info("Select Add Project option");
-      break;
-    case Show_Hidden_Project:
-      info("Select Show hide Project");
-      break;
-    default:
-      info("No option in the list. Please select correct option.");
-      break;
+      case Add_Project:
+        info("Select Add Project option");
+        break;
+      case Show_Hidden_Project:
+        info("Select Show hide Project");
+        break;
+      default:
+        info("No option in the list. Please select correct option.");
+        break;
     }
   }
 
@@ -70,27 +70,27 @@ public class ProjectsManagement {
   public void selectOpContMenuGivenProject(String project, optionContMenuGivenProject op) {
     goToContMenuGivenProject(project);
     switch (op) {
-    case Edit:
-      info("Select Edit option");
-      break;
-    case Share:
-      info("Select Share option");
-      break;
-    case Clone:
-      info("Select Clone option");
-      break;
-    case Hide:
-      info("Select Hide option");
-      break;
-    case Delete:
-      info("Select Delete option");
-      break;
-    case Add_Project:
-      info("Select Add Project option");
-      break;
-    default:
-      info("No option in the list. Please select correct option");
-      break;
+      case Edit:
+        info("Select Edit option");
+        break;
+      case Share:
+        info("Select Share option");
+        break;
+      case Clone:
+        info("Select Clone option");
+        break;
+      case Hide:
+        info("Select Hide option");
+        break;
+      case Delete:
+        info("Select Delete option");
+        break;
+      case Add_Project:
+        info("Select Add Project option");
+        break;
+      default:
+        info("No option in the list. Please select correct option");
+        break;
     }
   }
 

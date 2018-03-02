@@ -511,7 +511,7 @@ public class ForumTopicManagement {
     switchTo().defaultContent();
     info("click on Attached file button");
     $(ELEMENT_START_TOPIC_ATTACH_FILE).click();
-    File file = $(By.className("file")).uploadFromClasspath("data/forum/topic_attachment.txt");
+    File file = $(By.className("file")).uploadFromClasspath("topic_attachment.txt");
     assertTrue(file.exists());
     $(ELEMENT_SAVE_BTN).click();
 

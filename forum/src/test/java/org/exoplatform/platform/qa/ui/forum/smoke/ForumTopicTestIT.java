@@ -55,7 +55,7 @@ public class ForumTopicTestIT extends Base {
     if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
       $(ELEMENT_SKIP_BUTTON).click();
     }
-    manageLogInOut.signInCas(username, password);
+    manageLogInOut.signInCas(username,password);
   }
 
   @Test

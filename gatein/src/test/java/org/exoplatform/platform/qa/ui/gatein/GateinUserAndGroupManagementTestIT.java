@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.gatein;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_CONTENT_PEOPLE;
@@ -347,6 +348,7 @@ public class GateinUserAndGroupManagementTestIT extends Base {
 
   @Test
   @Tag("search")
+  @Tag("aymen")
   public void test12_SearchUserFromPeopleSearchByName() {
     String username = "username" + getRandomNumber();
     String password = "password" + getRandomNumber();

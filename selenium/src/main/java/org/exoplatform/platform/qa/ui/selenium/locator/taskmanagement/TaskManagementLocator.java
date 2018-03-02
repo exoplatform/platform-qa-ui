@@ -69,6 +69,7 @@ public class TaskManagementLocator {
   public static final SelenideElement ELEMENT_INPUT_LABEL                           = $(byClassName("addLabelInput"));
 
   public static final SelenideElement ELEMENT_LABEL_BUTTON_CONFIRM_DELETE           = $(byClassName("confirmDelete"));
+  public static final By ELEMENT_CLICK  = By.id("taskManagement");
 
   // CENTRAL PANEL
 
@@ -179,6 +180,25 @@ public class TaskManagementLocator {
   public static final String          ELEMENT_VIEW_ALL_REPLIES_LINK_TASK            = "SubCommentShowAll_{id}";
 
   public static final SelenideElement ELEMENT_LEFT_PANEL_IN_TASK_PAGE               = $(byClassName("left-menu"));
+
+  public static final SelenideElement ELEMENT_MARK_AS_COMPLETED                       =
+          $(byClassName("uiIconValidate"));
+
+  public static final SelenideElement ELEMENT_FILTER                     =
+          $(byClassName("uiIcon"));
+
+  public static final SelenideElement  ELEMENT_SHOW_COMPLETED_TASK                             =
+          $(byClassName("uiCheckbox"));
+
+  public static final SelenideElement  ELEMENT_CLOSE_FILTER                             =
+          $(byClassName("actionIcon"));
+
+
+
+
+
+
+
   // Add labels form
 
   // Edit labels form

@@ -500,10 +500,10 @@ public class WikiLocators {
                                                                                 By.xpath(".//*[@id='UIWikiPageEditForm']//*[contains(text(),'Draft saved')]");
 
   public static final SelenideElement ELEMENT_SAVE_BUTTON_ADD_PAGE                               =
-                                                                   $(byId("UISubmitToolBarUpper_SavePage_"));
+                                                                   $(byId("UISubmitToolBarBottom_SavePage_"));
 
   public static final By              ELEMENT_CANCEL_BUTTON_ADD_PAGE                             =
-                                                                     By.id("UISubmitToolBarBottom_Cancel_");
+                                                                     By.id("UISubmitToolBarUpper_Cancel_");
 
   public static final By              ELEMENT_RICHTEXT_BUTTON                                    =
                                                               By.xpath("//*[contains(text(),'Rich Text')]");
