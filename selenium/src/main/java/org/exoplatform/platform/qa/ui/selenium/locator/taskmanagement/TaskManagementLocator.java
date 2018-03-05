@@ -196,6 +196,10 @@ public static final String ELEMENT_VIEW_ALL_REPLIES_LINK_TASK="SubCommentShowAll
 
   public static final SelenideElement ELEMENT_MINI_CALENDAR_TO                      = $(byId("UITaskToCalendarControl"));
 
+  public static final SelenideElement ELEMENT_ICON_ADD_IMAGE_IN_COMMENT=$(byClassName("cke_button__selectimage_icon"));
+
+  public static final SelenideElement ELEMENT_BUTTON_OK_UPLOAD=$(byClassName("cke_dialog_ui_hbox_first")).find(byClassName("btn"));
+
   // Add labels form
 
   // Edit labels form
