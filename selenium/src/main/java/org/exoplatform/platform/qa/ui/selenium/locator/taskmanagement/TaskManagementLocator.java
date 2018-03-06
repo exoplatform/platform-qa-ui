@@ -181,6 +181,7 @@ public static final String ELEMENT_VIEW_ALL_REPLIES_LINK_TASK="SubCommentShowAll
 
   public static final SelenideElement ELEMENT_LEFT_PANEL_IN_TASK_PAGE               = $(byClassName("left-menu"));
 
+
   public static final SelenideElement ELEMENT_TITLE_OF_PROJECT=$(byClassName("projectName"));
 
   public static final SelenideElement ELEMENT_WORK_PLANED_FIELD                     =
@@ -200,6 +201,15 @@ public static final String ELEMENT_VIEW_ALL_REPLIES_LINK_TASK="SubCommentShowAll
   public static final SelenideElement ELEMENT_ICON_ADD_IMAGE_IN_COMMENT=$(byClassName("cke_button__selectimage_icon"));
 
   public static final SelenideElement ELEMENT_BUTTON_OK_UPLOAD=$(byClassName("cke_dialog_ui_hbox_first")).find(byClassName("btn"));
+  public static final SelenideElement ELEMENT_UNSECHEDULED                         =
+          $(byXpath("//*[@id=\"taskManagement\"]/div[3]/div[2]/div/div/div[6]/div[1]/div/div[2]/span"));
+
+  public static final SelenideElement ELEMENT_INPUT_IN_CALENDAR              =   $(byXpath("//*[@id=\"taskManagement\"]/div[3]/div[2]/div/div/div[6]/div[1]/div/div[2]/i"));
+  public static final SelenideElement ELEMENT_CHECK_ALL_DAY               = $(byClassName("uiCheckbox"));
+
+  public static final SelenideElement ELEMENT_LIST                                =
+          $(byXpath("//*[@id=\"UIActionBar\"]/div[3]/ul[1]/li[4]"));
+
 
   // Add labels form
 

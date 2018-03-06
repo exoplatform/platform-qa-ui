@@ -272,11 +272,11 @@ public class SpaceManagement {
   public void sendARequestToASpace(String space, boolean... isVerify) {
     info("Send a request to a space");
     $(byText(space)).parent()
-                    .parent()
-                    .parent()
-                    .find(ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_TO_JOIN_BTN)
-                    .waitUntil(Condition.appears, Configuration.timeout)
-                    .click();
+            .parent()
+            .parent()
+            .find(ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_TO_JOIN_BTN)
+            .waitUntil(Condition.appears, Configuration.timeout)
+            .click();
     if (isVerify.length > 0) {
       info("Verify that request to join button is hidden and request pending status is shown");
       evt.waitForAndGetElement(ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_PENDING.replace("${space}", space), 3000, 1);
