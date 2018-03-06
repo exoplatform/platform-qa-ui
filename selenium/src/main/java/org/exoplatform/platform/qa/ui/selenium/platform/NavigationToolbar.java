@@ -123,8 +123,8 @@ public class NavigationToolbar {
   }
 
   /**
-   * function: Go to Users and Group management (administration - Users -
-   * Groups and Roles)
+   * function: Go to Users and Group management (administration - Users - Groups
+   * and Roles)
    */
   public void goToUsersAndGroupsManagement() {
     info("--Go to Users and groups management--");
@@ -261,9 +261,9 @@ public class NavigationToolbar {
    */
   public void goToChangeLanguage() {
     info("Open Change Language popup");
-    evt.waitForAndGetElement(ELEMENT_TOPBAR_AVATAR);
-    evt.click(ELEMENT_TOPBAR_AVATAR);
-    evt.click(ELEMENT_AVATAR_CHANGELANGUAGE);
+    $(ELEMENT_TOPBAR_AVATAR).waitUntil(Condition.visible, Configuration.timeout);
+    $(ELEMENT_TOPBAR_AVATAR).click();
+    $(ELEMENT_AVATAR_CHANGELANGUAGE).click();
 
   }
 
@@ -333,10 +333,10 @@ public class NavigationToolbar {
    */
   public void goToBanding() {
     info("-- Go to Banding page --");
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     $(ELEMENT_ADMINISTRATION_PORTAL).hover();
-    $(ELEMENT_ADMINISTRATION_PORTAL_BRANDING).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_ADMINISTRATION_PORTAL_BRANDING).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_ADMINISTRATION_PORTAL_BRANDING).click();
   }
 
@@ -474,7 +474,7 @@ public class NavigationToolbar {
    * Open search administration
    */
   public void goToAdminSearch() {
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     $(ELEMENT_MENU_CONTENT_LINK).hover();
     $(ELEMENT_SEARCH_LINK).click();

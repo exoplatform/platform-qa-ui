@@ -704,9 +704,9 @@ public final class HomePageLocator {
           $(byXpath("//*[@id=\"UIUserPlatformToolBarPortlet\"]/ul/li[4]/a"));
 
 
+  public static final SelenideElement ELEMENT_POPUP_LIST_OF_LANGUAGES                                      =
+                                                                      $(byClassName("uiChangeLanguageForm"));
 
-
-
-
-
+  public static final SelenideElement ELEMENT_BUTTON_CANCEL_CHANGE_LANGUAGES                               =
+                                                                             $(byXpath("//*[@id=\"UIMaskWorkspace\"]/div/div/div/div[2]/a[2]"));
 }
