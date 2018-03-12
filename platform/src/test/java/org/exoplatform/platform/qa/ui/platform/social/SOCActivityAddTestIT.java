@@ -1,12 +1,14 @@
 package org.exoplatform.platform.qa.ui.platform.social;
 
-import static com.codeborne.selenide.Selectors.byAttribute;
-import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_COMPOSER_SHARE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +16,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 
 /**
  * Created by exo on 23/10/17.
@@ -21,6 +24,13 @@ import org.exoplatform.platform.qa.ui.commons.Base;
 @Tag("smoke")
 @Tag("social")
 public class SOCActivityAddTestIT extends Base {
+  ActivityStream activityStream;
+
+  @BeforeEach
+  public void setupBeforeMethod() {
+    info("Start setUpBeforeMethod");
+    activityStream = new ActivityStream(this);
+  }
 
   @Test
   public void test02_Upload_File_Without_Text() {
@@ -46,4 +56,25 @@ public class SOCActivityAddTestIT extends Base {
                                                              .waitUntil(Condition.disappears, Configuration.timeout);
   }
 
+  @Test
+  @Tag("PLF-7912")
+  public void test02_CheckIconTitleWhenLikeActivity() {
+    String activity1 = "activity1" + getRandomNumber();
+    ELEMENT_TAB_LINK.click();
+    refresh();
+    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
+    ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
+    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
+    activityStream.addActivity(activity1, "");
+    String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile"))
+                                                         .waitUntil(Condition.visible, Configuration.timeout)
+                                                         .click();
+    ELEMENT_ICON_LIKE_IN_PREVIEW_MODE.click();
+    ELEMENT_ICON_LIKE_IN_PREVIEW_MODE.waitUntil(Condition.have(Condition.attribute("data-original-title", "Unlike")),
+                                                Configuration.timeout);
+    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+    activityStream.deleteActivity(activity1);
+
+  }
 }
