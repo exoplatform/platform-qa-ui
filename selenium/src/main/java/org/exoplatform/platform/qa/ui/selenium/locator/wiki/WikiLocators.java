@@ -1524,4 +1524,6 @@ public class WikiLocators {
  
 
   public static final SelenideElement ELEMENT_BUTTON_OK_IN_WARNING_POPUB_TEMPLATE=$(byClassName("warningIcon")).parent().parent().parent().find(byClassName("btn"));
+
+  public static final SelenideElement ELEMENT_PAGE_WIKI_CONTENT=$(byId("UIViewContentDisplay"));
 }
