@@ -709,4 +709,6 @@ public final class HomePageLocator {
 
   public static final SelenideElement ELEMENT_BUTTON_CANCEL_CHANGE_LANGUAGES                               =
                                                                              $(byXpath("//*[@id=\"UIMaskWorkspace\"]/div/div/div/div[2]/a[2]"));
+
+  public static final SelenideElement ELEMENT_BUTTON_SHOW_MORE_SPACES_IN_LEFT_NAVIGATION=$(byId("LeftNavigation")).find(byClassName("moreSpace")).find(byClassName("btn"));
 }
