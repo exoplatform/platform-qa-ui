@@ -660,7 +660,7 @@ public class CalendarLocator {
                                                                   "Are you sure you want to delete this feed from the list?";
 
   public static final String          ELEMENT_FEED_CONFIRM_ADD_FEED                                    =
-                                                                    "The feed $name has been generated successfully";
+                                                                    "The feed $name has been generated successfully.";
 
   // Remote calendar form
   public static final By              ELEMENT_REMOTE_CALENDAR_FORM                                     =

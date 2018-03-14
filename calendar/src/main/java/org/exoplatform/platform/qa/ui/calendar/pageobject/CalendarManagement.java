@@ -704,13 +704,13 @@ public class CalendarManagement {
     goToDisplayCalendarTab();
     if (isShow != null) {
       if (isShow) {
-        if (evt.waitForAndGetElement(ELEMENT_DISPLAY_CALENDAR_FORM_UNCHECKED.replace("$calendar", calendarName), 5000, 0) != null)
-          evt.click(ELEMENT_DISPLAY_CALENDAR_FORM_UNCHECKED.replace("$calendar", calendarName));
-        evt.waitForAndGetElement(ELEMENT_DISPLAY_CALENDAR_FORM_CHECKED.replace("$calendar", calendarName));
+        if ($(byXpath(ELEMENT_DISPLAY_CALENDAR_FORM_UNCHECKED.replace("$calendar", calendarName))).parent().is(Condition.visible))
+          $(byXpath(ELEMENT_DISPLAY_CALENDAR_FORM_UNCHECKED.replace("$calendar", calendarName))).parent().click();
+          $(byXpath(ELEMENT_DISPLAY_CALENDAR_FORM_CHECKED.replace("$calendar", calendarName))).parent().waitUntil(Condition.visible,Configuration.timeout);
       } else {
-        if (evt.waitForAndGetElement(ELEMENT_DISPLAY_CALENDAR_FORM_CHECKED.replace("$calendar", calendarName), 5000, 0) != null)
-          evt.click(ELEMENT_DISPLAY_CALENDAR_FORM_CHECKED.replace("$calendar", calendarName));
-        evt.waitForAndGetElement(ELEMENT_DISPLAY_CALENDAR_FORM_UNCHECKED.replace("$calendar", calendarName));
+        if ($(byXpath(ELEMENT_DISPLAY_CALENDAR_FORM_CHECKED.replace("$calendar", calendarName))).is(Condition.visible))
+          $(byXpath(ELEMENT_DISPLAY_CALENDAR_FORM_CHECKED.replace("$calendar", calendarName))).click();
+          $(byXpath(ELEMENT_DISPLAY_CALENDAR_FORM_UNCHECKED.replace("$calendar", calendarName))).parent().waitUntil(Condition.visible,Configuration.timeout);
       }
     } else {
       if (evt.waitForAndGetElement(ELEMENT_DISPLAY_CALENDAR_FORM_UNCHECKED.replace("$calendar", calendarName), 5000, 0) != null)
@@ -740,7 +740,7 @@ public class CalendarManagement {
   public void addEditFeed(String name, String url, String calendars) {
     info("Add new feed");
     if (name != null && name != "") {
-      evt.type(ELEMENT_FEED_NAME_INPUT, name, true);
+      $(ELEMENT_FEED_NAME_INPUT).setValue(name);
     }
     if (url != null && url != "") {
       evt.type(ELEMENT_FEED_URL_INPUT, name, true);
@@ -748,8 +748,8 @@ public class CalendarManagement {
     if (calendars != null && calendars != "") {
       String[] calendar = calendars.split("/");
       for (int i = 0; i < calendar.length; i++) {
-        evt.select(ELEMENT_FEED_CALENDAR_OPTION, calendar[i]);
-        evt.click(ELEMENT_FEED_EDIT_FEED_ADD_CALENDAR);
+        $(ELEMENT_FEED_CALENDAR_OPTION).selectOption(calendar[i]);
+        $(ELEMENT_FEED_EDIT_FEED_ADD_CALENDAR).click();
       }
     }
   }
@@ -794,7 +794,7 @@ public class CalendarManagement {
     info("Delete Feed");
     ManageAlert alert = new ManageAlert(testBase);
     Button button = new Button(testBase);
-    evt.click(ELEMENT_FEED_LIST_ITEM_DELETE_BUTTON.replace("$name", feed));
+    $(byXpath(ELEMENT_FEED_LIST_ITEM_DELETE_BUTTON.replace("$name", feed))).click();
     if (isVerify != null) {
       if (isVerify)
         alert.verifyAlertMessage(ELEMENT_FEED_CONFIRM_DELETE);
@@ -1092,7 +1092,7 @@ public class CalendarManagement {
    */
   public void goToFeedTab() {
     info("Click on the Display calendar tab");
-    evt.click(ELEMENT_CALENDAR_SETTING_FEED_TAB);
+    $(ELEMENT_CALENDAR_SETTING_FEED_TAB).click();
 
   }
 
