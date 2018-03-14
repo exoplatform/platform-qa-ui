@@ -39,10 +39,7 @@ public class ChatLocator {
 
   public static final By              ELEMENT_CHAT_ICON                         = By.xpath(".//*[@id='chat-status']/a");
 
-  public static final SelenideElement ELEMENT_CHAT_ICON_ADD_ROOM                =
-                                                                 $(byXpath("//*[@id=\"chat-users\"]/table/tbody/tr[4]/td")).parent()
-                                                                                                                           .parent()
-                                                                                                                           .find(byClassName("uiIconChatSimplePlusMini"));
+  public static final SelenideElement ELEMENT_CHAT_ICON_ADD_ROOM                =$(byClassName("uiIconChatSimplePlusMini"));
 
   public static final SelenideElement ELEMENT_CHAT_INPUT_ROOM_NAME              = $(byXpath("//*[@id=\"team-modal-name\"]"));
 
@@ -83,4 +80,14 @@ public class ChatLocator {
   public static final SelenideElement ELEMENT_CHAT_MESSAGE_CONTAINER            = $(byClassName("msLinkInMes"));
 
   public static final SelenideElement ELEMENT_CHAT_BUTTON_HIDE_OFF_LINE         = $(byClassName("uiIconChatMember"));
+
+  public static final SelenideElement ELEMENT_ICON_CHAT=$(byId("chat-status"));
+
+  public static final SelenideElement ELEMENT_CHAT_STATUS_AVAILABLE=$(byClassName("chat-status-available"));
+
+  public static final SelenideElement ELEMENT_CHAT_STATUS_DONOTDISTURB=$(byClassName("chat-status-donotdisturb"));
+
+  public static final SelenideElement ELEMENT_CHAT_STATUS_AWAY=$(byClassName("chat-status-away"));
+
+  public static final SelenideElement ELEMENT_CHAT_STATUS_INVISIBLE=$(byClassName("chat-status-invisible"));
 }
