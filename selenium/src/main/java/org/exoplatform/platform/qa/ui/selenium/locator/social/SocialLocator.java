@@ -1401,8 +1401,8 @@ public final class SocialLocator {
   public static final By              ELEMENT_UIMINICONNECTIONS_PORLET_CONNECTED_STATUS                 =
                                                                                         By.xpath(".//*[@id='UIActionProfilePortlet']//*[@class='btn show-default']/*[@class='uiIconStatusConnected']");
 
-  public static final By              ELEMENT_UIMINICONNECTIONS_PORLET_DISCONNECTED_STATUS              =
-                                                                                           By.xpath(".//*[@id='UIActionProfilePortlet']//*[@class='btn hide-default']/*[@class='uiIconStatusDisconnect']");
+  public static final By              ELEMENT_UIMINICONNECTIONS_PORLET_DISCONNECTED_STATUS              =(byClassName("uiIconStatusDisconnect"));
+
 
   public static final By              ELEMENT_UIMINICONNECTIONS_PORTLET_DENY_STATUS                     =
                                                                                     By.xpath(".//*[@id='UIRelationshipAction']//*[@class='uiIconStatusDeny']/..");
