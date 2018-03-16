@@ -10,6 +10,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocat
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.ELEMENT_FAQ_QUESTION_LIST;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_CALENDAR_WORKING_PANEL;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -256,5 +257,16 @@ public class HomePagePlatform {
   public enum displayModeType {
     My_Activities, All_Activities, My_Spaces, Connections;
   }
+/**
+ * Go to user profile
+ */
 
+public void goToUserProfile(){
+
+  info("-- Go to user profile --");
+
+  $( ELEMENT_ACCOUNT_NAME_LINK).click();
+  $(ELEMENT_USER_PROFILE).click();
+
+}
 }
