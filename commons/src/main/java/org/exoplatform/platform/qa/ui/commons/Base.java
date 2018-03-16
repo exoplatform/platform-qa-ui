@@ -85,5 +85,4 @@ public class Base extends TestBase {
     }
     Screenshots.finishContext();
   }
-
 }

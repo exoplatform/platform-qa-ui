@@ -2359,4 +2359,12 @@ public final class SocialLocator {
   public static final By ELEMENT_BUTTON_ACCEPT_INVITATION=byClassName("action-item");
   public static final By ELEMENT_BUTTON_CANCEL_INVITATION=byClassName("cancel-item");
 
+
+  public static final By ELEMENT_EDIT_PROFILE= byClassName("uiIconEdit");
+  public static final By ELEMENT_TITLE_INPUT= byClassName("textarea");
+  public static final By ELEMENT_BUTTON_SAVE= byXpath("//*[@id=\"UIEditUserProfileForm\"]/div[3]/button[1]");
+  public static final By ELEMENT_ABOUT_ME= byClassName("simpleBox");
+
+
+
 }

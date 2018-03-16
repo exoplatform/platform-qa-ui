@@ -684,4 +684,14 @@ public final class HomePageLocator {
 
   public static final SelenideElement ELEMENT_GAGET_SUGGESTION_SPACE                                       =
                                                                      $(byId("spaceSuggest"));
+
+  public static final SelenideElement ELEMENT_USER_PROFILE                                    =
+          $(byXpath("//*[@id=\"UIUserPlatformToolBarPortlet\"]/ul/li[4]/a"));
+
+
+
+
+
+
+
 }
