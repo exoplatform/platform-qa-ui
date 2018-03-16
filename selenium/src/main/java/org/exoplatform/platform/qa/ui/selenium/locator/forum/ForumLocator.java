@@ -891,4 +891,11 @@ public class ForumLocator {
   public final By                     ELEMENT_MOVE_TOPIC_POPUP                           = By.id("UIForumPopupWindow");
 
   public static final SelenideElement ELEMENT_BUTTON_SUBMIT_POST= $(byXpath("//*[@id=\"UIPostForm\"]/div[3]/button[1]"));
+
+
+  public static final SelenideElement ELEMENT_TOPIC_MORE_ACTION= $(byXpath("//*[@id=\"UITopicDetail\"]/div[4]/div[1]/ul/li[3]/div/div[1]"));
+
+  public static final SelenideElement ELEMENT_TOPIC_LOCK= $(byXpath("//*[@id=\"UITopicDetail\"]/div[4]/div[1]/ul/li[3]/div/ul/li[5]/a"));
+
+  public static final SelenideElement ELEMENT_TOPIC_QUOTE= $(byXpath("//*[@id=\"QuoteId01534136cea60186faec9\"]"));
 }
