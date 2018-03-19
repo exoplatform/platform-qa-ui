@@ -21,6 +21,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.CreateNewDocument;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.SiteExplorerHome;
@@ -31,6 +32,7 @@ import org.exoplatform.platform.qa.ui.forum.pageobject.ForumTopicManagement;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.PageEditor;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.RichTextEditor;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
@@ -74,6 +76,8 @@ public class PlfUnifiedSearchTestIT extends Base {
 
   CreateNewDocument       createNewDocument;
 
+  SpaceHomePage           spaceHomePage;
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
@@ -94,6 +98,7 @@ public class PlfUnifiedSearchTestIT extends Base {
     siteExplorerHome = new SiteExplorerHome(this);
     createNewDocument = new CreateNewDocument(this);
     forumTopicManagement = new ForumTopicManagement(this);
+    spaceHomePage = new SpaceHomePage(this);
     if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
       $(ELEMENT_SKIP_BUTTON).click();
     }
@@ -443,5 +448,35 @@ public class PlfUnifiedSearchTestIT extends Base {
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     siteExplorerHome.deleteData(name);
+  }
+
+  @Test
+  @Tag("FORUM-1375")
+  public void test11_SearchDiscussionInPrivateSpace() {
+    String space1 = "space" + getRandomNumber();
+    String topic = "topic" + getRandomNumber();
+    String topic1 = "topic" + getRandomNumber();
+    homePagePlatform.goToMySpaces();
+    spaceManagement.addNewSpace(space1, space1, "hidden/close", "");
+    spaceHomePage.goToForumsTab();
+    forumForumManagement.goToStartTopic();
+    forumTopicManagement.startTopic(topic, topic, "", "");
+    forumForumManagement.goToStartTopic();
+    forumTopicManagement.startTopic(topic1, topic1, "", "");
+    manageLogInOut.signIn(PLFData.DATA_USER2, password);
+    navigationToolbar.goToQuickSearch();
+    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).setValue(topic);
+    ELEMENT_DROP_DOWN_LIST_RESULT_IN_QUICK_SEARCH.waitUntil(Condition.visible, Configuration.timeout)
+                                                 .find(byText(topic))
+                                                 .parent()
+                                                 .shouldHave(Condition.text("No result for " + topic));
+    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).setValue(topic1);
+    ELEMENT_DROP_DOWN_LIST_RESULT_IN_QUICK_SEARCH.waitUntil(Condition.visible, Configuration.timeout)
+                                                 .find(byText(topic1))
+                                                 .parent()
+                                                 .shouldHave(Condition.text("No result for " + topic1));
+    manageLogInOut.signIn(username, password);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space1, false);
   }
 }
