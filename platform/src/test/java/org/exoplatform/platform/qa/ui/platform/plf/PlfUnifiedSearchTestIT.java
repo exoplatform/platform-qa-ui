@@ -11,7 +11,6 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.QuickSearchResultL
 import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +21,9 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
+import org.exoplatform.platform.qa.ui.ecms.pageobject.CreateNewDocument;
+import org.exoplatform.platform.qa.ui.ecms.pageobject.SiteExplorerHome;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumCategoryManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
@@ -68,6 +70,10 @@ public class PlfUnifiedSearchTestIT extends Base {
 
   ForumTopicManagement    forumTopicManagement;
 
+  SiteExplorerHome        siteExplorerHome;
+
+  CreateNewDocument       createNewDocument;
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
@@ -85,6 +91,8 @@ public class PlfUnifiedSearchTestIT extends Base {
     pageEditor = new PageEditor(this);
     spaceManagement = new SpaceManagement(this);
     activityStream = new ActivityStream(this);
+    siteExplorerHome = new SiteExplorerHome(this);
+    createNewDocument = new CreateNewDocument(this);
     forumTopicManagement = new ForumTopicManagement(this);
     if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
       $(ELEMENT_SKIP_BUTTON).click();
@@ -407,5 +415,33 @@ public class PlfUnifiedSearchTestIT extends Base {
     forumHomePage.goToHomeCategory();
     forumCategoryManagement.deleteCategory(nameCat);
 
+  }
+
+  @Test
+  @Tag("ECMS-7784")
+  @BugInPLF("ECMS-7784")
+  public void test10_searchWebContentByContent() {
+    String name = "name" + getRandomNumber();
+    String content = "content" + getRandomNumber();
+    navigationToolbar.goToSiteExplorer();
+    siteExplorerHome.goToPath("intranet/documents", "Site Management");
+    siteExplorerHome.goToAddNewContent();
+    info("Create new file document");
+    createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
+    createNewDocument.addNewWebContent(name, content);
+    createNewDocument.saveAndClose();
+    homePagePlatform.goToHomePage();
+    navigationToolbar.goToQuickSearch();
+    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).setValue(content);
+    ELEMENT_DROP_DOWN_LIST_RESULT_IN_QUICK_SEARCH.waitUntil(Condition.visible, Configuration.timeout)
+                                                 .find(byText(name))
+                                                 .shouldBe(Condition.visible);
+    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).pressEnter();
+    $(ELEMENT_SEARCHRESULT_ALLTYPECHECK).click();
+    $(ELEMENT_SEARCHRESULT_DOCTYPECHECK).parent().click();
+    ELEMENT_RESULT_SEARCH.find(byText(name)).should(Condition.visible);
+    navigationToolbar.goToSiteExplorer();
+    siteExplorerHome.goToPath("intranet/documents", "Site Management");
+    siteExplorerHome.deleteData(name);
   }
 }
