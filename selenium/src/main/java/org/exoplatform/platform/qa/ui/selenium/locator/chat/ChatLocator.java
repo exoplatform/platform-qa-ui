@@ -90,4 +90,8 @@ public class ChatLocator {
   public static final SelenideElement ELEMENT_CHAT_STATUS_AWAY=$(byClassName("chat-status-away"));
 
   public static final SelenideElement ELEMENT_CHAT_STATUS_INVISIBLE=$(byClassName("chat-status-invisible"));
+
+  public static final SelenideElement ELEMENT_CHAT_ROOM_STARTSTOPMEETING=$(byId("chat-record-button"));
+
+  public static final SelenideElement ELEMENT_CHAT_LINK_TEXT_OPEN_WIKI_APP=$(byLinkText("Open Wiki application"));
 }
