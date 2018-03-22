@@ -181,8 +181,6 @@ public class TaskManagementLocator {
 
   public static final SelenideElement ELEMENT_LEFT_PANEL_IN_TASK_PAGE               = $(byClassName("left-menu"));
 
-  public static final SelenideElement ELEMENT_MARK_AS_COMPLETED                       =
-          $(byClassName("uiIconValidate"));
 
   public static final SelenideElement ELEMENT_FILTER                     =
           $(byClassName("uiIcon"));

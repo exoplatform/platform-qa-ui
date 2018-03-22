@@ -12,6 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -53,14 +55,22 @@ public class FilterTaskTestIT extends Base {
         projectsManagement.addProject(project, "", false);
         tasksManagement.addTask(taskName);
         tasksManagement.addTask(taskName1);
-        ELEMENT_MARK_AS_COMPLETED.click();
+        info("mark task as completed");
+        ELEMENT_TASKS_LIST.find(byText(taskName1)).parent().find(ELEMENT_ICON_MARK_AS_COMPLETED).click();
+        $(byText(taskName1)).shouldNot(Condition.exist);
         tasksManagement.addTask(taskName2);
-        ELEMENT_MARK_AS_COMPLETED.click();
+        info("mark task as completed");
+        ELEMENT_TASKS_LIST.find(byText(taskName2)).parent().find(ELEMENT_ICON_MARK_AS_COMPLETED).click();
+        $(byText(taskName2)).shouldNot(Condition.exist);
         ELEMENT_FILTER.waitUntil(Condition.appears, Configuration.timeout);
         ELEMENT_FILTER.click();
         ELEMENT_SHOW_COMPLETED_TASK.waitUntil(Condition.appears, Configuration.timeout);
         ELEMENT_SHOW_COMPLETED_TASK.click();
+        ELEMENT_TASKS_LIST.find(byText(taskName1)).parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_TASKS_LIST.find(byText(taskName2)).parent().waitUntil(Condition.visible, Configuration.timeout);
         ELEMENT_CLOSE_FILTER.click();
+        projectsManagement.deleteProject(project);
+        
     }
 
 }
