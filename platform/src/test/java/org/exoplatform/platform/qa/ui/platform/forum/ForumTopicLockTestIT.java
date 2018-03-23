@@ -12,13 +12,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_TOPIC_LOCK;
-import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_TOPIC_MORE_ACTION;
-import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_TOPIC_QUOTE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
@@ -65,17 +64,18 @@ public class ForumTopicLockTestIT extends Base {
     */
 
     @Test
-    public  void test01_Lock_Topic(){
+    public  void test_Lock_Topic(){
 
-        String name = "name" + getRandomNumber();
+        String category = "category" + getRandomNumber();
         String desc = "desc" + getRandomNumber();
+        String forum= "forum"+ getRandomNumber();
         String topic = "topic" + getRandomNumber();
 
         homePagePlatform.goToForum();
        info("Add a category");
-        forumCategoryManagement.addCategorySimple(name, "", desc);
+        forumCategoryManagement.addCategorySimple(category, "", desc);
         info("Add a forum in the category");
-        forumForumManagement.addForumSimple(name, "", desc);
+        forumForumManagement.addForumSimple(forum, "", desc);
         info("Add and go to a topic in the forums");
         forumForumManagement.goToStartTopic();
         forumTopicManagement.startTopic(topic, topic, "", "");
@@ -84,6 +84,9 @@ public class ForumTopicLockTestIT extends Base {
         $(ELEMENT_TOPIC_MORE_ACTION).click();
         $(ELEMENT_TOPIC_LOCK).click();
         $(ELEMENT_TOPIC_QUOTE).shouldNot(Condition.visible);
+        info("Delete category");
+        forumHomePage.goToHomeCategory();
+        forumCategoryManagement.deleteCategory(category);
 
     }
 

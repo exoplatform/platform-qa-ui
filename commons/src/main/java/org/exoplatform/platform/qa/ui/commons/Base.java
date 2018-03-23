@@ -85,4 +85,14 @@ public class Base extends TestBase {
     }
     Screenshots.finishContext();
   }
+<<<<<<< 7027050bad1530600a83b7c9b87c993ec7701f7d
+=======
+
+ /* @AfterEach
+  public void close() {
+    if (!title().equals("Login")) {
+      Selenide.close();
+    }
+  }*/
+>>>>>>> Button Quote should not be visible
 }
