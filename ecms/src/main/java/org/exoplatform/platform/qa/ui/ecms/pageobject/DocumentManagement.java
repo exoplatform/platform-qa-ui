@@ -9,6 +9,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
+import com.codeborne.selenide.commands.Click;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 
 /**
@@ -27,6 +28,10 @@ public class DocumentManagement {
 
   public void goToIconsView() {
     ELEMENT_ICON_DEFAULT_VIEW.click();
+  }
+  public void goToPublicFolder(){
+    $(ELEMENT_PUBLIC_FOLDER).click();
+
   }
 
   public void createFolder(String path, String folder, Boolean righclick) {
