@@ -139,4 +139,12 @@ public final class PlatformLocator {
   public static final String SOCIAL_NETWORKS_ACCOUNT_SUSPENDED    = "exosuspend@gmail.com";
 
   public static final String SOCIAL_NETWORKS_PD                   = "exoadmin1";
+
+
+  public static final    By  ELEMENT_SOURCE_CONTENT          = By.id("cke_22");
+
+  public static final    By  ELEMENT_CONTENT          = By.className("cke_source ");
+  public static final    By  ELEMENT_WEB_CONTENT          = By.id("UITabContent");
+
+
 }
