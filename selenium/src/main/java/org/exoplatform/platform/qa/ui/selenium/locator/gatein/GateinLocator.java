@@ -23,9 +23,11 @@ package org.exoplatform.platform.qa.ui.selenium.locator.gatein;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 
+import com.codeborne.selenide.commands.Find;
 import org.openqa.selenium.By;
 
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.support.FindBy;
 
 public final class GateinLocator {
   /*************************************
@@ -1813,5 +1815,18 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   public static final SelenideElement ELEMENT_TABLE_LIST_USERS=$(byXpath("//*[@id=\"UIListUsersGird\"]/table"));
 
   public static final By ELEMENT_LINE_IN_TABLE_LIST_USERS=byClassName("enabled");
+  public static final By ELEMENT_ICON_UP_LEVEL=byClassName("uiIconUpLevel");
+
+  public static final By ELEMENT_PAGE_NAME=byId("pageName");
+  public static final By ELEMENT_PAGE_TITLE=byId("i18nizedLabel");
+  public static final By ELEMENT_BUTTON_NEXT= byText("Next");
+  public static final SelenideElement ELEMENT_DASHBOARD_BUTTON=$(byXpath("//*[@id=\"PageTemplateOption\"]/div[1]/div/ul[1]/li[2]/a"));
+  public static final SelenideElement ELEMENT_SAVE_BT=$(byXpath("//*[@id=\"UIPageEditor\"]/div[1]/a[2]"));
+  public static final SelenideElement ELEMENT_ADD_GADGET=$(byXpath("//*[@id=\"GadgetContainer\"]/div[1]/div/div/div/a"));
+ public static final By ELEMENT_POP_UP_WRAPPER=byClassName("uiPopupWrapper");
+
+
+
+
 
 }

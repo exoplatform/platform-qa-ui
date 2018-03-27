@@ -82,10 +82,10 @@ public class Base extends TestBase {
     Screenshots.finishContext();
   }
 
-  @AfterEach
+ /* @AfterEach
   public void close() {
     if (!title().equals("Login")) {
       Selenide.close();
     }
-  }
+  }*/
 }

@@ -100,7 +100,19 @@ public class PortalManagePages {
     info("Click on Edit button");
     $(ELEMENT_MAGEPAGES_CONTENT_ACTION_COLUMN_EDIT).click();
   }
+  public void addDashboardPage(String pageName, String title){
 
+    $(ELEMENT_PAGE_NAME).setValue(pageName);
+    $(ELEMENT_PAGE_TITLE).setValue(title);
+    $(ELEMENT_ICON_UP_LEVEL).click();
+    $(ELEMENT_BUTTON_NEXT).click();
+    ELEMENT_DASHBOARD_BUTTON.click();
+    $(ELEMENT_BUTTON_NEXT).click();
+    ELEMENT_SAVE_BT.click();
+
+
+
+  }
   /**
    * Add a new simple page
    *
