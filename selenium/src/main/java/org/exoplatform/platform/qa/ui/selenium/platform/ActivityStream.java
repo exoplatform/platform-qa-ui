@@ -106,6 +106,10 @@ public class ActivityStream {
     $(byText(name)).isDisplayed();
     info("The activity of the name:" + name + " is shown successfully");
   }
+  public void checkTextActivity (String desc){
+    ELEMENT_TEXT_ACTIVITY.shouldHave(Condition.text("desc"));
+  }
+
 
   /**
    * Check if there is not an activity in the stream
@@ -542,7 +546,7 @@ public class ActivityStream {
     }
     shareActivity();
 
-    info("-- Verify that an activity has been added --");
+   info("-- Verify that an activity has been added --");
     $(byText(text)).should(Condition.exist);
     $(ELEMENT_COMPOSER_SHARE_BUTTON).shouldBe(Condition.disabled);
     info("The activity is shared success");
@@ -923,7 +927,6 @@ public class ActivityStream {
   /**
    * Remove an activity
    *
-   * @param name String
    */
   public void deleteActivity(String name) {
     info("remove activity");
@@ -941,7 +944,7 @@ public class ActivityStream {
     }
     evt.waitForElementNotPresent(ELEMENT_ACTIVITY_BOX.replace("${name}", name));
     info("the activity is removed successfully");
-  }
+}
 
   /**
    * Open answer form from Activity Stream
