@@ -1,9 +1,7 @@
 package org.exoplatform.platform.qa.ui.answer.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
-import static com.codeborne.selenide.Selenide.switchTo;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -33,6 +31,10 @@ public class AnswerManagement {
    */
   public void goToAnswerQuestion(String question) {
     info("Go to answer a question");
+    refresh();
+    if ($(byText(question)).parent().parent().find(ELEMENT_QUESTION_MORE_ACTION_BUTTON).is(Condition.not(Condition.visible))) {
+      $(byText(question)).click();
+    }
     String idQuestion = $(byText(question)).parent().parent().parent().parent().parent().getAttribute("id");
     $(byXpath(ELEMENT_ANSWER_QUESTION.replace("{IdQuestion}", idQuestion))).click();
   }

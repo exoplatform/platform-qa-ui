@@ -475,10 +475,6 @@ public class WikiManagement {
    * @param locator object
    */
   public void unCheckViewAUserOfPage(Object locator) {
-    info("Click on More link");
-    $(ELEMENT_MORE_LINK).click();
-    info("Click on permission link");
-    $(ELEMENT_PERMISSION_LINK).click();
     info("Uncheck view permission checkbox");
     evt.uncheck(locator, 2);
     info("Click on save button");

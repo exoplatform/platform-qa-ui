@@ -42,6 +42,7 @@ public class DocumentManagement {
     }
     ELEMENT_INPUT_NAME_FOLDER.setValue(folder);
     ELEMENT_BUTTON_CONFIRM_ADD_FOLDER.click();
+    ELEMENT_LIST_FOLDER_IN_DEFAULT_VIEW.find(byText(folder)).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   public void deleteFolder(String path, String folder, Boolean rightClick) {

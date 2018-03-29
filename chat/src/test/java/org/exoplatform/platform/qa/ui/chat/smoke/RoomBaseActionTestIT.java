@@ -78,34 +78,34 @@ public class RoomBaseActionTestIT extends Base {
     manageLogInOut.signIn(PLFData.username, PLFData.password);
     homePagePlatform.goToChat();
     info("Add room with users");
-    switchTo().window("Chat");
+    switchTo().window(1);
     roomManagement.addRoom(room, usernamea, usernameb, usernamec);
 
-    switchTo().window("Home Page");
+    switchTo().window(0);
     manageLogInOut.signIn(usernamea, password);
     homePagePlatform.goToChat();
-    switchTo().window("Chat");
+    switchTo().window(1);
     $(byText(room)).should(Condition.exist);
 
-    switchTo().window("Home Page");
+    switchTo().window(0);
     manageLogInOut.signIn(usernameb, password);
     homePagePlatform.goToChat();
-    switchTo().window("Chat");
+    switchTo().window(1);
     $(byText(room)).should(Condition.exist);
 
-    switchTo().window("Home Page");
+    switchTo().window(0);
     manageLogInOut.signIn(usernamec, password);
     homePagePlatform.goToChat();
-    switchTo().window("Chat");
+    switchTo().window(1);
     $(byText(room)).should(Condition.exist);
     info("delete data");
-    switchTo().window("Home Page");
+    switchTo().window(0);
     manageLogInOut.signIn(PLFData.username, PLFData.password);
     homePagePlatform.goToChat();
-    switchTo().window("Chat");
+    switchTo().window(1);
     roomManagement.deleteRomm(room);
 
-    switchTo().window("Home Page");
+    switchTo().window(0);
     navigationToolbar.goToManageCommunity();
     userandgroupmanagement.deleteUser(usernamea);
     userandgroupmanagement.deleteUser(usernameb);

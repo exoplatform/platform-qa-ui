@@ -231,7 +231,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
    * members who are user's connections and ordered by creation date
    */
   @Test
-  @BugInPLF("5806")
+
   public void test01_CheckDisplayOfSuggestionsGadgetIfCommunConnectionIs0() {
     String username1 = "usernamea" + getRandomString();
     String username2 = "usernameb" + getRandomString();

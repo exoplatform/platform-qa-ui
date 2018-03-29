@@ -97,8 +97,8 @@ public class ECMSManageProjectTestIT extends Base {
     homePagePlatform.goToDocuments();
     documentManagement.goToIconsView();
     documentManagement.createFolder("/", folder1, false);
-    refresh();
     $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     ELEMENT_INPUT_PATH.setValue("/").pressEnter();
     documentManagement.createFolder("/", folder, true);
     ELEMENT_LIST_FOLDER_IN_DEFAULT_VIEW.find(byText(folder)).should(Condition.exist);
@@ -114,6 +114,8 @@ public class ECMSManageProjectTestIT extends Base {
     homePagePlatform.goToDocuments();
     documentManagement.goToIconsView();
     documentManagement.createFolder("/", folder1, false);
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     documentManagement.createFolder("/", folder, true);
     documentManagement.deleteFolder("/", folder, true);
     documentManagement.deleteFolder("/", folder1, true);

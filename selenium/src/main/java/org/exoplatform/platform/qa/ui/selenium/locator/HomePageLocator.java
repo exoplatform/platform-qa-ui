@@ -596,7 +596,7 @@ public final class HomePageLocator {
   public static final String          ELEMENT_DOCUMENT_PREVIEW                                             = "Preview{id}-0";
 
   public static final SelenideElement ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW                            =
-                                                                                $(byId("cke_commentInput"));
+          $(byClassName("commentTextInput"));
 
   public static final SelenideElement ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW                           =
                                                                                  $(byId("CommentButton"));

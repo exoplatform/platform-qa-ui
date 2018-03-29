@@ -1147,9 +1147,10 @@ public class ActivityStream {
 
   public void replyToCommentInPreview(String comment, String reply, String user) {
     // Click on reply link
-    $(byId("commentArea")).find(byText(comment)).parent().parent().parent().find(byClassName("replyCommentLink")).click();
-
-    ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
+    $(byId("commentArea")).find(byText(comment)).parent()
+            .parent()
+            .parent().find(byClassName("replyCommentLink")).click();
+    ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.visible,Configuration.timeout).click();
     executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + reply + "\")", "");
     ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
     $(byText(reply)).parent().parent().parent().find(byText(user)).should(Condition.exist);
@@ -1206,9 +1207,11 @@ public class ActivityStream {
     $(byText(replytoreply)).should(Condition.exist);
   }
 
-  public void replyToReplyInPreviewMode(String reply) {
-    String replytoreply = "ReplyToReply" + getRandomNumber();
-    $(byId("commentArea")).find(byText(reply)).parent().parent().parent().find(byClassName("replyCommentLink")).click();
+
+  public void replyToReplyInPreviewMode(String reply,String replytoreply) {
+    $(byId("commentArea")).find(byText(reply)).parent()
+            .parent()
+            .parent().find(byClassName("replyCommentLink")).click();
 
     ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
     executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + replytoreply + "\")", "");

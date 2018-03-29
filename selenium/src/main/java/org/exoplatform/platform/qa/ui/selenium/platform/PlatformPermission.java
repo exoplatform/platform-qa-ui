@@ -45,11 +45,8 @@ public class PlatformPermission {
         default: // search by user name
           $(ELEMENT_SELECT_SEARCH).selectOption("User Name");
           break;
-
       }
-
     }
-
     $(ELEMENT_QUICK_SEARCH_BUTTON).click();
    $(byXpath(ELEMENT_USER_CHECKBOX.replace("${user}", keySearch))).parent().waitUntil(Condition.visible,Configuration.timeout);
   }

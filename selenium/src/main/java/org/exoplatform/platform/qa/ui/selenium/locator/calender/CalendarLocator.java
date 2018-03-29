@@ -1676,4 +1676,6 @@ public class CalendarLocator {
   public static final By ELEMENT_UNCHECK_CALENDAR=byClassName("iconUnCheckBox");
   public static final SelenideElement ELEMENT_ICON_ADD_PARTICIPANT=$(byXpath("//*[@id=\"eventShare\"]/table/tbody/tr[3]/td[2]/a/i"));
 
+  public static final SelenideElement ELEMENT_LIST_CALENDAR=$(byId("UICalendars"));
+
 }

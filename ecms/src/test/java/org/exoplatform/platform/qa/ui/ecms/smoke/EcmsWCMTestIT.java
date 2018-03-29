@@ -1,9 +1,10 @@
 package org.exoplatform.platform.qa.ui.ecms.smoke;
 
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selectors.byTitle;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_INCON_ADD_PATH;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_ADDNEWPAGE_BTNNEXT;
@@ -156,8 +157,8 @@ public class EcmsWCMTestIT extends Base {
     $(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
     pageCreationWizard.addContentDetail("General Drives/Sites Management/intranet", content1);
 
-    // navigationToolbar.goToEditContent();
-
+     navigationToolbar.goToEditContent();
+    refresh();
     /*
      * Step number: 2 Step Name: Step 2: Edit Single Content Viewer page Step
      * Description: - Login acme by Admin/Web contributor - Open page above - Click

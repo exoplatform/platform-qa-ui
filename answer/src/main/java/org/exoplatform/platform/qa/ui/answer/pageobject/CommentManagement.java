@@ -41,7 +41,7 @@ public class CommentManagement {
   public void goToCommentQuestion(String question) {
     info("Go to COMMENT a question");
 
-    if ($(ELEMENT_QUESTION_MORE_ACTION_BUTTON).is(Condition.not(Condition.exist))) {
+    if ($(byText(question)).parent().parent().find(ELEMENT_QUESTION_MORE_ACTION_BUTTON).is(Condition.not(Condition.visible))) {
       $(byText(question)).click();
     }
 

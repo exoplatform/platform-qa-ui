@@ -341,6 +341,7 @@ public class CalendarManagement {
     $(byXpath(ELEMENT_LIST_EDIT_EVENT_BUTTON.replace("${categoryName}", oldCategory))).waitUntil(Condition.visible,Configuration.timeout);
     $(byXpath(ELEMENT_LIST_EDIT_EVENT_BUTTON.replace("${categoryName}", oldCategory))).click();
     $(ELEMENT_ADD_EVENT_CATEGORY_INPUT).setValue(newCategory);
+    $(ELEMENT_ADD_EVENT_CATEGORY_INPUT).click();
     $(ELEMENT_EDIT_EVENT_CATEGORY_BUTTON_UPDATE).click();
     $(byXpath(ELEMENT_LIST_EDIT_EVENT_BUTTON.replace("${categoryName}", newCategory))).waitUntil(Condition.visible,Configuration.timeout);
     $(ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE).click();
@@ -353,13 +354,12 @@ public class CalendarManagement {
    */
   public void openMenuOfCalendar(String calendar) {
     info("Open menu of a calendar");
-    $(byId("UICalendars")).find(byText(calendar))
-                          .waitUntil(Condition.appears, Configuration.timeout)
-                          .hover()
-                          .parent()
-                          .parent()
-                          .find(ELEMENT_CALENDAR_ICON_SETTINGS_OF_CALENDAR)
-                          .click();
+    ELEMENT_LIST_CALENDAR.find(byText(calendar)).waitUntil(Condition.appears, Configuration.timeout)
+            .hover()
+            .parent()
+            .parent()
+            .find(ELEMENT_CALENDAR_ICON_SETTINGS_OF_CALENDAR)
+            .click();
 
   }
 

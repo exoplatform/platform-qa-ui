@@ -14,6 +14,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
+import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
@@ -223,12 +224,12 @@ public class HomePagePlatform {
     evt.click(ELEMENT_PLF_HOMEPAGE_LOAD_MORE_BUTTON);
   }
 
-  public void refreshUntil(String text, Condition condition, long time) throws Exception {
+  public void refreshUntil(SelenideElement selenideElement, Condition condition, long time) throws Exception {
 
     for (int i = 0; i <= 15; i++) {
       refresh();
       Thread.sleep(time);
-      if ($(byText(text)).is(condition)) {
+      if (selenideElement.is(condition)) {
         break;
       }
     }

@@ -489,7 +489,7 @@ public class WikiSettingsTestIT extends Base {
     click(ELEMENT_SAVE_PERMISSION);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     open(perLink);
-    homePagePlatform.refreshUntil(wiki,exist,2000);
+    homePagePlatform.refreshUntil($(byText(wiki)),exist,2000);
 
     info("Test 9: Delete permission for space wiki");
     manageLogInOut.signIn(username, password);
@@ -503,7 +503,7 @@ public class WikiSettingsTestIT extends Base {
 
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     open(perLink);
-    homePagePlatform.refreshUntil($(ELEMENT_WIKI_PAGE_NOT_FOUND).find(byText("Page Not Found")).getText(),exist,2000);
+    homePagePlatform.refreshUntil($(byText("Page Not Found")),exist,2000);
     // delete data
 
     manageLogInOut.signIn(username, password);
