@@ -475,9 +475,9 @@ public class CalendarManagement {
   /**
    * Check user selector of share calendar
    *
-   * @param cal
-   * @param user
-   * @param isPresent
+   * @param cal String
+   * @param user String
+   * @param isPresent boolean
    */
   public void checkUserSelectorOfShareCalendar(String cal, String user, boolean isPresent) {
     executeActionCalendar(cal, menuOfCalendarOption.SHARE);
@@ -857,6 +857,7 @@ public class CalendarManagement {
    *
    * @param name String
    * @param opt is an instance of a repeated event as 1,2,3,4....
+   * @param view view
    */
   public void openEditEventTaskPopup(String name, CalendarHomePage.selectViewOption view, String... opt) {
     info("Edit an event");

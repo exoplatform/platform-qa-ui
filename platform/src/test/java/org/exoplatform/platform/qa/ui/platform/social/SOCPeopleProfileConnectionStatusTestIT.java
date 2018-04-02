@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.social;
 
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
@@ -99,7 +100,7 @@ public class SOCPeopleProfileConnectionStatusTestIT extends Base {
     homePagePlatform.goToConnections();
     $(ELEMENT_ALL_CONNECTIONS_TAB).click();
     connectionsManagement.searchPeople(username1, null, null, null);
-    homePagePlatform.refreshUntil(username1 + " " + username1, visible, 2000);
+    homePagePlatform.refreshUntil($(byText(username1 + " " + username1)), visible, 2000);
     $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username1))).click();
     $(ELEMENT_UIMINICONNECTIONS_PORLET_ACCEPT_STATUS).waitUntil(visible, Configuration.timeout);
     $(ELEMENT_UIMINICONNECTIONS_PORTLET_DENY_STATUS).waitUntil(visible, Configuration.timeout);
