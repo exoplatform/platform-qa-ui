@@ -39,6 +39,8 @@ import org.exoplatform.platform.qa.ui.commons.pageobject.Platform;
 import org.exoplatform.platform.qa.ui.core.context.Smoke;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class Base extends TestBase {
 
@@ -48,8 +50,10 @@ public class Base extends TestBase {
 
   @BeforeAll
   public static void setup() {
+
     Configuration.browserSize = "1366x768";
     Configuration.pageLoadStrategy = "normal";
+
   }
 
   @BeforeEach
@@ -64,6 +68,7 @@ public class Base extends TestBase {
   }
 
   public void openPlatform(TestInfo testInfo) {
+
     Platform plf = new Platform();
     plf.open();
 
@@ -75,7 +80,7 @@ public class Base extends TestBase {
 
   @AfterEach
   public void afterEach() {
-    switchTo().window(0);
+     switchTo().window(0);
     ManageLogInOut manageLogInOut = new ManageLogInOut(this);
     if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.visible))
         && $(ELEMENT_INPUT_PASSWORD_CAS).is(Condition.not(Condition.visible))) {

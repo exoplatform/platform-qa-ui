@@ -31,7 +31,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 
 @Tag("ecms")
 @Tag("sniff")
-public class ECMSCreateWebContentWithParticularCharacter extends Base {
+public class ECMSCreateWebContentTestIT extends Base {
 
     HomePagePlatform homePagePlatform;
 
@@ -59,10 +59,7 @@ public class ECMSCreateWebContentWithParticularCharacter extends Base {
         manageLogInOut.signInCas(username, password);
     }
 
-   /*
-    bug EXOGTN-2345
-     */
-
+    @Tag("bug EXOGTN-2345")
     @Test
     public void test_CreateWebContentWithParticularCharacter(){
 
@@ -70,7 +67,6 @@ public class ECMSCreateWebContentWithParticularCharacter extends Base {
         info("Create data test");
         String name = "name" + getRandomNumber();
         String content = "content" + getRandomNumber();
-        String content2 = "content2" + getRandomNumber();
         info("Finished creating data test");
 
         navigationToolbar.goToSiteExplorer();
@@ -78,7 +74,7 @@ public class ECMSCreateWebContentWithParticularCharacter extends Base {
         siteExplorerHome.goToAddNewContent();
         info("Create new file document");
         createNewDoc.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
-        createNewDoc.addNewWebContent(name, content);
+        createNewDoc.addNewWebContent(name,"&#128522;");
         $(ELEMENT_SOURCE_CONTENT).waitUntil(Condition.visible, Configuration.timeout).click();
         $(ELEMENT_CONTENT).waitUntil(Condition.visible, Configuration.timeout).click();
         $(ELEMENT_CONTENT).setValue("&#128522;");

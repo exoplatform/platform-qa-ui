@@ -38,5 +38,6 @@
             <artifactId>platform-qa-ui-core</artifactId>
             <version>${project.version}</version>
         </dependency>
+
     </dependencies>
 </project>

@@ -119,6 +119,7 @@
       <artifactId>guava</artifactId>
       <version>${guava.version}</version>
     </dependency>
+
     <!-- JUnit5 stack -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
