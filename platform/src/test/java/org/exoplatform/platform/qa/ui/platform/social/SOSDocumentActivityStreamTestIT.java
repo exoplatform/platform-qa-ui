@@ -26,7 +26,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
  */
 
 @Tag("sniff")
-@Tag("ecms")
+@Tag("social")
 public class SOSDocumentActivityStreamTestIT extends Base{
 
     HomePagePlatform homePagePlatform;
