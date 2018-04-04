@@ -3,10 +3,12 @@ package org.exoplatform.platform.qa.ui.ecms.pageobject;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_SELECT_USER_ICON1;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 import java.util.ArrayList;
 
@@ -119,15 +121,15 @@ public class SiteExplorerHome {
    */
   public void createFolder(String title, String folderType) {
     info("Type a title:" + title + " for the folder");
-    evt.type(ELEMENT_ADDFOLDER_NAME, title, true);
+    $(ELEMENT_ADDFOLDER_NAME).setValue(title);
     if (!folderType.isEmpty()) {
       info("Select folder type:" + folderType);
-      evt.select(ELEMENT_ADDFOLDER_FOLDERTYPE, folderType);
+      $(ELEMENT_ADDFOLDER_FOLDERTYPE).selectOption(folderType);
     }
     info("Click on Create folder button");
-    evt.click(ELEMENT_ADDFOLDER_CREATEFOLDERBUTTON);
+    $(ELEMENT_ADDFOLDER_CREATEFOLDERBUTTON).click();
     info("Verify that the folder is created");
-    evt.waitForAndGetElement(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", title));
+    $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", title))).waitUntil(Condition.visible,Configuration.timeout);
     info("The folder is created successfully");
   }
 
@@ -151,8 +153,8 @@ public class SiteExplorerHome {
    * @param node String
    */
   public void addSymlink(String node) {
-    evt.rightClickOnElement(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", node)));
-    evt.click(ELEMENT_SITEEXPLORER_ACTION_ADDSYMLINK);
+    $(byXpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", node))).contextClick();
+    $(ELEMENT_SITEEXPLORER_ACTION_ADDSYMLINK).click();
 
   }
 
@@ -171,12 +173,13 @@ public class SiteExplorerHome {
 
     info("Right click on nodename");
     ELEMENT_CONTENT_LIST.find(byLinkText(title)).click();
-    $(ELEMENT_ACTIONBAR_MORE).click();
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
     ELEMENT_CONTENT_LIST.find(byLinkText(title)).contextClick();
     info("Click on Delete link");
     $(ELEMENT_SITEEXPLORER_ACTION_DELETE).click();
     info("Click on Delete button on Confirm popup");
     $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).click();
+    $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     info("Verify that the node is deleted");
     info("the node is deleted successfully");
   }
@@ -186,12 +189,14 @@ public class SiteExplorerHome {
    * @param destination String
    */
   public void copyPasteNode(String title, String destination) {
-    evt.rightClickOnElement(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", title)));
-    evt.click(ELEMENT_SITEEXPLORER_ACTION_COPY);
-    evt.rightClickOnElement(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", destination)));
-    evt.click(ELEMENT_SITEEXPLORER_ACTION_PASTE);
-    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-    evt.click(ELEMENT_SIDEBAR_SITES_MANAGEMENT);
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    $(byXpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", title))).contextClick();
+    $(ELEMENT_SITEEXPLORER_ACTION_COPY).click();
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    $(byXpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", destination))).contextClick();
+    $(ELEMENT_SITEEXPLORER_ACTION_PASTE).click();
+    refresh();
+    $(ELEMENT_SIDEBAR_SITES_MANAGEMENT).click();
 
   }
 
@@ -225,12 +230,15 @@ public class SiteExplorerHome {
    * @param destination String
    */
   public void cutPasteNode(String title, String destination) {
-    evt.rightClickOnElement(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", title)));
-    evt.click(ELEMENT_SITEEXPLORER_ACTION_CUT);
-    evt.rightClickOnElement(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", destination)));
-    evt.click(ELEMENT_SITEEXPLORER_ACTION_PASTE);
-    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-    evt.click(ELEMENT_SIDEBAR_SITES_MANAGEMENT);
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    $(byXpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", title))).contextClick();
+    $(ELEMENT_SITEEXPLORER_ACTION_CUT).click();
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    $(byXpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", destination))).contextClick();
+    $(ELEMENT_SITEEXPLORER_ACTION_PASTE).click();
+    refresh();
+    executeJavaScript("window.scrollBy(0,-5500)", "");
+    $(ELEMENT_SIDEBAR_SITES_MANAGEMENT).click();
 
   }
 
@@ -517,9 +525,9 @@ public class SiteExplorerHome {
    */
   public void lockNode(String name) {
     info("lock node:" + name);
-    evt.rightClickOnElement(By.xpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", name)));
-    evt.click(ELEMENT_SITEEXPLORER_LIST_LOCK_NODE);
-    evt.waitForAndGetElement(ELEMENT_SITEEXPLORER_LOCK_ICON.replace("$node", name));
+    $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", name))).contextClick();
+    $(ELEMENT_SITEEXPLORER_LIST_LOCK_NODE).click();
+    $(byXpath(ELEMENT_SITEEXPLORER_LOCK_ICON.replace("$node", name))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -529,9 +537,9 @@ public class SiteExplorerHome {
    */
   public void unlockNode(String name) {
     info("unlock node:" + name);
-    evt.rightClickOnElement(By.xpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", name)));
-    evt.click(ELEMENT_SITEEXPLORER_LIST_UNLOCK_NODE);
-    evt.waitForElementNotPresent(ELEMENT_SITEEXPLORER_LOCK_ICON.replace("$node", name));
+    $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", name))).contextClick();
+    $(ELEMENT_SITEEXPLORER_LIST_UNLOCK_NODE).click();
+    $(byXpath(ELEMENT_SITEEXPLORER_LOCK_ICON.replace("$node", name))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**

@@ -173,10 +173,10 @@ public class TaskManagementLocator {
 
   public static final SelenideElement COWORKER_FILED                                =
                                                      $(byXpath("//*[@id=\"taskManagement\"]/div[3]/div[2]/div[1]/div/div[4]/div[2]/div/div/div/div[2]/div[2]/div[3]"));
+public static final SelenideElement ELEMENT_LABEL_REPLY_TASK=$(byClassName("replyCommentLink"));
+public static final String ELEMENT_VIEW_ALL_REPLIES_LINK_TASK="SubCommentShowAll_{id}";
 
-  public static final SelenideElement ELEMENT_LABEL_REPLY_TASK                      = $(byClassName("replyCommentLink"));
 
-  public static final String          ELEMENT_VIEW_ALL_REPLIES_LINK_TASK            = "SubCommentShowAll_{id}";
 
   public static final SelenideElement ELEMENT_LEFT_PANEL_IN_TASK_PAGE               = $(byClassName("left-menu"));
   // Add labels form
