@@ -1210,7 +1210,7 @@ public class ECMSLocator {
           By.xpath("//*[@id=\"UIDocumentNodeList\"]/div/div[9]/div[4]/a/span");
   public static final SelenideElement ELEMENT_PUBLIC_LIST_VIEW=$(byClassName("uiListGrid"));
   public static final SelenideElement ELEMENT_FILE_DESCRIPTION=$(byClassName("description"));
-  public static final SelenideElement ELEMENT_BUTTON_DELETE_FIRST=$(byXpath("//*[@id=\"JCRContextMenu\"]/div[1]/ul/li[3]/a"));
+  public static final SelenideElement ELEMENT_BUTTON_DELETE_FIRST=$(byXpath("//*[@id=\"ECMContextMenu\"]/div/ul/li[7]/a"));
   public static final SelenideElement ELEMENT_NOTIFICATION= $(byClassName("UIControl"));
   public static final SelenideElement ELEMENT_CHECK=$(byClassName("uiCheckbox"));
 

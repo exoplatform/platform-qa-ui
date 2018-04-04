@@ -1,26 +1,21 @@
-package org.exoplatform.platform.qa.ui.platform.ecms;
+package org.exoplatform.platform.qa.ui.platform.social;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.commands.Click;
-import com.codeborne.selenide.commands.Should;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.DocumentManagement;
-import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.appear;
-import static com.codeborne.selenide.Condition.not;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
-import static org.exoplatform.platform.qa.ui.core.PLFData.*;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS;
+import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER2;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DATE_ACTIVITY;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -32,7 +27,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 
 @Tag("sniff")
 @Tag("ecms")
-public class ECMSDocumentActivityStreamTestIT extends Base{
+public class SOSDocumentActivityStreamTestIT extends Base{
 
     HomePagePlatform homePagePlatform;
 
@@ -52,9 +47,9 @@ public class ECMSDocumentActivityStreamTestIT extends Base{
         }
         manageLogInOut.signInCas(DATA_USER2, DATA_PASS );
     }
-    /*
-    bug INTEG-487
-    */
+
+
+    @Tag("INTEG-487")
     @Test
     public void test_DocumentActivity() {
         homePagePlatform.goToDocuments();
@@ -75,10 +70,23 @@ public class ECMSDocumentActivityStreamTestIT extends Base{
                 .hover()
                 .find(byClassName(ELEMENT_DATE_ACTIVITY));
 
-        ELEMENT_FILE_DESCRIPTION.shouldNotBe(visible);
+        $(byAttribute("data-original-title", "Mary Williams > Public")).parent()
+                .parent()
+                .parent()
+                .parent()
+                .parent()
+                .parent()
+                .parent()
+                .parent()
+                .parent()
+                .find(byClassName("Description")).shouldNotBe(visible);
+
         homePagePlatform.goToDocuments();
         ELEMENT_PUBLIC_LIST_VIEW.find(byText("eXo-Platform"));
-        ELEMENT_CHECK.parent().click();
+        $(byText("eXo-Platform")).parent()
+                .parent()
+                .parent()
+                .find(byClassName("uiCheckbox")).click();
         ELEMENT_BUTTON_DELETE_FIRST.click();
         ELEMENT_BUTTON_CONFIRM_DELETE_FILE.waitUntil(Condition.visible, Configuration.timeout).click();
         ELEMENT_NOTIFICATION.shouldBe(visible);
