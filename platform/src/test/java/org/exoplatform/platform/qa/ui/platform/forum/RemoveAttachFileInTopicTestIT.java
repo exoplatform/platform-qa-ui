@@ -14,13 +14,11 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.core.PLFData.password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_REMOVE_ICON;
-import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_START_TOPIC_POPUP_TITLE_FILED;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_SUBMIT_BUTTON;
+import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_TOPIC_CONTAINER;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
@@ -30,14 +28,14 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 
 @Tag("forum")
 @Tag("sniff")
-public class RemoveAttachFileInTopic extends Base{
+public class RemoveAttachFileInTopicTestIT extends Base{
 
-    HomePagePlatform homePagePlatform;
+    HomePagePlatform        homePagePlatform;
     ForumCategoryManagement forumCategoryManagement;
-    ForumHomePage forumHomePage;
-    ForumForumManagement forumForumManagement;
-    ForumTopicManagement forumTopicManagement;
-    ManageLogInOut manageLogInOut;
+    ForumHomePage           forumHomePage;
+    ForumForumManagement    forumForumManagement;
+    ForumTopicManagement    forumTopicManagement;
+    ManageLogInOut          manageLogInOut;
 
     @BeforeEach
     public void setupBeforeMethod() {
@@ -55,10 +53,17 @@ public class RemoveAttachFileInTopic extends Base{
         manageLogInOut.signInCas(username, password);
     }
 
-    /*
-    bug FORUM-1382
-    */
 
+     /*
+   * Step Number: 1 Step Name: Prepare data: create a
+   * category, forum, topic Step Description: - Create a category - Create a forum
+   * - Create a topic Input Data: Expected Outcome: Category, forum, topic are
+   * created successfully Step number: 2 Step Name: Edit topic and remove attach file:
+   * Expected Outcome: the attach file is removed successfully
+   */
+
+
+    @Tag("FORUM-1382")
     @Test
     public void test_VerifyRemoveAttachFile(){
         String category= "category" + getRandomNumber();
@@ -82,7 +87,7 @@ public class RemoveAttachFileInTopic extends Base{
         info("verify that the attach file is removed");
         forumHomePage.goToTopic(topic);
         forumTopicManagement.selectItemMoreActionMenuTopic(ForumTopicManagement.specifMoreActionMenuTopic.EDIT);
-        $(byId("UIEditTopicContainer")).find(byClassName("uiIconDelete")).shouldNotBe(Condition.visible);
+        ELEMENT_TOPIC_CONTAINER.find(byClassName("uiIconDelete")).shouldNotBe(Condition.visible);
         $(ELEMENT_SUBMIT_BUTTON).click();
         info("Delete category");
         forumHomePage.goToHomeCategory();

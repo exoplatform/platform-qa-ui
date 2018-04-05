@@ -894,5 +894,6 @@ public class ForumLocator {
   public static final SelenideElement ELEMENT_BUTTON_SUBMIT_POST = $(byXpath("//*[@id=\"UIPostForm\"]/div[3]/button[1]"));
   public static final SelenideElement ELEMENT_TOPIC_QUOTE = $(byClassName("btnDetailTopic")).find(byText("Quote"));
   public static final SelenideElement ELEMENT_REMOVE_ICON= $(byClassName("uiIconDelete "));
+  public static final SelenideElement ELEMENT_TOPIC_CONTAINER= $(byId("UIEditTopicContainer"));
 
 }
