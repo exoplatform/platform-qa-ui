@@ -348,7 +348,6 @@ public class GateinUserAndGroupManagementTestIT extends Base {
 
   @Test
   @Tag("search")
-  @Tag("aymen")
   public void test12_SearchUserFromPeopleSearchByName() {
     String username = "username" + getRandomNumber();
     String password = "password" + getRandomNumber();

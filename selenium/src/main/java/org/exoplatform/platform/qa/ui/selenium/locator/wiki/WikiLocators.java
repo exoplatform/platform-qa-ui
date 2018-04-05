@@ -503,7 +503,7 @@ public class WikiLocators {
                                                                    $(byId("UISubmitToolBarBottom_SavePage_"));
 
   public static final By              ELEMENT_CANCEL_BUTTON_ADD_PAGE                             =
-                                                                     By.id("UISubmitToolBarUpper_Cancel_");
+                                                                     By.id("UISubmitToolBarBottom_Cancel_");
 
   public static final By              ELEMENT_RICHTEXT_BUTTON                                    =
                                                               By.xpath("//*[contains(text(),'Rich Text')]");

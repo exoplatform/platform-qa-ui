@@ -40,10 +40,8 @@ public class FilterTaskTestIT extends Base {
         manageLogInOut.signInCas(PLFData.USER_ROOT,PLFData.password);
 
     }
-   /*
-    bug TA-571
-   */
 
+    @Tag("TA-571")
     @Test
     public void test01_FilterCompletedTask(){
 
