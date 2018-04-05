@@ -221,17 +221,17 @@ public class ConnectionsManagement {
 
       ELEMENT_NAME_OF_PEOPLE.waitUntil(Condition.appears,Configuration.timeout).setValue(peopleName).pressEnter();
     } else {
-      evt.type(ELEMENT_NAME_OF_PEOPLE, "", true);
+      $(ELEMENT_NAME_OF_PEOPLE).setValue("");
     }
     if (position != "" && position != null) {
       $(ELEMENT_POSITIONS_OF_PEOPLE).setValue(position);
     } else {
-      evt.type(ELEMENT_POSITIONS_OF_PEOPLE, "", true);
+      $(ELEMENT_POSITIONS_OF_PEOPLE).setValue("");
     }
     if (skills != "" && skills != null) {
       $(ELEMENT_SKILL_OF_PEOPLE).setValue(skills);
     } else {
-      evt.type(ELEMENT_SKILL_OF_PEOPLE, "", true);
+      $(ELEMENT_SKILL_OF_PEOPLE).setValue("");
     }
     $(ELEMENT_SEARCH_BUTTON).pressEnter();
     refresh();

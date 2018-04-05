@@ -50,8 +50,8 @@ public class UserProfilePage {
    */
   public void goToEditProfile() {
     info("Go to edit profile");
-    evt.click(ELEMENT_EDIT_MY_PROFILE_BUTTON);
-    evt.waitForAndGetElement(ELEMENT_EDIT_PROFILE_FORM);
+    $(ELEMENT_EDIT_MY_PROFILE_BUTTON).click();
+    $(ELEMENT_EDIT_PROFILE_FORM).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
