@@ -1824,7 +1824,7 @@ public final class SocialLocator {
 
   // Navigation tab
   public static final By              ELEMENT_SPACE_SETTING_NAVIGATION_TAB                              =
-                                                                           By.xpath(".//*[contains(@data-target,'#UISpaceNavigationManagement-tab')]");
+                                                                           By.xpath(".//*[contains(@data-target,'#UITabPanetab4-tab')]");
 
   public static final By              ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON                          =
                                                                                By.xpath(".//*[@id='UISpaceNavigationManagement']//button[text()='Add Node']");
