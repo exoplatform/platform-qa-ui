@@ -69,8 +69,8 @@ public class ContentAdministration {
       break;
     case TEMPLATES:
       info("Select Templates tab");
-      if (evt.waitForAndGetElement(ELEMENT_TEMPLATE_CATEGORIES_ECM_FUNCTIONS, 5000, 0) != null)
-        $(byText("Templates")).click();
+      if ($(ELEMENT_TEMPLATE_CATEGORIES_ECM_FUNCTIONS).is(Condition.visible))
+        $(ELEMENT_TEMPLATE_CATEGORIES_ECM_FUNCTIONS).click();
       break;
     case REPOSITORY:
       info("Select Repository tab");
@@ -119,7 +119,7 @@ public class ContentAdministration {
       break;
     case NODESTYPES:
       info("Select NodeStypes function");
-      evt.click(ELEMENT_ECMS_FUNCTIONS_NODES);
+      $(ELEMENT_ECMS_FUNCTIONS_NODES).click();
       break;
     case NAMESPACES:
       info("Select NameSpace function");
@@ -141,11 +141,11 @@ public class ContentAdministration {
       break;
     case LIST:
       info("Select List function");
-      evt.click(ELEMENT_ECMS_FUNCTIONS_LIST);
+      $(ELEMENT_ECMS_FUNCTIONS_LIST).click();
       break;
     case METADATA:
       info("Select Metadata function");
-      evt.click(ELEMENT_ECMS_FUNCTIONS_METADATA);
+      $(ELEMENT_ECMS_FUNCTIONS_METADATA).click();
       break;
     }
     info("End of selecting a function in Advance tab");
@@ -777,13 +777,13 @@ public class ContentAdministration {
    */
   public void addNodeType(String name, String superTypes, Object... opParams) {
     String mixinType = (String) (opParams.length > 0 ? opParams[0] : null);
-    evt.click(ELEMENT_ECM_REPOSITORY_NODES_ADD);
-    evt.type(ELEMENT_ECM_REPOSITORY_NODES_NAME_FORM, name, true);
-    evt.type(ELEMENT_ECM_REPOSITORY_NODES_SUPER_TYPES_FORM, superTypes, true);
+    $(ELEMENT_ECM_REPOSITORY_NODES_ADD).click();
+    $(ELEMENT_ECM_REPOSITORY_NODES_NAME_FORM).setValue(name);
+    $(ELEMENT_ECM_REPOSITORY_NODES_SUPER_TYPES_FORM).setValue(superTypes);
     if (mixinType != null)
-      evt.select(ELEMENT_ECM_REPOSITORY_NODES_MIXIN_TYPES, mixinType);
-    evt.click(ELEMENT_ECM_REPOSITORY_NODES_SAVE_FORM);
-    evt.click(ELEMENT_ECM_REPOSITORY_NODES_OK_FORM);
+      $(ELEMENT_ECM_REPOSITORY_NODES_MIXIN_TYPES).selectOption(mixinType);
+    $(ELEMENT_ECM_REPOSITORY_NODES_SAVE_FORM).click();
+    $(ELEMENT_ECM_REPOSITORY_NODES_OK_FORM).click();
   }
 
   /**
@@ -911,13 +911,36 @@ public class ContentAdministration {
    * @param content
    */
   public void addTemplateInList(String name, String nameTemplate, String content) {
-    evt.click(ELEMENT_ECM_TEMPLATES_LIST_ADD_LIST);
-    evt.type(ELEMENT_ECM_TEMPLATES_LIST_TEMPLATE_NAME_FORM, nameTemplate, true);
-    evt.type(ELEMENT_ECM_TEMPLATES_LIST_NAME_FORM, name, true);
-    evt.type(ELEMENT_ECM_TEMPLATES_LIST_CONTENT_FORM, content, true);
-    evt.click(ELEMENT_ECM_TEMPLATES_LIST_SAVE_FORM);
-    evt.waitForAndGetElement(By.xpath(ELEMENT_ECM_TEMPLATES_LIST_CHECK_LIST.replace("{$name}", name).replace("{$template}",
-                                                                                                             nameTemplate)));
+    $(ELEMENT_ECM_TEMPLATES_LIST_ADD_LIST).click();
+    $(ELEMENT_ECM_TEMPLATES_LIST_TEMPLATE_NAME_FORM).setValue(nameTemplate);
+    $(ELEMENT_ECM_TEMPLATES_LIST_NAME_FORM).setValue(name);
+    $(ELEMENT_ECM_TEMPLATES_LIST_CONTENT_FORM).setValue(content);
+    $(ELEMENT_ECM_TEMPLATES_LIST_SAVE_FORM).click();
+    $(ELEMENT_ECM_TEMPLATES_LIST_SAVE_FORM).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    /*
+     * This loop is for checking if template is not exist in current page, click on
+     * next button to display the next page until finding the template added
+     */
+    final int NUMBER_TOTAL_PAGE_OF_LIST_TEMPLATE = 9;
+    for (int i = 0; i < NUMBER_TOTAL_PAGE_OF_LIST_TEMPLATE; i++) {
+      if ($(byXpath(ELEMENT_ECM_TEMPLATES_LIST_CHECK_LIST.replace("{$name}",
+                                                                  name)
+                                                         .replace("{$template}", nameTemplate)))
+                                                                                                .is(Condition.not(Condition.visible))) {
+        $(ELEMENT_ICON_NEXT_ARROW).click();
+      }
+      if ($(byXpath(ELEMENT_ECM_TEMPLATES_LIST_CHECK_LIST.replace("{$name}", name)
+                                                         .replace("{$template}", nameTemplate)))
+                                                                                                .waitUntil(Condition.visible,
+                                                                                                           Configuration.timeout)
+                                                                                                .isDisplayed()) {
+        break;
+      }
+    }
+    $(byXpath(ELEMENT_ECM_TEMPLATES_LIST_CHECK_LIST.replace("{$name}", name)
+                                                   .replace("{$template}", nameTemplate))).waitUntil(Condition.visible,
+                                                                                                     Configuration.timeout);
+
   }
 
   /**
@@ -927,10 +950,11 @@ public class ContentAdministration {
    * @param newName
    */
   public void editTemplateNameInList(String oldTem, String newName) {
-    evt.click(By.xpath(ELEMENT_ECM_TEMPLATES_LIST_EDIT_LIST.replace("{$name}", oldTem)));
-    evt.type(ELEMENT_ECM_TEMPLATES_LIST_NAME_FORM, newName, true);
-    evt.click(ELEMENT_ECM_TEMPLATES_LIST_SAVE_FORM);
-    evt.waitForAndGetElement(By.xpath(ELEMENT_ECM_TEMPLATES_LIST_CHECK_BY_NAME.replace("{$name}", newName)));
+    $(byXpath(ELEMENT_ECM_TEMPLATES_LIST_EDIT_LIST.replace("{$name}", oldTem))).click();
+    $(ELEMENT_ECM_TEMPLATES_LIST_NAME_FORM).setValue(newName);
+    $(ELEMENT_ECM_TEMPLATES_LIST_SAVE_FORM).click();
+    $(byXpath(ELEMENT_ECM_TEMPLATES_LIST_CHECK_BY_NAME.replace("{$name}", newName))).waitUntil(Condition.visible,
+                                                                                               Configuration.timeout);
   }
 
   /**
@@ -939,9 +963,10 @@ public class ContentAdministration {
    * @param name
    */
   public void deleteTemplateList(String name) {
-    evt.click(By.xpath(ELEMENT_ECM_TEMPLATES_LIST_DELETE_LIST.replace("{$name}", name)));
+    $(byXpath(ELEMENT_ECM_TEMPLATES_LIST_DELETE_LIST.replace("{$name}", name))).click();
     alert.acceptAlert();
-    evt.waitForElementNotPresent(By.xpath(ELEMENT_ECM_TEMPLATES_LIST_DELETE_LIST.replace("{$name}", name)));
+    $(byXpath(ELEMENT_ECM_TEMPLATES_LIST_DELETE_LIST.replace("{$name}", name))).waitUntil(Condition.not(Condition.visible),
+                                                                                          Configuration.timeout);
   }
 
   /**
@@ -952,13 +977,14 @@ public class ContentAdministration {
    * @param permission
    */
   public void editeMetadataNameAndPermission(String oldName, String newName, String permission) {
-    evt.click(By.xpath(ELEMENT_ECM_TEMPLATES_METADATA_FORM_EDIT.replace("{$name}", oldName)));
-    evt.type(ELEMENT_ECM_TEMPLATES_METEDATA_FORM_EDIT_LABEL, newName, true);
-    evt.click(ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON);
+    $(byXpath(ELEMENT_ECM_TEMPLATES_METADATA_FORM_EDIT.replace("{$name}", oldName))).click();
+    $(ELEMENT_ECM_TEMPLATES_METEDATA_FORM_EDIT_LABEL).setValue(newName);
+    $(ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON).click();
     if (permission == "any")
-      evt.click(AdministrationLocator.ELEMENT_PERMISSION_ANY);
-    evt.click(ELEMENT_ECM_TEMPLATES_METADATA_FORM_APPLY);
-    evt.waitForElementNotPresent(By.xpath(ELEMENT_ECM_TEMPLATES_LIST_DELETE_LIST.replace("{$name}", oldName)));
+      $(AdministrationLocator.ELEMENT_PERMISSION_ANY).click();
+    $(ELEMENT_ECM_TEMPLATES_METADATA_FORM_APPLY).click();
+    $(byXpath(ELEMENT_ECM_TEMPLATES_LIST_DELETE_LIST.replace("{$name}", oldName))).waitUntil(Condition.not(Condition.visible),
+                                                                                             Configuration.timeout);
   }
 
   /**
@@ -967,10 +993,11 @@ public class ContentAdministration {
    * @param name
    */
   public void deleteMetadata(String name) {
-    evt.click(By.xpath(ELEMENT_ECM_TEMPLATES_METADATA_FORM_DELETE.replace("{$name}", name)));
+    $(byXpath(ELEMENT_ECM_TEMPLATES_METADATA_FORM_DELETE.replace("{$name}", name))).click();
     alert.acceptAlert();
-    evt.waitForElementNotPresent(By.xpath(ELEMENT_ECM_TEMPLATES_METADATA_FORM_DELETE.replace("{$name}", name)));
-    evt.click(ELEMENT_ECM_TEMPLATES_METADATA_FORM_OK_FORM);
+    $(byXpath(ELEMENT_ECM_TEMPLATES_METADATA_FORM_DELETE.replace("{$name}", name))).waitUntil(Condition.not(Condition.visible),
+                                                                                              Configuration.timeout);
+    $(ELEMENT_ECM_TEMPLATES_METADATA_FORM_OK_FORM).click();
   }
 
   /**
