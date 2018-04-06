@@ -917,7 +917,12 @@ public class ContentAdministration {
     $(ELEMENT_ECM_TEMPLATES_LIST_CONTENT_FORM).setValue(content);
     $(ELEMENT_ECM_TEMPLATES_LIST_SAVE_FORM).click();
     $(ELEMENT_ECM_TEMPLATES_LIST_SAVE_FORM).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
-    for (int i = 0; i < 9; i++) {
+    /*
+     * This loop is for checking if template is not exist in current page, click on
+     * next button to display the next page until finding the template added
+     */
+    final int NUMBER_TOTAL_PAGE_OF_LIST_TEMPLATE = 9;
+    for (int i = 0; i < NUMBER_TOTAL_PAGE_OF_LIST_TEMPLATE; i++) {
       if ($(byXpath(ELEMENT_ECM_TEMPLATES_LIST_CHECK_LIST.replace("{$name}",
                                                                   name)
                                                          .replace("{$template}", nameTemplate)))
