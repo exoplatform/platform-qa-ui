@@ -916,21 +916,25 @@ public class ContentAdministration {
     $(ELEMENT_ECM_TEMPLATES_LIST_NAME_FORM).setValue(name);
     $(ELEMENT_ECM_TEMPLATES_LIST_CONTENT_FORM).setValue(content);
     $(ELEMENT_ECM_TEMPLATES_LIST_SAVE_FORM).click();
-    $(ELEMENT_ECM_TEMPLATES_LIST_SAVE_FORM).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
-      for (int i = 0; i < 9; i++) {
-        if ($(byXpath(ELEMENT_ECM_TEMPLATES_LIST_CHECK_LIST.replace("{$name}", name).replace("{$template}",
-                nameTemplate)))
-                .is(Condition.not(Condition.visible))) {
-          $(ELEMENT_ICON_NEXT_ARROW).click();
-        }
-        if ($(byXpath(ELEMENT_ECM_TEMPLATES_LIST_CHECK_LIST.replace("{$name}", name).replace("{$template}",
-                nameTemplate)))
-                .waitUntil(Condition.visible,Configuration.timeout).isDisplayed()) {
-          break;
-        }
+    $(ELEMENT_ECM_TEMPLATES_LIST_SAVE_FORM).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    for (int i = 0; i < 9; i++) {
+      if ($(byXpath(ELEMENT_ECM_TEMPLATES_LIST_CHECK_LIST.replace("{$name}",
+                                                                  name)
+                                                         .replace("{$template}", nameTemplate)))
+                                                                                                .is(Condition.not(Condition.visible))) {
+        $(ELEMENT_ICON_NEXT_ARROW).click();
       }
-    $(byXpath(ELEMENT_ECM_TEMPLATES_LIST_CHECK_LIST.replace("{$name}", name).replace("{$template}",
-            nameTemplate))).waitUntil(Condition.visible,Configuration.timeout);
+      if ($(byXpath(ELEMENT_ECM_TEMPLATES_LIST_CHECK_LIST.replace("{$name}", name)
+                                                         .replace("{$template}", nameTemplate)))
+                                                                                                .waitUntil(Condition.visible,
+                                                                                                           Configuration.timeout)
+                                                                                                .isDisplayed()) {
+        break;
+      }
+    }
+    $(byXpath(ELEMENT_ECM_TEMPLATES_LIST_CHECK_LIST.replace("{$name}", name)
+                                                   .replace("{$template}", nameTemplate))).waitUntil(Condition.visible,
+                                                                                                     Configuration.timeout);
 
   }
 
@@ -944,7 +948,8 @@ public class ContentAdministration {
     $(byXpath(ELEMENT_ECM_TEMPLATES_LIST_EDIT_LIST.replace("{$name}", oldTem))).click();
     $(ELEMENT_ECM_TEMPLATES_LIST_NAME_FORM).setValue(newName);
     $(ELEMENT_ECM_TEMPLATES_LIST_SAVE_FORM).click();
-    $(byXpath(ELEMENT_ECM_TEMPLATES_LIST_CHECK_BY_NAME.replace("{$name}", newName))).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_ECM_TEMPLATES_LIST_CHECK_BY_NAME.replace("{$name}", newName))).waitUntil(Condition.visible,
+                                                                                               Configuration.timeout);
   }
 
   /**
@@ -955,7 +960,8 @@ public class ContentAdministration {
   public void deleteTemplateList(String name) {
     $(byXpath(ELEMENT_ECM_TEMPLATES_LIST_DELETE_LIST.replace("{$name}", name))).click();
     alert.acceptAlert();
-    $(byXpath(ELEMENT_ECM_TEMPLATES_LIST_DELETE_LIST.replace("{$name}", name))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    $(byXpath(ELEMENT_ECM_TEMPLATES_LIST_DELETE_LIST.replace("{$name}", name))).waitUntil(Condition.not(Condition.visible),
+                                                                                          Configuration.timeout);
   }
 
   /**
@@ -968,11 +974,12 @@ public class ContentAdministration {
   public void editeMetadataNameAndPermission(String oldName, String newName, String permission) {
     $(byXpath(ELEMENT_ECM_TEMPLATES_METADATA_FORM_EDIT.replace("{$name}", oldName))).click();
     $(ELEMENT_ECM_TEMPLATES_METEDATA_FORM_EDIT_LABEL).setValue(newName);
-   $(ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON).click();
+    $(ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON).click();
     if (permission == "any")
       $(AdministrationLocator.ELEMENT_PERMISSION_ANY).click();
     $(ELEMENT_ECM_TEMPLATES_METADATA_FORM_APPLY).click();
-    $(byXpath(ELEMENT_ECM_TEMPLATES_LIST_DELETE_LIST.replace("{$name}", oldName))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    $(byXpath(ELEMENT_ECM_TEMPLATES_LIST_DELETE_LIST.replace("{$name}", oldName))).waitUntil(Condition.not(Condition.visible),
+                                                                                             Configuration.timeout);
   }
 
   /**
@@ -983,7 +990,8 @@ public class ContentAdministration {
   public void deleteMetadata(String name) {
     $(byXpath(ELEMENT_ECM_TEMPLATES_METADATA_FORM_DELETE.replace("{$name}", name))).click();
     alert.acceptAlert();
-    $(byXpath(ELEMENT_ECM_TEMPLATES_METADATA_FORM_DELETE.replace("{$name}", name))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    $(byXpath(ELEMENT_ECM_TEMPLATES_METADATA_FORM_DELETE.replace("{$name}", name))).waitUntil(Condition.not(Condition.visible),
+                                                                                              Configuration.timeout);
     $(ELEMENT_ECM_TEMPLATES_METADATA_FORM_OK_FORM).click();
   }
 
