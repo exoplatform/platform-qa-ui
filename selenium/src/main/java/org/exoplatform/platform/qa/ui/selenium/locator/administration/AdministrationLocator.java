@@ -21,6 +21,7 @@
 package org.exoplatform.platform.qa.ui.selenium.locator.administration;
 
 import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -655,6 +656,8 @@ public class AdministrationLocator {
   public static final String          ELEMENT_CHANGELANGUAGE_LANGUAGE                              = "//*[text()='${language}']";
 
   public static final String          ELEMENT_AVATAR_CHANGELANGUAGE_APPLY                          = "//*[text()='${text}']";
+
+  /*****************************************************
 
   /*****************************************************
    * CONTENT SEARCH ADMINISTRATION

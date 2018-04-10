@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static com.codeborne.selenide.Condition.appears;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
@@ -9,6 +10,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.util.ArrayList;
 
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.Dialog;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
@@ -124,9 +126,11 @@ public class UserAddManagement {
     if (confirmNewPass != null && confirmNewPass != "")
       evt.type(ELEMENT_CONFIRM_NEW_PASSWORD, confirmNewPass, true);
     evt.click(ELEMENT_SAVE_PASSWORD);
-    evt.waitForMessage(ELEMENT_MSG_CHANGE_PASS_WORD);
-    evt.click(ELEMENT_CLOSE_MESSAGE);
-    button.close();
-    evt.waitForElementNotPresent(button.ELEMENT_CLOSE_BUTTON);
+    $(ELEMENT_OK).waitUntil(visible, Configuration.timeout);
+    $(ELEMENT_OK).click();
+
+
+    $(ELEMENT_CLOSE_MESSAGE).click();
+
   }
 }
