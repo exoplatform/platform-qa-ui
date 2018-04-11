@@ -12,6 +12,7 @@ import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.By;
 
 public class PortalGroupNavigation {
 
@@ -90,9 +91,9 @@ public class PortalGroupNavigation {
    * @param currentNavigation String
    */
   public void editNavigation(String currentNavigation) {
-    String navigation = ELEMENT_EDIT_NAVIGATION.replace("${groupName}", currentNavigation);
-    evt.click(navigation);
-    evt.waitForAndGetElement(ELEMENT_TITLE_NAVIGATION_MANAGEMENT);
+    By navigation = byXpath(ELEMENT_EDIT_NAVIGATION.replace("${groupName}", currentNavigation));
+    $(navigation).click();
+    $(byXpath(ELEMENT_TITLE_NAVIGATION_MANAGEMENT)).waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**

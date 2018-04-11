@@ -4,6 +4,7 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -29,8 +30,7 @@ public class GateinGroupNavigationEditNavigationTestIT extends Base {
 	NavigationManagement navigationmanagement;
 	PortalManageSites portalManageSites;
 	NavigationToolbar navigationToolbar;
-    PortalGroupNavigation portalGroupNavigation;
-
+	PortalGroupNavigation portalGroupNavigation;
 
 
 	@BeforeEach
@@ -50,7 +50,7 @@ public class GateinGroupNavigationEditNavigationTestIT extends Base {
 	@Test
 	public void test01EditPriorityForGroupNavigation() {
 
-		String groupAdmin="Administration";
+		String groupAdmin = "Administration";
 		String groupAdminOldPosition = ELEMENT_GROUP_NAVIGATION_POSITION.replace("${index}", "1").replace("${groupTitle}", groupAdmin);
 		String groupAdminNewPosition = ELEMENT_GROUP_NAVIGATION_POSITION.replace("${index}", "2").replace("${groupTitle}", groupAdmin);
 
@@ -62,10 +62,9 @@ public class GateinGroupNavigationEditNavigationTestIT extends Base {
 		$(byXpath(groupAdminOldPosition)).should(Condition.exist);
 
 
-
 		portalGroupNavigation.editPriorityForGroup(groupAdmin, "2");
 
-		info ("Verify position of Administration after changing order");
+		info("Verify position of Administration after changing order");
 
 		$(byXpath(groupAdminNewPosition)).should(Condition.exist);
 		manageLogInOut.signIn(DATA_USER1, "gtngtn");
@@ -81,5 +80,50 @@ public class GateinGroupNavigationEditNavigationTestIT extends Base {
 
 	}
 
-}
 
+	@Test
+
+	public void test05CopyAndPasteNode() {
+		String groupAdmin = "Administration";
+		String nodeName1 = "nodeName1" + getRandomNumber();
+		String nodeName2 = "nodeName2" + getRandomNumber();
+
+		info("Go to Group Sites/Edit navigation");
+		navigationToolbar.goToGroupSites();
+		portalGroupNavigation.editNavigation(groupAdmin);
+		/*Step Number: 1
+		*Step Name: Step 1: Copy and Paste node
+		*Step Description:
+			- Go to Group Sites/Edit navigation
+			- Select a node
+			- Right click on node and choose Copy from the drop-down menu.
+			- Right click the position you want to paste this node and select Paste Node.
+		*Input Data:
+		*Expected Outcome:
+			- Node is copied to new place*/
+		info("Test Case 05: Copy and Paste node");
+		info("Add a new node 1");
+		navigationmanagement.addNode(nodeName1, "");
+		navigationmanagement.saveNode();
+
+		info("Add a new node 2");
+		portalGroupNavigation.editNavigation(groupAdmin);
+		navigationmanagement.addNode(nodeName2, "");
+		navigationmanagement.saveNode();
+
+		info("Copy and paste a node");
+		portalGroupNavigation.editNavigation(groupAdmin);
+		navigationmanagement.copyNode(nodeName1);
+		navigationmanagement.pasteNode(nodeName2);
+
+		info("Verify that node 2 has only one children is node1");
+
+		waitForAndGetElement(byXpath(ELEMENT_NAVIGATION_PARENT_CHILD_NODE.replace("${parent}", nodeName2).replace("${child}", nodeName1)));
+		waitForAndGetElement(byXpath(ELEMENT_NAVIGATION_NUMBER_CHILD_NODES.replace("${parent}", nodeName2).replace("${numberChild}", "1")));
+		navigationmanagement.closeNavigationManagementPopup();
+		portalGroupNavigation.editNavigation(groupAdmin);
+		navigationmanagement.deleteNode(nodeName1);
+		portalGroupNavigation.editNavigation(groupAdmin);
+		navigationmanagement.deleteNode(nodeName2);
+	}
+}

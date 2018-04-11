@@ -4,6 +4,7 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -94,7 +95,7 @@ public class NavigationManagement {
       break;
     case COPY_NODE:
       info("Click on Copy node");
-      evt.click(ELEMENT_MANAGESITES_CONTEXTMENU_COPY_ICON);
+      $(ELEMENT_MANAGESITES_CONTEXTMENU_COPY_ICON).click();
 
       break;
     case CLONE_NODE:
@@ -109,7 +110,7 @@ public class NavigationManagement {
       break;
     case PASTE_NODE:
       info("Click on Paste node");
-      evt.clickByJavascript(ELEMENT_MANAGESITES_CONTEXTMENU_PASTE_ICON);
+      $(ELEMENT_MANAGESITES_CONTEXTMENU_PASTE_ICON).click();
 
       break;
     case DELETE_NODE:
@@ -205,7 +206,8 @@ public class NavigationManagement {
   public void copyNode(String name) {
     info("Copy a node");
     info("Right click on the node");
-    evt.rightClickOnElement(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name));
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    $(byXpath(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name))).contextClick();
     info("Select Edit link");
     selectItem(specifiContextMenu.COPY_NODE);
   }
@@ -244,7 +246,8 @@ public class NavigationManagement {
   public void pasteNode(String name) {
     info("Paste a node");
     info("Right click on the node");
-    evt.rightClickOnElement(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name));
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    $(byXpath(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name))).contextClick();
     info("Select Edit link");
     selectItem(specifiContextMenu.PASTE_NODE);
   }
