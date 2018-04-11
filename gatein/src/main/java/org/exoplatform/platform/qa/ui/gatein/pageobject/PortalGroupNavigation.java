@@ -78,10 +78,10 @@ public class PortalGroupNavigation {
    */
   public void editPriorityForGroup(String groupAdmin, String priority) {
     info("Select group navigation [Administration] and click [Edit Properties]");
-    $(ELEMENT_EDIT_PROPERTIES_ICON.replace("${groupName}", groupAdmin));
+    $(byXpath(ELEMENT_EDIT_PROPERTIES_ICON.replace("${groupName}", groupAdmin))).click();
     info("Change priority for this group");
-    evt.select(ELEMENT_GROUP_NAVIGATION_PRIORITY, priority);
-    evt.click(ELEMENT_SAVE_BTN);
+    $(byXpath(ELEMENT_GROUP_NAVIGATION_PRIORITY)).selectOption(priority);
+    $(byXpath(ELEMENT_SAVE_BTN)).click();
   }
 
   /**
