@@ -394,7 +394,7 @@ public class WikiSettingsTestIT extends Base {
     wikiManagement.saveAddPage();
     wikiHomePage.goToPermalink();
     String perLink = ELEMENT_WIKI_PERMELINK.getValue();
-
+    $(ELEMENT_PERMALINK_CLOSE).click();
     wikiHomePage.goToPermissions();
     wikiPermission.addPermisisonByType(DATA_USER2);
     click(ELEMENT_ADD_PERMISSION);
@@ -439,7 +439,7 @@ public class WikiSettingsTestIT extends Base {
     wikiManagement.saveAddPage();
     wikiHomePage.goToPermalink();
     String perLink = ELEMENT_WIKI_PERMELINK.getValue();
-
+    $(ELEMENT_PERMALINK_CLOSE).click();
     wikiHomePage.goToPermissions();
     wikiPermission.addPermisisonByType(DATA_USER2);
     // mary can now edit the page
@@ -482,7 +482,7 @@ public class WikiSettingsTestIT extends Base {
     wikiManagement.saveAddPage();
     wikiHomePage.goToPermalink();
     String perLink = ELEMENT_WIKI_PERMELINK.getValue();
-
+    $(ELEMENT_PERMALINK_CLOSE).click();
     wikiHomePage.goToPermissions();
     wikiPermission.addPermisisonByType(DATA_USER2);
     click(ELEMENT_ADD_PERMISSION);

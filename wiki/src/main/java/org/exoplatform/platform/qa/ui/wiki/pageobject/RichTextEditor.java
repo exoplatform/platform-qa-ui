@@ -1,9 +1,7 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
-import static com.codeborne.selenide.Selenide.switchTo;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -1425,11 +1423,17 @@ public class RichTextEditor {
       $(ELEMENT_TITLE_WIKI_INPUT).val(newTitle);
     info("Input a new content for the page");
     if (!newContent.isEmpty()) {
-      plf.inputFrame(ELEMENT_CONTENT_WIKI_FRAME, newContent);
+      SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.timeout);
+      $(byClassName("gwt-RichTextArea")).click();
+      switchTo().frame(frame);
+      $(byId("body")).sendKeys(newContent);
+      switchTo().defaultContent();
     }
     info("Waiting 30s before saved all changes");
     $(ELEMENT_DRAFT_NOTIFY).waitUntil(Condition.appears, 31000, 1);
     info("Save all changes");
+    executeJavaScript("window.scrollBy(0,-5500)", "");
+    ELEMENT_SAVE_BUTTON_ADD_PAGE.click();
   }
 
   /**
@@ -1444,7 +1448,9 @@ public class RichTextEditor {
       $(ELEMENT_TITLE_WIKI_INPUT).val(title);
     info("Input a content for the page");
     if (!content.isEmpty()) {
-      switchTo().frame(0);
+      SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.timeout);
+      $(byClassName("gwt-RichTextArea")).click();
+      switchTo().frame(frame);
       $(byId("body")).sendKeys(content);
       switchTo().defaultContent();
     }

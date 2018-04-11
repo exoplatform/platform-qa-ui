@@ -1131,7 +1131,7 @@ public final class SocialLocator {
                                                              ".//*[@id='UIBreadCrumbsNavigationPortlet']//*[contains(text(),'$fullName')]";
 
   public static final By              ELEMENT_EDIT_MY_PROFILE_LINK                                      =
-                                                                   By.xpath(".//*[@id='UIBreadCrumbsNavigationPortlet']//*[@class='uiIconEdit uiIconLightGray']");
+                                                                   By.xpath("//*[@id=\"UIUserNavigationPortlet\"]/div[1]/div/div/ul/li/a");
 
   public static final By              ELEMENT_EDIT_MY_PROFILE_BUTTON                                    =
                                                                      By.xpath("//*[@id='UIExperienceProfilePortlet']//*[@class='uiIconEdit uiIconLightGray']");

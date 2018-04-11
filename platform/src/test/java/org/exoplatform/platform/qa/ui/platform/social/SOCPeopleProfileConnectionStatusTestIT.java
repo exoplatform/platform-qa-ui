@@ -11,6 +11,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -69,6 +70,7 @@ public class SOCPeopleProfileConnectionStatusTestIT extends Base {
    * : * The icon to a disconnect icon* The label to Disconnect
    */
   @Test
+  @BugInPLF("PLF-7947")
   public void test01_CheckConnectionStatusBetweenTwoUsers() throws Exception {
     info("Test 1: Check Connection Status between two users");
     /* Create data test */

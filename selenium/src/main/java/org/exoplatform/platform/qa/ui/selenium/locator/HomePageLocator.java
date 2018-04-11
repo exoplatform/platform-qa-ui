@@ -647,7 +647,7 @@ public final class HomePageLocator {
                                                                    $(byXpath("//*[@id=\"Avatar\"]/div[2]"));
 
   public static final SelenideElement ELEMENT_INPUT_UPLOAD_AVATAR                                          =
-                                                                  $(byClassName("uploadContainer")).find(byClassName("file"));
+                                                                  $(byId("Uploader")).find(byClassName("file"));
 
   public static final SelenideElement ELEMENT_BUTTON_CONFIRM_UPLOAD                                        =
                                                                     $(byXpath("//*[@id=\"UIAvatarUploader\"]/div[3]/button[1]"));

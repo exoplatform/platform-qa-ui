@@ -643,11 +643,11 @@ public class CalendarManagement {
       switch (option) {
       case NEVER:
         // check(ELEMENT_CALENDAR_SETTING_NEVER_SEND_INVITE_CHECKBOX,2);
-        $(ELEMENT_CALENDAR_SETTING_NEVER_SEND_INVITE_CHECKBOX).click();
+        $(ELEMENT_CALENDAR_SETTING_NEVER_SEND_INVITE_CHECKBOX).parent().click();
         break;
       case ALWAYS:
         // check(ELEMENT_CALENDAR_SETTING_ALWAYS_SEND_INVITE_CHECKBOX,2);
-        $(ELEMENT_CALENDAR_SETTING_ALWAYS_SEND_INVITE_CHECKBOX).click();
+        $(ELEMENT_CALENDAR_SETTING_ALWAYS_SEND_INVITE_CHECKBOX).parent().click();
         break;
       case ASK:
         // check(ELEMENT_CALENDAR_SETTING_ASK_SEND_INVITE_CHECKBOX,2);

@@ -624,6 +624,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     richTextEditor.addSimplePage(title, title);
     wikiManagement.saveAddPage();
     info("Un check view permission of any group");
+    wikiHomePage.goToPermissions();
     wikiManagement.unCheckViewAUserOfPage(ELEMENT_PERMISSION_VIEW_ANY);
 
     wikiHomePage.goToPermalink();
@@ -869,6 +870,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     wikiHomePage.goToAddBlankPage();
     richTextEditor.addSimplePage(title, title);
     wikiManagement.saveAddPage();
+    wikiHomePage.goToPermissions();
     wikiManagement.unCheckViewAUserOfPage(ELEMENT_PERMISSION_VIEW_ANY);
 
     wikiHomePage.goToPermalink();
@@ -914,7 +916,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     wikiManagement.saveAddPage();
     wikiHomePage.goToPermalink();
     String perLink = ELEMENT_WIKI_PERMELINK.getValue();
-    $(ELEMENT_PERMALINK_MANAGEPERM).click();
+    $(ELEMENT_PERMALINK_CLOSE).click();
     info("Un check view permission of any group");
     wikiHomePage.goToPermissions();
     wikiManagement.unCheckViewAUserOfPage(ELEMENT_PERMISSION_VIEW_ANY);

@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.forum.pageobject;
 
+import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
@@ -269,6 +270,8 @@ public class ForumHomePage {
     info("Click on Bookmark link on Action bar");
     $(ELEMENT_ACTIONBAR_BOOKMARK_ICON).click();
     info("Click on Bookmark link on Action bar to open Bookmark popup");
+    if($(ELEMENT_ACTIONBAR_BOOKMARK_MANAGER).is(Condition.not(Condition.visible)))
+    $(byClassName("moreItem")).click();
     $(ELEMENT_ACTIONBAR_BOOKMARK_MANAGER).click();
     info("Verify that the topic is bookmarked");
     $(byText(name)).should(Condition.exist);
