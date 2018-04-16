@@ -1,8 +1,11 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.ecms;
 
+import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
@@ -49,9 +52,9 @@ public class ECMS_Permission {
    * @param name String
    */
   public void deletePermissionNode(String name) {
-    if (evt.waitForAndGetElement(ELEMENT_PERMISSION_USER_OR_GROUP_NAME.replace("${name}", name), 3000, 0) != null) {
+    if ($(byXpath(ELEMENT_PERMISSION_USER_OR_GROUP_NAME.replace("${name}", name))).is(Condition.visible)) {
       info("Click on Delete button of the node:" + name);
-      evt.click(By.xpath((ELEMENT_PERMISSION_DELETE).replace("${name}", name)));
+      $(byXpath((ELEMENT_PERMISSION_DELETE).replace("${name}", name))).click();
       info("click on OK button of alert popup");
       mngAlert.acceptAlert();
       info("Finished deleting permission of the node");
@@ -156,10 +159,10 @@ public class ECMS_Permission {
     evt.waitForAndGetElement(ELEMENT_CAT_SELECT_MEMBERSHIP_POPUP);
     temp = groupPath.split("/");
     for (int i = 0; i < temp.length; i++) {
-      evt.click(ELEMENT_CAT_SELECT_RIGHT_PARENT_GROUP.replace("$group", temp[i]));
+      $(byXpath(ELEMENT_CAT_SELECT_RIGHT_PARENT_GROUP.replace("$group", temp[i]))).click();
     }
-    evt.click(ELEMENT_CAT_SELECT_RIGHT_PARENT_GROUP.replace("$group", membership));
-    evt.waitForElementNotPresent(ELEMENT_CAT_SELECT_MEMBERSHIP_POPUP);
+    $(byXpath(ELEMENT_CAT_SELECT_RIGHT_PARENT_GROUP.replace("$group", membership))).click();
+    $(ELEMENT_CAT_SELECT_MEMBERSHIP_POPUP).shouldNot(Condition.visible);
   }
 
   /**
