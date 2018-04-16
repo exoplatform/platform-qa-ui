@@ -4,6 +4,7 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_SELECT_USER_ICON1;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
@@ -97,19 +98,18 @@ public class SiteExplorerHome {
    */
   public void goToAddNewFolder() {
     info("Add a new folder");
-    if (evt.waitForAndGetElement(ELEMENT_ACTIONBAR_ADDFOLDER, 7000, 0) == null) {
+    if ($(ELEMENT_ACTIONBAR_ADDFOLDER).is(Condition.not(Condition.visible))) {
       info("Click on More menu");
-      evt.click(ELEMENT_ACTIONBAR_MORE);
-      evt.waitForAndGetElement(ELEMENT_ACTIONBAR_ADDFOLDER, testBase.getDefaultTimeout(), 1);
+      $(ELEMENT_ACTIONBAR_MORE).click();
+      $(ELEMENT_ACTIONBAR_ADDFOLDER).waitUntil(Condition.visible,Configuration.timeout);
       info("Click on New folder on Action Bar");
-      evt.click(ELEMENT_ACTIONBAR_ADDFOLDER);
+      $(ELEMENT_ACTIONBAR_ADDFOLDER).click();
     } else {
-      evt.waitForAndGetElement(ELEMENT_ACTIONBAR_ADDFOLDER, testBase.getDefaultTimeout(), 1);
       info("Click on New folder on Action Bar");
-      evt.click(ELEMENT_ACTIONBAR_ADDFOLDER);
+      $(ELEMENT_ACTIONBAR_ADDFOLDER).waitUntil(Condition.visible,Configuration.timeout).click();
     }
     info("Verify that Add folder popup is shown");
-    evt.waitForAndGetElement(ELEMENT_ADDFOLDERBOX);
+    $(ELEMENT_ADDFOLDERBOX).waitUntil(Condition.visible,Configuration.timeout);
     info("The folder is shown successfully");
   }
 
@@ -179,7 +179,8 @@ public class SiteExplorerHome {
     $(ELEMENT_SITEEXPLORER_ACTION_DELETE).click();
     info("Click on Delete button on Confirm popup");
     $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).click();
-    $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    refresh();
+    $(byText(title)).shouldNot(Condition.exist);
     info("Verify that the node is deleted");
     info("the node is deleted successfully");
   }
@@ -301,13 +302,10 @@ public class SiteExplorerHome {
    */
   public void uploadFile(String link, Object... params) {
     Boolean verify = (Boolean) (params.length > 0 ? params[0] : true);
-    if (evt.waitForAndGetElement(ELEMENT_UPLOAD_BUTTON, testBase.getDefaultTimeout(), 0) == null) {
-      evt.click(ELEMENT_MORE_LINK_WITHOUT_BLOCK);
-    }
-
-    evt.click(ELEMENT_UPLOAD_LINK);
-    MFTB.uploadFileUsingRobot(link);
-    // waitForElementNotPresent(ELEMENT_UPLOAD_PROGRESS_BAR);
+    $(byId("MultiUploadInputFiles")).uploadFromClasspath(link);
+    $(byClassName("progress")).waitUntil(Condition.visible, Configuration.timeout);
+    $(byClassName("progress")).waitUntil(Condition.not(Condition.visible),60000);
+    refresh();
 
     info("verify:" + verify);
     if (verify) {
@@ -417,7 +415,9 @@ public class SiteExplorerHome {
       $(ELEMENT_FILE_FORM_TITLE).setValue(newTitle);
     }
     $(ELEMENT_FILEFORM_BLANK_CONTENT).click();
-    $(ELEMENT_FILEFORM_BLANK_CONTENT).sendKeys(content);
+    switchTo().frame($(ELEMENT_FILEFORM_BLANK_CONTENT));
+    $(byXpath("/html/body")).sendKeys(content);
+    switchTo().defaultContent();
   }
 
   /**
@@ -439,8 +439,9 @@ public class SiteExplorerHome {
    * Go to space
    */
   public void goToSpace(String spaceName) {
-    evt.click(ELEMENT_ACTIONBAR_SHOWDRIVES);
-    evt.click(By.xpath((ELEMENT_SELECTDRIVE_SPECIFICDRIVE).replace("${spaceName}", spaceName)));
+    $(ELEMENT_ACTIONBAR_SHOWDRIVES).click();
+    $(byXpath(ELEMENT_SELECTDRIVE_SPECIFICDRIVE.replace("${spaceName}", spaceName))).click();
+    $(ELEMENT_ACTIONBAR_SHOWDRIVES).waitUntil(Condition.have(Condition.text(spaceName)),Configuration.timeout);
   }
 
   /**

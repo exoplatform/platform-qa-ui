@@ -2,8 +2,10 @@ package org.exoplatform.platform.qa.ui.ecms.pageobject;
 
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_NAME;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
@@ -160,7 +162,10 @@ public class CreateNewDocument {
     $(ELEMENT_FILEFORM_BLANK_NAME).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_FILEFORM_BLANK_NAME).setValue(title);
     $(ELEMENT_FILEFORM_BLANK_CONTENT).click();
-    $(ELEMENT_FILEFORM_BLANK_CONTENT).waitUntil(Condition.appears, Configuration.timeout).sendKeys(content);
+    $(ELEMENT_FILEFORM_BLANK_CONTENT).click();
+    switchTo().frame($(ELEMENT_FILEFORM_BLANK_CONTENT));
+    $(byXpath("/html/body")).sendKeys(content);
+    switchTo().defaultContent();
   }
 
   /**
@@ -173,7 +178,9 @@ public class CreateNewDocument {
     $(ELEMENT_FILEFORM_BLANK_NAME).click();
     $(ELEMENT_FILEFORM_BLANK_NAME).setValue(title);
     $(ELEMENT_FILEFORM_BLANK_CONTENT).click();
-    $(ELEMENT_FILEFORM_BLANK_CONTENT).sendKeys(content);
+    switchTo().frame($(ELEMENT_FILEFORM_BLANK_CONTENT));
+    $(byXpath("/html/body")).sendKeys(content);
+    switchTo().defaultContent();
 
   }
 
@@ -208,9 +215,9 @@ public class CreateNewDocument {
    * @param url String
    */
   public void addLinkInWebContent(String url) {
-    evt.click(ELEMENT_WEBCONTENTFORM_BUTTON_LINK);
-    evt.type(ELEMENT_WEBCONTENTFORM_LINK_ADRESS, url, true);
-    evt.click(ELEMENT_WEBCONTENTFORM_LINK_OK);
+    $(ELEMENT_WEBCONTENTFORM_BUTTON_LINK).click();
+    $(ELEMENT_WEBCONTENTFORM_LINK_ADRESS).setValue(url);
+    $(ELEMENT_WEBCONTENTFORM_LINK_OK).click();
   }
 
   /**
