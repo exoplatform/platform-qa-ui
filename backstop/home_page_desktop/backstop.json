@@ -26,7 +26,10 @@
         "viewport",
         "document",
         ".LeftNavigationTDContainer.TDContainer",
-        ".RightBodyTDContainer.TDContainer"
+        ".RightBodyTDContainer.TDContainer",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "td.OfficeMiddleTDContainer.TDContainer",
+        "td.OfficeRightTDContainer.TDContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
