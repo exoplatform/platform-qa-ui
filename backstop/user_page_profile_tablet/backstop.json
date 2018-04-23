@@ -11,7 +11,7 @@
   "onReadyScript": "onBefore.js",
   "scenarios": [
     {
-      "label": "Answers_page-onTablet",
+      "label": "User_page_profile-onTablet",
       "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
