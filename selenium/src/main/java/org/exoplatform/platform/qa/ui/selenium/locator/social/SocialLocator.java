@@ -2355,5 +2355,6 @@ public final class SocialLocator {
 
   public static final SelenideElement ELEMENT_CONTAINER_ACTIVITY                                        =
                                                                  $(byClassName("MediaName"));
+  public static final SelenideElement ELEMENT_ABOUT_ME_PORTLET=$(byId("UIExperienceProfilePortlet"));
 
 }
