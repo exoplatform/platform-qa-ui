@@ -441,8 +441,8 @@ public class SpaceManagement {
    */
   public void goToDocumentTab() {
     info("Open Document Tab");
-    evt.click(ELEMENT_DOCUMENT_TAB);
-    evt.waitForAndGetElement(ELEMENT_DOCUMENT_FOLDER_ADD_BTN, 2000, 0);
+    $(ELEMENT_DOCUMENT_TAB).click();
+    $(ELEMENT_DOCUMENT_FOLDER_ADD_BTN).waitUntil(Condition.visible,Configuration.timeout);
     info("Document portlet is shown");
   }
 

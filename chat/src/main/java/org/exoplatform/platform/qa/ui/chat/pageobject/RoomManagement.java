@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.chat.pageobject;
 
+import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
@@ -43,5 +44,10 @@ public class RoomManagement {
     ELEMENT_CHAT_BUTTON_SAVE_ADD_ROOM.click();
 
   }
+public void startStopmeeting(String room){
+  $(byText(room)).click();
+  ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
+  ELEMENT_CHAT_ROOM_STARTSTOPMEETING.click();
 
+}
 }
