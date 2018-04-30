@@ -68,13 +68,13 @@ services:
       - mongo
   selenium_hub:
     container_name: hub
-    image: 'selenium/hub:3.0.1'
+    image: 'selenium/hub:3.7.0'
     ports:
     - '4444:4444'
     networks:
       - front
   selenium_node:
-    image: 'selenium/node-firefox:3.0.1'
+    image: 'selenium/node-firefox:3.7.0'
     depends_on:
       - selenium_hub
     environment:
@@ -85,7 +85,7 @@ services:
     networks:
       - front
   selenium_node_chrome:
-    image: 'selenium/node-chrome:3.0.1'
+    image: 'selenium/node-chrome:3.7.0'
     depends_on:
       - selenium_hub
     environment:
