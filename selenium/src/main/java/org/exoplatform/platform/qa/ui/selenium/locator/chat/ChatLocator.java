@@ -94,4 +94,6 @@ public class ChatLocator {
   public static final SelenideElement ELEMENT_CHAT_ROOM_STARTSTOPMEETING=$(byId("chat-record-button"));
 
   public static final SelenideElement ELEMENT_CHAT_LINK_TEXT_OPEN_WIKI_APP=$(byLinkText("Open Wiki application"));
+  public static final String ELEMENT_STATUS_CHAT="toggle-status-{status}";
+  public static final String ELEMENT_STATUS_CHAT_IN_PROFILE_PAGE="uiIconUser{status}";
 }
