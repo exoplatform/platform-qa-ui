@@ -40,8 +40,10 @@ public class SpaceHomePage {
     info("--Open Setting tab of the space");
     info("Click on the tab");
 
-    if  ($(ELEMENT_SPACE_MENU_MORE).is(Condition.visible)) {
+    if ($(ELEMENT_SPACE_MENU_MORE).is(Condition.visible)) {
       $(ELEMENT_SPACE_MENU_MORE).click();
+      $(ELEMENT_SPACE_SPACE_SETTINGS).click();
+    } else {
       $(ELEMENT_SPACE_SPACE_SETTINGS).click();
       $(ELEMENT_SPACE_SPACE_SETTINGS_TITLE).waitUntil(Condition.appears, Configuration.timeout);
       info("Space setting page is shown");
@@ -54,7 +56,7 @@ public class SpaceHomePage {
   public void goToWikiTab() {
     info("--Open Wiki tab of the space");
     info("Click on the tab");
-    if ( $(ELEMENT_SPACE_WIKI_TAB).is(Condition.not(Condition.visible))){
+    if ($(ELEMENT_SPACE_WIKI_TAB).is(Condition.not(Condition.visible))) {
       refresh();
     }
     $(ELEMENT_SPACE_WIKI_TAB).waitUntil(Condition.appears, Configuration.timeout).click();
@@ -64,7 +66,7 @@ public class SpaceHomePage {
   public void goToForumsTab() {
     info("--Open Wiki tab of the space");
     info("Click on the tab");
-    if($(ELEMENT_SPACE_FORUMS_TAB).is(Condition.not(Condition.visible))){
+    if ($(ELEMENT_SPACE_FORUMS_TAB).is(Condition.not(Condition.visible))) {
       refresh();
     }
     $(ELEMENT_SPACE_FORUMS_TAB).waitUntil(Condition.appears, Configuration.timeout).click();
@@ -78,9 +80,9 @@ public class SpaceHomePage {
    */
   public void goToSpace(String name) {
     info("Go to the Space:" + name);
-    $(byXpath(ELEMENT_SPACE_LEFT_MENU_SPACE_NAME.replace("${name}",name))).waitUntil(Condition.appears, Configuration.timeout);
-    $(byXpath(ELEMENT_SPACE_LEFT_MENU_SPACE_NAME.replace("${name}",name))).click();
-    $(byXpath(ELEMENT_SPACE_NAME.replace("${name}",name))).waitUntil(Condition.appears, Configuration.timeout);
+    $(byXpath(ELEMENT_SPACE_LEFT_MENU_SPACE_NAME.replace("${name}", name))).waitUntil(Condition.appears, Configuration.timeout);
+    $(byXpath(ELEMENT_SPACE_LEFT_MENU_SPACE_NAME.replace("${name}", name))).click();
+    $(byXpath(ELEMENT_SPACE_NAME.replace("${name}", name))).waitUntil(Condition.appears, Configuration.timeout);
     info("The space is shown");
   }
 
