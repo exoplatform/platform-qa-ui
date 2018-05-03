@@ -4,7 +4,6 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.url;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
-import static org.exoplatform.platform.qa.ui.selenium.Button.ELEMENT_OK_BUTTON_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
@@ -20,7 +19,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
@@ -275,12 +273,11 @@ public class SOCSpaceManagementTestIT extends Base {
    * joins the space and is redirected to the initially requested page.
    */
   @Test
-  @BugInPLF("SOC-5885")
   public void test08_CheckAccessVisibleOpenSpace() {
     info("Test 08:Check access visible/open space");
     String space = "space" + getRandomNumber();
     String[] arrayRight = { "open" };
-    String mess = "You must be a member of the space " + space + " to access this page.";
+    String mess = "You must be a member of the space " + space + " to view this page.";
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
     String username2 = "usernameb" + getRandomString();
@@ -299,18 +296,14 @@ public class SOCSpaceManagementTestIT extends Base {
     spaceSettingManagement.goToAccessEditTab();
     spaceSettingManagement.setPermissionForSpace(arrayRight);
     spaceManagement.goToActivityStreamTab();
-    refresh();
     String urlSpace = url();
     manageLogInOut.signIn(username2, password);
-    for (int i = 0; i <= 14; i++) {
-      open(urlSpace);
-      if ($(ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE).is(Condition.visible)) {
-        break;
-      }
-    }
-
+    homePagePlatform.goToWiki();
+    open(urlSpace);
+    if ($(ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE).is(Condition.not(Condition.visible)))
+      refresh();
     $(ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE).should(Condition.visible);
-    $(ELEMENT_SPACE_ACCESS_INFO).getText().contains(mess);
+    $(ELEMENT_SPACE_ACCESS_INFO).shouldHave(Condition.text(mess));
     $(ELEMENT_SPACE_ACCESS_JOIN_BTN).click();
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
@@ -330,12 +323,12 @@ public class SOCSpaceManagementTestIT extends Base {
    * Found' title is displayed Message is : No space is available at this URL.
    * [Find Spaces] - User2 is redirected to Spaces directory page
    */
-  @BugInPLF("SOC-5884")
   @Test
   public void test09_CheckAccessHiddenSpace() {
     info("Test 09:Check access hidden space");
     String space = "space" + getRandomNumber();
     String[] arrayRight = { "hidden" };
+    String mess = "You must be a member of the space " + space + " to view this page.";
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
     String username2 = "usernameb" + getRandomString();
@@ -356,23 +349,14 @@ public class SOCSpaceManagementTestIT extends Base {
     spaceSettingManagement.goToAccessEditTab();
     spaceSettingManagement.setPermissionForSpace(arrayRight);
     spaceManagement.goToActivityStreamTab();
-    refresh();
     String urlSpace = url();
     manageLogInOut.signIn(username2, password);
-    for (int i = 0; i <= 14; i++) {
-      open(urlSpace);
-      if ($(ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE).is(Condition.visible)) {
-        break;
-      }
-    }
-    waitForAndGetElement(ELEMENT_SPACE_ACCESS_SPACE_NOT_FOUND_TITLE, 2000, 1);
-    waitForAndGetElement(ELEMENT_SPACE_ACCESS_SPACE_NOT_FOUND_INFO, 2000, 1);
-    waitForAndGetElement(ELEMENT_SPACE_ACCESS_SPACE_NOT_FOUND_FIND_BTN, 2000, 1).click();
-    waitForAndGetElement(ELEMENT_MY_SPACE_ALL_SPACES_TAB, 3000, 1);
-
-    if ($(ELEMENT_OK_BUTTON_LINK).waitUntil(Condition.visible, Configuration.timeout) != null) {
-      $(ELEMENT_OK_BUTTON_LINK).click();
-    }
+    homePagePlatform.goToWiki();
+    open(urlSpace);
+    if ($(ELEMENT_SPACE_ACCESS_SPACE_DENIED).is(Condition.not(Condition.visible)))
+      refresh();
+    $(ELEMENT_SPACE_ACCESS_SPACE_DENIED).is(Condition.visible);
+    $(ELEMENT_SPACE_ACCESS_SPACE_DENIED_INFO).shouldHave(Condition.text(mess));
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -419,14 +403,9 @@ public class SOCSpaceManagementTestIT extends Base {
     refresh();
     String urlSpace = url();
     manageLogInOut.signIn(username2, password);
-    for (int i = 0; i <= 14; i++) {
-      open(urlSpace);
-      if ($(ELEMENT_SPACE_ACCESS_SPACE_DENIED).is(Condition.visible)) {
-        break;
-      }
-    }
+    open(urlSpace);
     $(ELEMENT_SPACE_ACCESS_SPACE_DENIED).is(Condition.visible);
-    $(ELEMENT_SPACE_ACCESS_SPACE_DENIED_INFO).getText().contains(mess);
+    $(ELEMENT_SPACE_ACCESS_SPACE_DENIED_INFO).shouldHave(Condition.text(mess));
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -451,7 +430,7 @@ public class SOCSpaceManagementTestIT extends Base {
   public void test11_CheckAccessVisibleValidationSpace() {
     info("Test 11:Check access visible/validation space");
     String space = "space" + getRandomNumber();
-    String mess = "You must be a member of the space " + space + " to access this page.";
+    String mess = "You must be a member of the space " + space + " to view this page.";
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
     String username2 = "usernameb" + getRandomString();
@@ -471,14 +450,9 @@ public class SOCSpaceManagementTestIT extends Base {
     refresh();
     String urlSpace = url();
     manageLogInOut.signIn(username2, password);
-    for (int i = 0; i <= 14; i++) {
-      open(urlSpace);
-      if ($(ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE).is(Condition.visible)) {
-        break;
-      }
-    }
+    open(urlSpace);
     $(ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE).should(Condition.visible);
-    $(ELEMENT_SPACE_ACCESS_INFO).getText().contains(mess);
+    $(ELEMENT_SPACE_ACCESS_INFO).shouldHave(Condition.text(mess));
     $(ELEMENT_SPACE_ACCESS_REQUEST_JOIN_BTN).click();
     refresh();
     $(ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE).shouldNot(Condition.visible);
