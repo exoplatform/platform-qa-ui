@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
+import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
@@ -179,29 +180,26 @@ public class SpaceManagement {
    */
   public void editSpaceSimple(String space, String newName, String newDes, boolean isChangeAvatar, String filepath) {
     info("evt.click on Edit button of the space");
-    if (evt.waitForAndGetElement(ELEMENT_SPACE_EDIT_BTN.replace("${space}", space), testBase.getDefaultTimeout(), 0) != null)
-      evt.click(ELEMENT_SPACE_EDIT_BTN.replace("${space}", space));
-    if (evt.waitForAndGetElement(ELEMENT_SPACE_NAME_INPUT, testBase.getDefaultTimeout(), 0) == null)
-      evt.click(ELEMENT_SPACE_EDIT_SETTING_TAB);
+    if ($(byXpath(ELEMENT_SPACE_EDIT_BTN.replace("${space}", space))).is(Condition.visible))
+     $(byXpath(ELEMENT_SPACE_EDIT_BTN.replace("${space}", space))).click();
+    if ($(ELEMENT_SPACE_NAME_INPUT).is(Condition.not(Condition.visible)))
+      $(ELEMENT_SPACE_EDIT_SETTING_TAB).click();
     if (!newName.isEmpty()) {
       info("Input new name");
-      evt.type(ELEMENT_SPACE_NAME_INPUT, newName, true);
+      $(ELEMENT_SPACE_NAME_INPUT).setValue(newName);
     }
     if (!newDes.isEmpty()) {
       info("Input new description");
-      evt.type(ELEMENT_SPACE_DESCRIPTION_INPUT, newDes, true);
+      $(ELEMENT_SPACE_DESCRIPTION_INPUT).setValue(newDes);
     }
     if (isChangeAvatar == true) {
       info("evt.click on change picture button");
-      evt.click(ELEMENT_SPACE_CHANGE_AVATAR_BTN);
-      info("evt.click on upload button");
-      evt.click(ELEMENT_UPLOAD_POPUP_SELECT_FILE_BTN);
+      $(ELEMENT_SPACE_CHANGE_AVATAR_BTN).click();
+     $(byClassName("uploadContainer")).find(byClassName("file")).uploadFromClasspath(filepath);
 
       info("filepath:" + filepath);
-      testBase.uploadFileUsingRobot(filepath);
-
-      evt.click(ELEMENT_SPACE_UPLOAD_CONFIRM_BTN);
-      evt.click(ELEMENT_SPACE_UPLOAD_SAVE_BTN);
+      $(ELEMENT_SPACE_UPLOAD_CONFIRM_BTN).click();
+      $(ELEMENT_SPACE_UPLOAD_SAVE_BTN).click();
 
     }
 
@@ -212,7 +210,7 @@ public class SpaceManagement {
    */
   public void saveChangesSpace() {
     info("evt.click on Save button");
-    evt.clickByJavascript(ELEMENT_SPACE_SAVE_BTN);
+    $(ELEMENT_SPACE_SAVE_BTN).click();
     info("Save all changes");
 
   }
