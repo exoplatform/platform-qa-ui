@@ -198,8 +198,6 @@ public class SpaceManagement {
      $(byClassName("uploadContainer")).find(byClassName("file")).uploadFromClasspath(filepath);
 
       info("filepath:" + filepath);
-      //testBase.uploadFileUsingRobot(filepath);
-
       $(ELEMENT_SPACE_UPLOAD_CONFIRM_BTN).click();
       $(ELEMENT_SPACE_UPLOAD_SAVE_BTN).click();
 
