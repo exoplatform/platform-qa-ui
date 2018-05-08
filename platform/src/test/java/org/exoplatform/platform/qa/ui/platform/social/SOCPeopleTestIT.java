@@ -377,7 +377,6 @@ public class SOCPeopleTestIT extends Base {
    * requests - Requested user is removed from list
    */
   @Test
-  @BugInPLF("SOC-5738")
   public void test05_PendingRequests() {
     info("test05_PendingRequestsList");
     String username1 = "usernamea" + getRandomString();
@@ -420,8 +419,7 @@ public class SOCPeopleTestIT extends Base {
 
   }
 
-  @Test
-  @BugInPLF("SOC-5738")
+
 
   /*
    * Step Number: 1 Step Name: Step 1: Open Pending Requests list Step
@@ -429,6 +427,7 @@ public class SOCPeopleTestIT extends Base {
    * to My Connections/Requests Sent - Click Cancel Request Input Data: Expected
    * Outcome: - Display all user's requests - Requested user is removed from list
    */
+  @Test
   public void test06_RequestsList() {
     info("test05_PendingRequestsList");
     String username1 = "usernamea" + getRandomString();
