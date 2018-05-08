@@ -2,3 +2,4 @@
 	path = platform/src/test/resources/data
 	url = https://github.com/exoplatform/platform-qa-ui-data.git
 	branch = master
+

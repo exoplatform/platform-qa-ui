@@ -78,11 +78,14 @@ public class SiteExplorerHome {
   public void goToPath(String path, String drive) {
     info("Go to selected Drive");
 
-    $(byId("uiActionsBarContainer")).find(byText("Site Management")).click();
+    $(byId("uiActionsBarContainer")).find(byId("driveAction")).click();
 
     $(byText(drive)).waitUntil(Condition.appears, Configuration.timeout);
     $(byText(drive)).click();
-    $(ELEMENT_SIDE_BAR_MAINTAB).waitUntil(Condition.appears, Configuration.timeout);
+    $(byId("uiActionsBarContainer")).find(byId("driveAction")).waitUntil(Condition.have(Condition.text(drive)),Configuration.timeout);
+    if( $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).is(Condition.not(Condition.visible))){
+      $(byClassName("uiIconEcmsViewWeb")).click();
+    }
     $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
     info("Go to folder");
     if (!path.isEmpty()) {
@@ -304,7 +307,7 @@ public class SiteExplorerHome {
     Boolean verify = (Boolean) (params.length > 0 ? params[0] : true);
     $(byId("MultiUploadInputFiles")).uploadFromClasspath(link);
     $(byClassName("progress")).waitUntil(Condition.visible, Configuration.timeout);
-    $(byClassName("progress")).waitUntil(Condition.not(Condition.visible),60000);
+    $(byClassName("progress")).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     refresh();
 
     info("verify:" + verify);
@@ -334,18 +337,17 @@ public class SiteExplorerHome {
    * @param tag String
    */
   public void addTag(String tag) {
-    evt.waitForAndGetElement(ELEMENT_ACTIONBAR_MORE);
     info("Click on More menu");
-    evt.click(ELEMENT_ACTIONBAR_MORE);
+    $(ELEMENT_ACTIONBAR_MORE).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Click on Tag link");
-    evt.click(ELEMENT_ACTIONBAR_TAG);
+    $(ELEMENT_ACTIONBAR_TAG).click();
     info("Input name of tag");
-    evt.type(ELEMENT_TAG_FORM, tag, true);
+    $(ELEMENT_TAG_FORM).setValue(tag);
     info("Click on Add button");
-    evt.click(ELEMENT_ADD_TAG_FORM);
+    $(ELEMENT_ADD_TAG_FORM).click();
     info("The tag is created successfully");
     info("Close the popup");
-    evt.click(ELEMENT_TAG_POPUP_CLOSE);
+    $(ELEMENT_TAG_POPUP_CLOSE).click();
   }
 
   /**
@@ -894,15 +896,16 @@ public class SiteExplorerHome {
    */
   public void addCategoryForNode(String node, String category) {
     info("Click on More menu");
-    evt.click(ELEMENT_ACTIONBAR_MORE);
+    if( $(ELEMENT_ACTIONBAR_CATEGORY).is(Condition.not(Condition.visible)))
+    $(ELEMENT_ACTIONBAR_MORE).click();
 
-    evt.click(ELEMENT_ACTIONBAR_CATEGORY);
+    $(ELEMENT_ACTIONBAR_CATEGORY).click();
 
-    evt.click(ELEMENT_CATEGORY_CHANGE_FORM_SELECT_CATEGORY);
+    $(ELEMENT_CATEGORY_CHANGE_FORM_SELECT_CATEGORY).click();
 
-    evt.select(ELEMENT_CATEGORY_SELECT_CATEGORY_TREE, category);
+    $(ELEMENT_CATEGORY_SELECT_CATEGORY_TREE).selectOption(category);
 
-    evt.click(ELEMENT_CATEGORY_ADD_ROOT_NODE);
+    $(ELEMENT_CATEGORY_ADD_ROOT_NODE).click();
 
   }
 
@@ -911,8 +914,8 @@ public class SiteExplorerHome {
    * @param status String
    */
   public void changeStatusPulication(String status) {
-    evt.waitForAndGetElement(ELEMENT_PUBLICATION_STATUS.replace("${status}", status));
-    evt.click((ELEMENT_PUBLICATION_STATUS).replace("${status}", status));
+    $(byXpath(ELEMENT_PUBLICATION_STATUS.replace("${status}", status))).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_PUBLICATION_STATUS.replace("${status}", status))).click();
 
   }
 
