@@ -19,7 +19,6 @@ import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarManagement;
 import org.exoplatform.platform.qa.ui.calendar.pageobject.EventManagement;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
-import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
@@ -84,23 +83,58 @@ public class CalendarPublishActivityTestIT extends Base {
    * of an edited recurring event. Pre-Condition: - Event should be in group
    * calendars for spaces - An edited recurring event is displayed, edited by drag
    * & drop or by only this event option - An activity of edited recurring event
-   * is displayed in the activity stream Post-Condition:
-   * Step Number: 1 Step Name: <p>Step 1: Open calendar application<br data -mce
-   * -bogus="1"></p> Step Description: <p> - Connect to Intranet<br> - Open
-   * "Calendar" application</p> Input Data: Expected Outcome: <p> - The calendar
-   * application is displayed</p><p> - An edited recurring event is
-   * displayed&nbsp;</p><p><br></p>
-   * Step number: 2 Step Name: <p>Step 2: Delete the edited recurring event<br
-   * data -mce -bogus="1"></p> Step Description: <p> - Right click on the edited
-   * recurring event</p><p> - Click Delete</p> Input Data: Expected Outcome: <p> -
-   * The edited recurring event is deleted</p>
-   * Step number: 3 Step Name: <p>Step 3: Check activity<br data -mce
-   * -bogus="1"></p> Step Description: - Go to the Homepage Input Data: Expected
-   * Outcome: <p> - In the activity stream: </p><p>Activity of the edited
-   * recurring event is</p><p>A comment is added to the main activity (of
-   * series):&nbsp;<em>Event cancelled for
-   * $CANCEL_DATE</em></p><p><em>where&nbsp;<span>$CANCEL_DATE : the date of the
-   * event removed</span></em></p>
+   * is displayed in the activity stream Post-Condition: Step Number: 1 Step Name:
+   * <p>
+   * Step 1: Open calendar application<br data -mce -bogus="1">
+   * </p>
+   * Step Description:
+   * <p>
+   * - Connect to Intranet<br>
+   * - Open "Calendar" application
+   * </p>
+   * Input Data: Expected Outcome:
+   * <p>
+   * - The calendar application is displayed
+   * </p>
+   * <p>
+   * - An edited recurring event is displayed&nbsp;
+   * </p>
+   * <p>
+   * <br>
+   * </p>
+   * Step number: 2 Step Name:
+   * <p>
+   * Step 2: Delete the edited recurring event<br data -mce -bogus="1">
+   * </p>
+   * Step Description:
+   * <p>
+   * - Right click on the edited recurring event
+   * </p>
+   * <p>
+   * - Click Delete
+   * </p>
+   * Input Data: Expected Outcome:
+   * <p>
+   * - The edited recurring event is deleted
+   * </p>
+   * Step number: 3 Step Name:
+   * <p>
+   * Step 3: Check activity<br data -mce -bogus="1">
+   * </p>
+   * Step Description: - Go to the Homepage Input Data: Expected Outcome:
+   * <p>
+   * - In the activity stream:
+   * </p>
+   * <p>
+   * Activity of the edited recurring event is
+   * </p>
+   * <p>
+   * A comment is added to the main activity (of series):&nbsp;<em>Event cancelled
+   * for $CANCEL_DATE</em>
+   * </p>
+   * <p>
+   * <em>where&nbsp;<span>$CANCEL_DATE : the date of the event removed</span></em>
+   * </p>
    */
 
   @Test
@@ -206,10 +240,14 @@ public class CalendarPublishActivityTestIT extends Base {
    * <p>
    * - All events of the series are deleted
    * </p>
-   * Step number: 4 Step Name: <p>Step 4: Check activity after delete event<br
-   * data -mce -bogus="1"></p> Step Description: - Go to the Homepage Input Data:
-   * Expected Outcome: <p> - In the activity stream, the activity of recurring
-   * event is deleted</p>
+   * Step number: 4 Step Name:
+   * <p>
+   * Step 4: Check activity after delete event<br data -mce -bogus="1">
+   * </p>
+   * Step Description: - Go to the Homepage Input Data: Expected Outcome:
+   * <p>
+   * - In the activity stream, the activity of recurring event is deleted
+   * </p>
    */
   @Test
   public void test10_ActivityOfRecurringEventShouldBeDeletedAfterDeletingAllEvents() {
@@ -551,20 +589,19 @@ public class CalendarPublishActivityTestIT extends Base {
    * and other group calendars are not concerned. Post-Condition: Step Number: 1
    * Step Name: - Create a Group calendar Step Description: - Login and Click
    * [Join a Space] - Create a new space Input Data: Expected Outcome: - Space and
-   * Group calendar of space is created succesfully
-  // See function setUpBeforeTest()
-   * Step number: 2 Step Name: - Create new event Step Description: - Go to
-   * Calendar - Click Add Event button - Input the info of event and click save
-   * Input Data: Expected Outcome: - Event is created successfully
-   * Step number: 3 Step Name: - Check Activity stream Step Description: - Goto
-   * Homepage and check activity stream Input Data: Expected Outcome: - The
-   * activity of creating Event is added and displayed in the activity stream
-   * Step number: 2 Step Name: Step Description: - Click on Title of the event
-   * Input Data: Expected Outcome: Space calendar opens with event details opened.
-   * Step number: 2 Step Name: - Delete event Step Description: - Right click on
-   * event and select delete - Click ok to confirm - Check activity stream Input
-   * Data: Expected Outcome: - The event's activity is removed from the activity
-   * stream
+   * Group calendar of space is created succesfully // See function
+   * setUpBeforeTest() Step number: 2 Step Name: - Create new event Step
+   * Description: - Go to Calendar - Click Add Event button - Input the info of
+   * event and click save Input Data: Expected Outcome: - Event is created
+   * successfully Step number: 3 Step Name: - Check Activity stream Step
+   * Description: - Goto Homepage and check activity stream Input Data: Expected
+   * Outcome: - The activity of creating Event is added and displayed in the
+   * activity stream Step number: 2 Step Name: Step Description: - Click on Title
+   * of the event Input Data: Expected Outcome: Space calendar opens with event
+   * details opened. Step number: 2 Step Name: - Delete event Step Description: -
+   * Right click on event and select delete - Click ok to confirm - Check activity
+   * stream Input Data: Expected Outcome: - The event's activity is removed from
+   * the activity stream
    */
   @Test
   public void test01_VerifyActivityEventOfPersonalCalendars() {
@@ -666,7 +703,6 @@ public class CalendarPublishActivityTestIT extends Base {
   }
 
   @Test
-  @BugInPLF("CAL-1296")
   public void test01_02_03_04VerifyActivityEventOfPersonalSharedAndOtherGroupCalendarsSpace() {
     String titleEventSpace = "titleEventSpace" + getRandomNumber();
     String titleEventPersonal = "titleEventPersonal" + getRandomNumber();
