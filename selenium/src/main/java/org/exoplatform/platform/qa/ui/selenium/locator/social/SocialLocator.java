@@ -2325,7 +2325,7 @@ public final class SocialLocator {
                                                                          $(byId("UIBreadCrumbsNavigationPortlet"));
 
   public static final SelenideElement ELEMENT_CONTENT_NAME_PROFILE                                      =
-                                                                   $(byId("UIBreadCrumbsNavigationPortlet"));
+                                                                   $(byId("UIUserNavigationPortlet"));
 
   public static final SelenideElement ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE                         =
                                                                                 $(byXpath("//*[@id=\"spaceMenuTab\"]/li[8]/ul"));

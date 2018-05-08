@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.social.pageobject;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -415,7 +416,7 @@ public class MyNotificationsSetting {
         repeat++;
       }
       info("Click on Save button");
-      evt.click(ELEMENT_EDIT_LIKE_SAVE_BTN);
+      $(ELEMENT_EDIT_LIKE_SAVE_BTN).click();
       info("Verify that email notification is shown");
       evt.waitForAndGetElement(ELEMENT_LIKE_INTRANET_ICON, 3000, 1);
       break;

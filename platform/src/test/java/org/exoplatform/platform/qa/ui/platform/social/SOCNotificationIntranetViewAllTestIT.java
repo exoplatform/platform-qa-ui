@@ -2,7 +2,7 @@ package org.exoplatform.platform.qa.ui.platform.social;
 
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
@@ -14,7 +14,6 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 
 import java.awt.*;
 
-import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -106,10 +105,32 @@ public class SOCNotificationIntranetViewAllTestIT extends Base {
    * <li>Case ID:123005.</li>
    * <li>Test Case Name: Check UI of the View All page.</li>
    * 
-   * @throws AWTException
+   * @throws AWTException Precondition: The user has following notifications - New
+   *           User - Space Invitation - Space Join Request - Like - Comment -
+   *           Connection request - Post on My stream - Post on My Space - Connect
+   *           ion request (read) - Post in My stream (read) Step Number: 1 Step
+   *           Name: Step 1: Open View All page Step Description: - Login - Click
+   *           the notifications icon in the top navigation - Click View All
+   *           button Input Data: Expected Outcome: - The user is redirected to
+   *           the View All page Step Number: 2 Step Name: Step 2: Check
+   *           Connection Request notification Step Description: - Click on the
+   *           Connection Request notification Input Data: Expected Outcome: - The
+   *           user is redirect to the profile of User A Step Number: 4 Step Name:
+   *           Step 4: Check Space Invitation notification Step Description: -
+   *           Click the Space Invitation notification Input Data: Expected
+   *           Outcome: - The user is redirected to the home of space 1 Step
+   *           Number: 5 Step Name: Step 5: Check Space Join Request notification
+   *           Step Description: - Click on the Space Join Request notification
+   *           Input Data: Expected Outcome: - The user is redirected to the home
+   *           of space 1 Step Number: 6 Step Name: Step 6: Check Comment
+   *           notification Step Description: - Click on the Comment notification
+   *           Input Data: Expected Outcome: - The activity is displayed in the
+   *           activity viewer with all comment expanded. Step Number: 7 Step
+   *           Name: Step 7: Check Like notification Step Description: - Click on
+   *           the Like notification Input Data: Expected Outcome: - The activity
+   *           is displayed in the activity viewer with all comment expanded..
    */
   @Test
-  @BugInPLF("SOC-5868")
   public void test01_02_CheckTheWorkOfLinksOnViewAllPage_ChecUIOfTheViewAllPage() throws AWTException {
     // set Data test
     String username1 = "usernamea" + getRandomString();
@@ -133,12 +154,6 @@ public class SOCNotificationIntranetViewAllTestIT extends Base {
     String space1 = "space1" + getRandomNumber();
     String space2 = "space2" + getRandomNumber();
 
-    /*
-     * Precondition: The user has following notifications - New User - Space
-     * Invitation - Space Join Request - Like - Comment - Connection request - Post
-     * on My stream - Post on My Space - Connect ion request (read) - Post in My
-     * stream (read)
-     */
     info("Create user1 and enable new user and like notifications for user1");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);
@@ -179,10 +194,7 @@ public class SOCNotificationIntranetViewAllTestIT extends Base {
     connectionsManagement.acceptAConnection(username1);
     homePagePlatform.goToHomePage();
     activityStream.commentActivity(activity1, comment);
-    executeJavaScript("window.scrollBy(0,-1500)", "");
     info("user 2 likes user1's activity");
-    refresh();
-    executeJavaScript("window.scrollBy(0,-5500)", "");
     homePagePlatform.goToHomePage();
     activityStream.likeActivity(activity1);
 
@@ -224,134 +236,46 @@ public class SOCNotificationIntranetViewAllTestIT extends Base {
     homePagePlatform.goToAllSpace();
     spaceManagement.requestToJoinSpace(space1);
 
-    /*
-     * Step Number: 1 Step Name: Step 1: Open View All page Step Description: -
-     * Login - Click the notifications icon in the top navigation - Click View All
-     * button Input Data: Expected Outcome: - The user is redirected to the View All
-     * page
-     */
     manageLogInOut.signIn(username1, password);
-    for (int i = 0; i <= 100; i++) {
-      if ($(byId("UIIntranetNotificationsPortlet")).is(Condition.not(Condition.exist))) {
-        navigationToolbar.goToIntranetNotification();
-        intranetNotification.goToAllNotification();
-      } else {
-        break;
-      }
-    }
-    /*
-     * Step Number: 2 Step Name: Step 2: Check Connection Request notification Step
-     * Description: - Click on the Connection Request notification Input Data:
-     * Expected Outcome: - The user is redirect to the profile of User A
-     */
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
+
     $(byText(username3 + " " + username3)).parent()
                                           .shouldHave(Condition.text(username3 + " " + username3 + " wants to connect with you"));
-    for (int i = 0; i <= 100; i++) {
-      if ($(byText(username3 + " " + username3)).parent().has(Condition.text(username3 + " " + username3
-          + " wants to connect with you"))) {
-        $(byText(username3 + " " + username3)).parent().click();
 
-      } else {
-        break;
-      }
-    }
-
+    $(byText(username3 + " " + username3)).hover().click();
     info("Verify that user was redidected to user A's profile");
     ELEMENT_CONTENT_NAME_PROFILE.find(byText(username3 + " " + username3)).should(Condition.exist);
 
-    /*
-     * Step Number: 4 Step Name: Step 4: Check Space Invitation notification Step
-     * Description: - Click the Space Invitation notification Input Data: Expected
-     * Outcome: - The user is redirected to the home of space 1
-     */
-    for (int i = 0; i <= 100; i++) {
-      if ($(byId("UIIntranetNotificationsPortlet")).is(Condition.not(Condition.exist))) {
-        navigationToolbar.goToIntranetNotification();
-        intranetNotification.goToAllNotification();
-      } else {
-        break;
-      }
-    }
-    for (int i = 0; i <= 100; i++) {
-      if ($(byId("UIIntranetNotificationsPortlet")).is(Condition.exist)) {
-        $(byText(space2)).parent().click();
-      } else {
-        break;
-      }
-    }
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
+    $(byText(space2)).parent().click();
+
     info("Verify user is not redirected to home page of space");
     $(byText(space2)).parent()
                      .shouldHave(Condition.text("You are invited to join the space " + space2 + " by the administrator."));
-    refresh();
-    /*
-     * Step Number: 5 Step Name: Step 5: Check Space Join Request notification Step
-     * Description: - Click on the Space Join Request notification Input Data:
-     * Expected Outcome: - The user is redirected to the home of space 1
-     */
-    for (int i = 0; i <= 100; i++) {
-      if ($(byId("UIIntranetNotificationsPortlet")).is(Condition.not(Condition.exist))) {
-        navigationToolbar.goToIntranetNotification();
-        intranetNotification.goToAllNotification();
-      } else {
-        break;
-      }
-    }
-    $(byId("UIIntranetNotificationsPortlet")).find(byText(space1)).parent().shouldHave(Condition.text(username4 + " " + username4
-        + " has requested access to " + space1));
-    for (int i = 0; i <= 100; i++) {
-      if ($(byId("UIIntranetNotificationsPortlet")).is(Condition.exist)) {
-        $(byId("UIIntranetNotificationsPortlet")).find(byText(space1)).parent().click();
-      } else {
-        break;
-      }
-    }
+
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
+
+    $(byId("UIIntranetNotificationsPortlet")).find(byText(space1))
+                                             .parent()
+                                             .shouldHave(Condition.text(username4 + " " + username4 + " has requested access to "
+                                                 + space1))
+                                             .click();
     info("Verify user is redirected to home page of space");
     ELEMENT_CONTENT_NAME_PROFILE.find(byText(space1)).should(Condition.exist);
-    refresh();
-    /*
-     * Step Number: 6 Step Name: Step 6: Check Comment notification Step
-     * Description: - Click on the Comment notification Input Data: Expected
-     * Outcome: - The activity is displayed in the activity viewer with all comment
-     * expanded.
-     */
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
 
-    for (int i = 0; i <= 100; i++) {
-      if ($(byId("UIIntranetNotificationsPortlet")).is(Condition.not(Condition.exist))) {
-        navigationToolbar.goToIntranetNotification();
-        intranetNotification.goToAllNotification();
-      } else {
-        break;
-      }
-    }
-    for (int i = 0; i <= 100; i++) {
-      if ($(byId("UIIntranetNotificationsPortlet")).is(Condition.exist)) {
-        $(byId("UIIntranetNotificationsPortlet")).find(byText(activity1)).parent().click();
-      } else {
-        break;
-      }
-    }
+    $(byId("UIIntranetNotificationsPortlet")).find(byText(activity1)).parent().click();
+
     $(byText(activity1)).parent().parent().parent().find(byText(comment)).should(Condition.exist);
-    refresh();
-    /*
-     * Step Number: 7 Step Name: Step 7: Check Like notification Step Description: -
-     * Click on the Like notification Input Data: Expected Outcome: - The activity
-     * is displayed in the activity viewer with all comment expanded..
-     */
-    for (int i = 0; i <= 100; i++) {
-      if ($(byId("UIIntranetNotificationsPortlet")).is(Condition.not(Condition.exist))) {
-        navigationToolbar.goToIntranetNotification();
-        intranetNotification.goToAllNotification();
-      } else {
-        break;
-      }
-    }
-    for (int i = 0; i <= 100; i++) {
-      if ($(byId("UIIntranetNotificationsPortlet")).is(Condition.exist)) {
-        $(byId("UIIntranetNotificationsPortlet")).find(byText(activity1)).parent().click();
-      } else {
-        break;
-      }
-    }
+
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
+
+    $(byId("UIIntranetNotificationsPortlet")).find(byText(activity1)).parent().click();
     $(byText(activity1)).parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).parent().shouldHave(Condition.text("1"));
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
