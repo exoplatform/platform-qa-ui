@@ -27,28 +27,30 @@ public class PlatformPermission {
    *          search by last name 4: search by email default: search by user name
    */
   public void searchUser(String keySearch, int type) {
-    $(ELEMENT_SEARCH_USER_INPUT).setValue(keySearch);
-    switch (type) {
-    case 1: // search by user name
-      $(ELEMENT_SELECT_SEARCH).selectOption("User Name");
-      break;
-    case 2: // search by first name
-      $(ELEMENT_SELECT_SEARCH).selectOption("First Name");
-      break;
-    case 3: // search by last name
-      $(ELEMENT_SELECT_SEARCH).selectOption("Last Name");
-      break;
-    case 4: // search by email
-      $(ELEMENT_SELECT_SEARCH).selectOption("Email");
-      break;
-    default: // search by user name
-      $(ELEMENT_SELECT_SEARCH).selectOption("User Name");
-      break;
+    $(ELEMENT_SEARCH_USER_INPUT).setValue(keySearch).pressEnter();
+    if( $(ELEMENT_SELECT_SEARCH).is(Condition.visible)) {
+      switch (type) {
+        case 1: // search by user name
+          $(ELEMENT_SELECT_SEARCH).selectOption("User Name");
+          break;
+        case 2: // search by first name
+          $(ELEMENT_SELECT_SEARCH).selectOption("First Name");
+          break;
+        case 3: // search by last name
+          $(ELEMENT_SELECT_SEARCH).selectOption("Last Name");
+          break;
+        case 4: // search by email
+          $(ELEMENT_SELECT_SEARCH).selectOption("Email");
+          break;
+        default: // search by user name
+          $(ELEMENT_SELECT_SEARCH).selectOption("User Name");
+          break;
+
+      }
 
     }
 
     $(ELEMENT_QUICK_SEARCH_BUTTON).click();
-    // clickByJavascript(ELEMENT_QUICK_SEARCH_BUTTON);
    $(byXpath(ELEMENT_USER_CHECKBOX.replace("${user}", keySearch))).parent().waitUntil(Condition.visible,Configuration.timeout);
   }
 

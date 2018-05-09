@@ -548,6 +548,7 @@ public class EventManagement {
     for (int i = fromIndex; i <= toIndex - 1; i++) {
       info("index:" + i);
       assert $(byXpath(ELEMENT_SCHEDULE_BUSY_TIME.replace("${user}", user).replace("${index}", String.valueOf(i))))
+
                 .getAttribute("class")
                 .contains("busyDotTime") : "Wrong busy time";
     }
@@ -896,13 +897,13 @@ public class EventManagement {
       break;
     }
     evt.waitForAndGetElement(ELEMENT_CONFIRM_DELETE_BUTTON, testBase.getDefaultTimeout(), 1);
-    evt.clickByJavascript(ELEMENT_CONFIRM_DELETE_BUTTON, 2);
-    evt.waitForElementNotPresent(ELEMENT_DELETE_RECURRING_EVENT_FORM);
+    $(ELEMENT_CONFIRM_DELETE_BUTTON).click();
+    $(ELEMENT_DELETE_RECURRING_EVENT_FORM).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
   }
 
   /**
    * edit recurring event
-   * 
+   *
    * @param optEditType type of edit recurring
    * @param opParams isVerify, if not be set, the event/task will be automatically
    *          set as verify edit confirm message = true: verify edit confirm
@@ -941,8 +942,13 @@ public class EventManagement {
 
   /**
    * Delete recurring Confirm selection
+<<<<<<< 90efa636f7e7a40852084c3df9f7aa8dc7aeb943
    * 
    * @param optEditType String
+=======
+   *
+   * @param optEditType
+>>>>>>> calendar publish activity
    */
   public void deleteRecurringConfirm(recurringType optEditType) {
     evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_RECURRING_FORM);
@@ -1026,8 +1032,13 @@ public class EventManagement {
 
   /**
    * Select an option as 5,10,15,20,...60 for reminder Email box
+<<<<<<< 90efa636f7e7a40852084c3df9f7aa8dc7aeb943
    * 
    * @param option String
+=======
+   *
+   * @param option
+>>>>>>> calendar publish activity
    */
   public void selectReminderEmailBox(String option) {
     info("Select an option");
@@ -1091,7 +1102,7 @@ public class EventManagement {
 
   /**
    * Remove an user in participants tab of Add/Edit Event/Task form
-   * 
+   *
    * @param fullName
    */
   public void removeUser(String fullName) {
@@ -1103,7 +1114,7 @@ public class EventManagement {
 
   /**
    * Check user selector of event
-   * 
+   *
    * @param user
    * @param isPresent
    */
@@ -1131,9 +1142,15 @@ public class EventManagement {
 
   /**
    * Check display of event
+<<<<<<< 90efa636f7e7a40852084c3df9f7aa8dc7aeb943
    * 
    * @param event String
    * @param isPresent boolean
+=======
+   *
+   * @param event
+   * @param isPresent
+>>>>>>> calendar publish activity
    */
   public void checkDisplayOfEvent(String event, boolean isPresent) {
     if (isPresent)
@@ -1144,9 +1161,15 @@ public class EventManagement {
 
   /**
    * function: check content of mail then delete mail in email server
+<<<<<<< 90efa636f7e7a40852084c3df9f7aa8dc7aeb943
    * 
    * @param titleEvent String
    * @param opParams object
+=======
+   *
+   * @param titleEvent
+   * @param opParams
+>>>>>>> calendar publish activity
    */
   public void checkEmailNotificationReminderEvent(String titleEvent, Object... opParams) {
     info("Check and delete mail");
