@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.social.pageobject;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -365,12 +366,13 @@ public class MyNotificationsSetting {
         evt.waitForAndGetElement(ELEMENT_LIKE_MAIL_ICON, 3000, 1);
         break;
       case AS_Like_intranet:
+        refresh();
         $(ELEMENT_EDIT_LIKE_ICON).click();
         if($(ELEMENT_EDIT_LIKE_WEB_CHECKBOX).is(Condition.not(Condition.selected))){
           $(ELEMENT_EDIT_LIKE_WEB_CHECKBOX).click();
         }
         info("Click on Save button");
-        evt.click(ELEMENT_EDIT_LIKE_SAVE_BTN);
+        $(ELEMENT_EDIT_LIKE_SAVE_BTN).click();
         info("Verify that email notification is shown");
         evt.waitForAndGetElement(ELEMENT_LIKE_INTRANET_ICON, 3000, 1);
         break;

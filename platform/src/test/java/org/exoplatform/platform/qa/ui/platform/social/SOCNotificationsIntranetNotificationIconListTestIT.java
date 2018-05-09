@@ -32,7 +32,6 @@ import org.exoplatform.platform.qa.ui.social.pageobject.IntranetNotification;
 import org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting;
 @Tag("social")
 @Tag("sniff")
-@BugInPLF("SOC-5868")
 public class SOCNotificationsIntranetNotificationIconListTestIT extends Base {
   NavigationToolbar      navigationToolbar;
 
@@ -96,9 +95,7 @@ public class SOCNotificationsIntranetNotificationIconListTestIT extends Base {
     String password = "123456";
     String username4 = "usernameb" + getRandomString();
     String email4 = username4 + "@test.com";
-    if (ELEMENT_ALERT_NOTIFICATION_EXIST.waitUntil(visible, Configuration.timeout) != null) {
-      ELEMENT_ALERT_NOTIFICATION_EXIST.click();
-    }
+    navigationToolbar.goToIntranetNotification();
     navigationToolbar.goToMyNotifications();
     myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.NewUser_intranet);
     info("Check number of notifications in badge before ccreate more notifications");
