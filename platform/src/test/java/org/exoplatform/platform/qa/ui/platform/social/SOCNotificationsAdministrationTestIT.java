@@ -35,7 +35,6 @@ import org.exoplatform.platform.qa.ui.social.pageobject.NotificationsAdminSeting
  */
 @Tag("social")
 @Tag("sniff")
-@BugInPLF("SOC-5868")
 public class SOCNotificationsAdministrationTestIT extends Base {
   NavigationToolbar        navigationToolbar;
 
