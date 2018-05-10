@@ -1,8 +1,12 @@
 package org.exoplatform.platform.qa.ui.social.pageobject;
 
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -147,10 +151,10 @@ public class NotificationsAdminSeting {
       evt.waitForElementNotPresent(ELEMENT_ACTIVITY_COMMENT_EMAIL_NOTIFICATION_TITLE, 3000, 1);
       break;
     case AS_Comment_intranet:
-      evt.click(ELEMENT_ACTIVITY_COMMENT_EDIT_BTN);
+      $(ELEMENT_ACTIVITY_COMMENT_EDIT_BTN).click();
       evt.uncheck(ELEMENT_ACTIVITY_COMMENT_INTRANET_NOTIFICATION_CHECKBOX, 2);
       info("Click on Save button");
-      evt.click(ELEMENT_ACTIVITY_COMMENT_SAVE_BTN);
+      $(ELEMENT_ACTIVITY_COMMENT_SAVE_BTN).click();
       info("Verify that Intranet notification is hidded");
       evt.waitForElementNotPresent(ELEMENT_ACTIVITY_COMMENT_INTRANET_NOTIFICATION_TITLE, 3000, 1);
       break;
@@ -309,13 +313,13 @@ public class NotificationsAdminSeting {
       evt.waitForAndGetElement(ELEMENT_ACTIVITY_COMMENT_EMAIL_NOTIFICATION_TITLE, 3000, 1);
       break;
     case AS_Comment_intranet:
-      evt.click(ELEMENT_ACTIVITY_COMMENT_EDIT_BTN);
+      $(ELEMENT_ACTIVITY_COMMENT_EDIT_BTN).click();
       if (evt.waitForAndGetElement(ELEMENT_ACTIVITY_COMMENT_INTRANET_NOTIFICATION_CHECKBOX_CHECKED, 2000, 0) == null)
         evt.check(ELEMENT_ACTIVITY_COMMENT_INTRANET_NOTIFICATION_CHECKBOX, 2);
       info("Click on Save button");
-      evt.click(ELEMENT_ACTIVITY_COMMENT_SAVE_BTN);
+      $(ELEMENT_ACTIVITY_COMMENT_SAVE_BTN).click();
       info("Verify that Intranet notification is hidded");
-      evt.waitForAndGetElement(ELEMENT_ACTIVITY_COMMENT_INTRANET_NOTIFICATION_TITLE, 3000, 1);
+      $(ELEMENT_ACTIVITY_COMMENT_INTRANET_NOTIFICATION_TITLE).waitUntil(Condition.disappears,Configuration.timeout);
       break;
     case AS_Like_email:
       evt.click(ELEMENT_ACTIVITY_LIKE_EDIT_BTN);
@@ -399,13 +403,13 @@ public class NotificationsAdminSeting {
       evt.waitForAndGetElement(ELEMENT_SPACE_INVITATION_EMAIL_NOTIFICATION_TITLE, 3000, 1);
       break;
     case Space_Invitation_intranet:
-      evt.click(ELEMENT_SPACE_NOTIFICATION_INVITATION_EDIT_BTN);
+      $(ELEMENT_SPACE_NOTIFICATION_INVITATION_EDIT_BTN).click();
       if (evt.waitForAndGetElement(ELEMENT_SPACE_INVITATION_INTRANET_NOTIFICATION_CHECKBOX_CHECKED, 2000, 0) == null)
-        evt.check(ELEMENT_SPACE_INVITATION_INTRANET_NOTIFICATION_CHECKBOX, 2);
+        $(ELEMENT_SPACE_INVITATION_INTRANET_NOTIFICATION_CHECKBOX).click();
       info("Click on Save button");
-      evt.click(ELEMENT_SPACE_INVITATION_NOTIFICATION_SAVE_BTN);
+      $(ELEMENT_SPACE_INVITATION_NOTIFICATION_SAVE_BTN).click();
       info("Verify that Intranet notification is hidded");
-      evt.waitForAndGetElement(ELEMENT_SPACE_INVITATION_INTRANET_NOTIFICATION_TITLE, 3000, 1);
+      $(ELEMENT_SPACE_INVITATION_INTRANET_NOTIFICATION_TITLE).waitUntil(Condition.disappears, Configuration.timeout);
       break;
     case Space_Post_email:
       evt.click(ELEMENT_SPACE_NOTIFICATION_POST_EDIT_BTN);

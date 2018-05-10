@@ -182,7 +182,7 @@ public class NavigationToolbar {
       evt.click(ELEMENT_MY_DASHBOARD_LINK);
       break;
     case MY_NOTIFICATION:
-      evt.click(ELEMENT_MY_NOTIFICATIONS_LINK);
+      $(ELEMENT_MY_NOTIFICATIONS_LINK).click();
       break;
     case SETTINGS:
       evt.click(ELEMENT_MY_SETTINGS_LINK);
@@ -540,11 +540,11 @@ public class NavigationToolbar {
    */
   public void goToAdminNotifications() {
     info("Go to email notifications");
-    evt.waitElementAndTryGetElement(ELEMENT_TOOLBAR_ADMINISTRATION);
-    evt.click(ELEMENT_TOOLBAR_ADMINISTRATION);
-    evt.mouseOver(ELEMENT_ADMINISTRATION_PORTAL, true);
-    evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL_EMAIL_NOTIFICATIONS, 3000, 1);
-    evt.click(ELEMENT_ADMINISTRATION_PORTAL_EMAIL_NOTIFICATIONS);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    $(ELEMENT_ADMINISTRATION_PORTAL).hover();
+    $(ELEMENT_ADMINISTRATION_PORTAL_EMAIL_NOTIFICATIONS).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_ADMINISTRATION_PORTAL_EMAIL_NOTIFICATIONS).click();
 
   }
 
@@ -576,9 +576,9 @@ public class NavigationToolbar {
    */
   public void goToNotificationList() {
     info("Click on Notification icon");
-    evt.click(ELEMENT_TOOLBAR_NOTIFICATION_LIST);
+    $(ELEMENT_TOOLBAR_NOTIFICATION_LIST).click();
     info("Notification list is shown");
-    evt.waitForAndGetElement(ELEMENT_NOTIFICATION_DROPDOWN, 3000, 1);
+    $(ELEMENT_NOTIFICATION_DROPDOWN).waitUntil(Condition.appears,Configuration.timeout);
 
   }
 
