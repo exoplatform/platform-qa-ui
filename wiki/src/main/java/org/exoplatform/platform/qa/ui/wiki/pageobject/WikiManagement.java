@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -33,6 +34,7 @@ public class WikiManagement {
 
   /**
    * constructor
+   * 
    * @param testBase TestBase
    */
   public WikiManagement(TestBase testBase) {
@@ -45,6 +47,7 @@ public class WikiManagement {
 
   /**
    * Select template to create page
+   * 
    * @param eTemplate SelenideElement
    */
   public void selectTemplateWikiPage(SelenideElement eTemplate) {
@@ -109,6 +112,7 @@ public class WikiManagement {
    */
   public void saveAddPage() {
     info("Save all changes");
+    executeJavaScript("window.scrollBy(0,-5500)", "");
     ELEMENT_SAVE_BUTTON_ADD_PAGE.click();
     ELEMENT_SAVE_BUTTON_ADD_PAGE.waitUntil(Condition.disappears, Configuration.timeout);
     info("Wiki page simple is created successfully");
@@ -302,6 +306,7 @@ public class WikiManagement {
 
   /**
    * Delete an attachment file
+   * 
    * @param file String
    */
   public void deleteAttachmentFile(String file) {
@@ -377,6 +382,7 @@ public class WikiManagement {
 
   /**
    * Watch a page
+   * 
    * @param mess String
    */
   public void watchAPage(String mess) {
@@ -396,6 +402,7 @@ public class WikiManagement {
 
   /**
    * un-Watch a page
+   * 
    * @param mess String
    */
   public void unWatchAPage(String mess) {
