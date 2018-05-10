@@ -697,7 +697,7 @@ public class ActivityStream {
    * @param text String
    * @throws AWTException exception
    */
-  public void mentionUserActivity(String username, String text) throws AWTException {
+  public void mentionUserActivity(String username, String text) {
     info("mention user in activity");
     ELEMENT_ACTIVITY_INPUT_TEXT.waitUntil(Condition.appears, Configuration.timeout).click();
     switchTo().frame(0);

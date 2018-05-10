@@ -24,7 +24,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
@@ -33,7 +32,6 @@ import org.exoplatform.platform.qa.ui.social.pageobject.*;
 
 @Tag("social")
 @Tag("sniff")
-@BugInPLF("SOC-5868")
 public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
   NavigationToolbar      navigationToolbar;
 
@@ -160,6 +158,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     $(byText(activity)).parent().parent().parent().parent().find(byText(comment1)).should(Condition.exist);
 
     info("Check comment notification in the View All");
+    refresh();
     navigationToolbar.goToIntranetNotification();
     intranetNotification.goToAllNotification();
     $(byId("UIIntranetNotificationsPortlet")).find(byText(comment1)).should(Condition.exist);
@@ -192,7 +191,6 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
    * activity message/title - $DATE is the date of the last notification of User C
    */
   @Test
-  @BugInPLF("5852")
   public void test02_CommentNotificationWhenANewNotificationIsPushed() {
     // Setup data test
     String username1 = "usernamea" + getRandomString();
@@ -252,11 +250,17 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(comment2)).should(Condition.exist);
     info("Check comment notification in the View All");
     intranetNotification.goToAllNotification();
-    $(byId("UIIntranetNotificationsPortlet")).find(byText(comment1))
+    $(byId("UIIntranetNotificationsPortlet")).find(byText(comment2))
                                              .parent()
-                                             .find(byText(username2 + " " + username2 + " has commented on your activity."))
-                                             .should(Condition.exist);
-    $(byId("UIIntranetNotificationsPortlet")).find(byText(comment2)).should(Condition.exist);
+                                             .parent()
+                                             .parent()
+                                             .shouldHave(Condition.text(username3 + " " + username3 + " and " + username2 + " "
+                                                 + username2 + " have commented on your activity."));
+    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
+    addUsers.deleteUser(username2);
+    addUsers.deleteUser(username3);
   }
 
   /**
@@ -597,7 +601,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     info("Check comment notification in activity Viewer");
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).click();
     $(byText(activity)).parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).parent().shouldHave(text("1"));
-
+    refresh();
     navigationToolbar.goToIntranetNotification();
     intranetNotification.goToAllNotification();
     $(byText(activity)).parent().parent().parent().find(byText(username2 + " " + username2)).should(Condition.exist);
@@ -635,7 +639,6 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
    * the activity.
    */
   @Test
-  @BugInPLF("PLF-7656")
   public void test07_LikeIntranetNotificationMerged() {
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
@@ -714,9 +717,11 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     info("Check comment notification in activity Viewer");
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).click();
     $(byText(activity)).parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).parent().shouldHave(text("4"));
+    refresh();
     navigationToolbar.goToIntranetNotification();
     intranetNotification.goToAllNotification();
-    $(byText(activity)).parent().parent().parent().find(byText(username2 + " " + username2)).should(Condition.exist);
+    $(byText(activity)).parent().parent().shouldHave(text(username5 + " " + username5 + ", " + username4 + " " + username4
+        + " and 2 more like your activity."));
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -748,7 +753,6 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
    * activity message/title - $DATE is the date of the last notification of User C
    */
   @Test
-  @BugInPLF("PLF-7656")
   public void test08_NotificationWhenANewLikeIsPushed() {
     // Setup data test
     String username1 = "usernamea" + getRandomString();
@@ -806,11 +810,13 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     manageLogInOut.signIn(username1, password);
     ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_ALERT_NOTIFICATION.click();
-    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).parent().parent().shouldHave(text(username2 + " " + username2 + ", "
-        + username3 + " " + username3 + " likes your activity."));
-
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).parent().parent().shouldHave(text(username3 + " " + username3
+        + " and " + username2 + " " + username2 + " like your activity."));
+    refresh();
+    navigationToolbar.goToIntranetNotification();
     intranetNotification.goToAllNotification();
-    $(byText(activity)).parent().parent().parent().find(byText(username3 + " " + username3)).should(Condition.exist);
+    $(byText(activity)).parent().parent().shouldHave(text(username3 + " " + username3 + " and " + username2 + " " + username2
+        + " like your activity."));
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -980,14 +986,8 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     $(byClassName("uiActivityLoader")).find(byText(username1 + " " + username1))
                                       .parent()
                                       .shouldHave(Condition.text(username1 + " " + username1 + " " + comment));
-
-    for (int i = 0; i <= 100; i++) {
-      navigationToolbar.goToIntranetNotification();
-      if ($(ELEMENT_NOTIFICATION_DROPDOWN).is(visible)) {
-        intranetNotification.goToAllNotification();
-        break;
-      }
-    }
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
     $(byId("UIIntranetNotificationsPortlet")).find(byText(activity)).should(exist);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
@@ -1204,14 +1204,13 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
 
     info("Add new space and ivite user");
     homePagePlatform.goToAllSpace();
-    spaceManagement.goToCreateSpace();
     spaceManagement.addNewSpaceSimple(space, space);
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.inviteUser(username2, false, "");
 
     info("User accepts Request notification and mention John in activity");
     manageLogInOut.signIn(username2, password);
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.acceptAInvitation(space);
 
     info("user posted an activity inspace");
@@ -1231,13 +1230,8 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     refresh();
 
     info("Check in view all");
-    for (int i = 0; i <= 100; i++) {
-      navigationToolbar.goToIntranetNotification();
-      if ($(ELEMENT_NOTIFICATION_DROPDOWN).is(visible)) {
-        intranetNotification.goToAllNotification();
-        break;
-      }
-    }
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
     $(byId("UIIntranetNotificationsPortlet")).find(byText(space)).parent().shouldHave(text(username2 + " " + username2
         + " has posted an activity in the " + space + " space."));
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
@@ -1296,7 +1290,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.Space_Invitation_Intranet);
 
     info("Add new space and ivite an user");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.inviteUser(username2, false, "");
@@ -1427,8 +1421,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.Space_Join_Req_intranet);
 
     info("Add a new space");
-    homePagePlatform.goToAllSpace();
-    spaceManagement.goToCreateSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
 
     info("user requests to join space");
@@ -1451,6 +1444,8 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     $(byId("UIIntranetNotificationsPortlet")).find(byText(space))
                                              .parent()
                                              .shouldHave(text(username2 + " " + username2 + " joined " + space + " space."));
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -1500,7 +1495,6 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
 
     info("Add a new space");
     homePagePlatform.goToAllSpace();
-    spaceManagement.goToCreateSpace();
     spaceManagement.addNewSpaceSimple(space, space);
 
     info("user requests to join space");
@@ -1516,6 +1510,8 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
         + " has requested access to " + space + " space."));
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).parent().parent().find(ELEMENT_BUTTON_CANCEL_INVITATION).click();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).shouldNot(exist);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -1557,7 +1553,8 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     navigationToolbar.goToIntranetNotification();
     intranetNotification.goToAllNotification();
     $(byText(username1 + " " + username1)).parent().shouldHave(text(username1 + " " + username1 + " has joined eXo."));
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    navigationToolbar.goToMyNotifications();
+    myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.NewUser_intranet);
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
   }
@@ -1673,7 +1670,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
   }
 
   @Test
-  public void test09_2_MentionIntranetNotification_InactivityMessageWhenNotificationIsDisabled() throws AWTException {
+  public void test09_2_MentionIntranetNotification_InactivityMessageWhenNotificationIsDisabled() {
     String activity = "activity" + getRandomNumber();
 
     String username1 = "usernamea" + getRandomString();
@@ -1823,8 +1820,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.Space_Post_intranet);
 
     info("Add new space and ivite user");
-    homePagePlatform.goToAllSpace();
-    spaceManagement.goToCreateSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.inviteUser(username2, false, "");
@@ -1912,8 +1908,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.Space_Join_Req_intranet);
 
     info("Add a new space");
-    homePagePlatform.goToAllSpace();
-    spaceManagement.goToCreateSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
 
     info("user requests to join space");
@@ -2022,27 +2017,22 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     homePagePlatform.goToAllSpace();
     spaceManagement.acceptAInvitation(space);
     activityStream.commentActivity(activity, comment1);
-
     info("Check comment notification in the notification list");
     manageLogInOut.signIn(username1, password);
     ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_ALERT_NOTIFICATION.click();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(comment1)).should(Condition.exist);
-
     info("Check comment notification in activity Viewer");
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(comment1)).click();
     $(byText(activity)).parent().parent().parent().parent().find(byText(comment1)).should(Condition.exist);
-
     info("Check comment notification in the View All");
     info("Check in view all");
-    for (int i = 0; i <= 100; i++) {
-      navigationToolbar.goToIntranetNotification();
-      if ($(ELEMENT_NOTIFICATION_DROPDOWN).is(visible)) {
-        intranetNotification.goToAllNotification();
-        break;
-      }
-    }
+    refresh();
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
     $(byId("UIIntranetNotificationsPortlet")).find(byText(comment1)).should(Condition.exist);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -2094,8 +2084,6 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     addUsers.deleteUser(username2);
   }
 
-  @Test
-  @BugInPLF("5852")
   /*
    * Precondition: - User A, User B and User B are connected - User A has posted
    * an activity - User B has commented on User A activity - The notification
@@ -2116,6 +2104,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
    * thumbnail of User C - $USER_LIST is User B, User C - $ACTIVITY is the
    * activity message/title - $DATE is the date of the last notification of User C
    */
+  @Test
   public void test02_2CommentNotificationWhenANewNotificationIsPushedInSpace() {
     // Setup data test
     String username1 = "usernamea" + getRandomString();
@@ -2174,15 +2163,19 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     manageLogInOut.signIn(username1, password);
     ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_ALERT_NOTIFICATION.click();
-    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(comment2)).should(Condition.exist);
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(comment2)).parent().parent().parent().shouldHave(Condition.text(username3 + " "
+        + username3 + " and " + username2 + " " + username2 + " have commented on your activity."));
 
     info("Check comment notification in the View All");
     intranetNotification.goToAllNotification();
-    $(byId("UIIntranetNotificationsPortlet")).find(byText(comment1))
+    $(byId("UIIntranetNotificationsPortlet")).find(byText(comment2))
                                              .parent()
-                                             .find(byText(username2 + " " + username2 + " has commented on your activity."))
-                                             .should(Condition.exist);
-    $(byId("UIIntranetNotificationsPortlet")).find(byText(comment2)).should(Condition.exist);
+                                             .parent()
+                                             .parent()
+                                             .shouldHave(Condition.text(username3 + " " + username3 + " and " + username2 + " "
+                                                 + username2 + " have commented on your activity."));
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -2270,16 +2263,14 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     $(byText(activity)).parent().parent().parent().parent().find(byText(comment4)).should(Condition.exist);
 
     info("Check comment notification in the View All");
-    for (int i = 0; i <= 100; i++) {
-      navigationToolbar.goToIntranetNotification();
-      if ($(ELEMENT_NOTIFICATION_DROPDOWN).is(visible)) {
-        intranetNotification.goToAllNotification();
-        break;
-      }
-    }
+    refresh();
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
     $(byText(activity)).parent().parent().shouldHave(text(username2 + " " + username2 + ", " + username4 + " " + username4
         + " and 1 more have commented on your activity."));
     $(byText(comment4)).should(Condition.exist);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -2345,6 +2336,8 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     ELEMENT_ALERT_NOTIFICATION.shouldNot(visible);
     navigationToolbar.goToIntranetNotification();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(comment2)).shouldNot(Condition.exist);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -2424,6 +2417,8 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     navigationToolbar.goToIntranetNotification();
     info("Not Check comment notification in activity Viewer");
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).shouldNot(exist);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -2481,6 +2476,8 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     navigationToolbar.goToIntranetNotification();
     intranetNotification.goToAllNotification();
     $(byText(activity)).parent().parent().parent().find(byText(username2 + " " + username2)).should(Condition.exist);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -2646,7 +2643,6 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
    * the activity.
    */
   @Test
-  @BugInPLF("PLF-7656")
   public void test07_2_LikeIntranetNotificationMergedInSpace() {
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
@@ -2720,10 +2716,13 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     info("Check comment notification in activity Viewer");
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).click();
     $(byText(activity)).parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).parent().shouldHave(text("4"));
-
+    refresh();
     navigationToolbar.goToIntranetNotification();
     intranetNotification.goToAllNotification();
-    $(byText(activity)).parent().parent().parent().find(byText(username2 + " " + username2)).should(Condition.exist);
+    $(byText(activity)).parent().parent().shouldHave(text(username5 + " " + username5 + ", " + username4 + " " + username4
+        + " and 2 more like your activity."));
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -2902,7 +2901,6 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
    * the last notification of User C
    */
   @Test
-  @BugInPLF("PLF-7656")
   public void test08_2NotificationWhenANewLikeIsPushedInSpace() {
     // Setup data test
     String username1 = "usernamea" + getRandomString();
@@ -2958,11 +2956,15 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     manageLogInOut.signIn(username1, password);
     ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_ALERT_NOTIFICATION.click();
-    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).parent().parent().shouldHave(text(username2 + " " + username2 + ", "
-        + username3 + " " + username3 + " likes your activity."));
-
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).parent().parent().shouldHave(text(username3 + " " + username3
+        + " and " + username2 + " " + username2 + " like your activity."));
+    refresh();
+    navigationToolbar.goToIntranetNotification();
     intranetNotification.goToAllNotification();
-    $(byText(activity)).parent().parent().parent().find(byText(username3 + " " + username3)).should(Condition.exist);
+    $(byText(activity)).parent().parent().shouldHave(text(username3 + " " + username3 + " and " + username2 + " " + username2
+        + " like your activity."));
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -3033,6 +3035,8 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     ELEMENT_ALERT_NOTIFICATION.shouldNotBe(visible);
     navigationToolbar.goToIntranetNotification();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).shouldNot(exist);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -3104,6 +3108,8 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
                                              .parent()
                                              .find(byText(username2 + " " + username2))
                                              .should(exist);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -3147,6 +3153,8 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     ELEMENT_ALERT_NOTIFICATION.shouldNotBe(visible);
     navigationToolbar.goToIntranetNotification();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username2 + " " + username2)).shouldNot(exist);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -3196,15 +3204,12 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     $(byClassName("uiActivityLoader")).find(byText(username1 + " " + username1))
                                       .parent()
                                       .shouldHave(Condition.text(username1 + " " + username1 + " " + comment));
-
-    for (int i = 0; i <= 100; i++) {
-      navigationToolbar.goToIntranetNotification();
-      if ($(ELEMENT_NOTIFICATION_DROPDOWN).is(visible)) {
-        intranetNotification.goToAllNotification();
-        break;
-      }
-    }
+    refresh();
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
     $(byId("UIIntranetNotificationsPortlet")).find(byText(activity)).should(exist);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -3249,6 +3254,8 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     ELEMENT_ALERT_NOTIFICATION.shouldNot(visible);
     navigationToolbar.goToIntranetNotification();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username2 + " " + username2)).shouldNot(exist);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -3274,8 +3281,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     addUsers.addUser(username3, password, email3, username3, username3);
     manageLogInOut.signIn(username1, password);
     info("Add new space and ivite user");
-    homePagePlatform.goToAllSpace();
-    spaceManagement.goToCreateSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.inviteUser(username2, false, "");
@@ -3309,13 +3315,14 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     ELEMENT_ALERT_NOTIFICATION.click();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1 + " " + username1)).parent().shouldHave(text(username1 + " "
         + username1 + " has posted an activity in the " + space + " space."));
+    manageLogInOut.signIn(username1, password);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
     addUsers.deleteUser(username3);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
 
   }
 
@@ -3337,8 +3344,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     addUsers.addUser(username3, password, email3, username3, username3);
     manageLogInOut.signIn(username1, password);
     info("Add new space and ivite user");
-    homePagePlatform.goToAllSpace();
-    spaceManagement.goToCreateSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.inviteUser(username2, false, "");
@@ -3368,6 +3374,8 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     ELEMENT_ALERT_NOTIFICATION.shouldNot(visible);
     navigationToolbar.goToIntranetNotification();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1 + " " + username1)).shouldNot(exist);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
