@@ -307,7 +307,7 @@ public final class SocialLocator {
                                                                            ".//*[contains(@class,'unread')][contains(.,'$status')]//*[contains(@class,'user-name')][contains(text(),'$fullName')]";
 
   public static final By              ELEMENT_INTRANET_NOTIFICATION_MARK_ALL_AS_READ                    =
-                                                                                     By.xpath(".//*[@id='NotificationPopup']//*[contains(@class,'markAll')]/a");
+                                                                                     By.xpath("//*[@id=\"NotificationPopup\"]/li[3]/a");
 
   public static final String          ELEMENT_INTRANET_NOTIFICATION_REMOVE_ICON                         =
                                                                                 "(.//*[@id='NotificationPopup']//*[contains(@class,'uiIconClose')])[$num]";
@@ -2321,7 +2321,7 @@ public final class SocialLocator {
                                                                          $(byId("UIBreadCrumbsNavigationPortlet"));
 
   public static final SelenideElement ELEMENT_CONTENT_NAME_PROFILE                                      =
-                                                                   $(byId("UIBreadCrumbsNavigationPortlet"));
+                                                                   $(byId("UIUserNavigationPortlet"));
 
   public static final SelenideElement ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE                         =
                                                                                 $(byXpath("//*[@id=\"spaceMenuTab\"]/li[8]/ul"));
@@ -2356,5 +2356,7 @@ public final class SocialLocator {
   public static final SelenideElement ELEMENT_CONTAINER_ACTIVITY                                        =
                                                                  $(byClassName("MediaName"));
   public static final SelenideElement ELEMENT_ABOUT_ME_PORTLET=$(byId("UIExperienceProfilePortlet"));
+  public static final By ELEMENT_BUTTON_ACCEPT_INVITATION=byClassName("action-item");
+  public static final By ELEMENT_BUTTON_CANCEL_INVITATION=byClassName("cancel-item");
 
 }

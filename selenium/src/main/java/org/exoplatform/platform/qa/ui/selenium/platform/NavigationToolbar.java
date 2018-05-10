@@ -595,8 +595,6 @@ public class NavigationToolbar {
    */
   public void goToIntranetNotification() {
     info("Go to Intranet Notification");
-    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-
     evt.click(ELEMENT_INTRANET_NOTIFICATION_BELL);
     evt.waitForAndGetElement(ELEMENT_NOTIFICATION_DROPDOWN);
     info("The elemnt is shown successfully");
