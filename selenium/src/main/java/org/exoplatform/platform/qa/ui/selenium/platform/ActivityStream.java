@@ -768,13 +768,6 @@ public class ActivityStream {
     switchTo().defaultContent();
     $(byAttribute("data-value", username)).waitUntil(Condition.visible, Configuration.timeout);
     switchTo().frame(frame);
-<<<<<<< 65bad4621ef86137faed32730f2daea8ad67242b
-=======
-    $(byXpath("/html/body")).setValue("@"+username);
-    switchTo().defaultContent();
-    $(byAttribute("data-value",username)).waitUntil(Condition.visible,Configuration.timeout);
-    switchTo().frame(frame);
->>>>>>> add tests when notication is disabled
     $(byXpath("/html/body")).pressEnter();
     $(byXpath("/html/body")).sendKeys(textContent);
     switchTo().defaultContent();
