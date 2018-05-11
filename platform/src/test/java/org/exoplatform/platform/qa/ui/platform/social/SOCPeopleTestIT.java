@@ -279,7 +279,7 @@ public class SOCPeopleTestIT extends Base {
     connectionsManagement.acceptAConnection(username1);
     info("Verify after accept John's invitaion");
     navigationToolbar.goToMyConnection();
-    homePagePlatform.refreshUntil("Remove Connection", Condition.exist, 2000);
+    homePagePlatform.refreshUntil($(byText("Remove Connection")), Condition.exist, 2000);
 
     info("Login by invited users, go to My Connections/Requests Received and accept invitations");
     manageLogInOut.signIn(username3, password);

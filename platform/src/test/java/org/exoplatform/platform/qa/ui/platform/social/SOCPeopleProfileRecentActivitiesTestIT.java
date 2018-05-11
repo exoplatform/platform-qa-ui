@@ -184,7 +184,7 @@ public class SOCPeopleProfileRecentActivitiesTestIT extends Base {
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToConnections();
     connectionsManagement.searchPeople(username1, null, null, null);
-    homePagePlatform.refreshUntil(username1 + " " + username1, visible, 2000);
+    homePagePlatform.refreshUntil($(byText(username1 + " " + username1)), visible, 2000);
     $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username1))).click();
     $(ELEMENT_RECENT_ACTIVITY_VIEWALL_BTN).click();
     $(ELEMENT_HORIZONTAL_TOOLBAR_SECOND_APP_ACTIVITIES).should(visible);
