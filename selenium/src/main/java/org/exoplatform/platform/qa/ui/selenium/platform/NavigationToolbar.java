@@ -595,8 +595,7 @@ public class NavigationToolbar {
    */
   public void goToIntranetNotification() {
     info("Go to Intranet Notification");
-    evt.click(ELEMENT_INTRANET_NOTIFICATION_BELL);
-    evt.waitForAndGetElement(ELEMENT_NOTIFICATION_DROPDOWN);
+    $(ELEMENT_INTRANET_NOTIFICATION_BELL).click();
     info("The elemnt is shown successfully");
   }
 

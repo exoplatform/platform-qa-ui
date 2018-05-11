@@ -1110,7 +1110,7 @@ public final class SocialLocator {
                                                                                    By.xpath("//*[@id='UIUserNavigationPortlet']/ul/li[1]//*[@class='uiIconAppprofile uiIconDefaultApp']");
 
   public static final By              ELEMENT_HORIZONTAL_TOOLBAR_SECOND_APP_ACTIVITIES                  =
-                                                                                       By.xpath("//*[@id='UIUserNavigationPortlet']/ul/li[2]//*[@class='uiIconAppactivities uiIconDefaultApp']");
+                                                                                       By.xpath("//*[@id=\"UIUserNavigationPortlet\"]/div[1]/ul/li[2]/a/div");
 
   public static final By              ELEMENT_HORIZONTAL_TOOLBAR_THIRD_APP_CONNECTIONS                  =
                                                                                        By.xpath("//*[@id='UIUserNavigationPortlet']/ul/li[3]//*[@class='uiIconAppconnections uiIconDefaultApp']");
