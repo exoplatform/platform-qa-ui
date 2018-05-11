@@ -23,6 +23,7 @@ package org.exoplatform.platform.qa.ui.selenium.platform;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.selenium.DownloadFileControl.driver;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_MANAGESITES_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_PAGE_CREATION_WIZARD;
@@ -57,9 +58,9 @@ public class NavigationToolbar {
   public void goToEditLayout() {
     info("--Go to Edit Layout--");
 
-    evt.clickByJavascript(ELEMENT_LINK_EDIT);
-    evt.mouseOver(ELEMENT_MENU_PAGE_LINK, true);
-    evt.click(ELEMENT_MENU_EDIT_LAYOUT, 2, true);
+    $(ELEMENT_LINK_EDIT).click();
+    $(ELEMENT_MENU_PAGE_LINK).hover();
+    $(ELEMENT_MENU_EDIT_LAYOUT).click();
   }
 
   /**
@@ -607,29 +608,29 @@ public class NavigationToolbar {
    */
   public void goToEditSiteLayout() {
     info("Go to Edit layout form");
-    for (int repeat = 0;; repeat++) {
-      if (repeat > 1) {
-        evt.mouseOverAndClick(ELEMENT_LINK_EDIT);
+    for(int repeat=0;; repeat ++){
+      if (repeat > 1){
+        $(ELEMENT_LINK_EDIT).click();
+        $(ELEMENT_LINK_EDIT).hover();
         break;
       }
-      evt.mouseOver(ELEMENT_LINK_EDIT, true);
-      if (evt.waitForAndGetElement(ELEMENT_MENU_EDIT_SITES, 5000, 0) != null) {
+      $(ELEMENT_LINK_EDIT).hover();
+      if ($(ELEMENT_MENU_EDIT_SITES).waitUntil(Condition.visible,Configuration.timeout)!= null) {
         info("-- Click Site menu --");
-        evt.mouseOver(ELEMENT_MENU_EDIT_SITES, true);
-        if (evt.waitForAndGetElement(ELEMENT_MENU_EDIT_SITE_LAYOUT, 5000, 0) != null) {
-          evt.click(ELEMENT_MENU_EDIT_SITE_LAYOUT);
+        $( ELEMENT_MENU_EDIT_SITES).hover();
+        if ($(ELEMENT_MENU_EDIT_SITE_LAYOUT).waitUntil(Condition.visible,Configuration.timeout)!= null){
+          $(ELEMENT_MENU_EDIT_SITE_LAYOUT).click();
           break;
         }
-      } else {
+      }
+      else{
         String editPageRequest = "ajaxGet(eXo.env.server.createPortalURL('UIWorkingWorkspace', 'EditInline', true))";
-        info("editPageRequest:" + editPageRequest);
-        ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript(editPageRequest);
-
+        info("editPageRequest:"+editPageRequest);
+        ((JavascriptExecutor)driver).executeScript(editPageRequest);
         break;
       }
       info("Retry...[" + repeat + "]");
     }
-
   }
 
   /**

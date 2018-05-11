@@ -1,8 +1,11 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.administration;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -29,8 +32,9 @@ public class ManageLayout {
    */
   public void publicMode() {
     info("Check on Public mode checkbox");
-    evt.check(ELEMENT_PERMISSION_PUBLIC_CHECKBOX, 2);
-    evt.waitForElementNotPresent(ELEMENT_PERMISSION_GRID);
+    if($(ELEMENT_PERMISSION_PUBLIC_CHECKBOX).is(Condition.not(Condition.checked)))
+      $(ELEMENT_PERMISSION_PUBLIC_CHECKBOX).parent().click();
+    $(ELEMENT_PERMISSION_GRID).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     info("The public mode is checked");
   }
 
@@ -39,8 +43,8 @@ public class ManageLayout {
    */
   public void goToSiteConfigPopup() {
     info("Click on Site Config button");
-    evt.click(ELEMENT_EDIT_SITE_LAYOUT_SITE_CONFIG_BTN);
-    evt.waitForAndGetElement(ELEMENT_SITE_CONFIG_POPUP_PERMISSION_TAB);
+    $(ELEMENT_EDIT_SITE_LAYOUT_SITE_CONFIG_BTN).click();
+    $(ELEMENT_SITE_CONFIG_POPUP_PERMISSION_TAB).waitUntil(Condition.visible,Configuration.timeout);
     info("The popup is shown");
   }
 
@@ -49,8 +53,8 @@ public class ManageLayout {
    */
   public void goToSitePermissionTab() {
     info("Click on Permission tab");
-    evt.click(ELEMENT_SITE_CONFIG_POPUP_PERMISSION_TAB);
-    evt.waitForAndGetElement(ELEMENT_PERMISSION_GRID);
+    $(ELEMENT_SITE_CONFIG_POPUP_PERMISSION_TAB).click();
+    $(ELEMENT_PERMISSION_GRID).waitUntil(Condition.visible,Configuration.timeout);
     info("The permission tab's content is shown");
   }
 
@@ -59,8 +63,8 @@ public class ManageLayout {
    */
   public void saveChangesSiteConfig() {
     info("Click on Save button");
-    evt.click(ELEMENET_SITE_CONFIG_POPUP_SAVE_BTN);
-    evt.waitForElementNotPresent(ELEMENT_SITE_CONFIG_POPUP_PERMISSION_TAB);
+    $(ELEMENET_SITE_CONFIG_POPUP_SAVE_BTN).click();
+    $(ELEMENT_SITE_CONFIG_POPUP_PERMISSION_TAB).waitUntil(Condition.not(Condition.visible),Configuration.timeout);;
     info("All changes are saved");
   }
 
@@ -93,27 +97,27 @@ public class ManageLayout {
     switch (portlet) {
     case Breadcrumbs:
       info("Mouse over on the portlet");
-      evt.mouseOver(ELEMENT_HOME_PAGE_LEFT_PORTLET_BREADCRUM_NAVIGATION, true);
+      $(ELEMENT_HOME_PAGE_LEFT_PORTLET_BREADCRUM_NAVIGATION).hover();
       info("Click on Edit button");
-      evt.click(ELEMENT_HOME_PAGE_LEFT_PORTLET_BREADCRUM_NAVIGATION_EDIT_BTN);
+      $(ELEMENT_HOME_PAGE_LEFT_PORTLET_BREADCRUM_NAVIGATION_EDIT_BTN).click();
       break;
     case Company:
       info("Mouse over on the portlet");
-      evt.mouseOver(ELEMENT_HOME_PAGE_LEFT_PORTLET_COMPANY_NAVIGATION, true);
+      $(ELEMENT_HOME_PAGE_LEFT_PORTLET_COMPANY_NAVIGATION).hover();
       info("Click on Edit button");
-      evt.click(ELEMENT_HOME_PAGE_LEFT_PORTLET_COMPANY_NAVIGATION_EDIT_BTN);
+      $(ELEMENT_HOME_PAGE_LEFT_PORTLET_COMPANY_NAVIGATION_EDIT_BTN).click();
       break;
     case Groups:
       info("Mouse over on the portlet");
-      evt.mouseOver(ELEMENT_HOME_PAGE_LEFT_PORTLET_GROUPS_NAVIGATION, true);
+      $(ELEMENT_HOME_PAGE_LEFT_PORTLET_GROUPS_NAVIGATION).hover();
       info("Click on Edit button");
-      evt.click(ELEMENT_HOME_PAGE_LEFT_PORTLET_GROUPS_NAVIGATION_EDIT_BTN);
+      $(ELEMENT_HOME_PAGE_LEFT_PORTLET_GROUPS_NAVIGATION_EDIT_BTN).click();
       break;
     case Space:
       info("Mouse over on the portlet");
-      evt.mouseOver(ELEMENT_HOME_PAGE_LEFT_PORTLET_SPACES_NAVIGATION, true);
+      $(ELEMENT_HOME_PAGE_LEFT_PORTLET_SPACES_NAVIGATION).hover();
       info("Click on Edit button");
-      evt.click(ELEMENT_HOME_PAGE_LEFT_PORTLET_SPACES_NAVIGATION_EDIT_BTN);
+      $(ELEMENT_HOME_PAGE_LEFT_PORTLET_SPACES_NAVIGATION_EDIT_BTN).click();
       break;
     }
     goToPortletPermissionTab();
@@ -126,8 +130,8 @@ public class ManageLayout {
    */
   public void saveChangesSiteLayout() {
     info("click on Finish button of the layout");
-    evt.click(ELEMENT_EDIT_SITE_LAYOUT_SAVE_BTN);
-    evt.waitForElementNotPresent(ELEMENT_EDIT_SITE_LAYOUT_SAVE_BTN);
+    $(ELEMENT_EDIT_SITE_LAYOUT_SAVE_BTN).click();
+    $(ELEMENT_EDIT_SITE_LAYOUT_SAVE_BTN).waitUntil(Condition.visible,Configuration.timeout);
     info("All changes are saved");
   }
 
@@ -136,8 +140,8 @@ public class ManageLayout {
    */
   public void goToPagePropertiesPopup() {
     info("Click on Properties button");
-    evt.click(ELEMENT_PAGE_EDIT_LAYOUT_PROPERITES_BTN);
-    evt.waitForAndGetElement(ELEMENT_PAGE_EDIT_LAYOUT_SAVE_BTN);
+    $(ELEMENT_PAGE_EDIT_LAYOUT_PROPERITES_BTN).click();
+    $(ELEMENT_PAGE_EDIT_LAYOUT_SAVE_BTN).waitUntil(Condition.visible,Configuration.timeout);
     info("The popup is shown");
   }
 
@@ -146,8 +150,8 @@ public class ManageLayout {
    */
   public void goToPagePermissionTab() {
     info("Click on Permission tab");
-    evt.click(ELEMENT_PROPERTIES_POPUP_PERMISSION_TAB);
-    evt.waitForAndGetElement(ELEMENT_PERMISSION_GRID);
+    $(ELEMENT_PROPERTIES_POPUP_PERMISSION_TAB).waitUntil(Condition.appears, Configuration.timeout);;
+    $(ELEMENT_PERMISSION_GRID).waitUntil(Condition.appears, Configuration.timeout);
     info("The permission tab's content is shown");
   }
 
@@ -156,8 +160,8 @@ public class ManageLayout {
    */
   public void saveChangesPageLayout() {
     info("Click on Save button");
-    evt.click(ELEMENT_PAGE_EDIT_LAYOUT_SAVE_BTN);
-    evt.waitForElementNotPresent(ELEMENT_PAGE_EDIT_LAYOUT_SAVE_BTN);
+    $(ELEMENT_PAGE_EDIT_LAYOUT_SAVE_BTN).click();
+    $(ELEMENT_PAGE_EDIT_LAYOUT_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     info("All changes are saved");
   }
 
@@ -166,8 +170,8 @@ public class ManageLayout {
    */
   public void saveChangesPropertiesPopup() {
     info("Click on Save button");
-    evt.click(ELEMENT_PROPERTIES_POPUP_SAVE_BTN);
-    evt.waitForElementNotPresent(ELEMENT_PROPERTIES_POPUP_SAVE_BTN);
+    $(ELEMENT_PROPERTIES_POPUP_SAVE_BTN).click();
+    $(ELEMENT_PROPERTIES_POPUP_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     info("All changes are saved");
   }
 
@@ -185,8 +189,8 @@ public class ManageLayout {
    */
   public void saveChangesContainerPopup() {
     info("Click on Save button");
-    evt.click(ELEMENT_CONTAINER_POPUP_SAVE_BTN);
-    evt.waitForElementNotPresent(ELEMENT_CONTAINER_POPUP_SAVE_BTN);
+    $(ELEMENT_CONTAINER_POPUP_SAVE_BTN).click();
+    $(ELEMENT_CONTAINER_POPUP_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);;
     info("All changes are saved");
   }
 
@@ -205,9 +209,9 @@ public class ManageLayout {
   public void publicModeWikiPortletContainer() {
     goToContainerTab();
     info("Mouse over on the container");
-    evt.mouseOver(ELEMENT_PAGE_EDIT_LAYOUT_WIKI_CONTAINER, true);
+    $(ELEMENT_PAGE_EDIT_LAYOUT_WIKI_CONTAINER).hover();
     info("Click on Edit button");
-    evt.click(ELEMENT_PAGE_EDIT_LAYOUT_WIKI_CONTAINER_EDIT_BTN);
+    $(ELEMENT_PAGE_EDIT_LAYOUT_WIKI_CONTAINER_EDIT_BTN).click();
     info("The container popup is shown");
     goToPermissionContainer();
     publicMode();
