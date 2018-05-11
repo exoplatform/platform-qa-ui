@@ -3,7 +3,6 @@ package org.exoplatform.platform.qa.ui.wiki.pageobject;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -40,7 +39,9 @@ public class WikiDraftPage {
    */
   public void resumeADraft(String title) {
     info("Click on the title of the draf in the list");
-    $(byId("UIWikiDraftGrid")).find(byText(title + "(New Page)")).click();
+    // $(byXpath("UIWikiDraftGrid")).find(byText(title + "(New Page)")).click();
+
+    $(byText(title + "(New Page)")).click();
 
   }
 }

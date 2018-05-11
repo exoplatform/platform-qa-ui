@@ -1,8 +1,6 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
@@ -87,7 +85,7 @@ public class SpaceManagement {
     ELEMENT_SPACE_DESCRIPTION_INPUT.setValue(desc);
     info("Save all changes");
     ELEMENET_SPACE_CREATE_BUTTON.click();
-    ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
   }
 
   /**
@@ -181,7 +179,7 @@ public class SpaceManagement {
   public void editSpaceSimple(String space, String newName, String newDes, boolean isChangeAvatar, String filepath) {
     info("evt.click on Edit button of the space");
     if ($(byXpath(ELEMENT_SPACE_EDIT_BTN.replace("${space}", space))).is(Condition.visible))
-     $(byXpath(ELEMENT_SPACE_EDIT_BTN.replace("${space}", space))).click();
+      $(byXpath(ELEMENT_SPACE_EDIT_BTN.replace("${space}", space))).click();
     if ($(ELEMENT_SPACE_NAME_INPUT).is(Condition.not(Condition.visible)))
       $(ELEMENT_SPACE_EDIT_SETTING_TAB).click();
     if (!newName.isEmpty()) {
@@ -195,7 +193,7 @@ public class SpaceManagement {
     if (isChangeAvatar == true) {
       info("evt.click on change picture button");
       $(ELEMENT_SPACE_CHANGE_AVATAR_BTN).click();
-     $(byClassName("uploadContainer")).find(byClassName("file")).uploadFromClasspath(filepath);
+      $(byClassName("uploadContainer")).find(byClassName("file")).uploadFromClasspath(filepath);
 
       info("filepath:" + filepath);
       $(ELEMENT_SPACE_UPLOAD_CONFIRM_BTN).click();
@@ -239,11 +237,11 @@ public class SpaceManagement {
    */
   public void searchByLetterList(String alpha, String name) {
     info("Waiting my space is shown");
-    $(byXpath(ELEMENT_MY_SPACE_LETTER_LIST.replace("${alpha}", alpha))).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_MY_SPACE_LETTER_LIST.replace("${alpha}", alpha))).waitUntil(Condition.visible, Configuration.timeout);
     info("evt.click on the alpha");
     $(byXpath(ELEMENT_MY_SPACE_LETTER_LIST.replace("${alpha}", alpha))).click();
     info("Verify that the space is shown in the search result");
-    $(byXpath(ELEMENT_MY_SPACE_SEARCH_RESULT.replace("${name}", name))).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_MY_SPACE_SEARCH_RESULT.replace("${name}", name))).waitUntil(Condition.visible, Configuration.timeout);
   }
 
   /**
@@ -353,7 +351,9 @@ public class SpaceManagement {
     info("evt.click on Ignore button of the space");
     $(byXpath(ELEMENT_MY_SPACE_INVITATION_RECEIVED_CANCEL_BTN.replace("${space}", space))).click();
     info("Verify that the user didn't join to the space");
-    $(byXpath(ELEMENT_MY_SPACE_INVITATION_RECEIVED_CANCEL_BTN.replace("${space}", space))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    $(byXpath(ELEMENT_MY_SPACE_INVITATION_RECEIVED_CANCEL_BTN.replace("${space}",
+                                                                      space))).waitUntil(Condition.not(Condition.visible),
+                                                                                         Configuration.timeout);
   }
 
   /**
@@ -424,14 +424,14 @@ public class SpaceManagement {
    */
   public void goToWikiTab() {
     info("Open Wiki Tab");
-    evt.click(ELEMENT_WIKI_TAB);
-    evt.waitForAndGetElement(ELEMENT_WIKI_HOME_TITLE, 2000, 0);
+    $(ELEMENT_WIKI_TAB).click();
+    $(ELEMENT_WIKI_HOME_TITLE).waitUntil(Condition.visible, Configuration.timeout);
     info("Wiki portlet is shown");
   }
 
-  public void goToTaskTab(){
+  public void goToTaskTab() {
     ELEMENT_SPACE_MENU_TAB.find(ELEMENT_TASK_TAB).click();
-    ELEMENT_PROJECT_ICON_ADD_PROJECT.waitUntil(Condition.visible,Configuration.timeout);
+    ELEMENT_PROJECT_ICON_ADD_PROJECT.waitUntil(Condition.visible, Configuration.timeout);
   }
 
   /**
@@ -440,7 +440,7 @@ public class SpaceManagement {
   public void goToDocumentTab() {
     info("Open Document Tab");
     $(ELEMENT_DOCUMENT_TAB).click();
-    $(ELEMENT_DOCUMENT_FOLDER_ADD_BTN).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_DOCUMENT_FOLDER_ADD_BTN).waitUntil(Condition.visible, Configuration.timeout);
     info("Document portlet is shown");
   }
 
@@ -451,7 +451,7 @@ public class SpaceManagement {
     info("Open Agenda Tab");
     refresh();
     $(ELEMENT_AGENDA_TAB).click();
-    $(ELEMENT_AGENDA_EVENT_ADD_BTN).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_AGENDA_EVENT_ADD_BTN).waitUntil(Condition.visible, Configuration.timeout);
 
     info("Agenda portlet is shown");
   }
