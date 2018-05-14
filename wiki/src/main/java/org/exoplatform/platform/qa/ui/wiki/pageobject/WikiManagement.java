@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -33,6 +34,7 @@ public class WikiManagement {
 
   /**
    * constructor
+   * 
    * @param testBase TestBase
    */
   public WikiManagement(TestBase testBase) {
@@ -45,6 +47,7 @@ public class WikiManagement {
 
   /**
    * Select template to create page
+   * 
    * @param eTemplate SelenideElement
    */
   public void selectTemplateWikiPage(SelenideElement eTemplate) {
@@ -99,9 +102,12 @@ public class WikiManagement {
    */
   public void addContentPage(String content) {
     info("Input a content for the page");
+    SelenideElement frame = $(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible, Configuration.timeout);
     if (!content.isEmpty())
-      plf.inputFrame(ELEMENT_CONTENT_WIKI_FRAME, content);
-
+      $(byClassName("gwt-RichTextArea")).click();
+    switchTo().frame(frame);
+    $(byId("body")).sendKeys(content);
+    switchTo().defaultContent();
   }
 
   /**
@@ -302,6 +308,7 @@ public class WikiManagement {
 
   /**
    * Delete an attachment file
+   * 
    * @param file String
    */
   public void deleteAttachmentFile(String file) {
@@ -377,6 +384,7 @@ public class WikiManagement {
 
   /**
    * Watch a page
+   * 
    * @param mess String
    */
   public void watchAPage(String mess) {
@@ -396,6 +404,7 @@ public class WikiManagement {
 
   /**
    * un-Watch a page
+   * 
    * @param mess String
    */
   public void unWatchAPage(String mess) {

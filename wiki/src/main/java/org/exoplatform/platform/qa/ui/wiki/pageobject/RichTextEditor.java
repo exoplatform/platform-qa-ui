@@ -1,7 +1,6 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
@@ -663,9 +662,9 @@ public class RichTextEditor {
    */
   public void goToWikiPageLink() {
     info("Click on Link menu");
-    evt.mouseOverAndClick(ELEMENT_LINK);
+    $(ELEMENT_LINK).click();
     info("Click on Page Link menu");
-    evt.mouseOverAndClick(ELEMENT_WIKI_PAGE_LINK_MENU);
+    $(ELEMENT_WIKI_PAGE_LINK_MENU).click();
   }
 
   /**
@@ -731,7 +730,8 @@ public class RichTextEditor {
       break;
     case Search:
       info("Select Search tab and search the page");
-      searchPage(page);
+      goToSearchTab();
+      $(byClassName("popupContent")).find(byClassName("gwt-TextBox")).setValue(page).pressEnter();
       info("Select a page");
       selectPageInSearchTab(page);
       break;
@@ -1016,7 +1016,7 @@ public class RichTextEditor {
    * Insert an image into the content of the page
    *
    * @param attachedFile String
-   * @param isPressEndKey  Boolean
+   * @param isPressEndKey Boolean
    */
   public void insertImage(String attachedFile, Boolean isPressEndKey) {
     info("Open Current page tab");
@@ -1122,7 +1122,7 @@ public class RichTextEditor {
    */
   public void inputNameWikiPageLink(String page) {
     info("Input the name of the page");
-    $(ELEMENT_INPUT_NAME_NEW_WIKI_PAGE).val(page);
+    $(ELEMENT_INPUT_NAME_NEW_WIKI_PAGE).setValue(page);
   }
 
   /**
@@ -1148,7 +1148,7 @@ public class RichTextEditor {
    */
   public void addNewPageInMyRecentChangesTab(String page) {
     info("Double click on Add New Page button");
-    evt.doubleClickOnElement(ELEMENT_MY_RECENT_CHANGES_TAB_ADD_NEW_PAGE_BTN);
+    $(ELEMENT_MY_RECENT_CHANGES_TAB_ADD_NEW_PAGE_BTN).doubleClick();
     info("Input the name of the page");
     inputNameWikiPageLink(page);
   }
@@ -1222,9 +1222,9 @@ public class RichTextEditor {
   public void searchPage(String page) {
     goToSearchTab();
     info("Input the page:" + page);
-    $(ELEMENT_SEARCH_TEXTBOX_POPUP).val(page);
+    $(ELEMENT_SEARCH_TEXTBOX_POPUP).setValue(page);
     info("Search the page");
-    evt.click(ELEMENT_SEARCH_BUTTON);
+    $(ELEMENT_SEARCH_BUTTON).click();
   }
 
   /**
@@ -1346,6 +1346,7 @@ public class RichTextEditor {
 
   /**
    * Check auto save essage
+   * 
    * @param title String
    * @param content String
    */
@@ -1374,11 +1375,12 @@ public class RichTextEditor {
    * @param page String
    */
   public void selectPageInSearchTab(String page) {
-    if (evt.waitForAndGetElement(ELEMENT_SEARCH_TAB_PAGE_SELECTED.replace("${page}", page), 5000, 0) != null) {
+    if ($(byXpath(ELEMENT_SEARCH_TAB_PAGE_SELECTED.replace("${page}", page))).waitUntil(Condition.visible,
+                                                                                        Configuration.timeout) != null) {
       info("Select the page");
-      evt.click(ELEMENT_SEARCH_TAB_PAGE_SELECTED.replace("${page}", page));
+      $(By.xpath(ELEMENT_SEARCH_TAB_PAGE_SELECTED.replace("${page}", page))).click();
       info("Click on Select button");
-      evt.click(ELEMENT_SELECT_BUTTON);
+      $(ELEMENT_SELECT_BUTTON).click();
     }
 
   }
@@ -1636,8 +1638,6 @@ public class RichTextEditor {
     info("Click on Edit Macro link");
     evt.mouseOverAndClick(ELEMENT_EDIT_MACRO_LINK);
   }
-
-
 
   /**
    * Collapse all macro
