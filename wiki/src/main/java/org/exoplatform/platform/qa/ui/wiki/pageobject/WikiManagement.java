@@ -33,6 +33,7 @@ public class WikiManagement {
 
   /**
    * constructor
+   * 
    * @param testBase TestBase
    */
   public WikiManagement(TestBase testBase) {
@@ -45,6 +46,7 @@ public class WikiManagement {
 
   /**
    * Select template to create page
+   * 
    * @param eTemplate SelenideElement
    */
   public void selectTemplateWikiPage(SelenideElement eTemplate) {
@@ -302,6 +304,7 @@ public class WikiManagement {
 
   /**
    * Delete an attachment file
+   * 
    * @param file String
    */
   public void deleteAttachmentFile(String file) {
@@ -377,6 +380,7 @@ public class WikiManagement {
 
   /**
    * Watch a page
+   * 
    * @param mess String
    */
   public void watchAPage(String mess) {
@@ -396,6 +400,7 @@ public class WikiManagement {
 
   /**
    * un-Watch a page
+   * 
    * @param mess String
    */
   public void unWatchAPage(String mess) {
@@ -599,6 +604,6 @@ public class WikiManagement {
     goToPreviewPage();
     // evt.waitForAndGetElement(ELEMENT_PREVIEW_TEMPLATE_CONTENT.replace("${template}",
     // title), testBase.getDefaultTimeout(), 1);
-    evt.waitForAndGetElement(ELEMENT_PREVIEW_PAGE_CONTENT.replace("${content}", content), testBase.getDefaultTimeout(), 1);
+    $(byXpath(ELEMENT_PREVIEW_PAGE_CONTENT.replace("${content}", content))).waitUntil(Condition.visible, Configuration.timeout);
   }
 }
