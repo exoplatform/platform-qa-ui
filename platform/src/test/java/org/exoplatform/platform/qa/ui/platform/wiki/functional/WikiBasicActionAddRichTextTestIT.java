@@ -23,6 +23,7 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
  */
 
 @Tag("functional")
+@Tag("wiki")
 
 public class WikiBasicActionAddRichTextTestIT extends Base {
   HomePagePlatform homePagePlatform;
