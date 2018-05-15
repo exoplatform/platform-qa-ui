@@ -167,20 +167,21 @@ public class PlfNavigationLeftNavigationTestIT extends Base {
     info("Test 4: Display Subnavigations in Group Navigation panel");
     String title = "title" + getRandomNumber();
     String title2 = "title2" + getRandomNumber();
+    String groupAdmin =  "Development";
 
     info("Add a note to left Navigation menu");
     navigationToolbar.goToPotalSites();
-    portalManageSites.goToEditNavigation();
+    portalManageSites.goToEditLayout(groupAdmin);
     navigationManagement.addNode(title, "");
     navigationManagement.saveNode();
     info("Verify that the node is added");
     ELEMENT_LEFT_NAVIGATION_NODE_CHECK.find(byText(title)).waitUntil(Condition.appears, Configuration.timeout);
 
-    portalManageSites.goToEditNavigation();
+    portalManageSites.goToEditLayout(groupAdmin);
     navigationManagement.addNode(title, title2);
     navigationManagement.saveNode();
     executeJavaScript("window.scrollBy(0,-350);", "");
-    portalManageSites.goToEditNavigation();
+    portalManageSites.goToEditLayout(groupAdmin);
     ELEMENT_NAVIGATION_NODE_CHECK.find(byText(title)).scrollTo().click();
     ELEMENT_NAVIGATION_NODE_CHECK.find(byText(title2)).waitUntil(Condition.appears, Configuration.timeout);
     navigationManagement.deleteNode(title);

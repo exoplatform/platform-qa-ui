@@ -4,6 +4,7 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -31,12 +32,10 @@ public class NavigationManagement {
   /**
    * Open Navigation Management popup
    *
-   * @param site as acme or intranet or a group
    */
   public void goToEditNavigation(String site) {
-    evt.waitForAndGetElement(ELEMENT_MANAGESITES_EDIT_NAVIGATION_ICON.replace("${site}", site), 3000, 0);
-    evt.click(ELEMENT_MANAGESITES_EDIT_NAVIGATION_ICON.replace("${site}", site));
-    evt.waitForAndGetElement(ELEMENT_NAVIGATION_MANAGEMENT_POPUP_TITLE, 3000, 0);
+    $(byXpath(ELEMENT_MANAGESITES_EDIT_NAVIGATION_ICON.replace("${site}", site))).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_NAVIGATION_MANAGEMENT_POPUP_TITLE).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -46,7 +45,7 @@ public class NavigationManagement {
    */
   public void goToEditLayout(String site) {
     info("Click on Edit layout button");
-    evt.click(ELEMENT_MANAGESITES_EDIT_LAYOUT_ICON.replace("${site}", site));
+    $(ELEMENT_MANAGESITES_EDIT_LAYOUT_ICON.replace("${site}", site)).click();
 
   }
 
@@ -58,7 +57,7 @@ public class NavigationManagement {
   public void changeConfig(String site) {
     goToEditLayout(site);
     info("Click on site's config button");
-    evt.click(ELEMENT_MANAGESITES_EDIT_LAYOUT_SITE_CONFIG_BTN);
+  $(ELEMENT_MANAGESITES_EDIT_LAYOUT_SITE_CONFIG_BTN).click();
 
   }
 
@@ -69,7 +68,7 @@ public class NavigationManagement {
    */
   public void goToEditSiteConfig(String site) {
     info("Click on Edit Site Configuration button");
-    evt.click(ELEMENT_MANAGESITES_EDIT_CONFIG_ICON.replace("${site}", site));
+   $(ELEMENT_MANAGESITES_EDIT_CONFIG_ICON.replace("${site}", site)).click();
 
   }
 
@@ -94,22 +93,22 @@ public class NavigationManagement {
       break;
     case COPY_NODE:
       info("Click on Copy node");
-      evt.click(ELEMENT_MANAGESITES_CONTEXTMENU_COPY_ICON);
+      $(ELEMENT_MANAGESITES_CONTEXTMENU_COPY_ICON).click();
 
       break;
     case CLONE_NODE:
       info("Click on Clone node");
-      evt.click(ELEMENT_MANAGESITES_CONTEXTMENU_CLONE_ICON);
+     $(ELEMENT_MANAGESITES_CONTEXTMENU_CLONE_ICON).click();
 
       break;
     case CUT_NODE:
       info("Click on Cut node");
-      evt.click(ELEMENT_MANAGESITES_CONTEXTMENU_CUT_ICON);
+      $(ELEMENT_MANAGESITES_CONTEXTMENU_CUT_ICON).click();
 
       break;
     case PASTE_NODE:
       info("Click on Paste node");
-      evt.clickByJavascript(ELEMENT_MANAGESITES_CONTEXTMENU_PASTE_ICON);
+      $(ELEMENT_MANAGESITES_CONTEXTMENU_PASTE_ICON).click();
 
       break;
     case DELETE_NODE:
@@ -119,12 +118,12 @@ public class NavigationManagement {
       break;
     case MOVE_UP:
       info("Click on Moveup node");
-      evt.clickByJavascript(ELEMENT_MANAGESITES_CONTEXTMENU_MOVE_UP_ICON);
+      $(ELEMENT_MANAGESITES_CONTEXTMENU_MOVE_UP_ICON).click();
 
       break;
     case MOVE_DOWN:
       info("Click on Move down node");
-      evt.clickByJavascript(ELEMENT_MANAGESITES_CONTEXTMENU_MOVE_DOWN_ICON);
+      $(ELEMENT_MANAGESITES_CONTEXTMENU_MOVE_DOWN_ICON).click();
 
       break;
     }
@@ -159,7 +158,7 @@ public class NavigationManagement {
   public void deleteNode(String title) {
     info("Delete a node");
     info("Right click on the node");
-
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
     $(byClassName("uiNavigationManagement")).find(byText(title)).scrollTo().contextClick();
     info("Select Delete link");
     selectItem(specifiContextMenu.DELETE_NODE);
@@ -205,7 +204,8 @@ public class NavigationManagement {
   public void copyNode(String name) {
     info("Copy a node");
     info("Right click on the node");
-    evt.rightClickOnElement(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name));
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    $(byXpath(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name))).contextClick();
     info("Select Edit link");
     selectItem(specifiContextMenu.COPY_NODE);
   }
@@ -218,7 +218,8 @@ public class NavigationManagement {
   public void cloneNode(String name) {
     info("Clone a node");
     info("Right click on the node");
-    evt.rightClickOnElement(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name));
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    $(byXpath(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name))).contextClick();
     info("Select Edit link");
     selectItem(specifiContextMenu.CLONE_NODE);
   }
@@ -231,7 +232,8 @@ public class NavigationManagement {
   public void cutNode(String name) {
     info("Cut a node");
     info("Right click on the node");
-    evt.rightClickOnElement(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name));
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+   $(byXpath(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name))).contextClick();
     info("Select Edit link");
     selectItem(specifiContextMenu.CUT_NODE);
   }
@@ -244,7 +246,8 @@ public class NavigationManagement {
   public void pasteNode(String name) {
     info("Paste a node");
     info("Right click on the node");
-    evt.rightClickOnElement(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name));
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    $(byXpath(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name))).contextClick();
     info("Select Edit link");
     selectItem(specifiContextMenu.PASTE_NODE);
   }
@@ -257,7 +260,8 @@ public class NavigationManagement {
   public void moveUpNode(String name) {
     info("Move up a node");
     info("Right click on the node");
-    evt.rightClickOnElement(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name));
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+   $(byXpath(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name))).contextClick();
     info("Select Edit link");
     selectItem(specifiContextMenu.MOVE_UP);
   }
@@ -270,7 +274,8 @@ public class NavigationManagement {
   public void moveDownNode(String name) {
     info("Move down a node");
     info("Right click on the node");
-    evt.rightClickOnElement(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name));
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    $(byXpath(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name))).contextClick();
     info("Select Edit link");
     selectItem(specifiContextMenu.MOVE_DOWN);
   }
