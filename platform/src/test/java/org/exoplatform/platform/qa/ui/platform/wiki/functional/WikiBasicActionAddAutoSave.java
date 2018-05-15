@@ -6,6 +6,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
@@ -21,6 +22,10 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
 /**
  * Created by exo on 5/11/18.
  */
+
+@Tag("wiki")
+@Tag("functional")
+
 public class WikiBasicActionAddAutoSave extends Base {
 
   HomePagePlatform homePagePlatform;
@@ -155,16 +160,13 @@ public class WikiBasicActionAddAutoSave extends Base {
    * without saving for 30s Input Data: Expected Outcome: - A draft is created
    * after 30s Step number: 2 Step Name: Step 2: Session work expired Step
    * Description: - Keep the session opened until time expiration Input Data:
-   * Expected Outcome: - The session is expired
-   */
-
-  /*
-   * Step number: 3 Step Name: Step 3: Autosave a page as draft Step Description:
-   * - Re-connect to the session - Go to "My draft" Input Data: Expected Outcome:
-   * - The draft is displayed in the list Step number: 4 Step Name: Step 4: Check
-   * show draft page Step Description: - Click on the link "Title" of the draft
-   * Input Data: Expected Outcome: The page is displayed in edit mode and the last
-   * saved content is displayed
+   * Expected Outcome: - The session is expired Step number: 3 Step Name: Step 3:
+   * Autosave a page as draft Step Description: - Re-connect to the session - Go
+   * to "My draft" Input Data: Expected Outcome: - The draft is displayed in the
+   * list Step number: 4 Step Name: Step 4: Check show draft page Step
+   * Description: - Click on the link "Title" of the draft Input Data: Expected
+   * Outcome: The page is displayed in edit mode and the last saved content is
+   * displayed
    */
   @BugInPLF("WIKI-1418")
   @Test
