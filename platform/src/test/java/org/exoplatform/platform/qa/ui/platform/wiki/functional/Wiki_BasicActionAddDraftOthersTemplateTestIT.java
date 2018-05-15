@@ -7,6 +7,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.SelenideElement;
@@ -20,6 +21,10 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
 /**
  * Created by exo on 5/11/18.
  */
+
+@Tag("functional")
+@Tag("wiki")
+
 public class Wiki_BasicActionAddDraftOthersTemplateTestIT extends Base {
 
   HomePagePlatform homePagePlatform;
@@ -58,17 +63,18 @@ public class Wiki_BasicActionAddDraftOthersTemplateTestIT extends Base {
    * <li>Case ID:118451.</li>
    * <li>Test Case Name: Add a page with link wiki page existed.</li>
    * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
+   * <li>Post-Condition:</li> Step Number: 1 Step Name: Step 1: Step Description:
+   * - Connect with the user A - Go to [Intranet] --> [Wiki] - Click [Add Page]
+   * --> [Blank Page]/[From Template...] - Enter the required fields without
+   * saving for 30s Input Data: Expected Outcome: The draft is saved after 30s
+   * Step Number: 2 Step Name: Step 2: Step Description: - Connect with the user B
+   * - Go to [Intranet] --> [Wiki] - From the menu "Browse", choose "My drafts"
+   * Input Data: Expected Outcome: The draft created by the user A doesn't appear
+   * in the list of drafts of the user B
    */
   @Test
   public void test01_ViewADraftForAnotherUser() {
     info("Test 1: View a draft for another user");
-    /*
-     * Step Number: 1 Step Name: Step 1: Step Description: - Connect with the user A
-     * - Go to [Intranet] --> [Wiki] - Click [Add Page] --> [Blank Page]/[From
-     * Template...] - Enter the required fields without saving for 30s Input Data:
-     * Expected Outcome: The draft is saved after 30s
-     */
 
     info("Create a draft");
     String title = "title" + getRandomNumber();
@@ -76,17 +82,9 @@ public class Wiki_BasicActionAddDraftOthersTemplateTestIT extends Base {
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddBlankPage();
     richTextEditor.addSimplePageHasAutoSaveWithoutSave(title, content);
-
     info("Verify draft exists in draft list");
     wikiHomePage.goToMyDraft();
     wikiValidattions.verifyDraftExistsInDraftListOrNot(title, true);
-
-    /*
-     * Step Number: 2 Step Name: Step 2: Step Description: - Connect with the user B
-     * - Go to [Intranet] --> [Wiki] - From the menu "Browse", choose "My drafts"
-     * Input Data: Expected Outcome: The draft created by the user A doesn't appear
-     * in the list of drafts of the user B
-     */
     info("Sign in with Mary");
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     info("Go to Myfraft and verify that draft created in step 1 does not exist in draft list");
