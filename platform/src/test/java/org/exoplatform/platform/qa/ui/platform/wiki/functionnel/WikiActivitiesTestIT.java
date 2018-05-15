@@ -5,6 +5,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
@@ -19,6 +20,10 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.SourceTextEditor;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
+
+
+@Tag("wiki")
+@Tag("functionnel")
 
 public class WikiActivitiesTestIT extends Base {
 
@@ -451,9 +456,6 @@ public class WikiActivitiesTestIT extends Base {
    * Step Description: - Back to activity stream - Move the mouse over the Wiki
    * activity for space Input Data: Expected Outcome: A (X) icon is displayed in
    * the top right panel of the activity
-   */
-
-  /*
    * Step number: 3 Step Name: Step 3: Delete wiki's activity Step Description: -
    * Click on the (X) icon - Click on [OK] button of confirmation message Input
    * Data: Expected Outcome: The Wiki activity for spaceis removed from the

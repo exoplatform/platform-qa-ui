@@ -109,7 +109,7 @@ public class ActivityStream {
    */
   public void checkNotShownActivity(String name) {
     info("Verify that the activity of the name:" + name + " isnot shown");
-    $(By.xpath(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("${title}", name)));
+    $(byXpath(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("${title}", name))).shouldNotBe(Condition.visible);
     info("The activity of the name:" + name + " isnot shown successfully");
   }
 
