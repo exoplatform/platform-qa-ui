@@ -2347,7 +2347,7 @@ public final class SocialLocator {
                                                                                   .find(byClassName("btn"));
 
   public static final SelenideElement ELEMENT_NAME_PROFILE_OF_USERS                                     =
-                                                                    $(byId("UIBreadCrumbsNavigationPortlet"));
+                                                                    $(byId("UIUserNavigationPortlet"));
 
   public static final SelenideElement ELEMENT_MINI_CONNECTION_PORTLET= $(byId("UIMiniConnectionsPortlet"));
   public static final By              ELEMENT_TASK_TAB                                                  =

@@ -35,8 +35,8 @@ public class AnswerManagement {
     if ($(byText(question)).parent().parent().find(ELEMENT_QUESTION_MORE_ACTION_BUTTON).is(Condition.not(Condition.visible))) {
       $(byText(question)).click();
     }
-    String idQuestion = $(byText(question)).parent().parent().parent().parent().parent().getAttribute("id");
-    $(byXpath(ELEMENT_ANSWER_QUESTION.replace("{IdQuestion}", idQuestion))).click();
+    $(ELEMENT_ANSWER_BUTTON).click();
+    $(ELEMENT_ANSWER_FORM).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**

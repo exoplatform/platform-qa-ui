@@ -4,6 +4,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -290,6 +291,7 @@ public class MyNotificationsSetting {
         evt.check(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX, 2);
         info("Click on Save button");
         $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).click();
+        $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
         info("Verify that intranet notification is shown");
         evt.waitForAndGetElement(ELEMENT_NEW_USER_INTRANET_ICON, 3000, 1);
         break;
@@ -319,7 +321,8 @@ public class MyNotificationsSetting {
           repeat++;
         }
         info("Click on Save button");
-        evt.click(ELEMENT_EDIT_RECREQ_SAVE_BTN);
+        $(ELEMENT_EDIT_RECREQ_SAVE_BTN).click();
+        $(ELEMENT_EDIT_RECREQ_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
         info("Verify that Intranet notification is shown");
         evt.waitForAndGetElement(ELEMENT_CONNECTION_REQ_INTRANET_ICON, 3000, 1);
         break;
@@ -345,7 +348,9 @@ public class MyNotificationsSetting {
           $(ELEMENT_EDIT_COMMENT_WEB_CHECKBOX).click();
         }
         info("Click on Save button");
+        $(ELEMENT_ACCOUNT_NAME_LINK).click();
         $(ELEMENT_EDIT_COMMENT_SAVE_BTN).click();
+        $(ELEMENT_EDIT_COMMENT_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
         info("Verify that Intranet notification is shown");
         evt.waitForAndGetElement(ELEMENT_COMMENT_INTRANET_ICON, 3000, 1);
         break;
@@ -366,13 +371,14 @@ public class MyNotificationsSetting {
         evt.waitForAndGetElement(ELEMENT_LIKE_MAIL_ICON, 3000, 1);
         break;
       case AS_Like_intranet:
-        refresh();
+        $(ELEMENT_ACCOUNT_NAME_LINK).click();
         $(ELEMENT_EDIT_LIKE_ICON).click();
         if($(ELEMENT_EDIT_LIKE_WEB_CHECKBOX).is(Condition.not(Condition.selected))){
           $(ELEMENT_EDIT_LIKE_WEB_CHECKBOX).click();
         }
         info("Click on Save button");
         $(ELEMENT_EDIT_LIKE_SAVE_BTN).click();
+        $(ELEMENT_EDIT_LIKE_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
         info("Verify that email notification is shown");
         evt.waitForAndGetElement(ELEMENT_LIKE_INTRANET_ICON, 3000, 1);
         break;

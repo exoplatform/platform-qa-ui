@@ -284,7 +284,7 @@ public class AnswerLocator {
           "//*[contains(@class,'voteResult')]//*[contains(text(),'$index')]";
   // answer form
   public static final By              ELEMENT_ANSWER_BUTTON                                 =
-          By.xpath("//*[@class='questionAction']//*[text()='answer']");
+          By.xpath("//*[@class='questionAction']//*[text()='Answer']");
   public static final By              ELEMENT_ANSWER_FORM                                   = By.id("UIResponseForm");
   public static final By              ELEMENT_ANSWER_FORM_DATA_FRAME_INPUT                  =
           By.xpath("//*[@class='cke_wysiwyg_frame cke_reset']");

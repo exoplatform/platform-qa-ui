@@ -725,6 +725,7 @@ public class EventManagement {
    */
   public void saveAddEventDetails() {
     info("Sae add event details");
+    if($(ELEMENT_ADD_EDIT_EVENT_NAME).is(Condition.visible))
     $(ELEMENT_ADD_EDIT_EVENT_NAME).click();
     ELEMENT_BUTTON_EVENT_SAVE_DETAILS.waitUntil(Condition.appears, Configuration.timeout);
     // click(ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
