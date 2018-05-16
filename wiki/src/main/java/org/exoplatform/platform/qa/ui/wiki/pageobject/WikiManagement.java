@@ -104,7 +104,7 @@ public class WikiManagement {
    */
   public void savePage() {
     info("Save all changes");
-    evt.click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
+    $(ELEMENT_SAVE_BUTTON_ADD_PAGE).click();
   }
 
   /**

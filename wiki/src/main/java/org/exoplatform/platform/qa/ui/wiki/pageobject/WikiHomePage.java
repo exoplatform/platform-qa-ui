@@ -198,8 +198,9 @@ public class WikiHomePage {
         $(ELEMENT_CONFIRM_POPUP_OK_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
       }
       if ($(ELEMENT_CONFIRM_POPUP_CONFIRM_BTN).is(Condition.visible)) {
+
         info("Click on Confirm button");
-        $(ELEMENT_CONFIRM_POPUP_CONFIRM_BTN).click();
+       $(ELEMENT_CONFIRM_POPUP_CONFIRM_BTN).click();
       }
       if ($(ELEMENT_CONFIRM_POPUP_YES_BTN).is(Condition.visible)) {
         info("Click on Yes button");

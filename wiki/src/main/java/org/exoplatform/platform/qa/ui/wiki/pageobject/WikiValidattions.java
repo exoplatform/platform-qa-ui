@@ -382,7 +382,7 @@ public class WikiValidattions {
    */
   public void verifyEmptyContentPage() {
     info("Verify that the content page is empty");
-    evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_PAGE_EMPTY, 2000, 1, 2);
+    $(ELEMENT_CONTENT_WIKI_PAGE_EMPTY).parent().waitUntil(Condition.visible,Configuration.timeout);
     info("the page's content is empty");
   }
 
