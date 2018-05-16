@@ -1,4 +1,3 @@
-
 package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
