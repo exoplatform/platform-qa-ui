@@ -26,7 +26,7 @@
   <parent>
     <artifactId>maven-parent-pom</artifactId>
     <groupId>org.exoplatform</groupId>
-    <version>17-M01</version>
+    <version>18-M02</version>
     <relativePath />
   </parent>
   <groupId>org.exoplatform.platform.qa.ui</groupId>
@@ -56,7 +56,7 @@
   </scm>
   <properties>
     <!-- PLF dependencies -->
-    <org.exoplatform.depmgt.version>13-SNAPSHOT</org.exoplatform.depmgt.version>
+    <org.exoplatform.platform.version>5.1.x-SNAPSHOT</org.exoplatform.platform.version>
     <!-- Override Maven Surefire/Failsafe plugins versions -->
     <version.surefire.plugin>2.19.1</version.surefire.plugin>
     <!-- Dependencies for UI Tests -->
@@ -82,9 +82,9 @@
     <!-- Import versions of external dependencies to use -->
     <dependencies>
       <dependency>
-        <groupId>org.exoplatform</groupId>
-        <artifactId>maven-depmgt-pom</artifactId>
-        <version>${org.exoplatform.depmgt.version}</version>
+        <groupId>org.exoplatform.platform</groupId>
+        <artifactId>platform</artifactId>
+        <version>${org.exoplatform.platform.version}</version>
         <type>pom</type>
         <scope>import</scope>
         <exclusions>
