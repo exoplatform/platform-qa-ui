@@ -40,13 +40,8 @@ public class SpaceHomePage {
     info("--Open Setting tab of the space");
     info("Click on the tab");
 
-    if ($(ELEMENT_SPACE_SPACE_SETTINGS).is(Condition.not(Condition.visible))) {
+    if  ($(ELEMENT_SPACE_MENU_MORE).is(Condition.visible)) {
       $(ELEMENT_SPACE_MENU_MORE).click();
-      $(ELEMENT_SPACE_SPACE_SETTINGS).click();
-    } else {
-      if($(ELEMENT_SPACE_SPACE_SETTINGS).is(Condition.not(Condition.visible))){
-        refresh();
-      }
       $(ELEMENT_SPACE_SPACE_SETTINGS).click();
       $(ELEMENT_SPACE_SPACE_SETTINGS_TITLE).waitUntil(Condition.appears, Configuration.timeout);
       info("Space setting page is shown");

@@ -343,6 +343,7 @@ public class MyNotificationsSetting {
         evt.waitForAndGetElement(ELEMENT_COMMENT_MAIL_ICON, 3000, 1);
         break;
       case AS_Comment_intranet:
+        $(ELEMENT_ACCOUNT_NAME_LINK).click();
         $(ELEMENT_EDIT_COMMENT_ICON).click();
         if($(ELEMENT_EDIT_COMMENT_WEB_CHECKBOX).is(Condition.not(Condition.selected))){
           $(ELEMENT_EDIT_COMMENT_WEB_CHECKBOX).click();

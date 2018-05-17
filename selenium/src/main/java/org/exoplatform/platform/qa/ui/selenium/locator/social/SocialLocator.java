@@ -2324,7 +2324,7 @@ public final class SocialLocator {
                                                                    $(byId("UIUserNavigationPortlet"));
 
   public static final SelenideElement ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE                         =
-                                                                                $(byXpath("//*[@id=\"spaceMenuTab\"]/li[8]/ul"));
+                                                                                $(byXpath("//*[@id=\"spaceMenuTab\"]/li[7]/ul"));
 
   public static final SelenideElement ELEMENT_LIST_OF_EXISTED_APPLICATION_IN_APPLICATION_TAB            =
                                                                                              $(byId("UITabPanetab3"));
