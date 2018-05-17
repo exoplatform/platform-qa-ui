@@ -608,29 +608,10 @@ public class NavigationToolbar {
    */
   public void goToEditSiteLayout() {
     info("Go to Edit layout form");
-    for(int repeat=0;; repeat ++){
-      if (repeat > 1){
         $(ELEMENT_LINK_EDIT).click();
-        $(ELEMENT_LINK_EDIT).hover();
-        break;
-      }
-      $(ELEMENT_LINK_EDIT).hover();
-      if ($(ELEMENT_MENU_EDIT_SITES).waitUntil(Condition.visible,Configuration.timeout)!= null) {
-        info("-- Click Site menu --");
-        $( ELEMENT_MENU_EDIT_SITES).hover();
-        if ($(ELEMENT_MENU_EDIT_SITE_LAYOUT).waitUntil(Condition.visible,Configuration.timeout)!= null){
-          $(ELEMENT_MENU_EDIT_SITE_LAYOUT).click();
-          break;
-        }
-      }
-      else{
-        String editPageRequest = "ajaxGet(eXo.env.server.createPortalURL('UIWorkingWorkspace', 'EditInline', true))";
-        info("editPageRequest:"+editPageRequest);
-        ((JavascriptExecutor)driver).executeScript(editPageRequest);
-        break;
-      }
-      info("Retry...[" + repeat + "]");
-    }
+        $( ELEMENT_MENU_EDIT_SITES).waitUntil(Condition.visible,Configuration.timeout).hover();
+        $(ELEMENT_MENU_EDIT_SITE_LAYOUT).waitUntil(Condition.visible,Configuration.timeout).click();
+
   }
 
   /**

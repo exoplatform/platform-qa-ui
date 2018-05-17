@@ -1,14 +1,18 @@
 package org.exoplatform.platform.qa.ui.platform.wiki.functional;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.WebDriverRunner.url;
 import static org.exoplatform.platform.qa.ui.selenium.DownloadFileControl.driver;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_TITLE_WIKI_HOME_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
@@ -24,6 +28,10 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 /**
  * Created by exo on 5/10/18.
  */
+
+@Tag("wiki")
+@Tag("functional")
+
 public class WikiBasicActionPublicPageTestIT extends Base {
 
   ManageLogInOut    manageLogInOut;
@@ -81,6 +89,8 @@ public class WikiBasicActionPublicPageTestIT extends Base {
    * Logout Step Description: - Log out Input Data: Expected Outcome: - Log out
    * normally and no exception throws for this logout. - Wiki home is displayed
    */
+
+  @BugInPLF("WIKI-1421")
   @Test
   public void test01_MakeAWikiPageInPublicMode() {
     info("Test 1: Make a Wiki page in public mode");
@@ -95,7 +105,7 @@ public class WikiBasicActionPublicPageTestIT extends Base {
     manageLayout.publicModePortlet(ManageLayout.homePortletName.Space);
     manageLayout.saveChangesSiteLayout();
     homePagePlatform.goToWiki();
-    String wiki_url = driver.getCurrentUrl();
+    String wiki_url = url();
     navigationToolbar.goToEditLayout();
     manageLayout.goToPagePropertiesPopup();
     manageLayout.goToPagePermissionTab();
@@ -105,7 +115,7 @@ public class WikiBasicActionPublicPageTestIT extends Base {
     manageLayout.saveChangesContainerPopup();
     manageLayout.saveChangesPageLayout();
     manageLogInOut.signOut();
-    driver.get(wiki_url);
+    open(wiki_url);
     info("Verify that wiki home page is shown");
     waitForAndGetElement(ELEMENT_TITLE_WIKI_HOME_LINK);
 
