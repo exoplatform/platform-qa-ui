@@ -994,7 +994,8 @@ $(byXpath("//*[@id=\"UIEventForm\"]/div[4]/button[2]")).click();
     ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(titleEvent))
                                         .parent()
                                         .parent()
-                                        .find(byText(getDate(0, "HH") + ":13" + " - " + getDate(0, "HH") + ":58"));
+                                        .find(byText(getDate(0, "HH") + ":13" + " - " + getDate(0, "HH") + ":58"))
+                                        .shouldBe(Condition.visible);
     calendarHomePage.deleteEventTask(titleEvent,
                                      CalendarHomePage.selectViewOption.WEEK,
                                      CalendarHomePage.selectDayOption.DETAILTIME,
