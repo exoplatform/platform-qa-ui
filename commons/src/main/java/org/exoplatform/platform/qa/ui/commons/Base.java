@@ -23,6 +23,7 @@ package org.exoplatform.platform.qa.ui.commons;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_PASSWORD_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -76,8 +77,7 @@ public class Base extends TestBase {
     if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.visible))
         && $(ELEMENT_INPUT_PASSWORD_CAS).is(Condition.not(Condition.visible))) {
       manageLogInOut.signOut();
-      $(ELEMENT_INPUT_USERNAME_CAS).shouldBe(Condition.visible);
-      $(ELEMENT_INPUT_PASSWORD_CAS).shouldBe(Condition.visible);
+      assertEquals(getExoWebDriver().getWebDriver().getCurrentUrl(), "http://www.atis-network.be/");
     }
     Screenshots.finishContext();
   }

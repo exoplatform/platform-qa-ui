@@ -23,7 +23,6 @@ package org.exoplatform.platform.qa.ui.commons.pageobject;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
 
-import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.openqa.selenium.By;
 
