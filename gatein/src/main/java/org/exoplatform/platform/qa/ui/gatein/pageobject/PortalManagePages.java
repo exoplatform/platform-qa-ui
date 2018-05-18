@@ -1,10 +1,14 @@
 package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
+import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -45,19 +49,59 @@ public class PortalManagePages {
    * @param type String
    * @param verify  boolean
    */
+
   public void searchPage(String title, String siteName, String type, boolean... verify) {
 
     info("waiting the page is loaded full");
-    evt.waitForAndGetElement(ELEMENT_MANAGEPAGES_TITLE_FIELD);
+    $(ELEMENT_MANAGEPAGES_TITLE_FIELD).waitUntil(Condition.visible, Configuration.timeout);
+    if (!title.isEmpty()) {
+      info("Input a new title");
+      $(ELEMENT_MANAGEPAGES_TITLE_FIELD).scrollTo().setValue(title).waitUntil(Condition.visible,Configuration.timeout);
+    }
 
     if (!siteName.isEmpty()) {
       info("Input a new site Name");
-      evt.type(ELEMENT_MANAGEPAGES_SITES_NAME_FIELD, siteName, true);
+      $(ELEMENT_MANAGEPAGES_SITES_NAME_FIELD).setValue(siteName).waitUntil(Condition.visible,Configuration.timeout);
     }
+
     if (!type.isEmpty()) {
       info("Select a type");
-      $(ELEMENT_MANAGEPAGES_TYPE_DROPBOX).selectOption(type);
+      $(ELEMENT_MANAGEPAGES_TYPE_DROPBOX).selectOption("group");
     }
+    try {
+
+    info("Click on Search button");
+    executeJavaScript("window.scrollBy(0,-350);", "");
+      $(byId("pageId")).click();
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+
+    $(ELEMENT_MANAGEPAGES_SEARCH_BUTTON).click();
+
+      info("Verify that the search page is shown with correct results");
+      $(byText(title)).should(Condition.exist);
+
+/*
+      $(byText(title)).should(Condition.exist);
+      if (!title.isEmpty())
+
+               $(byXpath(ELEMENT_MANAGEPAGES_CONTENT_TITLE_COLUMN.replace("${title}", title))).waitUntil(Condition.visible,Configuration.timeout);
+      if (!siteName.isEmpty() & !type.isEmpty())
+
+                $(byXpath(ELEMENT_MANAGEPAGES_CONTENT_SEARCH_TABLE.replace("${type}", type).replace("${siteName}", siteName).replace("${title}", title))).waitUntil(Condition.visible,Configuration.timeout);
+
+
+    }
+
+
+
+
+
+
+
+
     $(ELEMENT_MANAGEPAGES_TITLE_FIELD).waitUntil(Condition.appears, Configuration.timeout);
     info("Input a new title");
     $(ELEMENT_MANAGEPAGES_TITLE_FIELD).scrollTo().setValue(title);
@@ -71,12 +115,13 @@ public class PortalManagePages {
     $(byText(title)).should(Condition.exist);
   }
 
-  /**
    * Delete a page
    *
    * @param titlePage String
    * @param type String
    */
+  }
+
   public void deletePage(String titlePage, String type) {
     info("Delete a page");
     searchPage(titlePage, "", type);
@@ -112,7 +157,7 @@ public class PortalManagePages {
   public void addPage(String pageName, String title, String type, boolean... isMaxWindow) {
     info("Click on Add new Page button");
 
-    $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_BTN).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_BTN).scrollTo(). waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_BTN).scrollTo().click();
     $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_PAGE_NAME).setValue(pageName);
     $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_TITLE).setValue(title);

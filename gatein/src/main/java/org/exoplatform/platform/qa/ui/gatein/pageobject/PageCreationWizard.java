@@ -5,6 +5,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.jcp.xml.dsig.internal.dom.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
@@ -29,7 +30,7 @@ public class PageCreationWizard {
 
   public ContentList           contList;
 
-  public ManageAlert           magAlert;
+  public ManageAlert           manageAlert;
 
   public Button                but;
 
@@ -44,7 +45,7 @@ public class PageCreationWizard {
     this.evt = testBase.getElementEventTestBase();
     this.contList = new ContentList(testBase);
     this.contDetail = new ContentDetail(testBase);
-    this.magAlert = new ManageAlert(testBase);
+    this.manageAlert = new ManageAlert(testBase);
     this.but = new Button(testBase);
     this.portMgPg = new PortalManagePages(testBase);
   }
@@ -208,28 +209,27 @@ public class PageCreationWizard {
    * @param numRow this name of containers as: oneRow,twoRow...
    * @param verify boolean
    */
-  public void addContainer(String numRow, boolean... verify) {
-    evt.click(ELEMENT_CONTAINER_TAB);
-    boolean isVerify = (verify.length > 0 ? verify[0] : true);
+  public static void addContainer(String numRow, boolean... verify){
+    $(ELEMENT_CONTAINER_TAB).click();
+    boolean isVerify = (verify.length > 0 ? verify[0]: true);
     info("Add container");
     info("Add new container: " + numRow);
-    try {
-      evt.click(ELEMENT_CONTAINER_TAB);
-    } catch (org.openqa.selenium.UnhandledAlertException e) {
-      magAlert.waitForConfirmation("The target block ID to update is not found : EmptyAjaxBlock", 40000);
-      testBase.clearCache();
-    }
-    evt.click(By.linkText("Rows Layout"));
-    evt.dragAndDropToObject(By.id(numRow), By.className("UIRowContainer"));
+    try{
+      $(ELEMENT_CONTAINER_TAB).click();
+    }catch(org.openqa.selenium.UnhandledAlertException e){
 
-    if (isVerify) {
-      evt.mouseOver(ELEMENT_DROP_SOURCE_HAS_LAYOUT, true);
-      evt.waitForAndGetElement(ELEMENT_CONTAINER_TITLE.replace("${title}", "Container"));
     }
-    saveChangesPageEditor();
+    $(By.linkText("Rows Layout")).click();
+    $(byId(numRow)).dragAndDropTo($(byClassName("UIRowContainer")));
+
+    if (isVerify){
+      $(ELEMENT_DROP_SOURCE_HAS_LAYOUT).waitUntil(Condition.visible, Configuration.timeout).click();
+      $(byXpath(ELEMENT_CONTAINER_TITLE.replace("${title}","Container"))).waitUntil(Condition.visible, Configuration.timeout);
+    }
+
     info("the container is added");
-  }
 
+  }
   /**
    * Edit a container
    *
@@ -282,7 +282,7 @@ public class PageCreationWizard {
     try {
       evt.click(ELEMENT_CONTAINER_TAB);
     } catch (org.openqa.selenium.UnhandledAlertException e) {
-      magAlert.waitForConfirmation("The target block ID to update is not found : EmptyAjaxBlock", 40000);
+      manageAlert.waitForConfirmation("The target block ID to update is not found : EmptyAjaxBlock", 40000);
       testBase.clearCache();
     }
     if (!title.isEmpty()) {
@@ -341,14 +341,14 @@ public class PageCreationWizard {
     try {
       evt.click(ELEMENT_CONTAINER_TAB);
     } catch (org.openqa.selenium.UnhandledAlertException e) {
-      magAlert.waitForConfirmation("The target block ID to update is not found : EmptyAjaxBlock", 40000);
+      manageAlert.waitForConfirmation("The target block ID to update is not found : EmptyAjaxBlock", 40000);
       testBase.clearCache();
     }
     if (!name.isEmpty()) {
       evt.mouseOver(ELEMENT_DROP_SOURCE_HAS_LAYOUT_BY_NAME.replace("${name}", name), true);
 
       evt.click(ELEMENT_DELETE_CONTAINER_ICON_BY_NAME.replace("${name}", name));
-      magAlert.acceptAlert();
+      manageAlert.acceptAlert();
 
       evt.waitForElementNotPresent(ELEMENT_DELETE_CONTAINER_ICON_BY_NAME.replace("${name}", name));
     }
@@ -397,6 +397,7 @@ public class PageCreationWizard {
     info("Save change Page Editor");
     $(ELEMENT_PAGEEDITOR_FINISHBTN).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_PAGEEDITOR_FINISHBTN).click();
+
   }
 
   /**
@@ -455,7 +456,7 @@ public class PageCreationWizard {
       evt.mouseOver(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}", name), true);
 
       evt.click(ELEMENT_APPLICATION_DELETE_ICON.replace("${name}", name));
-      magAlert.acceptAlert();
+      manageAlert.acceptAlert();
 
       evt.waitForElementNotPresent(ELEMENT_APPLICATION_DELETE_ICON.replace("${name}", name));
     }
@@ -470,9 +471,9 @@ public class PageCreationWizard {
    */
   public void switchViewMode(boolean... verify) {
     info("Click on Switch view mode button");
-    evt.click(ELEMENT_SWITCH_VIEW_MODE);
+    $(ELEMENT_SWITCH_VIEW_MODE).click();
     if (verify.length > 0)
-      evt.waitForAndGetElement(ELEMENT_SWITCH_VIEW_MODE_NAME_APPLICATION_CLASS, 2000, 0);
+     $(ELEMENT_SWITCH_VIEW_MODE_NAME_APPLICATION_CLASS).waitUntil(Condition.visible, Configuration.timeout);
   }
 
   /**
@@ -651,7 +652,7 @@ public class PageCreationWizard {
   public void removeGroup(String group) {
     info("Click on Delete button of the group:" + group);
     evt.click(ELEMENT_VIEW_PROPERTIES_GROUP_REMOVE_BTN.replace("${group}", group));
-    magAlert.acceptAlert();
+    manageAlert.acceptAlert();
     info("The group is removed");
     evt.waitForElementNotPresent(ELEMENT_VIEW_PROPERTIES_GROUP_REMOVE_BTN.replace("${group}", group));
   }
@@ -917,7 +918,7 @@ public class PageCreationWizard {
     try {
       evt.click(ELEMENT_CONTAINER_TAB);
     } catch (org.openqa.selenium.UnhandledAlertException e) {
-      magAlert.waitForConfirmation("The target block ID to update is not found : EmptyAjaxBlock", 40000);
+      manageAlert.waitForConfirmation("The target block ID to update is not found : EmptyAjaxBlock", 40000);
       testBase.clearCache();
     }
     evt.click(By.linkText("Rows Layout"));
@@ -961,7 +962,7 @@ public class PageCreationWizard {
       evt.click(ELEMENT_CONTAINER_TAB);
 
     } catch (org.openqa.selenium.UnhandledAlertException e) {
-      magAlert.waitForConfirmation("The target block ID to update is not found : EmptyAjaxBlock", 40000);
+      manageAlert.waitForConfirmation("The target block ID to update is not found : EmptyAjaxBlock", 40000);
       testBase.clearCache();
     }
     if (!id.isEmpty()) {
@@ -1000,7 +1001,7 @@ public class PageCreationWizard {
       evt.click(ELEMENT_CONTAINER_TAB);
 
     } catch (org.openqa.selenium.UnhandledAlertException e) {
-      magAlert.waitForConfirmation("The target block ID to update is not found : EmptyAjaxBlock", 40000);
+      manageAlert.waitForConfirmation("The target block ID to update is not found : EmptyAjaxBlock", 40000);
       testBase.clearCache();
     }
     if (!containerId.isEmpty()) {

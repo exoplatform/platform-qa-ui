@@ -83,13 +83,9 @@ public class NavigationToolbar {
 
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
 
-    $(ELEMENT_ADMINISTRATION_PORTAL).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_ADMINISTRATION_PORTAL).waitUntil(Condition.visible,Configuration.timeout).hover();
 
-    evt.mouseOver(ELEMENT_ADMINISTRATION_PORTAL, true);
-
-    $(ELEMENT_ADMINISTRATION_PORTAL_SITES).waitUntil(Condition.appears, Configuration.timeout);
-
-    $(ELEMENT_ADMINISTRATION_PORTAL_SITES).click();
+    $(ELEMENT_ADMINISTRATION_PORTAL_SITES).waitUntil(Condition.appears, Configuration.timeout).click();
 
     $(ELEMENT_MANAGESITES_TITLE).waitUntil(Condition.appears, Configuration.timeout);
   }
@@ -112,16 +108,24 @@ public class NavigationToolbar {
    */
   public void goToPotalPages() {
     info("-- Go to Page Management page --");
-    if ($(byText("No result found.")).is(Condition.exist)) {
-      $(byText("OK")).click();
+
+    for(int repeat=0;; repeat ++){
+      if (repeat > 1){
+       $(ELEMENT_LINK_SETUP).click();
+        break;
+      }
+      //mouseOver(ELEMENT_LINK_SETUP, true);
+      $(ELEMENT_LINK_SETUP).click();
+      if ($(ELEMENT_ADMINISTRATION_PORTAL).waitUntil(Condition.visible, Configuration.timeout).is(Condition.exist)){
+        info("Element " + ELEMENT_ADMINISTRATION_PORTAL + "... is displayed");
+        break;
+      }
+      info("Retry...[" + repeat + "]");
     }
-    $(ELEMENT_LINK_SETUP).click();
-    $(ELEMENT_ADMINISTRATION_PORTAL).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_ADMINISTRATION_PORTAL).click();
+
     info("Page Managements is shown successfully");
-
   }
-
   /**
    * function: Go to Users and Group management (administration - Users -
    * Groups and Roles)

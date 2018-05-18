@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -49,7 +50,7 @@ public class PortalManageSites {
    */
   public void goToEditLayout(String site) {
     info("Click on Edit layout button");
-    evt.click(ELEMENT_MANAGESITES_EDIT_LAYOUT_ICON.replace("${site}", site));
+    $(byXpath( ELEMENT_MANAGESITES_EDIT_LAYOUT_ICON.replace("${site}", site))).click();
 
   }
 
@@ -61,7 +62,7 @@ public class PortalManageSites {
   public void changeConfig(String site) {
     goToEditLayout(site);
     info("Click on site's config button");
-    evt.click(ELEMENT_MANAGESITES_EDIT_LAYOUT_SITE_CONFIG_BTN);
+    $(ELEMENT_MANAGESITES_EDIT_LAYOUT_SITE_CONFIG_BTN).click();
 
   }
 
@@ -126,7 +127,7 @@ public class PortalManageSites {
     String[] groups = groupsPath.split("/");
     for (String groupSelect : groups) {
       info("Select group:" + groupSelect);
-      evt.click(ELEMENT_PERMISSION_SELECTOR_POPUP_GROUP.replace("${group}", groupSelect));
+     $(byXpath(ELEMENT_PERMISSION_SELECTOR_POPUP_GROUP.replace("${group}", groupSelect))).click();
     }
 
   }
@@ -138,7 +139,7 @@ public class PortalManageSites {
    */
   public void selectMemberShip(String memberShip) {
     info("Select a membership:" + memberShip);
-    evt.click(ELEMENT_PERMISSION_SELECTOR_POPUP_MEMEBRSHIP.replace("${member}", memberShip));
+    $(byXpath(ELEMENT_PERMISSION_SELECTOR_POPUP_MEMEBRSHIP.replace("${member}", memberShip))).click();
 
   }
 
@@ -147,7 +148,7 @@ public class PortalManageSites {
    */
   public void saveNewPortal() {
     info("click on Save button");
-    evt.click(ELEMENT_ADD_NEW_PORTAL_POPUP_SAVE_BTN);
+    $(ELEMENT_ADD_NEW_PORTAL_POPUP_SAVE_BTN).click();
 
   }
 
@@ -163,25 +164,25 @@ public class PortalManageSites {
   public void editSimplePortal(String portalName, String label, String des, String groupsPath, String memberShips) {
     if (!portalName.isEmpty()) {
       info("Input new name for portal name");
-      evt.type(ELEMENT_ADD_NEW_PORTAL_POPUP_NAME, portalName, true);
+      $(ELEMENT_ADD_NEW_PORTAL_POPUP_NAME).setValue(portalName).waitUntil(Condition.visible, Configuration.timeout);
     }
     if (!label.isEmpty()) {
       info("Input label");
-      evt.type(ELEMENT_ADD_NEW_PORTAL_POPUP_LABEL, label, true);
+      $(ELEMENT_ADD_NEW_PORTAL_POPUP_LABEL).setValue(label).waitUntil(Condition.visible,Configuration.timeout);
     }
     if (!des.isEmpty()) {
       info("Input description");
-      evt.type(ELEMENT_ADD_NEW_PORTAL_POPUP_DESC, des, true);
+      $(ELEMENT_ADD_NEW_PORTAL_POPUP_DESC).setValue(des).waitUntil(Condition.visible,Configuration.timeout);
     }
     info("Select permission tab");
-    evt.click(ELEMENT_ADD_NEW_PORTAL_POPUP_PERMISSION_TAB);
+   $(ELEMENT_ADD_NEW_PORTAL_POPUP_PERMISSION_TAB).click();
     info("Select public permission checkbox");
-    evt.check(ELEMENT_ADD_NEW_PORTAL_POPUP_PUBLIC_PERMISSION, 2);
+    $(ELEMENT_ADD_NEW_PORTAL_POPUP_PUBLIC_PERMISSION).waitUntil(Condition.exist, Configuration.timeout);
     if (!groupsPath.isEmpty()) {
       info("Select Edit permission settings tab");
-      evt.click(ELEMENT_ADD_NEW_PORTAL_POPUP_EDIT_PERMISSITION_SETTINGS);
+     $(ELEMENT_ADD_NEW_PORTAL_POPUP_EDIT_PERMISSITION_SETTINGS).click();
       info("Click on Select permission button");
-      evt.click(ELEMENT_ADD_NEW_PORTAL_POPUP_SELECT_PERMISSION_BTN);
+      $(ELEMENT_ADD_NEW_PORTAL_POPUP_SELECT_PERMISSION_BTN).click();
       info("Select a group");
       selectGroup(groupsPath);
       info("Select a meberships");
