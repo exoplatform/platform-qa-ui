@@ -3,15 +3,20 @@ package org.exoplatform.platform.qa.ui.platform.forum;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.core.PLFData.password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_FORUM_LINK_PLF;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
+import com.codeborne.selenide.Configuration;
+import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
+import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -26,6 +31,7 @@ import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumTopicManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
+import org.openqa.selenium.By;
 
 /**
  * @author eXo
@@ -46,6 +52,9 @@ public class ForumPostTestIT extends Base {
 
   ManageLogInOut          manageLogInOut;
 
+  NavigationToolbar navigationToolbar;
+
+  UserPageBase userPageBase;
   String                  nameCat;
 
   String                  nameForum;
@@ -62,6 +71,8 @@ public class ForumPostTestIT extends Base {
     forumHomePage = new ForumHomePage(this);
     forumCategoryManagement = new ForumCategoryManagement(this);
     manageLogInOut = new ManageLogInOut(this);
+    userPageBase=new UserPageBase(this);
+    navigationToolbar=new NavigationToolbar(this);
     if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
       $(ELEMENT_SKIP_BUTTON).click();
     }
@@ -221,6 +232,7 @@ public class ForumPostTestIT extends Base {
     String title = "Title" + getRandomNumber();
     String content = "Content" + getRandomNumber();
     String newTitle = "NewTitle" + getRandomNumber();
+
     prepareData();
     info("Reply a topic");
     forumTopicManagement.postReply(title, content);
@@ -236,6 +248,30 @@ public class ForumPostTestIT extends Base {
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     info("Delete data");
     deletaData();
+
+  }
+
+  @Tag("")
+@Test
+  public void test06_Check_Topic_in_Lastest_forum_gadget(){
+    String nameCat = "Category" + getRandomNumber();
+    String nameForum = "Forum" + getRandomNumber();
+    String nameTopic = "Topic" + getRandomNumber();
+    String description = "Description" + getRandomNumber();
+    navigationToolbar.goToMyProfile();
+    userPageBase.goToDashboardTab();
+    $(byClassName("AddIcon")).click();
+    $(byId("Adoption/gadget_LatestForumPosts")).dragAndDropTo($(byClassName("AddIcon")));
+    info("Open forum portlet");
+    homePagePlatform.goToForum();
+    info("Add a new category");
+    forumCategoryManagement.addCategorySimple(nameCat, "", description);
+    info("Add a new forum");
+    forumForumManagement.addForumSimple(nameForum, "", description);
+    info("Add a new topic");
+    forumForumManagement.goToStartTopic();
+    forumTopicManagement.startTopic(nameCat,description,"","data/forum/DataForum1.pdf","data/forum/DataForum2.pdf","data/forum/DataForum3.pdf");
+    forumHomePage.goToTopic(nameTopic);
 
   }
 }

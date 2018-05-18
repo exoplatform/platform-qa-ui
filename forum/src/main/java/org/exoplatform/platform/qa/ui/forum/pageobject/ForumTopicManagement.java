@@ -496,30 +496,25 @@ public class ForumTopicManagement {
    *@param fileName String
    * @param pathFile String
    */
-  public void startTopic(String title, String message, String pathFile, String fileName) {
+  public void startTopic(String title, String message, String pathFile, String... fileName) {
     info("Verify that the pop up is shown");
     $(ELEMENT_START_TOPIC_POPUP_TITLE_FILED).waitUntil(Condition.appears, Configuration.timeout);
-
     info("Input the title:" + title);
-
     $(ELEMENT_START_TOPIC_POPUP_TITLE_FILED).val(title);
-
     info("Input the message:" + message);
     $(ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR).click();
     switchTo().frame(0);
     $(byXpath("/html/body")).sendKeys(message);
     switchTo().defaultContent();
     info("click on Attached file button");
-    if (fileName!="") {
-      $(ELEMENT_START_TOPIC_ATTACH_FILE).click();
-      File file = $(By.className("file")).uploadFromClasspath(fileName);
-      assertTrue(file.exists());
-      $(ELEMENT_SAVE_BTN).pressEnter();
+    $(ELEMENT_START_TOPIC_ATTACH_FILE).click();
+    for (int i=0;i<=fileName.length-1;i++){
+    $(By.className("file")).uploadFromClasspath(fileName[i]);
     }
-    $(ELEMENT_SUBMIT_BUTTON).pressEnter();
+    $(ELEMENT_SAVE_BTN).click();
+    $(ELEMENT_SUBMIT_BUTTON).click();
     $(ELEMENT_SUBMIT_BUTTON).waitUntil(Condition.disappear, Configuration.timeout);
     info("Verify that the topic is created");
-
     $(By.linkText(title)).should(exist);
     info("Start topic successfully");
   }
