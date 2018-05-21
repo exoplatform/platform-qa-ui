@@ -1,28 +1,27 @@
 package org.exoplatform.platform.qa.ui.platform.forum;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static com.codeborne.selenide.Selenide.switchTo;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_FORUM_LINK_PLF;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_POST_FORM_SUBMIT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_POST_IN_TOPIC;
+import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_TITLE_POST;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
-import com.codeborne.selenide.Configuration;
-import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
-import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumCategoryManagement;
@@ -31,7 +30,8 @@ import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumTopicManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
-import org.openqa.selenium.By;
+import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
+import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
 
 /**
  * @author eXo
@@ -52,9 +52,10 @@ public class ForumPostTestIT extends Base {
 
   ManageLogInOut          manageLogInOut;
 
-  NavigationToolbar navigationToolbar;
+  NavigationToolbar       navigationToolbar;
 
-  UserPageBase userPageBase;
+  UserPageBase            userPageBase;
+
   String                  nameCat;
 
   String                  nameForum;
@@ -71,14 +72,13 @@ public class ForumPostTestIT extends Base {
     forumHomePage = new ForumHomePage(this);
     forumCategoryManagement = new ForumCategoryManagement(this);
     manageLogInOut = new ManageLogInOut(this);
-    userPageBase=new UserPageBase(this);
-    navigationToolbar=new NavigationToolbar(this);
+    userPageBase = new UserPageBase(this);
+    navigationToolbar = new NavigationToolbar(this);
     if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
       $(ELEMENT_SKIP_BUTTON).click();
     }
     manageLogInOut.signInCas(username, password);
   }
-
 
   /**
    * Create a category, forum and topic
@@ -164,7 +164,7 @@ public class ForumPostTestIT extends Base {
     $(byText(content + content)).should(Condition.exist);
     info("Test 4: Delete a post");
     info("Click on delete button of the post that is replied");
-    $(byText(content+content)).parent().parent().parent().parent().find(ELEMENT_BUTTON_DELETE_POST).click();
+    $(byText(content + content)).parent().parent().parent().parent().find(ELEMENT_BUTTON_DELETE_POST).click();
     info("Click on OK button of the confirm popup");
     $(ELEMENT_DELETE_BOX_CONFIRMATION).click();
     info("Verify that the replied post is deleted");
@@ -251,17 +251,20 @@ public class ForumPostTestIT extends Base {
 
   }
 
-  @Tag("")
-@Test
-  public void test06_Check_Topic_in_Lastest_forum_gadget(){
+  @Tag("FORUM-1381")
+  @Test
+  public void test06_Check_Topic_in_Lastest_forum_gadget() {
     String nameCat = "Category" + getRandomNumber();
     String nameForum = "Forum" + getRandomNumber();
     String nameTopic = "Topic" + getRandomNumber();
+    String namePost = "post" + getRandomNumber();
     String description = "Description" + getRandomNumber();
     navigationToolbar.goToMyProfile();
     userPageBase.goToDashboardTab();
-    $(byClassName("AddIcon")).click();
-    $(byId("Adoption/gadget_LatestForumPosts")).dragAndDropTo($(byClassName("AddIcon")));
+    ELEMENT_BUTTON_ADD_GADGET.click();
+    $(byClassName("PopupTitle")).dragAndDropTo($(ELEMENT_FORUM_LINK_PLF));
+    ELEMENT_GADGET_LAST_FORUM_POST.dragAndDropTo(ELEMENT_CONTAINER_GADGETS);
+    ELEMENT_BUTTON_CLOSE_GADGETS.click();
     info("Open forum portlet");
     homePagePlatform.goToForum();
     info("Add a new category");
@@ -270,8 +273,38 @@ public class ForumPostTestIT extends Base {
     forumForumManagement.addForumSimple(nameForum, "", description);
     info("Add a new topic");
     forumForumManagement.goToStartTopic();
-    forumTopicManagement.startTopic(nameCat,description,"","data/forum/DataForum1.pdf","data/forum/DataForum2.pdf","data/forum/DataForum3.pdf");
+    forumTopicManagement.startTopic(nameTopic,
+                                    description,
+                                    "",
+                                    "data/forum/DataForum1.pdf",
+                                    "data/forum/DataForum2.pdf",
+                                    "data/forum/DataForum3.pdf");
     forumHomePage.goToTopic(nameTopic);
+    $(ELEMENT_POST_REPLY).click();
+    $(ELEMENT_TITLE_POST).setValue(namePost);
+    switchTo().frame(0);
+    $(byXpath("/html/body")).sendKeys(description);
+    switchTo().defaultContent();
+    executeJavaScript("window.scrollBy(0,150)");
+    $(ELEMENT_START_TOPIC_ATTACH_FILE).click();
+    $(By.className("file")).uploadFromClasspath("data/forum/DataForum1.pdf");
+    $(By.className("file")).uploadFromClasspath("data/forum/DataForum2.pdf");
+    $(By.className("file")).uploadFromClasspath("data/forum/DataForum3.pdf");
+    $(ELEMENT_SAVE_BTN).click();
+    $(ELEMENT_POST_FORM_SUBMIT).click();
+    navigationToolbar.goToMyProfile();
+    userPageBase.goToDashboardTab();
+    switchTo().frame($(byClassName("gadgets-gadget")));
+    $(byText(description)).shouldBe(Condition.visible);
+    switchTo().defaultContent();
+    ELEMENT_BUTTON_CLOSE_SPECIFIC_GADGET.click();
+    switchTo().alert();
+    confirm();
+    switchTo().defaultContent();
+    $(byClassName("gadgets-gadget")).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    homePagePlatform.goToForum();
+    forumHomePage.goToHomeCategory();
+    forumCategoryManagement.deleteCategory(nameCat);
 
   }
 }
