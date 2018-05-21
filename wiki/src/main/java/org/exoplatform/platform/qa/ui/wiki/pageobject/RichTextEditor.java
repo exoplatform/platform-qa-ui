@@ -2,19 +2,16 @@ package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
 import java.awt.event.KeyEvent;
 import java.io.File;
-
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.Utils;
@@ -979,9 +976,9 @@ public class RichTextEditor {
    */
   public void goToAttachedImageLink() {
     info("Click on Link menu");
-    evt.mouseOverAndClick(ELEMENT_IMAGE_LINK);
+    $(ELEMENT_IMAGE_LINK).hover().click();
     info("Click on Attached file Link menu");
-    evt.mouseOverAndClick(ELEMENT_ATTACHED_IMAGE_LINK_MENU);
+    $(ELEMENT_ATTACHED_IMAGE_LINK_MENU).hover().click();
   }
 
   /**
@@ -1040,19 +1037,19 @@ public class RichTextEditor {
    */
   public void removeImage(String content) {
     info("Click on Image link");
-    evt.mouseOverAndClick(ELEMENT_IMAGE_LINK);
+    $(ELEMENT_IMAGE_LINK).hover().click();
     info("Click on Remove Image link");
-    evt.mouseOverAndClick(ELEMENT_REMOVE_IMAGE_LINK_MENU);
+    $(ELEMENT_REMOVE_IMAGE_LINK_MENU).hover().click();
     info("Switch to the frame");
     testBase.getExoWebDriver().getWebDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
     info("Verify that the image is removed");
-    evt.waitForElementNotPresent(ELEMENT_CHECK_IMAGE.replace("${file}", content));
+    $(byXpath(ELEMENT_CHECK_IMAGE.replace("${file}", content))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     info("Switch to the parent");
     evt.switchToParentWindow();
     info("click on Image link again");
-    evt.mouseOverAndClick(ELEMENT_IMAGE_LINK);
+    $(ELEMENT_IMAGE_LINK).hover().click();
     info("Verify that Remove Image link is not shown");
-    evt.waitForElementNotPresent(ELEMENT_REMOVE_IMAGE_LINK_MENU);
+    $(ELEMENT_REMOVE_IMAGE_LINK_MENU).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
@@ -1098,23 +1095,23 @@ public class RichTextEditor {
    */
   public void removeLink(String content) {
     info("Click on link");
-    // mouseOverAndClick(ELEMENT_LINK);
-    // click(By.linkText(content));
-    evt.click(ELEMENT_LINK);
+    //mouseOverAndClick(ELEMENT_LINK);
+    //click(By.linkText(content));
+    $(ELEMENT_LINK).click();
     info("Click on Remove link");
-    // mouseOverAndClick(ELEMENT_REMOVE_LINK_MENU);
-    evt.waitForAndGetElement(ELEMENT_REMOVE_LINK_MENU, testBase.getDefaultTimeout(), 1);
-    evt.click(ELEMENT_REMOVE_LINK_MENU);
+    //mouseOverAndClick(ELEMENT_REMOVE_LINK_MENU);
+    $(ELEMENT_REMOVE_LINK_MENU).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_REMOVE_LINK_MENU).click();
     info("Switch to the frame");
-    testBase.getExoWebDriver().getWebDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
+    switchTo().frame($(ELEMENT_CONTENT_WIKI_FRAME).waitUntil(Condition.visible,Configuration.timeout));;
     info("Verify that the link is removed");
-    evt.waitForElementNotPresent(By.linkText(content));
+    $(byLinkText(content)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     info("Switch to the parent");
     evt.switchToParentWindow();
     info("click on link again");
-    evt.mouseOverAndClick(ELEMENT_LINK);
+    $(ELEMENT_LINK).hover().click();
     info("Verify that Remove link is not shown");
-    evt.waitForElementNotPresent(ELEMENT_REMOVE_LINK_MENU);
+    $(ELEMENT_REMOVE_LINK_MENU).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
@@ -1174,20 +1171,9 @@ public class RichTextEditor {
    */
   public void uploadAttachedFile(String link) {
     info("Double Click on Upload New file button");
-    String fs = File.separator;
-    String path = testBase.getAbsoluteFilePath(link.replace("/", fs));
-    info("path in uploadRobot:" + path);
-    evt.doubleClickOnElement(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_NEW_FILE_BTN);
+    $(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_NEW_FILE_BTN).doubleClick();
+    $(byClassName("gwt-FileUpload")).uploadFromClasspath(link);
 
-    ((JavascriptExecutor) testBase.getExoWebDriver()
-                                  .getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
-    testBase.getExoWebDriver().getWebDriver().findElement(By.xpath("//*[@name='filepath']")).sendKeys(path);
-    /*
-     * WebElement elem =
-     * waitForAndGetElement(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_NAME,5000,1,2);
-     * scrollToElement(elem, driver); click(elem,2,true);
-     * uploadFileUsingRobot(link);
-     */
   }
 
   /**
@@ -1244,15 +1230,9 @@ public class RichTextEditor {
    */
   public void uploadImageFile(String link) {
     info("Double Click on Upload New file button");
-    String fs = File.separator;
-    String path = testBase.getAbsoluteFilePath(link.replace("/", fs));
-    info("path in uploadRobot:" + path);
-    evt.doubleClickOnElement(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_IMAGE_BTN);
+    $(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_IMAGE_BTN).doubleClick();
 
-    ((JavascriptExecutor) testBase.getExoWebDriver()
-                                  .getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
-    testBase.getExoWebDriver().getWebDriver().findElement(By.xpath("//*[@name='filepath']")).sendKeys(path);
-
+    $(byClassName("gwt-FileUpload")).uploadFromClasspath(link);
     /*
      * WebElement elem =
      * waitForAndGetElement(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_NAME,5000,1,2);
