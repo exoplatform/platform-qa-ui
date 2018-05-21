@@ -547,10 +547,10 @@ public class EventManagement {
     info("To index is " + String.valueOf(toIndex));
     for (int i = fromIndex; i <= toIndex - 1; i++) {
       info("index:" + i);
-      assert $(byXpath(ELEMENT_SCHEDULE_BUSY_TIME.replace("${user}", user).replace("${index}", String.valueOf(i))))
+      $(byXpath(ELEMENT_SCHEDULE_BUSY_TIME.replace("${user}", user).replace("${index}", String.valueOf(i))))
 
-                .getAttribute("class")
-                .contains("busyDotTime") : "Wrong busy time";
+                .shouldHave(Condition.attribute("class","busyDotTime"));
+
     }
   }
 

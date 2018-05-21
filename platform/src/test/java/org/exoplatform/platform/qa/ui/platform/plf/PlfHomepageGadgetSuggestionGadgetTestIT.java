@@ -180,7 +180,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
    * suggestions gadget is not hided
    */
   @Test
-  public void test02_NotShowSuggestionsGadget() {
+  public void test02_NotShowSuggestionsGadget() throws Exception {
     info("Test 02: Not show suggestions gadget");
 
     info("Invite John to 2 spaces");

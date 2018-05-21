@@ -9,6 +9,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_CONTENT_NAME_PROFILE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_NAME_OF_PROFILE_TOP_LEFT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -109,11 +110,12 @@ public class ConnectionsManagement {
    * 
    * @param username
    */
-  public void cancelConnection(String username) {
+  public void cancelConnection(String username) throws Exception {
     info("--Cancel a connection of a user--");
     info("Click on Cancel button");
     searchPeople(username, null, null, null);
     $(byText("Cancel Request")).click();
+    homePagePlatform.refreshUntil($(byText("Cancel Request")),Condition.not(Condition.visible),1000);
     $(byText("Cancel Request")).waitUntil(Condition.disappears, Configuration.timeout);
     info("Canceled to the user");
   }
@@ -137,7 +139,7 @@ public class ConnectionsManagement {
    * 
    * @param username
    */
-  public void resetConnection(String username) {
+  public void resetConnection(String username) throws Exception {
     searchPeople(username, null, null, null);
     if (evt.waitForAndGetElement(ELEMENT_CONNECTION_REVOVE_BTN, 3000, 0) != null)
       removeConnection(username);
@@ -240,9 +242,11 @@ public class ConnectionsManagement {
     } else {
       $(ELEMENT_SKILL_OF_PEOPLE).setValue("");
     }
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
     $(ELEMENT_SEARCH_BUTTON).pressEnter();
     refresh();
-    $(ELEMENT_SEARCH_BUTTON).pressEnter();
+    $(ELEMENT_SEARCH_BUTTON).click();
+    refresh();
     if (directory != "" && directory != null)
       $(byLinkText(directory)).click();
   }

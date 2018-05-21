@@ -567,7 +567,7 @@ public class MyNotificationsSetting {
       }
     } else {
       if (evt.isElementPresent(ELEMENT_SWITCH_ONOFF_WEB_ON)) {
-        evt.click(ELEMENT_SWITCH_ONOFF_WEB_ON, 2);
+       $(ELEMENT_SWITCH_ONOFF_WEB_ON).parent().click();
       } else
         info("Intranet notification is already OFF");
 

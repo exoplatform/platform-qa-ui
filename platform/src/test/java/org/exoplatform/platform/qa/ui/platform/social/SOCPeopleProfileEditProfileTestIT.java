@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.platform.social;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
@@ -65,7 +66,7 @@ public class SOCPeopleProfileEditProfileTestIT extends Base {
     info("Test 1: Edit About Me");
     String aboutMe = "aboutMe" + getRandomNumber();
     String aboutMe1 = "aboutMe1" + getRandomNumber();
-    String actAboutMe = "Contact information has been updated.";
+    String actAboutMe = "\"About me\" has been updated.";
     String password = "123456";
     /* Create data test */
     String username1 = "usernamea" + getRandomString();
@@ -94,6 +95,7 @@ public class SOCPeopleProfileEditProfileTestIT extends Base {
     userProfilePage.updateAboutMe(aboutMe1);
     userProfilePage.saveCancelUpdateInfo(false);
     $(byXpath(ELEMENT_UIEXPERIENCE_PROFILE_PORTLET.replace("${content}", aboutMe1))).shouldNot(Condition.exist);
+    refresh();
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -213,7 +215,7 @@ public class SOCPeopleProfileEditProfileTestIT extends Base {
     String dEnd = getDate(-1, "MM/dd/yyyy");
     String actdStart = getDate(-7, "MMMM dd, yyyy");
     String actdEnd = getDate(-1, "MMMM dd, yyyy");
-    String actExperience = "Contact information has been updated.";
+    String actExperience = "Experience has been updated.";
 
     /* Create data test */
     String username1 = "usernamea" + getRandomString();
@@ -269,7 +271,7 @@ public class SOCPeopleProfileEditProfileTestIT extends Base {
   @Test
   public void test04_ChangeAvatar() {
     info("Test 4: Change Avatar");
-    String actAvatar = "Contact information has been updated.";
+    String actAvatar = "Avatar has been updated.";
 
     /* Create data test */
     String username1 = "usernamea" + getRandomString();

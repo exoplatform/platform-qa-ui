@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.gatein;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_CONTENT_PEOPLE;
@@ -370,8 +371,10 @@ public class GateinUserAndGroupManagementTestIT extends Base {
     useraddmanagement.addUser(username1, password1, email1, firstName1, lastName1);
     useraddmanagement.addUser(username2, password2, email2, firstName2, lastName2);
     homePagePlatform.goToConnections();
-    ELEMENT_NAME_OF_PEOPLE.setValue(firstName + " " + lastName);
+    ELEMENT_NAME_OF_PEOPLE.setValue(firstName + " " + lastName).pressEnter();
     ELEMENT_CONTENT_PEOPLE.find(byText(firstName + " " + lastName)).should(Condition.exist);
+    ELEMENT_CONTENT_PEOPLE.find(byText(firstName1 + " " + lastName1)).shouldNot(Condition.exist);
+    refresh();
     navigationToolbar.goToManageCommunity();
     userandgroupmanagement.deleteUser(username);
     userandgroupmanagement.deleteUser(username1);

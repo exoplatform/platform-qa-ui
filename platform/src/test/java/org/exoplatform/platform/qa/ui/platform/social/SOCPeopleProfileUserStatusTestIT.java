@@ -152,7 +152,7 @@ public class SOCPeopleProfileUserStatusTestIT extends Base {
     String username2 = "usernameb" + getRandomString();
     String email2 = username2 + "@test.com";
     String password = "123456";
-    String statusOnline = "Available";
+    String statusOnline = "Offline";
 
     info("Add user");
     navigationToolbar.goToAddUser();

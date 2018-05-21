@@ -314,8 +314,8 @@ public class NotificationsAdminSeting {
       break;
     case AS_Comment_intranet:
       $(ELEMENT_ACTIVITY_COMMENT_EDIT_BTN).click();
-      if (evt.waitForAndGetElement(ELEMENT_ACTIVITY_COMMENT_INTRANET_NOTIFICATION_CHECKBOX_CHECKED, 2000, 0) == null)
-        evt.check(ELEMENT_ACTIVITY_COMMENT_INTRANET_NOTIFICATION_CHECKBOX, 2);
+      if ($(ELEMENT_ACTIVITY_COMMENT_INTRANET_NOTIFICATION_CHECKBOX_CHECKED).is(Condition.not(Condition.checked)))
+        $(ELEMENT_ACTIVITY_COMMENT_INTRANET_NOTIFICATION_CHECKBOX).parent().click();
       info("Click on Save button");
       $(ELEMENT_ACTIVITY_COMMENT_SAVE_BTN).click();
       info("Verify that Intranet notification is hidded");

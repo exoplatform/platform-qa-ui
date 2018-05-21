@@ -377,7 +377,7 @@ public class SOCPeopleTestIT extends Base {
    * requests - Requested user is removed from list
    */
   @Test
-  public void test05_PendingRequests() {
+  public void test05_PendingRequests() throws Exception {
     info("test05_PendingRequestsList");
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
@@ -428,7 +428,7 @@ public class SOCPeopleTestIT extends Base {
    * Outcome: - Display all user's requests - Requested user is removed from list
    */
   @Test
-  public void test06_RequestsList() {
+  public void test06_RequestsList() throws Exception {
     info("test05_PendingRequestsList");
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";

@@ -1,9 +1,13 @@
 package org.exoplatform.platform.qa.ui.platform.social;
 
+import static com.codeborne.selenide.Selectors.byText;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACES_LIST;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -59,6 +63,7 @@ public class SOCSpaceSearchTestIT extends Base {
   public void test01_SearchSpace() {
     info("Test 01: Search Space");
     String space = "cspace" + getRandomNumber();
+    String space1 = "1space" + getRandomNumber();
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@gmail.com";
     String password = "123456";
@@ -70,10 +75,17 @@ public class SOCSpaceSearchTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
     homePagePlatform.goToMySpaces();
+    spaceManagement.addNewSpaceSimple(space1, space1);
+    homePagePlatform.goToMySpaces();
     spaceManagement.searchSpace(space, "1");
+    ELEMENT_SPACES_LIST.find(byText(space)).shouldBe(Condition.visible);
+    ELEMENT_SPACES_LIST.find(byText(space1)).shouldNotBe(Condition.visible);
     spaceManagement.searchByLetterList("C", space);
+    ELEMENT_SPACES_LIST.find(byText(space1)).shouldNotBe(Condition.visible);
+    spaceManagement.searchByLetterList("All", space);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
+    spaceManagement.deleteSpace(space1, false);
 
   }
 
