@@ -69,7 +69,6 @@ public class TaskManagementLocator {
   public static final SelenideElement ELEMENT_INPUT_LABEL                           = $(byClassName("addLabelInput"));
 
   public static final SelenideElement ELEMENT_LABEL_BUTTON_CONFIRM_DELETE           = $(byClassName("confirmDelete"));
-  public static final By ELEMENT_CLICK  = By.id("taskManagement");
 
   // CENTRAL PANEL
 

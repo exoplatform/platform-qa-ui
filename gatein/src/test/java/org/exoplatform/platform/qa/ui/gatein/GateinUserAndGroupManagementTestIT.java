@@ -2,7 +2,6 @@ package org.exoplatform.platform.qa.ui.gatein;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_CONTENT_PEOPLE;
@@ -11,7 +10,6 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_INPUT_SEARCH_USER_NAME;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;

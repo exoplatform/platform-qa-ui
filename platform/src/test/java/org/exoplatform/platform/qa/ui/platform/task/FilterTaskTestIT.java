@@ -11,7 +11,6 @@ import org.exoplatform.platform.qa.ui.task.pageobject.TasksManagement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
