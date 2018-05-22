@@ -12,6 +12,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -98,10 +99,10 @@ public class AddonsAnswersPublishActivityTestIT extends Base {
     // click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
     $(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
     $(ELEMENT_OK_BUTTON_LINK).click();
+    $(ELEMENT_OK_BUTTON_LINK).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
 
     info("Create answer");
     ELEMENT_LIST_CATEGORIE.find(byLinkText(" " + paCat1)).click();
-    $(byText(question)).click();
     answerManagement.goToAnswerQuestion(question);
     answerManagement.inputDataToAnswer(answer, null, null, null);
     $(ELEMENT_ANSWER_FORM_SAVE_BUTTON).click();
@@ -181,7 +182,7 @@ public class AddonsAnswersPublishActivityTestIT extends Base {
     // click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
     $(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
     $(ELEMENT_OK_BUTTON_LINK).click();
-
+    $(ELEMENT_OK_BUTTON_LINK).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     info("Create answer");
     ELEMENT_LIST_CATEGORIE.find(byLinkText(" " + paCat1)).click();
     $(byText(question)).click();
