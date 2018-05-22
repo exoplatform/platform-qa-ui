@@ -12,6 +12,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
@@ -26,6 +27,8 @@ import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 
+@Tag("sniff")
+@Tag("calendar")
 public class CalendarSettingTestIT extends Base {
   HomePagePlatform   homePagePlatform;
 
