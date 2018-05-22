@@ -929,7 +929,7 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
                                                                                  ".//*[@id='PermissionSetting']//a[contains(text(),'Move Containers')]";
 
   public static final String          ELEMENT_SELECT_PERMISSION_BUTTON                        =
-                                                                       ".//*[@id='UIPermissionSelector']//*[contains(text(),'Select Permission')]";
+                                                                       ".//*[@id='UIPermissionSelector']//*[contains(text(),'Permission Selector')]";
 
   public static final By              ELEMENT_EDIT_PORTLET_FORM_ADD_PERM_BTN                  =
                                                                              By.xpath("//*[contains(@class,'uiIconAddUser')]");
