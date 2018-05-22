@@ -13,12 +13,10 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.exist;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_STREAM_CONTAINER;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
@@ -58,10 +56,8 @@ public class WikiCommentActivityStreamTestIT extends Base{
         manageLogInOut.signInCas( DATA_USER1 , DATA_PASS2 );
 
 }
-    /*
-     bug WIKI-1392
-    */
 
+    @Tag("WIKI-1392")
     @Test
     public void test_CommentWikiActivityStream(){
         String wiki = "wiki" + getRandomNumber();
