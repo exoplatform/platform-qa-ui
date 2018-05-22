@@ -17,6 +17,7 @@ import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.gatein.pageobject.PageCreationWizard.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -35,9 +36,11 @@ public class GateinPortalNavigationEditLayoutTestIt extends Base {
 
     ManageLogInOut manageLogInOut;
 
-    PortalManagePages PortalManagePages;
+    PortalManagePages portalManagePages;
 
     HomePagePlatform homePagePlatform;
+    UserAddManagement userAddManagement;
+    UserAndGroupManagement userAndGroupManagement;
 
     @BeforeEach
     public void setupBeforeMethod() {
@@ -47,8 +50,10 @@ public class GateinPortalNavigationEditLayoutTestIt extends Base {
         navigationToolbar = new NavigationToolbar(this);
         navigationmanagement = new NavigationManagement(this);
         manageLogInOut = new ManageLogInOut(this);
-        PortalManagePages  = new PortalManagePages(this);
+        portalManagePages  = new PortalManagePages(this);
         homePagePlatform=new HomePagePlatform(this);
+        userAndGroupManagement = new UserAndGroupManagement(this);
+        userAddManagement = new UserAddManagement(this);
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
 
     }
@@ -115,6 +120,9 @@ public class GateinPortalNavigationEditLayoutTestIt extends Base {
     @Test
     public void test01_AddApplicationIntoContainerWhenEditLayoutForGroupPage() {
         info("Test 01:  Add application into container when edit layout for group's page");
+        String username="username"+getRandomString();
+        String password="123456";
+        String email=username+"@test.com";
         String num= "num" + getRandomNumber();
         String pageName ="pageName" + getRandomNumber();
         String title = "title" + getRandomNumber();
@@ -128,28 +136,33 @@ public class GateinPortalNavigationEditLayoutTestIt extends Base {
         String name = "name" + getRandomNumber();
         String container = "Une Ligne";
         String  siteName = "siteName" + getRandomNumber();
-
+        manageLogInOut.signIn(PLFData.username,PLFData.password);
+        navigationToolbar.goToAddUser();
+        userAddManagement.addUser(username, password, email, username, username);
+        navigationToolbar.goToManageCommunity();
+        userAndGroupManagement.goToGroupTab();
+        userAndGroupManagement.addUserAdmin(username,"*");
+        manageLogInOut.signIn(username,password);
         navigationToolbar.goToPotalPages();
         info("Add a new page with group type");
-        PortalManagePages.addPage(pageName, title,type);
-
+        portalManagePages.addPage(pageName, title,"group");
         info("Add a container");
         navigationToolbar.goToPotalPages();
-        PortalManagePages.editPage(title,type);
-        PageCreationWizard.addContainer (container);
+        portalManagePages.editPage(title,"group");
+      //  PageCreationWizard.addContainer (container);
 
         info("Add an application to the container");
         navigationToolbar.goToPotalPages();
-        PortalManagePages.editPage(title ,type);
+        portalManagePages.editPage(title ,type);
         pagecreationwizard.addApp("",name,$(byXpath(ELEMENT_APPLICATION_APPLICATION.replace("${name}",idName))),$(byXpath(ELEMENT_DROP_SOURCE_HAS_LAYOUT_BY_NAME.replace("${name}","Container"))));
 
         info("Verify that the application is added successfully in the container");
         navigationToolbar.goToPotalPages();
-        PortalManagePages.editPage(title,type);
+        portalManagePages.editPage(title,type);
         $(byXpath(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}",name))).waitUntil(Condition.visible, Configuration.timeout);
         pagecreationwizard.switchViewMode(true);
         pagecreationwizard.saveChangesPageEditor();
 
-        PortalManagePages.deletePage(title,type);
+        portalManagePages.deletePage(title,type);
     }
 }

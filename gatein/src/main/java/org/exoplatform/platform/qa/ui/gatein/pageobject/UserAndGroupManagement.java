@@ -118,7 +118,7 @@ public class UserAndGroupManagement {
     String[] groups = groupsPath.split("/");
     for (String groupSelect : groups) {
       info("Select group:" + groupSelect);
-      evt.click(ELEMENT_GROUP_MANAGEMENT_SELECT_GROUP.replace("${name}", groupSelect));
+      $(byXpath(ELEMENT_GROUP_MANAGEMENT_SELECT_GROUP.replace("${name}", groupSelect))).click();
     }
 
   }
@@ -151,18 +151,18 @@ public class UserAndGroupManagement {
     goToGroupTab();
     evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     info("Select Platform/administration group");
-    selectGroup("Platform/administration");
+    selectGroup("Platform/Administration");
     info("Add user to administration group by type");
-    evt.type(ELEMENT_INPUT_USERNAME, user, true);
+    $(ELEMENT_INPUT_USERNAME).setValue(user);
     if (membership.length > 0)
-      evt.select(ELEMENT_SELECT_MEMBERSHIP, membership[0]);
+      $(byXpath(ELEMENT_SELECT_MEMBERSHIP)).selectOptionByValue(membership[0]);
     evt.scrollToElement(evt.waitForAndGetElement(ELEMENT_SAVE_BUTTON_2), this.testBase.getExoWebDriver().getWebDriver());
-    evt.click(ELEMENT_SAVE_BUTTON_2);
+    $(ELEMENT_SAVE_BUTTON_2).click();
     String addedUser = ELEMENT_ADDED_GROUP_USER_IN_TABLE.replace("${username}", user);
     if (testBase.isTextPresent(ELEMENT_MSG_TOTAL_PAGES)) {
       plfBase.usePaginator(addedUser, ELEMENT_USER_NOT_FOUND.replace("${user}", user));
     } else {
-      evt.waitForAndGetElement(addedUser);
+     $(byXpath(addedUser)).waitUntil(Condition.visible,Configuration.timeout);
     }
     info("User is added to administration group");
   }
