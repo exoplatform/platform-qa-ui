@@ -179,6 +179,8 @@ public static final String ELEMENT_VIEW_ALL_REPLIES_LINK_TASK="SubCommentShowAll
 
 
   public static final SelenideElement ELEMENT_LEFT_PANEL_IN_TASK_PAGE               = $(byClassName("left-menu"));
+
+  public static final SelenideElement ELEMENT_TITLE_OF_PROJECT=$(byClassName("projectName"));
   // Add labels form
 
   // Edit labels form

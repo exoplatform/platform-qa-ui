@@ -10,10 +10,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_TASKS_LIST;
+import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_TITLE_OF_PROJECT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 /**
@@ -80,6 +83,7 @@ public class LabelManagementTestIT extends Base {
         homePagePlatform.goToTaskPage();
         labelsManagement.addLabel(label);
         $(byText(label)).click();
+        ELEMENT_TITLE_OF_PROJECT.waitUntil(Condition.hasText(label),Configuration.timeout);
         tasksManagement.addTask(task);
         ELEMENT_TASKS_LIST.find(byText(task)).parent().find(byText(label)).should(Condition.exist);
         homePagePlatform.goToTaskPage();
