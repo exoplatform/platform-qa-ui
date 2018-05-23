@@ -714,7 +714,7 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   // Container panel
   public static final By              ELEMENT_CONTAINER_TAB                                   = By.linkText("Containers");
 
-  public static final By              ELEMENT_SWITCH_VIEW_MODE                                = By.linkText("Switch View mode");
+  public static final By              ELEMENT_SWITCH_VIEW_MODE                                = By.linkText("Toggle Preview");
 
   public static final By              ELEMENT_VIEW_PROPERTIES                                 =
                                                               By.cssSelector(".PageProfileIcon");
@@ -813,8 +813,15 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   public static final By              ELEMENT_SWITCH_VIEW_MODE_NAME_APPLICATION_CLASS         =
                                                                                       By.xpath(".//*[contains(@class,'portletName')]");
 
+  public static final       By         ELEMENT_APPLICATION_Registry_IN_LAYOUT_PAGE =
+                                                          By.className("accordion-inner clearfix DragObjectPortlet");
+
+
   public static final String          ELEMENT_APPLICATION_IN_LAYOUT_PAGE                      =
                                                                          "//*[contains(@class,'LAYOUT-PORTLET')]//*[contains(text(),'${name}')]";
+
+
+
 
   public static final String          ELEMENT_APPLICATION_EDIT_ICON                           =
                                                                     "//span[contains(text(),'${name}')]/../../../..//*[contains(@class,'uiIconEdit')]";

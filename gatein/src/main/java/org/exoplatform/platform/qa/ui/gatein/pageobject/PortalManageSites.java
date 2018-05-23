@@ -73,7 +73,7 @@ public class PortalManageSites {
    */
   public void goToEditSiteConfig(String site) {
     info("Click on Edit Site Configuration button");
-    evt.click(ELEMENT_MANAGESITES_EDIT_CONFIG_ICON.replace("${site}", site));
+    $(byXpath(ELEMENT_MANAGESITES_EDIT_CONFIG_ICON.replace("${site}", site))).click();
   }
 
   /**
@@ -177,7 +177,7 @@ public class PortalManageSites {
     info("Select permission tab");
    $(ELEMENT_ADD_NEW_PORTAL_POPUP_PERMISSION_TAB).click();
     info("Select public permission checkbox");
-    $(ELEMENT_ADD_NEW_PORTAL_POPUP_PUBLIC_PERMISSION).waitUntil(Condition.exist, Configuration.timeout);
+    $(ELEMENT_ADD_NEW_PORTAL_POPUP_PUBLIC_PERMISSION).shouldHave();
     if (!groupsPath.isEmpty()) {
       info("Select Edit permission settings tab");
      $(ELEMENT_ADD_NEW_PORTAL_POPUP_EDIT_PERMISSITION_SETTINGS).click();

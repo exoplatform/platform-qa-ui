@@ -128,7 +128,7 @@ public class ManageLogInOut {
     info("Sign out");
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
-        evt.mouseOverAndClick(ELEMENT_ACCOUNT_NAME_LINK);
+       $(ELEMENT_ACCOUNT_NAME_LINK).hover();
         break;
       }
       $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.appears, Configuration.timeout).click();

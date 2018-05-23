@@ -140,9 +140,7 @@ public class PortalManagePages {
    * @param type String
    */
   public void editPage(String titlePage, String type) {
-    info("Go to edit a page");
-    searchPage(titlePage, "", type);
-    info("Click on Edit button");
+
     $(ELEMENT_MAGEPAGES_CONTENT_ACTION_COLUMN_EDIT).click();
   }
 

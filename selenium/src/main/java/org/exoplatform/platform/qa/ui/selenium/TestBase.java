@@ -20,7 +20,10 @@
  */
 package org.exoplatform.platform.qa.ui.selenium;
 
+import static java.awt.SystemColor.info;
+import static org.exoplatform.platform.qa.ui.selenium.DownloadFileControl.driver;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.debug;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.util.List;
 
@@ -38,6 +41,8 @@ public class TestBase {
   /**
    * REFACTORING: Use delegate to new classes
    */
+
+  public WebDriver driver;
   private final ManageFileTestBase         manageFileTestBase         = new ManageFileTestBase(this);
 
   private final DateTestBase               dateTestBase               = new DateTestBase(this);
@@ -58,6 +63,7 @@ public class TestBase {
   protected int                            DEFAULT_TIMEOUT            = 30000;                               // milliseconds
 
   protected boolean                        ieFlag;
+
 
   protected boolean                        chromeFlag;
 
@@ -266,17 +272,34 @@ public class TestBase {
    * @param targetLocator target element html
    */
   public void dragAndDropToObject(Object sourceLocator, Object targetLocator) {
-    elementEventTestBase.dragAndDropToObject(sourceLocator, targetLocator);
-  }
+    info("--Drag and drop to object--");
+    Actions action = new Actions(driver);
+    try {
+      WebElement source = waitForAndGetElement(sourceLocator);
+      WebElement target = waitForAndGetElement(targetLocator);
 
-  /**
-   * Drag an object
-   *
-   * @param sourceLocator source element html
-   * @param targetLocator target element html
-   */
-  public void dragObject(String sourceLocator, String targetLocator) {
-    elementEventTestBase.dragObject(sourceLocator, targetLocator);
+      action.dragAndDrop(source, target).build().perform();
+    } catch (StaleElementReferenceException e) {
+
+      /*
+      checkCycling(e, DEFAULT_TIMEOUT/WAIT_INTERVAL);
+      Utils.pause(WAIT_INTERVAL);
+
+      */
+      dragAndDropToObject(sourceLocator, targetLocator);
+    }catch (UnhandledAlertException e) {
+      try {
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
+        switchToParentWindow();
+      } catch (NoAlertPresentException eNoAlert) {
+      }
+    }
+
+    finally {
+      loopCount = 0;
+    }
+
   }
 
   /**

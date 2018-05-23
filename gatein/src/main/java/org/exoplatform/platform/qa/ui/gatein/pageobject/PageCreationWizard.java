@@ -21,6 +21,8 @@ import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
+import javax.lang.model.element.Element;
+
 /**
  * Path: Edit-Page-Add Pages
  */
@@ -125,10 +127,10 @@ public class PageCreationWizard {
     $(ELEMENT_APPLICATION_TAB).click();
     if (!tabName.isEmpty())
       $(byText(tabName)).click();
-    $(appLocator).dragAndDropTo(layoutLocator);
+    $(appLocator).dragAndDropTo   (layoutLocator);
 
     info("Verify that the application is shown in the layout");
-    $(byText(nameApp)).should(Condition.exist);
+    $(byText(nameApp)).shouldBe(Condition.exist);
     info("The application is shown in the layout page");
     saveChangesPageEditor();
   }
@@ -324,10 +326,11 @@ public class PageCreationWizard {
    * @param positionFirst is the position before changed
    * @param positionEnd is the position after changed
    */
-  public void checkPositions(Object positionFirst, Object positionEnd) {
+  public void checkPositions(SelenideElement  positionFirst, SelenideElement positionEnd) {
     info("Verify that positions of element is changed");
     evt.waitForElementNotPresent(positionFirst, 2000, 1);
-    evt.waitForAndGetElement(positionEnd, 2000, 1);
+    positionEnd.waitUntil(Condition.visible,Configuration.timeout);
+    positionEnd.waitUntil(Condition.visible,Configuration.timeout);
     saveChangesPageEditor();
   }
 
@@ -368,15 +371,15 @@ public class PageCreationWizard {
     // TODO Auto-generated method stub
 
     info("Edit application");
-    evt.mouseOver(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}", oldTitle), true);
-    evt.click(ELEMENT_APPLICATION_EDIT_ICON.replace("${name}", oldTitle));
-    evt.click(ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_TAB);
+    $(byXpath(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}", oldTitle))).hover().waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_APPLICATION_EDIT_ICON.replace("${name}", oldTitle))).click();
+    $(ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_TAB).click();
     if (!newTitle.isEmpty())
-      evt.type(ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_TITLE, newTitle, true);
+     $(ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_TITLE).setValue(newTitle).waitUntil(Condition.visible,Configuration.timeout);
     if (!width.isEmpty())
-      evt.type(ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_WIDTH, width, true);
+      $(ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_WIDTH).setValue(width).waitUntil(Condition.visible, Configuration.timeout);
     if (!height.isEmpty())
-      evt.type(ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_HEIGHT, height, true);
+      $(ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_HEIGHT).setValue(height).waitUntil(Condition.visible,Configuration.timeout);
 
   }
 
@@ -386,7 +389,7 @@ public class PageCreationWizard {
    */
   public void saveChangesApplication() {
     info("Save all changes of an application");
-    evt.click(ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_SAVE);
+   $(ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_SAVE).click();
 
   }
 
@@ -395,53 +398,26 @@ public class PageCreationWizard {
    */
   public void saveChangesPageEditor() {
     info("Save change Page Editor");
-    $(ELEMENT_PAGEEDITOR_FINISHBTN).waitUntil(Condition.appears, Configuration.timeout);
-    $(ELEMENT_PAGEEDITOR_FINISHBTN).click();
-
-  }
+   $(ELEMENT_PAGEEDITOR_FINISHBTN).waitUntil(Condition.visible,Configuration.timeout).click();
+}
 
   /**
    * Move an application to new place
    *
-   * @param titleSource is the title of applicattion source that will be moved to
-   *          new place
-   * @param titleTarget is the title of application target that application source
-   *          will be followed
-   * @param heightTarget is the height of application target
+
+
    */
-  public void moveApplication(String titleSource, String titleTarget, int heightTarget) {
-    info("Move an application to new place");
-    evt.click(ELEMENT_APPLICATION_TAB);
-    if (!titleSource.isEmpty()) {
-      info("titleSource:" + titleSource);
-      info("titleTarget:" + titleTarget);
-      evt.mouseOver(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}", titleSource), true);
+  public void moveApplication(String name) {
+
+    info("Delete the application");
+    $(ELEMENT_APPLICATION_TAB).click();
+    if (!name.isEmpty()) {
+      $(byXpath(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}", name))).click();
+      $(byXpath(ELEMENT_APPLICATION_IN_LAYOUT_PAGE  )).click();
 
     }
-    WebElement elSource = evt.waitForAndGetElement(ELEMENT_APPLICATION_HOLDER_MOVE.replace("${name}", titleSource), 2000, 1);
-    WebElement elTarget = evt.waitForAndGetElement(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}", titleTarget), 2000, 0);
-    if (elTarget == null)
-      elTarget = evt.waitForAndGetElement(ELEMENT_DROP_SOURCE_HAS_LAYOUT, 2000, 1);
-
-    info("Get the size of target");
-    Dimension size = elTarget.getSize();
-
-    Actions builder = new Actions(testBase.getExoWebDriver().getWebDriver());
-    info("Hold the source:");
-    builder.clickAndHold(elSource).build().perform();
-    info("Move the mouse to the middle of the portlet");
-    Action actionMove = builder.moveToElement(elTarget).build();
-    actionMove.perform();
-    info("Move the mouse under the portlet");
-    Action actionMove1 = builder.moveByOffset(-(size.width / 2), -(size.height / 2) + heightTarget).build();
-    actionMove1.perform();
-    info("Drop the source");
-
-    Action actiondrop = builder.release().build();
-    actiondrop.perform();
-
     saveChangesPageEditor();
-    info("the application is moved succefully");
+    info("the container is deleted");
   }
 
   /**
@@ -451,14 +427,13 @@ public class PageCreationWizard {
    */
   public void deleteApplication(String name) {
     info("Delete the application");
-    evt.click(ELEMENT_APPLICATION_TAB);
+    $(ELEMENT_APPLICATION_TAB).click();
     if (!name.isEmpty()) {
-      evt.mouseOver(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}", name), true);
-
-      evt.click(ELEMENT_APPLICATION_DELETE_ICON.replace("${name}", name));
+     $(byXpath(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}", name))).click();
+      $(byXpath(ELEMENT_APPLICATION_DELETE_ICON)).click();
       manageAlert.acceptAlert();
 
-      evt.waitForElementNotPresent(ELEMENT_APPLICATION_DELETE_ICON.replace("${name}", name));
+     $(ELEMENT_APPLICATION_DELETE_ICON.replace("${name}", name)).waitUntil(Condition.visible,Configuration.timeout);
     }
     saveChangesPageEditor();
     info("the container is deleted");
@@ -472,8 +447,7 @@ public class PageCreationWizard {
   public void switchViewMode(boolean... verify) {
     info("Click on Switch view mode button");
     $(ELEMENT_SWITCH_VIEW_MODE).click();
-    if (verify.length > 0)
-     $(ELEMENT_SWITCH_VIEW_MODE_NAME_APPLICATION_CLASS).waitUntil(Condition.visible, Configuration.timeout);
+
   }
 
   /**

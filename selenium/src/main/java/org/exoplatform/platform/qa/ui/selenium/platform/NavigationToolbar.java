@@ -57,9 +57,9 @@ public class NavigationToolbar {
   public void goToEditLayout() {
     info("--Go to Edit Layout--");
 
-    evt.clickByJavascript(ELEMENT_LINK_EDIT);
-    evt.mouseOver(ELEMENT_MENU_PAGE_LINK, true);
-    evt.click(ELEMENT_MENU_EDIT_LAYOUT, 2, true);
+   $(ELEMENT_LINK_EDIT).click();
+   $(ELEMENT_MENU_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).hover();
+   $(ELEMENT_MENU_EDIT_LAYOUT).waitUntil(Condition.visible, Configuration.timeout).click();
   }
 
   /**
