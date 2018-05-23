@@ -717,7 +717,7 @@ public class WikiValidattions {
    * @param template String
    */
   public void verifyTemplateInList(String template) {
-    if (evt.waitForAndGetElement(ELEMENT_WIKI_SETTING_PAGE_TOTAL_NUMBER, 2000, 0) != null) {
+    if ($(ELEMENT_WIKI_SETTING_PAGE_TOTAL_NUMBER).is(Condition.visible)) {
       String total = evt.waitForAndGetElement(ELEMENT_WIKI_SETTING_PAGE_TOTAL_NUMBER).getText();
       int totalNum = Integer.parseInt(total);
       for (int i = 0; i < totalNum; i++) {
@@ -733,7 +733,7 @@ public class WikiValidattions {
       }
     } else {
       info("Verify that the template is shown in the list");
-      evt.waitForAndGetElement(ELEMENT_WIKI_SETTINGS_RESULTS.replace("${template}", template));
+      $(byXpath(ELEMENT_WIKI_SETTINGS_RESULTS.replace("${template}", template))).waitUntil(Condition.visible,Configuration.timeout);
       info("The template is shown successfully");
     }
   }

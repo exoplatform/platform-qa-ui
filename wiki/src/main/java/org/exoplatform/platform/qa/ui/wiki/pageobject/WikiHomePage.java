@@ -192,23 +192,23 @@ public class WikiHomePage {
    */
   public void confirmWaringMessage(Boolean isConfirm) {
     if (isConfirm) {
-      if (evt.waitForAndGetElement(ELEMENT_CONFIRM_POPUP_OK_BTN, 2000, 0) != null) {
+      if ($(ELEMENT_CONFIRM_POPUP_OK_BTN).is(Condition.visible)) {
         info("Click on OK button");
-        $(ELEMENT_CONFIRM_POPUP_OK_BTN).click();
+        $(ELEMENT_CONFIRM_POPUP_OK_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
       }
-      if (evt.waitForAndGetElement(ELEMENT_CONFIRM_POPUP_CONFIRM_BTN, 2000, 0) != null) {
+      if ($(ELEMENT_CONFIRM_POPUP_CONFIRM_BTN).is(Condition.visible)) {
         info("Click on Confirm button");
         $(ELEMENT_CONFIRM_POPUP_CONFIRM_BTN).click();
       }
-      if (evt.waitForAndGetElement(ELEMENT_CONFIRM_POPUP_YES_BTN, 2000, 0) != null) {
+      if ($(ELEMENT_CONFIRM_POPUP_YES_BTN).is(Condition.visible)) {
         info("Click on Yes button");
         $(ELEMENT_CONFIRM_POPUP_YES_BTN).click();
       }
-      if (evt.waitForAndGetElement(ELEMENT_CONFIRM_POPUP_YES_BTN, 2000, 0) != null) {
+      if ($(ELEMENT_CONFIRM_POPUP_YES_BTN).is(Condition.visible)) {
         info("Click on Yes button");
         $(ELEMENT_CONFIRM_POPUP_YES_BTN).click();
       }
-      if (evt.waitForAndGetElement(ELEMENT_WARNING_OK_BTN, 2000, 0) != null) {
+      if ($(ELEMENT_WARNING_OK_BTN).is(Condition.visible)) {
         info("Click OK button");
         $(ELEMENT_WARNING_OK_BTN).click();
       }

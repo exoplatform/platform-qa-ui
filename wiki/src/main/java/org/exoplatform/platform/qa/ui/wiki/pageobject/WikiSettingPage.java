@@ -2,10 +2,12 @@ package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
@@ -82,11 +84,11 @@ public class WikiSettingPage {
    * @param template String
    */
   public void deleteTemplate(String template) {
-    if (evt.waitForAndGetElement(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template), 2000, 0) != null) {
+    if ($(byXpath(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template))).is(Condition.visible)) {
       info("Delete template " + template);
-      evt.click(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template));
+      $(byXpath(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template))).click();
       alert.acceptAlert();
-      evt.waitForElementNotPresent(By.xpath(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template)));
+      $(By.xpath(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     }
   }
 
@@ -125,8 +127,8 @@ public class WikiSettingPage {
    */
   public void saveTemplate() {
     info("Click on Save template");
-    evt.click(ELEMENT_SAVE_TEMPLATE);
-    evt.waitForElementNotPresent(ELEMENT_SAVE_TEMPLATE);
+    $(ELEMENT_SAVE_TEMPLATE).click();
+    $(ELEMENT_SAVE_TEMPLATE).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
   }
 
   /**
@@ -147,21 +149,21 @@ public class WikiSettingPage {
    */
   public void addTemplate(String title, String des, String content) {
     info("Click on Add more Template button");
-    evt.click(ELEMENT_WIKI_SETTING_ADD_MORE_TEMPALTE);
+    $(ELEMENT_WIKI_SETTING_ADD_MORE_TEMPALTE).click();
 
     if (!title.isEmpty()) {
       info("Input the title for the template");
-      evt.type(ELEMENT_TITLE_TEMPLATE, title, true);
+      $(ELEMENT_TITLE_TEMPLATE).setValue(title);
     }
 
     if (!des.isEmpty()) {
       info("Input the description for the template");
-      evt.type(ELEMENT_DESCRIPTION_TEMPLATE, des, true);
+      $(ELEMENT_DESCRIPTION_TEMPLATE).setValue(des);
     }
 
     if (!content.isEmpty()) {
       info("Input the content for the template");
-      evt.type(ELEMENT_CONTENT_TEMPLATE, content, true);
+      $(ELEMENT_CONTENT_TEMPLATE).setValue(content);
     }
   }
 
