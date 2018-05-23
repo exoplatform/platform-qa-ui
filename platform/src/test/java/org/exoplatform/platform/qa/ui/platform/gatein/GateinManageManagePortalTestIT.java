@@ -13,10 +13,16 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
+import static com.codeborne.selenide.Configuration.baseUrl;
+import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.refresh;
+import static org.exoplatform.platform.qa.ui.selenium.DownloadFileControl.driver;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_NEW_PORTAL_ADD;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_NEW_PORTAL_SWITCH;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 
@@ -71,10 +77,39 @@ public class GateinManageManagePortalTestIT extends Base {
         portalManageSites.addNewPortal(portalName, null, null, language, null, "Always", true, permissions, editGroupId, editMembership);
 
         $(byXpath(ELEMENT_NEW_PORTAL_ADD.replace("${portalName}", portalName))).waitUntil(Condition.visible, Configuration.timeout);
+        navigationToolbar.goToPotalSites();
+        portalManageSites.deletePortal(portalName);
     }
 
-}
+
+/*Step Number: 2
+         *Step Name: Step 2: Change using portal
+		 *Step Description:
+			- Create new some portals
+			- Switch between some portals by input directly name of portal on URL ( ex:  http://localhost:8080/portal/{name_of_portal}
+		 *Input Data:
+		 *Expected Outcome:
+			- The switched portal is changed successfully*/
+
+    @Test
+    public void test02_SwitchToNewPortal() {
+        String portalName = "portalName" + getRandomNumber();
+        String editGroupId = "Platform/Administration";
+        String editMembership = "*";
+        String language = "English";
+        Map<String, String> permissions = null;
+        navigationToolbar.goToPotalSites();
+        portalManageSites.addNewPortal(portalName, null, null, language, null, "Always", true, permissions, editGroupId, editMembership);
+
+        $(byXpath(ELEMENT_NEW_PORTAL_ADD.replace("${portalName}", portalName))).waitUntil(Condition.visible, Configuration.timeout);
+        open(Configuration.baseUrl+"/portal/"+portalName);
+        $(byId("PAGEBODY-VIEW-BLOCK")).waitUntil(Condition.visible,Configuration.timeout);
+        open(Configuration.baseUrl);
+        navigationToolbar.goToPotalSites();
+        refresh();
+        portalManageSites.deletePortal(portalName);
 
 
+}}
 
-		
+

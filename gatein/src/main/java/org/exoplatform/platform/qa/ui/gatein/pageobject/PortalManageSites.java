@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
+import static com.codeborne.selenide.Condition.not;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
@@ -369,9 +370,9 @@ public class PortalManageSites {
   public void deletePortal(String portalName) {
     String portalDeleteIcon = ELEMENT_PORTAL_DELETE_ICON.replace("${portalName}", portalName);
     info("--Delete portal (" + portalName + ")--");
-    evt.click(portalDeleteIcon);
+    $(byXpath(portalDeleteIcon)).click();
     alert.acceptAlert();
-    evt.waitForElementNotPresent(ELEMENT_PORTAL_DELETE_ICON.replace("${portalName}", portalName), 2000);
+    $(byXpath(ELEMENT_PORTAL_DELETE_ICON.replace("${portalName}", portalName))).waitUntil(not(visible),Configuration.timeout);
   }
 
   /**
