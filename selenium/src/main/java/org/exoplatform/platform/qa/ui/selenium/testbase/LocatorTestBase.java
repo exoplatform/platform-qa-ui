@@ -116,7 +116,7 @@ public class LocatorTestBase {
   // SSO Login with CAS
 
 
-  public static final By              ELEMENT_INPUT_PASSWORD_CAS                       = By.id("UIPortalLoginFormControl");
+  public static final By              ELEMENT_INPUT_PASSWORD_CAS                       = By.id("password");
 
   public static final By              ELEMENT_INPUT_USERNAME_CAS                       = By.id("username");
 

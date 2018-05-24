@@ -61,7 +61,7 @@ public class Login {
    */
   public Login signIn(final String user, final String password) {
     $(byId("username")).setValue(user);
-    $(byId("UIPortalLoginFormControl")).setValue(password);
+    $(byId("password")).setValue(password);
     $(byClassName("button")).click();
 
     return this;
