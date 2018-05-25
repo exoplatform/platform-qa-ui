@@ -1,8 +1,6 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -47,7 +45,7 @@ public class WikiSettingPage {
 
     info("Verify that the search results is shown that matchs with keyword");
 
-    $(byClassName("TemplateGrid")).find(byText(template)).should(Condition.exist);
+    $(byId("UIWikiTemplateGrid")).find(byText(template)).should(Condition.exist);
 
   }
 
@@ -60,20 +58,20 @@ public class WikiSettingPage {
    * @param newDes String
    */
   public void editTemplate(String template, String newTitle, String newDes, String newContent) {
-    evt.click(By.xpath(ELEMENT_EDIT_TEMPLATE.replace("{$template}", template)));
+    $(byXpath(ELEMENT_EDIT_TEMPLATE.replace("{$template}", template))).click();
     if (!newTitle.isEmpty()) {
       info("Input the title for the template");
-      evt.type(ELEMENT_TITLE_TEMPLATE, newTitle, true);
+      $(ELEMENT_TITLE_TEMPLATE).setValue(newTitle);
     }
 
     if (!newDes.isEmpty()) {
       info("Input the description for the template");
-      evt.type(ELEMENT_DESCRIPTION_TEMPLATE, newDes, true);
+      $(ELEMENT_DESCRIPTION_TEMPLATE).setValue(newDes);
     }
 
     if (!newContent.isEmpty()) {
       info("Input the content for the template");
-      evt.type(ELEMENT_CONTENT_TEMPLATE, newContent, true);
+      $(ELEMENT_CONTENT_TEMPLATE).setValue(newContent);
     }
     saveTemplate();
   }
@@ -84,12 +82,10 @@ public class WikiSettingPage {
    * @param template String
    */
   public void deleteTemplate(String template) {
-    if ($(byXpath(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template))).is(Condition.visible)) {
       info("Delete template " + template);
       $(byXpath(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template))).click();
       alert.acceptAlert();
       $(By.xpath(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
-    }
   }
 
   /**
@@ -99,9 +95,9 @@ public class WikiSettingPage {
    */
   public void deleteTemplateWithCanceling(String template) {
     info("Delete template " + template);
-    evt.click(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template));
+    $(byXpath(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template))).click();
     alert.cancelAlert();
-    evt.waitForAndGetElement(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template));
+    $(byXpath(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
