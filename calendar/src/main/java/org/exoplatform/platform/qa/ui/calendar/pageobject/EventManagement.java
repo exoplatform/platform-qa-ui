@@ -180,7 +180,7 @@ public class EventManagement {
       $(ELEMENT_QUICK_INPUT_EVENT_NOTE).setValue(note);
     }
     if (opt.length > 0 && opt[0] != null) {
-      $(byId("category")).selectOption(opt[0]);
+      $(byId("calendar")).selectOption(opt[0]);
     }
     if (opt.length > 1 && opt[1] != null) {
       $(byId("category")).selectOption(opt[1]);

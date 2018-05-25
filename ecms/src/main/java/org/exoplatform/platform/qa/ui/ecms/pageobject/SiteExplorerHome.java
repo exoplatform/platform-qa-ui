@@ -94,6 +94,7 @@ public class SiteExplorerHome {
         selectNode(arrayElement);
       }
     }
+    $(byId("address")).waitUntil(Condition.hasValue("/"+path),Configuration.timeout);
   }
 
   /**

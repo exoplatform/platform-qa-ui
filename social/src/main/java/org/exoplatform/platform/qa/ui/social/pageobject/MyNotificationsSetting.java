@@ -375,7 +375,7 @@ public class MyNotificationsSetting {
         $(ELEMENT_ACCOUNT_NAME_LINK).click();
         $(ELEMENT_EDIT_LIKE_ICON).click();
         if($(ELEMENT_EDIT_LIKE_WEB_CHECKBOX).is(Condition.not(Condition.selected))){
-          $(ELEMENT_EDIT_LIKE_WEB_CHECKBOX).click();
+          $(ELEMENT_EDIT_LIKE_WEB_CHECKBOX).parent().click();
         }
         info("Click on Save button");
         $(ELEMENT_EDIT_LIKE_SAVE_BTN).click();
