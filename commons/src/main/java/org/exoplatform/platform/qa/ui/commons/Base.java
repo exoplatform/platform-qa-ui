@@ -20,6 +20,8 @@
  */
 package org.exoplatform.platform.qa.ui.commons;
 
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_PASSWORD_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
@@ -77,7 +79,9 @@ public class Base extends TestBase {
     if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.visible))
         && $(ELEMENT_INPUT_PASSWORD_CAS).is(Condition.not(Condition.visible))) {
       manageLogInOut.signOut();
-      assertEquals(getExoWebDriver().getWebDriver().getCurrentUrl(), "http://www.atis-network.be/");
+      if (!($(byClassName("confirm-mail-container")).exists() || $(byId("Register_Page")).exists())) {
+        assertEquals(getExoWebDriver().getWebDriver().getCurrentUrl(), "http://www.atis-network.be/");
+      }
     }
     Screenshots.finishContext();
   }

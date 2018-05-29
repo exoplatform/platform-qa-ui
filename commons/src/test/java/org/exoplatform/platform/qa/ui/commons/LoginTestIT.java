@@ -22,13 +22,12 @@ package org.exoplatform.platform.qa.ui.commons;
 
 import org.exoplatform.platform.qa.ui.commons.pageobject.Login;
 import org.exoplatform.platform.qa.ui.commons.pageobject.Platform;
+import org.exoplatform.platform.qa.ui.commons.pageobject.Register;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.util.StringUtils;
-import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Selenide.$;
 import static org.junit.Assert.assertTrue;
 
 @Tag("login")
@@ -44,8 +43,8 @@ public final class LoginTestIT extends Base {
     // Init instance for signInTest
     Platform plf = new Platform();
     plf.open();
-    $(By.className("alreadyMember")).find(By.tagName("a")).click();
     plf.ensureLicenseIsAccepted().ensureRegisterSoftwareIsSkipped().ensureAccountSetupIsSkipped();
+    new Register().skipRegister();
     String username = System.getProperty("atis.username");
     String password = System.getProperty("atis.password");
     if (StringUtils.isBlank(username)) {

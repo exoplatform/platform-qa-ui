@@ -20,6 +20,8 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
@@ -124,6 +126,9 @@ public class ManageLogInOut {
    * Sign out from intranet
    */
   public void signOut() {
+    if ($(byClassName("confirm-mail-container")).exists() || $(byId("Register_Page")).exists()) {
+      return;
+    }
 
     info("Sign out");
     for (int repeat = 0;; repeat++) {
