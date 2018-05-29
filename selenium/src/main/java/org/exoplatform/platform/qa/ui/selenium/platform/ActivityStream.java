@@ -85,11 +85,13 @@ public class ActivityStream {
    */
   public void checkActivityAddFile(String title) {
     info("Verify that the file's title is shown");
-   $(byXpath(ELEMENT_ACTIVITY_FILE_TITLE.replace("{$title}", title))).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_ACTIVITY_FILE_TITLE.replace("{$title}", title))).waitUntil(Condition.visible, Configuration.timeout);
     info("Verify that file's icon is shown");
-    $(byXpath(ELEMENT_ACTIVITY_FILE_CHECK_ICON_FILE.replace("{$title}", title))).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_ACTIVITY_FILE_CHECK_ICON_FILE.replace("{$title}", title))).waitUntil(Condition.visible,
+                                                                                           Configuration.timeout);
     info("Verify that file's size is shown");
-    $(byXpath(ELEMENT_ACTIVITY_FILE_TITLE_CHECK_FILE_SIZE.replace("{$title}", title))).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_ACTIVITY_FILE_TITLE_CHECK_FILE_SIZE.replace("{$title}", title))).waitUntil(Condition.visible,
+                                                                                                 Configuration.timeout);
   }
 
   /**
@@ -110,9 +112,7 @@ public class ActivityStream {
    */
   public void checkNotShownActivity(String name) {
     info("Verify that the activity of the name:" + name + " isnot shown");
-    evt.waitForElementNotPresent(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("${title}", name),
-                                 testBase.getDefaultTimeout(),
-                                 1);
+    $(byXpath(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("${title}", name))).shouldNotBe(Condition.visible);
     info("The activity of the name:" + name + " isnot shown successfully");
   }
 
@@ -123,7 +123,7 @@ public class ActivityStream {
    */
   public void checkNoActivity(String name) {
     info("Verify that the activity of the name:" + name + " is not shown");
-    evt.waitForElementNotPresent(By.xpath(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("${title}", name)), 3000, 1);
+    $(byXpath(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("${title}", name))).shouldNotBe(Condition.visible);
     info("The activity of the name:" + name + " is not shown successfully");
   }
 
@@ -144,12 +144,13 @@ public class ActivityStream {
     switch (type) {
     case Has_One_Value:
       info("Verify that the comment is added");
-      evt.waitForAndGetElement(ELEMENT_ACTIVITY_COMMENT.replace("${title}", title)
-                                                       .replace("${comment}", comment)
-                                                       .replace("$value", value));
+      $(byXpath(ELEMENT_ACTIVITY_COMMENT.replace("${title}", title)
+                                        .replace("${comment}", comment)
+                                        .replace("$value", value))).waitUntil(Condition.visible, Configuration.timeout);
       break;
     case No_Value:
-      evt.waitForAndGetElement(ELEMENT_ACTIVITY_COMMENT.replace("${title}", title).replace("${comment}", comment));
+      $(byXpath(ELEMENT_ACTIVITY_COMMENT.replace("${title}", title)
+                                        .replace("${comment}", comment))).waitUntil(Condition.visible, Configuration.timeout);
       break;
 
     }
@@ -204,7 +205,9 @@ public class ActivityStream {
   public void checkActivityWikiPage(String title, String content, String version, boolean isEdit) {
     if (!title.isEmpty()) {
       info("Check wiki page's title");
-      evt.waitForAndGetElement(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("${title}", title), 2000, 1);
+
+      $(byXpath(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("${title}", title))).waitUntil(Condition.visible,
+                                                                                                   Configuration.timeout);
     }
     if (!content.isEmpty()) {
       info("Check the content");
@@ -212,21 +215,27 @@ public class ActivityStream {
       arrayline = content.split("</br>");
       if (arrayline.length > 1) {
         info("Check first 4 lines of the wiki page");
-        evt.waitForAndGetElement(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("{$name}", arrayline[0]), 2000, 1);
-        evt.waitForAndGetElement(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("{$name}", arrayline[1]), 2000, 1);
-        evt.waitForAndGetElement(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("{$name}", arrayline[2]), 2000, 1);
-        evt.waitForAndGetElement(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("{$name}", arrayline[3]), 2000, 1);
+        $(byXpath(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("{$name}", title))).waitUntil(Condition.visible,
+                                                                                                    Configuration.timeout);
+        $(byXpath(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("{$name}", title))).waitUntil(Condition.visible,
+                                                                                                    Configuration.timeout);
+        $(byXpath(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("{$name}", title))).waitUntil(Condition.visible,
+                                                                                                    Configuration.timeout);
+        $(byXpath(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("{$name}", title))).waitUntil(Condition.visible,
+                                                                                                    Configuration.timeout);
         info("Check line 5 of the wiki page is not shown");
-        evt.waitForElementNotPresent(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("{$name}", arrayline[4]));
+        $(byXpath(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("{$name}", title))).shouldNotBe();
       } else {
         info("Check first line of the wiki page");
-        evt.waitForAndGetElement(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("${title}", arrayline[0]), 2000, 1);
+        $(byXpath(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("${title}", title))).waitUntil(Condition.visible,
+                                                                                                     Configuration.timeout);
       }
 
     }
     if (isEdit) {
       info("View change link is shown");
-      evt.waitForAndGetElement(ELEMENT_ACTIVITY_WIKI_VIEW_CHANGE_LINK.replace("$title", title));
+      $(byXpath(ELEMENT_ACTIVITY_WIKI_VIEW_CHANGE_LINK.replace("$title", title))).waitUntil(Condition.visible,
+                                                                                            Configuration.timeout);
     }
   }
 
@@ -243,11 +252,13 @@ public class ActivityStream {
     if (status == null)
       status = "Draft";
     // check icon and title
-    $(byXpath(ELEMENT_ACTIVITY_WEBCONTENT_TITLE.replace("${title}", title))).waitUntil(Condition.visible,Configuration.timeout);
-    $(byXpath(ELEMENT_ACTIVITY_WEBCONTENT_CHECK_VERSION.replace("${title}", title).replace("{$version}",
-            version))).waitUntil(Condition.visible,Configuration.timeout);
-    $(byXpath(ELEMENT_ACTIVITY_WEBCONTENT_CHECK_STATUS.replace("${title}", title).replace("{$status}",
-            status))).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_ACTIVITY_WEBCONTENT_TITLE.replace("${title}", title))).waitUntil(Condition.visible, Configuration.timeout);
+    $(byXpath(ELEMENT_ACTIVITY_WEBCONTENT_CHECK_VERSION.replace("${title}", title)
+                                                       .replace("{$version}", version))).waitUntil(Condition.visible,
+                                                                                                   Configuration.timeout);
+    $(byXpath(ELEMENT_ACTIVITY_WEBCONTENT_CHECK_STATUS.replace("${title}", title)
+                                                      .replace("{$status}", status))).waitUntil(Condition.visible,
+                                                                                                Configuration.timeout);
   }
 
   /**
@@ -492,7 +503,7 @@ public class ActivityStream {
     // type(ELEMENT_COMPOSER_INPUT_LINK_FIELD, link, true);
     evt.waitForAndGetElement(ELEMENT_COMPOSER_ATTACH_LINK_BUTTON);
     info("----Click attach button-----");
-    evt.clickByJavascript(ELEMENT_COMPOSER_ATTACH_LINK_BUTTON);
+    $(ELEMENT_COMPOSER_ATTACH_LINK_BUTTON).click();
     evt.waitForAndGetElement(By.id("LinkTitle"));
   }
 
@@ -864,7 +875,25 @@ public class ActivityStream {
   public void likeActivity(String activityText) {
     info("-- Action: Like or Unlike an activity --");
     info("-- Like activity --");
-    $(byText(activityText)).parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).click();
+    int numberofLike = Integer.parseInt($(byText(activityText)).parent()
+                                                               .parent()
+                                                               .parent()
+                                                               .parent()
+                                                               .find(ELEMENT_ICON_LIKE_ACTIVITY)
+                                                               .parent()
+                                                               .parent()
+                                                               .getText()
+                                                               .split(" ")[1]);
+    String numberAfterlike = String.valueOf(numberofLike + 1);
+    $(byText(activityText)).parent().parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).click();
+    $(byText(activityText)).parent()
+                           .parent()
+                           .parent()
+                           .parent()
+                           .find(ELEMENT_ICON_LIKE_ACTIVITY)
+                           .parent()
+                           .parent()
+                           .shouldHave(Condition.text(numberAfterlike));
 
   }
 
@@ -874,19 +903,25 @@ public class ActivityStream {
    * @param activityText input a text (String)
    */
   public void unlikeActivity(String activityText) {
-    info("-- Action: Like or Unlike an activity --");
-    info("-- Unlike activity --");
-    int numLike = Integer.parseInt(evt.waitForAndGetElement(ELEMENT_LIKE_NUMBER.replace("${title}", activityText))
-                                      .getText()
-                                      .trim());
-    evt.click(ELEMENT_ICON_UNLIKE.replace("${title}", activityText));
-    info("-- Verify UnLike button is gray --");
-    evt.waitForAndGetElement(ELEMENT_ICON_LIKE.replace("${title}", activityText));
-    info("-- Unlike successfully and Verify number of like is updated --");
-    int newNumLike = Integer.parseInt(evt.waitForAndGetElement(ELEMENT_LIKE_NUMBER.replace("${title}", activityText))
-                                         .getText()
-                                         .trim());
-    assert (newNumLike == (numLike - 1)) : "Number of like is updated";
+    int numberLike = Integer.parseInt($(byText(activityText)).parent()
+                                                             .parent()
+                                                             .parent()
+                                                             .parent()
+                                                             .find(ELEMENT_ICON_LIKE_ACTIVITY)
+                                                             .parent()
+                                                             .parent()
+                                                             .getText()
+                                                             .split(" ")[1]);
+    $(byText(activityText)).parent().parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).click();
+    String numberAfterUnlike = String.valueOf(numberLike - 1);
+    $(byText(activityText)).parent()
+                           .parent()
+                           .parent()
+                           .parent()
+                           .find(ELEMENT_ICON_LIKE_ACTIVITY)
+                           .parent()
+                           .parent()
+                           .shouldHave(Condition.text(numberAfterUnlike));
 
   }
 
@@ -963,7 +998,7 @@ public class ActivityStream {
    */
   public void checkNotComment(String title) {
     info("Verify that the activity hasn't any comment");
-    evt.waitForAndGetElement(ELEMENT_ACTIVITY_NOT_ANY_COMMENT.replace("$title", title));
+    $(By.xpath(ELEMENT_ACTIVITY_NOT_ANY_COMMENT.replace("$title", title))).waitUntil(Condition.visible, Configuration.timeout);
   }
 
   public void addcomment_to_activity(String id) {
@@ -1041,6 +1076,27 @@ public class ActivityStream {
     ELEMENT_DELETE_POPUP_OK.click();
     ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears, Configuration.timeout);
 
+  }
+
+  public void deleteActivityWiki(String activity) {
+    // get the id of activity created
+    String id = $(byText(activity)).parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .parent()
+                                   .getAttribute("id")
+                                   .split("UIActivityLoader")[1];
+    // click on the activity to appear the delete button
+    $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
+    // click on delete button
+    $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
+    ELEMENT_DELETE_POPUP_OK.click();
+    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears, Configuration.timeout);
   }
 
   public void likeUnlikeComment(String activity, String comment) {

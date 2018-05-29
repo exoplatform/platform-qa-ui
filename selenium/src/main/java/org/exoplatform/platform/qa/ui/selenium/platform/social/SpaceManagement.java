@@ -302,8 +302,9 @@ public class SpaceManagement {
    */
   public void goToSpace(String space) {
     info("evt.click on the title of the space");
-    evt.click(ELEMENT_ALL_SPACE_SPACE_NAME.replace("$space", space.toLowerCase()));
-    evt.waitForElementNotPresent(ELEMENT_ALL_SPACE_SPACE_NAME.replace("$space", space));
+    $(byXpath(ELEMENT_ALL_SPACE_SPACE_NAME.replace("$space", space.toLowerCase()))).click();
+    $(byXpath(ELEMENT_ALL_SPACE_SPACE_NAME.replace("$space", space))).waitUntil(Condition.not(Condition.visible),
+                                                                                Configuration.timeout);
   }
 
   /**
@@ -314,7 +315,8 @@ public class SpaceManagement {
    */
   public void verifyMessageAccessToSpace(String space) {
     info("Verify that");
-    evt.waitForAndGetElement(ELEMENT_SPACE_ACCESS_SPACE_REQUEST_JOIN_MESSAGE.replace("$space", space));
+    $(By.xpath(ELEMENT_SPACE_ACCESS_SPACE_REQUEST_JOIN_MESSAGE.replace("$space", space))).waitUntil(Condition.visible,
+                                                                                                    Configuration.timeout);
   }
 
   /**

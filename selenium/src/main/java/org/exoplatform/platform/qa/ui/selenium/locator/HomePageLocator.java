@@ -118,11 +118,16 @@ public final class HomePageLocator {
 
   public static final SelenideElement ELEMENT_MY_SPACE_LINK_PLF                                            =
                                                                 $(byClassName("uiSpaceNavigationPortlet")).find(byLinkText("MY SPACES"));
-  public static final SelenideElement ELEMENT_SECOND_SPACE_MY_SPACE  =
-                        $(byClassName("spaceNavigation")).findAll(byClassName("spaceItem")).get(1);
+
+  public static final SelenideElement ELEMENT_SECOND_SPACE_MY_SPACE                                        =
+                                                                    $(byClassName("spaceNavigation")).findAll(byClassName("spaceItem"))
+                                                                                                     .get(1);
 
   public static final By              ELEMENT_ALL_SPACE_JOIN_LINK                                          =
                                                                   By.cssSelector("#UISpaceNavigationPortlet .uiIconPLFMan");
+
+  public static final By              ELEMENT_ALL_SPACE_JOIN_LINK2                                         =
+                                                                   By.xpath("//*[@id=\"UISpaceNavigationPortlet\"]/div/div[2]/a");
 
   public static final String          ELEMENT_SPECIFIC_SPACE_LINK_PLF                                      =
                                                                       "//*[@id='UISpaceNavigationPortlet']//*[contains(text(),'{$space}')]";
@@ -621,7 +626,7 @@ public final class HomePageLocator {
 
   public static final SelenideElement ELEMENT_NOTIFICATION_POPUP                                           =
                                                                  $(byId("NotificationPopup"));
-  
+
   public static final SelenideElement ELEMENT_HP_GETTING_STARTED_SET_YOUR_PROFILE_PICTURE                  =
                                                                                           $(byXpath("//*[@id=\"gsList\"]/li[1]/a"));
 
@@ -655,21 +660,31 @@ public final class HomePageLocator {
   public static final SelenideElement ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR                                    =
                                                                         $(byXpath("//*[@id=\"UIAvatarUploadContent\"]/div[2]/button[1]"));
 
-  public static final SelenideElement ELEMENT_CALENDAR_CONTAINER=$(byClassName("currentDateContainer"));
+  public static final SelenideElement ELEMENT_CALENDAR_CONTAINER                                           =
+                                                                 $(byClassName("currentDateContainer"));
 
-  public static final SelenideElement ELEMENT_ICON_DELETE_CALENDAR_GADGET_CONTENT_MANAGEMENT =$(byClassName("DisplayedCalendarContainer")).find(byAttribute("data-original-title","Content Management")).parent().find(byClassName("uiIconDel"));
+  public static final SelenideElement ELEMENT_ICON_DELETE_CALENDAR_GADGET_CONTENT_MANAGEMENT               = $(
+                                                                                                               byClassName("DisplayedCalendarContainer")).find(byAttribute("data-original-title", "Content Management")).parent().find(byClassName("uiIconDel"));
 
-  public static final SelenideElement ELEMENT_CONTAINER_NO_DISPALYED_CALENDAR =$(byId("nonDisplayedCalendarContainer"));
+  public static final SelenideElement ELEMENT_CONTAINER_NO_DISPALYED_CALENDAR                              =
+                                                                              $(byId("nonDisplayedCalendarContainer"));
 
   public static final SelenideElement ELEMENT_SUGGETION_SPACE                                              =
                                                               $(byId("spaceSuggest"));
 
   public static final SelenideElement ELEMENT_GADGET_INVITATION                                            =
                                                                 $(byId("InvitationsPortlet"));
-  public static final By ELEMENT_ICON_DELETE_ACTIVITY= byClassName("uiIconClose");
-  public static final SelenideElement ELEMENT_TAB_ADD_LINK=$(byXpath("//*[@id=\"ActivityComposerExt\"]/div[3]/a"));
-  public static final SelenideElement ELEMENT_INPUT_LINK= $(byId("InputLink"));
-  public static final SelenideElement ELEMENT_BUTTON_ATTACH_LINK=$(byId("AttachButton"));
+
+  public static final By              ELEMENT_ICON_DELETE_ACTIVITY                                         =
+                                                                   byClassName("uiIconClose");
+
+  public static final SelenideElement ELEMENT_TAB_ADD_LINK                                                 =
+                                                           $(byXpath("//*[@id=\"ActivityComposerExt\"]/div[3]/a"));
+
+  public static final SelenideElement ELEMENT_INPUT_LINK                                                   = $(byId("InputLink"));
+
+  public static final SelenideElement ELEMENT_BUTTON_ATTACH_LINK                                           =
+                                                                 $(byId("AttachButton"));
 
   public static final By              ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET                              =
                                                                               byClassName("connect");
