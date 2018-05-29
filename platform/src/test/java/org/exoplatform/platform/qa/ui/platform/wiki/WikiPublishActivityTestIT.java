@@ -364,4 +364,26 @@ public class WikiPublishActivityTestIT extends Base {
     homePagePlatform.goToWiki();
     wikiHomePage.deleteWiki(title2);
   }
+
+  @Tag("WIKI-1392")
+  @Test
+  public void test08_CommentWikiActivityStream(){
+    String wiki = "wiki" + getRandomNumber();
+    String text= "text" + getRandomNumber();
+
+    homePagePlatform.goToWiki();
+    wikiHomePage.goToAddBlankPage();
+    richTextEditor.addSimplePage(wiki, text);
+    wikiManagement.saveAddPage();
+    homePagePlatform.goToHomePage();
+    activityStream.checkActivity(wiki);
+    info("add the content of the wiki page as a comment on wiki activity stream");
+    activityStream.commentWikiActivity(wiki, text);
+    info("check that the comment is added successfully");
+    activityStream.checkCommentOfActivity(wiki, text);
+    info("Delete the page");
+    homePagePlatform.goToWiki();
+    wikiHomePage.deleteWiki(wiki);
+  }
+
 }
