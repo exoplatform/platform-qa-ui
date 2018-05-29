@@ -44,8 +44,10 @@ public class WikiValidattions {
    * @param title String
    */
   public void verifyTitleDrafPage(String title) {
-    info("Verify that a draf page with the title:" + title + " is shown in draf table");
+    info("Verify that a draf page with the title:" + "title" + " is shown in draf table");
 
+    $(byXpath(ELEMENT_DRAFT_OF_NEW_PAGE.replace("${title}", title + "(New Page)"))).waitUntil(Condition.visible,
+                                                                                              Configuration.timeout);
   }
 
   /**
@@ -62,18 +64,13 @@ public class WikiValidattions {
    * Verify resuming a draf page
    *
    * @param titleBeforeDraf String
+   * @param content String
    */
-  public void verifyResumADraf(String titleBeforeDraf) {
+  public void verifyResumADraf(String titleBeforeDraf, String content) {
     info("Get current title in iput field");
-    String currentTitle = this.testBase.getExoWebDriver()
-                                       .getWebDriver()
-                                       .findElement(ELEMENT_TITLE_WIKI_INPUT)
-                                       .getAttribute("value")
-                                       .toString();
-    if (currentTitle.contains(titleBeforeDraf))
-      assert true;
-    else
-      assert false;
+    $(ELEMENT_TITLE_WIKI_INPUT).shouldHave(Condition.value(titleBeforeDraf));
+    $(ELEMENT_CONTENT_WIKI_INPUT).shouldHave(Condition.text(content));
+
   }
 
   /**
