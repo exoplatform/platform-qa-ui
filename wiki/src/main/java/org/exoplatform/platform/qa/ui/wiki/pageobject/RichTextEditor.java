@@ -6,6 +6,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
 import java.awt.event.KeyEvent;
 import java.io.File;
 import com.codeborne.selenide.SelenideElement;
@@ -509,9 +510,9 @@ public class RichTextEditor {
    */
   public void goToEditLink() {
     info("Click on Link menu");
-    evt.mouseOverAndClick(ELEMENT_LINK);
+    $(ELEMENT_LINK).hover().click();
     info("Click on Edit Link menu");
-    evt.mouseOverAndClick(ELEMENT_EDIT_LINK_MENU);
+    $(ELEMENT_EDIT_LINK_MENU).hover().click();
   }
 
   /**
@@ -553,7 +554,7 @@ public class RichTextEditor {
     info("Go To Edit Link");
     goToEditLink();
     info("Select the image");
-    $(byXpath(ELEMENT_CURRENT_TAB_ATTACHED_FILE_SELECTED)).click();
+    $(byXpath(ELEMENT_CURRENT_TAB_ATTACHED_FILE_SELECTED.replace("$file",fileName))).click();
     info("click on Select button");
     $(ELEMENT_SELECT_BUTTON).click();
     info("Input Label for the page");
@@ -562,8 +563,7 @@ public class RichTextEditor {
     inputToolTip(tooltip);
     info("Click on Create link button");
     goToCreateLink();
-    info("Move focus at the end of the line");
-    evt.pressEndKey(this.testBase.getExoWebDriver().getWebDriver());
+
   }
 
   /**
@@ -663,9 +663,9 @@ public class RichTextEditor {
    */
   public void goToWikiPageLink() {
     info("Click on Link menu");
-    evt.mouseOverAndClick(ELEMENT_LINK);
+    $(ELEMENT_LINK).hover().click();
     info("Click on Page Link menu");
-    evt.mouseOverAndClick(ELEMENT_WIKI_PAGE_LINK_MENU);
+    $(ELEMENT_WIKI_PAGE_LINK_MENU).hover().click();
   }
 
   /**
@@ -837,9 +837,9 @@ public class RichTextEditor {
    */
   public void goToEditImageLink() {
     info("Click on Link menu");
-    evt.mouseOverAndClick(ELEMENT_IMAGE_LINK);
+    $(ELEMENT_IMAGE_LINK).hover().click();
     info("Click on Edit image Link menu");
-    evt.mouseOverAndClick(ELEMENT_EDIT_IMAGE_LINK_MENU);
+    $(ELEMENT_EDIT_IMAGE_LINK_MENU).hover().click();
   }
 
   /**
@@ -1231,7 +1231,6 @@ public class RichTextEditor {
   public void uploadImageFile(String link) {
     info("Double Click on Upload New file button");
     $(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_IMAGE_BTN).doubleClick();
-
     $(byClassName("gwt-FileUpload")).uploadFromClasspath(link);
     /*
      * WebElement elem =
@@ -1255,12 +1254,11 @@ public class RichTextEditor {
    */
   public void goToExplorerWikiHome() {
     info("click on Wiki Home note");
-    $(ELEMENT_ICON_OPEN_INTRANET_IN_ALL_PAGE_TAB.waitUntil(Condition.appears, Configuration.timeout));
-    if (ELEMENT_EXPLORER_WIKIHOME.is(Condition.not(Condition.exist))) {
-      ELEMENT_ICON_OPEN_INTRANET_IN_ALL_PAGE_TAB.click();
+    $(byClassName("gwt-TabPanel")).find(byText("intranet")).waitUntil(Condition.visible,Configuration.timeout);
+    if($(ELEMENT_EXPLORER_WIKIHOME).is(Condition.not(Condition.visible))){
+      info("click on Wiki Home note");
+      $(byId("isc_1open_icon_0")).click();
     }
-    goToAllPagesTab();
-    ELEMENT_EXPLORER_WIKIHOME.waitUntil(Condition.appears, Configuration.timeout).click();
   }
 
   /**
@@ -1289,8 +1287,8 @@ public class RichTextEditor {
    */
   public void goToInsertImage() {
     info("Click on Insert Image");
-    $(ELEMENT_IMAGE_MENU_INSERT_IMAGE_BTN).click();
-    $(ELEMENT_IMAGE_MENU_INSERT_IMAGE_BTN).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+   $(ELEMENT_IMAGE_MENU_INSERT_IMAGE_BTN).click();
+    $(ELEMENT_IMAGE_MENU_INSERT_IMAGE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
@@ -1317,7 +1315,10 @@ public class RichTextEditor {
   public void selectPageInAllPagesTab(String page) {
     info("Select the page");
     goToAllPagesTab();
-    ELEMENT_POPUP_SELECT_WIKI_PAGE.find(byText(page)).waitUntil(Condition.appears, Configuration.timeout);
+    $(byClassName("gwt-TabPanel")).find(byText("intranet")).waitUntil(Condition.visible,Configuration.timeout);
+    if ($(byClassName("gwt-TabPanel")).find(byText(page)).is(Condition.not(Condition.visible))){
+      $(ELEMENT_EXPLORER_WIKIHOME).click();
+    }
     ELEMENT_WIKI_UNPUT_LINK_EXISTED_PAGE.click();
     ELEMENT_WIKI_UNPUT_LINK_EXISTED_PAGE.setValue("intranet:" + page);
     ELEMENT_POPUP_SELECT_WIKI_PAGE.find(byText(page)).click();
@@ -1461,12 +1462,9 @@ public class RichTextEditor {
    */
   public void selectImage(String altTextImage) {
     info("Focus on the frame");
-    plf.switchFrame(ELEMENT_CONTENT_WIKI_FRAME);
-    WebElement element = testBase.getExoWebDriver()
-                                 .getWebDriver()
-                                 .findElement(By.xpath(ELEMENT_WIKI_CONTENT_IMAGE_ALT.replace("$alt", altTextImage)));
-    selectItems(element);
-    evt.switchToParentWindow();
+    switchTo().frame($(byClassName("gwt-RichTextArea")));
+    $($(byXpath(ELEMENT_WIKI_CONTENT_IMAGE_ALT.replace("$alt", altTextImage)))).dragAndDropTo($(byId("body")));
+    switchTo().defaultContent();
   }
 
   /**

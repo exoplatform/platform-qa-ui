@@ -6,6 +6,7 @@ import com.codeborne.selenide.Selenide;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
+import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
@@ -14,11 +15,10 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
@@ -28,6 +28,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMETN_WIKI_STATUS_VERSION_TEXT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Created by exo on 5/21/18.
@@ -178,7 +179,440 @@ public class WikiBasicActionEditTestIT  extends Base {
         wikiValidattions.verifyTitleWikiPage(newTitle);
 
     }
+    /**
+     *<li> Case ID:139444.</li>
+     *<li> Test Case Name: Draft in an outdate version status.</li>
+     *<li> Pre-Condition: Make changes on a page with two usersCreate a page</li>
+     *<li> Post-Condition: </li>
+     */
+    @Test
+    public  void test03_00_DraftInAnOutdateVersionStatus() {
+        info("Test 3: Draft in an outdate version status");
+		/*Step Number: 1
+		*Step Name: Step 1: Edit an outdated version
+		*Step Description:
+			- Connect with the User A
+			- Add a page with name is Test
+			- Add a content and save
+		*Input Data:
 
+		*Expected Outcome:
+			The page is created*/
+        info("Create 2 new users");
+        String password="123456";
+        navigationToolbar.goToAddUser();
+//        arrayUsers = addUserPage.addUsers(2,password);
+
+        info("Add 2 users to Admin groups");
+ //       String groupsPath=permisGroups.getDataColOneByArrayTypeRandom(5);
+        navigationToolbar.goToUsersAndGroupsManagement();
+        userAndGroupManagement.goToGroupTab();
+  //      userAndGroupManagement.selectGroup(groupsPath);
+   //     userAndGroupManagement.addUsersToGroup(arrayUsers.get(0),"*",false,true);
+    //    userAndGroupManagement.addUsersToGroup(arrayUsers.get(1),"*",false,true);
+
+        info("Login with User A");
+    //    magAc.signOut();
+     //   magAc.signIn(arrayUsers.get(0), password);
+
+        info("Create a wiki page");
+        String title = "title"+getRandomNumber();
+        String content = "content"+getRandomNumber();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.addSimplePage(title,content);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(title);
+
+		/*Step number: 2
+		*Step Name: Step 2: Edit page
+		*Step Description:
+			- Connect with the User B who have edit permission on "Test" page
+			- Edit the page "Test" and add a content
+		*Input Data:
+
+		*Expected Outcome:
+			A draft is saved after 30s*/
+        info("Login with User B");
+       // magAc.signOut();
+       // magAc.signIn(arrayUsers.get(1), password);
+
+        info("Edit the page");
+        String newTitle = "newTitle"+getRandomNumber();
+        String newContent = "newContent"+getRandomNumber();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAPage(title);
+        wikiHomePage.goToEditPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.editSimplePageWithAutoSave(newTitle, newContent);
+        wikiManagement.cancelAddPage();
+        wikiHomePage.confirmWaringMessage(true);
+
+        info("The draft is saved");
+        wikiHomePage.goToMyDraft();
+        wikiValidattions.verifyTitleDrafPage(newTitle);
+
+		/*Step number: 3
+		*Step Name: Step 3: Edit page by User A
+		*Step Description:
+			- Connect with the user "A"
+			- Edit the page "Test" and add a content
+			- Save the page
+		*Input Data:
+
+		*Expected Outcome:
+			A new version of the page is created*/
+        info("Login with User A");
+      //  magAc.signOut();
+      //  magAc.signIn(arrayUsers.get(0), password);
+
+        info("Edit the page");
+        String newTitle1 = "newTitle1"+getRandomNumber();
+        String newContent1 = "newContent1"+getRandomNumber();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAPage(title);
+        wikiHomePage.goToEditPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.editSimplePage(newTitle1, newContent1);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(newTitle1);
+
+        info("A new version of the page is created");
+        wikiHomePage.viewInformationTable(newTitle1,"V2");
+
+
+
+		/*Step number: 4
+		*Step Name: Step 4: Edit page by User B
+		*Step Description:
+			- Connect with the User B:
+			- Open the page "Test" and click [Edit]
+		*Input Data:
+
+		*Expected Outcome:
+			A page is opened in edit mode and a warning message is displayed:
+			Your version is outdated, a version of this content has been updated
+			by another user.
+			You can [view your changes] and continue editing or [delete] your draft. "*/
+        info("Login with User B");
+      //  magAc.signOut();
+      //  magAc.signIn(arrayUsers.get(1), password);
+
+        info("Edit the page");
+      //  String message = wikiWarningData.getDataContentByArrayTypeRandom(3);
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAPage(newTitle1);
+        wikiHomePage.goToEditPage();
+
+        info("A page is opened in edit mode and a warning message is displayed:");
+        info("Your version is outdated, a version of this content has been updated by another user. "
+                + "You can [view your changes] and continue editing or [delete] your draft.");
+      //  wikiValidattions.verifyDraftInOutDateVersionStatus(message);
+
+		/*Step number: 5
+		*Step Name: Step 5: Check View your changes
+		*Step Description:
+			From the message, click on the link [View your changes]
+		*Input Data:
+
+		*Expected Outcome:
+			The Comparison view is open.
+			it's possible to click on continue editing or cancel the draft.*/
+        info("The Comparison view is open");
+        wikiManagement.goToViewChangesLinkOnStatus();
+        wikiValidattions.verifyTitleDraftChangesPage();
+
+    }
+
+    /**
+     *<li> Case ID:139444.</li>
+     *<li> Test Case Name: Draft in an outdate version status.</li>
+     *<li> Pre-Condition: Make changes on a page with two usersCreate a page</li>
+     *<li> Post-Condition: </li>
+     */
+    @Test
+    public  void test03_01_DraftInAnOutdateVersionStatus() {
+        info("Test 3: Draft in an outdate version status");
+		/*Step Number: 1
+		*Step Name: Step 1: Edit an outdated version
+		*Step Description:
+			- Connect with the User A
+			- Add a page with name is Test
+			- Add a content and save
+		*Input Data:
+
+		*Expected Outcome:
+			The page is created*/
+        info("Create 2 new users");
+        String password="123456";
+        navigationToolbar.goToAddUser();
+      //  arrayUsers = addUserPage.addUsers(2,password);
+
+        info("Add 2 users to Admin groups");
+      //  String groupsPath=permisGroups.getDataColOneByArrayTypeRandom(5);
+        navigationToolbar.goToUsersAndGroupsManagement();
+        userAndGroupManagement.goToGroupTab();
+       // userAndGroupManagement.selectGroup(groupsPath);
+      //  userAndGroupManagement.addUsersToGroup(arrayUsers.get(0),"*",false,true);
+      //  userAndGroupManagement.addUsersToGroup(arrayUsers.get(1),"*",false,true);
+
+        info("Login with User A");
+      //  magAc.signOut();
+     //   magAc.signIn(arrayUsers.get(0), password);
+
+        info("Create a wiki page");
+        String title = "title"+getRandomNumber();
+        String content = "content"+getRandomNumber();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.addSimplePage(title,content);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(title);
+
+		/*Step number: 2
+		*Step Name: Step 2: Edit page
+		*Step Description:
+			- Connect with the User B who have edit permission on "Test" page
+			- Edit the page "Test" and add a content
+		*Input Data:
+
+		*Expected Outcome:
+			A draft is saved after 30s*/
+        info("Login with User B");
+       // magAc.signOut();
+       // magAc.signIn(arrayUsers.get(1), password);
+
+
+        info("Edit the page");
+        String newTitle = "newTitle"+getRandomNumber();
+        String newContent = "newContent"+getRandomNumber();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAPage(title);
+        wikiHomePage.goToEditPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.editSimplePageWithAutoSave(newTitle, newContent);
+        wikiManagement.cancelAddPage();
+        wikiHomePage.confirmWaringMessage(true);
+
+        info("The draft is saved");
+        wikiHomePage.goToMyDraft();
+        wikiValidattions.verifyTitleDrafPage(newTitle);
+
+		/*Step number: 3
+		*Step Name: Step 3: Edit page by User A
+		*Step Description:
+			- Connect with the user "A"
+			- Edit the page "Test" and add a content
+			- Save the page
+		*Input Data:
+
+		*Expected Outcome:
+			A new version of the page is created*/
+        info("Login with User A");
+      //  magAc.signOut();
+      //  magAc.signIn(arrayUsers.get(0), password);
+
+        info("Edit the page");
+        String newTitle1 = "newTitle1"+getRandomNumber();
+        String newContent1 = "newContent1"+getRandomNumber();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAPage(title);
+        wikiHomePage.goToEditPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.editSimplePage(newTitle1, newContent1);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(newTitle1);
+
+        info("A new version of the page is created");
+        wikiHomePage.viewInformationTable(newTitle1,"V2");
+
+		/*Step number: 4
+		*Step Name: Step 4: Edit page by User B
+		*Step Description:
+			- Connect with the User B:
+			- Open the page "Test" and click [Edit]
+		*Input Data:
+
+		*Expected Outcome:
+			A page is opened in edit mode and a warning message is displayed:
+			Your version is outdated, a version of this content has been updated
+			by another user.
+			You can [view your changes] and continue editing or [delete] your draft. "*/
+        info("Login with User B");
+  //      magAc.signOut();
+//        magAc.signIn(arrayUsers.get(1), password);
+
+        info("Edit the page");
+      ///  String message = wikiWarningData.getDataContentByArrayTypeRandom(3);
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAPage(newTitle1);
+        wikiHomePage.goToEditPage();
+
+        info("A page is opened in edit mode and a warning message is displayed:");
+        info("Your version is outdated, a version of this content has been updated by another user. "
+                + "You can [view your changes] and continue editing or [delete] your draft.");
+    //    wikiValidattions.verifyDraftInOutDateVersionStatus(message);
+
+		/*Step number: 6
+		*Step Name: Step 6: Check continue editting
+		*Step Description:
+			- Close the draft view
+			- From the message, click on the link [Continue editing]
+		*Input Data:
+
+		*Expected Outcome:
+			The page is opened in the editing status*/
+        info("The page is opened in the editing status");
+        wikiManagement.goToContinueEdittingLinkOnStatus();
+    }
+
+    /**
+     *<li> Case ID:139444.</li>
+     *<li> Test Case Name: Draft in an outdate version status.</li>
+     *<li> Pre-Condition: Make changes on a page with two usersCreate a page</li>
+     *<li> Post-Condition: </li>
+     */
+    @Test
+    public  void test03_02_DraftInAnOutdateVersionStatus() {
+        info("Test 3: Draft in an outdate version status");
+		/*Step Number: 1
+		*Step Name: Step 1: Edit an outdated version
+		*Step Description:
+			- Connect with the User A
+			- Add a page with name is Test
+			- Add a content and save
+		*Input Data:
+
+		*Expected Outcome:
+			The page is created*/
+        info("Create 2 new users");
+        String password="123456";
+        navigationToolbar.goToAddUser();
+    //    arrayUsers = addUserPage.addUsers(2,password);
+
+        info("Add 2 users to Admin groups");
+    //    String groupsPath=permisGroups.getDataColOneByArrayTypeRandom(5);
+        navigationToolbar.goToUsersAndGroupsManagement();
+        userAndGroupManagement.goToGroupTab();
+   //     userAndGroupManagement.selectGroup(groupsPath);
+  //      userAndGroupManagement.addUsersToGroup(arrayUsers.get(0),"*",false,true);
+//        userAndGroupManagement.addUsersToGroup(arrayUsers.get(1),"*",false,true);
+
+        info("Login with User A");
+     //   magAc.signOut();
+     //   magAc.signIn(arrayUsers.get(0), password);
+        info("Create a wiki page");
+        String title = "title"+getRandomNumber();
+        String content = "content"+getRandomNumber();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.addSimplePage(title,content);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(title);
+
+		/*Step number: 2
+		*Step Name: Step 2: Edit page
+		*Step Description:
+			- Connect with the User B who have edit permission on "Test" page
+			- Edit the page "Test" and add a content
+		*Input Data:
+
+		*Expected Outcome:
+			A draft is saved after 30s*/
+        info("Login with User B");
+       // magAc.signOut();
+      //  magAc.signIn(arrayUsers.get(1), password);
+
+        info("Edit the page");
+        String newTitle = "newTitle"+getRandomNumber();
+        String newContent = "newContent"+getRandomNumber();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAPage(title);
+        wikiHomePage.goToEditPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.editSimplePageWithAutoSave(newTitle, newContent);
+        wikiManagement.cancelAddPage();
+        wikiHomePage.confirmWaringMessage(true);
+
+        info("The draft is saved");
+        wikiHomePage.goToMyDraft();
+        wikiValidattions.verifyTitleDrafPage(newTitle);
+
+		/*Step number: 3
+		*Step Name: Step 3: Edit page by User A
+		*Step Description:
+			- Connect with the user "A"
+			- Edit the page "Test" and add a content
+			- Save the page
+		*Input Data:
+
+		*Expected Outcome:
+			A new version of the page is created*/
+        info("Login with User A");
+       // magAc.signOut();
+       // magAc.signIn(arrayUsers.get(0), password);
+
+        info("Edit the page");
+        String newTitle1 = "newTitle1"+getRandomNumber();
+        String newContent1 = "newContent1"+getRandomNumber();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAPage(title);
+        wikiHomePage.goToEditPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.editSimplePage(newTitle1, newContent1);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(newTitle1);
+
+        info("A new version of the page is created");
+        wikiHomePage.viewInformationTable(newTitle1,"V2");
+
+		/*Step number: 4
+		*Step Name: Step 4: Edit page by User B
+		*Step Description:
+			- Connect with the User B:
+			- Open the page "Test" and click [Edit]
+		*Input Data:
+
+		*Expected Outcome:
+			A page is opened in edit mode and a warning message is displayed:
+			Your version is outdated, a version of this content has been updated
+			by another user.
+			You can [view your changes] and continue editing or [delete] your draft. "*/
+        info("Login with User B");
+  //      magAc.signOut();
+//        magAc.signIn(arrayUsers.get(1), password);
+
+        info("Edit the page");
+       // String message = wikiWarningData.getDataContentByArrayTypeRandom(3);
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAPage(newTitle1);
+        wikiHomePage.goToEditPage();
+
+        info("A page is opened in edit mode and a warning message is displayed:");
+        info("Your version is outdated, a version of this content has been updated by another user. "
+                + "You can [view your changes] and continue editing or [delete] your draft.");
+        //wikiValidattions.verifyDraftInOutDateVersionStatus(message);
+
+		/*Step number: 7
+		*Step Name: Step 7: Check delete draft
+		*Step Description:
+			- re
+			-open the page and click [Edit]
+			- From the message, click on the link [delete]
+		*Input Data:
+
+		*Expected Outcome:
+			The draft is deleted from the list" My drafts"*/
+        wikiManagement.goToDeleteLinkOnStatus();
+        info("The draft is deleted from the list of draft");
+        wikiHomePage.goToMyDraft();
+        wikiValidattions.verifyNotTitleDrafPage(newTitle1);
+        wikiValidattions.verifyNotTitleDrafPage(title);
+
+    }
 
     /**
      *<li> Case ID:139445.</li>
@@ -343,6 +777,79 @@ public class WikiBasicActionEditTestIT  extends Base {
 
     }
 
+    /**
+     *<li> Case ID:139445.</li>
+     *<li> Test Case Name: Edit a page with an existing draft.</li>
+     *<li> Pre-Condition: </li>
+     *<li> Post-Condition: </li>
+     */
+    @Test
+    public  void test04_01_EditAPageWithAnExistingDraft() {
+        info("Test 4: Edit a page with an existing draft");
+		/*Step Number: 1
+		*Step Name: Step 1: Add new page
+		*Step Description:
+			- Add a wiki page and save
+			- Edit the page
+			- Input a content
+		*Input Data:
+
+		*Expected Outcome:
+			The draft is saved after 30s*/
+        info("Create a wiki page");
+        String title = "title"+getRandomNumber();
+        String content = "content"+getRandomNumber();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        richTextEditor.addSimplePageWithAutoSaveStatus(title, content);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(title);
+
+        info("Edit the page");
+        String newTitle = "newTitle"+getRandomNumber();
+        String newContent = "newContent"+getRandomNumber();
+        wikiHomePage.goToAPage(title);
+        wikiHomePage.goToEditPage();
+        richTextEditor.editSimplePageWithAutoSave(newTitle, newContent);
+        wikiManagement.cancelAddPage();
+        wikiHomePage.confirmWaringMessage(true);
+
+		/*Step number: 2
+		*Step Name: Step 2: Edit page
+		*Step Description:
+			- From the "Wiki Home", Open again the page
+			- Edit the page
+		*Input Data:
+
+		*Expected Outcome:
+			A warning message is displayed under the title:
+			 "A draft of this page was saved on Month Day, Year HH:MM.
+			 You can view your changes and decide to resume the draft or delete it.*/
+        info("Edit the page again");
+       String message = "A draft of this page was saved on Month Day, Year HH:MM. "
+        + "You can view your changes and decide to resume the draft or delete it.";
+        wikiHomePage.goToAPage(title);
+        wikiHomePage.goToEditPage();
+
+        info("A warning message is displayed under the title:");
+        info("A draft of this page was saved on Month Day, Year HH:MM. "
+                + "You can view your changes and decide to resume the draft or delete it.");
+        String currentDate = getCurrentDate("M/d/yyyy");
+       wikiValidattions.verifyStatusWhenEditPageHasExistingDraf(message, currentDate);
+
+		/*Step number: 4
+		*Step Name: Step 4: Resume draft
+		*Step Description:
+			- Close the page "Draft changes"
+			- Click on the link [resume the draft]
+		*Input Data:
+
+		*Expected Outcome:
+			The page is displayed in the edit mode.*/
+        wikiManagement.goToResumDrafLinkOnStatus();
+        wikiValidattions.verifyResumADraf(newTitle);
+
+    }
 
     /**
      *<li> Case ID:139449.</li>
@@ -404,8 +911,218 @@ public class WikiBasicActionEditTestIT  extends Base {
         wikiHomePage.goToMyDraft();
         wikiValidattions.verifyTitleDrafPage(title1);
     }
+    /**
+     *<li> Case ID:139450.</li>
+     *<li> Test Case Name: Resume a draft after close without saving.</li>
+     *<li> Pre-Condition: edit a page</li>
+     *<li> Post-Condition: </li>
+     * @throws Exception
+     */
+    @Test
+    public  void test06_ResumeADraftAfterCloseWithoutSaving() throws Exception {
+        info("Test 6: Resume a draft after close without saving");
+		/*Step Number: 1
+		*Step Name: Step 1: Edit a page
+		*Step Description:
+			- Go to Intranet/Wiki
+			- Add a page
+			- Edit the page
+		*Input Data:
+
+		*Expected Outcome:
+			A draft version is saved after 30s*/
+        info("Create a wiki page");
+        String title = "title"+getRandomNumber();
+        String content = "content"+getRandomNumber();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        richTextEditor.addSimplePage(title, content);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(title);
+
+        info("Edit the page");
+        String title1 = "title1"+getRandomNumber();
+        String content1 = "content1"+getRandomNumber();
+        wikiHomePage.goToEditPage();
+        richTextEditor.editSimplePageWithAutoSave(title1, content1);
+        wikiManagement.cancelAddPage();
+        wikiHomePage.confirmWaringMessage(true);
+
+		/*Step number: 2
+		*Step Name: Step 2: Close a window without saving
+		*Step Description:
+			Close a window of the browser without saving
+			of the pageOpen the window of the age againGo to [My drafts]
+		*Input Data:
+
+		*Expected Outcome:
+			The draft is displayed in the list*/
+        info("The Browser is closed");
+        Selenide.close();
+        open(Configuration.baseUrl);
+        manageLogInOut.signInCas(PLFData.DATA_USER1,"gtngtn");
+        info("The draft version appears in the list");
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToMyDraft();
+        wikiValidattions.verifyTitleDrafPage(title1);
+
+		/*Step number: 3
+		*Step Name: Step 3: Autosave of the page
+		*Step Description:
+			Click on the link "title" of the draft
+		*Input Data:
+
+		*Expected Outcome:
+			The page in edit mode is displayed*/
+        info("The page in edit mode is displayed");
+        $(byId("UIWikiDraftGrid")).find(byText(title1)).click();
+        wikiValidattions.verifyResumADraf(title1);
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToMyDraft();
+        wikiDraftPage.deleteDraft(title1);
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(title);
+
+    }
 
 
+    /**
+     *<li> Case ID:139451.</li>
+     *<li> Test Case Name: Save a draft of currently saved page.</li>
+     *<li> Pre-Condition: connect with 2 users and edit the same page</li>
+     *<li> Post-Condition: </li>
+     */
+    @Test
+    public  void test07_SaveADraftOfCurrentlySavedPage() {
+        info("Test 7: Save a draft of currently saved page");
+		/*Step Number: 1
+		*Step Name: Step 1: Edit a page with User1
+		*Step Description:
+			- Connect with the User1
+			- Edit a page wiki and add a content
+		*Input Data:
+
+		*Expected Outcome:
+			The draft is saved after 30s*/
+        info("Create 2 new users");
+        String password="123456";
+        navigationToolbar.goToAddUser();
+      //  arrayUsers = addUserPage.addUsers(2,password);
+
+        info("Add 2 users to Admin groups");
+     //   String groupsPath=permisGroups.getDataColOneByArrayTypeRandom(5);
+        navigationToolbar.goToUsersAndGroupsManagement();
+        userAndGroupManagement.goToGroupTab();
+      //  userAndGroupManagement.selectGroup(groupsPath);
+      //  userAndGroupManagement.addUsersToGroup(arrayUsers.get(0),"*",false,true);
+      //  userAndGroupManagement.addUsersToGroup(arrayUsers.get(1),"*",false,true);
+
+        info("Login with User A");
+      //  magAc.signOut();
+      //  magAc.signIn(arrayUsers.get(0), password);
+
+        info("Create a wiki page");
+        String title = "title"+getRandomNumber();
+        String content = "content"+getRandomNumber();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.addSimplePage(title, content);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(title);
+
+        info("Edit the page");
+        String title1 = "title1"+getRandomNumber();
+        String content1 = "content1"+getRandomNumber();
+        wikiHomePage.goToEditPage();
+        sourceTextEditor.editSimplePageWithAutoSave(title1, content1);
+
+		/*Step number: 2
+		*Step Name: Step 2: Edit a page with User2
+		*Step Description:
+			- Connect with user2
+			- Open the same page edited by the user 1
+			- Click on the icon "Edit"
+		*Input Data:
+
+		*Expected Outcome:
+			A warning message is displayed:
+			This Page is currently being edited by FulluserName".*/
+        info("Login with User B");
+      //  magAc.signOut();
+      //  magAc.signIn(arrayUsers.get(1), password);
+
+        info("Edit the page");
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAPage(title);
+        wikiHomePage.goToEditPage();
+
+        info("A warning message is displayed:");
+        info("This Page is currently being edited by FulluserName");
+    //    String fullName = arrayUsers.get(0)+" "+arrayUsers.get(0);
+     //   String status = wikiWarningData.getDataContentByArrayTypeRandom(5);
+   //     wikiValidattions.verifyMessageWhenEditingSamePage(status, fullName);
+        wikiHomePage.confirmWaringMessage(true);
+    }
+
+    @Test
+    public  void test08_EditAttachedFile() {
+        info("Test 8: Edit attached file");
+		/*Step Number: 1
+		*Step Name: Step 1: Open attach file link form
+		*Step Description:
+			- Add new page or edit a page
+			- Ensure the page isin [Rich Text]editor
+			- Select attached file link in content
+			- Click [Link] in menu and select [Edit Link]
+		*Input Data:
+
+		*Expected Outcome:
+			- By default, the [Create Wiki page] is displayed in the [Rich Text] mode
+			- If the page is created in the [Rich Text] mode, the [Edit Page] will be displayed in the [Rich Text] mode.
+			- If the page is created in the [Source Editor] mode, the [Edit Page] will be displayed in the [Source Editor] mode.
+			- Attached File form appear*/
+
+
+		/*Step number: 2
+		*Step Name: Step 2: Change attached file
+		*Step Description:
+			- Choose other attached file
+			- Click [Select]
+			- Input tooltip for file
+			- Click [Create Link] button
+			- Click [Save]
+		*Input Data:
+
+		*Expected Outcome:
+			- Attached file is changed successfully in content of page
+			- Page is add/edited successfully*/
+        info("Create a wiki page");
+        String title1 = "title1"+getRandomNumber();
+        String tooltip = "tooltip"+getRandomNumber();
+        String attachedFile = "eXo-Platform.png";
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        richTextEditor.addSimplePage(title1,"");
+        richTextEditor.insertAttachedFileLink(attachedFile,true);
+        wikiValidattions.verifyInsertedLinkIntoFrame(attachedFile,"");
+        richTextEditor.editAttachedFileLink(attachedFile,"", tooltip);
+        wikiValidattions.verifyInsertedLinkIntoFrame("", tooltip);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(title1);
+		/*Step number: 3
+		*Step Name: Step 3: View attach file
+		*Step Description:
+			- Click on name of attached file
+		*Input Data:
+
+		*Expected Outcome:
+			Content of attach file is shown*/
+        info("The file is attached in the page");
+        wikiHomePage.goToAPage(title1);
+        wikiManagement.viewInsertLink(attachedFile);
+
+    }
     /**
      *<li> Case ID:139534.</li>
      *<li> Test Case Name: Add web page.</li>
@@ -459,6 +1176,516 @@ public class WikiBasicActionEditTestIT  extends Base {
         richTextEditor.insertWebLink(address,label1,"",true);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(title1);
+    }
+
+
+    /**
+     *<li> Case ID:139535.</li>
+     *<li> Test Case Name: Edit wiki page link.</li>
+     *<li> Pre-Condition: </li>
+     *<li> Post-Condition: </li>
+     */
+    @Test
+    public  void test10_EditWikiPageLink() {
+        info("Test 10 Edit wiki page link");
+		/*Step Number: 1
+		*Step Name: Step 1: Open attach file link form
+		*Step Description:
+			- Add new page or edit a page that has a wiki page link
+			- Ensure the page isin [Rich Text] editor
+			- Select an attached file link in content
+			-Click [Link] in menu and select [Edit Link]
+		*Input Data:
+
+		*Expected Outcome:
+			- By default, the [Create Wiki page] is displayed in the [Rich Text] mode
+			- If the page is created in the [Rich Text] mode, the [Edit Page] will be displayed in the [Rich Text] mode.
+			- If the page is created in the [Source Editor] mode, the [Edit Page] will be displayed in the [Source Editor] mode.
+			- Attached File form appear*/
+
+        info("Create a wiki page 1");
+        String title1 = "title1"+getRandomNumber();
+        String content1 = "content1"+getRandomNumber();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        richTextEditor.addSimplePage(title1, content1);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(title1);
+
+
+        info("Create a wiki page 2");
+        String title2 = "title2"+getRandomNumber();
+        String content2 = "content2"+getRandomNumber();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        richTextEditor.addSimplePage(title2, content2);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(title2);
+
+
+        info("Create a wiki page 3");
+        String title3 = "title3"+getRandomNumber();
+        String label = "label"+getRandomNumber();
+        String tooltip = "tooltip"+getRandomNumber();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        richTextEditor.addSimplePage(title3,"");
+        richTextEditor.goToWikiPageLink();
+        richTextEditor.insertExistWikiPageLink(title1,label,tooltip, RichTextEditor.wikiPageLinkTab.All_pages);
+        wikiValidattions.verifyInsertedLinkIntoFrame(label, tooltip);
+        info("Move focus at the end of the line");
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(title3);
+
+		/*Step number: 2
+		*Step Name: Step 2: Change wiki page link
+		*Step Description:
+			- Choose other page link
+			- Click [Select]
+			- Input tooltip for file
+			- Click [Create Link] button
+			- Click [Save]
+		*Input Data:
+
+		*Expected Outcome:
+			The attached wiki page link is changed successfully in content of page
+			- Page is add/edited successfully*/
+
+        info("Edit the page");
+        String title4 = "title4"+getRandomNumber();
+        String label4 = "label4"+getRandomNumber();
+        String tooltip4 = "tooltip4"+getRandomNumber();
+        wikiHomePage.goToAPage(title3);
+        wikiHomePage.goToEditPage();
+        richTextEditor.editSimplePage(title4,"");
+        richTextEditor.changeLink(label);
+        richTextEditor.goToEditLink();
+        richTextEditor.insertExistWikiPageLink(title2, label4, tooltip4, RichTextEditor.wikiPageLinkTab.All_pages);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(title4);
+
+		/*Step number: 3
+		*Step Name: Step 3: View the wiki page link
+		*Step Description:
+			- Click on name wiki page link
+		*Input Data:
+
+		*Expected Outcome:
+			Content of wiki page link is shown*/
+        info("Content of wiki page link is shown");
+        wikiHomePage.goToAPage(title4);
+        wikiManagement.viewInsertLink(label4);
+        wikiValidattions.verifyPageContent(title2,content2);
+        wikiHomePage.deleteWiki(title2);
+        wikiHomePage.deleteWiki(title4);
+        wikiHomePage.deleteWiki(title1);
+
+    }
+    /**
+     *<li> Case ID:139536.</li>
+     *<li> Test Case Name: Edit email address.</li>
+     *<li> Pre-Condition: </li>
+     *<li> Post-Condition: </li>
+     */
+    @Test
+    public  void test11_EditEmailAddress() {
+        info("Test 11 Edit email address");
+		/*Step Number: 1
+		*Step Name: Step 1: Open Email address form
+		*Step Description:
+			- Add new page or edit a page
+			- Ensure the page isin [Rich Text] editor
+			- Select email address link in content
+			-Click [Link] in menu and select [Edit Link]
+		*Input Data:
+
+		*Expected Outcome:
+			- By default, the [Create Wiki page] is displayed in the [Rich Text] mode
+			- If the page is created in the [Rich Text] mode, the [Edit Page] will be displayed in the [Rich Text] mode.
+			- If the page is created in the [Source Editor] mode, the [Edit Page] will be displayed in the [Source Editor] mode.
+			- Attached File form appear*/
+
+        info("Create a wiki page with email address");
+        String title1 = "title1"+getRandomNumber();
+        String tooltip = "tooltip"+getRandomNumber();
+        String label ="label"+getRandomNumber();
+        String address=getRandomString()+"@gmail.com";
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        richTextEditor.addSimplePage(title1,"");
+        richTextEditor.insertEmailLink(address, label, tooltip,true);
+        wikiValidattions.verifyInsertedLinkIntoFrame(label, tooltip);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(title1);
+
+		/*Step number: 2
+		*Step Name: Step 2: Change attached file
+		*Step Description:
+			- Change email address
+			- Click [Select]
+			- Input tooltip
+			- Click [Create Link] button
+			- Click [Save]
+		*Input Data:
+
+		*Expected Outcome:
+			Add attach file is changed successfully in content of page
+			- Page is add/edited successfully*/
+        info("Edit the page with change email address");
+        String title2 = "title2"+getRandomNumber();
+        String label2 = "label2"+getRandomNumber();
+        String address2=getRandomString()+"@gmail.com";
+        wikiHomePage.goToAPage(title1);
+        wikiHomePage.goToEditPage();
+        richTextEditor.editSimplePage(title2,"");
+        richTextEditor.changeLink(label);
+        richTextEditor.goToEditLink();
+        richTextEditor.insertEmailLink(address2, label2,"",true);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(title2);
+
+		/*Step number: 3
+		*Step Name: Step 3: View the email address
+		*Step Description:
+			- Click the email address
+		*Input Data:
+
+		*Expected Outcome:
+			- The Launch Application is shown that allows selecting an email app to be redirected to the email*/
+        info("Click on email link to verify that the link is avaiable");
+        wikiHomePage.goToAPage(title2);
+        wikiManagement.viewInsertLink(label2);
+    }
+
+
+
+    /**
+     *<li> Case ID:139537.</li>
+     *<li> Test Case Name: Edit image.</li>
+     *<li> Pre-Condition: </li>
+     *<li> Post-Condition: </li>
+     */
+    @Test
+    public  void test12_EditImage() {
+        info("Test 12 Edit image");
+		/*Step Number: 1
+		*Step Name: Step 1: Open upload image form
+		*Step Description:
+			- Add new page or edit a page
+			- Ensure the page is in [Rich Text]editor
+			- Choose image in page
+			-Click [Image] in menu and select [Edit Image...]
+		*Input Data:
+
+		*Expected Outcome:
+			- By default, the [Create Wiki page] is displayed in the [Rich Text] mode
+			- If the page is created in the [Rich Text] mode, the [Edit Page] will be displayed in the [Rich Text] mode.
+			- If the page is created in the [Source Editor] mode, the [Edit Page] will be displayed in the [Source Editor] mode.
+			- Attached File form appear*/
+        info("Create a wiki page");
+        String title = "title"+getRandomNumber();
+        String attachedFile = "eXo-Platform.png";
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        richTextEditor.addSimplePage(title,"");
+        richTextEditor.goToAttachedImageLink();
+        richTextEditor.insertImage(attachedFile, "200","200","");
+        richTextEditor.goToInsertImage();
+        info("Move focus at the end of the line");
+        wikiManagement.saveAddPage();
+        info("Page is add/edited successfully");
+        wikiValidattions.verifyTitleWikiPage(title);
+
+		/*Step number: 2
+		*Step Name: Step 2: Edit Attach image
+		*Step Description:
+			- Select an image to insert from the list below, by clicking it or upload new image
+			- Click Image Settings
+			- Type the width/height of the image
+			- Choose the way the image is positioned in the text
+			- Choose the way the image is vertically aligned in the line of text
+			- Click Insert Image button
+			- Click [Save]
+		*Input Data:
+
+		*Expected Outcome:
+			- The attached file is added successfully in content of page
+			- Page is add/edited successfully*/
+        info("Edit the page with change image");
+        String title2 = "title2"+getRandomNumber();
+        String attachedFile2 = "testavatar.png";
+        String altText2="altText2"+getRandomNumber();
+        String width2="200";
+        String height2="200";
+        wikiHomePage.goToAPage(title);
+        wikiHomePage.goToEditPage();
+        richTextEditor.editSimplePage(title2,"");
+        richTextEditor.selectImage(attachedFile);
+        richTextEditor.goToEditImageLink();
+        richTextEditor.insertImage(attachedFile2, width2, height2, altText2);
+        richTextEditor.goToInsertImage();
+        info("Move focus at the end of the line");
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(title2);
+
+        info("Add attach file is added successfully in content of page");
+        wikiHomePage.goToAPage(title2);
+        wikiValidattions.verifyAltTextImageInContentPage(altText2);
+
+
+    }
+
+    /**
+     *<li> Case ID:139606.</li>
+     *<li> Test Case Name: Check show message if there are 2 users editing in the same page..</li>
+     *<li> Pre-Condition: </li>
+     *<li> Post-Condition: </li>
+     */
+    @Test
+    public  void test13_CheckShowMessageIfThereAre2UsersEditingInTheSamePage() {
+        info("Test 13 Check show message if there are 2 users editing in the same page.");
+		/*Step Number: 1
+		*Step Name: Step 1: Add new page on browser 1
+		*Step Description:
+			- Login as user 1
+			- Go to Wiki
+			- Create a new page
+			- Input content
+			- Save page
+		*Input Data:
+
+		*Expected Outcome:
+			Add new page successfully*/
+        info("Create 2 new users");
+        String username1=getRandomString();
+        String password="123456";
+        String username2=getRandomString();
+        String email1=username1+"@test.com";
+        String email2=username2+"@test.com";
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(username1, password, email1, username1, username1);
+        addUsers.addUser(username2, password, email2, username2, username2);
+        navigationToolbar.goToAddUser();
+
+        info("Add 2 users to Admin groups");
+       // String groupsPath=permisGroups.getDataColOneByArrayTypeRandom(5);
+        navigationToolbar.goToUsersAndGroupsManagement();
+        userAndGroupManagement.goToGroupTab();
+      //  user.selectGroup(groupsPath);
+      //  userAndGroupManagement.addUsersToGroup(arrayUsers.get(0),"*",false,true);
+      //  user.addUsersToGroup(arrayUsers.get(1),"*",false,true);
+        manageLogInOut.signInCas(PLFData.DATA_USER1,"gtngtn");
+        info("Create a wiki page");
+        String title = "title"+getRandomNumber();
+        String content = "content"+getRandomNumber();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.addSimplePage(title, content);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(title);
+
+		/*Step number: 2
+		*Step Name: Step 2: Edit page at step 1
+		*Step Description:
+			- Click [Edit] button of that page
+			- Edit title & content
+			- Wait 30s for auto
+			->save draft
+		*Input Data:
+
+		*Expected Outcome:
+			Page is save to my draft*/
+        info("Edit a wiki page");
+        String newTitle = "newTitle"+getRandomNumber();
+        String newContent = "newContent"+getRandomNumber();
+        wikiHomePage.goToAPage(title);
+        wikiHomePage.goToEditPage();
+        sourceTextEditor.editSimplePageWithAutoSave(newTitle, newContent);
+
+		/*Step number: 3
+		*Step Name: Step 3: Edit page at step 1 by other user on browser 2
+		*Step Description:
+			- Login as user 2
+			- Go to Wiki
+			- Click on the page user 1 has been created before
+			- Click [Edit] button of that page
+			- Change title or content for this page
+			- Click [Save]
+		*Input Data:
+
+		*Expected Outcome:
+			- Show message alert "This page is currently being edited by"user 1"."
+			- Edit successfully*/
+        info("Login with user 2 on browser 2");
+   //   newDriver = new FirefoxDriver();
+   //     newDriver.get(baseUrl);
+    //    newDriver.manage().window().maximize();
+    //   ManageLogInOut  acc2 = new ManageLogInOut(newDriver);
+     //   WikiHomePage wHome2 = new WikiHomePage(newDriver);
+     //   WikiManagement wikiMg2 = new WikiManagement(newDriver);
+    //   SourceTextEditor sourceEditor2=new SourceTextEditor(newDriver);
+     //   WikiValidattions wValidate2 = new WikiValidattions(newDriver);
+  //      HomePagePlatform hp2 = new HomePagePlatform(newDriver);
+        manageLogInOut.signInCas(username1,"123456");
+
+        info("Edit the page");
+        String newTitle2 = "newTitle2"+getRandomNumber();
+        String newContent2 = "newContent2"+getRandomNumber();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAPage(title);
+        wikiHomePage.goToEditPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.editSimplePage(newTitle2, newContent2);
+        info("Show message alert: This page is currently being edited by user 1");
+   //    String fullName = arrayUsers.get(0)+" "+arrayUsers.get(0);
+  //     String status = wikiWarningData.getDataContentByArrayTypeRandom(5);
+  //      wikiValidattions.verifyMessageWhenEditingSamePage(status, fullName);
+        wikiManagement.cancelAddPage();
+         wikiHomePage.confirmWaringMessage(true);
+    //    newDriver.close();
+		/*Step number: 4
+		*Step Name: Step 4: Edit page at step 1 by user 1
+		*Step Description:
+			- Back to browser 1 and click Save button
+		*Input Data:
+
+		*Expected Outcome:
+			- Page is edited successfully and have no exception in console*/
+        wikiManagement.savePage();
+        wikiValidattions.verifyTitleWikiPage(newTitle);
+    }
+
+    /**
+     *<li> Case ID:139607.</li>
+     *<li> Test Case Name: Edit Paragraph When The Level Of Header Is Equal To Paragraph Below.</li>
+     *<li> Pre-Condition: </li>
+     *<li> Post-Condition: </li>
+     */
+    @Test
+    public  void test14_EditParagraphWhenTheLevelOfHeaderIsEqualToParagraphBelow() {
+        info("Test 14 Edit Paragraph When The Level Of Header Is Equal To Paragraph Below");
+		/*Step Number: 1
+		*Step Name: Create New Wiki Page with 2 paragraphs with the same header
+		*Step Description:
+			- Go to [Wiki]
+			- Click [Add Page]
+			-
+			-> [Blank Page]/[From Template...]
+			- Select [Source Editor] to switch to [Source Editor] mode
+			- Put title.
+			- Put content with 2 paragraphs with the same header (ex:= paragraph1 == paragraph2 =)
+			- Click [Save]
+		*Input Data:
+
+		*Expected Outcome:
+			- New page with 2 paragraphs with the same header is created successfully*/
+        info("Create a wiki page");
+        String title = "title"+getRandomNumber();
+        String value1 = "value1"+getRandomNumber();
+        String value2 = "value2"+getRandomNumber();
+        String value3 = "value3"+getRandomNumber();
+        String contentHeading1 = "=" + value1 + "=";
+        String contentHeading2 = "==" + value2 + "==";
+        String contentHeading3 = "===" + value2 + "===";
+        String content=contentHeading1+"\n"+contentHeading3;
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.addSimplePage(title,content);
+        wikiManagement.saveAddPage();
+        info("The page is created successfully");
+        wikiValidattions.verifyTitleWikiPage(title);
+        info("The page is shown with Heading 1 effect");
+        $(byId("H" + value1)).shouldHave(Condition.text(value1));
+        assertEquals($(byId("H" + value1)).getCssValue("font-size"), "36px");
+        info("The page is shown with Heading 1 effect");
+        $(byId("H" + value3)).shouldHave(Condition.text(value3));
+        assertEquals($(byId("H" + value3)).getCssValue("font-size"), "36px");
+		/*Step number: 2
+		*Step Name: Edit paragraph 1
+		*Step Description:
+			- Click to Wiki page added in step 1
+			- Click to edit button for paragraph 1 (This button is a hidden button, only appear when hover in paragraph)
+			- Change Title of paragraph 1
+			- Click [Save]
+		*Input Data:
+
+		*Expected Outcome:
+			- Wiki page is in Edit screen, but only paragraph 1 appears in edit content.
+			- Paragraph 1 is edited title successfully. There is no change for paragraph 2.*/
+       info("Edit paragraph");
+       wikiManagement.editParagraph(value1,contentHeading2);
+        wikiManagement.saveAddPage();
+       info("The page is shown with Heading 3 effect");
+    //    wikiValidattions.verifyEffectsPageContent(WikiValidattions.effectTypes.Heading3,value2);
+
+    }
+
+    /**
+     *<li> Case ID:139608.</li>
+     *<li> Test Case Name: Edit Paragraph When The Level Of Header Greater Than Paragraph Below.</li>
+     *<li> Pre-Condition: </li>
+     *<li> Post-Condition: </li>
+     */
+    @Test
+    public  void test15_EditParagraphWhenTheLevelOfHeaderGreaterThanParagraphBelow() {
+        info("Test 15 Edit Paragraph When The Level Of Header Greater Than Paragraph Below");
+		/*Step Number: 1
+		*Step Name: Create New Wiki Page with 2 paragraphs:+ Paragraph 1 with heading 1+ Paragraph 2 with heading 2
+		*Step Description:
+			- Go to [Wiki]
+			- Click [Add Page]
+			-
+			-> [Blank Page]/[From Template...]
+			- Select [Source Editor] to switch to [Source Editor] mode
+			- Put title.
+			- Put content with 2 paragraphs+ Paragraph 1 with heading 1+ Paragraph 2 with heading 2r (ex= paragraph1 === paragraph2 ==)
+			- Click [Save]
+		*Input Data:
+
+		*Expected Outcome:
+			- New page with 2 paragraphs is created successfully with:+ Paragraph 1 with heading 1+ Paragraph 2 with heading 2*/
+        info("Create a wiki page");
+        String title = "title"+getRandomNumber();
+        String value1 = "value1"+getRandomNumber();
+        String value2 = "value2"+getRandomNumber();
+        String contentHeading1 = "=" + value1 + "=";
+        String contentHeading2 = "==" + value2 + "==";
+        String content=contentHeading1+"\n"+contentHeading2;
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.addSimplePage(title,content);
+        wikiManagement.saveAddPage();
+        info("The page is created successfully");
+        wikiValidattions.verifyTitleWikiPage(title);
+        info("The page is shown with Heading 1 effect");
+        $(byId("H" + value1)).shouldHave(Condition.text(value1));
+        assertEquals($(byId("H" + value1)).getCssValue("font-size"), "36px");
+        info("The page is shown with Heading 2 effect");
+        $(byId("H" + value2 + "-1")).shouldHave(Condition.text(value2));
+        assertEquals($(byId("H" + value2 + "-1")).getCssValue("font-size"), "30px");
+
+
+		/*Step number: 2
+		*Step Name: Edit paragraph 2
+		*Step Description:
+			- Click to Wiki page added in step 1
+			- Click to edit button for paragraph 2 (This button is a hidden button, only appear when hover in paragraph)
+			- Change Title of paragraph 2
+			- Click [Save]
+		*Input Data:
+
+		*Expected Outcome:
+			- Wiki page is in Edit screen, but only paragraph 2 appears in edit content.
+			- Paragraph 2 is edited title successfully. There is no change for paragraph 1.*/
+        info("Edit paragraph");
+        String value3 = "value3"+getRandomNumber();
+        String contentHeading3 = "===" + value3 + "===";;
+        wikiManagement.editParagraph(value2,contentHeading3);
+        wikiManagement.saveAddPage();
+
     }
 
 }
