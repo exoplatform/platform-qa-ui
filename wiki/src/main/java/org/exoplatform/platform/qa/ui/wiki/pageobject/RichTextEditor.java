@@ -928,9 +928,9 @@ public class RichTextEditor {
    */
   public void goToExternalImageLink() {
     info("Click on Link menu");
-    evt.mouseOverAndClick(ELEMENT_IMAGE_LINK);
+    $(ELEMENT_IMAGE_LINK).click();
     info("Click on Attached file Link menu");
-    evt.mouseOverAndClick(ELEMENT_EXTERNAL_IMAGE_LINK_MENU);
+    $(ELEMENT_EXTERNAL_IMAGE_LINK_MENU).click();
   }
 
   /**
@@ -950,15 +950,15 @@ public class RichTextEditor {
     goToImageSettings();
     if (!width.isEmpty()) {
       info("Input width");
-      $(ELEMENT_IMAGE_WIDTH).val(width);
+      $(ELEMENT_IMAGE_WIDTH).setValue(width);
     }
     if (!height.isEmpty()) {
       info("Input height");
-      $(ELEMENT_IMAGE_HEIGHT).val(height);
+      $(ELEMENT_IMAGE_HEIGHT).setValue(height);
     }
     if (!altText.isEmpty()) {
       info("Change alt text");
-      $(ELEMENT_IMAGE_ALTERNATIVE_TEXT).val(altText);
+      $(ELEMENT_IMAGE_ALTERNATIVE_TEXT).setValue(altText);
     }
   }
 
@@ -970,7 +970,7 @@ public class RichTextEditor {
   public void inputExternalImageLink(String link) {
     if (!link.isEmpty()) {
       info("Input external Image link");
-      $(ELEMENT_EXTERNAL_IMAGE_INPUT_LINK).val(link);
+      $(ELEMENT_EXTERNAL_IMAGE_INPUT_LINK).setValue(link);
     }
   }
 
@@ -1018,7 +1018,7 @@ public class RichTextEditor {
    * Insert an image into the content of the page
    *
    * @param attachedFile String
-   * @param isPressEndKey  Boolean
+   * @param isPressEndKey Boolean
    */
   public void insertImage(String attachedFile, Boolean isPressEndKey) {
     info("Open Current page tab");
@@ -1066,27 +1066,27 @@ public class RichTextEditor {
       break;
     case Left:
       info("Select left align");
-      evt.check(ELEMENT_IMAGE_ALIGN_LEFT, 2);
+      $(ELEMENT_IMAGE_ALIGN_LEFT).click();
       break;
     case Center:
       info("Select center align");
-      evt.check(ELEMENT_IMAGE_ALIGN_CENTER, 2);
+      $(ELEMENT_IMAGE_ALIGN_CENTER).click();
       break;
     case Right:
       info("Select right align");
-      evt.check(ELEMENT_IMAGE_ALIGN_RIGHT, 2);
+      $(ELEMENT_IMAGE_ALIGN_RIGHT).click();
       break;
     case Top:
       info("Select top align");
-      evt.check(ELEMENT_IMAGE_ALIGN_TOP, 2);
+      $(ELEMENT_IMAGE_ALIGN_TOP).click();
       break;
     case Middle:
       info("Select middle align");
-      evt.check(ELEMENT_IMAGE_ALIGN_MIDDLE, 2);
+      $(ELEMENT_IMAGE_ALIGN_MIDDLE).click();
       break;
     case Bottom:
       info("Select bottom align");
-      evt.check(ELEMENT_IMAGE_ALIGN_BOTTOM, 2);
+      $(ELEMENT_IMAGE_ALIGN_BOTTOM).click();
       break;
     }
   }
@@ -1266,8 +1266,8 @@ public class RichTextEditor {
    */
   public void goToImageSettings() {
     info("Click on Insert Image");
-    evt.click(ELEMENT_IMAGE_MENU_IMAGE_SETTINGS_BTN);
-    evt.waitForElementNotPresent(ELEMENT_IMAGE_MENU_IMAGE_SETTINGS_BTN);
+    $(ELEMENT_IMAGE_MENU_IMAGE_SETTINGS_BTN).click();
+    $(ELEMENT_IMAGE_MENU_IMAGE_SETTINGS_BTN).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
   }
 
   /**
@@ -1309,8 +1309,8 @@ public class RichTextEditor {
    */
   public void goToInsertImage() {
     info("Click on Insert Image");
-    evt.click(ELEMENT_IMAGE_MENU_INSERT_IMAGE_BTN);
-    evt.waitForElementNotPresent(ELEMENT_IMAGE_MENU_INSERT_IMAGE_BTN);
+    $(ELEMENT_IMAGE_MENU_INSERT_IMAGE_BTN).click();
+    $(ELEMENT_IMAGE_MENU_INSERT_IMAGE_BTN).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
   }
 
   /**
@@ -1348,6 +1348,7 @@ public class RichTextEditor {
 
   /**
    * Check auto save essage
+   * 
    * @param title String
    * @param content String
    */
@@ -1646,8 +1647,6 @@ public class RichTextEditor {
     info("Click on Edit Macro link");
     evt.mouseOverAndClick(ELEMENT_EDIT_MACRO_LINK);
   }
-
-
 
   /**
    * Collapse all macro

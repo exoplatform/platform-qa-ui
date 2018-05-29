@@ -1,9 +1,7 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_DELETE_DRAFT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
@@ -14,7 +12,6 @@ public class WikiDraftPage {
   private final TestBase       testBase;
 
   public ManageAlert           magAl;
-
 
   ManageAlert                  alert;
 
@@ -32,7 +29,7 @@ public class WikiDraftPage {
    * @param title The title of a wiki's page to be deleted.
    */
   public void deleteDraft(String title) {
-    $(ELEMENT_DELETE_DRAFT).click();
+    $(byText(title + "(New Page)")).parent().parent().parent().find(byClassName("uiIconDeleteDraft")).click();
     alert.acceptAlert();
   }
 

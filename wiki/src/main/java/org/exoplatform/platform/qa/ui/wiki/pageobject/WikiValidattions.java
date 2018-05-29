@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -138,7 +139,7 @@ public class WikiValidattions {
   /**
    * Verify effects of Page's content
    *
-   * @param type  String
+   * @param type String
    * @param content String
    */
   public void verifyEffectsPageContent(effectTypes type, String content) {
@@ -296,6 +297,7 @@ public class WikiValidattions {
 
   /**
    * Verify that a table is added to the content of the page
+   * 
    * @param col int
    * @param row int
    */
@@ -666,12 +668,13 @@ public class WikiValidattions {
    */
   public void verifyAltTextImageInContentPage(String altText) {
     info("Verify that alt text is changed");
-    evt.waitForAndGetElement(ELEMENT_INSERTED_IMAGE_ALT_TEXT.replace("$alt", altText));
+    $(byXpath(ELEMENT_INSERTED_IMAGE_ALT_TEXT.replace("$alt", altText))).waitUntil(Condition.visible, Configuration.timeout);
   }
 
   /**
    * Verify attach files are displayed in attach list or not when clicking in
    * attach files number
+   * 
    * @param fileName String
    * @param display boolean
    */
