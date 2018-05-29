@@ -326,7 +326,7 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     activityStream.likeUnlikeComment(activity1,comment);
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).parent().shouldHave(Condition.text("(1)"));
     //rgba(47, 94, 146, 1) is the css value of blue
-    assertEquals("rgba(47, 94, 146, 1)",$(byId("LikeCommentLinkcomment"+idBlocComment)).find(byClassName("uiIconThumbUp")).getCssValue("color"));
+    assertEquals("rgba(87, 141, 201, 1)",$(byId("LikeCommentLinkcomment"+idBlocComment)).find(byClassName("uiIconThumbUp")).getCssValue("color"));
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).hover();
     ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.shouldHave(Condition.text("Unlike"));
     manageLogInOut.signIn("root","gtn");
@@ -374,13 +374,13 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     String idBlocComment=$(byText(activity1)).parent().parent().parent().find(byText(comment)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
     activityStream.likeUnlikeComment(activity1,comment);
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).parent().shouldHave(Condition.text("(1)"));
-    assertEquals("rgba(47, 94, 146, 1)",$(byId("LikeCommentLinkcomment"+idBlocComment)).find(byClassName("uiIconThumbUp")).getCssValue("color"));
+    assertEquals("rgba(87, 141, 201, 1)",$(byId("LikeCommentLinkcomment"+idBlocComment)).find(byClassName("uiIconThumbUp")).getCssValue("color"));
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).hover();
     ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.shouldHave(Condition.text("Unlike"));
     activityStream.likeUnlikeComment(activity1,comment);
     refresh();
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).parent().shouldHave(Condition.text(""));
-    assertEquals("rgba(153, 153, 153, 1)",$(byId("LikeCommentLinkcomment"+idBlocComment)).find(byClassName("uiIconThumbUp")).getCssValue("color"));
+    assertEquals("rgba(87, 141, 201, 1)",$(byId("LikeCommentLinkcomment"+idBlocComment)).find(byClassName("uiIconThumbUp")).getCssValue("color"));
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).hover();
     ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.shouldHave(Condition.text("Like"));
     manageLogInOut.signIn("root","gtn");

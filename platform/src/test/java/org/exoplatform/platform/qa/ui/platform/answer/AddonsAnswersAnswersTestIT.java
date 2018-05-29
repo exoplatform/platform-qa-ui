@@ -83,7 +83,6 @@ public class AddonsAnswersAnswersTestIT extends Base {
     questionManagement.inputDataToQuestionForm(question1, content1, null, null);
     clickByJavascript(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
     click(ELEMENT_OK_BUTTON_LINK);
-    $(byText(question1)).click();
     info("Create answer");
     homePagePlatform.goToAnswer();
     answerManagement.goToAnswerQuestion(question1);

@@ -93,7 +93,7 @@ public class AnswerLocator {
   public static final By              ELEMENT_ATTACHMENT_SAVE_BUTTON                        =
 
           By.xpath("//*[@id='FAQImportForm']//*[text()='Save']");
-  public static final String          ELEMENT_IMPORT_SUCCESS_MESSAGE                        = "The file has been imported";
+  public static final String          ELEMENT_IMPORT_SUCCESS_MESSAGE                        = "The file has been imported.";
   public static final By              ELEMENT_CATEGORY_OK_BUTTON                            =
           By.xpath("//*[contains(@class,'UIPopupWindow')]//a[text()='OK']");
   // Delete category
@@ -284,7 +284,7 @@ public class AnswerLocator {
           "//*[contains(@class,'voteResult')]//*[contains(text(),'$index')]";
   // answer form
   public static final By              ELEMENT_ANSWER_BUTTON                                 =
-          By.xpath("//*[@class='questionAction']//*[text()='answer']");
+          By.xpath("//*[@class='questionAction']//*[text()='Answer']");
   public static final By              ELEMENT_ANSWER_FORM                                   = By.id("UIResponseForm");
   public static final By              ELEMENT_ANSWER_FORM_DATA_FRAME_INPUT                  =
           By.xpath("//*[@class='cke_wysiwyg_frame cke_reset']");
@@ -404,7 +404,7 @@ public class AnswerLocator {
   public static final SelenideElement ELEMENT_RATE_QUESTION_5_VOTED=$(byClassName("voteResult")).findAll(byClassName("voted")).get(4);
   public static final SelenideElement ELEMENT_CONTAINER_QUESTIONS_IN_MANAGE_QUESTION=$(byId("QuestionManagerment-tab"));
   public static final By ELEMENT_ICON_EDIT_QUESTION_IN_MANAGE_QUESTION=byClassName("uiIconEdit");
-  public static final By ELEMENT_ICON_DELETE_QUESTION_IN_MANAGE_QUESTION=byClassName("uiIconEdit");
+  public static final By ELEMENT_ICON_DELETE_QUESTION_IN_MANAGE_QUESTION=byClassName("uiIconDelete");
   public static final By ELEMENT_CHECBOX_IN_MANAGE_QUESTION=byId("allDay");
 
   public static final By ELEMENT_ANSWER_DELETE=byClassName("confirm");
@@ -441,4 +441,8 @@ public class AnswerLocator {
   public static final By ELEMENT_ICON_PROMOTE_COMMENT= byClassName("uiIconAnsPromte");
   public static final SelenideElement ELEMENT_TAB_OPEN_QUESTION_IN_MANAGE_QUESTION=$(byId("QuestionNotAnswered-tab"));
   public static final By ELEMENT_ICON_ANSWER_QUESTION_IN_MANAGE_QUESTION=byClassName("uiIconAnsAnswer");
+  public static final By ELEMENT_ICON_MOVE_CATEGORIE=byClassName("uiIconMoveCategory");
+
+  public static final By ELEMENT_ICON_SUBMIT_QUESTION=byClassName("uiIconAnsAddNewQuestion");
+
 }

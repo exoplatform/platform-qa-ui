@@ -1667,7 +1667,7 @@ public class CalendarLocator {
                                                                          $(byId("UIListContainer")).find(byClassName("uiIconMiniArrowRight"));
 
   public static final SelenideElement ELEMENT_POUPUP_LIST_EVENT                                        =
-                                                                $(byClassName("uiIconMiniArrowRight"));
+                                                              $(byClassName("spliterResizableListArea"));
 
   public static final SelenideElement ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW                             = $(byId("UIWeekView"));
 
@@ -1675,5 +1675,7 @@ public class CalendarLocator {
 
   public static final By ELEMENT_UNCHECK_CALENDAR=byClassName("iconUnCheckBox");
   public static final SelenideElement ELEMENT_ICON_ADD_PARTICIPANT=$(byXpath("//*[@id=\"eventShare\"]/table/tbody/tr[3]/td[2]/a/i"));
+
+  public static final SelenideElement ELEMENT_LIST_CALENDAR=$(byId("UICalendars"));
 
 }

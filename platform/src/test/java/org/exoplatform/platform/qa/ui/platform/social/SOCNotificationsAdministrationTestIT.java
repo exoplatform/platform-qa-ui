@@ -143,7 +143,6 @@ public class SOCNotificationsAdministrationTestIT extends Base {
     addUsers.addUser(username, password, email, username, username);
     manageLogInOut.signIn(username, password);
     homePagePlatform.goToMySpaces();
-    spaceManagement.goToCreateSpace();
     spaceManagement.addNewSpaceSimple(spaceName, "");
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.inviteUser(DATA_USER1, false, "");

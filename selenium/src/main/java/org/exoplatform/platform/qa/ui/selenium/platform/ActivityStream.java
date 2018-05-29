@@ -7,6 +7,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLoca
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 import java.awt.*;
 
@@ -24,6 +25,7 @@ import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import com.codeborne.selenide.SelenideElement;
 
 public class ActivityStream {
   private final TestBase       testBase;
@@ -462,10 +464,13 @@ public class ActivityStream {
    */
   public void addText(String text) {
     info("----Add text into activity text box-----");
-    SelenideElement frame = $(byClassName("cke_wysiwyg_frame"));
+    SelenideElement frame=$(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
     switchTo().frame(frame);
-    $(byXpath("/html/body")).sendKeys(text);
+    ELEMENT_INPUT_ACTIVITY.click();
+    ELEMENT_INPUT_ACTIVITY.sendKeys(text);
     switchTo().defaultContent();
+
   }
 
   /**
@@ -890,7 +895,7 @@ public class ActivityStream {
    *
    * @param name String
    */
-  public void deleteactivity(String name) {
+  public void deleteActivity(String name) {
     info("remove activity");
     int repeat = 0;
     while (evt.waitForAndGetElement(ELEMENT_ACTIVITY_BOX.replace("${name}", name), 3000, 0) != null) {
@@ -1018,7 +1023,7 @@ public class ActivityStream {
     $(byText(comment)).should(Condition.exist);
   }
 
-  public void deleteActivity(String activity) {
+  public void deleteactivity(String activity) {
     // get the id of activity created
     String id = $(byText(activity)).parent()
                                    .parent()
@@ -1142,9 +1147,10 @@ public class ActivityStream {
 
   public void replyToCommentInPreview(String comment, String reply, String user) {
     // Click on reply link
-    $(byId("commentArea")).find(byText(comment)).parent().parent().parent().find(byClassName("replyCommentLink")).click();
-
-    ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
+    $(byId("commentArea")).find(byText(comment)).parent()
+            .parent()
+            .parent().find(byClassName("replyCommentLink")).click();
+    ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.visible,Configuration.timeout).click();
     executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + reply + "\")", "");
     ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
     $(byText(reply)).parent().parent().parent().find(byText(user)).should(Condition.exist);
@@ -1201,9 +1207,11 @@ public class ActivityStream {
     $(byText(replytoreply)).should(Condition.exist);
   }
 
-  public void replyToReplyInPreviewMode(String reply) {
-    String replytoreply = "ReplyToReply" + getRandomNumber();
-    $(byId("commentArea")).find(byText(reply)).parent().parent().parent().find(byClassName("replyCommentLink")).click();
+
+  public void replyToReplyInPreviewMode(String reply,String replytoreply) {
+    $(byId("commentArea")).find(byText(reply)).parent()
+            .parent()
+            .parent().find(byClassName("replyCommentLink")).click();
 
     ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
     executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + replytoreply + "\")", "");

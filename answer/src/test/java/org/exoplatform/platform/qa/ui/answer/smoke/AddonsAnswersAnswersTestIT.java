@@ -74,10 +74,8 @@ public class AddonsAnswersAnswersTestIT extends Base {
     questionManagement.inputDataToQuestionForm(question, "", null, "");
     $(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
     $(ELEMENT_OK_BUTTON_LINK).click();
-    $(byText(question)).click();
     answerManagement.goToAnswerQuestion(question);
     answerManagement.inputDataToAnswer(answer, null, null, null);
-    /// click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
     $(ELEMENT_ANSWER_FORM_SAVE_BUTTON).click();
     $(byText(answer)).waitUntil(Condition.appears, Configuration.timeout);
     questionManagement.deleteQuestion(question);

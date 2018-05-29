@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.calendar.smoke;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_ADD_EDIT_EVENT_NAME;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
@@ -155,6 +156,7 @@ public class CalendarEventTestIT extends Base {
                                                getDate(0, "MM/dd/yyyy"),
                                                getDate(0, "MM/dd/yyyy"),
                                                false);
+    $(ELEMENT_ADD_EDIT_EVENT_NAME).click();
     eventManagement.saveAddEventDetails();
     calendarHomePage.verifyIsPresentEventTask(titleEvent2,
                                               CalendarHomePage.selectViewOption.LIST,

@@ -200,7 +200,7 @@ public class CalendarEventTestIT extends Base {
     $(ELEMENT_EVENT_SCHEDULE_TAB).click();
     eventManagement.addParticipants(DATA_USER1, 1);
     eventManagement.checkBusyTimeOfUser(DATA_USER1, getDate(0, "HH") + ":00", getDate(0, "HH") + ":30");
-
+$(byXpath("//*[@id=\"UIEventForm\"]/div[4]/button[2]")).click();
     info("clear data");
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     homePagePlatform.goToCalendarPage();

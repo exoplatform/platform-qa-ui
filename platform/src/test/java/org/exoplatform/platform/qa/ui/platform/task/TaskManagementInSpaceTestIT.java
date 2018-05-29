@@ -53,7 +53,6 @@ public class TaskManagementInSpaceTestIT extends Base {
     labelsManagement = new LabelsManagement(this);
     projectsManagement = new ProjectsManagement(this);
     manageLogInOut = new ManageLogInOut(this);
-    manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
   }
 
   @Test
@@ -62,7 +61,7 @@ public class TaskManagementInSpaceTestIT extends Base {
     String space = "space" + getRandomNumber();
     String taskName = "task" + getRandomNumber();
     info("Create a space");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
     spaceManagement.goToTaskTab();
     ELEMENT_LEFT_PANEL_IN_TASK_PAGE.find(byText(space)).click();
@@ -78,7 +77,7 @@ public class TaskManagementInSpaceTestIT extends Base {
     String taskName = "task" + getRandomNumber();
     String newTaskName = "newTaskName" + getRandomNumber();
     info("Create a space");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
     spaceManagement.goToTaskTab();
     ELEMENT_LEFT_PANEL_IN_TASK_PAGE.find(byText(space)).click();
@@ -95,7 +94,7 @@ public class TaskManagementInSpaceTestIT extends Base {
     String space = "space" + getRandomNumber();
     String taskName = "task" + getRandomNumber();
     info("Create a space");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
     spaceManagement.goToTaskTab();
     ELEMENT_LEFT_PANEL_IN_TASK_PAGE.find(byText(space)).click();
@@ -111,7 +110,7 @@ public class TaskManagementInSpaceTestIT extends Base {
     String space = "space" + getRandomNumber();
     String label = "label" + getRandomNumber();
     info("Create a space");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
     spaceManagement.goToTaskTab();
     labelsManagement.addLabel(label);
@@ -126,7 +125,7 @@ public class TaskManagementInSpaceTestIT extends Base {
     String label = "label" + getRandomNumber();
     String newLabel = "newLabel" + getRandomNumber();
     info("Create a space");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
     spaceManagement.goToTaskTab();
     labelsManagement.addLabel(label);
@@ -141,7 +140,7 @@ public class TaskManagementInSpaceTestIT extends Base {
     String space = "space" + getRandomNumber();
     String label = "label" + getRandomNumber();
     info("Create a space");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
     spaceManagement.goToTaskTab();
     labelsManagement.addLabel(label);
@@ -156,7 +155,7 @@ public class TaskManagementInSpaceTestIT extends Base {
     String space = "space" + getRandomNumber();
     String project = "project" + getRandomNumber();
     info("Create a space");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
     spaceManagement.goToTaskTab();
     projectsManagement.addProject(project, "", false);
@@ -171,7 +170,7 @@ public class TaskManagementInSpaceTestIT extends Base {
     String project = "project" + getRandomNumber();
     String newProject = "newProject" + getRandomNumber();
     info("Create a space");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
     spaceManagement.goToTaskTab();
     projectsManagement.addProject(project, "", false);
@@ -186,7 +185,7 @@ public class TaskManagementInSpaceTestIT extends Base {
     String space = "space" + getRandomNumber();
     String project = "project" + getRandomNumber();
     info("Create a space");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
     spaceManagement.goToTaskTab();
     projectsManagement.addProject(project, "", false);

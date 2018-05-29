@@ -158,7 +158,6 @@ public class CreateNewDocument {
    * @param content String
    */
   public void addNewFile(String title, String content) {
-    this.testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     $(ELEMENT_FILEFORM_BLANK_NAME).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_FILEFORM_BLANK_NAME).setValue(title);
     $(ELEMENT_FILEFORM_BLANK_CONTENT).click();

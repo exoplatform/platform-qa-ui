@@ -128,7 +128,7 @@ public class AnswerCategoryManagement {
       break;
     case MOVE:
       info("MOVE category");
-      $(ELEMENT_CATEGORY_RIGHT_MOVE_BUTTON).click();
+      ELEMENT_LIST_CATEGORIE.find(byLinkText(" " + cat)).parent().find(ELEMENT_ICON_MOVE_CATEGORIE).click();
       $(ELEMENT_CATEGORY_MOVE_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case WATCH:
@@ -142,7 +142,7 @@ public class AnswerCategoryManagement {
       break;
     case SUBMITQUESTION:
       info("SUBMITQUESTION category");
-      $(ELEMENT_CATEGORY_RIGHT_SUBMIT_QUESTION_BUTTON).click();
+      ELEMENT_LIST_CATEGORIE.find(byLinkText(" " + cat)).parent().parent().find(ELEMENT_ICON_SUBMIT_QUESTION).click();
       $(ELEMENT_SUBMIT_QUESTION_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case RSS:

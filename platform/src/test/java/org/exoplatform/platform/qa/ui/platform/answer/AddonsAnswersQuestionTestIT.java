@@ -11,6 +11,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
@@ -24,7 +25,8 @@ import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
-
+@Tag("sniff")
+@Tag("answer")
 public class AddonsAnswersQuestionTestIT extends Base {
   HomePagePlatform         homePagePlatform;
 
@@ -118,9 +120,7 @@ public class AddonsAnswersQuestionTestIT extends Base {
     $(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
     $(byText(title)).shouldNot(Condition.exist);
     $(byText(newtitle)).should(Condition.exist);
-
     info("Test 6: Delete a question in Manage Question form");
-
     questionManagement.goToDeleteQuestionFromManageQuestionForm(newtitle);
     $(ELEMENT_QUESTION_CONFIRM_DELETE).waitUntil(Condition.visible, Configuration.timeout);
     $(ELEMENT_QUESTION_DELETE_FORM_OK_BUTTON).click();

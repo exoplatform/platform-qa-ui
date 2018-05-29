@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_TITLE_OF_PROJECT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 /**
@@ -94,6 +95,7 @@ public class ProjectManagementTestIT extends Base {
         homePagePlatform.goToTaskPage();
         projectsManagement.addProject(title, "", false);
         $(byText(title)).click();
+        ELEMENT_TITLE_OF_PROJECT.waitUntil(Condition.hasText(title),Configuration.timeout);
         tasksManagement.addTask(task);
         $(byText(task)).should(Condition.exist);
         info("delete task");
@@ -109,6 +111,7 @@ public class ProjectManagementTestIT extends Base {
         homePagePlatform.goToTaskPage();
         projectsManagement.addProject(title, "", false);
         $(byText(title)).click();
+        ELEMENT_TITLE_OF_PROJECT.waitUntil(Condition.hasText(title),Configuration.timeout);
         tasksManagement.addTask(task);
         info("edit task");
         tasksManagement.editTask(task, newTask, "High");
@@ -126,6 +129,7 @@ public class ProjectManagementTestIT extends Base {
         homePagePlatform.goToTaskPage();
         projectsManagement.addProject(title, "", false);
         $(byText(title)).click();
+        ELEMENT_TITLE_OF_PROJECT.waitUntil(Condition.hasText(title),Configuration.timeout);
         tasksManagement.addTask(task);
         info("delete task");
         tasksManagement.deleteTask(task);

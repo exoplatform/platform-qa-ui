@@ -4,6 +4,7 @@ import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -41,11 +42,13 @@ public class DocumentManagement {
     }
     ELEMENT_INPUT_NAME_FOLDER.setValue(folder);
     ELEMENT_BUTTON_CONFIRM_ADD_FOLDER.click();
+    ELEMENT_LIST_FOLDER_IN_DEFAULT_VIEW.find(byText(folder)).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   public void deleteFolder(String path, String folder, Boolean rightClick) {
     ELEMENT_INPUT_PATH.setValue(path).pressEnter();
     if (rightClick) {
+      $(ELEMENT_ACCOUNT_NAME_LINK).click();
       ELEMENT_LIST_FOLDER_IN_DEFAULT_VIEW.find(byText(folder)).contextClick();
       ELEMENT_POPUP_RIGHT_MENU_CONTAINER.find(ELEMENT_DELETE_BUTTON_IN_RIGHT_CLICK_CONTAINER).click();
     } else {
@@ -66,6 +69,7 @@ public class DocumentManagement {
   public void renameFolderInAdminView(String path, String folder, String newFolder, Boolean rightClick) {
     ELEMENT_INPUT_PATH.setValue(path).pressEnter();
     if (rightClick) {
+      $(ELEMENT_ACCOUNT_NAME_LINK).click();
       ELEMENT_LIST_FOLDER_IN_DEFAULT_VIEW.find(byText(folder)).contextClick();
       ELEMENT_POPUP_RIGHT_MENU_CONTAINER.find(ELEMENT_RENAME_BUTTON_IN_RIGHT_CLICK).click();
     } else {

@@ -50,7 +50,7 @@ public class UserProfilePage {
    */
   public void goToEditProfile() {
     info("Go to edit profile");
-    $(ELEMENT_EDIT_MY_PROFILE_BUTTON).click();
+    $(ELEMENT_EDIT_MY_PROFILE_LINK).click();
     $(ELEMENT_EDIT_PROFILE_FORM).waitUntil(Condition.visible,Configuration.timeout);
   }
 
@@ -263,7 +263,8 @@ public class UserProfilePage {
     if (isSave == null || isSave) {
       info("Save updating information");
 
-      evt.clickByJavascript(ELEMENT_CONTACT_SAVE_BUTTON, 2);
+      $(ELEMENT_CONTACT_SAVE_BUTTON).click();
+      $(ELEMENT_CONTACT_SAVE_BUTTON).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
 
     } else {
       info("Cancel updating information");

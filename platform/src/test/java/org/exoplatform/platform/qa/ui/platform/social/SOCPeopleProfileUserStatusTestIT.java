@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.platform.social;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
@@ -151,7 +152,7 @@ public class SOCPeopleProfileUserStatusTestIT extends Base {
     String username2 = "usernameb" + getRandomString();
     String email2 = username2 + "@test.com";
     String password = "123456";
-    String statusOnline = "Available";
+    String statusOnline = "Offline";
 
     info("Add user");
     navigationToolbar.goToAddUser();
@@ -161,7 +162,7 @@ public class SOCPeopleProfileUserStatusTestIT extends Base {
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToConnections();
     connectionsManagement.searchPeople(username1, null, null, null);
-    homePagePlatform.refreshUntil(username1 + " " + username1, visible, 2000);
+    homePagePlatform.refreshUntil($(byText(username1 + " " + username1)), visible, 2000);
     $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username1))).click();
     $(byClassName(ELEMENT_STATUS_CHAT_IN_PROFILE_PAGE.replace("{status}", statusOnline))).should(visible);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");

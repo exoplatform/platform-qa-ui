@@ -50,7 +50,6 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
     eventManagement = new EventManagement(this);
     calendarHomePage = new CalendarHomePage(this);
     manageLogInOut = new ManageLogInOut(this);
-    manageLogInOut.signInCas("john", "gtngtn");
 
   }
 
@@ -60,7 +59,7 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
     String contentEvent = "contentEvent" + getRandomNumber();
     String space = "space" + getRandomNumber();
     info("Create a space");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
     spaceManagement.goToAgendaTab();
     info("Test 13 Add an event in personal calendar");
@@ -88,7 +87,7 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
     String contentEvent2 = "contentEvent2" + getRandomNumber();
     String space = "space" + getRandomNumber();
     info("Create a space");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
     spaceManagement.goToAgendaTab();
     info("Test 13 Add an event in personal calendar");
@@ -127,7 +126,7 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
     String contentEvent = "contentEvent" + getRandomNumber();
     String space = "space" + getRandomNumber();
     info("Create a space");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
     spaceManagement.goToAgendaTab();
     info("Test 13 Add an event in personal calendar");

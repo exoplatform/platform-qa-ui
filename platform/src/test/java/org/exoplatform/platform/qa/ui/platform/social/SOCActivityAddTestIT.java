@@ -31,16 +31,11 @@ public class SOCActivityAddTestIT extends Base {
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
     $(ELEMENT_COMPOSER_SHARE_BUTTON).should(Condition.be(Condition.enabled));
     $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
+    $(byAttribute("data-original-title", "eXo-Platform.png")).parent().parent().parent().parent().parent().parent().parent().find(byClassName(ELEMENT_DATE_ACTIVITY)).hover();
     $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
                                                              .parent()
                                                              .parent()
-                                                             .parent()
-                                                             .find(byClassName(ELEMENT_DATE_ACTIVITY))
-                                                             .hover();
-    $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
-                                                             .parent()
-                                                             .parent()
-                                                             .parent()
+                                                             .parent().parent().parent().parent()
                                                              .find(ELEMENT_ICON_DELETE_ACTIVITY)
                                                              .click();
     ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.timeout).click();
