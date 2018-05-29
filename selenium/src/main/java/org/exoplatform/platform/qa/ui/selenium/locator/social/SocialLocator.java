@@ -1131,7 +1131,7 @@ public final class SocialLocator {
                                                              ".//*[@id='UIBreadCrumbsNavigationPortlet']//*[contains(text(),'$fullName')]";
 
   public static final By              ELEMENT_EDIT_MY_PROFILE_LINK                                      =
-                                                                   By.xpath(".//*[@id='UIBreadCrumbsNavigationPortlet']//*[@class='uiIconEdit uiIconLightGray']");
+                                                                   By.xpath("//*[@id=\"UIUserNavigationPortlet\"]/div[1]/div/div/ul/li/a");
 
   public static final By              ELEMENT_EDIT_MY_PROFILE_BUTTON                                    =
                                                                      By.xpath("//*[@id='UIExperienceProfilePortlet']//*[@class='uiIconEdit uiIconLightGray']");
@@ -2324,7 +2324,7 @@ public final class SocialLocator {
                                                                    $(byId("UIUserNavigationPortlet"));
 
   public static final SelenideElement ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE                         =
-                                                                                $(byXpath("//*[@id=\"spaceMenuTab\"]/li[8]/ul"));
+                                                                                $(byXpath("//*[@id=\"spaceMenuTab\"]/li[7]/ul"));
 
   public static final SelenideElement ELEMENT_LIST_OF_EXISTED_APPLICATION_IN_APPLICATION_TAB            =
                                                                                              $(byId("UITabPanetab3"));
@@ -2347,7 +2347,7 @@ public final class SocialLocator {
                                                                                   .find(byClassName("btn"));
 
   public static final SelenideElement ELEMENT_NAME_PROFILE_OF_USERS                                     =
-                                                                    $(byId("UIBreadCrumbsNavigationPortlet"));
+                                                                    $(byId("UIUserNavigationPortlet"));
 
   public static final SelenideElement ELEMENT_MINI_CONNECTION_PORTLET= $(byId("UIMiniConnectionsPortlet"));
   public static final By              ELEMENT_TASK_TAB                                                  =

@@ -135,7 +135,7 @@ public class TasksManagement {
   public void deleteReply (String task, String reply){
     $(byText(task)).click();
     $(byText(reply)).hover();
-    $(byText(reply)).parent().parent().find(byClassName("uiIconTrashMini")).click();
+    $(byText(reply)).parent().parent().parent().find(byClassName("uiIconTrashMini")).click();
     $(byText(reply)).shouldNot(Condition.exist);
   }
 

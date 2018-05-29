@@ -2,6 +2,7 @@ package org.exoplatform.platform.ui.qa.wiki;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.back;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_BUTTON_WIKI_RITCH_TEXT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_CONTENT_WIKI_INPUT;
@@ -168,6 +169,7 @@ public class WikiBasicActionAddRichTextTestIT extends Base {
     else
       assert false;
     back();
+    wikiHomePage.deleteWiki(title1);
   }
 
 }

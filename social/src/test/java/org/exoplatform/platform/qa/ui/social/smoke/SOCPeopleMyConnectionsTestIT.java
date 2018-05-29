@@ -175,7 +175,7 @@ public class SOCPeopleMyConnectionsTestIT extends Base {
   @BugInPLF("SOC-5738")
   // this test case is disabled until resolving this bug:
   // https://jira.exoplatform.org/browse/SOC-5738
-  public void test02_CancelAInvitationRequest() {
+  public void test02_CancelAInvitationRequest() throws Exception {
     info("Test 2: Cancel a invitation request");
     /* Create data test */
     String username1 = "usernamea" + getRandomString();

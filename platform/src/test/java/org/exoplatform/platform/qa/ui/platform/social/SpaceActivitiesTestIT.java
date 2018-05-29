@@ -131,6 +131,7 @@ public class SpaceActivitiesTestIT extends Base {
     // comment
     // icon
     $(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
+    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
     // insert comment
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
     // click on the button comment

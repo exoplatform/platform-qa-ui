@@ -153,7 +153,7 @@ public class ForumPublishActivityTestIT extends Base {
     $(byText(Topic)).should(Condition.exist);
     info("Verify that the topic's activity is shown on intranet");
     homePagePlatform.goToHomePage();
-    homePagePlatform.refreshUntil(comment,Condition.exist,1000);
+    homePagePlatform.refreshUntil($(byText(comment)),Condition.exist,1000);
     $(byText(comment)).should(Condition.exist);
     info("The activity is shown successfully");
     $(byText(Topic)).should(Condition.exist);
@@ -197,7 +197,7 @@ public class ForumPublishActivityTestIT extends Base {
     forumTopicManagement.startTopic(topic1, topic1, "", "");
     homePagePlatform.goToHomePage();
     info("clear cache and reconnect");
-    homePagePlatform.refreshUntil(topic1,Condition.exist,1000);
+    homePagePlatform.refreshUntil($(byText(topic1)),Condition.exist,1000);
     activityStream.checkActivity(topic1);
     deleteDataTest();
     info("Test 2: Finished testing");
@@ -225,7 +225,7 @@ public class ForumPublishActivityTestIT extends Base {
     forumTopicManagement.editTopic(topicNewName, "");
     executeJavaScript("window.scrollBy(0,-400);", "");
     homePagePlatform.goToHomePage();
-    homePagePlatform.refreshUntil(topicNewName,Condition.exist,1000);
+    homePagePlatform.refreshUntil($(byText(topicNewName)),Condition.exist,1000);
     info("Verify that the topic's activity is updated");
     $(byText(topicNewName)).should(Condition.exist);
     info("The topic's activity is updated successfully");
@@ -254,7 +254,7 @@ public class ForumPublishActivityTestIT extends Base {
     forumTopicManagement.editTopic("", newContent);
     executeJavaScript("window.scrollBy(0,-400);", "");
     homePagePlatform.goToHomePage();
-    homePagePlatform.refreshUntil(topic1,Condition.exist,1000);
+    homePagePlatform.refreshUntil($(byText(topic1)),Condition.exist,1000);
     info("Verify that the new topic's activity is shown");
     $(byText(topic1)).should(Condition.exist);
     $(byText(comment2)).should(Condition.exist);
@@ -286,7 +286,7 @@ public class ForumPublishActivityTestIT extends Base {
     $(ELEMENT_POST_REPLY).should(Condition.exist);
     info("The topic is locked successfully");
     homePagePlatform.goToHomePage();
-    homePagePlatform.refreshUntil(topic1,Condition.exist,1000);
+    homePagePlatform.refreshUntil($(byText(topic1)),Condition.exist,1000);
     info("Verify that the topic's activity is shown");
     $(byText(comment4)).should(Condition.exist);
     info("The topic's activity is shown successfully");
@@ -299,7 +299,7 @@ public class ForumPublishActivityTestIT extends Base {
     $(ELEMENT_POST_REPLY).should(Condition.exist);
     info("The topic is unlocked successfully");
     homePagePlatform.goToHomePage();
-    homePagePlatform.refreshUntil(topic1,Condition.exist,1000);
+    homePagePlatform.refreshUntil($(byText(topic1)),Condition.exist,1000);
     info("Verify that topic's activity is shown");
     $(By.xpath(ELEMENT_ACTIVITY_COMMENT.replace("${title}", topic1).replace("${comment}", comment3))).should(Condition.exist);
     info("The topic's activity is shown successfully");
@@ -325,7 +325,7 @@ public class ForumPublishActivityTestIT extends Base {
     forumTopicManagement.deleteTopic();
     deleteDataTest();
     homePagePlatform.goToHomePage();
-    homePagePlatform.refreshUntil(topic1,Condition.not(Condition.exist),2000);
+    homePagePlatform.refreshUntil($(byText(topic1)),Condition.not(Condition.exist),2000);
     info("Verify that the topic's activity is deleted after the topic is deleted");
     $(byText(topic1)).shouldNot(Condition.exist);
     info("the topic's activity is deleted sucessfully");
@@ -359,7 +359,7 @@ public class ForumPublishActivityTestIT extends Base {
     forumTopicManagement.addPoll(question, option1, option2);
     info("clear cache and recconnect");
     homePagePlatform.goToHomePage();
-    homePagePlatform.refreshUntil(comment,Condition.exist,1000);
+    homePagePlatform.refreshUntil($(byText(comment)),Condition.exist,1000);
     info("Verify that topic's activity is added to the stream");
     $(byText(comment)).should(Condition.exist);
     info("The topic's activity is added to the stream successfully");
@@ -390,7 +390,7 @@ public class ForumPublishActivityTestIT extends Base {
     info("clear cache and recconnect");
     homePagePlatform.goToHomePage();
     info("Click on Vote of Poll's activity on the stream");
-    homePagePlatform.refreshUntil(question,Condition.exist,1000);
+    homePagePlatform.refreshUntil($(byText(question)),Condition.exist,1000);
     $(byText(question)).click();
     info("Verify that the page redirects to the poll");
     $(ELEMENT_MORE_ACTIONS_POLL).should(Condition.exist);
@@ -425,7 +425,7 @@ public class ForumPublishActivityTestIT extends Base {
     forumTopicManagement.editPoll(question, option1, option3);
     info("clear cache and recconnect");
     homePagePlatform.goToHomePage();
-    homePagePlatform.refreshUntil(question,Condition.exist,1000);
+    homePagePlatform.refreshUntil($(byText(question)),Condition.exist,1000);
     info("Verify that the poll's comment is shown on the stream");
     $(byText(question)).should(Condition.exist);
     $(byText(comment2)).should(Condition.exist);
@@ -460,7 +460,7 @@ public class ForumPublishActivityTestIT extends Base {
     forumTopicManagement.deletePoll();
     homePagePlatform.goToHomePage();
     info("Verify that the comment is added to the topic on the stream after deleted poll");
-    homePagePlatform.refreshUntil(topic1,Condition.exist,1000);
+    homePagePlatform.refreshUntil($(byText(topic1)),Condition.exist,1000);
     $(byText(topic1)).should(Condition.exist);
     $(byText(comment3)).should(Condition.exist);
     info("The comment is added to the topic on the stream successfully after deleted poll");
@@ -492,7 +492,7 @@ public class ForumPublishActivityTestIT extends Base {
     forumForumManagement.goToStartTopic();
     forumTopicManagement.startTopic(topic1, topic1, "", "");
     homePagePlatform.goToHomePage();
-    homePagePlatform.refreshUntil(topic1,Condition.exist,1000);
+    homePagePlatform.refreshUntil($(byText(topic1)),Condition.exist,1000);
     info("Click on Reply button of the topic:" + topic1);
     $(byText(topic1)).parent().parent().parent().parent().find(ELEMENT_ICON_REPLAY_POST_FROM_ACTIVITY).click();
     info("Verify that Reply popup of the topic is shown");
@@ -536,7 +536,7 @@ public class ForumPublishActivityTestIT extends Base {
     forumTopicManagement.replyTopic(reply, reply, "", "");
     executeJavaScript("window.scrollBy(0,-600);", "");
     homePagePlatform.goToHomePage();
-    homePagePlatform.refreshUntil(topic,Condition.exist,1000);
+    homePagePlatform.refreshUntil($(byText(topic)),Condition.exist,1000);
     info("Verify that topic's activity with View Last reply icon is shown");
     $(byText(topic)).should(Condition.exist);
     info("The topic's activity with View Last reply icon is shown successfully");
@@ -578,7 +578,7 @@ public class ForumPublishActivityTestIT extends Base {
     forumTopicManagement.startTopic(topic, topic, "", "");
     info("Finished Creating a topic");
     homePagePlatform.goToHomePage();
-    homePagePlatform.refreshUntil(topic,Condition.exist,1000);
+    homePagePlatform.refreshUntil($(byText(topic)),Condition.exist,1000);
     info("Add a comment to the topic's activity");
     activityStream.checkActivity(topic);
     String id = $(byText(topic)).parent().parent().parent().parent().getAttribute("id").split("ActivityContextBox")[1];

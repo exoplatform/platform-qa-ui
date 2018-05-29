@@ -103,7 +103,7 @@ public class SOCPeopleProfileViewProfileTestIT extends Base {
     manageLogInOut.signIn(username1, password);
 
     navigationToolbar.goToMyProfile();
-    assertEquals(title(), "My Profile");
+    assertEquals(title(), "Profile");
 
     info("check mid-column");
     $(byXpath(ELEMENT_UIEXPERIENCE_PROFILE_PORTLET.replace("${content}", msgAboutMe))).should(Condition.exist);
@@ -160,7 +160,7 @@ public class SOCPeopleProfileViewProfileTestIT extends Base {
     manageLogInOut.signIn(username1, password);
 
     navigationToolbar.goToMyProfile();
-    assertEquals(title(), "My Profile");
+    assertEquals(title(), "Profile");
 
     info("check mid-column");
     $(byXpath(ELEMENT_UIEXPERIENCE_PROFILE_PORTLET.replace("${content}", msgAboutMe))).should(Condition.exist);

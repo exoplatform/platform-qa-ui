@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.platform.social;
 
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_CONNECTION_USER_NAME;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -101,6 +102,7 @@ public class SOCPeopleSearchTestIT extends Base {
     connectionsManagement.searchPeople(username1, "", "", "");
     $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username1))).should(Condition.exist);
     $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username2))).shouldNot(Condition.exist);
+    refresh();
     manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -149,6 +151,7 @@ public class SOCPeopleSearchTestIT extends Base {
 
     info("Edit user profile of user 1");
     info("Click on the name of user, click on My profile");
+    refresh();
     manageLogInOut.signIn(username2, password);
     navigationToolbar.goToMyProfile();
     info("Click on Edit button to change user's information");
@@ -159,6 +162,7 @@ public class SOCPeopleSearchTestIT extends Base {
 
     info("Login as John");
     manageLogInOut.signIn(username3, password);
+    refresh();
     info("Click on Connections on the left panel");
     homePagePlatform.goToConnections();
 
@@ -214,13 +218,14 @@ public class SOCPeopleSearchTestIT extends Base {
 
     info("Edit user profile of user 1");
     info("Click on the name of user, click on My profile");
+    refresh();
     manageLogInOut.signIn(username2, password);
     navigationToolbar.goToMyProfile();
     info("Click on Edit button to change user's information");
     userProfilePage.goToEditProfile();
     userProfilePage.updateExperience(organization2, jobTitle2, jobDetail2, skill2, dStart, null, true);
     userProfilePage.saveCancelUpdateInfo(true);
-
+    refresh();
     info("Login as John");
     manageLogInOut.signIn(username3, password);
     info("Click on Connections on the left panel");

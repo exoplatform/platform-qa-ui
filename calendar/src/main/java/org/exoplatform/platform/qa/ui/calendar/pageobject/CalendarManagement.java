@@ -341,6 +341,7 @@ public class CalendarManagement {
     $(byXpath(ELEMENT_LIST_EDIT_EVENT_BUTTON.replace("${categoryName}", oldCategory))).waitUntil(Condition.visible,Configuration.timeout);
     $(byXpath(ELEMENT_LIST_EDIT_EVENT_BUTTON.replace("${categoryName}", oldCategory))).click();
     $(ELEMENT_ADD_EVENT_CATEGORY_INPUT).setValue(newCategory);
+    $(ELEMENT_ADD_EVENT_CATEGORY_INPUT).click();
     $(ELEMENT_EDIT_EVENT_CATEGORY_BUTTON_UPDATE).click();
     $(byXpath(ELEMENT_LIST_EDIT_EVENT_BUTTON.replace("${categoryName}", newCategory))).waitUntil(Condition.visible,Configuration.timeout);
     $(ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE).click();
@@ -353,13 +354,12 @@ public class CalendarManagement {
    */
   public void openMenuOfCalendar(String calendar) {
     info("Open menu of a calendar");
-    $(byId("UICalendars")).find(byText(calendar))
-                          .waitUntil(Condition.appears, Configuration.timeout)
-                          .hover()
-                          .parent()
-                          .parent()
-                          .find(ELEMENT_CALENDAR_ICON_SETTINGS_OF_CALENDAR)
-                          .click();
+    ELEMENT_LIST_CALENDAR.find(byText(calendar)).waitUntil(Condition.appears, Configuration.timeout)
+            .hover()
+            .parent()
+            .parent()
+            .find(ELEMENT_CALENDAR_ICON_SETTINGS_OF_CALENDAR)
+            .click();
 
   }
 
@@ -475,9 +475,9 @@ public class CalendarManagement {
   /**
    * Check user selector of share calendar
    *
-   * @param cal
-   * @param user
-   * @param isPresent
+   * @param cal String
+   * @param user String
+   * @param isPresent boolean
    */
   public void checkUserSelectorOfShareCalendar(String cal, String user, boolean isPresent) {
     executeActionCalendar(cal, menuOfCalendarOption.SHARE);
@@ -643,11 +643,11 @@ public class CalendarManagement {
       switch (option) {
       case NEVER:
         // check(ELEMENT_CALENDAR_SETTING_NEVER_SEND_INVITE_CHECKBOX,2);
-        $(ELEMENT_CALENDAR_SETTING_NEVER_SEND_INVITE_CHECKBOX).click();
+        $(ELEMENT_CALENDAR_SETTING_NEVER_SEND_INVITE_CHECKBOX).parent().click();
         break;
       case ALWAYS:
         // check(ELEMENT_CALENDAR_SETTING_ALWAYS_SEND_INVITE_CHECKBOX,2);
-        $(ELEMENT_CALENDAR_SETTING_ALWAYS_SEND_INVITE_CHECKBOX).click();
+        $(ELEMENT_CALENDAR_SETTING_ALWAYS_SEND_INVITE_CHECKBOX).parent().click();
         break;
       case ASK:
         // check(ELEMENT_CALENDAR_SETTING_ASK_SEND_INVITE_CHECKBOX,2);
@@ -857,6 +857,7 @@ public class CalendarManagement {
    *
    * @param name String
    * @param opt is an instance of a repeated event as 1,2,3,4....
+   * @param view view
    */
   public void openEditEventTaskPopup(String name, CalendarHomePage.selectViewOption view, String... opt) {
     info("Edit an event");

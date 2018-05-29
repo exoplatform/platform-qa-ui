@@ -24,6 +24,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_PASSWORD_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 
+import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -53,6 +54,9 @@ public class Base extends TestBase {
 
   @BeforeEach
   public void beforeEach(TestInfo testInfo) {
+    if (!title().equals("Login")) {
+      Selenide.close();
+    }
     // Set context from better naming of screenshots in case of test failure
     Screenshots.startContext(testInfo.getTestClass().get().getName(), testInfo.getTestMethod().get().getName());
     openPlatform(testInfo);
@@ -82,10 +86,4 @@ public class Base extends TestBase {
     Screenshots.finishContext();
   }
 
-  @AfterEach
-  public void close() {
-    if (!title().equals("Login")) {
-      Selenide.close();
-    }
-  }
 }

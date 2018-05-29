@@ -180,7 +180,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
    * suggestions gadget is not hided
    */
   @Test
-  public void test02_NotShowSuggestionsGadget() {
+  public void test02_NotShowSuggestionsGadget() throws Exception {
     info("Test 02: Not show suggestions gadget");
 
     info("Invite John to 2 spaces");
@@ -231,7 +231,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
    * members who are user's connections and ordered by creation date
    */
   @Test
-  @BugInPLF("5806")
+
   public void test01_CheckDisplayOfSuggestionsGadgetIfCommunConnectionIs0() {
     String username1 = "usernamea" + getRandomString();
     String username2 = "usernameb" + getRandomString();

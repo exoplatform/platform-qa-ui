@@ -1045,10 +1045,8 @@ public class CalendarHomePage {
    */
   public void quickSearchCalendar(String keyword) {
     info("----Type in quick search box----");
-    evt.type(ELEMENT_QUICK_SEARCH_INPUT, keyword, true);
-    Actions action = new Actions(testBase.getExoWebDriver().getWebDriver());
-    action.sendKeys(Keys.RETURN).build().perform();
-    evt.waitForAndGetElement(ELEMENT_BUTTON_CLOSE_QUICK_SEARCH_RESULT);
+    $(ELEMENT_QUICK_SEARCH_INPUT).setValue(keyword).pressEnter();
+    $(byXpath(ELEMENT_BUTTON_CLOSE_QUICK_SEARCH_RESULT)).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -1058,15 +1056,15 @@ public class CalendarHomePage {
    */
   public void advanceSearchCalendar(String keyword) {
     info("----Open Advance Search window----");
-    evt.waitForAndGetElement(ELEMENT_BUTTON_OPEN_ADVANCE_SEARCH_FORM);
-    evt.click(ELEMENT_BUTTON_OPEN_ADVANCE_SEARCH_FORM);
+    $(byXpath(ELEMENT_BUTTON_OPEN_ADVANCE_SEARCH_FORM)).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_BUTTON_OPEN_ADVANCE_SEARCH_FORM)).click();
     info("----Input keyword----");
-    evt.waitForAndGetElement(ELEMENT_INPUT_TEXT_ADVANCE_SEARCH);
-    evt.type(ELEMENT_INPUT_TEXT_ADVANCE_SEARCH, keyword, true);
-    evt.click(ELEMENT_BUTTON_SEARCH_ADVANCE_SEARCH);
+    $(byXpath(ELEMENT_INPUT_TEXT_ADVANCE_SEARCH)).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_INPUT_TEXT_ADVANCE_SEARCH)).setValue(keyword);
+    $(byXpath(ELEMENT_BUTTON_SEARCH_ADVANCE_SEARCH)).click();
     info("----Confirm search result displayed----");
 
-    evt.waitForAndGetElement(ELEMENT_BUTTON_CLOSE_QUICK_SEARCH_RESULT);
+    $(byXpath(ELEMENT_BUTTON_CLOSE_QUICK_SEARCH_RESULT)).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**

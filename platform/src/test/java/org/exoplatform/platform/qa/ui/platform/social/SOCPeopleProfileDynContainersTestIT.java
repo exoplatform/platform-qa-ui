@@ -7,6 +7,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocat
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_EDIT_MY_PROFILE_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -67,6 +68,7 @@ public class SOCPeopleProfileDynContainersTestIT extends Base {
    * -container
    */
   @Test
+  @BugInPLF("PLF-7947")
   public void test01_CheckTheLayoutOfProfilePage() {
     info("Test 1: Check the layout of Profile page");
     String righttop_profile = "righttop-profile-container";
@@ -119,6 +121,7 @@ public class SOCPeopleProfileDynContainersTestIT extends Base {
    * on the right - Container Name is right -editprofile -container
    */
   @Test
+  @BugInPLF("PLF-7947")
   public void test02_CheckTheLayoutOfEditProfilePage() {
     info("Test 2: Check the layout of Edit Profile page");
     String action_editprofile = "action-editprofile-container";

@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -39,14 +40,12 @@ public class SpaceHomePage {
     info("--Open Setting tab of the space");
     info("Click on the tab");
 
-    if (evt.waitForAndGetElement(ELEMENT_SPACE_SPACE_SETTINGS, 5000, 0) == null) {
-      evt.click(ELEMENT_SPACE_MENU_MORE, 2);
-      evt.clickByJavascript(ELEMENT_SPACE_SPACE_SETTINGS);
-    } else
+    if  ($(ELEMENT_SPACE_MENU_MORE).is(Condition.visible)) {
+      $(ELEMENT_SPACE_MENU_MORE).click();
       $(ELEMENT_SPACE_SPACE_SETTINGS).click();
-
-    $(ELEMENT_SPACE_SPACE_SETTINGS_TITLE).waitUntil(Condition.appears, Configuration.timeout);
-    info("Space setting page is shown");
+      $(ELEMENT_SPACE_SPACE_SETTINGS_TITLE).waitUntil(Condition.appears, Configuration.timeout);
+      info("Space setting page is shown");
+    }
   }
 
   /**
@@ -55,6 +54,9 @@ public class SpaceHomePage {
   public void goToWikiTab() {
     info("--Open Wiki tab of the space");
     info("Click on the tab");
+    if ( $(ELEMENT_SPACE_WIKI_TAB).is(Condition.not(Condition.visible))){
+      refresh();
+    }
     $(ELEMENT_SPACE_WIKI_TAB).waitUntil(Condition.appears, Configuration.timeout).click();
     info("wiki page is shown");
   }
@@ -62,6 +64,9 @@ public class SpaceHomePage {
   public void goToForumsTab() {
     info("--Open Wiki tab of the space");
     info("Click on the tab");
+    if($(ELEMENT_SPACE_FORUMS_TAB).is(Condition.not(Condition.visible))){
+      refresh();
+    }
     $(ELEMENT_SPACE_FORUMS_TAB).waitUntil(Condition.appears, Configuration.timeout).click();
     info("wiki page is shown");
   }

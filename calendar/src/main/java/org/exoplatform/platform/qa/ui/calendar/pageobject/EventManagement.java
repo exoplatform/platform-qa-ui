@@ -180,7 +180,7 @@ public class EventManagement {
       $(ELEMENT_QUICK_INPUT_EVENT_NOTE).setValue(note);
     }
     if (opt.length > 0 && opt[0] != null) {
-      $(byId("category")).selectOption(opt[0]);
+      $(byId("calendar")).selectOption(opt[0]);
     }
     if (opt.length > 1 && opt[1] != null) {
       $(byId("category")).selectOption(opt[1]);
@@ -547,10 +547,10 @@ public class EventManagement {
     info("To index is " + String.valueOf(toIndex));
     for (int i = fromIndex; i <= toIndex - 1; i++) {
       info("index:" + i);
-      assert $(byXpath(ELEMENT_SCHEDULE_BUSY_TIME.replace("${user}", user).replace("${index}", String.valueOf(i))))
+      $(byXpath(ELEMENT_SCHEDULE_BUSY_TIME.replace("${user}", user).replace("${index}", String.valueOf(i))))
 
-                .getAttribute("class")
-                .contains("busyDotTime") : "Wrong busy time";
+                .shouldHave(Condition.attribute("class","busyDotTime"));
+
     }
   }
 
@@ -725,6 +725,8 @@ public class EventManagement {
    */
   public void saveAddEventDetails() {
     info("Sae add event details");
+    if($(ELEMENT_ADD_EDIT_EVENT_NAME).is(Condition.visible))
+    $(ELEMENT_ADD_EDIT_EVENT_NAME).click();
     ELEMENT_BUTTON_EVENT_SAVE_DETAILS.waitUntil(Condition.appears, Configuration.timeout);
     // click(ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
     // waitForElementNotPresent(ELEMENT_BUTTON_EVENT_SAVE_DETAILS);

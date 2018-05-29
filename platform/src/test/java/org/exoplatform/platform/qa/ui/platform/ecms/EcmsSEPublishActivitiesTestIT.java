@@ -6,6 +6,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_CLOSE_DOCUMENT_PREVIEW;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_CLOSE_PUBLICATION_POPUP;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_FILEFORM_BLANK_CONTENT2;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -150,6 +151,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
     siteExplorerHome.selectNode(title);
     siteExplorerHome.goToPublication();
     siteExplorerHome.changeStatusPulication("Published");
+    ELEMENT_CLOSE_PUBLICATION_POPUP.click();
     homePagePlatform.goToHomePage();
     refresh();
     activityStream.checkActivityAddWebContent(title, "1", "Published");

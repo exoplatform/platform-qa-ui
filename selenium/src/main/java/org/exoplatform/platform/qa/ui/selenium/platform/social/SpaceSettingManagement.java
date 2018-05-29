@@ -63,6 +63,8 @@ public class SpaceSettingManagement {
    */
   public void goToMemberTab() {
     info("Open members tab");
+    if($(ELEMENT_SPACE_MENU_MORE).is(Condition.visible))
+      $(ELEMENT_SPACE_MENU_MORE).click();
     $(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB).click();
     $(byClassName("uiGrayLightBox")).waitUntil(Condition.appears, Configuration.timeout);
   }

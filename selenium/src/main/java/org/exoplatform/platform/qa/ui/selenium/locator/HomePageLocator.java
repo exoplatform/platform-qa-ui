@@ -596,7 +596,7 @@ public final class HomePageLocator {
   public static final String          ELEMENT_DOCUMENT_PREVIEW                                             = "Preview{id}-0";
 
   public static final SelenideElement ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW                            =
-                                                                                $(byId("cke_commentInput"));
+          $(byClassName("commentTextInput"));
 
   public static final SelenideElement ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW                           =
                                                                                  $(byId("CommentButton"));
@@ -611,7 +611,7 @@ public final class HomePageLocator {
                                                                            byClassName("uiIconClose");
 
   public static final SelenideElement ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW                         =
-                                                                                   $(byXpath("//*[@id=\"$uicomponent.id\"]/div[2]"));
+                                                                                   $(byId("commentArea"));
 
   public static final SelenideElement ELEMENT_ICON_NOTIFICATION                                            =
                                                                 $(byXpath("//*[@id=\"UINotificationPopoverToolbarPortlet\"]/div[2]/a"));
@@ -647,7 +647,7 @@ public final class HomePageLocator {
                                                                    $(byXpath("//*[@id=\"Avatar\"]/div[2]"));
 
   public static final SelenideElement ELEMENT_INPUT_UPLOAD_AVATAR                                          =
-                                                                  $(byClassName("uploadContainer")).find(byClassName("file"));
+                                                                  $(byId("Uploader")).find(byClassName("file"));
 
   public static final SelenideElement ELEMENT_BUTTON_CONFIRM_UPLOAD                                        =
                                                                     $(byXpath("//*[@id=\"UIAvatarUploader\"]/div[3]/button[1]"));

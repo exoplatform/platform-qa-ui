@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.selenium.platform;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_CONNECTION_EVERYONE_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
@@ -13,6 +14,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
+import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
@@ -34,6 +36,7 @@ public class HomePagePlatform {
     info("--Go to Wiki--");
     $(ELEMENT_WIKI_LINK_PLF).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_WIKI_LINK_PLF).click();
+    refresh();
   }
 
   public void goToChat() {
@@ -56,6 +59,7 @@ public class HomePagePlatform {
    */
   public void goToHomePage() {
     info("Click on Home link of intranet page");
+    executeJavaScript("window.scrollBy(0,-5500)", "");
     $(ELEMENT_HOME_LINK_PLF).click();
   }
 
@@ -67,6 +71,7 @@ public class HomePagePlatform {
     ELEMENT_CALENDAR_LINK_PLF.waitUntil(Condition.appears, Configuration.timeout);
     info("click on Calendar link");
     ELEMENT_CALENDAR_LINK_PLF.click();
+    refresh();
     info("Verify that Calendar page is shown");
     $(ELEMENT_CALENDAR_WORKING_PANEL).waitUntil(Condition.appears, Configuration.timeout);
     info("The calendar page is shown successfully");
@@ -83,6 +88,7 @@ public class HomePagePlatform {
     info("-- Go to my spaces --");
     ELEMENT_MY_SPACE_LINK_PLF.waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_MY_SPACE_LINK_PLF.click();
+    refresh();
   }
 
   /**
@@ -115,6 +121,7 @@ public class HomePagePlatform {
   public void goToForum() {
     info("-- Go to forum page --");
     $(ELEMENT_FORUM_LINK_PLF).click();
+    refresh();
   }
 
   /**
@@ -217,12 +224,12 @@ public class HomePagePlatform {
     evt.click(ELEMENT_PLF_HOMEPAGE_LOAD_MORE_BUTTON);
   }
 
-  public void refreshUntil(String text, Condition condition, long time) throws Exception {
+  public void refreshUntil(SelenideElement selenideElement, Condition condition, long time) throws Exception {
 
     for (int i = 0; i <= 15; i++) {
       refresh();
       Thread.sleep(time);
-      if ($(byText(text)).is(condition)) {
+      if (selenideElement.is(condition)) {
         break;
       }
     }

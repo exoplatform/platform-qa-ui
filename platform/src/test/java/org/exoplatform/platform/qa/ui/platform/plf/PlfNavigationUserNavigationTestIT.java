@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.platform.plf;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_CONTENT_PEOPLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_SUGGESTION_BOX;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_TOPBAR_AVATAR;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_MY_PROFILE_LINK;
@@ -11,6 +12,9 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
+import org.exoplatform.platform.qa.ui.core.PLFData;
+import org.exoplatform.platform.qa.ui.selenium.platform.ConnectionsManagement;
+import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -28,11 +32,14 @@ import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 @Tag("sniff")
 public class PlfNavigationUserNavigationTestIT extends Base {
   ManageLogInOut manageLogInOut;
-
+  HomePagePlatform homePagePlatform;
+  ConnectionsManagement connectionsManagement;
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
     manageLogInOut = new ManageLogInOut(this);
+    homePagePlatform=new HomePagePlatform(this);
+    connectionsManagement=new ConnectionsManagement(this);
     if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
       $(ELEMENT_SKIP_BUTTON).click();
     }
@@ -56,8 +63,10 @@ public class PlfNavigationUserNavigationTestIT extends Base {
   public void test01_UserNavigateAnotherUsersPersonalPages() {
     info("Test 1: User navigate another user's personal pages");
 
-    $(ELEMENT_SUGGESTION_BOX).find(byText("Mary Williams")).click();
-    ELEMENT_CONTENT_NAME_PROFILE.find(byText("Mary Williams")).should(Condition.exist);
+   homePagePlatform.goToConnections();
+   connectionsManagement.searchPeople(PLFData.DATA_USER2,"","","");
+    ELEMENT_CONTENT_PEOPLE.find(byText(PLFData.DATA_NAME_USER2)).click();
+    ELEMENT_CONTENT_NAME_PROFILE.find(byText(PLFData.DATA_NAME_USER2)).should(Condition.exist);
     waitForAndGetElement(ELEMENT_HORIZONTAL_TOOLBAR);
     waitForAndGetElement(ELEMENT_HORIZONTAL_TOOLBAR_FIRST_APP_PROFILE);
     waitForAndGetElement(ELEMENT_HORIZONTAL_TOOLBAR_SECOND_APP_ACTIVITIES);
@@ -82,7 +91,7 @@ public class PlfNavigationUserNavigationTestIT extends Base {
 
     click(ELEMENT_TOPBAR_AVATAR);
     click(ELEMENT_MY_PROFILE_LINK);
-    ELEMENT_CONTENT_NAME_PROFILE.find(byText("John Smith")).should(Condition.exist);
+    ELEMENT_CONTENT_NAME_PROFILE.find(byText(PLFData.DATA_NAME_USER1)).should(Condition.exist);
     waitForAndGetElement(ELEMENT_HORIZONTAL_TOOLBAR);
     waitForAndGetElement(ELEMENT_HORIZONTAL_TOOLBAR_FIRST_APP_PROFILE);
     waitForAndGetElement(ELEMENT_HORIZONTAL_TOOLBAR_SECOND_APP_ACTIVITIES);
