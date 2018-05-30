@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -127,7 +128,7 @@ public class PageCreationWizard {
     $(ELEMENT_APPLICATION_TAB).click();
     if (!tabName.isEmpty())
       $(byText(tabName)).click();
-    $(appLocator).dragAndDropTo   (layoutLocator);
+    $(appLocator).dragAndDropTo(layoutLocator);
 
     info("Verify that the application is shown in the layout");
     $(byText(nameApp)).shouldBe(Condition.exist);
@@ -208,11 +209,26 @@ public class PageCreationWizard {
   /**
    * Add a Container
    *
-   * @param numRow this name of containers as: oneRow,twoRow...
-   * @param verify boolean
+
    */
-  public static void addContainer(String numRow, boolean... verify){
+  public void addContainer(String tabNameC, String nameCont, SelenideElement appLocatorCont, SelenideElement layoutLocator){
+
+
+    info("Add new container");
     $(ELEMENT_CONTAINER_TAB).click();
+
+    if (!tabNameC.isEmpty())
+      $(byText(tabNameC)).click();
+    $(appLocatorCont).waitUntil(Condition.visible,Configuration.timeout).dragAndDropTo(layoutLocator);
+
+    info("Verify that the application is shown in the layout");
+    $(byText(nameCont)).shouldBe(Condition.exist);
+    info("The application is shown in the layout page");
+    saveChangesPageEditor();
+  }
+
+
+/*
     boolean isVerify = (verify.length > 0 ? verify[0]: true);
     info("Add container");
     info("Add new container: " + numRow);
@@ -227,7 +243,7 @@ public class PageCreationWizard {
     if (isVerify){
       $(ELEMENT_DROP_SOURCE_HAS_LAYOUT).waitUntil(Condition.visible, Configuration.timeout).click();
       $(byXpath(ELEMENT_CONTAINER_TITLE.replace("${title}","Container"))).waitUntil(Condition.visible, Configuration.timeout);
-    }
+
 
     info("the container is added");
 
@@ -240,30 +256,29 @@ public class PageCreationWizard {
    * @param height String
    * @param oldTitle String
    */
-  public void editContainer(String oldTitle, String newTitle, String width, String height) {
+  public void editContainer(String oldTitle,String newTitle,String width, String height){
     info("Edit container");
-    evt.click(ELEMENT_SWITCH_VIEW_MODE);
-    evt.click(ELEMENT_CONTAINER_TAB);
-    if (!oldTitle.isEmpty())
-      evt.mouseOver(ELEMENT_DROP_SOURCE_HAS_LAYOUT_BY_NAME.replace("${name}", oldTitle), true);
+    $(ELEMENT_SWITCH_VIEW_MODE).click();
+    $(ELEMENT_CONTAINER_TAB).click();
+    if(!oldTitle.isEmpty())
+      $(byXpath(ELEMENT_DROP_SOURCE_HAS_LAYOUT_BY_NAME.replace("${name}",oldTitle))).waitUntil(Condition.visible,Configuration.timeout).hover();
     else
-      evt.mouseOver(ELEMENT_DROP_SOURCE_HAS_LAYOUT, true);
-
-    if (!oldTitle.isEmpty())
-      evt.click(ELEMENT_EDIT_CONTAINER_ICON_BY_NAME.replace("${name}", oldTitle));
+     $(ELEMENT_DROP_SOURCE_HAS_LAYOUT).waitUntil(Condition.visible,Configuration.timeout).hover();
+    if(!oldTitle.isEmpty())
+     $(byXpath(ELEMENT_EDIT_CONTAINER_ICON_BY_NAME.replace("${name}", oldTitle))).click();
     else
-      evt.click(ELEMENT_EDIT_CONTAINER_ICON);
-    if (!newTitle.isEmpty())
-      evt.type(ELEMENT_CONTAINER_POPUP_TITLE, newTitle, true);
-    if (!width.isEmpty())
-      evt.type(ELEMENT_CONTAINER_POPUP_WIDTH, width, true);
-    if (!height.isEmpty())
-      evt.type(ELEMENT_CONTAINER_POPUP_HEIGHT, height, true);
-    // but.save();
-    evt.waitForAndGetElement(ELEMENT_SAVE_BTN_2);
-    evt.click(ELEMENT_SAVE_BTN_2);
-    evt.mouseOver(ELEMENT_DROP_SOURCE_HAS_LAYOUT, true);
-    evt.waitForAndGetElement(ELEMENT_CONTAINER_TITLE.replace("${title}", newTitle));
+      $(ELEMENT_EDIT_CONTAINER_ICON).click();
+    if(!newTitle.isEmpty())
+      $(ELEMENT_CONTAINER_POPUP_TITLE).setValue(newTitle).waitUntil(Condition.visible,Configuration.timeout);
+    if(!width.isEmpty())
+      $(ELEMENT_CONTAINER_POPUP_WIDTH).setValue(width).waitUntil(Condition.visible,Configuration.timeout);
+    if(!height.isEmpty())
+      $(ELEMENT_CONTAINER_POPUP_HEIGHT).setValue(height).waitUntil(Condition.visible,Configuration.timeout);
+    //but.save();
+    $(ELEMENT_SAVE_BTN_2).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_SAVE_BTN_2).click();
+    $(ELEMENT_DROP_SOURCE_HAS_LAYOUT).waitUntil(Condition.visible,Configuration.timeout).hover();
+    $(byXpath(ELEMENT_CONTAINER_TITLE.replace("${title}",newTitle))).waitUntil(Condition.visible,Configuration.timeout);
     saveChangesPageEditor();
     info("the container is edited");
   }
@@ -279,19 +294,23 @@ public class PageCreationWizard {
    * @param heightTarget is height size of the portlet or the container that will
    *          be replaced position by sourceLocator
    */
-  public void moveContainer(String title, Object sourceLocator, Object targetLocator, int heightTarget) {
+
+    public void moveContainer(String title,Object sourceLocator,Object targetLocator,int heightTarget){
+
+
     info("Move container to new place");
     try {
-      evt.click(ELEMENT_CONTAINER_TAB);
+      $(ELEMENT_CONTAINER_TAB).click();
     } catch (org.openqa.selenium.UnhandledAlertException e) {
-      manageAlert.waitForConfirmation("The target block ID to update is not found : EmptyAjaxBlock", 40000);
+      manageAlert.acceptAlert();
       testBase.clearCache();
     }
     if (!title.isEmpty()) {
-      evt.mouseOver(ELEMENT_DROP_SOURCE_HAS_LAYOUT_BY_NAME.replace("${name}", title), true);
+      $(byXpath(ELEMENT_DROP_SOURCE_HAS_LAYOUT_BY_NAME.replace("${name}", title))).waitUntil(Condition.visible,Configuration.timeout).hover();
+
 
     } else {
-      evt.mouseOver(ELEMENT_DROP_SOURCE_HAS_LAYOUT, true);
+      $(ELEMENT_DROP_SOURCE_HAS_LAYOUT).waitUntil(Condition.visible,Configuration.timeout).hover();
 
     }
 
@@ -319,18 +338,18 @@ public class PageCreationWizard {
     info("the container is moved succefully");
   }
 
-  /**
+
+/*
    * Check the positions of containers or portlets before and after changed their
    * position in the layout
    *
    * @param positionFirst is the position before changed
    * @param positionEnd is the position after changed
    */
-  public void checkPositions(SelenideElement  positionFirst, SelenideElement positionEnd) {
+  public void checkPositions(By  positionFirst , By positionEnd) {
     info("Verify that positions of element is changed");
-    evt.waitForElementNotPresent(positionFirst, 2000, 1);
-    positionEnd.waitUntil(Condition.visible,Configuration.timeout);
-    positionEnd.waitUntil(Condition.visible,Configuration.timeout);
+    $(positionFirst).waitUntil(Condition.visible,Configuration.timeout);
+    $(positionEnd).waitUntil(Condition.visible,Configuration.timeout);
     saveChangesPageEditor();
   }
 
@@ -342,18 +361,18 @@ public class PageCreationWizard {
   public void deleteContainer(String name) {
     info("Delete the container");
     try {
-      evt.click(ELEMENT_CONTAINER_TAB);
+      $(ELEMENT_CONTAINER_TAB).click();
     } catch (org.openqa.selenium.UnhandledAlertException e) {
-      manageAlert.waitForConfirmation("The target block ID to update is not found : EmptyAjaxBlock", 40000);
+      manageAlert.acceptAlert();
       testBase.clearCache();
     }
     if (!name.isEmpty()) {
-      evt.mouseOver(ELEMENT_DROP_SOURCE_HAS_LAYOUT_BY_NAME.replace("${name}", name), true);
+      $(byXpath(ELEMENT_DROP_SOURCE_HAS_LAYOUT_BY_NAME.replace("${name}", name))).waitUntil(Condition.visible,Configuration.timeout).hover();
 
-      evt.click(ELEMENT_DELETE_CONTAINER_ICON_BY_NAME.replace("${name}", name));
+     $(byXpath(ELEMENT_DELETE_CONTAINER_ICON_BY_NAME.replace("${name}", name))).click();
       manageAlert.acceptAlert();
 
-      evt.waitForElementNotPresent(ELEMENT_DELETE_CONTAINER_ICON_BY_NAME.replace("${name}", name));
+
     }
     saveChangesPageEditor();
     info("the container is deleted");
@@ -362,24 +381,26 @@ public class PageCreationWizard {
   /**
    * Edit an application with changes about title, width and height
    *
-   * @param oldTitle String
+
    * @param newTitle String
    * @param width String
    * @param height String
    */
-  public void editApplication(String oldTitle, String newTitle, String width, String height) {
+  public void editApplication(By titleSource , String newTitle, String width, String height) {
     // TODO Auto-generated method stub
 
     info("Edit application");
-    $(byXpath(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}", oldTitle))).hover().waitUntil(Condition.visible,Configuration.timeout);
-    $(byXpath(ELEMENT_APPLICATION_EDIT_ICON.replace("${name}", oldTitle))).click();
+    info("Move an application to new place");
+    $(ELEMENT_APPLICATION_TAB).click();
+    $(byClassName("VIEW-PAGE")).find(titleSource).hover();
+    $(byClassName("VIEW-PAGE")).find(titleSource).parent().parent().parent().find(byClassName("uiIconEdit")).click();
     $(ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_TAB).click();
     if (!newTitle.isEmpty())
-     $(ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_TITLE).setValue(newTitle).waitUntil(Condition.visible,Configuration.timeout);
+     $(ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_TITLE).waitUntil(Condition.visible,Configuration.timeout).setValue(newTitle);
     if (!width.isEmpty())
-      $(ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_WIDTH).setValue(width).waitUntil(Condition.visible, Configuration.timeout);
+      $(ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_WIDTH).waitUntil(Condition.visible, Configuration.timeout).setValue(width);
     if (!height.isEmpty())
-      $(ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_HEIGHT).setValue(height).waitUntil(Condition.visible,Configuration.timeout);
+      $(ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_HEIGHT).waitUntil(Condition.visible,Configuration.timeout).setValue(height);
 
   }
 
@@ -407,37 +428,35 @@ public class PageCreationWizard {
 
 
    */
-  public void moveApplication(String name) {
-
-    info("Delete the application");
-    $(ELEMENT_APPLICATION_TAB).click();
-    if (!name.isEmpty()) {
-      $(byXpath(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}", name))).click();
-      $(byXpath(ELEMENT_APPLICATION_IN_LAYOUT_PAGE  )).click();
-
-    }
-    saveChangesPageEditor();
-    info("the container is deleted");
+    public void moveApplication(By titleSource,SelenideElement titleTarget){
+          info("Move an application to new place");
+         $(ELEMENT_APPLICATION_TAB).click();
+         $(byClassName("VIEW-PAGE")).find(titleSource).hover();
+         $(byClassName("VIEW-PAGE")).find(titleSource).parent().parent().parent().find(byClassName("uiIconDragDrop")).dragAndDropTo(titleTarget);
+         saveChangesPageEditor();
+    info("the container is moved");
   }
 
   /**
    * Delete an application
-   *
-   * @param name String
+
    */
   public void deleteApplication(String name) {
+
+
     info("Delete the application");
     $(ELEMENT_APPLICATION_TAB).click();
-    if (!name.isEmpty()) {
-     $(byXpath(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}", name))).click();
-      $(byXpath(ELEMENT_APPLICATION_DELETE_ICON)).click();
+    if(!name.isEmpty()){
+      $(byXpath(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}",name))).waitUntil(Condition.visible,Configuration.timeout).hover();
+      $(byXpath(ELEMENT_APPLICATION_DELETE_ICON.replace("${name}",name))).click();
       manageAlert.acceptAlert();
-
-     $(ELEMENT_APPLICATION_DELETE_ICON.replace("${name}", name)).waitUntil(Condition.visible,Configuration.timeout);
+      $(byXpath(ELEMENT_APPLICATION_DELETE_ICON.replace("${name}",name))).waitUntil(Condition.visible,Configuration.timeout).is(Condition.not(Condition.exist));
     }
     saveChangesPageEditor();
     info("the container is deleted");
   }
+
+
 
   /**
    * Change to Switch view mode

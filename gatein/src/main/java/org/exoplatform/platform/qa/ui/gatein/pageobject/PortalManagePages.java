@@ -66,7 +66,7 @@ public class PortalManagePages {
 
     if (!type.isEmpty()) {
       info("Select a type");
-      $(ELEMENT_MANAGEPAGES_TYPE_DROPBOX).selectOption("group");
+      $(ELEMENT_MANAGEPAGES_TYPE_DROPBOX).selectOption(type);
     }
     try {
 
@@ -83,7 +83,7 @@ public class PortalManagePages {
       info("Verify that the search page is shown with correct results");
       $(byText(title)).should(Condition.exist);
 
-/*
+
       $(byText(title)).should(Condition.exist);
       if (!title.isEmpty())
 
@@ -102,29 +102,19 @@ public class PortalManagePages {
 
 
 
-    $(ELEMENT_MANAGEPAGES_TITLE_FIELD).waitUntil(Condition.appears, Configuration.timeout);
-    info("Input a new title");
-    $(ELEMENT_MANAGEPAGES_TITLE_FIELD).scrollTo().setValue(title);
-    info("Select a type");
-    $(ELEMENT_MANAGEPAGES_TYPE_DROPBOX).selectOption("group");
-    info("Click on Search button");
-    // scroll up
-    executeJavaScript("window.scrollBy(0,-350);", "");
-    $(ELEMENT_MANAGEPAGES_SEARCH_BUTTON).click();
-    info("Verify that the search page is shown with correct results");
-    $(byText(title)).should(Condition.exist);
-  }
+  /*
 
    * Delete a page
    *
    * @param titlePage String
    * @param type String
    */
-  }
+
 
   public void deletePage(String titlePage, String type) {
     info("Delete a page");
     searchPage(titlePage, "", type);
+
     $(ELEMENT_MAGEPAGES_CONTENT_ACTION_COLUMN_DELETE).click();
     alert.acceptAlert();
     if ($(byText("No result found.")).waitUntil(Condition.appears, Configuration.timeout).is(Condition.exist)) {
@@ -141,6 +131,9 @@ public class PortalManagePages {
    */
   public void editPage(String titlePage, String type) {
 
+    info("Go to edit a page");
+    searchPage(titlePage,"",type);
+    info("Click on Edit button");
     $(ELEMENT_MAGEPAGES_CONTENT_ACTION_COLUMN_EDIT).click();
   }
 

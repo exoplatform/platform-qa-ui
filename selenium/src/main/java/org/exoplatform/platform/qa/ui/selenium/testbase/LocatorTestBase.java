@@ -71,7 +71,7 @@ public class LocatorTestBase {
 
   public static final By              ELEMENT_SUBMIT_BUTTON                            = By.xpath("//*[text()='Submit']");
 
-  public static final By              ELEMENT_INPUT_PASSWORD                           = By.name("password");
+  public static final By              ELEMENT_INPUT_PASSWORD                           = By.name("UIPortalLoginFormControl");
 
   public static final String          ELEMENT_INPUT_PASSWORD_ID                        = "UIPortalLoginFormControl";
 

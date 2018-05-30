@@ -821,6 +821,12 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
                                                                          "//*[contains(@class,'LAYOUT-PORTLET')]//*[contains(text(),'${name}')]";
 
 
+/*public static final String                ELEMENT_LAYOUT_SOURCE
+                                                                           "//*[@id=\"UIPortlet-49701688-0b69-4186-8827-f46f9586436c\"]"*/
+
+
+/*public static final String                ELEMENT_LAYOUT_DEST
+                                                                           "//*[@id=\"UIPortlet-3e8bd338-a490-4424-9692-eeeb7b452bc4\"]"*/
 
 
   public static final String          ELEMENT_APPLICATION_EDIT_ICON                           =
