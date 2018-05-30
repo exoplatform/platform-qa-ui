@@ -4,10 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
-import org.exoplatform.platform.qa.ui.gatein.pageobject.NavigationManagement;
-import org.exoplatform.platform.qa.ui.gatein.pageobject.PageCreationWizard;
-import org.exoplatform.platform.qa.ui.gatein.pageobject.PortalManagePages;
-import org.exoplatform.platform.qa.ui.gatein.pageobject.PortalManageSites;
+import org.exoplatform.platform.qa.ui.gatein.pageobject.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
@@ -18,6 +15,7 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -32,6 +30,8 @@ public class GateinPortalNavigationEditLayoutTestIt extends Base {
     ManageLogInOut manageLogInOut;
     PortalManagePages portalManagePages;
     HomePagePlatform homePagePlatform;
+    UserAddManagement userAddManagement;
+    UserAndGroupManagement userAndGroupManagement;
 
     @BeforeEach
     public void setupBeforeMethod() {
@@ -41,11 +41,12 @@ public class GateinPortalNavigationEditLayoutTestIt extends Base {
         navigationToolbar = new NavigationToolbar(this);
         navigationmanagement = new NavigationManagement(this);
         manageLogInOut = new ManageLogInOut(this);
-        portalManagePages = new PortalManagePages(this);
-        homePagePlatform = new HomePagePlatform(this);
-        manageLogInOut.signInCas("root", "gtn");
+        portalManagePages  = new PortalManagePages(this);
+        homePagePlatform=new HomePagePlatform(this);
+        userAndGroupManagement = new UserAndGroupManagement(this);
+        userAddManagement = new UserAddManagement(this);
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
     }
-
     /**
      * Step Number: 1
      * Step Name: Step 1: Change site's config of portal
@@ -489,10 +490,13 @@ public class GateinPortalNavigationEditLayoutTestIt extends Base {
              - The Layout of page is displayed in the view mode with all changes
      */
     @Test
-    public void test11_Add_Edit_Move_ContainerWhenEditLayoutForPortalPage() {
-        info("Move a container to new place");
-        info("Get information of an application");
-        String pageName = "pageName" + getRandomNumber();
+    public void test01_AddApplicationIntoContainerWhenEditLayoutForGroupPage() {
+        info("Test 01:  Add application into container when edit layout for group's page");
+        String username="username"+getRandomString();
+        String password="123456";
+        String email=username+"@test.com";
+        String num= "num" + getRandomNumber();
+        String pageName ="pageName" + getRandomNumber();
         String title = "title" + getRandomNumber();
         info("Get value of group type");
         String type = "group";
@@ -686,7 +690,11 @@ public class GateinPortalNavigationEditLayoutTestIt extends Base {
         info("Verify that the application is added successfully in the container");
         info("delete page");
         navigationToolbar.goToPotalPages();
-        portalManagePages.deletePage(title, "group");
+        portalManagePages.editPage(title,type);
+        $(byXpath(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}",idName))).waitUntil(Condition.visible, Configuration.timeout);
+        pagecreationwizard.switchViewMode(true);
+        pagecreationwizard.saveChangesPageEditor();
 
+        portalManagePages.deletePage(title,type);
     }
 }

@@ -91,8 +91,8 @@ public class GateinManagePagesTestIT extends Base {
      * Expected Outcome: - The page is updated with the change value
      */
     navigationToolbar.goToPotalPages();
-    portalmanagepages.addPage(pageName, title, "");
-    portalmanagepages.editPage(title, "");
+    portalmanagepages.addPage(pageName, title, "group");
+    portalmanagepages.editPage(title, "group");
     pagecreationwizard.addApp("",
                               "Application Registry",
                               $(byId("Administration/portlet_ApplicationRegistryPortlet")),

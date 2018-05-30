@@ -51,33 +51,24 @@ public class PortalManagePages {
    */
 
   public void searchPage(String title, String siteName, String type, boolean... verify) {
-
+    executeJavaScript("window.scrollBy(0,-350);", "");
     info("waiting the page is loaded full");
     $(ELEMENT_MANAGEPAGES_TITLE_FIELD).waitUntil(Condition.visible, Configuration.timeout);
     if (!title.isEmpty()) {
       info("Input a new title");
-      $(ELEMENT_MANAGEPAGES_TITLE_FIELD).scrollTo().setValue(title).waitUntil(Condition.visible,Configuration.timeout);
+      $(ELEMENT_MANAGEPAGES_TITLE_FIELD).setValue(title).waitUntil(Condition.visible,Configuration.timeout);
     }
 
     if (!siteName.isEmpty()) {
       info("Input a new site Name");
-      $(ELEMENT_MANAGEPAGES_SITES_NAME_FIELD).setValue(siteName).waitUntil(Condition.visible,Configuration.timeout);
+      $(ELEMENT_MANAGEPAGES_SITES_NAME_FIELD).setValue(siteName);
     }
 
     if (!type.isEmpty()) {
       info("Select a type");
-      $(ELEMENT_MANAGEPAGES_TYPE_DROPBOX).selectOption(type);
+      $(ELEMENT_MANAGEPAGES_TYPE_DROPBOX).selectOptionByValue(type);
     }
-    try {
-
     info("Click on Search button");
-    executeJavaScript("window.scrollBy(0,-350);", "");
-      $(byId("pageId")).click();
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-
     $(ELEMENT_MANAGEPAGES_SEARCH_BUTTON).click();
 
       info("Verify that the search page is shown with correct results");
@@ -152,7 +143,7 @@ public class PortalManagePages {
     $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_BTN).scrollTo().click();
     $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_PAGE_NAME).setValue(pageName);
     $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_TITLE).setValue(title);
-    $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_TYPE_DROPBOX).selectOption("group");
+    $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_TYPE_DROPBOX).selectOption(type);
     $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGES_POPUP_SAVE_BTN).click();
   }
 
