@@ -1036,6 +1036,29 @@ public class ActivityStream {
     $(byText(comment)).should(Condition.exist);
   }
 
+  public void commentWikiActivity(String wikiactivity, String comment) {
+    // get the id of wikiactivity
+    String id = $(byText(wikiactivity)).parent()
+            .parent()
+            .parent()
+            .parent()
+            .getAttribute("id")
+            .split("ActivityContextBox")[1];
+    // click on comment link
+    $(byText(wikiactivity)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
+    // insert comment
+    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
+    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
+    // click on the button comment
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
+    $(byText(comment)).should(Condition.exist);
+
+
+
+
+
+  }
+
   public void commentTopicActivity(String description, String comment) {
     // get the id of activity created
     String id = $(byText(description)).parent()
