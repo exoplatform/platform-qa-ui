@@ -53,24 +53,7 @@ public class WikiManagement {
   public void selectTemplateWikiPage(SelenideElement eTemplate) {
     info("--Select  template--");
     $(ELEMENT_TEMPLATE_SELECT_FORM).waitUntil(Condition.appears, Configuration.timeout);
-    switch (eTemplate.getValue()) {
-    case "HOW-TO_Guide":
-      eTemplate.selectRadio("HOW-TO_Guide");
-      break;
-    case "Three-Column_Layout":
-      eTemplate.selectRadio("Three-Column_Layout");
-      break;
-    case "Status_Meeting":
-      eTemplate.selectRadio("Status_Meeting");
-      break;
-    case "Leave_Planning":
-      eTemplate.selectRadio("Leave_Planning");
-      break;
-    case "Two-Column_Layout":
-      eTemplate.selectRadio("Two-Column_Layout");
-      break;
-
-    }
+    eTemplate.selectRadio(eTemplate.getValue());
   }
 
   /**

@@ -195,7 +195,7 @@ public class WikiHomePage {
     if (isConfirm) {
       if ($(ELEMENT_CONFIRM_POPUP_OK_BTN).is(Condition.visible)) {
         info("Click on OK button");
-        $(ELEMENT_CONFIRM_POPUP_OK_BTN).click();
+        $(ELEMENT_CONFIRM_POPUP_OK_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
       }
       if ($(ELEMENT_CONFIRM_POPUP_CONFIRM_BTN).is(Condition.visible)) {
         info("Click on Confirm button");
