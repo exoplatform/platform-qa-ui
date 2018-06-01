@@ -347,10 +347,10 @@ public class PortalManageSites {
   public void setEditPermissions(String groupId, String membership) {
     String membershipToSelect = ELEMENT_SELECT_EDIT_PERMISSION_MEMBERSHIP.replace("${membership}", membership);
 
+
     info("--Setting edit permission to " + groupId + ", " + membership + "--");
     String[] groups = groupId.split("/");
-    $(byXpath("//*[@id=\"UIPermissionSelector\"]/div[3]/a[2]")).click();
-
+        $(ELEMENT_SELECT_PERMISSION_BUTTON).click();
     $(byText("Permission Selector")).waitUntil(visible,Configuration.timeout);
     for (String group : groups) {
       String groupToSelect = ELEMENT_SELECT_EDIT_PERMISSION_MEMBERSHIP.replace("${membership}", group);

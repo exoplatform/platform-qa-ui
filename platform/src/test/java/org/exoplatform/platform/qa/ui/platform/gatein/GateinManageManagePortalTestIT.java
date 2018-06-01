@@ -32,18 +32,12 @@ public class GateinManageManagePortalTestIT extends Base {
     ManageLogInOut manageLogInOut;
     PortalManageSites portalManageSites;
     NavigationToolbar navigationToolbar;
-
-
     @BeforeEach
-
     public void setUpBeforeMethod() throws Exception {
         manageLogInOut = new ManageLogInOut(this);
         portalManageSites = new PortalManageSites(this);
         navigationToolbar = new NavigationToolbar(this);
-
-
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
-
     }
 
     /**
@@ -81,15 +75,15 @@ public class GateinManageManagePortalTestIT extends Base {
         portalManageSites.deletePortal(portalName);
     }
 
-
-/*Step Number: 2
-         *Step Name: Step 2: Change using portal
-		 *Step Description:
-			- Create new some portals
-			- Switch between some portals by input directly name of portal on URL ( ex:  http://localhost:8080/portal/{name_of_portal}
-		 *Input Data:
-		 *Expected Outcome:
-			- The switched portal is changed successfully*/
+    /*Step Number: 2
+      *Step Name: Step 2: Change using portal
+	  *Step Description:
+	  *- Create new some portals
+	  *- Switch between some portals by input directly name of portal on URL ( ex:  http://localhost:8080/portal/{name_of_portal}
+	  *Input Data:
++	  *Expected Outcome:
++	  *- The switched portal is changed successfully
+      */
 
     @Test
     public void test02_SwitchToNewPortal() {
