@@ -769,7 +769,7 @@ public class CalendarEventRecurringTestIT extends Base {
   }
 
   @Test
-  @BugInPLF("CAL-1330")
+  @Tag("CAL-1330")
   public void test10_addRecurringEventStartAfterMonth() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String titleEvent2 = "titleEvent" + getRandomNumber();
@@ -801,17 +801,12 @@ public class CalendarEventRecurringTestIT extends Base {
                                               getDate(0, "MM/dd/yyyy HH") + ":00",
                                               getDate(0, "MM/dd/yyyy HH") + ":30",
                                               false);
-    calendarHomePage.verifyIsPresentEventTaskWithDateTime(titleEvent,
+    eventManagement.saveQuickAddEvent();
+    calendarHomePage.verifyIsPresentEventTaskWithDateTime(titleEvent2,
                                                           getDate(0, "MMM dd yyyy"),
                                                           CalendarHomePage.selectViewOption.MONTH,
                                                           CalendarHomePage.selectDayOption.DETAILTIME);
-    eventManagement.deleteRecurringEvent(titleEvent,
-                                         CalendarHomePage.selectViewOption.DAY,
-                                         CalendarHomePage.selectDayOption.DETAILTIME,
-                                         EventManagement.recurringType.ALL_EVENT,
-                                         getDate(30, "MMM dd yyyy"),
-                                         false);
-    calendarHomePage.deleteEventTask(titleEvent,
+    calendarHomePage.deleteEventTask(titleEvent2,
                                      CalendarHomePage.selectViewOption.LIST,
                                      CalendarHomePage.selectDayOption.DETAILTIME,
                                      getDate(0, "MM/dd/yyyy"));

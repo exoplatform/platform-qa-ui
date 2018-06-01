@@ -59,7 +59,7 @@ public class PlfCheckLanguagesTestIT extends Base {
     ELEMENT_POPUP_LIST_OF_LANGUAGES.find(byText("Spanish - Spain")).shouldBe(Condition.visible);
     ELEMENT_POPUP_LIST_OF_LANGUAGES.find(byText("Turkish")).shouldBe(Condition.visible);
     ELEMENT_POPUP_LIST_OF_LANGUAGES.find(byText("Ukrainian")).shouldBe(Condition.visible);
-    ELEMENT_POPUP_LIST_OF_LANGUAGES.find(byText("Vietnamese")).shouldBe(Condition.visible);
+    ELEMENT_POPUP_LIST_OF_LANGUAGES.find(byText("Simplified Chinese")).shouldBe(Condition.visible);
     ELEMENT_BUTTON_CANCEL_CHANGE_LANGUAGES.click();
   }
 }

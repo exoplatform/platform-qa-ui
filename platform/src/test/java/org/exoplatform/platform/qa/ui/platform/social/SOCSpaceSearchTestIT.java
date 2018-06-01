@@ -93,7 +93,7 @@ public class SOCSpaceSearchTestIT extends Base {
 
   }
 
-  @BugInPLF("PLF-8006")
+  @Tag("PLF-8006")
   @Test
   public void test02_SearchSpaceWithPatern() {
     ArrayList<String> spaceList = new ArrayList<String>();
