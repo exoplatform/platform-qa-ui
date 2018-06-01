@@ -32,7 +32,9 @@ public class NavigationManagement {
   /**
    * Open Navigation Management popup
    *
+   * @param site as acme or intranet or a group
    */
+
   public void goToEditNavigation(String site) {
     $(byXpath(ELEMENT_MANAGESITES_EDIT_NAVIGATION_ICON.replace("${site}", site))).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_NAVIGATION_MANAGEMENT_POPUP_TITLE).waitUntil(Condition.visible,Configuration.timeout);
@@ -45,7 +47,7 @@ public class NavigationManagement {
    */
   public void goToEditLayout(String site) {
     info("Click on Edit layout button");
-    $(ELEMENT_MANAGESITES_EDIT_LAYOUT_ICON.replace("${site}", site)).click();
+    $(byXpath(ELEMENT_MANAGESITES_EDIT_LAYOUT_ICON.replace("${site}", site))).click();
 
   }
 
@@ -68,7 +70,7 @@ public class NavigationManagement {
    */
   public void goToEditSiteConfig(String site) {
     info("Click on Edit Site Configuration button");
-   $(ELEMENT_MANAGESITES_EDIT_CONFIG_ICON.replace("${site}", site)).click();
+   $(byXpath(ELEMENT_MANAGESITES_EDIT_CONFIG_ICON.replace("${site}", site))).click();
 
   }
 

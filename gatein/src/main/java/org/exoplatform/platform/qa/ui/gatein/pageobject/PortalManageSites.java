@@ -30,14 +30,17 @@ public class PortalManageSites {
     this.alert = new ManageAlert(testBase);
   }
 
-/*
+  /**
+     * Open Navigation Management popup
+     *
+   */
   public void editNavigation(String currentNavigation) {
    $(byXpath(ELEMENT_EDIT_NAVIGATION.replace("${groupName}",currentNavigation)));
            $(byXpath(ELEMENT_EDIT_NAVIGATION)).click();
 
     $(ELEMENT_TITLE_NAVIGATION_MANAGEMENT).waitUntil(Condition.appears, 10000);
   }
-  */
+
 
   public void goToEditNavigation(String site) {
     ELEMENT_BUTTON_EDIT_NAVIGATION.waitUntil(Condition.appears, Configuration.timeout);

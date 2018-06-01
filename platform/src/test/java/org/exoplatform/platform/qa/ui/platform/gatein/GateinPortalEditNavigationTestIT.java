@@ -43,7 +43,7 @@ public class GateinPortalEditNavigationTestIT extends Base {
     navigationToolbar = new NavigationToolbar(this);
     navigationmanagement = new NavigationManagement(this);
     manageLogInOut = new ManageLogInOut(this);
-    manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+    manageLogInOut.signIn("root", "gtn");
   }
 
   /**
@@ -78,8 +78,8 @@ public class GateinPortalEditNavigationTestIT extends Base {
     navigationmanagement.copyNode(nodeName1);
     navigationmanagement.pasteNode(nodeName2);
     info("Verify that node 2 has only one children is node1");
-    $(byXpath(ELEMENT_NAVIGATION_PARENT_CHILD_NODE.replace("${parent}", nodeName2).replace("${child}", nodeName1)));
-    $(ELEMENT_NAVIGATION_NUMBER_CHILD_NODES.replace("${parent}", nodeName2).replace("${numberChild}", "1"));
+    $(byXpath(ELEMENT_NAVIGATION_PARENT_CHILD_NODE.replace("${parent}", nodeName2).replace("${child}", nodeName1))).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_NAVIGATION_NUMBER_CHILD_NODES.replace("${parent}", nodeName2).replace("${numberChild}", "1"))).waitUntil(Condition.visible,Configuration.timeout);
     navigationmanagement.closeNavigationManagementPopup();
 
     info("Delete a node1 and node2");
