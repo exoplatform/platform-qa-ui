@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
@@ -107,19 +108,19 @@ public class WikiHomePage {
    * @param title String
    */
   public void cancelDeleteWiki(String title) {
-    if (evt.waitForAndGetElement(ELEMENT_TREE_WIKI_NAME.replace("${name}", title), 3000, 0) != null) {
+    if ($(byXpath(ELEMENT_TREE_WIKI_NAME.replace("${name}", title))).waitUntil(Condition.visible,Configuration.timeout) != null) {
       info("Go to delete wiki page...");
       info("Select the wiki page to delete");
       selectAPage(title);
       info("Click on More link");
       $(ELEMENT_MORE_LINK).click();
-      if (evt.waitForAndGetElement(ELEMENT_DELETE_LINK, 5000, 0) == null) {
-        evt.mouseOverAndClick(ELEMENT_DELETE_LINK);
+      if ($(ELEMENT_DELETE_LINK).waitUntil(Condition.visible,Configuration.timeout) == null) {
+        $(ELEMENT_DELETE_LINK).click();
       } else {
         $(ELEMENT_DELETE_LINK).click();
       }
-      evt.waitForAndGetElement(ELEMENT_CANCEL_WIKI_DELETE, 2000, 0).click();
-      evt.waitForAndGetElement(ELEMENT_TREE_WIKI_NAME.replace("${name}", title));
+      $(ELEMENT_CANCEL_WIKI_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(byXpath(ELEMENT_TREE_WIKI_NAME.replace("${name}", title))).waitUntil(Condition.visible,Configuration.timeout);
     }
   }
 
@@ -192,33 +193,33 @@ public class WikiHomePage {
    */
   public void confirmWaringMessage(Boolean isConfirm) {
     if (isConfirm) {
-      if (evt.waitForAndGetElement(ELEMENT_CONFIRM_POPUP_OK_BTN, 2000, 0) != null) {
+      if ($(ELEMENT_CONFIRM_POPUP_OK_BTN).is(Condition.visible)) {
         info("Click on OK button");
         $(ELEMENT_CONFIRM_POPUP_OK_BTN).click();
       }
-      if (evt.waitForAndGetElement(ELEMENT_CONFIRM_POPUP_CONFIRM_BTN, 2000, 0) != null) {
+      if ($(ELEMENT_CONFIRM_POPUP_CONFIRM_BTN).is(Condition.visible)) {
         info("Click on Confirm button");
         $(ELEMENT_CONFIRM_POPUP_CONFIRM_BTN).click();
       }
-      if (evt.waitForAndGetElement(ELEMENT_CONFIRM_POPUP_YES_BTN, 2000, 0) != null) {
+      if ($(ELEMENT_CONFIRM_POPUP_YES_BTN).is(Condition.visible)) {
         info("Click on Yes button");
         $(ELEMENT_CONFIRM_POPUP_YES_BTN).click();
       }
-      if (evt.waitForAndGetElement(ELEMENT_CONFIRM_POPUP_YES_BTN, 2000, 0) != null) {
+      if ($(ELEMENT_CONFIRM_POPUP_YES_BTN).is(Condition.visible)) {
         info("Click on Yes button");
         $(ELEMENT_CONFIRM_POPUP_YES_BTN).click();
       }
-      if (evt.waitForAndGetElement(ELEMENT_WARNING_OK_BTN, 2000, 0) != null) {
+      if ($(ELEMENT_WARNING_OK_BTN).is(Condition.visible)) {
         info("Click OK button");
         $(ELEMENT_WARNING_OK_BTN).click();
       }
     } else {
-      if (evt.waitForAndGetElement(ELEMENT_CONFIRM_POPUP_CANCEL_BTN, 2000, 0) != null) {
+      if ($(ELEMENT_CONFIRM_POPUP_CANCEL_BTN).is(Condition.visible)) {
         info("Click on Cancel button");
         $(ELEMENT_CONFIRM_POPUP_CANCEL_BTN).click();
       }
 
-      if (evt.waitForAndGetElement(ELEMENT_CONFIRM_POPUP_NO_BTN, 2000, 0) != null) {
+      if ($(ELEMENT_CONFIRM_POPUP_NO_BTN).is(Condition.visible)) {
         info("Click on No button");
         $(ELEMENT_CONFIRM_POPUP_NO_BTN).click();
       }

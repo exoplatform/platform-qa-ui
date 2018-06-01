@@ -80,12 +80,12 @@ public class WikiValidattions {
    * @param tooltip String
    */
   public void verifyInsertedLinkIntoFrame(String label, String tooltip) {
-    WebElement e = evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME, testBase.getDefaultTimeout(), 1, 2);
+    WebElement e = $(ELEMENT_CONTENT_WIKI_FRAME).waitUntil(Condition.visible,Configuration.timeout);
     testBase.getExoWebDriver().getWebDriver().switchTo().frame(e);
     if (label != null && label != "")
-      evt.waitForAndGetElement(By.linkText(label));
+      $(By.linkText(label)).waitUntil(Condition.visible,Configuration.timeout);
     if (tooltip != null && tooltip != "")
-      evt.waitForAndGetElement(By.xpath("//*[@title='" + tooltip + "']"));
+      $(byXpath("//*[@title='" + tooltip + "']")).waitUntil(Condition.visible,Configuration.timeout);
     evt.switchToParentWindow();
   }
 
@@ -129,7 +129,7 @@ public class WikiValidattions {
    */
   public void verifyWarningMessage(String mess) {
     info("Verify that the warning message is shown");
-    evt.waitForAndGetElement(ELEMENT_MESSAGES_TEXT.replace("$mess", mess));
+    $(byXpath(ELEMENT_MESSAGES_TEXT.replace("$mess", mess))).waitUntil(Condition.visible,Configuration.timeout);
 
   }
 
