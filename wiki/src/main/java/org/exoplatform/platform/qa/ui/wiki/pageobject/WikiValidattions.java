@@ -140,51 +140,51 @@ public class WikiValidattions {
    * @param content String
    */
   public void verifyEffectsPageContent(effectTypes type, String content) {
-    switch (type) {
-    case Bold:
-      info("Verify Bold effect");
-      evt.waitForAndGetElement(ELEMENT_EFFECT_BOLD.replace("$content", content));
-      break;
-    case Bullest_List:
-      info("Verify Bullest list");
-      evt.waitForAndGetElement(ELEMENT_EFFECT_BULLET_LIST.replace("$content", content));
-      break;
-    case Number_List:
-      info("Verify Number list");
-      evt.waitForAndGetElement(ELEMENT_EFFECT_NUMBER_LIST.replace("$content", content));
-      break;
-    case Heading1:
-      info("Verify Heading1 effect");
-      evt.waitForAndGetElement(ELEMENT_EFFECT_HEADING_1.replace("$content", content));
-      break;
-    case Heading3:
-      info("Verify Heading3 effect");
-      evt.waitForAndGetElement(ELEMENT_EFFECT_HEADING_3.replace("$content", content));
-      break;
-    case Heading2:
-      info("Verify Heading3 effect");
-      evt.waitForAndGetElement(ELEMENT_EFFECT_HEADING_2.replace("$content", content));
-      break;
-    case Heading5:
-      info("Verify Heading4 effect");
-      evt.waitForAndGetElement(ELEMENT_EFFECT_HEADING_5.replace("$content", content));
-      break;
-    case Italic:
-      info("Verify Italic effect");
-      evt.waitForAndGetElement(ELEMENT_EFFECT_ITALIC.replace("$content", content));
-      break;
-    case Link:
-      info("Verify Link effect");
-      evt.waitForAndGetElement(ELEMENT_EFFECT_LINK.replace("$content", content));
-      break;
-    case Strike:
-      info("Verify Strike effect");
-      evt.waitForAndGetElement(ELEMENT_EFFECT_STRIKE.replace("$content", content));
-      break;
-    case Underline:
-      info("Verify Underline effect");
-      evt.waitForAndGetElement(ELEMENT_EFFECT_UNDERLINE.replace("$content", content));
-      break;
+    switch(type){
+      case Bold:
+        info("Verify Bold effect");
+        $(byXpath(ELEMENT_EFFECT_BOLD.replace("$content",content))).waitUntil(Condition.visible,Configuration.timeout);
+        break;
+      case Bullest_List:
+        info("Verify Bullest list");
+        $(byXpath(ELEMENT_EFFECT_BULLET_LIST.replace("$content",content))).waitUntil(Condition.visible,Configuration.timeout);
+        break;
+      case Number_List:
+        info("Verify Number list");
+        $(byXpath(ELEMENT_EFFECT_NUMBER_LIST.replace("$content",content))).waitUntil(Condition.visible,Configuration.timeout);
+        break;
+      case Heading1:
+        info("Verify Heading1 effect");
+        $(byXpath(ELEMENT_EFFECT_HEADING_1.replace("$content",content))).waitUntil(Condition.visible,Configuration.timeout);
+        break;
+      case Heading3:
+        info("Verify Heading3 effect");
+        $(byXpath(ELEMENT_EFFECT_HEADING_3.replace("$content",content))).waitUntil(Condition.visible,Configuration.timeout);
+        break;
+      case Heading2:
+        info("Verify Heading3 effect");
+        $(byXpath(ELEMENT_EFFECT_HEADING_2.replace("$content",content))).waitUntil(Condition.visible,Configuration.timeout);
+        break;
+      case Heading5:
+        info("Verify Heading4 effect");
+        $(byXpath(ELEMENT_EFFECT_HEADING_5.replace("$content",content))).waitUntil(Condition.visible,Configuration.timeout);
+        break;
+      case Italic:
+        info("Verify Italic effect");
+        $(byXpath(ELEMENT_EFFECT_ITALIC.replace("$content",content))).waitUntil(Condition.visible,Configuration.timeout);
+        break;
+      case Link:
+        info("Verify Link effect");
+        $(byXpath(ELEMENT_EFFECT_LINK.replace("$content",content))).waitUntil(Condition.visible,Configuration.timeout);
+        break;
+      case Strike:
+        info("Verify Strike effect");
+        $(byXpath(ELEMENT_EFFECT_STRIKE.replace("$content",content))).waitUntil(Condition.visible,Configuration.timeout);
+        break;
+      case Underline:
+        info("Verify Underline effect");
+        $(byXpath(ELEMENT_EFFECT_UNDERLINE.replace("$content",content))).waitUntil(Condition.visible,Configuration.timeout);
+        break;
     }
   }
 
@@ -300,19 +300,19 @@ public class WikiValidattions {
    */
   public void verifyTableInContentPage(int col, int row) {
     info("Verify that the table is shown into the content of the page");
-    evt.waitForAndGetElement(ELEMENT_PAGE_CONTENT_TABLE_MODE);
+    $(ELEMENT_PAGE_CONTENT_TABLE_MODE).waitUntil(Condition.visible,Configuration.timeout);
     for (int i = 1; i <= col; i++) {
       info("A table is shown with the col:" + col);
-      evt.waitForAndGetElement(ELEMETN_PAGE_CONTENT_TABLE_COL_NUM.replace("$col", String.valueOf(col)));
+      $(byXpath(ELEMETN_PAGE_CONTENT_TABLE_COL_NUM.replace("$col", String.valueOf(col)))).waitUntil(Condition.visible,Configuration.timeout);
     }
     for (int i = 1; i <= row; i++) {
       info("A table is shown with the row:" + row);
-      evt.waitForAndGetElement(ELEMETN_PAGE_CONTENT_TABLE_ROW_NUM.replace("$row", String.valueOf(row)));
+      $(byXpath(ELEMETN_PAGE_CONTENT_TABLE_ROW_NUM.replace("$row", String.valueOf(row)))).waitUntil(Condition.visible,Configuration.timeout);
     }
     info("A table isnot shown with the col:" + col + 1);
-    evt.waitForElementNotPresent(ELEMETN_PAGE_CONTENT_TABLE_COL_NUM.replace("$col", String.valueOf(col + 1)));
+    $(byXpath(ELEMETN_PAGE_CONTENT_TABLE_COL_NUM.replace("$col", String.valueOf(col + 1)))).shouldNotBe(Condition.visible);
     info("A table isnot shown with the row:" + row + 1);
-    evt.waitForElementNotPresent(ELEMETN_PAGE_CONTENT_TABLE_ROW_NUM.replace("$row", String.valueOf(row + 1)));
+    $(byXpath(ELEMETN_PAGE_CONTENT_TABLE_ROW_NUM.replace("$row", String.valueOf(row + 1)))).shouldNotBe(Condition.visible);
   }
 
   /**
@@ -717,7 +717,7 @@ public class WikiValidattions {
    * @param template String
    */
   public void verifyTemplateInList(String template) {
-    if (evt.waitForAndGetElement(ELEMENT_WIKI_SETTING_PAGE_TOTAL_NUMBER, 2000, 0) != null) {
+    if ($(ELEMENT_WIKI_SETTING_PAGE_TOTAL_NUMBER).is(Condition.visible)) {
       String total = evt.waitForAndGetElement(ELEMENT_WIKI_SETTING_PAGE_TOTAL_NUMBER).getText();
       int totalNum = Integer.parseInt(total);
       for (int i = 0; i < totalNum; i++) {
@@ -733,7 +733,7 @@ public class WikiValidattions {
       }
     } else {
       info("Verify that the template is shown in the list");
-      evt.waitForAndGetElement(ELEMENT_WIKI_SETTINGS_RESULTS.replace("${template}", template));
+      $(byXpath(ELEMENT_WIKI_SETTINGS_RESULTS.replace("${template}", template))).waitUntil(Condition.visible,Configuration.timeout);
       info("The template is shown successfully");
     }
   }
@@ -760,7 +760,7 @@ public class WikiValidattions {
    */
   public void verifyTemplateSearchEmpty() {
     info("Verify that the searching is empty");
-    evt.waitForAndGetElement(ELEMENT_WIKI_SETTING_SEARCH_EMPTY);
+    $(ELEMENT_WIKI_SETTING_SEARCH_EMPTY).waitUntil(Condition.visible,Configuration.timeout);
     info("Searching is empty successfully");
   }
 
