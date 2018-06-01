@@ -6,6 +6,9 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.io.File;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import org.omg.CORBA.CODESET_INCOMPATIBLE;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -90,7 +93,8 @@ public class SourceTextEditor {
       }
     }
     info("Waiting 30s before saved all changes");
-    $(ELEMENT_WIKI_PAGE_TOOL_BAR_AUTO_SAVE_TEXT).waitUntil(Condition.visible, 31000);
+    $(ELEMENT_WIKI_PAGE_TOOL_BAR_AUTO_SAVE_TEXT).waitUntil(Condition.visible,31000);
+
     info("Cancel adding page");
     $(ELEMENT_CANCEL_BUTTON_ADD_PAGE).click();
     $(ELEMENT_CONFIRMATION_POPUP_YES_BTN).click();
@@ -158,17 +162,17 @@ public class SourceTextEditor {
     info("Input a title for the page");
     String[] text;
     if (!newTitle.isEmpty())
-      evt.type(ELEMENT_TITLE_WIKI_INPUT, newTitle, true);
+      $(ELEMENT_TITLE_WIKI_INPUT).setValue(newTitle);
     info("Input a content for the page");
     if (!newContent.isEmpty()) {
       text = newContent.split("</br>");
       for (int i = 0; i < text.length; i++) {
-        evt.type(ELEMENT_CONTENT_WIKI_INPUT, text[i], false);
-        evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).sendKeys(Keys.ENTER);
+        $(ELEMENT_CONTENT_WIKI_INPUT).setValue(newContent);
+        $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.visible,Configuration.timeout).sendKeys(Keys.ENTER);
       }
     }
     info("Waiting 30s before saved all changes");
-    evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_TOOL_BAR_AUTO_SAVE_TEXT, 31000, 0);
+    $(ELEMENT_WIKI_PAGE_TOOL_BAR_AUTO_SAVE_TEXT).waitUntil(Condition.visible,31000);
   }
 
   /**
