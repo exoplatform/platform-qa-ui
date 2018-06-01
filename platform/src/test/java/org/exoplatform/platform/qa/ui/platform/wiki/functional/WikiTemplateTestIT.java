@@ -9,6 +9,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -574,7 +575,7 @@ public class WikiTemplateTestIT extends Base {
     info("Go to Wiki Settings");
     homePagePlatform.goToWiki();
     wikiHomePage.goToWikiSettingPage();
-    ArrayList<String> arrayTemplate = new ArrayList<String>();
+    List arrayTemplate = new ArrayList();
     for (int i = 0; i < 3; i++) {
       info("Add a new template");
       String title = "title" + getRandomNumber();
@@ -592,12 +593,12 @@ public class WikiTemplateTestIT extends Base {
     info("Search template with search field is blank");
     wikiSettingPage.searchTemplate("");
     info("Verify that any templates is shown in the list");
-    wikiValidattions.verifyTemplateInList(arrayTemplate.get(0));
-    wikiValidattions.verifyTemplateInList(arrayTemplate.get(1));
-    wikiValidattions.verifyTemplateInList(arrayTemplate.get(2));
-    wikiSettingPage.deleteTemplate(arrayTemplate.get(0));
-    wikiSettingPage.deleteTemplate(arrayTemplate.get(1));
-    wikiSettingPage.deleteTemplate(arrayTemplate.get(2));
+    wikiValidattions.verifyTemplateInList(arrayTemplate.get(0).toString());
+    wikiValidattions.verifyTemplateInList(arrayTemplate.get(1).toString());
+    wikiValidattions.verifyTemplateInList(arrayTemplate.get(2).toString());
+    wikiSettingPage.deleteTemplate(arrayTemplate.get(0).toString());
+    wikiSettingPage.deleteTemplate(arrayTemplate.get(1).toString());
+    wikiSettingPage.deleteTemplate(arrayTemplate.get(2).toString());
   }
 
   /**
