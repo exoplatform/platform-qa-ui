@@ -34,7 +34,7 @@ public class Platform {
 
   public void open() {
 
-    Selenide.open(URI);
+    Selenide.open("/portal");
     return;
 
   }

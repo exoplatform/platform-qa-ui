@@ -7,6 +7,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.hamcrest.core.Is.is;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -16,6 +17,7 @@ import org.exoplatform.platform.qa.ui.selenium.Dialog;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.By;
 
 public class WikiHomePage {
   private final TestBase       testBase;
@@ -448,8 +450,9 @@ public class WikiHomePage {
     info("Click on More link");
     $(ELEMENT_MORE_LINK).click();
     info("Click on Move page link");
-    if (evt.waitForAndGetElement(ELEMENT_MOVE_PAGE, 5000, 0) == null) {
-      evt.mouseOverAndClick(ELEMENT_MOVE_PAGE);
+    if (ELEMENT_MOVE_PAGE.is(Condition.visible)){
+
+      $(ELEMENT_MOVE_PAGE).hover().click();
     } else {
       $(ELEMENT_MOVE_PAGE).click();
     }
