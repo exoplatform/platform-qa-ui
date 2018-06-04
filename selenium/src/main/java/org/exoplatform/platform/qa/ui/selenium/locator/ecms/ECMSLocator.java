@@ -1184,4 +1184,5 @@ public class ECMSLocator {
                                                                       $(byId("UIDocumentContainer"));
 
   public static final SelenideElement ELEMENT_CLOSE_PUBLICATION_POPUP=$(byXpath("//*[@id=\"UIPublicationContainer\"]/div[2]/button"));
+  public static final SelenideElement ELEMENT_SEARCH_BTN=$(byId("simpleSearch"));
 }
