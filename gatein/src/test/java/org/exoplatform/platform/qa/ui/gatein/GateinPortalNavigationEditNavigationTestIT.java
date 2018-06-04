@@ -58,7 +58,7 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
     String portalName = "portalName" + getRandomNumber();
     String nodeName = "nodeName" + getRandomNumber();
     String newNodeName = "newNodeName" + getRandomNumber();
-
+    String groupAdmin =  "Development";
     /*
      * Step Number: 1 Step Name: Step 1: Add node for portal Step Description: - Go
      * to Administration/Portal/ Sites/Edit navigation - Select a node and choose
@@ -69,19 +69,19 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
 
     manageLogInOut.signIn("root", "gtn");
     navigationToolbar.goToPotalSites();
-    portalmanagesites.goToEditNavigation();
+    portalmanagesites.goToEditNavigation(groupAdmin);
     info("Add a new node");
     navigationmanagement.addNode(nodeName, "");
     navigationmanagement.saveNode();
 
     info("Edit a node");
-    portalmanagesites.goToEditNavigation();
+    portalmanagesites.goToEditNavigation(groupAdmin);
     navigationmanagement.editThisNode(nodeName);
     navigationmanagement.inputInfoNodeSetting(true, "", newNodeName, true, false);
     navigationmanagement.saveNode();
 
     info("Verify that the node is changed with new name");
-    portalmanagesites.goToEditNavigation();
+    portalmanagesites.goToEditNavigation(groupAdmin);
 
     $(byText(newNodeName)).should(Condition.exist);
     navigationmanagement.editThisNode(newNodeName);
@@ -118,6 +118,7 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
     String newTitlePage = "newTitlePage" + getRandomNumber();
     String groupPath = "Development";
     String memberships = "author";
+    String groupAdmin =  "Development";
     /*
      * Step Number: 1 Step Name: Step 1: Add node for portal Step Description: - Go
      * to Administration/Portal/ Sites/Edit navigation - Add new node by click add
@@ -127,7 +128,7 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
      */
     manageLogInOut.signIn("root", "gtn");
     navigationToolbar.goToPotalSites();
-    portalmanagesites.goToEditNavigation();
+    portalmanagesites.goToEditNavigation(groupAdmin);
     info("Add a new node");
     navigationmanagement.addNode(nodeName, "");
     navigationmanagement.inputInfoPageSelector(namePage, titlePage, true, false, false);
@@ -142,7 +143,7 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
      * Outcome: Page Setting, Permission setting tab are updated successfully with
      * new changes
      */
-    portalmanagesites.goToEditNavigation();
+    portalmanagesites.goToEditNavigation(groupAdmin);
     navigationmanagement.editNodePage(nodeName);// go to declaration de automate
     // right click
     pagecreationwizard.viewProperties();
@@ -164,7 +165,7 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
       assert false : "The title:" + newTitlePage + " is not updated";
     $(ELEMENT_NAVIGATION_MANAGEMENT_SAVE).click();
     navigationToolbar.goToPotalSites();
-    portalmanagesites.goToEditNavigation();
+    portalmanagesites.goToEditNavigation(groupAdmin);
 
     info("Test 03: Delete node");
     /*
@@ -199,6 +200,7 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
     String newTitlePage = "newTitlePage" + getRandomNumber();
     String groupPath = "Development";
     String memberships = "author";
+    String groupAdmin =  "Development";
     /*
      * Step Number: 1 Step Name: Step 1: Add node for portal Step Description: - Go
      * to Administration/Portal/ Sites/Edit navigation - Add new node by click add
@@ -208,7 +210,7 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
      */
     manageLogInOut.signIn("root", "gtn");
     navigationToolbar.goToPotalSites();
-    portalmanagesites.goToEditNavigation();
+    portalmanagesites.goToEditNavigation(groupAdmin);
     info("Add a new node");
     navigationmanagement.addNode(nodeName, "");
     navigationmanagement.inputInfoPageSelector(namePage, titlePage, true, false, false);
@@ -223,7 +225,7 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
      * Outcome: Page Setting, Permission setting tab are updated successfully with
      * new changes
      */
-    portalmanagesites.goToEditNavigation();
+    portalmanagesites.goToEditLayout(groupAdmin);
     navigationmanagement.editNodePage(nodeName);// go to declaration de automate
     // right click
     pagecreationwizard.viewProperties();
@@ -245,7 +247,7 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
       assert false : "The title:" + newTitlePage + " is not updated";
     $(ELEMENT_NAVIGATION_MANAGEMENT_SAVE).click();
     navigationToolbar.goToPotalSites();
-    portalmanagesites.goToEditNavigation();
+    portalmanagesites.goToEditNavigation(groupAdmin);
     info("Test 03: Delete node");
     /*
      * Step Number: 1 Step Name: Step 1: Delete Node Step Description: - Go to
@@ -279,6 +281,7 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
     String newTitlePage = "newTitlePage" + getRandomNumber();
     String groupPath = "Development";
     String memberships = "author";
+    String groupAdmin =  "Development";
     /*
      * Step Number: 1 Step Name: Step 1: Add node for portal Step Description: - Go
      * to Administration/Portal/ Sites/Edit navigation - Add new node by click add
@@ -288,7 +291,7 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
      */
     manageLogInOut.signIn("root", "gtn");
     navigationToolbar.goToPotalSites();
-    portalmanagesites.goToEditNavigation();
+    portalmanagesites.goToEditNavigation(groupAdmin);
     info("Add a new node");
     navigationmanagement.addNode(nodeName, "");
     navigationmanagement.inputInfoPageSelector(namePage, titlePage, true, false, false);
@@ -303,7 +306,7 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
      * Outcome: Page Setting, Permission setting tab are updated successfully with
      * new changes
      */
-    portalmanagesites.goToEditNavigation();
+    portalmanagesites.goToEditNavigation(groupAdmin);
     navigationmanagement.editNodePage(nodeName);// go to declaration de automate
     // right click
     pagecreationwizard.viewProperties();
@@ -325,7 +328,7 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
       assert false : "The title:" + newTitlePage + " is not updated";
     $(ELEMENT_NAVIGATION_MANAGEMENT_SAVE).click();
     navigationToolbar.goToPotalSites();
-    portalmanagesites.goToEditNavigation();
+    portalmanagesites.goToEditNavigation(groupAdmin);
     info("Test 03: Delete node");
     /*
      * Step Number: 1 Step Name: Step 1: Delete Node Step Description: - Go to

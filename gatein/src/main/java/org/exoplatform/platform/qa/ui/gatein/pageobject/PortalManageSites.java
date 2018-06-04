@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -30,11 +31,18 @@ public class PortalManageSites {
   }
 
   /**
-   * Open Navigation Management popup
-   *
+     * Open Navigation Management popup
+     *
    */
-  public void goToEditNavigation() {
+  public void editNavigation(String currentNavigation) {
+   $(byXpath(ELEMENT_EDIT_NAVIGATION.replace("${groupName}",currentNavigation)));
+           $(byXpath(ELEMENT_EDIT_NAVIGATION)).click();
 
+    $(ELEMENT_TITLE_NAVIGATION_MANAGEMENT).waitUntil(Condition.appears, 10000);
+  }
+
+
+  public void goToEditNavigation(String site) {
     ELEMENT_BUTTON_EDIT_NAVIGATION.waitUntil(Condition.appears, Configuration.timeout);
 
     ELEMENT_BUTTON_EDIT_NAVIGATION.click();
@@ -49,7 +57,7 @@ public class PortalManageSites {
    */
   public void goToEditLayout(String site) {
     info("Click on Edit layout button");
-    evt.click(ELEMENT_MANAGESITES_EDIT_LAYOUT_ICON.replace("${site}", site));
+   $(ELEMENT_MANAGESITES_EDIT_LAYOUT_ICON.replace("${site}", site)).click();
 
   }
 
