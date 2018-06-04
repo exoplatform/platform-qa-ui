@@ -1,0 +1,77 @@
+{
+  "id": "eXo Platform",
+  "viewports": [
+    {
+      "label": "tablet",
+      "width": 1024,
+      "height": 768
+    }
+  ],
+  "scenarios": [
+    {
+      "label": "Home_page_contentButton-onTablet",
+      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "readyEvent": null,
+      "onBeforeScript": "",
+      "onReadyScript": "onBefore.js",
+      "readySelector": "",
+      "delay": 1000,
+      "hideSelectors": ["div.currentDateContainer center"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "Content_search_page-onTablet",
+      "url": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/search",
+      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/search",
+      "readyEvent": null,
+      "onBeforeScript": "",
+      "onReadyScript": "",
+      "readySelector": "",
+      "delay": 1000,
+      "hideSelectors": ["div.currentDateContainer center"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    }
+  ],
+  "paths": {
+    "bitmaps_reference": "backstop_data/bitmaps_reference",
+    "bitmaps_test": "backstop_data/bitmaps_test",
+    "engine_scripts": "backstop_data/engine_scripts",
+    "html_report": "backstop_data/html_report",
+    "ci_report": "backstop_data/ci_report"
+  },
+  "report": ["browser", "CI"],
+  "engine": "phantomjs",
+  "engineFlags": [],
+  "asyncCaptureLimit": 5,
+  "asyncCompareLimit": 50,
+  "debug": false,
+  "debugWindow": false,
+  "casperflags":[],
+  "cliExitOnFail":false,
+  "port":3001
+}
