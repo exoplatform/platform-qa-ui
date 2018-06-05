@@ -1,11 +1,16 @@
 package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
+import static com.codeborne.selenide.Condition.not;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.util.Map;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.codeborne.selenide.Condition;
@@ -218,7 +223,7 @@ public class PortalManageSites {
                            String editMembership,
                            String... template) {
     info("--Create new portal--");
-    evt.click(ELEMENT_ADD_NEW_PORTAL_LINK);
+    $(byXpath(ELEMENT_ADD_NEW_PORTAL_LINK)).click();
     configPortal(portalName,
                  label,
                  description,
@@ -260,47 +265,52 @@ public class PortalManageSites {
                            String editMembership,
                            String... template) {
     if (portalName != null) {
-      evt.type(ELEMENT_INPUT_NAME, portalName, true);
+      $(ELEMENT_INPUT_NAME).setValue(portalName);
     }
     if (label != null) {
-      evt.type(ELEMENT_PORTAL_LABEL, label, true);
+      $(ELEMENT_PORTAL_LABEL).setValue(label);
     }
     if (description != null) {
-      evt.type(ELEMENT_PORTAL_DESCRIPTION, description, true);
+      $(ELEMENT_PORTAL_DESCRIPTION).setValue(description);
     }
     if (portalLocale != null) {
-      evt.select(ELEMENT_SELECT_LOCALE, portalLocale);
+      $(byXpath(ELEMENT_SELECT_LOCALE)).selectOption(portalLocale);
+
     }
     if (portalSkin != null) {
-      evt.select(ELEMENT_SELECT_SKIN, portalSkin);
+      $(ELEMENT_SELECT_SKIN).selectOption(portalSkin);
     }
     if (portalSession != null) {
-      evt.click(ELEMENT_PROPERTIES_TAB);
-      evt.select(ELEMENT_SELECT_SESSION_ALIVE, portalSession);
+      $(byXpath(ELEMENT_PROPERTIES_TAB)).click();
+      $(byXpath(ELEMENT_SELECT_SESSION_ALIVE)).selectOption(portalSession);
     }
-    evt.click(ELEMENT_PERMISSION_SETTING_TAB);
+    $(byXpath(ELEMENT_PERMISSION_SETTING_TAB)).click();
     if (publicMode) {
-      evt.check(ELEMENT_CHECKBOX_PUBLIC_MODE, 2);
-      evt.waitForElementNotPresent(ELEMENT_ADD_PERMISSION_BUTTON);
+      if($(ELEMENT_CHECKBOX_PUBLIC_MODE).is(Condition.not(Condition.checked)))
+      $(ELEMENT_CHECKBOX_PUBLIC_MODE).parent().click();
+      $(ELEMENT_ADD_PERMISSION_BUTTON).waitUntil(Condition.not(visible),Configuration.timeout);
     } else {
       for (String key : permissions.keySet()) {
         setViewPermissions(key, permissions.get(key));
       }
     }
     if (editGroupId != null && editMembership != null) {
-      evt.click(ELEMENT_EDIT_PERMISSION_SETTING);
+      $(byXpath(ELEMENT_EDIT_PERMISSION_SETTING)).click();
       setEditPermissions(editGroupId, editMembership);
     }
     if (template.length > 0) {
-      evt.click(ELEMENT_PORTAL_TEMPLATE_TAB);
+      $(byXpath(ELEMENT_PORTAL_TEMPLATE_TAB)).click();
       WebElement temp = evt.getElementFromTextByJquery(template[0]);
       temp.click();
     }
-    evt.click(ELEMENT_SAVE_BUTTON);
+    $(byXpath(ELEMENT_SAVE_BUTTON)).click();
 
-    evt.waitForElementNotPresent(ELEMENT_POPUP_ADD_PORTAL, 180000, 0);
+    $(ELEMENT_POPUP_ADD_PORTAL).waitUntil(Condition.not(visible),Configuration.timeout);
+
+
     if (evt.waitForAndGetElement(ELEMENT_POPUP_ADD_PORTAL, 10000, 0) == null)
-      evt.waitForElementNotPresent(ELEMENT_EDIT_PERMISSION_SETTING, 120000);
+
+    $(ELEMENT_EDIT_PERMISSION_SETTING).waitUntil(Condition.not(visible),Configuration.timeout);
   }
 
   /**
@@ -337,17 +347,19 @@ public class PortalManageSites {
   public void setEditPermissions(String groupId, String membership) {
     String membershipToSelect = ELEMENT_SELECT_EDIT_PERMISSION_MEMBERSHIP.replace("${membership}", membership);
 
+
     info("--Setting edit permission to " + groupId + ", " + membership + "--");
     String[] groups = groupId.split("/");
-    evt.click(ELEMENT_SELECT_PERMISSION_BUTTON);
-
-    evt.waitForTextPresent("Permission Selector");
+        $(ELEMENT_SELECT_PERMISSION_BUTTON).click();
+    $(byText("Permission Selector")).waitUntil(visible,Configuration.timeout);
     for (String group : groups) {
       String groupToSelect = ELEMENT_SELECT_EDIT_PERMISSION_MEMBERSHIP.replace("${membership}", group);
-      evt.click(groupToSelect);
+      $(byXpath(groupToSelect)).click();
     }
-    evt.click(membershipToSelect);
-    evt.waitForTextNotPresent("Permission Selector");
+    $(byXpath(membershipToSelect)).click();
+    $("Permission Selector").waitUntil(Condition.not(visible),Configuration.timeout);
+
+
   }
 
   /**
@@ -358,9 +370,9 @@ public class PortalManageSites {
   public void deletePortal(String portalName) {
     String portalDeleteIcon = ELEMENT_PORTAL_DELETE_ICON.replace("${portalName}", portalName);
     info("--Delete portal (" + portalName + ")--");
-    evt.click(portalDeleteIcon);
+    $(byXpath(portalDeleteIcon)).click();
     alert.acceptAlert();
-    evt.waitForElementNotPresent(ELEMENT_PORTAL_DELETE_ICON.replace("${portalName}", portalName), 2000);
+    $(byXpath(ELEMENT_PORTAL_DELETE_ICON.replace("${portalName}", portalName))).waitUntil(not(visible),Configuration.timeout);
   }
 
   /**
