@@ -120,8 +120,6 @@ public class GateinManagePagesTestIT extends Base {
      * click [Delete page] Input Data: Expected Outcome: - The page is removed from
      * the list
      */
-
-
     navigationToolbar.goToPotalPages();
     portalmanagepages.addPage(pageName, title, "");
     portalmanagepages.deletePage(title, "");
