@@ -6,7 +6,6 @@ import com.codeborne.selenide.Selenide;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
@@ -15,17 +14,14 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
-import static org.exoplatform.platform.qa.ui.core.PLFData.*;
+import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_CLOSE_PREVIEW_WINDOW;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMETN_WIKI_STATUS_VERSION_TEXT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_BUTTON_CLOSE_PREVIEW_MODE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("functional")
 @Tag("wiki")
-public class WikiBasicActionEditTestIT  extends Base {
+public class WikiBasicActionEditTestIT extends Base {
 
 
     HomePagePlatform homePagePlatform;
@@ -75,7 +71,7 @@ public class WikiBasicActionEditTestIT  extends Base {
     @Test
     public void test01_EditPage() {
         info("Test 1: Edit page");
-		/*Step Number: 1
+        /*Step Number: 1
 		*Step Name: Step 1: Create a page
 		*Step Description:
 			- Click [Add Page]
@@ -116,9 +112,11 @@ public class WikiBasicActionEditTestIT  extends Base {
         wikiHomePage.goToAPage(title);
         wikiHomePage.goToEditPage();
         wikiManagement.goToSourceEditor();
-        sourceTextEditor.editSimplePage("test", newContent);
+        sourceTextEditor.editSimplePage(newTitle, newContent);
         wikiManagement.saveAddPage();
-        wikiValidattions.verifyTitleWikiPage("test");
+        wikiValidattions.verifyTitleWikiPage(newTitle);
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(newTitle);
     }
 
     /**
@@ -177,16 +175,19 @@ public class WikiBasicActionEditTestIT  extends Base {
         sourceTextEditor.editSimplePage(newTitle, newContent);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(newTitle);
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(newTitle);
 
     }
+
     /**
-     *<li> Case ID:139444.</li>
-     *<li> Test Case Name: Draft in an outdate version status.</li>
-     *<li> Pre-Condition: Make changes on a page with two usersCreate a page</li>
-     *<li> Post-Condition: </li>
+     * <li> Case ID:139444.</li>
+     * <li> Test Case Name: Draft in an outdate version status.</li>
+     * <li> Pre-Condition: Make changes on a page with two usersCreate a page</li>
+     * <li> Post-Condition: </li>
      */
     @Test
-    public  void test03_00_DraftInAnOutdateVersionStatus() {
+    public void test03_00_DraftInAnOutdateVersionStatus() {
         info("Test 3: Draft in an outdate version status");
 		/*Step Number: 1
 		*Step Name: Step 1: Edit an outdated version
@@ -199,29 +200,37 @@ public class WikiBasicActionEditTestIT  extends Base {
 		*Expected Outcome:
 			The page is created*/
         info("Create 2 new users");
-        String password="123456";
+
+        String username1 = "username1" + getRandomString();
+        String username2 = "username2" + getRandomString();
+        String firstname = "test" + getRandomString();
+        String firstname2 = "testt" + getRandomString();
+        String password = "123456";
+        String email1 = username1 + "@test.com";
+        String email2 = username2 + "@test.com";
         navigationToolbar.goToAddUser();
-//        arrayUsers = addUserPage.addUsers(2,password);
+        addUsers.addUser(username1, password, email1, firstname, firstname);
+        addUsers.addUser(username2, password, email2, firstname2, firstname2);
 
         info("Add 2 users to Admin groups");
- //       String groupsPath=permisGroups.getDataColOneByArrayTypeRandom(5);
+        String groupsPath = "Platform/Administration";
         navigationToolbar.goToUsersAndGroupsManagement();
         userAndGroupManagement.goToGroupTab();
-  //      userAndGroupManagement.selectGroup(groupsPath);
-   //     userAndGroupManagement.addUsersToGroup(arrayUsers.get(0),"*",false,true);
-    //    userAndGroupManagement.addUsersToGroup(arrayUsers.get(1),"*",false,true);
+        userAndGroupManagement.selectGroup(groupsPath);
+        userAndGroupManagement.addUsersToGroup(username1, "*", false, false);
+        refresh();
+        userAndGroupManagement.addUsersToGroup(username2, "*", false, false);
 
         info("Login with User A");
-    //    magAc.signOut();
-     //   magAc.signIn(arrayUsers.get(0), password);
+        manageLogInOut.signIn(username1, "123456");
 
         info("Create a wiki page");
-        String title = "title"+getRandomNumber();
-        String content = "content"+getRandomNumber();
+        String title = "title" + getRandomNumber();
+        String content = "content" + getRandomNumber();
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         wikiManagement.goToSourceEditor();
-        sourceTextEditor.addSimplePage(title,content);
+        sourceTextEditor.addSimplePage(title, content);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(title);
 
@@ -235,12 +244,11 @@ public class WikiBasicActionEditTestIT  extends Base {
 		*Expected Outcome:
 			A draft is saved after 30s*/
         info("Login with User B");
-       // magAc.signOut();
-       // magAc.signIn(arrayUsers.get(1), password);
+        manageLogInOut.signIn(username2, "123456");
 
         info("Edit the page");
-        String newTitle = "newTitle"+getRandomNumber();
-        String newContent = "newContent"+getRandomNumber();
+        String newTitle = "newTitle" + getRandomNumber();
+        String newContent = "newContent" + getRandomNumber();
         homePagePlatform.goToWiki();
         wikiHomePage.goToAPage(title);
         wikiHomePage.goToEditPage();
@@ -264,12 +272,11 @@ public class WikiBasicActionEditTestIT  extends Base {
 		*Expected Outcome:
 			A new version of the page is created*/
         info("Login with User A");
-      //  magAc.signOut();
-      //  magAc.signIn(arrayUsers.get(0), password);
+        manageLogInOut.signIn(username1, "123456");
 
         info("Edit the page");
-        String newTitle1 = "newTitle1"+getRandomNumber();
-        String newContent1 = "newContent1"+getRandomNumber();
+        String newTitle1 = "newTitle1" + getRandomNumber();
+        String newContent1 = "newContent1" + getRandomNumber();
         homePagePlatform.goToWiki();
         wikiHomePage.goToAPage(title);
         wikiHomePage.goToEditPage();
@@ -279,7 +286,7 @@ public class WikiBasicActionEditTestIT  extends Base {
         wikiValidattions.verifyTitleWikiPage(newTitle1);
 
         info("A new version of the page is created");
-        wikiHomePage.viewInformationTable(newTitle1,"V2");
+        wikiHomePage.viewInformationTable(newTitle1, "V2");
 
 
 
@@ -296,11 +303,10 @@ public class WikiBasicActionEditTestIT  extends Base {
 			by another user.
 			You can [view your changes] and continue editing or [delete] your draft. "*/
         info("Login with User B");
-      //  magAc.signOut();
-      //  magAc.signIn(arrayUsers.get(1), password);
+        manageLogInOut.signIn(username2, "123456");
 
         info("Edit the page");
-      //  String message = wikiWarningData.getDataContentByArrayTypeRandom(3);
+        String message = "Your version is outdated. A version of this content has been updated by another user. You can ";
         homePagePlatform.goToWiki();
         wikiHomePage.goToAPage(newTitle1);
         wikiHomePage.goToEditPage();
@@ -308,7 +314,8 @@ public class WikiBasicActionEditTestIT  extends Base {
         info("A page is opened in edit mode and a warning message is displayed:");
         info("Your version is outdated, a version of this content has been updated by another user. "
                 + "You can [view your changes] and continue editing or [delete] your draft.");
-      //  wikiValidattions.verifyDraftInOutDateVersionStatus(message);
+        $(byText("View your Changes")).waitUntil(visible, Configuration.timeout);
+        wikiValidattions.verifyDraftInOutDateVersionStatus(message);
 
 		/*Step number: 5
 		*Step Name: Step 5: Check View your changes
@@ -322,17 +329,23 @@ public class WikiBasicActionEditTestIT  extends Base {
         info("The Comparison view is open");
         wikiManagement.goToViewChangesLinkOnStatus();
         wikiValidattions.verifyTitleDraftChangesPage();
-
+        ELEMENT_BUTTON_CLOSE_PREVIEW_MODE.click();
+        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(newTitle1);
     }
 
     /**
-     *<li> Case ID:139444.</li>
-     *<li> Test Case Name: Draft in an outdate version status.</li>
-     *<li> Pre-Condition: Make changes on a page with two usersCreate a page</li>
-     *<li> Post-Condition: </li>
+     * <li> Case ID:139444.</li>
+     * <li> Test Case Name: Draft in an outdate version status.</li>
+     * <li> Pre-Condition: Make changes on a page with two usersCreate a page</li>
+     * <li> Post-Condition: </li>
      */
     @Test
-    public  void test03_01_DraftInAnOutdateVersionStatus() {
+    public void test03_01_DraftInAnOutdateVersionStatus() {
         info("Test 3: Draft in an outdate version status");
 		/*Step Number: 1
 		*Step Name: Step 1: Edit an outdated version
@@ -345,29 +358,34 @@ public class WikiBasicActionEditTestIT  extends Base {
 		*Expected Outcome:
 			The page is created*/
         info("Create 2 new users");
-        String password="123456";
+        String username1 = "username1" + getRandomString();
+        String username2 = "username2" + getRandomString();
+        String firstname = "test" + getRandomString();
+        String firstname2 = "testt" + getRandomString();
+        String password = "123456";
+        String email1 = username1 + "@test.com";
+        String email2 = username2 + "@test.com";
         navigationToolbar.goToAddUser();
-      //  arrayUsers = addUserPage.addUsers(2,password);
+        addUsers.addUser(username1, password, email1, firstname, firstname);
+        addUsers.addUser(username2, password, email2, firstname2, firstname2);
 
         info("Add 2 users to Admin groups");
-      //  String groupsPath=permisGroups.getDataColOneByArrayTypeRandom(5);
+        String groupsPath = "Platform/Administration";
         navigationToolbar.goToUsersAndGroupsManagement();
         userAndGroupManagement.goToGroupTab();
-       // userAndGroupManagement.selectGroup(groupsPath);
-      //  userAndGroupManagement.addUsersToGroup(arrayUsers.get(0),"*",false,true);
-      //  userAndGroupManagement.addUsersToGroup(arrayUsers.get(1),"*",false,true);
-
+        userAndGroupManagement.selectGroup(groupsPath);
+        userAndGroupManagement.addUsersToGroup(username1, "*", false, false);
+        userAndGroupManagement.addUsersToGroup(username2, "*", false, false);
         info("Login with User A");
-      //  magAc.signOut();
-     //   magAc.signIn(arrayUsers.get(0), password);
+        manageLogInOut.signIn(username1, "123456");
 
         info("Create a wiki page");
-        String title = "title"+getRandomNumber();
-        String content = "content"+getRandomNumber();
+        String title = "title" + getRandomNumber();
+        String content = "content" + getRandomNumber();
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         wikiManagement.goToSourceEditor();
-        sourceTextEditor.addSimplePage(title,content);
+        sourceTextEditor.addSimplePage(title, content);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(title);
 
@@ -381,13 +399,12 @@ public class WikiBasicActionEditTestIT  extends Base {
 		*Expected Outcome:
 			A draft is saved after 30s*/
         info("Login with User B");
-       // magAc.signOut();
-       // magAc.signIn(arrayUsers.get(1), password);
+        manageLogInOut.signIn(username2, "123456");
 
 
         info("Edit the page");
-        String newTitle = "newTitle"+getRandomNumber();
-        String newContent = "newContent"+getRandomNumber();
+        String newTitle = "newTitle" + getRandomNumber();
+        String newContent = "newContent" + getRandomNumber();
         homePagePlatform.goToWiki();
         wikiHomePage.goToAPage(title);
         wikiHomePage.goToEditPage();
@@ -411,12 +428,11 @@ public class WikiBasicActionEditTestIT  extends Base {
 		*Expected Outcome:
 			A new version of the page is created*/
         info("Login with User A");
-      //  magAc.signOut();
-      //  magAc.signIn(arrayUsers.get(0), password);
+        manageLogInOut.signIn(username1, "123456");
 
         info("Edit the page");
-        String newTitle1 = "newTitle1"+getRandomNumber();
-        String newContent1 = "newContent1"+getRandomNumber();
+        String newTitle1 = "newTitle1" + getRandomNumber();
+        String newContent1 = "newContent1" + getRandomNumber();
         homePagePlatform.goToWiki();
         wikiHomePage.goToAPage(title);
         wikiHomePage.goToEditPage();
@@ -426,7 +442,7 @@ public class WikiBasicActionEditTestIT  extends Base {
         wikiValidattions.verifyTitleWikiPage(newTitle1);
 
         info("A new version of the page is created");
-        wikiHomePage.viewInformationTable(newTitle1,"V2");
+        wikiHomePage.viewInformationTable(newTitle1, "V2");
 
 		/*Step number: 4
 		*Step Name: Step 4: Edit page by User B
@@ -441,11 +457,10 @@ public class WikiBasicActionEditTestIT  extends Base {
 			by another user.
 			You can [view your changes] and continue editing or [delete] your draft. "*/
         info("Login with User B");
-  //      magAc.signOut();
-//        magAc.signIn(arrayUsers.get(1), password);
+        manageLogInOut.signIn(username2, "123456");
 
         info("Edit the page");
-      ///  String message = wikiWarningData.getDataContentByArrayTypeRandom(3);
+        String message = "Your version is outdated. A version of this content has been updated by another user. You can ";
         homePagePlatform.goToWiki();
         wikiHomePage.goToAPage(newTitle1);
         wikiHomePage.goToEditPage();
@@ -453,7 +468,8 @@ public class WikiBasicActionEditTestIT  extends Base {
         info("A page is opened in edit mode and a warning message is displayed:");
         info("Your version is outdated, a version of this content has been updated by another user. "
                 + "You can [view your changes] and continue editing or [delete] your draft.");
-    //    wikiValidattions.verifyDraftInOutDateVersionStatus(message);
+        $(byText("View your Changes")).waitUntil(visible, Configuration.timeout);
+        wikiValidattions.verifyDraftInOutDateVersionStatus(message);
 
 		/*Step number: 6
 		*Step Name: Step 6: Check continue editting
@@ -466,16 +482,23 @@ public class WikiBasicActionEditTestIT  extends Base {
 			The page is opened in the editing status*/
         info("The page is opened in the editing status");
         wikiManagement.goToContinueEdittingLinkOnStatus();
+        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(newTitle1);
+
     }
 
     /**
-     *<li> Case ID:139444.</li>
-     *<li> Test Case Name: Draft in an outdate version status.</li>
-     *<li> Pre-Condition: Make changes on a page with two usersCreate a page</li>
-     *<li> Post-Condition: </li>
+     * <li> Case ID:139444.</li>
+     * <li> Test Case Name: Draft in an outdate version status.</li>
+     * <li> Pre-Condition: Make changes on a page with two usersCreate a page</li>
+     * <li> Post-Condition: </li>
      */
     @Test
-    public  void test03_02_DraftInAnOutdateVersionStatus() {
+    public void test03_02_DraftInAnOutdateVersionStatus() {
         info("Test 3: Draft in an outdate version status");
 		/*Step Number: 1
 		*Step Name: Step 1: Edit an outdated version
@@ -488,28 +511,34 @@ public class WikiBasicActionEditTestIT  extends Base {
 		*Expected Outcome:
 			The page is created*/
         info("Create 2 new users");
-        String password="123456";
+        String username1 = "username1" + getRandomString();
+        String username2 = "username2" + getRandomString();
+        String firstname = "test" + getRandomString();
+        String firstname2 = "testt" + getRandomString();
+        String password = "123456";
+        String email1 = username1 + "@test.com";
+        String email2 = username2 + "@test.com";
         navigationToolbar.goToAddUser();
-    //    arrayUsers = addUserPage.addUsers(2,password);
+        addUsers.addUser(username1, password, email1, firstname, firstname);
+        addUsers.addUser(username2, password, email2, firstname2, firstname2);
 
         info("Add 2 users to Admin groups");
-    //    String groupsPath=permisGroups.getDataColOneByArrayTypeRandom(5);
+        String groupsPath = "Platform/Administration";
         navigationToolbar.goToUsersAndGroupsManagement();
         userAndGroupManagement.goToGroupTab();
-   //     userAndGroupManagement.selectGroup(groupsPath);
-  //      userAndGroupManagement.addUsersToGroup(arrayUsers.get(0),"*",false,true);
-//        userAndGroupManagement.addUsersToGroup(arrayUsers.get(1),"*",false,true);
+        userAndGroupManagement.selectGroup(groupsPath);
+        userAndGroupManagement.addUsersToGroup(username1, "*", false, false);
+        userAndGroupManagement.addUsersToGroup(username2, "*", false, false);
 
         info("Login with User A");
-     //   magAc.signOut();
-     //   magAc.signIn(arrayUsers.get(0), password);
+        manageLogInOut.signIn(username1, "123456");
         info("Create a wiki page");
-        String title = "title"+getRandomNumber();
-        String content = "content"+getRandomNumber();
+        String title = "title" + getRandomNumber();
+        String content = "content" + getRandomNumber();
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         wikiManagement.goToSourceEditor();
-        sourceTextEditor.addSimplePage(title,content);
+        sourceTextEditor.addSimplePage(title, content);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(title);
 
@@ -523,12 +552,11 @@ public class WikiBasicActionEditTestIT  extends Base {
 		*Expected Outcome:
 			A draft is saved after 30s*/
         info("Login with User B");
-       // magAc.signOut();
-      //  magAc.signIn(arrayUsers.get(1), password);
+        manageLogInOut.signIn(username2, "123456");
 
         info("Edit the page");
-        String newTitle = "newTitle"+getRandomNumber();
-        String newContent = "newContent"+getRandomNumber();
+        String newTitle = "newTitle" + getRandomNumber();
+        String newContent = "newContent" + getRandomNumber();
         homePagePlatform.goToWiki();
         wikiHomePage.goToAPage(title);
         wikiHomePage.goToEditPage();
@@ -552,12 +580,11 @@ public class WikiBasicActionEditTestIT  extends Base {
 		*Expected Outcome:
 			A new version of the page is created*/
         info("Login with User A");
-       // magAc.signOut();
-       // magAc.signIn(arrayUsers.get(0), password);
+        manageLogInOut.signIn(username1, "123456");
 
         info("Edit the page");
-        String newTitle1 = "newTitle1"+getRandomNumber();
-        String newContent1 = "newContent1"+getRandomNumber();
+        String newTitle1 = "newTitle1" + getRandomNumber();
+        String newContent1 = "newContent1" + getRandomNumber();
         homePagePlatform.goToWiki();
         wikiHomePage.goToAPage(title);
         wikiHomePage.goToEditPage();
@@ -567,7 +594,7 @@ public class WikiBasicActionEditTestIT  extends Base {
         wikiValidattions.verifyTitleWikiPage(newTitle1);
 
         info("A new version of the page is created");
-        wikiHomePage.viewInformationTable(newTitle1,"V2");
+        wikiHomePage.viewInformationTable(newTitle1, "V2");
 
 		/*Step number: 4
 		*Step Name: Step 4: Edit page by User B
@@ -582,11 +609,10 @@ public class WikiBasicActionEditTestIT  extends Base {
 			by another user.
 			You can [view your changes] and continue editing or [delete] your draft. "*/
         info("Login with User B");
-  //      magAc.signOut();
-//        magAc.signIn(arrayUsers.get(1), password);
+        manageLogInOut.signIn(username2, "123456");
 
         info("Edit the page");
-       // String message = wikiWarningData.getDataContentByArrayTypeRandom(3);
+        String message = "Your version is outdated. A version of this content has been updated by another user. You can ";
         homePagePlatform.goToWiki();
         wikiHomePage.goToAPage(newTitle1);
         wikiHomePage.goToEditPage();
@@ -594,7 +620,7 @@ public class WikiBasicActionEditTestIT  extends Base {
         info("A page is opened in edit mode and a warning message is displayed:");
         info("Your version is outdated, a version of this content has been updated by another user. "
                 + "You can [view your changes] and continue editing or [delete] your draft.");
-        //wikiValidattions.verifyDraftInOutDateVersionStatus(message);
+        wikiValidattions.verifyDraftInOutDateVersionStatus(message);
 
 		/*Step number: 7
 		*Step Name: Step 7: Check delete draft
@@ -611,17 +637,23 @@ public class WikiBasicActionEditTestIT  extends Base {
         wikiHomePage.goToMyDraft();
         wikiValidattions.verifyNotTitleDrafPage(newTitle1);
         wikiValidattions.verifyNotTitleDrafPage(title);
+        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(newTitle1);
 
     }
 
     /**
-     *<li> Case ID:139445.</li>
-     *<li> Test Case Name: Edit a page with an existing draft.</li>
-     *<li> Pre-Condition: </li>
-     *<li> Post-Condition: </li>
+     * <li> Case ID:139445.</li>
+     * <li> Test Case Name: Edit a page with an existing draft.</li>
+     * <li> Pre-Condition: </li>
+     * <li> Post-Condition: </li>
      */
     @Test
-    public  void test04_02_EditAPageWithAnExistingDraft() {
+    public void test04_02_EditAPageWithAnExistingDraft() {
         info("Test 4: Edit a page with an existing draft");
 		/*Step Number: 1
 		*Step Name: Step 1: Add new page
@@ -634,8 +666,8 @@ public class WikiBasicActionEditTestIT  extends Base {
 		*Expected Outcome:
 			The draft is saved after 30s*/
         info("Create a wiki page");
-        String title = "title"+getRandomNumber();
-        String content = "content"+getRandomNumber();
+        String title = "title" + getRandomNumber();
+        String content = "content" + getRandomNumber();
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePageWithAutoSaveStatus(title, content);
@@ -643,8 +675,8 @@ public class WikiBasicActionEditTestIT  extends Base {
         wikiValidattions.verifyTitleWikiPage(title);
 
         info("Edit the page");
-        String newTitle = "newTitle"+getRandomNumber();
-        String newContent = "newContent"+getRandomNumber();
+        String newTitle = "newTitle" + getRandomNumber();
+        String newContent = "newContent" + getRandomNumber();
         wikiHomePage.goToAPage(title);
         wikiHomePage.goToEditPage();
         richTextEditor.editSimplePageWithAutoSave(newTitle, newContent);
@@ -663,13 +695,13 @@ public class WikiBasicActionEditTestIT  extends Base {
 			 "A draft of this page was saved on Month Day, Year HH:MM.
 			 You can view your changes and decide to resume the draft or delete it.*/
         info("Edit the page again");
-        String message = "message"+getRandomNumber();
+        String message = "message" + getRandomNumber();
         wikiHomePage.goToAPage(title);
         wikiHomePage.goToEditPage();
 
         info("A warning message is displayed under the title:");
-        $(byText("View your Changes")).waitUntil(visible,Configuration.timeout);
-        $(byText("Resume the Draft")).waitUntil(visible,Configuration.timeout);
+        $(byText("View your Changes")).waitUntil(visible, Configuration.timeout);
+        $(byText("Resume the Draft")).waitUntil(visible, Configuration.timeout);
 
 		/*Step number: 5
 		*Step Name: Step 5: Delete draft
@@ -696,20 +728,20 @@ public class WikiBasicActionEditTestIT  extends Base {
         wikiHomePage.goToAPage(title);
         wikiHomePage.goToEditPage();
         info("The warning message isn't displayed");
-        $(byText("View your Changes")).waitUntil(Condition.not(visible),Configuration.timeout);
-        $(byText("Resume the Draf")).waitUntil(Condition.not(visible),Configuration.timeout);
+        $(byText("View your Changes")).waitUntil(Condition.not(visible), Configuration.timeout);
+        $(byText("Resume the Draf")).waitUntil(Condition.not(visible), Configuration.timeout);
         wikiHomePage.deleteWiki(title);
 
     }
 
     /**
-     *<li> Case ID:139445.</li>
-     *<li> Test Case Name: Edit a page with an existing draft.</li>
-     *<li> Pre-Condition: </li>
-     *<li> Post-Condition: </li>
+     * <li> Case ID:139445.</li>
+     * <li> Test Case Name: Edit a page with an existing draft.</li>
+     * <li> Pre-Condition: </li>
+     * <li> Post-Condition: </li>
      */
     @Test
-    public  void test04_00_EditAPageWithAnExistingDraft() {
+    public void test04_00_EditAPageWithAnExistingDraft() {
         info("Test 4: Edit a page with an existing draft");
 		/*Step Number: 1
 		*Step Name: Step 1: Add new page
@@ -722,8 +754,8 @@ public class WikiBasicActionEditTestIT  extends Base {
 		*Expected Outcome:
 			The draft is saved after 30s*/
         info("Create a wiki page");
-        String title = "title"+getRandomNumber();
-        String content = "content"+getRandomNumber();
+        String title = "title" + getRandomNumber();
+        String content = "content" + getRandomNumber();
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePageWithAutoSaveStatus(title, content);
@@ -731,8 +763,8 @@ public class WikiBasicActionEditTestIT  extends Base {
         wikiValidattions.verifyTitleWikiPage(title);
 
         info("Edit the page");
-        String newTitle = "newTitle"+getRandomNumber();
-        String newContent = "newContent"+getRandomNumber();
+        String newTitle = "newTitle" + getRandomNumber();
+        String newContent = "newContent" + getRandomNumber();
         wikiHomePage.goToAPage(title);
         wikiHomePage.goToEditPage();
         richTextEditor.editSimplePageWithAutoSave(newTitle, newContent);
@@ -758,8 +790,8 @@ public class WikiBasicActionEditTestIT  extends Base {
         info("A draft of this page was saved on Month Day, Year HH:MM. "
                 + "You can view your changes and decide to resume the draft or delete it.");
 
-        $(byText("View your Changes")).waitUntil(visible,Configuration.timeout);
-        $(byText("Resume the Draft")).waitUntil(visible,Configuration.timeout);
+        $(byText("View your Changes")).waitUntil(visible, Configuration.timeout);
+        $(byText("Resume the Draft")).waitUntil(visible, Configuration.timeout);
 		/*Step number: 3
 		*Step Name: Step 3: Check view changes
 		*Step Description:
@@ -773,18 +805,19 @@ public class WikiBasicActionEditTestIT  extends Base {
         $(byText(title)).shouldBe(visible);
         $(byText(newContent)).shouldBe(visible);
         $(byXpath("//*[@id=\"UIWikiMaskWorkspace\"]/div[1]/a/i")).click();
-
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(title);
 
     }
 
     /**
-     *<li> Case ID:139445.</li>
-     *<li> Test Case Name: Edit a page with an existing draft.</li>
-     *<li> Pre-Condition: </li>
-     *<li> Post-Condition: </li>
+     * <li> Case ID:139445.</li>
+     * <li> Test Case Name: Edit a page with an existing draft.</li>
+     * <li> Pre-Condition: </li>
+     * <li> Post-Condition: </li>
      */
     @Test
-    public  void test04_01_EditAPageWithAnExistingDraft() {
+    public void test04_01_EditAPageWithAnExistingDraft() {
         info("Test 4: Edit a page with an existing draft");
 		/*Step Number: 1
 		*Step Name: Step 1: Add new page
@@ -797,8 +830,8 @@ public class WikiBasicActionEditTestIT  extends Base {
 		*Expected Outcome:
 			The draft is saved after 30s*/
         info("Create a wiki page");
-        String title = "title"+getRandomNumber();
-        String content = "content"+getRandomNumber();
+        String title = "title" + getRandomNumber();
+        String content = "content" + getRandomNumber();
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePageWithAutoSaveStatus(title, content);
@@ -806,8 +839,8 @@ public class WikiBasicActionEditTestIT  extends Base {
         wikiValidattions.verifyTitleWikiPage(title);
 
         info("Edit the page");
-        String newTitle = "newTitle"+getRandomNumber();
-        String newContent = "newContent"+getRandomNumber();
+        String newTitle = "newTitle" + getRandomNumber();
+        String newContent = "newContent" + getRandomNumber();
         wikiHomePage.goToAPage(title);
         wikiHomePage.goToEditPage();
         richTextEditor.editSimplePageWithAutoSave(newTitle, newContent);
@@ -826,16 +859,14 @@ public class WikiBasicActionEditTestIT  extends Base {
 			 "A draft of this page was saved on Month Day, Year HH:MM.
 			 You can view your changes and decide to resume the draft or delete it.*/
         info("Edit the page again");
-       String message = "A draft of this page was saved on Month Day, Year HH:MM. "
-        + "You can view your changes and decide to resume the draft or delete it.";
         wikiHomePage.goToAPage(title);
         wikiHomePage.goToEditPage();
 
         info("A warning message is displayed under the title:");
         info("A draft of this page was saved on Month Day, Year HH:MM. "
                 + "You can view your changes and decide to resume the draft or delete it.");
-        String currentDate = getCurrentDate("M/d/yyyy");
-       wikiValidattions.verifyStatusWhenEditPageHasExistingDraf(message, currentDate);
+        $(byText("View your Changes")).waitUntil(visible, Configuration.timeout);
+        $(byText("Resume the Draft")).waitUntil(visible, Configuration.timeout);
 
 		/*Step number: 4
 		*Step Name: Step 4: Resume draft
@@ -848,18 +879,22 @@ public class WikiBasicActionEditTestIT  extends Base {
 			The page is displayed in the edit mode.*/
         wikiManagement.goToResumDrafLinkOnStatus();
         wikiValidattions.verifyResumADraf(newTitle);
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(title);
+
 
     }
 
     /**
-     *<li> Case ID:139449.</li>
-     *<li> Test Case Name: Resume a draft after Browser crash.</li>
-     *<li> Pre-Condition: Add/Edit a page</li>
-     *<li> Post-Condition: </li>
+     * <li> Case ID:139449.</li>
+     * <li> Test Case Name: Resume a draft after Browser crash.</li>
+     * <li> Pre-Condition: Add/Edit a page</li>
+     * <li> Post-Condition: </li>
+     *
      * @throws Exception
      */
     @Test
-    public  void test05_ResumeADraftAfterBrowserCrash() throws Exception {
+    public void test05_ResumeADraftAfterBrowserCrash() throws Exception {
         info("Test 5: Resume a draft after Browser crash");
 		/*Step Number: 1
 		*Step Name: Step 1: Edit page
@@ -870,8 +905,8 @@ public class WikiBasicActionEditTestIT  extends Base {
 		*Expected Outcome:
 			The draft is added after 30s*/
         info("Create a wiki page");
-        String title = "title"+getRandomNumber();
-        String content = "content"+getRandomNumber();
+        String title = "title" + getRandomNumber();
+        String content = "content" + getRandomNumber();
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(title, content);
@@ -879,8 +914,8 @@ public class WikiBasicActionEditTestIT  extends Base {
         wikiValidattions.verifyTitleWikiPage(title);
 
         info("Edit the page");
-        String title1 = "title1"+getRandomNumber();
-        String content1 = "content1"+getRandomNumber();
+        String title1 = "title1" + getRandomNumber();
+        String content1 = "content1" + getRandomNumber();
         wikiHomePage.goToEditPage();
         richTextEditor.editSimplePageWithAutoSave(title1, content1);
         wikiManagement.cancelAddPage();
@@ -897,7 +932,7 @@ public class WikiBasicActionEditTestIT  extends Base {
         info("The Browser is stopped");
         Selenide.close();
         open(Configuration.baseUrl);
-        manageLogInOut.signInCas(PLFData.DATA_USER1,"gtngtn");
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
 		/*Step number: 3
 		*Step Name: Step 3: Page saved as draft
 		*Step Description:
@@ -910,16 +945,20 @@ public class WikiBasicActionEditTestIT  extends Base {
         homePagePlatform.goToWiki();
         wikiHomePage.goToMyDraft();
         wikiValidattions.verifyTitleDrafPage(title1);
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(title);
     }
+
     /**
-     *<li> Case ID:139450.</li>
-     *<li> Test Case Name: Resume a draft after close without saving.</li>
-     *<li> Pre-Condition: edit a page</li>
-     *<li> Post-Condition: </li>
+     * <li> Case ID:139450.</li>
+     * <li> Test Case Name: Resume a draft after close without saving.</li>
+     * <li> Pre-Condition: edit a page</li>
+     * <li> Post-Condition: </li>
+     *
      * @throws Exception
      */
     @Test
-    public  void test06_ResumeADraftAfterCloseWithoutSaving() throws Exception {
+    public void test06_ResumeADraftAfterCloseWithoutSaving() throws Exception {
         info("Test 6: Resume a draft after close without saving");
 		/*Step Number: 1
 		*Step Name: Step 1: Edit a page
@@ -932,8 +971,8 @@ public class WikiBasicActionEditTestIT  extends Base {
 		*Expected Outcome:
 			A draft version is saved after 30s*/
         info("Create a wiki page");
-        String title = "title"+getRandomNumber();
-        String content = "content"+getRandomNumber();
+        String title = "title" + getRandomNumber();
+        String content = "content" + getRandomNumber();
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(title, content);
@@ -941,8 +980,8 @@ public class WikiBasicActionEditTestIT  extends Base {
         wikiValidattions.verifyTitleWikiPage(title);
 
         info("Edit the page");
-        String title1 = "title1"+getRandomNumber();
-        String content1 = "content1"+getRandomNumber();
+        String title1 = "title1" + getRandomNumber();
+        String content1 = "content1" + getRandomNumber();
         wikiHomePage.goToEditPage();
         richTextEditor.editSimplePageWithAutoSave(title1, content1);
         wikiManagement.cancelAddPage();
@@ -960,7 +999,7 @@ public class WikiBasicActionEditTestIT  extends Base {
         info("The Browser is closed");
         Selenide.close();
         open(Configuration.baseUrl);
-        manageLogInOut.signInCas(PLFData.DATA_USER1,"gtngtn");
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         info("The draft version appears in the list");
         homePagePlatform.goToWiki();
         wikiHomePage.goToMyDraft();
@@ -987,13 +1026,13 @@ public class WikiBasicActionEditTestIT  extends Base {
 
 
     /**
-     *<li> Case ID:139451.</li>
-     *<li> Test Case Name: Save a draft of currently saved page.</li>
-     *<li> Pre-Condition: connect with 2 users and edit the same page</li>
-     *<li> Post-Condition: </li>
+     * <li> Case ID:139451.</li>
+     * <li> Test Case Name: Save a draft of currently saved page.</li>
+     * <li> Pre-Condition: connect with 2 users and edit the same page</li>
+     * <li> Post-Condition: </li>
      */
     @Test
-    public  void test07_SaveADraftOfCurrentlySavedPage() {
+    public void test07_SaveADraftOfCurrentlySavedPage() {
         info("Test 7: Save a draft of currently saved page");
 		/*Step Number: 1
 		*Step Name: Step 1: Edit a page with User1
@@ -1005,25 +1044,32 @@ public class WikiBasicActionEditTestIT  extends Base {
 		*Expected Outcome:
 			The draft is saved after 30s*/
         info("Create 2 new users");
-        String password="123456";
+        String username1 = "username1" + getRandomString();
+        String username2 = "username2" + getRandomString();
+        String firstname = "test" + getRandomString();
+        String firstname2 = "testt" + getRandomString();
+        String password = "123456";
+        String email1 = username1 + "@test.com";
+        String email2 = username2 + "@test.com";
         navigationToolbar.goToAddUser();
-      //  arrayUsers = addUserPage.addUsers(2,password);
+        addUsers.addUser(username1, password, email1, firstname, firstname);
+        addUsers.addUser(username2, password, email2, firstname2, firstname2);
 
         info("Add 2 users to Admin groups");
-     //   String groupsPath=permisGroups.getDataColOneByArrayTypeRandom(5);
+        String groupsPath = "Platform/Administration";
         navigationToolbar.goToUsersAndGroupsManagement();
         userAndGroupManagement.goToGroupTab();
-      //  userAndGroupManagement.selectGroup(groupsPath);
-      //  userAndGroupManagement.addUsersToGroup(arrayUsers.get(0),"*",false,true);
-      //  userAndGroupManagement.addUsersToGroup(arrayUsers.get(1),"*",false,true);
+        userAndGroupManagement.selectGroup(groupsPath);
+        userAndGroupManagement.addUsersToGroup(username1, "*", false, false);
+        refresh();
+        userAndGroupManagement.addUsersToGroup(username2, "*", false, false);
 
         info("Login with User A");
-      //  magAc.signOut();
-      //  magAc.signIn(arrayUsers.get(0), password);
+        manageLogInOut.signIn(username1, "123456");
 
         info("Create a wiki page");
-        String title = "title"+getRandomNumber();
-        String content = "content"+getRandomNumber();
+        String title = "title" + getRandomNumber();
+        String content = "content" + getRandomNumber();
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         wikiManagement.goToSourceEditor();
@@ -1032,8 +1078,8 @@ public class WikiBasicActionEditTestIT  extends Base {
         wikiValidattions.verifyTitleWikiPage(title);
 
         info("Edit the page");
-        String title1 = "title1"+getRandomNumber();
-        String content1 = "content1"+getRandomNumber();
+        String title1 = "title1" + getRandomNumber();
+        String content1 = "content1" + getRandomNumber();
         wikiHomePage.goToEditPage();
         sourceTextEditor.editSimplePageWithAutoSave(title1, content1);
 
@@ -1049,8 +1095,7 @@ public class WikiBasicActionEditTestIT  extends Base {
 			A warning message is displayed:
 			This Page is currently being edited by FulluserName".*/
         info("Login with User B");
-      //  magAc.signOut();
-      //  magAc.signIn(arrayUsers.get(1), password);
+        manageLogInOut.signIn(username2, "123456");
 
         info("Edit the page");
         homePagePlatform.goToWiki();
@@ -1058,15 +1103,21 @@ public class WikiBasicActionEditTestIT  extends Base {
         wikiHomePage.goToEditPage();
 
         info("A warning message is displayed:");
-        info("This Page is currently being edited by FulluserName");
-    //    String fullName = arrayUsers.get(0)+" "+arrayUsers.get(0);
-     //   String status = wikiWarningData.getDataContentByArrayTypeRandom(5);
-   //     wikiValidattions.verifyMessageWhenEditingSamePage(status, fullName);
+        info("This Page is currently being edited by ");
+        String fullName = firstname + " " + firstname;
+        String status = "This page is currently being edited by ";
+        wikiValidattions.verifyMessageWhenEditingSamePage(status, fullName);
         wikiHomePage.confirmWaringMessage(true);
+        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(title);
     }
 
     @Test
-    public  void test08_EditAttachedFile() {
+    public void test08_EditAttachedFile() {
         info("Test 8: Edit attached file");
 		/*Step Number: 1
 		*Step Name: Step 1: Open attach file link form
@@ -1098,15 +1149,15 @@ public class WikiBasicActionEditTestIT  extends Base {
 			- Attached file is changed successfully in content of page
 			- Page is add/edited successfully*/
         info("Create a wiki page");
-        String title1 = "title1"+getRandomNumber();
-        String tooltip = "tooltip"+getRandomNumber();
+        String title1 = "title1" + getRandomNumber();
+        String tooltip = "tooltip" + getRandomNumber();
         String attachedFile = "eXo-Platform.png";
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
-        richTextEditor.addSimplePage(title1,"");
-        richTextEditor.insertAttachedFileLink(attachedFile,true);
-        wikiValidattions.verifyInsertedLinkIntoFrame(attachedFile,"");
-        richTextEditor.editAttachedFileLink(attachedFile,"", tooltip);
+        richTextEditor.addSimplePage(title1, "");
+        richTextEditor.insertAttachedFileLink(attachedFile, true);
+        wikiValidattions.verifyInsertedLinkIntoFrame(attachedFile, "");
+        richTextEditor.editAttachedFileLink(attachedFile, "", tooltip);
         wikiValidattions.verifyInsertedLinkIntoFrame("", tooltip);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(title1);
@@ -1121,16 +1172,20 @@ public class WikiBasicActionEditTestIT  extends Base {
         info("The file is attached in the page");
         wikiHomePage.goToAPage(title1);
         wikiManagement.viewInsertLink(attachedFile);
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(title1);
+
 
     }
+
     /**
-     *<li> Case ID:139534.</li>
-     *<li> Test Case Name: Add web page.</li>
-     *<li> Pre-Condition: </li>
-     *<li> Post-Condition: </li>
+     * <li> Case ID:139534.</li>
+     * <li> Test Case Name: Add web page.</li>
+     * <li> Pre-Condition: </li>
+     * <li> Post-Condition: </li>
      */
     @Test
-    public  void test09_AddWebPage() {
+    public void test09_AddWebPage() {
         info("Test 9: Add web page");
 		/*Step Number: 1
 		*Step Name: Step 1: Edit a web page
@@ -1153,40 +1208,43 @@ public class WikiBasicActionEditTestIT  extends Base {
 			- If the page is created in the [Source Editor] mode, the [Edit Page] will be displayed in the [Source Editor] mode.
 			- Web page link is changed succesfully*/
         info("Create a wiki page 1");
-        String title = "title"+getRandomNumber();
-        String label = "label"+getRandomNumber();
+        String title = "title" + getRandomNumber();
+        String label = "label" + getRandomNumber();
         String address = "www.google.com";
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
-        richTextEditor.addSimplePage(title,"");
+        richTextEditor.addSimplePage(title, "");
         richTextEditor.goToWebPageLink();
-        richTextEditor.insertWebLink(address, label,"",true);
-        wikiValidattions.verifyInsertedLinkIntoFrame(label,"");
+        richTextEditor.insertWebLink(address, label, "", true);
+        wikiValidattions.verifyInsertedLinkIntoFrame(label, "");
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(title);
 
         info("Edit the page");
-        String title1 = "title1"+getRandomNumber();
-        String label1 = "label1"+getRandomNumber();
+        String title1 = "title1" + getRandomNumber();
+        String label1 = "label1" + getRandomNumber();
         wikiHomePage.goToAPage(title);
         wikiHomePage.goToEditPage();
-        richTextEditor.editSimplePage(title1,"");
+        richTextEditor.editSimplePage(title1, "");
         richTextEditor.changeLink(label);
         richTextEditor.goToEditLink();
-        richTextEditor.insertWebLink(address,label1,"",true);
+        richTextEditor.insertWebLink(address, label1, "", true);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(title1);
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(title1);
+
     }
 
 
     /**
-     *<li> Case ID:139535.</li>
-     *<li> Test Case Name: Edit wiki page link.</li>
-     *<li> Pre-Condition: </li>
-     *<li> Post-Condition: </li>
+     * <li> Case ID:139535.</li>
+     * <li> Test Case Name: Edit wiki page link.</li>
+     * <li> Pre-Condition: </li>
+     * <li> Post-Condition: </li>
      */
     @Test
-    public  void test10_EditWikiPageLink() {
+    public void test10_EditWikiPageLink() {
         info("Test 10 Edit wiki page link");
 		/*Step Number: 1
 		*Step Name: Step 1: Open attach file link form
@@ -1204,8 +1262,8 @@ public class WikiBasicActionEditTestIT  extends Base {
 			- Attached File form appear*/
 
         info("Create a wiki page 1");
-        String title1 = "title1"+getRandomNumber();
-        String content1 = "content1"+getRandomNumber();
+        String title1 = "title1" + getRandomNumber();
+        String content1 = "content1" + getRandomNumber();
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(title1, content1);
@@ -1214,8 +1272,8 @@ public class WikiBasicActionEditTestIT  extends Base {
 
 
         info("Create a wiki page 2");
-        String title2 = "title2"+getRandomNumber();
-        String content2 = "content2"+getRandomNumber();
+        String title2 = "title2" + getRandomNumber();
+        String content2 = "content2" + getRandomNumber();
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(title2, content2);
@@ -1224,14 +1282,14 @@ public class WikiBasicActionEditTestIT  extends Base {
 
 
         info("Create a wiki page 3");
-        String title3 = "title3"+getRandomNumber();
-        String label = "label"+getRandomNumber();
-        String tooltip = "tooltip"+getRandomNumber();
+        String title3 = "title3" + getRandomNumber();
+        String label = "label" + getRandomNumber();
+        String tooltip = "tooltip" + getRandomNumber();
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
-        richTextEditor.addSimplePage(title3,"");
+        richTextEditor.addSimplePage(title3, "");
         richTextEditor.goToWikiPageLink();
-        richTextEditor.insertExistWikiPageLink(title1,label,tooltip, RichTextEditor.wikiPageLinkTab.All_pages);
+        richTextEditor.insertExistWikiPageLink(title1, label, tooltip, RichTextEditor.wikiPageLinkTab.All_pages);
         wikiValidattions.verifyInsertedLinkIntoFrame(label, tooltip);
         info("Move focus at the end of the line");
         wikiManagement.saveAddPage();
@@ -1252,12 +1310,12 @@ public class WikiBasicActionEditTestIT  extends Base {
 			- Page is add/edited successfully*/
 
         info("Edit the page");
-        String title4 = "title4"+getRandomNumber();
-        String label4 = "label4"+getRandomNumber();
-        String tooltip4 = "tooltip4"+getRandomNumber();
+        String title4 = "title4" + getRandomNumber();
+        String label4 = "label4" + getRandomNumber();
+        String tooltip4 = "tooltip4" + getRandomNumber();
         wikiHomePage.goToAPage(title3);
         wikiHomePage.goToEditPage();
-        richTextEditor.editSimplePage(title4,"");
+        richTextEditor.editSimplePage(title4, "");
         richTextEditor.changeLink(label);
         richTextEditor.goToEditLink();
         richTextEditor.insertExistWikiPageLink(title2, label4, tooltip4, RichTextEditor.wikiPageLinkTab.All_pages);
@@ -1275,20 +1333,21 @@ public class WikiBasicActionEditTestIT  extends Base {
         info("Content of wiki page link is shown");
         wikiHomePage.goToAPage(title4);
         wikiManagement.viewInsertLink(label4);
-        wikiValidattions.verifyPageContent(title2,content2);
+        wikiValidattions.verifyPageContent(title2, content2);
         wikiHomePage.deleteWiki(title2);
         wikiHomePage.deleteWiki(title4);
         wikiHomePage.deleteWiki(title1);
 
     }
+
     /**
-     *<li> Case ID:139536.</li>
-     *<li> Test Case Name: Edit email address.</li>
-     *<li> Pre-Condition: </li>
-     *<li> Post-Condition: </li>
+     * <li> Case ID:139536.</li>
+     * <li> Test Case Name: Edit email address.</li>
+     * <li> Pre-Condition: </li>
+     * <li> Post-Condition: </li>
      */
     @Test
-    public  void test11_EditEmailAddress() {
+    public void test11_EditEmailAddress() {
         info("Test 11 Edit email address");
 		/*Step Number: 1
 		*Step Name: Step 1: Open Email address form
@@ -1306,14 +1365,14 @@ public class WikiBasicActionEditTestIT  extends Base {
 			- Attached File form appear*/
 
         info("Create a wiki page with email address");
-        String title1 = "title1"+getRandomNumber();
-        String tooltip = "tooltip"+getRandomNumber();
-        String label ="label"+getRandomNumber();
-        String address=getRandomString()+"@gmail.com";
+        String title1 = "title1" + getRandomNumber();
+        String tooltip = "tooltip" + getRandomNumber();
+        String label = "label" + getRandomNumber();
+        String address = getRandomString() + "@gmail.com";
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
-        richTextEditor.addSimplePage(title1,"");
-        richTextEditor.insertEmailLink(address, label, tooltip,true);
+        richTextEditor.addSimplePage(title1, "");
+        richTextEditor.insertEmailLink(address, label, tooltip, true);
         wikiValidattions.verifyInsertedLinkIntoFrame(label, tooltip);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(title1);
@@ -1332,15 +1391,15 @@ public class WikiBasicActionEditTestIT  extends Base {
 			Add attach file is changed successfully in content of page
 			- Page is add/edited successfully*/
         info("Edit the page with change email address");
-        String title2 = "title2"+getRandomNumber();
-        String label2 = "label2"+getRandomNumber();
-        String address2=getRandomString()+"@gmail.com";
+        String title2 = "title2" + getRandomNumber();
+        String label2 = "label2" + getRandomNumber();
+        String address2 = getRandomString() + "@gmail.com";
         wikiHomePage.goToAPage(title1);
         wikiHomePage.goToEditPage();
-        richTextEditor.editSimplePage(title2,"");
+        richTextEditor.editSimplePage(title2, "");
         richTextEditor.changeLink(label);
         richTextEditor.goToEditLink();
-        richTextEditor.insertEmailLink(address2, label2,"",true);
+        richTextEditor.insertEmailLink(address2, label2, "", true);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(title2);
 
@@ -1355,18 +1414,19 @@ public class WikiBasicActionEditTestIT  extends Base {
         info("Click on email link to verify that the link is avaiable");
         wikiHomePage.goToAPage(title2);
         wikiManagement.viewInsertLink(label2);
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(title2);
     }
 
 
-
     /**
-     *<li> Case ID:139537.</li>
-     *<li> Test Case Name: Edit image.</li>
-     *<li> Pre-Condition: </li>
-     *<li> Post-Condition: </li>
+     * <li> Case ID:139537.</li>
+     * <li> Test Case Name: Edit image.</li>
+     * <li> Pre-Condition: </li>
+     * <li> Post-Condition: </li>
      */
-    @Test
-    public  void test12_EditImage() {
+
+    public void test12_EditImage() {
         info("Test 12 Edit image");
 		/*Step Number: 1
 		*Step Name: Step 1: Open upload image form
@@ -1383,13 +1443,13 @@ public class WikiBasicActionEditTestIT  extends Base {
 			- If the page is created in the [Source Editor] mode, the [Edit Page] will be displayed in the [Source Editor] mode.
 			- Attached File form appear*/
         info("Create a wiki page");
-        String title = "title"+getRandomNumber();
+        String title = "title" + getRandomNumber();
         String attachedFile = "eXo-Platform.png";
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
-        richTextEditor.addSimplePage(title,"");
+        richTextEditor.addSimplePage(title, "");
         richTextEditor.goToAttachedImageLink();
-        richTextEditor.insertImage(attachedFile, "200","200","");
+        richTextEditor.insertImage(attachedFile, "200", "200", "");
         richTextEditor.goToInsertImage();
         info("Move focus at the end of the line");
         wikiManagement.saveAddPage();
@@ -1412,14 +1472,14 @@ public class WikiBasicActionEditTestIT  extends Base {
 			- The attached file is added successfully in content of page
 			- Page is add/edited successfully*/
         info("Edit the page with change image");
-        String title2 = "title2"+getRandomNumber();
+        String title2 = "title2" + getRandomNumber();
         String attachedFile2 = "testavatar.png";
-        String altText2="altText2"+getRandomNumber();
-        String width2="200";
-        String height2="200";
+        String altText2 = "altText2" + getRandomNumber();
+        String width2 = "200";
+        String height2 = "200";
         wikiHomePage.goToAPage(title);
         wikiHomePage.goToEditPage();
-        richTextEditor.editSimplePage(title2,"");
+        richTextEditor.editSimplePage(title2, "");
         richTextEditor.selectImage(attachedFile);
         richTextEditor.goToEditImageLink();
         richTextEditor.insertImage(attachedFile2, width2, height2, altText2);
@@ -1436,134 +1496,13 @@ public class WikiBasicActionEditTestIT  extends Base {
     }
 
     /**
-     *<li> Case ID:139606.</li>
-     *<li> Test Case Name: Check show message if there are 2 users editing in the same page..</li>
-     *<li> Pre-Condition: </li>
-     *<li> Post-Condition: </li>
+     * <li> Case ID:139607.</li>
+     * <li> Test Case Name: Edit Paragraph When The Level Of Header Is Equal To Paragraph Below.</li>
+     * <li> Pre-Condition: </li>
+     * <li> Post-Condition: </li>
      */
     @Test
-    public  void test13_CheckShowMessageIfThereAre2UsersEditingInTheSamePage() {
-        info("Test 13 Check show message if there are 2 users editing in the same page.");
-		/*Step Number: 1
-		*Step Name: Step 1: Add new page on browser 1
-		*Step Description:
-			- Login as user 1
-			- Go to Wiki
-			- Create a new page
-			- Input content
-			- Save page
-		*Input Data:
-
-		*Expected Outcome:
-			Add new page successfully*/
-        info("Create 2 new users");
-        String username1=getRandomString();
-        String password="123456";
-        String username2=getRandomString();
-        String email1=username1+"@test.com";
-        String email2=username2+"@test.com";
-        navigationToolbar.goToAddUser();
-        addUsers.addUser(username1, password, email1, username1, username1);
-        addUsers.addUser(username2, password, email2, username2, username2);
-        navigationToolbar.goToAddUser();
-
-        info("Add 2 users to Admin groups");
-       // String groupsPath=permisGroups.getDataColOneByArrayTypeRandom(5);
-        navigationToolbar.goToUsersAndGroupsManagement();
-        userAndGroupManagement.goToGroupTab();
-      //  user.selectGroup(groupsPath);
-      //  userAndGroupManagement.addUsersToGroup(arrayUsers.get(0),"*",false,true);
-      //  user.addUsersToGroup(arrayUsers.get(1),"*",false,true);
-        manageLogInOut.signInCas(PLFData.DATA_USER1,"gtngtn");
-        info("Create a wiki page");
-        String title = "title"+getRandomNumber();
-        String content = "content"+getRandomNumber();
-        homePagePlatform.goToWiki();
-        wikiHomePage.goToAddBlankPage();
-        wikiManagement.goToSourceEditor();
-        sourceTextEditor.addSimplePage(title, content);
-        wikiManagement.saveAddPage();
-        wikiValidattions.verifyTitleWikiPage(title);
-
-		/*Step number: 2
-		*Step Name: Step 2: Edit page at step 1
-		*Step Description:
-			- Click [Edit] button of that page
-			- Edit title & content
-			- Wait 30s for auto
-			->save draft
-		*Input Data:
-
-		*Expected Outcome:
-			Page is save to my draft*/
-        info("Edit a wiki page");
-        String newTitle = "newTitle"+getRandomNumber();
-        String newContent = "newContent"+getRandomNumber();
-        wikiHomePage.goToAPage(title);
-        wikiHomePage.goToEditPage();
-        sourceTextEditor.editSimplePageWithAutoSave(newTitle, newContent);
-
-		/*Step number: 3
-		*Step Name: Step 3: Edit page at step 1 by other user on browser 2
-		*Step Description:
-			- Login as user 2
-			- Go to Wiki
-			- Click on the page user 1 has been created before
-			- Click [Edit] button of that page
-			- Change title or content for this page
-			- Click [Save]
-		*Input Data:
-
-		*Expected Outcome:
-			- Show message alert "This page is currently being edited by"user 1"."
-			- Edit successfully*/
-        info("Login with user 2 on browser 2");
-   //   newDriver = new FirefoxDriver();
-   //     newDriver.get(baseUrl);
-    //    newDriver.manage().window().maximize();
-    //   ManageLogInOut  acc2 = new ManageLogInOut(newDriver);
-     //   WikiHomePage wHome2 = new WikiHomePage(newDriver);
-     //   WikiManagement wikiMg2 = new WikiManagement(newDriver);
-    //   SourceTextEditor sourceEditor2=new SourceTextEditor(newDriver);
-     //   WikiValidattions wValidate2 = new WikiValidattions(newDriver);
-  //      HomePagePlatform hp2 = new HomePagePlatform(newDriver);
-        manageLogInOut.signInCas(username1,"123456");
-
-        info("Edit the page");
-        String newTitle2 = "newTitle2"+getRandomNumber();
-        String newContent2 = "newContent2"+getRandomNumber();
-        homePagePlatform.goToWiki();
-        wikiHomePage.goToAPage(title);
-        wikiHomePage.goToEditPage();
-        wikiManagement.goToSourceEditor();
-        sourceTextEditor.editSimplePage(newTitle2, newContent2);
-        info("Show message alert: This page is currently being edited by user 1");
-   //    String fullName = arrayUsers.get(0)+" "+arrayUsers.get(0);
-  //     String status = wikiWarningData.getDataContentByArrayTypeRandom(5);
-  //      wikiValidattions.verifyMessageWhenEditingSamePage(status, fullName);
-        wikiManagement.cancelAddPage();
-         wikiHomePage.confirmWaringMessage(true);
-    //    newDriver.close();
-		/*Step number: 4
-		*Step Name: Step 4: Edit page at step 1 by user 1
-		*Step Description:
-			- Back to browser 1 and click Save button
-		*Input Data:
-
-		*Expected Outcome:
-			- Page is edited successfully and have no exception in console*/
-        wikiManagement.savePage();
-        wikiValidattions.verifyTitleWikiPage(newTitle);
-    }
-
-    /**
-     *<li> Case ID:139607.</li>
-     *<li> Test Case Name: Edit Paragraph When The Level Of Header Is Equal To Paragraph Below.</li>
-     *<li> Pre-Condition: </li>
-     *<li> Post-Condition: </li>
-     */
-    @Test
-    public  void test14_EditParagraphWhenTheLevelOfHeaderIsEqualToParagraphBelow() {
+    public void test14_EditParagraphWhenTheLevelOfHeaderIsEqualToParagraphBelow() {
         info("Test 14 Edit Paragraph When The Level Of Header Is Equal To Paragraph Below");
 		/*Step Number: 1
 		*Step Name: Create New Wiki Page with 2 paragraphs with the same header
@@ -1581,18 +1520,18 @@ public class WikiBasicActionEditTestIT  extends Base {
 		*Expected Outcome:
 			- New page with 2 paragraphs with the same header is created successfully*/
         info("Create a wiki page");
-        String title = "title"+getRandomNumber();
-        String value1 = "value1"+getRandomNumber();
-        String value2 = "value2"+getRandomNumber();
-        String value3 = "value3"+getRandomNumber();
+        String title = "title" + getRandomNumber();
+        String value1 = "value1" + getRandomNumber();
+        String value2 = "value2" + getRandomNumber();
+        String value3 = "value3" + getRandomNumber();
         String contentHeading1 = "=" + value1 + "=";
         String contentHeading2 = "==" + value2 + "==";
-        String contentHeading3 = "===" + value2 + "===";
-        String content=contentHeading1+"\n"+contentHeading3;
+        String contentHeading3 = "===" + value3 + "===";
+        String content = contentHeading1 + "\n" + contentHeading3;
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         wikiManagement.goToSourceEditor();
-        sourceTextEditor.addSimplePage(title,content);
+        sourceTextEditor.addSimplePage(title, content);
         wikiManagement.saveAddPage();
         info("The page is created successfully");
         wikiValidattions.verifyTitleWikiPage(title);
@@ -1614,22 +1553,26 @@ public class WikiBasicActionEditTestIT  extends Base {
 		*Expected Outcome:
 			- Wiki page is in Edit screen, but only paragraph 1 appears in edit content.
 			- Paragraph 1 is edited title successfully. There is no change for paragraph 2.*/
-       info("Edit paragraph");
-       wikiManagement.editParagraph(value1,contentHeading2);
+        info("Edit paragraph");
+        wikiManagement.editParagraph(value1, contentHeading2);
         wikiManagement.saveAddPage();
-       info("The page is shown with Heading 3 effect");
-    //    wikiValidattions.verifyEffectsPageContent(WikiValidattions.effectTypes.Heading3,value2);
+        info("The page is shown with Heading 3 effect");
+        $(byId("H" + value2)).shouldHave(Condition.text(value2));
+        assertEquals($(byId("H" + value2)).getCssValue("font-size"), "24px");
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(title);
+
 
     }
 
     /**
-     *<li> Case ID:139608.</li>
-     *<li> Test Case Name: Edit Paragraph When The Level Of Header Greater Than Paragraph Below.</li>
-     *<li> Pre-Condition: </li>
-     *<li> Post-Condition: </li>
+     * <li> Case ID:139608.</li>
+     * <li> Test Case Name: Edit Paragraph When The Level Of Header Greater Than Paragraph Below.</li>
+     * <li> Pre-Condition: </li>
+     * <li> Post-Condition: </li>
      */
     @Test
-    public  void test15_EditParagraphWhenTheLevelOfHeaderGreaterThanParagraphBelow() {
+    public void test15_EditParagraphWhenTheLevelOfHeaderGreaterThanParagraphBelow() {
         info("Test 15 Edit Paragraph When The Level Of Header Greater Than Paragraph Below");
 		/*Step Number: 1
 		*Step Name: Create New Wiki Page with 2 paragraphs:+ Paragraph 1 with heading 1+ Paragraph 2 with heading 2
@@ -1647,16 +1590,16 @@ public class WikiBasicActionEditTestIT  extends Base {
 		*Expected Outcome:
 			- New page with 2 paragraphs is created successfully with:+ Paragraph 1 with heading 1+ Paragraph 2 with heading 2*/
         info("Create a wiki page");
-        String title = "title"+getRandomNumber();
-        String value1 = "value1"+getRandomNumber();
-        String value2 = "value2"+getRandomNumber();
+        String title = "title" + getRandomNumber();
+        String value1 = "value1" + getRandomNumber();
+        String value2 = "value2" + getRandomNumber();
         String contentHeading1 = "=" + value1 + "=";
         String contentHeading2 = "==" + value2 + "==";
-        String content=contentHeading1+"\n"+contentHeading2;
+        String content = contentHeading1 + "\n" + contentHeading2;
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         wikiManagement.goToSourceEditor();
-        sourceTextEditor.addSimplePage(title,content);
+        sourceTextEditor.addSimplePage(title, content);
         wikiManagement.saveAddPage();
         info("The page is created successfully");
         wikiValidattions.verifyTitleWikiPage(title);
@@ -1664,8 +1607,8 @@ public class WikiBasicActionEditTestIT  extends Base {
         $(byId("H" + value1)).shouldHave(Condition.text(value1));
         assertEquals($(byId("H" + value1)).getCssValue("font-size"), "36px");
         info("The page is shown with Heading 2 effect");
-        $(byId("H" + value2 + "-1")).shouldHave(Condition.text(value2));
-        assertEquals($(byId("H" + value2 + "-1")).getCssValue("font-size"), "30px");
+        $(byId("H" + value2)).shouldHave(Condition.text(value2));
+        assertEquals($(byId("H" + value2)).getCssValue("font-size"), "30px");
 
 
 		/*Step number: 2
@@ -1681,11 +1624,15 @@ public class WikiBasicActionEditTestIT  extends Base {
 			- Wiki page is in Edit screen, but only paragraph 2 appears in edit content.
 			- Paragraph 2 is edited title successfully. There is no change for paragraph 1.*/
         info("Edit paragraph");
-        String value3 = "value3"+getRandomNumber();
-        String contentHeading3 = "===" + value3 + "===";;
-        wikiManagement.editParagraph(value2,contentHeading3);
+        String value3 = "value3" + getRandomNumber();
+        String contentHeading3 = "===" + value3 + "===";
+        wikiManagement.editParagraph(value2, contentHeading3);
         wikiManagement.saveAddPage();
-
+        info("The page is shown with Heading 3 effect");
+        $(byId("H" + value3)).shouldHave(Condition.text(value3));
+        assertEquals($(byId("H" + value3)).getCssValue("font-size"), "24px");
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(title);
     }
 
 }

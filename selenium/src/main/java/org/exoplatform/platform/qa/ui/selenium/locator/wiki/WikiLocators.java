@@ -1540,4 +1540,6 @@ public class WikiLocators {
   public static final SelenideElement ELEMENT_PAGE_WIKI_CONTENT=$(byId("UIViewContentDisplay"));
 
   public static final SelenideElement ELEMENT_BUTTON_CLOSE_PERMALINK=$(byXpath("//*[@id=\"UIWikiPopupWindowL1\"]/div[1]/a"));
+  public static final SelenideElement ELEMENT_BUTTON_CLOSE_PREVIEW_MODE=$(byClassName("actionIcon"));
+
 }

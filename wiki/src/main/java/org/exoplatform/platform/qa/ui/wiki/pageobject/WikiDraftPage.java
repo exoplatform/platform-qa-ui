@@ -5,6 +5,7 @@ import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_DELETE_DRAFT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -33,6 +34,8 @@ public class WikiDraftPage {
   public void deleteDraft(String title) {
     $(byText(title + "(New Page)")).parent().parent().parent().find(byClassName("uiIconDeleteDraft")).click();
     alert.acceptAlert();
+    $(ELEMENT_DELETE_DRAFT).click();
+   // alert.acceptAlert();
   }
 
   /**
