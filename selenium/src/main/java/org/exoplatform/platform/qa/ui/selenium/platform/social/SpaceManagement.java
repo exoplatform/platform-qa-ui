@@ -426,6 +426,7 @@ public class SpaceManagement {
    */
   public void goToWikiTab() {
     info("Open Wiki Tab");
+    refresh();
     $(ELEMENT_WIKI_TAB).click();
     $(ELEMENT_WIKI_HOME_TITLE).waitUntil(Condition.visible, Configuration.timeout);
     info("Wiki portlet is shown");

@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
+import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
@@ -578,8 +579,7 @@ public class WikiValidattions {
    */
   public void verifyBreadCrumbePath(String locator1, String locator2) {
     info("Verify that the page is at the path:" + locator1 + "->" + locator2);
-    evt.waitForAndGetElement(ELEMENT_WIKI_HOME_BREADCRUMB_PATH_HOME.replace("$locator1", locator1).replace("$locator2",
-                                                                                                           locator2));
+    $(byId("UIWikiBreadCrumb")).shouldHave(Condition.text(locator1+" "+locator2));
     info("The page is at correct path");
   }
 

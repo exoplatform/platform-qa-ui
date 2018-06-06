@@ -327,7 +327,7 @@ public class WikiHomePage {
     goToSpaceSwitcher();
     if (!space.isEmpty()) {
       info("Select the space");
-      $(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", space)).click();
+      $(byXpath(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", space))).click();
     }
   }
 
