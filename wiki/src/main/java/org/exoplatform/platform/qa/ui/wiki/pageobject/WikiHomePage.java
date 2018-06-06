@@ -376,7 +376,7 @@ public class WikiHomePage {
   public void closeSpaceSwitcherMovePopupByClickOutside() {
     info("Click on outside to close space switcher");
     $(ELEMENT_SPACE_SWITCHER_OUTSIDE).click();
-    evt.waitForElementNotPresent(ELEMENT_SPACE_SWITCHER_INPUT_MOVE_PAGE_POPUP);
+    $(ELEMENT_SPACE_SWITCHER_INPUT_MOVE_PAGE_POPUP).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**

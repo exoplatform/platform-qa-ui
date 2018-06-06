@@ -860,7 +860,7 @@ public class WikiValidattions {
   public void verifyPresentSpaceSwitcher(String space) {
     if (!space.isEmpty()) {
       info("Verify that the space is shown");
-      evt.waitForAndGetElement(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", space));
+      $(byXpath(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", space))).waitUntil(Condition.visible,Configuration.timeout);
     }
 
   }
@@ -873,7 +873,7 @@ public class WikiValidattions {
   public void verifyNotPresentSpaceSwitcher(String space) {
     if (!space.isEmpty()) {
       info("Verify that the space is shown");
-      evt.waitForElementNotPresent(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", space));
+      $(byXpath(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", space))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     }
   }
 
@@ -893,7 +893,7 @@ public class WikiValidattions {
    */
   public void verifyPositionOfASpaceInList(int i, String space) {
     info("Verify that the space has:" + i + " position in the list");
-    evt.waitForAndGetElement(ELEMENT_SPACE_SWITCHER_SPACE_POSITION.replace("$num", String.valueOf(i)).replace("$space", space));
+    $(byXpath(ELEMENT_SPACE_SWITCHER_SPACE_POSITION.replace("$num", String.valueOf(i)).replace("$space", space))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**

@@ -1116,7 +1116,7 @@ public final class SocialLocator {
                                                                                        By.xpath("//*[@id='UIUserNavigationPortlet']/ul/li[3]//*[@class='uiIconAppconnections uiIconDefaultApp']");
 
   public static final By              ELEMENT_HORIZONTAL_TOOLBAR_FORTH_APP_WIKI                         =
-                                                                                By.xpath("//*[@id='UIUserNavigationPortlet']/ul/li[4]//*[@class='uiIconAppwiki uiIconDefaultApp']");
+                                                                                By.xpath("//*[@id=\"UIUserNavigationPortlet\"]/div[1]/ul/li[4]/a/div");
 
   public static final By              ELEMENT_HORIZONTAL_TOOLBAR_FIFTH_APP_DASHBOARD                    =
                                                                                      By.xpath("//*[@id='UIUserNavigationPortlet']/ul/li[5]//*[@class='uiIconAppdashboard uiIconDefaultApp']");
