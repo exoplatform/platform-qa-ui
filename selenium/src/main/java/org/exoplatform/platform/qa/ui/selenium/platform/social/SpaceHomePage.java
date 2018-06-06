@@ -12,66 +12,44 @@ import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+
+
 public class SpaceHomePage {
-    private final TestBase testBase;
+  private final TestBase        testBase;
 
-    public SpaceSettingManagement setSpaceMg;
+  public SpaceSettingManagement setSpaceMg;
 
-    public ManageLogInOut magAc;
+  public ManageLogInOut         magAc;
 
-    private ElementEventTestBase evt;
+  private ElementEventTestBase  evt;
 
-    /**
-     * constructor
-     *
-     * @param testBase
-     */
-    public SpaceHomePage(TestBase testBase) {
-        this.testBase = testBase;
-        this.evt = testBase.getElementEventTestBase();
-        this.magAc = new ManageLogInOut(testBase);
-    }
+  /**
+   * constructor
+   * 
+   * @param testBase
+   */
+  public SpaceHomePage(TestBase testBase) {
+    this.testBase = testBase;
+    this.evt = testBase.getElementEventTestBase();
+    this.magAc = new ManageLogInOut(testBase);
+  }
 
-    /**
-     * Open Space setting page
-     */
-    public void goToSpaceSettingTab() {
-        info("--Open Setting tab of the space");
-        info("Click on the tab");
-
-        if ($(ELEMENT_SPACE_MENU_MORE).is(Condition.visible)) {
-            $(ELEMENT_SPACE_MENU_MORE).click();
-            $(ELEMENT_SPACE_SPACE_SETTINGS).click();
-        } else {
-            $(ELEMENT_SPACE_SPACE_SETTINGS).click();
-            $(ELEMENT_SPACE_SPACE_SETTINGS_TITLE).waitUntil(Condition.appears, Configuration.timeout);
-            info("Space setting page is shown");
-        }
-    }
-
-    /**
-     * Open Wiki portlet of space
-     */
-    public void goToWikiTab() {
-        info("--Open Wiki tab of the space");
-        info("Click on the tab");
-        if ($(ELEMENT_SPACE_WIKI_TAB).is(Condition.not(Condition.visible))) {
-            refresh();
-        }
-        $(ELEMENT_SPACE_WIKI_TAB).waitUntil(Condition.appears, Configuration.timeout).click();
-        info("wiki page is shown");
-    }
-
-    public void goToForumsTab() {
-        info("--Open Wiki tab of the space");
-        info("Click on the tab");
-        if ($(ELEMENT_SPACE_FORUMS_TAB).is(Condition.not(Condition.visible))) {
-            refresh();
-        }
-        $(ELEMENT_SPACE_FORUMS_TAB).waitUntil(Condition.appears, Configuration.timeout).click();
-        info("wiki page is shown");
-    }
-
+  /**
+   * Open Space setting page
+   */
+  public void goToSpaceSettingTab() {
+      info("--Open Setting tab of the space");
+      info("Click on the tab");
+      $(ELEMENT_SPACE_WIKI_TAB).waitUntil(Condition.visible, Configuration.timeout);
+      if ($(ELEMENT_SPACE_MENU_MORE).is(Condition.visible)) {
+          $(ELEMENT_SPACE_MENU_MORE).click();
+          $(ELEMENT_SPACE_SPACE_SETTINGS).click();
+      } else {
+          $(ELEMENT_SPACE_SPACE_SETTINGS).click();
+          $(ELEMENT_SPACE_SPACE_SETTINGS_TITLE).waitUntil(Condition.appears, Configuration.timeout);
+          info("Space setting page is shown");
+      }
+  }
     /**
      * Open a space from left menu
      *
