@@ -1185,11 +1185,8 @@ public class ECMSLocator {
 
   public static final SelenideElement ELEMENT_CLOSE_PUBLICATION_POPUP=$(byXpath("//*[@id=\"UIPublicationContainer\"]/div[2]/button"));
 
-<<<<<<< 81fdc5ef25d118770545db2ace004edf0dea3f66
   public static final SelenideElement ELEMENT_SEARCH_BTN=$(byId("simpleSearch"));
 
-  public static final By ELEMENT_EXPAND_ICON=byClassName("expandIcon");
-=======
 
   public static final By              ELEMENT_EXPAND_ICON                                                  =
                                                           byClassName("expandIcon");
@@ -1208,6 +1205,5 @@ public class ECMSLocator {
 
   public static final SelenideElement ELEMENT_BUTTON_PERMISSION_IN_MORE_DROP_DOWN_MENU                     =
                                                                                        $(byId("ListHideContainer")).find(byClassName("uiIconEcmsViewPermissions"));
->>>>>>> test01_CheckSaveASNewVersionButtonWhenUserNotHaveModifyRight
 
 }
