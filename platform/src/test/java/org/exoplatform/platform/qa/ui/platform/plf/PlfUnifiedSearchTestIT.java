@@ -424,7 +424,6 @@ public class PlfUnifiedSearchTestIT extends Base {
 
   @Test
   @Tag("ECMS-7784")
-  @BugInPLF("ECMS-7784")
   public void test10_searchWebContentByContent() {
     String name = "name" + getRandomNumber();
     String content = "content" + getRandomNumber();
