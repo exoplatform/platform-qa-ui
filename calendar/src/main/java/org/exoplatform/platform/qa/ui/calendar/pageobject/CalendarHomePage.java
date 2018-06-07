@@ -4,7 +4,9 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.refresh;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_AVATAR_CHANGELANGUAGE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.ELEMENT_CHANGE_LANGUAGE_POPUP_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
@@ -94,7 +96,8 @@ public class CalendarHomePage {
     switch (optionDay) {
       case DETAILTIME:
         $(ELEMENT_ACCOUNT_NAME_LINK).click();
-        $(byXpath(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name))).scrollTo().contextClick();
+        executeJavaScript("window.scrollBy(0,450)", "");
+        $(byXpath(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name))).contextClick();
         break;
       case ALLDAY:
         $(ELEMENT_ACCOUNT_NAME_LINK).click();
@@ -174,10 +177,12 @@ public class CalendarHomePage {
         $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE.replace("$name", name).replace("$date",
                 date))).scrollTo().contextClick();}
       if ($(byText(name)).is(Condition.not(Condition.visible)))
-        $(byText(name)).scrollTo().contextClick();
+        $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE.replace("$name", name).replace("$date",
+                date))).contextClick();
       else {
         $(ELEMENT_ACCOUNT_NAME_LINK).click();
-        $(byText(name)).contextClick();
+        $(ELEMENT_ACCOUNT_NAME_LINK).click();
+        $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))).contextClick();
 
       }
 

@@ -66,7 +66,6 @@ public class CalendarPublishActivityTestIT extends Base {
     calendarManagement.changeSettingCalendar(null, "(GMT +01:00) Africa/Tunis", null, null, null, null, null);
     calendarManagement.saveSetting();
     homePagePlatform.goToMySpaces();
-    spaceManagement.goToCreateSpace();
     spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
   }
 
