@@ -23,6 +23,7 @@ package org.exoplatform.platform.qa.ui.selenium.locator.social;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 
+import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.By;
 
 import com.codeborne.selenide.SelenideElement;
@@ -2364,7 +2365,7 @@ public final class SocialLocator {
   public static final By ELEMENT_TITLE_INPUT= byClassName("textarea");
   public static final By ELEMENT_BUTTON_SAVE= byXpath("//*[@id=\"UIEditUserProfileForm\"]/div[3]/button[1]");
   public static final By ELEMENT_ABOUT_ME= byClassName("simpleBox");
-
+public static final ElementsCollection ELEMENT_LIST_OF_MEMBERS_IN_SPACE=$(byId("spaceMemberListBox")).findAll(byClassName("itemContainer"));
 
 
 }
