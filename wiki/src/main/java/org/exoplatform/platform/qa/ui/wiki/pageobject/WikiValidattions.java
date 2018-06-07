@@ -344,7 +344,7 @@ public class WikiValidattions {
    */
   public void verifyContentPage(String content) {
     info("Verify that the content page is added successfully");
-    evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_PAGE.replace("$content", content));
+    $(byXpath(ELEMENT_CONTENT_WIKI_PAGE.replace("$content", content))).waitUntil(Condition.visible,Configuration.timeout);
     info("The content also is added successfully");
   }
 
@@ -525,17 +525,13 @@ public class WikiValidattions {
       for (int i = 0; i < pages.size(); i++) {
         if (i > 4) {
           info("i5:" + i + "with:" + pages.get(i));
-          evt.waitForElementNotPresent(EMENENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_RENAME_LINK.replace("$message", mess)
-                                                                                        .replace("$page", pages.get(i)),
-                                       2000,
-                                       1);
-          evt.waitForAndGetElement(ELEMENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_AND_MORE);
+         $(byXpath(EMENENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_RENAME_LINK.replace("$message", mess)
+                                                                                        .replace("$page", pages.get(i)))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+          $(ELEMENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_AND_MORE).waitUntil(Condition.visible,Configuration.timeout);
         } else {
           info("i0:" + i + "with:" + pages.get(i));
-          evt.waitForAndGetElement(EMENENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_RENAME_LINK.replace("$message", mess)
-                                                                                    .replace("$page", pages.get(i)),
-                                   2000,
-                                   1);
+          $(EMENENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_RENAME_LINK.replace("$message", mess)
+                                                                                    .replace("$page", pages.get(i))).waitUntil(Condition.visible,Configuration.timeout);
         }
       }
     }
@@ -550,7 +546,7 @@ public class WikiValidattions {
   public void verifyMessageOnePageHasSameTitleInMovingPage(String mess) {
     if (!mess.isEmpty()) {
       info("Verify that the message is shown");
-      evt.waitForAndGetElement(EMENENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_RENAME_LINK.replace("$message", mess));
+      $(EMENENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_RENAME_LINK.replace("$message", mess)).waitUntil(Condition.visible,Configuration.timeout);
       info("The message is shown");
     }
   }
@@ -564,9 +560,9 @@ public class WikiValidattions {
    */
   public void verifyBreadCrumbePath(String locator1, String locator2, String page) {
     info("Verify that the page is at the path:" + locator1 + "->" + locator2 + "->" + page);
-    evt.waitForAndGetElement(ELEMENT_WIKI_HOME_BREADCRUMB_PATH.replace("$locator1", locator1)
+    $(byXpath(ELEMENT_WIKI_HOME_BREADCRUMB_PATH.replace("$locator1", locator1)
                                                               .replace("$locator2", locator2)
-                                                              .replace("$page", page));
+                                                              .replace("$page", page))).waitUntil(Condition.visible,Configuration.timeout);
     info("The page is at correct path");
   }
 
@@ -633,8 +629,8 @@ public class WikiValidattions {
    */
   public void verifyParentChildNode(String parentNode, String childNode) {
     info("Verify that page A is under page B or page A is parent of the page B");
-    evt.waitForAndGetElement(ELEMENT_TREE_WIKI_PARENT_NODE_CHILD_NODE.replace("$parent", parentNode).replace("$child",
-                                                                                                             childNode));
+    $(byXpath(ELEMENT_TREE_WIKI_PARENT_NODE_CHILD_NODE.replace("$parent", parentNode).replace("$child",
+                                                                                                             childNode))).waitUntil(Condition.visible,Configuration.timeout);
     info("The page" + parentNode + " is parent of" + childNode + "");
   }
 
@@ -645,7 +641,7 @@ public class WikiValidattions {
    */
   public void verifyEditModeOpenning(String oldTitle) {
     info("Verify that input tilte field is shown");
-    evt.waitForAndGetElement(ELEMENT_TITLE_WIKI_INPUT);
+    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.timeout);
     info("Verify that the value of input title field has correct value of old title");
     String currentTitle = this.testBase.getExoWebDriver()
                                        .getWebDriver()

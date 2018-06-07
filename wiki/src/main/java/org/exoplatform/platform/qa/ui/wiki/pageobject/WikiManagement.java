@@ -481,7 +481,7 @@ public class WikiManagement {
 
   public void renameFromAlertMessageOfManyPages(String mess, String page) {
     info("Click on Rename link of the page");
-    evt.click(EMENENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_RENAME_LINK.replace("$message", mess).replace("$page", page));
+    $(byXpath(EMENENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_RENAME_LINK.replace("$message", mess).replace("$page", page))).click();
 
   }
 
