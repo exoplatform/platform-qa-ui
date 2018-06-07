@@ -74,6 +74,7 @@ public class HomePagePlatform {
     ELEMENT_CALENDAR_LINK_PLF.click();
     refresh();
     info("Verify that Calendar page is shown");
+    refresh();
     $(ELEMENT_CALENDAR_WORKING_PANEL).waitUntil(Condition.appears, Configuration.timeout);
     info("The calendar page is shown successfully");
   }

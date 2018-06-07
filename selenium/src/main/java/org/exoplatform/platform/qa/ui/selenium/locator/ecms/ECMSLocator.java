@@ -1184,5 +1184,26 @@ public class ECMSLocator {
                                                                       $(byId("UIDocumentContainer"));
 
   public static final SelenideElement ELEMENT_CLOSE_PUBLICATION_POPUP=$(byXpath("//*[@id=\"UIPublicationContainer\"]/div[2]/button"));
+
   public static final SelenideElement ELEMENT_SEARCH_BTN=$(byId("simpleSearch"));
+
+
+  public static final By              ELEMENT_EXPAND_ICON                                                  =
+                                                          byClassName("expandIcon");
+
+  public static final String          ELEMENT_CHECKBOX_MODIFY_PERMISSION                                   =
+                                                                         "*:/spaces/{user}addNode";
+
+  public static final SelenideElement ELEMENT_BUTTON_UPLOAD_NEW_VERSION                                    =
+                                                                        $(byClassName("uiIconEcmsUploadNewVersion"));
+
+  public static final SelenideElement ELEMENT_BUTTON_CREATE_NEW_VERSION                                    =
+                                                                        $(byClassName("uiIconEcmsCreateNewVersion"));
+
+  public static final SelenideElement ELEMENT_BUTTON_PERMISSION                                            =
+                                                                $(byId("uiActionsBarContainer")).find(byClassName("uiIconEcmsViewPermissions"));
+
+  public static final SelenideElement ELEMENT_BUTTON_PERMISSION_IN_MORE_DROP_DOWN_MENU                     =
+                                                                                       $(byId("ListHideContainer")).find(byClassName("uiIconEcmsViewPermissions"));
+
 }

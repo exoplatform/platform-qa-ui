@@ -1,17 +1,16 @@
 package org.exoplatform.platform.qa.ui.platform.wiki;
 
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.core.PLFData.password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_STREAM_CONTAINER;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_WIKI_PAGE_CONTAINER;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -69,7 +68,6 @@ public class WikiPublishActivityTestIT extends Base {
     }
     manageLogInOut.signInCas(username, password);
   }
-
 
   /**
    * <li>Case ID:122869.</li>
@@ -386,4 +384,43 @@ public class WikiPublishActivityTestIT extends Base {
     wikiHomePage.deleteWiki(wiki);
   }
 
+  @Test
+  @Tag("WIKI-1290")
+  public void test08_checkFirst4linesDisplayedInAS() {
+    String title = "title" + getRandomNumber();
+    String content = "content" + getRandomNumber();
+    String content1 = "content" + getRandomNumber();
+    String content2 = "content" + getRandomNumber();
+    String content3 = "content" + getRandomNumber();
+    String content4 = "content" + getRandomNumber();
+    homePagePlatform.goToWiki();
+    wikiHomePage.goToAddBlankPage();
+    if (ELEMENT_BUTTON_WIKI_RITCH_TEXT.is(Condition.visible)) {
+      ELEMENT_BUTTON_WIKI_RITCH_TEXT.click();
+    }
+    $(ELEMENT_TITLE_WIKI_INPUT).setValue(title);
+    switchTo().frame($(byClassName("gwt-RichTextArea")));
+    $(byId("body")).sendKeys(content);
+    $(byId("body")).pressEnter();
+    $(byId("body")).sendKeys(content1);
+    $(byId("body")).pressEnter();
+    $(byId("body")).sendKeys(content2);
+    $(byId("body")).pressEnter();
+    $(byId("body")).sendKeys(content3);
+    $(byId("body")).pressEnter();
+    $(byId("body")).sendKeys(content4);
+    $(byId("body")).pressEnter();
+    switchTo().defaultContent();
+    wikiManagement.saveAddPage();
+    homePagePlatform.goToHomePage();
+    activityStream.checkActivity(title);
+    activityStream.checkActivity(content);
+    activityStream.checkActivity(content1);
+    activityStream.checkActivity(content2);
+    activityStream.checkActivity(content3);
+    $(byText(content4)).shouldNot(Condition.exist);
+    homePagePlatform.goToWiki();
+    wikiHomePage.deleteWiki(title);
+
+  }
 }

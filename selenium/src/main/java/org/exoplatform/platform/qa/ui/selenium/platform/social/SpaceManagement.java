@@ -55,7 +55,7 @@ public class SpaceManagement {
       if (isVerify)
         alert.verifyAlertMessage(ELEMENT_SPACE_CONFIRM_DELETE);
       $(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON).click();
-      $(byText(spaceName)).waitUntil(Condition.disappears, Configuration.timeout);
+      ELEMENT_SPACES_LIST.find(byText(spaceName)).waitUntil(Condition.disappears, Configuration.timeout);
     }
 
   }
@@ -99,14 +99,14 @@ public class SpaceManagement {
    */
   public void addNewSpace(String name, String desc, String access, String groups, int... params) {
     int iTimeout = params.length > 0 ? params[0] : testBase.getDefaultTimeout();
-    if (evt.waitForAndGetElement(ELEMENT_ADDNEWSPACE_BUTTON, 3000, 0, 2) != null) {
-      evt.click(ELEMENT_ADDNEWSPACE_BUTTON);
+    if ($(ELEMENT_ADDNEWSPACE_BUTTON).waitUntil(Condition.visible,Configuration.timeout) != null) {
+      $(ELEMENT_ADDNEWSPACE_BUTTON).click();
     } else {
-      evt.click(By.xpath("//*[contains(@class, 'uiIconSocSimplePlus')]"));
+      $(By.xpath("//*[contains(@class, 'uiIconSocSimplePlus')]")).click();
     }
-    evt.waitForAndGetElement(ELEMENT_ADDNEWSPACE_FORM, 3000, 0);
-    evt.type(ELEMENT_SPACE_NAME_INPUT, name, true);
-    evt.type(ELEMENT_SPACE_DESCRIPTION_INPUT, desc, true);
+    $(ELEMENT_ADDNEWSPACE_FORM).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_SPACE_NAME_INPUT).setValue(name);
+    $(ELEMENT_SPACE_DESCRIPTION_INPUT).setValue(desc);
 
     if (!access.isEmpty()) {
       goToAccessTabFromPopUp();
@@ -114,11 +114,11 @@ public class SpaceManagement {
       if (arrayRight.length > 0) {
         for (String right : arrayRight) {
           info("Select a permission for space:" + right);
-          evt.check(ELEMENT_ACCESS_PERMISSION_RADIO.replace("${right}", right), 2);
+          evt.check(byXpath(ELEMENT_ACCESS_PERMISSION_RADIO.replace("${right}", right)), 2);
         }
       } else {
         info("Select a permission for space:" + access);
-        evt.check(ELEMENT_ACCESS_PERMISSION_RADIO.replace("${right}", access), 2);
+        evt.check(byXpath(ELEMENT_ACCESS_PERMISSION_RADIO.replace("${right}", access)), 2);
       }
 
     }
@@ -143,7 +143,7 @@ public class SpaceManagement {
     }
 
     info("Save all changes");
-    evt.click(ELEMENET_SPACE_CREATE_BUTTON);
+    $(ELEMENET_SPACE_CREATE_BUTTON).click();
     evt.waitForAndGetElement(By.linkText(name), iTimeout);
   }
 

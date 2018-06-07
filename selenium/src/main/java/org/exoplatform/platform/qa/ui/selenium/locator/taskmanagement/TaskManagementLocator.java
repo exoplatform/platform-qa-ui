@@ -181,6 +181,25 @@ public static final String ELEMENT_VIEW_ALL_REPLIES_LINK_TASK="SubCommentShowAll
   public static final SelenideElement ELEMENT_LEFT_PANEL_IN_TASK_PAGE               = $(byClassName("left-menu"));
 
   public static final SelenideElement ELEMENT_TITLE_OF_PROJECT=$(byClassName("projectName"));
+
+  public static final SelenideElement ELEMENT_WORK_PLANED_FIELD                     =
+                                                                $(byClassName("addTask")).find(byClassName("date-work-plan"))
+                                                                                         .find(byClassName("editableField"));
+
+  public static final SelenideElement ELEMENT_CHECKBOX_ALL_DAY                      = $(byName("allday"));
+
+  public static final SelenideElement ELEMENT_INPUT_FROM_TIME                       = $(byName("fromTime"));
+
+  public static final SelenideElement ELEMENT_INPUT_TO_TIME                         = $(byName("toTime"));
+
+  public static final SelenideElement ELEMENT_MINI_CALENDAR_FROM                    = $(byId("UITaskFromCalendarControl"));
+
+  public static final SelenideElement ELEMENT_MINI_CALENDAR_TO                      = $(byId("UITaskToCalendarControl"));
+
+  public static final SelenideElement ELEMENT_ICON_ADD_IMAGE_IN_COMMENT=$(byClassName("cke_button__selectimage_icon"));
+
+  public static final SelenideElement ELEMENT_BUTTON_OK_UPLOAD=$(byClassName("cke_dialog_ui_hbox_first")).find(byClassName("btn"));
+
   // Add labels form
 
   // Edit labels form

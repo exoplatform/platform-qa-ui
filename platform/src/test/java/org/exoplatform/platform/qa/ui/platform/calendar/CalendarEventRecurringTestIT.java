@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.platform.calendar;
 
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -17,6 +18,7 @@ import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarHomePage;
 import org.exoplatform.platform.qa.ui.calendar.pageobject.EventManagement;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 
@@ -46,28 +48,38 @@ public class CalendarEventRecurringTestIT extends Base {
    * events" option. Case ID:115632. Test Case Name: Delete Following events in
    * recurring event. Pre-Condition: A recurring events is created Post-Condition:
    * Step number: 2 Step Name: Step 2: Show Edit an event form Step Description: -
-   * Edit an even from the series Input Data: Expected Outcome: - The pop up
-   * "Edit Recurring event" is displayed - The icon "Repeat" is checked Step
-   * number: 3 Step Name: Step 3: Edit repeat option Step Description: - Edit the
-   * repeat option - Click "Save" Input Data: Expected Outcome: - A confirmation
-   * pop up is displayed to ask user:
-   * "Would you like to change only this event, all events in the series, or this and all following events in the series?"
-   * - 3 options: + Only this event + Following events + All events - The option
-   * "Only this Event" is selcted by Default
-   * Step number: 4 Step Name: Step 4: Choose option to change Step Description: -
-   * Choose "Following events" - Click "Save" Input Data: Expected Outcome: -
-   * Changes are appliyed for current & following events Step number: 2 Step Name:
-   * <p>Step 2: Select a recurring event<br data -mce -bogus="1"></p> Step
-   * Description: - Right click on event from the series - Choose the option
+   * Edit an even from the series Input Data: Expected Outcome: - The pop up "Edit
+   * Recurring event" is displayed - The icon "Repeat" is checked Step number: 3
+   * Step Name: Step 3: Edit repeat option Step Description: - Edit the repeat
+   * option - Click "Save" Input Data: Expected Outcome: - A confirmation pop up
+   * is displayed to ask user: "Would you like to change only this event, all
+   * events in the series, or this and all following events in the series?" - 3
+   * options: + Only this event + Following events + All events - The option "Only
+   * this Event" is selcted by Default Step number: 4 Step Name: Step 4: Choose
+   * option to change Step Description: - Choose "Following events" - Click "Save"
+   * Input Data: Expected Outcome: - Changes are appliyed for current & following
+   * events Step number: 2 Step Name:
+   * <p>
+   * Step 2: Select a recurring event<br data -mce -bogus="1">
+   * </p>
+   * Step Description: - Right click on event from the series - Choose the option
    * "Delete" Input Data: Expected Outcome: - A pop upis displayed with:* A title:
    * "Delete Recurring Event"* A message: Would you like to delete only this
    * event, all events in the series, or this and all following events in the
-   * series?* The option 'Only this
-   * event" is selected by default* A button "Delete"
-   * Step number: 3 Step Name: <p>Step 3: Delete only this event<br data -mce
-   * -bogus="1"></p> Step Description: <p> - Choose the default option
-   * "Following events"<br> - Click "Delete"</p> Input Data: Expected Outcome: <p>
-   * - Selected and following event are deleted</p>
+   * series?* The option 'Only this event" is selected by default* A button
+   * "Delete" Step number: 3 Step Name:
+   * <p>
+   * Step 3: Delete only this event<br data -mce -bogus="1">
+   * </p>
+   * Step Description:
+   * <p>
+   * - Choose the default option "Following events"<br>
+   * - Click "Delete"
+   * </p>
+   * Input Data: Expected Outcome:
+   * <p>
+   * - Selected and following event are deleted
+   * </p>
    */
   @Test
   public void test02_EditFollowingEventsInRecurringEvent() {
@@ -239,30 +251,37 @@ public class CalendarEventRecurringTestIT extends Base {
    * Pre-Condition: A recurring events is created Post-Condition: Step number: 2
    * Step Name: Step 2: Show Edit an event form Step Description: - Edit an even
    * from the series Input Data: Expected Outcome: - The pop up "Edit Recurring
-   * event" is displayed - The icon "Repeat" is checked
-   * Step number: 3 Step Name: Step 3: Edit repeat option Step Description: - Edit
-   * any information of event - Click "Save" Input Data: Expected Outcome: - A
-   * confirmation pop up is displayed to ask user:
-   * "Would you like to change only this event, all events in the series, or this and all following events in the series?"
-   * - 3 new options: Only this event, Following events, All events. - The option
-   * "Only this event" is selected by default. Step number: 4 Step Name: Step 4:
-   * Choose option to change Step Description: - Choose the default option
-   * "Only this event" - Click "Save" Input Data: Expected Outcome: - Changes are
-   * restricted to the edited recurring event
-   * Step Number: 1 Step Name: <p>Step 1: Show calendar application<br data -mce
-   * -bogus="1"></p> Step Description: - Connect to Intranet - Open "Calendar"
-   * application Input Data: Expected Outcome: - A recurring events is displayed
-   * Step number: 2 Step Name: <p>Step 2: Select a recurring event<br data -mce
-   * -bogus="1"></p> Step Description: - Right click on event from the series -
-   * Choose the option "Delete" Input Data: Expected Outcome: - A pop upis
-   * displayed with:* A title: "Delete Recurring Event"* A message: Would you like
-   * to delete only this event, all events in the series, or this and all
-   * following events in the series?* The option 'Only this
-   * event" is selected by default* A button "Delete"
-   * Step number: 3 Step Name: <p>Step 3: Delete only this event<br data -mce
-   * -bogus="1"></p> Step Description: - Choose the default option
-   * "Only this event" - Click "Delete" Input Data: Expected Outcome: - Only
-   * current event is deleted from the series
+   * event" is displayed - The icon "Repeat" is checked Step number: 3 Step Name:
+   * Step 3: Edit repeat option Step Description: - Edit any information of event
+   * - Click "Save" Input Data: Expected Outcome: - A confirmation pop up is
+   * displayed to ask user: "Would you like to change only this event, all events
+   * in the series, or this and all following events in the series?" - 3 new
+   * options: Only this event, Following events, All events. - The option "Only
+   * this event" is selected by default. Step number: 4 Step Name: Step 4: Choose
+   * option to change Step Description: - Choose the default option "Only this
+   * event" - Click "Save" Input Data: Expected Outcome: - Changes are restricted
+   * to the edited recurring event Step Number: 1 Step Name:
+   * <p>
+   * Step 1: Show calendar application<br data -mce -bogus="1">
+   * </p>
+   * Step Description: - Connect to Intranet - Open "Calendar" application Input
+   * Data: Expected Outcome: - A recurring events is displayed Step number: 2 Step
+   * Name:
+   * <p>
+   * Step 2: Select a recurring event<br data -mce -bogus="1">
+   * </p>
+   * Step Description: - Right click on event from the series - Choose the option
+   * "Delete" Input Data: Expected Outcome: - A pop upis displayed with:* A title:
+   * "Delete Recurring Event"* A message: Would you like to delete only this
+   * event, all events in the series, or this and all following events in the
+   * series?* The option 'Only this event" is selected by default* A button
+   * "Delete" Step number: 3 Step Name:
+   * <p>
+   * Step 3: Delete only this event<br data -mce -bogus="1">
+   * </p>
+   * Step Description: - Choose the default option "Only this event" - Click
+   * "Delete" Input Data: Expected Outcome: - Only current event is deleted from
+   * the series
    */
   @Test
   public void test03_04_EditDeleteOnlyACurrentRecurringEvent() {
@@ -388,19 +407,30 @@ public class CalendarEventRecurringTestIT extends Base {
    * displayed - A recurring event is displayed Step number: 2 Step Name: Step 2:
    * Show Edit an event form Step Description: - Edit an even from the series
    * Input Data: Expected Outcome: - The pop up "Edit Recurring event" is
-   * displayed - The icon "Repeat" is checked
-   * Step number: 3 Step Name: Step 3: Edit repeat option Step Description: - Edit
-   * the repeat option - Click "Save" Input Data: Expected Outcome: - A
-   * confirmation pop up is displayed to ask user:
-   * "Would you like to change only this event, all events in the series, or this and all following events in the series?"
-   * - 3 options: + Only this event + Following events + All events - The option
-   * "Only this Event" is selcted by Default Step number: 4 Step Name: Step 4:
-   * Choose option to change Step Description: - Choose "All events" - Click
-   * "Save" Input Data: Expected Outcome: - Changes are appliyed for all events
-   * Step number: 3 Step Name: <p>Step 3: Delete event<br data -mce
-   * -bogus="1"></p> Step Description: <p> - Choose the default option
-   * "All events"<br> - Click "Delete"</p> Input Data: Expected Outcome: <p> - All
-   * events are deletes</p><p> - Series no longer exists</p>
+   * displayed - The icon "Repeat" is checked Step number: 3 Step Name: Step 3:
+   * Edit repeat option Step Description: - Edit the repeat option - Click "Save"
+   * Input Data: Expected Outcome: - A confirmation pop up is displayed to ask
+   * user: "Would you like to change only this event, all events in the series, or
+   * this and all following events in the series?" - 3 options: + Only this event
+   * + Following events + All events - The option "Only this Event" is selcted by
+   * Default Step number: 4 Step Name: Step 4: Choose option to change Step
+   * Description: - Choose "All events" - Click "Save" Input Data: Expected
+   * Outcome: - Changes are appliyed for all events Step number: 3 Step Name:
+   * <p>
+   * Step 3: Delete event<br data -mce -bogus="1">
+   * </p>
+   * Step Description:
+   * <p>
+   * - Choose the default option "All events"<br>
+   * - Click "Delete"
+   * </p>
+   * Input Data: Expected Outcome:
+   * <p>
+   * - All events are deletes
+   * </p>
+   * <p>
+   * - Series no longer exists
+   * </p>
    */
   @Test
   public void test05_AddRecurringEvents() {
@@ -736,5 +766,49 @@ public class CalendarEventRecurringTestIT extends Base {
                                          EventManagement.recurringType.ALL_EVENT,
                                          getDate(0, "MMM dd yyyy"),
                                          false);
+  }
+
+  @Test
+  @Tag("CAL-1330")
+  public void test10_addRecurringEventStartAfterMonth() {
+    String titleEvent = "titleEvent" + getRandomNumber();
+    String titleEvent2 = "titleEvent" + getRandomNumber();
+    String content = "content" + getRandomNumber();
+    info("Add a event");
+    homePagePlatform.goToCalendarPage();
+    eventManagement.goToAddEventFromActionBar();
+    eventManagement.inputDataEventInQuickForm(titleEvent,
+                                              content,
+                                              getDate(30, "MM/dd/yyyy HH") + ":00",
+                                              getDate(30, "MM/dd/yyyy HH") + ":30",
+                                              false);
+    eventManagement.moreDetailsEvent();
+    check(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX, 2);
+    eventManagement.inputRecurringInfoEvent(EventManagement.repeatType.Yearly,
+                                            "1",
+                                            null,
+                                            EventManagement.repeatEndType.After,
+                                            "3");
+    click(ELEMENT_SAVE_EVENT_OCCURRING);
+    eventManagement.saveAddEventDetails();
+    calendarHomePage.goToView(CalendarHomePage.selectViewOption.MONTH);
+    $(ELEMENT_NEXT_BUTTON_ANY_VIEW).click();
+    $(byText(titleEvent)).waitUntil(Condition.visible, Configuration.timeout);
+    $(ELEMENT_PREVIOUS_BUTTON_ANY_VIEW).click();
+    eventManagement.goToAddEventFromActionBar();
+    eventManagement.inputDataEventInQuickForm(titleEvent2,
+                                              content,
+                                              getDate(0, "MM/dd/yyyy HH") + ":00",
+                                              getDate(0, "MM/dd/yyyy HH") + ":30",
+                                              false);
+    eventManagement.saveQuickAddEvent();
+    calendarHomePage.verifyIsPresentEventTaskWithDateTime(titleEvent2,
+                                                          getDate(0, "MMM dd yyyy"),
+                                                          CalendarHomePage.selectViewOption.MONTH,
+                                                          CalendarHomePage.selectDayOption.DETAILTIME);
+    calendarHomePage.deleteEventTask(titleEvent2,
+                                     CalendarHomePage.selectViewOption.LIST,
+                                     CalendarHomePage.selectDayOption.DETAILTIME,
+                                     getDate(0, "MM/dd/yyyy"));
   }
 }

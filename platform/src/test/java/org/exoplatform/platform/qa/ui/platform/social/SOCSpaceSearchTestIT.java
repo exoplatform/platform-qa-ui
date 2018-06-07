@@ -3,17 +3,21 @@ package org.exoplatform.platform.qa.ui.platform.social;
 import static com.codeborne.selenide.Selectors.byText;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_SEARCH_SPACE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_SPECIFIC_PANEL;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACES_LIST;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
+import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import com.codeborne.selenide.Condition;
+
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
@@ -89,4 +93,75 @@ public class SOCSpaceSearchTestIT extends Base {
 
   }
 
+  @Tag("PLF-8006")
+  @Test
+  public void test02_SearchSpaceWithPatern() {
+    ArrayList<String> spaceList = new ArrayList<String>();
+    spaceList.add("space" + getRandomNumber());
+    spaceList.add("space" + getRandomNumber());
+    spaceList.add("space" + getRandomNumber());
+    spaceList.add("space" + getRandomNumber());
+    spaceList.add("space" + getRandomNumber());
+    spaceList.add("space" + getRandomNumber());
+    spaceList.add("space" + getRandomNumber());
+    spaceList.add("space" + getRandomNumber());
+    spaceList.add("space" + getRandomNumber());
+    spaceList.add("space" + getRandomNumber());
+    spaceList.add("space" + getRandomNumber());
+    spaceList.add("space" + getRandomNumber());
+    spaceList.add("space" + getRandomNumber());
+    spaceList.add("space" + getRandomNumber());
+    spaceList.add("space" + getRandomNumber());
+    spaceList.add("space" + getRandomNumber());
+    spaceList.add("space" + getRandomNumber());
+    spaceList.add("space" + getRandomNumber());
+    spaceList.add("space" + getRandomNumber());
+    spaceList.add("space" + getRandomNumber());
+    spaceList.add("space" + getRandomNumber());
+    String spaceexo1 = "exo" + getRandomNumber();
+    String spaceexo2 = "exo" + getRandomNumber();
+    String spaceexo3 = "exo" + getRandomNumber();
+    String spaceexo4 = "exo" + getRandomNumber();
+    homePagePlatform.goToMySpaces();
+    spaceManagement.addNewSpaceSimple(spaceexo1, "");
+    homePagePlatform.goToMySpaces();
+    spaceManagement.addNewSpaceSimple(spaceexo2, "");
+    homePagePlatform.goToMySpaces();
+    spaceManagement.addNewSpaceSimple(spaceexo3, "");
+    homePagePlatform.goToMySpaces();
+    spaceManagement.addNewSpaceSimple(spaceexo4, "");
+    for (int i = 0; i < 21; i++) {
+      homePagePlatform.goToMySpaces();
+      spaceManagement.addNewSpaceSimple(spaceList.get(i), "");
+    }
+    for (int i = 0; i < 21; i++) {
+      homePagePlatform.goToMySpaces();
+      spaceManagement.searchSpace(spaceList.get(i), "");
+      ELEMENT_SPACES_LIST.find(byText(spaceList.get(i))).click();
+    }
+
+    manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+    ELEMENT_SEARCH_SPACE.setValue("exo");
+    ELEMENT_SPECIFIC_PANEL.find(byText(spaceexo1)).shouldBe(Condition.visible);
+    ELEMENT_SPECIFIC_PANEL.find(byText(spaceexo2)).shouldBe(Condition.visible);
+    ELEMENT_SPECIFIC_PANEL.find(byText(spaceexo3)).shouldBe(Condition.visible);
+    ELEMENT_SPECIFIC_PANEL.find(byText(spaceexo4)).shouldBe(Condition.visible);
+    for (int i = 0; i < 21; i++) {
+      ELEMENT_SPECIFIC_PANEL.find(byText(spaceList.get(i))).shouldNotBe(Condition.visible);
+    }
+    homePagePlatform.goToMySpaces();
+    for (int i = 0; i < 21; i++) {
+      spaceManagement.searchSpace(spaceList.get(i), "");
+      spaceManagement.deleteSpace(spaceList.get(i), false);
+    }
+    spaceManagement.searchSpace(spaceexo1, "");
+    spaceManagement.deleteSpace(spaceexo1, false);
+    spaceManagement.searchSpace(spaceexo2, "");
+    spaceManagement.deleteSpace(spaceexo2, false);
+    spaceManagement.searchSpace(spaceexo3, "");
+    spaceManagement.deleteSpace(spaceexo3, false);
+    spaceManagement.searchSpace(spaceexo4, "");
+    spaceManagement.deleteSpace(spaceexo4, false);
+
+  }
 }

@@ -107,4 +107,13 @@ public class DocumentManagement {
     ELEMENT_BUTTON_CONFIRM_DELETE_FILE.waitUntil(Condition.visible, Configuration.timeout).click();
 
   }
+
+  public void goToPermissions() {
+    if (ELEMENT_BUTTON_PERMISSION.is(Condition.not(Condition.visible))) {
+      $(ELEMENT_ACTIONBAR_MORE).click();
+      ELEMENT_BUTTON_PERMISSION_IN_MORE_DROP_DOWN_MENU.click();
+    } else {
+      ELEMENT_BUTTON_PERMISSION.click();
+    }
+  }
 }
