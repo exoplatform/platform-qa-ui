@@ -12,6 +12,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
@@ -32,6 +33,8 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
 
+@Tag("wiki")
+@Tag("functional")
 public class WikiSpaceSwitcherTestIT extends Base {
   NavigationToolbar      navigationToolbar;
 
