@@ -730,6 +730,7 @@ public class ActivityStream {
 
     info("Click share button");
     $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.disabled,Configuration.timeout);
 
   }
 

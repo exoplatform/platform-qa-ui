@@ -7,7 +7,7 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ICON_LIKE_ACTIVITY;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_ALERT_NOTIFICATION;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -24,6 +24,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
@@ -3494,5 +3495,51 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     addUsers.deleteUser(username2);
     addUsers.deleteUser(username3);
 
+  }
+
+  @Tag("PLF-7988")
+  @Test
+  public void test20_checkNotificationsAfterAttachLink() {
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@test.com";
+    String username2 = "usernameb" + getRandomString();
+    String email2 = username2 + "@test.com";
+    String password = "123456";
+
+    info("Add user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+    addUsers.addUser(username2, password, email2, username2, username2);
+    manageLogInOut.signIn(username1, password);
+
+    info("Connect with user");
+    homePagePlatform.goToConnections();
+    connectionsManagement.connectToAUser(username2);
+
+    info("Enable the notifications");
+    navigationToolbar.goToMyNotifications();
+    myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.AS_Mention_intranet);
+
+    info("User accepts Request notification and mention John in activity");
+    manageLogInOut.signIn(username2, password);
+    homePagePlatform.goToConnections();
+    connectionsManagement.acceptAConnection(username1);
+    homePagePlatform.goToHomePage();
+    ELEMENT_TAB_LINK.click();
+    refresh();
+    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
+    ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
+    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
+    activityStream.mentionUserActivity(username1, "");
+    manageLogInOut.signIn(username1, password);
+    ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
+    ELEMENT_ALERT_NOTIFICATION.click();
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username2 + " " + username2))
+                                    .parent()
+                                    .shouldHave(text(username2 + " " + username2 + " has mentioned you."));
+    manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
+    addUsers.deleteUser(username2);
   }
 }
