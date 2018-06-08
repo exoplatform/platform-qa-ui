@@ -1,7 +1,8 @@
 package org.exoplatform.platform.qa.ui.platform.social;
 
-import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
@@ -316,5 +317,66 @@ public class SOCSpaceMemberManagementTestIT extends Base {
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
+  }
+
+  @Tag("SOC-5834")
+  @Test
+  public void test06_checkMembersListIsSortedByAlphabeticalOrder() {
+    info("Create a space");
+    String space = "space" + getRandomNumber();
+    String username1 = "ausername" + getRandomString();
+    String email1 = username1 + "@test.com";
+    String username2 = "bsername" + getRandomString();
+    String email2 = username2 + "@test.com";
+    String username3 = "csername" + getRandomString();
+    String email3 = username3 + "@test.com";
+    String username4 = "dsername" + getRandomString();
+    String email4 = username4 + "@test.com";
+    String password = "123456";
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+    addUsers.addUser(username2, password, email2, username2, username2);
+    addUsers.addUser(username3, password, email3, username3, username3);
+    addUsers.addUser(username4, password, email4, username4, username4);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.addNewSpaceSimple(space, space);
+    spaceSettingManagement.inviteUser(username1, false, "");
+    spaceSettingManagement.inviteUser(username2, false, "");
+    spaceSettingManagement.inviteUser(username3, false, "");
+    spaceSettingManagement.inviteUser(username4, false, "");
+    manageLogInOut.signIn(username1, password);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.acceptAInvitation(space);
+    manageLogInOut.signIn(username2, password);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.acceptAInvitation(space);
+    manageLogInOut.signIn(username3, password);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.acceptAInvitation(space);
+    manageLogInOut.signIn(username4, password);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.acceptAInvitation(space);
+    manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space)).click();
+    spaceSettingManagement.goToMemberTab();
+    ELEMENT_LIST_OF_MEMBERS_IN_SPACE.get(0).shouldHave(Condition.text(username1 + " " + username1));
+    ELEMENT_LIST_OF_MEMBERS_IN_SPACE.get(1).shouldHave(Condition.text(username2 + " " + username2));
+    ELEMENT_LIST_OF_MEMBERS_IN_SPACE.get(2).shouldHave(Condition.text(username3 + " " + username3));
+    ELEMENT_LIST_OF_MEMBERS_IN_SPACE.get(3).shouldHave(Condition.text(username4 + " " + username4));
+    spaceHomePage.goToSpaceSettingTab();
+    spaceSettingManagement.goToMemberTabInSpaceSettingTab();
+    $$(byId("existingUsersTable")).get(0).shouldHave(Condition.text(username1 + " " + username1));
+    $$(byId("existingUsersTable")).get(1).shouldHave(Condition.text(username2 + " " + username2));
+    $$(byId("existingUsersTable")).get(2).shouldHave(Condition.text(username3 + " " + username3));
+    $$(byId("existingUsersTable")).get(3).shouldHave(Condition.text(username4 + " " + username4));
+    $$(byId("existingUsersTable")).get(4).shouldHave(Condition.text(PLFData.DATA_NAME_USER1));
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
+    addUsers.deleteUser(username2);
+    addUsers.deleteUser(username3);
+    addUsers.deleteUser(username4);
   }
 }

@@ -22,7 +22,6 @@ import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
-import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.CreateNewDocument;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.SiteExplorerHome;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumCategoryManagement;
@@ -477,5 +476,19 @@ public class PlfUnifiedSearchTestIT extends Base {
     manageLogInOut.signIn(username, password);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space1, false);
+  }
+
+  @Tag("PLF-8027")
+  @Test
+  public void test12_checkSearchBoxActivatedAfterDeleteSpace() {
+    String space = "space" + getRandomNumber();
+    homePagePlatform.goToMySpaces();
+    spaceManagement.addNewSpaceSimple(space, space);
+    homePagePlatform.goToMySpaces();
+    navigationToolbar.goToQuickSearch();
+    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
+    spaceManagement.deleteSpace(space, false);
+    navigationToolbar.goToQuickSearch();
+    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
   }
 }
