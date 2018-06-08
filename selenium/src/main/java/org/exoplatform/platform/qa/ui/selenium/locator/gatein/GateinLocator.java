@@ -449,7 +449,7 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   public static final By              ELEMENT_NAVIGATION_MANAGEMENT_POPUP_TITLE               =
                                                                                 By.xpath(".//*[@class='PopupTitle popupTitle'][text()='Navigation Management']");
 
-  public static final SelenideElement ELEMENT_BUTTON_EDIT_NAVIGATION                          =
+  public static final SelenideElement  ELEMENT_BUTTON_EDIT_NAVIGATION                          =
                                                                      $(byXpath("//*[@id=\"UISiteManagement\"]/table/tbody/tr[2]/td[3]/a"));
 
   public static final String          ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME                 = ".//*[@title='${name}']";

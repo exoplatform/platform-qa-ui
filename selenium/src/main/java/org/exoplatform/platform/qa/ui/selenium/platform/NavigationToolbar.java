@@ -85,7 +85,7 @@ public class NavigationToolbar {
 
     $(ELEMENT_ADMINISTRATION_PORTAL).waitUntil(Condition.appears, Configuration.timeout);
 
-    evt.mouseOver(ELEMENT_ADMINISTRATION_PORTAL, true);
+    $(ELEMENT_ADMINISTRATION_PORTAL).hover();
 
     $(ELEMENT_ADMINISTRATION_PORTAL_SITES).waitUntil(Condition.appears, Configuration.timeout);
 
