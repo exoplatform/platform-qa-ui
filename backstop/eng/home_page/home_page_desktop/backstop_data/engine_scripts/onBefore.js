@@ -6,8 +6,8 @@ casper.then( function(){
     casper.echo('loggin');
     casper.waitForSelector('form', function(){
       this.fillSelectors('form', {
-        'input[class="username"]':'root',
-        'input[class="password"]':'gtn'
+        'input[id="username"]':'root',
+        'input[id="password"]':'gtn'
       }, true);
     casper.echo('Clicking button');
     casper.click('button.button');

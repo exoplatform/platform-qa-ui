@@ -51,6 +51,5 @@
   "debug": false,
   "debugWindow": false,
   "casperflags":[],
-  "cliExitOnFail":false,
-  "port":3001
+  "cliExitOnFail":false
 }

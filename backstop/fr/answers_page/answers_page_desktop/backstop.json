@@ -42,7 +42,7 @@
     "ci_report": "backstop_data/ci_report"
   },
   "report": ["browser", "CI"],
-  "engine": "phantomjs",
+  "engine": "casper",
   "engineFlags": [],
   "asyncCaptureLimit": 5,
   "asyncCompareLimit": 50,
