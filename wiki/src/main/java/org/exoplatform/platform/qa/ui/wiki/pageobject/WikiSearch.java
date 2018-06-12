@@ -2,10 +2,13 @@ package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
@@ -79,10 +82,10 @@ public class WikiSearch {
   public void quickSeach(String text) {
     if (!text.isEmpty()) {
       info("Input a text to the searched field");
-      evt.type(ELEMENT_WIKI_SEARCH_FIELD, text, true);
+      $(ELEMENT_WIKI_SEARCH_FIELD).setValue(text).waitUntil(Condition.visible,Configuration.timeout);
     }
     info("Click on Search button");
-    evt.click(ELEMENT_WIKI_QUICK_SEARCH_BTN);
+    $(ELEMENT_WIKI_QUICK_SEARCH_BTN).click();
 
   }
 
@@ -95,8 +98,8 @@ public class WikiSearch {
   public void viewContentOfSearchedPage(String page, String contentPage) {
     if (!page.isEmpty()) {
       info("Click on the page link in searched results list");
-      evt.click(ELEMENT_WIKI_SEARCH_RESULT_PAGE_LINK.replace("$page", page));
-      evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_PAGE.replace("$content", contentPage), 3000, 1);
+     $(byXpath(ELEMENT_WIKI_SEARCH_RESULT_PAGE_LINK.replace("$page", page))).click();
+     $(byXpath(ELEMENT_CONTENT_WIKI_PAGE.replace("$content", contentPage))).waitUntil(Condition.visible,Configuration.timeout);
     }
   }
 

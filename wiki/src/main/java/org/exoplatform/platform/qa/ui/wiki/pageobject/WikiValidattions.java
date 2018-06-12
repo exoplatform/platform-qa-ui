@@ -1,8 +1,6 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -771,7 +769,8 @@ public class WikiValidattions {
    */
   public void verifySearchResults(String page) {
     info("Verify that the page is shown in results searched");
-    evt.waitForAndGetElement(ELEMENT_WIKI_SEARCH_RESULT_PAGE_LINK.replace("$page", page));
+    $(byClassName("resultInfo")).find(byText(page)).should(Condition.exist);
+
     info("The page is shown successfully");
   }
 
@@ -800,7 +799,7 @@ public class WikiValidattions {
    */
   public void verifyScrollDownOfSpaceSwitcher() {
     info("Scroll down");
-    WebElement spaceList = evt.waitForAndGetElement(By.className("spaceList"));
+    WebElement spaceList = $(By.className("spaceList")).waitUntil(Condition.visible,Configuration.timeout);
     String str1 = String.valueOf(((JavascriptExecutor) testBase.getExoWebDriver()
                                                                .getWebDriver()).executeScript("return arguments[0].clientHeight;",
                                                                                               spaceList));
@@ -822,12 +821,12 @@ public class WikiValidattions {
     if (numIndex.length > 0) {
       for (int i = 0; i < spaces.size() - numIndex[0]; i++) {
         info("Verify that all spaces is shown");
-        evt.waitForAndGetElement(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", spaces.get(i).toLowerCase()).replace(" ", "_"));
+       $(byXpath(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", spaces.get(i).toLowerCase()).replace(" ", "_"))).waitUntil(Condition.visible,Configuration.timeout);
       }
     } else {
       for (int i = 0; i < spaces.size(); i++) {
         info("Verify that all spaces is shown");
-        evt.waitForAndGetElement(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", spaces.get(i).toLowerCase()).replace(" ", "_"));
+        $(byXpath(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", spaces.get(i).toLowerCase()).replace(" ", "_"))).waitUntil(Condition.visible,Configuration.timeout);
       }
     }
   }
@@ -842,12 +841,12 @@ public class WikiValidattions {
     if (numIndex.length > 0) {
       for (int i = 0; i < spaces.size() - numIndex[0]; i++) {
         info("Verify that all spaces is shown");
-        evt.waitForElementNotPresent(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", spaces.get(i)));
+        $(byXpath(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", spaces.get(i)))).waitUntil(Condition.visible,Configuration.timeout);
       }
     } else {
       for (int i = 0; i < spaces.size(); i++) {
         info("Verify that all spaces is shown");
-        evt.waitForElementNotPresent(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", spaces.get(i)));
+       $(byXpath(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", spaces.get(i)))).waitUntil(Condition.visible,Configuration.timeout);
       }
     }
   }
