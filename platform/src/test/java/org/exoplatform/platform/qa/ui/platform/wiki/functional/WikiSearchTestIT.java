@@ -1,10 +1,6 @@
 package org.exoplatform.platform.qa.ui.platform.wiki.functional;
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
-import static org.exoplatform.platform.qa.ui.core.PLFData.password;
-import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_WIKI_SEARCH_FIELD;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -12,10 +8,8 @@ import java.util.ArrayList;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
@@ -26,8 +20,6 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-
 /**
  *<li> Case ID:139356.</li>
  *<li> Test Case Name: Search when the keyword is matched.</li>
@@ -91,13 +83,13 @@ public class WikiSearchTestIT  extends Base {
     }
 
 
-/**
-    Step Number: 1
+    /**
+     Step Number: 1
             *Step Name: -
             *Step Description: Step 1: Create pages
- *Input Data:
+     *Input Data:
             - Go to Add Page â†’Blank Page (or From Template)
- - Add values in required fields
+     - Add values in required fields
  - Click Save
  *Expected Outcome:
             - By default, the [Create Wiki page] is displayed in the [Rich Text] mode
@@ -788,5 +780,4 @@ public class WikiSearchTestIT  extends Base {
         wikiHomePage.goToWikiHomeOfSpaceFromBreadcrumb("My Wiki", "John");
         info("Verify that The first item of the list is an input text field");
         $(ELEMENT_WIKI_SEARCH_FIELD).waitUntil(Condition.visible,Configuration.timeout);
-
     }}
