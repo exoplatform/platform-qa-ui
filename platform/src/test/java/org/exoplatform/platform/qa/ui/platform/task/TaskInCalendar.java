@@ -61,12 +61,9 @@ public class TaskInCalendar extends Base {
         manageLogInOut.signInCas(PLFData.USER_ROOT, PLFData.password);
 
     }
-    /*
-    bug TA-605
-   */
 
     @Test
-    @BugInPLF("TA-605")
+    @Tag("TA-605")
     public void test01_AddTaskInSpace() {
 
         String space = "space" + getRandomNumber();

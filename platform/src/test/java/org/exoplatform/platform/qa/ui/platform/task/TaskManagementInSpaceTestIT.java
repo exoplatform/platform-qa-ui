@@ -48,7 +48,6 @@ public class TaskManagementInSpaceTestIT extends Base {
     projectsManagement = new ProjectsManagement(this);
     manageLogInOut = new ManageLogInOut(this);
     manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
-
   }
 
   @Test

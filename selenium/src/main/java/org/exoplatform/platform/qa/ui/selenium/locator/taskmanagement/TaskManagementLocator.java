@@ -187,7 +187,6 @@ public static final String ELEMENT_VIEW_ALL_REPLIES_LINK_TASK="SubCommentShowAll
   public static final SelenideElement ELEMENT_WORK_PLANED_FIELD                     =
                                                                 $(byClassName("addTask")).find(byClassName("date-work-plan"))
                                                                                          .find(byClassName("editableField"));
-
   public static final SelenideElement ELEMENT_CHECKBOX_ALL_DAY                      = $(byName("allday"));
 
   public static final SelenideElement ELEMENT_INPUT_FROM_TIME                       = $(byName("fromTime"));
@@ -209,7 +208,6 @@ public static final String ELEMENT_VIEW_ALL_REPLIES_LINK_TASK="SubCommentShowAll
 
   public static final SelenideElement ELEMENT_LIST                                =
           $(byXpath("//*[@id=\"UIActionBar\"]/div[3]/ul[1]/li[4]"));
-
 
   // Add labels form
 
