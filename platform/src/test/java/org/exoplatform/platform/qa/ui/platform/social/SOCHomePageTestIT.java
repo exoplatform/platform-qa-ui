@@ -148,17 +148,11 @@ public class SOCHomePageTestIT extends Base {
    * <li>Post-Condition:</li> Step Number: 1 Step Name: - Go to Select File Dialog
    * Step Description: - Log in - Goto Homepage - In Activity Composer click File
    * (icon) Input Data: Expected Outcome: - Select File Dialog shows up
-   */
-
-  /*
    * Step number: 2 Step Name: - Select document Step Description: - Browse the
    * Select File Dialog to choose a document - Click Select Input Data: Expected
    * Outcome: - A breadcrumb is displaying the current position of the user in the
    * browsed drive. - the name of the file should be displayed under the activity
    * input field.
-   */
-
-  /*
    * Step number: 3 Step Name: - Share the document Step Description: - Click
    * Share button Input Data: Expected Outcome: - Activity is added into activity
    * stream
@@ -254,7 +248,6 @@ public class SOCHomePageTestIT extends Base {
     for (int i = 0; i <= 15; i++) {
       String act = "act" + getRandomNumber();
       activityStream.addActivity(act, "");
-      refresh();
     }
     executeJavaScript("window.scrollBy(0,5500)", "");
     homePagePlatform.loadMoreActivities();
