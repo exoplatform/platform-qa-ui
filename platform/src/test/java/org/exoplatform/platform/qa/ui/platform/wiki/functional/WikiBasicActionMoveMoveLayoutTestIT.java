@@ -20,7 +20,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 
-@Tag("smoke")
+@Tag("functional")
 @Tag("wiki")
 public class WikiBasicActionMoveMoveLayoutTestIT extends Base {
 
@@ -97,6 +97,9 @@ public class WikiBasicActionMoveMoveLayoutTestIT extends Base {
         info("Label Select the destination is displayed before the space switcher");
         $(ELEMENT_MOVE_PAGE_SELECT_THE_DESTINATION_LABEL).waitUntil(Condition.visible, Configuration.timeout);
 
+        info("Delete the page");
+        homePagePlatform.goToMySpaces();
+        spaceManagement.deleteSpace(space1, false);
     }
 
 
@@ -148,6 +151,9 @@ public class WikiBasicActionMoveMoveLayoutTestIT extends Base {
         info("Space switcher is displayed");
         $(ELEMENT_MOVE_SPACESWITCHER).waitUntil(Condition.visible,Configuration.timeout);
 
+        info("Delete the page");
+        homePagePlatform.goToMySpaces();
+        spaceManagement.deleteSpace(space1, false);
     }
 
     @Test
@@ -205,4 +211,9 @@ public class WikiBasicActionMoveMoveLayoutTestIT extends Base {
         info("Test 3: Move layout should display destination labels outside destination container");
         info("Label Destination is displayed outside and above the destination container");
         $(ELEMENT_MOVE_PAGE_DESTINATION_LABEL).waitUntil(Condition.visible,Configuration.timeout);
-    }}
+
+        info("Delete the page");
+        homePagePlatform.goToMySpaces();
+        spaceManagement.deleteSpace(space1, false);
+    }
+}
