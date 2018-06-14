@@ -14,8 +14,6 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.awt.*;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -147,15 +145,14 @@ public class SOCHomePageTestIT extends Base {
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li> Step Number: 1 Step Name: - Go to Select File Dialog
    * Step Description: - Log in - Goto Homepage - In Activity Composer click File
-   * (icon) Input Data: Expected Outcome: - Select File Dialog shows up
-   * Step number: 2 Step Name: - Select document Step Description: - Browse the
-   * Select File Dialog to choose a document - Click Select Input Data: Expected
-   * Outcome: - A breadcrumb is displaying the current position of the user in the
-   * browsed drive. - the name of the file should be displayed under the activity
-   * input field.
-   * Step number: 3 Step Name: - Share the document Step Description: - Click
-   * Share button Input Data: Expected Outcome: - Activity is added into activity
-   * stream
+   * (icon) Input Data: Expected Outcome: - Select File Dialog shows up Step
+   * number: 2 Step Name: - Select document Step Description: - Browse the Select
+   * File Dialog to choose a document - Click Select Input Data: Expected Outcome:
+   * - A breadcrumb is displaying the current position of the user in the browsed
+   * drive. - the name of the file should be displayed under the activity input
+   * field. Step number: 3 Step Name: - Share the document Step Description: -
+   * Click Share button Input Data: Expected Outcome: - Activity is added into
+   * activity stream
    */
   @Test
   public void test06_AddADocument() {
@@ -548,13 +545,6 @@ public class SOCHomePageTestIT extends Base {
    * <li>Test Case Name: Mention a user in comment.</li>
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li>
-   * 
-   * @throws AWTException Step Number: 1 Step Name: Add comment with mention Step
-   *           Description: - Select the activity that has some comments - input
-   *           the comment with mention and click comment Input Data: Expected
-   *           Outcome: - Input text field is displayed in activity, click comment
-   *           button to show comment textbox - Comment will be added into comment
-   *           section of activity
    */
   @Test
   public void test18_MentionAUserInComment() {
