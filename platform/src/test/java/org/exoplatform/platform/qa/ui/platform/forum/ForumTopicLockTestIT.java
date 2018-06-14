@@ -25,7 +25,6 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
  * Created by esmaoui on 16/03/2018.
  */
 
-
 @Tag("sniff")
 @Tag("forum")
 public class ForumTopicLockTestIT extends Base {
@@ -58,11 +57,7 @@ public class ForumTopicLockTestIT extends Base {
         manageLogInOut.signInCas(username, password);
     }
 
-
-    /*
-       bug FORUM-1317
-    */
-
+    @Tag("FORUM-1317")
     @Test
     public  void test_Lock_Topic(){
 
@@ -87,10 +82,5 @@ public class ForumTopicLockTestIT extends Base {
         info("Delete category");
         forumHomePage.goToHomeCategory();
         forumCategoryManagement.deleteCategory(category);
-
     }
-
 }
-
-
-

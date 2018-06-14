@@ -269,6 +269,5 @@ public void goToUserProfile(){
   $( ELEMENT_ACCOUNT_NAME_LINK).click();
   $(ELEMENT_USER_PROFILE).click();
 
+  } 
 }
-}
-
