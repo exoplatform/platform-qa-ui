@@ -5,12 +5,8 @@ import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.io.File;
 
 import org.openqa.selenium.By;
 
@@ -260,7 +256,7 @@ public class ForumTopicManagement {
     $(byText(newContent)).parent().parent().parent().parent().find(byText("Quote")).click();
     if (newContent != "")
       switchTo().frame(0);
-    $(byXpath("/html/body")).sendKeys(newContent+"quote");
+    $(byXpath("/html/body")).sendKeys(newContent + "quote");
     switchTo().defaultContent();
     executeJavaScript("window.scrollBy(0,150)");
     $(ELEMENT_POST_FORM_SUBMIT).click();
@@ -493,7 +489,7 @@ public class ForumTopicManagement {
    *
    * @param title String
    * @param message String
-   *@param fileName String
+   * @param fileName String
    * @param pathFile String
    */
   public void startTopic(String title, String message, String pathFile, String... fileName) {
@@ -637,6 +633,7 @@ public class ForumTopicManagement {
 
   /**
    * function: Search user in User Selection Form in Topic Permission
+   * 
    * @param searchOption String
    * @param user String
    */
