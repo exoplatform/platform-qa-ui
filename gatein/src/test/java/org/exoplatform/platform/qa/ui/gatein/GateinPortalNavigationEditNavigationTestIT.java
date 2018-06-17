@@ -64,17 +64,17 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
     String newNodeName = "newNodeName" + getRandomNumber();
     manageLogInOut.signIn("root", "gtn");
     navigationToolbar.goToPotalSites();
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     info("Add a new node");
     navigationmanagement.addNode(nodeName, "");
     navigationmanagement.saveNode();
     info("Edit a node");
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     navigationmanagement.editThisNode(nodeName);
     navigationmanagement.inputInfoNodeSetting(true, "", newNodeName, true, false);
     navigationmanagement.saveNode();
     info("Verify that the node is changed with new name");
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     $(byText(newNodeName)).should(Condition.exist);
     navigationmanagement.editThisNode(newNodeName);
     info("Verify that label mode is not checked");
@@ -126,13 +126,13 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
     String groupAdmin =  "Development";
     manageLogInOut.signIn("root", "gtn");
     navigationToolbar.goToPotalSites();
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     info("Add a new node");
     navigationmanagement.addNode(nodeName, "");
     navigationmanagement.inputInfoPageSelector(namePage, titlePage, true, false, false);
     navigationmanagement.saveNode();
     info("Test 02: Edit node Page");
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     navigationmanagement.editNodePage(nodeName);// go to declaration de automate
     // right click
     pagecreationwizard.viewProperties();
@@ -152,7 +152,7 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
       assert false : "The title:" + newTitlePage + " is not updated";
     $(ELEMENT_NAVIGATION_MANAGEMENT_SAVE).click();
     navigationToolbar.goToPotalSites();
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     info("Test 03: Delete node");
     navigationmanagement.deleteNode(nodeName);
   }
@@ -196,7 +196,7 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
     String groupAdmin =  "Development";
     manageLogInOut.signIn("root", "gtn");
     navigationToolbar.goToPotalSites();
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     info("Add a new node");
     navigationmanagement.addNode(nodeName, "");
     navigationmanagement.inputInfoPageSelector(namePage, titlePage, true, false, false);
@@ -222,7 +222,7 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
       assert false : "The title:" + newTitlePage + " is not updated";
     $(ELEMENT_NAVIGATION_MANAGEMENT_SAVE).click();
     navigationToolbar.goToPotalSites();
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     info("Test 03: Delete node");
     navigationmanagement.deleteNode(nodeName);
   }
@@ -265,13 +265,13 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
     String groupAdmin =  "Development";
     manageLogInOut.signIn("root", "gtn");
     navigationToolbar.goToPotalSites();
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     info("Add a new node");
     navigationmanagement.addNode(nodeName, "");
     navigationmanagement.inputInfoPageSelector(namePage, titlePage, true, false, false);
     navigationmanagement.saveNode();
     info("Test 02: Edit node Page");
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     navigationmanagement.editNodePage(nodeName);// go to declaration de automate
     // right click
     pagecreationwizard.viewProperties();
@@ -291,7 +291,7 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
       assert false : "The title:" + newTitlePage + " is not updated";
     $(ELEMENT_NAVIGATION_MANAGEMENT_SAVE).click();
     navigationToolbar.goToPotalSites();
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     info("Test 03: Delete node");
     navigationmanagement.deleteNode(nodeName);
   }

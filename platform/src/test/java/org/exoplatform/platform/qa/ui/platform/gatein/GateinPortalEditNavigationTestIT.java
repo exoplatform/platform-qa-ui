@@ -45,7 +45,6 @@ public class GateinPortalEditNavigationTestIT extends Base {
     manageLogInOut = new ManageLogInOut(this);
     manageLogInOut.signIn("root", "gtn");
   }
-
   /**
    * <li>Case ID:123134.</li>
    * <li>Test Case Name:Copy and Paste node.</li> Step Number: 1 Step Name: Step
@@ -58,37 +57,31 @@ public class GateinPortalEditNavigationTestIT extends Base {
   @Test
   public void test14_CopyAndPasteNode() {
     info("Test 14: Copy and Paste node");
-    String portalName = "intranet";
     String nodeName1 = "nodeName1" + getRandomNumber();
     String nodeName2 = "nodeName1" + getRandomNumber();
-
     info("Add a new node 1");
     navigationToolbar.goToPotalSites();
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     navigationmanagement.addNode(nodeName1, "");
     navigationmanagement.saveNode();
-
     info("Add a new node 2");
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     navigationmanagement.addNode(nodeName2, "");
     navigationmanagement.saveNode();
-
     info("Copy and paste a node");
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     navigationmanagement.copyNode(nodeName1);
     navigationmanagement.pasteNode(nodeName2);
     info("Verify that node 2 has only one children is node1");
     $(byXpath(ELEMENT_NAVIGATION_PARENT_CHILD_NODE.replace("${parent}", nodeName2).replace("${child}", nodeName1))).waitUntil(Condition.visible,Configuration.timeout);
     $(byXpath(ELEMENT_NAVIGATION_NUMBER_CHILD_NODES.replace("${parent}", nodeName2).replace("${numberChild}", "1"))).waitUntil(Condition.visible,Configuration.timeout);
     navigationmanagement.closeNavigationManagementPopup();
-
     info("Delete a node1 and node2");
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     navigationmanagement.deleteNode(nodeName1);
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     navigationmanagement.deleteNode(nodeName2);
   }
-
   /**
    * <li>Case ID:123135.</li>
    * <li>Test Case Name:Cut and Paste node.</li> Step Number: 1 Step Name: Step 1:
@@ -99,30 +92,24 @@ public class GateinPortalEditNavigationTestIT extends Base {
    */
   @Test
   public void test15_CutAndPasteNode() {
-
     info("Test 15: Cut and Paste node");
-    String portalName = "Intranet";
     String nodeName1 = "nodeName1" + getRandomNumber();
     String nodeName2 = "nodeName2" + getRandomNumber();
-
     info("Add a new node 1");
     navigationToolbar.goToPotalSites();
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     navigationmanagement.addNode(nodeName1, "");
     navigationmanagement.saveNode();
-
     info("Add a new node 2");
     navigationToolbar.goToPotalSites();
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     navigationmanagement.addNode(nodeName2, "");
     navigationmanagement.saveNode();
-
     info("Cut and paste a node");
     navigationToolbar.goToPotalSites();
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     navigationmanagement.cutNode(nodeName1);
     navigationmanagement.pasteNode(nodeName2);
-
     info("Verify that node 2 has only one children is node1");
     $(byXpath(ELEMENT_NAVIGATION_PARENT_CHILD_NODE.replace("${parent}", nodeName2)
                                                   .replace("${child}", nodeName1))).waitUntil(Condition.visible,
@@ -131,17 +118,15 @@ public class GateinPortalEditNavigationTestIT extends Base {
                                                    .replace("${numberChild}", "1"))).waitUntil(Condition.visible,
                                                                                                Configuration.timeout);
     navigationmanagement.closeNavigationManagementPopup();
-
     info("Verify that node 1 is only one avaiable");
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     $(byXpath(ELEMENT_NAVIGATION_PARENT_NODE.replace("${parent}", nodeName2))).waitUntil(Condition.visible,
                                                                                          Configuration.timeout);
     $(byXpath(ELEMENT_NAVIGATION_PARENT_NODE.replace("${parent}", nodeName1))).waitUntil(Condition.not(Condition.visible),
                                                                                          Configuration.timeout);
     navigationmanagement.closeNavigationManagementPopup();
-
     info("Delete a node1 and node2");
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     navigationmanagement.deleteNode(nodeName2);
   }
 
@@ -158,26 +143,22 @@ public class GateinPortalEditNavigationTestIT extends Base {
   @Test
   public void test16_CloneAndPasteNode() {
     info("Test 16: Clone and Paste Node");
-    String portalName = "Intranet";
     String nodeName1 = "nodeName1" + getRandomNumber();
     String nodeName2 = "nodeName2" + getRandomNumber();
 
     info("Add a new node 1");
     navigationToolbar.goToPotalSites();
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     navigationmanagement.addNode(nodeName1, "");
     navigationmanagement.saveNode();
-
     info("Add a new node 2");
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     navigationmanagement.addNode(nodeName2, "");
     navigationmanagement.saveNode();
-
     info("Clone and paste a node");
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     navigationmanagement.cloneNode(nodeName1);
     navigationmanagement.pasteNode(nodeName2);
-
     info("Verify that node 2 has only one children is node1");
     $(byXpath(ELEMENT_NAVIGATION_PARENT_CHILD_NODE.replace("${parent}", nodeName2)
                                                   .replace("${child}", nodeName1))).waitUntil(Condition.visible,
@@ -188,15 +169,14 @@ public class GateinPortalEditNavigationTestIT extends Base {
     navigationmanagement.closeNavigationManagementPopup();
 
     info("Verify that node 1 is more one avaiable");
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     $(byXpath(ELEMENT_NAVIGATION_PARENT_NODE.replace("${parent}", nodeName1))).waitUntil(Condition.visible,
                                                                                          Configuration.timeout);
     navigationmanagement.closeNavigationManagementPopup();
-
     info("Delete a node1 and node2");
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     navigationmanagement.deleteNode(nodeName1);
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     navigationmanagement.deleteNode(nodeName2);
 
   }
@@ -211,26 +191,22 @@ public class GateinPortalEditNavigationTestIT extends Base {
    */
   @Test
   public void test17_ChangeNodeOrder() {
-    String portalName = "Intranet";
     String nodeName1 = "nodeName1" + getRandomNumber();
     String nodeName2 = "nodeName2" + getRandomNumber();
 
     info("Go to Group Sites/Edit navigation");
     navigationToolbar.goToPotalSites();
     info("Add a new node 1");
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     navigationmanagement.addNode(nodeName1, "");
     navigationmanagement.saveNode();
-
     info("Add a new node 2");
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     navigationmanagement.addNode(nodeName2, "");
     navigationmanagement.saveNode();
-
     info("move up node2 to node 1");
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     navigationmanagement.moveUpNode(nodeName2);
-
     info("Verify that node 2 is moved up node1");
     $(byXpath(ELEMENT_NAVIGATION_PREVIOUS_NODE.replace("${currentNode}", nodeName2)
                                               .replace("${previousNode}", nodeName1))).waitUntil(Condition.not(Condition.visible),
@@ -238,7 +214,6 @@ public class GateinPortalEditNavigationTestIT extends Base {
     $(byXpath(ELEMENT_NAVIGATION_NEXT_NODE.replace("${currentNode}", nodeName2)
                                           .replace("${nextNode}", nodeName1))).waitUntil(Condition.visible,
                                                                                          Configuration.timeout);
-
     info("move down node 2 to node 1");
     navigationmanagement.moveDownNode(nodeName2);
     info("Verify that node 2 is moved up node1");
@@ -249,11 +224,10 @@ public class GateinPortalEditNavigationTestIT extends Base {
                                           .replace("${nextNode}", nodeName1))).waitUntil(Condition.not(Condition.visible),
                                                                                          Configuration.timeout);
     navigationmanagement.closeNavigationManagementPopup();
-
     info("Delete a node1 and node2");
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     navigationmanagement.deleteNode(nodeName1);
-    portalmanagesites.goToEditNavigation(portalName);
+    portalmanagesites.goToEditNavigation();
     navigationmanagement.deleteNode(nodeName2);
 
   }

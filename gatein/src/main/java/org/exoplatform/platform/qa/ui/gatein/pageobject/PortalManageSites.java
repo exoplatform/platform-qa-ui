@@ -42,12 +42,14 @@ public class PortalManageSites {
   }
 
 
-  public void goToEditNavigation(String site ) {
-   $(ELEMENT_MANAGESITES_EDIT_NAVIGATION_ICON.replace("${site}", site)).waitUntil(Condition.visible,Configuration.timeout);
-    $(ELEMENT_MANAGESITES_EDIT_NAVIGATION_ICON.replace("${site}", site)).click();
-    $(ELEMENT_NAVIGATION_MANAGEMENT_POPUP_TITLE).waitUntil(Condition.visible,Configuration.timeout);
-  }
+  public void goToEditNavigation() {
 
+    ELEMENT_BUTTON_EDIT_NAVIGATION.waitUntil(Condition.appears, Configuration.timeout);
+
+    ELEMENT_BUTTON_EDIT_NAVIGATION.click();
+
+    $(ELEMENT_NAVIGATION_MANAGEMENT_POPUP_TITLE).waitUntil(Condition.appears, Configuration.timeout);
+  }
   /**
    * Edit layout of a portal
    *
