@@ -551,7 +551,7 @@ public class SiteExplorerHome {
    * By QuynhPT Open Add Relation popup
    */
   public void goToManageRelation() {
-    evt.click(ELEMENT_ACTIONBAR_RELATION);
+    $(ELEMENT_ACTIONBAR_RELATION).click();
 
   }
 
@@ -564,7 +564,7 @@ public class SiteExplorerHome {
   public void addRelation(String[] nameContent, String path) {
     for (String arrayElement : nameContent) {
       goToPathHasFiles(path);
-      evt.click(ELEMENT_RELATION_POPUP_SELECT_RELATION_TAB_SELECT_CONTENT_RIGHT_TREE.replace("${nameContent}", arrayElement));
+      $(byXpath(ELEMENT_RELATION_POPUP_SELECT_RELATION_TAB_SELECT_CONTENT_RIGHT_TREE.replace("${nameContent}", arrayElement))).click();
 
     }
   }
@@ -586,17 +586,17 @@ public class SiteExplorerHome {
    */
   public void addCategory(String categoryTreeName, String[] arrayCatePath, String nameSelectedCategory) {
     info("select category");
-    evt.click(ELEMENT_ADD_CATEGORY_POPUP_SELECT_CATEGORY_TAB);
+    $(ELEMENT_ADD_CATEGORY_POPUP_SELECT_CATEGORY_TAB).click();
 
-    evt.select(ELEMENT_ADD_CATEGORY_POPUP_MENU, categoryTreeName);
+    $(ELEMENT_ADD_CATEGORY_POPUP_MENU).selectOption(categoryTreeName);
 
     for (String cateName : arrayCatePath) {
       // click(ELEMENT_ADD_CATEGORY_POPUP_CATEGORY_NAME_LEFT_SIDE.replace("${nameTitle}",
       // cateName));
-      evt.clickByJavascript(ELEMENT_ADD_CATEGORY_POPUP_CATEGORY_NAME_LEFT_SIDE.replace("${nameTitle}", cateName), 2);
+      $(byXpath(ELEMENT_ADD_CATEGORY_POPUP_CATEGORY_NAME_LEFT_SIDE.replace("${nameTitle}", cateName))).click();
 
     }
-    evt.click(ELEMENT_ADD_CATEGORY_POPUP_SELECT_CATEGORY_RIGHT_SIDE.replace("${nameCategory}", nameSelectedCategory));
+    $(byXpath(ELEMENT_ADD_CATEGORY_POPUP_SELECT_CATEGORY_RIGHT_SIDE.replace("${nameCategory}", nameSelectedCategory))).click();
 
   }
 
@@ -615,11 +615,11 @@ public class SiteExplorerHome {
    */
   public void goToPathHasFiles(String path) {
     // Open "Select Relation" tab
-    evt.click(ELEMENT_RELATION_POPUP_SELECT_RELATION_TAB);
+    $(ELEMENT_RELATION_POPUP_SELECT_RELATION_TAB).click();
 
     String[] arrayPath = path.split("/");
     for (String arrayElement : arrayPath) {
-      evt.click(ELEMENT_RELATION_POPUP_SELECT_RELATION_TAB_NODE_LEFT_TREE.replace("${nameNode}", arrayElement));
+      $(byXpath(ELEMENT_RELATION_POPUP_SELECT_RELATION_TAB_NODE_LEFT_TREE.replace("${nameNode}", arrayElement))).click();
     }
   }
 
@@ -627,7 +627,7 @@ public class SiteExplorerHome {
    * By QuynhPT Close "Add Relation" popup
    */
   public void closeAddRelationPopup() {
-    evt.click(ELEMENT_RELATION_POPUP_SELECT_RELATION_TAB_CLOSE_BUTTON);
+    $(ELEMENT_RELATION_POPUP_SELECT_RELATION_TAB_CLOSE_BUTTON).click();
 
   }
 
@@ -635,7 +635,7 @@ public class SiteExplorerHome {
    * By QuynhPT Open Relation tab on SideBar
    */
   public void goToRelationSideBar() {
-    evt.click(ELEMENT_SIDE_BAR_RELATION_ICON);
+    $(ELEMENT_SIDE_BAR_RELATION_ICON).click();
 
   }
 
@@ -645,7 +645,7 @@ public class SiteExplorerHome {
    * @param nameContent String
    */
   public void deleteRelation(String nameContent) {
-    evt.click(By.xpath(ELEMENT_RELATION_POPUP_RELATION_LIST_DELETE_BUTTON.replace("${nameContent}", nameContent)));
+    $(byXpath(ELEMENT_RELATION_POPUP_RELATION_LIST_DELETE_BUTTON.replace("${nameContent}", nameContent))).click();
     alert.waitForConfirmation(MESSAGE_DELETE_RELATION);
     alert.acceptAlert();
   }
@@ -656,7 +656,7 @@ public class SiteExplorerHome {
    * @param nameCategory String
    */
   public void deleteCategory(String nameCategory) {
-    evt.click(By.xpath(ELEMENT_ADD_CATEGORY_POPUP_DELETE_CATEGORY.replace("${nameCategory}", nameCategory)));
+    $(byXpath(ELEMENT_ADD_CATEGORY_POPUP_DELETE_CATEGORY.replace("${nameCategory}", nameCategory))).click();
     alert.acceptAlert();
   }
 
@@ -672,7 +672,7 @@ public class SiteExplorerHome {
    * Open Export Node popup By QuynhPT date 16/01/2015
    */
   public void goToExportNode() {
-    evt.click(ELEMENT_ACTIONBAR_EXPORT_BUTTON);
+    $(ELEMENT_ACTIONBAR_EXPORT_BUTTON).click();
 
   }
 
@@ -750,24 +750,24 @@ public class SiteExplorerHome {
    */
   public void exportNode(boolean systemView, boolean zip) {
     // Verify that the popup is shown
-    evt.waitForAndGetElement(ELEMENT_EXPORT_NODE_POPUP_TITLE);
+   $(ELEMENT_EXPORT_NODE_POPUP_TITLE).waitUntil(Condition.visible,Configuration.timeout);
     // select doc view type
     if (!systemView)
-      evt.click(ELEMENT_EXPORT_NODE_POPUP_DOC_VIEW, 2);
+      $(ELEMENT_EXPORT_NODE_POPUP_DOC_VIEW).click();
     // select zip type
     if (zip)
-      evt.click(ELEMENT_EXPORT_NODE_POPUP_ZIP, 2);
+      $(ELEMENT_EXPORT_NODE_POPUP_ZIP).click();
 
-    evt.click(ELEMENT_EXPORT_NODE_POPUP_EXPORT_BUTTON);
-    evt.waitForElementNotPresent(ELEMENT_EXPORT_NODE_POPUP_EXPORT_BUTTON);
+    $(ELEMENT_EXPORT_NODE_POPUP_EXPORT_BUTTON).click();
+    $(ELEMENT_EXPORT_NODE_POPUP_EXPORT_BUTTON).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
    * Open Properties popup By QuynhPT date 19/01/2015
    */
   public void goToProperties() {
-    evt.waitForAndGetElement(ELEMENT_ACTIONBAR_PROPERTIES);
-    evt.click(ELEMENT_ACTIONBAR_PROPERTIES);
+    $(ELEMENT_ACTIONBAR_PROPERTIES).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_ACTIONBAR_PROPERTIES).click();
   }
 
   /**
@@ -777,15 +777,13 @@ public class SiteExplorerHome {
    * @param value String
    */
   public void addProperty(String property, String value) {
-    evt.waitForAndGetElement(ELEMENT_VIEWPROPERTIES_PROPERTIES_TAB);
-    evt.click(ELEMENT_VIEWPROPERTIES_ADD_PROPERTY_TAB);
-
-    evt.select(ELEMENT_VIEWPROPERTIES_ADD_PROPERTY_INPUT, property);
-    evt.type(ELEMENT_VIEWPROPERTIES_VALUE_INPUT, value, true);
+    $(ELEMENT_VIEWPROPERTIES_PROPERTIES_TAB).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_VIEWPROPERTIES_ADD_PROPERTY_TAB).click();
+    $(ELEMENT_VIEWPROPERTIES_ADD_PROPERTY_INPUT).selectOption(property);
+    $(ELEMENT_VIEWPROPERTIES_VALUE_INPUT).setValue(value);
     button.save();
-
     // Check if a property is added successfully.
-    evt.waitForAndGetElement(ELEMENT_VIEWPROPERTIES_PROPERTY.replace("{$property}", property).replace("{$value}", value));
+    $(byXpath(ELEMENT_VIEWPROPERTIES_PROPERTY.replace("{$property}", property).replace("{$value}", value))).waitUntil(Condition.visible,Configuration.timeout);
     button.close();
   }
 
@@ -793,8 +791,8 @@ public class SiteExplorerHome {
    * Open Manage Pulishtation popup By QuynhPT
    */
   public void goToManagePublishtation() {
-    evt.waitForAndGetElement(ELEMENT_ACTIONBAR_MANAGER_PUBLISHTATION);
-    evt.click(ELEMENT_ACTIONBAR_MANAGER_PUBLISHTATION);
+    $(ELEMENT_ACTIONBAR_MANAGER_PUBLISHTATION).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_ACTIONBAR_MANAGER_PUBLISHTATION).click();
 
   }
 
@@ -809,30 +807,30 @@ public class SiteExplorerHome {
     String date1 = (String) (date.length > 0 ? date[0] : "");
     String date2 = (String) (date.length > 1 ? date[1] : "");
     // select State
-    evt.click(bState);
-    evt.waitForAndGetElement(ELEMENT_MANAGEPUBLICATION_CURRENT_SPECIFIC_STATUS.replace("${status}", state));
+    $(bState).click();
+    $(byXpath(ELEMENT_MANAGEPUBLICATION_CURRENT_SPECIFIC_STATUS.replace("${status}", state))).waitUntil(Condition.visible,Configuration.timeout);
     if (state.equals("Staged") & (date.length > 0)) {
-      evt.click(ELEMENT_MANAGEPUBLICATION_SCHEDULE_TAB);
+      $(ELEMENT_MANAGEPUBLICATION_SCHEDULE_TAB).click();
       if ((date1 != "" && date1 != null))
-        evt.type(ELEMENT_MANAGEPUBLICATION_PUB_FROM_INPUT, date1, true);
+        $(ELEMENT_MANAGEPUBLICATION_PUB_FROM_INPUT).setValue(date1);
       if ((date2 != "" && date2 != null))
-        evt.type(ELEMENT_MANAGEPUBLICATION_PUB_TO_INPUT, date2, true);
+        $(ELEMENT_MANAGEPUBLICATION_PUB_TO_INPUT).setValue(date2);
       button.save();
       if (date.length > 2) {
-        evt.waitForMessage(MSG_INVALID_DATE_TIME);
+        $(byText(MSG_INVALID_DATE_TIME)).waitUntil(Condition.visible,Configuration.timeout);
         button.ok();
         button.close();
         return;
       }
-      evt.waitForMessage("Your new publication schedule was saved successfully.");
+      $(byText("Your new publication schedule was saved successfully.")).waitUntil(Condition.visible,Configuration.timeout);
       button.ok();
-      evt.click(ELEMENT_MANAGEPUBLICATION_REVISION_TAB);
+      $(ELEMENT_MANAGEPUBLICATION_REVISION_TAB).click();
     }
     evt.waitForAndGetElement(ELEMENT_MANAGEPUBLICATION_HISTORY_TAB);
     evt.waitForAndGetElement(ELEMENT_MANAGEPUBLICATION_REVISION_TAB);
 
-    evt.click(ELEMENT_MANAGEPUBLICATION_HISTORY_TAB);
-    evt.waitForAndGetElement(ELEMENT_MANAGEPUBLICATION_HISTORY_ITEM.replace("${state}", state));
+   $(ELEMENT_MANAGEPUBLICATION_HISTORY_TAB).click();
+    $(byXpath(ELEMENT_MANAGEPUBLICATION_HISTORY_ITEM.replace("${state}", state))).waitUntil(Condition.visible,Configuration.timeout);
 
     button.close();
 

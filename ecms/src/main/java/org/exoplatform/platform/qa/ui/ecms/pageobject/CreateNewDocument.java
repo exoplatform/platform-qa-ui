@@ -128,7 +128,7 @@ public class CreateNewDocument {
     info("if check box is avaiabled and unchecked, so, check it.");
     if (checkBox != null && !checkBox.isSelected()) {
       info("Check on check box");
-      evt.click(ELEMENT_USE_CUSTOM_TYPE_FOLDER, 2);
+      $(ELEMENT_USE_CUSTOM_TYPE_FOLDER).parent().click();
     }
     info("Select a type of new folder");
     switch (type) {
