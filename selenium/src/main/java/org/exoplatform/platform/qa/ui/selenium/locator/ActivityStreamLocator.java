@@ -28,7 +28,6 @@ import static com.codeborne.selenide.Selectors.byId;
 
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
-
 public final class ActivityStreamLocator {
     // Author of activity
     public static final String          ELEMENT_ACTIVITY_AUTHOR_SPACE                        =
@@ -670,6 +669,10 @@ public final class ActivityStreamLocator {
 
     public static final String          ELEMENT_ACTIVITY_PRODUCT_CHECK_VERSION               =
             "//*[@class='uiIcon64x64Templateacme_product']/../..//*[@class='linkTitle' and contains(text(),'{$title}')]/..//*[@class='versionFile' and contains(text(),'Version: {$version}')]";
+  public static final By ELEMENT_ICONCOMMENT=byClassName("uiIconComment");
+  public static final By ELEMENT_ICONLIKE=byClassName("uiIconThumbUp");
+  public static final String ELEMENT_LINK_TEXT_VIEW_ALL_COMMENTS="//*[@id=\"CommentBlockBound{id}\"]/div[1]/a";
+  public static final String ELEMENT_LIST_ALL_COMMENNTS="CommentBlockBound{id}";
 
     public static final String          ELEMENT_ACTIVITY_PRODUCT_CHECK_STATUS                =
             "//*[@class='uiIcon64x64Templateacme_product']/../..//*[@class='linkTitle' and contains(text(),'{$title}')]/..//*[@class='versionFile' and contains(text(),'- {$status}')]";

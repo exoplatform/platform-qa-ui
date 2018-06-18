@@ -222,8 +222,8 @@ public class HomePagePlatform {
   public void loadMoreActivities() {
 
     info("Load more activities");
-    evt.waitForAndGetElement(ELEMENT_PLF_HOMEPAGE_LOAD_MORE_BUTTON, testBase.getDefaultTimeout(), 1);
-    evt.click(ELEMENT_PLF_HOMEPAGE_LOAD_MORE_BUTTON);
+    $(ELEMENT_PLF_HOMEPAGE_LOAD_MORE_BUTTON).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_PLF_HOMEPAGE_LOAD_MORE_BUTTON).click();
   }
 
   public void refreshUntil(SelenideElement selenideElement, Condition condition, long time) throws Exception {

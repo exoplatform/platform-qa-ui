@@ -159,6 +159,7 @@ public class CreateNewDocument {
    */
   public void addNewFile(String title, String content) {
     $(ELEMENT_FILEFORM_BLANK_NAME).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_FILEFORM_BLANK_NAME).click();
     $(ELEMENT_FILEFORM_BLANK_NAME).setValue(title);
     $(ELEMENT_FILEFORM_BLANK_CONTENT).click();
     $(ELEMENT_FILEFORM_BLANK_CONTENT).click();
