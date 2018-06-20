@@ -114,7 +114,7 @@ public class WikiSettingPage {
    */
   public void goToPermissionTab() {
     info("Click on Permission tab");
-    evt.click(ELEMENT_WIKI_SETTING_PERMISSION_TAB);
+    $(ELEMENT_WIKI_SETTING_PERMISSION_TAB).click();
 
   }
 

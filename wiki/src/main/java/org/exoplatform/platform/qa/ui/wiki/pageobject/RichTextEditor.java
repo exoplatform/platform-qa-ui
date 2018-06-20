@@ -520,6 +520,7 @@ public class RichTextEditor {
    * @param content updated content of the wiki page. Can not be <code>null</code>
    */
   public void addSimplePage(String title, String content) {
+
     info("Input a title for the page");
     $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
     if ($(ELEMENT_SOURCE_EDITOR_BUTTON).is(Condition.not(Condition.exist))
@@ -536,6 +537,7 @@ public class RichTextEditor {
       switchTo().frame(frame);
       $(byId("body")).sendKeys(content);
       switchTo().defaultContent();
+      refresh();
     }
     }
 

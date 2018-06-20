@@ -136,8 +136,10 @@ public class WikiLocators {
 
   // More menu
 
-  public static final SelenideElement ELEMENT_MORE_LINK                                          =
-                                                        $(byXpath("//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li[3]/div"));
+  public static final SelenideElement   ELEMENT_MORE_LINK                                          =
+                                                         $(byXpath("//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li[3]/div"));
+  public static final SelenideElement ELEMENT_MORE_LINK_SIMPLE   =
+                                                         $(byXpath("//*[@id=\"UIWikiPageControlArea_PageToolBar\"]") );
 
   public static final By              ELEMENT_DELETE_LINK                                        =
                                                           By.xpath(".//*[text()='Delete']");
