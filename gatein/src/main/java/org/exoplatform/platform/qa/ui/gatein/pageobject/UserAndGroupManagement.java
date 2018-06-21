@@ -118,7 +118,7 @@ public class UserAndGroupManagement {
     String[] groups = groupsPath.split("/");
     for (String groupSelect : groups) {
       info("Select group:" + groupSelect);
-      evt.click(ELEMENT_GROUP_MANAGEMENT_SELECT_GROUP.replace("${name}", groupSelect));
+     $(byXpath(ELEMENT_GROUP_MANAGEMENT_SELECT_GROUP.replace("${name}", groupSelect))).click();
     }
 
   }
