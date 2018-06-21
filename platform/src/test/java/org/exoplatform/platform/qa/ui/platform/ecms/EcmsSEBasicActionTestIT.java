@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.platform.ecms;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER2;
@@ -148,7 +149,7 @@ public class EcmsSEBasicActionTestIT extends Base {
         siteExplorerHome.copyPasteNode(titleCommonNode, destination);
         info("delete data");
         $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", destination))).click();
-        siteExplorerHome.deleteData(titleCommonNode);
+        siteExplorerHome.deleteData(titleCommonNode,false);
         $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", secondDestination))).click();
         siteExplorerHome.deleteData(titleCommonNode);
     }
@@ -187,8 +188,9 @@ public class EcmsSEBasicActionTestIT extends Base {
         createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
         createNewDocument.addNewWebContent(titleCommonNode, titleCommonNode);
         createNewDocument.saveAndClose();
+        refresh();
         info("Test 4: Drag and drop a node");
-        $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNode))).dragAndDropTo($(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", destination))));
+        $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNode))).dragAndDropTo($(byXpath("//*[@id=\"iconTreeExplorer_2fsites_2fintranet\"]/a/span")));
         manageAlert.acceptAlert();
         $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", destination))).click();
         siteExplorerHome.deleteData(titleCommonNode);
@@ -319,7 +321,7 @@ public class EcmsSEBasicActionTestIT extends Base {
         $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
         $(ELEMENT_SIDEBAR_SITES_MANAGEMENT).click();
         info("Test 9: Delete Clipboard");
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+        $(ELEMENT_ACCOUNT_NAME_LINK).click();
         $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNode))).contextClick();
         $(ELEMENT_SITEEXPLORER_ACTION_COPY).click();
         $(ELEMENT_SITEEXPLORER_CLIPBOARD).click();

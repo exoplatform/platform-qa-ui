@@ -187,9 +187,11 @@ public class SiteExplorerHome {
     $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).click();
     $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     refresh();
+    if(destination.equals(true))
     $(byText(title)).shouldNot(Condition.exist);
     info("Verify that the node is deleted");
     info("the node is deleted successfully");
+    executeJavaScript("window.scrollBy(0,-550);", "");
   }
 
 
