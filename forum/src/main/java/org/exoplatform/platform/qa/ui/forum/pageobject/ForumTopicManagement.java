@@ -505,7 +505,7 @@ public class ForumTopicManagement {
     info("click on Attached file button");
     $(ELEMENT_START_TOPIC_ATTACH_FILE).click();
     for (int i=0;i<=fileName.length-1;i++){
-    $(By.className("file")).uploadFromClasspath(fileName[i]);
+      $(By.className("file")).uploadFromClasspath(fileName[i]);
     }
     $(ELEMENT_SAVE_BTN).click();
     $(ELEMENT_SUBMIT_BUTTON).click();

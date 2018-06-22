@@ -581,7 +581,6 @@ public class SOCSpaceManagementTestIT extends Base {
     addUsers.deleteUser(username2);
   }
 
-  @BugInPLF("SOC-6043")
   @Test
   public void test14_Translatepagetitles() {
 
