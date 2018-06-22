@@ -541,11 +541,7 @@ public class UserAndGroupManagement {
       evt.select(ELEMENT_LANGUAGE, language);
     }
     (ELEMENT_SAVE_BUTTON).click();
-    //evt.waitForElementNotPresent(ELEMENT_SAVE_BUTTON);
-   // evt.waitForMessage(ELEMENT_MSG_UPDATE_USER_PROFILE);
     (ELEMENT_MSG_UPDATE_USER_PROFILE).click();
-    //evt.click(GateinLocator.ELEMENT_CLOSE_MESSAGE);
-    //evt.waitForElementNotPresent(GateinLocator.ELEMENT_CLOSE_MESSAGE);
   }
 
   /**
