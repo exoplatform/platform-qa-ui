@@ -33,11 +33,6 @@ import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.administration.ChangeLanguages;
 
-/**
- * @date 15-January-2015
- * @author exo update 26/01/2015
- */
-
 @Tag("ecms")
 @Tag("sniff")
 public class EcmsWCMTestIT extends Base {

@@ -40,7 +40,6 @@ public class ContentList {
 
     if (content != "" || content != null) {
       $(byXpath(ELEMENT_MULTIPLE_CONTENT_POPUP_FILE.replace("${content}", content))).waitUntil(Condition.visible,Configuration.timeout);
-      //click(ELEMENT_MULTIPLE_CONTENT_POPUP_FILE.replace("${content}",content));
       $(byXpath(ELEMENT_MULTIPLE_CONTENT_POPUP_FILE.replace("${content}",content))).click();
     }
   }
