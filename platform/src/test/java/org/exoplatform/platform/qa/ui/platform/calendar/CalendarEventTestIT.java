@@ -1,7 +1,6 @@
 package org.exoplatform.platform.qa.ui.platform.calendar;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
@@ -811,18 +810,17 @@ $(byXpath("//*[@id=\"UIEventForm\"]/div[4]/button[2]")).click();
    * Data: Expected Outcome: - To time is automatically set = From Time + 1 hour
    * Step number: 4 Step Name: Step 4: Save Step Description: - Click Save to
    * finish Input Data: Expected Outcome: - Event in shared calendar is edited -
-   * Sharing user can see updated event
-   * Step Number: 1 Step Name: - Step Description: Step 1: Create & share a
-   * calendar Input Data: - Create personal calendar - Share added calendar with
-   * edit right Expected Outcome: Calendar is created and shared Step number: 2
-   * Step Name: Step Description: Step 2: Add an event to a shared calendar Input
-   * Data: - Log in as shared user - Click wheel icon of shared calendar then
-   * choose Add event - Input Event summary and click Save Expected Outcome: - The
-   * shared user can see the shared calendar and add event into it.
-   * Step number: 3 Step Name: - Step Description: Step 3: Delete an event to a
-   * shared calendar Input Data: - Right click on event then choose Delete - Click
-   * OK at confirmation - Save Expected Outcome: - Event is deleted - The sharing
-   * user cannot see this event
+   * Sharing user can see updated event Step Number: 1 Step Name: - Step
+   * Description: Step 1: Create & share a calendar Input Data: - Create personal
+   * calendar - Share added calendar with edit right Expected Outcome: Calendar is
+   * created and shared Step number: 2 Step Name: Step Description: Step 2: Add an
+   * event to a shared calendar Input Data: - Log in as shared user - Click wheel
+   * icon of shared calendar then choose Add event - Input Event summary and click
+   * Save Expected Outcome: - The shared user can see the shared calendar and add
+   * event into it. Step number: 3 Step Name: - Step Description: Step 3: Delete
+   * an event to a shared calendar Input Data: - Right click on event then choose
+   * Delete - Click OK at confirmation - Save Expected Outcome: - Event is deleted
+   * - The sharing user cannot see this event
    */
   @Test
   public void test22DeleteAnEventInSharedCalendar() {
@@ -981,5 +979,28 @@ $(byXpath("//*[@id=\"UIEventForm\"]/div[4]/button[2]")).click();
     homePagePlatform.goToCalendarPage();
     calendarManagement.deleteCalendar(calendarName, true);
 
+  }
+
+  @Tag("CAL-1321")
+  @Test
+  public void test_22_Calendar_event_time_granularity() {
+    String titleEvent = "titleEvent" + getRandomNumber();
+    homePagePlatform.goToCalendarPage();
+    eventManagement.goToAddEventFromActionBar();
+    $(ELEMENT_QUICK_INPUT_EVENT_NAME).setValue(titleEvent);
+    $(ELEMENT_QUICK_INPUT_EVENT_FROM_TIME_INPUT).setValue(getDate(0, "HH") + ":13");
+    $(ELEMENT_QUICK_INPUT_EVENT_TO_TIME_INPUT).setValue(getDate(0, "HH") + ":58");
+    eventManagement.saveQuickAddEvent();
+    ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(titleEvent))
+                                        .parent()
+                                        .parent()
+                                        .find(byText(getDate(0, "HH") + ":13" + " - " + getDate(0, "HH") + ":58"))
+                                        .shouldBe(Condition.visible);
+    calendarHomePage.deleteEventTask(titleEvent,
+                                     CalendarHomePage.selectViewOption.WEEK,
+                                     CalendarHomePage.selectDayOption.DETAILTIME,
+                                     getDate(0, "MMM dd yyyy"),
+                                     false,
+                                     false);
   }
 }

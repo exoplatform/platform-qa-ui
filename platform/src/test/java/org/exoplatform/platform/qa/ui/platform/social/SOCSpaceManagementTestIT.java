@@ -10,7 +10,10 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLoca
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
+import org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -29,6 +32,8 @@ import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.SourceTextEditor;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
+import org.exoplatform.platform.qa.ui.selenium.platform.administration.*;
+
 
 @Tag("sniff")
 @Tag("social")
@@ -53,6 +58,9 @@ public class SOCSpaceManagementTestIT extends Base {
 
   SourceTextEditor       sourceTextEditor;
 
+  ChangeLanguages        changeLanguages;
+
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
@@ -66,6 +74,8 @@ public class SOCSpaceManagementTestIT extends Base {
     wikiManagement = new WikiManagement(this);
     spaceSettingManagement = new SpaceSettingManagement(this);
     sourceTextEditor = new SourceTextEditor(this);
+    changeLanguages = new ChangeLanguages(this);
+
     manageLogInOut.signInCas(DATA_USER1, "gtngtn");
   }
 
@@ -569,5 +579,29 @@ public class SOCSpaceManagementTestIT extends Base {
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
+  }
+
+  @Test
+  public void test14_Translatepagetitles() {
+
+    String space = "space" + getRandomNumber();
+   homePagePlatform.goToMySpaces();
+   spaceManagement.addNewSpaceSimple(space, space);
+   navigationToolbar.goToChangeLanguage();
+   changeLanguages.changeLanguage("French","Apply");
+   spaceManagement.goToTaskTab();
+    assertEquals(title(),space+" - Tâches");
+    spaceManagement.goToForumTab();
+    assertEquals(title(),space+" - Forum");
+    spaceManagement.goToAgendaTab();
+    assertEquals(title(),space+" - Calendrier");
+    spaceManagement.goToMemberTab();
+    assertEquals(title(),space+" - Membres");
+    navigationToolbar.goToChangeLanguage();
+    changeLanguages.changeLanguage("Anglais","Appliquer");
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space,false
+    );
+
   }
 }

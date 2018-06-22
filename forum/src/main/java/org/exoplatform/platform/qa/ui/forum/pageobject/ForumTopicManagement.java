@@ -5,12 +5,8 @@ import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.io.File;
 
 import org.openqa.selenium.By;
 
@@ -260,7 +256,7 @@ public class ForumTopicManagement {
     $(byText(newContent)).parent().parent().parent().parent().find(byText("Quote")).click();
     if (newContent != "")
       switchTo().frame(0);
-    $(byXpath("/html/body")).sendKeys(newContent+"quote");
+    $(byXpath("/html/body")).sendKeys(newContent + "quote");
     switchTo().defaultContent();
     executeJavaScript("window.scrollBy(0,150)");
     $(ELEMENT_POST_FORM_SUBMIT).click();
@@ -493,33 +489,28 @@ public class ForumTopicManagement {
    *
    * @param title String
    * @param message String
-   *@param fileName String
+   * @param fileName String
    * @param pathFile String
    */
-  public void startTopic(String title, String message, String pathFile, String fileName) {
+  public void startTopic(String title, String message, String pathFile, String... fileName) {
     info("Verify that the pop up is shown");
     $(ELEMENT_START_TOPIC_POPUP_TITLE_FILED).waitUntil(Condition.appears, Configuration.timeout);
-
     info("Input the title:" + title);
-
     $(ELEMENT_START_TOPIC_POPUP_TITLE_FILED).val(title);
-
     info("Input the message:" + message);
     $(ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR).click();
     switchTo().frame(0);
     $(byXpath("/html/body")).sendKeys(message);
     switchTo().defaultContent();
     info("click on Attached file button");
-    if (fileName!="") {
-      $(ELEMENT_START_TOPIC_ATTACH_FILE).click();
-      File file = $(By.className("file")).uploadFromClasspath(fileName);
-      assertTrue(file.exists());
-      $(ELEMENT_SAVE_BTN).pressEnter();
+    $(ELEMENT_START_TOPIC_ATTACH_FILE).click();
+    for (int i=0;i<=fileName.length-1;i++){
+      $(By.className("file")).uploadFromClasspath(fileName[i]);
     }
-    $(ELEMENT_SUBMIT_BUTTON).pressEnter();
+    $(ELEMENT_SAVE_BTN).click();
+    $(ELEMENT_SUBMIT_BUTTON).click();
     $(ELEMENT_SUBMIT_BUTTON).waitUntil(Condition.disappear, Configuration.timeout);
     info("Verify that the topic is created");
-
     $(By.linkText(title)).should(exist);
     info("Start topic successfully");
   }
@@ -642,6 +633,7 @@ public class ForumTopicManagement {
 
   /**
    * function: Search user in User Selection Form in Topic Permission
+   * 
    * @param searchOption String
    * @param user String
    */
