@@ -1,0 +1,29 @@
+= UI Quality Assurance project for eXo Platform
+
+Automation Process for Visual Regression Tests on eXo Platform.
+
+== Quick start
+
+Running tests:
+
+* Desktop full test
+----
+$ backstop test --configPath=backstopTestDesktop
+----
+
+* Mobile full test
+----
+$ backstop test --configPath=backstopTestMobile
+----
+
+* Tablet full test
+----
+$ backstop test --configPath=backstopTestTablet
+----
+
+* Running specific tests
+
+In order to run only login and home page tests for Desktop we use the *filter* parameter
+----
+$ backstop test --configPath=backstopTestDesktop --filter=Login_page,Home_page
+----
