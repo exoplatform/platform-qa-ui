@@ -1,5 +1,7 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byName;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -220,11 +222,10 @@ public class SourceTextEditor {
    */
   public void attachFileInWiki(String link, Integer... type) {
     String fs = File.separator;
-    WebElement elem = evt.waitForAndGetElement(ELEMENT_UPLOAD_NAME, 5000, 1, 2);
+    WebElement elem = $(ELEMENT_UPLOAD_NAME);
     evt.scrollToElement(elem, testBase.getExoWebDriver().getWebDriver());
-    evt.click(elem, 2, true);
-    testBase.uploadFileUsingRobot(link);
-    evt.waitForAndGetElement(By.linkText(link.substring(link.lastIndexOf(fs) + 1)));
+    $(byClassName("uploadInput")).find(byName("file")).uploadFromClasspath(link);
+    $(By.linkText(link.substring(link.lastIndexOf(fs) + 1))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
 }

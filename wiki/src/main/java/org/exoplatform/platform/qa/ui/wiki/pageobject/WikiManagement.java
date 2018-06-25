@@ -19,6 +19,7 @@ import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import sun.security.krb5.Config;
 
 public class WikiManagement {
 
@@ -69,11 +70,11 @@ public class WikiManagement {
    * Change to Rich Text Mode
    */
   public void goToRichTextEditor() {
-    if (ELEMENT_BUTTON_WIKI_RITCH_TEXT.waitUntil(Condition.appears, Configuration.timeout).is(Condition.exist)) {
+    if($(ELEMENT_SOURCE_EDITOR_BUTTON).is(Condition.visible)){
       info("Go to Rich Text Mode");
-      ELEMENT_BUTTON_WIKI_RITCH_TEXT.click();
+      $(ELEMENT_RICHTEXT_BUTTON).click();
     }
-    $(ELEMENT_CONTENT_WIKI_FRAME).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_CONTENT_WIKI_FRAME).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -95,8 +96,9 @@ public class WikiManagement {
     info("Save all changes");
     executeJavaScript("window.scrollBy(0,-5500)", "");
     ELEMENT_SAVE_BUTTON_ADD_PAGE.click();
-    ELEMENT_SAVE_BUTTON_ADD_PAGE.waitUntil(Condition.disappears, Configuration.timeout);
+   $(ELEMENT_SAVE_BUTTON_ADD_PAGE).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     info("Wiki page simple is created successfully");
+
   }
 
   /**
@@ -200,23 +202,23 @@ public class WikiManagement {
     // evt.waitForAndGetElement(ELEMENT_TREE_WIKI_NAME.replace("${name}", page1),
     // 2000, 0).click();
     info("Click on More link");
-    evt.click(ELEMENT_MORE_LINK);
+    $(ELEMENT_MORE).click();
     if (destination) {
       info("Click on Move page link");
-      if (evt.waitForAndGetElement(ELEMENT_MOVE_PAGE, 5000, 0) == null) {
-        evt.mouseOverAndClick(ELEMENT_MOVE_PAGE);
+      if ($(ELEMENT_MOVE_PAGE).waitUntil(Condition.visible,Configuration.timeout) == null) {
+        $(ELEMENT_MOVE_PAGE).click();
       } else {
-        evt.click(ELEMENT_MOVE_PAGE);
+        $(ELEMENT_MOVE_PAGE).click();
       }
       info("Move page popup is shown. User can see the page");
-      evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_MOVE_POPUP_NODE.replace("${name}", page2), 2000, 0).click();
+      $(byXpath(ELEMENT_WIKI_PAGE_MOVE_POPUP_NODE.replace("${name}", page2))).waitUntil(Condition.visible, Configuration.timeout).click();
       info("Click on Move button");
-      evt.waitForAndGetElement(ELEMENT_MOVE_BTNMOVE, 2000, 0).click();
+      $(ELEMENT_MOVE_BTNMOVE).waitUntil(Condition.visible,Configuration.timeout).click();
       info("A pop up appears");
       alert.verifyAlertMessage(ELEMENT_MESSAGE_USER_DOES_NOT_HAVE_EDIT_PERMMISSON);
     } else {
       info("");
-      evt.waitForElementNotPresent(ELEMENT_MOVE_PAGE, testBase.getDefaultTimeout(), 0);
+     $(ELEMENT_MOVE_PAGE).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     }
   }
 
@@ -254,12 +256,10 @@ public class WikiManagement {
     info("Save all changes");
     if (check) {
       info("Check New Location Home");
-      $(byId("newLocation")).find(byText(locator)).find(byText("Wiki Home")).find(byText(page2)).should(Condition.exist);
+      $(byXpath(ELEMENT_MOVE_PAGE_POPUP_NEW_LOCATION_HOME.replace("${spaceName}", locator))).waitUntil(Condition.visible,Configuration.timeout);
     }
-    $(ELEMENT_MOVE_BTNMOVE).waitUntil(Condition.appears, Configuration.timeout);
-    $(ELEMENT_MOVE_BTNMOVE).click();
+    $(ELEMENT_MOVE_BTNMOVE).waitUntil(Condition.visible,Configuration.timeout).click();
   }
-
   /**
    * Open space switcher in move page popup
    */
@@ -457,9 +457,13 @@ public class WikiManagement {
    *
    * @param locator object
    */
-  public void unCheckViewAUserOfPage(Object locator) {
+  public void unCheckViewAUserOfPage(By locator) {
+    info("Click on More link");
+    $(ELEMENT_MORE_LINK).click();
+    info("Click on permission link");
+    $(ELEMENT_PERMISSION_LINK).click();
     info("Uncheck view permission checkbox");
-    evt.uncheck(locator, 2);
+    $(locator).is(Condition.checked);
     info("Click on save button");
     $(ELEMENT_PERMISSION_BUTTON_SAVE).click();
   }

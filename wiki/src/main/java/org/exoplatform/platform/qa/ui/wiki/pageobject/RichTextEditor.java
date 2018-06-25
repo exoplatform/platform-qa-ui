@@ -1128,8 +1128,8 @@ public class RichTextEditor {
    * Click on Create link button on Wiki page popup
    */
   public void goToCreateLink() {
-    evt.click(ELEMENT_CREATE_LINK_BUTTON);
-    evt.waitForElementNotPresent(ELEMENT_CREATE_LINK_BUTTON);
+    $(ELEMENT_CREATE_LINK_BUTTON).click();
+    $(ELEMENT_CREATE_LINK_BUTTON).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**

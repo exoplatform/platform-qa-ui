@@ -56,6 +56,7 @@ public class PlfPeopleSearchTestIT extends Base {
         getHomePagePlatform().goToConnections();
         getConnectionsManagement().searchPeople(firstName, "","", "");
         getHomePagePlatform().refreshUntil($(byText(firstName+" "+lastName)),Condition.visible,1000);
+
       info("Test Case 10: Delete user");
         getNavigationToolbar().goToManageCommunity();
         getUserandgroupmanagement().deleteUser(username);
@@ -74,7 +75,7 @@ public class PlfPeopleSearchTestIT extends Base {
         getHomePagePlatform().goToConnections();
         getConnectionsManagement().searchPeople(firstName, "", "", "");
         getHomePagePlatform().refreshUntil($(byText(firstName+" "+lastName)),Condition.visible,1000);
-      info("Test Case 10: Delete user");
+        info("Test Case 10: Delete user");
         getNavigationToolbar().goToManageCommunity();
         getUserandgroupmanagement().deleteUser(username);
     }

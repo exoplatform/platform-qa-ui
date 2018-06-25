@@ -138,6 +138,8 @@ public class WikiLocators {
 
   public static final SelenideElement ELEMENT_MORE_LINK                                          =
                                                         $(byXpath("//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li[3]/div"));
+  public static final SelenideElement ELEMENT_MORE                                          =
+          $(byXpath("//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li[2]/div"));
 
   public static final By              ELEMENT_DELETE_LINK                                        =
                                                           By.xpath(".//*[text()='Delete']");
@@ -149,8 +151,10 @@ public class WikiLocators {
                                                                   By.xpath(".//*[@id='UIWikiDeletePageConfirm']//button[text()='OK']");
 
   public static final SelenideElement ELEMENT_MOVE_PAGE                                          =
-                                                        $(byXpath("//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li[3]/ul/li[4]/a"));
+                                                        $(byClassName("uiIconMovePage"));
 
+  public static final SelenideElement ELEMENT_MOVE                                         =
+                                                   $(byXpath("//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li[3]/div"));
   public static final By              ELEMENT_MOVE_LINK                                          =
                                                         By.xpath("//*[@class='uiIconMovePage']");
 
@@ -341,6 +345,7 @@ public class WikiLocators {
 
   public static final String          ELEMENT_MOVE_PAGE_POPUP_NEW_LOCATION_HOME                  =
                                                                                 ".//*[@id='newLocation']//*[@class='active']/a[contains(text(),'Wiki Home')]/../..//a[contains(text(),'${spaceName}')]";
+
 
   public static final String          ELEMENT_MESSAGE_USER_DOES_NOT_HAVE_EDIT_PERMMISSON         =
                                                                                          "You have no edit permission at the destination page";
@@ -1526,4 +1531,5 @@ public class WikiLocators {
   public static final SelenideElement ELEMENT_BUTTON_OK_IN_WARNING_POPUB_TEMPLATE=$(byClassName("warningIcon")).parent().parent().parent().find(byClassName("btn"));
 
   public static final SelenideElement ELEMENT_PAGE_WIKI_CONTENT=$(byId("UIViewContentDisplay"));
+
 }
