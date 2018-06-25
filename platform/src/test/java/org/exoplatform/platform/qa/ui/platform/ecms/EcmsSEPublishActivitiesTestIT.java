@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.platform.ecms;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.selenium.Button.ELEMENT_CLOSE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_CLOSE_DOCUMENT_PREVIEW;
@@ -10,6 +11,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.E
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_FILEFORM_BLANK_CONTENT2;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -18,7 +20,6 @@ import org.openqa.selenium.By;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.CreateNewDocument;
@@ -356,6 +357,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
     siteExplorerHome.selectNode("uploadFile.pdf");
     info("Add a category to the file");
     siteExplorerHome.addCategoryForNode("uploadFile.pdf", "intranet");
+    $(byXpath("//*[@id=\"UICategoryManager\"]/div[2]/button")).click();
     homePagePlatform.goToHomePage();
     $(byText("Category: intranet has been added.")).should(Condition.visible);
     info("Delete the file");
@@ -446,6 +448,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
 
     info("View the content from the activity");
     homePagePlatform.goToHomePage();
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
     $(byXpath(ELEMENT_ACTIVITY_VIEW_A_NODE.replace("{$title}", title))).click();
     $(byText(content)).should(Condition.visible);
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
