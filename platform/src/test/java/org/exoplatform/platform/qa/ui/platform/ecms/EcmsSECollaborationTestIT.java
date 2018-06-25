@@ -159,7 +159,6 @@ public class EcmsSECollaborationTestIT extends Base {
    * Tag cloud of FE
    */
   @Test
-  @BugInPLF("ECMS-7676")
   public void test05_AddATag() {
     info("Test 05: Add a tag");
     String title = "title" + getRandomNumber();
