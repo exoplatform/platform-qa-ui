@@ -24,10 +24,6 @@ import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 
-/**
- * @date 15-January-2015
- * @author exo
- */
 @Tag("sniff")
 @Tag("ecms")
 public class EcmsSECollaborationTestIT extends Base {
@@ -193,7 +189,6 @@ public class EcmsSECollaborationTestIT extends Base {
   }
 
   @Test
-  @BugInPLF("ECMS-7676")
   public void test06_EditATag() {
     info("Test 05: Add a tag");
     String title = "title" + getRandomNumber();
@@ -223,7 +218,6 @@ public class EcmsSECollaborationTestIT extends Base {
   }
 
   @Test
-  @BugInPLF("ECMS-7676")
   public void test07_DeleteATag() {
     info("Test 05: Add a tag");
     String title = "title" + getRandomNumber();

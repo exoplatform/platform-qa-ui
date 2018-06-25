@@ -965,11 +965,6 @@ public class SiteExplorerHome {
     refresh();
     info("Input a content to the frame");
     $(byId("comment")).sendKeys(content);
-/*    $(ELEMENT_FILEFORM_BLANK_CONTENT).click();
-    switchTo().frame($(ELEMENT_FILEFORM_BLANK_CONTENT));
-    $(byXpath("/html/body")).sendKeys(content);
-    info("Switch to parent window");
-    switchTo().defaultContent();*/
     info("Click on Save button");
     $(ELEMENT_SITEEXPLORER_COMMENT_SAVE).click();
     info("Finish adding/Editing the Comment");
