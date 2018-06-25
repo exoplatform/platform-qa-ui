@@ -51,6 +51,12 @@ public class ConnectionsLocator {
   public static final By              ELEMENT_ALL_CONNECTIONS_TAB             =
                                                                   By.xpath("//*[@id='UIConnectionsPortlet' or @id='UIAllPeoplePortlet']//*[contains(@href,'all-people')]");
 
+  public static final By
+                                      ELEMENT_ICON_CHAT_PROFIL_STATUS            =
+                                                                 By.xpath("//*[@id=\"UIUserNavigationPortlet\"]/div[1]/div/div[1]/ul/li[1]/a/span");
+  public static final By
+                                       ELEMENT_ICON_CALL_PROFIL_STATUS    =
+                                                                 By.xpath("//*[@id=\"UIUserNavigationPortlet\"]/div[1]/div/div[1]/ul/li[2]/div/a/span");
   public static final By              ELEMENT_MY_CONNECTIONS_TAB              =
                                                                  By.xpath("//*[@id='UIConnectionsPortlet' or @id='UIAllPeoplePortlet']//*[contains(@href,'network')]");
 

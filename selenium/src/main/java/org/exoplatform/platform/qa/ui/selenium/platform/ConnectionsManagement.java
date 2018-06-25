@@ -228,7 +228,7 @@ public class ConnectionsManagement {
     info("-- Searching people ... --");
     if (peopleName != "" && peopleName != null) {
 
-      ELEMENT_NAME_OF_PEOPLE.waitUntil(Condition.appears,Configuration.timeout).setValue(peopleName).pressEnter();
+      $(ELEMENT_NAME_OF_PEOPLE).waitUntil(Condition.appears,Configuration.timeout).setValue(peopleName).pressEnter();
     } else {
       $(ELEMENT_NAME_OF_PEOPLE).setValue("");
     }
