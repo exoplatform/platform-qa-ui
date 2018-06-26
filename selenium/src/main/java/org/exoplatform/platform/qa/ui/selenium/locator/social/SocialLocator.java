@@ -1120,7 +1120,7 @@ public final class SocialLocator {
                                                                                 By.xpath("//*[@id=\"UIUserNavigationPortlet\"]/div[1]/ul/li[4]/a/div");
 
   public static final By              ELEMENT_HORIZONTAL_TOOLBAR_FIFTH_APP_DASHBOARD                    =
-                                                                                     By.xpath("//*[@id='UIUserNavigationPortlet']/ul/li[5]//*[@class='uiIconAppdashboard uiIconDefaultApp']");
+                                                                                     By.xpath("//*[@id=\"UIUserNavigationPortlet\"]/div[1]/ul/li[5]/a/div");
 
   public static final By              ELEMENT_MORE_TAB                                                  =
                                                        By.xpath("//*[@class='nav nav-tabs userNavigation']//*[@class='uiIconAppMoreButton']");
@@ -2359,13 +2359,14 @@ public final class SocialLocator {
   public static final SelenideElement ELEMENT_ABOUT_ME_PORTLET=$(byId("UIExperienceProfilePortlet"));
   public static final By ELEMENT_BUTTON_ACCEPT_INVITATION=byClassName("action-item");
   public static final By ELEMENT_BUTTON_CANCEL_INVITATION=byClassName("cancel-item");
-
-
   public static final By ELEMENT_EDIT_PROFILE= byClassName("uiIconEdit");
   public static final By ELEMENT_TITLE_INPUT= byClassName("textarea");
   public static final By ELEMENT_BUTTON_SAVE= byXpath("//*[@id=\"UIEditUserProfileForm\"]/div[3]/button[1]");
   public static final By ELEMENT_ABOUT_ME= byClassName("simpleBox");
-public static final ElementsCollection ELEMENT_LIST_OF_MEMBERS_IN_SPACE=$(byId("spaceMemberListBox")).findAll(byClassName("itemContainer"));
-
-
+  public static final ElementsCollection ELEMENT_LIST_OF_MEMBERS_IN_SPACE=$(byId("spaceMemberListBox")).findAll(byClassName("itemContainer"));
+  public static final SelenideElement ELEMENT_BUTTON_ADD_GADGET=$(byClassName("AddIcon"));
+  public static final SelenideElement ELEMENT_GADGET_LAST_FORUM_POST=$(byId("Adoption/gadget_LatestForumPosts"));
+  public static final SelenideElement ELEMENT_CONTAINER_GADGETS=$(byId("UIDashboardContainer"));
+  public static final SelenideElement ELEMENT_BUTTON_CLOSE_GADGETS=$(byClassName("UIPopupWindow")).find(byClassName("uiIconClose"));
+  public static final SelenideElement ELEMENT_BUTTON_CLOSE_SPECIFIC_GADGET=$(byClassName("gadgets-gadget")).parent().parent().parent().parent().find(byClassName("uiIconClose"));
 }

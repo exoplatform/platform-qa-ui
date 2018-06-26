@@ -60,6 +60,6 @@ public class UserPageBase {
    */
   public void goToDashboardTab() {
     info("Go to dashboard tab");
-    evt.click(ELEMENT_HORIZONTAL_TOOLBAR_FIFTH_APP_DASHBOARD);
+    $(ELEMENT_HORIZONTAL_TOOLBAR_FIFTH_APP_DASHBOARD).click();
   }
 }

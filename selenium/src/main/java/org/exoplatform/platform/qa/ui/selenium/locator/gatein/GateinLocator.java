@@ -688,7 +688,7 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
                                                                          By.xpath("//*[@id='Content/SingleContentViewer']");
 
   public static final By              ELEMENT_APPLICATION_CONTENT_LIST                        =
-                                                                       By.xpath("//*[@id='Content/ContentListViewerPortlet']");
+                                                                       By.xpath("//*[@id='Content/portlet_ContentListViewerPortlet']");
 
   public static final String          ELEMENT_APPLICATION_APPLICATION                         = ".//*[@id='${name}']";
 
@@ -1815,5 +1815,6 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   public static final By ELEMENT_LINE_IN_TABLE_LIST_USERS=byClassName("enabled");
 
   public static final SelenideElement ELEMENT_ICON_CLOSE_EDIT_LAYOUT=$(byXpath("//*[@id=\"UIPageEditor\"]/div[1]/a[1]"));
+  public static final SelenideElement ELEMENT_LIST_CONTENT=$(byId("PAGEBODY-VIEW-BLOCK"));
 
 }

@@ -230,8 +230,7 @@ public class NavigationToolbar {
     info("Hover over on Page link");
     evt.mouseOver(ELEMENT_MENU_PAGE_LINK, true);
     info("Click on Seo Menu");
-    WebElement seoMenu = evt.waitForAndGetElement(ELEMENT_MENU_SEO_LINK, 10000, 1, 2);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].evt.click()", seoMenu);
+    $(ELEMENT_MENU_SEO_LINK).click();
 
   }
 
@@ -250,10 +249,9 @@ public class NavigationToolbar {
    */
   public void goToUnEditContent() {
     info("Go to un Edit content");
-    evt.waitForAndGetElement(ELEMENT_LINK_EDIT);
-    evt.click(ELEMENT_LINK_EDIT);
-    if (evt.waitForAndGetElement(ELEMENT_EDIT_CONTENT_CHECK, 5000, 0) != null)
-      evt.click(ELEMENT_EDIT_CONTENT_CHECK);
+    $(ELEMENT_LINK_EDIT).waitUntil(Condition.visible,Configuration.timeout).click();
+    if ($(ELEMENT_EDIT_CONTENT_CHECK).is(Condition.visible))
+      $(ELEMENT_EDIT_CONTENT_CHECK).click();
   }
 
   /**

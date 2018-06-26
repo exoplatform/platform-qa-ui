@@ -1,5 +1,7 @@
 package org.exoplatform.platform.qa.ui.ecms.pageobject;
 
+import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
@@ -26,10 +28,10 @@ public class SEOManagement {
    * @param language String
    */
   public void deleteLanguage(String language) {
-    evt.click(ELEMENT_SEO_SELECTED_LANGUAGE.replace("${language}", language));
-    evt.click(ELEMENT_SEO_DELETE);
+    $(byXpath(ELEMENT_SEO_SELECTED_LANGUAGE.replace("${language}", language))).click();
+    $(ELEMENT_SEO_DELETE).click();
     magAlert.acceptAlert();
-    evt.click(ELEMENT_SEO_CLOSE);
+    $(ELEMENT_SEO_CLOSE).click();
   }
 
 }

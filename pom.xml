@@ -62,8 +62,8 @@
     <version.surefire.plugin>2.19.1</version.surefire.plugin>
     <!-- Dependencies for UI Tests -->
     <!-- JUnit5 stack -->
-    <org.junit.platform.version>1.0.0-M4</org.junit.platform.version>
-    <org.junit.jupiter.version>5.0.0-M4</org.junit.jupiter.version>
+    <org.junit.platform.version>1.0.0</org.junit.platform.version>
+    <org.junit.jupiter.version>5.0.0</org.junit.jupiter.version>
     <!-- Selenium/Selenide Stack -->
     <selenide.version>4.3</selenide.version>
     <guava.version>21.0</guava.version>

@@ -108,7 +108,7 @@ public class PageCreationWizard {
     $(tab).click();
 
     // evt.dragAndDropToObject(element, ELEMENT_PAGEEDITOR_VIEWPAGE);
-    $(element).dragAndDropTo($(byClassName("VIEW-PAGE")));
+    element.dragAndDropTo($(byClassName("VIEW-PAGE")));
   }
 
   /**
@@ -139,14 +139,13 @@ public class PageCreationWizard {
    * @param folder String
    */
   public void addContentlistByFolder(String path, String folder) {
-    // addApplication(ELEMENT_APPLICATION_CONTENT_TAB,
-    // ELEMENT_APPLICATION_CONTENT_LIST);
-    evt.mouseOver(ELEMENT_PAGEEDITOR_VIEWPAGE, true);
-    evt.click(ELEMENT_CONTENT_LIST_EDIT_BTN);
+
+    $(ELEMENT_PAGEEDITOR_VIEWPAGE).hover();
+    $(ELEMENT_CONTENT_LIST_EDIT_BTN).click();
     contList.selectFolderContent(path, folder);
-    evt.click(ELEMENT_CONTENT_LIST_SAVE_BTN);
-    evt.click(ELEMENT_CONTENT_LIST_CLOSE_BTN);
-    evt.click(ELEMENT_PAGE_FINISH_BTN);
+    $(ELEMENT_CONTENT_LIST_SAVE_BTN).click();
+    $(ELEMENT_CONTENT_LIST_CLOSE_BTN).click();
+    $(ELEMENT_PAGE_FINISH_BTN).click();
 
   }
 
@@ -157,16 +156,15 @@ public class PageCreationWizard {
    * @param content String
    */
   public void addContentListByContent(String path, String content) {
-    // addApplication(ELEMENT_APPLICATION_CONTENT_TAB,
-    // ELEMENT_APPLICATION_CONTENT_LIST);
-    evt.mouseOver(ELEMENT_PAGEEDITOR_VIEWPAGE, true);
-    evt.click(ELEMENT_CONTENT_LIST_EDIT_BTN);
+
+    $(ELEMENT_PAGEEDITOR_VIEWPAGE).hover();
+    $(ELEMENT_CONTENT_LIST_EDIT_BTN).click();
     evt.check(ELEMENT_CONTENT_LIST_BY_CONTENT_MODE, 2);
     contList.selectFolderContent(path, content);
-    evt.click(ELEMENT_MULTIPLE_CONTENT_POPUP_SAVE_BTN);
-    evt.click(ELEMENT_CONTENT_LIST_SAVE_BTN);
-    evt.click(ELEMENT_CONTENT_LIST_CLOSE_BTN);
-    evt.click(ELEMENT_PAGE_FINISH_BTN);
+    $(ELEMENT_MULTIPLE_CONTENT_POPUP_SAVE_BTN).click();
+    $(ELEMENT_CONTENT_LIST_SAVE_BTN).click();
+    $(ELEMENT_CONTENT_LIST_CLOSE_BTN).click();
+    $(ELEMENT_PAGE_FINISH_BTN).click();
   }
 
   /**
