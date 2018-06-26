@@ -361,24 +361,24 @@ public class SiteExplorerHome {
    */
   public void editTag(String oldName, String newName) {
     info("Click on Tag Cloud tab of SE");
-    evt.click(ELEMENT_SITEEXPLORER_TAG_CLOUD_TAB);
-    evt.waitForAndGetElement(ELEMENT_SIDEBAR_TAGCLOUD_NAME.replace("${name}", oldName));
+    $(ELEMENT_SITEEXPLORER_TAG_CLOUD_TAB).click();
+    $(byId("UITagExplorer")).find(byText(oldName)).should(Condition.visible);
     info("Click on Edit button of Tag Cloud");
-    evt.click(ELEMENT_SIDEBAR_TAGCLOUD_EDIT);
-    evt.waitForAndGetElement(ELEMENT_SIDEBAR_TAGCLOUD_POPUP_TITLE);
+    $(ELEMENT_SIDEBAR_TAGCLOUD_EDIT).click();
+    $(ELEMENT_SIDEBAR_TAGCLOUD_POPUP_TITLE).waitUntil(Condition.visible,Configuration.timeout);
     info("Click on Edit button of the old tag");
-    evt.click(ELEMENT_SIDEBAR_TAGCLOUD_POPUP_EDIT.replace("${name}", oldName));
-    evt.waitForAndGetElement(ELEMENT_TAG_POPUP_NAME_FIELD);
+    $(byXpath(ELEMENT_SIDEBAR_TAGCLOUD_POPUP_EDIT.replace("${name}", oldName))).click();
+    $(ELEMENT_TAG_POPUP_NAME_FIELD).waitUntil(Condition.visible,Configuration.timeout);
     info("Input new name of tag");
 
     ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].setAttribute('value', '"
         + newName + "')", evt.waitForAndGetElement(ELEMENT_TAG_POPUP_NAME_FIELD));
     info("Save all changes");
-    evt.clickByJavascript(ELEMENT_TAG_POPUP_SAVE);
+    $(ELEMENT_TAG_POPUP_SAVE).click();
     info("Verify that the new name of tag is changed");
-    evt.waitForAndGetElement(ELEMENT_SIDEBAR_TAGCLOUD_NAME.replace("${name}", newName));
+    $(byId("UITagExplorer")).find(byText(newName)).should(Condition.visible);
     info("the new name of tag is changed successfully");
-    evt.click(ELEMENT_TAGE_POPUP_CLOSE);
+    $(ELEMENT_TAGE_POPUP_CLOSE).click();
     info("The edit tag popup is closed");
   }
 
@@ -389,19 +389,19 @@ public class SiteExplorerHome {
    */
   public void deleteTag(String tag) {
     info("Click on Tag Cloud tab of SE");
-    evt.click(ELEMENT_SITEEXPLORER_TAG_CLOUD_TAB);
-    evt.waitForAndGetElement(ELEMENT_SIDEBAR_TAGCLOUD_NAME.replace("${name}", tag));
+    $(ELEMENT_SITEEXPLORER_TAG_CLOUD_TAB).click();
+    $(byId("UITagExplorer")).find(byText(tag)).should(Condition.visible);
     info("Click on Edit button of Tag Cloud");
-    evt.click(ELEMENT_SIDEBAR_TAGCLOUD_EDIT);
-    evt.waitForAndGetElement(ELEMENT_SIDEBAR_TAGCLOUD_POPUP_TITLE);
+    $(ELEMENT_SIDEBAR_TAGCLOUD_EDIT).click();
+    $(ELEMENT_SIDEBAR_TAGCLOUD_POPUP_TITLE).waitUntil(Condition.visible,Configuration.timeout);
     info("Click on Delete button of the old tag");
-    evt.click(ELEMENT_SIDEBAR_TAGCLOUD_POPUP_DELETE.replace("${name}", tag));
+    $(byXpath(ELEMENT_SIDEBAR_TAGCLOUD_POPUP_DELETE.replace("${name}", tag))).click();
     alert.acceptAlert();
     info("Verify that tag is delete");
-    evt.waitForElementNotPresent(ELEMENT_SIDEBAR_TAGCLOUD_NAME.replace("${name}", tag));
+    $(byId("UITagExplorer")).find(byText(tag)).should(Condition.not(Condition.visible));
     info("The tag is deleted successfully");
     info("Close the popup");
-    evt.click(ELEMENT_TAGE_POPUP_CLOSE);
+    $(ELEMENT_TAGE_POPUP_CLOSE).click();
 
   }
 
@@ -841,9 +841,9 @@ public class SiteExplorerHome {
    */
   public void addTranslation() {
     info("Click on Add Tranlation button");
-    if (evt.waitForAndGetElement(ELEMENT_ACTIONBAR_ADDTRANSLATION, 5000, 0) == null)
-      evt.click(ELEMENT_ACTIONBAR_MORE);
-    evt.click(ELEMENT_ACTIONBAR_ADDTRANSLATION);
+    if ($(ELEMENT_ACTIONBAR_ADDTRANSLATION).is(Condition.not(Condition.visible)))
+      $(ELEMENT_ACTIONBAR_MORE).click();
+    $(ELEMENT_ACTIONBAR_ADDTRANSLATION).click();
   }
 
   /**
@@ -851,9 +851,9 @@ public class SiteExplorerHome {
    */
   public void voteDocument() {
     info("Click to vote document");
-    if (evt.waitForAndGetElement(ELEMENT_ACTIONBAR_VOTE, 5000, 0) == null)
-      evt.click(ELEMENT_ACTIONBAR_MORE);
-    evt.click(ELEMENT_ACTIONBAR_VOTE);
+    if ($(ELEMENT_ACTIONBAR_VOTE).is(Condition.not(Condition.visible)))
+      $(ELEMENT_ACTIONBAR_MORE).click();
+    $(ELEMENT_ACTIONBAR_VOTE).click();
   }
 
   /**
@@ -864,19 +864,19 @@ public class SiteExplorerHome {
    */
   public void addDocumentTranslation(String path, String content) {
     addTranslation();
-    evt.waitForAndGetElement(ELEMENT_ADDTRANSLATION_SELECTDOC);
-    evt.click(ELEMENT_ADDTRANSLATION_SELECTDOC);
+    $(ELEMENT_ADDTRANSLATION_SELECTDOC).waitUntil(Condition.visible,Configuration.timeout).click();
 
     String[] arrayPath = path.split("/");
-    for (String arrayElement : arrayPath) {
-      evt.click(ELEMENT_SELECT_DOCUMENT_NODE_FOLDER.replace("${node}", arrayElement));
-    }
 
-    if (!content.isEmpty()) {
-      evt.waitForAndGetElement(ELEMENT_SELECT_DOCUMENT_NODE_FILE.replace("${content}", content));
-      evt.click(ELEMENT_SELECT_DOCUMENT_NODE_FILE.replace("${content}", content));
+    for (int i=0;i<=arrayPath.length-2;i++) {
+      if($(byXpath(ELEMENT_SELECT_DOCUMENT_NODE_FOLDER.replace("${node}", arrayPath[i+1]))).waitUntil(Condition.visible,2000)==null)
+      $(byXpath(ELEMENT_SELECT_DOCUMENT_NODE_FOLDER.replace("${node}", arrayPath[i]))).click();
     }
-    evt.click(ELEMENT_SAVE_BTN);
+    $(byXpath(ELEMENT_SELECT_DOCUMENT_NODE_FOLDER.replace("${node}", arrayPath[arrayPath.length-1]))).click();
+    if (!content.isEmpty()) {
+      $(byXpath(ELEMENT_SELECT_DOCUMENT_NODE_FILE.replace("${content}", content))).waitUntil(Condition.visible,Configuration.timeout).click();
+    }
+    $(ELEMENT_SAVE_BTN).click();
 
   }
 
@@ -956,19 +956,17 @@ public class SiteExplorerHome {
     info("Add/Edit a comment");
     if (isAdd == true) {
       info("Click on Add comment on action bar");
-      evt.click(ELEMENT_ACTIONBAR_ADDCOMMENT);
+      $(ELEMENT_ACTIONBAR_ADDCOMMENT).click();
     } else {
       info("Click on Edit comment button on action bar");
-      evt.click(ELEMENT_SITEEXPLORER_COMMENT_EDIT);
+      $(ELEMENT_SITEEXPLORER_COMMENT_EDIT).click();
     }
     info("Refresh the page");
-    this.testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+    refresh();
     info("Input a content to the frame");
-    evt.inputDataToCKEditor(ELEMENT_FILEFORM_BLANK_CONTENT, content);
-    info("Switch to parent window");
-    evt.switchToParentWindow();
+    $(byId("comment")).sendKeys(content);
     info("Click on Save button");
-    evt.click(ELEMENT_SITEEXPLORER_COMMENT_SAVE);
+    $(ELEMENT_SITEEXPLORER_COMMENT_SAVE).click();
     info("Finish adding/Editing the Comment");
   }
 
