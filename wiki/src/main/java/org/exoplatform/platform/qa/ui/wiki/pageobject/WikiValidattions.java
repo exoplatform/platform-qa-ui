@@ -373,14 +373,14 @@ public class WikiValidattions {
         evt.waitForAndGetElement(ELEMENT_EMAIL_LINK_EMAIL_FORMAT.replace("$email", address));
     }
 
-  /**
-   * The page's content is empty
-   */
-  public void verifyEmptyContentPage() {
-    info("Verify that the content page is empty");
-    $(ELEMENT_CONTENT_WIKI_PAGE_EMPTY).parent().waitUntil(Condition.visible,Configuration.timeout);
-    info("the page's content is empty");
-  }
+    /**
+     * The page's content is empty
+     */
+    public void verifyEmptyContentPage() {
+        info("Verify that the content page is empty");
+        $(ELEMENT_CONTENT_WIKI_PAGE_EMPTY).parent().waitUntil(Condition.visible,Configuration.timeout);
+        info("the page's content is empty");
+    }
 
     /**
      * Verify that the system redirects to the wiki page link that is inserted
@@ -552,20 +552,20 @@ public class WikiValidattions {
         }
     }
 
-  /**
-   * Verify breadcrumb path of a page
-   *
-   * @param locator1 String
-   * @param locator2 String
-   * @param page String
-   */
-  public void verifyBreadCrumbePath(String locator1, String locator2, String page) {
-    info("Verify that the page is at the path:" + locator1 + "->" + locator2 + "->" + page);
-   $(byXpath(ELEMENT_WIKI_HOME_BREADCRUMB_PATH.replace("$locator1", locator1)
-                                                              .replace("$locator2", locator2)
-                                                              .replace("$page", page))).waitUntil(Condition.visible,Configuration.timeout);
-    info("The page is at correct path");
-  }
+    /**
+     * Verify breadcrumb path of a page
+     *
+     * @param locator1 String
+     * @param locator2 String
+     * @param page String
+     */
+    public void verifyBreadCrumbePath(String locator1, String locator2, String page) {
+        info("Verify that the page is at the path:" + locator1 + "->" + locator2 + "->" + page);
+        $(byXpath(ELEMENT_WIKI_HOME_BREADCRUMB_PATH.replace("$locator1", locator1)
+                .replace("$locator2", locator2)
+                .replace("$page", page))).waitUntil(Condition.visible,Configuration.timeout);
+        info("The page is at correct path");
+    }
 
     /**
      * Verify breadcrumb path of a page
@@ -674,16 +674,16 @@ public class WikiValidattions {
     public void VerifyAttachFilesAreDisplayedInAttachListOrNot(String fileName, boolean display) {
         info("Verify attach files are displayed in attach list");
 
-    if (display) {
-      if ($(byXpath(ELEMENT_PAGE_ATTACHFILE_1.replace("${fileName}", fileName))).is(Condition.visible));
-        $(byXpath(ELEMENT_PAGE_ATTACHFILE_2.replace("${fileName}", fileName))).is(Condition.visible);
-      info("Attach files are dilsplayed in attach list");
-    } else {
-      if ($(byXpath(ELEMENT_PAGE_ATTACHFILE_1.replace("${fileName}", fileName))).waitUntil(Condition.not(Condition.visible),Configuration.timeout) != null)
-        $(byXpath(ELEMENT_PAGE_ATTACHFILE_2.replace("${fileName}", fileName))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
-      info("Attach files are not displayed in attach list");
+        if (display) {
+            if ($(byXpath(ELEMENT_PAGE_ATTACHFILE_1.replace("${fileName}", fileName))).is(Condition.visible));
+            $(byXpath(ELEMENT_PAGE_ATTACHFILE_2.replace("${fileName}", fileName))).is(Condition.visible);
+            info("Attach files are dilsplayed in attach list");
+        } else {
+            if ($(byXpath(ELEMENT_PAGE_ATTACHFILE_1.replace("${fileName}", fileName))).waitUntil(Condition.not(Condition.visible),Configuration.timeout) != null)
+                $(byXpath(ELEMENT_PAGE_ATTACHFILE_2.replace("${fileName}", fileName))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+            info("Attach files are not displayed in attach list");
+        }
     }
-  }
 
     /**
      * Verify the page is created and shown in the list
