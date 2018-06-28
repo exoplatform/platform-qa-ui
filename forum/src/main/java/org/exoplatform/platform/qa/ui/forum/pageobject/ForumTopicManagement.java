@@ -503,11 +503,12 @@ public class ForumTopicManagement {
     $(byXpath("/html/body")).sendKeys(message);
     switchTo().defaultContent();
     info("click on Attached file button");
-    $(ELEMENT_START_TOPIC_ATTACH_FILE).click();
+    if(fileName[0]!=""){
     for (int i=0;i<=fileName.length-1;i++){
+      $(ELEMENT_START_TOPIC_ATTACH_FILE).click();
       $(By.className("file")).uploadFromClasspath(fileName[i]);
-    }
-    $(ELEMENT_SAVE_BTN).click();
+      $(ELEMENT_SAVE_BTN).click();
+    }}
     $(ELEMENT_SUBMIT_BUTTON).click();
     $(ELEMENT_SUBMIT_BUTTON).waitUntil(Condition.disappear, Configuration.timeout);
     info("Verify that the topic is created");
