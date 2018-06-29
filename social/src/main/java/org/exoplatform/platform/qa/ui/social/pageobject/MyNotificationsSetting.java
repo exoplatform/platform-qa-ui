@@ -291,8 +291,8 @@ public class MyNotificationsSetting {
       case NewUser_intranet:
         info("Click on Edit button");
         $(ELEMENT_EDIT_NEWUSER_ICON).click();
-        if($(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX).is(not(Condition.checked)))
-          $(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX).parent().click();
+        if($(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX).is(Condition.not(Condition.checked)))
+        $(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX).parent().click();
         info("Click on Save button");
         $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).click();
         $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).waitUntil(not(Condition.visible),Configuration.timeout);
@@ -436,11 +436,11 @@ public class MyNotificationsSetting {
         break;
       case AS_Mention_intranet:
         $(ELEMENT_EDIT_MENTION_ICON).click();
-        if($(ELEMENT_EDIT_MENTION_WEB_CHECKBOX).is(not(Condition.checked)))
-          $(ELEMENT_EDIT_MENTION_WEB_CHECKBOX).parent().click();
+       if($(ELEMENT_EDIT_MENTION_WEB_CHECKBOX).is(Condition.not(Condition.checked)))
+         $(ELEMENT_EDIT_MENTION_WEB_CHECKBOX).parent().click();
         info("Click on Save button");
         $(ELEMENT_EDIT_MENTION_SAVE_BTN).click();
-        $(ELEMENT_EDIT_MENTION_SAVE_BTN).waitUntil(not(Condition.visible),Configuration.timeout);
+        $(ELEMENT_EDIT_MENTION_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
         info("Verify that email notification is shown");
         $(ELEMENT_MENTION_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);
         break;

@@ -242,9 +242,12 @@ public class ConnectionsManagement {
     }
     $(ELEMENT_ACCOUNT_NAME_LINK).click();
     $(ELEMENT_SEARCH_BUTTON).pressEnter();
-    refresh();
     $(ELEMENT_SEARCH_BUTTON).click();
-    refresh();
+    try {
+      homePagePlatform.refreshUntil($(byClassName("spaceBox")),Condition.visible,1000);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     if (directory != "" && directory != null)
       $(byLinkText(directory)).click();
   }

@@ -784,8 +784,6 @@ public class ActivityStream {
     $(byXpath("/html/body")).pressEnter();
     $(byXpath("/html/body")).sendKeys(textContent);
     switchTo().defaultContent();
-    // executeJavaScript("CKEDITOR.instances.CommentTextarea" + id +
-    // ".insertText(\"" +"@"+username+ "\")", "");
     // click on the button comment
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(textContent)).should(Condition.exist);

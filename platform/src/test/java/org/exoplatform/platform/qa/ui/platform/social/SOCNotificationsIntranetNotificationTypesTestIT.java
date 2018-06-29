@@ -1204,7 +1204,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.Space_Post_intranet);
 
     info("Add new space and ivite user");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.inviteUser(username2, false, "");
@@ -1358,7 +1358,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.Space_Invitation_Intranet);
 
     info("Add new space and ivite an user");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.inviteUser(username2, false, "");
@@ -1495,7 +1495,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.Space_Join_Req_intranet);
 
     info("Add a new space");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
 
     info("user requests to join space");
@@ -1871,7 +1871,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
 
     info("Add new space and ivite an user");
     manageLogInOut.signIn(username1, password);
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.inviteUser(username2, false, "");
@@ -3382,7 +3382,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
     addUsers.deleteUser(username3);
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
 
   }

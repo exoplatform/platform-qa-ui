@@ -14,6 +14,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -107,6 +108,7 @@ public class SOCHomePageTestIT extends Base {
     String text = "text" + getRandomNumber();
     homePagePlatform.goToHomePage();
     activityStream.mentionUserActivity(DATA_USER2, text);
+    $(byText(text)).parent().shouldHave(Condition.text(PLFData.DATA_NAME_USER2+" "+text));
     $(byText(text)).parent().parent().find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
     $(byText(text)).parent().parent().find(ELEMENT_ICON_DELETE_ACTIVITY).click();
     $(ELEMENT_DELETE_POPUP_OK).click();
@@ -240,24 +242,26 @@ public class SOCHomePageTestIT extends Base {
   public void test09_LoadPreviousActivityPageAutomatically() {
     info("Test 9: Load previous activity page automatically");
     String textDesfirst = "textDesfirst" + getRandomNumber();
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@test.com";
+    String password="123456";
+    info("Add new user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+    manageLogInOut.signIn(username1,password);
     activityStream.addActivity(textDesfirst, "");
     refresh();
     for (int i = 0; i <= 15; i++) {
       String act = "act" + getRandomNumber();
       activityStream.addActivity(act, "");
     }
+    refresh();
     executeJavaScript("window.scrollBy(0,5500)", "");
     homePagePlatform.loadMoreActivities();
     $(byText(textDesfirst)).should(Condition.exist);
-    executeJavaScript("window.scrollBy(0,-5500)", "");
-    for (int i = 0; i <= 16; i++) {
-      if ($(byClassName(ELEMENT_DATE_ACTIVITY)).is(Condition.exist)) {
-        $(byClassName("author")).click();
-        $(byClassName("author")).parent().find(ELEMENT_ICON_DELETE_ACTIVITY).click();
-        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.timeout).click();
-        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappear, Configuration.timeout);
-      }
-    }
+    manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
   }
 
   /**
@@ -517,6 +521,7 @@ public class SOCHomePageTestIT extends Base {
     executeJavaScript("window.scrollBy(0,-1500)", "");
     activityStream.commentActivity(name, text1);
     refresh();
+    executeJavaScript("window.scrollBy(0,-1500)", "");
     info("Verify that only second last and last comment are shown");
     $(byText(name)).parent().parent().parent().parent().parent().parent().parent().find(byText(text)).should(Condition.exist);
     $(byText(name)).parent().parent().parent().parent().parent().parent().parent().find(byText(text1)).should(Condition.exist);
@@ -537,6 +542,7 @@ public class SOCHomePageTestIT extends Base {
     assertEquals(13, $(byId(ELEMENT_LIST_ALL_COMMENNTS.replace("{id}", id))).findAll(byClassName("commentItem")).size());
     executeJavaScript("window.scrollBy(0,-1500)", "");
     activityStream.deleteactivity(name);
+    refresh();
 
   }
 
@@ -555,6 +561,7 @@ public class SOCHomePageTestIT extends Base {
     homePagePlatform.goToHomePage();
     activityStream.addActivity(name, null);
     activityStream.addCommentWithMentionUser(name, DATA_USER2, text);
+    $(byText(text)).parent().shouldHave(Condition.text(PLFData.DATA_NAME_USER2+" "+text));
     executeJavaScript("window.scrollBy(0,-1500)", "");
     activityStream.deleteactivity(name);
   }
@@ -632,6 +639,7 @@ public class SOCHomePageTestIT extends Base {
    * activity stream - A comment is added: Avatar has been updated.
    */
   @Test
+  @BugInPLF("SOC-6055")
   public void test24_UpdateProfileChangeOfAvatar() {
     info("Test 24: Update Profile - change of avatar");
     String comment = "Avatar has been updated.";
@@ -719,7 +727,7 @@ public class SOCHomePageTestIT extends Base {
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToAddNewContent();
     info("Create new file document");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(name3, content3);
     homePagePlatform.goToHomePage();
     ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_BOX_ACTIVITY).get(0).find(byText(content3)).should(Condition.exist);
