@@ -328,7 +328,6 @@ public class WikiBasicActionDeleteTestIT extends Base {
         info("The draft version become the published version");
         wikiHomePage.goToMyDraft();
         wikiValidattions.verifyNotTitleDrafPage(title);
-        wikiDraftPage.deleteDraft(title);
     }
 
     /**
