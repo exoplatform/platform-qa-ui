@@ -32,140 +32,140 @@ import com.codeborne.selenide.SelenideElement;
 public final class NavigationToolBarLocator {
   // Tool bar
   public static final By              ELEMENT_TOOLBAR_ADMINISTRATION                      =
-                                                                     By.xpath(".//*[@id='UISetupPlatformToolBarPortlet']//i");
+          By.xpath(".//*[@id='UISetupPlatformToolBarPortlet']//i");
 
   public static final By              ELEMENT_TOOLBAR_THEMELIGHT                          =
-                                                                 By.xpath("//*[@class='UIContainer UIToolbarContainer UIToolbarContainerLight']");
+          By.xpath("//*[@class='UIContainer UIToolbarContainer UIToolbarContainerLight']");
 
   public static final By              ELEMENT_UPLOAD_FILE_FRAME_XPATH                     =
-                                                                      By.xpath("//iframe[contains(@id,'uploadFrame')]");
+          By.xpath("//iframe[contains(@id,'uploadFrame')]");
 
   public static final By              ELEMENT_HELP_TOOLBAR                                = By.className("uiIconPLF24x24Help");
 
   public static final By              ELEMENT_TOOLBAR_NOTIFICATION_LIST                   =
-                                                                        By.xpath(".//*[@id='UINotificationPopoverToolbarPortlet']//*[contains(@class,'uiIconPLF24x24Bell')]");
+          By.xpath(".//*[@id='UINotificationPopoverToolbarPortlet']//*[contains(@class,'uiIconPLF24x24Bell')]");
 
   public static final String          ELEMENT_TOOLBAR_NOTIFICATION_NUMEBER                =
-                                                                           ".//*[contains(@class,'badgeNotification')][contains(text(),'${num}')]";
+          ".//*[contains(@class,'badgeNotification')][contains(text(),'${num}')]";
 
   // Notificaiton list
   public static final By              ELEMENT_NOTIFICATION_DROPDOWN                       = By.cssSelector("#NotificationPopup");
 
   public static final String          ELEMENT_NOTIFICATION_LIST_COMMENT_ACTIVITY          =
-                                                                                 ".//*[@id='NotificationPopup']//*[contains(@class,'user-name')][contains(text(),'${user}')]/../..//*[contains(.,'${des}')]/..//*[contains(.,'${act}')]";
+          ".//*[@id='NotificationPopup']//*[contains(@class,'user-name')][contains(text(),'${user}')]/../..//*[contains(.,'${des}')]/..//*[contains(.,'${act}')]";
 
   public static final String          ELEMENT_NOTIFICATION_LIST_CONNECT_USER              =
-                                                                             ".//*[@id='NotificationPopup']//*[contains(@class,'user-name')][contains(text(),'${user}')]/../..//*[contains(.,' ${des}')]";
+          ".//*[@id='NotificationPopup']//*[contains(@class,'user-name')][contains(text(),'${user}')]/../..//*[contains(.,' ${des}')]";
 
   public static final By              ELEMENT_NOTIFICATION_LIST_CONNECT_USER_STATUS       =
-                                                                                    By.xpath(".//*[@id='NotificationPopup']//*[contains(text(),'Accept')]/../../..//*[contains(@class,'status')]");
+          By.xpath(".//*[@id='NotificationPopup']//*[contains(text(),'Accept')]/../../..//*[contains(@class,'status')]");
 
   public static final String          ELEMENT_NOTIFICATION_LIST_INVITATION_SPACE_STATUS   =
-                                                                                        ".//*[@id='NotificationPopup']//*[contains(@class,'text-bold')][contains(text(),'${space}')]/..";
+          ".//*[@id='NotificationPopup']//*[contains(@class,'text-bold')][contains(text(),'${space}')]/..";
 
   public static final String          ELEMENT_NOTIFICATION_LIST_USER                      =
-                                                                     "//*[@id='NotificationPopup']/../..//*[contains(@class,'user-name text-bold')][contains(text(),'${user}')]/..";
+          "//*[@id='NotificationPopup']/../..//*[contains(@class,'user-name text-bold')][contains(text(),'${user}')]/..";
 
   public static final By              ELEMENT_NOTIFICATION_REMOVE_ICON                    =
-                                                                       By.xpath(".//*[@id='NotificationPopup']//i[contains(@class,'uiIconClose uiIconLightGray')]");
+          By.xpath(".//*[@id='NotificationPopup']//i[contains(@class,'uiIconClose uiIconLightGray')]");
 
   public static final By              ELEMENT_INTRANET_NOTIFICATION_BELL                  =
-                                                                         By.xpath("//*[@class='uiIconPLF24x24Bell']");
+          By.xpath("//*[@class='uiIconPLF24x24Bell']");
 
   public static final By              ELEMENT_INTRANET_NOTIFICATION_NEAR_USER_AVATAR      =
-                                                                                     By.xpath(".//*[contains(@class,'NotificationPopoverPortletTDContainer')]/..//following-sibling::*//img[@alt='avatar']");
+          By.xpath(".//*[contains(@class,'NotificationPopoverPortletTDContainer')]/..//following-sibling::*//img[@alt='avatar']");
 
   public static final By              ELEMENT_POSITION_OF_INTRANET_NOTIFICATION           =
-                                                                                By.xpath("//*[@class='UITableColumnContainer']//*[@class='UserInfoPortletTDContainer pull-left']/../*[@class='NotificationPopoverPortletTDContainer pull-left']");
+          By.xpath("//*[@class='UITableColumnContainer']//*[@class='UserInfoPortletTDContainer pull-left']/../*[@class='NotificationPopoverPortletTDContainer pull-left']");
 
   public static final By              ELEMENT_DOC_EXO_OF_HOME_GETTING_STARTED             =
-                                                                              By.xpath(".//*[@id='newBreadcrumbs']//*[contains(text(),'Getting Started')]");
+          By.xpath(".//*[@id='newBreadcrumbs']//*[contains(text(),'Getting Started')]");
 
   // Intranet notification
   public static final String          ELEMENT_BADGE_NUMBER_DISPLAY                        =
-                                                                   "//*[contains(@class,'badgeDefault') and @style='display: inline;' and text()='${number}']";
+          "//*[contains(@class,'badgeDefault') and @style='display: inline;' and text()='${number}']";
 
   public static final By              ELEMENT_BADGE_NUMBER_NOT_DISPLAY                    =
-                                                                       By.xpath("//*[contains(@class,'badgeDefault') and text()='0']");
+          By.xpath("//*[contains(@class,'badgeDefault') and text()='0']");
 
   public static final By              ELEMENT_BADGE_NUMBER                                =
-                                                           By.xpath("//*[@class='badgeDefault badgePrimary mini badgeNotification']");
+          By.xpath("//*[@class='badgeDefault badgePrimary mini badgeNotification']");
 
   public static final By              ELEMENT_NOTIFICATION_MARK_ALL_AS_READ_WITH_POSITION =
-                                                                                          By.xpath(".//*[@id='NotificationPopup']//*[contains(text(),'Mark all as read')]");
+          By.xpath(".//*[@id='NotificationPopup']//*[contains(text(),'Mark all as read')]");
 
   public static final By              ELEMENT_VIEW_ALL_BUTTON                             =
-                                                              By.xpath(".//*[@id='NotificationPopup']//a[text()='View All']");
+          By.xpath(".//*[@id='NotificationPopup']//a[text()='View All']");
 
   public static final By              ELEMENT_NO_NOTIFICATIONS                            =
-                                                               By.xpath(".//*[@id='NotificationPopup']//*[@class='no-items' and text()='No notifications']");
+          By.xpath(".//*[@id='NotificationPopup']//*[@class='no-items' and text()='No notifications']");
 
   public static final String          ELEMENT_CONNECT_NOTIFICATION_POSITION               =
-                                                                            "//li[${position}]//*[contains(@alt,'${fullName}')]/../..//*[contains(text(),'${fullName}')]/../..//*[contains(.,'wants to connect with you')]";
+          "//li[${position}]//*[contains(@alt,'${fullName}')]/../..//*[contains(text(),'${fullName}')]/../..//*[contains(.,'wants to connect with you')]";
 
   public static final String          ELEMENT_COMMENT_JUST_NOW_READ                       =
-                                                                    "//*[@class='read clearfix']//*[contains(@alt,'${userName}')]/../..//*[contains(.,'has commented on your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime' and contains(text(),'Just Now')]";
+          "//*[@class='read clearfix']//*[contains(@alt,'${userName}')]/../..//*[contains(.,'has commented on your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime' and contains(text(),'Just Now')]";
 
   public static final String          ELEMENT_COMMENT_POSITION_ONE_MINUTE_READ            =
-                                                                               "//*[contains(@alt,'${userName}')]/../..//*[contains(.,'has commented on your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime' and contains(text(),'${time} minute ago')]";
+          "//*[contains(@alt,'${userName}')]/../..//*[contains(.,'has commented on your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime' and contains(text(),'${time} minute ago')]";
 
   public static final String          ELEMENT_COMMENT_MARK_ALL_AS_READ                    =
-                                                                       "//*[@class='clearfix']//*[contains(@alt,'${userName}')]/../..//*[@class='status' and contains(.,'has commented on your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]";
+          "//*[@class='clearfix']//*[contains(@alt,'${userName}')]/../..//*[@class='status' and contains(.,'has commented on your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]";
 
   public static final String          ELEMENT_COMMENT_JUST_NOW_UNREAD                     =
-                                                                      "//*[@class='unread clearfix']//[contains(@alt,'${userName}')]/../..//*[@class='status' and contains(.,'has commented on your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime' and contains(text(),'Just Now')]";
+          "//*[@class='unread clearfix']//[contains(@alt,'${userName}')]/../..//*[@class='status' and contains(.,'has commented on your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime' and contains(text(),'Just Now')]";
 
   public static final String          ELEMENT_COMMENT_POSITION_ONE_MINUTE_UNREAD          =
-                                                                                 "//*[@class='unread clearfix']//*[contains(@alt,'${userName}')]/../..//*[contains(.,'has commented on your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime' and contains(text(),'${time} minute ago')]";
+          "//*[@class='unread clearfix']//*[contains(@alt,'${userName}')]/../..//*[contains(.,'has commented on your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime' and contains(text(),'${time} minute ago')]";
 
   public static final String          ELEMENT_LIKE_NOTIFICATION_JUST_NOW_READ             =
-                                                                              "//*[@class='read clearfix']//*[contains(@alt,'${userName}')]/../..//*[.contains(.,'likes your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime' and contains(text(),'Just Now')]";
+          "//*[@class='read clearfix']//*[contains(@alt,'${userName}')]/../..//*[.contains(.,'likes your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime' and contains(text(),'Just Now')]";
 
   public static final String          ELEMENT_LIKE_NOTIFICATION_ONE_MINUTE_READ           =
-                                                                                "//*[@class='read clearfix']//*[contains(@alt,'${userName}')]/../..//*[contains(.,'likes your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime' and contains(text(),'${time} minute ago')]";
+          "//*[@class='read clearfix']//*[contains(@alt,'${userName}')]/../..//*[contains(.,'likes your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime' and contains(text(),'${time} minute ago')]";
 
   public static final String          ELEMENT_LIKE_NOTIFICATION_MARK_ALL_AS_READ          =
-                                                                                 "//*[@class='clearfix']//*[contains(@alt,'${userName}')]/../..//*[contains(.,'likes your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]";
+          "//*[@class='clearfix']//*[contains(@alt,'${userName}')]/../..//*[contains(.,'likes your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]";
 
   public static final String          ELEMENT_LIKE_NOTIFICATION_JUST_NOW_UNREAD           =
-                                                                                "//*[@class='unread clearfix']//*[contains(@alt,'${userName}')]/../..//*[contains(.,'likes your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime' and contains(text(),'Just Now')]";
+          "//*[@class='unread clearfix']//*[contains(@alt,'${userName}')]/../..//*[contains(.,'likes your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime' and contains(text(),'Just Now')]";
 
   public static final String          ELEMENT_LIKE_NOTIFICATION_ONE_MINUTE_UNREAD         =
-                                                                                  "//*[@class='unread clearfix']//*[contains(@alt,'${userName}')]/../..//*[contains(.,'likes your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime' and contains(text(),'${time} minute ago')]";
+          "//*[@class='unread clearfix']//*[contains(@alt,'${userName}')]/../..//*[contains(.,'likes your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime' and contains(text(),'${time} minute ago')]";
 
   public static final String          ELEMENT_COMMENT_ONE_MINUTE_DELETE                   =
-                                                                        "//*[contains(@alt,'${userName}')]/../..//*[contains(.,'has commented on your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime' and contains(text(),'${time} minute ago')]/../../../..//*[@class='uiIconClose uiIconLightGray']";
+          "//*[contains(@alt,'${userName}')]/../..//*[contains(.,'has commented on your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime' and contains(text(),'${time} minute ago')]/../../../..//*[@class='uiIconClose uiIconLightGray']";
 
   public static final String          ELEMENT_COMMENT_JUST_NOW_DELETE                     =
-                                                                      "//*[contains(@alt,'${userName}')]/../..//*[contains(.,'has commented on your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime' and contains(text(),'Just Now')]/../../../..//*[@class='uiIconClose uiIconLightGray']";
+          "//*[contains(@alt,'${userName}')]/../..//*[contains(.,'has commented on your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime' and contains(text(),'Just Now')]/../../../..//*[@class='uiIconClose uiIconLightGray']";
 
   public static final String          ELEMENT_LIKE_NOTIFICATION_ONE_MINUTE_DELETE         =
-                                                                                  "//*[contains(@alt,'${userName}')]/../..//*[contains(.,'likes your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime' and contains(text(),'${time} minute ago')]/../../../..//*[@class='uiIconClose uiIconLightGray']";
+          "//*[contains(@alt,'${userName}')]/../..//*[contains(.,'likes your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime' and contains(text(),'${time} minute ago')]/../../../..//*[@class='uiIconClose uiIconLightGray']";
 
   public static final String          ELEMENT_LIKE_NOTIFICATION_JUST_NOW_DELETE           =
-                                                                                "//*[contains(@alt,'${userName}')]/../..//*[contains(.,'likes your activity.')]//[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime' and contains(text(),'Just Now')]/../../../..//*[@class='uiIconClose uiIconLightGray']";
+          "//*[contains(@alt,'${userName}')]/../..//*[contains(.,'likes your activity.')]//[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime' and contains(text(),'Just Now')]/../../../..//*[@class='uiIconClose uiIconLightGray']";
 
   public static final String          ELEMENT_LIKE_NOTIFICATION_DELETE                    =
-                                                                       "//*[contains(@alt,'${userName}')]/../..//*[contains(.,'likes your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime']/../../../..//*[@class='uiIconClose uiIconLightGray']";
+          "//*[contains(@alt,'${userName}')]/../..//*[contains(.,'likes your activity.')]//*[contains(text(), '${userName}')]/../..//*[contains(text(),'${activity}')]/..//*[@class='lastUpdatedTime']/../../../..//*[@class='uiIconClose uiIconLightGray']";
 
   public static final String          ELEMENT_CONNECT_NOTIFICATION_DELETE                 =
-                                                                          "//*[contains(@alt,'${fullName}')]/../..//*[ contains(text(),'${fullName}')]/../..//*[contains(.,'wants to connect with you')]/../../../..//*[@class='uiIconClose uiIconLightGray']";
+          "//*[contains(@alt,'${fullName}')]/../..//*[ contains(text(),'${fullName}')]/../..//*[contains(.,'wants to connect with you')]/../../../..//*[@class='uiIconClose uiIconLightGray']";
 
   public static final String          ELEMENT_NEW_USER_NOTIFICATION_DELETE                =
-                                                                           "//*[contains(@alt,'${userName}')]/../..//*[contains(text(),'${userName}')]/../..//*[contains(.,'has joined eXo')]/../../../..//*[@class='uiIconClose uiIconLightGray']";
+          "//*[contains(@alt,'${userName}')]/../..//*[contains(text(),'${userName}')]/../..//*[contains(.,'has joined eXo')]/../../../..//*[@class='uiIconClose uiIconLightGray']";
 
   public static final By              ELEMENT_ACTIVITY_UPLOAD_POPUP_UPLOAD_BUTTON         = By.xpath(".//input[@type='file']");
 
   // administration Menu
   // users
   public static final By              ELEMENT_ADMINISTRATION_USERS                        =
-                                                                   By.xpath("//*[contains(@href,'g/:platform:administrators/administration/newStaff') and text()='Community']");
+          By.xpath("//*[contains(@href,'g/:platform:administrators/administration/newStaff') and text()='Community']");
 
   public static final By              ELEMENT_ADMINISTRATION_PORTAL_ADD_USERS             =
-                                                                              By.xpath("//*[contains(@href,'g/:platform:administrators/administration/newStaff') and text()='Add Users']");
+          By.xpath("//*[contains(@href,'g/:platform:administrators/administration/newStaff') and text()='Add Users']");
 
   public static final By              ELEMENT_GROUP_AND_ROLE_LINK                         =
-                                                                  By.xpath(".//*[@id='UISetupPlatformToolBarPortlet']//a[contains(@href,'management')]");
+          By.xpath(".//*[@id='UISetupPlatformToolBarPortlet']//a[contains(@href,'management')]");
 
   // administration-->Portal
   public static final By              ELEMENT_ADMINISTRATION_PORTAL                       = By.xpath("//*[text()='Portal']");
@@ -175,7 +175,7 @@ public final class NavigationToolBarLocator {
   public static final By              ELEMENT_ADMINISTRATION_PORTAL_PAGES                 = By.xpath("//*[text()='Pages']");
 
   public static final By              ELEMENT_ADMINISTRATION_PORTAL_EMAIL_NOTIFICATIONS   =
-                                                                                        By.xpath(".//*[contains(@id,'UISetupPlatformToolBarPortlet')]//*[contains(@href,'notification')]");
+          By.xpath(".//*[contains(@id,'UISetupPlatformToolBarPortlet')]//*[contains(@href,'notification')]");
 
   public static final By              ELEMENT_ADMINISTRATION_PORTAL_BRANDING              = By.xpath("//*[text()='Branding']");
 
@@ -185,211 +185,217 @@ public final class NavigationToolBarLocator {
 
   // Administation-->Content
   public static final SelenideElement ELEMENT_LINK_CONTENT_ADMIN                          =
-                                                                 $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[3]/ul/li[2]/a"));
+          $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[3]/ul/li[2]/a"));
 
   public static final By              ELEMENT_MENU_CONTENT_LINK                           =
-                                                                By.xpath("//li[@class='dropdown-submenu']/a[text()='Content']");
+          By.xpath("//li[@class='dropdown-submenu']/a[text()='Content']");
 
   public static final By              ELEMENT_MENU_SITE_EXPLORER                          = By.linkText("Sites Explorer");
 
   public static final By              ELEMENT_SITE_EXPLORER_HOME                          = By.className("uiIconEcmsHome");
 
   public static final By              ELEMENT_NEW_FOLDER_LINK                             =
-                                                              By.xpath("//*[@class='actionIcon']//*[contains(@class, 'uiIconEcmsAddFolder')]");
+          By.xpath("//*[@class='actionIcon']//*[contains(@class, 'uiIconEcmsAddFolder')]");
 
   public static final By              ELEMENT_SEARCH_LINK                                 =
-                                                          By.xpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[3]/ul/li[3]/a");
+          By.xpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[3]/ul/li[3]/a");
 
   // administration panel
   public static final By              ELEMENT_TOPBAR_ADMINISTRATION_BUTTON                =
-                                                                           By.xpath("//*[@class='uiIconPLF24x24Setup']");
+          By.xpath("//*[@class='uiIconPLF24x24Setup']");
 
   public static final By              ELEMENT_TOPBAR_CONTENT                              =
-                                                             By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[contains(text(),'Content')]");
+          By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[contains(text(),'Content')]");
 
   public static final By              ELEMENT_CONTENT_TOPBAR_ADMINISTRATION               =
-                                                                            By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[contains(text(),'Content administration')]");
+          By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[contains(text(),'Content administration')]");
 
   // Setup icon
   public static final By              ELEMENT_LINK_SETUP                                  =
-                                                         By.xpath(".//*[@id='UISetupPlatformToolBarPortlet']//*[@class='uiIconPLF24x24Setup']");
+          By.xpath(".//*[@id='UISetupPlatformToolBarPortlet']//*[@class='uiIconPLF24x24Setup']");
 
   public static final By              ELEENT_LINK_APPLICATION                             =
-                                                              By.xpath("//*[contains(@href,'/portal/g/:platform:administrators/administration/registry')]");
+          By.xpath("//*[contains(@href,'/portal/g/:platform:administrators/administration/registry')]");
 
   // Edit menu
   public static final By              ELEMENT_LINK_EDIT                                   =
-                                                        By.xpath("//*[@class='uiIconPLF24x24Edit']");
+          By.xpath("//*[@class='uiIconPLF24x24Edit']");
 
   public static final By              ELEMENT_MENU_PAGE_LINK                              =
-                                                             By.xpath("//*[@tabindex='-1' and contains(text(),'Page')]");
+          By.xpath("//*[@tabindex='-1' and contains(text(),'Page')]");
 
   public static final By              ELEMENT_MENU_SITE_LINK                              =
-                                                             By.xpath("//*[@tabindex='-1' and contains(text(),'Site')]");
+          By.xpath("//*[@tabindex='-1' and contains(text(),'Site')]");
 
   public static final By              ELEMENT_MENU_EDIT_LAYOUT                            =
-                                                               By.xpath("//*[contains(text(),'Edit Layout')]");
+          By.xpath("//*[contains(text(),'Edit Layout')]");
 
   public static final By              ELEMENT_MENU_LAYOUT                                 =
-                                                          By.xpath("//*[@tabindex='-1' and contains(text(),'Site')]/..//*[contains(text(),'Layout')]");
+          By.xpath("//*[@tabindex='-1' and contains(text(),'Site')]/..//*[contains(text(),'Layout')]");
+
+  public static final By              ELEMENT_INTRANET_CHAT                          =
+          By.xpath("//*[@id=\"chatApplicationNotification\"]/div[1]/ul/li[6]/a");
+  public static final By             ELEMENT_NOTIF_CHAT   =
+          By.xpath( "//*[@id=\"chatApplicationNotification\"]/div[1]/a/div");
+
 
   public static final By              ELEMENT_MENU_SEO_LINK                               =
-                                                            By.xpath("//span[contains(text(), 'SEO')]");
+          By.xpath("//span[contains(text(), 'SEO')]");
 
   public static final By              ELEMENT_MENU_ADD_PAGE_LINK                          =
-                                                                 By.xpath("//*[contains(text(), 'Add Page')]");
+          By.xpath("//*[contains(text(), 'Add Page')]");
 
   public static final By              ELEMENT_EDIT_PAGE                                   =
-                                                        By.xpath("//*[@id='UIAdminToolbarContainer']//*[@class='dropdown-submenu']//*[@href='#' and contains(text(), 'Page')]");
+          By.xpath("//*[@id='UIAdminToolbarContainer']//*[@class='dropdown-submenu']//*[@href='#' and contains(text(), 'Page')]");
 
   public static final By              ELEMENT_EDIT_PAGE_SEO                               =
-                                                            By.xpath("//*[@data-original-title = 'SEO Management']");
+          By.xpath("//*[@data-original-title = 'SEO Management']");
 
   public static final By              ELEMENT_EDIT_CONTENT                                =
-                                                           By.xpath("//*[@class='quickEditUnchecked']");
+          By.xpath("//*[@class='quickEditUnchecked']");
 
   public static final By              ELEMENT_EDIT_CONTENT_CHECK                          =
-                                                                 By.xpath("//*[@class='quickEditChecked']");
+          By.xpath("//*[@class='quickEditChecked']");
 
   // Edit->site
   public static final By              ELEMENT_MENU_EDIT_SITES                             =
-                                                              By.xpath("//*[contains(@href,'#')][contains(text(),'Site')]");
+          By.xpath("//*[contains(@href,'#')][contains(text(),'Site')]");
 
   public static final By              ELEMENT_MENU_EDIT_SITES_NAV                         =
-                                                                  By.xpath("//*[@id='UIAdminToolbarContainer']//a[contains(text(),'Navigation')]");
+          By.xpath("//*[@id='UIAdminToolbarContainer']//a[contains(text(),'Navigation')]");
 
   public static final By              ELEMENT_MENU_EDIT_SITE_LAYOUT                       =
-                                                                    By.xpath(".//*[contains(@href,'#')][contains(text(),'Site')]/..//*[contains(text(),'Layout')]");
+          By.xpath(".//*[contains(@href,'#')][contains(text(),'Site')]/..//*[contains(text(),'Layout')]");
 
   public static final By              ELEMENT_MENU_EDIT_ADDSITE                           = By.linkText("Add Site");
 
   public static final By              ELEMENT_MENU_EDIT_CONTENT_TEXT                      = By.linkText("Content");
 
   public static final By              ELEMENT_NAVIGATION_MANAGE_POPUP                     =
-                                                                      By.xpath(".//*[@id='UINavigationManagement']");
+          By.xpath(".//*[@id='UINavigationManagement']");
 
   public static final By              ELEMENT_ADDSITE_MANAGE_POPUP                        =
-                                                                   By.xpath(".//*[@id='UIMaskWorkspace']//*[contains(@class,'MaskContainer')]");
+          By.xpath(".//*[@id='UIMaskWorkspace']//*[contains(@class,'MaskContainer')]");
 
   // User Menu
   public static final By              ELEMENT_MY_PROFILE_LINK                             =
-                                                              By.xpath("//i[@class='uiIconPLFProfile']/..");
+          By.xpath("//i[@class='uiIconPLFProfile']/..");
 
   public static final By              ELEMENT_MY_DASHBOARD_LINK                           =
-                                                                By.xpath("//i[@class='uiIconPLFDashboard']/..");
+          By.xpath("//i[@class='uiIconPLFDashboard']/..");
 
   public static final By              ELEMENT_MY_SETTINGS_LINK                            = By.className("uiIconSetting");
 
   public static final By              ELEMENT_MY_CONNECTION_LINK                          = By.className("uiIconPLFMyConnection");
 
   public static final By              ELEMENT_ACTIVITIES_LINK                             =
-                                                              By.className("uiIconPLFActivityStream");
+          By.className("uiIconPLFActivityStream");
 
   public static final By              ELEMENT_TOPBAR_AVATAR                               = By.xpath("//*[@alt='avatar']");
 
   public static final By              ELEMENT_AVATAR_CHANGELANGUAGE                       = By.xpath("//*[@class='uiIconFlags']");
 
   public static final By              ELEMENT_MY_WIKI_LINK                                =
-                                                           By.xpath("//i[@class='uiIconWikiMyWiki']/..");
+          By.xpath("//i[@class='uiIconWikiMyWiki']/..");
 
   public static final By              ELEMENT_MY_NOTIFICATIONS_LINK                       =
-                                                                    By.className("uiIconPLFNotifications");
+          By.className("uiIconPLFNotifications");
 
   public static final By              ELEMENT_ACTIVITIES_PORTLET                          = By.id("UIUserActivityStreamPortlet");
 
   // administration-->Application
   public static final By              ELEMENT_ADMINISTRATION_APPLICATION                  =
-                                                                         By.xpath(".//*[text()='Applications']");
+          By.xpath(".//*[text()='Applications']");
 
   public static final By              ELEMENT_ADD_TOOTLBAR                                =
-                                                           By.xpath("//*[@id='UICreatePlatformToolBarPortlet']//*[@class='uiIconPLF24x24Add']");
+          By.xpath("//*[@id='UICreatePlatformToolBarPortlet']//*[@class='uiIconPLF24x24Add']");
 
   public static final By              ELEMENT_ADD_WIKI_TOOLBAR                            =
-                                                               By.xpath("//*[@id='UICreateList']//*[@class='uiIconWikiWiki']");
+          By.xpath("//*[@id='UICreateList']//*[@class='uiIconWikiWiki']");
 
   public static final By              ELEMENT_ADD_POOL_TOOLBAR                            =
-                                                               By.xpath("//*[@id='UICreateList']//*[@class='uiIconPoll']");
+          By.xpath("//*[@id='UICreateList']//*[@class='uiIconPoll']");
 
   public static final By              ELEMENT_ADD_TOPIC_TOOLBAR                           =
-                                                                By.xpath("//*[@id='UICreateList']//*[@class='uiIconUIForms']");
+          By.xpath("//*[@id='UICreateList']//*[@class='uiIconUIForms']");
 
   public static final By              ELEMENT_ADD_EVENT_CLASS_TOOLBAR                     =
-                                                                      By.xpath("//*[@id='UICreateList']//*[@class='uiIconPLFEventTask']");
+          By.xpath("//*[@id='UICreateList']//*[@class='uiIconPLFEventTask']");
 
   public static final SelenideElement ELEMENT_ADD_TASK_CLASS_TOOLBAR                      =
-                                                                     $(byXpath("//*[@id=\"UICreateList\"]/li[1]/a"));
+          $(byXpath("//*[@id=\"UICreateList\"]/li[1]/a"));
 
   public static final By              ELEMENT_UPLOAD_FILE_TOOLBAR                         =
-                                                                  By.xpath("//*[@id='UICreateList']//*[@class='uiIconUpload']");
+          By.xpath("//*[@id='UICreateList']//*[@class='uiIconUpload']");
 
   public static final By              ELEMENT_NEXT_BUTTON                                 =
-                                                          By.xpath("//*[@id='UICreateList']//*[contains(text(),'Next')]");
+          By.xpath("//*[@id='UICreateList']//*[contains(text(),'Next')]");
 
   public static final By              ELEMENT_SAVE_BUTTON                                 =
-                                                          By.xpath("//*[@id='UICreateList']//*[contains(text(),'Save')]");
+          By.xpath("//*[@id='UICreateList']//*[contains(text(),'Save')]");
 
   // add wiki from toolbar
   public static final By              ELEMENT_ADD_WIKI_SET_LOCATION                       =
-                                                                    By.xpath("//*[@id='uiWikiSpaceSwitcher_CreateWiki']//*[@id='DisplayModesDropDown']/div");
+          By.xpath("//*[@id='uiWikiSpaceSwitcher_CreateWiki']//*[@id='DisplayModesDropDown']/div");
 
   public static final String          ELEMENT_ADD_WIKI_CHOOSE_LOCATION                    =
-                                                                       "//*[@class='spaceChooserPopup']//*[contains(text(),'{$location}')]";
+          "//*[@class='spaceChooserPopup']//*[contains(text(),'{$location}')]";
 
   // add poll/topic
   public static final By              ELEMENT_ADD_POLL_SET_LOCATION                       =
-                                                                    By.xpath("//*[@id='ScrollSelectlocation']//*[@class='btn dropdown-toggle']");
+          By.xpath("//*[@id='ScrollSelectlocation']//*[@class='btn dropdown-toggle']");
 
   public static final SelenideElement ELEMENT_SELECT_FORUM_COMBOBOX                       = $(byId("uiForumFilterforumId"));
 
   public static final String          ELEMENT_SELECT_FORUM_NAME                           =
-                                                                ".//*[@id='uiForumFilterforumId']//*[contains(text(),'${forum}')]";
+          ".//*[@id='uiForumFilterforumId']//*[contains(text(),'${forum}')]";
 
   // event or task
   public static final By              ELEMENT_ADD_EVENT_RADIO_BUTTON                      =
-                                                                     By.xpath("//*[@id='QuickAddEventContainer']//*[@class='radio' and @value='Event']");
+          By.xpath("//*[@id='QuickAddEventContainer']//*[@class='radio' and @value='Event']");
 
   public static final By              ELEMENT_ADD_TASK_RADIO_BUTTON                       =
-                                                                    By.xpath("//*[@id='QuickAddEventContainer']//*[@class='radio' and @value='Task']");
+          By.xpath("//*[@id='QuickAddEventContainer']//*[@class='radio' and @value='Task']");
 
   public static final By              ELEMENT_ADD_TITLE                                   = By.id("Title");
 
   public static final String          ELEMENT_CHECK_NAME_UPLOADED_FILE                    =
-                                                                       "//*[@id='ListRecords']//*[contains(text(),'{$name}')]";
+          "//*[@id='ListRecords']//*[contains(text(),'{$name}')]";
 
   // Quick search
   public static final By              ELEMENT_TOOLBAR_QUICKSEARCH                         =
-                                                                  By.xpath("//*[@class='uiIconPLF24x24Search']");
+          By.xpath("//*[@class='uiIconPLF24x24Search']");
 
   // Notifications
   // Get the content of the first notification
   public static final String          ELEMENT_SPACE_DOCUMENTS_SHARED_NOTIFICATION         =
-                                                                                  "//*[@id='NotificationPopup']/li[4]/ul//*[contains(text(),'${author}')]"
-                                                                                      + "/../..//*[contains(text(),'has posted an activity in the')]/../..//*[contains(text(),'${spaceName}')]";
+          "//*[@id='NotificationPopup']/li[4]/ul//*[contains(text(),'${author}')]"
+                  + "/../..//*[contains(text(),'has posted an activity in the')]/../..//*[contains(text(),'${spaceName}')]";
 
   // toolbar--> upload file
   public static final By              ELEMENT_UPLOAD_FILE_TOOLBAR_PERSONNAL_DOCUMENTS     =
-                                                                                      By.xpath("//*[@id='ListRecords']//*[contains(text(),'Personal Documents')]");
+          By.xpath("//*[@id='ListRecords']//*[contains(text(),'Personal Documents')]");
 
   public static final By              ELEMENT_UPLOAD_FILE_GO_TO_UPLOAD                    =
-                                                                       By.xpath("//*[@id='UIDocumentSelector']//*[@class='UIDSUploadInput']");
+          By.xpath("//*[@id='UIDocumentSelector']//*[@class='UIDSUploadInput']");
 
   public static final SelenideElement ELEMENT_ADMINISTRATION_COMMUNITY                    =
-                                                                       $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/a"));
+          $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/a"));
 
   public static final SelenideElement ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY             =
-                                                                              $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/ul/li[2]/a"));
+          $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/ul/li[2]/a"));
 
   public static final SelenideElement ELEMENT_ADMINISTRATION_ADD_USERS                    =
-                                                                       $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/ul/li[1]/a"));
+          $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/ul/li[1]/a"));
 
   public static final SelenideElement ELEMENT_TASK_ADD_TITLE                              = $(byId("title"));
 
   public static final SelenideElement ELEMENT_TASK_BUTTON_ADD                             =
-                                                              $(byXpath("//*[@id=\"QuickAddTaskContainer\"]/div[2]/a[1]"));
+          $(byXpath("//*[@id=\"QuickAddTaskContainer\"]/div[2]/a[1]"));
 
   public static final SelenideElement ELEMENT_ALERT_EXIST_NOTIFICATION                    =
-                                                                       $(byXpath("//*[@id=\\\"UINotificationPopoverToolbarPortlet\\\"]/div[2]/a/i/span"));
-public static final By ELEMENT_BUTTON_ACCEPT_INVITATION_IN_NOTIFICATION=byClassName("action-item");
+          $(byXpath("//*[@id=\\\"UINotificationPopoverToolbarPortlet\\\"]/div[2]/a/i/span"));
+  public static final By ELEMENT_BUTTON_ACCEPT_INVITATION_IN_NOTIFICATION=byClassName("action-item");
   public static final By ELEMENT_BUTTON_CANCEL_INVITATION_IN_NOTIFICATION=byClassName("cancel-item");
 
 

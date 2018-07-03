@@ -24,6 +24,8 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_INTRANET_CHAT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_NOTIF_CHAT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_MANAGESITES_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_PAGE_CREATION_WIZARD;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -161,34 +163,34 @@ public class NavigationToolbar {
   public void selectALinkOfUserMenu(specifUserToolBar link) {
     openUserMenu();
     switch (link) {
-    case MY_PROFILE:
-      evt.click(ELEMENT_MY_PROFILE_LINK);
+      case MY_PROFILE:
+        evt.click(ELEMENT_MY_PROFILE_LINK);
 
-      evt.waitForAndGetElement(SocialLocator.ELEMENT_MY_PROFILE_TAB, 3000, 1);
-      break;
-    case MY_ACTIVITY:
-      info("Go to Activities of User");
-      $(ELEMENT_ACTIVITIES_LINK).waitUntil(Condition.appears, Configuration.timeout);
-      $(ELEMENT_ACTIVITIES_LINK).click();
-      $(ELEMENT_ACTIVITIES_PORTLET).waitUntil(Condition.appears, Configuration.timeout);
-      break;
-    case MY_CONNECTIONS:
-      evt.click(ELEMENT_MY_CONNECTION_LINK);
-      break;
-    case MY_WIKI:
-      $(ELEMENT_MY_WIKI_LINK).click();
-      break;
-    case MY_DASHBOARD:
-      evt.click(ELEMENT_MY_DASHBOARD_LINK);
-      break;
-    case MY_NOTIFICATION:
-      $(ELEMENT_MY_NOTIFICATIONS_LINK).click();
-      break;
-    case SETTINGS:
-      evt.click(ELEMENT_MY_SETTINGS_LINK);
-      break;
-    case CHANGE_LANGUAGE:
-      break;
+        evt.waitForAndGetElement(SocialLocator.ELEMENT_MY_PROFILE_TAB, 3000, 1);
+        break;
+      case MY_ACTIVITY:
+        info("Go to Activities of User");
+        $(ELEMENT_ACTIVITIES_LINK).waitUntil(Condition.appears, Configuration.timeout);
+        $(ELEMENT_ACTIVITIES_LINK).click();
+        $(ELEMENT_ACTIVITIES_PORTLET).waitUntil(Condition.appears, Configuration.timeout);
+        break;
+      case MY_CONNECTIONS:
+        evt.click(ELEMENT_MY_CONNECTION_LINK);
+        break;
+      case MY_WIKI:
+        $(ELEMENT_MY_WIKI_LINK).click();
+        break;
+      case MY_DASHBOARD:
+        evt.click(ELEMENT_MY_DASHBOARD_LINK);
+        break;
+      case MY_NOTIFICATION:
+        $(ELEMENT_MY_NOTIFICATIONS_LINK).click();
+        break;
+      case SETTINGS:
+        evt.click(ELEMENT_MY_SETTINGS_LINK);
+        break;
+      case CHANGE_LANGUAGE:
+        break;
 
     }
   }
@@ -457,7 +459,7 @@ public class NavigationToolbar {
     info(testBase.getAbsoluteFilePath(linkFile));
 
     ((JavascriptExecutor) testBase.getExoWebDriver()
-                                  .getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
+            .getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
 
     testBase.getExoWebDriver()
             .getWebDriver()
@@ -710,6 +712,12 @@ public class NavigationToolbar {
     } else {
       evt.waitForElementNotPresent(ELEMENT_MENU_LAYOUT);
     }
+  }
+
+  public void gotochatwindow() {
+    info("go to chat window");
+    $(ELEMENT_NOTIF_CHAT).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_INTRANET_CHAT).waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   /**
