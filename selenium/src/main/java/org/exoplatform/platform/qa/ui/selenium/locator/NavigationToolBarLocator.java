@@ -20,11 +20,10 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.locator;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 
 import com.codeborne.selenide.SelenideElement;
@@ -391,8 +390,9 @@ public final class NavigationToolBarLocator {
                                                                        $(byXpath("//*[@id=\\\"UINotificationPopoverToolbarPortlet\\\"]/div[2]/a/i/span"));
 public static final By ELEMENT_BUTTON_ACCEPT_INVITATION_IN_NOTIFICATION=byClassName("action-item");
   public static final By ELEMENT_BUTTON_CANCEL_INVITATION_IN_NOTIFICATION=byClassName("cancel-item");
-
-
+public static final SelenideElement ELEMENT_WEB_CONFERENCING_LINK=$(byAttribute("href","/portal/g/:platform:administrators/webconferencing"));
+public static final SelenideElement ELEMENT_WEB_CONFERENCING_PAGE=$(byId("webconferencingAdmin"));
+public static final SelenideElement ELEMENT_SLIDER_WEBCONFERENCING=$(byXpath("//*[@id=\"webconferencingAdmin\"]/div/table/tbody/tr[2]/td[3]/label/span"));
 }
 
 

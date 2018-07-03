@@ -99,7 +99,7 @@ public class ChatLocator {
 
   public static final SelenideElement ELEMENT_CHAT_RESULT_SEARCH_USER            =
                                                                       $(byAttribute("class",
-                                                                                    "selectize-dropdown multi plugin-remove_button"));
+                                                                                    "selectize-dropdown multi"));
 
   public static final SelenideElement ELEMENT_CHAT_MEETTING_ACTIONS              = $(byId("chat-msg-meeting-actions"));
 

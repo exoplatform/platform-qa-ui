@@ -43,7 +43,7 @@ public class ConnectionsManagement {
     switch (option) {
     case ALL:
       info("Go to all tab");
-      evt.click(ELEMENT_ALL_CONNECTIONS_TAB, 0, true);
+      $(ELEMENT_ALL_CONNECTIONS_TAB).click();
       break;
     case MYCONNECTION:
       info("Go to my connection tab");

@@ -20,6 +20,7 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.locator;
 
+import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
@@ -78,4 +79,6 @@ public class ConnectionsLocator {
                                                              $(byXpath("//*[@id=\"uiTableProfileUserSearchInput\"]/div[1]/div/div/div[1]/input"));
 
   public static final SelenideElement ELEMENT_CONTENT_PEOPLE                  = $(byXpath("//*[@id=\"UIAllPeople\"]/div[2]/div"));
+
+  public static final SelenideElement ELEMENT_POPOVER_USER=$(byId("tiptip_content"));
 }

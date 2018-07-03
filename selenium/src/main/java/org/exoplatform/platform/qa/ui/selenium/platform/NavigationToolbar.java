@@ -20,8 +20,7 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_MANAGESITES_TITLE;
@@ -558,6 +557,13 @@ public class NavigationToolbar {
     ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, 10000);
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
     ELEMENT_ADMINISTRATION_ADD_USERS.click();
+  }
+  public void goToWebConferencing(){
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, 10000);
+    ELEMENT_WEB_CONFERENCING_LINK.click();
+    ELEMENT_WEB_CONFERENCING_PAGE.waitUntil(Condition.visible,Configuration.timeout);
   }
 
   public void goToManageCommunity() {
