@@ -136,8 +136,7 @@ public class WikiLocators {
 
   // More menu
 
-  public static final SelenideElement ELEMENT_MORE_LINK                                          =
-                                                        $(byXpath("//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li[3]/div"));
+  public static  final By ELEMENT_MORE_LINK = By.xpath("//*[@id='UIWikiPageControlArea_PageToolBar']//div[contains(text(), 'More')]");
 
   public static final By              ELEMENT_DELETE_LINK                                        =
                                                           By.xpath(".//*[text()='Delete']");
@@ -714,6 +713,7 @@ public class WikiLocators {
 
   public static final String          ELEMENT_ADD_RELATED_POPUP_DROPDOWN_VALUE                   =
                                                                                ".//*[@id='uiSpaceSwitcher_UIWikiSelectPageForm']//*[contains(text(),'$space')]";
+
 
   // Space swithcher drop down
   public static final By              ELEMENT_SPACE_SWITHCHER_DROPDOWN_CLOSE                     =
@@ -1455,7 +1455,7 @@ public class WikiLocators {
                                                                  By.xpath(".//*[@id='UIWikiDeletePageConfirm']//button[text()='Cancel']");
 
   public static final SelenideElement ELEMENT_PAGE_INFO                                          =
-                                                        $(byXpath("//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li[3]/ul/li[6]/a[1]"));
+                                                        $(byClassName("uiIconPageInfo"));
 
   public static final String          ELEMENT_ALL_PAGE_TAB_PAGE_SELECTED                         =
                                                                          ".//*[@class='listTable']//*[contains(text(),'$title')]";

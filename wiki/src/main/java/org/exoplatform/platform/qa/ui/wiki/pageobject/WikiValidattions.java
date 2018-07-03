@@ -902,13 +902,13 @@ public class WikiValidattions {
    */
   public void verifyTablesPageInformation() {
     info("Verify sumary table");
-    evt.waitForAndGetElement(ELEMENT_PAGE_INFO_SUMMARY_TABLE);
+    $(ELEMENT_PAGE_INFO_SUMMARY_TABLE).waitUntil(Condition.visible,Configuration.timeout);
     info("Verify relate table");
-    evt.waitForAndGetElement(ELEMENT_PAGE_INFO_RELATED_TABLE);
+    $(ELEMENT_PAGE_INFO_RELATED_TABLE).waitUntil(Condition.visible,Configuration.timeout);;
     info("Verify hierachy table");
-    evt.waitForAndGetElement(ELEMENT_PAGE_INFO_HIERARCHY_TABLE);
+    $(ELEMENT_PAGE_INFO_HIERARCHY_TABLE).waitUntil(Condition.visible,Configuration.timeout);;
     info("Verify recent changes table");
-    evt.waitForAndGetElement(ELEMENT_PAGE_INFO_RECENT_CHANGES_TABLE);
+    $(ELEMENT_PAGE_INFO_RECENT_CHANGES_TABLE).waitUntil(Condition.visible,Configuration.timeout);;
   }
 
   /**
@@ -919,9 +919,7 @@ public class WikiValidattions {
    */
   public void verifyRelatedPage(String locator, String relatedPage) {
     info("Verify that related page is added to the related table");
-    evt.waitForAndGetElement(ELEMENT_PAGE_INFO_RELATED_TABLE_CONTENT.replace("${col1}", locator).replace("${col2}", relatedPage),
-                             2000,
-                             1);
+    $(byXpath(ELEMENT_PAGE_INFO_RELATED_TABLE_CONTENT.replace("${col1}", locator).replace("${col2}", relatedPage))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -932,7 +930,7 @@ public class WikiValidattions {
    */
   public void verifyNotPageInRelatedPageList(String page) {
     info("Verify that a page is not listed in related page list to select it");
-    evt.waitForElementNotPresent(ELEMENT_ADD_RELATED_POPUP_CONTENT.replace("${page}", page));
+    $(byXpath(ELEMENT_ADD_RELATED_POPUP_CONTENT.replace("${page}", page))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
@@ -942,7 +940,7 @@ public class WikiValidattions {
    */
   public void verifyNotPageInLeftRelatePageList(String page) {
     info("Verify that a page is not shown in left related page list");
-    evt.waitForElementNotPresent(ELEMENT_PAGE_INFO_RELATED_PAGE_LINK.replace("$page", page));
+    $(byXpath(ELEMENT_PAGE_INFO_RELATED_PAGE_LINK.replace("$page", page))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
@@ -952,7 +950,7 @@ public class WikiValidattions {
    */
   public void verifyPageInLeftRelatePageList(String page) {
     info("Verify that a page is shown in left related page list");
-    evt.waitForAndGetElement(ELEMENT_PAGE_INFO_RELATED_PAGE_LINK.replace("$page", page));
+    $(byXpath(ELEMENT_PAGE_INFO_RELATED_PAGE_LINK.replace("$page", page))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**

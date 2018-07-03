@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -37,18 +38,18 @@ public class WikiPageInformation {
    * @param location String
    * @param page String
    */
-  public void addRelations(String location, String page) {
+  public void addRelations(String location,String page){
     info("Click on Drop down");
     $(ELEMENT_ADD_RELATED_PAGE_POPUP_DROPDOWN).click();
-
-    if (!location.isEmpty()) {
+    if(!location.isEmpty()){
       info("Select a location");
-      $(byClassName("spaceChooserPopup")).find(byText(location)).click();
-
+      $(byXpath(ELEMENT_ADD_RELATED_POPUP_DROPDOWN_LOCATION
+              .replace("${location}",location))).click();
     }
-    if (!page.isEmpty()) {
+    if(!page.isEmpty()){
       info("Select a page in the list");
-      $(ELEMENT_ADD_RELATED_POPUP_CONTENT).click();
+      $(byXpath(ELEMENT_ADD_RELATED_POPUP_CONTENT
+              .replace("${page}",page))).click();
     }
     info("Save all changes");
     $(ELEMENT_ADD_RELATED_POPUP_SELECT_BTN).click();
@@ -83,10 +84,10 @@ public class WikiPageInformation {
    */
   public void deleteRelation(String relation) {
     info("Click on Delete button");
-    evt.waitForAndGetElement(ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN.replace("${name}", relation), 2000, 0);
-    evt.click(ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN.replace("${name}", relation));
+    $(byXpath(ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN.replace("${name}", relation))).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN.replace("${name}", relation)).click();
     alert.acceptAlert();
-    evt.waitForElementNotPresent(ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN.replace("${name}", relation));
+    $(byXpath(ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN.replace("${name}", relation))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     info("The relation is deleted");
   }
 
@@ -97,10 +98,10 @@ public class WikiPageInformation {
    */
   public void deleteRelationWithCancelDeleting(String relation) {
     info("Click on Delete button");
-    evt.waitForAndGetElement(ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN.replace("${name}", relation), 2000, 0);
-    evt.click(ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN.replace("${name}", relation));
+    $(byXpath(ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN.replace("${name}", relation))).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN.replace("${name}", relation))).waitUntil(Condition.visible,Configuration.timeout);
     alert.cancelAlert();
-    evt.waitForAndGetElement(ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN.replace("${name}", relation));
+    $(byXpath(ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN.replace("${name}", relation))).waitUntil(Condition.visible,Configuration.timeout);
     info("The relation isnot deleted");
   }
 
@@ -111,9 +112,10 @@ public class WikiPageInformation {
    */
   public void viewRelatedPageContent(String page) {
     info("Click on related page");
-    evt.click(ELEMENT_PAGE_INFO_RELATED_PAGE_LINK.replace("$page", page));
+    $(byXpath(ELEMENT_PAGE_INFO_RELATED_PAGE_LINK.replace("$page", page))).click();
     info("Verify that related page's content is shown");
-    evt.waitForAndGetElement(ELEMENT_WIKI_HOME_PAGE_TITLE.replace("${title}", page));
+    $(byXpath(ELEMENT_WIKI_HOME_PAGE_TITLE.replace("${title}", page))).waitUntil(Condition.visible,Configuration.timeout);
+
   }
 
   /**

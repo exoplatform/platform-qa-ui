@@ -5,6 +5,8 @@ import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 
 import org.exoplatform.platform.qa.ui.selenium.Button;
@@ -46,14 +48,13 @@ public class WikiPermission {
    */
   public void deletePermission(String groupUsers) {
     By bDelete = By.xpath(ELEMENT_DELETE_PERMISSION.replace("$user", groupUsers));
-    if (evt.waitForAndGetElement(bDelete, 20000, 0) != null) {
+    if ($(bDelete).is(Condition.visible)) {
       info("--Delete permission--");
-      evt.click(bDelete);
-      evt.waitForElementNotPresent(bDelete);
+      $(bDelete).click();
+      $(bDelete).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     }
 
   }
-
   /**
    * Select permission for a username/group/membership
    *
@@ -62,22 +63,23 @@ public class WikiPermission {
    */
   public void selectPermission(String userGroup, permissionType type) {
     switch (type) {
-    case View_Pages:
-      info("Select View pages permission");
-      evt.check(ELEMENT_PERMISSION_VIEW_CHECKBOX.replace("$userGroup", userGroup), 2);
-      break;
-    case Edit_Pages:
-      info("Select Edit pages permission");
-      $(byText(userGroup)).parent().parent().findAll(byClassName("uiCheckbox")).get(1).click();
-      break;
-    case Admin_Pages:
-      info("Select View pages permission");
-      evt.check(ELEMENT_PERMISSION_ADMPAGE_CHECKBOX.replace("$userGroup", userGroup), 2);
-      break;
-    case Admin_Wiki:
-      info("Select View pages permission");
-      evt.check(ELEMENT_PERMISSION_ADMWIKI_CHECKBOX.replace("$userGroup", userGroup), 2);
-      break;
+      case View_Pages:
+        info("Select View pages permission");
+        $(byId("VIEWPAGE"+userGroup)).parent().click();
+        break;
+      case Edit_Pages:
+        info("Select Edit pages permission");
+
+        $(byId("EDITPAGE"+userGroup)).parent().click();
+        break;
+      case Admin_Pages:
+        info("Select View pages permission");
+        $(byId("ADMINPAGE"+userGroup)).parent().click();
+        break;
+      case Admin_Wiki:
+        info("Select View pages permission");
+        $(byId("ADMINSPACE"+userGroup)).parent().click();
+        break;
     }
   }
 
@@ -199,7 +201,7 @@ public class WikiPermission {
     info("Click on Save button");
     $(ELEMENT_PERMISSION_BUTTON_SAVE).click();
     if (!savePresent)
-      evt.waitForElementNotPresent(ELEMENT_PERMISSION_BUTTON_SAVE);
+      $(ELEMENT_PERMISSION_BUTTON_SAVE).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
 
   }
 

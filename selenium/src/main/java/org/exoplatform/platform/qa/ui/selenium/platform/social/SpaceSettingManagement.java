@@ -215,11 +215,11 @@ public class SpaceSettingManagement {
     info("Input data to setting tab");
     if (name != null && name != "") {
       info("input a name");
-      evt.type(ELEMENT_SPACE_NAME_INPUT, name, true);
+      $(ELEMENT_SPACE_NAME_INPUT).setValue(name);
     }
     if (des != null && des != "") {
       info("input a description");
-      evt.type(ELEMENT_SPACE_DESCRIPTION_INPUT, des, true);
+      $(ELEMENT_SPACE_DESCRIPTION_INPUT).setValue(des);
     }
   }
 
