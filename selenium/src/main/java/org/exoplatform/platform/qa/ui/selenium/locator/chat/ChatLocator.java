@@ -49,7 +49,13 @@ public class ChatLocator {
 
     public static final SelenideElement ELEMENT_CHAT_STATUS_AWAY = $(byClassName("chat-status-away"));
 
+<<<<<<< HEAD
     public static final SelenideElement ELEMENT_CHAT_STATUS_INVISIBLE = $(byClassName("chat-status-invisible"));
+=======
+  public static final SelenideElement ELEMENT_CHAT_STATUS_AWAY                   = $(byClassName("chat-status-away"));
+  public static final SelenideElement ELEMENT_MORE_ACTION                   = $(byClassName("uiIconVerticalDots"));
+  public static final SelenideElement ELEMENT_LEAVEROOM_ACTION           = $(byClassName("room-setting-action-leaveRoom"));
+>>>>>>> LeaveChatRoomTestIt
 
     public static final SelenideElement ELEMENT_CHAT_ROOM_STARTSTOPMEETING = $(byId("chat-record-button"));
 
@@ -77,6 +83,7 @@ public class ChatLocator {
 
     public static final SelenideElement ELEMENT_CHAT_INPUT_ROOM_NAME = $(byClassName("add-room-form")).find(by("type", "text"));
 
+<<<<<<< HEAD
     public static final SelenideElement ELEMENT_CHAT_INPUT_ROOM_USERS =
             $(byXpath("//*[@id=\"chat-application\"]/div[1]/div[2]/div[4]/div[1]/div/div[2]/div[1]/div[1]/div/input"));
 
@@ -86,6 +93,21 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_ROOM_NAME = $(byClassName("add-room-form")).find(by("type", "text"));
     public static final SelenideElement ELEMENT_BUTTON_SAVE_ROOM = $(byClassName("btn-primary"));
     public static final SelenideElement ELEMENT_CONTACT_LIST = $(byId("chat-users"));
+=======
+  public static final SelenideElement ELEMENT_CHAT_ICON_ADDROOM
+                                                                                        = $(byClassName("uiIconSimplePlus"));
+
+  public static final SelenideElement ELEMENT_CHAT_INPUT_ROOM_NAME               = $(byXpath("//*[@id=\"chat-application\"]/div[1]/div[2]/div[4]/div/div[2]/div[1]/input[1]"));
+
+  public static final SelenideElement ELEMENT_CHAT_INPUT_ROOM_USERS              =
+                                                                    $(byXpath("//*[@id=\"team-modal-form\"]/div[2]/div[1]/div/div[2]/div/div/div/input"));
+  public static final SelenideElement ELEMENT_CHAT_INPUT_ROOMUSERS              =
+                                                                             $(byXpath("//*[@id=\"chat-application\"]/div[1]/div[2]/div[4]/div/div[2]/div[1]/div[1]/div/input"));
+  public static final SelenideElement ELEMENT_CHAT_BUTTON_SAVE_ADD_ROOM          =
+                                                                        $(byXpath("//*[@id=\"team-modal-form\"]/div[2]/div[2]/a[1]"));
+  public static final SelenideElement ELEMENT_CHAT_BUTTON_SAVE_ADDROOM
+                                                                             = $(byXpath("//*[@id=\"chat-application\"]/div[1]/div[2]/div[4]/div/div[2]/div[2]/button[1]"));
+>>>>>>> LeaveChatRoomTestIt
 
     public static final SelenideElement ELEMENT_CHAT_BUTTON_SAVE_ADD_ROOM =
             $(byXpath("//*[@id=\"chat-application\"]/div[1]/div[2]/div[4]/div[1]/div/div[2]/div[2]/button[1]"));
@@ -101,9 +123,15 @@ public class ChatLocator {
 
     public static final SelenideElement ELEMENT_CHAT_INPUT_SEARCH_USER = $(byId("chat-search"));
 
+<<<<<<< HEAD
     public static final SelenideElement ELEMENT_CHAT_RESULT_SEARCH_USER =
             $(byAttribute("class",
                     "selectize-dropdown multi"));
+=======
+  public static final SelenideElement ELEMENT_CHAT_RESULT_SEARCH_USER            =
+                                                         $(byAttribute("class",
+                  "selectize-dropdown multi"));
+>>>>>>> LeaveChatRoomTestIt
 
     public static final SelenideElement ELEMENT_CHAT_MEETTING_ACTIONS = $(byId("chat-msg-meeting-actions"));
     public static final SelenideElement ELEMENT_CHAT_RESULT_SEARCH_ASSIGNEE= $(byAttribute("class","selectize-dropdown multi large plugin-remove_button"));

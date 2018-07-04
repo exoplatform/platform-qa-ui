@@ -34,6 +34,7 @@ import static com.codeborne.selenide.Selenide.$;
  */
 public class Button {
 
+<<<<<<< HEAD
   public static final By       ELEMENT_OK_BUTTON_LINK            = By.linkText("OK");
   public final By              ELEMENT_SAVE_CLOSE_BUTTON         = By.xpath("//*[text()='Save & Close']");
   public final By              ELEMENT_SAVE_CLOSE_BUTTON_2       = By.xpath("//*[text()='Save And Close']");
@@ -165,10 +166,164 @@ public class Button {
         } else if (evt.waitForAndGetElement(ELEMENT_YES_BUTTON_AUX, 3000, 0) != null) {
             evt.clickByJavascript(ELEMENT_YES_BUTTON_AUX);
         }
+=======
+    public static final By ELEMENT_OK_BUTTON_LINK = By.linkText("OK");
+    public static final By ELEMENT_YES_BUTTON_AUX =
+            By.xpath("//*[contains(@class, 'popup')]//*[contains(text(),'Yes')]");
+    public static final By ELEMENT_NOO_BUTTON_AUX =
+            By.xpath("//*[@id=\"team-delete-button-cancel\"]");
+    public static final By ELEMENT_FROMX_BUTTON_AUX =
+            By.xpath("//*[@id=\"room-detail\"]/div[4]/div/div[1]/a");
+    public final By ELEMENT_SAVE_CLOSE_BUTTON = By.xpath("//*[text()='Save & Close']");
+    public final By ELEMENT_SAVE_CLOSE_BUTTON_2 = By.xpath("//*[text()='Save And Close']");
+    public final By ELEMENT_OK_BUTTON = By.xpath("//*[text()='OK']");
+    public final By ELEMENT_NO_BUTTON = By.xpath("//*[text()='No']");
+    public final By ELEMENT_NO_BUTTON_AUX =
+            By.xpath("//*[contains(@class, 'popup')]//*[contains(text(),'No')]");
+    public final SelenideElement ELEMENT_YES_BUTTON = $(byXpath("//*[@id=\"UIConfirmation\"]/div[2]/div/a[1]"));
+    public final By ELEMENT_APPLY_FRENCH_BUTTON = By.linkText("Appliquer");
+
+    public final By ELEMENT_APPLY_GERMAN_BUTTON = By.linkText("Anwenden");
+
+    public final By ELEMENT_APPLY_BUTTON = By.xpath("//*[text()='Apply']");
+
+    public final By ELEMENT_DELETE_BUTTON = By.xpath("//*[text()='Delete']");
+
+    public final By ELEMENT_SAVE_BUTTON = By.xpath("//*[text()='Save']");
+
+    public final By ELEMENT_SAVE_BUTTON_POPUP_WINDOWS = By.xpath("//*[contains(@class, 'popup')]//*[text()='Save']");
+
+    public final By ELEMENT_CANCEL_BUTTON = By.xpath("//*[contains(text(),'Cancel')]");
+
+    public final By ELEMENT_CANCEL_BUTTON_AUX = By.xpath("//*[@data-original-title='Cancel']");
+
+    public final By ELEMENT_CLOSE_BUTTON = By.xpath("//*[normalize-space(text())='Close']");
+
+    public final By ELEMENT_ADD_BUTTON = By.xpath("//*[text()='Add']");
+
+    public final By ELEMENT_ADD_BUTTON_DISABLED =
+            By.xpath("//*[@id='PermissionTab']//button[@disabled='disabled']");
+
+    public final By ELEMENT_CATEGORY_CANCEL_BUTTON =
+            By.xpath("//*[@id='UICategoryForm']//button[contains(text(),'Cancel')]");
+
+    public final By ELEMENT_SELECT_BUTTON = By.xpath("//*[text()='Select']");
+
+    public final By ELEMENT_CONFIRM_BUTTON = By.xpath("//*[text()='Confirm']");
+
+    public final By ELEMENT_CLOSE_WINDOW =
+            By.xpath("//*[contains(@class, 'uiIconClose') and @title = 'Close Window']");
+
+    public final By ELEMENT_MOVE_BUTTON = By.xpath("//button[contains(text(), 'Move')]");
+
+    public final By ELEMENT_FINISH_ICON = By.xpath("//a[@title='Finish']");
+
+    public final By ELEMENT_NEXT_BUTTON = By.xpath("//*[text()='Next']");
+
+    public final By ELEMENT_ABORT_BUTTON = By.xpath("//*[text()='Abort']");
+
+    public final By ELEMENT_RESET_BUTTON = By.xpath("//*[text()='Reset']");
+
+    public final By ELEMENT_PREVIOUS_BUTTON = By.xpath("//*[text()='Previous']");
+
+    public final By ELEMENT_CREATE_LINK_BUTTON = By.xpath("//*[text()='Create Link']");
+
+    public final By ELEMENT_CREATE_MACRO_BUTTON = By.xpath("//button[text()='Insert Macro']");
+
+    public final By ELEMENT_APPLY_MACRO_BUTTON = By.xpath("//button[text()='Apply']");
+
+    public final By ELEMENT_INSERT_TABLE = By.xpath("//button[text()='Insert Table']");
+
+    public final By ELEMENT_SETTING_LINK_BUTTON = By.xpath("//*[text()='Link Settings']");
+
+    // ECMS Admin > Category > Add Category
+    public final By ELEMENT_PREVIOUS_BUTTON_ADMIN_4 =
+            By.xpath("//*[@class='UITaxonomyTreeCreateChild']//*[text()='Previous']");
+
+    public final By ELEMENT_PREVIOUS_BUTTON_ADMIN_3 =
+            By.xpath("//*[@class='UIActionTaxonomyManager']//*[text()='Previous']");
+
+    public final By ELEMENT_RESTORE_BUTTON = By.xpath("//*[text()='Restore']");
+
+    // Content explorer
+    public final By ELEMENT_REFRESH_BUTTON = By.xpath("//*[text()='refresh']");
+
+    public final By ELEMENT_RENAME_BUTTON = By.xpath("//*[text()='Rename']");
+
+    public final By ELEMENT_NEXT_PAGE_BUTTON = By.xpath("//*[(@data-original-title or @title)='Next Page']");
+
+    private final TestBase testBase;
+
+    private ElementEventTestBase evt;
+
+    public Button(TestBase testBase) {
+        this.testBase = testBase;
+        this.evt = testBase.getElementEventTestBase();
+    }
+
+    /**
+     * Click button confirm
+     */
+    public void confirm() {
+        evt.waitForAndGetElement(ELEMENT_CONFIRM_BUTTON);
+        evt.click(ELEMENT_CONFIRM_BUTTON);
 
     }
 
     /**
+     * Click button save
+     */
+    public void save() {
+        evt.waitForAndGetElement(ELEMENT_SAVE_BUTTON);
+        evt.click(ELEMENT_SAVE_BUTTON);
+
+    }
+
+    /**
+     * Click button ok
+     */
+    public void ok() {
+        if (evt.waitForAndGetElement(ELEMENT_OK_BUTTON, 5000, 0) != null) {
+            evt.click(ELEMENT_OK_BUTTON);
+        } else if (evt.waitForAndGetElement(ELEMENT_OK_BUTTON_LINK, 5000, 0) != null) {
+            evt.click(ELEMENT_OK_BUTTON_LINK);
+        }
+
+    }
+
+    /**
+     * Click button no
+     */
+    public void no() {
+        evt.waitForAndGetElement(ELEMENT_NO_BUTTON);
+        evt.click(ELEMENT_NO_BUTTON);
+
+    }
+
+    /**
+     * Click button yes
+     */
+    public void yes() {
+        if (ELEMENT_YES_BUTTON.waitUntil(Condition.appears, Configuration.timeout).is(Condition.exist)) {
+            ELEMENT_YES_BUTTON.click();
+        } else if (evt.waitForAndGetElement(ELEMENT_YES_BUTTON_AUX, 3000, 0) != null) {
+            evt.clickByJavascript(ELEMENT_YES_BUTTON_AUX);
+        }
+
+    }
+
+    /**
+     * Click button close
+     */
+    public void close() {
+        evt.waitForAndGetElement(ELEMENT_CLOSE_BUTTON);
+        evt.click(ELEMENT_CLOSE_BUTTON);
+>>>>>>> LeaveChatRoomTestIt
+
+    }
+
+    /**
+<<<<<<< HEAD
      * Click button close
      */
     public void close() {
@@ -209,6 +364,39 @@ public class Button {
         }
 
     }
+=======
+     * Click button cancel
+     */
+    public void cancel() {
+        if (evt.waitForAndGetElement(ELEMENT_CANCEL_BUTTON, 3000, 0) != null) {
+            evt.click(ELEMENT_CANCEL_BUTTON);
+        } else if (evt.waitForAndGetElement(ELEMENT_CANCEL_BUTTON_AUX, 3000, 0) != null) {
+            evt.click(ELEMENT_CANCEL_BUTTON_AUX);
+        }
+    }
+
+    /**
+     * Click button add
+     */
+    public void add() {
+        evt.waitForAndGetElement(ELEMENT_ADD_BUTTON);
+        evt.click(ELEMENT_ADD_BUTTON);
+        evt.waitForElementNotPresent(ELEMENT_ADD_BUTTON);
+
+    }
+
+    /**
+     * Click button Save and Close
+     */
+    public void saveAndClose() {
+        if (evt.waitForAndGetElement(ELEMENT_SAVE_CLOSE_BUTTON, 3000, 0) != null) {
+            evt.click(ELEMENT_SAVE_CLOSE_BUTTON);
+        } else if (evt.waitForAndGetElement(ELEMENT_SAVE_CLOSE_BUTTON_2, 3000, 0) != null) {
+            evt.click(ELEMENT_SAVE_CLOSE_BUTTON_2);
+        }
+
+    }
+>>>>>>> LeaveChatRoomTestIt
 
     /**
      * Click btton apply
