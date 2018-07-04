@@ -36,15 +36,19 @@ public class ChatManagement {
     switch (status) {
     case "Available":
       ELEMENT_CHAT_STATUS_AVAILABLE.click();
+      $(byXpath("//*[@id=\"chatApplicationNotification\"]/div[1]/a")).waitUntil(Condition.have(Condition.attribute("class","dropdown-toggle user-available")),Configuration.timeout);
       break;
     case "Do not disturb":
       ELEMENT_CHAT_STATUS_DONOTDISTURB.click();
+      $(byXpath("//*[@id=\"chatApplicationNotification\"]/div[1]/a")).waitUntil(Condition.have(Condition.attribute("class","dropdown-toggle user-donotdisturb")),Configuration.timeout);
       break;
     case "Away":
       ELEMENT_CHAT_STATUS_AWAY.click();
+      $(byXpath("//*[@id=\"chatApplicationNotification\"]/div[1]/a")).waitUntil(Condition.have(Condition.attribute("class","dropdown-toggle user-away")),Configuration.timeout);
       break;
     case "Invisible":
       ELEMENT_CHAT_STATUS_INVISIBLE.click();
+      $(byXpath("//*[@id=\"chatApplicationNotification\"]/div[1]/a")).waitUntil(Condition.have(Condition.attribute("class","dropdown-toggle user-offline")),Configuration.timeout);
       break;
     }
   }

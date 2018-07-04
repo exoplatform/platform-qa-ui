@@ -41,15 +41,15 @@ public class ChatLocator {
 
   public static final SelenideElement ELEMENT_CHAT_BUTTON_HIDE_OFF_LINE          = $(byClassName("uiIconChatMember"));
 
-  public static final SelenideElement ELEMENT_ICON_CHAT                          = $(byId("chat-status"));
+  public static final SelenideElement ELEMENT_ICON_CHAT                          = $(byId("chatApplicationNotification"));
 
-  public static final SelenideElement ELEMENT_CHAT_STATUS_AVAILABLE              = $(byClassName("chat-status-available"));
+  public static final SelenideElement ELEMENT_CHAT_STATUS_AVAILABLE              = $(byClassName("user-available"));
 
-  public static final SelenideElement ELEMENT_CHAT_STATUS_DONOTDISTURB           = $(byClassName("chat-status-donotdisturb"));
+  public static final SelenideElement ELEMENT_CHAT_STATUS_DONOTDISTURB           = $(byClassName("user-donotdisturb"));
 
-  public static final SelenideElement ELEMENT_CHAT_STATUS_AWAY                   = $(byClassName("chat-status-away"));
+  public static final SelenideElement ELEMENT_CHAT_STATUS_AWAY                   = $(byClassName("user-away"));
 
-  public static final SelenideElement ELEMENT_CHAT_STATUS_INVISIBLE              = $(byClassName("chat-status-invisible"));
+  public static final SelenideElement ELEMENT_CHAT_STATUS_INVISIBLE              = $(byClassName("user-invisible"));
 
   public static final SelenideElement ELEMENT_CHAT_ROOM_STARTSTOPMEETING         = $(byId("chat-record-button"));
 
