@@ -7,6 +7,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACES_LIST;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
@@ -494,7 +495,8 @@ public class WikiSettingsTestIT extends Base {
     info("Test 9: Delete permission for space wiki");
     manageLogInOut.signIn(username, password);
 
-    homePagePlatform.goToSpecificSpace(space);
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceHomePage.goToWikiTab();
     wikiHomePage.selectAPage(wiki);
     wikiHomePage.goToPermissions();

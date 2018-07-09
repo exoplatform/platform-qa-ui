@@ -256,9 +256,8 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
     info("Test 06: Auto Save when adding page from template");
     String title = "title1" + getRandomNumber();
     String space = "space" + getRandomNumber();
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
-    homePagePlatform.goToSpecificSpace(space);
     spaceHomePage.goToWikiTab();
     wikiHomePage.goToAddTemplateWikiPage();
     wikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_HowToGuide, title);
@@ -272,9 +271,8 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
     info("Test 06: Auto Save when adding page from template");
     String title = "title1" + getRandomNumber();
     String space = "space" + getRandomNumber();
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
-    homePagePlatform.goToSpecificSpace(space);
     spaceHomePage.goToWikiTab();
     wikiHomePage.goToAddTemplateWikiPage();
     wikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_ThreeColumnLayout, title);
@@ -288,9 +286,8 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
     info("Test 06: Auto Save when adding page from template");
     String title = "title1" + getRandomNumber();
     String space = "space" + getRandomNumber();
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
-    homePagePlatform.goToSpecificSpace(space);
     spaceHomePage.goToWikiTab();
     wikiHomePage.goToAddTemplateWikiPage();
     wikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_StatusMeeting, title);
@@ -304,9 +301,8 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
     info("Test 06: Auto Save when adding page from template");
     String title = "title1" + getRandomNumber();
     String space = "space" + getRandomNumber();
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
-    homePagePlatform.goToSpecificSpace(space);
     spaceHomePage.goToWikiTab();
     wikiHomePage.goToAddTemplateWikiPage();
     wikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_LeavePlanning, title);
@@ -320,9 +316,8 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
     info("Test 06: Auto Save when adding page from template");
     String title = "title1" + getRandomNumber();
     String space = "space" + getRandomNumber();
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
-    homePagePlatform.goToSpecificSpace(space);
     spaceHomePage.goToWikiTab();
     wikiHomePage.goToAddTemplateWikiPage();
     wikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_TwoColumnLayout, title);
@@ -355,9 +350,8 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
     SelenideElement template = ELEMENT_SELECT_TEMPLATE_StatusMeeting;
     String title = "title1" + getRandomNumber();
     String space = "space" + getRandomNumber();
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
-    homePagePlatform.goToSpecificSpace(space);
     spaceHomePage.goToWikiTab();
     wikiHomePage.goToAddTemplateWikiPage();
     wikiManagement.addSimpleWikiPageByTemplate(template, title);
@@ -392,9 +386,8 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
     SelenideElement template = ELEMENT_SELECT_TEMPLATE_StatusMeeting;
     String title = "title1" + getRandomNumber();
     String space = "space" + getRandomNumber();
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
-    homePagePlatform.goToSpecificSpace(space);
     spaceHomePage.goToWikiTab();
     wikiHomePage.goToAddTemplateWikiPage();
     wikiManagement.addSimpleWikiPageByTemplate(template, title);

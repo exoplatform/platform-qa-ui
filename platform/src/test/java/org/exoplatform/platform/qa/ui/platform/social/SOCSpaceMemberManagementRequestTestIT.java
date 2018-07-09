@@ -6,6 +6,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ICON_DECLINE_SPACE_REQUEST_IN_MEMBERS_TAB;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACES_LIST;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -92,7 +93,8 @@ public class SOCSpaceMemberManagementRequestTestIT extends Base {
     spaceManagement.sendARequestToASpace(space);
     manageLogInOut.signIn(username1, password);
     info("verify request");
-    homePagePlatform.goToSpecificSpace(space);
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.goToMemberTabInSpaceSettingTab();
     $(byText(username2 + " " + username2)).should(Condition.exist);
@@ -134,7 +136,8 @@ public class SOCSpaceMemberManagementRequestTestIT extends Base {
     info("send request by user 2");
     spaceManagement.sendARequestToASpace(space);
     manageLogInOut.signIn(username1, password);
-    homePagePlatform.goToSpecificSpace(space);
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceHomePage.goToSpaceSettingTab();
     info("accept request by user 1");
     spaceSettingManagement.goToMemberTabInSpaceSettingTab();
@@ -180,7 +183,8 @@ public class SOCSpaceMemberManagementRequestTestIT extends Base {
     info("send request by user 2");
     spaceManagement.sendARequestToASpace(space);
     manageLogInOut.signIn(username1, password);
-    homePagePlatform.goToSpecificSpace(space);
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceHomePage.goToSpaceSettingTab();
     info("DECLINE request by user 1");
     spaceSettingManagement.goToMemberTabInSpaceSettingTab();

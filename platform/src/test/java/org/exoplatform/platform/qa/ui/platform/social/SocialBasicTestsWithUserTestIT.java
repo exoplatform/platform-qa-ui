@@ -524,7 +524,6 @@ public class SocialBasicTestsWithUserTestIT extends Base {
     info("Create a space");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 60000);
-    homePagePlatform.goToSpecificSpace(space);
     String activity1 = "activity1" + getRandomNumber();
     activityStream.addActivity(activity1, "");
     String comment = "comment" + getRandomNumber();

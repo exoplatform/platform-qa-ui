@@ -1692,7 +1692,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
 
     info("Enable the notifications");
     navigationToolbar.goToMyNotifications();
-    myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.AS_Mention_intranet);
+    myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.AS_Mention_intranet);
 
     info("User accepts Request notification and mention John in activity");
     manageLogInOut.signIn(username2, password);
@@ -2248,7 +2248,9 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
 
     info("user2 comments in John's activity");
     manageLogInOut.signIn(username2, password);
-    homePagePlatform.goToSpecificSpace(space);
+      homePagePlatform.goToMySpaces();
+      spaceManagement.goToAllSpacesTab();
+      ELEMENT_SPACES_LIST.find(byText(space)).click();
     activityStream.commentActivity(activity, comment4);
 
     info("Check comment notification in the notification list");
@@ -2410,7 +2412,9 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
 
     info("user2 comments in John's activity");
     manageLogInOut.signIn(username2, password);
-    homePagePlatform.goToSpecificSpace(space);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.goToAllSpacesTab();
+    ELEMENT_SPACES_LIST.find(byText(space)).click();
     activityStream.commentActivity(activity, comment4);
     info("Check comment notification in the notification list");
     manageLogInOut.signIn(username1, password);
@@ -3304,7 +3308,9 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
 
     manageLogInOut.signIn(username1, password);
     info("Enable the notifications");
-    homePagePlatform.goToSpecificSpace(space);
+      homePagePlatform.goToMySpaces();
+      spaceManagement.goToAllSpacesTab();
+      ELEMENT_SPACES_LIST.find(byText(space)).click();
     activityStream.addActivity(activity, "");
     manageLogInOut.signIn(username2, password);
     ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
@@ -3364,7 +3370,9 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     spaceManagement.acceptAInvitation(space);
     manageLogInOut.signIn(username1, password);
     info("Enable the notifications");
-    homePagePlatform.goToSpecificSpace(space);
+      homePagePlatform.goToMySpaces();
+      spaceManagement.goToAllSpacesTab();
+      ELEMENT_SPACES_LIST.find(byText(space)).click();
     activityStream.addActivity(activity, "");
     manageLogInOut.signIn(username2, password);
     ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);

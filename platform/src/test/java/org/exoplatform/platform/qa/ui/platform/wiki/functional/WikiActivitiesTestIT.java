@@ -23,7 +23,7 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
 
 
 @Tag("wiki")
-@Tag("functionnel")
+@Tag("functional")
 
 public class WikiActivitiesTestIT extends Base {
 
@@ -471,7 +471,6 @@ public class WikiActivitiesTestIT extends Base {
     info("Create a wiki page 1");
     String title = "title" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    homePagePlatform.goToSpecificSpace(space);
     spaceHomePage.goToWikiTab();
     wikiHomePage.goToAddBlankPage();
     wikiManagement.goToSourceEditor();
