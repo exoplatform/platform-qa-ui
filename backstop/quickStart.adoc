@@ -8,22 +8,22 @@ Running tests:
 
 * Desktop full test
 ----
-$ backstop test --configPath=backstopTestDesktop
+$ backstop test --configPath=backstopTestDesktop *url*
 ----
 
 * Mobile full test
 ----
-$ backstop test --configPath=backstopTestMobile
+$ backstop test --configPath=backstopTestMobile *url*
 ----
 
 * Tablet full test
 ----
-$ backstop test --configPath=backstopTestTablet
+$ backstop test --configPath=backstopTestTablet *url*
 ----
 
 * Running specific tests
 
 In order to run only login and home page tests for Desktop we use the *filter* parameter
 ----
-$ backstop test --configPath=backstopTestDesktop --filter=Login_page,Home_page
+$ backstop test --configPath=backstopTestDesktop --filter=Login_page,Home_page *url*
 ----
