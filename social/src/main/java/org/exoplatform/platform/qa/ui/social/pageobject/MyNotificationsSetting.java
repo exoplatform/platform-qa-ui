@@ -134,6 +134,7 @@ public class MyNotificationsSetting {
         }
         info("Click on Save button");
         $(ELEMENT_EDIT_LIKE_SAVE_BTN).click();
+        $(ELEMENT_EDIT_LIKE_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
         info("Verify that email notification is hidded");
         evt.waitForElementNotPresent(ELEMENT_LIKE_INTRANET_ICON, 3000, 1);
         break;

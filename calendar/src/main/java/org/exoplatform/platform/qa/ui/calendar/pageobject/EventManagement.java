@@ -938,8 +938,8 @@ public class EventManagement {
       evt.check(ELEMENT_EDIT_DELETE_ALL_EVENT, 2);
       break;
     }
-    evt.click(ELEMENT_CONFIRM_EDIT_BUTTON);
-    evt.waitForElementNotPresent(ELEMENT_CONFIRM_EDIT_RECURRING_FORM);
+    $(ELEMENT_CONFIRM_EDIT_BUTTON).click();
+    $(ELEMENT_CONFIRM_EDIT_RECURRING_FORM).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**

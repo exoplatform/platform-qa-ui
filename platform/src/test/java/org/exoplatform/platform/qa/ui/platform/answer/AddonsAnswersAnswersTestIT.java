@@ -172,10 +172,10 @@ public class AddonsAnswersAnswersTestIT extends Base {
                             .parent()
                             .parent()
                             .find(ELEMENT_QUESTION_MORE_ACTION_BUTTON)
-                            .is(Condition.not(Condition.exist))) {
+                            .is(Condition.not(Condition.visible))) {
       $(byText(question1)).click();
     }
-    $(byText(answer)).parent().parent().find(byText(fullName)).shouldNot(Condition.exist);
+    $(byText(answer)).parent().parent().find(byText(fullName)).should(Condition.visible);
 
     info("Clear data");
     manageLogInOut.signIn(DATA_USER1, "gtngtn");

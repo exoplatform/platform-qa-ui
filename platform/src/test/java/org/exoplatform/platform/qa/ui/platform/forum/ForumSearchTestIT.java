@@ -10,6 +10,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -100,7 +101,7 @@ public class ForumSearchTestIT extends Base {
     forumTopicManagement.addPostSimple(name4, content);
 
     $(ELEMENT_SEARCH_TEXTBOX).setValue(name4).pressEnter();
-    ELEMENT_SEARCH_RESULT.find(byText(name4)).click();
+    ELEMENT_SEARCH_RESULT.find(byText(name4)).waitUntil(Condition.visible,Configuration.timeout).click();
     $(byText(name4)).should(Condition.exist);
     $(byText(content)).should(Condition.exist);
     ELEMENT_CLOSE_POPUP.click();

@@ -61,11 +61,11 @@ public class SpaceActivitiesTestIT extends Base {
   @Test
   public void test01_AddNewYourActivityOnSpace() {
     String space = "space" + getRandomNumber();
-
+    String activity1 = "activity1" + getRandomNumber();
     info("Create a space");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 60000);
-    String activity1 = "activity1" + getRandomNumber();
+    info("add activity in space");
     activityStream.addActivity(activity1, "");
     homePagePlatform.goToAllSpace();
     spaceManagement.deleteSpace(space, false);
