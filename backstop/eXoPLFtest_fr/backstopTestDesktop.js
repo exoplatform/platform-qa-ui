@@ -11,7 +11,7 @@ module.exports = {
   "scenarios": [
     {
       "label": "Login_page",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
@@ -32,7 +32,7 @@ module.exports = {
     },
     {
       "label": "Home_page",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
@@ -58,7 +58,7 @@ module.exports = {
     },
     {
       "label": "Answers_page",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
@@ -82,7 +82,7 @@ module.exports = {
     },
     {
       "label": "AppsBtn",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
@@ -130,7 +130,7 @@ module.exports = {
     },
     {
       "label": "Calendar_page",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
@@ -153,7 +153,7 @@ module.exports = {
     },
     {
       "label": "ChatButton",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
@@ -201,7 +201,7 @@ module.exports = {
     },
     {
       "label": "AdduserBtn",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "onBeforeScript": "",
@@ -249,7 +249,7 @@ module.exports = {
     },
     {
       "label": "UserMgmntBtn",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "onBeforeScript": "",
@@ -297,7 +297,7 @@ module.exports = {
     },
     {
       "label": "ContentBtn",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
@@ -393,7 +393,7 @@ module.exports = {
     },
     {
       "label": "Documents_page",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
@@ -419,7 +419,7 @@ module.exports = {
     
     {
       "label": "Documents_page",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
@@ -442,7 +442,7 @@ module.exports = {
     },
     {
       "label": "Forums_page",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
@@ -466,7 +466,7 @@ module.exports = {
     },
     {
       "label": "Network_page",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
@@ -490,7 +490,7 @@ module.exports = {
     },
     {
       "label": "PortalBtn",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
@@ -658,7 +658,7 @@ module.exports = {
     },
     {
       "label": "Spaces_page",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
@@ -730,7 +730,7 @@ module.exports = {
     },
     {
       "label": "Tasks_page",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
@@ -754,7 +754,7 @@ module.exports = {
     },
     {
       "label": "User_page_acts",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
@@ -778,7 +778,7 @@ module.exports = {
     },
     {
       "label": "User_page_dashboard",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
@@ -802,7 +802,7 @@ module.exports = {
     },
     {
       "label": "User_page_flags",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
@@ -827,7 +827,7 @@ module.exports = {
     },
     {
       "label": "Close_flags",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
@@ -848,7 +848,7 @@ module.exports = {
     },
     {
       "label": "User_page_network",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
@@ -872,7 +872,7 @@ module.exports = {
     },
     {
       "label": "User_page_notifs",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
@@ -896,7 +896,7 @@ module.exports = {
     },
     {
       "label": "User_page_profile",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
@@ -920,7 +920,7 @@ module.exports = {
     },
     {
       "label": "User_page_settings",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
@@ -945,7 +945,7 @@ module.exports = {
     },
     {
       "label": "Close_settings",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
@@ -966,7 +966,7 @@ module.exports = {
     },
     {
       "label": "WebconfBtn",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
@@ -1014,7 +1014,7 @@ module.exports = {
     },
     {
       "label": "User_page_wiki",
-      "url": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
       "readyEvent": null,
       "readySelector": "",
