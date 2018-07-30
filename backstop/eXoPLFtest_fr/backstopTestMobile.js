@@ -1,5 +1,5 @@
 module.exports = {
-  "id": "eXo PLF Mobile",
+  "id": "eXo Platform",
   "viewports": [
     {
       "label": "mobile",
@@ -12,7 +12,7 @@ module.exports = {
     {
       "label": "Login_page",
       "url": process.argv[process.argv.length-1],
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
       "readySelector": "",
       "delay": 500,
@@ -23,8 +23,7 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document",
-        "div.uiLogin"
+        "document"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -33,21 +32,20 @@ module.exports = {
     {
       "label": "Home_page",
       "url": process.argv[process.argv.length-1],
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
       "readySelector": "",
       "delay": 500,
+      "onBeforeScript": "",
       "onReadyScript": "onReady_home.js",
-      "hideSelectors": [],
+      "hideSelectors": ["ul#suggestions li","div.currentDateContainer center a"],
       "removeSelectors": [],
       "hoverSelector": "",
       "clickSelector": "",
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document",
-        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
-        "div#RightBody.UIContainer"
+        "document"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -56,10 +54,11 @@ module.exports = {
     {
       "label": "Answers_page",
       "url": process.argv[process.argv.length-1],
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
+      "onBeforeScript": "",
       "onReadyScript": "onBefore_answers.js",
       "hideSelectors": [],
       "removeSelectors": [],
@@ -68,9 +67,51 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document",
-        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
-        "div#RightBody.UIContainer"
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "AppsBtn",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 1000,
+      "onBeforeScript": "",
+      "onReadyScript": "onBefore_appsbtn.js",
+      "hideSelectors": ["ul#suggestions li","div.currentDateContainer center a"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "Apps_page",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 1000,
+      "onBeforeScript": "",
+      "onReadyScript": "onBefore_appspage.js",
+      "hideSelectors": ["div.currentDateContainer center"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -79,7 +120,7 @@ module.exports = {
     {
       "label": "Calendar_page",
       "url": process.argv[process.argv.length-1],
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
@@ -91,9 +132,7 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document",
-        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
-        "div#RightBody.UIContainer"
+        "document"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -102,22 +141,20 @@ module.exports = {
     {
       "label": "ChatButton",
       "url": process.argv[process.argv.length-1],
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
       "readySelector": "",
       "onBeforeScript": "",
       "onReadyScript": "onReady_chatbtn.js",
       "delay": 1000,
-      "hideSelectors": ["div.currentDateContainer center"],
+      "hideSelectors": ["ul#suggestions li","div.currentDateContainer center a"],
       "removeSelectors": [],
       "hoverSelector": "",      
       "clickSelector": "",
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document",
-        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
-        "div#RightBody.UIContainer"
+        "document"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -125,23 +162,197 @@ module.exports = {
     },
     {
       "label": "Chat_page",
-      "url": "http://qa-ui03.exoplatform.org/portal/intranet/chat",
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/intranet/chat",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
       "hideSelectors": ["div.currentDateContainer center"],
       "removeSelectors": [],
       "hoverSelector": "",
-      "onBeforeScript": "onBefore_chatpage.js",
-      "onReadyScript": "",
+      "onBeforeScript": "",
+      "onReadyScript": "onBefore_chatpage.js",
       "clickSelector": "",
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document",        
-        "div.uiGrayLightBox.clearfix.input-prepend.no-user-selection",
-        "div.uiLeftContainerArea.no-user-selection"
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "AdduserBtn",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "onBeforeScript": "",
+      "onReadyScript": "onBefore_adduserbtn.js",
+      "readySelector": "",
+      "delay": 1000,
+      "hideSelectors": ["ul#suggestions li","div.currentDateContainer center a"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "Community_page_adduser",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "onBeforeScript": "",
+      "onReadyScript": "onBefore_adduserpage.js",
+      "readySelector": "",
+      "delay": 1000,
+      "hideSelectors": ["div.currentDateContainer center"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "UserMgmntBtn",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "onBeforeScript": "",
+      "onReadyScript": "onBefore_usermgmntbtn.js",
+      "readySelector": "",
+      "delay": 1000,
+      "hideSelectors": ["ul#suggestions li","div.currentDateContainer center a"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "CommPage",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "onBeforeScript": "",
+      "onReadyScript": "onBefore_usermgmntpage.js",
+      "readySelector": "",
+      "delay": 1000,
+      "hideSelectors": ["div.currentDateContainer center"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "ContentBtn",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 1000,
+      "onBeforeScript": "",
+      "onReadyScript": "onBefore_contentbtn.js",
+      "hideSelectors": ["ul#suggestions li","div.currentDateContainer center a"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "Content_admin",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 1000,
+      "onBeforeScript": "",
+      "onReadyScript": "onBefore_contentadminpage",
+      "hideSelectors": ["div.currentDateContainer center"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "ContentMgmnt",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "onBeforeScript": "",
+      "onReadyScript": "onBefore_contentMgmnt.js",
+      "readySelector": "",
+      "delay": 1000,
+      "hideSelectors": ["div.currentDateContainer center"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "Content_search_page",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 1000,
+      "onBeforeScript": "",
+      "onReadyScript": "onBefore_contentsearch",
+      "hideSelectors": ["div.currentDateContainer center"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -150,7 +361,7 @@ module.exports = {
     {
       "label": "Documents_page",
       "url": process.argv[process.argv.length-1],
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
@@ -162,44 +373,317 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document",
-        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
-        "div#RightBody.UIContainer"
+        "document"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
       "requireSameDimensions": true
     },
-    
-
-    
     {
-      "label": "Documents_page",
+      "label": "Create_newSpace_page",
       "url": process.argv[process.argv.length-1],
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
       "readySelector": "",
-      "delay": 1000,
-      "onReadyScript": "onBefore_docs.js",
-      "hideSelectors": [],
+      "delay": 500,
+      "onBeforeScript": "",
+      "onReadyScript": "onReady_createspace.js",
+      "hideSelectors": ["div.footerWLC.backOutdated"],
       "removeSelectors": [],
       "hoverSelector": "",
       "clickSelector": "",
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document",
-        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
-        "div#RightBody.UIContainer"
+        "document"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
       "requireSameDimensions": true
     },
     {
+      "label": "delete_space1",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 500,
+      "onReadyScript": "onbefore_delete_space.js",
+      "hideSelectors": [""],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+
+    },
+    {
+      "label": "Space_page_Cldr",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 500,
+      "onBeforeScript": "",
+      "onReadyScript": "onReady_newspace_cldr.js",
+      "hideSelectors": [""],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "delete_space2",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 500,
+      "onReadyScript": "onbefore_delete_space.js",
+      "hideSelectors": [""],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+
+    },
+    {
+      "label": "Space_page_Docs",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 500,
+      "onBeforeScript": "",
+      "onReadyScript": "onReady_newspace_docs.js",
+      "hideSelectors": ["div.uiContentBox.uiExpandContainer span"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "delete_space3",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 500,
+      "onReadyScript": "onbefore_delete_space.js",
+      "hideSelectors": [""],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+
+    },
+    {
+      "label": "Space_page_Forum",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 500,
+      "onBeforeScript": "",
+      "onReadyScript": "onReady_newspace_forum.js",
+      "hideSelectors": ["div.uiContentBox.uiExpandContainer span"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "delete_space4",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 500,
+      "onReadyScript": "onbefore_delete_space.js",
+      "hideSelectors": [""],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+
+    },
+    {
+      "label": "Space_page_Settings",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 500,
+      "onBeforeScript": "",
+      "onReadyScript": "onReady_newspace_settings.js",
+      "hideSelectors": ["div.uiContentBox.uiExpandContainer span"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "delete_space5",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 500,
+      "onReadyScript": "onbefore_delete_space.js",
+      "hideSelectors": [""],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+
+    },
+    {
+      "label": "Space_page_Tasks",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 500,
+      "onBeforeScript": "",
+      "onReadyScript": "onReady_newspace_tasks.js",
+      "hideSelectors": [""],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "delete_space6",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 500,
+      "onReadyScript": "onbefore_delete_space.js",
+      "hideSelectors": [""],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+
+    },
+    {
+      "label": "Space_page_Wiki",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 500,
+      "onBeforeScript": "",
+      "onReadyScript": "onReady_newspace_wiki.js",
+      "hideSelectors": [""],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "delete_space7",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 500,
+      "onReadyScript": "onbefore_delete_space.js",
+      "hideSelectors": [""],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+
+    },    
+    {
       "label": "Forums_page",
       "url": process.argv[process.argv.length-1],
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
@@ -212,9 +696,7 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document",
-        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
-        "div#RightBody.UIContainer"
+        "document"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -223,7 +705,7 @@ module.exports = {
     {
       "label": "Network_page",
       "url": process.argv[process.argv.length-1],
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
@@ -236,9 +718,161 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document",
-        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
-        "div#RightBody.UIContainer"
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "PortalBtn",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 1000,
+      "onBeforeScript": "",
+      "onReadyScript": "onBefore_portalbtn.js",
+      "hideSelectors": ["ul#suggestions li","div.currentDateContainer center a"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "Portal_page",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 1000,
+      "onBeforeScript": "",
+      "onReadyScript": "onBefore_portalpage.js",
+      "hideSelectors": ["div.currentDateContainer center"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "Portal_gpsites_page",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 1000,
+      "onBeforeScript": "",
+      "onReadyScript": "onBefore_portalgpsitespage.js",
+      "hideSelectors": ["div.currentDateContainer center"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "Portal_notifs_page",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 1000,
+      "onBeforeScript": "",
+      "onReadyScript": "onBefore_portalnotifspage.js",
+      "hideSelectors": ["div.currentDateContainer center"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "Portal_sites_page",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 1000,
+      "onBeforeScript": "",
+      "onReadyScript": "onBefore_portalsitespage.js",
+      "hideSelectors": ["div.currentDateContainer center"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "Portalpages_page",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 1000,
+      "onBeforeScript": "",
+      "onReadyScript": "onBefore_portalpages.js",
+      "hideSelectors": ["div.currentDateContainer center"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "Searchindexing_page",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 1000,
+      "onBeforeScript": "",
+      "onReadyScript": "onBefore_searchindexinpage.js",
+      "hideSelectors": ["div.currentDateContainer center"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -247,7 +881,7 @@ module.exports = {
     {
       "label": "Spaces_page",
       "url": process.argv[process.argv.length-1],
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
@@ -260,9 +894,51 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document",
-        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
-        "div#RightBody.UIContainer"
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "System_mngmnt_page",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 1000,
+      "onBeforeScript": "",
+      "onReadyScript": "onBefore_systemmgmentpage.js",
+      "hideSelectors": ["div.currentDateContainer center"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "System_monitoring",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 1000,
+      "onBeforeScript": "",
+      "onReadyScript": "onBefore_systemmonitoringpage.js",
+      "hideSelectors": ["div.currentDateContainer center"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -271,7 +947,7 @@ module.exports = {
     {
       "label": "Tasks_page",
       "url": process.argv[process.argv.length-1],
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
@@ -284,9 +960,7 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document",
-        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
-        "div#RightBody.UIContainer"
+        "document"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -295,7 +969,7 @@ module.exports = {
     {
       "label": "User_page_acts",
       "url": process.argv[process.argv.length-1],
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
@@ -308,9 +982,7 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document",
-        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
-        "div#RightBody.UIContainer"
+        "document"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -319,7 +991,7 @@ module.exports = {
     {
       "label": "User_page_dashboard",
       "url": process.argv[process.argv.length-1],
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
@@ -332,9 +1004,7 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document",
-        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
-        "div#RightBody.UIContainer"
+        "document"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -343,23 +1013,20 @@ module.exports = {
     {
       "label": "User_page_flags",
       "url": process.argv[process.argv.length-1],
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
       "onBeforeScript": "",
       "onReadyScript": "onBefore_usrpageflags.js",
-      "hideSelectors": [],
+      "hideSelectors": ["ul#suggestions li","div.currentDateContainer center a"],
       "removeSelectors": [],
       "hoverSelector": "",
       "clickSelector": "",
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document",
-        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
-        "div#RightBody.UIContainer",
-        "div.MaskContainer"
+        "document"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -368,13 +1035,13 @@ module.exports = {
     {
       "label": "Close_flags",
       "url": process.argv[process.argv.length-1],
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
       "onBeforeScript": "",
       "onReadyScript": "onBefore_Closeflags.js",
-      "hideSelectors": [],
+      "hideSelectors": ["ul#suggestions li","div.currentDateContainer center a"],
       "removeSelectors": [],
       "hoverSelector": "",
       "clickSelector": "",
@@ -389,7 +1056,7 @@ module.exports = {
     {
       "label": "User_page_network",
       "url": process.argv[process.argv.length-1],
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
@@ -402,9 +1069,7 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document",
-        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
-        "div#RightBody.UIContainer"
+        "document"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -413,7 +1078,7 @@ module.exports = {
     {
       "label": "User_page_notifs",
       "url": process.argv[process.argv.length-1],
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
@@ -426,9 +1091,7 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document",
-        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
-        "div#RightBody.UIContainer"
+        "document"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -437,7 +1100,7 @@ module.exports = {
     {
       "label": "User_page_profile",
       "url": process.argv[process.argv.length-1],
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
@@ -450,9 +1113,7 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document",
-        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
-        "div#RightBody.UIContainer"
+        "document"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -461,23 +1122,20 @@ module.exports = {
     {
       "label": "User_page_settings",
       "url": process.argv[process.argv.length-1],
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
       "onBeforeScript": "",
       "onReadyScript": "onBefore_usrpagesettings.js",
-      "hideSelectors": [],
+      "hideSelectors": ["ul#suggestions li","div.currentDateContainer center a"],
       "removeSelectors": [],
       "hoverSelector": "",
       "clickSelector": "",
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document",
-        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
-        "div#RightBody.UIContainer",
-        "div.MaskContainer"
+        "document"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -486,13 +1144,13 @@ module.exports = {
     {
       "label": "Close_settings",
       "url": process.argv[process.argv.length-1],
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
       "onBeforeScript": "",
       "onReadyScript": "onBefore_closeusersettings.js",
-      "hideSelectors": [],
+      "hideSelectors": ["ul#suggestions li","div.currentDateContainer center a"],
       "removeSelectors": [],
       "hoverSelector": "",
       "clickSelector": "",
@@ -505,9 +1163,53 @@ module.exports = {
       "requireSameDimensions": true
     },
     {
+      "label": "WebconfBtn",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 1000,
+      "onBeforeScript": "",
+      "onReadyScript": "onBefore_webconfbtn.js",
+      "hideSelectors": ["ul#suggestions li","div.currentDateContainer center a"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "Webconf_page",
+      "url": process.argv[process.argv.length-1],
+      "referenceUrl": process.argv[process.argv.length-1],
+      "readyEvent": null,
+      "readySelector": "",
+      "delay": 1000,
+      "onBeforeScript": "",
+      "onReadyScript": "onBefore_webconfpage.js",
+      "hideSelectors": ["div.currentDateContainer center"],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [
+        "viewport",
+        "document"
+      ],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0,
+      "requireSameDimensions": true
+    },
+    {
       "label": "User_page_wiki",
       "url": process.argv[process.argv.length-1],
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
+      "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
@@ -520,9 +1222,7 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document",
-        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
-        "div#RightBody.UIContainer"
+        "document"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,

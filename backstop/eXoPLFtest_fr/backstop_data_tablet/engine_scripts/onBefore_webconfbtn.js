@@ -26,8 +26,4 @@ casper.then( function(){
 
   });
 
-casper.then( function(){  
-    casper.echo('Clicking webconf button');
-  });
-
 }

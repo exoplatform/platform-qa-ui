@@ -12,9 +12,23 @@ casper.then( function(){
       }, true);
     casper.echo('Clicking button');
     casper.click('button.button');
-    casper.wait(8000);
+    casper.wait(4000);
     });
    }
+  });
+
+casper.then( function(){  
+    casper.echo('Clicking chat button');
+    casper.click('div#chat-status a.dropdown-toggle');
+    casper.waitForSelector('li a.notif-chat-open-link');
+    casper.wait(8000);
+
+  });
+
+casper.thenOpen(scenario.url + "/intranet/chat", function() {
+    casper.echo('Clicking chat button');
+    casper.wait(4000);
+    this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');
   });
 
 }

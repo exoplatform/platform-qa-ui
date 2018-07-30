@@ -21,6 +21,7 @@ casper.then( function(){
     casper.echo('Clicking user button');
     casper.click('div#UIUserPlatformToolBarPortlet a');
     casper.waitForSelector('i.uiIconPLFProfile');
+
   });
 
 casper.then( function(){  
@@ -29,6 +30,7 @@ casper.then( function(){
     casper.waitForSelector('div.uiIconAppprofile.uiIconDefaultApp');
     casper.wait(4000);
     this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');
+
   });
 
 }

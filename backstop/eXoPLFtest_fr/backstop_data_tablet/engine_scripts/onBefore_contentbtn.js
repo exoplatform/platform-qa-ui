@@ -27,7 +27,7 @@ casper.then( function(){
   });
 
 casper.then( function(){  
-    casper.echo('Clicking content button');
+    casper.echo('Clicking adduser button');
   });
 
 }

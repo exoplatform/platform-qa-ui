@@ -12,15 +12,17 @@ casper.then( function(){
       }, true);
     casper.echo('Clicking button');
     casper.click('button.button');
+    casper.waitForSelector('div.uiBox.uiSuggestions');
     casper.wait(8000);
     });
    }
   });
 
-casper.then( function(){ 
-    casper.echo('Clicking button menu');
-    casper.click('div.mobile-visible.toggle-left-bar');
-    casper.wait(1000);
+casper.then( function(){  
+    casper.echo('Waiting for page to load');
+    casper.waitForSelector('div.uiBox.uiSuggestions');
+    casper.wait(8000);    
+    this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');
   });
 
 }

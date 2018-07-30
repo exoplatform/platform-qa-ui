@@ -21,6 +21,7 @@ casper.then( function(){
     casper.echo('Clicking chat button');
     casper.click('div#chat-status a.dropdown-toggle');
     casper.waitForSelector('li a.notif-chat-open-link');
+    casper.wait(8000);
     this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');
 
   });

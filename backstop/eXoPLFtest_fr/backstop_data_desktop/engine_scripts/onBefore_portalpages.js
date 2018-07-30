@@ -17,4 +17,19 @@ casper.then( function(){
    }
   });
 
+casper.then( function(){  
+    casper.echo('Clicking portal button');
+    casper.click('div#UISetupPlatformToolBarPortlet a');
+    casper.waitForSelector('i.uiIconPLFProfile');
+    casper.wait(4000);
+    this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');
+
+  });
+
+casper.thenOpen(scenario.url + "/g/:platform:administrators/administration/pageManagement", function() {
+    casper.echo('Clicking portalePages button');
+    casper.wait(8000);
+    this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');
+  });
+
 }
