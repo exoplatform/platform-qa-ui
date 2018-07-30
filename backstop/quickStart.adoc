@@ -16,7 +16,7 @@ In order to run the tests against some specific instances we added the *url* par
 
 * Command structure in order to run all test cases for (Desktop,Mobile and Tablet):
 ----
-$ backstop test --config=backstopTest [url]
+$ backstop test --configPath=backstopTest [url]
 ----
 
 * Desktop full test
@@ -38,7 +38,7 @@ $ backstop test --configPath=backstopTestTablet [url]
 
 * Command structure in order to run some test cases for (Desktop,Mobile and Tablet):
 ----
-$ backstop test --config=backstopTest --filter=<scenario1.label,scenario2.label...> [url]
+$ backstop test --configPath=backstopTest --filter=<scenario1.label,scenario2.label...> [url]
 ----
 
 * Command structure in order to run some test cases for Mobile:
