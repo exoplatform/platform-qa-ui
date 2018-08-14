@@ -126,6 +126,16 @@ public class NotificationsAdminSeting {
       info("Verify that intranet notification is hidded");
       evt.waitForElementNotPresent(ELEMENT_NEW_USER_INTRANET_NOTIFICATION_TITLE, 3000, 1);
       break;
+      case NewUser_mobile:
+        info("Click on Edit button");
+        $(ELEMENT_NEW_USER_NOTIFICATION_EDIT_BTN).click();
+        if($(ELEMENT_NEW_USER_MOBILE_NOTIFICATION_CHECKBOX).is(Condition.checked))
+          $(ELEMENT_NEW_USER_MOBILE_NOTIFICATION_CHECKBOX).parent().click();
+        info("Click on Save button");
+        $(ELEMENT_NEW_USER_NOTIFICATION_SAVE_BTN).click();
+        info("Verify that intranet notification is hidded");
+        $(ELEMENT_NEW_USER_MOBILE_NOTIFICATION_CHECKBOX).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+        break;
     case ConnectionRequest_email:
       evt.click(ELEMENT_CONNECTION_REQUEST_EDIT_BTN);
       evt.uncheck(ELEMENT_CONNECTION_REQUEST_EMAIL_NOTIFICATION_CHECKBOX, 2);
@@ -152,12 +162,22 @@ public class NotificationsAdminSeting {
       break;
     case AS_Comment_intranet:
       $(ELEMENT_ACTIVITY_COMMENT_EDIT_BTN).click();
-      evt.uncheck(ELEMENT_ACTIVITY_COMMENT_INTRANET_NOTIFICATION_CHECKBOX, 2);
+      if($(ELEMENT_ACTIVITY_COMMENT_INTRANET_NOTIFICATION_CHECKBOX).is(Condition.checked))
+      $(ELEMENT_ACTIVITY_COMMENT_INTRANET_NOTIFICATION_CHECKBOX).parent().click();
       info("Click on Save button");
       $(ELEMENT_ACTIVITY_COMMENT_SAVE_BTN).click();
       info("Verify that Intranet notification is hidded");
       evt.waitForElementNotPresent(ELEMENT_ACTIVITY_COMMENT_INTRANET_NOTIFICATION_TITLE, 3000, 1);
       break;
+      case AS_Comment_mobile:
+        $(ELEMENT_ACTIVITY_COMMENT_EDIT_BTN).click();
+        if($(ELEMENT_ACTIVITY_COMMENT_MOBILE_NOTIFICATION_CHECKBOX).is(Condition.checked))
+          $(ELEMENT_ACTIVITY_COMMENT_MOBILE_NOTIFICATION_CHECKBOX).parent().click();
+        info("Click on Save button");
+        $(ELEMENT_ACTIVITY_COMMENT_SAVE_BTN).click();
+        info("Verify that Intranet notification is hidded");
+        $(ELEMENT_ACTIVITY_COMMENT_MOBILE_NOTIFICATION_CHECKBOX).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+        break;
     case AS_Like_email:
       evt.click(ELEMENT_ACTIVITY_LIKE_EDIT_BTN);
       evt.uncheck(ELEMENT_ACTIVITY_LIKE_EMAIL_NOTIFICATION_CHECKBOX, 2);
@@ -215,13 +235,23 @@ public class NotificationsAdminSeting {
       evt.waitForElementNotPresent(ELEMENT_SPACE_JOIN_EMAIL_NOTIFICATION_TITLE, 3000, 1);
       break;
     case Space_Join_intranet:
-      evt.click(ELEMENT_SPACE_NOTIFICATION_JOIN_EDIT_BTN);
-      evt.uncheck(ELEMENT_SPACE_JOIN_INTRANET_NOTIFICATION_CHECKBOX, 2);
+      $(ELEMENT_SPACE_NOTIFICATION_JOIN_EDIT_BTN).click();
+      if($(ELEMENT_SPACE_JOIN_INTRANET_NOTIFICATION_CHECKBOX).is(Condition.checked))
+      $(ELEMENT_SPACE_JOIN_INTRANET_NOTIFICATION_CHECKBOX).parent().click();
       info("Click on Save button");
-      evt.click(ELEMENT_SPACE_JOIN_NOTIFICATION_SAVE_BTN);
+      $(ELEMENT_SPACE_JOIN_NOTIFICATION_SAVE_BTN).click();
       info("Verify that Intranet notification is hidded");
-      evt.waitForElementNotPresent(ELEMENT_SPACE_JOIN_INTRANET_NOTIFICATION_TITLE, 3000, 1);
+      $(ELEMENT_SPACE_JOIN_INTRANET_NOTIFICATION_TITLE).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
       break;
+      case Space_Join_mobile:
+        evt.click(ELEMENT_SPACE_NOTIFICATION_JOIN_EDIT_BTN);
+        if($(ELEMENT_SPACE_JOIN_MOBILE_NOTIFICATION_CHECKBOX).is(Condition.checked))
+        $(ELEMENT_SPACE_JOIN_MOBILE_NOTIFICATION_CHECKBOX).parent().click();
+        info("Click on Save button");
+        $(ELEMENT_SPACE_JOIN_NOTIFICATION_SAVE_BTN).click();
+        info("Verify that Intranet notification is hidded");
+        $(ELEMENT_SPACE_JOIN_INTRANET_NOTIFICATION_TITLE).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+        break;
     case Space_Invitation_email:
       evt.click(ELEMENT_SPACE_NOTIFICATION_INVITATION_EDIT_BTN);
       evt.uncheck(ELEMENT_SPACE_INVITATION_EMAIL_NOTIFICATION_CHECKBOX, 2);
@@ -267,23 +297,24 @@ public class NotificationsAdminSeting {
     switch (notifToDisable) {
     case NewUser_email:
       info("Click on Edit button");
-      evt.click(ELEMENT_NEW_USER_NOTIFICATION_EDIT_BTN);
-      if (evt.waitForAndGetElement(ELEMENT_NEW_USER_EMAIL_NOTIFICATION_CHECKBOX_CHECKED, 2000, 0) == null)
-        evt.check(ELEMENT_NEW_USER_EMAIL_NOTIFICATION_CHECKBOX, 2);
+      $(ELEMENT_NEW_USER_NOTIFICATION_EDIT_BTN).click();
+      if ($(ELEMENT_NEW_USER_EMAIL_NOTIFICATION_CHECKBOX).is(Condition.not(Condition.checked)))
+        $(ELEMENT_NEW_USER_EMAIL_NOTIFICATION_CHECKBOX).parent().click();
       info("Click on Save button");
-      evt.click(ELEMENT_NEW_USER_NOTIFICATION_SAVE_BTN);
+      $(ELEMENT_NEW_USER_NOTIFICATION_SAVE_BTN).click();
+      $(ELEMENT_NEW_USER_NOTIFICATION_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
       info("Verify that email notification is shown");
-      evt.waitForAndGetElement(ELEMENT_NEW_USER_EMAIL_NOTIFICATION_TITLE, 3000, 1);
+      $(ELEMENT_NEW_USER_EMAIL_NOTIFICATION_TITLE).waitUntil(Condition.visible,Configuration.timeout);
       break;
     case NewUser_intranet:
       info("Click on Edit button");
-      evt.click(ELEMENT_NEW_USER_NOTIFICATION_EDIT_BTN);
-      if (evt.waitForAndGetElement(ELEMENT_NEW_USER_INTRANET_NOTIFICATION_CHECKBOX_CHECKED, 2000, 0) == null)
-        evt.check(ELEMENT_NEW_USER_INTRANET_NOTIFICATION_CHECKBOX, 2);
+      $(ELEMENT_NEW_USER_NOTIFICATION_EDIT_BTN).click();
+      if ($(ELEMENT_NEW_USER_INTRANET_NOTIFICATION_CHECKBOX).is(Condition.not(Condition.checked)))
+        $(ELEMENT_NEW_USER_INTRANET_NOTIFICATION_CHECKBOX).parent().click();
       info("Click on Save button");
-      evt.click(ELEMENT_NEW_USER_NOTIFICATION_SAVE_BTN);
+      $(ELEMENT_NEW_USER_NOTIFICATION_SAVE_BTN).click();
       info("Verify that intranet notification is shown");
-      evt.waitForAndGetElement(ELEMENT_NEW_USER_INTRANET_NOTIFICATION_TITLE, 3000, 1);
+      $(ELEMENT_NEW_USER_INTRANET_NOTIFICATION_TITLE).waitUntil(Condition.visible,Configuration.timeout);
       break;
     case ConnectionRequest_email:
       evt.click(ELEMENT_CONNECTION_REQUEST_EDIT_BTN);
@@ -449,7 +480,7 @@ public class NotificationsAdminSeting {
       break;
     case AS_Comment:
       info("Verify that Activity Comment is disabled");
-      evt.waitForAndGetElement(ELEMENT_ADMIN_NOTIFICATION_ACTIVITY_COMMENT_DISBALE);
+      $(ELEMENT_ADMIN_NOTIFICATION_ACTIVITY_COMMENT_DISBALE).waitUntil(Condition.visible,Configuration.timeout);
       break;
     case AS_Like:
       info("Verify that Activity like is disabled");
@@ -469,7 +500,7 @@ public class NotificationsAdminSeting {
       break;
     case Space_Join:
       info("Verify that Space join is disabled");
-      evt.waitForAndGetElement(ELEMENT_ADMIN_NOTIFICATION_SPACE_JOIN_DISBALE);
+      $(ELEMENT_ADMIN_NOTIFICATION_SPACE_JOIN_DISBALE).waitUntil(Condition.visible,Configuration.timeout);
       break;
     case Space_Post:
       info("Verify that Space post is disabled");
@@ -489,14 +520,14 @@ public class NotificationsAdminSeting {
     evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     if (!name.isEmpty()) {
       info("Input name");
-      evt.type(ELEMENT_ADMIN_NOTIFICATION_SENDER_NAME, name, true);
+      $(ELEMENT_ADMIN_NOTIFICATION_SENDER_NAME).setValue(name);
     }
     if (!address.isEmpty()) {
       info("Input address");
-      evt.type(ELEMENT_ADMIN_NOTIFICATION_SENDER_ADDRESS, address, true);
+      $(ELEMENT_ADMIN_NOTIFICATION_SENDER_ADDRESS).setValue(address);
     }
     info("Click on Save button");
-    evt.click(ELEMENT_ADMIN_NOTIFICATION_SENDER_SAVE_BTN);
+     $(ELEMENT_ADMIN_NOTIFICATION_SENDER_SAVE_BTN).click();
   }
 
   /**
@@ -504,7 +535,7 @@ public class NotificationsAdminSeting {
    */
   public void verifyFailChangeNotificationSender() {
     info("Verify error message when input invalid email");
-    evt.waitForAndGetElement(ELEMENT_NOTIFICATION_SENDER_ERROR_MESSAGE_INVALID_EMAIL);
+    $(ELEMENT_NOTIFICATION_SENDER_ERROR_MESSAGE_INVALID_EMAIL).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -513,7 +544,7 @@ public class NotificationsAdminSeting {
    */
   public void verifySuccessChangeNotificationSender(String name, String email) {
     info("Verify success message when input correct name and email");
-    evt.waitForAndGetElement(ELEMENT_NOTIFICATION_SENDER_SUCCESS_MESSAGE.replace("$name", name).replace("$email", email));
+    $(byXpath(ELEMENT_NOTIFICATION_SENDER_SUCCESS_MESSAGE.replace("$name", name).replace("$email", email))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -815,7 +846,7 @@ public class NotificationsAdminSeting {
    * Connection Request for email.....
    */
   public enum notificationType {
-    NewUser_email, NewUser_intranet, ConnectionRequest_email, ConnectionRequest_intranet, AS_Comment_email, AS_Comment_intranet, AS_Like_email, AS_Like_intranet, AS_Mention_email, AS_Mention_intranet, AS_Post_email, AS_Post_intranet, Space_Invitation_email, Space_Invitation_intranet, Space_Join_email, Space_Join_intranet, Space_Post_email, Space_Post_intranet;
+    NewUser_email, NewUser_intranet,NewUser_mobile, ConnectionRequest_email, ConnectionRequest_intranet, AS_Comment_email, AS_Comment_mobile,AS_Comment_intranet, AS_Like_email, AS_Like_intranet, AS_Mention_email, AS_Mention_intranet, AS_Post_email, AS_Post_intranet, Space_Invitation_email, Space_Invitation_intranet, Space_Join_email, Space_Join_mobile,Space_Join_intranet, Space_Post_email, Space_Post_intranet;
   }
 
   /**

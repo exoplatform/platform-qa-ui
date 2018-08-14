@@ -565,6 +565,8 @@ public final class SocialLocator {
 
   public static final By              ELEMENT_NEW_USER_INTRANET_NOTIFICATION_CHECKBOX                   =
                                                                                       By.xpath(".//*[@id='WEB_CHANNELNewUserPlugin']");
+  public static final By              ELEMENT_NEW_USER_MOBILE_NOTIFICATION_CHECKBOX                   =
+          By.xpath(".//*[@id='PUSH_CHANNELNewUserPlugin']");
 
   public static final By              ELEMENT_NEW_USER_EMAIL_NOTIFICATION_CHECKBOX_CHECKED              =
                                                                                            By.xpath(".//*[@id='MAIL_CHANNELNewUserPlugin'][contains(@checked,'checked')]");
@@ -624,6 +626,8 @@ public final class SocialLocator {
 
   public static final By              ELEMENT_ACTIVITY_COMMENT_INTRANET_NOTIFICATION_CHECKBOX           =
                                                                                               By.xpath(".//*[@id='WEB_CHANNELActivityCommentPlugin']");
+  public static final By              ELEMENT_ACTIVITY_COMMENT_MOBILE_NOTIFICATION_CHECKBOX           =
+          By.xpath(".//*[@id='PUSH_CHANNELActivityCommentPlugin']");
 
   public static final By              ELEMENT_ACTIVITY_COMMENT_INTRANET_NOTIFICATION_CHECKBOX_CHECKED   =
                                                                                                       By.xpath(".//*[@id='WEB_CHANNELActivityCommentPlugin'][contains(@checked,'checked')]");
@@ -2277,6 +2281,8 @@ public final class SocialLocator {
 
   public static final By              ELEMENT_SPACE_JOIN_INTRANET_NOTIFICATION_CHECKBOX                 =
                                                                                         By.xpath(".//*[@id='WEB_CHANNELRequestJoinSpacePlugin']");
+  public static final By              ELEMENT_SPACE_JOIN_MOBILE_NOTIFICATION_CHECKBOX                 =
+          By.xpath(".//*[@id='PUSH_CHANNELRequestJoinSpacePlugin']");
 
   public static final By              ELEMENT_SPACE_JOIN_EMAIL_NOTIFICATION_TITLE                       =
                                                                                   By.xpath(".//*[@id='RequestJoinSpacePlugin']//*[contains(@class,'MAIL_CHANNEL')]");
