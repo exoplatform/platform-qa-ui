@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.social.pageobject;
 
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_NOTIFICATION_DROPDOWN;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
@@ -73,18 +74,17 @@ public class IntranetNotification {
 
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
-        if (evt.waitForAndGetElement(ELEMENT_NOTIFICATION_UI_ACTIVITY_LOADER, 3000, 0) != null)
-          ;
+        if (evt.waitForAndGetElement(ELEMENT_NOTIFICATION_UI_ACTIVITY_LOADER, 3000, 0) != null);
         break;
       }
-      if (evt.waitForAndGetElement(ELEMENT_NOTIFICATION_UI_ACTIVITY_LOADER, 5000, 0) != null) {
+      if ($(ELEMENT_NOTIFICATION_UI_ACTIVITY_LOADER).is(Condition.visible)) {
         info("Element " + ELEMENT_NOTIFICATION_UI_ACTIVITY_LOADER + " is displayed");
         break;
       }
       info("Retry...[" + repeat + "]");
       if (isPopup) {
         info("View detail notification when comments an activity from the popup");
-        evt.click(ELEMENT_NOTIFICATION_POPUP_COMMENT.replace("$activity", activity));
+        $(byXpath(ELEMENT_NOTIFICATION_POPUP_COMMENT.replace("$activity", activity))).click();
       } else {
         info("View detail notification when comments an activity from all notification page");
         evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_COMMENT.replace("$activity", activity));
@@ -507,7 +507,7 @@ public class IntranetNotification {
     info("users.size:" + users.size());
     if (isPopUp) {
       info("Verify that last user is shown in the popup");
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_USER.replace("$user", users.get(lastIndex)), 2000, 2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_USER.replace("$user", users.get(lastIndex)))).waitUntil(Condition.visible,Configuration.timeout);
     } else {
       info("Verify that last user is shown in the page");
       evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ALL_USER.replace("$user", users.get(lastIndex)), 2000, 2);
@@ -515,7 +515,7 @@ public class IntranetNotification {
 
     if (users.size() > 2 && isPopUp == true) {
       info("Verify that second last user is shown in the popup");
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_USER.replace("$user", users.get(lastIndex - 1)), 2000, 2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_USER.replace("$user", users.get(lastIndex - 1)))).waitUntil(Condition.visible,Configuration.timeout);
     }
 
     if (users.size() > 2 && isPopUp == false) {
@@ -536,10 +536,9 @@ public class IntranetNotification {
     int lastIndex = users.size() - 1;
     if (users.size() > 3 && isPopUp == true) {
       info("Verify the activity message for more " + (lastIndex - 2) + " users comments");
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_COMMENTS_CONTENT.replace("$comment", status)
-                                                                             .replace("$number", users.get(lastIndex - 1)),
-                               2000,
-                               2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_COMMENTS_CONTENT.replace("$comment", status)
+                                                                             .replace("$number", users.get(lastIndex - 1)))).waitUntil(Condition.visible,Configuration.timeout);
+
     }
 
     if (users.size() > 3 && isPopUp == false) {
@@ -552,7 +551,7 @@ public class IntranetNotification {
 
     if (users.size() < 3 && isPopUp == true) {
       info("Verify the activity message for 2 or 1 comment(s)");
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_COMMENTS_CONTENT.replace("$comment", status), 2000, 2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_COMMENTS_CONTENT.replace("$comment", status))).waitUntil(Condition.visible,Configuration.timeout);
     }
 
     if (users.size() < 3 && isPopUp == false) {
@@ -725,7 +724,7 @@ public class IntranetNotification {
   public void checkActivityTitleInStatus(String actTitle, boolean isPopUp) {
     if (!actTitle.isEmpty() && isPopUp == true) {
       info("Verify the activity's title is shown in the popup");
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ACTIVITY_TITLE.replace("$title", actTitle), 2000, 2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ACTIVITY_TITLE.replace("$title", actTitle))).waitUntil(Condition.visible,Configuration.timeout);
     } else {
       info("Verify the activity's title is shown in the page");
       evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ALL_ACTIVITY_TITLE.replace("$title", actTitle), 2000, 2);
@@ -745,7 +744,7 @@ public class IntranetNotification {
     info("users.size():" + users.size());
     info("Verify that last user's avatar is shown in list");
     if (isPopUp)
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_AVATAR.replace("$lastUser", users.get(lastIndex)), 2000, 2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_AVATAR.replace("$lastUser", users.get(lastIndex)))).waitUntil(Condition.visible,Configuration.timeout);
     else
       evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ALL_AVATAR.replace("$lastUser", users.get(lastIndex)), 2000, 2);
   }
