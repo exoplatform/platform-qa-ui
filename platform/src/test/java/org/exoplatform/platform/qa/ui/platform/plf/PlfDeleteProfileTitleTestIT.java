@@ -61,6 +61,7 @@ public class PlfDeleteProfileTitleTestIT extends Base {
    $(ELEMENT_EDIT_PROFILE).click();
    $(ELEMENT_TITLE_INPUT).setValue("");
    $(ELEMENT_BUTTON_SAVE).click();
+   $(ELEMENT_BUTTON_SAVE).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
    $(ELEMENT_ABOUT_ME).shouldNot(Condition.visible);
 
 

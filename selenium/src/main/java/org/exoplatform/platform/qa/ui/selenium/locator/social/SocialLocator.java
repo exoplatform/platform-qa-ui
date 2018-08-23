@@ -2165,7 +2165,7 @@ public static final By
 
   // Members tab
   public static final SelenideElement ELEMENT_SPACE_SETTINGS_MEMBERS_TAB                                =
-                                                                         $(byId("UISpaceMenu")).find(byText("Members"));
+                                                                         $(byId("UISpaceMenu")).find(byClassName("uiIconAppmembers"));
 
   public static final SelenideElement ELEMENT_SPACE_SETTINGS_MEMBERS_TAB_IN_SETTING_TAB                 =
                                                                                         $(byId("UISpaceSettingPortlet")).find(byText("Members"));

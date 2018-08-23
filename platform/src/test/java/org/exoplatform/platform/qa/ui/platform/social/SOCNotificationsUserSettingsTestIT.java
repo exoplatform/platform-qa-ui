@@ -219,7 +219,6 @@ public class SOCNotificationsUserSettingsTestIT extends Base {
     activityStream.mentionUserActivity(username1, mention2);
     manageLogInOut.signIn(username1, password);
     info("Check intranet notification");
-    ELEMENT_ALERT_NOTIFICATION.shouldNot(Condition.visible);
     navigationToolbar.goToIntranetNotification();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(mention2)).shouldNot(Condition.exist);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");

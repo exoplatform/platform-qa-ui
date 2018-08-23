@@ -33,6 +33,7 @@ import org.exoplatform.platform.qa.ui.social.pageobject.*;
 
 @Tag("social")
 @Tag("sniff")
+
 public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
   NavigationToolbar      navigationToolbar;
 
@@ -3380,9 +3381,9 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1 + " " + username1)).parent().shouldHave(text(username1 + " "
         + username1 + " has posted an activity in the " + space + " space."));
     manageLogInOut.signIn(username3, password);
-    ELEMENT_ALERT_NOTIFICATION.shouldNot(visible);
     navigationToolbar.goToIntranetNotification();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1 + " " + username1)).shouldNot(exist);
+    manageLogInOut.signIn(username1, password);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
@@ -3481,7 +3482,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     manageLogInOut.signIn(username2, password);
     info("Enable like and new user notifications");
     navigationToolbar.goToMyNotifications();
-    myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.AS_Comment_intranet);
+    myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.AS_Comment_intranet);
     executeJavaScript("window.scrollBy(0,-5500)", "");
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(username1);
@@ -3494,7 +3495,6 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     homePagePlatform.goToHomePage();
     activityStream.commentActivity(activity, comment1);
     manageLogInOut.signIn(username2, password);
-    ELEMENT_ALERT_NOTIFICATION.shouldNot(not(visible));
     navigationToolbar.goToIntranetNotification();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(comment1)).shouldNot(Condition.exist);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");

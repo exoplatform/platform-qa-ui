@@ -1092,7 +1092,7 @@ public class ActivityStream {
     // click on delete button
     $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
     ELEMENT_DELETE_POPUP_OK.click();
-    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears, Configuration.timeout);
+    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
 
   }
 
