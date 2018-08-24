@@ -510,7 +510,7 @@ public class IntranetNotification {
       $(byXpath(ELEMENT_INTRANET_NOTIFICATION_USER.replace("$user", users.get(lastIndex)))).waitUntil(Condition.visible,Configuration.timeout);
     } else {
       info("Verify that last user is shown in the page");
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ALL_USER.replace("$user", users.get(lastIndex)), 2000, 2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ALL_USER.replace("$user", users.get(lastIndex)))).waitUntil(Condition.visible,Configuration.timeout);
     }
 
     if (users.size() > 2 && isPopUp == true) {
@@ -520,7 +520,7 @@ public class IntranetNotification {
 
     if (users.size() > 2 && isPopUp == false) {
       info("Verify that second last user is shown in the page");
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ALL_USER.replace("$user", users.get(lastIndex - 1)), 2000, 2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ALL_USER.replace("$user", users.get(lastIndex - 1)))).waitUntil(Condition.visible,Configuration.timeout);
     }
   }
 
@@ -556,7 +556,7 @@ public class IntranetNotification {
 
     if (users.size() < 3 && isPopUp == false) {
       info("Verify the activity message for 2 or 1 comment(s)");
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ALL_COMMENTS_CONTENT.replace("$comment", status), 2000, 2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ALL_COMMENTS_CONTENT.replace("$comment", status))).waitUntil(Condition.visible,Configuration.timeout);
     }
   }
 
@@ -727,7 +727,7 @@ public class IntranetNotification {
       $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ACTIVITY_TITLE.replace("$title", actTitle))).waitUntil(Condition.visible,Configuration.timeout);
     } else {
       info("Verify the activity's title is shown in the page");
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ALL_ACTIVITY_TITLE.replace("$title", actTitle), 2000, 2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ALL_ACTIVITY_TITLE.replace("$title", actTitle))).waitUntil(Condition.visible,Configuration.timeout);
     }
   }
 
@@ -746,7 +746,7 @@ public class IntranetNotification {
     if (isPopUp)
       $(byXpath(ELEMENT_INTRANET_NOTIFICATION_AVATAR.replace("$lastUser", users.get(lastIndex)))).waitUntil(Condition.visible,Configuration.timeout);
     else
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ALL_AVATAR.replace("$lastUser", users.get(lastIndex)), 2000, 2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ALL_AVATAR.replace("$lastUser", users.get(lastIndex)))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
