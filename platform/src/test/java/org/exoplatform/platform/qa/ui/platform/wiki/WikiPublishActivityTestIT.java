@@ -376,7 +376,7 @@ public class WikiPublishActivityTestIT extends Base {
     homePagePlatform.goToHomePage();
     activityStream.checkActivity(wiki);
     info("add the content of the wiki page as a comment on wiki activity stream");
-    activityStream.commentWikiActivity(wiki, text);
+    activityStream.commentNOTextActivity(wiki, text);
     info("check that the comment is added successfully");
     activityStream.checkCommentOfActivity(wiki, text);
     info("Delete the page");

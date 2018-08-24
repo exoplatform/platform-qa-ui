@@ -543,10 +543,9 @@ public class IntranetNotification {
 
     if (users.size() > 3 && isPopUp == false) {
       info("Verify the activity message for more " + (lastIndex - 2) + " users comments");
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ALL_COMMENTS_CONTENT.replace("$comment", status)
-                                                                                 .replace("$number", users.get(lastIndex - 1)),
-                               2000,
-                               2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ALL_COMMENTS_CONTENT.replace("$comment", status)
+                                                                                 .replace("$number", users.get(lastIndex - 1)))).waitUntil(Condition.visible,Configuration.timeout);
+
     }
 
     if (users.size() < 3 && isPopUp == true) {
