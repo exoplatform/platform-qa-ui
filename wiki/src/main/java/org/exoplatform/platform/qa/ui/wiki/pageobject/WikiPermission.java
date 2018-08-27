@@ -5,6 +5,8 @@ import static com.codeborne.selenide.Selectors.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 
 import org.exoplatform.platform.qa.ui.selenium.Button;
@@ -64,19 +66,20 @@ public class WikiPermission {
     switch (type) {
     case View_Pages:
       info("Select View pages permission");
-      evt.check(ELEMENT_PERMISSION_VIEW_CHECKBOX.replace("$userGroup", userGroup), 2);
+      $(byId("VIEWPAGE"+userGroup)).parent().click();
       break;
     case Edit_Pages:
       info("Select Edit pages permission");
-      $(byText(userGroup)).parent().parent().findAll(byClassName("uiCheckbox")).get(1).click();
+
+      $(byId("EDITPAGE"+userGroup)).parent().click();
       break;
     case Admin_Pages:
       info("Select View pages permission");
-      evt.check(ELEMENT_PERMISSION_ADMPAGE_CHECKBOX.replace("$userGroup", userGroup), 2);
+      $(byId("ADMINPAGE"+userGroup)).parent().click();
       break;
     case Admin_Wiki:
       info("Select View pages permission");
-      evt.check(ELEMENT_PERMISSION_ADMWIKI_CHECKBOX.replace("$userGroup", userGroup), 2);
+      $(byId("ADMINSPACE"+userGroup)).parent().click();
       break;
     }
   }
@@ -199,7 +202,7 @@ public class WikiPermission {
     info("Click on Save button");
     $(ELEMENT_PERMISSION_BUTTON_SAVE).click();
     if (!savePresent)
-      evt.waitForElementNotPresent(ELEMENT_PERMISSION_BUTTON_SAVE);
+      $(ELEMENT_PERMISSION_BUTTON_SAVE).waitUntil(Condition.visible,Configuration.timeout);
 
   }
 

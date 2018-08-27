@@ -118,7 +118,7 @@ public class UserAndGroupManagement {
     String[] groups = groupsPath.split("/");
     for (String groupSelect : groups) {
       info("Select group:" + groupSelect);
-      evt.click(ELEMENT_GROUP_MANAGEMENT_SELECT_GROUP.replace("${name}", groupSelect));
+      $(byXpath(ELEMENT_GROUP_MANAGEMENT_SELECT_GROUP.replace("${name}", groupSelect))).click();
     }
 
   }
@@ -327,6 +327,7 @@ public class UserAndGroupManagement {
   public void deleteGroup(String groupName, boolean verify, int... wait) {
     info("-- Delete group: " + groupName + "--");
     int waitTime = wait.length > 0 ? wait[0] : testBase.getDefaultTimeout();
+    ELEMENT_LIST_OF_GROUPS_IN_GROUP_TAB.find(byText(groupName)).waitUntil(Condition.visible,Configuration.timeout).click();
     $(byClassName("uiIconTrash")).click();
     alert.acceptAlert();
     if (verify) {
