@@ -1818,5 +1818,6 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
           "//*[contains(@title,'Close Window')]";
   public static final String          ELEMENT_MSG_UPDATE_USER_PROFILE                         =
           "The user profile has been updated.";
+  public static final SelenideElement ELEMENT_LIST_OF_GROUPS_IN_GROUP_TAB=$(byClassName("groupNavigationContainer"));
 
 }
