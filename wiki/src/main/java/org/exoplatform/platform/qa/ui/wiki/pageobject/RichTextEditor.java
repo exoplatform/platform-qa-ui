@@ -537,7 +537,6 @@ public class RichTextEditor {
       switchTo().frame(frame);
       $(byId("body")).sendKeys(content);
       switchTo().defaultContent();
-      refresh();
     }
     }
 
