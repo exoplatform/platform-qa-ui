@@ -75,24 +75,24 @@ public class ECMS_Permission {
     if (user == "user") {
       info("User is a user");
       info("Click on Select User button");
-      evt.click(ELEMENT_PERMISSION_SELECTUSER);
+      $(ELEMENT_PERMISSION_SELECTUSER).click();
       info("Click on Add User button");
-      evt.click(By.xpath((ELEMENT_PERMISSION_USER_ADDUSER).replace("${name}", name)));
+      $(By.xpath((ELEMENT_PERMISSION_USER_ADDUSER).replace("${name}", name))).click();
     }
     if (user == "membership") {
       info("User is a membership");
       info("Type a mebership for textbox user");
-      evt.type(ELEMENT_PERMISSION_TEXTBOXUSER, "" + opt[0] + ":/" + opt[1] + "", true);
+      $(ELEMENT_PERMISSION_TEXTBOXUSER).setValue( "" + opt[0] + ":/" + opt[1] + "");
     }
     if (user == "all") {
       info("User is all");
       info("Click on Select everyone button");
-      evt.click(ELEMENT_PERMISSION_SELECTEVERYONE);
+      $(ELEMENT_PERMISSION_SELECTEVERYONE).click();
     }
     info("Check on checkbox for reading, modifying and removing");
     selectCheckBoxRight(read, modify, remove);
     info("Click on Save button");
-    evt.click(ELEMENT_PERMISSION_SAVE);
+    $(ELEMENT_PERMISSION_SAVE).click();
     info("Finished changing right");
   }
 
@@ -126,7 +126,7 @@ public class ECMS_Permission {
    */
   public void closePermission() {
     info("Close permission form");
-    evt.click(ELEMENT_PERMISSION_CLOSE);
+    $(ELEMENT_PERMISSION_CLOSE).click();
   }
 
   /**
