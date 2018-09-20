@@ -1,6 +1,9 @@
 package org.exoplatform.platform.qa.ui.platform.wiki.functional;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
@@ -15,16 +18,17 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
+import static com.codeborne.selenide.Selectors.byAttribute;
+import static com.codeborne.selenide.Selenide.$;
 import static java.time.zone.ZoneRulesProvider.refresh;
-import static org.exoplatform.platform.qa.ui.core.PLFData.password;
-import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 
 @Tag("wiki")
 @Tag("functional")
-public class WikiPermissionPagePermissionAddTestIt extends Base {
+public class WikiPermissionPagePermissionAddTestIT extends Base {
 
     HomePagePlatform homePagePlatform;
 
@@ -69,8 +73,7 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         userAndGroupManagement = new UserAndGroupManagement(this);
         userAddManagement = new UserAddManagement(this);
         manageLogInOut = new ManageLogInOut(this);
-
-        manageLogInOut.signInCas(username, password);
+        manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
     }
 
     /**
@@ -154,7 +157,6 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         navigationToolbar.goToUsersAndGroupsManagement();
         userAndGroupManagement.goToGroupTab();
         userAndGroupManagement.addGroup(groupName, groupLabel, groupDesc, true);
-        arrayUsers.add(groupLabel);
         info("Add users to the group");
         String membership = "manager";
         navigationToolbar.goToUsersAndGroupsManagement();
@@ -179,6 +181,7 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         wikiPermission.addPermisisonByType(groupUsers);
         wikiPermission.selectPermission(groupUsers, WikiPermission.permissionType.Edit_Pages);
         wikiPermission.savePermisison();
+        $(byAttribute("class", "UIPopupWindow UIDragObject uiPopup")).waitUntil(Condition.visible, Configuration.timeout);
         wikiHomePage.confirmWaringMessage(true);
         info("Select permission page");
         homePagePlatform.goToWiki();
@@ -193,6 +196,11 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         homePagePlatform.goToWiki();
         wikiHomePage.goToAPage(page);
         wikiHomePage.goToEditPage();
+        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+        navigationToolbar.goToManageCommunity();
+        userAndGroupManagement.deleteAllUsers(arrayUsers);
+        userAndGroupManagement.goToGroupTab();
+        userAndGroupManagement.deleteGroup(groupLabel, true);
     }
 
     /**
@@ -258,7 +266,6 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         navigationToolbar.goToUsersAndGroupsManagement();
         userAndGroupManagement.goToGroupTab();
         userAndGroupManagement.addGroup(groupName, groupLabel, groupDesc, true);
-        arrayUsers.add(groupLabel);
         info("Add users to the group");
         String membership = "manager";
         navigationToolbar.goToUsersAndGroupsManagement();
@@ -288,6 +295,11 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         homePagePlatform.goToWiki();
         wikiHomePage.goToAPage(page);
         wikiHomePage.goToEditPage();
+        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+        navigationToolbar.goToManageCommunity();
+        userAndGroupManagement.deleteAllUsers(arrayUsers);
+        userAndGroupManagement.goToGroupTab();
+        userAndGroupManagement.deleteGroup(groupLabel, true);
     }
 
     /**
@@ -355,7 +367,6 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         navigationToolbar.goToUsersAndGroupsManagement();
         userAndGroupManagement.goToGroupTab();
         userAndGroupManagement.addGroup(groupName, groupLabel, groupDesc, true);
-        arrayUsers.add(groupLabel);
         info("Add users to the group");
         String membership = "manager";
         navigationToolbar.goToUsersAndGroupsManagement();
@@ -369,9 +380,7 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(page, pageContent);
         wikiManagement.saveAddPage();
-        refresh();
         wikiValidattions.verifyTitleWikiPage(page);
-        //arrayPage.add(page);
         info(" Open form to add permission for space");
         homePagePlatform.goToWiki();
         wikiHomePage.goToWikiSettingPage();
@@ -379,14 +388,19 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         info("Select group to add permission");
         String groupUsers = "*:/" + groupName;
         wikiPermission.addPermisisonByType(groupUsers);
+        wikiPermission.selectPermission(groupUsers, WikiPermission.permissionType.Edit_Pages);
         wikiPermission.savePermisison();
+        $(byAttribute("class", "UIPopupWindow UIDragObject uiPopup")).waitUntil(Condition.visible, Configuration.timeout);
         wikiHomePage.confirmWaringMessage(true);
-        // arrayUsers.add(groupUsers);
+        $(ELEMENT_ACCOUNT_NAME_LINK).click();
+        homePagePlatform.goToHomePage();
         info("Select permission page");
         homePagePlatform.goToWiki();
+        refresh();
         wikiHomePage.goToAPage(page);
         wikiHomePage.goToPermissions();
         wikiPermission.addPermisisonByType(groupUsers);
+        wikiPermission.selectPermission(groupUsers, WikiPermission.permissionType.Edit_Pages);
         wikiPermission.savePermisison(true);
         wikiHomePage.confirmWaringMessage(true);
         info("Mermbers of the selected group has view/edit permission");
@@ -394,6 +408,13 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         homePagePlatform.goToWiki();
         wikiHomePage.goToAPage(page);
         wikiHomePage.goToEditPage();
+        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(page);
+        navigationToolbar.goToManageCommunity();
+        userAndGroupManagement.deleteAllUsers(arrayUsers);
+        userAndGroupManagement.goToGroupTab();
+        userAndGroupManagement.deleteGroup(groupLabel, true);
 
     }
 
@@ -472,51 +493,12 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         wikiPermission.addPermisisonByType(arrayUsers.get(1));
         wikiPermission.selectPermission(arrayUsers.get(1), WikiPermission.permissionType.Edit_Pages);
         wikiPermission.savePermisison(true);
+        $(byAttribute("class", "UIPopupWindow UIDragObject uiPopup")).waitUntil(Condition.visible, Configuration.timeout);
         wikiHomePage.confirmWaringMessage(true);
-        info("Select permission page");
+        $(ELEMENT_ACCOUNT_NAME_LINK).click();
+        homePagePlatform.goToHomePage();
         homePagePlatform.goToWiki();
-        wikiHomePage.goToAPage(page);
-        wikiHomePage.goToPermissions();
-        wikiPermission.addPermisisonByType(arrayUsers.get(1));
-        wikiPermission.selectPermission(arrayUsers.get(1), WikiPermission.permissionType.Edit_Pages);
-        wikiPermission.savePermisison(true);
-        wikiHomePage.confirmWaringMessage(true);
-        homePagePlatform.goToWiki();
-        wikiHomePage.goToAPage(page);
-        wikiHomePage.goToPermissions();
-        wikiPermission.addPermisisonByType(arrayUsers.get(2));
-        wikiPermission.selectPermission(arrayUsers.get(2), WikiPermission.permissionType.Edit_Pages);
-        wikiPermission.savePermisison(true);
-        wikiHomePage.confirmWaringMessage(true);
-        info("Select permission page");
-        homePagePlatform.goToWiki();
-        wikiHomePage.goToAPage(page);
-        wikiHomePage.goToPermissions();
-        wikiPermission.addPermisisonByType(arrayUsers.get(2));
-        wikiPermission.selectPermission(arrayUsers.get(2), WikiPermission.permissionType.Edit_Pages);
-        wikiPermission.savePermisison(true);
-        wikiHomePage.confirmWaringMessage(true);
-        homePagePlatform.goToWiki();
-        wikiHomePage.goToAPage(page);
-        wikiHomePage.goToPermissions();
-        wikiPermission.addPermisisonByType(arrayUsers.get(3));
-        wikiPermission.selectPermission(arrayUsers.get(3), WikiPermission.permissionType.Edit_Pages);
-        wikiPermission.savePermisison(true);
-        wikiHomePage.confirmWaringMessage(true);
-        info("Select permission page");
-        homePagePlatform.goToWiki();
-        wikiHomePage.goToAPage(page);
-        wikiHomePage.goToPermissions();
-        wikiPermission.addPermisisonByType(arrayUsers.get(3));
-        wikiPermission.selectPermission(arrayUsers.get(3), WikiPermission.permissionType.Edit_Pages);
-        wikiPermission.savePermisison(true);
-        wikiHomePage.confirmWaringMessage(true);
-        info("Mermbers of the selected group has view/edit permission");
-        manageLogInOut.signIn(arrayUsers.get(0), password);
-        homePagePlatform.goToWiki();
-        wikiHomePage.goToAPage(page);
         refresh();
-        wikiHomePage.goToEditPage();
         info("Select permission page");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAPage(page);
@@ -525,6 +507,27 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         wikiPermission.selectPermission(arrayUsers.get(0), WikiPermission.permissionType.Edit_Pages);
         wikiPermission.savePermisison(true);
         wikiHomePage.confirmWaringMessage(true);
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAPage(page);
+        wikiHomePage.goToPermissions();
+        wikiPermission.addPermisisonByType(arrayUsers.get(1));
+        wikiPermission.selectPermission(arrayUsers.get(1), WikiPermission.permissionType.Edit_Pages);
+        wikiPermission.savePermisison(true);
+        wikiHomePage.confirmWaringMessage(true);
+        info("Select permission page");
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAPage(page);
+        wikiHomePage.goToPermissions();
+        wikiPermission.addPermisisonByType(arrayUsers.get(2));
+        wikiPermission.selectPermission(arrayUsers.get(2), WikiPermission.permissionType.Edit_Pages);
+        wikiPermission.savePermisison(true);
+        wikiHomePage.confirmWaringMessage(true);
+        info("Mermbers of the selected group has view/edit permission");
+        manageLogInOut.signIn(arrayUsers.get(0), password);
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAPage(page);
+        refresh();
+        wikiHomePage.goToEditPage();
         info("Mermbers of the selected group has view/edit permission");
         manageLogInOut.signIn(arrayUsers.get(1), password);
         homePagePlatform.goToWiki();
@@ -537,6 +540,11 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         wikiHomePage.goToAPage(page);
         refresh();
         wikiHomePage.goToEditPage();
+        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(page);
+        navigationToolbar.goToManageCommunity();
+        userAndGroupManagement.deleteAllUsers(arrayUsers);
     }
 
     /**
@@ -610,9 +618,13 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         wikiPermission.addPermisisonByType(arrayUsers.get(0));
         wikiPermission.selectPermission(arrayUsers.get(0), WikiPermission.permissionType.Edit_Pages);
         wikiPermission.savePermisison(true);
+        $(byAttribute("class", "UIPopupWindow UIDragObject uiPopup")).waitUntil(Condition.visible, Configuration.timeout);
         wikiHomePage.confirmWaringMessage(true);
         info("Select permission page");
+        homePagePlatform.goToHomePage();
+        $(ELEMENT_ACCOUNT_NAME_LINK).click();
         homePagePlatform.goToWiki();
+        refresh();
         wikiHomePage.goToAPage(page);
         wikiHomePage.goToPermissions();
         wikiPermission.addPermisisonByType(arrayUsers.get(0));
@@ -625,6 +637,11 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         wikiHomePage.goToAPage(page);
         refresh();
         wikiHomePage.goToEditPage();
+        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(page);
+        navigationToolbar.goToManageCommunity();
+        userAndGroupManagement.deleteAllUsers(arrayUsers);
     }
 
     /**
@@ -704,6 +721,7 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         wikiPermission.selectPermission(arrayUsers.get(0), WikiPermission.permissionType.Edit_Pages);
         wikiPermission.savePermisison();
         wikiHomePage.confirmWaringMessage(true);
+        $(byAttribute("class", "UIPopupWindow UIDragObject uiPopup")).waitUntil(Condition.visible, Configuration.timeout);
         info("Select permission page");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAPage(page);
@@ -719,6 +737,11 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         wikiHomePage.goToAPage(page);
         refresh();
         wikiHomePage.goToEditPage();
+        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(page);
+        navigationToolbar.goToManageCommunity();
+        userAndGroupManagement.deleteAllUsers(arrayUsers);
     }
 
     /**
@@ -808,6 +831,7 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         wikiPermission.selectPermission(arrayUsers.get(0), WikiPermission.permissionType.Edit_Pages);
         wikiPermission.savePermisison(true);
         wikiHomePage.confirmWaringMessage(true);
+        $(byAttribute("class", "UIPopupWindow UIDragObject uiPopup")).waitUntil(Condition.visible, Configuration.timeout);
         info("Select permission page");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAPage(page);
@@ -822,6 +846,11 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         wikiHomePage.goToAPage(page);
         refresh();
         wikiHomePage.goToEditPage();
+        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(page);
+        navigationToolbar.goToManageCommunity();
+        userAndGroupManagement.deleteAllUsers(arrayUsers);
     }
 
     /**
@@ -911,6 +940,7 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         wikiPermission.selectPermission(arrayUsers.get(0), WikiPermission.permissionType.Edit_Pages);
         wikiPermission.savePermisison(true);
         wikiHomePage.confirmWaringMessage(true);
+        $(byAttribute("class", "UIPopupWindow UIDragObject uiPopup")).waitUntil(Condition.visible, Configuration.timeout);
         info("Select permission page");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAPage(page);
@@ -923,8 +953,14 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         manageLogInOut.signIn(arrayUsers.get(0), password);
         homePagePlatform.goToWiki();
         wikiHomePage.goToAPage(page);
-        refresh();
         wikiHomePage.goToEditPage();
+        refresh();
+        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(page);
+        navigationToolbar.goToManageCommunity();
+        userAndGroupManagement.deleteAllUsers(arrayUsers);
+
     }
 
     /**
@@ -1012,6 +1048,7 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         wikiPermission.selectPermission(arrayUsers.get(0), WikiPermission.permissionType.Edit_Pages);
         wikiPermission.savePermisison(true);
         wikiHomePage.confirmWaringMessage(true);
+        $(byAttribute("class", "UIPopupWindow UIDragObject uiPopup")).waitUntil(Condition.visible, Configuration.timeout);
         info("Select permission page");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAPage(page);
@@ -1024,8 +1061,13 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         manageLogInOut.signIn(arrayUsers.get(0), password);
         homePagePlatform.goToWiki();
         wikiHomePage.goToAPage(page);
-        refresh();
         wikiHomePage.goToEditPage();
+        refresh();
+        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(page);
+        navigationToolbar.goToManageCommunity();
+        userAndGroupManagement.deleteAllUsers(arrayUsers);
     }
 
     /**
@@ -1106,6 +1148,7 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         wikiPermission.selectPermission(arrayUsers.get(0), WikiPermission.permissionType.Edit_Pages);
         wikiPermission.savePermisison(true);
         wikiHomePage.confirmWaringMessage(true);
+        $(byAttribute("class", "UIPopupWindow UIDragObject uiPopup")).waitUntil(Condition.visible, Configuration.timeout);
         info("Select permission page");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAPage(page);
@@ -1120,6 +1163,11 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         wikiHomePage.goToAPage(page);
         refresh();
         wikiHomePage.goToEditPage();
+        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(page);
+        navigationToolbar.goToManageCommunity();
+        userAndGroupManagement.deleteAllUsers(arrayUsers);
     }
 
     /**
@@ -1183,9 +1231,8 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         wikiManagement.saveAddPage();
         refresh();
         wikiValidattions.verifyTitleWikiPage(page);
-        //arrayPage.add(page);
         info("Open form to page permission");
-        String groupUsers = "manager:/developers";
+        String groupUsers = "*:/developers";
         homePagePlatform.goToWiki();
         wikiHomePage.goToWikiSettingPage();
         wikiSettingPage.goToPermissionTab();
@@ -1194,10 +1241,22 @@ public class WikiPermissionPagePermissionAddTestIt extends Base {
         wikiPermission.selectPermission(groupUsers, WikiPermission.permissionType.Edit_Pages);
         wikiPermission.savePermisison(true);
         wikiHomePage.confirmWaringMessage(true);
+        $(byAttribute("class", "UIPopupWindow UIDragObject uiPopup")).waitUntil(Condition.visible, Configuration.timeout);
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAPage(page);
+        wikiHomePage.goToPermissions();
+        wikiPermission.addPermisisonByType(groupUsers);
+        wikiPermission.selectPermission(groupUsers, WikiPermission.permissionType.Edit_Pages);
+        wikiPermission.savePermisison(true);
+        wikiHomePage.confirmWaringMessage(true);
         info("Mermbers of the selected group has view/edit permission");
-        manageLogInOut.signIn("john","gtngtn",true);
+        manageLogInOut.signIn(PLFData.DATA_USER4, PLFData.password);
         homePagePlatform.goToWiki();
         wikiHomePage.goToAPage(page);
         wikiHomePage.goToEditPage();
+        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(page);
+
     }
 }

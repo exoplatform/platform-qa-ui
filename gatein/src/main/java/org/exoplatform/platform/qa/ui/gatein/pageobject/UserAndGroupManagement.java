@@ -327,7 +327,8 @@ public class UserAndGroupManagement {
   public void deleteGroup(String groupName, boolean verify, int... wait) {
     info("-- Delete group: " + groupName + "--");
     int waitTime = wait.length > 0 ? wait[0] : testBase.getDefaultTimeout();
-    $(byClassName("uiIconTrash")).click();
+      ELEMENT_LIST_OF_GROUPS_IN_GROUP_TAB.find(byText(groupName)).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(byClassName("uiIconTrash")).click();
     alert.acceptAlert();
     if (verify) {
       $(byText(groupName)).shouldNot(Condition.exist);
