@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.platform.social;
 
+import static com.codeborne.selenide.Condition.hasText;
 import static com.codeborne.selenide.Condition.not;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
@@ -69,7 +70,7 @@ public class SOCPeopleProfileConnectionStatusTestIT extends Base {
    * : * The icon to a disconnect icon* The label to Disconnect
    */
   @Test
-  @BugInPLF("PLF8057")
+  @Tag("PLF-7947")
   public void test01_CheckConnectionStatusBetweenTwoUsers() throws Exception {
     info("Test 1: Check Connection Status between two users");
     /* Create data test */
@@ -98,8 +99,8 @@ public class SOCPeopleProfileConnectionStatusTestIT extends Base {
     connectionsManagement.searchPeople(username1, null, null, null);
     homePagePlatform.refreshUntil($(byText(username1 + " " + username1)), visible, 2000);
     $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username1))).click();
-    $(ELEMENT_ICON_CHAT_PROFIL_STATUS).waitUntil(visible,Configuration.timeout);
-    $(ELEMENT_ICON_CALL_PROFIL_STATUS).waitUntil(visible,Configuration.timeout);
+    ELEMENT_ICON_CHAT_PROFIL_STATUS.waitUntil(visible,Configuration.timeout);
+    ELEMENT_ICON_CALL_PROFIL_STATUS.waitUntil(visible,Configuration.timeout);
     $(ELEMENT_ACCEPT_CONNECT_PROFIL_STATUS).waitUntil(visible, Configuration.timeout);
     $(ELEMENT_DROPDOWN_DENY_PROFIL_STATUS).click();
     $(ELEMENT_DENY_PROFIL_STATUS).waitUntil(visible, Configuration.timeout);
@@ -132,7 +133,7 @@ public class SOCPeopleProfileConnectionStatusTestIT extends Base {
       connectionsManagement.searchPeople(username2, null, null, null);
       $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username2))).click();
       $(ELEMENT_ADD_CONNECT_PROFIL_STATUS).click();
-      $(ELEMENT_CANCEL_CONNECT_PROFILE_STATUS).waitUntil(visible,Configuration.timeout);
+      $(ELEMENT_CANCEL_CONNECT_PROFILE_STATUS).waitUntil(visible,Configuration.timeout).waitUntil(hasText("Cancel Request"),Configuration.timeout);
       info("login as user 2");
       manageLogInOut.signIn(username2, password);
       info("goto user1's profile");
@@ -144,7 +145,7 @@ public class SOCPeopleProfileConnectionStatusTestIT extends Base {
       info("Deny to connect user1");
       $(ELEMENT_DROPDOWN_DENY_PROFIL_STATUS).click();
       $(ELEMENT_CLICK_DENY_USER_PROFIL_STATUS).click();
-      $(ELEMENT_ADD_CONNECT_PROFIL_STATUS).waitUntil(visible,Configuration.timeout);
+      $(ELEMENT_ADD_CONNECT_PROFIL_STATUS).waitUntil(visible,Configuration.timeout).waitUntil(hasText("Connect"),Configuration.timeout);
       info("Delete users");
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
@@ -274,9 +275,9 @@ public class SOCPeopleProfileConnectionStatusTestIT extends Base {
     homePagePlatform.goToConnections();
     $(ELEMENT_ALL_CONNECTIONS_TAB).click();
     connectionsManagement.searchPeople(username2, null, null, null);
-    homePagePlatform.refreshUntil($(byText(username2 + " " + username1)), visible, 2000);
+    homePagePlatform.refreshUntil($(byText(username2 + " " + username2)), visible, 2000);
     $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username2))).click();
-    $(ELEMENT_ADD_CONNECT_PROFIL_STATUS).waitUntil(visible,Configuration.timeout);
+    $(ELEMENT_ADD_CONNECT_PROFIL_STATUS).waitUntil(visible,Configuration.timeout).waitUntil(hasText("Connect"),Configuration.timeout);
     info("Delete users");
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
