@@ -92,7 +92,7 @@ public class SpaceSettingManagement {
     if (verify) {
       info("Verify that user is shown in invitation table");
       if (fullName != "" && fullName != null)
-        evt.waitForAndGetElement(ELEMENT_SPACE_INVITED_USER_TABLE.replace("${user}", fullName), 2000, 1);
+        $(byXpath(ELEMENT_SPACE_INVITED_USER_TABLE.replace("${user}", fullName))).waitUntil(Condition.visible,Configuration.timeout);
     }
   }
 

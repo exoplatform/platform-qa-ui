@@ -453,6 +453,9 @@ public class SpaceManagement {
   public void goToAgendaTab() {
     info("Open Agenda Tab");
     refresh();
+    info("Open members tab");
+    if($(ELEMENT_SPACE_MENU_MORE).is(Condition.visible))
+      $(ELEMENT_SPACE_MENU_MORE).click();
     $(ELEMENT_AGENDA_TAB).click();
     $(ELEMENT_AGENDA_EVENT_ADD_BTN).waitUntil(Condition.visible, Configuration.timeout);
 

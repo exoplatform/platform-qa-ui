@@ -1022,7 +1022,7 @@ public class ActivityStream {
                                    .getAttribute("id")
                                    .split("UIActivityLoader")[1];
     // click on comment link
-    $(byText(activity)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
+    $(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
     // insert comment
     $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
@@ -1031,7 +1031,7 @@ public class ActivityStream {
     $(byText(comment)).should(Condition.exist);
   }
 
-  public void commentWikiActivity(String wikiactivity, String comment) {
+  public void commentNOTextActivity(String wikiactivity, String comment) {
     // get the id of wikiactivity
     String id = $(byText(wikiactivity)).parent()
             .parent()
