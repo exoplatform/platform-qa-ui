@@ -31,6 +31,5 @@ public class ChangeLanguages {
     $(ELEMENT_CHANGE_LANGUAGE_POPUP_TITLE).waitUntil(Condition.visible, Configuration.timeout);
     $(byXpath(ELEMENT_CHANGELANGUAGE_LANGUAGE.replace("${language}", language))).click();
     $(byXpath(ELEMENT_AVATAR_CHANGELANGUAGE_APPLY.replace("${text}", applyText))).click();
-
   }
 }

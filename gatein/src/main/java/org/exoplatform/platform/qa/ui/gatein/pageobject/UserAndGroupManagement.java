@@ -540,8 +540,11 @@ public class UserAndGroupManagement {
     if (language != null && language != "") {
       evt.select(ELEMENT_LANGUAGE, language);
     }
-    (ELEMENT_SAVE_BUTTON).click();
-    (ELEMENT_MSG_UPDATE_USER_PROFILE).click();
+    ELEMENT_SAVE_BUTTON.click();
+    ELEMENT_SAVE_BUTTON.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    ELEMENT_MSG_UPDATE_USER_PROFILE.waitUntil(Condition.visible,Configuration.timeout);
+    ELEMENT_CLOSE_MESSAGE.click();
+    ELEMENT_CLOSE_MESSAGE.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**

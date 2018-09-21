@@ -1220,8 +1220,6 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   public static final String          ELEMENT_PORTAL_TEMPLATE_TAB                             =
                                                                   "//a[contains(text(),'Portal Templates')]";
 
-  public static final SelenideElement        ELEMENT_SAVE_BUTTON                                     =
-                                                          $(byText("Save"));
 
   public static final String          ELEMENT_SELECT_ACCESS_GROUP_ITEM                        =
                                                                        "//a[contains(@title,'${group}')]/i";
@@ -1276,8 +1274,6 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   public static final String          ELEMENT_SEARCH_ICON_USERS_MANAGEMENT                    =
                                                                            "//*[contains(@title,'Quick Search')]";
 
-  public static final SelenideElement       ELEMENT_CLOSE_MESSAGE                                   =
-          $(byText("Close"));
 
   // message
   public static final String          ELEMENT_MSG_CREATE_ACCOUNT                              =
@@ -1458,8 +1454,6 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
 
   public static final String          ELEMENT_MSG_CONFIRM_DELETE1                             = "Are you sure you want to delete";
 
-  public static final SelenideElement    ELEMENT_MSG_UPDATE_USER_PROFILE                         =
-                                                                      $(byText("OK"));
 
   public static final By              ELEMENT_OK_BUTTON                                       =
                                                         By.xpath("//*[contains(text(),'OK')]");
@@ -1817,6 +1811,14 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   public static final By ELEMENT_LINE_IN_TABLE_LIST_USERS=byClassName("enabled");
 
   public static final SelenideElement ELEMENT_ICON_CLOSE_EDIT_LAYOUT=$(byXpath("//*[@id=\"UIPageEditor\"]/div[1]/a[1]"));
+
   public static final SelenideElement ELEMENT_LIST_CONTENT=$(byId("PAGEBODY-VIEW-BLOCK"));
+  public static final String          ELEMENT_SAVE_BUTTON                                     =
+          "//button[contains(text(),'Save')]";
+  public static final String          ELEMENT_CLOSE_MESSAGE                                   =
+          "//*[contains(@title,'Close Window')]";
+  public static final String          ELEMENT_MSG_UPDATE_USER_PROFILE                         =
+          "The user profile has been updated.";
+
 
 }
