@@ -225,7 +225,7 @@ public class SOCNotificationsIntranetNotificationIconListTestIT extends Base {
                  "rgba(227, 236, 246, 1)");
     $(ELEMENT_NOTIFICATION_DROPDOWN).findAll(byClassName("media")).get(0).has(Condition.text(username3 + " " + username3));
     info("A button [View All] is displayed at the bottom of the page");
-    waitForAndGetElement(ELEMENT_VIEW_ALL_BUTTON, 3000, 1);
+    $(ELEMENT_VIEW_ALL_BUTTON).waitUntil(Condition.visible,Configuration.timeout);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);

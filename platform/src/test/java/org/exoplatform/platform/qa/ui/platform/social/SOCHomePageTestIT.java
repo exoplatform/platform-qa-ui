@@ -540,6 +540,7 @@ public class SOCHomePageTestIT extends Base {
 
   }
 
+
   /**
    * <li>Case ID:121936.</li>
    * <li>Test Case Name: Mention a user in comment.</li>

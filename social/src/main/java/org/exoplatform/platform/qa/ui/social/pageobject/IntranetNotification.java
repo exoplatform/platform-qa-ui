@@ -6,6 +6,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_NOTIFICATION_DROPDOWN;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_MOVE_PAGE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.By;
 
 public class IntranetNotification {
   private final TestBase       testBase;
@@ -110,20 +112,16 @@ public class IntranetNotification {
           ;
         break;
       }
-      if (evt.waitForAndGetElement(ELEMENT_UIBASICPROFILEPORTLET, 5000, 0) != null) {
-        info("Element " + ELEMENT_UIBASICPROFILEPORTLET + " is displayed");
-        break;
-      }
       info("Retry...[" + repeat + "]");
       if (isPopup) {
         info("View detail of request connection to new user from the popup");
-        evt.click(ELEMENT_NOTIFICATION_POPUP_REQUEST_CONNECT.replace("$name", fullName));
+        $(byXpath(ELEMENT_NOTIFICATION_POPUP_REQUEST_CONNECT.replace("$name", fullName))).click();
       } else {
         info("View detail of request connection to new user from all notification page");
         evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_REQUEST_CONNECT.replace("$name", fullName));
       }
-
     }
+
   }
 
   /**
@@ -509,7 +507,7 @@ public class IntranetNotification {
     info("users.size:" + users.size());
     if (isPopUp) {
       info("Verify that last user is shown in the popup");
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_USER.replace("$user", users.get(lastIndex)), 2000, 2);
+      ($(byXpath(ELEMENT_INTRANET_NOTIFICATION_USER.replace("$user", users.get(lastIndex))))).waitUntil(Condition.visible,Configuration.timeout);
     } else {
       info("Verify that last user is shown in the page");
       evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ALL_USER.replace("$user", users.get(lastIndex)), 2000, 2);
@@ -570,28 +568,22 @@ public class IntranetNotification {
    *          connection,mention...
    * @param user is full name or name of the user
    */
-  public void checkStatus(String status, String user) {
-
-    info("Verify that the status is shown");
-    for (int repeat = 0;; repeat++) {
-      if (repeat > 1) {
-        if (evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_STATUS.replace("$status", status).replace("$fullName", user),
-                                     3000,
-                                     0) != null)
-          ;
-        break;
+  public void checkStatus(String status,String user){
+      info("Verify that the status is shown");
+      for (int repeat = 0;; repeat++) {
+          if (repeat > 1) {
+              if ($(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS.
+                      replace("$status",status).replace("$fullName",user))).is(Condition.visible));
+              break;
+          }
+          if ($(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS.
+                  replace("$status",status).replace("$fullName",user))).is(Condition.visible)) {
+              info("Element " + ELEMENT_INTRANET_NOTIFICATION_STATUS.
+                      replace("$status",status).replace("$fullName",user)+ " is displayed");
+              break;
+          }
+          info("Retry...[" + repeat + "]");
       }
-      if (evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_STATUS.replace("$status", status).replace("$fullName", user),
-                                   5000,
-                                   0) != null) {
-        info("Element " + ELEMENT_INTRANET_NOTIFICATION_STATUS.replace("$status", status).replace("$fullName", user)
-            + " is displayed");
-        break;
-      }
-      info("Retry...[" + repeat + "]");
-      this.testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-
-    }
   }
 
   /**
@@ -747,9 +739,10 @@ public class IntranetNotification {
     info("users.size():" + users.size());
     info("Verify that last user's avatar is shown in list");
     if (isPopUp)
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_AVATAR.replace("$lastUser", users.get(lastIndex)), 2000, 2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_AVATAR.replace("$lastUser", users.get(lastIndex)))).waitUntil(Condition.visible,Configuration.timeout);
     else
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ALL_AVATAR.replace("$lastUser", users.get(lastIndex)), 2000, 2);
+      $(byXpath (ELEMENT_INTRANET_NOTIFICATION_ALL_AVATAR.replace("$lastUser", users.get(lastIndex)))).waitUntil(Condition.visible,Configuration.timeout);
+
   }
 
   /**
@@ -763,6 +756,7 @@ public class IntranetNotification {
   public void checkAvatarInStatus(String user, boolean isPopUp) {
     info("Verify that last user's avatar is shown in list");
     if (isPopUp)
+
       $(byXpath(ELEMENT_INTRANET_NOTIFICATION_AVATAR.replace("$lastUser", user))).waitUntil(Condition.visible,Configuration.timeout);
     else
       $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ALL_AVATAR.replace("$lastUser", user))).waitUntil(Condition.visible,Configuration.timeout);

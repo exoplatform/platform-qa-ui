@@ -72,14 +72,14 @@ public class PlfBrandingTestIT extends Base {
     waitForAndGetElement(ELEMENT_PLF_BRANDINGPAGE);
 
     click(ELEMENT_PLF_BRANDING_SELECTTHEME);
-    waitForAndGetElement(ELEMENT_PLF_BRANDING_THEMELIGHT, 2000, 0);
-    waitForAndGetElement(ELEMENT_PLF_BRANDING_THEMEDARK, 2000, 0);
+    $(ELEMENT_PLF_BRANDING_THEMELIGHT).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_PLF_BRANDING_THEMEDARK).waitUntil(Condition.visible,Configuration.timeout);
 
     click(ELEMENT_PLF_BRANDING_THEMELIGHT);
-    waitForAndGetElement(ELEMENT_PLF_BRANDING_TOPBAR_THEMELIGHT, 2000, 0);
+    $(ELEMENT_PLF_BRANDING_TOPBAR_THEMELIGHT).waitUntil(Condition.visible,Configuration.timeout);
 
     ELEMENT_BUTTON_APPLY.click();
-    waitForAndGetElement(ELEMENT_TOOLBAR_THEMELIGHT, 2000, 0);
+    $(ELEMENT_TOOLBAR_THEMELIGHT).waitUntil(Condition.visible,Configuration.timeout);
     $(ELEMENT_PLF_BRANDING_SELECTTHEME).click();
     $(ELEMENT_PLF_BRANDING_THEMEDARK).click();
     ELEMENT_BUTTON_APPLY.click();
@@ -109,7 +109,7 @@ public class PlfBrandingTestIT extends Base {
 
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToBanding();
-    waitForAndGetElement(ELEMENT_PLF_BRANDINGPAGE, 2000, 0);
+    $(ELEMENT_PLF_BRANDINGPAGE).waitUntil(Condition.visible,Configuration.timeout);
 
     ELEMENT_UPLOAD_LOGO.uploadFromClasspath("TestBrandingLogo.png");
 
@@ -136,7 +136,7 @@ public class PlfBrandingTestIT extends Base {
 
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToBanding();
-    waitForAndGetElement(ELEMENT_PLF_BRANDINGPAGE, 2000, 0);
+    $(ELEMENT_PLF_BRANDINGPAGE).waitUntil(Condition.visible,Configuration.timeout);
     waitForAndGetElement(ELEMENT_BANDING_PAGE_SELECT_LOGO);
     waitForAndGetElement(ELEMENT_BANDING_PAGE_SELECT_NAVIGATION_BAR_STYLE);
     ELEMENT_BUTTON_APPLY.waitUntil(Condition.appears, Configuration.timeout);

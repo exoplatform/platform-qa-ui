@@ -140,7 +140,7 @@ public class ManageLogInOut {
       info("Retry...[" + repeat + "]");
       testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     }
-    evt.click(ManageLogInOutLocator.ELEMENT_SIGN_OUT_LINK);
+    $(ManageLogInOutLocator.ELEMENT_SIGN_OUT_LINK).click();
     if (evt.waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK, 2000, 0) != null) {
       info("Clear cache and reconnect to the package");
       testBase.getExoWebDriver().getWebDriver().manage().deleteAllCookies();

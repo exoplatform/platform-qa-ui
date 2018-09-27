@@ -92,7 +92,7 @@ public class WikiAttachmentTestIT extends Base {
     $(byClassName("uploadInput")).find(byName("file")).uploadFromClasspath("wiki_attachment.txt");
     ELEMENT_SAVE_BUTTON_ADD_PAGE.waitUntil(Condition.enabled, Configuration.timeout);
     wikiManagement.saveAddPage();
-    waitForAndGetElement(ELEMENT_PAGE_ATTACHFILE, 3000, 1);
+    $(ELEMENT_PAGE_ATTACHFILE).waitUntil(Condition.visible,Configuration.timeout);
 
     click(ELEMENT_PAGE_ATTACHFILE);
     refresh();

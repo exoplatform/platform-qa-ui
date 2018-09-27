@@ -1150,7 +1150,7 @@ public final class SocialLocator {
                                                                      ".//*[@id='UIUserPlatformToolBarPortlet']//*[contains(normalize-space(),'${firstName} ${lastName}')]";
 
   public static final String          ELEMENT_PROFILE_TITLE                                             =
-                                                            ".//*[@id='UIStatusProfilePortlet']//*[contains(text(),'${fullName}')]";
+                                                            ".//*[@id='UIUserNavigationPortlet']//*[contains(text(),'${fullName}')]";
 
   // Left contact information
   public static final By              ELEMENT_UIBASICPROFILEPORTLET                                     =
