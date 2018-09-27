@@ -184,9 +184,13 @@ public class ProjectsManagement {
    *          want to disable or uncheck calendar integration
    */
   public void editProject(String projectPath, String title, String newTitle, String des, boolean... opt) {
-    $(byId("taskManagement")).find(byText(projectPath)).click();
-    $(byId("taskManagement")).find(byText(projectPath)).parent().parent().find(ELEMENT_ICON_PROJECT).click();
-    $(byId("taskManagement")).find(byText(projectPath)).parent().parent().find(ELEMENT_EDIT_PROJECT_OPTION).click();
+    $(byClassName("sub-item")).click();
+    //$(byText(projectPath)).click();
+    //$(byText(projectPath)).parent().parent().find(ELEMENT_ICON_PROJECT).click();
+    $(byClassName("list-projects")).parent().parent().parent().parent().find(byClassName("uiIconRightMenu")).click();
+   // $(byText(projectPath)).parent().parent().find(ELEMENT_EDIT_PROJECT_OPTION).click();
+   $ (ELEMENT_EDIT_PROJECT_OPTION).click();
+
     if (title != null && title != "") {
       info("Input title");
       ELEMENT_POPUB_EDIT_PROJECT.find(byText(title)).click();
