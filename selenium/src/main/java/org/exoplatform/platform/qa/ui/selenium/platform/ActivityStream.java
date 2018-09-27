@@ -1161,6 +1161,7 @@ public class ActivityStream {
     info("Verify that the reply is added");
     // click on the button comment
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
+    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     $(byText(reply)).should(Condition.exist);
     $(byText(reply)).parent().parent().find(byText(user)).should(Condition.exist);
   }
@@ -1217,6 +1218,7 @@ public class ActivityStream {
     // Confirm delete
     ELEMENT_DELETE_POPUP_OK.click();
     $(byText(reply)).shouldNot(Condition.exist);
+    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   public void replyToCommentInPreview(String comment, String reply, String user) {

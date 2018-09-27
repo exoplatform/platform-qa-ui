@@ -597,6 +597,8 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     wikiManagement.saveAddPage();
     wikiHomePage.goToPermalink();
     String perLink = ELEMENT_WIKI_PERMELINK.getValue();
+    ELEMENT_BUTTON_CLOSE_PERMALINK.click();
+    ELEMENT_BUTTON_CLOSE_PERMALINK.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     open(perLink);
     refresh();
@@ -639,7 +641,8 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
 
     wikiHomePage.goToPermalink();
     String perLink = ELEMENT_WIKI_PERMELINK.getValue();
-
+    ELEMENT_BUTTON_CLOSE_PERMALINK.click();
+    ELEMENT_BUTTON_CLOSE_PERMALINK.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     open(perLink);
     refresh();
@@ -698,6 +701,8 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     $(byText(wiki)).click();
     wikiHomePage.goToPermalink();
     String perLink = ELEMENT_WIKI_PERMELINK.getValue();
+    ELEMENT_BUTTON_CLOSE_PERMALINK.click();
+    ELEMENT_BUTTON_CLOSE_PERMALINK.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     open(perLink);
     refresh();
@@ -744,7 +749,8 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     wikiManagement.saveAddPage();
     wikiHomePage.goToPermalink();
     String perLink = ELEMENT_WIKI_PERMELINK.getValue();
-
+    ELEMENT_BUTTON_CLOSE_PERMALINK.click();
+    ELEMENT_BUTTON_CLOSE_PERMALINK.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     open(perLink);
     refresh();

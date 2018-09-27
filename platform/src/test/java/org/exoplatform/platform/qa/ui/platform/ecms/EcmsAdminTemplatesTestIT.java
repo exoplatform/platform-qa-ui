@@ -8,6 +8,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -157,6 +158,7 @@ public class EcmsAdminTemplatesTestIT extends Base {
    * Actions - A new template is created successfully
    */
   @Test
+  @BugInPLF("ECMS-7841")
   public void test04_AddDocumentTemplate() {
     info("Test 1: Add, edit and delete Document Template");
     String title = "title" + getRandomNumber();
@@ -170,6 +172,7 @@ public class EcmsAdminTemplatesTestIT extends Base {
   }
 
   @Test
+  @BugInPLF("ECMS-7841")
   public void test05_EditTemplate() {
     info("Test 1: Add, edit and delete Document Template");
     String title = "title" + getRandomNumber();
@@ -185,6 +188,7 @@ public class EcmsAdminTemplatesTestIT extends Base {
   }
 
   @Test
+  @BugInPLF("ECMS-7841")
   public void test06_DeleteDocumentTemplate() {
     info("Test 1: Add, edit and delete Document Template");
     String title = "title" + getRandomNumber();
