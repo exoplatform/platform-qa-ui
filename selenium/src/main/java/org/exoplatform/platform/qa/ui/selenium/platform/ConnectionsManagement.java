@@ -181,7 +181,7 @@ public class ConnectionsManagement {
       ELEMENT_CONNECTION_REVOVE_BTN.should(Condition.exist);
     }
     else
-      $(ELEMENT_CONNECTION_REVOVE_BTN).click();
+      $(byXpath(ELEMENT_CONNECTION_REMOVE_BTN.replace("${user}", username))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**

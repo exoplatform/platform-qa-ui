@@ -18,11 +18,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS;
 import static org.exoplatform.platform.qa.ui.core.PLFData.USER_ROOT;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_NOTIFICATION_DROPDOWN;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_PROFILE_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -192,5 +194,57 @@ public class SOCNotificationIntranetConnectionRequestTestIT extends Base {
         intranetNotification.goToDetailAcceptRequestConnectionUser(username1, true);
         info("Verify that User B is redirected to the profile of User A");
         $(byXpath(ELEMENT_PROFILE_TITLE.replace("${fullName}", username1 + " " + username1))).waitUntil(Condition.visible, Configuration.timeout);
+    }
+
+    @Test
+    public void Test03_RefuseAConnectionRequestFromTheNotification() {
+        info("Test 03: Refuse a Connection Request from the notification");
+        /** Refuse a Connection Request from the notification
+         - The notification "Someone sends me a connection request" is activated in User Settings
+         - User A sent a connection request to User B
+         - Login with User B
+         - Click notifications icon
+         - Check the list
+         - Click [Refuse]
+         --> Expected: - The connection is not approved, the 2 users are not connected
+         - The notification message is automatically hidden from the list
+         - Go to View All page
+         --> Expected: - The notification is not available / displayed in the View All page*/
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String username2 = "usernameb" + getRandomString();
+        String email2 = username2 + "@gmail.com";
+        String password = "123456";
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        UserAddManagement.addUser(username1, "123456", email1, username1, username1);
+        UserAddManagement.addUser(username2, "123456", email2, username2, username2);
+        manageLogInOut.signIn(username1, "123456");
+        info("goto My notification");
+        navigationToolbar.goToMyNotifications();
+        MyNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.ConnectionRequest_intranet);
+
+        info("User A sent a connection request to User B");
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(username2);
+
+        info("Log in with User B");
+        manageLogInOut.signIn(username2, password);
+        String status = "";
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.refuseRqConnection(username1);
+        intranetNotification.checkStatus(status, username1);
+
+        info("Verify that User A and User B are not friend");
+
+        homePagePlatform.goToConnections();
+        connectionsManagement.searchPeople(username1, null, null, null);
+        connectionsManagement.verifyConnection(username1, false);
+        homePagePlatform.goToHomePage();
+        info("The notification is not available / displayed in the View All page");
+        navigationToolbar.goToIntranetNotification();
+        $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1 + " " + username1)).shouldNot(Condition.visible);
+
+
     }
 }

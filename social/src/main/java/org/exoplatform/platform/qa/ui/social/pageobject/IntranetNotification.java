@@ -480,9 +480,9 @@ public class IntranetNotification {
       info("Retry...[" + repeat + "]");
       info("Click on Refuse button");
       $(byXpath(ELEMENT_CONNECT_REFUSE_BUTTON.replace("$name", fullName))).waitUntil(Condition.visible,Configuration.timeout).click();
-      $(byXpath(ELEMENT_CONNECT_REFUSE_BUTTON.replace("$name", fullName))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     }
   }
+
 
   /**
    * Check Accept and Refuse buttons are shown in Notification popup and page
