@@ -2361,18 +2361,13 @@ public final class SocialLocator {
   public static final By ELEMENT_TITLE_INPUT= byClassName("textarea");
   public static final By ELEMENT_BUTTON_SAVE= byXpath("//*[@id=\"UIEditUserProfileForm\"]/div[3]/button[1]");
   public static final By ELEMENT_ABOUT_ME= byClassName("simpleBox");
-<<<<<<< HEAD
   public static final ElementsCollection ELEMENT_LIST_OF_MEMBERS_IN_SPACE=$(byId("spaceMemberListBox")).findAll(byClassName("itemContainer"));
   public static final SelenideElement ELEMENT_BUTTON_ADD_GADGET=$(byClassName("AddIcon"));
   public static final SelenideElement ELEMENT_GADGET_LAST_FORUM_POST=$(byId("Adoption/gadget_LatestForumPosts"));
   public static final SelenideElement ELEMENT_CONTAINER_GADGETS=$(byId("UIDashboardContainer"));
   public static final SelenideElement ELEMENT_BUTTON_CLOSE_GADGETS=$(byClassName("UIPopupWindow")).find(byClassName("uiIconClose"));
   public static final SelenideElement ELEMENT_BUTTON_CLOSE_SPECIFIC_GADGET=$(byClassName("gadgets-gadget")).parent().parent().parent().parent().find(byClassName("uiIconClose"));
-=======
   public static final By              ELEMENT_EDIT_MY_PROFILE_BUTTON                                    =
           By.xpath("//*[@id='UIExperienceProfilePortlet']//*[@class='uiIconEdit uiIconLightGray']");
 
-
-
->>>>>>> Gatein global settig
 }
