@@ -297,4 +297,43 @@ public class SOCNotificationIntranetConnectionRequestTestIT extends Base {
         navigationToolbar.goToIntranetNotification();
         $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1 + " " + username1)).shouldNot(Condition.visible);
     }
-}
+
+    @Test
+    public void Test05_CheckViewAllAfterrefusingAConnectionRequest(){
+        info("Test 05: Check View All after refusing a Connection Request");
+        /** Check View All after refusing a Connection Request
+         *
+         * - The notification "Someone sends me a connection request" is activated in User Settings
+         - User A sent a connection request to User B
+         * - Login with User B
+         - Click notifications icon
+         - Check the list
+         - Click [Refuse]
+         - Go to View All
+         --> Expected: - The notifications message is not displayed in the page
+         */
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String username2 = "usernameb" + getRandomString();
+        String email2 = username2 + "@gmail.com";
+        String password = "123456";
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        UserAddManagement.addUser(username1, "123456", email1, username1, username1);
+        UserAddManagement.addUser(username2, "123456", email2, username2, username2);
+        manageLogInOut.signIn(username1, "123456");
+        info("goto My notification");
+        navigationToolbar.goToMyNotifications();
+        MyNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.ConnectionRequest_intranet);
+        info("User A sent a connection request to User B");
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(username2);
+        info("Log in with User B");
+        manageLogInOut.signIn(username2, password);
+        String status="";
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.refuseRqConnection(username1);
+        info("The notification is not available / displayed in the View All page");
+        intranetNotification.checkStatus(status,username1);
+    }}
+
