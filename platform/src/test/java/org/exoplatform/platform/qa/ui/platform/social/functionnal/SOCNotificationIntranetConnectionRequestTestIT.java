@@ -247,4 +247,54 @@ public class SOCNotificationIntranetConnectionRequestTestIT extends Base {
 
 
     }
+
+    @Test
+    public void Test04_CheckViewAllAfterAcceptingAConnectionRequest() {
+        info("Test 04: Check View All after accepting a Connection Request");
+      /*Check View All after accepting a Connection Request
+      Precondition:
+      - The notification "Someone sends me a connection request" is activated in User Settings
+      - User A sent a connection request to User B
+      Step 1:
+      - Login with User B
+      - Click notifications icon
+      - Check the list
+      - Click [Accept]
+      --> Expected: - The connection is approved, the 2 users are connected
+                  - The notification message is updated accordingly
+      */
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String username2 = "usernameb" + getRandomString();
+        String email2 = username2 + "@gmail.com";
+        String password = "123456";
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        UserAddManagement.addUser(username1, "123456", email1, username1, username1);
+        UserAddManagement.addUser(username2, "123456", email2, username2, username2);
+        manageLogInOut.signIn(username1, "123456");
+
+        info("goto My notification");
+        navigationToolbar.goToMyNotifications();
+        MyNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.ConnectionRequest_intranet);
+
+        info("User A sent a connection request to User B");
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(username2);
+
+        info("Log in with User B");
+        manageLogInOut.signIn(username2, password);
+        String status = " ";
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.acceptRqConnection(username1);
+        intranetNotification.checkStatus(status, username1);
+        /** Step 2:
+         - Go to View All
+         --> Expected: - The notifications is displayed in the message
+         - The message is displayed at the same position as the connection request
+         */
+        info("The notification is not available / displayed in the View All page");
+        navigationToolbar.goToIntranetNotification();
+        $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1 + " " + username1)).shouldNot(Condition.visible);
+    }
 }
