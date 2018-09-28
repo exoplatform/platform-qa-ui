@@ -181,7 +181,7 @@ public class ConnectionsManagement {
       ELEMENT_CONNECTION_REVOVE_BTN.should(Condition.exist);
     }
     else
-      evt.waitForElementNotPresent(ELEMENT_CONNECTION_REVOVE_BTN);
+      $(ELEMENT_CONNECTION_REVOVE_BTN).click();
   }
 
   /**
@@ -303,6 +303,14 @@ public class ConnectionsManagement {
       searchPeople(user, "", "", "");
       evt.waitForElementNotPresent(ELEMENT_USER_LINK.replace("${userName}", user));
     }
+  }
+
+  public void confirm(String username) {
+    $(ELEMENT_MY_CONNECTIONS_TAB).click();
+    // With user confirmed the invitation, user becomes friend and user's name
+    // is displayed on user's network list
+    searchPeople(username, null, null, null);
+    $(ELEMENT_CONNECTION_CONFIRM_BTN).click();
   }
 
   /**

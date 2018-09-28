@@ -131,4 +131,66 @@ public class SOCNotificationIntranetConnectionRequestTestIT extends Base {
         $(byXpath(ELEMENT_PROFILE_TITLE.replace("${fullName}", username1 + " " + username1))).waitUntil(Condition.visible, Configuration.timeout);
 
     }
+
+    @Test
+    public void Test02_AcceptAConnectionRequestFromTheNotification() {
+        info("Test 02: Accept a Connection Request from the notification");
+        /** Accept a Connection Request from the notification
+         - The notification "Someone sends me a connection request" is activated in User Settings
+         - User A sent a connection request to User B
+         - Login with User B
+         - Click notifications icon
+         - Check the list
+         Step 2:
+         Click on Accept
+         --> Expected: - The connection is approved, the 2 users are connected
+         */
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String username2 = "usernameb" + getRandomString();
+        String email2 = username2 + "@gmail.com";
+        String password = "123456";
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        UserAddManagement.addUser(username1, "123456", email1, username1, username1);
+        UserAddManagement.addUser(username2, "123456", email2, username2, username2);
+        manageLogInOut.signIn(username1, "123456");
+        info("goto My notification");
+        navigationToolbar.goToMyNotifications();
+        MyNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.ConnectionRequest_intranet);
+        info("User A sent a connection request to User B");
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(username2);
+        navigationToolbar.goToMyNotifications();
+        MyNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.ConnectionRequest_intranet);
+
+        /** Step 3:
+         - Check the notification message
+         --> Expected: After clicking Accept, the notification message is updated to :
+         $AVATAR
+         You are connected with $USER
+         $DATE
+         Where :
+         - $AVATAR is thumbnail of User A
+         - $USER is User A
+         - $DATE is the date of the notification
+         */
+        info("Log in with User B");
+        manageLogInOut.signIn(username2, password);
+        String status = " ";
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.acceptRqConnection(username1);
+        intranetNotification.checkStatus(status, username1);
+        info("Verify that User A and User B are friend");
+        homePagePlatform.goToConnections();
+        connectionsManagement.searchPeople(username1, null, null, null);
+        /** Step 4:
+         - Click the notification area
+         --> Expected:- User B is redirected to the profile of User A
+         */
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.goToDetailAcceptRequestConnectionUser(username1, true);
+        info("Verify that User B is redirected to the profile of User A");
+        $(byXpath(ELEMENT_PROFILE_TITLE.replace("${fullName}", username1 + " " + username1))).waitUntil(Condition.visible, Configuration.timeout);
+    }
 }
