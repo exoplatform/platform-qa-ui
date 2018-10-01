@@ -1534,19 +1534,13 @@ public class SiteExplorerHome {
    */
   public void verifyContentCreatedSuccessfully(String title) {
     info("Verify Content was created successfully");
-
     $(byText(title)).waitUntil(Condition.appears, Configuration.timeout);
     info("Content was created successfully");
   }
 
   public void verifyWebContentInformationCreatedSuccessfully(String Content){
     assertEquals(Content,$(byClassName("rightContainer")).find(byId("UIDocumentWorkspace")).find(byId("myTabContent")).find(byClassName("content-display")).getText());
-
   }
-
-
-
-
 
   /**
    * Select Drive by option
