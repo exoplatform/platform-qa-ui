@@ -10,6 +10,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermission
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 
@@ -1537,6 +1538,15 @@ public class SiteExplorerHome {
     $(byText(title)).waitUntil(Condition.appears, Configuration.timeout);
     info("Content was created successfully");
   }
+
+  public void verifyWebContentInformationCreatedSuccessfully(String Content){
+    assertEquals(Content,$(byClassName("rightContainer")).find(byId("UIDocumentWorkspace")).find(byId("myTabContent")).find(byClassName("content-display")).getText());
+
+  }
+
+
+
+
 
   /**
    * Select Drive by option

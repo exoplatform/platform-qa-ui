@@ -59,7 +59,7 @@ public class ECMSCreateWebContentTestIT extends Base {
         manageLogInOut.signInCas(username, password);
     }
 
-    @Tag("bug EXOGTN-2345")
+    @Tag("EXOGTN-2345")
     @Test
     public void test_CreateWebContentWithParticularCharacter(){
 
@@ -80,6 +80,7 @@ public class ECMSCreateWebContentTestIT extends Base {
         $(ELEMENT_CONTENT).setValue("&#128522;");
         createNewDoc.saveAndClose();
         siteExplorerHome.verifyContentCreatedSuccessfully(name);
+        siteExplorerHome.verifyWebContentInformationCreatedSuccessfully("\uD83D\uDE0A");
         info("Delete file document");
         navigationToolbar.goToSiteExplorer();
         siteExplorerHome.goToPath("intranet/documents", "Site Management");
