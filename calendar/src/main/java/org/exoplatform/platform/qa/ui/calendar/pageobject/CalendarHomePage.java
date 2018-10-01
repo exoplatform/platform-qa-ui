@@ -176,7 +176,7 @@ public class CalendarHomePage {
         $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE_ICON.replace("$date", date))).click();
         $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE.replace("$name", name).replace("$date",
                 date))).scrollTo().contextClick();}
-      if ($(byText(name)).is(Condition.not(Condition.visible)))
+      if ($(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))).is(Condition.not(Condition.visible)))
         $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE.replace("$name", name).replace("$date",
                 date))).contextClick();
       else {
@@ -906,7 +906,7 @@ public class CalendarHomePage {
           $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE.replace("$name", name).replace("$date",
                   date))).shouldNotBe(Condition.visible);
         } else
-          evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date));
+          $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
         break;
       case WORKWEEK:
         switch (optionDay) {
@@ -951,6 +951,8 @@ public class CalendarHomePage {
    */
   public void goToRightMenuTaskEventFromAnyView(String name, selectViewOption view, selectDayOption optionDay, String date) {
     info("click right menu task/event");
+    executeJavaScript("window.scrollBy(0,-2000)", "");
+    refresh();
     switch (view) {
       case DAY:
         goToRightMenuTaskEventFromDayView(name, optionDay);
