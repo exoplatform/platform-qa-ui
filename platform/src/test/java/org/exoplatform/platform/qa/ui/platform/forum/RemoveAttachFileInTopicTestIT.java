@@ -82,7 +82,7 @@ public class RemoveAttachFileInTopicTestIT extends Base{
         info("Go to a topic");
         forumHomePage.goToTopic(topic);
         forumTopicManagement.selectItemMoreActionMenuTopic(ForumTopicManagement.specifMoreActionMenuTopic.EDIT);
-        $(byId("UIEditTopicContainer")).find(byClassName("uiIconDelete")).click();
+        ELEMENT_TOPIC_CONTAINER.find(byClassName("uiIconDelete")).click();
         $(ELEMENT_SUBMIT_BUTTON).click();
         info("verify that the attach file is removed");
         forumHomePage.goToTopic(topic);
@@ -97,6 +97,3 @@ public class RemoveAttachFileInTopicTestIT extends Base{
 
 
 }
-
-
-
