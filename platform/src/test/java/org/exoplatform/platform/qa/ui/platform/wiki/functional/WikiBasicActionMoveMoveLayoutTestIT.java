@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.RichTextEditor;
@@ -13,6 +14,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.core.PLFData.password;
+import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_MOVE_PAGE_DESTINATION_LABEL;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_MOVE_PAGE_SELECT_THE_DESTINATION_LABEL;
@@ -30,6 +33,7 @@ public class WikiBasicActionMoveMoveLayoutTestIT extends Base {
     WikiManagement wikiManagement;
     RichTextEditor richEditor;
     SpaceHomePage spaceHomePage;
+    ManageLogInOut manageLogInOut;
 
 
 
@@ -43,6 +47,8 @@ public class WikiBasicActionMoveMoveLayoutTestIT extends Base {
         wikiManagement = new WikiManagement(this);
         spaceManagement = new SpaceManagement(this);
         richEditor = new RichTextEditor(this);
+        manageLogInOut=new ManageLogInOut(this);
+        manageLogInOut.signInCas(username, password);
     }
 
     @Test
