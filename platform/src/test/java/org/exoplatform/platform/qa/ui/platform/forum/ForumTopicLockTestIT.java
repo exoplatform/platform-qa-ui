@@ -30,15 +30,10 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 public class ForumTopicLockTestIT extends Base {
 
     HomePagePlatform        homePagePlatform;
-
     ForumForumManagement    forumForumManagement;
-
     ForumTopicManagement    forumTopicManagement;
-
     ForumCategoryManagement forumCategoryManagement;
-
     ForumHomePage           forumHomePage;
-
     ManageLogInOut          manageLogInOut;
 
     @BeforeEach
@@ -76,8 +71,8 @@ public class ForumTopicLockTestIT extends Base {
         forumTopicManagement.startTopic(topic, topic, "", "");
         info("Go to a topic");
         forumHomePage.goToTopic(topic);
-        $(ELEMENT_TOPIC_MORE_ACTION).click();
-        $(ELEMENT_TOPIC_LOCK).click();
+        forumTopicManagement.selectItemMoreActionMenuTopic(ForumTopicManagement.specifMoreActionMenuTopic.LOCK);
+        info("verify that quote button is not visible");
         $(ELEMENT_TOPIC_QUOTE).shouldNot(Condition.visible);
         info("Delete category");
         forumHomePage.goToHomeCategory();
