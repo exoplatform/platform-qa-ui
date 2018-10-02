@@ -193,9 +193,9 @@ public class GateinGlobalSettingsTestIT extends Base {
    * <li>Test Case Name: Change language with demo account.</li>
    */
   @Test
-  public void test04_ChangeLanguageWithDemoAccount() {
+  public void test04_ChangeLanguageAccount() {
     String language1 = "French";
-    String language2 = "English";
+    String language2 = "Français";
 
     /*
      * Step Number: 1 Step Name: Step 1: Change language with demo account
@@ -231,7 +231,6 @@ public class GateinGlobalSettingsTestIT extends Base {
     info("At next time when edited user sign in, the displaying language will be in the new selected");
     manageLogInOut.signInCas(DATA_USER1, DATA_PASS2);
 
-    info("Change language of john account to French");
     navigationToolbar.goToChangeLanguage();
     changeLanguage.changeLanguage(language2, "Apply");
     $(ELEMENT_HOME_LINK_PLF_IN_FRENCH).waitUntil(Condition.visible, Configuration.timeout);

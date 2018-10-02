@@ -541,10 +541,11 @@ public class UserAndGroupManagement {
       evt.select(ELEMENT_LANGUAGE, language);
     }
     $(byXpath(ELEMENT_SAVE_BUTTON)).click();
-    $(byXpath(ELEMENT_SAVE_BUTTON)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
-    $(byXpath(ELEMENT_MSG_UPDATE_USER_PROFILE)).waitUntil(Condition.visible,Configuration.timeout);
-    $(byXpath(ELEMENT_CLOSE_MESSAGE)).click();
-    $(byXpath(ELEMENT_CLOSE_MESSAGE)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    //$(byXpath(ELEMENT_SAVE_BUTTON)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    ELEMENT_MSG_UPDATE_USER_PROFILE_2.waitUntil(Condition.visible,Configuration.timeout);
+   // $(byXpath(ELEMENT_CLOSE_MESSAGE)).click();
+    ELEMENT_CLOSE_MESSAGE_3.click();
+   // $(byXpath(ELEMENT_CLOSE_MESSAGE)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**

@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.gatein.pageobject;
 import static com.codeborne.selenide.Condition.appears;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
@@ -10,6 +11,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.util.ArrayList;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.Dialog;
@@ -125,12 +127,11 @@ public class UserAddManagement {
       evt.type(ELEMENT_NEW_PASSWORD, newPass, true);
     if (confirmNewPass != null && confirmNewPass != "")
       evt.type(ELEMENT_CONFIRM_NEW_PASSWORD, confirmNewPass, true);
-    evt.click(ELEMENT_SAVE_PASSWORD);
-    $(ELEMENT_OK).waitUntil(visible, Configuration.timeout);
+    $(ELEMENT_SAVE_PASSWORD).click();
+    $(ELEMENT_OK).waitUntil(Condition.visible, Configuration.timeout);
     $(ELEMENT_OK).click();
 
-
-    $(ELEMENT_CLOSE_MESSAGE).click();
+    ELEMENT_CLOSE_MESSAGE_2.click();
 
   }
 }
