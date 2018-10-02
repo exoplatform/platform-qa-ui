@@ -1183,6 +1183,7 @@ public class ECMSLocator {
   public static final SelenideElement ELEMENT_LIST_DOCUMENTS_IN_SPACE                                      =
                                                                       $(byId("UIDocumentContainer"));
 
+
   public static final SelenideElement ELEMENT_CLOSE_PUBLICATION_POPUP=$(byXpath("//*[@id=\"UIPublicationContainer\"]/div[2]/button"));
 
   public static final SelenideElement ELEMENT_SEARCH_BTN=$(byId("simpleSearch"));
@@ -1205,5 +1206,12 @@ public class ECMSLocator {
 
   public static final SelenideElement ELEMENT_BUTTON_PERMISSION_IN_MORE_DROP_DOWN_MENU                     =
                                                                                        $(byId("ListHideContainer")).find(byClassName("uiIconEcmsViewPermissions"));
+  public static final By              ELEMENT_PUBLIC_FOLDER                                           =
+          By.xpath("//*[@id=\"UIDocumentNodeList\"]/div/div[9]/div[4]/a/span");
+  public static final SelenideElement ELEMENT_PUBLIC_LIST_VIEW=$(byClassName("uiListGrid"));
+  public static final SelenideElement ELEMENT_FILE_DESCRIPTION=$(byClassName("description"));
+  public static final SelenideElement ELEMENT_BUTTON_DELETE_FIRST=$(byXpath("//*[@id=\"ECMContextMenu\"]/div/ul/li[7]/a"));
+  public static final SelenideElement ELEMENT_NOTIFICATION= $(byClassName("UIControl"));
+  public static final SelenideElement ELEMENT_CHECK=$(byClassName("uiCheckbox"));
 
 }
