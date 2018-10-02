@@ -31,15 +31,10 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 public class GateinGlobalSettingsTestIT extends Base {
 
   ManageLogInOut         manageLogInOut;
-
   NavigationToolbar      navigationToolbar;
-
   UserAddManagement      userAddManagement;
-
   UserAndGroupManagement userAndGroupManagement;
-
   UserProfilePage        userProfilePage;
-
   ChangeLanguages        changeLanguage;
 
   @BeforeEach
