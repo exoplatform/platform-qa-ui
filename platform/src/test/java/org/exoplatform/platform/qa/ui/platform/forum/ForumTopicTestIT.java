@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.platform.forum;
 
+import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
@@ -598,16 +599,14 @@ public class ForumTopicTestIT extends Base {
     forumCategoryManagement.deleteCategory(name);
   }
 
-
-  @Tag("FORUM-1317")
+  @Tag("FORUM-1382")
   @Test
-  public  void test15_test_Lock_Topic(){
-
-    String category = "category" + getRandomNumber();
-    String desc = "desc" + getRandomNumber();
-    String forum= "forum"+ getRandomNumber();
+  public void test15_VerifyRemoveAttachFile(){
+    String category= "category" + getRandomNumber();
+    String desc= "description" + getRandomNumber();
+    String forum = "forum" + getRandomNumber();
     String topic = "topic" + getRandomNumber();
-
+    info("Go to Forum portlet");
     homePagePlatform.goToForum();
     info("Add a category");
     forumCategoryManagement.addCategorySimple(category, "", desc);
@@ -618,9 +617,14 @@ public class ForumTopicTestIT extends Base {
     forumTopicManagement.startTopic(topic, topic, "", "data/forum/topic_attachment.txt");
     info("Go to a topic");
     forumHomePage.goToTopic(topic);
-    forumTopicManagement.selectItemMoreActionMenuTopic(ForumTopicManagement.specifMoreActionMenuTopic.LOCK);
-    info("verify that quote button is not visible");
-    $(ELEMENT_TOPIC_QUOTE).shouldNot(Condition.visible);
+    forumTopicManagement.selectItemMoreActionMenuTopic(ForumTopicManagement.specifMoreActionMenuTopic.EDIT);
+    ELEMENT_DELETE_ATTACHMENT_FILE.click();
+    $(ELEMENT_SUBMIT_BUTTON).click();
+    info("verify that the attach file is removed");
+    forumHomePage.goToTopic(topic);
+    forumTopicManagement.selectItemMoreActionMenuTopic(ForumTopicManagement.specifMoreActionMenuTopic.EDIT);
+    ELEMENT_DELETE_ATTACHMENT_FILE.shouldNotBe(Condition.visible);
+    $(ELEMENT_SUBMIT_BUTTON).click();
     info("Delete category");
     forumHomePage.goToHomeCategory();
     forumCategoryManagement.deleteCategory(category);
