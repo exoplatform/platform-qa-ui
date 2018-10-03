@@ -68,7 +68,6 @@ public class UserProfilePage {
     if (pos != "") {
       $(ELEMENT_ABOUTME_TEXTAREA_EDIT).setValue(pos);
     }
-
   }
 
   /**
@@ -129,7 +128,6 @@ public class UserProfilePage {
       info("update job");
       $(ELEMENT_CONTACT_JOB_TITLE).setValue(job);
     }
-
   }
 
   /**
@@ -262,15 +260,11 @@ public class UserProfilePage {
     evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     if (isSave == null || isSave) {
       info("Save updating information");
-
       $(ELEMENT_CONTACT_SAVE_BUTTON).click();
       $(ELEMENT_CONTACT_SAVE_BUTTON).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
-
     } else {
       info("Cancel updating information");
-
       evt.clickByJavascript(ELEMENT_CONTACT_CANCEL_BUTTON, 2);
-
     }
   }
 
@@ -280,7 +274,6 @@ public class UserProfilePage {
   public void goToActivity() {
     info("Click on Activity tab");
     evt.click(ELEMETN_ACTIVITY_TAB);
-
   }
 
   /**

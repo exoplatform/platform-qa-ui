@@ -526,7 +526,7 @@ public class UserAndGroupManagement {
       evt.type(ELEMENT_BIRTHDAY, birthday, true);
     }
     if (Gender != null && Gender != "") {
-      evt.select(ELEMENT_GENDER, Gender);
+      $(ELEMENT_GENDER).selectOptionByValue(Gender);
     }
     if (Employer != null && Employer != "") {
       evt.type(ELEMENT_EMPLOYER, Employer, true);
@@ -540,11 +540,11 @@ public class UserAndGroupManagement {
     if (language != null && language != "") {
       evt.select(ELEMENT_LANGUAGE, language);
     }
-    evt.click(ELEMENT_SAVE_BUTTON);
-    evt.waitForElementNotPresent(ELEMENT_SAVE_BUTTON);
-    evt.waitForMessage(ELEMENT_MSG_UPDATE_USER_PROFILE);
-    evt.click(GateinLocator.ELEMENT_CLOSE_MESSAGE);
-    evt.waitForElementNotPresent(GateinLocator.ELEMENT_CLOSE_MESSAGE);
+    $(byXpath(ELEMENT_SAVE_BUTTON)).click();
+    $(byXpath(ELEMENT_SAVE_BUTTON)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    $(byText(ELEMENT_MSG_UPDATE_USER_PROFILE)).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_CLOSE_MESSAGE)).click();
+    $(byXpath(ELEMENT_CLOSE_MESSAGE)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**

@@ -21,6 +21,7 @@
 package org.exoplatform.platform.qa.ui.selenium.locator.administration;
 
 import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -652,9 +653,15 @@ public class AdministrationLocator {
   public static final By              ELEMENT_CHANGE_LANGUAGE_POPUP_TITLE                          =
                                                                           By.xpath(".//*[@id='UIMaskWorkspace']//h5");
 
+
   public static final String          ELEMENT_CHANGELANGUAGE_LANGUAGE                              = "//*[text()='${language}']";
 
   public static final String          ELEMENT_AVATAR_CHANGELANGUAGE_APPLY                          = "//*[text()='${text}']";
+
+  /*****************************************************
+=======
+
+>>>>>>> Gatein global settig
 
   /*****************************************************
    * CONTENT SEARCH ADMINISTRATION
@@ -893,5 +900,9 @@ public class AdministrationLocator {
   public static final By              ELEMENT_BTN_DELETE_DRIVE                                     = byClassName("uiIconDelete");
 
   public static final By ELEMENT_ICON_NEXT_ARROW=byClassName("uiIconNextArrow");
+
   public static final SelenideElement ELEMENT_BTN_APPLY_CHANGE_LANGUAGE=$(byXpath("//*[@id=\"UIMaskWorkspace\"]/div/div/div/div[2]/a[1]"));
+
+  
+
 }

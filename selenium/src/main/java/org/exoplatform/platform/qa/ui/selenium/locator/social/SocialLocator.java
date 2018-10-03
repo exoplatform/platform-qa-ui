@@ -1134,8 +1134,6 @@ public final class SocialLocator {
   public static final By              ELEMENT_EDIT_MY_PROFILE_LINK                                      =
                                                                    By.xpath("//*[@id=\"UIUserNavigationPortlet\"]/div[1]/div/div/ul/li/a");
 
-  public static final By              ELEMENT_EDIT_MY_PROFILE_BUTTON                                    =
-                                                                     By.xpath("//*[@id='UIExperienceProfilePortlet']//*[@class='uiIconEdit uiIconLightGray']");
 
   public static final By              ELEMENT_EDIT_PROFILE_FORM                                         =
                                                                 By.id("UIEditUserProfileForm");
@@ -2369,4 +2367,7 @@ public final class SocialLocator {
   public static final SelenideElement ELEMENT_CONTAINER_GADGETS=$(byId("UIDashboardContainer"));
   public static final SelenideElement ELEMENT_BUTTON_CLOSE_GADGETS=$(byClassName("UIPopupWindow")).find(byClassName("uiIconClose"));
   public static final SelenideElement ELEMENT_BUTTON_CLOSE_SPECIFIC_GADGET=$(byClassName("gadgets-gadget")).parent().parent().parent().parent().find(byClassName("uiIconClose"));
+  public static final By              ELEMENT_EDIT_MY_PROFILE_BUTTON                                    =
+          By.xpath("//*[@id='UIExperienceProfilePortlet']//*[@class='uiIconEdit uiIconLightGray']");
+
 }
