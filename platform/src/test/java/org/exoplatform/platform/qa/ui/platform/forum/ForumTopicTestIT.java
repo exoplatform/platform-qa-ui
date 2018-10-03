@@ -4,8 +4,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_ACTIONBAR_TOPIC_TAGDELETE;
-import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_FORUM_POLL_GRID;
+import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
@@ -597,5 +596,33 @@ public class ForumTopicTestIT extends Base {
     info("Delete data");
     forumHomePage.goToHomeCategory();
     forumCategoryManagement.deleteCategory(name);
+  }
+
+
+  @Tag("FORUM-1317")
+  @Test
+  public  void test15_test_Lock_Topic(){
+
+    String category = "category" + getRandomNumber();
+    String desc = "desc" + getRandomNumber();
+    String forum= "forum"+ getRandomNumber();
+    String topic = "topic" + getRandomNumber();
+
+    homePagePlatform.goToForum();
+    info("Add a category");
+    forumCategoryManagement.addCategorySimple(category, "", desc);
+    info("Add a forum in the category");
+    forumForumManagement.addForumSimple(forum, "", desc);
+    info("Add and go to a topic in the forums");
+    forumForumManagement.goToStartTopic();
+    forumTopicManagement.startTopic(topic, topic, "", "data/forum/topic_attachment.txt");
+    info("Go to a topic");
+    forumHomePage.goToTopic(topic);
+    forumTopicManagement.selectItemMoreActionMenuTopic(ForumTopicManagement.specifMoreActionMenuTopic.LOCK);
+    info("verify that quote button is not visible");
+    $(ELEMENT_TOPIC_QUOTE).shouldNot(Condition.visible);
+    info("Delete category");
+    forumHomePage.goToHomeCategory();
+    forumCategoryManagement.deleteCategory(category);
   }
 }
