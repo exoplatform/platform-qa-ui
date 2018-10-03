@@ -185,7 +185,7 @@ public class NavigationToolbar {
       $(ELEMENT_MY_NOTIFICATIONS_LINK).click();
       break;
     case SETTINGS:
-      evt.click(ELEMENT_MY_SETTINGS_LINK);
+      $(ELEMENT_MY_SETTINGS_LINK).click();
       break;
     case CHANGE_LANGUAGE:
       break;

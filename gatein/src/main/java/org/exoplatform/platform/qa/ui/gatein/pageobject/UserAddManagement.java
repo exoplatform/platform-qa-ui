@@ -1,7 +1,6 @@
 package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
-import static com.codeborne.selenide.Condition.appears;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
@@ -119,19 +118,19 @@ public class UserAddManagement {
    */
   public void changePassWord(String currentPass, String newPass, String confirmNewPass) {
     info("Change password");
-    evt.waitForAndGetElement(ELEMENT_CHANGE_PASSWORD_LINK, 2000, 0);
-    evt.click(ELEMENT_CHANGE_PASSWORD_LINK);
+    $(ELEMENT_CHANGE_PASSWORD_LINK).waitUntil(visible,Configuration.timeout);
+    $(ELEMENT_CHANGE_PASSWORD_LINK).click();
     if (currentPass != null && currentPass != "")
-      evt.type(ELEMENT_CURRENT_PASSWOR, currentPass, true);
+      $(ELEMENT_CURRENT_PASSWOR).setValue(currentPass);
     if (newPass != null && newPass != "")
-      evt.type(ELEMENT_NEW_PASSWORD, newPass, true);
+      $(ELEMENT_NEW_PASSWORD).setValue(newPass);
     if (confirmNewPass != null && confirmNewPass != "")
-      evt.type(ELEMENT_CONFIRM_NEW_PASSWORD, confirmNewPass, true);
+      $(ELEMENT_CONFIRM_NEW_PASSWORD).setValue(confirmNewPass);
     $(ELEMENT_SAVE_PASSWORD).click();
-    $(ELEMENT_OK).waitUntil(Condition.visible, Configuration.timeout);
-    $(ELEMENT_OK).click();
-
-    ELEMENT_CLOSE_MESSAGE_2.click();
+    $(byText(ELEMENT_MSG_CHANGE_PASS_WORD)).waitUntil(visible,Configuration.timeout);
+    $(byXpath(ELEMENT_CLOSE_MESSAGE)).click();
+    button.close();
+    $(button.ELEMENT_CLOSE_BUTTON).waitUntil(not(visible),Configuration.timeout);
 
   }
 }

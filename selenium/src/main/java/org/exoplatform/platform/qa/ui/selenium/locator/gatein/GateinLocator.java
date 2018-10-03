@@ -1261,8 +1261,7 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
 
   public static final By              ELEMENT_SAVE_PASSWORD                                   =
                                                             By.xpath(".//*[@id='UIAccountChangePass']//*[text()='Save']");
-  public static final SelenideElement ELEMENT_OK                                    =
-          $(byText("OK"));
+
 
   public static final By              ELEMENT_INPUT_SEARCH_USER_NAME                          = By.id("searchTerm");
 
@@ -1817,10 +1816,7 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
           "//button[contains(text(),'Save')]";
   public static final String          ELEMENT_CLOSE_MESSAGE                                   =
           "//*[contains(@title,'Close Window')]";
-  public static final SelenideElement ELEMENT_CLOSE_MESSAGE_2= $(byXpath("//*[@id=\"UIAccountSetting\"]/div[2]/a"));
-  public static final SelenideElement ELEMENT_CLOSE_MESSAGE_3= $(byClassName("uiAction"));
   public static final String          ELEMENT_MSG_UPDATE_USER_PROFILE                         =
           "The user profile has been updated.";
-public  static final SelenideElement ELEMENT_MSG_UPDATE_USER_PROFILE_2= $(byClassName("infoIcon"));
 
 }
