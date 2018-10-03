@@ -713,9 +713,4 @@ public final class ActivityStreamLocator {
     public static final String ELEMENT_REPLY_CONTAINER="commentContainercomment{id}";
 
     public static final SelenideElement ELEMENT_TEXT_ACTIVITY=$(byClassName("description"));
-
-    public static final SelenideElement ELEMENT_DELETE_BTN=$(byXpath("//*[@id=\"DeleteActivityButton8\"]"));
-    public static  final String ELEMENT_LINK= "//*[@id=\"Permalink87\"]";
-    public static final String ELEMENT_DATE="dateTime";
-
 }

@@ -103,12 +103,10 @@ public class ActivityStream {
    */
   public void checkActivity(String name) {
     info("Verify that the activity of the name:" + name + " is shown");
-    $(byText(name)).isDisplayed();
+    $(byText(name)).waitUntil(Condition.visible,Configuration.timeout);
     info("The activity of the name:" + name + " is shown successfully");
   }
-  public void checkTextActivity (String desc){
-    ELEMENT_TEXT_ACTIVITY.shouldHave(Condition.text("desc"));
-  }
+
 
 
   /**

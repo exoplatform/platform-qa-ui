@@ -873,11 +873,8 @@ public class SOCHomePageTestIT extends Base {
     homePagePlatform.goToHomePage();
     info("add an activity with $ and check that is added succesfully");
     activityStream.addActivity("$ {val}", "");
+    activityStream.checkActivity("$ {val}");
     info("delete activity");
-
     activityStream.deleteactivity("$ {val}");
-
-
   }
-
 }
