@@ -1093,6 +1093,7 @@ public class ActivityStream {
     $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
     ELEMENT_DELETE_POPUP_OK.click();
     ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    refresh();
 
   }
 
