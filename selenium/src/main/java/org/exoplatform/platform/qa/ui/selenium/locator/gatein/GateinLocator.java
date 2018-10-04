@@ -1481,7 +1481,7 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
 
   public static final By              ELEMENT_GENDER                                          =
                                                      By.xpath("//*[@name='user.gender']");
-
+  public static final By    ELEMENT_GENDER_EDIT_PROFILE=  By.xpath("//*[@name='gender']");
   public static final By              ELEMENT_EMPLOYER                                        = By.id("user.employer");
 
   public static final By              ELEMENT_DEPARTMENT                                      = By.id("user.department");

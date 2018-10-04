@@ -1,16 +1,22 @@
 package org.exoplatform.platform.qa.ui.platform.social;
 
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_USER_PROFILE_TAB;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase.scrollToBottomPage;
 
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.ElementsCollection;
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
+import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -22,6 +28,8 @@ import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
+import org.openqa.selenium.By;
+
 @Tag("sniff")
 @Tag("social")
 public class SOCPeopleProfileEditProfileTestIT extends Base {
@@ -32,11 +40,13 @@ public class SOCPeopleProfileEditProfileTestIT extends Base {
   AddUsers          addUsers;
 
   UserProfilePage   userProfilePage;
+  UserAndGroupManagement userAndGroupManagement;
 
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
     navigationToolbar = new NavigationToolbar(this);
+    userAndGroupManagement= new UserAndGroupManagement(this);
     manageLogInOut = new ManageLogInOut(this);
     addUsers = new AddUsers(this);
     userProfilePage = new UserProfilePage(this);
@@ -296,5 +306,39 @@ public class SOCPeopleProfileEditProfileTestIT extends Base {
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
+  }
+
+  @BugInPLF("SOC-6086")
+  @Test
+  public void test05_EmptyGenderIsSynchronizedInMangeUsers(){
+    String username = "username" + getRandomString();
+    String email = username + "@test.com";
+    String password = "123456";
+
+    info("Add user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username, password, email, username, username);
+    navigationToolbar.goToUsersAndGroupsManagement();
+    userAndGroupManagement.goToEditUserInfo(username);
+    userAndGroupManagement.editUserInfo_UserProfileTab("", "", "", "", "female", "", "", "","");
+    manageLogInOut.signIn(username,password);
+    navigationToolbar.goToMyProfile();
+    userProfilePage.goToEditProfile();
+    scrollToBottomPage(this.getExoWebDriver().getWebDriver());
+    $(ELEMENT_GENDER_EDIT_PROFILE).shouldHave(Condition.exactValue("female"));
+    $(ELEMENT_GENDER_EDIT_PROFILE).selectOptionByValue("");
+    userProfilePage.saveCancelUpdateInfo(true);
+    userProfilePage.goToEditProfile();
+    scrollToBottomPage(this.getExoWebDriver().getWebDriver());
+    $(ELEMENT_GENDER_EDIT_PROFILE).shouldHave(Condition.exactValue(""));
+    info("verify that empty gender is synchronized in manage users");
+    manageLogInOut.signIn(DATA_USER1,DATA_PASS2);
+    navigationToolbar.goToUsersAndGroupsManagement();
+    userAndGroupManagement.goToEditUserInfo(username);
+    $(ELEMENT_USER_PROFILE_TAB).click();
+    $(ELEMENT_GENDER).shouldHave(Condition.exactValue(""));
+    info("delete user");
+    navigationToolbar.goToUsersAndGroupsManagement();
+    userAndGroupManagement.deleteUser(username);
   }
 }

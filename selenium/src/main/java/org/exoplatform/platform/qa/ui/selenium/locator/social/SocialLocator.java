@@ -2015,6 +2015,9 @@ public final class SocialLocator {
 
   public static final SelenideElement ELEMENT_INPUT_SEARCH_USER                                         =
                                                                 $(byTitle("Quick Search"));
+  public static final SelenideElement ELEMENT_BUTTON_EDIT_USER= $(byClassName("uiIconViewUserInfo"));
+
+  public static final SelenideElement ELEMENT_USER_PROFILE= $(byXpath("//*[@id=\"UIUserManagement\"]/div[1]/ul/li[2]/a"));
 
   public static final SelenideElement ELEMENT_BUTTON_DELETE_USER                                        =
                                                                  $(byClassName("uiIconDeleteUser"));
