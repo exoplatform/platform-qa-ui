@@ -865,4 +865,16 @@ public class SOCHomePageTestIT extends Base {
     spaceManagement.deleteSpace(newSpace, false);
 
   }
+
+  @Tag("SOC-5646")
+  @Test
+  public void test23_SpecialisationOfDollarInActivityMessage(){
+
+    homePagePlatform.goToHomePage();
+    info("add an activity with $ and check that is added succesfully");
+    activityStream.addActivity("$ {val}", "");
+    activityStream.checkActivity("$ {val}");
+    info("delete activity");
+    activityStream.deleteactivity("$ {val}");
+  }
 }

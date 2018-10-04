@@ -25,7 +25,6 @@ import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byId;
-
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 public final class ActivityStreamLocator {
@@ -712,4 +711,6 @@ public final class ActivityStreamLocator {
     public static final SelenideElement ELEMENT_THIRD_USER_IN_POPUP_WHO_LIKE_COMMENT=ELEMENT_POPUP_WHO_LIKED_COMMENT.findAll(".likerName").get(2);
     public static final By ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT=byClassName("uiActionLike");
     public static final String ELEMENT_REPLY_CONTAINER="commentContainercomment{id}";
+
+    public static final SelenideElement ELEMENT_TEXT_ACTIVITY=$(byClassName("description"));
 }
