@@ -20,8 +20,7 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.locator;
 
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 
 import org.openqa.selenium.By;
@@ -51,6 +50,12 @@ public class ConnectionsLocator {
   public static final By              ELEMENT_ALL_CONNECTIONS_TAB             =
                                                                   By.xpath("//*[@id='UIConnectionsPortlet' or @id='UIAllPeoplePortlet']//*[contains(@href,'all-people')]");
 
+  public static final SelenideElement
+                                      ELEMENT_ICON_CHAT_PROFIL_STATUS            =
+                                                                 $(byId("UIUserNavigationPortlet")).find(byClassName("uiIconBannerChat"));
+  public static final SelenideElement
+                                       ELEMENT_ICON_CALL_PROFIL_STATUS    =
+          $(byId("UIUserNavigationPortlet")).find(byClassName("callButtonIconVideo"));
   public static final By              ELEMENT_MY_CONNECTIONS_TAB              =
                                                                  By.xpath("//*[@id='UIConnectionsPortlet' or @id='UIAllPeoplePortlet']//*[contains(@href,'network')]");
 

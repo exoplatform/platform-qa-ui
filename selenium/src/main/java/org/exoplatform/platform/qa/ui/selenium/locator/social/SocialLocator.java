@@ -1391,12 +1391,42 @@ public final class SocialLocator {
   public static final By              ELEMENT_UIMINICONNECTIONS_PORLET_CONNECT_STATUS                   =
                                                                                       By.xpath(".//*[@id='UIRelationshipAction']//*[@class='uiIconStatusConnect']/..");
 
+  public static final By
+                                      ELEMENT_ADD_CONNECT_PROFIL_STATUS                                =
+
+                                                                                     By.xpath ("//*[@id=\"UIRelationshipAction\"]//*[@class='uiIconSocConnectUser']/..");
+  public static final By
+
+                                      ELEMENT_CLICK_DENY_USER_PROFIL_STATUS     =
+                                                                                   By.xpath("//*[@id=\"UIRelationshipAction\"]/div/div[1]/ul/li/a");
+public static final By
+                                      ELEMENT_ACCEPT_CONNECT_USER_PROFIL_STATUS               =
+                                                                                     By.xpath("//*[@id=\"UIRelationshipAction\"]//*[@class='btn-default']/..");
+public static final By
+                                      ELEMENT_ACCEPT_ADD_USER_PROFIL_STATUS    =
+                                                                                      By.xpath("//*[@id=\"UIRelationshipAction\"]/div/div[1]/button[1]");
+  public static final By
+                                      ELEMENT_CANCEL_CONNECT_PROFILE_STATUS         =
+                                                                                    By.xpath("//*[@id=\"UIRelationshipAction\"]//*[@class='uiIconClose']/..");
+
+  public static final By
+                                      ELEMENT_CANCEL_REQUEST_PROFIL_STATUS    =
+                                                                                 By.xpath("//*[@id=\"UIRelationshipAction\"]/div/button");
   public static final By              ELEMENT_UIMINICONNECTIONS_PORLET_CANCEL_STATUS                    =
                                                                                      By.xpath(".//*[@id='UIRelationshipAction']//*[text()='Cancel Request']");
 
   public static final By              ELEMENT_UIMINICONNECTIONS_PORLET_ACCEPT_STATUS                    =
                                                                                      By.xpath(".//*[@id='UIRelationshipAction']//*[@class='uiIconStatusAccept']/..");
 
+  public static final By
+                                      ELEMENT_ACCEPT_CONNECT_PROFIL_STATUS         =
+                                                                                     By.xpath("//*[@id=\"UIRelationshipAction\"]//*[@class='btn-group btnStatusAnswer']/..");
+  public static final By
+                                      ELEMENT_ACCEPT_USER_PROFIL_STATUS   =
+                                                                                     By.xpath("//*[@id=\"UIRelationshipAction\"]/div/div[1]/button[1]");
+  public static final By
+                                      ELEMENT_DROPDOWN_DENY_PROFIL_STATUS          =
+                                                                                     By.xpath("//*[@id=\"UIRelationshipAction\"]//*[@class='caret']/..");
   public static final By              ELEMENT_UIMINICONNECTIONS_PORLET_CONNECTED_STATUS                 =
                                                                                         By.xpath(".//*[@id='UIActionProfilePortlet']//*[@class='btn show-default']/*[@class='uiIconStatusConnected']");
 
@@ -1406,6 +1436,12 @@ public final class SocialLocator {
   public static final By              ELEMENT_UIMINICONNECTIONS_PORTLET_DENY_STATUS                     =
                                                                                     By.xpath(".//*[@id='UIRelationshipAction']//*[@class='uiIconStatusDeny']/..");
 
+  public static final By
+                                      ELEMENT_DENY_PROFIL_STATUS        =
+                                                                               By.xpath("//*[@id=\"UIRelationshipAction\"]//*[@class='dropdown-menu']/..");
+  public static final By
+                                      ELEMENT_DENY_CLICK_PROFIL_STATUS   =
+                                                                              By.xpath("//*[@id=\"UIRelationshipAction\"]/div/div[1]/ul/li/a");
   public static final By              ELEMENT_UIMINICONNECTIONS_PORTLET_TITLE                           =
                                                                               By.xpath(".//*[@id='UIMiniConnectionsPortlet']/h4[contains(text(),'Connections')]");
 
