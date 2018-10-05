@@ -1216,5 +1216,5 @@ public class ECMSLocator {
   public static final SelenideElement ELEMENT_NOTIFICATION= $(byClassName("UIControl"));
   public static final SelenideElement ELEMENT_CHECK=$(byClassName("uiCheckbox"));
 
-  public static final SelenideElement ELEMENT_BUTTON_CLOSE_SEARCH=$(byXpath("//*[@id=\"UIPopupWindow\"]/div[1]/a")).waitUntil(Condition.visible,Configuration.timeout);
+  public static final SelenideElement ELEMENT_BUTTON_CLOSE_SEARCH=$(byXpath("//*[@id=\"UIPopupWindow\"]/div[1]/a"));
 }

@@ -11,6 +11,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.EL
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_SITEEXPLORER_LEFTBOX_ROOTNODE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACES_LIST;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -283,7 +284,7 @@ public class SOCHomePageTestIT extends Base {
     String text = "text" + getRandomNumber();
     homePagePlatform.goToHomePage();
     activityStream.addActivity(text, "");
-    assertEquals("All Activities", $(byId("DisplayModesDropDown")).getText());
+    assertEquals("ALL ACTIVITIES", $(byId("DisplayModesDropDown")).getText());
     executeJavaScript("window.scrollBy(0,-1500)", "");
     activityStream.deleteactivity(text);
 
@@ -340,6 +341,7 @@ public class SOCHomePageTestIT extends Base {
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
     $(ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES).click();
     $(ELEMENT_PUBLICATION_DISPLAYMODE_CONNECTION_OPTION).click();
     executeJavaScript("window.scrollBy(0,-1500)", "");
@@ -384,7 +386,7 @@ public class SOCHomePageTestIT extends Base {
     homePagePlatform.goToHomePage();
     $(ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES).click();
     $(ELEMENT_PUBLICATION_DISPLAYMODE_MYACTIVITIES_OPTION).click();
-    ELEMENT_ACTIVITY_STREAM_CONTAINER.find(byText(space)).shouldNot(Condition.exist);
+    ELEMENT_ACTIVITY_STREAM_CONTAINER.find(byText(space)).should(Condition.exist);
     $(byText(text)).shouldNot(Condition.exist);
     $(byText(text1)).should(Condition.exist);
     activityStream.deleteactivity(text1);
@@ -640,7 +642,6 @@ public class SOCHomePageTestIT extends Base {
    * activity stream - A comment is added: Avatar has been updated.
    */
   @Test
-  @BugInPLF("SOC-6055")
   public void test24_UpdateProfileChangeOfAvatar() {
     info("Test 24: Update Profile - change of avatar");
     String comment = "Avatar has been updated.";
@@ -710,7 +711,7 @@ public class SOCHomePageTestIT extends Base {
     String content2 = "content2" + getRandomNumber();
     String name3 = "name3" + getRandomNumber();
     String content3 = "content3" + getRandomNumber();
-
+    manageLogInOut.signIn(DATA_USER2,DATA_PASS);
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToAddNewContent();
     info("Create new file document");

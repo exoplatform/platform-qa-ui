@@ -1027,8 +1027,8 @@ public class ActivityStream {
     $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
     // click on the button comment
-    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
-    $(byText(comment)).should(Condition.exist);
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    $(byText(comment)).should(Condition.visible);
   }
 
   public void commentWikiActivity(String wikiactivity, String comment) {
@@ -1310,6 +1310,7 @@ public class ActivityStream {
     $(byId(ELEMENT_INCON_DELETE_COMMENT.replace("{id}", idBlocComment))).click();
     // Confirm delete
     ELEMENT_DELETE_POPUP_OK.click();
+    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     $(byText(comment)).shouldNot(Condition.exist);
   }
 
