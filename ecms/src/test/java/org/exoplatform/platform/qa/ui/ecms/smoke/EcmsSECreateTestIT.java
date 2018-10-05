@@ -166,7 +166,6 @@ public class EcmsSECreateTestIT extends Base {
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     siteExplorerHome.deleteData(name);
   }
-
   /**
    * <li>Test Case Name: Edit Web Content document.</li>
    * <li>Pre-Condition: A Web Content document is already created.</li>
