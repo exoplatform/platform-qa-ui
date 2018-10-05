@@ -118,6 +118,8 @@ public class TaskManagementLocator {
   // Edit project form
   public static final SelenideElement ELEMENT_POPUB_EDIT_PROJECT                    = $(byClassName("PopupContent"));
 
+  public static final SelenideElement ELEMENT_LIST_PROJECT = $(byAttribute("class","list-projects projectTree"));
+
   public static final By              ELEMENT_ICON_PROJECT                          = byClassName("uiIconRightMenu");
 
   public static final By              ELEMENT_EDIT_PROJECT_OPTION                   = byClassName("uiIconEdit");

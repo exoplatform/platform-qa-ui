@@ -55,7 +55,7 @@ public class TaskInCalendarTestIT extends Base {
     }
     @Test
     @Tag("TA-605")
-    public void test01_AddTaskInSpace() throws InterruptedException {
+    public void test01_ShowTaskDetailInCalendar() throws InterruptedException {
 
         String space = "space" + getRandomNumber();
         String taskName = "task" + getRandomNumber();

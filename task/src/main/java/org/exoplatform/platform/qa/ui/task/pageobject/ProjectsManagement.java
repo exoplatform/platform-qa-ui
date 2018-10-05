@@ -1,8 +1,6 @@
 package org.exoplatform.platform.qa.ui.task.pageobject;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -184,17 +182,13 @@ public class ProjectsManagement {
    *          want to disable or uncheck calendar integration
    */
   public void editProject(String projectPath, String title, String newTitle, String des, boolean... opt) {
-    $(byClassName("sub-item")).click();
-    //$(byText(projectPath)).click();
-    //$(byText(projectPath)).parent().parent().find(ELEMENT_ICON_PROJECT).click();
-    $(byClassName("list-projects")).parent().parent().parent().parent().find(byClassName("uiIconRightMenu")).click();
-   // $(byText(projectPath)).parent().parent().find(ELEMENT_EDIT_PROJECT_OPTION).click();
-   $ (ELEMENT_EDIT_PROJECT_OPTION).click();
-
+    ELEMENT_LIST_PROJECT.find(byText(projectPath)).click();
+    ELEMENT_LIST_PROJECT.find(byText(projectPath)).parent().parent().find(ELEMENT_ICON_PROJECT).click();
+    ELEMENT_LIST_PROJECT.find(byText(projectPath)).parent().parent().find(ELEMENT_EDIT_PROJECT_OPTION).click();
     if (title != null && title != "") {
       info("Input title");
       ELEMENT_POPUB_EDIT_PROJECT.find(byText(title)).click();
-      // Input a new title with clearing an old title
+// Input a new title with clearing an old title
       ELEMENT_EDIT_PROJECT.setValue(newTitle).pressEnter();
     }
     if (des != null && des != "") {
