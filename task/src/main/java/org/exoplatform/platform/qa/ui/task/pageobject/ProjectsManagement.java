@@ -1,7 +1,6 @@
 package org.exoplatform.platform.qa.ui.task.pageobject;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -40,15 +39,15 @@ public class ProjectsManagement {
   public void selectOpContMenuProject(optionContMenuProject op) {
     goToContMenuProject();
     switch (op) {
-    case Add_Project:
-      info("Select Add Project option");
-      break;
-    case Show_Hidden_Project:
-      info("Select Show hide Project");
-      break;
-    default:
-      info("No option in the list. Please select correct option.");
-      break;
+      case Add_Project:
+        info("Select Add Project option");
+        break;
+      case Show_Hidden_Project:
+        info("Select Show hide Project");
+        break;
+      default:
+        info("No option in the list. Please select correct option.");
+        break;
     }
   }
 
@@ -70,27 +69,27 @@ public class ProjectsManagement {
   public void selectOpContMenuGivenProject(String project, optionContMenuGivenProject op) {
     goToContMenuGivenProject(project);
     switch (op) {
-    case Edit:
-      info("Select Edit option");
-      break;
-    case Share:
-      info("Select Share option");
-      break;
-    case Clone:
-      info("Select Clone option");
-      break;
-    case Hide:
-      info("Select Hide option");
-      break;
-    case Delete:
-      info("Select Delete option");
-      break;
-    case Add_Project:
-      info("Select Add Project option");
-      break;
-    default:
-      info("No option in the list. Please select correct option");
-      break;
+      case Edit:
+        info("Select Edit option");
+        break;
+      case Share:
+        info("Select Share option");
+        break;
+      case Clone:
+        info("Select Clone option");
+        break;
+      case Hide:
+        info("Select Hide option");
+        break;
+      case Delete:
+        info("Select Delete option");
+        break;
+      case Add_Project:
+        info("Select Add Project option");
+        break;
+      default:
+        info("No option in the list. Please select correct option");
+        break;
     }
   }
 
@@ -183,13 +182,13 @@ public class ProjectsManagement {
    *          want to disable or uncheck calendar integration
    */
   public void editProject(String projectPath, String title, String newTitle, String des, boolean... opt) {
-    $(byText(projectPath)).click();
-    $(byText(projectPath)).parent().parent().find(ELEMENT_ICON_PROJECT).click();
-    $(byText(projectPath)).parent().parent().find(ELEMENT_EDIT_PROJECT_OPTION).click();
+    ELEMENT_LIST_PROJECT.find(byText(projectPath)).click();
+    ELEMENT_LIST_PROJECT.find(byText(projectPath)).parent().parent().find(ELEMENT_ICON_PROJECT).click();
+    ELEMENT_LIST_PROJECT.find(byText(projectPath)).parent().parent().find(ELEMENT_EDIT_PROJECT_OPTION).click();
     if (title != null && title != "") {
       info("Input title");
       ELEMENT_POPUB_EDIT_PROJECT.find(byText(title)).click();
-      // Input a new title with clearing an old title
+// Input a new title with clearing an old title
       ELEMENT_EDIT_PROJECT.setValue(newTitle).pressEnter();
     }
     if (des != null && des != "") {

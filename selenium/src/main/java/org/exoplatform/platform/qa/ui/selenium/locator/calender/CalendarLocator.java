@@ -1678,4 +1678,6 @@ public class CalendarLocator {
 
   public static final SelenideElement ELEMENT_LIST_CALENDAR=$(byId("UICalendars"));
 
+  public static final SelenideElement ELEMENT_TASK_DETAIL =$(byClassName("titleList"));
+
 }

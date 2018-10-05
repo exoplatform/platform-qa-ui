@@ -29,17 +29,11 @@ import org.exoplatform.platform.qa.ui.task.pageobject.TasksManagement;
 @Tag("task")
 public class TaskManagementInSpaceTestIT extends Base {
   HomePagePlatform   homePagePlatform;
-
   SpaceManagement    spaceManagement;
-
   SpaceHomePage      spaceHomePage;
-
   TasksManagement    tasksManagement;
-
   ManageLogInOut     manageLogInOut;
-
   LabelsManagement   labelsManagement;
-
   ProjectsManagement projectsManagement;
 
   @BeforeEach
@@ -53,6 +47,7 @@ public class TaskManagementInSpaceTestIT extends Base {
     labelsManagement = new LabelsManagement(this);
     projectsManagement = new ProjectsManagement(this);
     manageLogInOut = new ManageLogInOut(this);
+    manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
   }
 
   @Test
