@@ -1094,7 +1094,6 @@ public class ActivityStream {
     ELEMENT_DELETE_POPUP_OK.click();
     ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     refresh();
-
   }
 
   public void deleteActivityWiki(String activity) {
@@ -1281,7 +1280,7 @@ public class ActivityStream {
     info("Verify that the reply is added");
     // click on the button comment
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
-    $(byText(replytoreply)).should(Condition.exist);
+    $(byText(replytoreply)).should(Condition.visible);
   }
 
 
