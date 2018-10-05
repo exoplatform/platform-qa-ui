@@ -896,8 +896,5 @@ public class ForumLocator {
   public static final SelenideElement ELEMENT_REMOVE_ICON= $(byClassName("uiIconDelete "));
   public static final SelenideElement ELEMENT_TOPIC_CONTAINER= $(byId("UIEditTopicContainer"));
   public  static final SelenideElement ELEMENT_DELETE_ATTACHMENT_FILE = $(byId("UIEditTopicContainer")).find(byClassName("uiIconDelete"));
-  public final String                 ELEMENT_EDIT_POST                                  =
-          "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@data-original-title='Edit This Post']";
-  public final By                     ELEMENT_MOVE_TOPIC_POPUP                           = By.id("UIForumPopupWindow");
 
 }
