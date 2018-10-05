@@ -54,6 +54,7 @@ public class EcmsSECreateTestIT extends Base {
     siteExplorerHome = new SiteExplorerHome(this);
     manageLogInOut = new ManageLogInOut(this);
     createNewDocument = new CreateNewDocument(this);
+    createNewDoc= new CreateNewDocument(this);
     manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
   }
 
