@@ -3,6 +3,8 @@ package org.exoplatform.platform.qa.ui.platform.ecms;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_CONTENT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_SOURCE_CONTENT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -39,6 +41,9 @@ public class EcmsSECreateTestIT extends Base {
   HomePagePlatform  homePagePlatform;
 
   SpaceManagement   spaceManagement;
+
+  CreateNewDocument createNewDoc;
+
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -585,5 +590,27 @@ public class EcmsSECreateTestIT extends Base {
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     siteExplorerHome.deleteData("uploadFile.xlsx");
 
+  }
+  @Tag("EXOGTN-2345")
+  @Test
+  public void test13_CreateWebContentWithParticularCharacter(){
+    info("Test 3: Create Web Content document");
+    String name = "name" + getRandomNumber();
+    navigationToolbar.goToSiteExplorer();
+    siteExplorerHome.goToPath("intranet/documents", "Site Management");
+    siteExplorerHome.goToAddNewContent();
+    info("Create new file document");
+    createNewDoc.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
+    createNewDoc.addNewWebContent(name,"&#128522;");
+    $(ELEMENT_SOURCE_CONTENT).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_CONTENT).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_CONTENT).setValue("&#128522;");
+    createNewDoc.saveAndClose();
+    siteExplorerHome.verifyContentCreatedSuccessfully(name);
+    siteExplorerHome.verifyWebContentInformationCreatedSuccessfully("\uD83D\uDE0A");
+    info("Delete file document");
+    navigationToolbar.goToSiteExplorer();
+    siteExplorerHome.goToPath("intranet/documents", "Site Management");
+    siteExplorerHome.deleteData(name);
   }
 }
