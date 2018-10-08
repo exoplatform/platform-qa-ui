@@ -5,6 +5,7 @@ import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
@@ -23,6 +24,8 @@ public class SpaceSettingManagement {
 
   public PlatformPermission    plfPerm;
 
+  public HomePagePlatform homePagePlatform;
+
   private ElementEventTestBase evt;
 
   /**
@@ -36,6 +39,7 @@ public class SpaceSettingManagement {
     this.alert = new ManageAlert(testBase);
     this.button = new Button(testBase);
     this.plfPerm = new PlatformPermission(testBase);
+    this.homePagePlatform= new HomePagePlatform(testBase);
   }
 
   /**
@@ -61,11 +65,11 @@ public class SpaceSettingManagement {
    */
   public void goToMemberTab() {
     info("Open members tab");
-    $(ELEMENT_SPACE_WIKI_TAB).waitUntil(Condition.visible,Configuration.timeout);
+    homePagePlatform.refreshUntil($(ELEMENT_SPACE_WIKI_TAB),Condition.visible,1000);
     if($(ELEMENT_SPACE_MENU_MORE).is(Condition.visible))
       $(ELEMENT_SPACE_MENU_MORE).click();
     $(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB).click();
-    $(byClassName("uiGrayLightBox")).waitUntil(Condition.appears, Configuration.timeout);
+    $(byClassName("uiGrayLightBox")).waitUntil(Condition.visible, Configuration.timeout);
   }
 
   public void goToMemberTabInSpaceSettingTab() {

@@ -49,7 +49,6 @@ public class SOCPeopleMyConnectionsTestIT extends Base {
    * <li>Test Case Name: Check request pending after inviting an user.</li>
    */
   @Test
-  @BugInPLF("SOC-5738")
   // this test case is disabled until resolving this bug:
   // https://jira.exoplatform.org/browse/SOC-5738
   public void test01_ChechTheInvitation() {
@@ -110,7 +109,6 @@ public class SOCPeopleMyConnectionsTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
-  @BugInPLF("SOC-5738")
   // this test case is disabled until resolving this bug:
   // https://jira.exoplatform.org/browse/SOC-5738
   public void test06_AcceptTheInvitation() {
@@ -172,7 +170,6 @@ public class SOCPeopleMyConnectionsTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
-  @BugInPLF("SOC-5738")
   // this test case is disabled until resolving this bug:
   // https://jira.exoplatform.org/browse/SOC-5738
   public void test02_CancelAInvitationRequest() throws Exception {

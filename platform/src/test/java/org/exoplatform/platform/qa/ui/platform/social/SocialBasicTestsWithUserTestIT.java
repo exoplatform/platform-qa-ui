@@ -344,9 +344,6 @@ public class SocialBasicTestsWithUserTestIT extends Base {
     refresh();
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().shouldHave(Condition.text(""));
     homePagePlatform.goToHomePage();
-    Assert.assertEquals("rgba(153, 153, 153, 1)",
-                        $(byId("LikeCommentLinkcomment" + idBlocComment)).find(byClassName("uiIconThumbUp"))
-                                                                         .getCssValue("color"));
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).hover();
     ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.shouldHave(Condition.text("Like"));
     manageLogInOut.signIn("root", "gtn");

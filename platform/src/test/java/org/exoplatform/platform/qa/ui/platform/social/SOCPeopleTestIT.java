@@ -4,6 +4,7 @@ import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
@@ -416,7 +417,7 @@ public class SOCPeopleTestIT extends Base {
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToConnections();
     connectionsManagement.goToConnectionTab(ConnectionsManagement.selectTabOption.RECEIVE);
-    $(ELEMENT_CONNECTION_CONFIRM_BTN).waitUntil(Condition.appears, Configuration.timeout);
+    $(byXpath(ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}",username1))).waitUntil(Condition.visible,Configuration.timeout);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -467,7 +468,7 @@ public class SOCPeopleTestIT extends Base {
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToConnections();
     connectionsManagement.goToConnectionTab(ConnectionsManagement.selectTabOption.RECEIVE);
-    $(ELEMENT_CONNECTION_CONFIRM_BTN).waitUntil(Condition.appears, Configuration.timeout);
+    $(byXpath(ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}",username1))).waitUntil(Condition.visible,Configuration.timeout);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);

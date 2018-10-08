@@ -40,7 +40,7 @@ public class ConnectionsLocator {
   public static final String          ELEMENT_CONNECTION_IGNORE_BTN           =
                                                                     " //a[contains(@href,'${user}')]/../..//*[text()='Ignore']";
 
-  public static final SelenideElement ELEMENT_CONNECTION_CONFIRM_BTN          = $(byText("Confirm"));
+  public static final String ELEMENT_CONNECTION_CONFIRM_BTN          = " //a[contains(@href,'${user}')]/../..//*[text()='Confirm']";
 
   public static final String          ELEMENT_CONNECTION_USER_AVARTAR         = "//a[contains(@href,'${user}')]/img";
 

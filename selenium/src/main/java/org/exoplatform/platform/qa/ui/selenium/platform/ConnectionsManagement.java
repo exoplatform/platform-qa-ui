@@ -159,9 +159,9 @@ public class ConnectionsManagement {
       searchPeople(fullName[0], null, null, null);
     else
       searchPeople(username, null, null, null);
-    $(byText("Confirm")).click();
-    $(byText("Confirm")).waitUntil(Condition.disappears, Configuration.timeout);
-    info("Accepted to the user");
+      $(byXpath(ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}",username))).click();
+      homePagePlatform.refreshUntil($(byXpath(ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}",username))),Condition.not(Condition.visible),1000);
+      info("Accepted to the user");
   }
 
   /**
@@ -240,14 +240,8 @@ public class ConnectionsManagement {
     } else {
       $(ELEMENT_SKILL_OF_PEOPLE).setValue("");
     }
-    $(ELEMENT_ACCOUNT_NAME_LINK).click();
     $(ELEMENT_SEARCH_BUTTON).pressEnter();
-    $(ELEMENT_SEARCH_BUTTON).click();
-    try {
-      homePagePlatform.refreshUntil($(byClassName("spaceBox")),Condition.visible,1000);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    homePagePlatform.refreshUntil($(byClassName("spaceBox")),Condition.visible,1000);
     if (directory != "" && directory != null)
       $(byLinkText(directory)).click();
   }
