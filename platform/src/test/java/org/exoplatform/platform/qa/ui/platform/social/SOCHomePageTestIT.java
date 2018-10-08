@@ -877,4 +877,13 @@ public class SOCHomePageTestIT extends Base {
     info("delete activity");
     activityStream.deleteactivity("$ {val}");
   }
+  @Test
+  @Tag("PLF-8135")
+  public void test23_CheckPaddingOfSpacesAtLeftAndRightOfActivities(){
+    homePagePlatform.goToHomePage();
+    assertEquals("40px", ELEMENT_ACTIVITY_CONTAINER.getCssValue("padding-top"));
+    assertEquals("20px", ELEMENT_ACTIVITY_CONTAINER.getCssValue("padding-right"));
+   assertEquals("40px", ELEMENT_ACTIVITY_CONTAINER.getCssValue("padding-bottom"));
+   assertEquals("20px", ELEMENT_ACTIVITY_CONTAINER.getCssValue("padding-left"));
+  }
 }
