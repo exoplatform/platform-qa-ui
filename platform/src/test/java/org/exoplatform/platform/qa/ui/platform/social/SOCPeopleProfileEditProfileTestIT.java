@@ -308,9 +308,32 @@ public class SOCPeopleProfileEditProfileTestIT extends Base {
     addUsers.deleteUser(username1);
   }
 
+  @Test
+  public void test05_CheckDefaultEmptyGenderInManageUsers(){
+    navigationToolbar.goToAddUser();
+    $(ELEMENT_USER_PROFILE_TAB).click();
+    $(ELEMENT_GENDER).shouldHave(Condition.exactValue(""));
+
+  }
+
+  @Test
+  public void test06_CheckEmptyGenderIsSynchronizedInEditProfile(){
+    String username = "username" + getRandomString();
+    String email = username + "@test.com";
+    String password = "123456";
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username, password, email, username, username);
+    manageLogInOut.signIn(username,password);
+    navigationToolbar.goToMyProfile();
+    userProfilePage.goToEditProfile();
+    scrollToBottomPage(this.getExoWebDriver().getWebDriver());
+    $(ELEMENT_GENDER_EDIT_PROFILE).shouldHave(Condition.exactValue(""));
+  }
+
+
   @BugInPLF("SOC-6086")
   @Test
-  public void test05_EmptyGenderIsSynchronizedInMangeUsers(){
+  public void test07_CheckEmptyGenderIsSynchronizedInMangeUsers(){
     String username = "username" + getRandomString();
     String email = username + "@test.com";
     String password = "123456";
