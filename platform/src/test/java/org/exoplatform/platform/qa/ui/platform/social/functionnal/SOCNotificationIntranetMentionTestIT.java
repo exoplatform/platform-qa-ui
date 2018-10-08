@@ -71,6 +71,7 @@ public class SOCNotificationIntranetMentionTestIT extends Base {
         String email2 = username2 + "@gmail.com";
         String password = "123456";
         arrayUser.add(username1 + " " + username1);
+
         info("Add new user");
         navigationToolbar.goToAddUser();
         userAddManagement.addUser(username1, "123456", email1, username1, username1);
@@ -157,8 +158,6 @@ public class SOCNotificationIntranetMentionTestIT extends Base {
         userAddManagement.addUser(username2, "123456", email2, username2, username2);
         manageLogInOut.signIn(username1, "123456");
         homePagePlatform.goToHomePage();
-
-
         homePagePlatform.goToHomePage();
         String activity1 = "activitya" + getRandomNumber();
         activityStream.addActivity(activity1, "");
@@ -221,9 +220,57 @@ public class SOCNotificationIntranetMentionTestIT extends Base {
 			- The user is redirected to the activity viewer with all comment expanded.
 			- The comment where the mention has been done is highlighted*/
         intranetNotification.goToDetailMentionNotification(username1, true);
+    }
 
+    /*Step Number: 1
+		 *Step Name:
+		 *Step Description:
+			- Login with User B
+			- Click the notification icons in the top navigation
+			- Check the notification list
+		 *Input Data:
+
+		 *Expected Outcome:
+			- The Mention notification is displayed in the list*/
+    /*Step number: 2
+		 *Step Name:
+		 *Step Description:
+			- Go to View All page
+		 *Input Data:
+
+		 *Expected Outcome:
+			- The Mention notification is displayed / available in the page*/
+
+    @Test
+    public void test03_CheckViewAllAfterReceivingAMentionNotification() {
+        info("Test 3: Check View All after receiving a Mention notification");
+        ArrayList<String> arrayUser = new ArrayList<String>();
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String username2 = getRandomString();
+        String email2 = username2 + "@gmail.com";
+        String password = "123456";
+        arrayUser.add(username1 + " " + username1);
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        userAddManagement.addUser(username1, "123456", email1, username1, username1);
+        userAddManagement.addUser(username2, "123456", email2, username2, username2);
+        manageLogInOut.signIn(username1, "123456");
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToHomePage();
+        String activity1 = "activitya" + getRandomNumber();
+        activityStream.mentionUserActivity(username2, activity1);
+        manageLogInOut.signIn(username2, password);
+        navigationToolbar.goToIntranetNotification();
+        String status = "";
+        intranetNotification.checkStatus(status, username1 + " " + username1);
+        intranetNotification.goToAllNotification();
+        intranetNotification.checkStatus(status, username1 + " " + username1);
     }
 }
+
+
 
 
 
