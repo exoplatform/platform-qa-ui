@@ -2,42 +2,38 @@ package org.exoplatform.platform.qa.ui.platform.chat.Functional;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selectors;
-import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.chat.pageobject.RoomManagement;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
-import org.exoplatform.platform.qa.ui.gatein.pageobject.NavigationManagement;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
+import org.exoplatform.platform.qa.ui.task.pageobject.ProjectsManagement;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
-import org.openqa.selenium.*;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_TABLE_PROJECT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 @Tag("chat")
 @Tag("sniff")
-public class ChatAssignTaskPopoverTestIT extends Base {
+public class ChatAssignTaskTestIT extends Base {
 
-    HomePagePlatform homePagePlatform;
-    ManageLogInOut manageLogInOut;
+    HomePagePlatform       homePagePlatform;
+    ManageLogInOut         manageLogInOut;
     UserAndGroupManagement userandgroupmanagement;
     UserAddManagement      userAddManagement;
-    NavigationToolbar      navigationToolbar;
     RoomManagement         roomManagement;
-
-
+    ProjectsManagement     projectsManagement;
 
 
     @BeforeEach
@@ -46,8 +42,8 @@ public class ChatAssignTaskPopoverTestIT extends Base {
         homePagePlatform = new HomePagePlatform(this);
         userAddManagement = new UserAddManagement(this);
         userandgroupmanagement = new UserAndGroupManagement(this);
-        navigationToolbar=new NavigationToolbar(this);
         roomManagement= new RoomManagement(this);
+        projectsManagement=new ProjectsManagement(this);
         manageLogInOut = new ManageLogInOut(this);
         if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
             $(ELEMENT_SKIP_BUTTON).click();
@@ -56,18 +52,30 @@ public class ChatAssignTaskPopoverTestIT extends Base {
     }
 
      @Test
-     public void test_AssignTaskPopover(){
+     public void test_CheckTaskWithNoAssignee() throws InterruptedException {
+        String room =  "room" +getRandomNumber();
+        String task =  "task" +getRandomNumber();
+
          homePagePlatform.goToChat();
          switchTo().window(1);
-         $(byClassName("uiIconSimplePlus")).waitUntil(Condition.appears, Configuration.timeout);
-         $(byClassName("uiIconSimplePlus")).click();
-         $(byClassName("PopupContent")).waitUntil(Condition.appear, Configuration.timeout);
-         $(byXpath("//*[@id=\"chat-application\"]/div[1]/div[2]/div[4]/div/div[2]/div[1]/input[1]")).setValue("room1");
-         $(byClassName("selectize-input")).find(by("type", "text")).sendKeys("root");
-         $(byClassName("btn-primary")).click();
-         $(byId("chat-users")).find(byText("room1")).click();
-         $(byClassName("uiIconPlusCircled")).click();
+         ELEMENT_CREATE_ROOM.waitUntil(Condition.appears, Configuration.timeout);
+         ELEMENT_CREATE_ROOM.click();
+         ELEMENT_POPUP_ROOM.waitUntil(Condition.appear, Configuration.timeout);
+         ELEMENT_ROOM_NAME.setValue(room);
+         ELEMENT_PEOPLE_ROOM.sendKeys("root");
+         ELEMENT_BUTTON_SAVE_ROOM.click();
+         ELEMENT_CONTACT_LIST.find(byText(room)).click();
+         ELEMENT_COLLABORATION_ACTIONS.click();
          $(byClassName("uiIconChatCreateTask")).click();
+         $(byId("taskTitle")).setValue(task);
+         $(byXpath("//*[@id=\"appComposerForm\"]/div[2]/button")).click();
+         switchToParentWindow();
+         homePagePlatform.goToTaskPage();
+         $(byText(room)).should(Condition.exist);
+         $(byText(room)).click();
+         ELEMENT_TABLE_PROJECT.parent().parent().parent().find(byText(task)).should(Condition.exist);
+         projectsManagement.deleteProject(room);
+         switchTo().window(1);
+         roomManagement.deleteRomm(room);
      }
-
 }

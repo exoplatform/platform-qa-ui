@@ -1,7 +1,7 @@
 package org.exoplatform.platform.qa.ui.chat.pageobject;
 
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
 

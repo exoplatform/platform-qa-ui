@@ -168,7 +168,7 @@ public class ChatManageMessageTestIT extends Base {
 
   @Test
   @Tag("CHAT-829")
-  public void test03_checkUserStatusWhenSendMessageInRoom() {
+  public void test03_checkUserStatusWhenSendMessageInRoom() throws InterruptedException {
     String room = "room" + getRandomNumber();
     String message = "room" + getRandomNumber();
     manageLogInOut.signIn(PLFData.DATA_USER2, PLFData.password);

@@ -2405,5 +2405,13 @@ public static final By
   public static final SelenideElement ELEMENT_BUTTON_CLOSE_SPECIFIC_GADGET=$(byClassName("gadgets-gadget")).parent().parent().parent().parent().find(byClassName("uiIconClose"));
   public static final By              ELEMENT_EDIT_MY_PROFILE_BUTTON                                    =
           By.xpath("//*[@id='UIExperienceProfilePortlet']//*[@class='uiIconEdit uiIconLightGray']");
+  public static final SelenideElement ELEMENT_CREATE_ROOM =  $(byClassName("uiIconSimplePlus"));
+  public static final SelenideElement ELEMENT_POPUP_ROOM=  $(byClassName("PopupContent"));
+  public static final SelenideElement ELEMENT_ROOM_NAME= $(byClassName("add-room-form")).find(by("type", "text"));
+  public static final SelenideElement ELEMENT_PEOPLE_ROOM=  $(byClassName("selectize-input")).find(by("type", "text"));
+  public static final SelenideElement ELEMENT_BUTTON_SAVE_ROOM=   $(byClassName("btn-primary"));
+  public static final SelenideElement ELEMENT_CONTACT_LIST=  $(byId("chat-users"));
+  public static final SelenideElement ELEMENT_COLLABORATION_ACTIONS=  $(byClassName("uiIconPlusCircled"));
 
 }
+

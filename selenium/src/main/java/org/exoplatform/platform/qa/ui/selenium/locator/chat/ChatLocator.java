@@ -28,6 +28,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class ChatLocator {
 
+
     public static final SelenideElement ELEMENT_CHAT_MEETTING_ACTIONS_UPLOAD_FILE = $(byId("meeting-action-upload-link"));
 
     public static final SelenideElement ELEMENT_CHAT_POPUP_UPLOAD = $(byClassName("popover-inner"));
@@ -145,8 +146,5 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_CHAT_CANCEL_UPLOAD_FILE_BUTTON= $(byXpath(" //*[@id=\"appComposerForm\"]/div[1]/div[2]/a[2]"));
     public static final SelenideElement ELEMENT_CHAT_SHARE_LINK_BUTTON= $(byXpath("//*[@id=\"appComposerForm\"]/div[2]/button"));
 
-
-
-    //*[@id="appComposerForm"]/div[2]/button
-
+  public static final SelenideElement ELEMENT_MORE_ACTIONS=$(byClassName("uiIconVerticalDots"));
 }
