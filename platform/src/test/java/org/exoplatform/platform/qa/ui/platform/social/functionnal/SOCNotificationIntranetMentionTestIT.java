@@ -1,4 +1,5 @@
 package org.exoplatform.platform.qa.ui.platform.social.functionnal;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
@@ -8,10 +9,13 @@ import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.social.pageobject.IntranetNotification;
 import org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting;
+import org.exoplatform.platform.qa.ui.social.pageobject.NotificationActivity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
+
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
@@ -35,6 +39,7 @@ public class SOCNotificationIntranetMentionTestIT extends Base {
     ActivityStream activityStream;
     UserAddManagement userAddManagement;
     ArrayList<String> arrayUser;
+    NotificationActivity notificationActivity;
 
     @BeforeEach
     public void setupBeforeMethod() {
@@ -101,7 +106,7 @@ public class SOCNotificationIntranetMentionTestIT extends Base {
 			- $ACTIVITY is the activity title/message
 			- $DATE is the date of the notification*/
         arrayUser.add(username1);
-        String status = " ";
+        String status = "UserA has mentionned you";
         intranetNotification.checkAvatarInStatus(username1 + " " + username1, true);
         intranetNotification.checkStatus(status, username1);
         intranetNotification.checkActivityTitleInStatus(activity1, true);
@@ -132,6 +137,91 @@ public class SOCNotificationIntranetMentionTestIT extends Base {
         intranetNotification.checkActivityTitleInStatus(activity1, true);
         refresh();
         $(byXpath(ELEMENT_ACTIVITY_MENTION_USER.replace("${content}", activity1).replace("${user}", username2))).waitUntil(Condition.visible, Configuration.timeout);
+    }
+
+
+    @Test
+    public void test02_CheckMentionNotificationsInComment() {
+        info("Test 1: Check Mention notifications (in activity message)");
+        ArrayList<String> arrayUser = new ArrayList<String>();
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String username2 = getRandomString();
+        String email2 = username2 + "@gmail.com";
+        String password = "123456";
+        arrayUser.add(username1 + " " + username1);
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        userAddManagement.addUser(username1, "123456", email1, username1, username1);
+        userAddManagement.addUser(username2, "123456", email2, username2, username2);
+        manageLogInOut.signIn(username1, "123456");
+        homePagePlatform.goToHomePage();
+
+
+        homePagePlatform.goToHomePage();
+        String activity1 = "activitya" + getRandomNumber();
+        activityStream.addActivity(activity1, "");
+        String comment = "comment" + getRandomNumber();
+        activityStream.addCommentWithMentionUser(activity1, username2, comment);
+
+
+        info("Test 2: Check Mention notifications (in comment)");
+		/*Step Number: 1
+		 *Step Name:
+		 *Step Description:
+			- Login with User B
+			- Click the notification icons in the top navigation
+			- Check the notification list
+		 *Input Data:
+
+		 *Expected Outcome:
+			- The Mention notification is displayed in the list*/
+        manageLogInOut.signIn(username2, password);
+        navigationToolbar.goToIntranetNotification();
+
+		/*Step number: 2
+		 *Step Name:
+		 *Step Description:
+			- Check the notification message
+		 *Input Data:
+
+		 *Expected Outcome:
+			The notification message is : $AVATAR$USER has mentioned you $ACTIVITY$DATEWhere :
+			- $AVATAR is the thumbnail of User A
+			- $USER is User A
+			- $ACTIVITY is the name of the wiki page
+			- $DATE is the date of the notification*/
+        arrayUser.add(username2);
+        String status = "userA has mentioned you ";
+        intranetNotification.checkAvatarInStatus(username1, true);
+        intranetNotification.checkStatus(status, username1);
+        intranetNotification.checkActivityTitleInStatus(activity1, true);
+
+
+        info("Test 5: Click the Mention notifications (in comment)");
+		/*Step Number: 1
+		 *Step Name:
+		 *Step Description:
+			- Login with User B
+			- Click the notification icons in the top navigation
+			- Check the notification list
+		 *Input Data:
+
+		 *Expected Outcome:
+			- The Mention notification is displayed in the list*/
+
+		/*Step number: 2
+		 *Step Name:
+		 *Step Description:
+			- Click the notification
+		 *Input Data:
+
+		 *Expected Outcome:
+			- The user is redirected to the activity viewer with all comment expanded.
+			- The comment where the mention has been done is highlighted*/
+        intranetNotification.goToDetailMentionNotification(username1, true);
+
     }
 }
 

@@ -562,7 +562,7 @@ public class IntranetNotification {
   public void checkStatus(String status, String user) {
 
     info("Verify that the status is shown");
-    for (int repeat = 0;; repeat++) {
+    for (int repeat = 0; ; repeat++) {
       if (repeat > 1) {
         if ($(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS.replace("$status", status).replace("$fullName", user))).is(Condition.visible))
           ;
@@ -577,7 +577,9 @@ public class IntranetNotification {
       info("Retry...[" + repeat + "]");
 
     }
+
     }
+
 
 
   /**
