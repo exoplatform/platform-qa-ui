@@ -133,7 +133,7 @@ public class PlfUnifiedSearchTestIT extends Base {
     homePagePlatform.goToHomePage();
     navigationToolbar.goToQuickSearch();
     quickSearchResult.search("cloud");
-    waitForAndGetElement(ELEMENT_SEARCHRESULT_ALLTYPECHECK, 5000, 0);
+    $(ELEMENT_SEARCHRESULT_ALLTYPECHECK).waitUntil(Condition.visible,Configuration.timeout);
     homePagePlatform.goToWiki();
     wikiHomePage.deleteWiki(name);
     homePagePlatform.goToForum();

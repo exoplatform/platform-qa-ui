@@ -98,10 +98,10 @@ public class SOCNotificationsAdministrationTestIT extends Base {
     info("Test 1: Notification Administration");
 
     navigationToolbar.goToAdminNotifications();
-    waitForAndGetElement(ELEMENT_TITLE_ADMIN_NOTIFICATIONS_PAGE, 2000, 1);
-    waitForAndGetElement(ELEMENT_NOTIFICATION_GRID_TITLE, 2000, 1);
-    waitForAndGetElement(ELEMENT_TITLE_NOTIFICATION_GRID, 2000, 1);
-    waitForAndGetElement(ELEMENT_ENABLE_NOTIFICATION_GRID, 2000, 1);
+    $(ELEMENT_TITLE_ADMIN_NOTIFICATIONS_PAGE).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_NOTIFICATION_GRID_TITLE).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_TITLE_NOTIFICATION_GRID).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_ENABLE_NOTIFICATION_GRID).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -129,11 +129,11 @@ public class SOCNotificationsAdministrationTestIT extends Base {
     String spaceName = "spaceName" + getRandomNumber();
 
     navigationToolbar.goToAdminNotifications();
-    waitForAndGetElement(ELEMENT_TITLE_ADMIN_NOTIFICATIONS_PAGE, 2000, 1);
+    $(ELEMENT_TITLE_ADMIN_NOTIFICATIONS_PAGE).waitUntil(Condition.visible,Configuration.timeout);
 
     notificationsAdminSeting.enableNotification(NotificationsAdminSeting.notificationType.Space_Invitation_intranet);
     navigationToolbar.goToMyNotifications();
-    waitForAndGetElement(ELEMENT_SPACE_INVITATION_INTRANET_NOTIFICATION_ICON, 2000, 1);
+    $(ELEMENT_SPACE_INVITATION_INTRANET_NOTIFICATION_ICON).waitUntil(Condition.visible,Configuration.timeout);
 
     String username = "username" + getRandomString();
     String email = username + "@gmail.com";
@@ -186,7 +186,7 @@ public class SOCNotificationsAdministrationTestIT extends Base {
     info("Test 03: Disable an Intranet Notification type");
 
     navigationToolbar.goToAdminNotifications();
-    waitForAndGetElement(ELEMENT_TITLE_ADMIN_NOTIFICATIONS_PAGE, 2000, 1);
+    $(ELEMENT_TITLE_ADMIN_NOTIFICATIONS_PAGE).waitUntil(Condition.visible,Configuration.timeout);
 
     notificationsAdminSeting.disableNotification(NotificationsAdminSeting.notificationType.AS_Comment_intranet);
     navigationToolbar.goToMyNotifications();
