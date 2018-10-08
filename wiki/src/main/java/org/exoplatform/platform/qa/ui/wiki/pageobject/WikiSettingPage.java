@@ -37,15 +37,12 @@ public class WikiSettingPage {
    */
   public void searchTemplate(String template) {
 
-    info("Input a template's name");
-    $(ELEMENT_TEMPLATE_SEARCH_TEXTBOX).setValue(template);
-
-    info("Press Enter key");
-    testBase.getExoWebDriver().getWebDriver().findElement(ELEMENT_TEMPLATE_SEARCH_TEXTBOX).sendKeys(Keys.ENTER);
+    info("Input a template's name and press entrer");
+    $(ELEMENT_TEMPLATE_SEARCH_TEXTBOX).setValue(template).pressEnter();
 
     info("Verify that the search results is shown that matchs with keyword");
 
-    $(byId("UIWikiTemplateGrid")).find(byText(template)).should(Condition.exist);
+    $(byId("UIWikiTemplateGrid")).find(byText(template)).waitUntil(Condition.visible,Configuration.timeout);
 
   }
 
@@ -83,6 +80,7 @@ public class WikiSettingPage {
    */
   public void deleteTemplate(String template) {
       info("Delete template " + template);
+      searchTemplate(template);
       $(byXpath(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template))).click();
       alert.acceptAlert();
       $(By.xpath(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);

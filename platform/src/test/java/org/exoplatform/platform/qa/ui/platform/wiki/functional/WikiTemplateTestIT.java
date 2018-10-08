@@ -150,7 +150,7 @@ public class WikiTemplateTestIT extends Base {
 
     info("Verify that new tempate is created. It'll be shown in template form");
     wikiValidattions.verifyTemplateInList(title1);
-
+    manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
     info("Verify that the template is a table with 2 column and 2 rows");
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddTemplateWikiPage();
@@ -183,6 +183,7 @@ public class WikiTemplateTestIT extends Base {
     info("Verify that new tempate is created. It'll be shown in template form");
     wikiValidattions.verifyTemplateInList(title2);
     info("Verify that the template has bold effect");
+    manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddTemplateWikiPage();
     wikiSettingPage.searchTemplate(title2);
@@ -215,6 +216,7 @@ public class WikiTemplateTestIT extends Base {
     wikiHomePage.confirmWaringMessage(true);
     info("Verify that new tempate is created. It'll be shown in template form");
     wikiValidattions.verifyTemplateInList(title3);
+    manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
     info("The page is shown with Bullest list effect");
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddTemplateWikiPage();
@@ -247,8 +249,9 @@ public class WikiTemplateTestIT extends Base {
 
     info("Verify that new tempate is created. It'll be shown in template form");
     wikiValidattions.verifyTemplateInList(title4);
-
+    manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
     info("The page is shown with Italic effect");
+    manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddTemplateWikiPage();
     wikiSettingPage.searchTemplate(title4);
@@ -323,7 +326,7 @@ public class WikiTemplateTestIT extends Base {
 
     info("Verify that new tempate is created. It'll be shown in template form");
     wikiValidattions.verifyTemplateInList(title6);
-
+    manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
     info("The page is shown with link effect");
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddTemplateWikiPage();
@@ -356,6 +359,7 @@ public class WikiTemplateTestIT extends Base {
 
     info("Verify that new tempate is created. It'll be shown in template form");
     wikiValidattions.verifyTemplateInList(title7);
+    manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
     info("The page is shown with Number list effect");
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddTemplateWikiPage();
@@ -389,6 +393,7 @@ public class WikiTemplateTestIT extends Base {
     info("Verify that new tempate is created. It'll be shown in template form");
     wikiValidattions.verifyTemplateInList(title8);
     info("The page is shown with Strike effect");
+    manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddTemplateWikiPage();
     wikiSettingPage.searchTemplate(title8);
@@ -421,6 +426,7 @@ public class WikiTemplateTestIT extends Base {
 
     info("Verify that new tempate is created. It'll be shown in template form");
     wikiValidattions.verifyTemplateInList(title9);
+    manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
     info("The page is shown with underline effect");
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddTemplateWikiPage();
