@@ -847,7 +847,6 @@ public class SOCHomePageTestIT extends Base {
   @Test
   public void test22_RenameASpace() {
     info("Test 22: Rename a Space");
-
     String space = "space" + getRandomNumber();
     String contentSpace = "contentSpace" + getRandomNumber();
     String newSpace = "newSpace" + getRandomNumber();
@@ -876,5 +875,14 @@ public class SOCHomePageTestIT extends Base {
     activityStream.checkActivity("$ {val}");
     info("delete activity");
     activityStream.deleteactivity("$ {val}");
+  }
+  @Test
+  @Tag("PLF-8135")
+  public void test23_CheckPaddingOfSpacesAtLeftAndRightOfActivities(){
+    homePagePlatform.goToHomePage();
+    assertEquals("40px", ELEMENT_ACTIVITY_CONTAINER.getCssValue("padding-top"));
+    assertEquals("20px", ELEMENT_ACTIVITY_CONTAINER.getCssValue("padding-right"));
+    assertEquals("40px", ELEMENT_ACTIVITY_CONTAINER.getCssValue("padding-bottom"));
+    assertEquals("20px", ELEMENT_ACTIVITY_CONTAINER.getCssValue("padding-left"));
   }
 }
