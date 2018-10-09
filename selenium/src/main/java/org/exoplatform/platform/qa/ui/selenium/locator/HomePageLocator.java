@@ -727,5 +727,4 @@ public static final SelenideElement ELEMENT_ACTIVITY_STREAM_CONTAINER= $(byClass
 
 public static final By ELEMENT_BOX_ACTIVITY=byId("boxContainer");
 public static final SelenideElement ELEMENT_ACTIVITY_CONTAINER=$(byClassName("OfficeMiddleTDContainer"));
-
 }
