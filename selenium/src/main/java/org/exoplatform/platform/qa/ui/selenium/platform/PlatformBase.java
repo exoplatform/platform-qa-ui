@@ -20,6 +20,7 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -29,6 +30,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
@@ -414,8 +417,8 @@ public class PlatformBase {
   public void usePaginator(Object locator, String exceptionMessage) {
     String page1 = ELEMENT_PAGINATOR_PAGE_LINK.replace("${number}", "1");
 
-    if (evt.waitForAndGetElement(page1, 5000, 0) != null)
-      evt.click(page1);
+    if ($(byXpath(page1)).is(Condition.visible));
+        $(byXpath(page1)).click();
 
     int totalPages = 0;
     if (evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE, 3000, 0) != null) {

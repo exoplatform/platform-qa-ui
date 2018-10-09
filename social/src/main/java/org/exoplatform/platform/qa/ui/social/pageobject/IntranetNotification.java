@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.social.pageobject;
 
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_NOTIFICATION_DROPDOWN;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
@@ -573,15 +574,14 @@ public class IntranetNotification {
     info("Verify that the status is shown");
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
-        if (evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_STATUS.replace("$status", status).replace("$fullName", user),
-                                     3000,
-                                     0) != null)
-          ;
+          if ($(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS.
+                  replace("$status",status).replace("$fullName",user))).is(Condition.visible));
+
         break;
       }
-      if (evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_STATUS.replace("$status", status).replace("$fullName", user),
-                                   5000,
-                                   0) != null) {
+        if ($(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS.
+                replace("$status",status).replace("$fullName",user))).is(Condition.visible))
+        {
         info("Element " + ELEMENT_INTRANET_NOTIFICATION_STATUS.replace("$status", status).replace("$fullName", user)
             + " is displayed");
         break;
@@ -761,9 +761,9 @@ public class IntranetNotification {
   public void checkAvatarInStatus(String user, boolean isPopUp) {
     info("Verify that last user's avatar is shown in list");
     if (isPopUp)
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_AVATAR.replace("$lastUser", user), 2000, 2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_AVATAR.replace("$lastUser", user))).waitUntil(Condition.visible,Configuration.timeout);
     else
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ALL_AVATAR.replace("$lastUser", user), 2000, 2);
-  }
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ALL_AVATAR.replace("$lastUser", user))).waitUntil(Condition.visible,Configuration.timeout);
+  }}
 
-}
+

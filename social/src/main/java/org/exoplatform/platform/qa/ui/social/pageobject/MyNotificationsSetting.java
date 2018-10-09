@@ -291,7 +291,7 @@ public class MyNotificationsSetting {
         evt.check(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX, 2);
         info("Click on Save button");
         $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).click();
-        $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+        $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).waitUntil(Condition.visible,Configuration.timeout);
         info("Verify that intranet notification is shown");
         evt.waitForAndGetElement(ELEMENT_NEW_USER_INTRANET_ICON, 3000, 1);
         break;
