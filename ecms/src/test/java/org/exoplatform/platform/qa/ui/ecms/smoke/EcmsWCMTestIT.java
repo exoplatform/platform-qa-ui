@@ -170,7 +170,6 @@ public class EcmsWCMTestIT extends Base {
      */
     $(byTitle("Portlet Mode")).click();
     $(byTitle("Edit")).click();
-    ELEMENT_INCON_ADD_PATH.click();
     contentList.selectFolderContent("General Drives/Sites Management/intranet", content2);
     // $(ELEMENT_CONTENT_DETAIL_SAVE_BTN).scrollTo().click();
     // scroll up
