@@ -19,6 +19,7 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_CHAT_RESULT_SEARCH_USER;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_TABLE_PROJECT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -52,7 +53,7 @@ public class ChatAssignTaskTestIT extends Base {
     }
 
      @Test
-     public void test_CheckTaskWithNoAssignee() throws InterruptedException {
+     public void test01_CheckTaskWithNoAssignee() throws InterruptedException {
         String room =  "room" +getRandomNumber();
         String task =  "task" +getRandomNumber();
 
@@ -77,5 +78,33 @@ public class ChatAssignTaskTestIT extends Base {
          projectsManagement.deleteProject(room);
          switchTo().window(1);
          roomManagement.deleteRomm(room);
+     }
+
+     @Test
+    public void test02_CheckTaskWithAssignee(){
+
+         String room =  "room" +getRandomNumber();
+         String task =  "task" +getRandomNumber();
+
+         homePagePlatform.goToChat();
+         switchTo().window(1);
+         ELEMENT_CREATE_ROOM.waitUntil(Condition.appears, Configuration.timeout);
+         ELEMENT_CREATE_ROOM.click();
+         ELEMENT_POPUP_ROOM.waitUntil(Condition.appear, Configuration.timeout);
+         ELEMENT_ROOM_NAME.setValue(room);
+         $(byXpath("//*[@id=\"chat-application\"]/div[1]/div[2]/div[4]/div[1]/div/div[2]/div[1]/div[1]/div/input")).setValue("root");
+      //   ELEMENT_PEOPLE_ROOM.sendKeys("root");
+         ELEMENT_CHAT_RESULT_SEARCH_USER.waitUntil(Condition.visible,Configuration.timeout);
+         $(byXpath("//*[@id=\"chat-application\"]/div[1]/div[2]/div[4]/div[1]/div/div[2]/div[1]/div[1]/div/input")).pressEnter();
+         ELEMENT_BUTTON_SAVE_ROOM.click();
+         ELEMENT_CONTACT_LIST.find(byText(room)).click();
+         ELEMENT_COLLABORATION_ACTIONS.click();
+         $(byClassName("uiIconChatCreateTask")).click();
+         $(byId("taskTitle")).setValue(task);
+         $(byId("taskAssignee")).parent().parent().find(byClassName("selectize-input")).find(by("type","text")).sendKeys("root");
+
+         $(byId("taskDueDate")).click();
+         $(byClassName("today")).click();
+         $(byXpath("//*[@id=\"appComposerForm\"]/div[2]/button")).click();
      }
 }
