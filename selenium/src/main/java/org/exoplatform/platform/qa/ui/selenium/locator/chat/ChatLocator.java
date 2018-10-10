@@ -106,6 +106,13 @@ public class ChatLocator {
                     "selectize-dropdown multi"));
 
     public static final SelenideElement ELEMENT_CHAT_MEETTING_ACTIONS = $(byId("chat-msg-meeting-actions"));
+    public static final SelenideElement ELEMENT_CHAT_RESULT_SEARCH_ASSIGNEE= $(byAttribute("class","selectize-dropdown multi large plugin-remove_button"));
+  public static final SelenideElement ELEMENT_CHAT_ASSIGNEE_TASK=  $(byId("taskAssignee")).parent().parent().find(byClassName("selectize-input")).find(by("type","text"));
+  public static final SelenideElement ELEMENT_CHAT_TASK_NAME= $(byId("taskTitle"));
+  public static final SelenideElement ELEMENT_CHAT_DUE_DATE_TASK= $(byId("taskDueDate"));
+  public static final SelenideElement ELEMENT_CHAT_CURRENT_DATE_TASK= $(byClassName("today"));
+  public static final SelenideElement ELEMENT_CHAT_POST_TASK_BUTTON= $(byXpath("//*[@id=\"appComposerForm\"]/div[2]/button"));
+
 
     public static final SelenideElement ELEMENT_CHAT_INPUT_TASKNAME = $(byId("task-add-task"));
 
