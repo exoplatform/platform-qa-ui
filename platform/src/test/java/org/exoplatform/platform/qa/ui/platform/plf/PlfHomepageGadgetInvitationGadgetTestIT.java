@@ -9,7 +9,9 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
+import static org.exoplatform.platform.qa.ui.selenium.locator.QuickSearchResultLocator.ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
@@ -87,8 +89,17 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
   @Test
   public void test01_NotShowInvitationGadget() {
     info("Test 01: Not show Invitation gadget");
-
+    info("Add new user");
+    String usernamea = "usernamea" + getRandomString();
+    String password = "123456";
+    String email1 = usernamea + "@test.com";
+    navigationToolbar.goToAddUser();
+    userAddManagement.addUser(usernamea, password, email1, usernamea, usernamea);
+    manageLogInOut.signIn(usernamea,password);
     waitForElementNotPresent(ELEMENT_INVITATIONS_GADGET);
+    manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
+    navigationToolbar.goToUsersAndGroupsManagement();
+    userAndGroupManagement.deleteUser(usernamea);
   }
 
   /**
@@ -118,6 +129,8 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
     String email2 = usernameb + "@test.com";
     String usernamec = "usernamec" + getRandomString();
     String email3 = usernamec + "@test.com";
+    String username4 = "usernamed" + getRandomString();
+    String email4 = username4 + "@test.com";
 
     /* Create data test */
     info("Add new user");
@@ -125,24 +138,24 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
     userAddManagement.addUser(usernamea, password, email1, usernamea, usernamea);
     userAddManagement.addUser(usernameb, password, email2, usernameb, usernameb);
     userAddManagement.addUser(usernamec, password, email3, usernamec, usernamec);
-
+    userAddManagement.addUser(username4, password, email4, username4, username4);
     info("--Send request 2 to John");
     info("Sign in with username1 account");
     manageLogInOut.signIn(usernamea, password);
     homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER1);
+    connectionsManagement.connectToAUser(username4);
 
     info("Sign in with username2 account");
     manageLogInOut.signIn(usernameb, password);
     homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER1);
+    connectionsManagement.connectToAUser(username4);
 
     info("Sign in with username3 account");
     manageLogInOut.signIn(usernamec, password);
     homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER1);
+    connectionsManagement.connectToAUser(username4);
 
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    manageLogInOut.signIn(username4, password);
     info("Verify that the maximum number of displayed requests is 4");
     info("Verify that for user request, the portlet will displayes the profile picture of the user, his name");
 
@@ -150,10 +163,12 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
     ELEMENT_GADGET_INVITATION.find(byText(usernameb + " " + usernameb)).should(Condition.exist);
     ELEMENT_GADGET_INVITATION.find(byText(usernamec + " " + usernamec)).should(Condition.exist);
     info("Delete DATA for the last test");
+    manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
     navigationToolbar.goToUsersAndGroupsManagement();
     userAndGroupManagement.deleteUser(usernamea);
     userAndGroupManagement.deleteUser(usernameb);
     userAndGroupManagement.deleteUser(usernamec);
+    userAndGroupManagement.deleteUser(username4);
   }
 
   /**
@@ -179,32 +194,37 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
     String email1 = username1 + "@test.com";
     String username2 = "usernameb" + getRandomString();
     String email2 = username2 + "@test.com";
+    String username3 = "usernamec" + getRandomString();
+    String email3 = username3 + "@test.com";
     info("Add new user");
     navigationToolbar.goToAddUser();
     userAddManagement.addUser(username1, password, email1, username1, username1);
     userAddManagement.addUser(username2, password, email2, username2, username2);
-
+    userAddManagement.addUser(username3, password, email3, username3, username3);
     info("Sign in with mary account");
     manageLogInOut.signIn(username1, password);
     homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER1);
+    connectionsManagement.connectToAUser(username3);
 
     info("--Send request 2 to John");
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER1);
+    connectionsManagement.connectToAUser(username3);
 
-    manageLogInOut.signIn(DATA_USER1,"gtngtn");
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    manageLogInOut.signIn(username3,password);
+    navigationToolbar.goToQuickSearch();
+    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().hover();
     ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().parent().find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).shouldNot(Condition.exist);
     ELEMENT_GADGET_INVITATION.find(byText(username1 + " " + username1)).should(Condition.exist);
 
     info("Clear Data");
+    manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
     navigationToolbar.goToUsersAndGroupsManagement();
     userAndGroupManagement.deleteUser(username1);
     userAndGroupManagement.deleteUser(username2);
+    userAndGroupManagement.deleteUser(username3);
   }
 
   /**
@@ -229,32 +249,37 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
     String email1 = username1 + "@test.com";
     String username2 = "usernameb" + getRandomString();
     String email2 = username2 + "@test.com";
+    String username3 = "usernamec" + getRandomString();
+    String email3 = username3 + "@test.com";
     info("Add new user");
     navigationToolbar.goToAddUser();
     userAddManagement.addUser(username1, password, email1, username1, username1);
     userAddManagement.addUser(username2, password, email2, username2, username2);
-
+    userAddManagement.addUser(username3, password, email3, username3, username3);
     info("Sign in with mary account");
     manageLogInOut.signIn(username1, password);
     homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER1);
+    connectionsManagement.connectToAUser(username3);
 
     info("--Send request 2 to John");
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER1);
+    connectionsManagement.connectToAUser(username3);
 
     info("Sign in with ROOT account");
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    manageLogInOut.signIn(username3, password);
+    navigationToolbar.goToQuickSearch();
+    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().hover();
     ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().parent().find(byClassName("uiIconClose")).click();
     ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).shouldNot(Condition.exist);
     ELEMENT_GADGET_INVITATION.find(byText(username1 + " " + username1)).should(Condition.exist);
 
     info("Clear Data");
+    manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
     navigationToolbar.goToUsersAndGroupsManagement();
     userAndGroupManagement.deleteUser(username1);
     userAndGroupManagement.deleteUser(username2);
+    userAndGroupManagement.deleteUser(username3);
   }
 }
