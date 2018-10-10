@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.platform.wiki;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
+import static org.exoplatform.platform.qa.ui.selenium.Button.ELEMENT_CANCEL_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACES_LIST;
@@ -1110,7 +1111,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
 
     info("Move page popup is shown");
     $(byId("UIMoveTree")).find(byText(wiki1)).shouldNot(Condition.exist);
-
+    $(ELEMENT_CANCEL_BUTTON).click();
     info("delete data");
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     homePagePlatform.goToMySpaces();
