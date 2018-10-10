@@ -108,10 +108,15 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_CHAT_MEETTING_ACTIONS = $(byId("chat-msg-meeting-actions"));
     public static final SelenideElement ELEMENT_CHAT_RESULT_SEARCH_ASSIGNEE= $(byAttribute("class","selectize-dropdown multi large plugin-remove_button"));
   public static final SelenideElement ELEMENT_CHAT_ASSIGNEE_TASK=  $(byId("taskAssignee")).parent().parent().find(byClassName("selectize-input")).find(by("type","text"));
+  public static final SelenideElement ELEMENT_CHAT_CREATE_TASK= $(byClassName("uiIconChatCreateTask"));
+  public static final SelenideElement ELEMENT_ASSIGN_TASK_WINDOW=$(byClassName("apps-composer-modal")).find(byText("Assign Task"));
+  public static final SelenideElement ELEMENT_ASSIGN_TASK_CONTAINER= $(byClassName("apps-composer-modal"));
   public static final SelenideElement ELEMENT_CHAT_TASK_NAME= $(byId("taskTitle"));
   public static final SelenideElement ELEMENT_CHAT_DUE_DATE_TASK= $(byId("taskDueDate"));
   public static final SelenideElement ELEMENT_CHAT_CURRENT_DATE_TASK= $(byClassName("today"));
   public static final SelenideElement ELEMENT_CHAT_POST_TASK_BUTTON= $(byXpath("//*[@id=\"appComposerForm\"]/div[2]/button"));
+  public static final SelenideElement ELEMENT_CHAT_CANCEL_TASK_BUTTON= $(byXpath("//*[@id=\"appComposerForm\"]/div[2]/div"));
+  public static final SelenideElement ELEMENT_CHAT_CLOSE_ICON= $(byXpath("//*[@id=\"chat-application\"]/div[2]/div[2]/div[1]/div[2]/div[3]/div/div[1]/a"));
 
 
     public static final SelenideElement ELEMENT_CHAT_INPUT_TASKNAME = $(byId("task-add-task"));
@@ -143,7 +148,6 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_CHAT_ASK_BUTTON= $(byXpath("//*[@id=\"appComposerForm\"]/div[2]/button"));
     public static final SelenideElement ELEMENT_CHAT_CANCEL_BUTTON= $(byXpath("//*[@id=\"appComposerForm\"]/div[2]/div"));
     public static final SelenideElement ELEMENT_CHAT_RAISE_HAND= $(byClassName("uiIconChatRaiseHand"));
-    public static final SelenideElement ELEMENT_CHAT_CREATE_TASK= $(byClassName("uiIconChatCreateTask"));
     public static final SelenideElement ELEMENT_CHAT_COLLABORATION_MENU= $(byClassName("apps-container"));
     public static final SelenideElement ELEMENT_POPUP_CONTAINER= $(byClassName("apps-composer-modal"));
     public static final SelenideElement ELEMENT_RAISE_HAND_BUTTON= $(byXpath("//*[@id=\"appComposerForm\"]/div[2]/button"));

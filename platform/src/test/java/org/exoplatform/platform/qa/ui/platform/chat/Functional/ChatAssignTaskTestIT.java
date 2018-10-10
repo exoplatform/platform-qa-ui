@@ -16,6 +16,9 @@ import org.exoplatform.platform.qa.ui.task.pageobject.ProjectsManagement;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
+import org.openqa.selenium.By;
+
+import javax.lang.model.element.Element;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -58,8 +61,36 @@ public class ChatAssignTaskTestIT extends Base {
         manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2 );
     }
 
+    @Test
+    public void test01_CheckPopupAssignTasK(){
+
+        String room =  "room" +getRandomNumber();
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.addRoom(room);
+        ELEMENT_CONTACT_LIST.find(byText(room)).click();
+        ELEMENT_COLLABORATION_ACTIONS.click();
+        ELEMENT_CHAT_CREATE_TASK.click();
+        info ("check the popup assign task is displayed with task title, Assignee, Due date");
+        ELEMENT_ASSIGN_TASK_WINDOW.waitUntil(Condition.appear,Configuration.timeout);
+        ELEMENT_ASSIGN_TASK_CONTAINER.findElement(By.xpath("//input[@placeholder='Task Title']")).getAttribute("placeholder");
+        ELEMENT_ASSIGN_TASK_CONTAINER.findElement(By.xpath("//input[@placeholder='Assignee']")).getAttribute("placeholder");
+        ELEMENT_ASSIGN_TASK_CONTAINER.findElement(By.xpath("//input[@placeholder='Due date']")).getAttribute("placeholder");
+        info("check that post button is displayed");
+        ELEMENT_CHAT_POST_TASK_BUTTON.should(Condition.appears);
+        info ("check that cancel button works");
+        ELEMENT_CHAT_CANCEL_TASK_BUTTON.should(Condition.appears).click();
+        ELEMENT_ASSIGN_TASK_WINDOW.shouldNot(Condition.appears);
+        info ("check the close button");
+        ELEMENT_COLLABORATION_ACTIONS.click();
+        ELEMENT_CHAT_CREATE_TASK.click();
+        ELEMENT_CHAT_CLOSE_ICON.should(Condition.appears).click();
+        ELEMENT_ASSIGN_TASK_WINDOW.shouldNot(Condition.appears);
+    }
+
+
      @Test
-     public void test01_CheckTaskWithNoAssignee() throws InterruptedException {
+     public void test02_CheckTaskWithNoAssignee() throws InterruptedException {
         String room =  "room" +getRandomNumber();
         String task =  "task" +getRandomNumber();
         String usernamea = "usernamea" + getRandomNumber();
@@ -86,7 +117,7 @@ public class ChatAssignTaskTestIT extends Base {
          ELEMENT_CONTACT_LIST.find(byText(room)).click();
          ELEMENT_COLLABORATION_ACTIONS.click();
          ELEMENT_CHAT_CREATE_TASK.click();
-         ELEMENT_CHAT_TASK_NAME.setValue(task);
+         $(ELEMENT_CHAT_TASK_NAME).setValue(task);
          ELEMENT_CHAT_POST_TASK_BUTTON.click();
          switchToParentWindow();
         homePagePlatform.goToTaskPage();
@@ -97,9 +128,10 @@ public class ChatAssignTaskTestIT extends Base {
         switchTo().window(1);
         roomManagement.deleteRomm(room);
      }
+
      @BugInPLF("CHAT-982")
      @Test
-    public void test02_CheckTaskWithAssignee(){
+    public void test03_CheckTaskWithAssignee(){
 
          String room =  "room" +getRandomNumber();
          String task =  "task" +getRandomNumber();
@@ -128,7 +160,7 @@ public class ChatAssignTaskTestIT extends Base {
          ELEMENT_COLLABORATION_ACTIONS.click();
          ELEMENT_CHAT_CREATE_TASK.click();
          ELEMENT_CHAT_TASK_NAME.setValue(task);
-         ELEMENT_CHAT_ASSIGNEE_TASK.setValue(FirstName);
+         ELEMENT_CHAT_ASSIGNEE_TASK.setValue(usernamea);
          ELEMENT_CHAT_RESULT_SEARCH_ASSIGNEE.waitUntil(Condition.visible,Configuration.timeout);
          ELEMENT_CHAT_ASSIGNEE_TASK.pressEnter();
          ELEMENT_CHAT_DUE_DATE_TASK.click();
