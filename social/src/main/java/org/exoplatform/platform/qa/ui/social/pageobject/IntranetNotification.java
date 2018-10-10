@@ -414,26 +414,13 @@ public class IntranetNotification {
    */
   public void goToDetailNewUserJoinIntranet(String fullName, boolean isPopup) {
 
-    for (int repeat = 0;; repeat++) {
-      if (repeat > 1) {
-        if (evt.waitForAndGetElement(ELEMENT_UIBASICPROFILEPORTLET, 3000, 0) != null)
-          ;
-        break;
-      }
-      if (evt.waitForAndGetElement(ELEMENT_UIBASICPROFILEPORTLET, 5000, 0) != null) {
-        info("Element " + ELEMENT_UIBASICPROFILEPORTLET + " is displayed");
-        break;
-      }
-      info("Retry...[" + repeat + "]");
       if (isPopup) {
         info("View detail notification when new user joined to intranet from all notificaiton page");
-        evt.click(ELEMENT_NOTIFICATION_POPUP_NEW_USER_JOIN_INTRANET.replace("$name", fullName));
+        $(byXpath(ELEMENT_NOTIFICATION_POPUP_NEW_USER_JOIN_INTRANET.replace("$name", fullName))).click();
       } else {
         info("View detail notification when new user joined to intranet from all notificaiton page");
-        evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_NEW_USER_JOIN_INTRANET.replace("$name", fullName));
+        $(byXpath(ELEMENT_NOTIFICATION_ALL_PAGE_NEW_USER_JOIN_INTRANET.replace("$name", fullName))).click();
       }
-
-    }
   }
 
   /**
@@ -574,14 +561,13 @@ public class IntranetNotification {
     info("Verify that the status is shown");
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
-          if ($(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS.
-                  replace("$status",status).replace("$fullName",user))).is(Condition.visible));
-
+        if ($(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS.
+                replace("$status",status).replace("$fullName",user))).is(Condition.visible));
+          ;
         break;
       }
-        if ($(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS.
-                replace("$status",status).replace("$fullName",user))).is(Condition.visible))
-        {
+      if ($(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS.
+              replace("$status",status).replace("$fullName",user))).is(Condition.visible)) {
         info("Element " + ELEMENT_INTRANET_NOTIFICATION_STATUS.replace("$status", status).replace("$fullName", user)
             + " is displayed");
         break;

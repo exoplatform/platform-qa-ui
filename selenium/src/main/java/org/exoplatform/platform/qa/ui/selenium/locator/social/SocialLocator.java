@@ -1129,7 +1129,7 @@ public final class SocialLocator {
    * USER PROFILE
    ****************************************************************************/
   public static final String          ELEMENT_USER_NAME_PAGE                                            =
-                                                             ".//*[@id='UIBreadCrumbsNavigationPortlet']//*[contains(text(),'$fullName')]";
+                                                             ".//*[@id='UIUserNavigationPortlet']//*[contains(text(),'$fullName')]";
 
   public static final By              ELEMENT_EDIT_MY_PROFILE_LINK                                      =
                                                                    By.xpath("//*[@id=\"UIUserNavigationPortlet\"]/div[1]/div/div/ul/li/a");

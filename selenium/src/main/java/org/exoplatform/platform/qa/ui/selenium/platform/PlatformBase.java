@@ -418,7 +418,9 @@ public class PlatformBase {
     String page1 = ELEMENT_PAGINATOR_PAGE_LINK.replace("${number}", "1");
 
     if ($(byXpath(page1)).is(Condition.visible));
-        $(byXpath(page1)).click();
+    $(byXpath(page1)).click();
+
+      $(byXpath(ELEMENT_PAGINATOR_PAGE_LINK.replace("${number}", "1"))).click();
 
     int totalPages = 0;
     if (evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE, 3000, 0) != null) {
