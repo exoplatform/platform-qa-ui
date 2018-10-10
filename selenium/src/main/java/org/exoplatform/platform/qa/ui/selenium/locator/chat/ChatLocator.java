@@ -156,6 +156,8 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_CHAT_SELECT_FILE= $(byXpath("//*[@id=\"appComposerForm\"]/div[1]/div[2]/a[1]"));
     public static final SelenideElement ELEMENT_CHAT_CANCEL_UPLOAD_FILE_BUTTON= $(byXpath(" //*[@id=\"appComposerForm\"]/div[1]/div[2]/a[2]"));
     public static final SelenideElement ELEMENT_CHAT_SHARE_LINK_BUTTON= $(byXpath("//*[@id=\"appComposerForm\"]/div[2]/button"));
+  public static final SelenideElement ELEMENT_ASSIGNEE_TASK=$(byXpath("//*[@id=\"taskManagement\"]/div[3]/div[2]/div/div/div[4]/div[2]/div/span/a[2]"));
+
 
   public static final SelenideElement ELEMENT_MORE_ACTIONS=$(byClassName("uiIconVerticalDots"));
 }

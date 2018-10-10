@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.platform.chat.Functional;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import org.exoplatform.platform.qa.ui.calendar.pageobject.TaskManagement;
 import org.exoplatform.platform.qa.ui.chat.pageobject.RoomManagement;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
@@ -131,7 +132,7 @@ public class ChatAssignTaskTestIT extends Base {
 
      @BugInPLF("CHAT-982")
      @Test
-    public void test03_CheckTaskWithAssignee(){
+    public void test03_CheckTaskWithAssigneeUsername(){
 
          String room =  "room" +getRandomNumber();
          String task =  "task" +getRandomNumber();
@@ -167,4 +168,53 @@ public class ChatAssignTaskTestIT extends Base {
          ELEMENT_CHAT_CURRENT_DATE_TASK.click();
          ELEMENT_CHAT_POST_TASK_BUTTON.click();
      }
+
+    @Test
+    public void test03_CheckTaskWithAssigneeFirstName(){
+
+        String room =  "room" +getRandomNumber();
+        String task =  "task" +getRandomNumber();
+        String usernamea = "usernamea" + getRandomString();
+        String password = "123456";
+        String email = "email" + getRandomNumber() + "@test.com";
+        String FirstName = "FirstName"+getRandomString();
+        String LastName = "LastName"+getRandomString();
+        navigationToolbar.goToAddUser();
+        userAddManagement.addUser(usernamea, password, email, FirstName, LastName);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.addRoom(room,usernamea);
+        switchToParentWindow();
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(usernamea,password);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        ELEMENT_CONTACT_LIST.find(byText(room)).waitUntil(Condition.visible,Configuration.timeout);
+        switchToParentWindow();
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2 );
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        ELEMENT_CONTACT_LIST.find(byText(room)).click();
+        ELEMENT_COLLABORATION_ACTIONS.click();
+        ELEMENT_CHAT_CREATE_TASK.click();
+        ELEMENT_CHAT_TASK_NAME.setValue(task);
+        ELEMENT_CHAT_ASSIGNEE_TASK.setValue(FirstName);
+        ELEMENT_CHAT_RESULT_SEARCH_ASSIGNEE.waitUntil(Condition.visible,Configuration.timeout);
+        ELEMENT_CHAT_ASSIGNEE_TASK.pressEnter();
+        ELEMENT_CHAT_DUE_DATE_TASK.click();
+        ELEMENT_CHAT_CURRENT_DATE_TASK.click();
+        ELEMENT_CHAT_POST_TASK_BUTTON.click();
+        ELEMENT_CONTAINER_LIST_MESSAGES.find(byLinkText(task)).shouldBe(Condition.visible);
+        switchToParentWindow();
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(usernamea,password);
+        $(byClassName("uiIconStatus")).click();
+        ELEMENT_CHAT_NOTIFICATION.find(byText(task)).should(Condition.appears);
+        homePagePlatform.goToTaskPage();
+        $(byText(room)).should(Condition.exist);
+        $(byText(room)).click();
+        ELEMENT_TABLE_PROJECT.parent().parent().parent().find(byText(task)).should(Condition.exist).click();
+        ELEMENT_ASSIGNEE_TASK.shouldHave(Condition.text(FirstName));
+    }
 }
