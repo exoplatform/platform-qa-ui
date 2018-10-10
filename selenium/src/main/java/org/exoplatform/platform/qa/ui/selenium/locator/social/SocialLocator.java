@@ -2358,7 +2358,7 @@ public static final By
                                                                                 $(byId("UISpaceNavigationPortlet"));
 
   public static final SelenideElement ELEMENT_SPACE_NAME_LEFT_NAVIGATION                                =
-                                                                         $(byId("UIBreadCrumbsNavigationPortlet"));
+                                                                         $(byId("UISpaceNavigationPortlet"));
 
   public static final SelenideElement ELEMENT_CONTENT_NAME_PROFILE                                      =
                                                                    $(byId("UIUserNavigationPortlet"));

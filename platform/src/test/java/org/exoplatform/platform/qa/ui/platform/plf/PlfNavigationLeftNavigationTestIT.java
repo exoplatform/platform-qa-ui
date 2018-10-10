@@ -121,7 +121,6 @@ public class PlfNavigationLeftNavigationTestIT extends Base {
    * browsed space jump to the top of the list
    */
   @Test
-  @BugInPLF("2286")
   public void test03_DisplayListOfSpacesOrderedByTheLastBrowsed() {
     info("Test 3: Display list of spaces ordered by the last browsed");
     String space1 = "space1" + getRandomNumber();
@@ -138,13 +137,16 @@ public class PlfNavigationLeftNavigationTestIT extends Base {
     $(ELEMENT_MY_SPACE_LINK_PLF).waitUntil(Condition.appears, Configuration.timeout);
 
     info("Open space 1 in the list");
-    ELEMENT_SECOND_SPACE_MY_SPACE.click();
-    ELEMENT_SPACE_NAME_LEFT_NAVIGATION.find(byText(space1)).waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_SECOND_SPACE_MY_SPACE.waitUntil(Condition.hasText(space1),Configuration.timeout);
+    ELEMENT_SPACE_NAME_LEFT_NAVIGATION.find(byText(space1)).click();
 
     homePagePlatform.goToHomePage();
-    ELEMENT_SECOND_SPACE_MY_SPACE.click();
-    ELEMENT_SPACE_NAME_LEFT_NAVIGATION.find(byText(space2)).waitUntil(Condition.appears, Configuration.timeout);
-
+    ELEMENT_SECOND_SPACE_MY_SPACE.waitUntil(Condition.hasText(space2),Configuration.timeout);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.searchSpace(space1,"");
+    spaceManagement.deleteSpace(space1,false);
+    spaceManagement.searchSpace(space2,"");
+    spaceManagement.deleteSpace(space2,false);
   }
 
   /**

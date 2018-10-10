@@ -106,7 +106,6 @@ public class WikiSearchTestIT extends Base {
    * button Input Data: Expected Outcome: Search results will list pages that
    * matches with keyword and selected space
    */
-  @BugInPLF("WIKI-1296")
   @Test
   public void test02_AdvancedSearch() {
     info("Test 2: Advanced search");
@@ -119,9 +118,7 @@ public class WikiSearchTestIT extends Base {
     wikiHomePage.goTosearchPage(wiki);
     info("Verify that search page is shown with the text");
     $(byClassName("resultInfo")).find(byText(wiki)).should(Condition.exist);
-
     wikiSearch.advancedSearch("", "My Wiki");
-
     info("Verify that the searched results is listed that matches with keyword and selected location");
     $(ELEMENT_SEARCH_NORESULT).waitUntil(Condition.appears, Configuration.timeout);
 

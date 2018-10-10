@@ -160,7 +160,6 @@ public class EcmsAdminRepositoryTestIT extends Base {
    * Group is removed permission
    */
   @Test
-  @BugInPLF("ECMS-7671")
   public void test05_ManageLock() {
     info("Test 5: Manage lock");
     String title = "title" + getRandomNumber();

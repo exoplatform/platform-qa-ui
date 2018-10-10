@@ -1,5 +1,12 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
@@ -12,45 +19,44 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class WikiPageInformation {
-    private final TestBase testBase;
 
-    public ManageAlert alert;
+  private final TestBase       testBase;
 
-    private ElementEventTestBase evt;
+  public ManageAlert           alert;
 
-    /**
-     * constructor
-     *
-     * @param testBase TestBase
-     */
-    public WikiPageInformation(TestBase testBase) {
-        this.testBase = testBase;
-        this.evt = testBase.getElementEventTestBase();
-        this.alert = new ManageAlert(testBase);
+  private ElementEventTestBase evt;
+
+  /**
+   * constructor
+   *
+   * @param testBase TestBase
+   */
+  public WikiPageInformation(TestBase testBase) {
+    this.testBase = testBase;
+    this.evt = testBase.getElementEventTestBase();
+    this.alert = new ManageAlert(testBase);
+  }
+
+  /**
+   * Add a relation to a page
+   *
+   * @param location String
+   * @param page String
+   */
+  public void addRelations(String location, String page) {
+    info("Click on Drop down");
+    $(ELEMENT_ADD_RELATED_PAGE_POPUP_DROPDOWN).click();
+    if(!location.isEmpty()){
+      info("Select a location");
+      $(byXpath(ELEMENT_ADD_RELATED_POPUP_DROPDOWN_LOCATION
+              .replace("${location}",location))).click();
     }
-
-    /**
-     * Add a relation to a page
-     *
-     * @param location String
-     * @param page     String
-     */
-    public void addRelations(String location, String page) {
-        info("Click on Drop down");
-        $(ELEMENT_ADD_RELATED_PAGE_POPUP_DROPDOWN).click();
-
-        if (!location.isEmpty()) {
-            info("Select a location");
-            $(byClassName("spaceChooserPopup")).find(byText(location)).click();
-
-        }
-        if (!page.isEmpty()) {
-            info("Select a page in the list");
-            $(ELEMENT_ADD_RELATED_POPUP_CONTENT).click();
-        }
-        info("Save all changes");
-        $(ELEMENT_ADD_RELATED_POPUP_SELECT_BTN).click();
+    if(!page.isEmpty()){
+      info("Select a page in the list");
+      $(byXpath(ELEMENT_ADD_RELATED_POPUP_CONTENT
+              .replace("${page}",page))).click();
     }
+  }
 
     /**
      * Open add related page popup

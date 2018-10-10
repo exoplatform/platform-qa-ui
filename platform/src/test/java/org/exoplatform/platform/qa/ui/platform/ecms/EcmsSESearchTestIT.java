@@ -127,7 +127,6 @@ public class EcmsSESearchTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
-  @BugInPLF("ECMS-7683")
   public void test03_SimpleSearch() {
     info("Test 3: Simple Search");
     String title = "title" + getRandomNumber();
@@ -144,6 +143,7 @@ public class EcmsSESearchTestIT extends Base {
     createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
     createNewDocument.addNewFile(title, content);
     createNewDocument.saveAndClose();
+    siteExplorerHome.goToPath("intranet/documents", "Site Management");
     $(ELEMENT_ACTIONBAR_SEARCHBAR).setValue(title).pressEnter();
     $(byId("SimpleSearchResult")).find(byText(title)).should(Condition.visible);
     navigationToolbar.goToSiteExplorer();

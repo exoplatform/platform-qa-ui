@@ -540,7 +540,6 @@ public class CalendarManagement {
     $(ELEMENT_CALENDAR_IMPORT_POPUP_FORM).shouldNot(Condition.visible);
     refresh();
     evt.waitForAndGetElement(By.linkText(name));
-    button.ok();
   }
 
   /**
