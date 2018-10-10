@@ -44,7 +44,7 @@ public class IntranetNotification {
     info("Go to all notification");
     if (evt.waitForAndGetElement(ELEMENT_VIEW_ALL, 3000, 0) != null) {
       info("Click on View All button");
-      evt.click(ELEMENT_VIEW_ALL);
+      $(ELEMENT_VIEW_ALL).click();
     } else {
       info("Open All page by link");
       testBase.getExoWebDriver().getWebDriver().get(testBase.getExoWebDriver().getBaseUrl() + "/intranet/allNotifications/");

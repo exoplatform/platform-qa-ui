@@ -117,7 +117,7 @@ public class SOCNotificationIntranetNewUserTestIT extends Base {
         UserAddManagement.addUser(username2, "123456", email2, username2, username2);
 
         info("Check intranet notification");
-        String status = "userA has joined exo";
+        String status = "user2 has joined exo";
         navigationToolbar.goToIntranetNotification();
         intranetNotification.checkAvatarInStatus(username2, true);
         intranetNotification.checkStatus(status, username2);
@@ -182,6 +182,62 @@ public class SOCNotificationIntranetNewUserTestIT extends Base {
         info("The user is redirected to the profile of the new user");
         intranetNotification.goToDetailNewUserJoinIntranet(username2 + " " + username2, true);
         $(byXpath(ELEMENT_USER_NAME_PAGE.replace("$fullName", username2 + " " + username2))).waitUntil(Condition.visible, Configuration.timeout);
+
+    }
+
+    /**
+     * <li> Case ID:125110.</li>
+     * <li> Test Case Name: Check View All after receiving a New User notification.</li>
+     * <li> Pre-Condition: - The settings "Someone joins the social intranet" is activated in User Settings
+     * - A New User notification has been received</li>
+     * <li> Post-Condition: </li>
+     */
+    @Test
+    public void test03_CheckViewAllAfterReceivingANewUserNotification() {
+        info("Test 3: Check View All after receiving a New User notification");
+		/*Step Number: 1
+		*Step Name: Step 1 : Check notification list
+		*Step Description:
+			- Login
+			- Click the notifications icon
+		*Input Data:
+
+		*Expected Outcome:
+			- A New User notification is displayed in the list*/
+        ArrayList<String> arrayUser = new ArrayList<String>();
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String username2 = "usernameb" + getRandomString();
+        String email2 = username2 + "@gmail.com";
+        String password = "123456";
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        UserAddManagement.addUser(username1, "123456", email1, username1, username1);
+        navigationToolbar.goToUsersAndGroupsManagement();
+        UserAndGroupManagement.addUserAdmin(username1);
+        manageLogInOut.signIn(username1, "123456");
+
+        info("goto My notification");
+        navigationToolbar.goToMyNotifications();
+        MyNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.NewUser_intranet);
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        UserAddManagement.addUser(username2, "123456", email2, username2, username2);
+        homePagePlatform.goToHomePage();
+		/*Step number: 2
+		*Step Name: Step 2 : Check View All page
+		*Step Description:
+			- Go to View All
+		*Input Data:
+
+		*Expected Outcome:
+			- The New User Notification is displayed*/
+        info("Check intranet notification");
+        String status = "";
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.goToAllNotification();
+        intranetNotification.checkStatus(status, username2);
 
     }
 }
