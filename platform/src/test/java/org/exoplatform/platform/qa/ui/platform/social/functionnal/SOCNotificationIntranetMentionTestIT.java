@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
+import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_MENTION_USER;
@@ -58,12 +59,51 @@ public class SOCNotificationIntranetMentionTestIT extends Base {
         }
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
     }
+    /*Step Number: 1
+		 *Step Name:
+		 *Step Description:
+			- Login with User B
+			- Click the notification icons in the top navigation
+			- Check the notification list
+		 *Input Data:
 
+		 *Expected Outcome:
+			- The Mention notification is displayed in the list*/
+    /*Step number: 2
+		 *Step Name:
+		 *Step Description:
+			- Check the notification message
+		 *Input Data:
 
+		 *Expected Outcome:
+			The notification message is : $AVATAR$USER has mentioned you $ACTIVITY$DATEWhere :
+			- $AVATAR is the thumbnail of User A
+			- $USER is User A
+			- $ACTIVITY is the activity title/message
+			- $DATE is the date of the notification*/
+    /*Step Number: 1
+		 *Step Name:
+		 *Step Description:
+			- Login with User B
+			- Click the notification icons in the top navigation
+			- Check the notification list
+		 *Input Data:
+
+		 *Expected Outcome:
+			- The Mention notification is displayed in the list*/
+
+    /*Step number: 2
+     *Step Name:
+     *Step Description:
+        - Click the notification
+     *Input Data:
+
+     *Expected Outcome:
+        - The user is redirected to the activity viewer with all comment expanded.*/
     @Test
     public void test01_CheckMentionNotificationInActivityMessage() {
-        info("Test 1: Check Mention notifications (in activity message)");
 
+        info("Test 1: Check Mention notifications (in activity message)");
         ArrayList<String> arrayUser = new ArrayList<String>();
         String username1 = "usernamea" + getRandomString();
         String email1 = username1 + "@gmail.com";
@@ -80,21 +120,38 @@ public class SOCNotificationIntranetMentionTestIT extends Base {
         homePagePlatform.goToHomePage();
         String activity1 = "activitya" + getRandomNumber();
         activityStream.mentionUserActivity(username2, activity1);
-
-		/*Step Number: 1
-		 *Step Name:
-		 *Step Description:
-			- Login with User B
-			- Click the notification icons in the top navigation
-			- Check the notification list
-		 *Input Data:
-
-		 *Expected Outcome:
-			- The Mention notification is displayed in the list*/
         manageLogInOut.signIn(username2, password);
         navigationToolbar.goToIntranetNotification();
+        arrayUser.add(username1);
+        String status = "has mentioned you";
+        intranetNotification.checkAvatarInStatus(username1 + " " + username1, true);
+        intranetNotification.checkStatus(status, username1);
+        intranetNotification.checkActivityTitleInStatus(activity1, true);
+        intranetNotification.checkUsers(arrayUser, true);
 
-		/*Step number: 2
+        info("Test 4: Click the Mention notifications (in activity message)");
+        intranetNotification.checkAvatarInStatus(arrayUser, true);
+        intranetNotification.checkStatus(status, username1);
+        intranetNotification.checkActivityTitleInStatus(activity1, true);
+        refresh();
+        $(byXpath(ELEMENT_ACTIVITY_MENTION_USER.replace("${content}", activity1).replace("${user}", username2))).waitUntil(Condition.visible, Configuration.timeout);
+        manageLogInOut.signIn(DATA_USER1, "gtngtn");
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
+    }
+
+    /*Step Number: 1
+            *Step Name:
+            *Step Description:
+               - Login with User B
+               - Click the notification icons in the top navigation
+               - Check the notification list
+            *Input Data:
+
+            *Expected Outcome:
+               - The Mention notification is displayed in the list*/
+    /*Step number: 2
 		 *Step Name:
 		 *Step Description:
 			- Check the notification message
@@ -104,17 +161,9 @@ public class SOCNotificationIntranetMentionTestIT extends Base {
 			The notification message is : $AVATAR$USER has mentioned you $ACTIVITY$DATEWhere :
 			- $AVATAR is the thumbnail of User A
 			- $USER is User A
-			- $ACTIVITY is the activity title/message
+			- $ACTIVITY is the name of the wiki page
 			- $DATE is the date of the notification*/
-        arrayUser.add(username1);
-        String status = "UserA has mentionned you";
-        intranetNotification.checkAvatarInStatus(username1 + " " + username1, true);
-        intranetNotification.checkStatus(status, username1);
-        intranetNotification.checkActivityTitleInStatus(activity1, true);
-        intranetNotification.checkUsers(arrayUser, true);
-
-        info("Test 4: Click the Mention notifications (in activity message)");
-		/*Step Number: 1
+    /*Step Number: 1
 		 *Step Name:
 		 *Step Description:
 			- Login with User B
@@ -125,22 +174,15 @@ public class SOCNotificationIntranetMentionTestIT extends Base {
 		 *Expected Outcome:
 			- The Mention notification is displayed in the list*/
 
-		/*Step number: 2
-		 *Step Name:
-		 *Step Description:
-			- Click the notification
-		 *Input Data:
+    /*Step number: 2
+     *Step Name:
+     *Step Description:
+        - Click the notification
+     *Input Data:
 
-		 *Expected Outcome:
-			- The user is redirected to the activity viewer with all comment expanded.*/
-        intranetNotification.checkAvatarInStatus(arrayUser, true);
-        intranetNotification.checkStatus(status, username1);
-        intranetNotification.checkActivityTitleInStatus(activity1, true);
-        refresh();
-        $(byXpath(ELEMENT_ACTIVITY_MENTION_USER.replace("${content}", activity1).replace("${user}", username2))).waitUntil(Condition.visible, Configuration.timeout);
-    }
-
-
+     *Expected Outcome:
+        - The user is redirected to the activity viewer with all comment expanded.
+        - The comment where the mention has been done is highlighted*/
     @Test
     public void test02_CheckMentionNotificationsInComment() {
         info("Test 1: Check Mention notifications (in activity message)");
@@ -166,62 +208,22 @@ public class SOCNotificationIntranetMentionTestIT extends Base {
 
 
         info("Test 2: Check Mention notifications (in comment)");
-		/*Step Number: 1
-		 *Step Name:
-		 *Step Description:
-			- Login with User B
-			- Click the notification icons in the top navigation
-			- Check the notification list
-		 *Input Data:
-
-		 *Expected Outcome:
-			- The Mention notification is displayed in the list*/
         manageLogInOut.signIn(username2, password);
         navigationToolbar.goToIntranetNotification();
-
-		/*Step number: 2
-		 *Step Name:
-		 *Step Description:
-			- Check the notification message
-		 *Input Data:
-
-		 *Expected Outcome:
-			The notification message is : $AVATAR$USER has mentioned you $ACTIVITY$DATEWhere :
-			- $AVATAR is the thumbnail of User A
-			- $USER is User A
-			- $ACTIVITY is the name of the wiki page
-			- $DATE is the date of the notification*/
         arrayUser.add(username2);
-        String status = "userA has mentioned you ";
+        String status = "has mentioned you ";
         intranetNotification.checkAvatarInStatus(username1, true);
         intranetNotification.checkStatus(status, username1);
         intranetNotification.checkActivityTitleInStatus(activity1, true);
 
 
         info("Test 5: Click the Mention notifications (in comment)");
-		/*Step Number: 1
-		 *Step Name:
-		 *Step Description:
-			- Login with User B
-			- Click the notification icons in the top navigation
-			- Check the notification list
-		 *Input Data:
-
-		 *Expected Outcome:
-			- The Mention notification is displayed in the list*/
-
-		/*Step number: 2
-		 *Step Name:
-		 *Step Description:
-			- Click the notification
-		 *Input Data:
-
-		 *Expected Outcome:
-			- The user is redirected to the activity viewer with all comment expanded.
-			- The comment where the mention has been done is highlighted*/
         intranetNotification.goToDetailMentionNotification(username1, true);
+        manageLogInOut.signIn(DATA_USER1, "gtngtn");
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
     }
-
     /*Step Number: 1
 		 *Step Name:
 		 *Step Description:
@@ -263,7 +265,7 @@ public class SOCNotificationIntranetMentionTestIT extends Base {
         activityStream.mentionUserActivity(username2, activity1);
         manageLogInOut.signIn(username2, password);
         navigationToolbar.goToIntranetNotification();
-        String status = "";
+        String status = "has mentioned you";
         intranetNotification.checkStatus(status, username1 + " " + username1);
         intranetNotification.goToAllNotification();
         intranetNotification.checkStatus(status, username1 + " " + username1);
