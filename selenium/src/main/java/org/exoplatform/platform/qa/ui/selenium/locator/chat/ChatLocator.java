@@ -117,19 +117,21 @@ public class ChatLocator {
   public static final SelenideElement ELEMENT_CHAT_POST_TASK_BUTTON= $(byXpath("//*[@id=\"appComposerForm\"]/div[2]/button"));
   public static final SelenideElement ELEMENT_CHAT_CANCEL_TASK_BUTTON= $(byXpath("//*[@id=\"appComposerForm\"]/div[2]/div"));
   public static final SelenideElement ELEMENT_CHAT_CLOSE_ICON= $(byXpath("//*[@id=\"chat-application\"]/div[2]/div[2]/div[1]/div[2]/div[3]/div/div[1]/a"));
+  public static final SelenideElement ELEMENT_CHAT_NOTIFICATION=   $(byClassName("dropdown-menu")).find(byXpath("//*[@id=\"chat-notifications-details\"]/a"));
+  public static final SelenideElement ELEMENT_ASSIGNEE_TASK=$(byXpath("//*[@id=\"taskManagement\"]/div[3]/div[2]/div/div/div[4]/div[2]/div/span/a[2]"));
+
+  public static final SelenideElement ELEMENT_CHAT_INPUT_TASKNAME                = $(byId("task-add-task"));
+
+  public static final SelenideElement ELEMENT_CHAT_INPUT_USERNAME_IN_ASSIGN_TASK =
+                                                                                 $(byXpath("//*[@id=\"chat-application\"]/div[8]/div[2]/div/div[3]/div[1]/div[1]/div[2]/div/div[5]/div[1]/div[1]/input"));
 
 
-    public static final SelenideElement ELEMENT_CHAT_INPUT_TASKNAME = $(byId("task-add-task"));
-
-    public static final SelenideElement ELEMENT_CHAT_INPUT_USERNAME_IN_ASSIGN_TASK =
-            $(byXpath("//*[@id=\"chat-application\"]/div[8]/div[2]/div/div[3]/div[1]/div[1]/div[2]/div/div[5]/div[1]/div[1]/input"));
 
     public static final SelenideElement ELEMENT_CHAT_INPUT_DUE_TASK_DATE = $(byId("task-add-date"));
 
     public static final SelenideElement ELEMENT_BUTTON_ADD_TASK = $(byClassName("create-task-button"));
 
     public static final SelenideElement ELEMENT_CONTAINER_LIST_MESSAGES = $(byId("chats"));
-    public static final SelenideElement ELEMENT_CHAT_NOTIFICATION=   $(byClassName("dropdown-menu")).find(byXpath("//*[@id=\"chat-notifications-details\"]/a"));
     public static final SelenideElement ELEMENT_CHAT_ICON_STATUS=   $(byClassName("uiIconStatus"));
     public static final SelenideElement ELEMENT_CHAT_CONTACT = $(byClassName("chat-contact"));
     public static final SelenideElement ELEMENT_DELETE_ROOM = $(byClassName("room-setting-action-deleteRoom"));
@@ -156,7 +158,6 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_CHAT_SELECT_FILE= $(byXpath("//*[@id=\"appComposerForm\"]/div[1]/div[2]/a[1]"));
     public static final SelenideElement ELEMENT_CHAT_CANCEL_UPLOAD_FILE_BUTTON= $(byXpath(" //*[@id=\"appComposerForm\"]/div[1]/div[2]/a[2]"));
     public static final SelenideElement ELEMENT_CHAT_SHARE_LINK_BUTTON= $(byXpath("//*[@id=\"appComposerForm\"]/div[2]/button"));
-  public static final SelenideElement ELEMENT_ASSIGNEE_TASK=$(byXpath("//*[@id=\"taskManagement\"]/div[3]/div[2]/div/div/div[4]/div[2]/div/span/a[2]"));
 
 
   public static final SelenideElement ELEMENT_MORE_ACTIONS=$(byClassName("uiIconVerticalDots"));
