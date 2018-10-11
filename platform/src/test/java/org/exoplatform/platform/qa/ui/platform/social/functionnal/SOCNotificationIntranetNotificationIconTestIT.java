@@ -1,4 +1,5 @@
 package org.exoplatform.platform.qa.ui.platform.social.functionnal;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
@@ -15,11 +16,15 @@ import org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
+
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS;
 import static org.exoplatform.platform.qa.ui.core.PLFData.USER_ROOT;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_BADGE_NUMBER_DISPLAY;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_INTRANET_NOTIFICATION_NEAR_USER_AVATAR;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -91,5 +96,55 @@ public class SOCNotificationIntranetNotificationIconTestIT extends Base {
 
         info("Check The Notifications icon is displayed in the top navigation");
         $(ELEMENT_INTRANET_NOTIFICATION_NEAR_USER_AVATAR).waitUntil(Condition.visible, Configuration.timeout);
-    }}
+    }
+
+    /**
+     * <li> Case ID:125113.</li>
+     * <li> Test Case Name: New notifications number is displayed next to the icon.</li>
+     * <li> Pre-Condition: The user has unread notifications (no matters the notification type), for instance 3 notifications</li>
+     * <li> Post-Condition: </li>
+     */
+    /*Step Number: 1
+		*Step Name:
+		*Step Description:
+			- Login to platform
+			- Check the top navigation
+		*Input Data:
+
+		*Expected Outcome:
+			- The number of new notifications (3 notifications) is displayed above the icon with a blue badge.*/
+    @Test
+    public void test02_NewNotificationsNumberIsDisplayedNextToTheIcon() {
+        info("Test 2: New notifications number is displayed next to the icon");
+
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String username2 = "usernameb" + getRandomString();
+        String email2 = username2 + "@gmail.com";
+        String username3 = "usernamec" + getRandomString();
+        String email3 = username3 + "@gmail.com";
+        String username4 = "usernamed" + getRandomString();
+        String email4 = username4 + "@gmail.com";
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        UserAddManagement.addUser(username1, "123456", email1, username1, username1);
+        navigationToolbar.goToUsersAndGroupsManagement();
+        UserAndGroupManagement.addUserAdmin(username1);
+        manageLogInOut.signIn(username1, "123456");
+
+        info("goto My notification");
+        navigationToolbar.goToMyNotifications();
+        MyNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.NewUser_intranet);
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        UserAddManagement.addUser(username2, "123456", email2, username2, username2);
+        UserAddManagement.addUser(username3, "123456", email3, username3, username3);
+        UserAddManagement.addUser(username4, "123456", email4, username4, username4);
+
+        info("Verify that The number of new notifications (3 notifications) is displayed above the icon");
+        $(byXpath(ELEMENT_BADGE_NUMBER_DISPLAY.replace("${number}", "3"))).waitUntil(Condition.visible, Configuration.timeout);
+
+    }
+}
 
