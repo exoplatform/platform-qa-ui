@@ -82,7 +82,7 @@ public class SOCSpaceMemberManagementInviteTestIT extends Base {
     String space = "space" + getRandomNumber();
 
     info("Create a space");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
 
     /*

@@ -128,8 +128,7 @@ public class TasksManagement {
 
   public void deleteComment (String task, String comment) {
     $(byText(task)).click();
-    $(ELEMENT_ACCOUNT_NAME_LINK).click();
-    $(byText(comment)).hover();
+    $(byText(comment)).waitUntil(Condition.visible,Configuration.timeout).hover();
     $(byText(comment)).parent().parent().parent().find(byClassName("uiIconTrashMini")).click();
     refresh();
     $(byText(comment)).shouldNot(Condition.exist);

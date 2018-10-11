@@ -191,13 +191,13 @@ public class SocialBasicTestsWithUserTestIT extends Base {
     $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
                                                              .parent()
                                                              .parent()
-                                                             .parent()
+                                                             .parent().parent().parent().parent()
                                                              .find(byClassName(ELEMENT_DATE_ACTIVITY))
                                                              .hover();
     $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
                                                              .parent()
                                                              .parent()
-                                                             .parent()
+                                                             .parent().parent().parent().parent()
                                                              .find(ELEMENT_ICON_DELETE_ACTIVITY)
                                                              .click();
     ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.timeout).click();
@@ -475,6 +475,7 @@ public class SocialBasicTestsWithUserTestIT extends Base {
     activityStream.addActivity(activity1, "");
     activityStream.deleteactivity(activity1);
     $(byText(activity1)).shouldNotBe(Condition.visible);
+    homePagePlatform.goToHomePage();
     info("the activity is removed successfully");
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
@@ -509,7 +510,6 @@ public class SocialBasicTestsWithUserTestIT extends Base {
     String comment = "comment" + getRandomNumber();
     activityStream.commentActivity(activity1,comment);
     info("Test 15: Delete comment");
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     // scroll up
     executeJavaScript("window.scrollBy(0,-550)");
     // the id of the comment is id of the activity+1

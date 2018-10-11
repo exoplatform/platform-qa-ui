@@ -192,7 +192,6 @@ public class EcmsSECreateTestIT extends Base {
     createNewDoc.saveAndClose();
 
     info("Edit the content");
-    siteExplorerHome.selectNode(name);
     siteExplorerHome.editDocument("", content2);
     createNewDoc.saveAndClose();
 

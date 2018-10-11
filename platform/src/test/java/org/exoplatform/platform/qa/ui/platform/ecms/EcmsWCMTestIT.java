@@ -60,20 +60,6 @@ public class EcmsWCMTestIT extends Base {
 
   HomePagePlatform     homePagePlatform;
 
-  @AfterAll
-  public static void changeLanguage() {
-    Selenide.close();
-    Platform plf = new Platform();
-    plf.open();
-    $(ELEMENT_INPUT_USERNAME_CAS).setValue(PLFData.DATA_USER1);
-    $(ELEMENT_INPUT_PASSWORD_CAS).setValue("gtngtn");
-    ELEMENT_SIGN_IN_BUTTON_CAS.click();
-    $(ELEMENT_TOPBAR_AVATAR).click();
-    $(ELEMENT_AVATAR_CHANGELANGUAGE).click();
-    $(ELEMENT_CHANGE_LANGUAGE_POPUP_TITLE).waitUntil(Condition.visible, Configuration.timeout);
-    $(byXpath(ELEMENT_CHANGELANGUAGE_LANGUAGE.replace("${language}", "English"))).click();
-    ELEMENT_BTN_APPLY_CHANGE_LANGUAGE.click();
-  }
 
   @BeforeEach
   public void setupBeforeMethod() {

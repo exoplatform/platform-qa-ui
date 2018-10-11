@@ -6,6 +6,7 @@ import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER2;
+import static org.exoplatform.platform.qa.ui.selenium.Button.ELEMENT_OK_BUTTON_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
@@ -188,10 +189,10 @@ public class EcmsSEBasicActionTestIT extends Base {
         createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
         createNewDocument.addNewWebContent(titleCommonNode, titleCommonNode);
         createNewDocument.saveAndClose();
-        refresh();
         info("Test 4: Drag and drop a node");
-        $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNode))).dragAndDropTo($(byXpath("//*[@id=\"iconTreeExplorer_2fsites_2fintranet\"]/a/span")));
+        ELEMENT_CONTENT_LIST.find(byText(titleCommonNode)).dragAndDropTo($(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", destination))));
         manageAlert.acceptAlert();
+        $(ELEMENT_OK_BUTTON_LINK).click();
         $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", destination))).click();
         siteExplorerHome.deleteData(titleCommonNode);
 

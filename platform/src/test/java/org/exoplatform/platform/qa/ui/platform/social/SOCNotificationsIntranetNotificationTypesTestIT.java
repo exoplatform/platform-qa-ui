@@ -2480,7 +2480,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     info("Check comment notification in activity Viewer");
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).click();
     $(byText(activity)).parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).parent().shouldHave(text("1"));
-
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
     navigationToolbar.goToIntranetNotification();
     intranetNotification.goToAllNotification();
     $(byText(activity)).parent().parent().parent().find(byText(username2 + " " + username2)).should(Condition.exist);
