@@ -6,6 +6,7 @@ import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_CHAT_LIST_MSG;
+import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_CONTACT_LIST;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -27,18 +28,13 @@ import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 @Tag("chat")
 @Tag("smoke")
 public class RoomBaseActionTestIT extends Base {
+
   HomePagePlatform       homePagePlatform;
-
   RoomManagement         roomManagement;
-
   NavigationToolbar      navigationToolbar;
-
   UserAddManagement      userAddManagement;
-
   ManageLogInOut         manageLogInOut;
-
   UserAndGroupManagement userandgroupmanagement;
-
   ChatManagement         chatManagement;
 
   @BeforeEach
@@ -60,7 +56,6 @@ public class RoomBaseActionTestIT extends Base {
     String usernamec = "usernamec" + getRandomString();
     String password = "123456";
     String room = "room" + getRandomNumber();
-
     String emaila = usernamea + getRandomNumber() + "@test.com";
     String emailb = usernameb + getRandomNumber() + "@test.com";
     String emailc = usernamec + getRandomNumber() + "@test.com";
@@ -69,52 +64,41 @@ public class RoomBaseActionTestIT extends Base {
     userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
     userAddManagement.addUser(usernameb, password, emailb, usernameb, usernamec);
     userAddManagement.addUser(usernamec, password, emailc, usernamec, usernamec);
-    manageLogInOut.signIn(usernamea, password);
-    homePagePlatform.goToChat();
-    manageLogInOut.signIn(usernameb, password);
-    homePagePlatform.goToChat();
-    manageLogInOut.signIn(usernamec, password);
-    homePagePlatform.goToChat();
-    manageLogInOut.signIn(PLFData.username, PLFData.password);
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
     homePagePlatform.goToChat();
     info("Add room with users");
     switchTo().window(1);
     roomManagement.addRoom(room, usernamea, usernameb, usernamec);
-
     switchTo().window(0);
     manageLogInOut.signIn(usernamea, password);
     homePagePlatform.goToChat();
     switchTo().window(1);
-    $(byText(room)).should(Condition.exist);
-
+    ELEMENT_CONTACT_LIST.find(byText(room)).should(Condition.exist);
     switchTo().window(0);
     manageLogInOut.signIn(usernameb, password);
     homePagePlatform.goToChat();
     switchTo().window(1);
-    $(byText(room)).should(Condition.exist);
-
+    ELEMENT_CONTACT_LIST.find(byText(room)).should(Condition.exist);
     switchTo().window(0);
     manageLogInOut.signIn(usernamec, password);
     homePagePlatform.goToChat();
     switchTo().window(1);
-    $(byText(room)).should(Condition.exist);
+    ELEMENT_CONTACT_LIST.find(byText(room)).should(Condition.exist);
     info("delete data");
     switchTo().window(0);
-    manageLogInOut.signIn(PLFData.username, PLFData.password);
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
     homePagePlatform.goToChat();
     switchTo().window(1);
     roomManagement.deleteRomm(room);
-
     switchTo().window(0);
     navigationToolbar.goToManageCommunity();
     userandgroupmanagement.deleteUser(usernamea);
     userandgroupmanagement.deleteUser(usernameb);
     userandgroupmanagement.deleteUser(usernamec);
-
   }
 
   @Test
-  public void test02_deleteRoom() {
+  public void test02_deleteRoom()  {
     String usernamea = "usernamea" + getRandomString();
 
     String password = "123456";
@@ -125,21 +109,22 @@ public class RoomBaseActionTestIT extends Base {
     userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
     manageLogInOut.signIn(usernamea, password);
     homePagePlatform.goToChat();
-    manageLogInOut.signIn(PLFData.username, PLFData.password);
+    switchToParentWindow();
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
     homePagePlatform.goToChat();
-    switchTo().window("Chat");
+    switchTo().window(1);
     info("add room");
     roomManagement.addRoom(room, usernamea);
     info("delete room");
-    roomManagement.deleteRomm(room);
+   roomManagement.deleteRomm(room);
     info("delete data");
-    switchTo().window("Home Page");
+    switchToParentWindow();
     navigationToolbar.goToManageCommunity();
     userandgroupmanagement.deleteUser(usernamea);
   }
 
   @Test
-  public void test03_SendMessageInAROOM() {
+  public void test03_SendMessageInAROOM()  {
     String usernamea = "usernamea" + getRandomString();
     String password = "123456";
     String emaila = usernamea + "@test.com";
@@ -148,28 +133,27 @@ public class RoomBaseActionTestIT extends Base {
     navigationToolbar.goToAddUser();
     info("Create new user");
     userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
-    manageLogInOut.signIn(usernamea, password);
+    switchToParentWindow();
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
     homePagePlatform.goToChat();
-    manageLogInOut.signIn(PLFData.username, PLFData.password);
-    homePagePlatform.goToChat();
-    switchTo().window("Chat");
+    switchTo().window(1);
     info("add room");
     roomManagement.addRoom(room, usernamea);
     info("send message");
     chatManagement.sendMessageInRoomOrSpace(room, message);
-    switchTo().window("Home Page");
+    switchTo().window(0);
     manageLogInOut.signIn(usernamea, password);
     homePagePlatform.goToChat();
     switchTo().window(1);
-    $(byText(room)).click();
+    ELEMENT_CONTACT_LIST.find(byText(room)).should(Condition.exist);
     info("verify message");
     ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.exist);
-    switchTo().window("Home Page");
-    manageLogInOut.signIn(PLFData.username, PLFData.password);
+    switchToParentWindow();
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
     homePagePlatform.goToChat();
-    switchTo().window("Chat");
+    switchTo().window(1);
     roomManagement.deleteRomm(room);
-    switchTo().window("Home Page");
+    switchTo().window(0);
     navigationToolbar.goToManageCommunity();
     userandgroupmanagement.deleteUser(usernamea);
   }
@@ -184,16 +168,14 @@ public class RoomBaseActionTestIT extends Base {
     navigationToolbar.goToAddUser();
     info("Create new user");
     userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
-    manageLogInOut.signIn(usernamea, password);
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
     homePagePlatform.goToChat();
-    manageLogInOut.signIn(PLFData.username, PLFData.password);
-    homePagePlatform.goToChat();
-    switchTo().window("Chat");
+    switchTo().window(1);
     info("add room");
     roomManagement.addRoom(room, usernamea);
     info("edit title");
     roomManagement.editTitleofAroom(room, newroom);
-    $(byText(newroom)).should(Condition.exist);
+    ELEMENT_CONTACT_LIST.$(byText(newroom)).should(Condition.exist);
     roomManagement.deleteRomm(newroom);
     switchTo().window(0);
     navigationToolbar.goToManageCommunity();

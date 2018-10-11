@@ -75,23 +75,27 @@ public class ChatLocator {
                                                                                                                            .parent()
                                                                                                                            .find(byClassName("uiIconChatSimplePlusMini"));
 
-  public static final SelenideElement ELEMENT_CHAT_INPUT_ROOM_NAME               = $(byXpath("//*[@id=\"team-modal-name\"]"));
+  public static final SelenideElement ELEMENT_CHAT_INPUT_ROOM_NAME               = $(byClassName("add-room-form")).find(by("type","text"));
 
   public static final SelenideElement ELEMENT_CHAT_INPUT_ROOM_USERS              =
-                                                                    $(byXpath("//*[@id=\"team-modal-form\"]/div[2]/div[1]/div/div[2]/div/div/div/input"));
+          $(byXpath("//*[@id=\"chat-application\"]/div[1]/div[2]/div[4]/div[1]/div/div[2]/div[1]/div[1]/div/input"));
+
+
+  public static final SelenideElement ELEMENT_CREATE_ROOM =  $(byClassName("uiIconSimplePlus"));
+  public static final SelenideElement ELEMENT_POPUP_ROOM=  $(byClassName("PopupContent"));
+  public static final SelenideElement ELEMENT_ROOM_NAME= $(byClassName("add-room-form")).find(by("type", "text"));
+  public static final SelenideElement ELEMENT_BUTTON_SAVE_ROOM=   $(byClassName("btn-primary"));
+  public static final SelenideElement ELEMENT_CONTACT_LIST=  $(byId("chat-users"));
 
   public static final SelenideElement ELEMENT_CHAT_BUTTON_SAVE_ADD_ROOM          =
-                                                                        $(byXpath("//*[@id=\"team-modal-form\"]/div[2]/div[2]/a[1]"));
+                                                                        $(byXpath("//*[@id=\"chat-application\"]/div[1]/div[2]/div[4]/div[1]/div/div[2]/div[2]/button[1]"));
 
-  public static final SelenideElement ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN         = $(byId("chat-team-button-dropdown"));
+  public static final SelenideElement ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN         = $(byClassName("uiIconVerticalDots"));
+  
+  public static final SelenideElement ELEMENT_CHAT_ROOM_EDIT                     = $(byXpath("//*[@id=\"room-detail\"]/div[2]/div[2]/div[3]/ul/li[5]/a"));
 
-  public static final SelenideElement ELEMENT_CHAT_ROOM_DELETE                   = $(byId("team-delete-button"));
 
-  public static final SelenideElement ELEMENT_CHAT_ROOM_EDIT                     = $(byId("team-edit-button"));
-
-  public static final SelenideElement ELEMENT_CHAT_CONFIRM_DELETE_ROOM           = $(byId("team-delete-button-ok"));
-
-  public static final SelenideElement ELEMENT_CHAT_MESSAGE_INPUT                 = $(byId("msg"));
+  public static final SelenideElement ELEMENT_CHAT_MESSAGE_INPUT                 = $(byId("messageComposerArea"));
 
   public static final SelenideElement ELEMENT_CHAT_LIST_MSG                      = $(byId("chats"));
 
@@ -99,7 +103,7 @@ public class ChatLocator {
 
   public static final SelenideElement ELEMENT_CHAT_RESULT_SEARCH_USER            =
                                                                       $(byAttribute("class",
-                                                                                    "selectize-dropdown multi plugin-remove_button"));
+                                                                                    "selectize-dropdown multi"));
 
   public static final SelenideElement ELEMENT_CHAT_MEETTING_ACTIONS              = $(byId("chat-msg-meeting-actions"));
 
@@ -113,4 +117,8 @@ public class ChatLocator {
   public static final SelenideElement ELEMENT_BUTTON_ADD_TASK                    = $(byClassName("create-task-button"));
 
   public static final SelenideElement ELEMENT_CONTAINER_LIST_MESSAGES            = $(byId("chats"));
+  public static final SelenideElement ELEMENT_CHAT_CONTACT= $(byClassName("chat-contact"));
+  public static final SelenideElement ELEMENT_MORE_ACTIONS=$(byClassName("uiIconVerticalDots"));
+  public static final SelenideElement ELEMENT_DELETE_ROOM=$(byClassName("room-setting-action-deleteRoom"));
+  public static final SelenideElement ELEMENT_CONFIRM_BUTTON_DELETE_ROOM=$(byId("team-delete-button-ok"));
 }
