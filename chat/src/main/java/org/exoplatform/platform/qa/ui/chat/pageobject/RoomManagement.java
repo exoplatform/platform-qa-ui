@@ -18,22 +18,27 @@ public class RoomManagement {
   }
 
   public void addRoom(String name, String... users) {
-    ELEMENT_CHAT_ICON_ADD_ROOM.click();
-    ELEMENT_CHAT_INPUT_ROOM_NAME.setValue(name);
+    ELEMENT_CREATE_ROOM.waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_CREATE_ROOM.click();
+    ELEMENT_POPUP_ROOM.waitUntil(Condition.appear, Configuration.timeout);
+    ELEMENT_ROOM_NAME.setValue(name);
     for (int i = 0; i <= users.length - 1; i++) {
       ELEMENT_CHAT_INPUT_ROOM_USERS.setValue(users[i]);
       ELEMENT_CHAT_RESULT_SEARCH_USER.waitUntil(Condition.be(Condition.visible),Configuration.timeout);
+      ELEMENT_CHAT_RESULT_SEARCH_USER.waitUntil(Condition.visible,Configuration.timeout);
       ELEMENT_CHAT_INPUT_ROOM_USERS.pressEnter();
     }
     ELEMENT_CHAT_BUTTON_SAVE_ADD_ROOM.click();
+    ELEMENT_BUTTON_SAVE_ROOM.click();
+    ELEMENT_CONTACT_LIST.find(byText(name)).should(Condition.exist);
   }
 
   public void deleteRomm(String room) {
-    $(byText(room)).click();
+    ELEMENT_CHAT_CONTACT.parent().parent().parent().parent().find(byText(room)).click();
     ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
-    ELEMENT_CHAT_ROOM_DELETE.click();
-    ELEMENT_CHAT_CONFIRM_DELETE_ROOM.click();
-    $(byText(room)).shouldNot(Condition.exist);
+    ELEMENT_DELETE_ROOM.click();
+    ELEMENT_CONFIRM_BUTTON_DELETE_ROOM.click();
+    ELEMENT_CONTACT_LIST.find(byText(room)).waitUntil(Condition.not(Condition.appear),Configuration.timeout);
   }
 
   public void editTitleofAroom(String room, String newroom) {
