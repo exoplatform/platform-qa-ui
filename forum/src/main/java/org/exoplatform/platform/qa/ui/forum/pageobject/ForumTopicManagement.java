@@ -489,7 +489,7 @@ public class ForumTopicManagement {
    *
    * @param title String
    * @param message String
-   *@param fileName String
+   * @param fileName String
    * @param pathFile String
    */
   public void startTopic(String title, String message, String pathFile, String... fileName) {

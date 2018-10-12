@@ -138,7 +138,6 @@ public class WikiValidattions {
    * Verify effects of Page's content
    *
    * @param type  String
-
    * @param content String
    */
   public void verifyEffectsPageContent(effectTypes type, String content) {
