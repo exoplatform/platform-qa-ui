@@ -1,8 +1,6 @@
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byLinkText;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.*;
@@ -128,9 +126,9 @@ public class ConnectionsManagement {
   public void ignoreConnection(String username) {
     info("--Ignore a connection of a user--");
     info("Click on Ignore button");
-    searchPeople(username, null, null, null);
-    ELEMENT_CONTENT_PEOPLE.find(byText(username)).parent().parent().parent().findAll(byClassName("actionLabel")).get(0).click();
-    $(byText(username)).parent().parent().parent().find(byText("Ignore")).waitUntil(Condition.disappears,Configuration.timeout);
+    searchPeople(username,null,null,null);
+    $(byXpath(ELEMENT_CONNECTION_IGNORE_BTN.replace("${user}",username))).click();
+    $(byXpath(ELEMENT_CONNECTION_IGNORE_BTN.replace("${user}",username))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     info("Connected to the user");
   }
 
