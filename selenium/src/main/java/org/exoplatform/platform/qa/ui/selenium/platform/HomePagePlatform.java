@@ -42,7 +42,7 @@ public class HomePagePlatform {
 
   public void goToChat() {
     info("--Go to chat--");
-    $(byId("chat-status")).click();
+    $(byId("chatApplicationNotification")).click();
     $(byClassName("notif-chat-open-link")).waitUntil(Condition.appears, Configuration.timeout).click();
   }
 
