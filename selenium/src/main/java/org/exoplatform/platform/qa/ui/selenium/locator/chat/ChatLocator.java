@@ -116,7 +116,20 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_BUTTON_ADD_TASK = $(byClassName("create-task-button"));
 
     public static final SelenideElement ELEMENT_CONTAINER_LIST_MESSAGES = $(byId("chats"));
+    public static final SelenideElement ELEMENT_CHAT_NOTIFICATION=   $(byClassName("dropdown-menu")).find(byXpath("//*[@id=\"chat-notifications-details\"]/a"));
+
     public static final SelenideElement ELEMENT_CHAT_CONTACT = $(byClassName("chat-contact"));
     public static final SelenideElement ELEMENT_DELETE_ROOM = $(byClassName("room-setting-action-deleteRoom"));
     public static final SelenideElement ELEMENT_CONFIRM_BUTTON_DELETE_ROOM = $(byId("team-delete-button-ok"));
+    public static final SelenideElement ELEMENT_CHAT_ADD_EVENT = $(byClassName("uiIconChatCreateEvent"));
+    public static final SelenideElement ELEMENT_COLLABORATION_ACTIONS=  $(byClassName("uiIconPlusCircled"));
+    public static final SelenideElement ELEMENT_ADD_EVENT_WINDOW =$(byClassName("apps-composer-modal")).find(byText("Add Event"));
+    public static final SelenideElement ELEMENT_ADD_EVENT =$(byXpath("//*[@id=\"appComposerForm\"]/div[1]/input[1]"));
+    public static final SelenideElement ELEMENT_CHAT_EVENT_FROM_DATE_= $(byXpath("//*[@id=\"appComposerForm\"]/div[1]/div/div[1]/input"));
+    public static final SelenideElement ELEMENT_CHAT_EVENT_TO_DATE_= $(byXpath("//*[@id=\"appComposerForm\"]/div[1]/div/div[2]/input"));
+    public static final SelenideElement ELEMENT_CHAT_EVENT_LOCATION =$(byXpath("//*[@id=\"appComposerForm\"]/div[1]/input[2]"));
+
+
+
+
 }
