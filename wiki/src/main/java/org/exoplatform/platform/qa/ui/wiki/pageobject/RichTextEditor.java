@@ -1015,7 +1015,7 @@ public class RichTextEditor {
    * Insert an image into the content of the page
    *
    * @param attachedFile String
-   * @param isPressEndKey Boolean
+   * @param isPressEndKey  Boolean
    */
   public void insertImage(String attachedFile, Boolean isPressEndKey) {
     info("Open Current page tab");
@@ -1328,7 +1328,6 @@ public class RichTextEditor {
 
   /**
    * Check auto save essage
-   * 
    * @param title String
    * @param content String
    */

@@ -633,7 +633,6 @@ public class ForumTopicManagement {
 
   /**
    * function: Search user in User Selection Form in Topic Permission
-   * 
    * @param searchOption String
    * @param user String
    */

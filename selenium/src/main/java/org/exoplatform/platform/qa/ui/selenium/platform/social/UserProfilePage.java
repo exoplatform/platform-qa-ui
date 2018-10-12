@@ -25,7 +25,7 @@ public class UserProfilePage {
 
   /**
    * constructor
-   *
+   * 
    * @param testBase
    */
   public UserProfilePage(TestBase testBase) {

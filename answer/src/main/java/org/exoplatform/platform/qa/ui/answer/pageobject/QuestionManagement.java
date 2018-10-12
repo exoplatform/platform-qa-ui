@@ -67,7 +67,7 @@ public class QuestionManagement {
 
   /**
    * input data to question form
-   *
+   * 
    * @param title string
    * @param content string
    * @param language string
@@ -106,7 +106,7 @@ public class QuestionManagement {
 
   /**
    * Execute action of question: COMMENT, ANSWER, EDIT, DELETE, MOVE, SEND
-   *
+   * 
    * @param question string
    * @param action action that needs to be done
    */
@@ -193,7 +193,7 @@ public class QuestionManagement {
 
   /**
    * Delete question
-   *
+   * 
    * @param question string
    */
   public void deleteQuestion(String question) {
@@ -213,7 +213,7 @@ public class QuestionManagement {
 
   /**
    * Cancel to Delete question
-   *
+   * 
    * @param question string
    */
   public void cancelDeleteQuestion(String question) {
@@ -226,7 +226,7 @@ public class QuestionManagement {
 
   /**
    * Go to edit question from manage question form
-   *
+   * 
    * @param question string
    */
   public void goToEditQuestionFromManageQuestionForm(String question) {
@@ -241,7 +241,7 @@ public class QuestionManagement {
 
   /**
    * Go to delete question from manage question form
-   *
+   * 
    * @param question string
    */
   public void goToDeleteQuestionFromManageQuestionForm(String question) {
@@ -256,6 +256,7 @@ public class QuestionManagement {
 
   /**
    * Approve question or not from manage question form
+   * 
    * @param question string
    * @param isApprove true: check to approve false: uncheck to un-approve
    */
@@ -295,7 +296,7 @@ public class QuestionManagement {
 
   /**
    * Active question or not from manage question form
-   *
+   * 
    * @param question string
    * @param isActive true: check to active false: uncheck to un-active
    */

@@ -137,7 +137,7 @@ public class WikiValidattions {
   /**
    * Verify effects of Page's content
    *
-   * @param type String
+   * @param type  String
    * @param content String
    */
   public void verifyEffectsPageContent(effectTypes type, String content) {
@@ -295,7 +295,7 @@ public class WikiValidattions {
 
   /**
    * Verify that a table is added to the content of the page
-   * 
+
    * @param col int
    * @param row int
    */
@@ -671,7 +671,6 @@ public class WikiValidattions {
   /**
    * Verify attach files are displayed in attach list or not when clicking in
    * attach files number
-   * 
    * @param fileName String
    * @param display boolean
    */

@@ -35,7 +35,7 @@ public class CalendarHomePage {
 
   /**
    * constructor
-   *
+   * 
    * @param testBase TestBase
    */
   public CalendarHomePage(TestBase testBase) {
@@ -812,8 +812,8 @@ public class CalendarHomePage {
 
   /**
    * Select an option in context menu
-   *
-   * @param option  contextMenuAddEditEvenTaskOptiong
+   * 
+   * @param option  contextMenuAddEditEvenTaskOption
    */
   public void selectOptionByRightclickOnDateTime(contextMenuAddEditEvenTaskOption option) {
     switch (option) {
@@ -1068,7 +1068,7 @@ public class CalendarHomePage {
 
   /**
    * check on checkboxes of events/tasks that has different name in Month view
-   *
+   * 
    * @param names String
    */
   public void checkBoxEventTaskInMonthView(String[] names) {
@@ -1113,7 +1113,7 @@ public class CalendarHomePage {
 
   /**
    * Check box on Event/task by date of Month and Week view
-   *
+   * 
    * @param name String
    * @param date String
    */
@@ -1125,7 +1125,7 @@ public class CalendarHomePage {
 
   /**
    * Click on Next arrow of header panel to jump to next days/weeks/months
-   *
+   * 
    * @param number int
    */
   public void nextDate(int number) {
@@ -1141,7 +1141,7 @@ public class CalendarHomePage {
 
   /**
    * Click on Next arrow to jump to next month in Calendar mini
-   *
+   * 
    * @param number int
    */
   public void nextMonth(int number) {
@@ -1157,7 +1157,7 @@ public class CalendarHomePage {
 
   /**
    * Click on Previous arrow of header panel to back previous days/weeks/months
-   *
+   * 
    * @param number int
    */
   public void previousDate(int number) {
@@ -1173,7 +1173,7 @@ public class CalendarHomePage {
 
   /**
    * Click on previous arrow to jump to previous month in Calendar mini
-   *
+   * 
    * @param number int
    */
   public void previousMonth(int number) {

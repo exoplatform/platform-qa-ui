@@ -34,7 +34,6 @@ public class WikiManagement {
 
   /**
    * constructor
-   * 
    * @param testBase TestBase
    */
   public WikiManagement(TestBase testBase) {
@@ -47,7 +46,6 @@ public class WikiManagement {
 
   /**
    * Select template to create page
-   * 
    * @param eTemplate SelenideElement
    */
   public void selectTemplateWikiPage(SelenideElement eTemplate) {
@@ -289,7 +287,6 @@ public class WikiManagement {
 
   /**
    * Delete an attachment file
-   * 
    * @param file String
    */
   public void deleteAttachmentFile(String file) {
@@ -365,7 +362,6 @@ public class WikiManagement {
 
   /**
    * Watch a page
-   * 
    * @param mess String
    */
   public void watchAPage(String mess) {
@@ -385,7 +381,6 @@ public class WikiManagement {
 
   /**
    * un-Watch a page
-   * 
    * @param mess String
    */
   public void unWatchAPage(String mess) {

@@ -18,7 +18,7 @@ public class AnswerManagement {
 
   /**
    * constructor
-   *
+   * 
    * @param testBase testBase
    */
   public AnswerManagement(TestBase testBase) {
@@ -41,7 +41,7 @@ public class AnswerManagement {
 
   /**
    * Input data to answer form
-   *
+   * 
    * @param content string
    * @param isApprove string
    * @param isActive string
@@ -77,7 +77,7 @@ public class AnswerManagement {
 
   /**
    * Execute action of answer: EDIT, APPROVE, DISAPPROVE, ACTIVE, DEACTIVE, DELETE
-   *
+   * 
    * @param answer string
    * @param action action that needs to be done
    */
@@ -129,7 +129,7 @@ public class AnswerManagement {
 
   /**
    * Delete answer
-   *
+   * 
    * @param answer string
    */
   public void deleteAnswer(String answer) {
@@ -142,7 +142,7 @@ public class AnswerManagement {
 
   /**
    * function vote/unvote an answer
-   *
+   * 
    * @param answer string
    * @param rate boolean
    */
