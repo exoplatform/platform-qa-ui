@@ -34,7 +34,7 @@ public class RoomManagement {
 
     public void deleteRomm(String room) {
       ELEMENT_CHAT_CONTACT.parent().parent().parent().parent().find(byText(room)).click();
-      ELEMENT_MORE_ACTIONS.click();
+      ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
       ELEMENT_DELETE_ROOM.click();
       ELEMENT_CONFIRM_BUTTON_DELETE_ROOM.click();
       ELEMENT_CONTACT_LIST.find(byText(room)).waitUntil(Condition.not(Condition.appear),Configuration.timeout);

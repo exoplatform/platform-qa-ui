@@ -91,7 +91,7 @@ public class ChatLocator {
                                                                         $(byXpath("//*[@id=\"chat-application\"]/div[1]/div[2]/div[4]/div[1]/div/div[2]/div[2]/button[1]"));
 
   public static final SelenideElement ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN         = $(byClassName("uiIconVerticalDots"));
-  
+
   public static final SelenideElement ELEMENT_CHAT_ROOM_EDIT                     = $(byXpath("//*[@id=\"room-detail\"]/div[2]/div[2]/div[3]/ul/li[5]/a"));
 
 
@@ -118,7 +118,6 @@ public class ChatLocator {
 
   public static final SelenideElement ELEMENT_CONTAINER_LIST_MESSAGES            = $(byId("chats"));
   public static final SelenideElement ELEMENT_CHAT_CONTACT= $(byClassName("chat-contact"));
-  public static final SelenideElement ELEMENT_MORE_ACTIONS=$(byClassName("uiIconVerticalDots"));
   public static final SelenideElement ELEMENT_DELETE_ROOM=$(byClassName("room-setting-action-deleteRoom"));
   public static final SelenideElement ELEMENT_CONFIRM_BUTTON_DELETE_ROOM=$(byId("team-delete-button-ok"));
 }
