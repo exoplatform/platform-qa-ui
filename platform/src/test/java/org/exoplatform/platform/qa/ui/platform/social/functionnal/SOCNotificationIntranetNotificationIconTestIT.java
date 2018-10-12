@@ -204,5 +204,4 @@ public class SOCNotificationIntranetNotificationIconTestIT extends Base {
 
         info("Verify that The number of new notifications (3 notifications) isnot displayed above the icon");
         $(byXpath(ELEMENT_BADGE_NUMBER_DISPLAY.replace("${number}", "3"))).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
-    }
-}
+    }}
