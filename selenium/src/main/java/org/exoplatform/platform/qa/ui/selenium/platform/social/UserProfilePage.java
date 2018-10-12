@@ -25,11 +25,7 @@ public class UserProfilePage {
 
   /**
    * constructor
-<<<<<<< HEAD
-   *
-=======
    * 
->>>>>>> 078cf21... correct javaDoc (#105)
    * @param testBase
    */
   public UserProfilePage(TestBase testBase) {
