@@ -199,6 +199,10 @@ public class TaskManagementLocator {
   public static final SelenideElement ELEMENT_UNSECHEDULED                         =
           $(byXpath("//*[@id=\"taskManagement\"]/div[3]/div[2]/div/div/div[6]/div[1]/div/div[2]/span"));
   public  static final  SelenideElement ELEMENT_SHOW_IN_CALENDAR                    =$(byClassName("date-work-plan"));
+  public static final SelenideElement ELEMENT_TABLE_PROJECT=$(byClassName("table-project"));
+  public static final SelenideElement ELEMENT_ASSIGNEE_TASK=$(byXpath("//*[@id=\"taskManagement\"]/div[3]/div[2]/div/div/div[4]/div[2]/div/span/a[2]"));
+  public static final SelenideElement ELEMENT_PRIORITY_TASK= $(byXpath("//*[@id=\"taskManagement\"]/div[3]/div[2]/div/div/div[6]/div[3]/div/span"));
+
 
   // Add labels form
 

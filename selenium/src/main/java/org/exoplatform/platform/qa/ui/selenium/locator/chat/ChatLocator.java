@@ -95,6 +95,8 @@ public class ChatLocator {
 
 
     public static final SelenideElement ELEMENT_CHAT_MESSAGE_INPUT = $(byId("messageComposerArea"));
+    public static final SelenideElement ELEMENT_CHAT_NOTIFICATION=   $(byClassName("dropdown-menu")).find(byXpath("//*[@id=\"chat-notifications-details\"]/a"));
+
 
     public static final SelenideElement ELEMENT_CHAT_LIST_MSG = $(byId("chats"));
 

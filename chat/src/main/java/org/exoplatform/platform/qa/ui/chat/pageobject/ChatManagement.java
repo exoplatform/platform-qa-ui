@@ -22,6 +22,27 @@ public class ChatManagement {
     ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.exist);
   }
 
+  public void sendMessageAssignTaskInRoom(String room, String task, String... user){
+    ELEMENT_CONTACT_LIST.find(byText(room)).waitUntil(Condition.visible,Configuration.timeout).click();
+    if(user.length>0){
+    ELEMENT_CHAT_MESSAGE_INPUT.setValue("++"+task+" @"+user[0]);
+    $(byClassName("atwho-view")).waitUntil(Condition.visible,Configuration.timeout);
+    }
+    else{
+      ELEMENT_CHAT_MESSAGE_INPUT.setValue("++"+task);
+    }
+    ELEMENT_CHAT_MESSAGE_INPUT.pressEnter();
+    ELEMENT_CHAT_LIST_MSG.find(byText(task)).should(Condition.exist);
+
+  }
+
+  public void sendMessageTaskPriority(String room, String task, String priority){
+    ELEMENT_CONTACT_LIST.find(byText(room)).waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_CHAT_MESSAGE_INPUT.setValue("++"+task+" !"+priority).pressEnter();
+    ELEMENT_CHAT_LIST_MSG.find(byText(task)).should(Condition.exist);
+
+  }
+
   public void uploadFile(String file) {
     ELEMENT_CHAT_MEETTING_ACTIONS.click();
     ELEMENT_CHAT_MEETTING_ACTIONS_UPLOAD_FILE.waitUntil(Condition.visible, Configuration.timeout).click();
