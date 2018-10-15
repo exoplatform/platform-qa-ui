@@ -1810,6 +1810,8 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   public static final By ELEMENT_LINE_IN_TABLE_LIST_USERS=byClassName("enabled");
 
   public static final SelenideElement ELEMENT_ICON_CLOSE_EDIT_LAYOUT=$(byXpath("//*[@id=\"UIPageEditor\"]/div[1]/a[1]"));
+    public static final SelenideElement ELEMENT_LIST_OF_GROUPS_IN_GROUP_TAB=$(byClassName("groupNavigationContainer"));
+
 
   public static final SelenideElement ELEMENT_LIST_CONTENT=$(byId("PAGEBODY-VIEW-BLOCK"));
   public static final String          ELEMENT_SAVE_BUTTON                                     =

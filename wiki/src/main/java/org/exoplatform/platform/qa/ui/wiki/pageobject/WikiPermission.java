@@ -68,15 +68,15 @@ public class WikiPermission {
       break;
     case Edit_Pages:
       info("Select Edit pages permission");
-      $(byText(userGroup)).parent().parent().findAll(byClassName("uiCheckbox")).get(1).click();
+      $(byId("EDITPAGE"+userGroup)).parent().click();
       break;
     case Admin_Pages:
       info("Select View pages permission");
-      evt.check(ELEMENT_PERMISSION_ADMPAGE_CHECKBOX.replace("$userGroup", userGroup), 2);
+      $(byXpath(ELEMENT_PERMISSION_ADMPAGE_CHECKBOX.replace("$userGroup", userGroup))).click();
       break;
     case Admin_Wiki:
       info("Select View pages permission");
-      evt.check(ELEMENT_PERMISSION_ADMWIKI_CHECKBOX.replace("$userGroup", userGroup), 2);
+      $(byXpath(ELEMENT_PERMISSION_ADMWIKI_CHECKBOX.replace("$userGroup", userGroup))).click();
       break;
     }
   }
@@ -146,7 +146,7 @@ public class WikiPermission {
    */
   public void goToGroup() {
     info("Click on select membership button");
-    evt.click(ELEMENT_PERMISSION_SELECT_GROUP);
+    $(ELEMENT_PERMISSION_SELECT_GROUP).click();
 
   }
 
@@ -185,7 +185,7 @@ public class WikiPermission {
       break;
     }
     info("Click on Add button");
-    evt.click(ELEMENT_PERMISSION_ADD_BUTTON);
+    $(ELEMENT_PERMISSION_ADD_BUTTON).click();
 
     info("The group/user/membership is added successfully");
   }

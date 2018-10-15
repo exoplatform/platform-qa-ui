@@ -20,6 +20,7 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -29,6 +30,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
@@ -444,22 +447,26 @@ public class PlatformBase {
   public void searchUser(String user, filterOption op) {
     if (!user.isEmpty()) {
       info("Type user into the search field");
-      evt.type(ELEMENT_SEARCH_USER_INPUT, user, true);
+      $(ELEMENT_SEARCH_USER_INPUT).setValue(user);
       switch (op) {
       case userName:
+        if($(ELEMENT_SELECT_SEARCH).is(Condition.visible))
         selectOption(ELEMENT_SELECT_SEARCH, filterOption.userName.name());
         break;
       case firstName:
+        if($(ELEMENT_SELECT_SEARCH).is(Condition.visible))
         selectOption(ELEMENT_SELECT_SEARCH, filterOption.firstName.name());
         break;
       case lastName:
+        if($(ELEMENT_SELECT_SEARCH).is(Condition.visible))
         selectOption(ELEMENT_SELECT_SEARCH, filterOption.lastName.name());
         break;
       case email:
+        if($(ELEMENT_SELECT_SEARCH).is(Condition.visible))
         selectOption(ELEMENT_SELECT_SEARCH, filterOption.email.name());
         break;
       }
-      evt.click(ELEMENT_QUICK_SEARCH_BUTTON);
+     $(ELEMENT_QUICK_SEARCH_BUTTON).click();
 
       info("the user is shown in searched result list");
     }
@@ -475,10 +482,11 @@ public class PlatformBase {
   public void selectUser(String user, filterOption op) {
     searchUser(user, op);
     info("Select the user");
-    evt.check(ELEMENT_USER_CHECKBOX.replace("$user", user), 2);
+    if($(byXpath( ELEMENT_USER_CHECKBOX.replace("$user", user))).is(Condition.not(Condition.checked)))
+    $(byXpath( ELEMENT_USER_CHECKBOX.replace("$user", user))).parent().click();
     info("Click on Add button");
-    evt.click(ELEMENT_ADD_USERS_BUTTON);
-    evt.waitForElementNotPresent(ELEMENT_ADD_USERS_BUTTON);
+    $(ELEMENT_ADD_USERS_BUTTON).click();
+    $(ELEMENT_ADD_USERS_BUTTON).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     info("the user is added");
   }
 
@@ -492,13 +500,13 @@ public class PlatformBase {
     String[] groups = group.split("/");
     for (String groupName : groups) {
       info("Select the group:" + groupName);
-      evt.click(ELEMENT_GROUP_MEMBERSHIP_NAME_SELECT.replace("$groupName", groupName));
+     $(byXpath(ELEMENT_GROUP_MEMBERSHIP_NAME_SELECT.replace("$groupName", groupName))).click();
     }
     if (!membership.isEmpty()) {
       info("Select the membership:" + membership);
-      evt.click(ELEMENT_GROUP_MEMBERSHIP_NAME_SELECT.replace("$groupName", membership));
+     $(byXpath(ELEMENT_GROUP_MEMBERSHIP_NAME_SELECT.replace("$groupName", membership))).click();
     }
-    evt.waitForElementNotPresent(ELEMENT_MEMBERSHIP_POPUP);
+    $(ELEMENT_MEMBERSHIP_POPUP).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
@@ -510,11 +518,11 @@ public class PlatformBase {
     String[] groups = group.split("/");
     for (String groupName : groups) {
       info("Select the group:" + groupName);
-      evt.click(ELEMENT_GROUP_NAME.replace("$group", groupName));
+      $(byXpath(ELEMENT_GROUP_NAME.replace("$group", groupName))).click();
     }
     info("Select the group");
-    evt.click(ELEMENT_SELECT_THIS_GROUP);
-    evt.waitForElementNotPresent(ELEMENT_SELECT_GROUP_POPUP);
+   $(ELEMENT_SELECT_THIS_GROUP).click();
+  $(ELEMENT_SELECT_GROUP_POPUP).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**

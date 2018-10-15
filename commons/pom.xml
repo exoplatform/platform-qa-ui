@@ -43,6 +43,5 @@
       <artifactId>platform-qa-ui-selenium</artifactId>
       <version>${project.version}</version>
     </dependency>
-
   </dependencies>
 </project>
