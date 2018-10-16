@@ -110,7 +110,7 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     info("Add a forum in the category1");
     forumForumManagement.addForumSimple(forum, "", forum);
     forumForumManagement.addForumSimple(forum1, "", forum1);
-
+    homePagePlatform.goToHomePage();
     /*
      * Step Number: 1 Step Name: Connect to intranet Step Description: - Login as
      * normal user - Connect to Intranet Input Data: - The Top Navigation bar is

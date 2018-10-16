@@ -20,9 +20,7 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.locator;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 
 import org.openqa.selenium.By;
@@ -391,6 +389,7 @@ public final class NavigationToolBarLocator {
                                                                        $(byXpath("//*[@id=\\\"UINotificationPopoverToolbarPortlet\\\"]/div[2]/a/i/span"));
 public static final By ELEMENT_BUTTON_ACCEPT_INVITATION_IN_NOTIFICATION=byClassName("action-item");
   public static final By ELEMENT_BUTTON_CANCEL_INVITATION_IN_NOTIFICATION=byClassName("cancel-item");
+  public static final SelenideElement ELEMENT_LIST_FORUM_IN_TOP_NAVIGATION=$(byAttribute("class","item forum"));
 
 
 }
