@@ -3,7 +3,6 @@ package org.exoplatform.platform.qa.ui.calendar.pageobject;
 import static com.codeborne.selenide.Selectors.*;
 
 import static com.codeborne.selenide.Selenide.$;
-import static org.bouncycastle.crypto.tls.ConnectionEnd.server;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_USER_CLOSE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -344,30 +343,7 @@ public class EventManagement {
     inputFromToDetailEvent(from, to, allDay);
   }
 
-  /**
-   * Attach file in "Add new EVENT" form
-   *
-   * @param path path of attachment of a EVENT
-   */
-  public void attachFileToEvent(String path, Boolean... opt) {
-    String fullPath = "";
-    if ("win".equals(server)) {
-      fullPath = "TestData\\" + path;
-    } else {
-      fullPath = "TestData/" + path;
-    }
-    evt.click(ELEMENT_EVENT_ADD_ATTACHMENT);
-    evt.click(ELEMENT_SELECT_FILE_BUTTON);
-    testBase.uploadFileUsingRobot(fullPath);
-    info("opt.length:" + opt.length);
 
-    if (opt.length == 0) {
-      evt.waitForAndGetElement(ELEMENT_ATTACHMENT_FORM_FILE_NAME.replace("$fileName", path));
-      evt.click(ELEMENT_ATTACHMENT_SAVE_BUTTON, 0, true);
-
-      evt.waitForAndGetElement(ELEMENT_ATTACH_FILE_NAME.replace("$fileName", path));
-    }
-  }
 
   /**
    * Check default suggestion EVENT time in detail add form

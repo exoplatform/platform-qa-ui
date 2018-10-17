@@ -59,14 +59,14 @@
     <!-- PLF dependencies -->
     <org.exoplatform.platform.version>5.2.x-SNAPSHOT</org.exoplatform.platform.version>
     <!-- Override Maven Surefire/Failsafe plugins versions -->
-    <version.surefire.plugin>2.19.1</version.surefire.plugin>
+    <version.surefire.plugin>2.22.1</version.surefire.plugin>
     <!-- Dependencies for UI Tests -->
     <!-- JUnit5 stack -->
     <org.junit.platform.version>1.0.0</org.junit.platform.version>
     <org.junit.jupiter.version>5.0.0</org.junit.jupiter.version>
     <!-- Selenium/Selenide Stack -->
-    <selenide.version>4.3</selenide.version>
-    <guava.version>21.0</guava.version>
+    <selenide.version>5.0.0</selenide.version>
+    <guava.version>22.0</guava.version>
     <!-- Selenium / Selenide configuration  -->
     <selenide.browser>org.exoplatform.platform.qa.ui.core.config.driver.ExoWebDriverProvider</selenide.browser>
     <selenide.holdBrowserOpen>false</selenide.holdBrowserOpen>
@@ -111,7 +111,7 @@
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-api</artifactId>
-      <version>3.0.1</version>
+      <version>3.14.0</version>
     </dependency>
     <!--  Add this dependency to fix a classpath error with ChromeDriver -->
     <dependency>

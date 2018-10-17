@@ -95,7 +95,7 @@ public class ProjectManagementTestIT extends Base {
         homePagePlatform.goToTaskPage();
         projectsManagement.addProject(title, "", false);
         $(byText(title)).click();
-        ELEMENT_TITLE_OF_PROJECT.waitUntil(Condition.hasText(title),Configuration.timeout);
+        ELEMENT_TITLE_OF_PROJECT.waitUntil(Condition.matchesText(title),Configuration.timeout);
         tasksManagement.addTask(task);
         $(byText(task)).should(Condition.exist);
         info("delete task");
@@ -111,7 +111,7 @@ public class ProjectManagementTestIT extends Base {
         homePagePlatform.goToTaskPage();
         projectsManagement.addProject(title, "", false);
         $(byText(title)).click();
-        ELEMENT_TITLE_OF_PROJECT.waitUntil(Condition.hasText(title),Configuration.timeout);
+        ELEMENT_TITLE_OF_PROJECT.waitUntil(Condition.matchesText(title),Configuration.timeout);
         tasksManagement.addTask(task);
         info("edit task");
         tasksManagement.editTask(task, newTask, "High");
@@ -129,7 +129,7 @@ public class ProjectManagementTestIT extends Base {
         homePagePlatform.goToTaskPage();
         projectsManagement.addProject(title, "", false);
         $(byText(title)).click();
-        ELEMENT_TITLE_OF_PROJECT.waitUntil(Condition.hasText(title),Configuration.timeout);
+        ELEMENT_TITLE_OF_PROJECT.waitUntil(Condition.matchesText(title),Configuration.timeout);
         tasksManagement.addTask(task);
         info("delete task");
         tasksManagement.deleteTask(task);

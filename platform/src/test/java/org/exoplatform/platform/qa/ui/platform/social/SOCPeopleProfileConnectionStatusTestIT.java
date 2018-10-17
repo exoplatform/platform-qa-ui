@@ -1,8 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.social;
 
-import static com.codeborne.selenide.Condition.hasText;
-import static com.codeborne.selenide.Condition.not;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.matchesText;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
@@ -133,7 +132,7 @@ public class SOCPeopleProfileConnectionStatusTestIT extends Base {
       connectionsManagement.searchPeople(username2, null, null, null);
       $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username2))).click();
       $(ELEMENT_ADD_CONNECT_PROFIL_STATUS).click();
-      $(ELEMENT_CANCEL_CONNECT_PROFILE_STATUS).waitUntil(visible,Configuration.timeout).waitUntil(hasText("Cancel Request"),Configuration.timeout);
+      $(ELEMENT_CANCEL_CONNECT_PROFILE_STATUS).waitUntil(visible,Configuration.timeout).waitUntil(have(matchesText("Cancel Request")),Configuration.timeout);
       info("login as user 2");
       manageLogInOut.signIn(username2, password);
       info("goto user1's profile");
@@ -145,7 +144,7 @@ public class SOCPeopleProfileConnectionStatusTestIT extends Base {
       info("Deny to connect user1");
       $(ELEMENT_DROPDOWN_DENY_PROFIL_STATUS).click();
       $(ELEMENT_CLICK_DENY_USER_PROFIL_STATUS).click();
-      $(ELEMENT_ADD_CONNECT_PROFIL_STATUS).waitUntil(visible,Configuration.timeout).waitUntil(hasText("Connect"),Configuration.timeout);
+      $(ELEMENT_ADD_CONNECT_PROFIL_STATUS).waitUntil(visible,Configuration.timeout).waitUntil(have(matchesText("Connect")),Configuration.timeout);
       info("Delete users");
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
@@ -277,7 +276,7 @@ public class SOCPeopleProfileConnectionStatusTestIT extends Base {
     connectionsManagement.searchPeople(username2, null, null, null);
     homePagePlatform.refreshUntil($(byText(username2 + " " + username2)), visible, 2000);
     $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username2))).click();
-    $(ELEMENT_ADD_CONNECT_PROFIL_STATUS).waitUntil(visible,Configuration.timeout).waitUntil(hasText("Connect"),Configuration.timeout);
+    $(ELEMENT_ADD_CONNECT_PROFIL_STATUS).waitUntil(visible,Configuration.timeout).waitUntil(have(matchesText("Connect")),Configuration.timeout);
     info("Delete users");
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();

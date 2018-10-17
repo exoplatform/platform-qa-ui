@@ -165,7 +165,7 @@ public class TasksManagement {
     $(byText(task)).click();
     String idDataComment = $(byText(comment)).parent().parent().getAttribute("data-commentid");
     // Get id Comment button
-    $(byId(ELEMENT_VIEW_ALL_REPLIES_LINK_TASK.replace("{id}", idDataComment))).waitUntil(Condition.appears, Configuration.timeout).findElementByClassName("subCommentShowAllLink").click();
+    $(byId(ELEMENT_VIEW_ALL_REPLIES_LINK_TASK.replace("{id}", idDataComment))).waitUntil(Condition.appears, Configuration.timeout).find(byClassName("subCommentShowAllLink")).click();
   }
 
   /**

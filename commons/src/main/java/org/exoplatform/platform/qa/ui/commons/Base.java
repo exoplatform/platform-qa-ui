@@ -56,13 +56,12 @@ public class Base extends TestBase {
 
   @BeforeEach
   public void beforeEach(TestInfo testInfo) {
-    if (!title().equals("Login")) {
-      Selenide.close();
-    }
     // Set context from better naming of screenshots in case of test failure
     Screenshots.startContext(testInfo.getTestClass().get().getName(), testInfo.getTestMethod().get().getName());
     openPlatform(testInfo);
-
+    if (!title().equals("Login")) {
+      Selenide.close();
+    }
   }
 
   public void openPlatform(TestInfo testInfo) {

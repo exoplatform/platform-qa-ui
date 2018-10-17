@@ -1246,7 +1246,7 @@ public class ActivityStream {
     // Get id Comment button
     executeJavaScript("window.scrollBy(0,-250)");
     $(byId(ELEMENT_VIEW_ALL_REPLIES_LINK.replace("{id}", idBlocComment))).waitUntil(Condition.appears, Configuration.timeout)
-                                                                         .findElementByClassName("subCommentShowAllLink")
+                                                                         .find(byClassName("subCommentShowAllLink"))
                                                                          .click();
   }
 

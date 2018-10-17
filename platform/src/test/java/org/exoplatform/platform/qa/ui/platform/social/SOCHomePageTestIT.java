@@ -531,7 +531,7 @@ public class SOCHomePageTestIT extends Base {
                                .getAttribute("id")
                                .split("UIActivityLoader")[1];
     $(byXpath(ELEMENT_LINK_TEXT_VIEW_ALL_COMMENTS.replace("{id}", id))).click();
-    $(byXpath(ELEMENT_LINK_TEXT_VIEW_ALL_COMMENTS.replace("{id}", id))).waitUntil(Condition.hasText("Hide all 12 comments."),
+    $(byXpath(ELEMENT_LINK_TEXT_VIEW_ALL_COMMENTS.replace("{id}", id))).waitUntil(Condition.have(Condition.matchesText("Hide all 12 comments.")),
                                                                                   Configuration.timeout);
     info("Verify that all comments is shown");
     assertEquals(13, $(byId(ELEMENT_LIST_ALL_COMMENNTS.replace("{id}", id))).findAll(byClassName("commentItem")).size());

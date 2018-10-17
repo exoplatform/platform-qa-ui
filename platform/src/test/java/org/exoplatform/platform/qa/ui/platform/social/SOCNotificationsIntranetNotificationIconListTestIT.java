@@ -352,11 +352,11 @@ public class SOCNotificationsIntranetNotificationIconListTestIT extends Base {
     info("Log in user 1 and check 2 notifications above is unread");
     manageLogInOut.signIn(username1, password);
     ELEMENT_ALERT_NOTIFICATION_EXIST.waitUntil(visible, Configuration.timeout).click();
-    $(ELEMENT_NOTIFICATION_DROPDOWN).findAll(byClassName("unread")).shouldHave(CollectionCondition.size(2));
+    $(ELEMENT_NOTIFICATION_DROPDOWN).findAll(byClassName("unread")).shouldHaveSize(2);
 
     info("Click [Mark all as read] button and verify result");
     intranetNotification.markAllAsRead();
-    $(ELEMENT_NOTIFICATION_DROPDOWN).findAll(byClassName("clearfix")).shouldHave(CollectionCondition.size(2));
+    $(ELEMENT_NOTIFICATION_DROPDOWN).findAll(byClassName("clearfix")).shouldHaveSize(2);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);

@@ -1,6 +1,5 @@
 package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
-import static org.bouncycastle.crypto.tls.ConnectionEnd.server;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_USER_CLOSE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -262,31 +261,7 @@ public class TaskManagement {
     inputFromToDetailTask(from, to, allDay);
   }
 
-  /**
-   * Attach file in "Add new task" form
-   * 
-   * @param path String
-   * @param opt boolean
-   */
-  public void attachFileToTask(String path, Boolean... opt) {
-    String fullPath = "";
-    if ("win".equals(server)) {
-      fullPath = "TestData\\" + path;
-    } else {
 
-      fullPath = "TestData/" + path;
-    }
-    info("fullPath:" + fullPath);
-    evt.click(ELEMENT_TASK_ADD_ATTACHMENT);
-    evt.click(ELEMENT_SELECT_FILE_BUTTON);
-    testBase.uploadFileUsingRobot(fullPath);
-    info("opt.length:" + opt.length);
-    if (opt.length == 0) {
-      evt.waitForAndGetElement(ELEMENT_ATTACHMENT_FORM_FILE_NAME.replace("$fileName", path));
-      evt.click(ELEMENT_ATTACHMENT_SAVE_BUTTON, 0, true);
-      evt.waitForAndGetElement(ELEMENT_ATTACH_FILE_NAME.replace("$fileName", path));
-    }
-  }
 
   /**
    * Check default suggestion task time in detail add form

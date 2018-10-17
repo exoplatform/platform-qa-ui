@@ -83,7 +83,7 @@ public class LabelManagementTestIT extends Base {
         homePagePlatform.goToTaskPage();
         labelsManagement.addLabel(label);
         $(byText(label)).click();
-        ELEMENT_TITLE_OF_PROJECT.waitUntil(Condition.hasText(label),Configuration.timeout);
+        ELEMENT_TITLE_OF_PROJECT.waitUntil(Condition.matchesText(label),Configuration.timeout);
         tasksManagement.addTask(task);
         ELEMENT_TASKS_LIST.find(byText(task)).parent().find(byText(label)).should(Condition.exist);
         homePagePlatform.goToTaskPage();

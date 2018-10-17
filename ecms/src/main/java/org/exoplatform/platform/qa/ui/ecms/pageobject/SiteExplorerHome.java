@@ -95,7 +95,7 @@ public class SiteExplorerHome {
         selectNode(arrayElement);
       }
     }
-    $(byId("address")).waitUntil(Condition.hasValue("/"+path),Configuration.timeout);
+    $(byId("address")).waitUntil(Condition.have(Condition.value("/"+path)),Configuration.timeout);
   }
 
   /**
@@ -1076,9 +1076,8 @@ public class SiteExplorerHome {
    */
   public void selectFileExplorer() {
     info("Select File Explorer");
-    WebElement el = (new WebDriverWait(testBase.getExoWebDriver().getWebDriver(),
-                                       30)).until(ExpectedConditions.presenceOfElementLocated(ELEMENT_FILE_EXPLORER_ICON));
-    el.click();
+
+    $(ELEMENT_FILE_EXPLORER_ICON).click();
 
   }
 
@@ -1118,13 +1117,11 @@ public class SiteExplorerHome {
    */
   public void selectAllFiles() {
     info("Select all file");
-    WebElement el =
-                  (new WebDriverWait(testBase.getExoWebDriver().getWebDriver(),
-                                     30)).until(ExpectedConditions.presenceOfElementLocated(ELEMENT_SITE_EXPLORER_ALL_CHECKBOX));
+
     if (evt.waitForAndGetElement(ELEMENT_DOCUMENT_LIST_ROW_CONTENT, 5000, 0) != null) {
       info("check on the checkbox");
       // el.click();
-      evt.clickByJavascript(el, 2);
+      evt.clickByJavascript($(ELEMENT_SITE_EXPLORER_ALL_CHECKBOX), 2);
 
       info("Click on Delete button");
       clickDeleteButton();
@@ -1139,10 +1136,8 @@ public class SiteExplorerHome {
    */
   public void selectAContentType(String nameContent) {
     info("Select a content");
-    WebElement el =
-                  (new WebDriverWait(testBase.getExoWebDriver().getWebDriver(),
-                                     30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(ELEMENT_SITE_EXPLORER_CONTENT_NAME.replace("${nameContent}", nameContent))));
-    el.click();
+
+    $(By.xpath(ELEMENT_SITE_EXPLORER_CONTENT_NAME.replace("${nameContent}", nameContent))).click();
 
   }
 
