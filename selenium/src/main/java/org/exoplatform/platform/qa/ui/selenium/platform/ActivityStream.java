@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
 import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
@@ -8,6 +9,8 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLoca
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_STREAM_CONTAINER;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_ADD_EDIT_EVENT_NAME;
+import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
@@ -332,30 +335,25 @@ public class ActivityStream {
   public void addComment(String filename, String textContent) {
     info("Click on icon comment");
     int repeat = 0;
-    while (evt.waitForAndGetElement(ELEMENT_COMMENTBOX.replace("${title}", filename), 3000, 0) == null) {
+    while ($(byXpath(ELEMENT_COMMENTBOX.replace("${title}", filename))).is(Condition.not(Condition.visible))) {
       // if repeat more 5 times, break the loop
       if (repeat > 5)
         break;
       // if comment box is shown, break the loop
-      if (evt.waitForAndGetElement(ELEMENT_COMMENT_BUTTON, 3000, 0) != null)
+      if ($(byXpath(ELEMENT_COMMENT_BUTTON)).is(Condition.visible))
         break;
-
       info("Click on icon comment with repeat " + repeat);
-      evt.click(ELEMENT_ICON_COMMENT.replace("${title}", filename));
+      $(byXpath(ELEMENT_ICON_COMMENT.replace("${title}", filename))).click();
       repeat++;
     }
     info("Put a comment to comment box");
     int repeat1 = 0;
-    while (evt.waitForAndGetElement(ELEMENT_PUBLICATION_COMMENTPOSTED.replace("${content}", textContent)
-                                                                     .replace("$activity", filename),
-                                    2000,
-                                    0) == null) {
+    while ($(byXpath(ELEMENT_PUBLICATION_COMMENTPOSTED.replace("${content}", textContent)
+                    .replace("$activity", filename))).is(Condition.not(Condition.visible))) {
       if (repeat1 > 5)
         break;
-      if (evt.waitForAndGetElement(ELEMENT_PUBLICATION_COMMENTPOSTED.replace("${content}", textContent)
-                                                                    .replace("$activity", filename),
-                                   2000,
-                                   0) != null)
+      if ($(byXpath(ELEMENT_PUBLICATION_COMMENTPOSTED.replace("${content}", textContent)
+                      .replace("$activity", filename))).is(Condition.visible))
         break;
       else {
         evt.switchToParentWindow();
@@ -363,9 +361,8 @@ public class ActivityStream {
         Actions action = new Actions(testBase.getExoWebDriver().getWebDriver());
         action.moveToElement(input).sendKeys(textContent).build().perform();
         info("Click on comment button to add comment to the activity");
-        evt.click(ELEMENT_COMMENT_BUTTON);
+        $(ELEMENT_COMMENT_BUTTON).click();
       }
-
       info("Repeat " + repeat1);
       repeat1++;
     }
@@ -550,7 +547,168 @@ public class ActivityStream {
     info("The activity is shared success");
 
   }
+  public void editActivity(String text, String newtext) {
+    info("-- Editing an activity--");
+    String idActivity = $(byText(text)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+    $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).click();
+    $(byId(ELEMENT_EDIT_ACTIVITY_LINK.replace("{id}", idActivity))).click();
+    SelenideElement frame = $(byAttribute("title", "Rich Text Editor, composerEditInput" + idActivity)).waitUntil(Condition.visible, Configuration.timeout);
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    switchTo().frame(frame);
+    ELEMENT_INPUT_ACTIVITY.click();
+    ELEMENT_INPUT_ACTIVITY.sendKeys(newtext);
+    switchTo().defaultContent();
+    $(byId(ELEMENT_BUTTON_UPDATE_ACTIVITY.replace("{id}", idActivity))).waitUntil(Condition.enabled, Configuration.timeout).click();
+    $(byId(ELEMENT_BUTTON_UPDATE_ACTIVITY.replace("{id}", idActivity))).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+  }
 
+
+  public void cancelActivity(String text, String newtext) {
+    info("-- Editing an activity--");
+    String idActivity = $(byText(text)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+    $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).click();
+    $(byId(ELEMENT_EDIT_ACTIVITY_LINK.replace("{id}", idActivity))).click();
+    SelenideElement frame = $(byAttribute("title", "Rich Text Editor, composerEditInput" + idActivity)).waitUntil(Condition.visible, Configuration.timeout);
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    switchTo().frame(frame);
+    ELEMENT_INPUT_ACTIVITY.click();
+    ELEMENT_INPUT_ACTIVITY.sendKeys(newtext);
+    switchTo().defaultContent();
+    $(byId(ELEMENT_BUTTON_CANCEL_EDITACTIVITY.replace("{id}", idActivity))).waitUntil(Condition.enabled, Configuration.timeout).click();
+    $(byId(ELEMENT_BUTTON_CANCEL_EDITACTIVITY.replace("{id}", idActivity))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+  }
+  public void cancelComment(String text, String newtext) {
+    String idComment = $(byText(text)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
+    $(byId(ELEMENT_COMMENT_DROPDOWN.replace("{id}", idComment))).click();
+    $(byId(ELEMENT_EDIT_COMMENT_LINK.replace("{id}", idComment))).click();
+    SelenideElement frame = $(byAttribute("title","Rich Text Editor, composerEditCommentcomment"+idComment));
+    switchTo().frame(frame);
+    $(byXpath("/html/body")).sendKeys(newtext);
+    switchTo().defaultContent();
+    $(byId(ELEMENT_BUTTON_CANCEL_EDITCOMMENT.replace("{id}", idComment))).waitUntil(Condition.enabled, Configuration.timeout).click();
+    $(byId(ELEMENT_BUTTON_CANCEL_EDITCOMMENT.replace("{id}", idComment))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+  }
+  public void editComment(String text, String newtext) {
+    info("-- Editing a Comment--");
+    String idComment = $(byText(text)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
+    $(byId(ELEMENT_COMMENT_DROPDOWN.replace("{id}", idComment))).click();
+    $(byId(ELEMENT_EDIT_COMMENT_LINK.replace("{id}", idComment))).click();
+    SelenideElement frame = $(byAttribute("title","Rich Text Editor, composerEditCommentcomment"+idComment));
+    switchTo().frame(frame);
+    $(byXpath("/html/body")).sendKeys(newtext);
+    switchTo().defaultContent();
+    $(byId(ELEMENT_BUTTON_UPDATE_COMMENT.replace("{id}", idComment))).waitUntil(Condition.enabled, Configuration.timeout).click();
+    $(byId(ELEMENT_BUTTON_UPDATE_COMMENT.replace("{id}", idComment))).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+  }
+  public void CheckEditActivity(String text, Boolean edit){
+    String idActivity = $(byText(text)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+    if (edit) {
+    $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).click();
+    $(byId(ELEMENT_EDIT_ACTIVITY_LINK.replace("{id}", idActivity))).waitUntil(Condition.visible,Configuration.timeout);}
+    else {
+      $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    }
+  }
+  public void CheckEditActivityInSpaceByManager(String text, Boolean edit){
+    String idActivity = $(byText(text)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+    if (edit) {
+      $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).click();
+      $(byId(ELEMENT_EDIT_ACTIVITY_LINK.replace("{id}", idActivity))).waitUntil(Condition.visible,Configuration.timeout);}
+    else {
+      $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(byId(ELEMENT_EDIT_ACTIVITY_LINK.replace("{id}", idActivity))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    }
+  }
+  public void CheckEditComment(String text, Boolean edit){
+    String idComment = $(byText(text)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
+    if (edit) {
+      $(byId(ELEMENT_COMMENT_DROPDOWN.replace("{id}", idComment))).click();
+      $(byId(ELEMENT_EDIT_COMMENT_LINK.replace("{id}", idComment))).waitUntil(Condition.visible,Configuration.timeout);}
+    else {
+      $(byId(ELEMENT_COMMENT_DROPDOWN.replace("{id}", idComment))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    }}
+    public void CheckEditCommentbySpaceManager(String text, Boolean edit){
+      String idComment = $(byText(text)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
+      if (edit) {
+        $(byId(ELEMENT_COMMENT_DROPDOWN.replace("{id}", idComment))).click();
+        $(byId(ELEMENT_EDIT_COMMENT_LINK.replace("{id}", idComment))).waitUntil(Condition.visible,Configuration.timeout);}
+      else {
+        $(byId(ELEMENT_COMMENT_DROPDOWN.replace("{id}", idComment))).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(byId(ELEMENT_EDIT_COMMENT_LINK.replace("{id}", idComment))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+      }
+
+  }
+
+  public void gotoActivityViewer(String text) {
+    String idActivityTime = $(byText(text)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+    $(byId(ELEMENT_ACTIVITY_TIME.replace("{id}", idActivityTime))).click();
+    $(byId("ProfileActivity")).waitUntil(Condition.visible,Configuration.timeout);
+  }
+  public void gotoCommentViewer(String text) {
+    String idCommentTime = $(byText(text)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
+    $(byId(ELEMENT_COMMENT_TIME.replace("{id}", idCommentTime))).click();
+    $(byId("ProfileActivity")).waitUntil(Condition.visible,Configuration.timeout);
+  }
+  public void CheckEditCommentInSpaceByManager(String text, Boolean edit){
+    String idComment = $(byText(text)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
+    if (edit) {
+      $(byId(ELEMENT_COMMENT_DROPDOWN.replace("{id}", idComment))).click();
+      $(byId(ELEMENT_EDIT_COMMENT_LINK.replace("{id}", idComment))).waitUntil(Condition.visible,Configuration.timeout);}
+    else {
+      $(byId(ELEMENT_COMMENT_DROPDOWN.replace("{id}", idComment))).waitUntil(Condition.visible,Configuration.timeout);
+      $(byId(ELEMENT_EDIT_COMMENT_LINK.replace("{id}", idComment))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    }
+
+  }
+  public void checkNotEditInTopicActivity(String topic){
+      String idActivity = $(byText(topic)).parent().parent().parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).click();
+        $(byId(ELEMENT_EDIT_ACTIVITY_LINK.replace("{id}", idActivity))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+  }
+  public void checkNotEditInWikiActivity(String title){
+    String idActivity = $(byText(title)).parent().parent().parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+    $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).click();
+    $(byId(ELEMENT_EDIT_ACTIVITY_LINK.replace("{id}", idActivity))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+  }
+public void removeCharactersActivity(String text ,int nbreCh, Boolean alltext) {
+  String idActivity = $(byText(text)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+  $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).click();
+  $(byId(ELEMENT_EDIT_ACTIVITY_LINK.replace("{id}", idActivity))).click();
+  SelenideElement frame = $(byAttribute("title", "Rich Text Editor, composerEditInput" + idActivity)).waitUntil(Condition.visible, Configuration.timeout);
+  $(ELEMENT_ACCOUNT_NAME_LINK).click();
+  switchTo().frame(frame);
+  ELEMENT_INPUT_ACTIVITY.click();
+  for (int i = 0; i < nbreCh; i++) {
+    ELEMENT_INPUT_ACTIVITY.sendKeys(Keys.BACK_SPACE);
+  }
+  switchTo().defaultContent();
+  if (alltext) {
+    $(byId(ELEMENT_BUTTON_UPDATE_ACTIVITY.replace("{id}", idActivity))).waitUntil(Condition.disabled, Configuration.timeout);
+  } else {
+    $(byId(ELEMENT_BUTTON_UPDATE_ACTIVITY.replace("{id}", idActivity))).waitUntil(Condition.enabled, Configuration.timeout).click();
+  $(byId(ELEMENT_BUTTON_UPDATE_ACTIVITY.replace("{id}", idActivity))).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+}
+}
+  public void removeCharactersComment(String text ,int nbreCh, Boolean alltext){
+    String idComment = $(byText(text)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
+    $(byId(ELEMENT_COMMENT_DROPDOWN.replace("{id}", idComment))).click();
+    $(byId(ELEMENT_EDIT_COMMENT_LINK.replace("{id}", idComment))).click();
+    SelenideElement frame = $(byAttribute("title","Rich Text Editor, composerEditCommentcomment"+idComment));
+    switchTo().frame(frame);
+    $(byXpath("/html/body")).click();
+    for(int i=0;i<nbreCh;i++) {
+      ELEMENT_INPUT_COMMENT.sendKeys(Keys.BACK_SPACE);
+    }
+    switchTo().defaultContent();
+    if(alltext){
+      $(byId(ELEMENT_BUTTON_UPDATE_COMMENT.replace("{id}", idComment))).waitUntil(Condition.disabled, Configuration.timeout);
+    }
+    else {
+    $(byId(ELEMENT_BUTTON_UPDATE_COMMENT.replace("{id}", idComment))).waitUntil(Condition.enabled, Configuration.timeout).click();
+    $(byId(ELEMENT_BUTTON_UPDATE_COMMENT.replace("{id}", idComment))).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+
+    }
+  }
   /**
    * Open More menu of Space menu
    */
@@ -1078,24 +1236,14 @@ public class ActivityStream {
     $(byText(comment)).should(Condition.exist);
   }
 
-  public void deleteactivity(String activity) {
+  public void deleteactivity(String text) {
     // get the id of activity created
-    String id = $(byText(activity)).parent()
-                                   .parent()
-                                   .parent()
-                                   .parent()
-                                   .parent()
-                                   .parent()
-                                   .parent()
-                                   .getAttribute("id")
-                                   .split("UIActivityLoader")[1];
-    // click on the activity to appear the delete button
-    $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-    // click on delete button
-    $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
+    info("-- Editing an activity--");
+    String idActivity = $(byText(text)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+    $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).click();
+    $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}",idActivity))).click();
     ELEMENT_DELETE_POPUP_OK.click();
     ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
-    $(byText(activity)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   public void deleteActivityWiki(String activity) {

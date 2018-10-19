@@ -2419,5 +2419,13 @@ public static final By
   public static final SelenideElement ELEMENT_COLLABORATION_ACTIONS=  $(byClassName("uiIconPlusCircled"));
   public static final SelenideElement ELEMENT_SPACE_NAME_CONTAINER=$(byId("UISpaceMenuPortlet"));
 
+  public static final SelenideElement ELEMENT_EDIT_ACTIVITY_ICON = $(byAttribute("for","EditActivityPlugin")).parent().parent().find(byClassName("uiIconEdit"));
+  public static final SelenideElement ELEMENT_BUTTON_ON_MAIL_ACTIVITY = $(byId("MAIL_CHANNELEditActivityPlugin"));
+  public static final SelenideElement ELEMENT_BUTTON_ON_MOBILE_ACTIVITY = $(byId("PUSH_CHANNELEditActivityPlugin"));
+  public static final SelenideElement ELEMENT_BUTTON_ON_SITE_ACTIVITY = $(byId("WEB_CHANNELEditActivityPlugin"));
+  public static final SelenideElement ELEMENT_EDIT_COMMENT_ICON_NOTIF = $(byAttribute("for","EditCommentPlugin")).parent().parent().find(byClassName("uiIconEdit"));
+  public static final SelenideElement ELEMENT_BUTTON_ON_MAIL_COMMENT = $(byId("MAIL_CHANNELEditCommentPlugin"));
+  public static final SelenideElement ELEMENT_BUTTON_ON_MOBILE_COMMENT = $(byId("PUSH_CHANNELEditCommentPlugin"));
+  public static final SelenideElement ELEMENT_BUTTON_ON_SITE_COMMENT =   $(byId("WEB_CHANNELEditCommentPlugin"));
 }
 
