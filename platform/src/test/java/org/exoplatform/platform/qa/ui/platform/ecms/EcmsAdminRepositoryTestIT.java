@@ -5,6 +5,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -133,6 +134,8 @@ public class EcmsAdminRepositoryTestIT extends Base {
     contentAdministration.goToSpecificFunctions(ContentAdministration.specificEcmFunctions.NAMESPACES);
     contentAdministration.registerNamespace(prefix, url);
     for (int i = 1; i < 9; i++) {
+      $(ELEMENT_ACCOUNT_NAME_LINK).click();
+      $(ELEMENT_ACCOUNT_NAME_LINK).click();
       if ($(byXpath(ELEMENT_ECM_REPOSITORY_NAMESPACES_CHECK_LIST_URL_AND_PREFIX.replace("{$url}", url)
                                                                                .replace("{$prefix}", prefix)))
                                                                                                               .is(Condition.not(Condition.visible))) {

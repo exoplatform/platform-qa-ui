@@ -585,19 +585,25 @@ public class SOCHomePageTestIT extends Base {
   @Test
   public void test19_RelationActivity() {
     info("Test 19 Relation Activity");
-
+    String username = "username" + getRandomString();
+    String email = username + "@test.com";
+    String password = "123456";
+    info("Add new user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username, password, email, username, username);
     String comment = "I'm now connected with 1 user(s)";
-
+    manageLogInOut.signIn(username,password);
     homePagePlatform.goToConnections();
     connectionsManagement.connectToAUser(DATA_USER2);
 
-    manageLogInOut.signIn(DATA_USER2, password);
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
+    connectionsManagement.acceptAConnection(username);
     homePagePlatform.goToHomePage();
-    $(byText(DATA_NAME_USER1)).parent().parent().parent().parent().find(byText(comment)).should(Condition.exist);
-    homePagePlatform.goToConnections();
-    connectionsManagement.removeConnection(DATA_USER1);
+    $(byText(username+" "+username)).parent().parent().parent().parent().find(byText(comment)).should(Condition.exist);
+    manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username);
   }
 
   /**

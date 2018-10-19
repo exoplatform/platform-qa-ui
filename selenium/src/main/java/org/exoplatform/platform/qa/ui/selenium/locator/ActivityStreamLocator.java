@@ -45,16 +45,16 @@ public final class ActivityStreamLocator {
     public static final By ELEMENT_SPACE_MENU_ACTIVITY_PORTLET= byClassName("uiIconAppSpaceActivityStreamPortlet");
 
     public static final By              ELEMENT_SPACE_MENU_FORUM_PORTLET                     =
-            By.xpath(".//*[@class='uiIconAppForumPortlet uiIconDefaultApp']");
+            By.xpath(".//*[@class='uiIconAppforum uiIconAppForumPortlet uiIconDefaultApp']");
 
     public static final By              ELEMENT_SPACE_MENU_WIKI_PORTLET                      =
             By.xpath(".//*[@class='uiIconAppWikiPortlet uiIconDefaultApp']");
 
     public static final By              ELEMENT_SPACE_MENU_DOCUMENT_PORTLET                  =
-            By.xpath(".//*[@class='uiIconAppFileExplorerPortlet uiIconDefaultApp']");
+            By.xpath(".//*[@class='uiIconAppdocuments uiIconAppFileExplorerPortlet uiIconDefaultApp']");
 
     public static final By              ELEMENT_SPACE_MENU_AGENDA_PORTLET                    =
-            By.xpath(".//*[@class='uiIconAppCalendarPortlet uiIconDefaultApp']");
+            By.xpath(".//*[@class='uiIconAppcalendar uiIconAppCalendarPortlet uiIconDefaultApp']");
 
     public static final By              ELEMENT_SPACE_MENU_SPACE_SETTING_PORTLET             =
             By.xpath(".//*[@class='class='uiIconAppSpaceSettingPortlet uiIconDefaultApp']");

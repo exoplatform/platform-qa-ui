@@ -36,6 +36,7 @@ public class MyNotificationsSetting {
    * @param notifToDisable myNotiType
    */
   public void disableNotification(myNotiType notifToDisable) {
+    $(ELEMENT_ADD_TOOTLBAR).click();
     int repeat = 0;
     switch (notifToDisable) {
       case NewUser_email:

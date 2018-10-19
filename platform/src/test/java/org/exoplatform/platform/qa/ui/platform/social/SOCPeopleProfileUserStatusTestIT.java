@@ -84,10 +84,11 @@ public class SOCPeopleProfileUserStatusTestIT extends Base {
     String statusDisturb = "Do not disturb";
     String iconInvi = "invisible";
     String statusInvi = "Invisible";
+    String iconOnline = "available";
     String statusOnline = "Available";
-    String orangeColor = "rgba(248, 148, 6, 1)";
-    String redColor = "rgba(214, 33, 38, 1)";
-    String whiteColor = "rgba(255, 255, 255, 1)";
+    String orangeColor = "rgba(253, 140, 64, 1)";
+    String redColor = "rgba(199, 34, 34, 1)";
+    String whiteColor = "rgba(153, 153, 153, 1)";
     String greenColor = "rgba(70, 165, 70, 1)";
 
     // Create data test
@@ -104,37 +105,38 @@ public class SOCPeopleProfileUserStatusTestIT extends Base {
 
     info("change status to Away");
     mouseOverAndClick(ELEMENT_CHAT_ICON);
-    $(byXpath(ELEMENT_CHAT_STATUS.replace("${status}", statusAway))).click();
+    $(byClassName(ELEMENT_CHAT_STATUS.replace("${status}", iconAway))).click();
     info(ELEMENT_CHAT_UISTATUSPROFILEPORTLET.replace("${icon}", iconAway).replace("${status}", statusAway));
-    refresh();
-    $(ELEMENT_CHAT_ICON).find(byClassName(ELEMENT_STATUS_CHAT.replace("{status}", iconAway))).should(Condition.exist);
-    assertEquals($(ELEMENT_CHAT_ICON).find(byClassName(ELEMENT_STATUS_CHAT.replace("{status}", iconAway))).getCssValue("color"),
+    homePagePlatform.refreshUntil($(ELEMENT_CHAT_ICON),visible,1000);
+    $(ELEMENT_CHAT_ICON).find(byClassName(ELEMENT_CHAT_STATUS.replace("${status}", iconAway))).should(Condition.exist);
+    assertEquals($(ELEMENT_CHAT_ICON).find(byClassName("uiIconStatus")).getCssValue("color"),
                  orangeColor);
     $(byClassName(ELEMENT_STATUS_CHAT_IN_PROFILE_PAGE.replace("{status}", statusAway))).should(visible);
 
     info("change status to Do not disturb");
     mouseOverAndClick(ELEMENT_CHAT_ICON);
-    $(byXpath(ELEMENT_CHAT_STATUS.replace("${status}", statusDisturb))).click();
-    $(ELEMENT_CHAT_ICON).find(byClassName(ELEMENT_STATUS_CHAT.replace("{status}", iconDisturb))).should(Condition.exist);
-    assertEquals($(ELEMENT_CHAT_ICON).find(byClassName(ELEMENT_STATUS_CHAT.replace("{status}", iconDisturb)))
+    $(byClassName(ELEMENT_CHAT_STATUS.replace("${status}", iconDisturb))).click();
+    homePagePlatform.refreshUntil($(ELEMENT_CHAT_ICON),visible,1000);
+    $(ELEMENT_CHAT_ICON).find(byClassName(ELEMENT_CHAT_STATUS.replace("${status}", iconDisturb))).should(Condition.exist);
+    assertEquals($(ELEMENT_CHAT_ICON).find(byClassName("uiIconStatus"))
                                      .getCssValue("color"),
                  redColor);
-    refresh();
     $(byClassName(ELEMENT_STATUS_CHAT_IN_PROFILE_PAGE.replace("{status}", statusDisturb.replaceAll(" ", "")))).should(visible);
 
     info("change status to Offline");
     mouseOverAndClick(ELEMENT_CHAT_ICON);
-    $(byXpath(ELEMENT_CHAT_STATUS.replace("${status}", statusInvi))).click();
-    $(ELEMENT_CHAT_ICON).find(byClassName(ELEMENT_STATUS_CHAT.replace("{status}", iconInvi))).should(Condition.exist);
-    assertEquals($(ELEMENT_CHAT_ICON).find(byClassName(ELEMENT_STATUS_CHAT.replace("{status}", iconInvi))).getCssValue("color"),
+    $(byClassName(ELEMENT_CHAT_STATUS.replace("${status}", iconInvi))).click();
+    homePagePlatform.refreshUntil($(ELEMENT_CHAT_ICON),visible,1000);
+    $(ELEMENT_CHAT_ICON).find(byClassName(ELEMENT_CHAT_STATUS.replace("${status}", iconInvi))).should(Condition.exist);
+    assertEquals($(ELEMENT_CHAT_ICON).find(byClassName("uiIconStatus")).getCssValue("color"),
                  whiteColor);
-    refresh();
     $(byClassName(ELEMENT_STATUS_CHAT_IN_PROFILE_PAGE.replace("{status}", statusInvi))).should(visible);
     info("restore data");
     info("change status to Online");
     mouseOverAndClick(ELEMENT_CHAT_ICON);
-    $(byXpath(ELEMENT_CHAT_STATUS.replace("${status}", statusOnline))).click();
-    assertEquals($(ELEMENT_CHAT_ICON).find(byClassName(ELEMENT_STATUS_CHAT.replace("{status}", statusOnline.toLowerCase())))
+    $(byClassName(ELEMENT_CHAT_STATUS.replace("${status}", iconOnline))).click();
+    homePagePlatform.refreshUntil($(ELEMENT_CHAT_ICON),visible,1000);
+    assertEquals($(ELEMENT_CHAT_ICON).find(byClassName("uiIconStatus"))
                                      .getCssValue("color"),
                  greenColor);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");

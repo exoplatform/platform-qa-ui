@@ -989,7 +989,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     $(byClassName("uiActivityLoader")).find(byText(username1 + " " + username1))
                                       .parent()
                                       .shouldHave(Condition.text(username1 + " " + username1 + " " + comment));
-    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    homePagePlatform.refreshUntil($(byClassName("uiActivityLoader")).find(byText(username1 + " " + username1)),visible,1000);
     navigationToolbar.goToIntranetNotification();
     intranetNotification.goToAllNotification();
     $(byId("UIIntranetNotificationsPortlet")).find(byText(activity)).should(exist);
@@ -1140,13 +1140,9 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     $(byText(activity)).should(exist);
 
     info("Check notification in view all");
-    for (int i = 0; i <= 100; i++) {
-      navigationToolbar.goToIntranetNotification();
-      if ($(ELEMENT_NOTIFICATION_DROPDOWN).is(visible)) {
-        intranetNotification.goToAllNotification();
-        break;
-      }
-    }
+    homePagePlatform.refreshUntil($(byText(activity)),visible,1000);
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
     $(byText(activity)).parent().parent().parent().find(byText(username2 + " " + username2)).should(exist);
     $(byText(activity)).parent()
                        .parent()
@@ -1231,7 +1227,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     info("check notification in activity viewer");
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).click();
     $(byText(activity)).should(exist);
-    refresh();
+    homePagePlatform.refreshUntil($(byText(activity)),visible,1000);
 
     info("Check in view all");
     navigationToolbar.goToIntranetNotification();
@@ -1554,6 +1550,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
                                     .shouldHave(text(username1 + " " + username1 + " has joined eXo."));
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1 + " " + username1)).parent().click();
     ELEMENT_CONTENT_NAME_PROFILE.find(byText(username1 + " " + username1)).click();
+    homePagePlatform.refreshUntil(ELEMENT_CONTENT_NAME_PROFILE,visible,1000);
     navigationToolbar.goToIntranetNotification();
     intranetNotification.goToAllNotification();
     $(byText(username1 + " " + username1)).parent().shouldHave(text(username1 + " " + username1 + " has joined eXo."));
@@ -2031,7 +2028,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     $(byText(activity)).parent().parent().parent().parent().find(byText(comment1)).should(Condition.exist);
     info("Check comment notification in the View All");
     info("Check in view all");
-    refresh();
+    homePagePlatform.refreshUntil($(byText(activity)),visible,1000);
     navigationToolbar.goToIntranetNotification();
     intranetNotification.goToAllNotification();
     $(byId("UIIntranetNotificationsPortlet")).find(byText(comment1)).should(Condition.exist);
@@ -2269,7 +2266,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     $(byText(activity)).parent().parent().parent().parent().find(byText(comment4)).should(Condition.exist);
 
     info("Check comment notification in the View All");
-    refresh();
+    homePagePlatform.refreshUntil($(byText(activity)),visible,1000);
     navigationToolbar.goToIntranetNotification();
     intranetNotification.goToAllNotification();
     $(byText(activity)).parent().parent().shouldHave(text(username2 + " " + username2 + ", " + username4 + " " + username4
@@ -2480,7 +2477,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     info("Check comment notification in activity Viewer");
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).click();
     $(byText(activity)).parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).parent().shouldHave(text("1"));
-    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    homePagePlatform.refreshUntil($(byText(activity)).parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY),visible,1000);
     navigationToolbar.goToIntranetNotification();
     intranetNotification.goToAllNotification();
     $(byText(activity)).parent().parent().parent().find(byText(username2 + " " + username2)).should(Condition.exist);
@@ -2724,7 +2721,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     info("Check comment notification in activity Viewer");
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).click();
     $(byText(activity)).parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).parent().shouldHave(text("4"));
-    refresh();
+    homePagePlatform.refreshUntil($(byText(activity)),visible,1000);
     navigationToolbar.goToIntranetNotification();
     intranetNotification.goToAllNotification();
     $(byText(activity)).parent().parent().shouldHave(text(username5 + " " + username5 + ", " + username4 + " " + username4
@@ -2965,12 +2962,10 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_ALERT_NOTIFICATION.click();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).parent().parent().shouldHave(text(username3 + " " + username3
-        + " and " + username2 + " " + username2 + " like your activity."));
-    refresh();
-    navigationToolbar.goToIntranetNotification();
-    intranetNotification.goToAllNotification();
+        + " and " + username2 + " " + username2 + " like your activity.")).waitUntil(visible,Configuration.timeout);
+
     $(byText(activity)).parent().parent().shouldHave(text(username3 + " " + username3 + " and " + username2 + " " + username2
-        + " like your activity."));
+        + " like your activity.")).waitUntil(visible,Configuration.timeout);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
@@ -3087,7 +3082,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     manageLogInOut.signIn(username1, password);
     ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_ALERT_NOTIFICATION.click();
-    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username2 + " " + username2))
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText("has mentioned you."))
                                     .parent()
                                     .shouldHave(text(username2 + " " + username2 + " has mentioned you."));
 
@@ -3104,7 +3099,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
                                       .should(exist);
 
     info("Check notification in view all");
-    refresh();
+    homePagePlatform.refreshUntil($(byText(username1+" "+username1)),visible,1000);
     navigationToolbar.goToIntranetNotification();
     intranetNotification.goToAllNotification();
     $(byId("UIIntranetNotificationsPortlet")).find(byText(username1 + " " + username1))
@@ -3212,7 +3207,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     $(byClassName("uiActivityLoader")).find(byText(username1 + " " + username1))
                                       .parent()
                                       .shouldHave(Condition.text(username1 + " " + username1 + " " + comment));
-    refresh();
+    homePagePlatform.refreshUntil($(byText(username1+" "+username1)),visible,1000);
     navigationToolbar.goToIntranetNotification();
     intranetNotification.goToAllNotification();
     $(byId("UIIntranetNotificationsPortlet")).find(byText(activity)).should(exist);
