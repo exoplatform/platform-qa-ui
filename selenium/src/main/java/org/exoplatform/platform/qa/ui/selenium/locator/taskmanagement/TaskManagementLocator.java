@@ -202,6 +202,10 @@ public class TaskManagementLocator {
   public static final SelenideElement ELEMENT_TABLE_PROJECT=$(byClassName("table-project"));
   public static final SelenideElement ELEMENT_ASSIGNEE_TASK=$(byXpath("//*[@id=\"taskManagement\"]/div[3]/div[2]/div/div/div[4]/div[2]/div/span/a[2]"));
   public static final SelenideElement ELEMENT_PRIORITY_TASK= $(byXpath("//*[@id=\"taskManagement\"]/div[3]/div[2]/div/div/div[6]/div[3]/div/span"));
+  public static final SelenideElement ELEMENT_POPUP_ASSIGNEE_COWORKER=$(byClassName("uiContentBox"));
+  public static final SelenideElement ELEMENT_CONTENT_ASSIGNEE_COWORKER=$(byClassName("contBlock"));
+
+
 
 
   // Add labels form

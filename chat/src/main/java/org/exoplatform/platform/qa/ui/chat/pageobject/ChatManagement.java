@@ -25,16 +25,16 @@ public class ChatManagement {
   public void sendMessageAssignTaskInRoom(String room, String task, String... user){
     ELEMENT_CONTACT_LIST.find(byText(room)).waitUntil(Condition.visible,Configuration.timeout).click();
     if(user.length>0){
-    ELEMENT_CHAT_MESSAGE_INPUT.setValue("++"+task+" @"+user[0]);
-    $(byClassName("atwho-view")).waitUntil(Condition.visible,Configuration.timeout);
+      ELEMENT_CHAT_MESSAGE_INPUT.setValue("++"+task+" @"+user[0]);
+      $(byClassName("atwho-view")).waitUntil(Condition.visible,Configuration.timeout);
     }
     else{
       ELEMENT_CHAT_MESSAGE_INPUT.setValue("++"+task);
     }
     ELEMENT_CHAT_MESSAGE_INPUT.pressEnter();
     ELEMENT_CHAT_LIST_MSG.find(byText(task)).should(Condition.exist);
-
   }
+
 
   public void sendMessageTaskPriority(String room, String task, String priority){
     ELEMENT_CONTACT_LIST.find(byText(room)).waitUntil(Condition.visible,Configuration.timeout).click();
