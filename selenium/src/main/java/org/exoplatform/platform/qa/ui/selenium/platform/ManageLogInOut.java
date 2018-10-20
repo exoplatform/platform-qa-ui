@@ -111,8 +111,8 @@ public class ManageLogInOut {
    */
   public void signInCas(String username, String password) {
     testBase.getExoWebDriver().getWebDriver();
-    $(ELEMENT_INPUT_USERNAME_CAS).setValue(username);
-    $(ELEMENT_INPUT_PASSWORD_CAS).setValue(password);
+    $(ELEMENT_INPUT_USERNAME).setValue(username);
+    $(ELEMENT_INPUT_PASSWORD).setValue(password);
     ELEMENT_SIGN_IN_BUTTON_CAS.click();
 
 

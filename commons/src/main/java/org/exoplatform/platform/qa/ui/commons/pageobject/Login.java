@@ -22,6 +22,8 @@ package org.exoplatform.platform.qa.ui.commons.pageobject;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_PASSWORD;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME;
 
 import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.core.PLFData;
@@ -60,8 +62,8 @@ public class Login {
    * @param password the password associated with the user
    */
   public Login signIn(final String user, final String password) {
-    $(byId("username")).setValue(user);
-    $(byId("password")).setValue(password);
+    $(ELEMENT_INPUT_USERNAME).setValue(user);
+    $(ELEMENT_INPUT_PASSWORD).setValue(password);
     $(byClassName("button")).click();
 
     return this;
