@@ -108,6 +108,7 @@ public class SOCNotificationsEditActivityTestIT extends Base {
         navigationToolbar.goToManageCommunity();
         addUsers.deleteUser(username1);
     }
+
     @Test
     public void test02_DisplayEditCommentOnsiteNotification() {
 
@@ -226,5 +227,75 @@ public class SOCNotificationsEditActivityTestIT extends Base {
         navigationToolbar.goToManageCommunity();
         addUsers.deleteUser(username1);
 
+    }
+    @Test
+    public void test06_DisplayOnsiteNotificationForEveryActivityEdited() {
+
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@test.com";
+        String password = "123456";
+        String activity1 = "activity1" + getRandomNumber();
+        String activity2 = "activity2" + getRandomNumber();
+        String newactivity = "newactivity" + getRandomString();
+        String newactivity2 = "newactivity2" + getRandomString();
+        String comment1 = "comment1" + getRandomNumber();
+        String comment2 = "comment2" + getRandomNumber();
+        info("Add user");
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(username1, password, email1, username1, username1);
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(username1);
+        homePagePlatform.goToHomePage();
+        activityStream.addActivity(activity1,"");
+        activityStream.addActivity(activity2,"");
+        manageLogInOut.signIn(username1, password);
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(username,username+" "+username);
+        refresh();
+        homePagePlatform.goToHomePage();
+        activityStream.commentActivity(activity1, comment1);
+        homePagePlatform.goToHomePage();
+        activityStream.commentActivity(activity2,comment2);
+        manageLogInOut.signIn(username, PASS_ROOT);
+        activityStream.editActivity(activity1,newactivity);
+        activityStream.editActivity(activity2,newactivity2);
+        manageLogInOut.signIn(username1,password);
+        navigationToolbar.goToIntranetNotification();
+        $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(DATA_NAME_ROOT)).parent().shouldHave(Condition.text(DATA_NAME_ROOT+" has edited his activity."));
+        manageLogInOut.signIn(username, PASS_ROOT);
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+    }
+    @Test
+    public void test07_CheckOnsiteNotificationEditActivityValueByDefault() {
+
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@test.com";
+        String password = "123456";
+        info("Add user");
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(username1, password, email1, username1, username1);
+        manageLogInOut.signIn(username1, password);
+        navigationToolbar.goToMyNotifications();
+        myNotificationsSetting.verifyNotificationDefault(Edit_Activity);
+        manageLogInOut.signIn(username, PASS_ROOT);
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+    }
+    @Test
+    public void test08_CheckOnsiteNotificationEditCommentValueByDefault() {
+
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@test.com";
+        String password = "123456";
+        info("Add user");
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(username1, password, email1, username1, username1);
+        manageLogInOut.signIn(username1, password);
+        navigationToolbar.goToMyNotifications();
+        myNotificationsSetting.verifyNotificationDefault(Edit_Comment);
+        manageLogInOut.signIn(username, PASS_ROOT);
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
     }
 }

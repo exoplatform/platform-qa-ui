@@ -41,8 +41,11 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.E
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_ADD_NEW_PORTAL_POPUP_SAVE_BTN;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACES_LIST;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream.activitiesFormat.*;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
+import static org.exoplatform.platform.qa.ui.social.pageobject.NotificationsAdminSeting.notificationType.Edit_Activity;
+import static org.junit.Assert.assertEquals;
 
 @Tag("")
 @Tag("social")
@@ -432,5 +435,107 @@ public class SOCActivityEditTestIT extends Base {
         navigationToolbar.goToManageCommunity();
         addUsers.deleteUser(usertest);
 }
+    @Test
+    public void test20_CheckEditActivityWithFormattingTextBold() {
 
+        String activity = "activity" + getRandomNumber();
+        String newActivity="newActivity"+getRandomNumber();
+        info("Add user");
+        activityStream.addFormattingText(activity,Add_FormattingBOLD);
+        activityStream.editFormatedActivity(activity,newActivity);
+        assertEquals(Integer.parseInt($(byText(activity+newActivity)).getCssValue("font-weight")),700);
+        activityStream.deleteFormatedActivity(activity+newActivity);
+
+    }
+    @Test
+    public void test21_EditActivityWithLink() {
+
+        // Check when this feature will be done
+
+        String activity1 = "activity1" + getRandomNumber();
+        String newActivity = "newActivity" + getRandomNumber();
+        activityStream.addActivity(activity1, "https://www.google.com/");
+        activityStream.editActivity(activity1, newActivity);
+        $(byText(activity1 + newActivity)).waitUntil(Condition.visible, Configuration.timeout);
+        activityStream.deleteactivity(activity1 + newActivity);
+
+
+
+    }
+    @Test
+    public void test22_CheckEditActivityWithFormattingTextItalic() {
+
+        String activity = "activity" + getRandomNumber();
+        String newActivity="newActivity"+getRandomNumber();
+        info("Add user");
+        activityStream.addFormattingText(activity,Add_FormattingITALIC);
+        activityStream.editFormatedActivity(activity,newActivity);
+        assertEquals(($(byText(activity+newActivity)).getCssValue("font-style")),"italic");
+        activityStream.deleteFormatedActivity(activity+newActivity);
+
+    }
+    @Test
+    public void test24_CheckEditActivityWithFormattingTextNumbredList() {
+
+        // Check when this feature will be done
+
+        String activity = "activity" + getRandomNumber();
+        String newActivity="newActivity"+getRandomNumber();
+        info("Add user");
+        activityStream.addFormattingText(activity,Add_Formtting_numbred_List);
+        activityStream.editFormatedActivity(activity,newActivity);
+        assertEquals($(byText(activity+newActivity)).getCssValue("list-style-position"),"inside");
+        activityStream.deleteFormatedActivity(activity+newActivity);
+
+    }
+    @Test
+    public void test25_CheckEditActivityWithFormattingTextBulledList() {
+// Check when this feature will be done
+        String activity = "activity" + getRandomNumber();
+        String newActivity="newActivity"+getRandomNumber();
+        info("Add user");
+        activityStream.addFormattingText(activity,Add_Formtting_Bulled_List);
+        activityStream.editFormatedActivity(activity,newActivity);
+        assertEquals($(byText(activity+newActivity)).getCssValue("list-style-type"),"decimal");
+        activityStream.deleteFormatedActivity(activity+newActivity);
+
+    }
+    @Test
+    public void test26_CheckEditActivityWithFormattingTextBlockquote() {
+// Check when this feature will be done
+        String activity = "activity" + getRandomNumber();
+        String newActivity="newActivity"+getRandomNumber();
+        info("Add user");
+        activityStream.addFormattingText(activity,Add_FormattingQuote);
+        activityStream.editFormatedActivity(activity,newActivity);
+        assertEquals($(byText(activity+newActivity)).getCssValue("display"),"block");
+        activityStream.deleteFormatedActivity(activity+newActivity);
+
+    }
+    @Test
+    public void test27_CheckEditActivityWithFormattingTextRemoveFormat() {
+        // Check when this feature will be done
+
+        String activity = "activity" + getRandomNumber();
+        String newActivity="newActivity"+getRandomNumber();
+        info("Add user");
+        activityStream.addFormattingText(activity,Add_FormattingBOLD);
+        activityStream.addFormattingText(activity,Add_FormttingRemoveFormat);
+        activityStream.editFormatedActivity(activity,newActivity);
+        assertEquals(($(byText(activity+newActivity)).getCssValue("font-style")),"normal");
+        activityStream.deleteFormatedActivity(activity+newActivity);
+
+    }
+
+    @Test
+    public void test28_CheckActivities_EnabledBydefault() {
+
+        String activity1 = "activity1" + getRandomNumber();
+        activityStream.addActivity(activity1, "");
+        activityStream.CheckEditActivityBydefault(activity1, true);
+        manageLogInOut.signIn(username, PASS_ROOT);
+        activityStream.deleteactivity(activity1);
+
+
+    }
 }

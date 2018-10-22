@@ -23,14 +23,20 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_NAME_ROOT;
 import static org.exoplatform.platform.qa.ui.core.PLFData.PASS_ROOT;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_COMMENT_BOX;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_ACTIVITY_STREAM_CONTAINER;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACES_LIST;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream.activitiesFormat.Add_FormattingBOLD;
+import static org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream.activitiesFormat.Add_FormattingITALIC;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
+import static org.junit.Assert.assertEquals;
 
 public class SOCReplyEditTestIT  extends Base {
     ActivityStream activityStream;
@@ -420,4 +426,63 @@ public class SOCReplyEditTestIT  extends Base {
         activityStream.removeCharactersComment(reply1,reply1.length(),true);
         activityStream.deleteactivity(activity1);
     }
+   /* @Test
+    public void test21_CheckOrderOfREplyWhenEditReply() {
+
+
+        String activity1 = "activity1" + getRandomNumber();
+        String reply1 = "reply1" + getRandomNumber();
+        String reply2 = "reply2" + getRandomNumber();
+        String reply3 = "reply3" + getRandomNumber();
+        String newreply = "newreply" + getRandomNumber();
+        String comment1 = "comment1" + getRandomNumber();
+        String comment2 = "comment2" + getRandomNumber();
+        String comment3 = "comment3" + getRandomNumber();
+        activityStream.addActivity(activity1, "");
+        activityStream.commentActivity(activity1, comment1);
+        activityStream.commentActivity(activity1, comment2);
+        activityStream.commentActivity(activity1, comment3);
+        activityStream.replyToComment(comment1,reply1,DATA_NAME_ROOT);
+        activityStream.replyToComment(comment2,reply2,DATA_NAME_ROOT);
+        activityStream.replyToComment(comment3,reply3,DATA_NAME_ROOT);
+        activityStream.editComment(reply1, newreply);
+        activityStream.editComment(reply2, newreply);
+        activityStream.editComment(reply3, newreply);
+        refresh();
+       // ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_COMMENT_BOX).get(0).find(byText(comment1)).should(Condition.exist);
+       // ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_COMMENT_BOX).get(0).find(byText(comment2)).should(Condition.exist);
+       // ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_COMMENT_BOX).get(1).find(byText(comment3)).should(Condition.exist);
+
+    } */
+
+    @Test
+    public void test15_CheckEditReplyWithFormattingTextBold(){
+        String activity1 = "activity" + getRandomNumber();
+        String comment1 = "comment" + getRandomNumber();
+        String reply1 = "reply1" + getRandomNumber();
+        String newcomment = "newcomment" + getRandomNumber();
+        activityStream.addActivity(activity1,"");
+        activityStream.commentActivity(activity1,comment1);
+        activityStream.addFormattedTextInReply(comment1, reply1,DATA_NAME_ROOT, Add_FormattingITALIC);
+        activityStream.editFormattingComment(comment1,newcomment);
+        assertEquals(Integer.parseInt($(byText(newcomment+comment1)).getCssValue("font-weight")),700);
+        activityStream.deleteactivity(activity1);
+    }
+    @Test
+    public void test16_CheckReply_EnabledBydefault() {
+
+        String activity1 = "activity1" + getRandomNumber();
+        String comment1 = "comment" + getRandomNumber();
+        String reply1 = "reply1" + getRandomNumber();
+        activityStream.addActivity(activity1,"");
+        activityStream.commentActivity(activity1, comment1);
+        activityStream.replyToComment(comment1,reply1,DATA_NAME_ROOT);
+        activityStream.CheckEditCommentbyDefault(reply1, true);
+        manageLogInOut.signIn(username, PASS_ROOT);
+        activityStream.deleteactivity(activity1);
+        
+
+
+    }
+
 }

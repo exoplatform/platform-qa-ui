@@ -5,12 +5,20 @@ import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_ADD_YOUR_COMMENTLABEL;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_STREAM_CONTAINER;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_STREAM_CONTAINER;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_COMMENTBOX;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_COMMENT_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_CONTAINER_ACTIVITY;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_ADD_EDIT_EVENT_NAME;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_BUTTON_ON_MOBILE_COMMENT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_BUTTON_ON_SITE_COMMENT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_DELETE_COMMENT_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
@@ -547,9 +555,64 @@ public class ActivityStream {
     info("The activity is shared success");
 
   }
+
+  public void addFormattingText(String text, activitiesFormat type) {
+    info("-- Adding formating Text--");
+    SelenideElement frame=$(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible,Configuration.timeout);
+    switchTo().frame(frame);
+    ELEMENT_INPUT_ACTIVITY.click();
+    switchTo().defaultContent();
+    switch (type) {
+      case Add_FormattingBOLD:
+        info("check bold on toolbar");
+        $(ELEMENT_BUTTON_BOLD_ICON).click();
+        break;
+      case Add_FormattingITALIC:
+        info("check italic on toolbar");
+        $(ELEMENT_BUTTON_ITALIC_ICON).click();
+        break;
+      case Add_FormattingQuote:
+        info("check quote on toolbar");
+        $(ELEMENT_BLOCKQUOTE_ICON).click();
+        break;
+      case Add_Formtting_numbred_List:
+        info("check quote on toolbar");
+        $(ELEMENT_BULLETEDLIST_ICON).click();
+        break;
+      case Add_FormttingRemoveFormat:
+        info("check quote on toolbar");
+        $(ELEMENT_BUTTON_REMOVE_FORMAT_ICON).click();
+        break;
+      case Add_Formtting_Bulled_List:
+        info("check quote on toolbar");
+        break;
+
+    }
+    switchTo().frame(frame);
+    ELEMENT_INPUT_ACTIVITY.sendKeys(text);
+    switchTo().defaultContent();
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.disabled,Configuration.timeout);
+
+  }
+
   public void editActivity(String text, String newtext) {
     info("-- Editing an activity--");
     String idActivity = $(byText(text)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+    $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).click();
+    $(byId(ELEMENT_EDIT_ACTIVITY_LINK.replace("{id}", idActivity))).click();
+    SelenideElement frame = $(byAttribute("title", "Rich Text Editor, composerEditInput" + idActivity)).waitUntil(Condition.visible, Configuration.timeout);
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    switchTo().frame(frame);
+    ELEMENT_INPUT_ACTIVITY.click();
+    ELEMENT_INPUT_ACTIVITY.sendKeys(newtext);
+    switchTo().defaultContent();
+    $(byId(ELEMENT_BUTTON_UPDATE_ACTIVITY.replace("{id}", idActivity))).waitUntil(Condition.enabled, Configuration.timeout).click();
+    $(byId(ELEMENT_BUTTON_UPDATE_ACTIVITY.replace("{id}", idActivity))).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+  }
+  public void editFormatedActivity(String text, String newtext) {
+    info("-- Editing an activity--");
+    String idActivity = $(byText(text)).parent().parent().parent().getAttribute("id").split("ActivityContextBox")[1];
     $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).click();
     $(byId(ELEMENT_EDIT_ACTIVITY_LINK.replace("{id}", idActivity))).click();
     SelenideElement frame = $(byAttribute("title", "Rich Text Editor, composerEditInput" + idActivity)).waitUntil(Condition.visible, Configuration.timeout);
@@ -600,11 +663,32 @@ public class ActivityStream {
     $(byId(ELEMENT_BUTTON_UPDATE_COMMENT.replace("{id}", idComment))).waitUntil(Condition.enabled, Configuration.timeout).click();
     $(byId(ELEMENT_BUTTON_UPDATE_COMMENT.replace("{id}", idComment))).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
   }
+  public void editFormattingComment(String text, String newtext) {
+    info("-- Editing a Comment--");
+    String idComment = $(byText(text)).parent().parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
+    $(byId(ELEMENT_COMMENT_DROPDOWN.replace("{id}", idComment))).click();
+    $(byId(ELEMENT_EDIT_COMMENT_LINK.replace("{id}", idComment))).click();
+    SelenideElement frame = $(byAttribute("title","Rich Text Editor, composerEditCommentcomment"+idComment));
+    switchTo().frame(frame);
+    $(byXpath("/html/body")).sendKeys(newtext);
+    switchTo().defaultContent();
+    $(byId(ELEMENT_BUTTON_UPDATE_COMMENT.replace("{id}", idComment))).waitUntil(Condition.enabled, Configuration.timeout).click();
+    $(byId(ELEMENT_BUTTON_UPDATE_COMMENT.replace("{id}", idComment))).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+  }
   public void CheckEditActivity(String text, Boolean edit){
     String idActivity = $(byText(text)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
     if (edit) {
     $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).click();
     $(byId(ELEMENT_EDIT_ACTIVITY_LINK.replace("{id}", idActivity))).waitUntil(Condition.visible,Configuration.timeout);}
+    else {
+      $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    }
+  }
+  public void CheckEditActivityBydefault(String text, Boolean edit){
+    String idActivity = $(byText(text)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+    if (edit) {
+      $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).click();
+      $(byId(ELEMENT_EDIT_ACTIVITY_LINK.replace("{id}", idActivity))).waitUntil(Condition.enabled,Configuration.timeout);}
     else {
       $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     }
@@ -624,6 +708,14 @@ public class ActivityStream {
     if (edit) {
       $(byId(ELEMENT_COMMENT_DROPDOWN.replace("{id}", idComment))).click();
       $(byId(ELEMENT_EDIT_COMMENT_LINK.replace("{id}", idComment))).waitUntil(Condition.visible,Configuration.timeout);}
+    else {
+      $(byId(ELEMENT_COMMENT_DROPDOWN.replace("{id}", idComment))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    }}
+  public void CheckEditCommentbyDefault(String text, Boolean edit){
+    String idComment = $(byText(text)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
+    if (edit) {
+      $(byId(ELEMENT_COMMENT_DROPDOWN.replace("{id}", idComment))).click();
+      $(byId(ELEMENT_EDIT_COMMENT_LINK.replace("{id}", idComment))).waitUntil(Condition.enabled,Configuration.timeout);}
     else {
       $(byId(ELEMENT_COMMENT_DROPDOWN.replace("{id}", idComment))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     }}
@@ -1190,6 +1282,100 @@ public void removeCharactersActivity(String text ,int nbreCh, Boolean alltext) {
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     $(byText(comment)).should(Condition.visible);
   }
+  public void addFormattedTextInComment(String activity, String comment,activitiesFormat type){
+    String id = $(byText(activity)).parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .getAttribute("id")
+            .split("UIActivityLoader")[1];
+    $(byText(activity)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
+    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
+    switch (type) {
+      case Add_FormattingBOLD:
+        info("check bold on toolbar");
+        $(byText(activity)).parent().parent().find(ELEMENT_BUTTON_BOLD_ICON).click();
+        break;
+      case Add_FormattingITALIC:
+        info("check italic on toolbar");
+        $(ELEMENT_BUTTON_ITALIC_ICON).click();
+        break;
+      case Add_FormattingQuote:
+        info("check quote on toolbar");
+        $(ELEMENT_BLOCKQUOTE_ICON).click();
+        break;
+      case Add_Formtting_numbred_List:
+        info("check quote on toolbar");
+        $(ELEMENT_NUMBERED_LIST_ICON).click();
+        break;
+      case Add_Formtting_Bulled_List:
+        info("check quote on toolbar");
+        $(ELEMENT_BULLETEDLIST_ICON).click();
+        break;
+    }
+    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
+    // click on the button comment
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
+
+  }
+  public void addFormattedTextInReply(String comment, String reply, String user,activitiesFormat type){
+    String id = $(byText(comment)).parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .getAttribute("id")
+            .split("CommentBlockBound")[1];
+    String idBlocComment = $(byText(comment)).parent()
+            .parent()
+            .parent()
+            .find(byText(comment))
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .getAttribute("id")
+            .split("commentContainercomment")[1];
+    // Get id Comment button
+    executeJavaScript("window.scrollBy(0,-250)");
+    // Click on reply link
+    $(byId(ELEMENT_lABEL_REPLY_COMMENT.replace("{id}", idBlocComment))).click();
+    // Insert the reply
+    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
+    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + reply + "\")", "");
+    // click on the button comment
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
+    $(byText(reply)).should(Condition.exist);
+    $(byText(reply)).parent().parent().find(byText(user)).should(Condition.exist);
+    switch (type) {
+      case Add_FormattingBOLD:
+        info("check bold on toolbar");
+        $(ELEMENT_BUTTON_BOLD_ICON).click();
+        break;
+      case Add_FormattingITALIC:
+        info("check italic on toolbar");
+        $(ELEMENT_BUTTON_ITALIC_ICON).click();
+        break;
+      case Add_FormattingQuote:
+        info("check quote on toolbar");
+        $(ELEMENT_BLOCKQUOTE_ICON).click();
+        break;
+      case Add_Formtting_numbred_List:
+        info("check quote on toolbar");
+        $(ELEMENT_NUMBERED_LIST_ICON).click();
+        break;
+      case Add_Formtting_Bulled_List:
+        info("check quote on toolbar");
+        $(ELEMENT_BULLETEDLIST_ICON).click();
+        break;
+    }
+
+    info("Verify that the reply is added");
+  }
 
   public void commentWikiActivity(String wikiactivity, String comment) {
     // get the id of wikiactivity
@@ -1244,6 +1430,16 @@ public void removeCharactersActivity(String text ,int nbreCh, Boolean alltext) {
     $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}",idActivity))).click();
     ELEMENT_DELETE_POPUP_OK.click();
     ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+  }
+  public void deleteFormatedActivity(String text) {
+    // get the id of activity created
+    info("-- Editing an activity--");
+    String idActivity = $(byText(text)).parent().parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+    $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).click();
+    $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}",idActivity))).click();
+    ELEMENT_DELETE_POPUP_OK.click();
+    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+
   }
 
   public void deleteActivityWiki(String activity) {
@@ -1483,5 +1679,8 @@ public void removeCharactersActivity(String text ,int nbreCh, Boolean alltext) {
 
   public enum changeTypes {
     No_Value, Has_One_Value;
+  }
+  public enum activitiesFormat {
+    Add_FormattingBOLD,Add_FormattingITALIC,Add_FormattingQuote,Add_Formtting_numbred_List,Add_Formtting_Bulled_List,Add_FormttingRemoveFormat;
   }
 }

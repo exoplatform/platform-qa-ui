@@ -24,16 +24,20 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
-import static org.exoplatform.platform.qa.ui.core.PLFData.PASS_ROOT;
-import static org.exoplatform.platform.qa.ui.core.PLFData.password;
-import static org.exoplatform.platform.qa.ui.core.PLFData.username;
+import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_INPUT_TEXT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_COMMENT_BOX;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_COMMENT_INPUT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_ACTIVITY_STREAM_CONTAINER;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_BOX_ACTIVITY;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ACTIVITY_COMMENT_BOX;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACES_LIST;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream.activitiesFormat.*;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
+import static org.junit.Assert.assertEquals;
 
 public class SOCCommentEditTestIT extends Base {
 
@@ -88,6 +92,7 @@ public class SOCCommentEditTestIT extends Base {
         }
         manageLogInOut.signInCas(username, password);
     }
+
     @Test
     public void test01_EditCommentbyadmin() {
         String activity1 = "activity1" + getRandomNumber();
@@ -222,6 +227,7 @@ public class SOCCommentEditTestIT extends Base {
         $(byText(activity1)).parent().parent().parent().parent().find(byText(newComment + comment1)).waitUntil(Condition.visible, Configuration.timeout);
         activityStream.deleteactivity(activity1);
     }
+
     @Test
     public void test09_ckeckEditCommentInSpaceByManager() {
 
@@ -253,6 +259,7 @@ public class SOCCommentEditTestIT extends Base {
         spaceManagement.deleteSpace(space, false);
 
     }
+
     @Test
     public void test10_ckeckEditCommentInSpaceByUser() {
 
@@ -305,6 +312,7 @@ public class SOCCommentEditTestIT extends Base {
         activityStream.gotoCommentViewer(comment1);
         activityStream.deleteactivity(activity1);
     }
+
     @Test
     public void test12_checkEditCommentInDefaultSkin() {
 
@@ -320,24 +328,27 @@ public class SOCCommentEditTestIT extends Base {
         activityStream.deleteactivity(activity1);
 
     }
+
     @Test
     public void test13_CheckCommentEditedWhenRemoveCharacters() {
         String activity1 = "activity1" + getRandomNumber();
         String comment1 = "comment1" + getRandomNumber();
         activityStream.addActivity(activity1, "");
         activityStream.commentActivity(activity1, comment1);
-        activityStream.removeCharactersComment(comment1,3,false);
+        activityStream.removeCharactersComment(comment1, 3, false);
         activityStream.deleteactivity(activity1);
     }
+
     @Test
     public void test14_CheckCommentEditedWhenRemoveAllcomment() {
         String activity1 = "activity1" + getRandomNumber();
         String comment1 = "comment1" + getRandomNumber();
         activityStream.addActivity(activity1, "");
         activityStream.commentActivity(activity1, comment1);
-        activityStream.removeCharactersComment(comment1,comment1.length(),true);
+        activityStream.removeCharactersComment(comment1, comment1.length(), true);
         activityStream.deleteactivity(activity1);
     }
+
     @Test
     public void test15_CheckOrderOfActivityWhenEditComment() {
 
@@ -358,6 +369,7 @@ public class SOCCommentEditTestIT extends Base {
 
     }
 
+
     @Test
     public void test19_CheckMentionUserWhenEditComment() {
 
@@ -372,27 +384,141 @@ public class SOCCommentEditTestIT extends Base {
         navigationToolbar.goToAddUser();
         addUsers.addUser(usertest, password, email1, usertest, usertest);
         homePagePlatform.goToHomePage();
-        activityStream.addCommentWithMentionUser(activity1,usertest,comment1);
-        activityStream.editActivity(activity1,newactivity);
-        $(byText(usertest+" "+usertest+newactivity)).waitUntil(Condition.visible,Configuration.timeout);
+        activityStream.addCommentWithMentionUser(activity1, usertest, comment1);
+        activityStream.editActivity(activity1, newactivity);
+        $(byText(usertest + " " + usertest + newactivity)).waitUntil(Condition.visible, Configuration.timeout);
     }
+
     @Test
-    public void test20_CheckMentionUserWhenEditComment() {
+    public void test20_CheckMentionUserWhenEditComment() throws Exception {
 
         String usertest = "usernamea" + getRandomString();
         String email1 = usertest + "@test.com";
         String password = "123456";
         String activity1 = "activity1" + getRandomNumber();
         String comment1 = "comment" + getRandomNumber();
-        String newacomment = "newacomment" + getRandomNumber();
+        String newcomment = "newacomment" + getRandomNumber();
         info("Add user");
         navigationToolbar.goToAddUser();
         addUsers.addUser(usertest, password, email1, usertest, usertest);
         homePagePlatform.goToHomePage();
-        activityStream.addCommentWithMentionUser(activity1,usertest,comment1);
-        activityStream.mentionUserActivity(usertest,activity1);
-        activityStream.editComment(comment1,newacomment);
-        $(byText(usertest+" "+usertest+comment1+newacomment)).waitUntil(Condition.visible,Configuration.timeout);
+        activityStream.addActivity(activity1, "");
+        activityStream.addCommentWithMentionUser(activity1, usertest, comment1);
+        activityStream.editComment(comment1, newcomment);
+        $(byText(comment1 + newcomment)).shouldHave(Condition.text(usertest + " " + usertest + " " + comment1 + newcomment));
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(usertest);
+    }
+   /* @Test
+    public void test21_CheckOrderOfCommentWhenEditComment() {
+
+        String activity1 = "activity1" + getRandomNumber();
+
+        String comment1 = "comment1" + getRandomNumber();
+        String comment2 = "comment2" + getRandomNumber();
+        String comment3 = "comment3" + getRandomNumber();
+        String newComment = "newComment" + getRandomNumber();
+        activityStream.addActivity(activity1, "");
+        activityStream.commentActivity(activity1, comment1);
+        activityStream.commentActivity(activity1, comment2);
+        activityStream.commentActivity(activity1, comment3);
+        activityStream.editComment(comment1, newComment);
+        activityStream.editComment(comment2, newComment);
+        activityStream.editComment(comment3, newComment);
+        refresh();
+        ELEMENT_ACTIVITY_STREAM_CONTAINER.parent().findAll(ELEMENT_COMMENT_BOX).get(0).find(byText(comment1)).should(Condition.exist);
+        ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_COMMENT_BOX).get(1).find(byText(comment2)).should(Condition.exist);
+        ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_COMMENT_BOX).get(2).find(byText(comment3)).should(Condition.exist);
+*/
+
+    @Test
+    public void test21_CheckEditCommentWithFormattingTextBold(){
+        String activity = "activity" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+        String newcomment = "newcomment" + getRandomNumber();
+        activityStream.addActivity(activity,"");
+        activityStream.addFormattedTextInComment(activity,comment,Add_FormattingBOLD);
+        activityStream.editFormattingComment(comment,newcomment);
+        assertEquals(Integer.parseInt($(byText(newcomment+comment)).getCssValue("font-weight")),700);
+        activityStream.deleteactivity(activity);
+    }
+    @Test
+    public void test22_CheckEditCommentWithFormattingTextItalic(){
+        // Check when this feature will be done
+        String activity = "activity" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+        String newcomment = "newcomment" + getRandomNumber();
+        activityStream.addActivity(activity,"");
+        activityStream.addFormattedTextInComment(activity,comment,Add_FormattingITALIC);
+        activityStream.editFormattingComment(comment,newcomment);
+        assertEquals(($(byText(newcomment+comment)).getCssValue("font-style")),"italic");
+        activityStream.deleteactivity(activity);
+    }
+    @Test
+    public void test23_CheckEditCommentWithFormattingNumbredList(){
+
+        // Check when this feature will be done
+        String activity = "activity" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+        String newcomment = "newcomment" + getRandomNumber();
+        activityStream.addActivity(activity,"");
+        activityStream.addFormattedTextInComment(activity,comment,Add_Formtting_numbred_List);
+        activityStream.editFormattingComment(comment,newcomment);
+        assertEquals($(byText(newcomment+comment)).getCssValue("list-style-position"),"inside");
+        activityStream.deleteactivity(activity);
+    }
+    @Test
+    public void test24_CheckEditCommentWithFormattingBulledList(){
+
+        // Check when this feature will be done
+        String activity = "activity" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+        String newcomment = "newcomment" + getRandomNumber();
+        activityStream.addActivity(activity,"");
+        activityStream.addFormattedTextInComment(activity,comment,Add_Formtting_numbred_List);
+        activityStream.editFormattingComment(comment,newcomment);
+        assertEquals($(byText(newcomment+comment)).getCssValue("list-style-type"),"decimal");
+        activityStream.deleteactivity(activity);
     }
 
+    @Test
+    public void test25_CheckEditCommentWithFormattingBlockquote(){
+
+        // Check when this feature will be done
+        String activity = "activity" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+        String newcomment = "newcomment" + getRandomNumber();
+        activityStream.addActivity(activity,"");
+        activityStream.addFormattedTextInComment(activity,comment,Add_FormattingQuote);
+        activityStream.editFormattingComment(comment,newcomment);
+        assertEquals($(byText(newcomment+comment)).getCssValue("list-style-type"),"decimal");
+        activityStream.deleteactivity(activity);
+    }
+    @Test
+    public void test26_CheckEditCommentWithFormattingRemoveFormat(){
+
+        // Check when this feature will be done
+        String activity = "activity" + getRandomNumber();
+        String comment = "comment" + getRandomNumber();
+        String newcomment = "newcomment" + getRandomNumber();
+        activityStream.addActivity(activity,"");
+        activityStream.addFormattedTextInComment(activity,comment,Add_FormattingBOLD);
+        activityStream.addFormattedTextInComment(activity,comment,Add_FormttingRemoveFormat);
+        activityStream.editFormattingComment(comment,newcomment);
+        assertEquals(($(byText(newcomment+comment)).getCssValue("font-style")),"normal");
+        activityStream.deleteactivity(activity);
+    }
+    @Test
+    public void test27_CheckComment_EnabledBydefault() {
+
+        String activity1 = "activity1" + getRandomNumber();
+        String comment1 = "comment" + getRandomNumber();
+        activityStream.addActivity(activity1,"");
+        activityStream.commentActivity(activity1, comment1);
+        activityStream.CheckEditCommentbyDefault(comment1, true);
+        manageLogInOut.signIn(username, PASS_ROOT);
+        activityStream.deleteactivity(activity1);
+
+
+    }
 }

@@ -728,6 +728,12 @@ public final class ActivityStreamLocator {
     public static final String ELEMENT_BUTTON_CANCEL_EDITCOMMENT="DeleteEditCommentButtoncomment{id}";
     public static final String ELEMENT_ACTIVITY_TIME="EditActivityTime{id}";
     public static final String ELEMENT_COMMENT_TIME="EditCommentTimecomment{id}";
+    public static final By ELEMENT_BUTTON_BOLD_ICON=byClassName("cke_button__bold_icon");
+    public static final By ELEMENT_BUTTON_ITALIC_ICON=byClassName("cke_button__italic_icon");
+    public static final By ELEMENT_BUTTON_REMOVE_FORMAT_ICON=byClassName("cke_button__removeformat_icon");
+    public static final By ELEMENT_BLOCKQUOTE_ICON=byClassName("cke_button__blockquote_icon");
+    public static final By ELEMENT_BULLETEDLIST_ICON=byClassName("cke_button__bulletedlist_icon");
+    public static final By ELEMENT_NUMBERED_LIST_ICON=byClassName("cke_button__numberedlist_icon");
 
 
 
