@@ -614,9 +614,9 @@ public class IntranetNotification {
    */
   public void checkOrderNotifications(int num, String status, String fullName) {
     info("Check on the notificaiton has index as:" + num);
-    evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_STATUS_ORDER.replace("$num", String.valueOf(num))
+    $(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS_ORDER.replace("$num", String.valueOf(num))
                                                                        .replace("$status", status)
-                                                                       .replace("$fullName", fullName));
+                                                                       .replace("$fullName", fullName))).waitUntil(Condition.visible,Configuration.timeout);
 
   }
 

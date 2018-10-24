@@ -13,7 +13,9 @@ import org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
+
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
@@ -175,5 +177,100 @@ public class SOCNotificationIntranetNotificationListTestIT extends Base {
         addUsers.deleteUser(username1);
         addUsers.deleteUser(username2);
         addUsers.deleteUser(username3);
+    }
+
+    /**
+     * <li> Case ID:125121.</li>
+     * <li> Test Case Name: Check order of the notifications.</li>
+     * <li> Pre-Condition: A user has received several notifications (from the oldest to the newest)
+     * 1. A like notification2. A comment notification3. A connection request</li>
+     * <li> Post-Condition: </li>
+     */
+    @Test
+    public void test05_CheckOrderOfTheNotifications() {
+        info("Test 5: Check order of the notifications");
+		/*Step Number: 1
+		*Step Name:
+		*Step Description:
+			- Login
+			- Click the notification icon
+			- Check the order of the notifications
+		*Input Data:
+
+		*Expected Outcome:
+			- The list is revealed
+			- The notifications are ordered from the newest at the top to the latest at the bottom (connection request, comment, like)*/
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String username2 = "usernameb" + getRandomString();
+        String email2 = username2 + "@gmail.com";
+        String username3 = "usernamec" + getRandomString();
+        String email3 = username3 + "@gmail.com";
+        String password = "123456";
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        UserAddManagement.addUser(username1, password, email1, username1, username1);
+        UserAddManagement.addUser(username2, password, email2, username2, username2);
+        UserAddManagement.addUser(username3, password, email3, username3, username3);
+        manageLogInOut.signIn(username1, password);
+
+        info("goto My notification");
+        navigationToolbar.goToMyNotifications();
+        MyNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.AS_Comment_intranet);
+        MyNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.AS_Like_intranet);
+
+        info("User A sent a connection request to User B");
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(username2);
+
+        info("User A add an activity");
+        String activity = "activity1" + getRandomNumber();
+        homePagePlatform.goToHomePage();
+
+        activityStream.addActivity(activity, null);
+        activityStream.checkActivity(activity);
+
+        info("User B login");
+        manageLogInOut.signIn(username2, password);
+
+        info("User A and User B are connected");
+
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(username1);
+
+        info("UserB comments in UserA's activity");
+        ArrayList<String> comments = new ArrayList<String>();
+        String comment = "comment1" + getRandomNumber();
+
+        homePagePlatform.goToHomePage();
+
+        activityStream.likeActivity(activity);
+        activityStream.commentActivity(activity, comment);
+
+        info("Add comment to Comment list");
+        comments.add(comment);
+
+        info("User C login");
+        manageLogInOut.signIn(username3, password);
+
+        info("User C sent a connection request to User A");
+
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(username1);
+
+        String statusSendRq = "has send you a connection request ";
+        String statusLikeAc = "likes your activity ";
+        String statusCommAc = "has commented on you activity";
+
+        info("Log in with User A");
+        manageLogInOut.signIn(username1, password);
+
+
+        info("The notifications are ordered from the newest at the top to the latest at the bottom (connection request, comment, like)");
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.checkOrderNotifications(1, statusSendRq, username3);
+        intranetNotification.checkOrderNotifications(2, statusCommAc, username2);
+        intranetNotification.checkOrderNotifications(3, statusLikeAc, username2);
     }
 }
