@@ -5,6 +5,7 @@ import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.chat.pageobject.RoomManagement;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
@@ -27,8 +28,7 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_NAME_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_LIST_PROJECT;
-import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_TABLE_PROJECT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
@@ -139,5 +139,28 @@ public class TaskChatInSpaceRoomTestIT extends Base {
         spaceManagement.deleteSpace(space, false);
         navigationToolbar.goToManageCommunity();
         addUsers.deleteUser(username);
+    }
+
+    @BugInPLF("TA-660")
+    public void test03_AssignTaskInSpaceRoomWithMultipleProjects() {
+        String space = "space" + getRandomNumber();
+        String task = "task" + getRandomNumber();
+        String username = "usernamea" + getRandomString();
+        String password = "123456";
+        String email = "email" + getRandomNumber() + "@test.com";
+        String FirstName = "FirstName" + getRandomString();
+        String LastName = "LastName" + getRandomString();
+        String projectA = "project" + getRandomNumber();
+        String projectB = "project" + getRandomNumber();
+        String projectC = "project" + getRandomNumber();
+
+        navigationToolbar.goToAddUser();
+        userAddManagement.addUser(username, password, email, FirstName, LastName);
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(space, space, 6000);
+        spaceManagement.goToTaskTab();
+        projectsManagement.addProjectInProject(space, projectA, "", false);
+        projectsManagement.addProjectInProject(space, projectB, "", false);
+        projectsManagement.addProjectInProject(space, projectC, "", false);
     }
 }

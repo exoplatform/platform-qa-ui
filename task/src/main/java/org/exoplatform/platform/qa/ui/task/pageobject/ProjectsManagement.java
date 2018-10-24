@@ -138,9 +138,34 @@ public class ProjectsManagement {
     $(byText(title)).should(Condition.visible);
   }
 
-  /**
-   * Save all changes for adding project
-   */
+  public void addProjectInProject(String projectPath, String title, String des, boolean enableCalendar) {
+    ELEMENT_LIST_PROJECT.find(byText(projectPath)).click();
+    ELEMENT_LIST_PROJECT.find(byText(projectPath)).parent().parent().find(ELEMENT_ICON_PROJECT).click();
+    ELEMENT_LIST_PROJECT.find(byText(projectPath)).parent().parent().find(ELEMENT_ADD_PROJECT_IN_PROJECT).click();
+    info("Create a new project");
+    if (title != null || title != "") {
+      info("Input title");
+      $(ELEMENT_ADD_PROJECT_TITLE).setValue(title);
+    }
+    if (des != null || des != "") {
+      info("Input description");
+      // $(ELEMENT_ADD_PROJECT_DES).setValue(des);
+    }
+    if (enableCalendar) {
+      info("Enable Calendar intergration");
+      evt.check(ELEMETN_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX, 2);
+    } else {
+      info("Disable Calendar intergration");
+      evt.uncheck(ELEMETN_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX, 2);
+    }
+    ELEMENT_SAVE_PROJECT.click();
+    $(byText(title)).should(Condition.visible);
+  }
+
+
+    /**
+     * Save all changes for adding project
+     */
   public void saveAddProject() {
     info("Click on Save button");
 
