@@ -382,7 +382,7 @@ public class ActivityStream {
     info("add comment using javascript");
     $(By.xpath(ELEMENT_ICON_COMMENT.replace("${title}", activityText))).click();
     WebElement commentText = $(byText(activityText)).should(Condition.exist);
-    WebElement commentButton = evt.waitForAndGetElement(ELEMENT_COMMENT_BUTTON);
+    WebElement commentButton =  $(byXpath(ELEMENT_COMMENT_BUTTON)).waitUntil(Condition.visible, Configuration.timeout);
     WebElement workingLabel = evt.waitForAndGetElement(ELEMENT_ACTIVITY_ADD_YOUR_COMMENTLABEL.replace("${activityText}",
                                                                                                       activityText));
 

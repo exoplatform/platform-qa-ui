@@ -1,6 +1,4 @@
 package org.exoplatform.platform.qa.ui.platform.social.functional;
-
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;

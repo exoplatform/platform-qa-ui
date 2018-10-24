@@ -197,26 +197,14 @@ public class IntranetNotification {
    */
   public void goToDetailLikeNotification(String fullName, boolean isPopup) {
 
-    for (int repeat = 0;; repeat++) {
-      if (repeat > 1) {
-        if (evt.waitForAndGetElement(ELEMENT_NOTIFICATION_UI_ACTIVITY_LOADER, 3000, 0) != null)
-          ;
-        break;
-      }
-      if (evt.waitForAndGetElement(ELEMENT_NOTIFICATION_UI_ACTIVITY_LOADER, 5000, 0) != null) {
-        info("Element " + ELEMENT_NOTIFICATION_UI_ACTIVITY_LOADER + " is displayed");
-        break;
-      }
-      info("Retry...[" + repeat + "]");
       if (isPopup) {
         info("View detail notification when like an activity from the popup");
-        evt.click(ELEMENT_NOTIFICATION_POPUP_LIKE.replace("$user", fullName));
+        $(byXpath(ELEMENT_NOTIFICATION_POPUP_LIKE.replace("$user", fullName))).click();
+
       } else {
         info("View detail notification when like an activity from all notification page");
-        evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_LIKE.replace("$user", fullName));
+        $(byXpath(ELEMENT_NOTIFICATION_ALL_PAGE_LIKE.replace("$user", fullName))).click();
       }
-
-    }
   }
 
   /**
@@ -571,28 +559,24 @@ public class IntranetNotification {
    * @param user is full name or name of the user
    */
   public void checkStatus(String status, String user) {
-
     info("Verify that the status is shown");
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
-        if (evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_STATUS.replace("$status", status).replace("$fullName", user),
-                                     3000,
-                                     0) != null)
-          ;
+        if ($(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS.
+                replace("$status",status).replace("$fullName",user))).is(Condition.visible));
         break;
       }
-      if (evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_STATUS.replace("$status", status).replace("$fullName", user),
-                                   5000,
-                                   0) != null) {
+      if ($(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS.
+              replace("$status",status).replace("$fullName",user))).is(Condition.visible))
+      {
         info("Element " + ELEMENT_INTRANET_NOTIFICATION_STATUS.replace("$status", status).replace("$fullName", user)
-            + " is displayed");
+                + " is displayed");
         break;
       }
-      info("Retry...[" + repeat + "]");
-      this.testBase.getExoWebDriver().getWebDriver().navigate().refresh();
 
     }
   }
+
 
   /**
    * Check status of space notifications
