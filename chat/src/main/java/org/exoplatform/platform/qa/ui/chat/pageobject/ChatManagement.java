@@ -35,6 +35,13 @@ public class ChatManagement {
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byClassName("uiIconChatUpload")).waitUntil(Condition.appear, Configuration.timeout);
   }
 
+
+  public void sendMessageTaskDueDate(String room, String task, String DueDate){
+    ELEMENT_CONTACT_LIST.find(byText(room)).waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_CHAT_MESSAGE_INPUT.setValue("++"+task+" ^"+DueDate).pressEnter();
+    ELEMENT_CHAT_LIST_MSG.find(byText(task)).should(Condition.exist);
+  }
+
   public void changeStatus(String status) {
     ELEMENT_ICON_CHAT.click();
     switch (status) {

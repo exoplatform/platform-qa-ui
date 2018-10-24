@@ -200,6 +200,8 @@ public class TaskManagementLocator {
           $(byXpath("//*[@id=\"taskManagement\"]/div[3]/div[2]/div/div/div[6]/div[1]/div/div[2]/span"));
   public  static final  SelenideElement ELEMENT_SHOW_IN_CALENDAR                    =$(byClassName("date-work-plan"));
   public static final SelenideElement ELEMENT_TABLE_PROJECT=$(byClassName("table-project"));
+  public static final SelenideElement ELEMENT_TASK_DUE_DATE=$(byXpath("//*[@id=\"taskManagement\"]/div[3]/div[2]/div/div/div[4]/div[1]/div/span"));
+
 
   // Add labels form
 
