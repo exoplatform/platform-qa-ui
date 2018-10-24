@@ -4,6 +4,7 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -156,7 +157,7 @@ public class WikiActivitiesTestIT extends Base {
     activityStream.clickOnViewChange(editTitle);
     wikiValidattions.verifyCompareVersions("1");
     homePagePlatform.goToWiki();
-    wikiHomePage.deleteWiki(title);
+    wikiHomePage.deleteWiki(editTitle);
 
   }
 
@@ -345,7 +346,7 @@ public class WikiActivitiesTestIT extends Base {
     wikiValidattions.verifyTitleWikiPage(title);
     info("Check the activity on Activity Stream");
     homePagePlatform.goToHomePage();
-    activityStream.checkActivity(editContent);
+    activityStream.checkActivity(content+editContent);
     activityStream.checkComment(title, comment, null, ActivityStream.changeTypes.No_Value);
     homePagePlatform.goToWiki();
     wikiHomePage.deleteWiki(title);
@@ -630,6 +631,7 @@ public class WikiActivitiesTestIT extends Base {
    */
 
   @Test
+  @BugInPLF("WIKI-1440")
   public void test13_RemoveWikisPageOfSpace() {
     info("Test 13 Remove wiki's page of space");
     info("Create a space");

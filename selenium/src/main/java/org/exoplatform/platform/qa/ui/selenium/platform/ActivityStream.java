@@ -881,6 +881,7 @@ public class ActivityStream {
                                                                .split(" ")[1]);
     String numberAfterlike = String.valueOf(numberofLike + 1);
     $(byText(activityText)).parent().parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).click();
+    refresh();
     $(byText(activityText)).parent()
                            .parent()
                            .parent()
@@ -908,6 +909,7 @@ public class ActivityStream {
                                                              .getText()
                                                              .split(" ")[1]);
     $(byText(activityText)).parent().parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).click();
+    refresh();
     String numberAfterUnlike = String.valueOf(numberLike - 1);
     $(byText(activityText)).parent()
                            .parent()
@@ -982,8 +984,8 @@ public class ActivityStream {
    */
   public void clickOnViewChange(String title) {
     info("Click on View change link");
-    evt.click(ELEMENT_ACTIVITY_WIKI_VIEW_CHANGE_LINK.replace("$title", title));
-    evt.waitForElementNotPresent(ELEMENT_ACTIVITY_WIKI_VIEW_CHANGE_LINK.replace("$title", title));
+    $(byXpath(ELEMENT_ACTIVITY_WIKI_VIEW_CHANGE_LINK.replace("$title", title))).click();
+    $(byXpath(ELEMENT_ACTIVITY_WIKI_VIEW_CHANGE_LINK.replace("$title", title))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
@@ -1114,7 +1116,7 @@ public class ActivityStream {
     // click on delete button
     $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
     ELEMENT_DELETE_POPUP_OK.click();
-    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears, Configuration.timeout);
+    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
   }
 
   public void likeUnlikeComment(String activity, String comment) {
