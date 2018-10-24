@@ -208,7 +208,6 @@ public class EcmsWCMTestIT extends Base {
     pageCreationWizard.inputPageInfoStep1(content, true, "English", content, true, false);
     click(ELEMENT_ADDNEWPAGE_BTNNEXT);
     click(ELEMENT_ADDNEWPAGE_BTNNEXT);
-    pageCreationWizard.addApplication($(ELEMENT_APPLICATION_CONTENT_TAB), $(byId("Content/portlet_ContentListViewerPortlet")));
     pageCreationWizard.addContentDetail("General Drives/Sites Management/intranet", content);
     navigationToolbar.goToEditContent();
     ELEMENT_LIST_CONTENT.find(byText(content)).waitUntil(Condition.visible, Configuration.timeout);
