@@ -10,10 +10,15 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.social.pageobject.IntranetNotification;
 import org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting;
+import org.exoplatform.platform.qa.ui.wiki.pageobject.SourceTextEditor;
+import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
+import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
+import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 import static com.codeborne.selenide.Selectors.byText;
@@ -40,6 +45,11 @@ public class SOCNotificationIntranetNotificationListTestIT extends Base {
     UserProfilePage userProfilePage;
     UserAndGroupManagement UserAndGroupManagement;
     ActivityStream activityStream;
+    UserAndGroupManagement userAndGroupManagement;
+    WikiHomePage wikiHomePage;
+    WikiManagement wikiManagement;
+    SourceTextEditor sourceTextEditor;
+    WikiValidattions wikiValidattions;
 
 
     @BeforeEach
@@ -57,6 +67,11 @@ public class SOCNotificationIntranetNotificationListTestIT extends Base {
         intranetNotification = new IntranetNotification(this);
         UserAndGroupManagement = new UserAndGroupManagement(this);
         activityStream = new ActivityStream(this);
+        UserAndGroupManagement = new UserAndGroupManagement(this);
+        wikiHomePage = new WikiHomePage(this);
+        wikiManagement = new WikiManagement(this);
+        sourceTextEditor = new SourceTextEditor(this);
+        wikiValidattions = new WikiValidattions(this);
     }
 
     /*Step Number: 1
@@ -272,5 +287,122 @@ public class SOCNotificationIntranetNotificationListTestIT extends Base {
         intranetNotification.checkOrderNotifications(1, statusSendRq, username3);
         intranetNotification.checkOrderNotifications(2, statusCommAc, username2);
         intranetNotification.checkOrderNotifications(3, statusLikeAc, username2);
+    }
+
+    /**
+     * <li> Case ID:125122.</li>
+     * <li> Test Case Name: Notifications are pushed instantaneously.</li>
+     * <li> Pre-Condition: - The user A doesn't have any new notifications while starting the test
+     * - The test is performed on latest version of FF, Chrome or IE 10/11</li>
+     * <li> Post-Condition: </li>
+     *
+     * @throws AWTException
+     */
+    /*Step Number: 1
+		*Step Name:
+		*Step Description:
+			- Login with user A
+			- Go to wiki application
+		*Input Data:
+
+		*Expected Outcome:
+			- User A is doing some actions on wiki*/
+    /*Step number: 2
+		*Step Name:
+		*Step Description:
+			- Login with User B on a different browser
+			- Go to Connections or Who's Online and request a connection with User A
+		*Input Data:
+
+		*Expected Outcome:
+			- The number of notifications of User A is updated as soon
+			as the connection request notification is received*/
+    /*Step number: 3
+		*Step Name:
+		*Step Description:
+			- With User A, click on the notification icon
+			- Browse the notifications list
+		*Input Data:
+
+		*Expected Outcome:
+			- The connection request notifications is displayed*/
+    /*Step number: 4
+		*Step Name:
+		*Step Description:
+			- Come back to User B while User A is browsing the list
+			- Go to the actiivty stream and mention User A
+		*Input Data:
+
+		*Expected Outcome:
+			- While User A is browsing the notification list,
+			the number of notification and the content of the list is updated
+			as soon as a new notifications is received. The new notification is
+			displayed at the top of the list.*/
+    @Test
+    public void test06_NotificationsArePushedInstantaneously() throws AWTException {
+        info("Test 6: Notifications are pushed instantaneously");
+        ArrayList<String> arrayUser = new ArrayList<String>();
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String username2 = "usernameb" + getRandomString();
+        String email2 = username2 + "@gmail.com";
+        String password = "123456";
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        UserAddManagement.addUser(username1, "123456", email1, username1, username1);
+        UserAddManagement.addUser(username2, "123456", email2, username2, username2);
+        navigationToolbar.goToUsersAndGroupsManagement();
+        UserAndGroupManagement.addUserAdmin(username1);
+        manageLogInOut.signIn(username1, "123456");
+
+        info("UserA created a new wiki page");
+        String wiki = "wiki" + getRandomNumber();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.addSimplePage(wiki, wiki);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(wiki);
+
+        info("Log in with userB and connect to userA");
+        manageLogInOut.signIn(username2, password);
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(username1);
+
+        info("User B login on drifferent browser");
+        manageLogInOut.signIn(username2, password);
+
+        info("User B sent a connection request to userA");
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(username1);
+
+        info("Switch to user1 and check intranet notification");
+        manageLogInOut.signIn(username1, password);
+
+        info("The number of notifications of User A is updated as soon as the connection request notification is received");
+        intranetNotification.checkBadgeNoti(1);
+
+        info("The connection request notifications is displayed");
+        String statusSendRq = " ";
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.checkStatus(statusSendRq, username2);
+        String text = "text" + getRandomNumber();
+        String statusMention = " ";
+
+        ("Go to the actiivty stream and mention User A");
+        manageLogInOut.signIn(username2, password);
+        homePagePlatform.goToHomePage();
+        activityStream.mentionUserActivity(username1, text);
+        manageLogInOut.signIn(username1, password);
+
+        info("Check badge and content notification of User A");
+        intranetNotification.checkBadgeNoti(1);
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.checkStatus(statusMention, username2);
+        manageLogInOut.signIn(DATA_USER1, "gtngtn");
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
     }
 }

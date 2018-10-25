@@ -670,7 +670,7 @@ public class IntranetNotification {
    */
   public void checkBadgeNoti(int num) {
     info("Check number of badge notification");
-    ELEMENT_ALERT_NOTIFICATION_EXIST.parent().shouldHave(Condition.text(String.valueOf(num)));
+      ELEMENT_ALERT_NOTIFICATION_EXIST.parent().shouldHave(Condition.text(String.valueOf(num)));
   }
 
   /**
