@@ -4,11 +4,13 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static junit.framework.TestCase.assertEquals;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_COLLABORATION_ACTIONS;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.openqa.selenium.By;
 
 public class ChatManagement {
   private final TestBase testBase;
@@ -187,4 +189,28 @@ public class ChatManagement {
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byText(link)).waitUntil(Condition.appear, Configuration.timeout);
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byClassName("uiIconChatLink")).waitUntil(Condition.appear, Configuration.timeout);
   }
-}
+
+
+  public void checkPopUpAssignTask(){
+    ELEMENT_ASSIGN_TASK_WINDOW.waitUntil(Condition.appear, Configuration.timeout);
+    ELEMENT_ASSIGN_TASK_CONTAINER.findElement(By.xpath("//input[@placeholder='Task Title']")).getAttribute("placeholder");
+    ELEMENT_ASSIGN_TASK_CONTAINER.findElement(By.xpath("//input[@placeholder='Assignee']")).getAttribute("placeholder");
+    ELEMENT_ASSIGN_TASK_CONTAINER.findElement(By.xpath("//input[@placeholder='Due date']")).getAttribute("placeholder");
+  }
+
+  public void CreateTask(String task, String... users) {
+    ELEMENT_COLLABORATION_ACTIONS.click();
+    ELEMENT_CHAT_CREATE_TASK.click();
+    $(ELEMENT_CHAT_TASK_NAME).setValue(task);
+    for (int i = 0; i <= users.length - 1; i++) {
+      ELEMENT_CHAT_ASSIGNEE_TASK.setValue(users[i]);
+      ELEMENT_CHAT_RESULT_SEARCH_ASSIGNEE.waitUntil(Condition.visible, Configuration.timeout);
+      ELEMENT_CHAT_ASSIGNEE_TASK.pressEnter();
+    }
+      ELEMENT_CHAT_DUE_DATE_TASK.click();
+      ELEMENT_CHAT_CURRENT_DATE_TASK.click();
+      ELEMENT_CHAT_POST_TASK_BUTTON.click();
+      ELEMENT_CONTAINER_LIST_MESSAGES.find(byLinkText(task)).shouldBe(Condition.visible);
+    }
+
+  }
