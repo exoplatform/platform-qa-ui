@@ -64,4 +64,19 @@ public class ChatManagement {
     ELEMENT_BUTTON_ADD_TASK.click();
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byLinkText(taskName)).shouldBe(Condition.visible);
   }
+
+  public void addEventInChat(String event, String location){
+
+    ELEMENT_COLLABORATION_ACTIONS.click();
+    ELEMENT_CHAT_ADD_EVENT.click();
+    ELEMENT_ADD_EVENT_WINDOW.waitUntil(Condition.appear, Configuration.timeout);
+    ELEMENT_ADD_EVENT.setValue(event);
+    ELEMENT_CHAT_EVENT_FROM_DATE_.click();
+    $(byClassName("today")).click();
+    ELEMENT_CHAT_EVENT_TO_DATE_.click();
+    $(byClassName("today")).click();
+    ELEMENT_CHAT_EVENT_LOCATION.setValue(location);
+    ELEMENT_CHAT_POST_EVENT.click();
+    ELEMENT_CONTAINER_LIST_MESSAGES.find(byText(event)).waitUntil(Condition.appear, Configuration.timeout);
+  }
 }

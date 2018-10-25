@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarHomePage;
 import org.exoplatform.platform.qa.ui.calendar.pageobject.EventManagement;
+import org.exoplatform.platform.qa.ui.chat.pageobject.ChatManagement;
 import org.exoplatform.platform.qa.ui.chat.pageobject.RoomManagement;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
@@ -24,7 +25,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("chat")
-@Tag("sniff")
+@Tag("smoke")
 
 public class ChatCollaborativeActionsTestIT extends Base {
 
@@ -36,6 +37,7 @@ public class ChatCollaborativeActionsTestIT extends Base {
     EventManagement eventManagement;
     UserAddManagement userAddManagement;
     UserAndGroupManagement userAndGroupManagement;
+    ChatManagement chatManagement;
 
     @BeforeEach
     public void setupBeforeMethod() {
@@ -47,8 +49,9 @@ public class ChatCollaborativeActionsTestIT extends Base {
         calendarHomePage = new CalendarHomePage(this);
         eventManagement = new EventManagement(this);
         userAddManagement = new UserAddManagement(this);
-        userAndGroupManagement=new UserAndGroupManagement(this);
-        manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);
+        userAndGroupManagement = new UserAndGroupManagement(this);
+        chatManagement = new ChatManagement(this);
+        manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
     }
 
     @Test
@@ -69,26 +72,20 @@ public class ChatCollaborativeActionsTestIT extends Base {
         switchTo().window(1);
         roomManagement.addRoom(room, username);
         ELEMENT_CONTACT_LIST.find(byText(room)).click();
-        ELEMENT_COLLABORATION_ACTIONS.click();
-        ELEMENT_CHAT_ADD_EVENT.click();
-        ELEMENT_ADD_EVENT_WINDOW.waitUntil(Condition.appear, Configuration.timeout);
-        ELEMENT_ADD_EVENT.setValue(event);
-        ELEMENT_CHAT_EVENT_FROM_DATE_.click();
-        $(byClassName("today")).click();
-        ELEMENT_CHAT_EVENT_TO_DATE_.click();
-        $(byClassName("today")).click();
-        ELEMENT_CHAT_EVENT_LOCATION.setValue(location);
-        ELEMENT_CHAT_POST_EVENT.click();
-        ELEMENT_CONTAINER_LIST_MESSAGES.find(byText(event)).waitUntil(Condition.appear, Configuration.timeout);
+        chatManagement.addEventInChat(event, location);
         switchToParentWindow();
         manageLogInOut.signOut();
         manageLogInOut.signInCas(username, password);
         ELEMENT_CHAT_ICON_STATUS.click();
         ELEMENT_CHAT_NOTIFICATION.find(byText(event)).should(Condition.appears);
         homePagePlatform.goToCalendarPage();
-        $(byText(event)).waitUntil(Condition.appear,Configuration.timeout);
+        $(byText(event)).waitUntil(Condition.appear, Configuration.timeout);
         manageLogInOut.signOut();
-        manageLogInOut.signInCas(PLFData.DATA_USER1,PLFData.DATA_PASS2);
+        manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.deleteRomm(room);
+        switchToParentWindow();
         navigationToolbar.goToManageCommunity();
         userAndGroupManagement.deleteUser(username);
     }
