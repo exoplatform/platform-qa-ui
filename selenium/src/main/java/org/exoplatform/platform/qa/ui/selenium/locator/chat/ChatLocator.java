@@ -129,4 +129,14 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_CHAT_EVENT_TO_DATE_= $(byXpath("//*[@id=\"appComposerForm\"]/div[1]/div/div[2]/input"));
     public static final SelenideElement ELEMENT_CHAT_EVENT_LOCATION =$(byXpath("//*[@id=\"appComposerForm\"]/div[1]/input[2]"));
     public static final SelenideElement ELEMENT_CHAT_POST_EVENT =$(byXpath("//*[@id=\"appComposerForm\"]/div[2]/button"));
+    public static final SelenideElement ELEMENT_CHAT_SHARE_LINK = $(byClassName("uiIconChatLink"));
+    public static final SelenideElement ELEMENT_CHAT_UPLOAD_FILE= $(byClassName("uiIconChatUpload"));
+    public static final SelenideElement ELEMENT_CHAT_ASK_QUESTION= $(byClassName("uiIconChatQuestion"));
+    public static final SelenideElement ELEMENT_CHAT_ASK_BUTTON= $(byXpath("//*[@id=\"appComposerForm\"]/div[2]/button"));
+    public static final SelenideElement ELEMENT_CHAT_CANCEL_BUTTON= $(byXpath("//*[@id=\"appComposerForm\"]/div[2]/div"));
+    public static final SelenideElement ELEMENT_CHAT_RAISE_HAND= $(byClassName("uiIconChatRaiseHand"));
+    public static final SelenideElement ELEMENT_CHAT_CREATE_TASK= $(byClassName("uiIconChatCreateTask"));
+    public static final SelenideElement ELEMENT_CHAT_COLLABORATION_MENU= $(byClassName("apps-container"));
+    public static final SelenideElement ELEMENT_POPUP_CONTAINER= $(byClassName("apps-composer-modal"));
+    public static final SelenideElement ELEMENT_RAISE_HAND_BUTTON= $(byXpath("//*[@id=\"appComposerForm\"]/div[2]/button"));
 }
