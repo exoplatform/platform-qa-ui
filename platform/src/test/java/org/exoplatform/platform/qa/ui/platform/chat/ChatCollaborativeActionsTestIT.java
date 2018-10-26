@@ -16,6 +16,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -23,6 +24,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("chat")
 @Tag("smoke")
@@ -202,7 +204,7 @@ public class ChatCollaborativeActionsTestIT extends Base {
     }
 
     @Test
-    public void test08_checkUploadFilePopUp(){
+    public void test08_checkUploadFilePopUp() {
         String room = "room" + getRandomNumber();
         homePagePlatform.goToChat();
         switchTo().window(1);
@@ -214,7 +216,7 @@ public class ChatCollaborativeActionsTestIT extends Base {
 
 
     @Test
-    public void test09_uploadFileInChat(){
+    public void test09_uploadFileInChat() {
         String room = "room" + getRandomNumber();
         String username = "username" + getRandomNumber();
         String password = "123456";
@@ -243,7 +245,7 @@ public class ChatCollaborativeActionsTestIT extends Base {
     }
 
     @Test
-    public void test10_checkShareLinkPopUp(){
+    public void test10_checkShareLinkPopUp() {
         String room = "room" + getRandomNumber();
         homePagePlatform.goToChat();
         switchTo().window(1);
@@ -255,7 +257,7 @@ public class ChatCollaborativeActionsTestIT extends Base {
     }
 
     @Test
-    public void test11_addShareLinkInChat(){
+    public void test11_addShareLinkInChat() {
         String room = "room" + getRandomNumber();
         String username = "username" + getRandomNumber();
         String password = "123456";
@@ -282,5 +284,20 @@ public class ChatCollaborativeActionsTestIT extends Base {
         switchToParentWindow();
         navigationToolbar.goToManageCommunity();
         userAndGroupManagement.deleteUser(username);
+    }
+
+    @Test
+    public void test12_addInvalidLinkInChat() {
+        String room = "room" + getRandomNumber();
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.addRoom(room);
+        ELEMENT_COLLABORATION_ACTIONS.click();
+        ELEMENT_CHAT_SHARE_LINK.click();
+        ELEMENT_POPUP_CONTAINER.findElement(By.xpath("//input[@placeholder='E.g: http://www.exoplatform.com']")).sendKeys("link");
+        ELEMENT_CHAT_SHARE_LINK_BUTTON.click();
+        $(byText("The link has an incorrect format. Please enter a valid URL.")).waitUntil(Condition.appear, Configuration.timeout);
+        ELEMENT_CHAT_CANCEL_BUTTON.click();
+        roomManagement.deleteRomm(room);
     }
 }
