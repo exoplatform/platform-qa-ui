@@ -523,7 +523,7 @@ public class RichTextEditor {
     info("Input a title for the page");
     $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
     if ($(ELEMENT_SOURCE_EDITOR_BUTTON).is(Condition.not(Condition.exist))
-        && (ELEMENT_BUTTON_WIKI_RITCH_TEXT.is(Condition.exist))) {
+            && (ELEMENT_BUTTON_WIKI_RITCH_TEXT.is(Condition.exist))) {
       ELEMENT_BUTTON_WIKI_RITCH_TEXT.click();
     }
     if (!title.isEmpty()) {
@@ -537,9 +537,7 @@ public class RichTextEditor {
       $(byId("body")).sendKeys(content);
       switchTo().defaultContent();
     }
-    }
-
-
+  }
 
   /**
    * Edit an attached file link
