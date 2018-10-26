@@ -139,4 +139,14 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_CHAT_COLLABORATION_MENU= $(byClassName("apps-container"));
     public static final SelenideElement ELEMENT_POPUP_CONTAINER= $(byClassName("apps-composer-modal"));
     public static final SelenideElement ELEMENT_RAISE_HAND_BUTTON= $(byXpath("//*[@id=\"appComposerForm\"]/div[2]/button"));
+
+    public static final SelenideElement ELEMENT_CHAT_EVENT_CALENDAR = $(byClassName("uiCalendarComponent"));
+    public static final SelenideElement ELEMENT_CHAT_SELECT_FILE= $(byXpath("//*[@id=\"appComposerForm\"]/div[1]/div[2]/a[1]"));
+    public static final SelenideElement ELEMENT_CHAT_CANCEL_UPLOAD_FILE_BUTTON= $(byXpath(" //*[@id=\"appComposerForm\"]/div[1]/div[2]/a[2]"));
+    public static final SelenideElement ELEMENT_CHAT_SHARE_LINK_BUTTON= $(byXpath("//*[@id=\"appComposerForm\"]/div[2]/button"));
+
+
+
+    //*[@id="appComposerForm"]/div[2]/button
+
 }

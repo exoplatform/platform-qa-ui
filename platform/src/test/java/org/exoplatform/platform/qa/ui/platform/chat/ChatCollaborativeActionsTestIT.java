@@ -56,7 +56,7 @@ public class ChatCollaborativeActionsTestIT extends Base {
 
 
     @Test
-    public void test01_CheckMenuCollaborativeActions() {
+    public void test01_checkMenuCollaborativeActions() {
         String room = "room" + getRandomNumber();
         homePagePlatform.goToChat();
         switchTo().window(1);
@@ -67,20 +67,19 @@ public class ChatCollaborativeActionsTestIT extends Base {
     }
 
     @Test
-    public void test02_CheckaddEventPopUp() {
+    public void test02_checkaddEventPopUp() {
         String room = "room" + getRandomNumber();
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.addRoom(room);
-        chatManagement.checkMenuCollaborativeAction();
+        ELEMENT_COLLABORATION_ACTIONS.click();
         ELEMENT_CHAT_ADD_EVENT.click();
         chatManagement.checkAddEventPopUp();
-        ELEMENT_CHAT_CANCEL_BUTTON.click();
         roomManagement.deleteRomm(room);
     }
 
     @Test
-    public void test03_AddEventInChatRoom() {
+    public void test03_addEventInChatRoom() {
 
         String room = "room" + getRandomNumber();
         String username = "username" + getRandomNumber();
@@ -103,6 +102,7 @@ public class ChatCollaborativeActionsTestIT extends Base {
         manageLogInOut.signInCas(username, password);
         ELEMENT_CHAT_ICON_STATUS.click();
         ELEMENT_CHAT_NOTIFICATION.find(byText(event)).should(Condition.appears);
+        ELEMENT_CHAT_NOTIFICATION.find(byClassName("uiIconChatCreateEvent")).should(Condition.appears);
         homePagePlatform.goToCalendarPage();
         $(byText(event)).waitUntil(Condition.appear, Configuration.timeout);
         manageLogInOut.signOut();
@@ -116,20 +116,19 @@ public class ChatCollaborativeActionsTestIT extends Base {
     }
 
     @Test
-    public void test04_CheckAskQuestionPopUp() {
+    public void test04_checkAskQuestionPopUp() {
         String room = "room" + getRandomNumber();
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.addRoom(room);
-        chatManagement.checkMenuCollaborativeAction();
+        ELEMENT_COLLABORATION_ACTIONS.click();
         ELEMENT_CHAT_ASK_QUESTION.click();
         chatManagement.checkAskQuestionPopUp();
-        ELEMENT_CHAT_CANCEL_BUTTON.click();
         roomManagement.deleteRomm(room);
     }
 
     @Test
-    public void test05_AddQuestionInChat() {
+    public void test05_addQuestionInChat() {
         String room = "room" + getRandomNumber();
         String Question = "Question" + getRandomString();
         String username = "username" + getRandomNumber();
@@ -142,8 +141,6 @@ public class ChatCollaborativeActionsTestIT extends Base {
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.addRoom(room, username);
-        chatManagement.checkMenuCollaborativeAction();
-        chatManagement.checkAskQuestionPopUp();
         chatManagement.addQuestionInChat(Question);
         switchToParentWindow();
         manageLogInOut.signOut();
@@ -162,20 +159,19 @@ public class ChatCollaborativeActionsTestIT extends Base {
     }
 
     @Test
-    public void test06_CheckRaiseHandPopUp() {
+    public void test06_checkRaiseHandPopUp() {
         String room = "room" + getRandomNumber();
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.addRoom(room);
-        chatManagement.checkMenuCollaborativeAction();
+        ELEMENT_COLLABORATION_ACTIONS.click();
         ELEMENT_CHAT_RAISE_HAND.click();
         chatManagement.checkRaiseHandPopUp();
-        ELEMENT_CHAT_CANCEL_BUTTON.click();
         roomManagement.deleteRomm(room);
     }
 
     @Test
-    public void test07_RaiseHandInChat() {
+    public void test07_raiseHandInChat() {
         String room = "room" + getRandomNumber();
         String Comment = "comment" + getRandomString();
         String username = "username" + getRandomNumber();
@@ -188,9 +184,6 @@ public class ChatCollaborativeActionsTestIT extends Base {
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.addRoom(room, username);
-        chatManagement.checkMenuCollaborativeAction();
-        ELEMENT_CHAT_RAISE_HAND.click();
-        chatManagement.checkRaiseHandPopUp();
         chatManagement.raiseHandInChat(Comment);
         switchToParentWindow();
         manageLogInOut.signOut();
@@ -198,6 +191,89 @@ public class ChatCollaborativeActionsTestIT extends Base {
         ELEMENT_CHAT_ICON_STATUS.click();
         ELEMENT_CHAT_NOTIFICATION.find(byClassName("uiIconChatRaiseHand")).should(Condition.appears);
         ELEMENT_CHAT_NOTIFICATION.find(byText(Comment)).should(Condition.appears);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.deleteRomm(room);
+        switchToParentWindow();
+        navigationToolbar.goToManageCommunity();
+        userAndGroupManagement.deleteUser(username);
+    }
+
+    @Test
+    public void test08_checkUploadFilePopUp(){
+        String room = "room" + getRandomNumber();
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.addRoom(room);
+        ELEMENT_COLLABORATION_ACTIONS.click();
+        ELEMENT_CHAT_UPLOAD_FILE.click();
+        chatManagement.checkUploadFilePopUp();
+    }
+
+
+    @Test
+    public void test09_uploadFileInChat(){
+        String room = "room" + getRandomNumber();
+        String username = "username" + getRandomNumber();
+        String password = "123456";
+        String FirstName = "FirstName" + getRandomString();
+        String LastName = "LastName" + getRandomString();
+        String email = username + "@test.com";
+        navigationToolbar.goToAddUser();
+        userAddManagement.addUser(username, password, email, FirstName, LastName);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.addRoom(room, username);
+        chatManagement.uploadFile("eXo-Platform.png");
+        switchToParentWindow();
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(username, password);
+        ELEMENT_CHAT_ICON_STATUS.click();
+        ELEMENT_CHAT_NOTIFICATION.find(byClassName("uiIconChatUpload")).should(Condition.appears);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.deleteRomm(room);
+        switchToParentWindow();
+        navigationToolbar.goToManageCommunity();
+        userAndGroupManagement.deleteUser(username);
+    }
+
+    @Test
+    public void test10_checkShareLinkPopUp(){
+        String room = "room" + getRandomNumber();
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.addRoom(room);
+        ELEMENT_COLLABORATION_ACTIONS.click();
+        ELEMENT_CHAT_SHARE_LINK.click();
+        chatManagement.checkShareLinPopUp();
+        roomManagement.deleteRomm(room);
+    }
+
+    @Test
+    public void test11_addShareLinkInChat(){
+        String room = "room" + getRandomNumber();
+        String username = "username" + getRandomNumber();
+        String password = "123456";
+        String FirstName = "FirstName" + getRandomString();
+        String LastName = "LastName" + getRandomString();
+        String email = username + "@test.com";
+        navigationToolbar.goToAddUser();
+        userAddManagement.addUser(username, password, email, FirstName, LastName);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.addRoom(room, username);
+        chatManagement.shareLinkInChat("https://www.google.fr/");
+        switchToParentWindow();
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(username, password);
+        ELEMENT_CHAT_ICON_STATUS.click();
+        ELEMENT_CHAT_NOTIFICATION.find(byClassName("uiIconChatLink")).should(Condition.appears);
+        ELEMENT_CHAT_NOTIFICATION.find(byText("https://www.google.fr/")).should(Condition.appears);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);
         homePagePlatform.goToChat();
