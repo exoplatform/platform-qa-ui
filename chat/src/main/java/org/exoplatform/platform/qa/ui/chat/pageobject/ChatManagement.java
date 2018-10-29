@@ -26,7 +26,6 @@ public class ChatManagement {
   public void uploadFile(String file) {
     ELEMENT_COLLABORATION_ACTIONS.click();
     ELEMENT_CHAT_UPLOAD_FILE.click();
-    ELEMENT_CHAT_SELECT_FILE.click();
     ELEMENT_CHAT_INPUT_UPLOAD.uploadFromClasspath(file);
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byText(file)).waitUntil(Condition.appear,Configuration.timeout);
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byClassName("uiIconChatUpload")).waitUntil(Condition.appear, Configuration.timeout);
