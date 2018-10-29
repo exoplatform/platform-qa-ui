@@ -95,7 +95,7 @@ public class ChatManagement {
 
   public void checkAskQuestionPopUp(){
     ELEMENT_POPUP_CONTAINER.find(byText("Ask a Question")).waitUntil(Condition.appear,Configuration.timeout);
-    ELEMENT_POPUP_CONTAINER.findElement(byXpath("//input[@placeholder='What is your question?']")).getAttribute("placeholder");
+    ELEMENT_POPUP_CONTAINER.find(byXpath("//input[@placeholder='What is your question?']")).waitUntil(Condition.appear, Configuration.timeout);
     assertEquals("Ask",ELEMENT_CHAT_ASK_BUTTON.getText());
     assertEquals("Cancel", ELEMENT_CHAT_CANCEL_BUTTON.getText());
     ELEMENT_CHAT_CANCEL_BUTTON.click();
@@ -105,7 +105,7 @@ public class ChatManagement {
   public void addQuestionInChat(String question){
     ELEMENT_COLLABORATION_ACTIONS.click();
     ELEMENT_CHAT_ASK_QUESTION.click();
-    ELEMENT_POPUP_CONTAINER.findElement(byXpath("//input[@placeholder='What is your question?']")).sendKeys(question+"?");
+    ELEMENT_POPUP_CONTAINER.find(byXpath("//input[@placeholder='What is your question?']")).sendKeys(question+"?");
     ELEMENT_CHAT_ASK_BUTTON.click();
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byText(question+"?")).waitUntil(Condition.appear, Configuration.timeout);
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byClassName("uiIconChatQuestion")).waitUntil(Condition.appear, Configuration.timeout);
@@ -114,25 +114,25 @@ public class ChatManagement {
 
   public void checkAddEventPopUp(){
     ELEMENT_POPUP_CONTAINER.find(byText("Add Event")).waitUntil(Condition.appear,Configuration.timeout);
-    ELEMENT_POPUP_CONTAINER.findElement(byXpath("//input[@placeholder='Event Title']")).getAttribute("placeholder");
+    ELEMENT_POPUP_CONTAINER.find(byXpath("//input[@placeholder='Event Title']")).waitUntil(Condition.appear, Configuration.timeout);
     ELEMENT_POPUP_CONTAINER.find(byClassName("event-item")).parent().findAll(byClassName("action-label")).get(0)
             .shouldHave(Condition.text("From"))
-            .findElement(byXpath("//input[@placeholder='mm/dd/yyyy']")).getAttribute("placeholder");
+            .find(byXpath("//input[@placeholder='mm/dd/yyyy']")).waitUntil(Condition.appear, Configuration.timeout);
     ELEMENT_POPUP_CONTAINER.find(byClassName("event-item")).parent().findAll(byClassName("action-label")).get(0)
-            .findElement(byXpath("//input[@placeholder='mm/dd/yyyy']")).click();
+            .find(byXpath("//input[@placeholder='mm/dd/yyyy']")).click();
     ELEMENT_CHAT_EVENT_CALENDAR.should(Condition.appear);
     ELEMENT_POPUP_CONTAINER.find(byClassName("event-item")).parent().findAll(byClassName("action-label")).get(0)
-            .findElement(byXpath("//input[@placeholder='mm/dd/yyyy']")).click();
+            .find(byXpath("//input[@placeholder='mm/dd/yyyy']")).click();
     $(byClassName("chat-app-event")).click();
     ELEMENT_POPUP_CONTAINER.find(byClassName("event-item")).parent().findAll(byClassName("action-label")).get(1)
             .shouldHave(Condition.text("To"))
-            .findElement(byXpath("//input[@placeholder='mm/dd/yyyy']")).getAttribute("placeholder");
+            .find(byXpath("//input[@placeholder='mm/dd/yyyy']")).waitUntil(Condition.appear, Configuration.timeout);
     ELEMENT_POPUP_CONTAINER.find(byClassName("event-item")).parent().findAll(byClassName("action-label")).get(1)
-            .findElement(byXpath("//input[@placeholder='mm/dd/yyyy']")).click();
+            .find(byXpath("//input[@placeholder='mm/dd/yyyy']")).click();
     ELEMENT_CHAT_EVENT_CALENDAR.should(Condition.appear);
     ELEMENT_POPUP_CONTAINER.find(byClassName("event-item")).parent().findAll(byClassName("action-label")).get(1)
-            .findElement(byXpath("//input[@placeholder='mm/dd/yyyy']")).click();
-    ELEMENT_POPUP_CONTAINER.findElement(byXpath("//input[@placeholder='Location']")).getAttribute("placeholder");
+            .find(byXpath("//input[@placeholder='mm/dd/yyyy']")).click();
+    ELEMENT_POPUP_CONTAINER.find(byXpath("//input[@placeholder='Location']")).waitUntil(Condition.appear, Configuration.timeout);
     assertEquals("All Day",$("select[name=startTime]").getText());
     assertEquals("All Day",$("select[name=endTime]").getText());
     assertEquals("Post",ELEMENT_CHAT_POST_EVENT.getText());
@@ -146,7 +146,7 @@ public class ChatManagement {
 
   public void checkRaiseHandPopUp(){
     ELEMENT_POPUP_CONTAINER.find(byText("Raise Hand")).waitUntil(Condition.appear,Configuration.timeout);
-    ELEMENT_POPUP_CONTAINER.findElement(byXpath("//input[@placeholder='Optional comment']")).getAttribute("placeholder");
+    ELEMENT_POPUP_CONTAINER.find(byXpath("//input[@placeholder='Optional comment']")).waitUntil(Condition.appear, Configuration.timeout);
     assertEquals("Raise your hand",ELEMENT_RAISE_HAND_BUTTON.getText());
     assertEquals("Cancel", ELEMENT_CHAT_CANCEL_BUTTON.getText());
     ELEMENT_CHAT_CANCEL_BUTTON.click();
@@ -156,7 +156,7 @@ public class ChatManagement {
   public void raiseHandInChat(String comment){
     ELEMENT_COLLABORATION_ACTIONS.click();
     ELEMENT_CHAT_RAISE_HAND.click();
-    ELEMENT_POPUP_CONTAINER.findElement(byXpath("//input[@placeholder='Optional comment']")).sendKeys(comment);
+    ELEMENT_POPUP_CONTAINER.find(byXpath("//input[@placeholder='Optional comment']")).sendKeys(comment);
     ELEMENT_RAISE_HAND_BUTTON.click();
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byText(comment)).waitUntil(Condition.appear, Configuration.timeout);
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byClassName("uiIconChatRaiseHand")).waitUntil(Condition.appear, Configuration.timeout);
@@ -172,7 +172,7 @@ public class ChatManagement {
 
   public void checkShareLinPopUp(){
     ELEMENT_POPUP_CONTAINER.find(byText("Share Link")).waitUntil(Condition.appear,Configuration.timeout);
-    ELEMENT_POPUP_CONTAINER.findElement(byXpath("//input[@placeholder='E.g: http://www.exoplatform.com']")).getAttribute("placeholder");
+    ELEMENT_POPUP_CONTAINER.find(byXpath("//input[@placeholder='E.g: http://www.exoplatform.com']")).waitUntil(Condition.appear, Configuration.timeout);
     assertEquals("Share",ELEMENT_CHAT_SHARE_LINK_BUTTON.getText());
     assertEquals("Cancel", ELEMENT_CHAT_CANCEL_BUTTON.getText());
     ELEMENT_CHAT_CANCEL_BUTTON.click();
@@ -182,7 +182,7 @@ public class ChatManagement {
   public void shareLinkInChat(String link){
     ELEMENT_COLLABORATION_ACTIONS.click();
     ELEMENT_CHAT_SHARE_LINK.click();
-    ELEMENT_POPUP_CONTAINER.findElement(byXpath("//input[@placeholder='E.g: http://www.exoplatform.com']")).sendKeys(link);
+    ELEMENT_POPUP_CONTAINER.find(byXpath("//input[@placeholder='E.g: http://www.exoplatform.com']")).sendKeys(link);
     ELEMENT_CHAT_SHARE_LINK_BUTTON.click();
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byText(link)).waitUntil(Condition.appear, Configuration.timeout);
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byClassName("uiIconChatLink")).waitUntil(Condition.appear, Configuration.timeout);
