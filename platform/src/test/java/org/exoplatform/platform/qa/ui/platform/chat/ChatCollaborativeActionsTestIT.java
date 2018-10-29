@@ -294,7 +294,7 @@ public class ChatCollaborativeActionsTestIT extends Base {
         roomManagement.addRoom(room);
         ELEMENT_COLLABORATION_ACTIONS.click();
         ELEMENT_CHAT_SHARE_LINK.click();
-        ELEMENT_POPUP_CONTAINER.findElement(By.xpath("//input[@placeholder='E.g: http://www.exoplatform.com']")).sendKeys("link");
+        ELEMENT_POPUP_CONTAINER.findElement(byXpath("//input[@placeholder='E.g: http://www.exoplatform.com']")).sendKeys("link");
         ELEMENT_CHAT_SHARE_LINK_BUTTON.click();
         $(byText("The link has an incorrect format. Please enter a valid URL.")).waitUntil(Condition.appear, Configuration.timeout);
         ELEMENT_CHAT_CANCEL_BUTTON.click();
