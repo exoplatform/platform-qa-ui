@@ -275,7 +275,7 @@ public class ChatCollaborativeActionsTestIT extends Base {
         manageLogInOut.signInCas(username, password);
         ELEMENT_CHAT_ICON_STATUS.click();
         ELEMENT_CHAT_NOTIFICATION.find(byClassName("uiIconChatLink")).should(Condition.appears);
-        ELEMENT_CHAT_NOTIFICATION.find(byText("https://www.google.fr/")).should(Condition.appears);
+        ELEMENT_CHAT_NOTIFICATION.find(byLinkText("https://www.google.fr/")).should(Condition.appears);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);
         homePagePlatform.goToChat();
