@@ -15,6 +15,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestB
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.ElementsCollection;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
 import org.junit.jupiter.api.BeforeEach;
@@ -328,8 +329,12 @@ public class SOCPeopleProfileEditProfileTestIT extends Base {
     userProfilePage.goToEditProfile();
     scrollToBottomPage(this.getExoWebDriver().getWebDriver());
     $(ELEMENT_GENDER_EDIT_PROFILE).shouldHave(Condition.exactValue(""));
+    manageLogInOut.signOut();
+    info("delete user");
+    manageLogInOut.signInCas(DATA_USER1, DATA_PASS2);
+    navigationToolbar.goToUsersAndGroupsManagement();
+    userAndGroupManagement.deleteUser(username);
   }
-
 
   @BugInPLF("SOC-6086")
   @Test
