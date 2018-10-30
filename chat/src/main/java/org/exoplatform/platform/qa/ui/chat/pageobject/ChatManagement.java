@@ -191,13 +191,12 @@ public class ChatManagement {
   }
 
 
-  public void checkPopUpAssignTask(){
+  public void checkPopUpAssignTask() {
     ELEMENT_ASSIGN_TASK_WINDOW.waitUntil(Condition.appear, Configuration.timeout);
-    ELEMENT_ASSIGN_TASK_CONTAINER.findElement(By.xpath("//input[@placeholder='Task Title']")).getAttribute("placeholder");
-    ELEMENT_ASSIGN_TASK_CONTAINER.findElement(By.xpath("//input[@placeholder='Assignee']")).getAttribute("placeholder");
-    ELEMENT_ASSIGN_TASK_CONTAINER.findElement(By.xpath("//input[@placeholder='Due date']")).getAttribute("placeholder");
+    ELEMENT_ASSIGN_TASK_CONTAINER.find(byXpath("//input[@placeholder='Task Title']")).waitUntil(Condition.appear, Configuration.timeout);
+    ELEMENT_ASSIGN_TASK_CONTAINER.find(byXpath("//input[@placeholder='Assignee']")).waitUntil(Condition.appear, Configuration.timeout);
+    ELEMENT_ASSIGN_TASK_CONTAINER.find(byXpath("//input[@placeholder='Due date']")).waitUntil(Condition.appear, Configuration.timeout);
   }
-
   public void CreateTask(String task, String... users) {
     ELEMENT_COLLABORATION_ACTIONS.click();
     ELEMENT_CHAT_CREATE_TASK.click();

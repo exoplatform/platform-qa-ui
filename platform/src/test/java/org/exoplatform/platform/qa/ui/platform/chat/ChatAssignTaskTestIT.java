@@ -44,7 +44,8 @@ public class ChatAssignTaskTestIT extends Base {
     ProjectsManagement projectsManagement;
     NavigationToolbar navigationToolbar;
     ConnectionsManagement connectionsManagement;
-    ChatManagement   chatManagement;
+    ChatManagement chatManagement;
+    UserAndGroupManagement userAndGroupManagement;
 
     @BeforeEach
     public void setupBeforeMethod() {
@@ -56,7 +57,8 @@ public class ChatAssignTaskTestIT extends Base {
         projectsManagement = new ProjectsManagement(this);
         navigationToolbar = new NavigationToolbar(this);
         connectionsManagement = new ConnectionsManagement(this);
-        chatManagement=new ChatManagement(this);
+        chatManagement = new ChatManagement(this);
+        userAndGroupManagement = new UserAndGroupManagement(this);
         manageLogInOut = new ManageLogInOut(this);
         if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
             $(ELEMENT_SKIP_BUTTON).click();
@@ -90,31 +92,13 @@ public class ChatAssignTaskTestIT extends Base {
 
 
     @Test
-    public void test02_CheckTaskWithNoAssignee(){
+    public void test02_CheckTaskWithNoAssignee() {
         String room = "room" + getRandomNumber();
         String task = "task" + getRandomNumber();
-        String usernamea = "usernamea" + getRandomNumber();
-        String password = "123456" + getRandomNumber();
-        String emaila = "emaila" + getRandomNumber() + "@gmail.com";
-        String FirstNameA = "FirstNameA";
-        String LastNameA = "LastNameA";
-        navigationToolbar.goToAddUser();
-        userAddManagement.addUser(usernamea, password, emaila, FirstNameA, LastNameA);
         homePagePlatform.goToChat();
         switchTo().window(1);
-        roomManagement.addRoom(room, usernamea);
-        switchToParentWindow();
-        manageLogInOut.signOut();
-        manageLogInOut.signInCas(usernamea, password);
-        homePagePlatform.goToChat();
-        switchTo().window(1);
+        roomManagement.addRoom(room);
         ELEMENT_CONTACT_LIST.find(byText(room)).should(Condition.exist);
-        switchToParentWindow();
-        manageLogInOut.signOut();
-        manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);
-        homePagePlatform.goToChat();
-        switchTo().window(1);
-        ELEMENT_CONTACT_LIST.find(byText(room)).click();
         chatManagement.CreateTask(task);
         switchToParentWindow();
         homePagePlatform.goToTaskPage();
@@ -155,7 +139,25 @@ public class ChatAssignTaskTestIT extends Base {
         switchTo().window(1);
         ELEMENT_CONTACT_LIST.find(byText(room)).click();
         ELEMENT_COLLABORATION_ACTIONS.click();
-       chatManagement.CreateTask(task,usernamea);
+        chatManagement.CreateTask(task, usernamea);
+        switchToParentWindow();
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(usernamea, password);
+        $(byClassName("uiIconStatus")).click();
+        ELEMENT_CHAT_NOTIFICATION.find(byText(task)).should(Condition.appears);
+        homePagePlatform.goToTaskPage();
+        $(byText(room)).should(Condition.exist);
+        $(byText(room)).click();
+        ELEMENT_TABLE_PROJECT.parent().parent().parent().find(byText(task)).should(Condition.exist).click();
+        ELEMENT_ASSIGNEE_TASK.shouldHave(Condition.text(FirstName));
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.deleteRomm(room);
+        switchToParentWindow();
+        navigationToolbar.goToManageCommunity();
+        userAndGroupManagement.deleteUser(usernamea);
     }
 
     @Test
@@ -185,7 +187,7 @@ public class ChatAssignTaskTestIT extends Base {
         homePagePlatform.goToChat();
         switchTo().window(1);
         ELEMENT_CONTACT_LIST.find(byText(room)).click();
-        chatManagement.CreateTask(task,FirstName);
+        chatManagement.CreateTask(task, FirstName);
         switchToParentWindow();
         manageLogInOut.signOut();
         manageLogInOut.signInCas(usernamea, password);
@@ -196,5 +198,13 @@ public class ChatAssignTaskTestIT extends Base {
         $(byText(room)).click();
         ELEMENT_TABLE_PROJECT.parent().parent().parent().find(byText(task)).should(Condition.exist).click();
         ELEMENT_ASSIGNEE_TASK.shouldHave(Condition.text(FirstName));
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.deleteRomm(room);
+        switchToParentWindow();
+        navigationToolbar.goToManageCommunity();
+        userAndGroupManagement.deleteUser(usernamea);
     }
 }
