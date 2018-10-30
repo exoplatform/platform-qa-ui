@@ -26,6 +26,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_VIEW_ALL;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("social")
@@ -227,7 +228,7 @@ public class SOCNotificationIntranetNotificationListTestIT extends Base {
         navigationToolbar.goToAddUser();
         UserAddManagement.addUser(username1, "123456", email1, username1, username1);
         UserAddManagement.addUser(username2, "123456", email2, username2, username2);
-        UserAddManagement.addUser(username3,"123456", email3, username3, username3);
+        UserAddManagement.addUser(username3, "123456", email3, username3, username3);
         manageLogInOut.signIn(username1, password);
 
         info("goto My notification");
@@ -454,7 +455,7 @@ public class SOCNotificationIntranetNotificationListTestIT extends Base {
         navigationToolbar.goToAddUser();
         UserAddManagement.addUser(username1, "123456", email1, username1, username1);
         UserAddManagement.addUser(username2, "123456", email2, username2, username2);
-        UserAddManagement.addUser(username3,"123456", email3, username3, username3);
+        UserAddManagement.addUser(username3, "123456", email3, username3, username3);
         manageLogInOut.signIn(username1, password);
 
         info("goto My notification");
@@ -554,4 +555,130 @@ public class SOCNotificationIntranetNotificationListTestIT extends Base {
         addUsers.deleteUser(username1);
         addUsers.deleteUser(username2);
         addUsers.deleteUser(username3);
-    }}
+    }
+
+
+    /**
+     * <li> Case ID:125125.</li>
+     * <li> Test Case Name: Check [View All] button.</li>
+     * <li> Pre-Condition: The user has notifications (read or unread)</li>
+     * <li> Post-Condition: </li>
+     *
+     * @throws AWTException
+     */
+    /*Step Number: 1
+		*Step Name:
+		*Step Description:
+			- Login
+			- Click the notifications icon
+			- Check the popover
+		*Input Data:
+
+		*Expected Outcome:
+			- A [View All] button is displayed at the end of the popover*/
+    /*Step number: 2
+		*Step Name:
+		*Step Description:
+			- Click [View All]
+		*Input Data:
+
+		*Expected Outcome:
+			- The user is redirected to the page View All in order to see all notificaitons*/
+    /*Step number: 3
+		*Step Name:
+		*Step Description:
+			- Click the notification icon
+			- Remove all notifications from the list
+		*Input Data:
+
+		*Expected Outcome:
+			- The [View All] button is still displayed at the end of the popover*/
+    @Test
+    public void test08_CheckViewAllButton() throws AWTException {
+
+        info("Test 8: Check [View All] button");
+        ArrayList<String> arrayUser = new ArrayList<String>();
+        String username1 = "usenamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String username2 = "usernameb" + getRandomString();
+        String email2 = username2 + "@gmail.com";
+        String password = "123456";
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        UserAddManagement.addUser(username1, "123456", email1, username1, username1);
+        UserAddManagement.addUser(username2, "123456", email2, username2, username2);
+        manageLogInOut.signIn(username1, "123456");
+
+        info("goto My notification");
+        navigationToolbar.goToMyNotifications();
+        MyNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.AS_Comment_intranet);
+        MyNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.AS_Like_intranet);
+
+        info("User A sent a connection request to User B");
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(username2);
+
+        info("User A add an activity");
+        String activity = "activity" + getRandomNumber();
+        homePagePlatform.goToHomePage();
+        activityStream.addActivity(activity, null);
+        activityStream.checkActivity(activity);
+
+        info("User B login");
+        manageLogInOut.signIn(username2, password);
+
+        info("User A and User B are connected");
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.acceptRqConnection(username1);
+
+        info("UserB comments in UserA's activity");
+        ArrayList<String> comments = new ArrayList<String>();
+        String comment = "comment" + getRandomNumber();
+
+        info("Add a comment to UserA's activity");
+        homePagePlatform.goToHomePage();
+        activityStream.commentActivity(activity, comment);
+
+        info("Add comment to Comment list");
+        comments.add(comment);
+
+        info("User A login");
+        manageLogInOut.signIn(username1, password);
+
+        info("View comment notification of User A");
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.goToDetailCommentNotification(activity, true);
+
+        info("User B login");
+        manageLogInOut.signIn(username2, password);
+
+        info("User B likes User A's activity");
+        homePagePlatform.goToHomePage();
+        activityStream.likeActivity(activity);
+
+        info("User B mention User A in a activity");
+        String textMention = "text" + getRandomNumber();
+        activityStream.mentionUserActivity(username1, textMention);
+
+        info("User A login");
+        manageLogInOut.signIn(username1, password);
+
+        info("Open All Notification page");
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.goToAllNotification();
+
+        info("Remove all notifications from the list");
+        navigationToolbar.goToIntranetNotification();
+        for (int i = 0; i < 3; i++)
+            intranetNotification.removeNotificationByIndex(1);
+
+        info(" The [View All] button is still displayed at the end of the popover");
+        $(ELEMENT_VIEW_ALL).waitUntil(Condition.visible, Configuration.timeout);
+        manageLogInOut.signIn(DATA_USER1, "gtngtn");
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
+
+    }
+}

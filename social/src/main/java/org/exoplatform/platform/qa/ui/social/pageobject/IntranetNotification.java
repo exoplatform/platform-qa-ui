@@ -66,7 +66,7 @@ public class IntranetNotification {
 
   /**
    * Open detail a Comment notification
-   * 
+   *
    * @param activity is activity's name
    * @param isPopup =true if open from the popup =false if open from All
    *          Notification page
@@ -97,7 +97,7 @@ public class IntranetNotification {
 
   /**
    * Open a detail Request Connection to a new user
-   * 
+   *
    * @param fullName is user's full name
    * @param isPopup =true if open from the pop up =false if open from all
    *          notification page
@@ -128,7 +128,7 @@ public class IntranetNotification {
 
   /**
    * Open a detail Accept Request Connection to a new user
-   * 
+   *
    * @param fullName is user's full name
    * @param isPopup =true if open from the pop up =false if open from all
    *          notification page
@@ -159,7 +159,7 @@ public class IntranetNotification {
 
   /**
    * Open a detail Accept Request Invitation to a new space
-   * 
+   *
    * @param space is space's name
    * @param isPopup =true if open from the pop up =false if open from all
    *          notification page
@@ -190,26 +190,38 @@ public class IntranetNotification {
 
   /**
    * Open a detail Like Notification
-   * 
+   *
    * @param fullName is user's full name
    * @param isPopup =true if open from the pop up =false if open from all
    *          notification page
    */
   public void goToDetailLikeNotification(String fullName, boolean isPopup) {
 
+    for (int repeat = 0;; repeat++) {
+      if (repeat > 1) {
+        if (evt.waitForAndGetElement(ELEMENT_NOTIFICATION_UI_ACTIVITY_LOADER, 3000, 0) != null)
+          ;
+        break;
+      }
+      if (evt.waitForAndGetElement(ELEMENT_NOTIFICATION_UI_ACTIVITY_LOADER, 5000, 0) != null) {
+        info("Element " + ELEMENT_NOTIFICATION_UI_ACTIVITY_LOADER + " is displayed");
+        break;
+      }
+      info("Retry...[" + repeat + "]");
       if (isPopup) {
         info("View detail notification when like an activity from the popup");
-        $(byXpath(ELEMENT_NOTIFICATION_POPUP_LIKE.replace("$user", fullName))).click();
-
+        evt.click(ELEMENT_NOTIFICATION_POPUP_LIKE.replace("$user", fullName));
       } else {
         info("View detail notification when like an activity from all notification page");
-        $(byXpath(ELEMENT_NOTIFICATION_ALL_PAGE_LIKE.replace("$user", fullName))).click();
+        evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_LIKE.replace("$user", fullName));
       }
+
+    }
   }
 
   /**
    * Open a detail Mention Notification
-   * 
+   *
    * @param fullName is user's full name
    * @param isPopup =true if open from the pop up =false if open from all
    *          notification page
@@ -240,7 +252,7 @@ public class IntranetNotification {
 
   /**
    * Open a detail Post in My activity Notification
-   * 
+   *
    * @param fullName is user's full name
    * @param isPopup =true if open from the pop up =false if open from all
    *          notification page
@@ -271,7 +283,7 @@ public class IntranetNotification {
 
   /**
    * Open a detail Post in Space activity Notification
-   * 
+   *
    * @param space is user's full name
    * @param isPopup =true if open from the pop up =false if open from all
    *          notification page
@@ -302,7 +314,7 @@ public class IntranetNotification {
 
   /**
    * Open a detail Invitation to join a new space Notification
-   * 
+   *
    * @param space is space's name
    * @param isPopup =true if open from the pop up =false if open from all
    *          notification page
@@ -333,7 +345,7 @@ public class IntranetNotification {
 
   /**
    * Open a detail Join a new space Notification
-   * 
+   *
    * @param fullName is user's full name
    * @param isPopup =true if open from the pop up =false if open from all
    *          notification page
@@ -364,7 +376,7 @@ public class IntranetNotification {
 
   /**
    * Open a detail request to join a new space Notification
-   * 
+   *
    * @param fullName is user's full name
    * @param isPopup =true if open from the pop up =false if open from all
    *          notification page
@@ -396,7 +408,7 @@ public class IntranetNotification {
 
   /**
    * Open a detail new user to join Intranet Notification
-   * 
+   *
    * @param fullName is user's full name
    * @param isPopup =true if open from the pop up =false if open from all
    *          notification page
@@ -427,7 +439,7 @@ public class IntranetNotification {
 
   /**
    * Accept an connection request in notification list
-   * 
+   *
    * @param fullName is fullName of user that want to connect
    */
   public void acceptRqConnection(String fullName) {
@@ -448,10 +460,9 @@ public class IntranetNotification {
     }
   }
 
-
   /**
    * Refuse an connection request in notificaiton list
-   * 
+   *
    * @param fullName String
    */
   public void refuseRqConnection(String fullName) {
@@ -475,7 +486,7 @@ public class IntranetNotification {
 
   /**
    * Check Accept and Refuse buttons are shown in Notification popup and page
-   * 
+   *
    * @param name is here maybe as fullName of a user, space's name
    */
   public void checkBtnConnectJoinRequest(String name) {
@@ -487,7 +498,7 @@ public class IntranetNotification {
 
   /**
    * Check users that are shown their names in notification list
-   * 
+   *
    * @param users is array of users
    * @param isPopUp =true, if the notification list is shown in Notification list
    *          popup =false, if the notification list is shown in All notification
@@ -517,7 +528,7 @@ public class IntranetNotification {
 
   /**
    * Check status of Activity Comment in notification list
-   * 
+   *
    * @param users is array of users
    * @param status is activity's status as: has commented on your activity,...
    * @param isPopUp =true if want to check on notification list popup =false if
@@ -528,17 +539,17 @@ public class IntranetNotification {
     if (users.size() > 3 && isPopUp == true) {
       info("Verify the activity message for more " + (lastIndex - 2) + " users comments");
       evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_COMMENTS_CONTENT.replace("$comment", status)
-                                                                             .replace("$number", users.get(lastIndex - 1)),
-                               2000,
-                               2);
+                      .replace("$number", users.get(lastIndex - 1)),
+              2000,
+              2);
     }
 
     if (users.size() > 3 && isPopUp == false) {
       info("Verify the activity message for more " + (lastIndex - 2) + " users comments");
       evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ALL_COMMENTS_CONTENT.replace("$comment", status)
-                                                                                 .replace("$number", users.get(lastIndex - 1)),
-                               2000,
-                               2);
+                      .replace("$number", users.get(lastIndex - 1)),
+              2000,
+              2);
     }
 
     if (users.size() < 3 && isPopUp == true) {
@@ -554,34 +565,38 @@ public class IntranetNotification {
 
   /**
    * Check status of Notifications
-   * 
+   *
    * @param status is a status's content of Notifications as: Like, comment,
    *          connection,mention...
    * @param user is full name or name of the user
    */
   public void checkStatus(String status, String user) {
+
     info("Verify that the status is shown");
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
-        if ($(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS.
-                replace("$status",status).replace("$fullName",user))).is(Condition.visible));
+        if (evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_STATUS.replace("$status", status).replace("$fullName", user),
+                3000,
+                0) != null)
+          ;
         break;
       }
-      if ($(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS.
-              replace("$status",status).replace("$fullName",user))).is(Condition.visible))
-      {
+      if (evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_STATUS.replace("$status", status).replace("$fullName", user),
+              5000,
+              0) != null) {
         info("Element " + ELEMENT_INTRANET_NOTIFICATION_STATUS.replace("$status", status).replace("$fullName", user)
                 + " is displayed");
         break;
       }
+      info("Retry...[" + repeat + "]");
+      this.testBase.getExoWebDriver().getWebDriver().navigate().refresh();
 
     }
   }
 
-
   /**
    * Check status of space notifications
-   * 
+   *
    * @param status is a status's content of Notifications
    * @param space is space's name
    */
@@ -592,7 +607,7 @@ public class IntranetNotification {
 
   /**
    * Check not available notification in notifcation list
-   * 
+   *
    * @param status is a status's content of Notifications
    * @param user is full name or name of the user
    */
@@ -608,33 +623,33 @@ public class IntranetNotification {
 
   /**
    * Check order of Notifications in the list
-   * 
+   *
    * @param num is order's number in the list
    * @param status is the status of Notification
    * @param fullName is the full name of the user that send the notification
    */
   public void checkOrderNotifications(int num, String status, String fullName) {
     info("Check on the notificaiton has index as:" + num);
-    $(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS_ORDER.replace("$num", String.valueOf(num))
-                                                                       .replace("$status", status)
-                                                                       .replace("$fullName", fullName))).waitUntil(Condition.visible,Configuration.timeout);
+    evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_STATUS_ORDER.replace("$num", String.valueOf(num))
+            .replace("$status", status)
+            .replace("$fullName", fullName));
 
   }
 
   /**
    * Check unread notification
-   * 
+   *
    * @param status is a status of the notification
    * @param fullName is a full name of the user that send the notification
    */
   public void checkUnreadNotification(String status, String fullName) {
     info("Check:" + status + " of the user:" + fullName);
-    $(byXpath(ELEMENT_INTRANET_NOTIFICATION_UNREAD.replace("$status", status).replace("$fullName", fullName))).waitUntil(Condition.visible,Configuration.timeout);
+    evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_UNREAD.replace("$status", status).replace("$fullName", fullName));
   }
 
   /**
    * Check read notification
-   * 
+   *
    * @param status is a status of the notification
    * @param fullName is a full name of the user that send the notification
    */
@@ -655,7 +670,7 @@ public class IntranetNotification {
 
   /**
    * Remove an notification by index
-   * 
+   *
    * @param num is order's number in notification list
    */
   public void removeNotificationByIndex(int num) {
@@ -666,17 +681,17 @@ public class IntranetNotification {
 
   /**
    * Check the number of badge notification
-   * 
+   *
    * @param num is the number that is shown
    */
   public void checkBadgeNoti(int num) {
     info("Check number of badge notification");
-      ELEMENT_ALERT_NOTIFICATION_EXIST.parent().shouldHave(Condition.text(String.valueOf(num)));
+    ELEMENT_ALERT_NOTIFICATION_EXIST.parent().shouldHave(Condition.text(String.valueOf(num)));
   }
 
   /**
    * Check not any the number of badge notification
-   * 
+   *
    * @param num is the number that is shown
    */
   public void checkNotBadgeNoti(int num) {
@@ -686,7 +701,7 @@ public class IntranetNotification {
 
   /**
    * Check format of Activity's comment in Notification list
-   * 
+   *
    * @param users is array of users
    * @param status is as: has commented on your activity,...
    * @param actTitle is the title of the activity that is commented
@@ -704,7 +719,7 @@ public class IntranetNotification {
 
   /**
    * Check Activity's title is shown in notification list
-   * 
+   *
    * @param actTitle String
    * @param isPopUp =true if want to check on notification list popup =false if
    *          want to check on notification list page
@@ -721,7 +736,7 @@ public class IntranetNotification {
 
   /**
    * Check avatar of notification list
-   * 
+   *
    * @param users is array of users
    * @param isPopUp =true, if the notification list is shown in Notification list
    *          popup =false, if the notification list is shown in All notification
@@ -739,7 +754,7 @@ public class IntranetNotification {
 
   /**
    * Check avatar of notification list
-   * 
+   *
    * @param user is the username
    * @param isPopUp =true, if the notification list is shown in Notification list
    *          popup =false, if the notification list is shown in All notification
