@@ -25,6 +25,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 import java.awt.*;
 
 import com.codeborne.selenide.SelenideElement;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -555,6 +556,17 @@ public class ActivityStream {
     info("The activity is shared success");
 
   }
+  @Test
+  public void Upload_File_With_Text(String text) {
+    ELEMENT_TAB_LINK.click();
+    refresh();
+    addText(text);
+    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
+    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).should(Condition.be(Condition.enabled));
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
+  }
 
   public void addFormattingText(String text, activitiesFormat type) {
     info("-- Adding formating Text--");
@@ -576,15 +588,33 @@ public class ActivityStream {
         $(ELEMENT_BLOCKQUOTE_ICON).click();
         break;
       case Add_Formtting_numbred_List:
-        info("check quote on toolbar");
-        $(ELEMENT_BULLETEDLIST_ICON).click();
+        info("check numbred list on toolbar");
+        $(ELEMENT_NUMBERED_LIST_ICON).click();
         break;
       case Add_FormttingRemoveFormat:
-        info("check quote on toolbar");
+        info("check remove format on toolbar");
         $(ELEMENT_BUTTON_REMOVE_FORMAT_ICON).click();
         break;
       case Add_Formtting_Bulled_List:
-        info("check quote on toolbar");
+        info("check BulletedList on toolbar");
+        $(ELEMENT_BULLETEDLIST_ICON).click();
+        break;
+      case Add_Formtting_Image:
+        info("check BulletedList on toolbar");
+        switchTo().frame(frame);
+        ELEMENT_INPUT_ACTIVITY.sendKeys(text);
+        switchTo().defaultContent();
+        $(ELEMENT_SELECTIMAGE_ICON).click();
+        $(byClassName("selectImageBox")).find(byClassName("file")).uploadFromClasspath("eXo-Platform.png");
+        $(byClassName("cke_dialog_ui_button")).parent().waitUntil(Condition.have(Condition.not(Condition.attribute("disabled"))),Configuration.timeout);
+        $(byClassName("cke_dialog_ui_button")).click();
+        break;
+      case Add_Formtting_Link:
+        info("check link on toolbar");
+        $(ELEMENT_SIMPLELINK_ICON).click();
+        $(byClassName("cke_dialog_ui_input_textarea")).find(byAttribute("rows","5")).setValue(text);
+        $(byClassName("cke_dialog_ui_input_text")).find(byAttribute("type","text")).setValue("https://www.google.fr/");
+        $(byClassName("cke_dialog_ui_button")).click();
         break;
 
     }
@@ -1293,7 +1323,7 @@ public void removeCharactersActivity(String text ,int nbreCh, Boolean alltext) {
             .getAttribute("id")
             .split("UIActivityLoader")[1];
     $(byText(activity)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
-    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
+    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
     switch (type) {
       case Add_FormattingBOLD:
         info("check bold on toolbar");
@@ -1301,19 +1331,39 @@ public void removeCharactersActivity(String text ,int nbreCh, Boolean alltext) {
         break;
       case Add_FormattingITALIC:
         info("check italic on toolbar");
-        $(ELEMENT_BUTTON_ITALIC_ICON).click();
+        $(byText(activity)).parent().parent().$(ELEMENT_BUTTON_ITALIC_ICON).click();
         break;
       case Add_FormattingQuote:
         info("check quote on toolbar");
-        $(ELEMENT_BLOCKQUOTE_ICON).click();
+        $(byText(activity)).parent().parent().$(ELEMENT_BLOCKQUOTE_ICON).click();
         break;
       case Add_Formtting_numbred_List:
         info("check quote on toolbar");
-        $(ELEMENT_NUMBERED_LIST_ICON).click();
+        $(byText(activity)).parent().parent().$(ELEMENT_NUMBERED_LIST_ICON).click();
         break;
       case Add_Formtting_Bulled_List:
         info("check quote on toolbar");
-        $(ELEMENT_BULLETEDLIST_ICON).click();
+        $(byText(activity)).parent().parent().$(ELEMENT_BULLETEDLIST_ICON).click();
+        break;
+      case Add_Formtting_Image:
+        info("check BulletedList on toolbar");
+        executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
+        switchTo().defaultContent();
+        // click on the button comment
+        switchTo().defaultContent();
+        $(byText(activity)).parent().parent().$(ELEMENT_SELECTIMAGE_ICON).click();
+        $(byClassName("selectImageBox")).find(byClassName("file")).uploadFromClasspath("eXo-Platform.png");
+        $(byClassName("cke_dialog_ui_button")).parent().waitUntil(Condition.have(Condition.not(Condition.attribute("disabled"))),Configuration.timeout);
+        $(byClassName("cke_dialog_ui_button")).click();
+
+        break;
+      case Add_Formtting_Link:
+        info("check link on toolbar");
+        $(byText(activity)).parent().parent().$(ELEMENT_SIMPLELINK_ICON).click();
+        $(byClassName("cke_dialog_ui_input_textarea")).find(byAttribute("rows","5")).setValue(activity);
+        $(byClassName("cke_dialog_ui_input_text")).find(byAttribute("type","text")).setValue("https://www.google.fr/");
+        $(byClassName("cke_dialog_ui_button")).click();
+        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
         break;
     }
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
@@ -1343,39 +1393,52 @@ public void removeCharactersActivity(String text ,int nbreCh, Boolean alltext) {
     // Get id Comment button
     executeJavaScript("window.scrollBy(0,-250)");
     // Click on reply link
-    $(byId(ELEMENT_lABEL_REPLY_COMMENT.replace("{id}", idBlocComment))).click();
+    $(byId(ELEMENT_lABEL_REPLY_COMMENT.replace("{id}", idBlocComment))).waitUntil(Condition.visible,Configuration.timeout).click();
     // Insert the reply
-    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.visible,Configuration.timeout);
+    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
+    switch (type) {
+      case Add_FormattingBOLD:
+        info("check bold on toolbar");
+        $(byText(comment)).parent().parent().parent().parent().parent().find(ELEMENT_BUTTON_BOLD_ICON).waitUntil(Condition.visible, Configuration.timeout).click();
+        break;
+      case Add_FormattingITALIC:
+        info("check italic on toolbar");
+        $(byText(comment)).parent().parent().parent().parent().parent().find(ELEMENT_BUTTON_ITALIC_ICON).waitUntil(Condition.visible, Configuration.timeout).click();
+        break;
+      case Add_FormattingQuote:
+        info("check quote on toolbar");
+        $(byText(comment)).parent().parent().parent().parent().parent().find(ELEMENT_BLOCKQUOTE_ICON).waitUntil(Condition.visible, Configuration.timeout).click();
+        break;
+      case Add_Formtting_numbred_List:
+        info("check quote on toolbar");
+        $(byText(comment)).parent().parent().parent().parent().parent().find(ELEMENT_NUMBERED_LIST_ICON).waitUntil(Condition.visible, Configuration.timeout).click();
+        break;
+      case Add_Formtting_Bulled_List:
+        info("check quote on toolbar");
+        $(byText(comment)).parent().parent().parent().parent().parent().find(ELEMENT_BULLETEDLIST_ICON).waitUntil(Condition.visible, Configuration.timeout).click();
+        break;
+      case Add_Formtting_Image:
+        info("check BulletedList on toolbar");
+        $(byText(comment)).parent().parent().parent().parent().parent().find(ELEMENT_SELECTIMAGE_ICON).waitUntil(Condition.visible, Configuration.timeout).click();
+        $(byClassName("cke_dialog_ui_input_text")).click();
+        break;
+      case Add_Formtting_Link:
+        info("check link on toolbar");
+        $(byText(comment)).parent().parent().parent().parent().parent().find(ELEMENT_SIMPLELINK_ICON).waitUntil(Condition.visible, Configuration.timeout).click();
+        $(byClassName("cke_dialog_ui_input_textarea")).find(byAttribute("rows","5")).setValue(comment);
+        $(byClassName("cke_dialog_ui_input_text")).find(byAttribute("type","text")).setValue("https://www.google.fr/");
+        $(byClassName("cke_dialog_ui_button")).click();
+        break;
+    }
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + reply + "\")", "");
     // click on the button comment
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(reply)).should(Condition.exist);
-    $(byText(reply)).parent().parent().find(byText(user)).should(Condition.exist);
-    switch (type) {
-      case Add_FormattingBOLD:
-        info("check bold on toolbar");
-        $(ELEMENT_BUTTON_BOLD_ICON).click();
-        break;
-      case Add_FormattingITALIC:
-        info("check italic on toolbar");
-        $(ELEMENT_BUTTON_ITALIC_ICON).click();
-        break;
-      case Add_FormattingQuote:
-        info("check quote on toolbar");
-        $(ELEMENT_BLOCKQUOTE_ICON).click();
-        break;
-      case Add_Formtting_numbred_List:
-        info("check quote on toolbar");
-        $(ELEMENT_NUMBERED_LIST_ICON).click();
-        break;
-      case Add_Formtting_Bulled_List:
-        info("check quote on toolbar");
-        $(ELEMENT_BULLETEDLIST_ICON).click();
-        break;
-    }
-
+    $(byText(reply)).parent().parent().parent().find(byText(user)).should(Condition.exist);
     info("Verify that the reply is added");
   }
+
 
   public void commentWikiActivity(String wikiactivity, String comment) {
     // get the id of wikiactivity
@@ -1681,6 +1744,6 @@ public void removeCharactersActivity(String text ,int nbreCh, Boolean alltext) {
     No_Value, Has_One_Value;
   }
   public enum activitiesFormat {
-    Add_FormattingBOLD,Add_FormattingITALIC,Add_FormattingQuote,Add_Formtting_numbred_List,Add_Formtting_Bulled_List,Add_FormttingRemoveFormat;
+    Add_FormattingBOLD,Add_FormattingITALIC,Add_FormattingQuote,Add_Formtting_numbred_List,Add_Formtting_Bulled_List,Add_FormttingRemoveFormat,Add_Formtting_Image,Add_Formtting_Link;
   }
 }

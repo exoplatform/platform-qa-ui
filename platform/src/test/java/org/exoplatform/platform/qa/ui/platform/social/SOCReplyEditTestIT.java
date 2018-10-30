@@ -33,8 +33,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLoca
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_ACTIVITY_STREAM_CONTAINER;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACES_LIST;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream.activitiesFormat.Add_FormattingBOLD;
-import static org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream.activitiesFormat.Add_FormattingITALIC;
+import static org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream.activitiesFormat.*;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 import static org.junit.Assert.assertEquals;
 
@@ -100,7 +99,6 @@ public class SOCReplyEditTestIT  extends Base {
         activityStream.addActivity(activity1, "");
         activityStream.commentActivity(activity1, comment1);
         activityStream.replyToComment(comment1,reply1,DATA_NAME_ROOT);
-
         activityStream.editComment(reply1, newreply);
         $(byText(newreply+reply1)).waitUntil(Condition.visible, Configuration.timeout);
         manageLogInOut.signIn(username,DATA_PASS);
@@ -370,6 +368,7 @@ public class SOCReplyEditTestIT  extends Base {
         manageLogInOut.signIn(username, PASS_ROOT);
         $(byText(reply1)).waitUntil(Condition.visible, Configuration.timeout);
         activityStream.gotoCommentViewer(reply1);
+        manageLogInOut.signIn(username, PASS_ROOT);
         activityStream.deleteactivity(activity1);
     }
     @Test
@@ -426,8 +425,151 @@ public class SOCReplyEditTestIT  extends Base {
         activityStream.removeCharactersComment(reply1,reply1.length(),true);
         activityStream.deleteactivity(activity1);
     }
-   /* @Test
-    public void test21_CheckOrderOfREplyWhenEditReply() {
+
+   @Test
+
+    public void test15_CheckEditReplyWithFormattingTextBold(){
+       // Check when this feature will be done
+        String activity1 = "activity" + getRandomNumber();
+        String comment1 = "comment" + getRandomNumber();
+        String reply1 = "reply1" + getRandomNumber();
+        String newreply = "newreply" + getRandomNumber();
+        activityStream.addActivity(activity1,"");
+        activityStream.commentActivity(activity1,comment1);
+        activityStream.addFormattedTextInReply(comment1, reply1,DATA_NAME_ROOT, Add_FormattingBOLD);
+        activityStream.editFormattingComment(reply1,newreply);
+        assertEquals(Integer.parseInt($(byText(newreply+reply1)).getCssValue("font-weight")),700);
+        manageLogInOut.signIn(username,DATA_PASS);
+        activityStream.deleteactivity(activity1);
+    }
+    @Test
+    public void test16_CheckReply_EnabledBydefault() {
+        // Check when this feature will be done
+        String activity1 = "activity1" + getRandomNumber();
+        String comment1 = "comment" + getRandomNumber();
+        String reply1 = "reply1" + getRandomNumber();
+        activityStream.addActivity(activity1,"");
+        activityStream.commentActivity(activity1, comment1);
+        activityStream.replyToComment(comment1,reply1,DATA_NAME_ROOT);
+        activityStream.CheckEditCommentbyDefault(reply1, true);
+        manageLogInOut.signIn(username, PASS_ROOT);
+        activityStream.deleteactivity(activity1);
+
+    }
+    @Test
+
+    public void test17_CheckEditReplyWithFormattingTextItalic(){
+        // Check when this feature will be done
+        String activity1 = "activity" + getRandomNumber();
+        String comment1 = "comment" + getRandomNumber();
+        String reply1 = "reply1" + getRandomNumber();
+        String newreply = "newreply" + getRandomNumber();
+        activityStream.addActivity(activity1,"");
+        activityStream.commentActivity(activity1,comment1);
+        activityStream.addFormattedTextInReply(comment1, reply1,DATA_NAME_ROOT, Add_FormattingITALIC);
+        activityStream.editFormattingComment(reply1,newreply);
+        assertEquals(($(byText(newreply+reply1)).getCssValue("font-style")),"italic");
+        manageLogInOut.signIn(username,DATA_PASS);
+        activityStream.deleteactivity(activity1);
+    }
+    @Test
+
+    public void test18_CheckEditReplyWithFormattingTextNumbredList(){
+        // Check when this feature will be done
+        String activity1 = "activity" + getRandomNumber();
+        String comment1 = "comment" + getRandomNumber();
+        String reply1 = "reply1" + getRandomNumber();
+        String newreply = "newreply" + getRandomNumber();
+        activityStream.addActivity(activity1,"");
+        activityStream.commentActivity(activity1,comment1);
+        activityStream.addFormattedTextInReply(comment1, reply1,DATA_NAME_ROOT, Add_Formtting_numbred_List);
+        activityStream.editFormattingComment(reply1,newreply);
+        assertEquals($(byText(newreply+reply1)).getCssValue("list-style-position"),"inside");
+        manageLogInOut.signIn(username,DATA_PASS);
+        activityStream.deleteactivity(activity1);
+    }
+    @Test
+
+    public void test19_CheckEditReplyWithFormattingTextBulledList(){
+        // Check when this feature will be done
+        String activity1 = "activity" + getRandomNumber();
+        String comment1 = "comment" + getRandomNumber();
+        String reply1 = "reply1" + getRandomNumber();
+        String newreply = "newreply" + getRandomNumber();
+        activityStream.addActivity(activity1,"");
+        activityStream.commentActivity(activity1,comment1);
+        activityStream.addFormattedTextInReply(comment1, reply1,DATA_NAME_ROOT, Add_Formtting_Bulled_List);
+        activityStream.editFormattingComment(reply1,newreply);
+        assertEquals($(byText(newreply+reply1)).getCssValue("list-style-type"),"decimal");
+        manageLogInOut.signIn(username,DATA_PASS);
+        activityStream.deleteactivity(activity1);
+    }
+    @Test
+
+    public void test20_CheckEditReplyWithFormattingTextBlockquote(){
+        // Check when this feature will be done
+        String activity1 = "activity" + getRandomNumber();
+        String comment1 = "comment" + getRandomNumber();
+        String reply1 = "reply1" + getRandomNumber();
+        String newreply = "newreply" + getRandomNumber();
+        activityStream.addActivity(activity1,"");
+        activityStream.commentActivity(activity1,comment1);
+        activityStream.addFormattedTextInReply(comment1, reply1,DATA_NAME_ROOT, Add_FormattingQuote);
+        activityStream.editFormattingComment(reply1,newreply);
+        assertEquals($(byText(newreply+reply1)).getCssValue("list-style-type"),"decimal");
+        manageLogInOut.signIn(username,DATA_PASS);
+        activityStream.deleteactivity(activity1);
+
+    }
+    @Test
+
+    public void test21_CheckEditReplyWithFormattingTextRemoveFormat(){
+        // Check when this feature will be done
+        String activity1 = "activity" + getRandomNumber();
+        String comment1 = "comment" + getRandomNumber();
+        String reply1 = "reply1" + getRandomNumber();
+        String newreply = "newreply" + getRandomNumber();
+        activityStream.addActivity(activity1,"");
+        activityStream.commentActivity(activity1,comment1);
+        activityStream.addFormattedTextInReply(comment1, reply1,DATA_NAME_ROOT, Add_FormttingRemoveFormat);
+        activityStream.editFormattingComment(reply1,newreply);
+        assertEquals(($(byText(newreply+reply1)).getCssValue("font-style")),"normal");
+        manageLogInOut.signIn(username,DATA_PASS);
+        activityStream.deleteactivity(activity1);
+    }
+    @Test
+    public void test22_CheckEditReplyWithlinkFormtoolbar() {
+        // Check when this feature will be done
+        String activity1 = "activity1" + getRandomNumber();
+        String comment1 = "comment" + getRandomNumber();
+        String reply1= "reply1" + getRandomNumber();
+        String newreply = "newreply" + getRandomNumber();
+        activityStream.addActivity(activity1,"");
+        activityStream.commentActivity(activity1,comment1);
+        activityStream.addFormattedTextInReply(comment1, reply1,DATA_NAME_ROOT, Add_Formtting_Link);
+        activityStream.editComment(reply1,newreply);
+        $(byText("https://www.google.fr/"+reply1 + newreply)).waitUntil(Condition.visible, Configuration.timeout);
+        manageLogInOut.signIn(username, PASS_ROOT);
+        activityStream.deleteactivity(activity1);
+    }
+    @Test
+    public void test23_CheckEditReplyWithImageFormtoolbar() {
+        // Check when this feature will be done
+
+        String activity1 = "activity1" + getRandomNumber();
+        String newactivity = "activity1" + getRandomNumber();
+        String comment1 = "comment1" + getRandomNumber();
+        String reply1 = "reply1" + getRandomNumber();
+        String newreply = "reply1" + getRandomNumber();
+        activityStream.addActivity(activity1,"");
+        activityStream.commentActivity(activity1,comment1);
+        activityStream.addFormattedTextInReply(comment1, reply1,DATA_NAME_ROOT, Add_Formtting_Image);
+        activityStream.editComment(reply1,newreply);
+        manageLogInOut.signIn(username, PASS_ROOT);
+        activityStream.deleteactivity(activity1);
+    }
+    @Test
+    public void test24_CheckOrderOfREplyWhenEditReply() {
 
 
         String activity1 = "activity1" + getRandomNumber();
@@ -449,39 +591,9 @@ public class SOCReplyEditTestIT  extends Base {
         activityStream.editComment(reply2, newreply);
         activityStream.editComment(reply3, newreply);
         refresh();
-       // ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_COMMENT_BOX).get(0).find(byText(comment1)).should(Condition.exist);
-       // ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_COMMENT_BOX).get(0).find(byText(comment2)).should(Condition.exist);
-       // ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_COMMENT_BOX).get(1).find(byText(comment3)).should(Condition.exist);
-
-    } */
-
-    @Test
-    public void test15_CheckEditReplyWithFormattingTextBold(){
-        String activity1 = "activity" + getRandomNumber();
-        String comment1 = "comment" + getRandomNumber();
-        String reply1 = "reply1" + getRandomNumber();
-        String newcomment = "newcomment" + getRandomNumber();
-        activityStream.addActivity(activity1,"");
-        activityStream.commentActivity(activity1,comment1);
-        activityStream.addFormattedTextInReply(comment1, reply1,DATA_NAME_ROOT, Add_FormattingITALIC);
-        activityStream.editFormattingComment(comment1,newcomment);
-        assertEquals(Integer.parseInt($(byText(newcomment+comment1)).getCssValue("font-weight")),700);
-        activityStream.deleteactivity(activity1);
-    }
-    @Test
-    public void test16_CheckReply_EnabledBydefault() {
-
-        String activity1 = "activity1" + getRandomNumber();
-        String comment1 = "comment" + getRandomNumber();
-        String reply1 = "reply1" + getRandomNumber();
-        activityStream.addActivity(activity1,"");
-        activityStream.commentActivity(activity1, comment1);
-        activityStream.replyToComment(comment1,reply1,DATA_NAME_ROOT);
-        activityStream.CheckEditCommentbyDefault(reply1, true);
-        manageLogInOut.signIn(username, PASS_ROOT);
-        activityStream.deleteactivity(activity1);
-        
-
+        // ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_COMMENT_BOX).get(0).find(byText(comment1)).should(Condition.exist);
+        // ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_COMMENT_BOX).get(0).find(byText(comment2)).should(Condition.exist);
+        // ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_COMMENT_BOX).get(1).find(byText(comment3)).should(Condition.exist);
 
     }
 

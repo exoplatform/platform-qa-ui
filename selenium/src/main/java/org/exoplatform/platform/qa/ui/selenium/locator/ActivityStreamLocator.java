@@ -734,6 +734,9 @@ public final class ActivityStreamLocator {
     public static final By ELEMENT_BLOCKQUOTE_ICON=byClassName("cke_button__blockquote_icon");
     public static final By ELEMENT_BULLETEDLIST_ICON=byClassName("cke_button__bulletedlist_icon");
     public static final By ELEMENT_NUMBERED_LIST_ICON=byClassName("cke_button__numberedlist_icon");
+    public static final By ELEMENT_SIMPLELINK_ICON = byClassName("cke_button__simplelink_icon");
+    public static final By ELEMENT_SELECTIMAGE_ICON= byClassName("cke_button__selectimage_icon");
+
 
 
 

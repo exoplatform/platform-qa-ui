@@ -120,6 +120,8 @@ public class SOCActivityEditTestIT extends Base {
         String activity1 = "activity1" + getRandomNumber();
         activityStream.addActivity(activity1, "");
         activityStream.CheckEditActivity(activity1, true);
+        manageLogInOut.signIn(username, PASS_ROOT);
+        activityStream.deleteactivity(activity1);
 
 
     }
@@ -311,7 +313,7 @@ public class SOCActivityEditTestIT extends Base {
         manageLogInOut.signIn(username, PASS_ROOT);
         homePagePlatform.goToMySpaces();
         ELEMENT_SPACES_LIST.find(byText(space)).click();
-        activityStream.CheckEditActivityInSpaceByManager(activity1, false);
+        activityStream.CheckEditActivityInSpaceByManager(activity1, true);
         homePagePlatform.goToMySpaces();
         spaceManagement.deleteSpace(space, false);
 
@@ -364,10 +366,10 @@ public class SOCActivityEditTestIT extends Base {
         activityStream.addActivity(activity1, "");
         $(byText(activity1)).waitUntil(Condition.visible, Configuration.timeout);
         activityStream.gotoActivityViewer(activity1);
+        manageLogInOut.signIn(username, PASS_ROOT);
         activityStream.deleteactivity(activity1);
 
     }
-
     @Test
     public void test15_checkEditActivityInDefaultSkin() {
 
@@ -378,8 +380,8 @@ public class SOCActivityEditTestIT extends Base {
         homePagePlatform.goToHomePage();
         activityStream.addActivity(activity1, "");
         activityStream.CheckEditActivity(activity1, true);
+        manageLogInOut.signIn(username, PASS_ROOT);
         activityStream.deleteactivity(activity1);
-
 
     }
 
@@ -475,7 +477,7 @@ public class SOCActivityEditTestIT extends Base {
 
     }
     @Test
-    public void test24_CheckEditActivityWithFormattingTextNumbredList() {
+    public void test23_CheckEditActivityWithFormattingTextNumbredList() {
 
         // Check when this feature will be done
 
@@ -489,7 +491,7 @@ public class SOCActivityEditTestIT extends Base {
 
     }
     @Test
-    public void test25_CheckEditActivityWithFormattingTextBulledList() {
+    public void test24_CheckEditActivityWithFormattingTextBulledList() {
 // Check when this feature will be done
         String activity = "activity" + getRandomNumber();
         String newActivity="newActivity"+getRandomNumber();
@@ -501,7 +503,7 @@ public class SOCActivityEditTestIT extends Base {
 
     }
     @Test
-    public void test26_CheckEditActivityWithFormattingTextBlockquote() {
+    public void test25_CheckEditActivityWithFormattingTextBlockquote() {
 // Check when this feature will be done
         String activity = "activity" + getRandomNumber();
         String newActivity="newActivity"+getRandomNumber();
@@ -513,13 +515,13 @@ public class SOCActivityEditTestIT extends Base {
 
     }
     @Test
-    public void test27_CheckEditActivityWithFormattingTextRemoveFormat() {
+    public void test26_CheckEditActivityWithFormattingTextRemoveFormat() {
         // Check when this feature will be done
 
         String activity = "activity" + getRandomNumber();
         String newActivity="newActivity"+getRandomNumber();
         info("Add user");
-        activityStream.addFormattingText(activity,Add_FormattingBOLD);
+        activityStream.addActivity(activity,"");
         activityStream.addFormattingText(activity,Add_FormttingRemoveFormat);
         activityStream.editFormatedActivity(activity,newActivity);
         assertEquals(($(byText(activity+newActivity)).getCssValue("font-style")),"normal");
@@ -528,14 +530,43 @@ public class SOCActivityEditTestIT extends Base {
     }
 
     @Test
-    public void test28_CheckActivities_EnabledBydefault() {
+    public void test27_CheckActivities_EnabledBydefault() {
 
         String activity1 = "activity1" + getRandomNumber();
         activityStream.addActivity(activity1, "");
         activityStream.CheckEditActivityBydefault(activity1, true);
         manageLogInOut.signIn(username, PASS_ROOT);
         activityStream.deleteactivity(activity1);
-
-
     }
+    @Test
+    public void test28_CheckEditActivityWithFile() {
+
+        String activity1 = "activity1" + getRandomNumber();
+        activityStream.Upload_File_With_Text(activity1);
+        activityStream.CheckEditActivityBydefault(activity1, true);
+        manageLogInOut.signIn(username, PASS_ROOT);
+        activityStream.deleteactivity(activity1);
+    }
+    @Test
+    public void test29_CheckEditActivityWithlinkFormmicroblog() {
+     // Check when this feature will be done
+        String activity1 = "activity1" + getRandomNumber();
+        String newactivity = "newactivity" + getRandomNumber();
+        activityStream.addFormattingText(activity1,Add_Formtting_Link);
+        activityStream.editActivity(activity1,newactivity);
+        $(byText("https://www.google.fr/"+activity1 + newactivity)).waitUntil(Condition.visible, Configuration.timeout);
+        manageLogInOut.signIn(username, PASS_ROOT);
+        activityStream.deleteactivity(activity1);
+    }
+    @Test
+    public void test30_CheckEditActivityWithImageFormmicroblog() {
+
+        String activity1 = "activity1" + getRandomNumber();
+        String newactivity = "activity1" + getRandomNumber();
+        activityStream.addFormattingText(activity1,Add_Formtting_Image);
+        activityStream.editActivity(activity1,newactivity);
+        manageLogInOut.signIn(username, PASS_ROOT);
+        activityStream.deleteactivity(activity1);
+    }
+
 }
