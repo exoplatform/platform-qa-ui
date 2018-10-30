@@ -655,7 +655,7 @@ public class IntranetNotification {
    */
   public void checkReadNotification(String status, String fullName) {
     info("Check:" + status + " of the user:" + fullName);
-    evt.waitForElementNotPresent(ELEMENT_INTRANET_NOTIFICATION_UNREAD.replace("$status", status).replace("$fullName", fullName));
+    $(byXpath(ELEMENT_INTRANET_NOTIFICATION_UNREAD.replace("$status", status).replace("$fullName", fullName))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
