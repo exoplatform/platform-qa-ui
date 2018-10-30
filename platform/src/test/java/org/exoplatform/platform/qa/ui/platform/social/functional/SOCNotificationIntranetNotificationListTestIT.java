@@ -752,7 +752,7 @@ public class SOCNotificationIntranetNotificationListTestIT extends Base {
     @Test
     public void test10_CheckDisplayOfMarkAsRead() throws AWTException {
         info("Test 10 Check display of [Mark as read]");
-
+        ArrayList<String> arrayUser = new ArrayList<String>();
         String username1 = "usernamea" + getRandomString();
         String email1 = username1 + "@gmail.com";
         String username2 = "usernameb" + getRandomString();
@@ -815,5 +815,47 @@ public class SOCNotificationIntranetNotificationListTestIT extends Base {
         navigationToolbar.goToManageCommunity();
         addUsers.deleteUser(username1);
         addUsers.deleteUser(username2);
+    }
+
+    /**
+     * <li> Case ID:125130.</li>
+     * <li> Test Case Name: Check notifications list out-of-the-box.</li>
+     * <li> Pre-Condition: The user logs for the 1st time to the platform</li>
+     * <li> Post-Condition: </li>
+     */
+    @Test
+    public void test11_CheckNotificationsListOutofthebox() {
+        info("Test 11 Check notifications list out-of-the-box");
+		/*Step Number: 1
+		*Step Name:
+		*Step Description:
+			- Login
+			- Click the notifications icon
+			- Check the popover content
+		*Input Data:
+
+		*Expected Outcome:
+			- The button View All is not displayed
+			- [Mark as read] is hidden
+			- The UI indicates there is no notification to display*/
+        ArrayList<String> arrayUser = new ArrayList<String>();
+        String password = "123456";
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        UserAddManagement.addUser(username1, "123456", email1, username1, username1);
+        manageLogInOut.signIn(username1, "123456");
+        navigationToolbar.goToIntranetNotification();
+
+        info("The link Mark as read is hidden");
+        $(ELEMENT_INTRANET_NOTIFICATION_MARK_ALL_AS_READ).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+
+        info("The UI of the list must indicate there is no notification to display");
+        $(ELEMENT_INTRANET_NOTIFICATION_EMPTY_LIST).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+
+        info("The button View All is not displayed");
+        $(ELEMENT_VIEW_ALL).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+
     }
 }
