@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
@@ -800,7 +801,6 @@ public class SOCNotificationIntranetNotificationListTestIT extends Base {
         comments.add(comment);
         info("User A login");
         manageLogInOut.signIn(username1, password);
-
         String statusLikeAc = "likes your activity";
         String statusCommAc = "has commented on you activity";
         navigationToolbar.goToIntranetNotification();
@@ -856,6 +856,118 @@ public class SOCNotificationIntranetNotificationListTestIT extends Base {
 
         info("The button View All is not displayed");
         $(ELEMENT_VIEW_ALL).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+
+    }
+
+    /**
+     * <li> Case ID:125132.</li>
+     * <li> Test Case Name: Check layout with 1 notification kept and after refusing.</li>
+     * <li> Pre-Condition: - The user has received already several notification
+     * but kept ONLY1 notification is the list
+     * - The notification kept in the list by the user includes an action [Refuse]
+     * (connection request, space join, space request).</li>
+     * <li> Post-Condition: </li>
+     */
+    /*Step Number: 1
+		*Step Name: Step 1 : Click Refuse
+		*Step Description:
+			- Login
+			- Open the notifications list
+			- Click [Refuse]
+		*Input Data:
+
+		*Expected Outcome:
+			- The notification is hidden
+			- The layout of the popover/list is updated accordingly :
+			* The label "No Notifications" is displayed*
+			* The link [Mark all as read] is not displayed anymore*
+			* [View All] is displayed*/
+    @Test
+    public void test13_CheckLayoutWith1NotificationKeptAndAfterRefusing() {
+        info("Test 13 Check layout with 1 notification kept and after refusing");
+
+        ArrayList<String> arrayUser = new ArrayList<String>();
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String username2 = "usernameb" + getRandomString();
+        String email2 = username2 + "@gmail.com";
+        String username3 = "usernamec" + getRandomString();
+        String email3 = username3 + "@gmail.com";
+        String password = "123456";
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        UserAddManagement.addUser(username1, "123456", email1, username1, username1);
+        UserAddManagement.addUser(username2, "123456", email2, username2, username2);
+        UserAddManagement.addUser(username3, "123456", email3, username3, username3);
+        manageLogInOut.signIn(username1, password);
+
+        info("goto My notification");
+        navigationToolbar.goToMyNotifications();
+        MyNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.AS_Comment_intranet);
+        MyNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.AS_Like_intranet);
+
+        info("User A sent a connection request to User B");
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(username2);
+
+        info("User A add an activity");
+        String activity = "activity" + getRandomNumber();
+        homePagePlatform.goToHomePage();
+        activityStream.addActivity(activity, null);
+        activityStream.checkActivity(activity);
+
+        info("User B login");
+        manageLogInOut.signIn(username2, password);
+
+        info("User A and User B are connected");
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.acceptRqConnection(username1);
+
+        info("UserB comments in UserA's activity");
+        ArrayList<String> comments = new ArrayList<String>();
+        String comment = "comment" + getRandomNumber();
+
+        info("Add a comment to UserA's activity");
+        homePagePlatform.goToHomePage();
+        activityStream.likeActivity(activity);
+        activityStream.commentActivity(activity, comment);
+
+        info("Add comment to Comment list");
+        comments.add(comment);
+
+        info("User C login");
+        manageLogInOut.signIn(username3, password);
+
+        info("User C sent a connection request to User A");
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(username1);
+
+        info("User A login");
+        manageLogInOut.signIn(username1, password);
+
+        info("User A removed some notificaitons form User B");
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.removeNotificationByIndex(3);
+        intranetNotification.removeNotificationByIndex(2);
+        refresh();
+        info("User A refuse connection with User C");
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.refuseRqConnection(username3);
+
+        info("The link Mark as read is hidden");
+        $(ELEMENT_INTRANET_NOTIFICATION_MARK_ALL_AS_READ).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+
+        info("The UI of the list must indicate there is no notification to display");
+        $(ELEMENT_INTRANET_NOTIFICATION_EMPTY_LIST).waitUntil(Condition.visible, Configuration.timeout);
+
+        info("The button View All is displayed");
+        $(ELEMENT_VIEW_ALL).waitUntil(Condition.visible, Configuration.timeout);
+        manageLogInOut.signIn(DATA_USER1, "gtngtn");
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
+        addUsers.deleteUser(username3);
 
     }
 }
