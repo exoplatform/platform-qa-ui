@@ -87,8 +87,9 @@ public class SOCSpaceMemberManagementRequestTestIT extends Base {
     spaceManagement.addNewSpaceSimple(space, space);
     info("connect with user 2");
     manageLogInOut.signIn(username2, password);
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.goToAllSpacesTab();
+    spaceManagement.searchSpace(space,"");
     info("send request");
     spaceManagement.sendARequestToASpace(space);
     manageLogInOut.signIn(username1, password);
@@ -134,6 +135,7 @@ public class SOCSpaceMemberManagementRequestTestIT extends Base {
     homePagePlatform.goToAllSpace();
     spaceManagement.goToAllSpacesTab();
     info("send request by user 2");
+    spaceManagement.searchSpace(space,"");
     spaceManagement.sendARequestToASpace(space);
     manageLogInOut.signIn(username1, password);
     homePagePlatform.goToMySpaces();
@@ -180,6 +182,7 @@ public class SOCSpaceMemberManagementRequestTestIT extends Base {
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToAllSpace();
     spaceManagement.goToAllSpacesTab();
+    spaceManagement.searchSpace(space,"");
     info("send request by user 2");
     spaceManagement.sendARequestToASpace(space);
     manageLogInOut.signIn(username1, password);

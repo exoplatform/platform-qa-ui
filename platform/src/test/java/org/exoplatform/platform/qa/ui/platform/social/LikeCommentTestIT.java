@@ -350,7 +350,7 @@ public class LikeCommentTestIT extends Base {
     String activity1 = "activity1" + getRandomNumber();
     String comment = "comment" + getRandomNumber();
     info("Create a space and invite users");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
     spaceSettingManagement.goToMemberTab();
     ELEMENT_INPUT_INVITE_USER.sendKeys(DATA_USER2);
@@ -1052,7 +1052,7 @@ public class LikeCommentTestIT extends Base {
     String comment = "comment" + getRandomNumber();
     String space = "space" + getRandomNumber();
 
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
     ELEMENT_TAB_LINK.click();
     refresh();

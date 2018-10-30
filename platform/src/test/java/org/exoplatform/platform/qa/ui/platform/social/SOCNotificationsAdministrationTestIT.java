@@ -77,10 +77,6 @@ public class SOCNotificationsAdministrationTestIT extends Base {
     manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
   }
 
-  @AfterEach
-  public void signout() {
-    manageLogInOut.signOut();
-  }
 
   /**
    * <li>Case ID:121951.</li>
