@@ -615,4 +615,37 @@ public class SOCSpaceManagementTestIT extends Base {
     addUsers.deleteUser(username1);
 
   }
+    @Tag("SOC-6067")
+    @Test
+    public void test15_checkNOtPermissionToEditSpaceApp() {
+        String space = "space" + getRandomNumber();
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@test.com";
+        String password = "123456";
+        String activity1 = "activity1" + getRandomNumber();
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(username1, password, email1, username1, username1);
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(space, space);
+        spaceHomePage.goToSpaceSettingTab();
+        spaceSettingManagement.inviteUser(username1, false, "");
+        manageLogInOut.signIn(username1, password);
+        homePagePlatform.goToMySpaces();
+        spaceManagement.searchSpace(space, "");
+        spaceManagement.acceptAInvitation(space);
+        homePagePlatform.goToMySpaces();
+        spaceManagement.searchSpace(space, "");
+        ELEMENT_SPACES_LIST.find(byText(space)).click();
+        activityStream.addActivity(activity1, "");
+        $(ELEMENT_ACTIVITY_STREAM_TAB).parent().find(byClassName("tabName")).doubleClick();
+        $(byValue(" Activity Stream")).shouldNotBe(Condition.visible);
+        spaceManagement.goToTaskTab();
+        ELEMENT_SPACE_MENU_TAB.find(ELEMENT_TASK_TAB).parent().find(byClassName("tabName")).doubleClick();
+        $(byValue("Tasks")).shouldNotBe(Condition.visible);
+        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        homePagePlatform.goToMySpaces();
+        spaceManagement.deleteSpace(space, false);
+    }
 }
