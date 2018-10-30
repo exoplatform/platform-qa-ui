@@ -26,7 +26,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_VIEW_ALL;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("social")
@@ -384,11 +384,11 @@ public class SOCNotificationIntranetNotificationListTestIT extends Base {
         intranetNotification.checkBadgeNoti(1);
 
         info("The connection request notifications is displayed");
-        String statusSendRq = " ";
+        String statusSendRq = "has send you a connection request ";
         navigationToolbar.goToIntranetNotification();
         intranetNotification.checkStatus(statusSendRq, username2);
         String text = "text" + getRandomNumber();
-        String statusMention = " ";
+        String statusMention = "has mentionned you ";
 
         info("Go to the actiivty stream and mention User A");
         manageLogInOut.signIn(username2, password);
@@ -496,9 +496,10 @@ public class SOCNotificationIntranetNotificationListTestIT extends Base {
 
         info("User A login");
         manageLogInOut.signIn(username1, password);
-        String statusLikeAc = "";
-        String statusCommAc = "";
-        String statusMention = " ";
+        String statusLikeAc = "likes your activity";
+        String statusCommAc = "has commented on you activity";
+        String statusMention = "has mentionned you";
+
         String textMention = "text" + getRandomNumber();
 
         info("View comment notification of User A");
@@ -681,4 +682,47 @@ public class SOCNotificationIntranetNotificationListTestIT extends Base {
         addUsers.deleteUser(username2);
 
     }
+
+    /**
+     * <li> Case ID:125126.</li>
+     * <li> Test Case Name: Check notifications list when there is no notification.</li>
+     * <li> Pre-Condition: The notification list is empty
+     * (no notification received or all notifications are removed)</li>
+     * <li> Post-Condition: </li>
+     */
+    /*Step Number: 1
+		*Step Name:
+		*Step Description:
+			- Login
+			- Click the notifications icon
+		*Input Data:
+
+		*Expected Outcome:
+			The list is revealed and is empty :
+			- The link Mark as read is hidden
+			- The UI of the list must indicate there is no notification to display*/
+    @Test
+    public void test09_CheckNotificationsListWhenThereIsNoNotification() {
+        info("Test 9: Check notifications list when there is no notification");
+
+        ArrayList<String> arrayUser = new ArrayList<String>();
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String password = "123456";
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        UserAddManagement.addUser(username1, "123456", email1, username1, username1);
+        manageLogInOut.signIn(username1, "123456");
+        navigationToolbar.goToIntranetNotification();
+
+        info("The link Mark as read is hidden");
+        $(ELEMENT_INTRANET_NOTIFICATION_MARK_ALL_AS_READ).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+
+        info("The UI of the list must indicate there is no notification to display");
+        $(ELEMENT_INTRANET_NOTIFICATION_EMPTY_LIST).waitUntil(Condition.visible, Configuration.timeout);
+    }
 }
+
+
+
