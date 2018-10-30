@@ -225,9 +225,9 @@ public class SOCNotificationIntranetNotificationListTestIT extends Base {
 
         info("Add new user");
         navigationToolbar.goToAddUser();
-        UserAddManagement.addUser(username1, password, email1, username1, username1);
-        UserAddManagement.addUser(username2, password, email2, username2, username2);
-        UserAddManagement.addUser(username3, password, email3, username3, username3);
+        UserAddManagement.addUser(username1, "123456", email1, username1, username1);
+        UserAddManagement.addUser(username2, "123456", email2, username2, username2);
+        UserAddManagement.addUser(username3,"123456", email3, username3, username3);
         manageLogInOut.signIn(username1, password);
 
         info("goto My notification");
@@ -250,7 +250,6 @@ public class SOCNotificationIntranetNotificationListTestIT extends Base {
         manageLogInOut.signIn(username2, password);
 
         info("User A and User B are connected");
-
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(username1);
 
@@ -390,7 +389,7 @@ public class SOCNotificationIntranetNotificationListTestIT extends Base {
         String text = "text" + getRandomNumber();
         String statusMention = " ";
 
-        ("Go to the actiivty stream and mention User A");
+        info("Go to the actiivty stream and mention User A");
         manageLogInOut.signIn(username2, password);
         homePagePlatform.goToHomePage();
         activityStream.mentionUserActivity(username1, text);
@@ -405,4 +404,154 @@ public class SOCNotificationIntranetNotificationListTestIT extends Base {
         addUsers.deleteUser(username1);
         addUsers.deleteUser(username2);
     }
-}
+
+    /**
+     * <li> Case ID:125124.</li>
+     * <li> Test Case Name: Check notifications after logout / login.</li>
+     * <li> Pre-Condition: - Initially, the User A has 3 unread notifications including 2 new notifications
+     * displayed in the blue badge
+     * - When starting the tests, the User A is connected to the platform</li>
+     * <li> Post-Condition: </li>
+     *
+     * @throws AWTException
+     */
+    /*Step Number: 1
+		*Step Name:
+		*Step Description:
+			- Logout / Login User A
+			- Check badge and notification list
+		*Input Data:
+
+		*Expected Outcome:
+			- The number in the badge is still 2
+			- User A has still 3 unread notifications*/
+    /*Step number: 2
+		*Step Name:
+		*Step Description:
+			- Logout User A
+			- Login with User B
+			- Send 2 new notifications to User A (mention and connection request)
+			- Login again with User A and check the badge and notifications list
+		*Input Data:
+
+		*Expected Outcome:
+			- The number in the badge is updated to 4
+			- User A has 5 unread notifications*/
+    @Test
+    public void test07_CheckNotificationsAfterLogoutLogin() throws AWTException {
+        info("Test 7: Check notifications after logout / login");
+
+        ArrayList<String> arrayUser = new ArrayList<String>();
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String username2 = "usernameb" + getRandomString();
+        String email2 = username2 + "@gmail.com";
+        String username3 = "usernamec" + getRandomString();
+        String email3 = username3 + "@gmail.com";
+        String password = "123456";
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        UserAddManagement.addUser(username1, "123456", email1, username1, username1);
+        UserAddManagement.addUser(username2, "123456", email2, username2, username2);
+        UserAddManagement.addUser(username3,"123456", email3, username3, username3);
+        manageLogInOut.signIn(username1, password);
+
+        info("goto My notification");
+        navigationToolbar.goToMyNotifications();
+        MyNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.AS_Comment_intranet);
+        MyNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.AS_Like_intranet);
+
+
+        info("User A sent a connection request to User B");
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(username2);
+
+        info("User A add an activity");
+        String activity = "activity" + getRandomNumber();
+        homePagePlatform.goToHomePage();
+        activityStream.addActivity(activity, null);
+        activityStream.checkActivity(activity);
+
+        info("User B login");
+        manageLogInOut.signIn(username2, password);
+
+        info("User A and User B are connected");
+
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.acceptRqConnection(username1);
+
+        info("UserB comments in UserA's activity");
+        ArrayList<String> comments = new ArrayList<String>();
+        String comment = "comment" + getRandomNumber();
+
+
+        info("Add a comment to UserA's activity");
+        homePagePlatform.goToHomePage();
+        activityStream.commentActivity(activity, comment);
+
+        info("Add comment to Comment list");
+        comments.add(comment);
+
+        info("User A login");
+        manageLogInOut.signIn(username1, password);
+        String statusLikeAc = "";
+        String statusCommAc = "";
+        String statusMention = " ";
+        String textMention = "text" + getRandomNumber();
+
+        info("View comment notification of User A");
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.checkStatus(statusCommAc, username2);
+
+        info("User B login");
+        manageLogInOut.signIn(username2, password);
+
+        info("User B likes User A's activity");
+        homePagePlatform.goToHomePage();
+        activityStream.likeActivity(activity);
+
+        info("User B mention User A in a activity");
+        activityStream.mentionUserActivity(username1, textMention);
+
+        info("User A login");
+        manageLogInOut.signIn(username1, password);
+
+
+        info("The number in the badge is still 2");
+        intranetNotification.checkBadgeNoti(2);
+
+
+        info("User C login");
+        manageLogInOut.signIn(username3, password);
+
+        info("User C sent a connection request to User A");
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(username1);
+
+        info("User C mention to User A");
+        String textMention1 = "text" + getRandomNumber();
+        homePagePlatform.goToHomePage();
+
+        activityStream.mentionUserActivity(username1, textMention1);
+
+        info("User A login");
+        manageLogInOut.signIn(username1, password);
+
+        info("The number in the badge is still 4");
+        intranetNotification.checkBadgeNoti(4);
+
+        info("User A has still 5 unread notifications");
+        String statusSendRq = " ";
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.checkUnreadNotification(statusLikeAc, username2);
+        intranetNotification.checkUnreadNotification(statusMention, username2);
+        intranetNotification.checkUnreadNotification(statusCommAc, username2);
+        intranetNotification.checkUnreadNotification(statusSendRq, username3);
+        intranetNotification.checkUnreadNotification(statusMention, username3);
+        manageLogInOut.signIn(DATA_USER1, "gtngtn");
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
+        addUsers.deleteUser(username3);
+    }}

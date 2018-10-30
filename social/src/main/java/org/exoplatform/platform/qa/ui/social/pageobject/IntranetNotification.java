@@ -448,6 +448,7 @@ public class IntranetNotification {
     }
   }
 
+
   /**
    * Refuse an connection request in notificaiton list
    * 
@@ -628,7 +629,7 @@ public class IntranetNotification {
    */
   public void checkUnreadNotification(String status, String fullName) {
     info("Check:" + status + " of the user:" + fullName);
-    evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_UNREAD.replace("$status", status).replace("$fullName", fullName));
+    $(byXpath(ELEMENT_INTRANET_NOTIFICATION_UNREAD.replace("$status", status).replace("$fullName", fullName))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
