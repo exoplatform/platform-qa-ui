@@ -173,7 +173,8 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_CHAT_SELECT_FILE= $(byXpath("//*[@id=\"appComposerForm\"]/div[1]/div[2]/a[1]"));
     public static final SelenideElement ELEMENT_CHAT_CANCEL_UPLOAD_FILE_BUTTON= $(byXpath(" //*[@id=\"appComposerForm\"]/div[1]/div[2]/a[2]"));
     public static final SelenideElement ELEMENT_CHAT_SHARE_LINK_BUTTON= $(byXpath("//*[@id=\"appComposerForm\"]/div[2]/button"));
-
+    public static final SelenideElement ELEMENT_CHAT_NOTIFICATION_NUMBER = $(byClassName("notif-total"));
+    public static final SelenideElement ELEMENT_MINI_CHAT = $(byClassName("mini-chat"));
 
   public static final SelenideElement ELEMENT_MORE_ACTIONS=$(byClassName("uiIconVerticalDots"));
   public static final SelenideElement ELEMENT_BANNER_CHAT=$(byClassName("uiIconBannerChat"));
@@ -181,3 +182,6 @@ public class ChatLocator {
   public static final SelenideElement ELEMENT_NO_BUTTON_LEAVEROOM = $(byXpath("//*[@id=\"team-delete-button-cancel\"]"));
 
 }
+
+
+
