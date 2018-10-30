@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.platform.wiki.functionnel;
+package org.exoplatform.platform.qa.ui.platform.wiki.functional;
 
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
