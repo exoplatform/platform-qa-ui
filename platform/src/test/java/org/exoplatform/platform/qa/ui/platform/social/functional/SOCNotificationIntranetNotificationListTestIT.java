@@ -970,4 +970,69 @@ public class SOCNotificationIntranetNotificationListTestIT extends Base {
         addUsers.deleteUser(username3);
 
     }
+
+    /**
+     * <li> Case ID:125133.</li>
+     * <li> Test Case Name: Check layout with 1 notification (since first connection) and after refusing.</li>
+     * <li> Pre-Condition: - The user has received only 1 notification is the list since his first connection
+     * - The notification kept in the list by the user includes an action [Refuse] (connection request, space join, space request).</li>
+     * <li> Post-Condition: </li>
+     */
+    /*Step Number: 1
+		*Step Name: Step 1 : Click Refuse
+		*Step Description:
+			- Login
+			- Open the notifications list
+			- Click [Refuse]
+		*Input Data:
+
+		*Expected Outcome:
+			- The notification is hidden
+			- The layout of the popover/list is updated accordingly :
+			* The label "No Notifications" is displayed*
+			*  The link [Mark all as read] is not displayed anymore*
+			*  [View All] is not displayed*/
+    @Test
+    public void test14_CheckLayoutWith1NotificationSinceFirstConnectionAndAfterRefusing() {
+        info("Test 14 Check layout with 1 notification (since first connection) and after refusing");
+
+        ArrayList<String> arrayUser = new ArrayList<String>();
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String username2 = "usernameb" + getRandomString();
+        String email2 = username2 + "@gmail.com";
+        String password = "123456";
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        UserAddManagement.addUser(username1, "123456", email1, username1, username1);
+        UserAddManagement.addUser(username2, "123456", email2, username2, username2);
+        manageLogInOut.signIn(username1, "123456");
+
+        info("User A sent a connection request to User B");
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(username2);
+
+        info("User B login");
+        manageLogInOut.signIn(username2, "123456");
+
+        info("User B refuse connection with User A");
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.refuseRqConnection(username1);
+        refresh();
+
+        info("The link Mark as read is hidden");
+        navigationToolbar.goToIntranetNotification();
+        $(ELEMENT_INTRANET_NOTIFICATION_MARK_ALL_AS_READ).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+
+        info("The UI of the list must indicate there is no notification to display");
+        $(ELEMENT_INTRANET_NOTIFICATION_EMPTY_LIST).waitUntil(Condition.visible, Configuration.timeout);
+
+        info("The button View All is not displayed");
+        $(ELEMENT_VIEW_ALL).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+        manageLogInOut.signIn(DATA_USER1, "gtngtn");
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
+    }
 }
