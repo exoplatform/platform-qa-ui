@@ -128,6 +128,10 @@ public class SOCNotificationIntranetMentionTestIT extends Base {
         intranetNotification.checkStatus(status, username1);
         intranetNotification.checkActivityTitleInStatus(activity1, true);
         intranetNotification.checkUsers(arrayUser, true);
+        manageLogInOut.signIn(DATA_USER1, "gtngtn");
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
     }
 
     @Test
@@ -165,5 +169,73 @@ public class SOCNotificationIntranetMentionTestIT extends Base {
         addUsers.deleteUser(username1);
         addUsers.deleteUser(username2);
     }
-}
 
+    /**
+     * <li> Case ID:125103.</li>
+     * <li> Test Case Name: Check Mention notifications (in comment).</li>
+     * <li> Case ID:125104.</li>
+     * <li> Test Case Name: Click the Mention notifications (in comment).</li>
+     * <li> Pre-Condition: - An wiki activity is generated (create a new page)
+     * - User A has mentioned User B directly in a comment</li>
+     * <li> Post-Condition: </li>
+     *
+     * @throws AWTException
+     */
+    /*Step Number: 1
+		 *Step Name:
+		 *Step Description:
+			- Login with User B
+			- Click the notification icons in the top navigation
+			- Check the notification list
+		 *Input Data:
+
+		 *Expected Outcome:
+			- The Mention notification is displayed in the list*/
+    	/*Step number: 2
+		 *Step Name:
+		 *Step Description:
+			- Check the notification message
+		 *Input Data:
+
+		 *Expected Outcome:
+			The notification message is : $AVATAR$USER has mentioned you $ACTIVITY$DATEWhere :
+			- $AVATAR is the thumbnail of User A
+			- $USER is User A
+			- $ACTIVITY is the name of the wiki page
+			- $DATE is the date of the notification*/
+    @Test
+    public void test02_CheckMentionNotificationsInComment() {
+
+        info("Test 2: Check Mention notifications (in comment)");
+        ArrayList<String> arrayUser = new ArrayList<String>();
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String username2 = getRandomString();
+        String email2 = username2 + "@gmail.com";
+        String password = "123456";
+        arrayUser.add(username1 + " " + username1);
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        userAddManagement.addUser(username1, "123456", email1, username1, username1);
+        userAddManagement.addUser(username2, "123456", email2, username2, username2);
+        manageLogInOut.signIn(username1, "123456");
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToHomePage();
+        String activity1 = "activitya" + getRandomNumber();
+        activityStream.addActivity(activity1, "");
+        String comment = "comment" + getRandomNumber();
+        activityStream.addCommentWithMentionUser(activity1, username2, comment);
+        manageLogInOut.signIn(username2, password);
+        navigationToolbar.goToIntranetNotification();
+        arrayUser.add(username2);
+        String status = "has mentioned you ";
+        intranetNotification.checkAvatarInStatus(username1, true);
+        intranetNotification.checkStatus(status, username1);
+        intranetNotification.checkActivityTitleInStatus(activity1, true);
+        manageLogInOut.signIn(DATA_USER1, "gtngtn");
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
+    }
+}
