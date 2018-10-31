@@ -238,4 +238,59 @@ public class SOCNotificationIntranetMentionTestIT extends Base {
         addUsers.deleteUser(username1);
         addUsers.deleteUser(username2);
     }
-}
+    /*Step Number: 1
+		 *Step Name:
+		 *Step Description:
+			- Login with User B
+			- Click the notification icons in the top navigation
+			- Check the notification list
+		 *Input Data:
+
+		 *Expected Outcome:
+			- The Mention notification is displayed in the list*/
+
+    /*Step number: 2
+     *Step Name:
+     *Step Description:
+        - Click the notification
+     *Input Data:
+
+     *Expected Outcome:
+        - The user is redirected to the activity viewer with all comment expanded.
+        - The comment where the mention has been done is highlighted*/
+    @Test
+    public void test05_CheckMentionNotificationsInComment() {
+
+        info("Test 5: Click the Mention notifications (in comment)");
+        ArrayList<String> arrayUser = new ArrayList<String>();
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String username2 = getRandomString();
+        String email2 = username2 + "@gmail.com";
+        String password = "123456";
+        arrayUser.add(username1 + " " + username1);
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        userAddManagement.addUser(username1, "123456", email1, username1, username1);
+        userAddManagement.addUser(username2, "123456", email2, username2, username2);
+        manageLogInOut.signIn(username1, "123456");
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToHomePage();
+        String activity1 = "activitya" + getRandomNumber();
+        activityStream.addActivity(activity1, "");
+        String comment = "comment" + getRandomNumber();
+        activityStream.addCommentWithMentionUser(activity1, username2, comment);
+        manageLogInOut.signIn(username2, password);
+        navigationToolbar.goToIntranetNotification();
+        arrayUser.add(username2);
+        String status = "has mentioned you ";
+        intranetNotification.checkAvatarInStatus(username1, true);
+        intranetNotification.checkStatus(status, username1);
+        intranetNotification.checkActivityTitleInStatus(activity1, true);
+        intranetNotification.goToDetailMentionNotification(username1, true);
+        manageLogInOut.signIn(DATA_USER1, "gtngtn");
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
+    } }
