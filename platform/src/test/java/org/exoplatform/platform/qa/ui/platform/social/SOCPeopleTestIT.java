@@ -101,7 +101,7 @@ public class SOCPeopleTestIT extends Base {
     info("Login by invited users, go to My Connections/Requests Received and ignore invitation");
     manageLogInOut.signIn(username3, password);
     homePagePlatform.goToConnections();
-    connectionsManagement.ignoreConnection(username1 + " " + username1);
+    connectionsManagement.ignoreConnection(username1);
 
     info("Verify after invitation");
     manageLogInOut.signIn(username1, password);
@@ -168,7 +168,7 @@ public class SOCPeopleTestIT extends Base {
     info("Login by invited users, go to My Connections/Requests Received and ignore invitation");
     manageLogInOut.signIn(username3, password);
     homePagePlatform.goToConnections();
-    connectionsManagement.ignoreConnection(username1 + " " + username1);
+    connectionsManagement.ignoreConnection(username1);
 
     info("Verify after invitation");
     manageLogInOut.signIn(username1, password);

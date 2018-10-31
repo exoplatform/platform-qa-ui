@@ -333,10 +333,8 @@ public class EcmsWCMTestIT extends Base {
     pageCreationWizard.addContentlistByFolder("General Drives/Sites Management", "intranet");
     navigationToolbar.goToEditContent();
     // Verify that all webcontents are shown in Content list View page
-    $(byXpath(ELEMENT_CONTENT_LIST_CONTENT_TITLE.replace("${title}", content1))).waitUntil(Condition.visible,
-                                                                                           Configuration.timeout);
-    $(byXpath(ELEMENT_CONTENT_LIST_CONTENT_TITLE.replace("${title}", content2))).waitUntil(Condition.visible,
-                                                                                           Configuration.timeout);
+    ELEMENT_LIST_CONTENT.find(byText(content1)).waitUntil(Condition.visible, Configuration.timeout);
+    ELEMENT_LIST_CONTENT.find(byText(content2)).waitUntil(Condition.visible, Configuration.timeout);
     $(ELEMENT_EDIT_CLV).hover();
     $(ELEMENT_EDIT_PREFERENCE).click();
     check(ELEMENT_CONTENT_LIST_BY_CONTENT_MODE, 2);

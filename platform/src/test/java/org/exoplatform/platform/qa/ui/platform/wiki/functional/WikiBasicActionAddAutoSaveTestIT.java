@@ -26,7 +26,7 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
 @Tag("wiki")
 @Tag("functional")
 
-public class WikiBasicActionAddAutoSave extends Base {
+public class WikiBasicActionAddAutoSaveTestIT extends Base {
 
   HomePagePlatform homePagePlatform;
 

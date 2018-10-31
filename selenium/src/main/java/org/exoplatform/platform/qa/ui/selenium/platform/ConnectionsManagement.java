@@ -15,6 +15,7 @@ import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.Keys;
 
 ;
 
@@ -225,8 +226,9 @@ public class ConnectionsManagement {
   public void searchPeople(String peopleName, String position, String skills, String directory) {
     info("-- Searching people ... --");
     if (peopleName != "" && peopleName != null) {
-
-      $(ELEMENT_NAME_OF_PEOPLE).waitUntil(Condition.appears,Configuration.timeout).setValue(peopleName).pressEnter();
+      $(ELEMENT_NAME_OF_PEOPLE).waitUntil(Condition.appear,Configuration.timeout).sendKeys(Keys.CONTROL,"a");
+      $(ELEMENT_NAME_OF_PEOPLE).sendKeys(Keys.BACK_SPACE);
+      $(ELEMENT_NAME_OF_PEOPLE).waitUntil(Condition.appears,Configuration.timeout).setValue(peopleName);
     } else {
       $(ELEMENT_NAME_OF_PEOPLE).setValue("");
     }
@@ -240,7 +242,7 @@ public class ConnectionsManagement {
     } else {
       $(ELEMENT_SKILL_OF_PEOPLE).setValue("");
     }
-    $(ELEMENT_SEARCH_BUTTON).pressEnter();
+    $(ELEMENT_SEARCH_BUTTON).click();
     homePagePlatform.refreshUntil($(byClassName("spaceBox")),Condition.visible,1000);
     if (directory != "" && directory != null)
       $(byLinkText(directory)).click();
