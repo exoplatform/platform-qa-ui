@@ -1118,7 +1118,6 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         wikiHomePage.goToAPage(wiki2);
         wikiValidattions.verifyTitleWikiPage(wiki1);
         homePagePlatform.goToWiki();
-        wikiHomePage.deleteWiki(wiki1);
         wikiHomePage.deleteWiki(wiki2);
 
     }

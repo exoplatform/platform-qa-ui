@@ -682,8 +682,8 @@ public class WikiValidattions {
         $(byXpath(ELEMENT_PAGE_ATTACHFILE_2.replace("${fileName}", fileName))).is(Condition.visible);
       info("Attach files are dilsplayed in attach list");
     } else {
-      if ($(ELEMENT_PAGE_ATTACHFILE_1.replace("${fileName}", fileName)).waitUntil(Condition.not(Condition.visible),Configuration.timeout) != null)
-        $(ELEMENT_PAGE_ATTACHFILE_2.replace("${fileName}", fileName)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+      if ($(byXpath(ELEMENT_PAGE_ATTACHFILE_1.replace("${fileName}", fileName))).waitUntil(Condition.not(Condition.visible),Configuration.timeout) != null)
+        $(byXpath(ELEMENT_PAGE_ATTACHFILE_2.replace("${fileName}", fileName))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
       info("Attach files are not displayed in attach list");
     }
   }
