@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.chat.pageobject;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static junit.framework.TestCase.assertEquals;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_CATEGORY_OPTION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_COLLABORATION_ACTIONS;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;

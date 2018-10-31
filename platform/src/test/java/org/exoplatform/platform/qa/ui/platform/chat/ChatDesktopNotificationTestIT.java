@@ -22,8 +22,8 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
-import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_CHAT_NOTIFICATION_NUMBER;
-import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_MINI_CHAT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_CHAT_LIST_MSG;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -47,9 +47,9 @@ public class ChatDesktopNotificationTestIT extends Base {
         navigationToolbar = new NavigationToolbar(this);
         userAndGroupManagement = new UserAndGroupManagement(this);
         chatManagement = new ChatManagement(this);
-        userAddManagement= new UserAddManagement(this);
-        roomManagement=new RoomManagement(this);
-        manageLogInOut=new ManageLogInOut(this);
+        userAddManagement = new UserAddManagement(this);
+        roomManagement = new RoomManagement(this);
+        manageLogInOut = new ManageLogInOut(this);
         if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
             $(ELEMENT_SKIP_BUTTON).click();
         }
@@ -57,28 +57,65 @@ public class ChatDesktopNotificationTestIT extends Base {
     }
 
     @Test
-    public void test01_CheckDesktopNotificationWhenSendMessageInRoom(){
+    public void test01_CheckDesktopNotificationWhenSendMessageInRoom() {
 
         String room = "room" + getRandomNumber();
         String username = "username" + getRandomNumber();
         String password = "123456";
         String email = "emaila" + getRandomNumber() + "@test.com";
-        String Firstname= "FirstName"+getRandomString();
-        String LastName= "LastName"+getRandomString();
-        String message= "message"+getRandomString();
+        String Firstname = "FirstName" + getRandomString();
+        String LastName = "LastName" + getRandomString();
+        String message = "message" + getRandomString();
         navigationToolbar.goToAddUser();
         userAddManagement.addUser(username, password, email, Firstname, LastName);
         homePagePlatform.goToChat();
         switchTo().window(1);
-        roomManagement.addRoom(room,username);
-        chatManagement.sendMessageInRoomOrSpace(room,message);
+        roomManagement.addRoom(room, username);
+        chatManagement.sendMessageInRoomOrSpace(room, message);
         switchToParentWindow();
         manageLogInOut.signOut();
-        manageLogInOut.signInCas(username,password);
+        manageLogInOut.signInCas(username, password);
         ELEMENT_CHAT_NOTIFICATION_NUMBER.waitUntil(Condition.appear, Configuration.timeout).click();
-        $(byText(message)).waitUntil(Condition.appear,Configuration.timeout).click();
-        ELEMENT_MINI_CHAT.waitUntil(Condition.appear,Configuration.timeout);
+        $(byText(message)).waitUntil(Condition.appear, Configuration.timeout).click();
+        ELEMENT_MINI_CHAT.waitUntil(Condition.appear, Configuration.timeout);
         $(byText(message)).should(Condition.exist);
+        ELEMENT_MINI_CHAT.find(byClassName("uiIconClose")).click();
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.deleteRomm(room);
+        switchToParentWindow();
+        navigationToolbar.goToManageCommunity();
+        userAndGroupManagement.deleteUser(username);
+    }
+
+
+    @Test
+    public void test02_CheckDesktopNotificationWhenSendEmoticons() {
+
+        String room = "room" + getRandomNumber();
+        String username = "username" + getRandomNumber();
+        String password = "123456";
+        String email = "emaila" + getRandomNumber() + "@test.com";
+        String Firstname = "FirstName" + getRandomString();
+        String LastName = "LastName" + getRandomString();
+        navigationToolbar.goToAddUser();
+        userAddManagement.addUser(username, password, email, Firstname, LastName);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.addRoom(room, username);
+        ELEMENT_CHAT_EMOTICON.click();
+        ELEMENT_CHAT_COMPOSER_EMOTICON.find(byClassName("emoticon-smile")).click();
+        ELEMENT_CHAT_MESSAGE_INPUT.pressEnter();
+        ELEMENT_CHAT_LIST_MSG.find(byClassName("emoticon-smile")).waitUntil(Condition.appear,Configuration.timeout);
+        switchToParentWindow();
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(username, password);
+        ELEMENT_CHAT_NOTIFICATION_NUMBER.waitUntil(Condition.appear, Configuration.timeout).click();
+        $(byText(":)")).waitUntil(Condition.appear, Configuration.timeout).click();
+        ELEMENT_MINI_CHAT.waitUntil(Condition.appear, Configuration.timeout);
+        $(byClassName("emoticon-smile")).should(Condition.exist);
         ELEMENT_MINI_CHAT.find(byClassName("uiIconClose")).click();
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);
