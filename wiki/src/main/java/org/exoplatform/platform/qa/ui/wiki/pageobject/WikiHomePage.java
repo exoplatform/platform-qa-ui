@@ -1,21 +1,18 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
-
 import org.exoplatform.platform.qa.ui.selenium.Dialog;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class WikiHomePage {
     private final TestBase       testBase;
@@ -115,7 +112,6 @@ public class WikiHomePage {
             info("Click on More link");
             $(ELEMENT_MORE_LINK).click();
             if ($(ELEMENT_DELETE_LINK).waitUntil(Condition.visible,Configuration.timeout) == null) {
-                $(ELEMENT_DELETE_LINK).click();
             } else {
                 $(ELEMENT_DELETE_LINK).click();
             }
@@ -247,7 +243,7 @@ public class WikiHomePage {
         info("Make Restricted page");
         Boolean useRestrictLink = (opParams.length > 0 ? opParams[0] : false);
         if (useRestrictLink) {
-            evt.waitForAndGetElement(ELEMENT_PUBLIC_WIKI_ICON);
+            $(ELEMENT_PUBLIC_WIKI_ICON).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
             $(ELEMENT_PUBLIC_WIKI_ICON).click();
         } else {
             goToPermalink();
@@ -265,12 +261,13 @@ public class WikiHomePage {
         info("Make Public page");
         Boolean useRestrictLink = (Boolean) (opParams.length > 0 ? opParams[0] : false);
         if (useRestrictLink) {
-            evt.waitForAndGetElement(ELEMENT_RESTICT_WIKI_ICON);
+            $(ELEMENT_RESTICT_WIKI_ICON).waitUntil(Condition.visible, Configuration.timeout);
             $(ELEMENT_RESTICT_WIKI_ICON).click();
         } else {
             goToPermalink();
         }
         $(ELEMENT_MAKE_PUBLIC_BUTTON).click();
+        $(ELEMENT_MAKE_RESTRICT_BUTTON).waitUntil(Condition.visible, Configuration.timeout);
         dialog.closeMessageDialog();
     }
 
@@ -321,7 +318,7 @@ public class WikiHomePage {
     /**
      * Go to Wiki Home of the space
      *
-     * @param space String
+     * @param space    String
      * @param userWiki String
      */
     public void goToWikiHomeOfSpaceFromBreadcrumb(String space, String userWiki) {

@@ -284,9 +284,9 @@ public class WikiValidattions {
      */
     public void verifyPageContent(String pageName, String pageContent) {
         info("Verify the page's name");
-        evt.waitForAndGetElement(ELEMENT_WIKI_HOME_PAGE_TITLE.replace("${title}", pageName));
+        $(byXpath(ELEMENT_WIKI_HOME_PAGE_TITLE.replace("${title}", pageName))).waitUntil(Condition.visible,Configuration.timeout);
         info("Verify the page's content");
-        evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_PAGE.replace("$content", pageContent));
+        $(byXpath(ELEMENT_CONTENT_WIKI_PAGE.replace("$content", pageContent))).waitUntil(Condition.visible,Configuration.timeout);
     }
 
     /**
@@ -373,14 +373,14 @@ public class WikiValidattions {
         evt.waitForAndGetElement(ELEMENT_EMAIL_LINK_EMAIL_FORMAT.replace("$email", address));
     }
 
-  /**
-   * The page's content is empty
-   */
-  public void verifyEmptyContentPage() {
-    info("Verify that the content page is empty");
-    $(ELEMENT_CONTENT_WIKI_PAGE_EMPTY).parent().waitUntil(Condition.visible,Configuration.timeout);
-    info("the page's content is empty");
-  }
+    /**
+     * The page's content is empty
+     */
+    public void verifyEmptyContentPage() {
+        info("Verify that the content page is empty");
+        $(ELEMENT_CONTENT_WIKI_PAGE_EMPTY).parent().waitUntil(Condition.visible,Configuration.timeout);
+        info("the page's content is empty");
+    }
 
     /**
      * Verify that the system redirects to the wiki page link that is inserted
@@ -483,10 +483,10 @@ public class WikiValidattions {
     public void verifyViewPermisison(String userGroupMembership, boolean isChecked) {
         if (isChecked) {
             info("Verify that view permission is checked");
-            evt.waitForAndGetElement(ELEMENT_PERMISSION_VIEW_USER_CHECKED.replace("$userGroup", userGroupMembership), 1000, 2);
+            $(byXpath(ELEMENT_PERMISSION_VIEW_USER_CHECKED.replace("$userGroup", userGroupMembership))).parent().waitUntil(Condition.visible, Configuration.timeout);
         } else {
             info("Verify that view permission isnot checked");
-            evt.waitForElementNotPresent(ELEMENT_PERMISSION_VIEW_USER_CHECKED.replace("$userGroup", userGroupMembership), 1000, 2);
+            $(byXpath(ELEMENT_PERMISSION_VIEW_USER_CHECKED.replace("$userGroup", userGroupMembership))).parent().waitUntil(Condition.not(Condition.visible), Configuration.timeout);
         }
     }
 
@@ -495,20 +495,19 @@ public class WikiValidattions {
      */
     public void verifyPageNotFound() {
         info("Verify that the page is not found");
-        evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_NOT_FOUND);
+        $(ELEMENT_WIKI_PAGE_NOT_FOUND).waitUntil(Condition.visible, Configuration.timeout);
         info("The page is not found");
     }
-
     /**
      * Verify a parent page has not permission for a user
      */
     public void verifyRestrictedPageHasChildPage() {
         info("Verify that parent page is shown under the title: restricted on the left tree");
-        evt.waitForAndGetElement(ELEMENT_WIKI_LEFT_TREE_RESTRICTED_PAGE_TITLE);
+        $(ELEMENT_WIKI_LEFT_TREE_RESTRICTED_PAGE_TITLE).waitUntil(Condition.visible, Configuration.timeout).hover();
         info("Verify the tooltip of the page as:[this page is restricted, you don't have permissions to view it]");
-        evt.waitForAndGetElement(ELEMENT_WIKI_TOOLTIP_RESTRICTED_PAGE_TITLE);
+        $(ELEMENT_WIKI_TOOLTIP_RESTRICTED_PAGE_TITLE).waitUntil(Condition.visible, Configuration.timeout);
         info("Verify that cannot click on parent page");
-        evt.waitForAndGetElement(ELEMENT_WIKI_PARENT_PAGE_UN_LINK);
+        $(ELEMENT_WIKI_PARENT_PAGE_UN_LINK).waitUntil(Condition.visible, Configuration.timeout);
     }
 
     /**
@@ -552,20 +551,20 @@ public class WikiValidattions {
         }
     }
 
-  /**
-   * Verify breadcrumb path of a page
-   *
-   * @param locator1 String
-   * @param locator2 String
-   * @param page String
-   */
-  public void verifyBreadCrumbePath(String locator1, String locator2, String page) {
-    info("Verify that the page is at the path:" + locator1 + "->" + locator2 + "->" + page);
-   $(byXpath(ELEMENT_WIKI_HOME_BREADCRUMB_PATH.replace("$locator1", locator1)
-                                                              .replace("$locator2", locator2)
-                                                              .replace("$page", page))).waitUntil(Condition.visible,Configuration.timeout);
-    info("The page is at correct path");
-  }
+    /**
+     * Verify breadcrumb path of a page
+     *
+     * @param locator1 String
+     * @param locator2 String
+     * @param page String
+     */
+    public void verifyBreadCrumbePath(String locator1, String locator2, String page) {
+        info("Verify that the page is at the path:" + locator1 + "->" + locator2 + "->" + page);
+        $(byXpath(ELEMENT_WIKI_HOME_BREADCRUMB_PATH.replace("$locator1", locator1)
+                .replace("$locator2", locator2)
+                .replace("$page", page))).waitUntil(Condition.visible,Configuration.timeout);
+        info("The page is at correct path");
+    }
 
     /**
      * Verify breadcrumb path of a page
@@ -674,16 +673,16 @@ public class WikiValidattions {
     public void VerifyAttachFilesAreDisplayedInAttachListOrNot(String fileName, boolean display) {
         info("Verify attach files are displayed in attach list");
 
-    if (display) {
-      if ($(byXpath(ELEMENT_PAGE_ATTACHFILE_1.replace("${fileName}", fileName))).is(Condition.visible));
-        $(byXpath(ELEMENT_PAGE_ATTACHFILE_2.replace("${fileName}", fileName))).is(Condition.visible);
-      info("Attach files are dilsplayed in attach list");
-    } else {
-      if ($(byXpath(ELEMENT_PAGE_ATTACHFILE_1.replace("${fileName}", fileName))).waitUntil(Condition.not(Condition.visible),Configuration.timeout) != null)
-        $(byXpath(ELEMENT_PAGE_ATTACHFILE_2.replace("${fileName}", fileName))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
-      info("Attach files are not displayed in attach list");
+        if (display) {
+            if ($(byXpath(ELEMENT_PAGE_ATTACHFILE_1.replace("${fileName}", fileName))).is(Condition.visible));
+            $(byXpath(ELEMENT_PAGE_ATTACHFILE_2.replace("${fileName}", fileName))).is(Condition.visible);
+            info("Attach files are dilsplayed in attach list");
+        } else {
+            if ($(byXpath(ELEMENT_PAGE_ATTACHFILE_1.replace("${fileName}", fileName))).waitUntil(Condition.not(Condition.visible),Configuration.timeout) != null)
+                $(byXpath(ELEMENT_PAGE_ATTACHFILE_2.replace("${fileName}", fileName))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+            info("Attach files are not displayed in attach list");
+        }
     }
-  }
 
     /**
      * Verify the page is created and shown in the list

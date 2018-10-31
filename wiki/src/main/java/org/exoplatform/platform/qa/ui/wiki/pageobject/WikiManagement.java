@@ -462,8 +462,10 @@ public class WikiManagement {
     $(ELEMENT_MORE_LINK).click();
     info("Click on permission link");
     $(ELEMENT_PERMISSION_LINK).click();
+    $(locator).parent().waitUntil(Condition.exist,Configuration.timeout);
     info("Uncheck view permission checkbox");
-    $(locator).is(Condition.checked);
+    if($(locator).is(Condition.checked))
+      $(locator).parent().click();
     info("Click on save button");
     $(ELEMENT_PERMISSION_BUTTON_SAVE).click();
   }
