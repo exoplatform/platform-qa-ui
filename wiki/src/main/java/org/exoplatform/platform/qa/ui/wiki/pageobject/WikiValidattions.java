@@ -565,9 +565,9 @@ public class WikiValidattions {
    */
   public void verifyBreadCrumbePath(String locator1, String locator2, String page) {
     info("Verify that the page is at the path:" + locator1 + "->" + locator2 + "->" + page);
-    evt.waitForAndGetElement(ELEMENT_WIKI_HOME_BREADCRUMB_PATH.replace("$locator1", locator1)
+   $(byXpath(ELEMENT_WIKI_HOME_BREADCRUMB_PATH.replace("$locator1", locator1)
                                                               .replace("$locator2", locator2)
-                                                              .replace("$page", page));
+                                                              .replace("$page", page))).waitUntil(Condition.visible,Configuration.timeout);
     info("The page is at correct path");
   }
 
@@ -678,12 +678,12 @@ public class WikiValidattions {
     info("Verify attach files are displayed in attach list");
 
     if (display) {
-      if (evt.waitForAndGetElement(ELEMENT_PAGE_ATTACHFILE_1.replace("${fileName}", fileName), 5000, 0) != null)
-        evt.waitForAndGetElement(ELEMENT_PAGE_ATTACHFILE_2.replace("${fileName}", fileName), 5000, 0);
+      if ($(byXpath(ELEMENT_PAGE_ATTACHFILE_1.replace("${fileName}", fileName))).is(Condition.visible));
+        $(byXpath(ELEMENT_PAGE_ATTACHFILE_2.replace("${fileName}", fileName))).is(Condition.visible);
       info("Attach files are dilsplayed in attach list");
     } else {
-      if (evt.waitForElementNotPresent(ELEMENT_PAGE_ATTACHFILE_1.replace("${fileName}", fileName), 5000, 0) != null)
-        evt.waitForElementNotPresent(ELEMENT_PAGE_ATTACHFILE_2.replace("${fileName}", fileName), 5000, 0);
+      if ($(byXpath(ELEMENT_PAGE_ATTACHFILE_1.replace("${fileName}", fileName))).waitUntil(Condition.not(Condition.visible),Configuration.timeout) != null)
+        $(byXpath(ELEMENT_PAGE_ATTACHFILE_2.replace("${fileName}", fileName))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
       info("Attach files are not displayed in attach list");
     }
   }

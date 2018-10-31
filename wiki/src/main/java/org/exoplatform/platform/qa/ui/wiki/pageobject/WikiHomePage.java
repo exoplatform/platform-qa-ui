@@ -299,7 +299,7 @@ public class WikiHomePage {
    */
   public void goToAttachFiles(String number) {
     info("Click attach file link");
-    $(ELEMENT_PAGE_ATTACHFILE_NUMBER.replace("${number}", number)).click();
+    $(byXpath(ELEMENT_PAGE_ATTACHFILE_NUMBER.replace("${number}", number))).click();
   }
 
   /**
