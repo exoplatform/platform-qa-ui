@@ -398,9 +398,9 @@ public class WikiHomePage {
      */
     public void goToRevisions(String version) {
         info("Click on Version");
-        $(ELEMENT_WIKI_PAGE_INFOMATION_VERSION.replace("${version}", version)).click();
+        $(byXpath(ELEMENT_WIKI_PAGE_INFOMATION_VERSION.replace("${version}", version))).click();
         info("Verify that the table is shown");
-        evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_INFORMATION_TABLE_TITLE, 2000, 1);
+        $(ELEMENT_WIKI_PAGE_INFORMATION_TABLE_TITLE).waitUntil(Condition.visible,Configuration.timeout);
     }
 
     /**

@@ -1,29 +1,25 @@
 package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-import java.util.ArrayList;
-
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
+import java.util.ArrayList;
 
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class WikiValidattions {
 
-    private final TestBase       testBase;
+    private final TestBase testBase;
 
-    public WikiHomePage          wHome;
+    public WikiHomePage wHome;
 
     private ElementEventTestBase evt;
 
@@ -65,7 +61,7 @@ public class WikiValidattions {
      * Verify resuming a draf page
      *
      * @param titleBeforeDraf String
-     * @param content String
+     * @param content         String
      */
     public void verifyResumADraf(String titleBeforeDraf, String content) {
         info("Get current title in iput field");
@@ -77,16 +73,16 @@ public class WikiValidattions {
     /**
      * Verify that a wiki page link is inserted to the page
      *
-     * @param label String
+     * @param label   String
      * @param tooltip String
      */
     public void verifyInsertedLinkIntoFrame(String label, String tooltip) {
-        WebElement e = $(ELEMENT_CONTENT_WIKI_FRAME).waitUntil(Condition.visible,Configuration.timeout);
+        WebElement e = $(ELEMENT_CONTENT_WIKI_FRAME).waitUntil(Condition.visible, Configuration.timeout);
         testBase.getExoWebDriver().getWebDriver().switchTo().frame(e);
         if (label != null && label != "")
-            $(By.linkText(label)).waitUntil(Condition.visible,Configuration.timeout);
+            $(By.linkText(label)).waitUntil(Condition.visible, Configuration.timeout);
         if (tooltip != null && tooltip != "")
-            $(byXpath("//*[@title='" + tooltip + "']")).waitUntil(Condition.visible,Configuration.timeout);
+            $(byXpath("//*[@title='" + tooltip + "']")).waitUntil(Condition.visible, Configuration.timeout);
         evt.switchToParentWindow();
     }
 
@@ -115,7 +111,7 @@ public class WikiValidattions {
     /**
      * Verify the alert message when editing same page
      *
-     * @param status String
+     * @param status   String
      * @param fullName String
      */
     public void verifyMessageWhenEditingSamePage(String status, String fullName) {
@@ -130,61 +126,61 @@ public class WikiValidattions {
      */
     public void verifyWarningMessage(String mess) {
         info("Verify that the warning message is shown");
-        $(byXpath(ELEMENT_MESSAGES_TEXT.replace("$mess", mess))).waitUntil(Condition.visible,Configuration.timeout);
+        $(byXpath(ELEMENT_MESSAGES_TEXT.replace("$mess", mess))).waitUntil(Condition.visible, Configuration.timeout);
 
     }
 
     /**
      * Verify effects of Page's content
      *
-     * @param type  String
+     * @param type    String
      * @param content String
      */
     public void verifyEffectsPageContent(effectTypes type, String content) {
-        switch(type){
+        switch (type) {
             case Bold:
                 info("Verify Bold effect");
-                $(byXpath(ELEMENT_EFFECT_BOLD.replace("$content",content))).waitUntil(Condition.visible,Configuration.timeout);
+                $(byXpath(ELEMENT_EFFECT_BOLD.replace("$content", content))).waitUntil(Condition.visible, Configuration.timeout);
                 break;
             case Bullest_List:
                 info("Verify Bullest list");
-                $(byXpath(ELEMENT_EFFECT_BULLET_LIST.replace("$content",content))).waitUntil(Condition.visible,Configuration.timeout);
+                $(byXpath(ELEMENT_EFFECT_BULLET_LIST.replace("$content", content))).waitUntil(Condition.visible, Configuration.timeout);
                 break;
             case Number_List:
                 info("Verify Number list");
-                $(byXpath(ELEMENT_EFFECT_NUMBER_LIST.replace("$content",content))).waitUntil(Condition.visible,Configuration.timeout);
+                $(byXpath(ELEMENT_EFFECT_NUMBER_LIST.replace("$content", content))).waitUntil(Condition.visible, Configuration.timeout);
                 break;
             case Heading1:
                 info("Verify Heading1 effect");
-                $(byXpath(ELEMENT_EFFECT_HEADING_1.replace("$content",content))).waitUntil(Condition.visible,Configuration.timeout);
+                $(byXpath(ELEMENT_EFFECT_HEADING_1.replace("$content", content))).waitUntil(Condition.visible, Configuration.timeout);
                 break;
             case Heading3:
                 info("Verify Heading3 effect");
-                $(byXpath(ELEMENT_EFFECT_HEADING_3.replace("$content",content))).waitUntil(Condition.visible,Configuration.timeout);
+                $(byXpath(ELEMENT_EFFECT_HEADING_3.replace("$content", content))).waitUntil(Condition.visible, Configuration.timeout);
                 break;
             case Heading2:
                 info("Verify Heading3 effect");
-                $(byXpath(ELEMENT_EFFECT_HEADING_2.replace("$content",content))).waitUntil(Condition.visible,Configuration.timeout);
+                $(byXpath(ELEMENT_EFFECT_HEADING_2.replace("$content", content))).waitUntil(Condition.visible, Configuration.timeout);
                 break;
             case Heading5:
                 info("Verify Heading4 effect");
-                $(byXpath(ELEMENT_EFFECT_HEADING_5.replace("$content",content))).waitUntil(Condition.visible,Configuration.timeout);
+                $(byXpath(ELEMENT_EFFECT_HEADING_5.replace("$content", content))).waitUntil(Condition.visible, Configuration.timeout);
                 break;
             case Italic:
                 info("Verify Italic effect");
-                $(byXpath(ELEMENT_EFFECT_ITALIC.replace("$content",content))).waitUntil(Condition.visible,Configuration.timeout);
+                $(byXpath(ELEMENT_EFFECT_ITALIC.replace("$content", content))).waitUntil(Condition.visible, Configuration.timeout);
                 break;
             case Link:
                 info("Verify Link effect");
-                $(byXpath(ELEMENT_EFFECT_LINK.replace("$content",content))).waitUntil(Condition.visible,Configuration.timeout);
+                $(byXpath(ELEMENT_EFFECT_LINK.replace("$content", content))).waitUntil(Condition.visible, Configuration.timeout);
                 break;
             case Strike:
                 info("Verify Strike effect");
-                $(byXpath(ELEMENT_EFFECT_STRIKE.replace("$content",content))).waitUntil(Condition.visible,Configuration.timeout);
+                $(byXpath(ELEMENT_EFFECT_STRIKE.replace("$content", content))).waitUntil(Condition.visible, Configuration.timeout);
                 break;
             case Underline:
                 info("Verify Underline effect");
-                $(byXpath(ELEMENT_EFFECT_UNDERLINE.replace("$content",content))).waitUntil(Condition.visible,Configuration.timeout);
+                $(byXpath(ELEMENT_EFFECT_UNDERLINE.replace("$content", content))).waitUntil(Condition.visible, Configuration.timeout);
                 break;
         }
     }
@@ -235,7 +231,7 @@ public class WikiValidattions {
     /**
      * Check display of edit page permission
      *
-     * @param title String
+     * @param title     String
      * @param isDisplay boolean
      */
     public void checkDisplayOfEditPage(String title, boolean isDisplay) {
@@ -254,7 +250,7 @@ public class WikiValidattions {
     /**
      * Check display of view page permission
      *
-     * @param title String
+     * @param title     String
      * @param isDisplay boolean
      */
     public void checkDisplayOfViewPage(String title, boolean isDisplay) {
@@ -283,7 +279,7 @@ public class WikiValidattions {
     /**
      * Verify that the page is shown detail
      *
-     * @param pageName String
+     * @param pageName    String
      * @param pageContent String
      */
     public void verifyPageContent(String pageName, String pageContent) {
@@ -295,19 +291,20 @@ public class WikiValidattions {
 
     /**
      * Verify that a table is added to the content of the page
+     *
      * @param col int
      * @param row int
      */
     public void verifyTableInContentPage(int col, int row) {
         info("Verify that the table is shown into the content of the page");
-        $(ELEMENT_PAGE_CONTENT_TABLE_MODE).waitUntil(Condition.visible,Configuration.timeout);
+        $(ELEMENT_PAGE_CONTENT_TABLE_MODE).waitUntil(Condition.visible, Configuration.timeout);
         for (int i = 1; i <= col; i++) {
             info("A table is shown with the col:" + col);
-            $(byXpath(ELEMETN_PAGE_CONTENT_TABLE_COL_NUM.replace("$col", String.valueOf(col)))).waitUntil(Condition.visible,Configuration.timeout);
+            $(byXpath(ELEMETN_PAGE_CONTENT_TABLE_COL_NUM.replace("$col", String.valueOf(col)))).waitUntil(Condition.visible, Configuration.timeout);
         }
         for (int i = 1; i <= row; i++) {
             info("A table is shown with the row:" + row);
-            $(byXpath(ELEMETN_PAGE_CONTENT_TABLE_ROW_NUM.replace("$row", String.valueOf(row)))).waitUntil(Condition.visible,Configuration.timeout);
+            $(byXpath(ELEMETN_PAGE_CONTENT_TABLE_ROW_NUM.replace("$row", String.valueOf(row)))).waitUntil(Condition.visible, Configuration.timeout);
         }
         info("A table isnot shown with the col:" + col + 1);
         $(byXpath(ELEMETN_PAGE_CONTENT_TABLE_COL_NUM.replace("$col", String.valueOf(col + 1)))).shouldNotBe(Condition.visible);
@@ -344,7 +341,7 @@ public class WikiValidattions {
      */
     public void verifyContentPage(String content) {
         info("Verify that the content page is added successfully");
-        evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_PAGE.replace("$content", content));
+        $(byXpath(ELEMENT_CONTENT_WIKI_PAGE.replace("$content", content))).waitUntil(Condition.visible, Configuration.timeout);
         info("The content also is added successfully");
     }
 
@@ -376,19 +373,19 @@ public class WikiValidattions {
         evt.waitForAndGetElement(ELEMENT_EMAIL_LINK_EMAIL_FORMAT.replace("$email", address));
     }
 
-    /**
-     * The page's content is empty
-     */
-    public void verifyEmptyContentPage() {
-        info("Verify that the content page is empty");
-        $(ELEMENT_CONTENT_WIKI_PAGE_EMPTY).parent().waitUntil(Condition.visible,Configuration.timeout);
-        info("the page's content is empty");
-    }
+  /**
+   * The page's content is empty
+   */
+  public void verifyEmptyContentPage() {
+    info("Verify that the content page is empty");
+    $(ELEMENT_CONTENT_WIKI_PAGE_EMPTY).parent().waitUntil(Condition.visible,Configuration.timeout);
+    info("the page's content is empty");
+  }
 
     /**
      * Verify that the system redirects to the wiki page link that is inserted
      *
-     * @param label String
+     * @param label    String
      * @param pageLink String
      */
     public void verifyInsertedExistLink(String label, String pageLink) {
@@ -399,7 +396,7 @@ public class WikiValidattions {
     /**
      * Verify that the system redirects to the wiki page that is created
      *
-     * @param label String
+     * @param label    String
      * @param pageLink String
      */
     public void verifyInsertNewLink(String label, String pageLink) {
@@ -418,7 +415,7 @@ public class WikiValidattions {
     /**
      * Verify the size of the image in the page's content
      *
-     * @param width String
+     * @param width  String
      * @param height String
      */
     public void verifySizeImageInContentPage(String width, String height) {
@@ -430,7 +427,7 @@ public class WikiValidattions {
      * Verify status when edit a page that has existing a draf
      *
      * @param message String
-     * @param date String
+     * @param date    String
      */
     public void verifyStatusWhenEditPageHasExistingDraf(String message, String date) {
         info("Verify status text");
@@ -463,8 +460,8 @@ public class WikiValidattions {
      * Verify that edit permission is checked or not
      *
      * @param userGroupMembership is username/Group or Membership
-     * @param isChecked = true if want to verify that is checked = false if want to
-     *          verify that is not checked
+     * @param isChecked           = true if want to verify that is checked = false if want to
+     *                            verify that is not checked
      */
     public void verifyEditPermisison(String userGroupMembership, boolean isChecked) {
         if (isChecked) {
@@ -480,8 +477,8 @@ public class WikiValidattions {
      * Verify that view permission is checked or not
      *
      * @param userGroupMembership is username/Group or Membership
-     * @param isChecked = true if want to verify that is checked = false if want to
-     *          verify that is not checked
+     * @param isChecked           = true if want to verify that is checked = false if want to
+     *                            verify that is not checked
      */
     public void verifyViewPermisison(String userGroupMembership, boolean isChecked) {
         if (isChecked) {
@@ -517,7 +514,7 @@ public class WikiValidattions {
     /**
      * Verify that the message for many pages have same title in moving page
      *
-     * @param mess String
+     * @param mess  String
      * @param pages String
      */
     public void verifyMessageManyPagesHaveSameTitleInMovingPage(String mess, ArrayList<String> pages) {
@@ -555,20 +552,20 @@ public class WikiValidattions {
         }
     }
 
-    /**
-     * Verify breadcrumb path of a page
-     *
-     * @param locator1 String
-     * @param locator2 String
-     * @param page String
-     */
-    public void verifyBreadCrumbePath(String locator1, String locator2, String page) {
-        info("Verify that the page is at the path:" + locator1 + "->" + locator2 + "->" + page);
-        $(byXpath(ELEMENT_WIKI_HOME_BREADCRUMB_PATH.replace("$locator1", locator1)
-                .replace("$locator2", locator2)
-                .replace("$page", page))).waitUntil(Condition.visible,Configuration.timeout);
-        info("The page is at correct path");
-    }
+  /**
+   * Verify breadcrumb path of a page
+   *
+   * @param locator1 String
+   * @param locator2 String
+   * @param page String
+   */
+  public void verifyBreadCrumbePath(String locator1, String locator2, String page) {
+    info("Verify that the page is at the path:" + locator1 + "->" + locator2 + "->" + page);
+   $(byXpath(ELEMENT_WIKI_HOME_BREADCRUMB_PATH.replace("$locator1", locator1)
+                                                              .replace("$locator2", locator2)
+                                                              .replace("$page", page))).waitUntil(Condition.visible,Configuration.timeout);
+    info("The page is at correct path");
+  }
 
     /**
      * Verify breadcrumb path of a page
@@ -578,7 +575,7 @@ public class WikiValidattions {
      */
     public void verifyBreadCrumbePath(String locator1, String locator2) {
         info("Verify that the page is at the path:" + locator1 + "->" + locator2);
-        $(byId("UIWikiBreadCrumb")).shouldHave(Condition.text(locator1+" "+locator2));
+        $(byId("UIWikiBreadCrumb")).shouldHave(Condition.text(locator1 + " " + locator2));
         info("The page is at correct path");
     }
 
@@ -600,7 +597,7 @@ public class WikiValidattions {
      * Verify that the tooltip of the message for many pages have same title in
      * moving page
      *
-     * @param mess String
+     * @param mess  String
      * @param pages String
      */
     public void verifyToolTipMessageManyPagesHaveSameTitleInMovingPage(String mess, ArrayList<String> pages) {
@@ -628,7 +625,7 @@ public class WikiValidattions {
      * Verify that a page is parent of other page
      *
      * @param parentNode String
-     * @param childNode String
+     * @param childNode  String
      */
     public void verifyParentChildNode(String parentNode, String childNode) {
         info("Verify that page A is under page B or page A is parent of the page B");
@@ -670,22 +667,23 @@ public class WikiValidattions {
     /**
      * Verify attach files are displayed in attach list or not when clicking in
      * attach files number
+     *
      * @param fileName String
-     * @param display boolean
+     * @param display  boolean
      */
     public void VerifyAttachFilesAreDisplayedInAttachListOrNot(String fileName, boolean display) {
         info("Verify attach files are displayed in attach list");
 
-        if (display) {
-            if ($(byXpath(ELEMENT_PAGE_ATTACHFILE_1.replace("${fileName}", fileName))).is(Condition.visible));
-            $(byXpath(ELEMENT_PAGE_ATTACHFILE_2.replace("${fileName}", fileName))).is(Condition.visible);
-            info("Attach files are dilsplayed in attach list");
-        } else {
-            if ($(byXpath(ELEMENT_PAGE_ATTACHFILE_1.replace("${fileName}", fileName))).waitUntil(Condition.not(Condition.visible),Configuration.timeout) != null)
-                $(byXpath(ELEMENT_PAGE_ATTACHFILE_2.replace("${fileName}", fileName))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
-            info("Attach files are not displayed in attach list");
-        }
+    if (display) {
+      if ($(byXpath(ELEMENT_PAGE_ATTACHFILE_1.replace("${fileName}", fileName))).is(Condition.visible));
+        $(byXpath(ELEMENT_PAGE_ATTACHFILE_2.replace("${fileName}", fileName))).is(Condition.visible);
+      info("Attach files are dilsplayed in attach list");
+    } else {
+      if ($(byXpath(ELEMENT_PAGE_ATTACHFILE_1.replace("${fileName}", fileName))).waitUntil(Condition.not(Condition.visible),Configuration.timeout) != null)
+        $(byXpath(ELEMENT_PAGE_ATTACHFILE_2.replace("${fileName}", fileName))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+      info("Attach files are not displayed in attach list");
     }
+  }
 
     /**
      * Verify the page is created and shown in the list
@@ -731,7 +729,7 @@ public class WikiValidattions {
             }
         } else {
             info("Verify that the template is shown in the list");
-            $(byXpath(ELEMENT_WIKI_SETTINGS_RESULTS.replace("${template}", template))).waitUntil(Condition.visible,Configuration.timeout);
+            $(byXpath(ELEMENT_WIKI_SETTINGS_RESULTS.replace("${template}", template))).waitUntil(Condition.visible, Configuration.timeout);
             info("The template is shown successfully");
         }
     }
@@ -758,7 +756,7 @@ public class WikiValidattions {
      */
     public void verifyTemplateSearchEmpty() {
         info("Verify that the searching is empty");
-        $(ELEMENT_WIKI_SETTING_SEARCH_EMPTY).waitUntil(Condition.visible,Configuration.timeout);
+        $(ELEMENT_WIKI_SETTING_SEARCH_EMPTY).waitUntil(Condition.visible, Configuration.timeout);
         info("Searching is empty successfully");
     }
 
@@ -813,7 +811,7 @@ public class WikiValidattions {
     /**
      * Verify that spaces in space switcher lis are shown
      *
-     * @param spaces ArrayList
+     * @param spaces   ArrayList
      * @param numIndex int
      */
     public void verifyPresentSpaceSwitcher(ArrayList<String> spaces, int... numIndex) {
@@ -833,7 +831,7 @@ public class WikiValidattions {
     /**
      * Verify that spaces in space switcher are not shown
      *
-     * @param spaces ArrayList
+     * @param spaces   ArrayList
      * @param numIndex int
      */
     public void verifyNotPresentSpaceSwitcher(ArrayList<String> spaces, int... numIndex) {
@@ -858,7 +856,7 @@ public class WikiValidattions {
     public void verifyPresentSpaceSwitcher(String space) {
         if (!space.isEmpty()) {
             info("Verify that the space is shown");
-            $(byXpath(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", space))).waitUntil(Condition.visible,Configuration.timeout);
+            $(byXpath(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", space))).waitUntil(Condition.visible, Configuration.timeout);
         }
 
     }
@@ -871,7 +869,7 @@ public class WikiValidattions {
     public void verifyNotPresentSpaceSwitcher(String space) {
         if (!space.isEmpty()) {
             info("Verify that the space is shown");
-            $(byXpath(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", space))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+            $(byXpath(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", space))).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
         }
     }
 
@@ -886,12 +884,12 @@ public class WikiValidattions {
     /**
      * Verify that a space has a position in the list
      *
-     * @param i int
+     * @param i     int
      * @param space String
      */
     public void verifyPositionOfASpaceInList(int i, String space) {
         info("Verify that the space has:" + i + " position in the list");
-        $(byXpath(ELEMENT_SPACE_SWITCHER_SPACE_POSITION.replace("$num", String.valueOf(i)).replace("$space", space))).waitUntil(Condition.visible,Configuration.timeout);
+        $(byXpath(ELEMENT_SPACE_SWITCHER_SPACE_POSITION.replace("$num", String.valueOf(i)).replace("$space", space))).waitUntil(Condition.visible, Configuration.timeout);
     }
 
     /**
@@ -912,7 +910,7 @@ public class WikiValidattions {
     /**
      * Verify that related page is added in Related table
      *
-     * @param locator String
+     * @param locator     String
      * @param relatedPage String
      */
     public void verifyRelatedPage(String locator, String relatedPage) {
@@ -960,7 +958,7 @@ public class WikiValidattions {
      */
     public void verifyVersionPage(String version) {
         info("Verify that page's version is:" + version);
-        evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_INFOMATION_VERSION.replace("${version}", version));
+        $(byXpath(ELEMENT_WIKI_PAGE_INFOMATION_VERSION.replace("${version}", version))).waitUntil(Condition.visible, Configuration.timeout);
     }
 
     /**
@@ -970,7 +968,7 @@ public class WikiValidattions {
      */
     public void verifyVersionsInPage(int num) {
         info("Verify that the version is list in recent changes table");
-        evt.waitForAndGetElement(ELEMENT_PAGE_INFO_RECENT_CHANGES_VERSION.replace("$num", String.valueOf(num)));
+        $(byXpath(ELEMENT_PAGE_INFO_RECENT_CHANGES_VERSION.replace("$num", String.valueOf(num)))).waitUntil(Condition.visible, Configuration.timeout);
     }
 
     /**
@@ -980,7 +978,7 @@ public class WikiValidattions {
      */
     public void verifyContentOfVersion(String content) {
         info("Verify that the content of the version is shown");
-        evt.waitForAndGetElement(ELEMENT_PAGE_INFO_VIEW_CONTENT_OF_VERSION.replace("$content", content));
+        $(byXpath(ELEMENT_PAGE_INFO_VIEW_CONTENT_OF_VERSION.replace("$content", content))).waitUntil(Condition.visible, Configuration.timeout);
     }
 
     /**
@@ -991,15 +989,10 @@ public class WikiValidattions {
      */
     public void verifyCompareVersionPage(String oldContent, String newContent) {
         info("Verify that  Words/lines which are red-highlighted with strike-throughs indicate that they were removed");
-        evt.waitForAndGetElement(ELEMENT_PAGE_HISTORY_COMPARE_CONTENT.replace("${text}", oldContent), 2000, 1)
-                .getCssValue("background-color")
-                .contains("rgb(247,217,216)");
+        $(byXpath(ELEMENT_PAGE_HISTORY_COMPARE_CONTENT.replace("${text}", oldContent))).getCssValue("background-color").contentEquals("rgba(208, 123, 123, 1)");
 
         info("Verify that Words/lines highlighted in green indicate that they were added");
-        evt.waitForAndGetElement(ELEMENT_PAGE_HISTORY_COMPARE_CONTENT.replace("${text}", newContent), 2000, 0)
-                .getCssValue("background-color")
-                .contains("rgb(219,245,209)");
-
+        $(byXpath(ELEMENT_PAGE_HISTORY_COMPARE_CONTENT.replace("${text}", newContent))).getCssValue("background-color").contentEquals("rgba(108, 203, 174, 1)");
     }
 
     /**
@@ -1009,7 +1002,7 @@ public class WikiValidattions {
      */
     public void verifyVersionsInHistoryPage(String version) {
         info("Verify that vesion is listed in history page");
-        evt.waitForAndGetElement(ELEMENT_PAGE_HISTORY_VERSION.replace("$version", version));
+        $(byXpath(ELEMENT_PAGE_HISTORY_VERSION.replace("$version", version))).waitUntil(Condition.visible, Configuration.timeout);
     }
 
     /**
@@ -1045,8 +1038,8 @@ public class WikiValidattions {
     /**
      * Verify footNode intoFrame of Rich Text Mode
      *
-     * @param footNode1 String
-     * @param footNode2 String
+     * @param footNode1       String
+     * @param footNode2       String
      * @param contentMacroBox String
      */
     public void verifyMacroFootNodeIntoFrame(String footNode1, String footNode2, String contentMacroBox) {
@@ -1062,8 +1055,8 @@ public class WikiValidattions {
     /**
      * Verify footNode into the content of the page
      *
-     * @param footNode1 String
-     * @param footNode2 String
+     * @param footNode1       String
+     * @param footNode2       String
      * @param contentMacroBox String
      */
     public void verifyMacroFootNodeIntoContentPage(String footNode1, String footNode2, String contentMacroBox) {
