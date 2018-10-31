@@ -222,10 +222,6 @@ public class ProjectsManagement {
     ELEMENT_BUTTON_SAVE.click();
   }
 
-  public void findProject(){
-  }
-
-
   /**
    * Cancel all changes when editing a project
    */

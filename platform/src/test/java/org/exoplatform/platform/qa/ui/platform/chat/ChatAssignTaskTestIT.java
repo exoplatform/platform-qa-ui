@@ -78,18 +78,8 @@ public class ChatAssignTaskTestIT extends Base {
         ELEMENT_CHAT_CREATE_TASK.click();
         info("check the popup assign task is displayed with task title, Assignee, Due date");
         chatManagement.checkPopUpAssignTask();
-        info("check that post button is displayed");
-        ELEMENT_CHAT_POST_TASK_BUTTON.should(Condition.appears);
-        info("check that cancel button works");
-        ELEMENT_CHAT_CANCEL_TASK_BUTTON.should(Condition.appears).click();
-        ELEMENT_ASSIGN_TASK_WINDOW.shouldNot(Condition.appears);
-        info("check the close button");
-        ELEMENT_COLLABORATION_ACTIONS.click();
-        ELEMENT_CHAT_CREATE_TASK.click();
-        ELEMENT_CHAT_CLOSE_ICON.should(Condition.appears).click();
-        ELEMENT_ASSIGN_TASK_WINDOW.shouldNot(Condition.appears);
+        roomManagement.deleteRomm(room);
     }
-
 
     @Test
     public void test02_CheckTaskWithNoAssignee() {
