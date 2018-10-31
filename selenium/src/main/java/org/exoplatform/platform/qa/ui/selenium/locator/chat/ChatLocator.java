@@ -180,6 +180,10 @@ public class ChatLocator {
   public static final SelenideElement ELEMENT_BANNER_CHAT=$(byClassName("uiIconBannerChat"));
   public static final SelenideElement ELEMENT_CLOSE_WINDOW_ROOM=$(byXpath("//*[@id=\"room-detail\"]/div[4]/div/div[1]/a"));
   public static final SelenideElement ELEMENT_NO_BUTTON_LEAVEROOM = $(byXpath("//*[@id=\"team-delete-button-cancel\"]"));
+  public static final SelenideElement ELEMENT_CHAT_EMOTICON = $(byClassName("uiIconChatSmile"));
+  public static final SelenideElement ELEMENT_CHAT_COMPOSER_EMOTICON= $(byClassName("composer-emoji-panel"));
+
+
 
 }
 
