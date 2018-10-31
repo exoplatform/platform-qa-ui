@@ -439,7 +439,6 @@ public class WikiBasicActionPermalinkTestIT extends Base {
         info("Create a wiki page");
         String title = "title" + getRandomNumber();
         String content = "content" + getRandomNumber();
-        homePagePlatform.goToSpecificSpace(space);
         spaceHomePage.goToWikiTab();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(title, content);
@@ -500,7 +499,6 @@ public class WikiBasicActionPermalinkTestIT extends Base {
         info("Create a wiki page");
         String title = "title" + getRandomNumber();
         String content = "content" + getRandomNumber();
-        homePagePlatform.goToSpecificSpace(space);
         spaceHomePage.goToWikiTab();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(title, content);
@@ -580,14 +578,13 @@ public class WikiBasicActionPermalinkTestIT extends Base {
         info("Create a wiki page");
         String title = "title" + getRandomNumber();
         String content = "content" + getRandomNumber();
-        homePagePlatform.goToSpecificSpace(space);
+
         spaceHomePage.goToWikiTab();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(title, content);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(title);
         info("John invites User to the space");
-        homePagePlatform.goToSpecificSpace(space);
         spaceHomePage.goToSpaceSettingTab();
         spaceSettingManagement.goToMemberTab();
         spaceSettingManagement.inviteUser(arrayUsers.get(0), true, "");
@@ -811,7 +808,6 @@ public class WikiBasicActionPermalinkTestIT extends Base {
         richTextEditor.addSimplePage(title1, content1);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(title1);
-        wikiHomePage.goToPermissions();
         wikiManagement.unCheckViewAUserOfPage(ELEMENT_PERMISSION_VIEW_ANY);
         info("check Restricted the sub page");
         wikiValidattions.verifyRestrictedPage();
@@ -861,7 +857,6 @@ public class WikiBasicActionPermalinkTestIT extends Base {
         info("Create a wiki page");
         String title = "title" + getRandomNumber();
         String content = "content" + getRandomNumber();
-        homePagePlatform.goToSpecificSpace(space);
         spaceHomePage.goToWikiTab();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(title, content);
@@ -914,7 +909,7 @@ public class WikiBasicActionPermalinkTestIT extends Base {
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(title);
         info("Make public the page");
-        wikiHomePage.restrictedPage(true);
+        wikiHomePage.publicPage(true);
 
         info("Verify that the page is published");
         wikiValidattions.verifyPublishedPage();

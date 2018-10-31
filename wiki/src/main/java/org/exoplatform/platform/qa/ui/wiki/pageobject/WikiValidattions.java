@@ -284,9 +284,9 @@ public class WikiValidattions {
      */
     public void verifyPageContent(String pageName, String pageContent) {
         info("Verify the page's name");
-        evt.waitForAndGetElement(ELEMENT_WIKI_HOME_PAGE_TITLE.replace("${title}", pageName));
+        $(byXpath(ELEMENT_WIKI_HOME_PAGE_TITLE.replace("${title}", pageName))).waitUntil(Condition.visible,Configuration.timeout);
         info("Verify the page's content");
-        evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_PAGE.replace("$content", pageContent));
+        $(byXpath(ELEMENT_CONTENT_WIKI_PAGE.replace("$content", pageContent))).waitUntil(Condition.visible,Configuration.timeout);
     }
 
     /**
@@ -483,10 +483,10 @@ public class WikiValidattions {
     public void verifyViewPermisison(String userGroupMembership, boolean isChecked) {
         if (isChecked) {
             info("Verify that view permission is checked");
-            evt.waitForAndGetElement(ELEMENT_PERMISSION_VIEW_USER_CHECKED.replace("$userGroup", userGroupMembership), 1000, 2);
+            $(byXpath(ELEMENT_PERMISSION_VIEW_USER_CHECKED.replace("$userGroup", userGroupMembership))).parent().waitUntil(Condition.visible, Configuration.timeout);
         } else {
             info("Verify that view permission isnot checked");
-            evt.waitForElementNotPresent(ELEMENT_PERMISSION_VIEW_USER_CHECKED.replace("$userGroup", userGroupMembership), 1000, 2);
+            $(byXpath(ELEMENT_PERMISSION_VIEW_USER_CHECKED.replace("$userGroup", userGroupMembership))).parent().waitUntil(Condition.not(Condition.visible), Configuration.timeout);
         }
     }
 
@@ -495,20 +495,19 @@ public class WikiValidattions {
      */
     public void verifyPageNotFound() {
         info("Verify that the page is not found");
-        evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_NOT_FOUND);
+        $(ELEMENT_WIKI_PAGE_NOT_FOUND).waitUntil(Condition.visible, Configuration.timeout);
         info("The page is not found");
     }
-
     /**
      * Verify a parent page has not permission for a user
      */
     public void verifyRestrictedPageHasChildPage() {
         info("Verify that parent page is shown under the title: restricted on the left tree");
-        evt.waitForAndGetElement(ELEMENT_WIKI_LEFT_TREE_RESTRICTED_PAGE_TITLE);
+        $(ELEMENT_WIKI_LEFT_TREE_RESTRICTED_PAGE_TITLE).waitUntil(Condition.visible, Configuration.timeout).hover();
         info("Verify the tooltip of the page as:[this page is restricted, you don't have permissions to view it]");
-        evt.waitForAndGetElement(ELEMENT_WIKI_TOOLTIP_RESTRICTED_PAGE_TITLE);
+        $(ELEMENT_WIKI_TOOLTIP_RESTRICTED_PAGE_TITLE).waitUntil(Condition.visible, Configuration.timeout);
         info("Verify that cannot click on parent page");
-        evt.waitForAndGetElement(ELEMENT_WIKI_PARENT_PAGE_UN_LINK);
+        $(ELEMENT_WIKI_PARENT_PAGE_UN_LINK).waitUntil(Condition.visible, Configuration.timeout);
     }
 
     /**
