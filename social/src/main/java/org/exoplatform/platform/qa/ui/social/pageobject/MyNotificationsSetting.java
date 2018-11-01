@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.social.pageobject;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_ADD_TOOTLBAR;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
@@ -293,7 +294,8 @@ public class MyNotificationsSetting {
         if($(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX).is(Condition.not(Condition.checked)))
           $(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX).parent().click();
         info("Click on Save button");
-
+        // scroll up
+        executeJavaScript("window.scrollBy(0,-2000)", "");
         $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).click();
         $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
         info("Verify that intranet notification is shown");
