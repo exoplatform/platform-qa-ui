@@ -25,6 +25,7 @@ import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 public class ChatLocator {
 
@@ -198,11 +199,11 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_CHAT_ON_SITE_NOTIFICATION_BUTTON=   $(byId("notifyOnSite"));
     public static final SelenideElement ELEMENT_CHAT_NOTIFICATION_DETAIL=   $(byId("chat-notifications-details"));
 
+    public static final SelenideElement ELEMENT_CHAT_EDIT_MESSAGE = $(byClassName("edit-message-modal"));
 
+    public static final SelenideElement ELEMENT_CHAT_MESSAGE_VALUE = $(byId("editMessageComposerArea"));
 
-
-
-
+    public static final SelenideElement ELEMENT_CHAT_SAVE_EDIT_MESSAGE= $(byXpath("//*[@id=\"chat-application\"]/div[2]/div[2]/div[1]/div[3]/div/div[2]/div/div[1]"));
 }
 
 
