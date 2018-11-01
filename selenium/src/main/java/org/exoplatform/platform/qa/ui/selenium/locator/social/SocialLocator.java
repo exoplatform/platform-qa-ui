@@ -1476,7 +1476,7 @@ public static final By
                                                                 By.xpath(".//*[@class='tabName' and contains(text(),'answer')]");
 
   public static final String          ELEMENT_SPACE_NAME                                                =
-                                                         ".//*[@id='UIBreadCrumbsNavigationPortlet']//*[@class='name'][contains(text(),'${name}')]";
+                                                         ".//*[@id='UISpaceMenuPortlet']//*[@class='name'][contains(text(),'${name}')]";
 
   public static final String          ELEMENT_SPACE_MENU_DISPLAYORDER_ID                                =
                                                                          ".//*[@id='spaceMenuTab']/li[${number}]//*[contains(@class,'${tab}')]";
@@ -2417,6 +2417,7 @@ public static final By
   public static final SelenideElement ELEMENT_BUTTON_SAVE_ROOM=   $(byClassName("btn-primary"));
   public static final SelenideElement ELEMENT_CONTACT_LIST=  $(byId("chat-users"));
   public static final SelenideElement ELEMENT_COLLABORATION_ACTIONS=  $(byClassName("uiIconPlusCircled"));
+  public static final SelenideElement ELEMENT_SPACE_NAME_CONTAINER=$(byId("UISpaceMenuPortlet"));
 
 }
 

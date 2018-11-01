@@ -691,7 +691,7 @@ public class WikiValidattions {
      */
     public void verifyTitleWikiPage(String title) {
         info("Verify that the wiki page is created and shown in the list");
-        ELEMENT_WIKI_PAGE_LINK.find(byText(title)).should(Condition.exist);
+        ELEMENT_WIKI_PAGE_LINK.find(byText(title)).waitUntil(Condition.visible,Configuration.timeout);
         info("The wiki page is created successfully");
     }
 
