@@ -9,6 +9,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.commands.ScrollTo;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
@@ -292,6 +293,7 @@ public class MyNotificationsSetting {
         if($(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX).is(Condition.not(Condition.checked)))
           $(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX).parent().click();
         info("Click on Save button");
+
         $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).click();
         $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
         info("Verify that intranet notification is shown");

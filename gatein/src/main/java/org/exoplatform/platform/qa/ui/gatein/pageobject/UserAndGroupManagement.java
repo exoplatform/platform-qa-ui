@@ -25,6 +25,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_NEXT_PAGE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME;
 
 import java.util.ArrayList;
@@ -149,15 +150,14 @@ public class UserAndGroupManagement {
   public void addUserAdmin(String user, String... membership) {
     info("Go to Group tab");
     goToGroupTab();
-    evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     info("Select Platform/administration group");
     selectGroup("Platform/Administration");
     info("Add user to administration group by type");
-    $(ELEMENT_INPUT_USERNAME).setValue(user);
+    $(ELEMENT_INPUT_USERNAME).scrollTo().setValue(user);
     if (membership.length > 0)
       evt.select(ELEMENT_SELECT_MEMBERSHIP, membership[0]);
-    evt.scrollToElement(evt.waitForAndGetElement(ELEMENT_SAVE_BUTTON_2), this.testBase.getExoWebDriver().getWebDriver());
-    evt.click(ELEMENT_SAVE_BUTTON_2);
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    $(ELEMENT_SAVE_BUTTON_2).click();
     String addedUser = ELEMENT_ADDED_GROUP_USER_IN_TABLE.replace("${username}", user);
     if (testBase.isTextPresent(ELEMENT_MSG_TOTAL_PAGES)) {
       plfBase.usePaginator(addedUser, ELEMENT_USER_NOT_FOUND.replace("${user}", user));

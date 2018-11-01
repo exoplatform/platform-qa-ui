@@ -16,13 +16,14 @@ import org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
+
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS;
+import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
-
-import static org.exoplatform.platform.qa.ui.core.PLFData.password;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_BADGE_NUMBER_DISPLAY;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_INTRANET_NOTIFICATION_NEAR_USER_AVATAR;
@@ -54,6 +55,7 @@ public class SOCNotificationIntranetNotificationIconTestIT extends Base {
         MyNotificationsSetting = new MyNotificationsSetting(this);
         UserAddManagement = new UserAddManagement(this);
         userProfilePage = new UserProfilePage(this);
+        manageLogInOut.signInCas(DATA_USER1, DATA_PASS2);
         intranetNotification = new IntranetNotification(this);
         UserAndGroupManagement = new UserAndGroupManagement(this);
     }
@@ -87,18 +89,16 @@ public class SOCNotificationIntranetNotificationIconTestIT extends Base {
         String username1 = "usernamea" + getRandomString();
         String email1 = username1 + "@gmail.com";
         String password = "123456";
-        String DATA_PASS ="gtngtn";
 
         info("Add new user");
-        manageLogInOut.signInCas(DATA_USER1, DATA_PASS);
         navigationToolbar.goToAddUser();
         UserAddManagement.addUser(username1, "123456", email1, username1, username1);
         manageLogInOut.signIn(username1, password);
 
         info("Check The Notifications icon is displayed in the top navigation");
         $(ELEMENT_INTRANET_NOTIFICATION_NEAR_USER_AVATAR).waitUntil(Condition.visible, Configuration.timeout);
-        manageLogInOut.signIn(DATA_USER1, "gtngtn");
+        manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
         navigationToolbar.goToManageCommunity();
         addUsers.deleteUser(username1);
-    }}
-
+    }
+}
