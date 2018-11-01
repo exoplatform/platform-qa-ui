@@ -128,6 +128,7 @@ public class SOCNotificationIntranetNotificationIconTestIT extends Base {
         String username4 = "usernamed" + getRandomString();
         String email4 = username4 + "@gmail.com";
         String password = "123456";
+
         info("Add new user");
         navigationToolbar.goToAddUser();
         UserAddManagement.addUser(username1, "123456", email1, username1, username1);
@@ -154,4 +155,75 @@ public class SOCNotificationIntranetNotificationIconTestIT extends Base {
         addUsers.deleteUser(username3);
         addUsers.deleteUser(username4);
     }
-}
+
+    /**
+     * <li> Case ID:125114.</li>
+     * <li> Test Case Name: Open the notifications list to reset the number of notifications.</li>
+     * <li> Pre-Condition: The user has unread notifications (no matters the notification type), for instance 3 notifications</li>
+     * <li> Post-Condition: </li>
+     */
+     /*Step Number: 1
+		*Step Name:
+		*Step Description:
+			- Login to platform
+			- Check the top navigation
+		*Input Data:
+
+		*Expected Outcome:
+			- The number of new notifications (3 notifications) is displayed above the icon with a blue badge.*/
+     /*Step number: 2
+		*Step Name:
+		*Step Description:
+			- Click the notification icon
+		*Input Data:
+
+		*Expected Outcome:
+			- The list opens
+			- When opening the notification list, the number of new notifications displayed in the badge is reset.*/
+
+    @Test
+    public void test03_OpenTheNotificationsListToResetTheNumberOfNotifications() {
+        info("Test 3: Open the notifications list to reset the number of notifications");
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String username2 = "usernameb" + getRandomString();
+        String email2 = username2 + "@gmail.com";
+        String username3 = "usernamec" + getRandomString();
+        String email3 = username3 + "@gmail.com";
+        String username4 = "usernamed" + getRandomString();
+        String email4 = username4 + "@gmail.com";
+        String password ="123456";
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        UserAddManagement.addUser(username1, "123456", email1, username1, username1);
+        navigationToolbar.goToUsersAndGroupsManagement();
+        UserAndGroupManagement.addUserAdmin(username1);
+        manageLogInOut.signIn(username1,password );
+
+        info("goto My notification");
+        navigationToolbar.goToMyNotifications();
+        MyNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.NewUser_intranet);
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        UserAddManagement.addUser(username2, "123456", email2, username2, username2);
+        UserAddManagement.addUser(username3, "123456", email3, username3, username3);
+        UserAddManagement.addUser(username4, "123456", email4, username4, username4);
+
+        info("Verify that The number of new notifications (3 notifications) is displayed above the icon");
+        $(byXpath(ELEMENT_BADGE_NUMBER_DISPLAY.replace("${number}", "3"))).waitUntil(Condition.visible, Configuration.timeout);
+        navigationToolbar.goToIntranetNotification();
+
+        info("Verify that The number of new notifications (3 notifications) isnot displayed above the icon");
+        $(byXpath(ELEMENT_BADGE_NUMBER_DISPLAY.replace("${number}", "3"))).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+        manageLogInOut.signIn(DATA_USER1,DATA_PASS2);
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
+        addUsers.deleteUser(username3);
+        addUsers.deleteUser(username4);
+    }}
+
+
+
