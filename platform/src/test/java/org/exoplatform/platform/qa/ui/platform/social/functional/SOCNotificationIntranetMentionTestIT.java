@@ -26,7 +26,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLoca
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
-@Tag("sniff")
+@Tag("functional")
 @Tag("social")
 
 public class SOCNotificationIntranetMentionTestIT extends Base {
