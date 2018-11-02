@@ -17,8 +17,8 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.switchTo;
+import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_NAME_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("chat")
@@ -90,6 +90,31 @@ public class ChatMessageManagementTestIT extends Base {
         roomManagement.addRoom(room);
         chatManagement.sendMessageInRoomOrSpace(room,message);
         messageManagement.deleteMessage(message);
+        roomManagement.deleteRomm(room);
+    }
+
+    @Test
+    public void test04_QuoteMessage(){
+        String room="room"+getRandomNumber();
+        String message="message"+getRandomNumber();
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.addRoom(room);
+        chatManagement.sendMessageInRoomOrSpace(room,message);
+        messageManagement.quoteMessage(message,DATA_NAME_USER1);
+        roomManagement.deleteRomm(room);
+    }
+
+    @Test
+    public void test05_SaveNotes(){
+        String room="room"+getRandomNumber();
+        String message="message"+getRandomNumber();
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.addRoom(room);
+        chatManagement.sendMessageInRoomOrSpace(room,message);
+        messageManagement.saveNotes(message,DATA_NAME_USER1);
+        switchTo().window(1);
         roomManagement.deleteRomm(room);
     }
 }
