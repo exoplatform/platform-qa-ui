@@ -421,13 +421,13 @@ public class NotificationsAdminSeting {
       evt.waitForAndGetElement(ELEMENT_SPACE_POST_EMAIL_NOTIFICATION_TITLE, 3000, 1);
       break;
     case Space_Post_intranet:
-      evt.click(ELEMENT_SPACE_NOTIFICATION_POST_EDIT_BTN);
+      $(ELEMENT_SPACE_NOTIFICATION_POST_EDIT_BTN).click();
       if (evt.waitForAndGetElement(ELEMENT_SPACE_POST_INTRANET_NOTIFICATION_CHECKBOX_CHECKED, 2000, 0) == null)
-        evt.check(ELEMENT_SPACE_POST_INTRANET_NOTIFICATION_CHECKBOX, 2);
+        $(ELEMENT_SPACE_POST_INTRANET_NOTIFICATION_CHECKBOX).click();
       info("Click on Save button");
-      evt.click(ELEMENT_SPACE_POST_NOTIFICATION_SAVE_BTN);
+      $(ELEMENT_SPACE_POST_NOTIFICATION_SAVE_BTN).click();
       info("Verify that Intranet notification is hidded");
-      evt.waitForAndGetElement(ELEMENT_SPACE_POST_INTRANET_NOTIFICATION_TITLE, 3000, 1);
+      $(ELEMENT_SPACE_POST_INTRANET_NOTIFICATION_TITLE).waitUntil(Condition.disappears,Configuration.timeout);
       break;
     }
   }

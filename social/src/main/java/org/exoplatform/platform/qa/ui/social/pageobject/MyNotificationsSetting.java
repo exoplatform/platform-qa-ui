@@ -459,7 +459,7 @@ public class MyNotificationsSetting {
         evt.waitForAndGetElement(ELEMENT_POST_SPACE_MAIL_ICON, 3000, 1);
         break;
       case Space_Post_intranet:
-        evt.click(ELEMENT_EDIT_POST_SPACE_ICON);
+        $(ELEMENT_EDIT_POST_SPACE_ICON).click();
         while (evt.waitForAndGetElement(ELEMENT_EDIT_POST_SPACE_WEB_CHECKBOX_CHECKED, 2000, 0) == null) {
           if (repeat > 5)
             break;
@@ -468,10 +468,11 @@ public class MyNotificationsSetting {
           repeat++;
         }
         info("Click on Save button");
-        evt.click(ELEMENT_EDIT_POST_SPACE_SAVE_BTN);
+        $(ELEMENT_EDIT_POST_SPACE_SAVE_BTN).click();
         info("Verify that email notification is shown");
-        evt.waitForAndGetElement(ELEMENT_POST_SPACE_INTRANET_ICON, 3000, 1);
+        $(ELEMENT_POST_SPACE_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);
         break;
+
       case Space_Join_Req_email:
         evt.click(ELEMENT_EDIT_REQJOIN_SPACE_ICON);
         while (evt.waitForAndGetElement(ELEMENT_EDIT_REQJOIN_SPACE_MAIL_CHECKBOX_CHECKED, 2000, 0) == null) {
@@ -760,7 +761,7 @@ public class MyNotificationsSetting {
         break;
       case Space_Post_intranet:
         info("Verify that intranet for space post notification is shown");
-        evt.waitForAndGetElement(ELEMENT_POST_SPACE_INTRANET_ICON);
+        $(ELEMENT_POST_SPACE_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);
         info("The notification is shown successfully");
         break;
     }

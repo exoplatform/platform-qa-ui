@@ -183,8 +183,8 @@ public class CalendarSettingTestIT extends Base {
     info("verify dateformat of event");
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    timeFrom = waitForAndGetElement(ELEMENT_QUICK_INPUT_EVENT_FROM_TIME, DEFAULT_TIMEOUT, 1, 2).getAttribute("value");
-    timeTo = waitForAndGetElement(ELEMENT_QUICK_INPUT_EVENT_TO_TIME, DEFAULT_TIMEOUT, 1, 2).getAttribute("value");
+    timeFrom = $(ELEMENT_QUICK_INPUT_EVENT_FROM_TIME, DEFAULT_TIMEOUT).waitUntil(Condition.visible,Configuration.timeout).getAttribute("value");
+    timeTo = $(ELEMENT_QUICK_INPUT_EVENT_TO_TIME, DEFAULT_TIMEOUT).waitUntil(Condition.visible,Configuration.timeout).getAttribute("value");
     assert (timeFrom.contains("AM") || timeFrom.contains("PM"));
     assert (timeTo.contains("AM") || timeTo.contains("PM"));
     eventManagement.inputDataEventInQuickForm(titleEvent,

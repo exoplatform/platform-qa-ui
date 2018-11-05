@@ -398,12 +398,12 @@ public class SpaceSettingManagement {
         info("Right click on the node");
         // Actions actions = new Actions(driver);
         $(byXpath(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName))).contextClick();
-    /*
-     * WebElement el =
-     * waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace(
-     * "${name}", nodeName), DEFAULT_TIMEOUT, 1);
-     * actions.moveToElement(el).contextClick().perform();
-     */
+        /*
+         * WebElement el =
+         * waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace(
+         * "${name}", nodeName), DEFAULT_TIMEOUT, 1);
+         * actions.moveToElement(el).contextClick().perform();
+         */
         info("Select delete link");
         $(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_DELETE).waitUntil(Condition.visible, Configuration.timeout).click();
         alert.acceptAlert();
