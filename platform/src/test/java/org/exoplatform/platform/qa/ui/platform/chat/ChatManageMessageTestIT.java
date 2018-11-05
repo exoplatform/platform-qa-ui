@@ -3,11 +3,17 @@ package org.exoplatform.platform.qa.ui.platform.chat;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.codeborne.selenide.Configuration;
+import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
+import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
+import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -50,6 +56,12 @@ public class ChatManageMessageTestIT extends Base {
 
   WikiHomePage           wikiHomePage;
 
+  NavigationToolbar      navigationToolbar;
+
+  UserAddManagement      userAddManagement;
+
+  UserAndGroupManagement userAndGroupManagement;
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
@@ -61,6 +73,9 @@ public class ChatManageMessageTestIT extends Base {
     chatManagement = new ChatManagement(this);
     spaceSettingManagement = new SpaceSettingManagement(this);
     roomManagement = new RoomManagement(this);
+    navigationToolbar=new NavigationToolbar(this);
+    userAddManagement=new UserAddManagement(this);
+    userAndGroupManagement=new UserAndGroupManagement(this);
     wikiHomePage = new WikiHomePage(this);
     manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
   }
@@ -222,5 +237,78 @@ public class ChatManageMessageTestIT extends Base {
     $(byText(nameWikipage)).shouldBe(Condition.visible);
     wikiHomePage.deleteWiki(nameWikipage);
 
+  }
+
+  @Test
+  public void test05_checkTimeWhenSendAmessageInChatRoom(){
+    String room = "room" + getRandomNumber();
+    String message="message"+getRandomNumber();
+    String username = "username" + getRandomNumber();
+    String password = "123456";
+    String FirstName = "FirstName" + getRandomString();
+    String LastName = "LastName" + getRandomString();
+    String email = username + "@test.com";
+    String I;
+
+    navigationToolbar.goToAddUser();
+    userAddManagement.addUser(username, password, email, FirstName, LastName);
+    homePagePlatform.goToChat();
+    switchTo().window(1);
+    roomManagement.addRoom(room, username);
+    chatManagement.sendMessageInRoomOrSpace(room,message);
+    I=$(byClassName("message-time")).waitUntil(Condition.appear, Configuration.timeout).getText();
+    switchToParentWindow();
+    manageLogInOut.signOut();
+    manageLogInOut.signInCas(username,password);
+    homePagePlatform.goToChat();
+    switchTo().window(1);
+    $(byText(room)).click();
+    assertEquals(I,$(byClassName("chat-sender-avatar")).parent().parent().parent().parent()
+            .find(byClassName("message-time")).getText());
+    switchToParentWindow();
+    manageLogInOut.signOut();
+    manageLogInOut.signInCas(PLFData.DATA_USER1,PLFData.DATA_PASS2);
+    homePagePlatform.goToChat();
+    switchTo().window(1);
+    roomManagement.deleteRomm(room);
+    switchToParentWindow();
+    navigationToolbar.goToManageCommunity();
+    userAndGroupManagement.deleteUser(username);
+  }
+
+  @Test
+  public void test06_checkAvatarWhenSendMessage(){
+    String room = "room" + getRandomNumber();
+    String message="message"+getRandomNumber();
+    String username = "username" + getRandomNumber();
+    String password = "123456";
+    String FirstName = "FirstName" + getRandomString();
+    String LastName = "LastName" + getRandomString();
+    String email = username + "@test.com";
+
+
+    navigationToolbar.goToAddUser();
+    userAddManagement.addUser(username, password, email, FirstName, LastName);
+    homePagePlatform.goToChat();
+    switchTo().window(1);
+    roomManagement.addRoom(room, username);
+    chatManagement.sendMessageInRoomOrSpace(room,message);
+    ELEMENT_CHAT_AVATAR.parent().find(byClassName("chat-contact-avatar")).shouldNot(Condition.appear);
+    switchToParentWindow();
+    manageLogInOut.signOut();
+    manageLogInOut.signInCas(username,password);
+    homePagePlatform.goToChat();
+    switchTo().window(1);
+    $(byText(room)).click();
+    ELEMENT_CHAT_AVATAR.parent().find(byClassName("chat-contact-avatar")).shouldNot(Condition.appear);
+    switchToParentWindow();
+    manageLogInOut.signOut();
+    manageLogInOut.signInCas(PLFData.DATA_USER1,PLFData.DATA_PASS2);
+    homePagePlatform.goToChat();
+    switchTo().window(1);
+    roomManagement.deleteRomm(room);
+    switchToParentWindow();
+    navigationToolbar.goToManageCommunity();
+    userAndGroupManagement.deleteUser(username);
   }
 }

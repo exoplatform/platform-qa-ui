@@ -214,5 +214,7 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_WIKI_ATTENDEE_MESSAGE= $(byXpath("//*[@id=\\\"UIViewContentDisplay\\\"]/div[3]/p[3]\""));
 }
 
+    public static final SelenideElement ELEMENT_CHAT_AVATAR = $(byClassName("chat-sender-avatar"));
+
 
 
