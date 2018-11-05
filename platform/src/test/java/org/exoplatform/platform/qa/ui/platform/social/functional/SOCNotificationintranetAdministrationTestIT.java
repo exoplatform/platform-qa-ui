@@ -183,6 +183,10 @@ public class SOCNotificationintranetAdministrationTestIT extends Base {
         $(ELEMENT_NEWUSER_ICON_INTRANET_NOTIFICATION).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
         $(ELEMENT_EDIT_NEWUSER_ICON).click();
         $(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+        navigationToolbar.goToAdminNotifications();
+        info("Notifications Administration page is displayed");
+        $(ELEMENT_TITLE_ADMIN_NOTIFICATIONS_PAGE).waitUntil(Condition.visible, Configuration.timeout);
+        notificationsAdminSeting.enableNotification(NotificationsAdminSeting.notificationType.NewUser_intranet);
 
     }
 }

@@ -380,8 +380,8 @@ public class MyNotificationsSetting {
       case AS_Like_intranet:
         $(ELEMENT_ACCOUNT_NAME_LINK).click();
         $(ELEMENT_EDIT_LIKE_ICON).click();
-        $(ELEMENT_EDIT_LIKE_ICON).waitUntil(not(Condition.visible),Configuration.timeout);
-        if($(ELEMENT_EDIT_LIKE_WEB_CHECKBOX).is(not(Condition.selected))){
+        $(ELEMENT_EDIT_LIKE_ICON).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+        if($(ELEMENT_EDIT_LIKE_WEB_CHECKBOX).is(Condition.not(Condition.selected))){
           $(ELEMENT_EDIT_LIKE_WEB_CHECKBOX).parent().click();
         }
         info("Click on Save button");
