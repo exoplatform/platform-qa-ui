@@ -12,6 +12,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManag
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.social.pageobject.IntranetNotification;
 import org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting;
+import org.exoplatform.platform.qa.ui.social.pageobject.NotificationActivity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -38,6 +39,7 @@ public class SOCNotificationIntranetPostInSpaceTestIT extends Base {
     ActivityStream activityStream;
     IntranetNotification intranetNotification;
     MyNotificationsSetting myNotificationsSetting;
+    NotificationActivity notificationActivity;
 
 
     @BeforeEach
@@ -55,7 +57,7 @@ public class SOCNotificationIntranetPostInSpaceTestIT extends Base {
         spaceHomePage = new SpaceHomePage(this);
         myNotificationsSetting = new MyNotificationsSetting(this);
         spaceSettingManagement = new SpaceSettingManagement(this);
-
+        notificationActivity = new NotificationActivity(this);
 
     }
 
@@ -90,7 +92,6 @@ public class SOCNotificationIntranetPostInSpaceTestIT extends Base {
 			- $SPACE is Space 1
 			- $ACTIVITY is the activity title / message
 			- $DATE is the date of the notification*/
-
     @Test
     public void test01_CheckPostOnMySpaceNotification() {
 
@@ -149,5 +150,90 @@ public class SOCNotificationIntranetPostInSpaceTestIT extends Base {
         navigationToolbar.goToManageCommunity();
         addUsers.deleteUser(username1);
         addUsers.deleteUser(username2);
+    }
+
+    /**
+     * <li> Case ID:125135.</li>
+     * <li> Test Case Name: Click Post on my Space notification.</li>
+     * <li> Pre-Condition: - User A and User B are members of Space 1
+     * - User B has posted in Space 1
+     * - The notification "An activity is posted on one of my spaces" is activated in the user settings</li>
+     * <li> Post-Condition: </li>
+     */
+    /*Step Number: 1
+		*Step Name: Step 1 : Check notification list
+		*Step Description:
+			- Login with User A
+			- Click the notifications icon in the top navigation
+			- Check the notifications list
+		*Input Data:
+
+		*Expected Outcome:
+			- A Post on my Space notifications is displayed in the list*/
+    /*Step number: 2
+		*Step Name: Step 2 : View the notification
+		*Step Description:
+			- Click the notification area
+		*Input Data:
+
+		*Expected Outcome:
+			The activity is displayedin the activity viewer with all comments expanded*/
+    @Test
+    public void test02_ClickPostOnMySpaceNotification() {
+
+        info("Test 2: Click Post on my Space notification");
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String username2 = "usernameb" + getRandomString();
+        String email2 = username2 + "@gmail.com";
+        String password = "123456";
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(username1, password, email1, username1, username1);
+        addUsers.addUser(username2, password, email2, username2, username2);
+        manageLogInOut.signIn(username1, password);
+
+        info("goto My notification");
+        navigationToolbar.goToMyNotifications();
+        myNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.Space_Post_intranet);
+
+        info("User A create a new space");
+        String spaceName = "spaceName" + getRandomNumber();
+        String spaceDes = "description" + getRandomNumber();
+        homePagePlatform.goToAllSpace();
+        spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+
+        info("User A invites UserB to the space");
+        homePagePlatform.goToSpecificSpace(spaceName);
+        spaceHomePage.goToSpaceSettingTab();
+        spaceSettingManagement.goToMemberTab();
+        spaceSettingManagement.inviteUser(username2, false, "");
+
+        info("User B login");
+        manageLogInOut.signIn(username2, password);
+
+        info("User B accepted to join the space");
+        homePagePlatform.goToAllSpace();
+        spaceManagement.goToInvitationsReceivedTab();
+        spaceManagement.acceptAInvitation(spaceName);
+
+        info("User B added an new activity to the space");
+        String activity = "activity" + getRandomNumber();
+        homePagePlatform.goToSpecificSpace(spaceName);
+        activityStream.addActivity(activity, null);
+        activityStream.checkActivity(activity);
+
+        info("User A login");
+        manageLogInOut.signIn(username1, password);
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.goToDetailPostInSpace(spaceName, true);
+        notificationActivity.checkTitleActivityExpand(activity);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(DATA_USER1, DATA_PASS2);
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
+
     }
 }

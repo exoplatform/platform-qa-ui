@@ -30,7 +30,7 @@ public class NotificationActivity {
 
   /**
    * constructor
-   * 
+   *
    * @param testBase TestBase
    */
   public NotificationActivity(TestBase testBase) {
@@ -42,7 +42,7 @@ public class NotificationActivity {
 
   /**
    * Check notification's comment type in notification list popup
-   * 
+   *
    * @param users String
    * @param comment String
    * @param actTitle String
@@ -62,9 +62,9 @@ public class NotificationActivity {
       if (users.size() > 2) {
         info("Verify the activity message for more 2 users comments");
         evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_COMMENTS_CONTENT.replace("$comment", comment)
-                                                                               .replace("$number", users.get(lastIndex - 1)),
-                                 2000,
-                                 2);
+                        .replace("$number", users.get(lastIndex - 1)),
+                2000,
+                2);
       } else {
         info("Verify the activity message for 2 or 1 comment(s)");
         evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_COMMENTS_CONTENT.replace("$comment", comment), 2000, 2);
@@ -80,7 +80,7 @@ public class NotificationActivity {
 
   /**
    * Verify that the comment is expanded and highlight or not highlight
-   * 
+   *
    * @param comment is comment's content
    * @param isHighlight = true if wants to check the comment is highlighted =
    *          false if wants to check the comment is not highlighted or ignore
@@ -100,7 +100,7 @@ public class NotificationActivity {
 
   /**
    * function: check comment in activity viewer
-   * 
+   *
    * @param userName
    * @param comment
    * @param highlighted (true if you need to check the comment is highlighted)
@@ -119,7 +119,7 @@ public class NotificationActivity {
 
   /**
    * function: check like in activity viewer
-   * 
+   *
    * @param number number of like
    */
   public void checkLikeInActivityViewer(String number) {
@@ -130,7 +130,7 @@ public class NotificationActivity {
 
   /**
    * function: check mention in activity viewer
-   * 
+   *
    * @param Activity the activity you are mentioned
    */
   public void checkMentionInActivityViewer(String Activity) {
@@ -141,7 +141,7 @@ public class NotificationActivity {
 
   /**
    * Verify that the activity is shown with correct content
-   * 
+   *
    * @param text is the title of the activity
    */
   public void checkTitleActivityExpand(String text) {
@@ -161,7 +161,7 @@ public class NotificationActivity {
 
   /**
    * Verify detail Activity's format
-   * 
+   *
    * @param isCommentBox =true if wants to check comment's box =false if don't
    *          want
    * @param content is activity's title
@@ -185,7 +185,7 @@ public class NotificationActivity {
 
   /**
    * Verify the title of the page
-   * 
+   *
    * @param expectedTitle is the title's content
    */
   public void verifyTitlePage(String expectedTitle) {
@@ -200,7 +200,7 @@ public class NotificationActivity {
 
   /**
    * Reply an activity
-   * 
+   *
    * @param comment is the content of the comment
    */
   public void reply(String comment) {
@@ -210,22 +210,22 @@ public class NotificationActivity {
       WebElement workingLabel = evt.waitForAndGetElement(ELEMENT_ACTIVITY_ADD_YOUR_COMMENTLABEL);
 
       ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].textContent = '';",
-                                                                                     workingLabel);
+              workingLabel);
       ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript(
-                                                                                     "arguments[0].textContent = '" + comment
-                                                                                         + "';",
-                                                                                     commentText);
+              "arguments[0].textContent = '" + comment
+                      + "';",
+              commentText);
       ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].disabled = false;",
-                                                                                     commentButton);
+              commentButton);
       ((JavascriptExecutor) testBase.getExoWebDriver()
-                                    .getWebDriver()).executeScript("arguments[0].className = 'btn pull-right btn-primary';",
-                                                                   commentButton);
+              .getWebDriver()).executeScript("arguments[0].className = 'btn pull-right btn-primary';",
+              commentButton);
       evt.click(ELEMENT_COMMENT_BUTTON);
       info("Verify comment successfully");
       evt.waitForAndGetElement(ELEMENT_DELETE_COMMENT_BUTTON.replace("${commentText}", comment),
-                               testBase.getDefaultTimeout(),
-                               1,
-                               2);
+              testBase.getDefaultTimeout(),
+              1,
+              2);
       info("Add comment successfully");
     }
 
@@ -233,7 +233,7 @@ public class NotificationActivity {
 
   /**
    * Verify information of Answer activity
-   * 
+   *
    * @param numPoint is the number of the point
    * @param numAnswer is the number of the answer
    * @param numCom is the number of the comment
@@ -263,7 +263,7 @@ public class NotificationActivity {
 
   /**
    * Verify information of uploaded file activity
-   * 
+   *
    * @param fileName
    */
   public void verifyActivityFileUpload(String fileName) {
@@ -301,7 +301,7 @@ public class NotificationActivity {
 
   /**
    * Get download file url
-   * 
+   *
    * @return url
    */
   public String getDownloadFileUrl() {
@@ -312,7 +312,7 @@ public class NotificationActivity {
 
   /**
    * Verify that default comment is expanded and highlight or not highlight
-   * 
+   *
    * @param comment is comment's content
    * @param value is the value of the comment that sent to default comment as:
    *          Answer has been submitted: $comment,....
@@ -328,8 +328,8 @@ public class NotificationActivity {
       if (isHighlight) {
         info("Verify that the last comment is highlighted");
         evt.waitForAndGetElement(ELEMENT_ACTIVITY_COMMENT_HIGHLIGHT.replace("$comment", comment).replace("$comment", value),
-                                 2000,
-                                 1);
+                2000,
+                1);
       }
     }
   }
@@ -345,7 +345,7 @@ public class NotificationActivity {
 
   /**
    * Input information for Reply form
-   * 
+   *
    * @param title String
    * @param content String
    */
@@ -362,7 +362,7 @@ public class NotificationActivity {
 
   /**
    * Type a text to a Frame using for CKEDITOR By QuynhPT
-   * 
+   *
    * @param frameLocator By
    * @param content  String
    * @param titleWindow  String
@@ -392,7 +392,7 @@ public class NotificationActivity {
 
   /**
    * Verify topic is shown
-   * 
+   *
    * @param title String
    * @param description String
    */
@@ -405,7 +405,7 @@ public class NotificationActivity {
 
   /**
    * Verify activity's format of Topic activity
-   * 
+   *
    * @param desTopic String
    * @param numReply String
    */
@@ -432,7 +432,7 @@ public class NotificationActivity {
 
   /**
    * Check version and description of Wiki activity
-   * 
+   *
    * @param description String
    */
   public void verifyActivityWiki(String description) {
@@ -448,7 +448,7 @@ public class NotificationActivity {
 
   /**
    * Go to detail wiki page via clicking wiki's activity's title
-   * 
+   *
    * @param title String
    */
   public void goToDetailWikiPage(String title) {
@@ -463,7 +463,7 @@ public class NotificationActivity {
   /**
    * Verify that many comments are expanded and the last comment is highlighted or
    * not highlighted
-   * 
+   *
    * @param comments is an array of comments
    * @param isHighlight = true to check last comment that is highlighted = false
    *          to check last comment is not highlighted or ignore this case
@@ -477,8 +477,8 @@ public class NotificationActivity {
         if (isHighlight) {
           info("Verify that the last comment is highlighted");
           evt.waitForAndGetElement(ELEMENT_ACTIVITY_COMMENT_CONTENT.replace("$comment", comments.get(comments.size() - 1)),
-                                   2000,
-                                   1);
+                  2000,
+                  1);
         }
       }
     }
