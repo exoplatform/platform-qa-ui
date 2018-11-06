@@ -15,12 +15,12 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.Keys;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_CONTACT_LIST;
+import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -72,9 +72,10 @@ public class ChatContactListTestIT extends Base {
         roomManagement.deleteRomm(room);
     }
 
-    @Test void test02_CheckFavoriteIconForSpace(){
-        String space= "space"+getRandomNumber();
+    @Test
+    public void test02_CheckFavoriteIconForSpace(){
 
+        String space= "space"+getRandomNumber();
         homePagePlatform.goToMySpaces();
         spaceManagement.addNewSpaceSimple(space, space);
         homePagePlatform.goToChat();
@@ -93,4 +94,50 @@ public class ChatContactListTestIT extends Base {
         homePagePlatform.goToMySpaces();
         spaceManagement.deleteSpace(space, false);
     }
+
+    @Test
+    public void test03_SearchFieldAction(){
+        String room1= "room1"+getRandomNumber();
+        String room2="room2"+getRandomNumber();
+        String room3="room3"+getRandomNumber();
+        String newroom="newroom"+getRandomNumber();
+
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.addRoom(room1);
+        roomManagement.addRoom(room2);
+        roomManagement.addRoom(room3);
+        ELEMENT_CHAT_SEARCH_FIELD.setValue(room1);
+        ELEMENT_CONTACT_LIST.find(byText(room1)).waitUntil(Condition.visible,Configuration.timeout);
+        ELEMENT_CONTACT_LIST.find(byText(room2)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+        ELEMENT_CONTACT_LIST.find(byText(room3)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+        roomManagement.editTitleofAroom(room1,newroom);
+        assertEquals(room1,ELEMENT_CHAT_SEARCH_FIELD.getValue());
+        ELEMENT_CHAT_SEARCH_FIELD.click();
+        for(int i=0;i<room1.length();i++){
+            ELEMENT_CHAT_SEARCH_FIELD.sendKeys(Keys.BACK_SPACE);
+        }
+        ELEMENT_CONTACT_LIST.find(byText(newroom)).waitUntil(Condition.appear,Configuration.timeout);
+        ELEMENT_CONTACT_LIST.find(byText(room2)).waitUntil(Condition.appear,Configuration.timeout);
+        ELEMENT_CONTACT_LIST.find(byText(room3)).waitUntil(Condition.appear,Configuration.timeout);
+        roomManagement.deleteRomm(newroom);
+        roomManagement.deleteRomm(room2);
+        roomManagement.deleteRomm(room3);
+    }
+
+    @Test
+    public void test04_CheckNotificationSettingPopUp(){
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        ELEMENT_CHAT_SETTING_NOTIFICATION.click();
+        ELEMENT_CHAT_PREFERRENCE_POPUP.waitUntil(Condition.appear,Configuration.timeout);
+        assertEquals("Do Not Disturb Notifications",ELEMENT_CHAT_PREFERRENCE_POPUP.find(byXpath("//*[@id=\"chatPreferences\"]/div/div[2]/section[1]/div/div[2]/b")).getText());
+        assertEquals("Desktop notifications",ELEMENT_CHAT_PREFERRENCE_POPUP.find(byXpath("//*[@id=\"chatPreferences\"]/div/div[2]/section[2]/div[1]/div[2]/b")).getText());
+        assertEquals("On-site notifications",ELEMENT_CHAT_PREFERRENCE_POPUP.find(byXpath("//*[@id=\"chatPreferences\"]/div/div[2]/section[2]/div[2]/div[2]/b")).getText());
+        assertEquals("Bips",ELEMENT_CHAT_PREFERRENCE_POPUP.find(byXpath("//*[@id=\"chatPreferences\"]/div/div[2]/section[2]/div[3]/div[2]/b")).getText());
+    }
+
+    @Test
+    public void test05
+
 }

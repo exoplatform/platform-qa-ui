@@ -161,4 +161,13 @@ public class ChatLocator {
 
 
   public static final SelenideElement ELEMENT_MORE_ACTIONS=$(byClassName("uiIconVerticalDots"));
+  public static final SelenideElement ELEMENT_CHAT_LEAVE_ROOM_BUTTON=  $(byXpath("//*[@id=\"room-detail\"]/div[2]/div[2]/div[3]/ul/li[5]/a"));
+  public static final SelenideElement ELEMENT_CHAT_SEARCH_FIELD=  $(byXpath("//*[@id=\"room-detail\"]/div[2]/div[2]/div[3]/ul/li[5]/a"));
+  public static final SelenideElement ELEMENT_CHAT_SETTING_NOTIFICATION=$(byClassName("uiIconGear"));
+    public static final SelenideElement ELEMENT_CHAT_PREFERRENCE_POPUP=$(byClassName("uiIconGear"));
+
+
+
+
+
 }

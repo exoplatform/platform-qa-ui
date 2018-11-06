@@ -1,14 +1,18 @@
 package org.exoplatform.platform.qa.ui.chat.smoke;
 
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
-import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_CHAT_INPUT_SEARCH_USER;
-import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_CHAT_LIST_MSG;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB;
+import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ALERT_NOTIFICATION_EXIST;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_CONTACT_LIST;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Configuration;
+import org.exoplatform.platform.qa.ui.chat.pageobject.RoomManagement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -48,6 +52,8 @@ public class SpaceManageMessageTestIT extends Base {
 
   SpaceSettingManagement spaceSettingManagement;
 
+  RoomManagement     roomManagement;
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
@@ -60,6 +66,7 @@ public class SpaceManageMessageTestIT extends Base {
     spaceManagement = new SpaceManagement(this);
     spaceHomePage = new SpaceHomePage(this);
     spaceSettingManagement = new SpaceSettingManagement(this);
+    roomManagement= new RoomManagement(this);
   }
 
   @Test
@@ -173,5 +180,50 @@ public class SpaceManageMessageTestIT extends Base {
     navigationToolbar.goToManageCommunity();
     userandgroupmanagement.deleteUser(usernamea);
 
+  }
+
+  @Test
+  public void test04_CheckLeaveRoomForSpaceMember(){
+
+    String space="space"+getRandomNumber();
+    String username = "usernamea" + getRandomString();
+    String password = "123456";
+    String email = "email" + getRandomNumber() + "@test.com";
+    String FirstName = "FirstName" + getRandomString();
+    String LastName = "LastName" + getRandomString();
+    navigationToolbar.goToAddUser();
+    userAddManagement.addUser(username, password, email, FirstName, LastName);
+    info("create space");
+    homePagePlatform.goToMySpaces();
+    spaceManagement.addNewSpaceSimple(space, space);
+    spaceHomePage.goToSpaceSettingTab();
+    spaceSettingManagement.goToMemberTab();
+    ELEMENT_INPUT_INVITE_USER.sendKeys(username);
+    $(ELEMENT_SPACE_BTN_INVITE).click();
+    manageLogInOut.signIn(username, password);
+    ELEMENT_ALERT_NOTIFICATION_EXIST.waitUntil(Condition.appears, Configuration.timeout).click();
+    $(byText("Accept")).click();
+    homePagePlatform.goToChat();
+    switchTo().window(1);
+    ELEMENT_CONTACT_LIST.find(byText(space)).click();
+    ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
+    ELEMENT_CHAT_LEAVE_ROOM_BUTTON.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    switchToParentWindow();
+    manageLogInOut.signOut();
+    manageLogInOut.signInCas(PLFData.DATA_USER1,PLFData.DATA_PASS2);
+    info("delete space");
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
+  }
+
+  @Test
+  public void test05_CheckLeaveRoomForManager(){
+    String room= "room"+getRandomNumber();
+    homePagePlatform.goToChat();
+    switchTo().window(1);
+    roomManagement.addRoom(room);
+    ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
+    $(byText("Leave Room")).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    roomManagement.deleteRomm(room);
   }
 }
