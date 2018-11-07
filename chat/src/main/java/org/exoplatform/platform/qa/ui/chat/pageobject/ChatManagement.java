@@ -36,7 +36,7 @@ public class ChatManagement {
   }
 
   public void changeStatus(String status) {
-    ELEMENT_ICON_CHAT.click();
+    ELEMENT_CHAT_ICON_STATUS.click();
     switch (status) {
     case "Available":
       ELEMENT_CHAT_STATUS_AVAILABLE.click();

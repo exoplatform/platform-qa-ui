@@ -138,6 +138,13 @@ public class ChatContactListTestIT extends Base {
     }
 
     @Test
-    public void test05
+    public void test05_CheckNotificationSettingCancel(){
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        ELEMENT_CHAT_SETTING_NOTIFICATION.click();
+        ELEMENT_CHAT_PREFERRENCE_POPUP.waitUntil(Condition.appear,Configuration.timeout);
+        $(byXpath("//*[@id=\"chatPreferences\"]/div/div[2]/div/div[2]")).click();
+        ELEMENT_CHAT_PREFERRENCE_POPUP.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    }
 
 }

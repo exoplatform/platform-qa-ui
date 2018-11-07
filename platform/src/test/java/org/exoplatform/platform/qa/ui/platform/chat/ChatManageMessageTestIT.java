@@ -2,12 +2,16 @@ package org.exoplatform.platform.qa.ui.platform.chat;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER2;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.codeborne.selenide.Configuration;
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -74,11 +78,11 @@ public class ChatManageMessageTestIT extends Base {
     spaceManagement.addNewSpaceSimple(space, space);
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.goToMemberTab();
-    ELEMENT_INPUT_INVITE_USER.sendKeys(PLFData.DATA_USER2);
+    ELEMENT_INPUT_INVITE_USER.sendKeys(DATA_USER2);
     $(ELEMENT_SPACE_BTN_INVITE).click();
     homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(PLFData.DATA_USER2);
-    manageLogInOut.signIn(PLFData.DATA_USER2, "gtn");
+    connectionsManagement.connectToAUser(DATA_USER2);
+    manageLogInOut.signIn(DATA_USER2, "gtn");
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(PLFData.DATA_USER1);
     homePagePlatform.goToAllSpace();
@@ -117,6 +121,7 @@ public class ChatManageMessageTestIT extends Base {
 
   @Test
   @Tag("CHAT-808")
+  @BugInPLF("CHAT-990")
   public void test02_uploadFileInUserChatThenSpaceChat() {
     String space = "space" + getRandomNumber();
     info("create space and invite user");
@@ -124,11 +129,11 @@ public class ChatManageMessageTestIT extends Base {
     spaceManagement.addNewSpaceSimple(space, space);
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.goToMemberTab();
-    ELEMENT_INPUT_INVITE_USER.sendKeys(PLFData.DATA_USER2);
+    ELEMENT_INPUT_INVITE_USER.sendKeys(DATA_USER2);
     $(ELEMENT_SPACE_BTN_INVITE).click();
     homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(PLFData.DATA_USER2);
-    manageLogInOut.signIn(PLFData.DATA_USER2, "gtn");
+    connectionsManagement.connectToAUser(DATA_USER2);
+    manageLogInOut.signIn(DATA_USER2, "gtn");
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(PLFData.DATA_USER1);
     homePagePlatform.goToAllSpace();
@@ -138,8 +143,6 @@ public class ChatManageMessageTestIT extends Base {
     homePagePlatform.goToChat();
     switchTo().window(1);
     info("upload file in user chat");
-    if ($(byText(PLFData.DATA_NAME_USER2)).is(Condition.not(Condition.visible)))
-      ELEMENT_CHAT_BUTTON_HIDE_OFF_LINE.click();
     $(byText(PLFData.DATA_NAME_USER2)).click();
     chatManagement.uploadFile("testavatar.png");
     refresh();
@@ -163,7 +166,6 @@ public class ChatManageMessageTestIT extends Base {
     ELEMENT_CONTAINER_ACTIVITY.find(byAttribute("data-original-title", "eXo-Platform.png")).should(Condition.exist);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
-
   }
 
   @Test
@@ -171,15 +173,13 @@ public class ChatManageMessageTestIT extends Base {
   public void test03_checkUserStatusWhenSendMessageInRoom(){
     String room = "room" + getRandomNumber();
     String message = "room" + getRandomNumber();
-    manageLogInOut.signIn(PLFData.DATA_USER2, PLFData.password);
-    homePagePlatform.goToChat();
     manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
     chatManagement.changeStatus("Available");
     homePagePlatform.goToChat();
     switchTo().window(1);
-    roomManagement.addRoom(room, PLFData.DATA_USER2);
+    roomManagement.addRoom(room, DATA_USER2);
     switchTo().window(0);
-    manageLogInOut.signIn(PLFData.DATA_USER2, PLFData.password);
+    manageLogInOut.signIn(DATA_USER2, PLFData.password);
     chatManagement.changeStatus("Away");
     homePagePlatform.goToChat();
     switchTo().window(1);
@@ -191,9 +191,8 @@ public class ChatManageMessageTestIT extends Base {
     $(byText(room)).click();
     info("verify message");
     ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.visible);
-    $(byClassName("buttonChangeStatus")).find(byClassName("chat-status-available")).should(Condition.visible);
+    $(byClassName("user-available")).should(Condition.visible);
     roomManagement.deleteRomm(room);
-
   }
 
   @Test
@@ -203,24 +202,23 @@ public class ChatManageMessageTestIT extends Base {
     String message = "room" + getRandomNumber();
     String message1 = "room" + getRandomNumber();
     String message2 = "room" + getRandomNumber();
-    manageLogInOut.signIn(PLFData.DATA_USER2, PLFData.password);
+    manageLogInOut.signIn(DATA_USER2, PLFData.password);
     homePagePlatform.goToChat();
     manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
     homePagePlatform.goToChat();
     switchTo().window(1);
     refresh();
-    roomManagement.addRoom(room, PLFData.DATA_USER2);
+    roomManagement.addRoom(room, DATA_USER2);
     roomManagement.startStopmeeting(room);
     chatManagement.sendMessageInRoomOrSpace(room, message);
     chatManagement.sendMessageInRoomOrSpace(room, message1);
     chatManagement.sendMessageInRoomOrSpace(room, message2);
     roomManagement.startStopmeeting(room);
     ELEMENT_CHAT_LIST_MSG.find(byClassName("uiIconChatWiki")).parent().find(byClassName("save-meeting-notes")).click();
-    ELEMENT_CHAT_LINK_TEXT_OPEN_WIKI_APP.click();
-    $(byText("Meeting Notes")).click();
-    String nameWikipage = room + " Meeting " + getDate(0, "dd-MM-yyyy HH-mm");
-    $(byText(nameWikipage)).shouldBe(Condition.visible);
-    wikiHomePage.deleteWiki(nameWikipage);
-
+    switchTo().window(2);
+    ELEMENT_WIKI_CONTAINER.waitUntil(Condition.appear,Configuration.timeout);
+    ELEMENT_WIKI_DISCUSSION_CONTAINER.should(Condition.exist);
+    assertEquals(DATA_USER2,ELEMENT_WIKI_ATTENDEE_NAME.getText());
+    assertEquals(message,ELEMENT_WIKI_ATTENDEE_MESSAGE.getText());
   }
 }

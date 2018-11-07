@@ -1,10 +1,12 @@
 package org.exoplatform.platform.qa.ui.chat.smoke;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.chat.pageobject.ChatManagement;
 import org.exoplatform.platform.qa.ui.chat.pageobject.RoomManagement;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
@@ -14,13 +16,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
-import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_CHAT_LIST_MSG;
-import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_CONTACT_LIST;
+import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("chat")
 @Tag("smoke")
@@ -44,6 +47,7 @@ public class RoomBaseActionTestIT extends Base {
         manageLogInOut = new ManageLogInOut(this);
         userandgroupmanagement = new UserAndGroupManagement(this);
         chatManagement = new ChatManagement(this);
+        manageLogInOut.signIn(PLFData.DATA_USER1,PLFData.DATA_PASS2);
     }
 
     @Test
@@ -177,5 +181,61 @@ public class RoomBaseActionTestIT extends Base {
         switchTo().window(0);
         navigationToolbar.goToManageCommunity();
         userandgroupmanagement.deleteUser(usernamea);
+    }
+
+    @BugInPLF("CHAT-991")
+    public void test05_CheckAlertOnNotificationInRoomDiscussion(){
+        String room= "room"+getRandomNumber();
+        String username = "usernamea" + getRandomString();
+        String password = "123456";
+        String email = "email" + getRandomNumber() + "@test.com";
+        String FirstName = "FirstName" + getRandomString();
+        String LastName = "LastName" + getRandomString();
+        navigationToolbar.goToAddUser();
+        userAddManagement.addUser(username, password, email, FirstName, LastName);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.addRoom(room);
+        ELEMENT_CONTACT_LIST.find(byText(room)).click();
+        ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
+       ELEMENT_CHAT_ROOM_NOTIFICATION.click();
+       ELEMENT_CHAT_ROOM_NOTIFICATION_POPUP.waitUntil(Condition.appear, Configuration.timeout);
+       ELEMENT_CHAT_ALERT_ON.selectRadio("keywords");
+       ELEMENT_CHAT_NOTIFICATION_KEYWORD.setValue(PLFData.DATA_USER1);
+       ELEMENT_NOTIFICATION_CONFIRM_BUTTON.click();
+    }
+
+    @Test
+    public void test06_CheckRoomNotificationCancel(){
+        String room= "room"+getRandomNumber();
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.addRoom(room);
+        ELEMENT_CONTACT_LIST.find(byText(room)).click();
+        ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
+        ELEMENT_CHAT_ROOM_NOTIFICATION.click();
+        ELEMENT_CHAT_ROOM_NOTIFICATION_POPUP.waitUntil(Condition.appear, Configuration.timeout);
+        $(byXpath("//*[@id=\"room-detail\"]/div[3]/div/div[2]/div[2]/div[2]")).click();
+        ELEMENT_CHAT_ROOM_NOTIFICATION_POPUP.waitUntil(Condition.not(Condition.appear),Configuration.timeout);
+    }
+
+    @Test
+    public void test07_ShowParticipant(){
+        String room="room"+getRandomNumber();
+        String username = "usernamea" + getRandomString();
+        String password = "123456";
+        String email = "email" + getRandomNumber() + "@test.com";
+        String FirstName = "FirstName" + getRandomString();
+        String LastName = "LastName" + getRandomString();
+        navigationToolbar.goToAddUser();
+        userAddManagement.addUser(username, password, email, FirstName, LastName);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.addRoom(room,username);
+        ELEMENT_CONTACT_LIST.find(byText(room)).click();
+        ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
+        ELEMENT_CHAT_SHOW_PARTICIPANT.click();
+        ELEMENT_CHAT_SHOW_PARTICIPANT_POPUP.waitUntil(Condition.appear,Configuration.timeout);
+        roomManagement.deleteRomm(room);
     }
 }

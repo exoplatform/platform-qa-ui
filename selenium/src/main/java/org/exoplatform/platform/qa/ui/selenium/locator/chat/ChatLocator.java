@@ -43,15 +43,15 @@ public class ChatLocator {
 
     public static final SelenideElement ELEMENT_ICON_CHAT = $(byId("chat-status"));
 
-    public static final SelenideElement ELEMENT_CHAT_STATUS_AVAILABLE = $(byClassName("chat-status-available"));
+    public static final SelenideElement ELEMENT_CHAT_STATUS_AVAILABLE = $(byClassName("user-available"));
 
-    public static final SelenideElement ELEMENT_CHAT_STATUS_DONOTDISTURB = $(byClassName("chat-status-donotdisturb"));
+    public static final SelenideElement ELEMENT_CHAT_STATUS_DONOTDISTURB = $(byClassName("user-donotdisturb"));
 
-    public static final SelenideElement ELEMENT_CHAT_STATUS_AWAY = $(byClassName("chat-status-away"));
+    public static final SelenideElement ELEMENT_CHAT_STATUS_AWAY = $(byClassName("user-away"));
 
-    public static final SelenideElement ELEMENT_CHAT_STATUS_INVISIBLE = $(byClassName("chat-status-invisible"));
+    public static final SelenideElement ELEMENT_CHAT_STATUS_INVISIBLE = $(byClassName("user-invisible"));
 
-    public static final SelenideElement ELEMENT_CHAT_ROOM_STARTSTOPMEETING = $(byId("chat-record-button"));
+    public static final SelenideElement ELEMENT_CHAT_ROOM_STARTSTOPMEETING = $(byXpath("//*[@id=\"room-detail\"]/div[2]/div[2]/div[3]/ul/li[1]/a"));
 
     public static final SelenideElement ELEMENT_CHAT_LINK_TEXT_OPEN_WIKI_APP = $(byLinkText("Open Wiki application"));
 
@@ -165,9 +165,19 @@ public class ChatLocator {
   public static final SelenideElement ELEMENT_CHAT_SEARCH_FIELD=  $(byXpath("//*[@id=\"room-detail\"]/div[2]/div[2]/div[3]/ul/li[5]/a"));
   public static final SelenideElement ELEMENT_CHAT_SETTING_NOTIFICATION=$(byClassName("uiIconGear"));
     public static final SelenideElement ELEMENT_CHAT_PREFERRENCE_POPUP=$(byClassName("uiIconGear"));
+    public static final SelenideElement ELEMENT_CHAT_ROOM_NOTIFICATION=  $(byXpath("//*[@id=\"room-detail\"]/div[2]/div[2]/div[3]/ul/li[2]/a"));
+    public static final SelenideElement ELEMENT_CHAT_ROOM_NOTIFICATION_POPUP=$(byClassName("room-notification-modal"));
+    public static final SelenideElement ELEMENT_CHAT_ALERT_ON=$(byValue("keywords"));
 
+    public static final SelenideElement ELEMENT_CHAT_NOTIFICATION_KEYWORD=$(byClassName("notif-keyword"));
 
+    public static final SelenideElement ELEMENT_NOTIFICATION_CONFIRM_BUTTON=  $(byXpath("//*[@id=\"room-detail\"]/div[3]/div/div[2]/div[2]/div[1]"));
 
-
-
+    public static final SelenideElement ELEMENT_WIKI_CONTAINER = $(byId("UIWikiMiddleArea"));
+    public static final SelenideElement ELEMENT_WIKI_DISCUSSION_CONTAINER = $(byClassName("section-container"));
+    public static final SelenideElement ELEMENT_WIKI_ATTENDEE_NAME= $(byXpath("//*[@id=\"chat-application\"]/div[2]/div[2]/div[1]/div[3]/div/div[2]/div/div[1]"));
+    public static final SelenideElement ELEMENT_WIKI_ATTENDEE_MESSAGE= $(byXpath("//*[@id=\\\"UIViewContentDisplay\\\"]/div[3]/p[3]\""));
+    public static final SelenideElement ELEMENT_CHAT_MEETING_NOTE_SAVED = $(byClassName("meetingNotesSent"));
+    public static final SelenideElement ELEMENT_CHAT_SHOW_PARTICIPANT= $(byXpath("//*[@id=\"room-detail\"]/div[2]/div[2]/div[3]/ul/li[4]/a"));
+    public static final SelenideElement ELEMENT_CHAT_SHOW_PARTICIPANT_POPUP = $(byClassName("room-participants"));
 }
