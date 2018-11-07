@@ -299,5 +299,4 @@ public class SOCNotificationIntranetPostInStreamTestIT extends Base {
         navigationToolbar.goToManageCommunity();
         addUsers.deleteUser(username1);
         addUsers.deleteUser(username2);
-
     }}
