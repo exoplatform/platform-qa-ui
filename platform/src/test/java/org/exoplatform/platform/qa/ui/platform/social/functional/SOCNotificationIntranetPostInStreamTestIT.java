@@ -220,4 +220,84 @@ public class SOCNotificationIntranetPostInStreamTestIT extends Base {
         addUsers.deleteUser(username1);
         addUsers.deleteUser(username2);
     }
-}
+
+    /**
+     * <li> Case ID:125140.</li>
+     * <li> Test Case Name: Check View All after receiving a Post on my Stream notification.</li>
+     * <li> Pre-Condition: - User A has posted an activity on User B activity stream
+     * - The notification "Someone posts a message on my activity stream" is activated in the user settings</li>
+     * <li> Post-Condition: </li>
+     */
+    /*Step Number: 1
+		*Step Name: Step 1 : Check notification list
+		*Step Description:
+			- Login with User B
+			- Click the notifications icon in the top navigation
+			- Check the notifications list
+		*Input Data:
+
+		*Expected Outcome:
+			- A Post on my Stream notifications is displayed in the list*/
+		/*Step number: 2
+		*Step Name: Step 2 : Check in View all page
+		*Step Description:
+			- Go to View All
+		*Input Data:
+
+		*Expected Outcome:
+			- Post of my Stream notification is displayed / available in the page*/
+    @Test
+    public void test03_CheckViewAllAfterReceivingAPostOnMyStreamNotification() {
+        info("Test 3: Check View All after receiving a Post on my Stream notification");
+
+        ArrayList<String> arrayUser = new ArrayList<String>();
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String username2 = "usernameb" + getRandomString();
+        String email2 = username2 + "@gmail.com";
+        String password = "123456";
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(username1, password, email1, username1, username1);
+        addUsers.addUser(username2, password, email2, username2, username2);
+        manageLogInOut.signIn(username1, password);
+
+        info("goto My notification");
+        navigationToolbar.goToMyNotifications();
+        myNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.AS_Post_intranet);
+
+
+        info("User A sent a connection request to User B");
+        homePagePlatform.goToConnections();
+        connectionsManagement.connectToAUser(username2);
+
+        info("User B login");
+        manageLogInOut.signIn(username2, password);
+
+        info("User A and User B are connected");
+        homePagePlatform.goToConnections();
+        connectionsManagement.acceptAConnection(username1);
+        connectionsManagement.goToUserByFullName(username1 + " " + username1);
+
+        info("User B add an activity on User A's stream");
+        String activity = "activity" + getRandomNumber();
+        userProfilePage.goToActivity();
+        activityStream.addActivity(activity, "");
+        activityStream.checkActivity(activity);
+
+        info("Log in with User A");
+        manageLogInOut.signIn(username1, password);
+
+        info(" Go to Intranet Notification");
+        navigationToolbar.goToIntranetNotification();
+        String status = "has posted on your activity";
+        intranetNotification.goToAllNotification();
+        intranetNotification.checkStatus(status, username2);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(DATA_USER1, DATA_PASS2);
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
+
+    }}
