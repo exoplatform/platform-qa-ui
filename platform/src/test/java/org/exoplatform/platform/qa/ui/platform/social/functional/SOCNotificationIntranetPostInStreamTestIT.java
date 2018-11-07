@@ -119,6 +119,7 @@ public class SOCNotificationIntranetPostInStreamTestIT extends Base {
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(username1);
         connectionsManagement.goToUserByFullName(username1 + " " + username1);
+
         info("User B add an activity on User A's stream");
         String activity = "activity" + getRandomNumber();
         userProfilePage.goToActivity();
@@ -135,7 +136,10 @@ public class SOCNotificationIntranetPostInStreamTestIT extends Base {
         intranetNotification.checkStatus(status, username2);
         intranetNotification.checkAvatarInStatus(username2, true);
         intranetNotification.checkActivityTitleInStatus(activity, true);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(DATA_USER1, DATA_PASS2);
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
     }
 }
-
-

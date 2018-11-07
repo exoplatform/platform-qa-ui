@@ -1,11 +1,15 @@
 package org.exoplatform.platform.qa.ui.social.pageobject;
 
+import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_TREE_WIKI_NAME;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.util.ArrayList;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -142,7 +146,7 @@ public class NotificationActivity {
   public void checkTitleActivityExpand(String text) {
     if (!text.isEmpty()) {
       info("Verifyt that the Activity is shown with correct it's content");
-      evt.waitForAndGetElement(ELEMENT_NOTIFICATION_ACTIVITY_TITLE_CONTENT.replace("$text", text));
+      $(byXpath(ELEMENT_NOTIFICATION_ACTIVITY_TITLE_CONTENT.replace("$text", text))).waitUntil(Condition.visible, Configuration.timeout);
     }
   }
 
