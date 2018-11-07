@@ -164,6 +164,7 @@ public class ConnectionsManagement {
     info("Accepted to the user");
   }
 
+
   /**
    * Function Verify connection
    * 
