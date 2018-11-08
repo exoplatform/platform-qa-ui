@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
@@ -26,6 +27,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_SPACE_MENU_ACTIVITY_PORTLET;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 
 @Tag("functional")
@@ -154,6 +156,11 @@ public class SOCNotificationIntranetSpaceInvitationTestIt extends Base {
 
         intranetNotification.goToDetailInvitationSpace(spaceName, true);
         $(ELEMENT_SPACE_MENU_ACTIVITY_PORTLET).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(DATA_USER1, DATA_PASS2);
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
 
     }
 
@@ -236,6 +243,11 @@ public class SOCNotificationIntranetSpaceInvitationTestIt extends Base {
         String statusJoin = " ";
         intranetNotification.checkStatusSpace(statusJoin, spaceName);
         intranetNotification.checkAvatarInStatus(spaceName, true);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(DATA_USER1, DATA_PASS2);
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
 
     }
 
@@ -318,6 +330,11 @@ public class SOCNotificationIntranetSpaceInvitationTestIt extends Base {
         info("User A refuse invitation");
         intranetNotification.refuseRqConnection(spaceName);
         intranetNotification.checkNotStatusSpace(status, spaceName);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(DATA_USER1, DATA_PASS2);
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
 
     }
 
@@ -391,6 +408,87 @@ public class SOCNotificationIntranetSpaceInvitationTestIt extends Base {
         navigationToolbar.goToIntranetNotification();
         intranetNotification.goToAllNotification();
         intranetNotification.checkStatusSpace(status, spaceName);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(DATA_USER1, DATA_PASS2);
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
+
+    }
+
+    /**
+     * <li> Case ID:125147.</li>
+     * <li> Test Case Name: Check View All after refusing a Space Invitation.</li>
+     * <li> Pre-Condition: - User A is manager of the space 1
+     * - User A invite User B to join the space 1
+     * - Space Invitation notification is activated in the settings of User B</li>
+     * <li> Post-Condition: </li>
+     */
+    /*Step Number: 1
+		*Step Name: Step 1 : Check notification list
+		*Step Description:
+			- Login with User B
+			- Click Notifications icon
+			- Check the notifications list
+		*Input Data:
+
+		*Expected Outcome:
+			- A Space Invitation notifications is displayed in the list*/
+    /*Step number: 2
+		*Step Name: Step 2 : Check View all page
+		*Step Description:
+			- Click [Refuse]
+			- Go to View All
+		*Input Data:
+
+		*Expected Outcome:
+			- The notifications is not displayed / available in the View All page*/
+    @Test
+    public void test05_CheckViewAllAfterRefusingASpaceInvitation() throws Exception {
+        info("Test 5: Check View All after refusing a Space Invitation");
+
+        ArrayList<String> arrayUser = new ArrayList<String>();
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String username2 = "usernameb" + getRandomString();
+        String email2 = username2 + "@gmail.com";
+        String password = "123456";
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(username1, password, email1, username1, username1);
+        addUsers.addUser(username2, password, email2, username2, username2);
+        manageLogInOut.signIn(username1, password);
+
+        info("goto My notification");
+        navigationToolbar.goToMyNotifications();
+        myNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.Space_Invitation_Intranet);
+
+        info("User B login");
+        manageLogInOut.signIn(username2, password);
+
+        info("User B create a new space");
+        String spaceName = "spaceName" + getRandomNumber();
+        String spaceDes = "description" + getRandomNumber();
+        homePagePlatform.goToAllSpace();
+        spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+
+        info("User B invites UserA to the space");
+        homePagePlatform.goToSpecificSpace(spaceName);
+        spaceHomePage.goToSpaceSettingTab();
+        spaceSettingManagement.inviteUser(username1, false, "");
+
+        info("User A login");
+        manageLogInOut.signIn(username1, password);
+        String status ="You're invited to join  " ;
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.goToAllNotification();
+        intranetNotification.checkStatusSpace(status, spaceName);
+        homePagePlatform.refreshUntil($(byText(spaceName)),Condition.visible,2000);
+
+        info("User A refuse invitation");
+        intranetNotification.refuseRqConnection(spaceName);
+        intranetNotification.checkNotStatusSpace(status, spaceName);
 
     }
 }
