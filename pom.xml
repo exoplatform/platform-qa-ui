@@ -77,7 +77,7 @@
     <selenide.reports>${project.build.directory}/reports/ui-tests</selenide.reports>
     <!-- Tests filtered by tags to include/exclude -->
     <selenide.test.tags.include>smoke</selenide.test.tags.include>
-    <selenide.test.tags.exclude>license,register</selenide.test.tags.exclude>
+    <selenide.test.tags.exclude>license,register,answer</selenide.test.tags.exclude>
   </properties>
   <dependencyManagement>
     <!-- Import versions of external dependencies to use -->
