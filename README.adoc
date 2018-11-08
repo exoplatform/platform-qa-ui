@@ -103,9 +103,7 @@ To be able to execute JUnit5 Tests with IntellIJ, you need at *least IntellIJ 20
 
 [NOTE]
 --
-To run tests on *PLF 5.2.x* and *PLF 5.1.x* you must ignore *Answer* TC by adding :
-
- `-Dselenide.test.tags.exclude=answer \`
+*Answer* TC are disabled when running tests on *PLF 5.2.x* and *PLF 5.1.x* (from master branch)
 
 To run tests on *PLF 5.0.x* , you must checkout *stable/5.0.x* before runnig tests :
 
