@@ -1,4 +1,5 @@
 package org.exoplatform.platform.qa.ui.platform.social.functional;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
@@ -15,7 +16,9 @@ import org.exoplatform.platform.qa.ui.social.pageobject.NotificationActivity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
+
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
@@ -233,6 +236,88 @@ public class SOCNotificationIntranetSpaceInvitationTestIt extends Base {
         String statusJoin = " ";
         intranetNotification.checkStatusSpace(statusJoin, spaceName);
         intranetNotification.checkAvatarInStatus(spaceName, true);
+
+    }
+
+    /**
+     * <li> Case ID:125145.</li>
+     * <li> Test Case Name: Refuse a Space Invitation from notification.</li>
+     * <li> Pre-Condition: - User A is manager of the space 1
+     * - User A invite User B to join the space 1
+     * - Space Invitation notification is activated in the settings of User B</li>
+     * <li> Post-Condition: </li>
+     */
+    /*Step Number: 1
+		*Step Name: Step 1 : Check notification list
+		*Step Description:
+			- Login with User B
+			- Click Notifications icon
+			- Check the notifications list
+		*Input Data:
+
+		*Expected Outcome:
+			- A Space Invitation notifications is displayed in the list*/
+    /*Step number: 2
+		*Step Name: Step 2 : Refuse space invitation
+		*Step Description:
+			- Click [Refuse]
+		*Input Data:
+
+		*Expected Outcome:
+			- User B is not member of Space 1*/
+    	/*Step number: 3
+		*Step Name: Step 3 : Check notification message
+		*Step Description:
+			- Click the notification message
+		*Input Data:
+
+		*Expected Outcome:
+			- The notifications message is hidden from the list*/
+    @Test
+    public void test03_RefuseASpaceInvitationFromNotification() {
+        info("Test 3: Refuse a Space Invitation from notification");
+
+        ArrayList<String> arrayUser = new ArrayList<String>();
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String username2 = "usernameb" + getRandomString();
+        String email2 = username2 + "@gmail.com";
+        String password = "123456";
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(username1, password, email1, username1, username1);
+        addUsers.addUser(username2, password, email2, username2, username2);
+        manageLogInOut.signIn(username1, password);
+
+        info("goto My notification");
+        navigationToolbar.goToMyNotifications();
+        myNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.Space_Invitation_Intranet);
+
+        info("User B login");
+        manageLogInOut.signIn(username2, password);
+
+        info("User B create a new space");
+        String spaceName = "spaceName" + getRandomNumber();
+        String spaceDes = "description" + getRandomNumber();
+        homePagePlatform.goToAllSpace();
+        spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+
+        info("User B invites UserA to the space");
+        homePagePlatform.goToSpecificSpace(spaceName);
+        spaceHomePage.goToSpaceSettingTab();
+        spaceSettingManagement.inviteUser(username1, false, "");
+
+        info("User A login");
+        manageLogInOut.signIn(username1, password);
+
+        String status = "";
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.checkStatusSpace(status, spaceName);
+
+        info("User A refuse invitation");
+        intranetNotification.refuseRqConnection(spaceName);
+        intranetNotification.checkNotStatusSpace(status, spaceName);
 
     }
 }
