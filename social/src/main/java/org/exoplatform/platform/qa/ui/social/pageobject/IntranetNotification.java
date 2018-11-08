@@ -446,7 +446,11 @@ public class IntranetNotification {
       $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(fullName)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_INVITATION).waitUntil(Condition.visible,Configuration.timeout).click();
       $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(fullName)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_INVITATION).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     }
+
   }
+
+
+
 
   /**
    * Refuse an connection request in notificaiton list
