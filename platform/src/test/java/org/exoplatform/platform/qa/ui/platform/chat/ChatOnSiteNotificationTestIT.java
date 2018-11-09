@@ -290,4 +290,38 @@ public class ChatOnSiteNotificationTestIT extends Base {
         ELEMENT_CHAT_SETTING_NOTIFICATION.click();
         assertEquals("OFF",$(byId("notifyDesktop")).parent().getText());
     }
+
+    @Test
+    public void test09_CheckBipsNotificationButton(){
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        ELEMENT_CHAT_SETTING_NOTIFICATION.click();
+        ELEMENT_CHAT_BIP_NOTIFICATION_BUTTON.parent().click();
+        ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.click();
+        switchToParentWindow();
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1,PLFData.DATA_PASS2);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        refresh();
+        ELEMENT_CHAT_SETTING_NOTIFICATION.click();
+        assertEquals("OFF",ELEMENT_CHAT_BIP_NOTIFICATION_BUTTON.parent().getText());
+    }
+
+    @Test
+    public void test10_CheckOnSiteNotificationButton(){
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        ELEMENT_CHAT_SETTING_NOTIFICATION.click();
+        ELEMENT_CHAT_ON_SITE_NOTIFICATION_BUTTON.parent().click();
+        ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.click();
+        switchToParentWindow();
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1,PLFData.DATA_PASS2);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        refresh();
+        ELEMENT_CHAT_SETTING_NOTIFICATION.click();
+        assertEquals("OFF",ELEMENT_CHAT_ON_SITE_NOTIFICATION_BUTTON.parent().getText());
+    }
 }
