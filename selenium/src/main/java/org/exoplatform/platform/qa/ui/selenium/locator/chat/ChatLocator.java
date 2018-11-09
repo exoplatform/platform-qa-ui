@@ -215,6 +215,8 @@ public class ChatLocator {
 }
 
     public static final SelenideElement ELEMENT_CHAT_AVATAR = $(byClassName("chat-sender-avatar"));
+    public static final SelenideElement ELEMENT_CHAT_SEARCH_FIELD=  $(byXpath("//*[@id=\"chat-application\"]/div[1]/div[2]/div[1]/input"));
+
 
 
 
