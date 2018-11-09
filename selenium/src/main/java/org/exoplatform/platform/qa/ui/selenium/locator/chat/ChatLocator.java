@@ -168,6 +168,10 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_CHAT_ROOM_NOTIFICATION=  $(byXpath("//*[@id=\"room-detail\"]/div[2]/div[2]/div[3]/ul/li[2]/a"));
     public static final SelenideElement ELEMENT_CHAT_ROOM_NOTIFICATION_POPUP=$(byClassName("room-notification-modal"));
     public static final SelenideElement ELEMENT_CHAT_ALERT_ON=$(byValue("keywords"));
+    public static final SelenideElement ELEMENT_CHAT_SILENCE_ROOM_NOTIFICATION=$(byValue("silence"));
+
+
+
 
     public static final SelenideElement ELEMENT_CHAT_NOTIFICATION_KEYWORD=$(byClassName("notif-keyword"));
 

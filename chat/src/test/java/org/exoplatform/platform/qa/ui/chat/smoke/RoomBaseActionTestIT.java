@@ -205,6 +205,36 @@ public class RoomBaseActionTestIT extends Base {
        ELEMENT_NOTIFICATION_CONFIRM_BUTTON.click();
     }
 
+    @BugInPLF("CHAT-991")
+    public void test06_CheckSilenceNotificationInRoomDiscussion(){
+        String room= "room"+getRandomNumber();
+        String username = "usernamea" + getRandomString();
+        String password = "123456";
+        String email = "email" + getRandomNumber() + "@test.com";
+        String FirstName = "FirstName" + getRandomString();
+        String LastName = "LastName" + getRandomString();
+        navigationToolbar.goToAddUser();
+        userAddManagement.addUser(username, password, email, FirstName, LastName);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.addRoom(room);
+        ELEMENT_CONTACT_LIST.find(byText(room)).click();
+        ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
+        ELEMENT_CHAT_ROOM_NOTIFICATION.click();
+        ELEMENT_CHAT_ROOM_NOTIFICATION_POPUP.waitUntil(Condition.appear, Configuration.timeout);
+        ELEMENT_CHAT_SILENCE_ROOM_NOTIFICATION.selectRadio("silence");
+        ELEMENT_NOTIFICATION_CONFIRM_BUTTON.click();
+        switchToParentWindow();
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1,PLFData.DATA_PASS2);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        ELEMENT_CONTACT_LIST.find(byText(room)).click();
+        ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
+        ELEMENT_CHAT_ROOM_NOTIFICATION.click();
+        ELEMENT_CHAT_ROOM_NOTIFICATION_POPUP.waitUntil(Condition.appear, Configuration.timeout);
+    }
+
     @Test
     public void test06_CheckRoomNotificationCancel(){
         String room= "room"+getRandomNumber();
