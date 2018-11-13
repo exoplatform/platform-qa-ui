@@ -99,6 +99,11 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_CHAT_BUTTON_SAVE_ADD_ROOM =
             $(byXpath("//*[@id=\"chat-application\"]/div[1]/div[2]/div[4]/div[1]/div/div[2]/div[2]/button[1]"));
 
+    public static final SelenideElement ELEMENT_CHAT_INPUT_ROOMUSERSS =
+            $(byClassName("selectize-input")).find(by("type", "text"));
+
+
+
     public static final SelenideElement ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN = $(byClassName("uiIconVerticalDots"));
 
     public static final SelenideElement ELEMENT_CHAT_ROOM_EDIT = $(byXpath("//*[@id=\"room-detail\"]/div[2]/div[2]/div[3]/ul/li[5]/a"));
@@ -171,4 +176,8 @@ public class ChatLocator {
 
 
   public static final SelenideElement ELEMENT_MORE_ACTIONS=$(byClassName("uiIconVerticalDots"));
+  public static final SelenideElement ELEMENT_BANNER_CHAT=$(byClassName("uiIconBannerChat"));
+  public static final SelenideElement ELEMENT_CLOSE_WINDOW_ROOM=$(byXpath("//*[@id=\"room-detail\"]/div[4]/div/div[1]/a"));
+  public static final SelenideElement ELEMENT_NO_BUTTON_LEAVEROOM = $(byXpath("//*[@id=\"team-delete-button-cancel\"]"));
+
 }

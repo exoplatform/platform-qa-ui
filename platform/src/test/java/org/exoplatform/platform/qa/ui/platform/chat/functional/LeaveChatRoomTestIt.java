@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.platform.chat.functional;
 
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.chat.pageobject.ChatManagement;
 import org.exoplatform.platform.qa.ui.chat.pageobject.RoomManagement;
 import org.exoplatform.platform.qa.ui.commons.Base;
@@ -22,6 +23,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -76,7 +79,6 @@ public class LeaveChatRoomTestIt extends Base {
         manageLogInOut.signInCas(PLFData.username, PLFData.password);
     }
 
-    @BugInPLF("CHAT-926")
     @Test
     public void test01_checktheleaveroombutton() {
 
@@ -87,17 +89,22 @@ public class LeaveChatRoomTestIt extends Base {
         navigationToolbar.goToAddUser();
         arrayUsers = userAddManagement.addUsers(4, password);
         manageLogInOut.signIn(arrayUsers.get(1), password);
+        homePagePlatform.refreshUntil($(byClassName("status-dropdown")), Condition.visible,1000);
         homePagePlatform.goToChat();
         manageLogInOut.signIn(arrayUsers.get(2), password);
+        homePagePlatform.refreshUntil($(byClassName("status-dropdown")), Condition.visible,1000);
         homePagePlatform.goToChat();
         manageLogInOut.signIn(arrayUsers.get(3), password);
+        homePagePlatform.refreshUntil($(byClassName("status-dropdown")), Condition.visible,1000);
         homePagePlatform.goToChat();
         manageLogInOut.signIn(arrayUsers.get(0), password);
+        homePagePlatform.refreshUntil($(byClassName("status-dropdown")), Condition.visible,1000);
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.addRoom(room1, arrayUsers.get(1), arrayUsers.get(2), arrayUsers.get(3));
         switchTo().window(0);
         manageLogInOut.signIn(arrayUsers.get(1), password);
+        homePagePlatform.refreshUntil($(byClassName("status-dropdown")), Condition.visible,1000);
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.leaveRoom(room1);
@@ -120,17 +127,22 @@ public class LeaveChatRoomTestIt extends Base {
         navigationToolbar.goToAddUser();
         arrayUsers = userAddManagement.addUsers(4, password);
         manageLogInOut.signIn(arrayUsers.get(1), password);
+        homePagePlatform.refreshUntil($(byClassName("status-dropdown")), Condition.visible,1000);
         homePagePlatform.goToChat();
         manageLogInOut.signIn(arrayUsers.get(2), password);
+        homePagePlatform.refreshUntil($(byClassName("status-dropdown")), Condition.visible,1000);
         homePagePlatform.goToChat();
         manageLogInOut.signIn(arrayUsers.get(3), password);
+        homePagePlatform.refreshUntil($(byClassName("status-dropdown")), Condition.visible,1000);
         homePagePlatform.goToChat();
         manageLogInOut.signIn(arrayUsers.get(0), password);
+        homePagePlatform.refreshUntil($(byClassName("status-dropdown")), Condition.visible,1000);
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.addRoom(room1, arrayUsers.get(1), arrayUsers.get(2), arrayUsers.get(3));
         switchTo().window(0);
         manageLogInOut.signIn(arrayUsers.get(1), password);
+        homePagePlatform.refreshUntil($(byClassName("status-dropdown")), Condition.visible,1000);
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.CancelleaveRoomFromNo(room1);
@@ -154,17 +166,22 @@ public class LeaveChatRoomTestIt extends Base {
         navigationToolbar.goToAddUser();
         arrayUsers = userAddManagement.addUsers(4, password);
         manageLogInOut.signIn(arrayUsers.get(1), password);
+        homePagePlatform.refreshUntil($(byClassName("status-dropdown")), Condition.visible,1000);
         homePagePlatform.goToChat();
         manageLogInOut.signIn(arrayUsers.get(2), password);
+        homePagePlatform.refreshUntil($(byClassName("status-dropdown")), Condition.visible,1000);
         homePagePlatform.goToChat();
         manageLogInOut.signIn(arrayUsers.get(3), password);
+        homePagePlatform.refreshUntil($(byClassName("status-dropdown")), Condition.visible,1000);
         homePagePlatform.goToChat();
         manageLogInOut.signIn(arrayUsers.get(0), password);
+        homePagePlatform.refreshUntil($(byClassName("status-dropdown")), Condition.visible,1000);
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.addRoom(room1, arrayUsers.get(1), arrayUsers.get(2), arrayUsers.get(3));
         switchTo().window(0);
         manageLogInOut.signIn(arrayUsers.get(1), password);
+        homePagePlatform.refreshUntil($(byClassName("status-dropdown")), Condition.visible,1000);
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.CancelleaveRoom(room1);
@@ -189,17 +206,22 @@ public class LeaveChatRoomTestIt extends Base {
         navigationToolbar.goToAddUser();
         arrayUsers = userAddManagement.addUsers(4, password);
         manageLogInOut.signIn(arrayUsers.get(1), password);
+        homePagePlatform.refreshUntil($(byClassName("status-dropdown")), Condition.visible,1000);
         homePagePlatform.goToChat();
         manageLogInOut.signIn(arrayUsers.get(2), password);
+        homePagePlatform.refreshUntil($(byClassName("status-dropdown")), Condition.visible,1000);
         homePagePlatform.goToChat();
         manageLogInOut.signIn(arrayUsers.get(3), password);
+        homePagePlatform.refreshUntil($(byClassName("status-dropdown")), Condition.visible,1000);
         homePagePlatform.goToChat();
         manageLogInOut.signIn(arrayUsers.get(0), password);
+        homePagePlatform.refreshUntil($(byClassName("status-dropdown")), Condition.visible,1000);
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.addRoom(room1, arrayUsers.get(1), arrayUsers.get(2), arrayUsers.get(3));
         switchTo().window(0);
         manageLogInOut.signIn(arrayUsers.get(1), password);
+        homePagePlatform.refreshUntil($(byClassName("status-dropdown")), Condition.visible,1000);
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.ViewLeavePopup(room1);

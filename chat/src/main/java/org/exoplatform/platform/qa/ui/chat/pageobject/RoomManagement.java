@@ -24,10 +24,10 @@ public class RoomManagement {
     ELEMENT_POPUP_ROOM.waitUntil(Condition.appear, Configuration.timeout);
     ELEMENT_ROOM_NAME.setValue(name);
     for (int i = 0; i <= users.length - 1; i++) {
-      ELEMENT_CHAT_INPUT_ROOMUSERS.setValue(users[i]);
+        ELEMENT_CHAT_INPUT_ROOMUSERSS.setValue(users[i]);
       ELEMENT_CHAT_RESULT_SEARCH_USER.waitUntil(Condition.be(Condition.visible),Configuration.timeout);
       ELEMENT_CHAT_RESULT_SEARCH_USER.waitUntil(Condition.visible,Configuration.timeout);
-      ELEMENT_CHAT_INPUT_ROOM_USERS.pressEnter();
+        ELEMENT_CHAT_INPUT_ROOMUSERSS.pressEnter();
     }
     ELEMENT_BUTTON_SAVE_ROOM.click();
     ELEMENT_CONTACT_LIST.find(byText(name)).should(Condition.exist);
@@ -60,7 +60,7 @@ public void startStopmeeting(String room){
     $(byText(room)).click();
     ELEMENT_MORE_ACTION.click();
     ELEMENT_LEAVEROOM_ACTION.waitUntil(Condition.visible,Configuration.timeout).click();
-    $(byId("team-delete-window-chat-name")).shouldHave(Condition.text("You are about to leave the '"+room+"' Room. You will loose access to all messages it contains. Are you sure you want to leave?")).waitUntil(Condition.visible,Configuration.timeout);
+    $(byId("team-delete-window-chat-name")).has(Condition.text("Are you sure you want to leave the room '"+room+"' ?"));
     $(ELEMENT_YES_BUTTON_AUX).click();
     $(ELEMENT_YES_BUTTON_AUX).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     refresh();
@@ -71,24 +71,24 @@ public void CancelleaveRoomFromNo(String room){
   $(byText(room)).click();
   ELEMENT_MORE_ACTION.click();
   ELEMENT_LEAVEROOM_ACTION.waitUntil(Condition.visible,Configuration.timeout).click();
-  $(byId("team-delete-window-chat-name")).shouldHave(Condition.text("You are about to leave the '"+room+"' Room. You will loose access to all messages it contains. Are you sure you want to leave?")).waitUntil(Condition.visible,Configuration.timeout);
-  $(ELEMENT_NO_BUTTON_AUX).click();
-  $(ELEMENT_NO_BUTTON_AUX).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+  $(byId("team-delete-window-chat-name")).has(Condition.text("Are you sure you want to leave the room '"+room+"' ?"));
+  $(ELEMENT_NO_BUTTON_LEAVEROOM).click();
+  $(ELEMENT_NO_BUTTON_LEAVEROOM).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
 }
   public void CancelleaveRoom(String room){
 
     $(byText(room)).click();
     ELEMENT_MORE_ACTION.click();
     ELEMENT_LEAVEROOM_ACTION.waitUntil(Condition.visible,Configuration.timeout).click();
-    $(byId("team-delete-window-chat-name")).shouldHave(Condition.text("You are about to leave the '"+room+"' Room. You will loose access to all messages it contains. Are you sure you want to leave?")).waitUntil(Condition.visible,Configuration.timeout);
-    $(ELEMENT_CLOSE_WINDOW).click();
-    $(ELEMENT_CLOSE_WINDOW).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+      $(byId("team-delete-window-chat-name")).shouldHave(Condition.text("Are you sure you want to leave the room \""+room+"\" ?")).waitUntil(Condition.visible,Configuration.timeout);
+      $(ELEMENT_CLOSE_WINDOW_ROOM).click();
+      $(ELEMENT_CLOSE_WINDOW_ROOM).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
   public void ViewLeavePopup(String room){
     $(byText(room)).click();
     ELEMENT_MORE_ACTION.click();
     ELEMENT_LEAVEROOM_ACTION.waitUntil(Condition.visible,Configuration.timeout).click();
-    $(byId("team-delete-window-chat-name")).shouldHave(Condition.text("You are about to leave the '"+room+"' Room. You will loose access to all messages it contains. Are you sure you want to leave?")).waitUntil(Condition.visible,Configuration.timeout);
+    $(byId("team-delete-window-chat-name")).has(Condition.text("Are you sure you want to leave the room '"+room+"' ?"));
 
   }
 
