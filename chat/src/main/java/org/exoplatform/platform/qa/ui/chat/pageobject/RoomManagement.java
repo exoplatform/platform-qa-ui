@@ -2,6 +2,8 @@ package org.exoplatform.platform.qa.ui.chat.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
+import static org.exoplatform.platform.qa.ui.selenium.Button.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
 
 import com.codeborne.selenide.Condition;
@@ -22,10 +24,10 @@ public class RoomManagement {
     ELEMENT_POPUP_ROOM.waitUntil(Condition.appear, Configuration.timeout);
     ELEMENT_ROOM_NAME.setValue(name);
     for (int i = 0; i <= users.length - 1; i++) {
-      ELEMENT_CHAT_INPUT_ROOM_USERS.setValue(users[i]);
+        ELEMENT_CHAT_INPUT_ROOMUSERSS.setValue(users[i]);
       ELEMENT_CHAT_RESULT_SEARCH_USER.waitUntil(Condition.be(Condition.visible),Configuration.timeout);
       ELEMENT_CHAT_RESULT_SEARCH_USER.waitUntil(Condition.visible,Configuration.timeout);
-      ELEMENT_CHAT_INPUT_ROOM_USERS.pressEnter();
+        ELEMENT_CHAT_INPUT_ROOMUSERSS.pressEnter();
     }
     ELEMENT_BUTTON_SAVE_ROOM.click();
     ELEMENT_CONTACT_LIST.find(byText(name)).should(Condition.exist);
@@ -52,5 +54,44 @@ public void startStopmeeting(String room){
   ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
   ELEMENT_CHAT_ROOM_STARTSTOPMEETING.click();
 
+
+  }
+  public void leaveRoom(String room) {
+    $(byText(room)).click();
+    ELEMENT_MORE_ACTION.click();
+    ELEMENT_LEAVEROOM_ACTION.waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byId("team-delete-window-chat-name")).has(Condition.text("Are you sure you want to leave the room '"+room+"' ?"));
+    $(ELEMENT_YES_BUTTON_AUX).click();
+    $(ELEMENT_YES_BUTTON_AUX).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    refresh();
+    $(byText(room)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
 }
+public void CancelleaveRoomFromNo(String room){
+
+  $(byText(room)).click();
+  ELEMENT_MORE_ACTION.click();
+  ELEMENT_LEAVEROOM_ACTION.waitUntil(Condition.visible,Configuration.timeout).click();
+  $(byId("team-delete-window-chat-name")).has(Condition.text("Are you sure you want to leave the room '"+room+"' ?"));
+  $(ELEMENT_NO_BUTTON_LEAVEROOM).click();
+  $(ELEMENT_NO_BUTTON_LEAVEROOM).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+  $(byText(room)).waitUntil((Condition.visible),Configuration.timeout);
+}
+  public void CancelleaveRoom(String room){
+
+    $(byText(room)).click();
+    ELEMENT_MORE_ACTION.click();
+    ELEMENT_LEAVEROOM_ACTION.waitUntil(Condition.visible,Configuration.timeout).click();
+      $(byId("team-delete-window-chat-name")).shouldHave(Condition.text("Are you sure you want to leave the room \""+room+"\" ?")).waitUntil(Condition.visible,Configuration.timeout);
+      $(ELEMENT_CLOSE_WINDOW_ROOM).click();
+      $(ELEMENT_CLOSE_WINDOW_ROOM).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+      $(byText(room)).waitUntil((Condition.visible),Configuration.timeout);
+  }
+  public void ViewLeavePopup(String room){
+    $(byText(room)).click();
+    ELEMENT_MORE_ACTION.click();
+    ELEMENT_LEAVEROOM_ACTION.waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byId("team-delete-window-chat-name")).has(Condition.text("Are you sure you want to leave the room '"+room+"' ?"));
+
+  }
+
 }

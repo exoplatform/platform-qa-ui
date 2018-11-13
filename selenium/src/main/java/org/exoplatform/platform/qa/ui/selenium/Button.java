@@ -34,16 +34,16 @@ import static com.codeborne.selenide.Selenide.$;
  */
 public class Button {
 
-  public static final By       ELEMENT_OK_BUTTON_LINK            = By.linkText("OK");
-  public final By              ELEMENT_SAVE_CLOSE_BUTTON         = By.xpath("//*[text()='Save & Close']");
-  public final By              ELEMENT_SAVE_CLOSE_BUTTON_2       = By.xpath("//*[text()='Save And Close']");
-  public static  final By              ELEMENT_OK_BUTTON                 = By.xpath("//*[text()='OK']");
-  public final By              ELEMENT_NO_BUTTON                 = By.xpath("//*[text()='No']");
+    public static final By       ELEMENT_OK_BUTTON_LINK            = By.linkText("OK");
+    public final By              ELEMENT_SAVE_CLOSE_BUTTON         = By.xpath("//*[text()='Save & Close']");
+    public final By              ELEMENT_SAVE_CLOSE_BUTTON_2       = By.xpath("//*[text()='Save And Close']");
+    public static  final By              ELEMENT_OK_BUTTON                 = By.xpath("//*[text()='OK']");
+    public final By              ELEMENT_NO_BUTTON                 = By.xpath("//*[text()='No']");
     public static final By ELEMENT_CANCEL_BUTTON = By.xpath("//*[contains(text(),'Cancel')]");
-    public final By ELEMENT_NO_BUTTON_AUX =
+    public static final By ELEMENT_NO_BUTTON_AUX =
             By.xpath("//*[contains(@class, 'popup')]//*[contains(text(),'No')]");
     public final SelenideElement ELEMENT_YES_BUTTON = $(byXpath("//*[@id=\"UIConfirmation\"]/div[2]/div/a[1]"));
-    public final By ELEMENT_YES_BUTTON_AUX =
+    public static final By ELEMENT_YES_BUTTON_AUX =
             By.xpath("//*[contains(@class, 'popup')]//*[contains(text(),'Yes')]");
     public final By ELEMENT_APPLY_FRENCH_BUTTON = By.linkText("Appliquer");
     public final By ELEMENT_APPLY_GERMAN_BUTTON = By.linkText("Anwenden");
@@ -67,7 +67,7 @@ public class Button {
 
     public final By ELEMENT_CONFIRM_BUTTON = By.xpath("//*[text()='Confirm']");
 
-    public final By ELEMENT_CLOSE_WINDOW =
+    public static final By ELEMENT_CLOSE_WINDOW =
             By.xpath("//*[contains(@class, 'uiIconClose') and @title = 'Close Window']");
 
     public final By ELEMENT_MOVE_BUTTON = By.xpath("//button[contains(text(), 'Move')]");
@@ -75,6 +75,7 @@ public class Button {
     public final By ELEMENT_FINISH_ICON = By.xpath("//a[@title='Finish']");
 
     public final By ELEMENT_NEXT_BUTTON = By.xpath("//*[text()='Next']");
+
 
     public final By ELEMENT_ABORT_BUTTON = By.xpath("//*[text()='Abort']");
 
@@ -91,6 +92,7 @@ public class Button {
     public final By ELEMENT_INSERT_TABLE = By.xpath("//button[text()='Insert Table']");
 
     public final By ELEMENT_SETTING_LINK_BUTTON = By.xpath("//*[text()='Link Settings']");
+
 
     // ECMS Admin > Category > Add Category
     public final By ELEMENT_PREVIOUS_BUTTON_ADMIN_4 =
