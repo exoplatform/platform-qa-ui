@@ -74,6 +74,7 @@ public void CancelleaveRoomFromNo(String room){
   $(byId("team-delete-window-chat-name")).has(Condition.text("Are you sure you want to leave the room '"+room+"' ?"));
   $(ELEMENT_NO_BUTTON_LEAVEROOM).click();
   $(ELEMENT_NO_BUTTON_LEAVEROOM).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+  $(byText(room)).waitUntil((Condition.visible),Configuration.timeout);
 }
   public void CancelleaveRoom(String room){
 
@@ -83,6 +84,7 @@ public void CancelleaveRoomFromNo(String room){
       $(byId("team-delete-window-chat-name")).shouldHave(Condition.text("Are you sure you want to leave the room \""+room+"\" ?")).waitUntil(Condition.visible,Configuration.timeout);
       $(ELEMENT_CLOSE_WINDOW_ROOM).click();
       $(ELEMENT_CLOSE_WINDOW_ROOM).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+      $(byText(room)).waitUntil((Condition.visible),Configuration.timeout);
   }
   public void ViewLeavePopup(String room){
     $(byText(room)).click();
