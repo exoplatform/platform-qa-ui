@@ -65,10 +65,7 @@ public class SOCNotificationIntranetUserSettingsTestIT extends Base {
      * <li> Pre-Condition: </li>ju
      * <li> Post-Condition: </li>
      */
-    @Test
-    public void test01_CheckEmailNotificationsUserSettings() {
-        info("Test 1: Check Email Notifications User settings");
-		/*Step Number: 1
+    /*Step Number: 1
 		*Step Name: Step 1 : Go to My Notifications
 		*Step Description:
 			- Login
@@ -77,20 +74,7 @@ public class SOCNotificationIntranetUserSettingsTestIT extends Base {
 
 		*Expected Outcome:
 			- The user settings page is displayed*/
-        String username1 = "usernamea" + getRandomString();
-        String email1 = username1 + "@gmail.com";
-        String password ="123456";
-
-        info("Add new user");
-        navigationToolbar.goToAddUser();
-        addUsers.addUser(username1, "123456", email1, username1, username1);
-        manageLogInOut.signIn(username1, password);
-
-        navigationToolbar.goToMyNotifications();
-        myNotificationsSetting.verifyTilePage();
-
-
-        /*Step number: 2
+    /*Step number: 2
 		*Step Name: Step 2 : Check Email Notifications toggle
 		*Step Description:
 			- Check the toggle related to email notifications
@@ -100,10 +84,7 @@ public class SOCNotificationIntranetUserSettingsTestIT extends Base {
 			- The toggle is displayed at the top of the table
 			- The toggle is labeled :Notify me by email
 			- The toggle if ON by default*/
-
-        myNotificationsSetting.checkEmailNotifiToggle();
-
-		/*Step number: 3
+    /*Step number: 3
 		*Step Name: Step 3 : Update Email Notifications toggle
 		*Step Description:
 			- Switch OFF email notifications
@@ -112,18 +93,7 @@ public class SOCNotificationIntranetUserSettingsTestIT extends Base {
 		*Expected Outcome:
 			- All settings related to Email Notifications are disabled (instant notification and digest)
 			and the settings of the user are remembere*/
-        myNotificationsSetting.turnOnOffNotiEmail(false);
-        myNotificationsSetting.veriftyAllEmailNotiDefaultDisable();
-
-        info("the settings of the user are remembered");
-        info("User A login");
-        manageLogInOut.signIn(username1, password);
-
-        navigationToolbar.goToMyNotifications();
-        myNotificationsSetting.verifyTilePage();
-        myNotificationsSetting.veriftyAllEmailNotiDefaultDisable();
-
-		/*Step number: 4
+    /*Step number: 4
 		*Step Name: Step 4 : Update Email Notifications toggle
 		*Step Description:
 			- Switch ON emails notifications
@@ -131,6 +101,33 @@ public class SOCNotificationIntranetUserSettingsTestIT extends Base {
 
 		*Expected Outcome:
 			- The user finds back the same configuration*/
+    @Test
+    public void test01_CheckEmailNotificationsUserSettings() {
+        info("Test 1: Check Email Notifications User settings");
+
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String password ="123456";
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(username1, "123456", email1, username1, username1);
+        manageLogInOut.signIn(username1, password);
+        navigationToolbar.goToMyNotifications();
+        myNotificationsSetting.verifyTilePage();
+
+        myNotificationsSetting.checkEmailNotifiToggle();
+
+        myNotificationsSetting.turnOnOffNotiEmail(false);
+        myNotificationsSetting.veriftyAllEmailNotiDefaultDisable();
+        info("the settings of the user are remembered");
+
+        info("User A login");
+        manageLogInOut.signIn(username1, password);
+        navigationToolbar.goToMyNotifications();
+        myNotificationsSetting.verifyTilePage();
+        myNotificationsSetting.veriftyAllEmailNotiDefaultDisable();
+
         myNotificationsSetting.turnOnOffNotiEmail(true);
         myNotificationsSetting.veriftyAllEmailNotiDefaultEnabled();
 
