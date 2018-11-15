@@ -9,10 +9,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
-import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
-import org.exoplatform.platform.qa.ui.social.pageobject.IntranetNotification;
-import org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting;
-import org.exoplatform.platform.qa.ui.social.pageobject.NotificationActivity;
+import org.exoplatform.platform.qa.ui.social.pageobject.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -202,4 +199,55 @@ public class SOCNotificationIntranetUserSettingsTestIT extends Base {
         myNotificationsSetting.veriftyAllIntranetNotiDefaultEnabled();
 
     }
-}
+    /**
+     *<li> Case ID:125166.</li>
+     *<li> Test Case Name: Check default user settings.</li>
+     *<li> Pre-Condition: - The user connects for the first time to the platform
+     *(or haven't done any change in the user settings since his first connection)</li>
+     *<li> Post-Condition: </li>
+     */
+    	/*Step Number: 1
+		*Step Name:
+		*Step Description:
+			- Login
+			- Go to User Menu and click [My Notifications]
+			- Check the Intranet Notification setings
+		*Input Data:
+
+		*Expected Outcome:
+			The default Intranet Notification settings are :
+			* New User : No Notifications
+			* Connection Request : Intranet Notification
+			* * Space Invitation : Intranet Notification
+			* * Space Join Request: Intranet Notification
+			* * Mention : Intranet Notification
+			* * Comment : Intranet Notification
+			* * Like : No notifications
+			* * Post on my Steam : Intranet Notification
+			* * Post on my Space : Intranet Notification*/
+    @Test
+    public  void test03_CheckDefaultUserSettings() {
+        info("Test 3: Check default user settings");
+
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1+"@gmail.com";
+        String password ="123456";
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(username1, password, email1, username1, username1);
+        manageLogInOut.signIn(username1,password);
+
+        navigationToolbar.goToMyNotifications();
+        myNotificationsSetting.verifyTilePage();
+        myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.NewUser_intranet);
+        myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.ConnectionRequest_intranet);
+        myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.Space_Invitation_intranet);
+        myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.Space_Join_intranet);
+        myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.AS_Mention_intranet);
+        myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.AS_Comment_intranet);
+        myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.AS_Like_intranet);
+        myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.AS_Post_intranet);
+        myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.Space_Post_intranet);
+
+    }}

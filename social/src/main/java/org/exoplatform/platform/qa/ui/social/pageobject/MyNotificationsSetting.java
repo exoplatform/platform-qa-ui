@@ -907,7 +907,7 @@ public class MyNotificationsSetting {
                 selectBoxMailType.Weekly.name().toString()));
       case AS_Like_intranet:
         info("Verify that Activity like's intranet is disabled");
-        evt.waitForElementNotPresent(ELEMENT_LIKE_INTRANET_ICON);
+        $(ELEMENT_LIKE_INTRANET_ICON).is(Condition.visible);
         break;
       case AS_Post_email:
         info("Verify that Activity post's email is shown");
