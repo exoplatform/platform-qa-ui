@@ -560,7 +560,7 @@ public class MyNotificationsSetting {
       if (evt.isElementPresent(ELEMENT_SWITCH_ONOFF_WEB_ON))
         info("Intranet notification is already ON");
       else {
-        evt.click(ELEMENT_SWITCH_ONOFF_WEB_OFF, 2);
+        $(ELEMENT_SWITCH_ONOFF_WEB_OFF, 2).is(Condition.visible);
       }
     } else {
       if (evt.isElementPresent(ELEMENT_SWITCH_ONOFF_WEB_ON)) {
@@ -1078,7 +1078,7 @@ public class MyNotificationsSetting {
     info("Verify that Activity post's intranet is disabled");
     evt.waitForElementNotPresent(ELEMENT_POST_INTRANET_ICON);
     info("Verify that Space invitation's intranet is disabled");
-    evt.waitForElementNotPresent(ELEMENT_INVITATION_SPACE_MAIL_ICON);
+    $(ELEMENT_INVITATION_SPACE_MAIL_ICON).is(Condition.visible);
     info("Verify that Space join's intranet is disabled");
     evt.waitForElementNotPresent(ELEMENT_JOIN_REQ_SPACE_INTRANET_ICON);
     info("Verify that Space post's intranet is disabled");

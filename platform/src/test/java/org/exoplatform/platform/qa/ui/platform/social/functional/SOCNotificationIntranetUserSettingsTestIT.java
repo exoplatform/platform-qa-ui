@@ -131,4 +131,75 @@ public class SOCNotificationIntranetUserSettingsTestIT extends Base {
         myNotificationsSetting.turnOnOffNotiEmail(true);
         myNotificationsSetting.veriftyAllEmailNotiDefaultEnabled();
 
-    }}
+    }
+    /**
+     *<li> Case ID:125161.</li>
+     *<li> Test Case Name: Check Intranet Notifications User settings.</li>
+     *<li> Pre-Condition: </li>
+     *<li> Post-Condition: </li>
+     */
+    /*Step Number: 1
+		*Step Name: Step 1 : Go to My Notifications
+		*Step Description:
+			- Login
+			- Click the user menu and go to My Notifications
+		*Input Data:
+
+		*Expected Outcome:
+			- The user settings page is displayed*/
+    /*Step number: 2
+		*Step Name: Step 2 : Check Intranet Notifications toggle
+		*Step Description:
+			- Check the toggle related to Intranet Notifications
+		*Input Data:
+
+		*Expected Outcome:
+			- The toggle is displayed at the top of the table
+			- The toggle is labeled : Get Intranet Notifications
+			- The toggle if ON by default*/
+    /*Step number: 3
+		*Step Name: Step 3 : Update Intranet Notifications toggle
+		*Step Description:
+			- Switch OFF Intranet Notifications
+		*Input Data:
+
+		*Expected Outcome:
+			- All settings related to Intranet Notifications are disabled and the settings of the user are remembered.*/
+    	/*Step number: 4
+		*Step Name: Step 4 : Update Intranet Notifications toggle
+		*Step Description:
+			- Switch ON Intranet Notifications
+		*Input Data:
+
+		*Expected Outcome:
+			- The user finds back the same configuration*/
+    @Test
+    public  void test02_CheckIntranetNotificationsUserSettings() {
+        info("Test 2: Check Intranet Notifications User settings");
+
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1+"@gmail.com";
+        String password = "123456";
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(username1, password, email1, username1, username1);
+        manageLogInOut.signIn(username1,password);
+        navigationToolbar.goToMyNotifications();
+        myNotificationsSetting.verifyTilePage();
+        myNotificationsSetting.checkIntranetNotifiToggle();
+        myNotificationsSetting.turnOnOffNotiIntranet(false);
+        myNotificationsSetting.veriftyAllIntranetNotiDefaultDisable();
+
+        info("the settings of the user are remembered");
+
+        info("User A login");
+        manageLogInOut.signIn(username1, password);
+        navigationToolbar.goToMyNotifications();
+        myNotificationsSetting.verifyTilePage();
+        myNotificationsSetting.veriftyAllIntranetNotiDefaultDisable();
+        myNotificationsSetting.turnOnOffNotiIntranet(true);
+        myNotificationsSetting.veriftyAllIntranetNotiDefaultEnabled();
+
+    }
+}
