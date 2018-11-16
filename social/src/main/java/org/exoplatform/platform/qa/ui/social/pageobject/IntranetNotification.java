@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.social.pageobject;
 
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_NOTIFICATION_DROPDOWN;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
@@ -442,20 +443,13 @@ public class IntranetNotification {
    */
   public void acceptRqConnection(String fullName) {
 
-    for (int repeat = 0;; repeat++) {
-      if (repeat > 1) {
-        if (evt.waitForAndGetElement(ELEMENT_CONNECT_ACCEPT_BUTTON.replace("$name", fullName), 3000, 0) == null)
-          ;
-        break;
-      }
-      if ($(byText(fullName)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_INVITATION).is(Condition.not(Condition.exist))) {
-        break;
-      }
-      info("Retry...[" + repeat + "]");
       info("Click on Accept button");
-      $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(fullName)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_INVITATION).click();
-
+      $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(fullName + " " + fullName)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_INVITATION).click();
     }
+    /**
+
+
+     }
   }
 
   /**
@@ -573,24 +567,18 @@ public class IntranetNotification {
     info("Verify that the status is shown");
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
-        if (evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_STATUS.replace("$status", status).replace("$fullName", user),
-                                     3000,
-                                     0) != null)
-          ;
+        if ($(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS.
+                replace("$status",status).replace("$fullName",user))).is(Condition.visible));
         break;
       }
-      if (evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_STATUS.replace("$status", status).replace("$fullName", user),
-                                   5000,
-                                   0) != null) {
+      if ($(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS.
+              replace("$status",status).replace("$fullName",user))).is(Condition.visible))
+      {
         info("Element " + ELEMENT_INTRANET_NOTIFICATION_STATUS.replace("$status", status).replace("$fullName", user)
-            + " is displayed");
+                + " is displayed");
         break;
       }
-      info("Retry...[" + repeat + "]");
-      this.testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-
-    }
-  }
+    }}
 
   /**
    * Check status of space notifications

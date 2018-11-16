@@ -544,16 +544,15 @@ public class ActivityStream {
     }
     shareActivity();
 
-   info("-- Verify that an activity has been added --");
+    info("-- Verify that an activity has been added --");
     $(byText(text)).should(Condition.exist);
     $(ELEMENT_COMPOSER_SHARE_BUTTON).shouldBe(Condition.disabled);
     info("The activity is shared success");
 
   }
-
-  /**
-   * Open More menu of Space menu
-   */
+    /**
+     * Open More menu of Space menu
+     */
   public void openMorelist() {
     info("Click on More button");
     evt.click(ELEMENT_SPACE_MENU_MORE_BTN);
@@ -883,6 +882,7 @@ public class ActivityStream {
                                                                .split(" ")[1]);
     String numberAfterlike = String.valueOf(numberofLike + 1);
     $(byText(activityText)).parent().parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).click();
+    refresh();
     $(byText(activityText)).parent()
                            .parent()
                            .parent()

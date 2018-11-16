@@ -545,10 +545,10 @@ public class MyNotificationsSetting {
       if (evt.isElementPresent(ELEMENT_SWITCH_ONOFF_MAIL_ON))
         info("Email notification is already ON");
       else
-        evt.click(ELEMENT_SWITCH_ONOFF_MAIL_OFF, 2);
+        $(ELEMENT_SWITCH_ONOFF_MAIL_OFF, 2).is(Condition.visible);
     } else {
       if (evt.isElementPresent(ELEMENT_SWITCH_ONOFF_MAIL_ON))
-        evt.click(ELEMENT_SWITCH_ONOFF_MAIL_ON, 2);
+        $(ELEMENT_SWITCH_ONOFF_MAIL_ON, 2).is(Condition.visible);
       else
         info("Email notification is already OFF");
     }
@@ -563,7 +563,7 @@ public class MyNotificationsSetting {
       if (evt.isElementPresent(ELEMENT_SWITCH_ONOFF_WEB_ON))
         info("Intranet notification is already ON");
       else {
-        evt.click(ELEMENT_SWITCH_ONOFF_WEB_OFF, 2);
+        $(ELEMENT_SWITCH_ONOFF_WEB_OFF, 2).is(Condition.visible);
       }
     } else {
       if (evt.isElementPresent(ELEMENT_SWITCH_ONOFF_WEB_ON)) {

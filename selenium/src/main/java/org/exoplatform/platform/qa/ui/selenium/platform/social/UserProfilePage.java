@@ -273,7 +273,7 @@ public class UserProfilePage {
    */
   public void goToActivity() {
     info("Click on Activity tab");
-    evt.click(ELEMETN_ACTIVITY_TAB);
+    $(ELEMETN_ACTIVITY_TAB).click();
   }
 
   /**
