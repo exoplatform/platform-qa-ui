@@ -309,6 +309,7 @@ public class ReplyToCommentTestIT extends Base {
         String nameForum = "Forum" + getRandomNumber();
         String nameTopic = "Topic" + getRandomNumber();
         String description = "Description" + getRandomNumber();
+        String quote="quote"+getRandomNumber();
         homePagePlatform.goToConnections();
         connectionsManagement.connectToAUser(DATA_USER2);
         info("Open forum portlet");
@@ -331,10 +332,11 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToForum();
         forumHomePage.goToTopic(nameTopic);
-        forumTopicManagement.quotePost(title, content);
+        forumTopicManagement.quotePost(content, quote);
         homePagePlatform.goToHomePage();
-        String comment_parent_id = $(byText(content)).parent().parent().parent().parent().getAttribute("data-comment-id");
-        assertEquals($(byText(content)).parent()
+        homePagePlatform.refreshUntil($(byText(quote)),Condition.visible,1000);
+        String comment_parent_id = $(byText(quote)).parent().parent().parent().parent().getAttribute("data-comment-id");
+        assertEquals($(byText(quote)).parent()
                 .parent()
                 .parent()
                 .parent()
