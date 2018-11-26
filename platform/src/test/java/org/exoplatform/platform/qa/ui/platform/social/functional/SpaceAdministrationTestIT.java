@@ -41,10 +41,22 @@ public class SpaceAdministrationTestIT extends Base {
         $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
         $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/a")).waitUntil(Condition.visible, Configuration.timeout);
     }
+
     @Test
     public void test02_CheckThatOnlyAdministratorsAreRedirectedToSpaceManagementPage() {
         info("Test 2: CheckThatOnlyAdministratorsAreRedirectedToSpaceManagementPage");
         $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
         $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
         $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/a")).click();
-    }}
+    }
+
+    @Test
+    public void test03_Checktabsinthespacemanagementpage() {
+        info("Test 3: CheckThatOnlyAdministratorsAreRedirectedToSpaceManagementPage");
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+        $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/a")).click();
+        $(byXpath("//*[@id=\"1b6db64e-29cf-410f-908e-e3a43400401d\"]/div/div/div/ul/li[1]/a")).click();
+        $(byXpath("//*[@id=\"1b6db64e-29cf-410f-908e-e3a43400401d\"]/div/div/div/ul/li[2]/a")).click();
+    }
+}
