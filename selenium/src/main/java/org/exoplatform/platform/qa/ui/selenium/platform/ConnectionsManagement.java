@@ -226,8 +226,6 @@ public class ConnectionsManagement {
   public void searchPeople(String peopleName, String position, String skills, String directory) {
     info("-- Searching people ... --");
     if (peopleName != "" && peopleName != null) {
-      $(ELEMENT_NAME_OF_PEOPLE).waitUntil(Condition.appear,Configuration.timeout).sendKeys(Keys.CONTROL,"a");
-      $(ELEMENT_NAME_OF_PEOPLE).sendKeys(Keys.BACK_SPACE);
       $(ELEMENT_NAME_OF_PEOPLE).waitUntil(Condition.appears,Configuration.timeout).setValue(peopleName);
     } else {
       $(ELEMENT_NAME_OF_PEOPLE).setValue("");
