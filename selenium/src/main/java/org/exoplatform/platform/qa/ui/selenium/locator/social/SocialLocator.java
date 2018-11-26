@@ -426,7 +426,7 @@ public final class SocialLocator {
                                                                                          ".//*[@id='UIIntranetNotificationsPortlet']//*[contains(@class,'status')][contains(.,'$comment')]";
 
   public static final String          ELEMENT_INTRANET_NOTIFICATION_ALL_ACTIVITY_TITLE                  =
-                                                                                       ".//*[@id='NotificationPopup']//*[@class='content'][contains(.,'$title')]";
+                                                                                       ".//*[@id='UIIntranetNotificationsPortlet']//*[@class='content'][contains(.,'$title')]";
 
   public static final By              ELEMENT_NOTIFICATION_SETTINGS_LINK                                =
                                                                          By.xpath(".//*[@id='UIIntranetNotificationsPortlet']//*[contains(text(),'Notification Settings')]");
