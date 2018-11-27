@@ -93,7 +93,7 @@ public class ManageSpacesTestIT extends Base {
     }
 
     @Test
-    public void test02_CheckTheDisplayOfTheFilterFieldAboveTheSpaceManagementTable () {
+    public void test03_CheckTheDisplayOfTheFilterFieldAboveTheSpaceManagementTable () {
 
         info("CheckTheDisplayOfTheFilterFieldAboveTheSpaceManagementTable");
 
