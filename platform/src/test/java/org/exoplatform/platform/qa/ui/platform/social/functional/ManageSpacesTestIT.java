@@ -81,7 +81,7 @@ public class ManageSpacesTestIT extends Base {
         homePagePlatform.goToMySpaces();
         spaceManagement.addNewSpaceSimple(spaceNamec, spaceDesc);
 
-        info("Test 2: CheckThatNothingHappensWhenClickOnSpacesNameAndAvatar");
+        info("CheckThatNothingHappensWhenClickOnSpacesNameAndAvatar");
         $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
         $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
         $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/a")).click();
@@ -90,6 +90,16 @@ public class ManageSpacesTestIT extends Base {
         $(byAttribute("src", "/eXoSkin/skin/images/system/SpaceAvtDefault.png")).click();
         $(byXpath("//*[@id=\"4f91fdf7-ce43-4f17-9809-955c21cd6251\"]/div/div/div/div/div/div/table")).find(byText(spaceNamec));
         $(byText(spaceNamec)).click();
+    }
+
+    @Test
+    public void test02_CheckTheDisplayOfTheFilterFieldAboveTheSpaceManagementTable () {
+
+        info("CheckTheDisplayOfTheFilterFieldAboveTheSpaceManagementTable");
+
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+        $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/a")).click();
+        $(byXpath("//*[@id=\"4f91fdf7-ce43-4f17-9809-955c21cd6251\"]/div/div/div/ul/li[1]/a")).click();
+        $(byXpath("//*[@id=\"4f91fdf7-ce43-4f17-9809-955c21cd6251\"]/div/div/div/div/div/div/div[1]/input")).waitUntil(Condition.exist, Configuration.timeout);
     }}
-
-
