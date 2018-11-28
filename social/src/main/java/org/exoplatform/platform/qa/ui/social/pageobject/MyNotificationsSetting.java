@@ -1,6 +1,6 @@
+
 package org.exoplatform.platform.qa.ui.social.pageobject;
 
-import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_ADD_TOOTLBAR;
@@ -20,7 +20,7 @@ public class MyNotificationsSetting {
 
   /**
    * constructor
-   * 
+   *
    * @param testBase TestBase
    */
   public MyNotificationsSetting(TestBase testBase) {
@@ -539,12 +539,12 @@ public class MyNotificationsSetting {
    */
   public void turnOnOffNotiEmail(boolean on) {
     if (on) {
-      if ($(ELEMENT_SWITCH_ONOFF_MAIL_ON).is(Condition.visible))
+      if (evt.isElementPresent(ELEMENT_SWITCH_ONOFF_MAIL_ON))
         info("Email notification is already ON");
       else
-        $(ELEMENT_SWITCH_ONOFF_MAIL_OFF, 2).is(Condition.visible);
+        evt.click(ELEMENT_SWITCH_ONOFF_MAIL_OFF, 2);
     } else {
-      if ($(ELEMENT_SWITCH_ONOFF_MAIL_ON).is(Condition.visible))
+      if (evt.isElementPresent(ELEMENT_SWITCH_ONOFF_MAIL_ON))
         evt.click(ELEMENT_SWITCH_ONOFF_MAIL_ON, 2);
       else
         info("Email notification is already OFF");
@@ -560,11 +560,11 @@ public class MyNotificationsSetting {
       if (evt.isElementPresent(ELEMENT_SWITCH_ONOFF_WEB_ON))
         info("Intranet notification is already ON");
       else {
-        $(ELEMENT_SWITCH_ONOFF_WEB_OFF, 2).is(Condition.visible);
+        evt.click(ELEMENT_SWITCH_ONOFF_WEB_OFF, 2);
       }
     } else {
       if (evt.isElementPresent(ELEMENT_SWITCH_ONOFF_WEB_ON)) {
-       $(ELEMENT_SWITCH_ONOFF_WEB_ON).parent().click();
+        $(ELEMENT_SWITCH_ONOFF_WEB_ON).parent().click();
       } else
         info("Intranet notification is already OFF");
 
@@ -598,7 +598,7 @@ public class MyNotificationsSetting {
    */
   public void verifyTilePage() {
     info("Verify the title of Notification settings page");
-    $(ELEMENT_TITLE_NOTIFICATION_SETTING_PAGE).waitUntil(Condition.visible,Configuration.timeout);
+    evt.waitForAndGetElement(ELEMENT_TITLE_NOTIFICATION_SETTING_PAGE);
     info("The page is shown");
   }
 
@@ -907,7 +907,7 @@ public class MyNotificationsSetting {
                 selectBoxMailType.Weekly.name().toString()));
       case AS_Like_intranet:
         info("Verify that Activity like's intranet is disabled");
-        $(ELEMENT_LIKE_INTRANET_ICON).is(Condition.visible);
+        evt.waitForElementNotPresent(ELEMENT_LIKE_INTRANET_ICON);
         break;
       case AS_Post_email:
         info("Verify that Activity post's email is shown");
@@ -971,7 +971,7 @@ public class MyNotificationsSetting {
    */
   public void checkEmailNotifiToggle() {
     info("Verify that the table is followng switch on-off buttons");
-    $(ELEMENT_TABLE_FOLLOWING_SWITCH_ONOFF).waitUntil(Condition.visible,Configuration.timeout);
+    evt.waitForAndGetElement(ELEMENT_TABLE_FOLLOWING_SWITCH_ONOFF);
     info("Verify that the switch on-off label is shown correct");
     evt.waitForAndGetElement(ELEMENT_SWITCH_ONOFF_MAIL_LABEL);
     info("Verify that switch on-off is enabled by default");
@@ -996,34 +996,34 @@ public class MyNotificationsSetting {
    */
   public void veriftyAllEmailNotiDefaultDisable() {
     info("Verify that daily email is disabled");
-    $(byXpath(ELEMENT_NEW_USER_SELECTED_BOX_MAIL_ICON.replace("$option", selectBoxMailType.Daily.name().toString()))).click();
-
+    evt.waitForElementNotPresent(ELEMENT_NEW_USER_SELECTED_BOX_MAIL_ICON.replace("$option",
+            selectBoxMailType.Daily.name().toString()));
     info("Verify that Connection request's email is disabled");
-    $(ELEMENT_CONNECTION_REQ_MAIL_ICON).click();
-
-    $(byXpath(ELEMENT_CONNECTION_REQ_SELECTED_BOX_MAIL_ICON.replace("$option", selectBoxMailType.Daily.name().toString()))).click();
+    evt.waitForElementNotPresent(ELEMENT_CONNECTION_REQ_MAIL_ICON);
+    evt.waitForElementNotPresent(ELEMENT_CONNECTION_REQ_SELECTED_BOX_MAIL_ICON.replace("$option",
+            selectBoxMailType.Daily.name()
+                    .toString()));
     info("Verify that Activity Comment's email is disabled");
-    $(ELEMENT_COMMENT_MAIL_ICON).click();
-
-    $(byXpath(ELEMENT_COMMENT_SELECTED_BOX_MAIL_ICON.replace("$option", selectBoxMailType.Daily.name().toString()))).click();
+    evt.waitForElementNotPresent(ELEMENT_COMMENT_MAIL_ICON);
+    evt.waitForElementNotPresent(ELEMENT_COMMENT_SELECTED_BOX_MAIL_ICON.replace("$option",
+            selectBoxMailType.Daily.name().toString()));
     info("Verify that Activity mention's email is disabled");
-    $(ELEMENT_MENTION_MAIL_ICON).click();
+    evt.waitForElementNotPresent(ELEMENT_MENTION_MAIL_ICON);
     info("Verify that Activity like's email is disabled");
-    $(byXpath(ELEMENT_LIKE_SELECTED_BOX_MAIL_ICON.replace("$option",
-            selectBoxMailType.Weekly.name().toString()))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    evt.waitForElementNotPresent(ELEMENT_LIKE_SELECTED_BOX_MAIL_ICON.replace("$option",
+            selectBoxMailType.Weekly.name().toString()));
     info("Verify that Activity post's email is disabled");
-    $(ELEMENT_POST_MAIL_ICON).click();
+    evt.waitForElementNotPresent(ELEMENT_POST_MAIL_ICON);
     info("Verify that Space invitation's email is disabled");
-    $(ELEMENT_INVITATION_SPACE_MAIL_ICON).waitUntil(Condition.visible,Configuration.timeout);
-    $(byXpath(ELEMENT_INVI_SPACE_SELECTED_BOX_MAIL_ICON.replace("$option",
-            selectBoxMailType.Weekly.name().toString()))).waitUntil(Condition.visible,Configuration.timeout);
+    evt.waitForElementNotPresent(ELEMENT_INVITATION_SPACE_MAIL_ICON);
+    evt.waitForElementNotPresent(ELEMENT_INVI_SPACE_SELECTED_BOX_MAIL_ICON.replace("$option",
+            selectBoxMailType.Weekly.name().toString()));
     info("Verify that Space join request's email is disabled");
-    $(ELEMENT_JOIN_REQ_SPACE_MAIL_ICON).click();
-
-    $(byXpath(ELEMENT_JOIN_SPACE_SELECTED_BOX_MAIL_ICON.replace("$option",
-            selectBoxMailType.Weekly.name().toString()))).click();
+    evt.waitForElementNotPresent(ELEMENT_JOIN_REQ_SPACE_MAIL_ICON);
+    evt.waitForElementNotPresent(ELEMENT_JOIN_SPACE_SELECTED_BOX_MAIL_ICON.replace("$option",
+            selectBoxMailType.Weekly.name().toString()));
     info("Verify that Space post's email is disabled");
-    $(ELEMENT_POST_SPACE_MAIL_ICON).click();
+    evt.waitForElementNotPresent(ELEMENT_POST_SPACE_MAIL_ICON);
   }
 
   /**
@@ -1032,30 +1032,30 @@ public class MyNotificationsSetting {
    */
   public void veriftyAllEmailNotiDefaultEnabled() {
     info("Verify that daily email is disabled");
-    $(byXpath(ELEMENT_NEW_USER_SELECTED_BOX_MAIL_ICON.replace("$option",
-            selectBoxMailType.Daily.name().toString()))).is(Condition.visible);
+    evt.waitForAndGetElement(ELEMENT_NEW_USER_SELECTED_BOX_MAIL_ICON.replace("$option",
+            selectBoxMailType.Daily.name().toString()));
     info("Verify that Connection request's email is disabled");
     evt.waitForAndGetElement(ELEMENT_CONNECTION_REQ_MAIL_ICON);
-    $(byXpath(ELEMENT_CONNECTION_REQ_SELECTED_BOX_MAIL_ICON.replace("$option",
-            selectBoxMailType.Daily.name().toString()))).is(Condition.visible);
+    evt.waitForAndGetElement(ELEMENT_CONNECTION_REQ_SELECTED_BOX_MAIL_ICON.replace("$option",
+            selectBoxMailType.Daily.name().toString()));
     info("Verify that Activity Comment's email is disabled");
     evt.waitForAndGetElement(ELEMENT_COMMENT_MAIL_ICON);
-    $(byXpath(ELEMENT_COMMENT_SELECTED_BOX_MAIL_ICON.replace("$option",
-            selectBoxMailType.Daily.name().toString()))).is(Condition.visible);
+    evt.waitForAndGetElement(ELEMENT_COMMENT_SELECTED_BOX_MAIL_ICON.replace("$option",
+            selectBoxMailType.Daily.name().toString()));
     info("Verify that Activity mention's email is disabled");
     evt.waitForAndGetElement(ELEMENT_MENTION_MAIL_ICON);
     info("Verify that Activity like's email is disabled");
-    $(byXpath(ELEMENT_LIKE_SELECTED_BOX_MAIL_ICON.replace("$option", selectBoxMailType.Weekly.name().toString()))).is(Condition.visible);
+    evt.waitForAndGetElement(ELEMENT_LIKE_SELECTED_BOX_MAIL_ICON.replace("$option", selectBoxMailType.Weekly.name().toString()));
     info("Verify that Activity post's email is disabled");
     evt.waitForAndGetElement(ELEMENT_POST_MAIL_ICON);
     info("Verify that Space invitation's email is disabled");
     evt.waitForAndGetElement(ELEMENT_INVITATION_SPACE_MAIL_ICON);
-    $(byXpath(ELEMENT_INVI_SPACE_SELECTED_BOX_MAIL_ICON.replace("$option",
-            selectBoxMailType.Weekly.name().toString()))).is(Condition.visible);
+    evt.waitForAndGetElement(ELEMENT_INVI_SPACE_SELECTED_BOX_MAIL_ICON.replace("$option",
+            selectBoxMailType.Weekly.name().toString()));
     info("Verify that Space join request's email is disabled");
     evt.waitForAndGetElement(ELEMENT_JOIN_REQ_SPACE_MAIL_ICON);
-    $(byXpath(ELEMENT_JOIN_SPACE_SELECTED_BOX_MAIL_ICON.replace("$option",
-            selectBoxMailType.Weekly.name().toString()))).is(Condition.visible);
+    evt.waitForAndGetElement(ELEMENT_JOIN_SPACE_SELECTED_BOX_MAIL_ICON.replace("$option",
+            selectBoxMailType.Weekly.name().toString()));
     info("Verify that Space post's email is disabled");
     evt.waitForAndGetElement(ELEMENT_POST_SPACE_MAIL_ICON);
   }
@@ -1078,7 +1078,7 @@ public class MyNotificationsSetting {
     info("Verify that Activity post's intranet is disabled");
     evt.waitForElementNotPresent(ELEMENT_POST_INTRANET_ICON);
     info("Verify that Space invitation's intranet is disabled");
-    $(ELEMENT_INVITATION_SPACE_MAIL_ICON).is(Condition.visible);
+    evt.waitForElementNotPresent(ELEMENT_INVITATION_SPACE_MAIL_ICON);
     info("Verify that Space join's intranet is disabled");
     evt.waitForElementNotPresent(ELEMENT_JOIN_REQ_SPACE_INTRANET_ICON);
     info("Verify that Space post's intranet is disabled");
