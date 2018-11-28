@@ -103,6 +103,7 @@ public class ManageSpacesTestIT extends Base {
         $(byClassName("showInputSearch")).waitUntil(Condition.exist, Configuration.timeout);
     }
 
+
     @Test
     public void test04_SpacesAreFilteredByItsName() {
 
@@ -143,6 +144,4 @@ public class ManageSpacesTestIT extends Base {
         $(byXpath(" //*[@id=\"f0da4b11-96ff-4d12-9119-5731c979d541\"]/div/div/div/ul/li[1]/a")).click();
         $(byClassName("showInputSearch")).setValue(spaceNamec);
         $(byClassName("uiIconPLF24x24Search")).click();
-
-
     }}
