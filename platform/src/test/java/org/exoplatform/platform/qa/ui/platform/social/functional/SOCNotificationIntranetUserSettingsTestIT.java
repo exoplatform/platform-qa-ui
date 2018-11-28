@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.platform.social.functional;
 
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
@@ -14,10 +15,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 
 @Tag("functional")
@@ -99,12 +102,12 @@ public class SOCNotificationIntranetUserSettingsTestIT extends Base {
 		*Expected Outcome:
 			- The user finds back the same configuration*/
     @Test
-    public void test01_CheckEmailNotificationsUserSettings() {
+    public void test01_CheckEmailNotificationsUserSettings() throws Exception {
         info("Test 1: Check Email Notifications User settings");
 
         String username1 = "usernamea" + getRandomString();
         String email1 = username1 + "@gmail.com";
-        String password ="123456";
+        String password = "123456";
 
         info("Add new user");
         navigationToolbar.goToAddUser();
@@ -114,9 +117,10 @@ public class SOCNotificationIntranetUserSettingsTestIT extends Base {
         myNotificationsSetting.verifyTilePage();
 
         myNotificationsSetting.checkEmailNotifiToggle();
-
+        homePagePlatform.refreshUntil($(ELEMENT_ACCOUNT_NAME_LINK), Condition.visible, 1000);
         myNotificationsSetting.turnOnOffNotiEmail(false);
         myNotificationsSetting.veriftyAllEmailNotiDefaultDisable();
+
         info("the settings of the user are remembered");
 
         info("User A login");
@@ -124,16 +128,19 @@ public class SOCNotificationIntranetUserSettingsTestIT extends Base {
         navigationToolbar.goToMyNotifications();
         myNotificationsSetting.verifyTilePage();
         myNotificationsSetting.veriftyAllEmailNotiDefaultDisable();
-
+        homePagePlatform.refreshUntil($(ELEMENT_ACCOUNT_NAME_LINK), Condition.visible, 1000);
         myNotificationsSetting.turnOnOffNotiEmail(true);
         myNotificationsSetting.veriftyAllEmailNotiDefaultEnabled();
-
+        manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
     }
+
     /**
-     *<li> Case ID:125161.</li>
-     *<li> Test Case Name: Check Intranet Notifications User settings.</li>
-     *<li> Pre-Condition: </li>
-     *<li> Post-Condition: </li>
+     * <li> Case ID:125161.</li>
+     * <li> Test Case Name: Check Intranet Notifications User settings.</li>
+     * <li> Pre-Condition: </li>
+     * <li> Post-Condition: </li>
      */
     /*Step Number: 1
 		*Step Name: Step 1 : Go to My Notifications
@@ -171,17 +178,17 @@ public class SOCNotificationIntranetUserSettingsTestIT extends Base {
 		*Expected Outcome:
 			- The user finds back the same configuration*/
     @Test
-    public  void test02_CheckIntranetNotificationsUserSettings() {
+    public void test02_CheckIntranetNotificationsUserSettings() {
         info("Test 2: Check Intranet Notifications User settings");
 
         String username1 = "usernamea" + getRandomString();
-        String email1 = username1+"@gmail.com";
+        String email1 = username1 + "@gmail.com";
         String password = "123456";
 
         info("Add new user");
         navigationToolbar.goToAddUser();
         addUsers.addUser(username1, password, email1, username1, username1);
-        manageLogInOut.signIn(username1,password);
+        manageLogInOut.signIn(username1, password);
         navigationToolbar.goToMyNotifications();
         myNotificationsSetting.verifyTilePage();
         myNotificationsSetting.checkIntranetNotifiToggle();
@@ -197,14 +204,18 @@ public class SOCNotificationIntranetUserSettingsTestIT extends Base {
         myNotificationsSetting.veriftyAllIntranetNotiDefaultDisable();
         myNotificationsSetting.turnOnOffNotiIntranet(true);
         myNotificationsSetting.veriftyAllIntranetNotiDefaultEnabled();
+        manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
 
     }
+
     /**
-     *<li> Case ID:125166.</li>
-     *<li> Test Case Name: Check default user settings.</li>
-     *<li> Pre-Condition: - The user connects for the first time to the platform
-     *(or haven't done any change in the user settings since his first connection)</li>
-     *<li> Post-Condition: </li>
+     * <li> Case ID:125166.</li>
+     * <li> Test Case Name: Check default user settings.</li>
+     * <li> Pre-Condition: - The user connects for the first time to the platform
+     * (or haven't done any change in the user settings since his first connection)</li>
+     * <li> Post-Condition: </li>
      */
     	/*Step Number: 1
 		*Step Name:
@@ -226,17 +237,17 @@ public class SOCNotificationIntranetUserSettingsTestIT extends Base {
 			* * Post on my Steam : Intranet Notification
 			* * Post on my Space : Intranet Notification*/
     @Test
-    public  void test03_CheckDefaultUserSettings() {
+    public void test03_CheckDefaultUserSettings() {
         info("Test 3: Check default user settings");
 
         String username1 = "usernamea" + getRandomString();
-        String email1 = username1+"@gmail.com";
-        String password ="123456";
+        String email1 = username1 + "@gmail.com";
+        String password = "123456";
 
         info("Add new user");
         navigationToolbar.goToAddUser();
         addUsers.addUser(username1, password, email1, username1, username1);
-        manageLogInOut.signIn(username1,password);
+        manageLogInOut.signIn(username1, password);
 
         navigationToolbar.goToMyNotifications();
         myNotificationsSetting.verifyTilePage();
@@ -249,5 +260,9 @@ public class SOCNotificationIntranetUserSettingsTestIT extends Base {
         myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.AS_Like_intranet);
         myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.AS_Post_intranet);
         myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.Space_Post_intranet);
+        manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
 
-    }}
+    }
+}
