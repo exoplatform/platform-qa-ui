@@ -144,4 +144,39 @@ public class ManageSpacesTestIT extends Base {
         $(byXpath(" //*[@id=\"f0da4b11-96ff-4d12-9119-5731c979d541\"]/div/div/div/ul/li[1]/a")).click();
         $(byClassName("showInputSearch")).setValue(spaceNamec);
         $(byClassName("uiIconPLF24x24Search")).click();
+    }
+    @Test
+    public void test05_SpacesAreFilteredByItsDescription() {
+        info("create some spaces");
+        String spaceNamea = "spaceNamea" + getRandomNumber();
+        String spaceDesa = "descriptiona" + getRandomNumber();
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
+        String spaceNameb = "spaceNameb" + getRandomNumber();
+        String spaceDesb = "descriptionb" + getRandomNumber();
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(spaceNameb, spaceDesb);
+        String spaceNamec = "spaceNamec" + getRandomNumber();
+        String spaceDesc = "descriptionc" + getRandomNumber();
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(spaceNamec, spaceDesc);
+        info("SpacesAreFilteredByItsName");
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+        $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/a")).click();
+        $(byXpath(" //*[@id=\"f0da4b11-96ff-4d12-9119-5731c979d541\"]/div/div/div/ul/li[1]/a")).click();
+        $(byClassName("showInputSearch")).setValue(spaceDesa);
+        $(byClassName("uiIconPLF24x24Search")).click();
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+        $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/a")).click();
+        $(byXpath(" //*[@id=\"f0da4b11-96ff-4d12-9119-5731c979d541\"]/div/div/div/ul/li[1]/a")).click();
+        $(byClassName("showInputSearch")).setValue(spaceDesb);
+        $(byClassName("uiIconPLF24x24Search")).click();
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+        $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/a")).click();
+        $(byXpath(" //*[@id=\"f0da4b11-96ff-4d12-9119-5731c979d541\"]/div/div/div/ul/li[1]/a")).click();
+        $(byClassName("showInputSearch")).setValue(spaceDesc);
+        $(byClassName("uiIconPLF24x24Search")).click();
     }}
