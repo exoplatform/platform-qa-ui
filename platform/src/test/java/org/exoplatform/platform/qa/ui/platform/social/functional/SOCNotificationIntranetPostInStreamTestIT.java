@@ -11,9 +11,7 @@ import org.exoplatform.platform.qa.ui.social.pageobject.NotificationActivity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
-
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -248,8 +246,8 @@ public class SOCNotificationIntranetPostInStreamTestIT extends Base {
 			- Post of my Stream notification is displayed / available in the page*/
     @Test
     public void test03_CheckViewAllAfterReceivingAPostOnMyStreamNotification() {
-        info("Test 3: Check View All after receiving a Post on my Stream notification");
 
+        info("Test 3: Check View All after receiving a Post on my Stream notification");
         ArrayList<String> arrayUser = new ArrayList<String>();
         String username1 = "usernamea" + getRandomString();
         String email1 = username1 + "@gmail.com";
@@ -299,4 +297,5 @@ public class SOCNotificationIntranetPostInStreamTestIT extends Base {
         navigationToolbar.goToManageCommunity();
         addUsers.deleteUser(username1);
         addUsers.deleteUser(username2);
-    }}
+    }
+}
