@@ -9,9 +9,8 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import static com.codeborne.selenide.Selectors.byAttribute;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.byXpath;
+
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
@@ -101,5 +100,49 @@ public class ManageSpacesTestIT extends Base {
         $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
         $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/a")).click();
         $(byXpath("//*[@id=\"4f91fdf7-ce43-4f17-9809-955c21cd6251\"]/div/div/div/ul/li[1]/a")).click();
-        $(byXpath("//*[@id=\"4f91fdf7-ce43-4f17-9809-955c21cd6251\"]/div/div/div/div/div/div/div[1]/input")).waitUntil(Condition.exist, Configuration.timeout);
+        $(byClassName("showInputSearch")).waitUntil(Condition.exist, Configuration.timeout);
+    }
+
+    @Test
+    public void test04_SpacesAreFilteredByItsName() {
+
+        info("create some spaces");
+        String spaceNamea = "spaceNamea" + getRandomNumber();
+        String spaceDesa = "descriptiona" + getRandomNumber();
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
+        String spaceNameb = "spaceNameb" + getRandomNumber();
+        String spaceDesb = "descriptionb" + getRandomNumber();
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(spaceNameb, spaceDesb);
+        String spaceNamec = "spaceNamec" + getRandomNumber();
+        String spaceDesc = "descriptionc" + getRandomNumber();
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(spaceNamec, spaceDesc);
+
+        info("SpacesAreFilteredByItsName");
+
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+        $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/a")).click();
+        $(byXpath(" //*[@id=\"f0da4b11-96ff-4d12-9119-5731c979d541\"]/div/div/div/ul/li[1]/a")).click();
+        $(byClassName("showInputSearch")).setValue(spaceNamea);
+        $(byClassName("uiIconPLF24x24Search")).click();
+
+
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+        $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/a")).click();
+        $(byXpath(" //*[@id=\"f0da4b11-96ff-4d12-9119-5731c979d541\"]/div/div/div/ul/li[1]/a")).click();
+        $(byClassName("showInputSearch")).setValue(spaceNameb);
+        $(byClassName("uiIconPLF24x24Search")).click();
+
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+        $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/a")).click();
+        $(byXpath(" //*[@id=\"f0da4b11-96ff-4d12-9119-5731c979d541\"]/div/div/div/ul/li[1]/a")).click();
+        $(byClassName("showInputSearch")).setValue(spaceNamec);
+        $(byClassName("uiIconPLF24x24Search")).click();
+
+
     }}
