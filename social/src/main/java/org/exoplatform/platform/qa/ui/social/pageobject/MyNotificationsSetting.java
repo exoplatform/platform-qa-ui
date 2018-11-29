@@ -297,7 +297,7 @@ public class MyNotificationsSetting {
         // scroll up
         executeJavaScript("window.scrollBy(0,-2000)", "");
         $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).click();
-        $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+        $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).waitUntil(Condition.visible,Configuration.timeout);
         info("Verify that intranet notification is shown");
         evt.waitForAndGetElement(ELEMENT_NEW_USER_INTRANET_ICON, 3000, 1);
         break;

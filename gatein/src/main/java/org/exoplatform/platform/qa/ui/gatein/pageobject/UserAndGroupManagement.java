@@ -153,7 +153,11 @@ public class UserAndGroupManagement {
     info("Select Platform/administration group");
     selectGroup("Platform/Administration");
     info("Add user to administration group by type");
+<<<<<<< HEAD
     $(ELEMENT_INPUT_USERNAME).scrollTo().setValue(user);
+=======
+    $(ELEMENT_INPUT_USERNAME).setValue(user);
+>>>>>>> 2388a5a1056852e955e91467646694f1293b9ae3
     if (membership.length > 0)
       evt.select(ELEMENT_SELECT_MEMBERSHIP, membership[0]);
     $(ELEMENT_ACCOUNT_NAME_LINK).click();
