@@ -19,7 +19,6 @@ import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
-import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
@@ -39,7 +38,7 @@ public class SOCNotificationIntranetSpaceJoinRequestTestIT extends Base {
   NotificationsAdminSeting notificationsAdminSeting;
 
   ManageLogInOut           manageLogInOut;
-  
+
   AddUsers                 addUsers;
 
   HomePagePlatform         homePagePlatform;
