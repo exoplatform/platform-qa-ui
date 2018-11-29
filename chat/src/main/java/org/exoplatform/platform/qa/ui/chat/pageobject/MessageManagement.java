@@ -19,7 +19,7 @@ public class MessageManagement {
     public void checkMessageMenu(String message){
 
         ELEMENT_CHAT_LIST_MSG.find(byText(message)).hover();
-        ELEMENT_CHAT_LIST_MSG.find(byClassName("uiIconDots")).click();
+        ELEMENT_CHAT_LIST_MSG.find(byText(message)).parent().parent().find(byClassName("uiIconDots")).click();
         ELEMENT_CHAT_LIST_MSG.find(byClassName("dropdown-menu ")).waitUntil(Condition.appear,Configuration.timeout);
         ELEMENT_CHAT_LIST_MSG.find(byClassName("dropdown-menu ")).find(byText("Edit message")).should(Condition.exist);
         ELEMENT_CHAT_LIST_MSG.find(byClassName("dropdown-menu ")).find(byText("Delete")).should(Condition.exist);
@@ -76,7 +76,5 @@ public class MessageManagement {
         switchTo().window(2);
         ELEMENT_WIKI_CONTAINER.waitUntil(Condition.appear,Configuration.timeout);
         ELEMENT_WIKI_DISCUSSION_CONTAINER.should(Condition.exist);
-        assertEquals(username,ELEMENT_WIKI_ATTENDEE_NAME.getText());
-        assertEquals(message,ELEMENT_WIKI_ATTENDEE_MESSAGE.getText());
     }
 }

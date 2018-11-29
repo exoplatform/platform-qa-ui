@@ -54,81 +54,81 @@ public class ChatMessageManagementTestIT extends Base {
         userAddManagement = new UserAddManagement(this);
         userAndGroupManagement = new UserAndGroupManagement(this);
         chatManagement = new ChatManagement(this);
-        messageManagement=new MessageManagement(this);
+        messageManagement = new MessageManagement(this);
         manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
     }
 
     @Test
-    public void test01_CheckMessageActions(){
+    public void test01_CheckMessageActions() {
 
-        String room = "room"+getRandomNumber();
-        String message= "message"+getRandomNumber();
+        String room = "room" + getRandomNumber();
+        String message = "message" + getRandomNumber();
 
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.addRoom(room);
-        chatManagement.sendMessageInRoomOrSpace(room,message);
+        chatManagement.sendMessageInRoomOrSpace(room, message);
         messageManagement.checkMessageMenu(message);
 
     }
 
     @Test
-    public void test02_EditMessage(){
-        String room = "room"+getRandomNumber();
-        String message= "message"+getRandomNumber();
-        String newmessage="newmessage"+getRandomNumber();
+    public void test02_EditMessage() {
+        String room = "room" + getRandomNumber();
+        String message = "message" + getRandomNumber();
+        String newmessage = "newmessage" + getRandomNumber();
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.addRoom(room);
-        chatManagement.sendMessageInRoomOrSpace(room,message);
-        messageManagement.editMessage(message,newmessage);
+        chatManagement.sendMessageInRoomOrSpace(room, message);
+        messageManagement.editMessage(message, newmessage);
         roomManagement.deleteRomm(room);
     }
 
     @Test
-    public void test03_DeleteMessage(){
+    public void test03_DeleteMessage() {
 
-        String room = "room"+getRandomNumber();
-        String message= "message"+getRandomNumber();
-        String newmessage="newmessage"+getRandomNumber();
+        String room = "room" + getRandomNumber();
+        String message = "message" + getRandomNumber();
+        String newmessage = "newmessage" + getRandomNumber();
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.addRoom(room);
-        chatManagement.sendMessageInRoomOrSpace(room,message);
+        chatManagement.sendMessageInRoomOrSpace(room, message);
         messageManagement.deleteMessage(message);
         roomManagement.deleteRomm(room);
     }
 
     @Test
-    public void test04_QuoteMessage(){
-        String room="room"+getRandomNumber();
-        String message="message"+getRandomNumber();
+    public void test04_QuoteMessage() {
+        String room = "room" + getRandomNumber();
+        String message = "message" + getRandomNumber();
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.addRoom(room);
-        chatManagement.sendMessageInRoomOrSpace(room,message);
-        messageManagement.quoteMessage(message,DATA_NAME_USER1);
+        chatManagement.sendMessageInRoomOrSpace(room, message);
+        messageManagement.quoteMessage(message, DATA_NAME_USER1);
         roomManagement.deleteRomm(room);
     }
 
     @Test
-    public void test05_SaveNotes(){
-        String room="room"+getRandomNumber();
-        String message="message"+getRandomNumber();
+    public void test05_SaveNotes() {
+        String room = "room" + getRandomNumber();
+        String message = "message" + getRandomNumber();
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.addRoom(room);
-        chatManagement.sendMessageInRoomOrSpace(room,message);
-        messageManagement.saveNotes(message,DATA_NAME_USER1);
+        chatManagement.sendMessageInRoomOrSpace(room, message);
+        messageManagement.saveNotes(message, DATA_NAME_USER1);
         switchTo().window(1);
         roomManagement.deleteRomm(room);
     }
 
 
     @BugInPLF("CHAT-990")
-    public void test06_CheckEditedMessageInChatWindow(){
-        String message= "message"+getRandomNumber();
-        String newmessage="new message"+getRandomNumber();
+    public void test06_CheckEditedMessageInChatWindow() {
+        String message = "message" + getRandomNumber();
+        String newmessage = "new message" + getRandomNumber();
         String username = "username" + getRandomNumber();
         String password = "123456";
         String email = "emaila" + getRandomNumber() + "@test.com";
@@ -137,21 +137,21 @@ public class ChatMessageManagementTestIT extends Base {
         navigationToolbar.goToAddUser();
         userAddManagement.addUser(username, password, email, Firstname, LastName);
         manageLogInOut.signOut();
-        manageLogInOut.signInCas(username,password);
+        manageLogInOut.signInCas(username, password);
         homePagePlatform.goToChat();
         switchTo().window(1);
         ELEMENT_CHAT_SEARCH_FIELD.setValue("John Smith");
         ELEMENT_CONTACT_LIST.find(byText("John Smith")).waitUntil(Condition.visible, Configuration.timeout).click();
         ELEMENT_CHAT_MESSAGE_INPUT.setValue(message).pressEnter();
         ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.exist);
-        messageManagement.editMessage(message,newmessage);
+        messageManagement.editMessage(message, newmessage);
         switchToParentWindow();
         manageLogInOut.signOut();
-        manageLogInOut.signInCas(PLFData.DATA_USER1,PLFData.DATA_PASS2);
+        manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);
         homePagePlatform.goToChat();
         switchTo().window(1);
         ELEMENT_CHAT_SEARCH_FIELD.setValue(Firstname);
-        ELEMENT_CONTACT_LIST.find(byText(Firstname+" "+LastName)).waitUntil(Condition.visible, Configuration.timeout).click();
+        ELEMENT_CONTACT_LIST.find(byText(Firstname + " " + LastName)).waitUntil(Condition.visible, Configuration.timeout).click();
         ELEMENT_CHAT_LIST_MSG.find(byText(newmessage)).should(Condition.exist);
         switchToParentWindow();
         navigationToolbar.goToManageCommunity();

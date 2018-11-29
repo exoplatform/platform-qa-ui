@@ -248,7 +248,7 @@ public class ChatManageMessageTestIT extends Base {
     String FirstName = "FirstName" + getRandomString();
     String LastName = "LastName" + getRandomString();
     String email = username + "@test.com";
-    String I;
+    String MessageTime;
 
     navigationToolbar.goToAddUser();
     userAddManagement.addUser(username, password, email, FirstName, LastName);
@@ -256,14 +256,14 @@ public class ChatManageMessageTestIT extends Base {
     switchTo().window(1);
     roomManagement.addRoom(room, username);
     chatManagement.sendMessageInRoomOrSpace(room,message);
-    I=$(byClassName("message-time")).waitUntil(Condition.appear, Configuration.timeout).getText();
+    MessageTime=$(byClassName("message-time")).waitUntil(Condition.appear, Configuration.timeout).getText();
     switchToParentWindow();
     manageLogInOut.signOut();
     manageLogInOut.signInCas(username,password);
     homePagePlatform.goToChat();
     switchTo().window(1);
     $(byText(room)).click();
-    assertEquals(I,$(byClassName("chat-sender-avatar")).parent().parent().parent().parent()
+    assertEquals(MessageTime,$(byClassName("chat-sender-avatar")).parent().parent().parent().parent()
             .find(byClassName("message-time")).getText());
     switchToParentWindow();
     manageLogInOut.signOut();

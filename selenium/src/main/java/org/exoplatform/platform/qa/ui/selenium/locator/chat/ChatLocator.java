@@ -205,7 +205,7 @@ public class ChatLocator {
 
     public static final SelenideElement ELEMENT_CHAT_SAVE_EDIT_MESSAGE= $(byXpath("//*[@id=\"chat-application\"]/div[2]/div[2]/div[1]/div[3]/div/div[2]/div/div[1]"));
     public static final SelenideElement ELEMENT_CHAT_MEETING_NOTE_SENT = $(byClassName("meetingNotesSent"));
-    public static final SelenideElement ELEMENT_CHAT_MEETING_NOTE_SAVED = $(byClassName("meetingNotesSent"));
+    public static final SelenideElement ELEMENT_CHAT_MEETING_NOTE_SAVED = $(byClassName("meetingNotesSaved"));
 
     public static final SelenideElement ELEMENT_WIKI_CONTAINER = $(byId("UIWikiMiddleArea"));
     public static final SelenideElement ELEMENT_WIKI_DISCUSSION_CONTAINER = $(byClassName("section-container"));
