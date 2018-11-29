@@ -1,7 +1,9 @@
 package org.exoplatform.platform.qa.ui.social.pageobject;
 
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_NOTIFICATION_DROPDOWN;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -41,14 +43,14 @@ public class IntranetNotification {
    */
   public void goToAllNotification() {
     info("Go to all notification");
-    if (evt.waitForAndGetElement(ELEMENT_VIEW_ALL, 3000, 0) != null) {
+    if ($(ELEMENT_VIEW_ALL).is(Condition.visible)) {
       info("Click on View All button");
-      evt.click(ELEMENT_VIEW_ALL);
+      $(ELEMENT_VIEW_ALL).click();
     } else {
       info("Open All page by link");
-      testBase.getExoWebDriver().getWebDriver().get(testBase.getExoWebDriver().getBaseUrl() + "/intranet/allNotifications/");
+      open(Configuration.baseUrl+ "portal/intranet/allNotifications/");
     }
-    evt.waitForAndGetElement(ELEMENT_ALL_NOTIFICATIONS);
+    $(ELEMENT_ALL_NOTIFICATIONS).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -352,21 +354,21 @@ public class IntranetNotification {
 
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
-        if (evt.waitForAndGetElement(ELEMENT_SPACE_MENU_ACTIVITY_STREAM, 3000, 0) != null)
+        if ($(ELEMENT_SPACE_MENU_ACTIVITY_STREAM).is(Condition.visible))
           ;
         break;
       }
-      if (evt.waitForAndGetElement(ELEMENT_SPACE_MENU_ACTIVITY_STREAM, 5000, 0) != null) {
+      if ($(ELEMENT_SPACE_MENU_ACTIVITY_STREAM).is(Condition.visible)) {
         info("Element " + ELEMENT_SPACE_MENU_ACTIVITY_STREAM + " is displayed");
         break;
       }
       info("Retry...[" + repeat + "]");
       if (isPopup) {
         info("View detail notification when joined new space from the popup");
-        evt.click(ELEMENT_NOTIFICATION_POPUP_JOIN_SPACE.replace("$name", fullName));
+        $(byXpath(ELEMENT_NOTIFICATION_POPUP_JOIN_SPACE.replace("$name", fullName))).click();
       } else {
         info("View detail notification when joined new space from all notification page");
-        evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_JOIN_SPACE.replace("$name", fullName));
+        $(byXpath(ELEMENT_NOTIFICATION_ALL_PAGE_JOIN_SPACE.replace("$name", fullName))).click();
       }
 
     }
@@ -383,21 +385,21 @@ public class IntranetNotification {
 
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
-        if (evt.waitForAndGetElement(ELEMENT_SPACE_MENU_ACTIVITY_STREAM, 3000, 0) != null)
+        if ($(ELEMENT_SPACE_MENU_ACTIVITY_STREAM).is(Condition.visible))
           ;
         break;
       }
-      if (evt.waitForAndGetElement(ELEMENT_SPACE_MENU_ACTIVITY_STREAM, 5000, 0) != null) {
+      if ($(ELEMENT_SPACE_MENU_ACTIVITY_STREAM).is(Condition.visible)) {
         info("Element " + ELEMENT_SPACE_MENU_ACTIVITY_STREAM + " is displayed");
         break;
       }
       info("Retry...[" + repeat + "]");
       if (isPopup) {
         info("View detail of asking to join new space from the popup");
-        evt.click(ELEMENT_NOTIFICATION_POPUP_REQUEST_JOIN_SPACE.replace("$name", fullName));
+        $(byXpath(ELEMENT_NOTIFICATION_POPUP_REQUEST_JOIN_SPACE.replace("$name", fullName))).click();
       } else {
         info("View detail of asking to join new space from all notification page");
-        evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_REQUEST_JOIN_SPACE.replace("$name", fullName));
+        $(byXpath(ELEMENT_NOTIFICATION_ALL_PAGE_REQUEST_JOIN_SPACE.replace("$name", fullName))).click();
       }
 
     }
@@ -453,8 +455,8 @@ public class IntranetNotification {
       }
       info("Retry...[" + repeat + "]");
       info("Click on Accept button");
-      $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(fullName)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_INVITATION).click();
-
+      $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(fullName)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_INVITATION).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(fullName)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_INVITATION).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     }
   }
 
@@ -467,18 +469,18 @@ public class IntranetNotification {
 
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
-        if (evt.waitForAndGetElement(ELEMENT_CONNECT_REFUSE_BUTTON.replace("$name", fullName), 3000, 0) == null)
+        if ($(byXpath(ELEMENT_CONNECT_REFUSE_BUTTON.replace("$name", fullName))).is(Condition.not(Condition.visible)))
           ;
         break;
       }
-      if (evt.waitForAndGetElement(ELEMENT_CONNECT_REFUSE_BUTTON.replace("$name", fullName), 5000, 0) == null) {
+      if ($(byXpath(ELEMENT_CONNECT_REFUSE_BUTTON.replace("$name", fullName))).is(Condition.not(Condition.visible))) {
         info("Element " + ELEMENT_CONNECT_ACCEPT_BUTTON.replace("$name", fullName) + " isnot displayed");
         break;
       }
       info("Retry...[" + repeat + "]");
       info("Click on Refuse button");
-      evt.click(ELEMENT_CONNECT_REFUSE_BUTTON.replace("$name", fullName));
-
+      $(byXpath(ELEMENT_CONNECT_REFUSE_BUTTON.replace("$name", fullName))).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(byXpath(ELEMENT_CONNECT_REFUSE_BUTTON.replace("$name", fullName))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     }
   }
 
@@ -600,7 +602,7 @@ public class IntranetNotification {
    */
   public void checkStatusSpace(String status, String space) {
     info("Verify that the status is shown");
-    evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_STATUS_SPACE.replace("$status", status).replace("$space", space));
+    $(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS_SPACE.replace("$status", status).replace("$space", space))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -616,7 +618,7 @@ public class IntranetNotification {
 
   public void checkNotStatusSpace(String status, String space) {
     info("Verify that the status isnot shown");
-    evt.waitForElementNotPresent(ELEMENT_INTRANET_NOTIFICATION_STATUS_SPACE.replace("$status", status).replace("$space", space));
+    $(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS_SPACE.replace("$status", status).replace("$space", space))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
@@ -761,9 +763,9 @@ public class IntranetNotification {
   public void checkAvatarInStatus(String user, boolean isPopUp) {
     info("Verify that last user's avatar is shown in list");
     if (isPopUp)
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_AVATAR.replace("$lastUser", user), 2000, 2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_AVATAR.replace("$lastUser", user))).waitUntil(Condition.visible,Configuration.timeout);
     else
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ALL_AVATAR.replace("$lastUser", user), 2000, 2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ALL_AVATAR.replace("$lastUser", user))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
 }
