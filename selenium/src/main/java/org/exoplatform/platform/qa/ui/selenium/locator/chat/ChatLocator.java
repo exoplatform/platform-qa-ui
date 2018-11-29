@@ -197,6 +197,12 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_CHAT_BIP_NOTIFICATION_BUTTON=   $(byId("notifyBip"));
 
     public static final SelenideElement ELEMENT_CHAT_ON_SITE_NOTIFICATION_BUTTON=   $(byId("notifyOnSite"));
+    public static final SelenideElement ELEMENT_CHAT_NOTIFICATION_DETAIL=   $(byId("chat-notifications-details"));
+
+
+
+
+
 
 }
 

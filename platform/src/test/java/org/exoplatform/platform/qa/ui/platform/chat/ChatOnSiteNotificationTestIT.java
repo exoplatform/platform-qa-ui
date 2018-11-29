@@ -16,9 +16,6 @@ import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-
-import javax.security.auth.Refreshable;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -323,5 +320,58 @@ public class ChatOnSiteNotificationTestIT extends Base {
         refresh();
         ELEMENT_CHAT_SETTING_NOTIFICATION.click();
         assertEquals("OFF",ELEMENT_CHAT_ON_SITE_NOTIFICATION_BUTTON.parent().getText());
+    }
+
+    @Test
+    public void test11_CheckMaximumOfUnreadMessage(){
+        String room= "room"+getRandomNumber();
+        String room1= "room1"+getRandomNumber();
+        String room2= "room2"+getRandomNumber();
+        String room3= "room3"+getRandomNumber();
+        String room4= "room4"+getRandomNumber();
+        String message="message"+getRandomNumber();
+        String username = "username" + getRandomNumber();
+        String password = "123456";
+        String FirstName = "FirstName" + getRandomString();
+        String LastName = "LastName" + getRandomString();
+        String email = username + "@test.com";
+       // String room5= "room5"+getRandomNumber();
+
+        navigationToolbar.goToAddUser();
+        userAddManagement.addUser(username, password, email, FirstName, LastName);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.addRoom(room,username);
+        roomManagement.addRoom(room1,username);
+        roomManagement.addRoom(room2,username);
+        roomManagement.addRoom(room3,username);
+        roomManagement.addRoom(room4,username);
+        switchToParentWindow();
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(username,password);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        ELEMENT_CONTACT_LIST.find(byText(room)).click();
+        chatManagement.sendMessageInRoomOrSpace(room,message);
+        chatManagement.sendMessageInRoomOrSpace(room1,message);
+        chatManagement.sendMessageInRoomOrSpace(room2,message);
+        chatManagement.sendMessageInRoomOrSpace(room3,message);
+        chatManagement.sendMessageInRoomOrSpace(room4,message);
+        switchToParentWindow();
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(PLFData.DATA_USER1,PLFData.DATA_PASS2);
+        ELEMENT_CHAT_ICON_STATUS.click();
+        assertEquals(ELEMENT_CHAT_NOTIFICATION_DETAIL.getCssValue("overflow-y"),"auto");
+        ELEMENT_CHAT_ICON_STATUS.click();
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.deleteRomm(room);
+        roomManagement.deleteRomm(room1);
+        roomManagement.deleteRomm(room2);
+        roomManagement.deleteRomm(room3);
+        roomManagement.deleteRomm(room4);
+        switchToParentWindow();
+        navigationToolbar.goToManageCommunity();
+        userAndGroupManagement.deleteUser(username);
     }
 }
