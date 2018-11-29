@@ -180,8 +180,7 @@ public class SOCNotificationIntranetNotificationIconTestIT extends Base {
 		*Expected Outcome:
 			- The list opens
 			- When opening the notification list, the number of new notifications displayed in the badge is reset.*/
-
-    @Test
+     @Test
     public void test03_OpenTheNotificationsListToResetTheNumberOfNotifications() {
         info("Test 3: Open the notifications list to reset the number of notifications");
         String username1 = "usernamea" + getRandomString();
