@@ -326,4 +326,78 @@ public class SOCNotificationIntranetSpaceInvitationTestIt extends Base {
         navigationToolbar.goToManageCommunity();
         addUsers.deleteUser(username1);
         addUsers.deleteUser(username2);
+    }
+    /**
+     * <li> Case ID:125146.</li>
+     * <li> Test Case Name: Check View All after accepting a Space Invitation.</li>
+     * <li> Pre-Condition: - User A is manager of the space 1
+     * - User A invite User B to join the space 1
+     * - Space Invitation notification is activated in the settings of User B</li>
+     * <li> Post-Condition: </li>
+     */
+    	/*Step Number: 1
+		*Step Name: Step 1 : Check notification list
+		*Step Description:
+			- Login with User B
+			- Click Notifications icon
+			- Check the notifications list
+		*Input Data:
+ 		*Expected Outcome:
+			- A Space Invitation notifications is displayed in the list*/
+			/*Step number: 2
+		*Step Name: Step 2 : Check View All page
+		*Step Description:
+			- Click [Accept]
+			- Go to View All
+		*Input Data:
+ 		*Expected Outcome:
+			- The notifications is displayed / available in the View All page
+			- The message displayed in the last one updated after accepting the request*/
+    @Test
+    public void test04_CheckViewAllAfterAcceptingASpaceInvitation() {
+
+        info("Test 4: Check View All after accepting a Space Invitation");
+        ArrayList<String> arrayUser = new ArrayList<String>();
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String username2 = "usernameb" + getRandomString();
+        String email2 = username2 + "@gmail.com";
+        String password = "123456";
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(username1, password, email1, username1, username1);
+        addUsers.addUser(username2, password, email2, username2, username2);
+        manageLogInOut.signIn(username1, password);
+
+        info("goto My notification");
+        navigationToolbar.goToMyNotifications();
+        myNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.Space_Invitation_Intranet);
+
+        info("User B login");
+        manageLogInOut.signIn(username2, password);
+
+        info("User B create a new space");
+        String spaceName = "spaceName" + getRandomNumber();
+        String spaceDes = "description" + getRandomNumber();
+        homePagePlatform.goToAllSpace();
+        spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+
+        info("User B invites UserA to the space");
+        homePagePlatform.goToSpecificSpace(spaceName);
+        spaceHomePage.goToSpaceSettingTab();
+        refresh();
+        spaceSettingManagement.inviteUser(username1, false, "");
+
+        info("User A login");
+        manageLogInOut.signIn(username1, password);
+        String status = "You're invited to join ";
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.goToAllNotification();
+        intranetNotification.checkStatusSpace(status, spaceName);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(DATA_USER1, DATA_PASS2);
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
     }}
