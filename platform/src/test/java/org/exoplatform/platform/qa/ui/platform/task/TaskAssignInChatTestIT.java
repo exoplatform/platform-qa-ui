@@ -47,6 +47,7 @@ public class TaskAssignInChatTestIT extends Base {
     tasksManagement = new TasksManagement(this);
   }
 
+  @Test
   @Tag("TA-609")
   public void test01_checkAssignTaskInChatContainLinkToTaskApp() {
     String taskName = "task" + getRandomNumber();

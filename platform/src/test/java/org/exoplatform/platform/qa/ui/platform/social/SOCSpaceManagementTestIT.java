@@ -467,8 +467,8 @@ public class SOCSpaceManagementTestIT extends Base {
     open(urlSpace);
     homePagePlatform.refreshUntil($(ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE),Condition.visible,1000);
     $(ELEMENT_SPACE_ACCESS_INFO).shouldHave(Condition.text(mess));
-    $(ELEMENT_SPACE_ACCESS_REQUEST_JOIN_BTN).click();
-    refresh();
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    $(ELEMENT_SPACE_ACCESS_REQUEST_JOIN_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE).shouldNot(Condition.visible);
     $(ELEMENT_SPACE_ACCESS_INFO).shouldNot(Condition.visible);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");

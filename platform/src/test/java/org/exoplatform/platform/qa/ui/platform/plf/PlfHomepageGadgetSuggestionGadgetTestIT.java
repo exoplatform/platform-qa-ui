@@ -287,31 +287,28 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     homePagePlatform.goToConnections();
     connectionsManagement.connectToAUser(username1);
     manageLogInOut.signIn(username1, password);
-    navigationToolbar.goToQuickSearch();
-    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
+    homePagePlatform.refreshUntil(ELEMENT_GADGET_INVITATION,Condition.visible,1000);
     ELEMENT_GADGET_INVITATION.find(byText(DATA_NAME_ROOT)).waitUntil(Condition.visible, Configuration.timeout).hover();
-    ELEMENT_GADGET_INVITATION.find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET)
+    ELEMENT_GADGET_INVITATION.find(byText(DATA_NAME_ROOT)).parent().parent().find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET)
             .waitUntil(Condition.visible, Configuration.timeout)
             .click();
     homePagePlatform.goToConnections();
     connectionsManagement.connectToAUser(username3);
     connectionsManagement.connectToAUser(username4);
     manageLogInOut.signIn(username3, password);
-    navigationToolbar.goToQuickSearch();
-    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
+    homePagePlatform.refreshUntil(ELEMENT_GADGET_INVITATION,Condition.visible,1000);
     ELEMENT_GADGET_INVITATION.find(byText(username1 + " " + username1))
             .waitUntil(Condition.visible, Configuration.timeout)
             .hover();
-    ELEMENT_GADGET_INVITATION.find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET)
+    ELEMENT_GADGET_INVITATION.find(byText(username1 + " " + username1)).parent().parent().find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET)
             .waitUntil(Condition.visible, Configuration.timeout)
             .click();
     manageLogInOut.signIn(username4, password);
-    navigationToolbar.goToQuickSearch();
-    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
+    homePagePlatform.refreshUntil(ELEMENT_GADGET_INVITATION,Condition.visible,1000);
     ELEMENT_GADGET_INVITATION.find(byText(username1 + " " + username1))
             .waitUntil(Condition.visible, Configuration.timeout)
             .hover();
-    ELEMENT_GADGET_INVITATION.find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET)
+    ELEMENT_GADGET_INVITATION.find(byText(username1 + " " + username1)).parent().parent().find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET)
             .waitUntil(Condition.visible, Configuration.timeout)
             .click();
     manageLogInOut.signIn(username, PLFData.password);
@@ -406,8 +403,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-    navigationToolbar.goToQuickSearch();
-    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
+    homePagePlatform.refreshUntil(ELEMENT_GAGET_SUGGESTION_SPACE,Condition.visible,1000);
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).hover();
     String id = ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).parent().parent().getAttribute("id");
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byXpath(ELEMNT_BUTTON_REQUEST_SPACE_FROM_GADGET.replace("{id}", id)))
@@ -430,8 +426,6 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     addUsers.addUser(username2, password, email2, username2, username2);
     manageLogInOut.signIn(username1, password);
     homePagePlatform.refreshUntil(ELEMENT_GADGET_USER_SUGGESTION.find(byText(username2+" "+username2)),Condition.visible,1000);
-    navigationToolbar.goToQuickSearch();
-    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_GADGET_USER_SUGGESTION.find(byText(username2+" "+username2)).parent().hover();
     ELEMENT_GADGET_USER_SUGGESTION.find(byText(username2+" "+username2)).parent().parent().find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET)
             .waitUntil(Condition.appears, Configuration.timeout)
@@ -454,8 +448,6 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     addUsers.addUser(username2, password, email2, username2, username2);
     manageLogInOut.signIn(username1, password);
     homePagePlatform.refreshUntil(ELEMENT_GADGET_USER_SUGGESTION.find(byText(username2+" "+username2)),Condition.visible,1000);
-    navigationToolbar.goToQuickSearch();
-    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_GADGET_USER_SUGGESTION.find(byText(username2+" "+username2)).waitUntil(Condition.visible, Configuration.timeout).parent().hover();
     ELEMENT_GADGET_USER_SUGGESTION.find(byText(username2+" "+username2)).parent().parent().find(ELEMENT_BUTTON_CANCEL_SUGGESTION_USER_FROM_GADGET)
             .waitUntil(Condition.visible, Configuration.timeout)
@@ -472,9 +464,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-    homePagePlatform.refreshUntil(ELEMENT_GADGET_USER_SUGGESTION.find(byText(space1)),Condition.visible,1000);
-    navigationToolbar.goToQuickSearch();
-    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
+    homePagePlatform.refreshUntil(ELEMENT_GAGET_SUGGESTION_SPACE,Condition.visible,1000);
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).parent().hover();
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).parent().parent().find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET).click();
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).shouldNot(Condition.visible);
@@ -489,9 +479,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-    homePagePlatform.refreshUntil(ELEMENT_GADGET_USER_SUGGESTION.find(byText(space1)),Condition.visible,1000);
-    navigationToolbar.goToQuickSearch();
-    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
+    homePagePlatform.refreshUntil(ELEMENT_GAGET_SUGGESTION_SPACE,Condition.visible,1000);
     executeJavaScript("window.scrollBy(0,300)");
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).parent().hover();
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1))
@@ -516,9 +504,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space3, space3);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-    homePagePlatform.refreshUntil(ELEMENT_GADGET_USER_SUGGESTION.find(byText(space2)),Condition.visible,1000);
-    navigationToolbar.goToQuickSearch();
-    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
+    homePagePlatform.refreshUntil(ELEMENT_GAGET_SUGGESTION_SPACE,Condition.visible,1000);
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).shouldNot(Condition.visible);
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space2)).parent().hover();
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space2))
@@ -546,9 +532,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space3, space3);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-    homePagePlatform.refreshUntil(ELEMENT_GADGET_USER_SUGGESTION.find(byText(space2)),Condition.visible,1000);
-    navigationToolbar.goToQuickSearch();
-    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
+    homePagePlatform.refreshUntil(ELEMENT_GAGET_SUGGESTION_SPACE,Condition.visible,1000);
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).shouldNot(Condition.visible);
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space2)).parent().hover();
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space2)).parent().parent().find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET).click();

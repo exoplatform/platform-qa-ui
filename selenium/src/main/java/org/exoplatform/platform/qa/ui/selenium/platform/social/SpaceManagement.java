@@ -148,6 +148,7 @@ public class SpaceManagement {
 
         info("Save all changes");
         $(ELEMENET_SPACE_CREATE_BUTTON).click();
+        $(ELEMENET_SPACE_CREATE_BUTTON).waitUntil(Condition.disappear,Configuration.timeout);
         evt.waitForAndGetElement(By.linkText(name), iTimeout);
     }
 

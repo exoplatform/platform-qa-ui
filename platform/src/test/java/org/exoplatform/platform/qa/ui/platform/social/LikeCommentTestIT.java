@@ -584,7 +584,7 @@ public class LikeCommentTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.searchSpace(space,"");
     ELEMENT_SPACES_LIST.find(byText(space)).click();
-    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    homePagePlatform.refreshUntil($(ELEMENT_WIKI_TAB),Condition.visible,1000);
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().find(byText("(11)")).scrollTo().hover();
     ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.find(byText(username11 + " " + username11)).should(Condition.exist);
     ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.find(byText(username10 + " " + username10)).should(Condition.exist);
@@ -638,7 +638,7 @@ public class LikeCommentTestIT extends Base {
     homePagePlatform.goToHomePage();
     activityStream.likeUnlikeComment(activity1, comment);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    homePagePlatform.refreshUntil($(ELEMENT_ACCOUNT_NAME_LINK),Condition.visible,1000);
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().find(byText("(1)")).hover();
     ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.find(byText("Mary Williams")).should(Condition.exist);
     activityStream.deleteactivity(activity1);
