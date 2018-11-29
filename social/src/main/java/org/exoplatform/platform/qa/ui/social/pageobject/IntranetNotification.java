@@ -455,8 +455,8 @@ public class IntranetNotification {
       }
       info("Retry...[" + repeat + "]");
       info("Click on Accept button");
-      $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(fullName)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_INVITATION).click();
-
+      $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(fullName)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_INVITATION).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(fullName)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_INVITATION).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     }
   }
 
@@ -479,8 +479,8 @@ public class IntranetNotification {
       }
       info("Retry...[" + repeat + "]");
       info("Click on Refuse button");
-      $(byXpath(ELEMENT_CONNECT_REFUSE_BUTTON.replace("$name", fullName))).click();
-
+      $(byXpath(ELEMENT_CONNECT_REFUSE_BUTTON.replace("$name", fullName))).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(byXpath(ELEMENT_CONNECT_REFUSE_BUTTON.replace("$name", fullName))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     }
   }
 

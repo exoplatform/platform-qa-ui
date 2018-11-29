@@ -39,9 +39,7 @@ public class SOCNotificationIntranetSpaceJoinRequestTestIT extends Base {
   NotificationsAdminSeting notificationsAdminSeting;
 
   ManageLogInOut           manageLogInOut;
-
-  UserAndGroupManagement   userAndGroupManagement;
-
+  
   AddUsers                 addUsers;
 
   HomePagePlatform         homePagePlatform;

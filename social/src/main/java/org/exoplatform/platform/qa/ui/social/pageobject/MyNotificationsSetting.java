@@ -489,7 +489,7 @@ public class MyNotificationsSetting {
         evt.waitForAndGetElement(ELEMENT_JOIN_REQ_SPACE_MAIL_ICON, 3000, 1);
         break;
       case Space_Join_Req_intranet:
-        $(ELEMENT_EDIT_REQJOIN_SPACE_ICON).click();
+        $(ELEMENT_EDIT_REQJOIN_SPACE_ICON).waitUntil(Condition.visible,Configuration.timeout).click();
         $(ELEMENT_EDIT_REQJOIN_SPACE_ICON).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
         if($(ELEMENT_EDIT_REQJOIN_SPACE_WEB_CHECKBOX).is(Condition.not(Condition.selected))){
           $(ELEMENT_EDIT_REQJOIN_SPACE_WEB_CHECKBOX).parent().click();}
