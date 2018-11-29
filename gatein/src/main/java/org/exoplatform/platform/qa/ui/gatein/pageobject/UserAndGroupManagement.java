@@ -155,7 +155,7 @@ public class UserAndGroupManagement {
     info("Go to Group tab");
     goToGroupTab();
     info("Select Platform/administration group");
-    selectGroup("Platform/administration");
+    selectGroup("Platform/Administration");
     info("Add user to administration group by type");
     if (membership.length > 0)
       $(byXpath(ELEMENT_SELECT_MEMBERSHIP)).selectOptionByValue(membership[0]);
