@@ -39,8 +39,10 @@ public final class ActivityStreamLocator {
             "//*[@id='boxContainer']//*[contains(text(),\"${name}\")]/../../../..//*[contains(@class,'uiIconClose')]";
 
     // Home page space menu
-    public static final By              ELEMENT_SPACE_MENU_ACTIVITY_PORTLET                  =
-            By.xpath(".//*[@class='uiIconAppSpaceActivityStreamPortlet uiIconDefaultApp']");
+  //  public static final By              ELEMENT_SPACE_MENU_ACTIVITY_PORTLET                  =
+    //        By.xpath(".//*[@class='uiIconAppSpaceActivityStreamPortlet uiIconDefaultApp']");
+
+    public static final By ELEMENT_SPACE_MENU_ACTIVITY_PORTLET= byClassName("uiIconAppSpaceActivityStreamPortlet");
 
     public static final By              ELEMENT_SPACE_MENU_FORUM_PORTLET                     =
             By.xpath(".//*[@class='uiIconAppForumPortlet uiIconDefaultApp']");

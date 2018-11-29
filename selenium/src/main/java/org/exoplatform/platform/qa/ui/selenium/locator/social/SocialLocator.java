@@ -413,8 +413,10 @@ public final class SocialLocator {
                                                                       "//*[contains(@id,'LikeLink')]";
 
   // All notification list
-  public static final By              ELEMENT_ALL_NOTIFICATIONS                                         =
-                                                                By.xpath(".//*[@id='UIIntranetNotificationsPortlet']//*[text()='All Notifications']");
+   public static final By              ELEMENT_ALL_NOTIFICATIONS                                         =
+                                                              By.xpath(".//*[@id='UIIntranetNotificationsPortlet']//*[text()='All Notifications']");
+
+
 
   public static final String          ELEMENT_INTRANET_NOTIFICATION_ALL_AVATAR                          =
                                                                                ".//*[@id='UIIntranetNotificationsPortlet']//*[contains(@class,'avatarXSmall')]//*[contains(@alt,'$lastUser')]";
