@@ -285,7 +285,7 @@ public class NotificationsAdminSeting {
       $(ELEMENT_NEW_USER_NOTIFICATION_SAVE_BTN).click();
       $(ELEMENT_NEW_USER_NOTIFICATION_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
       info("Verify that intranet notification is shown");
-      evt.waitForAndGetElement(ELEMENT_NEW_USER_INTRANET_ICON, 3000, 1);
+      $(ELEMENT_NEW_USER_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);
       break;
     case ConnectionRequest_email:
       evt.click(ELEMENT_CONNECTION_REQUEST_EDIT_BTN);
