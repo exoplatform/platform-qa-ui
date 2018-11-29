@@ -1,4 +1,5 @@
 package org.exoplatform.platform.qa.ui.platform.social.functional;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
@@ -15,9 +16,10 @@ import org.exoplatform.platform.qa.ui.social.pageobject.NotificationActivity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
+
 import static com.codeborne.selenide.Condition.not;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
@@ -65,6 +67,7 @@ public class SOCNotificationIntranetSpaceInvitationTestIt extends Base {
         spaceManagement = new SpaceManagement(this);
         spaceSettingManagement = new SpaceSettingManagement(this);
     }
+
     /**
      * <li> Case ID:125143.</li>
      * <li> Test Case Name: Check Space Invitation notification.</li>
@@ -144,13 +147,11 @@ public class SOCNotificationIntranetSpaceInvitationTestIt extends Base {
 
         info("User A login");
         manageLogInOut.signIn(username1, "123456");
-
         String status = "You're invited to join";
         navigationToolbar.goToIntranetNotification();
         intranetNotification.checkAvatarInStatus(spaceName, true);
         intranetNotification.checkStatusSpace(status, spaceName);
         intranetNotification.checkBtnConnectJoinRequest(spaceName);
-
         intranetNotification.goToDetailInvitationSpace(spaceName, true);
         $(ELEMENT_SPACE_MENU_ACTIVITY_PORTLET).waitUntil(not(Condition.visible), Configuration.timeout);
         manageLogInOut.signOut();
@@ -160,6 +161,7 @@ public class SOCNotificationIntranetSpaceInvitationTestIt extends Base {
         addUsers.deleteUser(username2);
 
     }
+
     /**
      * <li> Case ID:125144.</li>
      * <li> Test Case Name: Accept a Space Invitation from notification.</li>
@@ -168,6 +170,25 @@ public class SOCNotificationIntranetSpaceInvitationTestIt extends Base {
      * - Space Invitation notification is activated in the settings of User B</li>
      * <li> Post-Condition: </li>
      */
+     /*Step number: 2
+		*Step Name: Step 2 : Accept Space invitation
+		*Step Description:
+			- Click [Accept]
+		*Input Data:
+
+		*Expected Outcome:
+			- The invitation is approved and User B is member of Space 1*/
+      /*Step number: 3
+		*Step Name: Step 3 : Check Notification message
+		*Step Description:
+			- Click the notification message
+		*Input Data:
+
+		*Expected Outcome:
+			The notification message is updated to : $AVATARYou joined $SPACE space$DATEWhere :
+			- $AVATAR is the thumbnail of the space
+			- $SPACE is space 1
+			- $DATE is the date of the notification*/
     @Test
     public void test02_AcceptASpaceInvitationFromNotification() {
 
@@ -202,15 +223,8 @@ public class SOCNotificationIntranetSpaceInvitationTestIt extends Base {
         homePagePlatform.goToSpecificSpace(spaceName);
         spaceHomePage.goToSpaceSettingTab();
         refresh();
-        spaceSettingManagement.inviteUser(username1, false,"");
-        /*Step number: 2
-		*Step Name: Step 2 : Accept Space invitation
-		*Step Description:
-			- Click [Accept]
-		*Input Data:
+        spaceSettingManagement.inviteUser(username1, false, "");
 
-		*Expected Outcome:
-			- The invitation is approved and User B is member of Space 1*/
         info("User A login");
         manageLogInOut.signIn(username1, password);
         String status = "You're invited to join ";
@@ -222,19 +236,8 @@ public class SOCNotificationIntranetSpaceInvitationTestIt extends Base {
         homePagePlatform.goToHomePage();
         homePagePlatform.goToSpecificSpace(spaceName);
         $(ELEMENT_SPACE_MENU_ACTIVITY_PORTLET).waitUntil(Condition.visible, Configuration.timeout);
-        /*Step number: 3
-		*Step Name: Step 3 : Check Notification message
-		*Step Description:
-			- Click the notification message
-		*Input Data:
-
-		*Expected Outcome:
-			The notification message is updated to : $AVATARYou joined $SPACE space$DATEWhere :
-			- $AVATAR is the thumbnail of the space
-			- $SPACE is space 1
-			- $DATE is the date of the notification*/
         navigationToolbar.goToIntranetNotification();
-        String statusJoin = "You're invited to join";
+        String statusJoin = "You joined";
         intranetNotification.checkStatusSpace(statusJoin, spaceName);
         intranetNotification.checkAvatarInStatus(spaceName, true);
         manageLogInOut.signOut();
