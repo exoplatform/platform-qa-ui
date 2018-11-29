@@ -14,6 +14,8 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.switchTo;
+import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_NAME_USER1;
+import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_ASSIGNEE_TASK;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -175,4 +177,9 @@ public class TasksManagement {
     Incoming, All_Tasks, Overdue, Today, Tommorrow, Upcoming;
   }
 
+  public void checkTask(String project,String task, String FirstName,String LastName){
+    ELEMENT_LIST_PROJECT.find(byText(project)).click();
+    ELEMENT_TABLE_PROJECT.parent().parent().parent().find(byText(task)).should(Condition.exist).click();
+    ELEMENT_ASSIGNEE_TASK.shouldHave(Condition.text(FirstName + " " + LastName));
+  }
 }

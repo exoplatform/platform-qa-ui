@@ -213,11 +213,13 @@ public class ChatManagement {
   public void CreateTask(String task, String... users) {
     ELEMENT_COLLABORATION_ACTIONS.click();
     ELEMENT_CHAT_CREATE_TASK.click();
+    if (task != null || task != ""){
     $(ELEMENT_CHAT_TASK_NAME).setValue(task);
     for (int i = 0; i <= users.length - 1; i++) {
       ELEMENT_CHAT_ASSIGNEE_TASK.setValue(users[i]);
       ELEMENT_CHAT_RESULT_SEARCH_ASSIGNEE.waitUntil(Condition.visible, Configuration.timeout);
       ELEMENT_CHAT_ASSIGNEE_TASK.pressEnter();
+    }
     }
       ELEMENT_CHAT_DUE_DATE_TASK.click();
       ELEMENT_CHAT_CURRENT_DATE_TASK.click();
@@ -305,7 +307,6 @@ public class ChatManagement {
         break;
     }
     ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.click();
-
   }
 
 }

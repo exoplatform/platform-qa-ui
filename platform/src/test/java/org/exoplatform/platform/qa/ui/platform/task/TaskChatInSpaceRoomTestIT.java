@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.platform.task;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import org.exoplatform.platform.qa.ui.chat.pageobject.ChatManagement;
 import org.exoplatform.platform.qa.ui.chat.pageobject.RoomManagement;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
@@ -47,6 +48,7 @@ public class TaskChatInSpaceRoomTestIT extends Base {
     UserAddManagement userAddManagement;
     SpaceSettingManagement spaceSettingManagement;
     AddUsers addUsers;
+    ChatManagement chatManagement;
 
     @BeforeEach
     public void setupBeforeMethod() {
@@ -63,6 +65,7 @@ public class TaskChatInSpaceRoomTestIT extends Base {
         userAddManagement = new UserAddManagement(this);
         spaceSettingManagement = new SpaceSettingManagement(this);
         addUsers = new AddUsers(this);
+        chatManagement=new ChatManagement(this);
         manageLogInOut = new ManageLogInOut(this);
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
@@ -81,16 +84,11 @@ public class TaskChatInSpaceRoomTestIT extends Base {
         homePagePlatform.goToChat();
         switchTo().window(1);
         ELEMENT_CONTACT_LIST.find(byText(space)).click();
-        ELEMENT_COLLABORATION_ACTIONS.click();
-        ELEMENT_CHAT_CREATE_TASK.click();
-        ELEMENT_CHAT_TASK_NAME.setValue(task);
-        ELEMENT_CHAT_POST_TASK_BUTTON.click();
+        chatManagement.CreateTask(task);
         ELEMENT_CONTAINER_LIST_MESSAGES.find(byLinkText(task)).shouldBe(Condition.visible);
         switchToParentWindow();
         homePagePlatform.goToTaskPage();
-        ELEMENT_LIST_PROJECT.find(byText(space)).click();
-        ELEMENT_TABLE_PROJECT.parent().parent().parent().find(byText(task)).should(Condition.exist).click();
-        ELEMENT_ASSIGNEE_TASK.shouldHave(Condition.text(DATA_NAME_USER1));
+        tasksManagement.checkTask(space,task,"John","Smith");
         homePagePlatform.goToMySpaces();
         spaceManagement.deleteSpace(space, false);
     }
@@ -117,13 +115,7 @@ public class TaskChatInSpaceRoomTestIT extends Base {
         homePagePlatform.goToChat();
         switchTo().window(1);
         ELEMENT_CONTACT_LIST.find(byText(space)).click();
-        ELEMENT_COLLABORATION_ACTIONS.click();
-        ELEMENT_CHAT_CREATE_TASK.click();
-        ELEMENT_CHAT_TASK_NAME.setValue(task);
-        ELEMENT_CHAT_ASSIGNEE_TASK.setValue(FirstName);
-        ELEMENT_CHAT_RESULT_SEARCH_ASSIGNEE.waitUntil(Condition.visible, Configuration.timeout);
-        ELEMENT_CHAT_ASSIGNEE_TASK.pressEnter();
-        ELEMENT_CHAT_POST_TASK_BUTTON.click();
+        chatManagement.CreateTask(task,FirstName);
         ELEMENT_CONTAINER_LIST_MESSAGES.find(byLinkText(task)).shouldBe(Condition.visible);
         switchToParentWindow();
         manageLogInOut.signOut();
@@ -131,9 +123,7 @@ public class TaskChatInSpaceRoomTestIT extends Base {
         $(byClassName("uiIconStatus")).click();
         ELEMENT_CHAT_NOTIFICATION.find(byText(task)).should(Condition.appears);
         homePagePlatform.goToTaskPage();
-        ELEMENT_LIST_PROJECT.find(byText(space)).click();
-        ELEMENT_TABLE_PROJECT.parent().parent().parent().find(byText(task)).should(Condition.exist).click();
-        ELEMENT_ASSIGNEE_TASK.shouldHave(Condition.text(FirstName + " " + LastName));
+        tasksManagement.checkTask(space,task,FirstName,LastName);
         manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToMySpaces();
         spaceManagement.deleteSpace(space, false);
