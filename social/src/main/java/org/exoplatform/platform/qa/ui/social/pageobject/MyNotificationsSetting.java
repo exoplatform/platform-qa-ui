@@ -285,6 +285,7 @@ public class MyNotificationsSetting {
         evt.click(ELEMENT_EDIT_NEWUSER_SAVE_BTN);
         info("Verify that email notification is shown");
         evt.waitForAndGetElement(ELEMENT_NEW_USER_MAIL_ICON, 3000, 1);
+
         break;
       case NewUser_intranet:
         info("Click on Edit button");
@@ -314,20 +315,15 @@ public class MyNotificationsSetting {
         evt.waitForAndGetElement(ELEMENT_CONNECTION_REQ_MAIL_ICON, 3000, 1);
         break;
       case ConnectionRequest_intranet:
-        evt.click(ELEMENT_EDIT_RECREQ_ICON);
-        while (evt.waitForAndGetElement(ELEMENT_EDIT_RECREQ_WEB_CHECKBOX_CHECKED, 2000, 0) == null) {
-          if (repeat > 5)
-            break;
-          info("Check on the checkbox");
-          evt.check(ELEMENT_EDIT_RECREQ_WEB_CHECKBOX, 2);
-          repeat++;
-        }
-        info("Click on Save button");
-        $(ELEMENT_EDIT_RECREQ_SAVE_BTN).click();
-        $(ELEMENT_EDIT_RECREQ_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
-        info("Verify that Intranet notification is shown");
-        evt.waitForAndGetElement(ELEMENT_CONNECTION_REQ_INTRANET_ICON, 3000, 1);
-        break;
+          $(ELEMENT_EDIT_RECREQ_ICON).click();
+          if($(ELEMENT_EDIT_RECREQ_WEB_CHECKBOX).is(Condition.not(Condition.checked)))
+          $(ELEMENT_EDIT_RECREQ_WEB_CHECKBOX).click();
+          info("Click on Save button");
+          $(ELEMENT_EDIT_RECREQ_SAVE_BTN).click();
+          $(ELEMENT_EDIT_RECREQ_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+          info("Verify that Intranet notification is shown");
+          evt.waitForAndGetElement(ELEMENT_CONNECTION_REQ_INTRANET_ICON, 3000, 1);
+          break;
       case AS_Comment_email:
         evt.click(ELEMENT_EDIT_COMMENT_ICON);
         while (evt.waitForAndGetElement(ELEMENT_EDIT_COMMENT_MAIL_CHECKBOX_CHECKED, 2000, 0) == null) {

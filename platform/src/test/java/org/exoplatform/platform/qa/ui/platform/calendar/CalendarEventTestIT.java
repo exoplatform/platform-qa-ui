@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.platform.calendar;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static javax.swing.text.html.CSS.getAttribute;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
@@ -570,9 +571,8 @@ $(byXpath("//*[@id=\"UIEventForm\"]/div[4]/button[2]")).click();
                                               getDate(0, "MM/dd/yyyy"),
                                               getDate(0, "MM/dd/yyyy"),
                                               false);
-    String fromTime =
-                    waitForAndGetElement(ELEMENT_QUICK_INPUT_EVENT_FROM_TIME_INPUT, DEFAULT_TIMEOUT, 1, 2).getAttribute("value");
-    String toTime = waitForAndGetElement(ELEMENT_QUICK_INPUT_EVENT_TO_TIME_INPUT, DEFAULT_TIMEOUT, 1, 2).getAttribute("value");
+    String fromTime = $(ELEMENT_QUICK_INPUT_EVENT_FROM_TIME_INPUT, DEFAULT_TIMEOUT).waitUntil(Condition.visible,Configuration.timeout).getAttribute("value");
+    String toTime = $(ELEMENT_QUICK_INPUT_EVENT_TO_TIME_INPUT, DEFAULT_TIMEOUT).waitUntil(Condition.visible,Configuration.timeout).getAttribute("value");
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
                                               CalendarHomePage.selectViewOption.LIST,

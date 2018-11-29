@@ -98,8 +98,8 @@ public class SOCNotificationsUserSettingsTestIT extends Base {
     manageLogInOut.signIn(username1, password);
     info("goto My notification");
     navigationToolbar.goToMyNotifications();
-    waitForAndGetElement(ELEMENT_SWITCH_ONOFF_MAIL_ON, 5000, 1, 2);
-    waitForAndGetElement(ELEMENT_SWITCH_ONOFF_WEB_ON, 5000, 1, 2);
+    $(ELEMENT_SWITCH_ONOFF_MAIL_ON).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_SWITCH_ONOFF_WEB_ON).waitUntil(Condition.visible,Configuration.timeout);
     waitForAndGetElement(ELEMENT_COLUMN_NOTIFYME);
     waitForAndGetElement(ELEMENT_COLUMN_HOWTO);
     click(ELEMENT_EDIT_NEWUSER_ICON);
@@ -143,7 +143,7 @@ public class SOCNotificationsUserSettingsTestIT extends Base {
     navigationToolbar.goToMyNotifications();
     info("turn off intranet notifications");
     myNotificationsSetting.turnOnOffNotiIntranet(false);
-    waitForAndGetElement(ELEMENT_WEB_VIEWMODE_FALSE, 3000, 1, 2);
+    $(ELEMENT_WEB_VIEWMODE_FALSE).waitUntil(Condition.visible,Configuration.timeout);
     info("add new user");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password1, email1, username1, username1);
