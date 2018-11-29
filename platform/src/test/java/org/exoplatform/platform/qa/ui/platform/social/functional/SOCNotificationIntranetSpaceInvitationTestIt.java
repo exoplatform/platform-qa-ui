@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import static com.codeborne.selenide.Condition.not;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -157,5 +158,88 @@ public class SOCNotificationIntranetSpaceInvitationTestIt extends Base {
         navigationToolbar.goToManageCommunity();
         addUsers.deleteUser(username1);
         addUsers.deleteUser(username2);
-    }}
 
+    }
+    /**
+     * <li> Case ID:125144.</li>
+     * <li> Test Case Name: Accept a Space Invitation from notification.</li>
+     * <li> Pre-Condition: - User A is manager of the space 1
+     * - User A invite User B to join the space 1
+     * - Space Invitation notification is activated in the settings of User B</li>
+     * <li> Post-Condition: </li>
+     */
+    @Test
+    public void test02_AcceptASpaceInvitationFromNotification() {
+
+        info("Test 2: AcceptASpaceInvitationFromNotification");
+        ArrayList<String> arrayUser = new ArrayList<String>();
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String username2 = "usernameb" + getRandomString();
+        String email2 = username2 + "@gmail.com";
+        String password = "123456";
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(username1, password, email1, username1, username1);
+        addUsers.addUser(username2, password, email2, username2, username2);
+        manageLogInOut.signIn(username1, password);
+
+        info("goto My notification");
+        navigationToolbar.goToMyNotifications();
+        myNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.Space_Invitation_Intranet);
+
+        info("User B login");
+        manageLogInOut.signIn(username2, password);
+
+        info("User B create a new space");
+        String spaceName = "spaceName" + getRandomNumber();
+        String spaceDes = "description" + getRandomNumber();
+        homePagePlatform.goToAllSpace();
+        spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+
+        info("User B invites UserA to the space");
+        homePagePlatform.goToSpecificSpace(spaceName);
+        spaceHomePage.goToSpaceSettingTab();
+        refresh();
+        spaceSettingManagement.inviteUser(username1, false,"");
+        /*Step number: 2
+		*Step Name: Step 2 : Accept Space invitation
+		*Step Description:
+			- Click [Accept]
+		*Input Data:
+
+		*Expected Outcome:
+			- The invitation is approved and User B is member of Space 1*/
+        info("User A login");
+        manageLogInOut.signIn(username1, password);
+        String status = "You're invited to join ";
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.checkStatusSpace(status, spaceName);
+
+        info("User A accepted invitation");
+        intranetNotification.acceptRqConnection(spaceName);
+        homePagePlatform.goToHomePage();
+        homePagePlatform.goToSpecificSpace(spaceName);
+        $(ELEMENT_SPACE_MENU_ACTIVITY_PORTLET).waitUntil(Condition.visible, Configuration.timeout);
+        /*Step number: 3
+		*Step Name: Step 3 : Check Notification message
+		*Step Description:
+			- Click the notification message
+		*Input Data:
+
+		*Expected Outcome:
+			The notification message is updated to : $AVATARYou joined $SPACE space$DATEWhere :
+			- $AVATAR is the thumbnail of the space
+			- $SPACE is space 1
+			- $DATE is the date of the notification*/
+        navigationToolbar.goToIntranetNotification();
+        String statusJoin = "You're invited to join";
+        intranetNotification.checkStatusSpace(statusJoin, spaceName);
+        intranetNotification.checkAvatarInStatus(spaceName, true);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(DATA_USER1, DATA_PASS2);
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
+    }}
