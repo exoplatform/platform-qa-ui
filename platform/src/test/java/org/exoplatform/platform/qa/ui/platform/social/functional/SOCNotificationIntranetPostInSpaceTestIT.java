@@ -1,4 +1,5 @@
 package org.exoplatform.platform.qa.ui.platform.social.functional;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -119,6 +120,7 @@ public class SOCNotificationIntranetPostInSpaceTestIT extends Base {
     info("User A invites UserB to the space");
     homePagePlatform.goToSpecificSpace(spaceName);
     spaceHomePage.goToSpaceSettingTab();
+    refresh();
     spaceSettingManagement.inviteUser(username2, false, "");
 
     info("User B login");
@@ -137,7 +139,7 @@ public class SOCNotificationIntranetPostInSpaceTestIT extends Base {
 
     info("User A login");
     manageLogInOut.signIn(username1, password);
-    String status = "has posted the activity";
+    String status = "has posted an activity";
     navigationToolbar.goToIntranetNotification();
     intranetNotification.checkAvatarInStatus(username2, true);
     intranetNotification.checkStatusSpace(status, spaceName);

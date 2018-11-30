@@ -427,7 +427,7 @@ public class NotificationsAdminSeting {
       info("Click on Save button");
       $(ELEMENT_SPACE_POST_NOTIFICATION_SAVE_BTN).click();
       info("Verify that Intranet notification is hidded");
-      $(ELEMENT_SPACE_POST_INTRANET_NOTIFICATION_TITLE).waitUntil(Condition.disappears,Configuration.timeout);
+      $(ELEMENT_SPACE_POST_INTRANET_NOTIFICATION_TITLE).waitUntil(Condition.visible,Configuration.timeout);
       break;
     }
   }
