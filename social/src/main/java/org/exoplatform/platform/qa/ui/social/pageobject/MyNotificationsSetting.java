@@ -1046,8 +1046,6 @@ public class MyNotificationsSetting {
             selectBoxMailType.Daily.name().toString()))).waitUntil(Condition.visible,Configuration.timeout);
     info("Verify that Activity mention's email is disabled");
     $(ELEMENT_MENTION_MAIL_ICON).waitUntil(Condition.visible,Configuration.timeout);
-    info("Verify that Activity like's email is disabled");
-    $(byXpath(ELEMENT_LIKE_SELECTED_BOX_MAIL_ICON.replace("$option", selectBoxMailType.Weekly.name().toString()))).waitUntil(Condition.visible,Configuration.timeout);
     info("Verify that Activity post's email is disabled");
     $(ELEMENT_POST_MAIL_ICON).waitUntil(Condition.visible,Configuration.timeout);
     info("Verify that Space invitation's email is disabled");
