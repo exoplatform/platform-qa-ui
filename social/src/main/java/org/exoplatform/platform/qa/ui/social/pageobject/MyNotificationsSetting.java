@@ -1,5 +1,7 @@
 package org.exoplatform.platform.qa.ui.social.pageobject;
 
+import static com.codeborne.selenide.Condition.not;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_ADD_TOOTLBAR;
@@ -19,7 +21,7 @@ public class MyNotificationsSetting {
 
   /**
    * constructor
-   * 
+   *
    * @param testBase TestBase
    */
   public MyNotificationsSetting(TestBase testBase) {
@@ -289,11 +291,11 @@ public class MyNotificationsSetting {
       case NewUser_intranet:
         info("Click on Edit button");
         $(ELEMENT_EDIT_NEWUSER_ICON).click();
-        if($(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX).is(Condition.not(Condition.checked)))
+        if($(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX).is(not(Condition.checked)))
           $(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX).parent().click();
         info("Click on Save button");
         $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).click();
-        $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+        $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).waitUntil(not(Condition.visible),Configuration.timeout);
         info("Verify that intranet notification is shown");
         evt.waitForAndGetElement(ELEMENT_NEW_USER_INTRANET_ICON, 3000, 1);
         break;
@@ -324,7 +326,7 @@ public class MyNotificationsSetting {
         }
         info("Click on Save button");
         $(ELEMENT_EDIT_RECREQ_SAVE_BTN).click();
-        $(ELEMENT_EDIT_RECREQ_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+        $(ELEMENT_EDIT_RECREQ_SAVE_BTN).waitUntil(not(Condition.visible),Configuration.timeout);
         info("Verify that Intranet notification is shown");
         evt.waitForAndGetElement(ELEMENT_CONNECTION_REQ_INTRANET_ICON, 3000, 1);
         break;
@@ -347,13 +349,13 @@ public class MyNotificationsSetting {
       case AS_Comment_intranet:
         $(ELEMENT_ACCOUNT_NAME_LINK).click();
         $(ELEMENT_EDIT_COMMENT_ICON).click();
-        if($(ELEMENT_EDIT_COMMENT_WEB_CHECKBOX).is(Condition.not(Condition.selected))){
+        if($(ELEMENT_EDIT_COMMENT_WEB_CHECKBOX).is(not(Condition.selected))){
           $(ELEMENT_EDIT_COMMENT_WEB_CHECKBOX).click();
         }
         info("Click on Save button");
         $(ELEMENT_ACCOUNT_NAME_LINK).click();
         $(ELEMENT_EDIT_COMMENT_SAVE_BTN).click();
-        $(ELEMENT_EDIT_COMMENT_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+        $(ELEMENT_EDIT_COMMENT_SAVE_BTN).waitUntil(not(Condition.visible),Configuration.timeout);
         info("Verify that Intranet notification is shown");
         evt.waitForAndGetElement(ELEMENT_COMMENT_INTRANET_ICON, 3000, 1);
         break;
@@ -376,13 +378,13 @@ public class MyNotificationsSetting {
       case AS_Like_intranet:
         $(ELEMENT_ACCOUNT_NAME_LINK).click();
         $(ELEMENT_EDIT_LIKE_ICON).click();
-        $(ELEMENT_EDIT_LIKE_ICON).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
-        if($(ELEMENT_EDIT_LIKE_WEB_CHECKBOX).is(Condition.not(Condition.selected))){
+        $(ELEMENT_EDIT_LIKE_ICON).waitUntil(not(Condition.visible),Configuration.timeout);
+        if($(ELEMENT_EDIT_LIKE_WEB_CHECKBOX).is(not(Condition.selected))){
           $(ELEMENT_EDIT_LIKE_WEB_CHECKBOX).parent().click();
         }
         info("Click on Save button");
         $(ELEMENT_EDIT_LIKE_SAVE_BTN).click();
-        $(ELEMENT_EDIT_LIKE_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+        $(ELEMENT_EDIT_LIKE_SAVE_BTN).waitUntil(not(Condition.visible),Configuration.timeout);
         info("Verify that email notification is shown");
         evt.waitForAndGetElement(ELEMENT_LIKE_INTRANET_ICON, 3000, 1);
         break;
@@ -434,11 +436,11 @@ public class MyNotificationsSetting {
         break;
       case AS_Mention_intranet:
         $(ELEMENT_EDIT_MENTION_ICON).click();
-        if($(ELEMENT_EDIT_MENTION_WEB_CHECKBOX).is(Condition.not(Condition.checked)))
+        if($(ELEMENT_EDIT_MENTION_WEB_CHECKBOX).is(not(Condition.checked)))
           $(ELEMENT_EDIT_MENTION_WEB_CHECKBOX).parent().click();
         info("Click on Save button");
         $(ELEMENT_EDIT_MENTION_SAVE_BTN).click();
-        $(ELEMENT_EDIT_MENTION_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+        $(ELEMENT_EDIT_MENTION_SAVE_BTN).waitUntil(not(Condition.visible),Configuration.timeout);
         info("Verify that email notification is shown");
         $(ELEMENT_MENTION_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);
         break;
@@ -459,7 +461,7 @@ public class MyNotificationsSetting {
         evt.waitForAndGetElement(ELEMENT_POST_SPACE_MAIL_ICON, 3000, 1);
         break;
       case Space_Post_intranet:
-        evt.click(ELEMENT_EDIT_POST_SPACE_ICON);
+        $(ELEMENT_EDIT_POST_SPACE_ICON).click();
         while (evt.waitForAndGetElement(ELEMENT_EDIT_POST_SPACE_WEB_CHECKBOX_CHECKED, 2000, 0) == null) {
           if (repeat > 5)
             break;
@@ -468,10 +470,11 @@ public class MyNotificationsSetting {
           repeat++;
         }
         info("Click on Save button");
-        evt.click(ELEMENT_EDIT_POST_SPACE_SAVE_BTN);
+        $(ELEMENT_EDIT_POST_SPACE_SAVE_BTN).click();
         info("Verify that email notification is shown");
-        evt.waitForAndGetElement(ELEMENT_POST_SPACE_INTRANET_ICON, 3000, 1);
+        $(ELEMENT_POST_SPACE_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);
         break;
+
       case Space_Join_Req_email:
         evt.click(ELEMENT_EDIT_REQJOIN_SPACE_ICON);
         while (evt.waitForAndGetElement(ELEMENT_EDIT_REQJOIN_SPACE_MAIL_CHECKBOX_CHECKED, 2000, 0) == null) {
@@ -490,12 +493,12 @@ public class MyNotificationsSetting {
         break;
       case Space_Join_Req_intranet:
         $(ELEMENT_EDIT_REQJOIN_SPACE_ICON).waitUntil(Condition.visible,Configuration.timeout).click();
-        $(ELEMENT_EDIT_REQJOIN_SPACE_ICON).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
-        if($(ELEMENT_EDIT_REQJOIN_SPACE_WEB_CHECKBOX).is(Condition.not(Condition.selected))){
+        $(ELEMENT_EDIT_REQJOIN_SPACE_ICON).waitUntil(not(Condition.visible),Configuration.timeout);
+        if($(ELEMENT_EDIT_REQJOIN_SPACE_WEB_CHECKBOX).is(not(Condition.selected))){
           $(ELEMENT_EDIT_REQJOIN_SPACE_WEB_CHECKBOX).parent().click();}
         info("Click on Save button");
         $(ELEMENT_EDIT_REQJOIN_SPACE_SAVE_BTN).click();
-        $(ELEMENT_EDIT_REQJOIN_SPACE_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+        $(ELEMENT_EDIT_REQJOIN_SPACE_SAVE_BTN).waitUntil(not(Condition.visible),Configuration.timeout);
         $(ELEMENT_JOIN_REQ_SPACE_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);
         info("Verify that email notification is shown");
         break;
@@ -541,10 +544,10 @@ public class MyNotificationsSetting {
       if (evt.isElementPresent(ELEMENT_SWITCH_ONOFF_MAIL_ON))
         info("Email notification is already ON");
       else
-        evt.click(ELEMENT_SWITCH_ONOFF_MAIL_OFF, 2);
+        $(ELEMENT_SWITCH_ONOFF_MAIL_OFF).parent().click();
     } else {
       if (evt.isElementPresent(ELEMENT_SWITCH_ONOFF_MAIL_ON))
-        evt.click(ELEMENT_SWITCH_ONOFF_MAIL_ON, 2);
+        $(ELEMENT_SWITCH_ONOFF_MAIL_ON).parent().click();
       else
         info("Email notification is already OFF");
     }
@@ -559,7 +562,7 @@ public class MyNotificationsSetting {
       if (evt.isElementPresent(ELEMENT_SWITCH_ONOFF_WEB_ON))
         info("Intranet notification is already ON");
       else {
-        evt.click(ELEMENT_SWITCH_ONOFF_WEB_OFF, 2);
+        $(ELEMENT_SWITCH_ONOFF_WEB_OFF).parent().click();
       }
     } else {
       if (evt.isElementPresent(ELEMENT_SWITCH_ONOFF_WEB_ON)) {
@@ -760,7 +763,7 @@ public class MyNotificationsSetting {
         break;
       case Space_Post_intranet:
         info("Verify that intranet for space post notification is shown");
-        evt.waitForAndGetElement(ELEMENT_POST_SPACE_INTRANET_ICON);
+        $(ELEMENT_POST_SPACE_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);
         info("The notification is shown successfully");
         break;
     }
@@ -906,7 +909,7 @@ public class MyNotificationsSetting {
                 selectBoxMailType.Weekly.name().toString()));
       case AS_Like_intranet:
         info("Verify that Activity like's intranet is disabled");
-        evt.waitForElementNotPresent(ELEMENT_LIKE_INTRANET_ICON);
+        $(ELEMENT_LIKE_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);
         break;
       case AS_Post_email:
         info("Verify that Activity post's email is shown");
@@ -1031,32 +1034,30 @@ public class MyNotificationsSetting {
    */
   public void veriftyAllEmailNotiDefaultEnabled() {
     info("Verify that daily email is disabled");
-    evt.waitForAndGetElement(ELEMENT_NEW_USER_SELECTED_BOX_MAIL_ICON.replace("$option",
-            selectBoxMailType.Daily.name().toString()));
+    $(byXpath(ELEMENT_NEW_USER_SELECTED_BOX_MAIL_ICON.replace("$option",
+            selectBoxMailType.Daily.name().toString()))).waitUntil(Condition.visible,Configuration.timeout);
     info("Verify that Connection request's email is disabled");
-    evt.waitForAndGetElement(ELEMENT_CONNECTION_REQ_MAIL_ICON);
-    evt.waitForAndGetElement(ELEMENT_CONNECTION_REQ_SELECTED_BOX_MAIL_ICON.replace("$option",
-            selectBoxMailType.Daily.name().toString()));
+    $(ELEMENT_CONNECTION_REQ_MAIL_ICON).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_CONNECTION_REQ_SELECTED_BOX_MAIL_ICON.replace("$option",
+            selectBoxMailType.Daily.name().toString()))).waitUntil(Condition.visible,Configuration.timeout);
     info("Verify that Activity Comment's email is disabled");
-    evt.waitForAndGetElement(ELEMENT_COMMENT_MAIL_ICON);
-    evt.waitForAndGetElement(ELEMENT_COMMENT_SELECTED_BOX_MAIL_ICON.replace("$option",
-            selectBoxMailType.Daily.name().toString()));
+    $(ELEMENT_COMMENT_MAIL_ICON).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_COMMENT_SELECTED_BOX_MAIL_ICON.replace("$option",
+            selectBoxMailType.Daily.name().toString()))).waitUntil(Condition.visible,Configuration.timeout);
     info("Verify that Activity mention's email is disabled");
-    evt.waitForAndGetElement(ELEMENT_MENTION_MAIL_ICON);
-    info("Verify that Activity like's email is disabled");
-    evt.waitForAndGetElement(ELEMENT_LIKE_SELECTED_BOX_MAIL_ICON.replace("$option", selectBoxMailType.Weekly.name().toString()));
+    $(ELEMENT_MENTION_MAIL_ICON).waitUntil(Condition.visible,Configuration.timeout);
     info("Verify that Activity post's email is disabled");
-    evt.waitForAndGetElement(ELEMENT_POST_MAIL_ICON);
+    $(ELEMENT_POST_MAIL_ICON).waitUntil(Condition.visible,Configuration.timeout);
     info("Verify that Space invitation's email is disabled");
-    evt.waitForAndGetElement(ELEMENT_INVITATION_SPACE_MAIL_ICON);
-    evt.waitForAndGetElement(ELEMENT_INVI_SPACE_SELECTED_BOX_MAIL_ICON.replace("$option",
-            selectBoxMailType.Weekly.name().toString()));
+   $(ELEMENT_INVITATION_SPACE_MAIL_ICON).waitUntil(Condition.visible,Configuration.timeout);
+   $(byXpath(ELEMENT_INVI_SPACE_SELECTED_BOX_MAIL_ICON.replace("$option",
+            selectBoxMailType.Weekly.name().toString()))).waitUntil(Condition.visible,Configuration.timeout);
     info("Verify that Space join request's email is disabled");
-    evt.waitForAndGetElement(ELEMENT_JOIN_REQ_SPACE_MAIL_ICON);
-    evt.waitForAndGetElement(ELEMENT_JOIN_SPACE_SELECTED_BOX_MAIL_ICON.replace("$option",
-            selectBoxMailType.Weekly.name().toString()));
+   $(ELEMENT_JOIN_REQ_SPACE_MAIL_ICON).waitUntil(Condition.visible,Configuration.timeout);
+   $(byXpath(ELEMENT_JOIN_SPACE_SELECTED_BOX_MAIL_ICON.replace("$option",
+            selectBoxMailType.Weekly.name().toString()))).waitUntil(Condition.visible,Configuration.timeout);
     info("Verify that Space post's email is disabled");
-    evt.waitForAndGetElement(ELEMENT_POST_SPACE_MAIL_ICON);
+   $(ELEMENT_POST_SPACE_MAIL_ICON).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -1065,23 +1066,23 @@ public class MyNotificationsSetting {
    */
   public void veriftyAllIntranetNotiDefaultDisable() {
     info("Verify that New user's intranet is disabled");
-    evt.waitForElementNotPresent(ELEMENT_NEW_USER_INTRANET_ICON);
+    $(ELEMENT_NEW_USER_INTRANET_ICON).waitUntil(not(Condition.visible),Configuration.timeout);
     info("Verify that Connection request's intranet is disabled");
-    evt.waitForElementNotPresent(ELEMENT_CONNECTION_REQ_INTRANET_ICON);
+    $(ELEMENT_CONNECTION_REQ_INTRANET_ICON).waitUntil(not(Condition.visible),Configuration.timeout);
     info("Verify that Activity Comment's intranet is disabled");
-    evt.waitForElementNotPresent(ELEMENT_COMMENT_INTRANET_ICON);
+    $(ELEMENT_COMMENT_INTRANET_ICON).waitUntil(not(Condition.visible),Configuration.timeout);
     info("Verify that Activity mention's intranet is disabled");
-    evt.waitForElementNotPresent(ELEMENT_MENTION_INTRANET_ICON);
+    $(ELEMENT_MENTION_INTRANET_ICON).waitUntil(not(Condition.visible),Configuration.timeout);
     info("Verify that Activity like's intranet is disabled");
-    evt.waitForElementNotPresent(ELEMENT_LIKE_INTRANET_ICON);
+    $(ELEMENT_LIKE_INTRANET_ICON).waitUntil(not(Condition.visible),Configuration.timeout);
     info("Verify that Activity post's intranet is disabled");
-    evt.waitForElementNotPresent(ELEMENT_POST_INTRANET_ICON);
+    $(ELEMENT_POST_INTRANET_ICON).waitUntil(not(Condition.visible),Configuration.timeout);
     info("Verify that Space invitation's intranet is disabled");
-    evt.waitForElementNotPresent(ELEMENT_INVITATION_SPACE_MAIL_ICON);
+    $(ELEMENT_INVITATION_SPACE_INTRANET_ICON).waitUntil(not(Condition.visible),Configuration.timeout);
     info("Verify that Space join's intranet is disabled");
-    evt.waitForElementNotPresent(ELEMENT_JOIN_REQ_SPACE_INTRANET_ICON);
+    $(ELEMENT_JOIN_REQ_SPACE_INTRANET_ICON).waitUntil(not(Condition.visible),Configuration.timeout);
     info("Verify that Space post's intranet is disabled");
-    evt.waitForElementNotPresent(ELEMENT_POST_SPACE_INTRANET_ICON);
+    $(ELEMENT_POST_SPACE_INTRANET_ICON).waitUntil(not(Condition.visible),Configuration.timeout);
   }
 
   /**
@@ -1090,19 +1091,19 @@ public class MyNotificationsSetting {
    */
   public void veriftyAllIntranetNotiDefaultEnabled() {
     info("Verify that Connection request's intranet is enabled");
-    evt.waitForAndGetElement(ELEMENT_CONNECTION_REQ_INTRANET_ICON);
+    $(ELEMENT_CONNECTION_REQ_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);
     info("Verify that Activity Comment's intranet is enabled");
-    evt.waitForAndGetElement(ELEMENT_COMMENT_INTRANET_ICON);
+    $(ELEMENT_COMMENT_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);;
     info("Verify that Activity mention's intranet is enabled");
-    evt.waitForAndGetElement(ELEMENT_MENTION_INTRANET_ICON);
+    $(ELEMENT_MENTION_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);;
     info("Verify that Activity post's intranet is enabled");
-    evt.waitForAndGetElement(ELEMENT_POST_INTRANET_ICON);
+    $(ELEMENT_POST_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);;
     info("Verify that Space invitation's intranet is enabled");
-    evt.waitForAndGetElement(ELEMENT_INVITATION_SPACE_INTRANET_ICON);
+    $(ELEMENT_INVITATION_SPACE_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);;
     info("Verify that Space join's intranet is enabled");
-    evt.waitForAndGetElement(ELEMENT_JOIN_REQ_SPACE_INTRANET_ICON);
+    $(ELEMENT_JOIN_REQ_SPACE_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);;
     info("Verify that Space post's intranet is enabled");
-    evt.waitForAndGetElement(ELEMENT_POST_SPACE_INTRANET_ICON);
+    $(ELEMENT_POST_SPACE_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);;
   }
 
   public enum myNotiType {
