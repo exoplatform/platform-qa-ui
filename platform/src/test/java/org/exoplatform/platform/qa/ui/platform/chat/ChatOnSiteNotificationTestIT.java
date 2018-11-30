@@ -259,6 +259,7 @@ public class ChatOnSiteNotificationTestIT extends Base {
         switchTo().window(1);
         refresh();
         ELEMENT_CHAT_SETTING_NOTIFICATION.click();
+        ELEMENT_CHAT_DO_NOT_DISTURB_BUTTON_NOTIFICATION.parent().waitUntil(Condition.visible,Configuration.timeout);
         assertEquals("ON",ELEMENT_CHAT_DO_NOT_DISTURB_BUTTON_NOTIFICATION.parent().getText());
         ELEMENT_CHAT_DO_NOT_DISTURB_BUTTON_NOTIFICATION.parent().click();
         ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.click();
