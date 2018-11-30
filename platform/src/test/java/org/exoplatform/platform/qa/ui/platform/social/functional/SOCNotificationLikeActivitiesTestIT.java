@@ -592,7 +592,7 @@ public class SOCNotificationLikeActivitiesTestIT extends Base {
         String link = "https://www.google.fr/";
         activityStream.addActivity(textDes, link);
         $(byXpath(ELEMENT_ACTIVITY_TITLE.replace("${text}",textDes).replace("${file}",link))).waitUntil(Condition.visible, Configuration.timeout);
-        String title=$(ELEMENT_TITLE_BOX.replace("${title}",textDes)).getText();
+        String title=$(byXpath(ELEMENT_TITLE_BOX.replace("${title}",textDes))).getText();
         manageLogInOut.signIn(username2, password);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(username1);
@@ -802,7 +802,7 @@ public class SOCNotificationLikeActivitiesTestIT extends Base {
 			- $USER is User B
 			- $ACTIVITY is the activity title/message : the name of the event
 			- $DATE is the date of the activity*/
-        manageLogInOut.signIn(DATA_USER1, DATA_PASS);
+        manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
         navigationToolbar.goToIntranetNotification();
        String status = username1+" "+username1+" "+"likes your activity. ";
         intranetNotification.checkAvatarInStatus(username1,true);
