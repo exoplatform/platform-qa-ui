@@ -1047,7 +1047,7 @@ public class MyNotificationsSetting {
     info("Verify that Activity mention's email is disabled");
     $(ELEMENT_MENTION_MAIL_ICON).waitUntil(Condition.visible,Configuration.timeout);
     info("Verify that Activity like's email is disabled");
-    $(byXpath(ELEMENT_LIKE_SELECTED_BOX_MAIL_ICON.replace("$option", selectBoxMailType.Weekly.name().toString()))).waitUntil(not(Condition.visible),Configuration.timeout);
+    $(byXpath(ELEMENT_LIKE_SELECTED_BOX_MAIL_ICON.replace("$option", selectBoxMailType.Weekly.name().toString()))).waitUntil(Condition.visible,Configuration.timeout);
     info("Verify that Activity post's email is disabled");
     $(ELEMENT_POST_MAIL_ICON).waitUntil(Condition.visible,Configuration.timeout);
     info("Verify that Space invitation's email is disabled");
@@ -1080,7 +1080,7 @@ public class MyNotificationsSetting {
     info("Verify that Activity post's intranet is disabled");
     $(ELEMENT_POST_INTRANET_ICON).waitUntil(not(Condition.visible),Configuration.timeout);
     info("Verify that Space invitation's intranet is disabled");
-    $(ELEMENT_INVITATION_SPACE_MAIL_ICON).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_INVITATION_SPACE_INTRANET_ICON).waitUntil(not(Condition.visible),Configuration.timeout);
     info("Verify that Space join's intranet is disabled");
     $(ELEMENT_JOIN_REQ_SPACE_INTRANET_ICON).waitUntil(not(Condition.visible),Configuration.timeout);
     info("Verify that Space post's intranet is disabled");
@@ -1093,19 +1093,19 @@ public class MyNotificationsSetting {
    */
   public void veriftyAllIntranetNotiDefaultEnabled() {
     info("Verify that Connection request's intranet is enabled");
-    evt.waitForAndGetElement(ELEMENT_CONNECTION_REQ_INTRANET_ICON);
+    $(ELEMENT_CONNECTION_REQ_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);
     info("Verify that Activity Comment's intranet is enabled");
-    evt.waitForAndGetElement(ELEMENT_COMMENT_INTRANET_ICON);
+    $(ELEMENT_COMMENT_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);;
     info("Verify that Activity mention's intranet is enabled");
-    evt.waitForAndGetElement(ELEMENT_MENTION_INTRANET_ICON);
+    $(ELEMENT_MENTION_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);;
     info("Verify that Activity post's intranet is enabled");
-    evt.waitForAndGetElement(ELEMENT_POST_INTRANET_ICON);
+    $(ELEMENT_POST_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);;
     info("Verify that Space invitation's intranet is enabled");
-    evt.waitForAndGetElement(ELEMENT_INVITATION_SPACE_INTRANET_ICON);
+    $(ELEMENT_INVITATION_SPACE_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);;
     info("Verify that Space join's intranet is enabled");
-    evt.waitForAndGetElement(ELEMENT_JOIN_REQ_SPACE_INTRANET_ICON);
+    $(ELEMENT_JOIN_REQ_SPACE_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);;
     info("Verify that Space post's intranet is enabled");
-    evt.waitForAndGetElement(ELEMENT_POST_SPACE_INTRANET_ICON);
+    $(ELEMENT_POST_SPACE_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);;
   }
 
   public enum myNotiType {

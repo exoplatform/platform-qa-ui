@@ -238,4 +238,5 @@ public class SOCNotificationIntranetUserSettingsTestIT extends Base {
     manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
-  }}
+  }
+}
