@@ -155,12 +155,11 @@ public class UserAndGroupManagement {
     info("Go to Group tab");
     goToGroupTab();
     info("Select Platform/administration group");
-    selectGroup("Platform/administration");
+    selectGroup("Platform/Administration");
     info("Add user to administration group by type");
     if (membership.length > 0)
       $(byXpath(ELEMENT_SELECT_MEMBERSHIP)).selectOptionByValue(membership[0]);
-    homePagePlatform.refreshUntil($(ELEMENT_INPUT_USERNAME),Condition.visible,1000);
-    $(ELEMENT_INPUT_USERNAME).sendKeys(user);
+    $(ELEMENT_INPUT_USERNAME).setValue(user);
     $(ELEMENT_SAVE_BUTTON_2).click();
     String addedUser = ELEMENT_ADDED_GROUP_USER_IN_TABLE.replace("${username}", user);
     if ($(ELEMENT_MSG_TOTAL_PAGES).is(Condition.visible)) {

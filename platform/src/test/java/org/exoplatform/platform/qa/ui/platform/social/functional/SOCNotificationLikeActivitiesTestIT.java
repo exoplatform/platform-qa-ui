@@ -669,7 +669,7 @@ public class SOCNotificationLikeActivitiesTestIT extends Base {
         wikiManagement.goToSourceEditor();
         sourceTextEditor.addSimplePageWithAutoSaveStatus(name,content);
         wikiManagement.saveAddPage();
-        $(ELEMENT_TREE_WIKI_NAME.replace("${name}",name)).waitUntil(Condition.visible,Configuration.timeout);
+        $(byXpath(ELEMENT_TREE_WIKI_NAME.replace("${name}",name))).waitUntil(Condition.visible,Configuration.timeout);
 
         manageLogInOut.signIn(username2, password);
         homePagePlatform.goToConnections();
@@ -717,6 +717,10 @@ public class SOCNotificationLikeActivitiesTestIT extends Base {
 			- The activity is displayed in the activity viewer with all comment expanded.*/
         intranetNotification.goToDetailLikeNotification(username2+" "+username2, true);
         notificationActivity.checkLikeInActivityViewer("1");
+        manageLogInOut.signIn(DATA_USER1, "gtngtn");
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
     }
 
     /**
@@ -751,7 +755,7 @@ public class SOCNotificationLikeActivitiesTestIT extends Base {
         wikiManagement.goToSourceEditor();
         sourceTextEditor.addSimplePageWithAutoSaveStatus(name,content);
         wikiManagement.saveAddPage();
-        $(ELEMENT_TREE_WIKI_NAME.replace("${name}",name)).waitUntil(Condition.visible,Configuration.timeout);
+        $(byXpath(ELEMENT_TREE_WIKI_NAME.replace("${name}",name))).waitUntil(Condition.visible,Configuration.timeout);
 
         manageLogInOut.signIn(username1, password1);
         homePagePlatform.goToConnections();
@@ -800,7 +804,9 @@ public class SOCNotificationLikeActivitiesTestIT extends Base {
 			- The activity is displayed in the activity viewer with all comment expanded.*/
         intranetNotification.goToDetailLikeNotification(username1+" "+username1, true);
         notificationActivity.checkLikeInActivityViewer("1");
-
+       manageLogInOut.signIn(DATA_USER1, "gtngtn");
+       navigationToolbar.goToManageCommunity();
+       addUsers.deleteUser(username1);
     }
 
 
@@ -1140,7 +1146,11 @@ public class SOCNotificationLikeActivitiesTestIT extends Base {
         String status = "likes your activity. ";
         intranetNotification.checkAvatarInStatus(username3,false);
         intranetNotification.checkStatus(status, username3);
-        intranetNotification.checkActivityTitleInStatus(activity,false);
+        intranetNotification.checkActivityTitleInStatus(activity,false);manageLogInOut.signIn(DATA_USER1, "gtngtn");
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
+        addUsers.deleteUser(username3);
     }
     /**
      *<li> Case ID:125095.</li>
