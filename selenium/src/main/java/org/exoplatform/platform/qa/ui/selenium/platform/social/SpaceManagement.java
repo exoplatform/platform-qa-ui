@@ -277,7 +277,7 @@ public class SpaceManagement {
                 .click();
         if (isVerify.length > 0) {
             info("Verify that request to join button is hidden and request pending status is shown");
-            evt.waitForAndGetElement(ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_PENDING.replace("${space}", space), 3000, 1);
+           $(byXpath(ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_PENDING.replace("${space}", space))).waitUntil(Condition.visible,Configuration.timeout);
         }
     }
 
