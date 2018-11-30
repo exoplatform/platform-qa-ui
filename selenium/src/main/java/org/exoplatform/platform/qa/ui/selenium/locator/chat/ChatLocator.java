@@ -45,14 +45,15 @@ public class ChatLocator {
 
     public static final SelenideElement ELEMENT_CHAT_STATUS_AVAILABLE = $(byClassName("chat-status-available"));
 
-    public static final SelenideElement ELEMENT_CHAT_STATUS_DONOTDISTURB = $(byClassName("chat-status-donotdisturb"));
+    public static final SelenideElement ELEMENT_CHAT_STATUS_DONOTDISTURB = $(byClassName("user-donotdisturb"));
 
     public static final SelenideElement ELEMENT_CHAT_STATUS_AWAY = $(byClassName("chat-status-away"));
 
     public static final SelenideElement ELEMENT_CHAT_STATUS_INVISIBLE = $(byClassName("chat-status-invisible"));
   public static final SelenideElement ELEMENT_MORE_ACTION                   = $(byClassName("uiIconVerticalDots"));
   public static final SelenideElement ELEMENT_LEAVEROOM_ACTION           = $(byClassName("room-setting-action-leaveRoom"));
-    public static final SelenideElement ELEMENT_CHAT_ROOM_STARTSTOPMEETING = $(byId("chat-record-button"));
+
+    public static final SelenideElement ELEMENT_CHAT_ROOM_STARTSTOPMEETING = $(byXpath("//*[@id=\"room-detail\"]/div[2]/div[2]/div[3]/ul/li[1]/a"));
 
     public static final SelenideElement ELEMENT_CHAT_LINK_TEXT_OPEN_WIKI_APP = $(byLinkText("Open Wiki application"));
 
@@ -173,11 +174,36 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_CHAT_SELECT_FILE= $(byXpath("//*[@id=\"appComposerForm\"]/div[1]/div[2]/a[1]"));
     public static final SelenideElement ELEMENT_CHAT_CANCEL_UPLOAD_FILE_BUTTON= $(byXpath(" //*[@id=\"appComposerForm\"]/div[1]/div[2]/a[2]"));
     public static final SelenideElement ELEMENT_CHAT_SHARE_LINK_BUTTON= $(byXpath("//*[@id=\"appComposerForm\"]/div[2]/button"));
-
+    public static final SelenideElement ELEMENT_CHAT_NOTIFICATION_NUMBER = $(byClassName("notif-total"));
+    public static final SelenideElement ELEMENT_MINI_CHAT = $(byClassName("mini-chat"));
 
   public static final SelenideElement ELEMENT_MORE_ACTIONS=$(byClassName("uiIconVerticalDots"));
   public static final SelenideElement ELEMENT_BANNER_CHAT=$(byClassName("uiIconBannerChat"));
   public static final SelenideElement ELEMENT_CLOSE_WINDOW_ROOM=$(byXpath("//*[@id=\"room-detail\"]/div[4]/div/div[1]/a"));
   public static final SelenideElement ELEMENT_NO_BUTTON_LEAVEROOM = $(byXpath("//*[@id=\"team-delete-button-cancel\"]"));
+  public static final SelenideElement ELEMENT_CHAT_EMOTICON = $(byClassName("uiIconChatSmile"));
+  public static final SelenideElement ELEMENT_CHAT_COMPOSER_EMOTICON= $(byClassName("composer-emoji-panel"));
+    public static final SelenideElement ELEMENT_CHAT_SEARCH_FIELD=  $(byXpath("//*[@id=\"chat-application\"]/div[1]/div[2]/div[1]/input"));
+    public static final SelenideElement ELEMENT_CHAT_SETTING_NOTIFICATION=$(byClassName("uiIconGear"));
+
+    public static final SelenideElement ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION=$(byXpath("//*[@id=\"chatPreferences\"]/div/div[2]/div/div[1]"));
+
+    public static final SelenideElement ELEMENT_CHAT_BADGE_NOTIFICATION=  $(byXpath("//*[@id=\"chatApplicationNotification\"]/div[1]/a/div/span"));
+    public static final SelenideElement ELEMENT_CHAT_DO_NOT_DISTURB_BUTTON_NOTIFICATION=   $(byId("notifyDonotdisturb"));
+
+    public static final SelenideElement ELEMENT_CHAT_DESKTOP_NOTIFICATION_BUTTON_=   $(byId("notifyDesktop"));
+
+    public static final SelenideElement ELEMENT_CHAT_BIP_NOTIFICATION_BUTTON=   $(byId("notifyBip"));
+
+    public static final SelenideElement ELEMENT_CHAT_ON_SITE_NOTIFICATION_BUTTON=   $(byId("notifyOnSite"));
+    public static final SelenideElement ELEMENT_CHAT_NOTIFICATION_DETAIL=   $(byId("chat-notifications-details"));
+
+
+
+
+
 
 }
+
+
+
