@@ -199,6 +199,7 @@ public class SOCNotificationIntranetPostInSpaceTestIT extends Base {
     info("User A invites UserB to the space");
     homePagePlatform.goToSpecificSpace(spaceName);
     spaceHomePage.goToSpaceSettingTab();
+    refresh();
     spaceSettingManagement.goToMemberTab();
     spaceSettingManagement.inviteUser(username2, false, "");
 
