@@ -11,6 +11,8 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
+import com.codeborne.selenide.Selectors;
+import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator;
 import org.openqa.selenium.By;
@@ -193,7 +195,6 @@ public class ChatManagement {
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byClassName("uiIconChatLink")).waitUntil(Condition.appear, Configuration.timeout);
   }
 
-
   public void checkPopUpAssignTask() {
     ELEMENT_ASSIGN_TASK_WINDOW.waitUntil(Condition.appear, Configuration.timeout);
     ELEMENT_ASSIGN_TASK_CONTAINER.find(byXpath("//input[@placeholder='Task Title']")).waitUntil(Condition.appear, Configuration.timeout);
@@ -223,5 +224,88 @@ public class ChatManagement {
       ELEMENT_CHAT_POST_TASK_BUTTON.click();
       ELEMENT_CONTAINER_LIST_MESSAGES.find(byLinkText(task)).shouldBe(Condition.visible);
     }
+    public void sendSmile(String Emoticon){
+    ELEMENT_CHAT_EMOTICON.click();
+    switch (Emoticon) {
+      case "smile":
+        ELEMENT_CHAT_COMPOSER_EMOTICON.find(byClassName("emoticon-smile")).click();
+        break;
+      case "wink":
+        ELEMENT_CHAT_COMPOSER_EMOTICON.find(byClassName("emoticon-wink")).click();
+        break;
+      case "speechless":
+        ELEMENT_CHAT_COMPOSER_EMOTICON.find(byClassName("emoticon-speechless")).click();
+        break;
+      case "surprise":
+        ELEMENT_CHAT_COMPOSER_EMOTICON.find(byClassName("emoticon-surprise")).click();
+        break;
+      case "smile-tongue":
+        ELEMENT_CHAT_COMPOSER_EMOTICON.find(byClassName("emoticon-smile-tongue")).click();
+        break;
+      case "emoticon-flaugh":
+        ELEMENT_CHAT_COMPOSER_EMOTICON.find(byClassName("emoticon-flaugh")).click();
+        break;
+      case "cool":
+        ELEMENT_CHAT_COMPOSER_EMOTICON.find(byClassName("emoticon-cool")).click();
+        break;
+      case "crying":
+        ELEMENT_CHAT_COMPOSER_EMOTICON.find(byClassName("emoticon-crying")).click();
+        break;
+      case "beer":
+        ELEMENT_CHAT_COMPOSER_EMOTICON.find(byClassName("emoticon-beer")).click();
+        break;
+      case "bug":
+        ELEMENT_CHAT_COMPOSER_EMOTICON.find(byClassName(" emoticon-bug")).click();
+        break;
+      case "cake":
+        ELEMENT_CHAT_COMPOSER_EMOTICON.find(byClassName("emoticon-cake")).click();
+        break;
+      case "coffee":
+        ELEMENT_CHAT_COMPOSER_EMOTICON.find(byClassName("emoticon-coffee")).click();
+        break;
+      case "star":
+        ELEMENT_CHAT_COMPOSER_EMOTICON.find(byClassName(" emoticon-star")).click();
+        break;
+      case "heart":
+        ELEMENT_CHAT_COMPOSER_EMOTICON.find(byClassName("emoticon-heart")).click();
+        break;
+      case "raise-up":
+        ELEMENT_CHAT_COMPOSER_EMOTICON.find(byClassName("emoticon-raise-up")).click();
+        break;
+      case "raise-down":
+        ELEMENT_CHAT_COMPOSER_EMOTICON.find(byClassName(" emoticon-raise-down")).click();
+        break;
+      case "devil":
+        ELEMENT_CHAT_COMPOSER_EMOTICON.find(byClassName(" emoticon-devil")).click();
+        break;
+    }
+    ELEMENT_CHAT_MESSAGE_INPUT.pressEnter();
+    ELEMENT_CHAT_LIST_MSG.find(byClassName("emoticon-"+Emoticon)).waitUntil(Condition.appear,Configuration.timeout);
+  }
+
+  public void checkMessageNotification(String message){
+    ELEMENT_CHAT_NOTIFICATION_NUMBER.waitUntil(Condition.appear, Configuration.timeout).click();
+    $(byText(message)).waitUntil(Condition.appear, Configuration.timeout).click();
+  }
+
+  public void changeChatSettings(String Notification){
+    ELEMENT_CHAT_SETTING_NOTIFICATION.click();
+    switch (Notification) {
+      case "DoNotDisturbNotication":
+        ELEMENT_CHAT_DO_NOT_DISTURB_BUTTON_NOTIFICATION.parent().click();
+        break;
+      case "DesktopNotification":
+        ELEMENT_CHAT_DESKTOP_NOTIFICATION_BUTTON_.parent().click();
+        break;
+      case "BipNotification":
+        ELEMENT_CHAT_BIP_NOTIFICATION_BUTTON.parent().click();
+        break;
+      case "OnSiteNotification":
+        ELEMENT_CHAT_ON_SITE_NOTIFICATION_BUTTON.parent().click();
+        break;
+    }
+    ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.click();
 
   }
+
+}
