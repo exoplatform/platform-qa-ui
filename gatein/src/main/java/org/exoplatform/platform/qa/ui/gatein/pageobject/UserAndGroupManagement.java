@@ -22,6 +22,7 @@ package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_NEXT_PAGE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -29,6 +30,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 
 import java.util.ArrayList;
 
+import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.openqa.selenium.By;
 
 import com.codeborne.selenide.Condition;
@@ -51,6 +53,8 @@ public class UserAndGroupManagement {
 
   public Dialog                dialog;
 
+  public HomePagePlatform homePagePlatform;
+
   private ElementEventTestBase evt;
 
   private PlatformBase         plfBase;
@@ -61,6 +65,7 @@ public class UserAndGroupManagement {
     this.alert = new ManageAlert(testBase);
     this.dialog = new Dialog(testBase);
     this.plfBase = new PlatformBase(testBase);
+    this.homePagePlatform=new HomePagePlatform(testBase);
 
   }
 
@@ -118,7 +123,7 @@ public class UserAndGroupManagement {
     String[] groups = groupsPath.split("/");
     for (String groupSelect : groups) {
       info("Select group:" + groupSelect);
-      evt.click(ELEMENT_GROUP_MANAGEMENT_SELECT_GROUP.replace("${name}", groupSelect));
+     $(byXpath(ELEMENT_GROUP_MANAGEMENT_SELECT_GROUP.replace("${name}", groupSelect))).click();
     }
 
   }
@@ -149,20 +154,18 @@ public class UserAndGroupManagement {
   public void addUserAdmin(String user, String... membership) {
     info("Go to Group tab");
     goToGroupTab();
-    evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     info("Select Platform/administration group");
-    selectGroup("Platform/administration");
+    selectGroup("Platform/Administration");
     info("Add user to administration group by type");
-    evt.type(ELEMENT_INPUT_USERNAME, user, true);
     if (membership.length > 0)
-      evt.select(ELEMENT_SELECT_MEMBERSHIP, membership[0]);
-    evt.scrollToElement(evt.waitForAndGetElement(ELEMENT_SAVE_BUTTON_2), this.testBase.getExoWebDriver().getWebDriver());
-    evt.click(ELEMENT_SAVE_BUTTON_2);
+      $(byXpath(ELEMENT_SELECT_MEMBERSHIP)).selectOptionByValue(membership[0]);
+    $(ELEMENT_INPUT_USERNAME).setValue(user);
+    $(ELEMENT_SAVE_BUTTON_2).click();
     String addedUser = ELEMENT_ADDED_GROUP_USER_IN_TABLE.replace("${username}", user);
-    if (testBase.isTextPresent(ELEMENT_MSG_TOTAL_PAGES)) {
+    if ($(ELEMENT_MSG_TOTAL_PAGES).is(Condition.visible)) {
       plfBase.usePaginator(addedUser, ELEMENT_USER_NOT_FOUND.replace("${user}", user));
     } else {
-      evt.waitForAndGetElement(addedUser);
+     $(byXpath(addedUser)).waitUntil(Condition.visible,Configuration.timeout);
     }
     info("User is added to administration group");
   }

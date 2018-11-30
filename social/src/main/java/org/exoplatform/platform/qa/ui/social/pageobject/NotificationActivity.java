@@ -1,11 +1,16 @@
 package org.exoplatform.platform.qa.ui.social.pageobject;
 
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_TREE_WIKI_NAME;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.util.ArrayList;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -119,8 +124,8 @@ public class NotificationActivity {
    */
   public void checkLikeInActivityViewer(String number) {
     info("Check like in Activity viewer");
-
-    assert (evt.waitForAndGetElement(ELEMENT_LIKE_IN_ACTIVITY_VIEWER).getText().contains(number));
+    $(ELEMENT_ACTIVITY_ICON_LIKE).parent().shouldHave(Condition.text(number));
+    //assert(waitForAndGetElement(ELEMENT_LIKE_IN_ACTIVITY_VIEWER).getText().contains(number));
   }
 
   /**
