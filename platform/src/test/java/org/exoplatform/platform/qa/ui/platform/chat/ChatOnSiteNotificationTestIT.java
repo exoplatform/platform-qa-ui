@@ -9,7 +9,6 @@ import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
-import org.exoplatform.platform.qa.ui.selenium.platform.ConnectionsManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
@@ -104,15 +103,11 @@ public class ChatOnSiteNotificationTestIT extends Base {
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.addRoom(room, username);
-        ELEMENT_CHAT_EMOTICON.click();
-        ELEMENT_CHAT_COMPOSER_EMOTICON.find(byClassName("emoticon-smile")).click();
-        ELEMENT_CHAT_MESSAGE_INPUT.pressEnter();
-        ELEMENT_CHAT_LIST_MSG.find(byClassName("emoticon-smile")).waitUntil(Condition.appear,Configuration.timeout);
+        chatManagement.sendSmile("smile");
         switchToParentWindow();
         manageLogInOut.signOut();
         manageLogInOut.signInCas(username, password);
-        ELEMENT_CHAT_NOTIFICATION_NUMBER.waitUntil(Condition.appear, Configuration.timeout).click();
-        $(byText(":)")).waitUntil(Condition.appear, Configuration.timeout).click();
+        chatManagement.checkMessageNotification(":)");
         ELEMENT_MINI_CHAT.waitUntil(Condition.appear, Configuration.timeout);
         $(byClassName("emoticon-smile")).should(Condition.exist);
         ELEMENT_MINI_CHAT.find(byClassName("uiIconClose")).click();
@@ -200,9 +195,7 @@ public class ChatOnSiteNotificationTestIT extends Base {
         userAddManagement.addUser(username, password, email, Firstname, LastName);
         homePagePlatform.goToChat();
         switchTo().window(1);
-        ELEMENT_CHAT_SETTING_NOTIFICATION.click();
-        ELEMENT_CHAT_ON_SITE_BUTTON_NOTIFICATION.parent().click();
-        ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.click();
+        chatManagement.changeChatSettings("OnSiteNotification");
         switchToParentWindow();
         manageLogInOut.signOut();
         manageLogInOut.signInCas(username,password);
@@ -245,7 +238,7 @@ public class ChatOnSiteNotificationTestIT extends Base {
         switchToParentWindow();
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1,PLFData.DATA_PASS2);
-        $(byXpath("//*[@id=\"chatApplicationNotification\"]/div[1]/a/div/span")).shouldBe(Condition.visible);
+        $(byXpath("//*[@id=\"chatApplicationNotification\"]/div[1]/a/div/span")).shouldNotBe(Condition.visible);
         switchTo().window(1);
         refresh();
         roomManagement.deleteRomm(room);
@@ -256,11 +249,9 @@ public class ChatOnSiteNotificationTestIT extends Base {
 
     @Test
     public void test07_CheckDONotDisturbNotificationButton(){
-      homePagePlatform.goToChat();
-      switchTo().window(1);
-        ELEMENT_CHAT_SETTING_NOTIFICATION.click();
-        ELEMENT_CHAT_DO_NOT_DISTURB_BUTTON_NOTIFICATION.parent().click();
-        ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.click();
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        chatManagement.changeChatSettings("DoNotDisturbNotication");
         switchToParentWindow();
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1,PLFData.DATA_PASS2);
@@ -268,16 +259,16 @@ public class ChatOnSiteNotificationTestIT extends Base {
         switchTo().window(1);
         refresh();
         ELEMENT_CHAT_SETTING_NOTIFICATION.click();
-        assertEquals("ON",$(byId("notifyDonotdisturb")).parent().getText());
+        assertEquals("ON",ELEMENT_CHAT_DO_NOT_DISTURB_BUTTON_NOTIFICATION.parent().getText());
+        ELEMENT_CHAT_DO_NOT_DISTURB_BUTTON_NOTIFICATION.parent().click();
+        ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.click();
     }
 
     @Test
     public void test08_CheckDesktopNotificationButton(){
         homePagePlatform.goToChat();
         switchTo().window(1);
-        ELEMENT_CHAT_SETTING_NOTIFICATION.click();
-        ELEMENT_CHAT_DESKTOP_NOTIFICATION_BUTTON_.parent().click();
-        ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.click();
+        chatManagement.changeChatSettings("DesktopNotification");
         switchToParentWindow();
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1,PLFData.DATA_PASS2);
@@ -285,16 +276,16 @@ public class ChatOnSiteNotificationTestIT extends Base {
         switchTo().window(1);
         refresh();
         ELEMENT_CHAT_SETTING_NOTIFICATION.click();
-        assertEquals("OFF",$(byId("notifyDesktop")).parent().getText());
+        assertEquals("OFF",ELEMENT_CHAT_DESKTOP_NOTIFICATION_BUTTON_.parent().getText());
+        ELEMENT_CHAT_DESKTOP_NOTIFICATION_BUTTON_.parent().click();
+        ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.click();
     }
 
     @Test
     public void test09_CheckBipsNotificationButton(){
         homePagePlatform.goToChat();
         switchTo().window(1);
-        ELEMENT_CHAT_SETTING_NOTIFICATION.click();
-        ELEMENT_CHAT_BIP_NOTIFICATION_BUTTON.parent().click();
-        ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.click();
+        chatManagement.changeChatSettings("BipNotification");
         switchToParentWindow();
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1,PLFData.DATA_PASS2);
@@ -303,15 +294,15 @@ public class ChatOnSiteNotificationTestIT extends Base {
         refresh();
         ELEMENT_CHAT_SETTING_NOTIFICATION.click();
         assertEquals("OFF",ELEMENT_CHAT_BIP_NOTIFICATION_BUTTON.parent().getText());
+        ELEMENT_CHAT_BIP_NOTIFICATION_BUTTON.parent().click();
+        ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.click();
     }
 
     @Test
     public void test10_CheckOnSiteNotificationButton(){
         homePagePlatform.goToChat();
         switchTo().window(1);
-        ELEMENT_CHAT_SETTING_NOTIFICATION.click();
-        ELEMENT_CHAT_ON_SITE_NOTIFICATION_BUTTON.parent().click();
-        ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.click();
+        chatManagement.changeChatSettings("OnSiteNotification");
         switchToParentWindow();
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1,PLFData.DATA_PASS2);
@@ -320,6 +311,8 @@ public class ChatOnSiteNotificationTestIT extends Base {
         refresh();
         ELEMENT_CHAT_SETTING_NOTIFICATION.click();
         assertEquals("OFF",ELEMENT_CHAT_ON_SITE_NOTIFICATION_BUTTON.parent().getText());
+        ELEMENT_CHAT_ON_SITE_NOTIFICATION_BUTTON.parent().click();
+        ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.click();
     }
 
     @Test
@@ -335,7 +328,6 @@ public class ChatOnSiteNotificationTestIT extends Base {
         String FirstName = "FirstName" + getRandomString();
         String LastName = "LastName" + getRandomString();
         String email = username + "@test.com";
-       // String room5= "room5"+getRandomNumber();
 
         navigationToolbar.goToAddUser();
         userAddManagement.addUser(username, password, email, FirstName, LastName);

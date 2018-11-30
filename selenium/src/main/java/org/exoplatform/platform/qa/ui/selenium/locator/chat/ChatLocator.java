@@ -187,10 +187,9 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_CHAT_SETTING_NOTIFICATION=$(byClassName("uiIconGear"));
 
     public static final SelenideElement ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION=$(byXpath("//*[@id=\"chatPreferences\"]/div/div[2]/div/div[1]"));
-    public static final SelenideElement ELEMENT_CHAT_ON_SITE_BUTTON_NOTIFICATION=   $(byId("notifyOnSite"));
 
     public static final SelenideElement ELEMENT_CHAT_BADGE_NOTIFICATION=  $(byXpath("//*[@id=\"chatApplicationNotification\"]/div[1]/a/div/span"));
-    public static final SelenideElement ELEMENT_CHAT_DO_NOT_DISTURB_BUTTON_NOTIFICATION=   $(byId("notifyOnSite"));
+    public static final SelenideElement ELEMENT_CHAT_DO_NOT_DISTURB_BUTTON_NOTIFICATION=   $(byId("notifyDonotdisturb"));
 
     public static final SelenideElement ELEMENT_CHAT_DESKTOP_NOTIFICATION_BUTTON_=   $(byId("notifyDesktop"));
 
