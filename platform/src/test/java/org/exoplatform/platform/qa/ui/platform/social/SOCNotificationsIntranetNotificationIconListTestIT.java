@@ -1,10 +1,10 @@
 package org.exoplatform.platform.qa.ui.platform.social;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
@@ -362,5 +362,40 @@ public class SOCNotificationsIntranetNotificationIconListTestIT extends Base {
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
 
+  }
+  @Test
+  public void test05_CheckMarlAllAsReadInAllNotifcationPage(){
+    String username1 = "usernamea" + getRandomString();
+    String FirstNameA="FirstNameA"+getRandomString();
+    String LastNameA="LastNameA"+getRandomString();
+    String email1 = username1 + "@test.com";
+    String password="123456"+getRandomNumber();
+    String activity="activity"+getRandomString();
+    String comment="comment"+getRandomString();
+
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, FirstNameA, LastNameA);
+    navigationToolbar.goToMyNotifications();
+    myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.NewUser_intranet);
+    myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.AS_Like_intranet);
+
+    homePagePlatform.goToHomePage();
+    activityStream.addActivity(activity, "");
+    activityStream.checkActivity(activity);
+    homePagePlatform.goToConnections();
+    connectionsManagement.connectToAUser(username1);
+    manageLogInOut.signIn(username1, password);
+    homePagePlatform.goToConnections();
+    connectionsManagement.acceptAConnection(PLFData.DATA_USER1);
+    homePagePlatform.goToHomePage();
+    activityStream.commentActivity(activity, comment);
+    activityStream.likeActivity(activity);
+    manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+    ELEMENT_ALERT_NOTIFICATION_EXIST.waitUntil(visible, Configuration.timeout).click();
+    $(byXpath("//*[@id=\"NotificationPopup\"]/li[5]/div/a")).click();
+    homePagePlatform.refreshUntil($(byClassName("notificationsActions")).find(byId("markAllReadLink")),visible,1000);
+    $(byClassName("notificationsActions")).find(byId("markAllReadLink")).waitUntil(visible,Configuration.timeout).click();
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
   }
 }
