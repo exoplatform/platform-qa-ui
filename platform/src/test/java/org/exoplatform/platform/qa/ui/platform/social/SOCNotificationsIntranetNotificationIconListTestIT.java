@@ -364,7 +364,7 @@ public class SOCNotificationsIntranetNotificationIconListTestIT extends Base {
   }
 
   @Test
-  public void CheckNotificationInBrowerTab(){
+  public void test01_CheckNotificationInBrowerTab(){
     String username="username"+getRandomString();
     String FirstName="FirstName"+getRandomString();
     String LastName="LastName"+getRandomString();
@@ -388,7 +388,7 @@ public class SOCNotificationsIntranetNotificationIconListTestIT extends Base {
   }
 
   @Test
-  public void CheckNotificationNumberWithMoreThanNineNotifications(){
+  public void test02_CheckNotificationNumberWithMoreThanNineNotifications(){
     String username="username"+getRandomString();
     String FirstName="FirstName"+getRandomString();
     String LastName="LastName"+getRandomString();
