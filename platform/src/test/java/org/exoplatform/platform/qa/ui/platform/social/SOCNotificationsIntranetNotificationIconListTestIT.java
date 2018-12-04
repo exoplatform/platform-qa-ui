@@ -3,8 +3,7 @@ package org.exoplatform.platform.qa.ui.platform.social;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
@@ -362,5 +361,81 @@ public class SOCNotificationsIntranetNotificationIconListTestIT extends Base {
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
 
+  }
+
+  @Test
+  public void CheckNotificationInBrowerTab(){
+    String username="username"+getRandomString();
+    String FirstName="FirstName"+getRandomString();
+    String LastName="LastName"+getRandomString();
+    String password="LastName"+getRandomString();
+
+    String email = username + "@test.com";
+
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username, password, email, FirstName, LastName);
+    homePagePlatform.goToConnections();
+    connectionsManagement.connectToAUser(username);
+    manageLogInOut.signIn(username,password);
+    assertEquals("(1) Home",title());
+    homePagePlatform.goToChat();
+    switchTo().window(1);
+    assertEquals("Chat",title());
+    switchToParentWindow();
+    homePagePlatform.goToHomePage();
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username);
+  }
+
+  @Test
+  public void CheckNotificationNumberWithMoreThanNineNotifications(){
+    String username="username"+getRandomString();
+    String FirstName="FirstName"+getRandomString();
+    String LastName="LastName"+getRandomString();
+    String password="LastName"+getRandomString();
+    String activity="activity"+getRandomString();
+    String activity1="activity1"+getRandomString();
+    String activity2="activity2"+getRandomString();
+    String activity3="activity3"+getRandomString();
+    String activity4="activity4"+getRandomString();
+    String activity5="activity5"+getRandomString();
+    String activity6="activity6"+getRandomString();
+    String activity7="activity7"+getRandomString();
+    String activity8="activity8"+getRandomString();
+    String activity9="activity9"+getRandomString();
+    String comment="comment"+getRandomString();
+
+    String email = username + "@test.com";
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username, password, email, FirstName, LastName);
+    homePagePlatform.goToConnections();
+    connectionsManagement.connectToAUser(username);
+    homePagePlatform.goToHomePage();
+    activityStream.addActivity(activity, "");
+    activityStream.addActivity(activity1, "");
+    activityStream.addActivity(activity2, "");
+    activityStream.addActivity(activity3, "");
+    activityStream.addActivity(activity4, "");
+    activityStream.addActivity(activity5, "");
+    activityStream.addActivity(activity6, "");
+    activityStream.addActivity(activity7, "");
+    activityStream.addActivity(activity8, "");
+    activityStream.addActivity(activity9, "");
+    manageLogInOut.signIn(username,password);
+    homePagePlatform.goToConnections();
+    connectionsManagement.acceptAConnection(DATA_USER1);
+    homePagePlatform.goToHomePage();
+    activityStream.commentActivity(activity,comment);
+    activityStream.commentActivity(activity1,comment);
+    activityStream.commentActivity(activity2,comment);
+    activityStream.commentActivity(activity3,comment);
+    activityStream.commentActivity(activity4,comment);
+    activityStream.commentActivity(activity5,comment);
+    activityStream.commentActivity(activity6,comment);
+    activityStream.commentActivity(activity7,comment);
+    activityStream.commentActivity(activity8,comment);
+    activityStream.commentActivity(activity9,comment);
+    manageLogInOut.signIn(DATA_USER1,PLFData.DATA_PASS2);
+    assertEquals("(10) Home",title());
   }
 }
