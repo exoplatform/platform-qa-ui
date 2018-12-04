@@ -9,8 +9,7 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ALERT_NOTIFICATION_EXIST;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_CONTENT_NAME_PROFILE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -392,9 +391,9 @@ public class SOCNotificationsIntranetNotificationIconListTestIT extends Base {
     activityStream.likeActivity(activity);
     manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
     ELEMENT_ALERT_NOTIFICATION_EXIST.waitUntil(visible, Configuration.timeout).click();
-    $(byXpath("//*[@id=\"NotificationPopup\"]/li[5]/div/a")).click();
+    ELEMENT_ALL_NOTIFICATION.click();
     homePagePlatform.refreshUntil($(byClassName("notificationsActions")).find(byId("markAllReadLink")),visible,1000);
-    $(byClassName("notificationsActions")).find(byId("markAllReadLink")).waitUntil(visible,Configuration.timeout).click();
+    ELEMENT_NOTIFICATION_ACTIONS.find(byId("markAllReadLink")).waitUntil(visible,Configuration.timeout).click();
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
   }

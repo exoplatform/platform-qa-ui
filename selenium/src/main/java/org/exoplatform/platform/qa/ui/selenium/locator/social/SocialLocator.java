@@ -2427,5 +2427,7 @@ public static final By
   public static final SelenideElement ELEMENT_BUTTON_ON_MAIL_COMMENT = $(byId("MAIL_CHANNELEditCommentPlugin"));
   public static final SelenideElement ELEMENT_BUTTON_ON_MOBILE_COMMENT = $(byId("PUSH_CHANNELEditCommentPlugin"));
   public static final SelenideElement ELEMENT_BUTTON_ON_SITE_COMMENT =   $(byId("WEB_CHANNELEditCommentPlugin"));
+  public static final SelenideElement ELEMENT_ALL_NOTIFICATION=  $(byXpath("//*[@id=\"NotificationPopup\"]/li[5]/div/a"));
+  public static final SelenideElement ELEMENT_NOTIFICATION_ACTIONS=  $(byClassName("notificationsActions"));
 }
 
