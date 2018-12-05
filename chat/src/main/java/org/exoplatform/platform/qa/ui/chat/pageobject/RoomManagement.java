@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.chat.pageobject;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -81,5 +82,20 @@ public void notificationRoomSettings(String room, String value, String username)
     ELEMENT_CHAT_ROOM_NOTIFICATION_POPUP.waitUntil(Condition.appear, Configuration.timeout);
     $(byValue(value)).shouldBe(Condition.selected);
     ELEMENT_CHAT_ICON_CLOSE_ROOM_NOTIFICATION.click();
+  }
+
+  public void checkNotificationRoomSettingsPage(String room){
+    ELEMENT_CONTACT_LIST.find(byText(room)).click();
+    ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
+    ELEMENT_CHAT_ROOM_NOTIFICATION.click();
+    ELEMENT_CHAT_ROOM_NOTIFICATION_POPUP.waitUntil(Condition.appear, Configuration.timeout);
+    assertEquals(room +" Notifications",$(byXpath("//*[@id=\"room-detail\"]/div[3]/div/div[1]/span")).getText());
+    $(byValue("normal")).shouldBe(Condition.selected);
+    $(byValue("silence")).shouldNotBe(Condition.selected);
+    $(byValue("keywords")).shouldNotBe(Condition.selected);
+    assertEquals("",ELEMENT_CHAT_NOTIFICATION_KEYWORD.getText());
+    ELEMENT_NOTIFICATION_CONFIRM_BUTTON.shouldBe(Condition.visible);
+    ELEMENT_CHAT_CANCEL_BUTTON_ROOM_NOTIFICATION.shouldBe(Condition.visible);
+    ELEMENT_CHAT_ICON_CLOSE_ROOM_NOTIFICATION.shouldBe(Condition.visible).click();
   }
 }

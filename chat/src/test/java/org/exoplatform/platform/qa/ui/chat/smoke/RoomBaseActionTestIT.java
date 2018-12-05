@@ -184,7 +184,17 @@ public class RoomBaseActionTestIT extends Base {
     }
 
     @Test
-    public void test05_CheckAlertOnNotificationInRoomDiscussion(){
+    public void test05_CheckRoomNotificationSettingsPage(){
+        String room= "room"+getRandomNumber();
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.addRoom(room);
+        roomManagement.checkNotificationRoomSettingsPage(room);
+        roomManagement.deleteRomm(room);
+    }
+
+    @Test
+    public void test06_CheckAlertOnNotificationInRoomDiscussion(){
         String room= "room"+getRandomNumber();
 
         homePagePlatform.goToChat();
@@ -201,7 +211,7 @@ public class RoomBaseActionTestIT extends Base {
     }
 
     @Test
-    public void test06_CheckSilenceNotificationInRoomDiscussion(){
+    public void test07_CheckSilenceNotificationInRoomDiscussion(){
         String room= "room"+getRandomNumber();
 
         homePagePlatform.goToChat();
@@ -218,7 +228,7 @@ public class RoomBaseActionTestIT extends Base {
     }
 
     @Test
-    public void test07_CheckRoomNotificationCancel(){
+    public void test08_CheckRoomNotificationCancel(){
         String room= "room"+getRandomNumber();
         homePagePlatform.goToChat();
         switchTo().window(1);
@@ -229,10 +239,41 @@ public class RoomBaseActionTestIT extends Base {
         ELEMENT_CHAT_ROOM_NOTIFICATION_POPUP.waitUntil(Condition.appear, Configuration.timeout);
         ELEMENT_CHAT_CANCEL_BUTTON_ROOM_NOTIFICATION.click();
         ELEMENT_CHAT_ROOM_NOTIFICATION_POPUP.waitUntil(Condition.not(Condition.appear),Configuration.timeout);
+        ELEMENT_CONTAINER_LIST_MESSAGES.waitUntil(Condition.appear,Configuration.timeout);
     }
 
     @Test
-    public void test08_ShowParticipant(){
+    public void test09_CheckRoomNotificationIconCLose(){
+        String room= "room"+getRandomNumber();
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.addRoom(room);
+        ELEMENT_CONTACT_LIST.find(byText(room)).click();
+        ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
+        ELEMENT_CHAT_ROOM_NOTIFICATION.click();
+        ELEMENT_CHAT_ROOM_NOTIFICATION_POPUP.waitUntil(Condition.appear, Configuration.timeout);
+        ELEMENT_CHAT_ICON_CLOSE_ROOM_NOTIFICATION.click();
+        ELEMENT_CHAT_ROOM_NOTIFICATION_POPUP.waitUntil(Condition.not(Condition.appear),Configuration.timeout);
+        ELEMENT_CONTAINER_LIST_MESSAGES.waitUntil(Condition.appear,Configuration.timeout);
+    }
+
+    @Test
+    public void test10_CheckRoomNoficationConfirmButton(){
+        String room= "room"+getRandomNumber();
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.addRoom(room);
+        ELEMENT_CONTACT_LIST.find(byText(room)).click();
+        ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
+        ELEMENT_CHAT_ROOM_NOTIFICATION.click();
+        ELEMENT_CHAT_ROOM_NOTIFICATION_POPUP.waitUntil(Condition.appear, Configuration.timeout);
+        ELEMENT_NOTIFICATION_CONFIRM_BUTTON.click();
+        ELEMENT_CHAT_ROOM_NOTIFICATION_POPUP.waitUntil(Condition.not(Condition.appear),Configuration.timeout);
+        ELEMENT_CONTAINER_LIST_MESSAGES.waitUntil(Condition.appear,Configuration.timeout);
+    }
+
+    @Test
+    public void test09_ShowParticipant(){
         String room="room"+getRandomNumber();
         String username = "usernamea" + getRandomString();
         String password = "123456";
