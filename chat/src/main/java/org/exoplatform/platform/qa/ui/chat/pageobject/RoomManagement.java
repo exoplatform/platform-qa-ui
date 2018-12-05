@@ -7,6 +7,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 
 public class RoomManagement {
@@ -53,4 +54,32 @@ public void startStopmeeting(String room){
   ELEMENT_CHAT_ROOM_STARTSTOPMEETING.click();
 
 }
+
+public void notificationRoomSettings(String room, String value, String username){
+
+  ELEMENT_CONTACT_LIST.find(byText(room)).click();
+  ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
+  ELEMENT_CHAT_ROOM_NOTIFICATION.click();
+  ELEMENT_CHAT_ROOM_NOTIFICATION_POPUP.waitUntil(Condition.appear, Configuration.timeout);
+  switch (value){
+    case "Silence":
+    ELEMENT_CHAT_SILENCE_ROOM_NOTIFICATION.selectRadio("silence");
+      ELEMENT_NOTIFICATION_CONFIRM_BUTTON.click();
+      break;
+    case "AlertOn":
+      ELEMENT_CHAT_ALERT_ON.selectRadio("keywords");
+      ELEMENT_CHAT_NOTIFICATION_KEYWORD.setValue(username);
+      ELEMENT_NOTIFICATION_CONFIRM_BUTTON.click();
+      break;
+  }
+  }
+
+  public void checkNotificationRoomSettings(String room, String value){
+    ELEMENT_CONTACT_LIST.find(byText(room)).click();
+    ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
+    ELEMENT_CHAT_ROOM_NOTIFICATION.click();
+    ELEMENT_CHAT_ROOM_NOTIFICATION_POPUP.waitUntil(Condition.appear, Configuration.timeout);
+    $(byValue(value)).shouldBe(Condition.selected);
+    ELEMENT_CHAT_ICON_CLOSE_ROOM_NOTIFICATION.click();
+  }
 }

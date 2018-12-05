@@ -184,4 +184,7 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_CHAT_MEETING_NOTE_SAVED = $(byClassName("meetingNotesSent"));
     public static final SelenideElement ELEMENT_CHAT_SHOW_PARTICIPANT= $(byXpath("//*[@id=\"room-detail\"]/div[2]/div[2]/div[3]/ul/li[4]/a"));
     public static final SelenideElement ELEMENT_CHAT_SHOW_PARTICIPANT_POPUP = $(byClassName("room-participants"));
+
+    public static final SelenideElement ELEMENT_CHAT_ICON_CLOSE_ROOM_NOTIFICATION=  $(byXpath("//*[@id=\"room-detail\"]/div[3]/div/div[1]/a"));
+    public static final SelenideElement ELEMENT_CHAT_CANCEL_BUTTON_ROOM_NOTIFICATION= $(byXpath("//*[@id=\"room-detail\"]/div[3]/div/div[2]/div[2]/div[2]"));
 }
