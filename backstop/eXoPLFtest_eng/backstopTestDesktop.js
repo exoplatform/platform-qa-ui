@@ -57,30 +57,6 @@ module.exports = {
       "requireSameDimensions": true
     },
     {
-      "label": "Answers_page",
-      "url": process.argv[process.argv.length-1],
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
-      "readyEvent": null,
-      "readySelector": "",
-      "delay": 1000,
-      "onReadyScript": "onBefore_answers.js",
-      "hideSelectors": [],
-      "removeSelectors": [],
-      "hoverSelector": "",
-      "clickSelector": "",
-      "postInteractionWait": "",
-      "selectors": [
-        "viewport",
-        "document",
-        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
-        ".LeftNavigationTDContainer.TDContainer",
-        "div#RightBody.UIContainer"
-      ],
-      "selectorExpansion": true,
-      "misMatchThreshold" : 0,
-      "requireSameDimensions": true
-    },
-    {
       "label": "AppsBtn",
       "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
@@ -106,7 +82,7 @@ module.exports = {
     },
     {
       "label": "Apps_page",
-      "url": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/administration/registry",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/administration/registry",
       "readyEvent": null,
       "readySelector": "",
@@ -152,54 +128,6 @@ module.exports = {
       "requireSameDimensions": true
     },
     {
-      "label": "ChatButton",
-      "url": process.argv[process.argv.length-1],
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
-      "readyEvent": null,
-      "readySelector": "",
-      "onBeforeScript": "",
-      "onReadyScript": "onReady_chatbtn.js",
-      "delay": 1000,
-      "hideSelectors": ["ul#suggestions li","div.currentDateContainer center a"],
-      "removeSelectors": [],
-      "hoverSelector": "",      
-      "clickSelector": "",
-      "postInteractionWait": "",
-      "selectors": [
-        "viewport",
-        "document",
-        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
-        "div#RightBody.UIContainer"
-      ],
-      "selectorExpansion": true,
-      "misMatchThreshold" : 0,
-      "requireSameDimensions": true
-    },
-    {
-      "label": "Chat_page",
-      "url": "http://qa-ui03.exoplatform.org/portal/intranet/chat",
-      "referenceUrl": "http://qa-ui03.exoplatform.org/portal/intranet/chat",
-      "readyEvent": null,
-      "readySelector": "",
-      "delay": 1000,
-      "hideSelectors": ["div.currentDateContainer center"],
-      "removeSelectors": [],
-      "hoverSelector": "",
-      "onBeforeScript": "onBefore_chatpage.js",
-      "onReadyScript": "",
-      "clickSelector": "",
-      "postInteractionWait": "",
-      "selectors": [
-        "viewport",
-        "document",        
-        "div.uiGrayLightBox.clearfix.input-prepend.no-user-selection",
-        "div.uiLeftContainerArea.no-user-selection"
-      ],
-      "selectorExpansion": true,
-      "misMatchThreshold" : 0,
-      "requireSameDimensions": true
-    },
-    {
       "label": "AdduserBtn",
       "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/login?initialURI=%2Fportal%2Fintranet%2F",
@@ -225,7 +153,7 @@ module.exports = {
     },
     {
       "label": "Community_page_adduser",
-      "url": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/administration/newStaff",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/administration/newStaff",
       "readyEvent": null,
       "onBeforeScript": "onBefore_adduserpage.js",
@@ -273,7 +201,7 @@ module.exports = {
     },
     {
       "label": "CommPage",
-      "url": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/administration/management",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/administration/management",
       "readyEvent": null,
       "onBeforeScript": "onBefore_usermgmntpage.js",
@@ -321,7 +249,7 @@ module.exports = {
     },
     {
       "label": "Content_admin",
-      "url": "http://qa-ui03.exoplatform.org/portal/g/:platform:web-contributors/wcmAdmin",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/g/:platform:web-contributors/wcmAdmin",
       "readyEvent": null,
       "readySelector": "",
@@ -345,7 +273,7 @@ module.exports = {
     },
     {
       "label": "ContentMgmnt",
-      "url": "http://qa-ui03.exoplatform.org/portal/g/:platform:web-contributors/siteExplorer",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/g/:platform:web-contributors/siteExplorer",
       "readyEvent": null,
       "onBeforeScript": "onBefore_contentMgmnt.js",
@@ -369,7 +297,7 @@ module.exports = {
     },
     {
       "label": "Content_search_page",
-      "url": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/search",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/search",
       "readyEvent": null,
       "readySelector": "",
@@ -514,7 +442,7 @@ module.exports = {
     },
     {
       "label": "Portal_page",
-      "url": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/branding",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/branding",
       "readyEvent": null,
       "readySelector": "",
@@ -538,7 +466,7 @@ module.exports = {
     },
     {
       "label": "Portal_gpsites_page",
-      "url": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/groupnavigation",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/groupnavigation",
       "readyEvent": null,
       "readySelector": "",
@@ -562,7 +490,7 @@ module.exports = {
     },
     {
       "label": "Portal_notifs_page",
-      "url": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/notification",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/notification",
       "readyEvent": null,
       "readySelector": "",
@@ -586,7 +514,7 @@ module.exports = {
     },
     {
       "label": "Portal_sites_page",
-      "url": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/portalnavigation",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/portalnavigation",
       "readyEvent": null,
       "readySelector": "",
@@ -610,7 +538,7 @@ module.exports = {
     },
     {
       "label": "Portalpages_page",
-      "url": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/administration/pageManagement",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/administration/pageManagement",
       "readyEvent": null,
       "readySelector": "",
@@ -634,7 +562,7 @@ module.exports = {
     },
     {
       "label": "Searchindexing_page",
-      "url": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/searchIndexing",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/searchIndexing",
       "readyEvent": null,
       "readySelector": "",
@@ -682,7 +610,7 @@ module.exports = {
     },
     {
       "label": "System_mngmnt_page",
-      "url": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/servicesManagement",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/servicesManagement",
       "readyEvent": null,
       "readySelector": "",
@@ -706,7 +634,7 @@ module.exports = {
     },
     {
       "label": "System_monitoring",
-      "url": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/monitoring",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/monitoring",
       "readyEvent": null,
       "readySelector": "",
@@ -833,7 +761,7 @@ module.exports = {
       "readySelector": "",
       "delay": 1000,
       "onBeforeScript": "",
-      "onReadyScript": "onBefore_Closeflags.js",
+      "onReadyScript": "onBefore_closeflags.js",
       "hideSelectors": ["ul#suggestions li","div.currentDateContainer center a"],
       "removeSelectors": [],
       "hoverSelector": "",
@@ -990,7 +918,7 @@ module.exports = {
     },
     {
       "label": "Webconf_page",
-      "url": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/webconferencing",
+      "url": process.argv[process.argv.length-1],
       "referenceUrl": "http://qa-ui03.exoplatform.org/portal/g/:platform:administrators/webconferencing",
       "readyEvent": null,
       "readySelector": "",
