@@ -160,6 +160,7 @@ public class WikiPublishActivityTestIT extends Base {
     wikiManagement.saveAddPage();
 
     homePagePlatform.goToHomePage();
+    homePagePlatform.refreshUntil(ELEMENT_ICON_SEARCH,Condition.visible,2000);
     ELEMENT_ICON_SEARCH.click();
     ELEMENT_SEARCH_INPUT.setValue(title);
     ELEMENT_SEARCH_RESULT.shouldHave(Condition.exactText(title));

@@ -131,7 +131,7 @@ public class SOCNotificationIntranetSpaceJoinRequestTestIT extends Base {
     intranetNotification.checkBtnConnectJoinRequest(spaceName);
     info("The user is redirected to the Space");
     intranetNotification.goToDetailRequestJoinSpace(username2, true);
-    $(ELEMENT_SPACE_MENU_ACTIVITY_PORTLET).waitUntil(Condition.visible, Configuration.timeout);
+    homePagePlatform.refreshUntil($(ELEMENT_SPACE_MENU_ACTIVITY_PORTLET),Condition.visible,1000);
     manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username2);

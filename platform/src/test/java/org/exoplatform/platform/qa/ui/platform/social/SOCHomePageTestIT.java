@@ -311,6 +311,7 @@ public class SOCHomePageTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 60000);
     homePagePlatform.goToHomePage();
+    homePagePlatform.refreshUntil($(ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES),Condition.visible,1000);
     $(ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES).click();
     $(ELEMENT_PUBLICATION_DISPLAYMODE_MYSPACE_OPTION).click();
     $(byText(space)).should(Condition.exist);

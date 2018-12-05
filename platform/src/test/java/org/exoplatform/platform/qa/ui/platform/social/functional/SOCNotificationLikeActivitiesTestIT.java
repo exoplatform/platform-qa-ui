@@ -1008,8 +1008,6 @@ public class SOCNotificationLikeActivitiesTestIT extends Base {
      * is the date of the activity
      */
     intranetNotification.goToAllNotification();
-    homePagePlatform.goToHomePage();
-    navigationToolbar.goToIntranetNotification();
     String status = "likes your activity. ";
     intranetNotification.checkAvatarInStatus(username3, false);
     intranetNotification.checkStatus(status, username3);
