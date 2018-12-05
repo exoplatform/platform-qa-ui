@@ -83,4 +83,8 @@ public class ConnectionsLocator {
                                                              $(byXpath("//*[@id=\"uiTableProfileUserSearchInput\"]/div[1]/div/div/div[1]/input"));
 
   public static final SelenideElement ELEMENT_CONTENT_PEOPLE                  = $(byXpath("//*[@id=\"UIAllPeople\"]/div[2]/div"));
+
+  public static final SelenideElement ELEMENT_AVATAR_IN_SEARCH_USER                  = $(byXpath("//*[@id=\"identity2\"]/a/img"));
+
+
 }
