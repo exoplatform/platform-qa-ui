@@ -7,7 +7,6 @@ import com.codeborne.selenide.commands.ScrollTo;
 import javafx.scene.control.ScrollBar;
 import org.exoplatform.platform.qa.ui.chat.pageobject.ChatManagement;
 import org.exoplatform.platform.qa.ui.chat.pageobject.RoomManagement;
-
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
@@ -194,7 +193,6 @@ public class MiniChatTestIt extends Base {
         navigationToolbar.goToManageCommunity();
         userAndGroupManagement.deleteUser(username);
     }
-
     @Test
     public void test06_CheckMinimizeInMiniChatPopUp(){
         String username = "username" + getRandomNumber();
