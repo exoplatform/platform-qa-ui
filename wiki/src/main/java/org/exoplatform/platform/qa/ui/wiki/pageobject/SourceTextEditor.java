@@ -169,7 +169,7 @@ public class SourceTextEditor {
     if (!newContent.isEmpty()) {
       text = newContent.split("</br>");
       for (int i = 0; i < text.length; i++) {
-        $(ELEMENT_CONTENT_WIKI_INPUT).setValue(newContent);
+      $(ELEMENT_CONTENT_WIKI_INPUT).setValue(newContent);
        $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.visible, Configuration.timeout).sendKeys(Keys.ENTER);
       }
     }

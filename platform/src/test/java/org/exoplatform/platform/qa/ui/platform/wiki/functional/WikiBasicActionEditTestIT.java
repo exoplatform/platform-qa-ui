@@ -14,8 +14,10 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
@@ -46,7 +48,6 @@ public class WikiBasicActionEditTestIT extends Base {
     AddUsers addUsers;
     RichTextEditor richTextEditor;
     WikiDraftPage wikiDraftPage;
-
     @BeforeEach
     public void setupBeforeMethod() {
         info("Start setUpBeforeMethod");
@@ -246,8 +247,8 @@ public class WikiBasicActionEditTestIT extends Base {
         info("Test 3: Draft in an outdate version status");
         info("Create 2 new users");
 
-        String username1 = "username1" + getRandomString();
-        String username2 = "username2" + getRandomString();
+        String username1 = "usernamea" + getRandomString();
+        String username2 = "usernameb" + getRandomString();
         String firstname = "test" + getRandomString();
         String firstname2 = "testt" + getRandomString();
         String password = "123456";
@@ -718,6 +719,7 @@ public class WikiBasicActionEditTestIT extends Base {
         info("The warning message isn't displayed");
         $(byText("View your Changes")).waitUntil(Condition.not(visible), Configuration.timeout);
         $(byText("Resume the Draf")).waitUntil(Condition.not(visible), Configuration.timeout);
+        wikiManagement.cancelAddPage();
         wikiHomePage.deleteWiki(title);
 
     }
@@ -914,7 +916,7 @@ public class WikiBasicActionEditTestIT extends Base {
         wikiValidattions.verifyTitleWikiPage(title);
 
         info("Edit the page");
-        String title1 = "title1" + getRandomNumber();
+        String title1 = "title1"+ getRandomNumber();
         String content1 = "content1" + getRandomNumber();
         wikiHomePage.goToEditPage();
         richTextEditor.editSimplePageWithAutoSave(title1, content1);
@@ -922,7 +924,7 @@ public class WikiBasicActionEditTestIT extends Base {
         wikiHomePage.confirmWaringMessage(true);
         info("The Browser is stopped");
         Selenide.close();
-        open(Configuration.baseUrl);
+        open(baseUrl);
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         info("The draft version appears in the list");
         homePagePlatform.goToWiki();
@@ -988,7 +990,7 @@ public class WikiBasicActionEditTestIT extends Base {
         wikiHomePage.confirmWaringMessage(true);
         info("The Browser is closed");
         Selenide.close();
-        open(Configuration.baseUrl);
+        open(baseUrl);
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         info("The draft version appears in the list");
         homePagePlatform.goToWiki();
@@ -998,10 +1000,8 @@ public class WikiBasicActionEditTestIT extends Base {
         $(byId("UIWikiDraftGrid")).find(byText(title1)).click();
         wikiValidattions.verifyResumADraf(title1);
         homePagePlatform.goToWiki();
-        wikiHomePage.goToMyDraft();
-        wikiDraftPage.deleteDraft(title1);
-        homePagePlatform.goToWiki();
         wikiHomePage.deleteWiki(title);
+
 
     }
 
@@ -1036,8 +1036,10 @@ public class WikiBasicActionEditTestIT extends Base {
     public void test07_SaveADraftOfCurrentlySavedPage() {
         info("Test 7: Save a draft of currently saved page");
         info("Create 2 new users");
-        String username1 = "username1" + getRandomString();
-        String username2 = "username2" + getRandomString();
+
+
+        String username1 = "usernamec" + getRandomString();
+        String username2 = "usernamed" + getRandomString();
         String firstname = "test" + getRandomString();
         String firstname2 = "testt" + getRandomString();
         String password = "123456";
@@ -1053,19 +1055,18 @@ public class WikiBasicActionEditTestIT extends Base {
         userAndGroupManagement.goToGroupTab();
         userAndGroupManagement.selectGroup(groupsPath);
         userAndGroupManagement.addUsersToGroup(username1, "*", false, false);
-        refresh();
         userAndGroupManagement.addUsersToGroup(username2, "*", false, false);
-
+        info("Login with User A");
+        manageLogInOut.signIn(username1, "123456");
         info("Login with User A");
         manageLogInOut.signIn(username1, "123456");
 
         info("Create a wiki page");
-        String title = "title" + getRandomNumber();
-        String content = "content" + getRandomNumber();
+        String title = "title"+getRandomNumber();
+        String content = "content"+getRandomNumber();
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
-        wikiManagement.goToSourceEditor();
-        sourceTextEditor.addSimplePage(title, content);
+        richTextEditor.addSimplePage(title, content);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(title);
 
@@ -1073,6 +1074,7 @@ public class WikiBasicActionEditTestIT extends Base {
         String title1 = "title1" + getRandomNumber();
         String content1 = "content1" + getRandomNumber();
         wikiHomePage.goToEditPage();
+        wikiManagement.goToSourceEditor();
         sourceTextEditor.editSimplePageWithAutoSave(title1, content1);
         info("Login with User B");
         manageLogInOut.signIn(username2, "123456");
@@ -1459,7 +1461,6 @@ public class WikiBasicActionEditTestIT extends Base {
         info("Move focus at the end of the line");
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(title2);
-
         info("Add attach file is added successfully in content of page");
         wikiHomePage.goToAPage(title2);
         wikiValidattions.verifyAltTextImageInContentPage(altText2);
@@ -1524,13 +1525,13 @@ public class WikiBasicActionEditTestIT extends Base {
         assertEquals($(byId("H" + value1)).getCssValue("font-size"), "36px");
         info("The page is shown with Heading 1 effect");
         $(byId("H" + value3)).shouldHave(Condition.text(value3));
-        assertEquals($(byId("H" + value3)).getCssValue("font-size"), "36px");
+        assertEquals($(byId("H" + value3)).getCssValue("font-size"), "24px");
         info("Edit paragraph");
         wikiManagement.editParagraph(value1, contentHeading2);
         wikiManagement.saveAddPage();
         info("The page is shown with Heading 3 effect");
         $(byId("H" + value2)).shouldHave(Condition.text(value2));
-        assertEquals($(byId("H" + value2)).getCssValue("font-size"), "24px");
+        assertEquals($(byId("H" + value2)).getCssValue("font-size"), "30px");
         homePagePlatform.goToWiki();
         wikiHomePage.deleteWiki(title);
 

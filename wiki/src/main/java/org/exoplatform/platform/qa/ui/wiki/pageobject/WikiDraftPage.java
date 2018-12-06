@@ -32,10 +32,8 @@ public class WikiDraftPage {
    * @param title The title of a wiki's page to be deleted.
    */
   public void deleteDraft(String title) {
-    $(byText(title + "(New Page)")).parent().parent().parent().find(byClassName("uiIconDeleteDraft")).click();
+    $(byText(title)).parent().parent().parent().find(byClassName("uiIconDeleteDraft")).click();
     alert.acceptAlert();
-    $(ELEMENT_DELETE_DRAFT).click();
-   // alert.acceptAlert();
   }
 
   /**

@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.platform.wiki;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.core.PLFData.password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -122,7 +123,9 @@ public class WikiBasicActionManagePageEditTestIT extends Base {
     wikidraftpage.resumeADraft(title);
     info("The page in edit mode is displayed");
     richTextEditor.editSimplePageWithAutoSave(title, title2);
-
+    info("Save all changes");
+    executeJavaScript("window.scrollBy(0,-5500)", "");
+    ELEMENT_SAVE_BUTTON_ADD_PAGE.click();
     info("Delete draf");
       homePagePlatform.goToWiki();;
       wikiHomePage.deleteWiki(title);

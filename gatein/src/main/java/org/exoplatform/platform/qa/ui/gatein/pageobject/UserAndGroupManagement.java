@@ -51,9 +51,10 @@ public class UserAndGroupManagement {
 
   public ManageAlert           alert;
 
-  public Dialog                dialog;
-
   public HomePagePlatform homePagePlatform;
+
+  public Dialog                dialog;
+  
 
   private ElementEventTestBase evt;
 
@@ -266,13 +267,14 @@ public class UserAndGroupManagement {
         $(byClassName("uiCheckbox")).click();
       }
       $(byText("Add")).click();
-
-      Assert.assertEquals(testBase.getValue(ELEMENT_INPUT_USERNAME), userNames);
     } else {
-      $(ELEMENT_INPUT_USERNAME).setValue(userNames);
+      $(ELEMENT_INPUT_USERNAME).waitUntil(Condition.visible,Configuration.timeout).scrollTo();
+      homePagePlatform.refreshUntil($(ELEMENT_INPUT_USERNAME),Condition.visible,1000);
+      $(ELEMENT_INPUT_USERNAME).sendKeys(userNames);
     }
     $(byId("membership")).selectOption(memberShip);
     $(ELEMENT_SAVE_BUTTON_2).click();
+    $(byXpath(ELEMENT_ADDED_GROUP_USER_IN_TABLE.replace("${username}", userNames))).waitUntil(Condition.visible,Configuration.timeout);
     if (verify) {
       for (String user : users) {
         if (testBase.isTextPresent(ELEMENT_MSG_TOTAL_PAGES)) {

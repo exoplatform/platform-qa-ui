@@ -43,7 +43,7 @@ public class WikiValidattions {
     public void verifyTitleDrafPage(String title) {
         info("Verify that a draf page with the title:" + "title" + " is shown in draf table");
 
-        $(byXpath(ELEMENT_DRAFT_OF_NEW_PAGE.replace("${title}", title + "(New Page)"))).waitUntil(Condition.visible,
+        $(byXpath(ELEMENT_DRAFT_OF_NEW_PAGE.replace("${title}", title))).waitUntil(Condition.visible,
                 Configuration.timeout);
     }
 
@@ -61,12 +61,10 @@ public class WikiValidattions {
      * Verify resuming a draf page
      *
      * @param titleBeforeDraf String
-     * @param content         String
      */
-    public void verifyResumADraf(String titleBeforeDraf, String content) {
+    public void verifyResumADraf(String titleBeforeDraf) {
         info("Get current title in iput field");
         $(ELEMENT_TITLE_WIKI_INPUT).shouldHave(Condition.value(titleBeforeDraf));
-        $(ELEMENT_CONTENT_WIKI_INPUT).shouldHave(Condition.text(content));
 
     }
 
@@ -116,7 +114,7 @@ public class WikiValidattions {
      */
     public void verifyMessageWhenEditingSamePage(String status, String fullName) {
         info("Verify the message");
-        evt.waitForAndGetElement(ELEMENT_WIKI_STATUS_EDITTING_SAME_PAGE.replace("$status", status).replace("$fullName", fullName));
+        $(byXpath(ELEMENT_WIKI_STATUS_EDITTING_SAME_PAGE.replace("$status", status).replace("$fullName", fullName))).waitUntil(Condition.visible,Configuration.timeout);
     }
 
     /**
@@ -354,13 +352,13 @@ public class WikiValidattions {
      */
     public void verifyDraftInOutDateVersionStatus(String message) {
         info("Verify status text");
-        evt.waitForAndGetElement(ELEMETN_WIKI_STATUS_VERSION_TEXT.replace("$status", message));
+       $(byXpath(ELEMETN_WIKI_STATUS_VERSION_TEXT.replace("$status", message))).waitUntil(Condition.visible,Configuration.timeout);
         info("Verify status with View Changes link");
-        evt.waitForAndGetElement(ELEMENT_WIKI_STATUS_VERSION_VIEW_CHANGES_LINK);
+        $(ELEMENT_WIKI_STATUS_VERSION_VIEW_CHANGES_LINK).waitUntil(Condition.visible,Configuration.timeout);;
         info("Verify status with Continue Editting link");
-        evt.waitForAndGetElement(ELEMENT_WIKI_STATUS_VERSION_CONTINUE_EDITTING_LINK);
+        $(ELEMENT_WIKI_STATUS_VERSION_CONTINUE_EDITTING_LINK).waitUntil(Condition.visible,Configuration.timeout);;
         info("Verify status with Delete link");
-        evt.waitForAndGetElement(ELEMENT_WIKI_STATUS_VERSION_DELETE_LINK);
+        $(ELEMENT_WIKI_STATUS_VERSION_DELETE_LINK).waitUntil(Condition.visible,Configuration.timeout);;
     }
 
     /**

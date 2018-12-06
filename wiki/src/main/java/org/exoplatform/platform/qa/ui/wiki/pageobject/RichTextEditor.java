@@ -1412,9 +1412,7 @@ public class RichTextEditor {
     }
     info("Waiting 30s before saved all changes");
     $(ELEMENT_DRAFT_NOTIFY).waitUntil(Condition.appears, 31000, 1);
-    info("Save all changes");
-    executeJavaScript("window.scrollBy(0,-5500)", "");
-    ELEMENT_SAVE_BUTTON_ADD_PAGE.click();
+
   }
 
   /**
