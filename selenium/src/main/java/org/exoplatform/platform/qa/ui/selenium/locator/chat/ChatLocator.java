@@ -200,10 +200,9 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_CHAT_ON_SITE_NOTIFICATION_BUTTON=   $(byId("notifyOnSite"));
     public static final SelenideElement ELEMENT_CHAT_NOTIFICATION_DETAIL=   $(byId("chat-notifications-details"));
 
+    public static final SelenideElement ELEMENT_CHAT_BUTTON_USER_PROFILE=  $(byXpath("//*[@id=\"UIUserNavigationPortlet\"]/div[1]/div/div[1]/ul/li[2]/a"));
 
-
-
-
+    public static final SelenideElement ELEMENT_CHAT_TIP_CONTENT=   $(byId("tiptip_content"));
 
 }
 
