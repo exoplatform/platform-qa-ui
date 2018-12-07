@@ -257,4 +257,37 @@ public class MiniChatTestIt extends Base {
         userAndGroupManagement.deleteUser(usernameb);
     }
 
+    @Test
+    public void test08_ChatWithMemberOfRoomUsingUserPopOver(){
+        String room ="room"+getRandomNumber();
+        String usernamea = "username" + getRandomNumber();
+        String password = "123456";
+        String emaila= "emaila" + getRandomNumber() + "@test.com";
+        String FirstnameA = "FirstName" + getRandomString();
+        String LastNameA = "LastName" + getRandomString();
+
+        navigationToolbar.goToAddUser();
+        userAddManagement.addUser(usernamea, password, emaila, FirstnameA, LastNameA);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.addRoom(room,usernamea);
+        switchToParentWindow();
+        manageLogInOut.signIn(usernamea,password);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        ELEMENT_CONTACT_LIST.find(byText(room)).click();
+        $(byClassName("room-participants")).find(byClassName("contact-list-item")).hover();
+        ELEMENT_CHAT_TIP_CONTENT.waitUntil(Condition.appear, Configuration.timeout);
+        $(byXpath("//*[@id=\"tiptip_content\"]/div/a/i")).click();
+        $(byClassName("chat-contact")).parent().parent().find(byText(PLFData.DATA_NAME_USER1)).waitUntil(Condition.appear,Configuration.timeout);
+        switchToParentWindow();
+        manageLogInOut.signIn(PLFData.DATA_USER1,PLFData.DATA_PASS2);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.deleteRomm(room);
+        switchToParentWindow();
+        navigationToolbar.goToManageCommunity();
+        userAndGroupManagement.deleteUser(usernamea);
+    }
+
 }
