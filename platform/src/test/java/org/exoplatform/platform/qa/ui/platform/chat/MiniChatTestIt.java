@@ -193,4 +193,68 @@ public class MiniChatTestIt extends Base {
         navigationToolbar.goToManageCommunity();
         userAndGroupManagement.deleteUser(username);
     }
+
+    @Test
+    public void test06_CheckMinimizeInMiniChatPopUp(){
+        String username = "username" + getRandomNumber();
+        String password = "123456";
+        String emaila= "emaila" + getRandomNumber() + "@test.com";
+        String Firstname = "FirstName" + getRandomString();
+        String LastName = "LastName" + getRandomString();
+
+
+        navigationToolbar.goToAddUser();
+        userAddManagement.addUser(username, password, emaila, Firstname, LastName);
+        homePagePlatform.goToConnections();
+        connectionsManagement.searchPeople(Firstname+" "+LastName, null, null, null);
+        refresh();
+        ELEMENT_USER_RESULT_SEARCH.find(byText(Firstname+" "+LastName)).hover();
+        ELEMENT_CHAT_TIP_CONTENT.waitUntil(Condition.appear, Configuration.timeout);
+        $(byXpath("//*[@id=\"tiptip_content\"]/div/a/i")).click();
+        ELEMENT_MINI_CHAT.waitUntil(Condition.appear,Configuration.timeout);
+        $(byClassName("uiIconMinimize")).click();
+        $(byClassName("chat-message-list")).waitUntil(Condition.not(Condition.appear),Configuration.timeout);
+        $(byClassName("uiIconMaximize")).click();
+        $(byClassName("chat-message-list")).waitUntil(Condition.appear,Configuration.timeout);
+        navigationToolbar.goToManageCommunity();
+        userAndGroupManagement.deleteUser(username);
+    }
+
+    @Test
+    public void test07_CheckMiniChatWhenANewConversationIsOpened(){
+        String usernamea = "username" + getRandomNumber();
+        String password = "123456";
+        String emaila= "emaila" + getRandomNumber() + "@test.com";
+        String FirstnameA = "FirstName" + getRandomString();
+        String LastNameA = "LastName" + getRandomString();
+        String message="message"+getRandomNumber();
+
+        String usernameb = "usernamea" + getRandomNumber();
+        String emailb= "emaila" + getRandomNumber() + "@test.com";
+        String FirstnameB = "FirstName" + getRandomString();
+        String LastNameB = "LastName" + getRandomString();
+
+        navigationToolbar.goToAddUser();
+        userAddManagement.addUser(usernamea, password, emaila, FirstnameA, LastNameA);
+        userAddManagement.addUser(usernameb, password, emailb, FirstnameB, LastNameB);
+        manageLogInOut.signIn(usernamea,password);
+        homePagePlatform.goToConnections();
+        connectionsManagement.searchPeople(FirstnameB+" "+LastNameB, null, null, null);
+        refresh();
+        ELEMENT_USER_RESULT_SEARCH.find(byText(FirstnameB+" "+LastNameB)).hover();
+        ELEMENT_CHAT_TIP_CONTENT.waitUntil(Condition.appear, Configuration.timeout);
+        $(byXpath("//*[@id=\"tiptip_content\"]/div/a/i")).click();
+        ELEMENT_MINI_CHAT.waitUntil(Condition.appear,Configuration.timeout);
+        $(byId("messageComposerArea")).setValue(message).pressEnter();
+        $(byClassName("uiIconMinimize")).click();
+        manageLogInOut.signIn(usernameb,password);
+        chatManagement.checkMessageNotification(message);
+        ELEMENT_MINI_CHAT.waitUntil(Condition.appear,Configuration.timeout);
+        $(byClassName("chat-message-list")).find(byText(message));
+        manageLogInOut.signIn(PLFData.DATA_USER1,PLFData.DATA_PASS2);
+        navigationToolbar.goToManageCommunity();
+        userAndGroupManagement.deleteUser(usernamea);
+        userAndGroupManagement.deleteUser(usernameb);
+    }
+
 }
