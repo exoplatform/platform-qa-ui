@@ -5,19 +5,8 @@ module.exports = {
       "label": "desktop",
       "width": 1500,
       "height": 768
-    },
-    {
-      "label": "tablet",
-      "width": 1024,
-      "height": 768
-    },
-    {
-      "label": "mobile",
-      "width": 320,
-      "height": 480
     }
   ],
-
   "scenarios": [
     {
       "label": "Login_page",
@@ -33,7 +22,8 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div.uiLogin"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -46,7 +36,6 @@ module.exports = {
       "readyEvent": null,
       "readySelector": "",
       "delay": 500,
-      "onBeforeScript": "",
       "onReadyScript": "onReady_home.js",
       "hideSelectors": ["ul#suggestions li","div.currentDateContainer center a"],
       "removeSelectors": [],
@@ -55,29 +44,12 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
-      ],
-      "selectorExpansion": true,
-      "misMatchThreshold" : 0,
-      "requireSameDimensions": true
-    },
-    {
-      "label": "Answers_page",
-      "url": process.argv[process.argv.length-1],
-      "referenceUrl": process.argv[process.argv.length-1],
-      "readyEvent": null,
-      "readySelector": "",
-      "delay": 1000,
-      "onBeforeScript": "",
-      "onReadyScript": "onBefore_answers.js",
-      "hideSelectors": [],
-      "removeSelectors": [],
-      "hoverSelector": "",
-      "clickSelector": "",
-      "postInteractionWait": "",
-      "selectors": [
-        "viewport",
-        "document"
+        "document",
+        ".LeftNavigationTDContainer.TDContainer",
+        ".RightBodyTDContainer.TDContainer",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "td.OfficeMiddleTDContainer.TDContainer",
+        "td.OfficeRightTDContainer.TDContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -99,7 +71,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -112,8 +86,8 @@ module.exports = {
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
-      "onBeforeScript": "",
-      "onReadyScript": "onBefore_appspage.js",
+      "onBeforeScript": "onBefore_appspage.js",
+      "onReadyScript": "",
       "hideSelectors": ["div.currentDateContainer center"],
       "removeSelectors": [],
       "hoverSelector": "",
@@ -121,13 +95,15 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
       "requireSameDimensions": true
     },
-    {
+  /*  {
       "label": "Calendar_page",
       "url": process.argv[process.argv.length-1],
       "referenceUrl": process.argv[process.argv.length-1],
@@ -136,62 +112,20 @@ module.exports = {
       "delay": 1000,
       "onReadyScript": "onReady_calendar.js",
       "hideSelectors": [],
-      "removeSelectors": [],
+      "removeSelectors": ["div#UIMiniCalendar","div.eventWeekBar"],
       "hoverSelector": "",
       "clickSelector": "",
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
       "requireSameDimensions": true
-    },
-    {
-      "label": "ChatButton",
-      "url": process.argv[process.argv.length-1],
-      "referenceUrl": process.argv[process.argv.length-1],
-      "readyEvent": null,
-      "readySelector": "",
-      "onBeforeScript": "",
-      "onReadyScript": "onReady_chatbtn.js",
-      "delay": 1000,
-      "hideSelectors": ["ul#suggestions li","div.currentDateContainer center a"],
-      "removeSelectors": [],
-      "hoverSelector": "",      
-      "clickSelector": "",
-      "postInteractionWait": "",
-      "selectors": [
-        "viewport",
-        "document"
-      ],
-      "selectorExpansion": true,
-      "misMatchThreshold" : 0,
-      "requireSameDimensions": true
-    },
-    {
-      "label": "Chat_page",
-      "url": process.argv[process.argv.length-1],
-      "referenceUrl": process.argv[process.argv.length-1],
-      "readyEvent": null,
-      "readySelector": "",
-      "delay": 1000,
-      "hideSelectors": ["div.currentDateContainer center"],
-      "removeSelectors": [],
-      "hoverSelector": "",
-      "onBeforeScript": "",
-      "onReadyScript": "onBefore_chatpage.js",
-      "clickSelector": "",
-      "postInteractionWait": "",
-      "selectors": [
-        "viewport",
-        "document"
-      ],
-      "selectorExpansion": true,
-      "misMatchThreshold" : 0,
-      "requireSameDimensions": true
-    },
+    },*/
     {
       "label": "AdduserBtn",
       "url": process.argv[process.argv.length-1],
@@ -208,7 +142,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div.UITableColumnContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -219,8 +155,8 @@ module.exports = {
       "url": process.argv[process.argv.length-1],
       "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
-      "onBeforeScript": "",
-      "onReadyScript": "onBefore_adduserpage.js",
+      "onBeforeScript": "onBefore_adduserpage.js",
+      "onReadyScript": "",
       "readySelector": "",
       "delay": 1000,
       "hideSelectors": ["div.currentDateContainer center"],
@@ -230,7 +166,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div.UITableColumnContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -252,7 +190,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div.UITableColumnContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -263,8 +203,8 @@ module.exports = {
       "url": process.argv[process.argv.length-1],
       "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
-      "onBeforeScript": "",
-      "onReadyScript": "onBefore_usermgmntpage.js",
+      "onBeforeScript": "onBefore_usermgmntpage.js",
+      "onReadyScript": "",
       "readySelector": "",
       "delay": 1000,
       "hideSelectors": ["div.currentDateContainer center"],
@@ -274,7 +214,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div.UITableColumnContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -296,7 +238,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div.UITableColumnContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -309,8 +253,8 @@ module.exports = {
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
-      "onBeforeScript": "",
-      "onReadyScript": "onBefore_contentadminpage",
+      "onBeforeScript": "onBefore_contentadminpage",
+      "onReadyScript": "",
       "hideSelectors": ["div.currentDateContainer center"],
       "removeSelectors": [],
       "hoverSelector": "",
@@ -318,7 +262,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div.UITableColumnContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -329,8 +275,8 @@ module.exports = {
       "url": process.argv[process.argv.length-1],
       "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
-      "onBeforeScript": "",
-      "onReadyScript": "onBefore_contentMgmnt.js",
+      "onBeforeScript": "onBefore_contentMgmnt.js",
+      "onReadyScript": "",
       "readySelector": "",
       "delay": 1000,
       "hideSelectors": ["div.currentDateContainer center"],
@@ -340,7 +286,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div.UITableColumnContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -353,8 +301,8 @@ module.exports = {
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
-      "onBeforeScript": "",
-      "onReadyScript": "onBefore_contentsearch",
+      "onBeforeScript": "onBefore_contentsearch",
+      "onReadyScript": "",
       "hideSelectors": ["div.currentDateContainer center"],
       "removeSelectors": [],
       "hoverSelector": "",
@@ -362,7 +310,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -383,313 +333,39 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
       "requireSameDimensions": true
     },
+
+
     {
-      "label": "Create_newSpace_page",
+      "label": "Documents_page",
       "url": process.argv[process.argv.length-1],
       "referenceUrl": process.argv[process.argv.length-1],
       "readyEvent": null,
       "readySelector": "",
-      "delay": 500,
-      "onBeforeScript": "",
-      "onReadyScript": "onReady_createspace.js",
-      "hideSelectors": ["div.footerWLC.backOutdated"],
+      "delay": 1000,
+      "onReadyScript": "onBefore_docs.js",
+      "hideSelectors": [],
       "removeSelectors": [],
       "hoverSelector": "",
       "clickSelector": "",
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
       "requireSameDimensions": true
     },
-    {
-      "label": "delete_space1",
-      "url": process.argv[process.argv.length-1],
-      "referenceUrl": process.argv[process.argv.length-1],
-      "readyEvent": null,
-      "readySelector": "",
-      "delay": 500,
-      "onReadyScript": "onbefore_delete_space.js",
-      "hideSelectors": [""],
-      "removeSelectors": [],
-      "hoverSelector": "",
-      "clickSelector": "",
-      "postInteractionWait": "",
-      "selectors": [
-        "document"
-      ],
-      "selectorExpansion": true,
-      "misMatchThreshold" : 0,
-      "requireSameDimensions": true
-
-    },
-    {
-      "label": "Space_page_Cldr",
-      "url": process.argv[process.argv.length-1],
-      "referenceUrl": process.argv[process.argv.length-1],
-      "readyEvent": null,
-      "readySelector": "",
-      "delay": 500,
-      "onBeforeScript": "",
-      "onReadyScript": "onReady_newspace_cldr.js",
-      "hideSelectors": [""],
-      "removeSelectors": [],
-      "hoverSelector": "",
-      "clickSelector": "",
-      "postInteractionWait": "",
-      "selectors": [
-        "viewport",
-        "document"
-      ],
-      "selectorExpansion": true,
-      "misMatchThreshold" : 0,
-      "requireSameDimensions": true
-    },
-    {
-      "label": "delete_space2",
-      "url": process.argv[process.argv.length-1],
-      "referenceUrl": process.argv[process.argv.length-1],
-      "readyEvent": null,
-      "readySelector": "",
-      "delay": 500,
-      "onReadyScript": "onbefore_delete_space.js",
-      "hideSelectors": [""],
-      "removeSelectors": [],
-      "hoverSelector": "",
-      "clickSelector": "",
-      "postInteractionWait": "",
-      "selectors": [
-        "document"
-      ],
-      "selectorExpansion": true,
-      "misMatchThreshold" : 0,
-      "requireSameDimensions": true
-
-    },
-    {
-      "label": "Space_page_Docs",
-      "url": process.argv[process.argv.length-1],
-      "referenceUrl": process.argv[process.argv.length-1],
-      "readyEvent": null,
-      "readySelector": "",
-      "delay": 500,
-      "onBeforeScript": "",
-      "onReadyScript": "onReady_newspace_docs.js",
-      "hideSelectors": ["div.uiContentBox.uiExpandContainer span"],
-      "removeSelectors": [],
-      "hoverSelector": "",
-      "clickSelector": "",
-      "postInteractionWait": "",
-      "selectors": [
-        "viewport",
-        "document"
-      ],
-      "selectorExpansion": true,
-      "misMatchThreshold" : 0,
-      "requireSameDimensions": true
-    },
-    {
-      "label": "delete_space3",
-      "url": process.argv[process.argv.length-1],
-      "referenceUrl": process.argv[process.argv.length-1],
-      "readyEvent": null,
-      "readySelector": "",
-      "delay": 500,
-      "onReadyScript": "onbefore_delete_space.js",
-      "hideSelectors": [""],
-      "removeSelectors": [],
-      "hoverSelector": "",
-      "clickSelector": "",
-      "postInteractionWait": "",
-      "selectors": [
-        "document"
-      ],
-      "selectorExpansion": true,
-      "misMatchThreshold" : 0,
-      "requireSameDimensions": true
-
-    },
-    {
-      "label": "Space_page_Forum",
-      "url": process.argv[process.argv.length-1],
-      "referenceUrl": process.argv[process.argv.length-1],
-      "readyEvent": null,
-      "readySelector": "",
-      "delay": 500,
-      "onBeforeScript": "",
-      "onReadyScript": "onReady_newspace_forum.js",
-      "hideSelectors": ["div.uiContentBox.uiExpandContainer span"],
-      "removeSelectors": [],
-      "hoverSelector": "",
-      "clickSelector": "",
-      "postInteractionWait": "",
-      "selectors": [
-        "viewport",
-        "document"
-      ],
-      "selectorExpansion": true,
-      "misMatchThreshold" : 0,
-      "requireSameDimensions": true
-    },
-    {
-      "label": "delete_space4",
-      "url": process.argv[process.argv.length-1],
-      "referenceUrl": process.argv[process.argv.length-1],
-      "readyEvent": null,
-      "readySelector": "",
-      "delay": 500,
-      "onReadyScript": "onbefore_delete_space.js",
-      "hideSelectors": [""],
-      "removeSelectors": [],
-      "hoverSelector": "",
-      "clickSelector": "",
-      "postInteractionWait": "",
-      "selectors": [
-        "document"
-      ],
-      "selectorExpansion": true,
-      "misMatchThreshold" : 0,
-      "requireSameDimensions": true
-
-    },
-    {
-      "label": "Space_page_Settings",
-      "url": process.argv[process.argv.length-1],
-      "referenceUrl": process.argv[process.argv.length-1],
-      "readyEvent": null,
-      "readySelector": "",
-      "delay": 500,
-      "onBeforeScript": "",
-      "onReadyScript": "onReady_newspace_settings.js",
-      "hideSelectors": ["div.uiContentBox.uiExpandContainer span"],
-      "removeSelectors": [],
-      "hoverSelector": "",
-      "clickSelector": "",
-      "postInteractionWait": "",
-      "selectors": [
-        "viewport",
-        "document"
-      ],
-      "selectorExpansion": true,
-      "misMatchThreshold" : 0,
-      "requireSameDimensions": true
-    },
-    {
-      "label": "delete_space5",
-      "url": process.argv[process.argv.length-1],
-      "referenceUrl": process.argv[process.argv.length-1],
-      "readyEvent": null,
-      "readySelector": "",
-      "delay": 500,
-      "onReadyScript": "onbefore_delete_space.js",
-      "hideSelectors": [""],
-      "removeSelectors": [],
-      "hoverSelector": "",
-      "clickSelector": "",
-      "postInteractionWait": "",
-      "selectors": [
-        "document"
-      ],
-      "selectorExpansion": true,
-      "misMatchThreshold" : 0,
-      "requireSameDimensions": true
-
-    },
-    {
-      "label": "Space_page_Tasks",
-      "url": process.argv[process.argv.length-1],
-      "referenceUrl": process.argv[process.argv.length-1],
-      "readyEvent": null,
-      "readySelector": "",
-      "delay": 500,
-      "onBeforeScript": "",
-      "onReadyScript": "onReady_newspace_tasks.js",
-      "hideSelectors": [""],
-      "removeSelectors": [],
-      "hoverSelector": "",
-      "clickSelector": "",
-      "postInteractionWait": "",
-      "selectors": [
-        "viewport",
-        "document"
-      ],
-      "selectorExpansion": true,
-      "misMatchThreshold" : 0,
-      "requireSameDimensions": true
-    },
-    {
-      "label": "delete_space6",
-      "url": process.argv[process.argv.length-1],
-      "referenceUrl": process.argv[process.argv.length-1],
-      "readyEvent": null,
-      "readySelector": "",
-      "delay": 500,
-      "onReadyScript": "onbefore_delete_space.js",
-      "hideSelectors": [""],
-      "removeSelectors": [],
-      "hoverSelector": "",
-      "clickSelector": "",
-      "postInteractionWait": "",
-      "selectors": [
-        "document"
-      ],
-      "selectorExpansion": true,
-      "misMatchThreshold" : 0,
-      "requireSameDimensions": true
-
-    },
-    {
-      "label": "Space_page_Wiki",
-      "url": process.argv[process.argv.length-1],
-      "referenceUrl": process.argv[process.argv.length-1],
-      "readyEvent": null,
-      "readySelector": "",
-      "delay": 500,
-      "onBeforeScript": "",
-      "onReadyScript": "onReady_newspace_wiki.js",
-      "hideSelectors": [""],
-      "removeSelectors": [],
-      "hoverSelector": "",
-      "clickSelector": "",
-      "postInteractionWait": "",
-      "selectors": [
-        "viewport",
-        "document"
-      ],
-      "selectorExpansion": true,
-      "misMatchThreshold" : 0,
-      "requireSameDimensions": true
-    },
-    {
-      "label": "delete_space7",
-      "url": process.argv[process.argv.length-1],
-      "referenceUrl": process.argv[process.argv.length-1],
-      "readyEvent": null,
-      "readySelector": "",
-      "delay": 500,
-      "onReadyScript": "onbefore_delete_space.js",
-      "hideSelectors": [""],
-      "removeSelectors": [],
-      "hoverSelector": "",
-      "clickSelector": "",
-      "postInteractionWait": "",
-      "selectors": [
-        "document"
-      ],
-      "selectorExpansion": true,
-      "misMatchThreshold" : 0,
-      "requireSameDimensions": true
-
-    },    
     {
       "label": "Forums_page",
       "url": process.argv[process.argv.length-1],
@@ -699,14 +375,16 @@ module.exports = {
       "delay": 1000,
       "onBeforeScript": "",
       "onReadyScript": "onBefore_forums_page.js",
-      "hideSelectors": [],
+      "hideSelectors": ['div#UICategoryInfo'],
       "removeSelectors": [],
       "hoverSelector": "",
       "clickSelector": "",
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -728,7 +406,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -750,7 +430,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div.UITableColumnContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -763,8 +445,8 @@ module.exports = {
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
-      "onBeforeScript": "",
-      "onReadyScript": "onBefore_portalpage.js",
+      "onBeforeScript": "onBefore_portalpage.js",
+      "onReadyScript": "",
       "hideSelectors": ["div.currentDateContainer center"],
       "removeSelectors": [],
       "hoverSelector": "",
@@ -772,7 +454,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div.UITableColumnContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -785,8 +469,8 @@ module.exports = {
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
-      "onBeforeScript": "",
-      "onReadyScript": "onBefore_portalgpsitespage.js",
+      "onBeforeScript": "onBefore_portalgpsitespage.js",
+      "onReadyScript": "",
       "hideSelectors": ["div.currentDateContainer center"],
       "removeSelectors": [],
       "hoverSelector": "",
@@ -794,7 +478,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -807,8 +493,8 @@ module.exports = {
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
-      "onBeforeScript": "",
-      "onReadyScript": "onBefore_portalnotifspage.js",
+      "onBeforeScript": "onBefore_portalnotifspage.js",
+      "onReadyScript": "",
       "hideSelectors": ["div.currentDateContainer center"],
       "removeSelectors": [],
       "hoverSelector": "",
@@ -816,7 +502,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -829,8 +517,8 @@ module.exports = {
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
-      "onBeforeScript": "",
-      "onReadyScript": "onBefore_portalsitespage.js",
+      "onBeforeScript": "onBefore_portalsitespage.js",
+      "onReadyScript": "",
       "hideSelectors": ["div.currentDateContainer center"],
       "removeSelectors": [],
       "hoverSelector": "",
@@ -838,7 +526,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -847,12 +537,12 @@ module.exports = {
     {
       "label": "Portalpages_page",
       "url": process.argv[process.argv.length-1],
-      "referenceUrl": process.argv[process.argv.length-1],
+      "referenceUrl":process.argv[process.argv.length-1],
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
-      "onBeforeScript": "",
-      "onReadyScript": "onBefore_portalpages.js",
+      "onBeforeScript": "onBefore_portalpages.js",
+      "onReadyScript": "",
       "hideSelectors": ["div.currentDateContainer center"],
       "removeSelectors": [],
       "hoverSelector": "",
@@ -860,7 +550,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -873,8 +565,8 @@ module.exports = {
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
-      "onBeforeScript": "",
-      "onReadyScript": "onBefore_searchindexinpage.js",
+      "onBeforeScript": "onBefore_searchindexinpage.js",
+      "onReadyScript": "",
       "hideSelectors": ["div.currentDateContainer center"],
       "removeSelectors": [],
       "hoverSelector": "",
@@ -882,7 +574,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -904,7 +598,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -917,8 +613,8 @@ module.exports = {
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
-      "onBeforeScript": "",
-      "onReadyScript": "onBefore_systemmgmentpage.js",
+      "onBeforeScript": "onBefore_systemmgmentpage.js",
+      "onReadyScript": "",
       "hideSelectors": ["div.currentDateContainer center"],
       "removeSelectors": [],
       "hoverSelector": "",
@@ -926,7 +622,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -939,8 +637,8 @@ module.exports = {
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
-      "onBeforeScript": "",
-      "onReadyScript": "onBefore_systemmonitoringpage.js",
+      "onBeforeScript": "onBefore_systemmonitoringpage.js",
+      "onReadyScript": "",
       "hideSelectors": ["div.currentDateContainer center"],
       "removeSelectors": [],
       "hoverSelector": "",
@@ -948,7 +646,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -970,7 +670,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -992,7 +694,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -1014,7 +718,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -1029,14 +735,17 @@ module.exports = {
       "delay": 1000,
       "onBeforeScript": "",
       "onReadyScript": "onBefore_usrpageflags.js",
-      "hideSelectors": ["ul#suggestions li","div.currentDateContainer center a"],
+      "hideSelectors": [],
       "removeSelectors": [],
       "hoverSelector": "",
       "clickSelector": "",
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer",
+        "div.MaskContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -1050,7 +759,7 @@ module.exports = {
       "readySelector": "",
       "delay": 1000,
       "onBeforeScript": "",
-      "onReadyScript": "onBefore_Closeflags.js",
+      "onReadyScript": "onBefore_closeflags.js",
       "hideSelectors": ["ul#suggestions li","div.currentDateContainer center a"],
       "removeSelectors": [],
       "hoverSelector": "",
@@ -1079,7 +788,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -1101,7 +812,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -1114,8 +827,8 @@ module.exports = {
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
-      "onBeforeScript": "",
-      "onReadyScript": "onBefore_usrpageprofile.js",
+      "onBeforeScript": "onBefore_usrpageprofile.js",
+      "onReadyScript": "",
       "hideSelectors": [],
       "removeSelectors": [],
       "hoverSelector": "",
@@ -1123,7 +836,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -1138,14 +853,17 @@ module.exports = {
       "delay": 1000,
       "onBeforeScript": "",
       "onReadyScript": "onBefore_usrpagesettings.js",
-      "hideSelectors": ["ul#suggestions li","div.currentDateContainer center a"],
+      "hideSelectors": [],
       "removeSelectors": [],
       "hoverSelector": "",
       "clickSelector": "",
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer",
+        "div.MaskContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -1188,7 +906,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -1201,8 +921,8 @@ module.exports = {
       "readyEvent": null,
       "readySelector": "",
       "delay": 1000,
-      "onBeforeScript": "",
-      "onReadyScript": "onBefore_webconfpage.js",
+      "onBeforeScript": "onBefore_webconfpage.js",
+      "onReadyScript": "",
       "hideSelectors": ["div.currentDateContainer center"],
       "removeSelectors": [],
       "hoverSelector": "",
@@ -1210,7 +930,9 @@ module.exports = {
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -1225,14 +947,16 @@ module.exports = {
       "delay": 1000,
       "onBeforeScript": "",
       "onReadyScript": "onBefore_usrpagewiki.js",
-      "hideSelectors": [],
+      "hideSelectors": ["div.uiWikiPageInfoArea"],
       "removeSelectors": [],
       "hoverSelector": "",
       "clickSelector": "",
       "postInteractionWait": "",
       "selectors": [
         "viewport",
-        "document"
+        "document",
+        "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+        "div#RightBody.UIContainer"
       ],
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
@@ -1240,11 +964,11 @@ module.exports = {
     }
   ],
   "paths": {
-    "bitmaps_reference": "backstop_data/bitmaps_reference",
-    "bitmaps_test": "backstop_data/bitmaps_test",
-    "engine_scripts": "backstop_data/engine_scripts",
-    "html_report": "backstop_data/html_report",
-    "ci_report": "backstop_data/ci_report"
+    "bitmaps_reference": "backstop_data_desktop/bitmaps_reference",
+    "bitmaps_test": "backstop_data_desktop/bitmaps_test",
+    "engine_scripts": "backstop_data_desktop/engine_scripts",
+    "html_report": "backstop_data_desktop/html_report",
+    "ci_report": "backstop_data_desktop/ci_report"
   },
   "report": ["browser", "CI"],
   "engine": "phantomjs",
