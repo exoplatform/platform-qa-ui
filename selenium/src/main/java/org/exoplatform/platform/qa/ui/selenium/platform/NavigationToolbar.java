@@ -20,10 +20,9 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DATE_ACTIVITY;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_MANAGESITES_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_PAGE_CREATION_WIZARD;
@@ -281,6 +280,11 @@ public class NavigationToolbar {
     ELEMENT_LINK_CONTENT_ADMIN.waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_LINK_CONTENT_ADMIN.click();
 
+  }
+  public void goToSpaceAdminstration() {
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    $(byAttribute("href", "/portal/g/:platform:administrators/spacesAdministration")).click();
   }
 
   /**

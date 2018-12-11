@@ -15,6 +15,8 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DATE_ACTIVITY;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DELETE_POPUP_OK;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_NOTIFICATION_DROPDOWN;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -43,64 +45,38 @@ public class ManageSpacesTestIT extends Base {
         String spaceDesa = "descriptiona" + getRandomNumber();
         homePagePlatform.goToMySpaces();
         spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
-        String spaceNameb = "spaceNameb" + getRandomNumber();
-        String spaceDesb = "descriptionb" + getRandomNumber();
-        homePagePlatform.goToMySpaces();
-        spaceManagement.addNewSpaceSimple(spaceNameb, spaceDesb);
-        String spaceNamec = "spaceNamec" + getRandomNumber();
-        String spaceDesc = "descriptionc" + getRandomNumber();
-        homePagePlatform.goToMySpaces();
-        spaceManagement.addNewSpaceSimple(spaceNamec, spaceDesc);
         info("Test 1: CheckElementsInTheManageSpacesTab");
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-        $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/a")).click();
-        $(byXpath("//*[@id=\"4f91fdf7-ce43-4f17-9809-955c21cd6251\"]/div/div/div/ul/li[1]/a")).click();
-        $(byXpath("//*[@id=\"4f91fdf7-ce43-4f17-9809-955c21cd6251\"]/div/div/div/div/div/div/table/tr[1]/th[1]")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byAttribute("src", "/eXoSkin/skin/images/system/SpaceAvtDefault.png")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byXpath("//*[@id=\"4f91fdf7-ce43-4f17-9809-955c21cd6251\"]/div/div/div/div/div/div/table/tr[1]/th[2]")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byXpath("//*[@id=\"4f91fdf7-ce43-4f17-9809-955c21cd6251\"]/div/div/div/div/div/div/table/tr[1]/th[3]")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byXpath("//*[@id=\"4f91fdf7-ce43-4f17-9809-955c21cd6251\"]/div/div/div/div/div/div/table/tr[3]/td[2]")).waitUntil(Condition.visible, Configuration.timeout);
+        navigationToolbar.goToSpaceAdminstration();
+        $(byClassName("uiGrid")).find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        $(byClassName("uiGrid")).find(byText(spaceDesa)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        $(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout);
+        $(byClassName("uiIconDeleteUser")).waitUntil(Condition.visible, Configuration.timeout);
+        homePagePlatform.goToMySpaces();
+        spaceManagement.deleteSpace(spaceNamea, false);
     }
 
     @Test
-    public void test02_CheckThatNothingHappensWhenClickOnSpacesNameAndAvatar(){
+    public void test02_CheckThatNothingHappensWhenClickOnSpacesNameAndAvatar() {
 
         info("create some spaces");
         String spaceNamea = "spaceNamea" + getRandomNumber();
         String spaceDesa = "descriptiona" + getRandomNumber();
         homePagePlatform.goToMySpaces();
         spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
-        String spaceNameb = "spaceNameb" + getRandomNumber();
-        String spaceDesb = "descriptionb" + getRandomNumber();
-        homePagePlatform.goToMySpaces();
-        spaceManagement.addNewSpaceSimple(spaceNameb, spaceDesb);
-        String spaceNamec = "spaceNamec" + getRandomNumber();
-        String spaceDesc = "descriptionc" + getRandomNumber();
-        homePagePlatform.goToMySpaces();
-        spaceManagement.addNewSpaceSimple(spaceNamec, spaceDesc);
-
         info("CheckThatNothingHappensWhenClickOnSpacesNameAndAvatar");
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-        $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/a")).click();
-        $(byXpath("//*[@id=\"4f91fdf7-ce43-4f17-9809-955c21cd6251\"]/div/div/div/ul/li[1]/a")).click();
-        $(byXpath("//*[@id=\"4f91fdf7-ce43-4f17-9809-955c21cd6251\"]/div/div/div/div/div/div/table/tr[1]/th[1]")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byAttribute("src", "/eXoSkin/skin/images/system/SpaceAvtDefault.png")).click();
-        $(byXpath("//*[@id=\"4f91fdf7-ce43-4f17-9809-955c21cd6251\"]/div/div/div/div/div/div/table")).find(byText(spaceNamec));
-        $(byText(spaceNamec)).click();
+        navigationToolbar.goToSpaceAdminstration();
+        $(byAttribute("src", "/eXoSkin/skin/images/system/SpaceAvtDefault.png")).hover().click();
+        homePagePlatform.goToMySpaces();
+        spaceManagement.deleteSpace(spaceNamea, false);
+
     }
 
     @Test
-    public void test03_CheckTheDisplayOfTheFilterFieldAboveTheSpaceManagementTable () {
+    public void test03_CheckTheDisplayOfTheFilterFieldAboveTheSpaceManagementTable() {
 
         info("CheckTheDisplayOfTheFilterFieldAboveTheSpaceManagementTable");
-
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-        $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/a")).click();
-        $(byXpath("//*[@id=\"4f91fdf7-ce43-4f17-9809-955c21cd6251\"]/div/div/div/ul/li[1]/a")).click();
-        $(byClassName("showInputSearch")).waitUntil(Condition.exist, Configuration.timeout);
+        navigationToolbar.goToSpaceAdminstration();
+        $(byClassName("showInputSearch")).waitUntil(Condition.visible, Configuration.timeout);
     }
 
 
@@ -145,6 +121,7 @@ public class ManageSpacesTestIT extends Base {
         $(byClassName("showInputSearch")).setValue(spaceNamec);
         $(byClassName("uiIconPLF24x24Search")).click();
     }
+
     @Test
     public void test05_SpacesAreFilteredByItsDescription() {
         info("create some spaces");
@@ -161,22 +138,69 @@ public class ManageSpacesTestIT extends Base {
         homePagePlatform.goToMySpaces();
         spaceManagement.addNewSpaceSimple(spaceNamec, spaceDesc);
         info("SpacesAreFilteredByItsName");
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-        $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/a")).click();
-        $(byXpath(" //*[@id=\"f0da4b11-96ff-4d12-9119-5731c979d541\"]/div/div/div/ul/li[1]/a")).click();
-        $(byClassName("showInputSearch")).setValue(spaceDesa);
-        $(byClassName("uiIconPLF24x24Search")).click();
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-        $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/a")).click();
-        $(byXpath(" //*[@id=\"f0da4b11-96ff-4d12-9119-5731c979d541\"]/div/div/div/ul/li[1]/a")).click();
-        $(byClassName("showInputSearch")).setValue(spaceDesb);
-        $(byClassName("uiIconPLF24x24Search")).click();
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-        $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/a")).click();
-        $(byXpath(" //*[@id=\"f0da4b11-96ff-4d12-9119-5731c979d541\"]/div/div/div/ul/li[1]/a")).click();
-        $(byClassName("showInputSearch")).setValue(spaceDesc);
-        $(byClassName("uiIconPLF24x24Search")).click();
-    }}
+        navigationToolbar.goToSpaceAdminstration();
+        $(byClassName("showInputSearch")).setValue("descriptiona");
+        $(byClassName("uiIconPLF24x24Search")).setValue("descriptiona");
+
+    }
+
+    @Test
+    public void test06_CheckcancelButtonFromTheConfirmationPopup() {
+        info("create some spaces");
+        String spaceNamea = "spaceNamea" + getRandomNumber();
+        String spaceDesa = "descriptiona" + getRandomNumber();
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
+        navigationToolbar.goToSpaceAdminstration();
+        $(byClassName("uiGrid")).find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        $(byClassName("uiIconDeleteUser")).waitUntil(Condition.visible, Configuration.timeout).click();
+        $(byClassName("modal-content")).find(byClassName("btn-primary")).click();
+
+    }
+    @Test
+    public void test07_CheckXButtonFromTheConfirmationPopup() {
+        info("create some spaces");
+        String spaceNamea = "spaceNamea" + getRandomNumber();
+        String spaceDesa = "descriptiona" + getRandomNumber();
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
+        navigationToolbar.goToSpaceAdminstration();
+        $(byClassName("uiGrid")).find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        $(byClassName("uiIconDeleteUser")).waitUntil(Condition.visible, Configuration.timeout).click();
+        $(byClassName("modal-content")).find(byClassName("uiIconClose")).click();
+
+    }
+    @Test
+    public void test08_CheckConfirmationPopupWhileDeleteSpace  () {
+        info("create some spaces");
+        String spaceNamea = "spaceNamea" + getRandomNumber();
+        String spaceDesa = "descriptiona" + getRandomNumber();
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
+        navigationToolbar.goToSpaceAdminstration();
+        $(byClassName("uiGrid")).find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        $(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout);
+        $(byClassName("uiIconDeleteUser")).waitUntil(Condition.visible, Configuration.timeout).click();
+        $(byText("Do you confirm the delete of this space ?")).waitUntil(Condition.visible, Configuration.timeout);
+        $(byClassName("modal-content")).find(byClassName("btn-primary")).waitUntil(Condition.visible,Configuration.timeout);
+        $(byClassName("modal-content")).find(byClassName("btn")).waitUntil(Condition.visible,Configuration.timeout);
+        $(byClassName("modal-content")).find(byClassName("uiIconClose")).click();
+        homePagePlatform.goToMySpaces();
+        spaceManagement.deleteSpace(spaceNamea, false);
+    }
+
+    @Test
+    public void test09_CheckButtonsInTheActionsColumn() {
+        info("create some spaces");
+        String spaceNamea = "spaceNamea" + getRandomNumber();
+        String spaceDesa = "descriptiona" + getRandomNumber();
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
+        navigationToolbar.goToSpaceAdminstration();
+        $(byClassName("uiGrid")).find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        $(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout);
+        $(byClassName("uiIconDeleteUser")).waitUntil(Condition.visible, Configuration.timeout);
+        homePagePlatform.goToMySpaces();
+        spaceManagement.deleteSpace(spaceNamea, false);
+    }
+}

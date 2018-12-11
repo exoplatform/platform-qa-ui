@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Selectors.byAttribute;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
@@ -37,9 +38,10 @@ public class SpaceAdministrationTestIT extends Base {
     @Test
     public void test01_CheckTheNewSpacesSubmenuInTheAdministrationMenu() {
         info("Test 1: CheckTheNewSpacesSubmenuInTheAdministrationMenu");
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
+        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
         $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-        $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[1]/a")).waitUntil(Condition.visible, Configuration.timeout);
+        $(byAttribute("href", "/portal/g/:platform:administrators/spacesAdministration")).waitUntil(Condition.visible,Configuration.timeout);
+
     }
 
     @Test
