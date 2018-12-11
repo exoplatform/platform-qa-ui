@@ -11,6 +11,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarL
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
+import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -33,6 +34,8 @@ public class CalendarHomePage {
 
   public ManageAlert           alert;
 
+  public HomePagePlatform homePagePlatform;
+
   private ElementEventTestBase evt;
 
   /**
@@ -44,6 +47,7 @@ public class CalendarHomePage {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
     this.alert = new ManageAlert(testBase);
+    this.homePagePlatform=new HomePagePlatform(testBase);
   }
 
   /**
@@ -95,12 +99,12 @@ public class CalendarHomePage {
     $(byXpath(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Day"))).waitUntil(Condition.visible,Configuration.timeout);
     switch (optionDay) {
       case DETAILTIME:
-        $(ELEMENT_ACCOUNT_NAME_LINK).click();
+        homePagePlatform.refreshUntil($(byXpath(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name))),Condition.visible,1000);
         executeJavaScript("window.scrollBy(0,450)", "");
         $(byXpath(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name))).contextClick();
         break;
       case ALLDAY:
-        $(ELEMENT_ACCOUNT_NAME_LINK).click();
+        homePagePlatform.refreshUntil($(byXpath(ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY.replace("$name", name))),Condition.visible,1000);
         $(byXpath(ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY.replace("$name", name))).contextClick();
         break;
       default:
@@ -124,13 +128,13 @@ public class CalendarHomePage {
     if (date != null && date != "") {
       switch (optionDay) {
         case DETAILTIME:
-          $(ELEMENT_ACCOUNT_NAME_LINK).click();
+          homePagePlatform.refreshUntil(ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name)),Condition.visible,1000);
           ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name))
                   .waitUntil(Condition.appears, Configuration.timeout)
                   .contextClick();
           break;
         case ALLDAY:
-          $(ELEMENT_ACCOUNT_NAME_LINK).click();
+          homePagePlatform.refreshUntil(ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name)),Condition.visible,1000);
           ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name))
                   .waitUntil(Condition.appears, Configuration.timeout)
                   .contextClick();
@@ -180,15 +184,14 @@ public class CalendarHomePage {
         $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE.replace("$name", name).replace("$date",
                 date))).contextClick();
       else {
-        $(ELEMENT_ACCOUNT_NAME_LINK).click();
-        $(ELEMENT_ACCOUNT_NAME_LINK).click();
+        homePagePlatform.refreshUntil($(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))),Condition.visible,1000);
         $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))).contextClick();
 
       }
 
     }
     else {
-      $(ELEMENT_ACCOUNT_NAME_LINK).click();
+      homePagePlatform.refreshUntil($(byXpath(ELEMENT_EVENT_TASK_MONTH_VIEW.replace("$name", name))),Condition.visible,1000);
       $(byXpath(ELEMENT_EVENT_TASK_MONTH_VIEW.replace("$name", name))).contextClick();
     }
   }

@@ -96,7 +96,7 @@ public class WikiHomePage {
         info("Select the wiki page to delete");
         selectAPage(title);
         info("Click on More link");
-
+        homePagePlatform.refreshUntil($(ELEMENT_MORE_LINK),Condition.visible,1000);
         $(ELEMENT_MORE_LINK).click();
         $(ELEMENT_DELETE_LINK).click();
         $(ELEMENT_CONFIRM_WIKI_DELETE).click();
