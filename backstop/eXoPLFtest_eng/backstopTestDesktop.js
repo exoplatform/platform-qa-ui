@@ -103,7 +103,7 @@ module.exports = {
       "misMatchThreshold" : 0,
       "requireSameDimensions": true
     },
-    {
+  /*  {
       "label": "Calendar_page",
       "url": process.argv[process.argv.length-1],
       "referenceUrl": process.argv[process.argv.length-1],
@@ -112,7 +112,7 @@ module.exports = {
       "delay": 1000,
       "onReadyScript": "onReady_calendar.js",
       "hideSelectors": [],
-      "removeSelectors": [],
+      "removeSelectors": ["div#UIMiniCalendar","div.eventWeekBar"],
       "hoverSelector": "",
       "clickSelector": "",
       "postInteractionWait": "",
@@ -125,7 +125,7 @@ module.exports = {
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
       "requireSameDimensions": true
-    },
+    },*/
     {
       "label": "AdduserBtn",
       "url": process.argv[process.argv.length-1],
@@ -947,7 +947,7 @@ module.exports = {
       "delay": 1000,
       "onBeforeScript": "",
       "onReadyScript": "onBefore_usrpagewiki.js",
-      "hideSelectors": [],
+      "hideSelectors": ["div.uiWikiPageInfoArea"],
       "removeSelectors": [],
       "hoverSelector": "",
       "clickSelector": "",
