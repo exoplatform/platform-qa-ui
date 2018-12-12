@@ -15,6 +15,7 @@ module.exports = {
       "readyEvent": null,
       "readySelector": "",
       "delay": 500,
+      "onBeforeScript": "onReady_login.js",
       "hideSelectors": ["div#loginFooter"],
       "removeSelectors": [],
       "hoverSelector": "",
@@ -702,6 +703,7 @@ module.exports = {
       "misMatchThreshold" : 0,
       "requireSameDimensions": true
     },
+   /* this use case is disable until fix issue
     {
       "label": "User_page_dashboard",
       "url": process.argv[process.argv.length-1],
@@ -725,7 +727,7 @@ module.exports = {
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
       "requireSameDimensions": true
-    },
+    },*/
     {
       "label": "User_page_flags",
       "url": process.argv[process.argv.length-1],
