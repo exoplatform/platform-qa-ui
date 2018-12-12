@@ -967,10 +967,10 @@ module.exports = {
   ],
   "paths": {
     "bitmaps_reference": "backstop_data_desktop/bitmaps_reference",
-    "bitmaps_test": "backstop_data_desktop/bitmaps_test",
+    "bitmaps_test": "backstop_data/bitmaps_test",
     "engine_scripts": "backstop_data_desktop/engine_scripts",
-    "html_report": "backstop_data_desktop/html_report",
-    "ci_report": "backstop_data_desktop/ci_report"
+    "html_report": "backstop_data/html_report",
+    "ci_report": "backstop_data/ci_report"
   },
   "report": ["browser", "CI"],
   "engine": "phantomjs",
