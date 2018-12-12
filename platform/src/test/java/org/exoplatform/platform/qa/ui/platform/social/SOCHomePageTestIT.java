@@ -385,8 +385,9 @@ public class SOCHomePageTestIT extends Base {
     activityStream.addActivity(text1, "");
     homePagePlatform.goToMySpaces();
     homePagePlatform.goToHomePage();
+    homePagePlatform.refreshUntil($(ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES),Condition.visible,1000);
     $(ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES).click();
-    $(ELEMENT_PUBLICATION_DISPLAYMODE_MYACTIVITIES_OPTION).click();
+    $(ELEMENT_PUBLICATION_DISPLAYMODE_MYACTIVITIES_OPTION).waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_ACTIVITY_STREAM_CONTAINER.find(byText(space)).should(Condition.exist);
     $(byText(text)).shouldNot(Condition.exist);
     $(byText(text1)).should(Condition.exist);

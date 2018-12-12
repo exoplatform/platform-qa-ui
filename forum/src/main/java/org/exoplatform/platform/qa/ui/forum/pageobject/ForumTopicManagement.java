@@ -1,7 +1,7 @@
 package org.exoplatform.platform.qa.ui.forum.pageobject;
 
-import static com.codeborne.selenide.Condition.appears;
-import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
@@ -58,14 +58,14 @@ public class ForumTopicManagement {
    */
   public void moveTopicToForum(String category, String forum) {
     info("if not found forum");
-    if ($(ELEMENT_UI_POPUP_MOVE_TOPIC.replace("{$forum}", forum)) == null) {
+    if($(byXpath(ELEMENT_UI_POPUP_MOVE_TOPIC.replace("{$forum}",forum))).is(not(visible))){
       info("Click on Category to expand tree");
-      $(ELEMENT_MOVE_POPUP_COLLASPE_NODE.replace("${category}", category)).click();
+      $(byXpath(ELEMENT_MOVE_POPUP_COLLASPE_NODE.replace("${category}",category))).click();
       info("Select the forum");
-      ELEMENT_SELECT_FORUM_TO_MOVE.click();
-    } else {
+      $(byXpath(ELEMENT_UI_POPUP_MOVE_TOPIC.replace("{$forum}",forum))).click();
+    }else{
       info("Select the forum");
-      ELEMENT_SELECT_FORUM_TO_MOVE.click();
+      $(byXpath(ELEMENT_UI_POPUP_MOVE_TOPIC.replace("{$forum}",forum))).click();
     }
     info("Finish moving");
 
@@ -122,6 +122,7 @@ public class ForumTopicManagement {
       $(ELEMENT_MOVE_TOPIC).waitUntil(Condition.appears, Configuration.timeout);
       info("Click on move topic link");
       $(ELEMENT_MOVE_TOPIC).click();
+      $(byId("UIForumPopupWindow")).waitUntil(visible,Configuration.timeout);
       break;
     case CLOSE:
       info("Click on Close");
