@@ -216,7 +216,8 @@ public class ChatLocator {
 
     public static final SelenideElement ELEMENT_CHAT_AVATAR = $(byClassName("chat-sender-avatar"));
     public static final SelenideElement ELEMENT_CHAT_SEARCH_FIELD=  $(byXpath("//*[@id=\"chat-application\"]/div[1]/div[2]/div[1]/input"));
+    public static final SelenideElement ELEMENT_CHAT_EROOR_ROOM_POPUP=   $(byXpath("//*[@id=\"chat-application\"]/div[1]/div[2]/div[4]/div[2]/div"));
+    public static final SelenideElement ELEMENT_CLOSE_EROOR_ROOM_POPUP_BUTTON=    $(byXpath("//*[@id=\"chat-application\"]/div[1]/div[2]/div[4]/div[2]/div/div[2]/div/button"));
 
-
-
+    public static final SelenideElement ELEMENT_CANCEL_ROOM_BUTTON=   $(byXpath("//*[@id=\"chat-application\"]/div[1]/div[2]/div[4]/div[1]/div/div[2]/div[2]/button[2]"));
 

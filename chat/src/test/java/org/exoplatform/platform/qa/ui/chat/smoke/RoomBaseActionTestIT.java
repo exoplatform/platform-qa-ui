@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.chat.smoke;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.chat.pageobject.ChatManagement;
 import org.exoplatform.platform.qa.ui.chat.pageobject.RoomManagement;
 import org.exoplatform.platform.qa.ui.commons.Base;
@@ -14,12 +15,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
-import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_CHAT_LIST_MSG;
-import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_CONTACT_LIST;
+import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("chat")
@@ -92,6 +93,22 @@ public class RoomBaseActionTestIT extends Base {
         userandgroupmanagement.deleteUser(usernamea);
         userandgroupmanagement.deleteUser(usernameb);
         userandgroupmanagement.deleteUser(usernamec);
+    }
+
+    @Test
+    public void test_AddRoomWithAnExistingName(){
+        String room = "room" + getRandomNumber();
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.addRoom(room);
+        roomManagement.addRoom(room);
+        ELEMENT_CHAT_EROOR_ROOM_POPUP.waitUntil(Condition.appear, Configuration.timeout);
+        $(byText("An error occurred when creating the new chat room. Please try again and if the problem persists inform your system administrator.")).should(Condition.appear);
+        $(byClassName("errorIcon")).should(Condition.appear);
+        $(byText("You are already member of a room with the same name. Please choose another name for your new room.")).should(Condition.appear);
+        ELEMENT_CLOSE_EROOR_ROOM_POPUP_BUTTON.click();
+        ELEMENT_CANCEL_ROOM_BUTTON.click();
+        roomManagement.deleteRomm(room);
     }
 
     @Test

@@ -30,6 +30,13 @@ public class ChatManagement {
     ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.exist);
   }
 
+  public void sendMessageWithSendButtonInRoomOrSpace(String room, String message){
+    $(byText(room)).click();
+    ELEMENT_CHAT_MESSAGE_INPUT.setValue(message);
+    $(byClassName("uiIconSend")).click();
+    ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.exist);
+  }
+
   public void uploadFile(String file) {
     ELEMENT_COLLABORATION_ACTIONS.click();
     ELEMENT_CHAT_UPLOAD_FILE.click();

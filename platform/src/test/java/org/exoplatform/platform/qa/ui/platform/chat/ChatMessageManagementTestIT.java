@@ -19,7 +19,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_NAME_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -59,6 +61,18 @@ public class ChatMessageManagementTestIT extends Base {
     }
 
     @Test
+    public void test_CheckSendMessageWithSendButton(){
+        String room = "room" + getRandomNumber();
+        String message = "message" + getRandomNumber();
+
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.addRoom(room);
+        chatManagement.sendMessageWithSendButtonInRoomOrSpace(room,message);
+        roomManagement.deleteRomm(room);
+    }
+
+    @Test
     public void test01_CheckMessageActions() {
 
         String room = "room" + getRandomNumber();
@@ -74,14 +88,33 @@ public class ChatMessageManagementTestIT extends Base {
 
     @Test
     public void test02_EditMessage() {
+        String username = "username" + getRandomNumber();
+        String password = "123456";
+        String FirstName = "FirstName" + getRandomString();
+        String LastName = "LastName" + getRandomString();
+        String email = username + "@test.com";
         String room = "room" + getRandomNumber();
         String message = "message" + getRandomNumber();
         String newmessage = "newmessage" + getRandomNumber();
+        navigationToolbar.goToAddUser();
+        userAddManagement.addUser(username,password,email,FirstName,LastName);
         homePagePlatform.goToChat();
         switchTo().window(1);
-        roomManagement.addRoom(room);
+        roomManagement.addRoom(room,username);
         chatManagement.sendMessageInRoomOrSpace(room, message);
         messageManagement.editMessage(message, newmessage);
+        switchToParentWindow();
+        manageLogInOut.signIn(username,password);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        $(byText(room)).click();
+        ELEMENT_CHAT_LIST_MSG.find(byText(newmessage)).hover();
+        ELEMENT_CHAT_LIST_MSG.find(byClassName("uiIconDots")).click();
+        ELEMENT_CHAT_LIST_MSG.find(byClassName("dropdown-menu ")).find(byText("Edit message")).shouldNotBe(Condition.visible);
+        switchToParentWindow();
+        manageLogInOut.signIn(PLFData.DATA_USER1,PLFData.DATA_PASS2);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
         roomManagement.deleteRomm(room);
     }
 
