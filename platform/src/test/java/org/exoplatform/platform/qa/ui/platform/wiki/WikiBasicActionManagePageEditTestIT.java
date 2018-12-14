@@ -124,8 +124,8 @@ public class WikiBasicActionManagePageEditTestIT extends Base {
     richTextEditor.editSimplePageWithAutoSave(title, title2);
 
     info("Delete draf");
-    wikiHomePage.goToMyDraft();
-    wikidraftpage.deleteDraft(title2);
+      homePagePlatform.goToWiki();;
+      wikiHomePage.deleteWiki(title);
   }
 
   /**
