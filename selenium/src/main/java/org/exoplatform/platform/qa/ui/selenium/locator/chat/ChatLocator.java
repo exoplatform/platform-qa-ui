@@ -162,7 +162,7 @@ public class ChatLocator {
 
   public static final SelenideElement ELEMENT_MORE_ACTIONS=$(byClassName("uiIconVerticalDots"));
   public static final SelenideElement ELEMENT_CHAT_LEAVE_ROOM_BUTTON=  $(byXpath("//*[@id=\"room-detail\"]/div[2]/div[2]/div[3]/ul/li[5]/a"));
-  public static final SelenideElement ELEMENT_CHAT_SEARCH_FIELD=  $(byXpath("//*[@id=\"room-detail\"]/div[2]/div[2]/div[3]/ul/li[5]/a"));
+  public static final SelenideElement ELEMENT_CHAT_SEARCH_FIELD=  $(byXpath("//*[@id=\"chat-application\"]/div[1]/div[2]/div[1]/input"));
   public static final SelenideElement ELEMENT_CHAT_SETTING_NOTIFICATION=$(byClassName("uiIconGear"));
     public static final SelenideElement ELEMENT_CHAT_PREFERRENCE_POPUP=$(byClassName("uiIconGear"));
     public static final SelenideElement ELEMENT_CHAT_ROOM_NOTIFICATION=  $(byXpath("//*[@id=\"room-detail\"]/div[2]/div[2]/div[3]/ul/li[2]/a"));
@@ -187,4 +187,5 @@ public class ChatLocator {
 
     public static final SelenideElement ELEMENT_CHAT_ICON_CLOSE_ROOM_NOTIFICATION=  $(byXpath("//*[@id=\"room-detail\"]/div[3]/div/div[1]/a"));
     public static final SelenideElement ELEMENT_CHAT_CANCEL_BUTTON_ROOM_NOTIFICATION= $(byXpath("//*[@id=\"room-detail\"]/div[3]/div/div[2]/div[2]/div[2]"));
+    public static final SelenideElement ELEMENT_CHAT_SEE_MORE_BUTTON= $(byXpath("//*[@id=\"chat-users\"]/div[2]/div/a")).find(byText("See more"));
 }

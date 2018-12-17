@@ -17,16 +17,19 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 
+import java.util.ArrayList;
+
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @Tag("chat")
-@Tag("smoke")
+@Tag("sniff")
 public class ChatContactListTestIT extends Base {
 
     HomePagePlatform homePagePlatform;
@@ -50,8 +53,12 @@ public class ChatContactListTestIT extends Base {
         userAndGroupManagement = new UserAndGroupManagement(this);
         chatManagement = new ChatManagement(this);
         spaceManagement= new SpaceManagement(this);
-        manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
+        if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+            $(ELEMENT_SKIP_BUTTON).click();
+        }
+        manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);
     }
+
 
     @Test
     public void test01_CheckFavoriteIconForRoom(){
@@ -96,6 +103,20 @@ public class ChatContactListTestIT extends Base {
     }
 
     @Test
+    public void Check_ColorOfFavoriteStar(){
+
+        String room="room"+getRandomNumber();
+        String yellowColor = "rgb(250,216,110)";
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.addRoom(room);
+        ELEMENT_CONTACT_LIST.find(byText(room)).hover();
+        $(byClassName("favorite")).waitUntil(Condition.appear, Configuration.timeout).click();
+        ELEMENT_CONTACT_LIST.find(byText(room)).parent().parent().parent().parent().find(byClassName("is-fav")).should(Condition.exist).getCssValue(yellowColor);
+        roomManagement.deleteRomm(room);
+    }
+
+    @Test
     public void test03_SearchFieldAction(){
         String room1= "room1"+getRandomNumber();
         String room2="room2"+getRandomNumber();
@@ -123,6 +144,53 @@ public class ChatContactListTestIT extends Base {
         roomManagement.deleteRomm(newroom);
         roomManagement.deleteRomm(room2);
         roomManagement.deleteRomm(room3);
+    }
+
+
+    @Test
+    public void test_CheckSeeMoreButton() {
+        String room="room"+getRandomNumber();
+          int i;
+
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        for (i=0;i<22;i++){
+            roomManagement.addRoom(room + i);
+    }
+        ELEMENT_CHAT_SEE_MORE_BUTTON.waitUntil(Condition.appear,Configuration.timeout).click();
+        for (i=0;i<22;i++){
+            roomManagement.deleteRomm(room + i);
+        }
+    }
+
+
+    @Test
+    public void test_CheckSearchRoom() throws Exception {
+        String room= "room"+getRandomNumber();
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.addRoom(room);
+        homePagePlatform.refreshUntil(ELEMENT_CONTACT_LIST,Condition.visible,2000);
+        ELEMENT_CHAT_SEARCH_FIELD.setValue("@"+room);
+        ELEMENT_CONTACT_LIST.find(byText(room)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+        roomManagement.deleteRomm(room);
+    }
+
+    @Test
+    public void test_CheckSearchSpace() throws Exception {
+
+        String space = "space" + getRandomNumber();
+        info("create space and invite user");
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(space, space);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        homePagePlatform.refreshUntil(ELEMENT_CONTACT_LIST,Condition.visible,2000);
+        ELEMENT_CHAT_SEARCH_FIELD.setValue("@"+space);
+        ELEMENT_CONTACT_LIST.find(byText(space)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+        switchToParentWindow();
+        homePagePlatform.goToMySpaces();
+        spaceManagement.deleteSpace(space, false);
     }
 
     @Test
