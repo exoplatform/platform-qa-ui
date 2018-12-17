@@ -120,14 +120,33 @@ public class ChatMessageManagementTestIT extends Base {
 
     @Test
     public void test03_DeleteMessage() {
-
+        String username = "username" + getRandomNumber();
+        String password = "123456";
+        String FirstName = "FirstName" + getRandomString();
+        String LastName = "LastName" + getRandomString();
+        String email = username + "@test.com";
         String room = "room" + getRandomNumber();
         String message = "message" + getRandomNumber();
         String newmessage = "newmessage" + getRandomNumber();
+        navigationToolbar.goToAddUser();
+        userAddManagement.addUser(username,password,email,FirstName,LastName);
         homePagePlatform.goToChat();
         switchTo().window(1);
-        roomManagement.addRoom(room);
+        roomManagement.addRoom(room,username);
         chatManagement.sendMessageInRoomOrSpace(room, message);
+        switchToParentWindow();
+        manageLogInOut.signIn(username,password);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        $(byText(room)).click();
+        ELEMENT_CHAT_LIST_MSG.find(byText(message)).hover();
+        ELEMENT_CHAT_LIST_MSG.find(byClassName("uiIconDots")).click();
+        ELEMENT_CHAT_LIST_MSG.find(byClassName("dropdown-menu ")).find(byText("Delete")).shouldNotBe(Condition.visible);
+        switchToParentWindow();
+        manageLogInOut.signIn(PLFData.DATA_USER1,PLFData.DATA_PASS2);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        $(byText(room)).click();
         messageManagement.deleteMessage(message);
         roomManagement.deleteRomm(room);
     }
