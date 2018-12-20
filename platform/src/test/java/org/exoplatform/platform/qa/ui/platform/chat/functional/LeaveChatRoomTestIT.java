@@ -35,7 +35,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("chat")
 @Tag("functional")
-public class LeaveChatRoomTestIt extends Base {
+public class LeaveChatRoomTestIT extends Base {
     HomePagePlatform homePagePlatform;
 
     ChatManagement chatManagement;

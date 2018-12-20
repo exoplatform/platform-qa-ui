@@ -23,6 +23,8 @@ package org.exoplatform.platform.qa.ui.selenium.locator.ecms;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 
 import com.codeborne.selenide.SelenideElement;
@@ -1214,4 +1216,5 @@ public class ECMSLocator {
   public static final SelenideElement ELEMENT_NOTIFICATION= $(byClassName("UIControl"));
   public static final SelenideElement ELEMENT_CHECK=$(byClassName("uiCheckbox"));
 
+  public static final SelenideElement ELEMENT_BUTTON_CLOSE_SEARCH=$(byXpath("//*[@id=\"UIPopupWindow\"]/div[1]/a"));
 }

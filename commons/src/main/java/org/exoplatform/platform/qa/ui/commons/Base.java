@@ -21,8 +21,7 @@
 package org.exoplatform.platform.qa.ui.commons;
 
 import static com.codeborne.selenide.Selenide.*;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_PASSWORD_CAS;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
 
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.AfterEach;
@@ -83,8 +82,8 @@ public class Base extends TestBase {
     if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.visible))
         && $(ELEMENT_INPUT_PASSWORD_CAS).is(Condition.not(Condition.visible))) {
       manageLogInOut.signOut();
-      $(ELEMENT_INPUT_USERNAME_CAS).shouldBe(Condition.visible);
-      $(ELEMENT_INPUT_PASSWORD_CAS).shouldBe(Condition.visible);
+      $(ELEMENT_INPUT_USERNAME).shouldBe(Condition.visible);
+      $(ELEMENT_INPUT_PASSWORD).shouldBe(Condition.visible);
     }
     Screenshots.finishContext();
   }

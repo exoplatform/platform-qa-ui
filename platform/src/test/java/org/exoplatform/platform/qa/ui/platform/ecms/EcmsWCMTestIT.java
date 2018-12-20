@@ -60,20 +60,6 @@ public class EcmsWCMTestIT extends Base {
 
   HomePagePlatform     homePagePlatform;
 
-  @AfterAll
-  public static void changeLanguage() {
-    Selenide.close();
-    Platform plf = new Platform();
-    plf.open();
-    $(ELEMENT_INPUT_USERNAME_CAS).setValue(PLFData.DATA_USER1);
-    $(ELEMENT_INPUT_PASSWORD_CAS).setValue("gtngtn");
-    ELEMENT_SIGN_IN_BUTTON_CAS.click();
-    $(ELEMENT_TOPBAR_AVATAR).click();
-    $(ELEMENT_AVATAR_CHANGELANGUAGE).click();
-    $(ELEMENT_CHANGE_LANGUAGE_POPUP_TITLE).waitUntil(Condition.visible, Configuration.timeout);
-    $(byXpath(ELEMENT_CHANGELANGUAGE_LANGUAGE.replace("${language}", "English"))).click();
-    ELEMENT_BTN_APPLY_CHANGE_LANGUAGE.click();
-  }
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -222,7 +208,6 @@ public class EcmsWCMTestIT extends Base {
     pageCreationWizard.inputPageInfoStep1(content, true, "English", content, true, false);
     click(ELEMENT_ADDNEWPAGE_BTNNEXT);
     click(ELEMENT_ADDNEWPAGE_BTNNEXT);
-    pageCreationWizard.addApplication($(ELEMENT_APPLICATION_CONTENT_TAB), $(byId("Content/portlet_ContentListViewerPortlet")));
     pageCreationWizard.addContentDetail("General Drives/Sites Management/intranet", content);
     navigationToolbar.goToEditContent();
     ELEMENT_LIST_CONTENT.find(byText(content)).waitUntil(Condition.visible, Configuration.timeout);
@@ -348,10 +333,8 @@ public class EcmsWCMTestIT extends Base {
     pageCreationWizard.addContentlistByFolder("General Drives/Sites Management", "intranet");
     navigationToolbar.goToEditContent();
     // Verify that all webcontents are shown in Content list View page
-    $(byXpath(ELEMENT_CONTENT_LIST_CONTENT_TITLE.replace("${title}", content1))).waitUntil(Condition.visible,
-                                                                                           Configuration.timeout);
-    $(byXpath(ELEMENT_CONTENT_LIST_CONTENT_TITLE.replace("${title}", content2))).waitUntil(Condition.visible,
-                                                                                           Configuration.timeout);
+    ELEMENT_LIST_CONTENT.find(byText(content1)).waitUntil(Condition.visible, Configuration.timeout);
+    ELEMENT_LIST_CONTENT.find(byText(content2)).waitUntil(Condition.visible, Configuration.timeout);
     $(ELEMENT_EDIT_CLV).hover();
     $(ELEMENT_EDIT_PREFERENCE).click();
     check(ELEMENT_CONTENT_LIST_BY_CONTENT_MODE, 2);

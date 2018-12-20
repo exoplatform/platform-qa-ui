@@ -60,9 +60,6 @@ public class SOCPeopleActivityAddTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
-  @BugInPLF("SOC-5738")
-  // this test case is disabled until resolving this bug:
-  // https://jira.exoplatform.org/browse/SOC-5738
   public void test03_AddNewYourActivity() {
     /* Create data test */
     String username1 = "usernamea" + getRandomString();
@@ -118,6 +115,7 @@ public class SOCPeopleActivityAddTestIT extends Base {
     $(byClassName("uiTabNormal")).find(byClassName("limitText")).click();
     userPageBase.goToActivityTab();
     $(byText(activity1)).should(Condition.exist);
+    refresh();
     manageLogInOut.signIn("root", "gtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);

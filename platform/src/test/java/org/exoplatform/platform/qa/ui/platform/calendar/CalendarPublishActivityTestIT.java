@@ -8,6 +8,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLoca
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -66,7 +67,6 @@ public class CalendarPublishActivityTestIT extends Base {
     calendarManagement.changeSettingCalendar(null, "(GMT +01:00) Africa/Tunis", null, null, null, null, null);
     calendarManagement.saveSetting();
     homePagePlatform.goToMySpaces();
-    spaceManagement.goToCreateSpace();
     spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
   }
 
@@ -790,6 +790,7 @@ public class CalendarPublishActivityTestIT extends Base {
     info("Test 6 Delete an event of space calendar");
 
     homePagePlatform.goToHomePage();
+    homePagePlatform.refreshUntil($(byXpath(ELEMENT_ACTIVITY_TASK_EVENT_TITLE.replace("$name", titleEventSpace))),Condition.visible,1000);
     $(byXpath(ELEMENT_ACTIVITY_TASK_EVENT_TITLE.replace("$name", titleEventSpace))).click();
     $(byXpath(ELEMENT_PREVIEW_TASK_EVENT_NAME.replace("$name", titleEventSpace))).should(Condition.visible);
     $(ELEMENT_CLOSE_PREVIEW_TASK_EVENT_FORM).click();

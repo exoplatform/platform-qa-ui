@@ -5,6 +5,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.administration.ContentAd
  */
 @Tag("ecms")
 @Tag("smoke")
+@BugInPLF("ECMS-7841")
 public class EcmsAdminTemplatesTestIT extends Base {
   ContentAdministration contentAdministration;
 

@@ -82,7 +82,7 @@ public class SOCSpaceMemberManagementInviteTestIT extends Base {
     String space = "space" + getRandomNumber();
 
     info("Create a space");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
 
     /*
@@ -102,7 +102,8 @@ public class SOCSpaceMemberManagementInviteTestIT extends Base {
     homePagePlatform.goToAllSpace();
     $(byText(space)).should(Condition.exist);
     manageLogInOut.signIn(username1, password);
-    homePagePlatform.goToSpecificSpace(space);
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceSettingManagement.goToMemberTab();
     $(byId("spaceMemberListBox")).scrollTo().find(byText(username2 + " " + username2)).should(Condition.exist);
     manageLogInOut.signIn("root", "gtn");
@@ -171,7 +172,8 @@ public class SOCSpaceMemberManagementInviteTestIT extends Base {
      * accept the request else click on [decline] button
      */
     manageLogInOut.signIn(username1, password);
-    homePagePlatform.goToSpecificSpace(space);
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.goToMemberTabInSpaceSettingTab();
     spaceSettingManagement.acceptRequest(username2);

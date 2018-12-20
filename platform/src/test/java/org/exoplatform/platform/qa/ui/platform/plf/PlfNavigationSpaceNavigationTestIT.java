@@ -105,7 +105,6 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     info("Verify that Application is added to space");
     ELEMENT_SPACE_MENU_TAB.find(byText("Answer")).should(Condition.exist);
     spaceSettingManagement.removeApplication("Answer");
-    $(ELEMENT_SPACE_MENU_MORE).shouldNot(Condition.exist);
     ELEMENT_SPACE_MENU_TAB.find(byText(app)).shouldNot(Condition.exist);
 
     info("Delete the space");
@@ -132,7 +131,6 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
     ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("BlogArticlesPortlet")).should(Condition.exist);
     spaceSettingManagement.removeApplication(app);
-    $(ELEMENT_SPACE_MENU_MORE).shouldNot(Condition.exist);
     ELEMENT_SPACE_MENU_TAB.find(byText(app)).shouldNot(Condition.exist);
 
     info("Delete the space");
@@ -163,7 +161,6 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
       ELEMENT_SPACE_MENU_TAB.find(byId("Bookmark")).should(Condition.exist);
     }
     spaceSettingManagement.removeApplication(app);
-    $(ELEMENT_SPACE_MENU_MORE).shouldNot(Condition.exist);
     ELEMENT_SPACE_MENU_TAB.find(byText(app)).shouldNot(Condition.exist);
 
     info("Delete the space");
@@ -190,7 +187,6 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
     ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("GoogleMapPortlet")).should(Condition.exist);
     spaceSettingManagement.removeApplication(app);
-    $(ELEMENT_SPACE_MENU_MORE).shouldNot(Condition.exist);
     ELEMENT_SPACE_MENU_TAB.find(byText(app)).shouldNot(Condition.exist);
 
     info("Delete the space");
@@ -217,7 +213,6 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
     ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("FriendSuggestion")).should(Condition.exist);
     spaceSettingManagement.removeApplication(app);
-    $(ELEMENT_SPACE_MENU_MORE).shouldNot(Condition.exist);
     ELEMENT_SPACE_MENU_TAB.find(byText(app)).shouldNot(Condition.exist);
 
     info("Delete the space");
@@ -243,7 +238,7 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
 
     info("Verify that Application is added to space");
     $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
-    ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byText("ForumsStatistic")).should(Condition.exist);
+    ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("ForumsStatistic")).should(Condition.exist);
     info("Delete the space");
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space1, false);
@@ -423,7 +418,6 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     spaceSettingManagement.removeApplication(app);
     spaceSettingManagement.removeApplication(app1);
     spaceSettingManagement.removeApplication(app2);
-    $(ELEMENT_SPACE_MENU_MORE).shouldNot(Condition.exist);
     ELEMENT_SPACE_MENU_TAB.find(byText(app)).shouldNot(Condition.exist);
     ELEMENT_SPACE_MENU_TAB.find(byText(app1)).shouldNot(Condition.exist);
     ELEMENT_SPACE_MENU_TAB.find(byText(app2)).shouldNot(Condition.exist);

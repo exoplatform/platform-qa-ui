@@ -95,6 +95,8 @@ public class EcmsSEInfoTestIT extends Base {
     ecms_permission.deletePermissionNode("mary");
     ecms_permission.closePermission();
     info("Delete data test");
+    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    navigationToolbar.goToSiteExplorer();
     siteExplorerHome.deleteData(node1);
   }
 
@@ -132,6 +134,8 @@ public class EcmsSEInfoTestIT extends Base {
     ecms_permission.deletePermissionNode("mary");
     ecms_permission.closePermission();
     info("Delete data test");
+    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    navigationToolbar.goToSiteExplorer();
     siteExplorerHome.deleteData(node1);
   }
 
@@ -169,6 +173,8 @@ public class EcmsSEInfoTestIT extends Base {
     ecms_permission.deletePermissionNode("mary");
     ecms_permission.closePermission();
     info("Delete data test");
+    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    navigationToolbar.goToSiteExplorer();
     siteExplorerHome.deleteData(node1);
   }
 

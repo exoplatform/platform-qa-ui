@@ -74,7 +74,7 @@ public class SOCActivityAddTestIT extends Base {
     ELEMENT_ICON_LIKE_IN_PREVIEW_MODE.waitUntil(Condition.have(Condition.attribute("data-original-title", "Unlike")),
                                                 Configuration.timeout);
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-    activityStream.deleteActivity(activity1);
+    activityStream.deleteactivity(activity1);
 
   }
 }

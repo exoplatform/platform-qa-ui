@@ -6,6 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.Dialog;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 import static com.codeborne.selenide.Selectors.*;
@@ -23,6 +24,8 @@ public class WikiHomePage {
 
     private ElementEventTestBase evt;
 
+    public HomePagePlatform homePagePlatform;
+
     /**
      * constructor
      *
@@ -32,6 +35,7 @@ public class WikiHomePage {
         this.testBase = testBase;
         this.evt = testBase.getElementEventTestBase();
         this.dialog = new Dialog(testBase);
+        this.homePagePlatform=new HomePagePlatform(testBase);
         this.alert = new ManageAlert(testBase);
     }
 
@@ -39,6 +43,7 @@ public class WikiHomePage {
      * Go to "Add blank wiki page"
      */
     public void goToAddBlankPage() {
+        homePagePlatform.refreshUntil($(ELEMENT_ADD_PAGE_LINK),Condition.visible,500);
         info("--Go to add blank wiki page--");
         $(ELEMENT_ADD_PAGE_LINK).click();
         $(ELEMENT_BLANK_PAGE_LINK).click();
@@ -91,7 +96,7 @@ public class WikiHomePage {
         info("Select the wiki page to delete");
         selectAPage(title);
         info("Click on More link");
-
+        homePagePlatform.refreshUntil($(ELEMENT_MORE_LINK),Condition.visible,1000);
         $(ELEMENT_MORE_LINK).click();
         $(ELEMENT_DELETE_LINK).click();
         $(ELEMENT_CONFIRM_WIKI_DELETE).click();

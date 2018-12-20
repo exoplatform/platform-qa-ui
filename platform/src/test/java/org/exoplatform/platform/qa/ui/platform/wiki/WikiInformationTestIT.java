@@ -161,7 +161,6 @@ public class WikiInformationTestIT extends Base {
    */
 
   @Test
-  @BugInPLF("WIKI-1313")
   public void test02_AddRelationWithIntranetPortal() {
     info("Test 02: Add relations with Intranet portal");
     String space1 = "space1" + getRandomNumber();
@@ -209,7 +208,7 @@ public class WikiInformationTestIT extends Base {
     info("intranet's portal is added as a related pages on page info layout");
 
     homePagePlatform.goToHomePage();
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space1, false);
     spaceManagement.deleteSpace(space2, false);
 

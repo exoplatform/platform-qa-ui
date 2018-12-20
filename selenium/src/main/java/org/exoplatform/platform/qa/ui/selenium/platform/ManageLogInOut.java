@@ -41,12 +41,15 @@ public class ManageLogInOut {
 
   public ManageAlert           alt;
 
+  public HomePagePlatform homePagePlatform;
+
   private ElementEventTestBase evt;
 
   public ManageLogInOut(TestBase testBase) {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
     this.alt = new ManageAlert(testBase);
+    this.homePagePlatform=new HomePagePlatform(testBase);
   }
 
   /**
@@ -111,8 +114,8 @@ public class ManageLogInOut {
    */
   public void signInCas(String username, String password) {
     testBase.getExoWebDriver().getWebDriver();
-    $(ELEMENT_INPUT_USERNAME_CAS).setValue(username);
-    $(ELEMENT_INPUT_PASSWORD_CAS).setValue(password);
+    $(ELEMENT_INPUT_USERNAME).setValue(username);
+    $(ELEMENT_INPUT_PASSWORD).setValue(password);
     ELEMENT_SIGN_IN_BUTTON_CAS.click();
 
 
@@ -124,7 +127,7 @@ public class ManageLogInOut {
    * Sign out from intranet
    */
   public void signOut() {
-
+    homePagePlatform.refreshUntil($(ELEMENT_ACCOUNT_NAME_LINK),Condition.visible,1000);
     info("Sign out");
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {

@@ -67,10 +67,8 @@ public class ChatLocator {
     public static final String ELEMENT_CHAT_TOOLTIP =
             "//*[contains(@class,'tooltip-inner') and contains(text(),'${tooltip}')]";
 
-    public static final String ELEMENT_CHAT_STATUS =
-            "//a[@class='chat-status']/*[contains(text(),'${status}')]";
 
-    public static final By ELEMENT_CHAT_ICON = By.xpath(".//*[@id='chat-status']/a");
+
 
     public static final SelenideElement ELEMENT_CHAT_ICON_ADD_ROOM =
             $(byXpath("//*[@id=\"chat-users\"]/table/tbody/tr[4]/td")).parent()
@@ -99,6 +97,10 @@ public class ChatLocator {
 
     public static final SelenideElement ELEMENT_CHAT_BUTTON_SAVE_ADD_ROOM =
             $(byXpath("//*[@id=\"chat-application\"]/div[1]/div[2]/div[4]/div[1]/div/div[2]/div[2]/button[1]"));
+  public static final String          ELEMENT_CHAT_STATUS                        =
+                                                          "user-${status}";
+
+  public static final By              ELEMENT_CHAT_ICON                          = byClassName("status-dropdown");
 
     public static final SelenideElement ELEMENT_CHAT_INPUT_ROOMUSERSS =
             $(byClassName("selectize-input")).find(by("type", "text"));

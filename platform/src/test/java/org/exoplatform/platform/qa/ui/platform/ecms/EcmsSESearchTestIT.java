@@ -71,7 +71,7 @@ public class EcmsSESearchTestIT extends Base {
     $(ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_NAME).setValue(name);
     $(ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_SEARCHBTN).click();
     $(By.xpath("//*[@class='active']//*[@href='#tab-AdvancedSearchResult']")).waitUntil(Condition.visible, Configuration.timeout);
-
+    ELEMENT_BUTTON_CLOSE_SEARCH.click();
   }
 
   /**
@@ -101,6 +101,7 @@ public class EcmsSESearchTestIT extends Base {
     $(byXpath((ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_DELETEQUERYBTN).replace("${name}", name))).click();
     manageAlert.acceptAlert();
     $(byXpath("//*[text()='" + name + "']")).shouldNot(Condition.visible);
+    ELEMENT_BUTTON_CLOSE_SEARCH.click();
   }
 
   @Test
@@ -116,6 +117,7 @@ public class EcmsSESearchTestIT extends Base {
     $(byXpath((ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_DELETEQUERYBTN).replace("${name}", name))).click();
     manageAlert.acceptAlert();
     $(byXpath("//*[text()='" + name + "']")).shouldNot(Condition.visible);
+    ELEMENT_BUTTON_CLOSE_SEARCH.click();
   }
 
   /**
@@ -125,7 +127,6 @@ public class EcmsSESearchTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
-  @BugInPLF("ECMS-7683")
   public void test03_SimpleSearch() {
     info("Test 3: Simple Search");
     String title = "title" + getRandomNumber();
@@ -142,6 +143,7 @@ public class EcmsSESearchTestIT extends Base {
     createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
     createNewDocument.addNewFile(title, content);
     createNewDocument.saveAndClose();
+    siteExplorerHome.goToPath("intranet/documents", "Site Management");
     $(ELEMENT_ACTIONBAR_SEARCHBAR).setValue(title).pressEnter();
     $(byId("SimpleSearchResult")).find(byText(title)).should(Condition.visible);
     navigationToolbar.goToSiteExplorer();
@@ -172,6 +174,7 @@ public class EcmsSESearchTestIT extends Base {
 
     $(ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_EXECUTEQUERYBTN).click();
     $(byXpath("//*[@class='active']//*[@href='#tab-AdvancedSearchResult']")).waitUntil(Condition.visible, Configuration.timeout);
+    ELEMENT_BUTTON_CLOSE_SEARCH.click();
   }
 
   /**
@@ -203,5 +206,6 @@ public class EcmsSESearchTestIT extends Base {
     $(byXpath((ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_DELETEQUERYBTN).replace("${name}", name))).click();
     manageAlert.acceptAlert();
     $(byXpath(ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_RESULT.replace("${name}", name))).shouldNot(Condition.visible);
+    ELEMENT_BUTTON_CLOSE_SEARCH.click();
   }
 }

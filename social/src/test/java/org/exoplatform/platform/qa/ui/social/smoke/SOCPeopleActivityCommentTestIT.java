@@ -126,9 +126,6 @@ public class SOCPeopleActivityCommentTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
-  @BugInPLF("SOC-5738")
-  // this test case is disabled until resolving this bug:
-  // https://jira.exoplatform.org/browse/SOC-5738
   public void test02_CommentOnYourFriendsActivity() {
     /* Create data test */
     String username1 = "usernamea" + getRandomString();

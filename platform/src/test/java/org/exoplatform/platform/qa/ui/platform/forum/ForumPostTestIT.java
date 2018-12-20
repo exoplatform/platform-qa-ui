@@ -13,6 +13,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_TITLE_POST;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -187,12 +188,12 @@ public class ForumPostTestIT extends Base {
     forumTopicManagement.postReply(title, content);
     info("Test 3: Quote a post");
     info("Quote a post");
-    forumTopicManagement.quotePost(title, content);
+    forumTopicManagement.quotePost(content, newTitle);
     info("Verify that quote a post successfully");
-    $(byText(content)).should(Condition.exist);
+    homePagePlatform.refreshUntil($(byText(newTitle)),Condition.visible,1000);
     info("Test 4: Delete a post");
     info("Click on delete button of the post that is replied");
-    $(byText(content)).parent().parent().parent().parent().find(ELEMENT_BUTTON_DELETE_POST).click();
+    $(byText(newTitle)).parent().parent().parent().parent().find(ELEMENT_BUTTON_DELETE_POST).click();
     info("Click on OK button of the confirm popup");
     $(ELEMENT_DELETE_BOX_CONFIRMATION).click();
     info("Verify that the replied post is deleted");

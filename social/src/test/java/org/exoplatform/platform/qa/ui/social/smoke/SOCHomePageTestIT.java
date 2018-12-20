@@ -22,6 +22,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarL
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("social")
+@Tag("smoke")
 public class SOCHomePageTestIT extends Base {
     NavigationToolbar navigationToolbar;
 

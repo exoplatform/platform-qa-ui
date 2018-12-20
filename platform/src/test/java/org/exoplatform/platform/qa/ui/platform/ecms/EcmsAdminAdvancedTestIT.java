@@ -8,6 +8,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -250,7 +251,7 @@ public class EcmsAdminAdvancedTestIT extends Base {
    * required fields - Click [Save] - Add/copy/cut/paste/delete category in
    * category tree Expected Outcome: The Category is created successfully
    */
-  @Test
+  @BugInPLF("ECMS-7819")
   public void test07_Add_Categories() {
     info("Test 07: Add Categories");
     info("Get the data test");
@@ -265,8 +266,7 @@ public class EcmsAdminAdvancedTestIT extends Base {
     info("Test 09: Delete Categories");
     contentAdministration.deleteCategories(name);
   }
-
-  @Test
+  @BugInPLF("ECMS-7819")
   public void test08_Edit_Categories() {
     info("Test 07: Add Categories");
     info("Get the data test");
@@ -289,8 +289,7 @@ public class EcmsAdminAdvancedTestIT extends Base {
     info("Test 09: Delete Categories");
     contentAdministration.deleteCategories(name);
   }
-
-  @Test
+  @BugInPLF("ECMS-7819")
   public void test09_Delete_Categories() {
     info("Test 07: Add Categories");
     info("Get the data test");

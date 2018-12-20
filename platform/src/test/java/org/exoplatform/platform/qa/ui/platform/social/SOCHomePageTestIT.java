@@ -9,11 +9,14 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLoca
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_ACTIVITY_STREAM_CONTAINER;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_SITEEXPLORER_LEFTBOX_ROOTNODE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACES_LIST;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -107,6 +110,7 @@ public class SOCHomePageTestIT extends Base {
     String text = "text" + getRandomNumber();
     homePagePlatform.goToHomePage();
     activityStream.mentionUserActivity(DATA_USER2, text);
+    $(byText(text)).parent().shouldHave(Condition.text(PLFData.DATA_NAME_USER2+" "+text));
     $(byText(text)).parent().parent().find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
     $(byText(text)).parent().parent().find(ELEMENT_ICON_DELETE_ACTIVITY).click();
     $(ELEMENT_DELETE_POPUP_OK).click();
@@ -240,24 +244,26 @@ public class SOCHomePageTestIT extends Base {
   public void test09_LoadPreviousActivityPageAutomatically() {
     info("Test 9: Load previous activity page automatically");
     String textDesfirst = "textDesfirst" + getRandomNumber();
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@test.com";
+    String password="123456";
+    info("Add new user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+    manageLogInOut.signIn(username1,password);
     activityStream.addActivity(textDesfirst, "");
     refresh();
     for (int i = 0; i <= 15; i++) {
       String act = "act" + getRandomNumber();
       activityStream.addActivity(act, "");
     }
+    refresh();
     executeJavaScript("window.scrollBy(0,5500)", "");
     homePagePlatform.loadMoreActivities();
     $(byText(textDesfirst)).should(Condition.exist);
-    executeJavaScript("window.scrollBy(0,-5500)", "");
-    for (int i = 0; i <= 16; i++) {
-      if ($(byClassName(ELEMENT_DATE_ACTIVITY)).is(Condition.exist)) {
-        $(byClassName("author")).click();
-        $(byClassName("author")).parent().find(ELEMENT_ICON_DELETE_ACTIVITY).click();
-        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.timeout).click();
-        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappear, Configuration.timeout);
-      }
-    }
+    manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
   }
 
   /**
@@ -278,7 +284,7 @@ public class SOCHomePageTestIT extends Base {
     String text = "text" + getRandomNumber();
     homePagePlatform.goToHomePage();
     activityStream.addActivity(text, "");
-    assertEquals("All Activities", $(byId("DisplayModesDropDown")).getText());
+    assertEquals("ALL ACTIVITIES", $(byId("DisplayModesDropDown")).getText());
     executeJavaScript("window.scrollBy(0,-1500)", "");
     activityStream.deleteactivity(text);
 
@@ -305,6 +311,7 @@ public class SOCHomePageTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 60000);
     homePagePlatform.goToHomePage();
+    homePagePlatform.refreshUntil($(ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES),Condition.visible,1000);
     $(ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES).click();
     $(ELEMENT_PUBLICATION_DISPLAYMODE_MYSPACE_OPTION).click();
     $(byText(space)).should(Condition.exist);
@@ -335,6 +342,7 @@ public class SOCHomePageTestIT extends Base {
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
     $(ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES).click();
     $(ELEMENT_PUBLICATION_DISPLAYMODE_CONNECTION_OPTION).click();
     executeJavaScript("window.scrollBy(0,-1500)", "");
@@ -377,9 +385,10 @@ public class SOCHomePageTestIT extends Base {
     activityStream.addActivity(text1, "");
     homePagePlatform.goToMySpaces();
     homePagePlatform.goToHomePage();
+    homePagePlatform.refreshUntil($(ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES),Condition.visible,1000);
     $(ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES).click();
-    $(ELEMENT_PUBLICATION_DISPLAYMODE_MYACTIVITIES_OPTION).click();
-    ELEMENT_ACTIVITY_STREAM_CONTAINER.find(byText(space)).shouldNot(Condition.exist);
+    $(ELEMENT_PUBLICATION_DISPLAYMODE_MYACTIVITIES_OPTION).waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_ACTIVITY_STREAM_CONTAINER.find(byText(space)).should(Condition.exist);
     $(byText(text)).shouldNot(Condition.exist);
     $(byText(text1)).should(Condition.exist);
     activityStream.deleteactivity(text1);
@@ -517,6 +526,7 @@ public class SOCHomePageTestIT extends Base {
     executeJavaScript("window.scrollBy(0,-1500)", "");
     activityStream.commentActivity(name, text1);
     refresh();
+    executeJavaScript("window.scrollBy(0,-1500)", "");
     info("Verify that only second last and last comment are shown");
     $(byText(name)).parent().parent().parent().parent().parent().parent().parent().find(byText(text)).should(Condition.exist);
     $(byText(name)).parent().parent().parent().parent().parent().parent().parent().find(byText(text1)).should(Condition.exist);
@@ -537,6 +547,7 @@ public class SOCHomePageTestIT extends Base {
     assertEquals(13, $(byId(ELEMENT_LIST_ALL_COMMENNTS.replace("{id}", id))).findAll(byClassName("commentItem")).size());
     executeJavaScript("window.scrollBy(0,-1500)", "");
     activityStream.deleteactivity(name);
+    refresh();
 
   }
 
@@ -555,6 +566,7 @@ public class SOCHomePageTestIT extends Base {
     homePagePlatform.goToHomePage();
     activityStream.addActivity(name, null);
     activityStream.addCommentWithMentionUser(name, DATA_USER2, text);
+    $(byText(text)).parent().shouldHave(Condition.text(PLFData.DATA_NAME_USER2+" "+text));
     executeJavaScript("window.scrollBy(0,-1500)", "");
     activityStream.deleteactivity(name);
   }
@@ -575,19 +587,25 @@ public class SOCHomePageTestIT extends Base {
   @Test
   public void test19_RelationActivity() {
     info("Test 19 Relation Activity");
-
+    String username = "username" + getRandomString();
+    String email = username + "@test.com";
+    String password = "123456";
+    info("Add new user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username, password, email, username, username);
     String comment = "I'm now connected with 1 user(s)";
-
+    manageLogInOut.signIn(username,password);
     homePagePlatform.goToConnections();
     connectionsManagement.connectToAUser(DATA_USER2);
 
-    manageLogInOut.signIn(DATA_USER2, password);
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
+    connectionsManagement.acceptAConnection(username);
     homePagePlatform.goToHomePage();
-    $(byText(DATA_NAME_USER1)).parent().parent().parent().parent().find(byText(comment)).should(Condition.exist);
-    homePagePlatform.goToConnections();
-    connectionsManagement.removeConnection(DATA_USER1);
+    $(byText(username+" "+username)).parent().parent().parent().parent().find(byText(comment)).should(Condition.exist);
+    manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username);
   }
 
   /**
@@ -701,7 +719,7 @@ public class SOCHomePageTestIT extends Base {
     String content2 = "content2" + getRandomNumber();
     String name3 = "name3" + getRandomNumber();
     String content3 = "content3" + getRandomNumber();
-
+    manageLogInOut.signIn(DATA_USER2,DATA_PASS);
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToAddNewContent();
     info("Create new file document");
@@ -719,7 +737,7 @@ public class SOCHomePageTestIT extends Base {
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToAddNewContent();
     info("Create new file document");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(name3, content3);
     homePagePlatform.goToHomePage();
     ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_BOX_ACTIVITY).get(0).find(byText(content3)).should(Condition.exist);
@@ -776,7 +794,8 @@ public class SOCHomePageTestIT extends Base {
     spaceManagement.acceptAInvitation(space);
 
     manageLogInOut.signIn(username, password);
-    homePagePlatform.goToSpecificSpace(space);
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.changeRole(fullName1);
 

@@ -616,7 +616,6 @@ $(byXpath("//*[@id=\"UIEventForm\"]/div[4]/button[2]")).click();
 
     info("Test 17 Add an event in group calendar");
 
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.goToCalendarPage();
     calendarManagement.executeActionCalendar(groupCalendar, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     info("Check default date");
@@ -665,7 +664,6 @@ $(byXpath("//*[@id=\"UIEventForm\"]/div[4]/button[2]")).click();
 
     info("Test 17 Add an event in group calendar");
 
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.goToCalendarPage();
     calendarManagement.executeActionCalendar(groupCalendar, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     info("Check default date");
@@ -723,7 +721,7 @@ $(byXpath("//*[@id=\"UIEventForm\"]/div[4]/button[2]")).click();
                                                  CalendarHomePage.selectViewOption.WEEK,
                                                  CalendarHomePage.selectDayOption.DETAILTIME);
     info("Test 19 Delete an event in group calendar");
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
     homePagePlatform.goToCalendarPage();
     calendarHomePage.deleteEventTask(titleEvent2,
                                      CalendarHomePage.selectViewOption.WEEK,
@@ -742,7 +740,6 @@ $(byXpath("//*[@id=\"UIEventForm\"]/div[4]/button[2]")).click();
 
     info("Test 17 Add an event in group calendar");
 
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.goToCalendarPage();
     calendarManagement.executeActionCalendar(groupCalendar, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     info("Check default date");
@@ -773,7 +770,7 @@ $(byXpath("//*[@id=\"UIEventForm\"]/div[4]/button[2]")).click();
                                                  CalendarHomePage.selectViewOption.WEEK,
                                                  CalendarHomePage.selectDayOption.DETAILTIME);
     info("Test 19 Delete an event in group calendar");
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
     homePagePlatform.goToCalendarPage();
     calendarHomePage.deleteEventTask(titleEvent,
                                      CalendarHomePage.selectViewOption.WEEK,

@@ -52,8 +52,8 @@ public class PlfHomepageGadgetWhoIsOnlineGadgetTestIT extends Base {
   public void test01_CheckDisplayOfWhosOnlineGadget() {
     info("Test 1: Check display of Who's online gadget");
 
-    manageLogInOut.signIn(DATA_USER2, "gtn");
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(username, DATA_PASS);
     ELEMENT_WHO_ON_LINE_GADGET.should(Condition.exist);
     // 3 is the id of john in who on line gadget
     ELEMENT_WHO_ON_LINE_GADGET.find(byId("3")).should(Condition.exist);
@@ -75,7 +75,7 @@ public class PlfHomepageGadgetWhoIsOnlineGadgetTestIT extends Base {
     info("Test 2: Show information of user");
 
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    manageLogInOut.signIn(username, DATA_PASS);
     // 3 is the id of mary in who on line gadget
     ELEMENT_WHO_ON_LINE_GADGET.find(byId("3")).hover();
     $(byId("tiptip_content")).find(byText(DATA_NAME_USER2)).should(Condition.exist);
@@ -100,18 +100,14 @@ public class PlfHomepageGadgetWhoIsOnlineGadgetTestIT extends Base {
     info("Test 3: Connect to users");
 
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    manageLogInOut.signIn(username, DATA_PASS);
     // 3 is the id of mary in who on line gadget
     ELEMENT_WHO_ON_LINE_GADGET.scrollTo().find(byId("3")).hover();
     $(byId("tiptip_content")).find(byText(DATA_NAME_USER2)).should(Condition.exist);
     $(ELEMENT_WHO_ONLINE_CONNECT).waitUntil(Condition.appears, Configuration.timeout).click();
-
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-    ELEMENT_GADGET_INVITATION.find(byText(DATA_NAME_USER1)).should(Condition.exist);
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    manageLogInOut.signIn(username, DATA_PASS);
     ELEMENT_WHO_ON_LINE_GADGET.find(byId("3")).hover();
     $(ELEMENT_WHO_ONLINE_CANCEL_CONNECT).click();
-    // closeBrowsers();
   }
 
   /**
@@ -128,7 +124,7 @@ public class PlfHomepageGadgetWhoIsOnlineGadgetTestIT extends Base {
     info("Test 4: Access activity's stream of users");
 
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    manageLogInOut.signIn(username, DATA_PASS);
     ELEMENT_WHO_ON_LINE_GADGET.find(byId("3")).click();
     ELEMENT_NAME_PROFILE_OF_USERS.find(byText(DATA_NAME_USER2)).should(Condition.exist);
     // closeBrowsers();

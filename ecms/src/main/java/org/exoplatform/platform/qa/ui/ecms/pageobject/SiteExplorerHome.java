@@ -187,9 +187,11 @@ public class SiteExplorerHome {
     $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).click();
     $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     refresh();
+    if(destination.equals(true))
     $(byText(title)).shouldNot(Condition.exist);
     info("Verify that the node is deleted");
     info("the node is deleted successfully");
+    executeJavaScript("window.scrollBy(0,-550);", "");
   }
 
 
@@ -420,7 +422,7 @@ public class SiteExplorerHome {
     $(ELEMENT_ACTIONBAR_EDIT).click();
 
     if ($(ELEMENT_FILE_FORM_TITLE).is(Condition.enabled)) {
-      $(ELEMENT_FILE_FORM_TITLE).setValue(newTitle);
+      $(ELEMENT_FILE_FORM_TITLE).sendKeys(newTitle);
     }
     $(ELEMENT_FILEFORM_BLANK_CONTENT).click();
     switchTo().frame($(ELEMENT_FILEFORM_BLANK_CONTENT));

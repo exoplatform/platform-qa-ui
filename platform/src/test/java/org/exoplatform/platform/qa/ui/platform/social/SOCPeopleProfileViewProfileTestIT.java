@@ -207,7 +207,6 @@ public class SOCPeopleProfileViewProfileTestIT extends Base {
     info("Test 2: Edit Contact Information");
     String jobTitle = "jobTitle" + getRandomNumber();
 
-    String gender = "Male";
     String organization = "organization" + getRandomString();
     String jobDetail = "jobDetail" + getRandomString();
     String skill = "skill" + getRandomString();
@@ -256,7 +255,6 @@ public class SOCPeopleProfileViewProfileTestIT extends Base {
     userProfilePage.saveCancelUpdateInfo(true);
 
     $(byXpath(ELEMENT_EMAIL_INFO.replace("${email}", email))).should(Condition.exist);
-    $(byXpath(ELEMENT_GENDER_INFO.replace("${gender}", gender))).should(Condition.exist);
 
     $(byXpath(ELEMENT_PHONE_INFO.replace("${type}", "Work").replace("${phone}", phone1))).should(Condition.exist);
     $(byXpath(ELEMENT_PHONE_INFO.replace("${type}", "Home").replace("${phone}", phone2))).should(Condition.exist);
