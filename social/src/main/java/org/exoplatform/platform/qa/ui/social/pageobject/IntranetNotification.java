@@ -648,7 +648,6 @@ public class IntranetNotification {
   public void markAllAsRead() {
     info("Click on Mark all as Read link");
     $(ELEMENT_INTRANET_NOTIFICATION_MARK_ALL_AS_READ).click();
-    $(ELEMENT_INTRANET_NOTIFICATION_MARK_ALL_AS_READ).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
 
   }
 
