@@ -1,7 +1,9 @@
 package org.exoplatform.platform.qa.ui.platform.social.functional;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
+import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
@@ -12,13 +14,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.title;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_PROFILE_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.xbill.DNS.Options.refresh;
+
 import java.util.ArrayList;
 
 @Tag("functional")
@@ -37,6 +43,7 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     NotificationActivity notificationActivity;
     ConnectionsManagement connectionsManagement;
     UserProfilePage userProfilePage;
+    UserAndGroupManagement userAndGroupManagement;
 
     @BeforeEach
     public void setupBeforeMethod() {
@@ -54,6 +61,7 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
         userAddManagement = new UserAddManagement(this);
         connectionsManagement = new ConnectionsManagement(this);
         userProfilePage = new UserProfilePage (this);
+        userAndGroupManagement =new UserAndGroupManagement(this);
     }
 
 
@@ -191,4 +199,69 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
         addUsers.deleteUser(username1);
         addUsers.deleteUser(username2);
         addUsers.deleteUser(username3);
+    }
+
+    /**
+     *<li> Case ID:125169.</li>
+     *<li> Test Case Name: Click a New User notification from View All page.</li>
+     *<li> Pre-Condition: - User A has received a New User notification from User B</li>
+     *<li> Post-Condition: </li>
+     */
+    /*Step Number: 1
+		*Step Name: Step 1 : Go to View All
+		*Step Description:
+			- Login with User A
+			- Go to View all
+		*Input Data:
+
+		*Expected Outcome:
+			- The View All page is displayed
+			- The New User notification is available/displayed in the page*/
+
+		/*Step number: 2
+		*Step Name: Step 2 : Check click on Notification
+		*Step Description:
+			- Click the New User notification
+		*Input Data:
+
+		*Expected Outcome:
+			- The user is redirected to the profile of User B*/
+    @Test
+    public  void test03_ClickANewUserNotificationFromViewAllPage() throws Exception {
+        info("Test 3: Click a New User notification from View All page");
+        String username1 ="usernamea" + getRandomString();
+        String email1 = username1+"@gmail.com";
+        String username2 = "usernameb" + getRandomString();
+        String email2 = username2+"@gmail.com";
+        String password ="123456";
+
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(username1, "123456", email1, username1, username1);
+        navigationToolbar.goToUsersAndGroupsManagement();
+        userAndGroupManagement.addUserAdmin(username1);
+        manageLogInOut.signIn(username1,password);
+
+        info("Go to My notification");
+        navigationToolbar.goToMyNotifications();
+        info("Enable new user notification");
+        myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.NewUser_intranet);
+        info("Add new user");
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(username2, password, email2, username2, username2);
+        refresh();
+        info("The user is redirected to the View All page");
+        navigationToolbar.goToIntranetNotification();
+        intranetNotification.goToAllNotification();
+        String connectStatus="has joined";
+        intranetNotification.checkStatus(connectStatus,username2);
+
+		homePagePlatform.refreshUntil($(byText(username2+" "+username2)),Condition.visible,1000);
+        intranetNotification.goToDetailNewUserJoinIntranet(username2,false);
+        $(byXpath(ELEMENT_PROFILE_TITLE.replace("${fullName}", username2+" "+username2))).waitUntil(Condition.visible, Configuration.timeout);
+        manageLogInOut.signOut();
+        manageLogInOut.signInCas(DATA_USER1, DATA_PASS2);
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        addUsers.deleteUser(username2);
     }}

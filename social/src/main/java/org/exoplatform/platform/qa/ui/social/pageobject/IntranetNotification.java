@@ -44,7 +44,7 @@ public class IntranetNotification {
     info("Go to all notification");
     if (evt.waitForAndGetElement(ELEMENT_VIEW_ALL, 3000, 0) != null) {
       info("Click on View All button");
-      evt.click(ELEMENT_VIEW_ALL);
+      $(ELEMENT_VIEW_ALL).click();
     } else {
       info("Open All page by link");
       testBase.getExoWebDriver().getWebDriver().get(testBase.getExoWebDriver().getBaseUrl() + "/intranet/allNotifications/");
@@ -416,21 +416,21 @@ public class IntranetNotification {
 
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
-        if (evt.waitForAndGetElement(ELEMENT_UIBASICPROFILEPORTLET, 3000, 0) != null)
+        if ($(ELEMENT_UIBASICPROFILEPORTLET).is(Condition.visible))
           ;
         break;
       }
-      if (evt.waitForAndGetElement(ELEMENT_UIBASICPROFILEPORTLET, 5000, 0) != null) {
+      if ($(ELEMENT_UIBASICPROFILEPORTLET).is(Condition.visible)) {
         info("Element " + ELEMENT_UIBASICPROFILEPORTLET + " is displayed");
         break;
       }
       info("Retry...[" + repeat + "]");
       if (isPopup) {
         info("View detail notification when new user joined to intranet from all notificaiton page");
-        evt.click(ELEMENT_NOTIFICATION_POPUP_NEW_USER_JOIN_INTRANET.replace("$name", fullName));
+        $(byXpath(ELEMENT_NOTIFICATION_POPUP_NEW_USER_JOIN_INTRANET.replace("$name", fullName))).click();
       } else {
         info("View detail notification when new user joined to intranet from all notificaiton page");
-        evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_NEW_USER_JOIN_INTRANET.replace("$name", fullName));
+        $(byXpath(ELEMENT_NOTIFICATION_ALL_PAGE_NEW_USER_JOIN_INTRANET.replace("$name", fullName))).click();
       }
 
     }

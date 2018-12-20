@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.social.pageobject;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -270,7 +271,7 @@ public class MyNotificationsSetting {
     switch (notifToEnable) {
       case NewUser_email:
         info("Click on Edit button");
-        evt.click(ELEMENT_EDIT_NEWUSER_ICON);
+        $(ELEMENT_EDIT_NEWUSER_ICON).click();
         while (evt.waitForAndGetElement(ELEMENT_EDIT_NEWUSER_MAIL_CHECKBOX_CHECKED, 2000, 0) == null) {
           if (repeat > 5)
             break;
@@ -284,12 +285,13 @@ public class MyNotificationsSetting {
         evt.click(ELEMENT_EDIT_NEWUSER_SAVE_BTN);
         info("Verify that email notification is shown");
         evt.waitForAndGetElement(ELEMENT_NEW_USER_MAIL_ICON, 3000, 1);
-        break;
       case NewUser_intranet:
         info("Click on Edit button");
         $(ELEMENT_EDIT_NEWUSER_ICON).click();
         evt.check(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX, 2);
         info("Click on Save button");
+        // scroll up
+        executeJavaScript("window.scrollBy(0,-2000)", "");
         $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).click();
         $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
         info("Verify that intranet notification is shown");
