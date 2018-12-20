@@ -45,16 +45,16 @@ public final class ActivityStreamLocator {
     public static final By ELEMENT_SPACE_MENU_ACTIVITY_PORTLET= byClassName("uiIconAppSpaceActivityStreamPortlet");
 
     public static final By              ELEMENT_SPACE_MENU_FORUM_PORTLET                     =
-            By.xpath(".//*[@class='uiIconAppForumPortlet uiIconDefaultApp']");
+            By.xpath(".//*[@class='uiIconAppforum uiIconAppForumPortlet uiIconDefaultApp']");
 
     public static final By              ELEMENT_SPACE_MENU_WIKI_PORTLET                      =
             By.xpath(".//*[@class='uiIconAppWikiPortlet uiIconDefaultApp']");
 
     public static final By              ELEMENT_SPACE_MENU_DOCUMENT_PORTLET                  =
-            By.xpath(".//*[@class='uiIconAppFileExplorerPortlet uiIconDefaultApp']");
+            By.xpath(".//*[@class='uiIconAppdocuments uiIconAppFileExplorerPortlet uiIconDefaultApp']");
 
     public static final By              ELEMENT_SPACE_MENU_AGENDA_PORTLET                    =
-            By.xpath(".//*[@class='uiIconAppCalendarPortlet uiIconDefaultApp']");
+            By.xpath(".//*[@class='uiIconAppcalendar uiIconAppCalendarPortlet uiIconDefaultApp']");
 
     public static final By              ELEMENT_SPACE_MENU_SPACE_SETTING_PORTLET             =
             By.xpath(".//*[@class='class='uiIconAppSpaceSettingPortlet uiIconDefaultApp']");
@@ -702,7 +702,7 @@ public final class ActivityStreamLocator {
     public static final String ELEMENT_INCON_LIKE_COMMENT="LikeCommentLinkcomment{id}";
     public static final String ELEMENT_INCON_LIKE_REPLY="likeCommentLink_comment{id}";
     public static final String ELEMENT_INCON_DELETE_COMMENT="DeleteCommentButtoncomment{id}";
-    public static final String ELEMENT_COMMENT_BLOC_AS = "CommentBlockcomment{id}";
+    public static final String ELEMENT_COMMENT_BLOC_AS = "commentContainercomment{id}";
     public static final String ELEMENT_lABEL_REPLY_COMMENT="CommentLinkcomment{id}";
     public static final String ELEMENT_VIEW_ALL_REPLIES_LINK="SubCommentShowAll_comment{id}";
     public static final SelenideElement ELEMENT_TOLLTIP_WHO_LIKE_COMMENT=$(byClassName("tooltip"));

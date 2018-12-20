@@ -13,6 +13,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_HORIZONTAL_TOOLBAR_SECOND_APP_ACTIVITIES;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_RECENT_ACTIVITY_VIEWALL_BTN;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 import java.awt.*;
 
@@ -100,7 +101,7 @@ public class SOCPeopleProfileRecentActivitiesTestIT extends Base {
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(username2);
     homePagePlatform.goToHomePage();
-
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
     info("add mention");
     activityStream.mentionUserActivity(username2, mention);
 
@@ -164,7 +165,7 @@ public class SOCPeopleProfileRecentActivitiesTestIT extends Base {
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(username2);
     homePagePlatform.goToHomePage();
-
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
     info("add mention");
     activityStream.mentionUserActivity(username2, mention);
 

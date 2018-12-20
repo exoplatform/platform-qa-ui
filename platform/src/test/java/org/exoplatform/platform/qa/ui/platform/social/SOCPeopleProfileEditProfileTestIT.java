@@ -133,7 +133,6 @@ public class SOCPeopleProfileEditProfileTestIT extends Base {
     info("Test 2: Edit Contact Information");
     String jobTitle = "jobTitle" + getRandomNumber();
 
-    String gender = "Male";
 
     String im1 = "im1" + getRandomNumber();
     String im2 = "im2" + getRandomNumber();
@@ -178,7 +177,6 @@ public class SOCPeopleProfileEditProfileTestIT extends Base {
     userProfilePage.saveCancelUpdateInfo(true);
 
     $(byXpath(ELEMENT_EMAIL_INFO.replace("${email}", email))).should(Condition.exist);
-    $(byXpath(ELEMENT_GENDER_INFO.replace("${gender}", gender))).should(Condition.exist);
 
     $(byXpath(ELEMENT_PHONE_INFO.replace("${type}", "Work").replace("${phone}", phone1))).should(Condition.exist);
     $(byXpath(ELEMENT_PHONE_INFO.replace("${type}", "Home").replace("${phone}", phone2))).should(Condition.exist);

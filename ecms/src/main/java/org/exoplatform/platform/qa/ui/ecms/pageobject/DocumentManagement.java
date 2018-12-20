@@ -36,8 +36,9 @@ public class DocumentManagement {
 
   public void createFolder(String path, String folder, Boolean righclick) {
     ELEMENT_INPUT_PATH.setValue(path).pressEnter();
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
     if (righclick) {
-      ELEMENT_LIST_FOLDER_IN_DEFAULT_VIEW.contextClick();
+      ELEMENT_LIST_FOLDER_IN_DEFAULT_VIEW.waitUntil(Condition.visible,Configuration.timeout).contextClick();
       $(byId("JCRContextMenu")).find(ELEMENT_BUTTON_ADD_FOLDAR).click();
     } else {
       ELEMENT_ACTION_BAR_MENU.find(ELEMENT_BUTTON_ADD_FOLDAR)
@@ -68,6 +69,7 @@ public class DocumentManagement {
       ELEMENT_BUTTON_DELETE_FOLDER_DOCUMENT.click();
     }
     ELEMENT_BUTTON_CONFIRM_DELETE.waitUntil(Condition.visible, Configuration.timeout).click();
+    $(byText(folder)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
 
   }
 

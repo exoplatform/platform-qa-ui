@@ -1476,7 +1476,7 @@ public static final By
                                                                 By.xpath(".//*[@class='tabName' and contains(text(),'answer')]");
 
   public static final String          ELEMENT_SPACE_NAME                                                =
-                                                         ".//*[@id='UIBreadCrumbsNavigationPortlet']//*[@class='name'][contains(text(),'${name}')]";
+                                                         ".//*[@id='UISpaceMenuPortlet']//*[@class='name'][contains(text(),'${name}')]";
 
   public static final String          ELEMENT_SPACE_MENU_DISPLAYORDER_ID                                =
                                                                          ".//*[@id='spaceMenuTab']/li[${number}]//*[contains(@class,'${tab}')]";
@@ -2165,7 +2165,7 @@ public static final By
 
   // Members tab
   public static final SelenideElement ELEMENT_SPACE_SETTINGS_MEMBERS_TAB                                =
-                                                                         $(byId("UISpaceMenu")).find(byText("Members"));
+                                                                         $(byId("UISpaceMenu")).find(byClassName("uiIconAppmembers"));
 
   public static final SelenideElement ELEMENT_SPACE_SETTINGS_MEMBERS_TAB_IN_SETTING_TAB                 =
                                                                                         $(byId("UISpaceSettingPortlet")).find(byText("Members"));
@@ -2358,7 +2358,7 @@ public static final By
                                                                                 $(byId("UISpaceNavigationPortlet"));
 
   public static final SelenideElement ELEMENT_SPACE_NAME_LEFT_NAVIGATION                                =
-                                                                         $(byId("UIBreadCrumbsNavigationPortlet"));
+                                                                         $(byId("UISpaceNavigationPortlet"));
 
   public static final SelenideElement ELEMENT_CONTENT_NAME_PROFILE                                      =
                                                                    $(byId("UIUserNavigationPortlet"));
@@ -2417,6 +2417,7 @@ public static final By
   public static final SelenideElement ELEMENT_BUTTON_SAVE_ROOM=   $(byClassName("btn-primary"));
   public static final SelenideElement ELEMENT_CONTACT_LIST=  $(byId("chat-users"));
   public static final SelenideElement ELEMENT_COLLABORATION_ACTIONS=  $(byClassName("uiIconPlusCircled"));
+  public static final SelenideElement ELEMENT_SPACE_NAME_CONTAINER=$(byId("UISpaceMenuPortlet"));
 
 }
 

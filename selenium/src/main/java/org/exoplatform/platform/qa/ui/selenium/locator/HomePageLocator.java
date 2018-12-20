@@ -46,7 +46,7 @@ public final class HomePageLocator {
 
   // Left panel
   public static final By              ELEMENT_PLF_HOMEPAGE_LOAD_MORE_BUTTON                                =
-                                                                            By.xpath(".//*[@id='ActivitiesLoader']/a");
+                                                                            byId("ActivitiesLoader");
 
   public static final By              ELEMENT_FORUM_LINK_PLF                                               =
                                                              By.xpath("//*[@data-original-title='Forums']");

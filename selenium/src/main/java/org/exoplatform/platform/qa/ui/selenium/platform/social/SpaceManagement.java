@@ -1,13 +1,5 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.Actions;
-
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
@@ -15,17 +7,31 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocat
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_PROJECT_ICON_ADD_PROJECT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.Actions;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+
+import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+
 public class SpaceManagement {
 
-    private final TestBase testBase;
+    private final TestBase       testBase;
 
-    public ManageAlert alert;
+    public ManageAlert           alert;
+
+    public HomePagePlatform homePagePlatform;
 
     private ElementEventTestBase evt;
 
     public SpaceManagement(TestBase testBase) {
         this.testBase = testBase;
         this.evt = testBase.getElementEventTestBase();
+        this.homePagePlatform=new HomePagePlatform(testBase);
         this.alert = new ManageAlert(testBase);
     }
 
@@ -43,8 +49,8 @@ public class SpaceManagement {
      * delete Space
      *
      * @param spaceName name of space
-     * @param isVerify  true: verify content of confirm msg false: not verify content
-     *                  of confirm msg
+     * @param isVerify true: verify content of confirm msg false: not verify content
+     *          of confirm msg
      */
     public void deleteSpace(String spaceName, Boolean isVerify) {
         if ($(byText(spaceName)).is(Condition.exist)) {
@@ -53,7 +59,7 @@ public class SpaceManagement {
             if (isVerify)
                 alert.verifyAlertMessage(ELEMENT_SPACE_CONFIRM_DELETE);
             $(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON).click();
-            ELEMENT_SPACES_LIST.find(byText(spaceName)).waitUntil(Condition.disappears, Configuration.timeout);
+            ELEMENT_SPACES_LIST.find(byText(spaceName)).waitUntil(Condition.disappear, Configuration.timeout);
         }
 
     }
@@ -97,12 +103,12 @@ public class SpaceManagement {
      */
     public void addNewSpace(String name, String desc, String access, String groups, int... params) {
         int iTimeout = params.length > 0 ? params[0] : testBase.getDefaultTimeout();
-        if ($(ELEMENT_ADDNEWSPACE_BUTTON).waitUntil(Condition.visible, Configuration.timeout) != null) {
+        if ($(ELEMENT_ADDNEWSPACE_BUTTON).waitUntil(Condition.visible,Configuration.timeout) != null) {
             $(ELEMENT_ADDNEWSPACE_BUTTON).click();
         } else {
             $(By.xpath("//*[contains(@class, 'uiIconSocSimplePlus')]")).click();
         }
-        $(ELEMENT_ADDNEWSPACE_FORM).waitUntil(Condition.visible, Configuration.timeout);
+        $(ELEMENT_ADDNEWSPACE_FORM).waitUntil(Condition.visible,Configuration.timeout);
         $(ELEMENT_SPACE_NAME_INPUT).setValue(name);
         $(ELEMENT_SPACE_DESCRIPTION_INPUT).setValue(desc);
 
@@ -142,6 +148,7 @@ public class SpaceManagement {
 
         info("Save all changes");
         $(ELEMENET_SPACE_CREATE_BUTTON).click();
+        $(ELEMENET_SPACE_CREATE_BUTTON).waitUntil(Condition.disappear,Configuration.timeout);
         evt.waitForAndGetElement(By.linkText(name), iTimeout);
     }
 
@@ -191,7 +198,7 @@ public class SpaceManagement {
         if (isChangeAvatar == true) {
             info("evt.click on change picture button");
             $(ELEMENT_SPACE_CHANGE_AVATAR_BTN).click();
-            $(byClassName("uploadContainer")).find(byClassName("file")).uploadFromClasspath(filepath);
+            $(byId("UIPopupAvatarUploader")).find(byClassName("file")).uploadFromClasspath(filepath);
 
             info("filepath:" + filepath);
             $(ELEMENT_SPACE_UPLOAD_CONFIRM_BTN).click();
@@ -257,8 +264,8 @@ public class SpaceManagement {
      */
     public void goToAllSpacesTab() {
         info("Open All spaces tab");
-        evt.waitForAndGetElement(ELEMENT_MY_SPACE_ALL_SPACES_TAB, 3000, 0);
-        evt.click(ELEMENT_MY_SPACE_ALL_SPACES_TAB);
+        $(ELEMENT_MY_SPACE_ALL_SPACES_TAB).waitUntil(Condition.visible,Configuration.timeout);
+        $(ELEMENT_MY_SPACE_ALL_SPACES_TAB).click();
 
     }
 
@@ -404,8 +411,9 @@ public class SpaceManagement {
      */
     public void goToActivityStreamTab() {
         info("Open Activity STream Tab");
+        homePagePlatform.refreshUntil($(ELEMENT_ACTIVITY_STREAM_TAB),Condition.visible,1000);
         $(ELEMENT_ACTIVITY_STREAM_TAB).click();
-
+        $(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible,Configuration.timeout);
         info("Activity STream portlet is shown");
     }
 
@@ -424,13 +432,14 @@ public class SpaceManagement {
      */
     public void goToWikiTab() {
         info("Open Wiki Tab");
-        refresh();
+        homePagePlatform.refreshUntil($(ELEMENT_WIKI_TAB),Condition.visible,1000);
         $(ELEMENT_WIKI_TAB).click();
         $(ELEMENT_WIKI_HOME_TITLE).waitUntil(Condition.visible, Configuration.timeout);
         info("Wiki portlet is shown");
     }
 
     public void goToTaskTab() {
+        homePagePlatform.refreshUntil(ELEMENT_SPACE_MENU_TAB.find(ELEMENT_TASK_TAB),Condition.visible,1000);
         ELEMENT_SPACE_MENU_TAB.find(ELEMENT_TASK_TAB).click();
         ELEMENT_PROJECT_ICON_ADD_PROJECT.waitUntil(Condition.visible, Configuration.timeout);
     }
@@ -440,6 +449,7 @@ public class SpaceManagement {
      */
     public void goToDocumentTab() {
         info("Open Document Tab");
+        homePagePlatform.refreshUntil($(ELEMENT_DOCUMENT_TAB),Condition.visible,1000);
         $(ELEMENT_DOCUMENT_TAB).click();
         $(ELEMENT_DOCUMENT_FOLDER_ADD_BTN).waitUntil(Condition.visible, Configuration.timeout);
         info("Document portlet is shown");
@@ -450,7 +460,7 @@ public class SpaceManagement {
      */
     public void goToAgendaTab() {
         info("Open Agenda Tab");
-        refresh();
+        homePagePlatform.refreshUntil($(ELEMENT_AGENDA_TAB),Condition.visible,1000);
         $(ELEMENT_AGENDA_TAB).click();
         $(ELEMENT_AGENDA_EVENT_ADD_BTN).waitUntil(Condition.visible, Configuration.timeout);
 
@@ -461,10 +471,12 @@ public class SpaceManagement {
      * Open Member tab
      */
     public void goToMemberTab() {
-        info("Open Member Tab");
-        evt.click(ELEMENT_MEMBER_TAB);
-        evt.waitForAndGetElement(ELEMENT_MEMBER_USER_INFOR, 2000, 0);
-        info("Member portlet is shown");
+        info("Open members tab");
+        $(ELEMENT_SPACE_WIKI_TAB).waitUntil(Condition.visible,Configuration.timeout);
+        if($(ELEMENT_SPACE_MENU_MORE).is(Condition.visible))
+            $(ELEMENT_SPACE_MENU_MORE).click();
+        $(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB).click();
+        $(byClassName("uiGrayLightBox")).waitUntil(Condition.appears, Configuration.timeout);
     }
 
     /**
@@ -481,9 +493,9 @@ public class SpaceManagement {
     /**
      * Verify that a user is a member of the space or not
      *
-     * @param fullName  is full name of the user
+     * @param fullName is full name of the user
      * @param isDisplay =true if user is a member of the space =false if user is not
-     *                  a memebr of the space
+     *          a memebr of the space
      */
     public void verifyMember(String fullName, Boolean isDisplay) {
         goToMemberTab();
@@ -500,9 +512,9 @@ public class SpaceManagement {
     /**
      * Verify that a user is a manager of the space or not
      *
-     * @param fullName  is full name of the user
+     * @param fullName is full name of the user
      * @param isDisplay =true if user is a manager of the space =false if user is
-     *                  not a manager of the space
+     *          not a manager of the space
      */
     public void verifyManager(String fullName, Boolean isDisplay) {
         goToMemberTab();

@@ -784,8 +784,6 @@ public class ActivityStream {
     $(byXpath("/html/body")).pressEnter();
     $(byXpath("/html/body")).sendKeys(textContent);
     switchTo().defaultContent();
-    // executeJavaScript("CKEDITOR.instances.CommentTextarea" + id +
-    // ".insertText(\"" +"@"+username+ "\")", "");
     // click on the button comment
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(textContent)).should(Condition.exist);
@@ -883,6 +881,7 @@ public class ActivityStream {
                                                                .split(" ")[1]);
     String numberAfterlike = String.valueOf(numberofLike + 1);
     $(byText(activityText)).parent().parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).click();
+    refresh();
     $(byText(activityText)).parent()
                            .parent()
                            .parent()
@@ -910,6 +909,7 @@ public class ActivityStream {
                                                              .getText()
                                                              .split(" ")[1]);
     $(byText(activityText)).parent().parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).click();
+    refresh();
     String numberAfterUnlike = String.valueOf(numberLike - 1);
     $(byText(activityText)).parent()
                            .parent()
@@ -984,8 +984,8 @@ public class ActivityStream {
    */
   public void clickOnViewChange(String title) {
     info("Click on View change link");
-    evt.click(ELEMENT_ACTIVITY_WIKI_VIEW_CHANGE_LINK.replace("$title", title));
-    evt.waitForElementNotPresent(ELEMENT_ACTIVITY_WIKI_VIEW_CHANGE_LINK.replace("$title", title));
+    $(byXpath(ELEMENT_ACTIVITY_WIKI_VIEW_CHANGE_LINK.replace("$title", title))).click();
+    $(byXpath(ELEMENT_ACTIVITY_WIKI_VIEW_CHANGE_LINK.replace("$title", title))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
@@ -1029,8 +1029,8 @@ public class ActivityStream {
     $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
     // click on the button comment
-    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
-    $(byText(comment)).should(Condition.exist);
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    $(byText(comment)).should(Condition.visible);
   }
 
   public void commentWikiActivity(String wikiactivity, String comment) {
@@ -1094,8 +1094,8 @@ public class ActivityStream {
     // click on delete button
     $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
     ELEMENT_DELETE_POPUP_OK.click();
-    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears, Configuration.timeout);
-
+    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    $(byText(activity)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   public void deleteActivityWiki(String activity) {
@@ -1116,7 +1116,7 @@ public class ActivityStream {
     // click on delete button
     $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
     ELEMENT_DELETE_POPUP_OK.click();
-    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.disappears, Configuration.timeout);
+    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
   }
 
   public void likeUnlikeComment(String activity, String comment) {
@@ -1163,6 +1163,7 @@ public class ActivityStream {
     info("Verify that the reply is added");
     // click on the button comment
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
+    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     $(byText(reply)).should(Condition.exist);
     $(byText(reply)).parent().parent().find(byText(user)).should(Condition.exist);
   }
@@ -1219,6 +1220,7 @@ public class ActivityStream {
     // Confirm delete
     ELEMENT_DELETE_POPUP_OK.click();
     $(byText(reply)).shouldNot(Condition.exist);
+    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   public void replyToCommentInPreview(String comment, String reply, String user) {
@@ -1280,7 +1282,7 @@ public class ActivityStream {
     info("Verify that the reply is added");
     // click on the button comment
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
-    $(byText(replytoreply)).should(Condition.exist);
+    $(byText(replytoreply)).should(Condition.visible);
   }
 
 
@@ -1310,6 +1312,7 @@ public class ActivityStream {
     $(byId(ELEMENT_INCON_DELETE_COMMENT.replace("{id}", idBlocComment))).click();
     // Confirm delete
     ELEMENT_DELETE_POPUP_OK.click();
+    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     $(byText(comment)).shouldNot(Condition.exist);
   }
 

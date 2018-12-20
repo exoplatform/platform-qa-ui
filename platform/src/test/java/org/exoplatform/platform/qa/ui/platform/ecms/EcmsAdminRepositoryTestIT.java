@@ -5,7 +5,9 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
+import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -38,6 +40,8 @@ public class EcmsAdminRepositoryTestIT extends Base {
 
   ManageLogInOut        manageLogInOut;
 
+  HomePagePlatform homePagePlatform;
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
@@ -46,6 +50,7 @@ public class EcmsAdminRepositoryTestIT extends Base {
     createNewDocument = new CreateNewDocument(this);
     contentAdministration = new ContentAdministration(this);
     manageLogInOut = new ManageLogInOut(this);
+    homePagePlatform=new HomePagePlatform(this);
     manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
 
   }
@@ -132,7 +137,9 @@ public class EcmsAdminRepositoryTestIT extends Base {
     contentAdministration.goToSpecificMainFunctions(ContentAdministration.mainEcmFunctions.REPOSITORY);
     contentAdministration.goToSpecificFunctions(ContentAdministration.specificEcmFunctions.NAMESPACES);
     contentAdministration.registerNamespace(prefix, url);
+    $(byXpath(ELEMENT_ECM_REPOSITORY_NAMESPACES_CHECK_LIST_URL_AND_PREFIX.replace("{$url}", "http://www.exoplatform.com/plf/acme/4.0/").replace("{$prefix}", "acme"))).waitUntil(Condition.visible,Configuration.timeout);
     for (int i = 1; i < 9; i++) {
+      homePagePlatform.refreshUntil($(byXpath(ELEMENT_ECM_REPOSITORY_NAMESPACES_CHECK_LIST_URL_AND_PREFIX.replace("{$url}", "Namespace URI").replace("{$prefix}", "Prefix"))).waitUntil(Condition.visible,Configuration.timeout),Condition.visible,1000);
       if ($(byXpath(ELEMENT_ECM_REPOSITORY_NAMESPACES_CHECK_LIST_URL_AND_PREFIX.replace("{$url}", url)
                                                                                .replace("{$prefix}", prefix)))
                                                                                                               .is(Condition.not(Condition.visible))) {
@@ -160,7 +167,6 @@ public class EcmsAdminRepositoryTestIT extends Base {
    * Group is removed permission
    */
   @Test
-  @BugInPLF("ECMS-7671")
   public void test05_ManageLock() {
     info("Test 5: Manage lock");
     String title = "title" + getRandomNumber();

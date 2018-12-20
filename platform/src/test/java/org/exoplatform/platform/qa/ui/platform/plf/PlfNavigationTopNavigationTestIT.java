@@ -110,7 +110,7 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     info("Add a forum in the category1");
     forumForumManagement.addForumSimple(forum, "", forum);
     forumForumManagement.addForumSimple(forum1, "", forum1);
-
+    homePagePlatform.goToHomePage();
     /*
      * Step Number: 1 Step Name: Connect to intranet Step Description: - Login as
      * normal user - Connect to Intranet Input Data: - The Top Navigation bar is
@@ -268,11 +268,13 @@ public class PlfNavigationTopNavigationTestIT extends Base {
   public void test07_OpenUserGuide() {
     info("Test 7: Open user guide");
     homePagePlatform.goToHomePage();
+    homePagePlatform.refreshUntil($(ELEMENT_HELP_TOOLBAR),Condition.visible,1000);
     click(ELEMENT_HELP_TOOLBAR);
     switchTo().window(1);
+    refresh();
     String url = WebDriverRunner.url();
     assertEquals(url,
-                 "https://docs.exoplatform.org/public/index.jsp?topic=/PLF50/PLFUserGuide.GettingStarted.SocialIntranetHomepage.html");
+                 "https://docs-old.exoplatform.org/public/index.jsp?topic=/PLF50/PLFUserGuide.GettingStarted.SocialIntranetHomepage.html");
     switchTo().window(0);
   }
 }

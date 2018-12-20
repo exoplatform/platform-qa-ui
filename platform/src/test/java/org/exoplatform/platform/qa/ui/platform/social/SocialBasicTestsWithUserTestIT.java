@@ -8,6 +8,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLoca
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -190,13 +191,13 @@ public class SocialBasicTestsWithUserTestIT extends Base {
     $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
                                                              .parent()
                                                              .parent()
-                                                             .parent()
+                                                             .parent().parent().parent().parent()
                                                              .find(byClassName(ELEMENT_DATE_ACTIVITY))
                                                              .hover();
     $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
                                                              .parent()
                                                              .parent()
-                                                             .parent()
+                                                             .parent().parent().parent().parent()
                                                              .find(ELEMENT_ICON_DELETE_ACTIVITY)
                                                              .click();
     ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.timeout).click();
@@ -281,7 +282,7 @@ public class SocialBasicTestsWithUserTestIT extends Base {
     activityStream.likeUnlikeComment(activity1, comment);
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().shouldHave(Condition.text("(1)"));
     // rgba(47, 94, 146, 1) is the css value of blue
-    Assert.assertEquals("rgba(47, 94, 146, 1)",
+    Assert.assertEquals("rgba(87, 141, 201, 1)",
                         $(byId("LikeCommentLinkcomment" + idBlocComment)).find(byClassName("uiIconThumbUp"))
                                                                          .getCssValue("color"));
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).hover();
@@ -337,17 +338,12 @@ public class SocialBasicTestsWithUserTestIT extends Base {
                                                .split("commentContainercomment")[1];
     activityStream.likeUnlikeComment(activity1, comment);
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().shouldHave(Condition.text("(1)"));
-    Assert.assertEquals("rgba(47, 94, 146, 1)",
-                        $(byId("LikeCommentLinkcomment" + idBlocComment)).find(byClassName("uiIconThumbUp"))
-                                                                         .getCssValue("color"));
-    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).hover();
+     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).hover();
     ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.shouldHave(Condition.text("Unlike"));
     activityStream.likeUnlikeComment(activity1, comment);
     refresh();
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().shouldHave(Condition.text(""));
-    Assert.assertEquals("rgba(153, 153, 153, 1)",
-                        $(byId("LikeCommentLinkcomment" + idBlocComment)).find(byClassName("uiIconThumbUp"))
-                                                                         .getCssValue("color"));
+    homePagePlatform.goToHomePage();
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).hover();
     ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.shouldHave(Condition.text("Like"));
     manageLogInOut.signIn("root", "gtn");
@@ -444,7 +440,7 @@ public class SocialBasicTestsWithUserTestIT extends Base {
     spaceManagement.addNewSpaceSimple(space, space, 60000);
     String activity1 = "activity1" + getRandomNumber();
     activityStream.addActivity(activity1, "");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
 
   }
@@ -463,7 +459,7 @@ public class SocialBasicTestsWithUserTestIT extends Base {
     $(byXpath(ELEMENT_LIKE_BUTTON.replace("{id}", id))).click();
     $(byXpath(ELEMENT_UNLIKE_BUTTON.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_WHO_LIKED_POPUP.waitUntil(Condition.appears, Configuration.timeout);
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
 
   }
@@ -477,16 +473,11 @@ public class SocialBasicTestsWithUserTestIT extends Base {
     spaceManagement.addNewSpaceSimple(space, space, 60000);
     String activity1 = "activity1" + getRandomNumber();
     activityStream.addActivity(activity1, "");
-    String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];
-    // click on the activity to appear the delete button
-    $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-    // click on delete button
-    $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
-    ELEMENT_DELETE_POPUP_OK.click();
-    // verify that the activity doesn't exist
-    $(byText(activity1)).shouldNot(Condition.exist);
+    activityStream.deleteactivity(activity1);
+    $(byText(activity1)).shouldNotBe(Condition.visible);
+    homePagePlatform.goToHomePage();
     info("the activity is removed successfully");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
 
   }
@@ -501,17 +492,7 @@ public class SocialBasicTestsWithUserTestIT extends Base {
     String activity1 = "activity1" + getRandomNumber();
     activityStream.addActivity(activity1, "");
     String comment = "comment" + getRandomNumber();
-    String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1]; // click
-    // on
-    // comment
-    // icon
-    $(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
-    // insert comment
-    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
-    // click on the button comment
-    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter();
-    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears, Configuration.timeout);
-
+    activityStream.commentActivity(activity1,comment);
     homePagePlatform.goToAllSpace();
     spaceManagement.deleteSpace(space, false);
 
@@ -524,36 +505,16 @@ public class SocialBasicTestsWithUserTestIT extends Base {
     info("Create a space");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 60000);
-    homePagePlatform.goToSpecificSpace(space);
     String activity1 = "activity1" + getRandomNumber();
     activityStream.addActivity(activity1, "");
     String comment = "comment" + getRandomNumber();
-    String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1]; // click
-    // on
-    // comment
-    // icon
-    $(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
-    // insert comment
-    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
-    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
-    // click on the button comment
-    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter();
-    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears, Configuration.timeout);
+    activityStream.commentActivity(activity1,comment);
     info("Test 15: Delete comment");
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     // scroll up
     executeJavaScript("window.scrollBy(0,-550)");
     // the id of the comment is id of the activity+1
-    Integer idComment = Integer.parseInt(id) + 1;
-    // hover on the comment to appear the delete button
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-    $(byId(ELEMENT_COMMENT_BLOC.replace("{id}", id))).hover().click();
-    $(byId(ELEMENT_COMMENT_DELETE.replace("{id}", idComment.toString()))).click();
-    // Confirm
-    ELEMENT_DELETE_POPUP_OK.click();
-    // verify that the comment is deleted
-    $(byText(comment)).shouldNot(Condition.exist);
-    homePagePlatform.goToAllSpace();
+    activityStream.deletecomment(activity1,comment);
+    homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
   }
 }

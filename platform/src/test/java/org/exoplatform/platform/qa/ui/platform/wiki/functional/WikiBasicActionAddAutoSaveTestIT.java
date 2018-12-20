@@ -26,7 +26,7 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
 @Tag("wiki")
 @Tag("functional")
 
-public class WikiBasicActionAddAutoSave extends Base {
+public class WikiBasicActionAddAutoSaveTestIT extends Base {
 
   HomePagePlatform homePagePlatform;
 
@@ -141,7 +141,6 @@ public class WikiBasicActionAddAutoSave extends Base {
     info("Create a wiki page 1");
     String title = "title" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    homePagePlatform.goToSpecificSpace(space);
     spaceManagement.goToWikiTab();
     wikiHomePage.goToAddBlankPage();
     wikiManagement.goToSourceEditor();

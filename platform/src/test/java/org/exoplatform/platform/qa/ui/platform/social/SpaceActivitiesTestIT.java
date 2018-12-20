@@ -61,12 +61,11 @@ public class SpaceActivitiesTestIT extends Base {
   @Test
   public void test01_AddNewYourActivityOnSpace() {
     String space = "space" + getRandomNumber();
-
+    String activity1 = "activity1" + getRandomNumber();
     info("Create a space");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 60000);
-    homePagePlatform.goToSpecificSpace(space);
-    String activity1 = "activity1" + getRandomNumber();
+    info("add activity in space");
     activityStream.addActivity(activity1, "");
     homePagePlatform.goToAllSpace();
     spaceManagement.deleteSpace(space, false);
@@ -80,7 +79,6 @@ public class SpaceActivitiesTestIT extends Base {
     info("Create a space");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 60000);
-    homePagePlatform.goToSpecificSpace(space);
     String activity1 = "activity1" + getRandomNumber();
     activityStream.addActivity(activity1, "");
     String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];
@@ -100,7 +98,6 @@ public class SpaceActivitiesTestIT extends Base {
     info("Create a space");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 60000);
-    homePagePlatform.goToSpecificSpace(space);
     String activity1 = "activity1" + getRandomNumber();
     activityStream.addActivity(activity1, "");
     String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];
@@ -124,7 +121,6 @@ public class SpaceActivitiesTestIT extends Base {
     info("Create a space");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 60000);
-    homePagePlatform.goToSpecificSpace(space);
     String activity1 = "activity1" + getRandomNumber();
     activityStream.addActivity(activity1, "");
     String comment = "comment" + getRandomNumber();
@@ -152,7 +148,6 @@ public class SpaceActivitiesTestIT extends Base {
     info("Create a space");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 60000);
-    homePagePlatform.goToSpecificSpace(space);
     String activity1 = "activity1" + getRandomNumber();
     activityStream.addActivity(activity1, "");
     String comment = "comment" + getRandomNumber();

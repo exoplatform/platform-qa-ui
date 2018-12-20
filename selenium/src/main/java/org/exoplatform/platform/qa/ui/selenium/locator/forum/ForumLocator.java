@@ -845,56 +845,56 @@ public class ForumLocator {
   public static final String ELEMENT_DELETE_MESSAGE =
           "//*[@id='UIListInBoxPrivateMessage']//*[contains(text(),'{$title}')]/../../..//*[contains(text(),'{$contact}')]/../..//*[@class='uiIconDelete uiIconLightGray']";
   // outbox
-  public static final String ELEMENT_FORWARD_MESSAGE =
-          "//*[@id='UIListSentPrivateMessage']//*[contains(text(),'{$title}')]/../../..//*[contains(text(),'{$contact}')]/../..//*[@class='uiIconForumForward uiIconForumLightGray']";
-  public static final SelenideElement ELEMENT_ICON_SEARCH =
-          $(byXpath("//*[@id=\"QuickSearchForm\"]/div[2]/a/i"));
-  public static final By ELEMENT_CONFIRM =
-          By.xpath("//*[@id='UIForumPopupConfirmation']//*[contains(text(),'OK')]");
-  public static final SelenideElement ELEMENT_POLL_CANCEL =
-          $(byXpath("//*[@id=\"UIPollForm\"]/div[3]/button[3]"));
-  public static final SelenideElement ELEMENT_SEARCH_RESULT =
-          $(byXpath("//*[@id=\"UIForumListSearch\"]/div[3]/table"));
-  public static final SelenideElement ELEMENT_CLOSE_POPUP =
-          $(byXpath("//*[@id=\"UIViewPost\"]/div[3]/button[1]"));
-  public static final SelenideElement ELEMENT_HOME_FORUM =
-          $(byId("UIBreadcumbs")).find(byText("Home"));
-  public static final SelenideElement ELEMENT_CATEGORY_CONTAINER = $(byId("UICategory"));
-  public static final SelenideElement ELEMENT_BTN_OK =
-          $(byClassName("infoIcon")).parent()
-                  .parent()
-                  .parent()
-                  .find(byClassName("btn"));
-  public static final SelenideElement ELEMENT_CAT_CONTAINER = $(byId("UICategoryContainer"));
-  public static final SelenideElement ELEMENT_PROGRESS_BAR = $((byClassName("progressBarFrame")));
-  public static final SelenideElement ELEMENT_CANCEL_PRIVATE_MSG =
-          $(byXpath("//*[@id=\"UIPrivateMessageForm\"]/div[3]/button"));
-  public static final SelenideElement ELEMENT_FORUM_OK_SEND_MSG =
-          $(byText("Your message was sent successfully.")).parent()
-                  .parent()
-                  .parent()
-                  .find(byClassName("btn"));
-  public static final SelenideElement ELEMENT_CONTENT_SEARCH_RESULT = $(byClassName("searchResult"));
-  public static final By ELEMENT_ICON_REPLAY_POST_FROM_ACTIVITY = byClassName("uiIconReply");
-  public static final By ELEMENT_BUTTON_DELETE_POST = byAttribute("data-original-title", "Delete This Post");
-  public static final SelenideElement ELEMENT_CHECKBOX_ALL_FORUM_CATEGORIE = $(byId("checkAll")).parent();
-  public static final SelenideElement ELEMENT_CHECKBOX_SELECT_ONE_FORUM_CATEGORIE =
-          $(byId("UIExportForm")).findAll(byClassName("uiCheckbox"))
-                  .get(1);
-  public static final SelenideElement ELEMENT_SELECT_FORUM_TO_MOVE =
-          $(byXpath("//*[@id=\"UIMoveTopicForm\"]/div[2]/div[1]/div/div/ul/li[1]/ul/li/a"));
-  public static final By ELEMENT_BUTTON_FORWARD_MESSAGE = byClassName("uiIconForumForward");
-  public static final By ELEMENT_BUTTON_DELETE_MESSAGE = byClassName("uiIconDelete");
-  public static final SelenideElement ELEMENT_UPLOAD_CATEGORIE_FORUM =
-          $(byId("FileUpload")).find(byClassName("file"));
-  public final String ELEMENT_EDIT_POST =
-          "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@data-original-title='Edit This Post']";
-  public final By ELEMENT_MOVE_TOPIC_POPUP = By.id("UIForumPopupWindow");
-
-  public static final SelenideElement ELEMENT_BUTTON_SUBMIT_POST = $(byXpath("//*[@id=\"UIPostForm\"]/div[3]/button[1]"));
-  public static final SelenideElement ELEMENT_TOPIC_QUOTE = $(byClassName("btnDetailTopic")).find(byText("Quote"));
-  public static final SelenideElement ELEMENT_REMOVE_ICON= $(byClassName("uiIconDelete "));
-  public static final SelenideElement ELEMENT_TOPIC_CONTAINER= $(byId("UIEditTopicContainer"));
   public  static final SelenideElement ELEMENT_DELETE_ATTACHMENT_FILE = $(byId("UIEditTopicContainer")).find(byClassName("uiIconDelete"));
 
+
+  public static final String          ELEMENT_FORWARD_MESSAGE                            =
+                                                              "//*[@id='UIListSentPrivateMessage']//*[contains(text(),'{$title}')]/../../..//*[contains(text(),'{$contact}')]/../..//*[@class='uiIconForumForward uiIconForumLightGray']";
+  public static final SelenideElement ELEMENT_ICON_SEARCH                                =
+                                                          $(byXpath("//*[@id=\"QuickSearchForm\"]/div[2]/a/i"));
+  public static final By              ELEMENT_CONFIRM                                    =
+                                                      By.xpath("//*[@id='UIForumPopupConfirmation']//*[contains(text(),'OK')]");
+  public static final SelenideElement ELEMENT_POLL_CANCEL                                =
+                                                          $(byXpath("//*[@id=\"UIPollForm\"]/div[3]/button[3]"));
+  public static final SelenideElement ELEMENT_SEARCH_RESULT                              =
+                                                            $(byXpath("//*[@id=\"UIForumListSearch\"]/div[3]/table"));
+  public static final SelenideElement ELEMENT_CLOSE_POPUP                                =
+                                                          $(byXpath("//*[@id=\"UIViewPost\"]/div[3]/button[1]"));
+  public static final SelenideElement ELEMENT_HOME_FORUM                                 =
+                                                         $(byId("UIBreadcumbs")).find(byText("Home"));
+  public static final SelenideElement ELEMENT_CATEGORY_CONTAINER                         = $(byId("UICategory"));
+  public static final SelenideElement ELEMENT_BTN_OK                                     =
+                                                     $(byClassName("infoIcon")).parent()
+                                                                               .parent()
+                                                                               .parent()
+                                                                               .find(byClassName("btn"));
+  public static final SelenideElement ELEMENT_CAT_CONTAINER                              = $(byId("UICategoryContainer"));
+  public static final SelenideElement ELEMENT_PROGRESS_BAR                               = $((byClassName("progressBarFrame")));
+  public static final SelenideElement ELEMENT_CANCEL_PRIVATE_MSG                         =
+                                                                 $(byXpath("//*[@id=\"UIPrivateMessageForm\"]/div[3]/button"));
+  public static final SelenideElement ELEMENT_FORUM_OK_SEND_MSG                          =
+                                                                $(byText("Your message was sent successfully.")).parent()
+                                                                                                                .parent()
+                                                                                                                .parent()
+                                                                                                                .find(byClassName("btn"));
+  public static final SelenideElement ELEMENT_CONTENT_SEARCH_RESULT                      = $(byClassName("searchResult"));
+  public static final By              ELEMENT_ICON_REPLAY_POST_FROM_ACTIVITY             = byClassName("uiIconReply");
+  public static final By              ELEMENT_BUTTON_DELETE_POST                         = byAttribute("data-original-title","Delete This Post");
+  public static final SelenideElement ELEMENT_CHECKBOX_ALL_FORUM_CATEGORIE               = $(byId("checkAll")).parent();
+  public static final SelenideElement ELEMENT_CHECKBOX_SELECT_ONE_FORUM_CATEGORIE        =
+                                                                                  $(byId("UIExportForm")).findAll(byClassName("uiCheckbox"))
+                                                                                                         .get(1);
+  public static final SelenideElement ELEMENT_SELECT_FORUM_TO_MOVE                       =
+                                                                   $(byXpath("//*[@id=\"UIMoveTopicForm\"]/div[2]/div[1]/div/div/ul/li[1]/ul/li/a"));
+  public static final By              ELEMENT_BUTTON_FORWARD_MESSAGE                     = byClassName("uiIconForumForward");
+  public static final By              ELEMENT_BUTTON_DELETE_MESSAGE                      = byClassName("uiIconDelete");
+  public static final SelenideElement ELEMENT_UPLOAD_CATEGORIE_FORUM                     =
+                                                                     $(byId("FileUpload")).find(byClassName("file"));
+  public final String                 ELEMENT_EDIT_POST                                  =
+                                                        "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@data-original-title='Edit This Post']";
+  public final By                     ELEMENT_MOVE_TOPIC_POPUP                           = By.id("UIForumPopupWindow");
+
+  public static final SelenideElement ELEMENT_BUTTON_SUBMIT_POST= $(byXpath("//*[@id=\"UIPostForm\"]/div[3]/button[1]"));
+ public static final SelenideElement ELEMENT_TOPIC_QUOTE= $(byClassName("btnDetailTopic")).find(byText("Quote"));
+public static final SelenideElement ELEMENT_MORE_IN_ACTION_BAR=$(byClassName("moreItem"));
 }

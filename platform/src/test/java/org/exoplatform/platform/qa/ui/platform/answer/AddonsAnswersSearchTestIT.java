@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.platform.answer;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.Button.ELEMENT_OK_BUTTON_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
@@ -163,7 +164,7 @@ public class AddonsAnswersSearchTestIT extends Base {
     $(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
     $(ELEMENT_OK_BUTTON_LINK).click();
     $(byText(question1)).should(Condition.exist);
-
+    refresh();
     if ($(byText(question1)).parent().find(ELEMENT_ICON_MORE_ACTIONS_QUESTION).is(Condition.not(Condition.exist))) {
       $(byText(question1)).click();
     }
@@ -171,13 +172,13 @@ public class AddonsAnswersSearchTestIT extends Base {
     answerManagement.inputDataToAnswer(answer1, null, null, null);
     $(ELEMENT_ANSWER_FORM_SAVE_BUTTON).click();
     $(byText(answer1)).waitUntil(Condition.appears, Configuration.timeout);
-
+    refresh();
     questionManagement.goToSubmitQuestion();
     questionManagement.inputDataToQuestionForm(question2, question2, null, "");
     $(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
     $(ELEMENT_OK_BUTTON_LINK).click();
     $(byText(question2)).should(Condition.exist);
-
+    refresh();
     if ($(byText(question2)).parent().find(ELEMENT_ICON_MORE_ACTIONS_QUESTION).is(Condition.not(Condition.exist))) {
       $(byText(question2)).click();
     }

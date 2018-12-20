@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.calendar.pageobject;
 import static com.codeborne.selenide.Selectors.*;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.bouncycastle.crypto.tls.ConnectionEnd.server;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_USER_CLOSE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
@@ -159,7 +160,7 @@ public class EventManagement {
    */
   public void goToAddEventFromActionBar() {
     info("Go to Add Event page from action bar");
-
+    executeJavaScript("window.scrollBy(0,-2000)", "");
     $(ELEMENT_BUTTON_EVENT).click();
     $(ELEMENT_QUICK_ADD_EVENT_POPUP).waitUntil(Condition.appears, Configuration.timeout);
   }
@@ -727,10 +728,11 @@ public class EventManagement {
     info("Sae add event details");
     if($(ELEMENT_ADD_EDIT_EVENT_NAME).is(Condition.visible))
     $(ELEMENT_ADD_EDIT_EVENT_NAME).click();
-    ELEMENT_BUTTON_EVENT_SAVE_DETAILS.waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_BUTTON_EVENT_SAVE_DETAILS.waitUntil(Condition.visible, Configuration.timeout);
     // click(ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
     // waitForElementNotPresent(ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
     ELEMENT_BUTTON_EVENT_SAVE_DETAILS.click();
+    ELEMENT_BUTTON_EVENT_SAVE_DETAILS.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
@@ -938,8 +940,8 @@ public class EventManagement {
       evt.check(ELEMENT_EDIT_DELETE_ALL_EVENT, 2);
       break;
     }
-    evt.click(ELEMENT_CONFIRM_EDIT_BUTTON);
-    evt.waitForElementNotPresent(ELEMENT_CONFIRM_EDIT_RECURRING_FORM);
+    $(ELEMENT_CONFIRM_EDIT_BUTTON).click();
+    $(ELEMENT_CONFIRM_EDIT_RECURRING_FORM).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**

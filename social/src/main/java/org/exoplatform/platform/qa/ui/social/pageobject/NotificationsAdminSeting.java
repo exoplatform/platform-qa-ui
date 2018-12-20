@@ -277,13 +277,15 @@ public class NotificationsAdminSeting {
       break;
     case NewUser_intranet:
       info("Click on Edit button");
-      evt.click(ELEMENT_NEW_USER_NOTIFICATION_EDIT_BTN);
-      if (evt.waitForAndGetElement(ELEMENT_NEW_USER_INTRANET_NOTIFICATION_CHECKBOX_CHECKED, 2000, 0) == null)
-        evt.check(ELEMENT_NEW_USER_INTRANET_NOTIFICATION_CHECKBOX, 2);
+      $(ELEMENT_EDIT_NEWUSER_ICON).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(ELEMENT_EDIT_NEWUSER_ICON).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+      if($(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX).is(Condition.not(Condition.checked)))
+        $(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX).parent().click();
       info("Click on Save button");
-      evt.click(ELEMENT_NEW_USER_NOTIFICATION_SAVE_BTN);
+      $(ELEMENT_NEW_USER_NOTIFICATION_SAVE_BTN).click();
+      $(ELEMENT_NEW_USER_NOTIFICATION_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
       info("Verify that intranet notification is shown");
-      evt.waitForAndGetElement(ELEMENT_NEW_USER_INTRANET_NOTIFICATION_TITLE, 3000, 1);
+      $(ELEMENT_NEW_USER_INTRANET_NOTIFICATION_TITLE).waitUntil(Condition.visible,Configuration.timeout);
       break;
     case ConnectionRequest_email:
       evt.click(ELEMENT_CONNECTION_REQUEST_EDIT_BTN);

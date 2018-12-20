@@ -3,8 +3,10 @@ package org.exoplatform.platform.qa.ui.platform.wiki;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
+import static org.exoplatform.platform.qa.ui.selenium.Button.ELEMENT_CANCEL_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACES_LIST;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
@@ -159,7 +161,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     info("Create a space");
     String space = "space" + getRandomNumber();
 
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
 
     info("Create a wiki page");
@@ -172,11 +174,12 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
 
     info("Move page to Space");
     wikiManagement.selectSpaceDestination(space);
-    homePagePlatform.goToSpecificSpace(space);
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceHomePage.goToWikiTab();
     $(byClassName("uiTreeExplorer")).find(byText(title1)).should(Condition.exist);
     homePagePlatform.goToHomePage();
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
 
   }
@@ -187,7 +190,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     info("Create a space");
     String space = "space" + getRandomNumber();
 
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
 
     info("Create a wiki page in space");
@@ -204,7 +207,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     $(byClassName("uiTreeExplorer")).find(byText(title1)).should(Condition.exist);
     wikiHomePage.deleteWiki(title1);
     homePagePlatform.goToHomePage();
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
 
   }
@@ -214,7 +217,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
 
     info("Create a space");
     String space = "space" + getRandomNumber();
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
 
     info("Create a wiki page ");
@@ -227,11 +230,12 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
 
     info("Move page to Space");
     wikiManagement.selectSpaceDestination(space);
-    homePagePlatform.goToSpecificSpace(space);
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceHomePage.goToWikiTab();
     $(byClassName("uiTreeExplorer")).find(byText(title1)).should(Condition.exist);
     homePagePlatform.goToHomePage();
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
 
   }
@@ -242,7 +246,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     info("Create a space");
     String space = "space" + getRandomNumber();
 
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
 
     info("Create a wiki page in space");
@@ -259,7 +263,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     $(byClassName("uiTreeExplorer")).find(byText(title1)).should(Condition.exist);
     wikiHomePage.deleteWiki(title1);
     homePagePlatform.goToHomePage();
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
   }
 
@@ -270,9 +274,9 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     String space1 = "space" + getRandomNumber();
     String space2 = "space" + getRandomNumber();
 
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1, 6000);
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space2, space2, 6000);
 
     info("Create a wiki page in space2");
@@ -286,11 +290,12 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     info("Move page to Space1");
 
     wikiManagement.selectSpaceDestination(space1);
-    homePagePlatform.goToSpecificSpace(space1);
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space1)).click();
     spaceHomePage.goToWikiTab();
     $(byClassName("uiTreeExplorer")).find(byText(title1)).should(Condition.exist);
     homePagePlatform.goToHomePage();
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space1, false);
     spaceManagement.deleteSpace(space2, false);
 
@@ -324,11 +329,12 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     $(byText(wiki2)).should(Condition.exist);
 
     info("Move wiki page 1 to wiki page 2");
-    homePagePlatform.goToSpecificSpace(space);
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceHomePage.goToWikiTab();
     wikiManagement.movePage(wiki1, wiki2);
     homePagePlatform.goToHomePage();
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
 
   }
@@ -362,25 +368,28 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     $(byText(wiki2)).should(Condition.exist);
 
     info("Open wiki page 1");
-    homePagePlatform.goToSpecificSpace(space1);
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space1)).click();
     spaceHomePage.goToWikiTab();
 
     info("Move page 1 to page 2");
     wikiManagement.movePageDiffDestination(wiki1, wiki2, space2);
 
     info("Open wiki page 1");
-    homePagePlatform.goToSpecificSpace(space1);
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space1)).click();
     spaceHomePage.goToWikiTab();
     $(byText(wiki1)).shouldNot(Condition.exist);
 
     info("Open wiki page 2");
-    homePagePlatform.goToSpecificSpace(space2);
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space2)).click();
     spaceHomePage.goToWikiTab();
     wikiHomePage.goToAPage(wiki2);
     $(byText(wiki1)).should(Condition.exist);
 
     homePagePlatform.goToHomePage();
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space1, false);
     spaceManagement.deleteSpace(space2, false);
   }
@@ -425,7 +434,8 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     $(byText(wiki1)).should(Condition.exist);
 
     info("Open wiki page 1");
-    homePagePlatform.goToSpecificSpace(space1);
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space1)).click();
     spaceManagement.goToWikiTab();
 
     info("Move page 1 to page 2");
@@ -437,7 +447,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     $(byText(newTitle)).should(Condition.exist);
 
     homePagePlatform.goToHomePage();
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space1, false);
     spaceManagement.deleteSpace(space2, false);
   }
@@ -473,7 +483,8 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     wikiManagement.movePageDiffDestination(wiki2, wiki1, space);
 
     info("Open wiki page 1");
-    homePagePlatform.goToSpecificSpace(space);
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceHomePage.goToWikiTab();
     wikiHomePage.goToAPage(wiki1);
     $(byText(wiki2)).should(Condition.exist);
@@ -482,7 +493,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     $(byText(wiki2)).shouldNot(Condition.exist);
 
     homePagePlatform.goToHomePage();
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
   }
 
@@ -587,6 +598,8 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     wikiManagement.saveAddPage();
     wikiHomePage.goToPermalink();
     String perLink = ELEMENT_WIKI_PERMELINK.getValue();
+    ELEMENT_BUTTON_CLOSE_PERMALINK.click();
+    ELEMENT_BUTTON_CLOSE_PERMALINK.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     open(perLink);
     refresh();
@@ -624,12 +637,12 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     richTextEditor.addSimplePage(title, title);
     wikiManagement.saveAddPage();
     info("Un check view permission of any group");
-    wikiHomePage.goToPermissions();
     wikiManagement.unCheckViewAUserOfPage(ELEMENT_PERMISSION_VIEW_ANY);
 
     wikiHomePage.goToPermalink();
     String perLink = ELEMENT_WIKI_PERMELINK.getValue();
-
+    ELEMENT_BUTTON_CLOSE_PERMALINK.click();
+    ELEMENT_BUTTON_CLOSE_PERMALINK.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     open(perLink);
     refresh();
@@ -672,12 +685,14 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     richTextEditor.addSimplePage(wiki, wiki);
     wikiManagement.saveAddPage();
     manageLogInOut.signIn(DATA_USER2, password);
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.goToAllSpacesTab();
     info("send request by user 2");
     spaceManagement.sendARequestToASpace(space);
     manageLogInOut.signIn("john", "gtngtn");
-    homePagePlatform.goToSpecificSpace(space);
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space)).click();
+    refresh();
     spaceHomePage.goToSpaceSettingTab();
     info("accept request by user 1");
     spaceSettingManagement.goToMemberTabInSpaceSettingTab();
@@ -686,6 +701,8 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     $(byText(wiki)).click();
     wikiHomePage.goToPermalink();
     String perLink = ELEMENT_WIKI_PERMELINK.getValue();
+    ELEMENT_BUTTON_CLOSE_PERMALINK.click();
+    ELEMENT_BUTTON_CLOSE_PERMALINK.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     open(perLink);
     refresh();
@@ -732,7 +749,8 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     wikiManagement.saveAddPage();
     wikiHomePage.goToPermalink();
     String perLink = ELEMENT_WIKI_PERMELINK.getValue();
-
+    ELEMENT_BUTTON_CLOSE_PERMALINK.click();
+    ELEMENT_BUTTON_CLOSE_PERMALINK.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     open(perLink);
     refresh();
@@ -870,7 +888,6 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     wikiHomePage.goToAddBlankPage();
     richTextEditor.addSimplePage(title, title);
     wikiManagement.saveAddPage();
-    wikiHomePage.goToPermissions();
     wikiManagement.unCheckViewAUserOfPage(ELEMENT_PERMISSION_VIEW_ANY);
 
     wikiHomePage.goToPermalink();
@@ -918,7 +935,6 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     String perLink = ELEMENT_WIKI_PERMELINK.getValue();
     $(ELEMENT_PERMALINK_CLOSE).click();
     info("Un check view permission of any group");
-    wikiHomePage.goToPermissions();
     wikiManagement.unCheckViewAUserOfPage(ELEMENT_PERMISSION_VIEW_ANY);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     open(perLink);
@@ -976,13 +992,15 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     wikiManagement.saveAddPage();
 
     info("Open wiki page 1");
-    homePagePlatform.goToSpecificSpace(space);
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceHomePage.goToWikiTab();
 
     info("Move page 1 to page 2");
     wikiManagement.movePageDiffDestination(wiki1, wiki2, "Intranet");
     info("Open wiki page 1");
-    homePagePlatform.goToSpecificSpace(space);
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceHomePage.goToWikiTab();
     $(byText(wiki1)).shouldNot(Condition.exist);
     info("Open wiki page 2");
@@ -1036,12 +1054,13 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
     manageLogInOut.signIn(DATA_USER2, password);
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.goToAllSpacesTab();
     info("send request by user 2");
     spaceManagement.sendARequestToASpace(space);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    homePagePlatform.goToSpecificSpace(space);
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceHomePage.goToSpaceSettingTab();
     info("accept request by user 1");
     spaceSettingManagement.goToMemberTabInSpaceSettingTab();
@@ -1072,11 +1091,12 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     info("Add permisison");
     wikiHomePage.goToPermissions();
     wikiPermission.addPermisisonByType(DATA_USER2);
-    wikiPermission.selectPermission(DATA_NAME_USER2, WikiPermission.permissionType.Edit_Pages);
+    wikiPermission.selectPermission(DATA_USER2, WikiPermission.permissionType.Edit_Pages);
     wikiPermission.savePermisison();
 
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-    homePagePlatform.goToSpecificSpace(space);
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceHomePage.goToWikiTab();
     info("Open a wiki page ");
     $(byText(wiki2)).waitUntil(Condition.appears, Configuration.timeout).click();
@@ -1088,10 +1108,10 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
 
     info("Move page popup is shown");
     $(byId("UIMoveTree")).find(byText(wiki1)).shouldNot(Condition.exist);
-
+    $(ELEMENT_CANCEL_BUTTON).click();
     info("delete data");
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    homePagePlatform.goToAllSpace();
+    homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
 
   }

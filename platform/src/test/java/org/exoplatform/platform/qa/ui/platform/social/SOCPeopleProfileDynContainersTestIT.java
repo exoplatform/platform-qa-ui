@@ -68,7 +68,6 @@ public class SOCPeopleProfileDynContainersTestIT extends Base {
    * -container
    */
   @Test
-  @BugInPLF("PLF-7947")
   public void test01_CheckTheLayoutOfProfilePage() {
     info("Test 1: Check the layout of Profile page");
     String righttop_profile = "righttop-profile-container";
@@ -90,7 +89,6 @@ public class SOCPeopleProfileDynContainersTestIT extends Base {
     $(byXpath(ELEMENT_CONTAINER_ID.replace("${id}", rightbottom_profile))).waitUntil(Condition.visible, Configuration.timeout);
     $(byXpath(ELEMENT_CONTAINER_ID.replace("${id}", middle_profile))).waitUntil(Condition.visible, Configuration.timeout);
     $(byXpath(ELEMENT_CONTAINER_ID.replace("${id}", left_profile))).waitUntil(Condition.visible, Configuration.timeout);
-    $(byXpath(ELEMENT_CONTAINER_ID.replace("${id}", action_profile))).waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_ICON_CLOSE_EDIT_LAYOUT.click();
   }
 
@@ -121,7 +119,6 @@ public class SOCPeopleProfileDynContainersTestIT extends Base {
    * on the right - Container Name is right -editprofile -container
    */
   @Test
-  @BugInPLF("PLF-7947")
   public void test02_CheckTheLayoutOfEditProfilePage() {
     info("Test 2: Check the layout of Edit Profile page");
     String action_editprofile = "action-editprofile-container";

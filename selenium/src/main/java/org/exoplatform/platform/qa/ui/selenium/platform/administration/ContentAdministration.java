@@ -201,15 +201,12 @@ public class ContentAdministration {
    * @param newName
    */
   public void editViewPermissionUser(String viewName, String oldName, String newName) {
-    $(byClassName("uiIconEditInfo")).click();
+    $(byXpath(ELEMENT_ECM_EXPLORER_VIEW_EDIT_LIST.replace("{$name}",viewName))).click();
     $(ELEMENT_ECM_EXPLORER_GO_TO_PERMISSION_FORM).click();
     $(ELEMENT_ECM_EXPLORER_USER_PERMISSION_ADD).click();
-    $(byId("Quick Search")).setValue(newName);
-    $(byClassName("btnSearchUser")).click();
-    $(byClassName("uiIconPlus")).click();
+    $(byXpath(ELEMENT_ECM_EXPLORER_SELECT_USER_LIST_PERMISSION.replace("{$user}",newName))).click();
     $(ELEMENT_ECM_EXPLORER_ADD_PERMISSION_FORM).click();
-    $(byText("Demo")).hover();
-    $(byId("UIViewPermissionContainer")).find(byClassName("uiIconDelete")).click();
+    $(byXpath(ELEMENT_ECM_EXPLORER_DELETE_PERMISSION_USER.replace("{$name}",oldName))).click();
     alert.acceptAlert();
     $(ELEMENT_ECM_EXPLORER_SAVE_FORM_ADD_VIEW).click();
   }

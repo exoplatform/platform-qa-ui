@@ -294,11 +294,13 @@ public class ForumHomePage {
     info("Click on Bookmark buton in Topic more actions list");
     $(ELEMENT_TOPIC_BOOKMARK).click();
     info("Click on Bookmark link on Action bar to open Bookmark popup");
-    $(ELEMENT_ACTIONBAR_BOOKMARK_MANAGER).click();
+    if(ELEMENT_MORE_IN_ACTION_BAR.is(Condition.visible))
+      ELEMENT_MORE_IN_ACTION_BAR.click();
+    $(ELEMENT_ACTIONBAR_BOOKMARK_MANAGER).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Verify that the topic is bookmarked");
     $(byText(name)).should(Condition.exist);
     info("Delete the bookmark of the topic");
-    $(ELEMENT_FORUM_BOOKMARK_DELETE).click();
+    $(ELEMENT_FORUM_BOOKMARK_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Verify that the bookmark is deleted");
     $(ELEMENT_FORUM_BOOKMARK_NAME).find(byText(name)).shouldNot(Condition.exist);
     info("Close the popup");

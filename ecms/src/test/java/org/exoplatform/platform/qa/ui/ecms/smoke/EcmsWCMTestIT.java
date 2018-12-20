@@ -8,6 +8,8 @@ import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_INCON_ADD_PATH;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_ADDNEWPAGE_BTNNEXT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_CONTENT_LIST_ADDPATH_BTN;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_MULTIPLE_CONTENT_POPUP_FILE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -170,9 +172,8 @@ public class EcmsWCMTestIT extends Base {
      */
     $(byTitle("Portlet Mode")).click();
     $(byTitle("Edit")).click();
-    ELEMENT_INCON_ADD_PATH.click();
-    contentList.selectFolderContent("General Drives/Sites Management/intranet", content2);
-    // $(ELEMENT_CONTENT_DETAIL_SAVE_BTN).scrollTo().click();
+    $(ELEMENT_CONTENT_LIST_ADDPATH_BTN).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(byXpath(ELEMENT_MULTIPLE_CONTENT_POPUP_FILE.replace("${content}", content2))).waitUntil(Condition.visible,Configuration.timeout).click();
     // scroll up
     executeJavaScript("window.scrollBy(0,-350);", "");
     $(byText("Done")).waitUntil(Condition.appears, Configuration.timeout);

@@ -1,7 +1,7 @@
 package org.exoplatform.platform.qa.ui.forum.pageobject;
 
-import static com.codeborne.selenide.Condition.appears;
-import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
@@ -58,14 +58,14 @@ public class ForumTopicManagement {
    */
   public void moveTopicToForum(String category, String forum) {
     info("if not found forum");
-    if ($(ELEMENT_UI_POPUP_MOVE_TOPIC.replace("{$forum}", forum)) == null) {
+    if($(byXpath(ELEMENT_UI_POPUP_MOVE_TOPIC.replace("{$forum}",forum))).is(not(visible))){
       info("Click on Category to expand tree");
-      $(ELEMENT_MOVE_POPUP_COLLASPE_NODE.replace("${category}", category)).click();
+      $(byXpath(ELEMENT_MOVE_POPUP_COLLASPE_NODE.replace("${category}",category))).click();
       info("Select the forum");
-      ELEMENT_SELECT_FORUM_TO_MOVE.click();
-    } else {
+      $(byXpath(ELEMENT_UI_POPUP_MOVE_TOPIC.replace("{$forum}",forum))).click();
+    }else{
       info("Select the forum");
-      ELEMENT_SELECT_FORUM_TO_MOVE.click();
+      $(byXpath(ELEMENT_UI_POPUP_MOVE_TOPIC.replace("{$forum}",forum))).click();
     }
     info("Finish moving");
 
@@ -122,6 +122,7 @@ public class ForumTopicManagement {
       $(ELEMENT_MOVE_TOPIC).waitUntil(Condition.appears, Configuration.timeout);
       info("Click on move topic link");
       $(ELEMENT_MOVE_TOPIC).click();
+      $(byId("UIForumPopupWindow")).waitUntil(visible,Configuration.timeout);
       break;
     case CLOSE:
       info("Click on Close");
@@ -253,10 +254,10 @@ public class ForumTopicManagement {
    * @param newContent String
    */
   public void quotePost(String title, String newContent) {
-    $(byText(newContent)).parent().parent().parent().parent().find(byText("Quote")).click();
+    $(byText(title)).parent().parent().parent().parent().find(byText("Quote")).click();
     if (newContent != "")
       switchTo().frame(0);
-    $(byXpath("/html/body")).sendKeys(newContent + "quote");
+    $(byXpath("/html/body")).sendKeys(newContent);
     switchTo().defaultContent();
     executeJavaScript("window.scrollBy(0,150)");
     $(ELEMENT_POST_FORM_SUBMIT).click();
@@ -503,11 +504,12 @@ public class ForumTopicManagement {
     $(byXpath("/html/body")).sendKeys(message);
     switchTo().defaultContent();
     info("click on Attached file button");
-    $(ELEMENT_START_TOPIC_ATTACH_FILE).click();
+    if(fileName[0]!=""){
     for (int i=0;i<=fileName.length-1;i++){
+      $(ELEMENT_START_TOPIC_ATTACH_FILE).click();
       $(By.className("file")).uploadFromClasspath(fileName[i]);
-    }
-    $(ELEMENT_SAVE_BTN).click();
+      $(ELEMENT_SAVE_BTN).click();
+    }}
     $(ELEMENT_SUBMIT_BUTTON).click();
     $(ELEMENT_SUBMIT_BUTTON).waitUntil(Condition.disappear, Configuration.timeout);
     info("Verify that the topic is created");

@@ -5,6 +5,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -46,7 +47,7 @@ public class PortalManagePages {
    * @param verify  boolean
    */
   public void searchPage(String title, String siteName, String type, boolean... verify) {
-
+    $(ELEMENT_ACCOUNT_NAME_LINK).click();
     info("waiting the page is loaded full");
     evt.waitForAndGetElement(ELEMENT_MANAGEPAGES_TITLE_FIELD);
 

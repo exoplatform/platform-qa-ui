@@ -2,9 +2,7 @@ package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
-import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_CONTENT_LIST_ADDPATH_BTN;
-import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_MULTIPLE_CONTENT_POPUP_FILE;
-import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_MULTIPLE_CONTENT_POPUP_NODE_FOLDER;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 
 import com.codeborne.selenide.Condition;
 
@@ -33,11 +31,11 @@ public class ContentList {
   public void selectFolderContent(String path, String content) {
 
     $(ELEMENT_CONTENT_LIST_ADDPATH_BTN).waitUntil(Condition.visible, Configuration.timeout).click();
-    String[] arrayPath = path.split("/");
-    for (String arrayElement : arrayPath) {
-      $(byXpath(ELEMENT_MULTIPLE_CONTENT_POPUP_NODE_FOLDER.replace("${node}", arrayElement))).click();
-    }
-
+      String[] arrayPath = path.split("/");
+      if($(byXpath(ELEMENT_MULTIPLE_CONTENT_POPUP_FILE.replace("${content}",content))).is(Condition.not(Condition.visible))){
+      for (String arrayElement : arrayPath) {
+        $(byXpath(ELEMENT_MULTIPLE_CONTENT_POPUP_NODE_FOLDER.replace("${node}", arrayElement))).click();
+      }}
     if (content != "" || content != null) {
       $(byXpath(ELEMENT_MULTIPLE_CONTENT_POPUP_FILE.replace("${content}", content))).waitUntil(Condition.visible,Configuration.timeout);
       $(byXpath(ELEMENT_MULTIPLE_CONTENT_POPUP_FILE.replace("${content}",content))).click();

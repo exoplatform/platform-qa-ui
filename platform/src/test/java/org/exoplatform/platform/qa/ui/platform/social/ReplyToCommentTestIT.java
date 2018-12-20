@@ -105,9 +105,7 @@ public class ReplyToCommentTestIT extends Base {
         refresh();
         executeJavaScript("window.scrollBy(0,-2000)", "");
         activityStream.deleteactivity(activity);
-        executeJavaScript("window.scrollBy(0,-2000)", "");
-        homePagePlatform.goToConnections();
-        connectionsManagement.removeConnection(DATA_USER2);
+
     }
 
     @Test
@@ -131,9 +129,7 @@ public class ReplyToCommentTestIT extends Base {
         activityStream.deleteReplyInAS(reply);
         executeJavaScript("window.scrollBy(0,-2000)", "");
         activityStream.deleteactivity(activity);
-        executeJavaScript("window.scrollBy(0,-2000)", "");
-        homePagePlatform.goToConnections();
-        connectionsManagement.removeConnection(DATA_USER2);
+
     }
 
     @Test
@@ -170,10 +166,9 @@ public class ReplyToCommentTestIT extends Base {
         assertEquals($(byText(reply1)).parent().parent().parent().parent().getAttribute("data-parent-comment"), comment_parent_id);
         assertEquals($(byText(reply2)).parent().parent().parent().parent().getAttribute("data-parent-comment"), comment_parent_id);
         assertEquals($(byText(reply3)).parent().parent().parent().parent().getAttribute("data-parent-comment"), comment_parent_id);
+        manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
         activityStream.deleteactivity(activity);
-        executeJavaScript("window.scrollBy(0,-2000)", "");
-        homePagePlatform.goToConnections();
-        connectionsManagement.removeConnection(DATA_USER2);
+
     }
 
     @Test
@@ -211,11 +206,9 @@ public class ReplyToCommentTestIT extends Base {
                 .getAttribute("id")
                 .split("commentContainercomment")[1];
         $(byId(ELEMENT_VIEW_ALL_REPLIES_LINK.replace("{id}", idBlocComment))).waitUntil(Condition.appears, Configuration.timeout).shouldHave(Condition.text("4"));
-        executeJavaScript("window.scrollBy(0,-2000)", "");
+        manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
         activityStream.deleteactivity(activity);
-        executeJavaScript("window.scrollBy(0,-2000)", "");
-        homePagePlatform.goToConnections();
-        connectionsManagement.removeConnection(DATA_USER2);
+
     }
 
     @Test
@@ -239,13 +232,11 @@ public class ReplyToCommentTestIT extends Base {
         activityStream.replyToComment(comment, reply1, DATA_NAME_USER1);
         activityStream.replyToComment(comment, reply2, DATA_NAME_USER1);
         refresh();
-        $(byText(reply1)).waitUntil(Condition.appears, Configuration.timeout);
-        $(byText(reply2)).waitUntil(Condition.appears, Configuration.timeout);
-        executeJavaScript("window.scrollBy(0,-2000)", "");
+        $(byText(reply1)).waitUntil(Condition.visible, Configuration.timeout);
+        $(byText(reply2)).waitUntil(Condition.visible, Configuration.timeout);
+        manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
         activityStream.deleteactivity(activity);
-        executeJavaScript("window.scrollBy(0,-2000)", "");
-        homePagePlatform.goToConnections();
-        connectionsManagement.removeConnection(DATA_USER2);
+
     }
 
     @Test
@@ -274,9 +265,7 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         activityStream.deleteactivity(activity);
-        executeJavaScript("window.scrollBy(0,-2000)", "");
-        homePagePlatform.goToConnections();
-        connectionsManagement.removeConnection(DATA_USER2);
+
     }
 
     @Test
@@ -308,8 +297,7 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         activityStream.deleteactivity(activity);
-        homePagePlatform.goToConnections();
-        connectionsManagement.removeConnection(DATA_USER2);
+
     }
 
     //Check that quote a post in forum turns to reply to a comment in activity stream
@@ -321,6 +309,7 @@ public class ReplyToCommentTestIT extends Base {
         String nameForum = "Forum" + getRandomNumber();
         String nameTopic = "Topic" + getRandomNumber();
         String description = "Description" + getRandomNumber();
+        String quote="quote"+getRandomNumber();
         homePagePlatform.goToConnections();
         connectionsManagement.connectToAUser(DATA_USER2);
         info("Open forum portlet");
@@ -343,10 +332,11 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToForum();
         forumHomePage.goToTopic(nameTopic);
-        forumTopicManagement.quotePost(title, content);
+        forumTopicManagement.quotePost(content, quote);
         homePagePlatform.goToHomePage();
-        String comment_parent_id = $(byText(content)).parent().parent().parent().parent().getAttribute("data-comment-id");
-        assertEquals($(byText(content)).parent()
+        homePagePlatform.refreshUntil($(byText(quote)),Condition.visible,1000);
+        String comment_parent_id = $(byText(quote)).parent().parent().parent().parent().getAttribute("data-comment-id");
+        assertEquals($(byText(quote)).parent()
                 .parent()
                 .parent()
                 .parent()
@@ -358,8 +348,7 @@ public class ReplyToCommentTestIT extends Base {
         $(byText(nameCat)).click();
         info("Delete category");
         forumCategoryManagement.deleteCategory(nameCat);
-        homePagePlatform.goToConnections();
-        connectionsManagement.removeConnection(DATA_USER2);
+
     }
 
     @Test
@@ -390,17 +379,15 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
         activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
+        manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
         $(ELEMENT_ACCOUNT_NAME_LINK).click();
-        executeJavaScript("window.scrollBy(0,-5500)", "");
         $(byText(nameTopic)).click();
         $(byText(reply)).parent().shouldHave(Condition.text(comment));
         forumHomePage.goToHomeCategory();
         $(byText(nameCat)).click();
         info("Delete category");
         forumCategoryManagement.deleteCategory(nameCat);
-        executeJavaScript("window.scrollBy(0,-2000)", "");
-        homePagePlatform.goToConnections();
-        connectionsManagement.removeConnection(DATA_USER2);
+
     }
 
     //Check reply turns to quote
@@ -432,7 +419,8 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
         activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
-        executeJavaScript("window.scrollBy(0,-5500)", "");
+        manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
+        $(ELEMENT_ACCOUNT_NAME_LINK).click();
         $(byText(nameTopic)).click();
         $(byClassName("contentQuote")).shouldHave(Condition.text(comment));
         $(byClassName("contentQuote")).shouldHave(Condition.text(DATA_USER2));
@@ -442,8 +430,7 @@ public class ReplyToCommentTestIT extends Base {
         $(byText(nameCat)).click();
         info("Delete category");
         forumCategoryManagement.deleteCategory(nameCat);
-        homePagePlatform.goToConnections();
-        connectionsManagement.removeConnection(DATA_USER2);
+
     }
 
     //Check that each reply is attached to its parent comment
@@ -479,8 +466,8 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         activityStream.replyToComment(comment1, reply1, DATA_NAME_USER1);
         activityStream.replyToComment(comment2, reply2, DATA_NAME_USER1);
+        manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
         $(ELEMENT_ACCOUNT_NAME_LINK).click();
-        executeJavaScript("window.scrollBy(0,-5500)", "");
         $(byText(nameTopic)).click();
         $(byText(reply1)).parent().shouldHave(Condition.text(comment1));
         $(byText(reply2)).parent().shouldHave(Condition.text(comment2));
@@ -488,8 +475,7 @@ public class ReplyToCommentTestIT extends Base {
         $(byText(nameCat)).click();
         info("Delete category");
         forumCategoryManagement.deleteCategory(nameCat);
-        homePagePlatform.goToConnections();
-        connectionsManagement.removeConnection(DATA_USER2);
+
     }
 
     //Check when replying to same comment for two times
@@ -527,7 +513,7 @@ public class ReplyToCommentTestIT extends Base {
         activityStream.replyToComment(comment, reply2, DATA_NAME_USER2);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
-        executeJavaScript("window.scrollBy(0,-5500)", "");
+        $(ELEMENT_ACCOUNT_NAME_LINK).click();
         $(byText(nameTopic)).click();
         $(byText(reply1)).parent().shouldHave(Condition.text(comment));
         $(byText(reply2)).parent().shouldHave(Condition.text(comment));
@@ -535,8 +521,7 @@ public class ReplyToCommentTestIT extends Base {
         $(byText(nameCat)).click();
         info("Delete category");
         forumCategoryManagement.deleteCategory(nameCat);
-        homePagePlatform.goToConnections();
-        connectionsManagement.removeConnection(DATA_USER2);
+
     }
 
     @Test
@@ -569,8 +554,7 @@ public class ReplyToCommentTestIT extends Base {
         activityStream.replyToCommentInPreview(comment, reply, DATA_NAME_USER1);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         activityStream.deleteactivity(activity);
-        homePagePlatform.goToConnections();
-        connectionsManagement.removeConnection(DATA_USER2);
+
     }
 
     @Test
@@ -611,8 +595,7 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         activityStream.deleteactivity(activity);
-        homePagePlatform.goToConnections();
-        connectionsManagement.removeConnection(DATA_USER2);
+
     }
 
     @Test
@@ -675,8 +658,7 @@ public class ReplyToCommentTestIT extends Base {
         assertEquals($(byText(reply3)).parent().parent().parent().getAttribute("data-parent-comment"), data_comment);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         activityStream.deleteactivity(activity);
-        homePagePlatform.goToConnections();
-        connectionsManagement.removeConnection(DATA_USER2);
+
     }
 
     @Test
@@ -727,9 +709,7 @@ public class ReplyToCommentTestIT extends Base {
         $(byId("commentArea")).find(byClassName("subCommentShowAllLink")).shouldHave(Condition.text("4"));
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         activityStream.deleteactivity(activity);
-        executeJavaScript("window.scrollBy(0,-2000)", "");
-        homePagePlatform.goToConnections();
-        connectionsManagement.removeConnection(DATA_USER2);
+
     }
 
     @Test
@@ -792,7 +772,8 @@ public class ReplyToCommentTestIT extends Base {
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToTaskPage();
         tasksManagement.replyToReply(task, reply, replytoreply, DATA_NAME_USER2);
-        executeJavaScript("window.scrollBy(0,-2000)", "");
+        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+        homePagePlatform.goToTaskPage();
         tasksManagement.deleteTask(task);
     }
 
@@ -858,9 +839,10 @@ public class ReplyToCommentTestIT extends Base {
         refresh();
         $(byText(task)).click();
         //Check that the replies number in show reply link
-        String idDataComment = $(byText(comment)).parent().parent().getAttribute("data-commentid");
+        String idDataComment = $(byText(comment)).parent().parent().parent().getAttribute("data-commentid");
         $(byId(ELEMENT_VIEW_ALL_REPLIES_LINK_TASK.replace("{id}", idDataComment))).waitUntil(Condition.appears, Configuration.timeout).shouldHave(Condition.text("4"));
-        executeJavaScript("window.scrollBy(0,-2000)", "");
+        manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
+        homePagePlatform.goToTaskPage();
         tasksManagement.deleteTask(task);
     }
 
@@ -914,6 +896,8 @@ public class ReplyToCommentTestIT extends Base {
         tasksManagement.deleteComment(task, comment);
         $(byText(reply)).shouldNot(Condition.exist);
         $(byText(replytoreply)).shouldNot(Condition.exist);
+        manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
+        homePagePlatform.goToTaskPage();
         tasksManagement.deleteTask(task);
     }
 
@@ -1002,10 +986,8 @@ public class ReplyToCommentTestIT extends Base {
         ELEMENT_ICON_NOTIFICATION.click();
         assertEquals("rgba(0, 0, 0, 0)",ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().getCssValue("background-color"));
         homePagePlatform.goToHomePage();
-        activityStream.deleteActivity(activity);
-        executeJavaScript("window.scrollBy(0,-2000)", "");
-        homePagePlatform.goToConnections();
-        connectionsManagement.removeConnection(DATA_USER2);
+        activityStream.deleteactivity(activity);
+
     }
 
     @Test
@@ -1038,18 +1020,15 @@ public class ReplyToCommentTestIT extends Base {
                 .find(byText(reply))
                 .parent()
                 .parent()
-                .shouldHave(Condition.text(DATA_NAME_USER3 + "and" + DATA_NAME_USER2 + notifContent));
+                .shouldHave(Condition.text(DATA_NAME_USER3 + " and " + DATA_NAME_USER2 + notifContent));
         assertEquals("rgba(227, 236, 246, 1)",ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().getCssValue("background-color"));
         ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().click();
         refresh();
         ELEMENT_ICON_NOTIFICATION.click();
         assertEquals("rgba(0, 0, 0, 0)",ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().getCssValue("background-color"));
         homePagePlatform.goToHomePage();
-        activityStream.deleteActivity(activity);
-        executeJavaScript("window.scrollBy(0,-2000)", "");
-        homePagePlatform.goToConnections();
-        connectionsManagement.removeConnection(DATA_USER2);
-        connectionsManagement.removeConnection(DATA_USER3);
+        activityStream.deleteactivity(activity);
+
     }
 
     @Test
@@ -1088,19 +1067,14 @@ public class ReplyToCommentTestIT extends Base {
                 .find(byText(reply))
                 .parent()
                 .parent()
-                .shouldHave(Condition.text(DATA_NAME_USER4 + " and " + DATA_NAME_USER3 + notifContent));
+                .shouldHave(Condition.text(DATA_NAME_USER4 + ", " + DATA_NAME_USER3 + notifContent));
         assertEquals("rgba(227, 236, 246, 1)",ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().getCssValue("background-color"));
         ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().click();
         refresh();
         ELEMENT_ICON_NOTIFICATION.click();
         assertEquals("rgba(0, 0, 0, 0)",ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().getCssValue("background-color"));
         homePagePlatform.goToHomePage();
-        activityStream.deleteActivity(activity);
-        executeJavaScript("window.scrollBy(0,-2000)", "");
-        homePagePlatform.goToConnections();
-        connectionsManagement.removeConnection(DATA_USER2);
-        connectionsManagement.removeConnection(DATA_USER3);
-        connectionsManagement.removeConnection(DATA_USER4);
+        activityStream.deleteactivity(activity);
     }
 
     @Test
@@ -1119,7 +1093,8 @@ public class ReplyToCommentTestIT extends Base {
         ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
         activityStream.addActivity(activity, "");
         String id = $(byText(activity)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
-        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).click();
         ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
         executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
         ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
@@ -1130,7 +1105,8 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).click();
         $(byId("commentArea")).find(byText(reply)).parent().find(byClassName("likeCommentLink")).click();
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
@@ -1153,10 +1129,7 @@ public class ReplyToCommentTestIT extends Base {
         ELEMENT_ICON_NOTIFICATION.click();
         assertEquals("rgba(0, 0, 0, 0)",ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().getCssValue("background-color"));
         homePagePlatform.goToHomePage();
-        activityStream.deleteActivity(activity);
-        executeJavaScript("window.scrollBy(0,-2000)", "");
-        homePagePlatform.goToConnections();
-        connectionsManagement.removeConnection(DATA_USER2);
+        activityStream.deleteactivity(activity);
     }
 
     @Test
@@ -1173,10 +1146,11 @@ public class ReplyToCommentTestIT extends Base {
         ELEMENT_TAB_LINK.click();
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
-        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
+        ELEMENT_BAR_PROGRESS.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
         activityStream.addActivity(activity, "");
         String id = $(byText(activity)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
-        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).click();
         ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
         executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
         ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
@@ -1187,14 +1161,16 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).click();
         $(byId("commentArea")).find(byText(reply)).parent().find(byClassName("likeCommentLink")).click();
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).click();
         $(byId("commentArea")).find(byText(reply)).parent().find(byClassName("likeCommentLink")).click();
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
@@ -1204,7 +1180,7 @@ public class ReplyToCommentTestIT extends Base {
                 .find(byText(reply))
                 .parent()
                 .parent()
-                .shouldHave(Condition.text(DATA_NAME_USER2 + notifContent));
+                .shouldHave(Condition.text(DATA_NAME_USER3 + " and " + DATA_NAME_USER2 + notifContent));
         ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
                 .find(byText(DATA_NAME_USER2))
                 .parent()
@@ -1217,11 +1193,8 @@ public class ReplyToCommentTestIT extends Base {
         ELEMENT_ICON_NOTIFICATION.click();
         assertEquals("rgba(0, 0, 0, 0)",ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().getCssValue("background-color"));
         homePagePlatform.goToHomePage();
-        activityStream.deleteActivity(activity);
-        executeJavaScript("window.scrollBy(0,-2000)", "");
-        homePagePlatform.goToConnections();
-        connectionsManagement.removeConnection(DATA_USER2);
-        connectionsManagement.removeConnection(DATA_USER3);
+        activityStream.deleteactivity(activity);
+
     }
 
     @Test
@@ -1242,7 +1215,8 @@ public class ReplyToCommentTestIT extends Base {
         ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
         activityStream.addActivity(activity, "");
         String id = $(byText(activity)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
-        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).click();
         ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
         executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
         ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
@@ -1253,21 +1227,24 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).click();
         $(byId("commentArea")).find(byText(reply)).parent().find(byClassName("likeCommentLink")).click();
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).click();
         $(byId("commentArea")).find(byText(reply)).parent().find(byClassName("likeCommentLink")).click();
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
-        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).click();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
+        $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).click();
         $(byId("commentArea")).find(byText(reply)).parent().find(byClassName("likeCommentLink")).click();
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
@@ -1277,9 +1254,9 @@ public class ReplyToCommentTestIT extends Base {
                 .find(byText(reply))
                 .parent()
                 .parent()
-                .shouldHave(Condition.text(DATA_NAME_USER4 + " and " + DATA_NAME_USER3 + notifContent));
+                .shouldHave(Condition.text(DATA_NAME_USER4 + ", " + DATA_NAME_USER3 + notifContent));
         ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
-                .find(byText(DATA_NAME_USER2))
+                .find(byText(DATA_NAME_USER4))
                 .parent()
                 .parent()
                 .find(byText(reply))
@@ -1290,11 +1267,7 @@ public class ReplyToCommentTestIT extends Base {
         ELEMENT_ICON_NOTIFICATION.click();
         assertEquals("rgba(0, 0, 0, 0)",ELEMENT_NOTIFICATION_POPUP.find(byText(reply)).parent().parent().parent().parent().parent().getCssValue("background-color"));
         homePagePlatform.goToHomePage();
-        activityStream.deleteActivity(activity);
-        executeJavaScript("window.scrollBy(0,-2000)", "");
-        homePagePlatform.goToConnections();
-        connectionsManagement.removeConnection(DATA_USER2);
-        connectionsManagement.removeConnection(DATA_USER3);
-        connectionsManagement.removeConnection(DATA_USER4);
+        activityStream.deleteactivity(activity);
+
     }
 }

@@ -2,9 +2,11 @@ package org.exoplatform.platform.qa.ui.platform.ecms;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER2;
+import static org.exoplatform.platform.qa.ui.selenium.Button.ELEMENT_OK_BUTTON_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
@@ -148,7 +150,7 @@ public class EcmsSEBasicActionTestIT extends Base {
         siteExplorerHome.copyPasteNode(titleCommonNode, destination);
         info("delete data");
         $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", destination))).click();
-        siteExplorerHome.deleteData(titleCommonNode);
+        siteExplorerHome.deleteData(titleCommonNode,false);
         $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", secondDestination))).click();
         siteExplorerHome.deleteData(titleCommonNode);
     }
@@ -188,8 +190,9 @@ public class EcmsSEBasicActionTestIT extends Base {
         createNewDocument.addNewWebContent(titleCommonNode, titleCommonNode);
         createNewDocument.saveAndClose();
         info("Test 4: Drag and drop a node");
-        $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNode))).dragAndDropTo($(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", destination))));
+        ELEMENT_CONTENT_LIST.find(byText(titleCommonNode)).dragAndDropTo($(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", destination))));
         manageAlert.acceptAlert();
+        $(ELEMENT_OK_BUTTON_LINK).click();
         $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", destination))).click();
         siteExplorerHome.deleteData(titleCommonNode);
 
@@ -319,7 +322,7 @@ public class EcmsSEBasicActionTestIT extends Base {
         $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
         $(ELEMENT_SIDEBAR_SITES_MANAGEMENT).click();
         info("Test 9: Delete Clipboard");
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+        $(ELEMENT_ACCOUNT_NAME_LINK).click();
         $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNode))).contextClick();
         $(ELEMENT_SITEEXPLORER_ACTION_COPY).click();
         $(ELEMENT_SITEEXPLORER_CLIPBOARD).click();
