@@ -20,6 +20,7 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
@@ -414,12 +416,11 @@ public class PlatformBase {
   public void usePaginator(Object locator, String exceptionMessage) {
     String page1 = ELEMENT_PAGINATOR_PAGE_LINK.replace("${number}", "1");
 
-    if (evt.waitForAndGetElement(page1, 5000, 0) != null)
-      evt.click(page1);
-
+    if (evt.waitForAndGetElement(byXpath(page1), 5000, 0) != null)
+      $(byXpath("$(byXpath(\"//*[@id=\\\"UIGridUser\\\"]/div/ul/li[2]/a\"))")).click();
     int totalPages = 0;
-    if (evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE, 3000, 0) != null) {
-      totalPages = evt.isElementPresent(ELEMENT_TOTAL_PAGE) ? Integer.valueOf(testBase.getText(ELEMENT_TOTAL_PAGE)) : 1;
+    if (evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE, 3000, 0) != null){
+      totalPages = evt.isElementPresent(ELEMENT_TOTAL_PAGE) ? Integer.valueOf(evt.getText(ELEMENT_TOTAL_PAGE)) : 1;
     }
     info("-- The total pages is: " + totalPages);
     int i = 1;
@@ -428,10 +429,9 @@ public class PlatformBase {
         info(exceptionMessage);
         break;
       }
-      if (evt.waitForAndGetElement(ELEMENT_NEXT_PAGE, 3000, 0) != null) {
-        evt.click(ELEMENT_NEXT_PAGE);
+      if (evt.waitForAndGetElement(ELEMENT_NEXT_PAGE, 3000, 0) != null){
+        $(ELEMENT_NEXT_PAGE).click();
       }
-
     }
   }
 

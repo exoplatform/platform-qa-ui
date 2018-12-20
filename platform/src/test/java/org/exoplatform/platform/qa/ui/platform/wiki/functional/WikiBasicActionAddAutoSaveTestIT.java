@@ -184,7 +184,7 @@ public class WikiBasicActionAddAutoSaveTestIT extends Base {
     wikiValidattions.verifyTitleDrafPage(title);
     wikiDraftPage.resumeADraft(title);
     wikiManagement.goToSourceEditor();
-    wikiValidattions.verifyResumADraf(title, content);
+    wikiValidattions.verifyResumADraf(title);
     wikiHomePage.goToMyDraft();
     wikiDraftPage.deleteDraft(title);
 

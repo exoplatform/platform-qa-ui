@@ -10,7 +10,7 @@ import java.io.File;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import org.omg.CORBA.CODESET_INCOMPATIBLE;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -169,8 +169,8 @@ public class SourceTextEditor {
     if (!newContent.isEmpty()) {
       text = newContent.split("</br>");
       for (int i = 0; i < text.length; i++) {
-        $(ELEMENT_CONTENT_WIKI_INPUT).setValue(newContent);
-        $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.visible,Configuration.timeout).sendKeys(Keys.ENTER);
+      $(ELEMENT_CONTENT_WIKI_INPUT).setValue(newContent);
+       $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.visible, Configuration.timeout).sendKeys(Keys.ENTER);
       }
     }
     info("Waiting 30s before saved all changes");

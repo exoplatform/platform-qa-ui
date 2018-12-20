@@ -493,9 +493,9 @@ public class WikiManagement {
    */
   public void viewInsertLink(String label) {
     info("Verify that the inserted link is shown in the page");
-    evt.waitForAndGetElement(By.linkText(label));
+    $(By.linkText(label)).waitUntil(Condition.visible,Configuration.timeout);
     info("Click on the label");
-    evt.click(By.linkText(label));
+    $(By.linkText(label)).click();
   }
 
   /**
@@ -503,7 +503,7 @@ public class WikiManagement {
    */
   public void goToViewChangesLinkOnStatus() {
     info("Click on View Changes link on the status");
-    evt.click(ELEMENT_WIKI_STATUS_VERSION_VIEW_CHANGES_LINK);
+    $(ELEMENT_WIKI_STATUS_VERSION_VIEW_CHANGES_LINK).click();
 
   }
 
@@ -523,9 +523,9 @@ public class WikiManagement {
    */
   public void goToDeleteLinkOnStatus() {
     info("Click on Continue Editting link on the status");
-    evt.click(ELEMENT_WIKI_STATUS_VERSION_DELETE_LINK);
+    $(ELEMENT_WIKI_STATUS_VERSION_DELETE_LINK).click();
     info("The status is not shown and Edit page is shown");
-    evt.waitForElementNotPresent(ELEMENT_WIKI_STATUS_VERSION_DELETE_LINK);
+    $(ELEMENT_WIKI_STATUS_VERSION_DELETE_LINK).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -533,7 +533,7 @@ public class WikiManagement {
    */
   public void goToResumDrafLinkOnStatus() {
     info("Click on Resume the Draf link");
-    evt.click(ELEMENT_WIKI_STATUS_RESUME_THE_DRAF_LINK);
+    $(ELEMENT_WIKI_STATUS_RESUME_THE_DRAF_LINK).click();
 
   }
 
