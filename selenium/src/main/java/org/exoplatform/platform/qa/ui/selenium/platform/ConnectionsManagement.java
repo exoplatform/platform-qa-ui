@@ -41,7 +41,7 @@ public class ConnectionsManagement {
     switch (option) {
     case ALL:
       info("Go to all tab");
-      evt.click(ELEMENT_ALL_CONNECTIONS_TAB, 0, true);
+      $(ELEMENT_ALL_CONNECTIONS_TAB).click();
       break;
     case MYCONNECTION:
       info("Go to my connection tab");
@@ -57,7 +57,7 @@ public class ConnectionsManagement {
       break;
     default:
       info("Go to all tab");
-      evt.click(ELEMENT_ALL_CONNECTIONS_TAB, 0, true);
+      $(ELEMENT_ALL_CONNECTIONS_TAB).click();
       break;
     }
 
@@ -76,8 +76,8 @@ public class ConnectionsManagement {
     else
       searchPeople(username, null, null, null);
     refresh();
-    if ($(ELEMENT_CONNECTION_REVOVE_BTN).is(Condition.exist)) {
-      $(ELEMENT_CONNECTION_REVOVE_BTN).click();
+    if ($(byXpath(ELEMENT_CONNECTION_REMOVE_BTN)).is(Condition.exist)) {
+      $(byXpath(ELEMENT_CONNECTION_REMOVE_BTN)).click();
     }
     if ($(ELEMENT_CONNECTION_CANCEL_BTN).is(Condition.exist)) {
       $(ELEMENT_CONNECTION_CANCEL_BTN).click();
@@ -87,6 +87,7 @@ public class ConnectionsManagement {
     // username), 2000, 1);
     info("Connected to the user");
   }
+
 
   /**
    * Remove a connection of user
@@ -178,11 +179,12 @@ public class ConnectionsManagement {
     searchPeople(username, null, null, null);
     if (accept){
 
-      ELEMENT_CONNECTION_REVOVE_BTN.should(Condition.exist);
+      $(byXpath(ELEMENT_CONNECTION_REMOVE_BTN)).is(Condition.exist);
     }
     else
-      evt.waitForElementNotPresent(ELEMENT_CONNECTION_REVOVE_BTN);
+      $(byXpath(ELEMENT_CONNECTION_REMOVE_BTN)).click();
   }
+
 
   /**
    * Verify that a request pending is sent to the user
@@ -208,10 +210,10 @@ public class ConnectionsManagement {
    */
   public void clearSearchTextbox() {
     info("Clear search textbox");
-    evt.click(ELEMENT_ALL_RESULTS);
-    evt.type(ELEMENT_NAME_OF_PEOPLE, "", true);
-    evt.type(ELEMENT_POSITIONS_OF_PEOPLE, "", true);
-    evt.type(ELEMENT_SKILL_OF_PEOPLE, "", true);
+    $(ELEMENT_ALL_RESULTS).click();
+    $(ELEMENT_NAME_OF_PEOPLE).setValue("");
+    $(ELEMENT_POSITIONS_OF_PEOPLE).setValue("");
+    $(ELEMENT_SKILL_OF_PEOPLE).setValue("");
   }
 
   /**

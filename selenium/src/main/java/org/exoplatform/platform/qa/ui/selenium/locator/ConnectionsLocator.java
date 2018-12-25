@@ -36,6 +36,8 @@ public class ConnectionsLocator {
   public static final SelenideElement ELEMENT_CONNECTION_CANCEL_BTN           = $(byText("Cancel Request"));
 
   public static final SelenideElement ELEMENT_CONNECTION_REVOVE_BTN           = $(byText("Remove Connection"));
+  public static final String ELEMENT_CONNECTION_REMOVE_BTN = "//a[contains(@href,'${user}')]/../..//*[text()='Remove Connection']";
+
 
   public static final String          ELEMENT_CONNECTION_IGNORE_BTN           =
                                                                     " //a[contains(@href,'${user}')]/../..//*[text()='Ignore']";

@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.social.pageobject;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_NOTIFICATION_DROPDOWN;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -128,33 +129,19 @@ public class IntranetNotification {
   /**
    * Open a detail Accept Request Connection to a new user
    * 
-   * @param fullName is user's full name
+   * @param fullName1 is user's full name
    * @param isPopup =true if open from the pop up =false if open from all
    *          notification page
    */
-  public void goToDetailAcceptRequestConnectionUser(String fullName, boolean isPopup) {
+  public void goToDetailAcceptRequestConnectionUser(String fullName1, boolean isPopup) {
 
-    for (int repeat = 0;; repeat++) {
-      if (repeat > 1) {
-        if (evt.waitForAndGetElement(ELEMENT_UIBASICPROFILEPORTLET, 3000, 0) != null)
-          ;
-        break;
-      }
-      if (evt.waitForAndGetElement(ELEMENT_UIBASICPROFILEPORTLET, 5000, 0) != null) {
-        info("Element " + ELEMENT_UIBASICPROFILEPORTLET + " is displayed");
-        break;
-      }
-      info("Retry...[" + repeat + "]");
       if (isPopup) {
         info("View detail of accept connection to new user from the pop up");
-        evt.click(ELEMENT_NOTIFICATION_POPUP_ACCEPT_REQUEST_CONNECT.replace("$name", fullName));
+        $(byXpath(ELEMENT_NOTIFICATION_POPUP_ACCEPT_REQUEST_CONNECT.replace("$name", fullName1))).waitUntil(Condition.visible,Configuration.timeout).click();
       } else {
         info("View detail of accept connection to new user from all notification page");
-        evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_ACCEPT_REQUEST_CONNECT.replace("$name", fullName));
-      }
-
-    }
-  }
+        $(byXpath(ELEMENT_NOTIFICATION_ALL_PAGE_ACCEPT_REQUEST_CONNECT.replace("$name", fullName1))).click();
+      } }
 
   /**
    * Open a detail Accept Request Invitation to a new space
@@ -441,16 +428,22 @@ public class IntranetNotification {
    * 
    * @param fullName is fullName of user that want to connect
    */
-  public void acceptRqConnection(String fullName) {
+  public void acceptRqConnection(String fullname1) {
+
+
 
       info("Click on Accept button");
-      $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(fullName + " " + fullName)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_INVITATION).click();
+      $(byXpath(ELEMENT_CONNECT_ACCEPT_BUTTON.replace("$name",fullname1))).click();
+
     }
+
+
+  // info("Click on Accept button");
+     // $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(fullname1 + " " + fullname1)).parent().find(ELEMENT_BUTTON_ACCEPT_INVITATION).click();
+
+
     /**
-
-
-     }
-  }
+     }}
 
   /**
    * Refuse an connection request in notificaiton list
@@ -504,7 +497,7 @@ public class IntranetNotification {
       evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_USER.replace("$user", users.get(lastIndex)), 2000, 2);
     } else {
       info("Verify that last user is shown in the page");
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ALL_USER.replace("$user", users.get(lastIndex)), 2000, 2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ALL_USER.replace("$user", users.get(lastIndex)))).waitUntil(Condition.visible,Configuration.timeout);
     }
 
     if (users.size() > 2 && isPopUp == true) {
@@ -722,7 +715,7 @@ public class IntranetNotification {
 
   /**
    * Check avatar of notification list
-   * 
+   *
    * @param users is array of users
    * @param isPopUp =true, if the notification list is shown in Notification list
    *          popup =false, if the notification list is shown in All notification
@@ -733,14 +726,14 @@ public class IntranetNotification {
     info("users.size():" + users.size());
     info("Verify that last user's avatar is shown in list");
     if (isPopUp)
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_AVATAR.replace("$lastUser", users.get(lastIndex)), 2000, 2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_AVATAR.replace("$lastUser", users.get(lastIndex)))).waitUntil(Condition.visible,Configuration.timeout);
     else
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ALL_AVATAR.replace("$lastUser", users.get(lastIndex)), 2000, 2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ALL_AVATAR.replace("$lastUser", users.get(lastIndex)))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
    * Check avatar of notification list
-   * 
+   *
    * @param user is the username
    * @param isPopUp =true, if the notification list is shown in Notification list
    *          popup =false, if the notification list is shown in All notification
@@ -751,7 +744,7 @@ public class IntranetNotification {
     if (isPopUp)
       evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_AVATAR.replace("$lastUser", user), 2000, 2);
     else
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ALL_AVATAR.replace("$lastUser", user), 2000, 2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ALL_AVATAR.replace("$lastUser", user))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
 }
