@@ -87,6 +87,12 @@ public void goToDefaultSkin() {
   $(ELEMENT_ADD_NEW_PORTAL_POPUP_SAVE_BTN).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
   refresh();
 }
+  public void goToEntrepriseSkin() {
+    $(byId("skin")).selectOptionByValue("Enterprise");
+    $((ELEMENT_ADD_NEW_PORTAL_POPUP_SAVE_BTN)).click();
+    $(ELEMENT_ADD_NEW_PORTAL_POPUP_SAVE_BTN).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    refresh();
+  }
   /**
    * Add a simple portal
    *
