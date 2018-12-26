@@ -13,6 +13,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.By;
 
 public class MyNotificationsSetting {
   private final TestBase       testBase;
@@ -772,6 +773,7 @@ public class MyNotificationsSetting {
     }
   }
 
+
   /**
    * Verify that notification's type is disabled all
    *
@@ -956,6 +958,20 @@ public class MyNotificationsSetting {
         info("Verify that Space post's intranet is disabled");
         evt.waitForAndGetElement(ELEMENT_POST_SPACE_INTRANET_ICON);
         break;
+      case Edit_Activity:
+        info("check selected option by default on edit activiy");
+        $(ELEMENT_EDIT_ACTIVITY_ICON).click();
+        ELEMENT_BUTTON_ON_MAIL_ACTIVITY.waitUntil(Condition.selected,Configuration.timeout);
+        ELEMENT_BUTTON_ON_MOBILE_ACTIVITY.waitUntil(Condition.selected,Configuration.timeout);
+        ELEMENT_BUTTON_ON_SITE_ACTIVITY.waitUntil(Condition.selected,Configuration.timeout);
+        break;
+      case Edit_Comment:
+        info("check selected option by default on edit activiy");
+        $(ELEMENT_EDIT_COMMENT_ICON_NOTIF).click();
+        ELEMENT_BUTTON_ON_MAIL_COMMENT.waitUntil(Condition.selected,Configuration.timeout);
+        ELEMENT_BUTTON_ON_MOBILE_COMMENT.waitUntil(Condition.selected,Configuration.timeout);
+        ELEMENT_BUTTON_ON_SITE_COMMENT.waitUntil(Condition.selected,Configuration.timeout);
+        break;
     }
   }
 
@@ -966,7 +982,7 @@ public class MyNotificationsSetting {
    */
   public void verifyLabelNotificationType(String label) {
     info("Verify that the label of Comment notification is correct");
-    evt.waitForAndGetElement(ELEMENT_NOTIFICATION_LABEL_NAME.replace("$label", label));
+    $(byXpath(ELEMENT_NOTIFICATION_LABEL_NAME.replace("$label", label))).waitUntil(Condition.visible,Configuration.timeout);
     info("the label is correct");
 
   }
@@ -1110,7 +1126,7 @@ public class MyNotificationsSetting {
   }
 
   public enum myNotiType {
-    NewUser_email, NewUser_intranet, ConnectionRequest_email, ConnectionRequest_intranet, AS_Comment_email, AS_Comment_intranet, AS_Like_email, AS_Like_intranet, AS_Post_email, AS_Post_intranet, AS_Mention_email, AS_Mention_intranet, Space_Post_email, Space_Post_intranet, Space_Join_Req_email, Space_Join_Req_intranet, Space_Invitation_email, Space_Invitation_Intranet;
+    NewUser_email, NewUser_intranet, ConnectionRequest_email, ConnectionRequest_intranet, AS_Comment_email, AS_Comment_intranet, AS_Like_email, AS_Like_intranet, AS_Post_email, AS_Post_intranet, AS_Mention_email, AS_Mention_intranet, Space_Post_email, Space_Post_intranet, Space_Join_Req_email, Space_Join_Req_intranet, Space_Invitation_email, Space_Invitation_Intranet,Edit_Activity;
   }
 
   /**

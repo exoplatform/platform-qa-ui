@@ -166,6 +166,7 @@ public final class ActivityStreamLocator {
     public static final String          ELEMENT_ACTIVITY_TASK_EVENT_LOCATION                 =
             "//*[@class='linkTitle' and text()='$name']/../..//*[@class='location']/text()";
 
+
     public static final String          ELEMENT_ACTIVITY_TASK_EVENT_TOTAL_COMMENT_NUMBER     =
             "//*[@class='linkTitle' and text()='${name}']/../../../..//*[contains(@class,'actionBar')][contains(.,'${number}')]";
 
@@ -699,6 +700,7 @@ public final class ActivityStreamLocator {
     public static final SelenideElement ELEMENT_ACTIVITY_STREAM_CONTAINER=$(byId("UIActivitiesLoader"));
     public static final By ELEMENT_ICON_LIKE_ACTIVITY=byClassName("uiIconThumbUp");
     public static final SelenideElement ELEMENT_INPUT_ACTIVITY=$(byXpath("/html/body"));
+    public static final SelenideElement ELEMENT_INPUT_COMMENT=$(byXpath("/html/body"));
     public static final String ELEMENT_INCON_LIKE_COMMENT="LikeCommentLinkcomment{id}";
     public static final String ELEMENT_INCON_LIKE_REPLY="likeCommentLink_comment{id}";
     public static final String ELEMENT_INCON_DELETE_COMMENT="DeleteCommentButtoncomment{id}";
@@ -715,4 +717,29 @@ public final class ActivityStreamLocator {
     public static final String ELEMENT_REPLY_CONTAINER="commentContainercomment{id}";
 
     public static final SelenideElement ELEMENT_TEXT_ACTIVITY=$(byClassName("description"));
+    public static final String ELEMENT_ACTIVITY_DROPDOWN="dropDownEditActivity{id}";
+    public static final String ELEMENT_DELETE_ACTIVITY_LINK="DeleteActivityButton{id}";
+    public static final String ELEMENT_EDIT_ACTIVITY_LINK="EditActivitylink{id}";
+    public static final String ELEMENT_BUTTON_UPDATE_ACTIVITY="EditActivityButton{id}";
+    public static final String ELEMENT_BUTTON_CANCEL_EDITACTIVITY="DeleteEditCommentButton{id}";
+    public static final String ELEMENT_COMMENT_DROPDOWN="dropDownEditCommentcomment{id}";
+    public static final String ELEMENT_EDIT_COMMENT_LINK="CommentActivitylinkcomment{id}";
+    public static final String ELEMENT_BUTTON_UPDATE_COMMENT="EditCommentButtoncomment{id}";
+    public static final String ELEMENT_BUTTON_CANCEL_EDITCOMMENT="DeleteEditCommentButtoncomment{id}";
+    public static final String ELEMENT_ACTIVITY_TIME="EditActivityTime{id}";
+    public static final String ELEMENT_COMMENT_TIME="EditCommentTimecomment{id}";
+    public static final By ELEMENT_BUTTON_BOLD_ICON=byClassName("cke_button__bold_icon");
+    public static final By ELEMENT_BUTTON_ITALIC_ICON=byClassName("cke_button__italic_icon");
+    public static final By ELEMENT_BUTTON_REMOVE_FORMAT_ICON=byClassName("cke_button__removeformat_icon");
+    public static final By ELEMENT_BLOCKQUOTE_ICON=byClassName("cke_button__blockquote_icon");
+    public static final By ELEMENT_BULLETEDLIST_ICON=byClassName("cke_button__bulletedlist_icon");
+    public static final By ELEMENT_NUMBERED_LIST_ICON=byClassName("cke_button__numberedlist_icon");
+    public static final By ELEMENT_SIMPLELINK_ICON = byClassName("cke_button__simplelink_icon");
+    public static final By ELEMENT_SELECTIMAGE_ICON= byClassName("cke_button__selectimage_icon");
+    public static final String ELEMENT_LINK_VIEW_ALL_COMMENTS="//*[@id=\"CommentBlockBound{id}\"]/div[1]/a";
+
+
+
+
+
 }

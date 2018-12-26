@@ -2,9 +2,11 @@ package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static com.codeborne.selenide.Condition.not;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static java.time.zone.ZoneRulesProvider.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -77,9 +79,20 @@ public class PortalManageSites {
    */
   public void goToEditSiteConfig(String site) {
     info("Click on Edit Site Configuration button");
-    evt.click(ELEMENT_MANAGESITES_EDIT_CONFIG_ICON.replace("${site}", site));
+    $(byXpath(ELEMENT_MANAGESITES_EDIT_CONFIG_ICON.replace("${site}", site))).waitUntil(visible,Configuration.timeout).click();
   }
-
+public void goToDefaultSkin() {
+  $(byId("skin")).selectOptionByValue("Default");
+  $((ELEMENT_ADD_NEW_PORTAL_POPUP_SAVE_BTN)).click();
+  $(ELEMENT_ADD_NEW_PORTAL_POPUP_SAVE_BTN).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+  refresh();
+}
+  public void goToEntrepriseSkin() {
+    $(byId("skin")).selectOptionByValue("Enterprise");
+    $((ELEMENT_ADD_NEW_PORTAL_POPUP_SAVE_BTN)).click();
+    $(ELEMENT_ADD_NEW_PORTAL_POPUP_SAVE_BTN).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    refresh();
+  }
   /**
    * Add a simple portal
    *
@@ -388,4 +401,6 @@ public class PortalManageSites {
     else
       evt.waitForElementNotPresent(ELEMENT_NEW_PORTAL_LOGOUT, 3000, 0);
   }
+
+
 }

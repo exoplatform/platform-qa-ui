@@ -386,7 +386,7 @@ public class ForumLocator {
           $(byClassName("UIPopupWindow")).find(byClassName("btn"));
 
   public static final By ELEMENT_SUBMIT_BUTTON = By.xpath("//*[text()='Submit']");
-
+  public static final By ELEMENT_UPDATE_BUTTON = By.xpath("//*[@id=\"EditActivityButton3\"]");
   // BBcode popup
   public static final By ELEMENT_EDITSITE_SAVEBTN =
           By.xpath("//*[@class='btn' and text()='Save']");

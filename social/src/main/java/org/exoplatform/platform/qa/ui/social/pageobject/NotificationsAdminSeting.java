@@ -817,7 +817,7 @@ public class NotificationsAdminSeting {
    * Connection Request for email.....
    */
   public enum notificationType {
-    NewUser_email, NewUser_intranet, ConnectionRequest_email, ConnectionRequest_intranet, AS_Comment_email, AS_Comment_intranet, AS_Like_email, AS_Like_intranet, AS_Mention_email, AS_Mention_intranet, AS_Post_email, AS_Post_intranet, Space_Invitation_email, Space_Invitation_intranet, Space_Join_email, Space_Join_intranet, Space_Post_email, Space_Post_intranet;
+    NewUser_email, NewUser_intranet, ConnectionRequest_email, ConnectionRequest_intranet, AS_Comment_email, AS_Comment_intranet, AS_Like_email, AS_Like_intranet, AS_Mention_email, AS_Mention_intranet, AS_Post_email, AS_Post_intranet, Space_Invitation_email, Space_Invitation_intranet, Space_Join_email, Space_Join_intranet, Space_Post_email, Space_Post_intranet,Edit_Activity,Edit_Comment;
   }
 
   /**
