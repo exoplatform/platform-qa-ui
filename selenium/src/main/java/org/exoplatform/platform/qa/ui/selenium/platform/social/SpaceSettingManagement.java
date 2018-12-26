@@ -79,21 +79,20 @@ public class SpaceSettingManagement {
      *                 want.
      * @param fullName
      */
-    public void inviteUser(String userName, boolean verify, String fullName) {
+    public void inviteUser (String userName,boolean verify, String fullName){
+            goToMemberTab();
+            info("--Search user ");
+            ELEMENT_INPUT_INVITE_USER.click();
+            ELEMENT_INPUT_INVITE_USER.sendKeys(userName);
+            info("click on Invite button");
+            $(byXpath("//*[@id=\"UIUserInvitation\"]/div[2]/div[1]/button")).click();
+            if (verify) {
+                info("Verify that user is shown in invitation table");
+                if (fullName != "" && fullName != null)
+                    $(byXpath(ELEMENT_SPACE_INVITED_USER_TABLE.replace(
+                            "${user}", fullName))).waitUntil(Condition.visible, Configuration.timeout);
+            } }
 
-        goToMemberTab();
-        info("--Search user ");
-        ELEMENT_INPUT_INVITE_USER.click();
-        ELEMENT_INPUT_INVITE_USER.sendKeys(userName);
-        info("click on Invite button");
-        $(byXpath("//*[@id=\"UIUserInvitation\"]/div[2]/div[1]/button")).click();
-        if (verify) {
-            info("Verify that user is shown in invitation table");
-            if (fullName != "" && fullName != null)
-                $(byXpath(ELEMENT_SPACE_INVITED_USER_TABLE.replace(
-                        "${user}", fullName))).waitUntil(Condition.visible, Configuration.timeout);
-        }
-    }
 
     /**
      * Change role of a user in the list if role's status is NO, this will change to

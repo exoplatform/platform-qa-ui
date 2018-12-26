@@ -427,11 +427,11 @@ public class IntranetNotification {
   /**
    * Accept an connection request in notification list
    * 
-   * @param fullName is fullName of user that want to connect
+   * @param spaceName is fullName of user that want to connect
    */
-  public void acceptRqConnection(String fullname1) {
+  public void acceptRqConnection(String spaceName) {
     info("Click on Accept button");
-    $(byXpath(ELEMENT_CONNECT_ACCEPT_BUTTON.replace("$name",fullname1))).click();
+    $(byXpath(ELEMENT_CONNECT_ACCEPT_BUTTON.replace("$name",spaceName))).click();
 
     }
 
@@ -485,7 +485,7 @@ public class IntranetNotification {
       evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_USER.replace("$user", users.get(lastIndex)), 2000, 2);
     } else {
       info("Verify that last user is shown in the page");
-      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ALL_USER.replace("$user", users.get(lastIndex)))).waitUntil(Condition.visible,Configuration.timeout);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ALL_USER.replace("$user", users.get(lastIndex)))).is(Condition.visible);
     }
 
     if (users.size() > 2 && isPopUp == true) {
@@ -569,7 +569,7 @@ public class IntranetNotification {
    */
   public void checkStatusSpace(String status, String space) {
     info("Verify that the status is shown");
-    evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_STATUS_SPACE.replace("$status", status).replace("$space", space));
+    $(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS_SPACE.replace("$status", status).replace("$space", space))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -717,7 +717,7 @@ public class IntranetNotification {
     if (isPopUp)
       $(byXpath(ELEMENT_INTRANET_NOTIFICATION_AVATAR.replace("$lastUser", users.get(lastIndex)))).waitUntil(Condition.visible,Configuration.timeout);
     else
-      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ALL_AVATAR.replace("$lastUser", users.get(lastIndex)))).waitUntil(Condition.visible,Configuration.timeout);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ALL_AVATAR.replace("$lastUser", users.get(lastIndex)))).waitUntil(not(Condition.visible),Configuration.timeout);
   }
 
   /**

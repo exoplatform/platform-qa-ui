@@ -489,10 +489,10 @@ public class SpaceManagement {
         goToMemberTab();
         if (isDisplay) {
             info("Verify that member is shown in list");
-            evt.waitForAndGetElement(ELEMENT_MEMBER_USER_NAME.replace("${fullName}", fullName));
+            $(byXpath(ELEMENT_MEMBER_USER_NAME.replace("${fullName}", fullName))).waitUntil(Condition.visible,Configuration.timeout);
         } else {
             info("Verify that member isnot shown in list");
-            evt.waitForElementNotPresent(ELEMENT_MEMBER_USER_NAME.replace("${fullName}", fullName));
+            $(byXpath(ELEMENT_MEMBER_USER_NAME.replace("${fullName}", fullName))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
         }
 
     }

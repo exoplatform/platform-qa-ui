@@ -427,4 +427,97 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
   }
+
+  /**
+   * <li>Case ID:125172.</li>
+   * <li>Test Case Name: Accept a Space Invitation from View All.</li>
+   * <li>Pre-Condition: - User A is manager of the space 1 - User A invite User B
+   * to join the space 1</li>
+   * <li>Post-Condition:</li>
+   */
+  /*
+   * Step Number: 1 Step Name: Step 1 : Go to View All Step Description: - Login
+   * with User B - Click Notifications icon - Click View All Input Data: Expected
+   * Outcome: - View All page is displayed - A Space Invitation notifications is
+   * displayed in the page
+   */
+  /*
+   * Step number: 2 Step Name: Step 2 : Accept Space Invitation Step Description:
+   * - Click [Accept] Input Data: Expected Outcome: - The invitation is approved
+   * and User B is member of Space 1
+   */
+  /*
+   * Step number: 3 Step Name: Step 3: Check notification message Step
+   * Description: - Click the notification message Input Data: Expected Outcome:
+   * The notification message is updated to : $AVATARYou joined $SPACE
+   * space$DATEWhere : - $AVATAR is the thumbnail of the space - $SPACE is space 1
+   * - $DATE is the date of the notification
+   */
+  @Test
+  public void test06_AcceptASpaceInvitationFromViewAll() {
+    info("Test 6: Accept a Space Invitation from View All");
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@gmail.com";
+    String username2 = "usernameb" + getRandomString();
+    String email2 = username2 + "@gmail.com";
+    String fullName2 = username2 + " " + username2;
+    String password = "123456";
+
+    info("Add new user");
+    ArrayList<String> arrayUser = new ArrayList<String>();
+    arrayUser.add(username2);
+    arrayUser.add(username1);
+    navigationToolbar.goToAddUser();
+    userAddManagement.addUser(username1, password, email1, username1, username1);
+    userAddManagement.addUser(username2, password, email2, username2, username2);
+    manageLogInOut.signIn(username1, password);
+
+    info("Create a new space");
+    String spaceName = "spaceNamea" + getRandomNumber();
+    String spaceDes = "descriptiona" + getRandomNumber();
+    homePagePlatform.goToAllSpace();
+    spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+
+    info("Invite UserB to the space");
+    homePagePlatform.goToSpecificSpace(spaceName);
+    spaceHomePage.goToSpaceSettingTab();
+    refresh();
+    spaceSettingManagement.inviteUser(username2, false, "");
+
+    info("User B login");
+    manageLogInOut.signIn(username2, password);
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
+
+    info("A Space Invitation notifications is displayed in the page");
+    String inviteSpaceStatus = "You're invited to join";
+    intranetNotification.checkStatusSpace(inviteSpaceStatus, spaceName);
+
+    info("Click [Accept]");
+    intranetNotification.acceptRqConnection(spaceName);
+
+    info("User A login");
+    manageLogInOut.signIn(username1, password);
+
+    info("The invitation is approved and User B is member of Space 1");
+    homePagePlatform.goToHomePage();
+    homePagePlatform.goToSpecificSpace(spaceName);
+
+    info("User B login");
+    manageLogInOut.signIn(username2, password);
+    info("Check format of the notification after accepted");
+    String acceptSpaceStatus = "";
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
+    intranetNotification.checkStatus(acceptSpaceStatus, spaceName);
+    intranetNotification.checkAvatarInStatus(arrayUser, false);
+    intranetNotification.checkUsers(arrayUser, false);
+    intranetNotification.checkStatusSpace(acceptSpaceStatus, spaceName);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(spaceName, false);
+    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
+    addUsers.deleteUser(username2);
+  }
 }
