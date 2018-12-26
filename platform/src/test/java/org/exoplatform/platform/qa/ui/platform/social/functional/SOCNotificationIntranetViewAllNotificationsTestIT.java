@@ -339,6 +339,7 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     info("Click [Accept]");
     homePagePlatform.refreshUntil($(byText(username1 + " " + username1)), Condition.visible, 1000);
     intranetNotification.acceptRqConnection(username1);
+
     info("The connection is approved, the 2 users are connected");
     homePagePlatform.goToConnections();
     connectionsManagement.verifyConnection(username1, true);
@@ -361,6 +362,69 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
+  }
 
+  /**
+   * <li>Case ID:125171.</li>
+   * <li>Test Case Name: Refuse a Connection Request from View All.</li>
+   * <li>Pre-Condition: User A sent a connection request to User B</li>
+   * <li>Post-Condition:</li>
+   */
+  /*
+   * Step Number: 1 Step Name: Step 1 : Go to View All page Step Description: -
+   * Login with User B - Click notifications icon - Click View All Input Data:
+   * Expected Outcome: - View All page is displayed - A connection request
+   * notification is displayed in the View All page
+   */
+  /*
+   * Step number: 2 Step Name: Step 2 : Refuse Connection Request Step
+   * Description: - Click [Refuse] Input Data: Expected Outcome: - The connection
+   * is not approved, the 2 users are not connected - The notification message is
+   * automatically hidden from the list
+   */
+  @Test
+  public void test05_RefuseAConnectionRequestFromViewAll() throws Exception {
+    info("Test 5: Refuse a Connection Request from View All");
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@gmail.com";
+    String username2 = "usernameb" + getRandomString();
+    String email2 = username2 + "@gmail.com";
+    String password = "123456";
+
+    info("Add new user");
+    ArrayList<String> arrayUser = new ArrayList<String>();
+    navigationToolbar.goToAddUser();
+    userAddManagement.addUser(username1, password, email1, username1, username1);
+    userAddManagement.addUser(username2, password, email2, username2, username2);
+    manageLogInOut.signIn(username1, password);
+
+    info("User A sent a connection request to User B");
+    homePagePlatform.goToConnections();
+    connectionsManagement.connectToAUser(username2);
+
+    info("User B login");
+    manageLogInOut.signIn(username2, password);
+    info("The user is redirected to the View All page");
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
+    info("A connection request notification is displayed in the page");
+    String connectStatus = "wants to connect with you";
+    intranetNotification.checkStatus(connectStatus, username1);
+
+    info("Click [Refuse]");
+    String acceptStatus = "You are connected with";
+    homePagePlatform.refreshUntil($(byText(username1 + " " + username1)), Condition.visible, 1000);
+    intranetNotification.refuseRqConnection(username1);
+    intranetNotification.checkNotPresentStatus(connectStatus, username1);
+    intranetNotification.checkNotPresentStatus(acceptStatus, username1);
+
+    info("The connection isnot approved, the 2 users are not connected");
+    homePagePlatform.goToConnections();
+    connectionsManagement.verifyConnection(username1, true);
+    manageLogInOut.signOut();
+    manageLogInOut.signInCas(DATA_USER1, DATA_PASS2);
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
+    addUsers.deleteUser(username2);
   }
 }

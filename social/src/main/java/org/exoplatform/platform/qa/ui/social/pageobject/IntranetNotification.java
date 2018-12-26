@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.social.pageobject;
 
+import static com.codeborne.selenide.Condition.not;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
@@ -429,11 +430,8 @@ public class IntranetNotification {
    * @param fullName is fullName of user that want to connect
    */
   public void acceptRqConnection(String fullname1) {
-
-
-
-      info("Click on Accept button");
-      $(byXpath(ELEMENT_CONNECT_ACCEPT_BUTTON.replace("$name",fullname1))).click();
+    info("Click on Accept button");
+    $(byXpath(ELEMENT_CONNECT_ACCEPT_BUTTON.replace("$name",fullname1))).click();
 
     }
 
@@ -450,24 +448,14 @@ public class IntranetNotification {
    * 
    * @param fullName String
    */
-  public void refuseRqConnection(String fullName) {
+  public void refuseRqConnection(String fullName1) {
+    info("Click on Refuse button");
+    $(byXpath(ELEMENT_CONNECT_REFUSE_BUTTON.replace("$name", fullName1))).click();
 
-    for (int repeat = 0;; repeat++) {
-      if (repeat > 1) {
-        if (evt.waitForAndGetElement(ELEMENT_CONNECT_REFUSE_BUTTON.replace("$name", fullName), 3000, 0) == null)
-          ;
-        break;
-      }
-      if (evt.waitForAndGetElement(ELEMENT_CONNECT_REFUSE_BUTTON.replace("$name", fullName), 5000, 0) == null) {
-        info("Element " + ELEMENT_CONNECT_ACCEPT_BUTTON.replace("$name", fullName) + " isnot displayed");
-        break;
-      }
-      info("Retry...[" + repeat + "]");
-      info("Click on Refuse button");
-      evt.click(ELEMENT_CONNECT_REFUSE_BUTTON.replace("$name", fullName));
 
-    }
+
   }
+
 
   /**
    * Check Accept and Refuse buttons are shown in Notification popup and page
@@ -592,7 +580,8 @@ public class IntranetNotification {
    */
   public void checkNotPresentStatus(String status, String user) {
     info("Verify that the status is not shown");
-    evt.waitForElementNotPresent(ELEMENT_INTRANET_NOTIFICATION_STATUS.replace("$status", status).replace("$fullName", user));
+    $(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS.replace("$status", status).replace("$fullName", user))).waitUntil(not(Condition.visible),Configuration.timeout);
+
   }
 
   public void checkNotStatusSpace(String status, String space) {
@@ -643,7 +632,7 @@ public class IntranetNotification {
   public void markAllAsRead() {
     info("Click on Mark all as Read link");
     $(ELEMENT_INTRANET_NOTIFICATION_MARK_ALL_AS_READ).click();
-    $(ELEMENT_INTRANET_NOTIFICATION_MARK_ALL_AS_READ).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    $(ELEMENT_INTRANET_NOTIFICATION_MARK_ALL_AS_READ).waitUntil(not(Condition.visible), Configuration.timeout);
 
   }
 

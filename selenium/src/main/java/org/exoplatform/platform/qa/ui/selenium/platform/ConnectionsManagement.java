@@ -171,19 +171,20 @@ public class ConnectionsManagement {
    * @param username
    * @param accept (true: if user accept invitation)
    */
-  public void verifyConnection(String username, Boolean accept) {
+  public void verifyConnection(String username, Boolean refuse) {
 
     $(ELEMENT_MY_CONNECTIONS_TAB).click();
     // With user confirmed the invitation, user becomes friend and user's name
     // is displayed on user's network list
     searchPeople(username, null, null, null);
-    if (accept){
+    if (refuse){
 
       $(byXpath(ELEMENT_CONNECTION_REMOVE_BTN)).is(Condition.exist);
     }
     else
       $(byXpath(ELEMENT_CONNECTION_REMOVE_BTN)).click();
   }
+
 
 
   /**
