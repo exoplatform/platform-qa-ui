@@ -446,11 +446,11 @@ public class IntranetNotification {
   /**
    * Refuse an connection request in notificaiton list
    * 
-   * @param fullName String
+   * @param spaceName String
    */
-  public void refuseRqConnection(String fullName1) {
+  public void refuseRqConnection(String spaceName) {
     info("Click on Refuse button");
-    $(byXpath(ELEMENT_CONNECT_REFUSE_BUTTON.replace("$name", fullName1))).click();
+    $(byXpath(ELEMENT_CONNECT_REFUSE_BUTTON.replace("$name", spaceName))).click();
 
 
 
@@ -585,8 +585,9 @@ public class IntranetNotification {
   }
 
   public void checkNotStatusSpace(String status, String space) {
-    info("Verify that the status isnot shown");
-    evt.waitForElementNotPresent(ELEMENT_INTRANET_NOTIFICATION_STATUS_SPACE.replace("$status", status).replace("$space", space));
+    info("Verify that the status is not shown");
+    refresh();
+    $(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS_SPACE.replace("$status", status).replace("$space", space))).waitUntil(not(Condition.visible),Configuration.timeout);
   }
 
   /**

@@ -505,6 +505,7 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
 
     info("User B login");
     manageLogInOut.signIn(username2, password);
+
     info("Check format of the notification after accepted");
     String acceptSpaceStatus = "";
     navigationToolbar.goToIntranetNotification();
@@ -520,4 +521,82 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
   }
-}
+
+  /**
+   * <li>Case ID:125173.</li>
+   * <li>Test Case Name: Refuse a Space Invitation from View All.</li>
+   * <li>Pre-Condition: - User A is manager of the space 1 - User A invite User B
+   * to join the space 1</li>
+   * <li>Post-Condition:</li>
+   */
+  /*
+   * Step Number: 1 Step Name: Step Description: - Login with User B - Click
+   * Notifications icon - Check the notifications list Input Data: Expected
+   * Outcome: - A Space Invitation notifications is displayed in the list
+   */
+  /*
+   * Step number: 2 Step Name: Step Description: - Click [Refuse] Input Data:
+   * Expected Outcome: - User B is not member of Space 1
+   */
+  /*
+   * Step number: 3 Step Name: Step Description: - Click the notification message
+   * Input Data: Expected Outcome: - The notifications message is hidden from the
+   * list
+   */
+  @Test
+  public void test07_RefuseASpaceInvitationFromViewAll() throws Exception {
+
+    info("Test 7: Refuse a Space Invitation from View All");
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@gmail.com";
+    String username2 = "usernameb" + getRandomString();
+    String email2 = username2 + "@gmail.com";
+    String fullName = username1 + " " + username1;
+    String password = "123456";
+
+    info("Add new user");
+    ArrayList<String> arrayUser = new ArrayList<String>();
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+    addUsers.addUser(username2, password, email2, username2, username2);
+    manageLogInOut.signIn(username1, password);
+
+    info("Create a new space");
+    String spaceName = "spaceName" + getRandomNumber();
+    String spaceDes = "description" + getRandomNumber();
+    homePagePlatform.goToAllSpace();
+    spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+
+    info("Invite UserB to the space");
+    homePagePlatform.goToSpecificSpace(spaceName);
+    spaceHomePage.goToSpaceSettingTab();
+    refresh();
+    spaceSettingManagement.inviteUser(username2, false, "");
+
+    info("User B login");
+    manageLogInOut.signIn(username2, password);
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
+
+    info("A Space Invitation notifications is displayed in the page");
+    String inviteSpaceStatus = "You're invited to join";
+    intranetNotification.checkStatusSpace(inviteSpaceStatus, spaceName);
+
+    info("Click [Refuse]");
+    intranetNotification.refuseRqConnection(spaceName);
+
+    info("Check format of the notification after accepted");
+    String acceptSpaceStatus = "";
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
+    intranetNotification.checkNotStatusSpace(acceptSpaceStatus, spaceName);
+    intranetNotification.checkNotStatusSpace(inviteSpaceStatus, spaceName);
+
+    info("User A login");
+    manageLogInOut.signIn(username1, password);
+
+    info("User B isnot member of Space 1");
+    homePagePlatform.goToSpecificSpace(spaceName);
+    spaceHomePage.goToSpaceSettingTab();
+    spaceManagement.verifyMember(username1, false);
+  }}
