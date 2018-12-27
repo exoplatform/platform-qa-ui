@@ -1,6 +1,8 @@
 package org.exoplatform.platform.qa.ui.platform.chat.functional;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import org.apache.bcel.generic.LADD;
 import org.exoplatform.platform.qa.ui.chat.pageobject.ChatManagement;
 import org.exoplatform.platform.qa.ui.chat.pageobject.RoomManagement;
 import org.exoplatform.platform.qa.ui.commons.Base;
@@ -23,10 +25,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.switchTo;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 /**
@@ -233,4 +236,88 @@ public class LeaveChatRoomTestIT extends Base {
         userAndGroupManagement.deleteUser(arrayUsers.get(2));
         userAndGroupManagement.deleteUser(arrayUsers.get(3));
     }
+
+    @Test
+    public void test05_CheckLeaveRoomBuutonOnlyForMembers(){
+        String room = "room" + getRandomNumber();
+        String usernamea = "username" + getRandomNumber();
+        String password = "123456";
+        String emaila = "emaila" + getRandomNumber() + "@test.com";
+        String FirstnameA = "FirstName" + getRandomString();
+        String LastNameA = "LastName" + getRandomString();
+        String usernameb = "username" + getRandomNumber();
+        String emailb = "emaila" + getRandomNumber() + "@test.com";
+        String FirstnameB = "FirstName" + getRandomString();
+        String LastNameB = "LastName" + getRandomString();
+
+        navigationToolbar.goToAddUser();
+        userAddManagement.addUser(usernamea,password,emaila,FirstnameA,LastNameA);
+        userAddManagement.addUser(usernameb,password,emailb,FirstnameB,LastNameB);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        info("add usernamea to room");
+        roomManagement.addRoom(room,usernamea,usernameb);
+        info("check leave room button doesn't exist for manager for manager");
+        ELEMENT_MORE_ACTION.click();
+        ELEMENT_LEAVEROOM_ACTION.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+        switchToParentWindow();
+        info("check leave room exist for members");
+        manageLogInOut.signIn(usernameb,password);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        $(byText(room)).click();
+        ELEMENT_MORE_ACTION.click();
+        ELEMENT_LEAVEROOM_ACTION.waitUntil(Condition.visible, Configuration.timeout);
+        switchToParentWindow();
+        manageLogInOut.signIn(usernameb,password);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        $(byText(room)).click();
+        ELEMENT_MORE_ACTION.click();
+        ELEMENT_LEAVEROOM_ACTION.waitUntil(Condition.visible, Configuration.timeout);
+        switchToParentWindow();
+        manageLogInOut.signIn(PLFData.username, PLFData.password);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        roomManagement.deleteRomm(room);
+        switchToParentWindow();
+        navigationToolbar.goToManageCommunity();
+        userAndGroupManagement.deleteUser(usernamea);
+        userAndGroupManagement.deleteUser(usernameb);
+    }
+
+   @Test
+   public void test06_CheckDisplayMessageWhenUserLeftRoom(){
+       String room = "room" + getRandomNumber();
+       String usernamea = "username" + getRandomNumber();
+       String password = "123456";
+       String emaila = "emaila" + getRandomNumber() + "@test.com";
+       String FirstnameA = "FirstNameA" + getRandomString();
+       String LastNameA = "LastNameA" + getRandomString();
+       String usernameb = "username" + getRandomNumber();
+       String emailb = "emaila" + getRandomNumber() + "@test.com";
+       String FirstnameB = "FirstNameB" + getRandomString();
+       String LastNameB = "LastNameB" + getRandomString();
+
+       navigationToolbar.goToAddUser();
+       userAddManagement.addUser(usernamea,password,emaila,FirstnameA,LastNameA);
+       userAddManagement.addUser(usernameb,password,emailb,FirstnameB,LastNameB);
+       homePagePlatform.goToChat();
+       switchTo().window(1);
+       info("add usernamea to room");
+       roomManagement.addRoom(room,usernamea,usernameb);
+       switchToParentWindow();
+       manageLogInOut.signIn(usernamea,password);
+       homePagePlatform.goToChat();
+       switchTo().window(1);
+       roomManagement.leaveRoom(room);
+       switchToParentWindow();
+       manageLogInOut.signIn(usernameb,password);
+       homePagePlatform.goToChat();
+       switchTo().window(1);
+       $(byText(room));
+       ELEMENT_CONTAINER_LIST_MESSAGES.find(byText(FirstnameA+" "+LastNameA)).parent().shouldHave(Condition.text(" has left this room."))
+               .should(Condition.exist);
+   }
+
 }
