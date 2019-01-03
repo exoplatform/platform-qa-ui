@@ -30,6 +30,9 @@ import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_CONTACT_LIST;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 /**
@@ -320,4 +323,115 @@ public class LeaveChatRoomTestIT extends Base {
                .should(Condition.exist);
    }
 
+   @Test
+    public void test07_CheckUserLeaveSpaceRoomWhenLeaveSpace(){
+
+       String space = "space" + getRandomNumber();
+       info("create space and invite user");
+
+       homePagePlatform.goToMySpaces();
+       spaceManagement.addNewSpaceSimple(space, space);
+       spaceHomePage.goToSpaceSettingTab();
+       spaceSettingManagement.goToMemberTab();
+       ELEMENT_INPUT_INVITE_USER.sendKeys(PLFData.DATA_USER2);
+       $(ELEMENT_SPACE_BTN_INVITE).click();
+       homePagePlatform.goToConnections();
+       connectionsManagement.connectToAUser(PLFData.DATA_USER2);
+       manageLogInOut.signIn(PLFData.DATA_USER2, "gtn");
+       homePagePlatform.goToConnections();
+       connectionsManagement.acceptAConnection(PLFData.username);
+       homePagePlatform.goToAllSpace();
+       ELEMENT_SPACES_LIST.find(byText(space)).parent().parent().parent().find(ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION).click();
+       homePagePlatform.goToChat();
+       switchTo().window(1);
+       ELEMENT_CONTACT_LIST.find(byText(space)).should(Condition.exist);
+       switchToParentWindow();
+       homePagePlatform.goToAllSpace();
+       ELEMENT_SPACES_LIST.find(byText(space)).parent().parent().parent().find(byAttribute("class", "btn pull-right")).click();
+       homePagePlatform.goToChat();
+       switchTo().window(1);
+       ELEMENT_CONTACT_LIST.find(byText(space)).shouldNotBe(Condition.exist);
+       switchToParentWindow();
+       manageLogInOut.signIn(PLFData.username,PLFData.password);
+       homePagePlatform.goToMySpaces();
+       spaceManagement.deleteSpace(space, false);
+   }
+    @Test
+   public void test08_CheckUserSeeOldMessageWhenReinvitedToRoom(){
+
+       String room = "room" + getRandomNumber();
+       String message="message"+getRandomNumber();
+       String usernamea = "username" + getRandomNumber();
+       String password = "123456";
+       String emaila = "emaila" + getRandomNumber() + "@test.com";
+       String FirstnameA = "FirstName" + getRandomString();
+       String LastNameA = "LastName" + getRandomString();
+
+       navigationToolbar.goToAddUser();
+       userAddManagement.addUser(usernamea,password,emaila,FirstnameA,LastNameA);
+       homePagePlatform.goToChat();
+       switchTo().window(1);
+       roomManagement.addRoom(room,usernamea);
+       chatManagement.sendMessageInRoomOrSpace(room,message);
+       switchToParentWindow();
+       manageLogInOut.signIn(usernamea,password);
+       homePagePlatform.goToChat();
+       switchTo().window(1);
+       $(byText(room));
+       ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.exist);
+       roomManagement.leaveRoom(room);
+       switchToParentWindow();
+       manageLogInOut.signIn(PLFData.username,PLFData.password);
+       homePagePlatform.goToChat();
+       switchTo().window(1);
+       $(byText(room)).click();
+       roomManagement.editRoom(room,usernamea);
+       switchToParentWindow();
+       manageLogInOut.signIn(usernamea,password);
+       homePagePlatform.goToChat();
+       switchTo().window(1);
+       $(byText(room));
+       ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.exist);
+       switchToParentWindow();
+       manageLogInOut.signIn(PLFData.username,PLFData.password);
+       homePagePlatform.goToChat();
+       switchTo().window(1);
+       roomManagement.deleteRomm(room);
+       switchToParentWindow();
+       navigationToolbar.goToManageCommunity();
+       userAndGroupManagement.deleteUser(usernamea);
+    }
+
+    @BugInPLF("CHAT-990")
+    public void test09_CheckDiscussionListWhenLeaveRoom(){
+        String room = "room" + getRandomNumber();
+        String message="message"+getRandomNumber();
+        String usernamea = "username" + getRandomNumber();
+        String password = "123456";
+        String emaila = "emaila" + getRandomNumber() + "@test.com";
+        String FirstnameA = "FirstNameA" + getRandomString();
+        String LastNameA = "LastNameA" + getRandomString();
+        String usernameb = "username" + getRandomNumber();
+        String emailb = "emaila" + getRandomNumber() + "@test.com";
+        String FirstnameB = "FirstNameB" + getRandomString();
+        String LastNameB = "LastNameB" + getRandomString();
+
+        navigationToolbar.goToAddUser();
+        userAddManagement.addUser(usernamea,password,emaila,FirstnameA,LastNameA);
+        userAddManagement.addUser(usernameb,password,emailb,FirstnameB,LastNameB);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        info("add usernamea to room");
+        roomManagement.addRoom(room,usernamea);
+        switchToParentWindow();
+        manageLogInOut.signIn(usernamea,password);
+        homePagePlatform.goToChat();
+        switchTo().window(1);
+        ELEMENT_CHAT_SEARCH_FIELD.setValue(FirstnameB+" "+LastNameB);
+        ELEMENT_CONTACT_LIST.find(byText(FirstnameB+" "+LastNameB)).waitUntil(Condition.visible,Configuration.timeout).click();
+        ELEMENT_CHAT_MESSAGE_INPUT.setValue(message).pressEnter();
+        ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.exist);
+        $(byText(room));
+        roomManagement.leaveRoom(room);
+    }
 }
