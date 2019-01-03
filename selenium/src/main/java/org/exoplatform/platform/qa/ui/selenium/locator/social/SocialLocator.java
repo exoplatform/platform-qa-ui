@@ -1141,7 +1141,7 @@ public final class SocialLocator {
                                                                 By.id("UIEditUserProfileForm");
 
   public static final String          ELEMENT_NAME_OF_PROFILE_TOP_LEFT                                  =
-                                                                       "//*[@id='UIBreadCrumbsNavigationPortlet']//*[contains(text(),'${name}')]";
+                                                                        "//*[@id='UIUserNavigationPortlet']//*[contains(text(),'${name}')]";
 
   public static final String          ELEMENT_NAME_OF_USER_TOP_LEFT                                     =
                                                                     "//*[@id='UIBreadCrumbsNavigationPortlet']//*[contains(text(),'{$name}')]";

@@ -496,12 +496,12 @@ public class ActivityStream {
 
     info("----Click attach button-----");
     $(ELEMENT_COMPOSER_ATTACH_LINK_BUTTON).click();
-    evt.waitForAndGetElement(By.id("LinkTitle"));
+    $(By.id("LinkTitle")).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   public void closeShareLink() {
     info("close share link");
-    evt.click(ELEMENT_COMPOSER_CLOSE_SHARE_LINK_BUTTON);
+    $(ELEMENT_COMPOSER_CLOSE_SHARE_LINK_BUTTON).click();
   }
 
   /**
