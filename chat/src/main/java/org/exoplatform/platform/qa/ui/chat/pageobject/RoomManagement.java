@@ -94,4 +94,17 @@ public void CancelleaveRoomFromNo(String room){
 
   }
 
+  public void editRoom(String room,  String... users){
+    $(byText(room)).click();
+    ELEMENT_MORE_ACTION.click();
+    $(byXpath("//*[@id=\"room-detail\"]/div[2]/div[2]/div[3]/ul/li[5]/a")).click();
+    for (int i = 0; i <= users.length - 1; i++) {
+      ELEMENT_CHAT_INPUT_ROOMUSERSS.setValue(users[i]);
+      ELEMENT_CHAT_RESULT_SEARCH_USER.waitUntil(Condition.be(Condition.visible),Configuration.timeout);
+      ELEMENT_CHAT_RESULT_SEARCH_USER.waitUntil(Condition.visible,Configuration.timeout);
+      ELEMENT_CHAT_INPUT_ROOMUSERSS.pressEnter();
+    }
+    ELEMENT_BUTTON_SAVE_ROOM.click();
+  }
+
 }
