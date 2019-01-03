@@ -337,8 +337,9 @@ public class ActivityStream {
       if (repeat > 5)
         break;
       // if comment box is shown, break the loop
-      if ($(byXpath(ELEMENT_COMMENT_BUTTON)).is(Condition.visible))
-        break;
+        if($(byXpath(ELEMENT_COMMENT_BUTTON.replace("${activityText}",filename))).is(Condition.visible))
+            break;
+
       info("Click on icon comment with repeat " + repeat);
       $(byXpath(ELEMENT_ICON_COMMENT.replace("${title}", filename))).click();
       repeat++;
@@ -354,7 +355,7 @@ public class ActivityStream {
         break;
       else {
         evt.switchToParentWindow();
-        WebElement input = evt.waitForAndGetElement(ELEMENT_COMMENTBOX.replace("${title}", filename));
+        SelenideElement input = $(byXpath(ELEMENT_COMMENTBOX.replace("${title}", filename))).waitUntil(Condition.visible,Configuration.timeout);
         Actions action = new Actions(testBase.getExoWebDriver().getWebDriver());
         action.moveToElement(input).sendKeys(textContent).build().perform();
         info("Click on comment button to add comment to the activity");
@@ -408,8 +409,8 @@ public class ActivityStream {
    */
   public void showComment(String name) {
     info("Show all comment");
-    evt.click(ELEMENT_PUBLICATION_SEEALLCOMMENTBTN.replace("${activity}", name));
-    evt.waitForAndGetElement(ELEMENT_PUBLICATION_HIDEALLCOMMENTBTN.replace("${activity}", name));
+    $(byXpath(ELEMENT_PUBLICATION_SEEALLCOMMENTBTN.replace("${activity}", name))).click();
+    $(byXpath(ELEMENT_PUBLICATION_HIDEALLCOMMENTBTN.replace("${activity}", name))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -419,8 +420,8 @@ public class ActivityStream {
    */
   public void hideComment(String name) {
     info("Show all comment");
-    evt.click(ELEMENT_PUBLICATION_HIDEALLCOMMENTBTN.replace("${activity}", name));
-    evt.waitForAndGetElement(ELEMENT_PUBLICATION_SEEALLCOMMENTBTN.replace("${activity}", name));
+    $(byXpath(ELEMENT_PUBLICATION_HIDEALLCOMMENTBTN.replace("${activity}", name))).click();
+    $(byXpath(ELEMENT_PUBLICATION_SEEALLCOMMENTBTN.replace("${activity}", name))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
