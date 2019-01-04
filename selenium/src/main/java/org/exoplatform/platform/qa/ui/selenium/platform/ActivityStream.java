@@ -1650,6 +1650,17 @@ public class ActivityStream {
     ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     $(byText(text)).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
   }
+  public void deleteGeneratedActivity(String text) {
+    // get the id of activity created
+    info("-- Editing an activity--");
+    homePagePlatform.refreshUntil($(byText(text)), Condition.visible, 500);
+    String idActivity = $(byText(text)).parent().getAttribute("id").split("ActivityContextBox")[1];
+    $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).click();
+    $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}", idActivity))).click();
+    ELEMENT_DELETE_POPUP_OK.click();
+    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    $(byText(text)).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+  }
 
   public void deleteFormatedActivity(String text) {
     // get the id of activity created
