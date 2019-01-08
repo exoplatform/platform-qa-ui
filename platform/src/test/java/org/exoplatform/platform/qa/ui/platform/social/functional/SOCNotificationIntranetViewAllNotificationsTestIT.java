@@ -575,7 +575,6 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     refresh();
     spaceSettingManagement.inviteUser(username2, false, "");
 
-
     info("User B login");
     manageLogInOut.signIn(username2, password);
     navigationToolbar.goToIntranetNotification();
@@ -584,7 +583,6 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     info("A Space Invitation notifications is displayed in the page");
     String inviteSpaceStatus = "You're invited to join";
     intranetNotification.checkStatusSpace(inviteSpaceStatus, spaceName);
-
 
     info("Click [Refuse]");
     intranetNotification.refuseRqConnection(spaceName);
@@ -670,7 +668,7 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     info("User B login");
     manageLogInOut.signIn(username2, password);
     navigationToolbar.goToIntranetNotification();
-    homePagePlatform.refreshUntil($(ELEMENT_ACCOUNT_NAME_LINK),visible,1000);
+    homePagePlatform.refreshUntil($(ELEMENT_ACCOUNT_NAME_LINK), visible, 1000);
     intranetNotification.goToAllNotification();
 
     info("A Space Invitation notifications is displayed in the page");
@@ -701,4 +699,91 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
-  }}
+  }
+
+  /**
+   * <li>Case ID:125175.</li>
+   * <li>Test Case Name: Refuse a Space Join Request from View All.</li>
+   * <li>Pre-Condition: - User A requested to join Space 1 - User B is manager of
+   * Space 1</li>
+   * <li>Post-Condition:</li>
+   */
+  /*
+   * Step Number: 1 Step Name: Step 1 : Go to View All page Step Description: -
+   * Login with User B - Click the notification icon - Click View All Input Data:
+   * Expected Outcome: - The View All page is displayed - The Space Join Request
+   * notification is displayed in the page
+   */
+  /*
+   * Step number: 2 Step Name: Step 2 : Refuse the Space Join Request Step
+   * Description: - Click the button [Refuse] Input Data: Expected Outcome: - User
+   * A is not member of the space
+   */
+  /*
+   * Step number: 3 Step Name: Step 3 : Check notification message Step
+   * Description: - Check the notifications list Input Data: Expected Outcome: -
+   * The notification message is automatically hidden from the list
+   */
+  @Test
+  public void test09_RefuseASpaceJoinRequestFromViewAll() throws Exception {
+
+    info("Test 9: Refuse a Space Join Request from View All");
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@gmail.com";
+    String username2 = "usernameb" + getRandomString();
+    String email2 = username2 + "@gmail.com";
+    String fullName2 = username2 + " " + username2;
+    String password = "123456";
+
+    info("Add new user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+    addUsers.addUser(username2, password, email2, username2, username2);
+    manageLogInOut.signIn(username1, password);
+
+    info("Create a new space");
+    String spaceName = "spaceName" + getRandomNumber();
+    String spaceDes = "description" + getRandomNumber();
+    homePagePlatform.goToMySpaces();
+    spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+
+    info("Invite UserB to the space");
+    homePagePlatform.goToSpecificSpace(spaceName);
+    spaceHomePage.goToSpaceSettingTab();
+    refresh();
+    spaceSettingManagement.inviteUser(username2, false, "");
+
+    info("User B login");
+    manageLogInOut.signIn(username2, password);
+    navigationToolbar.goToIntranetNotification();
+    homePagePlatform.refreshUntil($(ELEMENT_ACCOUNT_NAME_LINK), visible, 1000);
+    intranetNotification.goToAllNotification();
+
+    info("A Space Invitation notifications is displayed in the page");
+    String inviteSpaceStatus = "You're invited to join";
+    intranetNotification.checkStatusSpace(inviteSpaceStatus, spaceName);
+    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CONNECT_REFUSE_BUTTON.replace("$name", spaceName))), Condition.visible, 1000);
+
+    info("Click [Refuse]");
+    intranetNotification.refuseRqConnection(spaceName);
+
+    info("Check format of the notification after accepted");
+    String acceptSpaceStatus = "";
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
+    intranetNotification.checkNotStatusSpace(acceptSpaceStatus, spaceName);
+    intranetNotification.checkNotStatusSpace(inviteSpaceStatus, spaceName);
+
+    info("User A login");
+    manageLogInOut.signIn(username1, password);
+
+    info("User B isnot member of Space 1");
+    homePagePlatform.goToSpecificSpace(spaceName);
+    spaceHomePage.goToSpaceSettingTab();
+    spaceManagement.verifyMember(username1, false);
+    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
+    addUsers.deleteUser(username2);
+  }
+}
