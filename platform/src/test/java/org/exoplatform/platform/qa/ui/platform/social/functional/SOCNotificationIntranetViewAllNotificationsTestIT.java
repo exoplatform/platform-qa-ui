@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.platform.social.functional;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
@@ -10,6 +11,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 import static org.xbill.DNS.Options.refresh;
 
 import java.util.ArrayList;
@@ -668,6 +670,7 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     info("User B login");
     manageLogInOut.signIn(username2, password);
     navigationToolbar.goToIntranetNotification();
+    homePagePlatform.refreshUntil($(ELEMENT_ACCOUNT_NAME_LINK),visible,1000);
     intranetNotification.goToAllNotification();
 
     info("A Space Invitation notifications is displayed in the page");
@@ -698,5 +701,4 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
-  }
-}
+  }}

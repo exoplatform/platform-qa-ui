@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.social.pageobject;
 
 import static com.codeborne.selenide.Condition.not;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
@@ -8,12 +9,14 @@ import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_NOTIFICATION_DROPDOWN;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 import java.util.ArrayList;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -25,6 +28,8 @@ public class IntranetNotification {
 
   UserProfilePage              userPro;
 
+  HomePagePlatform homePagePlatform;
+
   private ElementEventTestBase evt;
 
   /**
@@ -34,6 +39,7 @@ public class IntranetNotification {
    */
   public IntranetNotification(TestBase testBase) {
     this.testBase = testBase;
+    this.homePagePlatform=new HomePagePlatform(testBase);
     this.evt = testBase.getElementEventTestBase();
     this.userPro = new UserProfilePage(testBase);
     this.spaceHome = new SpaceHomePage(testBase);
@@ -49,7 +55,7 @@ public class IntranetNotification {
       $(ELEMENT_VIEW_ALL).click();
     } else {
       info("Open All page by link");
-      testBase.getExoWebDriver().getWebDriver().get(testBase.getExoWebDriver().getBaseUrl() + "/intranet/allNotifications/");
+      testBase.getExoWebDriver().getWebDriver().get(testBase.getExoWebDriver().getBaseUrl() + "portal/intranet/allNotifications/");
     }
     evt.waitForAndGetElement(ELEMENT_ALL_NOTIFICATIONS);
   }
