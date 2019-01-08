@@ -44,7 +44,7 @@ public class IntranetNotification {
    */
   public void goToAllNotification() {
     info("Go to all notification");
-    if (evt.waitForAndGetElement(ELEMENT_VIEW_ALL, 3000, 0) != null) {
+    if ($(ELEMENT_VIEW_ALL).is (Condition.visible)) {
       info("Click on View All button");
       $(ELEMENT_VIEW_ALL).click();
     } else {
@@ -155,7 +155,7 @@ public class IntranetNotification {
 
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
-        if (evt.waitForAndGetElement(ELEMENT_SPACE_MENU_ACTIVITY_STREAM, 3000, 0) != null)
+        if ($(ELEMENT_SPACE_MENU_ACTIVITY_STREAM).is(Condition.visible))
           ;
         break;
       }
@@ -166,10 +166,10 @@ public class IntranetNotification {
       info("Retry...[" + repeat + "]");
       if (isPopup) {
         info("View detail of accept invitation to new space from the popup");
-        evt.click(ELEMENT_NOTIFICATION_POPUP_ACCEPT_INVITE_SPACE.replace("$space", space));
+        $(byXpath(ELEMENT_NOTIFICATION_POPUP_ACCEPT_INVITE_SPACE.replace("$space", space))).click();
       } else {
         info("View detail of accept invitation to new space from all notification page");
-        evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_ACCEPT_INVITE_SPACE.replace("$space", space));
+        $(byXpath(ELEMENT_NOTIFICATION_ALL_PAGE_ACCEPT_INVITE_SPACE.replace("$space", space))).click();
       }
 
     }

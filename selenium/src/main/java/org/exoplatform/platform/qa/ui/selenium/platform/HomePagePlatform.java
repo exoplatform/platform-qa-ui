@@ -157,7 +157,6 @@ public class HomePagePlatform {
    */
   public void goToSpecificSpace(String space) {
     info("Go to space " + space);
-
     ELEMENT_SPECIFIC_PANEL.find(byText(space)).click();
 
   }

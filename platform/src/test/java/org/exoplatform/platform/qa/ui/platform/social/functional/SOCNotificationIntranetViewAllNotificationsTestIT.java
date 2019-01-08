@@ -8,7 +8,7 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_PROFILE_TITLE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.xbill.DNS.Options.refresh;
 
@@ -573,6 +573,7 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     refresh();
     spaceSettingManagement.inviteUser(username2, false, "");
 
+
     info("User B login");
     manageLogInOut.signIn(username2, password);
     navigationToolbar.goToIntranetNotification();
@@ -581,6 +582,7 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     info("A Space Invitation notifications is displayed in the page");
     String inviteSpaceStatus = "You're invited to join";
     intranetNotification.checkStatusSpace(inviteSpaceStatus, spaceName);
+
 
     info("Click [Refuse]");
     intranetNotification.refuseRqConnection(spaceName);
@@ -599,4 +601,102 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     homePagePlatform.goToSpecificSpace(spaceName);
     spaceHomePage.goToSpaceSettingTab();
     spaceManagement.verifyMember(username1, false);
-  }}
+  }
+
+  /**
+   * <li>Case ID:125174.</li>
+   * <li>Test Case Name: Accept a Space Join Request from View All.</li>
+   * <li>Pre-Condition: - User A requested to join Space 1 - User B is manager of
+   * Space 1</li>
+   * <li>Post-Condition:</li>
+   */
+  /*
+   * Step Number: 1 Step Name: Step 1 : Go to View all Step Description: - Login
+   * with User B - Click the notification icon - Click View All Input Data:
+   * Expected Outcome: - The View All page is displayed - The Space Join Request
+   * notification is displayed in the oage
+   */
+  /*
+   * Step number: 2 Step Name: Step 2 : Accept Space Join Request Step
+   * Description: - Click the button [Accept] Input Data: Expected Outcome: - User
+   * A is accepted and member of the space
+   */
+  /*
+   * Step number: 3 Step Name: Step 3 : Check notification message Step
+   * Description: - Check the notification message Input Data: Expected Outcome:
+   * The notification message is updated to :$AVATAR$USER joined $SPACE
+   * space$DATEWhere: - $AVATAR is the thumbnail of User A - $USER is User A -
+   * $SPACE is Space 1 - $DATE is the date of the notification
+   */
+  /*
+   * Step number: 4 Step Name: Step 4 : Click the notification Step Description: -
+   * Click the notification area Input Data: Expected Outcome: - The user is
+   * redirector to the Space 1
+   */
+  @Test
+  public void test08_AcceptASpaceJoinRequestFromViewAll() throws Exception {
+
+    info("Test 8: Accept a Space Join Request from View All");
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@gmail.com";
+    String username2 = "usernameb" + getRandomString();
+    String email2 = username2 + "@gmail.com";
+    String password = "123456";
+    String fullName2 = username2 + " " + username2;
+
+    info("Add new user");
+    ArrayList<String> arrayUser = new ArrayList<String>();
+    arrayUser.add(username2);
+    arrayUser.add(username1);
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+    addUsers.addUser(username2, password, email2, username2, username2);
+    manageLogInOut.signIn(username1, password);
+
+    info("Create a new space");
+    String spaceName = "spaceName" + getRandomNumber();
+    String spaceDes = "description" + getRandomNumber();
+    homePagePlatform.goToMySpaces();
+    spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+
+    info("Invite UserB to the space");
+    homePagePlatform.goToSpecificSpace(spaceName);
+    spaceHomePage.goToSpaceSettingTab();
+    refresh();
+    spaceSettingManagement.inviteUser(username2, false, "");
+
+    info("User B login");
+    manageLogInOut.signIn(username2, password);
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
+
+    info("A Space Invitation notifications is displayed in the page");
+    String inviteSpaceStatus = "You're invited to join";
+    intranetNotification.checkStatusSpace(inviteSpaceStatus, spaceName);
+    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CONNECT_ACCEPT_BUTTON.replace("$name", spaceName))), Condition.visible, 1000);
+
+    info("Click [Accept]");
+    intranetNotification.acceptRqConnection(spaceName);
+
+    info("The invitation is approved and User B is member of Space 1");
+    homePagePlatform.goToHomePage();
+    homePagePlatform.goToSpecificSpace(spaceName);
+    $(ELEMENT_SPACE_MENU_ACTIVITY_STREAM).waitUntil(Condition.visible, Configuration.timeout);
+
+    info("Check format of the notification after accepted");
+    String acceptSpaceStatus = "You joined";
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
+    intranetNotification.checkStatus(acceptSpaceStatus, spaceName);
+    intranetNotification.checkAvatarInStatus(arrayUser, false);
+    intranetNotification.checkUsers(arrayUser, false);
+    intranetNotification.checkStatusSpace(acceptSpaceStatus, spaceName);
+
+    info("Click the notification area");
+    intranetNotification.goToDetailAcceptInvitationSpace(spaceName, false);
+    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
+    addUsers.deleteUser(username2);
+  }
+}
