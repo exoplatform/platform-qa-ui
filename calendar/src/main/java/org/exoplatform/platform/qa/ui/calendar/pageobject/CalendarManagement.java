@@ -378,7 +378,7 @@ public class CalendarManagement {
       break;
     case ADDEVENT:
       $(ELEMENT_CALENDAR_ADD_EVENT_MENU).click();
-      $(ELEMENT_CALENDAR_QUICK_ADD_EVENT_FORM).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_EVENT_DRAWER).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case EDIT:
       evt.clickByJavascript(ELEMENT_CALENDAR_EDIT_MENU, 2);

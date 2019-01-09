@@ -46,7 +46,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     calendarHomePage = new CalendarHomePage(this);
     eventManagement = new EventManagement(this);
     manageLogInOut = new ManageLogInOut(this);
-    manageLogInOut.signInCas(PLFData.DATA_USER2, PLFData.DATA_PASS);
+    manageLogInOut.signInCas(PLFData.username, PLFData.password);
   }
 
   @Test

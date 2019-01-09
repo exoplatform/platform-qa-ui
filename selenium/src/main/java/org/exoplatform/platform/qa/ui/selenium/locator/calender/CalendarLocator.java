@@ -999,7 +999,7 @@ public class CalendarLocator {
                                                                            "//*[@id='UIQuickAddEvent']//*[@id='fromTime']/..//*[@class='UIComboboxLabel' and text()='${time}']";
 
   public static final SelenideElement ELEMENT_BUTTON_EVENT_SAVE                                        =
-                                                                $(byXpath("//*[@id=\"QuickAddEventContainer\"]/div[2]/button[1]"));
+                               $(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[3]/div/button[1]"));
 
   public static final String          ELEMENT_ITEM_QUICK_EVENT_CATEGORY_OPTION                         =
                                                                                "//*[@id='UIQuickAddEventPopupWindow']//*[@name='category']/*[text()='$category']";
@@ -1679,5 +1679,14 @@ public class CalendarLocator {
   public static final SelenideElement ELEMENT_LIST_CALENDAR=$(byId("UICalendars"));
 
   public static final SelenideElement ELEMENT_TASK_DETAIL =$(byClassName("titleList"));
+
+  public static final SelenideElement ELEMENT_EVENT_DRAWER=  $(byId("ExoEventForm"));
+  public static final SelenideElement ELEMENT_EVENT_DRAWER_TITLE=  $(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[2]/form/div[1]/div/input"));
+  public static final SelenideElement ELEMENT_EVENT_CATEGORY=  $(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[2]/form/div[1]/div/span/select"));
+  public static final SelenideElement ELEMENT_EVENT_LOCATION=  $(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[2]/form/div[5]/div[2]/input"));
+  public static final SelenideElement ELEMENT_EVENT_DESCRIPTION=  $(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[2]/form/div[10]/div[2]/textarea"));
+  public static final SelenideElement ELEMENT_EVENT_CANCEL_BUTTON=  $(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[3]/div/button[2]"));
+  public static final SelenideElement ELEMENT_EVENT_SAVE_BUTTON=  $(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[3]/div/button[1]"));
+  public static final SelenideElement ELEMENT_EVENT_CLEAR_BUTTON=  $(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[3]/div/button[3]"));
 
 }

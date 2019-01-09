@@ -3,10 +3,12 @@ package org.exoplatform.platform.qa.ui.calendar.pageobject;
 import static com.codeborne.selenide.Selectors.*;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static org.bouncycastle.crypto.tls.ConnectionEnd.server;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_USER_CLOSE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -161,7 +163,7 @@ public class EventManagement {
     info("Go to Add Event page from action bar");
 
     $(ELEMENT_BUTTON_EVENT).click();
-    $(ELEMENT_QUICK_ADD_EVENT_POPUP).waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_EVENT_DRAWER.parent().waitUntil(Condition.visible, Configuration.timeout);
   }
 
   /**
@@ -1208,5 +1210,22 @@ public class EventManagement {
    */
   public enum recurringType {
     ONLY_EVENT, FOLLOW_EVENT, ALL_EVENT;
+  }
+
+  public void checkEventPopUp(){
+    switchTo().activeElement();
+    $(byText("Add Event")).should(Condition.exist);
+    assertEquals("Event title",$(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[2]/form/div[1]/div/input")).getAttribute("placeholder"));
+    assertEquals("All",$(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[2]/form/div[1]/div/span/select")).getText());
+    assertEquals("All day",$(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[2]/form/div[4]/div/label")).getText());
+    assertEquals("Location",$(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[2]/form/div[5]/div[1]")).getText());
+    assertEquals("Type a place address...",$(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[2]/form/div[5]/div[2]/input")).getAttribute("placeholder"));
+    assertEquals("Participants",$(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[2]/form/div[6]/div[1]")).getText());
+    assertEquals("Participants",$(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[2]/form/div[6]/div[2]/div/div/input")).getAttribute("placeholder"));
+    assertEquals("Clear",$(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
+    assertEquals("Save",$(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
+    assertEquals("Cancel",$(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
+
+
   }
 }
