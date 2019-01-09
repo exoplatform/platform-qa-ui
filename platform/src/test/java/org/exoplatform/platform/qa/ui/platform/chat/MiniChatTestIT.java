@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("chat")
 @Tag("sniff")
-public class MiniChatTestIt extends Base {
+public class MiniChatTestIT extends Base {
     HomePagePlatform homePagePlatform;
     ManageLogInOut   manageLogInOut;
     NavigationToolbar navigationToolbar;
