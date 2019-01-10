@@ -487,7 +487,7 @@ public class IntranetNotification {
 
     if (users.size() > 2 && isPopUp == false) {
       info("Verify that second last user is shown in the page");
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ALL_USER.replace("$user", users.get(lastIndex - 1)), 2000, 2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ALL_USER.replace("$user", users.get(lastIndex - 1)))).waitUntil(Condition.visible,Configuration.timeout);
     }
   }
 

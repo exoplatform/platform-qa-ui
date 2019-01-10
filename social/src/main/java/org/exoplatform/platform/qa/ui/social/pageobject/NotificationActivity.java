@@ -471,13 +471,11 @@ public class NotificationActivity {
     if (comments.size() > 0) {
       for (int i = 0; i < comments.size(); i++) {
         info("Verify that all comments are expanded");
-        evt.waitForAndGetElement(ELEMENT_ACTIVITY_COMMENT_CONTENT.replace("$comment", comments.get(i)), 2000, 1);
+        $(byXpath(ELEMENT_ACTIVITY_COMMENT_CONTENT.replace("$comment", comments.get(i)))).waitUntil(Condition.visible,Configuration.timeout);
 
         if (isHighlight) {
           info("Verify that the last comment is highlighted");
-          evt.waitForAndGetElement(ELEMENT_ACTIVITY_COMMENT_CONTENT.replace("$comment", comments.get(comments.size() - 1)),
-                                   2000,
-                                   1);
+       $(byXpath(ELEMENT_ACTIVITY_COMMENT_CONTENT.replace("$comment", comments.get(comments.size() - 1)))).waitUntil(Condition.visible,Configuration.timeout);
         }
       }
     }
