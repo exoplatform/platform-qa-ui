@@ -807,6 +807,7 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
   }
+
   /**
    * <li>Case ID:125176.</li>
    * <li>Test Case Name: Click Mention notifications in View All (in
@@ -888,40 +889,45 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
    * message</li>
    * <li>Post-Condition:</li>
    */
+  /*
+   * Step Number: 1 Step Name: Step 1 : Go to View All Step Description: - Login
+   * with User B - Click the notification icons in the top navigation - Click View
+   * All Input Data: Expected Outcome: - The View All page is displayed - The
+   * Mention notification is displayed in the page
+   */
+  /*
+   * Step number: 2 Step Name: Step 2 : Click Mention notification Step
+   * Description: - Click the notification Input Data: Expected Outcome: - The
+   * user is redirected to the activity viewer with all comment expanded.
+   */
   @Test
   public void test11_ClickTheMentionNotificationsFromViewAllInActivityMessage() {
     info("Test 11 Click the Mention notifications from View All (in activity message)");
-    /*
-     * Step Number: 1 Step Name: Step 1 : Go to View All Step Description: - Login
-     * with User B - Click the notification icons in the top navigation - Click View
-     * All Input Data: Expected Outcome: - The View All page is displayed - The
-     * Mention notification is displayed in the page
-     */
+
     info("Create 2 users for testing");
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@gmail.com";
     String username2 = "usernameb" + getRandomString();
     String email2 = username2 + "@gmail.com";
     String password = "123456";
+
     info("Add new user");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);
     addUsers.addUser(username2, password, email2, username2, username2);
     manageLogInOut.signIn(username1, password);
+
     info("UserA mention User B");
     homePagePlatform.goToHomePage();
-    String actMention = "";
+    String actMention = "actMention" + getRandomNumber();
     activityStream.mentionUserActivity(username2, actMention);
+
     info("User B login");
     navigationToolbar.goToIntranetNotification();
     intranetNotification.goToAllNotification();
     String status = "";
     intranetNotification.checkStatus(status, username1);
-    /*
-     * Step number: 2 Step Name: Step 2 : Click Mention notification Step
-     * Description: - Click the notification Input Data: Expected Outcome: - The
-     * user is redirected to the activity viewer with all comment expanded.
-     */
+
     info("Check detail of Activity comment");
     intranetNotification.goToDetailMentionNotification(username1, false);
     notificationActivity.checkTitleActivityExpand(actMention);

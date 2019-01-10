@@ -146,7 +146,7 @@ public class NotificationActivity {
   public void checkTitleActivityExpand(String text) {
     if (!text.isEmpty()) {
       info("Verifyt that the Activity is shown with correct it's content");
-      evt.waitForAndGetElement(ELEMENT_NOTIFICATION_ACTIVITY_TITLE_CONTENT.replace("$text", text));
+      $(byXpath(ELEMENT_NOTIFICATION_ACTIVITY_TITLE_CONTENT.replace("$text", text))).is(Condition.visible);
     }
   }
 
