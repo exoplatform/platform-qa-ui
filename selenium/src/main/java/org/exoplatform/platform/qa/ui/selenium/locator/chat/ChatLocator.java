@@ -200,10 +200,16 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_CHAT_ON_SITE_NOTIFICATION_BUTTON=   $(byId("notifyOnSite"));
     public static final SelenideElement ELEMENT_CHAT_NOTIFICATION_DETAIL=   $(byId("chat-notifications-details"));
 
+    public static final SelenideElement ELEMENT_CHAT_BUTTON_USER_PROFILE=  $(byXpath("//*[@id=\"UIUserNavigationPortlet\"]/div[1]/div/div[1]/ul/li[2]/a"));
 
-
-
-
+    public static final SelenideElement ELEMENT_CHAT_TIP_CONTENT=   $(byId("tiptip_content"));
+    public static final SelenideElement ELEMENT_CHAT_ICON_TIP_CONTENT=  $(byXpath("//*[@id=\"tiptip_content\"]/div/a/i"));
+    public static final SelenideElement ELEMENT_MINI_CHAT_MINIMIZE_ICON= $(byClassName("uiIconMinimize"));
+    public static final SelenideElement ELEMENT_MINI_CHAT_MAXIMIZE_ICON= $(byClassName("uiIconMaximize"));
+    public static final SelenideElement ELEMENT_MINI_CHAT_CLOSE_ICON= $(byClassName("uiIconClose"));
+    public static final SelenideElement ELEMENT_MINI_CHAT_POPOUT_ICON= $(byClassName("uiIconChatPopOut"));
+    public static final SelenideElement ELEMENT_MINI_CHAT_MESSAGE_LIST=  $(byClassName("chat-message-list"));
+    public static final SelenideElement ELEMENT_CHAT_ROOM_PARTICIPANTS=  $(byClassName("room-participants"));
 
 }
 
