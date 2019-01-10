@@ -1791,10 +1791,11 @@ public class ActivityStream {
                                                 .parent()
                                                 .getAttribute("id")
                                                 .split("commentContainercomment")[1];
-    $(byId(ELEMENT_REPLY_CONTAINER.replace("{id}", idCommentContainer))).hover();
+    $(byId(ELEMENT_COMMENT_DROPDOWN.replace("{id}", idCommentContainer))).hover().click();
     $(byId(ELEMENT_INCON_DELETE_COMMENT.replace("{id}", idCommentContainer))).click();
     // Confirm delete
     ELEMENT_DELETE_POPUP_OK.click();
+    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     $(byText(reply)).shouldNot(Condition.exist);
     ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
   }
@@ -1879,7 +1880,7 @@ public class ActivityStream {
                                               .getAttribute("id")
                                               .split("commentContainercomment")[1];
 
-    $(byId(ELEMENT_COMMENT_BLOC_AS.replace("{id}", idBlocComment))).hover().click();
+    $(byId(ELEMENT_COMMENT_DROPDOWN.replace("{id}", idBlocComment))).hover().click();
     $(byId(ELEMENT_INCON_DELETE_COMMENT.replace("{id}", idBlocComment))).click();
     // Confirm delete
     ELEMENT_DELETE_POPUP_OK.click();
