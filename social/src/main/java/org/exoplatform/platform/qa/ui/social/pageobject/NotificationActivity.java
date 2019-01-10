@@ -88,7 +88,7 @@ public class NotificationActivity {
   public void checkCommentExpand(String comment, boolean isHighlight) {
     if (!comment.isEmpty()) {
       info("Verify that all comments are expanded");
-      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ACTIVITY_COMMENT_CONTENT.replace("$comment", comment))).waitUntil(Condition.visible, Configuration.timeout);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ACTIVITY_COMMENT_CONTENT.replace("$comment", comment))).waitUntil(Condition.visible,Configuration.timeout);
 
       if (isHighlight) {
         info("Verify that the last comment is highlighted");

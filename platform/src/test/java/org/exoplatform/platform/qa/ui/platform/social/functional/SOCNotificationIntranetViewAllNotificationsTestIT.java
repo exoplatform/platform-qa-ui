@@ -935,4 +935,88 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
-  }}
+  }
+
+  /**
+   * <li>Case ID:125178.</li>
+   * <li>Test Case Name: Click Comment Notification from View All (1
+   * comment).</li>
+   * <li>Pre-Condition: - User A and User B are connected - User A has posted an
+   * activity - User B has commented on User A activity</li>
+   * <li>Post-Condition:</li>
+   */
+  /*
+   * Step Number: 1 Step Name: Step 1 : Go to View All Step Description: - Login
+   * with User A - Click the notifications icon in the top navigation - Go to View
+   * All Input Data: Expected Outcome: - The View All Page is displayed - A
+   * comment notification is displayed in the page
+   */
+  /*
+   * Step number: 2 Step Name: Step 2 : Click the Comment notification Step
+   * Description: - Click the notification area Input Data: Expected Outcome: -
+   * The activity is displayed in the activity viewer with all comment expanded. -
+   * The comment that this notification is about is highlighted.
+   */
+  @Test
+  public void test12_ClickCommentNotificationFromViewAll1Comment() throws Exception {
+
+    info("Test 12 Click Comment Notification from View All (1 comment)");
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@gmail.com";
+    String username2 = "usernameb" + getRandomString();
+    String email2 = username2 + "@gmail.com";
+    String password = "123456";
+
+    info("Add new user");
+    ArrayList<String> arrayUser = new ArrayList<String>();
+    ArrayList<String> comments = new ArrayList<String>();
+    arrayUser.add(username2);
+    arrayUser.add(username1);
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+    addUsers.addUser(username2, password, email2, username2, username2);
+    manageLogInOut.signIn(username1, password);
+
+    info("goto My notification");
+    navigationToolbar.goToMyNotifications();
+    MyNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.AS_Comment_intranet);
+
+    info("User A sent a connection request to User B");
+    homePagePlatform.goToConnections();
+    connectionsManagement.connectToAUser(username2);
+    
+    info("User A add an activity");
+    String activity = "activitya" + getRandomNumber();
+    homePagePlatform.goToHomePage();
+    activityStream.addActivity(activity, null);
+    activityStream.checkActivity(activity);
+
+    info("User B login");
+    manageLogInOut.signIn(username2, password);
+    info("User A and User B are connected");
+    homePagePlatform.goToConnections();
+    connectionsManagement.acceptAConnection(username1);
+
+    info("UserB comments in UserA's activity");
+    String comment = "commenta" + getRandomNumber();
+    homePagePlatform.goToHomePage();
+    activityStream.commentActivity(activity, comment);
+
+    info("Log in with User A");
+    manageLogInOut.signIn(username1, password);
+
+    info(" Go to View All Notification");
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
+    String status = "has commented on your activity";
+    intranetNotification.checkFormatStatusCommentNotification(arrayUser, status, activity, false);
+    homePagePlatform.refreshUntil($(byText(activity)),visible,1000);
+    info("Check detail of activity comment");
+    intranetNotification.goToDetailCommentNotification(activity, false);
+    notificationActivity.checkCommentExpand(comment, true);
+    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
+    addUsers.deleteUser(username2);
+  }
+}

@@ -371,7 +371,7 @@ public final class SocialLocator {
                                                                                    ".//*[@id='NotificationPopup']//*[@class='content'][contains(.,'$title')]";
 
   public static final String          ELEMENT_INTRANET_NOTIFICATION_ACTIVITY_COMMENT_HIGHLIGHT          =
-                                                                                               ".//*[@class='contentComment'][contains(.,'$comment')]/../../..[contains(@style,'rgb(240, 240, 240)')]";
+                                                                                               ".//*[@class='contentComment'][contains(.,'$comment')]";
 
   public static final String          ELEMENT_INTRANET_NOTIFICATION_ACTIVITY_COMMENT_CONTENT            =
                                                                                              ".//*[@class='contentComment'][contains(.,'$comment')]";

@@ -79,27 +79,13 @@ public class IntranetNotification {
    *          Notification page
    */
   public void goToDetailCommentNotification(String activity, boolean isPopup) {
-
-    for (int repeat = 0;; repeat++) {
-      if (repeat > 1) {
-        if (evt.waitForAndGetElement(ELEMENT_NOTIFICATION_UI_ACTIVITY_LOADER, 3000, 0) != null)
-          ;
-        break;
-      }
-      if (evt.waitForAndGetElement(ELEMENT_NOTIFICATION_UI_ACTIVITY_LOADER, 5000, 0) != null) {
-        info("Element " + ELEMENT_NOTIFICATION_UI_ACTIVITY_LOADER + " is displayed");
-        break;
-      }
-      info("Retry...[" + repeat + "]");
       if (isPopup) {
         info("View detail notification when comments an activity from the popup");
-        evt.click(ELEMENT_NOTIFICATION_POPUP_COMMENT.replace("$activity", activity));
+        $(byXpath(ELEMENT_NOTIFICATION_POPUP_COMMENT.replace("$activity", activity))).click();
       } else {
         info("View detail notification when comments an activity from all notification page");
-        evt.click(ELEMENT_NOTIFICATION_ALL_PAGE_COMMENT.replace("$activity", activity));
+        $(byXpath(ELEMENT_NOTIFICATION_ALL_PAGE_COMMENT.replace("$activity", activity))).click();
       }
-
-    }
   }
 
   /**
@@ -705,7 +691,7 @@ public class IntranetNotification {
       $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ACTIVITY_TITLE.replace("$title", actTitle))).waitUntil(Condition.visible,Configuration.timeout);
     } else {
       info("Verify the activity's title is shown in the page");
-      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ALL_ACTIVITY_TITLE.replace("$title", actTitle))).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ALL_ACTIVITY_TITLE.replace("$title", actTitle))).is(Condition.visible);
     }
   }
 
