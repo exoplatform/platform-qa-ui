@@ -740,6 +740,7 @@ public final class ActivityStreamLocator {
 
 
 
+    public static final SelenideElement ELEMENT_ACTIVITY_STREAM_HEADING=$(byClassName("heading"));
 
 
 }

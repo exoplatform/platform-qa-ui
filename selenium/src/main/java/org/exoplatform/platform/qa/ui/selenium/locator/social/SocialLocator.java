@@ -2429,5 +2429,7 @@ public static final By
   public static final SelenideElement ELEMENT_BUTTON_ON_SITE_COMMENT =   $(byId("WEB_CHANNELEditCommentPlugin"));
   public static final SelenideElement ELEMENT_ALL_NOTIFICATION=  $(byXpath("//*[@id=\"NotificationPopup\"]/li[5]/div/a"));
   public static final SelenideElement ELEMENT_NOTIFICATION_ACTIONS=  $(byClassName("notificationsActions"));
+  public static final SelenideElement ELEMENT_SPACE_PORTLET =  $(byClassName("uiIconAppSpaceActivityStreamPortlet"));
+  public static final SelenideElement ELEMENT_SPACE_MENU =  $(byXpath("//*[@id=\"UISpaceMenu\"]/div[1]/div/ul/li[1]/a"));
 }
 
