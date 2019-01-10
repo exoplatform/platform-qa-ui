@@ -10,6 +10,7 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_TREE_WIKI_NAME;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 import static org.xbill.DNS.Options.refresh;
@@ -35,6 +36,9 @@ import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.social.pageobject.IntranetNotification;
 import org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting;
 import org.exoplatform.platform.qa.ui.social.pageobject.NotificationActivity;
+import org.exoplatform.platform.qa.ui.wiki.pageobject.SourceTextEditor;
+import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
+import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 
 @Tag("functional")
 @Tag("social")
@@ -70,6 +74,14 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
 
   SpaceSettingManagement spaceSettingManagement;
 
+  WikiManagement         wikiManagement;
+
+  WikiHomePage           wikiHomePage;
+
+  SourceTextEditor       sourceTextEditor;
+
+  MyNotificationsSetting MyNotificationsSetting;
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
@@ -90,6 +102,14 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     spaceManagement = new SpaceManagement(this);
     spaceHomePage = new SpaceHomePage(this);
     spaceSettingManagement = new SpaceSettingManagement(this);
+    wikiManagement = new WikiManagement(this);
+    sourceTextEditor = new SourceTextEditor(this);
+    manageLogInOut = new ManageLogInOut(this);
+    wikiHomePage = new WikiHomePage(this);
+    MyNotificationsSetting = new MyNotificationsSetting(this);
+    ArrayList<String> arrayUser;
+    ArrayList<String> comments;
+
   }
 
   /**
@@ -252,7 +272,8 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     info("Go to My notification");
     navigationToolbar.goToMyNotifications();
     info("Enable new user notification");
-    myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.NewUser_intranet);
+    MyNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.NewUser_intranet);
+
     info("Add new user");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username2, password, email2, username2, username2);
@@ -785,5 +806,74 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
+  }
+
+  /**
+   * <li>Case ID:125176.</li>
+   * <li>Test Case Name: Click Mention notifications in View All (in
+   * comment).</li>
+   * <li>Pre-Condition: - An wiki activity is generated (create a new page) - User
+   * A has mentioned User B directly in a comment</li>
+   * <li>Post-Condition:</li>
+   */
+  @Test
+  public void test10_ClickMentionNotificationsInViewAllInComment() {
+    info("Test 10 Click Mention notifications in View All (in comment)");
+    /*
+     * Step Number: 1 Step Name: Step 1 : Go to View All Page Step Description: -
+     * Login with User B - Click the notification icons in the top navigation -
+     * Click View All Input Data: Expected Outcome: - The Mention notification is
+     * displayed in the list
+     */
+    /*
+     * Step number: 2 Step Name: Step 2 : Click Mention notification message Step
+     * Description: - Click the notification area Input Data: Expected Outcome: -
+     * The user is redirected to the activity in the activity viewer with all
+     * comments expanded - The comment is highlighted
+     */
+
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@gmail.com";
+    String username2 = "usernameb" + getRandomString();
+    String email2 = username2 + "@gmail.com";
+    String fullName2 = username2 + " " + username2;
+    String comment = "comment" + getRandomNumber();
+    String password = "123456";
+
+    info("Add new user");
+    ArrayList<String> arrayUser = new ArrayList<String>();
+    ArrayList<String> comments = new ArrayList<String>();
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+    addUsers.addUser(username2, password, email2, username2, username2);
+    navigationToolbar.goToUsersAndGroupsManagement();
+    userAndGroupManagement.addUserAdmin(username1);
+    manageLogInOut.signIn(username1, password);
+
+    info("John add an activity with wiki page");
+    String wiki = "wikia" + getRandomNumber();
+    homePagePlatform.goToWiki();
+    wikiHomePage.goToAddBlankPage();
+    wikiManagement.goToSourceEditor();
+    sourceTextEditor.addSimplePage(wiki, wiki);
+    wikiManagement.saveAddPage();
+    $(byXpath(ELEMENT_TREE_WIKI_NAME.replace("${name}", wiki))).waitUntil(Condition.visible, Configuration.timeout);
+
+    info("John mention User A");
+    homePagePlatform.goToHomePage();
+    String actMention = "actMention" + getRandomNumber();
+    activityStream.addCommentWikiWithMentionUser(wiki, username2, actMention);
+
+    info("Add comment to Comment list");
+    comments.add(actMention);
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
+    String status = "has commented on you activity";
+    intranetNotification.checkStatus(status, fullName2);
+    manageLogInOut.signIn(username2, password);
+
+    info("Check detail of Activity Comment");
+    intranetNotification.goToDetailMentionNotification(username1, false);
+    notificationActivity.checkCommentExpand(actMention, false);
   }
 }

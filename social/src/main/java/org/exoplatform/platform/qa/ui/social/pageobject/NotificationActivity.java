@@ -1,11 +1,15 @@
 package org.exoplatform.platform.qa.ui.social.pageobject;
 
+import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_TREE_WIKI_NAME;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.util.ArrayList;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -84,11 +88,11 @@ public class NotificationActivity {
   public void checkCommentExpand(String comment, boolean isHighlight) {
     if (!comment.isEmpty()) {
       info("Verify that all comments are expanded");
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ACTIVITY_COMMENT_CONTENT.replace("$comment", comment), 2000, 1);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ACTIVITY_COMMENT_CONTENT.replace("$comment", comment))).waitUntil(Condition.visible, Configuration.timeout);
 
       if (isHighlight) {
         info("Verify that the last comment is highlighted");
-        evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ACTIVITY_COMMENT_HIGHLIGHT.replace("$comment", comment), 2000, 1);
+        $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ACTIVITY_COMMENT_HIGHLIGHT.replace("$comment", comment))).waitUntil(Condition.visible,Configuration.timeout);
       }
     }
   }

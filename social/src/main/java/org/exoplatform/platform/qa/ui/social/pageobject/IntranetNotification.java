@@ -538,7 +538,7 @@ public class IntranetNotification {
 
     if (users.size() < 3 && isPopUp == false) {
       info("Verify the activity message for 2 or 1 comment(s)");
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ALL_COMMENTS_CONTENT.replace("$comment", status), 2000, 2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ALL_COMMENTS_CONTENT.replace("$comment", status))).waitUntil(Condition.visible,Configuration.timeout);
     }
   }
 
@@ -702,10 +702,10 @@ public class IntranetNotification {
   public void checkActivityTitleInStatus(String actTitle, boolean isPopUp) {
     if (!actTitle.isEmpty() && isPopUp == true) {
       info("Verify the activity's title is shown in the popup");
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ACTIVITY_TITLE.replace("$title", actTitle), 2000, 2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ACTIVITY_TITLE.replace("$title", actTitle))).waitUntil(Condition.visible,Configuration.timeout);
     } else {
       info("Verify the activity's title is shown in the page");
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ALL_ACTIVITY_TITLE.replace("$title", actTitle), 2000, 2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ALL_ACTIVITY_TITLE.replace("$title", actTitle))).waitUntil(Condition.visible,Configuration.timeout).click();
     }
   }
 

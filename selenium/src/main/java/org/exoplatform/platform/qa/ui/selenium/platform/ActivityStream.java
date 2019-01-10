@@ -790,6 +790,36 @@ public class ActivityStream {
     $(byText(textContent)).should(Condition.exist);
     info("The comment is added successfully");
   }
+  public void addCommentWikiWithMentionUser(String activity, String username, String textContent) {
+    // get the id of activity created
+    String id = $(byText(activity)).parent()
+            .parent()
+            .parent().parent()
+            .getAttribute("id")
+            .split("ActivityContextBox")[1];
+    // click on comment link
+    $(byText(activity)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
+    // insert comment
+    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
+    SelenideElement frame = $(byText(activity)).parent()
+            .parent()
+            .parent().parent()
+            .find(byAttribute("class", "cke_wysiwyg_frame cke_reset"));
+    switchTo().frame(frame);
+    $(byXpath("/html/body")).setValue("@" + username);
+    switchTo().defaultContent();
+    $(byAttribute("data-value", username)).waitUntil(Condition.visible, Configuration.timeout);
+    switchTo().frame(frame);
+    $(byXpath("/html/body")).pressEnter();
+    $(byXpath("/html/body")).sendKeys(textContent);
+    switchTo().defaultContent();
+    // executeJavaScript("CKEDITOR.instances.CommentTextarea" + id +
+    // ".insertText(\"" +"@"+username+ "\")", "");
+    // click on the button comment
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
+    $(byText(textContent)).should(Condition.exist);
+    info("The comment is added successfully");
+  }
 
   /**
    * Open Preview mode by clicking on View link
