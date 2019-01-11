@@ -1303,4 +1303,95 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
+  }
+  /**
+   *<li> Case ID:125182.</li>
+   *<li> Test Case Name: Click Post on my Space notification from View All.</li>
+   *<li> Pre-Condition: - User A and User B are members of Space 1
+   - User B has posted in Space 1</li>
+   *<li> Post-Condition: </li>
+   */
+  	/*Step Number: 1
+		*Step Name: Step 1 : Go to View All
+		*Step Description:
+			- Login with User B
+			- Click the notifications icon in the top navigation
+			- Click View All
+		*Input Data:
+
+		*Expected Outcome:
+			- View All page is displayed
+			- A Post on my Space notifications is displayed in the page*/
+
+		/*Step number: 2
+		*Step Name: Step 2 : Click the notification
+		*Step Description:
+			- Click the notification area
+		*Input Data:
+
+		*Expected Outcome:
+			The activity is displayed in the activity viewer with all comments expanded*/
+  @Test
+  public  void test16_ClickPostOnMySpaceNotificationFromViewAll() {
+    info("Test 16 Click Post on my Space notification from View All");
+    ArrayList<String> arrayUser = new ArrayList<String>();
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@gmail.com";
+    String username2 = "usernameb" + getRandomString();
+    String email2 = username2 + "@gmail.com";
+    String password = "123456";
+    String fullName2=username2+" "+username2;
+
+    info("Add new user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+    addUsers.addUser(username2, password, email2, username2, username2);
+    manageLogInOut.signIn(username1,password);
+
+    info("goto My notification");
+    navigationToolbar.goToMyNotifications();
+    MyNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.Space_Post_intranet);
+
+    info("Create a space");
+    String spaceName = "spaceName" + getRandomNumber();
+    String spaceDes = "description" + getRandomNumber();
+    homePagePlatform.goToAllSpace();
+    spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+
+    info("User A sent a join request to User B from the space");
+    spaceHomePage.goToSpaceSettingTab();
+    spaceSettingManagement.goToMemberTab();
+    refresh();
+    spaceSettingManagement.inviteUser(username2,false,"");
+
+    info("User B login");
+    manageLogInOut.signIn(username2, password);
+
+    info("UserB accepted the connection");
+    homePagePlatform.goToAllSpace();
+    spaceManagement.goToInvitationsReceivedTab();
+    spaceManagement.acceptAInvitation(spaceName);
+
+    info("User B post an activity on the space's activity");
+    String activity = "activity" +getRandomNumber();
+    homePagePlatform.goToSpecificSpace(spaceName);
+    spaceManagement.goToActivityStreamTab();
+    activityStream.addActivity(activity,null);
+
+    info("User A login");
+    manageLogInOut.signIn(username1, password);
+
+    info(" Go to View All Notification");
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
+    String status="";
+    intranetNotification.checkStatus(status,username2);
+
+    info("Check detail of activity comment");
+    intranetNotification.goToDetailPostInSpace(spaceName,false);
+    notificationActivity.checkTitleActivityExpand(activity);
+    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
+    addUsers.deleteUser(username2);
   }}
