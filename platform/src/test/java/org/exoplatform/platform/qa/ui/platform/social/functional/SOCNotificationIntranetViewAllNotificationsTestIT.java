@@ -14,24 +14,20 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 import static org.xbill.DNS.Options.refresh;
-
 import java.util.ArrayList;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
-import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.social.pageobject.IntranetNotification;
 import org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting;
@@ -82,6 +78,8 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
 
   MyNotificationsSetting MyNotificationsSetting;
 
+
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
@@ -107,6 +105,8 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     manageLogInOut = new ManageLogInOut(this);
     wikiHomePage = new WikiHomePage(this);
     MyNotificationsSetting = new MyNotificationsSetting(this);
+    userProfilePage = new UserProfilePage(this);
+
     ArrayList<String> arrayUser;
     ArrayList<String> comments;
 
@@ -1220,4 +1220,87 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
   }
-}
+
+  /**
+   *<li> Case ID:125181.</li>
+   *<li> Test Case Name: Click Post on my Stream notification from View All.</li>
+   *<li> Pre-Condition: User A has posted an activity on User B activity stream</li>
+   *<li> Post-Condition: </li>
+   */
+  /*Step Number: 1
+		*Step Name: Step 1 : Go to View All page
+		*Step Description:
+			- Login with User B
+			- Click the notifications icon in the top navigation
+			- Click View All
+		*Input Data:
+
+		*Expected Outcome:
+			- View All page is displayed
+			- A Post on my Stream notifications is displayed in the list*/
+
+		/*Step number: 2
+		*Step Name: Step 2 : Click the notification
+		*Step Description:
+			- Click the notification area
+		*Input Data:
+
+		*Expected Outcome:
+			The activity is displayedin the activity viewer with all comments expanded*/
+  @Test
+  public  void test15_ClickPostOnMyStreamNotificationFromViewAll() throws Exception {
+    info("Test 15 Click Post on my Stream notification from View All");
+
+    ArrayList<String> arrayUser = new ArrayList<String>();
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@gmail.com";
+    String username2 = "usernameb" + getRandomString();
+    String email2 = username2 + "@gmail.com";
+    String password = "123456";
+
+    info("Add new user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+    addUsers.addUser(username2, password, email2, username2, username2);
+    manageLogInOut.signIn(username1,password);
+
+    info("goto My notification");
+    navigationToolbar.goToMyNotifications();
+    MyNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.AS_Post_intranet);
+
+
+    info("User A sent a connection request to User B");
+    homePagePlatform.goToConnections();
+    connectionsManagement.connectToAUser(username2);
+
+    info("User B login");
+    manageLogInOut.signIn(username2, password);
+
+    info("User A and User B are connected");
+    homePagePlatform.goToConnections();
+    connectionsManagement.acceptAConnection(username1);
+
+    info("User B add an activity on User A's stream");
+    String activity = "activitya" + getRandomNumber();
+    connectionsManagement.goToUserByFullName(username1 + " " + username1);
+    userProfilePage.goToActivity();
+    activityStream.addActivity(activity, "");
+    activityStream.checkActivity(activity);
+
+    info("Log in with User A");
+    manageLogInOut.signIn(username1, password);
+
+    info(" Go to View All Notification");
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
+    String status="";
+    intranetNotification.checkStatus(status,username2);
+
+    info("Check detail of activity comment");
+    intranetNotification.goToDetailPostInMyActivity(username2,false);
+    notificationActivity.checkTitleActivityExpand(activity);
+    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
+    addUsers.deleteUser(username2);
+  }}
