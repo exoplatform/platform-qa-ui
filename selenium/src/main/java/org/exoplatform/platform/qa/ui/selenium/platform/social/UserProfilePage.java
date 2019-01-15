@@ -82,7 +82,6 @@ public class UserProfilePage {
    */
   public void updateBasicInformation(String firstName, String lastName, String email) {
     info("Update basic information");
-    evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     if (firstName != "" && firstName != null) {
       info("update firstname");
       $(ELEMENT_FIRST_NAME_TEXTBOX_EDIT).setValue(firstName);
@@ -122,11 +121,10 @@ public class UserProfilePage {
    * @param job
    */
   public void updateGenderJob(String gender, String job) {
-    evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
 
     if (gender != "" && gender != null) {
       info("update gender");
-      $(ELEMENT_CONTACT_GENDER_SELECTION).selectOptionByValue(gender);
+      $(byAttribute("selected","selected")).parent().waitUntil(Condition.visible,Configuration.timeout).selectOptionByValue(gender);
     }
     if (job != "" && job != null) {
       info("update job");
