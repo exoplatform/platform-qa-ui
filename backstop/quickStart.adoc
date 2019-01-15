@@ -1,0 +1,52 @@
+= UI Quality Assurance project for eXo Platform
+
+Automation Process for Visual Regression Tests on eXo Platform.
+
+== Quick start
+
+|===
+Important: The urls in command line must be like this example :
+
+http://qa-ui03.exoplatform.org/portal
+Which needs to end with "portal" and without a "/" at the end.
+|===
+=== Running tests:
+
+In order to run the tests against some specific instances we added the *url* parameter which is required and must be at the end of the command line.
+
+* Command structure in order to run all test cases for (Desktop,Mobile and Tablet):
+----
+$ backstop test --configPath=backstopTest [url]
+----
+
+* Desktop full test
+----
+$ backstop test --configPath=backstopTestDesktop [url]
+----
+
+* Mobile full test
+----
+$ backstop test --configPath=backstopTestMobile [url]
+----
+
+* Tablet full test
+----
+$ backstop test --configPath=backstopTestTablet [url]
+----
+
+=== Running specific tests
+
+* Command structure in order to run some test cases for (Desktop,Mobile and Tablet):
+----
+$ backstop test --configPath=backstopTest --filter=<scenario1.label,scenario2.label...> [url]
+----
+
+* Command structure in order to run some test cases for Mobile:
+----
+$ backstop test --configPath=backstopTestMobile --filter=<scenario1.label,scenario2.label...> [url]
+----
+
+* Command structure in order to run some test cases for Tablet:
+----
+$ backstop test --configPath=backstopTestTablet --filter=<scenario1.label,scenario2.label...> [url]
+----

@@ -1,0 +1,136 @@
+= UI Quality Assurance project for eXo Platform
+
+Automation Process for Visual Regression Tests on eXo Platform.
+
+== Overview
+
+Technical stacks required:
+
+* NodeJS 8.11.2+
+* npm 5.6.0+
+* install BackstopJS 3.2.16+
+
+== Getting Started
+
+=== BackstopJS installation
+
+----
+$ npm install -g backstopjs
+----
+
+=== BackstopJS usage
+==== Creating BackstopJS config file
+
+cd to your project's directory and run...
+----
+$ backstop init
+----
+In order to initialize a BackstopJS default configuration file and project scaffolding in your current working directory.
+
+By default, BackstopJS places backstop.json in the root of your project. And also by default, BackstopJS looks for this file when invoked.
+
+==== Creating reference files
+cd to your project's directory and run...
+----
+$ backstop refernce
+----
+This Utility command will by default delete all existing screen references and create new ones based on the referenceUrl or url config config. It will not run any file comparisons.
+
+==== Generating test bitmaps
+cd to your project's directory and run...
+----
+$ backstop test
+----
+This will create a new set of bitmaps in bitmaps_test/<timestamp>/
+
+Once the test bitmaps are generated, a report comparing the most recent test bitmaps against the current reference bitmaps will display.
+Optional parameters --config=<configFilePath> point to a specific config file --filter=<scenario.name> filter on scenario.name  use if you don't want BackstopJS do first delete all files in your reference directory.
+
+==== Approving changes
+cd to your project's directory and run...
+----
+$ backstop approve
+----
+When running this command, all images (with changes) from your most recent test batch will be promoted to your reference collection. Subsequent tests will be compared against your updated reference files.
+
+=== BackstopJS tests configuration
+In order to configure BackstopJS test we need to configure mostly two files, which are the config file backstop.json and a script file filename.js used to simulate user actions (click, scroll, hover, wait, etc.) or states (cookie values) by running the Casper.js script on ready. For each scenario, the custom .js file you specify is imported and run when the BackstopJS ready events are fulfilled.
+
+Required config properties in the backstop.json file:
+
+* id – Used for screenshot naming. 
+* viewports – An array of screen size objects, which your DOM will be tested against.
+* scenarios – This is where we set up our actual tests. The important sub properties are:
+** scenarios[n].label – Required. Also used for screenshot naming.
+** scenarios[n].url – Required. Tells BackstopJS what endpoint/document you want to test. This can be an absolute URL or local to your current working directory.
+** referenceUrl – Specify a different state or environment when creating reference.
+** onBeforeScript – Used to set up browser state e.g. cookies.
+** onReadyScript – After the above conditions are met -- use this script to modify UI state prior to screen shots e.g. hovers, clicks etc.
+** selectors – Array of selectors to capture, specifically CSS selectors. Defaults to document if omitted. Use "viewport" to capture the viewport size.
+
+Inside filename.js, structure is like this:
+----
+//onBefore example
+module.exports = function(casper, scenario, vp) {
+  // scenario is the current scenario object being run from your backstop config
+  // vp is the current viewport object being run from your backstop config
+  
+  // Example: setting cookies
+  casper.echo("Setting cookies");
+  casper.then(function(){
+    casper.page.addCookie({name: 'cookieName', value: 'cookieValue'});
+  });
+}
+
+// onReady example
+module.exports = function(casper, scenario, vp) {
+  // Example: Adding script delays to allow for things like CSS transitions to complete.
+  casper.echo( 'Clicking button' );
+  casper.click( '.toggle' );
+  casper.wait( 250 );
+  
+  // Example: changing behavior based on config values
+  if (vp.label === 'phone') {
+    casper.echo( 'doing stuff for just phone viewport here' );
+  }
+
+  // ...do other cool stuff here, see Casperjs.org for a full API and many ideas.
+}
+----
+
+==== Setting the base path for custom onBefore and onReady scripts
+By default the base path is a folder called engine_scripts inside the BackstopJS installation directory. You can override this by setting the paths.scripts property in your backstop.json file to point to somewhere in your project directory.
+----
+"paths": {
+  "engine_scripts": "backstop_data/engine_scripts"
+}
+----
+
+==== Reporting workflow tips
+One testing approach to consider is incorporating BackstopJS into the build process and just let the CLI report run on each build or before each deploy.
+
+Using the report property in the config file to enable or disable browser including/excluding the respective properties.
+
+Test report integration with a build system like Jenkins/Travis:
+
+The following settings will open a browser and write a junit report.
+
+----
+"report": ["browser", "CI"]
+----
+The regression test report will be generated in the JUnit format and the report will be placed in the given directory (default: [backstopjs dir]/test/ci_report/xunit.xml).
+
+==== Setting the bitmap and script directory paths
+By default, BackstopJS saves generated resources into the backstop_data directory in parallel with the backstop.json config file. The location of the various resource types are configurable so they can easily be moved inside or outside the source control or file sharing environment. See below for options...
+
+----
+  ...
+  "paths": {
+    "bitmaps_reference": "backstop_data/bitmaps_reference",
+    "bitmaps_test": "backstop_data/bitmaps_test",
+    "engine_scripts": "backstop_data/engine_scripts",
+    "html_report": "backstop_data/html_report",
+    "ci_report": "backstop_data/ci_report"
+  }
+  ...
+----
