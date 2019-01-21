@@ -75,15 +75,7 @@ public class SOCPeopleActivityDeleteTestIT extends Base {
      * Expected Outcome: The activity is deleted. All comments of activity are
      * deleted too.
      */
-    // get the id of the webContent created
-    String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];
-    // hover on the activity to appear the delete button
-    $(byId("ActivityContextBox" + id)).find(byClassName("dateTime")).hover();
-    // click on delete button
-    $(byId("DeleteActivityButton" + id)).click();
-    ELEMENT_DELETE_POPUP_OK.click();
-    // verify that the activity doesn't exist
-    $(byText(activity1)).shouldNot(Condition.exist);
+    activityStream.deleteactivity(activity1);
     info("the activity is removed successfully");
 
     // delete user
