@@ -145,7 +145,7 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     String comment = "comment" + getRandomNumber();
     activityStream.commentActivity(activity1, comment);
     $(byText(activity1)).parent().parent().find(byText(comment)).waitUntil(Condition.visible, Configuration.timeout);
-    manageLogInOut.signIn(username2, password);
+    manageLogInOut.signIn(username1, password);
     activityStream.deleteactivity(activity1);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
