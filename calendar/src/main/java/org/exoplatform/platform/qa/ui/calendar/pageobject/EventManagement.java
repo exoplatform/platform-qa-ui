@@ -2,8 +2,7 @@ package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.switchTo;
+import static com.codeborne.selenide.Selenide.*;
 import static org.bouncycastle.crypto.tls.ConnectionEnd.server;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_USER_CLOSE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
@@ -203,20 +202,12 @@ public class EventManagement {
     if (name != null) {
       $(ELEMENT_ADD_EDIT_EVENT_NAME).setValue(name);
     }
-    if (note != null) {
-      $(ELEMENT_ADD_EDIT_EVENT_NOTE).setValue(note);
-    }
-    if (opt.length > 0 && opt[0] != null) {
-      $(ELEMENT_ADD_EDIT_EVENT_CALENDAR).selectOption(opt[0]);
-    }
+
     if (opt.length > 1 && opt[1] != null) {
       $(ELEMENT_ADD_EDIT_EVENT_CATEGORY).selectOption(opt[1]);
     }
     if (opt.length > 2 && opt[2] != null) {
       $(ELEMENT_ADD_EDIT_EVENT_LOCATION).setValue(opt[2]);
-    }
-    if (opt.length > 3 && opt[3] != null) {
-      $(ELEMENT_ADD_EDIT_EVENT_CALENDAR).selectOption(opt[3]);
     }
   }
 
@@ -294,10 +285,10 @@ public class EventManagement {
         if (dateTimeFrom.length > 1) {
           if (opt.length > 0) {
             evt.type(ELEMENT_ADD_EDIT_EVENT_FROM_TIME_INPUT, dateTimeFrom[1], true);
-          } else {
+          } /*else {
             evt.click(ELEMENT_ADD_EDIT_EVENT_FROM_TIME_INPUT, 2);
             evt.click(ELEMENT_ADD_EDIT_EVENT_SELECT_FROM_TIME.replace("${time}", dateTimeFrom[1]));
-          }
+          }*/
         }
       }
       if ((to != null) & (to != "")) {
@@ -307,10 +298,10 @@ public class EventManagement {
         if (dateTimeTo.length > 1) {
           if (opt.length > 0) {
             evt.type(ELEMENT_ADD_EDIT_EVENT_TO_TIME_INPUT, dateTimeTo[1], true);
-          } else {
+          }/* else {
             evt.click(ELEMENT_ADD_EDIT_EVENT_TO_TIME_INPUT, 2);
             evt.click(ELEMENT_ADD_EDIT_EVENT_SELECT_TO_TIME.replace("${time}", dateTimeTo[1]));
-          }
+          }*/
         }
       }
     }
@@ -770,8 +761,8 @@ public class EventManagement {
    * @param file name of file
    */
   public void removeAttachment(String file) {
-    $(byXpath(ELEMENT_EVENT_ATTACHMENT.replace("${file}", "Remove"))).click();
-    $(byXpath(ELEMENT_EVENT_ATTACHMENT.replace("${file}", file))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    $(byTitle(file)).find(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[2]/form/div[2]/div[7]/div[2]/div/div[2]/div[2]/div[1]/div[3]/a")).click();
+   //$(byXpath(ELEMENT_EVENT_ATTACHMENT.replace("${file}", file))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
@@ -1215,17 +1206,16 @@ public class EventManagement {
   public void checkEventPopUp(){
     switchTo().activeElement();
     $(byText("Add Event")).should(Condition.exist);
-    assertEquals("Event title",$(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[2]/form/div[1]/div/input")).getAttribute("placeholder"));
-    assertEquals("All",$(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[2]/form/div[1]/div/span/select")).getText());
-    assertEquals("All day",$(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[2]/form/div[4]/div/label")).getText());
-    assertEquals("Location",$(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[2]/form/div[5]/div[1]")).getText());
-    assertEquals("Type a place address...",$(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[2]/form/div[5]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants",$(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[2]/form/div[6]/div[1]")).getText());
-    assertEquals("Participants",$(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[2]/form/div[6]/div[2]/div/div/input")).getAttribute("placeholder"));
-    assertEquals("Clear",$(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
-    assertEquals("Save",$(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
-    assertEquals("Cancel",$(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
-
+    assertEquals("Event title",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
+    assertEquals("All",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).getText());
+    assertEquals("All day",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[2]/div/label/span")).getText());
+    assertEquals("Location",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[3]/div[1]")).getText());
+    assertEquals("Type a place address...",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[3]/div[2]/input")).getAttribute("placeholder"));
+    assertEquals("Participants",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
+    assertEquals("Participants",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/div/div/input")).getAttribute("placeholder"));
+    assertEquals("Clear",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
+    assertEquals("Save",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
+    assertEquals("Cancel",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
 
   }
 }

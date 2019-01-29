@@ -8,6 +8,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -44,7 +45,7 @@ public class CalendarEventTestIT extends Base {
     calendarHomePage = new CalendarHomePage(this);
     eventManagement = new EventManagement(this);
     calendarManagement = new CalendarManagement(this);
-    manageLogInOut.signInCas(DATA_USER1, "gtngtn");
+    manageLogInOut.signInCas(username, "gtn");
   }
 
   /**
@@ -77,16 +78,15 @@ public class CalendarEventTestIT extends Base {
     calendarManagement.changeSettingCalendar(null, "(GMT +01:00) Africa/Tunis", null, null, null, null, null);
     calendarManagement.saveSetting();
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.moreDetailsEvent();
 
     info("Add attachment");
-    eventManagement.inputDataEventInDetailForm(titleEvent, content, getDate(0, "MM/dd/yyyy"), getDate(0, "MM/dd/yyyy"), false);
-    $(ELEMENT_ADD_EDIT_EVENT_NAME).click();
-    $(ELEMENT_EVENT_ADD_ATTACHMENT).click();
-    $(byClassName("uploadContainer")).find(byClassName("file")).uploadFromClasspath("eXo-Platform.png");
-    $(byClassName("progressBarFrame")).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
-    $(ELEMENT_ATTACHMENT_SAVE_BUTTON).click();
-    eventManagement.saveAddEventDetails();
+   // eventManagement.inputDataEventInDetailForm(titleEvent, content, getDate(0, "MM/dd/yyyy"), getDate(0, "MM/dd/yyyy"), false);
+    //$(ELEMENT_ADD_EDIT_EVENT_NAME).click();
+    $(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[2]/form/div[1]/div/input")).setValue(titleEvent);
+    $(byId("cal-attach-file")).uploadFromClasspath("eXo-Platform.png");
+   // $(byClassName("progressBarFrame")).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    //$(ELEMENT_ATTACHMENT_SAVE_BUTTON).click();
+    eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
                                               CalendarHomePage.selectViewOption.DAY,
                                               CalendarHomePage.selectDayOption.DETAILTIME);
@@ -99,14 +99,14 @@ public class CalendarEventTestIT extends Base {
                                                        CalendarHomePage.selectDayOption.DETAILTIME,
                                                        null);
     eventManagement.removeAttachment("eXo-Platform.png");
-    eventManagement.saveAddEventDetails();
+    eventManagement.saveQuickAddEvent();
 
     info("Delete data");
-    executeJavaScript("window.scrollBy(0,-5500)", "");
-    calendarHomePage.deleteEventTask(titleEvent,
-                                     CalendarHomePage.selectViewOption.DAY,
-                                     CalendarHomePage.selectDayOption.DETAILTIME,
-                                     null);
+   // executeJavaScript("window.scrollBy(0,-5500)", "");
+    //calendarHomePage.deleteEventTask(titleEvent,
+                                    // CalendarHomePage.selectViewOption.DAY,
+                                     //CalendarHomePage.selectDayOption.DETAILTIME,
+                                     //null);
   }
 
   @Test

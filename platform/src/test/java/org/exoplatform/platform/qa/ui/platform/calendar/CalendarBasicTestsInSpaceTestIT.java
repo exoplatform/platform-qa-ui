@@ -1,9 +1,11 @@
 package org.exoplatform.platform.qa.ui.platform.calendar;
 
 import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_BUTTON_EVENT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -64,17 +66,17 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
     spaceManagement.goToAgendaTab();
     info("Test 13 Add an event in personal calendar");
     ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.contextClick();
-    $(byClassName("createEvent")).waitUntil(Condition.visible, Configuration.timeout).click();
-    eventManagement.inputDataEventInQuickForm(titleEvent,
-                                              contentEvent,
-                                              getDate(0, "MM/dd/yyyy"),
-                                              getDate(0, "MM/dd/yyyy"),
-                                              false);
+    homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT),Condition.visible,1000);
+    eventManagement.goToAddEventFromActionBar();
+    eventManagement.checkEventPopUp();
+    info("Add event");
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).setValue(titleEvent);
     eventManagement.saveQuickAddEvent();
-    executeJavaScript("window.scrollBy(0,-2000)", "");
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
-                                              CalendarHomePage.selectViewOption.LIST,
-                                              CalendarHomePage.selectDayOption.DETAILTIME);
+            CalendarHomePage.selectViewOption.DAY,
+            CalendarHomePage.selectDayOption.DETAILTIME);
+
+
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
   }

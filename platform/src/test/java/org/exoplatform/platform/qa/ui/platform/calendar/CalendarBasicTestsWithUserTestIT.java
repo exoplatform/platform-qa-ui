@@ -1,9 +1,9 @@
 package org.exoplatform.platform.qa.ui.platform.calendar;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_BUTTON_EVENT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_NEXT_RIGHT_LIST_DAY_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -170,17 +170,13 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     calendarManagement.saveAddCalendar();
     calendarManagement.executeActionCalendar(calendar, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     info("Check default date");
-    eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
-    eventManagement.inputDataEventInQuickForm(titleEvent,
-                                              contentEvent,
-                                              getDate(0, "MM/dd/yyyy"),
-                                              getDate(0, "MM/dd/yyyy"),
-                                              false);
+    eventManagement.checkEventPopUp();
+    info("Add event");
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).setValue(titleEvent);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
-                                              CalendarHomePage.selectViewOption.LIST,
-                                              CalendarHomePage.selectDayOption.DETAILTIME);
-
+            CalendarHomePage.selectViewOption.DAY,
+            CalendarHomePage.selectDayOption.DETAILTIME);
     info("Test 15 Delete an Event in personal calendar");
 
     calendarHomePage.deleteEventTask(titleEvent,
@@ -228,7 +224,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
                                                getDate(0, "MM/dd/yyyy"),
                                                getDate(0, "MM/dd/yyyy"),
                                                false);
-    eventManagement.saveAddEventDetails();
+    eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent2,
                                               CalendarHomePage.selectViewOption.LIST,
                                               CalendarHomePage.selectDayOption.DETAILTIME);
@@ -288,12 +284,9 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     calendarManagement.saveAddCalendar();
     calendarManagement.executeActionCalendar(calendar, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     info("Check default date");
-    eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
-    eventManagement.inputDataEventInQuickForm(titleEvent,
-                                              contentEvent,
-                                              getDate(0, "MM/dd/yyyy"),
-                                              getDate(0, "MM/dd/yyyy"),
-                                              false);
+    eventManagement.checkEventPopUp();
+    info("Add event");
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).setValue(titleEvent);
     eventManagement.saveQuickAddEvent();
     $(byText(titleEvent)).should(Condition.exist);
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
@@ -316,7 +309,6 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     info("Create a new category");
     String categoryName = "categoryName" + getRandomNumber();
     homePagePlatform.goToCalendarPage();
-    calendarManagement.addEventCategory(categoryName);
 
     info("Create a new calendar");
     String calendar = "calendar" + getRandomNumber();
@@ -329,23 +321,18 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     info("Add an Event");
     String titleEvent = "titleEvent" + getRandomNumber();
     String content = "content" + getRandomNumber();
+    homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT),Condition.visible,1000);
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.inputDataEventInQuickForm(titleEvent, content, null, null, false, calendar);
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).setValue(titleEvent);
     eventManagement.saveQuickAddEvent();
 
     String titleEvent2 = "titleEvent2" + getRandomNumber();
     calendarManagement.openEditEventTaskPopup(titleEvent, CalendarHomePage.selectViewOption.LIST);
-    eventManagement.inputDataEventInDetailForm(titleEvent2, titleEvent2, null, null, false, null, categoryName);
-    eventManagement.saveAddEventDetails();
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).setValue(titleEvent2);
+    eventManagement.saveQuickAddEvent();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.LIST);
-    if (($(byText(titleEvent2)).is(Condition.not(Condition.exist)))) {
-      ELEMENT_NEXT_RIGHT_LIST_DAY_BUTTON.click();
       $(byText(titleEvent2)).waitUntil(Condition.appears, Configuration.timeout);
-    } else {
-      $(byText(titleEvent2)).waitUntil(Condition.appears, Configuration.timeout);
-    }
     calendarManagement.deleteCalendar(calendar);
-    calendarManagement.deleteEventCategory(categoryName);
   }
 
   @Test

@@ -893,19 +893,9 @@ public class CalendarManagement {
 
     } else {
       info("Double click on the event");
-      // scrollElementIntoView(this.testBase.getExoWebDriver().getWebDriver()
-      // .findElement(By.xpath(ELEMENT_EVENT_TASK_TITLE.replace("${name}",
-      // name))));
-      // action.moveToElement(evt.waitForAndGetElement(ELEMENT_EVENT_TASK_TITLE.replace("${name}",
-      // name))).doubleClick().perform();
-      if (($(byText(name)).is(Condition.not(Condition.exist)))) {
-        ELEMENT_NEXT_RIGHT_LIST_DAY_BUTTON.click();
         ELEMENT_POUPUP_LIST_EVENT.find(byText(name)).doubleClick();
-      } else {
-        ELEMENT_POUPUP_LIST_EVENT.find(byText(name)).doubleClick();
-      }
     }
-    $(ELEMENT_ADD_EDIT_EVENT_POPUP).waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_EVENT_DRAWER.waitUntil(Condition.appears, Configuration.timeout);
     info("The edit form is shown");
   }
 
