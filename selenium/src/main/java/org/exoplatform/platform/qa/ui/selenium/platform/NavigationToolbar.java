@@ -284,7 +284,7 @@ public class NavigationToolbar {
   public void goToSpaceAdminstration() {
     $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-    $(byAttribute("href", "/portal/g/:platform:administrators/spacesAdministration")).click();
+    $(byAttribute("href", "/portal/g/:platform:users/spacesAdministration")).click();
   }
 
   /**

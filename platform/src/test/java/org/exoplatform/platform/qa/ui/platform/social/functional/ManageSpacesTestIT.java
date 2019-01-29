@@ -1,35 +1,28 @@
 package org.exoplatform.platform.qa.ui.platform.social.functional;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.core.PLFData;
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
-import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
-import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
-import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
-import static com.codeborne.selenide.Selenide.switchTo;
-import static org.exoplatform.platform.qa.ui.core.PLFData.*;
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.core.PLFData.PASS_ROOT;
+import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_NOTIFICATION_DROPDOWN;
-import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_MY_SPACE_SEARCH_BTN;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_MY_SPACE_SEARCH_TEXT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
 @Tag("functional")
 @Tag("social")
 public class ManageSpacesTestIT extends Base {
@@ -37,9 +30,6 @@ public class ManageSpacesTestIT extends Base {
     ManageLogInOut manageLogInOut;
     HomePagePlatform homePagePlatform;
     SpaceManagement spaceManagement;
-    AddUsers addUsers;
-    SpaceHomePage spaceHomePage;
-    SpaceSettingManagement spaceSettingManagement;
 
     @BeforeEach
     public void setupBeforeMethod() {
@@ -47,20 +37,14 @@ public class ManageSpacesTestIT extends Base {
         navigationToolbar = new NavigationToolbar(this);
         manageLogInOut = new ManageLogInOut(this);
         homePagePlatform = new HomePagePlatform(this);
-        manageLogInOut.signInCas(DATA_USER1, DATA_PASS2);
+        manageLogInOut.signInCas(username, PASS_ROOT);
         spaceManagement = new SpaceManagement(this);
-        addUsers = new AddUsers(this);
-        spaceHomePage = new SpaceHomePage(this);
-        spaceSettingManagement = new SpaceSettingManagement(this);
     }
 
     @Test
     public void test01_CheckTheNewSpacesSubmenuInTheAdministrationMenu() {
         info("Test 1: CheckTheNewSpacesSubmenuInTheAdministrationMenu");
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-        $(byAttribute("href", "/portal/g/:platform:administrators/spacesAdministration")).waitUntil(Condition.visible, Configuration.timeout);
-
+        navigationToolbar.goToSpaceAdminstration();
     }
 
     @Test
@@ -72,17 +56,16 @@ public class ManageSpacesTestIT extends Base {
         spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
         info("Test 1: CheckElementsInTheManageSpacesTab");
         navigationToolbar.goToSpaceAdminstration();
-        $(byClassName("uiGrid")).find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("uiGrid")).find(byText(spaceDesa)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("uiIconDeleteUser")).waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_GRID.find(byText(spaceDesa)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_EDITSPACE_MANAGE_ICON.waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_DELETESPACE_MANAGE_ICON.waitUntil(Condition.visible, Configuration.timeout);
         homePagePlatform.goToMySpaces();
         spaceManagement.deleteSpace(spaceNamea, false);
     }
 
     @Test
     public void test03_CheckThatNothingHappensWhenClickOnSpacesNameAndAvatar() {
-
         info("create some spaces");
         String spaceNamea = "spaceNamea" + getRandomNumber();
         String spaceDesa = "descriptiona" + getRandomNumber();
@@ -90,18 +73,16 @@ public class ManageSpacesTestIT extends Base {
         spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
         info("CheckThatNothingHappensWhenClickOnSpacesNameAndAvatar");
         navigationToolbar.goToSpaceAdminstration();
-        $(byAttribute("src", "/eXoSkin/skin/images/system/SpaceAvtDefault.png")).hover().click();
+        ELEMENT_SPACEAVATAR_DEFAULT.hover().click();
         homePagePlatform.goToMySpaces();
         spaceManagement.deleteSpace(spaceNamea, false);
-
     }
 
     @Test
     public void test04_CheckTheDisplayOfTheFilterFieldAboveTheSpaceManagementTable() {
-
         info("CheckTheDisplayOfTheFilterFieldAboveTheSpaceManagementTable");
         navigationToolbar.goToSpaceAdminstration();
-        $(byClassName("showInputSearch")).waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_SEARCH_ICON.waitUntil(Condition.visible, Configuration.timeout);
     }
 
     @Test
@@ -112,10 +93,9 @@ public class ManageSpacesTestIT extends Base {
         homePagePlatform.goToMySpaces();
         spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
         navigationToolbar.goToSpaceAdminstration();
-        $(byClassName("uiGrid")).find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("uiIconDeleteUser")).waitUntil(Condition.visible, Configuration.timeout).click();
-        $(byClassName("modal-content")).find(byClassName("btn-primary")).click();
-
+        ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_DELETESPACE_MANAGE_ICON.waitUntil(Condition.visible, Configuration.timeout).click();
+        ELEMENT_SPACEMANAGEMENT_CANCEL_POPUP.click();
     }
 
     @Test
@@ -126,10 +106,9 @@ public class ManageSpacesTestIT extends Base {
         homePagePlatform.goToMySpaces();
         spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
         navigationToolbar.goToSpaceAdminstration();
-        $(byClassName("uiGrid")).find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("uiIconDeleteUser")).waitUntil(Condition.visible, Configuration.timeout).click();
-        $(byClassName("modal-content")).find(byClassName("uiIconClose")).click();
-
+        ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_DELETESPACE_MANAGE_ICON.waitUntil(Condition.visible, Configuration.timeout).click();
+        ELEMENT_SPACEMANAGEMENT_ClOSE_POPUP.click();
     }
 
     @Test
@@ -140,14 +119,14 @@ public class ManageSpacesTestIT extends Base {
         homePagePlatform.goToMySpaces();
         spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
         navigationToolbar.goToSpaceAdminstration();
-        $(byText("Manage Spaces")).click();
-        $(byClassName("uiGrid")).find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("uiIconDeleteUser")).waitUntil(Condition.visible, Configuration.timeout).click();
-        $(byText("Do you confirm the delete of this space ?")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("modal-content")).find(byClassName("btn-primary")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("modal-content")).find(byClassName("btn")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("modal-content")).find(byClassName("uiIconClose")).click();
+        ELEMENT_SPACE_MANAGEMENT_SECTION.click();
+        ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_EDITSPACE_MANAGE_ICON.waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_DELETESPACE_MANAGE_ICON.waitUntil(Condition.visible, Configuration.timeout).click();
+        $(byText("Do you confirm the deletion of this space ?")).waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACEMANAGEMENT_CANCEL_POPUP.waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACEMANAGEMENT_POPUP.waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACEMANAGEMENT_ClOSE_POPUP.click();
         homePagePlatform.goToMySpaces();
         spaceManagement.deleteSpace(spaceNamea, false);
     }
@@ -160,16 +139,15 @@ public class ManageSpacesTestIT extends Base {
         homePagePlatform.goToMySpaces();
         spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
         navigationToolbar.goToSpaceAdminstration();
-        $(byClassName("uiGrid")).find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("uiIconDeleteUser")).waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_EDITSPACE_MANAGE_ICON.waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_DELETESPACE_MANAGE_ICON.waitUntil(Condition.visible, Configuration.timeout);
         homePagePlatform.goToMySpaces();
         spaceManagement.deleteSpace(spaceNamea, false);
     }
 
     @Test
     public void test09_CheckTheExistanceOfTheSpacesInTheManageSpacesTab() {
-
         String spaceNamea = "spaceNamea" + getRandomNumber();
         String spaceDesa = "descriptiona" + getRandomNumber();
         String spaceNameb = "spaceNameb" + getRandomNumber();
@@ -183,10 +161,10 @@ public class ManageSpacesTestIT extends Base {
         homePagePlatform.goToMySpaces();
         spaceManagement.addNewSpaceSimple(spaceNamec, spaceDesc);
         navigationToolbar.goToSpaceAdminstration();
-        $(byText("Manage Spaces")).click();
-        $(byClassName("uiGrid")).find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("uiGrid")).find(byText(spaceNameb)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("uiGrid")).find(byText(spaceNamec)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        $(byText("Manage spaces")).click();
+        ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_GRID.find(byText(spaceNameb)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_GRID.find(byText(spaceNamec)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
         homePagePlatform.goToMySpaces();
         spaceManagement.deleteSpace(spaceNamea, false);
         spaceManagement.deleteSpace(spaceNameb, false);
@@ -205,11 +183,9 @@ public class ManageSpacesTestIT extends Base {
         spaceManagement.addNewSpaceSimple(spaceNameb, spaceDesb);
         homePagePlatform.goToMySpaces();
         spaceManagement.deleteSpace(spaceNamea, false);
-        spaceManagement.deleteSpace(spaceNameb, false);
         navigationToolbar.goToSpaceAdminstration();
-        $(byText("Manage Spaces")).click();
-        $(byClassName("uiGrid")).find(byText("Empty data")).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-
+        ELEMENT_SPACE_MANAGEMENT_SECTION.click();
+        ELEMENT_SPACE_GRID.find(byText("No spaces")).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
     }
 
     @Test
@@ -223,66 +199,17 @@ public class ManageSpacesTestIT extends Base {
         homePagePlatform.goToMySpaces();
         spaceManagement.addNewSpaceSimple(spaceNameb, spaceDesb);
         navigationToolbar.goToSpaceAdminstration();
-        $(byText("Manage Spaces")).click();
-        $(byClassName("uiGrid")).find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("uiGrid")).find(byText(spaceNameb)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_MANAGEMENT_SECTION.click();
+        ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_GRID.find(byText(spaceNameb)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
         homePagePlatform.goToMySpaces();
         spaceManagement.deleteSpace(spaceNamea, false);
         navigationToolbar.goToSpaceAdminstration();
-        $(byText("Manage Spaces")).click();
+        ELEMENT_SPACE_MANAGEMENT_SECTION.click();
         refresh();
-        $(byClassName("uiGrid")).find(byText(spaceNamea)).parent().parent().waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+        ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().waitUntil(Condition.not(Condition.visible), Configuration.timeout);
         homePagePlatform.goToMySpaces();
         spaceManagement.deleteSpace(spaceNameb, false);
-    }
-
-    @Test
-    public void test12_ThelistOfSpaceWillBeUpdatedOnlyWhenRefreshTheSpaceManagementPage() {
-
-        String spaceNamea = "spaceNamea" + getRandomNumber();
-        String spaceDesa = "descriptiona" + getRandomNumber();
-        String spaceNameb = "spaceNameb" + getRandomNumber();
-        String spaceDesb = "descriptionb" + getRandomNumber();
-        String spaceNamec = "spaceNamec" + getRandomNumber();
-        String spaceDesc = "descriptionc" + getRandomNumber();
-        String spaceNamed = "spaceNamed" + getRandomNumber();
-        String spaceDesd = "descriptiond" + getRandomNumber();
-        homePagePlatform.goToMySpaces();
-        spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
-        homePagePlatform.goToMySpaces();
-        spaceManagement.addNewSpaceSimple(spaceNameb, spaceDesb);
-        homePagePlatform.goToMySpaces();
-        spaceManagement.addNewSpaceSimple(spaceNamec, spaceDesc);
-        navigationToolbar.goToSpaceAdminstration();
-        $(byText("Manage Spaces")).click();
-        $(byClassName("uiGrid")).find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("uiGrid")).find(byText(spaceNameb)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("uiGrid")).find(byText(spaceNamec)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-        switchTo().defaultContent();
-        manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-        homePagePlatform.goToMySpaces();
-        spaceManagement.addNewSpaceSimple(spaceNamed, spaceDesd);
-        spaceHomePage.goToSpaceSettingTab();
-        spaceSettingManagement.goToMemberTab();
-        ELEMENT_INPUT_INVITE_USER.sendKeys(PLFData.DATA_USER1);
-        $(ELEMENT_SPACE_BTN_INVITE).click();
-        manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
-        homePagePlatform.goToMySpaces();
-        spaceManagement.goToInvitationsReceivedTab();
-        spaceManagement.acceptAInvitation(spaceNamed);
-        navigationToolbar.goToSpaceAdminstration();
-        $(byText("Manage Spaces")).click();
-        $(byClassName("uiGrid")).find(byText(spaceDesd)).parent().parent().waitUntil(Condition.not(Condition.visible), Configuration.timeout);
-        refresh();
-        $(byClassName("uiGrid")).find(byText(spaceDesd)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-        homePagePlatform.goToMySpaces();
-        spaceManagement.deleteSpace(spaceNamea, false);
-        spaceManagement.deleteSpace(spaceNameb, false);
-        spaceManagement.deleteSpace(spaceNamec, false);
-        manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-        homePagePlatform.goToMySpaces();
-        spaceManagement.deleteSpace(spaceNamed, false);
-
     }
 
     @Test
@@ -292,17 +219,16 @@ public class ManageSpacesTestIT extends Base {
         homePagePlatform.goToMySpaces();
         spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
         navigationToolbar.goToSpaceAdminstration();
-        $(byText("Manage Spaces")).click();
-        $(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout).click();
+        ELEMENT_SPACE_MANAGEMENT_SECTION.click();
+        ELEMENT_EDITSPACE_MANAGE_ICON.waitUntil(Condition.visible, Configuration.timeout).click();
         switchTo().window(1);
-        $(byId("UISpaceSetting")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byId("displayName")).setValue(spaceNamea + "zfzff");
-        $(byId("description")).setValue(spaceDesa + "zfzff");
+        ELEMENT_SPACE_SETTING_PAGE.waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_NAME_PAGE.setValue(spaceNamea + "zfzff");
+        ELEMENT_SPACE_DESCRIPTION_PAGE.setValue(spaceDesa + "zfzff");
         $(ELEMENET_SPACE_UPDATE_SAVE_BTN).click();
         switchTo().window(0);
         homePagePlatform.goToMySpaces();
         spaceManagement.deleteSpace(spaceNamea + "zfzff", false);
-
     }
 
     @Test
@@ -312,17 +238,15 @@ public class ManageSpacesTestIT extends Base {
         homePagePlatform.goToMySpaces();
         spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
         navigationToolbar.goToSpaceAdminstration();
-        $(byText("Manage Spaces")).click();
-        $(byClassName("uiGrid")).find(byText(spaceNamea)).parent().parent().click();
-        $(byClassName("uiGrid")).find(byClassName("avatar")).parent().parent().click();
+        ELEMENT_SPACE_MANAGEMENT_SECTION.click();
+        ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().click();
+        ELEMENT_SPACE_GRID.find(byClassName("avatar")).parent().parent().click();
         homePagePlatform.goToMySpaces();
         spaceManagement.deleteSpace(spaceNamea, false);
-
     }
 
     @Test
     public void test15_SpacesFilteredByItsDescription() {
-
         String spaceNamea = "spaceNamea" + getRandomNumber();
         String spaceDesa = "spaceDesa" + getRandomNumber();
         String spaceNameb = "spaceNameb" + getRandomNumber();
@@ -333,13 +257,15 @@ public class ManageSpacesTestIT extends Base {
         spaceManagement.addNewSpaceSimple(spaceNameb, spaceDesb);
         homePagePlatform.goToMySpaces();
         navigationToolbar.goToSpaceAdminstration();
-        $(byText("Manage Spaces")).click();
-        $(byClassName("showInputSearch")).waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_MANAGEMENT_SECTION.click();
+        ELEMENT_SPACE_SEARCH_ICON.waitUntil(Condition.visible, Configuration.timeout);
         info("Input the space into search text box");
-        $(byClassName("showInputSearch")).setValue(spaceDesa);
-        $(byClassName("showInputSearch")).click();
-        $(byClassName("uiGrid")).find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("uiGrid")).find(byText(spaceNameb)).parent().parent().waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+        ELEMENT_SPACE_SEARCH_ICON.setValue(spaceDesa);
+        ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_GRID.find(byText(spaceNameb)).parent().parent().waitUntil((Condition.visible), Configuration.timeout);
+        ELEMENT_SPACE_SEARCH_ICON.click();
+        ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_GRID.find(byText(spaceNameb)).parent().parent().waitUntil((Condition.visible), Configuration.timeout);
         homePagePlatform.goToMySpaces();
         spaceManagement.deleteSpace(spaceNamea, false);
         spaceManagement.deleteSpace(spaceNameb, false);
@@ -357,13 +283,13 @@ public class ManageSpacesTestIT extends Base {
         spaceManagement.addNewSpaceSimple(spaceNameb, spaceDesb);
         homePagePlatform.goToMySpaces();
         navigationToolbar.goToSpaceAdminstration();
-        $(byText("Manage Spaces")).click();
-        $(byClassName("showInputSearch")).waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_MANAGEMENT_SECTION.click();
+        ELEMENT_SPACE_SEARCH_ICON.waitUntil(Condition.visible, Configuration.timeout);
         info("Input the space into search text box");
-        $(byClassName("showInputSearch")).setValue(spaceNamea);
-        $(byClassName("showInputSearch")).click();
-        $(byClassName("uiGrid")).find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("uiGrid")).find(byText(spaceNameb)).parent().parent().waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+        ELEMENT_SPACE_SEARCH_ICON.setValue(spaceNamea);
+        ELEMENT_SPACE_SEARCH_ICON.click();
+        ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_GRID.find(byText(spaceNameb)).parent().parent().is(Condition.not(Condition.visible));
         homePagePlatform.goToMySpaces();
         spaceManagement.deleteSpace(spaceNamea, false);
         spaceManagement.deleteSpace(spaceNameb, false);
@@ -388,14 +314,14 @@ public class ManageSpacesTestIT extends Base {
         spaceManagement.addNewSpaceSimple(spaceNamed, spaceDesd);
         homePagePlatform.goToMySpaces();
         navigationToolbar.goToSpaceAdminstration();
-        $(byText("Manage Spaces")).click();
-        $(byClassName("showInputSearch")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("showInputSearch")).setValue(spaceDesa);
-        $(byClassName("showInputSearch")).click();
-        $(byClassName("uiGrid")).find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("uiGrid")).find(byText(spaceNamed)).parent().parent().waitUntil(Condition.not(Condition.visible), Configuration.timeout);
-        $(byClassName("uiGrid")).find(byText(spaceNameb)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("uiGrid")).find(byText(spaceNamec)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_MANAGEMENT_SECTION.click();
+        ELEMENT_SPACE_SEARCH_ICON.waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_SEARCH_ICON.setValue(spaceDesa);
+        ELEMENT_SPACE_SEARCH_ICON.click();
+        ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_GRID.find(byText(spaceNamed)).parent().parent().waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+        ELEMENT_SPACE_GRID.find(byText(spaceNameb)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_GRID.find(byText(spaceNamec)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
         homePagePlatform.goToMySpaces();
         spaceManagement.deleteSpace(spaceNamea, false);
         spaceManagement.deleteSpace(spaceNameb, false);
@@ -405,7 +331,6 @@ public class ManageSpacesTestIT extends Base {
 
     @Test
     public void test18_CheckDisplayofPaginationWhenSpaceAdministrationContainsMoreThan30Spaces() {
-
         ArrayList<String> spaceList = new ArrayList<String>();
         spaceList.add("space" + getRandomNumber());
         spaceList.add("space2" + getRandomNumber());
@@ -437,13 +362,13 @@ public class ManageSpacesTestIT extends Base {
         spaceList.add("space28" + getRandomNumber());
         spaceList.add("space29" + getRandomNumber());
         spaceList.add("space30" + getRandomNumber());
-
-        for (int i = 0; i < 30; i++) {
+        spaceList.add("space31" + getRandomNumber());
+        for (int i = 0; i < 31; i++) {
             homePagePlatform.goToMySpaces();
             spaceManagement.addNewSpaceSimple(spaceList.get(i), "");
         }
         navigationToolbar.goToSpaceAdminstration();
-        $(byText("Manage Spaces")).click();
+        ELEMENT_SPACE_MANAGEMENT_SECTION.click();
         $(byClassName("pagination")).find(byClassName("active")).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
         for (int i = 0; i < 30; i++) {
             homePagePlatform.goToMySpaces();
@@ -453,7 +378,6 @@ public class ManageSpacesTestIT extends Base {
 
     @Test
     public void test19_Only30SpacesDisplayedByDefaultPerView() {
-
         ArrayList<String> spaceList = new ArrayList<String>();
         spaceList.add("space" + getRandomNumber());
         spaceList.add("space2" + getRandomNumber());
@@ -484,13 +408,12 @@ public class ManageSpacesTestIT extends Base {
         spaceList.add("space27" + getRandomNumber());
         spaceList.add("space28" + getRandomNumber());
         spaceList.add("space29" + getRandomNumber());
-
         for (int i = 0; i < 29; i++) {
             homePagePlatform.goToMySpaces();
             spaceManagement.addNewSpaceSimple(spaceList.get(i), "");
         }
         navigationToolbar.goToSpaceAdminstration();
-        $(byText("Manage Spaces")).click();
+        ELEMENT_SPACE_MANAGEMENT_SECTION.click();
         $(byClassName("pagination")).find(byClassName("active")).parent().parent().waitUntil(Condition.not(Condition.visible), Configuration.timeout);
         for (int i = 0; i < 29; i++) {
             homePagePlatform.goToMySpaces();
@@ -498,36 +421,35 @@ public class ManageSpacesTestIT extends Base {
         }
     }
 
-    //Bug
+    @BugInPLF("SOC-6152")
     @Test
     public void test20_SpaceInformationUpdatedOnlyWhenRefreshTheSpaceManagementPage() {
-
         String spaceNamea = "spaceNamea" + getRandomNumber();
         String spaceDesa = "spaceDesa" + getRandomNumber();
         homePagePlatform.goToMySpaces();
         spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
         navigationToolbar.goToSpaceAdminstration();
-        $(byText("Manage Spaces")).click();
-        $(byClassName("uiGrid")).find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("uiGrid")).find(byText(spaceDesa)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("uiIconDeleteUser")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout).click();
+        ELEMENT_SPACE_MANAGEMENT_SECTION.click();
+        ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_GRID.find(byText(spaceDesa)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_DELETESPACE_MANAGE_ICON.waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_EDITSPACE_MANAGE_ICON.waitUntil(Condition.visible, Configuration.timeout).click();
         switchTo().window(1);
-        $(byId("UISpaceSetting")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byId("displayName")).setValue(spaceNamea + "zfzff");
-        $(byId("description")).setValue(spaceDesa + "zfzff");
+        ELEMENT_SPACE_SETTING_PAGE.waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_NAME_PAGE.setValue(spaceNamea + "zfzff");
+        ELEMENT_SPACE_DESCRIPTION_PAGE.setValue(spaceDesa + "zfzff");
         $(ELEMENET_SPACE_UPDATE_SAVE_BTN).click();
         switchTo().window(0);
         navigationToolbar.goToSpaceAdminstration();
-        $(byClassName("uiGrid")).find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("uiGrid")).find(byText(spaceDesa)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_GRID.find(byText(spaceDesa)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
         refresh();
-        $(byClassName("uiGrid")).find(byText(spaceNamea + "zfzff")).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("uiGrid")).find(byText(spaceDesa + "zfzff")).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_GRID.find(byText(spaceNamea + "zfzff")).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_GRID.find(byText(spaceDesa + "zfzff")).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
         homePagePlatform.goToMySpaces();
         spaceManagement.deleteSpace(spaceNamea + "zfzff", false);
     }
-    //Bug
+
     @Test
     public void test21_CheckTheOrderOfTheCreatedSpaces() {
         String spaceName1 = "spaceNamea" + getRandomNumber();
@@ -543,17 +465,15 @@ public class ManageSpacesTestIT extends Base {
         homePagePlatform.goToMySpaces();
         spaceManagement.addNewSpaceSimple(spaceName4, "");
         navigationToolbar.goToSpaceAdminstration();
-        $(byText("Manage Spaces")).click();
-        $(byClassName("UIRowContainer")).findAll(byClassName("tab-content")).get(0).find(byText(spaceName4)).should(Condition.exist);
-      // $(byClassName("UIRowContainer")).findAll(byClassName("tab-content")).get(1).find(byText(spaceName3)).should(Condition.exist);
-       // $(byClassName("UIRowContainer")).findAll(byClassName("tab-content")).get(2).find(byText(spaceName2)).should(Condition.exist);
-       //$(byClassName("UIRowContainer")).findAll(byClassName("tab-content")).get(3).find(byText(spaceName1)).should(Condition.exist);
+        ELEMENT_SPACE_MANAGEMENT_SECTION.click();
+        ELEMENT_ROW_CONTAINER_INDEX3.parent().parent().find(byText(spaceName1)).should(Condition.exist);
+        ELEMENT_ROW_CONTAINER_INDEX2.parent().parent().find(byText(spaceName2)).should(Condition.exist);
+        ELEMENT_ROW_CONTAINER_INDEX1.parent().parent().find(byText(spaceName3)).should(Condition.exist);
+        ELEMENT_ROW_CONTAINER_INDEX0.parent().parent().find(byText(spaceName4)).should(Condition.exist);
         homePagePlatform.goToMySpaces();
         spaceManagement.deleteSpace(spaceName1, false);
         spaceManagement.deleteSpace(spaceName2, false);
         spaceManagement.deleteSpace(spaceName3, false);
         spaceManagement.deleteSpace(spaceName4, false);
     }
-
-
 }

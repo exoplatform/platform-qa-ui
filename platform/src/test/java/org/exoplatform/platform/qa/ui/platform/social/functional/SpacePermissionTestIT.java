@@ -12,13 +12,11 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 
@@ -44,9 +42,9 @@ public class SpacePermissionTestIT extends Base {
     @Test
     public void test01_CheckPermissionTableInTheSpaceManagementPage() {
         navigationToolbar.goToSpaceAdminstration();
-        $(byText("Permissions")).click();
-        $(byText("Create spaces")).parent().parent().find(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byText("Manage spaces")).parent().parent().find(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_PERMISSIONS_SECTION.click();
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_MANAGEMENT_SECTION.parent().parent().parent().find(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout);
     }
 
     /**
@@ -55,43 +53,143 @@ public class SpacePermissionTestIT extends Base {
     @Test
     public void test02_CheckTheFirstColumnPermissions() {
         navigationToolbar.goToSpaceAdminstration();
-        $(byText("Permissions")).click();
-        $(byText("Create spaces")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byText("Manage spaces")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byText("Create spaces")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byText("Ability to create spaces")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byText("Ability to edit spaces")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byText("Create spaces")).parent().parent().find(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byText("Manage spaces")).parent().parent().find(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_PERMISSIONS_SECTION.click();
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_MANAGEMENT_SECTION.waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_PERMISSIONS_SECTION_Ability_SPACE.waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_PERMISSIONS_SECTION_Ability_EDIT_SPACE.waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_MANAGEMENT_SECTION.parent().parent().parent().find(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout);
 
     }
 
     @Test
     public void test03_CheckTheChangeOfEditbuttonWhenClickingOnIt() {
         navigationToolbar.goToSpaceAdminstration();
-        $(byText("Permissions")).click();
+        ELEMENT_PERMISSIONS_SECTION.click();
         $(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout).click();
         $(byClassName("uiIconSave")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byClassName("uiIconClose")).waitUntil(Condition.visible, Configuration.timeout);
+        $(byClassName("uiIconClose")).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
     }
 
     @Test
     public void test04_NoAssignmentDisplayedWhenNoPermission() {
         navigationToolbar.goToSpaceAdminstration();
-        $(byText("Permissions")).click();
-        $(byText("Create spaces")).parent().parent().find(byText("No assignement")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byText("Manage spaces")).parent().parent().find(byText("No assignement")).waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_PERMISSIONS_SECTION.click();
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byText("No assignment")).waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_SPACE_MANAGEMENT_SECTION.parent().parent().parent().find(byText("No assignment")).waitUntil(Condition.visible, Configuration.timeout);
 
     }
-    //Bug
-    @Test
-    public void test05_TheAdministratorCanOnlyEditASinglePermissionAtSameTime(){
 
+    @Test
+    public void test05_CheckFormatWhenAddGroupForPermission() {
         navigationToolbar.goToSpaceAdminstration();
-        $(byText("Permissions")).click();
-        $(byText("Create spaces")).parent().parent().find(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byText("Manage spaces")).parent().parent().find(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout);
-        $(byText("Create spaces")).parent().parent().find(byClassName("uiIconEdit")).click();
-        $(byText("Manage spaces")).parent().parent().find(byClassName("uiIconEdit")).waitUntil(Condition.disabled, Configuration.timeout);
+        ELEMENT_PERMISSIONS_SECTION.click();
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout).click();
+        ELEMENT_PERMISSIONS_SECTION_Ability_SPACE.parent().parent().find(byClassName("selectize-control")).find(byAttribute("type", "text")).click();
+        ELEMENT_PERMISSIONS_SECTION_Ability_SPACE.parent().parent().find(byClassName("selectize-control")).find(byAttribute("type", "text")).sendKeys("users");
+        homePagePlatform.refreshUntil($(byText("Create spaces")), Condition.visible, 1000);
+        ELEMENT_PERMISSIONS_SECTION_Ability_SPACE.parent().parent().find(byClassName("selectize-control")).find(byAttribute("type", "text")).pressEnter();
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byClassName("uiIconSave")).click();
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byText("*:/platform/users")).waitUntil(Condition.visible, Configuration.timeout);
+    }
+
+    //Ce cas de test couvre et sp11 et sp07
+    @Test
+    public void test07_CheckTheThirdColumnOfPermissionsTable() {
+        info("create some spaces");
+        String spaceNamea = "spaceNamea" + getRandomNumber();
+        String spaceDesa = "descriptiona" + getRandomNumber();
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
+        navigationToolbar.goToSpaceAdminstration();
+        ELEMENT_PERMISSIONS_SECTION.click();
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout).click();
+        ELEMENT_PERMISSIONS_SECTION_Ability_SPACE.parent().parent().find(byClassName("selectize-control")).find(byAttribute("type", "text")).click();
+        ELEMENT_PERMISSIONS_SECTION_Ability_SPACE.parent().parent().find(byClassName("selectize-control")).find(byAttribute("type", "text")).sendKeys("users");
+        homePagePlatform.refreshUntil($(byText("Create spaces")), Condition.visible, 1000);
+        ELEMENT_PERMISSIONS_SECTION_Ability_SPACE.parent().parent().find(byClassName("selectize-control")).find(byAttribute("type", "text")).pressEnter();
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byClassName("uiIconSave")).click();
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byText("*:/platform/users")).waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout).click();
+        ELEMENT_PERMISSIONS_SECTION_Ability_SPACE.parent().parent().find(byClassName("selectize-control")).find(byAttribute("type", "text")).click();
+        ELEMENT_PERMISSIONS_SECTION_Ability_SPACE.parent().parent().find(byClassName("selectize-control")).find(byAttribute("type", "text")).sendKeys("administrators");
+        homePagePlatform.refreshUntil($(byText("Create spaces")), Condition.visible, 1000);
+        ELEMENT_PERMISSIONS_SECTION_Ability_SPACE.parent().parent().find(byClassName("selectize-control")).find(byAttribute("type", "text")).pressEnter();
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byClassName("uiIconSave")).click();
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byText("*:/platform/administrators")).waitUntil(Condition.visible, Configuration.timeout);
+    }
+
+    @Test
+    public void test08_CheckTheChangeOfEditButtonWhenClickingOnIt() {
+        info("create some spaces");
+        String spaceNamea = "spaceNamea" + getRandomNumber();
+        String spaceDesa = "descriptiona" + getRandomNumber();
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
+        navigationToolbar.goToSpaceAdminstration();
+        ELEMENT_PERMISSIONS_SECTION.click();
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout).click();
+        ELEMENT_PERMISSIONS_SECTION_Ability_SPACE.parent().parent().find(byClassName("selectize-control")).find(byAttribute("type", "text")).click();
+        homePagePlatform.refreshUntil($(byText("Create spaces")), Condition.visible, 1000);
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byClassName("uiIconSave")).waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byClassName("uiIconClose")).waitUntil(Condition.visible, Configuration.timeout);
+        homePagePlatform.goToMySpaces();
+        spaceManagement.deleteSpace(spaceNamea, false);
+
+    }
+
+    //Ce cas de test couvre sp09 et sp09a
+    @Test
+    public void test09_SaveButtonWillSaveTheEditDoneByUser() {
+        info("create some spaces");
+        String spaceNamea = "spaceNamea" + getRandomNumber();
+        String spaceDesa = "descriptiona" + getRandomNumber();
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
+        navigationToolbar.goToSpaceAdminstration();
+        ELEMENT_PERMISSIONS_SECTION.click();
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout).click();
+        ELEMENT_PERMISSIONS_SECTION_Ability_SPACE.parent().parent().find(byClassName("selectize-control")).find(byAttribute("type", "text")).click();
+        ELEMENT_PERMISSIONS_SECTION_Ability_SPACE.parent().parent().find(byClassName("selectize-control")).find(byAttribute("type", "text")).sendKeys("users");
+        homePagePlatform.refreshUntil($(byText("Create spaces")), Condition.visible, 1000);
+        ELEMENT_PERMISSIONS_SECTION_Ability_SPACE.parent().parent().find(byClassName("selectize-control")).find(byAttribute("type", "text")).pressEnter();
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byClassName("uiIconSave")).click();
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byText("*:/platform/users")).waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout).click();
+        ELEMENT_PERMISSIONS_SECTION_Ability_SPACE.parent().parent().find(byClassName("selectize-control")).find(byAttribute("type", "text")).click();
+        ELEMENT_PERMISSIONS_SECTION_Ability_SPACE.parent().parent().find(byClassName("selectize-control")).find(byAttribute("type", "text")).sendKeys("administrators");
+        homePagePlatform.refreshUntil($(byText("Create spaces")), Condition.visible, 1000);
+        ELEMENT_PERMISSIONS_SECTION_Ability_SPACE.parent().parent().find(byClassName("selectize-control")).find(byAttribute("type", "text")).pressEnter();
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byClassName("uiIconSave")).click();
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byText("*:/platform/administrators")).waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byText("*:/platform/users")).waitUntil(Condition.visible, Configuration.timeout);
+        homePagePlatform.goToMySpaces();
+        spaceManagement.deleteSpace(spaceNamea, false);
+    }
+
+    @Test
+    public void test10_CheckThatGroupOfUserCanDeleteEditableUserSectionFromPermission() {
+        info("create some spaces");
+        navigationToolbar.goToSpaceAdminstration();
+        ELEMENT_PERMISSIONS_SECTION.click();
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout).click();
+        ELEMENT_PERMISSIONS_SECTION_Ability_SPACE.parent().parent().find(byClassName("selectize-control")).find(byAttribute("type", "text")).click();
+        ELEMENT_PERMISSIONS_SECTION_Ability_SPACE.parent().parent().find(byClassName("selectize-control")).find(byAttribute("type", "text")).sendKeys("users");
+        homePagePlatform.refreshUntil($(byText("Create spaces")), Condition.visible, 1000);
+        ELEMENT_PERMISSIONS_SECTION_Ability_SPACE.parent().parent().find(byClassName("selectize-control")).find(byAttribute("type", "text")).pressEnter();
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byClassName("uiIconSave")).click();
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byText("*:/platform/users")).waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout).click();
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byClassName("remove")).waitUntil(Condition.visible, Configuration.timeout).click();
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byClassName("uiIconSave")).click();
+        ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byText("No assignment")).waitUntil(Condition.visible, Configuration.timeout);
+
     }
 }
