@@ -76,6 +76,7 @@ public class SOCSpaceListPendingTestIT extends Base {
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToMySpaces();
     spaceManagement.goToAllSpacesTab();
+    spaceManagement.searchSpace(space,null);
     spaceManagement.sendARequestToASpace(space);
     spaceManagement.goToRequestPendingTab();
     info("Verify that request to join button is hidden and request pending status is shown");
