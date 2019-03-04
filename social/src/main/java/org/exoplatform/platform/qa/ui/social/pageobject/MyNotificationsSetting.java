@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.social.pageobject;
 
 import static com.codeborne.selenide.Condition.not;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
@@ -63,6 +64,7 @@ public class MyNotificationsSetting {
         }
         info("Click on Save button");
         evt.click(ELEMENT_EDIT_NEWUSER_SAVE_BTN);
+        $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).waitUntil(not(visible),Configuration.timeout);
         info("Verify that intranet notification is hidded");
         evt.waitForElementNotPresent(ELEMENT_NEW_USER_INTRANET_ICON, 3000, 1);
         break;
@@ -87,6 +89,7 @@ public class MyNotificationsSetting {
         }
         info("Click on Save button");
         evt.click(ELEMENT_EDIT_RECREQ_SAVE_BTN);
+        $((ELEMENT_EDIT_RECREQ_SAVE_BTN)).waitUntil(not(visible),Configuration.timeout);
         info("Verify that Intranet notification is hidded");
         evt.waitForElementNotPresent(ELEMENT_CONNECTION_REQ_INTRANET_ICON, 3000, 1);
         break;
@@ -162,6 +165,7 @@ public class MyNotificationsSetting {
         }
         info("Click on Save button");
         $(ELEMENT_EDIT_POST_SAVE_BTN).click();
+        $(ELEMENT_EDIT_POST_SAVE_BTN).waitUntil(not(visible),Configuration.timeout);
         info("Verify that email notification is hidded");
         evt.waitForElementNotPresent(ELEMENT_POST_INTRANET_ICON, 3000, 1);
         break;
@@ -186,6 +190,7 @@ public class MyNotificationsSetting {
         }
         info("Click on Save button");
         $(ELEMENT_EDIT_MENTION_SAVE_BTN).click();
+        $(ELEMENT_EDIT_MENTION_SAVE_BTN).waitUntil(not(visible),Configuration.timeout);
         info("Verify that email notification is hidded");
         evt.waitForElementNotPresent(ELEMENT_MENTION_INTRANET_ICON, 3000, 1);
         break;
@@ -210,6 +215,7 @@ public class MyNotificationsSetting {
         }
         info("Click on Save button");
         evt.click(ELEMENT_EDIT_POST_SPACE_SAVE_BTN);
+        $(ELEMENT_EDIT_POST_SPACE_SAVE_BTN).waitUntil(not(visible),Configuration.timeout);
         info("Verify that email notification is hidded");
         evt.waitForElementNotPresent(ELEMENT_POST_SPACE_INTRANET_ICON, 3000, 1);
         break;
@@ -234,6 +240,7 @@ public class MyNotificationsSetting {
         }
         info("Click on Save button");
         evt.click(ELEMENT_EDIT_REQJOIN_SPACE_SAVE_BTN);
+        $(ELEMENT_EDIT_REQJOIN_SPACE_SAVE_BTN).waitUntil(not(visible),Configuration.timeout);
         info("Verify that email notification is hidded");
         evt.waitForElementNotPresent(ELEMENT_JOIN_REQ_SPACE_INTRANET_ICON, 3000, 1);
         break;
@@ -258,6 +265,7 @@ public class MyNotificationsSetting {
         }
         info("Click on Save button");
         $(ELEMENT_EDIT_INVI_SPACE_SAVE_BTN).click();
+        $(ELEMENT_EDIT_INVI_SPACE_SAVE_BTN).waitUntil(not(visible),Configuration.timeout);
         info("Verify that email notification is hidded");
         evt.waitForElementNotPresent(ELEMENT_INVITATION_SPACE_INTRANET_ICON, 3000, 1);
         break;
@@ -291,6 +299,7 @@ public class MyNotificationsSetting {
         evt.click(ELEMENT_EDIT_NEWUSER_SAVE_BTN);
         info("Verify that email notification is shown");
         evt.waitForAndGetElement(ELEMENT_NEW_USER_MAIL_ICON, 3000, 1);
+
         break;
       case NewUser_intranet:
         info("Click on Edit button");
@@ -419,6 +428,7 @@ public class MyNotificationsSetting {
         }
         info("Click on Save button");
         evt.click(ELEMENT_EDIT_POST_SAVE_BTN);
+        $(ELEMENT_EDIT_POST_SAVE_BTN).waitUntil(not(visible),Configuration.timeout);
         info("Verify that email notification is shown");
         evt.waitForAndGetElement(ELEMENT_POST_INTRANET_ICON, 3000, 1);
         break;
@@ -475,6 +485,7 @@ public class MyNotificationsSetting {
         }
         info("Click on Save button");
         $(ELEMENT_EDIT_POST_SPACE_SAVE_BTN).click();
+        $(ELEMENT_EDIT_POST_SPACE_SAVE_BTN).waitUntil(not(visible),Configuration.timeout);
         info("Verify that email notification is shown");
         $(ELEMENT_POST_SPACE_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);
         break;

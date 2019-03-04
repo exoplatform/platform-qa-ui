@@ -43,7 +43,6 @@ public class WikiHomePage {
      * Go to "Add blank wiki page"
      */
     public void goToAddBlankPage() {
-        homePagePlatform.refreshUntil($(ELEMENT_ADD_PAGE_LINK),Condition.visible,500);
         info("--Go to add blank wiki page--");
         $(ELEMENT_ADD_PAGE_LINK).click();
         $(ELEMENT_BLANK_PAGE_LINK).click();

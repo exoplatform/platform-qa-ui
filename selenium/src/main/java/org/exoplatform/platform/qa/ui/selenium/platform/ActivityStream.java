@@ -1244,8 +1244,8 @@ public class ActivityStream {
                                                                .getText()
                                                                .split(" ")[1]);
     String numberAfterlike = String.valueOf(numberofLike + 1);
+    homePagePlatform.refreshUntil($(byText(activityText)),Condition.visible,1000);
     $(byText(activityText)).parent().parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).click();
-    refresh();
     $(byText(activityText)).parent()
                            .parent()
                            .parent()
@@ -1253,7 +1253,7 @@ public class ActivityStream {
                            .find(ELEMENT_ICON_LIKE_ACTIVITY)
                            .parent()
                            .parent()
-                           .shouldHave(Condition.text(numberAfterlike));
+                           .waitUntil(Condition.text(numberAfterlike),Configuration.timeout);
 
   }
 

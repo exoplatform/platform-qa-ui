@@ -578,7 +578,7 @@ public class SOCSpaceManagementTestIT extends Base {
     ELEMENT_BUTTON_CLOSE_PERMALINK.click();
     manageLogInOut.signIn(username2, password);
     open(perLink);
-    homePagePlatform.refreshUntil($(ELEMENT_WIKI_HOME_PAGENOTFOUND),Condition.visible,Configuration.timeout);
+    homePagePlatform.refreshUntil($(ELEMENT_WIKI_HOME_PAGENOTFOUND),Condition.visible,1000);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
