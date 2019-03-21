@@ -383,8 +383,6 @@ public class SOCHomePageTestIT extends Base {
     spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     activityStream.deleteactivity(text);
-    homePagePlatform.goToConnections();
-    connectionsManagement.removeConnection(DATA_USER1);
 
   }
 

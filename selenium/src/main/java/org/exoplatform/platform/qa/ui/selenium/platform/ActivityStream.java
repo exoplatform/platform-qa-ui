@@ -1246,7 +1246,7 @@ public class ActivityStream {
     String numberAfterlike = String.valueOf(numberofLike + 1);
     homePagePlatform.refreshUntil($(byText(activityText)),Condition.visible,1000);
     $(byText(activityText)).parent().parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).click();
-    $(byText(activityText)).parent()
+    $(byId("OfficeMiddle")).find(byText(activityText)).parent()
                            .parent()
                            .parent()
                            .parent()

@@ -13,6 +13,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.openqa.selenium.By;
 
@@ -21,6 +22,8 @@ public class MyNotificationsSetting {
 
   private ElementEventTestBase evt;
 
+  public HomePagePlatform homePagePlatform;
+
   /**
    * constructor
    *
@@ -28,6 +31,7 @@ public class MyNotificationsSetting {
    */
   public MyNotificationsSetting(TestBase testBase) {
     this.testBase = testBase;
+    this.homePagePlatform= new HomePagePlatform(testBase);
     this.evt = testBase.getElementEventTestBase();
 
   }
@@ -279,7 +283,7 @@ public class MyNotificationsSetting {
    * @param opParams  object
    */
   public void enableNotification(myNotiType notifToEnable, Object... opParams) {
-    $(ELEMENT_ADD_TOOTLBAR).click();
+    homePagePlatform.refreshUntil($(ELEMENT_EDIT_NEWUSER_ICON),visible,1000);
     String opt = (String) (opParams.length > 0 ? opParams[0] : "");
     int repeat = 0;
     switch (notifToEnable) {
@@ -360,13 +364,11 @@ public class MyNotificationsSetting {
         evt.waitForAndGetElement(ELEMENT_COMMENT_MAIL_ICON, 3000, 1);
         break;
       case AS_Comment_intranet:
-        $(ELEMENT_ACCOUNT_NAME_LINK).click();
         $(ELEMENT_EDIT_COMMENT_ICON).click();
         if($(ELEMENT_EDIT_COMMENT_WEB_CHECKBOX).is(not(Condition.selected))){
           $(ELEMENT_EDIT_COMMENT_WEB_CHECKBOX).click();
         }
         info("Click on Save button");
-        $(ELEMENT_ACCOUNT_NAME_LINK).click();
         $(ELEMENT_EDIT_COMMENT_SAVE_BTN).click();
         $(ELEMENT_EDIT_COMMENT_SAVE_BTN).waitUntil(not(Condition.visible),Configuration.timeout);
         info("Verify that Intranet notification is shown");
@@ -389,7 +391,6 @@ public class MyNotificationsSetting {
         evt.waitForAndGetElement(ELEMENT_LIKE_MAIL_ICON, 3000, 1);
         break;
       case AS_Like_intranet:
-        $(ELEMENT_ACCOUNT_NAME_LINK).click();
         $(ELEMENT_EDIT_LIKE_ICON).click();
         $(ELEMENT_EDIT_LIKE_ICON).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
         if($(ELEMENT_EDIT_LIKE_WEB_CHECKBOX).is(Condition.not(Condition.selected))){

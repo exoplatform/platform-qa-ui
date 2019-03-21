@@ -206,7 +206,7 @@ public class WikiInformationTestIT extends Base {
     wikiPageInformation.addRelations("Intranet", "Wiki Home");
 
     info("intranet's portal is added as a related pages on page info layout");
-
+    ELEMENT_BUTTON_SELECT_RELATION.click();
     homePagePlatform.goToHomePage();
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space1, false);

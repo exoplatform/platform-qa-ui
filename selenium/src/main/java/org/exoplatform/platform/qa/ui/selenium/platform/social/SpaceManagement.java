@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.selenium.platform.social;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_SPACE_MENU_ACTIVITY_PORTLET;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_PROJECT_ICON_ADD_PROJECT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -90,6 +91,7 @@ public class SpaceManagement {
         info("Save all changes");
         ELEMENET_SPACE_CREATE_BUTTON.click();
         ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+        homePagePlatform.refreshUntil($(ELEMENT_SPACE_MENU_ACTIVITY_PORTLET),Condition.visible,700);
     }
 
     /**

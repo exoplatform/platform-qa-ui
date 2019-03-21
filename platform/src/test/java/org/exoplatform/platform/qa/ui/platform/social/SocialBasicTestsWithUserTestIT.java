@@ -191,18 +191,6 @@ public class SocialBasicTestsWithUserTestIT extends Base {
                                                              .parent().parent().parent().parent()
                                                              .find(byClassName(ELEMENT_DATE_ACTIVITY))
                                                              .hover();
-    $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
-                                                             .parent()
-                                                             .parent()
-                                                             .parent().parent().parent().parent()
-                                                             .find(ELEMENT_ICON_DELETE_ACTIVITY)
-                                                             .click();
-    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.timeout).click();
-    $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
-                                                             .parent()
-                                                             .parent()
-                                                             .parent()
-                                                             .waitUntil(Condition.disappears, Configuration.timeout);
   }
 
   @Test
@@ -220,18 +208,15 @@ public class SocialBasicTestsWithUserTestIT extends Base {
     String title = "Google";
     assertEquals(title, Selenide.title());
     switchTo().window(0);
-    $(byText(link)).parent()
-                   .parent()
-                   .parent()
-                   .parent()
-                   .parent()
-                   .find(byClassName(ELEMENT_DATE_ACTIVITY))
-                   .waitUntil(Condition.visible, Configuration.timeout)
-                   .hover();
-    $(byText(link)).parent().parent().parent().parent().parent().find(ELEMENT_ICON_DELETE_ACTIVITY).click();
+    String id=$(byAttribute("data-original-title", "eXo-Platform.png")).parent().parent().parent().parent().parent().parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+    $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}",id))).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}",id))).click();
     ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.timeout).click();
-    $(byText(link)).parent().parent().parent().parent().parent().waitUntil(Condition.disappear, Configuration.timeout);
-
+    $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
+            .parent()
+            .parent()
+            .parent()
+            .waitUntil(Condition.disappear, Configuration.timeout);
   }
 
   @Test

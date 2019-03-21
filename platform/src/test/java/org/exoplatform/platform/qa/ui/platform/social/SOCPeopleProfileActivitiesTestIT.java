@@ -9,6 +9,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -112,7 +113,7 @@ public class SOCPeopleProfileActivitiesTestIT extends Base {
     info("edit avatar");
     click(ELEMENT_EDIT_MY_PROFILE_LINK);
     ELEMENT_BUTTON_CHANGE_AVATAR.click();
-    ELEMENT_INPUT_UPLOAD_AVATAR.uploadFromClasspath("testavatar.png");
+    ELEMENT_INPUT_UPLOAD_AVATAR.waitUntil(Condition.visible, Configuration.timeout).uploadFromClasspath("testavatar.png");
     ELEMENT_BUTTON_CONFIRM_UPLOAD.click();
     ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR.click();
     userProfilePage.saveCancelUpdateInfo(false);

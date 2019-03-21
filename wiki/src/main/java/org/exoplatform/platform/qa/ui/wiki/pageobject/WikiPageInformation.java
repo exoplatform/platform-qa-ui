@@ -45,16 +45,16 @@ public class WikiPageInformation {
    */
   public void addRelations(String location, String page) {
     info("Click on Drop down");
-    $(ELEMENT_ADD_RELATED_PAGE_POPUP_DROPDOWN).click();
+    $(ELEMENT_ADD_RELATED_PAGE_POPUP_DROPDOWN).waitUntil(Condition.visible,Configuration.timeout).click();
     if(!location.isEmpty()){
       info("Select a location");
       $(byXpath(ELEMENT_ADD_RELATED_POPUP_DROPDOWN_LOCATION
-              .replace("${location}",location))).click();
+              .replace("${location}",location))).waitUntil(Condition.visible,Configuration.timeout).click();
     }
     if(!page.isEmpty()){
       info("Select a page in the list");
       $(byXpath(ELEMENT_ADD_RELATED_POPUP_CONTENT
-              .replace("${page}",page))).click();
+              .replace("${page}",page))).waitUntil(Condition.visible,Configuration.timeout).click();
     }
   }
 
