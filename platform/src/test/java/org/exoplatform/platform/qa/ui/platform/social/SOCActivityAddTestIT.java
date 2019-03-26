@@ -21,7 +21,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 /**
  * Created by exo on 23/10/17.
  */
-@Tag("smoke")
+@Tag("functionnal")
 @Tag("social")
 public class SOCActivityAddTestIT extends Base {
   ActivityStream activityStream;
