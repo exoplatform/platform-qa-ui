@@ -188,6 +188,7 @@ public class ManageSpacesTestIT extends Base {
     spaceManagement.addNewSpaceSimple(spaceNameb, spaceDesb);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(spaceNamea, false);
+    spaceManagement.deleteSpace(spaceNameb, false);
     navigationToolbar.goToSpaceAdminstration();
     ELEMENT_SPACE_MANAGEMENT_SECTION.click();
     ELEMENT_SPACE_GRID.find(byText("No spaces")).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
@@ -328,10 +329,6 @@ public class ManageSpacesTestIT extends Base {
     ELEMENT_SPACE_SEARCH_ICON.setValue(spaceDesa);
     ELEMENT_SPACE_SEARCH_ICON.click();
     ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-    ELEMENT_SPACE_GRID.find(byText(spaceNamed))
-                      .parent()
-                      .parent()
-                      .waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     ELEMENT_SPACE_GRID.find(byText(spaceNameb)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_SPACE_GRID.find(byText(spaceNamec)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
     homePagePlatform.goToMySpaces();

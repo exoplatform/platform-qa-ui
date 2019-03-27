@@ -95,7 +95,7 @@ public class SpacePermissionTestIT extends Base {
     navigationToolbar.goToSpaceAdminstration();
     ELEMENT_PERMISSIONS_SECTION.click();
     ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent()
-                                            .parent()
+                                            .parent().parent()
                                             .find(byText("No assignment"))
                                             .waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_SPACE_MANAGEMENT_SECTION.parent()
@@ -353,7 +353,7 @@ public class SpacePermissionTestIT extends Base {
                                             .click();
     ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byClassName("uiIconSave")).click();
     ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent()
-                                            .parent()
+                                            .parent().parent()
                                             .find(byText("No assignment"))
                                             .waitUntil(Condition.visible, Configuration.timeout);
 
