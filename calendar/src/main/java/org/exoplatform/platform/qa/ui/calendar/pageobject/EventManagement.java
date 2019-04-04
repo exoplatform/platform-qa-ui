@@ -175,10 +175,10 @@ public class EventManagement {
   public void inputBasicQuickEvent(String name, String note, String... opt) {
     info("Input into basic fields of Quick EVENT form");
     if (name != null) {
-      $(ELEMENT_QUICK_INPUT_EVENT_NAME).setValue(name);
+      $(ELEMENT_EVENT_TITLE_DRAWER).setValue(name);
     }
     if (note != null) {
-      $(ELEMENT_QUICK_INPUT_EVENT_NOTE).setValue(note);
+      $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[6]/div[2]/textarea")).setValue(note);
     }
     if (opt.length > 0 && opt[0] != null) {
       $(byId("calendar")).selectOption(opt[0]);
@@ -720,10 +720,10 @@ public class EventManagement {
     info("Sae add event details");
     if($(ELEMENT_ADD_EDIT_EVENT_NAME).is(Condition.visible))
     $(ELEMENT_ADD_EDIT_EVENT_NAME).click();
-    ELEMENT_BUTTON_EVENT_SAVE_DETAILS.waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_EVENT_SAVE_BUTTON.waitUntil(Condition.appears, Configuration.timeout);
     // click(ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
     // waitForElementNotPresent(ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
-    ELEMENT_BUTTON_EVENT_SAVE_DETAILS.click();
+    ELEMENT_EVENT_SAVE_BUTTON.click();
   }
 
   /**

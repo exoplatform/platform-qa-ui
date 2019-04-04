@@ -1049,13 +1049,13 @@ public class CalendarLocator {
                                                                       By.xpath("//*[@id='UIEventForm']//*[@name='priority']");
 
   public static final By              ELEMENT_ADD_EDIT_EVENT_ALLDAY                                    =
-                                                                    By.xpath("//*[@id='UIEventForm']//*[@name='allDay']");
+                                                                    By.xpath("//*[@id=\"allday\"]");
 
   public static final By              ELEMENT_ADD_EDIT_EVENT_FROM_DATE                                 =
-                                                                       By.xpath("//*[@id='UIEventForm']//*[@name='from']");
+                                                                       By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[1]/div[2]/div[1]/input");
 
   public static final By              ELEMENT_ADD_EDIT_EVENT_TO_DATE                                   =
-                                                                     By.xpath("//*[@id='UIEventForm']//*[@name='to']");
+                                                                     By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[2]/div[2]/div[1]/input");
 
   public static final String          ELEMENT_ADD_EDIT_EVENT_FROM_DATE_VALUE                           =
                                                                              "//*[@id='UIEventForm']//*[@name='from'][contains(@value,'$value')]";

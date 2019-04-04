@@ -95,37 +95,29 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
     info("Test 13 Add an event in personal calendar");
     ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.contextClick();
     $(byClassName("createEvent")).waitUntil(Condition.visible, Configuration.timeout).click();
-
-   /* eventManagement.inputDataEventInQuickForm(titleEvent,
+    eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM/dd/yyyy"),
-                                              getDate(0, "MM/dd/yyyy"),
-                                              false);*/
-   $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[1]/div[2]/div[1]/input")).click();
-   $(byXpath("//*[@id=\"UICalendarControl\"]/div/div/div/table[2]/tbody/tr[1]/td[4]/a")).click();
-   $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[1]/div[2]/div[3]/div/ul/li[65]")).click();
-   $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[2]/div[2]/div[1]/input")).click();
-   $(byXpath("//*[@id=\"UICalendarControl\"]/div/div/div/table[2]/tbody/tr[1]/td[4]/a")).click();
-   $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[2]/div[2]/div[3]/div/ul/li[69]")).click();
-    ELEMENT_EVENT_TITLE_DRAWER.setValue(titleEvent);
+                                              getDate(0, "MM-dd-yyyy"),
+                                              getDate(0, "MM-dd-yyyy"),
+                                              false);
     eventManagement.saveQuickAddEvent();
     executeJavaScript("window.scrollBy(0,-2000)", "");
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
                                               CalendarHomePage.selectViewOption.LIST,
                                               CalendarHomePage.selectDayOption.DETAILTIME);
-    /*calendarHomePage.goToEditEventTaskFormByRightClick(titleEvent,
+    calendarHomePage.goToEditEventTaskFormByRightClick(titleEvent,
                                                        CalendarHomePage.selectViewOption.WEEK,
                                                        CalendarHomePage.selectDayOption.DETAILTIME,
                                                        getDate(0, "MMM dd yyyy"));
     eventManagement.inputDataEventInDetailForm(titleEvent2,
                                                contentEvent2,
-                                               getDate(0, "MM/dd/yyyy"),
-                                               getDate(0, "MM/dd/yyyy"),
+                                               getDate(0, "MM-dd-yyyy"),
+                                               getDate(0, "MM-dd-yyyy"),
                                                false);
     eventManagement.saveAddEventDetails();
     calendarHomePage.verifyIsPresentEventTask(titleEvent2,
                                               CalendarHomePage.selectViewOption.LIST,
-                                              CalendarHomePage.selectDayOption.DETAILTIME);*/
+                                              CalendarHomePage.selectDayOption.DETAILTIME);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
   }
@@ -144,8 +136,8 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
     $(byClassName("createEvent")).waitUntil(Condition.visible, Configuration.timeout).click();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM/dd/yyyy"),
-                                              getDate(0, "MM/dd/yyyy"),
+                                              getDate(0, "MM-dd-yyyy"),
+                                              getDate(0, "MM-dd-yyyy"),
                                               false);
     eventManagement.saveQuickAddEvent();
     executeJavaScript("window.scrollBy(0,-2000)", "");
@@ -157,7 +149,7 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
     calendarHomePage.deleteEventTask(titleEvent,
                                      CalendarHomePage.selectViewOption.LIST,
                                      CalendarHomePage.selectDayOption.DETAILTIME,
-                                     getDate(0, "MM/dd/yyyy"));
+                                     getDate(0, "MM-dd-yyyy"));
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
   }
