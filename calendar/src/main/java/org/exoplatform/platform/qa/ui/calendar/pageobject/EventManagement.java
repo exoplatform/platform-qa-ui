@@ -242,7 +242,7 @@ public class EventManagement {
           evt.type(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE, dateTimeFrom[0], true);
         if (dateTimeFrom.length > 1) {
           $(ELEMENT_QUICK_INPUT_EVENT_FROM_TIME_INPUT).click();
-          $(byXpath(ELEMENT_QUICK_EVENT_SELECT_FROM_TIME.replace("${time}", dateTimeFrom[1]))).click();
+         $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[1]/div[2]/div[3]/input")).click();
         }
       }
       if ((to != null) & (to != "")) {
@@ -251,7 +251,7 @@ public class EventManagement {
           evt.type(ELEMENT_QUICK_INPUT_EVENT_TO_DATE, dateTimeTo[0], true);
         if (dateTimeTo.length > 1) {
           $(ELEMENT_QUICK_INPUT_EVENT_TO_TIME_INPUT).click();
-          $(byXpath(ELEMENT_QUICK_EVENT_SELECT_TO_TIME.replace("${time}", dateTimeTo[1]))).click();
+         $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[2]/div[2]/div[3]/input")).click();
         }
       }
     }
@@ -384,7 +384,7 @@ public class EventManagement {
     info("Check default suggestion EVENT time");
     if (fromDateTime == null || fromDateTime == "") {
       info("Check time suggestion default");
-      assert dateFrom.equals(testBase.getCurrentDate("MM/dd/yyyy"));
+      assert dateFrom.equals(testBase.getCurrentDate("MM-dd-yyyy"));
     } else {
       info("Check suggesion when select from time");
       try {
@@ -399,7 +399,7 @@ public class EventManagement {
     }
     if (toDateTime == null || toDateTime == "") {
       info("Check time suggestion default");
-      assert dateTo.equals(testBase.getCurrentDate("MM/dd/yyyy"));
+      assert dateTo.equals(testBase.getCurrentDate("MM-dd-yyyy"));
     } else {
       info("Check suggesion when select to time");
       try {
@@ -446,7 +446,7 @@ public class EventManagement {
     info("Check default suggestion EVENT time");
     if (fromDateTime == null || fromDateTime == "") {
       info("Check time suggestion default");
-      assert dateFrom.equals(testBase.getCurrentDate("MM/dd/yyyy"));
+      assert dateFrom.equals(testBase.getCurrentDate("MM-dd-yyyy"));
     } else {
       info("Check suggesion when select from time");
       try {
@@ -461,7 +461,7 @@ public class EventManagement {
     }
     if (toDateTime == null || toDateTime == "") {
       info("Check time suggestion default");
-      assert dateTo.equals(testBase.getCurrentDate("MM/dd/yyyy"));
+      assert dateTo.equals(testBase.getCurrentDate("MM-dd-yyyy"));
     } else {
       info("Check suggesion when select to time");
       try {
@@ -746,8 +746,8 @@ public class EventManagement {
    * Click on cancel button
    */
   public void cancelQuickAddEditEvent() {
-    evt.click(ELEMENT_BUTTON_EVENT_QUICK_CANCEL);
-    evt.waitForElementNotPresent(ELEMENT_BUTTON_EVENT_QUICK_CANCEL);
+    ELEMENT_EVENT_CANCEL_BUTTON.click();
+    ELEMENT_EVENT_CANCEL_BUTTON.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   public void cancelAddEditDetailEvent() {
@@ -783,22 +783,12 @@ public class EventManagement {
                                       String... option) {
     info("Add recurring information");
     String occurence = option.length > 0 ? option[0] : "";
-    if (repeatType != null) {
-      evt.select(ELEMENT_RECURRING_TYPE_SELECT_BOX, String.valueOf(repeatType));
-    }
-    if (repeatInterval != null && repeatInterval != "") {
-      evt.select(ELEMENT_INTERVAL_SELECT_BOX, String.valueOf(repeatInterval));
-    }
-    if (repeatOn != null) {
-      for (int i = 0; i < repeatOn.length; i++) {
-        evt.check(By.id(String.valueOf(repeatOn[i])));
-      }
-    }
+    ELEMENT_REPEAT_SWITCH_LABEL.click();
     if (endRepeat != null) {
       switch (endRepeat) {
       case After:
         info("Check After option");
-        evt.check(ELEMENT_AFTER_END_RECURRING_EVENT, 2);
+        evt.check($(byId("endAfter")), 2);
         if (occurence != "")
           evt.type(ELEMENT_END_AFTER_NUMBER, option[0], true);
         break;

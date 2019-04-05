@@ -1064,10 +1064,10 @@ public class CalendarLocator {
                                                                            "//*[@id='UIEventForm']//*[@name='to'][contains(@value,'$value')]";
 
   public static final By              ELEMENT_ADD_EDIT_INPUT_EVENT_FROM_TIME                           =
-                                                                             By.xpath("//*[@id='UIEventForm']//*[@name='fromTime']");
+                                                                             By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[1]/div[2]/div[3]/input");
 
   public static final By              ELEMENT_ADD_EDIT_INPUT_EVENT_TO_TIME                             =
-                                                                           By.xpath("//*[@id='UIEventForm']//*[@name='toTime']");
+                                                                           By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[2]/div[2]/div[3]/input");
 
   public static final String          ELEMENT_ADD_EDIT_INPUT_EVENT_FROM_TIME_VALUE                     =
                                                                                    "//*[@id='UIEventForm']//input[@id='fromTime'][contains(@value,'$time')]";

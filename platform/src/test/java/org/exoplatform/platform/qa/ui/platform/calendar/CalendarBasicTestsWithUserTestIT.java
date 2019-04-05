@@ -204,8 +204,8 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM/dd/yyyy"),
-                                              getDate(0, "MM/dd/yyyy"),
+                                              getDate(0, "MM-dd-yyyy"),
+                                              getDate(0, "MM-dd-yyyy"),
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
@@ -221,8 +221,8 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     eventManagement.checkSuggestionEventTimeInDetailForm(null, null, 60);
     eventManagement.inputDataEventInDetailForm(titleEvent2,
                                                contentEvent2,
-                                               getDate(0, "MM/dd/yyyy"),
-                                               getDate(0, "MM/dd/yyyy"),
+                                               getDate(0, "MM-dd-yyyy"),
+                                               getDate(0, "MM-dd-yyyy"),
                                                false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent2,
@@ -234,7 +234,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     calendarHomePage.deleteEventTask(titleEvent2,
                                      CalendarHomePage.selectViewOption.LIST,
                                      CalendarHomePage.selectDayOption.DETAILTIME,
-                                     getDate(0, "MM/dd/yyyy"));
+                                     getDate(0, "MM-dd-yyyy"));
     calendarManagement.deleteCalendar(calendar, false);
   }
 
@@ -254,8 +254,8 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM/dd/yyyy"),
-                                              getDate(0, "MM/dd/yyyy"),
+                                              getDate(0, "MM-dd-yyyy"),
+                                              getDate(0, "MM-dd-yyyy"),
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
@@ -267,7 +267,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     calendarHomePage.deleteEventTask(titleEvent,
                                      CalendarHomePage.selectViewOption.LIST,
                                      CalendarHomePage.selectDayOption.DETAILTIME,
-                                     getDate(0, "MM/dd/yyyy"));
+                                     getDate(0, "MM-dd-yyyy"));
     calendarManagement.deleteCalendar(calendar, false);
   }
 
