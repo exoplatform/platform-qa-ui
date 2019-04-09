@@ -945,7 +945,7 @@ public class CalendarLocator {
                                                                             By.id("UIQuickAddEventPopupWindow");
 
   public static final By              ELEMENT_QUICK_ADD_EVENT_POPUP                                    =
-                                                                    By.id("UIQuickAddEventPopupWindow");
+          byAttribute("class","drawer open");
 
   public static final By              ELEMENT_QUICK_INPUT_EVENT_NAME                                   =
                                                                      By.xpath("//*[@id='UIQuickAddEvent']//*[@id='eventName']");
@@ -1679,5 +1679,7 @@ public class CalendarLocator {
   public static final SelenideElement ELEMENT_LIST_CALENDAR=$(byId("UICalendars"));
 
   public static final SelenideElement ELEMENT_TASK_DETAIL =$(byClassName("titleList"));
+
+  public static final SelenideElement ELEMENT_EVENT_NAME_INPUT=$(byName("eventName"));
 
 }

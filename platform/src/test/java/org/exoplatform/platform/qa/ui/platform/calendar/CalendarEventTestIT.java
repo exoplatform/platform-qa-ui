@@ -1,8 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.calendar;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
@@ -22,6 +21,7 @@ import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
+import org.openqa.selenium.Keys;
 
 @Tag("calendar")
 @Tag("sniff")
@@ -999,5 +999,42 @@ $(byXpath("//*[@id=\"UIEventForm\"]/div[4]/button[2]")).click();
                                      getDate(0, "MMM dd yyyy"),
                                      false,
                                      false);
+  }
+
+  @Tag("CAL-1461")
+  @Test
+  public void test23_checkClosewithEchapWhenNoText(){
+    homePagePlatform.goToCalendarPage();
+    eventManagement.goToAddEventFromActionBar();
+    eventManagement.closeWithEchap("");
+
+  }
+  @Tag("CAL-1461")
+  @Test
+  public void test24_checkClosewithEchapWhenText(){
+    String titleEvent = "titleEvent" + getRandomNumber();
+    homePagePlatform.goToCalendarPage();
+    eventManagement.goToAddEventFromActionBar();
+    eventManagement.closeWithEchap(titleEvent);
+
+  }
+  @Tag("CAL-1461")
+  @Test
+  public void test25_checkClosewithClickonOutsideNoText(){
+    homePagePlatform.goToCalendarPage();
+    eventManagement.goToAddEventFromActionBar();
+    eventManagement.closeWithClickonOutsidethedrawer("");
+
+
+  }
+  @Tag("CAL-1461")
+  @Test
+  public void test26_checkClosewithClickonOutsidewhenText(){
+    String titleEvent = "titleEvent" + getRandomNumber();
+    homePagePlatform.goToCalendarPage();
+    eventManagement.goToAddEventFromActionBar();
+    eventManagement.closeWithClickonOutsidethedrawer(titleEvent);
+
+
   }
 }

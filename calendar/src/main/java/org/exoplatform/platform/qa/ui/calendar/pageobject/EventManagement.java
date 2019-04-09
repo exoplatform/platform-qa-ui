@@ -24,6 +24,7 @@ import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.Keys;
 
 public class EventManagement {
   private final TestBase       testBase;
@@ -162,7 +163,7 @@ public class EventManagement {
     info("Go to Add Event page from action bar");
     executeJavaScript("window.scrollBy(0,-2000)", "");
     $(ELEMENT_BUTTON_EVENT).click();
-    $(ELEMENT_QUICK_ADD_EVENT_POPUP).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_QUICK_ADD_EVENT_POPUP).waitUntil(Condition.appear, Configuration.timeout);
   }
 
   /**
@@ -1057,7 +1058,24 @@ public class EventManagement {
     evt.click(ELEMENT_EVENT_DETAILS_TAB);
 
   }
-
+public void closeWithEchap(String title){
+    if(title!=null&& title!="")
+      ELEMENT_EVENT_NAME_INPUT.setValue(title);
+  ELEMENT_EVENT_NAME_INPUT.sendKeys(Keys.ESCAPE);
+    if(title!=null&& title!="")
+    $(byXpath("//*[@id=\"confirmClose\"]/div/button[1]")).waitUntil(Condition.visible,Configuration.timeout).click();
+  $(ELEMENT_QUICK_ADD_EVENT_POPUP).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+}
+public void closeWithClickonOutsidethedrawer (String title){
+  if(title!=null&& title!="")
+   ELEMENT_EVENT_NAME_INPUT.setValue(title);
+ //$(byXpath("//*[@id=\"UIActionBarQuickAddEvent\"]")).click();
+  $(byClassName("backdrop")).click();
+ // $(ELEMENT_BUTTON_EVENT).click();
+  if(title!=null&& title!="")
+  $(byXpath("//*[@id=\"confirmClose\"]/div/button[1]")).waitUntil(Condition.visible,Configuration.timeout).click();
+  $(ELEMENT_QUICK_ADD_EVENT_POPUP).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+}
   /**
    * Open participants tab
    */
