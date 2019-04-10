@@ -3,9 +3,8 @@ package org.exoplatform.platform.qa.ui.platform.social.functional;
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static org.exoplatform.platform.qa.ui.core.PLFData.PASS_ROOT;
-import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -19,22 +18,29 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
+import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
+import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 
 @Tag("functional")
 @Tag("social")
 public class ManageSpacesTestIT extends Base {
-  NavigationToolbar navigationToolbar;
+  NavigationToolbar      navigationToolbar;
 
-  ManageLogInOut    manageLogInOut;
+  ManageLogInOut         manageLogInOut;
 
-  HomePagePlatform  homePagePlatform;
+  HomePagePlatform       homePagePlatform;
 
-  SpaceManagement   spaceManagement;
+  SpaceManagement        spaceManagement;
+
+  UserAndGroupManagement userAndGroupManagement;
+
+  AddUsers               addUsers;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -42,7 +48,9 @@ public class ManageSpacesTestIT extends Base {
     navigationToolbar = new NavigationToolbar(this);
     manageLogInOut = new ManageLogInOut(this);
     homePagePlatform = new HomePagePlatform(this);
-    manageLogInOut.signInCas(username, PASS_ROOT);
+    userAndGroupManagement = new UserAndGroupManagement(this);
+    addUsers = new AddUsers(this);
+    manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);
     spaceManagement = new SpaceManagement(this);
   }
 
@@ -61,10 +69,16 @@ public class ManageSpacesTestIT extends Base {
     spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
     info("Test 1: CheckElementsInTheManageSpacesTab");
     navigationToolbar.goToSpaceAdminstration();
-    ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-    ELEMENT_SPACE_GRID.find(byText(spaceDesa)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-    ELEMENT_EDITSPACE_MANAGE_ICON.waitUntil(Condition.visible, Configuration.timeout);
-    ELEMENT_DELETESPACE_MANAGE_ICON.waitUntil(Condition.visible, Configuration.timeout);
+    ELEMENT_SPACE_GRID.find(byText(spaceNamea))
+                      .parent()
+                      .parent()
+                      .find(ELEMENT_DELETESPACE_MANAGE_ICON)
+                      .waitUntil(Condition.visible, Configuration.timeout);
+    ELEMENT_SPACE_GRID.find(byText(spaceDesa))
+                      .parent()
+                      .parent()
+                      .find(ELEMENT_EDITSPACE_MANAGE_ICON)
+                      .waitUntil(Condition.visible, Configuration.timeout);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(spaceNamea, false);
   }
@@ -98,8 +112,12 @@ public class ManageSpacesTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
     navigationToolbar.goToSpaceAdminstration();
-    ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-    ELEMENT_DELETESPACE_MANAGE_ICON.waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_SPACE_GRID.find(byText(spaceNamea))
+                      .parent()
+                      .parent()
+                      .find(ELEMENT_DELETESPACE_MANAGE_ICON)
+                      .waitUntil(Condition.visible, Configuration.timeout)
+                      .click();
     ELEMENT_SPACEMANAGEMENT_CANCEL_POPUP.click();
   }
 
@@ -111,9 +129,15 @@ public class ManageSpacesTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
     navigationToolbar.goToSpaceAdminstration();
-    ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-    ELEMENT_DELETESPACE_MANAGE_ICON.waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_SPACE_GRID.find(byText(spaceNamea))
+                      .parent()
+                      .parent()
+                      .find(ELEMENT_DELETESPACE_MANAGE_ICON)
+                      .waitUntil(Condition.visible, Configuration.timeout)
+                      .click();
     ELEMENT_SPACEMANAGEMENT_ClOSE_POPUP.click();
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(spaceNamea, false);
   }
 
   @Test
@@ -125,9 +149,12 @@ public class ManageSpacesTestIT extends Base {
     spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
     navigationToolbar.goToSpaceAdminstration();
     ELEMENT_SPACE_MANAGEMENT_SECTION.click();
-    ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-    ELEMENT_EDITSPACE_MANAGE_ICON.waitUntil(Condition.visible, Configuration.timeout);
-    ELEMENT_DELETESPACE_MANAGE_ICON.waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_SPACE_GRID.find(byText(spaceNamea))
+                      .parent()
+                      .parent()
+                      .find(ELEMENT_DELETESPACE_MANAGE_ICON)
+                      .waitUntil(Condition.visible, Configuration.timeout)
+                      .click();
     $(byText("Do you confirm the deletion of this space ?")).waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_SPACEMANAGEMENT_CANCEL_POPUP.waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_SPACEMANAGEMENT_POPUP.waitUntil(Condition.visible, Configuration.timeout);
@@ -144,9 +171,16 @@ public class ManageSpacesTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
     navigationToolbar.goToSpaceAdminstration();
-    ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-    ELEMENT_EDITSPACE_MANAGE_ICON.waitUntil(Condition.visible, Configuration.timeout);
-    ELEMENT_DELETESPACE_MANAGE_ICON.waitUntil(Condition.visible, Configuration.timeout);
+    ELEMENT_SPACE_GRID.find(byText(spaceNamea))
+                      .parent()
+                      .parent()
+                      .find(ELEMENT_EDITSPACE_MANAGE_ICON)
+                      .waitUntil(Condition.visible, Configuration.timeout);
+    ELEMENT_SPACE_GRID.find(byText(spaceNamea))
+                      .parent()
+                      .parent()
+                      .find(ELEMENT_DELETESPACE_MANAGE_ICON)
+                      .waitUntil(Condition.visible, Configuration.timeout);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(spaceNamea, false);
   }
@@ -182,6 +216,15 @@ public class ManageSpacesTestIT extends Base {
     String spaceDesa = "descriptiona" + getRandomNumber();
     String spaceNameb = "spaceNameb" + getRandomNumber();
     String spaceDesb = "descriptionb" + getRandomNumber();
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@test.com";
+    String password = "123456";
+    info("Add new user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+    navigationToolbar.goToUsersAndGroupsManagement();
+    userAndGroupManagement.addUserAdmin(username1, "*");
+    manageLogInOut.signIn(username1, password);
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
     homePagePlatform.goToMySpaces();
@@ -192,6 +235,9 @@ public class ManageSpacesTestIT extends Base {
     navigationToolbar.goToSpaceAdminstration();
     ELEMENT_SPACE_MANAGEMENT_SECTION.click();
     ELEMENT_SPACE_GRID.find(byText("No spaces")).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
   }
 
   @Test
@@ -229,7 +275,12 @@ public class ManageSpacesTestIT extends Base {
     spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
     navigationToolbar.goToSpaceAdminstration();
     ELEMENT_SPACE_MANAGEMENT_SECTION.click();
-    ELEMENT_EDITSPACE_MANAGE_ICON.waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_SPACE_GRID.find(byText(spaceNamea))
+                      .parent()
+                      .parent()
+                      .find(ELEMENT_EDITSPACE_MANAGE_ICON)
+                      .waitUntil(Condition.visible, Configuration.timeout)
+                      .click();
     switchTo().window(1);
     ELEMENT_SPACE_SETTING_PAGE.waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_SPACE_NAME_PAGE.setValue(spaceNamea + "zfzff");
@@ -372,6 +423,15 @@ public class ManageSpacesTestIT extends Base {
     spaceList.add("space29" + getRandomNumber());
     spaceList.add("space30" + getRandomNumber());
     spaceList.add("space31" + getRandomNumber());
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@test.com";
+    String password = "123456";
+    info("Add new user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+    navigationToolbar.goToUsersAndGroupsManagement();
+    userAndGroupManagement.addUserAdmin(username1, "*");
+    manageLogInOut.signIn(username1, password);
     for (int i = 0; i < 31; i++) {
       homePagePlatform.goToMySpaces();
       spaceManagement.addNewSpaceSimple(spaceList.get(i), "");
@@ -382,10 +442,14 @@ public class ManageSpacesTestIT extends Base {
                                 .parent()
                                 .parent()
                                 .waitUntil(Condition.visible, Configuration.timeout);
+    homePagePlatform.goToMySpaces();
     for (int i = 0; i < 30; i++) {
-      homePagePlatform.goToMySpaces();
+      spaceManagement.searchSpace(spaceList.get(i));
       spaceManagement.deleteSpace(spaceList.get(i), false);
     }
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
   }
 
   @Test
@@ -420,6 +484,15 @@ public class ManageSpacesTestIT extends Base {
     spaceList.add("space27" + getRandomNumber());
     spaceList.add("space28" + getRandomNumber());
     spaceList.add("space29" + getRandomNumber());
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@test.com";
+    String password = "123456";
+    info("Add new user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+    navigationToolbar.goToUsersAndGroupsManagement();
+    userAndGroupManagement.addUserAdmin(username1, "*");
+    manageLogInOut.signIn(username1, password);
     for (int i = 0; i < 29; i++) {
       homePagePlatform.goToMySpaces();
       spaceManagement.addNewSpaceSimple(spaceList.get(i), "");
@@ -430,10 +503,14 @@ public class ManageSpacesTestIT extends Base {
                                 .parent()
                                 .parent()
                                 .waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    homePagePlatform.goToMySpaces();
     for (int i = 0; i < 29; i++) {
-      homePagePlatform.goToMySpaces();
+      spaceManagement.searchSpace(spaceList.get(i));
       spaceManagement.deleteSpace(spaceList.get(i), false);
     }
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
   }
 
   @BugInPLF("SOC-6152")
@@ -445,10 +522,16 @@ public class ManageSpacesTestIT extends Base {
     spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
     navigationToolbar.goToSpaceAdminstration();
     ELEMENT_SPACE_MANAGEMENT_SECTION.click();
-    ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-    ELEMENT_SPACE_GRID.find(byText(spaceDesa)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
-    ELEMENT_DELETESPACE_MANAGE_ICON.waitUntil(Condition.visible, Configuration.timeout);
-    ELEMENT_EDITSPACE_MANAGE_ICON.waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_SPACE_GRID.find(byText(spaceNamea))
+                      .parent()
+                      .parent()
+                      .find(ELEMENT_DELETESPACE_MANAGE_ICON)
+                      .waitUntil(Condition.visible, Configuration.timeout);
+    ELEMENT_SPACE_GRID.find(byText(spaceDesa))
+                      .parent()
+                      .parent()
+                      .find(ELEMENT_EDITSPACE_MANAGE_ICON)
+                      .waitUntil(Condition.visible, Configuration.timeout);
     switchTo().window(1);
     ELEMENT_SPACE_SETTING_PAGE.waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_SPACE_NAME_PAGE.setValue(spaceNamea + "zfzff");

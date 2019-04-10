@@ -2431,8 +2431,8 @@ public static final By
   public static final SelenideElement ELEMENT_NOTIFICATION_ACTIONS=  $(byClassName("notificationsActions"));
   public static final SelenideElement ELEMENT_SPACE_PORTLET =  $(byClassName("uiIconAppSpaceActivityStreamPortlet"));
   public static final SelenideElement ELEMENT_SPACE_MENU =  $(byXpath("//*[@id=\"UISpaceMenu\"]/div[1]/div/ul/li[1]/a"));
-  public static final SelenideElement ELEMENT_EDITSPACE_MANAGE_ICON=  $(byClassName("uiIconEdit"));
-  public static final SelenideElement ELEMENT_DELETESPACE_MANAGE_ICON=  $(byClassName("uiIconDeleteUser"));
+  public static final By ELEMENT_EDITSPACE_MANAGE_ICON=  byClassName("uiIconEdit");
+  public static final By ELEMENT_DELETESPACE_MANAGE_ICON=  byClassName("uiIconDeleteUser");
   public static final SelenideElement ELEMENT_SPACE_SEARCH_ICON= $(byClassName("showInputSearch"));
   public static final SelenideElement ELEMENT_SPACE_GRID=  $(byClassName("uiGrid"));
   public static final SelenideElement ELEMENT_SPACE_SETTING_PAGE=  $(byId("UISpaceSetting"));
@@ -2451,6 +2451,7 @@ public static final By
   public static final SelenideElement ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE=$(byText("Create spaces"));
   public static final SelenideElement ELEMENT_PERMISSIONS_SECTION_Ability_SPACE=$(byText("Ability to create spaces"));
   public static final SelenideElement ELEMENT_PERMISSIONS_SECTION_Ability_EDIT_SPACE=$(byText("Ability to edit spaces"));
+  public static final SelenideElement ELEMENT_SPACE_ADMIN_PAGE=$(byClassName("spacesAdministration"));
 
 }
 

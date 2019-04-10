@@ -85,9 +85,24 @@ public class SpacePermissionTestIT extends Base {
   public void test03_CheckTheChangeOfEditbuttonWhenClickingOnIt() {
     navigationToolbar.goToSpaceAdminstration();
     ELEMENT_PERMISSIONS_SECTION.click();
-    $(byClassName("uiIconEdit")).waitUntil(Condition.visible, Configuration.timeout).click();
-    $(byClassName("uiIconSave")).waitUntil(Condition.visible, Configuration.timeout);
-    $(byClassName("uiIconClose")).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
+    ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent()
+                                            .parent()
+                                            .find(byClassName("uiIconEdit"))
+                                            .waitUntil(Condition.visible, Configuration.timeout)
+                                            .click();
+    ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent()
+                                            .parent()
+                                            .find(byClassName("uiIconEdit"))
+                                            .waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent()
+                                            .parent()
+                                            .find(byClassName("uiIconSave"))
+                                            .waitUntil(Condition.visible, Configuration.timeout);
+    ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent()
+                                            .parent()
+                                            .find(byClassName("uiIconClose"))
+                                            .waitUntil(Condition.visible, Configuration.timeout)
+                                            .click();
   }
 
   @Test
@@ -95,22 +110,20 @@ public class SpacePermissionTestIT extends Base {
     navigationToolbar.goToSpaceAdminstration();
     ELEMENT_PERMISSIONS_SECTION.click();
     ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent()
-                                            .parent().parent()
-                                            .find(byText("No assignment"))
+                                            .parent()
+                                            .find(byText("*:/platform/users"))
                                             .waitUntil(Condition.visible, Configuration.timeout);
-    ELEMENT_SPACE_MANAGEMENT_SECTION.parent()
-                                    .parent()
-                                    .parent()
-                                    .find(byText("No assignment"))
-                                    .waitUntil(Condition.visible, Configuration.timeout);
-
+    ELEMENT_SPACE_GRID.find(byText("Manage spaces"))
+                      .parent()
+                      .parent()
+                      .find(byText("No assignment"))
+                      .waitUntil(Condition.visible, Configuration.timeout);
   }
 
   @Test
   public void test05_CheckFormatWhenAddGroupForPermission() {
     navigationToolbar.goToSpaceAdminstration();
     ELEMENT_PERMISSIONS_SECTION.click();
-    ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent()
                                             .parent()
                                             .find(byClassName("uiIconEdit"))
@@ -125,7 +138,7 @@ public class SpacePermissionTestIT extends Base {
                                              .parent()
                                              .find(byClassName("selectize-control"))
                                              .find(byAttribute("type", "text"))
-                                             .sendKeys("users");
+                                             .sendKeys("admin");
     homePagePlatform.refreshUntil($(byText("Create spaces")), Condition.visible, 1000);
     ELEMENT_PERMISSIONS_SECTION_Ability_SPACE.parent()
                                              .parent()
@@ -135,7 +148,7 @@ public class SpacePermissionTestIT extends Base {
     ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byClassName("uiIconSave")).click();
     ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent()
                                             .parent()
-                                            .find(byText("*:/platform/users"))
+                                            .find(byText("*:/platform/administrators"))
                                             .waitUntil(Condition.visible, Configuration.timeout);
   }
 
@@ -149,7 +162,6 @@ public class SpacePermissionTestIT extends Base {
     spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
     navigationToolbar.goToSpaceAdminstration();
     ELEMENT_PERMISSIONS_SECTION.click();
-    ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent()
                                             .parent()
                                             .find(byClassName("uiIconEdit"))
@@ -314,7 +326,6 @@ public class SpacePermissionTestIT extends Base {
     info("create some spaces");
     navigationToolbar.goToSpaceAdminstration();
     ELEMENT_PERMISSIONS_SECTION.click();
-    ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent()
                                             .parent()
                                             .find(byClassName("uiIconEdit"))
@@ -329,7 +340,7 @@ public class SpacePermissionTestIT extends Base {
                                              .parent()
                                              .find(byClassName("selectize-control"))
                                              .find(byAttribute("type", "text"))
-                                             .sendKeys("users");
+                                             .sendKeys("admin");
     homePagePlatform.refreshUntil($(byText("Create spaces")), Condition.visible, 1000);
     ELEMENT_PERMISSIONS_SECTION_Ability_SPACE.parent()
                                              .parent()
@@ -339,7 +350,7 @@ public class SpacePermissionTestIT extends Base {
     ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byClassName("uiIconSave")).click();
     ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent()
                                             .parent()
-                                            .find(byText("*:/platform/users"))
+                                            .find(byText("*:/platform/administrators"))
                                             .waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent()
                                             .parent()
@@ -348,14 +359,16 @@ public class SpacePermissionTestIT extends Base {
                                             .click();
     ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent()
                                             .parent()
+                                            .find(byAttribute("data-value", "*:/platform/administrators"))
                                             .find(byClassName("remove"))
                                             .waitUntil(Condition.visible, Configuration.timeout)
                                             .click();
     ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent().parent().find(byClassName("uiIconSave")).click();
     ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE.parent()
-                                            .parent().parent()
-                                            .find(byText("No assignment"))
-                                            .waitUntil(Condition.visible, Configuration.timeout);
+                                            .parent()
+                                            .parent()
+                                            .find(byText("*:/platform/administrators"))
+                                            .waitUntil(Condition.not(Condition.visible), Configuration.timeout);
 
   }
 }

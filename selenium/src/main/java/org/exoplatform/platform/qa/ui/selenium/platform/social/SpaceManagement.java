@@ -224,7 +224,7 @@ public class SpaceManagement {
      * @param name
      * @param number
      */
-    public void searchSpace(String name, String number) {
+    public void searchSpace(String name, String... number) {
         info("Waiting my space is shown");
         ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.appears, Configuration.timeout);
         info("Input the space into search text box");

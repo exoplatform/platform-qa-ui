@@ -390,8 +390,7 @@ public final class NavigationToolBarLocator {
 public static final By ELEMENT_BUTTON_ACCEPT_INVITATION_IN_NOTIFICATION=byClassName("action-item");
   public static final By ELEMENT_BUTTON_CANCEL_INVITATION_IN_NOTIFICATION=byClassName("cancel-item");
   public static final SelenideElement ELEMENT_LIST_FORUM_IN_TOP_NAVIGATION=$(byAttribute("class","item forum"));
-
-
+ public static final SelenideElement ELEMENT_SPACE_ADMIN_LINK=$(byAttribute("href", "/portal/g/:platform:users/spacesAdministration"));
 }
 
 

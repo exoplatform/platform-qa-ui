@@ -26,6 +26,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.EL
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_MANAGESITES_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_PAGE_CREATION_WIZARD;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACE_ADMIN_PAGE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
@@ -284,7 +285,8 @@ public class NavigationToolbar {
   public void goToSpaceAdminstration() {
     $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-    $(byAttribute("href", "/portal/g/:platform:users/spacesAdministration")).click();
+    ELEMENT_SPACE_ADMIN_LINK.click();
+    ELEMENT_SPACE_ADMIN_PAGE.waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
