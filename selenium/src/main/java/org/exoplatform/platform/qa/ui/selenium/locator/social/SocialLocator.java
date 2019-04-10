@@ -2431,5 +2431,27 @@ public static final By
   public static final SelenideElement ELEMENT_NOTIFICATION_ACTIONS=  $(byClassName("notificationsActions"));
   public static final SelenideElement ELEMENT_SPACE_PORTLET =  $(byClassName("uiIconAppSpaceActivityStreamPortlet"));
   public static final SelenideElement ELEMENT_SPACE_MENU =  $(byXpath("//*[@id=\"UISpaceMenu\"]/div[1]/div/ul/li[1]/a"));
+  public static final By ELEMENT_EDITSPACE_MANAGE_ICON=  byClassName("uiIconEdit");
+  public static final By ELEMENT_DELETESPACE_MANAGE_ICON=  byClassName("uiIconDeleteUser");
+  public static final SelenideElement ELEMENT_SPACE_SEARCH_ICON= $(byClassName("showInputSearch"));
+  public static final SelenideElement ELEMENT_SPACE_GRID=  $(byClassName("uiGrid"));
+  public static final SelenideElement ELEMENT_SPACE_SETTING_PAGE=  $(byId("UISpaceSetting"));
+  public static final SelenideElement ELEMENT_SPACE_NAME_PAGE= $(byId("displayName"));
+  public static final SelenideElement ELEMENT_SPACE_DESCRIPTION_PAGE=   $(byId("description"));
+  public static final SelenideElement ELEMENT_ROW_CONTAINER_INDEX3= $(byClassName("UIRowContainer")).findAll(byClassName("avatar")).get(3);
+  public static final SelenideElement ELEMENT_ROW_CONTAINER_INDEX2= $(byClassName("UIRowContainer")).findAll(byClassName("avatar")).get(2);
+  public static final SelenideElement ELEMENT_ROW_CONTAINER_INDEX1= $(byClassName("UIRowContainer")).findAll(byClassName("avatar")).get(1);
+  public static final SelenideElement ELEMENT_ROW_CONTAINER_INDEX0= $(byClassName("UIRowContainer")).findAll(byClassName("avatar")).get(0);
+  public static final SelenideElement ELEMENT_SPACEAVATAR_DEFAULT=  $(byAttribute("src", "/eXoSkin/skin/images/system/SpaceAvtDefault.png"));
+  public static final SelenideElement ELEMENT_SPACEMANAGEMENT_CANCEL_POPUP= $(byClassName("modal-content")).find(byClassName("btn-primary"));
+  public static final SelenideElement ELEMENT_SPACEMANAGEMENT_ClOSE_POPUP= $(byClassName("modal-content")).find(byClassName("uiIconClose"));
+  public static final SelenideElement ELEMENT_SPACEMANAGEMENT_POPUP=$(byClassName("modal-content")).find(byClassName("btn"));
+  public static final SelenideElement ELEMENT_SPACE_MANAGEMENT_SECTION=$(byText("Manage spaces"));
+  public static final SelenideElement ELEMENT_PERMISSIONS_SECTION=$(byText("Permissions"));
+  public static final SelenideElement ELEMENT_PERMISSIONS_SECTION_CREATE_SPACE=$(byText("Create spaces"));
+  public static final SelenideElement ELEMENT_PERMISSIONS_SECTION_Ability_SPACE=$(byText("Ability to create spaces"));
+  public static final SelenideElement ELEMENT_PERMISSIONS_SECTION_Ability_EDIT_SPACE=$(byText("Ability to edit spaces"));
+  public static final SelenideElement ELEMENT_SPACE_ADMIN_PAGE=$(byClassName("spacesAdministration"));
+
 }
 
