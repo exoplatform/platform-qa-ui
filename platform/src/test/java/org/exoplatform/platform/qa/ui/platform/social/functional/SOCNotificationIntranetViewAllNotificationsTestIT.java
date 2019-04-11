@@ -1481,8 +1481,8 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
    */
   @Test
   public void test18_CheckNumberOfNotificationsDisplayedInThePage() throws AWTException {
-    info("Test 18 Check number of notifications displayed in the page");
 
+    info("Test 18 Check number of notifications displayed in the page");
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@gmail.com";
     String username2 = "usernameb" + getRandomString();
@@ -1778,5 +1778,4 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     addUsers.deleteUser(username6);
     addUsers.deleteUser(username7);
 
-  }
-}
+  }}
