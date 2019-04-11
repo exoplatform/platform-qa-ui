@@ -712,9 +712,9 @@ public class ActivityStream {
    */
   public void mentionUserActivity(String username, String text) {
     info("mention user in activity");
-    ELEMENT_ACTIVITY_INPUT_TEXT.waitUntil(Condition.appears, Configuration.timeout).click();
+    ELEMENT_ACTIVITY_INPUT_TEXT.waitUntil(Condition.appears, Configuration.timeout);
     switchTo().frame(0);
-    $(byXpath("/html/body")).setValue("@" + username);
+    $(byXpath("/html/body")).sendKeys("@" + username);
     switchTo().defaultContent();
     $(byXpath("//*[@id=\"at-view-64\"]")).waitUntil(Condition.visible, Configuration.timeout);
     switchTo().frame(0);

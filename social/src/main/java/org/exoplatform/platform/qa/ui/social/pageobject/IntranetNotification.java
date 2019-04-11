@@ -551,7 +551,11 @@ public class IntranetNotification {
                 + " is displayed");
         break;
       }
-    }}
+      info("Retry...[" + repeat + "]");
+      this.testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+    }
+  }
+
 
   /**
    * Check status of space notifications
@@ -572,8 +576,7 @@ public class IntranetNotification {
    */
   public void checkNotPresentStatus(String status, String user) {
     info("Verify that the status is not shown");
-    $(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS.replace("$status", status).replace("$fullName", user))).waitUntil(not(Condition.visible),Configuration.timeout);
-
+    $(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS.replace("$status", status).replace("$username", user))).waitUntil(not(Condition.visible),Configuration.timeout);
   }
 
   public void checkNotStatusSpace(String status, String space) {

@@ -364,9 +364,9 @@ public class SpaceManagement {
     public void requestToJoinSpace(String space, boolean... isVerify) {
         info("Request to join a space");
         searchSpace(space, "");
-        evt.click(ELEMENT_REQUEST_TO_JOIN_SPACE_BTN.replace("${space}", space));
+        $(byXpath(ELEMENT_REQUEST_TO_JOIN_SPACE_BTN.replace("${space}", space))).click();
         if (isVerify.length > 0) {
-            evt.waitForAndGetElement(ELEMENT_REQUEST_PENDING.replace("${space}", space), 2000, 1);
+            $(byXpath(ELEMENT_REQUEST_PENDING.replace("${space}", space))).waitUntil(Condition.visible,Configuration.timeout);
         }
         info("Request successfully");
     }
