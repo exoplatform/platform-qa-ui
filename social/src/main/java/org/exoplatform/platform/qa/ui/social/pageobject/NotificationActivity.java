@@ -1,8 +1,9 @@
 package org.exoplatform.platform.qa.ui.social.pageobject;
 
-import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selectors.byXpath;
+
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_TREE_WIKI_NAME;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -89,11 +90,11 @@ public class NotificationActivity {
   public void checkCommentExpand(String comment, boolean isHighlight) {
     if (!comment.isEmpty()) {
       info("Verify that all comments are expanded");
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ACTIVITY_COMMENT_CONTENT.replace("$comment", comment), 2000, 1);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ACTIVITY_COMMENT_CONTENT.replace("$comment", comment))).waitUntil(Condition.visible, Configuration.timeout);
 
       if (isHighlight) {
         info("Verify that the last comment is highlighted");
-        evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ACTIVITY_COMMENT_HIGHLIGHT.replace("$comment", comment), 2000, 1);
+        $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ACTIVITY_COMMENT_HIGHLIGHT.replace("$comment", comment))).waitUntil(Condition.visible,Configuration.timeout);
       }
     }
   }
@@ -110,10 +111,10 @@ public class NotificationActivity {
 
     if (highlighted) {
       info("Check comment in Activity viewer to make sure it's highlighted");
-      evt.waitForAndGetElement(ELEMENT_COMMENT_HIGHLIGHTED.replace("${comment}", comment));
+      $(byXpath(ELEMENT_COMMENT_HIGHLIGHTED.replace("${comment}", comment))).waitUntil(Condition.visible,Configuration.timeout);
     } else {
       info("Check to make sure all comments are shown in activity viewer");
-      evt.waitForAndGetElement(ELEMENT_COMMENT_ACTIVITY_VIEWER.replace("${comment}", comment).replace("${userName}", userName));
+      $(byXpath(ELEMENT_COMMENT_ACTIVITY_VIEWER.replace("${comment}", comment).replace("${userName}", userName))).waitUntil(Condition.visible,Configuration.timeout);
     }
   }
 

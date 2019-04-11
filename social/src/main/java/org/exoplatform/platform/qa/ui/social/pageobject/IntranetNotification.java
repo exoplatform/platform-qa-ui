@@ -498,7 +498,7 @@ public class IntranetNotification {
     info("users.size:" + users.size());
     if (isPopUp) {
       info("Verify that last user is shown in the popup");
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_USER.replace("$user", users.get(lastIndex)), 2000, 2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_USER.replace("$user", users.get(lastIndex)))).waitUntil(Condition.visible,Configuration.timeout);
     } else {
       info("Verify that last user is shown in the page");
       evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ALL_USER.replace("$user", users.get(lastIndex)), 2000, 2);
@@ -562,13 +562,14 @@ public class IntranetNotification {
   public void checkStatus(String status, String user) {
 
     info("Verify that the status is shown");
-    for (int repeat = 0;; repeat++) {
+    for (int repeat = 0; ; repeat++) {
       if (repeat > 1) {
         if ($(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS.replace("$status", status).replace("$fullName", user))).is(Condition.visible))
           ;
         break;
       }
       if ($(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS.replace("$status", status).replace("$fullName", user))).is(Condition.visible)) {
+
         info("Element " + ELEMENT_INTRANET_NOTIFICATION_STATUS.replace("$status", status).replace("$fullName", user)
                 + " is displayed");
         break;
@@ -576,7 +577,10 @@ public class IntranetNotification {
       info("Retry...[" + repeat + "]");
 
     }
-  }
+
+    }
+
+
 
   /**
    * Check status of space notifications
@@ -714,6 +718,7 @@ public class IntranetNotification {
     } else {
       info("Verify the activity's title is shown in the page");
       $(byXpath(ELEMENT_INTRANET_NOTIFICATION_ALL_ACTIVITY_TITLE.replace("$title", actTitle))).waitUntil(Condition.visible,Configuration.timeout);
+
     }
   }
 
@@ -730,7 +735,7 @@ public class IntranetNotification {
     info("users.size():" + users.size());
     info("Verify that last user's avatar is shown in list");
     if (isPopUp)
-      evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_AVATAR.replace("$lastUser", users.get(lastIndex)), 2000, 2);
+      $(byXpath(ELEMENT_INTRANET_NOTIFICATION_AVATAR.replace("$lastUser", users.get(lastIndex)))).waitUntil(Condition.visible,Configuration.timeout);
     else
       evt.waitForAndGetElement(ELEMENT_INTRANET_NOTIFICATION_ALL_AVATAR.replace("$lastUser", users.get(lastIndex)), 2000, 2);
   }
