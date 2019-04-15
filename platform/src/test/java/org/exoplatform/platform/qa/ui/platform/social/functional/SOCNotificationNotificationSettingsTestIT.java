@@ -222,6 +222,58 @@ public class SOCNotificationNotificationSettingsTestIT extends Base {
     manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
-  }}
+  }
 
- 
+  /**
+   * <li>Case ID:117522.</li>
+   * <li>Test Case Name: Check settings in notification table are context=user,
+   * scope=global..</li>
+   * <li>Pre-Condition:</li>
+   * <li>Post-Condition:</li>
+   */
+  /*
+   * Step Number: 1 Step Name: Step 1: Access notification settings Step
+   * Description: - Login as user1 - Move mouse over the full name of user and
+   * select [My Notifications] in the menu Input Data: Expected Outcome: -
+   * Notification Settings page is appeared
+   */
+  /*
+   * Step number: 2 Step Name: Step 2: Change notification settings Step
+   * Description: - Change settings for some notification types Input Data:
+   * Expected Outcome: - The change is saved
+   */
+  /*
+   * Step number: 3 Step Name: Step 3: Check notification settings by other user
+   * Step Description: - Login as user2 - Go to notification settings page Input
+   * Data: Expected Outcome: - The change at step 2 is not saved in notification
+   * settings of user2
+   */
+  @Test
+  public void test03_CheckSettingsInNotificationTableAreContextUserScopeGlobal() {
+    info("Test 3: Check settings in notification table are context=user, scope=global.");
+    /* Create data test */
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@gmail.com";
+    String username2 = "usernameb" + getRandomString();
+    String email2 = username2 + "@gmail.com";
+    String password = "123456";
+    info("Add new user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+    addUsers.addUser(username2, password, email2, username2, username2);
+    manageLogInOut.signIn(username1, password);
+    navigationToolbar.goToMyNotifications();
+    myNotificationsSetting.verifyTilePage();
+    myNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.NewUser_intranet);
+    myNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.AS_Like_intranet);
+    manageLogInOut.signIn(username2, password);
+    navigationToolbar.goToMyNotifications();
+    myNotificationsSetting.verifyTilePage();
+    myNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.NewUser_intranet);
+    myNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.AS_Like_intranet);
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
+    addUsers.deleteUser(username2);
+  }
+}
