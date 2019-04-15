@@ -1,10 +1,11 @@
 package org.exoplatform.platform.qa.ui.platform.social.functional;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_MY_NOTIFICATION_SETTING_FORM;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -99,10 +100,12 @@ public class SOCNotificationNotificationSettingsTestIT extends Base {
 
     info("Add new user");
     navigationToolbar.goToAddUser();
-    navigationToolbar.goToAddUser();
     addUsers.addUser(username1, "123456", email1, username1, username1);
     manageLogInOut.signIn(username1, password);
     navigationToolbar.goToMyNotifications();
     $(ELEMENT_MY_NOTIFICATION_SETTING_FORM).waitUntil(Condition.visible, Configuration.timeout);
-  }
-}
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
+  }}
+
