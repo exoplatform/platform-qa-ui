@@ -21,9 +21,6 @@ import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
-import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
-import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
-import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.social.pageobject.IntranetNotification;
 import org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting;
@@ -38,12 +35,6 @@ public class SOCNotificationNotificationSettingsTestIT extends Base {
   AddUsers               addUsers;
 
   ManageLogInOut         manageLogInOut;
-
-  SpaceManagement        spaceManagement;
-
-  SpaceHomePage          spaceHomePage;
-
-  SpaceSettingManagement spaceSettingManagement;
 
   HomePagePlatform       homePagePlatform;
 
@@ -64,14 +55,11 @@ public class SOCNotificationNotificationSettingsTestIT extends Base {
     addUsers = new AddUsers(this);
     manageLogInOut = new ManageLogInOut(this);
     homePagePlatform = new HomePagePlatform(this);
-    spaceManagement = new SpaceManagement(this);
     userAddManagement = new UserAddManagement(this);
     activityStream = new ActivityStream(this);
     manageLogInOut.signInCas(DATA_USER1, DATA_PASS2);
     intranetNotification = new IntranetNotification(this);
-    spaceHomePage = new SpaceHomePage(this);
     myNotificationsSetting = new MyNotificationsSetting(this);
-    spaceSettingManagement = new SpaceSettingManagement(this);
     notificationActivity = new NotificationActivity(this);
 
   }
