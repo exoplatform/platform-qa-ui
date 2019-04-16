@@ -1192,7 +1192,7 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     info(" Go to View All Notification");
     navigationToolbar.goToIntranetNotification();
     intranetNotification.goToAllNotification();
-    String status = "";
+    String status = "likes your activity";
     intranetNotification.checkStatus(status, username2);
 
     info("Check detail of activity comment");
@@ -1268,7 +1268,7 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     info(" Go to View All Notification");
     navigationToolbar.goToIntranetNotification();
     intranetNotification.goToAllNotification();
-    String status = "";
+    String status = "wants to connect with you";
     intranetNotification.checkStatus(status, username2);
 
     info("Check detail of activity comment");
@@ -1438,9 +1438,9 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     info("User C sent a connection request to User A");
     homePagePlatform.goToConnections();
     connectionsManagement.connectToAUser(username1);
-    String statusSendRq = "";
-    String statusLikeAc = "";
-    String statusCommAc = "";
+    String statusSendRq = "wants to connect with you";
+    String statusLikeAc = "likes your activity";
+    String statusCommAc = "has commented on your activity";
 
     info("Log in with User A");
     manageLogInOut.signIn(username1, password);
@@ -1464,8 +1464,6 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
    * <li>Pre-Condition: - The user must has between 20 and 30 notifications
    * existing</li>
    * <li>Post-Condition:</li>
-   *
-   * @throws AWTException
    */
   /*
    * Step Number: 1 Step Name: Step 1 : Go to View All Step Description: - Login -
@@ -1777,5 +1775,66 @@ public class SOCNotificationIntranetViewAllNotificationsTestIT extends Base {
     addUsers.deleteUser(username5);
     addUsers.deleteUser(username6);
     addUsers.deleteUser(username7);
+
+  }
+
+  /**
+   * <li>Case ID:125186.</li>
+   * <li>Test Case Name: Check Notifications Settings link in View All.</li>
+   * <li>Pre-Condition: The user has notifications</li>
+   * <li>Post-Condition:</li>
+   */
+  /*
+   * Step Number: 1 Step Name: Step 1 : Go to View All Step Description: - Login -
+   * Click the notifications icon in the top navigation - Click View All Input
+   * Data: Expected Outcome: - The View All page is displayed
+   */
+
+  /*
+   * Step number: 2 Step Name: Step 2 : Check UI Step Description: - Check the top
+   * of the View All page Input Data: Expected Outcome: - At the top of the page,
+   * 1 link "Notifications Settings" is available.
+   */
+  /*
+   * Step number: 3 Step Name: Step 3 : Click the link Step Description: - Click
+   * [Notifications Settings] Input Data: Expected Outcome: - The link redirects
+   * the user to his settings page
+   */
+  @Test
+  public void test19_CheckNotificationsSettingsLinkInViewAll() {
+    info("Test 19 Check Notifications Settings link in View All");
+
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@gmail.com";
+    String username2 = "usernameb" + getRandomString();
+    String email2 = username2 + "@gmail.com";
+    String password = "123456";
+
+    info("Add new user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+    addUsers.addUser(username2, password, email2, username2, username2);
+    manageLogInOut.signIn(username1, password);
+
+    info("User A sent a connection request to User B");
+    homePagePlatform.goToConnections();
+    connectionsManagement.connectToAUser(username2);
+
+    info("User B login");
+    manageLogInOut.signIn(username2, password);
+
+    info(" Go to View All Notification");
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
+
+    info(" Check the top of the View All page");
+    intranetNotification.goToAllNotification();
+    String status = "wants to connect with you";
+    intranetNotification.checkStatus(status, username2);
+
+    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    navigationToolbar.goToManageCommunity();// Notification 1
+    addUsers.deleteUser(username1);
+    addUsers.deleteUser(username2);
 
   }}
