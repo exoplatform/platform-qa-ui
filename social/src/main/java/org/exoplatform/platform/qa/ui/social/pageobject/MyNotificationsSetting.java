@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.social.pageobject;
 
 import static com.codeborne.selenide.Condition.not;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
@@ -12,6 +13,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.openqa.selenium.By;
 
@@ -19,6 +21,8 @@ public class MyNotificationsSetting {
   private final TestBase       testBase;
 
   private ElementEventTestBase evt;
+
+  public HomePagePlatform homePagePlatform;
 
   /**
    * constructor
@@ -28,6 +32,7 @@ public class MyNotificationsSetting {
   public MyNotificationsSetting(TestBase testBase) {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
+    this.homePagePlatform=new HomePagePlatform(testBase);
 
   }
 
@@ -37,7 +42,7 @@ public class MyNotificationsSetting {
    * @param notifToDisable myNotiType
    */
   public void disableNotification(myNotiType notifToDisable) {
-    $(ELEMENT_ADD_TOOTLBAR).click();
+    homePagePlatform.refreshUntil($(ELEMENT_ADD_TOOTLBAR),visible,1000);
     int repeat = 0;
     switch (notifToDisable) {
       case NewUser_email:
@@ -57,14 +62,14 @@ public class MyNotificationsSetting {
         break;
       case NewUser_intranet:
         info("Click on Edit button");
-        $(ELEMENT_EDIT_NEWUSER_ICON).click();
+          $(ELEMENT_EDIT_NEWUSER_ICON).click();
         if($(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX).is(Condition.selected)){
           $(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX).parent().click();
         }
         info("Click on Save button");
-        evt.click(ELEMENT_EDIT_NEWUSER_SAVE_BTN);
+        $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).click();
         info("Verify that intranet notification is hidded");
-        evt.waitForElementNotPresent(ELEMENT_NEW_USER_INTRANET_ICON, 3000, 1);
+        $(ELEMENT_NEW_USER_INTRANET_ICON).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
         break;
       case ConnectionRequest_email:
         evt.click(ELEMENT_EDIT_RECREQ_ICON);
@@ -271,7 +276,7 @@ public class MyNotificationsSetting {
    * @param opParams  object
    */
   public void enableNotification(myNotiType notifToEnable, Object... opParams) {
-    $(ELEMENT_ADD_TOOTLBAR).click();
+    homePagePlatform.refreshUntil($(ELEMENT_ADD_TOOTLBAR),visible,1000);
     String opt = (String) (opParams.length > 0 ? opParams[0] : "");
     int repeat = 0;
     switch (notifToEnable) {
@@ -301,7 +306,7 @@ public class MyNotificationsSetting {
         $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).click();
         $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).waitUntil(not(Condition.visible),Configuration.timeout);
         info("Verify that intranet notification is shown");
-        evt.waitForAndGetElement(ELEMENT_NEW_USER_INTRANET_ICON, 3000, 1);
+        $(ELEMENT_NEW_USER_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);
         break;
       case ConnectionRequest_email:
         evt.click(ELEMENT_EDIT_RECREQ_ICON);
@@ -582,9 +587,10 @@ public class MyNotificationsSetting {
    */
   public void confirmResetNotificationSetting() {
     info("Click on Reset button");
-    evt.click(ELEMENT_RESET_BTN);
+    $(ELEMENT_RESET_BTN).click();
     info("Click on Confirm button");
-    evt.click(ELEMENT_RESET_CONFIRM);
+    $(ELEMENT_RESET_CONFIRM).click();
+    $(ELEMENT_RESET_CONFIRM).waitUntil(not(visible),Configuration.timeout);
 
   }
 
@@ -593,9 +599,9 @@ public class MyNotificationsSetting {
    */
   public void cancelResetNotiSetting() {
     info("click on reset button");
-    evt.click(ELEMENT_RESET_BTN);
+    $(ELEMENT_RESET_BTN).click();
     info("click on cancel button");
-    evt.click(ELEMENT_RESET_CANCEL);
+    $(ELEMENT_RESET_CANCEL).click();
 
   }
 
@@ -604,7 +610,7 @@ public class MyNotificationsSetting {
    */
   public void verifyTilePage() {
     info("Verify the title of Notification settings page");
-    evt.waitForAndGetElement(ELEMENT_TITLE_NOTIFICATION_SETTING_PAGE);
+    $(ELEMENT_TITLE_NOTIFICATION_SETTING_PAGE).waitUntil(Condition.visible,Configuration.timeout);
     info("The page is shown");
   }
 
@@ -687,7 +693,7 @@ public class MyNotificationsSetting {
         break;
       case NewUser_intranet:
         info("Verify that email for new user notification is shown");
-        evt.waitForAndGetElement(ELEMENT_NEW_USER_INTRANET_ICON);
+        $(ELEMENT_NEW_USER_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);
         info("The notification is shown successfully");
         break;
       case AS_Comment_email:

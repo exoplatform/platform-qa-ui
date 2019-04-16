@@ -276,4 +276,62 @@ public class SOCNotificationNotificationSettingsTestIT extends Base {
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
   }
+
+  /**
+   * <li>Case ID:117575.</li>
+   * <li>Test Case Name: Check [Reset] button.</li>
+   * <li>Pre-Condition:</li>
+   * <li>Post-Condition:</li>
+   */
+  /*
+   * Step Number: 1 Step Name: Step 1: Access notification settings Step
+   * Description: - Login - Move mouse over the full name of user and select
+   * [Notifications] on the menu Input Data: Expected Outcome: - Notification
+   * Settings page is appeared
+   */
+  /*
+   * Step number: 3 Step Name: Step 3: Check [Reset] button when Cancel Step
+   * Description: - Make change somethings in notification settings table - Click
+   * [Reset] - Click [Cancel] Input Data: Expected Outcome: - Message
+   * "All your notification settings will be reset to default values. Your previous settings will be lost"
+   * is displayed - All changes are not reset
+   */
+  /*
+   * Step number: 2 Step Name: Step 2: Check [Reset] button when Confirm Step
+   * Description: - Make change somethings in notification settings table - Click
+   * [Reset] - Click [Confirm] Input Data: Expected Outcome: - Message
+   * "All your notification settings will be reset to default values. Your previous settings will be lost"
+   * is displayed - All changes are reset to default values
+   */
+  @Test
+  public void test04_CheckResetButton() {
+    info("Test 4: Check [Reset] button");
+    /* Create data test */
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@gmail.com";
+    String password = "123456";
+
+    info("Add new user");
+    ArrayList<String> arrayUser = new ArrayList<String>();
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+    manageLogInOut.signIn(username1, password);
+
+    navigationToolbar.goToMyNotifications();
+    myNotificationsSetting.verifyTilePage();
+    myNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.NewUser_intranet);
+    myNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.AS_Like_intranet);
+
+    myNotificationsSetting.cancelResetNotiSetting();
+    navigationToolbar.goToMyNotifications();
+    myNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.NewUser_intranet);
+    myNotificationsSetting.enableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.AS_Like_intranet);
+
+    navigationToolbar.goToMyNotifications();
+    myNotificationsSetting.confirmResetNotificationSetting();
+    navigationToolbar.goToMyNotifications();
+    myNotificationsSetting.disableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.NewUser_intranet);
+    myNotificationsSetting.disableNotification(org.exoplatform.platform.qa.ui.social.pageobject.MyNotificationsSetting.myNotiType.AS_Like_intranet);
+
+  }
 }
