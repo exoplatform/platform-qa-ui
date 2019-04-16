@@ -44,8 +44,10 @@ public class WikiHomePage {
      */
     public void goToAddBlankPage() {
         info("--Go to add blank wiki page--");
+        homePagePlatform.refreshUntil($(ELEMENT_ADD_PAGE_LINK),Condition.visible,1000);
         $(ELEMENT_ADD_PAGE_LINK).click();
         $(ELEMENT_BLANK_PAGE_LINK).click();
+        homePagePlatform.refreshUntil($(ELEMENT_TITLE_WIKI_INPUT),Condition.visible,1000);
         info("Blank wiki page is shown");
     }
 
@@ -91,11 +93,10 @@ public class WikiHomePage {
      * @param title String
      */
     public void deleteWiki(String title) {
-
+        homePagePlatform.refreshUntil($(byText(title)),Condition.visible,1000);
         info("Select the wiki page to delete");
         selectAPage(title);
         info("Click on More link");
-        homePagePlatform.refreshUntil($(ELEMENT_MORE_LINK),Condition.visible,1000);
         $(ELEMENT_MORE_LINK).click();
         $(ELEMENT_DELETE_LINK).click();
         $(ELEMENT_CONFIRM_WIKI_DELETE).click();
