@@ -215,4 +215,72 @@ public class SOCPeopleActivityAddTestIT extends Base {
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
   }
+
+  /**
+   * <li>Case ID:122785.</li>
+   * <li>Test Case Name: Add new your activity.</li>
+   * <li>Pre-Condition:</li>
+   * <li>Post-Condition:</li>
+   */
+  /* Create data test */
+  /*
+   * Step Number: 1 Step Name: - Step Description: Step 1: Go to my profile page
+   * Input Data: - Sign in system - Select Activities page on User Toolbar portlet
+   * in the upper right corner of the screen Expected Outcome: - Show content of
+   * People page. It focus on activity list
+   */
+  /*
+   * Step number: 2 Step Name: - Step Description: Step 2: Add new activities
+   * Input Data: - Select activity - Enter some text into text box - Click on Add
+   * button Expected Outcome: Add an activity successfully: - This activity is
+   * added into users activities list.User who is in your contact, can view your
+   * active on his/her activity list
+   */
+  @Test
+  public void test03_AddNewYourActivity() {
+
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@gmail.com";
+    String username2 = "usernameb" + getRandomString();
+    String email2 = username2 + "@gmail.com";
+    String password = "123456";
+
+    info("Add new user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+    addUsers.addUser(username2, password, email2, username2, username2);
+    manageLogInOut.signIn(username1, password);
+
+    info("Click on Connections on the left panel");
+    homePagePlatform.goToConnections();
+
+    info("Access people list, invite an user");
+    connectionsManagement.connectToAUser(username2);
+
+    info("Invited user accept invitation");
+    manageLogInOut.signIn(username2, password);
+    homePagePlatform.goToConnections();
+    connectionsManagement.acceptAConnection(username1);
+    info("Verify after accept");
+    connectionsManagement.verifyConnection(username1, true);
+
+    info("Test 3: Add new your activity");
+    manageLogInOut.signIn(username1, password);
+    navigationToolbar.goToMyActivities();
+    String activity1 = "activity1" + getRandomNumber();
+    activityStream.addActivity(activity1, "");
+
+    manageLogInOut.signIn(username2, password);
+    homePagePlatform.goToConnections();
+    $(ELEMENT_ALL_CONNECTIONS_TAB).click();
+    connectionsManagement.searchPeople(username1, null, null, null);
+    $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username1))).click();
+    userPageBase.goToActivityTab();
+    $(byXpath(ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", activity1))).waitUntil(Condition.visible,
+                                                                                                 Configuration.timeout);
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
+    addUsers.deleteUser(username2);
+  }
 }
