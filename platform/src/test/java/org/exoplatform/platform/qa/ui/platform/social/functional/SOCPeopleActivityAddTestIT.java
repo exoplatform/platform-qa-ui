@@ -283,4 +283,50 @@ public class SOCPeopleActivityAddTestIT extends Base {
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
   }
+
+  /**
+   * <li>Case ID:122777.</li>
+   * <li>Test Case Name: Close share link.</li>
+   * <li>Pre-Condition:</li>
+   * <li>Post-Condition:</li>
+   */
+  /*
+   * Step Number: 1 Step Name: - Step Description: Step 1: Go to my profile page
+   * Input Data: - Sign in system - Select Activities page on User Toolbar portlet
+   * in the upper right corner of the screen Expected Outcome: - User activities
+   * page is displayed. It focus on activity list
+   */
+  /*
+   * Step number: 2 Step Name: - Step Description: Step 2: Share a link Input
+   * Data: - Select activity in the left pane - Click on Attach icon - Enter a not
+   * exited URL - Hit Enter from keyboard or click on [Attach] button on Share
+   * link form - Click on [Close] icon Expected Outcome: Close share link form,
+   * and the link is not shared
+   */
+  @Test
+  public void test04_CloseShareLink() {
+    String textDes = "textDes" + getRandomNumber();
+    String link = "www.google.com/";
+    info("Test 4: Close share link");
+
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@gmail.com";
+    String password = "123456";
+
+    info("Add new user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+    manageLogInOut.signIn(username1, password);
+
+    navigationToolbar.goToMyActivities();
+
+    activityStream.addLink(link);
+    activityStream.closeShareLink();
+    $(byXpath(ELEMENT_ACTIVITY_TITLE.replace("${text}", textDes)
+                                    .replace("${file}", link))).waitUntil(Condition.not(Condition.visible),
+                                                                          Configuration.timeout);
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
+  }
 }
