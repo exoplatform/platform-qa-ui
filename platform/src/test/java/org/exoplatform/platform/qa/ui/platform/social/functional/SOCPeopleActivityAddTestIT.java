@@ -201,7 +201,6 @@ public class SOCPeopleActivityAddTestIT extends Base {
     connectionsManagement.acceptAConnection(username1);
     info("Verify after accept");
     connectionsManagement.verifyConnection(username1, true);
-
     manageLogInOut.signIn(username1, password);
     homePagePlatform.goToConnections();
     connectionsManagement.goToConnectionTab(ConnectionsManagement.selectTabOption.ALL);
@@ -269,7 +268,6 @@ public class SOCPeopleActivityAddTestIT extends Base {
     navigationToolbar.goToMyActivities();
     String activity1 = "activity1" + getRandomNumber();
     activityStream.addActivity(activity1, "");
-
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToConnections();
     $(ELEMENT_ALL_CONNECTIONS_TAB).click();
@@ -317,9 +315,7 @@ public class SOCPeopleActivityAddTestIT extends Base {
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);
     manageLogInOut.signIn(username1, password);
-
     navigationToolbar.goToMyActivities();
-
     activityStream.addLink(link);
     activityStream.closeShareLink();
     $(byXpath(ELEMENT_ACTIVITY_TITLE.replace("${text}", textDes)
