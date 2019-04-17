@@ -137,4 +137,82 @@ public class SOCPeopleActivityAddTestIT extends Base {
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
   }
+
+  /**
+   * <li>Case ID:122771.</li>
+   * <li>Test Case Name: Add new activity for users contact.</li>
+   * <li>Pre-Condition:</li>
+   * <li>Post-Condition:</li>
+   */
+  /*
+   * Step Number: 1 Step Name: - Step Description: Step 1: Go to people page Input
+   * Data: - Sign in system with user AAA - Select people page Expected Outcome: -
+   * Show content of People page
+   */
+  /*
+   * Step number: 2 Step Name: - Step Description: Step 2: Invite user Input Data:
+   * - Select user who has no relation with user to add relation - Click on
+   * [Invite] (BBB) Expected Outcome: Invited user successfully
+   */
+  /*
+   * Step number: 3 Step Name: - Step Description: Step 3: Accept the friend Input
+   * Data: - Sign in with user which invited at step 2 (BBB) - Select people page
+   * - Click on button [accept] Expected Outcome: - After the user clicks on
+   * [accept], the relation between two users has set. The user will be added into
+   * users relations user list. - By side each the user, has a [remove] button to
+   * user can remove from this relation.=> Two user become friend
+   */
+  /*
+   * Step number: 4 Step Name: - Step Description: Step 4: Update activities for
+   * user who invited (BBB) Input Data: - Go to My profile and update Profile and
+   * click Save. Expected Outcome: Status update successfully
+   */
+
+  /*
+   * Step number: 5 Step Name: - Step Description: Step 5: Add new activities for
+   * user AAA Input Data: On friends activities click on name user AAA Expected
+   * Outcome: User can see the text box to add new activity for user AAA and add
+   * activity for this user successfully
+   */
+  @Test
+  public void test02_AddNewActivityForUsersContact() {
+    info("Test 2: Add new activity for users contact");
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@gmail.com";
+    String username2 = "usernameb" + getRandomString();
+    String email2 = username2 + "@gmail.com";
+    String password = "123456";
+
+    info("Add new user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+    addUsers.addUser(username2, password, email2, username2, username2);
+    manageLogInOut.signIn(username1, password);
+
+    info("Click on Connections on the left panel");
+    homePagePlatform.goToConnections();
+
+    info("Access people list, invite an user");
+    connectionsManagement.connectToAUser(username2);
+
+    info("Invited user accept invitation");
+    manageLogInOut.signIn(username2, password);
+    homePagePlatform.goToConnections();
+    connectionsManagement.acceptAConnection(username1);
+    info("Verify after accept");
+    connectionsManagement.verifyConnection(username1, true);
+
+    manageLogInOut.signIn(username1, password);
+    homePagePlatform.goToConnections();
+    connectionsManagement.goToConnectionTab(ConnectionsManagement.selectTabOption.ALL);
+    homePagePlatform.goToHomePage();
+    navigationToolbar.goToMyActivities();
+    String activity1 = "activity1" + getRandomNumber();
+    activityStream.addActivity(activity1, "");
+    activityStream.addActivity(activity1, "");
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
+    addUsers.deleteUser(username2);
+  }
 }

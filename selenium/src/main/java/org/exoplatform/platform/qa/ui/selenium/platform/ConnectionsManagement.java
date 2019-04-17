@@ -263,8 +263,8 @@ public class ConnectionsManagement {
   public void goToUserByUserName(String userName) {
     info("Go to User profile page");
     searchPeople(userName, "", "", "");
-    evt.click(ELEMENT_USER_LINK.replace("" + "${userName}", userName));
-    evt.waitForAndGetElement(ELEMENT_NAME_OF_PROFILE_TOP_LEFT.replace("${name}", userName));
+    $(byXpath(ELEMENT_USER_LINK.replace("" + "${userName}", userName))).click();
+   $(byXpath(ELEMENT_NAME_OF_PROFILE_TOP_LEFT.replace("${name}", userName))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
