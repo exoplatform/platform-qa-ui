@@ -57,6 +57,29 @@ module.exports = {
       "requireSameDimensions": true
     },
     {
+          "label": "Space_Admin",
+          "url": process.argv[process.argv.length-1],
+          "referenceUrl": process.argv[process.argv.length-1],
+          "readyEvent": null,
+          "readySelector": "",
+          "delay": 500,
+          "onReadyScript": "onBefore_SpaceAdmin.js",
+          "hideSelectors": ["div.currentDateContainer center"],
+          "removeSelectors": [],
+          "hoverSelector": "",
+          "clickSelector": "",
+          "postInteractionWait": "",
+          "selectors": [
+                  "viewport",
+                  "document",
+                  "div.UITableColumnContainer div.TRContainer.clearfix",
+                  "div#RightBody.UIContainer"
+                ],
+          "selectorExpansion": true,
+          "misMatchThreshold" : 0,
+          "requireSameDimensions": true
+        },
+    {
       "label": "AppsBtn",
       "url": process.argv[process.argv.length-1],
       "referenceUrl": process.argv[process.argv.length-1],
