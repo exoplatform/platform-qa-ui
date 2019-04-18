@@ -1293,21 +1293,14 @@ public class ActivityStream {
    */
   public void deleteActivity(String name) {
     info("remove activity");
-    int repeat = 0;
-    while (evt.waitForAndGetElement(ELEMENT_ACTIVITY_BOX.replace("${name}", name), 3000, 0) != null) {
-      if (repeat > 5)
-        break;
-      evt.mouseOver(ELEMENT_ACTIVITY_BOX.replace("${name}", name), true);
-      evt.click(ELEMENT_ACTIVITY_BOX_DELETE_BUTTON.replace("${name}", name), 2);
+    homePagePlatform.refreshUntil($(byText(name)), Condition.visible, 500);
+    String idActivity = $(byText(name)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+    $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).click();
+    $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}", idActivity))).click();
+    ELEMENT_DELETE_POPUP_OK.click();
+    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    $(byText(name)).waitUntil(Condition.not(Condition.visible), Configuration.timeout);}
 
-      evt.click(button.ELEMENT_OK_BUTTON);
-      if (evt.waitForAndGetElement(ELEMENT_ACTIVITY_BOX.replace("${name}", name), 3000, 0) == null)
-        break;
-      repeat++;
-    }
-    evt.waitForElementNotPresent(ELEMENT_ACTIVITY_BOX.replace("${name}", name));
-    info("the activity is removed successfully");
-  }
 
   /**
    * Open answer form from Activity Stream
