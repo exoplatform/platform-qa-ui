@@ -989,7 +989,7 @@ module.exports = {
     }
   ],
   "paths": {
-    "bitmaps_reference": "backstop_data_desktop/bitmaps_reference",
+    "bitmaps_reference": "backstop_data/bitmaps_reference",
     "bitmaps_test": "backstop_data/bitmaps_test",
     "engine_scripts": "backstop_data_desktop/engine_scripts",
     "html_report": "backstop_data/html_report",
