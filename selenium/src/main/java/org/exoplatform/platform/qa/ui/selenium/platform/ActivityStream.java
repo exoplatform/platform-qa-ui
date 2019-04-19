@@ -1234,7 +1234,7 @@ public class ActivityStream {
   public void likeActivity(String activityText) {
     info("-- Action: Like or Unlike an activity --");
     info("-- Like activity --");
-    int numberofLike = Integer.parseInt($(byText(activityText)).parent()
+    int numberofLike = Integer.parseInt($(byId("boxContainer")).find(byText(activityText)).parent()
                                                                .parent()
                                                                .parent()
                                                                .parent()
@@ -1242,11 +1242,11 @@ public class ActivityStream {
                                                                .parent()
                                                                .parent()
                                                                .getText()
-                                                               .split(" ")[1]);
+                                                               .split("")[1]);
     String numberAfterlike = String.valueOf(numberofLike + 1);
-    $(byText(activityText)).parent().parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).click();
-    refresh();
-    $(byText(activityText)).parent()
+    $(byId("boxContainer")).find(byText(activityText)).parent().parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).click();
+    homePagePlatform.refreshUntil($(byId("boxContainer")),Condition.visible,1000);
+    $(byId("boxContainer")).find(byText(activityText)).parent()
                            .parent()
                            .parent()
                            .parent()
@@ -1263,19 +1263,19 @@ public class ActivityStream {
    * @param activityText input a text (String)
    */
   public void unlikeActivity(String activityText) {
-    int numberLike = Integer.parseInt($(byText(activityText)).parent()
+    homePagePlatform.refreshUntil($(byId("boxContainer")),Condition.visible,1000);
+    int numberLike = Integer.parseInt($(byId("boxContainer")).find((byText(activityText))).parent()
                                                              .parent()
                                                              .parent()
                                                              .parent()
                                                              .find(ELEMENT_ICON_LIKE_ACTIVITY)
                                                              .parent()
-                                                             .parent()
                                                              .getText()
                                                              .split(" ")[1]);
-    $(byText(activityText)).parent().parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).click();
-    refresh();
     String numberAfterUnlike = String.valueOf(numberLike - 1);
-    $(byText(activityText)).parent()
+    $(byId("boxContainer")).find(byText(activityText)).parent().parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).click();
+    homePagePlatform.refreshUntil($(byId("boxContainer")),Condition.visible,1000);
+    $(byId("boxContainer")).find(byText(activityText)).parent()
                            .parent()
                            .parent()
                            .parent()

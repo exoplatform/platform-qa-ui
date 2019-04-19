@@ -1237,7 +1237,7 @@ public final class SocialLocator {
   public static final By              ELEMENT_CONTACT_EDIT_ICON                                         =
                                                                 By.xpath(".//*[@id='UIContactSection']//*[contains(text(),'Contact')]/..//*[@class='uiIconEdit']");
 
-  public static final By              ELEMENT_CONTACT_GENDER_SELECTION                                  = byId("gender");
+  public static final By              ELEMENT_CONTACT_GENDER_SELECTION                                  = By.id("gender");
 
   public static final By              ELEMENT_CONTACT_JOB_TITLE                                         = By.name("position");
 

@@ -14,6 +14,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -26,6 +27,8 @@ public class UserProfilePage {
 
   private ElementEventTestBase evt;
 
+  public HomePagePlatform homePagePlatform;
+
   /**
    * constructor
    * 
@@ -34,6 +37,7 @@ public class UserProfilePage {
   public UserProfilePage(TestBase testBase) {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
+    this.homePagePlatform=new HomePagePlatform(testBase);
   }
 
   /**
@@ -121,17 +125,20 @@ public class UserProfilePage {
    * @param gender
    * @param job
    */
-  public void updateGenderJob(String gender, String job) {
+  public void updateGenderJob(String job,String gender) {
     evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
-
-    if (gender != "" && gender != null) {
-      info("update gender");
-      $(ELEMENT_CONTACT_GENDER_SELECTION).selectOptionByValue(gender);
-    }
     if (job != "" && job != null) {
       info("update job");
       $(ELEMENT_CONTACT_JOB_TITLE).setValue(job);
     }
+
+    if (gender != ""  && gender != null ) {
+      info("update gender");
+      $(ELEMENT_CONTACT_GENDER_SELECTION).selectOptionByValue(gender);
+    }
+
+
+
   }
 
   /**
@@ -166,7 +173,7 @@ public class UserProfilePage {
     String index = (String) (opParams.length > 0 ? opParams[0] : "0");
     Integer xpathCount = testBase.getElements(ELEMENT_CONTACT_URL_INPUT_LIST).size();
     if (Integer.valueOf(index) >= xpathCount) {
-      evt.click(ELEMENT_CONTACT_URL_ADD_ICON);
+      $(ELEMENT_CONTACT_URL_ADD_ICON).click();
     }
     if (url != null && !url.isEmpty()) {
       info("update url");
@@ -264,11 +271,13 @@ public class UserProfilePage {
     evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     if (isSave == null || isSave) {
       info("Save updating information");
+      homePagePlatform.refreshUntil($(ELEMENT_CONTACT_SAVE_BUTTON),Condition.visible,1000);
       $(ELEMENT_CONTACT_SAVE_BUTTON).click();
       $(ELEMENT_CONTACT_SAVE_BUTTON).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     } else {
       info("Cancel updating information");
       evt.clickByJavascript(ELEMENT_CONTACT_CANCEL_BUTTON, 2);
+      $(ELEMENT_CONTACT_CANCEL_BUTTON).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     }
   }
 

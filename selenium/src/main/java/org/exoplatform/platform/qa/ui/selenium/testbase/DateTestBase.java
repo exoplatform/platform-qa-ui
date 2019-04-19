@@ -24,6 +24,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -155,7 +156,7 @@ public class DateTestBase {
    * @return date in format "dd"
    */
   public String getDate(int gap, String format) {
-    DateFormat dateFormat = new SimpleDateFormat(format);
+    DateFormat dateFormat = new SimpleDateFormat(format, Locale.ENGLISH);
     Calendar cal = Calendar.getInstance();
     cal.add(Calendar.DAY_OF_MONTH, gap);
     Logger.info(dateFormat.format(cal.getTime()));
