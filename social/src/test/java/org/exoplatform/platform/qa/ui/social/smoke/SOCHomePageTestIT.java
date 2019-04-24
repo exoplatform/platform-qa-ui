@@ -69,13 +69,7 @@ public class SOCHomePageTestIT extends Base {
 
         ELEMENT_WHO_LIKED_POPUP.waitUntil(Condition.appears, Configuration.timeout);
         // click on the activity to appear the delete button
-        $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-        // click on delete button
-        $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
-        ELEMENT_DELETE_POPUP_OK.click();
-        // verify that the activity doesn't exist
-        $(byText(activity1)).shouldNot(Condition.exist);
-        info("the activity is removed successfully");
+       activityStream.deleteactivity(activity1);
     }
 
     /**
@@ -106,13 +100,7 @@ public class SOCHomePageTestIT extends Base {
         $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
         $(byText(comment)).should(Condition.exist);
         // click on the activity to appear the delete button
-        $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-        // click on delete button
-        $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
-        ELEMENT_DELETE_POPUP_OK.click();
-        // verify that the activity doesn't exist
-        $(byText(activity1)).shouldNot(Condition.exist);
-        info("the activity is removed successfully");
+        activityStream.deleteactivity(activity1);
     }
 
     /**
@@ -144,26 +132,11 @@ public class SOCHomePageTestIT extends Base {
         // click on the button comment
         $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
         info("Test 15: Delete comment");
-        $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-        // scroll up
-        executeJavaScript("window.scrollBy(0,-550)");
-        // the id of the comment is id of the activity+1
-        Integer idComment = Integer.parseInt(id) + 1;
-        // hover on the comment to appear the delete button
-        $(byId(ELEMENT_COMMENT_BLOC.replace("{id}", id))).hover().click();
-        $(byId(ELEMENT_COMMENT_DELETE.replace("{id}", idComment.toString()))).click();
-        // Confirm
-        $(ELEMENT_DELETE_POPUP_OK).click();
+        activityStream.deletecomment(activity1,comment);
         // verify that the comment is deleted
         $(byText(comment)).shouldNot(Condition.exist);
         // click on the activity to appear the delete button
-        $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-        // click on delete button
-        $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
-        ELEMENT_DELETE_POPUP_OK.click();
-        // verify that the activity doesn't exist
-        $(byText(activity1)).shouldNot(Condition.exist);
-        info("the activity is removed successfully");
+        activityStream.deleteactivity(activity1);
     }
 
     /**
@@ -185,13 +158,7 @@ public class SOCHomePageTestIT extends Base {
         // get the id of the webContent created
         String activity1 = "activity1" + getRandomNumber();
         activityStream.addActivity(activity1, "");
-        String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];
-        // click on the activity to appear the delete button
-        $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-        // click on delete button
-        $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
-        $(ELEMENT_DELETE_POPUP_OK).click();
-        // verify that the activity doesn't exist
+        activityStream.deleteactivity(activity1);
         $(byText(activity1)).shouldNot(Condition.exist);
         info("the activity is removed successfully");
     }

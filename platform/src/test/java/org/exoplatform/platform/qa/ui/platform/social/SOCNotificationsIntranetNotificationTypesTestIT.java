@@ -1035,7 +1035,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(username);
     homePagePlatform.goToHomePage();
-    $(byText("I'm now connected with 1 user(s)")).parent().find(byText(username + " " + username)).should(exist);
+    $(byId("OfficeMiddle")).find(byText(username1+" "+username1)).parent().parent().parent().parent().find(byText("I'm now connected with 1 user(s)")).waitUntil(visible,Configuration.timeout);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username);

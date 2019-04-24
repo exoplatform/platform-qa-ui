@@ -79,26 +79,38 @@ public class SocialBasicTestsWithUserTestIT extends Base {
     info("Test 1: Like Activity");
     String activity1 = "activity1" + getRandomNumber();
     activityStream.addActivity(activity1, "");
+    /*
+     * Step Number: 1 Step Name: Step 1: Like/Unlike Activity Step Description: - Go
+     * to Intranet home - Click on Like activity in action bar part of an activity
+     * Input Data: Expected Outcome: - Like button is highlighted and the number of
+     * likers is updated
+     */
     // get the id of the activity created
     String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];
     // click on the like button of the activity
     $(byXpath(ELEMENT_LIKE_BUTTON.replace("{id}", id))).click();
     $(byXpath(ELEMENT_UNLIKE_BUTTON.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout);
+    /*
+     * Step number: 2 Step Name: Check Likes part Step Description: - Check avatar -
+     * Mouse over the avatar Input Data: Expected Outcome: - Avatar of liker is
+     * added into likes part, the oldest liker is displayed at the right and the
+     * newest at the left. - Profile pictures of users popup
+     */
 
     ELEMENT_WHO_LIKED_POPUP.waitUntil(Condition.appears, Configuration.timeout);
     // click on the activity to appear the delete button
-    $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-    // click on delete button
-    $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
-    ELEMENT_DELETE_POPUP_OK.click();
-    // verify that the activity doesn't exist
-    $(byText(activity1)).shouldNot(Condition.exist);
-    info("the activity is removed successfully");
+    activityStream.deleteactivity(activity1);
   }
 
   @Test
   public void test02AddComment() {
     info("Test 2: Add comment");
+    /*
+     * Step Number: 1 Step Name: Add comment for activity Step Description: - Go to
+     * Intranet home - Select the activity - Click comment icon to show input text
+     * field - input the comment and click comment Input Data: Expected Outcome: -
+     * Comment will be shown in comment section of activity
+     */
 
     String activity1 = "activity1" + getRandomNumber();
     String comment = "comment" + getRandomNumber();
@@ -114,18 +126,17 @@ public class SocialBasicTestsWithUserTestIT extends Base {
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
     // click on the activity to appear the delete button
-    $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-    // click on delete button
-    $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
-    ELEMENT_DELETE_POPUP_OK.click();
-    // verify that the activity doesn't exist
-    $(byText(activity1)).shouldNot(Condition.exist);
-    info("the activity is removed successfully");
+    activityStream.deleteactivity(activity1);
   }
-
   @Test
-  public void test_03DeleteComment() {
+  public void test_15DeleteComment() {
     info("Test 2: Add comment");
+    /*
+     * Step Number: 1 Step Name: Add comment for activity Step Description: - Go to
+     * Intranet home - Select the activity - Click comment icon to show input text
+     * field - input the comment and click comment Input Data: Expected Outcome: -
+     * Comment will be shown in comment section of activity
+     */
 
     String activity1 = "activity1" + getRandomNumber();
     String comment = "comment" + getRandomNumber();
@@ -140,41 +151,27 @@ public class SocialBasicTestsWithUserTestIT extends Base {
     // click on the button comment
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
     info("Test 15: Delete comment");
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-    // scroll up
-    executeJavaScript("window.scrollBy(0,-550)");
-    // the id of the comment is id of the activity+1
-    Integer idComment = Integer.parseInt(id) + 1;
-    // hover on the comment to appear the delete button
-    $(byId(ELEMENT_COMMENT_BLOC.replace("{id}", id))).hover().click();
-    $(byId(ELEMENT_COMMENT_DELETE.replace("{id}", idComment.toString()))).click();
-    // Confirm
-    $(ELEMENT_DELETE_POPUP_OK).click();
+    activityStream.deletecomment(activity1,comment);
     // verify that the comment is deleted
     $(byText(comment)).shouldNot(Condition.exist);
     // click on the activity to appear the delete button
-    $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-    // click on delete button
-    $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
-    ELEMENT_DELETE_POPUP_OK.click();
-    // verify that the activity doesn't exist
-    $(byText(activity1)).shouldNot(Condition.exist);
-    info("the activity is removed successfully");
+    activityStream.deleteactivity(activity1);
   }
 
   @Test
-  public void test04_DeleteYourActivity() {
+  public void test03_DeleteYourActivity() {
     info("Test 3: Delete your activity");
+    /*
+     * Step Number: 1 Step Name: - Delete a comment Step Description: - Go to
+     * Intranet home - Select the activity - mouse over activity you want to delete
+     * - Click the (x) icon to delete Input Data: Expected Outcome: - Comment will
+     * be shown in comment section of activity - the (x) icon display on the top
+     * -right of activity - activity is deteled successfully
+     */
     // get the id of the webContent created
     String activity1 = "activity1" + getRandomNumber();
     activityStream.addActivity(activity1, "");
-    String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];
-    // click on the activity to appear the delete button
-    $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-    // click on delete button
-    $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
-    $(ELEMENT_DELETE_POPUP_OK).click();
-    // verify that the activity doesn't exist
+    activityStream.deleteactivity(activity1);
     $(byText(activity1)).shouldNot(Condition.exist);
     info("the activity is removed successfully");
   }
@@ -194,18 +191,6 @@ public class SocialBasicTestsWithUserTestIT extends Base {
                                                              .parent().parent().parent().parent()
                                                              .find(byClassName(ELEMENT_DATE_ACTIVITY))
                                                              .hover();
-    $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
-                                                             .parent()
-                                                             .parent()
-                                                             .parent().parent().parent().parent()
-                                                             .find(ELEMENT_ICON_DELETE_ACTIVITY)
-                                                             .click();
-    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.timeout).click();
-    $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
-                                                             .parent()
-                                                             .parent()
-                                                             .parent()
-                                                             .waitUntil(Condition.disappears, Configuration.timeout);
   }
 
   @Test
@@ -223,18 +208,15 @@ public class SocialBasicTestsWithUserTestIT extends Base {
     String title = "Google";
     assertEquals(title, Selenide.title());
     switchTo().window(0);
-    $(byText(link)).parent()
-                   .parent()
-                   .parent()
-                   .parent()
-                   .parent()
-                   .find(byClassName(ELEMENT_DATE_ACTIVITY))
-                   .waitUntil(Condition.visible, Configuration.timeout)
-                   .hover();
-    $(byText(link)).parent().parent().parent().parent().parent().find(ELEMENT_ICON_DELETE_ACTIVITY).click();
+    String id=$(byAttribute("data-original-title", "eXo-Platform.png")).parent().parent().parent().parent().parent().parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+    $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}",id))).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}",id))).click();
     ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.timeout).click();
-    $(byText(link)).parent().parent().parent().parent().parent().waitUntil(Condition.disappear, Configuration.timeout);
-
+    $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
+            .parent()
+            .parent()
+            .parent()
+            .waitUntil(Condition.disappear, Configuration.timeout);
   }
 
   @Test

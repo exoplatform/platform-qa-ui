@@ -192,7 +192,6 @@ public class EcmsSEBasicActionTestIT extends Base {
         info("Test 4: Drag and drop a node");
         ELEMENT_CONTENT_LIST.find(byText(titleCommonNode)).dragAndDropTo($(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", destination))));
         manageAlert.acceptAlert();
-        $(ELEMENT_OK_BUTTON_LINK).click();
         $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", destination))).click();
         siteExplorerHome.deleteData(titleCommonNode);
 

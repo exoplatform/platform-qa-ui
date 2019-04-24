@@ -40,6 +40,7 @@ public class HomePagePlatform {
     refreshUntil($(ELEMENT_WIKI_LINK_PLF), Condition.visible, 500);
     $(ELEMENT_WIKI_LINK_PLF).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_WIKI_LINK_PLF).click();
+    refreshUntil($(ELEMENT_WIKI_LINK_PLF), Condition.visible, 500);
   }
 
   public void goToChat() {

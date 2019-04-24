@@ -4,7 +4,9 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_DROPDOWN;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_COMPOSER_SHARE_BUTTON;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_DELETE_ACTIVITY_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -41,19 +43,16 @@ public class SOCActivityAddTestIT extends Base {
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
     $(ELEMENT_COMPOSER_SHARE_BUTTON).should(Condition.be(Condition.enabled));
     $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
-    $(byAttribute("data-original-title", "eXo-Platform.png")).parent().parent().parent().parent().parent().parent().parent().find(byClassName(ELEMENT_DATE_ACTIVITY)).hover();
-    $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
-                                                             .parent()
-                                                             .parent()
-                                                             .parent().parent().parent().parent()
-                                                             .find(ELEMENT_ICON_DELETE_ACTIVITY)
-                                                             .click();
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.disabled,Configuration.timeout);
+    String id=$(byAttribute("data-original-title", "eXo-Platform.png")).parent().parent().parent().parent().parent().parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+    $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}",id))).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}",id))).click();
     ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.timeout).click();
     $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
                                                              .parent()
                                                              .parent()
                                                              .parent()
-                                                             .waitUntil(Condition.disappears, Configuration.timeout);
+                                                             .waitUntil(Condition.disappear, Configuration.timeout);
   }
 
   @Test

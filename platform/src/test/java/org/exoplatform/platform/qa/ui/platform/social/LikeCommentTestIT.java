@@ -1260,6 +1260,7 @@ public class LikeCommentTestIT extends Base {
                               .parent()
                               .parent()
                               .shouldHave(Condition.text(DATA_NAME_USER4 + ", James David" + comment1));
+    ELEMENT_ICON_NOTIFICATION.click();
     activityStream.deleteactivity(activity1);
   }
 
@@ -1435,6 +1436,7 @@ public class LikeCommentTestIT extends Base {
                               .parent()
                               .parent()
                               .shouldHave(Condition.text(DATA_NAME_USER4 + ", James David" + comment1));
+    ELEMENT_ICON_NOTIFICATION.click();
     activityStream.deleteactivity(activity1);
 
   }

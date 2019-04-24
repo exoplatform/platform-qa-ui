@@ -111,9 +111,7 @@ public class SOCHomePageTestIT extends Base {
     homePagePlatform.goToHomePage();
     activityStream.mentionUserActivity(DATA_USER2, text);
     $(byText(text)).parent().shouldHave(Condition.text(PLFData.DATA_NAME_USER2+" "+text));
-    $(byText(text)).parent().parent().find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-    $(byText(text)).parent().parent().find(ELEMENT_ICON_DELETE_ACTIVITY).click();
-    $(ELEMENT_DELETE_POPUP_OK).click();
+    activityStream.deleteactivity(text);
     // verify that the activity doesn't exist
     $(byText(text)).shouldNot(Condition.exist);
   }
@@ -136,9 +134,7 @@ public class SOCHomePageTestIT extends Base {
     homePagePlatform.goToHomePage();
     activityStream.addActivity(name, "");
     $(byText(name)).should(Condition.exist);
-    $(byText(name)).parent().parent().find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
-    $(byText(name)).parent().parent().find(ELEMENT_ICON_DELETE_ACTIVITY).click();
-    $(ELEMENT_DELETE_POPUP_OK).click();
+    activityStream.deleteactivity(name);
     // verify that the activity doesn't exist
     $(byText(name)).shouldNot(Condition.exist);
   }
@@ -213,16 +209,7 @@ public class SOCHomePageTestIT extends Base {
     $(byText(link)).should(Condition.exist);
     $(byText(textDes)).should(Condition.exist);
     executeJavaScript("window.scrollBy(0,-1500)", "");
-    $(byText(link)).parent()
-                   .parent()
-                   .parent()
-                   .parent()
-                   .parent()
-                   .find(byClassName(ELEMENT_DATE_ACTIVITY))
-                   .waitUntil(Condition.visible, Configuration.timeout)
-                   .hover();
-    $(byText(link)).parent().parent().parent().parent().parent().find(ELEMENT_ICON_DELETE_ACTIVITY).click();
-    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.timeout).click();
+    activityStream.deleteactivity(textDes);
     $(byText(link)).parent().parent().parent().parent().parent().waitUntil(Condition.disappear, Configuration.timeout);
 
   }
@@ -396,8 +383,6 @@ public class SOCHomePageTestIT extends Base {
     spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     activityStream.deleteactivity(text);
-    homePagePlatform.goToConnections();
-    connectionsManagement.removeConnection(DATA_USER1);
 
   }
 

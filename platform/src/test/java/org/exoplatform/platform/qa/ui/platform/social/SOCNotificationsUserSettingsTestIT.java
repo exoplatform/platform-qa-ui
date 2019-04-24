@@ -13,6 +13,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 
 import java.awt.*;
 
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -139,20 +140,18 @@ public class SOCNotificationsUserSettingsTestIT extends Base {
     String username1 = "usernamea" + getRandomString();
     String password1 = "123456";
     String email1 = username1 + "@test.com";
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password1, email1, username1, username1);
     info("goto My notification page");
+    manageLogInOut.signIn(username1,password1);
     navigationToolbar.goToMyNotifications();
     info("turn off intranet notifications");
     myNotificationsSetting.turnOnOffNotiIntranet(false);
     waitForAndGetElement(ELEMENT_WEB_VIEWMODE_FALSE, 3000, 1, 2);
-    info("add new user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password1, email1, username1, username1);
     info("Check intranet notification");
     waitForElementNotPresent(ELEMENT_TOOLBAR_NOTIFICATION_LIST);
     waitForElementNotPresent(ELEMENT_NOTIFICATION_LIST_USER.replace("${user}", username1));
-    info("restore data");
-    navigationToolbar.goToMyNotifications();
-    myNotificationsSetting.confirmResetNotificationSetting();
+    manageLogInOut.signIn(PLFData.DATA_USER1,PLFData.DATA_PASS2);
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
   }

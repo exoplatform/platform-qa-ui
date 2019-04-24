@@ -6,6 +6,7 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
@@ -30,6 +31,8 @@ public class WikiManagement {
 
   public PlatformBase          plf;
 
+  public HomePagePlatform homePagePlatform;
+
   private ElementEventTestBase evt;
 
   /**
@@ -42,6 +45,7 @@ public class WikiManagement {
     this.alert = new ManageAlert(testBase);
     this.but = new Button(testBase);
     this.plf = new PlatformBase(testBase);
+    this.homePagePlatform=new HomePagePlatform(testBase);
   }
 
   /**
@@ -58,7 +62,7 @@ public class WikiManagement {
    * Change to Source Editor mode
    */
   public void goToSourceEditor() {
-    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
+    homePagePlatform.refreshUntil($(ELEMENT_TITLE_WIKI_INPUT),Condition.visible,1000);
     if ($(ELEMENT_SOURCE_EDITOR_BUTTON).is(Condition.exist)) {
       $(ELEMENT_SOURCE_EDITOR_BUTTON).click();
       $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);

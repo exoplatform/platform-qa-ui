@@ -40,7 +40,7 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
 
-@Tag("")
+@Tag("sniff")
 @Tag("social")
 public class SOCActivityEditTestIT extends Base {
   ActivityStream          activityStream;

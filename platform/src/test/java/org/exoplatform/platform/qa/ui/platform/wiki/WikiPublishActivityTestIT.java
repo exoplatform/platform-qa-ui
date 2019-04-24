@@ -209,6 +209,7 @@ public class WikiPublishActivityTestIT extends Base {
     String comment = "Page's title has been updated to: " + newTitle;
     info("Go to Wiki porlet and select the wiki page created");
     homePagePlatform.goToWiki();
+    homePagePlatform.refreshUntil($(byText(title)),Condition.visible,1000);
     $(byText(title)).click();
     info("Edit the title of the wiki page and check on published checkbox");
     wikiHomePage.goToEditPage();
