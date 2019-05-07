@@ -117,13 +117,13 @@ public class SpaceManageMessageTestIT extends Base {
     spaceManagement.addNewSpaceSimple(space, space);
     homePagePlatform.goToHomePage();
     homePagePlatform.goToChat();
-    switchTo().window("Chat");
+    switchTo().window(1);
     info("check that space exist");
     $(byText(space)).should(Condition.exist);
-    switchTo().window("Home Page");
+    switchTo().window(0);
     homePagePlatform.goToAllSpace();
     spaceManagement.deleteSpace(space, false);
-    switchTo().window("Chat");
+    switchTo().window(1);
     refresh();
     info("check that space chat deleted");
     $(byText(space)).shouldNot(Condition.exist);
