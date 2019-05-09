@@ -75,6 +75,9 @@ public class ECMSLocator {
   public static final By              ELEMENT_ADDDOCUMENT_NEXT_PAGE                                        =
                                                                     By.xpath(".//*[@id='UISelectDocumentForm']//*[@data-original-title='Next Page']");
 
+  public static final By              ELEMENT_PAGINATION_GO_TO_NEXT_PAGE                                           =
+                                                                    By.xpath("//div[@class='PageAvailable']/div");
+
   public static final By              ELEMENT_DOCFORM_BLANK_TITLE                                          =
                                                                   By.xpath("//*[@id='title0']");
 
@@ -1115,7 +1118,7 @@ public class ECMSLocator {
                                                              $(byClassName("uiIconAddPath"));
 
   public static final SelenideElement ELEMENT_CONTENT_LIST                                                 =
-                                                           $(byId("UITreeExplorer"));
+                                                           $(byXpath("//div[@id='UITreeExplorer']"));
 
   public static final SelenideElement ELEMENT_INPUT_PATH                                                   = $(byId("address"));
 

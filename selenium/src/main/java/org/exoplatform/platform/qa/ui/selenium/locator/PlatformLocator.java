@@ -93,7 +93,7 @@ public final class PlatformLocator {
                                                          "//*[@class='pagination uiPageIterator clearfix']//a[contains(Text(),'${number}')]";
 
   // frame
-  public static final By     ELEMENT_FILEFORM_BLANK_CONTENT       = By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");
+  public static final By     ELEMENT_FILEFORM_BLANK_CONTENT       = By.xpath("(//iframe[@class='cke_wysiwyg_frame cke_reset'])[1]");
 
   public static final By     ELEMENT_FILEFORM_BLANK_NAME          = By.id("name");
 

@@ -7,6 +7,7 @@ import static com.codeborne.selenide.Selenide.refresh;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_SELECT_USER_ICON1;
+import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_ADD_EVENT_WINDOW;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
@@ -87,7 +88,9 @@ public class SiteExplorerHome {
     if( $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).is(Condition.not(Condition.visible))){
       $(byClassName("uiIconEcmsViewWeb")).click();
     }
-    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
+      if( $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).is(Condition.not(Condition.visible))) {
+          $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
+      }
     info("Go to folder");
     if (!path.isEmpty()) {
       String[] arrayPath = path.split("/");
@@ -178,6 +181,7 @@ public class SiteExplorerHome {
     $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
 
     info("Right click on nodename");
+    ELEMENT_CONTENT_LIST.waitUntil((Condition.visible),Configuration.timeout);
     ELEMENT_CONTENT_LIST.find(byLinkText(title)).click();
     $(ELEMENT_ACCOUNT_NAME_LINK).click();
     ELEMENT_CONTENT_LIST.find(byLinkText(title)).contextClick();
