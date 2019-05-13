@@ -92,11 +92,10 @@ public class CalendarEventRecurringTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               content,
-                                              getDate(0, "MM/dd/yyyy HH") + ":00",
-                                              getDate(0, "MM/dd/yyyy HH") + ":30",
+                                              getDate(0, "MM-dd-yyyy HH") + ":00",
+                                              getDate(0, "MM-dd-yyyy HH") + ":30",
                                               false);
-    eventManagement.moreDetailsEvent();
-    check(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX, 2);
+
     eventManagement.inputRecurringInfoEvent(EventManagement.repeatType.Daily,
                                             "1",
                                             null,

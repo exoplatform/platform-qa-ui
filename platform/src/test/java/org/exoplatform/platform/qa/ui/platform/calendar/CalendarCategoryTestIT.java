@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.platform.calendar;
 
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
@@ -7,6 +8,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_ITEM_QUICK_EVENT_CATEGORY_OPTION;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -78,7 +80,7 @@ public class CalendarCategoryTestIT extends Base {
 
     calendarManagement.addEventCategory(oldNameCategory);
     eventManagement.goToAddEventFromActionBar();
-    $(byXpath(ELEMENT_ITEM_QUICK_EVENT_CATEGORY_OPTION.replace("$category", oldNameCategory))).should(Condition.visible);
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).find(byText(oldNameCategory));
     eventManagement.cancelQuickAddEditEvent();
 
     info("Test 3: Delete Event Category");
@@ -100,7 +102,7 @@ public class CalendarCategoryTestIT extends Base {
 
     calendarManagement.addEventCategory(oldNameCategory);
     eventManagement.goToAddEventFromActionBar();
-    $(byXpath(ELEMENT_ITEM_QUICK_EVENT_CATEGORY_OPTION.replace("$category", oldNameCategory))).should(Condition.visible);
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).find(byText(oldNameCategory));
     eventManagement.cancelQuickAddEditEvent();
 
     info("Test 2: Edit Event Category");
@@ -109,7 +111,7 @@ public class CalendarCategoryTestIT extends Base {
     calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.ADDCATEGORY);
     calendarManagement.editEventCategory(oldNameCategory, newNameCategory);
     eventManagement.goToAddEventFromActionBar();
-    $(byXpath(ELEMENT_ITEM_QUICK_EVENT_CATEGORY_OPTION.replace("$category", newNameCategory))).should(Condition.visible);
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).find(byText(newNameCategory));
     eventManagement.cancelQuickAddEditEvent();
 
     info("Test 3: Delete Event Category");
@@ -131,7 +133,7 @@ public class CalendarCategoryTestIT extends Base {
 
     calendarManagement.addEventCategory(oldNameCategory);
     eventManagement.goToAddEventFromActionBar();
-    $(byXpath(ELEMENT_ITEM_QUICK_EVENT_CATEGORY_OPTION.replace("$category", oldNameCategory))).should(Condition.visible);
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).find(byText(newNameCategory));
     eventManagement.cancelQuickAddEditEvent();
 
     info("Test 3: Delete Event Category");

@@ -334,7 +334,7 @@ public class CalendarHomePage {
         break;
     }
     $(ELEMENT_CONTEXT_MENU_EDIT).click();
-    ELEMENT_ADD_EDIT_TASK_POPUP.waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_EVENT_DRAWER.waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**
