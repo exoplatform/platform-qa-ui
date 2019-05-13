@@ -56,6 +56,10 @@ public class SpaceManagement {
     public void deleteSpace(String spaceName, Boolean isVerify) {
         if ($(byText(spaceName)).is(Condition.exist)) {
             info("Do delete space");
+            $(byXpath("(//input[@placeholder='Name or Description'])[2]")).waitUntil(Condition.visible, Configuration.timeout);
+            $(byXpath("(//input[@placeholder='Name or Description'])[2]")).setValue(spaceName);
+            $(byXpath("//i[@class='uiIconSearch uiIconLightGray']")).waitUntil(Condition.visible, Configuration.timeout);
+            $(byXpath("//i[@class='uiIconSearch uiIconLightGray']")).click();
             ELEMENT_SPACES_LIST.find(byText(spaceName)).parent().parent().parent().find(byText("Delete")).click();
             if (isVerify)
                 alert.verifyAlertMessage(ELEMENT_SPACE_CONFIRM_DELETE);

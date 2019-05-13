@@ -467,6 +467,11 @@ public class CalendarHomePage {
         }
         break;
       case LIST:
+        refresh();
+        $(byXpath("//input[@placeholder='Search']")).waitUntil(Condition.visible, Configuration.timeout);
+        $(byXpath("//input[@placeholder='Search']")).setValue(name);
+        $(byXpath("//i[@class='uiIconSearch uiIconLightGray']")).waitUntil(Condition.visible, Configuration.timeout);
+        $(byXpath("//i[@class='uiIconSearch uiIconLightGray']")).click();
         if ($(ELEMENT_TOTAL_PAGE).is(Condition.exist)) {
           evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
           while ((evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name), 5000, 0) == null)

@@ -244,6 +244,7 @@ public class EventManagement {
          $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[1]/div[2]/div[3]/input")).click();
         }
       }
+      $(ELEMENT_QUICK_INPUT_EVENT_TO_TIME_INPUT).waitUntil(Condition.visible, Configuration.timeout);
       if ((to != null) & (to != "")) {
         String[] dateTimeTo = to.split(" ");
         if (dateTimeTo.length > 0)
