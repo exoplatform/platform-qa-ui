@@ -89,7 +89,7 @@ public class SpaceManagement {
         ELEMENT_SPACE_DESCRIPTION_INPUT.setValue(desc);
         info("Save all changes");
         ELEMENET_SPACE_CREATE_BUTTON.click();
-        ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+       ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     }
 
     /**

@@ -2198,7 +2198,7 @@ public static final By
   public static final SelenideElement ELEMENET_SPACE_CREATE_BUTTON                                      =
                                                                    $(byClassName("PopupContent")).find(byText("Create Space"));
 
-  // Activity like
+  // Activity likeBy.xpath: .//*[@id='settings'//
   public static final By              ELEMENT_ACTIVITY_LIKE_EDIT_BTN                                    =
                                                                      By.xpath(".//*[@id='LikePlugin']//*[contains(@class,'uiIconEdit')]");
 
@@ -2431,5 +2431,29 @@ public static final By
   public static final SelenideElement ELEMENT_NOTIFICATION_ACTIONS=  $(byClassName("notificationsActions"));
   public static final SelenideElement ELEMENT_SPACE_PORTLET =  $(byClassName("uiIconAppSpaceActivityStreamPortlet"));
   public static final SelenideElement ELEMENT_SPACE_MENU =  $(byXpath("//*[@id=\"UISpaceMenu\"]/div[1]/div/ul/li[1]/a"));
+  public static final SelenideElement ELEMENT_Button_Groups =  $(byXpath("//*[@id=\"UIOrganizationPortlet\"]/div[2]/div[1]/ul/li[2]/a"));
+  public static final SelenideElement ELEMENT_Button_Spaces =  $(byXpath("//*[@id=\"UIOrganizationPortlet\"]/div[2]/div[2]/div/div[2]/div[1]/div/div/div/div/ul/li[4]/a"));
+  public static final SelenideElement ELEMENT_Button_Save =$(byXpath("//*[@id=\"UIGroupMembershipForm\"]/div[2]/div/div[2]/a"));
+  public static final SelenideElement ELEMENT_Membership =$(byId("membership"));
+  public static final SelenideElement ELEMENT_News= $(byClassName("uinewsactivitycomposer"));
+  public static final SelenideElement ELEMENT_Title =$(byXpath ("//*[@id=\"newsForm\"]/div[1]/label"));
+  public static final SelenideElement ELEMENT_Content =  $(byXpath ("//*[@id=\"newsForm\"]/div[2]/label"));
+  public static final SelenideElement ELEMENT_field_Title =  $(byXpath("//div[@class=\"newsFormRow newsFormTitle\"]/input[@id='newsTitle']"));
+  public static final SelenideElement ELEMENT_Button_Post =  $(byXpath ("//div[@class=\"newsFormRow newsFormButtons\"]/button[@disabled='disabled']"));
+  public static final SelenideElement ELEMENT_Icon_NewsPlus = $(byXpath ("//div[@class=\"newsFormRow newsFormButtons\"]/a[@id='newsPlus']"));
+  public static final SelenideElement ELEMENT_Checkbox_pinArticle= $(byXpath ("//span[@class=\"uiCheckbox\"]/input[@id='pinArticle']"));
+  public static final SelenideElement ELEMENT_Button_Post_enabled=$(byXpath("//div[@class=\"newsFormRow newsFormButtons\"]/button[@id='newsPost']"));
+  public static final String ELEMENT_Button_Space= "//li[@class='node']/a[@title='${space}']";
+  public static final SelenideElement ELEMENT_Field_username=$(byXpath("//div[@class=\"controls\"]/input[@id='username']"));
+  public static final SelenideElement ELEMENT_frame= $(byXpath("(//iframe[@class=\"cke_wysiwyg_frame cke_reset\"])[2]"));
+
+
+
+
+
+
+
+
+
 }
 
