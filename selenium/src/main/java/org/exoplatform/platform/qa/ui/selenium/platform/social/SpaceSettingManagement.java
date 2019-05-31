@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -14,6 +15,9 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_UI_POPUP_MOVE_TOPIC;
+import static com.sun.deploy.cache.Cache.exists;
+import static java.time.zone.ZoneRulesProvider.refresh;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -71,7 +75,7 @@ public class SpaceSettingManagement {
     homePagePlatform.refreshUntil($(ELEMENT_SPACE_WIKI_TAB),Condition.visible,1000);
     if($(ELEMENT_SPACE_MENU_MORE).is(Condition.visible))
       $(ELEMENT_SPACE_MENU_MORE).click();
-    $(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB).click();
+    $(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB).waitUntil(Condition.visible,Configuration.timeout).click();
     $(byClassName("uiGrayLightBox")).waitUntil(Condition.visible, Configuration.timeout);
   }
 
@@ -204,6 +208,16 @@ public class SpaceSettingManagement {
     info("Verify that the member is shown in member list");
     evt.waitForElementNotPresent(ELEMENT_SPACE_DELETE_USER_BTN.replace("${user}", user), 2000, 1);
   }
+  /*** Search User in People
+   *
+   */
+    public void searchUsersPeople(String user) {
+        info("--Search user To connect" + user + "--");
+            ($(byXpath("(//input[@placeholder=\"Name\"])[2]"))).setValue(user);
+            ($(byXpath("//button[text()='Search']"))).waitUntil(Condition.visible, Configuration.timeout).click();
+            ($(byXpath("//div[@class=\"connectionBtn clearfix\"]/button"))).waitUntil(Condition.visible, Configuration.timeout).click();
+            ($(byXpath("//button[text()=\"Cancel Request\"]"))).shouldNot(Condition.visible);
+    }
 
   /**
    * Delete member of space

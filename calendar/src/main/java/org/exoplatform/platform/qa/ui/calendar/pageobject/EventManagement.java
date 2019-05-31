@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
 import com.codeborne.selenide.Condition;
@@ -711,7 +712,24 @@ public class EventManagement {
     ELEMENT_BUTTON_EVENT_SAVE.click();
     ELEMENT_BUTTON_EVENT_SAVE.waitUntil(Condition.disappears, Configuration.timeout);
   }
-
+  /**
+   * Select Previous and Next day
+   */
+  public void selectPreviousAndNextDayInTheEventToAdd(String previousDay, String nextDay){
+    info("Select Previous and Next day");
+    ELEMENT_EVENT_SELECT_FROM.waitUntil(Condition.visible,Configuration.timeout).click();
+    if (previousDay!= null) {
+      final SelenideElement ELEMENT_EVENT_PREVIOUS_DAY= $(By.xpath("(//td/a[contains(text(),'${CurrentDay}')]/../preceding-sibling::td/a[@href='#SelectDate'])[last()]".replace("${CurrentDay}",ELEMENT_EVENT_CURRENT_DAY.getText())));
+      ELEMENT_EVENT_PREVIOUS_DAY.waitUntil(Condition.visible,Configuration.timeout).click();
+      ELEMENT_EVENT_SELECT_TO.waitUntil(Condition.visible,Configuration.timeout).click();
+      ELEMENT_EVENT_PREVIOUS_DAY.waitUntil(Condition.visible,Configuration.timeout).click();
+    }
+    if (nextDay!= null) {
+      ELEMENT_EVENT_NEXT_DAY.waitUntil(Condition.visible,Configuration.timeout).click();
+      ELEMENT_EVENT_SELECT_TO.waitUntil(Condition.visible,Configuration.timeout).click();
+      ELEMENT_EVENT_NEXT_DAY.waitUntil(Condition.visible,Configuration.timeout).click();
+    }
+  }
   /**
    * Save a EVENT with more details
    */

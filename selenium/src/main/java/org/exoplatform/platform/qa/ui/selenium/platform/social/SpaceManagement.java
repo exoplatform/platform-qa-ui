@@ -109,18 +109,14 @@ public class SpaceManagement {
     $(ELEMENT_ADDNEWSPACE_FORM).waitUntil(Condition.visible, Configuration.timeout);
     $(ELEMENT_SPACE_NAME_INPUT).setValue(name);
     $(ELEMENT_SPACE_DESCRIPTION_INPUT).setValue(desc);
-    if (hidden == "Yes")
-    {
-    if  ($(byXpath("//label[@class='switchBtnLabelOn']")).getCssValue("width").equals("9px"))
-    {
-      $(byXpath("//*[@class='uiSwitchBtn']")).waitUntil(Condition.visible,Configuration.timeout).click();
+    if (hidden == "Yes") {
+      if ($(byXpath("//label[@class='switchBtnLabelOn']")).getCssValue("width").equals("9px")) {
+        $(byXpath("//*[@class='uiSwitchBtn']")).waitUntil(Condition.visible, Configuration.timeout).click();
+      }
     }
-    }
-    if (hidden == "No")
-    {
-      if  ($(byXpath("//label[@class='switchBtnLabelOn']")).getCssValue("width").equals("52px"))
-      {
-        $(byXpath("//*[@class='uiSwitchBtn']")).waitUntil(Condition.visible,Configuration.timeout).click();
+    if (hidden == "No") {
+      if ($(byXpath("//label[@class='switchBtnLabelOn']")).getCssValue("width").equals("52px")) {
+        $(byXpath("//*[@class='uiSwitchBtn']")).waitUntil(Condition.visible, Configuration.timeout).click();
       }
     }
     if (!access.isEmpty()) {
@@ -277,8 +273,7 @@ public class SpaceManagement {
     info("Send a request to a space");
     searchSpace(space);
     sleep(2000);
-    if($(byXpath("//button[@type='button' and text()='Request to Join']")).exists())
-    {
+    if ($(byXpath("//button[@type='button' and text()='Request to Join']")).exists()) {
       $(byText(space)).parent()
               .parent()
               .parent()
@@ -286,8 +281,7 @@ public class SpaceManagement {
               .waitUntil(Condition.visible, Configuration.timeout)
               .click();
     }
-    if($(byXpath("//button[@type='button' and text()='Join']")).exists())
-    {
+    if ($(byXpath("//button[@type='button' and text()='Join']")).exists()) {
       $(byText(space)).parent()
               .parent()
               .parent()
@@ -362,8 +356,9 @@ public class SpaceManagement {
   public void acceptAInvitation(String space) {
     info("Open invitation received tab");
     goToInvitationsReceivedTab();
+    searchSpace(space);
     info("evt.click on Accept button of the space");
-    $(byText(space)).parent().parent().parent().find(ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION).click();
+    $(byText(space)).parent().parent().parent().find(ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION).waitUntil(Condition.visible, Configuration.timeout).click();
     info("Verify that the user joijed to the space");
     ELEMENT_LIST_MY_SPACES_IN_LEFT_NAVIGATION.find(byText(space)).should(Condition.exist);
   }
