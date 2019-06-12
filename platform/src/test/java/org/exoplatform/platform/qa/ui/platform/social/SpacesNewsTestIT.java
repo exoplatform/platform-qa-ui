@@ -51,6 +51,7 @@ public class SpacesNewsTestIT extends Base {
     AddUsers addUsers;
     UserAndGroupManagement userAndGroupManage;
 
+    
     @BeforeEach
     public void setupBeforeMethod() {
         info("Start setUpBeforeMethod");
