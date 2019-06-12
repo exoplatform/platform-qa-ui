@@ -66,7 +66,6 @@ public class SpacesNewsTestIT extends Base {
         userAndGroupManage = new UserAndGroupManagement(this);
         manageLogInOut.signInCas(username, password);
     }
-
     @Test
     public void test01_ChecktheTabNews_UserRedactor() {
 
