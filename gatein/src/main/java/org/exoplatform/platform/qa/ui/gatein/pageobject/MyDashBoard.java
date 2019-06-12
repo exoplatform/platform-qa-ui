@@ -1,13 +1,18 @@
 package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.WebElement;
 
 public class MyDashBoard {
 
@@ -88,13 +93,11 @@ public class MyDashBoard {
    */
   public void addTab(String name) {
     info("Click on add button");
-    evt.click(ELEMENT_MYDASH_BTN_ADDTAB);
-    evt.waitForAndGetElement(ELEMENT_MYDASH_BTN_NAMETAB.replace("${name}", "Tab_2")).clear();
-    evt.type(ELEMENT_MYDASH_BTN_NAMETAB.replace("${name}", "Tab_2"), name, false);
-    evt.type(ELEMENT_MYDASH_BTN_NAMETAB.replace("${name}", "Tab_2"), "\n", false);
+    $(ELEMENT_MYDASH_BTN_ADDTAB).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(By.xpath("//li[@class='last']/following::li[1]")).sendKeys(Keys.ENTER);
+
     info("Verify that the new tab is added");
     evt.waitForAndGetElement(ELEMENT_MYDASH_TAB_NAME.replace("${name}", name), 2000, 0);
-
   }
 
   /**

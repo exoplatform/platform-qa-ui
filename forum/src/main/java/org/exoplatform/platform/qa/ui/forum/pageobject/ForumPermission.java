@@ -1,11 +1,19 @@
 package org.exoplatform.platform.qa.ui.forum.pageobject;
 
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_GROUP_SEARCH_USER_SEARCH;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_GROUP_SEARCH_USER_SEARCH_INPUT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 
 public class ForumPermission {
 
@@ -169,5 +177,18 @@ public class ForumPermission {
     }
     evt.click(ELEMENT_MESSAGE_SELECT_RIGHT_PARENT_GROUP.replace("$group", member), 0, true);
     evt.waitForElementNotPresent(ELEMENT_MESSAGE_SELECT_MEMBERSHIP_POPUP);
+  }
+  public void addUserPermission(String user)
+  {
+    $(byXpath("//*[contains(text(),'Permissions')]")).click();
+    $(By.xpath("(//a[@data-original-title='Select User'])[2]")).click();
+    $(ELEMENT_GROUP_SEARCH_USER_SEARCH_INPUT).setValue(user);
+    $(ELEMENT_GROUP_SEARCH_USER_SEARCH_INPUT).click();
+    $(ELEMENT_GROUP_SEARCH_USER_SEARCH).waitUntil(visible, Configuration.timeout).click();
+    $(byXpath("(//span[@class=\"uiCheckbox\"])[2]")).click();
+    $(byXpath("//a[text()=\"Add\"]")).click();
+    $(byXpath("//button[text()=\"Add\"]")).click();
+    info("Check User Permission Added");
+    Assert.assertEquals($(byXpath("//div[text()='${userName}']".replace("${userName}", user))).getText(), user);
   }
 }

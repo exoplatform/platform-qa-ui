@@ -2,8 +2,7 @@ package org.exoplatform.platform.qa.ui.platform.forum;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static org.exoplatform.platform.qa.ui.core.PLFData.password;
-import static org.exoplatform.platform.qa.ui.core.PLFData.username;
+import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -169,5 +168,27 @@ public class ForumCategoryTestIT extends Base {
     ELEMENT_CAT_CONTAINER.find(byText(nameCat)).click();
     forumCategoryManagement.deleteCategory(nameCat);
   }
-
+  @Test
+  public void test05_CheckAddPermissionsToCategory() {
+    //1418
+    String nameCat = "nameCat" + getRandomNumber();
+    String description = "description" + getRandomNumber();
+    info("go to Forum home page");
+    homePagePlatform.goToForum();
+    info("Add a category");
+    forumCategoryManagement.addCategoryWithPermissions(nameCat,description, DATA_NAME_USER2);
+    info("Delete category");
+    forumCategoryManagement.deleteCategory(nameCat);
+  }
+  @Test
+  public void test06_CheckAddPermissionsToForum() {
+    //1418
+    String nameForum = "nameForum" + getRandomNumber();
+    String description = "description" + getRandomNumber();
+    info("go to Forum home page");
+    homePagePlatform.goToForum();
+    info("Add a Forum");
+    forumCategoryManagement.addForumWithPermissions(nameForum, "", description, DATA_NAME_USER2);
+    info("Delete Forum");
+    forumForumManagement.deleteForum(nameForum);  }
 }

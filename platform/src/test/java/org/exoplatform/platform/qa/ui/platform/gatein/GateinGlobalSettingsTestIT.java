@@ -2,26 +2,32 @@ package org.exoplatform.platform.qa.ui.platform.gatein;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import javafx.beans.binding.StringBinding;
+import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarHomePage;
 import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
-import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
+import org.exoplatform.platform.qa.ui.gatein.pageobject.*;
+import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.administration.ChangeLanguages;
+import org.exoplatform.platform.qa.ui.selenium.platform.administration.ManageLayout;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
+import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import sun.awt.AWTAccessor;
+
+import java.util.ArrayList;
 
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
-import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
-import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
+import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_HOME_LINK_PLF;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_HOME_LINK_PLF_IN_FRENCH;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_NAME_OF_USER_TOP_RIGHT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase.scrollToBottomPage;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
@@ -34,9 +40,18 @@ public class GateinGlobalSettingsTestIT extends Base {
     ManageLogInOut manageLogInOut;
     NavigationToolbar navigationToolbar;
     UserAddManagement userAddManagement;
+    HomePagePlatform homePagePlatform;
     UserAndGroupManagement userAndGroupManagement;
     UserProfilePage userProfilePage;
     ChangeLanguages changeLanguage;
+    UserPageBase userPageBase;
+    ManageLayout manageLayout;
+    MyDashBoard myDashBoard;
+    CalendarHomePage calendarHomePage;
+    PortalManagePages portalManagePages;
+    PortalManageSites portalmanagesites;
+    NavigationManagement navigationmanagement;
+
 
     @BeforeEach
     public void setupBeforeMethod() {
@@ -44,6 +59,14 @@ public class GateinGlobalSettingsTestIT extends Base {
         navigationToolbar = new NavigationToolbar(this);
         userAddManagement = new UserAddManagement(this);
         userProfilePage = new UserProfilePage(this);
+        manageLayout = new ManageLayout(this);
+        homePagePlatform = new HomePagePlatform(this);
+        calendarHomePage = new CalendarHomePage(this);
+        portalmanagesites = new PortalManageSites(this);
+        portalManagePages = new PortalManagePages(this);
+        myDashBoard = new MyDashBoard(this);
+        userPageBase = new UserPageBase(this);
+        navigationmanagement = new NavigationManagement(this);
         changeLanguage = new ChangeLanguages(this);
         manageLogInOut = new ManageLogInOut(this);
         userAndGroupManagement = new UserAndGroupManagement(this);
@@ -238,5 +261,88 @@ public class GateinGlobalSettingsTestIT extends Base {
         manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
         navigationToolbar.goToUsersAndGroupsManagement();
         userAndGroupManagement.deleteUser(username);
+    }
+    @Tag("gatein")
+    @Test
+    public void test05_CheckSearchAndSelectPage() {
+        //2423
+        String namePage = "namePage" + getRandomNumber();
+        String titlePage = "titlePage" + getRandomNumber();
+        String nodeName = "nodeName" + getRandomNumber();
+        navigationToolbar.goToPotalSites();
+        portalmanagesites.goToEditNavigation();
+        info("Add a new node");
+        navigationmanagement.addNode(nodeName, "");
+        navigationmanagement.inputInfoPageSelector(namePage, titlePage, true, false, false);
+        navigationmanagement.checkSearchAndSelectPage();
+
+    }
+    @Tag("gatein")
+    @Test
+    public void test06_CheckNewTabAddedForDashboard() {
+        //2418
+        String tabName = "tabName" + getRandomNumber();
+        info("Sign in with ROOT account");
+        manageLogInOut.signIn(username, PASS_ROOT);
+        navigationToolbar.goToMyProfile();
+        userPageBase.goToDashboardTab();
+        myDashBoard.addTab(tabName);
+        click(ELEMENT_HP_CALENDARGADGET_SETTINGS_ADDCAL);
+
+    }
+    @Tag("gatein")
+    @Test
+    public void test07_CheckGadgetAddedInMyDashboard() {
+        //2417
+        String tabName = "tabName" + getRandomNumber();
+        info("Sign in with ROOT account");
+        manageLogInOut.signIn(username, PASS_ROOT);
+        navigationToolbar.goToMyProfile();
+        userPageBase.goToDashboardTab();
+        myDashBoard.addTab(tabName);
+        click(ELEMENT_HP_CALENDARGADGET_SETTINGS_ADDCAL);
+
+    }
+    @Tag("gatein")
+    @Test
+    public void test08_CheckCanSearchPageInPortalPage() {
+        //2416
+        String namePage = "namePage" + getRandomNumber();
+        String titlePage = "titlePage" + getRandomNumber();
+        manageLogInOut.signIn(username, PASS_ROOT);
+        navigationToolbar.goToPotalPages();
+        portalManagePages.addPage(namePage, titlePage, "Portal",true);
+        portalManagePages.editPage(titlePage,"");
+        manageLayout.abortPageUpdate();
+    }
+    @Tag("gatein")
+    @Test
+    public void test09_PortalPage() {
+        //7878
+        ArrayList<String> a = new ArrayList<>();
+        manageLogInOut.signIn(username, PASS_ROOT);
+        homePagePlatform.goToDocuments();
+        $(byXpath("//a[text()=' Personal Documents ']")).waitUntil(Condition.visible,Configuration.timeout).click();
+        for(int i=1; i<11; i++) {
+            a.add($(byXpath("(//h5[text()='Group drives']/following::a[@class='driveLabel'])['{$p}']".replace("{$p}",String.valueOf(i)))).getText());
+        }
+         String a1 = a.get(0);
+         String a2 = a.get(1);
+
+    }
+    @Tag("gatein")
+    @Test
+    public void test10_CheckCalendarArabicMonthsDisplayed() {
+        //1431
+        String language1 = "Arabic";
+        String language2 = "English";
+        manageLogInOut.signIn(username, PASS_ROOT);
+        navigationToolbar.goToChangeLanguage();
+        changeLanguage.changeLanguage(language1, "Apply");
+        homePagePlatform.goToCalendarPage();
+        calendarHomePage.checkCalendarArabicMonths();
+        navigationToolbar.goToChangeLanguage();
+        changeLanguage.changeLanguage(language2, "Apply");
+
     }
 }

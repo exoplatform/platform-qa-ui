@@ -12,6 +12,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -162,13 +163,29 @@ public class CalendarHomePage {
       }
     }
   }
-
   /**
-   * goToRightMenuTaskEventFromMonthView
-   *
-   * @param name name of event or task
-   * @param date date of event: format (MMM dd yyyy)
+   * check Calendar Arabic Months
    */
+  public void checkCalendarArabicMonths() {
+    Assert.assertEquals("يناير",$(byXpath("(//div[@class=\"uiMiniCalendar uiBox\"]/div[@class=\"LocalizedMonthName\"])[1]")).getAttribute("name"));
+    Assert.assertEquals("فبراير",$(byXpath("(//div[@class=\"uiMiniCalendar uiBox\"]/div[@class=\"LocalizedMonthName\"])[2]")).getAttribute("name"));
+    Assert.assertEquals("مارس",$(byXpath("(//div[@class=\"uiMiniCalendar uiBox\"]/div[@class=\"LocalizedMonthName\"])[3]")).getAttribute("name"));
+    Assert.assertEquals("أبريل",$(byXpath("(//div[@class=\"uiMiniCalendar uiBox\"]/div[@class=\"LocalizedMonthName\"])[4]")).getAttribute("name"));
+    Assert.assertEquals("مايو",$(byXpath("(//div[@class=\"uiMiniCalendar uiBox\"]/div[@class=\"LocalizedMonthName\"])[5]")).getAttribute("name"));
+    Assert.assertEquals("يونيو",$(byXpath("(//div[@class=\"uiMiniCalendar uiBox\"]/div[@class=\"LocalizedMonthName\"])[6]")).getAttribute("name"));
+    Assert.assertEquals("يوليو",$(byXpath("(//div[@class=\"uiMiniCalendar uiBox\"]/div[@class=\"LocalizedMonthName\"])[7]")).getAttribute("name"));
+    Assert.assertEquals("أغسطس",$(byXpath("(//div[@class=\"uiMiniCalendar uiBox\"]/div[@class=\"LocalizedMonthName\"])[8]")).getAttribute("name"));
+    Assert.assertEquals("سبتمبر",$(byXpath("(//div[@class=\"uiMiniCalendar uiBox\"]/div[@class=\"LocalizedMonthName\"])[9]")).getAttribute("name"));
+    Assert.assertEquals("أكتوبر",$(byXpath("(//div[@class=\"uiMiniCalendar uiBox\"]/div[@class=\"LocalizedMonthName\"])[10]")).getAttribute("name"));
+    Assert.assertEquals("نوفمبر",$(byXpath("(//div[@class=\"uiMiniCalendar uiBox\"]/div[@class=\"LocalizedMonthName\"])[11]")).getAttribute("name"));
+    Assert.assertEquals("ديسمبر",$(byXpath("(//div[@class=\"uiMiniCalendar uiBox\"]/div[@class=\"LocalizedMonthName\"])[12]")).getAttribute("name"));
+  }
+    /**
+     * goToRightMenuTaskEventFromMonthView
+     *
+     * @param name name of event or task
+     * @param date date of event: format (MMM dd yyyy)
+     */
   public void goToRightMenuTaskEventFromMonthView(String name, String date) {
     info("Got to edit task from month view");
     goToView(selectViewOption.MONTH);

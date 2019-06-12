@@ -1,12 +1,14 @@
 package org.exoplatform.platform.qa.ui.forum.pageobject;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.withText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_SAVE_BTN;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.selenium.Button;
@@ -14,6 +16,9 @@ import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ManageFileTestBase;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 public class ForumCategoryManagement {
 
@@ -283,7 +288,43 @@ public class ForumCategoryManagement {
     info("Permissions page");
     evt.click(ELEMENT_CATEGORY_PERMISSION_TAB);
   }
-
+  /**
+   * Add Category with Permissions
+   */
+  public void addCategoryWithPermissions(String nameCat, String description, String user) {
+    info("click on Add Category button");
+    $(ELEMENT_ACTIONBAR_ADDCATEGORY).click();
+    info("input the title for the category");
+    $(ELEMENT_ADDCATEGORY_POPUP_TITLE).val(nameCat);
+    info("check and input description");
+    $(ELEMENT_ADDCATEGORY_POPUP_DESCRIPTION).val(description);
+    forumPerm.addUserPermission(user);
+    info("Click on Save button");
+    $(ELEMENT_ADDCATEGORY_POPUP_SAVE_BUTTON).click();
+    info("Check Category Name Added");
+    Assert.assertEquals($(byXpath("//span[@class='nameForum']")).getText(), nameCat);
+    info("Check Category Description Added");
+    Assert.assertEquals($(byXpath("//span[@class='description']")).getText(), description);
+  }
+  public void addForumWithPermissions(String nameForum, String order, String description, String user) {
+    $(ELEMENT_ACTIONBAR_ADDFORUM).waitUntil(Condition.appears, Configuration.timeout);
+    info("click on Add forum button");
+    $(ELEMENT_ACTIONBAR_ADDFORUM).click();
+    info("input the title for the forum");
+    $(ELEMENT_ADDFORUM_POPUP_TITLE).val(nameForum);
+    info("check and input Oder field");
+    $(ELEMENT_ADDFORUM_POPUP_ORDER).val(order);
+    info("check and input description");
+    $(ELEMENT_ADDFORUM_POPUP_DESCRIPTION).val(description);
+    forumPerm.addUserPermission(user);
+    info("Click on Save button");
+    $(ELEMENT_ADDFORUM_POPUP_SAVE_BUTTON).click();
+    info("Finish adding new forum");
+    info("Check Forum Name Added");
+    Assert.assertEquals($(byXpath("//span[@class='nameForum']")).getText(), nameForum);
+    info("Check Forum Description Added");
+    Assert.assertEquals($(byXpath("//span[@class='description']")).getText(), description);
+  }
   /**
    * Select User in Permission tab
    */

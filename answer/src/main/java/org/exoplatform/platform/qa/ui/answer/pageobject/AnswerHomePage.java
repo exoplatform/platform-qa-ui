@@ -41,7 +41,7 @@ public class AnswerHomePage {
   }
 
   /**
-   * Do quick search
+   * Do
    * 
    * @param key
    */

@@ -11,6 +11,7 @@ import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_UI_POPUP_MOVE_TOPIC;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -110,7 +111,32 @@ public class SpaceSettingManagement {
     $(byXpath(ELEMENT_SPACE_CHANGE_ROLE_USER_MEMBER.replace("${user}", user))).click();
 
   }
-
+    /**
+     * Search User in people space
+     */
+     public void searchUsersPeople(String user) {
+        info("Enter User Name");
+        $(byXpath("//div[@class='selectize-input items not-full']/input[@placeholder='Name']")).setValue(user);
+        $(byXpath("//button[@id='SearchButton']")).waitUntil(Condition.visible,Configuration.timeout).click();
+    }
+    /**
+     * Connect to Searched User
+     */
+    public void connectSearchedUser() {
+        if( $(byXpath("//button[text()='Cancel Request']")).isDisplayed()) {
+            $(byXpath("//button[text()='Cancel Request']")).waitUntil(Condition.visible, Configuration.timeout).click();
+        }
+        info("Connect to searched user");
+        $(byXpath("//button[text()='Connect']")).waitUntil(Condition.visible, Configuration.timeout).click();
+    }
+    /**
+     * Check User Not Connected
+     */
+    public void checkUserNotConnected() {
+        if( $(byXpath("//button[text()='Connect']")).isDisplayed()) {
+            info("User is not connected");
+        }
+    }
   /**
    * Remove a user in the invited list
    * 
@@ -618,6 +644,14 @@ public class SpaceSettingManagement {
         evt.click(ELEMENT_SPACE_INVITE_USERS_FROM_GROUP_TAB);
         evt.waitForAndGetElement(ELEMENT_SPACE_INVITE_USERS_FROM_GROUP_CHECKBOX, 2000, 2);
         info("The tab is shown");
+    }
+    /**
+     * Decline Notification Connect Request
+     */
+    public void declineNotificationConnectRequest(String userName) {
+        ($(byXpath("//div[@class=\"uiDropdownWithIcon dropdown pull-right\"]")).waitUntil(Condition.visible,Configuration.timeout)).click();
+        $(byXpath("//div[@class=\"status\"]/a[text()='${user}']/following::div[@class='confirm']/a[text()=\"Refuse\"]".replace("${user}",userName))).waitUntil(Condition.visible,Configuration.timeout).click();
+
     }
 
     /**
