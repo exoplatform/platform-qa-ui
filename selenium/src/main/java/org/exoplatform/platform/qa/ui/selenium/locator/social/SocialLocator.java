@@ -2436,13 +2436,13 @@ public static final By
   public static final SelenideElement ELEMENT_Button_Save =$(byXpath("//*[@id=\"UIGroupMembershipForm\"]/div[2]/div/div[2]/a"));
   public static final SelenideElement ELEMENT_Membership =$(byId("membership"));
   public static final SelenideElement ELEMENT_News= $(byClassName("uinewsactivitycomposer"));
-  public static final SelenideElement ELEMENT_Title =$(byXpath ("//*[@id=\"newsForm\"]/div[1]/label"));
-  public static final SelenideElement ELEMENT_Content =  $(byXpath ("//*[@id=\"newsForm\"]/div[2]/label"));
-  public static final SelenideElement ELEMENT_field_Title =  $(byXpath("//div[@class=\"newsFormRow newsFormTitle\"]/input[@id='newsTitle']"));
+  public static final SelenideElement ELEMENT_Title =$(byXpath ("//*[@id=\"newsForm\"]/div/div[1]/label[1]"));
+  public static final SelenideElement ELEMENT_Content =  $(byXpath ("//*[@id=\"newsForm\"]/div/div[1]/label[2]"));
+  public static final SelenideElement ELEMENT_field_Title =  $(byXpath("//div[@class=\"newsFormColumn newsFormInputs\"]/input[@id='newsTitle']"));
   public static final SelenideElement ELEMENT_Button_Post =  $(byXpath ("//div[@class=\"newsFormRow newsFormButtons\"]/button[@disabled='disabled']"));
   public static final SelenideElement ELEMENT_Icon_NewsPlus = $(byXpath ("//div[@class=\"newsFormRow newsFormButtons\"]/a[@id='newsPlus']"));
   public static final SelenideElement ELEMENT_Checkbox_pinArticle= $(byXpath ("//span[@class=\"uiCheckbox\"]/input[@id='pinArticle']"));
-  public static final SelenideElement ELEMENT_Button_Post_enabled=$(byXpath("//div[@class=\"newsFormRow newsFormButtons\"]/button[@id='newsPost']"));
+  public static final SelenideElement ELEMENT_Button_Post_enabled=$(byXpath("//div[@class=\"newsFormButtons\"]/button[@id='newsPost']"));
   public static final String ELEMENT_Button_Space= "//li[@class='node']/a[@title='${space}']";
   public static final SelenideElement ELEMENT_Field_username=$(byXpath("//div[@class=\"controls\"]/input[@id='username']"));
   public static final SelenideElement ELEMENT_frame= $(byXpath("(//iframe[@class=\"cke_wysiwyg_frame cke_reset\"])[2]"));

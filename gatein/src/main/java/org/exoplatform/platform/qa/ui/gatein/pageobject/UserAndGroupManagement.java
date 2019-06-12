@@ -25,7 +25,9 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_NEXT_PAGE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase.scrollToBottomPage;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME;
 
 import java.util.ArrayList;
@@ -180,15 +182,15 @@ public class UserAndGroupManagement {
   public void addUserContentManagement(String user, String... membership) {
     info("Go to Group tab");
     goToGroupTab();
-    evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
+    scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     info("Select Platform/Content Management group");
     selectGroup("Platform/Content Management");
     info("Add user to Content Management group by type");
-    evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
+    scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     evt.type(ELEMENT_INPUT_USERNAME, user, true);
     if (membership.length > 0)
       evt.select(ELEMENT_SELECT_MEMBERSHIP, membership[0]);
-    evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
+    scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     evt.click(ELEMENT_SAVE_BUTTON_2);
     String addedUser = ELEMENT_ADDED_GROUP_USER_IN_TABLE.replace("${username}", user);
     if (testBase.isTextPresent(ELEMENT_MSG_TOTAL_PAGES)) {
@@ -210,7 +212,7 @@ public class UserAndGroupManagement {
 
     $(ELEMENT_INPUT_GROUP_NAME).waitUntil(Condition.appears, 10000);
     $(ELEMENT_INPUT_GROUP_NAME).setValue(groupName);
-    $(ELEMENT_INPUT_LABEL).setValue(groupLabel);
+    $(GateinLocator.ELEMENT_INPUT_LABEL).setValue(groupLabel);
     $(ELEMENT_TEXTAREA_DESCRIPTION).setValue(groupDesc);
   }
 
@@ -218,7 +220,7 @@ public class UserAndGroupManagement {
 
     $(ELEMENT_INPUT_GROUP_NAME).waitUntil(Condition.appears, 10000);
 
-    $(ELEMENT_INPUT_LABEL).setValue(groupLabel);
+    $(GateinLocator.ELEMENT_INPUT_LABEL).setValue(groupLabel);
     $(ELEMENT_TEXTAREA_DESCRIPTION).setValue(groupDesc);
   }
 
@@ -443,12 +445,12 @@ public class UserAndGroupManagement {
       if (verifyMembership)
         evt.waitForTextNotPresent(membershipName);
       if (evt.waitForAndGetElement(ELEMENT_NEXT_PAGE, 10000, 0) != null) {
-        evt.click(ELEMENT_NEXT_PAGE);
+        $(ELEMENT_NEXT_PAGE).click();
         evt.waitForTextNotPresent(membershipName);
       }
     } else {
       evt.waitForTextPresent(ELEMENT_MSG_CANNOT_DELETE);
-      evt.click(ELEMENT_OK_BUTTON, 0, true);
+      evt.click(GateinLocator.ELEMENT_OK_BUTTON, 0, true);
     }
   }
 
@@ -463,7 +465,7 @@ public class UserAndGroupManagement {
       ELEMENT_BTN_USER_TAB.click();
     }
     if (testBase.isTextPresent("Search")) {
-      $(ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);
+      $(GateinLocator.ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);
     }
     ELEMENT_SELECT_BOX_USERS.selectOptionByValue("userName");
     ELEMENT_BTN_SEARCH_USER.click();
@@ -482,10 +484,10 @@ public class UserAndGroupManagement {
   public void editUserInfo_AccountTab(String first, String last, String displayName, String email) {
     info("--editUserInfo_AccountTab--");
 
-    $(ELEMENT_FIRSTNAME).setValue(first);
-    $(ELEMENT_LASTNAME).setValue(last);
+    $(GateinLocator.ELEMENT_FIRSTNAME).setValue(first);
+    $(GateinLocator.ELEMENT_LASTNAME).setValue(last);
     $(ELEMENT_DISPLAY_NAME).setValue(displayName);
-    $(ELEMENT_EMAIL).setValue(email);
+    $(GateinLocator.ELEMENT_EMAIL).setValue(email);
 
     ELEMENT_BTN_SAVE_EDIT_USER.click();
     ELEMENT_BTN_SAVE_EDIT_USER.waitUntil(Condition.disappears, Configuration.timeout);
@@ -548,8 +550,8 @@ public class UserAndGroupManagement {
     $(byXpath(ELEMENT_SAVE_BUTTON)).click();
     $(byXpath(ELEMENT_SAVE_BUTTON)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     $(byText(ELEMENT_MSG_UPDATE_USER_PROFILE)).waitUntil(Condition.visible,Configuration.timeout);
-    $(byXpath(ELEMENT_CLOSE_MESSAGE)).click();
-    $(byXpath(ELEMENT_CLOSE_MESSAGE)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    $(byXpath(GateinLocator.ELEMENT_CLOSE_MESSAGE)).click();
+    $(byXpath(GateinLocator.ELEMENT_CLOSE_MESSAGE)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
@@ -569,7 +571,7 @@ public class UserAndGroupManagement {
 
     evt.click(GateinLocator.ELEMENT_SEARCH_ICON_USERS_MANAGEMENT);
     if (testBase.isTextNotPresent(user))
-      evt.click(ELEMENT_OK_BUTTON);
+      evt.click(GateinLocator.ELEMENT_OK_BUTTON);
   }
 
   /**
@@ -685,14 +687,14 @@ public class UserAndGroupManagement {
     info("--Search user " + username + "--");
     ELEMENT_SELECT_BOX_USERS.selectOptionByValue("userName");
     if (testBase.isTextPresent("Search")) {
-      $(ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);
+      $(GateinLocator.ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);
     }
 
     ELEMENT_BTN_SEARCH_USER.click();
 
     $(byClassName("uiIconDeleteUser")).click();
     alert.acceptAlert();
-    $(ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);
+    $(GateinLocator.ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);
     ELEMENT_BTN_SEARCH_USER.click();
     $(byText("No result found.")).waitUntil(Condition.appears, Configuration.timeout);
     dialog.closeMessageDialog();
@@ -828,4 +830,21 @@ public class UserAndGroupManagement {
     evt.waitForAndGetElement(unlinkElement);
     evt.click(unlinkElement);
   }
+
+  public void addUsertoSpaceGroup (String space,String username1, String redactor) {
+
+    info("Go to Group tab");
+    goToGroupTab();
+    scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
+    info("Select Spaces ");
+    $(ELEMENT_Button_Spaces).click();
+    $(byXpath(ELEMENT_Button_Space.replace("${space}",space))).waitUntil(Condition.visible,Configuration.timeout).click();
+    info("give  the role redactor for user ");
+    $(ELEMENT_Field_username).waitUntil(Condition.visible,Configuration.timeout).setValue(username1);
+    ELEMENT_Membership.selectOptionByValue(redactor);
+    $(ELEMENT_Button_Save).click();
+
+    info("User is added to space group avec role redactor");
+  }
+
 }
