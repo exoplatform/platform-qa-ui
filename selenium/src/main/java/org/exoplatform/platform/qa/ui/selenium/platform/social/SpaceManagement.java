@@ -9,6 +9,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.Tas
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 
@@ -87,13 +88,51 @@ public class SpaceManagement {
         ELEMENT_ADDNEWSPACE_BUTTON.click();
         ELEMENT_SPACE_NAME_INPUT.waitUntil(Condition.appears, Configuration.timeout);
         ELEMENT_SPACE_NAME_INPUT.setValue(name);
+        info("Check Default Space Template is Community");
+        Assert.assertEquals("community", ELEMENT_SPACE_TEMPLATE_SELECT.getSelectedValue());
         ELEMENT_SPACE_DESCRIPTION_INPUT.setValue(desc);
         info("Save all changes");
         ELEMENET_SPACE_CREATE_BUTTON.click();
         ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
         homePagePlatform.refreshUntil($(ELEMENT_SPACE_MENU_ACTIVITY_PORTLET),Condition.visible,700);
     }
+    public void addNewSpacewithspecificTemplate(String name, String information, String desc,String temp,int...params) {
 
+        ELEMENT_ADDNEWSPACE_BUTTON.click();
+        ELEMENT_SPACE_NAME_INPUT.waitUntil(Condition.appears, Configuration.timeout);
+        ELEMENT_SPACE_NAME_INPUT.setValue(name);
+        info("Select Communication as Space Template");
+        ELEMENT_SPACE_TEMPLATE_SELECT.selectOptionContainingText(temp);
+        Assert.assertEquals(temp, ELEMENT_SPACE_TEMPLATE_SELECT.getSelectedText());
+
+        if (temp.equals("Communication")) {
+            Assert.assertEquals(information,ELEMENT_SPACE_TEMPLATE_INFORMATION.getText());
+            info("Hidden is switched to No");
+            $(ELEMENT_SPACE_TEMPLATE_VISIBILITY_OFF).isDisplayed();
+            info("Check that registration is Validation");
+            $(ELEMENT_SPACE_TEMPLATE_VALIDATION_REGISTRATION).isDisplayed();
+        }
+        if (temp.equals("Project")) {
+            Assert.assertEquals(information,ELEMENT_SPACE_TEMPLATE_INFORMATION.getText());
+            info("Hidden is switched to No");
+            $(ELEMENT_SPACE_TEMPLATE_VISIBILITY_OFF).isDisplayed();
+            info("Check that registration is Validation");
+            $(ELEMENT_SPACE_TEMPLATE_VALIDATION_REGISTRATION).isDisplayed();
+        }
+        if (temp.equals("Team")) {
+            Assert.assertEquals(information, ELEMENT_SPACE_TEMPLATE_INFORMATION.getText());
+            info("Hidden is switched to yes");
+            $((ELEMENT_SPACE_TEMPLATE_VISIBILITY_ON)).isDisplayed();
+            info("Check that registration is Validation");
+            $(ELEMENT_SPACE_TEMPLATE_VALIDATION_REGISTRATION).isDisplayed();
+        }
+
+        ELEMENT_SPACE_DESCRIPTION_INPUT.setValue(desc);
+        info("Save all changes");
+        ELEMENET_SPACE_CREATE_BUTTON.click();
+        ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+        homePagePlatform.refreshUntil($(ELEMENT_SPACE_MENU_ACTIVITY_PORTLET), Condition.visible, 700);
+    }
     /**
      * Add a new space
      *

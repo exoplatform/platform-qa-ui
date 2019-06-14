@@ -1815,7 +1815,17 @@ public static final By
 
   public static final SelenideElement ELEMENT_SPACE_DESCRIPTION_INPUT                                   = $(byId("description"));
 
-  public static final By              ELEMENT_SPACE_SETTING_TAB                                         =
+  public static final SelenideElement ELEMENT_SPACE_TEMPLATE_SELECT                                   = $(byXpath("//label[text()=\"Template:\"]/following::select"));
+
+  public static final SelenideElement ELEMENT_SPACE_TEMPLATE_INFORMATION                                  = $(byXpath(".//*[@id='UISpaceTemplateDescription']"));
+
+  public static final SelenideElement ELEMENT_SPACE_TEMPLATE_VISIBILITY_OFF                                = $(byXpath(".//label[@class='switchBtnLabelOff']/span"));
+
+  public static final SelenideElement ELEMENT_SPACE_TEMPLATE_VISIBILITY_ON                               = $(byXpath(".//label[@class='switchBtnLabelOn']/span"));
+
+  public static final SelenideElement ELEMENT_SPACE_TEMPLATE_VALIDATION_REGISTRATION                     = $(byXpath( "//input[@value='validation' and  @checked='checked']"));
+
+  public static final By              ELEMENT_SPACE_SETTING_TAB                                =
                                                                 By.xpath(".//*[contains(@data-target,'#UISpaceInfo-tab')]");
 
   public static final By              ELEMENT_SPACE_CHANGE_AVATAR_BTN                                   =

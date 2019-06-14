@@ -237,7 +237,6 @@ public class HomePagePlatform {
       if (selenideElement.is(condition)) {
         break;
       }
-      refresh();
     }
   }
 
