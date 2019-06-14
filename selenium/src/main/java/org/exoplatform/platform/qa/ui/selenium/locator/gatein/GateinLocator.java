@@ -361,6 +361,8 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
 
   public static final String          ELEMENT_MYDASH_TAB_NAME                                 = "//*[@id='${name}']";
 
+  public static final String          ELEMENT_MYDASH_LAST_TAB_EDIT                                 = "//li[@class=\"active last editing\"]/a/input";
+
   public static final String          ELEMENT_MYDASH_BTN_NAMETAB                              = "//*[@value='${name}']";
 
   public static final String          ELEMENT_MYDASH_BTN_DELETETAB                            =

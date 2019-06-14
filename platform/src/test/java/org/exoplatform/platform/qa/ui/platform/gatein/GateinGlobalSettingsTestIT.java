@@ -286,22 +286,17 @@ public class GateinGlobalSettingsTestIT extends Base {
         manageLogInOut.signIn(username, PASS_ROOT);
         navigationToolbar.goToMyProfile();
         userPageBase.goToDashboardTab();
-        myDashBoard.addTab(tabName);
-        click(ELEMENT_HP_CALENDARGADGET_SETTINGS_ADDCAL);
-
+        myDashBoard.editLastTab(tabName);
     }
     @Tag("gatein")
     @Test
     public void test07_CheckGadgetAddedInMyDashboard() {
         //2417
-        String tabName = "tabName" + getRandomNumber();
         info("Sign in with ROOT account");
         manageLogInOut.signIn(username, PASS_ROOT);
         navigationToolbar.goToMyProfile();
         userPageBase.goToDashboardTab();
-        myDashBoard.addTab(tabName);
-        click(ELEMENT_HP_CALENDARGADGET_SETTINGS_ADDCAL);
-
+        myDashBoard.addGadget();
     }
     @Tag("gatein")
     @Test

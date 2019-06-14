@@ -1,11 +1,13 @@
 package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
@@ -13,6 +15,9 @@ import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
+import java.util.concurrent.TimeUnit;
 
 public class MyDashBoard {
 
@@ -31,21 +36,14 @@ public class MyDashBoard {
   /**
    * Add a gadget to dashboard
    *
-   * @param name the name of gadget that will be added to dashboard
-   * @param numberCol the number of column that will put the gadget. We have 3
-   *          columns as: + numberCol= 1: this is for left column + numberCol= 2:
-   *          this is for middle column + numberCol =3: this is for right column
    */
-  public void addGadget(String name, String numberCol) {
+  public void addGadget() {
     info("Click on GadGet button");
     evt.click(ELEMENT_MYDASH_BTN_ADDGADGET);
     evt.waitForAndGetElement(ELEMENT_DASHBOARD_WORKSPACE_POPUP_TITLE, 2000, 0);
     info("The popup is shown");
-    evt.dragAndDropToObject(ELEMENT_MYDASH_GADGET_NAME.replace("${name}", name),
-                            ELEMENT_MYDASH_GADGET_COLUMN.replace("${number}", numberCol));
-
+    $(byXpath("//*[@class='GadgetTitle' and @title='Services Management']")).dragAndDropTo($(byXpath("//div[@id=\"GadgetContainer\"]"))).waitUntil(Condition.visible,Configuration.timeout);
     evt.click(ELEMENT_DASHBOARD_WORKSPACE_POPUP_CLOSE);
-    evt.waitForAndGetElement(ELEMENT_MYDASH_ADDED_GADGET_IN_DASHBOARD.replace("${name}", name), 2000, 0);
     info("The gadget is added to dashboard");
   }
 
@@ -91,13 +89,15 @@ public class MyDashBoard {
    *
    * @param name String
    */
-  public void addTab(String name) {
+  public void editLastTab(String name) {
     info("Click on add button");
-    $(ELEMENT_MYDASH_BTN_ADDTAB).waitUntil(Condition.visible, Configuration.timeout).click();
-    $(By.xpath("//li[@class='last']/following::li[1]")).sendKeys(Keys.ENTER);
-
-    info("Verify that the new tab is added");
-    evt.waitForAndGetElement(ELEMENT_MYDASH_TAB_NAME.replace("${name}", name), 2000, 0);
+    testBase.getExoWebDriver().getWebDriver().findElement(By.className("last")).click();
+    $(byXpath("//li[@class='active last']")).doubleClick();
+    $(byXpath(ELEMENT_MYDASH_LAST_TAB_EDIT)).clear();
+    $(byXpath(ELEMENT_MYDASH_LAST_TAB_EDIT)).sendKeys(name);
+    $(byXpath(ELEMENT_MYDASH_LAST_TAB_EDIT)).sendKeys(Keys.ENTER);
+      info("Verify that the new tab is added");
+      Assert.assertEquals($(byXpath("//li[@class=\"active last\"]/a/span")).getText(),name);
   }
 
   /**

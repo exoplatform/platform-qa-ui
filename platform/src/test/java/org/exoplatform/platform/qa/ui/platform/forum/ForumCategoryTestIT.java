@@ -9,6 +9,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
+import org.exoplatform.platform.qa.ui.forum.pageobject.ForumPermission;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -35,6 +36,8 @@ public class ForumCategoryTestIT extends Base {
 
   ForumForumManagement    forumForumManagement;
 
+  ForumPermission         forumPermission;
+
   ManageLogInOut          manageLogInOut;
 
   @BeforeEach
@@ -43,6 +46,7 @@ public class ForumCategoryTestIT extends Base {
 
     homePagePlatform = new HomePagePlatform(this);
     forumHomePage = new ForumHomePage(this);
+    forumPermission = new ForumPermission(this);
     forumCategoryManagement = new ForumCategoryManagement(this);
     forumForumManagement = new ForumForumManagement(this);
     manageLogInOut = new ManageLogInOut(this);
@@ -189,6 +193,20 @@ public class ForumCategoryTestIT extends Base {
     homePagePlatform.goToForum();
     info("Add a Forum");
     forumCategoryManagement.addForumWithPermissions(nameForum, "", description, DATA_NAME_USER2);
+    info("Delete Forum");
+    forumForumManagement.deleteForum(nameForum);  }
+
+  @Test
+  public void test07_CheckAddPermissionsToTopic() {
+    //1418
+    String nameForum = "nameForum" + getRandomNumber();
+    String description = "description" + getRandomNumber();
+    info("go to Forum home page");
+    homePagePlatform.goToForum();
+    info("Add a Forum");
+    forumCategoryManagement.addForumWithPermissions(nameForum, "", description, DATA_NAME_USER2);
+    forumForumManagement.goToStartTopic();
+    forumPermission.addUserPermission(DATA_NAME_USER2, "","forum", "topic");
     info("Delete Forum");
     forumForumManagement.deleteForum(nameForum);  }
 }

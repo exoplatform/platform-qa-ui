@@ -471,11 +471,4 @@ public class SOCNotificationIntranetSpaceInvitationTestIT extends Base {
     spaceSettingManagement.searchUsersPeople(DATA_USER3);
     spaceSettingManagement.checkUserNotConnected();
   }
-  @Tag("PLF-8210")
-  @Test
-  public void test07_Check() throws Exception {
-    info("Test 5: Check View All after refusing a Space Invitation");
-    homePagePlatform.goToDocuments();
-
-  }
 }

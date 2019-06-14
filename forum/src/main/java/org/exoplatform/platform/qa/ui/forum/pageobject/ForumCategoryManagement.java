@@ -298,7 +298,7 @@ public class ForumCategoryManagement {
     $(ELEMENT_ADDCATEGORY_POPUP_TITLE).val(nameCat);
     info("check and input description");
     $(ELEMENT_ADDCATEGORY_POPUP_DESCRIPTION).val(description);
-    forumPerm.addUserPermission(user);
+    forumPerm.addUserPermission(user, "category", "", "");
     info("Click on Save button");
     $(ELEMENT_ADDCATEGORY_POPUP_SAVE_BUTTON).click();
     info("Check Category Name Added");
@@ -316,7 +316,7 @@ public class ForumCategoryManagement {
     $(ELEMENT_ADDFORUM_POPUP_ORDER).val(order);
     info("check and input description");
     $(ELEMENT_ADDFORUM_POPUP_DESCRIPTION).val(description);
-    forumPerm.addUserPermission(user);
+    forumPerm.addUserPermission(user, "","forum", "");
     info("Click on Save button");
     $(ELEMENT_ADDFORUM_POPUP_SAVE_BUTTON).click();
     info("Finish adding new forum");
