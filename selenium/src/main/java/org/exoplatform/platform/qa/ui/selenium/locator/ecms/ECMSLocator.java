@@ -1078,7 +1078,7 @@ public class ECMSLocator {
                                                                            "//*[@class='accessSpaceMember clearfix']//*[contains(text(), 'Access:')]/..[contains(text(), 'Space Members')]/..//*[@id='permissionDropDown']//option[contains(text(), '${option}')]";
 
   public static final By              ELEMENT_DOCUMENT_SHARE_CLOSE_BUTTON                                  =
-                                                                          By.xpath("//*[@class='uiIconClose pull-right']");
+                                                                          By.xpath("(//*[@class='uiIconClose pull-right'])[1]");
 
   public static final By              ELEMENT_DOCUMENT_SHARE_SPACE_FILTER                                  =
                                                                           By.xpath("//input[@placeholder='Filter Spaces']");

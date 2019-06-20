@@ -191,4 +191,13 @@ public class ECMSManageProjectTestIT extends Base {
                                             .parent()
                                             .shouldHave(Condition.attribute("class", "collapseIcon SelectedNode SelectedNode"));
   }
+
+  @Test
+  public void test11_checkCloseButtonFunctionalityBrowsingPreference() {
+      //8352
+    info("Check close button in the browsing preference");
+    homePagePlatform.goToDocuments();
+    siteExplorerHome.openOrCloseSettingsDriver(SiteExplorerHome.selectDriverOption.MODIFIEDDATE,
+            SiteExplorerHome.selectDriverOrder.DESCENDING,"","Close");
+  }
 }

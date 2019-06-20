@@ -523,7 +523,7 @@ public class RichTextEditor {
    */
   public void addSimplePage(String title, String content) {
     info("Input a title for the page");
-    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
+   $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
     if ($(ELEMENT_SOURCE_EDITOR_BUTTON).is(Condition.not(Condition.exist))
         && (ELEMENT_BUTTON_WIKI_RITCH_TEXT.is(Condition.exist))) {
       ELEMENT_BUTTON_WIKI_RITCH_TEXT.click();
@@ -879,11 +879,13 @@ public class RichTextEditor {
     }
     info("Input a new title for the page");
     if (!newTitle.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).val(newTitle);
+      $(ELEMENT_TITLE_WIKI_INPUT).clear();
+    $(ELEMENT_TITLE_WIKI_INPUT).val(newTitle);
     info("Input a new content for the page");
     if (!newContent.isEmpty()) {
       SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.timeout);
       switchTo().frame(frame);
+      $(byId("body")).clear();
       $(byId("body")).sendKeys(newContent);
       switchTo().defaultContent();
     }

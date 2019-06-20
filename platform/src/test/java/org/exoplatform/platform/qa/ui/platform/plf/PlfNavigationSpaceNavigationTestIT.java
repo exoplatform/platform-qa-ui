@@ -425,4 +425,17 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space1, false);
   }
+  @Test
+  public void test15_CheckSpaceApplicationIconsDisplayed() {
+    //8166
+    String space1 = "space1" + getRandomNumber();
+    info("Add new space");
+    homePagePlatform.goToMySpaces();
+    spaceManagement.addNewSpaceSimple(space1, space1);
+    info("Check that tabs on Space are displayed");
+    spaceManagement.checkSpaceApplicationIconsDisplayed();
+    info("Delete the space");
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space1, false);
+  }
 }

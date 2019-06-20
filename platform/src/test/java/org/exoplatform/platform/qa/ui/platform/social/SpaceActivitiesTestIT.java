@@ -251,4 +251,13 @@ public class SpaceActivitiesTestIT extends Base {
     spaceManagement.deleteSpace(space12, false);
 
   }
-}
+  @Test
+  @Tag("SOC-6041")
+
+  public void test07_CheckActivityPostOnSpace() {
+    String activity1 = "activity1" + getRandomNumber();
+
+    activityStream.addActivity(activity1, "");
+    activityStream.checkActivity(activity1);
+  }
+  }

@@ -186,9 +186,9 @@ public final class NavigationToolBarLocator {
                                                                  $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[3]/ul/li[2]/a"));
 
   public static final By              ELEMENT_MENU_CONTENT_LINK                           =
-                                                                By.xpath("//li[@class='dropdown-submenu']/a[text()='Content']");
+                                                                By.xpath("(//li[@class='dropdown-submenu']/a)[2]");
 
-  public static final By              ELEMENT_MENU_SITE_EXPLORER                          = By.linkText("Sites Explorer");
+  public static final By              ELEMENT_MENU_SITE_EXPLORER                          = By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[contains(text(),'Administration')]/preceding::a[1]");
 
   public static final By              ELEMENT_SITE_EXPLORER_HOME                          = By.className("uiIconEcmsHome");
 

@@ -8,9 +8,11 @@ import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.junit.Assert;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_UI_POPUP_MOVE_TOPIC;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -355,6 +357,7 @@ public class SpaceSettingManagement {
    */
   public void addApplication(String category, String application) {
     info("Click on Add application button");
+    executeJavaScript("window.scrollBy(0,-150)");
     $(ELEMENT_APPLICATION_TAB_ADD_APPLICATION_BTN).click();
     info("the popup is shown");
     $(ELEMENT_ADD_APPLICATION_POPUP_TITLE).waitUntil(Condition.appears, Configuration.timeout);
@@ -366,6 +369,8 @@ public class SpaceSettingManagement {
     info("Close the popup after installed application");
     $(ELEMENT_ADD_APPLICATION_POPUP_CLOSE_BTN).click();
     $(ELEMENT_ADD_APPLICATION_POPUP_TITLE).waitUntil(Condition.disappears, Configuration.timeout);
+    info("Check Application added");
+      Assert.assertEquals($(byXpath("//div[@class='communityContainer']/strong[text()='${app}']".replace("${app}",application))).getText(),application);
   }
 
   /**

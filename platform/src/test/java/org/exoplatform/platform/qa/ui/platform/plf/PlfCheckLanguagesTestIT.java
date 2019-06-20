@@ -103,4 +103,16 @@ public class PlfCheckLanguagesTestIT extends Base {
     navigationToolbar.goToChangeLanguage();
     changeLanguages.changeLanguage("Inglês","Aplicar");
   }
+
+  @Test
+  public void test04_checkBadUIContentManagementStatusColumnWidthLimitAfterLanguageChange() {
+    //8336
+    String columnName ="Etat de publication";
+    navigationToolbar.goToChangeLanguage();
+    changeLanguages.changeLanguage("French","Apply");    // change language
+    navigationToolbar.goToSiteExplorer();
+    navigationToolbar.verifyColumnName(columnName);
+    navigationToolbar.goToChangeLanguage();
+    changeLanguages.changeLanguage("English","Appliquer");
+  }
 }

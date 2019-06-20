@@ -20,7 +20,7 @@ public class WikiLocators {
             By.xpath("//*[@id='titleInfo' and text()='Wiki Home']");
 
     public static final By ELEMENT_ADD_PAGE_LINK =
-            By.xpath("//*[@id='UIWikiPageControlArea_PageToolBar']//div[contains(text(),'Add Page')]");
+            By.xpath("//div[@data-toggle and text()='Add Page']");
 
     public static final By ELEMENT_FROM_TEMPLATE_LINK =
             By.xpath("//i[@class='uiIconAddPageFromTemplate']");

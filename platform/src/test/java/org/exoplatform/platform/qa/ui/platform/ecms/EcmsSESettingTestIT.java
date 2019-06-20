@@ -50,10 +50,10 @@ public class EcmsSESettingTestIT extends Base {
     info("Test 1: Set up browsing Preferences");
 
     navigationToolbar.goToSiteExplorer();
-    siteExplorerHome.openSettingsDriver(SiteExplorerHome.selectDriverOption.MODIFIEDDATE,
-                                        SiteExplorerHome.selectDriverOrder.DESCENDING);
+    siteExplorerHome.openOrCloseSettingsDriver(SiteExplorerHome.selectDriverOption.MODIFIEDDATE,
+                                        SiteExplorerHome.selectDriverOrder.DESCENDING,"Open","");
     $(By.xpath("//*[@class='nodeLabel']//*[text()='intranet']")).waitUntil(Condition.visible, Configuration.timeout);
-    siteExplorerHome.openSettingsDriver(SiteExplorerHome.selectDriverOption.ALPHABETICAL,
-                                        SiteExplorerHome.selectDriverOrder.ASCENDING);
+    siteExplorerHome.openOrCloseSettingsDriver(SiteExplorerHome.selectDriverOption.ALPHABETICAL,
+                                        SiteExplorerHome.selectDriverOrder.ASCENDING,"Open","");
   }
 }

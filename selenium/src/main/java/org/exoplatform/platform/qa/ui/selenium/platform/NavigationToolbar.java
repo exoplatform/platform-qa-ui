@@ -26,10 +26,12 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.EL
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_MANAGESITES_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_PAGE_CREATION_WIZARD;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACE_ADMIN_PAGE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
@@ -40,6 +42,7 @@ import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator;
 import org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.interactions.Actions;
 
 public class NavigationToolbar {
 
@@ -216,7 +219,8 @@ public class NavigationToolbar {
     } else
       $(ELEMENT_LINK_SETUP).click();
     info("Element " + ELEMENT_MENU_CONTENT_LINK + "... is displayed");
-    $(ELEMENT_MENU_CONTENT_LINK).click();
+    $(ELEMENT_MENU_CONTENT_LINK).hover();
+    $(ELEMENT_MENU_SITE_EXPLORER).waitUntil(Condition.visible,Configuration.timeout).click();
 
     info("Site Explorer is shown successfully");
   }
@@ -486,7 +490,18 @@ public class NavigationToolbar {
     $(ELEMENT_MENU_CONTENT_LINK).hover();
     $(ELEMENT_SEARCH_LINK).click();
   }
-
+  /**
+   * Open a folder in Documents
+   *
+   * @param name
+   */
+  public void openFolderInDocuments(String name) {
+    info("Click on the folder's name");
+    $(byXpath("//span[@class='nodeName' and text()='$name']".replace("$name", name))).waitUntil(Condition.visible,Configuration.timeout).click();
+    info("Verify that folder is opened");
+    $(byXpath("//a[@data-original-title='Personal Documents']/following::a[contains(text(),'$name')]".replace("$name",name))).waitUntil(Condition.visible,Configuration.timeout).isDisplayed();
+    info("The folder is opened");
+  }
   /**
    * Open quick search on toolbar
    */
@@ -554,7 +569,17 @@ public class NavigationToolbar {
     $(ELEMENT_ADMINISTRATION_PORTAL_EMAIL_NOTIFICATIONS).click();
 
   }
-
+  /**
+   * Go to content Administration
+   */
+  /*public void goToContentAdministration(){
+    info("Go to content Administration");
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    $(ELEMENT_TOPBAR_CONTENT).hover();
+    $(ELEMENT_CONTENT_TOPBAR_ADMINISTRATION).waitUntil(Condition.appears,Configuration.timeout);
+    $(ELEMENT_CONTENT_TOPBAR_ADMINISTRATION).click();
+  }*/
   /**
    * Go to add an user
    */
@@ -721,7 +746,25 @@ public class NavigationToolbar {
       evt.waitForElementNotPresent(ELEMENT_MENU_LAYOUT);
     }
   }
+  /**
+   * verify Column Name
+   *
+   */
+  public void verifyColumnName(String columnName) {
+    info("Check column name called" + columnName);
+  Assert.assertEquals($(byXpath("//div[contains(text(),'${columnName}')]".replace("${columnName}",columnName))).getText() , columnName);
+  }
+  /**
+   * check uploaded file in folder
+   *
+   */
+  public void checkFolderUploadedFile(String uploadedFile) {
+    info("Check uploaded file in folder" + uploadedFile);
+    $(byXpath(ELEMENT_DOCUMENT_FOLDER_UPLOADED_FILE.replace("${file}",uploadedFile))).isDisplayed();
+    info("CLick on uploaded file" + uploadedFile);
+    $(byXpath(ELEMENT_DOCUMENT_FOLDER_UPLOADED_FILE.replace("${file}",uploadedFile))).waitUntil(Condition.visible,Configuration.timeout).click();
 
+  }
   /**
    * List sublink in user menu
    */

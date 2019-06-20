@@ -460,8 +460,8 @@ public class SiteExplorerHome {
    * @param type enum
    * @param order enum
    */
-  public void openSettingsDriver(selectDriverOption type, selectDriverOrder order) {
-    evt.click(ELEMENT_ACTIONBAR_SETTINGS);
+  public void openOrCloseSettingsDriver(selectDriverOption type, selectDriverOrder order, String open, String close) {
+    $(ELEMENT_ACTIONBAR_SETTINGS).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Go to type " + type);
     switch (type) {
     case ALPHABETICAL:
@@ -492,9 +492,14 @@ public class SiteExplorerHome {
       break;
     }
 
-    $(ELEMENT_DRIVERSETTINGS_SAVE).click();
-  }
+    if(!open.isEmpty())
+    {$(ELEMENT_DRIVERSETTINGS_SAVE).waitUntil(Condition.visible,Configuration.timeout).click();}
 
+    if(!close.isEmpty())
+    {$(ELEMENT_DOCUMENT_SHARE_CLOSE_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byXpath("//span[text()='Documents Browsing Preferences']")).shouldNot(Condition.visible);
+    }
+  }
   /**
    * Go to Permission popup
    */

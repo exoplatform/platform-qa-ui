@@ -1,8 +1,8 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
+import static org.apache.http.client.methods.RequestBuilder.delete;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_SPACE_MENU_ACTIVITY_PORTLET;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_PROJECT_ICON_ADD_PROJECT;
@@ -10,6 +10,8 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import com.codeborne.selenide.Condition;
@@ -18,6 +20,8 @@ import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+
+import java.util.List;
 
 public class SpaceManagement {
 
@@ -56,6 +60,7 @@ public class SpaceManagement {
     public void deleteSpace(String spaceName, Boolean isVerify) {
         if ($(byText(spaceName)).is(Condition.exist)) {
             info("Do delete space");
+            searchSpace(spaceName);
             ELEMENT_SPACES_LIST.find(byText(spaceName)).parent().parent().parent().find(byText("Delete")).click();
             if (isVerify)
                 alert.verifyAlertMessage(ELEMENT_SPACE_CONFIRM_DELETE);
@@ -91,7 +96,7 @@ public class SpaceManagement {
         info("Save all changes");
         ELEMENET_SPACE_CREATE_BUTTON.click();
         ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
-        homePagePlatform.refreshUntil($(ELEMENT_SPACE_MENU_ACTIVITY_PORTLET),Condition.visible,700);
+        //homePagePlatform.refreshUntil($(ELEMENT_SPACE_MENU_ACTIVITY_PORTLET),Condition.visible,700);
     }
 
     /**
@@ -308,7 +313,7 @@ public class SpaceManagement {
      * @param space
      */
     public void goToSpace(String space) {
-        info("evt.click on the title of the space");
+        info("Click on the title of the space");
         $(byXpath(ELEMENT_ALL_SPACE_SPACE_NAME.replace("$space", space.toLowerCase()))).click();
         $(byXpath(ELEMENT_ALL_SPACE_SPACE_NAME.replace("$space", space))).waitUntil(Condition.not(Condition.visible),
                 Configuration.timeout);
@@ -325,7 +330,15 @@ public class SpaceManagement {
         $(By.xpath(ELEMENT_SPACE_ACCESS_SPACE_REQUEST_JOIN_MESSAGE.replace("$space", space))).waitUntil(Condition.visible,
                 Configuration.timeout);
     }
+    /**
+     *Check that uploaded file does not exist on Space
+     */
+    public void checkUploadedFileNotExist() {
+        info("Verify that uploaded file does not exist on space");
+        $(By.xpath("//div[@class='mediaContent']/img")).shouldNot(Condition.visible);
+    }
 
+    /**
     /**
      * Open request pending tab
      */
@@ -434,6 +447,7 @@ public class SpaceManagement {
      */
     public void goToWikiTab() {
         info("Open Wiki Tab");
+        executeJavaScript("window.scrollBy(0,-150)");
         homePagePlatform.refreshUntil($(ELEMENT_WIKI_TAB),Condition.visible,1000);
         $(ELEMENT_WIKI_TAB).click();
         $(ELEMENT_WIKI_HOME_TITLE).waitUntil(Condition.visible, Configuration.timeout);
@@ -545,20 +559,33 @@ public class SpaceManagement {
      * Create a new folder in Document Tab
      *
      * @param title
-     * @param foldertype
      */
-    public void createFolder(String title, String foldertype) {
-        info("evt.type a title:" + title + " for the folder");
-        evt.type(ELEMENT_ADDFOLDER_NAME, title, true);
-        if (!foldertype.isEmpty()) {
-            info("Select folder evt.type:" + foldertype);
-            evt.select(ELEMENT_ADDFOLDER_FOLDERTYPE, foldertype);
-        }
-        info("evt.click on Create folder button");
-        evt.click(ELEMENT_ADDFOLDER_CREATEFOLDERBUTTON);
+    public void createFolder(String title) {
+        info("Type a title:" + title + " for the folder");
+        $(ELEMENT_ADDFOLDER_NAME).setValue(title);
+        info("click on Create folder button");
+        $(ELEMENT_ADDFOLDER_CREATEFOLDERBUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
         info("Verify that the folder is created");
-        evt.waitForAndGetElement(ELEMENT_DOCUMENT_FOLDER_NAME.replace("$name", title));
+        $(byXpath(ELEMENT_DOCUMENT_FOLDER_NAME.replace("$name", title))).isDisplayed();
         info("The folder is created successfully");
+    }
+    /**
+     * Delete Folder
+     *
+     */
+    public void deleteFolder(String folderTitle) {
+        info("Go back to previous path");
+        $(byXpath("//td/a[@class='backIcon actionIcon pull-left']")).waitUntil(Condition.visible,Configuration.timeout).click();
+        info("Go back to previous path");
+        $(byXpath("//td/a[@class='backIcon actionIcon pull-left']")).waitUntil(Condition.visible,Configuration.timeout).click();
+        info("Check the folder to delete");
+        $(byXpath(ELEMENT_DOCUMENT_FOLDER_CHECK.replace("${file}", folderTitle))).waitUntil(Condition.visible,Configuration.timeout).click();
+        info("Delete the folder");
+        $(byXpath("(//i[@class='uiIconEcmsDelete'])[1]")).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(byXpath("//button[@type='button' and text()='Delete']")).waitUntil(Condition.visible,Configuration.timeout).click();
+        info("The folder is deleted successfully");
+        $(byXpath(ELEMENT_DOCUMENT_FOLDER_CHECK.replace("${file}", folderTitle))).shouldNot(Condition.visible);
+
     }
 
     /**
@@ -566,13 +593,25 @@ public class SpaceManagement {
      *
      * @param name
      */
-    public void openFolder(String name) {
-        info("evt.click on the folder's name");
+    public void openFolderDocumentTab(String name) {
+        info("Click on the folder's name");
         Actions action = new Actions(this.testBase.getExoWebDriver().getWebDriver());
-        action.moveToElement(evt.waitForAndGetElement(ELEMENT_DOCUMENT_FOLDER_NAME.replace("$name", name))).doubleClick().perform();
+        action.moveToElement($(byXpath(ELEMENT_DOCUMENT_FOLDER_NAME.replace("$name", name)))).doubleClick().perform();
         info("Verify that folder is opened");
-        evt.waitForAndGetElement(ELMENT_DOCUMENT_FOLDER_ADDRESS.replace("$name", name.toLowerCase()));
-        info("the folder is opened");
+        $(byXpath(ELMENT_DOCUMENT_FOLDER_ADDRESS.replace("$name", name.toLowerCase()))).isDisplayed();
+        info("The folder is opened");
     }
+    public void checkSpaceApplicationIconsDisplayed() {
 
+        $(ELEMENT_SPACE_WIKI_TAB).waitUntil(Condition.visible,Configuration.timeout).isDisplayed();
+        $(ELEMENT_SPACE_FORUMS_TAB).waitUntil(Condition.visible,Configuration.timeout).isDisplayed();
+        $(ELEMENT_DOCUMENT_TAB).waitUntil(Condition.visible,Configuration.timeout).isDisplayed();
+        $(ELEMENT_TASK_TAB).waitUntil(Condition.visible,Configuration.timeout).isDisplayed();
+        $(ELEMENT_AGENDA_TAB).waitUntil(Condition.visible,Configuration.timeout).isDisplayed();
+        $(ELEMENT_MEMBER_TAB).waitUntil(Condition.visible,Configuration.timeout).isDisplayed();
+        $(ELEMENT_SPACE_SPACE_SETTINGS).waitUntil(Condition.visible,Configuration.timeout).isDisplayed();
+        $(ELEMENT_HOME_SPACE_TAB).waitUntil(Condition.visible,Configuration.timeout).isDisplayed();
+
+
+    }
 }

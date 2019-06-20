@@ -1488,8 +1488,8 @@ public static final By
   public static final By              ELEMENT_HORIZOLTAL_MENU_BAR                                       =
                                                                   By.xpath(".//*[@id='spaceMenuTab']");
 
-  public static final String          ELEMENT_SPACE_TAB_NAME                                            =
-                                                             ".//*[@id='spaceMenuTab']//*[contains(text(),'${name}')]";
+  public static final By          ELEMENT_HOME_SPACE_TAB                                             =
+                                                                 By.xpath(".//*[@id='spaceMenuTab']//*[contains(text(),'Home')]");
 
   public static final By              ELEMENT_ACTIVITY_STREAM_TAB                                       =
                                                                   By.xpath(".//*[contains(@class,'uiIconAppSpaceActivityStreamPortlet')]");
@@ -1697,6 +1697,12 @@ public static final By
 
   public static final String          ELEMENT_DOCUMENT_FOLDER_NAME                                      =
                                                                    ".//*[contains(@id,'UIDocumentInfo')]//*[contains(@data-original-title,'$name')]";
+
+  public static final String          ELEMENT_DOCUMENT_FOLDER_UPLOADED_FILE                                      =
+                                                                     "//div[@data-original-title='${file}']/following::a[@class='nodeLabel']";
+
+  public static final String          ELEMENT_DOCUMENT_FOLDER_CHECK                                      =
+                                                      "(//div[@data-original-title='${file}']/following::div[@class='columnCheckbox']/span)[1]";
 
   public static final String          ELMENT_DOCUMENT_FOLDER_ADDRESS                                    =
                                                                      ".//*[@id='address'][contains(@value,'/$name')]";
