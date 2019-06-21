@@ -13,6 +13,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.administration.ChangeLan
 import org.exoplatform.platform.qa.ui.selenium.platform.administration.ManageLayout;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -279,24 +280,27 @@ public class GateinGlobalSettingsTestIT extends Base {
     }
     @Tag("gatein")
     @Test
-    public void test06_CheckNewTabAddedForDashboard() {
+    public void test06_CheckMyDashboardDefaultTabModified() {
         //2418
         String tabName = "tabName" + getRandomNumber();
         info("Sign in with ROOT account");
         manageLogInOut.signIn(username, PASS_ROOT);
         navigationToolbar.goToMyProfile();
         userPageBase.goToDashboardTab();
-        myDashBoard.editLastTab(tabName);
+        myDashBoard.editMyDashboardDefaultTab(tabName);
+        info("Verify that the default tab is modified");
+        $(byXpath("//span[@id='${name}']".replace("${name}",tabName))).isDisplayed();
     }
     @Tag("gatein")
     @Test
     public void test07_CheckGadgetAddedInMyDashboard() {
         //2417
+        String gadgetTitle="Services Management";
         info("Sign in with ROOT account");
         manageLogInOut.signIn(username, PASS_ROOT);
         navigationToolbar.goToMyProfile();
         userPageBase.goToDashboardTab();
-        myDashBoard.addGadget();
+        myDashBoard.addGadget(gadgetTitle);
     }
     @Tag("gatein")
     @Test
@@ -309,35 +313,5 @@ public class GateinGlobalSettingsTestIT extends Base {
         portalManagePages.addPage(namePage, titlePage, "Portal",true);
         portalManagePages.editPage(titlePage,"");
         manageLayout.abortPageUpdate();
-    }
-    @Tag("gatein")
-    @Test
-    public void test09_PortalPage() {
-        //7878
-        ArrayList<String> a = new ArrayList<>();
-        manageLogInOut.signIn(username, PASS_ROOT);
-        homePagePlatform.goToDocuments();
-        $(byXpath("//a[text()=' Personal Documents ']")).waitUntil(Condition.visible,Configuration.timeout).click();
-        for(int i=1; i<11; i++) {
-            a.add($(byXpath("(//h5[text()='Group drives']/following::a[@class='driveLabel'])['{$p}']".replace("{$p}",String.valueOf(i)))).getText());
-        }
-         String a1 = a.get(0);
-         String a2 = a.get(1);
-
-    }
-    @Tag("gatein")
-    @Test
-    public void test10_CheckCalendarArabicMonthsDisplayed() {
-        //1431
-        String language1 = "Arabic";
-        String language2 = "English";
-        manageLogInOut.signIn(username, PASS_ROOT);
-        navigationToolbar.goToChangeLanguage();
-        changeLanguage.changeLanguage(language1, "Apply");
-        homePagePlatform.goToCalendarPage();
-        calendarHomePage.checkCalendarArabicMonths();
-        navigationToolbar.goToChangeLanguage();
-        changeLanguage.changeLanguage(language2, "Apply");
-
     }
 }

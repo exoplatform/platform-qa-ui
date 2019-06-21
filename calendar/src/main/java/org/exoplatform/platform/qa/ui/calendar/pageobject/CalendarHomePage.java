@@ -163,23 +163,7 @@ public class CalendarHomePage {
       }
     }
   }
-  /**
-   * check Calendar Arabic Months
-   */
-  public void checkCalendarArabicMonths() {
-    Assert.assertEquals("يناير",$(byXpath("(//div[@class=\"uiMiniCalendar uiBox\"]/div[@class=\"LocalizedMonthName\"])[1]")).getAttribute("name"));
-    Assert.assertEquals("فبراير",$(byXpath("(//div[@class=\"uiMiniCalendar uiBox\"]/div[@class=\"LocalizedMonthName\"])[2]")).getAttribute("name"));
-    Assert.assertEquals("مارس",$(byXpath("(//div[@class=\"uiMiniCalendar uiBox\"]/div[@class=\"LocalizedMonthName\"])[3]")).getAttribute("name"));
-    Assert.assertEquals("أبريل",$(byXpath("(//div[@class=\"uiMiniCalendar uiBox\"]/div[@class=\"LocalizedMonthName\"])[4]")).getAttribute("name"));
-    Assert.assertEquals("مايو",$(byXpath("(//div[@class=\"uiMiniCalendar uiBox\"]/div[@class=\"LocalizedMonthName\"])[5]")).getAttribute("name"));
-    Assert.assertEquals("يونيو",$(byXpath("(//div[@class=\"uiMiniCalendar uiBox\"]/div[@class=\"LocalizedMonthName\"])[6]")).getAttribute("name"));
-    Assert.assertEquals("يوليو",$(byXpath("(//div[@class=\"uiMiniCalendar uiBox\"]/div[@class=\"LocalizedMonthName\"])[7]")).getAttribute("name"));
-    Assert.assertEquals("أغسطس",$(byXpath("(//div[@class=\"uiMiniCalendar uiBox\"]/div[@class=\"LocalizedMonthName\"])[8]")).getAttribute("name"));
-    Assert.assertEquals("سبتمبر",$(byXpath("(//div[@class=\"uiMiniCalendar uiBox\"]/div[@class=\"LocalizedMonthName\"])[9]")).getAttribute("name"));
-    Assert.assertEquals("أكتوبر",$(byXpath("(//div[@class=\"uiMiniCalendar uiBox\"]/div[@class=\"LocalizedMonthName\"])[10]")).getAttribute("name"));
-    Assert.assertEquals("نوفمبر",$(byXpath("(//div[@class=\"uiMiniCalendar uiBox\"]/div[@class=\"LocalizedMonthName\"])[11]")).getAttribute("name"));
-    Assert.assertEquals("ديسمبر",$(byXpath("(//div[@class=\"uiMiniCalendar uiBox\"]/div[@class=\"LocalizedMonthName\"])[12]")).getAttribute("name"));
-  }
+
     /**
      * goToRightMenuTaskEventFromMonthView
      *

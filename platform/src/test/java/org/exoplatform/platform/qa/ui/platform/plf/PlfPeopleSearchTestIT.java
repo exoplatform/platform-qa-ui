@@ -101,7 +101,13 @@ public class PlfPeopleSearchTestIT extends Base {
         userProfilePage.editUserProfile();
         userProfilePage.updateExperience(organization, jobTitle, jobDetail, skill, dStart, dEnd, false);
         userProfilePage.saveCancelUpdateInfo(true);
-        userProfilePage.checkUserProfileInformationsDisplayed(organization, jobTitle, jobDetail, skill, dStart, dEnd);
+        info("Check that User Profile Informations are displayed");
+        $(byXpath(ELEMENT_COMPANY_INFO.replace("${company}", organization))).should(Condition.visible);
+        $(byXpath(ELEMENT_POSITION_INFO.replace("${position}", jobTitle))).should(Condition.visible);
+        $(byXpath(ELEMENT_JOB_DETAIL_INFO.replace("${description}", jobDetail))).should(Condition.visible);
+        $(byXpath(ELEMENT_SKILL_INFO.replace("${skill}", skill))).should(Condition.visible);
+        $(byXpath(ELEMENT_STARTDATE_INFO.replace("${date}", dStart))).isDisplayed();
+        $(byXpath(ELEMENT_ENDDATE_INFO.replace("${date}", dEnd))).isDisplayed();
         userProfilePage.verifyEditProfileDatesExperienceDisplayedInOrder(dStart,dEnd);
     }
 
