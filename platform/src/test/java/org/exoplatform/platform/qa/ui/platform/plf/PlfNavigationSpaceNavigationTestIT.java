@@ -433,7 +433,14 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1);
     info("Check that tabs on Space are displayed");
-    spaceManagement.checkSpaceApplicationIconsDisplayed();
+    $(ELEMENT_SPACE_WIKI_TAB).waitUntil(Condition.visible, Configuration.timeout).isDisplayed();
+    $(ELEMENT_SPACE_FORUMS_TAB).waitUntil(Condition.visible, Configuration.timeout).isDisplayed();
+    $(ELEMENT_DOCUMENT_TAB).waitUntil(Condition.visible, Configuration.timeout).isDisplayed();
+    $(ELEMENT_TASK_TAB).waitUntil(Condition.visible, Configuration.timeout).isDisplayed();
+    $(ELEMENT_AGENDA_TAB).waitUntil(Condition.visible, Configuration.timeout).isDisplayed();
+    $(ELEMENT_MEMBER_TAB).waitUntil(Condition.visible, Configuration.timeout).isDisplayed();
+    $(ELEMENT_SPACE_SPACE_SETTINGS).waitUntil(Condition.visible, Configuration.timeout).isDisplayed();
+    $(ELEMENT_HOME_SPACE_TAB).waitUntil(Condition.visible, Configuration.timeout).isDisplayed();
     info("Delete the space");
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space1, false);

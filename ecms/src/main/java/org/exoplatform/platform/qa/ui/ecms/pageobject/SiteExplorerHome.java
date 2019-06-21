@@ -460,7 +460,7 @@ public class SiteExplorerHome {
    * @param type enum
    * @param order enum
    */
-  public void openOrCloseSettingsDriver(selectDriverOption type, selectDriverOrder order, String open, String close) {
+  public void openSettingsDriver(selectDriverOption type, selectDriverOrder order) {
     $(ELEMENT_ACTIONBAR_SETTINGS).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Go to type " + type);
     switch (type) {
@@ -480,7 +480,6 @@ public class SiteExplorerHome {
       $(ELEMENT_DRIVERSETTINGS_SORTBY).selectOption("Modified Date");
       break;
     }
-
     info("Go to type " + order);
     switch (order) {
     case ASCENDING:
@@ -491,15 +490,18 @@ public class SiteExplorerHome {
       $(ELEMENT_DRIVERSETTINGS_ORDER).selectOption("Descending");
       break;
     }
-
-    if(!open.isEmpty())
-    {$(ELEMENT_DRIVERSETTINGS_SAVE).waitUntil(Condition.visible,Configuration.timeout).click();}
-
-    if(!close.isEmpty())
-    {$(ELEMENT_DOCUMENT_SHARE_CLOSE_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
-    $(byXpath("//span[text()='Documents Browsing Preferences']")).shouldNot(Condition.visible);
-    }
+    $(ELEMENT_DRIVERSETTINGS_SAVE).waitUntil(Condition.visible,Configuration.timeout).click();
   }
+
+  /**
+   * Close Setting drive page
+   *
+   */
+  public void closeSettingsDriver() {
+    $(ELEMENT_ACTIONBAR_SETTINGS).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_DOCUMENT_SHARE_CLOSE_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
+  }
+
   /**
    * Go to Permission popup
    */

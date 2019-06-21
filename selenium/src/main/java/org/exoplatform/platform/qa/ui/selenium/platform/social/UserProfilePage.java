@@ -326,17 +326,7 @@ public class UserProfilePage {
     info("End date year is :" + dEnd.substring(6,10));
     Assert.assertTrue(endDate.contains(dEnd.substring(6,10)));
   }
-  /**
-   * check User Profile Informations
-   */
-  public void checkUserProfileInformationsDisplayed(String organization, String jobTitle, String jobDetail, String skill, String actdStart, String actdEnd){
-    $(byXpath(ELEMENT_COMPANY_INFO.replace("${company}", organization))).should(Condition.visible);
-    $(byXpath(ELEMENT_POSITION_INFO.replace("${position}", jobTitle))).should(Condition.visible);
-    $(byXpath(ELEMENT_JOB_DETAIL_INFO.replace("${description}", jobDetail))).should(Condition.visible);
-    $(byXpath(ELEMENT_SKILL_INFO.replace("${skill}", skill))).should(Condition.visible);
-    $(byXpath(ELEMENT_STARTDATE_INFO.replace("${date}", actdStart))).isDisplayed();
-    $(byXpath(ELEMENT_ENDDATE_INFO.replace("${date}", actdEnd))).isDisplayed();
-  }
+
   /**
    * Edit User Profile
    */

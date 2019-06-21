@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static org.exoplatform.platform.qa.ui.core.PLFData.*;
+import static org.exoplatform.platform.qa.ui.core.PLFData.password;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
@@ -111,11 +111,11 @@ public class EcmsManageDocumentsInSpaceTestIT extends Base {
     }
 
     @Test
-    public void test02_CheckScriptNotExecutedWhenFilePathContainsScript() {
+    public void test02_CheckUploadedFileNotExistingOnSpaceWhenFilePathContainsScript() {
         //8357
         String space = "space" + getRandomNumber();
         String folderTitle = "test<script>alert(2);</alert>";
-        String uploadedFile ="eXo-Platform.png";
+        String uploadedFile = "eXo-Platform.png";
         info("Create a space");
         homePagePlatform.goToMySpaces();
         spaceManagement.addNewSpaceSimple(space, space);
