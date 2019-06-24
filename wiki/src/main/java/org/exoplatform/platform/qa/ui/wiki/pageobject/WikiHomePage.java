@@ -10,17 +10,16 @@ import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class WikiHomePage {
-    private final TestBase       testBase;
+    private final TestBase testBase;
 
-    public Dialog                dialog;
+    public Dialog dialog;
 
-    public ManageAlert           alert;
+    public ManageAlert alert;
 
     private ElementEventTestBase evt;
 
@@ -35,7 +34,7 @@ public class WikiHomePage {
         this.testBase = testBase;
         this.evt = testBase.getElementEventTestBase();
         this.dialog = new Dialog(testBase);
-        this.homePagePlatform=new HomePagePlatform(testBase);
+        this.homePagePlatform = new HomePagePlatform(testBase);
         this.alert = new ManageAlert(testBase);
     }
 
@@ -44,10 +43,14 @@ public class WikiHomePage {
      */
     public void goToAddBlankPage() {
         info("--Go to add blank wiki page--");
-        homePagePlatform.refreshUntil($(ELEMENT_ADD_PAGE_LINK),Condition.visible,1000);
-        $(ELEMENT_ADD_PAGE_LINK).click();
-        $(ELEMENT_BLANK_PAGE_LINK).click();
-        homePagePlatform.refreshUntil($(ELEMENT_TITLE_WIKI_INPUT),Condition.visible,1000);
+        refresh();
+        do {
+            homePagePlatform.refreshUntil($(ELEMENT_ADD_PAGE_LINK), Condition.visible, 1000);
+            $(ELEMENT_ADD_PAGE_LINK).click();
+            $(ELEMENT_BLANK_PAGE_LINK).waitUntil(Condition.visible, Configuration.timeout).shouldBe(Condition.visible).click();
+        }
+        while ($(ELEMENT_TITLE_WIKI_INPUT).isDisplayed());
+        refresh();
         info("Blank wiki page is shown");
     }
 
@@ -93,7 +96,7 @@ public class WikiHomePage {
      * @param title String
      */
     public void deleteWiki(String title) {
-        homePagePlatform.refreshUntil($(byText(title)),Condition.visible,1000);
+        homePagePlatform.refreshUntil($(byText(title)), Condition.visible, 1000);
         info("Select the wiki page to delete");
         selectAPage(title);
         info("Click on More link");
@@ -110,18 +113,18 @@ public class WikiHomePage {
      * @param title String
      */
     public void cancelDeleteWiki(String title) {
-        if ($(byXpath(ELEMENT_TREE_WIKI_NAME.replace("${name}", title))).waitUntil(Condition.visible,Configuration.timeout) != null) {
+        if ($(byXpath(ELEMENT_TREE_WIKI_NAME.replace("${name}", title))).waitUntil(Condition.visible, Configuration.timeout) != null) {
             info("Go to delete wiki page...");
             info("Select the wiki page to delete");
             selectAPage(title);
             info("Click on More link");
             $(ELEMENT_MORE_LINK).click();
-            if ($(ELEMENT_DELETE_LINK).waitUntil(Condition.visible,Configuration.timeout) == null) {
+            if ($(ELEMENT_DELETE_LINK).waitUntil(Condition.visible, Configuration.timeout) == null) {
             } else {
                 $(ELEMENT_DELETE_LINK).click();
             }
-            $(ELEMENT_CANCEL_WIKI_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
-            $(byXpath(ELEMENT_TREE_WIKI_NAME.replace("${name}", title))).waitUntil(Condition.visible,Configuration.timeout);
+            $(ELEMENT_CANCEL_WIKI_DELETE).waitUntil(Condition.visible, Configuration.timeout).click();
+            $(byXpath(ELEMENT_TREE_WIKI_NAME.replace("${name}", title))).waitUntil(Condition.visible, Configuration.timeout);
         }
     }
 
@@ -190,13 +193,13 @@ public class WikiHomePage {
      * Confirm messages
      *
      * @param isConfirm = true if want to click on Confirm button = false if want to
-     *          click on Cancel button
+     *                  click on Cancel button
      */
     public void confirmWaringMessage(Boolean isConfirm) {
         if (isConfirm) {
             if ($(ELEMENT_CONFIRM_POPUP_OK_BTN).is(Condition.visible)) {
                 info("Click on OK button");
-                $(ELEMENT_CONFIRM_POPUP_OK_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
+                $(ELEMENT_CONFIRM_POPUP_OK_BTN).waitUntil(Condition.visible, Configuration.timeout).click();
             }
             if ($(ELEMENT_CONFIRM_POPUP_CONFIRM_BTN).is(Condition.visible)) {
 
@@ -231,7 +234,6 @@ public class WikiHomePage {
 
     /**
      * Get a permalink of the page
-     *
      */
     public void goToPermalink() {
         info("Go to permalink");
@@ -379,11 +381,12 @@ public class WikiHomePage {
     public void closeSpaceSwitcherMovePopupByClickOutside() {
         info("Click on outside to close space switcher");
         $(ELEMENT_SPACE_SWITCHER_OUTSIDE).click();
-        $(ELEMENT_SPACE_SWITCHER_INPUT_MOVE_PAGE_POPUP).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+        $(ELEMENT_SPACE_SWITCHER_INPUT_MOVE_PAGE_POPUP).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     }
 
     /**
      * Open Page information
+     *
      * @param wiki String
      */
     public void goToPageInformation(String wiki) {
@@ -402,13 +405,13 @@ public class WikiHomePage {
         info("Click on Version");
         $(byXpath(ELEMENT_WIKI_PAGE_INFOMATION_VERSION.replace("${version}", version))).click();
         info("Verify that the table is shown");
-        $(ELEMENT_WIKI_PAGE_INFORMATION_TABLE_TITLE).waitUntil(Condition.visible,Configuration.timeout);
+        $(ELEMENT_WIKI_PAGE_INFORMATION_TABLE_TITLE).waitUntil(Condition.visible, Configuration.timeout);
     }
 
     /**
      * Open information table
      *
-     * @param page String
+     * @param page    String
      * @param version String
      */
     public void viewInformationTable(String page, String version) {

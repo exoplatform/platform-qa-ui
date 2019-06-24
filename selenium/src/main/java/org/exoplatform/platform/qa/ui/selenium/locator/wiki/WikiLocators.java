@@ -20,14 +20,15 @@ public class WikiLocators {
             By.xpath("//*[@id='titleInfo' and text()='Wiki Home']");
 
     public static final By ELEMENT_ADD_PAGE_LINK =
-            By.xpath("//*[@id='UIWikiPageControlArea_PageToolBar']//div[contains(text(),'Add Page')]");
+            By.xpath("//div[contains(text(),'Add Page')]");
 
     public static final By ELEMENT_FROM_TEMPLATE_LINK =
             By.xpath("//i[@class='uiIconAddPageFromTemplate']");
 
     public static final By ELEMENT_BLANK_PAGE_LINK =
             By.xpath("//i[@class='uiIconAddPage']");
-
+    public static final String ELEMENT_WIKI_ATTACH_FILE_DELETE_ICON=
+                                                     "//a[text()='${file}']/following::a[@class='actionIcon']/i";
     public static final By ELEMENT_WIKI_PAGE_TITLE_RENAME_FIELD =
             By.xpath(".//*[@id='EdiableInput']");
 
@@ -139,8 +140,8 @@ public class WikiLocators {
             $(byXpath("//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li[3]/div"));
 
 
-  public static final SelenideElement ELEMENT_MORE                                          =
-          $(byXpath("//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li[2]/div"));
+    public static final SelenideElement ELEMENT_MORE =
+            $(byXpath("//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li[2]/div"));
     public static final By ELEMENT_DELETE_LINK =
             By.xpath(".//*[text()='Delete']");
 
@@ -151,14 +152,13 @@ public class WikiLocators {
             By.xpath(".//*[@id='UIWikiDeletePageConfirm']//button[text()='OK']");
 
 
+    public static final SelenideElement ELEMENT_MOVE_PAGE =
+            $(byClassName("uiIconMovePage"));
 
-  public static final SelenideElement ELEMENT_MOVE_PAGE                                          =
-                                                        $(byClassName("uiIconMovePage"));
-
-  public static final SelenideElement ELEMENT_MOVE                                         =
-                                                   $(byXpath("//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li[3]/div"));
-  public static final By              ELEMENT_MOVE_LINK                                          =
-                                                        By.xpath("//*[@class='uiIconMovePage']");
+    public static final SelenideElement ELEMENT_MOVE =
+            $(byXpath("//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li[3]/div"));
+    public static final By ELEMENT_MOVE_LINK =
+            By.xpath("//*[@class='uiIconMovePage']");
 
 
     public static final By ELEMENT_WATCH_LINK =
@@ -355,8 +355,8 @@ public class WikiLocators {
             ".//*[@id='newLocation']//*[@class='active']/a[contains(text(),'Wiki Home')]/../..//a[contains(text(),'${spaceName}')]";
 
 
-  public static final String          ELEMENT_MESSAGE_USER_DOES_NOT_HAVE_EDIT_PERMMISSON         =
-                                                                                         "You have no edit permission at the destination page";
+    public static final String ELEMENT_MESSAGE_USER_DOES_NOT_HAVE_EDIT_PERMMISSON =
+            "You have no edit permission at the destination page";
 
     public static final By ELEMENT_MOVE_PAGE_SELECT_THE_DESTINATION_LABEL =
             By.xpath(".//*[@id='UIWikiMovePageForm']//*[@id='uiSpaceSwitcher_UIWikiMovePageForm']/../*[contains(text(),'Select the destination')]");
@@ -1537,10 +1537,10 @@ public class WikiLocators {
 
     public static final SelenideElement ELEMENT_BUTTON_OK_IN_WARNING_POPUB_TEMPLATE = $(byClassName("warningIcon")).parent().parent().parent().find(byClassName("btn"));
 
-  public static final SelenideElement ELEMENT_PAGE_WIKI_CONTENT=$(byId("UIViewContentDisplay"));
+    public static final SelenideElement ELEMENT_PAGE_WIKI_CONTENT = $(byId("UIViewContentDisplay"));
 
-  public static final SelenideElement ELEMENT_BUTTON_CLOSE_PERMALINK=$(byXpath("//*[@id=\"UIWikiPopupWindowL1\"]/div[1]/a"));
-  public static final SelenideElement ELEMENT_BUTTON_CLOSE_PREVIEW_MODE=$(byClassName("actionIcon"));
-  public static final SelenideElement ELEMENT_BUTTON_SELECT_RELATION=$(byXpath("//*[@id=\"UIWikiSelectPageForm\"]/div[3]/button[1]"));
+    public static final SelenideElement ELEMENT_BUTTON_CLOSE_PERMALINK = $(byXpath("//*[@id=\"UIWikiPopupWindowL1\"]/div[1]/a"));
+    public static final SelenideElement ELEMENT_BUTTON_CLOSE_PREVIEW_MODE = $(byClassName("actionIcon"));
+    public static final SelenideElement ELEMENT_BUTTON_SELECT_RELATION = $(byXpath("//*[@id=\"UIWikiSelectPageForm\"]/div[3]/button[1]"));
 
 }

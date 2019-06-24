@@ -14,13 +14,11 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
-import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_BUTTON_CLOSE_PREVIEW_MODE;
@@ -48,6 +46,7 @@ public class WikiBasicActionEditTestIT extends Base {
     AddUsers addUsers;
     RichTextEditor richTextEditor;
     WikiDraftPage wikiDraftPage;
+
     @BeforeEach
     public void setupBeforeMethod() {
         info("Start setUpBeforeMethod");
@@ -66,7 +65,7 @@ public class WikiBasicActionEditTestIT extends Base {
         if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
             $(ELEMENT_SKIP_BUTTON).click();
         }
-        manageLogInOut.signInCas(DATA_USER1, "gtngtn");
+        manageLogInOut.signInCas("root", "gtn");
     }
 
     /**
@@ -916,7 +915,7 @@ public class WikiBasicActionEditTestIT extends Base {
         wikiValidattions.verifyTitleWikiPage(title);
 
         info("Edit the page");
-        String title1 = "title1"+ getRandomNumber();
+        String title1 = "title1" + getRandomNumber();
         String content1 = "content1" + getRandomNumber();
         wikiHomePage.goToEditPage();
         richTextEditor.editSimplePageWithAutoSave(title1, content1);
@@ -1062,8 +1061,8 @@ public class WikiBasicActionEditTestIT extends Base {
         manageLogInOut.signIn(username1, "123456");
 
         info("Create a wiki page");
-        String title = "title"+getRandomNumber();
-        String content = "content"+getRandomNumber();
+        String title = "title" + getRandomNumber();
+        String content = "content" + getRandomNumber();
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(title, content);
@@ -1429,7 +1428,7 @@ public class WikiBasicActionEditTestIT extends Base {
      * - The attached file is added successfully in content of page
      * - Page is add/edited successfully
      */
-
+    @Test
     public void test12_EditImage() {
         info("Test 12 Edit image");
         info("Create a wiki page");
@@ -1605,5 +1604,55 @@ public class WikiBasicActionEditTestIT extends Base {
         homePagePlatform.goToWiki();
         wikiHomePage.deleteWiki(title);
     }
+
+    @Test
+    public void test16_DeleteAttachmentWhenUserHaveNoPermission()
+    //
+    {
+        WikiPermission wikipermission = new WikiPermission(this);
+        String unameA = "useraa" + getRandomString(), unameB = "userbb" + getRandomString(), emailA = getRandomString() + "a@a.a", emailB = getRandomString() + "b@b.b", pass = "useraa";
+        String Titel = getRandomString();
+        String file = "eXo-Platform.png";
+        //create User A and User B
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(unameA, pass, emailA, unameA, unameB);
+        addUsers.addUser(unameB, pass, emailB, unameA, unameB);
+        //User A create a wiki page
+        manageLogInOut.signIn(unameA, pass);
+        navigationToolbar.goToMyWiki();
+        wikiHomePage.goToAddBlankPage();
+        richTextEditor.addSimplePage(Titel, "just a text");
+        richTextEditor.goToAttachedImageLink();
+        richTextEditor.insertImage(file, "300", "300", "a png");
+        richTextEditor.goToInsertImage();
+        wikiManagement.saveAddPage();
+        // restrict user B to view only
+        wikiHomePage.goToPermissions();
+        wikipermission.addPermisisonByType(unameB);
+        wikipermission.savePermisison();
+        wikiHomePage.goToAPage(Titel);
+        // Get the Wiki page Url
+        String Url = getExoWebDriver().getWebDriver().getCurrentUrl();
+        // log in with user B and try to delete the attached image
+        manageLogInOut.signIn(unameB, pass);
+        refresh();
+        // open the Wiki page by Url
+        open(Url);
+        refresh();
+        wikiHomePage.goToAttachFiles("1");
+        wikiValidattions.checkDeleteIconIsNotVisible(file);
+        // Deleting the Wiki page
+        manageLogInOut.signIn(unameA, pass);
+        navigationToolbar.goToMyWiki();
+        wikiHomePage.deleteWiki(Titel);
+        // delete Users
+        manageLogInOut.signIn("root", "gtn");
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(unameA);
+        addUsers.deleteUser(unameB);
+
+
+    }
+
 
 }

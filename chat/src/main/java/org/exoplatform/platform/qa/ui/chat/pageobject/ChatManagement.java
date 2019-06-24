@@ -2,10 +2,12 @@ package org.exoplatform.platform.qa.ui.chat.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static junit.framework.TestCase.assertEquals;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_CATEGORY_OPTION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_COLLABORATION_ACTIONS;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_USER_PROFILE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
@@ -305,7 +307,21 @@ public class ChatManagement {
         break;
     }
     ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.click();
-
+  }
+  public void openChatFromMiniChat()
+  {
+    SelenideElement chatButton=$(byClassName("chat-button"));
+    chatButton.click();
+    ELEMENT_MINI_CHAT.find(byClassName("uiIconChatPopOut")).click();
+  }
+  public void searchUserInChatDiscussion(String searchedValue , String user_first_name)
+  {
+    switchTo().window(1);
+    ELEMENT_CHAT_SEARCH_FIELD.setValue(searchedValue);
+    ELEMENT_CONTACT_LIST.shouldHave(Condition.text(user_first_name));
+    switchTo().window(0);
+    //close the mini chat
+    ELEMENT_MINI_CHAT.find(byClassName("uiIconClose")).click();
   }
 
 }

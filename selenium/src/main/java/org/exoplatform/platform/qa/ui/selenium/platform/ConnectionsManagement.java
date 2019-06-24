@@ -12,6 +12,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
+import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -84,8 +85,6 @@ public class ConnectionsManagement {
       $(ELEMENT_CONNECTION_CANCEL_BTN).click();
     }
     $(byText("Connect")).click();
-    // evt.waitForAndGetElement(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}",
-    // username), 2000, 1);
     info("Connected to the user");
   }
 
@@ -263,8 +262,11 @@ public class ConnectionsManagement {
   public void goToUserByUserName(String userName) {
     info("Go to User profile page");
     searchPeople(userName, "", "", "");
-    evt.click(ELEMENT_USER_LINK.replace("" + "${userName}", userName));
-    evt.waitForAndGetElement(ELEMENT_NAME_OF_PROFILE_TOP_LEFT.replace("${name}", userName));
+    // the user is unique we can find it using the class name
+    SelenideElement User=$(byClassName("limitText"));
+    User.click();
+    //evt.click(ELEMENT_USER_LINK.replace("" + "${userName}", userName));
+    //evt.waitForAndGetElement(ELEMENT_NAME_OF_PROFILE_TOP_LEFT.replace("${name}", userName));
   }
 
   /**

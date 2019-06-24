@@ -2,12 +2,14 @@ package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
+import javax.naming.Context;
 import java.util.ArrayList;
 
 import static com.codeborne.selenide.Selectors.*;
@@ -1062,6 +1064,10 @@ public class WikiValidattions {
         evt.waitForAndGetElement(ELEMENT_MACRO_FOOTNOTE.replace("${macro}", footNode1));
         evt.waitForAndGetElement(ELEMENT_MACRO_FOOTNOTE.replace("${macro}", footNode2));
         evt.waitForAndGetElement(ELEMENT_MACRO_BOX.replace("${macro}", contentMacroBox));
+    }
+    public  void checkDeleteIconIsNotVisible(String file)
+    {
+        $(byXpath(ELEMENT_WIKI_ATTACH_FILE_DELETE_ICON.replace("${file}",file))).shouldNot(Condition.visible);
     }
 
     /**
