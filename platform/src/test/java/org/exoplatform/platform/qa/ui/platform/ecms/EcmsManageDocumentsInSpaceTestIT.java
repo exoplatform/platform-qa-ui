@@ -56,13 +56,13 @@ public class EcmsManageDocumentsInSpaceTestIT extends Base {
         manageLogInOut = new ManageLogInOut(this);
         spaceManagement = new SpaceManagement(this);
         spaceHomePage = new SpaceHomePage(this);
-        siteExplorerHome = new SiteExplorerHome(this);
-        createNewDocument = new CreateNewDocument(this);
-        navigationToolbar = new NavigationToolbar(this);
         manageLogInOut.signInCas("john", "gtngtn");
         spaceSettingManagement = new SpaceSettingManagement(this);
         homePagePlatform = new HomePagePlatform(this);
         documentManagement = new DocumentManagement(this);
+        siteExplorerHome = new SiteExplorerHome(this);
+        createNewDocument = new CreateNewDocument(this);
+        navigationToolbar = new NavigationToolbar(this);
 
     }
 
@@ -114,7 +114,7 @@ public class EcmsManageDocumentsInSpaceTestIT extends Base {
     public void test02_CheckUploadedFileNotExistingOnSpaceWhenFilePathContainsScript() {
         //8357
         String space = "space" + getRandomNumber();
-        String folderTitle = "test<script>alert(2);</alert>";
+        String folderTitle = "test<script>alert(2);</script>";
         String uploadedFile = "eXo-Platform.png";
         info("Create a space");
         homePagePlatform.goToMySpaces();
@@ -131,6 +131,10 @@ public class EcmsManageDocumentsInSpaceTestIT extends Base {
         spaceManagement.goToSpace(space);
         spaceManagement.checkUploadedFileNotExist();
         homePagePlatform.goToDocuments();
+        info("Go back to previous path");
+        documentManagement.goBackToPreviousPath();
+        info("Go back to previous path");
+        documentManagement.goBackToPreviousPath();
         spaceManagement.deleteFolder(folderTitle);
         homePagePlatform.goToMySpaces();
         spaceManagement.deleteSpace(space, false);

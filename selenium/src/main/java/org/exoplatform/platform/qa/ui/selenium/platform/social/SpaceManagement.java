@@ -553,10 +553,6 @@ public class SpaceManagement {
      * Delete Folder
      */
     public void deleteFolder(String folderTitle) {
-        info("Go back to previous path");
-        $(byXpath("//td/a[@class='backIcon actionIcon pull-left']")).waitUntil(Condition.visible, Configuration.timeout).click();
-        info("Go back to previous path");
-        $(byXpath("//td/a[@class='backIcon actionIcon pull-left']")).waitUntil(Condition.visible, Configuration.timeout).click();
         info("Check the folder to delete");
         $(byXpath(ELEMENT_DOCUMENT_FOLDER_CHECK.replace("${file}", folderTitle))).waitUntil(Condition.visible, Configuration.timeout).click();
         info("Delete the folder");

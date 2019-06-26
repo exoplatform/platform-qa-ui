@@ -28,16 +28,17 @@ import org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_MANAGESITES_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_PAGE_CREATION_WIZARD;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_DOCUMENT_FOLDER_UPLOADED_FILE;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACE_ADMIN_PAGE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
@@ -717,6 +718,58 @@ public class NavigationToolbar {
         $(byXpath(ELEMENT_DOCUMENT_FOLDER_UPLOADED_FILE.replace("${file}", uploadedFile))).isDisplayed();
         info("CLick on uploaded file" + uploadedFile);
         $(byXpath(ELEMENT_DOCUMENT_FOLDER_UPLOADED_FILE.replace("${file}", uploadedFile))).waitUntil(Condition.visible, Configuration.timeout).click();
+        $(byXpath("//i[@id='MultiUploadClose']")).waitUntil(Condition.visible, Configuration.timeout).click();
+    }
+
+    /**
+     * copy Url To Clipboard
+     */
+    public void copyUrlToClipboard(String uploadedFile) {
+        info("Check uploaded file in folder" + uploadedFile);
+        $(byXpath(ELEMENT_DOCUMENT_FOLDER_CHECK.replace("${file}", uploadedFile))).waitUntil(Condition.visible, Configuration.timeout).click();
+        refresh();
+        info("Copy Url to clipboard");
+        $(byXpath("//a[@data-toggle='dropdown' and text()='More  '] ")).waitUntil(Condition.visible, Configuration.timeout).click();
+        COPY_URL_TO_CLIPBOARD_BUTTON.click();
+        executeJavaScript("window.open();");
+        switchTo().window(0);
+        $(byXpath("//input[@name='address']")).waitUntil(Condition.visible, Configuration.timeout).clear();
+        $(byXpath("//input[@name='address']")).waitUntil(Condition.visible, Configuration.timeout).sendKeys(Keys.CONTROL + "v");
+        String copyUrl = $(byXpath("//input[@name='address']")).getValue();
+        switchTo().window(1);
+        open(copyUrl);
+        sleep(3000);
+        $(byXpath("//div[@id='content']/embed[@id='plugin' and @src='${copyUrl}']".replace("${copyUrl}", copyUrl))).isDisplayed();
+        switchTo().window(0);
+        $(byXpath("//input[@name='address']")).waitUntil(Condition.visible, Configuration.timeout).clear();
+    }
+
+    /**
+     * rename Uploaded File
+     */
+    public void renameUploadedFile(String uploadedFile, String uploadedFileNewName) {
+        info("Check uploaded file in folder" + uploadedFile);
+        $(byXpath(ELEMENT_DOCUMENT_FOLDER_CHECK.replace("${file}", uploadedFile))).waitUntil(Condition.visible, Configuration.timeout).click();
+        info("Rename uploaded file");
+        $(ELEMENT_SITEEXPLORER_ACTION_RENAME).waitUntil(Condition.visible, Configuration.timeout).click();
+        $(ELEMENT_SITEEXPLORER_RENAME_FIELD).waitUntil(Condition.visible, Configuration.timeout).setValue(uploadedFileNewName);
+        $(ELEMENT_SITEEXPLORER_RENAME_SAVE).waitUntil(Condition.visible, Configuration.timeout).click();
+    }
+
+    /**
+     * Search File
+     */
+    public void searchFile(String firstUploadedFile) {
+        refresh();
+        $(byXpath("//input[@id='simpleSearch']")).waitUntil(Condition.visible, Configuration.timeout).setValue(firstUploadedFile);
+        if ($(byXpath("//span[@class='warningIcon' and contains(text(),'You are at the root folder.')]")).isDisplayed()) {
+            do {
+                $(byXpath("//a[@class='btn' and text()='OK']")).waitUntil(Condition.visible, Configuration.timeout).click();
+            } while (!$(byXpath("//span[@class='warningIcon' and contains(text(),'You are at the root folder.')]")).isDisplayed());
+        }
+        sleep(2000);
+        $(ELEMENT_QUICK_SEARCH_BUTTON).waitUntil(Condition.visible, Configuration.timeout).sendKeys(Keys.ENTER);
+        sleep(2000);
     }
 
     /**
