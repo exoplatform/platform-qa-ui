@@ -32,112 +32,81 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 @Tag("ecms")
 @Tag("sniff")
 public class EcmsManageDocumentsInSpaceTestIT extends Base {
-    SpaceManagement spaceManagement;
+  SpaceManagement spaceManagement;
 
-    SpaceHomePage spaceHomePage;
+  SpaceHomePage spaceHomePage;
 
-    NavigationToolbar navigationToolbar;
+  NavigationToolbar navigationToolbar;
 
-    SpaceSettingManagement spaceSettingManagement;
+  SpaceSettingManagement spaceSettingManagement;
 
-    SiteExplorerHome siteExplorerHome;
+  SiteExplorerHome siteExplorerHome;
 
-    CreateNewDocument createNewDocument;
+  CreateNewDocument createNewDocument;
 
-    ManageLogInOut manageLogInOut;
+  ManageLogInOut manageLogInOut;
 
-    HomePagePlatform homePagePlatform;
+  HomePagePlatform homePagePlatform;
 
-    DocumentManagement documentManagement;
+  DocumentManagement documentManagement;
 
-    @BeforeEach
-    public void setupBeforeMethod() {
-        info("Start setUpBeforeMethod");
-        manageLogInOut = new ManageLogInOut(this);
-        spaceManagement = new SpaceManagement(this);
-        spaceHomePage = new SpaceHomePage(this);
-        manageLogInOut.signInCas("john", "gtngtn");
-        spaceSettingManagement = new SpaceSettingManagement(this);
-        homePagePlatform = new HomePagePlatform(this);
-        documentManagement = new DocumentManagement(this);
-        siteExplorerHome = new SiteExplorerHome(this);
-        createNewDocument = new CreateNewDocument(this);
-        navigationToolbar = new NavigationToolbar(this);
+  @BeforeEach
+  public void setupBeforeMethod() {
+    info("Start setUpBeforeMethod");
+    manageLogInOut = new ManageLogInOut(this);
+    spaceManagement = new SpaceManagement(this);
+    spaceHomePage = new SpaceHomePage(this);
+    manageLogInOut.signInCas("john", "gtngtn");
+    spaceSettingManagement = new SpaceSettingManagement(this);
+    homePagePlatform = new HomePagePlatform(this);
+    documentManagement = new DocumentManagement(this);
+    siteExplorerHome = new SiteExplorerHome(this);
+    createNewDocument = new CreateNewDocument(this);
+    navigationToolbar = new NavigationToolbar(this);
 
-    }
+  }
 
-    @Tag("ECMS-7631")
-    @Test
-    public void test01_CheckSaveASNewVersionButtonWhenUserNotHaveModifyRight() {
-        String space = "space" + getRandomNumber();
-        info("Create a space");
-        homePagePlatform.goToMySpaces();
-        spaceManagement.addNewSpaceSimple(space, space);
-        spaceHomePage.goToSpaceSettingTab();
-        spaceSettingManagement.goToMemberTabInSpaceSettingTab();
-        ELEMENT_INPUT_INVITE_USER.sendKeys(PLFData.DATA_USER2);
-        $(ELEMENT_SPACE_BTN_INVITE).click();
-        manageLogInOut.signIn(PLFData.DATA_USER2, password);
-        homePagePlatform.goToMySpaces();
-        spaceManagement.acceptAInvitation(space);
-        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
-        homePagePlatform.goToMySpaces();
-        ELEMENT_SPACES_LIST.find(byText(space)).click();
-        spaceManagement.goToDocumentTab();
-        $(byId("MultiUploadInputFiles")).uploadFromClasspath("eXo-Platform.png");
-        ELEMENT_LIST_DOCUMENTS_IN_SPACE.find(byText("eXo-Platform.png")).waitUntil(Condition.visible, Configuration.timeout).click();
-        documentManagement.goToPermissions();
-        $(byId(ELEMENT_CHECKBOX_MODIFY_PERMISSION.replace("{user}", space))).parent().waitWhile(Condition.not(Condition.visible),
-                Configuration.timeout);
-        if ($(byId(ELEMENT_CHECKBOX_MODIFY_PERMISSION.replace("{user}", space))).is(Condition.checked))
-            $(byId(ELEMENT_CHECKBOX_MODIFY_PERMISSION.replace("{user}", space))).parent().click();
-        $(ELEMENT_CLOSE_BTN).click();
-        manageLogInOut.signIn(PLFData.DATA_USER2, password);
-        homePagePlatform.goToMySpaces();
-        ELEMENT_SPACES_LIST.find(byText(space)).click();
-        spaceManagement.goToDocumentTab();
-        ELEMENT_LIST_DOCUMENTS_IN_SPACE.find(byText("eXo-Platform.png"))
-                .waitUntil(Condition.visible, Configuration.timeout)
-                .contextClick();
-        ELEMENT_BUTTON_UPLOAD_NEW_VERSION.shouldNotBe(Condition.visible);
-        ELEMENT_BUTTON_CREATE_NEW_VERSION.shouldNotBe(Condition.visible);
-        ELEMENT_LIST_DOCUMENTS_IN_SPACE.find(byText("eXo-Platform.png")).waitUntil(Condition.visible, Configuration.timeout).click();
-        ELEMENT_BUTTON_UPLOAD_NEW_VERSION.shouldNotBe(Condition.visible);
-        ELEMENT_BUTTON_CREATE_NEW_VERSION.shouldNotBe(Condition.visible);
-        manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
-        homePagePlatform.goToMySpaces();
-        spaceManagement.deleteSpace(space, false);
+  @Tag("ECMS-7631")
+  @Test
+  public void test01_CheckSaveASNewVersionButtonWhenUserNotHaveModifyRight() {
+    String space = "space" + getRandomNumber();
+    info("Create a space");
+    homePagePlatform.goToMySpaces();
+    spaceManagement.addNewSpaceSimple(space, space);
+    spaceHomePage.goToSpaceSettingTab();
+    spaceSettingManagement.goToMemberTabInSpaceSettingTab();
+    ELEMENT_INPUT_INVITE_USER.sendKeys(PLFData.DATA_USER2);
+    $(ELEMENT_SPACE_BTN_INVITE).click();
+    manageLogInOut.signIn(PLFData.DATA_USER2, password);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.acceptAInvitation(space);
+    manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space)).click();
+    spaceManagement.goToDocumentTab();
+    $(byId("MultiUploadInputFiles")).uploadFromClasspath("eXo-Platform.png");
+    ELEMENT_LIST_DOCUMENTS_IN_SPACE.find(byText("eXo-Platform.png")).waitUntil(Condition.visible, Configuration.timeout).click();
+    documentManagement.goToPermissions();
+    $(byId(ELEMENT_CHECKBOX_MODIFY_PERMISSION.replace("{user}", space))).parent().waitWhile(Condition.not(Condition.visible),
+            Configuration.timeout);
+    if ($(byId(ELEMENT_CHECKBOX_MODIFY_PERMISSION.replace("{user}", space))).is(Condition.checked))
+      $(byId(ELEMENT_CHECKBOX_MODIFY_PERMISSION.replace("{user}", space))).parent().click();
+    $(ELEMENT_CLOSE_BTN).click();
+    manageLogInOut.signIn(PLFData.DATA_USER2, password);
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space)).click();
+    spaceManagement.goToDocumentTab();
+    ELEMENT_LIST_DOCUMENTS_IN_SPACE.find(byText("eXo-Platform.png"))
+            .waitUntil(Condition.visible, Configuration.timeout)
+            .contextClick();
+    ELEMENT_BUTTON_UPLOAD_NEW_VERSION.shouldNotBe(Condition.visible);
+    ELEMENT_BUTTON_CREATE_NEW_VERSION.shouldNotBe(Condition.visible);
+    ELEMENT_LIST_DOCUMENTS_IN_SPACE.find(byText("eXo-Platform.png")).waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_BUTTON_UPLOAD_NEW_VERSION.shouldNotBe(Condition.visible);
+    ELEMENT_BUTTON_CREATE_NEW_VERSION.shouldNotBe(Condition.visible);
+    manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
 
-    }
-
-    @Test
-    public void test02_CheckUploadedFileNotExistingOnSpaceWhenFilePathContainsScript() {
-        //8357
-        String space = "space" + getRandomNumber();
-        String folderTitle = "test<script>alert(2);</script>";
-        String uploadedFile = "eXo-Platform.png";
-        info("Create a space");
-        homePagePlatform.goToMySpaces();
-        spaceManagement.addNewSpaceSimple(space, space);
-        homePagePlatform.goToDocuments();
-        siteExplorerHome.goToAddNewFolder();
-        info("Create Folder node");
-        spaceManagement.createFolder(folderTitle);
-        navigationToolbar.openFolderInDocuments(folderTitle);
-        $(byId("MultiUploadInputFiles")).uploadFromClasspath(uploadedFile);
-        navigationToolbar.checkFolderUploadedFile(uploadedFile);
-        homePagePlatform.goToMySpaces();
-        spaceManagement.searchSpace(space);
-        spaceManagement.goToSpace(space);
-        spaceManagement.checkUploadedFileNotExist();
-        homePagePlatform.goToDocuments();
-        info("Go back to previous path");
-        documentManagement.goBackToPreviousPath();
-        info("Go back to previous path");
-        documentManagement.goBackToPreviousPath();
-        spaceManagement.deleteFolder(folderTitle);
-        homePagePlatform.goToMySpaces();
-        spaceManagement.deleteSpace(space, false);
-    }
-
+  }
 }
