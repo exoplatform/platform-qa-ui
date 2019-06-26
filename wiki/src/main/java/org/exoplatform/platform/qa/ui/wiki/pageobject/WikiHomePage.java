@@ -100,7 +100,7 @@ public class WikiHomePage {
         info("Select the wiki page to delete");
         selectAPage(title);
         info("Click on More link");
-        $(ELEMENT_MORE_LINK).click();
+        $(ELEMENT_MORE_LINK).waitUntil(Condition.visible, Configuration.timeout).click();
         $(ELEMENT_DELETE_LINK).click();
         $(ELEMENT_CONFIRM_WIKI_DELETE).click();
         $(byText(title)).shouldNot(Condition.exist);

@@ -26,6 +26,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Button.ELEMENT_OK_BUTTON_L
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_INFOR_BAR_VERSION;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_RICHTEXT_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 import static org.junit.Assert.assertEquals;
@@ -71,6 +72,7 @@ public class WikiBasicActionAddSourceEditorTestIT extends Base {
             $(ELEMENT_SKIP_BUTTON).click();
         }
         manageLogInOut.signInCas(DATA_USER1, "gtngtn");
+        // manageLogInOut.signInCas("root","gtn");
     }
 
     /**
@@ -909,6 +911,22 @@ public class WikiBasicActionAddSourceEditorTestIT extends Base {
         $(byXpath(ELEMENT_INFOR_BAR_VERSION.replace("$version", "V1"))).waitUntil(Condition.visible, Configuration.timeout);
         homePagePlatform.goToMySpaces();
         spaceManagement.deleteSpace(space, false);
+    }
+
+    @Test
+    @Tag("Wiki-1462")
+    public void test17_CheckXSSattackWikiEditorInWYSIWYGmode() {
+        // create a wiki page with in a source editor mode
+        String script = "[[image:x||onerror=\"alert(1337)\" rel=\"__blank\" title=\"test\"]]";
+        String titel = getRandomString();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.addSimplePage(titel, script);
+        // the script should not be executed and no pop up is shown when switching
+        $(ELEMENT_RICHTEXT_BUTTON).click();
+        wikiManagement.saveAddPage();
+        wikiHomePage.deleteWiki(titel);
     }
 
 }
