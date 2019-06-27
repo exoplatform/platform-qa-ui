@@ -2,8 +2,11 @@ package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase.scrollToBottomPage;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -150,7 +153,24 @@ public class NavigationManagement {
       $(ELEMENT_NODE_NAME).setValue(subTitle);
     }
   }
-
+  /**
+   * Check Pages are displayed in Select Page
+   *
+   */
+  public void checkPagesDisplayedInSelectPage(String title, String subTitle) {
+    if (subTitle.isEmpty()) {
+      info("Add parent node");
+      $(ELEMENT_UP_LEVEL_PATH_NODE).click();
+      $(ELEMENT_ADD_NODE).click();
+      $(ELEMENT_NODE_NAME).setValue(title);
+    } else {
+      info("Add sub node");
+      $(byText(title)).waitUntil(Condition.appears,Configuration.timeout);
+      $(byClassName("uiNavigationManagement")).find(byText(title)).scrollTo().click();
+      $(ELEMENT_ADD_NODE).click();
+      $(ELEMENT_NODE_NAME).setValue(subTitle);
+    }
+  }
   /**
    * Delete a node
    *
@@ -442,7 +462,17 @@ public class NavigationManagement {
 
     }
   }
-
+  /*
+  *Go To Search And Select Page
+   */
+  public void checkSearchAndSelectPage() {
+    info("CLick on Search And Select Page");
+    $(ELEMENT_NODE_PAGE_SELECTOR_SELECT_PAGES_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byXpath("(//td[@headers='pageId'])[1]")).dragAndDropTo($(byXpath("(//td[@headers='actions'])[1]")));
+    executeJavaScript("arguments[0].scrollBy(0,550);", $(byXpath("(//div[@class=\"PopupContent popupContent\"])[2]")).waitUntil(Condition.visible,Configuration.timeout));
+    $(byXpath("//td[@class='center actionContainer']/a")).isDisplayed();
+    $(byXpath(ELEMENT_CLOSE_MESSAGE)).click();
+  }
   /**
    * list all sublinks in Contextmenu
    */

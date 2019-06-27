@@ -58,7 +58,14 @@ public class HomePagePlatform {
     $(ELEMENT_DOCUMENTS_LINK_PLF).click();
 
   }
+  /**
+   * Go to People
+   */
+  public void goToPeople() {
+    info("--Go to People--");
+    $(ELEMENT_PEOPLE_LINK_PLF).waitUntil(Condition.visible,Configuration.timeout).click();
 
+  }
   /**
    * Go to Home page
    */

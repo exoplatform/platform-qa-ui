@@ -4,6 +4,7 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
+import static io.netty.util.internal.SystemPropertyUtil.contains;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_BUTTON_CONFIRM_UPLOAD;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_INPUT_UPLOAD_AVATAR;
@@ -11,15 +12,29 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarL
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
+import static org.hamcrest.CoreMatchers.containsString;
+import java.text.SimpleDateFormat;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
+import org.hamcrest.CoreMatchers;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+
+import java.text.DateFormatSymbols;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Month;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UserProfilePage {
   private final TestBase       testBase;
@@ -292,7 +307,33 @@ public class UserProfilePage {
     evt.waitForAndGetElement(ELEMENT_UIMINICONNECTIONS_PORLET_CANCEL_STATUS);
     evt.waitForElementNotPresent(ELEMENT_UIMINICONNECTIONS_PORLET_CONNECT_STATUS);
   }
+  /**
+   * Verify date experiences User Profile displayed in order
+   */
+  public void verifyEditProfileDatesExperienceDisplayedInOrder(String dStart, String dEnd) throws ParseException {
+    String firstDate =$(byXpath("(//div[text()=\"Start Date:\"]/following::div[@data-original-title])[1]")).getText();
+    String endDate =$(byXpath("//div[text()=\"End Date:\"]/following::div[@data-original-title]")).getText();
+     info("Start date month is :" + Month.of(Integer.valueOf(dStart.substring(0,2))).name());
+    Assert.assertTrue(firstDate.toUpperCase().contains(Month.of(Integer.valueOf(dStart.substring(0,2))).name()));
+    info("Start date day is :" + dStart.substring(3,5));
+    Assert.assertTrue(firstDate.contains(dStart.substring(3,5)));
+    info("Start date year is :" + dStart.substring(6,10));
+    Assert.assertTrue(firstDate.contains(dStart.substring(6,10)));
+    info("End date month is :" + Month.of(Integer.valueOf(dEnd.substring(0,2))).name());
+    Assert.assertTrue(endDate.toUpperCase().contains(Month.of(Integer.valueOf(dEnd.substring(0,2))).name()));
+    info("End date day is :" + dEnd.substring(3,5));
+    Assert.assertTrue(endDate.contains(dEnd.substring(3,5)));
+    info("End date year is :" + dEnd.substring(6,10));
+    Assert.assertTrue(endDate.contains(dEnd.substring(6,10)));
+  }
 
+  /**
+   * Edit User Profile
+   */
+  public void editUserProfile() {
+    $(ELEMENT_EDIT_MY_PROFILE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+
+  }
   /**
    * Disconnect in profile page
    *

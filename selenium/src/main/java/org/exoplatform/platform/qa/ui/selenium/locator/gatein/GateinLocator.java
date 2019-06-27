@@ -361,6 +361,8 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
 
   public static final String          ELEMENT_MYDASH_TAB_NAME                                 = "//*[@id='${name}']";
 
+  public static final String          ELEMENT_MYDASH_DEFAULT_TAB_EDIT                                 = "//li[@class=\"active last editing\"]/a/input";
+
   public static final String          ELEMENT_MYDASH_BTN_NAMETAB                              = "//*[@value='${name}']";
 
   public static final String          ELEMENT_MYDASH_BTN_DELETETAB                            =
@@ -563,7 +565,7 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
                                                                      By.cssSelector("a[data-target='#UIPageSelector-tab']");
 
   public static final By              ELEMENT_NODE_PAGE_SELECTOR_SELECT_PAGES_BTN             =
-                                                                                  By.cssSelector("#SelectPage .uiIconSelectPage");
+                                                                                  By.className("uiIconSelectPage");
 
   // new node-->Page Node Setting
   public static final By              ELEMENT_NODE_SETTING_SWITCH_MODE                        = By.cssSelector("#switchmode");
@@ -624,7 +626,7 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
                                                                By.xpath("//*[@id='UIPageCreationWizard']//*[text()='Next']");
 
   public static final By              ELEMENT_PAGE_ABORT_BUTTON                               =
-                                                                By.xpath(".//*[@id='UIPageEditor']//*[@data-original-title='Abort']");
+                                                                By.xpath(".//*[@id='UIPageEditor']//*[@data-original-title='']");
 
   public static final By              ELEMENT_WARNING_PAGE_NOT_FOUND                          =
                                                                      By.xpath("//*[@class='TitleWaring' and text()='Page not found.']");
@@ -666,7 +668,7 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   public static final By              ELEMENT_PAGE_FINISH_BTN                                 =
                                                               By.xpath("//*[@class='uiIconSave uiIconDarkGray pull-right']");
 
-  public static final By              ELEMENT_PAGE_ABORT_BTN                                  =
+  public static final By              ELEMENT_PAGE__BTN                                  =
                                                              By.xpath(".//*[@id='UIPageEditor']//*[@data-original-title='Abort']");
 
   // Application panel
@@ -1395,6 +1397,9 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
                                                                      "//span[contains(text(),'${membership}')]/../..//*[contains(@data-original-title,'Delete Membership')]/i";
 
   public static final String          ELEMENT_GROUP_ADDED                                     = "//a[@title='${groupLabel}']";
+
+  public static final SelenideElement          ELEMENT_GROUP_SEARCH_USER_SEARCH                  =
+                                                                            $(byXpath("//a[@data-original-title='Quick Search']"));
 
   public static final String          ELEMENT_USER_NAME                                       = "User Name";
 

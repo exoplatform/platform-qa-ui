@@ -1,5 +1,22 @@
 package org.exoplatform.platform.qa.ui.platform.ecms;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
+import org.exoplatform.platform.qa.ui.ecms.pageobject.CreateNewDocument;
+import org.exoplatform.platform.qa.ui.ecms.pageobject.DocumentManagement;
+import org.exoplatform.platform.qa.ui.ecms.pageobject.SiteExplorerHome;
+import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
+import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
@@ -9,39 +26,29 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-
-import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.core.PLFData;
-import org.exoplatform.platform.qa.ui.ecms.pageobject.DocumentManagement;
-import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
-import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
-import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
-import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
-import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
-
 /**
  * Created by exo on 02/05/18.
  */
 @Tag("ecms")
 @Tag("sniff")
 public class EcmsManageDocumentsInSpaceTestIT extends Base {
-  SpaceManagement        spaceManagement;
+  SpaceManagement spaceManagement;
 
-  SpaceHomePage          spaceHomePage;
+  SpaceHomePage spaceHomePage;
+
+  NavigationToolbar navigationToolbar;
 
   SpaceSettingManagement spaceSettingManagement;
 
-  ManageLogInOut         manageLogInOut;
+  SiteExplorerHome siteExplorerHome;
 
-  HomePagePlatform       homePagePlatform;
+  CreateNewDocument createNewDocument;
 
-  DocumentManagement     documentManagement;
+  ManageLogInOut manageLogInOut;
+
+  HomePagePlatform homePagePlatform;
+
+  DocumentManagement documentManagement;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -53,6 +60,9 @@ public class EcmsManageDocumentsInSpaceTestIT extends Base {
     spaceSettingManagement = new SpaceSettingManagement(this);
     homePagePlatform = new HomePagePlatform(this);
     documentManagement = new DocumentManagement(this);
+    siteExplorerHome = new SiteExplorerHome(this);
+    createNewDocument = new CreateNewDocument(this);
+    navigationToolbar = new NavigationToolbar(this);
 
   }
 
@@ -78,7 +88,7 @@ public class EcmsManageDocumentsInSpaceTestIT extends Base {
     ELEMENT_LIST_DOCUMENTS_IN_SPACE.find(byText("eXo-Platform.png")).waitUntil(Condition.visible, Configuration.timeout).click();
     documentManagement.goToPermissions();
     $(byId(ELEMENT_CHECKBOX_MODIFY_PERMISSION.replace("{user}", space))).parent().waitWhile(Condition.not(Condition.visible),
-                                                                                            Configuration.timeout);
+            Configuration.timeout);
     if ($(byId(ELEMENT_CHECKBOX_MODIFY_PERMISSION.replace("{user}", space))).is(Condition.checked))
       $(byId(ELEMENT_CHECKBOX_MODIFY_PERMISSION.replace("{user}", space))).parent().click();
     $(ELEMENT_CLOSE_BTN).click();
@@ -87,8 +97,8 @@ public class EcmsManageDocumentsInSpaceTestIT extends Base {
     ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceManagement.goToDocumentTab();
     ELEMENT_LIST_DOCUMENTS_IN_SPACE.find(byText("eXo-Platform.png"))
-                                   .waitUntil(Condition.visible, Configuration.timeout)
-                                   .contextClick();
+            .waitUntil(Condition.visible, Configuration.timeout)
+            .contextClick();
     ELEMENT_BUTTON_UPLOAD_NEW_VERSION.shouldNotBe(Condition.visible);
     ELEMENT_BUTTON_CREATE_NEW_VERSION.shouldNotBe(Condition.visible);
     ELEMENT_LIST_DOCUMENTS_IN_SPACE.find(byText("eXo-Platform.png")).waitUntil(Condition.visible, Configuration.timeout).click();

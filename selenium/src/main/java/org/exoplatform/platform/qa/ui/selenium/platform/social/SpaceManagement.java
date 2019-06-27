@@ -1,29 +1,26 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.Actions;
+
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_SPACE_MENU_ACTIVITY_PORTLET;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_PROJECT_ICON_ADD_PROJECT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
-import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.Actions;
-
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-
-import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-
 public class SpaceManagement {
 
-    private final TestBase       testBase;
+    private final TestBase testBase;
 
-    public ManageAlert           alert;
+    public ManageAlert alert;
 
     public HomePagePlatform homePagePlatform;
 
@@ -32,7 +29,7 @@ public class SpaceManagement {
     public SpaceManagement(TestBase testBase) {
         this.testBase = testBase;
         this.evt = testBase.getElementEventTestBase();
-        this.homePagePlatform=new HomePagePlatform(testBase);
+        this.homePagePlatform = new HomePagePlatform(testBase);
         this.alert = new ManageAlert(testBase);
     }
 
@@ -50,19 +47,19 @@ public class SpaceManagement {
      * delete Space
      *
      * @param spaceName name of space
-     * @param isVerify true: verify content of confirm msg false: not verify content
-     *          of confirm msg
+     * @param isVerify  true: verify content of confirm msg false: not verify content
+     *                  of confirm msg
      */
     public void deleteSpace(String spaceName, Boolean isVerify) {
         if ($(byText(spaceName)).is(Condition.exist)) {
             info("Do delete space");
+            searchSpace(spaceName);
             ELEMENT_SPACES_LIST.find(byText(spaceName)).parent().parent().parent().find(byText("Delete")).click();
             if (isVerify)
                 alert.verifyAlertMessage(ELEMENT_SPACE_CONFIRM_DELETE);
             $(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON).click();
             ELEMENT_SPACES_LIST.find(byText(spaceName)).waitUntil(Condition.disappear, Configuration.timeout);
         }
-
     }
 
     /**
@@ -83,7 +80,6 @@ public class SpaceManagement {
      * @param desc : Space description
      */
     public void addNewSpaceSimple(String name, String desc, int... params) {
-
         ELEMENT_ADDNEWSPACE_BUTTON.click();
         ELEMENT_SPACE_NAME_INPUT.waitUntil(Condition.appears, Configuration.timeout);
         ELEMENT_SPACE_NAME_INPUT.setValue(name);
@@ -91,7 +87,6 @@ public class SpaceManagement {
         info("Save all changes");
         ELEMENET_SPACE_CREATE_BUTTON.click();
         ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
-        homePagePlatform.refreshUntil($(ELEMENT_SPACE_MENU_ACTIVITY_PORTLET),Condition.visible,700);
     }
 
     /**
@@ -105,12 +100,12 @@ public class SpaceManagement {
      */
     public void addNewSpace(String name, String desc, String access, String groups, int... params) {
         int iTimeout = params.length > 0 ? params[0] : testBase.getDefaultTimeout();
-        if ($(ELEMENT_ADDNEWSPACE_BUTTON).waitUntil(Condition.visible,Configuration.timeout) != null) {
+        if ($(ELEMENT_ADDNEWSPACE_BUTTON).waitUntil(Condition.visible, Configuration.timeout) != null) {
             $(ELEMENT_ADDNEWSPACE_BUTTON).click();
         } else {
             $(By.xpath("//*[contains(@class, 'uiIconSocSimplePlus')]")).click();
         }
-        $(ELEMENT_ADDNEWSPACE_FORM).waitUntil(Condition.visible,Configuration.timeout);
+        $(ELEMENT_ADDNEWSPACE_FORM).waitUntil(Condition.visible, Configuration.timeout);
         $(ELEMENT_SPACE_NAME_INPUT).setValue(name);
         $(ELEMENT_SPACE_DESCRIPTION_INPUT).setValue(desc);
 
@@ -128,7 +123,6 @@ public class SpaceManagement {
             }
 
         }
-
         if (!groups.isEmpty()) {
             goToInviteUserFromGroupTab();
             info("Select a group in the list");
@@ -147,10 +141,9 @@ public class SpaceManagement {
                 evt.click(ELEMENT_SPACE_INVITE_USERS_FROM_GROUP_SELECT_GROUP.replace("${name}", groups));
             }
         }
-
         info("Save all changes");
         $(ELEMENET_SPACE_CREATE_BUTTON).click();
-        $(ELEMENET_SPACE_CREATE_BUTTON).waitUntil(Condition.disappear,Configuration.timeout);
+        $(ELEMENET_SPACE_CREATE_BUTTON).waitUntil(Condition.disappear, Configuration.timeout);
         evt.waitForAndGetElement(By.linkText(name), iTimeout);
     }
 
@@ -205,9 +198,7 @@ public class SpaceManagement {
             info("filepath:" + filepath);
             $(ELEMENT_SPACE_UPLOAD_CONFIRM_BTN).click();
             $(ELEMENT_SPACE_UPLOAD_SAVE_BTN).click();
-
         }
-
     }
 
     /**
@@ -217,7 +208,6 @@ public class SpaceManagement {
         info("evt.click on Save button");
         $(ELEMENT_SPACE_SAVE_BTN).click();
         info("Save all changes");
-
     }
 
     /**
@@ -233,7 +223,6 @@ public class SpaceManagement {
         ELEMENT_MY_SPACE_SEARCH_TEXT.setValue(name);
         info("evt.click on Search button");
         $(ELEMENT_MY_SPACE_SEARCH_BTN).click();
-
     }
 
     /**
@@ -258,7 +247,6 @@ public class SpaceManagement {
         info("Open Invitation Received tab");
         $(ELEMENT_MY_SPACE_INVITATION_RECEIVED).waitUntil(Condition.appears, Configuration.timeout);
         $(ELEMENT_MY_SPACE_INVITATION_RECEIVED).click();
-
     }
 
     /**
@@ -266,9 +254,8 @@ public class SpaceManagement {
      */
     public void goToAllSpacesTab() {
         info("Open All spaces tab");
-        $(ELEMENT_MY_SPACE_ALL_SPACES_TAB).waitUntil(Condition.visible,Configuration.timeout);
+        $(ELEMENT_MY_SPACE_ALL_SPACES_TAB).waitUntil(Condition.visible, Configuration.timeout);
         $(ELEMENT_MY_SPACE_ALL_SPACES_TAB).click();
-
     }
 
     /**
@@ -286,7 +273,7 @@ public class SpaceManagement {
                 .click();
         if (isVerify.length > 0) {
             info("Verify that request to join button is hidden and request pending status is shown");
-           $(byXpath(ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_PENDING.replace("${space}", space))).waitUntil(Condition.visible,Configuration.timeout);
+            $(byXpath(ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_PENDING.replace("${space}", space))).waitUntil(Condition.visible, Configuration.timeout);
         }
     }
 
@@ -308,7 +295,7 @@ public class SpaceManagement {
      * @param space
      */
     public void goToSpace(String space) {
-        info("evt.click on the title of the space");
+        info("Click on the title of the space");
         $(byXpath(ELEMENT_ALL_SPACE_SPACE_NAME.replace("$space", space.toLowerCase()))).click();
         $(byXpath(ELEMENT_ALL_SPACE_SPACE_NAME.replace("$space", space))).waitUntil(Condition.not(Condition.visible),
                 Configuration.timeout);
@@ -327,12 +314,20 @@ public class SpaceManagement {
     }
 
     /**
+     * Check that uploaded file does not exist on Space
+     */
+    public void checkUploadedFileNotExist() {
+        info("Verify that uploaded file does not exist on space");
+        $(By.xpath("//div[@class='mediaContent']/img")).shouldNot(Condition.visible);
+    }
+
+    /**
+     * /**
      * Open request pending tab
      */
     public void goToRequestPendingTab() {
         info("Open Request pending tab");
         $(ELEMENT_MY_SPACE_REQUEST_PENDING_TAB).click();
-
     }
 
     /**
@@ -413,9 +408,9 @@ public class SpaceManagement {
      */
     public void goToActivityStreamTab() {
         info("Open Activity STream Tab");
-        homePagePlatform.refreshUntil($(ELEMENT_ACTIVITY_STREAM_TAB),Condition.visible,1000);
+        homePagePlatform.refreshUntil($(ELEMENT_ACTIVITY_STREAM_TAB), Condition.visible, 1000);
         $(ELEMENT_ACTIVITY_STREAM_TAB).click();
-        $(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible,Configuration.timeout);
+        $(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible, Configuration.timeout);
         info("Activity STream portlet is shown");
     }
 
@@ -434,14 +429,15 @@ public class SpaceManagement {
      */
     public void goToWikiTab() {
         info("Open Wiki Tab");
-        homePagePlatform.refreshUntil($(ELEMENT_WIKI_TAB),Condition.visible,1000);
+        executeJavaScript("window.scrollBy(0,-150)");
+        homePagePlatform.refreshUntil($(ELEMENT_WIKI_TAB), Condition.visible, 1000);
         $(ELEMENT_WIKI_TAB).click();
         $(ELEMENT_WIKI_HOME_TITLE).waitUntil(Condition.visible, Configuration.timeout);
         info("Wiki portlet is shown");
     }
 
     public void goToTaskTab() {
-        homePagePlatform.refreshUntil(ELEMENT_SPACE_MENU_TAB.find(ELEMENT_TASK_TAB),Condition.visible,1000);
+        homePagePlatform.refreshUntil(ELEMENT_SPACE_MENU_TAB.find(ELEMENT_TASK_TAB), Condition.visible, 1000);
         ELEMENT_SPACE_MENU_TAB.find(ELEMENT_TASK_TAB).click();
         ELEMENT_PROJECT_ICON_ADD_PROJECT.waitUntil(Condition.visible, Configuration.timeout);
     }
@@ -451,7 +447,7 @@ public class SpaceManagement {
      */
     public void goToDocumentTab() {
         info("Open Document Tab");
-        homePagePlatform.refreshUntil($(ELEMENT_DOCUMENT_TAB),Condition.visible,1000);
+        homePagePlatform.refreshUntil($(ELEMENT_DOCUMENT_TAB), Condition.visible, 1000);
         $(ELEMENT_DOCUMENT_TAB).click();
         $(ELEMENT_DOCUMENT_FOLDER_ADD_BTN).waitUntil(Condition.visible, Configuration.timeout);
         info("Document portlet is shown");
@@ -462,7 +458,7 @@ public class SpaceManagement {
      */
     public void goToAgendaTab() {
         info("Open Agenda Tab");
-        homePagePlatform.refreshUntil($(ELEMENT_AGENDA_TAB),Condition.visible,1000);
+        homePagePlatform.refreshUntil($(ELEMENT_AGENDA_TAB), Condition.visible, 1000);
         $(ELEMENT_AGENDA_TAB).click();
         $(ELEMENT_AGENDA_EVENT_ADD_BTN).waitUntil(Condition.visible, Configuration.timeout);
 
@@ -474,8 +470,8 @@ public class SpaceManagement {
      */
     public void goToMemberTab() {
         info("Open members tab");
-        $(ELEMENT_SPACE_WIKI_TAB).waitUntil(Condition.visible,Configuration.timeout);
-        if($(ELEMENT_SPACE_MENU_MORE).is(Condition.visible))
+        $(ELEMENT_SPACE_WIKI_TAB).waitUntil(Condition.visible, Configuration.timeout);
+        if ($(ELEMENT_SPACE_MENU_MORE).is(Condition.visible))
             $(ELEMENT_SPACE_MENU_MORE).click();
         $(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB).click();
         $(byClassName("uiGrayLightBox")).waitUntil(Condition.appears, Configuration.timeout);
@@ -489,15 +485,14 @@ public class SpaceManagement {
     public void goToUserProfilePage(String fullName) {
         info("Open User profile page");
         evt.click(ELEMENT_MEMBER_USER_NAME.replace("${fullName}", fullName));
-
     }
 
     /**
      * Verify that a user is a member of the space or not
      *
-     * @param fullName is full name of the user
+     * @param fullName  is full name of the user
      * @param isDisplay =true if user is a member of the space =false if user is not
-     *          a memebr of the space
+     *                  a memebr of the space
      */
     public void verifyMember(String fullName, Boolean isDisplay) {
         goToMemberTab();
@@ -508,15 +503,14 @@ public class SpaceManagement {
             info("Verify that member isnot shown in list");
             evt.waitForElementNotPresent(ELEMENT_MEMBER_USER_NAME.replace("${fullName}", fullName));
         }
-
     }
 
     /**
      * Verify that a user is a manager of the space or not
      *
-     * @param fullName is full name of the user
+     * @param fullName  is full name of the user
      * @param isDisplay =true if user is a manager of the space =false if user is
-     *          not a manager of the space
+     *                  not a manager of the space
      */
     public void verifyManager(String fullName, Boolean isDisplay) {
         goToMemberTab();
@@ -527,7 +521,6 @@ public class SpaceManagement {
             info("Verify that manager isnot shown in list");
             evt.waitForElementNotPresent(ELEMENT_MANAGER_USER_NAME.replace("${fullName}", fullName));
         }
-
     }
 
     /**
@@ -545,20 +538,28 @@ public class SpaceManagement {
      * Create a new folder in Document Tab
      *
      * @param title
-     * @param foldertype
      */
-    public void createFolder(String title, String foldertype) {
-        info("evt.type a title:" + title + " for the folder");
-        evt.type(ELEMENT_ADDFOLDER_NAME, title, true);
-        if (!foldertype.isEmpty()) {
-            info("Select folder evt.type:" + foldertype);
-            evt.select(ELEMENT_ADDFOLDER_FOLDERTYPE, foldertype);
-        }
-        info("evt.click on Create folder button");
-        evt.click(ELEMENT_ADDFOLDER_CREATEFOLDERBUTTON);
+    public void createFolder(String title) {
+        info("Type a title:" + title + " for the folder");
+        $(ELEMENT_ADDFOLDER_NAME).setValue(title);
+        info("click on Create folder button");
+        $(ELEMENT_ADDFOLDER_CREATEFOLDERBUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
         info("Verify that the folder is created");
-        evt.waitForAndGetElement(ELEMENT_DOCUMENT_FOLDER_NAME.replace("$name", title));
+        $(byXpath(ELEMENT_DOCUMENT_FOLDER_NAME.replace("$name", title))).isDisplayed();
         info("The folder is created successfully");
+    }
+
+    /**
+     * Delete Folder
+     */
+    public void deleteFolder(String folderTitle) {
+        info("Check the folder to delete");
+        $(byXpath(ELEMENT_DOCUMENT_FOLDER_CHECK.replace("${file}", folderTitle))).waitUntil(Condition.visible, Configuration.timeout).click();
+        info("Delete the folder");
+        $(byXpath("(//i[@class='uiIconEcmsDelete'])[1]")).waitUntil(Condition.visible, Configuration.timeout).click();
+        $(byXpath("//button[@type='button' and text()='Delete']")).waitUntil(Condition.visible, Configuration.timeout).click();
+        info("The folder is deleted successfully");
+        $(byXpath(ELEMENT_DOCUMENT_FOLDER_CHECK.replace("${file}", folderTitle))).shouldNot(Condition.visible);
     }
 
     /**
@@ -566,13 +567,12 @@ public class SpaceManagement {
      *
      * @param name
      */
-    public void openFolder(String name) {
-        info("evt.click on the folder's name");
+    public void openFolderDocumentTab(String name) {
+        info("Click on the folder's name");
         Actions action = new Actions(this.testBase.getExoWebDriver().getWebDriver());
-        action.moveToElement(evt.waitForAndGetElement(ELEMENT_DOCUMENT_FOLDER_NAME.replace("$name", name))).doubleClick().perform();
+        action.moveToElement($(byXpath(ELEMENT_DOCUMENT_FOLDER_NAME.replace("$name", name)))).doubleClick().perform();
         info("Verify that folder is opened");
-        evt.waitForAndGetElement(ELMENT_DOCUMENT_FOLDER_ADDRESS.replace("$name", name.toLowerCase()));
-        info("the folder is opened");
+        $(byXpath(ELMENT_DOCUMENT_FOLDER_ADDRESS.replace("$name", name.toLowerCase()))).isDisplayed();
+        info("The folder is opened");
     }
-
 }

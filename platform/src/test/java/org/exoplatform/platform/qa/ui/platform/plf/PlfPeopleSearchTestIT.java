@@ -1,29 +1,23 @@
 package org.exoplatform.platform.qa.ui.platform.plf;
 
 import com.codeborne.selenide.Condition;
-import org.exoplatform.platform.qa.ui.selenium.platform.ConnectionsManagement;
-import org.junit.jupiter.api.Test;
-
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.ConnectionsManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("gatein")
@@ -33,6 +27,8 @@ public class PlfPeopleSearchTestIT extends Base {
     private NavigationToolbar navigationToolbar;
 
     private UserAndGroupManagement userandgroupmanagement;
+
+    UserProfilePage userProfilePage;
 
     private UserAddManagement useraddmanagement;
 
@@ -48,7 +44,7 @@ public class PlfPeopleSearchTestIT extends Base {
         setUserandgroupmanagement(new UserAndGroupManagement(this));
         setUseraddmanagement(new UserAddManagement(this));
         setHomePagePlatform(new HomePagePlatform(this));
-
+        userProfilePage = new UserProfilePage(this);
         setConnectionsManagement(new ConnectionsManagement(this));
     }
 
@@ -90,6 +86,29 @@ public class PlfPeopleSearchTestIT extends Base {
         info("Test Case 10: Delete user");
         getNavigationToolbar().goToManageCommunity();
         getUserandgroupmanagement().deleteUser(username);
+    }
+
+    @Test
+    public void test11_CheckDatesExperienceDisplayedInOrder() throws Exception {
+        //8238
+        String organization = "organization" + getRandomString();
+        String jobTitle = "jobTitle" + getRandomString();
+        String jobDetail = "jobDetail" + getRandomString();
+        String skill = "skill" + getRandomString();
+        String dStart = getDate(-7, "MM/dd/yyyy");
+        String dEnd = getDate(-1, "MM/dd/yyyy");
+        navigationToolbar.goToMyProfile();
+        userProfilePage.editUserProfile();
+        userProfilePage.updateExperience(organization, jobTitle, jobDetail, skill, dStart, dEnd, false);
+        userProfilePage.saveCancelUpdateInfo(true);
+        info("Check that User Profile Informations are displayed");
+        $(byXpath(ELEMENT_COMPANY_INFO.replace("${company}", organization))).should(Condition.visible);
+        $(byXpath(ELEMENT_POSITION_INFO.replace("${position}", jobTitle))).should(Condition.visible);
+        $(byXpath(ELEMENT_JOB_DETAIL_INFO.replace("${description}", jobDetail))).should(Condition.visible);
+        $(byXpath(ELEMENT_SKILL_INFO.replace("${skill}", skill))).should(Condition.visible);
+        $(byXpath(ELEMENT_STARTDATE_INFO.replace("${date}", dStart))).isDisplayed();
+        $(byXpath(ELEMENT_ENDDATE_INFO.replace("${date}", dEnd))).isDisplayed();
+        userProfilePage.verifyEditProfileDatesExperienceDisplayedInOrder(dStart,dEnd);
     }
 
     public NavigationToolbar getNavigationToolbar() {

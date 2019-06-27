@@ -4,8 +4,7 @@ import static com.codeborne.selenide.Condition.not;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
-import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
-import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
+import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_SPACE_MENU_ACTIVITY_PORTLET;
@@ -455,5 +454,21 @@ public class SOCNotificationIntranetSpaceInvitationTestIT extends Base {
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
+  }
+  @Tag("SOC-6212")
+  @Test
+  public void test06_CheckRefuseInvitation() throws Exception {
+    homePagePlatform.goToPeople();
+    spaceSettingManagement.searchUsersPeople(DATA_USER3);
+    spaceSettingManagement.connectSearchedUser();
+    manageLogInOut.signIn(DATA_USER3, DATA_PASS);
+    spaceSettingManagement.declineNotificationConnectRequest(DATA_NAME_USER1);
+    homePagePlatform.goToPeople();
+    spaceSettingManagement.searchUsersPeople(DATA_USER1);
+    spaceSettingManagement.checkUserNotConnected();
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+    homePagePlatform.goToPeople();
+    spaceSettingManagement.searchUsersPeople(DATA_USER3);
+    spaceSettingManagement.checkUserNotConnected();
   }
 }

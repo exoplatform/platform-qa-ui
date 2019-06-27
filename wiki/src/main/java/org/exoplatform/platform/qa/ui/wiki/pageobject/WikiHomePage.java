@@ -44,9 +44,9 @@ public class WikiHomePage {
      */
     public void goToAddBlankPage() {
         info("--Go to add blank wiki page--");
-        homePagePlatform.refreshUntil($(ELEMENT_ADD_PAGE_LINK),Condition.visible,1000);
-        $(ELEMENT_ADD_PAGE_LINK).click();
-        $(ELEMENT_BLANK_PAGE_LINK).click();
+        homePagePlatform.refreshUntil($(ELEMENT_ADD_PAGE_LINK),Condition.visible,Configuration.timeout);
+        $(ELEMENT_ADD_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(ELEMENT_BLANK_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
         homePagePlatform.refreshUntil($(ELEMENT_TITLE_WIKI_INPUT),Condition.visible,1000);
         info("Blank wiki page is shown");
     }

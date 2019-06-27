@@ -461,7 +461,7 @@ public class SiteExplorerHome {
    * @param order enum
    */
   public void openSettingsDriver(selectDriverOption type, selectDriverOrder order) {
-    evt.click(ELEMENT_ACTIONBAR_SETTINGS);
+    $(ELEMENT_ACTIONBAR_SETTINGS).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Go to type " + type);
     switch (type) {
     case ALPHABETICAL:
@@ -480,7 +480,6 @@ public class SiteExplorerHome {
       $(ELEMENT_DRIVERSETTINGS_SORTBY).selectOption("Modified Date");
       break;
     }
-
     info("Go to type " + order);
     switch (order) {
     case ASCENDING:
@@ -491,8 +490,16 @@ public class SiteExplorerHome {
       $(ELEMENT_DRIVERSETTINGS_ORDER).selectOption("Descending");
       break;
     }
+    $(ELEMENT_DRIVERSETTINGS_SAVE).waitUntil(Condition.visible,Configuration.timeout).click();
+  }
 
-    $(ELEMENT_DRIVERSETTINGS_SAVE).click();
+  /**
+   * Close Setting drive page
+   *
+   */
+  public void closeSettingsDriver() {
+    $(ELEMENT_ACTIONBAR_SETTINGS).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_DOCUMENT_SHARE_CLOSE_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   /**

@@ -12,6 +12,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -163,12 +164,12 @@ public class CalendarHomePage {
     }
   }
 
-  /**
-   * goToRightMenuTaskEventFromMonthView
-   *
-   * @param name name of event or task
-   * @param date date of event: format (MMM dd yyyy)
-   */
+    /**
+     * goToRightMenuTaskEventFromMonthView
+     *
+     * @param name name of event or task
+     * @param date date of event: format (MMM dd yyyy)
+     */
   public void goToRightMenuTaskEventFromMonthView(String name, String date) {
     info("Got to edit task from month view");
     goToView(selectViewOption.MONTH);

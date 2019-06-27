@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -12,6 +13,8 @@ import java.util.ArrayList;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_WIKI_CONTENT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_WIKI_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -692,7 +695,20 @@ public class WikiValidattions {
         ELEMENT_WIKI_PAGE_LINK.find(byText(title)).waitUntil(Condition.visible,Configuration.timeout);
         info("The wiki page is created successfully");
     }
-
+    /**
+     * Verify the page is created and shown in the list
+     *
+     * @param title String
+     * @param content String
+     */
+    public void verifyTitleAndContentWikiPageInHomeSpace(String title, String content) {
+        info("Verify that the wiki page is created and shown in ");
+        info("Wiki page title is displayed and correct");
+        $(byXpath(ELEMENT_ACTIVITY_WIKI_TITLE.replace("${title}",title))).isDisplayed();
+        info("Wiki page content is displayed and correct");
+        $(byXpath(ELEMENT_ACTIVITY_WIKI_CONTENT.replace("${title}",content))).isDisplayed();
+        info("The wiki page is published successfully");
+    }
     /**
      * Verify the page is not displayed in Wiki Home
      *

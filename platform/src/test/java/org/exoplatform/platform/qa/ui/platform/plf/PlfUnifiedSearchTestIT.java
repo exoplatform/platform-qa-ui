@@ -1,28 +1,11 @@
 package org.exoplatform.platform.qa.ui.platform.plf;
 
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
-import static org.exoplatform.platform.qa.ui.core.PLFData.password;
-import static org.exoplatform.platform.qa.ui.core.PLFData.username;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.QuickSearchResultLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.CreateNewDocument;
+import org.exoplatform.platform.qa.ui.ecms.pageobject.DocumentManagement;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.SiteExplorerHome;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumCategoryManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
@@ -36,46 +19,63 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.RichTextEditor;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
+import org.junit.Assert;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.core.PLFData.*;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.QuickSearchResultLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 @Tag("plf")
 @Tag("sniff")
 public class PlfUnifiedSearchTestIT extends Base {
 
-  NavigationToolbar       navigationToolbar;
+  NavigationToolbar navigationToolbar;
 
-  QuickSearchResult       quickSearchResult;
+  QuickSearchResult quickSearchResult;
 
-  ManageLogInOut          manageLogInOut;
+  ManageLogInOut manageLogInOut;
 
-  HomePagePlatform        homePagePlatform;
+  HomePagePlatform homePagePlatform;
 
   ForumCategoryManagement forumCategoryManagement;
 
-  ForumForumManagement    forumForumManagement;
+  ForumForumManagement forumForumManagement;
 
-  ForumHomePage           forumHomePage;
+  ForumHomePage forumHomePage;
 
-  WikiHomePage            wikiHomePage;
+  WikiHomePage wikiHomePage;
 
-  WikiManagement          wikiManagement;
+  WikiManagement wikiManagement;
 
-  RichTextEditor          richTextEditor;
+  RichTextEditor richTextEditor;
 
-  PageEditor              pageEditor;
+  PageEditor pageEditor;
 
-  ManageAlert             manageAlert;
+  ManageAlert manageAlert;
 
-  SpaceManagement         spaceManagement;
+  SpaceManagement spaceManagement;
 
-  ActivityStream          activityStream;
+  ActivityStream activityStream;
 
-  ForumTopicManagement    forumTopicManagement;
+  ForumTopicManagement forumTopicManagement;
 
-  SiteExplorerHome        siteExplorerHome;
+  SiteExplorerHome siteExplorerHome;
 
-  CreateNewDocument       createNewDocument;
+  CreateNewDocument createNewDocument;
 
-  SpaceHomePage           spaceHomePage;
+  DocumentManagement documentManagement;
+
+  SpaceHomePage spaceHomePage;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -87,6 +87,7 @@ public class PlfUnifiedSearchTestIT extends Base {
     forumForumManagement = new ForumForumManagement(this);
     forumHomePage = new ForumHomePage(this);
     wikiHomePage = new WikiHomePage(this);
+    documentManagement = new DocumentManagement(this);
     wikiManagement = new WikiManagement(this);
     richTextEditor = new RichTextEditor(this);
     manageLogInOut = new ManageLogInOut(this);
@@ -437,8 +438,8 @@ public class PlfUnifiedSearchTestIT extends Base {
     navigationToolbar.goToQuickSearch();
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).setValue(content);
     ELEMENT_DROP_DOWN_LIST_RESULT_IN_QUICK_SEARCH.waitUntil(Condition.visible, Configuration.timeout)
-                                                 .find(byText(name))
-                                                 .shouldBe(Condition.visible);
+            .find(byText(name))
+            .shouldBe(Condition.visible);
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).pressEnter();
     $(ELEMENT_SEARCHRESULT_ALLTYPECHECK).click();
     $(ELEMENT_SEARCHRESULT_DOCTYPECHECK).parent().click();
@@ -465,14 +466,14 @@ public class PlfUnifiedSearchTestIT extends Base {
     navigationToolbar.goToQuickSearch();
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).setValue(topic);
     ELEMENT_DROP_DOWN_LIST_RESULT_IN_QUICK_SEARCH.waitUntil(Condition.visible, Configuration.timeout)
-                                                 .find(byText(topic))
-                                                 .parent()
-                                                 .shouldHave(Condition.text("No result for " + topic));
+            .find(byText(topic))
+            .parent()
+            .shouldHave(Condition.text("No result for " + topic));
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).setValue(topic1);
     ELEMENT_DROP_DOWN_LIST_RESULT_IN_QUICK_SEARCH.waitUntil(Condition.visible, Configuration.timeout)
-                                                 .find(byText(topic1))
-                                                 .parent()
-                                                 .shouldHave(Condition.text("No result for " + topic1));
+            .find(byText(topic1))
+            .parent()
+            .shouldHave(Condition.text("No result for " + topic1));
     manageLogInOut.signIn(username, password);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space1, false);
@@ -491,4 +492,43 @@ public class PlfUnifiedSearchTestIT extends Base {
     navigationToolbar.goToQuickSearch();
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
   }
+
+  @Tag("PLF-8210")
+  @Test
+  public void test13_checkUnifiedSearchNotWorkingWithFilesContainingDashInTheirTitles() {
+    //8210
+    String firstUploadedFile = "key_word.doc";
+    String secondUploadedFile = "key word.doc";
+    String searchedTerm = "word";
+    String folderTitle = "Word documents";
+
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+    homePagePlatform.goToDocuments();
+    siteExplorerHome.goToAddNewFolder();
+    info("Create Folder node");
+    spaceManagement.createFolder(folderTitle);
+    navigationToolbar.openFolderInDocuments(folderTitle);
+    $(byId("MultiUploadInputFiles")).uploadFromClasspath(firstUploadedFile);
+    navigationToolbar.checkFolderUploadedFile(firstUploadedFile);
+    documentManagement.goBackToPreviousPath();
+    documentManagement.goBackToPreviousPath();
+    navigationToolbar.searchFile(searchedTerm);
+    Assert.assertEquals($(byXpath("(//h5[@class='title']/following::div/span)[2]")).getText(), firstUploadedFile);
+    documentManagement.goToFileFolder();
+    navigationToolbar.openFolderInDocuments(folderTitle);
+    spaceManagement.deleteFolder(firstUploadedFile);
+    $(byId("MultiUploadInputFiles")).uploadFromClasspath(secondUploadedFile);
+    navigationToolbar.checkFolderUploadedFile(secondUploadedFile);
+    documentManagement.goBackToPreviousPath();
+    documentManagement.goBackToPreviousPath();
+    navigationToolbar.searchFile(searchedTerm);
+    Assert.assertEquals($(byXpath("(//h5[@class='title']/following::div/span)[2]")).getText(), secondUploadedFile);
+    documentManagement.goToFileFolder();
+    navigationToolbar.openFolderInDocuments(folderTitle);
+    spaceManagement.deleteFolder(secondUploadedFile);
+    documentManagement.goBackToPreviousPath();
+    spaceManagement.deleteFolder(folderTitle);
+
+  }
+
 }

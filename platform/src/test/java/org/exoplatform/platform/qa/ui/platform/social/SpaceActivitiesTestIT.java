@@ -55,7 +55,6 @@ public class SpaceActivitiesTestIT extends Base {
     spaceSettingManagement = new SpaceSettingManagement(this);
     spaceHomePage = new SpaceHomePage(this);
     activityStream = new ActivityStream(this);
-
   }
 
   @Test
@@ -69,13 +68,11 @@ public class SpaceActivitiesTestIT extends Base {
     activityStream.addActivity(activity1, "");
     homePagePlatform.goToAllSpace();
     spaceManagement.deleteSpace(space, false);
-
   }
 
   @Test
   public void test02_likeYourActivityOnSpace() {
     String space = "space" + getRandomNumber();
-
     info("Create a space");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 60000);
@@ -88,13 +85,11 @@ public class SpaceActivitiesTestIT extends Base {
     ELEMENT_WHO_LIKED_POPUP.waitUntil(Condition.appears, Configuration.timeout);
     homePagePlatform.goToAllSpace();
     spaceManagement.deleteSpace(space, false);
-
   }
 
   @Test
   public void test03_DeleteYourActivityOnSpace() {
     String space = "space" + getRandomNumber();
-
     info("Create a space");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 60000);
@@ -111,13 +106,11 @@ public class SpaceActivitiesTestIT extends Base {
     info("the activity is removed successfully");
     homePagePlatform.goToAllSpace();
     spaceManagement.deleteSpace(space, false);
-
   }
 
   @Test
   public void test04_AddCommentOnYourActivityOnSpace() {
     String space = "space" + getRandomNumber();
-
     info("Create a space");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 60000);
@@ -135,16 +128,13 @@ public class SpaceActivitiesTestIT extends Base {
     // click on the button comment
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter();
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears, Configuration.timeout);
-
     homePagePlatform.goToAllSpace();
     spaceManagement.deleteSpace(space, false);
-
   }
 
   @Test
   public void test05_DeleteCommentOnYourActivityOnSpace() {
     String space = "space" + getRandomNumber();
-
     info("Create a space");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 60000);
@@ -249,6 +239,15 @@ public class SpaceActivitiesTestIT extends Base {
     spaceManagement.deleteSpace(space10, false);
     spaceManagement.deleteSpace(space11, false);
     spaceManagement.deleteSpace(space12, false);
-
   }
-}
+
+  @Test
+  public void test07_CheckActivityPostOnSpace() {
+   //6041
+    String activity = "1.1.1.1";
+    info("Create an activity containing the text" + activity);
+    activityStream.addActivity(activity, "");
+    info("Check that the posted text is shown successfully on Space");
+    activityStream.checkActivity(activity);
+  }
+  }
