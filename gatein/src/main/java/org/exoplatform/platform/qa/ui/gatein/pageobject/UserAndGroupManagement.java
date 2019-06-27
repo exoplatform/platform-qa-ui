@@ -709,7 +709,7 @@ public class UserAndGroupManagement {
    */
   public void removeUser(String username) {
     info("Click on Delete button");
-    evt.click(ELEMENT_USER_REMOVE_MEMBER_ICON.replace("${userName}", username));
+  $(byXpath( (ELEMENT_USER_REMOVE_MEMBER_ICON.replace("${userName}", username)))).click();
     alert.acceptAlert();
     evt.waitForElementNotPresent(ELEMENT_USER_REMOVE_MEMBER_ICON.replace("${userName}", username));
     info("User is removed from the group successfully");

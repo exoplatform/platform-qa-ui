@@ -5,9 +5,12 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
+import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -369,6 +372,41 @@ public class SpacePermissionTestIT extends Base {
                                             .parent()
                                             .find(byText("*:/platform/administrators"))
                                             .waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+
+  }
+  @Test
+  @Tag("Soc-6246")
+  public  void  test11_CheckUserCanNotAccessSpaceAfterBeeingDeletedFromSpaceMebers()
+  {
+    String username=getRandomString();
+    String email=username+"@t.t";
+    String pass="123456";
+    String spaceName=getRandomString();
+    homePagePlatform.goToMySpaces();
+    spaceManagement.addNewSpaceSimple(spaceName,spaceName);
+    navigationToolbar.goToAddUser();
+    AddUsers addUsers=new AddUsers(this);
+    addUsers.addUser(username,pass,email,username,username);
+    navigationToolbar.goToUsersAndGroupsManagement();
+    UserAndGroupManagement userAndGroupManagement= new UserAndGroupManagement(this);
+    userAndGroupManagement.goToGroupTab();
+    userAndGroupManagement.selectGroup("Spaces/"+spaceName);
+    userAndGroupManagement.addUsersToGroup(username,"*",false,false);
+    manageLogInOut.signIn(username,pass);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.goToSpace(spaceName);
+    manageLogInOut.signIn(DATA_USER1,DATA_PASS2);
+    navigationToolbar.goToUsersAndGroupsManagement();
+    userAndGroupManagement.goToGroupTab();
+    userAndGroupManagement.selectGroup("Spaces/"+spaceName);
+    userAndGroupManagement.removeUser(username);
+    manageLogInOut.signIn(username,pass);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.searchSpace(spaceName);
+    $(byXpath(ELEMENT_MY_SPACE_SEARCH_RESULT_NUMBER.replace("${number}","0"))).shouldHave(Condition.text("0"));
+
+
+
 
   }
 }
