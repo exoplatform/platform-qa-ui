@@ -491,7 +491,8 @@ public class WikiSettingsTestIT extends Base {
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     open(perLink);
     homePagePlatform.refreshUntil($(byText(wiki)),exist,2000);
-
+    sleep(2000);
+    refresh();
     info("Test 9: Delete permission for space wiki");
     manageLogInOut.signIn(username, password);
 
@@ -506,8 +507,9 @@ public class WikiSettingsTestIT extends Base {
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     open(perLink);
     homePagePlatform.refreshUntil($(byText("Page Not Found")),exist,2000);
+    sleep(3000);
+    refresh();
     // delete data
-
     manageLogInOut.signIn(username, password);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);

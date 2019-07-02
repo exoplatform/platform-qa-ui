@@ -1134,7 +1134,7 @@ public class WikiLocators {
             By.xpath("//div[text()='Search']");
 
     public static final SelenideElement ELEMENT_EXPLORER_WIKIHOME =
-            $(byText("WikiHome")).parent().find(byId("isc_1open_icon_2"));
+            $(byXpath("//nobr/span[@id='isc_1open_icon_2']/following::td[text()='WikiHome']"));
 
     public static final SelenideElement ELEMENT_ICON_OPEN_INTRANET_IN_ALL_PAGE_TAB = $(byId("isc_1open_icon_0"));
 

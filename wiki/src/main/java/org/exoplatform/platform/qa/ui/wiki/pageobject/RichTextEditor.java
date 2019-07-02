@@ -1322,8 +1322,7 @@ public class RichTextEditor {
       $(ELEMENT_EXPLORER_WIKIHOME).click();
     }
     ELEMENT_WIKI_UNPUT_LINK_EXISTED_PAGE.click();
-    ELEMENT_WIKI_UNPUT_LINK_EXISTED_PAGE.setValue("intranet:" + page);
-    ELEMENT_POPUP_SELECT_WIKI_PAGE.find(byText(page)).click();
+    ELEMENT_WIKI_UNPUT_LINK_EXISTED_PAGE.setValue("intranet." + page);
     info("Click on Select button");
     $(ELEMENT_SELECT_BUTTON).click();
 
@@ -1338,7 +1337,7 @@ public class RichTextEditor {
   public void checkAutoSaveMessage(String title, String content) {
     info("Input a title for the page");
     if (!title.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).val(title);
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.timeout).val(title);
     info("Input a content for the page");
     if (!content.isEmpty()) {
       switchTo().frame(0);

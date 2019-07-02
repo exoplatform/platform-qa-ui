@@ -137,7 +137,8 @@ public class ActivityStream {
      */
     public void checkCommentOfActivity(String activity, String comment) {
         info("Verify that the comment is added");
-        ELEMENT_ACTIVITY_STREAM_CONTAINER.find(byText(comment)).should(Condition.exist);
+        $(byXpath("//div[@class=\"titleWiki\"]/a[text()='${activity}']".replace("${activity}",activity))).should(Condition.exist);
+        $(byXpath("//div[@class='contentComment' and contains(text(),\"Page's title has been updated to:\")]")).should(Condition.exist);
         info("The comment is added successfully");
     }
 
@@ -1662,6 +1663,7 @@ public class ActivityStream {
                 .split("UIActivityLoader")[1];
         // click on the activity to appear the delete button
         $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
+        $(byXpath("//i[@class='uiIconActivityAction uiIconLightGray']")).waitUntil(Condition.visible,Configuration.timeout).click();
         // click on delete button
         $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
         ELEMENT_DELETE_POPUP_OK.click();

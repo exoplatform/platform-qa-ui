@@ -584,11 +584,10 @@ public class ForumPublishActivityTestIT extends Base {
     String id = $(byText(topic)).parent().parent().parent().parent().getAttribute("id").split("ActivityContextBox")[1];
     activityStream.addcomment_to_activity(id);
     info("Mouse over on the comment");
-    // mouseOver(ELEMENT_COMMENT_TEXT.replace("${activityText}",topic).replace("${commentText}",comment),true);
     $(byId(ELEMENT_COMMENT_BLOC.replace("{id}", id))).click();
     info("Verifyt that View is shown");
     info("Click on the View icon");
-    $(byClassName("viewComment")).click();
+    $(byXpath("//div[@class='contentComment']/p[text()='${comment}']".replace("${comment}",comment))).isDisplayed();
     info("Verify that the page redirects to related reply in the forum");
     executeJavaScript("window.scrollBy(0,-550)");
     $(byText(topic)).should(Condition.appears);

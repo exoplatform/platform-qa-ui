@@ -6,6 +6,7 @@ import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static java.time.zone.ZoneRulesProvider.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -316,14 +317,10 @@ public void goToDefaultSkin() {
       WebElement temp = evt.getElementFromTextByJquery(template[0]);
       temp.click();
     }
-    $(byXpath(ELEMENT_SAVE_BUTTON)).click();
+    $(byXpath(ELEMENT_SAVE_BUTTON)).waitUntil(visible,Configuration.timeout).click();
+    sleep(20000);
+    $(byXpath(ELEMENT_POPUP_ADD_PORTAL)).waitUntil(Condition.not(visible),Configuration.timeout);
 
-    $(ELEMENT_POPUP_ADD_PORTAL).waitUntil(Condition.not(visible),Configuration.timeout);
-
-
-    if (evt.waitForAndGetElement(ELEMENT_POPUP_ADD_PORTAL, 10000, 0) == null)
-
-    $(ELEMENT_EDIT_PERMISSION_SETTING).waitUntil(Condition.not(visible),Configuration.timeout);
   }
 
   /**

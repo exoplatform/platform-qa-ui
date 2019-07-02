@@ -74,6 +74,7 @@ public class WikiManagement {
    */
   public void goToRichTextEditor() {
     if($(ELEMENT_SOURCE_EDITOR_BUTTON).is(Condition.visible)){
+      $(byXpath("//button[@type='button' and text()='Source Editor']")).waitUntil(Condition.visible,Configuration.timeout).click();
       info("Go to Rich Text Mode");
       $(ELEMENT_RICHTEXT_BUTTON).click();
     }

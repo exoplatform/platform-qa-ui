@@ -206,6 +206,7 @@ public class WikiInformationTestIT extends Base {
     wikiPageInformation.addRelations("Intranet", "Wiki Home");
 
     info("intranet's portal is added as a related pages on page info layout");
+    $(byXpath("//span[@class='PopupTitle popupTitle']")).waitUntil(Condition.visible,Configuration.timeout).dragAndDropTo($(byXpath("//div[@class=\"TRContainer clearfix\"]")));
     ELEMENT_BUTTON_SELECT_RELATION.click();
     homePagePlatform.goToHomePage();
     homePagePlatform.goToMySpaces();
@@ -386,7 +387,7 @@ public class WikiInformationTestIT extends Base {
 
     info("Verify that Words/lines highlighted in green indicate that they were added");
 
-    assertEquals($(byClassName("diffmodifiedline")).find(byText(newTitle2+newTitle1+newTitle+content)).getCssValue("background-color"),
+    assertEquals($(byClassName("diffmodifiedline")).find(byText(newTitle2)).getCssValue("background-color"),
                  "rgba(108, 203, 174, 1)");
 
     info("Delete the page");

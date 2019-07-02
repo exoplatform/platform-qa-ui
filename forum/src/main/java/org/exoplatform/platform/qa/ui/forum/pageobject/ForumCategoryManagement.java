@@ -169,7 +169,7 @@ public class ForumCategoryManagement {
         info("input name");
         $(ELEMENT_FILENAME_INPUT).setValue(fileName);
         info("Save all changes");
-        $(ELEMENT_SAVE_BTN).click();
+        $(ELEMENT_SAVE_BTN).waitUntil(visible,Configuration.timeout).click();
     }
 
     /**
