@@ -89,6 +89,7 @@ public class WikiBasicTestWithUserTestIT extends Base {
 
 
   @Test
+  @Tag("wabis")
   public void test01_AddAPageWithLinkWikiPageExisted() {
     info("Test 1: Add a page with link wiki page existed");
 
@@ -158,6 +159,7 @@ public class WikiBasicTestWithUserTestIT extends Base {
   }
 
   @Test
+  @Tag("wabis")
   public void test03_EditPage() {
     info("Test 3: Edit page");
 
@@ -190,6 +192,7 @@ public class WikiBasicTestWithUserTestIT extends Base {
   }
 
   @Test
+  @Tag("wabis")
   public void test04_05_CreateDeletePageUsingSourceEditor() {
     info("Test 4: Create page using Source Editor");
     String wiki = "wiki" + getRandomNumber();
@@ -203,6 +206,7 @@ public class WikiBasicTestWithUserTestIT extends Base {
   }
 
   @Test
+  @Tag("wabis")
   public void test06_CreateNewWikiPage() {
     info("Test 6: Create new wiki page");
     String title = "title" + getRandomNumber();
@@ -254,6 +258,7 @@ public class WikiBasicTestWithUserTestIT extends Base {
   }
 
   @Test
+  @Tag("wabis")
   public void test08_AddAWikisActivityAfterCreateAWikiPageInSpace() {
     info("Test 08 Add a wiki's activity after create a wiki page in space");
     /*
@@ -316,6 +321,7 @@ public class WikiBasicTestWithUserTestIT extends Base {
   }
 
   @Test
+  @Tag("wabis")
   public void test10_editPageWikionSpace() {
     info("Edit page wiki on space");
     info("Create a space");
@@ -354,6 +360,7 @@ public class WikiBasicTestWithUserTestIT extends Base {
   }
 
   @Test
+  @Tag("wabis")
   public void test11_SearchWikiPageFromHomeSearchBar() {
     String title = "title" + getRandomNumber();
     String content = "content" + getRandomNumber();

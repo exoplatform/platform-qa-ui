@@ -1,8 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.ecms;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.*;
@@ -65,6 +64,7 @@ public class EcmsSEAdminTestIT extends Base {
    * - A relation is added for a node.
    */
   @Test
+  @Tag("eabis")
   public void test01_AddRelation() {
     info("Test 1: Add Relation");
     info("Create data test");
@@ -77,7 +77,8 @@ public class EcmsSEAdminTestIT extends Base {
     info("Create content 1");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("sites/intranet/documents", "Collaboration");
-    $(byClassName("uiIconEcmsViewWeb")).click();
+    sleep(Configuration.timeout);
+    $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.timeout).click();
     siteExplorerHome.goToAddNewContent();
     createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.FILE);
     createNewDocument.addNewFile(node1, node1);
@@ -124,6 +125,7 @@ public class EcmsSEAdminTestIT extends Base {
    */
 
   @Test
+  @Tag("eabis")
   public void test02_DeleteRelation() {
     info("Test 02: Delete Relation");
 
@@ -137,7 +139,8 @@ public class EcmsSEAdminTestIT extends Base {
     info("Create content 1");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("sites/intranet/documents", "Collaboration");
-    $(byClassName("uiIconEcmsViewWeb")).click();
+    sleep(Configuration.timeout);
+    $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.timeout).click();
     siteExplorerHome.goToAddNewContent();
     createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.FILE);
     createNewDocument.addNewFile(node1, node1);
@@ -153,8 +156,11 @@ public class EcmsSEAdminTestIT extends Base {
     siteExplorerHome.selectNode(node2);
     info("Click on More link ");
     executeJavaScript("window.scrollBy(0,-5500)", "");
-    $(byClassName("uiIconEcmsViewAdmin")).click();
-    $(ELEMENT_ACTIONBAR_MORE).click();
+    sleep(Configuration.timeout);
+    $(byClassName("uiIconEcmsViewAdmin")).waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(Configuration.timeout);
+    $(ELEMENT_ACTIONBAR_MORE).waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(Configuration.timeout);
     info("Add relation");
     siteExplorerHome.goToManageRelation();
     siteExplorerHome.addRelation(nameContent, "sites/intranet/documents");
@@ -176,6 +182,7 @@ public class EcmsSEAdminTestIT extends Base {
    * <li>Test Case Name: Show/ Hide Relation</li>
    */
   @Test
+  @Tag("eabis")
   public void test03_ShowHideRelation() {
     info("Test 3: Show/Hide Relation");
     info("Create data test");
@@ -187,7 +194,8 @@ public class EcmsSEAdminTestIT extends Base {
     info("Create content 1");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("sites/intranet/documents", "Collaboration");
-    $(byClassName("uiIconEcmsViewWeb")).click();
+    sleep(Configuration.timeout);
+    $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.timeout).click();
     siteExplorerHome.goToAddNewContent();
     createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.FILE);
     createNewDocument.addNewFile(node1, node1);
@@ -231,6 +239,7 @@ public class EcmsSEAdminTestIT extends Base {
    * bottom message to export. Expected Outcome: - Node is exported successfully.
    */
   @Test
+  @Tag("eabis")
   public void test04_ExportANode() {
     info("Test 4: Export a Node");
     info("Create data test");
@@ -251,7 +260,8 @@ public class EcmsSEAdminTestIT extends Base {
     info("Add New folder");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("sites/intranet/documents", "Collaboration");
-    $(byClassName("uiIconEcmsViewWeb")).click();
+    sleep(Configuration.timeout);
+    $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.timeout).click();
     siteExplorerHome.goToAddNewFolder();
     info("Create Folder node");
     createNewDocument.createNewFolder(node1, CreateNewDocument.folderType.Content);
@@ -277,6 +287,7 @@ public class EcmsSEAdminTestIT extends Base {
   }
 
   @Test
+  @Tag("eabis")
   public void test05_ImportNode() {
     info("Test 5: Import a Node");
     info("Create data test");
@@ -298,7 +309,8 @@ public class EcmsSEAdminTestIT extends Base {
     info("Add New folder");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("sites/intranet/documents", "Collaboration");
-    $(byClassName("uiIconEcmsViewWeb")).click();
+    sleep(Configuration.timeout);
+    $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.timeout).click();
     siteExplorerHome.goToAddNewFolder();
 
     info("Create Folder node");
@@ -309,7 +321,7 @@ public class EcmsSEAdminTestIT extends Base {
     $(byClassName("uiIconEcmsViewAdmin")).click();
     info("Import a node");
     siteExplorerHome.goToImportNode();
-    $(byId("upload")).find(byClassName("file")).uploadFromClasspath("data/ecms/importNode.xml");
+    $(byId("upload")).find(byClassName("file")).uploadFromClasspath("ks-export-forum.xml");
     $(byId("upload")).find(byClassName("progressBarFrame")).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     $(ELEMENT_IMPORT_MODE_POPUP_IMPORT_BUTTON).click();
     $(Button.ELEMENT_OK_BUTTON).click();
@@ -335,6 +347,7 @@ public class EcmsSEAdminTestIT extends Base {
    * Document/uploaded file
    */
   @Test
+  @Tag("eabis")
   public void test06_Add_Category() {
     info("Test 6: Add a category");
 
@@ -368,6 +381,7 @@ public class EcmsSEAdminTestIT extends Base {
   }
 
   @Test
+  @Tag("eabis")
   public void test07_Delete_Category() {
     info("Test 7: Delete a category");
 
@@ -407,6 +421,7 @@ public class EcmsSEAdminTestIT extends Base {
    * here. - New properties is added
    */
   @Test
+  @Tag("eabis")
   public void test08_ViewNodeProperties() {
     info("Test 08: View Node Properties");
 
@@ -426,7 +441,8 @@ public class EcmsSEAdminTestIT extends Base {
     info("View Node Properties");
     siteExplorerHome.selectNode(node1);
     executeJavaScript("window.scrollBy(0,-5500)", "");
-    $(byClassName("uiIconEcmsViewAdmin")).click();
+    sleep(Configuration.timeout);
+    $(byClassName("uiIconEcmsViewAdmin")).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_ACTIONBAR_MORE).click();
     siteExplorerHome.goToProperties();
     siteExplorerHome.addProperty(property, property);
@@ -445,6 +461,7 @@ public class EcmsSEAdminTestIT extends Base {
    * time in From and To field
    */
   @Test
+  @Tag("eabis")
   public void test09_ManagePublication() {
     info("Test 09: Manage Publication");
 

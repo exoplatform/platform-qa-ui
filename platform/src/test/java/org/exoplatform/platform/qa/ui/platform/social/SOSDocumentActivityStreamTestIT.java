@@ -50,6 +50,7 @@ public class SOSDocumentActivityStreamTestIT extends Base{
 
 
     @Tag("INTEG-487")
+    @Tag("sabis")
     @Test
     public void test_DocumentActivity() {
         homePagePlatform.goToDocuments();

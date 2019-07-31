@@ -10,8 +10,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -45,9 +44,11 @@ public class WikiHomePage {
     public void goToAddBlankPage() {
         info("--Go to add blank wiki page--");
         homePagePlatform.refreshUntil($(ELEMENT_ADD_PAGE_LINK),Condition.visible,Configuration.timeout);
+        sleep(2000);
         $(ELEMENT_ADD_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+        sleep(Configuration.timeout);
         $(ELEMENT_BLANK_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
-        homePagePlatform.refreshUntil($(ELEMENT_TITLE_WIKI_INPUT),Condition.visible,1000);
+        sleep(2000);
         info("Blank wiki page is shown");
     }
 
@@ -56,8 +57,8 @@ public class WikiHomePage {
      */
     public void goToAddTemplateWikiPage() {
         info("--Go to add template wiki page--");
-        $(ELEMENT_ADD_PAGE_LINK).click();
-        $(ELEMENT_FROM_TEMPLATE_LINK).click();
+        $(ELEMENT_ADD_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(ELEMENT_FROM_TEMPLATE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
     }
 
     /**
@@ -65,7 +66,8 @@ public class WikiHomePage {
      */
     public void goToEditPage() {
         info("--Go to edit page--");
-        $(ELEMENT_EDIT_PAGE_LINK).click();
+        sleep(Configuration.timeout);
+        $(ELEMENT_EDIT_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
     }
 
     /**
@@ -73,7 +75,8 @@ public class WikiHomePage {
      */
     public void goToHomeWikiPage() {
         info("-- Go to wiki home page --");
-        $(ELEMENT_WIKI_HOME_PAGE_LINK).click();
+        sleep(2000);
+        $(ELEMENT_WIKI_HOME_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
     }
 
     /**
@@ -96,9 +99,12 @@ public class WikiHomePage {
         homePagePlatform.refreshUntil($(byText(title)),Condition.visible,1000);
         info("Select the wiki page to delete");
         selectAPage(title);
+        sleep(2000);
         info("Click on More link");
-        $(ELEMENT_MORE_LINK).click();
-        $(ELEMENT_DELETE_LINK).click();
+        $(ELEMENT_MORE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+        sleep(2000);
+        $(ELEMENT_DELETE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+        sleep(2000);
         $(ELEMENT_CONFIRM_WIKI_DELETE).click();
         $(byText(title)).shouldNot(Condition.exist);
 

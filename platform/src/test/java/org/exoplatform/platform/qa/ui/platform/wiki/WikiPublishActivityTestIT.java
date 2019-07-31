@@ -113,6 +113,7 @@ public class WikiPublishActivityTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
+  @Tag("wabis")
   public void test04_OpenWikiPageFromWikiActivity() {
     info("Test 04: Update activity - edit wiki page title");
 
@@ -234,6 +235,7 @@ public class WikiPublishActivityTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
+  @Tag("wabis")
   public void test06_EditWikiPageWithComments() {
     info("Test 06: Update activity - edit wiki page with comments");
 
@@ -274,14 +276,14 @@ public class WikiPublishActivityTestIT extends Base {
     $(byText(title)).click();
     info("Edit the title of the wiki page and check on published checkbox");
     wikiHomePage.goToEditPage();
-    richTextEditor.editSimplePage("", newContent);
+    richTextEditor.editSimplePage(title, newContent);
     wikiManagement.addComment(comment);
     wikiManagement.publishPageWhenEditPage();
     wikiManagement.saveAddPage();
     $(byText(title)).should(Condition.exist);
     info("The content of wiki page's activity is updated");
     homePagePlatform.goToHomePage();
-    activityStream.checkActivity(newContent + content);
+    activityStream.checkActivity(newContent);
     info("Verify that only A comment that input above is added in the activity");
     activityStream.checkCommentOfActivity(title, comment);
     ELEMENT_WIKI_PAGE_CONTAINER.find(byText(comment1)).shouldNot(Condition.exist);
@@ -298,13 +300,13 @@ public class WikiPublishActivityTestIT extends Base {
     $(byText(title)).click();
     info("Edit the title of the wiki page and check on published checkbox");
     wikiHomePage.goToEditPage();
-    richTextEditor.editSimplePage("", newContent1);
+    richTextEditor.editSimplePage(title, newContent1);
     wikiManagement.publishPageWhenEditPage();
     wikiManagement.saveAddPage();
     $(byText(title)).waitUntil(Condition.appears, Configuration.timeout);
     info("The content of wiki page's activity is updated");
     homePagePlatform.goToHomePage();
-    activityStream.checkActivity(newContent1 + newContent + content);
+    activityStream.checkActivity(newContent1);
 
     info("Verify that only message is added in the activity");
     activityStream.checkCommentOfActivity(title, comment1);
@@ -322,6 +324,7 @@ public class WikiPublishActivityTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
+  @Tag("wabis")
   public void test07_UpdateWikiActivityAfterMovingAWikiPage() {
     info("Test 07: Update wiki's activity after moving a wiki page");
 
@@ -364,6 +367,7 @@ public class WikiPublishActivityTestIT extends Base {
     wikiHomePage.deleteWiki(title2);
   }
 
+  @Tag("0")
   @Tag("WIKI-1392")
   @Test
   public void test08_CommentWikiActivityStream(){

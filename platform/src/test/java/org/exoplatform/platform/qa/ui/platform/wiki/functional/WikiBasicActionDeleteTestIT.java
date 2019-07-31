@@ -262,6 +262,7 @@ public class WikiBasicActionDeleteTestIT extends Base {
      * The Draft is removed from the list
      */
     @Test
+    @Tag("wabis")
     public void test04_DeleteDraftFromTheMenuMyDraft() {
         info("Test 4: Delete draft from the menu My Draft");
         info("Create a draf wiki page");
@@ -275,7 +276,7 @@ public class WikiBasicActionDeleteTestIT extends Base {
         wikiHomePage.goToMyDraft();
         wikiValidattions.verifyTitleDrafPage(title);
         info("A pop up is displayed 'Are you sure you want to delete this draft?'");
-        wikiDraftPage.deleteDraft(title);
+        wikiDraftPage.deleteDraft();
 
     }
 
@@ -365,6 +366,7 @@ public class WikiBasicActionDeleteTestIT extends Base {
      * The draft created by the user A doesn't appear in the list of drafts of the user B
      */
     @Test
+    @Tag("wabis")
     public void test06_ViewADraftForAnotherUser() {
         info("Test 6: View a draft for another user");
 
@@ -382,7 +384,7 @@ public class WikiBasicActionDeleteTestIT extends Base {
         manageLogInOut.signIn(DATA_USER1, "gtngtn");
         homePagePlatform.goToWiki();
         wikiHomePage.goToMyDraft();
-        wikiDraftPage.deleteDraft(title);
+        wikiDraftPage.deleteDraft();
 
 
     }

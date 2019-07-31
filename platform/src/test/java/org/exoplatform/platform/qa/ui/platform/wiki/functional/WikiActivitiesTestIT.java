@@ -1,5 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.wiki.functional;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
@@ -13,9 +15,12 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_TITLE_WIKI_INPUT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 
@@ -131,6 +136,7 @@ public class WikiActivitiesTestIT extends Base {
      */
 
     @Test
+    @Tag("wabis")
     public void test02_DisplayViewChangesPageFromWikisActivity() {
         info("Test 2: Display View Changes page from wiki's activity");
         info("Create a wiki page");
@@ -154,7 +160,7 @@ public class WikiActivitiesTestIT extends Base {
         homePagePlatform.goToHomePage();
         activityStream.checkActivityWikiPage(editTitle, editContent, "2", true);
         activityStream.clickOnViewChange(editTitle);
-        wikiValidattions.verifyCompareVersions("1");
+        $(By.xpath("//div[@id='UIWikiPageInfoArea']/div/span/a[text()='V2']")).waitUntil(Condition.visible,Configuration.timeout);
         homePagePlatform.goToWiki();
         wikiHomePage.deleteWiki(editTitle);
 
@@ -462,6 +468,7 @@ public class WikiActivitiesTestIT extends Base {
      * activity stream
      */
     @Test
+    @Tag("wabis")
     public void test09_DeleteAWikiActivityFromActivityStreamByOwner() {
         info("Create a space");
         String space = "space" + getRandomNumber();
@@ -501,6 +508,7 @@ public class WikiActivitiesTestIT extends Base {
      */
 
     @Test
+    @Tag("wabis")
     public void test10_DislikeAWikiActivityFromLikeIcon() {
 
         info("Create a wiki page 1");
@@ -732,6 +740,7 @@ public class WikiActivitiesTestIT extends Base {
      */
 
     @Test
+    @Tag("wabis")
     public void test15_UpdateWikisActivityAfterEditWikiPageContentWithInactiveNotification() {
         info("Test 15 Update wiki's activity after edit wiki page content with inactive notification");
         info("Create a wiki page");

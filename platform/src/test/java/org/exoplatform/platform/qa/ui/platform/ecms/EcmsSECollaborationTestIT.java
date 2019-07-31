@@ -257,10 +257,11 @@ public class EcmsSECollaborationTestIT extends Base {
    * Expected Outcome: The node is voted
    */
   @Test
+  @Tag("eabis")
   public void test08_VoteForDocumentuploadedFile() {
     info("Test 08: Vote for document/uploaded file");
 
-    String fileName = "data/ecms/eXo-Platform.png";
+    String fileName = "eXo-Platform.png";
 
     info("Upload file");
     navigationToolbar.goToSiteExplorer();

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_WIKI_CONTENT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_WIKI_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
@@ -331,6 +332,7 @@ public class WikiValidattions {
         info("The compare version page is shown");
         evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_COMPARE_VERSION_TITLE);
         info("Verify that Version N-1 and current version is shown on the page");
+        sleep(Configuration.timeout);
         evt.waitForAndGetElement(ELEMENT_COMPARE_VERSION_VERSION_NUMBER.replace("$num", oldVersion));
         evt.waitForAndGetElement(ELEMENT_COMPARE_VERSION_CURRENT_VERSION);
     }
@@ -504,9 +506,12 @@ public class WikiValidattions {
      */
     public void verifyRestrictedPageHasChildPage() {
         info("Verify that parent page is shown under the title: restricted on the left tree");
-        $(ELEMENT_WIKI_LEFT_TREE_RESTRICTED_PAGE_TITLE).waitUntil(Condition.visible, Configuration.timeout).hover();
+        sleep(Configuration.timeout);
+        (ELEMENT_WIKI_LEFT_TREE_RESTRICTED_PAGE_TITLE).waitUntil(Condition.visible, Configuration.timeout).hover();
         info("Verify the tooltip of the page as:[this page is restricted, you don't have permissions to view it]");
-        $(ELEMENT_WIKI_TOOLTIP_RESTRICTED_PAGE_TITLE).waitUntil(Condition.visible, Configuration.timeout);
+        sleep(2000);
+        $(ELEMENT_WIKI_TOOLTIP_RESTRICTED_PAGE_TITLE).exists();
+        sleep(Configuration.timeout);
         info("Verify that cannot click on parent page");
         $(ELEMENT_WIKI_PARENT_PAGE_UN_LINK).waitUntil(Condition.visible, Configuration.timeout);
     }
@@ -692,7 +697,8 @@ public class WikiValidattions {
      */
     public void verifyTitleWikiPage(String title) {
         info("Verify that the wiki page is created and shown in the list");
-        ELEMENT_WIKI_PAGE_LINK.find(byText(title)).waitUntil(Condition.visible,Configuration.timeout);
+        sleep(Configuration.collectionsTimeout);
+        $(byXpath("//div[@id='UITreeExplorer']/following::div[@id='titleInfo' and text()='${title}']".replace("${title}",title))).waitUntil(Condition.visible,Configuration.timeout);
         info("The wiki page is created successfully");
     }
     /**
@@ -867,6 +873,7 @@ public class WikiValidattions {
      * @param space String
      */
     public void verifyPresentSpaceSwitcher(String space) {
+      sleep(Configuration.timeout);
         if (!space.isEmpty()) {
             info("Verify that the space is shown");
             $(byXpath(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", space))).waitUntil(Condition.visible, Configuration.timeout);

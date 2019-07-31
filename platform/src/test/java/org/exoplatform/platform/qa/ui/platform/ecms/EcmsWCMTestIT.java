@@ -12,6 +12,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.exoplatform.platform.qa.ui.platform.chat.ChatOnSiteNotificationTestIT;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -101,6 +102,7 @@ public class EcmsWCMTestIT extends Base {
    * are listed in Content List Viewer portlet in this page
    */
   @Test
+  @Tag("eabis")
   public void test01_CreateNewContentListViewerPageWithModeByFolder() {
     info("Test 1: Create new Content List viewer page with mode By Folder");
     String content = "content" + getRandomNumber();
@@ -120,9 +122,12 @@ public class EcmsWCMTestIT extends Base {
     pageCreationWizard.addApplication($(ELEMENT_APPLICATION_CONTENT_TAB), $(byId("Content/portlet_ContentListViewerPortlet")));
     pageCreationWizard.addContentlistByFolder("General Drives/Sites Management", "intranet");
     navigationToolbar.goToEditContent();
+    sleep(Configuration.timeout);
+    ($(byXpath("(//a[contains(text(),'${content}')]/following::a[text()='Read more'])[1]".replace("${content}",content.substring(0,11))))).waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_LIST_CONTENT.find(byText(content)).waitUntil(Condition.visible, Configuration.timeout);
     info("Delete Data test");
     info("Delete created file");
+    sleep(Configuration.timeout);
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.deleteData(content, true);
     info("Delete created page");
@@ -150,6 +155,7 @@ public class EcmsWCMTestIT extends Base {
    * displayed as list in List Content Viewer page
    */
   @Test
+  @Tag("eabis")
   public void test02_CreateNewContentListViewerPageWithModeByContents() {
     info("Test 2: Create new Content List Viewer page with mode By Contents");
     String content = "content" + getRandomNumber();
@@ -164,7 +170,8 @@ public class EcmsWCMTestIT extends Base {
     siteExplorerHome.verifyContentCreatedSuccessfully(content);
     navigationToolbar.goToAddPage();
     pageCreationWizard.inputPageInfoStep1(content, true, "English", content, true, false);
-    $(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
+    sleep(Configuration.timeout);
+    $(ELEMENT_ADDNEWPAGE_BTNNEXT).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
     pageCreationWizard.addApplication($(ELEMENT_APPLICATION_CONTENT_TAB), $(byId("Content/portlet_ContentListViewerPortlet")));
     pageCreationWizard.addContentListByContent("General Drives/Sites Management/intranet", content);
@@ -193,6 +200,7 @@ public class EcmsWCMTestIT extends Base {
    * web content/document is displayed
    */
   @Test
+  @Tag("eabis")
   public void test03_CreateSingleContentViewerPage() {
     info("Test 3: Create Single Content Viewer page");
     String content = "content" + getRandomNumber();
@@ -237,6 +245,7 @@ public class EcmsWCMTestIT extends Base {
    * published status
    */
   @Test
+  @Tag("eabis")
   public void test07_ShowDraftpublicContentFromPage() {
     info("Test 7: Show draft/public content from page");
     String content = "content" + getRandomNumber();
@@ -304,6 +313,7 @@ public class EcmsWCMTestIT extends Base {
    * page
    */
   @Test
+  @Tag("eabis")
   public void test08_EditContentListViewerPageWithModeByContents() {
     info("Test 8: Edit Content List Viewer page with mode By Contents");
     String title = "title" + getRandomNumber();
@@ -385,6 +395,7 @@ public class EcmsWCMTestIT extends Base {
    */
 
   @Test
+  @Tag("eabis")
   public void test09_EditContentListViewerPageWithModeByFolder() {
     info("Test 9: Edit Content List viewer page with mode By Folder");
     String title = "title" + getRandomNumber();
@@ -463,6 +474,7 @@ public class EcmsWCMTestIT extends Base {
    * content/document is displayed
    */
   @Test
+  @Tag("eabis")
   public void test10_EditSingleContentViewerPage() {
     info("Test 10 Edit Single Content Viewer page");
     String title = "title" + getRandomNumber();
@@ -492,7 +504,9 @@ public class EcmsWCMTestIT extends Base {
     pageCreationWizard.addContentDetail("General Drives/Sites Management/intranet", content1);
     $(byTitle("Portlet Mode")).click();
     $(byTitle("Edit")).click();
+    sleep(Configuration.timeout);
     contentList.selectFolderContent("intranet", content2);
+    sleep(Configuration.timeout);
     executeJavaScript("window.scrollBy(0,-350);", "");
     $(byText("Done")).waitUntil(Condition.appears, Configuration.timeout);
     info("Delete created files");
@@ -574,6 +588,7 @@ public class EcmsWCMTestIT extends Base {
    * there will be sitemap.xml file
    */
   @Test
+  @Tag("eabis")
   public void test13_AddSEOMetadasWithLocalization() {
     info("Test 12 Add SEO metadas with localization");
     String title = "title" + getRandomNumber();
@@ -625,6 +640,7 @@ public class EcmsWCMTestIT extends Base {
    */
 
   @Test
+  @Tag("eabis")
   public void test14_UpdateSEOMetadatasWithLocalization() {
     info("Test 14_15 Update SEO metadatas with localization");
     String title = "title" + getRandomNumber();
@@ -658,6 +674,7 @@ public class EcmsWCMTestIT extends Base {
   }
 
   @Test
+  @Tag("eabis")
   public void test15_DeleteSEOMetadatasWithLocalization() {
     info("Test 14_15 Update SEO metadatas with localization");
     String title = "title" + getRandomNumber();
@@ -668,11 +685,12 @@ public class EcmsWCMTestIT extends Base {
     info("language2 is:" + language2);
     String apply2 = "Appliquer";
     navigationToolbar.goToSEO();
-    $(ELEMENT_SEO_LANGUAGE_SHOW).click();
-    $(ELEMENT_SEO_LANGUAGE_SELECTBOX).selectOption(language1);
+    $(ELEMENT_SEO_LANGUAGE_SHOW).waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(Configuration.timeout);
+    $(ELEMENT_SEO_LANGUAGE_SELECTBOX).sendKeys(language1);
     $(ELEMENT_SEO_TITLEBOX).setValue(title);
-    $(ELEMENT_SEO_SAVE).click();
-    $(ELEMENT_SEO_CLOSE).click();
+    $(ELEMENT_SEO_SAVE).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_SEO_CLOSE).waitUntil(Condition.visible,Configuration.timeout).click();
     refresh();
     navigationToolbar.goToChangeLanguage();
     changeLanguages.changeLanguage(language1, apply1);
@@ -680,6 +698,7 @@ public class EcmsWCMTestIT extends Base {
     info("Changed language is:" + language2);
     changeLanguages.changeLanguage(language2, apply2);
     // Verify that sitemaps file is updated
+    sleep(Configuration.timeout);
     $(byText("sitemaps")).waitUntil(Condition.visible, Configuration.timeout);
     info("Delete SEO folder");
     navigationToolbar.goToSiteExplorer();

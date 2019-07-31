@@ -73,6 +73,7 @@ public class SOCPeopleProfileEditProfileTestIT extends Base {
    * - Click [Cancel] button Input Data: Expected Outcome: - Change aren't saved
    */
   @Test
+  @Tag("sabis")
   public void test01_EditAboutMe() {
     info("Test 1: Edit About Me");
     String aboutMe = "aboutMe" + getRandomNumber();
@@ -129,6 +130,7 @@ public class SOCPeopleProfileEditProfileTestIT extends Base {
    * been updated.
    */
   @Test
+  @Tag("sabis")
   public void test02_EditContactInformation() {
     info("Test 2: Edit Contact Information");
     String jobTitle = "jobTitle" + getRandomNumber();
@@ -214,6 +216,7 @@ public class SOCPeopleProfileEditProfileTestIT extends Base {
    * Recent Activities:Experiences have been updated.
    */
   @Test
+  @Tag("sabis")
   public void test03_EditExperience() {
     info("Test 3: Edit Experience");
     String organization = "organization" + getRandomString();
@@ -278,6 +281,7 @@ public class SOCPeopleProfileEditProfileTestIT extends Base {
    * Avatar has been updated.
    */
   @Test
+  @Tag("sabis")
   public void test04_ChangeAvatar() {
     info("Test 4: Change Avatar");
     String actAvatar = "Avatar has been updated.";
@@ -296,10 +300,15 @@ public class SOCPeopleProfileEditProfileTestIT extends Base {
 
     info("edit avatar");
     click(ELEMENT_EDIT_MY_PROFILE_LINK);
+    sleep(2000);
     ELEMENT_BUTTON_CHANGE_AVATAR.click();
+    sleep(2000);
     ELEMENT_INPUT_UPLOAD_AVATAR.uploadFromClasspath("testavatar.png");
+    sleep(Configuration.timeout);
     ELEMENT_BUTTON_CONFIRM_UPLOAD.click();
+    sleep(2000);
     ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR.click();
+    sleep(2000);
     userProfilePage.saveCancelUpdateInfo(false);
     $(byXpath(ELEMENT_RECENT_ACTIVITY_CONTENT.replace("${index}", "1").replace("${content}", actAvatar))).should(Condition.exist);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");

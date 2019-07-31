@@ -43,6 +43,7 @@ public class SpacePermissionTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test01_CheckPermissionTableInTheSpaceManagementPage() {
     navigationToolbar.goToSpaceAdminstration();
     ELEMENT_PERMISSIONS_SECTION.click();
@@ -61,6 +62,7 @@ public class SpacePermissionTestIT extends Base {
    * <li>This test case cover Case ID:SP_02, ID:SP_03,ID:SP_07</li>
    */
   @Test
+  @Tag("sabis")
   public void test02_CheckTheFirstColumnPermissions() {
     navigationToolbar.goToSpaceAdminstration();
     ELEMENT_PERMISSIONS_SECTION.click();
@@ -82,6 +84,7 @@ public class SpacePermissionTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test03_CheckTheChangeOfEditbuttonWhenClickingOnIt() {
     navigationToolbar.goToSpaceAdminstration();
     ELEMENT_PERMISSIONS_SECTION.click();
@@ -106,6 +109,7 @@ public class SpacePermissionTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test04_NoAssignmentDisplayedWhenNoPermission() {
     navigationToolbar.goToSpaceAdminstration();
     ELEMENT_PERMISSIONS_SECTION.click();
@@ -121,6 +125,7 @@ public class SpacePermissionTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test05_CheckFormatWhenAddGroupForPermission() {
     navigationToolbar.goToSpaceAdminstration();
     ELEMENT_PERMISSIONS_SECTION.click();
@@ -154,6 +159,7 @@ public class SpacePermissionTestIT extends Base {
 
   // Ce cas de test couvre et sp11 et sp07
   @Test
+  @Tag("sabis")
   public void test07_CheckTheThirdColumnOfPermissionsTable() {
     info("create some spaces");
     String spaceNamea = "spaceNamea" + getRandomNumber();
@@ -217,6 +223,7 @@ public class SpacePermissionTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test08_CheckTheChangeOfEditButtonWhenClickingOnIt() {
     info("create some spaces");
     String spaceNamea = "spaceNamea" + getRandomNumber();
@@ -252,6 +259,7 @@ public class SpacePermissionTestIT extends Base {
 
   // Ce cas de test couvre sp09 et sp09a
   @Test
+  @Tag("sabis")
   public void test09_SaveButtonWillSaveTheEditDoneByUser() {
     info("create some spaces");
     String spaceNamea = "spaceNamea" + getRandomNumber();
@@ -322,6 +330,7 @@ public class SpacePermissionTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test10_CheckThatGroupOfUserCanDeleteEditableUserSectionFromPermission() {
     info("create some spaces");
     navigationToolbar.goToSpaceAdminstration();

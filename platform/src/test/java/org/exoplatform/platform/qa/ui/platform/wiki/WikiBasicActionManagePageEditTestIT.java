@@ -139,6 +139,7 @@ public class WikiBasicActionManagePageEditTestIT extends Base {
    */
 
   @Test
+  @Tag("wabis")
   public void test01_EditPageUsingRichTextEditor() {
     info("Test 1: Edit Page with Rich Text Editor");
     String wiki = "wiki" + getRandomNumber();
@@ -264,6 +265,7 @@ public class WikiBasicActionManagePageEditTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
+  @Tag("wabis")
   public void test07_EditPageFromTemplateLeave_Planning() {
     info("Test 04:  Edit  Page with template layout");
     String title = "title" + getRandomNumber();
@@ -360,6 +362,7 @@ public class WikiBasicActionManagePageEditTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
+  @Tag("wabis")
   public void test06_EditPageWhenPublishActivityIsChecked() {
     info("Test 06: Edit page when publish activity is checked");
     String title = "title" + getRandomNumber();
@@ -408,7 +411,7 @@ public class WikiBasicActionManagePageEditTestIT extends Base {
     homePagePlatform.goToWiki();
     wikiHomePage.goToAPage(newTitle);
     wikiHomePage.goToEditPage();
-    richTextEditor.editSimplePage("", newTitle);
+    richTextEditor.editSimplePage(newTitle, newTitle);
     wikiManagement.publishPageWhenEditPage();
     wikiManagement.saveAddPage();
 

@@ -253,6 +253,7 @@ public class ForumPostTestIT extends Base {
   }
 
   @Tag("FORUM-1381")
+  @Tag("fabis")
   @Test
   public void test06_Check_Topic_in_Lastest_forum_gadget() {
     String nameCat = "Category" + getRandomNumber();
@@ -262,10 +263,15 @@ public class ForumPostTestIT extends Base {
     String description = "Description" + getRandomNumber();
     navigationToolbar.goToMyProfile();
     userPageBase.goToDashboardTab();
-    ELEMENT_BUTTON_ADD_GADGET.click();
+    sleep(Configuration.timeout);
+    ELEMENT_BUTTON_ADD_GADGET.waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(Configuration.timeout);
     $(byClassName("PopupTitle")).dragAndDropTo($(ELEMENT_FORUM_LINK_PLF));
+    sleep(Configuration.timeout);
     ELEMENT_GADGET_LAST_FORUM_POST.dragAndDropTo(ELEMENT_CONTAINER_GADGETS);
-    ELEMENT_BUTTON_CLOSE_GADGETS.click();
+    sleep(Configuration.timeout);
+    ELEMENT_BUTTON_CLOSE_GADGETS.waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(Configuration.timeout);
     info("Open forum portlet");
     homePagePlatform.goToForum();
     info("Add a new category");
@@ -274,12 +280,13 @@ public class ForumPostTestIT extends Base {
     forumForumManagement.addForumSimple(nameForum, "", description);
     info("Add a new topic");
     forumForumManagement.goToStartTopic();
+    sleep(Configuration.timeout);
     forumTopicManagement.startTopic(nameTopic,
                                     description,
                                     "",
-                                    "data/forum/DataForum1.pdf",
-                                    "data/forum/DataForum2.pdf",
-                                    "data/forum/DataForum3.pdf");
+                                    "eXoPlatform.pdf",
+                                    "testavatar.pdf",
+                                    "testPhoto.pdf");
     forumHomePage.goToTopic(nameTopic);
     $(ELEMENT_POST_REPLY).click();
     $(ELEMENT_TITLE_POST).setValue(namePost);
@@ -287,22 +294,23 @@ public class ForumPostTestIT extends Base {
     $(byXpath("/html/body")).sendKeys(description);
     switchTo().defaultContent();
     executeJavaScript("window.scrollBy(0,150)");
-    $(ELEMENT_START_TOPIC_ATTACH_FILE).click();
-    $(By.className("file")).uploadFromClasspath("data/forum/DataForum1.pdf");
-    $(By.className("file")).uploadFromClasspath("data/forum/DataForum2.pdf");
-    $(By.className("file")).uploadFromClasspath("data/forum/DataForum3.pdf");
+    sleep(Configuration.collectionsTimeout);
+    $(ELEMENT_START_TOPIC_ATTACH_FILE).waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(Configuration.timeout);
+    $(By.className("file")).uploadFromClasspath("eXoPlatform.pdf");
+    $(By.className("file")).uploadFromClasspath("testavatar.pdf");
+    $(By.className("file")).uploadFromClasspath("testPhoto.pdf");
     $(ELEMENT_SAVE_BTN).click();
     $(ELEMENT_POST_FORM_SUBMIT).click();
     navigationToolbar.goToMyProfile();
     userPageBase.goToDashboardTab();
-    switchTo().frame($(byClassName("gadgets-gadget")));
+    switchTo().frame($(byXpath("//iframe[@class='gadgets-gadget']")));
     $(byText(description)).shouldBe(Condition.visible);
     switchTo().defaultContent();
     ELEMENT_BUTTON_CLOSE_SPECIFIC_GADGET.click();
     switchTo().alert();
     confirm();
     switchTo().defaultContent();
-    $(byClassName("gadgets-gadget")).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     homePagePlatform.goToForum();
     forumHomePage.goToHomeCategory();
     forumCategoryManagement.deleteCategory(nameCat);

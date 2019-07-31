@@ -562,6 +562,7 @@ public class WikiBasicActionPermalinkTestIT extends Base {
      * - User B has not access to the space setting for the wiki application
      */
     @Test
+    @Tag("wabis")
     public void test06_AccessToSpaceSettingByAPageCreator() {
         info("Test 6: Access to space setting by a page creator");
         info("Create 1 new users");
@@ -673,6 +674,7 @@ public class WikiBasicActionPermalinkTestIT extends Base {
      * - The restricted ancestors are not clickable.
      */
     @Test
+    @Tag("wabis")
     public void test07_DisplayAncestorRestrictedPageInLeftTreePanel() {
         info("Test 7: Display ancestor Restricted page in left tree panel");
         info("Create 1 new users");
@@ -715,6 +717,7 @@ public class WikiBasicActionPermalinkTestIT extends Base {
         wikiHomePage.closePermalinkPopup();
         manageLogInOut.signIn(arrayUsers.get(0), password);
         open(permalink);
+        sleep(Configuration.timeout);
         wikiValidattions.verifyRestrictedPageHasChildPage();
         manageLogInOut.signIn(DATA_USER1, "gtngtn");
         navigationToolbar.goToManageCommunity();

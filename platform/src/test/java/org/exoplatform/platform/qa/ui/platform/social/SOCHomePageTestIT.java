@@ -17,6 +17,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
+import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -635,6 +636,7 @@ public class SOCHomePageTestIT extends Base {
    * activity stream - A comment is added: Avatar has been updated.
    */
   @Test
+  @Tag("sabis")
   public void test24_UpdateProfileChangeOfAvatar() {
     info("Test 24: Update Profile - change of avatar");
     String comment = "Avatar has been updated.";
@@ -695,6 +697,7 @@ public class SOCHomePageTestIT extends Base {
    * (newest at the top) - We have only 1 activity per kind (no duplication
    */
   @Test
+  @Tag("sabis")
   public void test26_CheckOrderOfTheActivities() {
     info("Test 26 Check order of the activities");
 
@@ -711,7 +714,9 @@ public class SOCHomePageTestIT extends Base {
     createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
     createNewDocument.addNewWebContent(name, content);
     createNewDocument.saveAndClose();
+    sleep(Configuration.timeout);
     click(ELEMENT_SITEEXPLORER_LEFTBOX_ROOTNODE);
+    sleep(2000);
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToAddNewContent();
     info("Create new file document");
@@ -727,7 +732,7 @@ public class SOCHomePageTestIT extends Base {
     homePagePlatform.goToHomePage();
     ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_BOX_ACTIVITY).get(0).find(byText(content3)).should(Condition.exist);
     ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_BOX_ACTIVITY).get(1).find(byText(name2)).should(Condition.exist);
-    ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_BOX_ACTIVITY).get(2).find(byText(name)).should(Condition.exist);
+    Assert.assertEquals($(byXpath("//a[@class='linkTitle']")).getText(), name);
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.deleteData(name);
     siteExplorerHome.deleteData(name2);

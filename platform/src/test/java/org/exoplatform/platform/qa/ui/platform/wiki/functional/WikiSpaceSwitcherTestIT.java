@@ -168,6 +168,7 @@ public class WikiSpaceSwitcherTestIT extends Base {
    * Space 2 is opened on "Wiki Home" page
    */
   @Test
+  @Tag("wabis")
   public void test02_ChangingWikiShouldDisplayTheRootPageOfTheTargetedWiki() {
     info("Test 2: Changing wiki should display the root page of the targeted wiki");
 
@@ -390,9 +391,9 @@ public class WikiSpaceSwitcherTestIT extends Base {
    * displayed ("Wiki" application selected)
    */
   @Test
+  @Tag("wabis")
   public void test06_SwitchingToASpaceWikiFromCompanyWikiShouldDisplaySpaceNavigation() {
     info("Test 6: Switching to a space wiki from Company wiki should display space navigation");
-
     info("Create 2 new users");
     String password = "123456";
     ArrayList<String> arrayUsers;

@@ -71,7 +71,7 @@ public class NavigationToolbar {
     info("Go to add page form");
     $(ELEMENT_LINK_EDIT).click();
     $(ELEMENT_MENU_PAGE_LINK).hover();
-    $(ELEMENT_MENU_ADD_PAGE_LINK).click();
+    $(ELEMENT_MENU_ADD_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_PAGE_CREATION_WIZARD).waitUntil(Condition.appears, Configuration.timeout);
   }
 
@@ -208,10 +208,14 @@ public class NavigationToolbar {
       $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
       $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     } else
-      $(ELEMENT_LINK_SETUP).click();
+      $(ELEMENT_LINK_SETUP).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Element " + ELEMENT_MENU_CONTENT_LINK + "... is displayed");
-    $(ELEMENT_MENU_CONTENT_LINK).hover();
-    $(ELEMENT_MENU_SITE_EXPLORER).waitUntil(Condition.visible, Configuration.timeout).click();
+    sleep(Configuration.timeout);
+    do {
+      $(ELEMENT_MENU_CONTENT_LINK).hover();
+    } while (!$(ELEMENT_MENU_SITE_EXPLORER).exists());
+    sleep(2000);
+    $(ELEMENT_MENU_SITE_EXPLORER).waitUntil(Condition.visible,2000).click();
     info("Site Explorer is shown successfully");
   }
 
@@ -225,7 +229,7 @@ public class NavigationToolbar {
     info("Hover over on Page link");
     evt.mouseOver(ELEMENT_MENU_PAGE_LINK, true);
     info("Click on Seo Menu");
-    $(ELEMENT_MENU_SEO_LINK).click();
+    $(ELEMENT_MENU_SEO_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   /**
@@ -279,7 +283,10 @@ public class NavigationToolbar {
   public void goToSpaceAdminstration() {
     $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    sleep(2000);
+    ELEMENT_ADMINISTRATION_SPACES.hover();
     ELEMENT_SPACE_ADMIN_LINK.click();
+    sleep(2000);
     ELEMENT_SPACE_ADMIN_PAGE.waitUntil(Condition.visible, Configuration.timeout);
   }
 
@@ -558,10 +565,11 @@ public class NavigationToolbar {
 
   public void goToManageCommunity() {
     $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(Configuration.timeout);
     ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, 10000);
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.click();
+    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   /**

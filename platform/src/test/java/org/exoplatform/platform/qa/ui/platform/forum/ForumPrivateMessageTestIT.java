@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.forum;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_CANCEL_PRIVATE_MSG;
@@ -8,6 +9,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -204,6 +206,7 @@ public class ForumPrivateMessageTestIT extends Base {
    */
 
   @Test
+  @Tag("fabis")
   public void test04elete_AMessage() {
     info("Test 3: Forward a message");
 
@@ -218,11 +221,14 @@ public class ForumPrivateMessageTestIT extends Base {
     privateMessageManagement.writeMessage(contact, title, content);
     privateMessageManagement.goSendMessages();
     ELEMENT_CANCEL_PRIVATE_MSG.click();
+    sleep(2000);
     forumHomePage.goToPrivateMessage();
     privateMessageManagement.goSendMessages();
     privateMessageManagement.forwardMessage(contact, title, contactForward, "", "");
     privateMessageManagement.deleteMessage(title, "");
+    sleep(2000);
     ELEMENT_CANCEL_PRIVATE_MSG.click();
+    sleep(Configuration.timeout);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.goToForum();
     forumHomePage.goToPrivateMessage();

@@ -1,8 +1,7 @@
 package org.exoplatform.platform.qa.ui.forum.pageobject;
 
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 
 import org.openqa.selenium.By;
@@ -51,7 +50,9 @@ public class PrivateMessageManagement {
    * Go send message tab
    */
   public void goSendMessages() {
+    sleep(2000);
     $(ELEMENT_TABS_SENT_MESSAGES).click();
+    sleep(Configuration.timeout);
   }
 
   /**
@@ -65,7 +66,9 @@ public class PrivateMessageManagement {
    * Go compose tab
    */
   public void goComposeMessage() {
-    $(ELEMENT_TABS_COMPOSE_MESSAGE).click();
+    sleep(2000);
+    $(ELEMENT_TABS_COMPOSE_MESSAGE).waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(Configuration.timeout);
   }
 
   /**
@@ -84,11 +87,17 @@ public class PrivateMessageManagement {
    */
   public void writeMessage(String contact, String title, String content) {
     refresh();
+    sleep(2000);
     $(ELEMENT_SEND_TO_MESSAGE).setValue(contact);
+    sleep(2000);
     $(ELEMENT_TITLE_MESSAGE).setValue(title);
+    sleep(2000);
     plf.inputFrame(ELEMENT_MESSAGE_CONTENT, content);
+    sleep(2000);
     $(ELEMENT_SEND_BUTTON).click();
+    sleep(3000);
     ELEMENT_FORUM_OK_SEND_MSG.click();
+    sleep(3000);
 
   }
 
@@ -117,8 +126,11 @@ public class PrivateMessageManagement {
    * @param content String
    */
   public void checkInboxMessage(String contact, String title, String content) {
+    sleep(2000);
     $(byText(title)).click();
+    sleep(Configuration.timeout);
     $(byText(content)).scrollTo().waitUntil(Condition.appears, Configuration.timeout);
+    sleep(2000);
   }
 
   /**
@@ -174,15 +186,19 @@ public class PrivateMessageManagement {
    */
   public void forwardMessage(String contact, String title, String newContact, String newTitle, String newContent) {
     $(byText(title)).parent().parent().parent().find(ELEMENT_BUTTON_FORWARD_MESSAGE).click();
-
+    sleep(Configuration.timeout);
     $(ELEMENT_SEND_TO_MESSAGE).setValue(newContact);
+    sleep(2000);
     if (newTitle != "")
       $(ELEMENT_TITLE_MESSAGE).setValue(newTitle);
-
+     sleep(2000);
     if (newContent != "")
       plf.inputFrame(ELEMENT_MESSAGE_CONTENT, newContent);
+    sleep(2000);
     $(ELEMENT_SEND_BUTTON).click();
+    sleep(2000);
     ELEMENT_FORUM_OK_SEND_MSG.click();
+    sleep(2000);
   }
 
   /**
@@ -193,8 +209,11 @@ public class PrivateMessageManagement {
    */
   public void deleteMessage(String title, String contact) {
     $(byText(title)).parent().parent().parent().find(ELEMENT_BUTTON_DELETE_MESSAGE).click();
+    sleep(2000);
     $(ELEMENT_CONFIRM).click();
+    sleep(Configuration.timeout);
     $(byText(title)).waitUntil(Condition.disappears, Configuration.timeout);
+    sleep(2000);
   }
 
   /**

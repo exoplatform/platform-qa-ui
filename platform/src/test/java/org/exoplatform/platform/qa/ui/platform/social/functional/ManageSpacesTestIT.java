@@ -1,7 +1,6 @@
 package org.exoplatform.platform.qa.ui.platform.social.functional;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
@@ -55,19 +54,21 @@ public class ManageSpacesTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test01_CheckTheNewSpacesSubmenuInTheAdministrationMenu() {
     info("Test 1: CheckTheNewSpacesSubmenuInTheAdministrationMenu");
     navigationToolbar.goToSpaceAdminstration();
   }
 
   @Test
-  public void test02_CheckElementsInTheManageSpacesTab() {
+  @Tag("sabis")
+  public void test02_CheckElementsInTheManageSpaces() {
     info("create some new spaces");
     String spaceNamea = "spaceNamea" + getRandomNumber();
     String spaceDesa = "descriptiona" + getRandomNumber();
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
-    info("Test 1: CheckElementsInTheManageSpacesTab");
+    info("Test 1: CheckElementsInTheManageSpaces");
     navigationToolbar.goToSpaceAdminstration();
     ELEMENT_SPACE_GRID.find(byText(spaceNamea))
                       .parent()
@@ -84,6 +85,7 @@ public class ManageSpacesTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test03_CheckThatNothingHappensWhenClickOnSpacesNameAndAvatar() {
     info("create some spaces");
     String spaceNamea = "spaceNamea" + getRandomNumber();
@@ -98,13 +100,15 @@ public class ManageSpacesTestIT extends Base {
   }
 
   @Test
-  public void test04_CheckTheDisplayOfTheFilterFieldAboveTheSpaceManagementTable() {
-    info("CheckTheDisplayOfTheFilterFieldAboveTheSpaceManagementTable");
+  @Tag("sabis")
+  public void test04_CheckTheDisplayOfTheFilterFieldAboveTheSpaceManagementle() {
+    info("CheckTheDisplayOfTheFilterFieldAboveTheSpaceManagementle");
     navigationToolbar.goToSpaceAdminstration();
     ELEMENT_SPACE_SEARCH_ICON.waitUntil(Condition.visible, Configuration.timeout);
   }
 
   @Test
+  @Tag("sabis")
   public void test05_CheckcancelButtonFromTheConfirmationPopup() {
     info("create some spaces");
     String spaceNamea = "spaceNamea" + getRandomNumber();
@@ -122,6 +126,7 @@ public class ManageSpacesTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test06_CheckXButtonFromTheConfirmationPopup() {
     info("create some spaces");
     String spaceNamea = "spaceNamea" + getRandomNumber();
@@ -141,6 +146,7 @@ public class ManageSpacesTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test07_CheckConfirmationPopupWhileDeleteSpace() {
     info("create some spaces");
     String spaceNamea = "spaceNamea" + getRandomNumber();
@@ -164,6 +170,7 @@ public class ManageSpacesTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test08_CheckButtonsInTheActionsColumn() {
     info("create some spaces");
     String spaceNamea = "spaceNamea" + getRandomNumber();
@@ -186,6 +193,7 @@ public class ManageSpacesTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test09_CheckTheExistanceOfTheSpacesInTheManageSpacesTab() {
     String spaceNamea = "spaceNamea" + getRandomNumber();
     String spaceDesa = "descriptiona" + getRandomNumber();
@@ -211,6 +219,7 @@ public class ManageSpacesTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test10_CheckEmptyTableIfNoSpacesHasBeenCreated() {
     String spaceNamea = "spaceNamea" + getRandomNumber();
     String spaceDesa = "descriptiona" + getRandomNumber();
@@ -241,6 +250,7 @@ public class ManageSpacesTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test11_SpaceAdministrationPageWillBeRefreshedOnceDeleteASpace() {
     String spaceNamea = "spaceNamea" + getRandomNumber();
     String spaceDesa = "descriptiona" + getRandomNumber();
@@ -268,6 +278,7 @@ public class ManageSpacesTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test13_CheckTheDisplayOfTheSpaceEditPage() {
     String spaceNamea = "spaceNamea" + getRandomNumber();
     String spaceDesa = "descriptiona" + getRandomNumber();
@@ -292,6 +303,7 @@ public class ManageSpacesTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test14_CheckThatNothingHappensWhenClickOnSpaceNameAvatar() {
     String spaceNamea = "spaceNamea" + getRandomNumber();
     String spaceDesa = "descriptiona" + getRandomNumber();
@@ -299,13 +311,17 @@ public class ManageSpacesTestIT extends Base {
     spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
     navigationToolbar.goToSpaceAdminstration();
     ELEMENT_SPACE_MANAGEMENT_SECTION.click();
+    sleep(2000);
     ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().click();
-    ELEMENT_SPACE_GRID.find(byClassName("avatar")).parent().parent().click();
+    sleep(2000);
+    $(byXpath("//div[@class='manageSpaces']/table//td[contains(text(),'${spaceName}')]/img[@class='avatar']".replace("${spaceName}",spaceNamea))).waitUntil(Condition.visible,Configuration.timeout).doubleClick();
+    sleep(2000);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(spaceNamea, false);
   }
 
   @Test
+  @Tag("sabis")
   public void test15_SpacesFilteredByItsDescription() {
     String spaceNamea = "spaceNamea" + getRandomNumber();
     String spaceDesa = "spaceDesa" + getRandomNumber();
@@ -323,7 +339,10 @@ public class ManageSpacesTestIT extends Base {
     ELEMENT_SPACE_SEARCH_ICON.setValue(spaceDesa);
     ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_SPACE_GRID.find(byText(spaceNameb)).parent().parent().waitUntil((Condition.visible), Configuration.timeout);
+    sleep(2000);
+    executeJavaScript("window.scrollBy(0,-1000)", "");
     ELEMENT_SPACE_SEARCH_ICON.click();
+    sleep(Configuration.timeout);
     ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_SPACE_GRID.find(byText(spaceNameb)).parent().parent().waitUntil((Condition.visible), Configuration.timeout);
     homePagePlatform.goToMySpaces();
@@ -332,6 +351,7 @@ public class ManageSpacesTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test16_SpacesFilteredByItsName() {
     String spaceNamea = "spaceNamea" + getRandomNumber();
     String spaceDesa = "spaceDesa" + getRandomNumber();
@@ -344,10 +364,13 @@ public class ManageSpacesTestIT extends Base {
     homePagePlatform.goToMySpaces();
     navigationToolbar.goToSpaceAdminstration();
     ELEMENT_SPACE_MANAGEMENT_SECTION.click();
+    sleep(2000);
+    executeJavaScript("window.scrollBy(0,-1000)", "");
     ELEMENT_SPACE_SEARCH_ICON.waitUntil(Condition.visible, Configuration.timeout);
     info("Input the space into search text box");
     ELEMENT_SPACE_SEARCH_ICON.setValue(spaceNamea);
     ELEMENT_SPACE_SEARCH_ICON.click();
+    sleep(Configuration.timeout);
     ELEMENT_SPACE_GRID.find(byText(spaceNamea)).parent().parent().waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_SPACE_GRID.find(byText(spaceNameb)).parent().parent().is(Condition.not(Condition.visible));
     homePagePlatform.goToMySpaces();
@@ -356,6 +379,7 @@ public class ManageSpacesTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test17_CheckTheplaceholderIntheFilterFiled() {
     // this TC cover also case [ID:SM_04b] the filter engine will be done on Space
     // name and Descriptions fields when typing charactersand[ID:SM_04a]
@@ -376,6 +400,8 @@ public class ManageSpacesTestIT extends Base {
     homePagePlatform.goToMySpaces();
     navigationToolbar.goToSpaceAdminstration();
     ELEMENT_SPACE_MANAGEMENT_SECTION.click();
+    sleep(2000);
+    executeJavaScript("window.scrollBy(0,-1000)", "");
     ELEMENT_SPACE_SEARCH_ICON.waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_SPACE_SEARCH_ICON.setValue(spaceDesa);
     ELEMENT_SPACE_SEARCH_ICON.click();
@@ -390,6 +416,7 @@ public class ManageSpacesTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test18_CheckDisplayofPaginationWhenSpaceAdministrationContainsMoreThan30Spaces() {
     ArrayList<String> spaceList = new ArrayList<String>();
     spaceList.add("space" + getRandomNumber());
@@ -453,6 +480,7 @@ public class ManageSpacesTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test19_Only30SpacesDisplayedByDefaultPerView() {
     ArrayList<String> spaceList = new ArrayList<String>();
     spaceList.add("space" + getRandomNumber());
@@ -549,6 +577,7 @@ public class ManageSpacesTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test21_CheckTheOrderOfTheCreatedSpaces() {
     String spaceName1 = "spaceNamea" + getRandomNumber();
     String spaceName2 = "spaceNameb" + getRandomNumber();
@@ -563,11 +592,13 @@ public class ManageSpacesTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(spaceName4, "");
     navigationToolbar.goToSpaceAdminstration();
+    sleep(2000);
     ELEMENT_SPACE_MANAGEMENT_SECTION.click();
-    ELEMENT_ROW_CONTAINER_INDEX3.parent().parent().find(byText(spaceName1)).should(Condition.exist);
-    ELEMENT_ROW_CONTAINER_INDEX2.parent().parent().find(byText(spaceName2)).should(Condition.exist);
-    ELEMENT_ROW_CONTAINER_INDEX1.parent().parent().find(byText(spaceName3)).should(Condition.exist);
-    ELEMENT_ROW_CONTAINER_INDEX0.parent().parent().find(byText(spaceName4)).should(Condition.exist);
+    sleep(2000);
+    $(byXpath("//div[@class='manageSpaces']//td[contains(text(),'${spaceName1}')]".replace("{spaceName1}",spaceName1))).exists();
+    $(byXpath("//div[@class='manageSpaces']//td[contains(text(),'${spaceName2}')]".replace("{spaceName2}",spaceName2))).exists();
+    $(byXpath("//div[@class='manageSpaces']//td[contains(text(),'${spaceName3}')]".replace("{spaceName3}",spaceName3))).exists();
+    $(byXpath("//div[@class='manageSpaces']//td[contains(text(),'${spaceName4}')]".replace("{spaceName4}",spaceName4))).exists();
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(spaceName1, false);
     spaceManagement.deleteSpace(spaceName2, false);

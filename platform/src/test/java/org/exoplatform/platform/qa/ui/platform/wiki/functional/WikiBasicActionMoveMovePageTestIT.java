@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Button.ELEMENT_CANCEL_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -304,6 +305,7 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
      * Page content is correctly displaying 2 images previously displayed
      */
     @Test
+    @Tag("wabis")
     public void test02_PageSubpageAndAttachmentsShouldBeMovedWithThePage() {
         info("Test 2: Page's sub-pages and attachments should be moved with the page.");
 
@@ -403,7 +405,8 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         wikiHomePage.goToAPage(wiki);
 
         info("Verify 2 sub pages are in page wiki");
-        wikiValidattions.verifyTitleWikiPage(wiki1);
+        wikiValidattions.verifyTitleWikiPage(wiki);
+        wikiHomePage.goToAPage(wiki2);
         wikiValidattions.verifyTitleWikiPage(wiki2);
 
         info("Verify 2 inserted images to sub pages 1 ");
@@ -415,6 +418,7 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         info("Verify 2 images are displayed in attach list of wiki page 2");
         wikiHomePage.goToAPage(wiki2);
         wikiHomePage.goToAttachFiles("2");
+        executeJavaScript("window.scrollBy(0,200)", "");
         wikiValidattions.VerifyAttachFilesAreDisplayedInAttachListOrNot(link1, true);
         wikiValidattions.VerifyAttachFilesAreDisplayedInAttachListOrNot(link2, true);
         info("2 attached images are attached successfully in attache list of page 2");
@@ -435,10 +439,12 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         spaceManagement.searchSpace(space2, "");
         spaceManagement.goToSpace(space2);
         spaceManagement.goToWikiTab();
+        wikiHomePage.goToAPage(wiki);
         wikiValidattions.verifyTitleWikiPage(wiki);
         info("Wiki page exists in Space 2");
-        wikiHomePage.goToAPage(wiki);
+        wikiHomePage.goToAPage(wiki1);
         wikiValidattions.verifyTitleWikiPage(wiki1);
+        wikiHomePage.goToAPage(wiki2);
         wikiValidattions.verifyTitleWikiPage(wiki2);
         wikiHomePage.goToAPage(wiki1);
         wikiValidattions.verifyAltTextImageInContentPage(altText1);
@@ -454,6 +460,7 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
 			The page has its two files attached correctly*/
         wikiHomePage.goToAPage(wiki2);
         wikiHomePage.goToAttachFiles("2");
+        executeJavaScript("window.scrollBy(0,200)", "");
         wikiValidattions.VerifyAttachFilesAreDisplayedInAttachListOrNot(link1, true);
         wikiValidattions.VerifyAttachFilesAreDisplayedInAttachListOrNot(link2, true);
         homePagePlatform.goToMySpaces();
@@ -549,6 +556,7 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
      * "Page to move" is moved in the space "Space Destination"
      */
     @Test
+    @Tag("wabis")
     public void test03_PageSubpageShouldBeMovedWithThePage() {
         info("Test 3: Page's sub-pages should be moved with the page");
 
@@ -916,6 +924,7 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
      */
 
     @Test
+    @Tag("wabis")
     public void test05_MoveAPageWhenUserDoesNotHaveEditPermissionOnDestinationPage() {
         info("Test 5: Move a page when user does not have edit permission on destination page");
 
@@ -999,6 +1008,7 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
      * - Move Page action is not displayed
      */
     @Test
+    @Tag("wabis")
     public void test06_MoveAPageWhenUserDoesNotHaveEditPermissionOnPage() {
         info("Test 6: Move a page when user doesn't have edit permission on page");
 
@@ -1073,6 +1083,7 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
      * New page is moved to the destination page
      */
     @Test
+    @Tag("wabis")
     public void test07_MoveAPageWhenUserHasEditPermissionOnPage() {
         info("Test 7: Move a page when user have edit permission on page");
 
@@ -1116,7 +1127,7 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         wikiValidattions.verifyWikiPageNotDisplayedInWikiHome(wiki1);
         info("Check to make sure wiki page 1 exists under wiki page 2");
         wikiHomePage.goToAPage(wiki2);
-        wikiValidattions.verifyTitleWikiPage(wiki1);
+        wikiValidattions.verifyTitleWikiPage(wiki2);
         homePagePlatform.goToWiki();
         wikiHomePage.deleteWiki(wiki2);
 
@@ -1192,6 +1203,7 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
      * - Space Navigation of "Space Destination 2" is displayed
      */
     @Test
+    @Tag("wabis")
     public void test08_CheckControlComplexSubpagesTreeWithNameDuplicatedInTheTargetSpace() {
         info("Test 15 Check Redirection after a move to another space");
         info("Create a space 1: moving space");
@@ -1283,6 +1295,7 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         wikiValidattions.verifyTitleWikiPage(subPage2);
         info("Move page of space 1 to Wiki Home of space 2");
         homePagePlatform.goToMySpaces();
+        spaceManagement.searchSpace(space1);
         ELEMENT_SPACES_LIST.find(byText(space1)).click();
         spaceManagement.goToWikiTab();
         wikiManagement.movePageDiffDestination(page, "Wiki Home", space2);

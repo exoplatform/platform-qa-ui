@@ -1,7 +1,6 @@
 package org.exoplatform.platform.qa.ui.platform.task;
 
-import static com.codeborne.selenide.Selectors.byLinkText;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_CHAT_INPUT_SEARCH_USER;
@@ -9,6 +8,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.E
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -56,9 +56,9 @@ public class TaskAssignInChatTestIT extends Base {
     manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
     homePagePlatform.goToChat();
     switchTo().window(1);
-    ELEMENT_CHAT_INPUT_SEARCH_USER.setValue("@" + PLFData.DATA_USER2);
+    $(byXpath("//input[@placeholder='Filter discussions']")).setValue(PLFData.DATA_USER2);
     $(byText(PLFData.DATA_NAME_USER2)).click();
-    chatManagement.assignTaskInChat(taskName, "", PLFData.DATA_USER2);
+    chatManagement.assignTaskInChat(taskName, PLFData.DATA_USER2);
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byLinkText(taskName)).click();
     switchTo().window(2);
     assertEquals("Tasks", title());

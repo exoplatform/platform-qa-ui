@@ -55,6 +55,7 @@ public class SOCSpaceListPendingTestIT extends Base {
    * tab Input Data: Expected Outcome: - Show all pending requests of this user
    */
   @Test
+  @Tag("sabis")
   public void test01_CheckPendingSpaceList() {
     info("Test 01: Check Pending space list");
     String space = "space" + getRandomNumber();
@@ -72,7 +73,7 @@ public class SOCSpaceListPendingTestIT extends Base {
 
     info("Create a space");
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space);
+    spaceManagement.addNewSpace(space, space, "validation", "No", "");
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToMySpaces();
     spaceManagement.goToAllSpacesTab();

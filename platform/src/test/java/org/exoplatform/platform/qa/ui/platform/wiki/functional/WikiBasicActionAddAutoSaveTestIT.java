@@ -72,6 +72,7 @@ public class WikiBasicActionAddAutoSaveTestIT extends Base {
    * created after 30sA message is displayed "Draft saved at HH:MM"
    */
   @Test
+  @Tag("wabis")
   public void test01_AddADraftToWikiIntranet() {
     info("Test 1: Add a Draft to Wiki Intranet");
 
@@ -84,7 +85,7 @@ public class WikiBasicActionAddAutoSaveTestIT extends Base {
     sourceTextEditor.addSimplePageHasAutoSaveWithoutSave(title, content);
     wikiHomePage.goToMyDraft();
     wikiValidattions.verifyTitleDrafPage(title);
-    wikiDraftPage.deleteDraft(title);
+    wikiDraftPage.deleteDraft();
   }
 
   /**
@@ -114,7 +115,7 @@ public class WikiBasicActionAddAutoSaveTestIT extends Base {
     wikiHomePage.goToMyDraft();
     wikiValidattions.verifyTitleDrafPage("");
     wikiHomePage.goToMyDraft();
-    wikiDraftPage.deleteDraft("");
+    wikiDraftPage.deleteDraft();
 
   }
 
@@ -186,7 +187,7 @@ public class WikiBasicActionAddAutoSaveTestIT extends Base {
     wikiManagement.goToSourceEditor();
     wikiValidattions.verifyResumADraf(title);
     wikiHomePage.goToMyDraft();
-    wikiDraftPage.deleteDraft(title);
+    wikiDraftPage.deleteDraft();
 
   }
 

@@ -1,23 +1,13 @@
 package org.exoplatform.platform.qa.ui.platform.chat;
 
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.*;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-
 import com.codeborne.selenide.Condition;
-
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.chat.pageobject.ChatManagement;
 import org.exoplatform.platform.qa.ui.chat.pageobject.RoomManagement;
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.commons.pageobject.Platform;
 import org.exoplatform.platform.qa.ui.core.PLFData;
+import org.exoplatform.platform.qa.ui.ecms.pageobject.SiteExplorerHome;
 import org.exoplatform.platform.qa.ui.selenium.platform.ConnectionsManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
@@ -25,6 +15,18 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getInterfaces;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 /**
  * Created by ilyes on 16/02/18.
@@ -32,23 +34,25 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 @Tag("chat")
 @Tag("sniff")
 public class ChatManageMessageTestIT extends Base {
-  HomePagePlatform       homePagePlatform;
+  HomePagePlatform homePagePlatform;
 
-  ChatManagement         chatManagement;
+  ChatManagement chatManagement;
 
-  ManageLogInOut         manageLogInOut;
+  ManageLogInOut manageLogInOut;
 
-  ConnectionsManagement  connectionsManagement;
+  ConnectionsManagement connectionsManagement;
 
-  SpaceManagement        spaceManagement;
+  SpaceManagement spaceManagement;
 
-  SpaceHomePage          spaceHomePage;
+  SpaceHomePage spaceHomePage;
 
   SpaceSettingManagement spaceSettingManagement;
 
-  RoomManagement         roomManagement;
+  RoomManagement roomManagement;
 
-  WikiHomePage           wikiHomePage;
+  SiteExplorerHome      siteExplorerHome;
+
+  WikiHomePage wikiHomePage;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -60,14 +64,16 @@ public class ChatManageMessageTestIT extends Base {
     spaceHomePage = new SpaceHomePage(this);
     chatManagement = new ChatManagement(this);
     spaceSettingManagement = new SpaceSettingManagement(this);
+    siteExplorerHome = new SiteExplorerHome(this);
     roomManagement = new RoomManagement(this);
     wikiHomePage = new WikiHomePage(this);
     manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
   }
 
   @Test
+  @Tag("cab")
   @Tag("CHAT-808")
-  public void test01_uploadFileInSpaceChatThenUserChat() {
+  public void test02_uploadFileInSpaceChatThenUserChat() {
     String space = "space" + getRandomNumber();
     info("create space and invite user");
     homePagePlatform.goToMySpaces();
@@ -87,37 +93,44 @@ public class ChatManageMessageTestIT extends Base {
     manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
     homePagePlatform.goToChat();
     switchTo().window(1);
+    sleep(2000);
     info("upload file in space chat");
-    $(byText(space)).click();
+    $(byText(space)).waitUntil(Condition.visible,Configuration.timeout).click();
     chatManagement.uploadFile("eXo-Platform.png");
+    sleep(Configuration.timeout);
     info("upload file in user chat");
-    if ($(byText(PLFData.DATA_NAME_USER2)).is(Condition.not(Condition.visible)))
-      ELEMENT_CHAT_BUTTON_HIDE_OFF_LINE.click();
-    $(byText(PLFData.DATA_NAME_USER2)).click();
-    chatManagement.uploadFile("testavatar.png");
+    chatManagement.openMiniChat(PLFData.DATA_USER2, PLFData.DATA_NAME_USER2);
+    chatManagement.uploadFileChatUser("testavatar.png");
+    sleep(Configuration.timeout);
     switchTo().window(0);
     info("verify file uploaded in user chat exist in personal document");
     homePagePlatform.goToDocuments();
-    ELEMENT_FOLDER_DOCUMENT.click();
+    sleep(Configuration.timeout);
+    ELEMENT_FOLDER_DOCUMENT.waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_LIST_DOCUMENTS.find(byText("eXo-Platform")).shouldNot(Condition.exist);
     ELEMENT_LIST_DOCUMENTS.find(byText("testavatar")).should(Condition.exist);
+    sleep(2000);
     info("verify file uploaded in space chat exist in space's documents");
     homePagePlatform.goToMySpaces();
+    ELEMENT_MINI_CHAT_CLOSE_ICON.waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceManagement.goToDocumentTab();
     ELEMENT_LIST_DOCUMENTS_IN_SPACE.find(byText("eXo-Platform.png")).should(Condition.visible);
     ELEMENT_LIST_DOCUMENTS_IN_SPACE.find(byText("testavatar.png")).shouldNot(Condition.visible);
     info("verify document uploaded in space chat exist in activity stream");
     homePagePlatform.goToHomePage();
+    sleep(Configuration.collectionsTimeout);
     ELEMENT_CONTAINER_ACTIVITY.find(byAttribute("data-original-title", "eXo-Platform.png")).should(Condition.exist);
+    sleep(Configuration.timeout);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
 
   }
 
   @Test
+  @Tag("cab")
   @Tag("CHAT-808")
-  public void test02_uploadFileInUserChatThenSpaceChat() {
+  public void test03_uploadFileInUserChatThenSpaceChat() {
     String space = "space" + getRandomNumber();
     info("create space and invite user");
     homePagePlatform.goToMySpaces();
@@ -137,14 +150,18 @@ public class ChatManageMessageTestIT extends Base {
     manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
     homePagePlatform.goToChat();
     switchTo().window(1);
+    $(byText(space)).waitUntil(Condition.visible,Configuration.timeout).click();
     info("upload file in user chat");
-    if ($(byText(PLFData.DATA_NAME_USER2)).is(Condition.not(Condition.visible)))
+    if (!$(byText(PLFData.DATA_NAME_USER2)).exists())
       ELEMENT_CHAT_BUTTON_HIDE_OFF_LINE.click();
-    $(byText(PLFData.DATA_NAME_USER2)).click();
-    chatManagement.uploadFile("testavatar.png");
+    $(byXpath("//div[@class='chat-contact']/div[contains(@style,'${userChat}')]".replace("${userChat}",PLFData.DATA_USER2))).click();
+    if ($(byXpath("//i[@class='uiIconBannerChat uiIconLightGray']")).exists())
+      $(byXpath("//i[@class='uiIconBannerChat uiIconLightGray']")).waitUntil(Condition.visible,Configuration.timeout).click();
     refresh();
+    chatManagement.uploadFile("testavatar.png");
+    sleep(Configuration.timeout);
     info("upload file in space chat");
-    $(byText(space)).click();
+    $(byText(space)).waitUntil(Condition.visible,Configuration.timeout).click();
     chatManagement.uploadFile("eXo-Platform.png");
     switchTo().window(0);
     info("verify file uploaded in user chat exist in personal document");
@@ -168,7 +185,7 @@ public class ChatManageMessageTestIT extends Base {
 
   @Test
   @Tag("CHAT-829")
-  public void test03_checkUserStatusWhenSendMessageInRoom(){
+  public void test03_checkUserStatusWhenSendMessageInRoom() {
     String room = "room" + getRandomNumber();
     String message = "room" + getRandomNumber();
     manageLogInOut.signIn(PLFData.DATA_USER2, PLFData.password);
@@ -188,10 +205,10 @@ public class ChatManageMessageTestIT extends Base {
     manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
     homePagePlatform.goToChat();
     switchTo().window(1);
-    $(byText(room)).click();
+    $(byText(room)).waitUntil(Condition.visible,Configuration.timeout).click();
     info("verify message");
     ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.visible);
-    $(byClassName("buttonChangeStatus")).find(byClassName("chat-status-available")).should(Condition.visible);
+    $(byXpath("//div[@class='user-available']/span[text()='Available']")).exists();
     roomManagement.deleteRomm(room);
 
   }
@@ -217,7 +234,11 @@ public class ChatManageMessageTestIT extends Base {
     roomManagement.startStopmeeting(room);
     ELEMENT_CHAT_LIST_MSG.find(byClassName("uiIconChatWiki")).parent().find(byClassName("save-meeting-notes")).click();
     ELEMENT_CHAT_LINK_TEXT_OPEN_WIKI_APP.click();
-    $(byText("Meeting Notes")).click();
+    switchTo().window(2);
+    do {
+      refresh();
+    } while ($(byXpath("//div[@id='iconTreeExplorer']/a[text()=' Meeting Notes']")).exists());
+    $(byXpath("//div[@id='iconTreeExplorer']/a[text()=' Meeting Notes']")).waitUntil(Condition.visible,Configuration.timeout).click();
     String nameWikipage = room + " Meeting " + getDate(0, "dd-MM-yyyy HH-mm");
     $(byText(nameWikipage)).shouldBe(Condition.visible);
     wikiHomePage.deleteWiki(nameWikipage);

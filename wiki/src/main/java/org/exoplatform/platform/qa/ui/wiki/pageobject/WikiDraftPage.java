@@ -29,10 +29,9 @@ public class WikiDraftPage {
   /**
    * Deletes a draft.
    *
-   * @param title The title of a wiki's page to be deleted.
    */
-  public void deleteDraft(String title) {
-    $(byText(title)).parent().parent().parent().find(byClassName("uiIconDeleteDraft")).click();
+  public void deleteDraft() {
+    $(byXpath("(//i[@class=\"uiIconDeleteDraft uiIconLightGray\"])[1]"));
     alert.acceptAlert();
   }
 

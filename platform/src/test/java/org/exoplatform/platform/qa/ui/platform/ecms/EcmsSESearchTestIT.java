@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.platform.ecms;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -127,6 +128,7 @@ public class EcmsSESearchTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
+  @Tag("eabis")
   public void test03_SimpleSearch() {
     info("Test 3: Simple Search");
     String title = "title" + getRandomNumber();
@@ -144,7 +146,9 @@ public class EcmsSESearchTestIT extends Base {
     createNewDocument.addNewFile(title, content);
     createNewDocument.saveAndClose();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    $(ELEMENT_ACTIONBAR_SEARCHBAR).setValue(title).pressEnter();
+    sleep(Configuration.timeout);
+    $(ELEMENT_ACTIONBAR_SEARCHBAR).setValue(title).waitUntil(Condition.visible,Configuration.timeout).pressEnter();
+    sleep(Configuration.timeout);
     $(byId("SimpleSearchResult")).find(byText(title)).should(Condition.visible);
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");

@@ -775,7 +775,7 @@ public class ForumLocator {
   public static final String ELEMENT_PRIVATE_POST =
           "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@data-original-title='Private Reply']";
   public static final By ELEMENT_DELETE_BOX_CONFIRMATION =
-          By.xpath("//*[@id='UIForumPopupConfirmation']//*[contains(text(),'OK')]");
+          By.xpath("//*[@id='UIForumPopupConfirmation']//button[@type='button' and text()='OK']");
   // Poll
   public static final By ELEMENT_POLL_QUESTION = By.id("Question");
   public static final By ELEMENT_POLL_OPTIONS0 = By.id("Option0");
@@ -813,7 +813,7 @@ public class ForumLocator {
   public static final By ELEMENT_TABS_INBOX =
           By.xpath("//*[@id='UIPrivateMessageForm']//*[@class='nav nav-tabs']//*[contains(text(),'Inbox')]");
   public static final By ELEMENT_TABS_COMPOSE_MESSAGE =
-          By.xpath("//*[@id='UIPrivateMessageForm']//*[@class='nav nav-tabs']//*[contains(text(),'Compose New Message')]");
+          By.xpath("//*[@id='UIPrivateMessageForm']//*[text()='Compose New Message']");
   public static final By ELEMENT_PRIVATE_MESSAGE_CANCEL_BUTTON =
           By.xpath("//*[@id='UIPrivateMessageForm']//*[contains(text(),'Cancel')]");
   // send messages

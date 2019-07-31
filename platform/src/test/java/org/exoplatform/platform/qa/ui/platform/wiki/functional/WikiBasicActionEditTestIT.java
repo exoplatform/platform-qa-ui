@@ -14,6 +14,7 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -162,6 +163,7 @@ public class WikiBasicActionEditTestIT extends Base {
      * - Page is edited
      */
     @Test
+    @Tag("wabis")
     public void test02_EditPageWhenTheTitleIsTheSameWithExistingPage() {
         info("Test 2: Edit page when the title is the same with existing page");
         info("Create a wiki page");
@@ -904,6 +906,7 @@ public class WikiBasicActionEditTestIT extends Base {
      * The draft version appears in the list
      */
     @Test
+    @Tag("wabis")
     public void test05_ResumeADraftAfterBrowserCrash() throws Exception {
         info("Test 5: Resume a draft after Browser crash");
         info("Create a wiki page");
@@ -1265,6 +1268,7 @@ public class WikiBasicActionEditTestIT extends Base {
      * Content of wiki page link is shown
      */
     @Test
+    @Tag("wabis")
     public void test10_EditWikiPageLink() {
         info("Test 10 Edit wiki page link");
         info("Create a wiki page 1");
@@ -1305,15 +1309,19 @@ public class WikiBasicActionEditTestIT extends Base {
         richTextEditor.editSimplePage(title4, "");
         richTextEditor.changeLink(label);
         richTextEditor.goToEditLink();
+        richTextEditor.editWikiPageLink("", label4, tooltip4);
+        richTextEditor.removeLink(content2);
+        getExoWebDriver().getWebDriver().navigate().refresh();
+        richTextEditor.goToWikiPageLink();
         richTextEditor.insertExistWikiPageLink(title2, label4, tooltip4, RichTextEditor.wikiPageLinkTab.All_pages);
         wikiManagement.saveAddPage();
-        wikiValidattions.verifyTitleWikiPage(title4);
+        wikiValidattions.verifyTitleWikiPage(title3);
         info("Content of wiki page link is shown");
-        wikiHomePage.goToAPage(title4);
+        wikiHomePage.goToAPage(title3);
         wikiManagement.viewInsertLink(label4);
         wikiValidattions.verifyPageContent(title2, content2);
         wikiHomePage.deleteWiki(title2);
-        wikiHomePage.deleteWiki(title4);
+        wikiHomePage.deleteWiki(title3);
         wikiHomePage.deleteWiki(title1);
 
     }
@@ -1360,6 +1368,7 @@ public class WikiBasicActionEditTestIT extends Base {
      * - The Launch Application is shown that allows selecting an email app to be redirected to the email
      */
     @Test
+    @Tag("wabis")
     public void test11_EditEmailAddress() {
         info("Test 11 Edit email address");
         info("Create a wiki page with email address");
@@ -1383,12 +1392,13 @@ public class WikiBasicActionEditTestIT extends Base {
         richTextEditor.editSimplePage(title2, "");
         richTextEditor.changeLink(label);
         richTextEditor.goToEditLink();
-        richTextEditor.insertEmailLink(address2, label2, "", true);
+        richTextEditor.insertWebLink(address2, label2, "", true);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(title2);
         info("Click on email link to verify that the link is avaiable");
         wikiHomePage.goToAPage(title2);
-        wikiManagement.viewInsertLink(label2);
+        info("Verify that the inserted link is shown in the page");
+        $(By.linkText(label2)).waitUntil(Condition.visible,Configuration.timeout);
         homePagePlatform.goToWiki();
         wikiHomePage.deleteWiki(title2);
     }
@@ -1572,6 +1582,7 @@ public class WikiBasicActionEditTestIT extends Base {
      * - Paragraph 2 is edited title successfully. There is no change for paragraph 1.
      */
     @Test
+    @Tag("wabis")
     public void test15_EditParagraphWhenTheLevelOfHeaderGreaterThanParagraphBelow() {
         info("Test 15 Edit Paragraph When The Level Of Header Greater Than Paragraph Below");
         info("Create a wiki page");

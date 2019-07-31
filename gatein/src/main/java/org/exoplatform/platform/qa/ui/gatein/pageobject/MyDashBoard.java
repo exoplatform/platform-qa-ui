@@ -10,6 +10,7 @@ import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -36,6 +37,7 @@ public class MyDashBoard {
         evt.waitForAndGetElement(ELEMENT_DASHBOARD_WORKSPACE_POPUP_TITLE, 2000, 0);
         info("The popup is shown");
         $(byXpath("//*[@class='GadgetTitle' and @title='${gadgetTitle}']".replace("${gadgetTitle}", gadgetTitle))).dragAndDropTo($(byXpath("//div[@id=\"GadgetContainer\"]"))).waitUntil(Condition.visible, Configuration.timeout);
+        sleep(2000);
         evt.click(ELEMENT_DASHBOARD_WORKSPACE_POPUP_CLOSE);
         info("The gadget is added to dashboard");
     }
@@ -82,8 +84,11 @@ public class MyDashBoard {
      */
     public void editMyDashboardDefaultTab(String name) {
         info("Click on add button");
+        sleep(2000);
         testBase.getExoWebDriver().getWebDriver().findElement(By.className("last")).click();
+        sleep(Configuration.timeout);
         $(byXpath(ELEMENT_MYDASH_DEFAULT_TAB_EDIT)).clear();
+        sleep(Configuration.timeout);
         $(byXpath(ELEMENT_MYDASH_DEFAULT_TAB_EDIT)).sendKeys(name);
         $(byXpath(ELEMENT_MYDASH_DEFAULT_TAB_EDIT)).sendKeys(Keys.ENTER);
     }

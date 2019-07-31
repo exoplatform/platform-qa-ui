@@ -1,7 +1,7 @@
 package org.exoplatform.platform.qa.ui.chat.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.*;
 import static junit.framework.TestCase.assertEquals;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_CATEGORY_OPTION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
@@ -13,6 +13,8 @@ import com.codeborne.selenide.Configuration;
 
 import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.SelenideElement;
+import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator;
 import org.openqa.selenium.By;
@@ -31,8 +33,9 @@ public class ChatManagement {
   }
 
   public void uploadFile(String file) {
-    ELEMENT_COLLABORATION_ACTIONS.click();
-    ELEMENT_CHAT_UPLOAD_FILE.click();
+    ELEMENT_COLLABORATION_ACTIONS.waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_CHAT_UPLOAD_FILE.waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(2000);
     ELEMENT_CHAT_INPUT_UPLOAD.uploadFromClasspath(file);
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byText(file)).waitUntil(Condition.appear,Configuration.timeout);
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byClassName("uiIconChatUpload")).waitUntil(Condition.appear, Configuration.timeout);
@@ -56,19 +59,21 @@ public class ChatManagement {
     }
   }
 
-  public void assignTaskInChat(String taskName, String DueDate, String... user) {
-    ELEMENT_CHAT_MEETTING_ACTIONS.click();
-    $(byClassName("meeting-action-task")).waitUntil(Condition.visible, Configuration.timeout).click();
-    if (taskName != null || taskName != "")
-      ELEMENT_CHAT_INPUT_TASKNAME.setValue(taskName);
-    if (user.length > 0) {
-      for (int i = 0; i < user.length; i++) {
-        ELEMENT_CHAT_INPUT_USERNAME_IN_ASSIGN_TASK.setValue(user[i]).pressEnter();
-      }
+  public void assignTaskInChat(String taskName, String... user) {
+
+    ELEMENT_COLLABORATION_ACTIONS.click();
+    $(byXpath("//div[@class='apps-item-icon']/i[@class='uiIconChatCreateTask']")).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_CHAT_TASK_NAME).setValue(taskName);
+    for (int i = 0; i <= user.length - 1; i++) {
+      ELEMENT_CHAT_ASSIGNEE_TASK.setValue(user[i]);
+      sleep(Configuration.collectionsTimeout);
+      ELEMENT_CHAT_RESULT_SEARCH_ASSIGNEE.waitUntil(Condition.visible, Configuration.timeout);
+      sleep(2000);
+      ELEMENT_CHAT_ASSIGNEE_TASK.pressEnter();
     }
-    if (DueDate != null || DueDate != "")
-      ELEMENT_CHAT_INPUT_DUE_TASK_DATE.setValue(DueDate);
-    ELEMENT_BUTTON_ADD_TASK.click();
+    ELEMENT_CHAT_DUE_DATE_TASK.click();
+    ELEMENT_CHAT_CURRENT_DATE_TASK.click();
+    ELEMENT_CHAT_POST_TASK_BUTTON.click();
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byLinkText(taskName)).shouldBe(Condition.visible);
   }
 
@@ -108,6 +113,32 @@ public class ChatManagement {
     ELEMENT_CHAT_CANCEL_BUTTON.click();
     ELEMENT_POPUP_CONTAINER.find(byText("Ask a Question")).shouldNot(Condition.appear);
   }
+
+  public void uploadFileChatUser(String file) {
+    ELEMENT_COLLABORATION_ACTIONS.waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_CHAT_UPLOAD_FILE.waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(2000);
+    ELEMENT_CHAT_INPUT_UPLOAD.uploadFromClasspath(file);
+    $(byXpath("//div[@class='message-content']/b/a[text()='${file}']".replace("${file}",file))).exists();
+    $(byXpath("//div[@class='message-content']/b/a[text()='${file}']/following::i[@class='uiIconChatUpload']".replace("${file}",file))).exists();
+  }
+
+  public void openMiniChat(String userChat, String userChatName) {
+    if (!$(byText(userChatName)).exists())
+      ELEMENT_CHAT_BUTTON_HIDE_OFF_LINE.click();
+    sleep(Configuration.timeout);
+    if ($(byXpath("(//div[@class='chat-contact']/div[contains(@style,'${userChat}')])[2]".replace("${userChat}",userChat))).exists())
+    {
+      $(byXpath("(//div[@class='chat-contact']/div[contains(@style,'${userChat}')])[2]".replace("${userChat}", userChat))).click();
+    }
+    else {
+      $(byXpath("//div[@class='chat-contact']/div[contains(@style,'${userChat}')]".replace("${userChat}", userChat))).click();
+    }
+    $(byXpath("//td[@id='profileName']/a[text()='${userChatName}']".replace("${userChatName}",userChatName))).click();
+    $(byXpath("(//span[@class='chat-label-status'])[2]")).waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(2000);
+    ELEMENT_MINI_CHAT_POPOUT_ICON.click();
+    refresh();  }
 
   public void addQuestionInChat(String question){
     ELEMENT_COLLABORATION_ACTIONS.click();
@@ -175,6 +206,17 @@ public class ChatManagement {
     assertEquals("Select Manually",ELEMENT_CHAT_SELECT_FILE.getText());
     ELEMENT_CHAT_CANCEL_UPLOAD_FILE_BUTTON.click();
     ELEMENT_POPUP_CONTAINER.find(byText("Upload File")).shouldNot(Condition.appear);
+  }
+
+  public void goToChatUser(String userChat){
+    if (!$(byText(PLFData.DATA_NAME_USER2)).exists())
+      ELEMENT_CHAT_BUTTON_HIDE_OFF_LINE.click();
+    sleep(Configuration.timeout);
+    $(byXpath("//div[@class='chat-contact']/div[contains(@style,'${userChat}')]".replace("${userChat}",userChat))).click();
+    if ($(byXpath("//i[@class='uiIconBannerChat uiIconLightGray']")).exists())
+      $(byXpath("//i[@class='uiIconBannerChat uiIconLightGray']")).waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(Configuration.timeout);
+    refresh();
   }
 
   public void checkShareLinPopUp(){
@@ -295,7 +337,8 @@ public class ChatManagement {
         ELEMENT_CHAT_DO_NOT_DISTURB_BUTTON_NOTIFICATION.parent().click();
         break;
       case "DesktopNotification":
-        ELEMENT_CHAT_DESKTOP_NOTIFICATION_BUTTON_.parent().click();
+        sleep(Configuration.timeout);
+        ELEMENT_CHAT_DESKTOP_NOTIFICATION_BUTTON_.parent().waitUntil(Condition.visible,Configuration.timeout).click();
         break;
       case "BipNotification":
         ELEMENT_CHAT_BIP_NOTIFICATION_BUTTON.parent().click();

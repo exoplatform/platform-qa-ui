@@ -598,7 +598,9 @@ public class ForumTopicTestIT extends Base {
     forumHomePage.goToHomeCategory();
     forumCategoryManagement.deleteCategory(name);
   }
+
   @Tag("FORUM-1317")
+  @Tag("fabis")
   @Test
   public  void test15_test_Lock_Topic(){
 
@@ -614,7 +616,7 @@ public class ForumTopicTestIT extends Base {
     forumForumManagement.addForumSimple(forum, "", desc);
     info("Add and go to a topic in the forums");
     forumForumManagement.goToStartTopic();
-    forumTopicManagement.startTopic(topic, topic, "", "data/forum/topic_attachment.txt");
+    forumTopicManagement.startTopic(topic, topic, "", "wiki_attachment.txt");
     info("Go to a topic");
     forumHomePage.goToTopic(topic);
     forumTopicManagement.selectItemMoreActionMenuTopic(ForumTopicManagement.specifMoreActionMenuTopic.LOCK);
@@ -624,7 +626,9 @@ public class ForumTopicTestIT extends Base {
     forumHomePage.goToHomeCategory();
     forumCategoryManagement.deleteCategory(category);
   }
+
   @Tag("FORUM-1382")
+  @Tag("fabis")
   @Test
   public void test15_VerifyRemoveAttachFile(){
     String category= "category" + getRandomNumber();
@@ -639,7 +643,7 @@ public class ForumTopicTestIT extends Base {
     forumForumManagement.addForumSimple(forum, "", desc);
     info("Add and go to a topic in the forums");
     forumForumManagement.goToStartTopic();
-    forumTopicManagement.startTopic(topic, topic, "", "data/forum/topic_attachment.txt");
+    forumTopicManagement.startTopic(topic, topic, "", "wiki_attachment.txt");
     info("Go to a topic");
     forumHomePage.goToTopic(topic);
     forumTopicManagement.selectItemMoreActionMenuTopic(ForumTopicManagement.specifMoreActionMenuTopic.EDIT);

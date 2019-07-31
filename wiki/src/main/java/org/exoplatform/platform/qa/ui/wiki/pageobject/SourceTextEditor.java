@@ -2,7 +2,7 @@ package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byName;
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -45,9 +45,18 @@ public class SourceTextEditor {
    */
   public void addSimplePage(String title, String content) {
     info("Input a title for the page");
+    if(!$(ELEMENT_TITLE_WIKI_INPUT).exists())
+    {
+      do {
+        //refresh();
+        testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+        sleep(2000);
+      }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
+    }
     $(ELEMENT_TITLE_WIKI_INPUT).setValue(title);
 
     info("Input a content for the page");
+    sleep(Configuration.timeout);
     $(ELEMENT_CONTENT_WIKI_INPUT).setValue(content);
   }
 
@@ -83,6 +92,14 @@ public class SourceTextEditor {
    */
   public void addSimplePageHasAutoSaveWithoutSave(String title, String content) {
     info("Input a title for the page");
+    if(!$(ELEMENT_TITLE_WIKI_INPUT).exists())
+    {
+      do {
+        //refresh();
+        testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+        sleep(2000);
+      }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
+    }
     String[] text;
     if (!title.isEmpty())
       $(ELEMENT_TITLE_WIKI_INPUT).setValue(title);

@@ -22,7 +22,7 @@ import sun.awt.AWTAccessor;
 import java.util.ArrayList;
 
 import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
@@ -107,6 +107,7 @@ public class GateinGlobalSettingsTestIT extends Base {
         userAddManagement.changePassWord(password, newpass, newpass);
         info("Login with new pass");
         manageLogInOut.signIn(username, newpass);
+        sleep(Configuration.timeout);
         $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible, Configuration.timeout);
         info("Clear Data");
         manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
@@ -263,6 +264,7 @@ public class GateinGlobalSettingsTestIT extends Base {
         navigationToolbar.goToUsersAndGroupsManagement();
         userAndGroupManagement.deleteUser(username);
     }
+
     @Tag("gatein")
     @Test
     public void test05_CheckSearchAndSelectPage() {
@@ -276,8 +278,8 @@ public class GateinGlobalSettingsTestIT extends Base {
         navigationmanagement.addNode(nodeName, "");
         navigationmanagement.inputInfoPageSelector(namePage, titlePage, true, false, false);
         navigationmanagement.checkSearchAndSelectPage();
-
     }
+
     @Tag("gatein")
     @Test
     public void test06_CheckMyDashboardDefaultTabModified() {
@@ -286,11 +288,13 @@ public class GateinGlobalSettingsTestIT extends Base {
         info("Sign in with ROOT account");
         manageLogInOut.signIn(username, PASS_ROOT);
         navigationToolbar.goToMyProfile();
+        refresh();
         userPageBase.goToDashboardTab();
         myDashBoard.editMyDashboardDefaultTab(tabName);
         info("Verify that the default tab is modified");
         $(byXpath("//span[@id='${name}']".replace("${name}",tabName))).isDisplayed();
     }
+
     @Tag("gatein")
     @Test
     public void test07_CheckGadgetAddedInMyDashboard() {
@@ -299,9 +303,11 @@ public class GateinGlobalSettingsTestIT extends Base {
         info("Sign in with ROOT account");
         manageLogInOut.signIn(username, PASS_ROOT);
         navigationToolbar.goToMyProfile();
+        refresh();
         userPageBase.goToDashboardTab();
         myDashBoard.addGadget(gadgetTitle);
     }
+
     @Tag("gatein")
     @Test
     public void test08_CheckCanSearchPageInPortalPage() {

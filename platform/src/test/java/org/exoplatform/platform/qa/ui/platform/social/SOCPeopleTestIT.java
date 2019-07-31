@@ -13,6 +13,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarL
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.exoplatform.platform.qa.ui.core.PLFData;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -313,6 +314,7 @@ public class SOCPeopleTestIT extends Base {
    * users
    */
   @Test
+  @Tag("sabis")
   public void test04_CheckPeopleListing() {
     info("test04_CheckPeopleListing");
     String username1 = "usernamea" + getRandomString();
@@ -357,6 +359,7 @@ public class SOCPeopleTestIT extends Base {
                           .parent()
                           .find(byText(connect))
                           .should(Condition.exist);
+    homePagePlatform.searchUsersPeople(username5);
     ELEMENT_CONTENT_PEOPLE.find(byText(username5 + " " + username5))
                           .parent()
                           .parent()

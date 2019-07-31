@@ -573,6 +573,7 @@ public class SOCNotificationLikeActivitiesTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
+  @Tag("sabis")
   public void test07_CheckLikeNotificationOnActivityWithAWikiPage() {
     String name = "name" + getRandomNumber();
     String content = "content" + getRandomNumber();

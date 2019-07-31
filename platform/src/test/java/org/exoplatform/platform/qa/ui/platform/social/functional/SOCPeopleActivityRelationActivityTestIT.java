@@ -189,6 +189,7 @@ public class SOCPeopleActivityRelationActivityTestIT extends Base {
    * of like is updated to -1
    */
   @Test
+  @Tag("sabis")
   public void test03_DislikeARelationActivityFromLikeIcon() {
 
     info("Add new user");

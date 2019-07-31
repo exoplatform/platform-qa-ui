@@ -9,7 +9,10 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLoca
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_DELETE_ACTIVITY_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 
+import org.exoplatform.platform.qa.ui.core.PLFData;
+import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -18,7 +21,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 
 /**
  * Created by exo on 23/10/17.
@@ -28,13 +30,31 @@ import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 public class SOCActivityAddTestIT extends Base {
   ActivityStream activityStream;
 
+  NavigationToolbar navigationToolbar;
+
+  ManageLogInOut manageLogInOut;
+
+  HomePagePlatform homePagePlatform;
+
+  ConnectionsManagement connectionsManagement;
+
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
     activityStream = new ActivityStream(this);
+    navigationToolbar = new NavigationToolbar(this);
+    homePagePlatform = new HomePagePlatform(this);
+    manageLogInOut = new ManageLogInOut(this);
+    connectionsManagement = new ConnectionsManagement(this);
+    if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
+      manageLogInOut.signOut();
+    }
+    manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);
   }
 
   @Test
+  @Tag("sabis")
   public void test02_Upload_File_Without_Text() {
     ELEMENT_TAB_LINK.click();
     refresh();
@@ -57,9 +77,10 @@ public class SOCActivityAddTestIT extends Base {
 
   @Test
   @Tag("PLF-7912")
+  @Tag("sabis")
   public void test02_CheckIconTitleWhenLikeActivity() {
     String activity1 = "activity1" + getRandomNumber();
-    ELEMENT_TAB_LINK.click();
+    ELEMENT_TAB_LINK.waitUntil(Condition.visible,Configuration.timeout).click();
     refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");

@@ -1,9 +1,7 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 import static io.netty.util.internal.SystemPropertyUtil.contains;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_BUTTON_CONFIRM_UPLOAD;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR;
@@ -123,8 +121,10 @@ public class UserProfilePage {
       evt.clickByJavascript(ELEMENT_CHANGE_AVATAR_LINK);
     else
       $(ELEMENT_CHANGE_AVATAR_LINK).click();
+    sleep(2000);
     ELEMENT_INPUT_UPLOAD_AVATAR.uploadFromClasspath("testavatar.png");
-    ELEMENT_BUTTON_CONFIRM_UPLOAD.click();
+    sleep(Configuration.timeout);
+    ELEMENT_BUTTON_CONFIRM_UPLOAD.waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_BUTTON_CONFIRM_UPLOAD.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR.waitUntil(Condition.visible,Configuration.timeout).click();
 
@@ -246,7 +246,11 @@ public class UserProfilePage {
     }
     info("-- update experience --");
     if (organization != null && organization != "") {
+      sleep(2000);
+      executeJavaScript("window.scrollBy(-200,0)");
+      sleep(2000);
       $(byXpath(ELEMENT_EXPERIENCE_COMPANY_INPUT.replace("${index}", index))).setValue(organization);
+    sleep(2000);
     }
     if (jobTitle != null && jobTitle != "") {
       $(byXpath(ELEMENT_EXPERIENCE_POSITION_INPUT.replace("${index}", index))).setValue(jobTitle);

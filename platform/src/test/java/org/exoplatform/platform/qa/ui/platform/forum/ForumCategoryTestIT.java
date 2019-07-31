@@ -120,6 +120,7 @@ public class ForumCategoryTestIT extends Base {
      */
 
     @Test
+    @Tag("fabis")
     public void test03_ExportAForum() {
         info("Test 3: Export a forum");
         String fileName = "fileName" + getRandomNumber();

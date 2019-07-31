@@ -2,10 +2,12 @@ package org.exoplatform.platform.qa.ui.selenium.platform.ecms;
 
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
@@ -75,8 +77,11 @@ public class ECMS_Permission {
     if (user == "user") {
       info("User is a user");
       info("Click on Select User button");
-      $(ELEMENT_PERMISSION_SELECTUSER).click();
+      $(ELEMENT_PERMISSION_SELECTUSER).waitUntil(Condition.visible, Configuration.timeout).click();
       info("Click on Add User button");
+      sleep(2000);
+      $(ELEMENT_SEARCH_USER_INPUT).setValue(name);
+      $(byXpath("//span[@class='searchByUser']//a[@data-original-title='Quick Search']")).waitUntil(Condition.visible,Configuration.timeout).click();
       $(By.xpath((ELEMENT_PERMISSION_USER_ADDUSER).replace("${name}", name))).click();
     }
     if (user == "membership") {

@@ -344,6 +344,7 @@ public class LikeCommentTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test07_CheckConnexionStatusButtonOfUsersLikeCommentInSpace() {
 
     String space = "space" + getRandomNumber();
@@ -418,6 +419,7 @@ public class LikeCommentTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test08_checkListOfUsersInToolTipWhen11UsersLikeComment() {
     String space = "space" + getRandomNumber();
     String activity1 = "activity1" + getRandomNumber();
@@ -1047,6 +1049,7 @@ public class LikeCommentTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test16_CheckConnectionStatusAfterPreviewDocumentInspace() {
     String activity1 = "activity1" + getRandomNumber();
     String comment = "comment" + getRandomNumber();
@@ -1054,7 +1057,7 @@ public class LikeCommentTestIT extends Base {
 
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
-    ELEMENT_TAB_LINK.click();
+    ELEMENT_SPACE_FILE_TAB.waitUntil(Condition.visible,Configuration.timeout).click();
     refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");

@@ -76,7 +76,7 @@ public class LocatorTestBase {
   public static final String          ELEMENT_INPUT_PASSWORD_ID                        = "UIPortalLoginFormControl";
 
   public static final By              ELEMENT_ACCOUNT_NAME_LINK                        =
-                                                                By.xpath("//*[@id='UIUserPlatformToolBarPortlet']/a/img");
+                                                                By.xpath("//div[@id='UIUserPlatformToolBarPortlet']/a/img");
 
   public static final By              ELEMENT_PLF_INFORMATION                          = By.id("platformInfoDiv");
 

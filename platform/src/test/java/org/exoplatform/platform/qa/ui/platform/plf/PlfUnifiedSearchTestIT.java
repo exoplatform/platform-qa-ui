@@ -456,7 +456,7 @@ public class PlfUnifiedSearchTestIT extends Base {
     String topic = "topic" + getRandomNumber();
     String topic1 = "topic" + getRandomNumber();
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpace(space1, space1, "hidden/close", "");
+    spaceManagement.addNewSpace(space1, space1, "close", "Yes", "");
     spaceHomePage.goToForumsTab();
     forumForumManagement.goToStartTopic();
     forumTopicManagement.startTopic(topic, topic, "", "");

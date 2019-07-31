@@ -94,6 +94,7 @@ public class SOCSpaceManagementTestIT extends Base {
      * Space settings.
      */
     @Test
+    @Tag("sabis")
     public void test01_AccessSpace() {
         info("Test 01: Access Space");
         String space = "space" + getRandomNumber();
@@ -109,7 +110,7 @@ public class SOCSpaceManagementTestIT extends Base {
         homePagePlatform.goToMySpaces();
         spaceManagement.addNewSpaceSimple(space, space);
         info("All default portlet is displayed");
-        $(ELEMENT_SPACE_MENU_ACTIVITY_PORTLET).should(Condition.exist);
+        $(byXpath("//i[@class='uiIconAppSpaceHomePage uiIconDefaultApp']")).should(Condition.exist);
         $(ELEMENT_SPACE_MENU_AGENDA_PORTLET).should(Condition.exist);
         $(ELEMENT_SPACE_MENU_DOCUMENT_PORTLET).should(Condition.exist);
         $(ELEMENT_SPACE_MENU_FORUM_PORTLET).should(Condition.exist);
@@ -130,6 +131,7 @@ public class SOCSpaceManagementTestIT extends Base {
      * <li>Post-Condition:</li>
      */
     @Test
+    @Tag("sabis")
     public void test07_AddApplicationOnSpace() {
         info("Test 07: Add application on Space");
         String space1 = "space1" + getRandomNumber();
@@ -147,7 +149,7 @@ public class SOCSpaceManagementTestIT extends Base {
         info("Verify that Application is added to space");
         if ($(ELEMENT_SPACE_MENU_MORE).is(Condition.exist)) {
             $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
-            ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("Bookmark")).should(Condition.exist);
+          $(byXpath("//div[@class=\"communityContainer\"]/span[text()='${app}']".replace("${app}",app))).exists();
         } else {
             ELEMENT_SPACE_MENU_TAB.find(byId("Bookmark")).should(Condition.exist);
         }
@@ -167,6 +169,7 @@ public class SOCSpaceManagementTestIT extends Base {
    * send request to join space.
    */
   @Test
+  @Tag("sabis")
   public void test03_SpaceList() {
     info("Test 03: Spaces list");
     String space = "space" + getRandomNumber();
@@ -205,6 +208,7 @@ public class SOCSpaceManagementTestIT extends Base {
    * successfully - All changed of space is saved. User see it when access space
    */
   @Test
+  @Tag("sabis")
   public void test05_EditASpace() {
     info("Test 05:Edit a space");
     String space = "space" + getRandomNumber();
@@ -246,6 +250,7 @@ public class SOCSpaceManagementTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
+  @Tag("sabis")
   public void test02_RemoveApplicationOnSpace() {
     info("Test 02: Remove application of space's toolbar");
     String space1 = "space1" + getRandomNumber();
@@ -263,7 +268,11 @@ public class SOCSpaceManagementTestIT extends Base {
 
     info("Verify that Application is added to space");
     $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
-    ELEMENT_LIST_OF_MORE_APPLICATION_IN_SPACE.find(byId("ForumsStatistic")).should(Condition.exist);
+    sleep(2000);
+    executeJavaScript("window.scrollBy(0,200)", "");
+    sleep(2000);
+    $(byXpath("//div[@class=\"communityContainer\"]/span[text()='${app}']".replace("${app}",app))).exists();
+    sleep(2000);
     spaceSettingManagement.removeApplication(app);
     if($(ELEMENT_SPACE_MENU_MORE).is(Condition.visible))
       $(ELEMENT_SPACE_MENU_MORE).click();
@@ -287,6 +296,7 @@ public class SOCSpaceManagementTestIT extends Base {
    * joins the space and is redirected to the initially requested page.
    */
   @Test
+  @Tag("sabis")
   public void test08_CheckAccessVisibleOpenSpace() {
     info("Test 08:Check access visible/open space");
     String space = "space" + getRandomNumber();
@@ -338,6 +348,7 @@ public class SOCSpaceManagementTestIT extends Base {
    * [Find Spaces] - User2 is redirected to Spaces directory page
    */
   @Test
+  @Tag("sabis")
   public void test09_CheckAccessHiddenSpace() throws Exception {
     info("Test 09:Check access hidden space");
     String space = "space" + getRandomNumber();
@@ -389,11 +400,12 @@ public class SOCSpaceManagementTestIT extends Base {
    * administrator to the Closed space to access this page.
    */
   @Test
+  @Tag("sabis")
   public void test10_CheckAccessVisibleCloseSpace() throws Exception {
     info("Test 10:Check access visible/close space");
     String space = "space" + getRandomNumber();
     String[] arrayRight = { "close" };
-    String mess = " You must be invited by an administrator to the space " + space + " to access this page.";
+    String mess = "This page is in a restricted area. Get an invitation by a manager of space '" + space + "' to access it.";
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
     String username2 = "usernameb" + getRandomString();
@@ -419,6 +431,7 @@ public class SOCSpaceManagementTestIT extends Base {
     open(urlSpace);
     homePagePlatform.refreshUntil($(ELEMENT_SPACE_ACCESS_SPACE_DENIED),Condition.visible,2000);
     $(ELEMENT_SPACE_ACCESS_SPACE_DENIED).is(Condition.visible);
+    sleep(2000);
     $(ELEMENT_SPACE_ACCESS_SPACE_DENIED_INFO).shouldHave(Condition.text(mess));
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
@@ -441,6 +454,7 @@ public class SOCSpaceManagementTestIT extends Base {
    * page remains
    */
   @Test
+  @Tag("sabis")
   public void test11_CheckAccessVisibleValidationSpace() {
     info("Test 11:Check access visible/validation space");
     String space = "space" + getRandomNumber();
@@ -458,7 +472,7 @@ public class SOCSpaceManagementTestIT extends Base {
 
     info("Create a space");
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space);
+    spaceManagement.addNewSpace(space, space, "validation", "No", "");
 
     spaceManagement.goToActivityStreamTab();
     String urlSpace = url();
@@ -616,6 +630,7 @@ public class SOCSpaceManagementTestIT extends Base {
 
   }
     @Tag("SOC-6067")
+    @Tag("sabis")
     @Test
     public void test15_checkNOtPermissionToEditSpaceApp() {
         String space = "space" + getRandomNumber();

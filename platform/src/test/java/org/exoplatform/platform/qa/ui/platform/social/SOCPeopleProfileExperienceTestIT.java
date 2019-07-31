@@ -128,6 +128,7 @@ public class SOCPeopleProfileExperienceTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test02_CheckOtherExperienceSection() {
     info("Test 1: Check my Experience section");
     String organization = "organization" + getRandomString();

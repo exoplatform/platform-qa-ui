@@ -111,6 +111,7 @@ public class Wiki_BasicActionAddDraftOthersTemplateTestIT extends Base {
    * is shown
    */
   @Test
+  @Tag("wabis")
   public void test02_PreviewAPage() {
     info("Test 2: Preview a page");
     info("Go to Add a Wiki page");

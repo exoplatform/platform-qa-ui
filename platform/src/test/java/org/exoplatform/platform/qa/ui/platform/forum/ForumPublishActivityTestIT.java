@@ -14,6 +14,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -93,12 +94,13 @@ public class ForumPublishActivityTestIT extends Base {
    */
   public void deleteDataTest() {
     info("Delete data test");
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.visible,Configuration.timeout).click();
     executeJavaScript("window.scrollBy(0,-550)");
+    sleep(Configuration.timeout);
     homePagePlatform.goToForum();
     forumHomePage.goToHomeCategory();
     info("Delete catefory");
-    $(byText(nameCat)).click();
+    $(byText(nameCat)).waitUntil(Condition.visible,Configuration.timeout).click();
     forumCategoryManagement.deleteCategory(nameCat);
     info("Finished deleting data test");
   }
@@ -326,6 +328,7 @@ public class ForumPublishActivityTestIT extends Base {
     deleteDataTest();
     homePagePlatform.goToHomePage();
     homePagePlatform.refreshUntil($(byText(topic1)),Condition.not(Condition.exist),2000);
+    sleep(Configuration.timeout);
     info("Verify that the topic's activity is deleted after the topic is deleted");
     $(byText(topic1)).shouldNot(Condition.exist);
     info("the topic's activity is deleted sucessfully");
@@ -361,6 +364,7 @@ public class ForumPublishActivityTestIT extends Base {
     homePagePlatform.goToHomePage();
     homePagePlatform.refreshUntil($(byText(comment)),Condition.exist,1000);
     info("Verify that topic's activity is added to the stream");
+    sleep(Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
     info("The topic's activity is added to the stream successfully");
     deleteDataTest();
@@ -582,13 +586,13 @@ public class ForumPublishActivityTestIT extends Base {
     info("Add a comment to the topic's activity");
     activityStream.checkActivity(topic);
     String id = $(byText(topic)).parent().parent().parent().parent().getAttribute("id").split("ActivityContextBox")[1];
-    activityStream.addcomment_to_activity(id);
+    activityStream.addcomment_to_activity(id, comment);
     info("Mouse over on the comment");
-    // mouseOver(ELEMENT_COMMENT_TEXT.replace("${activityText}",topic).replace("${commentText}",comment),true);
-    $(byId(ELEMENT_COMMENT_BLOC.replace("{id}", id))).click();
+    $(byId(ELEMENT_COMMENT_BLOC.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(byId("dropDownEditCommentcomment{id}".replace("{id}", String.valueOf(Integer.valueOf(id) + 1)))).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(byId("ViewCommentcomment{id}".replace("{id}", String.valueOf(Integer.valueOf(id) + 1)))).waitUntil(Condition.visible, Configuration.timeout).click();
     info("Verifyt that View is shown");
     info("Click on the View icon");
-    $(byClassName("viewComment")).click();
     info("Verify that the page redirects to related reply in the forum");
     executeJavaScript("window.scrollBy(0,-550)");
     $(byText(topic)).should(Condition.appears);

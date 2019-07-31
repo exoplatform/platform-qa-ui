@@ -48,6 +48,7 @@ public class WikiMacroInsertTestIT extends Base {
   }
 
   @Test
+  @Tag("6")
   @Tag("WIKI-1292")
   public void test01_InsertSectionMacro() {
     String title = "title" + getRandomNumber();

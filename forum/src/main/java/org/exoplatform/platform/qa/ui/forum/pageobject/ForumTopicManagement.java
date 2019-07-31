@@ -8,6 +8,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 
 import com.codeborne.selenide.Condition;
@@ -19,6 +20,7 @@ import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.interactions.Actions;
 
 public class ForumTopicManagement {
 
@@ -386,7 +388,9 @@ public class ForumTopicManagement {
    */
   public void deleteTopic() {
     info("Delete the topic");
+    sleep(Configuration.timeout);
     selectItemMoreActionMenuTopic(specifMoreActionMenuTopic.DELETE);
+    sleep(Configuration.timeout);
   }
 
   /**
@@ -470,7 +474,7 @@ public class ForumTopicManagement {
 
     if (!pathFile.isEmpty() || !fileName.isEmpty()) {
       info("click on Attached file button");
-      $(ELEMENT_START_TOPIC_ATTACH_FILE).click();
+      $(ELEMENT_START_TOPIC_ATTACH_FILE).waitUntil(visible,Configuration.timeout).click();
       info("Verify that upload button is shown");
       $(ELEMENT_UPLOAD_POPUP_FILE).should(Condition.exist);
       info("Attached file");
@@ -500,13 +504,18 @@ public class ForumTopicManagement {
     $(ELEMENT_START_TOPIC_POPUP_TITLE_FILED).val(title);
     info("Input the message:" + message);
     $(ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR).click();
+    sleep(Configuration.timeout);
     switchTo().frame(0);
     $(byXpath("/html/body")).sendKeys(message);
     switchTo().defaultContent();
     info("click on Attached file button");
+    sleep(Configuration.timeout);
     if(fileName[0]!=""){
     for (int i=0;i<=fileName.length-1;i++){
-      $(ELEMENT_START_TOPIC_ATTACH_FILE).click();
+      $(ELEMENT_START_TOPIC_ATTACH_FILE).shouldBe(visible);
+      Actions action = new Actions(this.testBase.getExoWebDriver().getWebDriver());
+      $(ELEMENT_START_TOPIC_ATTACH_FILE).waitUntil(visible, Configuration.timeout);
+      action.moveToElement($(ELEMENT_START_TOPIC_ATTACH_FILE)).click().perform();
       $(By.className("file")).uploadFromClasspath(fileName[i]);
       $(ELEMENT_SAVE_BTN).click();
     }}

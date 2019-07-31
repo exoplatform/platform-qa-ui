@@ -1,8 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.ecms;
 
 import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -62,6 +61,7 @@ public class EcmsSEInfoTestIT extends Base {
    * action on it as his rights
    */
   @Test
+  @Tag("eabis")
   public void test01_AddPermission() {
     info("Test 1: Add Permission");
     info("Get data test");
@@ -101,6 +101,7 @@ public class EcmsSEInfoTestIT extends Base {
   }
 
   @Test
+  @Tag("eabis")
   public void test02_EditPermission() {
     info("Test 1: Add Permission");
     info("Get data test");
@@ -140,6 +141,7 @@ public class EcmsSEInfoTestIT extends Base {
   }
 
   @Test
+  @Tag("eabis")
   public void test_03DeletePermission() {
     info("Test 1: Add Permission");
     info("Get data test");
@@ -187,20 +189,22 @@ public class EcmsSEInfoTestIT extends Base {
    * Expected Outcome: View matadata form is shown
    */
   @Test
+  @Tag("eabis")
   public void test04_ViewMetadata() {
     info("Test 04: View metadata");
 
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("sites/intranet/documents", "Collaboration");
-    $(byClassName("uiIconEcmsViewWeb")).click();
-    siteExplorerHome.uploadFile("data/ecms/uploadFile.pdf");
-    siteExplorerHome.selectNode("uploadFile.pdf");
+    $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(Configuration.timeout);
+    siteExplorerHome.uploadFile("testavatar.pdf");
+    siteExplorerHome.selectNode("testavatar.pdf");
     $(byClassName("uiIconEcmsViewAdmin")).click();
     siteExplorerHome.viewMetadata();
     info("Delete data test");
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     refresh();
-    siteExplorerHome.deleteData("uploadFile.pdf");
+    siteExplorerHome.deleteData("testavatar.pdf");
   }
 
 }

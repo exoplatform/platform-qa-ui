@@ -12,6 +12,7 @@ import org.junit.Assert;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_SAVE_BTN;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -69,10 +70,11 @@ public class ForumCategoryManagement {
      * @param item enum
      */
     public void selectItemManageCategoryMenu(specifManageCategoryMenu item) {
+        sleep(Configuration.timeout);
         info("Waiting manage menu is shown");
         $(ELEMENT_MENU_MANAGE_CATEGORY).waitUntil(appears, Configuration.timeout);
         info("Click on Manage menu");
-        $(ELEMENT_MENU_MANAGE_CATEGORY).click();
+        $(ELEMENT_MENU_MANAGE_CATEGORY).waitUntil(visible,Configuration.timeout).click();
         switch (item) {
             case EDIT_CATEGORY:
                 info("click on Edit link");
@@ -133,6 +135,7 @@ public class ForumCategoryManagement {
      */
     public void deleteCategory(String nameCat) {
         // TODO Auto-generated method stub
+        sleep(Configuration.timeout);
         info("Wait the category is shown");
         if ($(ELEMENT_MENU_MANAGE_CATEGORY).is(not(exist))) {
             ELEMENT_CAT_CONTAINER.find(byText(nameCat)).waitUntil(appears, Configuration.timeout).click();
@@ -140,6 +143,7 @@ public class ForumCategoryManagement {
         info("Select Delete link");
         selectItemManageCategoryMenu(specifManageCategoryMenu.DELETE);
         info("Verify that the category is deleted");
+        sleep(Configuration.timeout);
         $(withText(nameCat)).shouldNot(exist);
         info("The category is deleted successfully");
 
@@ -164,12 +168,16 @@ public class ForumCategoryManagement {
         selectItemManageCategoryMenu(specifManageCategoryMenu.EXPORT_FORUM);
         info("Uncheck All check boxes");
         ELEMENT_CHECKBOX_ALL_FORUM_CATEGORIE.click();
+        sleep(2000);
         info("Select check box of the forum");
         ELEMENT_CHECKBOX_SELECT_ONE_FORUM_CATEGORIE.click();
+        sleep(2000);
         info("input name");
         $(ELEMENT_FILENAME_INPUT).setValue(fileName);
+        sleep(2000);
         info("Save all changes");
-        $(ELEMENT_SAVE_BTN).click();
+        $(byXpath(ELEMENT_SAVE_BTN)).click();
+        sleep(Configuration.timeout);
     }
 
     /**

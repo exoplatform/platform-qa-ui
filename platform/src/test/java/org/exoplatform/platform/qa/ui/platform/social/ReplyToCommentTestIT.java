@@ -302,6 +302,7 @@ public class ReplyToCommentTestIT extends Base {
 
     //Check that quote a post in forum turns to reply to a comment in activity stream
     @Test
+    @Tag("sabis")
     public void test08_CheckQuoteInForumTurnsToReplyToCommentInAS() {
         String title = "Title" + getRandomNumber();
         String content = "Content" + getRandomNumber();
@@ -335,6 +336,7 @@ public class ReplyToCommentTestIT extends Base {
         forumTopicManagement.quotePost(content, quote);
         homePagePlatform.goToHomePage();
         homePagePlatform.refreshUntil($(byText(quote)),Condition.visible,1000);
+        sleep(Configuration.timeout);
         String comment_parent_id = $(byText(quote)).parent().parent().parent().parent().getAttribute("data-comment-id");
         assertEquals($(byText(quote)).parent()
                 .parent()

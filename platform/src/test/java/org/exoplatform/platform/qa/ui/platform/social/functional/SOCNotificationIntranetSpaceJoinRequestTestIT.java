@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.platform.social.functional;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
@@ -91,6 +92,7 @@ public class SOCNotificationIntranetSpaceJoinRequestTestIT extends Base {
    * Data: Expected Outcome: - The user is redirect to the Space 1
    */
   @Test
+  @Tag("sabis")
   public void test01_CheckSpaceJoinRequestNotification() {
     info("Test 1: Check Space Join Request notification");
     String username1 = "usernamea" + getRandomString();
@@ -112,7 +114,7 @@ public class SOCNotificationIntranetSpaceJoinRequestTestIT extends Base {
     String spaceName = "spaceName" + getRandomNumber();
     String spaceDes = "spaceDes" + getRandomNumber();
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+    spaceManagement.addNewSpace(spaceName, spaceDes, "validation", "No", "");
 
     info("User B login");
     manageLogInOut.signIn(username2, password);
@@ -160,6 +162,7 @@ public class SOCNotificationIntranetSpaceJoinRequestTestIT extends Base {
    * the Space 1
    */
   @Test
+  @Tag("sabis")
   public void test02_AcceptASpaceJoinRequestFromNotification() throws Exception {
     info("Test 2: Accept a Space Join Request from notification");
     String username1 = "usernamea" + getRandomString();
@@ -181,7 +184,7 @@ public class SOCNotificationIntranetSpaceJoinRequestTestIT extends Base {
     String spaceName = "spaceName" + getRandomNumber();
     String spaceDes = "spaceDes" + getRandomNumber();
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+    spaceManagement.addNewSpace(spaceName, spaceDes, "validation", "No", "");
 
     info("User B login");
     manageLogInOut.signIn(username2, password);
@@ -210,7 +213,7 @@ public class SOCNotificationIntranetSpaceJoinRequestTestIT extends Base {
     intranetNotification.checkStatusSpace(statusJoin, spaceName);
     info("The user is redirected to the Space");
     intranetNotification.goToDetailJoinSpace(username2, true);
-    $(ELEMENT_SPACE_MENU_ACTIVITY_PORTLET).waitUntil(Condition.visible, Configuration.timeout);
+    $(byXpath("//div[@id='UISpaceActivityStreamPortlet']")).waitUntil(Condition.visible,Configuration.timeout);
     manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username2);
@@ -235,6 +238,7 @@ public class SOCNotificationIntranetSpaceJoinRequestTestIT extends Base {
    * notification message is automatically hidden from the list
    */
   @Test
+  @Tag("sabis")
   public void test03_RefuseASpaceJoinRequestFromNotification() {
     info("Test 3: Refuse a Space Join Request from notification");
     String username1 = "usernamea" + getRandomString();
@@ -256,7 +260,7 @@ public class SOCNotificationIntranetSpaceJoinRequestTestIT extends Base {
     String spaceName = "spaceName" + getRandomNumber();
     String spaceDes = "spaceDes" + getRandomNumber();
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+    spaceManagement.addNewSpace(spaceName, spaceDes, "validation", "No", "");
 
     info("User B login");
     manageLogInOut.signIn(username2, password);
@@ -301,6 +305,7 @@ public class SOCNotificationIntranetSpaceJoinRequestTestIT extends Base {
    * Outcome: - The notification is not displayed / available in the page
    */
   @Test
+  @Tag("sabis")
   public void test04_CheckViewAllAfterRefusingASpaceJoinRequest() throws Exception {
     info("Test 4: Check View All after refusing a Space Join Request");
     String username1 = "usernamea" + getRandomString();
@@ -322,7 +327,7 @@ public class SOCNotificationIntranetSpaceJoinRequestTestIT extends Base {
     String spaceName = "spaceName" + getRandomNumber();
     String spaceDes = "spaceDes" + getRandomNumber();
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+    spaceManagement.addNewSpace(spaceName, spaceDes, "validation", "No", "");
 
     info("User B login");
     manageLogInOut.signIn(username2, password);
@@ -369,6 +374,7 @@ public class SOCNotificationIntranetSpaceJoinRequestTestIT extends Base {
    * displayed is the last one updated
    */
   @Test
+  @Tag("sabis")
   public void test05_CheckViewAllAfterAcceptingASpaceJoinRequest() throws Exception {
     info("Test 5: Check View All after accepting a Space Join Request");
     String username1 = "usernamea" + getRandomString();
@@ -390,7 +396,7 @@ public class SOCNotificationIntranetSpaceJoinRequestTestIT extends Base {
     String spaceName = "spaceName" + getRandomNumber();
     String spaceDes = "spaceDes" + getRandomNumber();
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+    spaceManagement.addNewSpace(spaceName, spaceDes, "validation", "No", "");
 
     info("User B login");
     manageLogInOut.signIn(username2, password);

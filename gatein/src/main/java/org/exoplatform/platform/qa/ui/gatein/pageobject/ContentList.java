@@ -1,7 +1,8 @@
 package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.ELEMENT_ANSWER_FORM_SAVE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 
 import com.codeborne.selenide.Condition;
@@ -34,9 +35,10 @@ public class ContentList {
       String[] arrayPath = path.split("/");
       if($(byXpath(ELEMENT_MULTIPLE_CONTENT_POPUP_FILE.replace("${content}",content))).is(Condition.not(Condition.visible))){
       for (String arrayElement : arrayPath) {
-        $(byXpath(ELEMENT_MULTIPLE_CONTENT_POPUP_NODE_FOLDER.replace("${node}", arrayElement))).click();
+        $(byXpath(ELEMENT_MULTIPLE_CONTENT_POPUP_NODE_FOLDER.replace("${node}", arrayElement))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
       }}
     if (content != "" || content != null) {
+      sleep(Configuration.timeout);
       $(byXpath(ELEMENT_MULTIPLE_CONTENT_POPUP_FILE.replace("${content}", content))).waitUntil(Condition.visible,Configuration.timeout);
       $(byXpath(ELEMENT_MULTIPLE_CONTENT_POPUP_FILE.replace("${content}",content))).click();
     }

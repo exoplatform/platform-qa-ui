@@ -78,6 +78,7 @@ public class MiniChatTestIT extends Base {
   }
 
   @Test
+  @Tag("cab")
   public void test01_OpenMiniChatFromUserPopUpInConnection() {
     String username = "username" + getRandomNumber();
     String password = "123456";

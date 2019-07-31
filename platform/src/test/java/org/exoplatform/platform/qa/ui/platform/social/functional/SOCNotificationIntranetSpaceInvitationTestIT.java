@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.platform.social.functional;
 
 import static com.codeborne.selenide.Condition.not;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
@@ -183,6 +184,7 @@ public class SOCNotificationIntranetSpaceInvitationTestIT extends Base {
    * - $DATE is the date of the notification
    */
   @Test
+  @Tag("sabis")
   public void test02_AcceptASpaceInvitationFromNotification() {
 
     info("Test 2: AcceptASpaceInvitationFromNotification");
@@ -228,7 +230,7 @@ public class SOCNotificationIntranetSpaceInvitationTestIT extends Base {
     intranetNotification.acceptRqConnection(spaceName);
     homePagePlatform.goToHomePage();
     homePagePlatform.goToSpecificSpace(spaceName);
-    $(ELEMENT_SPACE_MENU_ACTIVITY_PORTLET).waitUntil(Condition.visible, Configuration.timeout);
+    $(byXpath("//div[@id='UISpaceActivityStreamPortlet']")).waitUntil(Condition.visible,Configuration.timeout);
     navigationToolbar.goToIntranetNotification();
     String statusJoin = "You joined";
     intranetNotification.checkStatusSpace(statusJoin, spaceName);
@@ -459,16 +461,16 @@ public class SOCNotificationIntranetSpaceInvitationTestIT extends Base {
   @Test
   public void test06_CheckRefuseInvitation() throws Exception {
     homePagePlatform.goToPeople();
-    spaceSettingManagement.searchUsersPeople(DATA_USER3);
+    homePagePlatform.searchUsersPeople(DATA_USER3);
     spaceSettingManagement.connectSearchedUser();
     manageLogInOut.signIn(DATA_USER3, DATA_PASS);
     spaceSettingManagement.declineNotificationConnectRequest(DATA_NAME_USER1);
     homePagePlatform.goToPeople();
-    spaceSettingManagement.searchUsersPeople(DATA_USER1);
+    homePagePlatform.searchUsersPeople(DATA_USER1);
     spaceSettingManagement.checkUserNotConnected();
     manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
     homePagePlatform.goToPeople();
-    spaceSettingManagement.searchUsersPeople(DATA_USER3);
+    homePagePlatform.searchUsersPeople(DATA_USER3);
     spaceSettingManagement.checkUserNotConnected();
   }
 }

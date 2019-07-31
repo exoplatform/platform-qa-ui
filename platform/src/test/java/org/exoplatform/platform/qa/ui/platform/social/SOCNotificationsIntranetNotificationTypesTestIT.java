@@ -1401,6 +1401,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
    * to : $AVATAR $USER joined $SPACE space. $DATE
    */
   @Test
+  @Tag("sabis")
   public void test15_SpaceJoinRequestIntranetNotification_Accept() {
     String space = "space" + getRandomNumber();
 
@@ -1422,7 +1423,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
 
     info("Add a new space");
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space);
+    spaceManagement.addNewSpace(space, space,"validation", "No", "");
 
     info("user requests to join space");
     manageLogInOut.signIn(username2, password);
@@ -1474,6 +1475,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
    * - $DATE is the date of the notification
    */
   @Test
+  @Tag("sabis")
   public void test16_SpaceJoinRequestIntranetNotification_Refuse() {
     String space = "space" + getRandomNumber();
 
@@ -1495,7 +1497,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
 
     info("Add a new space");
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space);
+    spaceManagement.addNewSpace(space, space, "validation", "No", "");
 
     info("user requests to join space");
     manageLogInOut.signIn(username2, password);
@@ -1504,6 +1506,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
 
     info("check notification in notification list");
     manageLogInOut.signIn(username1, password);
+    sleep(Configuration.timeout);
     ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_ALERT_NOTIFICATION.click();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).parent().shouldHave(text(username2 + " " + username2
@@ -1533,6 +1536,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
    * is the date of the notification.
    */
   @Test
+  @Tag("sabis")
   public void test17_NewUserIntranetNotification() {
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
@@ -1889,6 +1893,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test15_2_SpaceJoinRequestIntranetNotificationWhenNotificationIsDisabled() {
     String space = "space" + getRandomNumber();
 
@@ -2349,6 +2354,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
   }
 
   @Test
+  @Tag("sabis")
   public void test03_3CommentsIntranetNotificationMergedInSpaceWhenNotificationIsDisabled() {
     // Setup data test
     String username1 = "usernamea" + getRandomString();
@@ -2414,7 +2420,10 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToMySpaces();
     spaceManagement.goToAllSpacesTab();
+    spaceManagement.searchSpace(space);
+    sleep(2000);
     ELEMENT_SPACES_LIST.find(byText(space)).click();
+    sleep(2000);
     activityStream.commentActivity(activity, comment4);
     info("Check comment notification in the notification list");
     manageLogInOut.signIn(username1, password);

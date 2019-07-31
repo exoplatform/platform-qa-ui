@@ -203,6 +203,7 @@ public class SOCPeopleProfileViewProfileTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
+  @Tag("sabis")
   public void test02_CheckMyProfilePageAfterAllInformationIsFilled() {
     info("Test 2: Edit Contact Information");
     String jobTitle = "jobTitle" + getRandomNumber();

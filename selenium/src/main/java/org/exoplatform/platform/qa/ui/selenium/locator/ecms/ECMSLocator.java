@@ -214,7 +214,7 @@ public class ECMSLocator {
           By.xpath("//*[@class='uiIconPlus uiIconLightGray']");
 
   public static final By ELEMENT_SEO_LANGUAGE_SELECTBOX =
-          By.xpath("//*[@name='language']");
+          By.xpath("//select[@name='language']");
 
   public static final By ELEMENT_SEO_TITLEBOX =
           By.xpath("//*[@id='title']");

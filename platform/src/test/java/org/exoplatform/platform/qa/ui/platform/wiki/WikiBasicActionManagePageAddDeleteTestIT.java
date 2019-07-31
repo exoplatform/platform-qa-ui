@@ -86,6 +86,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
    */
 
   @Test
+  @Tag("wabis")
   public void test03_AutoSaveWhenAddingPage() {
     info("Test 3: Auto Save when adding page");
 
@@ -101,7 +102,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
     info("Go to my draft");
     $(ELEMENT_SEARCH_BROWSERS_DROPDOWN).click();
     $(ELEMENT_SEARCH_BROWSERS_MY_DRAFT).click();
-    wikidraftpage.deleteDraft(title);
+    wikidraftpage.deleteDraft();
     info("Delete the page");
 
   }
@@ -175,6 +176,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
   }
 
   @Test
+  @Tag("wabis")
   public void test10_AutoSaveWhenAddingPageFromTwoColumnLayoutTemplate() {
     info("Test 06: Auto Save when adding page from template");
     String title = "title1" + getRandomNumber();
@@ -208,6 +210,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
    * Outcome: Delete draft successfully and don't show in draft list
    */
   @Test
+  @Tag("wabis")
   public void test07_11_Resume_Delete_ADraftWithSaveAsNormal() {
     info("Test 07: Resume a draft with save as normal");
     String title = "title" + getRandomNumber();
@@ -230,13 +233,14 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
     ELEMENT_DRAFT_NEW_PAGE.find(byText(title + "(New Page)")).shouldNot(Condition.exist);
 
     info("Test 11: Delete a draft");
-    wikidraftpage.deleteDraft(title);
+    wikidraftpage.deleteDraft();
     info("Delete the page ");
     homePagePlatform.goToWiki();
     wikiHomePage.deleteWiki(newTitle);
   }
 
   @Test
+  @Tag("wabis")
   public void Auto_save_message() {
     info("Test: Check auto save message");
     String title = "title" + getRandomNumber();
@@ -246,7 +250,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
     wikiHomePage.goToMyDraft();
     info("The draft is displayed in the list");
     info("Test 11: Delete a draft");
-    wikidraftpage.deleteDraft(title);
+    wikidraftpage.deleteDraft();
     info("Delete the page ");
     homePagePlatform.goToWiki();
   }
@@ -267,6 +271,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
   }
 
   @Test
+  @Tag("wabis")
   public void test06_2_AutoSaveWhenAddingPageFromThreeColumnLayoutTemplateOnSpace() {
     info("Test 06: Auto Save when adding page from template");
     String title = "title1" + getRandomNumber();

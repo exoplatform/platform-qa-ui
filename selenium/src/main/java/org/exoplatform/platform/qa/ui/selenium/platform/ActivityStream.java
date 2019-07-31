@@ -103,6 +103,7 @@ public class ActivityStream {
      */
     public void checkActivity(String name) {
         info("Verify that the activity of the name:" + name + " is shown");
+        sleep(Configuration.timeout);
         $(byText(name)).waitUntil(Condition.visible, Configuration.timeout);
         info("The activity of the name:" + name + " is shown successfully");
     }
@@ -137,6 +138,9 @@ public class ActivityStream {
      */
     public void checkCommentOfActivity(String activity, String comment) {
         info("Verify that the comment is added");
+        sleep(Configuration.collectionsTimeout);
+        $(byXpath("//div[@class='titleWiki']/a[text()='${activity}']".replace("${activity}",activity))).should(Condition.exist);
+        sleep(2000);
         ELEMENT_ACTIVITY_STREAM_CONTAINER.find(byText(comment)).should(Condition.exist);
         info("The comment is added successfully");
     }
@@ -250,13 +254,16 @@ public class ActivityStream {
         if (status == null)
             status = "Draft";
         // check icon and title
-        $(byXpath(ELEMENT_ACTIVITY_WEBCONTENT_TITLE.replace("${title}", title))).waitUntil(Condition.visible, Configuration.timeout);
+        sleep(3000);
+        $(byXpath(ELEMENT_ACTIVITY_WEBCONTENT_TITLE.replace("${title}", title))).exists();
+        sleep(Configuration.timeout);
         $(byXpath(ELEMENT_ACTIVITY_WEBCONTENT_CHECK_VERSION.replace("${title}", title)
                 .replace("{$version}", version))).waitUntil(Condition.visible,
-                Configuration.timeout);
+                Configuration.timeout).exists();
+        sleep(Configuration.timeout);
         $(byXpath(ELEMENT_ACTIVITY_WEBCONTENT_CHECK_STATUS.replace("${title}", title)
                 .replace("{$status}", status))).waitUntil(Condition.visible,
-                Configuration.timeout);
+                Configuration.timeout).exists();
     }
 
     /**
@@ -1238,6 +1245,9 @@ public class ActivityStream {
      * @param activityText input a text (String)
      */
     public void unlikeActivity(String activityText) {
+        sleep(Configuration.timeout);
+        testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+        sleep(2000);
         int numberLike = Integer.parseInt($(byText(activityText)).parent()
                 .parent()
                 .parent()
@@ -1247,8 +1257,11 @@ public class ActivityStream {
                 .parent()
                 .getText()
                 .split(" ")[1]);
-        $(byText(activityText)).parent().parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).click();
+        sleep(Configuration.timeout);
+        $(byText(activityText)).parent().parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).waitUntil(Condition.visible,Configuration.timeout).click();
+        sleep(Configuration.timeout);
         refresh();
+        sleep(Configuration.timeout);
         String numberAfterUnlike = String.valueOf(numberLike - 1);
         $(byText(activityText)).parent()
                 .parent()
@@ -1337,9 +1350,8 @@ public class ActivityStream {
         $(By.xpath(ELEMENT_ACTIVITY_NOT_ANY_COMMENT.replace("$title", title))).waitUntil(Condition.visible, Configuration.timeout);
     }
 
-    public void addcomment_to_activity(String id) {
+    public void addcomment_to_activity(String id, String comment) {
         info("Add Comment");
-        String comment = "Comment" + getRandomNumber();
         executeJavaScript("window.scrollBy(0,150)");
         $(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
         // insert comment
@@ -1663,8 +1675,10 @@ public class ActivityStream {
         // click on the activity to appear the delete button
         $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
         // click on delete button
-        $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
-        ELEMENT_DELETE_POPUP_OK.click();
+        sleep(Configuration.timeout);
+        $(byXpath("//i[@class='uiIconActivityAction uiIconLightGray']")).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).waitUntil(Condition.visible,Configuration.timeout).click();
+        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible,Configuration.timeout).click();
         ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     }
 

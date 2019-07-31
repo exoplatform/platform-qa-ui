@@ -523,6 +523,14 @@ public class RichTextEditor {
    */
   public void addSimplePage(String title, String content) {
     info("Input a title for the page");
+    if(!$(ELEMENT_TITLE_WIKI_INPUT).exists())
+    {
+      do {
+        //refresh();
+        testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+        sleep(2000);
+      }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
+    }
    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
     if ($(ELEMENT_SOURCE_EDITOR_BUTTON).is(Condition.not(Condition.exist))
         && (ELEMENT_BUTTON_WIKI_RITCH_TEXT.is(Condition.exist))) {
@@ -534,9 +542,12 @@ public class RichTextEditor {
     info("Input a content for the page");
     if (!content.isEmpty()) {
       SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.timeout);
-      $(byClassName("gwt-RichTextArea")).click();
+      sleep(2000);
+      $(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.timeout).click();
       switchTo().frame(frame);
+      sleep(2000);
       $(byId("body")).sendKeys(content);
+      sleep(2000);
       switchTo().defaultContent();
     }
     }
@@ -676,7 +687,9 @@ public class RichTextEditor {
   public void inputEmailAddress(String address) {
     if (!address.isEmpty()) {
       info("Input web address");
-      evt.type(ELEMENT_EMAIL_LINK_EMAIL_ADDRESS, address, true);
+      sleep(2000);
+      $(ELEMENT_EMAIL_LINK_EMAIL_ADDRESS).setValue(address);
+      sleep(2000);
     }
   }
 
@@ -736,24 +749,36 @@ public class RichTextEditor {
       selectPageInSearchTab(page);
       break;
     }
+    editWikiPageLink("", label,tooltip);
+
+  }
+
+  /**
+   * Edit wiki page link
+   *
+   * @param label String
+   * @param tooltip String
+   */
+  public void editWikiPageLink(String address, String label, String tooltip) {
+    info("Input address of the link");
+    inputEmailAddress(address);
     info("Input the label of the link");
     inputLabel(label);
     info("Input the tooltip of the link");
     inputToolTip(tooltip);
     info("Click on Create link button");
     goToCreateLink();
-
   }
 
-  /**
-   * Insert a new wiki page into other page
-   *
-   * @param page String
-   * @param label String
-   * @param tooltip String
-   * @param tab wikiPageLinkTab
-   * @param isPressEndKey Boolean
-   */
+    /**
+     * Insert a new wiki page into other page
+     *
+     * @param page String
+     * @param label String
+     * @param tooltip String
+     * @param tab wikiPageLinkTab
+     * @param isPressEndKey Boolean
+     */
   public void insertNewWikiPageLink(String page, String label, String tooltip, wikiPageLinkTab tab, Boolean isPressEndKey) {
     info("Open Wiki Page link popup");
     goToWikiPageLink();
@@ -896,9 +921,13 @@ public class RichTextEditor {
    */
   public void goToEmailLink() {
     info("Click on Link menu");
-    evt.mouseOverAndClick(ELEMENT_LINK);
+    sleep(Configuration.collectionsTimeout);
+    $(ELEMENT_LINK).doubleClick();
     info("Click on Attached file Link menu");
-    evt.mouseOverAndClick(ELEMENT_EMAIL_LINK_MENU);
+    sleep(Configuration.collectionsTimeout);
+    $(ELEMENT_EMAIL_LINK_MENU).shouldBe(Condition.visible);
+    $(ELEMENT_EMAIL_LINK_MENU).doubleClick();
+    sleep(2000);
   }
 
   /**
@@ -928,9 +957,10 @@ public class RichTextEditor {
    */
   public void goToExternalImageLink() {
     info("Click on Link menu");
-    $(ELEMENT_IMAGE_LINK).click();
+    sleep(2000);
+    $(ELEMENT_IMAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Click on Attached file Link menu");
-    $(ELEMENT_EXTERNAL_IMAGE_LINK_MENU).click();
+    $(ELEMENT_EXTERNAL_IMAGE_LINK_MENU).waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   /**
@@ -970,7 +1000,8 @@ public class RichTextEditor {
   public void inputExternalImageLink(String link) {
     if (!link.isEmpty()) {
       info("Input external Image link");
-      $(ELEMENT_EXTERNAL_IMAGE_INPUT_LINK).setValue(link);
+      sleep(Configuration.timeout);
+      $(ELEMENT_EXTERNAL_IMAGE_INPUT_LINK).waitUntil(Condition.visible,Configuration.timeout).setValue(link);
     }
   }
 
@@ -1098,11 +1129,8 @@ public class RichTextEditor {
    */
   public void removeLink(String content) {
     info("Click on link");
-    //mouseOverAndClick(ELEMENT_LINK);
-    //click(By.linkText(content));
     $(ELEMENT_LINK).click();
     info("Click on Remove link");
-    //mouseOverAndClick(ELEMENT_REMOVE_LINK_MENU);
     $(ELEMENT_REMOVE_LINK_MENU).waitUntil(Condition.visible,Configuration.timeout);
     $(ELEMENT_REMOVE_LINK_MENU).click();
     info("Switch to the frame");
@@ -1131,7 +1159,8 @@ public class RichTextEditor {
    * Click on Create link button on Wiki page popup
    */
   public void goToCreateLink() {
-    $(ELEMENT_CREATE_LINK_BUTTON).click();
+    $(ELEMENT_CREATE_LINK_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(Configuration.timeout);
     $(ELEMENT_CREATE_LINK_BUTTON).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
@@ -1191,7 +1220,9 @@ public class RichTextEditor {
    */
   public void goToAllPagesTab() {
     info("Click on All Pages tab");
-    evt.click(ELEMENT_ALL_PAGE_TAB);
+    sleep(Configuration.timeout);
+    $(ELEMENT_ALL_PAGE_TAB).click();
+    sleep(Configuration.timeout);
   }
 
   /**
@@ -1259,7 +1290,8 @@ public class RichTextEditor {
     $(byClassName("gwt-TabPanel")).find(byText("intranet")).waitUntil(Condition.visible,Configuration.timeout);
     if($(ELEMENT_EXPLORER_WIKIHOME).is(Condition.not(Condition.visible))){
       info("click on Wiki Home note");
-      $(byId("isc_1open_icon_0")).click();
+      $(byId("isc_1open_icon_0")).waitUntil(Condition.visible,Configuration.timeout).click();
+      sleep(2000);
     }
   }
 
@@ -1301,6 +1333,14 @@ public class RichTextEditor {
    */
   public void addSimplePageWithAutoSaveStatus(String title, String content) {
     info("Input a title for the page");
+    if(!$(ELEMENT_TITLE_WIKI_INPUT).exists())
+    {
+      do {
+        //refresh();
+        testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+        sleep(2000);
+      }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
+    }
     if (!title.isEmpty())
       $(ELEMENT_TITLE_WIKI_INPUT).setValue(title);
     info("Waiting 30s before saved all changes");
@@ -1318,14 +1358,18 @@ public class RichTextEditor {
     info("Select the page");
     goToAllPagesTab();
     $(byClassName("gwt-TabPanel")).find(byText("intranet")).waitUntil(Condition.visible,Configuration.timeout);
-    if ($(byClassName("gwt-TabPanel")).find(byText(page)).is(Condition.not(Condition.visible))){
-      $(ELEMENT_EXPLORER_WIKIHOME).click();
+    sleep(Configuration.timeout);
+    if (!$(byClassName("gwt-TabPanel")).find(byText(page)).exists()){
+      $(ELEMENT_EXPLORER_WIKIHOME).waitUntil(Condition.visible,Configuration.timeout).click();
     }
-    ELEMENT_WIKI_UNPUT_LINK_EXISTED_PAGE.click();
-    ELEMENT_WIKI_UNPUT_LINK_EXISTED_PAGE.setValue("intranet:" + page);
-    ELEMENT_POPUP_SELECT_WIKI_PAGE.find(byText(page)).click();
+    ELEMENT_WIKI_UNPUT_LINK_EXISTED_PAGE.waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(2000);
+    ELEMENT_WIKI_UNPUT_LINK_EXISTED_PAGE.setValue("intranet." + page);
+    sleep(2000);
+    ELEMENT_POPUP_SELECT_WIKI_PAGE.find(byText(page)).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Click on Select button");
-    $(ELEMENT_SELECT_BUTTON).click();
+    sleep(2000);
+    $(ELEMENT_SELECT_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
 
   }
 
@@ -1425,6 +1469,8 @@ public class RichTextEditor {
    */
   public void addSimplePageHasAutoSaveWithoutSave(String title, String content) {
     info("Input a title for the page");
+    sleep(Configuration.timeout);
+    refresh();
     if (!title.isEmpty())
       $(ELEMENT_TITLE_WIKI_INPUT).val(title);
     info("Input a content for the page");
@@ -1450,9 +1496,13 @@ public class RichTextEditor {
    */
   public void changeLink(String label) {
     info("Focus on the frame");
+    sleep(Configuration.timeout);
     plf.switchFrame(ELEMENT_CONTENT_WIKI_FRAME);
+    sleep(2000);
     selectLabelLink(label);
+    sleep(2000);
     evt.switchToParentWindow();
+    sleep(2000);
   }
 
   /**

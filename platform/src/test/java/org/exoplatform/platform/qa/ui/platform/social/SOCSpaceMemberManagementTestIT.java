@@ -289,6 +289,7 @@ public class SOCSpaceMemberManagementTestIT extends Base {
    * List
    */
   @Test
+  @Tag("sabis")
   public void test05_RequestAcceptUserToSpace() {
     info("Test 05:Request/Accept user to Space");
     String space = "space" + getRandomNumber();
@@ -305,7 +306,7 @@ public class SOCSpaceMemberManagementTestIT extends Base {
 
     info("Create a space");
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space);
+    spaceManagement.addNewSpace(space, space, "validation", "No", "");
 
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToAllSpace();

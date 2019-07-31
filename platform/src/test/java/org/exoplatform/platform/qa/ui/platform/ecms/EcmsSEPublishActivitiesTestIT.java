@@ -76,6 +76,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
    */
 
   @Test
+  @Tag("eabis")
   public void test01_CheckIntranetHomepageAfterAddingAFileContent() {
 
     info("Test 1: Check intranet homepage after adding a File content");
@@ -89,7 +90,8 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
     createNewDocument.addNewFile(title, content);
     createNewDocument.saveAndClose();
     homePagePlatform.goToHomePage();
-    $(byText(title)).should(Condition.visible);
+    sleep(Configuration.collectionsTimeout);
+    $(byText(title)).waitUntil(Condition.visible,Configuration.timeout).should(Condition.visible);
     $(byText(title)).parent().parent().parent().parent().find(byText("Managed Sites")).should(Condition.visible);
     // delete data
     navigationToolbar.goToSiteExplorer();
@@ -134,6 +136,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
   }
 
   @Test
+  @Tag("eabis")
   public void test04_CheckIntranetHomepageAfterPublishWebContent() {
     info("Test 3: Check intranet homepage after adding Web Content");
     String title = "title" + getRandomNumber();
@@ -145,6 +148,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
     createNewDocument.addNewWebContent(title, content);
     createNewDocument.saveAndClose();
     homePagePlatform.goToHomePage();
+    sleep(Configuration.timeout);
     activityStream.checkActivityAddWebContent(title, null, null);
     info("Test 4: Check intranet homepage after publishing a content");
     String comment = "Document has been published.";
@@ -152,7 +156,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
     siteExplorerHome.selectNode(title);
     siteExplorerHome.goToPublication();
     siteExplorerHome.changeStatusPulication("Published");
-    ELEMENT_CLOSE_PUBLICATION_POPUP.click();
+    sleep(Configuration.timeout);
     homePagePlatform.goToHomePage();
     refresh();
     activityStream.checkActivityAddWebContent(title, "1", "Published");
@@ -234,6 +238,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
    * isadded the activity: Tag: $value, $value have been added.
    */
   @Test
+  @Tag("eabis")
   public void test07_CheckIntranetHomepageAfterAddingTagToAContent() {
     info("Test 7: Check intranet homepage after adding tag to a content");
     info("Get data test");
@@ -314,6 +319,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
    * Expected Outcome: - A File activity is added to the activity stream
    */
   @Test
+  @Tag("eabis")
   public void test09_CheckIntranetHomepageAfterUploadingAFile() {
     info("Test 9: Check intranet homepage after Uploading a file");
 
@@ -323,16 +329,17 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
     info("Upload a file");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.uploadFile("data/ecms/uploadFile.pdf");
+    sleep(Configuration.timeout);
+    siteExplorerHome.uploadFile("testavatar.pdf");
 
     info("Go to the activity and verify that the file's activity is shown");
     homePagePlatform.goToHomePage();
-    waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_FILE_UPLOAD_TITLE.replace("{$title}", "uploadFile.pdf")));
+    waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_FILE_UPLOAD_TITLE.replace("{$title}", "testavatar.pdf")));
 
     info("Delete the file");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.deleteData("uploadFile.pdf");
+    siteExplorerHome.deleteData("testavatar.pdf");
   }
 
   /**
@@ -347,23 +354,25 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
    * the activity stream - A comment is added: Category: $value has been added.
    */
   @Test
+  @Tag("eabis")
   public void test11_CheckIntranetHomepageAfterAddingACategoryforUploadFile() {
     info("Test 11: Check intranet homepage after adding a category to an uploaded file");
     info("Upload a file");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.uploadFile("data/ecms/uploadFile.pdf");
+    siteExplorerHome.uploadFile("testavatar.pdf");
     info("Select the file");
-    siteExplorerHome.selectNode("uploadFile.pdf");
+    siteExplorerHome.selectNode("testavatar.pdf");
     info("Add a category to the file");
-    siteExplorerHome.addCategoryForNode("uploadFile.pdf", "intranet");
-    $(byXpath("//*[@id=\"UICategoryManager\"]/div[2]/button")).click();
+    siteExplorerHome.addCategoryForNode("testavatar.pdf", "intranet");
+    $(byXpath("//*[@id=\"UICategoryManager\"]/div[2]/button")).waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(Configuration.timeout);
     homePagePlatform.goToHomePage();
     $(byText("Category: intranet has been added.")).should(Condition.visible);
     info("Delete the file");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.deleteData("uploadFile.pdf");
+    siteExplorerHome.deleteData("testavatar.pdf");
 
   }
 
@@ -373,18 +382,19 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
    * file.</li>
    */
   @Test
+  @Tag("eabis")
   public void test12_CheckIntranetHomepageAfterDeletingAFile() {
     info("Test 12:Check intranet homepage after deleting an uploaded file");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.uploadFile("data/ecms/uploadFile.pdf");
+    siteExplorerHome.uploadFile("testavatar.pdf");
     info("Delete the file");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.deleteData("uploadFile.pdf");
+    siteExplorerHome.deleteData("testavatar.pdf");
     info("Check the activity");
     homePagePlatform.goToHomePage();
-    $(byXpath(ELEMENT_ACTIVITY_FILE_UPLOAD_TITLE.replace("{$title}", "uploadFile.pdf"))).shouldNot(Condition.visible);
+    $(byXpath(ELEMENT_ACTIVITY_FILE_UPLOAD_TITLE.replace("{$title}", "testavatar.pdf"))).shouldNot(Condition.visible);
   }
 
   /**
@@ -468,6 +478,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
    * path of the file.d
    */
   @Test
+  @Tag("eabis")
   public void test16_UpdateTheFileActivityAfterMovingAFile() {
     info("Test 16 Update the File activity after moving a file");
     info("Create data test");
@@ -475,18 +486,19 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
     info("Finish creating data test");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.uploadFile("data/ecms/uploadFile.pdf");
+    siteExplorerHome.uploadFile("testavatar.pdf");
     info("Move the file");
     $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}",
-                                                            "uploadFile.pdf"))).dragAndDropTo($(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", fileRecept))));
+                                                            "testavatar.pdf"))).dragAndDropTo($(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", fileRecept))));
     manageAlert.acceptAlert();
     info("Check the comment on the activity");
     homePagePlatform.goToHomePage();
-    $(byText("File has been moved to: /sites/intranet/" + "uploadFile.pdf")).waitUntil(Condition.visible, Configuration.timeout);
+    executeJavaScript("window.scrollBy(0,300)");
+    $(byText("File has been moved to: /sites/intranet/" + "testavatar.pdf")).waitUntil(Condition.visible, Configuration.timeout);
     info("Delete the file");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath(fileRecept, "Site Management");
-    siteExplorerHome.deleteData("uploadFile.pdf");
+    siteExplorerHome.deleteData("testavatar.pdf");
   }
 
   /**
@@ -499,6 +511,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
    * path of the content.
    */
   @Test
+  @Tag("eabis")
   public void test17_UpdateContentActivityAfterMovingAContent() {
     info("Test 17 Update Content activity after moving a content");
 
@@ -525,10 +538,12 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
 
     info("Check the comment on the activity");
     homePagePlatform.goToHomePage();
+    sleep(Configuration.timeout);
     $(byXpath(ELEMENT_ACTIVITY_COMMENT.replace("${title}", title).replace("${comment}",
                                                                           "Publication has been moved to: /sites/intranet/"
                                                                               + title))).waitUntil(Condition.visible,
                                                                                                    Configuration.timeout);
+    sleep(Configuration.timeout);
     info("Delete the file");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath(fileRecept, "Site Management");

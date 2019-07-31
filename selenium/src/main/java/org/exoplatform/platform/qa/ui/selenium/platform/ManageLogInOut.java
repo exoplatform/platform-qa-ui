@@ -21,6 +21,8 @@
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ManageLogInOutLocator.ELEMENT_SIGN_OUT_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
 
@@ -60,8 +62,10 @@ public class ManageLogInOut {
    * @param opParams
    */
   public void signIn(String username, String password, Boolean... opParams) {
+    sleep(2000);
     Boolean verify = (Boolean) (opParams.length > 0 ? opParams[0] : false);
-    if (evt.waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK, 5000, 0) != null) {
+    if ($(ELEMENT_ACCOUNT_NAME_LINK).exists()){
+    //if (evt.waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK, 5000, 0) != null) {
       signOut();
     }
     if (testBase.getSsoType() != "" && testBase.getSsoType() != null) {
@@ -83,8 +87,11 @@ public class ManageLogInOut {
       }
     } else {
       info("login normally if not use SSO with user " + username + " and pass " + password);
-      evt.type(ELEMENT_INPUT_USERNAME, username, true);
-      evt.type(ELEMENT_INPUT_PASSWORD, password, true);
+      sleep(Configuration.timeout);
+      $(ELEMENT_INPUT_USERNAME).setValue(username);
+      sleep(2000);
+      $(ELEMENT_INPUT_PASSWORD).setValue(password);
+      sleep(2000);
       evt.clickByJavascript(ManageLogInOutLocator.ELEMENT_SIGN_IN_BUTTON, 2);
       if (verify)
         evt.waitForElementNotPresent(ManageLogInOutLocator.ELEMENT_SIGN_IN_BUTTON);
@@ -98,11 +105,13 @@ public class ManageLogInOut {
    * @param password
    */
   public void signInOpenam(String username, String password) {
-    evt.type(ELEMENT_INPUT_USERNAME_OPENAM, username, true);
-    evt.type(ELEMENT_INPUT_PASSWORD_OPENAM, password, true);
-    evt.click(ELEMENT_SIGN_IN_BUTTON_OPENAM);
-
-    // waitForElementNotPresent(ELEMENT_SIGN_IN_BUTTON_OPENAM,3000);
+    sleep(2000);
+    testBase.getExoWebDriver().getWebDriver();
+    $(ELEMENT_INPUT_USERNAME_OPENAM).setValue(username);
+    $(ELEMENT_INPUT_PASSWORD_OPENAM).setValue(password);
+    sleep(2000);
+    $(ELEMENT_SIGN_IN_BUTTON_OPENAM).click();
+    sleep(2000);
 
   }
 
@@ -116,10 +125,9 @@ public class ManageLogInOut {
     testBase.getExoWebDriver().getWebDriver();
     $(ELEMENT_INPUT_USERNAME).setValue(username);
     $(ELEMENT_INPUT_PASSWORD).setValue(password);
+    sleep(2000);
     ELEMENT_SIGN_IN_BUTTON_CAS.click();
-
-
-    // waitForElementNotPresent(ELEMENT_SIGN_IN_BUTTON_CAS,3000);
+    sleep(2000);
 
   }
 
@@ -127,23 +135,27 @@ public class ManageLogInOut {
    * Sign out from intranet
    */
   public void signOut() {
-    homePagePlatform.refreshUntil($(ELEMENT_ACCOUNT_NAME_LINK),Condition.visible,1000);
+    homePagePlatform.refreshUntil($(ELEMENT_ACCOUNT_NAME_LINK),Condition.visible,Configuration.timeout);
     info("Sign out");
     for (int repeat = 0;; repeat++) {
       if (repeat > 1) {
         evt.mouseOverAndClick(ELEMENT_ACCOUNT_NAME_LINK);
         break;
       }
+      sleep(2000);
       $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.appears, Configuration.timeout).click();
 
-      if (evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_SIGN_OUT_LINK, 5000, 0) != null) {
-        info("Element " + ManageLogInOutLocator.ELEMENT_SIGN_OUT_LINK + "... is displayed");
+      if (evt.waitForAndGetElement(ELEMENT_SIGN_OUT_LINK, 5000, 0) != null) {
+        sleep(2000);
+        info("Element " + ELEMENT_SIGN_OUT_LINK + "... is displayed");
         break;
       }
       info("Retry...[" + repeat + "]");
       testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     }
-    evt.click(ManageLogInOutLocator.ELEMENT_SIGN_OUT_LINK);
+    sleep(Configuration.timeout);
+    $(ELEMENT_SIGN_OUT_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+
     if (evt.waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK, 2000, 0) != null) {
       info("Clear cache and reconnect to the package");
       testBase.getExoWebDriver().getWebDriver().manage().deleteAllCookies();

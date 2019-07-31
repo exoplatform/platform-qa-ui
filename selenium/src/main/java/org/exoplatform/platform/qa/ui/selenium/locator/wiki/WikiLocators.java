@@ -451,7 +451,7 @@ public class WikiLocators {
             By.xpath(".//*[@id='DisplayModesDropDown']//*[contains(@class,'uiIconMiniArrowDown')]");
 
     public static final String ELEMENT_SPACE_SWITCHER_SELECTED_SPACE =
-            "//*[contains(@class,'spaceChooserPopup')]//*[contains(@alt,'$space')]";
+            "//ul[@class ='spaceChooserPopup']//a[text()='$space']";
 
     // Browsers
     public static final By ELEMENT_SEARCH_BROWSERS_DROPDOWN =
@@ -1002,7 +1002,7 @@ public class WikiLocators {
             "//span[@class='macro-placeholder' and text()='${macro}']";
 
     // Link menu
-    public static final By ELEMENT_LINK = By.xpath("//*[text()='Link']");
+    public static final By ELEMENT_LINK = By.xpath("//div[@class='gwt-MenuItemLabel' and text()='Link']");
 
     public static final By ELEMENT_WIKI_PAGE_LINK_MENU =
             By.xpath("//*[text()='Wiki Page...']");
@@ -1017,7 +1017,7 @@ public class WikiLocators {
             By.xpath("//*[text()='Remove Link']");
 
     public static final By ELEMENT_EMAIL_LINK_MENU =
-            By.xpath("//*[text()='Email Address...']");
+            By.xpath("//div[@class='gwt-MenuItemLabel' and text()='Email Address...']");
 
     public static final By ELEMENT_EDIT_LINK_MENU =
             By.xpath("//*[text()='Edit Link...']");
@@ -1398,8 +1398,8 @@ public class WikiLocators {
     public static final By ELEMENT_MANAGER_PERMISSION_BTN =
             By.xpath(".//*[contains(@onclick,'ManagePermisisons')]");
 
-    public static final By ELEMENT_WIKI_LEFT_TREE_RESTRICTED_PAGE_TITLE =
-            By.xpath(".//*[@id='iconTreeExplorer']//em[contains(text(),'restricted')]");
+    public static final SelenideElement ELEMENT_WIKI_LEFT_TREE_RESTRICTED_PAGE_TITLE =
+            $(byXpath(".//*[@id='iconTreeExplorer']//em[contains(text(),'restricted')]"));
 
     public static final By ELEMENT_WIKI_TOOLTIP_RESTRICTED_PAGE_TITLE =
             By.xpath(".//*[@id='iconTreeExplorer']//em[contains(@data-original-title,'Access to this page is restricted, you do not have permission to view it.')]");

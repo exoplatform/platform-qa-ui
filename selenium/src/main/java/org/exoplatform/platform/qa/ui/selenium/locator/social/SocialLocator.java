@@ -1356,7 +1356,7 @@ public final class SocialLocator {
 
   // Recent activity
   public static final String          ELEMENT_RECENT_ACTIVITY_CONTENT                                   =
-                                                                      "//*[@id='UIRecentActivitiesPortlet']//*[@class='activityCont']/div[${index}]//*[@class='status' and contains(text(),'${content}')]";
+                                                                      "//*[@id='UIRecentActivitiesPortlet']//*[@class='activityCont']/div[${index}]//*[@class='status']/span[contains(text(),'${content}')]";
 
   public static final String          ELEMENT_RECENT_ACTIVITY_NO_CONTENT                                =
                                                                          "//*[@id='UIRecentActivitiesPortlet']//*[contains(text(),'${content}')]";
@@ -1492,7 +1492,7 @@ public static final By
                                                                  By.xpath(".//*[@id='spaceMenuTab']//*[contains(text(),'Home')]");
 
   public static final By              ELEMENT_ACTIVITY_STREAM_TAB                                       =
-                                                                  By.xpath(".//*[contains(@class,'uiIconAppSpaceActivityStreamPortlet')]");
+                                                                  By.xpath(".//*[contains(@class,'uiIconAppSpaceHomePage')]");
 
   public static final By              ELEMENT_FORUM_TAB                                                 =
                                                         By.xpath(".//*[contains(@class,'uiIconAppForumPortlet')]");
@@ -1548,8 +1548,8 @@ public static final By
   public static final By              ELEMENT_UPLOAD_POPUP_SELECT_FILE_BTN                              =
                                                                            By.xpath(".//*[@id='Uploader']//label[text()='Select File']");
 
-  public static final By              ELEMENT_SPACE_SAVE_BTN                                            =
-                                                             By.xpath(".//*[@id='UISpaceInfo']//button[text()='Save']");
+  public static final SelenideElement              ELEMENT_SPACE_SAVE_BTN                                            =
+                                                             $(byXpath(".//*[@id='UISpaceInfo']//button[text()='Save']"));
 
   public static final By              ELEMENT_SPACE_UPLOAD_CONFIRM_BTN                                  =
                                                                        By.xpath(".//*[@id='UIAvatarUploader']//button[text()='Confirm']");
@@ -1601,6 +1601,9 @@ public static final By
   // All Spaces tab
   public static final By              ELEMENT_MY_SPACE_ALL_SPACES_TAB                                   =
                                                                       By.xpath(".//*[@id='UIPage']//*[contains(@href,'all-spaces')]");
+
+  public static final By              ELEMENT_MY_SPACE_JOIN_BTN                   =
+                                                                                      byText("Join");
 
   public static final By              ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_TO_JOIN_BTN                   =
                                                                                       byText("Request to Join");
@@ -2435,8 +2438,8 @@ public static final By
   public static final SelenideElement ELEMENT_BUTTON_ON_SITE_COMMENT =   $(byId("WEB_CHANNELEditCommentPlugin"));
   public static final SelenideElement ELEMENT_ALL_NOTIFICATION=  $(byXpath("//*[@id=\"NotificationPopup\"]/li[5]/div/a"));
   public static final SelenideElement ELEMENT_NOTIFICATION_ACTIONS=  $(byClassName("notificationsActions"));
-  public static final SelenideElement ELEMENT_SPACE_PORTLET =  $(byClassName("uiIconAppSpaceActivityStreamPortlet"));
-  public static final SelenideElement ELEMENT_SPACE_MENU =  $(byXpath("//*[@id=\"UISpaceMenu\"]/div[1]/div/ul/li[1]/a"));
+  public static final SelenideElement ELEMENT_SPACE_PORTLET =  $(By.id("UISpaceActivityStreamPortlet"));
+  public static final SelenideElement ELEMENT_SPACE_MENU =  $(byXpath("//a[@class='chat-button btn']"));
   public static final By ELEMENT_EDITSPACE_MANAGE_ICON=  byClassName("uiIconEdit");
   public static final By ELEMENT_DELETESPACE_MANAGE_ICON=  byClassName("uiIconDeleteUser");
   public static final SelenideElement ELEMENT_SPACE_SEARCH_ICON= $(byClassName("showInputSearch"));

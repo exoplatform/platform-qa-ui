@@ -79,6 +79,7 @@ public class WikiAttachmentTestIT extends Base {
    */
 
   @Test
+  @Tag("wabis")
   public void test01_UploadDownloadDeleteAttachment() {
     info("Test 1: Upload Attachment");
     String rand = getRandomNumber();

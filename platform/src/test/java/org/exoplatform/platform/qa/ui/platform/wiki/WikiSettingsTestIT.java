@@ -98,6 +98,7 @@ public class WikiSettingsTestIT extends Base {
    */
 
   @Test
+  @Tag("wabis")
   public void test01_AddNewTemplate() {
     info("Test 1: Add new template");
     String title = "title" + getRandomNumber();
@@ -113,6 +114,7 @@ public class WikiSettingsTestIT extends Base {
   }
 
   @Test
+  @Tag("wabis")
   public void test01_1_AddNewTemplateWithoutTitle() {
     info("Test 1: Add new template");
     String title = "Sample Template Title...";
@@ -125,7 +127,9 @@ public class WikiSettingsTestIT extends Base {
     wikiSettingManagement.deleteTemplate(title);
 
   }
+
   @Test
+  @Tag("wabis")
   public void test01_1_2_AddNewTemplateWithExistedTitle() {
     info("Test 1: Add new template");
     String title ="title" + getRandomNumber();;
@@ -134,7 +138,8 @@ public class WikiSettingsTestIT extends Base {
     String message="The page title already exists. Please select another one.";
     homePagePlatform.goToWiki();
     wikiHomePage.goToWikiSettingPage();
-    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();
+    sleep(Configuration.timeout);
+    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.waitUntil(Condition.visible,Configuration.timeout).click();
     wikiSettingManagement.addTemplate(title, description, content);
     ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(title)).should(exist);
     ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();
@@ -160,6 +165,7 @@ public class WikiSettingsTestIT extends Base {
    * <li>Test Case Name: Edit template.</li>
    */
   @Test
+  @Tag("wabis")
   public void test02_EditTemplate() {
     info("Test 2: Edit template");
     String title = "title" + getRandomNumber();
@@ -242,6 +248,7 @@ public class WikiSettingsTestIT extends Base {
    */
 
   @Test
+  @Tag("wabis")
   public void test05_AddPermissionForWiki() {
     info("Test 5: Add Permission for Wiki");
     String wiki = "wiki" + getRandomNumber();
@@ -283,6 +290,7 @@ public class WikiSettingsTestIT extends Base {
    * Save Input Data: Expected Outcome: New permission is added in list
    */
   @Test
+  @Tag("wabis")
   public void test06_EditPermissionForWiki() {
     info("Test 5: Add Permission for Wiki");
     String wiki = "wiki" + getRandomNumber();
@@ -471,6 +479,7 @@ public class WikiSettingsTestIT extends Base {
    */
 
   @Test
+  @Tag("wabis")
   public void test10_DeletePermissionForSpaceWiki() throws Exception {
     info("Test 8: Add Permission for space wiki");
     String space = "" + getRandomNumber();

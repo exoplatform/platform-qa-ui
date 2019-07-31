@@ -5,6 +5,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Button.ELEMENT_CANCEL_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_BUTTON_EVENT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACES_LIST;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
@@ -156,6 +157,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
   }
 
   @Test
+  @Tag("wabis")
   public void test04_MovePage_MyWiki_Space() {
 
     info("Create a space");
@@ -175,6 +177,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     info("Move page to Space");
     wikiManagement.selectSpaceDestination(space);
     homePagePlatform.goToMySpaces();
+    spaceManagement.searchSpace(space);
     ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceHomePage.goToWikiTab();
     $(byClassName("uiTreeExplorer")).find(byText(title1)).should(Condition.exist);
@@ -268,6 +271,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
   }
 
   @Test
+  @Tag("wabis")
   public void test08_MovePage_Space2_Space1() {
 
     info("Create a space");
@@ -291,6 +295,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
 
     wikiManagement.selectSpaceDestination(space1);
     homePagePlatform.goToMySpaces();
+    spaceManagement.searchSpace(space1);
     ELEMENT_SPACES_LIST.find(byText(space1)).click();
     spaceHomePage.goToWikiTab();
     $(byClassName("uiTreeExplorer")).find(byText(title1)).should(Condition.exist);
@@ -587,6 +592,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
    */
 
   @Test
+  @Tag("wabis")
   public void test04_CheckPermalinkWhenUserIsMemberOfPage() {
     info("Test 4: Check permalink when user is member of page");
     String title = "title" + getRandomNumber();
@@ -627,6 +633,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
    */
 
   @Test
+  @Tag("wabis")
   public void test05_CheckPermalinkWhenUserIsNotMemberOfPage() {
     info("Test 5: Check permalink when user is not member of page");
     String title = "title" + getRandomNumber();
@@ -671,6 +678,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
    */
 
   @Test
+  @Tag("wabis")
   public void test06_CheckPermalinkWhenUserIsMemberOfSpace() {
     info("Test 6: Check permalink when user is member of space");
     String space = "space" + getRandomNumber();
@@ -691,12 +699,12 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     spaceManagement.sendARequestToASpace(space);
     manageLogInOut.signIn("john", "gtngtn");
     homePagePlatform.goToMySpaces();
+    spaceManagement.searchSpace(space);
     ELEMENT_SPACES_LIST.find(byText(space)).click();
     refresh();
     spaceHomePage.goToSpaceSettingTab();
     info("accept request by user 1");
     spaceSettingManagement.goToMemberTabInSpaceSettingTab();
-    $(byText(DATA_NAME_USER2)).parent().find(ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB).click();
     spaceHomePage.goToWikiTab();
     $(byText(wiki)).click();
     wikiHomePage.goToPermalink();
@@ -922,6 +930,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
    */
 
   @Test
+  @Tag("wabis")
   public void test11_ChangePermissionForPageInPermalinkPage() {
     info("Test 11 Change permission for page in Permalink page");
     String title = "title" + getRandomNumber();
@@ -929,6 +938,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     info("Add new wiki page");
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddBlankPage();
+    homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT),Condition.visible,1000);
     richTextEditor.addSimplePage(title, title);
     wikiManagement.saveAddPage();
     wikiHomePage.goToPermalink();
@@ -1041,6 +1051,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
    */
 
   @Test
+  @Tag("wabis")
   public void test02_MovePageWhenUserHasNoEditPermissionAtDestinationPage() {
     info("Test 02: Move page when user has no edit permission at destination page");
     String space = "space" + getRandomNumber();
@@ -1060,11 +1071,11 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     spaceManagement.sendARequestToASpace(space);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     homePagePlatform.goToMySpaces();
+    spaceManagement.searchSpace(space);
     ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceHomePage.goToSpaceSettingTab();
     info("accept request by user 1");
     spaceSettingManagement.goToMemberTabInSpaceSettingTab();
-    $(byText(DATA_NAME_USER2)).parent().find(ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB).click();
 
     info("Add new wiki page 1 for space 1");
     spaceHomePage.goToWikiTab();

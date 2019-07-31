@@ -20,12 +20,13 @@
  */
 package org.exoplatform.platform.qa.ui.commons.pageobject;
 
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_PASSWORD;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.openqa.selenium.By;
 
@@ -71,9 +72,10 @@ public class Login {
 
 
   public Login signOut() {
-
-    $(byId("UIUserPlatformToolBarPortlet")).click();
-    $(byClassName("uiIconPLFLogout")).click();
+    sleep(Configuration.timeout);
+    $(byId("UIUserPlatformToolBarPortlet")).waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(Configuration.collectionsTimeout);
+    $(byClassName("uiIconPLFLogout")).waitUntil(Condition.visible,Configuration.timeout).click();
 
     return this;
   }

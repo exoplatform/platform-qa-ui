@@ -113,14 +113,7 @@ public class SpaceSettingManagement {
     $(byXpath(ELEMENT_SPACE_CHANGE_ROLE_USER_MEMBER.replace("${user}", user))).click();
 
   }
-    /**
-     * Search User in people space
-     */
-     public void searchUsersPeople(String user) {
-        info("Enter User Name");
-        $(byXpath("//div[@class='selectize-input items not-full']/input[@placeholder='Name']")).setValue(user);
-        $(byXpath("//button[@id='SearchButton']")).waitUntil(Condition.visible,Configuration.timeout).click();
-    }
+
     /**
      * Connect to Searched User
      */
@@ -131,6 +124,7 @@ public class SpaceSettingManagement {
         info("Connect to searched user");
         $(byXpath("//button[text()='Connect']")).waitUntil(Condition.visible, Configuration.timeout).click();
     }
+
     /**
      * Check User Not Connected
      */
@@ -139,6 +133,7 @@ public class SpaceSettingManagement {
             info("User is not connected");
         }
     }
+
   /**
    * Remove a user in the invited list
    * 

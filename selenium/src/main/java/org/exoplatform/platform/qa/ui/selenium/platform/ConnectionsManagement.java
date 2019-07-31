@@ -1,8 +1,7 @@
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_CONTENT_NAME_PROFILE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_NAME_OF_PROFILE_TOP_LEFT;
@@ -50,7 +49,7 @@ public class ConnectionsManagement {
       break;
     case RECEIVE:
       info("Go to receive tab");
-      $(ELEMENT_REQUEST_RECEIVE_CONNECTIONS_TAB).click();
+      $(ELEMENT_REQUEST_RECEIVE_CONNECTIONS_TAB).waitUntil(Condition.visible,Configuration.timeout).click();
       break;
     case PENDING:
       info("Go to pending tab");
