@@ -659,11 +659,6 @@ public class AdministrationLocator {
   public static final String          ELEMENT_AVATAR_CHANGELANGUAGE_APPLY                          = "//*[text()='${text}']";
 
   /*****************************************************
-=======
-
->>>>>>> Gatein global settig
-
-  /*****************************************************
    * CONTENT SEARCH ADMINISTRATION
    *****************************************************************************/
   // table
