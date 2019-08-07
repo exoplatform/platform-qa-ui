@@ -1,8 +1,7 @@
 package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_USER_CLOSE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -352,12 +351,14 @@ public class CalendarManagement {
    */
   public void openMenuOfCalendar(String calendar) {
     info("Open menu of a calendar");
+    sleep(2000);
     ELEMENT_LIST_CALENDAR.find(byText(calendar)).waitUntil(Condition.appears, Configuration.timeout)
             .hover()
             .parent()
             .parent()
             .find(ELEMENT_CALENDAR_ICON_SETTINGS_OF_CALENDAR)
             .click();
+    sleep(Configuration.timeout);
 
   }
 
@@ -377,7 +378,8 @@ public class CalendarManagement {
       $(ELEMENT_CALENDAR_QUICK_ADD_TASK_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case ADDEVENT:
-      $(ELEMENT_CALENDAR_ADD_EVENT_MENU).click();
+      sleep(2000);
+      $(ELEMENT_CALENDAR_ADD_EVENT_MENU).waitUntil(Condition.visible,Configuration.timeout).click();
       $(ELEMENT_EVENT_DRAWER).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case EDIT:
