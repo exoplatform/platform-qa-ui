@@ -101,9 +101,8 @@ public class HomePagePlatform {
    */
   public void goToMySpaces() {
     info("-- Go to my spaces --");
-    ELEMENT_MY_SPACE_LINK_PLF.waitUntil(Condition.visible, Configuration.timeout);
     sleep(2000);
-    ELEMENT_MY_SPACE_LINK_PLF.click();
+    ELEMENT_MY_SPACE_LINK_PLF.waitUntil(Condition.visible,Configuration.timeout).click();
     sleep(2000);
     refreshUntil(ELEMENT_ADDNEWSPACE_BUTTON, Condition.visible, 1000);
   }

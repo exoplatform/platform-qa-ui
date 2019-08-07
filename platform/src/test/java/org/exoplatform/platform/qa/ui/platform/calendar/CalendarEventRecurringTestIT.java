@@ -82,6 +82,7 @@ public class CalendarEventRecurringTestIT extends Base {
    * </p>
    */
   @Test
+  @Tag("calis8")
   public void test02_EditFollowingEventsInRecurringEvent() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String content = "content" + getRandomNumber();
@@ -95,7 +96,7 @@ public class CalendarEventRecurringTestIT extends Base {
                                               getDate(0, "MM-dd-yyyy HH") + ":00",
                                               getDate(0, "MM-dd-yyyy HH") + ":30",
                                               false);
-
+    check(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX, 2);
     eventManagement.inputRecurringInfoEvent(EventManagement.repeatType.Daily,
                                             "1",
                                             null,
@@ -109,8 +110,7 @@ public class CalendarEventRecurringTestIT extends Base {
                                                        CalendarHomePage.selectDayOption.DETAILTIME,
                                                        getDate(1, "MMM dd yyyy"));
     eventManagement.inputDataEventInDetailForm(titleEvent2, contentEvent2, null, null, false);
-    // click(event.ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
-    $(ELEMENT_BUTTON_EVENT_SAVE_DETAILS).click();
+    eventManagement.saveAddEventDetails();
     eventManagement.editRecurringEvent(EventManagement.recurringType.FOLLOW_EVENT, true);
     calendarHomePage.verifyIsPresentEventTaskWithDateTime(titleEvent2,
                                                           getDate(0, "MMM dd yyyy"),
@@ -179,6 +179,7 @@ public class CalendarEventRecurringTestIT extends Base {
   }
 
   @Test
+  @Tag("calis7")
   public void test02_DeleteFollowingEventsInRecurringEvent() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String content = "content" + getRandomNumber();
@@ -190,7 +191,6 @@ public class CalendarEventRecurringTestIT extends Base {
                                               getDate(0, "MM/dd/yyyy HH") + ":00",
                                               getDate(0, "MM/dd/yyyy HH") + ":30",
                                               false);
-    eventManagement.moreDetailsEvent();
     check(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX, 2);
     eventManagement.inputRecurringInfoEvent(EventManagement.repeatType.Daily,
                                             "1",

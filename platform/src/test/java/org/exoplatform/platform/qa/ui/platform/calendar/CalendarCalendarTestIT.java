@@ -240,6 +240,7 @@ public class CalendarCalendarTestIT extends Base {
    * Save Expected Outcome: Export successfully with .ics file
    */
   @Test
+  @Tag("calis6")
   public void test12_ExportCalendar() {
     String titleEvent = "titleEvent" + "115693";
     String attachment = getRandomNumber() + ".ics";

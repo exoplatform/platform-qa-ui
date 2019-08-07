@@ -665,8 +665,8 @@ public class AdministrationLocator {
 
   /*****************************************************
    * CONTENT SEARCH ADMINISTRATION
-   *****************************************************************************/
-  // table
+   *****************************************************************************//*
+  // table*/
   public static final By              ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_TITLE             =
                                                                                        By.xpath(".//*[@id='searchAdmin']//th[text()='Content Type']");
 

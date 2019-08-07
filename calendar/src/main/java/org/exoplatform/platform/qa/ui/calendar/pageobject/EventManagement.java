@@ -177,7 +177,7 @@ public class EventManagement {
       $(ELEMENT_EVENT_TITLE_DRAWER).setValue(name);
     }
     if (note != null) {
-      $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[6]/div[2]/textarea")).setValue(note);
+      $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[6]/div[2]/following::textarea")).setValue(note);
     }
     if (opt.length > 0 && opt[0] != null) {
       $(byId("calendar")).selectOption(opt[0]);
@@ -241,7 +241,8 @@ public class EventManagement {
           evt.type(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE, dateTimeFrom[0], true);
         if (dateTimeFrom.length > 1) {
           $(ELEMENT_QUICK_INPUT_EVENT_FROM_TIME_INPUT).click();
-         $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[1]/div[2]/div[3]/input")).click();
+          sleep(3000);
+         $(byXpath("//li[@class='cbb_item selected']")).click();
         }
       }
       if ((to != null) & (to != "")) {
@@ -250,8 +251,8 @@ public class EventManagement {
           evt.type(ELEMENT_QUICK_INPUT_EVENT_TO_DATE, dateTimeTo[0], true);
         if (dateTimeTo.length > 1) {
           $(ELEMENT_QUICK_INPUT_EVENT_TO_TIME_INPUT).click();
-         $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[2]/div[2]/div[3]/input")).click();
-        }
+          sleep(3000);
+          $(byXpath("//li[@class='cbb_item selected']")).click();        }
       }
     }
   }
@@ -787,14 +788,13 @@ public class EventManagement {
                                       String... option) {
     info("Add recurring information");
     String occurence = option.length > 0 ? option[0] : "";
-    ELEMENT_REPEAT_SWITCH_LABEL.click();
     if (endRepeat != null) {
       switch (endRepeat) {
       case After:
         info("Check After option");
-        evt.check($(byId("endAfter")), 2);
+        evt.check(byId("endAfter"), 2);
         if (occurence != "")
-          evt.type(ELEMENT_END_AFTER_NUMBER, option[0], true);
+         // evt.type(ELEMENT_END_AFTER_NUMBER, option[0], true);
         break;
       case ByThisDate:
         info("Check By this date option");
@@ -904,12 +904,11 @@ public class EventManagement {
     evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_RECURRING_FORM);
     if (isVerify) {
       evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT);
-      evt.waitForAndGetElement(ELEMENT_EDIT_DELETE_ONE_EVENT, testBase.getDefaultTimeout(), 1, 2);
+      evt.waitForAndGetElement(ELEMENT_EDIT_RECURRING_EVENT_SAVE, testBase.getDefaultTimeout(), 1, 2);
       info(evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT).getText());
       assert evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT)
                 .getText()
                 .contains(ELEMENT_CONFIRM_EDIT_MESSAGE);
-      assert evt.waitForAndGetElement(ELEMENT_EDIT_DELETE_ONE_EVENT, testBase.getDefaultTimeout(), 1, 2).isSelected();
     }
     switch (optEditType) {
     case ONLY_EVENT:
@@ -1197,24 +1196,8 @@ public class EventManagement {
     ONLY_EVENT, FOLLOW_EVENT, ALL_EVENT;
   }
 
-  public void checkEventPopUp(){
-    switchTo().activeElement();
-    $(byText("Add Event")).should(Condition.exist);
-    assertEquals("Event title",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("All",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).getText());
-    assertEquals("All day",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[2]/div/label/span")).getText());
-    assertEquals("Location",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[3]/div[1]")).getText());
-    assertEquals("Enter a location for this event",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[3]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/div/div/input")).getAttribute("placeholder"));
-    assertEquals("Clear",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
-    assertEquals("Save",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
-    assertEquals("Cancel",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
-
-  }
-
   public void checkReminderLabel(){
 
-
   }
+
 }

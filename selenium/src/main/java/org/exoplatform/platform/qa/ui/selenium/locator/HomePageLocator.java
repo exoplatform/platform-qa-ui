@@ -70,7 +70,7 @@ public final class HomePageLocator {
                                                                 $(byClassName("uiIconPLFCalendar"));
 
   public static final SelenideElement ELEMENT_TASKS_LINK_PLF                                               =
-                                                             $(byClassName("uiCompanyNavigations")).find(byText("Tasks"));
+                                                             $(byXpath("//i[@id='MenuItemtasks']"));
 
   public static final By              ELEMENT_CONNECTION_LINK_PLF                                          =
                                                                   By.xpath("//*[@data-original-title='Connections']");
@@ -120,7 +120,7 @@ public final class HomePageLocator {
                                                                       "//*[text()='${title}']/../../../..//*[@class='contentComment' and contains(text(), 'Page has been moved to: ${path}')]";
 
   public static final SelenideElement ELEMENT_MY_SPACE_LINK_PLF                                            =
-                                                                $(byClassName("uiSpaceNavigationPortlet")).find(byLinkText("MY SPACES"));
+                                                                $(byXpath("//i[@id='MySpacesItem']"));
 
   public static final SelenideElement ELEMENT_SECOND_SPACE_MY_SPACE                                        =
                                                                     $(byClassName("spaceNavigation")).findAll(byClassName("spaceItem"))
