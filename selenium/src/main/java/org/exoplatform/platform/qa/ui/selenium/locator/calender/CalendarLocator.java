@@ -1702,7 +1702,7 @@ public class CalendarLocator {
 
   public static final SelenideElement ELEMENT_REPEAT_PREFERRENCE_IMPROVE_POPUP=$(byClassName("recurring-popup"));
   public static final SelenideElement ELEMENT_REMINDER_SWITCH_LABEL=     $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[2]/div[2]/div[2]/div/label[1]"));
-  public static final SelenideElement ELEMENT_REMINDER_POPUP=   $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[2]/div[2]/div[1]"));
+  public static final SelenideElement ELEMENT_REMINDER_POPUP=   $(byXpath("//div[@class='reminder pull-left']//div[@class='uiPopup']"));
   public static final SelenideElement ELEMENT_REMINDER_CLOSE_BUTTON=    $(byClassName("uiIconClose"));
 
   public static final SelenideElement ELEMENT_SAVE_REMINDER_BUTTON=$(byXpath("//*[@id=\"eventReminder\"]/div[3]/button[1]"));
@@ -1710,7 +1710,7 @@ public class CalendarLocator {
 
   public static final SelenideElement ELEMENT_REPEAT_SAVE_BUTTON=$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[3]/div[2]/div[2]/div[2]/div/div[2]/button[1]"));
 
-  public static final SelenideElement ELEMENT_REPEAT_LABEL=$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[3]/div[2]/a"));
+  public static final SelenideElement ELEMENT_REPEAT_LABEL=$(byXpath("//div[@class='iphoneCheckbox']/following::a[text()='Repeat']"));
   public static final SelenideElement ELEMENT_FIND_TIME_BUTTON= $(byClassName("findtime"));
   public static final SelenideElement ELEMENT_FIND_TIME_POPUP= $(byClassName("findtime-popup"));
   public static final SelenideElement ELEMENT_CHECK_TIME_ICON=  $(byId("checkTime"));
