@@ -51,8 +51,9 @@ public class HomePagePlatform {
 
   public void backToHomeFromChat() {
     info("--Go to Home--");
+    switchTo().window(1);
     refreshUntil($(byClassName("home-button")), Condition.visible, 1000);
-    $(byXpath("//div[@data-original-title='Back to Home']/a/i")).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byXpath("//i[@class='uiIconHomeInfo']")).waitUntil(Condition.visible,Configuration.timeout).click();
     refresh();
   }
   /**
