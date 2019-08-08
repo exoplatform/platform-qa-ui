@@ -37,7 +37,7 @@ public class SpaceSettingManagement {
 
   /**
    * constructor
-   * 
+   *
    * @param testBase
    */
   public SpaceSettingManagement(TestBase testBase) {
@@ -51,11 +51,11 @@ public class SpaceSettingManagement {
 
   /**
    * function: Search user
-   * 
-   * @param user (Can be: User name, Last name, First name or Email of the user
-   *          you want to search)
+   *
+   * @param user         (Can be: User name, Last name, First name or Email of the user
+   *                     you want to search)
    * @param searchOption (Can be: User name, Last name, First name or Email option
-   *          corresponding with information you input in "Search")
+   *                     corresponding with information you input in "Search")
    */
   public void searchUser(String user, String searchOption) {
     info("--Search user " + user + "--");
@@ -85,7 +85,7 @@ public class SpaceSettingManagement {
 
   /**
    * Invite a user in the space
-   * 
+   *
    * @param userName
    * @param verify is true if want to verify user in invited table. False if don't
    *          want.
@@ -140,7 +140,7 @@ public class SpaceSettingManagement {
 
   /**
    * Remove a user in the invited list
-   * 
+   *
    * @param user
    */
   public void removeUser(String user) {
@@ -153,7 +153,7 @@ public class SpaceSettingManagement {
 
   /**
    * Remove a user in the member list
-   * 
+   *
    * @param fullName
    */
   public void removeUserFromMemberlist(String fullName) {
@@ -166,7 +166,7 @@ public class SpaceSettingManagement {
 
   /**
    * Remove an application
-   * 
+   *
    * @param app
    */
   public void removeApplication(String app) {
@@ -222,7 +222,7 @@ public class SpaceSettingManagement {
 
   /**
    * Delete member of space
-   * 
+   *
    * @param user
    */
   public void deleteMember(String user) {
@@ -236,7 +236,7 @@ public class SpaceSettingManagement {
 
   /**
    * Delete an app from the top menu of space
-   * 
+   *
    * @param app
    */
   public void deleteApplications(String app) {
@@ -248,7 +248,7 @@ public class SpaceSettingManagement {
 
   /**
    * input name, des into setting tab
-   * 
+   *
    * @param name name of space
    * @param des description of space
    */
@@ -311,7 +311,7 @@ public class SpaceSettingManagement {
 
   /**
    * add a new simple node
-   * 
+   *
    * @param name
    */
   public void addANodeSimple(String name) {
@@ -334,7 +334,7 @@ public class SpaceSettingManagement {
 
   /**
    * add a new simple child node
-   * 
+   *
    * @param parentNode
    * @param childNode
    */
@@ -361,7 +361,7 @@ public class SpaceSettingManagement {
 
   /**
    * Add an application
-   * 
+   *
    * @param category
    * @param application
    */
@@ -385,7 +385,7 @@ public class SpaceSettingManagement {
 
   /**
    * Edit a node with new label
-   * 
+   *
    * @param nodeName
    * @param label
    */
@@ -404,7 +404,7 @@ public class SpaceSettingManagement {
 
   /**
    * Set permissions for a space
-   * 
+   *
    * @param arrayRight
    */
   public void setPermissionForSpace(String[] arrayRight) {
@@ -424,7 +424,7 @@ public class SpaceSettingManagement {
 
   /**
    * Set permissions for a space
-   * 
+   *
    * @param arrayRight
    */
   public void setPermissionForSpaceFromPopup(String[] arrayRight) {
@@ -436,7 +436,7 @@ public class SpaceSettingManagement {
 
   /**
    * Delete a node
-   * 
+   *
    * @param nodeName
    */
   public void deleteANode(String nodeName) {

@@ -175,6 +175,7 @@ public class PortletInSpaceHomePageTestIT extends Base {
         info("create new space");
         String space = "space" + getRandomNumber();
         String spaceDesa = "descriptiona" + getRandomNumber();
+        spaceManagement.changeStatus("Available");
         homePagePlatform.goToMySpaces();
         spaceManagement.addNewSpaceSimple(space, spaceDesa);
         spaceSettingManagement.inviteUser(DATA_USER2, false, "");
