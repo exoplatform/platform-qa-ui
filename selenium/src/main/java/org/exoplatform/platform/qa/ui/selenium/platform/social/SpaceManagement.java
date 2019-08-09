@@ -730,17 +730,17 @@ public class SpaceManagement {
     info("Request successfully");
   }
 
-  /**
-   * Cancel a pending request
-   *
-   * @param space
-   */
-  public void cancelPendingRequest(String space) {
-    info("evt.click on Cancel button");
-    evt.click(ELEMENT_SPACE_CANCEL_BUTTON.replace("${space}", space));
-    evt.waitForElementNotPresent(ELEMENT_SPACE_TITLE.replace("${space}", space), 2000, 1);
-    info("Cancelling pending request is success");
-  }
+    /**
+     * Cancel a pending request
+     *
+     * @param space
+     */
+    public void cancelPendingRequest(String space) {
+        info("evt.click on Cancel button");
+        evt.click(ELEMENT_SPACE_CANCEL_BUTTON.replace("${space}", space));
+        evt.waitForElementNotPresent(ELEMENT_SPACE_TITLE.replace("${space}", space), 2000, 1);
+        info("Cancelling pending request is success");
+    }
 
   /**
    * Open Activity Stream portlet
