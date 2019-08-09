@@ -1707,7 +1707,8 @@ public class CalendarLocator {
   public static final SelenideElement ELEMENT_REMINDER_POPUP=   $(byXpath("//div[@class='reminder pull-left']//div[@class='uiPopup']"));
   public static final SelenideElement ELEMENT_REMINDER_CLOSE_BUTTON=    $(byClassName("uiIconClose"));
 
-  public static final SelenideElement ELEMENT_SAVE_REMINDER_BUTTON=$(byXpath("//*[@id=\"eventReminder\"]/div[3]/button[1]"));
+  public static final SelenideElement ELEMENT_SAVE_REMINDER_BUTTON=$(byXpath("//*[@id='eventReminder']/div[3]/button[1]"));
+  public static final SelenideElement ELEMENT_CANCEL_REMINDER_BUTTON=$(byXpath("//*[@id='eventReminder']/div[3]/button[2]"));
   public static final SelenideElement ELEMENT_REMINDER_LABEL=$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[2]/div[2]/a"));
 
   public static final SelenideElement ELEMENT_REPEAT_SAVE_BUTTON=$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[3]/div[2]/div[2]/div[2]/div/div[2]/button[1]"));
