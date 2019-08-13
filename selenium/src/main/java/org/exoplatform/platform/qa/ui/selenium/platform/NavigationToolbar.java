@@ -380,7 +380,7 @@ public class NavigationToolbar {
     info("Select a forum for poll");
     $(ELEMENT_SELECT_FORUM_COMBOBOX).waitUntil(Condition.visible, Configuration.timeout).click();
     $(byText(forum)).click();
-    $(ELEMENT_SELECT_FORUM_COMBOBOX).waitUntil(Condition.hasText(forum), Configuration.timeout);
+    $(ELEMENT_SELECT_FORUM_COMBOBOX).waitUntil(Condition.text(forum), Configuration.timeout);
     info("Click on next button");
     ELEMENT_LIST_FORUM_IN_TOP_NAVIGATION.waitUntil(Condition.disappear, Configuration.timeout);
     $(ELEMENT_NEXT_BUTTON).waitUntil(Condition.enabled, Configuration.timeout);

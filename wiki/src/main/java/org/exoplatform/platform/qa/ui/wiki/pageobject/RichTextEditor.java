@@ -921,10 +921,10 @@ public class RichTextEditor {
    */
   public void goToEmailLink() {
     info("Click on Link menu");
-    sleep(Configuration.collectionsTimeout);
+    sleep(Configuration.timeout);
     $(ELEMENT_LINK).doubleClick();
     info("Click on Attached file Link menu");
-    sleep(Configuration.collectionsTimeout);
+    sleep(Configuration.timeout);
     $(ELEMENT_EMAIL_LINK_MENU).shouldBe(Condition.visible);
     $(ELEMENT_EMAIL_LINK_MENU).doubleClick();
     sleep(2000);

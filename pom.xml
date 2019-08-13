@@ -62,10 +62,15 @@
     <version.surefire.plugin>2.19.1</version.surefire.plugin>
     <!-- Dependencies for UI Tests -->
     <!-- JUnit5 stack -->
-    <org.junit.platform.version>1.0.0</org.junit.platform.version>
-    <org.junit.jupiter.version>5.0.0</org.junit.jupiter.version>
+    <org.junit.platform.version>1.5.1</org.junit.platform.version>
+<!--    <org.junit.platform.version>1.0.0</org.junit.platform.version>-->
+    <org.junit.jupiter.version>5.5.1</org.junit.jupiter.version>
+<!--    <org.junit.jupiter.version>5.0.0</org.junit.jupiter.version>-->
     <!-- Selenium/Selenide Stack -->
-    <selenide.version>4.3</selenide.version>
+    <selenium.version>3.141.59</selenium.version>
+<!--    <selenium.version>3.0.1</selenium.version>-->
+    <selenide.version>5.2.8</selenide.version>
+<!--    <selenide.version>4.3</selenide.version>-->
     <guava.version>21.0</guava.version>
     <!-- Selenium / Selenide configuration  -->
     <selenide.browser>org.exoplatform.platform.qa.ui.core.config.driver.ExoWebDriverProvider</selenide.browser>
@@ -111,8 +116,15 @@
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-api</artifactId>
-      <version>3.0.1</version>
+      <version>${selenium.version}</version>
     </dependency>
+<!--
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>${selenium.version}</version>
+    </dependency>
+-->
     <!--  Add this dependency to fix a classpath error with ChromeDriver -->
     <dependency>
       <groupId>com.google.guava</groupId>
@@ -123,7 +135,12 @@
     <!-- JUnit5 stack -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${org.junit.jupiter.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
       <version>${org.junit.jupiter.version}</version>
     </dependency>
   </dependencies>

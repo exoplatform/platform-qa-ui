@@ -1,6 +1,6 @@
 package org.exoplatform.platform.qa.ui.platform.social;
 
-import static com.codeborne.selenide.Condition.hasText;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.not;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;

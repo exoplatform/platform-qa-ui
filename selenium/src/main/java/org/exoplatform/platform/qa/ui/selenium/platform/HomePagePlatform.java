@@ -81,7 +81,7 @@ public class HomePagePlatform {
     info("Click on Home link of intranet page");
     sleep(Configuration.timeout);
     executeJavaScript("window.scrollBy(0,-5500)", "");
-    sleep(Configuration.collectionsTimeout);
+    sleep(Configuration.timeout);
     $(ELEMENT_HOME_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout).click();
   }
 

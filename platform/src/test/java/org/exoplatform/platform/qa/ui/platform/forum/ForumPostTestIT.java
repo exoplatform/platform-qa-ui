@@ -294,7 +294,7 @@ public class ForumPostTestIT extends Base {
     $(byXpath("/html/body")).sendKeys(description);
     switchTo().defaultContent();
     executeJavaScript("window.scrollBy(0,150)");
-    sleep(Configuration.collectionsTimeout);
+    sleep(Configuration.timeout);
     $(ELEMENT_START_TOPIC_ATTACH_FILE).waitUntil(Condition.visible,Configuration.timeout).click();
     sleep(Configuration.timeout);
     $(By.className("file")).uploadFromClasspath("eXoPlatform.pdf");

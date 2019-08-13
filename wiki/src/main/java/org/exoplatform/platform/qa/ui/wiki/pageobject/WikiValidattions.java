@@ -697,7 +697,7 @@ public class WikiValidattions {
      */
     public void verifyTitleWikiPage(String title) {
         info("Verify that the wiki page is created and shown in the list");
-        sleep(Configuration.collectionsTimeout);
+        sleep(Configuration.timeout);
         $(byXpath("//div[@id='UITreeExplorer']/following::div[@id='titleInfo' and text()='${title}']".replace("${title}",title))).waitUntil(Condition.visible,Configuration.timeout);
         info("The wiki page is created successfully");
     }

@@ -138,7 +138,7 @@ public class ActivityStream {
      */
     public void checkCommentOfActivity(String activity, String comment) {
         info("Verify that the comment is added");
-        sleep(Configuration.collectionsTimeout);
+        sleep(Configuration.timeout);
         $(byXpath("//div[@class='titleWiki']/a[text()='${activity}']".replace("${activity}",activity))).should(Condition.exist);
         sleep(2000);
         ELEMENT_ACTIVITY_STREAM_CONTAINER.find(byText(comment)).should(Condition.exist);
@@ -1810,7 +1810,7 @@ public class ActivityStream {
         // Get id Comment button
         executeJavaScript("window.scrollBy(0,-250)");
         $(byId(ELEMENT_VIEW_ALL_REPLIES_LINK.replace("{id}", idBlocComment))).waitUntil(Condition.appears, Configuration.timeout)
-                .findElementByClassName("subCommentShowAllLink")
+                .findElement(By.className("subCommentShowAllLink"))
                 .click();
     }
 

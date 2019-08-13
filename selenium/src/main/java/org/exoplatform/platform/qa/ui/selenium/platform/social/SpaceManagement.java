@@ -69,8 +69,8 @@ public class SpaceManagement {
       if (isVerify)
         alert.verifyAlertMessage(ELEMENT_SPACE_CONFIRM_DELETE);
       $(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
-      sleep(Configuration.collectionsTimeout);
-      ELEMENT_SPACES_LIST.find(byText(spaceName)).waitUntil(Condition.disappear, Configuration.collectionsTimeout);
+      sleep(Configuration.timeout);
+      ELEMENT_SPACES_LIST.find(byText(spaceName)).waitUntil(Condition.disappear, Configuration.timeout);
     }
   }
 

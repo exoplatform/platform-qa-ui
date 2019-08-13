@@ -2,7 +2,6 @@ package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
-import static io.netty.util.internal.SystemPropertyUtil.contains;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_BUTTON_CONFIRM_UPLOAD;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_INPUT_UPLOAD_AVATAR;

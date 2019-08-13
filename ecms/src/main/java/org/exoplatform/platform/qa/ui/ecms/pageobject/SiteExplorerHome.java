@@ -95,7 +95,7 @@ public class SiteExplorerHome {
         selectNode(arrayElement);
       }
     }
-    $(byId("address")).waitUntil(Condition.hasValue("/"+path),Configuration.timeout);
+    $(byId("address")).waitUntil(Condition.value("/"+path),Configuration.timeout);
     sleep(Configuration.timeout);
   }
 
@@ -177,7 +177,7 @@ public class SiteExplorerHome {
     // scroll de 50 pixel
     executeJavaScript("window.scrollBy(0,50);", "");
     $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
-    sleep(Configuration.collectionsTimeout);
+    sleep(Configuration.timeout);
     info("Right click on nodename");
     executeJavaScript("window.scrollBy(0,-250)", "");
     sleep(Configuration.timeout);
@@ -193,7 +193,7 @@ public class SiteExplorerHome {
     $(ELEMENT_SITEEXPLORER_ACTION_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
     sleep(Configuration.timeout);
     info("Click on Delete button on Confirm popup");
-    $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     refresh();
     if(destination.equals(true))
@@ -336,7 +336,7 @@ public class SiteExplorerHome {
     Boolean verify = (Boolean) (params.length > 0 ? params[0] : true);
     sleep(2000);
     $(byId("MultiUploadInputFiles")).uploadFromClasspath(link);
-    sleep(Configuration.collectionsTimeout);
+    sleep(Configuration.timeout);
     refresh();
     info("verify:" + verify);
     if (verify) {

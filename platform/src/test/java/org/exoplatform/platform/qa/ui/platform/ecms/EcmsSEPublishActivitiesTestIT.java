@@ -90,7 +90,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
     createNewDocument.addNewFile(title, content);
     createNewDocument.saveAndClose();
     homePagePlatform.goToHomePage();
-    sleep(Configuration.collectionsTimeout);
+    sleep(Configuration.timeout);
     $(byText(title)).waitUntil(Condition.visible,Configuration.timeout).should(Condition.visible);
     $(byText(title)).parent().parent().parent().parent().find(byText("Managed Sites")).should(Condition.visible);
     // delete data

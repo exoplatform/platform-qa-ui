@@ -1,0 +1,732 @@
+fdrouet@imac:~/.../exo/QAF/platform-qa-ui (master *%=) $ mvn dependency:tree -Prun-its,grid,exo-private
+Your configured notifier [ChosenNotifiers{primary=none, secondary=[]}] does not exist. Visit https://github.com/jcgay/send-notification/wiki#configuration to select an existing notifier.
+Scanning for projects...
+------------------------------------------------------------------------
+Reactor Build Order:
+
+eXo PLF:: QA - UI                                                  [pom]
+eXo PLF:: QA - UI - Core                                           [jar]
+eXo PLF:: QA - UI - Selenium (Legacy Code)                         [jar]
+eXo PLF:: QA - UI - Commons                                        [jar]
+eXo PLF:: QA - UI - Calendar                                       [jar]
+eXo PLF:: QA - UI - GateIn                                         [jar]
+eXo PLF:: QA - UI - ECMS                                           [jar]
+eXo PLF:: QA - UI - Social                                         [jar]
+eXo PLF:: QA - UI - Forum                                          [jar]
+eXo PLF:: QA - UI - Wiki                                           [jar]
+eXo PLF:: QA - UI - Answer                                         [jar]
+eXo PLF:: QA - UI - Task                                           [jar]
+eXo PLF:: QA - UI - Chat                                           [jar]
+eXo PLF:: QA - UI - Platform                                       [jar]
+
+-----------< org.exoplatform.platform.qa.ui:platform-qa-ui >------------
+Building eXo PLF:: QA - UI 1.0.x-SNAPSHOT                         [1/14]
+--------------------------------[ pom ]---------------------------------
+
+--- maven-dependency-plugin:2.10:tree (default-cli) @ platform-qa-ui ---
+org.exoplatform.platform.qa.ui:platform-qa-ui:pom:1.0.x-SNAPSHOT
++- org.slf4j:slf4j-simple:jar:1.7.18:compile
+|  \- org.slf4j:slf4j-api:jar:1.7.18:compile
++- com.codeborne:selenide:jar:4.3:compile
+|  +- org.apache.httpcomponents:httpcore:jar:4.4.6:compile
+|  +- com.google.code.gson:gson:jar:2.8.0:compile
+|  +- net.lightbody.bmp:browsermob-core:jar:2.1.4:compile
+|  |  +- net.lightbody.bmp:littleproxy:jar:1.1.0-beta-bmp-15:compile
+|  |  |  \- org.apache.commons:commons-lang3:jar:3.4:compile
+|  |  +- com.fasterxml.jackson.core:jackson-core:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-databind:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.8.5:compile
+|  |  +- dnsjava:dnsjava:jar:2.1.7:compile
+|  |  +- org.slf4j:jcl-over-slf4j:jar:1.7.18:compile
+|  |  +- com.jcraft:jzlib:jar:1.1.3:compile
+|  |  +- io.netty:netty-all:jar:4.0.42.Final:compile
+|  |  +- org.bouncycastle:bcprov-jdk15on:jar:1.56:compile
+|  |  +- org.bouncycastle:bcpkix-jdk15on:jar:1.56:compile
+|  |  \- net.lightbody.bmp:mitm:jar:2.1.4:compile
+|  +- com.codeborne:phantomjsdriver:jar:1.3.0:runtime
+|  \- commons-codec:commons-codec:jar:1.10:runtime
++- org.seleniumhq.selenium:selenium-api:jar:3.141.59:compile
++- org.seleniumhq.selenium:selenium-java:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-chrome-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-edge-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-firefox-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-ie-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-opera-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-remote-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-safari-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-support:jar:3.141.59:compile
+|  +- net.bytebuddy:byte-buddy:jar:1.8.15:compile
+|  +- org.apache.commons:commons-exec:jar:1.3:compile
+|  +- com.squareup.okhttp3:okhttp:jar:3.11.0:compile
+|  \- com.squareup.okio:okio:jar:1.14.0:compile
++- com.google.guava:guava:jar:21.0:compile
+\- org.junit.jupiter:junit-jupiter-api:jar:5.0.0:compile
+   +- org.apiguardian:apiguardian-api:jar:1.0.0:compile
+   +- org.opentest4j:opentest4j:jar:1.0.0:compile
+   \- org.junit.platform:junit-platform-commons:jar:1.0.0:compile
+
+---------< org.exoplatform.platform.qa.ui:platform-qa-ui-core >---------
+Building eXo PLF:: QA - UI - Core 1.0.x-SNAPSHOT                  [2/14]
+--------------------------------[ jar ]---------------------------------
+
+--- maven-dependency-plugin:2.10:tree (default-cli) @ platform-qa-ui-core ---
+org.exoplatform.platform.qa.ui:platform-qa-ui-core:jar:1.0.x-SNAPSHOT
++- org.slf4j:slf4j-simple:jar:1.7.18:compile
+|  \- org.slf4j:slf4j-api:jar:1.7.18:compile
++- com.codeborne:selenide:jar:4.3:compile
+|  +- org.apache.httpcomponents:httpcore:jar:4.4.6:compile
+|  +- com.google.code.gson:gson:jar:2.8.0:compile
+|  +- net.lightbody.bmp:browsermob-core:jar:2.1.4:compile
+|  |  +- net.lightbody.bmp:littleproxy:jar:1.1.0-beta-bmp-15:compile
+|  |  |  \- org.apache.commons:commons-lang3:jar:3.4:compile
+|  |  +- com.fasterxml.jackson.core:jackson-core:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-databind:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.8.5:compile
+|  |  +- dnsjava:dnsjava:jar:2.1.7:compile
+|  |  +- org.slf4j:jcl-over-slf4j:jar:1.7.18:compile
+|  |  +- com.jcraft:jzlib:jar:1.1.3:compile
+|  |  +- io.netty:netty-all:jar:4.0.42.Final:compile
+|  |  +- org.bouncycastle:bcprov-jdk15on:jar:1.56:compile
+|  |  +- org.bouncycastle:bcpkix-jdk15on:jar:1.56:compile
+|  |  \- net.lightbody.bmp:mitm:jar:2.1.4:compile
+|  +- com.codeborne:phantomjsdriver:jar:1.3.0:runtime
+|  \- commons-codec:commons-codec:jar:1.10:runtime
++- org.seleniumhq.selenium:selenium-api:jar:3.141.59:compile
++- org.seleniumhq.selenium:selenium-java:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-chrome-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-edge-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-firefox-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-ie-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-opera-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-remote-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-safari-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-support:jar:3.141.59:compile
+|  +- net.bytebuddy:byte-buddy:jar:1.8.15:compile
+|  +- org.apache.commons:commons-exec:jar:1.3:compile
+|  +- com.squareup.okhttp3:okhttp:jar:3.11.0:compile
+|  \- com.squareup.okio:okio:jar:1.14.0:compile
++- com.google.guava:guava:jar:21.0:compile
+\- org.junit.jupiter:junit-jupiter-api:jar:5.0.0:compile
+   +- org.apiguardian:apiguardian-api:jar:1.0.0:compile
+   +- org.opentest4j:opentest4j:jar:1.0.0:compile
+   \- org.junit.platform:junit-platform-commons:jar:1.0.0:compile
+
+-------< org.exoplatform.platform.qa.ui:platform-qa-ui-selenium >-------
+Building eXo PLF:: QA - UI - Selenium (Legacy Code) 1.0.x-SNAPSHOT [3/14]
+--------------------------------[ jar ]---------------------------------
+
+--- maven-dependency-plugin:2.10:tree (default-cli) @ platform-qa-ui-selenium ---
+org.exoplatform.platform.qa.ui:platform-qa-ui-selenium:jar:1.0.x-SNAPSHOT
++- org.exoplatform.platform.qa.ui:platform-qa-ui-core:jar:1.0.x-SNAPSHOT:compile
++- org.slf4j:slf4j-simple:jar:1.7.18:compile
+|  \- org.slf4j:slf4j-api:jar:1.7.18:compile
++- com.codeborne:selenide:jar:4.3:compile
+|  +- org.apache.httpcomponents:httpcore:jar:4.4.6:compile
+|  +- com.google.code.gson:gson:jar:2.8.0:compile
+|  +- net.lightbody.bmp:browsermob-core:jar:2.1.4:compile
+|  |  +- net.lightbody.bmp:littleproxy:jar:1.1.0-beta-bmp-15:compile
+|  |  |  \- org.apache.commons:commons-lang3:jar:3.4:compile
+|  |  +- com.fasterxml.jackson.core:jackson-core:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-databind:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.8.5:compile
+|  |  +- dnsjava:dnsjava:jar:2.1.7:compile
+|  |  +- org.slf4j:jcl-over-slf4j:jar:1.7.18:compile
+|  |  +- com.jcraft:jzlib:jar:1.1.3:compile
+|  |  +- io.netty:netty-all:jar:4.0.42.Final:compile
+|  |  +- org.bouncycastle:bcprov-jdk15on:jar:1.56:compile
+|  |  +- org.bouncycastle:bcpkix-jdk15on:jar:1.56:compile
+|  |  \- net.lightbody.bmp:mitm:jar:2.1.4:compile
+|  +- com.codeborne:phantomjsdriver:jar:1.3.0:runtime
+|  \- commons-codec:commons-codec:jar:1.10:runtime
++- org.seleniumhq.selenium:selenium-api:jar:3.141.59:compile
++- org.seleniumhq.selenium:selenium-java:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-chrome-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-edge-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-firefox-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-ie-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-opera-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-remote-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-safari-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-support:jar:3.141.59:compile
+|  +- net.bytebuddy:byte-buddy:jar:1.8.15:compile
+|  +- org.apache.commons:commons-exec:jar:1.3:compile
+|  +- com.squareup.okhttp3:okhttp:jar:3.11.0:compile
+|  \- com.squareup.okio:okio:jar:1.14.0:compile
++- com.google.guava:guava:jar:21.0:compile
+\- org.junit.jupiter:junit-jupiter-api:jar:5.0.0:compile
+   +- org.apiguardian:apiguardian-api:jar:1.0.0:compile
+   +- org.opentest4j:opentest4j:jar:1.0.0:compile
+   \- org.junit.platform:junit-platform-commons:jar:1.0.0:compile
+
+-------< org.exoplatform.platform.qa.ui:platform-qa-ui-commons >--------
+Building eXo PLF:: QA - UI - Commons 1.0.x-SNAPSHOT               [4/14]
+--------------------------------[ jar ]---------------------------------
+
+--- maven-dependency-plugin:2.10:tree (default-cli) @ platform-qa-ui-commons ---
+org.exoplatform.platform.qa.ui:platform-qa-ui-commons:jar:1.0.x-SNAPSHOT
++- org.exoplatform.platform.qa.ui:platform-qa-ui-core:jar:1.0.x-SNAPSHOT:compile
++- org.exoplatform.platform.qa.ui:platform-qa-ui-selenium:jar:1.0.x-SNAPSHOT:compile
++- org.slf4j:slf4j-simple:jar:1.7.18:compile
+|  \- org.slf4j:slf4j-api:jar:1.7.18:compile
++- com.codeborne:selenide:jar:4.3:compile
+|  +- org.apache.httpcomponents:httpcore:jar:4.4.6:compile
+|  +- com.google.code.gson:gson:jar:2.8.0:compile
+|  +- net.lightbody.bmp:browsermob-core:jar:2.1.4:compile
+|  |  +- net.lightbody.bmp:littleproxy:jar:1.1.0-beta-bmp-15:compile
+|  |  |  \- org.apache.commons:commons-lang3:jar:3.4:compile
+|  |  +- com.fasterxml.jackson.core:jackson-core:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-databind:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.8.5:compile
+|  |  +- dnsjava:dnsjava:jar:2.1.7:compile
+|  |  +- org.slf4j:jcl-over-slf4j:jar:1.7.18:compile
+|  |  +- com.jcraft:jzlib:jar:1.1.3:compile
+|  |  +- io.netty:netty-all:jar:4.0.42.Final:compile
+|  |  +- org.bouncycastle:bcprov-jdk15on:jar:1.56:compile
+|  |  +- org.bouncycastle:bcpkix-jdk15on:jar:1.56:compile
+|  |  \- net.lightbody.bmp:mitm:jar:2.1.4:compile
+|  +- com.codeborne:phantomjsdriver:jar:1.3.0:runtime
+|  \- commons-codec:commons-codec:jar:1.10:runtime
++- org.seleniumhq.selenium:selenium-api:jar:3.141.59:compile
++- org.seleniumhq.selenium:selenium-java:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-chrome-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-edge-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-firefox-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-ie-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-opera-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-remote-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-safari-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-support:jar:3.141.59:compile
+|  +- net.bytebuddy:byte-buddy:jar:1.8.15:compile
+|  +- org.apache.commons:commons-exec:jar:1.3:compile
+|  +- com.squareup.okhttp3:okhttp:jar:3.11.0:compile
+|  \- com.squareup.okio:okio:jar:1.14.0:compile
++- com.google.guava:guava:jar:21.0:compile
+\- org.junit.jupiter:junit-jupiter-api:jar:5.0.0:compile
+   +- org.apiguardian:apiguardian-api:jar:1.0.0:compile
+   +- org.opentest4j:opentest4j:jar:1.0.0:compile
+   \- org.junit.platform:junit-platform-commons:jar:1.0.0:compile
+
+-------< org.exoplatform.platform.qa.ui:platform-qa-ui-calendar >-------
+Building eXo PLF:: QA - UI - Calendar 1.0.x-SNAPSHOT              [5/14]
+--------------------------------[ jar ]---------------------------------
+
+--- maven-dependency-plugin:2.10:tree (default-cli) @ platform-qa-ui-calendar ---
+org.exoplatform.platform.qa.ui:platform-qa-ui-calendar:jar:1.0.x-SNAPSHOT
++- org.exoplatform.platform.qa.ui:platform-qa-ui-commons:jar:1.0.x-SNAPSHOT:compile
+|  +- org.exoplatform.platform.qa.ui:platform-qa-ui-core:jar:1.0.x-SNAPSHOT:compile
+|  \- org.exoplatform.platform.qa.ui:platform-qa-ui-selenium:jar:1.0.x-SNAPSHOT:compile
++- org.slf4j:slf4j-simple:jar:1.7.18:compile
+|  \- org.slf4j:slf4j-api:jar:1.7.18:compile
++- com.codeborne:selenide:jar:4.3:compile
+|  +- org.apache.httpcomponents:httpcore:jar:4.4.6:compile
+|  +- com.google.code.gson:gson:jar:2.8.0:compile
+|  +- net.lightbody.bmp:browsermob-core:jar:2.1.4:compile
+|  |  +- net.lightbody.bmp:littleproxy:jar:1.1.0-beta-bmp-15:compile
+|  |  |  \- org.apache.commons:commons-lang3:jar:3.4:compile
+|  |  +- com.fasterxml.jackson.core:jackson-core:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-databind:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.8.5:compile
+|  |  +- dnsjava:dnsjava:jar:2.1.7:compile
+|  |  +- org.slf4j:jcl-over-slf4j:jar:1.7.18:compile
+|  |  +- com.jcraft:jzlib:jar:1.1.3:compile
+|  |  +- io.netty:netty-all:jar:4.0.42.Final:compile
+|  |  +- org.bouncycastle:bcprov-jdk15on:jar:1.56:compile
+|  |  +- org.bouncycastle:bcpkix-jdk15on:jar:1.56:compile
+|  |  \- net.lightbody.bmp:mitm:jar:2.1.4:compile
+|  +- com.codeborne:phantomjsdriver:jar:1.3.0:runtime
+|  \- commons-codec:commons-codec:jar:1.10:runtime
++- org.seleniumhq.selenium:selenium-api:jar:3.141.59:compile
++- org.seleniumhq.selenium:selenium-java:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-chrome-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-edge-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-firefox-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-ie-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-opera-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-remote-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-safari-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-support:jar:3.141.59:compile
+|  +- net.bytebuddy:byte-buddy:jar:1.8.15:compile
+|  +- org.apache.commons:commons-exec:jar:1.3:compile
+|  +- com.squareup.okhttp3:okhttp:jar:3.11.0:compile
+|  \- com.squareup.okio:okio:jar:1.14.0:compile
++- com.google.guava:guava:jar:21.0:compile
+\- org.junit.jupiter:junit-jupiter-api:jar:5.0.0:compile
+   +- org.apiguardian:apiguardian-api:jar:1.0.0:compile
+   +- org.opentest4j:opentest4j:jar:1.0.0:compile
+   \- org.junit.platform:junit-platform-commons:jar:1.0.0:compile
+
+--------< org.exoplatform.platform.qa.ui:platform-qa-ui-gatein >--------
+Building eXo PLF:: QA - UI - GateIn 1.0.x-SNAPSHOT                [6/14]
+--------------------------------[ jar ]---------------------------------
+
+--- maven-dependency-plugin:2.10:tree (default-cli) @ platform-qa-ui-gatein ---
+org.exoplatform.platform.qa.ui:platform-qa-ui-gatein:jar:1.0.x-SNAPSHOT
++- org.exoplatform.platform.qa.ui:platform-qa-ui-commons:jar:1.0.x-SNAPSHOT:compile
+|  +- org.exoplatform.platform.qa.ui:platform-qa-ui-core:jar:1.0.x-SNAPSHOT:compile
+|  \- org.exoplatform.platform.qa.ui:platform-qa-ui-selenium:jar:1.0.x-SNAPSHOT:compile
++- org.slf4j:slf4j-simple:jar:1.7.18:compile
+|  \- org.slf4j:slf4j-api:jar:1.7.18:compile
++- com.codeborne:selenide:jar:4.3:compile
+|  +- org.apache.httpcomponents:httpcore:jar:4.4.6:compile
+|  +- com.google.code.gson:gson:jar:2.8.0:compile
+|  +- net.lightbody.bmp:browsermob-core:jar:2.1.4:compile
+|  |  +- net.lightbody.bmp:littleproxy:jar:1.1.0-beta-bmp-15:compile
+|  |  |  \- org.apache.commons:commons-lang3:jar:3.4:compile
+|  |  +- com.fasterxml.jackson.core:jackson-core:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-databind:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.8.5:compile
+|  |  +- dnsjava:dnsjava:jar:2.1.7:compile
+|  |  +- org.slf4j:jcl-over-slf4j:jar:1.7.18:compile
+|  |  +- com.jcraft:jzlib:jar:1.1.3:compile
+|  |  +- io.netty:netty-all:jar:4.0.42.Final:compile
+|  |  +- org.bouncycastle:bcprov-jdk15on:jar:1.56:compile
+|  |  +- org.bouncycastle:bcpkix-jdk15on:jar:1.56:compile
+|  |  \- net.lightbody.bmp:mitm:jar:2.1.4:compile
+|  +- com.codeborne:phantomjsdriver:jar:1.3.0:runtime
+|  \- commons-codec:commons-codec:jar:1.10:runtime
++- org.seleniumhq.selenium:selenium-api:jar:3.141.59:compile
++- org.seleniumhq.selenium:selenium-java:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-chrome-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-edge-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-firefox-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-ie-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-opera-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-remote-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-safari-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-support:jar:3.141.59:compile
+|  +- net.bytebuddy:byte-buddy:jar:1.8.15:compile
+|  +- org.apache.commons:commons-exec:jar:1.3:compile
+|  +- com.squareup.okhttp3:okhttp:jar:3.11.0:compile
+|  \- com.squareup.okio:okio:jar:1.14.0:compile
++- com.google.guava:guava:jar:21.0:compile
+\- org.junit.jupiter:junit-jupiter-api:jar:5.0.0:compile
+   +- org.apiguardian:apiguardian-api:jar:1.0.0:compile
+   +- org.opentest4j:opentest4j:jar:1.0.0:compile
+   \- org.junit.platform:junit-platform-commons:jar:1.0.0:compile
+
+---------< org.exoplatform.platform.qa.ui:platform-qa-ui-ecms >---------
+Building eXo PLF:: QA - UI - ECMS 1.0.x-SNAPSHOT                  [7/14]
+--------------------------------[ jar ]---------------------------------
+
+--- maven-dependency-plugin:2.10:tree (default-cli) @ platform-qa-ui-ecms ---
+org.exoplatform.platform.qa.ui:platform-qa-ui-ecms:jar:1.0.x-SNAPSHOT
++- org.exoplatform.platform.qa.ui:platform-qa-ui-commons:jar:1.0.x-SNAPSHOT:compile
+|  +- org.exoplatform.platform.qa.ui:platform-qa-ui-core:jar:1.0.x-SNAPSHOT:compile
+|  \- org.exoplatform.platform.qa.ui:platform-qa-ui-selenium:jar:1.0.x-SNAPSHOT:compile
++- org.exoplatform.platform.qa.ui:platform-qa-ui-gatein:jar:1.0.x-SNAPSHOT:compile
++- org.slf4j:slf4j-simple:jar:1.7.18:compile
+|  \- org.slf4j:slf4j-api:jar:1.7.18:compile
++- com.codeborne:selenide:jar:4.3:compile
+|  +- org.apache.httpcomponents:httpcore:jar:4.4.6:compile
+|  +- com.google.code.gson:gson:jar:2.8.0:compile
+|  +- net.lightbody.bmp:browsermob-core:jar:2.1.4:compile
+|  |  +- net.lightbody.bmp:littleproxy:jar:1.1.0-beta-bmp-15:compile
+|  |  |  \- org.apache.commons:commons-lang3:jar:3.4:compile
+|  |  +- com.fasterxml.jackson.core:jackson-core:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-databind:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.8.5:compile
+|  |  +- dnsjava:dnsjava:jar:2.1.7:compile
+|  |  +- org.slf4j:jcl-over-slf4j:jar:1.7.18:compile
+|  |  +- com.jcraft:jzlib:jar:1.1.3:compile
+|  |  +- io.netty:netty-all:jar:4.0.42.Final:compile
+|  |  +- org.bouncycastle:bcprov-jdk15on:jar:1.56:compile
+|  |  +- org.bouncycastle:bcpkix-jdk15on:jar:1.56:compile
+|  |  \- net.lightbody.bmp:mitm:jar:2.1.4:compile
+|  +- com.codeborne:phantomjsdriver:jar:1.3.0:runtime
+|  \- commons-codec:commons-codec:jar:1.10:runtime
++- org.seleniumhq.selenium:selenium-api:jar:3.141.59:compile
++- org.seleniumhq.selenium:selenium-java:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-chrome-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-edge-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-firefox-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-ie-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-opera-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-remote-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-safari-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-support:jar:3.141.59:compile
+|  +- net.bytebuddy:byte-buddy:jar:1.8.15:compile
+|  +- org.apache.commons:commons-exec:jar:1.3:compile
+|  +- com.squareup.okhttp3:okhttp:jar:3.11.0:compile
+|  \- com.squareup.okio:okio:jar:1.14.0:compile
++- com.google.guava:guava:jar:21.0:compile
+\- org.junit.jupiter:junit-jupiter-api:jar:5.0.0:compile
+   +- org.apiguardian:apiguardian-api:jar:1.0.0:compile
+   +- org.opentest4j:opentest4j:jar:1.0.0:compile
+   \- org.junit.platform:junit-platform-commons:jar:1.0.0:compile
+
+--------< org.exoplatform.platform.qa.ui:platform-qa-ui-social >--------
+Building eXo PLF:: QA - UI - Social 1.0.x-SNAPSHOT                [8/14]
+--------------------------------[ jar ]---------------------------------
+
+--- maven-dependency-plugin:2.10:tree (default-cli) @ platform-qa-ui-social ---
+org.exoplatform.platform.qa.ui:platform-qa-ui-social:jar:1.0.x-SNAPSHOT
++- org.exoplatform.platform.qa.ui:platform-qa-ui-commons:jar:1.0.x-SNAPSHOT:compile
+|  +- org.exoplatform.platform.qa.ui:platform-qa-ui-core:jar:1.0.x-SNAPSHOT:compile
+|  \- org.exoplatform.platform.qa.ui:platform-qa-ui-selenium:jar:1.0.x-SNAPSHOT:compile
++- org.slf4j:slf4j-simple:jar:1.7.18:compile
+|  \- org.slf4j:slf4j-api:jar:1.7.18:compile
++- com.codeborne:selenide:jar:4.3:compile
+|  +- org.apache.httpcomponents:httpcore:jar:4.4.6:compile
+|  +- com.google.code.gson:gson:jar:2.8.0:compile
+|  +- net.lightbody.bmp:browsermob-core:jar:2.1.4:compile
+|  |  +- net.lightbody.bmp:littleproxy:jar:1.1.0-beta-bmp-15:compile
+|  |  |  \- org.apache.commons:commons-lang3:jar:3.4:compile
+|  |  +- com.fasterxml.jackson.core:jackson-core:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-databind:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.8.5:compile
+|  |  +- dnsjava:dnsjava:jar:2.1.7:compile
+|  |  +- org.slf4j:jcl-over-slf4j:jar:1.7.18:compile
+|  |  +- com.jcraft:jzlib:jar:1.1.3:compile
+|  |  +- io.netty:netty-all:jar:4.0.42.Final:compile
+|  |  +- org.bouncycastle:bcprov-jdk15on:jar:1.56:compile
+|  |  +- org.bouncycastle:bcpkix-jdk15on:jar:1.56:compile
+|  |  \- net.lightbody.bmp:mitm:jar:2.1.4:compile
+|  +- com.codeborne:phantomjsdriver:jar:1.3.0:runtime
+|  \- commons-codec:commons-codec:jar:1.10:runtime
++- org.seleniumhq.selenium:selenium-api:jar:3.141.59:compile
++- org.seleniumhq.selenium:selenium-java:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-chrome-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-edge-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-firefox-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-ie-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-opera-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-remote-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-safari-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-support:jar:3.141.59:compile
+|  +- net.bytebuddy:byte-buddy:jar:1.8.15:compile
+|  +- org.apache.commons:commons-exec:jar:1.3:compile
+|  +- com.squareup.okhttp3:okhttp:jar:3.11.0:compile
+|  \- com.squareup.okio:okio:jar:1.14.0:compile
++- com.google.guava:guava:jar:21.0:compile
+\- org.junit.jupiter:junit-jupiter-api:jar:5.0.0:compile
+   +- org.apiguardian:apiguardian-api:jar:1.0.0:compile
+   +- org.opentest4j:opentest4j:jar:1.0.0:compile
+   \- org.junit.platform:junit-platform-commons:jar:1.0.0:compile
+
+--------< org.exoplatform.platform.qa.ui:platform-qa-ui-forum >---------
+Building eXo PLF:: QA - UI - Forum 1.0.x-SNAPSHOT                 [9/14]
+--------------------------------[ jar ]---------------------------------
+
+--- maven-dependency-plugin:2.10:tree (default-cli) @ platform-qa-ui-forum ---
+org.exoplatform.platform.qa.ui:platform-qa-ui-forum:jar:1.0.x-SNAPSHOT
++- org.exoplatform.platform.qa.ui:platform-qa-ui-commons:jar:1.0.x-SNAPSHOT:compile
+|  +- org.exoplatform.platform.qa.ui:platform-qa-ui-core:jar:1.0.x-SNAPSHOT:compile
+|  \- org.exoplatform.platform.qa.ui:platform-qa-ui-selenium:jar:1.0.x-SNAPSHOT:compile
++- org.slf4j:slf4j-simple:jar:1.7.18:compile
+|  \- org.slf4j:slf4j-api:jar:1.7.18:compile
++- com.codeborne:selenide:jar:4.3:compile
+|  +- org.apache.httpcomponents:httpcore:jar:4.4.6:compile
+|  +- com.google.code.gson:gson:jar:2.8.0:compile
+|  +- net.lightbody.bmp:browsermob-core:jar:2.1.4:compile
+|  |  +- net.lightbody.bmp:littleproxy:jar:1.1.0-beta-bmp-15:compile
+|  |  |  \- org.apache.commons:commons-lang3:jar:3.4:compile
+|  |  +- com.fasterxml.jackson.core:jackson-core:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-databind:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.8.5:compile
+|  |  +- dnsjava:dnsjava:jar:2.1.7:compile
+|  |  +- org.slf4j:jcl-over-slf4j:jar:1.7.18:compile
+|  |  +- com.jcraft:jzlib:jar:1.1.3:compile
+|  |  +- io.netty:netty-all:jar:4.0.42.Final:compile
+|  |  +- org.bouncycastle:bcprov-jdk15on:jar:1.56:compile
+|  |  +- org.bouncycastle:bcpkix-jdk15on:jar:1.56:compile
+|  |  \- net.lightbody.bmp:mitm:jar:2.1.4:compile
+|  +- com.codeborne:phantomjsdriver:jar:1.3.0:runtime
+|  \- commons-codec:commons-codec:jar:1.10:runtime
++- org.seleniumhq.selenium:selenium-api:jar:3.141.59:compile
++- org.seleniumhq.selenium:selenium-java:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-chrome-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-edge-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-firefox-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-ie-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-opera-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-remote-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-safari-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-support:jar:3.141.59:compile
+|  +- net.bytebuddy:byte-buddy:jar:1.8.15:compile
+|  +- org.apache.commons:commons-exec:jar:1.3:compile
+|  +- com.squareup.okhttp3:okhttp:jar:3.11.0:compile
+|  \- com.squareup.okio:okio:jar:1.14.0:compile
++- com.google.guava:guava:jar:21.0:compile
+\- org.junit.jupiter:junit-jupiter-api:jar:5.0.0:compile
+   +- org.apiguardian:apiguardian-api:jar:1.0.0:compile
+   +- org.opentest4j:opentest4j:jar:1.0.0:compile
+   \- org.junit.platform:junit-platform-commons:jar:1.0.0:compile
+
+---------< org.exoplatform.platform.qa.ui:platform-qa-ui-wiki >---------
+Building eXo PLF:: QA - UI - Wiki 1.0.x-SNAPSHOT                 [10/14]
+--------------------------------[ jar ]---------------------------------
+
+--- maven-dependency-plugin:2.10:tree (default-cli) @ platform-qa-ui-wiki ---
+org.exoplatform.platform.qa.ui:platform-qa-ui-wiki:jar:1.0.x-SNAPSHOT
++- org.exoplatform.platform.qa.ui:platform-qa-ui-commons:jar:1.0.x-SNAPSHOT:compile
+|  +- org.exoplatform.platform.qa.ui:platform-qa-ui-core:jar:1.0.x-SNAPSHOT:compile
+|  \- org.exoplatform.platform.qa.ui:platform-qa-ui-selenium:jar:1.0.x-SNAPSHOT:compile
++- org.slf4j:slf4j-simple:jar:1.7.18:compile
+|  \- org.slf4j:slf4j-api:jar:1.7.18:compile
++- com.codeborne:selenide:jar:4.3:compile
+|  +- org.apache.httpcomponents:httpcore:jar:4.4.6:compile
+|  +- com.google.code.gson:gson:jar:2.8.0:compile
+|  +- net.lightbody.bmp:browsermob-core:jar:2.1.4:compile
+|  |  +- net.lightbody.bmp:littleproxy:jar:1.1.0-beta-bmp-15:compile
+|  |  |  \- org.apache.commons:commons-lang3:jar:3.4:compile
+|  |  +- com.fasterxml.jackson.core:jackson-core:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-databind:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.8.5:compile
+|  |  +- dnsjava:dnsjava:jar:2.1.7:compile
+|  |  +- org.slf4j:jcl-over-slf4j:jar:1.7.18:compile
+|  |  +- com.jcraft:jzlib:jar:1.1.3:compile
+|  |  +- io.netty:netty-all:jar:4.0.42.Final:compile
+|  |  +- org.bouncycastle:bcprov-jdk15on:jar:1.56:compile
+|  |  +- org.bouncycastle:bcpkix-jdk15on:jar:1.56:compile
+|  |  \- net.lightbody.bmp:mitm:jar:2.1.4:compile
+|  +- com.codeborne:phantomjsdriver:jar:1.3.0:runtime
+|  \- commons-codec:commons-codec:jar:1.10:runtime
++- org.seleniumhq.selenium:selenium-api:jar:3.141.59:compile
++- org.seleniumhq.selenium:selenium-java:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-chrome-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-edge-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-firefox-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-ie-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-opera-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-remote-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-safari-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-support:jar:3.141.59:compile
+|  +- net.bytebuddy:byte-buddy:jar:1.8.15:compile
+|  +- org.apache.commons:commons-exec:jar:1.3:compile
+|  +- com.squareup.okhttp3:okhttp:jar:3.11.0:compile
+|  \- com.squareup.okio:okio:jar:1.14.0:compile
++- com.google.guava:guava:jar:21.0:compile
+\- org.junit.jupiter:junit-jupiter-api:jar:5.0.0:compile
+   +- org.apiguardian:apiguardian-api:jar:1.0.0:compile
+   +- org.opentest4j:opentest4j:jar:1.0.0:compile
+   \- org.junit.platform:junit-platform-commons:jar:1.0.0:compile
+
+--------< org.exoplatform.platform.qa.ui:platform-qa-ui-answer >--------
+Building eXo PLF:: QA - UI - Answer 1.0.x-SNAPSHOT               [11/14]
+--------------------------------[ jar ]---------------------------------
+
+--- maven-dependency-plugin:2.10:tree (default-cli) @ platform-qa-ui-answer ---
+org.exoplatform.platform.qa.ui:platform-qa-ui-answer:jar:1.0.x-SNAPSHOT
++- org.exoplatform.platform.qa.ui:platform-qa-ui-commons:jar:1.0.x-SNAPSHOT:compile
+|  +- org.exoplatform.platform.qa.ui:platform-qa-ui-core:jar:1.0.x-SNAPSHOT:compile
+|  \- org.exoplatform.platform.qa.ui:platform-qa-ui-selenium:jar:1.0.x-SNAPSHOT:compile
++- org.slf4j:slf4j-simple:jar:1.7.18:compile
+|  \- org.slf4j:slf4j-api:jar:1.7.18:compile
++- com.codeborne:selenide:jar:4.3:compile
+|  +- org.apache.httpcomponents:httpcore:jar:4.4.6:compile
+|  +- com.google.code.gson:gson:jar:2.8.0:compile
+|  +- net.lightbody.bmp:browsermob-core:jar:2.1.4:compile
+|  |  +- net.lightbody.bmp:littleproxy:jar:1.1.0-beta-bmp-15:compile
+|  |  |  \- org.apache.commons:commons-lang3:jar:3.4:compile
+|  |  +- com.fasterxml.jackson.core:jackson-core:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-databind:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.8.5:compile
+|  |  +- dnsjava:dnsjava:jar:2.1.7:compile
+|  |  +- org.slf4j:jcl-over-slf4j:jar:1.7.18:compile
+|  |  +- com.jcraft:jzlib:jar:1.1.3:compile
+|  |  +- io.netty:netty-all:jar:4.0.42.Final:compile
+|  |  +- org.bouncycastle:bcprov-jdk15on:jar:1.56:compile
+|  |  +- org.bouncycastle:bcpkix-jdk15on:jar:1.56:compile
+|  |  \- net.lightbody.bmp:mitm:jar:2.1.4:compile
+|  +- com.codeborne:phantomjsdriver:jar:1.3.0:runtime
+|  \- commons-codec:commons-codec:jar:1.10:runtime
++- org.seleniumhq.selenium:selenium-api:jar:3.141.59:compile
++- org.seleniumhq.selenium:selenium-java:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-chrome-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-edge-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-firefox-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-ie-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-opera-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-remote-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-safari-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-support:jar:3.141.59:compile
+|  +- net.bytebuddy:byte-buddy:jar:1.8.15:compile
+|  +- org.apache.commons:commons-exec:jar:1.3:compile
+|  +- com.squareup.okhttp3:okhttp:jar:3.11.0:compile
+|  \- com.squareup.okio:okio:jar:1.14.0:compile
++- com.google.guava:guava:jar:21.0:compile
+\- org.junit.jupiter:junit-jupiter-api:jar:5.0.0:compile
+   +- org.apiguardian:apiguardian-api:jar:1.0.0:compile
+   +- org.opentest4j:opentest4j:jar:1.0.0:compile
+   \- org.junit.platform:junit-platform-commons:jar:1.0.0:compile
+
+---------< org.exoplatform.platform.qa.ui:platform-qa-ui-task >---------
+Building eXo PLF:: QA - UI - Task 1.0.x-SNAPSHOT                 [12/14]
+--------------------------------[ jar ]---------------------------------
+
+--- maven-dependency-plugin:2.10:tree (default-cli) @ platform-qa-ui-task ---
+org.exoplatform.platform.qa.ui:platform-qa-ui-task:jar:1.0.x-SNAPSHOT
++- org.exoplatform.platform.qa.ui:platform-qa-ui-commons:jar:1.0.x-SNAPSHOT:compile
+|  +- org.exoplatform.platform.qa.ui:platform-qa-ui-core:jar:1.0.x-SNAPSHOT:compile
+|  \- org.exoplatform.platform.qa.ui:platform-qa-ui-selenium:jar:1.0.x-SNAPSHOT:compile
++- org.slf4j:slf4j-simple:jar:1.7.18:compile
+|  \- org.slf4j:slf4j-api:jar:1.7.18:compile
++- com.codeborne:selenide:jar:4.3:compile
+|  +- org.apache.httpcomponents:httpcore:jar:4.4.6:compile
+|  +- com.google.code.gson:gson:jar:2.8.0:compile
+|  +- net.lightbody.bmp:browsermob-core:jar:2.1.4:compile
+|  |  +- net.lightbody.bmp:littleproxy:jar:1.1.0-beta-bmp-15:compile
+|  |  |  \- org.apache.commons:commons-lang3:jar:3.4:compile
+|  |  +- com.fasterxml.jackson.core:jackson-core:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-databind:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.8.5:compile
+|  |  +- dnsjava:dnsjava:jar:2.1.7:compile
+|  |  +- org.slf4j:jcl-over-slf4j:jar:1.7.18:compile
+|  |  +- com.jcraft:jzlib:jar:1.1.3:compile
+|  |  +- io.netty:netty-all:jar:4.0.42.Final:compile
+|  |  +- org.bouncycastle:bcprov-jdk15on:jar:1.56:compile
+|  |  +- org.bouncycastle:bcpkix-jdk15on:jar:1.56:compile
+|  |  \- net.lightbody.bmp:mitm:jar:2.1.4:compile
+|  +- com.codeborne:phantomjsdriver:jar:1.3.0:runtime
+|  \- commons-codec:commons-codec:jar:1.10:runtime
++- org.seleniumhq.selenium:selenium-api:jar:3.141.59:compile
++- org.seleniumhq.selenium:selenium-java:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-chrome-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-edge-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-firefox-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-ie-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-opera-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-remote-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-safari-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-support:jar:3.141.59:compile
+|  +- net.bytebuddy:byte-buddy:jar:1.8.15:compile
+|  +- org.apache.commons:commons-exec:jar:1.3:compile
+|  +- com.squareup.okhttp3:okhttp:jar:3.11.0:compile
+|  \- com.squareup.okio:okio:jar:1.14.0:compile
++- com.google.guava:guava:jar:21.0:compile
+\- org.junit.jupiter:junit-jupiter-api:jar:5.0.0:compile
+   +- org.apiguardian:apiguardian-api:jar:1.0.0:compile
+   +- org.opentest4j:opentest4j:jar:1.0.0:compile
+   \- org.junit.platform:junit-platform-commons:jar:1.0.0:compile
+
+---------< org.exoplatform.platform.qa.ui:platform-qa-ui-chat >---------
+Building eXo PLF:: QA - UI - Chat 1.0.x-SNAPSHOT                 [13/14]
+--------------------------------[ jar ]---------------------------------
+
+--- maven-dependency-plugin:2.10:tree (default-cli) @ platform-qa-ui-chat ---
+org.exoplatform.platform.qa.ui:platform-qa-ui-chat:jar:1.0.x-SNAPSHOT
++- org.exoplatform.platform.qa.ui:platform-qa-ui-commons:jar:1.0.x-SNAPSHOT:compile
+|  +- org.exoplatform.platform.qa.ui:platform-qa-ui-core:jar:1.0.x-SNAPSHOT:compile
+|  \- org.exoplatform.platform.qa.ui:platform-qa-ui-selenium:jar:1.0.x-SNAPSHOT:compile
++- org.exoplatform.platform.qa.ui:platform-qa-ui-gatein:jar:1.0.x-SNAPSHOT:compile
++- org.exoplatform.platform.qa.ui:platform-qa-ui-social:jar:1.0.x-SNAPSHOT:compile
++- org.slf4j:slf4j-simple:jar:1.7.18:compile
+|  \- org.slf4j:slf4j-api:jar:1.7.18:compile
++- com.codeborne:selenide:jar:4.3:compile
+|  +- org.apache.httpcomponents:httpcore:jar:4.4.6:compile
+|  +- com.google.code.gson:gson:jar:2.8.0:compile
+|  +- net.lightbody.bmp:browsermob-core:jar:2.1.4:compile
+|  |  +- net.lightbody.bmp:littleproxy:jar:1.1.0-beta-bmp-15:compile
+|  |  |  \- org.apache.commons:commons-lang3:jar:3.4:compile
+|  |  +- com.fasterxml.jackson.core:jackson-core:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-databind:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.8.5:compile
+|  |  +- dnsjava:dnsjava:jar:2.1.7:compile
+|  |  +- org.slf4j:jcl-over-slf4j:jar:1.7.18:compile
+|  |  +- com.jcraft:jzlib:jar:1.1.3:compile
+|  |  +- io.netty:netty-all:jar:4.0.42.Final:compile
+|  |  +- org.bouncycastle:bcprov-jdk15on:jar:1.56:compile
+|  |  +- org.bouncycastle:bcpkix-jdk15on:jar:1.56:compile
+|  |  \- net.lightbody.bmp:mitm:jar:2.1.4:compile
+|  +- com.codeborne:phantomjsdriver:jar:1.3.0:runtime
+|  \- commons-codec:commons-codec:jar:1.10:runtime
++- org.seleniumhq.selenium:selenium-api:jar:3.141.59:compile
++- org.seleniumhq.selenium:selenium-java:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-chrome-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-edge-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-firefox-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-ie-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-opera-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-remote-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-safari-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-support:jar:3.141.59:compile
+|  +- net.bytebuddy:byte-buddy:jar:1.8.15:compile
+|  +- org.apache.commons:commons-exec:jar:1.3:compile
+|  +- com.squareup.okhttp3:okhttp:jar:3.11.0:compile
+|  \- com.squareup.okio:okio:jar:1.14.0:compile
++- com.google.guava:guava:jar:21.0:compile
+\- org.junit.jupiter:junit-jupiter-api:jar:5.0.0:compile
+   +- org.apiguardian:apiguardian-api:jar:1.0.0:compile
+   +- org.opentest4j:opentest4j:jar:1.0.0:compile
+   \- org.junit.platform:junit-platform-commons:jar:1.0.0:compile
+
+-------< org.exoplatform.platform.qa.ui:platform-qa-ui-platform >-------
+Building eXo PLF:: QA - UI - Platform 1.0.x-SNAPSHOT             [14/14]
+--------------------------------[ jar ]---------------------------------
+
+--- maven-dependency-plugin:2.10:tree (default-cli) @ platform-qa-ui-platform ---
+org.exoplatform.platform.qa.ui:platform-qa-ui-platform:jar:1.0.x-SNAPSHOT
++- org.exoplatform.platform.qa.ui:platform-qa-ui-commons:jar:1.0.x-SNAPSHOT:compile
+|  +- org.exoplatform.platform.qa.ui:platform-qa-ui-core:jar:1.0.x-SNAPSHOT:compile
+|  \- org.exoplatform.platform.qa.ui:platform-qa-ui-selenium:jar:1.0.x-SNAPSHOT:compile
++- org.exoplatform.platform.qa.ui:platform-qa-ui-calendar:jar:1.0.x-SNAPSHOT:compile
++- org.exoplatform.platform.qa.ui:platform-qa-ui-ecms:jar:1.0.x-SNAPSHOT:compile
++- org.exoplatform.platform.qa.ui:platform-qa-ui-forum:jar:1.0.x-SNAPSHOT:compile
++- org.exoplatform.platform.qa.ui:platform-qa-ui-gatein:jar:1.0.x-SNAPSHOT:compile
++- org.exoplatform.platform.qa.ui:platform-qa-ui-social:jar:1.0.x-SNAPSHOT:compile
++- org.exoplatform.platform.qa.ui:platform-qa-ui-wiki:jar:1.0.x-SNAPSHOT:compile
++- org.exoplatform.platform.qa.ui:platform-qa-ui-answer:jar:1.0.x-SNAPSHOT:compile
++- org.exoplatform.platform.qa.ui:platform-qa-ui-task:jar:1.0.x-SNAPSHOT:compile
++- org.exoplatform.platform.qa.ui:platform-qa-ui-chat:jar:1.0.x-SNAPSHOT:compile
++- org.slf4j:slf4j-simple:jar:1.7.18:compile
+|  \- org.slf4j:slf4j-api:jar:1.7.18:compile
++- com.codeborne:selenide:jar:4.3:compile
+|  +- org.apache.httpcomponents:httpcore:jar:4.4.6:compile
+|  +- com.google.code.gson:gson:jar:2.8.0:compile
+|  +- net.lightbody.bmp:browsermob-core:jar:2.1.4:compile
+|  |  +- net.lightbody.bmp:littleproxy:jar:1.1.0-beta-bmp-15:compile
+|  |  |  \- org.apache.commons:commons-lang3:jar:3.4:compile
+|  |  +- com.fasterxml.jackson.core:jackson-core:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-databind:jar:2.8.5:compile
+|  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.8.5:compile
+|  |  +- dnsjava:dnsjava:jar:2.1.7:compile
+|  |  +- org.slf4j:jcl-over-slf4j:jar:1.7.18:compile
+|  |  +- com.jcraft:jzlib:jar:1.1.3:compile
+|  |  +- io.netty:netty-all:jar:4.0.42.Final:compile
+|  |  +- org.bouncycastle:bcprov-jdk15on:jar:1.56:compile
+|  |  +- org.bouncycastle:bcpkix-jdk15on:jar:1.56:compile
+|  |  \- net.lightbody.bmp:mitm:jar:2.1.4:compile
+|  +- com.codeborne:phantomjsdriver:jar:1.3.0:runtime
+|  \- commons-codec:commons-codec:jar:1.10:runtime
++- org.seleniumhq.selenium:selenium-api:jar:3.141.59:compile
++- org.seleniumhq.selenium:selenium-java:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-chrome-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-edge-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-firefox-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-ie-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-opera-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-remote-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-safari-driver:jar:3.141.59:compile
+|  +- org.seleniumhq.selenium:selenium-support:jar:3.141.59:compile
+|  +- net.bytebuddy:byte-buddy:jar:1.8.15:compile
+|  +- org.apache.commons:commons-exec:jar:1.3:compile
+|  +- com.squareup.okhttp3:okhttp:jar:3.11.0:compile
+|  \- com.squareup.okio:okio:jar:1.14.0:compile
++- com.google.guava:guava:jar:21.0:compile
+\- org.junit.jupiter:junit-jupiter-api:jar:5.0.0:compile
+   +- org.apiguardian:apiguardian-api:jar:1.0.0:compile
+   +- org.opentest4j:opentest4j:jar:1.0.0:compile
+   \- org.junit.platform:junit-platform-commons:jar:1.0.0:compile
+------------------------------------------------------------------------
+Reactor Summary for eXo PLF:: QA - UI 1.0.x-SNAPSHOT:
+
+eXo PLF:: QA - UI .................................. SUCCESS [  1.566 s]
+eXo PLF:: QA - UI - Core ........................... SUCCESS [  0.100 s]
+eXo PLF:: QA - UI - Selenium (Legacy Code) ......... SUCCESS [  0.111 s]
+eXo PLF:: QA - UI - Commons ........................ SUCCESS [  0.071 s]
+eXo PLF:: QA - UI - Calendar ....................... SUCCESS [  0.064 s]
+eXo PLF:: QA - UI - GateIn ......................... SUCCESS [  0.059 s]
+eXo PLF:: QA - UI - ECMS ........................... SUCCESS [  0.069 s]
+eXo PLF:: QA - UI - Social ......................... SUCCESS [  0.059 s]
+eXo PLF:: QA - UI - Forum .......................... SUCCESS [  0.057 s]
+eXo PLF:: QA - UI - Wiki ........................... SUCCESS [  0.066 s]
+eXo PLF:: QA - UI - Answer ......................... SUCCESS [  0.063 s]
+eXo PLF:: QA - UI - Task ........................... SUCCESS [  0.069 s]
+eXo PLF:: QA - UI - Chat ........................... SUCCESS [  0.103 s]
+eXo PLF:: QA - UI - Platform ....................... SUCCESS [  0.158 s]
+------------------------------------------------------------------------
+BUILD SUCCESS
+------------------------------------------------------------------------
+Total time:  4.511 s
+Finished at: 2019-08-13T17:51:49+02:00
+------------------------------------------------------------------------

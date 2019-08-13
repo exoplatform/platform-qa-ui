@@ -243,7 +243,7 @@ public class ChatOnSiteNotificationTestIT extends Base {
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1,PLFData.DATA_PASS2);
         refresh();
-        sleep(Configuration.collectionsTimeout);
+        sleep(Configuration.timeout);
         $(byXpath("//*[@id='chatApplicationNotification']/div[1]/a/div/span")).shouldBe(Condition.visible);
         switchTo().window(1);
         refresh();

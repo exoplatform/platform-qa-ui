@@ -13,7 +13,6 @@ import com.codeborne.selenide.Configuration;
 
 import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.SelenideElement;
-import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator;
@@ -66,7 +65,7 @@ public class ChatManagement {
     $(ELEMENT_CHAT_TASK_NAME).setValue(taskName);
     for (int i = 0; i <= user.length - 1; i++) {
       ELEMENT_CHAT_ASSIGNEE_TASK.setValue(user[i]);
-      sleep(Configuration.collectionsTimeout);
+      sleep(Configuration.timeout);
       ELEMENT_CHAT_RESULT_SEARCH_ASSIGNEE.waitUntil(Condition.visible, Configuration.timeout);
       sleep(2000);
       ELEMENT_CHAT_ASSIGNEE_TASK.pressEnter();
