@@ -1698,6 +1698,8 @@ public class CalendarLocator {
   public static final SelenideElement ELEMENT_PARTICIPANT_DRAWER=     $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/div/div/input"));
   public static final SelenideElement ELEMENT_EVENT_ADD_PARTICIPANT=   $(byXpath("//input[@placeholder='Participants']/following::div[2]/input"));
   public static final SelenideElement ELEMENT_REPEAT_SWITCH_LABEL=     $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[3]/div[2]/div[3]/div/label[1]/span"));
+  public static final SelenideElement ELEMENT_CONFIRM_CLOSE_ADD_EVENT=  $(byXpath("//div[@id=\"confirmClose\"]/div/button[1]"));
+  public static final SelenideElement ELEMENT_CANCEL_CLOSE_ADD_EVENT=   $(byXpath("//div[@id=\"confirmClose\"]/div/button[2]"));
 
 
   public static final SelenideElement ELEMENT_REPEAT_PREFERRENCE_IMPROVE_POPUP=$(byClassName("recurring-popup"));
