@@ -183,6 +183,11 @@ public final class HomePageLocator {
   public static final By              ELEMENT_EDIT_PAGE_EDITLAYOUT                                         =
                                                                    By.xpath("//*[contains(text(), 'Edit Layout')]");
 
+  public static final SelenideElement              ELEMENT_DELETE_ECM_ADMIN_PAGE_EDITLAYOUT                                         =
+                                                                    $(byXpath("(//span[contains(text(),'ECM Admin')]/following::a[@data-original-title=\"Delete Portlet\"])[1]"));
+
+  public static final By              ELEMENT_ECM_ADMIN_PORTLET_LAYOUT                                         =
+                                                                    By.xpath("//div[@class=\"portletLayoutDecorator\" and contains(text(),\"ECM Admin\")]");
   // administration panel
   public static final By              ELEMENT_TOPBAR_ADMINISTRATION_BUTTON                                 =
                                                                            By.xpath("//*[@class='uiIconPLF24x24Setup']");

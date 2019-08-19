@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
 import com.codeborne.selenide.Condition;
@@ -711,7 +712,24 @@ public class EventManagement {
     ELEMENT_BUTTON_EVENT_SAVE.click();
     ELEMENT_BUTTON_EVENT_SAVE.waitUntil(Condition.disappears, Configuration.timeout);
   }
-
+  /**
+   * Select Previous and Next day
+   */
+  public void selectPreviousAndNextDayInTheEventToAdd(String previousDay, String nextDay){
+    info("Select Previous and Next day");
+    ELEMENT_EVENT_SELECT_FROM.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    if (previousDay!= null) {
+      final SelenideElement ELEMENT_EVENT_PREVIOUS_DAY= $(By.xpath("(//td/a[contains(text(),'${CurrentDay}')]/../preceding-sibling::td/a[@href='#SelectDate'])[last()]".replace("${CurrentDay}",ELEMENT_EVENT_CURRENT_DAY.getText())));
+      ELEMENT_EVENT_PREVIOUS_DAY.waitUntil(Condition.visible,Configuration.timeout).click();
+      ELEMENT_EVENT_SELECT_TO.waitUntil(Condition.visible,Configuration.timeout).click();
+      ELEMENT_EVENT_PREVIOUS_DAY.waitUntil(Condition.visible,Configuration.timeout).click();
+    }
+    if (nextDay!= null) {
+      ELEMENT_EVENT_NEXT_DAY.waitUntil(Condition.visible,Configuration.timeout).click();
+      ELEMENT_EVENT_SELECT_TO.waitUntil(Condition.visible,Configuration.timeout).click();
+      ELEMENT_EVENT_NEXT_DAY.waitUntil(Condition.visible,Configuration.timeout).click();
+    }
+  }
   /**
    * Save a EVENT with more details
    */
@@ -1202,11 +1220,10 @@ public class EventManagement {
     $(byText("Add Event")).should(Condition.exist);
     assertEquals("Event title",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
     assertEquals("All",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).getText());
-    assertEquals("All day",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[2]/div/label/span")).getText());
-    assertEquals("Location",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[3]/div[1]")).getText());
-    assertEquals("Enter a location for this event",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[3]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/div/div/input")).getAttribute("placeholder"));
+    assertEquals("All day",$(byXpath("//input[@id=\"allday\"]/following::span[1]")).getText());
+    assertEquals("Location",$(byXpath("//div[@class=\"control-label\" and contains(text(),'Location')]")).getText());
+    assertEquals("Enter a location for this event",$(byXpath("//div[@class=\"control-label\" and contains(text(),'Location')]/following::input[1]")).getAttribute("placeholder"));
+    assertEquals("Participants",$(byXpath("//div[@class=\"control-label\" and contains(text(),'Participants')]")).getText());
     assertEquals("Clear",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
     assertEquals("Save",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
     assertEquals("Cancel",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());

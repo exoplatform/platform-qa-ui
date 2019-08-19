@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -14,6 +15,9 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_UI_POPUP_MOVE_TOPIC;
+import static com.sun.deploy.cache.Cache.exists;
+import static java.time.zone.ZoneRulesProvider.refresh;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -33,7 +37,7 @@ public class SpaceSettingManagement {
 
   /**
    * constructor
-   * 
+   *
    * @param testBase
    */
   public SpaceSettingManagement(TestBase testBase) {
@@ -47,11 +51,11 @@ public class SpaceSettingManagement {
 
   /**
    * function: Search user
-   * 
-   * @param user (Can be: User name, Last name, First name or Email of the user
-   *          you want to search)
+   *
+   * @param user         (Can be: User name, Last name, First name or Email of the user
+   *                     you want to search)
    * @param searchOption (Can be: User name, Last name, First name or Email option
-   *          corresponding with information you input in "Search")
+   *                     corresponding with information you input in "Search")
    */
   public void searchUser(String user, String searchOption) {
     info("--Search user " + user + "--");
@@ -71,7 +75,7 @@ public class SpaceSettingManagement {
     homePagePlatform.refreshUntil($(ELEMENT_SPACE_WIKI_TAB),Condition.visible,1000);
     if($(ELEMENT_SPACE_MENU_MORE).is(Condition.visible))
       $(ELEMENT_SPACE_MENU_MORE).click();
-    $(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB).click();
+    $(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB).waitUntil(Condition.visible,Configuration.timeout).click();
     $(byClassName("uiGrayLightBox")).waitUntil(Condition.visible, Configuration.timeout);
   }
 
@@ -81,7 +85,7 @@ public class SpaceSettingManagement {
 
   /**
    * Invite a user in the space
-   * 
+   *
    * @param userName
    * @param verify is true if want to verify user in invited table. False if don't
    *          want.
@@ -98,7 +102,7 @@ public class SpaceSettingManagement {
     if (verify) {
       info("Verify that user is shown in invitation table");
       if (fullName != "" && fullName != null)
-       $(byXpath(ELEMENT_SPACE_INVITED_USER_TABLE.replace("${user}", fullName))).waitUntil(Condition.visible,Configuration.timeout);
+        $(byXpath(ELEMENT_SPACE_INVITED_USER_TABLE.replace("${user}", fullName))).waitUntil(Condition.visible, Configuration.timeout);
     }
   }
 
@@ -136,7 +140,7 @@ public class SpaceSettingManagement {
 
   /**
    * Remove a user in the invited list
-   * 
+   *
    * @param user
    */
   public void removeUser(String user) {
@@ -149,7 +153,7 @@ public class SpaceSettingManagement {
 
   /**
    * Remove a user in the member list
-   * 
+   *
    * @param fullName
    */
   public void removeUserFromMemberlist(String fullName) {
@@ -162,29 +166,29 @@ public class SpaceSettingManagement {
 
   /**
    * Remove an application
-   * 
+   *
    * @param app
    */
   public void removeApplication(String app) {
     info("Click on Remove icon");
     ELEMENT_LIST_OF_EXISTED_APPLICATION_IN_APPLICATION_TAB.find(byText(app))
-                                                          .parent()
-                                                          .parent()
-                                                          .find(ELEMENT_ICON_DELETE_APPLICATION_FROM_SPACE)
-                                                          .click();
+            .parent()
+            .parent()
+            .find(ELEMENT_ICON_DELETE_APPLICATION_FROM_SPACE)
+            .click();
     ELEMENT_LIST_OF_EXISTED_APPLICATION_IN_APPLICATION_TAB.find(byText(app)).waitUntil(Condition.disappears,
-                                                                                       Configuration.timeout);
+            Configuration.timeout);
     info("the application is removed");
   }
 
   /**
    * Accept a pending request to a space
-   * 
+   *
    * @param user is fullName
    */
   public void acceptRequest(String user) {
     info("OPen members tab");
-   ELEMENT_SPACE_SETTINGS_MEMBERS_TAB_IN_SETTING_TAB.click();
+    ELEMENT_SPACE_SETTINGS_MEMBERS_TAB_IN_SETTING_TAB.click();
     info("Click on join button to remove user");
     $(byText(user + " " + user)).parent().find(ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB).click();
     info("Verify that the member is shown in member list");
@@ -193,7 +197,7 @@ public class SpaceSettingManagement {
 
   /**
    * Decline a pending request to a space
-   * 
+   *
    * @param user
    */
   public void declineRequest(String user) {
@@ -205,9 +209,20 @@ public class SpaceSettingManagement {
     evt.waitForElementNotPresent(ELEMENT_SPACE_DELETE_USER_BTN.replace("${user}", user), 2000, 1);
   }
 
+  /*** Search User in People
+   *
+   */
+    public void searchUsersPeople(String user) {
+        info("--Search user To connect" + user + "--");
+            ($(byXpath("(//input[@placeholder=\"Name\"])[2]"))).setValue(user);
+            ($(byXpath("//button[text()='Search']"))).waitUntil(Condition.visible, Configuration.timeout).click();
+            ($(byXpath("//div[@class=\"connectionBtn clearfix\"]/button"))).waitUntil(Condition.visible, Configuration.timeout).click();
+            ($(byXpath("//button[text()=\"Cancel Request\"]"))).shouldNot(Condition.visible);
+    }
+
   /**
    * Delete member of space
-   * 
+   *
    * @param user
    */
   public void deleteMember(String user) {
@@ -221,7 +236,7 @@ public class SpaceSettingManagement {
 
   /**
    * Delete an app from the top menu of space
-   * 
+   *
    * @param app
    */
   public void deleteApplications(String app) {
@@ -233,7 +248,7 @@ public class SpaceSettingManagement {
 
   /**
    * input name, des into setting tab
-   * 
+   *
    * @param name name of space
    * @param des description of space
    */
@@ -296,7 +311,7 @@ public class SpaceSettingManagement {
 
   /**
    * add a new simple node
-   * 
+   *
    * @param name
    */
   public void addANodeSimple(String name) {
@@ -319,7 +334,7 @@ public class SpaceSettingManagement {
 
   /**
    * add a new simple child node
-   * 
+   *
    * @param parentNode
    * @param childNode
    */
@@ -346,7 +361,7 @@ public class SpaceSettingManagement {
 
   /**
    * Add an application
-   * 
+   *
    * @param category
    * @param application
    */
@@ -370,7 +385,7 @@ public class SpaceSettingManagement {
 
   /**
    * Edit a node with new label
-   * 
+   *
    * @param nodeName
    * @param label
    */
@@ -389,7 +404,7 @@ public class SpaceSettingManagement {
 
   /**
    * Set permissions for a space
-   * 
+   *
    * @param arrayRight
    */
   public void setPermissionForSpace(String[] arrayRight) {
@@ -409,7 +424,7 @@ public class SpaceSettingManagement {
 
   /**
    * Set permissions for a space
-   * 
+   *
    * @param arrayRight
    */
   public void setPermissionForSpaceFromPopup(String[] arrayRight) {
@@ -421,7 +436,7 @@ public class SpaceSettingManagement {
 
   /**
    * Delete a node
-   * 
+   *
    * @param nodeName
    */
   public void deleteANode(String nodeName) {
@@ -434,207 +449,207 @@ public class SpaceSettingManagement {
      * "${name}", nodeName), DEFAULT_TIMEOUT, 1);
      * actions.moveToElement(el).contextClick().perform();
      */
-        info("Select delete link");
-        $(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_DELETE).waitUntil(Condition.visible, Configuration.timeout).click();
-        alert.acceptAlert();
-        info("Verify that the node is deleted successfully");
-        $(byXpath(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName))).waitUntil(Condition.disappears, Configuration.timeout);
+    info("Select delete link");
+    $(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_DELETE).waitUntil(Condition.visible, Configuration.timeout).click();
+    alert.acceptAlert();
+    info("Verify that the node is deleted successfully");
+    $(byXpath(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName))).waitUntil(Condition.disappears, Configuration.timeout);
+  }
+
+  /**
+   * copy a node
+   *
+   * @param nodeName
+   */
+  public void copyANode(String nodeName) {
+    info("Copy node ");
+    info("Right click on the node");
+    evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
+    evt.rightClickOnElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
+    info("Select copy link");
+    evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_COPY_NODE, 2000, 0).click();
+
+  }
+
+  /**
+   * cut a node
+   *
+   * @param nodeName
+   */
+  public void cutANode(String nodeName) {
+    info("Copy node ");
+    info("Right click on the node");
+    evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
+    evt.rightClickOnElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
+    info("Select copy link");
+    evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_CUT_NODE, 2000, 0).click();
+
+  }
+
+  /**
+   * paste a node
+   *
+   * @param nodeName
+   */
+  public void pasteANode(boolean canPaste, String nodeName) {
+    info("paste node");
+    info("Right click on the node");
+    evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
+    evt.rightClickOnElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
+    if (canPaste) {
+      info("Select paste link");
+      evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_PASTE_NODE, 2000, 0).click();
+    } else {
+      info("can not find paste button");
+      evt.waitForElementNotPresent(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_PASTE_NODE, 2000, 0);
     }
 
-    /**
-     * copy a node
-     *
-     * @param nodeName
-     */
-    public void copyANode(String nodeName) {
-        info("Copy node ");
-        info("Right click on the node");
-        evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
-        evt.rightClickOnElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
-        info("Select copy link");
-        evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_COPY_NODE, 2000, 0).click();
+  }
 
+  /**
+   * Move up a node
+   *
+   * @param nodeName
+   */
+  public void moveUpANode(boolean firstNode, String nodeName, String nodeAboveName, String nodePosition, String abovePosition) {
+    info("move up a node ");
+    if (firstNode) {
+      info("Right click on the node");
+      evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
+      evt.rightClickOnElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
+      info("Select move up link");
+      evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_MOVE_UP, 2000, 0).click();
+      info("There is nothing happen with the first node");
+      evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_NODE_POSITION.replace("${nodeName}", nodeName).replace("${position}",
+              nodePosition));
+    } else {
+      info("Check position before move up");
+      evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_NODE_POSITION.replace("${nodeName}", nodeName).replace("${position}",
+              nodePosition));
+      evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_NODE_POSITION.replace("${nodeName}", nodeAboveName)
+              .replace("${position}", abovePosition));
+      info("Right click on the node");
+      evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
+      evt.rightClickOnElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
+      info("Select move up link");
+      evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_MOVE_UP, 2000, 0).click();
+      info("Check position after move up");
+      evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_NODE_POSITION.replace("${nodeName}", nodeName).replace("${position}",
+              abovePosition));
+      evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_NODE_POSITION.replace("${nodeName}", nodeAboveName)
+              .replace("${position}", nodePosition));
     }
+  }
 
-    /**
-     * cut a node
-     *
-     * @param nodeName
-     */
-    public void cutANode(String nodeName) {
-        info("Copy node ");
-        info("Right click on the node");
-        evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
-        evt.rightClickOnElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
-        info("Select copy link");
-        evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_CUT_NODE, 2000, 0).click();
-
+  /**
+   * Move down a node
+   *
+   * @param nodeName
+   */
+  public void moveDownANode(boolean lastNode, String nodeName, String nodeUnderName, String nodePosition, String underPosition) {
+    info("move up a node ");
+    if (lastNode) {
+      info("Right click on the node");
+      evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
+      evt.rightClickOnElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
+      info("Select move up link");
+      evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_MOVE_DOWN, 2000, 0).click();
+      evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_NODE_POSITION.replace("${nodeName}", nodeName).replace("${position}",
+              nodePosition));
+    } else {
+      info("Check position before move down");
+      evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_NODE_POSITION.replace("${nodeName}", nodeName).replace("${position}",
+              nodePosition));
+      evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_NODE_POSITION.replace("${nodeName}", nodeUnderName)
+              .replace("${position}", underPosition));
+      info("Right click on the node");
+      evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
+      evt.rightClickOnElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
+      info("Select move up link");
+      evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_MOVE_DOWN, 2000, 0).click();
+      info("Check position after move down");
+      evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_NODE_POSITION.replace("${nodeName}", nodeName).replace("${position}",
+              underPosition));
+      evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_NODE_POSITION.replace("${nodeName}", nodeUnderName)
+              .replace("${position}", nodePosition));
     }
+  }
 
-    /**
-     * paste a node
-     *
-     * @param nodeName
-     */
-    public void pasteANode(boolean canPaste, String nodeName) {
-        info("paste node");
-        info("Right click on the node");
-        evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
-        evt.rightClickOnElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
-        if (canPaste) {
-            info("Select paste link");
-            evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_PASTE_NODE, 2000, 0).click();
-        } else {
-            info("can not find paste button");
-            evt.waitForElementNotPresent(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_PASTE_NODE, 2000, 0);
-        }
+  /**
+   * go to Edit Node'sPage
+   *
+   * @param nodeName
+   */
+  public void goToEditNodePage(String nodeName) {
 
+    info("Go to Edit Node's Page");
+    info("Right click on the node");
+    evt.rightClickOnElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
+    info("Select edit node's page link");
+    evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_EDIT_NODE_PAGE, 2000, 0);
+    evt.click(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_EDIT_NODE_PAGE);
+
+  }
+
+  /**
+   * add node with page selector
+   *
+   * @param nodeName
+   * @param extendedLabelMode
+   * @param languages
+   * @param nodeLabel
+   * @param pageTitle
+   * @param pageTitleSearch
+   * @param verifyPage
+   * @param verifyNode
+   */
+  public void addANodeWithPageSelector(String nodeName,
+                                       boolean extendedLabelMode,
+                                       String languages,
+                                       String nodeLabel,
+                                       String pageName,
+                                       String pageTitle,
+                                       String pageTitleSearch,
+                                       String type,
+                                       boolean verifyPage,
+                                       boolean verifyNode) {
+    info("Click on Add node button");
+    evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON, 3000, 0).click();
+    info("The popup is shown");
+    evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_NODE_TITLE, 2000, 0);
+    evt.type(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_NAME, nodeName, true);
+    if (extendedLabelMode) {
+      evt.select(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_LANGUAGE, languages);
+
+    } else {
+      evt.uncheck(ELEMENT_CHECKBOX_EXTENDED_LABEL_MODE);
     }
+    evt.type(ELEMENT_INPUT_LABEL, nodeLabel, true);
 
-    /**
-     * Move up a node
-     *
-     * @param nodeName
-     */
-    public void moveUpANode(boolean firstNode, String nodeName, String nodeAboveName, String nodePosition, String abovePosition) {
-        info("move up a node ");
-        if (firstNode) {
-            info("Right click on the node");
-            evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
-            evt.rightClickOnElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
-            info("Select move up link");
-            evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_MOVE_UP, 2000, 0).click();
-            info("There is nothing happen with the first node");
-            evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_NODE_POSITION.replace("${nodeName}", nodeName).replace("${position}",
-                    nodePosition));
-        } else {
-            info("Check position before move up");
-            evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_NODE_POSITION.replace("${nodeName}", nodeName).replace("${position}",
-                    nodePosition));
-            evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_NODE_POSITION.replace("${nodeName}", nodeAboveName)
-                    .replace("${position}", abovePosition));
-            info("Right click on the node");
-            evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
-            evt.rightClickOnElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
-            info("Select move up link");
-            evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_MOVE_UP, 2000, 0).click();
-            info("Check position after move up");
-            evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_NODE_POSITION.replace("${nodeName}", nodeName).replace("${position}",
-                    abovePosition));
-            evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_NODE_POSITION.replace("${nodeName}", nodeAboveName)
-                    .replace("${position}", nodePosition));
-        }
+    evt.click(ELEMENT_PAGE_SELECTOR_TAB);
+
+    if (pageName != "" && pageTitle != "") {
+      info("--Create new page");
+      evt.type(ELEMENT_INPUT_PAGE_NAME, pageName, true);
+      evt.type(ELEMENT_INPUT_PAGE_TITLE, pageTitle, true);
+      evt.click(ELEMENT_CREATE_PAGE_LINK);
+      if (verifyPage) {
+        evt.waitForElementNotPresent(ELEMENT_CREATE_PAGE_LINK);
+      } else {
+        return;
+      }
+    } else {
+      info("Select Page");
+
+      evt.click(ELEMENT_SEARCH_SELECTOR_PAGE_LINK);
+      // @FIXME Dependency problem
+      // naviManage.selectPage(pageTitleSearch);
     }
+    info("Save to add node");
 
-    /**
-     * Move down a node
-     *
-     * @param nodeName
-     */
-    public void moveDownANode(boolean lastNode, String nodeName, String nodeUnderName, String nodePosition, String underPosition) {
-        info("move up a node ");
-        if (lastNode) {
-            info("Right click on the node");
-            evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
-            evt.rightClickOnElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
-            info("Select move up link");
-            evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_MOVE_DOWN, 2000, 0).click();
-            evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_NODE_POSITION.replace("${nodeName}", nodeName).replace("${position}",
-                    nodePosition));
-        } else {
-            info("Check position before move down");
-            evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_NODE_POSITION.replace("${nodeName}", nodeName).replace("${position}",
-                    nodePosition));
-            evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_NODE_POSITION.replace("${nodeName}", nodeUnderName)
-                    .replace("${position}", underPosition));
-            info("Right click on the node");
-            evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
-            evt.rightClickOnElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
-            info("Select move up link");
-            evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_MOVE_DOWN, 2000, 0).click();
-            info("Check position after move down");
-            evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_NODE_POSITION.replace("${nodeName}", nodeName).replace("${position}",
-                    underPosition));
-            evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_NODE_POSITION.replace("${nodeName}", nodeUnderName)
-                    .replace("${position}", nodePosition));
-        }
-    }
+    evt.click(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE);
 
-    /**
-     * go to Edit Node'sPage
-     *
-     * @param nodeName
-     */
-    public void goToEditNodePage(String nodeName) {
-
-        info("Go to Edit Node's Page");
-        info("Right click on the node");
-        evt.rightClickOnElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
-        info("Select edit node's page link");
-        evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_EDIT_NODE_PAGE, 2000, 0);
-        evt.click(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_EDIT_NODE_PAGE);
-
-    }
-
-    /**
-     * add node with page selector
-     *
-     * @param nodeName
-     * @param extendedLabelMode
-     * @param languages
-     * @param nodeLabel
-     * @param pageTitle
-     * @param pageTitleSearch
-     * @param verifyPage
-     * @param verifyNode
-     */
-    public void addANodeWithPageSelector(String nodeName,
-                                         boolean extendedLabelMode,
-                                         String languages,
-                                         String nodeLabel,
-                                         String pageName,
-                                         String pageTitle,
-                                         String pageTitleSearch,
-                                         String type,
-                                         boolean verifyPage,
-                                         boolean verifyNode) {
-        info("Click on Add node button");
-        evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON, 3000, 0).click();
-        info("The popup is shown");
-        evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_NODE_TITLE, 2000, 0);
-        evt.type(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_NAME, nodeName, true);
-        if (extendedLabelMode) {
-            evt.select(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_LANGUAGE, languages);
-
-        } else {
-            evt.uncheck(ELEMENT_CHECKBOX_EXTENDED_LABEL_MODE);
-        }
-        evt.type(ELEMENT_INPUT_LABEL, nodeLabel, true);
-
-        evt.click(ELEMENT_PAGE_SELECTOR_TAB);
-
-        if (pageName != "" && pageTitle != "") {
-            info("--Create new page");
-            evt.type(ELEMENT_INPUT_PAGE_NAME, pageName, true);
-            evt.type(ELEMENT_INPUT_PAGE_TITLE, pageTitle, true);
-            evt.click(ELEMENT_CREATE_PAGE_LINK);
-            if (verifyPage) {
-                evt.waitForElementNotPresent(ELEMENT_CREATE_PAGE_LINK);
-            } else {
-                return;
-            }
-        } else {
-            info("Select Page");
-
-            evt.click(ELEMENT_SEARCH_SELECTOR_PAGE_LINK);
-            // @FIXME Dependency problem
-            // naviManage.selectPage(pageTitleSearch);
-        }
-        info("Save to add node");
-
-        evt.click(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE);
-
-    }
+  }
 
     /**
      * Open Invite users from group tab
@@ -654,141 +669,141 @@ public class SpaceSettingManagement {
 
     }
 
-    /**
-     * Select a group
-     *
-     * @param arrayGroupPath
-     */
-    public void selectGroup(String[] arrayGroupPath) {
-        info("Select a group in the list");
-        for (String group : arrayGroupPath) {
-            info("Select a group:" + group);
-            evt.click(ELEMENT_SPACE_INVITE_USERS_FROM_GROUP_SELECT_GROUP.replace("${name}", group));
-        }
-        info("Select the group");
-        evt.click(ELEMENT_SPACE_INVITE_USERS_FROM_GROUP_SELECTED_LINK);
-        evt.waitForAndGetElement(ELEMENT_SPACE_INVITE_USERS_FROM_GROU_SELECTED_GROUP_INFO, 2000, 1);
+  /**
+   * Select a group
+   *
+   * @param arrayGroupPath
+   */
+  public void selectGroup(String[] arrayGroupPath) {
+    info("Select a group in the list");
+    for (String group : arrayGroupPath) {
+      info("Select a group:" + group);
+      evt.click(ELEMENT_SPACE_INVITE_USERS_FROM_GROUP_SELECT_GROUP.replace("${name}", group));
+    }
+    info("Select the group");
+    evt.click(ELEMENT_SPACE_INVITE_USERS_FROM_GROUP_SELECTED_LINK);
+    evt.waitForAndGetElement(ELEMENT_SPACE_INVITE_USERS_FROM_GROU_SELECTED_GROUP_INFO, 2000, 1);
+  }
+
+  /**
+   * Invite users from a group
+   *
+   * @param arrayGroupPath
+   */
+  public void inviteGroup(String[] arrayGroupPath) {
+    goToMemberTab();
+    info("Click on select group button");
+    evt.click(ELEMENT_SPACE_INVITED_GROUP_BTN);
+    for (String group : arrayGroupPath) {
+      info("Select a group:" + group);
+      evt.click(ELEMENT_SPACE_INVITED_GROUP_NAME.replace("$name", group));
+    }
+    info("Select the group");
+    evt.click(ELEMENT_SPACE_INVITED_SELECT_GROUP);
+    info("click on Invite button");
+    evt.click(ELEMENT_SPACE_MEMBERS_INVITE);
+
+  }
+
+  /**
+   * Save all changes
+   */
+  public void saveChanges() {
+    if (evt.waitForAndGetElement(ELEMENT_ACCESS_PERMISSION_SAVE_BTN, 3000, 0) != null) {
+      info("Save all changes by click on Save button");
+      evt.click(ELEMENT_ACCESS_PERMISSION_SAVE_BTN);
+      evt.click(ELEMENT_ACCESS_INFO_OK_BTN);
+    } else {
+      info("Save all changes by click on Create button");
+      evt.click(ELEMENT_ACCESS_AND_EDIT_TAB_OF_POPUP_CREATE_BTN);
     }
 
-    /**
-     * Invite users from a group
-     *
-     * @param arrayGroupPath
-     */
-    public void inviteGroup(String[] arrayGroupPath) {
-        goToMemberTab();
-        info("Click on select group button");
-        evt.click(ELEMENT_SPACE_INVITED_GROUP_BTN);
-        for (String group : arrayGroupPath) {
-            info("Select a group:" + group);
-            evt.click(ELEMENT_SPACE_INVITED_GROUP_NAME.replace("$name", group));
-        }
-        info("Select the group");
-        evt.click(ELEMENT_SPACE_INVITED_SELECT_GROUP);
-        info("click on Invite button");
-        evt.click(ELEMENT_SPACE_MEMBERS_INVITE);
+  }
 
+  /**
+   * Verify member of space
+   *
+   * @param fullname
+   * @param isDisplay
+   */
+  public void verifyMember(String fullname, boolean isDisplay) {
+    info("OPen members tab");
+    evt.click(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB, 0, true);
+    if (isDisplay) {
+      evt.waitForAndGetElement(ELEMENT_SPACE_MEMBERS_USER_TABLE.replace("${user}", fullname));
+    } else {
+      evt.waitForElementNotPresent(ELEMENT_SPACE_MEMBERS_USER_TABLE.replace("${user}", fullname));
     }
+  }
 
-    /**
-     * Save all changes
-     */
-    public void saveChanges() {
-        if (evt.waitForAndGetElement(ELEMENT_ACCESS_PERMISSION_SAVE_BTN, 3000, 0) != null) {
-            info("Save all changes by click on Save button");
-            evt.click(ELEMENT_ACCESS_PERMISSION_SAVE_BTN);
-            evt.click(ELEMENT_ACCESS_INFO_OK_BTN);
-        } else {
-            info("Save all changes by click on Create button");
-            evt.click(ELEMENT_ACCESS_AND_EDIT_TAB_OF_POPUP_CREATE_BTN);
-        }
-
+  /**
+   * Verify permission of member
+   *
+   * @param fullname
+   * @param isDisplay
+   */
+  public void verifyPermOfMember(String fullname, boolean isDisplay) {
+    info("verify permission of member space");
+    if (isDisplay) {
+      evt.waitForElementNotPresent(ELEMENT_SPACE_CHANGE_ROLE_USER_MEMBER_DISABLE.replace("${user}", fullname));
+      evt.waitForAndGetElement(ELEMENT_SPACE_REMOVE_USER_BTN_MEMBER_TABLE.replace("${fullName}", fullname));
+    } else {
+      evt.waitForAndGetElement(ELEMENT_SPACE_CHANGE_ROLE_USER_MEMBER_DISABLE.replace("${user}", fullname));
+      evt.waitForElementNotPresent(ELEMENT_SPACE_REMOVE_USER_BTN_MEMBER_TABLE.replace("${fullName}", fullname));
     }
+  }
 
-    /**
-     * Verify member of space
-     *
-     * @param fullname
-     * @param isDisplay
-     */
-    public void verifyMember(String fullname, boolean isDisplay) {
-        info("OPen members tab");
-        evt.click(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB, 0, true);
-        if (isDisplay) {
-            evt.waitForAndGetElement(ELEMENT_SPACE_MEMBERS_USER_TABLE.replace("${user}", fullname));
-        } else {
-            evt.waitForElementNotPresent(ELEMENT_SPACE_MEMBERS_USER_TABLE.replace("${user}", fullname));
-        }
-    }
+  /**
+   * Check user in Invited Space
+   *
+   * @param user
+   * @param space
+   * @param isPresent
+   */
+  public void checkUserInInvitedSpace(String user, String space, boolean isPresent) {
+    goToMemberTab();
+    if (isPresent)
+      evt.waitForAndGetElement(ELEMENT_SPACE_INVITED_USER_TABLE.replace("${user}", user));
+    else
+      evt.waitForElementNotPresent(ELEMENT_SPACE_INVITED_USER_TABLE.replace("${user}", user));
+  }
 
-    /**
-     * Verify permission of member
-     *
-     * @param fullname
-     * @param isDisplay
-     */
-    public void verifyPermOfMember(String fullname, boolean isDisplay) {
-        info("verify permission of member space");
-        if (isDisplay) {
-            evt.waitForElementNotPresent(ELEMENT_SPACE_CHANGE_ROLE_USER_MEMBER_DISABLE.replace("${user}", fullname));
-            evt.waitForAndGetElement(ELEMENT_SPACE_REMOVE_USER_BTN_MEMBER_TABLE.replace("${fullName}", fullname));
-        } else {
-            evt.waitForAndGetElement(ELEMENT_SPACE_CHANGE_ROLE_USER_MEMBER_DISABLE.replace("${user}", fullname));
-            evt.waitForElementNotPresent(ELEMENT_SPACE_REMOVE_USER_BTN_MEMBER_TABLE.replace("${fullName}", fullname));
-        }
-    }
+  /**
+   * Check user in Member Space
+   *
+   * @param user
+   * @param space
+   * @param isPresent
+   */
+  public void checkUserInMemberSpace(String user, String space, boolean isPresent) {
+    goToMemberTab();
+    if (isPresent)
+      evt.waitForAndGetElement(ELEMENT_USER_IN_MEMBER_TABLE.replace("${fullName}", user));
+    else
+      evt.waitForElementNotPresent(ELEMENT_USER_IN_MEMBER_TABLE.replace("${fullName}", user));
+  }
 
-    /**
-     * Check user in Invited Space
-     *
-     * @param user
-     * @param space
-     * @param isPresent
-     */
-    public void checkUserInInvitedSpace(String user, String space, boolean isPresent) {
-        goToMemberTab();
-        if (isPresent)
-            evt.waitForAndGetElement(ELEMENT_SPACE_INVITED_USER_TABLE.replace("${user}", user));
-        else
-            evt.waitForElementNotPresent(ELEMENT_SPACE_INVITED_USER_TABLE.replace("${user}", user));
-    }
+  /**
+   * Check user selector of Invite Space
+   *
+   * @param user
+   * @param isPresent
+   */
+  public void checkUserSelectorInviteSpace(String user, boolean isPresent) {
+    goToMemberTab();
+    evt.click(ELEMENT_SPACE_MEMBERS_SELECT_USER, 0, true);
+    plfPerm.checkUserSelector(user, isPresent);
+  }
 
-    /**
-     * Check user in Member Space
-     *
-     * @param user
-     * @param space
-     * @param isPresent
-     */
-    public void checkUserInMemberSpace(String user, String space, boolean isPresent) {
-        goToMemberTab();
-        if (isPresent)
-            evt.waitForAndGetElement(ELEMENT_USER_IN_MEMBER_TABLE.replace("${fullName}", user));
-        else
-            evt.waitForElementNotPresent(ELEMENT_USER_IN_MEMBER_TABLE.replace("${fullName}", user));
-    }
-
-    /**
-     * Check user selector of Invite Space
-     *
-     * @param user
-     * @param isPresent
-     */
-    public void checkUserSelectorInviteSpace(String user, boolean isPresent) {
-        goToMemberTab();
-        evt.click(ELEMENT_SPACE_MEMBERS_SELECT_USER, 0, true);
-        plfPerm.checkUserSelector(user, isPresent);
-    }
-
-    /**
-     * Check search user of Invite Space
-     *
-     * @param user
-     * @param isPresent
-     */
-    public void checkSearchUserInviteSpace(String user, boolean isPresent) {
-        goToMemberTab();
-        evt.click(ELEMENT_SPACE_MEMBERS_SELECT_USER, 0, true);
-        plfPerm.searchUser(user, isPresent);
-    }
+  /**
+   * Check search user of Invite Space
+   *
+   * @param user
+   * @param isPresent
+   */
+  public void checkSearchUserInviteSpace(String user, boolean isPresent) {
+    goToMemberTab();
+    evt.click(ELEMENT_SPACE_MEMBERS_SELECT_USER, 0, true);
+    plfPerm.searchUser(user, isPresent);
+  }
 }

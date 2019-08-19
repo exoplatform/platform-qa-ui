@@ -1689,11 +1689,13 @@ public class CalendarLocator {
   public static final SelenideElement ELEMENT_EVENT_SAVE_BUTTON=  $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]"));
   public static final SelenideElement ELEMENT_EVENT_CLEAR_BUTTON=  $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]"));
   public static final SelenideElement ELEMENT_EVENT_TITLE_DRAWER=   $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input"));
+  public static final SelenideElement ELEMENT_EVENT_SELECT_FROM=   $(By.xpath("(//div[@class=\"periodDate pull-left\"]/input)[1]"));
+  public static final SelenideElement ELEMENT_EVENT_SELECT_TO=   $(By.xpath("(//div[@class=\"periodDate pull-left\"]/input)[2]"));
+  public static final SelenideElement ELEMENT_EVENT_CURRENT_DAY=   $(By.xpath("//td/a/following::a[@class=\"highLight today\"]"));
+  public static final SelenideElement ELEMENT_EVENT_NEXT_DAY=   $(By.xpath("(//td/a[@class=\"highLight today\"]/following::td/a[@href=\"#SelectDate\"])[1]"));
   public static final SelenideElement ELEMENT_CLOSE_BUTTON_DRAWER=   $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[1]/a"));
   public static final SelenideElement ELEMENT_PARTICIPANT_DRAWER=     $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/div/div/input"));
   public static final SelenideElement ELEMENT_REPEAT_SWITCH_LABEL=     $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[3]/div[2]/div[3]/div/label[1]/span"));
-
-
   public static final SelenideElement ELEMENT_REPEAT_PREFERRENCE_IMPROVE_POPUP=$(byClassName("recurring-popup"));
   public static final SelenideElement ELEMENT_REMINDER_SWITCH_LABEL=     $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[2]/div[2]/div[2]/div/label[1]"));
   public static final SelenideElement ELEMENT_REMINDER_POPUP=   $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[2]/div[2]/div[1]"));

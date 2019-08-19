@@ -49,6 +49,13 @@ public class HomePagePlatform {
     $(byClassName("notif-chat-open-link")).waitUntil(Condition.appears, Configuration.timeout).click();
   }
 
+  public void backToHomeFromChat() {
+    info("--Go to Home--");
+    switchTo().window(1);
+    refreshUntil($(byClassName("home-button")), Condition.visible, 1000);
+    $(byXpath("//i[@class='uiIconHomeInfo']")).waitUntil(Condition.visible,Configuration.timeout).click();
+    refresh();
+  }
   /**
    * Go to Documents
    */
