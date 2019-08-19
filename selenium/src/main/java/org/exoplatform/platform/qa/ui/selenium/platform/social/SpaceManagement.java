@@ -7,6 +7,7 @@ import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 
@@ -271,20 +272,20 @@ public class SpaceManagement {
    */
   public void checkAvatarUserDimensions() {
     final String ELEMENT_AVATAR_IMAGE_HEIGHT = String.valueOf($(byXpath("//ul[@id=\"spaceManagers\"]/li/a/img")).getSize().getHeight());
-    assertEquals("Avatar Image Height is not " + ELEMENT_AVATAR_IMAGE_HEIGHT + " px","30", ELEMENT_AVATAR_IMAGE_HEIGHT);
+    Assert.assertEquals("Avatar Image Height is not " + ELEMENT_AVATAR_IMAGE_HEIGHT + " px", "30", ELEMENT_AVATAR_IMAGE_HEIGHT);
     final String ELEMENT_AVATAR_IMAGE_WIDTH = String.valueOf($(byXpath("//ul[@id=\"spaceManagers\"]/li/a/img")).getSize().getWidth());
-    assertEquals("Avatar Image Width is not " + ELEMENT_AVATAR_IMAGE_WIDTH + " px","30", ELEMENT_AVATAR_IMAGE_WIDTH);
+    Assert.assertEquals("Avatar Image Width is not " + ELEMENT_AVATAR_IMAGE_WIDTH + " px", "30", ELEMENT_AVATAR_IMAGE_WIDTH);
   }
 
   /**
    * Check Description Padding Dimensions
    */
   public void checkDescriptionPortletPadding() {
-    assertEquals("The line height of space description is not 20 px", "20px", ELEMENT_SPACE_DESCRIPTION.getCssValue("line-height"));
-    assertEquals("The font size of space description is not 14 px", "14px", ELEMENT_SPACE_DESCRIPTION.getCssValue("font-size"));
-    assertEquals("The color of space description is not #333333", "#333333", getCSSColor(ELEMENT_SPACE_DESCRIPTION));
-    assertEquals("The font weight of space description is not 400", "400", ELEMENT_SPACE_DESCRIPTION.getCssValue("font-weight"));
-    assertEquals("The font family of space description is not Helvetica, arial, sans-serif", "Helvetica, arial, sans-serif", ELEMENT_SPACE_DESCRIPTION.getCssValue("font-family"));
+    Assert.assertEquals("The line height of space description is not 20 px", "20px", ELEMENT_SPACE_DESCRIPTION.getCssValue("line-height"));
+    Assert.assertEquals("The font size of space description is not 14 px", "14px", ELEMENT_SPACE_DESCRIPTION.getCssValue("font-size"));
+    Assert.assertEquals("The color of space description is not #333333", "#333333", getCSSColor(ELEMENT_SPACE_DESCRIPTION));
+    Assert.assertEquals("The font weight of space description is not 400", "400", ELEMENT_SPACE_DESCRIPTION.getCssValue("font-weight"));
+    Assert.assertEquals("The font family of space description is not Helvetica, arial, sans-serif", "Helvetica, arial, sans-serif", ELEMENT_SPACE_DESCRIPTION.getCssValue("font-family"));
   }
 
   /**
@@ -336,7 +337,7 @@ public class SpaceManagement {
     }
     if (space != null) {
       final SelenideElement ELEMENT_SPACE_NAME = $(byXpath("//div[@id='CalendarContainer']/div[@class='eventTitle']/span[@id and contains(text(),'$Space')]".replace("$Space", space)));
-      ELEMENT_SPACE_NAME.waitUntil(Condition.visible,Configuration.timeout).exists();
+      ELEMENT_SPACE_NAME.waitUntil(Condition.visible, Configuration.timeout).exists();
       info("Space Name is : " + space);
       assertEquals(space, ELEMENT_SPACE_NAME.getText());
     }
@@ -384,11 +385,11 @@ public class SpaceManagement {
    * Check Manager Title Dimensions
    */
   public void checkManagerTitleDimensions() {
-    assertEquals("The line height of space manager name is not 20px", "20px", ELEMENT_SPACE_MANAGER_NAME.getCssValue("line-height"));
-    assertEquals("The font size of space manager name is not 14px", "14px", ELEMENT_SPACE_MANAGER_NAME.getCssValue("font-size"));
-    assertEquals("The color of space manager name is not #333333", "#333333", getCSSColor(ELEMENT_SPACE_MANAGER_NAME));
-    assertEquals("The font weight of space manager name is not 400", "400", ELEMENT_SPACE_MANAGER_NAME.getCssValue("font-weight"));
-    assertEquals("The font family of space manager name is not Helvetica, arial, sans-serif", "Helvetica, arial, sans-serif", ELEMENT_SPACE_MANAGER_NAME.getCssValue("font-family"));
+    Assert.assertEquals("The line height of space manager name is not 20px", "20px", ELEMENT_SPACE_MANAGER_NAME.getCssValue("line-height"));
+    Assert.assertEquals("The font size of space manager name is not 14px", "14px", ELEMENT_SPACE_MANAGER_NAME.getCssValue("font-size"));
+    Assert.assertEquals("The color of space manager name is not #333333", "#333333", getCSSColor(ELEMENT_SPACE_MANAGER_NAME));
+    Assert.assertEquals("The font weight of space manager name is not 400", "400", ELEMENT_SPACE_MANAGER_NAME.getCssValue("font-weight"));
+    Assert.assertEquals("The font family of space manager name is not Helvetica, arial, sans-serif", "Helvetica, arial, sans-serif", ELEMENT_SPACE_MANAGER_NAME.getCssValue("font-family"));
   }
 
   /**
@@ -396,10 +397,10 @@ public class SpaceManagement {
    */
   public void checkWhoIsOnlinePortletDimensions(String onlineUser) {
     final SelenideElement onlineUserInSpace = $(byXpath("//h6[text()=\"Who's Online?\"]/following::img[@src=\"/portal/rest/v1/social/users/${onlineUserSpace}/avatar\"]".replace("${onlineUserSpace}", onlineUser)));
-    assertEquals("The line height of Online User is not 20px", "20px", onlineUserInSpace.getCssValue("line-height"));
-    assertEquals("The font size of Online User is not 14px", "14px", onlineUserInSpace.getCssValue("font-size"));
-    assertEquals("The font weight of Online User is not 400", "400", onlineUserInSpace.getCssValue("font-weight"));
-    assertEquals("The font family of Online User is not Helvetica, arial, sans-serif", "Helvetica, arial, sans-serif", onlineUserInSpace.getCssValue("font-family"));
+    Assert.assertEquals("The line height of Online User is not 20px", "20px", onlineUserInSpace.getCssValue("line-height"));
+    Assert.assertEquals("The font size of Online User is not 14px", "14px", onlineUserInSpace.getCssValue("font-size"));
+    Assert.assertEquals("The font weight of Online User is not 400", "400", onlineUserInSpace.getCssValue("font-weight"));
+    Assert.assertEquals("The font family of Online User is not Helvetica, arial, sans-serif", "Helvetica, arial, sans-serif", onlineUserInSpace.getCssValue("font-family"));
   }
 
   /**
@@ -407,11 +408,11 @@ public class SpaceManagement {
    */
   public void checkCalendarPortletInSpaceHomePage() {
     final SelenideElement calendarCheck = $(byXpath("//div[@class='calendarPortlet']"));
-    assertEquals("The line height of Calendar Portlet is not 20px", "20px", calendarCheck.getCssValue("line-height"));
-    assertEquals("The font size of Calendar Portlet is not 14px", "14px", calendarCheck.getCssValue("font-size"));
-    assertEquals("The color of Calendar Portlet is not #333333", "#333333", getCSSColor(calendarCheck));
-    assertEquals("The font weight of Calendar Portlet is not 400", "400", calendarCheck.getCssValue("font-weight"));
-    assertEquals("The font family of Calendar Portlet is not Helvetica, arial, sans-serif", "Helvetica, arial, sans-serif", calendarCheck.getCssValue("font-family"));
+    Assert.assertEquals("The line height of Calendar Portlet is not 20px", "20px", calendarCheck.getCssValue("line-height"));
+    Assert.assertEquals("The font size of Calendar Portlet is not 14px", "14px", calendarCheck.getCssValue("font-size"));
+    Assert.assertEquals("The color of Calendar Portlet is not #333333", "#333333", getCSSColor(calendarCheck));
+    Assert.assertEquals("The font weight of Calendar Portlet is not 400", "400", calendarCheck.getCssValue("font-weight"));
+    Assert.assertEquals("The font family of Calendar Portlet is not Helvetica, arial, sans-serif", "Helvetica, arial, sans-serif", calendarCheck.getCssValue("font-family"));
   }
 
   /**
@@ -464,7 +465,7 @@ public class SpaceManagement {
     info("Check job title of: " + onlineUser);
     $(byXpath("//h6[text()=\"Who's Online?\"]/following::img[@src=\"/portal/rest/v1/social/users/${onlineUserSpace}/avatar\"]".replace("${onlineUserSpace}", onlineUser))).waitUntil(Condition.visible, Configuration.timeout).hover();
     final String userJobTitle = ($(byXpath("//td[@id=\"profileName\"]/div"))).waitUntil(Condition.visible, Configuration.timeout).getText();
-    assertEquals("Online User job " + jobTitle+ " is not displayed",jobTitle, userJobTitle);
+    Assert.assertEquals("Online User job " + jobTitle + " is not displayed", jobTitle, userJobTitle);
   }
 
   /**
@@ -505,7 +506,7 @@ public class SpaceManagement {
     sleep(Configuration.timeout);
     ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.appears, Configuration.timeout);
     info("Input the space into search text box");
-    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.visible, Configuration.timeout).setValue(name);
+    ELEMENT_MY_SPACE_SEARCH_TEXT.setValue(name);
     sleep(Configuration.timeout);
     info("evt.click on Search button");
     $(ELEMENT_MY_SPACE_SEARCH_BTN).click();
@@ -571,7 +572,6 @@ public class SpaceManagement {
     info("Open Invitation Received tab");
     $(ELEMENT_MY_SPACE_INVITATION_RECEIVED).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_MY_SPACE_INVITATION_RECEIVED).click();
-
   }
 
   /**
@@ -581,7 +581,6 @@ public class SpaceManagement {
     info("Open All spaces tab");
     $(ELEMENT_MY_SPACE_ALL_SPACES_TAB).waitUntil(Condition.visible, Configuration.timeout);
     $(ELEMENT_MY_SPACE_ALL_SPACES_TAB).click();
-
   }
 
   /**
@@ -730,17 +729,17 @@ public class SpaceManagement {
     info("Request successfully");
   }
 
-    /**
-     * Cancel a pending request
-     *
-     * @param space
-     */
-    public void cancelPendingRequest(String space) {
-        info("evt.click on Cancel button");
-        evt.click(ELEMENT_SPACE_CANCEL_BUTTON.replace("${space}", space));
-        evt.waitForElementNotPresent(ELEMENT_SPACE_TITLE.replace("${space}", space), 2000, 1);
-        info("Cancelling pending request is success");
-    }
+  /**
+   * Cancel a pending request
+   *
+   * @param space
+   */
+  public void cancelPendingRequest(String space) {
+    info("evt.click on Cancel button");
+    evt.click(ELEMENT_SPACE_CANCEL_BUTTON.replace("${space}", space));
+    evt.waitForElementNotPresent(ELEMENT_SPACE_TITLE.replace("${space}", space), 2000, 1);
+    info("Cancelling pending request is success");
+  }
 
   /**
    * Open Activity Stream portlet

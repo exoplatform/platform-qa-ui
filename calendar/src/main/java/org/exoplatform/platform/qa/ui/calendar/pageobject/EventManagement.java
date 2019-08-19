@@ -1220,11 +1220,10 @@ public class EventManagement {
     $(byText("Add Event")).should(Condition.exist);
     assertEquals("Event title",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
     assertEquals("All",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).getText());
-    assertEquals("All day",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[2]/div/label/span")).getText());
-    assertEquals("Location",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[3]/div[1]")).getText());
-    assertEquals("Enter a location for this event",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[3]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/div/div/input")).getAttribute("placeholder"));
+    assertEquals("All day",$(byXpath("//input[@id=\"allday\"]/following::span[1]")).getText());
+    assertEquals("Location",$(byXpath("//div[@class=\"control-label\" and contains(text(),'Location')]")).getText());
+    assertEquals("Enter a location for this event",$(byXpath("//div[@class=\"control-label\" and contains(text(),'Location')]/following::input[1]")).getAttribute("placeholder"));
+    assertEquals("Participants",$(byXpath("//div[@class=\"control-label\" and contains(text(),'Participants')]")).getText());
     assertEquals("Clear",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
     assertEquals("Save",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
     assertEquals("Cancel",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
