@@ -86,7 +86,7 @@ public class CalendarImproveCreateEvent extends Base {
     assertEquals(date, $(byXpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[2]")).getValue());
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
     $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//div[@class=\"trimText\"]")).getText());
+    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
     $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
     $(byXpath("//textarea[@placeholder='Add a description']")).exists();
     assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
@@ -334,7 +334,7 @@ public class CalendarImproveCreateEvent extends Base {
     assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
     $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//div[@class=\"trimText\"]")).getText());
+    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
     $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
     $(byXpath("//textarea[@placeholder='Add a description']")).exists();
     assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
@@ -364,7 +364,7 @@ public class CalendarImproveCreateEvent extends Base {
     assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
     $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//div[@class=\"trimText\"]")).getText());
+    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
     $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
     $(byXpath("//textarea[@placeholder='Add a description']")).exists();
     assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
@@ -394,7 +394,7 @@ public class CalendarImproveCreateEvent extends Base {
     assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
     $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//div[@class=\"trimText\"]")).getText());
+    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
     $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
     $(byXpath("//textarea[@placeholder='Add a description']")).exists();
     assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
@@ -442,7 +442,7 @@ public class CalendarImproveCreateEvent extends Base {
     assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
     $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//div[@class=\"trimText\"]")).getText());
+    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
     $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
     $(byXpath("//textarea[@placeholder='Add a description']")).exists();
     assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
@@ -514,7 +514,7 @@ public class CalendarImproveCreateEvent extends Base {
     assertEquals(date, $(byXpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[2]")).getValue());
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
     $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//div[@class=\"trimText\"]")).getText());
+    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
     $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
     $(byXpath("//textarea[@placeholder='Add a description']")).exists();
     assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
@@ -588,7 +588,7 @@ public class CalendarImproveCreateEvent extends Base {
     assertEquals(date, $(byXpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[2]")).getValue());
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
     $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//div[@class=\"trimText\"]")).getText());
+    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
     $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
     $(byXpath("//textarea[@placeholder='Add a description']")).exists();
     assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
@@ -633,7 +633,7 @@ public class CalendarImproveCreateEvent extends Base {
     assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
     $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//div[@class=\"trimText\"]")).getText());
+    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
     $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
     $(byXpath("//textarea[@placeholder='Add a description']")).exists();
     assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
@@ -701,7 +701,7 @@ public class CalendarImproveCreateEvent extends Base {
     assertEquals(date, $(byXpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[2]")).getValue());
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
     $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//div[@class=\"trimText\"]")).getText());
+    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
     $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
     $(byXpath("//textarea[@placeholder='Add a description']")).exists();
     assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
@@ -741,7 +741,7 @@ public class CalendarImproveCreateEvent extends Base {
     assertEquals(date, $(byXpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[2]")).getValue());
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
     $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//div[@class=\"trimText\"]")).getText());
+    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
     $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
     $(byXpath("//textarea[@placeholder='Add a description']")).exists();
     assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
@@ -788,7 +788,7 @@ public class CalendarImproveCreateEvent extends Base {
     assertEquals(date, $(byXpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[2]")).getValue());
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
     $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//div[@class=\"trimText\"]")).getText());
+    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
     $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
     $(byXpath("//textarea[@placeholder='Add a description']")).exists();
     assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
@@ -824,7 +824,7 @@ public class CalendarImproveCreateEvent extends Base {
     assertEquals(date, $(byXpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[2]")).getValue());
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
     $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//div[@class=\"trimText\"]")).getText());
+    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
     $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
     $(byXpath("//textarea[@placeholder='Add a description']")).exists();
     info("Close Edit Event Button exists");
@@ -861,12 +861,12 @@ public class CalendarImproveCreateEvent extends Base {
 
   @Test
   public void test21_CheckInformationOfSelectedEventToEdit() {
-    //21616
+    //21616 //21613 //21614
     String eventTitle = "event" + getRandomNumber();
     String uploadedFile = "eXo-Platform.png";
     String eventCategory = "Meeting";
     String eventLocation = "location" + getRandomString();
-    String eventDescription= "description" + getRandomString();
+    String eventDescription = "description" + getRandomString();
     String pattern = "MM-dd-yyyy";
     String eventTitle2 = "event" + getRandomNumber();
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -893,7 +893,7 @@ public class CalendarImproveCreateEvent extends Base {
     assertEquals(date, $(byXpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[2]")).getValue());
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
     $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//div[@class=\"trimText\"]")).getText());
+    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
     $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
     $(byXpath("//textarea[@placeholder='Add a description']")).exists();
     assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
@@ -926,19 +926,23 @@ public class CalendarImproveCreateEvent extends Base {
     assertEquals(eventLocation, ELEMENT_EVENT_LOCATION.getValue());
     assertEquals(eventDescription, ELEMENT_EVENT_DESCRIPTION.getValue());
     $(byXpath("//div[@title='${uploadedFile}']".replace("${uploadedFile}", uploadedFile))).exists();
-    sleep(2000);
-    ELEMENT_EVENT_CANCEL_BUTTON.click();
+    ELEMENT_EVENT_TITLE_DRAWER.setValue(eventTitle2);
+    ELEMENT_EVENT_SAVE_BUTTON.waitUntil(Condition.visible, Configuration.timeout).click();
     calendarHomePage.verifyIsPresentEventTask(eventTitle2,
             CalendarHomePage.selectViewOption.LIST,
             CalendarHomePage.selectDayOption.DETAILTIME);
-    info("Clear data");
-    homePagePlatform.goToCalendarPage();
-    sleep(2000);
+    calendarHomePage.goToEditEventTaskFormByRightClick(eventTitle2,
+            CalendarHomePage.selectViewOption.WEEK,
+            CalendarHomePage.selectDayOption.DETAILTIME,
+            getDate(0, "MMM dd yyyy"));
+    $(byText("Edit Event")).should(Condition.exist);
+    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
+    assertEquals(eventTitle2, ELEMENT_EVENT_DRAWER_TITLE.getValue());
+    ELEMENT_EVENT_CANCEL_BUTTON.waitUntil(Condition.visible, Configuration.timeout).click();
+    info("Clear all data");
     calendarHomePage.deleteEventTask(eventTitle2,
             CalendarHomePage.selectViewOption.LIST,
             CalendarHomePage.selectDayOption.DETAILTIME,
             getDate(0, "MM/dd/yyyy"));
-
   }
-
 }
