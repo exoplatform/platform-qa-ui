@@ -1114,34 +1114,6 @@ public class SiteExplorerHome {
   }
 
   /**
-   * Select File Explorer tree on left panel
-   */
-  public void selectFileExplorer() {
-    info("Select File Explorer");
-    WebElement el = (new WebDriverWait(testBase.getExoWebDriver().getWebDriver(),
-                                       30)).until(ExpectedConditions.presenceOfElementLocated(ELEMENT_FILE_EXPLORER_ICON));
-    el.click();
-
-  }
-
-  /**
-   * Click on Delete button
-   */
-  public void clickDeleteButton() {
-    info("click on Delete button");
-    evt.waitElementAndTryGetElement(ELEMENT_DELETE_ALL_BUTTON);
-    WebElement el = evt.waitForAndGetElement(ELEMENT_DELETE_ALL_BUTTON);
-    /*
-     * WebElement el = (new WebDriverWait(driver, 30))
-     * .until(ExpectedConditions.presenceOfElementLocated(
-     * ELEMENT_DELETE_ALL_BUTTON));
-     */
-    el.click();
-    dialog.deleteInDialog();
-
-  }
-
-  /**
    * Open a file from right panel
    *
    * @param filename String
@@ -1155,48 +1127,6 @@ public class SiteExplorerHome {
     info("The document is opened");
   }
 
-  /**
-   * Select all files in folder under admin view
-   */
-  public void selectAllFiles() {
-    info("Select all file");
-    WebElement el =
-                  (new WebDriverWait(testBase.getExoWebDriver().getWebDriver(),
-                                     30)).until(ExpectedConditions.presenceOfElementLocated(ELEMENT_SITE_EXPLORER_ALL_CHECKBOX));
-    if (evt.waitForAndGetElement(ELEMENT_DOCUMENT_LIST_ROW_CONTENT, 5000, 0) != null) {
-      info("check on the checkbox");
-      // el.click();
-      evt.clickByJavascript(el, 2);
-
-      info("Click on Delete button");
-      clickDeleteButton();
-    }
-
-  }
-
-  /**
-   * Select a new content in list
-   *
-   * @param nameContent String
-   */
-  public void selectAContentType(String nameContent) {
-    info("Select a content");
-    WebElement el =
-                  (new WebDriverWait(testBase.getExoWebDriver().getWebDriver(),
-                                     30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(ELEMENT_SITE_EXPLORER_CONTENT_NAME.replace("${nameContent}", nameContent))));
-    el.click();
-
-  }
-
-  /**
-   * Delete all files in a folder under Admin view
-   */
-  public void deleteAllFiles() {
-    info("Select Admin view type");
-    clickAdminView();
-    info("Select All checkbox");
-    selectAllFiles();
-  }
 
   /**
    * HEAD Check display of drive
