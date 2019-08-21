@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -18,13 +19,13 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class SpaceSettingManagement {
 
-  private final TestBase testBase;
+  private final TestBase       testBase;
 
-  public ManageAlert alert;
+  public ManageAlert           alert;
 
-  public Button button;
+  public Button                button;
 
-  public PlatformPermission plfPerm;
+  public PlatformPermission    plfPerm;
 
   public HomePagePlatform homePagePlatform;
 
@@ -41,7 +42,7 @@ public class SpaceSettingManagement {
     this.alert = new ManageAlert(testBase);
     this.button = new Button(testBase);
     this.plfPerm = new PlatformPermission(testBase);
-    this.homePagePlatform = new HomePagePlatform(testBase);
+    this.homePagePlatform= new HomePagePlatform(testBase);
   }
 
   /**
@@ -67,10 +68,10 @@ public class SpaceSettingManagement {
    */
   public void goToMemberTab() {
     info("Open members tab");
-    homePagePlatform.refreshUntil($(ELEMENT_SPACE_WIKI_TAB), Condition.visible, 1000);
-    if ($(ELEMENT_SPACE_MENU_MORE).is(Condition.visible))
+    homePagePlatform.refreshUntil($(ELEMENT_SPACE_WIKI_TAB),Condition.visible,1000);
+    if($(ELEMENT_SPACE_MENU_MORE).is(Condition.visible))
       $(ELEMENT_SPACE_MENU_MORE).click();
-    $(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB).waitUntil(Condition.visible,Configuration.timeout).click();
     $(byClassName("uiGrayLightBox")).waitUntil(Condition.visible, Configuration.timeout);
   }
 
@@ -82,8 +83,8 @@ public class SpaceSettingManagement {
    * Invite a user in the space
    *
    * @param userName
-   * @param verify   is true if want to verify user in invited table. False if don't
-   *                 want.
+   * @param verify is true if want to verify user in invited table. False if don't
+   *          want.
    * @param fullName
    */
   public void inviteUser(String userName, boolean verify, String fullName) {
@@ -113,25 +114,25 @@ public class SpaceSettingManagement {
 
   }
 
-  /**
-   * Connect to Searched User
-   */
-  public void connectSearchedUser() {
-    if ($(byXpath("//button[text()='Cancel Request']")).isDisplayed()) {
-      $(byXpath("//button[text()='Cancel Request']")).waitUntil(Condition.visible, Configuration.timeout).click();
+    /**
+     * Connect to Searched User
+     */
+    public void connectSearchedUser() {
+        if( $(byXpath("//button[text()='Cancel Request']")).isDisplayed()) {
+            $(byXpath("//button[text()='Cancel Request']")).waitUntil(Condition.visible, Configuration.timeout).click();
+        }
+        info("Connect to searched user");
+        $(byXpath("//button[text()='Connect']")).waitUntil(Condition.visible, Configuration.timeout).click();
     }
-    info("Connect to searched user");
-    $(byXpath("//button[text()='Connect']")).waitUntil(Condition.visible, Configuration.timeout).click();
-  }
 
-  /**
-   * Check User Not Connected
-   */
-  public void checkUserNotConnected() {
-    if ($(byXpath("//button[text()='Connect']")).isDisplayed()) {
-      info("User is not connected");
+    /**
+     * Check User Not Connected
+     */
+    public void checkUserNotConnected() {
+        if( $(byXpath("//button[text()='Connect']")).isDisplayed()) {
+            info("User is not connected");
+        }
     }
-  }
 
   /**
    * Remove a user in the invited list
@@ -143,7 +144,7 @@ public class SpaceSettingManagement {
     ELEMENT_SPACE_SETTINGS_MEMBERS_TAB_IN_SETTING_TAB.click();
     info("Click on Delete button to remove user");
     $(byText(user)).parent().find(byClassName("uiIconDelete")).click();
-    $(byText(user)).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    $(byText(user)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
@@ -207,13 +208,13 @@ public class SpaceSettingManagement {
   /*** Search User in People
    *
    */
-  public void searchUsersPeople(String user) {
-    info("--Search user To connect" + user + "--");
-    ($(byXpath("(//input[@placeholder=\"Name\"])[2]"))).setValue(user);
-    ($(byXpath("//button[text()='Search']"))).waitUntil(Condition.visible, Configuration.timeout).click();
-    ($(byXpath("//div[@class=\"connectionBtn clearfix\"]/button"))).waitUntil(Condition.visible, Configuration.timeout).click();
-    ($(byXpath("//button[text()=\"Cancel Request\"]"))).shouldNot(Condition.visible);
-  }
+    public void searchUsersPeople(String user) {
+        info("--Search user To connect" + user + "--");
+            ($(byXpath("(//input[@placeholder=\"Name\"])[2]"))).setValue(user);
+            ($(byXpath("//button[text()='Search']"))).waitUntil(Condition.visible, Configuration.timeout).click();
+            ($(byXpath("//div[@class=\"connectionBtn clearfix\"]/button"))).waitUntil(Condition.visible, Configuration.timeout).click();
+            ($(byXpath("//button[text()=\"Cancel Request\"]"))).shouldNot(Condition.visible);
+    }
 
   /**
    * Delete member of space
@@ -245,7 +246,7 @@ public class SpaceSettingManagement {
    * input name, des into setting tab
    *
    * @param name name of space
-   * @param des  description of space
+   * @param des description of space
    */
   public void updateInfoSpace(String name, String des) {
     info("Input data to setting tab");
@@ -273,9 +274,9 @@ public class SpaceSettingManagement {
    */
   public void goToNavigationTab() {
     info("Select Navigation tab");
-    $(ELEMENT_SPACE_SETTING_NAVIGATION_TAB).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_SPACE_SETTING_NAVIGATION_TAB).waitUntil(Condition.visible,Configuration.timeout).click();
     info("The tab is opened succcessfully");
-    $(ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON).waitUntil(Condition.visible, Configuration.timeout);
+    $(ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON).waitUntil(Condition.visible,Configuration.timeout);
     // waitForAndGetElement(ELEMENT_APPLICATION_TAB_ADD_APPLICATION_BTN,3000,0);
 
   }
@@ -312,18 +313,18 @@ public class SpaceSettingManagement {
   public void addANodeSimple(String name) {
     info("Click on Add node button");
     // waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON,3000,0).click();
-    $(ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON).waitUntil(Condition.visible, Configuration.timeout);
+    $(ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON).waitUntil(Condition.visible,Configuration.timeout);
     $(ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON).click();
     info("The popup is shown");
-    $(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_NODE_TITLE).waitUntil(Condition.visible, Configuration.timeout);
+    $(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_NODE_TITLE).waitUntil(Condition.visible,Configuration.timeout);
     info("Input a new name for the node");
     $(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_NAME).setValue(name);
     info("Save all changes");
     // waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE,2000,0).click();
-    $(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE).waitUntil(Condition.visible, Configuration.timeout);
-    $(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE).click();
+    $(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE).waitUntil(Condition.visible,Configuration.timeout);
+   $(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE).click();
     info("Verify that the node is added successfully");
-    $(byXpath(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", name))).waitUntil(Condition.visible, Configuration.timeout);
+    $(byXpath(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", name))).waitUntil(Condition.visible,Configuration.timeout);
 
   }
 
@@ -348,9 +349,9 @@ public class SpaceSettingManagement {
     info("Verify that the children node is added successfully under parent node");
     evt.click(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", parentNode));
     evt.waitForAndGetElement(ELEMENT_SPACE_NAVIGAION_ADD_NODE_CHILDREN_UNDER_PARENT.replace("${childrenNode}", childNode)
-                    .replace("${parentNode}", parentNode),
-            3000,
-            0);
+                                                                                   .replace("${parentNode}", parentNode),
+                             3000,
+                             0);
 
   }
 
@@ -375,7 +376,7 @@ public class SpaceSettingManagement {
     $(ELEMENT_ADD_APPLICATION_POPUP_CLOSE_BTN).click();
     $(ELEMENT_ADD_APPLICATION_POPUP_TITLE).waitUntil(Condition.disappears, Configuration.timeout);
     info("Check Application added");
-    Assert.assertEquals($(byXpath("//div[@class='communityContainer']/strong[text()='${app}']".replace("${app}", application))).getText(), application);
+      Assert.assertEquals($(byXpath("//div[@class='communityContainer']/strong[text()='${app}']".replace("${app}",application))).getText(),application);
   }
 
   /**
@@ -394,7 +395,7 @@ public class SpaceSettingManagement {
     info("Save all changes");
     $(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE).click();
     info("Verify that the node is edited successfully");
-    $(byXpath(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", label))).waitUntil(Condition.visible, Configuration.timeout);
+    $(byXpath(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", label))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -646,24 +647,23 @@ public class SpaceSettingManagement {
 
   }
 
-  /**
-   * Open Invite users from group tab
-   */
-  public void goToInviteUserFromGroupTab() {
-    info("click on the Invite users from group tab");
-    evt.click(ELEMENT_SPACE_INVITE_USERS_FROM_GROUP_TAB);
-    evt.waitForAndGetElement(ELEMENT_SPACE_INVITE_USERS_FROM_GROUP_CHECKBOX, 2000, 2);
-    info("The tab is shown");
-  }
+    /**
+     * Open Invite users from group tab
+     */
+    public void goToInviteUserFromGroupTab() {
+        info("click on the Invite users from group tab");
+        evt.click(ELEMENT_SPACE_INVITE_USERS_FROM_GROUP_TAB);
+        evt.waitForAndGetElement(ELEMENT_SPACE_INVITE_USERS_FROM_GROUP_CHECKBOX, 2000, 2);
+        info("The tab is shown");
+    }
+    /**
+     * Decline Notification Connect Request
+     */
+    public void declineNotificationConnectRequest(String userName) {
+        ($(byXpath("//div[@class=\"uiDropdownWithIcon dropdown pull-right\"]")).waitUntil(Condition.visible,Configuration.timeout)).click();
+        $(byXpath("//div[@class=\"status\"]/a[text()='${user}']/following::div[@class='confirm']/a[text()=\"Refuse\"]".replace("${user}",userName))).waitUntil(Condition.visible,Configuration.timeout).click();
 
-  /**
-   * Decline Notification Connect Request
-   */
-  public void declineNotificationConnectRequest(String userName) {
-    ($(byXpath("//div[@class=\"uiDropdownWithIcon dropdown pull-right\"]")).waitUntil(Condition.visible, Configuration.timeout)).click();
-    $(byXpath("//div[@class=\"status\"]/a[text()='${user}']/following::div[@class='confirm']/a[text()=\"Refuse\"]".replace("${user}", userName))).waitUntil(Condition.visible, Configuration.timeout).click();
-
-  }
+    }
 
   /**
    * Select a group
