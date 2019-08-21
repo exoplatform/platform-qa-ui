@@ -659,14 +659,9 @@ public class AdministrationLocator {
   public static final String          ELEMENT_AVATAR_CHANGELANGUAGE_APPLY                          = "//*[text()='${text}']";
 
   /*****************************************************
-=======
-
->>>>>>> Gatein global settig
-
-  /*****************************************************
    * CONTENT SEARCH ADMINISTRATION
-   *****************************************************************************//*
-  // table*/
+   *****************************************************************************/
+  // table
   public static final By              ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_TITLE             =
                                                                                        By.xpath(".//*[@id='searchAdmin']//th[text()='Content Type']");
 
