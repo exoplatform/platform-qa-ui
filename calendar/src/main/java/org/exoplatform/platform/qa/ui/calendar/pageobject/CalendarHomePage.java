@@ -440,8 +440,6 @@ public class CalendarHomePage {
       case DAY:
         switch (optionDay) {
           case DETAILTIME:
-            // evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name",
-            // name));
             $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
             break;
           case ALLDAY:
@@ -477,8 +475,7 @@ public class CalendarHomePage {
           evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
           evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
         } else {
-          sleep(3000);
-          $(byText(name)).exists();
+          $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
         }
         break;
       case MONTH:
