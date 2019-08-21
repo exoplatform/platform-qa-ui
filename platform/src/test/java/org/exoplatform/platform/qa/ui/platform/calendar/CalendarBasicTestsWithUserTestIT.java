@@ -159,7 +159,6 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
   }
 
   @Test
-  @Tag("calis1")
   public void test13_AddnEventInPersonalCalendar() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String calendar = "calendar" + getRandomNumber();
@@ -200,7 +199,6 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
   }
 
   @Test
-  @Tag("calis2")
   public void test14_EditAnEventInPersonalCalendar() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String calendar = "calendar" + getRandomNumber();
@@ -253,7 +251,6 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
   }
 
   @Test
-  @Tag("calis3")
   public void test15_DeletenEventInPersonalCalendar() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String calendar = "calendar" + getRandomNumber();
@@ -287,7 +284,6 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
   }
 
   @Test
-  @Tag("calis5")
   public void test_AddnEventInPersonalCalendarWithSpecialCharacter() {
     String titleEvent = "l'event" + getRandomNumber();
     String calendar = "calendar" + getRandomNumber();
@@ -330,7 +326,6 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
   }
 
   @Test
-  @Tag("calis4")
   public void test19_EditEventWithValidData() {
     info("Test 19 Edit event with valid data");
 

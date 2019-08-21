@@ -963,10 +963,10 @@ public class CalendarLocator {
                                                                           By.xpath("//*[@id=\"allday\"]");
 
   public static final By              ELEMENT_QUICK_INPUT_EVENT_FROM_DATE                              =
-                                                                          By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[1]");
+                                                                          By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label']/following::input[@class='date'])[1]");
 
   public static final By              ELEMENT_QUICK_INPUT_EVENT_TO_DATE                                =
-                                                                        By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[2]");
+                                                                        By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label']/following::input[@class='date'])[2]");
 
   public static final String          ELEMENT_QUICK_INPUT_EVENT_FROM_DATE_VALUE                        =
                                                                                 "//*[@id='UIQuickAddEvent']//*[@name='from'][contains(@value,'$value')]";
