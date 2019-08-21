@@ -73,7 +73,7 @@ public class SOCSpaceListPendingTestIT extends Base {
 
     info("Create a space");
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpace(space, space, "validation", "No", "");
+    spaceManagement.addNewSpaceSimple(space, space);
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToMySpaces();
     spaceManagement.goToAllSpacesTab();

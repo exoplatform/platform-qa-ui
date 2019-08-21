@@ -114,7 +114,7 @@ public class SOCNotificationIntranetSpaceJoinRequestTestIT extends Base {
     String spaceName = "spaceName" + getRandomNumber();
     String spaceDes = "spaceDes" + getRandomNumber();
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpace(spaceName, spaceDes, "validation", "No", "");
+    spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
 
     info("User B login");
     manageLogInOut.signIn(username2, password);
@@ -184,7 +184,7 @@ public class SOCNotificationIntranetSpaceJoinRequestTestIT extends Base {
     String spaceName = "spaceName" + getRandomNumber();
     String spaceDes = "spaceDes" + getRandomNumber();
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpace(spaceName, spaceDes, "validation", "No", "");
+    spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
 
     info("User B login");
     manageLogInOut.signIn(username2, password);
@@ -260,7 +260,7 @@ public class SOCNotificationIntranetSpaceJoinRequestTestIT extends Base {
     String spaceName = "spaceName" + getRandomNumber();
     String spaceDes = "spaceDes" + getRandomNumber();
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpace(spaceName, spaceDes, "validation", "No", "");
+    spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
 
     info("User B login");
     manageLogInOut.signIn(username2, password);
@@ -327,7 +327,7 @@ public class SOCNotificationIntranetSpaceJoinRequestTestIT extends Base {
     String spaceName = "spaceName" + getRandomNumber();
     String spaceDes = "spaceDes" + getRandomNumber();
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpace(spaceName, spaceDes, "validation", "No", "");
+    spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
 
     info("User B login");
     manageLogInOut.signIn(username2, password);
@@ -396,7 +396,7 @@ public class SOCNotificationIntranetSpaceJoinRequestTestIT extends Base {
     String spaceName = "spaceName" + getRandomNumber();
     String spaceDes = "spaceDes" + getRandomNumber();
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpace(spaceName, spaceDes, "validation", "No", "");
+    spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
 
     info("User B login");
     manageLogInOut.signIn(username2, password);

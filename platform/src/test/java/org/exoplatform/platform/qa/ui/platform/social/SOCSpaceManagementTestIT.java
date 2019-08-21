@@ -472,7 +472,7 @@ public class SOCSpaceManagementTestIT extends Base {
 
     info("Create a space");
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpace(space, space, "validation", "No", "");
+    spaceManagement.addNewSpaceSimple(space, space);
 
     spaceManagement.goToActivityStreamTab();
     String urlSpace = url();

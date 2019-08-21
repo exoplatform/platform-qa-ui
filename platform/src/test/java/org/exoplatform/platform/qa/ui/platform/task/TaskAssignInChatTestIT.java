@@ -9,6 +9,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.codeborne.selenide.Configuration;
+import org.exoplatform.platform.qa.ui.selenium.platform.ConnectionsManagement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -34,6 +35,8 @@ public class TaskAssignInChatTestIT extends Base {
 
   ChatManagement   chatManagement;
 
+  ConnectionsManagement connectionsManagement;
+
   TasksManagement  tasksManagement;
 
   @BeforeEach
@@ -41,6 +44,7 @@ public class TaskAssignInChatTestIT extends Base {
     info("Start setUpBeforeMethod");
 
     homePagePlatform = new HomePagePlatform(this);
+    connectionsManagement = new ConnectionsManagement(this);
     manageLogInOut = new ManageLogInOut(this);
     manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
     chatManagement = new ChatManagement(this);
@@ -51,13 +55,19 @@ public class TaskAssignInChatTestIT extends Base {
   @Tag("TA-609")
   public void test01_checkAssignTaskInChatContainLinkToTaskApp() {
     String taskName = "task" + getRandomNumber();
-    manageLogInOut.signIn(PLFData.DATA_USER2, PLFData.password);
-    homePagePlatform.goToChat();
+    manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+    homePagePlatform.goToConnections();
+    connectionsManagement.connectToAUser(PLFData.DATA_USER2);
+    manageLogInOut.signIn(PLFData.DATA_USER2, "gtn");
+    homePagePlatform.goToConnections();
+    connectionsManagement.acceptAConnection(PLFData.DATA_USER1);
     manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
     homePagePlatform.goToChat();
     switchTo().window(1);
     $(byXpath("//input[@placeholder='Filter discussions']")).setValue(PLFData.DATA_USER2);
+    sleep(2000);
     $(byText(PLFData.DATA_NAME_USER2)).click();
+    sleep(2000);
     chatManagement.assignTaskInChat(taskName, PLFData.DATA_USER2);
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byLinkText(taskName)).click();
     switchTo().window(2);

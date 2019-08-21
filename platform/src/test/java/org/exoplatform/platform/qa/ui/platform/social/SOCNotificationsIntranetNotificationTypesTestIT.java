@@ -1423,7 +1423,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
 
     info("Add a new space");
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpace(space, space,"validation", "No", "");
+    spaceManagement.addNewSpaceSimple(space, space);
 
     info("user requests to join space");
     manageLogInOut.signIn(username2, password);
@@ -1497,7 +1497,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
 
     info("Add a new space");
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpace(space, space, "validation", "No", "");
+    spaceManagement.addNewSpaceSimple(space, space);
 
     info("user requests to join space");
     manageLogInOut.signIn(username2, password);

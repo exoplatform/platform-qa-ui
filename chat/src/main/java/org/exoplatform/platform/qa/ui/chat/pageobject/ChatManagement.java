@@ -71,9 +71,13 @@ public class ChatManagement {
       sleep(2000);
       ELEMENT_CHAT_ASSIGNEE_TASK.pressEnter();
     }
+    sleep(2000);
     ELEMENT_CHAT_DUE_DATE_TASK.click();
+    sleep(2000);
     ELEMENT_CHAT_CURRENT_DATE_TASK.click();
+    sleep(2000);
     ELEMENT_CHAT_POST_TASK_BUTTON.click();
+    sleep(2000);
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byLinkText(taskName)).shouldBe(Condition.visible);
   }
 
