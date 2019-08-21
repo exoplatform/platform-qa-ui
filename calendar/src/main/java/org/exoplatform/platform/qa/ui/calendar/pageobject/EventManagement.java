@@ -1222,8 +1222,23 @@ public class EventManagement {
         ONLY_EVENT, FOLLOW_EVENT, ALL_EVENT;
       }
 
-      public void checkReminderLabel () {
+  public void checkEventPopUp(){
+    switchTo().activeElement();
+    $(byText("Add Event")).should(Condition.exist);
+    assertEquals("Event title",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
+    assertEquals("All",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).getText());
+    assertEquals("All day",$(byXpath("//input[@id=\"allday\"]/following::span[1]")).getText());
+    assertEquals("Location",$(byXpath("//div[@class=\"control-label\" and contains(text(),'Location')]")).getText());
+    assertEquals("Enter a location for this event",$(byXpath("//div[@class=\"control-label\" and contains(text(),'Location')]/following::input[1]")).getAttribute("placeholder"));
+    assertEquals("Participants",$(byXpath("//div[@class=\"control-label\" and contains(text(),'Participants')]")).getText());
+    assertEquals("Clear",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
+    assertEquals("Save",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
+    assertEquals("Cancel",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
 
-      }
+  }
 
-    }
+  public void checkReminderLabel(){
+
+
+  }
+}
