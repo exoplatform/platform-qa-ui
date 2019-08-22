@@ -995,7 +995,7 @@ public class CalendarHomePage {
     info("Delete event/tak: " + name);
     Button button = new Button(this.testBase);
     goToRightMenuTaskEventFromAnyView(name, view, optionDay, date);
-    $(ELEMENT_CONTEXT_MENU_DELETE).click();
+    $(ELEMENT_CONTEXT_MENU_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
     if (isVerify) {
       if (isEvent) {
         $(byText(ELEMENT_CONFIRM_DELETE_EVENT_MSG)).waitUntil(Condition.appears, Configuration.timeout);

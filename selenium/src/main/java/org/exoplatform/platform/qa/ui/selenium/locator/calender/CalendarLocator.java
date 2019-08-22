@@ -975,22 +975,22 @@ public class CalendarLocator {
                                                                               "//*[@id='UIQuickAddEvent']//*[@name='to'][contains(@value,'$value')]";
 
   public static final By              ELEMENT_QUICK_INPUT_EVENT_FROM_TIME                              =
-                                                                          By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='cbb_input'])[1]");
+                                                                          By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label']/following::input[@class='cbb_input'])[1]");
 
   public static final String          ELEMENT_QUICK_INPUT_EVENT_FROM_TIME_VALUE                        =
                                                                                 "//*[@id='UIQuickAddEvent']//input[@id='fromTime'][contains(@value,'$value')]";
 
   public static final By              ELEMENT_QUICK_INPUT_EVENT_TO_TIME                                =
-                                                                        By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='cbb_input'])[2]");
+                                                                        By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label']/following::input[@class='cbb_input'])[2]");
 
   public static final String          ELEMENT_QUICK_INPUT_EVENT_TO_TIME_VALUE                          =
                                                                               "//*[@id='UIQuickAddEvent']//input[@id='toTime'][contains(@value,'$value')]";
 
   public static final By              ELEMENT_QUICK_INPUT_EVENT_FROM_TIME_INPUT                        =
-                                                                                By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='cbb_input'])[1]");
+                                                                                By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label']/following::input[@class='cbb_input'])[1]");
 
   public static final By              ELEMENT_QUICK_INPUT_EVENT_TO_TIME_INPUT                          =
-                                                                              By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='cbb_input'])[2]");
+                                                                              By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label']/following::input[@class='cbb_input'])[2]");
 
   public static final String          ELEMENT_QUICK_EVENT_SELECT_TO_TIME                               =
                                                                          "//*[@id='UIQuickAddEvent']//*[@id='toTime']/..//*[@class='UIComboboxLabel' and text()='${time}']";
@@ -1052,10 +1052,10 @@ public class CalendarLocator {
                                                                     By.xpath("//*[@id=\"allday\"]");
 
   public static final By              ELEMENT_ADD_EDIT_EVENT_FROM_DATE                                 =
-                                                                       By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[1]");
+                                                                       By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label']/following::input[@class='date'])[1]");
 
   public static final By              ELEMENT_ADD_EDIT_EVENT_TO_DATE                                   =
-                                                                     By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[2]");
+                                                                     By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label']/following::input[@class='date'])[2]");
 
   public static final String          ELEMENT_ADD_EDIT_EVENT_FROM_DATE_VALUE                           =
                                                                              "//*[@id='UIEventForm']//*[@name='from'][contains(@value,'$value')]";
@@ -1064,10 +1064,10 @@ public class CalendarLocator {
                                                                            "//*[@id='UIEventForm']//*[@name='to'][contains(@value,'$value')]";
 
   public static final By              ELEMENT_ADD_EDIT_INPUT_EVENT_FROM_TIME                           =
-                                                                             By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='cbb_input'])[1]");
+                                                                             By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label']/following::input[@class='cbb_input'])[1]");
 
   public static final By              ELEMENT_ADD_EDIT_INPUT_EVENT_TO_TIME                             =
-                                                                           By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='cbb_input'])[2]");
+                                                                           By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label']/following::input[@class='cbb_input'])[2]");
 
   public static final String          ELEMENT_ADD_EDIT_INPUT_EVENT_FROM_TIME_VALUE                     =
                                                                                    "//*[@id='UIEventForm']//input[@id='fromTime'][contains(@value,'$time')]";
