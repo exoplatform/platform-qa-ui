@@ -20,23 +20,41 @@
  */
 package org.exoplatform.platform.qa.ui.commons.pageobject;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
+import org.exoplatform.platform.qa.ui.core.PLFData;
+import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byId;
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.error;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_PASSWORD;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME;
 
 /**
  * Created by mgreau on 23/01/2017.
  */
 public class Platform {
 
-  public static final String URI = "/portal";
+  public final String URI = "/portal";
 
-  public void open() {
+  public final SelenideElement licenseAgreement = $("#agreement");
 
-    Selenide.open(URI);
-    return;
+  public final SelenideElement registration = $(".plf-registration");
 
+  public final SelenideElement accountSetup = $("#AccountSetup");
+
+  public final SelenideElement signinContainer = $("div.loginContainer");
+
+  public final SelenideElement signinFailContainer = $("div.signinFail");
+
+  public Platform open() {
+    return Selenide.open(URI, Platform.class);
   }
 
   /**
@@ -44,77 +62,156 @@ public class Platform {
    * be accepted. If this screen doesn't appear, there is no exception.
    */
   public Platform ensureLicenseIsAccepted() {
-
     boolean alreadySkipped = false;
     try {
-      alreadySkipped = !License.element.exists();
+      alreadySkipped = !licenseAgreement.exists();
     } catch (Exception ex) {
       error("License skip exception " + ex.getStackTrace());
     }
     if (alreadySkipped == false) {
       info("Skip the License ");
-      new License().accept();
+      acceptLicense();
     }
+    return this;
+  }
 
+  /**
+   * Accept the eXo Platform license
+   * @return Platform page object
+   */
+  public Platform acceptLicense() {
+    licenseAgreement.parent().click();
+    $("#continueButton").click();
+    return this;
+
+  }
+
+  /**
+   * Ensure that the Register Software UI is skipped.
+   * @return Platform page object
+   */
+  public Platform ensureRegisterSoftwareIsSkipped() {
+
+    if (isNeededSoftwareRegistration()) {
+      info("Skip Registration screen");
+      return skipSoftwareRegistration();
+    } else {
+      return this;
+    }
+  }
+
+  /**
+   * Skip the Software Registration screen.
+   *
+   * @return Platform page object
+   */
+  private Platform skipSoftwareRegistration() {
+
+    // Click on the label because the checkbox is not visible
+    // '<input class="checkbox" id="agreement" name="checktc"
+    // onclick="toggleState();" type="checkbox" value="false"
+    // displayed:false></input>'
+
+    $(By.name("btnSkip")).click();
+    $(By.name("setupbutton")).click();
 
     return this;
   }
 
   /**
-   * Ensure that the Register Software UI is skipped.
+   * Check if Software Registration process is needed
+   * @return
    */
-  public Platform ensureRegisterSoftwareIsSkipped() {
-
-    boolean alreadySkipped = false;
-    try {
-      alreadySkipped = !RegisterSoftware.element.exists();
-    } catch (Exception ex) {
-      error("RG skip exception " + ex.getStackTrace());
-    }
-    if (alreadySkipped == false) {
-      info("Skip the UI ");
-      new RegisterSoftware().skip();
-    }
-
-    return this;
-
+  public boolean isNeededSoftwareRegistration () {
+    return registration.exists();
   }
 
   /**
    * Ensure that the Account Setup UI is skipped.
+   * @return Platform page object
    */
   public Platform ensureAccountSetupIsSkipped() {
-
-    boolean alreadySkipped = false;
-    try {
-      alreadySkipped = !AccountSetup.element.exists();
-    } catch (Exception ex) {
-      error("Account setup skip error.",ex);
+    if (isNeededAccountSetup()) {
+      info("Skip Account setup screen");
+      return skipAccountSetup();
+    } else {
+      return this;
     }
-    if (alreadySkipped == false) {
-      info("Skip the Account ");
-      new AccountSetup().skip();
-    }
+  }
 
+  /**
+   * Check if Account Setup process is needed
+   * @return
+   */
+  public boolean isNeededAccountSetup() {
+    return accountSetup.exists();
+  }
+
+  /**
+   * Skip the Account Setup UI.
+   *
+   * @return Platform page object
+   */
+  private Platform skipAccountSetup() {
+    $(By.name("setupbutton")).click();
     return this;
   }
 
+  /**
+   * Ensure a user is currently logged-in
+   * @return Platform page object
+   */
   public Platform ensureUserIsLoggedIn(){
+    if (isUserLogged() == false) {
+      return signIn();
+    }
+    return this;
+  }
 
-    boolean alreadyLogged = false;
-    try {
-      alreadyLogged = new Login().isUserLogged();
-    } catch (Exception ex) {
-      error("Error while checking if user is logged", ex);
-    }
-    if (alreadyLogged == false) {
-      info("Log in ");
-      new Login().signIn();
-    }
+  /**
+   * Check if a user is logged-in
+   * @return
+   */
+  public boolean isUserLogged(){
+    return $("#UIUserPlatformToolBarPortlet").exists();
+  }
+
+  /**
+   * SignIn with default eXo Root Credentials
+   * @return Platform page object
+   */
+  public Platform signIn() {
+    return this.signIn(PLFData.username, PLFData.password);
+  }
+
+  /**
+   * SignIn with a specific User and Password
+   *
+   * @param user the username to use to sign-in PLF
+   * @param password the password associated with the user
+   * @return Platform page object
+   */
+  public Platform signIn(final String user, final String password) {
+    info("Sign in with '" + user + "' username");
+    $(ELEMENT_INPUT_USERNAME).setValue(user);
+    $(ELEMENT_INPUT_PASSWORD).setValue(password);
+    $(".button").click();
+    return this;
+  }
+
+  /**
+   * Sign-out from eXo Platform
+   * @return Platform page object
+   */
+  public Platform signOut() {
+    // FIXME: why do we need such sleep ?
+    sleep(Configuration.timeout);
+    $("#UIUserPlatformToolBarPortlet").waitUntil(Condition.visible,Configuration.timeout).click();
+    // FIXME: why do we need such sleep ?
+    sleep(Configuration.timeout);
+    $(".uiIconPLFLogout").waitUntil(Condition.visible,Configuration.timeout).click();
 
     return this;
-
-
   }
 
 }

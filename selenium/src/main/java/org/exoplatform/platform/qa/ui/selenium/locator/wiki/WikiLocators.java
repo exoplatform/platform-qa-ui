@@ -11,6 +11,8 @@ public class WikiLocators {
 
     // *====================================================HOME
     // PAGE=================================================================*\\
+    public static final SelenideElement WIKI_PORTLET_CONTAINER = $("#myWikiPortlet.UIContainer ");
+
     public static final SelenideElement ELEMENT_WIKI_PAGE_LINK = $(byId("UITreeExplorer"));
 
     public static final By ELEMENT_WIKI_HOME_PAGE_LINK =

@@ -1,17 +1,18 @@
 package org.exoplatform.platform.qa.ui.commons.plf;
 
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_PLF_HOMEPAGE_ACTIVITY_PORTLET;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_PLF_HOMEPAGE_DISPLAY;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import com.codeborne.selenide.Condition;
+import static com.codeborne.selenide.Condition.*;
 import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.context.Smoke;
+import org.junit.jupiter.api.TestInfo;
 
 public class PLFIntegrationTestIT extends Base {
 
@@ -34,10 +35,13 @@ public class PLFIntegrationTestIT extends Base {
      * displayed at the right
      */
     info("Verify that Home page is shown");
-    ELEMENT_PLF_HOMEPAGE_DISPLAY.waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_PLF_HOMEPAGE_DISPLAY.shouldBe(visible);
+
     info("Verify that Activity stream is shown on the home page");
-    ELEMENT_PLF_HOMEPAGE_ACTIVITY_PORTLET.waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_PLF_HOMEPAGE_ACTIVITY_PORTLET.shouldBe(visible);
+
     info("Verify that Gadgets is shown on right of the page");
+    ELEMENT_PLF_HOMEPAGE_GADGET_PORTLET.shouldBe(visible);
   }
 
 }

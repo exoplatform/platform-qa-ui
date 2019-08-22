@@ -1,5 +1,7 @@
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
+import static com.codeborne.selenide.Condition.*;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
@@ -14,6 +16,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocat
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.ELEMENT_FAQ_QUESTION_LIST;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_CALENDAR_WORKING_PANEL;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ADDNEWSPACE_BUTTON;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.WIKI_PORTLET_CONTAINER;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
@@ -33,20 +36,25 @@ public class HomePagePlatform {
    */
   public void goToWiki() {
     info("--Go to Wiki--");
-    refreshUntil($(ELEMENT_WIKI_LINK_PLF), Condition.visible, 500);
-    $(ELEMENT_WIKI_LINK_PLF).waitUntil(Condition.appears, Configuration.timeout);
-    $(ELEMENT_WIKI_LINK_PLF).click();
-    refreshUntil($(ELEMENT_WIKI_LINK_PLF), Condition.visible, 500);
-    sleep(Configuration.timeout);
+//    refreshUntil($(ELEMENT_WIKI_LINK_PLF), visible, 500);
+//    $(ELEMENT_WIKI_LINK_PLF).waitUntil(appears, Configuration.timeout);
+//    $(ELEMENT_WIKI_LINK_PLF).click();
+//    refreshUntil($(ELEMENT_WIKI_LINK_PLF), visible, 500);
+//    sleep(Configuration.timeout);
+    ELEMENT_WIKI_LINK_PLF.click();
+    WIKI_PORTLET_CONTAINER.should(exist);
   }
 
   public void goToChat() {
     info("--Go to chat--");
-    refreshUntil($(byClassName("status-dropdown")), Condition.visible, 1000);
-    sleep(Configuration.timeout);
-    $(byClassName("status-dropdown")).waitUntil(Condition.visible, Configuration.timeout).click();
-    sleep(Configuration.timeout);
-    $(byClassName("notif-chat-open-link")).waitUntil(Condition.appears, Configuration.timeout).click();
+//    refreshUntil($(byClassName("status-dropdown")), visible, 1000);
+//    sleep(Configuration.timeout);
+//    $(byClassName("status-dropdown")).waitUntil(visible, Configuration.timeout).click();
+//    sleep(Configuration.timeout);
+//    $(byClassName("notif-chat-open-link")).waitUntil(Condition.appears, Configuration.timeout).click();
+
+    $("#chatApplicationNotification .status-dropdown").click();
+    $("#chatApplicationNotification .notif-chat-open-link").should(appear).click();
   }
 
   public void backToHomeFromChat() {
@@ -61,8 +69,7 @@ public class HomePagePlatform {
    */
   public void goToDocuments() {
     info("--Go to Documents--");
-    $(ELEMENT_DOCUMENTS_LINK_PLF).click();
-
+    ELEMENT_DOCUMENTS_LINK_PLF.click();
   }
 
   /**
@@ -70,7 +77,7 @@ public class HomePagePlatform {
    */
   public void goToPeople() {
     info("--Go to People--");
-    $(ELEMENT_PEOPLE_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_PEOPLE_LINK_PLF.click();
 
   }
 
@@ -79,10 +86,11 @@ public class HomePagePlatform {
    */
   public void goToHomePage() {
     info("Click on Home link of intranet page");
-    sleep(Configuration.timeout);
-    executeJavaScript("window.scrollBy(0,-5500)", "");
-    sleep(Configuration.timeout);
-    $(ELEMENT_HOME_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout).click();
+//    sleep(Configuration.timeout);
+//    executeJavaScript("window.scrollBy(0,-5500)", "");
+//    sleep(Configuration.timeout);
+//    $(ELEMENT_HOME_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_HOME_LINK_PLF.shouldBe(visible).click();
   }
 
   /**
@@ -90,29 +98,30 @@ public class HomePagePlatform {
    */
   public void goToCalendarPage() {
     info("-- Go to calendar home page --");
-    ELEMENT_CALENDAR_LINK_PLF.waitUntil(Condition.appears, Configuration.timeout);
     info("click on Calendar link");
-    ELEMENT_CALENDAR_LINK_PLF.click();
-    info("Verify that Calendar page is shown");
-    refreshUntil($(ELEMENT_CALENDAR_WORKING_PANEL), Condition.visible, 1000);
-    $(ELEMENT_CALENDAR_WORKING_PANEL).waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_CALENDAR_LINK_PLF.should(exist).click();
+//    info("Verify that Calendar page is shown");
+//    refreshUntil($(ELEMENT_CALENDAR_WORKING_PANEL), Condition.visible, 1000);
+//    $(ELEMENT_CALENDAR_WORKING_PANEL).waitUntil(Condition.appears, Configuration.timeout);
+
+    $(ELEMENT_CALENDAR_WORKING_PANEL).should(exist);
+
     info("The calendar page is shown successfully");
   }
 
   public void goToTaskPage() {
-    ELEMENT_TASKS_LINK_PLF.waitUntil(Condition.appears, Configuration.timeout).click();
+//    ELEMENT_TASKS_LINK_PLF.waitUntil(Condition.appears, Configuration.timeout).click();
+    ELEMENT_TASKS_LINK_PLF.should(appear).click();
   }
 
   /**
    * Go to my spaces
    */
-  public void goToMySpaces() {
+  public HomePagePlatform goToMySpaces() {
     info("-- Go to my spaces --");
-    ELEMENT_MY_SPACE_LINK_PLF.waitUntil(Condition.visible, Configuration.timeout);
-    sleep(2000);
     ELEMENT_MY_SPACE_LINK_PLF.click();
-    sleep(2000);
-    refreshUntil(ELEMENT_ADDNEWSPACE_BUTTON, Condition.visible, 1000);
+    ELEMENT_ADDNEWSPACE_BUTTON.shouldBe(visible);
+    return this;
   }
 
   /**
@@ -120,8 +129,9 @@ public class HomePagePlatform {
    */
   public void goToAllSpace() {
     info("Click on Join a space link");
-    executeJavaScript("arguments[0].scrollBy(0,5000);", $(byId("LeftNavigation")));
-    $(ELEMENT_ALL_SPACE_JOIN_LINK).waitUntil(Condition.appears, Configuration.timeout).click();
+//    executeJavaScript("arguments[0].scrollBy(0,5000);", $(byId("LeftNavigation")));
+//    $(ELEMENT_ALL_SPACE_JOIN_LINK).waitUntil(Condition.appears, Configuration.timeout).click();
+    $(ELEMENT_ALL_SPACE_JOIN_LINK).should(appears).click();
 
   }
 
@@ -131,11 +141,12 @@ public class HomePagePlatform {
   public void goToAnswer() {
     info("-- Go to answer page --");
 
-    $(ELEMENT_ANSWER_LINK_PLF).waitUntil(Condition.appears, Configuration.timeout);
-    $(ELEMENT_ANSWER_LINK_PLF).click();
-    if (evt.waitForAndGetElement(ELEMENT_ANSWER_PORTLET, 5000, 0) == null)
-      testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-    evt.waitForAndGetElement(ELEMENT_ANSWER_PORTLET);
+//    $(ELEMENT_ANSWER_LINK_PLF).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_ANSWER_LINK_PLF).should(appear).click();
+//    if (evt.waitForAndGetElement(ELEMENT_ANSWER_PORTLET, 5000, 0) == null)
+//      testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+//    evt.waitForAndGetElement(ELEMENT_ANSWER_PORTLET);
+    $(ELEMENT_ANSWER_PORTLET).should(exist);
 
   }
 
@@ -144,9 +155,10 @@ public class HomePagePlatform {
    */
   public void goToForum() {
     info("-- Go to forum page --");
-    sleep(Configuration.timeout);
-    $(ELEMENT_FORUM_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout).click();
-    refresh();
+//    sleep(Configuration.timeout);
+//    $(ELEMENT_FORUM_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_FORUM_LINK_PLF).shouldBe(visible).click();
+//    refresh();
   }
 
   /**
@@ -166,9 +178,12 @@ public class HomePagePlatform {
   public void goToConnections() {
     info("--Go to Connections page---");
     info("Click on Connection link");
-    $(ELEMENT_CONNECTIONS_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout).parent().click();
-    info("Verify that the connections portlet is shown");
-    refreshUntil($(ELEMENT_CONNECTION_EVERYONE_TITLE), Condition.visible, 500);
+//    $(ELEMENT_CONNECTIONS_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout).parent().click();
+//    info("Verify that the connections portlet is shown");
+//    refreshUntil($(ELEMENT_CONNECTION_EVERYONE_TITLE), Condition.visible, 500);
+
+    $(ELEMENT_CONNECTIONS_LINK_PLF).shouldBe(visible).parent().click();
+    $(ELEMENT_CONNECTION_EVERYONE_TITLE).shouldBe(visible);
     info("The connections portlet is shown successfully");
   }
 
@@ -246,7 +261,7 @@ public class HomePagePlatform {
     sleep(2000);
     $(byXpath("//div[@class='selectize-input items not-full']/input[@placeholder='Name']")).setValue(user);
     sleep(2000);
-    $(byXpath("//button[@id='SearchButton']")).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(byXpath("//button[@id='SearchButton']")).waitUntil(visible, Configuration.timeout).click();
     sleep(2000);
   }
 

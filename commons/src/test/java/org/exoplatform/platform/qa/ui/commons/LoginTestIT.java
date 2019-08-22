@@ -22,12 +22,14 @@ package org.exoplatform.platform.qa.ui.commons;
 
 import org.exoplatform.platform.qa.ui.commons.pageobject.Login;
 import org.exoplatform.platform.qa.ui.commons.pageobject.Platform;
+import org.exoplatform.platform.qa.ui.core.context.Smoke;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @Tag("login")
@@ -35,17 +37,17 @@ public final class LoginTestIT extends Base {
 
   public LoginTestIT() {
     super();
-
   }
 
   @Test
+  @Smoke
   public void signIn() {
     // Init instance for signInTest
     Platform plf = new Platform();
     plf.open();
     plf.ensureLicenseIsAccepted().ensureRegisterSoftwareIsSkipped().ensureAccountSetupIsSkipped();
 
-    assertTrue("User should be logged", new Login().signIn().isUserLogged());
+    assertTrue("User should be logged", plf.signIn().isUserLogged());
   }
 
   /**
@@ -55,21 +57,21 @@ public final class LoginTestIT extends Base {
    * This test should display an error message in the Login Container.
    * </p>
    */
+  @Test
   public void signInWithUnknownUser() {
     // Init instance for signInTest
     Platform plf = new Platform();
     plf.open();
     plf.ensureLicenseIsAccepted().ensureRegisterSoftwareIsSkipped().ensureAccountSetupIsSkipped();
 
-    final Login lg = new Login();
-    if (lg.isUserLogged()){
-      lg.signOut();
+    if (plf.isUserLogged()){
+      plf.signOut();
     }
 
-    lg.signIn("failTo", "logIn");
+    plf.signIn("failTo", "logIn");
 
-    assertTrue("User should not be logged", !lg.isUserLogged());
-    assertTrue("SignIn with unknown user should display a message.", lg.signinFailContainer.exists());
+    assertFalse("User should not be logged", plf.isUserLogged());
+    assertTrue("SignIn with unknown user should display a message.", plf.signinFailContainer.exists());
   }
 
 }

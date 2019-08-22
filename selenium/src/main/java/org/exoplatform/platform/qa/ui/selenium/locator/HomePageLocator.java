@@ -22,7 +22,9 @@ package org.exoplatform.platform.qa.ui.selenium.locator;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
+import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.By;
 
 import com.codeborne.selenide.SelenideElement;
@@ -30,13 +32,13 @@ import com.codeborne.selenide.SelenideElement;
 public final class HomePageLocator {
 
   public static final SelenideElement ELEMENT_PLF_HOMEPAGE_DISPLAY                                         =
-                                                                   $(byClassName("navItemSelected"));
+                                                                   $("li.navItemSelected");
 
   public static final SelenideElement ELEMENT_PLF_HOMEPAGE_ACTIVITY_PORTLET                                =
-                                                                            $(byId("UIUserActivityStreamPortlet"));
+                                                                            $("#UIUserActivityStreamPortlet");
 
-  public static final By              ELEMENT_PLF_HOMEPAGE_GADGET_PORTLET                                  =
-                                                                          By.xpath(".//*[@id='OfficeRightMiddle']");
+  public static final SelenideElement ELEMENT_PLF_HOMEPAGE_GADGET_PORTLET                                  =
+                                                                          $("#OfficeRightMiddle");
 
   public static final By              ELEMENT_ADDNEWSPACE_BUTTON                                           =
                                                                  By.xpath("//button[contains(.,'Add New Space')]");
@@ -54,17 +56,17 @@ public final class HomePageLocator {
   public static final By              ELEMENT_ANSWER_LINK_PLF                                              =
                                                               By.xpath("//*[@data-original-title='Answers']");
 
-  public static final By              ELEMENT_WIKI_LINK_PLF                                                =
-                                                            By.xpath("//*[@data-original-title='Wiki']");
+  public static final SelenideElement ELEMENT_WIKI_LINK_PLF                                                =
+                                                            $("#MenuItemwiki");
 
-  public static final By              ELEMENT_DOCUMENTS_LINK_PLF                                           =
-                                                                 byClassName("uiIconPLFDocuments");
+  public static final SelenideElement ELEMENT_DOCUMENTS_LINK_PLF                                           =
+                                                                 $("#MenuItemdocuments");
 
-  public static final By     ELEMENT_PEOPLE_LINK_PLF                                           =
-                                                    By.xpath("//span[@data-original-title='People']");
+  public static final SelenideElement ELEMENT_PEOPLE_LINK_PLF                                           =
+                                                    $("#MenuItemconnexions");
 
-  public static final By              ELEMENT_HOME_LINK_PLF                                                =
-                                                            By.xpath("//*[@data-original-title='Home']");
+  public static final SelenideElement ELEMENT_HOME_LINK_PLF                                                =
+                                                            $("#MenuItemhome");
 
   public static final SelenideElement ELEMENT_CALENDAR_LINK_PLF                                            =
                                                                 $(byClassName("uiIconPLFCalendar"));
@@ -82,7 +84,12 @@ public final class HomePageLocator {
                                                                    By.xpath("//*[@class='uiCompanyNavigations']//*[contains(@class,'uiIconPLFMyConnection')]");
 
   public static final SelenideElement ELEMENT_SEARCH_SPACE                                                 =
-                                                           $(byClassName("searchText "));
+                                                           $("#UISpaceNavigationPortlet div.searchInput input.searchText");
+
+  /**
+   * Get the list of spaces links in the left menu navigation
+   */
+  public static final ElementsCollection ELEMENT_SEARCH_SPACE_RESULTS = $$("#UISpaceNavigationPortlet ul.spaceNavigation li");
 
   public static final String          ELEMENT_RESULT_SEARCH_SPACE                                          =
                                                                   "//*[@id='UISpaceNavigationPortlet']//*[@class='spaceNavigation']//*[contains(text(),'{$space}')]";
@@ -120,7 +127,7 @@ public final class HomePageLocator {
                                                                       "//*[text()='${title}']/../../../..//*[@class='contentComment' and contains(text(), 'Page has been moved to: ${path}')]";
 
   public static final SelenideElement ELEMENT_MY_SPACE_LINK_PLF                                            =
-                                                                $(byClassName("uiSpaceNavigationPortlet")).find(byLinkText("MY SPACES"));
+                                                                $("#MySpacesItem");
 
   public static final SelenideElement ELEMENT_SECOND_SPACE_MY_SPACE                                        =
                                                                     $(byClassName("spaceNavigation")).findAll(byClassName("spaceItem"))

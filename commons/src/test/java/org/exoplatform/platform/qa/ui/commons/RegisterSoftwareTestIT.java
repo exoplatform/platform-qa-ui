@@ -21,11 +21,10 @@
 package org.exoplatform.platform.qa.ui.commons;
 
 import org.exoplatform.platform.qa.ui.commons.pageobject.Platform;
-import org.exoplatform.platform.qa.ui.commons.pageobject.RegisterSoftware;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public final class RegisterSoftwareTestIT extends Base {
@@ -42,13 +41,10 @@ public final class RegisterSoftwareTestIT extends Base {
   @Test
   @Tag("register")
   public void skipRegisterSoftware() {
-    new Platform().open();
-    // ensure that LicenseAgreement is accepted
-    final RegisterSoftware rg = new RegisterSoftware();
-    assertTrue("Actions for Register Software not found, Be sure to have a fresh PLF installation.", rg.element.exists());
-
-    rg.skip();
-    assertTrue("Actions for Register Software should not be found.", !rg.element.exists());
+    Platform platform = new Platform().open();
+    assertTrue("Actions for Register Software not found, Be sure to have a fresh PLF installation.", platform.isNeededSoftwareRegistration());
+    platform.ensureRegisterSoftwareIsSkipped();
+    assertFalse("Actions for Register Software should not be found.", platform.isNeededSoftwareRegistration());
   }
 
 }

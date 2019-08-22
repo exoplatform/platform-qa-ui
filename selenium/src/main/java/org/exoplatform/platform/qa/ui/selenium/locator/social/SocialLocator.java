@@ -20,8 +20,10 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.locator.social;
 
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.By;
@@ -1463,9 +1465,20 @@ public static final By
    * SPACE HOME PAGE
    ***********************************************************************/
   public static final By              ELEMENT_SPACE_PANEL                                               =
-                                                          By.xpath(".//*[@id='UIMySpacesPortlet']");
+                                                          By.cssSelector("div#SpacePage");
 
   // select menu (actvity stream, forum, agenda etc ..)
+
+  /**
+   * Get the full space menu zone (avatar, title, menu, ...)
+   */
+  public static final By              ELEMENT_SPACE_MENU = By.id("UISpaceMenu");
+
+  /**
+   * Get the Space Menu entry for Space Home
+   */
+  public static final SelenideElement ELEMENT_SPACE_MENU_HOME = $$("#UISpaceMenu #spaceMenuTab li.item").find(text("Home"));
+
   public static final By              ELEMENT_SPACE_MENU_ACTIVITY_STREAM                                =
                                                                          By.xpath(".//*[@class='tabName' and contains(text(),' Activity Stream')]");
 
@@ -1503,6 +1516,8 @@ public static final By
   public static final By          ELEMENT_HOME_SPACE_TAB                                             =
                                                                  By.xpath(".//*[@id='spaceMenuTab']//*[contains(text(),'Home')]");
 
+  public static final SelenideElement ELEMENT_ACTIVITY_STREAM_PORTLET = $("#UISpaceActivityStreamPortlet");
+
   public static final By              ELEMENT_ACTIVITY_STREAM_TAB                                       =
                                                                   By.xpath(".//*[contains(@class,'uiIconAppSpaceHomePage')]");
 
@@ -1532,7 +1547,7 @@ public static final By
    ***********************************************************************/
   // Add form space
   public static final SelenideElement ELEMENT_ADDNEWSPACE_BUTTON                                        =
-                                                                 $(byText("Add New Space"));
+                                                                 $$("button").findBy(text("Add New Space"));
 
   public static final By              ELEMENT_ADDNEWSPACE_FORM                                          =
                                                                By.xpath("//span[@class='PopupTitle popupTitle' and text()='Add New Space']");
@@ -2370,13 +2385,13 @@ public static final By
                                                                          ".//*[@id='UISpaceNavigationPortlet']//*[contains(text(),'${name}')]";
 
   public static final SelenideElement ELEMENT_MY_SPACE_SEARCH_TEXT                                      =
-                                                                   $(byXpath("//*[@id=\"UISpaceSearch\"]/div[2]/div/div/div[1]/input"));
+                                                                   $("div.uiSearchInput div.selectize-input input");
 
   public static final SelenideElement ELEMENT_SEARCHED_SPACE                                            =
                                                                     $(byXpath("//div/h4/a"));
 
   public static final SelenideElement ELEMENT_SPACES_LIST                                               =
-                                                          $(byClassName("tab-content"));
+                                                          $(".uiSocApplication .tab-content");
 
   public static final SelenideElement ELEMENT_SPACE_FORUMS_TAB                                          =
                                                                $(byId("spaceMenuTab")).find(byText("Forums"));
@@ -2466,7 +2481,7 @@ public static final By
   public static final SelenideElement ELEMENT_ALL_NOTIFICATION=  $(byXpath("//*[@id=\"NotificationPopup\"]/li[5]/div/a"));
   public static final SelenideElement ELEMENT_NOTIFICATION_ACTIONS=  $(byClassName("notificationsActions"));
   public static final SelenideElement ELEMENT_SPACE_PORTLET =  $(By.id("UISpaceActivityStreamPortlet"));
-  public static final SelenideElement ELEMENT_SPACE_MENU =  $(byXpath("//a[@class='chat-button btn']"));
+  public static final SelenideElement ELEMENT_SPACE_MINICHAT_BUTTON =  $(byXpath("//a[@class='chat-button btn']"));
   public static final By ELEMENT_EDITSPACE_MANAGE_ICON=  byClassName("uiIconEdit");
   public static final By ELEMENT_DELETESPACE_MANAGE_ICON=  byClassName("uiIconDeleteUser");
   public static final SelenideElement ELEMENT_SPACE_SEARCH_ICON= $(byClassName("showInputSearch"));

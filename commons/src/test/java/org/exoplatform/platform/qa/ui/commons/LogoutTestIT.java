@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.commons;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.Tag;
@@ -26,6 +27,6 @@ public class LogoutTestIT extends Base {
     plf.open();
     plf.ensureLicenseIsAccepted().ensureRegisterSoftwareIsSkipped().ensureAccountSetupIsSkipped().ensureUserIsLoggedIn();
 
-    assertTrue("User should not be logged anymore!", !new Login().signOut().isUserLogged());
+    assertFalse("User should not be logged anymore!", plf.signOut().isUserLogged());
   }
 }

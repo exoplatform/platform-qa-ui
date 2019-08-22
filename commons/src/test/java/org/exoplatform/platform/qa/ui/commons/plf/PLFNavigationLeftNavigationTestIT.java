@@ -3,10 +3,14 @@ package org.exoplatform.platform.qa.ui.commons.plf;
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.CollectionCondition.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.CollectionCondition;
+import org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -42,15 +46,17 @@ public class PLFNavigationLeftNavigationTestIT extends Base {
    * <li>Test Case Name: Open a Space.</li>
    */
   @Test
-
   public void test03_OpenASpace() {
     info("Test 3: Open a Space");
+    String space1 = "space1" + getRandomNumber();
+
     /*
      * Step Number: 1 Step Name: Connect to intranet Step Description: - Login as a
      * normal user - Connect to Intranet - Open an application from "COMPANY" Input
      * Data: Expected Outcome: - The left Navigation is displayed - The application
      * is opened
      */
+    spaceManagement.addNewSpaceSimple(space1, space1 + " - description");
 
     /*
      * Step number: 2 Step Name: Open a space Step Description: - Open a space from
@@ -59,11 +65,19 @@ public class PLFNavigationLeftNavigationTestIT extends Base {
      */
 
     homePagePlatform.goToMySpaces();
+    spaceManagement.goToSpace(space1);
+    $(SocialLocator.ELEMENT_SPACE_PANEL).should(exist);
+    SocialLocator.ELEMENT_SPACE_MENU_HOME.should(exist).shouldHave(cssClass("active"));
+    SocialLocator.ELEMENT_ACTIVITY_STREAM_PORTLET.should(exist);
     /*
      * Assertions.assertFalse(waitForAndGetElement(ELEMENT_SPACE_PANEL).isDisplayed(
      * )); Assertions.assertFalse(true);
      */
     // $(ELEMENT_SPACE_PANEL).waitUntil(Condition.appears,10000);
+    info("Delete spaces");
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space1, false);
+
   }
 
   /**
@@ -79,11 +93,9 @@ public class PLFNavigationLeftNavigationTestIT extends Base {
 
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1 + " - description");
-    $(byClassName("UIPopupWindow")).find(byText("Settings")).waitUntil(Condition.disappears, Configuration.timeout);
 
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space2, space2 + " - description");
-    $(byClassName("UIPopupWindow")).find(byText("Settings")).waitUntil(Condition.disappears, Configuration.timeout);
     /*
      * Step Number: 1 Step Name: Connect to intranet Step Description: - Login as an
      * user - Connect to Intranet Input Data: Expected Outcome: - The Left
@@ -102,8 +114,11 @@ public class PLFNavigationLeftNavigationTestIT extends Base {
     // space1))).isDisplayed();
     // waitForAndGetElement(By.xpath(ELEMENT_RESULT_SEARCH_SPACE.replace("{$space}",
     // space2))).isDisplayed();
-    $(byText(space1)).waitUntil(Condition.appears, Configuration.timeout);
-    $(byText(space2)).waitUntil(Condition.appears, Configuration.timeout);
+
+//    $(byText(space1)).waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_SEARCH_SPACE_RESULTS.filterBy(exactText(space1)).shouldBe(size(1));
+//    $(byText(space2)).waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_SEARCH_SPACE_RESULTS.filterBy(exactText(space2)).shouldBe(size(1));
     /*
      * homePagePlatform.goToHomePage(); type(ELEMENT_SEARCH_SPACE, "ah", false);
      * waitForAndGetElement(ELEMENT_RESULT_SEARCH_SPACE.replace("{$space}", space2),

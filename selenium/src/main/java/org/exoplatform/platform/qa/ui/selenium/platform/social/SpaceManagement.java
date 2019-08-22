@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
@@ -9,11 +10,13 @@ import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -63,16 +66,32 @@ public class SpaceManagement {
    *                  of confirm msg
    */
   public void deleteSpace(String spaceName, Boolean isVerify) {
-    if ($(byText(spaceName)).is(Condition.exist)) {
-      info("Do delete space");
-      searchSpace(spaceName);
-      ELEMENT_SPACES_LIST.find(byText(spaceName)).parent().parent().parent().find(byText("Delete")).click();
-      if (isVerify)
-        alert.verifyAlertMessage(ELEMENT_SPACE_CONFIRM_DELETE);
-      $(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
-      sleep(Configuration.timeout);
-      ELEMENT_SPACES_LIST.find(byText(spaceName)).waitUntil(Condition.disappear, Configuration.timeout);
-    }
+//    if ($(byText(spaceName)).exists()) {
+//      info("Do delete space");
+//      searchSpace(spaceName);
+//      ELEMENT_SPACES_LIST.find(byText(spaceName)).parent().parent().parent().find(byText("Delete")).click();
+//      if (isVerify)
+//        alert.verifyAlertMessage(ELEMENT_SPACE_CONFIRM_DELETE);
+//      $(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
+//      sleep(Configuration.timeout);
+//      ELEMENT_SPACES_LIST.find(byText(spaceName)).waitUntil(Condition.disappear, Configuration.timeout);
+//    }
+
+    info("Do delete space");
+    searchSpace(spaceName);
+    // check if space was found
+    ELEMENT_SPACES_LIST.findAll(".spaceBox .spaceTitle a").filterBy(Condition.exactText(spaceName)).shouldHaveSize(1);
+    // delete the space
+    ELEMENT_SPACES_LIST.findAll(".spaceBox button").find(Condition.exactText("Delete")).click();
+    if (isVerify)
+      alert.verifyAlertMessage(ELEMENT_SPACE_CONFIRM_DELETE);
+    $(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON).shouldBe(visible).click();
+    // check the number of spaces in the search is 0
+    ELEMENT_SPACES_LIST.find(".boxSpaceList .uiFilterList .result span.number").shouldBe(text("1"));
+    // check the space name is no more existing
+//    ELEMENT_SPACES_LIST.findAll(".spaceBox .spaceTitle a").find(exactText(spaceName)).should(not(exist));
+    ELEMENT_SPACES_LIST.findAll(".spaceBox").shouldBe(CollectionCondition.empty);
+
   }
 
   /**
@@ -94,13 +113,22 @@ public class SpaceManagement {
    */
   public void addNewSpaceSimple(String name, String desc, int... params) {
     ELEMENT_ADDNEWSPACE_BUTTON.click();
-    ELEMENT_SPACE_NAME_INPUT.waitUntil(Condition.appears, Configuration.timeout);
-    ELEMENT_SPACE_NAME_INPUT.setValue(name);
+//    ELEMENT_SPACE_NAME_INPUT.waitUntil(Condition.appears, Configuration.timeout);
+//    ELEMENT_SPACE_NAME_INPUT.setValue(name);
+    ELEMENT_SPACE_NAME_INPUT.should(appear).setValue(name);
     ELEMENT_SPACE_DESCRIPTION_INPUT.setValue(desc);
     info("Save all changes");
     ELEMENET_SPACE_CREATE_BUTTON.click();
-    sleep(Configuration.timeout);
-    ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+//    sleep(Configuration.timeout);
+//    ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    ELEMENET_SPACE_CREATE_BUTTON.should(not(exist));
+    if ($("#AjaxLoadingMask").isDisplayed()) {
+      $("#AjaxLoadingMask").should(disappear);
+    }
+    $("#UISpaceMenuPortlet").
+            should(exist).
+            find("#UISpaceMenuPortlet .spaceMenuNav h3").
+            should(have(exactText(name)));
   }
 
   /**
@@ -504,13 +532,15 @@ public class SpaceManagement {
    */
   public void searchSpace(String name, String... number) {
     info("Waiting my space is shown");
-    sleep(Configuration.timeout);
-    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.appears, Configuration.timeout);
-    info("Input the space into search text box");
-    ELEMENT_MY_SPACE_SEARCH_TEXT.setValue(name);
-    sleep(Configuration.timeout);
-    info("evt.click on Search button");
-    $(ELEMENT_MY_SPACE_SEARCH_BTN).click();
+//    sleep(Configuration.timeout);
+//    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.appears, Configuration.timeout);
+//    info("Input the space into search text box");
+//    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.visible, Configuration.timeout).setValue(name);
+//    sleep(Configuration.timeout);
+//    info("evt.click on Search button");
+//    $(ELEMENT_MY_SPACE_SEARCH_BTN).waitUntil(Condition.visible, Configuration.timeout).click();
+
+    ELEMENT_MY_SPACE_SEARCH_TEXT.should(exist).setValue(name).sendKeys(Keys.ENTER);
   }
 
   /**
@@ -632,11 +662,18 @@ public class SpaceManagement {
    *
    * @param space
    */
-  public void goToSpace(String space) {
+  public SpaceManagement goToSpace(String space) {
     info("Click on the title of the space");
-    $(byXpath(ELEMENT_ALL_SPACE_SPACE_NAME.replace("$space", space.toLowerCase()))).click();
-    $(byXpath(ELEMENT_ALL_SPACE_SPACE_NAME.replace("$space", space))).waitUntil(Condition.not(Condition.visible),
-            Configuration.timeout);
+    ELEMENT_SPACES_LIST.findAll(".spaceBox .spaceTitle a").filterBy(exactText(space)).first().click();
+    $("#UISpaceMenuPortlet").
+            should(exist).
+            find("#UISpaceMenuPortlet .spaceMenuNav h3").
+            should(have(exactText(space)));
+
+//    $(byXpath(ELEMENT_ALL_SPACE_SPACE_NAME.replace("$space", space.toLowerCase()))).click();
+//    $(byXpath(ELEMENT_ALL_SPACE_SPACE_NAME.replace("$space", space))).waitUntil(Condition.not(Condition.visible),
+//            Configuration.timeout);
+    return this;
   }
 
   /**

@@ -8,12 +8,12 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLoca
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_USER_PROFILE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_USER_RESULT_SEARCH;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACE_MENU;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACE_PORTLET;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -164,7 +164,7 @@ public class MiniChatTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
     ELEMENT_SPACE_PORTLET.waitUntil(Condition.appear, Configuration.timeout);
-    ELEMENT_SPACE_MENU.click();
+    ELEMENT_SPACE_MINICHAT_BUTTON.click();
     ELEMENT_MINI_CHAT.waitUntil(Condition.appear, Configuration.timeout);
     MiniChatName = $(byClassName("title-left")).parent().parent().find(byClassName("fullname")).getText();
     assertEquals(space, MiniChatName);
@@ -291,7 +291,7 @@ public class MiniChatTestIT extends Base {
     manageLogInOut.signIn(usernamea, password);
     homePagePlatform.goToChat();
     switchTo().window(1);
-    ELEMENT_CONTACT_LIST.find(byText(room)).click();
+    ChatLocator.ELEMENT_CONTACT_LIST.find(byText(room)).click();
     ELEMENT_CHAT_ROOM_PARTICIPANTS.find(byClassName("contact-list-item")).hover();
     ELEMENT_CHAT_TIP_CONTENT.waitUntil(Condition.appear, Configuration.timeout);
     ELEMENT_CHAT_ICON_TIP_CONTENT.click();
