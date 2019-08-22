@@ -14,6 +14,7 @@ import org.openqa.selenium.interactions.Actions;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
@@ -428,20 +429,20 @@ public class SpaceManagement {
    * Change Status
    */
   public void changeStatus(String status) {
-    ELEMENT_CHAT_ICON_STATUS.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+    ELEMENT_CHAT_ICON_STATUS.shouldBe(visible).click();
     switch (status) {
       case "Available":
-        ELEMENT_USER_STATUS_AVAILABLE.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
-        homePagePlatform.refreshUntil($(byXpath("//a[@class='dropdown-toggle user-available']")), Condition.visible, 700);
+        ELEMENT_USER_STATUS_AVAILABLE.shouldBe(visible).click();
+        homePagePlatform.refreshUntil($(byXpath("//a[@class='dropdown-toggle user-available']")), visible, 700);
         break;
       case "Do not disturb":
-        ELEMENT_USER_STATUS_DONOTDISTURB.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+        ELEMENT_USER_STATUS_DONOTDISTURB.shouldBe(visible).click();
         break;
       case "Away":
-        ELEMENT_USER_STATUS_AWAY.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+        ELEMENT_USER_STATUS_AWAY.shouldBe(visible).click();
         break;
       case "Invisible":
-        ELEMENT_USER_STATUS_INVISIBLE.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+        ELEMENT_USER_STATUS_INVISIBLE.shouldBe(visible).click();
         break;
     }
   }

@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.bouncycastle.crypto.tls.ConnectionEnd.server;
@@ -717,7 +718,7 @@ public class EventManagement {
    */
   public void selectPreviousAndNextDayInTheEventToAdd(String previousDay, String nextDay){
     info("Select Previous and Next day");
-    ELEMENT_EVENT_SELECT_FROM.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    ELEMENT_EVENT_SELECT_FROM.shouldBe(visible).click();
     if (previousDay!= null) {
       final SelenideElement ELEMENT_EVENT_PREVIOUS_DAY= $(By.xpath("(//td/a[contains(text(),'${CurrentDay}')]/../preceding-sibling::td/a[@href='#SelectDate'])[last()]".replace("${CurrentDay}",ELEMENT_EVENT_CURRENT_DAY.getText())));
       ELEMENT_EVENT_PREVIOUS_DAY.waitUntil(Condition.visible,Configuration.timeout).click();
