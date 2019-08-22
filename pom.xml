@@ -288,7 +288,7 @@
             <selenide.baseUrl>${selenide.baseUrl}</selenide.baseUrl>
             <browser>${selenide.browser}</browser>
             <selenide.browserSize>${selenide.browserSize}</selenide.browserSize>
-            <selenide.reports>${selenide.reports}</selenide.reports>
+            <selenide.reportsFolder>${selenide.reports}</selenide.reportsFolder>
           </systemPropertyVariables>
         </configuration>
       </plugin>
