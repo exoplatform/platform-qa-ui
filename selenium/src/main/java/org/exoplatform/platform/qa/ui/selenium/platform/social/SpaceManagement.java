@@ -8,6 +8,7 @@ import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.exoplatform.social.core.space.SpaceUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -66,17 +67,6 @@ public class SpaceManagement {
    *                  of confirm msg
    */
   public void deleteSpace(String spaceName, Boolean isVerify) {
-//    if ($(byText(spaceName)).exists()) {
-//      info("Do delete space");
-//      searchSpace(spaceName);
-//      ELEMENT_SPACES_LIST.find(byText(spaceName)).parent().parent().parent().find(byText("Delete")).click();
-//      if (isVerify)
-//        alert.verifyAlertMessage(ELEMENT_SPACE_CONFIRM_DELETE);
-//      $(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
-//      sleep(Configuration.timeout);
-//      ELEMENT_SPACES_LIST.find(byText(spaceName)).waitUntil(Condition.disappear, Configuration.timeout);
-//    }
-
     info("Do delete space");
     searchSpace(spaceName);
     // check if space was found
@@ -113,14 +103,10 @@ public class SpaceManagement {
    */
   public void addNewSpaceSimple(String name, String desc, int... params) {
     ELEMENT_ADDNEWSPACE_BUTTON.click();
-//    ELEMENT_SPACE_NAME_INPUT.waitUntil(Condition.appears, Configuration.timeout);
-//    ELEMENT_SPACE_NAME_INPUT.setValue(name);
     ELEMENT_SPACE_NAME_INPUT.should(appear).setValue(name);
     ELEMENT_SPACE_DESCRIPTION_INPUT.setValue(desc);
     info("Save all changes");
     ELEMENET_SPACE_CREATE_BUTTON.click();
-//    sleep(Configuration.timeout);
-//    ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     ELEMENET_SPACE_CREATE_BUTTON.should(not(exist));
     if ($("#AjaxLoadingMask").isDisplayed()) {
       $("#AjaxLoadingMask").should(disappear);
@@ -661,6 +647,7 @@ public class SpaceManagement {
    * Open a space in list space
    *
    * @param space
+   * @return
    */
   public SpaceManagement goToSpace(String space) {
     info("Click on the title of the space");
@@ -670,9 +657,18 @@ public class SpaceManagement {
             find("#UISpaceMenuPortlet .spaceMenuNav h3").
             should(have(exactText(space)));
 
-//    $(byXpath(ELEMENT_ALL_SPACE_SPACE_NAME.replace("$space", space.toLowerCase()))).click();
-//    $(byXpath(ELEMENT_ALL_SPACE_SPACE_NAME.replace("$space", space))).waitUntil(Condition.not(Condition.visible),
-//            Configuration.timeout);
+    return this;
+  }
+
+  /**
+   * Open a space directly by typing his url.
+   * @param spaceName the space to open
+   * @return the current space page
+   */
+
+  public SpaceManagement goToSpaceByUrl(String spaceName) {
+    String spaceId = SpaceUtils.cleanString(spaceName);
+    open("/portal/g/:spaces:"+spaceId+"/"+spaceId);
     return this;
   }
 

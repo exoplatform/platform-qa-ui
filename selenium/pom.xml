@@ -15,6 +15,10 @@
       <artifactId>platform-qa-ui-core</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.exoplatform.social</groupId>
+      <artifactId>social-component-core</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.codeborne</groupId>
       <artifactId>selenide</artifactId>
     </dependency>

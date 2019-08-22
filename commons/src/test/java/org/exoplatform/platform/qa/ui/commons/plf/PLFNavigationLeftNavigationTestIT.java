@@ -56,6 +56,7 @@ public class PLFNavigationLeftNavigationTestIT extends Base {
      * Data: Expected Outcome: - The left Navigation is displayed - The application
      * is opened
      */
+    homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1 + " - description");
 
     /*
@@ -63,9 +64,7 @@ public class PLFNavigationLeftNavigationTestIT extends Base {
      * "MY SPACES" Input Data: Expected Outcome: The space is opened in the Home
      * space's stream
      */
-
-    homePagePlatform.goToMySpaces();
-    spaceManagement.goToSpace(space1);
+    spaceManagement.goToSpaceByUrl(space1);
     $(SocialLocator.ELEMENT_SPACE_PANEL).should(exist);
     SocialLocator.ELEMENT_SPACE_MENU_HOME.should(exist).shouldHave(cssClass("active"));
     SocialLocator.ELEMENT_ACTIVITY_STREAM_PORTLET.should(exist);

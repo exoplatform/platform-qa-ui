@@ -34,6 +34,8 @@
     <url>https://github.com/exoplatform/platform-qa-ui</url>
   </scm>
   <properties>
+    <!-- ## eXo Platform -->
+    <lib.exoplatform.version>5.3.x-SNAPSHOT</lib.exoplatform.version>
     <!-- ## Project libraries dependencies -->
     <lib.bouncycastle.version>1.58</lib.bouncycastle.version>
     <lib.guava.version>28.0-jre</lib.guava.version>
@@ -133,6 +135,12 @@
         <groupId>${project.groupId}</groupId>
         <artifactId>platform-qa-ui-answer</artifactId>
         <version>${project.version}</version>
+      </dependency>
+      <!-- eXo Platform dependencies -->
+      <dependency>
+        <groupId>org.exoplatform.social</groupId>
+        <artifactId>social-component-core</artifactId>
+        <version>${lib.exoplatform.version}</version>
       </dependency>
       <!-- JUnit 5 stack -->
       <dependency>
