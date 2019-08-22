@@ -6,7 +6,6 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_BUTTON_EVENT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_NEXT_RIGHT_LIST_DAY_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -22,9 +21,6 @@ import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by ilyes on 06/11/17.
@@ -165,9 +161,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
   public void test13_AddnEventInPersonalCalendar() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String calendar = "calendar" + getRandomNumber();
-    String pattern = "MM-dd-yyyy";
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-    String date = simpleDateFormat.format(new Date());
+    String contentEvent = "contentEvent" + getRandomNumber();
     info("Test 13 Add an event in personal calendar");
 
     homePagePlatform.goToCalendarPage();
@@ -176,7 +170,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     calendarManagement.saveAddCalendar();
     calendarManagement.executeActionCalendar(calendar, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     info("Check default date");
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp();
     info("Add event");
     $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).setValue(titleEvent);
     eventManagement.saveQuickAddEvent();
@@ -281,9 +275,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
   public void test_AddnEventInPersonalCalendarWithSpecialCharacter() {
     String titleEvent = "l'event" + getRandomNumber();
     String calendar = "calendar" + getRandomNumber();
-    String pattern = "MM-dd-yyyy";
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-    String date = simpleDateFormat.format(new Date());
+    String contentEvent = "contentEvent" + getRandomNumber();
     info("Test 13 Add an event in personal calendar");
 
     homePagePlatform.goToCalendarPage();
@@ -292,7 +284,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     calendarManagement.saveAddCalendar();
     calendarManagement.executeActionCalendar(calendar, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     info("Check default date");
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp();
     info("Add event");
     $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).setValue(titleEvent);
     eventManagement.saveQuickAddEvent();

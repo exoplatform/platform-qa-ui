@@ -129,14 +129,13 @@ public class CalendarHomePage {
     if (date != null && date != "") {
       switch (optionDay) {
         case DETAILTIME:
-          homePagePlatform.refreshUntil(ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name)),Condition.visible,Configuration.timeout);
-          executeJavaScript("window.scrollBy(0,200)", "");
+          homePagePlatform.refreshUntil(ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name)),Condition.visible,1000);
           ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name))
-                  .waitUntil(Condition.appears, Configuration.collectionsTimeout)
+                  .waitUntil(Condition.appears, Configuration.timeout)
                   .contextClick();
           break;
         case ALLDAY:
-          homePagePlatform.refreshUntil(ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name)),Condition.visible,Configuration.timeout);
+          homePagePlatform.refreshUntil(ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name)),Condition.visible,1000);
           ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name))
                   .waitUntil(Condition.appears, Configuration.timeout)
                   .contextClick();

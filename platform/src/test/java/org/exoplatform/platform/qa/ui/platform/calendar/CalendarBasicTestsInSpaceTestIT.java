@@ -1,12 +1,12 @@
 package org.exoplatform.platform.qa.ui.platform.calendar;
 
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -22,9 +22,6 @@ import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by ilyes on 08/11/17.
@@ -61,9 +58,6 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
   public void test01_AddEventInSpace() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String contentEvent = "contentEvent" + getRandomNumber();
-    String pattern = "MM-dd-yyyy";
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-    String date = simpleDateFormat.format(new Date());
     String space = "space" + getRandomNumber();
     info("Create a space");
     homePagePlatform.goToMySpaces();
@@ -74,7 +68,7 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT),Condition.visible,1000);
     executeJavaScript("window.scrollBy(0,-2000)", "");
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp();
     info("Add event");
     ELEMENT_EVENT_TITLE_DRAWER.setValue(titleEvent);
     eventManagement.saveQuickAddEvent();

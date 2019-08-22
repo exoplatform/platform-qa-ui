@@ -124,7 +124,6 @@ public class LeaveChatRoomTestIT extends Base {
     }
 
     @Test
-    @Tag("cab")
     public void test02_CheckthedisplayofthepopupFromNoButton() {
 
         info("Create 4 new users");

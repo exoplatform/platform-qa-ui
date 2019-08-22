@@ -77,7 +77,7 @@ public class EventManagement {
     String cell = ELEMENT_CELL_TO_WORKING_PANEL.replace("$date", tempDate2).replace("$time", tempTime);
     info(cell);
     $(byXpath(cell)).click();
-    $(ELEMENT_QUICK_ADD_EVENT_POPUP).waitUntil(Condition.visible, Configuration.timeout);
+    $(ELEMENT_QUICK_ADD_EVENT_POPUP).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -117,7 +117,7 @@ public class EventManagement {
     String cell = ELEMENT_CELL_TO_WORKING_PANEL.replace("$date", tempDate2).replace("$time", tempTime);
     $(byXpath(cell)).contextClick();
     $(ELEMENT_CONTEXT_MENU_ADD_EVENT).click();
-    $(ELEMENT_QUICK_ADD_EVENT_POPUP).waitUntil(Condition.visible, Configuration.timeout);
+    $(ELEMENT_QUICK_ADD_EVENT_POPUP).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -174,7 +174,7 @@ public class EventManagement {
       $(ELEMENT_EVENT_TITLE_DRAWER).setValue(name);
     }
     if (note != null) {
-      $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[6]/div[2]/following::textarea")).setValue(note);
+      $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[6]/div[2]/textarea")).setValue(note);
     }
     if (opt.length > 0 && opt[0] != null) {
       $(byId("calendar")).selectOption(opt[0]);
@@ -238,7 +238,7 @@ public class EventManagement {
           evt.type(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE, dateTimeFrom[0], true);
         if (dateTimeFrom.length > 1) {
           $(ELEMENT_QUICK_INPUT_EVENT_FROM_TIME_INPUT).click();
-          $(byXpath("//li[@class='cbb_item selected']")).waitUntil(Condition.visible, Configuration.timeout).click();
+         $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[1]/div[2]/div[3]/input")).click();
         }
       }
       if ((to != null) & (to != "")) {
@@ -247,7 +247,7 @@ public class EventManagement {
           evt.type(ELEMENT_QUICK_INPUT_EVENT_TO_DATE, dateTimeTo[0], true);
         if (dateTimeTo.length > 1) {
           $(ELEMENT_QUICK_INPUT_EVENT_TO_TIME_INPUT).click();
-          $(byXpath("//li[@class='cbb_item selected']")).waitUntil(Condition.visible, Configuration.timeout).click();
+         $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[2]/div[2]/div[3]/input")).click();
         }
       }
     }
@@ -373,9 +373,9 @@ public class EventManagement {
     String dateFrom = $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).getValue();
     String dateTo = $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).getValue();
     String fromTime = evt.waitForAndGetElement(ELEMENT_QUICK_INPUT_EVENT_FROM_TIME, testBase.getDefaultTimeout(), 1, 2)
-            .getAttribute("value");
+                         .getAttribute("value");
     String toTime = evt.waitForAndGetElement(ELEMENT_QUICK_INPUT_EVENT_TO_TIME, testBase.getDefaultTimeout(), 1, 2)
-            .getAttribute("value");
+                       .getAttribute("value");
 
     info("Check default suggestion EVENT time");
     if (fromDateTime == null || fromDateTime == "") {
@@ -435,9 +435,9 @@ public class EventManagement {
     String dateFrom = testBase.getValue(ELEMENT_ADD_EDIT_EVENT_FROM_DATE);
     String dateTo = testBase.getValue(ELEMENT_ADD_EDIT_EVENT_TO_DATE);
     String fromTime = evt.waitForAndGetElement(ELEMENT_ADD_EDIT_INPUT_EVENT_FROM_TIME, testBase.getDefaultTimeout(), 1, 2)
-            .getAttribute("value");
+                         .getAttribute("value");
     String toTime = evt.waitForAndGetElement(ELEMENT_ADD_EDIT_INPUT_EVENT_TO_TIME, testBase.getDefaultTimeout(), 1, 2)
-            .getAttribute("value");
+                       .getAttribute("value");
 
     info("Check default suggestion EVENT time");
     if (fromDateTime == null || fromDateTime == "") {
@@ -492,9 +492,9 @@ public class EventManagement {
     $(ELEMENT_ADD_PARTICIPANTS_BUTTON_IN_SCHEDULE_TAB).click();
     pPer.selectUserPermission(user, type);
     if (type != 2 && type != 3 && type != 4)
-      $(byXpath(ELEMENT_USER_CHECKBOX_USERNAME.replace("${user}", user))).parent().waitUntil(Condition.visible, Configuration.timeout);
+      $(byXpath(ELEMENT_USER_CHECKBOX_USERNAME.replace("${user}", user))).parent().waitUntil(Condition.visible,Configuration.timeout);
     else
-      $(byXpath(ELEMENT_USER_CHECKBOX_FULLNAME.replace("${user}", user))).waitUntil(Condition.visible, Configuration.timeout);
+      $(byXpath(ELEMENT_USER_CHECKBOX_FULLNAME.replace("${user}", user))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -538,7 +538,7 @@ public class EventManagement {
       info("index:" + i);
       $(byXpath(ELEMENT_SCHEDULE_BUSY_TIME.replace("${user}", user).replace("${index}", String.valueOf(i))))
 
-              .shouldHave(Condition.attribute("class", "busyDotTime"));
+                .shouldHave(Condition.attribute("class","busyDotTime"));
 
     }
   }
@@ -568,10 +568,10 @@ public class EventManagement {
       int toIndex = convertFromTimeToIndex(timeTo);
       for (int i = fromIndex; i <= toIndex; i++) {
         assert $(byXpath(ELEMENT_SCHEDULE_TIME.replace("${index}", String.valueOf(i))))
-                .getAttribute("class")
-                .contains("userSelection") : "Wrong schedule time";
+                  .getAttribute("class")
+                  .contains("userSelection") : "Wrong schedule time";
       }
-      $(byXpath(ELEMENT_SCHEDULE_SELECTED_DATE.replace("$date", dateS))).waitUntil(Condition.visible, Configuration.timeout);
+      $(byXpath(ELEMENT_SCHEDULE_SELECTED_DATE.replace("$date", dateS))).waitUntil(Condition.visible,Configuration.timeout);
     } catch (ParseException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
@@ -592,16 +592,16 @@ public class EventManagement {
     info("From is " + fromIndex);
     info("To is " + toIndex);
     switch (option) {
-      case NEXT:
-        $(ELEMENT_SCHEDULE_NEXT_DAY).click();
-        break;
-      case PREVIOUS:
-        evt.click(ELEMENT_SCHEDULE_PREVIOUS_DAY);
-        break;
-      case NOW:
-        break;
-      default:
-        break;
+    case NEXT:
+      $(ELEMENT_SCHEDULE_NEXT_DAY).click();
+      break;
+    case PREVIOUS:
+      evt.click(ELEMENT_SCHEDULE_PREVIOUS_DAY);
+      break;
+    case NOW:
+      break;
+    default:
+      break;
     }
     $(byXpath(ELEMENT_SCHEDULE_DRAG.replace("${index}", String.valueOf(fromIndex)))).dragAndDropTo($(byXpath(ELEMENT_SCHEDULE_DRAG.replace("${index}", String.valueOf(toIndex)))));
 
@@ -629,22 +629,22 @@ public class EventManagement {
    */
   public void selectAvailable(selectAvailableOption option) {
     switch (option) {
-      case AVAILABLE:
-        info("Select AVAILABLE");
-        evt.check(ELEMENT_AVAILABLE_CHECKBOX, 2);
-        break;
-      case BUSY:
-        info("Select BUSY");
-        evt.check(ELEMENT_BUSY_CHECKBOX, 2);
-        break;
-      case OUTSIDE:
-        info("Select OUTSIDE");
-        evt.check(ELEMENT_OUTSIDE_CHECKBOX, 2);
-        break;
-      default:
-        info("Select AVAILABLE");
-        evt.check(ELEMENT_AVAILABLE_CHECKBOX, 2);
-        break;
+    case AVAILABLE:
+      info("Select AVAILABLE");
+      evt.check(ELEMENT_AVAILABLE_CHECKBOX, 2);
+      break;
+    case BUSY:
+      info("Select BUSY");
+      evt.check(ELEMENT_BUSY_CHECKBOX, 2);
+      break;
+    case OUTSIDE:
+      info("Select OUTSIDE");
+      evt.check(ELEMENT_OUTSIDE_CHECKBOX, 2);
+      break;
+    default:
+      info("Select AVAILABLE");
+      evt.check(ELEMENT_AVAILABLE_CHECKBOX, 2);
+      break;
     }
   }
 
@@ -655,22 +655,22 @@ public class EventManagement {
    */
   public void selectSendInvitation(PlatformBase.selectInvitationOption option) {
     switch (option) {
-      case ALWAYS:
-        info("Select ALWAYS");
-        evt.check(ELEMENT_SEND_INVITATION_ALWAYS_CHECKBOX, 2);
-        break;
-      case NEVER:
-        info("Select NEVER");
-        evt.check(ELEMENT_SEND_INVITATION_NEVER_CHECKBOX, 2);
-        break;
-      case ASK:
-        info("Select ASK");
-        evt.check(ELEMENT_SEND_INVITATION_ASK_CHECKBOX, 2);
-        break;
-      default:
-        info("Select NEVER");
-        evt.check(ELEMENT_SEND_INVITATION_NEVER_CHECKBOX, 2);
-        break;
+    case ALWAYS:
+      info("Select ALWAYS");
+      evt.check(ELEMENT_SEND_INVITATION_ALWAYS_CHECKBOX, 2);
+      break;
+    case NEVER:
+      info("Select NEVER");
+      evt.check(ELEMENT_SEND_INVITATION_NEVER_CHECKBOX, 2);
+      break;
+    case ASK:
+      info("Select ASK");
+      evt.check(ELEMENT_SEND_INVITATION_ASK_CHECKBOX, 2);
+      break;
+    default:
+      info("Select NEVER");
+      evt.check(ELEMENT_SEND_INVITATION_NEVER_CHECKBOX, 2);
+      break;
     }
 
   }
@@ -704,7 +704,7 @@ public class EventManagement {
    */
   public void saveQuickAddEvent() {
     info("Save quick add event");
-    ELEMENT_BUTTON_EVENT_SAVE.waitUntil(Condition.appears, Configuration.collectionsTimeout);
+    ELEMENT_BUTTON_EVENT_SAVE.waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_BUTTON_EVENT_SAVE.click();
     ELEMENT_BUTTON_EVENT_SAVE.waitUntil(Condition.disappears, Configuration.timeout);
   }
@@ -714,8 +714,8 @@ public class EventManagement {
    */
   public void saveAddEventDetails() {
     info("Sae add event details");
-    if ($(ELEMENT_ADD_EDIT_EVENT_NAME).is(Condition.visible))
-      $(ELEMENT_ADD_EDIT_EVENT_NAME).click();
+    if($(ELEMENT_ADD_EDIT_EVENT_NAME).is(Condition.visible))
+    $(ELEMENT_ADD_EDIT_EVENT_NAME).click();
     //ELEMENT_BUTTON_EVENT_SAVE_DETAILS.waitUntil(Condition.visible, Configuration.timeout);
     // click(ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
     // waitForElementNotPresent(ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
@@ -737,10 +737,10 @@ public class EventManagement {
   public void moreDetailsEvent() {
     info("Go to More Details");
 
-    $(ELEMENT_BUTTON_EVENT_MORE_DETAILS).waitUntil(Condition.visible, Configuration.timeout);
+    $(ELEMENT_BUTTON_EVENT_MORE_DETAILS).waitUntil(Condition.visible,Configuration.timeout);
     // click(ELEMENT_BUTTON_EVENT_MORE_DETAILS);
     $(ELEMENT_BUTTON_EVENT_MORE_DETAILS).click();
-    $(ELEMENT_BUTTON_EVENT_MORE_DETAILS).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    $(ELEMENT_BUTTON_EVENT_MORE_DETAILS).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
@@ -748,7 +748,7 @@ public class EventManagement {
    */
   public void cancelQuickAddEditEvent() {
     ELEMENT_EVENT_CANCEL_BUTTON.click();
-    ELEMENT_EVENT_CANCEL_BUTTON.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    ELEMENT_EVENT_CANCEL_BUTTON.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   public void cancelAddEditDetailEvent() {
@@ -763,7 +763,7 @@ public class EventManagement {
    */
   public void removeAttachment(String file) {
     $(byTitle(file)).find(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[2]/form/div[2]/div[7]/div[2]/div/div[2]/div[2]/div[1]/div[3]/a")).click();
-    //$(byXpath(ELEMENT_EVENT_ATTACHMENT.replace("${file}", file))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+   //$(byXpath(ELEMENT_EVENT_ATTACHMENT.replace("${file}", file))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
@@ -784,24 +784,25 @@ public class EventManagement {
                                       String... option) {
     info("Add recurring information");
     String occurence = option.length > 0 ? option[0] : "";
+    ELEMENT_REPEAT_SWITCH_LABEL.click();
     if (endRepeat != null) {
       switch (endRepeat) {
-        case After:
-          info("Check After option");
-          evt.check(byId("endAfter"), 2);
-          if (occurence != "")
-            // evt.type(ELEMENT_END_AFTER_NUMBER, option[0], true);
-            break;
-        case ByThisDate:
-          info("Check By this date option");
-          evt.check(ELEMENT_BY_THIS_DATE_END_RECURRING_EVENT, 2);
-          if (occurence != "")
-            evt.type(ELEMENT_DATE_TIME_PICKER, option[0], true);
-          break;
-        case Never:
-          info("Check never option");
-          evt.check(ELEMENT_NEVER_END_RECURRING_EVENT, 2);
-          break;
+      case After:
+        info("Check After option");
+        evt.check($(byId("endAfter")), 2);
+        if (occurence != "")
+          evt.type(ELEMENT_END_AFTER_NUMBER, option[0], true);
+        break;
+      case ByThisDate:
+        info("Check By this date option");
+        evt.check(ELEMENT_BY_THIS_DATE_END_RECURRING_EVENT, 2);
+        if (occurence != "")
+          evt.type(ELEMENT_DATE_TIME_PICKER, option[0], true);
+        break;
+      case Never:
+        info("Check never option");
+        evt.check(ELEMENT_NEVER_END_RECURRING_EVENT, 2);
+        break;
       }
     }
   }
@@ -847,8 +848,8 @@ public class EventManagement {
       $(ELEMENT_EDIT_DELETE_ONE_EVENT).parent().waitUntil(Condition.visible, Configuration.timeout);
       info(evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT).getText());
       assert evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT)
-              .getText()
-              .contains(ELEMENT_CONFIRM_DELETE_MESSAGE);
+                .getText()
+                .contains(ELEMENT_CONFIRM_DELETE_MESSAGE);
       assert evt.waitForAndGetElement(ELEMENT_EDIT_DELETE_ONE_EVENT, testBase.getDefaultTimeout(), 1, 2).isSelected();
     }
     switch (optDeleteType) {
@@ -900,11 +901,12 @@ public class EventManagement {
     evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_RECURRING_FORM);
     if (isVerify) {
       evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT);
-      evt.waitForAndGetElement(ELEMENT_EDIT_RECURRING_EVENT_SAVE, testBase.getDefaultTimeout(), 1, 2);
+      evt.waitForAndGetElement(ELEMENT_EDIT_DELETE_ONE_EVENT, testBase.getDefaultTimeout(), 1, 2);
       info(evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT).getText());
       assert evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT)
-              .getText()
-              .contains(ELEMENT_CONFIRM_EDIT_MESSAGE);
+                .getText()
+                .contains(ELEMENT_CONFIRM_EDIT_MESSAGE);
+      assert evt.waitForAndGetElement(ELEMENT_EDIT_DELETE_ONE_EVENT, testBase.getDefaultTimeout(), 1, 2).isSelected();
     }
     switch (optEditType) {
       case ONLY_EVENT:
@@ -921,7 +923,7 @@ public class EventManagement {
         break;
     }
     $(ELEMENT_CONFIRM_EDIT_BUTTON).click();
-    $(ELEMENT_CONFIRM_EDIT_RECURRING_FORM).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    $(ELEMENT_CONFIRM_EDIT_RECURRING_FORM).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
@@ -932,18 +934,18 @@ public class EventManagement {
   public void deleteRecurringConfirm(recurringType optEditType) {
     evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_RECURRING_FORM);
     switch (optEditType) {
-      case ONLY_EVENT:
-        info("Edit only event recurring");
-        evt.check(ELEMENT_EDIT_DELETE_ONE_EVENT, 2);
-        break;
-      case FOLLOW_EVENT:
-        info("Edit following event recurring");
-        evt.check(ELEMENT_EDIT_DELETE_FOLLOWING_EVENT, 2);
-        break;
-      case ALL_EVENT:
-        info("Edit all event recurring");
-        evt.click(ELEMENT_EDIT_DELETE_ALL_EVENT, 2);
-        break;
+    case ONLY_EVENT:
+      info("Edit only event recurring");
+      evt.check(ELEMENT_EDIT_DELETE_ONE_EVENT, 2);
+      break;
+    case FOLLOW_EVENT:
+      info("Edit following event recurring");
+      evt.check(ELEMENT_EDIT_DELETE_FOLLOWING_EVENT, 2);
+      break;
+    case ALL_EVENT:
+      info("Edit all event recurring");
+      evt.click(ELEMENT_EDIT_DELETE_ALL_EVENT, 2);
+      break;
     }
 
     evt.click(ELEMENT_CONFIRM_DELETE_BUTTON);
@@ -1186,48 +1188,30 @@ public class EventManagement {
   }
 
   /**
-   * Define a time of reminder by email minutes, hours, days, weeks
-   */
-  public enum timeEmailReminder {
-    minutes, hours, days, weeks;
-  }
-
-  /**
    * Define a type of delete recurring Only this event Following events All events
    */
   public enum recurringType {
     ONLY_EVENT, FOLLOW_EVENT, ALL_EVENT;
   }
 
-  /**
-   * Check Event PopUp Fields
-   */
-  public void checkEventPopUp(String date) {
+  public void checkEventPopUp(){
     switchTo().activeElement();
     $(byText("Add Event")).should(Condition.exist);
-    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).exists();
-    assertEquals("All", ELEMENT_EVENT_CATEGORY.getText());
-    assertEquals("All day", $(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
-    assertEquals("Location", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("Enter a location for this event", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
-    info("Date From is" + date);
-    assertEquals(date, $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).getValue());
-    info("Date To is" + date);
-    assertEquals(date, $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).getValue());
-    $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
-    $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
-    $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
-    $(byXpath("//textarea[@placeholder='Add a description']")).exists();
-    assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
-    assertEquals("Save", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
-    assertEquals("Cancel", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
-  }
-
-  public void checkReminderLabel() {
+    assertEquals("Event title",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
+    assertEquals("All",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).getText());
+    assertEquals("All day",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[2]/div/label/span")).getText());
+    assertEquals("Location",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[3]/div[1]")).getText());
+    assertEquals("Enter a location for this event",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[3]/div[2]/input")).getAttribute("placeholder"));
+    assertEquals("Participants",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
+    assertEquals("",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/div/div/input")).getAttribute("placeholder"));
+    assertEquals("Clear",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
+    assertEquals("Save",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
+    assertEquals("Cancel",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
 
   }
 
+  public void checkReminderLabel(){
+
+
+  }
 }
