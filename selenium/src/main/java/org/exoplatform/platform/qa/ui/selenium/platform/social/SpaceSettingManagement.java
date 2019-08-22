@@ -14,10 +14,6 @@ import org.junit.Assert;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_UI_POPUP_MOVE_TOPIC;
-import static com.sun.deploy.cache.Cache.exists;
-import static java.time.zone.ZoneRulesProvider.refresh;
-import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 

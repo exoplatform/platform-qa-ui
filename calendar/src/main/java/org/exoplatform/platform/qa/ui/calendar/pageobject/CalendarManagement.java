@@ -351,15 +351,12 @@ public class CalendarManagement {
    */
   public void openMenuOfCalendar(String calendar) {
     info("Open menu of a calendar");
-    sleep(2000);
-    ELEMENT_LIST_CALENDAR.find(byText(calendar)).waitUntil(Condition.appears, Configuration.timeout)
+    ELEMENT_LIST_CALENDAR.find(byText(calendar)).waitUntil(Condition.appears, Configuration.collectionsTimeout)
             .hover()
             .parent()
             .parent()
             .find(ELEMENT_CALENDAR_ICON_SETTINGS_OF_CALENDAR)
             .click();
-    sleep(Configuration.timeout);
-
   }
 
   /**
@@ -374,45 +371,43 @@ public class CalendarManagement {
     openMenuOfCalendar(calendar);
     switch (action) {
     case ADDTASK:
-      $(ELEMENT_CALENDAR_ADD_TASK_MENU).click();
+      $(ELEMENT_CALENDAR_ADD_TASK_MENU).waitUntil(Condition.visible,Configuration.timeout).click();
       $(ELEMENT_CALENDAR_QUICK_ADD_TASK_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case ADDEVENT:
-      sleep(2000);
-      $(ELEMENT_CALENDAR_ADD_EVENT_MENU).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(ELEMENT_CALENDAR_ADD_EVENT_MENU).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
       $(ELEMENT_EVENT_DRAWER).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case EDIT:
-      evt.clickByJavascript(ELEMENT_CALENDAR_EDIT_MENU, 2);
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_ADD_FORM);
+      $(ELEMENT_CALENDAR_EDIT_MENU).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(ELEMENT_CALENDAR_ADD_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case REMOVE:
-      // evt.clickByJavascript(ELEMENT_CALENDAR_REMOVE_MENU, 2);
-      $(ELEMENT_CALENDAR_REMOVE_MENU).click();
+      $(ELEMENT_CALENDAR_REMOVE_MENU).waitUntil(Condition.visible,Configuration.timeout).click();
       $(ELEMENT_CALENDAR_REMOVE_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case SHARE:
-      $(ELEMENT_CALENDAR_SHARE_MENU).click();
+      $(ELEMENT_CALENDAR_SHARE_MENU).waitUntil(Condition.visible,Configuration.timeout).click();
       $(ELEMENT_CALENDAR_SHARE_FORM).waitUntil(Condition.visible, Configuration.timeout);
       break;
     case IMPORT:
-      evt.clickByJavascript(ELEMENT_CALENDAR_IMPORT_MENU, 2);
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_IMPORT_POPUP_FORM);
+      $(ELEMENT_CALENDAR_IMPORT_MENU).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(ELEMENT_CALENDAR_IMPORT_POPUP_FORM).waitUntil(Condition.visible, Configuration.timeout);
       break;
     case EXPORT:
-      evt.clickByJavascript(ELEMENT_CALENDAR_EXPORT_MENU, 2);
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_EXPORT_POPUP_FORM);
+      $(ELEMENT_CALENDAR_EXPORT_MENU).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(ELEMENT_CALENDAR_EXPORT_POPUP_FORM).waitUntil(Condition.visible, Configuration.timeout);
       break;
     case REFRESH:
-      evt.clickByJavascript(ELEMENT_CALENDAR_REFRESH_MENU, 2);
+      $(ELEMENT_CALENDAR_REFRESH_MENU).waitUntil(Condition.visible,Configuration.timeout).click();
       break;
     case COLOR:
       info("Select a color");
-      evt.click(ELEMENT_CALENDAR_MENU_ACTIONS_COLOR.replace("${color}", color[0]));
+      $(ELEMENT_CALENDAR_MENU_ACTIONS_COLOR).waitUntil(Condition.visible,Configuration.timeout).click();
       break;
     default:
-      evt.click(ELEMENT_CALENDAR_ADD_TASK_MENU, 2);
-      evt.waitForAndGetElement(ELEMENT_CALENDAR_QUICK_ADD_TASK_FORM);
+      $(ELEMENT_CALENDAR_ADD_TASK_MENU).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(ELEMENT_CALENDAR_QUICK_ADD_TASK_FORM).waitUntil(Condition.visible, Configuration.timeout);
       break;
 
 

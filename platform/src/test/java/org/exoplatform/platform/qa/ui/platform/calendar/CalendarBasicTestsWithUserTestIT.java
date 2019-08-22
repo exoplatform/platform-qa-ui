@@ -1,7 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.calendar;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_BUTTON_EVENT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_NEXT_RIGHT_LIST_DAY_BUTTON;
@@ -22,6 +22,9 @@ import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by ilyes on 06/11/17.
@@ -159,11 +162,12 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
   }
 
   @Test
-  @Tag("calis1")
   public void test13_AddnEventInPersonalCalendar() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String calendar = "calendar" + getRandomNumber();
-    String contentEvent = "contentEvent" + getRandomNumber();
+    String pattern = "MM-dd-yyyy";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    String date = simpleDateFormat.format(new Date());
     info("Test 13 Add an event in personal calendar");
 
     homePagePlatform.goToCalendarPage();
@@ -172,18 +176,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     calendarManagement.saveAddCalendar();
     calendarManagement.executeActionCalendar(calendar, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     info("Check default date");
-    switchTo().activeElement();
-    $(byText("Add Event")).should(Condition.exist);
-    assertEquals("Event title",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    sleep(2000);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).exists();
-    assertEquals("All day",$(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
-    assertEquals("Location",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("Enter a location for this event",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
-    assertEquals("Clear",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
-    assertEquals("Save",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
-    assertEquals("Cancel",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
+    eventManagement.checkEventPopUp(date);
     info("Add event");
     $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).setValue(titleEvent);
     eventManagement.saveQuickAddEvent();
@@ -200,7 +193,6 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
   }
 
   @Test
-  @Tag("calis2")
   public void test14_EditAnEventInPersonalCalendar() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String calendar = "calendar" + getRandomNumber();
@@ -253,7 +245,6 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
   }
 
   @Test
-  @Tag("calis3")
   public void test15_DeletenEventInPersonalCalendar() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String calendar = "calendar" + getRandomNumber();
@@ -287,11 +278,12 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
   }
 
   @Test
-  @Tag("calis5")
   public void test_AddnEventInPersonalCalendarWithSpecialCharacter() {
     String titleEvent = "l'event" + getRandomNumber();
     String calendar = "calendar" + getRandomNumber();
-    String contentEvent = "contentEvent" + getRandomNumber();
+    String pattern = "MM-dd-yyyy";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    String date = simpleDateFormat.format(new Date());
     info("Test 13 Add an event in personal calendar");
 
     homePagePlatform.goToCalendarPage();
@@ -300,18 +292,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     calendarManagement.saveAddCalendar();
     calendarManagement.executeActionCalendar(calendar, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     info("Check default date");
-    switchTo().activeElement();
-    $(byText("Add Event")).should(Condition.exist);
-    assertEquals("Event title",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    sleep(2000);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).exists();
-    assertEquals("All day",$(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
-    assertEquals("Location",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("Enter a location for this event",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
-    assertEquals("Clear",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
-    assertEquals("Save",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
-    assertEquals("Cancel",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
+    eventManagement.checkEventPopUp(date);
     info("Add event");
     $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).setValue(titleEvent);
     eventManagement.saveQuickAddEvent();
@@ -330,7 +311,6 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
   }
 
   @Test
-  @Tag("calis4")
   public void test19_EditEventWithValidData() {
     info("Test 19 Edit event with valid data");
 

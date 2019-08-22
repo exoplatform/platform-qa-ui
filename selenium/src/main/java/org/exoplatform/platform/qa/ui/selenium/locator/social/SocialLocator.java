@@ -315,18 +315,6 @@ public final class SocialLocator {
 
   public static final By              ELEMENT_INTRANET_NOTIFICATION_EMPTY_LIST                          =
                                                                                By.xpath(".//*[@id='NotificationPopup']//*[contains(@class,'no-items')][contains(text(),'No notifications')]");
-  /*****************************************
-   * User Status
-   *******************************************/
-
-
-  public static final SelenideElement ELEMENT_USER_STATUS_AVAILABLE =  $(By.xpath("//li[@class='user-available']"));
-
-  public static final SelenideElement ELEMENT_USER_STATUS_DONOTDISTURB = $(By.xpath("//li[@class='user-donotdisturb']"));
-
-  public static final SelenideElement ELEMENT_USER_STATUS_AWAY =  $(By.xpath("//li[@class='user-away']"));
-
-  public static final SelenideElement ELEMENT_USER_STATUS_INVISIBLE =  $(By.xpath("//li[@class='user-invisible']"));
 
   // All notification page list
   public static final String          ELEMENT_NOTIFICATION_ALL_PAGE_MENTION                             =
@@ -1573,11 +1561,9 @@ public static final By
   public static final By              ELEMENT_SPACE_MY_SPACE_TAB                                        =
                                                                  By.xpath(".//*[@id='UIManageAllSpaces']//*[contains(text(),'My Spaces')]");
 
-  public static final SelenideElement ELEMENT_SPACE_DESCRIPTION                                         =
-                                                                  $(By.xpath("//div[@id='spaceInfosApp']/p[@id='spaceDescription']"));
+  public static final String          ELEMENT_SPACE_DESCRIPTION                                         =
+                                                                ".//*[@id='UIManageMySpaces']//*[@class='content limitText'][text()='${des}']";
 
-  public static final SelenideElement ELEMENT_SPACE_MANAGER_NAME                                             =
-                                                                  $(By.xpath("//div[@id='spaceManagersList']/ul/li"));
   public static final By              ELEMENT_SPACE_AVATAR_DEFAULT                                      =
                                                                    By.xpath(".//*[@id='UISpaceInfo']//*[contains(@src,'SpaceAvtDefault.png')]");
 
@@ -2135,13 +2121,6 @@ public static final By
   public static final By              ELEMENT_SPACE_PENDING_SPACE_PORTLET                               =
                                                                           By.id("UIPendingSpacesPortlet");
 
-  // Left and right Arrows "Tooltips"
-  public static final SelenideElement ELEMENT_SPACE_TOOLTIP_LEFT                                            =
-                                                                      $(byXpath("//a[@class='actionIcon prevDate pull-left']"));
-
-  public static final SelenideElement ELEMENT_SPACE_TOOLTIP_RIGHT                                            =
-                                                                      $(byXpath("//i[@class='uiIconMiniArrowRight uiIconLightGray']"));
-
   // Add new space buttons
   public static final By              ELEMENT_ADD_NEW_SPACE_BUTTON                                      =
                                                                    By.xpath("//*[@class='uiIconSocSimplePlus uiIconSocWhite']");
@@ -2227,9 +2206,6 @@ public static final By
   // Button create
   public static final SelenideElement ELEMENET_SPACE_CREATE_BUTTON                                      =
                                                                    $(byClassName("PopupContent")).find(byText("Create Space"));
-
-  public static final SelenideElement ELEMENET_SPACE_SAVE_BUTTON                                      =
-                                                                   $(byXpath("//div[@class='uiAction uiActionBorder']/button"));
 
   // Activity like
   public static final By              ELEMENT_ACTIVITY_LIKE_EDIT_BTN                                    =

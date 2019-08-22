@@ -82,7 +82,6 @@ public class CalendarEventRecurringTestIT extends Base {
    * </p>
    */
   @Test
-  @Tag("calis8")
   public void test02_EditFollowingEventsInRecurringEvent() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String content = "content" + getRandomNumber();

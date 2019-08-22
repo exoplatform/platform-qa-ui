@@ -103,20 +103,6 @@ public class SpaceManagement {
   }
 
   /**
-   * Update Space Description
-   */
-  public void updateSpaceDescription(String desc) {
-    info("Update Space Description ");
-    ELEMENT_SPACE_DESCRIPTION_INPUT.clear();
-    ELEMENT_SPACE_DESCRIPTION_INPUT.setValue(desc);
-    info("Save all changes");
-    ELEMENET_SPACE_SAVE_BUTTON.waitUntil(Condition.visible, 6000).click();
-    $(byXpath("//div[@class='uiAction uiActionBorder']/a")).waitUntil(Condition.visible, Configuration.timeout).click();
-    refresh();
-  }
-
-
-  /**
    * Add a new space
    *
    * @param name
@@ -190,33 +176,6 @@ public class SpaceManagement {
   }
 
   /**
-   * Assign User as a manager
-   */
-  public void assignUnassignUserAsManager(String oneUser, ArrayList<String> manyUsers) {
-
-    if (oneUser != null) {
-      $(ELEMENT_SPACE_MEMBERS).waitUntil(Condition.visible, Configuration.timeout).click();
-      final String assignOrRemoveManagerRole = "(//table[@class='uiGrid table  table-hover table-striped']//th[3]/following::tr[@id='existingUsersTable']/td[text()='${user}']/following::div[@class='uiSwitchBtn'])[1]";
-      $(byXpath(assignOrRemoveManagerRole.replace("${user}", oneUser))).waitUntil(Condition.visible, Configuration.timeout).click();
-    }
-    if (manyUsers != null) {
-      $(ELEMENT_SPACE_MEMBERS).waitUntil(Condition.visible, Configuration.timeout).click();
-
-      final String assignOrRemoveManagerRole = "(//table[@class='uiGrid table  table-hover table-striped']//th[3]/following::tr[@id='existingUsersTable']/td[text()='${user}']/following::div[@class='uiSwitchBtn'])[1]";
-      $(byXpath(assignOrRemoveManagerRole.replace("${user}", manyUsers.get(0)))).waitUntil(Condition.visible, Configuration.timeout).click();
-      $(byXpath(assignOrRemoveManagerRole.replace("${user}", manyUsers.get(2)))).waitUntil(Condition.visible, Configuration.timeout).click();
-    }
-
-  }
-
-  /**
-   * Go to Home Space
-   */
-  public void goToHomeSpace() {
-    $(By.xpath("//i[@class='uiIconAppSpaceHomePage uiIconDefaultApp']")).waitUntil(Condition.visible, Configuration.timeout).click();
-  }
-
-  /**
    * Open Access tab from add new space popup
    */
   public void goToAccessTabFromPopUp() {
@@ -272,234 +231,6 @@ public class SpaceManagement {
   }
 
   /**
-   * Check Avatar User Dimensions
-   */
-  public void checkAvatarUserDimensions() {
-    final String ELEMENT_AVATAR_IMAGE_HEIGHT = String.valueOf($(byXpath("//ul[@id=\"spaceManagers\"]/li/a/img")).getSize().getHeight());
-    Assert.assertEquals("Avatar Image Height is not " + ELEMENT_AVATAR_IMAGE_HEIGHT + " px", "30", ELEMENT_AVATAR_IMAGE_HEIGHT);
-    final String ELEMENT_AVATAR_IMAGE_WIDTH = String.valueOf($(byXpath("//ul[@id=\"spaceManagers\"]/li/a/img")).getSize().getWidth());
-    Assert.assertEquals("Avatar Image Width is not " + ELEMENT_AVATAR_IMAGE_WIDTH + " px", "30", ELEMENT_AVATAR_IMAGE_WIDTH);
-  }
-
-  /**
-   * Check Description Padding Dimensions
-   */
-  public void checkDescriptionPortletPadding() {
-    Assert.assertEquals("The line height of space description is not 20 px", "20px", ELEMENT_SPACE_DESCRIPTION.getCssValue("line-height"));
-    Assert.assertEquals("The font size of space description is not 14 px", "14px", ELEMENT_SPACE_DESCRIPTION.getCssValue("font-size"));
-    Assert.assertEquals("The color of space description is not #333333", "#333333", getCSSColor(ELEMENT_SPACE_DESCRIPTION));
-    Assert.assertEquals("The font weight of space description is not 400", "400", ELEMENT_SPACE_DESCRIPTION.getCssValue("font-weight"));
-    Assert.assertEquals("The font family of space description is not Helvetica, arial, sans-serif", "Helvetica, arial, sans-serif", ELEMENT_SPACE_DESCRIPTION.getCssValue("font-family"));
-  }
-
-  /**
-   * Get CSS Color Value
-   */
-  public static String getCSSColor(SelenideElement spaceElement) {
-    String[] hexValue = spaceElement.getCssValue("color").replace("rgba(", "").replace(")", "").split(",");
-    hexValue[0] = hexValue[0].trim();
-    int hexValue1 = Integer.parseInt(hexValue[0]);
-    hexValue[1] = hexValue[1].trim();
-    int hexValue2 = Integer.parseInt(hexValue[1]);
-    hexValue[2] = hexValue[2].trim();
-    int hexValue3 = Integer.parseInt(hexValue[2]);
-    String color = String.format("#%02x%02x%02x", hexValue1, hexValue2, hexValue3);
-    return color;
-  }
-
-  /**
-   * Check Space Description and Space Manager Name
-   */
-  public void checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(String spaceDesa, String oneManagerName, ArrayList<String> managersNames, String space, String titleEvent, String dateEvent, String toolTips) {
-    if (spaceDesa != null) {
-      info("Space Description is : " + spaceDesa);
-      ELEMENT_SPACE_DESCRIPTION.waitUntil(Condition.visible, Configuration.timeout);
-      assertEquals(spaceDesa, ELEMENT_SPACE_DESCRIPTION.getText());
-    }
-    if (oneManagerName != null) {
-      info("Space Manager is : " + oneManagerName);
-      assertEquals(oneManagerName, ELEMENT_SPACE_MANAGER_NAME.getText());
-    }
-
-    if (managersNames != null) {
-      final String ELEMENT_SPACE_MANAGER = ("//div[@id='spaceManagersList']/ul/li/a[@href and contains(text(),'${user}')]");
-      if (managersNames.get(0) != null && $(byXpath(ELEMENT_SPACE_MANAGER.replace("${user}", managersNames.get(0)))).waitUntil(Condition.appears, Configuration.timeout).isDisplayed()) {
-        assertEquals(managersNames.get(0), $(byXpath(ELEMENT_SPACE_MANAGER.replace("${user}", managersNames.get(0)))).getText());
-      } else {
-        $(byXpath(ELEMENT_SPACE_MANAGER)).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
-      }
-      if (managersNames.get(1) != null && $(byXpath(ELEMENT_SPACE_MANAGER.replace("${user}", managersNames.get(1)))).waitUntil(Condition.appears, Configuration.timeout).isDisplayed()) {
-        assertEquals(managersNames.get(1), $(byXpath(ELEMENT_SPACE_MANAGER.replace("${user}", managersNames.get(1)))).getText());
-      } else {
-        $(byXpath(ELEMENT_SPACE_MANAGER)).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
-      }
-      if (managersNames.get(2) != null && $(byXpath(ELEMENT_SPACE_MANAGER.replace("${user}", managersNames.get(2)))).waitUntil(Condition.appears, Configuration.timeout).isDisplayed()) {
-        assertEquals(managersNames.get(2), $(byXpath(ELEMENT_SPACE_MANAGER.replace("${user}", managersNames.get(2)))).getText());
-      } else {
-        $(byXpath(ELEMENT_SPACE_MANAGER)).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
-      }
-    }
-    if (space != null) {
-      final SelenideElement ELEMENT_SPACE_NAME = $(byXpath("//div[@id='CalendarContainer']/div[@class='eventTitle']/span[@id and contains(text(),'$Space')]".replace("$Space", space)));
-      ELEMENT_SPACE_NAME.waitUntil(Condition.visible, Configuration.timeout).exists();
-      info("Space Name is : " + space);
-      assertEquals(space, ELEMENT_SPACE_NAME.getText());
-    }
-    if (titleEvent != null) {
-      final SelenideElement ELEMENT_TITLE_EVENT_NAME = $(byXpath("//div[@class='pull-left eventSummary']/a[contains(text(),'$TitleEvent')]".replace("$TitleEvent", titleEvent)));
-      ELEMENT_TITLE_EVENT_NAME.waitUntil(Condition.visible, Configuration.timeout);
-      info("Title Event is : " + titleEvent);
-      assertEquals(titleEvent, ELEMENT_TITLE_EVENT_NAME.getText());
-    }
-    if (dateEvent != null) {
-      final String[] ELEMENT_CURRENT_DATE = $(byXpath("//div[@class='currentDateContainer']/center/a")).getText().split(": ");
-      info("Created Event Month is : ");
-      assertEquals(dateEvent.substring(6, 7), ELEMENT_CURRENT_DATE[1].substring(0, 1));
-      info("Created Event day is : ");
-      List<String> firstNineDays = new ArrayList<>();
-      firstNineDays.add("01");
-      firstNineDays.add("02");
-      firstNineDays.add("03");
-      firstNineDays.add("04");
-      firstNineDays.add("05");
-      firstNineDays.add("06");
-      firstNineDays.add("07");
-      firstNineDays.add("08");
-      firstNineDays.add("09");
-      if (firstNineDays.contains(dateEvent.substring(8, 10))) {
-        assertEquals(dateEvent.substring(9, 10), ELEMENT_CURRENT_DATE[1].substring(2, 3));
-        info("Created Event Year is : ");
-        assertEquals(dateEvent.substring(0, 4), ELEMENT_CURRENT_DATE[1].substring(4, 8));
-      } else {
-        assertEquals(dateEvent.substring(8, 10), ELEMENT_CURRENT_DATE[1].substring(2, 4));
-        info("Created Event Year is : ");
-        assertEquals(dateEvent.substring(0, 4), ELEMENT_CURRENT_DATE[1].substring(5, 9));
-      }
-
-    }
-    if (toolTips != null) {
-      info("Left arrow of the event calendar");
-      $(byXpath("//a[@class='actionIcon prevDate pull-left']")).waitUntil(Condition.visible, Configuration.timeout);
-      info("Right arrow of the event calendar");
-      $(byXpath("//i[@class='uiIconMiniArrowRight uiIconLightGray']")).waitUntil(Condition.visible, Configuration.timeout);
-    }
-  }
-
-  /**
-   * Check Manager Title Dimensions
-   */
-  public void checkManagerTitleDimensions() {
-    Assert.assertEquals("The line height of space manager name is not 20px", "20px", ELEMENT_SPACE_MANAGER_NAME.getCssValue("line-height"));
-    Assert.assertEquals("The font size of space manager name is not 14px", "14px", ELEMENT_SPACE_MANAGER_NAME.getCssValue("font-size"));
-    Assert.assertEquals("The color of space manager name is not #333333", "#333333", getCSSColor(ELEMENT_SPACE_MANAGER_NAME));
-    Assert.assertEquals("The font weight of space manager name is not 400", "400", ELEMENT_SPACE_MANAGER_NAME.getCssValue("font-weight"));
-    Assert.assertEquals("The font family of space manager name is not Helvetica, arial, sans-serif", "Helvetica, arial, sans-serif", ELEMENT_SPACE_MANAGER_NAME.getCssValue("font-family"));
-  }
-
-  /**
-   * Check Who's Online Portlet Dimensions
-   */
-  public void checkWhoIsOnlinePortletDimensions(String onlineUser) {
-    final SelenideElement onlineUserInSpace = $(byXpath("//h6[text()=\"Who's Online?\"]/following::img[@src=\"/portal/rest/v1/social/users/${onlineUserSpace}/avatar\"]".replace("${onlineUserSpace}", onlineUser)));
-    Assert.assertEquals("The line height of Online User is not 20px", "20px", onlineUserInSpace.getCssValue("line-height"));
-    Assert.assertEquals("The font size of Online User is not 14px", "14px", onlineUserInSpace.getCssValue("font-size"));
-    Assert.assertEquals("The font weight of Online User is not 400", "400", onlineUserInSpace.getCssValue("font-weight"));
-    Assert.assertEquals("The font family of Online User is not Helvetica, arial, sans-serif", "Helvetica, arial, sans-serif", onlineUserInSpace.getCssValue("font-family"));
-  }
-
-  /**
-   * Check Calendar Portlet
-   */
-  public void checkCalendarPortletInSpaceHomePage() {
-    final SelenideElement calendarCheck = $(byXpath("//div[@class='calendarPortlet']"));
-    Assert.assertEquals("The line height of Calendar Portlet is not 20px", "20px", calendarCheck.getCssValue("line-height"));
-    Assert.assertEquals("The font size of Calendar Portlet is not 14px", "14px", calendarCheck.getCssValue("font-size"));
-    Assert.assertEquals("The color of Calendar Portlet is not #333333", "#333333", getCSSColor(calendarCheck));
-    Assert.assertEquals("The font weight of Calendar Portlet is not 400", "400", calendarCheck.getCssValue("font-weight"));
-    Assert.assertEquals("The font family of Calendar Portlet is not Helvetica, arial, sans-serif", "Helvetica, arial, sans-serif", calendarCheck.getCssValue("font-family"));
-  }
-
-  /**
-   * Check No Settings Button Display For Calendar
-   */
-  public void checkNoSettingsButtonDisplayForCalendar() {
-    info("Calendar Settings Button is not displayed");
-    final SelenideElement settingsButton = $(byXpath("//a[@class='settingsLink actionIcon pull-right']"));
-    settingsButton.shouldNot(Condition.visible);
-  }
-
-  /**
-   * Change Status
-   */
-  public void changeStatus(String status) {
-    ELEMENT_CHAT_ICON_STATUS.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
-    switch (status) {
-      case "Available":
-        ELEMENT_USER_STATUS_AVAILABLE.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
-        homePagePlatform.refreshUntil($(byXpath("//a[@class='dropdown-toggle user-available']")), Condition.visible, 700);
-        break;
-      case "Do not disturb":
-        ELEMENT_USER_STATUS_DONOTDISTURB.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
-        break;
-      case "Away":
-        ELEMENT_USER_STATUS_AWAY.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
-        break;
-      case "Invisible":
-        ELEMENT_USER_STATUS_INVISIBLE.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
-        break;
-    }
-  }
-
-  /**
-   * Edit User Profile
-   */
-  public void editUserProfile(String jobTitle) {
-    $(ELEMENT_TOPBAR_AVATAR).waitUntil(Condition.visible, Configuration.timeout).click();
-    $(ELEMENT_MY_PROFILE_LINK).waitUntil(Condition.visible, Configuration.timeout).click();
-    $(ELEMENT_COMMENT_EDIT).waitUntil(Condition.visible, Configuration.timeout).click();
-    $(byXpath("//input[@id='position']")).waitUntil(Condition.visible, Configuration.timeout).setValue(jobTitle);
-    $(byXpath("//div[@class=\"uiAction\"]/button[text()='Save']")).waitUntil(Condition.visible, Configuration.timeout).click();
-    refresh();
-  }
-
-  /**
-   * Check Online User Job Title
-   */
-  public void checkOnlineUserJobTitle(String onlineUser, String jobTitle) {
-    info("Check job title of: " + onlineUser);
-    $(byXpath("//h6[text()=\"Who's Online?\"]/following::img[@src=\"/portal/rest/v1/social/users/${onlineUserSpace}/avatar\"]".replace("${onlineUserSpace}", onlineUser))).waitUntil(Condition.visible, Configuration.timeout).hover();
-    final String userJobTitle = ($(byXpath("//td[@id=\"profileName\"]/div"))).waitUntil(Condition.visible, Configuration.timeout).getText();
-    Assert.assertEquals("Online User job " + jobTitle + " is not displayed", jobTitle, userJobTitle);
-  }
-
-  /**
-   * Check Online Users
-   */
-  public void checkOnlineUsers(String onlineUser) {
-    info("Online User is displayed: " + onlineUser);
-    final SelenideElement onlineUserInSpace = $(byXpath("//h6[text()=\"Who's Online?\"]/following::img[@src=\"/portal/rest/v1/social/users/${onlineUserSpace}/avatar\"]".replace("${onlineUserSpace}", onlineUser)));
-    onlineUserInSpace.waitUntil(Condition.appears, Configuration.timeout);
-  }
-
-  /**
-   * Check Not Online Users
-   */
-  public void checkNotOnlineUsers(String onlineUser) {
-    info("Online User is not displayed: " + onlineUser);
-    final SelenideElement onlineUserInSpace = $(byXpath("//h6[text()=\"Who's Online?\"]/following::img[@src=\"/portal/rest/v1/social/users/${onlineUserSpace}/avatar\"]".replace("${onlineUserSpace}", onlineUser)));
-    onlineUserInSpace.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
-  }
-
-  /**
-   * Click Avatar Online Users
-   */
-  public void clickOnlineUsers(String onlineUser) {
-    info("Online User is : " + onlineUser);
-    final SelenideElement onlineUserInSpace = $(byXpath("//h6[text()=\"Who's Online?\"]/following::img[@src=\"/portal/rest/v1/social/users/${onlineUserSpace}/avatar\"]".replace("${onlineUserSpace}", onlineUser)));
-    onlineUserInSpace.waitUntil(Condition.appears, Configuration.timeout).click();
-  }
-
-  /**
    * Search a space by name or description
    *
    * @param name
@@ -514,44 +245,6 @@ public class SpaceManagement {
     sleep(Configuration.timeout);
     info("evt.click on Search button");
     $(ELEMENT_MY_SPACE_SEARCH_BTN).click();
-  }
-
-  /**
-   * Access to the searched space
-   */
-  public void accessToSearchedSpace() {
-    ELEMENT_SEARCHED_SPACE.waitUntil(Condition.visible, Configuration.timeout).click();
-  }
-
-  /**
-   * Edit Layout
-   */
-  public void editLayout(String action) {
-    if ($(ELEMENT_EDIT_BUTTON).isDisplayed()) {
-      $(ELEMENT_EDIT_BUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
-      $(ELEMENT_EDIT_PAGE).hover();
-      $(ELEMENT_EDIT_PAGE_EDITLAYOUT).waitUntil(Condition.visible, Configuration.timeout).click();
-      switch (action) {
-        case "Add":
-          $(byXpath("(//div[@class='txtLeft'])[2]")).dragAndDropTo($(byXpath(("(//div[@class='portletLayoutDecorator' and contains(text(),'Space Menu')]/following::div[@class=\"portletLayoutDecorator\"])[1]"))));
-          refresh();
-          $(byXpath("//a[@class='uiIconSave uiIconDarkGray pull-right']")).waitUntil(Condition.visible, Configuration.timeout).click();
-          $(byXpath("//h5[@class=\"portletName\" and contains(text(),'ECM Admin')]")).exists();
-          break;
-
-        case "Delete":
-          $(ELEMENT_ECM_ADMIN_PORTLET_LAYOUT).hover();
-          ELEMENT_DELETE_ECM_ADMIN_PAGE_EDITLAYOUT.waitUntil(Condition.visible, Configuration.timeout).click();
-          switchTo().alert().accept();
-          $(byXpath("//a[@class='uiIconSave pull-right uiIconDarkGray']")).waitUntil(Condition.visible, Configuration.timeout).click();
-          goToHomeSpace();
-          $(byXpath("//h5[@class=\"portletName\" and contains(text(),'ECM Admin')]")).shouldNot(Condition.visible);
-          break;
-      }
-
-    } else {
-      $(ELEMENT_EDIT_BUTTON).shouldNot(Condition.visible);
-    }
   }
 
   /**
@@ -596,7 +289,8 @@ public class SpaceManagement {
     info("Send a request to a space");
     searchSpace(space);
     sleep(2000);
-    if ($(byXpath("//button[@type='button' and text()='Request to Join']")).exists()) {
+    if($(byXpath("//button[@type='button' and text()='Request to Join']")).exists())
+    {
       $(byText(space)).parent()
               .parent()
               .parent()
@@ -604,7 +298,8 @@ public class SpaceManagement {
               .waitUntil(Condition.visible, Configuration.timeout)
               .click();
     }
-    if ($(byXpath("//button[@type='button' and text()='Join']")).exists()) {
+    if($(byXpath("//button[@type='button' and text()='Join']")).exists())
+    {
       $(byText(space)).parent()
               .parent()
               .parent()

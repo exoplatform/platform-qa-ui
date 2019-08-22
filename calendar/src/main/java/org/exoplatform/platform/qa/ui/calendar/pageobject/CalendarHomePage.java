@@ -1,7 +1,9 @@
 package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_AVATAR_CHANGELANGUAGE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.ELEMENT_CHANGE_LANGUAGE_POPUP_TITLE;
@@ -127,17 +129,14 @@ public class CalendarHomePage {
     if (date != null && date != "") {
       switch (optionDay) {
         case DETAILTIME:
-          sleep(3000);
-          homePagePlatform.refreshUntil(ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name)),Condition.visible,1000);
+          homePagePlatform.refreshUntil(ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name)),Condition.visible,Configuration.timeout);
           executeJavaScript("window.scrollBy(0,200)", "");
-          sleep(2000);
           ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name))
-                  .waitUntil(Condition.appears, Configuration.timeout)
+                  .waitUntil(Condition.appears, Configuration.collectionsTimeout)
                   .contextClick();
-          sleep(2000);
           break;
         case ALLDAY:
-          homePagePlatform.refreshUntil(ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name)),Condition.visible,1000);
+          homePagePlatform.refreshUntil(ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name)),Condition.visible,Configuration.timeout);
           ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name))
                   .waitUntil(Condition.appears, Configuration.timeout)
                   .contextClick();
@@ -443,8 +442,6 @@ public class CalendarHomePage {
       case DAY:
         switch (optionDay) {
           case DETAILTIME:
-            // evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name",
-            // name));
             $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
             break;
           case ALLDAY:
@@ -480,8 +477,7 @@ public class CalendarHomePage {
           evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
           evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
         } else {
-          sleep(3000);
-          $(byText(name)).exists();
+          $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
         }
         break;
       case MONTH:
@@ -1001,7 +997,7 @@ public class CalendarHomePage {
     info("Delete event/tak: " + name);
     Button button = new Button(this.testBase);
     goToRightMenuTaskEventFromAnyView(name, view, optionDay, date);
-    $(ELEMENT_CONTEXT_MENU_DELETE).click();
+    $(ELEMENT_CONTEXT_MENU_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
     if (isVerify) {
       if (isEvent) {
         $(byText(ELEMENT_CONFIRM_DELETE_EVENT_MSG)).waitUntil(Condition.appears, Configuration.timeout);

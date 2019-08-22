@@ -70,7 +70,7 @@ public final class HomePageLocator {
                                                                 $(byClassName("uiIconPLFCalendar"));
 
   public static final SelenideElement ELEMENT_TASKS_LINK_PLF                                               =
-                                                             $(byClassName("uiCompanyNavigations")).find(byText("Tasks"));
+                                                             $(byXpath("//i[@id='MenuItemtasks']"));
 
   public static final By              ELEMENT_CONNECTION_LINK_PLF                                          =
                                                                   By.xpath("//*[@data-original-title='Connections']");
@@ -120,7 +120,7 @@ public final class HomePageLocator {
                                                                       "//*[text()='${title}']/../../../..//*[@class='contentComment' and contains(text(), 'Page has been moved to: ${path}')]";
 
   public static final SelenideElement ELEMENT_MY_SPACE_LINK_PLF                                            =
-                                                                $(byClassName("uiSpaceNavigationPortlet")).find(byLinkText("MY SPACES"));
+                                                                $(byXpath("//i[@id='MySpacesItem']"));
 
   public static final SelenideElement ELEMENT_SECOND_SPACE_MY_SPACE                                        =
                                                                     $(byClassName("spaceNavigation")).findAll(byClassName("spaceItem"))
@@ -183,11 +183,6 @@ public final class HomePageLocator {
   public static final By              ELEMENT_EDIT_PAGE_EDITLAYOUT                                         =
                                                                    By.xpath("//*[contains(text(), 'Edit Layout')]");
 
-  public static final SelenideElement              ELEMENT_DELETE_ECM_ADMIN_PAGE_EDITLAYOUT                                         =
-                                                                    $(byXpath("(//span[contains(text(),'ECM Admin')]/following::a[@data-original-title=\"Delete Portlet\"])[1]"));
-
-  public static final By              ELEMENT_ECM_ADMIN_PORTLET_LAYOUT                                         =
-                                                                    By.xpath("//div[@class=\"portletLayoutDecorator\" and contains(text(),\"ECM Admin\")]");
   // administration panel
   public static final By              ELEMENT_TOPBAR_ADMINISTRATION_BUTTON                                 =
                                                                            By.xpath("//*[@class='uiIconPLF24x24Setup']");
