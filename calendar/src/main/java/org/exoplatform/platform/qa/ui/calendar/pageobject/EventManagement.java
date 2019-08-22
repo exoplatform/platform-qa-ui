@@ -704,7 +704,7 @@ public class EventManagement {
    */
   public void saveQuickAddEvent() {
     info("Save quick add event");
-    ELEMENT_BUTTON_EVENT_SAVE.waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_BUTTON_EVENT_SAVE.waitUntil(Condition.appears, Configuration.collectionsTimeout);
     ELEMENT_BUTTON_EVENT_SAVE.click();
     ELEMENT_BUTTON_EVENT_SAVE.waitUntil(Condition.disappears, Configuration.timeout);
   }
@@ -1206,7 +1206,6 @@ public class EventManagement {
     switchTo().activeElement();
     $(byText("Add Event")).should(Condition.exist);
     assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    sleep(2000);
     $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).exists();
     assertEquals("All", ELEMENT_EVENT_CATEGORY.getText());
     assertEquals("All day", $(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());

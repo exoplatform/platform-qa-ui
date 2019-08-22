@@ -74,9 +74,7 @@ public class CalendarImproveCreateEvent extends Base {
     info("Add event");
     ELEMENT_EVENT_TITLE_DRAWER.setValue(eventTitle);
     ELEMENT_EVENT_ADD_PARTICIPANT.setValue(PLFData.DATA_NAME_USER1).waitUntil(Condition.visible, Configuration.timeout).click();
-    sleep(2000);
-    ELEMENT_EVENT_ADD_PARTICIPANT.sendKeys(Keys.ENTER);
-    sleep(Configuration.timeout);
+    ELEMENT_EVENT_ADD_PARTICIPANT.waitUntil(Condition.visible,2000).sendKeys(Keys.ENTER);
     $(byXpath("//div[@class='item' and text()='${participantName}']".replace("${participantName}", PLFData.DATA_NAME_USER1))).exists();
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(eventTitle,
@@ -105,10 +103,8 @@ public class CalendarImproveCreateEvent extends Base {
     calendarManagement.saveSetting();
     homePagePlatform.refreshUntil($(byAttribute("startfull", getDate(0, "EEE MMM dd yyyy HH" + ":00:00"))), Condition.visible, 1000);
     refresh();
-    sleep(2000);
-    $(byAttribute("startfull", getDate(0, "EEE MMM dd yyyy HH" + ":00:00"))).doubleClick();
-    sleep(2000);
-    ELEMENT_EVENT_DRAWER.parent().waitUntil(Condition.visible, Configuration.timeout);
+    $(byAttribute("startfull", getDate(0, "EEE MMM dd yyyy HH" + ":00:00"))).waitUntil(Condition.visible,2000).doubleClick();
+    ELEMENT_EVENT_DRAWER.parent().waitUntil(Condition.visible, Configuration.collectionsTimeout);
     eventManagement.checkEventPopUp(date);
     info("Add event");
     ELEMENT_EVENT_TITLE_DRAWER.setValue(titleEvent);
@@ -142,21 +138,12 @@ public class CalendarImproveCreateEvent extends Base {
   @Test
   public void test04_checkCancelButtonOfEventDrawer() {
     //21501
+    String pattern = "MM-dd-yyyy";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    switchTo().activeElement();
-    $(byText("Add Event")).should(Condition.exist);
-    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    sleep(2000);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).exists();
-    assertEquals("All", ELEMENT_EVENT_CATEGORY.getText());
-    assertEquals("All day", $(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
-    assertEquals("Location", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("Enter a location for this event", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
-    assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
-    assertEquals("Save", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
-    assertEquals("Cancel", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
+    eventManagement.checkEventPopUp(date);
     ELEMENT_EVENT_CANCEL_BUTTON.click();
     ELEMENT_BUTTON_EVENT_SAVE.waitUntil(Condition.disappears, Configuration.timeout);
 
@@ -166,21 +153,12 @@ public class CalendarImproveCreateEvent extends Base {
   public void test05_CheckClearButtonInEventDrawer() {
     //21501
     String titleEvent = "titleEvent" + getRandomNumber();
+    String pattern = "MM-dd-yyyy";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    switchTo().activeElement();
-    $(byText("Add Event")).should(Condition.exist);
-    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    sleep(2000);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).exists();
-    assertEquals("All", ELEMENT_EVENT_CATEGORY.getText());
-    assertEquals("All day", $(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
-    assertEquals("Location", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("Enter a location for this event", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
-    assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
-    assertEquals("Save", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
-    assertEquals("Cancel", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
+    eventManagement.checkEventPopUp(date);
     ELEMENT_EVENT_DRAWER_TITLE.setValue(titleEvent);
     ELEMENT_EVENT_CATEGORY.selectOption("Meeting");
     ELEMENT_EVENT_LOCATION.setValue("Location");
@@ -197,21 +175,12 @@ public class CalendarImproveCreateEvent extends Base {
   @Test
   public void test06_checkSaveButtonWhenTitleIsEmpty() {
     //21502
+    String pattern = "MM-dd-yyyy";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    switchTo().activeElement();
-    $(byText("Add Event")).should(Condition.exist);
-    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    sleep(2000);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).exists();
-    assertEquals("All", ELEMENT_EVENT_CATEGORY.getText());
-    assertEquals("All day", $(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
-    assertEquals("Location", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("Enter a location for this event", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
-    assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
-    assertEquals("Save", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
-    assertEquals("Cancel", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
+    eventManagement.checkEventPopUp(date);
     assertEquals("", ELEMENT_EVENT_DRAWER_TITLE.getText());
     ELEMENT_EVENT_SAVE_BUTTON.waitUntil(Condition.disabled, Configuration.timeout);
     ELEMENT_EVENT_CANCEL_BUTTON.click();
@@ -222,20 +191,12 @@ public class CalendarImproveCreateEvent extends Base {
   public void test07_checkSaveButtonWhenTitleIsTyped() {
     //21504
     String titleEvent = "titleEvent" + getRandomNumber();
+    String pattern = "MM-dd-yyyy";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    switchTo().activeElement();
-    $(byText("Add Event")).should(Condition.exist);
-    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    sleep(2000);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).exists();
-    assertEquals("All day", $(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
-    assertEquals("Location", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("Enter a location for this event", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
-    assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
-    assertEquals("Save", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
-    assertEquals("Cancel", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
+    eventManagement.checkEventPopUp(date);
     ELEMENT_EVENT_DRAWER_TITLE.setValue(titleEvent);
     ELEMENT_EVENT_SAVE_BUTTON.waitUntil(Condition.enabled, Configuration.timeout);
     ELEMENT_EVENT_CANCEL_BUTTON.click();
@@ -245,6 +206,9 @@ public class CalendarImproveCreateEvent extends Base {
   @Test
   public void test08_AddParticipantToEvent() {
     String titleEvent = "titleEvent" + getRandomNumber();
+    String pattern = "MM-dd-yyyy";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    String date = simpleDateFormat.format(new Date());
     String username = "usernamea" + getRandomString();
     String Firstname = "Firstname" + getRandomString();
     String Lastname = "Lastname" + getRandomString();
@@ -254,24 +218,11 @@ public class CalendarImproveCreateEvent extends Base {
     addUsers.addUser(username, password, email1, Firstname, Lastname);
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    switchTo().activeElement();
-    $(byText("Add Event")).should(Condition.exist);
-    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    sleep(2000);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).exists();
-    assertEquals("All day", $(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
-    assertEquals("Location", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("Enter a location for this event", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
-    assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
-    assertEquals("Save", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
-    assertEquals("Cancel", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
+    eventManagement.checkEventPopUp(date);
     ELEMENT_EVENT_DRAWER_TITLE.setValue(titleEvent);
-    sleep(2000);
-    ELEMENT_EVENT_ADD_PARTICIPANT.setValue(Firstname).waitUntil(Condition.visible, Configuration.timeout).click();
-    sleep(2000);
+    ELEMENT_EVENT_ADD_PARTICIPANT.setValue(Firstname).waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+    ELEMENT_EVENT_ADD_PARTICIPANT.waitUntil(Condition.visible,2000);
     ELEMENT_EVENT_ADD_PARTICIPANT.sendKeys(Keys.ENTER);
-    sleep(Configuration.timeout);
     $(byXpath("//div[@class='item' and text()='${participantName}']".replace("${participantName}", Firstname))).exists();
     ELEMENT_EVENT_SAVE_BUTTON.click();
 
@@ -280,27 +231,12 @@ public class CalendarImproveCreateEvent extends Base {
   @Test
   public void test09_CheckRepeatPreferencePopup() {
     //21514
-    //21514
+    String pattern = "MM-dd-yyyy";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    switchTo().activeElement();
-    $(byText("Add Event")).should(Condition.exist);
-    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    sleep(2000);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).exists();
-    assertEquals("All", ELEMENT_EVENT_CATEGORY.getText());
-    assertEquals("All day", $(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
-    assertEquals("Location", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("Enter a location for this event", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
-    $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
-    $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
-    $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
-    $(byXpath("//textarea[@placeholder='Add a description']")).exists();
-    assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
-    assertEquals("Save", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
-    assertEquals("Cancel", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
+    eventManagement.checkEventPopUp(date);
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_REPEAT_PREFERRENCE_IMPROVE_POPUP.waitUntil(Condition.appear, Configuration.timeout);
     $(byText("Recurring Event")).waitUntil(Condition.exist, Configuration.timeout);
@@ -311,26 +247,12 @@ public class CalendarImproveCreateEvent extends Base {
   @Test
   public void test10_CheckReminderPopup() {
     //21518
+    String pattern = "MM-dd-yyyy";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    switchTo().activeElement();
-    $(byText("Add Event")).should(Condition.exist);
-    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    sleep(2000);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).exists();
-    assertEquals("All", ELEMENT_EVENT_CATEGORY.getText());
-    assertEquals("All day", $(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
-    assertEquals("Location", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("Enter a location for this event", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
-    $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
-    $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
-    $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
-    $(byXpath("//textarea[@placeholder='Add a description']")).exists();
-    assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
-    assertEquals("Save", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
-    assertEquals("Cancel", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
+    eventManagement.checkEventPopUp(date);
     $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_REMINDER_POPUP.waitUntil(Condition.appear, Configuration.timeout);
     $(byText("Reminder")).waitUntil(Condition.exist, Configuration.timeout);
@@ -341,77 +263,41 @@ public class CalendarImproveCreateEvent extends Base {
   @Test
   public void test11_CheckReminderLabel() {
     //21519 //21520 //21521
+    String pattern = "MM-dd-yyyy";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    switchTo().activeElement();
-    $(byText("Add Event")).should(Condition.exist);
-    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    sleep(2000);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).exists();
-    assertEquals("All", ELEMENT_EVENT_CATEGORY.getText());
-    assertEquals("All day", $(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
-    assertEquals("Location", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("Enter a location for this event", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
-    $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
-    $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
-    $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
-    $(byXpath("//textarea[@placeholder='Add a description']")).exists();
-    assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
-    assertEquals("Save", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
-    assertEquals("Cancel", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
+    eventManagement.checkEventPopUp(date);
     $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).waitUntil(Condition.visible, Configuration.timeout).click();
-    sleep(2000);
-    $(byXpath("//input[@id='mailReminderTimeEntry']")).setValue("15");
-    sleep(2000);
-    $(ELEMENT_SAVE_REMINDER_BUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(byXpath("//input[@id='mailReminderTimeEntry']")).waitUntil(Condition.visible,2000).setValue("15");
+    $(ELEMENT_SAVE_REMINDER_BUTTON).waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
     Assert.assertEquals($(byXpath("//div[@class='reminder pull-left']/div/a")).getText(), "15mn before");
     $(byXpath("//div[@class='reminder pull-left']/div/a")).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_REMINDER_POPUP.waitUntil(Condition.appear, Configuration.timeout);
     Assert.assertEquals($(byXpath("//input[@id='mailReminderTimeEntry']")).getValue(), "15");
-    sleep(2000);
     $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).waitUntil(Condition.visible, Configuration.timeout).click();
-    sleep(2000);
-    $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).waitUntil(Condition.visible, Configuration.timeout).click();
-    sleep(2000);
+    $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
     Assert.assertNotEquals($(byXpath("//div[@class='reminder pull-left']/div/a")).getText(), "15mn before");
-    sleep(2000);
-    ELEMENT_REMINDER_POPUP.waitUntil(Condition.appear, Configuration.timeout);
+    ELEMENT_REMINDER_POPUP.waitUntil(Condition.appear, Configuration.collectionsTimeout);
     Assert.assertEquals($(byXpath("//input[@id='mailReminderTimeEntry']")).getValue(), "10");
     Assert.assertEquals($(byXpath("//select[@id='mailReminderTime']")).getValue(), "minutes");
     $(ELEMENT_CANCEL_REMINDER_BUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
-    sleep(2000);
-    ELEMENT_EVENT_CANCEL_BUTTON.click();
+    ELEMENT_EVENT_CANCEL_BUTTON.waitUntil(Condition.visible,2000).click();
 
   }
 
   @Test
   public void test12_CheckRepeatLabel() {
     //21515 //21516
+    String pattern = "MM-dd-yyyy";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    switchTo().activeElement();
-    $(byText("Add Event")).should(Condition.exist);
-    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    sleep(2000);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).exists();
-    assertEquals("All", ELEMENT_EVENT_CATEGORY.getText());
-    assertEquals("All day", $(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
-    assertEquals("Location", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("Enter a location for this event", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
-    $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
-    $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
-    $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
-    $(byXpath("//textarea[@placeholder='Add a description']")).exists();
-    assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
-    assertEquals("Save", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
-    assertEquals("Cancel", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
+    eventManagement.checkEventPopUp(date);
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).waitUntil(Condition.visible, Configuration.timeout).click();
-    sleep(2000);
-    $(ELEMENT_SAVE_EVENT_OCCURRING).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_SAVE_EVENT_OCCURRING).waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
     ELEMENT_REPEAT_LABEL.waitUntil(Condition.text("Repeat"), Configuration.timeout);
     info("Check the behavior when click on repeat label");
     ELEMENT_REPEAT_LABEL.click();
@@ -422,20 +308,12 @@ public class CalendarImproveCreateEvent extends Base {
 
   @Test
   public void test13_CheckFindTimePopup() {
+    String pattern = "MM-dd-yyyy";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    switchTo().activeElement();
-    $(byText("Add Event")).should(Condition.exist);
-    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    sleep(2000);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).exists();
-    assertEquals("All day", $(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
-    assertEquals("Location", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("Enter a location for this event", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
-    assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
-    assertEquals("Save", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
-    assertEquals("Cancel", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
+    eventManagement.checkEventPopUp(date);
     ELEMENT_FIND_TIME_BUTTON.click();
     ELEMENT_FIND_TIME_POPUP.waitUntil(Condition.appear, Configuration.timeout);
     ELEMENT_CHECK_TIME_ICON.waitUntil(Condition.checked, Configuration.timeout);
@@ -459,34 +337,11 @@ public class CalendarImproveCreateEvent extends Base {
     calendarManagement.saveSetting();
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT), Condition.visible, 1000);
     eventManagement.goToAddEventFromActionBar();
-    switchTo().activeElement();
-    $(byText("Add Event")).should(Condition.exist);
-    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    sleep(2000);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).exists();
-    assertEquals("All", ELEMENT_EVENT_CATEGORY.getText());
-    assertEquals("All day", $(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
-    assertEquals("Location", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("Enter a location for this event", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
-    info("Date From is" + date);
-    assertEquals(date, $(byXpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[1]")).getValue());
-    info("Date To is" + date);
-    assertEquals(date, $(byXpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[2]")).getValue());
-    $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
-    $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
-    $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
-    $(byXpath("//textarea[@placeholder='Add a description']")).exists();
-    assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
-    assertEquals("Save", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
-    assertEquals("Cancel", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
-    $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
+    eventManagement.checkEventPopUp(date);
     for (int i = 0; i <= 11; i++) {
       $(By.className("attachFile")).uploadFromClasspath(uploadedFile);
     }
-    sleep(Configuration.timeout);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).dragAndDropTo($(byXpath("//div[@title=\"eXo-Platform.png_________\"]")));
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).waitUntil(Condition.visible,2000).dragAndDropTo($(byXpath("//div[@title=\"eXo-Platform.png_________\"]")));
     $(byXpath("//div[@title='${uploadedFile}']".replace("${uploadedFile}", uploadedFile))).exists();
     $(byXpath("//div[@title='${uploadedFile}']".replace("${uploadedFile}", uploadedFile + "_"))).exists();
     $(byXpath("//div[@title='${uploadedFile}']".replace("${uploadedFile}", uploadedFile + "__"))).exists();
@@ -505,8 +360,7 @@ public class CalendarImproveCreateEvent extends Base {
     $(By.className("attachFile")).uploadFromClasspath(uploadedFile);
     info("Inability to upload up to 10 files at once.");
     $(byXpath("//div[contains(text(),'You can only upload up to 10 files at once.')]")).exists();
-    sleep(2000);
-    ELEMENT_EVENT_TITLE_DRAWER.setValue(event);
+    ELEMENT_EVENT_TITLE_DRAWER.waitUntil(Condition.visible,2000).setValue(event);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(event,
             CalendarHomePage.selectViewOption.DAY,
@@ -533,39 +387,15 @@ public class CalendarImproveCreateEvent extends Base {
     calendarManagement.saveSetting();
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT), Condition.visible, 1000);
     eventManagement.goToAddEventFromActionBar();
-    switchTo().activeElement();
-    $(byText("Add Event")).should(Condition.exist);
-    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    sleep(2000);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).exists();
-    assertEquals("All", ELEMENT_EVENT_CATEGORY.getText());
-    assertEquals("All day", $(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
-    assertEquals("Location", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("Enter a location for this event", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
-    info("Date From is" + date);
-    assertEquals(date, $(byXpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[1]")).getValue());
-    info("Date To is" + date);
-    assertEquals(date, $(byXpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[2]")).getValue());
-    $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
-    $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
-    $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
-    $(byXpath("//textarea[@placeholder='Add a description']")).exists();
-    assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
-    assertEquals("Save", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
-    assertEquals("Cancel", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
-    $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
-    sleep(Configuration.timeout);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).dragAndDropTo($(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")));
+    eventManagement.checkEventPopUp(date);
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).waitUntil(Condition.visible,2000).dragAndDropTo($(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")));
     $(By.className("attachFile")).uploadFromClasspath(longName);
     Assert.assertEquals("Attached file name is not " + longName, $(byXpath("//div[@class=\"info\"]/div[@title]")).getText(), longName);
     $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).waitUntil(Condition.visible, 2000).click();
     $(By.className("attachFile")).uploadFromClasspath(bigSizePhoto);
     info("Inability to upload a file with size more than 10 MB");
     $(byXpath("//div[contains(text(),'File size exceeds the 10 MB limit.')]")).exists();
-    sleep(2000);
-    ELEMENT_EVENT_TITLE_DRAWER.setValue(event);
+    ELEMENT_EVENT_TITLE_DRAWER.waitUntil(Condition.visible,2000).setValue(event);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(event,
             CalendarHomePage.selectViewOption.DAY,
@@ -580,26 +410,12 @@ public class CalendarImproveCreateEvent extends Base {
   @Test
   public void test16_CheckBehaviorWhenDisableRepeatButtonFromYesToNo() {
     //21517
+    String pattern = "MM-dd-yyyy";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    switchTo().activeElement();
-    $(byText("Add Event")).should(Condition.exist);
-    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    sleep(2000);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).exists();
-    assertEquals("All", ELEMENT_EVENT_CATEGORY.getText());
-    assertEquals("All day", $(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
-    assertEquals("Location", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("Enter a location for this event", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
-    $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
-    $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
-    $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
-    $(byXpath("//textarea[@placeholder='Add a description']")).exists();
-    assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
-    assertEquals("Save", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
-    assertEquals("Cancel", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
+    eventManagement.checkEventPopUp(date);
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_REPEAT_PREFERRENCE_IMPROVE_POPUP.waitUntil(Condition.appear, Configuration.timeout);
     eventManagement.inputRecurringInfoEvent(EventManagement.repeatType.Daily,
@@ -607,12 +423,10 @@ public class CalendarImproveCreateEvent extends Base {
             null,
             EventManagement.repeatEndType.After,
             "5");
-    sleep(2000);
-    $(ELEMENT_SAVE_EVENT_OCCURRING).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_SAVE_EVENT_OCCURRING).waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
     ELEMENT_REPEAT_LABEL.waitUntil(Condition.text("Repeat"), Configuration.timeout);
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).waitUntil(Condition.visible, Configuration.timeout).click();
-    sleep(2000);
-    $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
     ELEMENT_REPEAT_PREFERRENCE_IMPROVE_POPUP.waitUntil(Condition.appear, Configuration.timeout);
     $(byText("Recurring Event")).waitUntil(Condition.exist, Configuration.timeout);
     ELEMENT_EVENT_CANCEL_BUTTON.click();
@@ -646,29 +460,9 @@ public class CalendarImproveCreateEvent extends Base {
     calendarManagement.saveSetting();
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT), Condition.visible, 1000);
     eventManagement.goToAddEventFromActionBar();
-    switchTo().activeElement();
-    $(byText("Add Event")).should(Condition.exist);
-    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    sleep(2000);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).exists();
-    assertEquals("All", ELEMENT_EVENT_CATEGORY.getText());
-    assertEquals("All day", $(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
-    assertEquals("Location", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("Enter a location for this event", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
-    info("Date From is" + date);
-    assertEquals(date, $(byXpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[1]")).getValue());
-    info("Date To is" + date);
-    assertEquals(date, $(byXpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[2]")).getValue());
-    $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
-    $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
-    $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
-    $(byXpath("//textarea[@placeholder='Add a description']")).exists();
-    assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
-    assertEquals("Save", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
-    assertEquals("Cancel", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
+    eventManagement.checkEventPopUp(date);
     info("Press on ESC button");
+    ELEMENT_EVENT_ADD_PARTICIPANT.waitUntil(Condition.visible,2000);
     ELEMENT_EVENT_ADD_PARTICIPANT.sendKeys(Keys.ESCAPE);
     info("The Create Event drawer is closed automatically");
   }
@@ -686,31 +480,10 @@ public class CalendarImproveCreateEvent extends Base {
     calendarManagement.saveSetting();
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT), Condition.visible, 1000);
     eventManagement.goToAddEventFromActionBar();
-    switchTo().activeElement();
-    $(byText("Add Event")).should(Condition.exist);
-    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    sleep(2000);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).exists();
-    assertEquals("All", ELEMENT_EVENT_CATEGORY.getText());
-    assertEquals("All day", $(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
-    assertEquals("Location", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("Enter a location for this event", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
-    info("Date From is" + date);
-    assertEquals(date, $(byXpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[1]")).getValue());
-    info("Date To is" + date);
-    assertEquals(date, $(byXpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[2]")).getValue());
-    $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
-    $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
-    $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
-    $(byXpath("//textarea[@placeholder='Add a description']")).exists();
-    assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
-    assertEquals("Save", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
-    assertEquals("Cancel", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
-    sleep(2000);
-    ELEMENT_EVENT_TITLE_DRAWER.setValue(eventTitle);
+    eventManagement.checkEventPopUp(date);
+    ELEMENT_EVENT_TITLE_DRAWER.waitUntil(Condition.visible,2000).setValue(eventTitle);
     info("Press on ESC button");
+    ELEMENT_EVENT_ADD_PARTICIPANT.waitUntil(Condition.visible,2000);
     ELEMENT_EVENT_ADD_PARTICIPANT.sendKeys(Keys.ESCAPE);
     info("A popUp Confirm Close is displayed");
     $(byXpath("//div[@id='confirmClose']")).exists();
@@ -733,34 +506,12 @@ public class CalendarImproveCreateEvent extends Base {
     calendarManagement.saveSetting();
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT), Condition.visible, 1000);
     eventManagement.goToAddEventFromActionBar();
-    switchTo().activeElement();
-    $(byText("Add Event")).should(Condition.exist);
-    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    sleep(2000);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).exists();
-    assertEquals("All", ELEMENT_EVENT_CATEGORY.getText());
-    assertEquals("All day", $(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
-    assertEquals("Location", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("Enter a location for this event", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
-    info("Date From is" + date);
-    assertEquals(date, $(byXpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[1]")).getValue());
-    info("Date To is" + date);
-    assertEquals(date, $(byXpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[2]")).getValue());
-    $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
-    $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
-    $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
-    $(byXpath("//textarea[@placeholder='Add a description']")).exists();
-    assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
-    assertEquals("Save", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
-    assertEquals("Cancel", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
+    eventManagement.checkEventPopUp(date);
     info("Add event");
     ELEMENT_EVENT_TITLE_DRAWER.setValue(eventTitle);
     ELEMENT_EVENT_ADD_PARTICIPANT.setValue(PLFData.DATA_NAME_USER1).waitUntil(Condition.visible, Configuration.timeout).click();
-    sleep(2000);
+    ELEMENT_EVENT_ADD_PARTICIPANT.waitUntil(Condition.visible,2000);
     ELEMENT_EVENT_ADD_PARTICIPANT.sendKeys(Keys.ENTER);
-    sleep(Configuration.timeout);
     $(byXpath("//div[@class='item' and text()='${participantName}']".replace("${participantName}", PLFData.DATA_NAME_USER1))).exists();
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(eventTitle,
@@ -770,49 +521,22 @@ public class CalendarImproveCreateEvent extends Base {
             CalendarHomePage.selectViewOption.WEEK,
             CalendarHomePage.selectDayOption.DETAILTIME,
             getDate(0, "MMM dd yyyy"));
-    $(byText("Edit Event")).should(Condition.exist);
-    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    sleep(2000);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).exists();
-    assertEquals("All", ELEMENT_EVENT_CATEGORY.getText());
-    assertEquals("All day", $(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
-    assertEquals("Location", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("Enter a location for this event", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
-    info("Date From is" + date);
-    assertEquals(date, $(byXpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[1]")).getValue());
-    info("Date To is" + date);
-    assertEquals(date, $(byXpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[2]")).getValue());
-    $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
-    $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
-    $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
-    $(byXpath("//textarea[@placeholder='Add a description']")).exists();
-    info("Close Edit Event Button exists");
-    $(byXpath("//div[@id='ExoCalendarEventForm']//div/a[@class='closebtn']")).exists();
-    assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
-    assertEquals("Save", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
-    assertEquals("Cancel", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
+    eventManagement.checkEventPopUp(date);
     ELEMENT_EVENT_TITLE_DRAWER.setValue(eventTitle2);
     ELEMENT_EVENT_CLEAR_BUTTON.click();
-    sleep(2000);
     Assert.assertEquals("Event Title is not " + eventTitle, $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getValue(), eventTitle);
     info("Remove the title of event");
     ELEMENT_EVENT_TITLE_DRAWER.clear();
-    sleep(2000);
     info("Button Save is disabled");
     $(byXpath("//div[@class='uiAction']/button[@disabled='disabled']")).exists();
     ELEMENT_EVENT_CLEAR_BUTTON.click();
-    sleep(2000);
-    ELEMENT_EVENT_TITLE_DRAWER.setValue(eventTitle2);
-    sleep(2000);
+    ELEMENT_EVENT_TITLE_DRAWER.waitUntil(Condition.visible,2000).setValue(eventTitle2);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(eventTitle2,
             CalendarHomePage.selectViewOption.LIST,
             CalendarHomePage.selectDayOption.DETAILTIME);
     info("Clear data");
     homePagePlatform.goToCalendarPage();
-    sleep(2000);
     calendarHomePage.deleteEventTask(eventTitle2,
             CalendarHomePage.selectViewOption.LIST,
             CalendarHomePage.selectDayOption.DETAILTIME,
@@ -838,34 +562,12 @@ public class CalendarImproveCreateEvent extends Base {
     calendarManagement.saveSetting();
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT), Condition.visible, 1000);
     eventManagement.goToAddEventFromActionBar();
-    switchTo().activeElement();
-    $(byText("Add Event")).should(Condition.exist);
-    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    sleep(2000);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).exists();
-    assertEquals("All", ELEMENT_EVENT_CATEGORY.getText());
-    assertEquals("All day", $(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
-    assertEquals("Location", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("Enter a location for this event", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
-    info("Date From is" + date);
-    assertEquals(date, $(byXpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[1]")).getValue());
-    info("Date To is" + date);
-    assertEquals(date, $(byXpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label' and text()='From']/following::input[@class='date'])[2]")).getValue());
-    $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
-    $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
-    $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
-    $(byXpath("//textarea[@placeholder='Add a description']")).exists();
-    assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
-    assertEquals("Save", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
-    assertEquals("Cancel", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
+    eventManagement.checkEventPopUp(date);
     info("Add event");
     ELEMENT_EVENT_TITLE_DRAWER.setValue(eventTitle);
     ELEMENT_EVENT_ADD_PARTICIPANT.setValue(PLFData.DATA_NAME_USER1).waitUntil(Condition.visible, Configuration.timeout).click();
-    sleep(2000);
+    ELEMENT_EVENT_ADD_PARTICIPANT.waitUntil(Condition.visible,2000);
     ELEMENT_EVENT_ADD_PARTICIPANT.sendKeys(Keys.ENTER);
-    sleep(Configuration.timeout);
     $(byXpath("//div[@class='item' and text()='${participantName}']".replace("${participantName}", PLFData.DATA_NAME_USER1))).exists();
     ELEMENT_EVENT_CATEGORY.selectOption(eventCategory);
     ELEMENT_EVENT_LOCATION.setValue(eventLocation);
@@ -883,7 +585,7 @@ public class CalendarImproveCreateEvent extends Base {
     assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
     assertEquals(eventTitle, ELEMENT_EVENT_DRAWER_TITLE.getValue());
     assertEquals(eventCategory, ELEMENT_EVENT_CATEGORY.getText());
-    assertEquals(PLFData.DATA_NAME_USER1, $(byXpath("//input[@placeholder='Participants']/following::div[@class='item' and text()='${participant}']".replace("${participant}", PLFData.DATA_NAME_USER1))).getText().split("\n")[0]);
+    $(byXpath("//div[@class='item' and text()='${participantName}']".replace("${participantName}", PLFData.DATA_NAME_USER1))).exists();
     assertEquals(eventLocation, ELEMENT_EVENT_LOCATION.getValue());
     assertEquals(eventDescription, ELEMENT_EVENT_DESCRIPTION.getValue());
     $(byXpath("//div[@title='${uploadedFile}']".replace("${uploadedFile}", uploadedFile))).exists();
