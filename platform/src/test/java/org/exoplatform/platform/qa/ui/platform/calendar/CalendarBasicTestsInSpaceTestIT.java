@@ -23,6 +23,9 @@ import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by ilyes on 08/11/17.
  */
@@ -58,6 +61,9 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
   public void test01_AddEventInSpace() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String contentEvent = "contentEvent" + getRandomNumber();
+    String pattern = "MM-dd-yyyy";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    String date = simpleDateFormat.format(new Date());
     String space = "space" + getRandomNumber();
     info("Create a space");
     homePagePlatform.goToMySpaces();
@@ -68,18 +74,7 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT),Condition.visible,1000);
     executeJavaScript("window.scrollBy(0,-2000)", "");
     eventManagement.goToAddEventFromActionBar();
-    switchTo().activeElement();
-    $(byText("Add Event")).should(Condition.exist);
-    assertEquals("Event title",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    sleep(2000);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).exists();
-    assertEquals("All day",$(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
-    assertEquals("Location",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
-    assertEquals("Enter a location for this event",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));
-    assertEquals("Participants",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
-    assertEquals("Clear",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
-    assertEquals("Save",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
-    assertEquals("Cancel",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
+    eventManagement.checkEventPopUp(date);
     info("Add event");
     ELEMENT_EVENT_TITLE_DRAWER.setValue(titleEvent);
     eventManagement.saveQuickAddEvent();
