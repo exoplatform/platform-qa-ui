@@ -27,13 +27,18 @@ import org.slf4j.LoggerFactory;
  */
 public class Logger {
 
-  public static final org.slf4j.Logger logger = LoggerFactory.getLogger(Logger.class);
+  public static final org.slf4j.Logger logger = LoggerFactory.getLogger("TestLogger");
 
   private Logger() {
 
   }
 
-  public static String log(String message) {
+  /**
+   * Log a message with the format : [ClassName][MethodName] message
+   * @param message
+   * @return
+   */
+  private static String log(String message) {
     Throwable t = new Throwable();
     String logMessage = message;
     StackTraceElement[] elements = t.getStackTrace();
