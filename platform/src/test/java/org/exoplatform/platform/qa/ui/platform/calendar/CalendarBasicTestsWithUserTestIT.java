@@ -3,8 +3,7 @@ package org.exoplatform.platform.qa.ui.platform.calendar;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_BUTTON_EVENT;
-import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_NEXT_RIGHT_LIST_DAY_BUTTON;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_BUTTON_EVENT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
