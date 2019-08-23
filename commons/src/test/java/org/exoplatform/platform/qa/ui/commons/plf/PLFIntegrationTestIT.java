@@ -1,18 +1,14 @@
 package org.exoplatform.platform.qa.ui.commons.plf;
 
+import static com.codeborne.selenide.Condition.visible;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.*;
-import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.context.Smoke;
-import org.junit.jupiter.api.TestInfo;
 
 public class PLFIntegrationTestIT extends Base {
 

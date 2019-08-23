@@ -20,17 +20,14 @@
  */
 package org.exoplatform.platform.qa.ui.commons;
 
-import org.exoplatform.platform.qa.ui.commons.pageobject.Login;
-import org.exoplatform.platform.qa.ui.commons.pageobject.Platform;
-import org.exoplatform.platform.qa.ui.core.context.Smoke;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-
-import static com.codeborne.selenide.Selenide.$;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
+import org.exoplatform.platform.qa.ui.commons.pageobject.Platform;
+import org.exoplatform.platform.qa.ui.core.context.Smoke;
 
 @Tag("login")
 public final class LoginTestIT extends Base {
@@ -52,7 +49,6 @@ public final class LoginTestIT extends Base {
 
   /**
    * Signin with a user that do not exist in the system.
-   *
    * <p>
    * This test should display an error message in the Login Container.
    * </p>
@@ -64,7 +60,7 @@ public final class LoginTestIT extends Base {
     plf.open();
     plf.ensureLicenseIsAccepted().ensureRegisterSoftwareIsSkipped().ensureAccountSetupIsSkipped();
 
-    if (plf.isUserLogged()){
+    if (plf.isUserLogged()) {
       plf.signOut();
     }
 

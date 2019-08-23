@@ -1470,32 +1470,57 @@ public static final By
   // select menu (actvity stream, forum, agenda etc ..)
 
   /**
-   * Get the full space menu zone (avatar, title, menu, ...)
+   * Get the full SpaceMenu Portlet zone (avatar, title, menu, ...)
    */
-  public static final By              ELEMENT_SPACE_MENU = By.id("UISpaceMenu");
+  public static final SelenideElement ELEMENT_SPACE_MENU_PORTLET = $("#UISpaceMenuPortlet");
+
+  /**
+   * Get the list of Space Menu Applications
+   */
+  public static final ElementsCollection ELEMENT_SPACE_MENU_APPLICATIONS = $$("#UISpaceMenuPortlet #spaceMenuTab .item");
 
   /**
    * Get the Space Menu entry for Space Home
    */
-  public static final SelenideElement ELEMENT_SPACE_MENU_HOME = $$("#UISpaceMenu #spaceMenuTab li.item").find(text("Home"));
+  public static final SelenideElement ELEMENT_SPACE_MENU_HOME = ELEMENT_SPACE_MENU_APPLICATIONS.findBy(text("Home"));
 
   public static final By              ELEMENT_SPACE_MENU_ACTIVITY_STREAM                                =
                                                                          By.xpath(".//*[@class='tabName' and contains(text(),' Activity Stream')]");
 
-  public static final By              ELEMENT_SPACE_MENU_AGENDA                                         =
-                                                                By.xpath(".//*[@id='calendar' and contains(text(),'Agenda')]");
+  /**
+   * Get the Space Menu entry for Calendar
+   */
+  public static final SelenideElement ELEMENT_SPACE_MENU_CALENDAR = ELEMENT_SPACE_MENU_APPLICATIONS.findBy(text("Agenda"));
 
-  public static final By              ELEMENT_SPACE_MENU_FORUMS                                         =
-                                                                By.xpath(".//*[@class='tabName' and contains(text(),'Forums')]");
+  /**
+   * Get the Space Menu entry for Forum
+   */
+  public static final SelenideElement ELEMENT_SPACE_MENU_FORUMS = ELEMENT_SPACE_MENU_APPLICATIONS.findBy(text("Forums"));
 
-  public static final By              ELEMENT_SPACE_MENU_WIKI                                           =
-                                                              By.xpath(".//*[@class='tabName' and contains(text(),'Wiki')]");
+  /**
+   * Get the Space Menu entry for Wiki
+   */
+  public static final SelenideElement ELEMENT_SPACE_MENU_WIKI = ELEMENT_SPACE_MENU_APPLICATIONS.findBy(text("Wiki"));
 
-  public static final By              ELEMENT_SPACE_MENU_DOCUMENTS                                      =
-                                                                   By.xpath(".//*[@class='tabName' and contains(text(),'Documents')]");
+  /**
+   * Get the Space Menu entry for Document
+   */
+  public static final SelenideElement ELEMENT_SPACE_MENU_DOCUMENTS = ELEMENT_SPACE_MENU_APPLICATIONS.findBy(text("Documents"));
 
-  public static final By              ELEMENT_SPACE_MENU_SETTINGS                                       =
-                                                                  By.xpath(".//*[@class='tabName' and contains(text(),'Space Settings')]");
+  /**
+   * Get the Space Menu entry for Tasks
+   */
+  public static final SelenideElement ELEMENT_SPACE_MENU_TASKS = ELEMENT_SPACE_MENU_APPLICATIONS.findBy(text("Tasks"));
+
+  /**
+   * Get the Space Menu entry for Members
+   */
+  public static final SelenideElement ELEMENT_SPACE_MENU_MEMBERS = ELEMENT_SPACE_MENU_APPLICATIONS.findBy(text("Members"));
+
+  /**
+   * Get the Space Menu entry for Settings
+   */
+  public static final SelenideElement ELEMENT_SPACE_MENU_SETTINGS = ELEMENT_SPACE_MENU_APPLICATIONS.findBy(text("Space Settings"));
 
   public static final By              ELEMENT_SPACE_MENU_ANSWER                                         =
                                                                 By.xpath(".//*[@class='tabName' and contains(text(),'answer')]");
@@ -2208,9 +2233,22 @@ public static final By
   public static final By              ELEMENT_SPACE_SPACE_SETTINGS_TITLE                                =
                                                                          By.xpath(".//*[@id='UISpaceSettingPortlet']/h3[text()='Space Configuration']");
 
-  // Members tab
-  public static final SelenideElement ELEMENT_SPACE_SETTINGS_MEMBERS_TAB                                =
-                                                                         $(byId("UISpaceMenu")).find(byClassName("uiIconAppmembers"));
+  /**
+   * Get the space member portlet zone
+   */
+  public static final SelenideElement ELEMENT_SPACE_MEMBERS_PORTLET = $("#UIMembersPortlet");
+
+  /**
+   * @deprecacted use ELEMENT_SPACE_MENU_MEMBERS instead
+   */
+  @Deprecated
+  public static final SelenideElement ELEMENT_SPACE_SETTINGS_MEMBERS_TAB                                = ELEMENT_SPACE_MENU_MEMBERS;
+
+  /**
+   * Get the space settings portlet zone
+   */
+  public static final SelenideElement ELEMENT_SPACE_SETTINGS_PORTLET = $("#UISpaceSettingPortlet");
+
 
   public static final SelenideElement ELEMENT_SPACE_SETTINGS_MEMBERS_TAB_IN_SETTING_TAB                 =
                                                                                         $(byId("UISpaceSettingPortlet")).find(byText("Members"));

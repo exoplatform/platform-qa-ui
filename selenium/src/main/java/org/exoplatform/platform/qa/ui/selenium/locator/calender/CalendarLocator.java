@@ -29,6 +29,11 @@ import com.codeborne.selenide.SelenideElement;
 
 public class CalendarLocator {
 
+  /**
+   * Get the full Calendar Portlet zone
+   */
+  public static final SelenideElement ELEMENT_CALENDAR_PORTLET = $("#UICalendarPortlet");
+
   /**************************************************
    * CALENDAR HOME PAGE
    **********************************************************************/

@@ -102,10 +102,11 @@ public class SpaceManagement {
    * @param desc : Space description
    */
   public void addNewSpaceSimple(String name, String desc, int... params) {
+    info("Create the space [" + name + "]");
     ELEMENT_ADDNEWSPACE_BUTTON.click();
     ELEMENT_SPACE_NAME_INPUT.should(appear).setValue(name);
     ELEMENT_SPACE_DESCRIPTION_INPUT.setValue(desc);
-    info("Save all changes");
+    info("Launch space creation");
     ELEMENET_SPACE_CREATE_BUTTON.click();
     ELEMENET_SPACE_CREATE_BUTTON.should(not(exist));
     if ($("#AjaxLoadingMask").isDisplayed()) {
@@ -114,7 +115,9 @@ public class SpaceManagement {
     $("#UISpaceMenuPortlet").
             should(exist).
             find("#UISpaceMenuPortlet .spaceMenuNav h3").
-            should(have(exactText(name)));
+            should(have(exactText(name))).
+            is(visible);
+    info("Space [" + name + "] created and printed");
   }
 
   /**

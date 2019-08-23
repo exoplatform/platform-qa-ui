@@ -20,36 +20,35 @@
  */
 package org.exoplatform.platform.qa.ui.commons.pageobject;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
-import org.exoplatform.platform.qa.ui.core.PLFData;
-import org.openqa.selenium.By;
-
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.error;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_PASSWORD;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME;
+
+import org.openqa.selenium.By;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
+
+import org.exoplatform.platform.qa.ui.core.PLFData;
 
 /**
  * Created by mgreau on 23/01/2017.
  */
 public class Platform {
 
-  public final String URI = "/portal";
+  public final String          URI                 = "/portal";
 
-  public final SelenideElement licenseAgreement = $("#agreement");
+  public final SelenideElement licenseAgreement    = $("#agreement");
 
-  public final SelenideElement registration = $(".plf-registration");
+  public final SelenideElement registration        = $(".plf-registration");
 
-  public final SelenideElement accountSetup = $("#AccountSetup");
+  public final SelenideElement accountSetup        = $("#AccountSetup");
 
-  public final SelenideElement signinContainer = $("div.loginContainer");
+  public final SelenideElement signinContainer     = $("div.loginContainer");
 
   public final SelenideElement signinFailContainer = $("div.signinFail");
 
@@ -58,8 +57,8 @@ public class Platform {
   }
 
   /**
-   * It ensures that, if the license screen appears, the license agreement will
-   * be accepted. If this screen doesn't appear, there is no exception.
+   * It ensures that, if the license screen appears, the license agreement will be
+   * accepted. If this screen doesn't appear, there is no exception.
    */
   public Platform ensureLicenseIsAccepted() {
     boolean alreadySkipped = false;
@@ -77,6 +76,7 @@ public class Platform {
 
   /**
    * Accept the eXo Platform license
+   * 
    * @return Platform page object
    */
   public Platform acceptLicense() {
@@ -88,6 +88,7 @@ public class Platform {
 
   /**
    * Ensure that the Register Software UI is skipped.
+   * 
    * @return Platform page object
    */
   public Platform ensureRegisterSoftwareIsSkipped() {
@@ -120,14 +121,16 @@ public class Platform {
 
   /**
    * Check if Software Registration process is needed
+   * 
    * @return
    */
-  public boolean isNeededSoftwareRegistration () {
+  public boolean isNeededSoftwareRegistration() {
     return registration.exists();
   }
 
   /**
    * Ensure that the Account Setup UI is skipped.
+   * 
    * @return Platform page object
    */
   public Platform ensureAccountSetupIsSkipped() {
@@ -141,6 +144,7 @@ public class Platform {
 
   /**
    * Check if Account Setup process is needed
+   * 
    * @return
    */
   public boolean isNeededAccountSetup() {
@@ -159,9 +163,10 @@ public class Platform {
 
   /**
    * Ensure a user is currently logged-in
+   * 
    * @return Platform page object
    */
-  public Platform ensureUserIsLoggedIn(){
+  public Platform ensureUserIsLoggedIn() {
     if (isUserLogged() == false) {
       return signIn();
     }
@@ -170,14 +175,16 @@ public class Platform {
 
   /**
    * Check if a user is logged-in
+   * 
    * @return
    */
-  public boolean isUserLogged(){
+  public boolean isUserLogged() {
     return $("#UIUserPlatformToolBarPortlet").exists();
   }
 
   /**
    * SignIn with default eXo Root Credentials
+   * 
    * @return Platform page object
    */
   public Platform signIn() {
@@ -201,15 +208,16 @@ public class Platform {
 
   /**
    * Sign-out from eXo Platform
+   * 
    * @return Platform page object
    */
   public Platform signOut() {
     // FIXME: why do we need such sleep ?
-    sleep(Configuration.timeout);
-    $("#UIUserPlatformToolBarPortlet").waitUntil(Condition.visible,Configuration.timeout).click();
+    // sleep(Configuration.timeout);
+    $("#UIUserPlatformToolBarPortlet").waitUntil(Condition.visible, Configuration.timeout).click();
     // FIXME: why do we need such sleep ?
-    sleep(Configuration.timeout);
-    $(".uiIconPLFLogout").waitUntil(Condition.visible,Configuration.timeout).click();
+    // sleep(Configuration.timeout);
+    $(".uiIconPLFLogout").waitUntil(Condition.visible, Configuration.timeout).click();
 
     return this;
   }

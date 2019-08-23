@@ -1,24 +1,20 @@
 package org.exoplatform.platform.qa.ui.commons.plf;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.CollectionCondition.*;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-import com.codeborne.selenide.CollectionCondition;
-import org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 
@@ -114,9 +110,9 @@ public class PLFNavigationLeftNavigationTestIT extends Base {
     // waitForAndGetElement(By.xpath(ELEMENT_RESULT_SEARCH_SPACE.replace("{$space}",
     // space2))).isDisplayed();
 
-//    $(byText(space1)).waitUntil(Condition.appears, Configuration.timeout);
+    // $(byText(space1)).waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_SEARCH_SPACE_RESULTS.filterBy(exactText(space1)).shouldBe(size(1));
-//    $(byText(space2)).waitUntil(Condition.appears, Configuration.timeout);
+    // $(byText(space2)).waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_SEARCH_SPACE_RESULTS.filterBy(exactText(space2)).shouldBe(size(1));
     /*
      * homePagePlatform.goToHomePage(); type(ELEMENT_SEARCH_SPACE, "ah", false);

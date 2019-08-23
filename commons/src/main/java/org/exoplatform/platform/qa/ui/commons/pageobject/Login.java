@@ -20,32 +20,30 @@
  */
 package org.exoplatform.platform.qa.ui.commons.pageobject;
 
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_PASSWORD;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.openqa.selenium.By;
 
 import com.codeborne.selenide.SelenideElement;
 
+import org.exoplatform.platform.qa.ui.core.PLFData;
 
 public class Login {
 
-  public final SelenideElement container = $(By.cssSelector("loginContainer"));
+  public final SelenideElement container           = $(By.cssSelector("loginContainer"));
 
   /** HTML container to display information when the signin action has failed **/
-  public final SelenideElement signinFailContainer = $(By.cssSelector("signinFail"));
+  public final SelenideElement signinFailContainer = $(".signinFail");
 
   public Login() {
   }
 
-
-  public boolean isUserLogged(){
-    return $(byId("UIUserPlatformToolBarPortlet")).exists();
+  public boolean isUserLogged() {
+    return $("#UIUserPlatformToolBarPortlet").exists();
 
   }
 
@@ -70,12 +68,11 @@ public class Login {
     return this;
   }
 
-
   public Login signOut() {
-    sleep(Configuration.timeout);
-    $(byId("UIUserPlatformToolBarPortlet")).waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(Configuration.timeout);
-    $(byClassName("uiIconPLFLogout")).waitUntil(Condition.visible,Configuration.timeout).click();
+    // sleep(Configuration.timeout);
+    $("#UIUserPlatformToolBarPortlet").shouldBe(visible).click();
+    // sleep(Configuration.timeout);
+    $("#UIUserPlatformToolBarPortlet .uiIconPLFLogout").shouldBe(visible).click();
 
     return this;
   }

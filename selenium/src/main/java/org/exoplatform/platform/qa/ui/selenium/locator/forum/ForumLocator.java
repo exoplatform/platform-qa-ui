@@ -29,6 +29,11 @@ import com.codeborne.selenide.SelenideElement;
 
 public class ForumLocator {
 
+  /**
+   * Get forum Portlet
+   */
+  public static final SelenideElement ELEMENT_FORUM_PORTLET = $("#UIForumPortlet");
+
   /***************************************************
    * HOME PAGE
    ************************************************************************/
@@ -262,9 +267,6 @@ public class ForumLocator {
   // Category right click option
   public static final String ELEMENT_FORUM_CONTEXT_MENU_BOOKMARK =
           ".//a[contains(text(),'${name}')]/..//a[contains(.,'Bookmarks')]";
-
-  // Forum/Category portlets
-  public static final By ELEMENT_FORUM_PORTLET = By.id("UIForumPortlet");
 
   public static final String ELEMENT_PORTLET_CONTENT_LINK = ".//*[contains(text(),'${topic}')]";
 

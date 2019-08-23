@@ -9,6 +9,7 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_NAME_USER2;
 
 public class WikiLocators {
 
+  public static final SelenideElement ELEMENT_WIKI_PORTLET = $("#UIWikiPortlet");
     // *====================================================HOME
     // PAGE=================================================================*\\
     public static final SelenideElement WIKI_PORTLET_CONTAINER = $("#myWikiPortlet.UIContainer ");

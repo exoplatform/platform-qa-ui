@@ -12,10 +12,11 @@ import com.codeborne.selenide.SelenideElement;
  * has following parts: 1. Left panel 2. Central panel 3. Right panel
  */
 
-public class TaskManagementLocator {
+public class  TaskManagementLocator {
 
   // LEFT PANEL
   // General
+  public static final SelenideElement ELEMENT_TASK_APPLICATION_PORTLET = $("#taskManagement");
 
   // Task area
   public static final SelenideElement ELEMENT_BUTTON_ADD_TASK                       =

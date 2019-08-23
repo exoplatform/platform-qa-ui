@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.platform.social;
 
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.url;
@@ -110,13 +111,13 @@ public class SOCSpaceManagementTestIT extends Base {
         homePagePlatform.goToMySpaces();
         spaceManagement.addNewSpaceSimple(space, space);
         info("All default portlet is displayed");
-        $(byXpath("//i[@class='uiIconAppSpaceHomePage uiIconDefaultApp']")).should(Condition.exist);
-        $(ELEMENT_SPACE_MENU_AGENDA_PORTLET).should(Condition.exist);
-        $(ELEMENT_SPACE_MENU_DOCUMENT_PORTLET).should(Condition.exist);
-        $(ELEMENT_SPACE_MENU_FORUM_PORTLET).should(Condition.exist);
-        $(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB).should(Condition.exist);
-        $(ELEMENT_SPACE_SPACE_SETTINGS).should(Condition.exist);
-        $(ELEMENT_SPACE_WIKI_TAB).should(Condition.exist);
+        $(byXpath("//i[@class='uiIconAppSpaceHomePage uiIconDefaultApp']")).should(exist);
+        $(ELEMENT_SPACE_MENU_AGENDA_PORTLET).should(exist);
+        $(ELEMENT_SPACE_MENU_DOCUMENT_PORTLET).should(exist);
+        $(ELEMENT_SPACE_MENU_FORUM_PORTLET).should(exist);
+        $(ELEMENT_SPACE_MENU_MEMBERS).should(exist);
+        $(ELEMENT_SPACE_SPACE_SETTINGS).should(exist);
+        $(ELEMENT_SPACE_WIKI_TAB).should(exist);
 
         info("Delete a Space");
         manageLogInOut.signIn(DATA_USER1, "gtngtn");
@@ -147,11 +148,11 @@ public class SOCSpaceManagementTestIT extends Base {
         spaceSettingManagement.goToApplicationTab();
         spaceSettingManagement.addApplication(category, app);
         info("Verify that Application is added to space");
-        if ($(ELEMENT_SPACE_MENU_MORE).is(Condition.exist)) {
-            $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
+        if ($(ELEMENT_SPACE_MENU_MORE).is(exist)) {
+            $(ELEMENT_SPACE_MENU_MORE).waitUntil(appears, Configuration.timeout).click();
           $(byXpath("//div[@class=\"communityContainer\"]/span[text()='${app}']".replace("${app}",app))).exists();
         } else {
-            ELEMENT_SPACE_MENU_TAB.find(byId("Bookmark")).should(Condition.exist);
+            ELEMENT_SPACE_MENU_TAB.find(byId("Bookmark")).should(exist);
         }
         info("Delete the space");
         homePagePlatform.goToMySpaces();
@@ -235,9 +236,9 @@ public class SOCSpaceManagementTestIT extends Base {
     info("All changes are saved");
     homePagePlatform.goToMySpaces();
     spaceManagement.searchSpace(newName, "");
-    $(byXpath(ELEMENT_SPACE_TITLE.replace("${space}", newName))).should(Condition.visible);
-    ELEMENT_SPACES_LIST.find(byText(newName)).parent().parent().find(byText(newDEs)).should(Condition.visible);
-    $(ELEMENT_SPACE_AVATAR_DEFAULT).should(Condition.not(Condition.exist));
+    $(byXpath(ELEMENT_SPACE_TITLE.replace("${space}", newName))).should(visible);
+    ELEMENT_SPACES_LIST.find(byText(newName)).parent().parent().find(byText(newDEs)).should(visible);
+    $(ELEMENT_SPACE_AVATAR_DEFAULT).should(not(exist));
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -267,16 +268,16 @@ public class SOCSpaceManagementTestIT extends Base {
     spaceSettingManagement.addApplication(category, app);
 
     info("Verify that Application is added to space");
-    $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
+    $(ELEMENT_SPACE_MENU_MORE).waitUntil(appears, Configuration.timeout).click();
     sleep(2000);
     executeJavaScript("window.scrollBy(0,200)", "");
     sleep(2000);
     $(byXpath("//div[@class=\"communityContainer\"]/span[text()='${app}']".replace("${app}",app))).exists();
     sleep(2000);
     spaceSettingManagement.removeApplication(app);
-    if($(ELEMENT_SPACE_MENU_MORE).is(Condition.visible))
+    if($(ELEMENT_SPACE_MENU_MORE).is(visible))
       $(ELEMENT_SPACE_MENU_MORE).click();
-    ELEMENT_SPACE_MENU_TAB.find(byId("ForumsStatistic")).shouldNot(Condition.exist);
+    ELEMENT_SPACE_MENU_TAB.find(byId("ForumsStatistic")).shouldNot(exist);
     info("Delete the space");
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space1, false);
@@ -322,13 +323,13 @@ public class SOCSpaceManagementTestIT extends Base {
     spaceManagement.goToActivityStreamTab();
     String urlSpace = url();
     manageLogInOut.signIn(username2, password);
-    homePagePlatform.refreshUntil(ELEMENT_MY_SPACE_LINK_PLF,Condition.visible,1000);
+    homePagePlatform.refreshUntil(ELEMENT_MY_SPACE_LINK_PLF,visible,1000);
     open(urlSpace);
-    homePagePlatform.refreshUntil($(ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE),Condition.visible,1000);
-    $(ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE).should(Condition.visible);
-    $(ELEMENT_SPACE_ACCESS_INFO).shouldHave(Condition.text(mess));
+    homePagePlatform.refreshUntil($(ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE),visible,1000);
+    $(ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE).should(visible);
+    $(ELEMENT_SPACE_ACCESS_INFO).shouldHave(text(mess));
     $(ELEMENT_SPACE_ACCESS_JOIN_BTN).click();
-    $(ELEMENT_SPACE_WIKI_TAB).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_SPACE_WIKI_TAB).waitUntil(visible,Configuration.timeout);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -376,11 +377,11 @@ public class SOCSpaceManagementTestIT extends Base {
     spaceManagement.goToActivityStreamTab();
     String urlSpace = url();
     manageLogInOut.signIn(username2, password);
-    homePagePlatform.refreshUntil(ELEMENT_MY_SPACE_LINK_PLF,Condition.visible,1000);
+    homePagePlatform.refreshUntil(ELEMENT_MY_SPACE_LINK_PLF,visible,1000);
     open(urlSpace);
-    homePagePlatform.refreshUntil($(ELEMENT_SPACE_ACCESS_SPACE_DENIED),Condition.visible,1000);
-    $(ELEMENT_SPACE_ACCESS_SPACE_DENIED).is(Condition.visible);
-    $(ELEMENT_SPACE_ACCESS_SPACE_DENIED_INFO).shouldHave(Condition.text(mess));
+    homePagePlatform.refreshUntil($(ELEMENT_SPACE_ACCESS_SPACE_DENIED),visible,1000);
+    $(ELEMENT_SPACE_ACCESS_SPACE_DENIED).is(visible);
+    $(ELEMENT_SPACE_ACCESS_SPACE_DENIED_INFO).shouldHave(text(mess));
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -427,12 +428,12 @@ public class SOCSpaceManagementTestIT extends Base {
     spaceManagement.goToActivityStreamTab();
     String urlSpace = url();
     manageLogInOut.signIn(username2, password);
-    homePagePlatform.refreshUntil(ELEMENT_MY_SPACE_LINK_PLF,Condition.visible,1000);
+    homePagePlatform.refreshUntil(ELEMENT_MY_SPACE_LINK_PLF,visible,1000);
     open(urlSpace);
-    homePagePlatform.refreshUntil($(ELEMENT_SPACE_ACCESS_SPACE_DENIED),Condition.visible,2000);
-    $(ELEMENT_SPACE_ACCESS_SPACE_DENIED).is(Condition.visible);
+    homePagePlatform.refreshUntil($(ELEMENT_SPACE_ACCESS_SPACE_DENIED),visible,2000);
+    $(ELEMENT_SPACE_ACCESS_SPACE_DENIED).is(visible);
     sleep(2000);
-    $(ELEMENT_SPACE_ACCESS_SPACE_DENIED_INFO).shouldHave(Condition.text(mess));
+    $(ELEMENT_SPACE_ACCESS_SPACE_DENIED_INFO).shouldHave(text(mess));
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -477,14 +478,14 @@ public class SOCSpaceManagementTestIT extends Base {
     spaceManagement.goToActivityStreamTab();
     String urlSpace = url();
     manageLogInOut.signIn(username2, password);
-    homePagePlatform.refreshUntil(ELEMENT_MY_SPACE_LINK_PLF,Condition.visible,1000);
+    homePagePlatform.refreshUntil(ELEMENT_MY_SPACE_LINK_PLF,visible,1000);
     open(urlSpace);
-    homePagePlatform.refreshUntil($(ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE),Condition.visible,1000);
-    $(ELEMENT_SPACE_ACCESS_INFO).shouldHave(Condition.text(mess));
+    homePagePlatform.refreshUntil($(ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE),visible,1000);
+    $(ELEMENT_SPACE_ACCESS_INFO).shouldHave(text(mess));
     $(ELEMENT_ACCOUNT_NAME_LINK).click();
-    $(ELEMENT_SPACE_ACCESS_REQUEST_JOIN_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
-    $(ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE).shouldNot(Condition.visible);
-    $(ELEMENT_SPACE_ACCESS_INFO).shouldNot(Condition.visible);
+    $(ELEMENT_SPACE_ACCESS_REQUEST_JOIN_BTN).waitUntil(visible,Configuration.timeout).click();
+    $(ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE).shouldNot(visible);
+    $(ELEMENT_SPACE_ACCESS_INFO).shouldNot(visible);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -530,7 +531,7 @@ public class SOCSpaceManagementTestIT extends Base {
     wikiManagement.goToSourceEditor();
     sourceTextEditor.addSimplePage(wiki, wiki);
     wikiManagement.saveAddPage();
-    $(byXpath(ELEMENT_TREE_WIKI_NAME.replace("${name}", wiki))).should(Condition.visible);
+    $(byXpath(ELEMENT_TREE_WIKI_NAME.replace("${name}", wiki))).should(visible);
 
     wikiHomePage.goToPermalink();
     String perLink = ELEMENT_WIKI_PERMELINK.getValue();
@@ -541,7 +542,7 @@ public class SOCSpaceManagementTestIT extends Base {
     spaceManagement.acceptAInvitation(space);
     open(perLink);
     refresh();
-    $(byXpath(ELEMENT_WIKI_PAGE_LEFTBOX.replace("${title}", wiki))).should(Condition.visible);
+    $(byXpath(ELEMENT_WIKI_PAGE_LEFTBOX.replace("${title}", wiki))).should(visible);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -585,14 +586,14 @@ public class SOCSpaceManagementTestIT extends Base {
     wikiManagement.goToSourceEditor();
     sourceTextEditor.addSimplePage(wiki, wiki);
     wikiManagement.saveAddPage();
-    $(byXpath(ELEMENT_TREE_WIKI_NAME.replace("${name}", wiki))).should(Condition.visible);
+    $(byXpath(ELEMENT_TREE_WIKI_NAME.replace("${name}", wiki))).should(visible);
 
     wikiHomePage.goToPermalink();
     String perLink = ELEMENT_WIKI_PERMELINK.getValue();
     ELEMENT_BUTTON_CLOSE_PERMALINK.click();
     manageLogInOut.signIn(username2, password);
     open(perLink);
-    homePagePlatform.refreshUntil($(ELEMENT_WIKI_HOME_PAGENOTFOUND),Condition.visible,1000);
+    homePagePlatform.refreshUntil($(ELEMENT_WIKI_HOME_PAGENOTFOUND),visible,1000);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -653,10 +654,10 @@ public class SOCSpaceManagementTestIT extends Base {
         ELEMENT_SPACES_LIST.find(byText(space)).click();
         activityStream.addActivity(activity1, "");
         $(ELEMENT_ACTIVITY_STREAM_TAB).parent().find(byClassName("tabName")).doubleClick();
-        $(byValue(" Activity Stream")).shouldNotBe(Condition.visible);
+        $(byValue(" Activity Stream")).shouldNotBe(visible);
         spaceManagement.goToTaskTab();
         ELEMENT_SPACE_MENU_TAB.find(ELEMENT_TASK_TAB).parent().find(byClassName("tabName")).doubleClick();
-        $(byValue("Tasks")).shouldNotBe(Condition.visible);
+        $(byValue("Tasks")).shouldNotBe(visible);
         manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
         navigationToolbar.goToManageCommunity();
         addUsers.deleteUser(username1);

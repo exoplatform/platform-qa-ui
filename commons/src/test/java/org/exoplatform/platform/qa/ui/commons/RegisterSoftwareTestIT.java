@@ -20,12 +20,13 @@
  */
 package org.exoplatform.platform.qa.ui.commons;
 
-import org.exoplatform.platform.qa.ui.commons.pageobject.Platform;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.exoplatform.platform.qa.ui.commons.pageobject.Platform;
 
 public final class RegisterSoftwareTestIT extends Base {
 
@@ -35,14 +36,15 @@ public final class RegisterSoftwareTestIT extends Base {
   }
 
   /**
-   * Skip Register Software. This test should be executed on a PLF instance
-   * where this feature has not be skipped more than 3 times.
+   * Skip Register Software. This test should be executed on a PLF instance where
+   * this feature has not be skipped more than 3 times.
    */
   @Test
   @Tag("register")
   public void skipRegisterSoftware() {
     Platform platform = new Platform().open();
-    assertTrue("Actions for Register Software not found, Be sure to have a fresh PLF installation.", platform.isNeededSoftwareRegistration());
+    assertTrue("Actions for Register Software not found, Be sure to have a fresh PLF installation.",
+               platform.isNeededSoftwareRegistration());
     platform.ensureRegisterSoftwareIsSkipped();
     assertFalse("Actions for Register Software should not be found.", platform.isNeededSoftwareRegistration());
   }
