@@ -65,9 +65,7 @@ public class TaskAssignInChatTestIT extends Base {
     homePagePlatform.goToChat();
     switchTo().window(1);
     $(byXpath("//input[@placeholder='Filter discussions']")).setValue(PLFData.DATA_USER2);
-    sleep(2000);
-    $(byText(PLFData.DATA_NAME_USER2)).click();
-    sleep(2000);
+    $(byText(PLFData.DATA_NAME_USER2)).waitUntil(Condition.visible,2000).click();
     chatManagement.assignTaskInChat(taskName, PLFData.DATA_USER2);
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byLinkText(taskName)).click();
     switchTo().window(2);

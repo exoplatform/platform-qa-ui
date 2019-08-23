@@ -790,7 +790,6 @@ public class EventManagement {
           info("Check After option");
           evt.check(byId("endAfter"), 2);
           if (occurence != "")
-            // evt.type(ELEMENT_END_AFTER_NUMBER, option[0], true);
             break;
         case ByThisDate:
           info("Check By this date option");
