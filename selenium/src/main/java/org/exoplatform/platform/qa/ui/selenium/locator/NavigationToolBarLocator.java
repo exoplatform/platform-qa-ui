@@ -20,18 +20,46 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.locator;
 
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 
+import org.apache.ecs.xhtml.img;
 import org.openqa.selenium.By;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
 public final class NavigationToolBarLocator {
   // Tool bar
+
+  /**
+   * Get the full Top Bar element
+   */
+  public static final SelenideElement ELEMENT_TOP_TOOLBAR_PORTLET = $("#UIToolbarContainer");
+
+  // Menu - Administration
+  /**
+   * Get Administration menu entry in the Top Bar
+   */
+  public static final SelenideElement ELEMENT_TOP_TOOLBAR_MENU_ADMINISTRATION = ELEMENT_TOP_TOOLBAR_PORTLET.find("#UISetupPlatformToolBarPortlet");
+
   public static final By              ELEMENT_TOOLBAR_ADMINISTRATION                      =
                                                                      By.xpath(".//*[@id='UISetupPlatformToolBarPortlet']//i");
+  // Menu - User
 
+  /**
+   * Get User menu entry in the Top Bar
+   */
+  public static final SelenideElement ELEMENT_TOP_TOOLBAR_MENU_USER = ELEMENT_TOP_TOOLBAR_PORTLET.find("#UIUserPlatformToolBarPortlet");
+
+  /**
+   * Get User logout menu entry in the Top Bar
+   */
+  public static final SelenideElement ELEMENT_TOP_TOOLBAR_MENU_USER_LOGOUT = ELEMENT_TOP_TOOLBAR_MENU_USER.findAll("li").filterBy(text("logout")).first();
+
+
+  // -- others --
   public static final By              ELEMENT_TOOLBAR_THEMELIGHT                          =
                                                                  By.xpath("//*[@class='UIContainer UIToolbarContainer UIToolbarContainerLight']");
 

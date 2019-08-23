@@ -31,6 +31,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
@@ -191,13 +192,25 @@ public class NavigationToolbar {
   }
 
   /**
-   * Open User menu by evt.click on username
+   * Open User menu
    */
-  public void openUserMenu() {
+  public NavigationToolbar openUserMenu() {
     info("--Open User Menu--");
-    evt.waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK);
-    evt.click(ELEMENT_ACCOUNT_NAME_LINK);
+    ELEMENT_TOP_TOOLBAR_PORTLET.exists();
+    ELEMENT_TOP_TOOLBAR_MENU_USER.click();
+    return this;
   }
+
+  /**
+   * Open user menu and logout
+   */
+  public void signOut() {
+    info("--Open User Menu--");
+    openUserMenu();
+    ELEMENT_TOP_TOOLBAR_MENU_USER_LOGOUT.shouldBe(visible).click();
+  }
+
+
 
   /**
    * Go to Adinistration-Content-Site Explorer

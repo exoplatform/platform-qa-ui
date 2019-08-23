@@ -14,6 +14,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.chrono.ChronoLocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,7 +73,8 @@ public class SpaceManagement {
    *                  of confirm msg
    */
   public void deleteSpace(String spaceName, Boolean isVerify) {
-    info("Do delete space");
+    info("Delete space [" + spaceName + "]");
+    Temporal start = LocalDateTime.now();
     searchSpace(spaceName);
     // check if space was found
     ELEMENT_SPACES_LIST.findAll(".spaceBox .spaceTitle a").filterBy(Condition.exactText(spaceName)).shouldHaveSize(1);
@@ -82,6 +89,7 @@ public class SpaceManagement {
 //    ELEMENT_SPACES_LIST.findAll(".spaceBox .spaceTitle a").find(exactText(spaceName)).should(not(exist));
     ELEMENT_SPACES_LIST.findAll(".spaceBox").shouldBe(CollectionCondition.empty);
 
+    info("Space [" + spaceName + "] deleted in " + Duration.between(start, LocalDateTime.now()).toString());
   }
 
   /**
@@ -520,8 +528,10 @@ public class SpaceManagement {
    * @param number
    */
   public void searchSpace(String name, String... number) {
-    info("Waiting my space is shown");
-//    sleep(Configuration.timeout);
+    info("Search space [" + name + "]");
+    Temporal start = LocalDateTime.now();
+
+    //    sleep(Configuration.timeout);
 //    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.appears, Configuration.timeout);
 //    info("Input the space into search text box");
 //    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.visible, Configuration.timeout).setValue(name);
@@ -530,6 +540,7 @@ public class SpaceManagement {
 //    $(ELEMENT_MY_SPACE_SEARCH_BTN).waitUntil(Condition.visible, Configuration.timeout).click();
 
     ELEMENT_MY_SPACE_SEARCH_TEXT.should(exist).setValue(name).sendKeys(Keys.ENTER);
+    info("Space [" + name + "] found in " + Duration.between(start, LocalDateTime.now()).toString());
   }
 
   /**

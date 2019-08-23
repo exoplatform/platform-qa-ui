@@ -23,6 +23,7 @@ package org.exoplatform.platform.qa.ui.commons.pageobject;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.page;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_PASSWORD;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME;
 
@@ -31,6 +32,7 @@ import org.openqa.selenium.By;
 import com.codeborne.selenide.SelenideElement;
 
 import org.exoplatform.platform.qa.ui.core.PLFData;
+import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 
 public class Login {
 
@@ -69,11 +71,11 @@ public class Login {
   }
 
   public Login signOut() {
-    // sleep(Configuration.timeout);
-    $("#UIUserPlatformToolBarPortlet").shouldBe(visible).click();
-    // sleep(Configuration.timeout);
-    $("#UIUserPlatformToolBarPortlet .uiIconPLFLogout").shouldBe(visible).click();
-
+//    // sleep(Configuration.timeout);
+//    $("#UIUserPlatformToolBarPortlet").shouldBe(visible).click();
+//    // sleep(Configuration.timeout);
+//    $("#UIUserPlatformToolBarPortlet .uiIconPLFLogout").shouldBe(visible).click();
+    page(NavigationToolbar.class).signOut();
     return this;
   }
 

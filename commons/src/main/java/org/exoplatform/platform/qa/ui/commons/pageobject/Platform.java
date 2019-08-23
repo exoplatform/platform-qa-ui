@@ -20,20 +20,27 @@
  */
 package org.exoplatform.platform.qa.ui.commons.pageobject;
 
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.page;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.error;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_PASSWORD;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOP_TOOLBAR_PORTLET;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOP_TOOLBAR_MENU_USER;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOP_TOOLBAR_MENU_USER_LOGOUT;
 
 import org.openqa.selenium.By;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
 import org.exoplatform.platform.qa.ui.core.PLFData;
+import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.temporal.Temporal;
 
 /**
  * Created by mgreau on 23/01/2017.
@@ -199,10 +206,12 @@ public class Platform {
    * @return Platform page object
    */
   public Platform signIn(final String user, final String password) {
+    Temporal start = LocalDateTime.now();
     info("Sign in with '" + user + "' username");
     $(ELEMENT_INPUT_USERNAME).setValue(user);
     $(ELEMENT_INPUT_PASSWORD).setValue(password);
     $(".button").click();
+    info("Sign in in " + Duration.between(start, LocalDateTime.now()).toString());
     return this;
   }
 
@@ -212,13 +221,12 @@ public class Platform {
    * @return Platform page object
    */
   public Platform signOut() {
-    // FIXME: why do we need such sleep ?
-    // sleep(Configuration.timeout);
-    $("#UIUserPlatformToolBarPortlet").waitUntil(Condition.visible, Configuration.timeout).click();
-    // FIXME: why do we need such sleep ?
-    // sleep(Configuration.timeout);
-    $(".uiIconPLFLogout").waitUntil(Condition.visible, Configuration.timeout).click();
-
+    Temporal start = LocalDateTime.now();
+    info("Sign out");
+    ELEMENT_TOP_TOOLBAR_PORTLET.exists();
+    ELEMENT_TOP_TOOLBAR_MENU_USER.click();
+    ELEMENT_TOP_TOOLBAR_MENU_USER_LOGOUT.click();
+    info("Sign out in " + Duration.between(start, LocalDateTime.now()).toString());
     return this;
   }
 

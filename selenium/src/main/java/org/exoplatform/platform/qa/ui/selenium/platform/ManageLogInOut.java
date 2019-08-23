@@ -21,16 +21,13 @@
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ManageLogInOutLocator.ELEMENT_SIGN_OUT_LINK;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.temporal.Temporal;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -135,45 +132,14 @@ public class ManageLogInOut {
    * Sign out from intranet
    */
   public void signOut() {
-    homePagePlatform.refreshUntil($(ELEMENT_ACCOUNT_NAME_LINK),Condition.visible,Configuration.timeout);
+    Temporal start = LocalDateTime.now();
     info("Sign out");
-    for (int repeat = 0;; repeat++) {
-      if (repeat > 1) {
-        evt.mouseOverAndClick(ELEMENT_ACCOUNT_NAME_LINK);
-        break;
-      }
-//      sleep(2000);
-      $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.appears, Configuration.timeout).click();
+    ELEMENT_TOP_TOOLBAR_PORTLET.exists();
+    ELEMENT_TOP_TOOLBAR_MENU_USER.click();
+    ELEMENT_TOP_TOOLBAR_MENU_USER_LOGOUT.click();
 
-      if (evt.waitForAndGetElement(ELEMENT_SIGN_OUT_LINK, 5000, 0) != null) {
-//        sleep(2000);
-        info("Element " + ELEMENT_SIGN_OUT_LINK + "... is displayed");
-        break;
-      }
-      info("Retry...[" + repeat + "]");
-      testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-    }
-//    sleep(Configuration.timeout);
-    $(ELEMENT_SIGN_OUT_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+    info("Sign out in " + Duration.between(start, LocalDateTime.now()).toString());
 
-    if (evt.waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK, 2000, 0) != null) {
-      info("Clear cache and reconnect to the package");
-      testBase.getExoWebDriver().getWebDriver().manage().deleteAllCookies();
-      testBase.getExoWebDriver().getWebDriver();
-    }
-
-    if (ExpectedConditions.alertIsPresent() != null) {
-      alt = new ManageAlert(testBase);
-      alt.acceptAlert();
-    }
-    WebElement logOutSucess = evt.waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK, 3000, 0);
-    if (logOutSucess != null) {
-      info("Because issue: in jboss, logout then come back homepage, we have to close IE and init the new one");
-      testBase.getExoWebDriver().getWebDriver().manage().deleteAllCookies();
-      testBase.getExoWebDriver().getWebDriver();
-    } else {
-      info("Logout sucessfully");
-    }
   }
 
   /**

@@ -22,8 +22,7 @@ public class LogoutTestIT extends Base {
   @Tag("smoke")
   public void signOut() {
     // Init instance for signInTest
-    Platform plf = new Platform();
-    plf.open();
+    Platform plf = new Platform().open();
     plf.ensureLicenseIsAccepted().ensureRegisterSoftwareIsSkipped().ensureAccountSetupIsSkipped().ensureUserIsLoggedIn();
 
     assertFalse("User should not be logged anymore!", plf.signOut().isUserLogged());
