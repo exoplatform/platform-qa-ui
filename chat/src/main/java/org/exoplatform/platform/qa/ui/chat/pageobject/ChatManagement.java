@@ -55,22 +55,18 @@ public class ChatManagement {
 
   public void assignTaskInChat(String taskName, String... user) {
 
-    ELEMENT_COLLABORATION_ACTIONS.click();
+    ELEMENT_COLLABORATION_ACTIONS.waitUntil(Condition.visible,2000).click();
     $(byXpath("//div[@class='apps-item-icon']/i[@class='uiIconChatCreateTask']")).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_CHAT_TASK_NAME).setValue(taskName);
     for (int i = 0; i <= user.length - 1; i++) {
       ELEMENT_CHAT_ASSIGNEE_TASK.setValue(user[i]);
       sleep(Configuration.collectionsTimeout);
       ELEMENT_CHAT_RESULT_SEARCH_ASSIGNEE.waitUntil(Condition.visible, Configuration.timeout);
-      sleep(2000);
-      ELEMENT_CHAT_ASSIGNEE_TASK.pressEnter();
+      ELEMENT_CHAT_ASSIGNEE_TASK.waitUntil(Condition.visible,2000).pressEnter();
     }
-    sleep(2000);
-    ELEMENT_CHAT_DUE_DATE_TASK.click();
-    sleep(2000);
-    ELEMENT_CHAT_CURRENT_DATE_TASK.click();
-    sleep(2000);
-    ELEMENT_CHAT_POST_TASK_BUTTON.click();
+    ELEMENT_CHAT_DUE_DATE_TASK.waitUntil(Condition.visible,2000).click();
+    ELEMENT_CHAT_CURRENT_DATE_TASK.waitUntil(Condition.visible,2000).click();
+    ELEMENT_CHAT_POST_TASK_BUTTON.waitUntil(Condition.visible,2000).click();
     sleep(2000);
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byLinkText(taskName)).shouldBe(Condition.visible);
   }
