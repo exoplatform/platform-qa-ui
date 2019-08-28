@@ -14,6 +14,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -106,17 +107,17 @@ public class ForumSettingsTestIT extends Base {
     info("Test 2: User management");
 
     homePagePlatform.goToForum();
-    $(ELEMENT_ACTIONBAR_USER).click();
-    $(ELEMENT_FORUM_USERS_POPUP_SEARCH_FIELD).setValue(DATA_USER2).pressEnter();
-    ELEMENT_FORUM_EDIT_PROFILE.click();
+    $(ELEMENT_ACTIONBAR_USER).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_FORUM_USERS_POPUP_SEARCH_FIELD).waitUntil(Condition.visible,2000).setValue(DATA_USER2).waitUntil(Condition.visible,2000).pressEnter();
+    ELEMENT_FORUM_EDIT_PROFILE.waitUntil(Condition.visible, Configuration.timeout).click();
     $(ELEMENT_FORUM_SETTINGS_SCREENNAME);
-    $(ELEMENT_FORUM_USERS_FORUMSETTINGS).click();
+    $(ELEMENT_FORUM_USERS_FORUMSETTINGS).waitUntil(Condition.visible,2000).click();
     select(ELEMENT_FORUM_SETTINGS_MAXTHREADS, "5", 2);
-    $(ELEMENT_FORUM_USERS_BAN).click();
-    $(ELEMENT_FORUM_USERS_TOPICS).click();
-    $(ELEMENT_FORUM_USERS_POSTS).click();
-    $(ELEMENT_FORUM_SETTINGS_SAVE).click();
-    $(ELEMENT_FORUM_CLOSEBTN).click();
+    $(ELEMENT_FORUM_USERS_BAN).waitUntil(Condition.visible,2000).click();
+    $(ELEMENT_FORUM_USERS_TOPICS).waitUntil(Condition.visible,2000).click();
+    $(ELEMENT_FORUM_USERS_POSTS).waitUntil(Condition.visible,2000).click();
+    $(ELEMENT_FORUM_SETTINGS_SAVE).waitUntil(Condition.visible,2000).click();
+    $(ELEMENT_FORUM_CLOSEBTN).waitUntil(Condition.visible,2000).click();
 
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.goToForum();

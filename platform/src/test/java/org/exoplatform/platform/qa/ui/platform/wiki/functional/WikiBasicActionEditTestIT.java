@@ -1194,6 +1194,7 @@ public class WikiBasicActionEditTestIT extends Base {
      * - Web page link is changed succesfully
      */
     @Test
+    @Tag("wabisi")
     public void test09_AddWebPage() {
         info("Test 9: Add web page");
         info("Create a wiki page 1");
@@ -1268,7 +1269,7 @@ public class WikiBasicActionEditTestIT extends Base {
      * Content of wiki page link is shown
      */
     @Test
-    @Tag("wabis")
+    @Tag("wabisi")
     public void test10_EditWikiPageLink() {
         info("Test 10 Edit wiki page link");
         info("Create a wiki page 1");
@@ -1368,7 +1369,7 @@ public class WikiBasicActionEditTestIT extends Base {
      * - The Launch Application is shown that allows selecting an email app to be redirected to the email
      */
     @Test
-    @Tag("wabis")
+    @Tag("wabisi")
     public void test11_EditEmailAddress() {
         info("Test 11 Edit email address");
         info("Create a wiki page with email address");

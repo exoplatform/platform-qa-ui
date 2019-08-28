@@ -307,6 +307,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
   }
 
   @Test
+  @Tag("wikis")
   public void test09_MovePageInSameSpace() {
     info("Test 09 Move page in same space");
 

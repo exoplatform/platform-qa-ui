@@ -22,6 +22,8 @@ import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.platform.ecms.ECMS_Permission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
+import java.util.concurrent.locks.AbstractQueuedSynchronizer;
+
 public class ContentAdministration {
 
   private final TestBase       testBase;
@@ -189,7 +191,7 @@ public class ContentAdministration {
     } else {
       ecmsPerm.selectGroupMembershipOfTag(perm[0], perm[1]);
     }
-    $(ELEMENT_ECM_EXPLORER_ADD_PERMISSION_FORM).click();
+    $(ELEMENT_ECM_EXPLORER_ADD_PERMISSION_FORM).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_ECM_EXPLORER_SAVE_FORM_ADD_VIEW).click();
   }
 
@@ -292,7 +294,7 @@ public class ContentAdministration {
    */
   public void editDrives(String name, specificView[] applyViews, String... views) {
     executeJavaScript("window.scrollBy(0,-250);");
-    $(byText(name)).parent().parent().find(byClassName("uiIconEditInfo")).click();
+    $(byText(name)).parent().parent().waitUntil(Condition.visible,2000).find(byClassName("uiIconEditInfo")).waitUntil(Condition.visible,2000).click();
     ELEMENT_ECM_EXPLORER_APPLY_VIEWS_FORM_EDIT.click();
     $(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ADMIN).click();
     evt.uncheck(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_CATEGORIES, 2);
@@ -632,7 +634,7 @@ public class ContentAdministration {
    */
   public void addScripts(String name, String content, String script) {
     info("Add a script");
-    $(ELEMENT_ECM_ADVANCED_SCRIPT_ADD_SCRIPT).click();
+    $(ELEMENT_ECM_ADVANCED_SCRIPT_ADD_SCRIPT).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Type a name for the script");
     $(ELEMENT_ECM_ADVANCED_SCRIPT_NAME_FORM).setValue(name);
     if (!script.isEmpty()) {
@@ -644,7 +646,7 @@ public class ContentAdministration {
       $(ELEMENT_ECM_ADVANCED_SCRIPT_CONTENT_FORM).setValue(content);
     }
     info("Save all changes");
-    $(ELEMENT_ECM_ADVANCED_SCRIPT_SAVE_FORM).click();
+    $(ELEMENT_ECM_ADVANCED_SCRIPT_SAVE_FORM).waitUntil(Condition.visible,2000).click();
     info("Finish adding the script");
     $(byXpath(ELEMENT_ECM_ADVANCED_SCRIPT_LIST.replace("{$name}", name))).waitUntil(Condition.visible,Configuration.timeout);
   }
@@ -918,9 +920,9 @@ public class ContentAdministration {
    * @param content
    */
   public void addTemplateInList(String name, String nameTemplate, String content) {
-    $(ELEMENT_ECM_TEMPLATES_LIST_ADD_LIST).click();
+    $(ELEMENT_ECM_TEMPLATES_LIST_ADD_LIST).waitUntil(Condition.visible,2000).click();
     $(ELEMENT_ECM_TEMPLATES_LIST_TEMPLATE_NAME_FORM).setValue(nameTemplate);
-    $(ELEMENT_ECM_TEMPLATES_LIST_NAME_FORM).setValue(name);
+    $(ELEMENT_ECM_TEMPLATES_LIST_NAME_FORM).waitUntil(Condition.visible,2000).setValue(name);
     $(ELEMENT_ECM_TEMPLATES_LIST_CONTENT_FORM).setValue(content);
     $(ELEMENT_ECM_TEMPLATES_LIST_SAVE_FORM).click();
     $(ELEMENT_ECM_TEMPLATES_LIST_SAVE_FORM).waitUntil(Condition.not(Condition.visible), Configuration.timeout);

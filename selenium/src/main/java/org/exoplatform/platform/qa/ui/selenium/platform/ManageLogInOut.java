@@ -87,10 +87,8 @@ public class ManageLogInOut {
       }
     } else {
       info("login normally if not use SSO with user " + username + " and pass " + password);
-      sleep(Configuration.timeout);
-      $(ELEMENT_INPUT_USERNAME).setValue(username);
-      sleep(2000);
-      $(ELEMENT_INPUT_PASSWORD).setValue(password);
+      $(ELEMENT_INPUT_USERNAME).waitUntil(Condition.visible,Configuration.collectionsTimeout).setValue(username);
+      $(ELEMENT_INPUT_PASSWORD).waitUntil(Condition.visible,Configuration.timeout).setValue(password);
       sleep(2000);
       evt.clickByJavascript(ManageLogInOutLocator.ELEMENT_SIGN_IN_BUTTON, 2);
       if (verify)

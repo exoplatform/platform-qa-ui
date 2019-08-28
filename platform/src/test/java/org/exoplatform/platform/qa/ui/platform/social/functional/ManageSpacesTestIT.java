@@ -140,7 +140,7 @@ public class ManageSpacesTestIT extends Base {
                       .find(ELEMENT_DELETESPACE_MANAGE_ICON)
                       .waitUntil(Condition.visible, Configuration.timeout)
                       .click();
-    ELEMENT_SPACEMANAGEMENT_ClOSE_POPUP.click();
+    ELEMENT_SPACEMANAGEMENT_ClOSE_POPUP.waitUntil(Condition.visible,Configuration.timeout).click();
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(spaceNamea, false);
   }
@@ -164,7 +164,7 @@ public class ManageSpacesTestIT extends Base {
     $(byText("Do you confirm the deletion of this space ?")).waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_SPACEMANAGEMENT_CANCEL_POPUP.waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_SPACEMANAGEMENT_POPUP.waitUntil(Condition.visible, Configuration.timeout);
-    ELEMENT_SPACEMANAGEMENT_ClOSE_POPUP.click();
+    ELEMENT_SPACEMANAGEMENT_ClOSE_POPUP.waitUntil(Condition.visible,Configuration.timeout).click();
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(spaceNamea, false);
   }

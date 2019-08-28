@@ -3,7 +3,7 @@ package org.exoplatform.platform.qa.ui.calendar.smoke;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_ADD_EDIT_EVENT_NAME;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
@@ -70,16 +70,14 @@ public class CalendarEventTestIT extends Base {
     calendarManagement.executeActionCalendar(calendar, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     info("Check default date");
     eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
-    eventManagement.inputDataEventInQuickForm(titleEvent,
-                                              contentEvent,
-                                              getDate(0, "MM/dd/yyyy"),
-                                              getDate(0, "MM/dd/yyyy"),
-                                              false);
+    ELEMENT_EVENT_TITLE_DRAWER.waitUntil(Condition.visible,2000).setValue(titleEvent);
+    ELEMENT_EVENT_DESCRIPTION.setValue(contentEvent);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
-                                              CalendarHomePage.selectViewOption.LIST,
-                                              CalendarHomePage.selectDayOption.DETAILTIME);
-
+            CalendarHomePage.selectViewOption.DAY,
+            CalendarHomePage.selectDayOption.DETAILTIME);
+    info("Clear data");
+    homePagePlatform.goToCalendarPage();
     info("Test 15 Delete an Event in personal calendar");
     /*
      * Step Number: 1 Step Name: - Step Description: Step 1: Delete an event Input
@@ -124,11 +122,8 @@ public class CalendarEventTestIT extends Base {
     calendarManagement.executeActionCalendar(calendar, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     info("Check default date");
     eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
-    eventManagement.inputDataEventInQuickForm(titleEvent,
-                                              contentEvent,
-                                              getDate(0, "MM/dd/yyyy"),
-                                              getDate(0, "MM/dd/yyyy"),
-                                              false);
+    ELEMENT_EVENT_TITLE_DRAWER.waitUntil(Condition.visible,2000).setValue(titleEvent);
+    ELEMENT_EVENT_DESCRIPTION.setValue(contentEvent);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
                                               CalendarHomePage.selectViewOption.LIST,
@@ -151,12 +146,8 @@ public class CalendarEventTestIT extends Base {
                                                        CalendarHomePage.selectDayOption.DETAILTIME,
                                                        getDate(0, "MMM dd yyyy"));
     eventManagement.checkSuggestionEventTimeInDetailForm(null, null, 60);
-    eventManagement.inputDataEventInDetailForm(titleEvent2,
-                                               contentEvent2,
-                                               getDate(0, "MM/dd/yyyy"),
-                                               getDate(0, "MM/dd/yyyy"),
-                                               false);
-    $(ELEMENT_ADD_EDIT_EVENT_NAME).click();
+    ELEMENT_EVENT_TITLE_DRAWER.waitUntil(Condition.visible,2000).setValue(titleEvent2);
+    ELEMENT_EVENT_DESCRIPTION.setValue(contentEvent2);
     eventManagement.saveAddEventDetails();
     calendarHomePage.verifyIsPresentEventTask(titleEvent2,
                                               CalendarHomePage.selectViewOption.LIST,
@@ -169,6 +160,7 @@ public class CalendarEventTestIT extends Base {
      * select Delete - Click OK at confirmation message Expected Outcome: - The
      * event is removed normally.
      */
+    homePagePlatform.goToCalendarPage();
     calendarHomePage.deleteEventTask(titleEvent2,
                                      CalendarHomePage.selectViewOption.LIST,
                                      CalendarHomePage.selectDayOption.DETAILTIME,
@@ -205,11 +197,8 @@ public class CalendarEventTestIT extends Base {
     calendarManagement.executeActionCalendar(calendar, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     info("Check default date");
     eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
-    eventManagement.inputDataEventInQuickForm(titleEvent,
-                                              contentEvent,
-                                              getDate(0, "MM/dd/yyyy"),
-                                              getDate(0, "MM/dd/yyyy"),
-                                              false);
+    ELEMENT_EVENT_TITLE_DRAWER.waitUntil(Condition.visible,2000).setValue(titleEvent);
+    ELEMENT_EVENT_DESCRIPTION.setValue(contentEvent);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
                                               CalendarHomePage.selectViewOption.LIST,
@@ -222,6 +211,7 @@ public class CalendarEventTestIT extends Base {
      * select Delete - Click OK at confirmation message Expected Outcome: - The
      * event is removed normally.
      */
+    homePagePlatform.goToCalendarPage();
     calendarHomePage.deleteEventTask(titleEvent,
                                      CalendarHomePage.selectViewOption.LIST,
                                      CalendarHomePage.selectDayOption.DETAILTIME,
@@ -257,19 +247,15 @@ public class CalendarEventTestIT extends Base {
     calendarManagement.executeActionCalendar(calendar, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     info("Check default date");
     eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
-    eventManagement.inputDataEventInQuickForm(titleEvent,
-            contentEvent,
-            getDate(0, "MM/dd/yyyy"),
-            getDate(0, "MM/dd/yyyy"),
-            false);
+    ELEMENT_EVENT_TITLE_DRAWER.waitUntil(Condition.visible,2000).setValue(titleEvent);
+    ELEMENT_EVENT_DESCRIPTION.setValue(contentEvent);
     eventManagement.saveQuickAddEvent();
     $(byText(titleEvent)).should(Condition.exist);
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
             CalendarHomePage.selectViewOption.LIST,
             CalendarHomePage.selectDayOption.DETAILTIME);
-
     info("Test 15 Delete an Event in personal calendar");
-
+    homePagePlatform.goToCalendarPage();
     calendarHomePage.deleteEventTask(titleEvent,
             CalendarHomePage.selectViewOption.LIST,
             CalendarHomePage.selectDayOption.DETAILTIME,

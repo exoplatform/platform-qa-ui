@@ -97,9 +97,9 @@ public class WikiPublishActivityTestIT extends Base {
 
     info("Click on the title of wiki page");
     homePagePlatform.goToHomePage();
-    ELEMENT_ACTIVITY_STREAM_CONTAINER.find(byText(title)).click();
+    ELEMENT_ACTIVITY_STREAM_CONTAINER.waitUntil(Condition.visible,2000).find(byText(title)).waitUntil(Condition.visible,2000).click();
     info("Verify that The wiki application is opened in the correspond page ");
-    ELEMENT_WIKI_PAGE_CONTAINER.find(byText(title)).should(Condition.exist);
+    ELEMENT_WIKI_PAGE_CONTAINER.waitUntil(Condition.visible,2000).find(byText(title)).waitUntil(Condition.visible,2000).should(Condition.exist);
     info("Delete the page");
     homePagePlatform.goToWiki();
     wikiHomePage.deleteWiki(title);
@@ -235,7 +235,7 @@ public class WikiPublishActivityTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
-  @Tag("wabis")
+  @Tag("wikis")
   public void test06_EditWikiPageWithComments() {
     info("Test 06: Update activity - edit wiki page with comments");
 

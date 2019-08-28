@@ -9,6 +9,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -448,7 +449,7 @@ public class ForumTopicTestIT extends Base {
     info("go to Forum home page");
     homePagePlatform.goToForum();
     info("Delete data");
-    $(byText(name)).click();
+    $(byText(name)).waitUntil(Condition.visible, Configuration.timeout).click();
     forumCategoryManagement.deleteCategory(name);
   }
 

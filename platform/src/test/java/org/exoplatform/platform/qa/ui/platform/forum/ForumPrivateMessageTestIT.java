@@ -91,7 +91,6 @@ public class ForumPrivateMessageTestIT extends Base {
     forumHomePage.goToPrivateMessage();
     privateMessageManagement.goComposeMessage();
     privateMessageManagement.writeMessage(contact, title, content);
-    privateMessageManagement.deleteMessage(title, "");
     ELEMENT_CANCEL_PRIVATE_MSG.click();
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
 
@@ -139,10 +138,8 @@ public class ForumPrivateMessageTestIT extends Base {
     forumHomePage.goToPrivateMessage();
     privateMessageManagement.goComposeMessage();
     privateMessageManagement.writeMessage(contact, title, content);
-    privateMessageManagement.deleteMessage(title, "");
     ELEMENT_CANCEL_PRIVATE_MSG.click();
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-
     homePagePlatform.goToForum();
     forumHomePage.goToPrivateMessage();
     privateMessageManagement.checkInboxMessage("", title, content);
@@ -206,8 +203,7 @@ public class ForumPrivateMessageTestIT extends Base {
    */
 
   @Test
-  @Tag("fabis")
-  public void test04elete_AMessage() {
+  public void test04Delete_AMessage() {
     info("Test 3: Forward a message");
 
     String contact = "james";

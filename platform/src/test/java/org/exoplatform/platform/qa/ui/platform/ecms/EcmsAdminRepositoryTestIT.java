@@ -167,6 +167,7 @@ public class EcmsAdminRepositoryTestIT extends Base {
    * Group is removed permission
    */
   @Test
+  @Tag("ecmis")
   public void test05_ManageLock() {
     info("Test 5: Manage lock");
     String title = "title" + getRandomNumber();

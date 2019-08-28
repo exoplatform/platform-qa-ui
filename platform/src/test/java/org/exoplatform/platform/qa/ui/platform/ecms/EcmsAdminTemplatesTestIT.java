@@ -232,6 +232,7 @@ public class EcmsAdminTemplatesTestIT extends Base {
   }
 
   @Test
+  @Tag("ecmis")
   public void test08Edit_ListTemplate() {
     info("Test 7: Add, Edit and Delete List Template");
     String tempName = "tempName" + getRandomNumber();

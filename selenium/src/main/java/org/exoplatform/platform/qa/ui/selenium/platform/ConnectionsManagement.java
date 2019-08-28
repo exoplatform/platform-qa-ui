@@ -239,7 +239,7 @@ public class ConnectionsManagement {
     } else {
       $(ELEMENT_SKILL_OF_PEOPLE).setValue("");
     }
-    $(ELEMENT_SEARCH_BUTTON).click();
+    $(ELEMENT_SEARCH_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
     homePagePlatform.refreshUntil($(byClassName("spaceBox")),Condition.visible,1000);
     if (directory != "" && directory != null)
       $(byLinkText(directory)).click();

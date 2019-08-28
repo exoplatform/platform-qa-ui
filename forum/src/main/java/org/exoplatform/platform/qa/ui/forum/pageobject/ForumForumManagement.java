@@ -49,10 +49,8 @@ public class ForumForumManagement {
   public void addForumSimple(String nameForum, String order, String description) {
     // TODO Auto-generated method stub
     info("Add forum simple");
-
-    $(ELEMENT_ACTIONBAR_ADDFORUM).waitUntil(Condition.appears, Configuration.timeout);
     info("click on Add forum button");
-    $(ELEMENT_ACTIONBAR_ADDFORUM).click();
+    $(ELEMENT_ACTIONBAR_ADDFORUM).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     info("input the title for the forum");
     $(ELEMENT_ADDFORUM_POPUP_TITLE).val(nameForum);
     info("check and input Oder field");

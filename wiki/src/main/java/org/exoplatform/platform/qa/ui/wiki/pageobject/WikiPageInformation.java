@@ -73,9 +73,7 @@ public class WikiPageInformation {
      */
     public void goToPageHistory() {
         info("Click on View page info button");
-        $(ELEMENT_PAGE_INFO_VIEW_PAGE_INFO_BTN).waitUntil(Condition.appears, Configuration.timeout);
-        $(ELEMENT_PAGE_INFO_VIEW_PAGE_INFO_BTN).click();
-
+        $(ELEMENT_PAGE_INFO_VIEW_PAGE_INFO_BTN).waitUntil(Condition.appears, Configuration.timeout).click();
         info("Page history is shown");
         $(ELEMENT_WIKI_PAGE_PAGE_HISTORY_TITLE).waitUntil(Condition.appears, Configuration.timeout);
     }

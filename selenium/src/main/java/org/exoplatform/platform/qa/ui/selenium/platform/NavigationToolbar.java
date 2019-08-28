@@ -214,8 +214,7 @@ public class NavigationToolbar {
     do {
       $(ELEMENT_MENU_CONTENT_LINK).hover();
     } while (!$(ELEMENT_MENU_SITE_EXPLORER).exists());
-    sleep(2000);
-    $(ELEMENT_MENU_SITE_EXPLORER).waitUntil(Condition.visible,2000).click();
+    $(ELEMENT_MENU_SITE_EXPLORER).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Site Explorer is shown successfully");
   }
 
@@ -560,7 +559,7 @@ public class NavigationToolbar {
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, 10000);
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-    ELEMENT_ADMINISTRATION_ADD_USERS.click();
+    ELEMENT_ADMINISTRATION_ADD_USERS.waitUntil(Condition.visible,2000).click();
   }
 
   public void goToManageCommunity() {

@@ -305,7 +305,7 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
      * Page content is correctly displaying 2 images previously displayed
      */
     @Test
-    @Tag("wabis")
+    @Tag("wabisi")
     public void test02_PageSubpageAndAttachmentsShouldBeMovedWithThePage() {
         info("Test 2: Page's sub-pages and attachments should be moved with the page.");
 
@@ -556,7 +556,7 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
      * "Page to move" is moved in the space "Space Destination"
      */
     @Test
-    @Tag("wabis")
+    @Tag("wabisi")
     public void test03_PageSubpageShouldBeMovedWithThePage() {
         info("Test 3: Page's sub-pages should be moved with the page");
 
@@ -824,6 +824,7 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
      * - New Location Path is displaying : Space Destination 2 > Wiki Home
      */
     @Test
+    @Tag("wabisi")
     public void test04_SpaceNamesDisplayedInLocationLabelsShouldBeUserFriendlyAndNotTechnical() {
         info("Test 4: Space names displayed in location labels should be user friendly and not technical");
 

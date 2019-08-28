@@ -159,6 +159,7 @@ public class EcmsSECollaborationTestIT extends Base {
    * Tag cloud of FE
    */
   @Test
+  @Tag("ecmis")
   public void test05_AddATag() {
     info("Test 05: Add a tag");
     String title = "title" + getRandomNumber();
@@ -188,6 +189,7 @@ public class EcmsSECollaborationTestIT extends Base {
   }
 
   @Test
+  @Tag("ecmis")
   public void test06_EditATag() {
     info("Test 05: Add a tag");
     String title = "title" + getRandomNumber();
@@ -217,6 +219,7 @@ public class EcmsSECollaborationTestIT extends Base {
   }
 
   @Test
+  @Tag("ecmis")
   public void test07_DeleteATag() {
     info("Test 05: Add a tag");
     String title = "title" + getRandomNumber();

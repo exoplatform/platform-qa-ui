@@ -107,6 +107,7 @@ public class WikiSearchTestIT extends Base {
    * matches with keyword and selected space
    */
   @Test
+  @Tag("wikis")
   public void test02_AdvancedSearch() {
     info("Test 2: Advanced search");
 
@@ -166,6 +167,7 @@ public class WikiSearchTestIT extends Base {
    */
 
   @Test
+  @Tag("wikis")
   public void test04_SearchTemplate() {
     info("Test 4: Search template");
 

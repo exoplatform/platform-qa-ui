@@ -4,8 +4,8 @@ import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_CONTEXT_MENU_VIEW;
-import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_NEXT_RIGHT_LIST_DAY_BUTTON;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_EVENT_DESCRIPTION;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -144,15 +144,15 @@ public class CALEventEditTestIT extends Base {
     calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.ADDCAL);
     calendarManagement.inputDataInDetailTabCalendarForm(calendar, calendar, null);
     calendarManagement.saveAddCalendar();
-    homePagePlatform.goToCalendarPage();
-    $(byText(calendar)).waitUntil(Condition.appears, 10000);
     info("Add an Event");
     String titleEvent = "titleEvent" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    eventManagement.goToAddEventFromActionBar();
-    eventManagement.inputDataEventInQuickForm(titleEvent, content, null, null, false, calendar);
+    calendarManagement.executeActionCalendar(calendar, CalendarManagement.menuOfCalendarOption.ADDEVENT);
+    info("Check default date");
+    eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
+    ELEMENT_EVENT_TITLE_DRAWER.waitUntil(Condition.visible,2000).setValue(titleEvent);
+    ELEMENT_EVENT_DESCRIPTION.setValue(content);
     eventManagement.saveQuickAddEvent();
-
     /*
      * Step number: 2 Step Name: - Step Description: Step 2: Show form to edit event
      * Input Data: - Select view type - Right click on event that you have edit
@@ -160,7 +160,6 @@ public class CALEventEditTestIT extends Base {
      * form appears with current information of event in form - all events/tasks in
      * list are kept in alphabetical order if they was sorted before
      */
-
     /*
      * Step number: 3 Step Name: - Step Description: Step 3: Edit event Input Data:
      * Do some valid changes and clickSave Expected Outcome: Event is changed and
@@ -168,7 +167,8 @@ public class CALEventEditTestIT extends Base {
      */
     String titleEvent2 = "titleEvent2" + getRandomNumber();
     calendarManagement.openEditEventTaskPopup(titleEvent, CalendarHomePage.selectViewOption.LIST);
-    eventManagement.inputDataEventInDetailForm(titleEvent2, titleEvent2, null, null, false, null, categoryName);
+    ELEMENT_EVENT_TITLE_DRAWER.waitUntil(Condition.visible,2000).setValue(titleEvent2);
+    ELEMENT_EVENT_DESCRIPTION.setValue(titleEvent2);
     eventManagement.saveAddEventDetails();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.LIST);
     if (($(byText(titleEvent2)).is(Condition.not(Condition.exist)))) {

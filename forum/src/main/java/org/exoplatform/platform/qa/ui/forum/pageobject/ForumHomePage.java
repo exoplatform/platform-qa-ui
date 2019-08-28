@@ -341,7 +341,7 @@ public class ForumHomePage {
   public void goToPrivateMessage() {
     // TODO Auto-generated method stub
     info("Click on Private Message button");
-    $(ELEMENT_ACTIONBAR_PRIVATE_MESSAGE).click();
+    $(ELEMENT_ACTIONBAR_PRIVATE_MESSAGE).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
   }
 
   /**

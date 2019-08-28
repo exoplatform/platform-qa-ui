@@ -3,13 +3,16 @@ package org.exoplatform.platform.qa.ui.platform.task;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_CHAT_INPUT_SEARCH_USER;
-import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_CONTAINER_LIST_MESSAGES;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_USER_PROFILE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_USER_RESULT_SEARCH;
+import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_MINI_CHAT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.platform.ConnectionsManagement;
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -55,6 +58,7 @@ public class TaskAssignInChatTestIT extends Base {
   @Tag("TA-609")
   public void test01_checkAssignTaskInChatContainLinkToTaskApp() {
     String taskName = "task" + getRandomNumber();
+    String MiniChatName;
     manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
     homePagePlatform.goToConnections();
     connectionsManagement.connectToAUser(PLFData.DATA_USER2);
@@ -63,11 +67,20 @@ public class TaskAssignInChatTestIT extends Base {
     connectionsManagement.acceptAConnection(PLFData.DATA_USER1);
     manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
     homePagePlatform.goToChat();
+    switchTo().window(0);
+    homePagePlatform.goToPeople();
+    homePagePlatform.searchUsersPeople(PLFData.DATA_USER2);
+    refresh();
+    ELEMENT_USER_RESULT_SEARCH.find(byText(PLFData.DATA_NAME_USER2)).click();
+    ELEMENT_USER_PROFILE.waitUntil(Condition.appear, Configuration.timeout);
+    ELEMENT_CHAT_BUTTON_USER_PROFILE.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    ELEMENT_MINI_CHAT.waitUntil(Condition.appear, Configuration.timeout);
+    MiniChatName = $(byClassName("title-left")).parent().parent().find(byClassName("fullname")).getText();
+    Assert.assertEquals(PLFData.DATA_NAME_USER2, MiniChatName);
+    ELEMENT_MINI_CHAT.find(byClassName("uiIconClose")).click();
     switchTo().window(1);
     $(byXpath("//input[@placeholder='Filter discussions']")).setValue(PLFData.DATA_USER2);
-    sleep(2000);
-    $(byText(PLFData.DATA_NAME_USER2)).click();
-    sleep(2000);
+    $(byText(PLFData.DATA_NAME_USER2)).waitUntil(Condition.visible,2000).click();
     chatManagement.assignTaskInChat(taskName, PLFData.DATA_USER2);
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byLinkText(taskName)).click();
     switchTo().window(2);

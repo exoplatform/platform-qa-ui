@@ -395,13 +395,14 @@ public class EcmsSECreateTestIT extends Base {
    * see containing folder - Files are uploaded successfully
    */
   @Test
+  @Tag("ecmis")
   public void test12_Upload_AFileInIntranetDocument() {
     info("Test 12 Upload a file in Intranet/Document");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     info("Upload a file");
     refresh();
-    siteExplorerHome.uploadFile("data/ecms/eXo-Platform.png");
+    siteExplorerHome.uploadFile("eXo-Platform.png");
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     $(byXpath(ELEMENT_GRID_LIST_CONTENT.replace("${file}", "eXo-Platform.png"))).waitUntil(Condition.visible,
                                                                                            Configuration.timeout);
@@ -449,6 +450,7 @@ public class EcmsSECreateTestIT extends Base {
    * containing folder - Files are uploaded successfully
    */
   @Test
+  @Tag("ecmis")
   public void test13_UploadFileInSpaceDocument() {
     info("Test 13 Upload a file in Space/Document");
     info("Create data test");
@@ -460,7 +462,7 @@ public class EcmsSECreateTestIT extends Base {
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToSpace(spaceName);
     refresh();
-    siteExplorerHome.uploadFile("data/ecms/eXo-Platform.png");
+    siteExplorerHome.uploadFile("eXo-Platform.png");
     $(ELEMENT_ADDRESS_BAR_ICON_VIEW).click();
     $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
     $(byXpath(ELEMENT_SPACE_DRIVE_NODE_TREE_FILE.replace("${file}", "eXo-Platform.png"))).waitUntil(Condition.visible,

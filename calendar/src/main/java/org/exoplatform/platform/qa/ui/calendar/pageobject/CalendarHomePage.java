@@ -129,13 +129,14 @@ public class CalendarHomePage {
     if (date != null && date != "") {
       switch (optionDay) {
         case DETAILTIME:
-          homePagePlatform.refreshUntil(ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name)),Condition.visible,1000);
+          homePagePlatform.refreshUntil(ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name)),Condition.visible,Configuration.timeout);
+          executeJavaScript("window.scrollBy(0,200)", "");
           ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name))
-                  .waitUntil(Condition.appears, Configuration.timeout)
+                  .waitUntil(Condition.appears, Configuration.collectionsTimeout)
                   .contextClick();
           break;
         case ALLDAY:
-          homePagePlatform.refreshUntil(ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name)),Condition.visible,1000);
+          homePagePlatform.refreshUntil(ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name)),Condition.visible,Configuration.timeout);
           ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(name))
                   .waitUntil(Condition.appears, Configuration.timeout)
                   .contextClick();
@@ -222,7 +223,7 @@ public class CalendarHomePage {
         if( $(byId("UIListUsers")).find(byText(name)).is(Condition.not(Condition.visible))){
           ELEMENT_NEXT_RIGHT_LIST_DAY_BUTTON.click();
         }
-        $(ELEMENT_ACCOUNT_NAME_LINK).click();
+        $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible,2000).click();
         $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
         $(byText(name)).waitUntil(Condition.visible,Configuration.timeout).contextClick();
       }

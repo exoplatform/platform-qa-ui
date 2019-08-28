@@ -336,7 +336,6 @@ public class WikiInformationTestIT extends Base {
    */
 
   @Test
-  @Tag("wabis")
   public void test03_ViewHistoryToCompareVersions() {
     info("Test 03: View Page history to compare versions");
     String title = "title" + getRandomNumber();

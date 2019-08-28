@@ -1356,7 +1356,7 @@ public final class SocialLocator {
 
   // Recent activity
   public static final String          ELEMENT_RECENT_ACTIVITY_CONTENT                                   =
-                                                                      "//*[@id='UIRecentActivitiesPortlet']//*[@class='activityCont']/div[${index}]//*[@class='status']/span[contains(text(),'${content}')]";
+                                                                      "//*[@id='UIRecentActivitiesPortlet']//*[@class='activityCont']/div[${index}]//*[@class='status' and contains(text(),'${content}')]";
 
   public static final String          ELEMENT_RECENT_ACTIVITY_NO_CONTENT                                =
                                                                          "//*[@id='UIRecentActivitiesPortlet']//*[contains(text(),'${content}')]";
@@ -1492,7 +1492,7 @@ public static final By
                                                                  By.xpath(".//*[@id='spaceMenuTab']//*[contains(text(),'Home')]");
 
   public static final By              ELEMENT_ACTIVITY_STREAM_TAB                                       =
-                                                                  By.xpath(".//*[contains(@class,'uiIconAppSpaceHomePage')]");
+                                                                  By.xpath(".//*[contains(@class,'uiIconAppSpaceActivityStreamPortlet')]");
 
   public static final By              ELEMENT_FORUM_TAB                                                 =
                                                         By.xpath(".//*[contains(@class,'uiIconAppForumPortlet')]");

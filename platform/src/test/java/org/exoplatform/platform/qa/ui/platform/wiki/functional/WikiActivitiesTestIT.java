@@ -17,9 +17,12 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_WIKI_HOME_TITLE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_WIKI_TAB;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_TITLE_WIKI_INPUT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -136,7 +139,7 @@ public class WikiActivitiesTestIT extends Base {
      */
 
     @Test
-    @Tag("wabis")
+    @Tag("wabisi")
     public void test02_DisplayViewChangesPageFromWikisActivity() {
         info("Test 2: Display View Changes page from wiki's activity");
         info("Create a wiki page");
@@ -280,6 +283,7 @@ public class WikiActivitiesTestIT extends Base {
      */
 
     @Test
+    @Tag("wabisi")
     public void test05_UpdateWikisActivityAfterEditWikiPageWithoutComment() {
         info("Test 5: Update wiki's activity after edit wiki page without comment");
         info("Create a wiki page");
@@ -769,6 +773,7 @@ public class WikiActivitiesTestIT extends Base {
     }
 
     @Test
+    @Tag("wabisi")
     public void test16_CheckLinksActivityStreamAfterRemoveAddWikiApplication() {
         //1448
         String space = "space" + getRandomNumber();
@@ -787,12 +792,15 @@ public class WikiActivitiesTestIT extends Base {
         info("Add application");
         spaceSettingManagement.addApplication(category, app);
         info("Create wiki page");
-        spaceManagement.goToWikiTab();
+        $(byXpath("//i[@class='uiIconAppMoreButton']")).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(ELEMENT_WIKI_TAB).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(ELEMENT_WIKI_HOME_TITLE).waitUntil(Condition.visible, Configuration.timeout);
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(wiki, wiki);
         wikiManagement.saveAddPage();
-        spaceManagement.goToWikiTab();
-        wikiHomePage.goToEditPage();
+        $(byXpath("//i[@class='uiIconAppMoreButton']")).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(ELEMENT_WIKI_TAB).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(ELEMENT_WIKI_HOME_TITLE).waitUntil(Condition.visible, Configuration.timeout);        wikiHomePage.goToEditPage();
         richTextEditor.editSimplePage(newTitle, newTitle);
         wikiManagement.publishPageWhenEditPage();
         wikiManagement.saveAddPage();

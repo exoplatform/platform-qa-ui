@@ -653,7 +653,7 @@ public class ActivityStream {
         info("-- Editing an activity--");
         String idActivity = $(byText(text)).parent().parent().parent().getAttribute("id").split("ActivityContextBox")[1];
         $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).click();
-        $(byId(ELEMENT_EDIT_ACTIVITY_LINK.replace("{id}", idActivity))).click();
+        $(byId(ELEMENT_EDIT_ACTIVITY_LINK.replace("{id}", idActivity))).waitUntil(Condition.visible,2000).click();
         SelenideElement frame = $(byAttribute("title",
                 "Rich Text Editor, composerEditInput" + idActivity)).waitUntil(Condition.visible,
                 Configuration.timeout);

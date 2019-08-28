@@ -158,6 +158,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
   }
 
   @Test
+  @Tag("calis1")
   public void test13_AddnEventInPersonalCalendar() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String calendar = "calendar" + getRandomNumber();
@@ -331,7 +332,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).setValue(titleEvent2);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.LIST);
-      $(byText(titleEvent2)).waitUntil(Condition.appears, Configuration.timeout);
+    $(byText(titleEvent2)).waitUntil(Condition.appears, Configuration.collectionsTimeout);
     calendarManagement.deleteCalendar(calendar);
   }
 

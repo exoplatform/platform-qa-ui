@@ -92,9 +92,8 @@ public class SpaceManagement {
    * @param desc : Space description
    */
   public void addNewSpaceSimple(String name, String desc, int... params) {
-    ELEMENT_ADDNEWSPACE_BUTTON.click();
-    ELEMENT_SPACE_NAME_INPUT.waitUntil(Condition.appears, Configuration.timeout);
-    ELEMENT_SPACE_NAME_INPUT.setValue(name);
+    ELEMENT_ADDNEWSPACE_BUTTON.waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_SPACE_NAME_INPUT.waitUntil(Condition.appears, Configuration.timeout).setValue(name);
     ELEMENT_SPACE_DESCRIPTION_INPUT.setValue(desc);
     info("Save all changes");
     ELEMENET_SPACE_CREATE_BUTTON.click();
@@ -469,7 +468,7 @@ public class SpaceManagement {
     info("Open Wiki Tab");
     executeJavaScript("window.scrollBy(0,-150)");
     homePagePlatform.refreshUntil($(ELEMENT_WIKI_TAB), Condition.visible, 1000);
-    $(ELEMENT_WIKI_TAB).click();
+    $(ELEMENT_WIKI_TAB).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_WIKI_HOME_TITLE).waitUntil(Condition.visible, Configuration.timeout);
     info("Wiki portlet is shown");
   }

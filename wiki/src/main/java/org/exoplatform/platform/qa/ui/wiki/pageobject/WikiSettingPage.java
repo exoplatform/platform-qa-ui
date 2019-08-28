@@ -121,7 +121,7 @@ public class WikiSettingPage {
    */
   public void saveTemplate() {
     info("Click on Save template");
-    $(ELEMENT_SAVE_TEMPLATE).click();
+    $(ELEMENT_SAVE_TEMPLATE).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_SAVE_TEMPLATE).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
   }
 
@@ -143,21 +143,21 @@ public class WikiSettingPage {
    */
   public void addTemplate(String title, String des, String content) {
     info("Click on Add more Template button");
-    $(ELEMENT_WIKI_SETTING_ADD_MORE_TEMPALTE).click();
+    $(ELEMENT_WIKI_SETTING_ADD_MORE_TEMPALTE).waitUntil(Condition.visible,Configuration.timeout).click();
 
     if (!title.isEmpty()) {
       info("Input the title for the template");
-      $(ELEMENT_TITLE_TEMPLATE).setValue(title);
+      $(ELEMENT_TITLE_TEMPLATE).waitUntil(Condition.visible,2000).setValue(title);
     }
 
     if (!des.isEmpty()) {
       info("Input the description for the template");
-      $(ELEMENT_DESCRIPTION_TEMPLATE).setValue(des);
+      $(ELEMENT_DESCRIPTION_TEMPLATE).waitUntil(Condition.visible,2000).setValue(des);
     }
 
     if (!content.isEmpty()) {
       info("Input the content for the template");
-      $(ELEMENT_CONTENT_TEMPLATE).setValue(content);
+      $(ELEMENT_CONTENT_TEMPLATE).waitUntil(Condition.visible,2000).setValue(content);
     }
   }
 

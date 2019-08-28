@@ -93,7 +93,7 @@ public class MiniChatTestIT extends Base {
     refresh();
     ELEMENT_USER_RESULT_SEARCH.find(byText(Firstname + " " + LastName)).hover();
     ELEMENT_CHAT_TIP_CONTENT.waitUntil(Condition.appear, Configuration.timeout);
-    $(byXpath("//*[@id=\"tiptip_content\"]/div/a/i")).click();
+    $(byXpath("//*[@id=\"tiptip_content\"]/div/a/i")).waitUntil(Condition.visible,2000).click();
     ELEMENT_MINI_CHAT.waitUntil(Condition.appear, Configuration.timeout);
     MiniChatName = $(byClassName("title-left")).parent().parent().find(byClassName("fullname")).getText();
     assertEquals(Firstname + " " + LastName, MiniChatName);

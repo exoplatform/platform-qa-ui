@@ -33,11 +33,11 @@ public class DocumentManagement {
     }
 
     public void createFolder(String path, String folder, Boolean righclick) {
-        ELEMENT_INPUT_PATH.setValue(path).pressEnter();
-        $(ELEMENT_ACCOUNT_NAME_LINK).click();
+        ELEMENT_INPUT_PATH.setValue(path).waitUntil(Condition.visible,2000).pressEnter();
+        $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible,2000).click();
         if (righclick) {
             ELEMENT_LIST_FOLDER_IN_DEFAULT_VIEW.waitUntil(Condition.visible, Configuration.timeout).contextClick();
-            $(byId("JCRContextMenu")).find(ELEMENT_BUTTON_ADD_FOLDAR).click();
+            $(byId("JCRContextMenu")).find(ELEMENT_BUTTON_ADD_FOLDAR).waitUntil(Condition.visible,2000).click();
         } else {
             ELEMENT_ACTION_BAR_MENU.find(ELEMENT_BUTTON_ADD_FOLDAR)
                     .parent()
@@ -45,8 +45,8 @@ public class DocumentManagement {
                     .click();
         }
         ELEMENT_INPUT_NAME_FOLDER.setValue(folder);
-        ELEMENT_BUTTON_CONFIRM_ADD_FOLDER.click();
-        ELEMENT_LIST_FOLDER_IN_DEFAULT_VIEW.find(byText(folder)).waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_BUTTON_CONFIRM_ADD_FOLDER.waitUntil(Condition.visible,2000).click();
+        ELEMENT_LIST_FOLDER_IN_DEFAULT_VIEW.find(byText(folder)).waitUntil(Condition.visible, Configuration.collectionsTimeout);
     }
 
     public void goToFileFolder() {

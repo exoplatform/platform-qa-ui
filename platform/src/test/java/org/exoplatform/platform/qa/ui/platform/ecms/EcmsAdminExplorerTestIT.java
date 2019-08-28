@@ -73,6 +73,7 @@ public class EcmsAdminExplorerTestIT extends Base {
   }
 
   @Test
+  @Tag("ecmis")
   public void test02_Edit_Drive() {
     info("Test 01: Add Drive");
     info("Get data test");
@@ -148,6 +149,7 @@ public class EcmsAdminExplorerTestIT extends Base {
   }
 
   @Test
+  @Tag("ecmis")
   public void test05Edit_AView() {
     info("Test 02 : Add, edit, show and delete a View");
     String title = "title" + getRandomNumber();

@@ -126,11 +126,8 @@ public class PrivateMessageManagement {
    * @param content String
    */
   public void checkInboxMessage(String contact, String title, String content) {
-    sleep(2000);
-    $(byText(title)).click();
-    sleep(Configuration.timeout);
-    $(byText(content)).scrollTo().waitUntil(Condition.appears, Configuration.timeout);
-    sleep(2000);
+    $(byText(title)).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byText(content)).scrollTo().waitUntil(Condition.appears, Configuration.collectionsTimeout);
   }
 
   /**
@@ -166,13 +163,13 @@ public class PrivateMessageManagement {
    * @param content String
    */
   public void replyMessage(String contact, String title, String newTitle, String content) {
-    $(byText(title)).click();
-    $(ELEMENT_REPLY).click();
+    $(byText(title)).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_REPLY).waitUntil(Condition.visible,2000).click();
     refresh();
     $(ELEMENT_TITLE_MESSAGE).setValue(newTitle);
     plf.inputFrame(ELEMENT_MESSAGE_CONTENT, content);
-    $(ELEMENT_SEND_BUTTON).click();
-    ELEMENT_FORUM_OK_SEND_MSG.click();
+    $(ELEMENT_SEND_BUTTON).waitUntil(Condition.visible,2000).click();
+    ELEMENT_FORUM_OK_SEND_MSG.waitUntil(Condition.visible,2000).click();
   }
 
   /**
@@ -208,11 +205,9 @@ public class PrivateMessageManagement {
    * @param contact String
    */
   public void deleteMessage(String title, String contact) {
-    $(byText(title)).parent().parent().parent().find(ELEMENT_BUTTON_DELETE_MESSAGE).click();
-    sleep(2000);
-    $(ELEMENT_CONFIRM).click();
-    sleep(Configuration.timeout);
-    $(byText(title)).waitUntil(Condition.disappears, Configuration.timeout);
+    $(byText(title)).parent().parent().parent().find(ELEMENT_BUTTON_DELETE_MESSAGE).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_CONFIRM).waitUntil(Condition.visible,2000).click();
+    $(byText(title)).waitUntil(Condition.disappears, Configuration.collectionsTimeout);
     sleep(2000);
   }
 

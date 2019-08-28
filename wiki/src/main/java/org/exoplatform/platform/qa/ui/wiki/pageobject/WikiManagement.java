@@ -73,7 +73,7 @@ public class WikiManagement {
       }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
     }
     if ($(ELEMENT_SOURCE_EDITOR_BUTTON).is(Condition.exist)) {
-      $(ELEMENT_SOURCE_EDITOR_BUTTON).click();
+      $(ELEMENT_SOURCE_EDITOR_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
       $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
     }
   }

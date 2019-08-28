@@ -3,7 +3,6 @@ package org.exoplatform.platform.qa.ui.chat.pageobject;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static junit.framework.TestCase.assertEquals;
-import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_CATEGORY_OPTION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_COLLABORATION_ACTIONS;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -11,13 +10,8 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
-import com.codeborne.selenide.Selectors;
-import com.codeborne.selenide.SelenideElement;
-import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator;
-import org.openqa.selenium.By;
 
 public class ChatManagement {
   private final TestBase testBase;
@@ -61,22 +55,17 @@ public class ChatManagement {
 
   public void assignTaskInChat(String taskName, String... user) {
 
-    ELEMENT_COLLABORATION_ACTIONS.click();
+    ELEMENT_COLLABORATION_ACTIONS.waitUntil(Condition.visible,2000).click();
     $(byXpath("//div[@class='apps-item-icon']/i[@class='uiIconChatCreateTask']")).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_CHAT_TASK_NAME).setValue(taskName);
     for (int i = 0; i <= user.length - 1; i++) {
       ELEMENT_CHAT_ASSIGNEE_TASK.setValue(user[i]);
-      sleep(Configuration.collectionsTimeout);
-      ELEMENT_CHAT_RESULT_SEARCH_ASSIGNEE.waitUntil(Condition.visible, Configuration.timeout);
-      sleep(2000);
-      ELEMENT_CHAT_ASSIGNEE_TASK.pressEnter();
+      ELEMENT_CHAT_RESULT_SEARCH_ASSIGNEE.waitUntil(Condition.visible, Configuration.collectionsTimeout);
+      ELEMENT_CHAT_ASSIGNEE_TASK.waitUntil(Condition.visible,2000).pressEnter();
     }
-    sleep(2000);
-    ELEMENT_CHAT_DUE_DATE_TASK.click();
-    sleep(2000);
-    ELEMENT_CHAT_CURRENT_DATE_TASK.click();
-    sleep(2000);
-    ELEMENT_CHAT_POST_TASK_BUTTON.click();
+    ELEMENT_CHAT_DUE_DATE_TASK.waitUntil(Condition.visible,2000).click();
+    ELEMENT_CHAT_CURRENT_DATE_TASK.waitUntil(Condition.visible,2000).click();
+    ELEMENT_CHAT_POST_TASK_BUTTON.waitUntil(Condition.visible,2000).click();
     sleep(2000);
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byLinkText(taskName)).shouldBe(Condition.visible);
   }

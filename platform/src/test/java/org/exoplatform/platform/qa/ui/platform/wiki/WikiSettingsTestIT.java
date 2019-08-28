@@ -165,7 +165,7 @@ public class WikiSettingsTestIT extends Base {
    * <li>Test Case Name: Edit template.</li>
    */
   @Test
-  @Tag("wabis")
+  @Tag("wikis")
   public void test02_EditTemplate() {
     info("Test 2: Edit template");
     String title = "title" + getRandomNumber();

@@ -245,7 +245,7 @@ public class EcmsWCMTestIT extends Base {
    * published status
    */
   @Test
-  @Tag("eabis")
+  @Tag("ecmis")
   public void test07_ShowDraftpublicContentFromPage() {
     info("Test 7: Show draft/public content from page");
     String content = "content" + getRandomNumber();
@@ -640,7 +640,7 @@ public class EcmsWCMTestIT extends Base {
    */
 
   @Test
-  @Tag("eabis")
+  @Tag("ecmis")
   public void test14_UpdateSEOMetadatasWithLocalization() {
     info("Test 14_15 Update SEO metadatas with localization");
     String title = "title" + getRandomNumber();
@@ -674,7 +674,7 @@ public class EcmsWCMTestIT extends Base {
   }
 
   @Test
-  @Tag("eabis")
+  @Tag("ecmis")
   public void test15_DeleteSEOMetadatasWithLocalization() {
     info("Test 14_15 Update SEO metadatas with localization");
     String title = "title" + getRandomNumber();

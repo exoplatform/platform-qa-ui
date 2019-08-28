@@ -201,6 +201,7 @@ public class EcmsAdminAdvancedTestIT extends Base {
   }
 
   @Test
+  @Tag("ecmis")
   public void test11_Edit_Script() {
     info("Test 10: Add Script");
     info("Get the data test");

@@ -125,7 +125,7 @@ public class EcmsSEAdminTestIT extends Base {
    */
 
   @Test
-  @Tag("eabis")
+  @Tag("ecmis")
   public void test02_DeleteRelation() {
     info("Test 02: Delete Relation");
 
@@ -278,16 +278,16 @@ public class EcmsSEAdminTestIT extends Base {
     $(byClassName("uiIconEcmsViewWeb")).click();
     $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-    ELEMENT_CONTENT_LIST.find(byLinkText(node1)).contextClick();
+    ELEMENT_CONTENT_LIST.find(byLinkText(node1)).waitUntil(Condition.visible,2000).contextClick();
     info("Click on Delete link");
-    $(ELEMENT_SITEEXPLORER_ACTION_DELETE).click();
+    $(ELEMENT_SITEEXPLORER_ACTION_DELETE).waitUntil(Condition.visible,2000).click();
     info("Click on Delete button on Confirm popup");
-    $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).click();
+    $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.visible,2000).click();
 
   }
 
   @Test
-  @Tag("eabis")
+  @Tag("ecmis")
   public void test05_ImportNode() {
     info("Test 5: Import a Node");
     info("Create data test");
@@ -333,9 +333,9 @@ public class EcmsSEAdminTestIT extends Base {
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     ELEMENT_CONTENT_LIST.find(byLinkText(node2)).contextClick();
     info("Click on Delete link");
-    $(ELEMENT_SITEEXPLORER_ACTION_DELETE).click();
+    $(ELEMENT_SITEEXPLORER_ACTION_DELETE).waitUntil(Condition.visible,2000).click();
     info("Click on Delete button on Confirm popup");
-    $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).click();
+    $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.visible,2000).click();
   }
 
   /**

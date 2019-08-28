@@ -7,6 +7,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
 
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
@@ -207,10 +208,10 @@ public class ProjectsManagement {
   }
 
   public void deleteProject(String title) {
-    $(byText(title)).click();
-    $(byText(title)).parent().parent().find(ELEMENT_ICON_PROJECT).click();
-    $(byText(title)).parent().parent().find(ELEMENT_DELETE_PROJECT_OPTION).click();
-    ELEMENT_CONFIRM_DELETE.click();
+    $(byText(title)).waitUntil(Condition.visible,2000).click();
+    $(byText(title)).parent().parent().find(ELEMENT_ICON_PROJECT).waitUntil(Condition.visible, 2000).click();
+    $(byText(title)).parent().parent().find(ELEMENT_DELETE_PROJECT_OPTION).waitUntil(Condition.visible,2000).click();
+    ELEMENT_CONFIRM_DELETE.waitUntil(Condition.visible,Configuration.timeout).click();
     $(byText(title)).should(Condition.not(Condition.visible));
   }
 

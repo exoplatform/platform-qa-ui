@@ -176,7 +176,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
   }
 
   @Test
-  @Tag("wabis")
+  @Tag("wikis")
   public void test10_AutoSaveWhenAddingPageFromTwoColumnLayoutTemplate() {
     info("Test 06: Auto Save when adding page from template");
     String title = "title1" + getRandomNumber();
@@ -210,7 +210,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
    * Outcome: Delete draft successfully and don't show in draft list
    */
   @Test
-  @Tag("wabis")
+  @Tag("wikis")
   public void test07_11_Resume_Delete_ADraftWithSaveAsNormal() {
     info("Test 07: Resume a draft with save as normal");
     String title = "title" + getRandomNumber();
@@ -317,6 +317,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
   }
 
   @Test
+  @Tag("wikis")
   public void test06_5_AutoSaveWhenAddingPageFromTwoColumnLayoutOnSpace() {
     info("Test 06: Auto Save when adding page from template");
     String title = "title1" + getRandomNumber();
@@ -350,6 +351,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
    */
 
   @Test
+  @Tag("wikis")
   public void test04CreatePageFromTemplateOnSpace() {
     info("Test 04: Create page from template");
     SelenideElement template = ELEMENT_SELECT_TEMPLATE_StatusMeeting;

@@ -254,7 +254,8 @@ public class CalendarCalendarTestIT extends Base {
     calendarManagement.executeActionCalendar(calendarName, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     info("Check default date");
     eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
-    eventManagement.inputDataEventInQuickForm(titleEvent, titleEvent, getDate(0, "MM/dd/yyyy"), getDate(0, "MM/dd/yyyy"), false);
+    ELEMENT_EVENT_TITLE_DRAWER.waitUntil(Condition.visible,2000).setValue(titleEvent);
+    ELEMENT_EVENT_DESCRIPTION.setValue(titleEvent);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
                                               CalendarHomePage.selectViewOption.LIST,

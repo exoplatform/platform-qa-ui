@@ -98,8 +98,7 @@ public class SOCPeopleProfileEditProfileTestIT extends Base {
     userProfilePage.updateAboutMe(aboutMe);
     userProfilePage.saveCancelUpdateInfo(true);
     $(byXpath(ELEMENT_UIEXPERIENCE_PROFILE_PORTLET.replace("${content}", aboutMe))).should(Condition.exist);
-    $(byXpath(ELEMENT_RECENT_ACTIVITY_CONTENT.replace("${index}", "1").replace("${content}",
-                                                                               actAboutMe))).should(Condition.exist);
+    $(byXpath(ELEMENT_RECENT_ACTIVITY_CONTENT.replace("${index}", "1").replace("${content}", actAboutMe))).waitUntil(Condition.visible,Configuration.timeout).should(Condition.exist);
 
     info("edit profile");
     click(ELEMENT_EDIT_MY_PROFILE_LINK);

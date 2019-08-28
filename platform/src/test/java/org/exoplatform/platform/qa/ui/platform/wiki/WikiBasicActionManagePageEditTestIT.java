@@ -235,6 +235,7 @@ public class WikiBasicActionManagePageEditTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
+  @Tag("wikis")
   public void test06_EditPageFromTemplateStatus_Meeting() {
     info("Test 04:  Edit  Page with template layout");
     String title = "title" + getRandomNumber();
@@ -326,6 +327,7 @@ public class WikiBasicActionManagePageEditTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
+  @Tag("wikis")
   public void test05_EditParagraphInPage() {
     info("Test 05: Edit Paragraph in Page");
 

@@ -1235,7 +1235,7 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   public static final String          ELEMENT_SELECT_EDIT_PERMISSION_MEMBERSHIP               =
                                                                                 ".//*[@id='PermissionSelector']//a[contains(.,'${membership}')]";
 
-  public static final By              ELEMENT_POPUP_ADD_PORTAL                                = By.id("UIMaskWorkspace");
+  public static final String              ELEMENT_POPUP_ADD_PORTAL                                = "//div[@class='UIMaskWorkspace ']";
 
   public static final String          ELEMENT_PORTAL_DELETE_ICON                              =
                                                                  "//*[contains(text(),'${portalName}')]/../..//i[@class='uiIconTrash uiIconLightGray']";

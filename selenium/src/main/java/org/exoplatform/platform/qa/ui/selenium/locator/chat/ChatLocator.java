@@ -116,7 +116,7 @@ public class ChatLocator {
 
     public static final SelenideElement ELEMENT_CHAT_LIST_MSG = $(byId("chats"));
 
-    public static final SelenideElement ELEMENT_CHAT_INPUT_SEARCH_USER = $(byId("chat-search"));
+    public static final SelenideElement ELEMENT_CHAT_INPUT_SEARCH_USER = $(By.xpath("//input[@placeholder='Filter discussions']"));
 
     public static final SelenideElement ELEMENT_CHAT_RESULT_SEARCH_USER =
             $(byAttribute("class",

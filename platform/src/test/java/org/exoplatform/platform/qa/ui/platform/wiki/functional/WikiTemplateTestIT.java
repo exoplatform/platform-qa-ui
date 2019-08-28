@@ -623,6 +623,7 @@ public class WikiTemplateTestIT extends Base {
    * keyword are displayed
    */
   @Test
+  @Tag("wabisi")
   public void test07_SearchTemplateWhenTheKeyIsMatched() {
     info("Test 7: Search template when the key is matched");
 

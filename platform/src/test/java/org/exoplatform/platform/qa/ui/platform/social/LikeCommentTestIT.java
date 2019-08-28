@@ -1057,7 +1057,7 @@ public class LikeCommentTestIT extends Base {
 
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
-    ELEMENT_SPACE_FILE_TAB.waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_TAB_LINK.click();
     refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");

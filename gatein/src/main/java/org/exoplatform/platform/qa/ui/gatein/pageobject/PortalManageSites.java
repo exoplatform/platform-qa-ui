@@ -318,13 +318,12 @@ public void goToDefaultSkin() {
       temp.click();
     }
     $(byXpath(ELEMENT_SAVE_BUTTON)).waitUntil(visible,Configuration.timeout).click();
-    sleep(12000);
-    $(ELEMENT_POPUP_ADD_PORTAL).waitUntil(Condition.not(visible),Configuration.timeout);
+    sleep(20000);
+    $(byXpath(ELEMENT_POPUP_ADD_PORTAL)).should(Condition.disappears);
 
-
-    if (evt.waitForAndGetElement(ELEMENT_POPUP_ADD_PORTAL, 10000, 0) == null)
-
-    $(ELEMENT_EDIT_PERMISSION_SETTING).waitUntil(Condition.not(visible),Configuration.timeout);
+    if  ($(byXpath(ELEMENT_POPUP_ADD_PORTAL)).isDisplayed()) {
+      $(ELEMENT_EDIT_PERMISSION_SETTING).waitUntil(Condition.not(visible), Configuration.timeout);
+    }
   }
 
   /**

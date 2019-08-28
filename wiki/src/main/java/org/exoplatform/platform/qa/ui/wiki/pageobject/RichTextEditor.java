@@ -761,12 +761,16 @@ public class RichTextEditor {
    */
   public void editWikiPageLink(String address, String label, String tooltip) {
     info("Input address of the link");
+    sleep(2000);
     inputEmailAddress(address);
     info("Input the label of the link");
+    sleep(Configuration.timeout);
     inputLabel(label);
     info("Input the tooltip of the link");
+    sleep(Configuration.timeout);
     inputToolTip(tooltip);
     info("Click on Create link button");
+    sleep(2000);
     goToCreateLink();
   }
 
@@ -824,7 +828,7 @@ public class RichTextEditor {
   public void inputWebAddress(String address) {
     if (!address.isEmpty()) {
       info("Input web address");
-      $(ELEMENT_WEB_PAGE_WEB_ADDRESS).val(address);
+      $(ELEMENT_EMAIL_LINK_EMAIL_ADDRESS).waitUntil(Condition.visible,2000).val(address);
     }
   }
 
@@ -878,10 +882,13 @@ public class RichTextEditor {
   public void insertWebLink(String address, String label, String tooltip, Boolean isPressEndKey) {
     info("Input web address for the page");
     inputWebAddress(address);
+    sleep(2000);
     info("Input Label for the page");
     inputLabel(label);
+    sleep(2000);
     info("Input Tooltip for the page");
     inputToolTip(tooltip);
+    sleep(2000);
     info("Click on Create link button");
     goToCreateLink();
     if (isPressEndKey) {
@@ -948,7 +955,7 @@ public class RichTextEditor {
    */
   public void inputLabel(String label) {
     if (label != null && label != "") {
-      $(ELEMENT_LABEL_LINK_TEXTBOX).val(label);
+      $(ELEMENT_LABEL_LINK_TEXTBOX).waitUntil(Condition.visible,Configuration.timeout).val(label);
     }
   }
 
@@ -1362,14 +1369,11 @@ public class RichTextEditor {
     if (!$(byClassName("gwt-TabPanel")).find(byText(page)).exists()){
       $(ELEMENT_EXPLORER_WIKIHOME).waitUntil(Condition.visible,Configuration.timeout).click();
     }
-    ELEMENT_WIKI_UNPUT_LINK_EXISTED_PAGE.waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(2000);
-    ELEMENT_WIKI_UNPUT_LINK_EXISTED_PAGE.setValue("intranet." + page);
-    sleep(2000);
-    ELEMENT_POPUP_SELECT_WIKI_PAGE.find(byText(page)).waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_WIKI_UNPUT_LINK_EXISTED_PAGE.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    ELEMENT_WIKI_UNPUT_LINK_EXISTED_PAGE.waitUntil(Condition.visible,2000).setValue("intranet." + page);
+    ELEMENT_POPUP_SELECT_WIKI_PAGE.find(byText(page)).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     info("Click on Select button");
-    sleep(2000);
-    $(ELEMENT_SELECT_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_SELECT_BUTTON).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
 
   }
 

@@ -76,7 +76,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
    */
 
   @Test
-  @Tag("eabis")
+  @Tag("ecmis")
   public void test01_CheckIntranetHomepageAfterAddingAFileContent() {
 
     info("Test 1: Check intranet homepage after adding a File content");
@@ -118,6 +118,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
    * new summary - A comment is added: Document has been published.
    */
   @Test
+  @Tag("ecmis")
   public void test03_CheckIntranetHomepageAfterAddingWebContent() {
     info("Test 3: Check intranet homepage after adding Web Content");
     String title = "title" + getRandomNumber();
@@ -136,7 +137,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
   }
 
   @Test
-  @Tag("eabis")
+  @Tag("ecmis")
   public void test04_CheckIntranetHomepageAfterPublishWebContent() {
     info("Test 3: Check intranet homepage after adding Web Content");
     String title = "title" + getRandomNumber();
@@ -184,6 +185,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
    * comment is added:File has been updated.
    */
   @Test
+  @Tag("ecmis")
   public void test06_CheckIntranetHomepageAfterEditingTitleOfContent() {
     info("Test 6: Check intranet homepage after Editing title of content");
     String title = "title" + getRandomNumber();
@@ -238,7 +240,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
    * isadded the activity: Tag: $value, $value have been added.
    */
   @Test
-  @Tag("eabis")
+  @Tag("ecmis")
   public void test07_CheckIntranetHomepageAfterAddingTagToAContent() {
     info("Test 7: Check intranet homepage after adding tag to a content");
     info("Get data test");
@@ -291,6 +293,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
    * activity related to the content is removed from the activity stream
    */
   @Test
+  @Tag("ecmis")
   public void test08_CheckIntranetHomepageAfterDeletingAContent() {
     info("Test 8: Check intranet homepage after deleting a content");
     info("Get data test");
@@ -354,7 +357,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
    * the activity stream - A comment is added: Category: $value has been added.
    */
   @Test
-  @Tag("eabis")
+  @Tag("ecmis")
   public void test11_CheckIntranetHomepageAfterAddingACategoryforUploadFile() {
     info("Test 11: Check intranet homepage after adding a category to an uploaded file");
     info("Upload a file");
@@ -478,7 +481,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
    * path of the file.d
    */
   @Test
-  @Tag("eabis")
+  @Tag("ecmis")
   public void test16_UpdateTheFileActivityAfterMovingAFile() {
     info("Test 16 Update the File activity after moving a file");
     info("Create data test");
@@ -511,7 +514,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
    * path of the content.
    */
   @Test
-  @Tag("eabis")
+  @Tag("ecmis")
   public void test17_UpdateContentActivityAfterMovingAContent() {
     info("Test 17 Update Content activity after moving a content");
 

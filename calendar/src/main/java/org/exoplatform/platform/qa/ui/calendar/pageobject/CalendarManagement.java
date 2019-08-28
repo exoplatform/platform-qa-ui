@@ -356,7 +356,7 @@ public class CalendarManagement {
             .parent()
             .parent()
             .find(ELEMENT_CALENDAR_ICON_SETTINGS_OF_CALENDAR)
-            .click();
+            .waitUntil(Condition.visible,2000).click();
   }
 
   /**

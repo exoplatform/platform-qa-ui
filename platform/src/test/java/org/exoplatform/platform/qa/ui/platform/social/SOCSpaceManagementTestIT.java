@@ -110,7 +110,7 @@ public class SOCSpaceManagementTestIT extends Base {
         homePagePlatform.goToMySpaces();
         spaceManagement.addNewSpaceSimple(space, space);
         info("All default portlet is displayed");
-        $(byXpath("//i[@class='uiIconAppSpaceHomePage uiIconDefaultApp']")).should(Condition.exist);
+        $(ELEMENT_SPACE_MENU_ACTIVITY_PORTLET).should(Condition.exist);
         $(ELEMENT_SPACE_MENU_AGENDA_PORTLET).should(Condition.exist);
         $(ELEMENT_SPACE_MENU_DOCUMENT_PORTLET).should(Condition.exist);
         $(ELEMENT_SPACE_MENU_FORUM_PORTLET).should(Condition.exist);
@@ -405,7 +405,7 @@ public class SOCSpaceManagementTestIT extends Base {
     info("Test 10:Check access visible/close space");
     String space = "space" + getRandomNumber();
     String[] arrayRight = { "close" };
-    String mess = "This page is in a restricted area. Get an invitation by a manager of space '" + space + "' to access it.";
+    String mess = " You must be invited by an administrator to the space " + space + " to access this page.";
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
     String username2 = "usernameb" + getRandomString();
@@ -431,7 +431,6 @@ public class SOCSpaceManagementTestIT extends Base {
     open(urlSpace);
     homePagePlatform.refreshUntil($(ELEMENT_SPACE_ACCESS_SPACE_DENIED),Condition.visible,2000);
     $(ELEMENT_SPACE_ACCESS_SPACE_DENIED).is(Condition.visible);
-    sleep(2000);
     $(ELEMENT_SPACE_ACCESS_SPACE_DENIED_INFO).shouldHave(Condition.text(mess));
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();

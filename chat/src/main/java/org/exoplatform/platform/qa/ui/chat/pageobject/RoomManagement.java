@@ -18,8 +18,7 @@ public class RoomManagement {
   }
 
   public void addRoom(String name, String... users) {
-    ELEMENT_CREATE_ROOM.waitUntil(Condition.appears, Configuration.timeout);
-    ELEMENT_CREATE_ROOM.click();
+    ELEMENT_CREATE_ROOM.waitUntil(Condition.appears, Configuration.collectionsTimeout).click();
     ELEMENT_POPUP_ROOM.waitUntil(Condition.appear, Configuration.timeout);
     ELEMENT_ROOM_NAME.setValue(name);
     for (int i = 0; i <= users.length - 1; i++) {

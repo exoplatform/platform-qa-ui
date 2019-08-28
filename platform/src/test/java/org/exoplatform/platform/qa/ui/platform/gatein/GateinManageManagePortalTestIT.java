@@ -69,7 +69,6 @@ public class GateinManageManagePortalTestIT extends Base {
         Map<String, String> permissions = null;
         navigationToolbar.goToPotalSites();
         portalManageSites.addNewPortal(portalName, null, null, language, null, "Always", true, permissions, editGroupId, editMembership);
-
         $(byXpath(ELEMENT_NEW_PORTAL_ADD.replace("${portalName}", portalName))).waitUntil(Condition.visible, Configuration.timeout);
         navigationToolbar.goToPotalSites();
         portalManageSites.deletePortal(portalName);
@@ -94,7 +93,6 @@ public class GateinManageManagePortalTestIT extends Base {
         Map<String, String> permissions = null;
         navigationToolbar.goToPotalSites();
         portalManageSites.addNewPortal(portalName, null, null, language, null, "Always", true, permissions, editGroupId, editMembership);
-
         $(byXpath(ELEMENT_NEW_PORTAL_ADD.replace("${portalName}", portalName))).waitUntil(Condition.visible, Configuration.timeout);
         open(Configuration.baseUrl+"/portal/"+portalName);
         $(byId("PAGEBODY-VIEW-BLOCK")).waitUntil(Condition.visible,Configuration.timeout);

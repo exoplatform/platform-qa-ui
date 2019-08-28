@@ -78,9 +78,8 @@ public class ForumTopicManagement {
    */
   public void openMoreActionMenu() {
     info("Wait More link is shown");
-    $(ELEMENT_MORE_ACTION).waitUntil(appears, Configuration.timeout);
     info("Click on More link");
-    $(ELEMENT_MORE_ACTION).click();
+    $(ELEMENT_MORE_ACTION).waitUntil(visible,Configuration.collectionsTimeout).click();
   }
 
   /**
@@ -519,10 +518,10 @@ public class ForumTopicManagement {
       $(By.className("file")).uploadFromClasspath(fileName[i]);
       $(ELEMENT_SAVE_BTN).click();
     }}
-    $(ELEMENT_SUBMIT_BUTTON).click();
+    $(ELEMENT_SUBMIT_BUTTON).waitUntil(visible,Configuration.timeout).click();
     $(ELEMENT_SUBMIT_BUTTON).waitUntil(Condition.disappear, Configuration.timeout);
     info("Verify that the topic is created");
-    $(By.linkText(title)).should(exist);
+    $(By.linkText(title)).waitUntil(visible,Configuration.timeout).should(exist);
     info("Start topic successfully");
   }
 

@@ -52,7 +52,7 @@ public class ForumLocator {
           By.xpath("//*[@class='uiIconForumManageCategory uiIconForumLightGray']");
 
   public static final By ELEMENT_ACTIONBAR_PRIVATE_MESSAGE =
-          By.xpath(".//*[@id='uiRightActionBar']//a[contains(.,'Private Messages')]");
+          By.xpath(".//*[@id='uiRightActionBar']//a/span[@class='badgeNotification']");
 
   public static final By ELEMENT_ACTIONBAR_TOPIC_TAGDELETE =
           By.xpath("//*[@id=\"UITopicDetail\"]/div[2]/div[2]/ul[1]/li/span/i");

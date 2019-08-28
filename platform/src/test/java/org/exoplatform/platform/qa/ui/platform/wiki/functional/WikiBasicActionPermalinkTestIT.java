@@ -145,6 +145,7 @@ public class WikiBasicActionPermalinkTestIT extends Base {
      * The pop up "Permalink" is displayed" and the button "Restricted" is played
      */
     @Test
+    @Tag("wabisi")
     public void test01_RestrictButtonForGrantedUser() {
         info("Test 1: Restrict button for granted user");
         info("Create 1 new users");
@@ -674,7 +675,7 @@ public class WikiBasicActionPermalinkTestIT extends Base {
      * - The restricted ancestors are not clickable.
      */
     @Test
-    @Tag("wabis")
+    @Tag("wabisi")
     public void test07_DisplayAncestorRestrictedPageInLeftTreePanel() {
         info("Test 7: Display ancestor Restricted page in left tree panel");
         info("Create 1 new users");

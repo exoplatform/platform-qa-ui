@@ -55,7 +55,7 @@ public class ForumCategoryManagement {
     public void addCategorySimple(String nameCat, String order, String description) {
 
         info("click on Add Category button");
-        $(ELEMENT_ACTIONBAR_ADDCATEGORY).click();
+        $(ELEMENT_ACTIONBAR_ADDCATEGORY).waitUntil(visible,Configuration.timeout).click();
         info("input the title for the category");
         $(ELEMENT_ADDCATEGORY_POPUP_TITLE).val(nameCat);
         info("check and input description");
@@ -90,8 +90,8 @@ public class ForumCategoryManagement {
                 break;
             case DELETE:
                 info("Click on Delete link");
-                $(ELEMENT_DELETE_CATEGORY).click();
-                $(ELEMENT_OK_DELETE).click();
+                $(ELEMENT_DELETE_CATEGORY).waitUntil(visible,Configuration.timeout).click();
+                $(ELEMENT_OK_DELETE).waitUntil(visible,2000).click();
                 break;
             case WATCHES:
                 break;

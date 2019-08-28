@@ -174,7 +174,7 @@ public class EventManagement {
       $(ELEMENT_EVENT_TITLE_DRAWER).setValue(name);
     }
     if (note != null) {
-      $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[6]/div[2]/textarea")).setValue(note);
+      $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[6]/div[2]/textarea")).waitUntil(Condition.visible,2000).setValue(note);
     }
     if (opt.length > 0 && opt[0] != null) {
       $(byId("calendar")).selectOption(opt[0]);
@@ -1198,6 +1198,7 @@ public class EventManagement {
     switchTo().activeElement();
     $(byText("Add Event")).should(Condition.exist);
     assertEquals("Event title",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
+    sleep(Configuration.timeout);
     assertEquals("All",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).getText());
     assertEquals("All day",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[2]/div/label/span")).getText());
     assertEquals("Location",$(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[3]/div[1]")).getText());
