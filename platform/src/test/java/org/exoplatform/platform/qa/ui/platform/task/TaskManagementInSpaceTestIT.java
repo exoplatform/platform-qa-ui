@@ -25,7 +25,7 @@ import org.exoplatform.platform.qa.ui.task.pageobject.TasksManagement;
 /**
  * Created by ilyes on 09/11/17.
  */
-@Tag("smoke")
+@Tag("sniff")
 @Tag("task")
 public class TaskManagementInSpaceTestIT extends Base {
   HomePagePlatform   homePagePlatform;

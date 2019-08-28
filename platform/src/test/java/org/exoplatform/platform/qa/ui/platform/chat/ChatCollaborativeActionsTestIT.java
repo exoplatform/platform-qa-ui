@@ -27,7 +27,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("chat")
-@Tag("smoke")
+@Tag("sniff")
 
 public class ChatCollaborativeActionsTestIT extends Base {
 
