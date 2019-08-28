@@ -41,4 +41,17 @@
       <artifactId>junit</artifactId>
     </dependency>
   </dependencies>
+  <profiles>
+    <profile>
+      <id>skip-tests-commons</id>
+      <activation>
+        <property>
+          <name>commons.test.skip</name>
+        </property>
+      </activation>
+      <properties>
+        <maven.test.skip>true</maven.test.skip>
+      </properties>
+    </profile>
+  </profiles>
 </project>
