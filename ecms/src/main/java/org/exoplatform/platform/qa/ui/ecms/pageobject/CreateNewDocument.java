@@ -1,7 +1,5 @@
 package org.exoplatform.platform.qa.ui.ecms.pageobject;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
@@ -24,13 +22,9 @@ public class CreateNewDocument {
 
   private final TestBase       testBase;
 
-  public PlatformPermission    per;
-
   public ManageAlert           alert;
 
   public PlatformBase          plf;
-
-  public SiteExplorerHome      SEHome;
 
   private ElementEventTestBase evt;
 
@@ -186,19 +180,6 @@ public class CreateNewDocument {
   }
 
   /**
-   * Add a new product
-   *
-   * @param title String
-   * @param summary String
-   */
-  public void addNewProduct(String title, String summary) {
-    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-    evt.type(ELEMENT_FILEFORM_BLANK_NAME, title, true);
-    plf.inputFrame(ELEMENT_FILEFORM_BLANK_CONTENT, summary);
-    evt.switchToParentWindow();
-  }
-
-  /**
    * Save and close a file form
    */
 
@@ -220,35 +201,6 @@ public class CreateNewDocument {
     $(ELEMENT_WEBCONTENTFORM_BUTTON_LINK).click();
     $(ELEMENT_WEBCONTENTFORM_LINK_ADRESS).setValue(url);
     $(ELEMENT_WEBCONTENTFORM_LINK_OK).click();
-  }
-
-  /**
-   * Create a Advanced Document
-   *
-   * @param name String
-   * @param content String
-   * @param title String
-   * @param desc String
-   * @param creator String
-   * @param source String
-   */
-  public void createAdvancedDocument(String name, String content, String title, String desc, String creator, String source) {
-
-    evt.type(ELEMENT_FILEFORM_BLANK_NAME, title, true);
-    plf.inputFrame(ELEMENT_FILEFORM_BLANK_CONTENT, content);
-    evt.switchToParentWindow();
-    if (title != "" && title != null) {
-      evt.type(ELEMENT_DOCFORM_BLANK_TITLE, title, true);
-    }
-    if (desc != "" && desc != null) {
-      evt.type(ELEMENT_DOCFORM_BLANK_DESC, desc, true);
-    }
-    if (creator != "" && creator != null) {
-      evt.type(ELEMENT_DOCFORM_BLANK_CREATOR, creator, true);
-    }
-    if (source != "" && source != null) {
-      evt.type(ELEMENT_DOCFORM_BLANK_SOURCE, source, true);
-    }
   }
 
   /**

@@ -28,42 +28,29 @@ import org.openqa.selenium.By;
 import com.codeborne.selenide.SelenideElement;
 
 public class ConnectionsLocator {
-  public static final By              ELEMENT_CONNECTION_EVERYONE_TITLE       =
-                                                                        By.xpath(".//*[@id='UIAllPeople']//*[contains(text(),'Everyone')]");
-
-  public static final SelenideElement ELEMENT_CONNECTION_CONNECT_BTN          = $(byText("Connect"));
+  public static final By              ELEMENT_CONNECTION_EVERYONE_TITLE       = By.xpath(".//*[@id='UIAllPeople']//*[contains(text(),'Everyone')]");
 
   public static final SelenideElement ELEMENT_CONNECTION_CANCEL_BTN           = $(byText("Cancel Request"));
 
   public static final SelenideElement ELEMENT_CONNECTION_REVOVE_BTN           = $(byText("Remove Connection"));
 
-  public static final String          ELEMENT_CONNECTION_IGNORE_BTN           =
-                                                                    " //a[contains(@href,'${user}')]/../..//*[text()='Ignore']";
+  public static final String          ELEMENT_CONNECTION_IGNORE_BTN           = " //a[contains(@href,'${user}')]/../..//*[text()='Ignore']";
 
-  public static final String ELEMENT_CONNECTION_CONFIRM_BTN          = " //a[contains(@href,'${user}')]/../..//*[text()='Confirm']";
+  public static final String          ELEMENT_CONNECTION_CONFIRM_BTN          = " //a[contains(@href,'${user}')]/../..//*[text()='Confirm']";
 
-  public static final String          ELEMENT_CONNECTION_USER_AVARTAR         = "//a[contains(@href,'${user}')]/img";
+  public static final String          ELEMENT_CONNECTION_USER_NAME            = "//a[contains(@href,'${user}') and @data-key='title']";
 
-  public static final String          ELEMENT_CONNECTION_USER_NAME            =
-                                                                   "//a[contains(@href,'${user}') and @data-key='title']";
+  public static final By              ELEMENT_ALL_CONNECTIONS_TAB             = By.xpath("//*[@id='UIConnectionsPortlet' or @id='UIAllPeoplePortlet']//*[contains(@href,'all-people')]");
 
-  public static final By              ELEMENT_ALL_CONNECTIONS_TAB             =
-                                                                  By.xpath("//*[@id='UIConnectionsPortlet' or @id='UIAllPeoplePortlet']//*[contains(@href,'all-people')]");
+  public static final SelenideElement ELEMENT_ICON_CHAT_PROFIL_STATUS         = $(byId("UIUserNavigationPortlet")).find(byClassName("uiIconBannerChat"));
 
-  public static final SelenideElement
-                                      ELEMENT_ICON_CHAT_PROFIL_STATUS            =
-                                                                 $(byId("UIUserNavigationPortlet")).find(byClassName("uiIconBannerChat"));
-  public static final SelenideElement
-                                       ELEMENT_ICON_CALL_PROFIL_STATUS    =
-          $(byId("UIUserNavigationPortlet")).find(byClassName("callButtonIconVideo"));
-  public static final By              ELEMENT_MY_CONNECTIONS_TAB              =
-                                                                 By.xpath("//*[@id='UIConnectionsPortlet' or @id='UIAllPeoplePortlet']//*[contains(@href,'network')]");
+  public static final SelenideElement ELEMENT_ICON_CALL_PROFIL_STATUS         = $(byId("UIUserNavigationPortlet")).find(byClassName("callButtonIconVideo"));
 
-  public static final By              ELEMENT_REQUEST_RECEIVE_CONNECTIONS_TAB =
-                                                                              By.xpath("//*[@id='UIConnectionsPortlet' or @id='UIAllPeoplePortlet']//*[contains(@href,'receivedInvitations')]");
+  public static final By              ELEMENT_MY_CONNECTIONS_TAB              = By.xpath("//*[@id='UIConnectionsPortlet' or @id='UIAllPeoplePortlet']//*[contains(@href,'network')]");
 
-  public static final By              ELEMENT_REQUEST_PENDING_CONNECTIONS_TAB =
-                                                                              By.xpath("//*[@id='UIConnectionsPortlet' or @id='UIAllPeoplePortlet']//*[contains(@href,'pendingRequests')]");
+  public static final By              ELEMENT_REQUEST_RECEIVE_CONNECTIONS_TAB = By.xpath("//*[@id='UIConnectionsPortlet' or @id='UIAllPeoplePortlet']//*[contains(@href,'receivedInvitations')]");
+
+  public static final By              ELEMENT_REQUEST_PENDING_CONNECTIONS_TAB = By.xpath("//*[@id='UIConnectionsPortlet' or @id='UIAllPeoplePortlet']//*[contains(@href,'pendingRequests')]");
 
   public static final By              ELEMENT_ALL_RESULTS                     = By.id("searchAll");
 
@@ -74,20 +61,14 @@ public class ConnectionsLocator {
 
   public static final By              ELEMENT_SEARCH_BUTTON                   = By.id("SearchButton");
 
-  public static final String          ELEMENT_USER_LINK                       =
-                                                        "//*[@class='spaceTitle']//*[contains(@href,'${userName}')]";
+  public static final String          ELEMENT_USER_LINK                       = "//*[@class='spaceTitle']//*[contains(@href,'${userName}')]";
 
-  public static final String          ELEMENT_USER_AVATAR                     = ".//*[@alt='${fullname}']";
-
-  public static final SelenideElement ELEMENT_NAME_OF_PEOPLE                  =
-                                                             $(byXpath("//*[@id=\"uiTableProfileUserSearchInput\"]/div[1]/div/div/div[1]/input"));
+  public static final SelenideElement ELEMENT_NAME_OF_PEOPLE                  = $(byXpath("//*[@id=\"uiTableProfileUserSearchInput\"]/div[1]/div/div/div[1]/input"));
 
   public static final SelenideElement ELEMENT_CONTENT_PEOPLE                  = $(byXpath("//*[@id=\"UIAllPeople\"]/div[2]/div"));
 
-  public static final SelenideElement ELEMENT_AVATAR_IN_SEARCH_USER                  = $(byXpath("//*[@id=\"identity2\"]/a/img"));
-  public static final SelenideElement ELEMENT_USER_RESULT_SEARCH                = $(byClassName(" spaceBox"));
-  public static final SelenideElement ELEMENT_USER_PROFILE                = $(byClassName("uiIconAppprofile"));
+  public static final SelenideElement ELEMENT_USER_RESULT_SEARCH              = $(byClassName(" spaceBox"));
 
-
+  public static final SelenideElement ELEMENT_USER_PROFILE                    = $(byClassName("uiIconAppprofile"));
 
 }

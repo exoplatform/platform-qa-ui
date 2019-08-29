@@ -24,9 +24,6 @@ import org.openqa.selenium.By;
 
 public final class PlatformPermissionLocator {
 
-  // Option select permission button
-  public static final By     ELEMENT_SELECT_USER_ICON          = By.xpath("//*[@class='uiIconUser uiIconLightGray']");
-
   public static final By     ELEMENT_SELECT_USER_ICON1         = By.xpath("//*[contains(@class,'uiIconSelectUser')]");
 
   public static final By     ELEMENT_SELECT_GROUP_ICON         = By.xpath("//*[@class='uiIconGroup uiIconLightGray']");
@@ -46,8 +43,7 @@ public final class PlatformPermissionLocator {
 
   public static final By     ELEMENT_SELECT_SEARCH             = By.name("filter");
 
-  public static final By     ELEMENT_USER_CLOSE_BUTTON         =
-                                                       By.xpath("//*[@id='UIUserSelector']//*[contains(@class,'btn')][contains(.,'Close')]");
+  public static final By     ELEMENT_USER_CLOSE_BUTTON         = By.xpath("//*[@id='UIUserSelector']//*[contains(@class,'btn')][contains(.,'Close')]");
 
   // Group permission
   public static final By     ELEMENT_SELECT_GROUP_POPUP        = By.id("UIPopupGroupMembershipSelector");

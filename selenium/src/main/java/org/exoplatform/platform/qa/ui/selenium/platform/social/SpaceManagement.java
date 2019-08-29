@@ -531,14 +531,6 @@ public class SpaceManagement {
     info("Search space [" + name + "]");
     Temporal start = LocalDateTime.now();
 
-    //    sleep(Configuration.timeout);
-//    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.appears, Configuration.timeout);
-//    info("Input the space into search text box");
-//    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.visible, Configuration.timeout).setValue(name);
-//    sleep(Configuration.timeout);
-//    info("evt.click on Search button");
-//    $(ELEMENT_MY_SPACE_SEARCH_BTN).waitUntil(Condition.visible, Configuration.timeout).click();
-
     ELEMENT_MY_SPACE_SEARCH_TEXT.should(exist).setValue(name).sendKeys(Keys.ENTER);
     info("Space [" + name + "] found in " + Duration.between(start, LocalDateTime.now()).toString());
   }

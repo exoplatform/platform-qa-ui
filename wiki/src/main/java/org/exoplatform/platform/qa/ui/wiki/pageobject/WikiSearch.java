@@ -57,7 +57,6 @@ public class WikiSearch {
       goToAdvancedSearchSpaceSwitcher();
       searchSpaces(location);
       info("Select a location");
-      // $(ELEMENT_ADVANCED_SEARCH_SPACE_SWITCHER).click();
       $(byClassName("wikis")).find(byText(location)).click();
 
     }

@@ -125,7 +125,6 @@ public class NotificationActivity {
   public void checkLikeInActivityViewer(String number) {
     info("Check like in Activity viewer");
     $(ELEMENT_ACTIVITY_ICON_LIKE).parent().shouldHave(Condition.text(number));
-    //assert(waitForAndGetElement(ELEMENT_LIKE_IN_ACTIVITY_VIEWER).getText().contains(number));
   }
 
   /**

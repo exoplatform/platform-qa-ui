@@ -286,10 +286,7 @@ public class EventManagement {
         if (dateTimeFrom.length > 1) {
           if (opt.length > 0) {
             evt.type(ELEMENT_ADD_EDIT_EVENT_FROM_TIME_INPUT, dateTimeFrom[1], true);
-          } /*else {
-            evt.click(ELEMENT_ADD_EDIT_EVENT_FROM_TIME_INPUT, 2);
-            evt.click(ELEMENT_ADD_EDIT_EVENT_SELECT_FROM_TIME.replace("${time}", dateTimeFrom[1]));
-          }*/
+          }
         }
       }
       if ((to != null) & (to != "")) {
@@ -299,10 +296,7 @@ public class EventManagement {
         if (dateTimeTo.length > 1) {
           if (opt.length > 0) {
             evt.type(ELEMENT_ADD_EDIT_EVENT_TO_TIME_INPUT, dateTimeTo[1], true);
-          }/* else {
-            evt.click(ELEMENT_ADD_EDIT_EVENT_TO_TIME_INPUT, 2);
-            evt.click(ELEMENT_ADD_EDIT_EVENT_SELECT_TO_TIME.replace("${time}", dateTimeTo[1]));
-          }*/
+          }
         }
       }
     }
@@ -785,7 +779,6 @@ public class EventManagement {
    */
   public void removeAttachment(String file) {
     $(byTitle(file)).find(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[2]/form/div[2]/div[7]/div[2]/div/div[2]/div[2]/div[1]/div[3]/a")).click();
-   //$(byXpath(ELEMENT_EVENT_ATTACHMENT.replace("${file}", file))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**

@@ -173,16 +173,12 @@ public class ContentAdministration {
     $(ELEMENT_ECM_EXPLORER_ADD_ACTION_VIEW_FORM).click();
     $(ELEMENT_ECM_EXPLORE_TAB_NAME_VIEW_FORM).setValue(tabName);
     for (String arrayElement : tab) {
-      // evt.check(By.xpath(ELEMENT_ECM_EXPLORER_CHOOSE_TAB_CATEGORY_VIEW_FORM.replace("{$tab}",
-      // arrayElement)), 2);
       $(byText(arrayElement)).click();
     }
     $(ELEMENT_ECM_EXPLORE_SAVE_TAB_VIEW_FORM).click();
     $(ELEMENT_ECM_EXPLORER_GO_TO_PERMISSION_FORM).click();
     if (perm.length < 2) {
       $(ELEMENT_ECM_EXPLORER_USER_PERMISSION_ADD).click();
-      // evt.click(By.xpath(ELEMENT_ECM_EXPLORER_SELECT_USER_LIST_PERMISSION.replace("{$user}",
-      // perm[0])));
       $(byId("Quick Search")).setValue(perm[0]);
       $(byClassName("btnSearchUser")).click();
       $(byClassName("uiIconPlus")).click();
@@ -336,8 +332,6 @@ public class ContentAdministration {
     $(byText(name)).parent().parent().find((ELEMENT_BTN_DELETE_DRIVE)).click();
 
     alert.acceptAlert();
-    // evt.waitForElementNotPresent(By.xpath(ELEMENT_ECM_EXPLORER_DRIVES_DELETE_LIST.replace("{$name}",
-    // name)));
     $(byText(name)).shouldNot(Condition.exist);
   }
 

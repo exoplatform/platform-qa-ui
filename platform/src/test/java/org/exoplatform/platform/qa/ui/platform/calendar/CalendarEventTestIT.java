@@ -80,12 +80,8 @@ public class CalendarEventTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
 
     info("Add attachment");
-   // eventManagement.inputDataEventInDetailForm(titleEvent, content, getDate(0, "MM/dd/yyyy"), getDate(0, "MM/dd/yyyy"), false);
-    //$(ELEMENT_ADD_EDIT_EVENT_NAME).click();
     $(byXpath("//*[@id=\"ExoEventForm\"]/div[1]/div[2]/form/div[1]/div/input")).setValue(titleEvent);
     $(byId("cal-attach-file")).uploadFromClasspath("eXo-Platform.png");
-   // $(byClassName("progressBarFrame")).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
-    //$(ELEMENT_ATTACHMENT_SAVE_BUTTON).click();
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
                                               CalendarHomePage.selectViewOption.DAY,
@@ -102,11 +98,6 @@ public class CalendarEventTestIT extends Base {
     eventManagement.saveQuickAddEvent();
 
     info("Delete data");
-   // executeJavaScript("window.scrollBy(0,-5500)", "");
-    //calendarHomePage.deleteEventTask(titleEvent,
-                                    // CalendarHomePage.selectViewOption.DAY,
-                                     //CalendarHomePage.selectDayOption.DETAILTIME,
-                                     //null);
   }
 
   @Test

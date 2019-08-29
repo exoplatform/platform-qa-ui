@@ -201,23 +201,14 @@ public class SourceTextEditor {
    * @param link link of file that will be attached
    */
   public void attachFile(String link) {
-    // String fs = File.separator;
-    // WebElement elem = waitForAndGetElement(ELEMENT_UPLOAD_NAME, 5000, 1, 2);
     String fs = File.separator;
     String path = testBase.getAbsoluteFilePath(link.replace("/", fs));
     info("path in uploadRobot:" + path);
-    // doubleClickOnElement(ELEMENT_UPLOAD_NAME);
 
     ((JavascriptExecutor) testBase.getExoWebDriver()
                                   .getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
 
     testBase.getExoWebDriver().getWebDriver().findElement(ELEMENT_UPLOAD_NAME).sendKeys(path);
-    /*
-     * scrollToElement(elem, driver); click(elem, 2, true);
-     * uploadFileUsingRobot(link); waitForAndGetElement(By
-     * .linkText(link.substring(link.lastIndexOf(fs) + 1)));
-     */
-
   }
 
   /**

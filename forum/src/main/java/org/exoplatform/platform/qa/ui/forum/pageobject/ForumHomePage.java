@@ -115,8 +115,6 @@ public class ForumHomePage {
    * @param name String
    */
   public void goToCategory(String name) {
-    // goToHomeCategory();
-    // evt.click(ELEMENT_FORUM_DETAIL_FORUM_NAME_LINK.replace("${name}", name));
     $(byText(name)).click();
   }
 
