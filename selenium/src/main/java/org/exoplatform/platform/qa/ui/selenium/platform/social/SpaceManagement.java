@@ -110,7 +110,7 @@ public class SpaceManagement {
    * @param groups
    * @param params
    */
-  public void addNewSpace(String name, String desc, String access, String hidden, String groups, int... params) {
+  public void addNewSpace(String name, String desc, String access, String groups, int... params) {
     int iTimeout = params.length > 0 ? params[0] : testBase.getDefaultTimeout();
     if ($(ELEMENT_ADDNEWSPACE_BUTTON).waitUntil(Condition.visible, Configuration.timeout) != null) {
       $(ELEMENT_ADDNEWSPACE_BUTTON).click();
@@ -120,25 +120,21 @@ public class SpaceManagement {
     $(ELEMENT_ADDNEWSPACE_FORM).waitUntil(Condition.visible, Configuration.timeout);
     $(ELEMENT_SPACE_NAME_INPUT).setValue(name);
     $(ELEMENT_SPACE_DESCRIPTION_INPUT).setValue(desc);
-    if (hidden == "Yes")
-    {
-    if  ($(byXpath("//label[@class='switchBtnLabelOn']")).getCssValue("width").equals("9px"))
-    {
-      $(byXpath("//*[@class='uiSwitchBtn']")).waitUntil(Condition.visible,Configuration.timeout).click();
-    }
-    }
-    if (hidden == "No")
-    {
-      if  ($(byXpath("//label[@class='switchBtnLabelOn']")).getCssValue("width").equals("52px"))
-      {
-        $(byXpath("//*[@class='uiSwitchBtn']")).waitUntil(Condition.visible,Configuration.timeout).click();
-      }
-    }
-    if (!access.isEmpty()) {
-      info("Select a permission for space:" + access);
-      $(byId("UIRegistration")).selectRadio(access);
-    }
 
+    if (!access.isEmpty()) {
+      goToAccessTabFromPopUp();
+      String[] arrayRight = access.split("/");
+      if (arrayRight.length > 0) {
+        for (String right : arrayRight) {
+          info("Select a permission for space:" + right);
+          evt.check(byXpath(ELEMENT_ACCESS_PERMISSION_RADIO.replace("${right}", right)), 2);
+        }
+      } else {
+        info("Select a permission for space:" + access);
+        evt.check(byXpath(ELEMENT_ACCESS_PERMISSION_RADIO.replace("${right}", access)), 2);
+      }
+
+    }
     if (!groups.isEmpty()) {
       goToInviteUserFromGroupTab();
       info("Select a group in the list");
@@ -159,7 +155,6 @@ public class SpaceManagement {
     }
     info("Save all changes");
     $(ELEMENET_SPACE_CREATE_BUTTON).click();
-    sleep(2000);
     $(ELEMENET_SPACE_CREATE_BUTTON).waitUntil(Condition.disappear, Configuration.timeout);
     evt.waitForAndGetElement(By.linkText(name), iTimeout);
   }

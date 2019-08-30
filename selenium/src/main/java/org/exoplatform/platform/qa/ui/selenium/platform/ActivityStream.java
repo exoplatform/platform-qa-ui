@@ -474,7 +474,7 @@ public class ActivityStream {
      */
     public void addText(String text) {
         info("----Add text into activity text box-----");
-        SelenideElement frame = $(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible, Configuration.timeout);
+        SelenideElement frame = $(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible, Configuration.collectionsTimeout);
         $(ELEMENT_ACCOUNT_NAME_LINK).click();
         switchTo().frame(frame);
         ELEMENT_INPUT_ACTIVITY.click();

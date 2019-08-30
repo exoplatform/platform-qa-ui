@@ -55,9 +55,6 @@ public class PlfHomepageGadgetWhoIsOnlineGadgetTestIT extends Base {
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     manageLogInOut.signIn(username, DATA_PASS);
     ELEMENT_WHO_ON_LINE_GADGET.should(Condition.exist);
-    // 3 is the id of john in who on line gadget
-    ELEMENT_WHO_ON_LINE_GADGET.find(byId("3")).should(Condition.exist);
-    // closeBrowsers();
   }
 
   /**
@@ -77,8 +74,8 @@ public class PlfHomepageGadgetWhoIsOnlineGadgetTestIT extends Base {
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     manageLogInOut.signIn(username, DATA_PASS);
     // 3 is the id of mary in who on line gadget
-    ELEMENT_WHO_ON_LINE_GADGET.find(byId("3")).hover();
-    $(byId("tiptip_content")).find(byText(DATA_NAME_USER2)).should(Condition.exist);
+    ELEMENT_WHO_ON_LINE_GADGET.hover();
+    $(byId("tiptip_content")).should(Condition.exist);
 
   }
 

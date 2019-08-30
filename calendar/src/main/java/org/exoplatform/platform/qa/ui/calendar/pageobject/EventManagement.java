@@ -157,7 +157,7 @@ public class EventManagement {
   public void goToAddEventFromActionBar() {
     info("Go to Add Event page from action bar");
     executeJavaScript("window.scrollBy(0,-2000)", "");
-    $(ELEMENT_BUTTON_EVENT).click();
+    $(ELEMENT_BUTTON_EVENT).waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_EVENT_DRAWER.parent().waitUntil(Condition.visible, Configuration.timeout);
   }
 
@@ -414,7 +414,7 @@ public class EventManagement {
       Date to = formatterTime.parse(toTime);
       long diff = (to.getTime() - fr.getTime()) / 60000;
       info("Duration is " + diff + " minus");
-      assert duration == (int) diff;
+      assertEquals(duration,(int)diff);
     } catch (ParseException e) {
       e.printStackTrace();
     }
@@ -787,22 +787,21 @@ public class EventManagement {
     ELEMENT_REPEAT_SWITCH_LABEL.click();
     if (endRepeat != null) {
       switch (endRepeat) {
-      case After:
-        info("Check After option");
-        evt.check($(byId("endAfter")), 2);
-        if (occurence != "")
-          evt.type(ELEMENT_END_AFTER_NUMBER, option[0], true);
-        break;
-      case ByThisDate:
-        info("Check By this date option");
-        evt.check(ELEMENT_BY_THIS_DATE_END_RECURRING_EVENT, 2);
-        if (occurence != "")
-          evt.type(ELEMENT_DATE_TIME_PICKER, option[0], true);
-        break;
-      case Never:
-        info("Check never option");
-        evt.check(ELEMENT_NEVER_END_RECURRING_EVENT, 2);
-        break;
+        case After:
+          info("Check After option");
+          evt.check(byId("endAfter"), 2);
+          if (occurence != "")
+            break;
+        case ByThisDate:
+          info("Check By this date option");
+          evt.check(ELEMENT_BY_THIS_DATE_END_RECURRING_EVENT, 2);
+          if (occurence != "")
+            evt.type(ELEMENT_DATE_TIME_PICKER, option[0], true);
+          break;
+        case Never:
+          info("Check never option");
+          evt.check(ELEMENT_NEVER_END_RECURRING_EVENT, 2);
+          break;
       }
     }
   }

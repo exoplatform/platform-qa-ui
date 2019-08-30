@@ -1316,7 +1316,10 @@ public class CalendarLocator {
                                                                          By.xpath(".//*[@class='repeatSummary'][contains(text(),' Daily, 5 times')]");
 
   public static final By              ELEMENT_SAVE_EVENT_OCCURRING                                     =
-                                                                   By.xpath("//*[@id='UIRepeatEventForm']//*[contains(text(),'Save')]");
+                                                                   By.xpath("//*[@class='uiForm uiRepeatEventForm']//*[contains(text(),'Save')]");
+
+  public static final By              ELEMENT_SAVE_ADD_EVENT                                     =
+                                                                   By.xpath("//div[@id='ExoCalendarEventForm']//div[@class='uiAction']/button[contains(text(),'Save')]");
 
   public static final By              ELEMENT_RECURRING_SAVE_BTN                                       =
                                                                  By.xpath(".//*[@id='UIRepeatEventForm']//button[1]");

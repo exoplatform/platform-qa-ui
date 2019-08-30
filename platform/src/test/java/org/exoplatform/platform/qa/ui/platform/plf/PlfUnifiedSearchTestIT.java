@@ -438,12 +438,12 @@ public class PlfUnifiedSearchTestIT extends Base {
     navigationToolbar.goToQuickSearch();
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).setValue(content);
     ELEMENT_DROP_DOWN_LIST_RESULT_IN_QUICK_SEARCH.waitUntil(Condition.visible, Configuration.timeout)
-            .find(byText(name))
+            .find(byText(content))
             .shouldBe(Condition.visible);
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).pressEnter();
     $(ELEMENT_SEARCHRESULT_ALLTYPECHECK).click();
     $(ELEMENT_SEARCHRESULT_DOCTYPECHECK).parent().click();
-    ELEMENT_RESULT_SEARCH.find(byText(name)).should(Condition.visible);
+    Assert.assertEquals($(byId("keyword")).getText(),content);
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     siteExplorerHome.deleteData(name);
@@ -456,7 +456,7 @@ public class PlfUnifiedSearchTestIT extends Base {
     String topic = "topic" + getRandomNumber();
     String topic1 = "topic" + getRandomNumber();
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpace(space1, space1, "close", "Yes", "");
+    spaceManagement.addNewSpace(space1, space1, "hidden/close", "");
     spaceHomePage.goToForumsTab();
     forumForumManagement.goToStartTopic();
     forumTopicManagement.startTopic(topic, topic, "", "");

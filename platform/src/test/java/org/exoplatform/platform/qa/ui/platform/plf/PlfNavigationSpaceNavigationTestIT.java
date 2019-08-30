@@ -1,7 +1,6 @@
 package org.exoplatform.platform.qa.ui.platform.plf;
 
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.username;
@@ -90,7 +89,7 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
   public void test03_RemoveCollaborationApplicationToolbar() {
     info("Test 02: Remove application of space's toolbar");
     String space1 = "space1" + getRandomNumber();
-    String app = "Answers";
+    String app = "Tasks";
     info("app:" + app);
     String category = "Collaboration";
     info("cate:" + category);
@@ -103,8 +102,8 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     spaceSettingManagement.addApplication(category, app);
 
     info("Verify that Application is added to space");
-    ELEMENT_SPACE_MENU_TAB.find(byText("Answer")).should(Condition.exist);
-    spaceSettingManagement.removeApplication("Answer");
+    ELEMENT_SPACE_MENU_TAB.find(byText("Tasks")).should(Condition.exist);
+    spaceSettingManagement.removeApplication("Tasks");
     ELEMENT_SPACE_MENU_TAB.find(byText(app)).shouldNot(Condition.exist);
 
     info("Delete the space");
@@ -248,7 +247,7 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
   public void test08_AddCollaborationApplicationToolbar() {
     info("Test 02: Remove application of space's toolbar");
     String space1 = "space1" + getRandomNumber();
-    String app = "Answers";
+    String app = "Tasks";
     info("app:" + app);
     String category = "Collaboration";
     info("cate:" + category);
@@ -261,7 +260,7 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     spaceSettingManagement.addApplication(category, app);
 
     info("Verify that Application is added to space");
-    ELEMENT_SPACE_MENU_TAB.find(byText("Answer")).should(Condition.exist);
+    ELEMENT_SPACE_MENU_TAB.find(byText("Tasks")).should(Condition.exist);
     info("Delete the space");
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space1, false);
@@ -438,9 +437,10 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     $(ELEMENT_DOCUMENT_TAB).waitUntil(Condition.visible, Configuration.timeout).isDisplayed();
     $(ELEMENT_TASK_TAB).waitUntil(Condition.visible, Configuration.timeout).isDisplayed();
     $(ELEMENT_AGENDA_TAB).waitUntil(Condition.visible, Configuration.timeout).isDisplayed();
+    $(byXpath("//i[@class='uiIconAppMoreButton']")).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_MEMBER_TAB).waitUntil(Condition.visible, Configuration.timeout).isDisplayed();
     $(ELEMENT_SPACE_SPACE_SETTINGS).waitUntil(Condition.visible, Configuration.timeout).isDisplayed();
-    $(ELEMENT_HOME_SPACE_TAB).waitUntil(Condition.visible, Configuration.timeout).isDisplayed();
+    $(byXpath("//i[@class='uiIconAppSpaceActivityStreamPortlet uiIconDefaultApp']")).waitUntil(Condition.visible, Configuration.timeout).isDisplayed();
     info("Delete the space");
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space1, false);

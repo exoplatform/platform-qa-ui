@@ -388,6 +388,7 @@ public class SiteExplorerHome {
    */
   public void editTag(String oldName, String newName) {
     info("Click on Tag Cloud tab of SE");
+    executeJavaScript("window.scrollBy(0,-1000)", "");
     $(ELEMENT_SITEEXPLORER_TAG_CLOUD_TAB).click();
     $(byId("UITagExplorer")).find(byText(oldName)).should(Condition.visible);
     info("Click on Edit button of Tag Cloud");

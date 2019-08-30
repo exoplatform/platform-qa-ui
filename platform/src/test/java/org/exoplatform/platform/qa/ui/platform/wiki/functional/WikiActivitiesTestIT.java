@@ -332,6 +332,7 @@ public class WikiActivitiesTestIT extends Base {
      */
 
     @Test
+    @Tag("wiki1477")
     public void test06_UpdateWikisActivityAfterEditWikiPageWithComment() {
         info("Test 6: Update wiki's activity after edit wiki page with comment");
         info("Create a wiki page");

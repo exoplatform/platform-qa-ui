@@ -1,11 +1,9 @@
 package org.exoplatform.platform.ui.qa.wiki;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.back;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_BUTTON_WIKI_RITCH_TEXT;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_CONTENT_WIKI_INPUT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.util.ArrayList;
@@ -150,7 +148,16 @@ public class WikiBasicActionAddRichTextTestIT extends Base {
     wikiHomePage.goToAddBlankPage();
     richTextEditor.addSimplePage(title1, content1);
     richTextEditor.goToWebPageLink();
-    richTextEditor.insertWebLink(address, label, tooltip, true);
+    $(ELEMENT_WEB_PAGE_WEB_ADDRESS).waitUntil(Condition.visible,2000).val(address);
+    sleep(2000);
+    info("Input Label for the page");
+    richTextEditor.inputLabel(label);
+    sleep(2000);
+    info("Input Tooltip for the page");
+    richTextEditor.inputToolTip(tooltip);
+    sleep(2000);
+    info("Click on Create link button");
+    richTextEditor.goToCreateLink();
     wikiValidattions.verifyInsertedLinkIntoFrame(label, tooltip);
     wikiManagement.saveAddPage();
     wikiValidattions.verifyTitleWikiPage(title1);

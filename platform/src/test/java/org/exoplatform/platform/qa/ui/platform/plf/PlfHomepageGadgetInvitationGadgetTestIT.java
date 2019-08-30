@@ -2,7 +2,7 @@ package org.exoplatform.platform.qa.ui.platform.plf;
 
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.core.PLFData.password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.username;
@@ -269,9 +269,10 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
     info("Sign in with ROOT account");
     manageLogInOut.signIn(username3, password);
     navigationToolbar.goToQuickSearch();
-    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
+    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.collectionsTimeout);
+    executeJavaScript("window.scrollBy(0,250)");
     ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().hover();
-    ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().parent().find(byClassName("uiIconClose")).click();
+    ELEMENT_GADGET_INVITATION.waitUntil(Condition.visible,2000).find(byText(username2 + " " + username2)).parent().parent().waitUntil(Condition.visible,2000).find(byClassName("uiIconClose")).waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).shouldNot(Condition.exist);
     ELEMENT_GADGET_INVITATION.find(byText(username1 + " " + username1)).should(Condition.exist);
 

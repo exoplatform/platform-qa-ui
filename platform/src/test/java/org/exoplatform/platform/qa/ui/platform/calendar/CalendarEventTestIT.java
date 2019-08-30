@@ -378,62 +378,6 @@ $(byXpath("//*[@id=\"UIEventForm\"]/div[4]/button[2]")).click();
   }
 
   /**
-   * Case ID:115627. Test Case Name: Send invitation. Pre-Condition: Mail is
-   * configuredEmail of participant is valid to receive mail Post-Condition:
-   * PENDING: Should verify link by checking manual Step Number: 1 Step Name: Step
-   * 1: Open add/edit event pop up Step Description: - Select a calendar, Click
-   * Setting icon of this calendar and choose [Add Event] or Click Event button on
-   * action bar - Click [More Details] Input Data: Expected Outcome: Add/Edit
-   * Event pop -up has 4 tabs - Details - Reminders - Participants - Schedule Step
-   * number: 2 Step Name: Step 2: Add aprticipant Step Description: - Click
-   * [Participants] tab - Select Privacy, Available - Add aparticipant - Select 1
-   * option to Send Invitations, eg Always - Save Input Data: Expected Outcome:
-   * Automatically send the invitation mail to the participants.Their statuses
-   * will be updated in the Status column after they have answered the invitations
-   * via emails.If the participants agree to participate (by clicking Yes in their
-   * received invitation emails), their statuses will be yes.If the participants
-   * do not agree to participate (by clicking No), their statuses will be no.If
-   * the participants have not decided to take part in the event (by clicking Not
-   * sure), their statuses will be pending.
-   */
-
-  @Test
-  public void test08_SendInvitation() {
-    String titleEvent = "titleEvent" + getRandomNumber();
-    String contentEvent = "contentEvent" + getRandomNumber();
-    String content = "content" + getRandomNumber();
-    info("Test 8: Send invitation");
-
-    info("Add a event");
-    homePagePlatform.goToCalendarPage();
-    eventManagement.goToAddEventFromActionBar();
-    eventManagement.inputDataEventInQuickForm(titleEvent,
-                                              contentEvent,
-                                              getDate(0, "MM/dd/yyyy"),
-                                              getDate(0, "MM/dd/yyyy"),
-                                              false);
-    $(ELEMENT_QUICK_INPUT_EVENT_NAME).click();
-    eventManagement.moreDetailsEvent();
-    $(ELEMENT_EVENT_PARTICIPANTS_TAB).click();
-    eventManagement.selectPrivacyParticipant(false);
-    eventManagement.selectAvailable(EventManagement.selectAvailableOption.AVAILABLE);
-    ELEMENT_ICON_ADD_PARTICIPANT.click();
-    eventManagement.selectUserParticipants(DATA_USER2, content, 0);
-    $(ELEMETN_INVITATION_SAVE_BUTTON).pressEnter();
-    eventManagement.selectSendInvitation(PlatformBase.selectInvitationOption.ALWAYS);
-    eventManagement.saveAddEventDetails();
-    calendarHomePage.verifyIsPresentEventTask(titleEvent,
-                                              CalendarHomePage.selectViewOption.WEEK,
-                                              CalendarHomePage.selectDayOption.DETAILTIME);
-
-    info("Clear data");
-    calendarHomePage.deleteEventTask(titleEvent,
-                                     CalendarHomePage.selectViewOption.WEEK,
-                                     CalendarHomePage.selectDayOption.DETAILTIME,
-                                     getDate(0, "MMM dd yyyy"));
-  }
-
-  /**
    * Case ID:115628. Test Case Name: Add a participant. Pre-Condition:
    * Post-Condition: Step Number: 1 Step Name: Step 1: Open add/edit event pop up
    * Step Description: - Select a calendar, Click Setting icon of this calendar
@@ -899,11 +843,8 @@ $(byXpath("//*[@id=\"UIEventForm\"]/div[4]/button[2]")).click();
     calendarManagement.executeActionCalendar(calendarName, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     info("Check default date");
     eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
-    eventManagement.inputDataEventInQuickForm(titleEvent,
-                                              contentEvent,
-                                              getDate(0, "MM/dd/yyyy"),
-                                              getDate(0, "MM/dd/yyyy"),
-                                              false);
+    $(ELEMENT_EVENT_TITLE_DRAWER).setValue(titleEvent);
+    $(ELEMENT_EVENT_DESCRIPTION).setValue(contentEvent);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
                                               CalendarHomePage.selectViewOption.WEEK,
@@ -944,11 +885,8 @@ $(byXpath("//*[@id=\"UIEventForm\"]/div[4]/button[2]")).click();
     calendarManagement.executeActionCalendar(calendarName, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     info("Check default date");
     eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
-    eventManagement.inputDataEventInQuickForm(titleEvent,
-                                              contentEvent,
-                                              getDate(0, "MM/dd/yyyy"),
-                                              getDate(0, "MM/dd/yyyy"),
-                                              false);
+    $(ELEMENT_EVENT_TITLE_DRAWER).setValue(titleEvent);
+    $(ELEMENT_EVENT_DESCRIPTION).setValue(contentEvent);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
                                               CalendarHomePage.selectViewOption.WEEK,
@@ -961,11 +899,8 @@ $(byXpath("//*[@id=\"UIEventForm\"]/div[4]/button[2]")).click();
                                                        CalendarHomePage.selectDayOption.DETAILTIME,
                                                        getDate(0, "MMM dd yyyy"));
     eventManagement.checkSuggestionEventTimeInDetailForm(null, null, 60);
-    eventManagement.inputDataEventInDetailForm(titleEvent2,
-                                               contentEvent2,
-                                               getDate(0, "MM/dd/yyyy"),
-                                               getDate(0, "MM/dd/yyyy"),
-                                               false);
+    $(ELEMENT_EVENT_TITLE_DRAWER).setValue(titleEvent2);
+    $(ELEMENT_EVENT_DESCRIPTION).setValue(contentEvent2);
     eventManagement.saveAddEventDetails();
     calendarHomePage.verifyIsPresentEventTask(titleEvent2,
                                               CalendarHomePage.selectViewOption.WEEK,

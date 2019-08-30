@@ -1108,6 +1108,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
 
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.goToMySpaces();
+    spaceManagement.searchSpace(space);
     ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceHomePage.goToWikiTab();
     info("Open a wiki page ");

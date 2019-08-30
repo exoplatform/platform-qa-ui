@@ -1,10 +1,13 @@
 package org.exoplatform.platform.qa.ui.platform.calendar;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -804,59 +807,33 @@ public class CalendarViewTestIT extends Base {
 
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.inputDataEventInQuickForm(titleEventMeeting,
-                                              content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
-                                              true,
-                                              null,
-                                              "Meeting");
+    ELEMENT_EVENT_TITLE_DRAWER.waitUntil(Condition.visible, Configuration.timeout).setValue(titleEventMeeting);
+    ELEMENT_EVENT_DESCRIPTION.setValue(content);
+    ELEMENT_EVENT_CATEGORY.selectOption("Meeting");
     eventManagement.saveQuickAddEvent();
-
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.inputDataEventInQuickForm(titleEventCall,
-                                              content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
-                                              true,
-                                              null,
-                                              "Calls");
+    ELEMENT_EVENT_TITLE_DRAWER.waitUntil(Condition.visible,Configuration.timeout).setValue(titleEventCall);
+    ELEMENT_EVENT_DESCRIPTION.setValue(content);
+    ELEMENT_EVENT_CATEGORY.selectOption("Calls");
     eventManagement.saveQuickAddEvent();
-
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.inputDataEventInQuickForm(titleEventClient,
-                                              content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
-                                              true,
-                                              null,
-                                              "Clients");
+    ELEMENT_EVENT_TITLE_DRAWER.waitUntil(Condition.visible,Configuration.timeout).setValue(titleEventClient);
+    ELEMENT_EVENT_DESCRIPTION.setValue(content);
+    ELEMENT_EVENT_CATEGORY.selectOption("Clients");
     eventManagement.saveQuickAddEvent();
-
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.inputDataEventInQuickForm(titleEventHoliday,
-                                              content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
-                                              true,
-                                              null,
-                                              "Holiday");
+    ELEMENT_EVENT_TITLE_DRAWER.waitUntil(Condition.visible,Configuration.timeout).setValue(titleEventHoliday);
+    ELEMENT_EVENT_DESCRIPTION.setValue(content);
+    ELEMENT_EVENT_CATEGORY.selectOption("Holiday");
     eventManagement.saveQuickAddEvent();
-
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.inputDataEventInQuickForm(titleEventAnni,
-                                              content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
-                                              true,
-                                              null,
-                                              "Anniversary");
+    ELEMENT_EVENT_TITLE_DRAWER.waitUntil(Condition.visible,Configuration.timeout).setValue(titleEventAnni);
+    ELEMENT_EVENT_DESCRIPTION.setValue(content);
+    ELEMENT_EVENT_CATEGORY.selectOption("Anniversary");
     eventManagement.saveQuickAddEvent();
-
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.LIST);
     click(ELEMENT_TODAY_ACTION_BAR);
     calendarHomePage.selectCategory(CalendarHomePage.selectCategoryOption.ANNIVERSARY);
-
     calendarHomePage.verifyIsNotPresentEventTask(titleEventClient,
                                                  CalendarHomePage.selectViewOption.LIST,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
@@ -872,9 +849,7 @@ public class CalendarViewTestIT extends Base {
     calendarHomePage.verifyIsNotPresentEventTask(titleEventMeeting,
                                                  CalendarHomePage.selectViewOption.LIST,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
-
     calendarHomePage.selectCategory(CalendarHomePage.selectCategoryOption.MEETING);
-
     calendarHomePage.verifyIsNotPresentEventTask(titleEventClient,
                                                  CalendarHomePage.selectViewOption.LIST,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
@@ -890,7 +865,6 @@ public class CalendarViewTestIT extends Base {
     calendarHomePage.verifyIsPresentEventTask(titleEventMeeting,
                                               CalendarHomePage.selectViewOption.LIST,
                                               CalendarHomePage.selectDayOption.ALLDAY);
-
     calendarHomePage.selectCategory(CalendarHomePage.selectCategoryOption.CALL);
     calendarHomePage.verifyIsNotPresentEventTask(titleEventClient,
                                                  CalendarHomePage.selectViewOption.LIST,
@@ -907,7 +881,6 @@ public class CalendarViewTestIT extends Base {
     calendarHomePage.verifyIsNotPresentEventTask(titleEventMeeting,
                                                  CalendarHomePage.selectViewOption.LIST,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
-
     calendarHomePage.selectCategory(CalendarHomePage.selectCategoryOption.HOLIDAY);
     calendarHomePage.verifyIsNotPresentEventTask(titleEventClient,
                                                  CalendarHomePage.selectViewOption.LIST,
@@ -924,7 +897,6 @@ public class CalendarViewTestIT extends Base {
     calendarHomePage.verifyIsNotPresentEventTask(titleEventMeeting,
                                                  CalendarHomePage.selectViewOption.LIST,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
-
     calendarHomePage.selectCategory(CalendarHomePage.selectCategoryOption.CLIENT);
     calendarHomePage.verifyIsPresentEventTask(titleEventClient,
                                               CalendarHomePage.selectViewOption.LIST,
@@ -941,7 +913,6 @@ public class CalendarViewTestIT extends Base {
     calendarHomePage.verifyIsNotPresentEventTask(titleEventMeeting,
                                                  CalendarHomePage.selectViewOption.LIST,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
-
     calendarHomePage.selectCategory(CalendarHomePage.selectCategoryOption.ALL);
     calendarHomePage.verifyIsPresentEventTask(titleEventClient,
                                               CalendarHomePage.selectViewOption.LIST,
