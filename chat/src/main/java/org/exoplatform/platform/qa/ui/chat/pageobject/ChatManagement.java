@@ -67,8 +67,7 @@ public class ChatManagement {
     ELEMENT_CHAT_DUE_DATE_TASK.waitUntil(Condition.visible,2000).click();
     ELEMENT_CHAT_CURRENT_DATE_TASK.waitUntil(Condition.visible,2000).click();
     ELEMENT_CHAT_POST_TASK_BUTTON.waitUntil(Condition.visible,2000).click();
-    sleep(2000);
-    ELEMENT_CONTAINER_LIST_MESSAGES.find(byLinkText(taskName)).shouldBe(Condition.visible);
+    ELEMENT_CONTAINER_LIST_MESSAGES.waitUntil(Condition.visible,2000).find(byLinkText(taskName)).waitUntil(Condition.visible,2000).shouldBe(Condition.visible);
   }
 
   public void addEventInChat(String event, String location){

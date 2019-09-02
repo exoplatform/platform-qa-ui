@@ -102,7 +102,7 @@ public class HomePagePlatform {
   public void goToMySpaces() {
     info("-- Go to my spaces --");
     ELEMENT_MY_SPACE_LINK_PLF.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
-    refreshUntil(ELEMENT_ADDNEWSPACE_BUTTON, Condition.visible, 3000);
+    refreshUntil(ELEMENT_ADDNEWSPACE_BUTTON, Condition.visible, Configuration.timeout);
   }
 
   /**
