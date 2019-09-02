@@ -10,9 +10,12 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER2;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_EMAIL_LINK_EMAIL_ADDRESS;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_WEB_PAGE_WEB_ADDRESS;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
@@ -540,7 +543,16 @@ public class WikiBasicActionDeleteTestIT extends Base {
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(title1, content1);
         richTextEditor.goToWebPageLink();
-        richTextEditor.insertWebLink(address, label, tooltip, false);
+        $(ELEMENT_WEB_PAGE_WEB_ADDRESS).waitUntil(Condition.visible,2000).val(address);
+        sleep(2000);
+        info("Input Label for the page");
+        richTextEditor.inputLabel(label);
+        sleep(2000);
+        info("Input Tooltip for the page");
+        richTextEditor.inputToolTip(tooltip);
+        sleep(2000);
+        info("Click on Create link button");
+        richTextEditor.goToCreateLink();
         wikiValidattions.verifyInsertedLinkIntoFrame(label, tooltip);
         richTextEditor.removeLink(label);
     }

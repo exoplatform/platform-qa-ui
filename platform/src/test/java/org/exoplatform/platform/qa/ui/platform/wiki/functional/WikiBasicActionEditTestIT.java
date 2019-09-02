@@ -1310,19 +1310,15 @@ public class WikiBasicActionEditTestIT extends Base {
         richTextEditor.editSimplePage(title4, "");
         richTextEditor.changeLink(label);
         richTextEditor.goToEditLink();
-        richTextEditor.editWikiPageLink("", label4, tooltip4);
-        richTextEditor.removeLink(content2);
-        getExoWebDriver().getWebDriver().navigate().refresh();
-        richTextEditor.goToWikiPageLink();
         richTextEditor.insertExistWikiPageLink(title2, label4, tooltip4, RichTextEditor.wikiPageLinkTab.All_pages);
         wikiManagement.saveAddPage();
-        wikiValidattions.verifyTitleWikiPage(title3);
+        wikiValidattions.verifyTitleWikiPage(title4);
         info("Content of wiki page link is shown");
-        wikiHomePage.goToAPage(title3);
+        wikiHomePage.goToAPage(title4);
         wikiManagement.viewInsertLink(label4);
         wikiValidattions.verifyPageContent(title2, content2);
         wikiHomePage.deleteWiki(title2);
-        wikiHomePage.deleteWiki(title3);
+        wikiHomePage.deleteWiki(title4);
         wikiHomePage.deleteWiki(title1);
 
     }

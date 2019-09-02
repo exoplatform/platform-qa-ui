@@ -160,8 +160,8 @@ public class SpaceActivitiesTestIT extends Base {
     Integer idComment = Integer.parseInt(id) + 1;
     // hover on the comment to appear the delete button
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-    $(byId(ELEMENT_COMMENT_BLOC.replace("{id}", id))).hover().click();
-    $(byId(ELEMENT_COMMENT_DELETE.replace("{id}", idComment.toString()))).click();
+    $(byXpath("//div[@id='CommentBlock{id}1']//i[@class='uiIconActivityAction uiIconLightGray']".replace("{id}", idComment.toString()))).click();
+    $(byId(ELEMENT_COMMENT_DELETE.replace("{id}", idComment.toString()))).waitUntil(Condition.visible,2000).click();
     // Confirm
     ELEMENT_DELETE_POPUP_OK.click();
     // verify that the comment is deleted
