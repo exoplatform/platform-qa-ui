@@ -963,10 +963,10 @@ public class CalendarLocator {
                                                                           By.xpath("//*[@id=\"allday\"]");
 
   public static final By              ELEMENT_QUICK_INPUT_EVENT_FROM_DATE                              =
-                                                                          By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[1]/div[2]/div[1]/input");
+                                                                          By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[2]/div[1]/div[2]/div[1]/input");
 
   public static final By              ELEMENT_QUICK_INPUT_EVENT_TO_DATE                                =
-                                                                        By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[2]/div[2]/div[1]/input");
+                                                                        By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[2]/div[2]/div[2]/div[1]/input");
 
   public static final String          ELEMENT_QUICK_INPUT_EVENT_FROM_DATE_VALUE                        =
                                                                                 "//*[@id='UIQuickAddEvent']//*[@name='from'][contains(@value,'$value')]";
@@ -975,13 +975,13 @@ public class CalendarLocator {
                                                                               "//*[@id='UIQuickAddEvent']//*[@name='to'][contains(@value,'$value')]";
 
   public static final By              ELEMENT_QUICK_INPUT_EVENT_FROM_TIME                              =
-                                                                          By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[1]/div[2]/div[3]/input");
+                                                                          By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[2]/div[1]/div[2]/div[3]/input");
 
   public static final String          ELEMENT_QUICK_INPUT_EVENT_FROM_TIME_VALUE                        =
                                                                                 "//*[@id='UIQuickAddEvent']//input[@id='fromTime'][contains(@value,'$value')]";
 
   public static final By              ELEMENT_QUICK_INPUT_EVENT_TO_TIME                                =
-                                                                        By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[2]/div[2]/div[3]/input");
+                                                                        By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[2]/div[2]/div[2]/div[3]/input");
 
   public static final String          ELEMENT_QUICK_INPUT_EVENT_TO_TIME_VALUE                          =
                                                                               "//*[@id='UIQuickAddEvent']//input[@id='toTime'][contains(@value,'$value')]";

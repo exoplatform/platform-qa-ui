@@ -57,6 +57,8 @@ public class Button {
 
     public final By ELEMENT_ADD_BUTTON = By.xpath("//*[text()='Add']");
 
+    public static final By ELEMENT_CHANGE_PASSWORD_CLOSE_BUTTON = By.xpath("//a[normalize-space(text())='Close']");
+
     public final By ELEMENT_ADD_BUTTON_DISABLED =
             By.xpath("//*[@id='PermissionTab']//button[@disabled='disabled']");
 

@@ -100,6 +100,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
   }
 
   @Test
+  @Tag("calendar1")
   public void test05_AddGroupCalendar() {
     String groupCalendar = "/platform/users";
     String calendarName = "calendarName" + getRandomNumber();
@@ -239,6 +240,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
   }
 
   @Test
+  @Tag("calendar4")
   public void test15_DeletenEventInPersonalCalendar() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String calendar = "calendar" + getRandomNumber();
@@ -272,6 +274,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
   }
 
   @Test
+  @Tag("calendar3")
   public void test_AddnEventInPersonalCalendarWithSpecialCharacter() {
     String titleEvent = "l'event" + getRandomNumber();
     String calendar = "calendar" + getRandomNumber();
@@ -286,7 +289,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     info("Check default date");
     eventManagement.checkEventPopUp();
     info("Add event");
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).setValue(titleEvent);
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).waitUntil(Condition.visible,2000).setValue(titleEvent);
     eventManagement.saveQuickAddEvent();
     $(byText(titleEvent)).should(Condition.exist);
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
@@ -303,6 +306,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
   }
 
   @Test
+  @Tag("calendar2")
   public void test19_EditEventWithValidData() {
     info("Test 19 Edit event with valid data");
 
@@ -323,12 +327,12 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     String content = "content" + getRandomNumber();
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT),Condition.visible,1000);
     eventManagement.goToAddEventFromActionBar();
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).setValue(titleEvent);
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).waitUntil(Condition.visible,2000).setValue(titleEvent);
     eventManagement.saveQuickAddEvent();
 
     String titleEvent2 = "titleEvent2" + getRandomNumber();
     calendarManagement.openEditEventTaskPopup(titleEvent, CalendarHomePage.selectViewOption.LIST);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).setValue(titleEvent2);
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).waitUntil(Condition.visible,2000).setValue(titleEvent2);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.LIST);
       $(byText(titleEvent2)).waitUntil(Condition.appears, Configuration.timeout);

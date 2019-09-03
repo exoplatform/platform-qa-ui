@@ -88,7 +88,7 @@ public class SpaceManageMessageTestIT extends Base {
     spaceHomePage.goToSpaceSettingTab();
     info("accept request by user 1");
     spaceSettingManagement.goToMemberTabInSpaceSettingTab();
-    $(byText(usernamea + " " + usernamea)).parent().find(ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB).click();
+    $(byText(usernamea + " " + usernamea)).parent().waitUntil(Condition.visible,2000).find(ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB).waitUntil(Condition.visible,2000).click();
     homePagePlatform.goToHomePage();
     homePagePlatform.goToChat();
     switchTo().window(1);

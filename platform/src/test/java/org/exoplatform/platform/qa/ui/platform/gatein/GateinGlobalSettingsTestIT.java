@@ -83,6 +83,7 @@ public class GateinGlobalSettingsTestIT extends Base {
      * <li>Test Case Name: Change Password.</li>
      */
     @Test
+    @Tag("gatein1")
     public void test01_ChangePassword() {
         String username = "username" + getRandomNumber();
         String password = "123456";
@@ -282,6 +283,7 @@ public class GateinGlobalSettingsTestIT extends Base {
 
     @Tag("gatein")
     @Test
+    @Tag("gatein3")
     public void test06_CheckMyDashboardDefaultTabModified() {
         //2418
         String tabName = "tabName" + getRandomNumber();
@@ -297,6 +299,7 @@ public class GateinGlobalSettingsTestIT extends Base {
 
     @Tag("gatein")
     @Test
+    @Tag("gatein2")
     public void test07_CheckGadgetAddedInMyDashboard() {
         //2417
         String gadgetTitle="Services Management";

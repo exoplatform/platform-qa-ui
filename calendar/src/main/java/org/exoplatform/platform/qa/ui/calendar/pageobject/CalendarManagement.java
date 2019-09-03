@@ -892,7 +892,7 @@ public class CalendarManagement {
 
     } else {
       info("Double click on the event");
-        ELEMENT_POUPUP_LIST_EVENT.find(byText(name)).doubleClick();
+        ELEMENT_POUPUP_LIST_EVENT.waitUntil(Condition.visible,2000).find(byText(name)).waitUntil(Condition.visible,2000).doubleClick();
     }
     ELEMENT_EVENT_DRAWER.waitUntil(Condition.appears, Configuration.timeout);
     info("The edit form is shown");

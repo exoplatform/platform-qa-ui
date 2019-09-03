@@ -66,10 +66,8 @@ public class ChatManagement {
     $(ELEMENT_CHAT_TASK_NAME).setValue(taskName);
     for (int i = 0; i <= user.length - 1; i++) {
       ELEMENT_CHAT_ASSIGNEE_TASK.setValue(user[i]);
-      sleep(Configuration.collectionsTimeout);
-      ELEMENT_CHAT_RESULT_SEARCH_ASSIGNEE.waitUntil(Condition.visible, Configuration.timeout);
-      sleep(2000);
-      ELEMENT_CHAT_ASSIGNEE_TASK.pressEnter();
+      ELEMENT_CHAT_RESULT_SEARCH_ASSIGNEE.waitUntil(Condition.appears,Configuration.collectionsTimeout);
+      ELEMENT_CHAT_ASSIGNEE_TASK.waitUntil(Condition.visible,Configuration.timeout).pressEnter();
     }
     ELEMENT_CHAT_DUE_DATE_TASK.click();
     ELEMENT_CHAT_CURRENT_DATE_TASK.click();
