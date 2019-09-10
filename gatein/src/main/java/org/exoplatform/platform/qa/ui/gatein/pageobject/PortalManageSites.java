@@ -5,6 +5,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -303,9 +304,9 @@ public class PortalManageSites {
       WebElement temp = evt.getElementFromTextByJquery(template[0]);
       temp.click();
     }
-    $(byXpath(ELEMENT_SAVE_BUTTON)).click();
-
-    $(ELEMENT_POPUP_ADD_PORTAL).waitUntil(Condition.not(visible),Configuration.timeout);
+    $(byXpath(ELEMENT_SAVE_BUTTON)).waitUntil(visible,Configuration.timeout).click();
+    sleep(Configuration.collectionsTimeout);
+    $(ELEMENT_POPUP_ADD_PORTAL).waitUntil(Condition.not(visible),Configuration.openBrowserTimeoutMs);
 
 
     if (evt.waitForAndGetElement(ELEMENT_POPUP_ADD_PORTAL, 10000, 0) == null)

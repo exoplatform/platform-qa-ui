@@ -90,7 +90,7 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
   public void test03_RemoveCollaborationApplicationToolbar() {
     info("Test 02: Remove application of space's toolbar");
     String space1 = "space1" + getRandomNumber();
-    String app = "Answers";
+    String app = "Tasks";
     info("app:" + app);
     String category = "Collaboration";
     info("cate:" + category);
@@ -103,8 +103,8 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     spaceSettingManagement.addApplication(category, app);
 
     info("Verify that Application is added to space");
-    ELEMENT_SPACE_MENU_TAB.find(byText("Answer")).should(Condition.exist);
-    spaceSettingManagement.removeApplication("Answer");
+    ELEMENT_SPACE_MENU_TAB.find(byText("Tasks")).should(Condition.exist);
+    spaceSettingManagement.removeApplication("Tasks");
     ELEMENT_SPACE_MENU_TAB.find(byText(app)).shouldNot(Condition.exist);
 
     info("Delete the space");
@@ -248,7 +248,7 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
   public void test08_AddCollaborationApplicationToolbar() {
     info("Test 02: Remove application of space's toolbar");
     String space1 = "space1" + getRandomNumber();
-    String app = "Answers";
+    String app = "Tasks";
     info("app:" + app);
     String category = "Collaboration";
     info("cate:" + category);
@@ -261,7 +261,7 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     spaceSettingManagement.addApplication(category, app);
 
     info("Verify that Application is added to space");
-    ELEMENT_SPACE_MENU_TAB.find(byText("Answer")).should(Condition.exist);
+    ELEMENT_SPACE_MENU_TAB.find(byText("Tasks")).should(Condition.exist);
     info("Delete the space");
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space1, false);

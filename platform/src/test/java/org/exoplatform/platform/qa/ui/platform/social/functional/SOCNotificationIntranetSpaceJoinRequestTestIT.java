@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.social.functional;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -342,7 +343,8 @@ public class SOCNotificationIntranetSpaceJoinRequestTestIT extends Base {
     intranetNotification.checkStatusSpace(status, spaceName);
     info("User A is accepted and member of the space");
     intranetNotification.refuseRqConnection(username2);
-    intranetNotification.goToAllNotification();
+    info("Open All page by link");
+    open(Configuration.baseUrl+ "/portal/intranet/allNotifications/");
     intranetNotification.checkNotStatusSpace(status, spaceName);
     manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
     navigationToolbar.goToManageCommunity();

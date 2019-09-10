@@ -970,6 +970,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
    */
 
   @Test
+  @Tag("wikid")
   public void test13_MoveWikisPageOfSpaceToPortal() {
     info("Test 13 Move wiki's page of space to portal");
     String space = "space" + getRandomNumber();

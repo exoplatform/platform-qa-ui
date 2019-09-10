@@ -20,10 +20,10 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
-import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_MANAGESITES_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_PAGE_CREATION_WIZARD;
@@ -554,22 +554,21 @@ public class NavigationToolbar {
    */
   public void goToAddUser() {
     info("Go to add user page");
-
     info("Click on administration icon");
     $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, 10000);
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-    ELEMENT_ADMINISTRATION_ADD_USERS.click();
+    ELEMENT_ADMINISTRATION_ADD_USERS.waitUntil(Condition.visible,2000).click();
   }
 
   public void goToManageCommunity() {
     $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(Configuration.timeout);
     ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, 10000);
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.click();
-
+    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   /**

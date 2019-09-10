@@ -1,10 +1,7 @@
 package org.exoplatform.platform.qa.ui.ecms.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static com.codeborne.selenide.Selenide.refresh;
-import static com.codeborne.selenide.Selenide.switchTo;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_SELECT_USER_ICON1;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
@@ -85,9 +82,11 @@ public class SiteExplorerHome {
     $(byText(drive)).click();
     $(byId("uiActionsBarContainer")).find(byId("driveAction")).waitUntil(Condition.have(Condition.text(drive)),Configuration.timeout);
     if( $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).is(Condition.not(Condition.visible))){
-      $(byClassName("uiIconEcmsViewWeb")).click();
+      sleep(Configuration.timeout);
+      $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.timeout).click();
     }
-    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
+    sleep(Configuration.timeout);
+    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Go to folder");
     if (!path.isEmpty()) {
       String[] arrayPath = path.split("/");
@@ -176,15 +175,23 @@ public class SiteExplorerHome {
     // scroll de 50 pixel
     executeJavaScript("window.scrollBy(0,50);", "");
     $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
-
+    sleep(Configuration.collectionsTimeout);
     info("Right click on nodename");
-    ELEMENT_CONTENT_LIST.find(byLinkText(title)).click();
+    executeJavaScript("window.scrollBy(0,-250)", "");
+    sleep(Configuration.timeout);
+    $(byXpath("//div[@id='UITreeExplorer']//i[@title='${title}']".replace("${title}",title))).waitUntil(Condition.visible,2000).click();
+    sleep(2000);
     $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    sleep(2000);
     ELEMENT_CONTENT_LIST.find(byLinkText(title)).contextClick();
+    sleep(2000);
+    executeJavaScript("window.scrollBy(0,100);", "");
     info("Click on Delete link");
-    $(ELEMENT_SITEEXPLORER_ACTION_DELETE).click();
+    sleep(Configuration.timeout);
+    $(ELEMENT_SITEEXPLORER_ACTION_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(Configuration.timeout);
     info("Click on Delete button on Confirm popup");
-    $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).click();
+    $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     refresh();
     if(destination.equals(true))
@@ -313,11 +320,10 @@ public class SiteExplorerHome {
    */
   public void uploadFile(String link, Object... params) {
     Boolean verify = (Boolean) (params.length > 0 ? params[0] : true);
+    sleep(2000);
     $(byId("MultiUploadInputFiles")).uploadFromClasspath(link);
-    $(byClassName("progress")).waitUntil(Condition.visible, Configuration.timeout);
-    $(byClassName("progress")).waitUntil(Condition.not(Condition.visible),60000);
+    sleep(Configuration.collectionsTimeout);
     refresh();
-
     info("verify:" + verify);
     if (verify) {
       String links[] = link.split("/");
@@ -461,7 +467,9 @@ public class SiteExplorerHome {
    * @param order enum
    */
   public void openSettingsDriver(selectDriverOption type, selectDriverOrder order) {
-    evt.click(ELEMENT_ACTIONBAR_SETTINGS);
+    if($(ELEMENT_ACTIONBAR_SETTINGS).isDisplayed()) {
+      $(ELEMENT_ACTIONBAR_SETTINGS).waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+    }
     info("Go to type " + type);
     switch (type) {
     case ALPHABETICAL:

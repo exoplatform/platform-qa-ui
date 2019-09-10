@@ -258,8 +258,10 @@ public class ChatOnSiteNotificationTestIT extends Base {
         homePagePlatform.goToChat();
         switchTo().window(1);
         refresh();
-        ELEMENT_CHAT_SETTING_NOTIFICATION.click();
+        ELEMENT_CHAT_SETTING_NOTIFICATION.waitUntil(Condition.visible,Configuration.timeout).click();
+        sleep(Configuration.timeout);
         ELEMENT_CHAT_DO_NOT_DISTURB_BUTTON_NOTIFICATION.parent().waitUntil(Condition.visible,Configuration.timeout);
+        sleep(Configuration.timeout);
         assertEquals("ON",ELEMENT_CHAT_DO_NOT_DISTURB_BUTTON_NOTIFICATION.parent().getText());
         ELEMENT_CHAT_DO_NOT_DISTURB_BUTTON_NOTIFICATION.parent().click();
         ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.click();
@@ -310,7 +312,8 @@ public class ChatOnSiteNotificationTestIT extends Base {
         homePagePlatform.goToChat();
         switchTo().window(1);
         refresh();
-        ELEMENT_CHAT_SETTING_NOTIFICATION.click();
+        ELEMENT_CHAT_SETTING_NOTIFICATION.waitUntil(Condition.visible,Configuration.timeout).click();
+        sleep(Configuration.timeout);
         assertEquals("OFF",ELEMENT_CHAT_ON_SITE_NOTIFICATION_BUTTON.parent().getText());
         ELEMENT_CHAT_ON_SITE_NOTIFICATION_BUTTON.parent().click();
         ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.click();
@@ -353,9 +356,11 @@ public class ChatOnSiteNotificationTestIT extends Base {
         switchToParentWindow();
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1,PLFData.DATA_PASS2);
-        ELEMENT_CHAT_ICON_STATUS.click();
+        ELEMENT_CHAT_ICON_STATUS.waitUntil(Condition.visible,Configuration.timeout).click();
+        sleep(Configuration.timeout);
         assertEquals(ELEMENT_CHAT_NOTIFICATION_DETAIL.getCssValue("overflow-y"),"auto");
-        ELEMENT_CHAT_ICON_STATUS.click();
+        sleep(Configuration.timeout);
+        ELEMENT_CHAT_ICON_STATUS.waitUntil(Condition.visible,Configuration.timeout).click();
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.deleteRomm(room);

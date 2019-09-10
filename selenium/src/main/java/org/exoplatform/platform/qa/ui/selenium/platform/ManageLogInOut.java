@@ -21,6 +21,7 @@
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
 
@@ -60,8 +61,10 @@ public class ManageLogInOut {
    * @param opParams
    */
   public void signIn(String username, String password, Boolean... opParams) {
+    sleep(2000);
     Boolean verify = (Boolean) (opParams.length > 0 ? opParams[0] : false);
-    if (evt.waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK, 5000, 0) != null) {
+    if ($(ELEMENT_ACCOUNT_NAME_LINK).exists()){
+    //if (evt.waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK, 5000, 0) != null) {
       signOut();
     }
     if (testBase.getSsoType() != "" && testBase.getSsoType() != null) {
@@ -83,8 +86,9 @@ public class ManageLogInOut {
       }
     } else {
       info("login normally if not use SSO with user " + username + " and pass " + password);
-      evt.type(ELEMENT_INPUT_USERNAME, username, true);
-      evt.type(ELEMENT_INPUT_PASSWORD, password, true);
+      $(ELEMENT_INPUT_USERNAME).waitUntil(Condition.visible,Configuration.collectionsTimeout).setValue(username);
+      $(ELEMENT_INPUT_PASSWORD).waitUntil(Condition.visible,Configuration.timeout).setValue(password);
+      sleep(2000);
       evt.clickByJavascript(ManageLogInOutLocator.ELEMENT_SIGN_IN_BUTTON, 2);
       if (verify)
         evt.waitForElementNotPresent(ManageLogInOutLocator.ELEMENT_SIGN_IN_BUTTON);

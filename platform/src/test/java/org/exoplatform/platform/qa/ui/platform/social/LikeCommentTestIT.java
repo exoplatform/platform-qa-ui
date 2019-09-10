@@ -614,6 +614,7 @@ public class LikeCommentTestIT extends Base {
   }
 
   @Test
+  @Tag("sociald")
   public void test09_checkFullNameOfUserIsDisplayed() {
     String activity1 = "activity1" + getRandomNumber();
     String comment = "comment" + getRandomNumber();
@@ -824,6 +825,7 @@ public class LikeCommentTestIT extends Base {
   }
 
   @Test
+  @Tag("sociald")
   public void test13_CheckListOfUserslikeComentAfterPreviewDocument() {
     String activity1 = "activity1" + getRandomNumber();
     String comment = "comment" + getRandomNumber();
@@ -832,7 +834,7 @@ public class LikeCommentTestIT extends Base {
     refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
-    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
+    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.collectionsTimeout);
     activityStream.addActivity(activity1, "");
     String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
     $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
@@ -871,20 +873,20 @@ public class LikeCommentTestIT extends Base {
     homePagePlatform.goToHomePage();
     $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).hover();
     $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
+    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.waitUntil(Condition.visible, Configuration.timeout).find(byText(comment)).parent().parent().waitUntil(Condition.visible, Configuration.timeout).find(ELEMENT_ICON_LIKE_COMMENT).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
     $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment))
+    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.waitUntil(Condition.visible,Configuration.timeout).find(byText(comment))
                                                 .parent()
                                                 .parent()
-                                                .find(ELEMENT_ICON_LIKE_COMMENT)
+                                                .waitUntil(Condition.visible,Configuration.timeout).find(ELEMENT_ICON_LIKE_COMMENT)
                                                 .parent()
                                                 .parent()
-                                                .find(byText("(3)"))
-                                                .click();
+                                                .waitUntil(Condition.visible,Configuration.timeout).find(byText("(3)"))
+                                                .waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Jack Miller")).should(Condition.exist);
     ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("James David")).should(Condition.exist);
     ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Mary Williams")).should(Condition.exist);
@@ -1227,6 +1229,7 @@ public class LikeCommentTestIT extends Base {
   }
 
   @Test
+  @Tag("sociald")
   public void test19_checkNotificationWhenManyUserLikeComment() {
     String activity1 = "activity1" + getRandomNumber();
     String comment = "comment" + getRandomNumber();

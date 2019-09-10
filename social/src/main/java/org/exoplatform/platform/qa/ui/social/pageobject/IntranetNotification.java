@@ -2,8 +2,7 @@ package org.exoplatform.platform.qa.ui.social.pageobject;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_NOTIFICATION_DROPDOWN;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -43,6 +42,7 @@ public class IntranetNotification {
    */
   public void goToAllNotification() {
     info("Go to all notification");
+    sleep(2000);
     if ($(ELEMENT_VIEW_ALL).is(Condition.visible)) {
       info("Click on View All button");
       $(ELEMENT_VIEW_ALL).click();
@@ -50,7 +50,8 @@ public class IntranetNotification {
       info("Open All page by link");
       open(Configuration.baseUrl+ "portal/intranet/allNotifications/");
     }
-    $(ELEMENT_ALL_NOTIFICATIONS).waitUntil(Condition.visible,Configuration.timeout);
+    sleep(Configuration.timeout);
+    $(ELEMENT_ALL_NOTIFICATIONS).exists();
   }
 
   /**

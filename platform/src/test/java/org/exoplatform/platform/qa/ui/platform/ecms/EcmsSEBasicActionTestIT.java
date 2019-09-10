@@ -1,8 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.ecms;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER2;
@@ -190,9 +189,9 @@ public class EcmsSEBasicActionTestIT extends Base {
         createNewDocument.addNewWebContent(titleCommonNode, titleCommonNode);
         createNewDocument.saveAndClose();
         info("Test 4: Drag and drop a node");
+        sleep(Configuration.timeout);
         ELEMENT_CONTENT_LIST.find(byText(titleCommonNode)).dragAndDropTo($(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", destination))));
         manageAlert.acceptAlert();
-        $(ELEMENT_OK_BUTTON_LINK).click();
         $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", destination))).click();
         siteExplorerHome.deleteData(titleCommonNode);
 

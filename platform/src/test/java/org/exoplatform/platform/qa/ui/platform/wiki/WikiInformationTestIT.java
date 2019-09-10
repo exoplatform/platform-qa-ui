@@ -7,7 +7,6 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -161,6 +160,7 @@ public class WikiInformationTestIT extends Base {
    */
 
   @Test
+  @Tag("wikid")
   public void test02_AddRelationWithIntranetPortal() {
     info("Test 02: Add relations with Intranet portal");
     String space1 = "space1" + getRandomNumber();
@@ -206,7 +206,8 @@ public class WikiInformationTestIT extends Base {
     wikiPageInformation.addRelations("Intranet", "Wiki Home");
 
     info("intranet's portal is added as a related pages on page info layout");
-
+    $(byXpath("//span[@class='PopupTitle popupTitle']")).waitUntil(Condition.visible,Configuration.timeout).dragAndDropTo($(byXpath("//div[@class=\"TRContainer clearfix\"]")));
+    ELEMENT_BUTTON_SELECT_RELATION.click();
     homePagePlatform.goToHomePage();
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space1, false);

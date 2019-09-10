@@ -208,7 +208,7 @@ public class ForumTopicManagement {
    * @param content String
    */
   public void postReply(String title, String content) {
-    $(ELEMENT_POST_REPLY).click();
+    $(ELEMENT_POST_REPLY).waitUntil(visible,Configuration.collectionsTimeout).click();
     replyTopic(title, content);
   }
 
@@ -225,7 +225,7 @@ public class ForumTopicManagement {
     $(byXpath("/html/body")).sendKeys(content);
     switchTo().defaultContent();
     executeJavaScript("window.scrollBy(0,150)");
-    $(ELEMENT_POST_FORM_SUBMIT).click();
+    $(ELEMENT_POST_FORM_SUBMIT).waitUntil(visible,Configuration.timeout).click();
     info("Verify that the post is created");
   }
 
@@ -510,8 +510,8 @@ public class ForumTopicManagement {
       $(By.className("file")).uploadFromClasspath(fileName[i]);
       $(ELEMENT_SAVE_BTN).click();
     }}
-    $(ELEMENT_SUBMIT_BUTTON).click();
-    $(ELEMENT_SUBMIT_BUTTON).waitUntil(Condition.disappear, Configuration.timeout);
+    $(ELEMENT_SUBMIT_BUTTON).waitUntil(visible,Configuration.timeout).click();
+    $(ELEMENT_SUBMIT_BUTTON).waitUntil(Condition.disappear, Configuration.collectionsTimeout);
     info("Verify that the topic is created");
     $(By.linkText(title)).should(exist);
     info("Start topic successfully");

@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.forum.pageobject;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -52,15 +53,16 @@ public class ForumForumManagement {
 
     $(ELEMENT_ACTIONBAR_ADDFORUM).waitUntil(Condition.appears, Configuration.timeout);
     info("click on Add forum button");
-    $(ELEMENT_ACTIONBAR_ADDFORUM).click();
+    sleep(Configuration.collectionsTimeout);
+    $(ELEMENT_ACTIONBAR_ADDFORUM).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("input the title for the forum");
-    $(ELEMENT_ADDFORUM_POPUP_TITLE).val(nameForum);
+    $(ELEMENT_ADDFORUM_POPUP_TITLE).waitUntil(Condition.visible,Configuration.timeout).val(nameForum);
     info("check and input Oder field");
-    $(ELEMENT_ADDFORUM_POPUP_ORDER).val(order);
+    $(ELEMENT_ADDFORUM_POPUP_ORDER).waitUntil(Condition.visible,Configuration.timeout).val(order);
     info("check and input description");
-    $(ELEMENT_ADDFORUM_POPUP_DESCRIPTION).val(description);
+    $(ELEMENT_ADDFORUM_POPUP_DESCRIPTION).waitUntil(Condition.visible,Configuration.timeout).val(description);
     info("Click on Save button");
-    $(ELEMENT_ADDFORUM_POPUP_SAVE_BUTTON).click();
+    $(ELEMENT_ADDFORUM_POPUP_SAVE_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Finish adding new forum");
   }
 
@@ -80,9 +82,9 @@ public class ForumForumManagement {
    */
   public void selectItemMoreActionMenu(specifMoreActionMenu item) {
     info("Wait More link is shown");
-    $(ELEMENT_MORE_ACTION).should(Condition.exist);
+    $(ELEMENT_MORE_ACTION).waitUntil(Condition.visible,Configuration.collectionsTimeout).should(Condition.exist);
     info("Click on More link");
-    $(ELEMENT_MORE_ACTION).click();
+    $(ELEMENT_MORE_ACTION).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Select a link on More menu");
     switch (item) {
     case START_TOPIC:

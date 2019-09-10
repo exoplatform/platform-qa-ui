@@ -1,11 +1,7 @@
 package org.exoplatform.platform.qa.ui.ecms.pageobject;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static com.codeborne.selenide.Selenide.switchTo;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_NAME;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
@@ -60,9 +56,11 @@ public class CreateNewDocument {
       if ($(ELEMENT_ADDDOCUMENT_WEBCONTENT).is(Condition.exist)) {
         $(ELEMENT_ADDDOCUMENT_WEBCONTENT).click();
       } else {
-        executeJavaScript("window.scrollBy(0,100);", "");
+        sleep(Configuration.timeout);
+        executeJavaScript("window.scrollBy(0,200);", "");
+        sleep(Configuration.timeout);
         // move ti page 2 for the list of template
-        $(byClassName("pagination")).find(byText("2")).click();
+        $(byXpath("//div[@class='PageAvailable']//li/a[text()='2']")).waitUntil(Condition.visible,Configuration.timeout).click();
         // scroll up
         executeJavaScript("window.scrollBy(0,-400);", "");
         $(ELEMENT_ADDDOCUMENT_WEBCONTENT).click();
@@ -175,9 +173,9 @@ public class CreateNewDocument {
    * @param content String
    */
   public void addNewWebContent(String title, String content) {
-    $(ELEMENT_FILEFORM_BLANK_NAME).click();
+    $(ELEMENT_FILEFORM_BLANK_NAME).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_FILEFORM_BLANK_NAME).setValue(title);
-    $(ELEMENT_FILEFORM_BLANK_CONTENT).click();
+    $(ELEMENT_FILEFORM_BLANK_CONTENT).waitUntil(Condition.visible,Configuration.timeout).click();
     switchTo().frame($(ELEMENT_FILEFORM_BLANK_CONTENT));
     $(byXpath("/html/body")).sendKeys(content);
     switchTo().defaultContent();

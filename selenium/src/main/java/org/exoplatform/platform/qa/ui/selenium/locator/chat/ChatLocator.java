@@ -43,11 +43,11 @@ public class ChatLocator {
 
     public static final SelenideElement ELEMENT_ICON_CHAT = $(byId("chat-status"));
 
-    public static final SelenideElement ELEMENT_CHAT_STATUS_AVAILABLE = $(byClassName("chat-status-available"));
+    public static final SelenideElement ELEMENT_CHAT_STATUS_AVAILABLE = $(byClassName("user-available"));
 
     public static final SelenideElement ELEMENT_CHAT_STATUS_DONOTDISTURB = $(byClassName("user-donotdisturb"));
 
-    public static final SelenideElement ELEMENT_CHAT_STATUS_AWAY = $(byClassName("chat-status-away"));
+    public static final SelenideElement ELEMENT_CHAT_STATUS_AWAY = $(byClassName("user-away"));
 
     public static final SelenideElement ELEMENT_CHAT_STATUS_INVISIBLE = $(byClassName("chat-status-invisible"));
   public static final SelenideElement ELEMENT_MORE_ACTION                   = $(byClassName("uiIconVerticalDots"));
@@ -84,7 +84,7 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_CREATE_ROOM = $(byClassName("uiIconSimplePlus"));
     public static final SelenideElement ELEMENT_POPUP_ROOM = $(byClassName("PopupContent"));
     public static final SelenideElement ELEMENT_ROOM_NAME = $(byClassName("add-room-form")).find(by("type", "text"));
-    public static final SelenideElement ELEMENT_BUTTON_SAVE_ROOM = $(byClassName("btn-primary"));
+    public static final SelenideElement ELEMENT_BUTTON_SAVE_ROOM = $(byXpath("//button[text()='Save']"));
     public static final SelenideElement ELEMENT_CONTACT_LIST = $(byId("chat-users"));
     public static final SelenideElement ELEMENT_CHAT_ICON_ADDROOM
                                                                                         = $(byClassName("uiIconSimplePlus"));
@@ -116,7 +116,7 @@ public class ChatLocator {
 
     public static final SelenideElement ELEMENT_CHAT_LIST_MSG = $(byId("chats"));
 
-    public static final SelenideElement ELEMENT_CHAT_INPUT_SEARCH_USER = $(byId("chat-search"));
+    public static final SelenideElement ELEMENT_CHAT_INPUT_SEARCH_USER = $(By.xpath("//input[@placeholder='Filter discussions']"));
 
     public static final SelenideElement ELEMENT_CHAT_RESULT_SEARCH_USER =
             $(byAttribute("class",
@@ -163,7 +163,7 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_CHAT_EVENT_LOCATION =$(byXpath("//*[@id=\"appComposerForm\"]/div[1]/input[2]"));
     public static final SelenideElement ELEMENT_CHAT_POST_EVENT =$(byXpath("//*[@id=\"appComposerForm\"]/div[2]/button"));
     public static final SelenideElement ELEMENT_CHAT_SHARE_LINK = $(byClassName("uiIconChatLink"));
-    public static final SelenideElement ELEMENT_CHAT_UPLOAD_FILE= $(byClassName("uiIconChatUpload"));
+    public static final SelenideElement ELEMENT_CHAT_UPLOAD_FILE= $(byXpath("//div[text()='Upload File']"));
     public static final SelenideElement ELEMENT_CHAT_ASK_QUESTION= $(byClassName("uiIconChatQuestion"));
     public static final SelenideElement ELEMENT_CHAT_ASK_BUTTON= $(byXpath("//*[@id=\"appComposerForm\"]/div[2]/button"));
     public static final SelenideElement ELEMENT_CHAT_CANCEL_BUTTON= $(byXpath("//*[@id=\"appComposerForm\"]/div[2]/div"));
@@ -200,10 +200,17 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_CHAT_ON_SITE_NOTIFICATION_BUTTON=   $(byId("notifyOnSite"));
     public static final SelenideElement ELEMENT_CHAT_NOTIFICATION_DETAIL=   $(byId("chat-notifications-details"));
 
+    public static final SelenideElement ELEMENT_CHAT_BUTTON_USER_PROFILE=  $(byXpath("(//i[@class=\"uiIconBannerChat\"])[2]"));
 
 
-
-
+    public static final SelenideElement ELEMENT_CHAT_TIP_CONTENT=   $(byId("tiptip_content"));
+    public static final SelenideElement ELEMENT_CHAT_ICON_TIP_CONTENT=  $(byXpath("//*[@id=\"tiptip_content\"]/div/a/i"));
+    public static final SelenideElement ELEMENT_MINI_CHAT_MINIMIZE_ICON= $(byClassName("uiIconMinimize"));
+    public static final SelenideElement ELEMENT_MINI_CHAT_MAXIMIZE_ICON= $(byClassName("uiIconMaximize"));
+    public static final SelenideElement ELEMENT_MINI_CHAT_CLOSE_ICON= $(byXpath("//a[@data-original-title='Close']"));
+    public static final SelenideElement ELEMENT_MINI_CHAT_POPOUT_ICON= $(byClassName("uiIconChatPopOut"));
+    public static final SelenideElement ELEMENT_MINI_CHAT_MESSAGE_LIST=  $(byClassName("chat-message-list"));
+    public static final SelenideElement ELEMENT_CHAT_ROOM_PARTICIPANTS=  $(byClassName("room-participants"));
 
 }
 

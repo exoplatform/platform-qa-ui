@@ -1,9 +1,12 @@
 package org.exoplatform.platform.qa.ui.platform.wiki.functional;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -21,6 +24,7 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.SourceTextEditor;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
+import org.openqa.selenium.By;
 
 
 @Tag("wiki")
@@ -155,7 +159,7 @@ public class WikiActivitiesTestIT extends Base {
     homePagePlatform.goToHomePage();
     activityStream.checkActivityWikiPage(editTitle, editContent, "2", true);
     activityStream.clickOnViewChange(editTitle);
-    wikiValidattions.verifyCompareVersions("1");
+    $(By.xpath("//div[@id='UIWikiPageInfoArea']/div/span/a[text()='V2']")).waitUntil(Condition.visible, Configuration.timeout);
     homePagePlatform.goToWiki();
     wikiHomePage.deleteWiki(editTitle);
 

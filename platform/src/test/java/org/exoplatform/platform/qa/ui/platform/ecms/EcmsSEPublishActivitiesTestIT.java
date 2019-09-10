@@ -145,6 +145,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
     createNewDocument.addNewWebContent(title, content);
     createNewDocument.saveAndClose();
     homePagePlatform.goToHomePage();
+    sleep(Configuration.timeout);
     activityStream.checkActivityAddWebContent(title, null, null);
     info("Test 4: Check intranet homepage after publishing a content");
     String comment = "Document has been published.";
@@ -152,7 +153,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
     siteExplorerHome.selectNode(title);
     siteExplorerHome.goToPublication();
     siteExplorerHome.changeStatusPulication("Published");
-    ELEMENT_CLOSE_PUBLICATION_POPUP.click();
+    sleep(Configuration.timeout);
     homePagePlatform.goToHomePage();
     refresh();
     activityStream.checkActivityAddWebContent(title, "1", "Published");
@@ -323,16 +324,17 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
     info("Upload a file");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.uploadFile("data/ecms/uploadFile.pdf");
+    sleep(Configuration.timeout);
+    siteExplorerHome.uploadFile("testavatar.pdf");
 
     info("Go to the activity and verify that the file's activity is shown");
     homePagePlatform.goToHomePage();
-    waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_FILE_UPLOAD_TITLE.replace("{$title}", "uploadFile.pdf")));
+    waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_FILE_UPLOAD_TITLE.replace("{$title}", "testavatar.pdf")));
 
     info("Delete the file");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.deleteData("uploadFile.pdf");
+    siteExplorerHome.deleteData("testavatar.pdf");
   }
 
   /**
@@ -352,18 +354,19 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
     info("Upload a file");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.uploadFile("data/ecms/uploadFile.pdf");
+    siteExplorerHome.uploadFile("testavatar.pdf");
     info("Select the file");
-    siteExplorerHome.selectNode("uploadFile.pdf");
+    siteExplorerHome.selectNode("testavatar.pdf");
     info("Add a category to the file");
-    siteExplorerHome.addCategoryForNode("uploadFile.pdf", "intranet");
-    $(byXpath("//*[@id=\"UICategoryManager\"]/div[2]/button")).click();
+    siteExplorerHome.addCategoryForNode("testavatar.pdf", "intranet");
+    $(byXpath("//*[@id=\"UICategoryManager\"]/div[2]/button")).waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(Configuration.timeout);
     homePagePlatform.goToHomePage();
     $(byText("Category: intranet has been added.")).should(Condition.visible);
     info("Delete the file");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.deleteData("uploadFile.pdf");
+    siteExplorerHome.deleteData("testavatar.pdf");
 
   }
 
@@ -377,14 +380,14 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
     info("Test 12:Check intranet homepage after deleting an uploaded file");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.uploadFile("data/ecms/uploadFile.pdf");
+    siteExplorerHome.uploadFile("testavatar.pdf");
     info("Delete the file");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.deleteData("uploadFile.pdf");
+    siteExplorerHome.deleteData("testavatar.pdf");
     info("Check the activity");
     homePagePlatform.goToHomePage();
-    $(byXpath(ELEMENT_ACTIVITY_FILE_UPLOAD_TITLE.replace("{$title}", "uploadFile.pdf"))).shouldNot(Condition.visible);
+    $(byXpath(ELEMENT_ACTIVITY_FILE_UPLOAD_TITLE.replace("{$title}", "testavatar.pdf"))).shouldNot(Condition.visible);
   }
 
   /**
@@ -475,18 +478,19 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
     info("Finish creating data test");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.uploadFile("data/ecms/uploadFile.pdf");
+    siteExplorerHome.uploadFile("testavatar.pdf");
     info("Move the file");
     $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}",
-                                                            "uploadFile.pdf"))).dragAndDropTo($(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", fileRecept))));
+                                                            "testavatar.pdf"))).dragAndDropTo($(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", fileRecept))));
     manageAlert.acceptAlert();
     info("Check the comment on the activity");
     homePagePlatform.goToHomePage();
-    $(byText("File has been moved to: /sites/intranet/" + "uploadFile.pdf")).waitUntil(Condition.visible, Configuration.timeout);
+    executeJavaScript("window.scrollBy(0,300)");
+    $(byText("File has been moved to: /sites/intranet/" + "testavatar.pdf")).waitUntil(Condition.visible, Configuration.timeout);
     info("Delete the file");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath(fileRecept, "Site Management");
-    siteExplorerHome.deleteData("uploadFile.pdf");
+    siteExplorerHome.deleteData("testavatar.pdf");
   }
 
   /**

@@ -5,6 +5,8 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -61,25 +63,25 @@ public class CalendarViewTestIT extends Base {
     String defaultFormatDate = "MM/dd/yyyy";
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.inputDataEventInQuickForm(titleEventCur,
-                                              content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
-                                              true);
+    $(ELEMENT_QUICK_INPUT_EVENT_NAME).waitUntil(Condition.visible, Configuration.timeout).setValue(titleEventCur);
+    $(ELEMENT_QUICK_INPUT_EVENT_NOTE).setValue(content);
+    $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).setValue(getDate(0, defaultFormatDate));
+    $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).setValue((getDate(0, defaultFormatDate)));
+    $(ELEMENT_CHECK_ADD_EVENT_ALL_DAY).waitUntil(Condition.visible,Configuration.timeout).click();
     eventManagement.saveQuickAddEvent();
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.inputDataEventInQuickForm(titleEventNext,
-                                              content,
-                                              getDate(1, defaultFormatDate),
-                                              getDate(1, defaultFormatDate),
-                                              true);
+    $(ELEMENT_QUICK_INPUT_EVENT_NAME).waitUntil(Condition.visible, Configuration.timeout).setValue(titleEventNext);
+    $(ELEMENT_QUICK_INPUT_EVENT_NOTE).setValue(content);
+    $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).setValue(getDate(1, defaultFormatDate));
+    $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).setValue((getDate(1, defaultFormatDate)));
+    $(ELEMENT_CHECK_ADD_EVENT_ALL_DAY).waitUntil(Condition.visible,Configuration.timeout).click();
     eventManagement.saveQuickAddEvent();
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.inputDataEventInQuickForm(titleEventPre,
-                                              content,
-                                              getDate(-1, defaultFormatDate),
-                                              getDate(-1, defaultFormatDate),
-                                              true);
+    $(ELEMENT_QUICK_INPUT_EVENT_NAME).waitUntil(Condition.visible, Configuration.timeout).setValue(titleEventPre);
+    $(ELEMENT_QUICK_INPUT_EVENT_NOTE).setValue(content);
+    $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).setValue(getDate(-1, defaultFormatDate));
+    $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).setValue((getDate(-1, defaultFormatDate)));
+    $(ELEMENT_CHECK_ADD_EVENT_ALL_DAY).waitUntil(Condition.visible,Configuration.timeout).click();
     eventManagement.saveQuickAddEvent();
     homePagePlatform.goToCalendarPage();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.DAY);
@@ -506,25 +508,25 @@ public class CalendarViewTestIT extends Base {
     String defaultFormatDate = "MM/dd/yyyy";
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.inputDataEventInQuickForm(titleEventCur,
-                                              content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
-                                              true);
+    $(ELEMENT_QUICK_INPUT_EVENT_NAME).waitUntil(Condition.visible, Configuration.timeout).setValue(titleEventCur);
+    $(ELEMENT_QUICK_INPUT_EVENT_NOTE).setValue(content);
+    $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).setValue(getDate(0, defaultFormatDate));
+    $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).setValue((getDate(0, defaultFormatDate)));
+    $(ELEMENT_CHECK_ADD_EVENT_ALL_DAY).waitUntil(Condition.visible,Configuration.timeout).click();
     eventManagement.saveQuickAddEvent();
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.inputDataEventInQuickForm(titleEventNext,
-                                              content,
-                                              getDate(1, defaultFormatDate),
-                                              getDate(1, defaultFormatDate),
-                                              true);
+    $(ELEMENT_QUICK_INPUT_EVENT_NAME).waitUntil(Condition.visible, Configuration.timeout).setValue(titleEventNext);
+    $(ELEMENT_QUICK_INPUT_EVENT_NOTE).setValue(content);
+    $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).setValue(getDate(1, defaultFormatDate));
+    $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).setValue((getDate(1, defaultFormatDate)));
+    $(ELEMENT_CHECK_ADD_EVENT_ALL_DAY).waitUntil(Condition.visible,Configuration.timeout).click();
     eventManagement.saveQuickAddEvent();
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.inputDataEventInQuickForm(titleEventPre,
-                                              content,
-                                              getDate(-1, defaultFormatDate),
-                                              getDate(-1, defaultFormatDate),
-                                              true);
+    $(ELEMENT_QUICK_INPUT_EVENT_NAME).waitUntil(Condition.visible, Configuration.timeout).setValue(titleEventPre);
+    $(ELEMENT_QUICK_INPUT_EVENT_NOTE).setValue(content);
+    $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).setValue(getDate(-1, defaultFormatDate));
+    $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).setValue((getDate(-1, defaultFormatDate)));
+    $(ELEMENT_CHECK_ADD_EVENT_ALL_DAY).waitUntil(Condition.visible,Configuration.timeout).click();
     eventManagement.saveQuickAddEvent();
     homePagePlatform.goToCalendarPage();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.DAY);

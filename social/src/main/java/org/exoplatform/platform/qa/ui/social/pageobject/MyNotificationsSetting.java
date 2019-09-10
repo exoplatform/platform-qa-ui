@@ -1,9 +1,16 @@
 package org.exoplatform.platform.qa.ui.social.pageobject;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+
 import static com.codeborne.selenide.Condition.not;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_ADD_TOOTLBAR;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -19,6 +26,8 @@ public class MyNotificationsSetting {
 
   private ElementEventTestBase evt;
 
+  public HomePagePlatform homePagePlatform;
+
   /**
    * constructor
    *
@@ -26,6 +35,7 @@ public class MyNotificationsSetting {
    */
   public MyNotificationsSetting(TestBase testBase) {
     this.testBase = testBase;
+    this.homePagePlatform = new HomePagePlatform(testBase);
     this.evt = testBase.getElementEventTestBase();
 
   }
@@ -270,7 +280,7 @@ public class MyNotificationsSetting {
    * @param opParams  object
    */
   public void enableNotification(myNotiType notifToEnable, Object... opParams) {
-    $(ELEMENT_ADD_TOOTLBAR).click();
+    homePagePlatform.refreshUntil($(ELEMENT_EDIT_NEWUSER_ICON), visible, 1000);
     String opt = (String) (opParams.length > 0 ? opParams[0] : "");
     int repeat = 0;
     switch (notifToEnable) {
@@ -290,15 +300,16 @@ public class MyNotificationsSetting {
         evt.click(ELEMENT_EDIT_NEWUSER_SAVE_BTN);
         info("Verify that email notification is shown");
         evt.waitForAndGetElement(ELEMENT_NEW_USER_MAIL_ICON, 3000, 1);
+
         break;
       case NewUser_intranet:
         info("Click on Edit button");
         $(ELEMENT_EDIT_NEWUSER_ICON).click();
-        if($(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX).is(Condition.not(Condition.checked)))
-        $(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX).parent().click();
+        if ($(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX).is(Condition.not(Condition.checked)))
+          $(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX).parent().click();
         info("Click on Save button");
         $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).click();
-        $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).waitUntil(not(Condition.visible),Configuration.timeout);
+        $(ELEMENT_EDIT_NEWUSER_SAVE_BTN).waitUntil(not(Condition.visible), Configuration.timeout);
         info("Verify that intranet notification is shown");
         evt.waitForAndGetElement(ELEMENT_NEW_USER_INTRANET_ICON, 3000, 1);
         break;
@@ -329,7 +340,7 @@ public class MyNotificationsSetting {
         }
         info("Click on Save button");
         $(ELEMENT_EDIT_RECREQ_SAVE_BTN).click();
-        $(ELEMENT_EDIT_RECREQ_SAVE_BTN).waitUntil(not(Condition.visible),Configuration.timeout);
+        $(ELEMENT_EDIT_RECREQ_SAVE_BTN).waitUntil(not(Condition.visible), Configuration.timeout);
         info("Verify that Intranet notification is shown");
         evt.waitForAndGetElement(ELEMENT_CONNECTION_REQ_INTRANET_ICON, 3000, 1);
         break;
@@ -350,15 +361,13 @@ public class MyNotificationsSetting {
         evt.waitForAndGetElement(ELEMENT_COMMENT_MAIL_ICON, 3000, 1);
         break;
       case AS_Comment_intranet:
-        $(ELEMENT_ACCOUNT_NAME_LINK).click();
         $(ELEMENT_EDIT_COMMENT_ICON).click();
-        if($(ELEMENT_EDIT_COMMENT_WEB_CHECKBOX).is(not(Condition.selected))){
+        if ($(ELEMENT_EDIT_COMMENT_WEB_CHECKBOX).is(not(Condition.selected))) {
           $(ELEMENT_EDIT_COMMENT_WEB_CHECKBOX).click();
         }
         info("Click on Save button");
-        $(ELEMENT_ACCOUNT_NAME_LINK).click();
         $(ELEMENT_EDIT_COMMENT_SAVE_BTN).click();
-        $(ELEMENT_EDIT_COMMENT_SAVE_BTN).waitUntil(not(Condition.visible),Configuration.timeout);
+        $(ELEMENT_EDIT_COMMENT_SAVE_BTN).waitUntil(not(Condition.visible), Configuration.timeout);
         info("Verify that Intranet notification is shown");
         evt.waitForAndGetElement(ELEMENT_COMMENT_INTRANET_ICON, 3000, 1);
         break;
@@ -379,15 +388,14 @@ public class MyNotificationsSetting {
         evt.waitForAndGetElement(ELEMENT_LIKE_MAIL_ICON, 3000, 1);
         break;
       case AS_Like_intranet:
-        $(ELEMENT_ACCOUNT_NAME_LINK).click();
         $(ELEMENT_EDIT_LIKE_ICON).click();
-        $(ELEMENT_EDIT_LIKE_ICON).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
-        if($(ELEMENT_EDIT_LIKE_WEB_CHECKBOX).is(Condition.not(Condition.selected))){
+        $(ELEMENT_EDIT_LIKE_ICON).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+        if ($(ELEMENT_EDIT_LIKE_WEB_CHECKBOX).is(Condition.not(Condition.selected))) {
           $(ELEMENT_EDIT_LIKE_WEB_CHECKBOX).parent().click();
         }
         info("Click on Save button");
         $(ELEMENT_EDIT_LIKE_SAVE_BTN).click();
-        $(ELEMENT_EDIT_LIKE_SAVE_BTN).waitUntil(not(Condition.visible),Configuration.timeout);
+        $(ELEMENT_EDIT_LIKE_SAVE_BTN).waitUntil(not(Condition.visible), Configuration.timeout);
         info("Verify that email notification is shown");
         evt.waitForAndGetElement(ELEMENT_LIKE_INTRANET_ICON, 3000, 1);
         break;
@@ -418,6 +426,7 @@ public class MyNotificationsSetting {
         }
         info("Click on Save button");
         evt.click(ELEMENT_EDIT_POST_SAVE_BTN);
+        $(ELEMENT_EDIT_POST_SAVE_BTN).waitUntil(not(Condition.visible), Configuration.timeout);
         info("Verify that email notification is shown");
         evt.waitForAndGetElement(ELEMENT_POST_INTRANET_ICON, 3000, 1);
         break;
@@ -439,13 +448,13 @@ public class MyNotificationsSetting {
         break;
       case AS_Mention_intranet:
         $(ELEMENT_EDIT_MENTION_ICON).click();
-       if($(ELEMENT_EDIT_MENTION_WEB_CHECKBOX).is(Condition.not(Condition.checked)))
-         $(ELEMENT_EDIT_MENTION_WEB_CHECKBOX).parent().click();
+        if ($(ELEMENT_EDIT_MENTION_WEB_CHECKBOX).is(Condition.not(Condition.checked)))
+          $(ELEMENT_EDIT_MENTION_WEB_CHECKBOX).parent().click();
         info("Click on Save button");
         $(ELEMENT_EDIT_MENTION_SAVE_BTN).click();
-        $(ELEMENT_EDIT_MENTION_SAVE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+        $(ELEMENT_EDIT_MENTION_SAVE_BTN).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
         info("Verify that email notification is shown");
-        $(ELEMENT_MENTION_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);
+        $(ELEMENT_MENTION_INTRANET_ICON).waitUntil(Condition.visible, Configuration.timeout);
         break;
       case Space_Post_email:
         evt.click(ELEMENT_EDIT_POST_SPACE_ICON);
@@ -474,8 +483,9 @@ public class MyNotificationsSetting {
         }
         info("Click on Save button");
         $(ELEMENT_EDIT_POST_SPACE_SAVE_BTN).click();
+        $(ELEMENT_EDIT_POST_SPACE_SAVE_BTN).waitUntil(not(Condition.visible), Configuration.timeout);
         info("Verify that email notification is shown");
-        $(ELEMENT_POST_SPACE_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);
+        $(ELEMENT_POST_SPACE_INTRANET_ICON).waitUntil(Condition.visible, Configuration.timeout);
         break;
 
       case Space_Join_Req_email:
@@ -495,14 +505,15 @@ public class MyNotificationsSetting {
         evt.waitForAndGetElement(ELEMENT_JOIN_REQ_SPACE_MAIL_ICON, 3000, 1);
         break;
       case Space_Join_Req_intranet:
-        $(ELEMENT_EDIT_REQJOIN_SPACE_ICON).waitUntil(Condition.visible,Configuration.timeout).click();
-        $(ELEMENT_EDIT_REQJOIN_SPACE_ICON).waitUntil(not(Condition.visible),Configuration.timeout);
-        if($(ELEMENT_EDIT_REQJOIN_SPACE_WEB_CHECKBOX).is(not(Condition.selected))){
-          $(ELEMENT_EDIT_REQJOIN_SPACE_WEB_CHECKBOX).parent().click();}
+        $(ELEMENT_EDIT_REQJOIN_SPACE_ICON).waitUntil(Condition.visible, Configuration.timeout).click();
+        $(ELEMENT_EDIT_REQJOIN_SPACE_ICON).waitUntil(not(Condition.visible), Configuration.timeout);
+        if ($(ELEMENT_EDIT_REQJOIN_SPACE_WEB_CHECKBOX).is(not(Condition.selected))) {
+          $(ELEMENT_EDIT_REQJOIN_SPACE_WEB_CHECKBOX).parent().click();
+        }
         info("Click on Save button");
         $(ELEMENT_EDIT_REQJOIN_SPACE_SAVE_BTN).click();
-        $(ELEMENT_EDIT_REQJOIN_SPACE_SAVE_BTN).waitUntil(not(Condition.visible),Configuration.timeout);
-        $(ELEMENT_JOIN_REQ_SPACE_INTRANET_ICON).waitUntil(Condition.visible,Configuration.timeout);
+        $(ELEMENT_EDIT_REQJOIN_SPACE_SAVE_BTN).waitUntil(not(Condition.visible), Configuration.timeout);
+        $(ELEMENT_JOIN_REQ_SPACE_INTRANET_ICON).waitUntil(Condition.visible, Configuration.timeout);
         info("Verify that email notification is shown");
         break;
       case Space_Invitation_email:

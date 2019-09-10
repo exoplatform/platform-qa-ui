@@ -136,6 +136,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends Base {
   }
 
   @Test
+  @Tag("wikid")
   public void test07_AutoSaveWhenAddingPageFromThreeColumnLayoutTemplate() {
     info("Test 06: Auto Save when adding page from template");
     String title = "title1" + getRandomNumber();

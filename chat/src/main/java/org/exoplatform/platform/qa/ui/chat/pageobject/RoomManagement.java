@@ -1,8 +1,7 @@
 package org.exoplatform.platform.qa.ui.chat.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Button.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
 
@@ -25,18 +24,18 @@ public class RoomManagement {
     ELEMENT_ROOM_NAME.setValue(name);
     for (int i = 0; i <= users.length - 1; i++) {
         ELEMENT_CHAT_INPUT_ROOMUSERSS.setValue(users[i]);
-      ELEMENT_CHAT_RESULT_SEARCH_USER.waitUntil(Condition.be(Condition.visible),Configuration.timeout);
-      ELEMENT_CHAT_RESULT_SEARCH_USER.waitUntil(Condition.visible,Configuration.timeout);
+        ELEMENT_CHAT_RESULT_SEARCH_USER.waitUntil(Condition.visible,Configuration.timeout);
         ELEMENT_CHAT_INPUT_ROOMUSERSS.pressEnter();
+        sleep(Configuration.timeout);
     }
-    ELEMENT_BUTTON_SAVE_ROOM.click();
+    ELEMENT_BUTTON_SAVE_ROOM.waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_CONTACT_LIST.find(byText(name)).should(Condition.exist);
   }
 
     public void deleteRomm(String room) {
       ELEMENT_CHAT_CONTACT.parent().parent().parent().parent().find(byText(room)).click();
       ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
-      ELEMENT_DELETE_ROOM.click();
+      ELEMENT_DELETE_ROOM.waitUntil(Condition.visible,Configuration.timeout).click();
       ELEMENT_CONFIRM_BUTTON_DELETE_ROOM.click();
       ELEMENT_CONTACT_LIST.find(byText(room)).waitUntil(Condition.not(Condition.appear),Configuration.timeout);
   }

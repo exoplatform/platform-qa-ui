@@ -49,11 +49,11 @@ public class EcmsSESettingTestIT extends Base {
   public void test01_SetUpBrowsingPreferences() {
     info("Test 1: Set up browsing Preferences");
 
-    navigationToolbar.goToSiteExplorer();
-    siteExplorerHome.openSettingsDriver(SiteExplorerHome.selectDriverOption.MODIFIEDDATE,
-                                        SiteExplorerHome.selectDriverOrder.DESCENDING);
-    $(By.xpath("//*[@class='nodeLabel']//*[text()='intranet']")).waitUntil(Condition.visible, Configuration.timeout);
-    siteExplorerHome.openSettingsDriver(SiteExplorerHome.selectDriverOption.ALPHABETICAL,
-                                        SiteExplorerHome.selectDriverOrder.ASCENDING);
-  }
+        navigationToolbar.goToSiteExplorer();
+        siteExplorerHome.openSettingsDriver(SiteExplorerHome.selectDriverOption.MODIFIEDDATE,
+                SiteExplorerHome.selectDriverOrder.DESCENDING);
+        $(By.xpath("//a[@class='refresh btn']")).waitUntil(Condition.visible,Configuration.timeout).click();
+        siteExplorerHome.openSettingsDriver(SiteExplorerHome.selectDriverOption.ALPHABETICAL,
+                SiteExplorerHome.selectDriverOrder.ASCENDING);
+    }
 }

@@ -142,6 +142,7 @@ public class EcmsSECreateTestIT extends Base {
    * <li>Test Case Name: Create Web Content document.</li>
    */
   @Test
+  @Tag("ecmsd")
   public void test03_CreateWebContentDocument() {
     info("Test 3: Create Web Content document");
     info("Create data test");
@@ -171,6 +172,7 @@ public class EcmsSECreateTestIT extends Base {
    * <li>Pre-Condition: A Web Content document is already created.</li>
    */
   @Test
+  @Tag("ecmsd")
   public void test08_EditWebContentDocument() {
     info("Test 3: Create Web Content document");
     info("Create data test");
@@ -206,6 +208,7 @@ public class EcmsSECreateTestIT extends Base {
    * <li>Pre-Condition: A Web Content document is already created.</li>
    */
   @Test
+  @Tag("ecmsd")
   public void test09_DeleteWebContentDocument() {
     info("Test 3: Create Web Content document");
     info("Create data test");

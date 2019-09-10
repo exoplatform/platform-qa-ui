@@ -316,6 +316,7 @@ public class WikiBasicTestWithUserTestIT extends Base {
   }
 
   @Test
+  @Tag("wikid")
   public void test10_editPageWikionSpace() {
     info("Edit page wiki on space");
     info("Create a space");

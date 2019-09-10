@@ -71,6 +71,7 @@ public class EcmsWCMTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
+  @Tag("ecmsd")
   public void test03_CreateSingleContentViewerPage() {
     info("Test 3: Create Single Content Viewer page");
     String content = "content" + getRandomNumber();
@@ -117,7 +118,7 @@ public class EcmsWCMTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
-
+  @Tag("ecmsd")
   public void test10_EditSingleContentViewerPage() {
     info("Test 10 Edit Single Content Viewer page");
     String title = "title" + getRandomNumber();

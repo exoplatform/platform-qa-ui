@@ -13,6 +13,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocat
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -437,12 +438,12 @@ public class PlfUnifiedSearchTestIT extends Base {
     navigationToolbar.goToQuickSearch();
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).setValue(content);
     ELEMENT_DROP_DOWN_LIST_RESULT_IN_QUICK_SEARCH.waitUntil(Condition.visible, Configuration.timeout)
-                                                 .find(byText(name))
-                                                 .shouldBe(Condition.visible);
+            .find(byText(content))
+            .shouldBe(Condition.visible);
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).pressEnter();
     $(ELEMENT_SEARCHRESULT_ALLTYPECHECK).click();
     $(ELEMENT_SEARCHRESULT_DOCTYPECHECK).parent().click();
-    ELEMENT_RESULT_SEARCH.find(byText(name)).should(Condition.visible);
+    Assert.assertEquals($(byId("keyword")).getText(),content);
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     siteExplorerHome.deleteData(name);

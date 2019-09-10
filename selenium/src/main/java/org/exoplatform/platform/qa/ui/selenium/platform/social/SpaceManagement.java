@@ -1,8 +1,7 @@
 package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_PROJECT_ICON_ADD_PROJECT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -55,11 +54,13 @@ public class SpaceManagement {
     public void deleteSpace(String spaceName, Boolean isVerify) {
         if ($(byText(spaceName)).is(Condition.exist)) {
             info("Do delete space");
+            searchSpace(spaceName);
             ELEMENT_SPACES_LIST.find(byText(spaceName)).parent().parent().parent().find(byText("Delete")).click();
             if (isVerify)
                 alert.verifyAlertMessage(ELEMENT_SPACE_CONFIRM_DELETE);
-            $(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON).click();
-            ELEMENT_SPACES_LIST.find(byText(spaceName)).waitUntil(Condition.disappear, Configuration.timeout);
+            $(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
+            sleep(Configuration.collectionsTimeout);
+            ELEMENT_SPACES_LIST.find(byText(spaceName)).waitUntil(Condition.disappear, Configuration.collectionsTimeout);
         }
 
     }
@@ -89,6 +90,7 @@ public class SpaceManagement {
         ELEMENT_SPACE_DESCRIPTION_INPUT.setValue(desc);
         info("Save all changes");
         ELEMENET_SPACE_CREATE_BUTTON.click();
+        sleep(Configuration.timeout);
         ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     }
 
@@ -224,11 +226,13 @@ public class SpaceManagement {
      * @param name
      * @param number
      */
-    public void searchSpace(String name, String number) {
+    public void searchSpace(String name, String... number) {
         info("Waiting my space is shown");
+        sleep(Configuration.timeout);
         ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.appears, Configuration.timeout);
         info("Input the space into search text box");
         ELEMENT_MY_SPACE_SEARCH_TEXT.setValue(name);
+        sleep(Configuration.timeout);
         info("evt.click on Search button");
         $(ELEMENT_MY_SPACE_SEARCH_BTN).click();
 
@@ -432,8 +436,9 @@ public class SpaceManagement {
      */
     public void goToWikiTab() {
         info("Open Wiki Tab");
+        executeJavaScript("window.scrollBy(0,-150)");
         homePagePlatform.refreshUntil($(ELEMENT_WIKI_TAB),Condition.visible,1000);
-        $(ELEMENT_WIKI_TAB).click();
+        $(ELEMENT_WIKI_TAB).waitUntil(Condition.visible,Configuration.timeout).click();
         $(ELEMENT_WIKI_HOME_TITLE).waitUntil(Condition.visible, Configuration.timeout);
         info("Wiki portlet is shown");
     }

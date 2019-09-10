@@ -1,8 +1,12 @@
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selectors.byText;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.SelenideElement;
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_CONNECTION_EVERYONE_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
@@ -10,20 +14,12 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocat
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.ELEMENT_FAQ_QUESTION_LIST;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.ELEMENT_CALENDAR_WORKING_PANEL;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ADDNEWSPACE_BUTTON;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_ADD_PAGE_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.SelenideElement;
-
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-
 public class HomePagePlatform {
 
-  private final TestBase       testBase;
+  private final TestBase testBase;
 
   private ElementEventTestBase evt;
 
@@ -40,6 +36,8 @@ public class HomePagePlatform {
     refreshUntil($(ELEMENT_WIKI_LINK_PLF), Condition.visible, 500);
     $(ELEMENT_WIKI_LINK_PLF).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_WIKI_LINK_PLF).click();
+    refreshUntil($(ELEMENT_WIKI_LINK_PLF), Condition.visible, 500);
+    sleep(Configuration.timeout);
   }
 
   public void goToChat() {
@@ -59,12 +57,23 @@ public class HomePagePlatform {
   }
 
   /**
+   * Go to People
+   */
+  public void goToPeople() {
+    info("--Go to People--");
+    $(ELEMENT_PEOPLE_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout).click();
+
+  }
+
+  /**
    * Go to Home page
    */
   public void goToHomePage() {
     info("Click on Home link of intranet page");
+    sleep(Configuration.timeout);
     executeJavaScript("window.scrollBy(0,-5500)", "");
-    $(ELEMENT_HOME_LINK_PLF).click();
+    sleep(Configuration.collectionsTimeout);
+    $(ELEMENT_HOME_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout).click();
   }
 
   /**
@@ -90,9 +99,8 @@ public class HomePagePlatform {
    */
   public void goToMySpaces() {
     info("-- Go to my spaces --");
-    ELEMENT_MY_SPACE_LINK_PLF.waitUntil(Condition.visible, Configuration.timeout);
-    ELEMENT_MY_SPACE_LINK_PLF.click();
-    refreshUntil(ELEMENT_ADDNEWSPACE_BUTTON, Condition.visible, 1000);
+    ELEMENT_MY_SPACE_LINK_PLF.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    refreshUntil(ELEMENT_ADDNEWSPACE_BUTTON, Condition.visible, Configuration.timeout);
   }
 
   /**
@@ -215,6 +223,18 @@ public class HomePagePlatform {
       evt.waitForAndGetElement(ELEMENT_INVITATIONS_PEOPLE_AVATAR.replace("${name}", user));
     else
       evt.waitForElementNotPresent(ELEMENT_INVITATIONS_PEOPLE_AVATAR.replace("${name}", user));
+  }
+
+  /**
+   * Search User in People Field
+   */
+  public void searchUsersPeople(String user) {
+    info("Enter User Name");
+    sleep(2000);
+    $(byXpath("//div[@class='selectize-input items not-full']/input[@placeholder='Name']")).setValue(user);
+    sleep(2000);
+    $(byXpath("//button[@id='SearchButton']")).waitUntil(Condition.visible, Configuration.timeout).click();
+    sleep(2000);
   }
 
   /**

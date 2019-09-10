@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -177,11 +178,15 @@ public class PageCreationWizard {
     addApplication($(byTitle("Content")), $(byId("Content/portlet_SingleContentViewer")));
 
     $(ELEMENT_PAGEEDITOR_VIEWPAGE).waitUntil(Condition.appears, Configuration.timeout).click();
-    $(ELEMENT_CONTENT_DETAIL_EDIT_BTN).click();
+    $(ELEMENT_CONTENT_DETAIL_EDIT_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(2000);
     contDetail.selectFolderContent(path, content);
-    $(ELEMENT_CONTENT_DETAIL_SAVE_BTN).click();
-    $(ELEMENT_CONTENT_DETAIL_CLOSE_BTN).click();
-    $(ELEMENT_PAGE_FINISH_BTN).click();
+    sleep(2000);
+    $(ELEMENT_CONTENT_DETAIL_SAVE_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(2000);
+    $(ELEMENT_CONTENT_DETAIL_CLOSE_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(2000);
+    $(ELEMENT_PAGE_FINISH_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   /**

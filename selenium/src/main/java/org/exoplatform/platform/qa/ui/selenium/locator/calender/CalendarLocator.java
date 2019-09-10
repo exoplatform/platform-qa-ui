@@ -999,7 +999,7 @@ public class CalendarLocator {
                                                                            "//*[@id='UIQuickAddEvent']//*[@id='fromTime']/..//*[@class='UIComboboxLabel' and text()='${time}']";
 
   public static final SelenideElement ELEMENT_BUTTON_EVENT_SAVE                                        =
-                                                                $(byXpath("//*[@id=\"QuickAddEventContainer\"]/div[2]/button[1]"));
+                                                                $(byXpath("(//*[@id=\"QuickAddEventContainer\"]/div[2]/button)[1]"));
 
   public static final String          ELEMENT_ITEM_QUICK_EVENT_CATEGORY_OPTION                         =
                                                                                "//*[@id='UIQuickAddEventPopupWindow']//*[@name='category']/*[text()='$category']";
@@ -1514,6 +1514,9 @@ public class CalendarLocator {
 
   public static final By              ELEMENT_ADD_EDIT_TASK_ALLDAY                                     =
                                                                    By.xpath("//*[@id='UITaskForm']//*[@name='allDay']");
+
+  public static final By              ELEMENT_CHECK_ADD_EVENT_ALL_DAY                                     =
+                                                                   By.xpath("(//div[@id='allDay']//span[@class='uiCheckbox'])[1]");
 
   public static final By              ELEMENT_ADD_EDIT_TASK_FROM_DATE                                  =
                                                                       By.xpath("//*[@id='UITaskForm']//*[@name='from']");

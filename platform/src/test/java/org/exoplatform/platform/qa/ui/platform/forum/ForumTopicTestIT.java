@@ -614,7 +614,7 @@ public class ForumTopicTestIT extends Base {
     forumForumManagement.addForumSimple(forum, "", desc);
     info("Add and go to a topic in the forums");
     forumForumManagement.goToStartTopic();
-    forumTopicManagement.startTopic(topic, topic, "", "data/forum/topic_attachment.txt");
+    forumTopicManagement.startTopic(topic, topic, "", "wiki_attachment.txt");
     info("Go to a topic");
     forumHomePage.goToTopic(topic);
     forumTopicManagement.selectItemMoreActionMenuTopic(ForumTopicManagement.specifMoreActionMenuTopic.LOCK);
@@ -639,7 +639,7 @@ public class ForumTopicTestIT extends Base {
     forumForumManagement.addForumSimple(forum, "", desc);
     info("Add and go to a topic in the forums");
     forumForumManagement.goToStartTopic();
-    forumTopicManagement.startTopic(topic, topic, "", "data/forum/topic_attachment.txt");
+    forumTopicManagement.startTopic(topic, topic, "", "wiki_attachment.txt");
     info("Go to a topic");
     forumHomePage.goToTopic(topic);
     forumTopicManagement.selectItemMoreActionMenuTopic(ForumTopicManagement.specifMoreActionMenuTopic.EDIT);

@@ -46,9 +46,9 @@ public class AddUsers {
     $(ELEMENT_EMAIL).setValue(email);
     $(ELEMENT_FIRSTNAME).setValue(firstname);
     $(ELEMENT_LASTNAME).setValue(lastName);
-    $(ELEMENT_SAVE).click();
-    ELEMENT_POPUP_MESSAGE_USER_ADDED.waitUntil(appears, Configuration.timeout);
-    $(ELEMENT_CONFIRM_INFORMATION).click();
+    $(ELEMENT_SAVE).waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_POPUP_MESSAGE_USER_ADDED.waitUntil(Condition.visible, Configuration.collectionsTimeout);
+    $(ELEMENT_CONFIRM_INFORMATION).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Finish adding an user");
   }
 

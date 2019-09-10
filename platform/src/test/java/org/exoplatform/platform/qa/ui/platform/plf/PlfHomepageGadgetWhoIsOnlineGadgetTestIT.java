@@ -104,9 +104,10 @@ public class PlfHomepageGadgetWhoIsOnlineGadgetTestIT extends Base {
     // 3 is the id of mary in who on line gadget
     ELEMENT_WHO_ON_LINE_GADGET.scrollTo().find(byId("3")).hover();
     $(byId("tiptip_content")).find(byText(DATA_NAME_USER2)).should(Condition.exist);
+    ELEMENT_WHO_ON_LINE_GADGET.waitUntil(Condition.visible,Configuration.timeout).find(byId("3")).waitUntil(Condition.visible,Configuration.timeout).hover();
     $(ELEMENT_WHO_ONLINE_CONNECT).waitUntil(Condition.appears, Configuration.timeout).click();
     manageLogInOut.signIn(username, DATA_PASS);
-    ELEMENT_WHO_ON_LINE_GADGET.find(byId("3")).hover();
+    ELEMENT_WHO_ON_LINE_GADGET.waitUntil(Condition.visible,Configuration.timeout).find(byId("3")).waitUntil(Condition.visible,Configuration.timeout).hover();
     $(ELEMENT_WHO_ONLINE_CANCEL_CONNECT).click();
   }
 
@@ -125,8 +126,8 @@ public class PlfHomepageGadgetWhoIsOnlineGadgetTestIT extends Base {
 
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     manageLogInOut.signIn(username, DATA_PASS);
-    ELEMENT_WHO_ON_LINE_GADGET.find(byId("3")).click();
-    ELEMENT_NAME_PROFILE_OF_USERS.find(byText(DATA_NAME_USER2)).should(Condition.exist);
+    ELEMENT_WHO_ON_LINE_GADGET.find(byId("3")).waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_NAME_PROFILE_OF_USERS.waitUntil(Condition.visible,Configuration.timeout).find(byText(DATA_NAME_USER2)).waitUntil(Condition.visible,Configuration.timeout).should(Condition.exist);
     // closeBrowsers();
   }
 }

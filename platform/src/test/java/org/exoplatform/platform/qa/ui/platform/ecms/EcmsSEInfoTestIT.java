@@ -1,8 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.ecms;
 
 import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -192,15 +191,16 @@ public class EcmsSEInfoTestIT extends Base {
 
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("sites/intranet/documents", "Collaboration");
-    $(byClassName("uiIconEcmsViewWeb")).click();
-    siteExplorerHome.uploadFile("data/ecms/uploadFile.pdf");
-    siteExplorerHome.selectNode("uploadFile.pdf");
+    $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(Configuration.timeout);
+    siteExplorerHome.uploadFile("testavatar.pdf");
+    siteExplorerHome.selectNode("testavatar.pdf");
     $(byClassName("uiIconEcmsViewAdmin")).click();
     siteExplorerHome.viewMetadata();
     info("Delete data test");
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     refresh();
-    siteExplorerHome.deleteData("uploadFile.pdf");
+    siteExplorerHome.deleteData("testavatar.pdf");
   }
 
 }

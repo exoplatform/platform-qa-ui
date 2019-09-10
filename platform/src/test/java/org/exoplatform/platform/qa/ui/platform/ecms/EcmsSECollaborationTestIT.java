@@ -260,7 +260,7 @@ public class EcmsSECollaborationTestIT extends Base {
   public void test08_VoteForDocumentuploadedFile() {
     info("Test 08: Vote for document/uploaded file");
 
-    String fileName = "data/ecms/eXo-Platform.png";
+    String fileName = "eXo-Platform.png";
 
     info("Upload file");
     navigationToolbar.goToSiteExplorer();

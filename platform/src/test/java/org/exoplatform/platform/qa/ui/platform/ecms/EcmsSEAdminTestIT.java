@@ -1,8 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.ecms;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.*;
@@ -166,7 +165,7 @@ public class EcmsSEAdminTestIT extends Base {
     info("Delete all data test");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.deleteData(node1);
+     siteExplorerHome.deleteData(node1);
     siteExplorerHome.deleteData(node2);
 
   }
@@ -298,7 +297,8 @@ public class EcmsSEAdminTestIT extends Base {
     info("Add New folder");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("sites/intranet/documents", "Collaboration");
-    $(byClassName("uiIconEcmsViewWeb")).click();
+    sleep(Configuration.timeout);
+    $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.timeout).click();
     siteExplorerHome.goToAddNewFolder();
 
     info("Create Folder node");
@@ -309,7 +309,7 @@ public class EcmsSEAdminTestIT extends Base {
     $(byClassName("uiIconEcmsViewAdmin")).click();
     info("Import a node");
     siteExplorerHome.goToImportNode();
-    $(byId("upload")).find(byClassName("file")).uploadFromClasspath("data/ecms/importNode.xml");
+    $(byId("upload")).find(byClassName("file")).uploadFromClasspath("ks-export-forum.xml");
     $(byId("upload")).find(byClassName("progressBarFrame")).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     $(ELEMENT_IMPORT_MODE_POPUP_IMPORT_BUTTON).click();
     $(Button.ELEMENT_OK_BUTTON).click();

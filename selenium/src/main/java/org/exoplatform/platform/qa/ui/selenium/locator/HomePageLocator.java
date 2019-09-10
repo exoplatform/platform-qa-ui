@@ -60,6 +60,9 @@ public final class HomePageLocator {
   public static final By              ELEMENT_DOCUMENTS_LINK_PLF                                           =
                                                                  byClassName("uiIconPLFDocuments");
 
+  public static final By     ELEMENT_PEOPLE_LINK_PLF                                           =
+                                                    By.xpath("//span[@data-original-title='People']");
+
   public static final By              ELEMENT_HOME_LINK_PLF                                                =
                                                             By.xpath("//*[@data-original-title='Home']");
 

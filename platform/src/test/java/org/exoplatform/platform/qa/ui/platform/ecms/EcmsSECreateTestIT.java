@@ -359,7 +359,7 @@ public class EcmsSECreateTestIT extends Base {
     info("Upload a file");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.uploadFile("data/ecms/eXo-Platform.png", true);
+    siteExplorerHome.uploadFile("eXo-Platform.png", true);
     info("Delete a file");
     siteExplorerHome.deleteData("eXo-Platform.png");
   }
@@ -371,7 +371,7 @@ public class EcmsSECreateTestIT extends Base {
     info("Upload a file");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.uploadFile("data/ecms/eXo-Platform.png", true);
+    siteExplorerHome.uploadFile("eXo-Platform.png", true);
     info("Delete a file");
     siteExplorerHome.deleteData("eXo-Platform.png");
   }
@@ -399,7 +399,7 @@ public class EcmsSECreateTestIT extends Base {
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     info("Upload a file");
     refresh();
-    siteExplorerHome.uploadFile("data/ecms/eXo-Platform.png");
+    siteExplorerHome.uploadFile("eXo-Platform.png");
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     $(byXpath(ELEMENT_GRID_LIST_CONTENT.replace("${file}", "eXo-Platform.png"))).waitUntil(Condition.visible,
                                                                                            Configuration.timeout);
@@ -416,7 +416,7 @@ public class EcmsSECreateTestIT extends Base {
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     info("Upload a file");
     refresh();
-    siteExplorerHome.uploadFile("data/ecms/eXo-Platform.png");
+    siteExplorerHome.uploadFile("eXo-Platform.png");
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     $(byXpath(ELEMENT_GRID_LIST_CONTENT.replace("${file}", "eXo-Platform.png"))).waitUntil(Condition.visible,
                                                                                            Configuration.timeout);
@@ -457,9 +457,11 @@ public class EcmsSECreateTestIT extends Base {
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToSpace(spaceName);
     refresh();
-    siteExplorerHome.uploadFile("data/ecms/eXo-Platform.png");
-    $(ELEMENT_ADDRESS_BAR_ICON_VIEW).click();
-    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
+    siteExplorerHome.uploadFile("eXo-Platform.png");
+    sleep(Configuration.timeout);
+    executeJavaScript("window.scrollBy(0,-300)");
+    $(ELEMENT_ADDRESS_BAR_ICON_VIEW).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).waitUntil(Condition.visible,Configuration.timeout).click();
     $(byXpath(ELEMENT_SPACE_DRIVE_NODE_TREE_FILE.replace("${file}", "eXo-Platform.png"))).waitUntil(Condition.visible,
                                                                                                     Configuration.timeout);
     info("Delete the file");
@@ -481,9 +483,10 @@ public class EcmsSECreateTestIT extends Base {
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToSpace(spaceName);
     refresh();
-    siteExplorerHome.uploadFile("data/ecms/eXo-Platform.png");
-    $(ELEMENT_ADDRESS_BAR_ICON_VIEW).click();
-    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
+    siteExplorerHome.uploadFile("eXo-Platform.png");
+    executeJavaScript("window.scrollBy(0,-300)");
+    $(ELEMENT_ADDRESS_BAR_ICON_VIEW).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).waitUntil(Condition.visible,Configuration.timeout).click();
     $(byXpath(ELEMENT_SPACE_DRIVE_NODE_TREE_FILE.replace("${file}", "eXo-Platform.png"))).waitUntil(Condition.visible,
                                                                                                     Configuration.timeout);
     info("Delete the file");
@@ -499,13 +502,13 @@ public class EcmsSECreateTestIT extends Base {
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     info("Upload a file");
     refresh();
-    siteExplorerHome.uploadFile("data/ecms/uploadFile.doc");
+    siteExplorerHome.uploadFile("key_word.doc");
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    $(byXpath(ELEMENT_GRID_LIST_CONTENT.replace("${file}", "uploadFile.doc"))).waitUntil(Condition.visible,
+    $(byXpath(ELEMENT_GRID_LIST_CONTENT.replace("${file}", "key_word.doc"))).waitUntil(Condition.visible,
                                                                                          Configuration.timeout);
     info("Delete the file");
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.deleteData("uploadFile.doc");
+    siteExplorerHome.deleteData("key_word.doc");
 
   }
 
@@ -516,13 +519,13 @@ public class EcmsSECreateTestIT extends Base {
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     info("Upload a file");
     refresh();
-    siteExplorerHome.uploadFile("data/ecms/uploadFile.docx");
+    siteExplorerHome.uploadFile("exoTest.docx");
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    $(byXpath(ELEMENT_GRID_LIST_CONTENT.replace("${file}", "uploadFile.docx"))).waitUntil(Condition.visible,
+    $(byXpath(ELEMENT_GRID_LIST_CONTENT.replace("${file}", "exoTest.docx"))).waitUntil(Condition.visible,
                                                                                           Configuration.timeout);
     info("Delete the file");
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.deleteData("uploadFile.docx");
+    siteExplorerHome.deleteData("exoTest.docx");
   }
 
   @Test
@@ -532,13 +535,13 @@ public class EcmsSECreateTestIT extends Base {
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     info("Upload a file");
     refresh();
-    siteExplorerHome.uploadFile("data/ecms/uploadFile.odt");
+    siteExplorerHome.uploadFile("exoOdtTest.odt");
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    $(byXpath(ELEMENT_GRID_LIST_CONTENT.replace("${file}", "uploadFile.odt"))).waitUntil(Condition.visible,
+    $(byXpath(ELEMENT_GRID_LIST_CONTENT.replace("${file}", "exoOdtTest.odt"))).waitUntil(Condition.visible,
                                                                                          Configuration.timeout);
     info("Delete the file");
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.deleteData("uploadFile.odt");
+    siteExplorerHome.deleteData("exoOdtTest.odt");
 
   }
 
@@ -549,13 +552,13 @@ public class EcmsSECreateTestIT extends Base {
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     info("Upload a file");
     refresh();
-    siteExplorerHome.uploadFile("data/ecms/uploadFile.pdf");
+    siteExplorerHome.uploadFile("testavatar.pdf");
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    $(byXpath(ELEMENT_GRID_LIST_CONTENT.replace("${file}", "uploadFile.pdf"))).waitUntil(Condition.visible,
+    $(byXpath(ELEMENT_GRID_LIST_CONTENT.replace("${file}", "testavatar.pdf"))).waitUntil(Condition.visible,
                                                                                          Configuration.timeout);
     info("Delete the file");
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.deleteData("uploadFile.pdf");
+    siteExplorerHome.deleteData("testavatar.pdf");
 
   }
 
@@ -566,13 +569,13 @@ public class EcmsSECreateTestIT extends Base {
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     info("Upload a file");
     refresh();
-    siteExplorerHome.uploadFile("data/ecms/uploadFile.rtf");
+    siteExplorerHome.uploadFile("exoRtfTest.rtf");
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    $(byXpath(ELEMENT_GRID_LIST_CONTENT.replace("${file}", "uploadFile.rtf"))).waitUntil(Condition.visible,
+    $(byXpath(ELEMENT_GRID_LIST_CONTENT.replace("${file}", "exoRtfTest.rtf"))).waitUntil(Condition.visible,
                                                                                          Configuration.timeout);
     info("Delete the file");
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.deleteData("uploadFile.rtf");
+    siteExplorerHome.deleteData("exoRtfTest.rtf");
 
   }
 
@@ -583,13 +586,13 @@ public class EcmsSECreateTestIT extends Base {
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     info("Upload a file");
     refresh();
-    siteExplorerHome.uploadFile("data/ecms/uploadFile.xlsx");
+    siteExplorerHome.uploadFile("exoXlsxTest.xlsx");
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    $(byXpath(ELEMENT_GRID_LIST_CONTENT.replace("${file}", "uploadFile.xlsx"))).waitUntil(Condition.visible,
+    $(byXpath(ELEMENT_GRID_LIST_CONTENT.replace("${file}", "exoXlsxTest.xlsx"))).waitUntil(Condition.visible,
                                                                                           Configuration.timeout);
     info("Delete the file");
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.deleteData("uploadFile.xlsx");
+    siteExplorerHome.deleteData("exoXlsxTest.xlsx");
 
   }
   @Tag("EXOGTN-2345")
