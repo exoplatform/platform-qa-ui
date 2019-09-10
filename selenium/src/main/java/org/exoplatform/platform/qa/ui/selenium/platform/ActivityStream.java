@@ -719,15 +719,15 @@ public class ActivityStream {
     switchTo().defaultContent();
     $(byXpath("//*[@id=\"at-view-64\"]")).waitUntil(Condition.visible, Configuration.timeout);
     switchTo().frame(0);
-    $(byXpath("/html/body")).pressEnter();
+    $(byXpath("/html/body")).waitUntil(Condition.visible,Configuration.timeout).pressEnter();
     switchTo().defaultContent();
     if (!text.isEmpty())
       switchTo().frame(0);
-    $(byXpath("/html/body")).sendKeys(text);
+    $(byXpath("/html/body")).waitUntil(Condition.visible,Configuration.timeout).sendKeys(text);
     switchTo().defaultContent();
 
     info("Click share button");
-    $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.disabled,Configuration.timeout);
   }
 
@@ -1092,8 +1092,8 @@ public class ActivityStream {
     // click on the activity to appear the delete button
     $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
     // click on delete button
-    $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
-    ELEMENT_DELETE_POPUP_OK.click();
+    $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     $(byText(activity)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }

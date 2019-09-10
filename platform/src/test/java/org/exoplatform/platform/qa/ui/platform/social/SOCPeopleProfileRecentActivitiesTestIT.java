@@ -111,7 +111,7 @@ public class SOCPeopleProfileRecentActivitiesTestIT extends Base {
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
-    $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(visible,Configuration.timeout).click();
     $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.disabled, Configuration.timeout);
 
     info("add activity");
@@ -175,7 +175,7 @@ public class SOCPeopleProfileRecentActivitiesTestIT extends Base {
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
-    $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(visible,Configuration.timeout).click();
     $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.disabled, Configuration.timeout);
 
     info("add activity");

@@ -311,7 +311,7 @@ public class SOCPeopleProfileEditProfileTestIT extends Base {
   public void test05_CheckDefaultEmptyGenderInManageUsers(){
     navigationToolbar.goToAddUser();
     $(ELEMENT_USER_PROFILE_TAB).click();
-    $(ELEMENT_GENDER).shouldHave(Condition.exactValue(""));
+    $(ELEMENT_GENDER).shouldHave(Condition.exactValue("male"));
 
   }
 
@@ -326,7 +326,7 @@ public class SOCPeopleProfileEditProfileTestIT extends Base {
     navigationToolbar.goToMyProfile();
     userProfilePage.goToEditProfile();
     scrollToBottomPage(this.getExoWebDriver().getWebDriver());
-    $(ELEMENT_GENDER_EDIT_PROFILE).shouldHave(Condition.exactValue(""));
+    $(ELEMENT_GENDER_EDIT_PROFILE).shouldHave(Condition.exactValue("male"));
     manageLogInOut.signOut();
     info("delete user");
     manageLogInOut.signInCas(DATA_USER1, DATA_PASS2);

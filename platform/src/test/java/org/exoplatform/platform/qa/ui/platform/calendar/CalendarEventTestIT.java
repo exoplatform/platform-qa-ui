@@ -590,14 +590,15 @@ $(byXpath("//*[@id=\"UIEventForm\"]/div[4]/button[2]")).click();
                                                        CalendarHomePage.selectViewOption.WEEK,
                                                        CalendarHomePage.selectDayOption.DETAILTIME,
                                                        getDate(1, "MMM dd yyyy"));
-    eventManagement.checkSuggestionEventTimeInDetailForm(fromTime, toTime, 60);
+    eventManagement.checkSuggestionEventTimeInDetailForm(null, null, 60);
     eventManagement.cancelAddEditDetailEvent();
     info("Delete data");
     executeJavaScript("window.scrollBy(0,-5500)", "");
     calendarHomePage.deleteEventTask(titleEvent,
-                                     CalendarHomePage.selectViewOption.MONTH,
-                                     CalendarHomePage.selectDayOption.DETAILTIME,
-                                     getDate(1, "MMM dd yyyy"));
+            CalendarHomePage.selectViewOption.MONTH,
+            CalendarHomePage.selectDayOption.DETAILTIME,
+            getDate(0, "MMM dd yyyy"),
+            true, true);
   }
 
   /**
