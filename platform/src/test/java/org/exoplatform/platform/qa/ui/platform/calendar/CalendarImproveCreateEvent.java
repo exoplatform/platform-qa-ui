@@ -70,7 +70,7 @@ public class CalendarImproveCreateEvent extends Base {
     calendarManagement.saveSetting();
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT), Condition.visible, 1000);
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     info("Add event");
     ELEMENT_EVENT_TITLE_DRAWER.setValue(eventTitle);
     ELEMENT_EVENT_ADD_PARTICIPANT.setValue(PLFData.DATA_NAME_USER1).waitUntil(Condition.visible, Configuration.timeout).click();
@@ -105,7 +105,7 @@ public class CalendarImproveCreateEvent extends Base {
     refresh();
     $(byAttribute("startfull", getDate(0, "EEE MMM dd yyyy HH" + ":00:00"))).waitUntil(Condition.visible,2000).doubleClick();
     ELEMENT_EVENT_DRAWER.parent().waitUntil(Condition.visible, Configuration.collectionsTimeout);
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     info("Add event");
     ELEMENT_EVENT_TITLE_DRAWER.setValue(titleEvent);
     eventManagement.saveQuickAddEvent();
@@ -129,7 +129,7 @@ public class CalendarImproveCreateEvent extends Base {
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     ELEMENT_CLOSE_BUTTON_DRAWER.click();
     ELEMENT_BUTTON_EVENT_SAVE.waitUntil(Condition.disappears, Configuration.timeout);
 
@@ -143,7 +143,7 @@ public class CalendarImproveCreateEvent extends Base {
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     ELEMENT_EVENT_CANCEL_BUTTON.click();
     ELEMENT_BUTTON_EVENT_SAVE.waitUntil(Condition.disappears, Configuration.timeout);
 
@@ -158,7 +158,7 @@ public class CalendarImproveCreateEvent extends Base {
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     ELEMENT_EVENT_DRAWER_TITLE.setValue(titleEvent);
     ELEMENT_EVENT_CATEGORY.selectOption("Meeting");
     ELEMENT_EVENT_LOCATION.setValue("Location");
@@ -180,7 +180,7 @@ public class CalendarImproveCreateEvent extends Base {
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     assertEquals("", ELEMENT_EVENT_DRAWER_TITLE.getText());
     ELEMENT_EVENT_SAVE_BUTTON.waitUntil(Condition.disabled, Configuration.timeout);
     ELEMENT_EVENT_CANCEL_BUTTON.click();
@@ -196,7 +196,7 @@ public class CalendarImproveCreateEvent extends Base {
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     ELEMENT_EVENT_DRAWER_TITLE.setValue(titleEvent);
     ELEMENT_EVENT_SAVE_BUTTON.waitUntil(Condition.enabled, Configuration.timeout);
     ELEMENT_EVENT_CANCEL_BUTTON.click();
@@ -218,7 +218,7 @@ public class CalendarImproveCreateEvent extends Base {
     addUsers.addUser(username, password, email1, Firstname, Lastname);
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     ELEMENT_EVENT_DRAWER_TITLE.setValue(titleEvent);
     ELEMENT_EVENT_ADD_PARTICIPANT.setValue(Firstname).waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
     ELEMENT_EVENT_ADD_PARTICIPANT.waitUntil(Condition.visible,2000);
@@ -236,7 +236,7 @@ public class CalendarImproveCreateEvent extends Base {
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_REPEAT_PREFERRENCE_IMPROVE_POPUP.waitUntil(Condition.appear, Configuration.timeout);
     $(byText("Recurring Event")).waitUntil(Condition.exist, Configuration.timeout);
@@ -252,7 +252,7 @@ public class CalendarImproveCreateEvent extends Base {
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_REMINDER_POPUP.waitUntil(Condition.appear, Configuration.timeout);
     $(byText("Reminder")).waitUntil(Condition.exist, Configuration.timeout);
@@ -268,7 +268,7 @@ public class CalendarImproveCreateEvent extends Base {
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).waitUntil(Condition.visible, Configuration.timeout).click();
     $(byXpath("//input[@id='mailReminderTimeEntry']")).waitUntil(Condition.visible,2000).setValue("15");
     $(ELEMENT_SAVE_REMINDER_BUTTON).waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
@@ -295,7 +295,7 @@ public class CalendarImproveCreateEvent extends Base {
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).waitUntil(Condition.visible, Configuration.timeout).click();
     $(ELEMENT_SAVE_EVENT_OCCURRING).waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
     ELEMENT_REPEAT_LABEL.waitUntil(Condition.text("Repeat"), Configuration.timeout);
@@ -313,7 +313,7 @@ public class CalendarImproveCreateEvent extends Base {
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     ELEMENT_FIND_TIME_BUTTON.click();
     ELEMENT_FIND_TIME_POPUP.waitUntil(Condition.appear, Configuration.timeout);
     ELEMENT_CHECK_TIME_ICON.waitUntil(Condition.checked, Configuration.timeout);
@@ -337,7 +337,7 @@ public class CalendarImproveCreateEvent extends Base {
     calendarManagement.saveSetting();
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT), Condition.visible, 1000);
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     for (int i = 0; i <= 11; i++) {
       $(By.className("attachFile")).uploadFromClasspath(uploadedFile);
     }
@@ -387,7 +387,7 @@ public class CalendarImproveCreateEvent extends Base {
     calendarManagement.saveSetting();
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT), Condition.visible, 1000);
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).waitUntil(Condition.visible,2000).dragAndDropTo($(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")));
     $(By.className("attachFile")).uploadFromClasspath(longName);
     Assert.assertEquals("Attached file name is not " + longName, $(byXpath("//div[@class=\"info\"]/div[@title]")).getText(), longName);
@@ -415,7 +415,7 @@ public class CalendarImproveCreateEvent extends Base {
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_REPEAT_PREFERRENCE_IMPROVE_POPUP.waitUntil(Condition.appear, Configuration.timeout);
     eventManagement.inputRecurringInfoEvent(EventManagement.repeatType.Daily,
@@ -460,7 +460,7 @@ public class CalendarImproveCreateEvent extends Base {
     calendarManagement.saveSetting();
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT), Condition.visible, 1000);
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     info("Press on ESC button");
     ELEMENT_EVENT_ADD_PARTICIPANT.waitUntil(Condition.visible,2000);
     ELEMENT_EVENT_ADD_PARTICIPANT.sendKeys(Keys.ESCAPE);
@@ -480,7 +480,7 @@ public class CalendarImproveCreateEvent extends Base {
     calendarManagement.saveSetting();
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT), Condition.visible, 1000);
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     ELEMENT_EVENT_TITLE_DRAWER.waitUntil(Condition.visible,2000).setValue(eventTitle);
     info("Press on ESC button");
     ELEMENT_EVENT_ADD_PARTICIPANT.waitUntil(Condition.visible,2000);
@@ -506,7 +506,7 @@ public class CalendarImproveCreateEvent extends Base {
     calendarManagement.saveSetting();
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT), Condition.visible, 1000);
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     info("Add event");
     ELEMENT_EVENT_TITLE_DRAWER.setValue(eventTitle);
     ELEMENT_EVENT_ADD_PARTICIPANT.setValue(PLFData.DATA_NAME_USER1).waitUntil(Condition.visible, Configuration.timeout).click();
@@ -521,7 +521,7 @@ public class CalendarImproveCreateEvent extends Base {
             CalendarHomePage.selectViewOption.WEEK,
             CalendarHomePage.selectDayOption.DETAILTIME,
             getDate(0, "MMM dd yyyy"));
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     ELEMENT_EVENT_TITLE_DRAWER.setValue(eventTitle2);
     ELEMENT_EVENT_CLEAR_BUTTON.click();
     Assert.assertEquals("Event Title is not " + eventTitle, $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getValue(), eventTitle);
@@ -562,7 +562,7 @@ public class CalendarImproveCreateEvent extends Base {
     calendarManagement.saveSetting();
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT), Condition.visible, 1000);
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     info("Add event");
     ELEMENT_EVENT_TITLE_DRAWER.setValue(eventTitle);
     ELEMENT_EVENT_ADD_PARTICIPANT.setValue(PLFData.DATA_NAME_USER1).waitUntil(Condition.visible, Configuration.timeout).click();

@@ -28,7 +28,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACE_TOOLTIP_LEFT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACE_TOOLTIP_RIGHT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -106,7 +106,10 @@ public class PortletInSpaceHomePageTestIT extends Base {
     String space = "space" + getRandomNumber();
     DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     Date date = new Date();
-    String dateEvent = format.format(date);
+    String dateEventAdded = format.format(date);
+    String pattern = "MM-dd-yyyy";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    String addDateEvent = simpleDateFormat.format(new Date());
     String toolTips = "arrows";
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
@@ -119,7 +122,7 @@ public class PortletInSpaceHomePageTestIT extends Base {
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT), Condition.visible, 1000);
     executeJavaScript("window.scrollBy(0,-2000)", "");
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp();
+    eventManagement.checkEventPopUp(addDateEvent, DATA_NAME_USER1, DATA_USER1);
     info("Add event");
     ELEMENT_EVENT_TITLE_DRAWER.setValue(titleEvent);
     eventManagement.saveQuickAddEvent();
@@ -129,11 +132,11 @@ public class PortletInSpaceHomePageTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.searchSpace(space);
     spaceManagement.accessToSearchedSpace();
-    spaceManagement.checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(null, DATA_NAME_USER1, null, space, titleEvent, dateEvent, toolTips);
+    spaceManagement.checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(null, DATA_NAME_USER1, null, space, titleEvent, dateEventAdded, toolTips);
     manageLogInOut.signIn(DATA_USER3, password);
     homePagePlatform.goToMySpaces();
     spaceManagement.acceptAInvitation(space);
-    spaceManagement.checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(null, DATA_NAME_USER1, null, space, titleEvent, dateEvent, toolTips);
+    spaceManagement.checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(null, DATA_NAME_USER1, null, space, titleEvent, dateEventAdded, toolTips);
     manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
@@ -374,7 +377,10 @@ public class PortletInSpaceHomePageTestIT extends Base {
     String space = "space" + getRandomNumber();
     DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     Date date = new Date();
-    String dateEvent = format.format(date);
+    String dateEventAdded = format.format(date);
+    String pattern = "MM-dd-yyyy";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    String addDateEvent = simpleDateFormat.format(new Date());
     Calendar today = Calendar.getInstance();
     today.setTime(date);
     today.add(Calendar.DAY_OF_YEAR, 1);
@@ -394,7 +400,7 @@ public class PortletInSpaceHomePageTestIT extends Base {
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT), Condition.visible, 1000);
     executeJavaScript("window.scrollBy(0,-2000)", "");
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp();
+    eventManagement.checkEventPopUp(addDateEvent, DATA_NAME_USER1, DATA_USER1);
     info("Add event");
     ELEMENT_EVENT_TITLE_DRAWER.setValue(titleEvent);
     eventManagement.saveQuickAddEvent();
@@ -404,7 +410,7 @@ public class PortletInSpaceHomePageTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.searchSpace(space);
     spaceManagement.accessToSearchedSpace();
-    spaceManagement.checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(null, DATA_NAME_USER1, null, space, titleEvent, dateEvent, toolTips);
+    spaceManagement.checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(null, DATA_NAME_USER1, null, space, titleEvent, dateEventAdded, toolTips);
     manageLogInOut.signIn(DATA_USER3, password);
     homePagePlatform.goToMySpaces();
     spaceManagement.acceptAInvitation(space);
@@ -414,7 +420,7 @@ public class PortletInSpaceHomePageTestIT extends Base {
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT), Condition.visible, 1000);
     executeJavaScript("window.scrollBy(0,-2000)", "");
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp();
+    eventManagement.checkEventPopUp(addDateEvent, DATA_NAME_USER3, DATA_USER3);
     info("Add event");
     ELEMENT_EVENT_TITLE_DRAWER.setValue(titleEvent);
     eventManagement.selectPreviousAndNextDayInTheEventToAdd(null, "N");
@@ -425,7 +431,7 @@ public class PortletInSpaceHomePageTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.searchSpace(space);
     spaceManagement.accessToSearchedSpace();
-    spaceManagement.checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(null, DATA_NAME_USER1, null, space, titleEvent, dateEvent, toolTips);
+    spaceManagement.checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(null, DATA_NAME_USER1, null, space, titleEvent, dateEventAdded, toolTips);
     ELEMENT_SPACE_TOOLTIP_RIGHT.waitUntil(Condition.visible, Configuration.timeout).click();
     spaceManagement.checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(null, DATA_NAME_USER1, null, space, titleEvent, nextDate, toolTips);
     manageLogInOut.signIn(DATA_USER2, password);
@@ -437,7 +443,7 @@ public class PortletInSpaceHomePageTestIT extends Base {
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT), Condition.visible, 1000);
     executeJavaScript("window.scrollBy(0,-2000)", "");
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp();
+    eventManagement.checkEventPopUp(addDateEvent, DATA_NAME_USER2, DATA_USER2);
     info("Add event");
     ELEMENT_EVENT_TITLE_DRAWER.setValue(titleEvent);
     eventManagement.selectPreviousAndNextDayInTheEventToAdd("P", null);
@@ -448,7 +454,7 @@ public class PortletInSpaceHomePageTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.searchSpace(space);
     spaceManagement.accessToSearchedSpace();
-    spaceManagement.checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(null, DATA_NAME_USER1, null, space, titleEvent, dateEvent, toolTips);
+    spaceManagement.checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(null, DATA_NAME_USER1, null, space, titleEvent, dateEventAdded, toolTips);
     ELEMENT_SPACE_TOOLTIP_LEFT.waitUntil(Condition.visible, Configuration.timeout).click();
     spaceManagement.checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(null, DATA_NAME_USER1, null, space, titleEvent, previousDate, toolTips);
     manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
@@ -556,6 +562,9 @@ public class PortletInSpaceHomePageTestIT extends Base {
     String spaceNamea = "spaceNamea" + getRandomNumber();
     String spaceDesa = "descriptiona" + getRandomNumber();
     String titleEvent = "titleEvent" + getRandomNumber();
+    String pattern = "MM-dd-yyyy";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    String dateEvent = simpleDateFormat.format(new Date());
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
     spaceManagement.goToAgendaTab();
@@ -564,7 +573,7 @@ public class PortletInSpaceHomePageTestIT extends Base {
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT), Condition.visible, 1000);
     executeJavaScript("window.scrollBy(0,-2000)", "");
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp();
+    eventManagement.checkEventPopUp(dateEvent, DATA_NAME_USER1, DATA_USER1);
     info("Add event");
     ELEMENT_EVENT_TITLE_DRAWER.setValue(titleEvent);
     eventManagement.saveQuickAddEvent();
@@ -588,6 +597,9 @@ public class PortletInSpaceHomePageTestIT extends Base {
     String spaceNamea = "spaceNamea" + getRandomNumber();
     String spaceDesa = "descriptiona" + getRandomNumber();
     String titleEvent = "titleEvent" + getRandomNumber();
+    String pattern = "MM-dd-yyyy";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    String dateEvent = simpleDateFormat.format(new Date());
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
     spaceManagement.goToAgendaTab();
@@ -596,7 +608,7 @@ public class PortletInSpaceHomePageTestIT extends Base {
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT), Condition.visible, 1000);
     executeJavaScript("window.scrollBy(0,-2000)", "");
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp();
+    eventManagement.checkEventPopUp(dateEvent, DATA_NAME_USER1, DATA_USER1);
     info("Add event");
     ELEMENT_EVENT_TITLE_DRAWER.setValue(titleEvent);
     eventManagement.saveQuickAddEvent();

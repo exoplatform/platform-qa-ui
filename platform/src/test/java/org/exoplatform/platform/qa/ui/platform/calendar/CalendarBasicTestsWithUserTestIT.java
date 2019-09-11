@@ -175,7 +175,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     calendarManagement.saveAddCalendar();
     calendarManagement.executeActionCalendar(calendar, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     info("Check default date");
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     info("Add event");
     $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).setValue(titleEvent);
     eventManagement.saveQuickAddEvent();
@@ -291,7 +291,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     calendarManagement.saveAddCalendar();
     calendarManagement.executeActionCalendar(calendar, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     info("Check default date");
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     info("Add event");
     $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).setValue(titleEvent);
     eventManagement.saveQuickAddEvent();

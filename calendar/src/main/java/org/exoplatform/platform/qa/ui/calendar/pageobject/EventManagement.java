@@ -222,8 +222,6 @@ public class EventManagement {
     info("Input into From, To and check/uncheck allday checkbox fields of a EVENT");
     if (allDay) {
       info("Check all day, then select date");
-      // waitForAndGetElement(ELEMENT_QUICK_CHECKBOX_EVENT_ALLDAY,
-      // DEFAULT_TIMEOUT, 1);
       evt.check(ELEMENT_QUICK_CHECKBOX_EVENT_ALLDAY, 2);
       if ((from != null) & (from != ""))
         evt.type(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE, from, true);
@@ -232,8 +230,6 @@ public class EventManagement {
 
     } else {
       info("Uncheck all day, then select date time");
-      // waitForAndGetElement(ELEMENT_QUICK_CHECKBOX_EVENT_ALLDAY,
-      // DEFAULT_TIMEOUT, 1);
       evt.uncheck(ELEMENT_QUICK_CHECKBOX_EVENT_ALLDAY, 2);
       if ((from != null) & (from != "")) {
         String[] dateTimeFrom = from.split(" ");
@@ -1221,7 +1217,7 @@ public class EventManagement {
   /**
    * Check Event PopUp Fields
    */
-  public void checkEventPopUp(String date) {
+  public void checkEventPopUp(String date, String userName, String user) {
     switchTo().activeElement();
     $(byText("Add Event")).should(Condition.exist);
     assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
@@ -1237,7 +1233,7 @@ public class EventManagement {
     assertEquals(date, $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).getValue());
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
     $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
-    assertEquals("Root Root", $(byXpath("//*[@data-value=\"root\"]")).getText().split("\n")[0]);
+    assertEquals(userName, $(byXpath("//*[@data-value='${user}']".replace("${user}",user))).getText().split("\n")[0]);
     $(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")).exists();
     $(byXpath("//textarea[@placeholder='Add a description']")).exists();
     assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());

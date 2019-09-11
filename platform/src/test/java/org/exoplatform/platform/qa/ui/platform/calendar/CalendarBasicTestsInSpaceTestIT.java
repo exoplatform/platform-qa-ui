@@ -7,6 +7,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarL
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -69,11 +70,11 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
     spaceManagement.addNewSpaceSimple(space, space);
     spaceManagement.goToAgendaTab();
     info("Test 13 Add an event in personal calendar");
-    ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.contextClick();
+    ELEMENT_CALENDAR_TODAY_FIRST_TIME.waitUntil(Condition.visible, Configuration.timeout).contextClick();
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT),Condition.visible,1000);
     executeJavaScript("window.scrollBy(0,-2000)", "");
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp(date);
+    eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     info("Add event");
     ELEMENT_EVENT_TITLE_DRAWER.setValue(titleEvent);
     eventManagement.saveQuickAddEvent();
@@ -98,7 +99,7 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
     spaceManagement.addNewSpaceSimple(space, space);
     spaceManagement.goToAgendaTab();
     info("Test 13 Add an event in personal calendar");
-    ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.contextClick();
+    ELEMENT_CALENDAR_TODAY_FIRST_TIME.waitUntil(Condition.visible, Configuration.timeout).contextClick();
     $(byClassName("createEvent")).waitUntil(Condition.visible, Configuration.timeout).click();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
@@ -137,7 +138,7 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
     spaceManagement.addNewSpaceSimple(space, space);
     spaceManagement.goToAgendaTab();
     info("Test 13 Add an event in personal calendar");
-    ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.contextClick();
+    ELEMENT_CALENDAR_TODAY_FIRST_TIME.waitUntil(Condition.visible, Configuration.timeout).contextClick();
     $(byClassName("createEvent")).waitUntil(Condition.visible, Configuration.timeout).click();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
