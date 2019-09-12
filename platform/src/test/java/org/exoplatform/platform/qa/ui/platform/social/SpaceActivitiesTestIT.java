@@ -29,7 +29,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManag
  * Created by exo on 07/06/17.
  */
 @Tag("social")
-@Tag("smoke")
+@Tag("sniff")
 public class SpaceActivitiesTestIT extends Base {
   NavigationToolbar      navigationToolbar;
 

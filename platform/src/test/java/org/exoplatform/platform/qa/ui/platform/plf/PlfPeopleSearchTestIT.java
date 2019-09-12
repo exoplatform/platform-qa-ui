@@ -20,8 +20,8 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-@Tag("gatein")
-@Tag("smoke")
+@Tag("plf")
+@Tag("sniff")
 public class PlfPeopleSearchTestIT extends Base {
 
     private NavigationToolbar navigationToolbar;

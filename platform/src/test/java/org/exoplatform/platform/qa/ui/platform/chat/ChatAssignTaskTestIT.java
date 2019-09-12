@@ -33,7 +33,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 @Tag("chat")
-@Tag("smoke")
+@Tag("sniff")
 public class ChatAssignTaskTestIT extends Base {
 
     HomePagePlatform homePagePlatform;

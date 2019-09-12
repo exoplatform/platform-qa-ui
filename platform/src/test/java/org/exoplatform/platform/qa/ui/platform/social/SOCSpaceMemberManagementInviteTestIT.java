@@ -26,7 +26,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManag
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 
 @Tag("social")
-@Tag("smoke")
+@Tag("sniff")
 public class SOCSpaceMemberManagementInviteTestIT extends Base {
 
   NavigationToolbar      navigationToolbar;

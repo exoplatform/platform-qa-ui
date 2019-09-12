@@ -14,6 +14,7 @@ import static org.exoplatform.platform.qa.ui.social.pageobject.NotificationsAdmi
 import static org.exoplatform.platform.qa.ui.social.pageobject.NotificationsAdminSeting.notificationType.Edit_Comment;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.Condition;
@@ -35,7 +36,8 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.SourceTextEditor;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
-
+@Tag("social")
+@Tag("sniff")
 public class SOCNotificationsEditActivityTestIT extends Base {
 
   ActivityStream          activityStream;

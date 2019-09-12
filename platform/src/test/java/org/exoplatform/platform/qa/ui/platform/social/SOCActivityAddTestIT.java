@@ -25,7 +25,7 @@ import org.exoplatform.platform.qa.ui.commons.Base;
 /**
  * Created by exo on 23/10/17.
  */
-@Tag("functionnal")
+@Tag("sniff")
 @Tag("social")
 public class SOCActivityAddTestIT extends Base {
   ActivityStream activityStream;

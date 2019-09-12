@@ -27,7 +27,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
  * Created by exo on 02/06/17.
  */
 @Tag("forum")
-@Tag("smoke")
+@Tag("sniff")
 
 public class ForumManagementInSpaceTestIT extends Base {
   HomePagePlatform     homePagePlatform;

@@ -25,7 +25,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 /**
  * Created by ilyes on 30/10/17.
  */
-@Tag("smoke")
+@Tag("sniff")
 @Tag("ecms")
 public class ECMSManageProjectTestIT extends Base {
     HomePagePlatform homePagePlatform;

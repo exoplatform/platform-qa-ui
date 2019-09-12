@@ -26,7 +26,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 /**
  * Created by ilyes on 08/11/17.
  */
-@Tag("smoke")
+@Tag("sniff")
 @Tag("calendar")
 public class CalendarBasicTestsInSpaceTestIT extends Base {
   HomePagePlatform homePagePlatform;
