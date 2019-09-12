@@ -221,6 +221,8 @@ public class EventManagement {
     info("Input into From, To and check/uncheck allday checkbox fields of a EVENT");
     if (allDay) {
       info("Check all day, then select date");
+      // waitForAndGetElement(ELEMENT_QUICK_CHECKBOX_EVENT_ALLDAY,
+      // DEFAULT_TIMEOUT, 1);
       evt.check(ELEMENT_QUICK_CHECKBOX_EVENT_ALLDAY, 2);
       if ((from != null) & (from != ""))
         evt.type(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE, from, true);
@@ -229,6 +231,8 @@ public class EventManagement {
 
     } else {
       info("Uncheck all day, then select date time");
+      // waitForAndGetElement(ELEMENT_QUICK_CHECKBOX_EVENT_ALLDAY,
+      // DEFAULT_TIMEOUT, 1);
       evt.uncheck(ELEMENT_QUICK_CHECKBOX_EVENT_ALLDAY, 2);
       if ((from != null) & (from != "")) {
         String[] dateTimeFrom = from.split(" ");
