@@ -19,7 +19,7 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
 
-@Tag("smoke")
+@Tag("sniff")
 @Tag("wiki")
 public class WikiActivitiesInSpaceTestIT extends Base {
 

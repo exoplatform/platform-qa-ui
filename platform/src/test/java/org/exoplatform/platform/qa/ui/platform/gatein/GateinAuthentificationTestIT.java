@@ -9,6 +9,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -22,6 +23,8 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 * @author eXo
 *
 */
+@Tag("sniff")
+@Tag("gatein")
 public class GateinAuthentificationTestIT extends Base{
 
     ManageLogInOut manageLogInOut;

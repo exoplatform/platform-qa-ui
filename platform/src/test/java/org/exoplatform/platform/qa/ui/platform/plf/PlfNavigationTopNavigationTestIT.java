@@ -30,7 +30,7 @@ import org.exoplatform.platform.qa.ui.task.pageobject.TasksManagement;
 /**
  * @author eXo
  */
-@Tag("smoke")
+@Tag("sniff")
 @Tag("plf")
 public class PlfNavigationTopNavigationTestIT extends Base {
 

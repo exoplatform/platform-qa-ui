@@ -28,7 +28,7 @@ import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 /**
  * Created by exo on 07/06/17.
  */
-@Tag("smoke")
+@Tag("sniff")
 @Tag("social")
 public class SOCSpaceMemberManagementRequestTestIT extends Base {
   NavigationToolbar      navigationToolbar;
