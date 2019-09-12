@@ -83,7 +83,7 @@ If you want to execute the *tests with Selenium Grid, you can skip this step*.
 
 === Run UI Tests from your IDE
 
-==== Configure IntellJ IDEA
+==== Configure IntellIJ IDEA
 
 [IMPORTANT]
 --
@@ -104,19 +104,11 @@ To be able to execute JUnit5 Tests with IntellIJ, you need at *least IntellIJ 20
 [NOTE]
 --
 
-To run tests on *PLF 5.2.x* , you must checkout *stable/5.2.x* before running tests :
-
-`git checkout stable/5.2.x`
-
-To run tests on *PLF 5.1.x* , you must checkout *stable/5.1.x* before running tests :
-
-`git checkout stable/5.1.x`
-
-To run tests on *PLF 5.0.x* , you must checkout *stable/5.0.x* before running tests :
+To run tests on *PLF 5.0.x* , you must checkout *stable/5.0.x* before runnig tests :
 
 `git checkout stable/5.0.x`
 
-To run tests on *PLF 4.4.x* , you must checkout *stable/4.4.x* before running tests :
+To run tests on *PLF 4.4.x* , you must checkout *stable/4.4.x* before runnig tests :
 
 `git checkout stable/4.4.x`
 
