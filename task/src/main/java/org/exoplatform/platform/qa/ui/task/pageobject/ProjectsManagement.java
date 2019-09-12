@@ -7,6 +7,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
 
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
@@ -116,12 +117,12 @@ public class ProjectsManagement {
    *          project in Calendar application = false if don't want.
    */
   public void addProject(String title, String des, boolean enableCalendar) {
-    ELEMENT_PROJECT_ICON_ADD_PROJECT.click();
-    ELEMENT_ADD_PROJECT.click();
+    ELEMENT_PROJECT_ICON_ADD_PROJECT.waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_ADD_PROJECT.waitUntil(Condition.visible, Configuration.timeout).click();
     info("Create a new project");
     if (title != null || title != "") {
       info("Input title");
-      $(ELEMENT_ADD_PROJECT_TITLE).setValue(title);
+      $(ELEMENT_ADD_PROJECT_TITLE).waitUntil(Condition.visible, Configuration.timeout).setValue(title);
     }
     if (des != null || des != "") {
       info("Input description");
@@ -134,7 +135,7 @@ public class ProjectsManagement {
       info("Disable Calendar intergration");
       evt.uncheck(ELEMETN_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX, 2);
     }
-    ELEMENT_SAVE_PROJECT.click();
+    ELEMENT_SAVE_PROJECT.waitUntil(Condition.visible, Configuration.timeout).click();
     $(byText(title)).should(Condition.visible);
   }
 
