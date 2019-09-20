@@ -90,9 +90,7 @@ public class HomePagePlatform {
    */
   public void goToCalendarPage() {
     info("-- Go to calendar home page --");
-    ELEMENT_CALENDAR_LINK_PLF.waitUntil(Condition.appears, Configuration.timeout);
-    info("click on Calendar link");
-    ELEMENT_CALENDAR_LINK_PLF.click();
+    ELEMENT_CALENDAR_LINK_PLF.waitUntil(Condition.appears, Configuration.collectionsTimeout).click();
     info("Verify that Calendar page is shown");
     refreshUntil($(ELEMENT_CALENDAR_WORKING_PANEL), Condition.visible, 1000);
     $(ELEMENT_CALENDAR_WORKING_PANEL).waitUntil(Condition.appears, Configuration.timeout);
@@ -108,7 +106,7 @@ public class HomePagePlatform {
    */
   public void goToMySpaces() {
     info("-- Go to my spaces --");
-    ELEMENT_MY_SPACE_LINK_PLF.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    ELEMENT_MY_SPACE_LINK_PLF.shouldBe(Condition.visible).click();
     refreshUntil(ELEMENT_ADDNEWSPACE_BUTTON, Condition.visible, Configuration.timeout);
   }
 

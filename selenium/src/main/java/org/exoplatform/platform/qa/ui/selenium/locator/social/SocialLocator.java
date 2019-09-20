@@ -1134,7 +1134,7 @@ public final class SocialLocator {
                                                                                 By.xpath("//*[@id=\"UIUserNavigationPortlet\"]/div[1]/ul/li[4]/a/div");
 
   public static final By              ELEMENT_HORIZONTAL_TOOLBAR_FIFTH_APP_DASHBOARD                    =
-                                                                                     By.xpath("//*[@id=\"UIUserNavigationPortlet\"]/div[1]/ul/li[5]/a/div");
+                                                                                     By.xpath("//*[@id=\"UIUserNavigationPortlet\"]/div[1]/ul/li[6]/a/div");
 
   public static final By              ELEMENT_MORE_TAB                                                  =
                                                        By.xpath("//*[@class='nav nav-tabs userNavigation']//*[@class='uiIconAppMoreButton']");

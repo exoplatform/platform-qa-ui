@@ -651,11 +651,11 @@ public class EcmsWCMTestIT extends Base {
     info("language2 is:" + language2);
     String apply2 = "Appliquer";
     navigationToolbar.goToSEO();
-    $(ELEMENT_SEO_LANGUAGE_SHOW).click();
+    $(ELEMENT_SEO_LANGUAGE_SHOW).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     $(ELEMENT_SEO_LANGUAGE_SELECTBOX).selectOption(language1);
     $(ELEMENT_SEO_TITLEBOX).setValue(title);
-    $(ELEMENT_SEO_SAVE).click();
-    $(ELEMENT_SEO_CLOSE).click();
+    $(ELEMENT_SEO_SAVE).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(ELEMENT_SEO_CLOSE).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     refresh();
     navigationToolbar.goToChangeLanguage();
     changeLanguages.changeLanguage(language1, apply1);
@@ -699,7 +699,7 @@ public class EcmsWCMTestIT extends Base {
     changeLanguages.changeLanguage(language2, apply2);
     // Verify that sitemaps file is updated
     sleep(Configuration.timeout);
-    $(byText("sitemaps")).waitUntil(Condition.visible, Configuration.timeout);
+    $(byText("sitemaps")).waitUntil(Condition.visible, Configuration.collectionsTimeout);
     info("Delete SEO folder");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/SEO", "Site Management");

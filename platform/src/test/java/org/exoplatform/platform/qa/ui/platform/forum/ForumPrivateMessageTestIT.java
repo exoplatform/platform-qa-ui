@@ -91,7 +91,6 @@ public class ForumPrivateMessageTestIT extends Base {
     forumHomePage.goToPrivateMessage();
     privateMessageManagement.goComposeMessage();
     privateMessageManagement.writeMessage(contact, title, content);
-    privateMessageManagement.deleteMessage(title, "");
     ELEMENT_CANCEL_PRIVATE_MSG.click();
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
 
@@ -139,10 +138,8 @@ public class ForumPrivateMessageTestIT extends Base {
     forumHomePage.goToPrivateMessage();
     privateMessageManagement.goComposeMessage();
     privateMessageManagement.writeMessage(contact, title, content);
-    privateMessageManagement.deleteMessage(title, "");
     ELEMENT_CANCEL_PRIVATE_MSG.click();
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-
     homePagePlatform.goToForum();
     forumHomePage.goToPrivateMessage();
     privateMessageManagement.checkInboxMessage("", title, content);

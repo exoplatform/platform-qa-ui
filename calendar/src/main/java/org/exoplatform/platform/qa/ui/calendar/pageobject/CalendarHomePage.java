@@ -435,13 +435,13 @@ public class CalendarHomePage {
       case DAY:
         switch (optionDay) {
           case DETAILTIME:
-            $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
+            $(byText(name)).waitUntil(Condition.appears, Configuration.collectionsTimeout);
             break;
           case ALLDAY:
-            $(byXpath(ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY.replace("$name", name))).waitUntil(Condition.visible,Configuration.timeout);
+            $(byXpath(ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY.replace("$name", name))).waitUntil(Condition.visible,Configuration.collectionsTimeout);
             break;
           default:
-            evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
+            $(byXpath(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name))).waitUntil(Condition.visible,Configuration.timeout);
             break;
         }
 
@@ -452,25 +452,26 @@ public class CalendarHomePage {
             $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
             break;
           case ALLDAY:
+
             $(byXpath(ELEMENT_EVENT_TASK_WEEK_VIEW_ALL_DAY.replace("$name", name))).waitUntil(Condition.visible,Configuration.timeout);
             break;
           default:
-            evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+            $(byXpath(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name))).waitUntil(Condition.visible,Configuration.timeout);
             break;
         }
         break;
       case LIST:
         if ($(ELEMENT_TOTAL_PAGE).is(Condition.exist)) {
-          evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
+          $(byXpath(ELEMENT_ANY_PAGE.replace("$page", "1"))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
           while ((evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name), 5000, 0) == null)
                   && !(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
                   .getText()
                   .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText())))
             evt.click(ELEMENT_NEXT_PAGE);
-          evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
-          evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
+          $(byXpath(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name))).waitUntil(Condition.visible,Configuration.collectionsTimeout);
+          $(byXpath(ELEMENT_ANY_PAGE.replace("$page", "1"))).waitUntil(Condition.visible,Configuration.timeout).click();
         } else {
-          $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
+          $(byText(name)).waitUntil(Condition.appears, Configuration.collectionsTimeout);
         }
         break;
       case MONTH:
@@ -492,7 +493,7 @@ public class CalendarHomePage {
       default:
         switch (optionDay) {
           case DETAILTIME:
-            $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
+            $(byText(name)).waitUntil(Condition.appears, Configuration.collectionsTimeout);
             break;
           case ALLDAY:
             evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name));

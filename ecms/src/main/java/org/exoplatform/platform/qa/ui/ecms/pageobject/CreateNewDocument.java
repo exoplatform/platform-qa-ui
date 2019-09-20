@@ -177,7 +177,7 @@ public class CreateNewDocument {
   public void addNewWebContent(String title, String content) {
     $(ELEMENT_FILEFORM_BLANK_NAME).click();
     $(ELEMENT_FILEFORM_BLANK_NAME).setValue(title);
-    $(ELEMENT_FILEFORM_BLANK_CONTENT).click();
+    $(ELEMENT_FILEFORM_BLANK_CONTENT).waitUntil(Condition.visible,Configuration.timeout).click();
     switchTo().frame($(ELEMENT_FILEFORM_BLANK_CONTENT));
     sleep(Configuration.timeout);
     $(byXpath("/html/body")).sendKeys(content);

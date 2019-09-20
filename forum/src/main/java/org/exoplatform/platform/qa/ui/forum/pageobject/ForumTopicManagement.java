@@ -5,6 +5,7 @@ import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_SCHEDULE_DRAG;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -238,12 +239,12 @@ public class ForumTopicManagement {
    * @param newContent String
    */
   public void editPost(String newTitle, String newContent) {
-    $(byText(newContent)).parent().parent().parent().parent().find(byText("Edit")).click();
+    $(byText(newContent)).parent().parent().parent().parent().waitUntil(visible,Configuration.timeout).find(byText("Edit")).click();
     if (!newTitle.isEmpty())
-      $(ELEMENT_TITLE_POST).sendKeys(newTitle);
+      $(ELEMENT_TITLE_POST).waitUntil(visible,Configuration.timeout).sendKeys(newTitle);
     if (!newContent.isEmpty())
       switchTo().frame(0);
-    $(byXpath("/html/body")).sendKeys(newContent);
+    $(byXpath("/html/body")).waitUntil(visible,Configuration.timeout).sendKeys(newContent);
     switchTo().defaultContent();
     executeJavaScript("window.scrollBy(0,150)");
     $(ELEMENT_POST_FORM_SUBMIT).click();
@@ -519,10 +520,10 @@ public class ForumTopicManagement {
       $(By.className("file")).uploadFromClasspath(fileName[i]);
       $(ELEMENT_SAVE_BTN).click();
     }}
-    $(ELEMENT_SUBMIT_BUTTON).click();
+    $(ELEMENT_SUBMIT_BUTTON).waitUntil(visible,Configuration.timeout).click();
     $(ELEMENT_SUBMIT_BUTTON).waitUntil(Condition.disappear, Configuration.timeout);
     info("Verify that the topic is created");
-    $(By.linkText(title)).should(exist);
+    $(By.linkText(title)).waitUntil(visible,Configuration.timeout).should(exist);
     info("Start topic successfully");
   }
 

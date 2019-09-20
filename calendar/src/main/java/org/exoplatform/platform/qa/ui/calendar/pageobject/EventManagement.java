@@ -22,6 +22,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 public class EventManagement {
   private final TestBase testBase;
@@ -238,18 +239,18 @@ public class EventManagement {
         String[] dateTimeFrom = from.split(" ");
         if (dateTimeFrom.length > 0)
           evt.type(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE, dateTimeFrom[0], true);
+        $(byXpath("(//input[@class='cbb_input'])[1]")).waitUntil(Condition.visible,Configuration.timeout).setValue(dateTimeFrom[1]);
         if (dateTimeFrom.length > 1) {
           $(ELEMENT_QUICK_INPUT_EVENT_FROM_TIME_INPUT).click();
-          $(byXpath("//li[@class='cbb_item selected']")).waitUntil(Condition.visible, Configuration.timeout).click();
         }
       }
       if ((to != null) & (to != "")) {
         String[] dateTimeTo = to.split(" ");
         if (dateTimeTo.length > 0)
           evt.type(ELEMENT_QUICK_INPUT_EVENT_TO_DATE, dateTimeTo[0], true);
+        $(byXpath("(//input[@class='cbb_input'])[2]")).waitUntil(Condition.visible,Configuration.timeout).setValue(dateTimeTo[1]);
         if (dateTimeTo.length > 1) {
           $(ELEMENT_QUICK_INPUT_EVENT_TO_TIME_INPUT).click();
-          $(byXpath("//li[@class='cbb_item selected']")).waitUntil(Condition.visible, Configuration.timeout).click();
         }
       }
     }
@@ -732,18 +733,10 @@ public class EventManagement {
    * Save a EVENT with more details
    */
   public void saveAddEventDetails() {
-    info("Sae add event details");
+    info("Save add event details");
     if ($(ELEMENT_ADD_EDIT_EVENT_NAME).is(Condition.visible))
       $(ELEMENT_ADD_EDIT_EVENT_NAME).click();
-    //ELEMENT_BUTTON_EVENT_SAVE_DETAILS.waitUntil(Condition.visible, Configuration.timeout);
-    // click(ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
-    // waitForElementNotPresent(ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
-    //ELEMENT_BUTTON_EVENT_SAVE_DETAILS.click();
-    //ELEMENT_BUTTON_EVENT_SAVE_DETAILS.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
-    ELEMENT_EVENT_SAVE_BUTTON.waitUntil(Condition.appears, Configuration.timeout);
-    // click(ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
-    // waitForElementNotPresent(ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
-    ELEMENT_EVENT_SAVE_BUTTON.click();
+    ELEMENT_EVENT_SAVE_BUTTON.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
   }
 
   /**
@@ -803,6 +796,7 @@ public class EventManagement {
                                       String... option) {
     info("Add recurring information");
     String occurence = option.length > 0 ? option[0] : "";
+    //$(byXpath("//*[@id='repeatType' and @class='selectbox']"), 2));
     if (endRepeat != null) {
       switch (endRepeat) {
         case After:
@@ -927,7 +921,7 @@ public class EventManagement {
     switch (optEditType) {
       case ONLY_EVENT:
         info("Edit only event recurring");
-        evt.check(ELEMENT_EDIT_DELETE_ONE_EVENT, 2);
+        $(byXpath("//label[@class='uiRadio']/span[text()='Only this event']")).waitUntil(Condition.visible,Configuration.timeout).click();
         break;
       case FOLLOW_EVENT:
         info("Edit following event recurring");
@@ -939,7 +933,7 @@ public class EventManagement {
         break;
     }
     $(ELEMENT_CONFIRM_EDIT_BUTTON).click();
-    $(ELEMENT_CONFIRM_EDIT_RECURRING_FORM).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    $(ELEMENT_CONFIRM_EDIT_RECURRING_FORM).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
@@ -1224,7 +1218,7 @@ public class EventManagement {
     switchTo().activeElement();
     $(byText("Add Event")).should(Condition.exist);
     assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).exists();
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).should(Condition.exist);
     assertEquals("All", ELEMENT_EVENT_CATEGORY.getText());
     assertEquals("All day", $(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
     assertEquals("Location", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());

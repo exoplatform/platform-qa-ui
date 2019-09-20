@@ -1,14 +1,18 @@
 package org.exoplatform.platform.qa.ui.chat.smoke;
 
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
-import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_CHAT_INPUT_SEARCH_USER;
-import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_CHAT_LIST_MSG;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_USER_PROFILE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_USER_RESULT_SEARCH;
+import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_MINI_CHAT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -88,7 +92,7 @@ public class SpaceManageMessageTestIT extends Base {
     spaceHomePage.goToSpaceSettingTab();
     info("accept request by user 1");
     spaceSettingManagement.goToMemberTabInSpaceSettingTab();
-    $(byText(usernamea + " " + usernamea)).parent().find(ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB).click();
+    $(byText(usernamea + " " + usernamea)).parent().waitUntil(Condition.visible,Configuration.timeout);
     homePagePlatform.goToHomePage();
     homePagePlatform.goToChat();
     switchTo().window(1);
@@ -117,13 +121,13 @@ public class SpaceManageMessageTestIT extends Base {
     spaceManagement.addNewSpaceSimple(space, space);
     homePagePlatform.goToHomePage();
     homePagePlatform.goToChat();
-    switchTo().window("Chat");
+    switchTo().window(1);
     info("check that space exist");
     $(byText(space)).should(Condition.exist);
-    switchTo().window("Home Page");
+    switchTo().window(0);
     homePagePlatform.goToAllSpace();
     spaceManagement.deleteSpace(space, false);
-    switchTo().window("Chat");
+    switchTo().window(1);
     refresh();
     info("check that space chat deleted");
     $(byText(space)).shouldNot(Condition.exist);
@@ -137,6 +141,7 @@ public class SpaceManageMessageTestIT extends Base {
     String emaila = usernamea + getRandomNumber() + "@test.com";
     String message = "message" + getRandomNumber();
     String message2 = "messagee" + getRandomNumber();
+    String MiniChatName;
     navigationToolbar.goToAddUser();
     info("Create new user");
     userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
@@ -145,9 +150,19 @@ public class SpaceManageMessageTestIT extends Base {
     switchTo().window(0);
     manageLogInOut.signIn(PLFData.username, PLFData.password);
     homePagePlatform.goToHomePage();
+    homePagePlatform.goToPeople();
+    homePagePlatform.searchUsersPeople(usernamea);
+    refresh();
+    ELEMENT_USER_RESULT_SEARCH.find(byText(usernamea + " " + usernamea)).click();
+    ELEMENT_USER_PROFILE.waitUntil(Condition.appear, Configuration.timeout);
+    $(byXpath("(//i[@class='uiIconBannerChat'])[2]")).waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_MINI_CHAT.waitUntil(Condition.appear, Configuration.timeout);
+    MiniChatName = $(byClassName("title-left")).parent().parent().find(byClassName("fullname")).getText();
+    assertEquals(usernamea + " " + usernamea, MiniChatName);
+    ELEMENT_MINI_CHAT.find(byClassName("uiIconClose")).click();
     switchTo().window(1);
     refresh();
-    ELEMENT_CHAT_INPUT_SEARCH_USER.setValue("@" + usernamea);
+    ELEMENT_CHAT_INPUT_SEARCH_USER.setValue(usernamea);
     $(byText(usernamea + " " + usernamea)).click();
     info("root send message to user");
     chatManagement.sendMessageInRoomOrSpace(usernamea + " " + usernamea, message);
@@ -164,7 +179,7 @@ public class SpaceManageMessageTestIT extends Base {
     homePagePlatform.goToChat();
     switchTo().window(1);
     refresh();
-    ELEMENT_CHAT_INPUT_SEARCH_USER.setValue("@" + usernamea);
+    ELEMENT_CHAT_INPUT_SEARCH_USER.setValue(usernamea);
     $(byText(usernamea + " " + usernamea)).click();
     info("root check the answer");
     $(byText(message2)).should(Condition.exist);

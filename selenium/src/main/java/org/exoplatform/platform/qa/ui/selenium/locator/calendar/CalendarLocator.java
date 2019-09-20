@@ -1378,7 +1378,7 @@ public class CalendarLocator {
 
   /* Delete recurring event */
   public static final By              ELEMENT_CONFIRM_EDIT_BUTTON                                      =
-                                                                  By.xpath("//*[@id='UIConfirmFormUpdate']//button[1]");
+                                                                  By.xpath("(//div[@class='uiPopup']//button[@type='button'])[5]");
 
   public static final By              ELEMENT_CONFIRM_EDIT_RECURRING_FORM                              =
                                                                           By.xpath(".//*[@class='confirmRadio']");

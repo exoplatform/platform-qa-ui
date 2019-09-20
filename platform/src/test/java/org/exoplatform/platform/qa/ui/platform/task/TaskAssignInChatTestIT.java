@@ -70,8 +70,8 @@ public class TaskAssignInChatTestIT extends Base {
     homePagePlatform.goToPeople();
     homePagePlatform.searchUsersPeople(PLFData.DATA_USER2);
     refresh();
-    ELEMENT_USER_RESULT_SEARCH.find(byText(PLFData.DATA_NAME_USER2)).click();
-    ELEMENT_USER_PROFILE.waitUntil(Condition.appear, Configuration.timeout);
+    ELEMENT_USER_RESULT_SEARCH.find(byText(PLFData.DATA_NAME_USER2)).waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_USER_PROFILE.waitUntil(Condition.appear, Configuration.collectionsTimeout);
     $(byXpath("(//i[@class='uiIconBannerChat'])[2]")).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     ELEMENT_MINI_CHAT.waitUntil(Condition.appear, Configuration.collectionsTimeout);
     MiniChatName = $(byClassName("title-left")).parent().parent().find(byClassName("fullname")).getText();

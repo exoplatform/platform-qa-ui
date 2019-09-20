@@ -243,6 +243,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
   }
 
   @Test
+  @Tag("calendar14")
   public void test15_DeletenEventInPersonalCalendar() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String calendar = "calendar" + getRandomNumber();

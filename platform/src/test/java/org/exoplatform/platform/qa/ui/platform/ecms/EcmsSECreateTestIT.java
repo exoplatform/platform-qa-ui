@@ -460,7 +460,7 @@ public class EcmsSECreateTestIT extends Base {
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToSpace(spaceName);
     refresh();
-    siteExplorerHome.uploadFile("data/ecms/eXo-Platform.png");
+    siteExplorerHome.uploadFile("eXo-Platform.png");
     $(ELEMENT_ADDRESS_BAR_ICON_VIEW).click();
     $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
     $(byXpath(ELEMENT_SPACE_DRIVE_NODE_TREE_FILE.replace("${file}", "eXo-Platform.png"))).waitUntil(Condition.visible,

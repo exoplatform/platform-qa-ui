@@ -145,9 +145,8 @@ public class SiteExplorerHome {
    */
   public void goToAddNewContent() {
 
-    $(ELEMENT_ACTIONBAR_ADDDOCUMENT).waitUntil(Condition.appears, Configuration.timeout);
     info("Click on New Document on Action Bar");
-    $(ELEMENT_ACTIONBAR_ADDDOCUMENT).click();
+    $(ELEMENT_ACTIONBAR_ADDDOCUMENT).waitUntil(Condition.appears, Configuration.collectionsTimeout).click();
     info("Verify that New content page is shown");
     sleep(Configuration.timeout);
     $(ELEMENT_ADDDOCUMENT_CHOICETYPE).waitUntil(Condition.appears, Configuration.timeout);
@@ -180,13 +179,9 @@ public class SiteExplorerHome {
     sleep(Configuration.collectionsTimeout);
     info("Right click on nodename");
     executeJavaScript("window.scrollBy(0,-250)", "");
-    sleep(Configuration.timeout);
-    $(byXpath("//div[@id='UITreeExplorer']//i[@title='${title}']".replace("${title}",title))).waitUntil(Condition.visible,2000).click();
-    sleep(2000);
-    $(ELEMENT_ACCOUNT_NAME_LINK).click();
-    sleep(2000);
-    ELEMENT_CONTENT_LIST.find(byLinkText(title)).contextClick();
-    sleep(2000);
+    $(byXpath("//div[@id='UITreeExplorer']//i[@title='${title}']".replace("${title}",title))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_CONTENT_LIST.find(byLinkText(title)).waitUntil(Condition.visible,Configuration.timeout).contextClick();
     executeJavaScript("window.scrollBy(0,100);", "");
     info("Click on Delete link");
     sleep(Configuration.timeout);
@@ -210,8 +205,8 @@ public class SiteExplorerHome {
    * @param destination String
    */
   public void copyPasteNode(String title, String destination) {
-    $(ELEMENT_ACCOUNT_NAME_LINK).click();
-    $(byXpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", title))).contextClick();
+    $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byXpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", title))).waitUntil(Condition.visible,Configuration.timeout).contextClick();
     $(ELEMENT_SITEEXPLORER_ACTION_COPY).click();
     $(ELEMENT_ACCOUNT_NAME_LINK).click();
     $(byXpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", destination))).contextClick();
