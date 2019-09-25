@@ -51,12 +51,12 @@ public class NewsComposerBasicActionTestIT extends Base {
 
     String newsTitle = "newsTitle" + getRandomNumber();
     String newsContent = "newsContent" + getRandomNumber();
-    //spaceManagement.goToCreateSpace();
     spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
     homePagePlatform.goToSpecificSpace(spaceName);
 
-    newsComposerManagement.goToNews();
-    newsComposerManagement.addNewSimpleNews(newsTitle, newsContent);
+    newsComposerManagement.postSimpleNews(newsTitle, newsContent);
+
+    homePagePlatform.goToAllSpace();
 
     spaceManagement.deleteSpace(spaceName, false);
   }
