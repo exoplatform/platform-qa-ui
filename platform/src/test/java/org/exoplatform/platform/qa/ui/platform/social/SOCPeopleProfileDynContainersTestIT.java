@@ -82,14 +82,14 @@ public class SOCPeopleProfileDynContainersTestIT extends Base {
     navigationToolbar.goToEditLayout();
 
     info("switch to tab container");
-    $(ELEMENT_CONTAINER_TAB).click();
+    $(ELEMENT_CONTAINER_TAB).waitUntil(Condition.visible,Configuration.timeout).click();
 
     info("goto edit container");
     $(byXpath(ELEMENT_CONTAINER_ID.replace("${id}", righttop_profile))).waitUntil(Condition.visible, Configuration.timeout);
     $(byXpath(ELEMENT_CONTAINER_ID.replace("${id}", rightbottom_profile))).waitUntil(Condition.visible, Configuration.timeout);
     $(byXpath(ELEMENT_CONTAINER_ID.replace("${id}", middle_profile))).waitUntil(Condition.visible, Configuration.timeout);
     $(byXpath(ELEMENT_CONTAINER_ID.replace("${id}", left_profile))).waitUntil(Condition.visible, Configuration.timeout);
-    ELEMENT_ICON_CLOSE_EDIT_LAYOUT.click();
+    ELEMENT_ICON_CLOSE_EDIT_LAYOUT.waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   /**

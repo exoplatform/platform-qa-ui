@@ -110,7 +110,7 @@ public class SOCSpaceManagementTestIT extends Base {
         homePagePlatform.goToMySpaces();
         spaceManagement.addNewSpaceSimple(space, space);
         info("All default portlet is displayed");
-        $(byXpath("//i[@class='uiIconAppSpaceHomePage uiIconDefaultApp']")).should(Condition.exist);
+        $(byXpath("//i[@class='uiIconAppSpaceHomePage uiIconDefaultApp']")).waitUntil(Condition.exist,Configuration.timeout);
         $(ELEMENT_SPACE_MENU_AGENDA_PORTLET).should(Condition.exist);
         $(ELEMENT_SPACE_MENU_DOCUMENT_PORTLET).should(Condition.exist);
         $(ELEMENT_SPACE_MENU_FORUM_PORTLET).should(Condition.exist);

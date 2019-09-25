@@ -9,6 +9,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocat
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACES_LIST;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -58,6 +59,8 @@ public class SOCSpaceMemberManagementRequestTestIT extends Base {
     spaceSettingManagement = new SpaceSettingManagement(this);
     spaceHomePage = new SpaceHomePage(this);
     userAndGroupManagement = new UserAndGroupManagement(this);
+    manageLogInOut.signIn(PLFData.username, PLFData.DATA_PASS);
+
 
   }
 
@@ -130,7 +133,7 @@ public class SOCSpaceMemberManagementRequestTestIT extends Base {
 
     info("Create a space by user 1");
     homePagePlatform.goToAllSpace();
-    spaceManagement.addNewSpaceSimple(space, space);
+    spaceManagement.addNewSpace(space, space, "validation", "No", "");
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToAllSpace();
     spaceManagement.goToAllSpacesTab();
@@ -178,7 +181,7 @@ public class SOCSpaceMemberManagementRequestTestIT extends Base {
 
     info("Create a space by user 1");
     homePagePlatform.goToAllSpace();
-    spaceManagement.addNewSpaceSimple(space, space);
+    spaceManagement.addNewSpace(space, space, "validation", "No", "");
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToAllSpace();
     spaceManagement.goToAllSpacesTab();

@@ -61,7 +61,7 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
   }
 
   @Test
-  @Tag("event101")
+  @Tag("eventis")
   public void test01_AddEventInSpace() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String contentEvent = "contentEvent" + getRandomNumber();
@@ -92,6 +92,7 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
   }
 
   @Test
+  @Tag("eventis")
   public void test02_EditEventInSpace() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String titleEvent2 = "titleEvent2" + getRandomNumber();
@@ -107,8 +108,8 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
     $(byClassName("createEvent")).waitUntil(Condition.visible, Configuration.timeout).click();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM-dd-yyyy"),
-                                              getDate(0, "MM-dd-yyyy"),
+                                              getDate(0, "MM-dd-yyyy" + " HH"),
+                                              getDate(0, "MM-dd-yyyy" + " HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     executeJavaScript("window.scrollBy(0,-2000)", "");
@@ -121,8 +122,8 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
                                                        getDate(0, "MMM dd yyyy"));
     eventManagement.inputDataEventInDetailForm(titleEvent2,
                                                contentEvent2,
-                                               getDate(0, "MM-dd-yyyy"),
-                                               getDate(0, "MM-dd-yyyy"),
+                                               getDate(0, "MM-dd-yyyy" + " HH"),
+                                               getDate(0, "MM-dd-yyyy" + " HH"),
                                                false);
     eventManagement.saveAddEventDetails();
     calendarHomePage.verifyIsPresentEventTask(titleEvent2,
@@ -133,6 +134,7 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
   }
 
   @Test
+  @Tag("eventis")
   public void test03_DeleteEventInSpace() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String contentEvent = "contentEvent" + getRandomNumber();
@@ -146,8 +148,8 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
     $(byClassName("createEvent")).waitUntil(Condition.visible, Configuration.timeout).click();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM-dd-yyyy"),
-                                              getDate(0, "MM-dd-yyyy"),
+                                              getDate(0, "MM-dd-yyyy" + " HH"),
+                                              getDate(0, "MM-dd-yyyy" + " HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     executeJavaScript("window.scrollBy(0,-2000)", "");

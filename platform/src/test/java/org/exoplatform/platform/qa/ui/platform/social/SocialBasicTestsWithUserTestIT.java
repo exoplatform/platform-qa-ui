@@ -203,20 +203,18 @@ public class SocialBasicTestsWithUserTestIT extends Base {
     $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.be(Condition.enabled), Configuration.timeout);
     $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
     $(byText(link)).should(Condition.exist);
-    $(byText(link)).click();
+    $(byText(link)).waitUntil(Condition.visible,Configuration.timeout).click();
     switchTo().window(1);
+    sleep(2000);
     String title = "Google";
     assertEquals(title, Selenide.title());
     switchTo().window(0);
-    String id=$(byAttribute("data-original-title", "eXo-Platform.png")).parent().parent().parent().parent().parent().parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+    sleep(2000);
+    String id = $(byXpath("(//div[@id='boxContainer']/div)[1]")).waitUntil(Condition.visible,Configuration.timeout).getAttribute("id").split("ContextBox")[1];
     $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}",id))).waitUntil(Condition.visible,Configuration.timeout).click();
     $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}",id))).click();
     ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.timeout).click();
-    $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
-            .parent()
-            .parent()
-            .parent()
-            .waitUntil(Condition.disappear, Configuration.timeout);
+    $(byXpath("//div[@id='ContextBox{id}']".replace("{id}",id))).waitUntil(Condition.disappear, Configuration.timeout);
   }
 
   @Test

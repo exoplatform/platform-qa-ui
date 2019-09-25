@@ -51,10 +51,11 @@ public class CalendarSearchTestIT extends Base {
    * with no error
    */
   @Test
+  @Tag("eventis")
   public void test01_QuickSearch() {
     String titleEvent = "titleEvent" + " dinner " + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
     String key = "dinner";
     String key1 = "dinnertest";
 
@@ -63,8 +64,8 @@ public class CalendarSearchTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
@@ -94,10 +95,11 @@ public class CalendarSearchTestIT extends Base {
    * events/tasks containing the word "dinner" already exist. Post-Condition:
    */
   @Test
+  @Tag("eventis")
   public void test02_AdvancedSearch() {
     String titleEvent = "titleEvent" + " dinner " + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
     String key = "dinner";
     String key1 = "dinnertest";
 
@@ -106,8 +108,8 @@ public class CalendarSearchTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,

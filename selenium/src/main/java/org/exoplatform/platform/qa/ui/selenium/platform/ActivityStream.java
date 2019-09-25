@@ -1489,7 +1489,7 @@ public class ActivityStream {
         $(byId(ELEMENT_lABEL_REPLY_COMMENT.replace("{id}", idBlocComment))).waitUntil(Condition.visible, Configuration.timeout)
                 .click();
         // Insert the reply
-        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout);
+        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.visible, Configuration.collectionsTimeout);
         $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
         homePagePlatform.refreshUntil($(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))), Condition.visible, 1000);
         switch (type) {
@@ -1629,6 +1629,7 @@ public class ActivityStream {
         info("-- Editing an activity--");
         homePagePlatform.refreshUntil($(byText(text)), Condition.visible, 500);
         String idActivity = $(byText(text)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        executeJavaScript("window.scrollBy(0,-150)");
         $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
         $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}", idActivity))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
         ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();

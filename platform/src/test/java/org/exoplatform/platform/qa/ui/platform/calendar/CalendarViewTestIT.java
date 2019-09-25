@@ -52,13 +52,14 @@ public class CalendarViewTestIT extends Base {
    */
 
   @Test
+  @Tag("eventis")
   public void test01_CheckTodayView() {
     info("Test 1: Check Today view");
     String titleEventCur = "titleEventCur" + getRandomNumber();
     String titleEventNext = "titleEventNext" + getRandomNumber();
     String titleEventPre = "titleEventPre" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventCur,
@@ -126,7 +127,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventNextWeek = "titleEventNextWeek" + getRandomNumber();
     String titleEventPreWeek = "titleEventPreWeek" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
 
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
@@ -222,7 +223,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventNext = "titleEventNext" + getRandomNumber();
     String titleEventPre = "titleEventPre" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventCur,
@@ -311,7 +312,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventNextMonth = "titleEventNextMonth" + getRandomNumber();
     String titleEventPreMonth = "titleEventPreMonth" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
     info("Test 4: Check displaying added task/event in month view");
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
@@ -411,7 +412,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventNextWeek = "titleEventNextWeek" + getRandomNumber();
     String titleEventPreWeek = "titleEventPreWeek" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventCur,
@@ -586,6 +587,7 @@ public class CalendarViewTestIT extends Base {
    * are shown
    */
   @Test
+  @Tag("eventis")
   public void test07_CheckCategoryFilterInWeekView() {
     info("Test 7: Check category filter in Week view");
     String titleEventMeeting = "titleEventMeeting" + getRandomNumber();
@@ -594,14 +596,14 @@ public class CalendarViewTestIT extends Base {
     String titleEventHoliday = "titleEventHoliday" + getRandomNumber();
     String titleEventAnni = "titleEventAnni" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
 
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventMeeting,
                                               content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
                                               true,
                                               null,
                                               "Meeting");
@@ -610,8 +612,8 @@ public class CalendarViewTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventCall,
                                               content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
                                               true,
                                               null,
                                               "Calls");
@@ -620,8 +622,8 @@ public class CalendarViewTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventClient,
                                               content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
                                               true,
                                               null,
                                               "Clients");
@@ -630,8 +632,8 @@ public class CalendarViewTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventHoliday,
                                               content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
                                               true,
                                               null,
                                               "Holiday");
@@ -640,8 +642,8 @@ public class CalendarViewTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventAnni,
                                               content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
                                               true,
                                               null,
                                               "Anniversary");
@@ -792,6 +794,7 @@ public class CalendarViewTestIT extends Base {
    * are shown
    */
   @Test
+  @Tag("eventis")
   public void test08_CheckCategoryFilterInListView() {
     info("Test 8: Check category filter in List view");
     String titleEventMeeting = "titleEventMeeting" + getRandomNumber();
@@ -800,14 +803,14 @@ public class CalendarViewTestIT extends Base {
     String titleEventHoliday = "titleEventHoliday" + getRandomNumber();
     String titleEventAnni = "titleEventAnni" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
 
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventMeeting,
                                               content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
                                               true,
                                               null,
                                               "Meeting");
@@ -816,8 +819,8 @@ public class CalendarViewTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventCall,
                                               content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
                                               true,
                                               null,
                                               "Calls");
@@ -826,8 +829,8 @@ public class CalendarViewTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventClient,
                                               content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
                                               true,
                                               null,
                                               "Clients");
@@ -836,8 +839,8 @@ public class CalendarViewTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventHoliday,
                                               content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
                                               true,
                                               null,
                                               "Holiday");
@@ -846,8 +849,8 @@ public class CalendarViewTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventAnni,
                                               content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
                                               true,
                                               null,
                                               "Anniversary");

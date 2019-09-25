@@ -59,9 +59,9 @@ public class NavigationToolbar {
   public void goToEditLayout() {
     info("--Go to Edit Layout--");
 
-    evt.clickByJavascript(ELEMENT_LINK_EDIT);
-    evt.mouseOver(ELEMENT_MENU_PAGE_LINK, true);
-    evt.click(ELEMENT_MENU_EDIT_LAYOUT, 2, true);
+    $(ELEMENT_LINK_EDIT).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_MENU_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).hover();
+    $(ELEMENT_MENU_EDIT_LAYOUT).waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   /**
@@ -129,9 +129,9 @@ public class NavigationToolbar {
    */
   public void goToUsersAndGroupsManagement() {
     info("--Go to Users and groups management--");
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.click();
+    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   /**
@@ -559,7 +559,7 @@ public class NavigationToolbar {
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, 10000);
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-    ELEMENT_ADMINISTRATION_ADD_USERS.click();
+    ELEMENT_ADMINISTRATION_ADD_USERS.waitUntil(Condition.visible,2000).click();
   }
 
   public void goToManageCommunity() {

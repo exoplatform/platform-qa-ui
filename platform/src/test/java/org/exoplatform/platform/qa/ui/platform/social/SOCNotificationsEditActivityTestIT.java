@@ -292,7 +292,7 @@ public class SOCNotificationsEditActivityTestIT extends Base {
     navigationToolbar.goToIntranetNotification();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(DATA_NAME_ROOT))
                                     .parent()
-                                    .shouldHave(Condition.text(DATA_NAME_ROOT + " has edited his activity."));
+                                    .shouldHave(Condition.text(DATA_NAME_ROOT + " edited a post. "));
     manageLogInOut.signIn(username, PASS_ROOT);
     activityStream.deleteactivity(activity1);
     activityStream.deleteactivity(activity2);
