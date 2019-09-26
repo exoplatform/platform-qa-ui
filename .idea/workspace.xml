@@ -3,29 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="fc4a0367-df54-4081-9eb5-c93d6d50856e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/CalendarHomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/CalendarHomePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/CalendarManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/CalendarManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarBasicTestsInSpaceTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarBasicTestsInSpaceTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarBasicTestsWithUserTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarBasicTestsWithUserTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarCalendarTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarCalendarTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarEventRecurringTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarEventRecurringTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarEventTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarEventTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarPublishActivityTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarPublishActivityTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarSearchTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarSearchTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarSettingTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarSettingTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarViewTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarViewTestIT.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsEditActivityTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsEditActivityTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCPeopleProfileDynContainersTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCPeopleProfileDynContainersTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCSpaceManagementTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCSpaceManagementTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCSpaceMemberManagementInviteTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCSpaceMemberManagementInviteTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCSpaceMemberManagementRequestTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCSpaceMemberManagementRequestTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SocialBasicTestsWithUserTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SocialBasicTestsWithUserTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SpaceActivitiesTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SpaceActivitiesTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/calendar/CalendarLocator.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/calendar/CalendarLocator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/NavigationToolbar.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/NavigationToolbar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/social/SpaceSettingManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/social/SpaceSettingManagement.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/forum/target/" />
     <ignored path="$PROJECT_DIR$/task/target/" />
@@ -79,20 +59,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsEditActivityTestIT.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="64">
-              <caret line="223" column="78" selection-start-line="223" selection-start-column="14" selection-end-line="223" selection-end-column="78" />
+            <state relative-caret-position="186">
+              <caret line="124" selection-start-line="124" selection-end-line="124" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/social/src/main/java/org/exoplatform/platform/qa/ui/social/pageobject/MyNotificationsSetting.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="87">
-              <caret line="1626" column="16" selection-start-line="1626" selection-start-column="16" selection-end-line="1626" selection-end-column="16" />
+            <state relative-caret-position="128">
+              <caret line="999" selection-start-line="999" selection-end-line="999" />
             </state>
           </provider>
         </entry>
@@ -209,10 +189,10 @@
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCSpaceMemberManagementInviteTestIT.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCSpaceManagementTestIT.java" />
         <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/social/SpaceSettingManagement.java" />
-        <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java" />
-        <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/NavigationToolbar.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCPeopleProfileDynContainersTestIT.java" />
+        <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsEditActivityTestIT.java" />
+        <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/NavigationToolbar.java" />
       </list>
     </option>
   </component>
@@ -246,7 +226,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -293,12 +272,13 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1569421774751" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1569485880439" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -323,7 +303,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.SOCNotificationsEditActivityTestIT.test06_DisplayOnsiteNotificationForEveryActivityEdited">
+  <component name="RunManager" selected="JUnit.SOCNotificationsEditActivityTestIT.test01_DisplayEditActivityOnsiteNotification">
     <configuration name="CalendarBasicTestsInSpaceTestIT.test01_AddEventInSpace" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
@@ -360,6 +340,78 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SOCNotificationsEditActivityTestIT.test01_DisplayEditActivityOnsiteNotification" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-platform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.social.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCNotificationsEditActivityTestIT" />
+      <option name="METHOD_NAME" value="test01_DisplayEditActivityOnsiteNotification" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://plfent-5.2.3-autoqa01.acceptance10.exoplatform.org" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SOCNotificationsEditActivityTestIT.test03_CHeckOnSiteNotifWhenEditActivity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-platform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.social.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCNotificationsEditActivityTestIT" />
+      <option name="METHOD_NAME" value="test03_CHeckOnSiteNotifWhenEditActivity" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://fqa02.exoplatform.org" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SOCNotificationsEditActivityTestIT.test04_CHeckOnSiteNotifWhenEditComment" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-platform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.social.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCNotificationsEditActivityTestIT" />
+      <option name="METHOD_NAME" value="test04_CHeckOnSiteNotifWhenEditComment" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://fqa02.exoplatform.org" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SOCNotificationsEditActivityTestIT.test05_DisplayOnsiteNotificationForAllActivitvitisCommentsEdited" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-platform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.social.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCNotificationsEditActivityTestIT" />
+      <option name="METHOD_NAME" value="test05_DisplayOnsiteNotificationForAllActivitvitisCommentsEdited" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://fqa02.exoplatform.org" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SOCNotificationsEditActivityTestIT.test06_DisplayOnsiteNotificationForEveryActivityEdited" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
@@ -371,78 +423,6 @@
       <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
       <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCNotificationsEditActivityTestIT" />
       <option name="METHOD_NAME" value="test06_DisplayOnsiteNotificationForEveryActivityEdited" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://fqa02.exoplatform.org" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SOCPeopleProfileDynContainersTestIT.test01_CheckTheLayoutOfProfilePage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-platform" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.social.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCPeopleProfileDynContainersTestIT" />
-      <option name="METHOD_NAME" value="test01_CheckTheLayoutOfProfilePage" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://fqa02.exoplatform.org" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SOCReplyEditTestIT.test13_CheckReplyEditedWhenRemoveCharacters" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-platform" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.social.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCReplyEditTestIT" />
-      <option name="METHOD_NAME" value="test13_CheckReplyEditedWhenRemoveCharacters" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://fqa02.exoplatform.org" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SOCReplyEditTestIT.test20_CheckEditReplyWithFormattingTextBlockquote" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-platform" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.social.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCReplyEditTestIT" />
-      <option name="METHOD_NAME" value="test20_CheckEditReplyWithFormattingTextBlockquote" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://fqa02.exoplatform.org" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SOCSpaceManageNavigationTestIT.test01_AddNewNode" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-platform" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.social.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCSpaceManageNavigationTestIT" />
-      <option name="METHOD_NAME" value="test01_AddNewNode" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://fqa02.exoplatform.org" />
       <option name="PARAMETERS" value="" />
@@ -463,19 +443,19 @@
     <list>
       <item itemvalue="JUnit.CalendarBasicTestsInSpaceTestIT.test01_AddEventInSpace" />
       <item itemvalue="JUnit.PortletInSpaceHomePageTestIT.test04_CheckTheSpaceWhoIsOnlinePortlet" />
-      <item itemvalue="JUnit.SOCSpaceManageNavigationTestIT.test01_AddNewNode" />
-      <item itemvalue="JUnit.SOCReplyEditTestIT.test20_CheckEditReplyWithFormattingTextBlockquote" />
-      <item itemvalue="JUnit.SOCReplyEditTestIT.test13_CheckReplyEditedWhenRemoveCharacters" />
-      <item itemvalue="JUnit.SOCPeopleProfileDynContainersTestIT.test01_CheckTheLayoutOfProfilePage" />
       <item itemvalue="JUnit.SOCNotificationsEditActivityTestIT.test06_DisplayOnsiteNotificationForEveryActivityEdited" />
+      <item itemvalue="JUnit.SOCNotificationsEditActivityTestIT.test05_DisplayOnsiteNotificationForAllActivitvitisCommentsEdited" />
+      <item itemvalue="JUnit.SOCNotificationsEditActivityTestIT.test04_CHeckOnSiteNotifWhenEditComment" />
+      <item itemvalue="JUnit.SOCNotificationsEditActivityTestIT.test03_CHeckOnSiteNotifWhenEditActivity" />
+      <item itemvalue="JUnit.SOCNotificationsEditActivityTestIT.test01_DisplayEditActivityOnsiteNotification" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.SOCNotificationsEditActivityTestIT.test01_DisplayEditActivityOnsiteNotification" />
+        <item itemvalue="JUnit.SOCNotificationsEditActivityTestIT.test04_CHeckOnSiteNotifWhenEditComment" />
+        <item itemvalue="JUnit.SOCNotificationsEditActivityTestIT.test03_CHeckOnSiteNotifWhenEditActivity" />
         <item itemvalue="JUnit.SOCNotificationsEditActivityTestIT.test06_DisplayOnsiteNotificationForEveryActivityEdited" />
-        <item itemvalue="JUnit.SOCPeopleProfileDynContainersTestIT.test01_CheckTheLayoutOfProfilePage" />
-        <item itemvalue="JUnit.SOCReplyEditTestIT.test13_CheckReplyEditedWhenRemoveCharacters" />
-        <item itemvalue="JUnit.SOCReplyEditTestIT.test20_CheckEditReplyWithFormattingTextBlockquote" />
-        <item itemvalue="JUnit.SOCSpaceManageNavigationTestIT.test01_AddNewNode" />
+        <item itemvalue="JUnit.SOCNotificationsEditActivityTestIT.test05_DisplayOnsiteNotificationForAllActivitvitisCommentsEdited" />
       </list>
     </recent_temporary>
   </component>
@@ -493,35 +473,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="SOCPeopleProfileDynContainersTestIT_test01_CheckTheLayoutOfProfilePage - 2019.09.25 at 13h 33m 15s.xml">
-      <configuration name="SOCPeopleProfileDynContainersTestIT.test01_CheckTheLayoutOfProfilePage" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsEditActivityTestIT_test03_CHeckOnSiteNotifWhenEditActivity - 2019.09.25 at 18h 30m 57s.xml">
+      <configuration name="SOCNotificationsEditActivityTestIT.test03_CHeckOnSiteNotifWhenEditActivity" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCNotificationsEditActivityTestIT_test06_DisplayOnsiteNotificationForEveryActivityEdited - 2019.09.25 at 13h 37m 19s.xml">
-      <configuration name="SOCNotificationsEditActivityTestIT.test06_DisplayOnsiteNotificationForEveryActivityEdited" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsEditActivityTestIT_test03_CHeckOnSiteNotifWhenEditActivity - 2019.09.25 at 18h 43m 48s.xml">
+      <configuration name="SOCNotificationsEditActivityTestIT.test03_CHeckOnSiteNotifWhenEditActivity" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCNotificationsEditActivityTestIT_test06_DisplayOnsiteNotificationForEveryActivityEdited - 2019.09.25 at 13h 40m 48s.xml">
-      <configuration name="SOCNotificationsEditActivityTestIT.test06_DisplayOnsiteNotificationForEveryActivityEdited" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsEditActivityTestIT_test03_CHeckOnSiteNotifWhenEditActivity - 2019.09.25 at 18h 47m 31s.xml">
+      <configuration name="SOCNotificationsEditActivityTestIT.test03_CHeckOnSiteNotifWhenEditActivity" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCNotificationsEditActivityTestIT_test06_DisplayOnsiteNotificationForEveryActivityEdited - 2019.09.25 at 15h 20m 02s.xml">
-      <configuration name="SOCNotificationsEditActivityTestIT.test06_DisplayOnsiteNotificationForEveryActivityEdited" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsEditActivityTestIT_test03_CHeckOnSiteNotifWhenEditActivity - 2019.09.25 at 18h 50m 20s.xml">
+      <configuration name="SOCNotificationsEditActivityTestIT.test03_CHeckOnSiteNotifWhenEditActivity" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCNotificationsEditActivityTestIT_test06_DisplayOnsiteNotificationForEveryActivityEdited - 2019.09.25 at 15h 28m 54s.xml">
-      <configuration name="SOCNotificationsEditActivityTestIT.test06_DisplayOnsiteNotificationForEveryActivityEdited" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsEditActivityTestIT_test04_CHeckOnSiteNotifWhenEditComment - 2019.09.25 at 18h 53m 06s.xml">
+      <configuration name="SOCNotificationsEditActivityTestIT.test04_CHeckOnSiteNotifWhenEditComment" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCNotificationsEditActivityTestIT_test06_DisplayOnsiteNotificationForEveryActivityEdited - 2019.09.25 at 16h 04m 22s.xml">
-      <configuration name="SOCNotificationsEditActivityTestIT.test06_DisplayOnsiteNotificationForEveryActivityEdited" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsEditActivityTestIT_test01_DisplayEditActivityOnsiteNotification - 2019.09.25 at 18h 54m 46s.xml">
+      <configuration name="SOCNotificationsEditActivityTestIT.test01_DisplayEditActivityOnsiteNotification" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCNotificationsEditActivityTestIT_test06_DisplayOnsiteNotificationForEveryActivityEdited - 2019.09.25 at 16h 08m 10s.xml">
-      <configuration name="SOCNotificationsEditActivityTestIT.test06_DisplayOnsiteNotificationForEveryActivityEdited" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsEditActivityTestIT_test01_DisplayEditActivityOnsiteNotification - 2019.09.26 at 10h 09m 07s.xml">
+      <configuration name="SOCNotificationsEditActivityTestIT.test01_DisplayEditActivityOnsiteNotification" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCNotificationsEditActivityTestIT_test06_DisplayOnsiteNotificationForEveryActivityEdited - 2019.09.25 at 16h 15m 55s.xml">
-      <configuration name="SOCNotificationsEditActivityTestIT.test06_DisplayOnsiteNotificationForEveryActivityEdited" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsEditActivityTestIT_test01_DisplayEditActivityOnsiteNotification - 2019.09.26 at 10h 12m 14s.xml">
+      <configuration name="SOCNotificationsEditActivityTestIT.test01_DisplayEditActivityOnsiteNotification" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCNotificationsEditActivityTestIT_test06_DisplayOnsiteNotificationForEveryActivityEdited - 2019.09.25 at 16h 19m 49s.xml">
-      <configuration name="SOCNotificationsEditActivityTestIT.test06_DisplayOnsiteNotificationForEveryActivityEdited" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsEditActivityTestIT_test01_DisplayEditActivityOnsiteNotification - 2019.09.26 at 10h 13m 14s.xml">
+      <configuration name="SOCNotificationsEditActivityTestIT.test01_DisplayEditActivityOnsiteNotification" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCNotificationsEditActivityTestIT_test06_DisplayOnsiteNotificationForEveryActivityEdited - 2019.09.25 at 16h 26m 00s.xml">
-      <configuration name="SOCNotificationsEditActivityTestIT.test06_DisplayOnsiteNotificationForEveryActivityEdited" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsEditActivityTestIT_test01_DisplayEditActivityOnsiteNotification - 2019.09.26 at 10h 14m 07s.xml">
+      <configuration name="SOCNotificationsEditActivityTestIT.test01_DisplayEditActivityOnsiteNotification" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -535,9 +515,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1533" height="875" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.79347825" visible="true" weight="0.13920645" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.79347825" visible="true" weight="0.14122394" />
       <window_info id="Structure" order="1" sideWeight="0.20652173" side_tool="true" weight="0.21250841" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -546,12 +525,12 @@
       <window_info id="Favorites" order="6" sideWeight="0.17024128" side_tool="true" weight="0.17148621" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32841823" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49831876" weight="0.5978552" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.18498659" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49831876" weight="0.39544237" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.4691689" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.4772118" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.38069704" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.20375335" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5016812" side_tool="true" weight="0.347185" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.34316355" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.2841823" />
@@ -2517,22 +2496,40 @@
           <option name="timeStamp" value="2190" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java</url>
-          <line>1630</line>
-          <properties />
-          <option name="timeStamp" value="2193" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsEditActivityTestIT.java</url>
-          <line>296</line>
+          <line>297</line>
           <properties />
           <option name="timeStamp" value="2194" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsEditActivityTestIT.java</url>
-          <line>251</line>
+          <url>file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java</url>
+          <line>1630</line>
           <properties />
-          <option name="timeStamp" value="2196" />
+          <option name="timeStamp" value="2200" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsEditActivityTestIT.java</url>
+          <line>124</line>
+          <properties />
+          <option name="timeStamp" value="2201" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsEditActivityTestIT.java</url>
+          <line>170</line>
+          <properties />
+          <option name="timeStamp" value="2203" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java</url>
+          <line>1400</line>
+          <properties />
+          <option name="timeStamp" value="2204" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java</url>
+          <line>1398</line>
+          <properties />
+          <option name="timeStamp" value="2205" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/gatein/src/main/java/org/exoplatform/platform/qa/ui/gatein/pageobject/MyDashBoard.java</url>
@@ -2635,76 +2632,53 @@
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
-        <expression-string>newactivity</expression-string>
+        <expression-string>$(byXpath(ELEMENT_NOTIFICATION_LABEL_NAME.replace(&quot;$label&quot;, label))).waitUntil(Condition.visible, Configuration.timeout);</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>String idActivity = $(byText(text)).parent().parent().getAttribute(&quot;id&quot;).split(&quot;ActivityContextBox&quot;)[1];</expression-string>
+        <expression-string>executeJavaScript(&quot;CKEDITOR.instances.CommentTextarea&quot; + id + &quot;.insertText(\&quot;&quot; + comment + &quot;\&quot;)&quot;, &quot;&quot;);</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>$(byText(text));</expression-string>
+        <expression-string>$(byId(ELEMENT_COMMENT_INPUT.replace(&quot;{id}&quot;, id))).waitUntil(Condition.appears, Configuration.timeout).click();</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>$(byText(text)).parent().parent();</expression-string>
+        <expression-string>activityStream.addActivity(activity1, &quot;&quot;);</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>$(byText(text)).parent().parent().getAttribute(&quot;id&quot;);</expression-string>
+        <expression-string>$(byXpath(&quot;(//div[@id='cke_CommentTextarea76'])[1]/div&quot;)).setValue(&quot;ffff&quot;);</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(DATA_NAME_ROOT))
-                                    .parent()
-                                    .shouldHave(Condition.text(DATA_NAME_ROOT + &quot; edited a post. &quot;));</expression-string>
+        <expression-string>$(byXpath(&quot;(//div[@id='cke_CommentTextarea76'])[1]/div&quot;)).sendKeys(comment);</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(DATA_NAME_ROOT))
-                                    .parent()
-                                    .shouldHave(Condition.text(DATA_NAME_ROOT + &quot; edited a pgggost. &quot;));</expression-string>
+        <expression-string>$(byXpath(&quot;(//div[@id='cke_CommentTextarea76'])[1]/div&quot;)).setValue(comment);</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(DATA_NAME_ROOT))
-                                    .parent()
-                                    .shouldHave(Condition.text(DATA_NAME_ROOT + &quot; edited a post &quot;));</expression-string>
+        <expression-string>$(byXpath(&quot;(//div[@id='cke_CommentTextarea76'])[1]&quot;)).setValue(comment);</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>$(ELEMENT_MENU_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).hover();</expression-string>
+        <expression-string>$(byXpath(&quot;(//div[@id='cke_CommentTextarea76'])[1]&quot;)).sendKeys(comment);</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///usr/lib/jvm/jdk1.8.0_211/src.zip!/java/net/SocketInputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="93" column="23" selection-start-line="93" selection-start-column="23" selection-end-line="93" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/logger/Logger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="56" selection-start-line="56" selection-end-line="56" />
-          <folding>
-            <element signature="e#1954#1955#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarEventRecurringTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -2995,13 +2969,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/ActivityStreamLocator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="724" column="48" selection-start-line="724" selection-start-column="31" selection-end-line="724" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/forum/src/main/java/org/exoplatform/platform/qa/ui/forum/pageobject/ForumTopicManagement.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
@@ -3030,17 +2997,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/NavigationToolbar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="64" selection-start-line="64" selection-end-line="64" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCPeopleProfileDynContainersTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
           <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/ActivityStreamLocator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="693" column="63" selection-start-line="693" selection-end-line="694" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/codeborne/selenide/4.3/selenide-4.3-sources.jar!/com/codeborne/selenide/Selectors.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="158" selection-start-line="158" selection-end-line="158" />
+          <folding>
+            <element signature="e#4689#4690#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="1385" selection-start-line="1385" selection-end-line="1385" />
         </state>
       </provider>
     </entry>
@@ -3051,17 +3035,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java">
+    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/NavigationToolbar.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="1626" column="16" selection-start-line="1626" selection-start-column="16" selection-end-line="1626" selection-end-column="16" />
+        <state relative-caret-position="113">
+          <caret line="561" selection-start-line="561" selection-end-line="561" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsEditActivityTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="223" column="78" selection-start-line="223" selection-start-column="14" selection-end-line="223" selection-end-column="78" />
+        <state relative-caret-position="186">
+          <caret line="124" selection-start-line="124" selection-end-line="124" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/social/src/main/java/org/exoplatform/platform/qa/ui/social/pageobject/MyNotificationsSetting.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="999" selection-start-line="999" selection-end-line="999" />
         </state>
       </provider>
     </entry>

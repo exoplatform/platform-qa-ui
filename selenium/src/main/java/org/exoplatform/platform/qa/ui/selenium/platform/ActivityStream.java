@@ -704,8 +704,8 @@ public class ActivityStream {
     public void editComment(String text, String newtext) {
         info("-- Editing a Comment--");
         String idComment = $(byText(text)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
-        $(byId(ELEMENT_COMMENT_DROPDOWN.replace("{id}", idComment))).click();
-        $(byId(ELEMENT_EDIT_COMMENT_LINK.replace("{id}", idComment))).click();
+        $(byId(ELEMENT_COMMENT_DROPDOWN.replace("{id}", idComment))).waitUntil(Condition.enabled, Configuration.timeout).click();
+        $(byId(ELEMENT_EDIT_COMMENT_LINK.replace("{id}", idComment))).waitUntil(Condition.enabled, Configuration.timeout).click();
         SelenideElement frame = $(byAttribute("title", "Rich Text Editor, composerEditCommentcomment" + idComment));
         switchTo().frame(frame);
         $(byXpath("/html/body")).click();
@@ -1380,8 +1380,8 @@ public class ActivityStream {
         $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
         executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
         // click on the button comment
-        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter()
-                .waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.visible,Configuration.timeout).pressEnter()
+                .waitUntil(Condition.not(Condition.visible), Configuration.collectionsTimeout);
         $(byText(comment)).should(Condition.visible);
     }
 
@@ -1628,7 +1628,7 @@ public class ActivityStream {
         // get the id of activity created
         info("-- Editing an activity--");
         homePagePlatform.refreshUntil($(byText(text)), Condition.visible, 500);
-        String idActivity = $(byText(text)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        String idActivity = $(byXpath("(//p[contains(text(),'${activityName}')]/following::div[@id])[1]".replace("${activityName}",text))).getAttribute("id").split("CommentBlockBound")[1];
         executeJavaScript("window.scrollBy(0,-150)");
         $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
         $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}", idActivity))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
