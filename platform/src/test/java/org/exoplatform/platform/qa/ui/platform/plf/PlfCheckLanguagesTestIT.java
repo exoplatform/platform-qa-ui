@@ -1,15 +1,16 @@
 package org.exoplatform.platform.qa.ui.platform.plf;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DELETE_ACTIVITY;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DELETE_POPUP_OK;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_LINK_SETUP;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.administration.ChangeLanguages;
 import org.junit.jupiter.api.BeforeEach;
@@ -57,7 +58,6 @@ public class PlfCheckLanguagesTestIT extends Base {
     ELEMENT_POPUP_LIST_OF_LANGUAGES.find(byText("Filipino")).shouldBe(Condition.visible);
     ELEMENT_POPUP_LIST_OF_LANGUAGES.find(byText("French")).shouldBe(Condition.visible);
     ELEMENT_POPUP_LIST_OF_LANGUAGES.find(byText("German")).shouldBe(Condition.visible);
-    ELEMENT_POPUP_LIST_OF_LANGUAGES.find(byText("Greek")).shouldBe(Condition.visible);
     ELEMENT_POPUP_LIST_OF_LANGUAGES.find(byText("Indonesian")).shouldBe(Condition.visible);
     ELEMENT_POPUP_LIST_OF_LANGUAGES.find(byText("Italian")).shouldBe(Condition.visible);
     ELEMENT_POPUP_LIST_OF_LANGUAGES.find(byText("Japanese")).shouldBe(Condition.visible);
@@ -110,7 +110,13 @@ public class PlfCheckLanguagesTestIT extends Base {
     String columnName ="Etat de publication";
     navigationToolbar.goToChangeLanguage();
     changeLanguages.changeLanguage("French","Apply");    // change language
-    navigationToolbar.goToSiteExplorer();
+    $(ELEMENT_LINK_SETUP).waitUntil(Condition.visible, Configuration.timeout).click();
+    sleep(Configuration.timeout);
+    do {
+      $(byXpath("//li[@class='dropdown-submenu']/a[text()='Contenu']")).hover();
+    } while (!$(byXpath("(//*[@id='UISetupPlatformToolBarPortlet']//a[contains(text(),'Administration de Contenu')]/preceding::a[1])[1]")).exists());
+    $(byXpath("(//*[@id='UISetupPlatformToolBarPortlet']//a[contains(text(),'Administration de Contenu')]/preceding::a[1])[1]")).waitUntil(Condition.visible,Configuration.timeout).click();
+    info("Site Explorer is shown successfully");
     navigationToolbar.verifyColumnName(columnName);
     navigationToolbar.goToChangeLanguage();
     changeLanguages.changeLanguage("English","Appliquer");

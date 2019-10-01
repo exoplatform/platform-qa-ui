@@ -474,7 +474,7 @@ public class ActivityStream {
      */
     public void addText(String text) {
         info("----Add text into activity text box-----");
-        SelenideElement frame = $(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible, Configuration.timeout);
+        SelenideElement frame = $(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible, Configuration.collectionsTimeout);
         $(ELEMENT_ACCOUNT_NAME_LINK).click();
         switchTo().frame(frame);
         ELEMENT_INPUT_ACTIVITY.click();
@@ -1628,13 +1628,12 @@ public class ActivityStream {
         // get the id of activity created
         info("-- Editing an activity--");
         homePagePlatform.refreshUntil($(byText(text)), Condition.visible, 500);
-        String idActivity = $(byXpath("(//p[contains(text(),'${activityName}')]/following::div[@id])[1]".replace("${activityName}",text))).getAttribute("id").split("CommentBlockBound")[1];
-        executeJavaScript("window.scrollBy(0,-150)");
-        $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
-        $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}", idActivity))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
-        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
-        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible), Configuration.collectionsTimeout);
-        $(byText(text)).waitUntil(Condition.not(Condition.visible), Configuration.collectionsTimeout);
+        String idActivity = $(byText(text)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}", idActivity))).waitUntil(Condition.visible,Configuration.timeout).click();
+        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible,Configuration.timeout).click();
+        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+        $(byText(text)).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     }
 
     public void deleteGeneratedActivity(String text) {

@@ -122,7 +122,7 @@ public class SOCNotificationsEditActivityTestIT extends Base {
     addUsers.addUser(username1, password, email1, username1, username1);
     manageLogInOut.signIn(username1, password);
     navigationToolbar.goToMyNotifications();
-    myNotificationsSetting.verifyLabelNotificationType("Someone edits an activity");
+    myNotificationsSetting.verifyLabelNotificationType("Someone comments on one of my activities");
     myNotificationsSetting.verifyNotificationDefault(Edit_Activity);
     manageLogInOut.signIn(username, PASS_ROOT);
     navigationToolbar.goToManageCommunity();

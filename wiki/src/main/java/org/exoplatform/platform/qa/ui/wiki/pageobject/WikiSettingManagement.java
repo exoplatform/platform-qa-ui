@@ -44,9 +44,9 @@ public class WikiSettingManagement {
   }
 public void addTemplate(String title,String description,String content){
     $(ELEMENT_TITLE_TEMPLATE).waitUntil(Condition.appears, Configuration.timeout).setValue(title);
-    $(ELEMENT_DESCRIPTION_TEMPLATE).setValue(description);
-    $(ELEMENT_CONTENT_TEMPLATE).setValue(content);
-    $(ELEMENT_SAVE_TEMPLATE).click();
+    $(ELEMENT_DESCRIPTION_TEMPLATE).waitUntil(Condition.visible, Configuration.timeout).setValue(description);
+    $(ELEMENT_CONTENT_TEMPLATE).waitUntil(Condition.visible, Configuration.timeout).setValue(content);
+    $(ELEMENT_SAVE_TEMPLATE).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_WIKI_OK_SAVE_TEMPLATE.waitUntil(Condition.appears,Configuration.timeout).click();
 }
   /**

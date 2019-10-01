@@ -1001,7 +1001,7 @@ public class RichTextEditor {
     if (!link.isEmpty()) {
       info("Input external Image link");
       sleep(Configuration.timeout);
-      $(ELEMENT_EXTERNAL_IMAGE_INPUT_LINK).waitUntil(Condition.visible,Configuration.timeout).setValue(link);
+      $(ELEMENT_EXTERNAL_IMAGE_INPUT_LINK).waitUntil(Condition.visible,Configuration.collectionsTimeout).setValue(link);
     }
   }
 

@@ -13,6 +13,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -62,6 +63,8 @@ public class WikiSettingsTestIT extends Base {
 
   WikiPermission        wikiPermission;
 
+  TestBase              testBase;
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
@@ -79,6 +82,7 @@ public class WikiSettingsTestIT extends Base {
     platformPermission = new PlatformPermission(this);
     manageLogInOut = new ManageLogInOut(this);
     wikiPermission = new WikiPermission(this);
+    testBase = new TestBase();
     if ($(ELEMENT_SKIP_BUTTON).is(exist)) {
       $(ELEMENT_SKIP_BUTTON).click();
     }
@@ -139,7 +143,8 @@ public class WikiSettingsTestIT extends Base {
     homePagePlatform.goToWiki();
     wikiHomePage.goToWikiSettingPage();
     sleep(Configuration.timeout);
-    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.waitUntil(Condition.visible,Configuration.timeout).click();
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     wikiSettingManagement.addTemplate(title, description, content);
     ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(title)).should(exist);
     ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();

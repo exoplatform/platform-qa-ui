@@ -1,12 +1,15 @@
 package org.exoplatform.platform.qa.ui.platform.plf;
 
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -168,7 +171,7 @@ public class PlfCalendarGadgetTestIT extends Base {
     info("Hover over the calendar box");
     ELEMENT_CONTAINER_NO_DISPALYED_CALENDAR.find(byText("Content Management")).hover();
     info("Click on add button");
-    $(ELEMENT_HP_CALENDARGADGET_SETTINGS_ADDCAL).click();
+    $(byXpath("//i[@class='uiIconSimplePlusMini uiIconLightGray']")).waitUntil(Condition.visible, Configuration.timeout).click();
     info("Verifyt that the calendar is added");
     ELEMENT_ICON_DELETE_CALENDAR_GADGET_CONTENT_MANAGEMENT.parent().shouldHave(Condition.text("Content Management"));
   }
@@ -196,13 +199,15 @@ public class PlfCalendarGadgetTestIT extends Base {
     info("Click on settings icon");
     click(ELEMENT_HP_CALENDARGADGET_SETTINGS);
     info("remove a calendar ");
-    ELEMENT_ICON_DELETE_CALENDAR_GADGET_CONTENT_MANAGEMENT.click();
+    ELEMENT_ICON_DELETE_CALENDAR_GADGET_CONTENT_MANAGEMENT.waitUntil(Condition.visible,Configuration.timeout).click();
     info("input a calendar");
     $(ELEMENT_HP_CALENDARGADGET_SETTINGS_SEARCHCAL).setValue("Content");
+    executeJavaScript("window.scrollBy(0,150)");
+
     info("Hover over on add button");
-    ELEMENT_CONTAINER_NO_DISPALYED_CALENDAR.find(byText("Content Management")).hover();
+    $(byXpath("(//*[@class='calName'])[2]")).hover();
     info("Click on add button");
-    click(ELEMENT_HP_CALENDARGADGET_SETTINGS_ADDCAL);
+    $(byXpath("(//i[@class='uiIconSimplePlusMini uiIconLightGray'])[2]")).waitUntil(Condition.visible, Configuration.timeout).click();
     info("Verify that the calendar is added");
     ELEMENT_ICON_DELETE_CALENDAR_GADGET_CONTENT_MANAGEMENT.parent().shouldHave(Condition.text("Content Management"));
   }

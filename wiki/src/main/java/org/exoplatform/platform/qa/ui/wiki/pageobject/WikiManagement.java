@@ -110,7 +110,7 @@ public class WikiManagement {
     info("Save all changes");
     sleep(Configuration.timeout);
     executeJavaScript("window.scrollBy(0,-5500)", "");
-    ELEMENT_SAVE_BUTTON_ADD_PAGE.click();
+    ELEMENT_SAVE_BUTTON_ADD_PAGE.waitUntil(Condition.visible,Configuration.timeout).click();
    $(ELEMENT_SAVE_BUTTON_ADD_PAGE).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     info("Wiki page simple is created successfully");
 
@@ -337,8 +337,7 @@ public class WikiManagement {
       }
 
     }
-    $(ELEMENT_SPACE_SWITHCHER_DROPDOWN_CLOSE).waitUntil(Condition.appears, Configuration.timeout);
-    $(ELEMENT_SPACE_SWITHCHER_DROPDOWN_CLOSE).click();
+    $(byXpath("(//div[@class='uiAction']/button)[2]")).waitUntil(Condition.appears, Configuration.timeout).click();
     info("All options are checked");
   }
 
@@ -591,7 +590,7 @@ public class WikiManagement {
     refresh();
     sleep(Configuration.collectionsTimeout);
     if (!newTitle.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).setValue(newTitle);
+      $(ELEMENT_TITLE_WIKI_INPUT).should(Condition.visible).setValue(newTitle);
     info("Waiting 30s before saved all changes");
     try {
       Thread.sleep(31000);

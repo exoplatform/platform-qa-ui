@@ -223,6 +223,7 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         spaceManagement.searchSpace(space2, "");
         spaceManagement.goToSpace(space2);
         spaceHomePage.goToWikiTab();
+
         wikiValidattions.verifyTitleWikiPage(title);
         wikiHomePage.goToAPage(title);
         wikiValidattions.verifyAltTextImageInContentPage(altText1);
@@ -953,6 +954,9 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         info("Un check edit permission of any group");
         wikiHomePage.goToPermissions();
         wikiPermission.addPermisisonByType(DATA_USER2);
+        wikiPermission.selectPermission(DATA_USER2, WikiPermission.permissionType.Edit_Pages);
+        wikiPermission.savePermisison();
+        wikiHomePage.goToPermissions();
         wikiPermission.unSelectPermission(DATA_USER2, WikiPermission.permissionType.Edit_Pages);
         wikiPermission.savePermisison();
         info("Log in as Mary");
@@ -966,6 +970,7 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         $(ELEMENT_CANCEL_BUTTON).click();
         homePagePlatform.goToWiki();
         wikiHomePage.deleteWiki(wiki1);
+        wikiHomePage.deleteWiki(wiki2);
 
     }
 

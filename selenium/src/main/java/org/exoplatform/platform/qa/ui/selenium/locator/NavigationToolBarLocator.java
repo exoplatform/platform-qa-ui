@@ -33,7 +33,10 @@ public final class NavigationToolBarLocator {
                                                                      By.xpath(".//*[@id='UISetupPlatformToolBarPortlet']//i");
 
   public static final By              ELEMENT_TOOLBAR_THEMELIGHT                          =
-                                                                 By.xpath("//*[@class='UIContainer UIToolbarContainer UIToolbarContainerLight']");
+                                                                 By.xpath("(//div[@class=\"UIContainer UIToolbarContainer UIToolbarContainerLight  \"])[1]");
+
+  public static final By              ELEMENT_TOOLBAR_THEMEDARK                          =
+                                                                 By.xpath("(//div[@class=\"UIContainer UIToolbarContainer UIToolbarContainerDark  \"])[1]");
 
   public static final By              ELEMENT_UPLOAD_FILE_FRAME_XPATH                     =
                                                                       By.xpath("//iframe[contains(@id,'uploadFrame')]");

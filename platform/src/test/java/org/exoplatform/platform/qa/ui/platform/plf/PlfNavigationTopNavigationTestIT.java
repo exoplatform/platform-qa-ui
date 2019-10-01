@@ -1,14 +1,19 @@
 package org.exoplatform.platform.qa.ui.platform.plf;
 
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.core.PLFData.password;
+import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_HELP_TOOLBAR;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_TITLE_WIKI_INPUT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -26,6 +31,7 @@ import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.task.pageobject.TasksManagement;
+import static com.codeborne.selenide.Selenide.$;
 
 /**
  * @author eXo
@@ -48,6 +54,8 @@ public class PlfNavigationTopNavigationTestIT extends Base {
 
   TasksManagement         tasksManagement;
 
+  ManageLogInOut          manageLogInOut;
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
@@ -59,7 +67,11 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     calendarHomePage = new CalendarHomePage(this);
     forumHomePage = new ForumHomePage(this);
     tasksManagement = new TasksManagement(this);
-
+    manageLogInOut = new ManageLogInOut(this);
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    manageLogInOut.signInCas(username, password);
   }
 
   /**
@@ -117,10 +129,7 @@ public class PlfNavigationTopNavigationTestIT extends Base {
      * displayed
      */
     navigationToolbar.goToAddPoll("", forum);
-    info("Verify that the poll popup is shown");
-    $(ELEMENT_POLL_SUBMIT).waitUntil(Condition.appears, Configuration.timeout);
     info("Delete data");
-    ELEMENT_POLL_CANCEL.click();
     homePagePlatform.goToForum();
     forumHomePage.goToHomeCategory();
     forumCategoryManagement.deleteCategory(category);
@@ -168,9 +177,8 @@ public class PlfNavigationTopNavigationTestIT extends Base {
      */
     navigationToolbar.goToAddTopic("", forum);
     info("Verify that the topic is shown");
-    $(ELEMENT_START_TOPIC_POPUP_TITLE).waitUntil(Condition.appears, Configuration.timeout);
+    $(byXpath("//*[@id='UIForumDescription']//strong[text()='${forum}']".replace("${forum}",forum))).waitUntil(Condition.appears, Configuration.timeout);
     info("Delete data");
-    ELEMENT_TOPIC_CANCEL.scrollTo().click();
     homePagePlatform.goToForum();
     forumHomePage.goToHomeCategory();
     forumCategoryManagement.deleteCategory(category);
@@ -269,12 +277,11 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     info("Test 7: Open user guide");
     homePagePlatform.goToHomePage();
     homePagePlatform.refreshUntil($(ELEMENT_HELP_TOOLBAR),Condition.visible,1000);
-    click(ELEMENT_HELP_TOOLBAR);
+    $(ELEMENT_HELP_TOOLBAR).waitUntil(Condition.visible,Configuration.timeout).click();
     switchTo().window(1);
-    refresh();
     String url = WebDriverRunner.url();
     assertEquals(url,
-                 "https://docs-old.exoplatform.org/public/index.jsp?topic=/PLF50/PLFUserGuide.GettingStarted.SocialIntranetHomepage.html");
+                 "https://docs.exoplatform.org/en/5.2/");
     switchTo().window(0);
   }
 }

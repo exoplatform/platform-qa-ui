@@ -12,8 +12,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_WIKI_CONTENT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_WIKI_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
@@ -48,7 +47,7 @@ public class WikiValidattions {
         info("Verify that a draf page with the title:" + "title" + " is shown in draf table");
 
         $(byXpath(ELEMENT_DRAFT_OF_NEW_PAGE.replace("${title}", title))).waitUntil(Condition.visible,
-                Configuration.timeout);
+                Configuration.collectionsTimeout);
     }
 
     /**
@@ -285,6 +284,7 @@ public class WikiValidattions {
      * @param pageContent String
      */
     public void verifyPageContent(String pageName, String pageContent) {
+        refresh();
         info("Verify the page's name");
         $(byXpath(ELEMENT_WIKI_HOME_PAGE_TITLE.replace("${title}", pageName))).waitUntil(Condition.visible,Configuration.timeout);
         info("Verify the page's content");
@@ -698,6 +698,7 @@ public class WikiValidattions {
     public void verifyTitleWikiPage(String title) {
         info("Verify that the wiki page is created and shown in the list");
         sleep(Configuration.collectionsTimeout);
+        $(byXpath("//div[@id='iconTreeExplorer']/a[text()='${title}']".replace("${title}", " " + title))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
         $(byXpath("//div[@id='UITreeExplorer']/following::div[@id='titleInfo' and text()='${title}']".replace("${title}",title))).waitUntil(Condition.visible,Configuration.timeout);
         info("The wiki page is created successfully");
     }

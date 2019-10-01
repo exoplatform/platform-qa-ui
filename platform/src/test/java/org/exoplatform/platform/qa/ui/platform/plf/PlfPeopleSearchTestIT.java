@@ -6,6 +6,7 @@ import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.ConnectionsManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,10 +16,13 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.core.PLFData.password;
+import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 @Tag("plf")
 @Tag("sniff")
@@ -36,6 +40,8 @@ public class PlfPeopleSearchTestIT extends Base {
 
     private ConnectionsManagement connectionsManagement;
 
+    private  ManageLogInOut  manageLogInOut;
+
     @BeforeEach
     public void setupBeforeMethod() {
         info("Start setUpBeforeMethod");
@@ -46,6 +52,11 @@ public class PlfPeopleSearchTestIT extends Base {
         setHomePagePlatform(new HomePagePlatform(this));
         userProfilePage = new UserProfilePage(this);
         setConnectionsManagement(new ConnectionsManagement(this));
+        manageLogInOut = new ManageLogInOut(this);
+        if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+            $(ELEMENT_SKIP_BUTTON).click();
+        }
+        manageLogInOut.signInCas(username, password);
     }
 
     @Test

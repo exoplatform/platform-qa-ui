@@ -44,10 +44,10 @@ public final class BrandingLocator {
   public static final By ELEMENT_PLF_BRANDING_SELECTTHEME                 = By.xpath("//*[@class='btn dropdown-toggle']");
 
   public static final By ELEMENT_PLF_BRANDING_THEMEDARK                   =
-                                                        By.xpath("//*[@class='OptionItem' and text()='Dark']");
+                                                        By.xpath("//input[@value='Dark']");
 
   public static final By ELEMENT_PLF_BRANDING_THEMELIGHT                  =
-                                                         By.xpath("//*[@class='OptionItem' and text()='Light']");
+                                                         By.xpath("//input[@value='Light']");
 
   // Displayed top bar
   public static final By ELEMENT_PLF_BRANDING_TOPBAR_THEMELIGHT           =
@@ -68,6 +68,6 @@ public final class BrandingLocator {
 
   public static final SelenideElement ELEMENT_BUTTON_APPLY =$(byId("save"));
 
-  public static final SelenideElement ELEMENT_UPLOAD_LOGO=$(byId("btUpload")).parent().parent().find(byId("file"));
+  public static final SelenideElement ELEMENT_UPLOAD_LOGO=$(byId("attachLogo"));
 
 }

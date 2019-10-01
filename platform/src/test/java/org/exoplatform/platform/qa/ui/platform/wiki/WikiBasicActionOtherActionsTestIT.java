@@ -843,10 +843,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     homePagePlatform.goToWiki();
     wikiHomePage.goToAPage(title);
-
     wikiHomePage.goToPermalink();
-    $(ELEMENT_MAKE_PUBLIC_BUTTON).click();
-    ELEMENT_MSG_MAKE_PUBLIC_RESTRICTED.shouldHave(Condition.text("public"));
     $(ELEMENT_MAKE_RESTRICT_BUTTON).click();
     ELEMENT_MSG_MAKE_PUBLIC_RESTRICTED.shouldHave(Condition.text("restricted"));
     $(ELEMENT_PERMALINK_CLOSE).click();

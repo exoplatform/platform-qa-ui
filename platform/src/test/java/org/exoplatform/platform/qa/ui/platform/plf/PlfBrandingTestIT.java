@@ -1,8 +1,10 @@
 package org.exoplatform.platform.qa.ui.platform.plf;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.BrandingLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_THEMEDARK;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_THEMELIGHT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
@@ -20,6 +22,7 @@ import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
+import org.openqa.selenium.By;
 
 @Tag("sniff")
 @Tag("plf")
@@ -71,18 +74,17 @@ public class PlfBrandingTestIT extends Base {
     navigationToolbar.goToBanding();
     waitForAndGetElement(ELEMENT_PLF_BRANDINGPAGE);
 
-    click(ELEMENT_PLF_BRANDING_SELECTTHEME);
     waitForAndGetElement(ELEMENT_PLF_BRANDING_THEMELIGHT, 2000, 0);
     waitForAndGetElement(ELEMENT_PLF_BRANDING_THEMEDARK, 2000, 0);
 
-    click(ELEMENT_PLF_BRANDING_THEMELIGHT);
-    waitForAndGetElement(ELEMENT_PLF_BRANDING_TOPBAR_THEMELIGHT, 2000, 0);
+    clickByJavascript($(ELEMENT_PLF_BRANDING_THEMELIGHT),2);
 
-    ELEMENT_BUTTON_APPLY.click();
+    ELEMENT_BUTTON_APPLY.waitUntil(Condition.visible,Configuration.timeout).click();
     waitForAndGetElement(ELEMENT_TOOLBAR_THEMELIGHT, 2000, 0);
-    $(ELEMENT_PLF_BRANDING_SELECTTHEME).click();
-    $(ELEMENT_PLF_BRANDING_THEMEDARK).click();
+    clickByJavascript($(ELEMENT_PLF_BRANDING_THEMEDARK),2);
     ELEMENT_BUTTON_APPLY.click();
+    waitForAndGetElement(ELEMENT_TOOLBAR_THEMEDARK, 2000, 0);
+
   }
 
   /**
@@ -111,7 +113,7 @@ public class PlfBrandingTestIT extends Base {
     navigationToolbar.goToBanding();
     waitForAndGetElement(ELEMENT_PLF_BRANDINGPAGE, 2000, 0);
 
-    ELEMENT_UPLOAD_LOGO.uploadFromClasspath("TestBrandingLogo.png");
+    ELEMENT_UPLOAD_LOGO.uploadFromClasspath("eXo-Platform.png");
 
     ELEMENT_BUTTON_APPLY.click();
     waitForAndGetElement(ELEMENT_PLF_BRANDING_TOPBAR_LOGO);

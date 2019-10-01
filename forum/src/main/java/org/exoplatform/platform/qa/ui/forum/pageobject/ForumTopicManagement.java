@@ -211,7 +211,8 @@ public class ForumTopicManagement {
    * @param content String
    */
   public void postReply(String title, String content) {
-    $(ELEMENT_POST_REPLY).click();
+    $(ELEMENT_POST_REPLY).waitUntil(visible,Configuration.timeout).click();
+    $(byXpath("//span[@class='PopupTitle popupTitle' and text()='New Post']")).dragAndDropTo($(byXpath("//div[@class='UITableColumnContainer']")));
     replyTopic(title, content);
   }
 

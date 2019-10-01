@@ -401,7 +401,7 @@ public class EcmsSECreateTestIT extends Base {
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     info("Upload a file");
     refresh();
-    siteExplorerHome.uploadFile("data/ecms/eXo-Platform.png");
+    siteExplorerHome.uploadFile("eXo-Platform.png");
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     $(byXpath(ELEMENT_GRID_LIST_CONTENT.replace("${file}", "eXo-Platform.png"))).waitUntil(Condition.visible,
                                                                                            Configuration.timeout);

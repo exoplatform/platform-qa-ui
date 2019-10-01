@@ -161,10 +161,6 @@ public class WikiBasicActionPermalinkTestIT extends Base {
         richTextEditor.addSimplePage(title, content);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(title);
-
-        info("Make public the page");
-        wikiHomePage.publicPage(false);
-
         info("Verify that the page is published");
         wikiValidattions.verifyPublishedPage();
         info("Go to Page permission");
@@ -269,11 +265,6 @@ public class WikiBasicActionPermalinkTestIT extends Base {
         richTextEditor.addSimplePage(title, content);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(title);
-
-        info("Make public the page");
-        // wikiHomePage.restrictedPage(true);
-        wikiHomePage.publicPage(true);
-
         info("Verify that the page is published");
         wikiValidattions.verifyPublishedPage();
         info("Go to Page permission");
@@ -289,7 +280,7 @@ public class WikiBasicActionPermalinkTestIT extends Base {
         refresh();
         open(permalink);
         wikiValidattions.verifyPageContent(title, content);
-        wikiHomePage.goToPermalink();
+        wikiHomePage.goToPermalinkForSimpleUserNotAdmin();
         $(ELEMENT_MAKE_RESTRICT_BUTTON).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
         wikiHomePage.closePermalinkPopup();
         manageLogInOut.signIn(DATA_USER1, "gtngtn");
@@ -362,12 +353,6 @@ public class WikiBasicActionPermalinkTestIT extends Base {
         richTextEditor.addSimplePage(title, content);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(title);
-
-
-        info("Make public the page");
-        //  wikiHomePage.restrictedPage(true);
-        wikiHomePage.publicPage(true);
-
         info("Verify that the page is published");
         wikiValidattions.verifyPublishedPage();
         wikiHomePage.goToPermalink();
@@ -376,7 +361,7 @@ public class WikiBasicActionPermalinkTestIT extends Base {
         manageLogInOut.signIn(arrayUsers.get(0), password);
         open(permalink);
         wikiValidattions.verifyPageContent(title, content);
-        wikiHomePage.goToPermalink();
+        wikiHomePage.goToPermalinkForSimpleUserNotAdmin();
         $(ELEMENT_MAKE_RESTRICT_BUTTON).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
         wikiHomePage.closePermalinkPopup();
         manageLogInOut.signIn(DATA_USER1, "gtngtn");
@@ -797,10 +782,6 @@ public class WikiBasicActionPermalinkTestIT extends Base {
         richTextEditor.addSimplePage(title, content);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(title);
-
-        info("Make public the page");
-        wikiHomePage.publicPage(false);
-
         info("Verify that the page is published");
         wikiValidattions.verifyPublishedPage();
         info("Add sub page");
@@ -911,15 +892,10 @@ public class WikiBasicActionPermalinkTestIT extends Base {
         richTextEditor.addSimplePage(title, content);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(title);
-        info("Make public the page");
-        wikiHomePage.publicPage(true);
-
         info("Verify that the page is published");
         wikiValidattions.verifyPublishedPage();
-
         info("Make restricted the page");
         wikiHomePage.restrictedPage();
-
         info("Verify that the page is restricted");
         wikiValidattions.verifyRestrictedPage();
         homePagePlatform.goToWiki();
