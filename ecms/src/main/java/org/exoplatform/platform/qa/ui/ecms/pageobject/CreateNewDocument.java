@@ -206,7 +206,7 @@ public class CreateNewDocument {
     info("save and close");
     // scroll up
     executeJavaScript("window.scrollBy(0,-250)");
-    $(ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE).click();
+    $(ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE).waitUntil(Condition.visible,Configuration.timeout).click();
     sleep(Configuration.timeout);
 
   }

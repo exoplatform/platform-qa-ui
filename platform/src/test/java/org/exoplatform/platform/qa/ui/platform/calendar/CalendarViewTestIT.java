@@ -504,7 +504,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventNext = "titleEventNext" + getRandomNumber();
     String titleEventPre = "titleEventPre" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventCur,

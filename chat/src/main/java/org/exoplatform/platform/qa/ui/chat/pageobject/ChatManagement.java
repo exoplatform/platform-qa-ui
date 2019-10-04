@@ -252,7 +252,7 @@ public class ChatManagement {
     for (int i = 0; i <= users.length - 1; i++) {
       ELEMENT_CHAT_ASSIGNEE_TASK.setValue(users[i]);
       ELEMENT_CHAT_RESULT_SEARCH_ASSIGNEE.waitUntil(Condition.visible, Configuration.timeout);
-      ELEMENT_CHAT_ASSIGNEE_TASK.pressEnter();
+      ELEMENT_CHAT_ASSIGNEE_TASK.waitUntil(Condition.visible, Configuration.timeout).pressEnter();
     }
       ELEMENT_CHAT_DUE_DATE_TASK.waitUntil(Condition.visible,Configuration.timeout).click();
       ELEMENT_CHAT_CURRENT_DATE_TASK.waitUntil(Condition.visible,Configuration.timeout).click();

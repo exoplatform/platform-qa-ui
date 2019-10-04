@@ -9,8 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_EDIT_PROFILE;
@@ -57,10 +56,10 @@ public class PlfDeleteProfileTitleTestIT extends Base {
    $(ELEMENT_EDIT_PROFILE).waitUntil(Condition.appears, Configuration.timeout).click();
    $(ELEMENT_TITLE_INPUT).waitUntil(Condition.appears, Configuration.timeout).click();
    $(ELEMENT_TITLE_INPUT).setValue(title);
-   $(ELEMENT_BUTTON_SAVE).waitUntil(Condition.appears, Configuration.timeout).click();
+   $(ELEMENT_BUTTON_SAVE).waitUntil(Condition.appears, Configuration.collectionsTimeout).click();
    $(ELEMENT_EDIT_PROFILE).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
    $(ELEMENT_TITLE_INPUT).setValue("");
-   $(ELEMENT_BUTTON_SAVE).click();
+   $(ELEMENT_BUTTON_SAVE).waitUntil(Condition.appears, Configuration.collectionsTimeout).click();
    executeJavaScript("window.scrollBy(0,150)");
    $(ELEMENT_BUTTON_SAVE).waitUntil(Condition.not(Condition.visible),Configuration.collectionsTimeout);
    $(ELEMENT_ABOUT_ME).shouldNot(Condition.visible);

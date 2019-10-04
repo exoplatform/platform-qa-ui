@@ -282,34 +282,6 @@ public class GateinGlobalSettingsTestIT extends Base {
 
     @Tag("gatein")
     @Test
-    public void test06_CheckMyDashboardDefaultTabModified() {
-        //2418
-        String tabName = "tabName" + getRandomNumber();
-        info("Sign in with ROOT account");
-        manageLogInOut.signIn(username, PASS_ROOT);
-        navigationToolbar.goToMyProfile();
-        refresh();
-        userPageBase.goToDashboardTab();
-        myDashBoard.editMyDashboardDefaultTab(tabName);
-        info("Verify that the default tab is modified");
-        $(byXpath("//span[@id='${name}']".replace("${name}",tabName))).isDisplayed();
-    }
-
-    @Tag("gatein")
-    @Test
-    public void test07_CheckGadgetAddedInMyDashboard() {
-        //2417
-        String gadgetTitle="Services Management";
-        info("Sign in with ROOT account");
-        manageLogInOut.signIn(username, PASS_ROOT);
-        navigationToolbar.goToMyProfile();
-        refresh();
-        userPageBase.goToDashboardTab();
-        myDashBoard.addGadget(gadgetTitle);
-    }
-
-    @Tag("gatein")
-    @Test
     public void test08_CheckCanSearchPageInPortalPage() {
         //2416
         String namePage = "namePage" + getRandomNumber();
