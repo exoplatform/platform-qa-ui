@@ -6,19 +6,20 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="platform-qa-ui-answer" />
-        <module name="platform-qa-ui-calendar" />
-        <module name="platform-qa-ui-chat" />
-        <module name="platform-qa-ui-commons" />
-        <module name="platform-qa-ui-core" />
-        <module name="platform-qa-ui-ecms" />
-        <module name="platform-qa-ui-forum" />
-        <module name="platform-qa-ui-gatein" />
-        <module name="platform-qa-ui-platform" />
-        <module name="platform-qa-ui-selenium" />
         <module name="platform-qa-ui-social" />
+        <module name="platform-qa-ui-calendar" />
+        <module name="platform-qa-ui-answer" />
+        <module name="platform-qa-ui-chat" />
+        <module name="platform-qa-ui-platform" />
+        <module name="platform-qa-ui-onlyOffice" />
         <module name="platform-qa-ui-task" />
+        <module name="platform-qa-ui-core" />
+        <module name="platform-qa-ui-selenium" />
+        <module name="platform-qa-ui-forum" />
+        <module name="platform-qa-ui-ecms" />
+        <module name="platform-qa-ui-commons" />
         <module name="platform-qa-ui-wiki" />
+        <module name="platform-qa-ui-gatein" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -31,6 +32,7 @@
       <module name="platform-qa-ui-ecms" target="1.8" />
       <module name="platform-qa-ui-forum" target="1.8" />
       <module name="platform-qa-ui-gatein" target="1.8" />
+      <module name="platform-qa-ui-onlyOffice" target="1.8" />
       <module name="platform-qa-ui-platform" target="1.8" />
       <module name="platform-qa-ui-selenium" target="1.8" />
       <module name="platform-qa-ui-social" target="1.8" />

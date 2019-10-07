@@ -330,7 +330,7 @@ public class SiteExplorerHome {
   public void uploadFile(String link, Object... params) {
     Boolean verify = (Boolean) (params.length > 0 ? params[0] : true);
     sleep(2000);
-    $(byId("MultiUploadInputFiles")).uploadFromClasspath(link);
+   $(byId("MultiUploadInputFiles")).uploadFromClasspath(link);
     sleep(Configuration.collectionsTimeout);
     refresh();
     info("verify:" + verify);
@@ -1565,6 +1565,9 @@ public class SiteExplorerHome {
     }
   }
 
+
+
+
   /**
    * Delete all files in a folder under Admin view
    *
@@ -1601,4 +1604,39 @@ public class SiteExplorerHome {
   public enum defineValueBehavior {
     CREATE_NEW, REMOVE_EXISTING, REPLACE_EXISTING, THROW_EXEPTION;
   }
+
+
+  /**
+   * Click on View Document button
+   */
+  public void clickViewDocumentButton() {
+    $(byText("View Document")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+  }
+
+
+  /**
+   * Click on Edit Online button
+   */
+  public void clickEditOnine() {
+    $(byText("Edit Online")).click();
+  }
+
+  /**
+   * Click on Delete button
+   */
+  public void checkButtonDocument(String officeDocument) {
+    info("click on CheckBox button for Document");
+    $(byXpath("(//div[@class='columnText']//span[@class='nodeName' and text()='${word}']/preceding::span[@class='uiCheckbox'])[last()]".replace("${word}",officeDocument))).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byXpath("(//div[@class='columnText']//span[text()='${word}']/following::*[@class='fileInfoBottom'])[1]".replace("${word}",officeDocument))).waitUntil(Condition.visible,Configuration.timeout).click();
+  }
+
+  /**
+   * Click on Delete button
+   */
+  public void clickDeleteButtonDocument() {
+    info("click on Delete button for Document");
+    $(byText("Delete")).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_DELETE_POPUP_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
+  }
+
 }

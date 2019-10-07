@@ -48,6 +48,7 @@
     <module>chat</module>
     <module>task</module>
     <module>answer</module>
+    <module>onlyOffice</module>
   </modules>
   <scm>
     <connection>scm:git:git://github.com/exoplatform/platform-qa-ui.git</connection>

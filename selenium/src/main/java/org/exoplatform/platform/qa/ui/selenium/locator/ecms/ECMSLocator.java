@@ -1215,4 +1215,8 @@ public class ECMSLocator {
   public static final SelenideElement ELEMENT_CHECK = $(byClassName("uiCheckbox"));
 
   public static final SelenideElement ELEMENT_BUTTON_CLOSE_SEARCH = $(byXpath("//*[@id=\"UIPopupWindow\"]/div[1]/a"));
+
+
+  public static final By ELEMENT_DELETE_POPUP_BUTTON =
+          By.xpath("//*[contains(@class, 'uiAction')]//*[text()='Delete']");
 }

@@ -2,7 +2,6 @@ package org.exoplatform.platform.qa.ui.platform.gatein;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import javafx.beans.binding.StringBinding;
 import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarHomePage;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.*;
