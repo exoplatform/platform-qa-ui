@@ -62,7 +62,7 @@ public class ChatLocator {
     public static final String ELEMENT_STATUS_CHAT_IN_PROFILE_PAGE = "uiIconUser{status}";
 
     public static final String ELEMENT_CHAT_UISTATUSPROFILEPORTLET =
-            ".//*[@id='UIStatusProfilePortlet']//*[@class='${icon}' and @data-original-title='${status}']";
+                                                         "//*[@class='uiIconLightGray uiIconUser{icon}' and @data-original-title='${status}']";
 
     public static final String ELEMENT_CHAT_TOOLTIP =
             "//*[contains(@class,'tooltip-inner') and contains(text(),'${tooltip}')]";

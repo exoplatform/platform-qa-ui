@@ -258,7 +258,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
                                              .parent()
                                              .parent()
                                              .shouldHave(Condition.text(username3 + " " + username3 + " and " + username2 + " "
-                                                 + username2 + " have commented on your activity."));
+                                                 + username2 + " have commented a post."));
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -380,7 +380,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     navigationToolbar.goToIntranetNotification();
     intranetNotification.goToAllNotification();
     $(byText(activity)).parent().parent().shouldHave(text(username2 + " " + username2 + ", " + username4 + " " + username4
-        + " and 1 more have commented on your activity."));
+        + " and 1 more have commented a post."));
     $(byText(comment4)).should(Condition.exist);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
@@ -2275,7 +2275,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     navigationToolbar.goToIntranetNotification();
     intranetNotification.goToAllNotification();
     $(byText(activity)).parent().parent().shouldHave(text(username2 + " " + username2 + ", " + username4 + " " + username4
-        + " and 1 more have commented on your activity."));
+        + " and 1 more have commented a post."));
     $(byText(comment4)).should(Condition.exist);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);

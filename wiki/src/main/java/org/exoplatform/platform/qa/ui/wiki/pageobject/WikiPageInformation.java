@@ -45,6 +45,7 @@ public class WikiPageInformation {
    */
   public void addRelations(String location, String page) {
     info("Click on Drop down");
+    $(byXpath("(//div[@class='uiAction']/button)[1]")).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_ADD_RELATED_PAGE_POPUP_DROPDOWN).waitUntil(Condition.visible,Configuration.timeout).click();
     if(!location.isEmpty()){
       info("Select a location");
@@ -63,7 +64,7 @@ public class WikiPageInformation {
      */
     public void goToAddRelations() {
         info("Click on Add more relations");
-        $(ELEMENT_PAGE_INFO_ADD_MORE_RELATIONS).click();
+        $(ELEMENT_PAGE_INFO_ADD_MORE_RELATIONS).waitUntil(Condition.visible, Configuration.timeout).click();
         $(ELEMENT_ADD_RELATED_PAGE_POPUP_TITLE).waitUntil(Condition.appears, Configuration.timeout);
         info("Add related page popup is shown");
     }

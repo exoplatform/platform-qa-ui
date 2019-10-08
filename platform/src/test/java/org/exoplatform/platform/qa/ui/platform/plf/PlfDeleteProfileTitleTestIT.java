@@ -54,12 +54,12 @@ public class PlfDeleteProfileTitleTestIT extends Base {
 
    homePagePlatform.goToUserProfile();
    $(ELEMENT_EDIT_PROFILE).waitUntil(Condition.appears, Configuration.timeout).click();
-   $(ELEMENT_TITLE_INPUT).waitUntil(Condition.appears, Configuration.timeout).click();
-   $(ELEMENT_TITLE_INPUT).setValue(title);
-   $(ELEMENT_BUTTON_SAVE).waitUntil(Condition.appears, Configuration.collectionsTimeout).click();
+   $(ELEMENT_TITLE_INPUT).waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+   $(ELEMENT_TITLE_INPUT).waitUntil(Condition.appears, Configuration.timeout).setValue(title);
+   $(ELEMENT_BUTTON_SAVE).waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
    $(ELEMENT_EDIT_PROFILE).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-   $(ELEMENT_TITLE_INPUT).setValue("");
-   $(ELEMENT_BUTTON_SAVE).waitUntil(Condition.appears, Configuration.collectionsTimeout).click();
+   $(ELEMENT_TITLE_INPUT).waitUntil(Condition.visible, Configuration.timeout).setValue("");
+   $(ELEMENT_BUTTON_SAVE).waitUntil(Condition.appears, Configuration.collectionsTimeout).doubleClick();
    executeJavaScript("window.scrollBy(0,150)");
    $(ELEMENT_BUTTON_SAVE).waitUntil(Condition.not(Condition.visible),Configuration.collectionsTimeout);
    $(ELEMENT_ABOUT_ME).shouldNot(Condition.visible);

@@ -697,7 +697,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     manageLogInOut.signIn("john", "gtngtn");
     homePagePlatform.goToMySpaces();
     spaceManagement.searchSpace(space);
-    ELEMENT_SPACES_LIST.find(byText(space)).click();
+    ELEMENT_SPACES_LIST.waitUntil(Condition.visible,Configuration.timeout).find(byText(space)).waitUntil(Condition.visible,Configuration.timeout).click();
     refresh();
     spaceHomePage.goToSpaceSettingTab();
     info("accept request by user 1");

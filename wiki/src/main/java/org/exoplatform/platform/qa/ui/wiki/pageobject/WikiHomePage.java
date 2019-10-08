@@ -139,7 +139,7 @@ public class WikiHomePage {
     public void selectAPage(String page) {
         info("Go to a wiki page...");
         info("Select the wiki page");
-        $(byText(page)).click();
+        $(byText(page)).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
         info("The page is shown");
     }
 

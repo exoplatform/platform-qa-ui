@@ -49,6 +49,7 @@ public class PlfCheckLanguagesTestIT extends Base {
   }
 
   @Test
+  @Tag("testCheck")
   public void test01_checkListOfLanguages() {
     navigationToolbar.goToChangeLanguage();
     ELEMENT_POPUP_LIST_OF_LANGUAGES.find(byText("Arabic")).shouldBe(Condition.visible);

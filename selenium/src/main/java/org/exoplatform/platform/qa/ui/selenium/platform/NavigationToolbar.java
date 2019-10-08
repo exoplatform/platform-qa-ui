@@ -556,11 +556,11 @@ public class NavigationToolbar {
   public void goToAddUser() {
     info("Go to add user page");
     info("Click on administration icon");
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-    ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, 10000);
+    ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-    ELEMENT_ADMINISTRATION_ADD_USERS.waitUntil(Condition.visible,2000).click();
+    ELEMENT_ADMINISTRATION_ADD_USERS.waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   public void goToManageCommunity() {
