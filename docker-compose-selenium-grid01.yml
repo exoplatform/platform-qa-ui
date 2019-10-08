@@ -1,0 +1,37 @@
+version: '2'
+services:
+  hub:
+    extends:
+      file: docker-compose-selenium-grid-stack.yml
+      service: hub
+    container_name: hub01
+    ports:
+      - '4401:4444'
+    networks:
+      - selenium_hub
+  node_firefox:
+    extends:
+      file: docker-compose-selenium-grid-stack.yml
+      service: node_firefox
+    container_name: node_firefox01
+    depends_on:
+      - hub
+    networks:
+      - selenium_hub
+    environment:
+      HUB_PORT_4444_TCP_ADDR: hub01
+      HUB_PORT_4444_TCP_PORT: 4444
+  node_chrome:
+    extends:
+      file: docker-compose-selenium-grid-stack.yml
+      service: node_chrome
+    container_name: node_chrome01
+    networks:
+      - selenium_hub
+    depends_on:
+      - hub
+    environment:
+      HUB_PORT_4444_TCP_ADDR: hub01
+      HUB_PORT_4444_TCP_PORT: 4444
+networks:
+  selenium_hub:
