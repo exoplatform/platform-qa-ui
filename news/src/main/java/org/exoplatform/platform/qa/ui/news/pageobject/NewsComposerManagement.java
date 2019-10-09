@@ -64,7 +64,6 @@ public class NewsComposerManagement {
       fillContentField(content);
     }
     info("Save all changes");
-    sleep(2000);
     $(NEWS_COMPOSER_POST_BUTTON).waitUntil(Condition.enabled, Configuration.timeout).click();
 
     info("-- Verify that news has been added --");
