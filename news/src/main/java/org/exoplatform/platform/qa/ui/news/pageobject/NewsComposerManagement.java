@@ -1,26 +1,22 @@
 package org.exoplatform.platform.qa.ui.news.pageobject;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ManageFileTestBase;
-import org.openqa.selenium.WebElement;
 
 
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Configuration.*;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_COMPOSER_SHARE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_INPUT_ACTIVITY;
 import static org.exoplatform.platform.qa.ui.selenium.locator.news.NewsLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 public class NewsComposerManagement {
-  private final TestBase testBase;
-
   public ManageAlert alert;
 
   public Button button;
@@ -35,7 +31,6 @@ public class NewsComposerManagement {
    * @param testBase TestBase
    */
   public NewsComposerManagement(TestBase testBase) {
-    this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
     this.alert = new ManageAlert(testBase);
     this.button = new Button(testBase);
@@ -46,7 +41,7 @@ public class NewsComposerManagement {
    * go to news composer
    */
   public void selectNewsComposer() {
-    $(NEWS_COMPOSER_TAB).waitUntil(Condition.visible, Configuration.timeout).click();
+    NEWS_COMPOSER_TAB.shouldBe(visible).click();
   }
 
   /**
@@ -57,18 +52,18 @@ public class NewsComposerManagement {
    */
   public void postSimpleNews(String title, String content) {
     selectNewsComposer();
-    $(NEWS_COMPOSER_TITLE_INPUT).waitUntil(Condition.appears, Configuration.timeout);
-    $(NEWS_COMPOSER_TITLE_INPUT).setValue(title);
+    NEWS_COMPOSER_TITLE_INPUT.should(appears);
+    NEWS_COMPOSER_TITLE_INPUT.setValue(title);
     if (content != null && !"".equals(content)) {
       info("----Add text into news content text box-----");
       fillContentField(content);
     }
     info("Save all changes");
-    $(NEWS_COMPOSER_POST_BUTTON).waitUntil(Condition.enabled, Configuration.timeout).click();
+    NEWS_COMPOSER_POST_BUTTON.waitUntil(enabled, timeout).click();
 
     info("-- Verify that news has been added --");
-    $(byText(title)).should(Condition.exist);
-    $(NEWS_COMPOSER_POST_BUTTON).shouldBe(Condition.disabled);
+    $(byText(title)).should(exist);
+    NEWS_COMPOSER_POST_BUTTON.shouldBe(disabled);
   }
 
   /**
