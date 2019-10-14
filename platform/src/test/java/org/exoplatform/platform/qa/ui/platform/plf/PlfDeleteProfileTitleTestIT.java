@@ -54,7 +54,7 @@ public class PlfDeleteProfileTitleTestIT extends Base {
 
    homePagePlatform.goToUserProfile();
    $(ELEMENT_EDIT_PROFILE).waitUntil(Condition.appears, Configuration.timeout).click();
-   $(ELEMENT_TITLE_INPUT).waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+   $(ELEMENT_TITLE_INPUT).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
    $(ELEMENT_TITLE_INPUT).waitUntil(Condition.appears, Configuration.timeout).setValue(title);
    $(ELEMENT_BUTTON_SAVE).waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
    $(ELEMENT_EDIT_PROFILE).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();

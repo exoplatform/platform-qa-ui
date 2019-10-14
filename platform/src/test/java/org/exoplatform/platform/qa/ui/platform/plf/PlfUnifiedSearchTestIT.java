@@ -322,14 +322,14 @@ public class PlfUnifiedSearchTestIT extends Base {
     $(ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_ACTION).waitUntil(Condition.appears, Configuration.timeout);
 
     info("Click on Disable button");
-    ELEMENT_BUTTON_DISABLE_ENABLE_WIKI_SEARCH.click();
+    ELEMENT_BUTTON_DISABLE_ENABLE_WIKI_SEARCH.waitUntil(Condition.visible, Configuration.timeout).click();
     info("Open Search page");
     navigationToolbar.goToQuickSearch();
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).setValue(wiki);
     ELEMENT_DROP_DOWN_LIST_RESULT_IN_QUICK_SEARCH.waitUntil(Condition.visible, Configuration.timeout);
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).pressEnter();
     info("Verify that File checkbox is not shown");
-    $(ELEMENT_SEARCHRESULT_WIKITYPECHECK).shouldNot(Condition.exist);
+    $(ELEMENT_SEARCHRESULT_WIKITYPECHECK).waitUntil(Condition.visible,Configuration.collectionsTimeout).shouldNot(Condition.exist);
     navigationToolbar.goToAdminSearch();
     $(ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_TITLE).waitUntil(Condition.appears, Configuration.timeout).click();
     info("Click on Enable button");
@@ -424,7 +424,7 @@ public class PlfUnifiedSearchTestIT extends Base {
 
   @Test
   @Tag("ECMS-7784")
-  public void test10_searchWebContentByContent() {
+    public void test10_searchWebContentByContent() {
     String name = "name" + getRandomNumber();
     String content = "content" + getRandomNumber();
     navigationToolbar.goToSiteExplorer();

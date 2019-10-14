@@ -122,7 +122,7 @@ public class ManageSpacesTestIT extends Base {
                       .find(ELEMENT_DELETESPACE_MANAGE_ICON)
                       .waitUntil(Condition.visible, Configuration.timeout)
                       .click();
-    ELEMENT_SPACEMANAGEMENT_CANCEL_POPUP.click();
+    ELEMENT_SPACEMANAGEMENT_CANCEL_POPUP.waitUntil(Condition.visible, Configuration.timeout).click();
   }
 
   @Test

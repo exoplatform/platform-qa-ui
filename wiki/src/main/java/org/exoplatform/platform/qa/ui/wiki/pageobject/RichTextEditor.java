@@ -980,15 +980,15 @@ public class RichTextEditor {
     goToImageSettings();
     if (!width.isEmpty()) {
       info("Input width");
-      $(ELEMENT_IMAGE_WIDTH).setValue(width);
+      $(ELEMENT_IMAGE_WIDTH).waitUntil(Condition.visible,Configuration.timeout).setValue(width);
     }
     if (!height.isEmpty()) {
       info("Input height");
-      $(ELEMENT_IMAGE_HEIGHT).setValue(height);
+      $(ELEMENT_IMAGE_HEIGHT).waitUntil(Condition.visible,Configuration.timeout).setValue(height);
     }
     if (!altText.isEmpty()) {
       info("Change alt text");
-      $(ELEMENT_IMAGE_ALTERNATIVE_TEXT).setValue(altText);
+      $(ELEMENT_IMAGE_ALTERNATIVE_TEXT).waitUntil(Condition.visible,Configuration.timeout).setValue(altText);
     }
   }
 

@@ -467,8 +467,6 @@ public class CalendarEventRecurringTestIT extends Base {
     info("Add a event");
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    refresh();
-    eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               content,
                                               getDate(0, "MM-dd-yyyy HH") + ":00",
@@ -753,7 +751,7 @@ public class CalendarEventRecurringTestIT extends Base {
    */
 
   @Test
-  @Tag("eventis")
+  @Tag("eventis120")
   public void test09_AnExtraIconIsDisplayedForARepeatedEvent() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String content = "content" + getRandomNumber();
@@ -778,7 +776,7 @@ public class CalendarEventRecurringTestIT extends Base {
     eventManagement.saveAddEventDetails();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.MONTH);
     $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", titleEvent).replace("$date",
-                                                                                             getDate(0, "MMM dd yyyy")))).hover();
+                                                                                             getDate(0, "MMM dd yyyy")))).waitUntil(Condition.visible,Configuration.timeout).hover();
     $(ELEMENT_TITLE_RECURRING_EVENT).waitUntil(Condition.visible, Configuration.timeout);
     $(ELEMENT_DATE_TIME_RECURRING_EVENT).waitUntil(Condition.visible, Configuration.timeout);
     $(ELEMENT_RECURRING_TEXT_RECURRING_EVENT).waitUntil(Condition.visible, Configuration.timeout);
@@ -835,9 +833,13 @@ public class CalendarEventRecurringTestIT extends Base {
                                      CalendarHomePage.selectViewOption.LIST,
                                      CalendarHomePage.selectDayOption.DETAILTIME,
                                      getDate(0, "MM/dd/yyyy"));
-    calendarHomePage.deleteEventTask(titleEvent,
-                                     CalendarHomePage.selectViewOption.LIST,
+
+    eventManagement.deleteRecurringEvent(titleEvent,
+                                     CalendarHomePage.selectViewOption.MONTH,
                                      CalendarHomePage.selectDayOption.DETAILTIME,
-                                     getDate(30, "MM/dd/yyyy"));
+                                     EventManagement.recurringType.ALL_EVENT,
+                                     getDate(30, "MMM dd yyyy"),
+                                    true);
+
   }
 }

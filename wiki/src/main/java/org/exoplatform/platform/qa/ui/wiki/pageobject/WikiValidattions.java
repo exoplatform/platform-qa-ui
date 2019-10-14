@@ -568,7 +568,7 @@ public class WikiValidattions {
         info("Verify that the page is at the path:" + locator1 + "->" + locator2 + "->" + page);
         $(byXpath(ELEMENT_WIKI_HOME_BREADCRUMB_PATH.replace("$locator1", locator1)
                 .replace("$locator2", locator2)
-                .replace("$page", page))).waitUntil(Condition.visible,Configuration.timeout);
+                .replace("$page", page))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
         info("The page is at correct path");
     }
 

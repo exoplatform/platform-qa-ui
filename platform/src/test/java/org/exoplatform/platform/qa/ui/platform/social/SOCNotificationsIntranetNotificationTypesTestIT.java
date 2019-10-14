@@ -17,6 +17,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 
 import java.awt.*;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -2167,19 +2168,22 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
 
     info("Check comment notification in the notification list");
     manageLogInOut.signIn(username1, password);
-    ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
-    ELEMENT_ALERT_NOTIFICATION.click();
-    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(comment2)).parent().parent().parent().shouldHave(Condition.text(username3 + " "
-        + username3 + " and " + username2 + " " + username2 + " have commented on your activity."));
-
+    sleep(2000);
+    ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout).click();
+    $(byId("UINotificationPopoverToolbarPortlet")).find(byText(comment2))
+            .parent()
+            .parent()
+            .parent()
+            .shouldHave(Condition.text(username3 + " " + username3 + " and " + username2 + " "
+                    + username2 + " have commented a post."));
     info("Check comment notification in the View All");
     intranetNotification.goToAllNotification();
-    $(byId("UIIntranetNotificationsPortlet")).find(byText(comment2))
+    $(byId("UINotificationPopoverToolbarPortlet")).find(byText(comment2))
                                              .parent()
                                              .parent()
                                              .parent()
                                              .shouldHave(Condition.text(username3 + " " + username3 + " and " + username2 + " "
-                                                 + username2 + " have commented on your activity."));
+                                                 + username2 + " have commented a post."));
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");

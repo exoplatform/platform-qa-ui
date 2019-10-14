@@ -92,12 +92,11 @@ public class SpaceManagement {
    * @param desc : Space description
    */
   public void addNewSpaceSimple(String name, String desc, int... params) {
-    ELEMENT_ADDNEWSPACE_BUTTON.click();
-    ELEMENT_SPACE_NAME_INPUT.waitUntil(Condition.appears, Configuration.timeout);
-    ELEMENT_SPACE_NAME_INPUT.setValue(name);
-    ELEMENT_SPACE_DESCRIPTION_INPUT.setValue(desc);
+    ELEMENT_ADDNEWSPACE_BUTTON.waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_SPACE_NAME_INPUT.waitUntil(Condition.visible, Configuration.timeout).setValue(name);
+    ELEMENT_SPACE_DESCRIPTION_INPUT.waitUntil(Condition.visible, Configuration.timeout).setValue(desc);
     info("Save all changes");
-    ELEMENET_SPACE_CREATE_BUTTON.click();
+    ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.visible, Configuration.timeout).click();
     sleep(Configuration.timeout);
     ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
   }

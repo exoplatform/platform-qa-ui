@@ -369,7 +369,7 @@ public class MyNotificationsSetting {
           $(ELEMENT_EDIT_COMMENT_WEB_CHECKBOX).click();
         }
         info("Click on Save button");
-        $(ELEMENT_EDIT_COMMENT_SAVE_BTN).click();
+        $(ELEMENT_EDIT_COMMENT_SAVE_BTN).waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
         $(ELEMENT_EDIT_COMMENT_SAVE_BTN).waitUntil(not(Condition.visible), Configuration.timeout);
         info("Verify that Intranet notification is shown");
         evt.waitForAndGetElement(ELEMENT_COMMENT_INTRANET_ICON, 3000, 1);

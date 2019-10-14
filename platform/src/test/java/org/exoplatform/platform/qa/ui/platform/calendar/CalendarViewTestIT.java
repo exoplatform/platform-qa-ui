@@ -5,6 +5,8 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -248,7 +250,7 @@ public class CalendarViewTestIT extends Base {
     eventManagement.saveQuickAddEvent();
     homePagePlatform.goToCalendarPage();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.LIST);
-    $(ELEMENT_TODAY_ACTION_BAR).click();
+    $(ELEMENT_TODAY_ACTION_BAR).waitUntil(Condition.visible, Configuration.timeout).click();
     calendarHomePage.verifyIsPresentEventTask(titleEventCur,
                                               CalendarHomePage.selectViewOption.LIST,
                                               CalendarHomePage.selectDayOption.ALLDAY);
@@ -258,7 +260,7 @@ public class CalendarViewTestIT extends Base {
     calendarHomePage.verifyIsNotPresentEventTask(titleEventPre,
                                                  CalendarHomePage.selectViewOption.LIST,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
-    $(ELEMENT_NEXT_BUTTON_ANY_VIEW).click();
+    $(ELEMENT_NEXT_BUTTON_ANY_VIEW).waitUntil(Condition.visible, Configuration.timeout).click();
     calendarHomePage.verifyIsNotPresentEventTask(titleEventCur,
                                                  CalendarHomePage.selectViewOption.LIST,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
@@ -268,8 +270,8 @@ public class CalendarViewTestIT extends Base {
     calendarHomePage.verifyIsNotPresentEventTask(titleEventPre,
                                                  CalendarHomePage.selectViewOption.LIST,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
-    $(ELEMENT_TODAY_ACTION_BAR).click();
-    $(ELEMENT_PREVIOUS_BUTTON_ANY_VIEW).click();
+    $(ELEMENT_TODAY_ACTION_BAR).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_PREVIOUS_BUTTON_ANY_VIEW).waitUntil(Condition.visible, Configuration.timeout).click();
     calendarHomePage.verifyIsNotPresentEventTask(titleEventCur,
                                                  CalendarHomePage.selectViewOption.LIST,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
@@ -279,7 +281,7 @@ public class CalendarViewTestIT extends Base {
     calendarHomePage.verifyIsPresentEventTask(titleEventPre,
                                               CalendarHomePage.selectViewOption.LIST,
                                               CalendarHomePage.selectDayOption.ALLDAY);
-    $(ELEMENT_TODAY_ACTION_BAR).click();
+    $(ELEMENT_TODAY_ACTION_BAR).waitUntil(Condition.visible, Configuration.timeout).click();
     calendarHomePage.deleteEventTask(titleEventCur,
                                      CalendarHomePage.selectViewOption.WEEK,
                                      CalendarHomePage.selectDayOption.ALLDAY,

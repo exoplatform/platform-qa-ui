@@ -63,9 +63,9 @@ public class CalendarHomePage {
         ELEMENT_CALENDAR_LIST_BUTTON.click();
         break;
       case MONTH:
-        $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"))).waitUntil(Condition.visible,Configuration.timeout);
-        $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
-        $(byXpath(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Month"))).waitUntil(Condition.visible,Configuration.collectionsTimeout);
+        sleep(Configuration.timeout);
+        $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        $(byXpath(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Month"))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
         break;
       case WORKWEEK:
         $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Work Week"))).waitUntil(Condition.visible,Configuration.timeout).click();
@@ -175,15 +175,16 @@ public class CalendarHomePage {
         $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE_ICON.replace("$date", date))).click();
         $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE.replace("$name", name).replace("$date",
                 date))).scrollTo().contextClick();}
-      if ($(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))).is(Condition.not(Condition.visible)))
-        $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE.replace("$name", name).replace("$date",
+      if ($(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))).is(Condition.not(Condition.visible))) {
+        $(byXpath("(//*[@data-original-title='Next Month']//i)[2]")).waitUntil(Condition.visible, Configuration.timeout).click();
+        $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date",
                 date))).contextClick();
-      else {
-        homePagePlatform.refreshUntil($(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))),Condition.visible,1000);
-        $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))).contextClick();
-
       }
-
+      else
+      {
+        $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date",
+                date))).contextClick();
+      }
     }
     else {
       homePagePlatform.refreshUntil($(byXpath(ELEMENT_EVENT_TASK_MONTH_VIEW.replace("$name", name))),Condition.visible,1000);
@@ -216,9 +217,8 @@ public class CalendarHomePage {
         if( $(byId("UIListUsers")).find(byText(name)).is(Condition.not(Condition.visible))){
           ELEMENT_NEXT_RIGHT_LIST_DAY_BUTTON.click();
         }
-        $(ELEMENT_ACCOUNT_NAME_LINK).click();
-        $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
-        $(byText(name)).waitUntil(Condition.visible,Configuration.timeout).contextClick();
+        $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible, Configuration.timeout).click();
+        $(byText(name)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).contextClick();
       }
     } else {
       if ($(ELEMENT_TOTAL_PAGE).is(Condition.visible)) {
@@ -328,7 +328,7 @@ public class CalendarHomePage {
         goToRightMenuTaskEventFromDayView(name, optionDay);
         break;
     }
-    $(ELEMENT_CONTEXT_MENU_EDIT).click();
+    $(ELEMENT_CONTEXT_MENU_EDIT).waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_EVENT_DRAWER.waitUntil(Condition.appears, Configuration.timeout);
   }
 
@@ -503,6 +503,21 @@ public class CalendarHomePage {
             break;
         }
         break;
+    }
+  }
+
+  /**
+   * Delete an event by search
+   *
+   * @param name name of event
+   */
+  public void deleteEventBySearch(String name) {
+    if (!name.isEmpty()) {
+      info("Input key search");
+      $(ELEMENT_EVENT_TASK_QUICK_SEARCH).waitUntil(Condition.visible,Configuration.timeout).setValue(name);
+      $(ELEMENT_EVENT_TASK_SEARCH_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
+
+      $(ELEMENT_EVENT_TASK_TITLE.replace("${name}", name)).waitUntil(Condition.visible,Configuration.timeout);
     }
   }
 
@@ -962,6 +977,7 @@ public class CalendarHomePage {
         break;
       case MONTH:
         goToRightMenuTaskEventFromMonthView(name, date);
+        sleep(2000);
         break;
       case WORKWEEK:
         goToRightMenuTaskEventFromWorkWeekView(name, optionDay, date);

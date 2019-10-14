@@ -24,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
 
 public class EventManagement {
   private final TestBase testBase;
@@ -228,10 +229,24 @@ public class EventManagement {
     if (allDay) {
       info("Check all day, then select date");
       evt.check(ELEMENT_QUICK_CHECKBOX_EVENT_ALLDAY, 2);
-      if ((from != null) & (from != ""))
-        evt.type(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE, from, true);
-      if ((to != null) & (to != ""))
-        evt.type(ELEMENT_QUICK_INPUT_EVENT_TO_DATE, to, true);
+      if ((from != null) & (from != "")) {
+        String[] dateTimeFrom = from.split(" ");
+        if (dateTimeFrom.length > 0)
+          for(int i=0; i<=11; i++)
+          {
+            $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).waitUntil(Condition.visible,Configuration.timeout).sendKeys(Keys.BACK_SPACE);
+          }
+        $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).setValue(dateTimeFrom[0]);
+      }
+      if ((to != null) & (to != "")) {
+        String[] dateTimeTo = to.split(" ");
+        if (dateTimeTo.length > 0)
+          for(int k=0; k<=11; k++)
+          {
+            $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).waitUntil(Condition.visible,Configuration.timeout).sendKeys(Keys.BACK_SPACE);
+          }
+        $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).sendKeys(dateTimeTo[0]);
+      }
 
     } else {
       info("Uncheck all day, then select date time");
@@ -239,9 +254,13 @@ public class EventManagement {
       if ((from != null) & (from != "")) {
         String[] dateTimeFrom = from.split(" ");
         if (dateTimeFrom.length > 0)
-         $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).sendKeys(dateTimeFrom[0]);
-        $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).click();
+        for(int i=0; i<=11; i++)
+          {
+            $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).waitUntil(Condition.visible,Configuration.timeout).sendKeys(Keys.BACK_SPACE);
+          }
+         $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).setValue(dateTimeFrom[0]);
         $(byXpath("(//input[@class='cbb_input'])[1]")).waitUntil(Condition.visible,Configuration.timeout).setValue(dateTimeFrom[1]);
+
         if (dateTimeFrom.length > 1) {
           $(ELEMENT_QUICK_INPUT_EVENT_FROM_TIME_INPUT).waitUntil(Condition.visible,Configuration.timeout).click();
         }
@@ -249,8 +268,11 @@ public class EventManagement {
       if ((to != null) & (to != "")) {
         String[] dateTimeTo = to.split(" ");
         if (dateTimeTo.length > 0)
-          $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).sendKeys(dateTimeTo[0]);
-        $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).click();
+        for(int k=0; k<=11; k++)
+        {
+          $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).waitUntil(Condition.visible,Configuration.timeout).sendKeys(Keys.BACK_SPACE);
+        }
+        $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).sendKeys(dateTimeTo[0]);
         $(byXpath("(//input[@class='cbb_input'])[2]")).waitUntil(Condition.visible,Configuration.timeout).setValue(dateTimeTo[1]);
         if (dateTimeTo.length > 1) {
           $(ELEMENT_QUICK_INPUT_EVENT_TO_TIME_INPUT).waitUntil(Condition.visible,Configuration.timeout).click();
@@ -701,8 +723,7 @@ public class EventManagement {
    */
   public void saveQuickAddEvent() {
     info("Save quick add event");
-    ELEMENT_BUTTON_EVENT_SAVE.waitUntil(Condition.appears, Configuration.collectionsTimeout);
-    ELEMENT_BUTTON_EVENT_SAVE.click();
+    ELEMENT_BUTTON_EVENT_SAVE.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_BUTTON_EVENT_SAVE.waitUntil(Condition.disappears, Configuration.timeout);
   }
   /**
