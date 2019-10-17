@@ -1,0 +1,14 @@
+version: '2'
+services:
+  hub:
+    image: 'selenium/hub:3.11.0'
+  node_firefox:
+    image: 'selenium/node-firefox:3.11.0'
+    environment:
+      NODE_MAX_SESSION: 1
+      NODE_MAX_INSTANCES: 1
+  node_chrome:
+    image: 'selenium/node-chrome:3.11.0'
+    environment:
+      NODE_MAX_SESSION: 1
+      NODE_MAX_INSTANCES: 1
