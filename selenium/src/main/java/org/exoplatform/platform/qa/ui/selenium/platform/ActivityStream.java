@@ -6,6 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -1628,7 +1629,7 @@ public class ActivityStream {
         // get the id of activity created
         info("-- Editing an activity--");
         homePagePlatform.refreshUntil($(byText(text)), Condition.visible, 500);
-        String idActivity = $(byText(text)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        String idActivity = $(byText(text)).parent().parent().parent().parent().getAttribute("id").split("ActivityContextBox")[1];
         $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).waitUntil(Condition.visible,Configuration.timeout).click();
         $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}", idActivity))).waitUntil(Condition.visible,Configuration.timeout).click();
         ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible,Configuration.timeout).click();
@@ -1899,4 +1900,48 @@ public class ActivityStream {
     public enum activitiesFormat {
         Add_FormattingBOLD, Add_FormattingITALIC, Add_FormattingQuote, Add_Formtting_numbred_List, Add_Formtting_Bulled_List, Add_FormttingRemoveFormat, Add_Formtting_Image, Add_Formtting_Link;
     }
+
+
+    /**
+     * Upload file from Activity Stream
+     */
+    public void UploadFileFromAS(String NameFile) {
+        ELEMENT_TAB_LINK.click();
+        refresh();
+        ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.timeout);
+        ELEMENT_INPUT_DOCUMENT.uploadFromClasspath(NameFile);
+        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
+        $(ELEMENT_COMPOSER_SHARE_BUTTON).should(Condition.be(Condition.enabled));
+        $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
+    }
+
+
+    /**
+     * OpenEditOnlineFromDocumentPreview
+     */
+    public void OpenEditOnlineFromDocumentPreview (String Document) {
+        String idActivity = $(byText(Document)).parent().parent().parent().parent().getAttribute("id");
+        $(byId(idActivity)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        Assert.assertEquals(ELEMENT_OPEN_DOCUMENT_PREVIEW.getText(),Document);
+        ELEMENT_EDIT_ONLINE_BUTTON_FROM_PREVIEW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    }
+
+    /**
+     * Delete document from AS
+     */
+    public void DeleteDocumentFromAS (String Document) {
+        homePagePlatform.refreshUntil($(byText(Document)), Condition.visible, 500);
+        String idActivity2 = $(byText(Document)).parent().parent().parent().parent().getAttribute("id").split("MediaName")[1].split("0")[0];    $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity2))).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}", idActivity2))).waitUntil(Condition.visible,Configuration.timeout).click();
+        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible,Configuration.timeout).click();
+        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+        $(byText(Document)).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    }
+
+
+
+
+
+
+
 }

@@ -1618,7 +1618,7 @@ public class SiteExplorerHome {
    * Click on Edit Online button
    */
   public void clickEditOnine() {
-    $(byText("Edit Online")).click();
+    $(ELEMENT_EDIT_ONlINE_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   /**
@@ -1635,7 +1635,7 @@ public class SiteExplorerHome {
    */
   public void clickDeleteButtonDocument() {
     info("click on Delete button for Document");
-    $(byText("Delete")).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_DELETE_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_DELETE_POPUP_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
