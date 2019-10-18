@@ -70,8 +70,15 @@ public class OnlyOfficeTestIT extends Base {
     switchTo().window(1);
     siteExplorerHome.clickEditOnine();
     switchTo().window(2);
-    switchTo().frame(0);
-    $(byText(Document + ".docx")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+
+    // check toolbar here
+    $(byText(Document + ".docx")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+
+    // check document editor here
+    $(byClassName("editor")).should(Condition.exist);
+    switchTo().frame("frameEditor");
+    $(byId("title-user-name")).shouldHave(Condition.exactText("Root Root"));
+
     switchTo().window(2).close();
     switchTo().window(1).close();
     switchTo().window(0);
