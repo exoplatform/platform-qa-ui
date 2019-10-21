@@ -741,9 +741,7 @@ public final class ActivityStreamLocator {
 
 
     public static final SelenideElement ELEMENT_ACTIVITY_STREAM_HEADING=$(byClassName("heading"));
-    public static final SelenideElement ELEMENT_EDIT_ONLINE_BUTTON_FROM_AS = $(byXpath("//i[@class='uiIconEcmsOnlyofficeOpen uiIconEcmsLightGray uiIconEdit']"));
     public static final SelenideElement ELEMENT_OPEN_DOCUMENT_PREVIEW =  $(byXpath("//div[@class='ellipsis']"));
-    public static final SelenideElement ELEMENT_EDIT_ONLINE_BUTTON_FROM_PREVIEW = $(byXpath("//div[@class='onlyOfficeEditBtn']//i[@class='uiIconEcmsOnlyofficeOpen uiIconEcmsLightGray uiIconEdit']"));
     public static final SelenideElement ELEMENT_OPEN_DOCUMENT_PREVIEW1 = $(byXpath("(//*[@class='infoFile'])[1]"));
     public static final SelenideElement ELEMENT_CLOSE_DOCUMENT_PREVIEW1 = $(byXpath("//a[@class='uiIconClose uiIconWhite']"));
 

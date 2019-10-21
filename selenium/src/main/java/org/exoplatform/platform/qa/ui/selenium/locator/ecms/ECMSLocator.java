@@ -1223,7 +1223,6 @@ public class ECMSLocator {
    public static final By ELEMENT_DELETE_POPUP_BUTTON =
           By.xpath("//div[@class='uiAction uiActionBorder']/button[1]");
 
-   public static final By ELEMENT_EDIT_ONlINE_BUTTON =
-          By.xpath("//*[@class='uiIconEcmsOnlyofficeOpen uiIconEcmsLightGray uiIconEdit']");
+
 
 }

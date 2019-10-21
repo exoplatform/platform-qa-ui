@@ -26,6 +26,8 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarL
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_DELETE_COMMENT_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
+import static org.exoplatform.platform.qa.ui.selenium.locator.onlyOffice.OnlyOfficeLocator.*;
+
 
 public class ActivityStream {
     private final TestBase testBase;

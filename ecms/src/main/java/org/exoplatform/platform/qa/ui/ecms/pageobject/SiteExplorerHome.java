@@ -1606,20 +1606,15 @@ public class SiteExplorerHome {
   }
 
 
+
+
+
+
   /**
    * Click on View Document button
    */
   public void clickViewDocumentButton() {
-    //$(byXpath("//i [@class='uiIconEcmsPermlink']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    $(byClassName("uiIconEcmsPermlink")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-  }
-
-
-  /**
-   * Click on Edit Online button
-   */
-  public void clickEditOnine() {
-    $(ELEMENT_EDIT_ONlINE_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byClassName("uiIconEcmsPermlink")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
