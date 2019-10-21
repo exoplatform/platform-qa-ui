@@ -342,14 +342,15 @@ public class EcmsSEBasicActionTestIT extends Base {
     public void test10_PasteClipboard() {
 
         String titleCommonNode = "titlecommonnode" + getRandomNumber();
+        String titleCommonNodeCopy = titleCommonNode + "(1)";
 
         navigationToolbar.goToSiteExplorer();
-        click(ELEMENT_SIDEBAR_SITES_MANAGEMENT);
+        $(ELEMENT_SIDEBAR_SITES_MANAGEMENT).waitUntil(Condition.visible,Configuration.timeout);
         siteExplorerHome.goToAddNewContent();
         createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
         createNewDocument.addNewWebContent(titleCommonNode, titleCommonNode);
         createNewDocument.saveAndClose();
-
+        sleep(3000);
         // clean the clipboard
         $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNode))).waitUntil(Condition.visible,Configuration.collectionsTimeout).contextClick();
         $(ELEMENT_SITEEXPLORER_ACTION_COPY).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
@@ -373,9 +374,10 @@ public class EcmsSEBasicActionTestIT extends Base {
         $(ELEMENT_SITEEXPLORER_ACTION_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
         $(byXpath("//span[@class='PopupTitle popupTitle' and contains(text(),'Delete')]")).dragAndDropTo($(byXpath("//div[@class='UITableColumnContainer']")));
         $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
-        $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNode))).waitUntil(Condition.visible, Configuration.timeout);
+        sleep(3000);
+        $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNodeCopy))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).isDisplayed();
 
-        siteExplorerHome.deleteData(titleCommonNode);
+        siteExplorerHome.deleteData(titleCommonNodeCopy);
     }
 
 }

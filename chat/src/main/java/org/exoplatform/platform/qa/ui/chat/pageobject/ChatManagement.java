@@ -251,11 +251,11 @@ public class ChatManagement {
     $(ELEMENT_CHAT_TASK_NAME).setValue(task);
     for (int i = 0; i <= users.length - 1; i++) {
       ELEMENT_CHAT_ASSIGNEE_TASK.setValue(users[i]);
-      ELEMENT_CHAT_RESULT_SEARCH_ASSIGNEE.waitUntil(Condition.visible, Configuration.timeout);
+      ELEMENT_CHAT_RESULT_SEARCH_ASSIGNEE.waitUntil(Condition.visible, Configuration.collectionsTimeout);
       ELEMENT_CHAT_ASSIGNEE_TASK.waitUntil(Condition.visible, Configuration.timeout).pressEnter();
     }
       ELEMENT_CHAT_DUE_DATE_TASK.waitUntil(Condition.visible,Configuration.timeout).click();
-      ELEMENT_CHAT_CURRENT_DATE_TASK.waitUntil(Condition.visible,Configuration.timeout).click();
+      ELEMENT_CHAT_CURRENT_DATE_TASK.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
       ELEMENT_CHAT_POST_TASK_BUTTON.waitUntil(Condition.visible,Configuration.timeout).click();
       ELEMENT_CONTAINER_LIST_MESSAGES.find(byLinkText(task)).shouldBe(Condition.visible);
     }

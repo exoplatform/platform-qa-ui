@@ -234,7 +234,7 @@ public class EventManagement {
         if (dateTimeFrom.length > 0)
           for(int i=0; i<=11; i++)
           {
-            $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).waitUntil(Condition.visible,Configuration.timeout).sendKeys(Keys.BACK_SPACE);
+            $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).sendKeys(Keys.BACK_SPACE);
           }
         $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).setValue(dateTimeFrom[0]);
       }
@@ -243,7 +243,7 @@ public class EventManagement {
         if (dateTimeTo.length > 0)
           for(int k=0; k<=11; k++)
           {
-            $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).waitUntil(Condition.visible,Configuration.timeout).sendKeys(Keys.BACK_SPACE);
+            $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).sendKeys(Keys.BACK_SPACE);
           }
         $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).sendKeys(dateTimeTo[0]);
       }
@@ -256,6 +256,7 @@ public class EventManagement {
         if (dateTimeFrom.length > 0)
         for(int i=0; i<=11; i++)
           {
+            $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).isDisplayed();
             $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).waitUntil(Condition.visible,Configuration.timeout).sendKeys(Keys.BACK_SPACE);
           }
          $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).setValue(dateTimeFrom[0]);
@@ -270,6 +271,7 @@ public class EventManagement {
         if (dateTimeTo.length > 0)
         for(int k=0; k<=11; k++)
         {
+          $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).isDisplayed();
           $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).waitUntil(Condition.visible,Configuration.timeout).sendKeys(Keys.BACK_SPACE);
         }
         $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).sendKeys(dateTimeTo[0]);

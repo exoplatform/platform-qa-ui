@@ -175,11 +175,11 @@ public class SiteExplorerHome {
     info("Click on File Explorer icon");
     // scroll de 50 pixel
     executeJavaScript("window.scrollBy(0,50);", "");
-    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
+    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     sleep(Configuration.collectionsTimeout);
     info("Right click on nodename");
     executeJavaScript("window.scrollBy(0,-250)", "");
-    $(byXpath("//div[@id='UITreeExplorer']//i[@title='${title}']".replace("${title}",title))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(byXpath("//div[@id='UITreeExplorer']//i[@title='${title}']".replace("${title}",title))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_CONTENT_LIST.find(byLinkText(title)).waitUntil(Condition.visible,Configuration.timeout).contextClick();
     executeJavaScript("window.scrollBy(0,100);", "");

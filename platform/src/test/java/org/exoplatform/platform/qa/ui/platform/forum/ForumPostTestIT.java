@@ -143,10 +143,10 @@ public class ForumPostTestIT extends Base {
     info("Click on delete button of the post that is replied");
     $(byText(content)).parent().parent().parent().parent().find(ELEMENT_BUTTON_DELETE_POST).click();
     info("Click on OK button of the confirm popup");
-    $(ELEMENT_DELETE_BOX_CONFIRMATION).click();
+    $(ELEMENT_DELETE_BOX_CONFIRMATION).waitUntil(visible,Configuration.timeout).click();
     info("Verify that the replied post is deleted");
     $(ELEMENT_POST_IN_TOPIC).find(byText(title)).shouldNot(Condition.exist);
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(visible,Configuration.timeout).click();
     info("Delete data");
     deletaData();
   }

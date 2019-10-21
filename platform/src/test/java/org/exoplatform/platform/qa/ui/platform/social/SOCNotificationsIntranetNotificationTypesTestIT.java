@@ -2178,8 +2178,8 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
                     + username2 + " have commented a post."));
     info("Check comment notification in the View All");
     intranetNotification.goToAllNotification();
-    $(byId("UINotificationPopoverToolbarPortlet")).find(byText(comment2))
-                                             .parent()
+    $(byClassName("media")).waitUntil(visible,Configuration.timeout).find(byText(comment2))
+                                             .waitUntil(visible,Configuration.timeout).parent()
                                              .parent()
                                              .parent()
                                              .shouldHave(Condition.text(username3 + " " + username3 + " and " + username2 + " "

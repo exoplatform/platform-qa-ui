@@ -105,7 +105,7 @@ public class WikiHomePage {
         sleep(2000);
         $(ELEMENT_DELETE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
         sleep(2000);
-        $(ELEMENT_CONFIRM_WIKI_DELETE).click();
+        $(ELEMENT_CONFIRM_WIKI_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
         $(byText(title)).shouldNot(Condition.exist);
 
     }

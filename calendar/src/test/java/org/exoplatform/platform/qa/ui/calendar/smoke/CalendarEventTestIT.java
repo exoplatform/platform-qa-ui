@@ -72,8 +72,8 @@ public class CalendarEventTestIT extends Base {
     eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM/dd/yyyy"),
-                                              getDate(0, "MM/dd/yyyy"),
+                                              getDate(0, "MM-dd-yyyy"),
+                                              getDate(0, "MM-dd-yyyy"),
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,

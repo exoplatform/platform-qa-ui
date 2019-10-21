@@ -255,8 +255,8 @@ public class EcmsSEAdminTestIT extends Base {
     if ($(byId("exportNode")).is(Condition.not(Condition.selected))) {
       $(byId("exportNode")).parent().click();
     }
-    $(ELEMENT_ECM_EXPORER_ACTIONS_POPUP_SAVE_BUTTON).click();
-    $(ELEMENT_ECM_EXPLORER_EDIT_VIEWS_SAVE_BUTTON).click();
+    $(ELEMENT_ECM_EXPORER_ACTIONS_POPUP_SAVE_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_ECM_EXPLORER_EDIT_VIEWS_SAVE_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Add New folder");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("sites/intranet/documents", "Collaboration");
@@ -268,21 +268,21 @@ public class EcmsSEAdminTestIT extends Base {
     info("Select folder");
     siteExplorerHome.selectNode(node1);
     executeJavaScript("window.scrollBy(0,-5500)", "");
-    $(byClassName("uiIconEcmsViewAdmin")).click();
+    $(byClassName("uiIconEcmsViewAdmin")).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Export a node");
     siteExplorerHome.goToExportNode();
     siteExplorerHome.exportNode(true, false);
     info("Delete all data test");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("sites/intranet/documents", "Collaboration");
-    $(byClassName("uiIconEcmsViewWeb")).click();
-    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_CONTENT_LIST.find(byLinkText(node1)).contextClick();
     info("Click on Delete link");
-    $(ELEMENT_SITEEXPLORER_ACTION_DELETE).click();
+    $(ELEMENT_SITEEXPLORER_ACTION_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Click on Delete button on Confirm popup");
-    $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).click();
+    $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
 
   }
 

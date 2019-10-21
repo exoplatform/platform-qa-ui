@@ -71,8 +71,8 @@ public class NavigationToolbar {
     info("Go to add page form");
     $(ELEMENT_LINK_EDIT).click();
     $(ELEMENT_MENU_PAGE_LINK).hover();
-    $(ELEMENT_MENU_ADD_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
-    $(ELEMENT_PAGE_CREATION_WIZARD).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_MENU_ADD_PAGE_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_PAGE_CREATION_WIZARD).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
   }
 
   /**
@@ -569,7 +569,7 @@ public class NavigationToolbar {
     sleep(Configuration.timeout);
     ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, 10000);
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
   }
 
   /**

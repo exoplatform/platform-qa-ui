@@ -477,7 +477,7 @@ public class ActivityStream {
         SelenideElement frame = $(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible, Configuration.collectionsTimeout);
         $(ELEMENT_ACCOUNT_NAME_LINK).click();
         switchTo().frame(frame);
-        ELEMENT_INPUT_ACTIVITY.click();
+        ELEMENT_INPUT_ACTIVITY.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         ELEMENT_INPUT_ACTIVITY.sendKeys(text);
         switchTo().defaultContent();
     }
@@ -620,10 +620,10 @@ public class ActivityStream {
         SelenideElement frame = $(byAttribute("title",
                 "Rich Text Editor, composerEditInput" + idActivity)).waitUntil(Condition.visible,
                 Configuration.timeout);
-        $(ELEMENT_ACCOUNT_NAME_LINK).click();
+        $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
         switchTo().frame(frame);
-        ELEMENT_INPUT_ACTIVITY.click();
-        ELEMENT_INPUT_ACTIVITY.sendKeys(newtext);
+        ELEMENT_INPUT_ACTIVITY.waitUntil(Condition.visible,Configuration.timeout).click();
+        ELEMENT_INPUT_ACTIVITY.waitUntil(Condition.visible,Configuration.timeout).sendKeys(newtext);
         switchTo().defaultContent();
         $(byId(ELEMENT_BUTTON_UPDATE_ACTIVITY.replace("{id}", idActivity))).waitUntil(Condition.enabled, Configuration.timeout)
                 .click();
@@ -1377,7 +1377,7 @@ public class ActivityStream {
         // click on comment link
         $(byText(activity)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
         // insert comment
-        $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
+        $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
         executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
         // click on the button comment
         $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.visible,Configuration.timeout).pressEnter()

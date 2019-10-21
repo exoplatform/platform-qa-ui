@@ -128,13 +128,13 @@ public class SOCPeopleProfileDynContainersTestIT extends Base {
     navigationToolbar.goToMyProfile();
 
     info("goto edit profile");
-    click(ELEMENT_EDIT_MY_PROFILE_LINK);
+    $(ELEMENT_EDIT_MY_PROFILE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
 
     info("goto edit layout");
     navigationToolbar.goToEditLayout();
 
     info("switch to tab container");
-    $(ELEMENT_CONTAINER_TAB).click();
+    $(ELEMENT_CONTAINER_TAB).waitUntil(Condition.visible,Configuration.timeout).click();
 
     info("goto edit container");
     $(byXpath(ELEMENT_CONTAINER_ID.replace("${id}", action_editprofile))).waitUntil(Condition.visible, Configuration.timeout);

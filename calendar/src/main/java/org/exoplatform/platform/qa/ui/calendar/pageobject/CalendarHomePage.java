@@ -435,13 +435,13 @@ public class CalendarHomePage {
       case DAY:
         switch (optionDay) {
           case DETAILTIME:
-            $(byText(name)).waitUntil(Condition.appears, Configuration.collectionsTimeout);
+            $(byText(name)).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
             break;
           case ALLDAY:
-            $(byXpath(ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY.replace("$name", name))).waitUntil(Condition.visible,Configuration.collectionsTimeout);
+            $(byXpath(ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY.replace("$name", name))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
             break;
           default:
-            $(byXpath(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name))).waitUntil(Condition.visible,Configuration.timeout);
+            $(byXpath(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
             break;
         }
 
