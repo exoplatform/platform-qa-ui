@@ -47,7 +47,6 @@ public class OnlyOfficeTestIT extends Base {
     navigationToolbar           =new NavigationToolbar(this);
     siteExplorerHome =new SiteExplorerHome(this);
     manageLogInOut = new ManageLogInOut(this);
-    //manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
     spaceManagement             =new SpaceManagement(this);
 
     activityStream      =new ActivityStream(this);
@@ -59,39 +58,43 @@ public class OnlyOfficeTestIT extends Base {
   }
 
   @Test
-  public void EditOnline_BTN_US01 () {
-    String Document = "OO_test";
+  public void EditOnlineDocumentFromDocumentsApp () {
+    String document = "OO_test";
     info("Upload document");
     homePagePlatform.goToDocuments();
-    siteExplorerHome.uploadFile(Document + ".docx");
+    siteExplorerHome.uploadFile(document + ".docx");
     info("Open document");
-    siteExplorerHome.checkButtonDocument(Document);
+    siteExplorerHome.checkButtonDocument(document);
     siteExplorerHome.clickViewDocumentButton();
     switchTo().window(1);
     siteExplorerHome.clickEditOnine();
     switchTo().window(2);
-    switchTo().frame(0);
-    $(byText(Document + ".docx")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+    // check toolbar here
+    $(byText(document + ".docx")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    // check document editor here
+    $(byClassName("editor")).should(Condition.exist);
+    switchTo().frame("frameEditor");
+    $(byId("title-user-name")).shouldHave(Condition.exactText("Root Root"));
     switchTo().window(2).close();
     switchTo().window(1).close();
     switchTo().window(0);
     info("Delete document");
-    siteExplorerHome.checkButtonDocument(Document);
+    siteExplorerHome.checkButtonDocument(document);
     siteExplorerHome.clickDeleteButtonDocument();
     manageLogInOut.signOut();
   }
 
 
   @Test
-  public void EditOnline_BTN_US02 () {
-    String Document = "OO_test.docx";
-    String space_test = "space_1_"+getRandomNumber();
+  public void EditOnlineDocumentFromActivityStreamFromSpaceASFromPreview () {
+    String document = "OO_test.docx";
+    String spaceTestName = "space_1_"+getRandomNumber();
     info("Edit Online from document from AS");
-    activityStream.UploadFileFromAS(Document);
-    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc",Document))),Condition.visible,Configuration.timeout);
+    activityStream.uploadFileFromAS(document);
+    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc",document))),Condition.visible,Configuration.timeout);
     ELEMENT_EDIT_ONLINE_BUTTON_FROM_AS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     switchTo().window(1);
-    $(byText(Document)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byText(document)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     switchTo().window(1).close();
     switchTo().window(0);
     refresh();
@@ -103,22 +106,22 @@ public class OnlyOfficeTestIT extends Base {
     switchTo().window(1).close();
     switchTo().window(0);
     ELEMENT_CLOSE_DOCUMENT_PREVIEW1.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
-    activityStream.DeleteDocumentFromAS(Document);
+    activityStream.deleteDocumentFromAS(document);
     info("Edit Online document from Space AS");
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space_test,"test",5000);
-    activityStream.UploadFileFromAS(Document);
-    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc",Document))),Condition.visible,Configuration.timeout);
+    spaceManagement.addNewSpaceSimple(spaceTestName,"test",5000);
+    activityStream.uploadFileFromAS(document);
+    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc",document))),Condition.visible,Configuration.timeout);
     ELEMENT_EDIT_ONLINE_BUTTON_FROM_AS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     switchTo().window(1);
-    $(byText(Document)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byText(document)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     switchTo().window(1).close();
     switchTo().window(0);
     homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space_test,false);
+    spaceManagement.deleteSpace(spaceTestName,false);
     info("Edit Online document from Document Application");
     homePagePlatform.goToDocuments();
-    siteExplorerHome.uploadFile(Document);
+    siteExplorerHome.uploadFile(document);
     siteExplorerHome.checkButtonDocument("OO_test");
     siteExplorerHome.clickViewDocumentButton();
     switchTo().window(1);

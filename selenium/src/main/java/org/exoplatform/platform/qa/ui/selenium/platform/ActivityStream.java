@@ -1905,7 +1905,7 @@ public class ActivityStream {
     /**
      * Upload file from Activity Stream
      */
-    public void UploadFileFromAS(String NameFile) {
+    public void uploadFileFromAS(String NameFile) {
         ELEMENT_TAB_LINK.click();
         refresh();
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.timeout);
@@ -1929,7 +1929,7 @@ public class ActivityStream {
     /**
      * Delete document from AS
      */
-    public void DeleteDocumentFromAS (String Document) {
+    public void deleteDocumentFromAS (String Document) {
         homePagePlatform.refreshUntil($(byText(Document)), Condition.visible, 500);
         String idActivity2 = $(byText(Document)).parent().parent().parent().parent().getAttribute("id").split("MediaName")[1].split("0")[0];    $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity2))).waitUntil(Condition.visible,Configuration.timeout).click();
         $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}", idActivity2))).waitUntil(Condition.visible,Configuration.timeout).click();

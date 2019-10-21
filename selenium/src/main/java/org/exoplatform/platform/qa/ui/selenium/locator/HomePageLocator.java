@@ -21,6 +21,7 @@
 package org.exoplatform.platform.qa.ui.selenium.locator;
 
 import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 
 import org.openqa.selenium.By;

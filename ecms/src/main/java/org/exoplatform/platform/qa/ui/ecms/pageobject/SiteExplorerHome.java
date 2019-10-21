@@ -330,7 +330,7 @@ public class SiteExplorerHome {
   public void uploadFile(String link, Object... params) {
     Boolean verify = (Boolean) (params.length > 0 ? params[0] : true);
     sleep(2000);
-   $(byId("MultiUploadInputFiles")).uploadFromClasspath(link);
+    $(byId("MultiUploadInputFiles")).uploadFromClasspath(link);
     sleep(Configuration.collectionsTimeout);
     refresh();
     info("verify:" + verify);
@@ -1610,7 +1610,8 @@ public class SiteExplorerHome {
    * Click on View Document button
    */
   public void clickViewDocumentButton() {
-    $(byText("View Document")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    //$(byXpath("//i [@class='uiIconEcmsPermlink']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byClassName("uiIconEcmsPermlink")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
 
