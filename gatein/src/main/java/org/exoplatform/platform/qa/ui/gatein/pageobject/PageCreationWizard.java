@@ -520,13 +520,13 @@ public class PageCreationWizard {
                                boolean... isShowMaxWindow) {
     if (!title.isEmpty()) {
       info("Input new title");
-      $(ELEMENT_VIEW_PROPERTIES_TITLE).setValue(title);
+      $(ELEMENT_VIEW_PROPERTIES_TITLE).waitUntil(Condition.visible,Configuration.collectionsTimeout).setValue(title);
 
     }
     if (!groupsPath.isEmpty()) {
       info("Select a group");
 
-      $(ELEMENT_VIEW_PROPERTIES_PERMISSION_TAB).click();
+      $(ELEMENT_VIEW_PROPERTIES_PERMISSION_TAB).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
       if (isAccessPermision == true) {
         // evt.click(ELEMENT_VIEW_PROPERTIES_ADD_PERMISSION_BTN);
         $(ELEMENT_VIEW_PROPERTIES_ADD_PERMISSION_BTN).click();
@@ -538,9 +538,9 @@ public class PageCreationWizard {
 
       if (isEditPermission == true) {
         info("Select Edit permission settings tab");
-        $(ELEMENT_VIEW_PROPERTIES_EDIT_PERMISSITION_SETTINGS).click();
+        $(ELEMENT_VIEW_PROPERTIES_EDIT_PERMISSITION_SETTINGS).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
         info("Click on Select permission button");
-        $(ELEMENT_VIEW_PROPERTIES_SELECT_PERMISSION_BTN).click();
+        $(ELEMENT_VIEW_PROPERTIES_SELECT_PERMISSION_BTN).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
         selectGroupEditTab(groupsPath);
         info("Select a meberships");
         selectMemberShipEditTab(memberShips);
@@ -574,7 +574,7 @@ public class PageCreationWizard {
       info("Select group:" + groupSelect);
       // evt.click(ELEMENT_ADD_PERMISSION_SELECTOR_POPUP_GROUP.replace("${group}",
       // groupSelect), 0, true);
-      $(byTitle(groupSelect)).click();
+      $(byXpath("(//*[@title='${groupSelect}'])[2]".replace("${groupSelect}",groupSelect))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     }
 
   }

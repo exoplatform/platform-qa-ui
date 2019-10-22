@@ -6,6 +6,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -162,7 +163,6 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
     pagecreationwizard.saveChangesPageEditor();
     if (!titleActual.equals(newTitlePage))
       assert false : "The title:" + newTitlePage + " is not updated";
-    $(ELEMENT_NAVIGATION_MANAGEMENT_SAVE).click();
     navigationToolbar.goToPotalSites();
     portalmanagesites.goToEditNavigation();
 

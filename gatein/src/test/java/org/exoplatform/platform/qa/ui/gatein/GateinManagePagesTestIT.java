@@ -95,7 +95,7 @@ public class GateinManagePagesTestIT extends Base {
     portalmanagepages.editPage(title, "");
     pagecreationwizard.addApp("",
                               "Application Registry",
-                              $(byId("Administration/portlet_ApplicationRegistryPortlet")),
+                              $(byId("Administration/ApplicationRegistryPortlet")),
                               $(byClassName("VIEW-PAGE")));
     info("Verify that all changes of page is saved");
     portalmanagepages.editPage(title, "");
