@@ -465,7 +465,7 @@ public class CalendarPublishActivityTestIT extends Base {
 
     homePagePlatform.goToHomePage();
     $(byXpath(ELEMENT_ACTIVITY_TASK_EVENT_COMMENT.replace("$name", newTitleEvent).replace("$comment",
-                                                                                          comment))).should(Condition.visible);
+                                                                                          comment))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).exists();
 
     info("Clear data");
     homePagePlatform.goToCalendarPage();

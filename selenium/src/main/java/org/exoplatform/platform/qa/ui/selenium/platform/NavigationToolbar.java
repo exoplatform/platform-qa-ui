@@ -214,7 +214,7 @@ public class NavigationToolbar {
     do {
       $(ELEMENT_MENU_CONTENT_LINK).hover();
     } while (!$(ELEMENT_MENU_SITE_EXPLORER).exists());
-    $(ELEMENT_MENU_SITE_EXPLORER).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_MENU_SITE_EXPLORER).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     info("Site Explorer is shown successfully");
   }
 

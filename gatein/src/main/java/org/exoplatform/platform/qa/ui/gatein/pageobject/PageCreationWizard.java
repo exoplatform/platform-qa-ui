@@ -105,10 +105,8 @@ public class PageCreationWizard {
    * @param element SelenideElement
    */
   public void addApplication(SelenideElement tab, SelenideElement element) {
-    $(ELEMENT_APPLICATION_TAB_ACTIVE).click();
-    $(tab).click();
-
-    // evt.dragAndDropToObject(element, ELEMENT_PAGEEDITOR_VIEWPAGE);
+    $(ELEMENT_APPLICATION_TAB_ACTIVE).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(tab).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     element.dragAndDropTo($(byClassName("VIEW-PAGE")));
   }
 
@@ -122,9 +120,9 @@ public class PageCreationWizard {
    */
   public void addApp(String tabName, String nameApp, SelenideElement appLocator, SelenideElement layoutLocator) {
     info("Add an application to the layout");
-    $(ELEMENT_APPLICATION_TAB).click();
+    $(ELEMENT_APPLICATION_TAB).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     if (!tabName.isEmpty())
-      $(byText(tabName)).click();
+      $(byText(tabName)).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     $(appLocator).dragAndDropTo(layoutLocator);
 
     info("Verify that the application is shown in the layout");
@@ -175,7 +173,7 @@ public class PageCreationWizard {
    * @param content String
    */
   public void addContentDetail(String path, String content) {
-    addApplication($(byTitle("Content")), $(byId("Content/portlet_SingleContentViewer")));
+    addApplication($(byTitle("Content")), $(byId("Content/SingleContentViewer")));
 
     $(ELEMENT_PAGEEDITOR_VIEWPAGE).waitUntil(Condition.appears, Configuration.timeout).click();
     $(ELEMENT_CONTENT_DETAIL_EDIT_BTN).waitUntil(Condition.visible,Configuration.timeout).click();

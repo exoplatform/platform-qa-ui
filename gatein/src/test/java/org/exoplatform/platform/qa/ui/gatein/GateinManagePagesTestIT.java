@@ -5,6 +5,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -74,6 +75,7 @@ public class GateinManagePagesTestIT extends Base {
    */
 
   @Test
+  @BugInPLF("ECMS-7966")
   public void test10_EditPageOfPortal() {
     info("Test 10: Edit page of portal");
     String num = getRandomNumber();

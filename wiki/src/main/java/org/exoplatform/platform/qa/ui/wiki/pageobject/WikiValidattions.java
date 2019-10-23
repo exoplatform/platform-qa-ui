@@ -699,7 +699,7 @@ public class WikiValidattions {
         info("Verify that the wiki page is created and shown in the list");
         sleep(Configuration.collectionsTimeout);
         $(byXpath("//div[@id='iconTreeExplorer']/a[text()='${title}']".replace("${title}", " " + title))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-        $(byXpath("//div[@id='UITreeExplorer']/following::div[@id='titleInfo' and text()='${title}']".replace("${title}",title))).waitUntil(Condition.visible,Configuration.timeout);
+        $(byXpath("//div[@id='UITreeExplorer']/following::div[@id='titleInfo' and text()='${title}']".replace("${title}",title))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
         info("The wiki page is created successfully");
     }
     /**

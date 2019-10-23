@@ -61,8 +61,8 @@ public class CalendarManagement {
   public void goToMenuFromMainCalendar(menuOfMainCalendar action) {
     info("Select action from menu");
 
-    $(ELEMENT_CALENDAR_MENU_ACTIONS_ICON).click();
-    $(ELEMENT_CALENDAR_MENU).waitUntil(Condition.visible, Configuration.timeout);
+    $(ELEMENT_CALENDAR_MENU_ACTIONS_ICON).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_CALENDAR_MENU).waitUntil(Condition.visible, Configuration.collectionsTimeout);
     switch (action) {
       case ADDCAL:
         info("Go to add calendar");
@@ -340,7 +340,7 @@ public class CalendarManagement {
     $(ELEMENT_ADD_EVENT_CATEGORY_INPUT).setValue(newCategory);
     $(ELEMENT_ADD_EVENT_CATEGORY_INPUT).click();
     $(ELEMENT_EDIT_EVENT_CATEGORY_BUTTON_UPDATE).click();
-    $(byXpath(ELEMENT_LIST_EDIT_EVENT_BUTTON.replace("${categoryName}", newCategory))).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_LIST_EDIT_EVENT_BUTTON.replace("${categoryName}", newCategory))).waitUntil(Condition.visible,Configuration.collectionsTimeout);
     $(ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE).click();
   }
 

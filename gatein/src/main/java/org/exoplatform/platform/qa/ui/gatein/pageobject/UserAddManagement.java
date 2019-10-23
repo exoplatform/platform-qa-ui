@@ -61,7 +61,7 @@ public class UserAddManagement {
     $(ELEMENT_EMAIL).setValue(email);
     $(ELEMENT_FIRSTNAME).setValue(firstname);
     $(ELEMENT_LASTNAME).setValue(lastName);
-    $(ELEMENT_SAVE_ADD_USER).click();
+    $(ELEMENT_SAVE_ADD_USER).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
     $(byText("You have registered a new account.")).waitUntil(appears, 10000);
     $(byText("OK")).click();
     info("Finish adding an user");

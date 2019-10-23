@@ -328,7 +328,7 @@ public class CalendarHomePage {
         goToRightMenuTaskEventFromDayView(name, optionDay);
         break;
     }
-    $(ELEMENT_CONTEXT_MENU_EDIT).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_CONTEXT_MENU_EDIT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_EVENT_DRAWER.waitUntil(Condition.appears, Configuration.timeout);
   }
 
@@ -373,14 +373,14 @@ public class CalendarHomePage {
         break;
       case LIST:
         if ($(ELEMENT_TOTAL_PAGE).is(Condition.visible)) {
-          $(byXpath(ELEMENT_ANY_PAGE.replace("$page", "1"))).click();
+          $(byXpath(ELEMENT_ANY_PAGE.replace("$page", "1"))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
           while (!(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
                   .getText()
                   .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText()))) {
             evt.click(ELEMENT_NEXT_PAGE);
             evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
           }
-          evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
+          $(byXpath(ELEMENT_ANY_PAGE.replace("$page", "1"))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
         } else {
           evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
         }
@@ -449,7 +449,7 @@ public class CalendarHomePage {
       case WEEK:
         switch (optionDay) {
           case DETAILTIME:
-            $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
+            $(byText(name)).waitUntil(Condition.appears, Configuration.collectionsTimeout);
             break;
           case ALLDAY:
 
@@ -475,7 +475,7 @@ public class CalendarHomePage {
         }
         break;
       case MONTH:
-        $(byXpath(ELEMENT_EVENT_TASK_MONTH_VIEW.replace("$name", name))).waitUntil(Condition.visible,Configuration.timeout);
+        $(byXpath(ELEMENT_EVENT_TASK_MONTH_VIEW.replace("$name", name))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
         break;
       case WORKWEEK:
         switch (optionDay) {
