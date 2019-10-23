@@ -31,13 +31,13 @@ public class OnlyOfficeActivityStream{
      * Edit Online button from AS
      */
     public void editOnlineFromAS() {
-        ELEMENT_EDIT_ONLINE_BUTTON_FROM_AS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        ELEMENT_EDIT_ONlINE_BUTTON.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
 
     /**
      * Edit Online button from Preview Document
      */
     public void editOnlineFromPreviw() {
-        ELEMENT_EDIT_ONLINE_BUTTON_FROM_PREVIEW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        ELEMENT_EDIT_ONlINE_BUTTON.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
 }

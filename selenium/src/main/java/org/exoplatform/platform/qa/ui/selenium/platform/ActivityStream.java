@@ -1925,7 +1925,7 @@ public class ActivityStream {
         String idActivity = $(byText(document)).parent().parent().parent().parent().getAttribute("id");
         $(byId(idActivity)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         Assert.assertEquals(ELEMENT_OPEN_DOCUMENT_PREVIEW.getText(),document);
-        ELEMENT_EDIT_ONLINE_BUTTON_FROM_PREVIEW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        $(ELEMENT_EDIT_ONLINE_BUTTON_FROM_PREVIEW).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
 
     /**

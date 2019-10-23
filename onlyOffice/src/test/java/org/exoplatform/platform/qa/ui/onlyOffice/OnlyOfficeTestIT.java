@@ -57,7 +57,10 @@ public class OnlyOfficeTestIT extends Base {
   }
 
   @Test
-  //EditOnline_BTN_US01
+  /*
+   * EditOnline_BTN_US01
+   * Upload a document & click on Edit Online button in Document Application/View Document and check document is correctly opened
+   */
   public void EditOnlineDocumentFromDocumentsApp () {
     String document = "OO_test";
     String userName = PLFData.DATA_NAME_ROOT;
@@ -82,7 +85,10 @@ public class OnlyOfficeTestIT extends Base {
   }
 
   @Test
-  //EditOnline_BTN_US02_(01)
+  /*
+   * EditOnline_BTN_US02_(01)
+   * Upload a document & click on Edit Online button from Activity Stream, from Document Preview and check document is correctly opened
+   */
   public void EditOnlineDocumentFromActivityStreamAndPreview () {
     String document = "OO_test.docx";
     String check_document = "OO_test";
@@ -109,7 +115,10 @@ public class OnlyOfficeTestIT extends Base {
   }
 
   @Test
-  //EditOnline_BTN_US02_(02)
+  /*
+   * EditOnline_BTN_US02_(02)
+   * Upload a document in a Space & click on Edit Online button from Space Activity Stream and check document is correctly opened
+   */
   public void EditOnlineDocumentFromSpaceAS () {
     String document = "OO_test.docx";
     String check_document = "OO_test";
@@ -131,7 +140,10 @@ public class OnlyOfficeTestIT extends Base {
   }
 
   @Test
-  //EditOnline_BTN_US02_(03)
+  /*
+   * EditOnline_BTN_US02_(03)
+   * Upload a document & click on Edit Online button in Document Application and check document is correctly opened
+   */
   public void EditOnlineDocumentFromDocumentApplication () {
     String document = "OO_test.docx";
     String check_document = "OO_test";

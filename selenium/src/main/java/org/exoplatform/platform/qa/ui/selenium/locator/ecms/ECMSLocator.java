@@ -1217,8 +1217,8 @@ public class ECMSLocator {
   public static final SelenideElement ELEMENT_BUTTON_CLOSE_SEARCH = $(byXpath("//*[@id=\"UIPopupWindow\"]/div[1]/a"));
 
 
-   public static final By ELEMENT_DELETE_BUTTON =
-           By.xpath("//li[@class='menuItem']/a/i[@class='uiIconEcmsDelete']");
+   public static final SelenideElement ELEMENT_DELETE_BUTTON =
+           $(By.xpath("//li[@class='menuItem']/a/i[@class='uiIconEcmsDelete']"));
 
    public static final By ELEMENT_DELETE_POPUP_BUTTON =
           By.xpath("//div[@class='uiAction uiActionBorder']/button[1]");
