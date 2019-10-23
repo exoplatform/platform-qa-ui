@@ -45,7 +45,7 @@ public final class SocialLocator {
   public static final String          ELEMENT_GMAIL_FORMAT_CONTENT_CONNECTION_REQUEST                   =
                                                                                       "//*[contains(@href,'$username')]/../..//*[contains(.,'$content')]";
 
-  public static final String           ELEMENT_GMAIL_FORMAT_CONTENT_SPACE_REQUEST                        =
+  public static final String          ELEMENT_GMAIL_FORMAT_CONTENT_SPACE_REQUEST                        =
                                                                                  "//*[contains(@href,'$username')]/../..//*[contains(.,'$content')]//a[contains(text(),'$space')]";
 
   public static final String          ELEMENT_GMAIL_FORMAT_CONTENT_SPACE_POST_IN_MYSPACE                =

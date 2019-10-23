@@ -6,6 +6,7 @@ import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+
 import static org.exoplatform.platform.qa.ui.selenium.locator.onlyOffice.OnlyOfficeLocator.*;
 
 public class OnlyOfficeActivityStream{
@@ -15,6 +16,7 @@ public class OnlyOfficeActivityStream{
     public ManageAlert alert;
 
     public HomePagePlatform homePagePlatform;
+
 
     private ElementEventTestBase evt;
 
@@ -38,5 +40,4 @@ public class OnlyOfficeActivityStream{
     public void editOnlineFromPreviw() {
         ELEMENT_EDIT_ONLINE_BUTTON_FROM_PREVIEW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
-
 }

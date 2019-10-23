@@ -14,4 +14,9 @@ public class OnlyOfficeLocator {
     public static final SelenideElement ELEMENT_EDIT_ONLINE_BUTTON_FROM_PREVIEW = $(byXpath("//div[@class='onlyOfficeEditBtn']//i[@class='uiIconEcmsOnlyofficeOpen uiIconEcmsLightGray uiIconEdit']"));
 
 
+
+
+
+
+
 }

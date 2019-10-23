@@ -21,19 +21,20 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_CLOSE_DOCUMENT_PREVIEW1;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 
+
+
 public class OnlyOfficeTestIT extends Base {
 
-  HomePagePlatform            homePagePlatform;
-  NavigationToolbar           navigationToolbar;
-  SiteExplorerHome            siteExplorerHome;
-  ManageLogInOut              manageLogInOut;
-  ConnectionsManagement       connectionsManagement;
-  ActivityStream              activityStream;
-  SpaceManagement             spaceManagement;
-  OnlyOfficeDocumentApplication onlyOfficeDocumentApplication;
-  OnlyOfficeActivityStream      onlyOfficeActivityStream;
+  HomePagePlatform               homePagePlatform;
+  NavigationToolbar              navigationToolbar;
+  SiteExplorerHome               siteExplorerHome;
+  ManageLogInOut                 manageLogInOut;
+  ConnectionsManagement          connectionsManagement;
+  ActivityStream                 activityStream;
+  SpaceManagement                spaceManagement;
+  OnlyOfficeDocumentApplication  onlyOfficeDocumentApplication;
+  OnlyOfficeActivityStream       onlyOfficeActivityStream;
   OnlyOfficeEditingPage          onlyOfficeEditingPage;
-
 
 
   @BeforeEach
@@ -56,6 +57,7 @@ public class OnlyOfficeTestIT extends Base {
   }
 
   @Test
+  //EditOnline_BTN_US01
   public void EditOnlineDocumentFromDocumentsApp () {
     String document = "OO_test";
     String userName = PLFData.DATA_NAME_ROOT;
@@ -80,41 +82,60 @@ public class OnlyOfficeTestIT extends Base {
   }
 
   @Test
-  public void EditOnlineDocumentFromActivityStreamFromSpaceASFromPreview () {
+  //EditOnline_BTN_US02_(01)
+  public void EditOnlineDocumentFromActivityStreamAndPreview () {
     String document = "OO_test.docx";
     String check_document = "OO_test";
     String userName = PLFData.DATA_NAME_ROOT;
-    String spaceTestName = "space_1_"+getRandomNumber();
     info("Edit Online from document from AS");
     activityStream.uploadFileFromAS(document);
-    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc",document))),Condition.visible,Configuration.timeout);
+    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document))), Condition.visible, Configuration.timeout);
     onlyOfficeActivityStream.editOnlineFromAS();
     switchTo().window(1);
-    onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(check_document,userName);
+    onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(check_document, userName);
     switchTo().window(1).close();
     switchTo().window(0);
     refresh();
     info("Edit Online from document preview");
-    ELEMENT_OPEN_DOCUMENT_PREVIEW1.waitUntil(Condition.visible,30000).doubleClick();
+    ELEMENT_OPEN_DOCUMENT_PREVIEW1.waitUntil(Condition.visible, 30000).doubleClick();
     onlyOfficeActivityStream.editOnlineFromPreviw();
     switchTo().window(1);
-    onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(check_document,userName);
+    onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(check_document, userName);
     switchTo().window(1).close();
     switchTo().window(0);
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW1.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    ELEMENT_CLOSE_DOCUMENT_PREVIEW1.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
     activityStream.deleteDocumentFromAS(document);
+    manageLogInOut.signOut();
+  }
+
+  @Test
+  //EditOnline_BTN_US02_(02)
+  public void EditOnlineDocumentFromSpaceAS () {
+    String document = "OO_test.docx";
+    String check_document = "OO_test";
+    String userName = PLFData.DATA_NAME_ROOT;
+    String spaceTestName = "space_1_" + getRandomNumber();
     info("Edit Online document from Space AS");
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(spaceTestName,"test",5000);
+    spaceManagement.addNewSpaceSimple(spaceTestName, "test", 5000);
     activityStream.uploadFileFromAS(document);
-    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc",document))),Condition.visible,Configuration.timeout);
+    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document))), Condition.visible, Configuration.timeout);
     onlyOfficeActivityStream.editOnlineFromAS();
     switchTo().window(1);
-    onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(check_document,userName);
+    onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(check_document, userName);
     switchTo().window(1).close();
     switchTo().window(0);
     homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(spaceTestName,false);
+    spaceManagement.deleteSpace(spaceTestName, false);
+    manageLogInOut.signOut();
+  }
+
+  @Test
+  //EditOnline_BTN_US02_(03)
+  public void EditOnlineDocumentFromDocumentApplication () {
+    String document = "OO_test.docx";
+    String check_document = "OO_test";
+    String userName = PLFData.DATA_NAME_ROOT;
     info("Edit Online document from Document Application");
     homePagePlatform.goToDocuments();
     siteExplorerHome.uploadFile(document);
@@ -130,7 +151,6 @@ public class OnlyOfficeTestIT extends Base {
     siteExplorerHome.checkButtonDocument("OO_test");
     siteExplorerHome.clickDeleteButtonDocument();
     manageLogInOut.signOut();
-
   }
 
 }

@@ -37,5 +37,6 @@ public class OnlyOfficeEditingPage {
         $(byClassName("editor")).waitUntil(Condition.visible, 60000).exists();
         switchTo().frame("frameEditor");
         $(byId("title-user-name")).waitUntil(Condition.exactText(userName), 60000);
+        $(byId("id_panel_left")).waitUntil(Condition.visible, 60000);
     }
 }
