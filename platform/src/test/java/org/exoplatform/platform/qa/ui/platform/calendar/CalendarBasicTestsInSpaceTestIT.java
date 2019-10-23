@@ -61,7 +61,7 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
   }
 
   @Test
-  @Tag("eventis")
+  @Tag("eventis201")
   public void test01_AddEventInSpace() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String contentEvent = "contentEvent" + getRandomNumber();

@@ -30,6 +30,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
+import org.openqa.selenium.Keys;
 
 /**
  * Created by exo on 11/09/17.
@@ -1057,9 +1058,9 @@ public class LikeCommentTestIT extends Base {
 
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
-    ELEMENT_SPACE_FILE_TAB.waitUntil(Condition.visible,Configuration.timeout).click();
-    refresh();
-    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
+    $(byXpath("//*[@class='uidocactivitycomposer']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.openBrowserTimeoutMs);
+    //ELEMENT_TAB_LINK.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
     activityStream.addActivity(activity1, "");

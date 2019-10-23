@@ -275,7 +275,8 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     Integer idComment = Integer.parseInt(id) + 1;
     // hover on the comment to appear the delete button
     $(byId(ELEMENT_COMMENT_BLOC.replace("{id}", id))).hover().click();
-    $(byId("DeleteCommentButtoncomment" + idComment.toString())).click();
+    $(byId("dropDownEditCommentcomment" + idComment.toString())).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byId("DeleteCommentButtoncomment" + idComment.toString())).waitUntil(Condition.visible,Configuration.timeout).click();
     // Confirm
     ELEMENT_DELETE_POPUP_OK.click();
     // verify that the comment is deleted

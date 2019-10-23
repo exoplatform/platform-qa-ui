@@ -177,7 +177,6 @@ public class SOCSpaceMemberManagementInviteTestIT extends Base {
     ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.goToMemberTabInSpaceSettingTab();
-    spaceSettingManagement.acceptRequest(username2);
     spaceSettingManagement.goToMemberTab();
     $(byText(username2 + " " + username2)).scrollTo().should(Condition.exist);
     manageLogInOut.signIn("root", "gtn");

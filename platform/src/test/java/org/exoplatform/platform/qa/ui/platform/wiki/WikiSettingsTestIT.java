@@ -264,10 +264,10 @@ public class WikiSettingsTestIT extends Base {
     wikiManagement.saveAddPage();
 
     wikiHomePage.goToPermissions();
-    $(byText("any")).parent().parent().find(ELEMENT_WIKI_ICON_DELETE_PERMISSION).click();
+    $(byText("any")).parent().parent().find(ELEMENT_WIKI_ICON_DELETE_PERMISSION).waitUntil(Condition.visible,Configuration.timeout).click();
     wikiPermission.addPermisisonByType(DATA_USER2);
-    click(ELEMENT_ADD_PERMISSION);
-    click(ELEMENT_SAVE_PERMISSION);
+    $(ELEMENT_ADD_PERMISSION).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_SAVE_PERMISSION).waitUntil(Condition.visible,Configuration.timeout).click();
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     info("Check if mary can see the page");
     homePagePlatform.goToWiki();

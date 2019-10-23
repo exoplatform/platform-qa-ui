@@ -97,7 +97,7 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     info("Go to Create Wiki page from Navigation toolbar");
     navigationToolbar.goToCreateWikiPage("");
     info("Verify that wiki home page is shown");
-    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
 
   }
 
@@ -231,6 +231,7 @@ public class PlfNavigationTopNavigationTestIT extends Base {
    * <li>Test Case Name: Create a new Task via the top navigation.</li>
    */
   @Test
+  @Tag("PLF-8521")
   public void test05_CreateANewTaskViaTheTopNavigation() {
     info("Test 5: Create a new Task via the top navigation");
     String name = "name" + getRandomNumber();
@@ -255,9 +256,9 @@ public class PlfNavigationTopNavigationTestIT extends Base {
      * with a fadeout effect
      */
     homePagePlatform.goToTaskPage();
-    $(byText(name)).should(Condition.exist);
+    $(byText(name)).waitUntil(Condition.visible,Configuration.collectionsTimeout).should(Condition.exist);
     tasksManagement.deleteTask(name);
-    $(byText(name)).shouldNot(Condition.exist);
+    $(byText(name)).waitUntil(Condition.visible,Configuration.collectionsTimeout).shouldNot(Condition.exist);
   }
 
   /**

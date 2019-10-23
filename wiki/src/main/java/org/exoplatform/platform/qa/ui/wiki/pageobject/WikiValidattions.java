@@ -568,7 +568,7 @@ public class WikiValidattions {
         info("Verify that the page is at the path:" + locator1 + "->" + locator2 + "->" + page);
         $(byXpath(ELEMENT_WIKI_HOME_BREADCRUMB_PATH.replace("$locator1", locator1)
                 .replace("$locator2", locator2)
-                .replace("$page", page))).waitUntil(Condition.visible,Configuration.timeout);
+                .replace("$page", page))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
         info("The page is at correct path");
     }
 
@@ -698,7 +698,7 @@ public class WikiValidattions {
     public void verifyTitleWikiPage(String title) {
         info("Verify that the wiki page is created and shown in the list");
         sleep(Configuration.collectionsTimeout);
-        $(byXpath("//div[@id='iconTreeExplorer']/a[text()='${title}']".replace("${title}", " " + title))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        $(byXpath("//div[@id='iconTreeExplorer']/a[text()='${title}']".replace("${title}", " " + title))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         $(byXpath("//div[@id='UITreeExplorer']/following::div[@id='titleInfo' and text()='${title}']".replace("${title}",title))).waitUntil(Condition.visible,Configuration.timeout);
         info("The wiki page is created successfully");
     }

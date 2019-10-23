@@ -295,8 +295,8 @@ public class SOCNotificationsEditActivityTestIT extends Base {
                                     .parent()
                                     .shouldHave(Condition.text(DATA_NAME_ROOT + " edited a post. "));
     manageLogInOut.signIn(username, PASS_ROOT);
-    activityStream.deleteactivity(activity1);
-    activityStream.deleteactivity(activity2);
+    activityStream.deleteactivity(activity1 + newactivity);
+    activityStream.deleteactivity(activity2 + newactivity2);
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
   }

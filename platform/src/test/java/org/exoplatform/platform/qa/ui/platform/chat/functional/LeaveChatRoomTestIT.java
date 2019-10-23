@@ -379,7 +379,7 @@ public class LeaveChatRoomTestIT extends Base {
        homePagePlatform.goToChat();
        switchTo().window(1);
        $(byText(room));
-       ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.exist);
+       ELEMENT_CHAT_LIST_MSG.waitUntil(Condition.visible,Configuration.timeout).find(byText(message)).waitUntil(Condition.visible,Configuration.timeout).should(Condition.exist);
        roomManagement.leaveRoom(room);
        switchToParentWindow();
        manageLogInOut.signIn(PLFData.username,PLFData.password);

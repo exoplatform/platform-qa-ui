@@ -330,9 +330,9 @@ public class SOCHomePageTestIT extends Base {
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
-    $(ELEMENT_ACCOUNT_NAME_LINK).click();
-    $(ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES).click();
-    $(ELEMENT_PUBLICATION_DISPLAYMODE_CONNECTION_OPTION).click();
+    $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_PUBLICATION_DISPLAYMODE_CONNECTION_OPTION).waitUntil(Condition.visible,Configuration.timeout).click();
     executeJavaScript("window.scrollBy(0,-1500)", "");
     $(byText(text)).should(Condition.exist);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");

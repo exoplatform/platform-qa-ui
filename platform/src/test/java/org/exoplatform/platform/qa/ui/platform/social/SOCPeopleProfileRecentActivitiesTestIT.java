@@ -165,7 +165,7 @@ public class SOCPeopleProfileRecentActivitiesTestIT extends Base {
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(username2);
     homePagePlatform.goToHomePage();
-    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(visible,Configuration.timeout).click();
     info("add mention");
     activityStream.mentionUserActivity(username2, mention);
 
