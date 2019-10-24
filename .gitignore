@@ -17,17 +17,22 @@
 
 # Maven
 target/
+pom.xml.versionsBackup
 
 # IntelliJ project files
+.idea/
 *.iml
 *.iws
 *.ipr
-.iAnd/
 
 # eclipse project file
 .settings/
 .classpath
 .project
+
+# Visual Studio Code
+.vscode/
+.factorypath
 
 # OS
 .DS_Store
