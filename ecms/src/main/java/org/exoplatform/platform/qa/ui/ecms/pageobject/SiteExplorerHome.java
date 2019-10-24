@@ -8,6 +8,8 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 import static org.junit.Assert.assertEquals;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Configuration.*;
 
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -1614,7 +1616,7 @@ public class SiteExplorerHome {
    * Click on View Document button
    */
   public void clickViewDocumentButton() {
-    $(byClassName("uiIconEcmsPermlink")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(".uiIconEcmsPermlink").waitUntil(visible, openBrowserTimeoutMs).click();
   }
 
   /**
@@ -1631,8 +1633,8 @@ public class SiteExplorerHome {
    */
   public void clickDeleteButtonDocument() {
     info("click on Delete button for Document");
-    $(ELEMENT_DELETE_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
-    $(ELEMENT_DELETE_POPUP_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_DELETE_BUTTON).waitUntil(visible,timeout).click();
+    $(ELEMENT_DELETE_POPUP_BUTTON).waitUntil(visible,timeout).click();
   }
 
 }

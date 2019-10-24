@@ -27,6 +27,8 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocat
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.locator.onlyOffice.OnlyOfficeLocator.*;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Configuration.*;
 
 
 public class ActivityStream {
@@ -1910,40 +1912,33 @@ public class ActivityStream {
     public void uploadFileFromAS(String NameFile) {
         ELEMENT_TAB_LINK.click();
         refresh();
-        ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.timeout);
+        ELEMENT_CONTAINER_DOCUMENT.waitUntil(appears, timeout);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath(NameFile);
-        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
-        $(ELEMENT_COMPOSER_SHARE_BUTTON).should(Condition.be(Condition.enabled));
+        ELEMENT_BAR_PROGRESS.waitUntil(disappears, timeout);
+        $(ELEMENT_COMPOSER_SHARE_BUTTON).should(be(enabled));
         $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
     }
-
 
     /**
      * OpenEditOnlineFromDocumentPreview
      */
     public void openEditOnlineFromDocumentPreview (String document) {
         String idActivity = $(byText(document)).parent().parent().parent().parent().getAttribute("id");
-        $(byId(idActivity)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        $(byId(idActivity)).waitUntil(visible,openBrowserTimeoutMs).click();
         Assert.assertEquals(ELEMENT_OPEN_DOCUMENT_PREVIEW.getText(),document);
-        ELEMENT_EDIT_ONLINE_BUTTON_FROM_PREVIEW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        ELEMENT_EDIT_ONLINE_BUTTON_FROM_PREVIEW.waitUntil(visible,openBrowserTimeoutMs).click();
     }
 
     /**
      * Delete document from AS
      */
     public void deleteDocumentFromAS (String Document) {
-        homePagePlatform.refreshUntil($(byText(Document)), Condition.visible, 500);
+        homePagePlatform.refreshUntil($(byText(Document)), visible, 500);
         String idActivity2 = $(byText(Document)).parent().parent().parent().parent().getAttribute("id").split("MediaName")[1].split("0")[0];    $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity2))).waitUntil(Condition.visible,Configuration.timeout).click();
-        $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}", idActivity2))).waitUntil(Condition.visible,Configuration.timeout).click();
-        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible,Configuration.timeout).click();
-        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
-        $(byText(Document)).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+        $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}", idActivity2))).waitUntil(visible,timeout).click();
+        ELEMENT_DELETE_POPUP_OK.waitUntil(visible,timeout).click();
+        ELEMENT_DELETE_POPUP_OK.waitUntil(not(visible), timeout);
+        $(byText(Document)).waitUntil(not(visible), timeout);
     }
-
-
-
-
-
-
 
 }
