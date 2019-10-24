@@ -8,6 +8,8 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 import static org.junit.Assert.assertEquals;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Configuration.*;
 
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -1565,6 +1567,9 @@ public class SiteExplorerHome {
     }
   }
 
+
+
+
   /**
    * Delete all files in a folder under Admin view
    *
@@ -1601,4 +1606,35 @@ public class SiteExplorerHome {
   public enum defineValueBehavior {
     CREATE_NEW, REMOVE_EXISTING, REPLACE_EXISTING, THROW_EXEPTION;
   }
+
+
+
+
+
+
+  /**
+   * Click on View Document button
+   */
+  public void clickViewDocumentButton() {
+    $(".uiIconEcmsPermlink").waitUntil(visible, openBrowserTimeoutMs).click();
+  }
+
+  /**
+   * Click on Delete button
+   */
+  public void checkButtonDocument(String officeDocument) {
+    info("click on CheckBox button for Document");
+    $(byXpath("(//div[@class='columnText']//span[@class='nodeName' and text()='${word}']/preceding::span[@class='uiCheckbox'])[last()]".replace("${word}",officeDocument))).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byXpath("(//div[@class='columnText']//span[text()='${word}']/following::*[@class='fileInfoBottom'])[1]".replace("${word}",officeDocument))).waitUntil(Condition.visible,Configuration.timeout).click();
+  }
+
+  /**
+   * Click on Delete button
+   */
+  public void clickDeleteButtonDocument() {
+    info("click on Delete button for Document");
+    $(ELEMENT_DELETE_BUTTON).waitUntil(visible,timeout).click();
+    $(ELEMENT_DELETE_POPUP_BUTTON).waitUntil(visible,timeout).click();
+  }
+
 }

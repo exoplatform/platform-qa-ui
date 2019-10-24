@@ -741,6 +741,8 @@ public final class ActivityStreamLocator {
 
 
     public static final SelenideElement ELEMENT_ACTIVITY_STREAM_HEADING=$(byClassName("heading"));
-
+    public static final SelenideElement ELEMENT_OPEN_DOCUMENT_PREVIEW =  $(".ellipsis");
+    public static final SelenideElement ELEMENT_OPEN_DOCUMENT_PREVIEW_FROM_AS = $(".infoFile");
+    public static final SelenideElement ELEMENT_CLOSE_DOCUMENT_PREVIEW_FROM_AS = $("#documentPreviewContainer").find(".uiIconClose.uiIconWhite");
 
 }
