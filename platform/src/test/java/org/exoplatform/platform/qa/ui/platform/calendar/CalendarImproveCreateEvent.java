@@ -104,7 +104,7 @@ public class CalendarImproveCreateEvent extends Base {
     homePagePlatform.refreshUntil($(byAttribute("startfull", getDate(0, "EEE MMM dd yyyy HH" + ":00:00"))), Condition.visible, 1000);
     refresh();
     $(byAttribute("startfull", getDate(0, "EEE MMM dd yyyy HH" + ":00:00"))).waitUntil(Condition.visible,2000).doubleClick();
-    ELEMENT_EVENT_DRAWER.parent().waitUntil(Condition.visible, Configuration.collectionsTimeout);
+    ELEMENT_EVENT_DRAWER.parent().waitUntil(Condition.visible, Configuration.timeout);
     eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     info("Add event");
     ELEMENT_EVENT_TITLE_DRAWER.setValue(titleEvent);
@@ -220,7 +220,7 @@ public class CalendarImproveCreateEvent extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     ELEMENT_EVENT_DRAWER_TITLE.setValue(titleEvent);
-    ELEMENT_EVENT_ADD_PARTICIPANT.setValue(Firstname).waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+    ELEMENT_EVENT_ADD_PARTICIPANT.setValue(Firstname).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_EVENT_ADD_PARTICIPANT.waitUntil(Condition.visible,2000);
     ELEMENT_EVENT_ADD_PARTICIPANT.sendKeys(Keys.ENTER);
     $(byXpath("//div[@class='item' and text()='${participantName}']".replace("${participantName}", Firstname))).exists();
@@ -271,15 +271,15 @@ public class CalendarImproveCreateEvent extends Base {
     eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).waitUntil(Condition.visible, Configuration.timeout).click();
     $(byXpath("//input[@id='mailReminderTimeEntry']")).waitUntil(Condition.visible,2000).setValue("15");
-    $(ELEMENT_SAVE_REMINDER_BUTTON).waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+    $(ELEMENT_SAVE_REMINDER_BUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
     Assert.assertEquals($(byXpath("//div[@class='reminder pull-left']/div/a")).getText(), "15mn before");
     $(byXpath("//div[@class='reminder pull-left']/div/a")).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_REMINDER_POPUP.waitUntil(Condition.appear, Configuration.timeout);
     Assert.assertEquals($(byXpath("//input[@id='mailReminderTimeEntry']")).getValue(), "15");
     $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).waitUntil(Condition.visible, Configuration.timeout).click();
-    $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+    $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).waitUntil(Condition.visible, Configuration.timeout).click();
     Assert.assertNotEquals($(byXpath("//div[@class='reminder pull-left']/div/a")).getText(), "15mn before");
-    ELEMENT_REMINDER_POPUP.waitUntil(Condition.appear, Configuration.collectionsTimeout);
+    ELEMENT_REMINDER_POPUP.waitUntil(Condition.appear, Configuration.timeout);
     Assert.assertEquals($(byXpath("//input[@id='mailReminderTimeEntry']")).getValue(), "10");
     Assert.assertEquals($(byXpath("//select[@id='mailReminderTime']")).getValue(), "minutes");
     $(ELEMENT_CANCEL_REMINDER_BUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
@@ -297,7 +297,7 @@ public class CalendarImproveCreateEvent extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).waitUntil(Condition.visible, Configuration.timeout).click();
-    $(ELEMENT_SAVE_EVENT_OCCURRING).waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+    $(ELEMENT_SAVE_EVENT_OCCURRING).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_REPEAT_LABEL.waitUntil(Condition.text("Repeat"), Configuration.timeout);
     info("Check the behavior when click on repeat label");
     ELEMENT_REPEAT_LABEL.click();
@@ -423,10 +423,10 @@ public class CalendarImproveCreateEvent extends Base {
             null,
             EventManagement.repeatEndType.After,
             "5");
-    $(ELEMENT_SAVE_EVENT_OCCURRING).waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+    $(ELEMENT_SAVE_EVENT_OCCURRING).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_REPEAT_LABEL.waitUntil(Condition.text("Repeat"), Configuration.timeout);
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).waitUntil(Condition.visible, Configuration.timeout).click();
-    $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+    $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_REPEAT_PREFERRENCE_IMPROVE_POPUP.waitUntil(Condition.appear, Configuration.timeout);
     $(byText("Recurring Event")).waitUntil(Condition.exist, Configuration.timeout);
     ELEMENT_EVENT_CANCEL_BUTTON.click();

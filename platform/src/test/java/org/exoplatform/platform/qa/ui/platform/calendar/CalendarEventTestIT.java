@@ -81,7 +81,7 @@ public class CalendarEventTestIT extends Base {
     calendarManagement.saveSetting();
     eventManagement.goToAddEventFromActionBar();
     info("Add attachment");
-    $(ELEMENT_ADD_EDIT_EVENT_NAME).waitUntil(Condition.visible, Configuration.collectionsTimeout).setValue(titleEvent);
+    $(ELEMENT_ADD_EDIT_EVENT_NAME).waitUntil(Condition.visible, Configuration.timeout).setValue(titleEvent);
     $(byId("cal-attach-file")).uploadFromClasspath("eXo-Platform.png");
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,

@@ -82,7 +82,7 @@ public class SOCPeopleProfileDynContainersTestIT extends Base {
     navigationToolbar.goToEditLayout();
 
     info("switch to tab container");
-    $(ELEMENT_CONTAINER_TAB).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_CONTAINER_TAB).waitUntil(Condition.visible,Configuration.timeout).click();
 
     info("goto edit container");
     $(byXpath(ELEMENT_CONTAINER_ID.replace("${id}", righttop_profile))).waitUntil(Condition.visible, Configuration.timeout);

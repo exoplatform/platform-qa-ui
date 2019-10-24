@@ -69,8 +69,8 @@ public class SpaceManagement {
       if (isVerify)
         alert.verifyAlertMessage(ELEMENT_SPACE_CONFIRM_DELETE);
       $(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
-      sleep(Configuration.collectionsTimeout);
-      ELEMENT_SPACES_LIST.find(byText(spaceName)).waitUntil(Condition.disappear, Configuration.collectionsTimeout);
+      sleep(Configuration.timeout);
+      ELEMENT_SPACES_LIST.find(byText(spaceName)).waitUntil(Condition.disappear, Configuration.timeout);
     }
   }
 
@@ -427,20 +427,20 @@ public class SpaceManagement {
    * Change Status
    */
   public void changeStatus(String status) {
-    ELEMENT_CHAT_ICON_STATUS.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+    ELEMENT_CHAT_ICON_STATUS.waitUntil(Condition.visible, Configuration.timeout).click();
     switch (status) {
       case "Available":
-        ELEMENT_USER_STATUS_AVAILABLE.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+        ELEMENT_USER_STATUS_AVAILABLE.waitUntil(Condition.visible, Configuration.timeout).click();
         homePagePlatform.refreshUntil($(byXpath("//a[@class='dropdown-toggle user-available']")), Condition.visible, 700);
         break;
       case "Do not disturb":
-        ELEMENT_USER_STATUS_DONOTDISTURB.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+        ELEMENT_USER_STATUS_DONOTDISTURB.waitUntil(Condition.visible, Configuration.timeout).click();
         break;
       case "Away":
-        ELEMENT_USER_STATUS_AWAY.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+        ELEMENT_USER_STATUS_AWAY.waitUntil(Condition.visible, Configuration.timeout).click();
         break;
       case "Invisible":
-        ELEMENT_USER_STATUS_INVISIBLE.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+        ELEMENT_USER_STATUS_INVISIBLE.waitUntil(Condition.visible, Configuration.timeout).click();
         break;
     }
   }

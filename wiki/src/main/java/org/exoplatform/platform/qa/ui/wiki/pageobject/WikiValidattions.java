@@ -47,7 +47,7 @@ public class WikiValidattions {
         info("Verify that a draf page with the title:" + "title" + " is shown in draf table");
 
         $(byXpath(ELEMENT_DRAFT_OF_NEW_PAGE.replace("${title}", title))).waitUntil(Condition.visible,
-                Configuration.collectionsTimeout);
+                Configuration.timeout);
     }
 
     /**
@@ -568,7 +568,7 @@ public class WikiValidattions {
         info("Verify that the page is at the path:" + locator1 + "->" + locator2 + "->" + page);
         $(byXpath(ELEMENT_WIKI_HOME_BREADCRUMB_PATH.replace("$locator1", locator1)
                 .replace("$locator2", locator2)
-                .replace("$page", page))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+                .replace("$page", page))).waitUntil(Condition.visible,Configuration.timeout);
         info("The page is at correct path");
     }
 
@@ -697,8 +697,8 @@ public class WikiValidattions {
      */
     public void verifyTitleWikiPage(String title) {
         info("Verify that the wiki page is created and shown in the list");
-        sleep(Configuration.collectionsTimeout);
-        $(byXpath("//div[@id='iconTreeExplorer']/a[text()='${title}']".replace("${title}", " " + title))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        sleep(Configuration.timeout);
+        $(byXpath("//div[@id='iconTreeExplorer']/a[text()='${title}']".replace("${title}", " " + title))).waitUntil(Condition.visible,Configuration.timeout).click();
         $(byXpath("//div[@id='UITreeExplorer']/following::div[@id='titleInfo' and text()='${title}']".replace("${title}",title))).waitUntil(Condition.visible,Configuration.timeout);
         info("The wiki page is created successfully");
     }

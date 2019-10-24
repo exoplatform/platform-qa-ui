@@ -55,9 +55,6 @@ public class Base extends TestBase {
 
   @BeforeEach
   public void beforeEach(TestInfo testInfo) {
-    if (!title().equals("Login")) {
-      Selenide.close();
-    }
     // Set context from better naming of screenshots in case of test failure
     Screenshots.startContext(testInfo.getTestClass().get().getName(), testInfo.getTestMethod().get().getName());
     openPlatform(testInfo);
@@ -77,7 +74,6 @@ public class Base extends TestBase {
 
   @AfterEach
   public void afterEach() {
-     switchTo().window(0);
     ManageLogInOut manageLogInOut = new ManageLogInOut(this);
     if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.visible))
         && $(ELEMENT_INPUT_PASSWORD_CAS).is(Condition.not(Condition.visible))) {

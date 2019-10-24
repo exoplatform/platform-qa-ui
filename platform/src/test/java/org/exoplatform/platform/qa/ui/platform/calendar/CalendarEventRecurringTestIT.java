@@ -478,7 +478,7 @@ public class CalendarEventRecurringTestIT extends Base {
                                             null,
                                             EventManagement.repeatEndType.After,
                                             "5");
-    $(ELEMENT_SAVE_EVENT_OCCURRING).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(ELEMENT_SAVE_EVENT_OCCURRING).waitUntil(Condition.visible,Configuration.timeout).click();
     eventManagement.saveAddEventDetails();
     calendarHomePage.verifyIsPresentEventTaskWithDateTime(titleEvent,
                                                           getDate(0, "MMM dd yyyy"),

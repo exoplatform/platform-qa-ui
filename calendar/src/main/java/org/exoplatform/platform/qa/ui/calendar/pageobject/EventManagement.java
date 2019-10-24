@@ -82,7 +82,7 @@ public class EventManagement {
     String cell = ELEMENT_CELL_TO_WORKING_PANEL.replace("$date", tempDate2).replace("$time", tempTime);
     info(cell);
     $(byXpath(cell)).click();
-    $(ELEMENT_QUICK_ADD_EVENT_POPUP).waitUntil(Condition.visible, Configuration.collectionsTimeout);
+    $(ELEMENT_QUICK_ADD_EVENT_POPUP).waitUntil(Condition.visible, Configuration.timeout);
   }
 
   /**
@@ -201,11 +201,11 @@ public class EventManagement {
   public void inputBasicDetailEvent(String name, String note, String... opt) {
     info("Input into basic fields of Quick EVENT form");
     if (name != null) {
-      $(ELEMENT_ADD_EDIT_EVENT_NAME).waitUntil(Condition.visible,Configuration.collectionsTimeout).setValue(name);
+      $(ELEMENT_ADD_EDIT_EVENT_NAME).waitUntil(Condition.visible,Configuration.timeout).setValue(name);
     }
 
     if (note != null) {
-      $(ELEMENT_ADD_EDIT_EVENT_NOTE).waitUntil(Condition.visible,Configuration.collectionsTimeout).setValue(note);
+      $(ELEMENT_ADD_EDIT_EVENT_NOTE).waitUntil(Condition.visible,Configuration.timeout).setValue(note);
     }
 
     if (opt.length > 1 && opt[1] != null) {
@@ -234,7 +234,7 @@ public class EventManagement {
         if (dateTimeFrom.length > 0)
           for(int i=0; i<=11; i++)
           {
-            $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).sendKeys(Keys.BACK_SPACE);
+            $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).waitUntil(Condition.visible,Configuration.timeout).sendKeys(Keys.BACK_SPACE);
           }
         $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).setValue(dateTimeFrom[0]);
       }
@@ -243,7 +243,7 @@ public class EventManagement {
         if (dateTimeTo.length > 0)
           for(int k=0; k<=11; k++)
           {
-            $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).sendKeys(Keys.BACK_SPACE);
+            $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).waitUntil(Condition.visible,Configuration.timeout).sendKeys(Keys.BACK_SPACE);
           }
         $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).sendKeys(dateTimeTo[0]);
       }
@@ -256,7 +256,7 @@ public class EventManagement {
         if (dateTimeFrom.length > 0)
         for(int i=0; i<=11; i++)
           {
-            $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).isDisplayed();
+            $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).waitUntil(Condition.visible,Configuration.timeout).isDisplayed();
             $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).waitUntil(Condition.visible,Configuration.timeout).sendKeys(Keys.BACK_SPACE);
           }
          $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).setValue(dateTimeFrom[0]);
@@ -271,7 +271,7 @@ public class EventManagement {
         if (dateTimeTo.length > 0)
         for(int k=0; k<=11; k++)
         {
-          $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).isDisplayed();
+          $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).waitUntil(Condition.visible,Configuration.timeout).isDisplayed();
           $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).waitUntil(Condition.visible,Configuration.timeout).sendKeys(Keys.BACK_SPACE);
         }
         $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).sendKeys(dateTimeTo[0]);
@@ -716,7 +716,7 @@ public class EventManagement {
       for (int i = 0; i < temp.length; i++) {
           ELEMENT_EVENT_ADD_PARTICIPANT.waitUntil(Condition.visible, Configuration.timeout).setValue(temp[i]).waitUntil(Condition.visible, Configuration.timeout).click();
           sleep(3000);
-          ELEMENT_EVENT_ADD_PARTICIPANT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).sendKeys(Keys.ENTER);
+          ELEMENT_EVENT_ADD_PARTICIPANT.waitUntil(Condition.visible, Configuration.timeout).sendKeys(Keys.ENTER);
       }
   }
 
@@ -725,7 +725,7 @@ public class EventManagement {
    */
   public void saveQuickAddEvent() {
     info("Save quick add event");
-    ELEMENT_BUTTON_EVENT_SAVE.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_BUTTON_EVENT_SAVE.waitUntil(Condition.appears, Configuration.timeout).click();
     ELEMENT_BUTTON_EVENT_SAVE.waitUntil(Condition.disappears, Configuration.timeout);
   }
   /**
@@ -733,7 +733,7 @@ public class EventManagement {
    */
   public void selectPreviousAndNextDayInTheEventToAdd(String previousDay, String nextDay){
     info("Select Previous and Next day");
-    ELEMENT_EVENT_SELECT_FROM.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    ELEMENT_EVENT_SELECT_FROM.waitUntil(Condition.visible,Configuration.timeout).click();
     if (previousDay!= null) {
       final SelenideElement ELEMENT_EVENT_PREVIOUS_DAY= $(By.xpath("(//td/a[contains(text(),'${CurrentDay}')]/../preceding-sibling::td/a[@href='#SelectDate'])[last()]".replace("${CurrentDay}",ELEMENT_EVENT_CURRENT_DAY.getText())));
       ELEMENT_EVENT_PREVIOUS_DAY.waitUntil(Condition.visible,Configuration.timeout).click();
@@ -753,7 +753,7 @@ public class EventManagement {
     info("Save add event details");
     if ($(ELEMENT_ADD_EDIT_EVENT_NAME).is(Condition.visible))
       $(ELEMENT_ADD_EDIT_EVENT_NAME).click();
-    ELEMENT_EVENT_SAVE_BUTTON.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+    ELEMENT_EVENT_SAVE_BUTTON.waitUntil(Condition.visible, Configuration.timeout).click();
   }
 
   /**
@@ -791,7 +791,7 @@ public class EventManagement {
    * @param file name of file
    */
   public void removeAttachment(String file) {
-    $(byXpath("//div[@title='${file}']/following::div[@class='removeFile']/a".replace("${file}",file))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(byXpath("//div[@title='${file}']/following::div[@class='removeFile']/a".replace("${file}",file))).waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   /**
@@ -815,19 +815,19 @@ public class EventManagement {
     switch (repeatType) {
       case Daily:
         info("Select Daily option");
-        $(byXpath("//*[@id='repeatType' and @class='selectbox']")).waitUntil(Condition.visible,Configuration.collectionsTimeout).selectOption("Daily");
+        $(byXpath("//*[@id='repeatType' and @class='selectbox']")).waitUntil(Condition.visible,Configuration.timeout).selectOption("Daily");
         break;
       case Weekly:
         info("Select Weekly option");
-        $(byXpath("//*[@id='repeatType' and @class='selectbox']")).waitUntil(Condition.visible,Configuration.collectionsTimeout).selectOption("Weekly");
+        $(byXpath("//*[@id='repeatType' and @class='selectbox']")).waitUntil(Condition.visible,Configuration.timeout).selectOption("Weekly");
         break;
       case Monthly:
         info("Select Monthly option");
-        $(byXpath("//*[@id='repeatType' and @class='selectbox']")).waitUntil(Condition.visible,Configuration.collectionsTimeout).selectOption("Monthly");
+        $(byXpath("//*[@id='repeatType' and @class='selectbox']")).waitUntil(Condition.visible,Configuration.timeout).selectOption("Monthly");
         break;
       case Yearly:
         info("Select Yearly option");
-        $(byXpath("//*[@id='repeatType' and @class='selectbox']")).waitUntil(Condition.visible,Configuration.collectionsTimeout).selectOption("Yearly");
+        $(byXpath("//*[@id='repeatType' and @class='selectbox']")).waitUntil(Condition.visible,Configuration.timeout).selectOption("Yearly");
         break;
       default:
         info("No option in the list.Please select correct option.");

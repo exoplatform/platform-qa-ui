@@ -588,7 +588,7 @@ public class WikiManagement {
     selectTemplateWikiPage(template);
     $(ELEMENT_TEMPLATE_SELECT_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
     refresh();
-    sleep(Configuration.collectionsTimeout);
+    sleep(Configuration.timeout);
     if (!newTitle.isEmpty())
       $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.timeout).setValue(newTitle);
     info("Waiting 30s before saved all changes");

@@ -921,10 +921,10 @@ public class RichTextEditor {
    */
   public void goToEmailLink() {
     info("Click on Link menu");
-    sleep(Configuration.collectionsTimeout);
+    sleep(Configuration.timeout);
     $(ELEMENT_LINK).doubleClick();
     info("Click on Attached file Link menu");
-    sleep(Configuration.collectionsTimeout);
+    sleep(Configuration.timeout);
     $(ELEMENT_EMAIL_LINK_MENU).shouldBe(Condition.visible);
     $(ELEMENT_EMAIL_LINK_MENU).doubleClick();
     sleep(2000);
@@ -1001,7 +1001,7 @@ public class RichTextEditor {
     if (!link.isEmpty()) {
       info("Input external Image link");
       sleep(Configuration.timeout);
-      $(ELEMENT_EXTERNAL_IMAGE_INPUT_LINK).waitUntil(Condition.visible,Configuration.collectionsTimeout).setValue(link);
+      $(ELEMENT_EXTERNAL_IMAGE_INPUT_LINK).waitUntil(Condition.visible,Configuration.timeout).setValue(link);
     }
   }
 

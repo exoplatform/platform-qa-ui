@@ -97,7 +97,7 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     info("Go to Create Wiki page from Navigation toolbar");
     navigationToolbar.goToCreateWikiPage("");
     info("Verify that wiki home page is shown");
-    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible, Configuration.timeout);
 
   }
 
@@ -256,9 +256,9 @@ public class PlfNavigationTopNavigationTestIT extends Base {
      * with a fadeout effect
      */
     homePagePlatform.goToTaskPage();
-    $(byText(name)).waitUntil(Condition.visible,Configuration.collectionsTimeout).should(Condition.exist);
+    $(byText(name)).waitUntil(Condition.visible,Configuration.timeout).should(Condition.exist);
     tasksManagement.deleteTask(name);
-    $(byText(name)).waitUntil(Condition.visible,Configuration.collectionsTimeout).shouldNot(Condition.exist);
+    $(byText(name)).waitUntil(Condition.visible,Configuration.timeout).shouldNot(Condition.exist);
   }
 
   /**

@@ -144,7 +144,7 @@ public class WikiSettingsTestIT extends Base {
     wikiHomePage.goToWikiSettingPage();
     sleep(Configuration.timeout);
     testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.waitUntil(Condition.visible,Configuration.timeout).click();
     wikiSettingManagement.addTemplate(title, description, content);
     ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(title)).should(exist);
     ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();

@@ -86,7 +86,7 @@ public class WikiHomePage {
      */
     public void goToAPage(String title) {
         info("-- Go to wiki page --");
-        $(byText(title)).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        $(byText(title)).waitUntil(Condition.visible,Configuration.timeout).click();
         $(ELEMENT_WIKI_HOME_PAGE_TEXT).shouldNot(Condition.exist);
     }
 
@@ -139,7 +139,7 @@ public class WikiHomePage {
     public void selectAPage(String page) {
         info("Go to a wiki page...");
         info("Select the wiki page");
-        $(byText(page)).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        $(byText(page)).waitUntil(Condition.visible,Configuration.timeout).click();
         info("The page is shown");
     }
 
@@ -148,9 +148,9 @@ public class WikiHomePage {
      */
     public void goToMyDraft() {
         info("Click on Browser drop down");
-        $(ELEMENT_SEARCH_BROWSERS_DROPDOWN).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        $(ELEMENT_SEARCH_BROWSERS_DROPDOWN).waitUntil(Condition.visible,Configuration.timeout).click();
         info("Select wiki settings label");
-        $(ELEMENT_SEARCH_BROWSERS_MY_DRAFT).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        $(ELEMENT_SEARCH_BROWSERS_MY_DRAFT).waitUntil(Condition.visible,Configuration.timeout).click();
     }
 
     /**
@@ -241,14 +241,14 @@ public class WikiHomePage {
      */
     public void goToPermalink() {
         info("Go to permalink");
-        $(ELEMENT_MORE_LINK).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
-        $(ELEMENT_PERMALINK_LINK).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        $(ELEMENT_MORE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(ELEMENT_PERMALINK_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
     }
 
     public void goToPermalinkForSimpleUserNotAdmin() {
         info("Go to permalink");
-        $(byXpath("(//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li)[2]")).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
-        $(ELEMENT_PERMALINK_LINK).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        $(byXpath("(//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li)[2]")).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(ELEMENT_PERMALINK_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
     }
 
     /**

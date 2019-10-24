@@ -352,11 +352,11 @@ public class EcmsSEBasicActionTestIT extends Base {
         createNewDocument.saveAndClose();
         sleep(3000);
         // clean the clipboard
-        $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNode))).waitUntil(Condition.visible,Configuration.collectionsTimeout).contextClick();
-        $(ELEMENT_SITEEXPLORER_ACTION_COPY).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
-        $(ELEMENT_SITEEXPLORER_CLIPBOARD).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNode))).waitUntil(Condition.visible,Configuration.timeout).contextClick();
+        $(ELEMENT_SITEEXPLORER_ACTION_COPY).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(ELEMENT_SITEEXPLORER_CLIPBOARD).waitUntil(Condition.visible,Configuration.timeout).click();
         executeJavaScript("window.scrollBy(0,-500)");
-        $(ELEMENT_CLIPBOARD_CLEAR_ALL).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        $(ELEMENT_CLIPBOARD_CLEAR_ALL).waitUntil(Condition.visible,Configuration.timeout).click();
         $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).waitUntil(Condition.visible,Configuration.timeout).click();
         $(ELEMENT_SIDEBAR_SITES_MANAGEMENT).waitUntil(Condition.visible,Configuration.timeout).click();
 
@@ -375,7 +375,7 @@ public class EcmsSEBasicActionTestIT extends Base {
         $(byXpath("//span[@class='PopupTitle popupTitle' and contains(text(),'Delete')]")).dragAndDropTo($(byXpath("//div[@class='UITableColumnContainer']")));
         $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
         sleep(3000);
-        $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNodeCopy))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).isDisplayed();
+        $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNodeCopy))).waitUntil(Condition.visible,Configuration.timeout).isDisplayed();
 
         siteExplorerHome.deleteData(titleCommonNodeCopy);
     }

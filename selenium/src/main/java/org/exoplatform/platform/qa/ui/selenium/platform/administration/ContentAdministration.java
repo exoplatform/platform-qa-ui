@@ -233,7 +233,7 @@ public class ContentAdministration {
    */
   public void addDrives(String name, String permission, specificView[] applyViews) {
     info("Click on Add button of the drive in the list");
-    ELEMENT_ECM_EXPLORER_DRIVES_ADD_DRIVES.scrollTo().waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    ELEMENT_ECM_EXPLORER_DRIVES_ADD_DRIVES.scrollTo().waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_TAB_ADD_DRIVE_POPUP.waitUntil(Condition.visible,Configuration.timeout).click();
     info("Type a name for the drive");
     $(ELEMENT_ECM_EXPLORER_NAME_DRIVES_FORM).waitUntil(Condition.visible,Configuration.timeout).setValue(name);

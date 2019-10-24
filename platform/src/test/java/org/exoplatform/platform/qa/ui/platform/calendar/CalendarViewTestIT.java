@@ -439,7 +439,7 @@ public class CalendarViewTestIT extends Base {
                                               true);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.WEEK);
-    $(ELEMENT_TODAY_ACTION_BAR).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(ELEMENT_TODAY_ACTION_BAR).waitUntil(Condition.visible,Configuration.timeout).click();
     calendarHomePage.verifyIsPresentEventTask(titleEventCur,
                                               CalendarHomePage.selectViewOption.WEEK,
                                               CalendarHomePage.selectDayOption.ALLDAY);
@@ -449,7 +449,7 @@ public class CalendarViewTestIT extends Base {
     calendarHomePage.verifyIsNotPresentEventTask(titleEventPreWeek,
                                                  CalendarHomePage.selectViewOption.WEEK,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
-    $(ELEMENT_NEXT_BUTTON_ANY_VIEW).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(ELEMENT_NEXT_BUTTON_ANY_VIEW).waitUntil(Condition.visible,Configuration.timeout).click();
     calendarHomePage.verifyIsNotPresentEventTask(titleEventCur,
                                                  CalendarHomePage.selectViewOption.WEEK,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
@@ -459,8 +459,8 @@ public class CalendarViewTestIT extends Base {
     calendarHomePage.verifyIsNotPresentEventTask(titleEventPreWeek,
                                                  CalendarHomePage.selectViewOption.WEEK,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
-    $(ELEMENT_TODAY_ACTION_BAR).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
-    $(ELEMENT_PREVIOUS_BUTTON_ANY_VIEW).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(ELEMENT_TODAY_ACTION_BAR).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_PREVIOUS_BUTTON_ANY_VIEW).waitUntil(Condition.visible,Configuration.timeout).click();
     calendarHomePage.verifyIsNotPresentEventTask(titleEventCur,
                                                  CalendarHomePage.selectViewOption.WEEK,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
@@ -470,18 +470,18 @@ public class CalendarViewTestIT extends Base {
     calendarHomePage.verifyIsPresentEventTask(titleEventPreWeek,
                                               CalendarHomePage.selectViewOption.WEEK,
                                               CalendarHomePage.selectDayOption.ALLDAY);
-    $(ELEMENT_TODAY_ACTION_BAR).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
-    $(ELEMENT_NEXT_BUTTON_ANY_VIEW).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(ELEMENT_TODAY_ACTION_BAR).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_NEXT_BUTTON_ANY_VIEW).waitUntil(Condition.visible,Configuration.timeout).click();
     calendarHomePage.deleteEventTask(titleEventNextWeek,
                                      CalendarHomePage.selectViewOption.WEEK,
                                      CalendarHomePage.selectDayOption.ALLDAY,
                                      getDate(7, "MMM dd yyyy"));
-    $(ELEMENT_TODAY_ACTION_BAR).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(ELEMENT_TODAY_ACTION_BAR).waitUntil(Condition.visible,Configuration.timeout).click();
     calendarHomePage.deleteEventTask(titleEventCur,
                                      CalendarHomePage.selectViewOption.WEEK,
                                      CalendarHomePage.selectDayOption.ALLDAY,
                                      getDate(0, "MMM dd yyyy"));
-    $(ELEMENT_PREVIOUS_BUTTON_ANY_VIEW).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(ELEMENT_PREVIOUS_BUTTON_ANY_VIEW).waitUntil(Condition.visible,Configuration.timeout).click();
     calendarHomePage.deleteEventTask(titleEventPreWeek,
                                      CalendarHomePage.selectViewOption.WEEK,
                                      CalendarHomePage.selectDayOption.ALLDAY,

@@ -143,7 +143,7 @@ public class ActivityStream {
      */
     public void checkCommentOfActivity(String activity, String comment) {
         info("Verify that the comment is added");
-        sleep(Configuration.collectionsTimeout);
+        sleep(Configuration.timeout);
         $(byXpath("//div[@class='titleWiki']/a[text()='${activity}']".replace("${activity}",activity))).should(Condition.exist);
         sleep(2000);
         ELEMENT_ACTIVITY_STREAM_CONTAINER.find(byText(comment)).should(Condition.exist);
@@ -479,10 +479,10 @@ public class ActivityStream {
      */
     public void addText(String text) {
         info("----Add text into activity text box-----");
-        SelenideElement frame = $(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible, Configuration.collectionsTimeout);
+        SelenideElement frame = $(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible, Configuration.timeout);
         $(ELEMENT_ACCOUNT_NAME_LINK).click();
         switchTo().frame(frame);
-        ELEMENT_INPUT_ACTIVITY.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        ELEMENT_INPUT_ACTIVITY.waitUntil(Condition.visible,Configuration.timeout).click();
         ELEMENT_INPUT_ACTIVITY.sendKeys(text);
         switchTo().defaultContent();
     }
@@ -1382,11 +1382,11 @@ public class ActivityStream {
         // click on comment link
         $(byText(activity)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
         // insert comment
-        $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
+        $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
         executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
         // click on the button comment
         $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.visible,Configuration.timeout).pressEnter()
-                .waitUntil(Condition.not(Condition.visible), Configuration.collectionsTimeout);
+                .waitUntil(Condition.not(Condition.visible), Configuration.timeout);
         $(byText(comment)).should(Condition.visible);
     }
 
@@ -1494,7 +1494,7 @@ public class ActivityStream {
         $(byId(ELEMENT_lABEL_REPLY_COMMENT.replace("{id}", idBlocComment))).waitUntil(Condition.visible, Configuration.timeout)
                 .click();
         // Insert the reply
-        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.visible, Configuration.collectionsTimeout);
+        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout);
         $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
         homePagePlatform.refreshUntil($(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))), Condition.visible, 1000);
         switch (type) {
@@ -1815,7 +1815,7 @@ public class ActivityStream {
         // Get id Comment button
         executeJavaScript("window.scrollBy(0,-250)");
         $(byId(ELEMENT_VIEW_ALL_REPLIES_LINK.replace("{id}", idBlocComment))).waitUntil(Condition.appears, Configuration.timeout)
-                .findElementByClassName("subCommentShowAllLink")
+                .findElement(By.className("subCommentShowAllLink"))
                 .click();
     }
 

@@ -351,7 +351,7 @@ public class CalendarManagement {
    */
   public void openMenuOfCalendar(String calendar) {
     info("Open menu of a calendar");
-    ELEMENT_LIST_CALENDAR.find(byText(calendar)).waitUntil(Condition.appears, Configuration.collectionsTimeout)
+    ELEMENT_LIST_CALENDAR.find(byText(calendar)).waitUntil(Condition.appears, Configuration.timeout)
             .hover()
             .parent()
             .parent()
@@ -375,7 +375,7 @@ public class CalendarManagement {
       $(ELEMENT_CALENDAR_QUICK_ADD_TASK_FORM).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case ADDEVENT:
-      $(ELEMENT_CALENDAR_ADD_EVENT_MENU).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+      $(ELEMENT_CALENDAR_ADD_EVENT_MENU).waitUntil(Condition.visible,Configuration.timeout).click();
       $(ELEMENT_EVENT_DRAWER).waitUntil(Condition.appears, Configuration.timeout);
       break;
     case EDIT:

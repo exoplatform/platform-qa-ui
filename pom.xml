@@ -1,26 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-
-    Copyright (C) 2003-2017 eXo Platform SAS.
-
-    This file is part of eXo PLF:: QA - UI.
-
-    eXo PLF:: QA - UI is free software; you can redistribute it and/or modify it
-    under the terms of the GNU Lesser General Public License as
-    published by the Free Software Foundation; either version 3 of
-    the License, or (at your option) any later version.
-
-    eXo PLF:: QA - UI software is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-    Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public
-    License along with eXo PLF:: QA - UI; if not, write to the Free
-    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
-    02110-1301 USA, or see <http://www.gnu.org/licenses/>.
-
--->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
@@ -57,110 +35,283 @@
     <url>https://github.com/exoplatform/platform-qa-ui</url>
   </scm>
   <properties>
-    <!-- PLF dependencies -->
-    <org.exoplatform.platform.version>5.3.x-SNAPSHOT</org.exoplatform.platform.version>
-    <!-- Override Maven Surefire/Failsafe plugins versions -->
-    <version.surefire.plugin>2.19.1</version.surefire.plugin>
-    <!-- Dependencies for UI Tests -->
+    <!-- ## eXo Platform -->
+    <lib.exoplatform.version>5.3.x-SNAPSHOT</lib.exoplatform.version>
+    <!-- ## Project libraries dependencies -->
+    <lib.bouncycastle.version>1.58</lib.bouncycastle.version>
+    <lib.guava.version>28.1-jre</lib.guava.version>
+    <lib.httpclient.version>4.5.10</lib.httpclient.version>
+    <lib.httpcore.version>4.4.12</lib.httpcore.version>
+    <lib.junit.version>4.12</lib.junit.version>
+    <lib.slf4j.version>1.7.28</lib.slf4j.version>
     <!-- JUnit5 stack -->
-    <org.junit.platform.version>1.0.0</org.junit.platform.version>
-    <org.junit.jupiter.version>5.0.0</org.junit.jupiter.version>
-    <!-- Selenium/Selenide Stack -->
-    <selenide.version>4.3</selenide.version>
-    <guava.version>21.0</guava.version>
-    <!-- Selenium / Selenide configuration  -->
+    <lib.junit.platform.version>1.5.1</lib.junit.platform.version>
+    <lib.junit.jupiter.version>5.5.1</lib.junit.jupiter.version>
+    <!-- Selenium / Selenide Stack -->
+    <lib.selenium.version>3.141.59</lib.selenium.version>
+    <lib.selenide.version>5.4.1</lib.selenide.version>
+    <!-- ## Maven plugin versions -->
+    <!-- Surefire / Failsafe -->
+    <version.surefire.plugin>2.22.2</version.surefire.plugin>
+    <version.surefire-report.plugin>2.22.2</version.surefire-report.plugin>
+    <version.failsafe.plugin>2.22.2</version.failsafe.plugin>
+    <!-- ## Selenide / Selenium default configuration -->
     <selenide.browser>org.exoplatform.platform.qa.ui.core.config.driver.ExoWebDriverProvider</selenide.browser>
     <selenide.holdBrowserOpen>false</selenide.holdBrowserOpen>
     <!-- Grid configuration -->
-    <selenide.remote>http://localhost:4444/wd/hub</selenide.remote>
     <selenide.baseUrl>http://localhost:8080</selenide.baseUrl>
     <selenide.browserSize>1366x768</selenide.browserSize>
+    <selenide.remote>http://localhost:4444/wd/hub</selenide.remote>
     <selenide.reports>${project.build.directory}/reports/ui-tests</selenide.reports>
+    <selenide.timeout>10000</selenide.timeout>
     <!-- Tests filtered by tags to include/exclude -->
-    <selenide.test.tags.include>smoke</selenide.test.tags.include>
-    <selenide.test.tags.exclude>license,register,answer</selenide.test.tags.exclude>
+    <selenide.tags.include>!nothing</selenide.tags.include>
+    <selenide.tags.exclude>license,register,answer</selenide.tags.exclude>
   </properties>
   <dependencyManagement>
     <!-- Import versions of external dependencies to use -->
     <dependencies>
+      <!-- all current project modules -->
       <dependency>
-        <groupId>org.exoplatform.platform</groupId>
-        <artifactId>platform</artifactId>
-        <version>${org.exoplatform.platform.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>platform-qa-ui-core</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>platform-qa-ui-selenium</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>platform-qa-ui-commons</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>platform-qa-ui-calendar</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>platform-qa-ui-ecms</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>platform-qa-ui-social</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>platform-qa-ui-forum</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>platform-qa-ui-wiki</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>platform-qa-ui-gatein</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>platform-qa-ui-platform</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>platform-qa-ui-chat</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>platform-qa-ui-task</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>platform-qa-ui-answer</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <!-- eXo Platform dependencies -->
+      <dependency>
+        <groupId>org.exoplatform.social</groupId>
+        <artifactId>social-component-core</artifactId>
+        <version>${lib.exoplatform.version}</version>
         <exclusions>
+          <!-- we need to exclude this artifact which embed old Guava classes-->
           <exclusion>
-            <artifactId>junit</artifactId>
-            <groupId>junit</groupId>
+            <groupId>com.google.javascript</groupId>
+            <artifactId>closure-compiler</artifactId>
           </exclusion>
         </exclusions>
+      </dependency>
+      <!-- JUnit 5 stack -->
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${lib.junit.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>${lib.junit.jupiter.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>${lib.junit.jupiter.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.vintage</groupId>
+        <artifactId>junit-vintage-engine</artifactId>
+        <version>${lib.junit.jupiter.version}</version>
+      </dependency>
+      <!-- Selenide Stack -->
+      <dependency>
+        <groupId>com.codeborne</groupId>
+        <artifactId>selenide</artifactId>
+        <version>${lib.selenide.version}</version>
+      </dependency>
+      <!-- Selenium Stack -->
+      <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-api</artifactId>
+        <version>${lib.selenium.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-support</artifactId>
+        <version>${lib.selenium.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-java</artifactId>
+        <version>${lib.selenium.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-firefox-driver</artifactId>
+        <version>${lib.selenium.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-chrome-driver</artifactId>
+        <version>${lib.selenium.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-ie-driver</artifactId>
+        <version>${lib.selenium.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-remote-driver</artifactId>
+        <version>${lib.selenium.version}</version>
+      </dependency>
+      <!-- other -->
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>${lib.guava.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>${lib.httpclient.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpcore</artifactId>
+        <version>${lib.httpcore.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bctls-jdk15on</artifactId>
+        <version>${lib.bouncycastle.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${lib.slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-simple</artifactId>
+        <version>${lib.slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>log4j-over-slf4j</artifactId>
+        <version>${lib.slf4j.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
   <dependencies>
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <scope>test</scope>
     </dependency>
-    <!-- Selenium/Selenide Stack -->
     <dependency>
       <groupId>com.codeborne</groupId>
       <artifactId>selenide</artifactId>
-      <version>${selenide.version}</version>
+      <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-api</artifactId>
-      <version>3.0.1</version>
-    </dependency>
-    <!--  Add this dependency to fix a classpath error with ChromeDriver -->
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>${guava.version}</version>
+      <scope>test</scope>
     </dependency>
-
-    <!-- JUnit5 stack -->
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>${org.junit.jupiter.version}</version>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>log4j-over-slf4j</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
   <build>
     <pluginManagement>
       <plugins>
         <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${version.surefire.plugin}</version>
+        </plugin>
+        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-report-plugin</artifactId>
-          <version>${version.surefire.plugin}</version>
+          <version>${version.surefire-report.plugin}</version>
           <configuration>
             <aggregate>true</aggregate>
             <alwaysGenerateFailsafeReport>true</alwaysGenerateFailsafeReport>
           </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <version>${version.failsafe.plugin}</version>
         </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
       <plugin>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <dependencies>
-          <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-surefire-provider</artifactId>
-            <version>${org.junit.platform.version}</version>
-          </dependency>
-          <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${org.junit.jupiter.version}</version>
-          </dependency>
-        </dependencies>
         <configuration>
+          <groups>${selenide.tags.include}</groups>
+          <excludedGroups>${selenide.tags.exclude}</excludedGroups>
           <properties>
-            <includeTags>${selenide.test.tags.include}</includeTags>
-            <excludeTags>${selenide.test.tags.exclude}</excludeTags>
+            <!--            <configurationParameters>-->
+            <!--              junit.jupiter.conditions.deactivate = *-->
+            <!--              junit.jupiter.extensions.autodetection.enabled = true-->
+            <!--              junit.jupiter.testinstance.lifecycle.default = per_class-->
+            <!--            </configurationParameters>-->
           </properties>
           <detail>true</detail>
           <forkCount>1</forkCount>
@@ -172,8 +323,9 @@
             <holdBrowserOpen>${selenide.holdBrowserOpen}</holdBrowserOpen>
             <selenide.baseUrl>${selenide.baseUrl}</selenide.baseUrl>
             <browser>${selenide.browser}</browser>
+            <selenide.browser>${selenide.browser}</selenide.browser>
             <selenide.browserSize>${selenide.browserSize}</selenide.browserSize>
-            <selenide.reports>${selenide.reports}</selenide.reports>
+            <selenide.reportsFolder>${selenide.reports}</selenide.reportsFolder>
           </systemPropertyVariables>
         </configuration>
       </plugin>
@@ -229,44 +381,7 @@
     </plugins>
   </reporting>
   <profiles>
-    <profile>
-      <id>chrome</id>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-failsafe-plugin</artifactId>
-            <configuration>
-              <systemPropertyVariables>
-                <webdriver.chrome.driver>${selenium.webdriver.chrome.driver.path}</webdriver.chrome.driver>
-              </systemPropertyVariables>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-      <properties>
-        <selenium.webdriver.chrome.driver.path>/tmp/chromedriver</selenium.webdriver.chrome.driver.path>
-      </properties>
-    </profile>
-    <profile>
-      <id>firefox</id>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-failsafe-plugin</artifactId>
-            <configuration>
-              <systemPropertyVariables>
-                <webdriver.gecko.driver>${selenium.webdriver.geckodriver.driver.path}</webdriver.gecko.driver>
-                <webdriver.firefox.marionette>true</webdriver.firefox.marionette>
-              </systemPropertyVariables>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-      <properties>
-        <selenium.webdriver.geckodriver.driver.path>/tmp/geckodriver</selenium.webdriver.geckodriver.driver.path>
-      </properties>
-    </profile>
-    <profile>
+   <profile>
       <!-- Run UI Integration Tests in Selenium Grid -->
       <id>grid</id>
       <build>

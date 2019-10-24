@@ -33,7 +33,7 @@ public class MyDashBoard {
      */
     public void addGadget(String gadgetTitle) {
         info("Click on GadGet button");
-        $(ELEMENT_MYDASH_BTN_ADDGADGET).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        $(ELEMENT_MYDASH_BTN_ADDGADGET).waitUntil(Condition.visible,Configuration.timeout).click();
         evt.waitForAndGetElement(ELEMENT_DASHBOARD_WORKSPACE_POPUP_TITLE, 2000, 0);
         info("The popup is shown");
         $(byXpath("//*[@class='GadgetTitle' and @title='${gadgetTitle}']".replace("${gadgetTitle}", gadgetTitle))).dragAndDropTo($(byXpath("//div[@id=\"GadgetContainer\"]"))).waitUntil(Condition.visible, Configuration.timeout);

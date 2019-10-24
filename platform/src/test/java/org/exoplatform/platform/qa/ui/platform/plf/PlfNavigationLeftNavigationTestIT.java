@@ -137,11 +137,11 @@ public class PlfNavigationLeftNavigationTestIT extends Base {
     $(ELEMENT_MY_SPACE_LINK_PLF).waitUntil(Condition.appears, Configuration.timeout);
 
     info("Open space 1 in the list");
-    ELEMENT_SECOND_SPACE_MY_SPACE.waitUntil(Condition.hasText(space1),Configuration.timeout);
+    ELEMENT_SECOND_SPACE_MY_SPACE.waitUntil(Condition.text(space1),Configuration.timeout);
     ELEMENT_SPACE_NAME_LEFT_NAVIGATION.find(byText(space1)).click();
 
     homePagePlatform.goToHomePage();
-    ELEMENT_SECOND_SPACE_MY_SPACE.waitUntil(Condition.hasText(space2),Configuration.timeout);
+    ELEMENT_SECOND_SPACE_MY_SPACE.waitUntil(Condition.text(space2),Configuration.timeout);
     homePagePlatform.goToMySpaces();
     spaceManagement.searchSpace(space1,"");
     spaceManagement.deleteSpace(space1,false);

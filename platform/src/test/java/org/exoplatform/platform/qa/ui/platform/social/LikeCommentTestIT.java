@@ -1058,9 +1058,9 @@ public class LikeCommentTestIT extends Base {
 
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
-    $(byXpath("//*[@class='uidocactivitycomposer']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.openBrowserTimeoutMs);
-    //ELEMENT_TAB_LINK.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("//*[@class='uidocactivitycomposer']")).waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
+    //ELEMENT_TAB_LINK.waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
     activityStream.addActivity(activity1, "");

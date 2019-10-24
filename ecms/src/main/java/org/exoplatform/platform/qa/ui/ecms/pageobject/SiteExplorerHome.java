@@ -97,7 +97,7 @@ public class SiteExplorerHome {
         selectNode(arrayElement);
       }
     }
-    $(byId("address")).waitUntil(Condition.hasValue("/"+path),Configuration.timeout);
+    $(byId("address")).waitUntil(Condition.value("/"+path),Configuration.timeout);
     sleep(Configuration.timeout);
   }
 
@@ -148,7 +148,7 @@ public class SiteExplorerHome {
   public void goToAddNewContent() {
 
     info("Click on New Document on Action Bar");
-    $(ELEMENT_ACTIONBAR_ADDDOCUMENT).waitUntil(Condition.appears, Configuration.collectionsTimeout).click();
+    $(ELEMENT_ACTIONBAR_ADDDOCUMENT).waitUntil(Condition.appears, Configuration.timeout).click();
     info("Verify that New content page is shown");
     sleep(Configuration.timeout);
     $(ELEMENT_ADDDOCUMENT_CHOICETYPE).waitUntil(Condition.appears, Configuration.timeout);
@@ -177,11 +177,11 @@ public class SiteExplorerHome {
     info("Click on File Explorer icon");
     // scroll de 50 pixel
     executeJavaScript("window.scrollBy(0,50);", "");
-    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    sleep(Configuration.collectionsTimeout);
+    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).waitUntil(Condition.visible,Configuration.timeout).click();
+    sleep(Configuration.timeout);
     info("Right click on nodename");
     executeJavaScript("window.scrollBy(0,-250)", "");
-    $(byXpath("//div[@id='UITreeExplorer']//i[@title='${title}']".replace("${title}",title))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("//div[@id='UITreeExplorer']//i[@title='${title}']".replace("${title}",title))).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_CONTENT_LIST.find(byLinkText(title)).waitUntil(Condition.visible,Configuration.timeout).contextClick();
     executeJavaScript("window.scrollBy(0,100);", "");
@@ -190,7 +190,7 @@ public class SiteExplorerHome {
     $(ELEMENT_SITEEXPLORER_ACTION_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
     sleep(Configuration.timeout);
     info("Click on Delete button on Confirm popup");
-    $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     refresh();
     if(destination.equals(true))
@@ -333,7 +333,7 @@ public class SiteExplorerHome {
     Boolean verify = (Boolean) (params.length > 0 ? params[0] : true);
     sleep(2000);
     $(byId("MultiUploadInputFiles")).uploadFromClasspath(link);
-    sleep(Configuration.collectionsTimeout);
+    sleep(Configuration.timeout);
     refresh();
     info("verify:" + verify);
     if (verify) {
@@ -565,9 +565,9 @@ public class SiteExplorerHome {
   public void lockNode(String name) {
     info("lock node:" + name);
     testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-    $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", name))).waitUntil(Condition.visible,Configuration.collectionsTimeout).contextClick();
-    $(ELEMENT_SITEEXPLORER_LIST_LOCK_NODE).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
-    $(byXpath(ELEMENT_SITEEXPLORER_LOCK_ICON.replace("$node", name))).waitUntil(Condition.visible,Configuration.collectionsTimeout);
+    $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", name))).waitUntil(Condition.visible,Configuration.timeout).contextClick();
+    $(ELEMENT_SITEEXPLORER_LIST_LOCK_NODE).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byXpath(ELEMENT_SITEEXPLORER_LOCK_ICON.replace("$node", name))).waitUntil(Condition.visible,Configuration.timeout);
   }
 
   /**
@@ -1112,17 +1112,6 @@ public class SiteExplorerHome {
   }
 
   /**
-   * Select File Explorer tree on left panel
-   */
-  public void selectFileExplorer() {
-    info("Select File Explorer");
-    WebElement el = (new WebDriverWait(testBase.getExoWebDriver().getWebDriver(),
-                                       30)).until(ExpectedConditions.presenceOfElementLocated(ELEMENT_FILE_EXPLORER_ICON));
-    el.click();
-
-  }
-
-  /**
    * Click on Delete button
    */
   public void clickDeleteButton() {
@@ -1151,49 +1140,6 @@ public class SiteExplorerHome {
     evt.click(ELEMENT_FILE_TITLE_RIGHT_PANEL.replace("${fileName}", filename));
 
     info("The document is opened");
-  }
-
-  /**
-   * Select all files in folder under admin view
-   */
-  public void selectAllFiles() {
-    info("Select all file");
-    WebElement el =
-                  (new WebDriverWait(testBase.getExoWebDriver().getWebDriver(),
-                                     30)).until(ExpectedConditions.presenceOfElementLocated(ELEMENT_SITE_EXPLORER_ALL_CHECKBOX));
-    if (evt.waitForAndGetElement(ELEMENT_DOCUMENT_LIST_ROW_CONTENT, 5000, 0) != null) {
-      info("check on the checkbox");
-      // el.click();
-      evt.clickByJavascript(el, 2);
-
-      info("Click on Delete button");
-      clickDeleteButton();
-    }
-
-  }
-
-  /**
-   * Select a new content in list
-   *
-   * @param nameContent String
-   */
-  public void selectAContentType(String nameContent) {
-    info("Select a content");
-    WebElement el =
-                  (new WebDriverWait(testBase.getExoWebDriver().getWebDriver(),
-                                     30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(ELEMENT_SITE_EXPLORER_CONTENT_NAME.replace("${nameContent}", nameContent))));
-    el.click();
-
-  }
-
-  /**
-   * Delete all files in a folder under Admin view
-   */
-  public void deleteAllFiles() {
-    info("Select Admin view type");
-    clickAdminView();
-    info("Select All checkbox");
-    selectAllFiles();
   }
 
   /**

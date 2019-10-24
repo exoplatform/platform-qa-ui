@@ -212,7 +212,7 @@ public class Plf_GettintStartedGadgetTestIT extends Base {
     ELEMENT_BUTTON_CHANGE_AVATAR.waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_INPUT_UPLOAD_AVATAR.uploadFromClasspath("testavatar.png");
     ELEMENT_BUTTON_CONFIRM_UPLOAD.waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR.waitUntil(Condition.visible,Configuration.timeout).click();
     info("Post an activity");
     homePagePlatform.goToHomePage();
     activityStream.addActivity(text, "");

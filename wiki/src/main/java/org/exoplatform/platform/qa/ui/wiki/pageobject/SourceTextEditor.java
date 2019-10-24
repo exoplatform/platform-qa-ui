@@ -128,10 +128,10 @@ public class SourceTextEditor {
    */
   public void editSimplePage(String newTitle, String newContent) {
     info("Input a title for the page");
-    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.collectionsTimeout).setValue(newTitle);
+    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.timeout).setValue(newTitle);
 
     info("Input a content for the page");
-    $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.visible,Configuration.collectionsTimeout).sendKeys(newContent);
+    $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.visible,Configuration.timeout).sendKeys(newContent);
 
   }
 

@@ -71,8 +71,8 @@ public class NavigationToolbar {
     info("Go to add page form");
     $(ELEMENT_LINK_EDIT).click();
     $(ELEMENT_MENU_PAGE_LINK).hover();
-    $(ELEMENT_MENU_ADD_PAGE_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    $(ELEMENT_PAGE_CREATION_WIZARD).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
+    $(ELEMENT_MENU_ADD_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_PAGE_CREATION_WIZARD).waitUntil(Condition.appears, Configuration.timeout);
   }
 
   /**
@@ -256,7 +256,7 @@ public class NavigationToolbar {
    */
   public void goToChangeLanguage() {
     info("Open Change Language popup");
-    $(ELEMENT_TOPBAR_AVATAR).waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+    $(ELEMENT_TOPBAR_AVATAR).waitUntil(Condition.visible, Configuration.timeout).click();
     $(ELEMENT_AVATAR_CHANGELANGUAGE).waitUntil(Condition.visible, Configuration.timeout).click();
   }
 
@@ -379,7 +379,7 @@ public class NavigationToolbar {
     info("Select a forum for poll");
     $(ELEMENT_SELECT_FORUM_COMBOBOX).waitUntil(Condition.visible, Configuration.timeout).click();
     $(byText(forum)).waitUntil(Condition.visible, Configuration.timeout).click();
-    $(ELEMENT_SELECT_FORUM_COMBOBOX).waitUntil(Condition.hasText(forum), Configuration.timeout);
+    $(ELEMENT_SELECT_FORUM_COMBOBOX).waitUntil(Condition.text(forum), Configuration.timeout);
     info("Click on next button");
     ELEMENT_LIST_FORUM_IN_TOP_NAVIGATION.waitUntil(Condition.disappear, Configuration.timeout);
     $(ELEMENT_NEXT_BUTTON).waitUntil(Condition.enabled, Configuration.timeout);
@@ -556,9 +556,9 @@ public class NavigationToolbar {
   public void goToAddUser() {
     info("Go to add user page");
     info("Click on administration icon");
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-    ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
+    ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
     ELEMENT_ADMINISTRATION_ADD_USERS.waitUntil(Condition.visible,Configuration.timeout).click();
   }
@@ -569,7 +569,7 @@ public class NavigationToolbar {
     sleep(Configuration.timeout);
     ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, 10000);
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   /**

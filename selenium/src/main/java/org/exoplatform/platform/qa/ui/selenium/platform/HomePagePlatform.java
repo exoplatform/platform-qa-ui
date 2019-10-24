@@ -81,7 +81,7 @@ public class HomePagePlatform {
     info("Click on Home link of intranet page");
     sleep(Configuration.timeout);
     executeJavaScript("window.scrollBy(0,-5500)", "");
-    sleep(Configuration.collectionsTimeout);
+    sleep(Configuration.timeout);
     $(ELEMENT_HOME_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout).click();
   }
 
@@ -90,7 +90,7 @@ public class HomePagePlatform {
    */
   public void goToCalendarPage() {
     info("-- Go to calendar home page --");
-    ELEMENT_CALENDAR_LINK_PLF.waitUntil(Condition.appears, Configuration.collectionsTimeout).click();
+    ELEMENT_CALENDAR_LINK_PLF.waitUntil(Condition.appears, Configuration.timeout).click();
     info("Verify that Calendar page is shown");
     refreshUntil($(ELEMENT_CALENDAR_WORKING_PANEL), Condition.visible, 1000);
     $(ELEMENT_CALENDAR_WORKING_PANEL).waitUntil(Condition.appears, Configuration.timeout);
@@ -106,7 +106,7 @@ public class HomePagePlatform {
    */
   public void goToMySpaces() {
     info("-- Go to my spaces --");
-    ELEMENT_MY_SPACE_LINK_PLF.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+    ELEMENT_MY_SPACE_LINK_PLF.waitUntil(Condition.visible, Configuration.timeout).click();
     refreshUntil(ELEMENT_ADDNEWSPACE_BUTTON, Condition.visible, Configuration.timeout);
   }
 

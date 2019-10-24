@@ -74,7 +74,7 @@ public class Login {
   public Login signOut() {
     sleep(Configuration.timeout);
     $(byId("UIUserPlatformToolBarPortlet")).waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(Configuration.collectionsTimeout);
+    sleep(Configuration.timeout);
     $(byClassName("uiIconPLFLogout")).waitUntil(Condition.visible,Configuration.timeout).click();
 
     return this;

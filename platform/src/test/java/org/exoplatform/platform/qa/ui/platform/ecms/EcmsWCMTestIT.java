@@ -534,17 +534,17 @@ public class EcmsWCMTestIT extends Base {
     info("Test 15 Manage the title");
     String title = "title" + getRandomNumber();
     navigationToolbar.goToSEO();
-    $(ELEMENT_SEO_TITLEBOX).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(title);
-    $(ELEMENT_SEO_SAVE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    $(ELEMENT_SEO_CLOSE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_SEO_TITLEBOX).waitUntil(Condition.visible,Configuration.timeout).setValue(title);
+    $(ELEMENT_SEO_SAVE).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_SEO_CLOSE).waitUntil(Condition.visible,Configuration.timeout).click();
     refresh();
     // Verify that the title of the page is changed
     assertEquals(Selenide.title(), title);
     navigationToolbar.goToSEO();
-    $(byClassName("uiIconDelete")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byClassName("uiIconDelete")).waitUntil(Condition.visible,Configuration.timeout).click();
     switchTo().alert().accept();
-    $(ELEMENT_SEO_SAVE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    $(ELEMENT_SEO_CLOSE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_SEO_SAVE).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_SEO_CLOSE).waitUntil(Condition.visible,Configuration.timeout).click();
     refresh();
 
   }
@@ -651,11 +651,11 @@ public class EcmsWCMTestIT extends Base {
     info("language2 is:" + language2);
     String apply2 = "Appliquer";
     navigationToolbar.goToSEO();
-    $(ELEMENT_SEO_LANGUAGE_SHOW).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(ELEMENT_SEO_LANGUAGE_SHOW).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_SEO_LANGUAGE_SELECTBOX).selectOption(language1);
     $(ELEMENT_SEO_TITLEBOX).setValue(title);
-    $(ELEMENT_SEO_SAVE).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
-    $(ELEMENT_SEO_CLOSE).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(ELEMENT_SEO_SAVE).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_SEO_CLOSE).waitUntil(Condition.visible,Configuration.timeout).click();
     refresh();
     navigationToolbar.goToChangeLanguage();
     changeLanguages.changeLanguage(language1, apply1);
@@ -699,7 +699,7 @@ public class EcmsWCMTestIT extends Base {
     changeLanguages.changeLanguage(language2, apply2);
     // Verify that sitemaps file is updated
     sleep(Configuration.timeout);
-    $(byText("sitemaps")).waitUntil(Condition.visible, Configuration.collectionsTimeout);
+    $(byText("sitemaps")).waitUntil(Condition.visible, Configuration.timeout);
     info("Delete SEO folder");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/SEO", "Site Management");
