@@ -31,7 +31,7 @@
   </parent>
   <groupId>org.exoplatform.platform.qa.ui</groupId>
   <artifactId>platform-qa-ui</artifactId>
-  <version>1.0.x-SNAPSHOT</version>
+  <version>1.1.x-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>eXo PLF:: QA - UI</name>
   <modules>
