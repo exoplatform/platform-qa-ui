@@ -18,9 +18,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_CLOSE_DOCUMENT_PREVIEW1;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
-
 
 
 public class OnlyOfficeTestIT extends Base {
@@ -103,13 +101,13 @@ public class OnlyOfficeTestIT extends Base {
     switchTo().window(0);
     refresh();
     info("Edit Online from document preview");
-    ELEMENT_OPEN_DOCUMENT_PREVIEW1.waitUntil(Condition.visible, 30000).doubleClick();
+    ELEMENT_OPEN_DOCUMENT_PREVIEW_FROM_AS.waitUntil(Condition.visible, 30000).doubleClick();
     onlyOfficeActivityStream.editOnlineFromPreviw();
     switchTo().window(1);
     onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(check_document, userName);
     switchTo().window(1).close();
     switchTo().window(0);
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW1.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+    ELEMENT_CLOSE_DOCUMENT_PREVIEW_FROM_AS.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
     activityStream.deleteDocumentFromAS(document);
     manageLogInOut.signOut();
   }
