@@ -1,13 +1,12 @@
 package org.exoplatform.platform.qa.ui.onlyOffice.pageobject;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-
 import static org.exoplatform.platform.qa.ui.selenium.locator.onlyOffice.OnlyOfficeLocator.*;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Configuration.*;
 
 public class OnlyOfficeActivityStream{
 
@@ -31,13 +30,13 @@ public class OnlyOfficeActivityStream{
      * Edit Online button from AS
      */
     public void editOnlineFromAS() {
-        ELEMENT_EDIT_ONlINE_BUTTON.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        ELEMENT_EDIT_ONlINE_BUTTON.waitUntil(visible,openBrowserTimeoutMs).click();
     }
 
     /**
      * Edit Online button from Preview Document
      */
     public void editOnlineFromPreviw() {
-        ELEMENT_EDIT_ONlINE_BUTTON.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        ELEMENT_EDIT_ONlINE_BUTTON.waitUntil(visible,openBrowserTimeoutMs).click();
     }
 }

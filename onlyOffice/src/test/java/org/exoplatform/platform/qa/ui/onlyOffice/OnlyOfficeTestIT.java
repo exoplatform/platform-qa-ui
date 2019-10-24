@@ -1,7 +1,5 @@
 package org.exoplatform.platform.qa.ui.onlyOffice;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.SiteExplorerHome;
@@ -17,8 +15,10 @@ import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Configuration.*;
 
 
 public class OnlyOfficeTestIT extends Base {
@@ -49,7 +49,7 @@ public class OnlyOfficeTestIT extends Base {
     onlyOfficeEditingPage           =new OnlyOfficeEditingPage(this);
     manageLogInOut.signInCas("root", "gtn");
     connectionsManagement           =new ConnectionsManagement(this);
-    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+    if ($(ELEMENT_SKIP_BUTTON).is(exist)) {
       $(ELEMENT_SKIP_BUTTON).click();
     }
   }
@@ -93,7 +93,7 @@ public class OnlyOfficeTestIT extends Base {
     String userName = PLFData.DATA_NAME_ROOT;
     info("Edit Online from document from AS");
     activityStream.uploadFileFromAS(document);
-    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document))), Condition.visible, Configuration.timeout);
+    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document))), visible,timeout);
     onlyOfficeActivityStream.editOnlineFromAS();
     switchTo().window(1);
     onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(check_document, userName);
@@ -101,13 +101,13 @@ public class OnlyOfficeTestIT extends Base {
     switchTo().window(0);
     refresh();
     info("Edit Online from document preview");
-    ELEMENT_OPEN_DOCUMENT_PREVIEW_FROM_AS.waitUntil(Condition.visible, 30000).doubleClick();
+    ELEMENT_OPEN_DOCUMENT_PREVIEW_FROM_AS.waitUntil(visible, 30000).doubleClick();
     onlyOfficeActivityStream.editOnlineFromPreviw();
     switchTo().window(1);
     onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(check_document, userName);
     switchTo().window(1).close();
     switchTo().window(0);
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW_FROM_AS.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+    ELEMENT_CLOSE_DOCUMENT_PREVIEW_FROM_AS.waitUntil(visible, collectionsTimeout).click();
     activityStream.deleteDocumentFromAS(document);
     manageLogInOut.signOut();
   }
@@ -126,7 +126,7 @@ public class OnlyOfficeTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(spaceTestName, "test", 5000);
     activityStream.uploadFileFromAS(document);
-    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document))), Condition.visible, Configuration.timeout);
+    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document))),visible, timeout);
     onlyOfficeActivityStream.editOnlineFromAS();
     switchTo().window(1);
     onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(check_document, userName);

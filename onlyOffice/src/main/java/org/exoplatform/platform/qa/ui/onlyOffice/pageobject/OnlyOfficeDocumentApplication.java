@@ -1,14 +1,13 @@
 package org.exoplatform.platform.qa.ui.onlyOffice.pageobject;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-
 import static org.exoplatform.platform.qa.ui.selenium.locator.onlyOffice.OnlyOfficeLocator.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Configuration.*;
 
 public class OnlyOfficeDocumentApplication{
 
@@ -31,7 +30,7 @@ public class OnlyOfficeDocumentApplication{
      * Click on Edit Online button
      */
     public void clickEditOnine() {
-        $(ELEMENT_EDIT_ONlINE_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(ELEMENT_EDIT_ONlINE_BUTTON).waitUntil(visible,timeout).click();
     }
 
 }
