@@ -61,7 +61,7 @@ public class SpaceHomePage {
         info("--Open Wiki tab of the space");
         info("Click on the tab");
         homePagePlatform.refreshUntil($(ELEMENT_SPACE_WIKI_TAB),Condition.visible,1000);
-        $(ELEMENT_SPACE_WIKI_TAB).waitUntil(Condition.appears, Configuration.timeout).click();
+        $(ELEMENT_SPACE_WIKI_TAB).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
         info("wiki page is shown");
     }
 
