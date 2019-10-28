@@ -94,20 +94,26 @@ public class OnlyOfficeTestIT extends Base {
     String document = "OO_test.docx";
     String check_document = "OO_test";
     String userName = PLFData.DATA_NAME_ROOT;
+
     info("Edit Online from document from AS");
     activityStream.uploadFileFromAS(document);
-    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document))), visible, timeout);
+    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document))), exist, timeout);
+
+    /*
     onlyOfficeActivityStream.editOnlineFromAS();
     switchTo().window(1);
     onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(check_document, userName);
     switchTo().window(1).close();
     switchTo().window(0);
     refresh();
+    */
+
     info("Edit Online from document preview");
-    ELEMENT_OPEN_DOCUMENT_PREVIEW_FROM_AS.waitUntil(visible, 30000).doubleClick();
-    onlyOfficeActivityStream.editOnlineFromPreviw();
+    $(".previews").waitUntil(exist, timeout).click();
+    onlyOfficeActivityStream.editOnlineFromPreview();
     switchTo().window(1);
     onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(check_document, userName);
+
     switchTo().window(1).close();
     switchTo().window(0);
     ELEMENT_CLOSE_DOCUMENT_PREVIEW_FROM_AS.waitUntil(visible, collectionsTimeout).click();
@@ -166,11 +172,11 @@ public class OnlyOfficeTestIT extends Base {
     manageLogInOut.signOut();
   }
 
-  @Test
   /*
    * EditOnline_BTN_US03_(01)
    * Check alignment of "Edit Online Button from AS"
    */
+  @Test
   public void EditOnlineButtonAlignmentFromAS() {
     String document = "OO_test.docx";
     info("Alignment of Edit Online button in AS");

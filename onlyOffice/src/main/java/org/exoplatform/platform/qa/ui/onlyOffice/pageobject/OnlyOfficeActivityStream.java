@@ -43,8 +43,8 @@ public class OnlyOfficeActivityStream{
     /**
      * Edit Online button from Preview Document
      */
-    public void editOnlineFromPreviw() {
-        ELEMENT_EDIT_ONlINE_BUTTON.waitUntil(visible,openBrowserTimeoutMs).click();
+    public void editOnlineFromPreview() {
+        ELEMENT_EDIT_ONLINE_BUTTON_FROM_PREVIEW.waitUntil(visible, openBrowserTimeoutMs).click();
     }
 
 
