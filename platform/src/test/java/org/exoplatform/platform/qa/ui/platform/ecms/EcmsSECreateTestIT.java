@@ -463,8 +463,9 @@ public class EcmsSECreateTestIT extends Base {
     siteExplorerHome.goToSpace(spaceName);
     refresh();
     siteExplorerHome.uploadFile("eXo-Platform.png");
-    $(ELEMENT_ADDRESS_BAR_ICON_VIEW).click();
-    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
+    executeJavaScript("window.scrollBy(0,-300)");
+    $(ELEMENT_ADDRESS_BAR_ICON_VIEW).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     $(byXpath(ELEMENT_SPACE_DRIVE_NODE_TREE_FILE.replace("${file}", "eXo-Platform.png"))).waitUntil(Condition.visible,
                                                                                                     Configuration.timeout);
     info("Delete the file");
@@ -488,6 +489,7 @@ public class EcmsSECreateTestIT extends Base {
     siteExplorerHome.goToSpace(spaceName);
     refresh();
     siteExplorerHome.uploadFile("eXo-Platform.png");
+    executeJavaScript("window.scrollBy(0,-300)");
     $(ELEMENT_ADDRESS_BAR_ICON_VIEW).click();
     $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
     $(byXpath(ELEMENT_SPACE_DRIVE_NODE_TREE_FILE.replace("${file}", "eXo-Platform.png"))).waitUntil(Condition.visible,

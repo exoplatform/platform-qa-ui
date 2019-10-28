@@ -474,10 +474,11 @@ public class ActivityStream {
      */
     public void addText(String text) {
         info("----Add text into activity text box-----");
+        testBase.getExoWebDriver().getWebDriver().navigate().refresh();
         SelenideElement frame = $(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible, Configuration.collectionsTimeout);
         $(ELEMENT_ACCOUNT_NAME_LINK).click();
         switchTo().frame(frame);
-        ELEMENT_INPUT_ACTIVITY.click();
+        ELEMENT_INPUT_ACTIVITY.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         ELEMENT_INPUT_ACTIVITY.sendKeys(text);
         switchTo().defaultContent();
     }

@@ -2,8 +2,7 @@ package org.exoplatform.platform.qa.ui.platform.plf;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
@@ -209,7 +208,8 @@ public class Plf_GettintStartedGadgetTestIT extends Base {
     ELEMENT_HP_GETTING_STARTED_SET_YOUR_PROFILE_PICTURE.click();
     $(ELEMENT_ACCOUNT_NAME_LINK).click();
     $(ELEMENT_EDIT_MY_PROFILE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_BUTTON_CHANGE_AVATAR.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    executeJavaScript("window.scrollBy(0,300)");
+    ELEMENT_BUTTON_CHANGE_AVATAR.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_INPUT_UPLOAD_AVATAR.uploadFromClasspath("testavatar.png");
     ELEMENT_BUTTON_CONFIRM_UPLOAD.waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR.waitUntil(Condition.visible,Configuration.timeout).click();

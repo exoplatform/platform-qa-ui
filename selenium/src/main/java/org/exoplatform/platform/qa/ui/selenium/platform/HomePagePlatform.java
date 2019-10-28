@@ -145,7 +145,7 @@ public class HomePagePlatform {
   public void goToForum() {
     info("-- Go to forum page --");
     sleep(Configuration.timeout);
-    $(ELEMENT_FORUM_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_FORUM_LINK_PLF).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     refresh();
   }
 

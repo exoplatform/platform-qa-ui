@@ -186,8 +186,8 @@ public class CalendarEventRecurringTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               content,
-                                              getDate(0, "MM/dd/yyyy HH") + ":00",
-                                              getDate(0, "MM/dd/yyyy HH") + ":30",
+                                              getDate(0, "MM-dd-yyyy HH") + ":00",
+                                              getDate(0, "MM-dd-yyyy HH") + ":30",
                                               false);
     check(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX, 2);
     eventManagement.inputRecurringInfoEvent(EventManagement.repeatType.Daily,
@@ -197,6 +197,10 @@ public class CalendarEventRecurringTestIT extends Base {
                                             "5");
     click(ELEMENT_SAVE_EVENT_OCCURRING);
     eventManagement.saveAddEventDetails();
+    calendarHomePage.verifyIsPresentEventTaskWithDateTime(titleEvent,
+                                                          getDate(0, "MMM dd yyyy"),
+                                                          CalendarHomePage.selectViewOption.MONTH,
+                                                          CalendarHomePage.selectDayOption.DETAILTIME);
     calendarHomePage.verifyIsPresentEventTaskWithDateTime(titleEvent,
                                                           getDate(1, "MMM dd yyyy"),
                                                           CalendarHomePage.selectViewOption.MONTH,
@@ -218,7 +222,7 @@ public class CalendarEventRecurringTestIT extends Base {
                                          CalendarHomePage.selectViewOption.WEEK,
                                          CalendarHomePage.selectDayOption.DETAILTIME,
                                          EventManagement.recurringType.FOLLOW_EVENT,
-                                         getDate(2, "MMM dd yyyy"),
+                                         getDate(0, "MMM dd yyyy"),
                                          true);
     calendarHomePage.verifyIsNotPresentEventTaskWithDateTime(titleEvent,
                                                              getDate(0, "MMM dd yyyy"),

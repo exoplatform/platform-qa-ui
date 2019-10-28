@@ -784,7 +784,27 @@ public class EventManagement {
                                       String... option) {
     info("Add recurring information");
     String occurence = option.length > 0 ? option[0] : "";
-    ELEMENT_REPEAT_SWITCH_LABEL.click();
+    switch (repeatType) {
+      case Daily:
+        info("Select Daily option");
+        $(byXpath("//*[@id='repeatType' and @class='selectbox']")).waitUntil(Condition.visible,Configuration.collectionsTimeout).selectOption("Daily");
+        break;
+      case Weekly:
+        info("Select Weekly option");
+        $(byXpath("//*[@id='repeatType' and @class='selectbox']")).waitUntil(Condition.visible,Configuration.collectionsTimeout).selectOption("Weekly");
+        break;
+      case Monthly:
+        info("Select Monthly option");
+        $(byXpath("//*[@id='repeatType' and @class='selectbox']")).waitUntil(Condition.visible,Configuration.collectionsTimeout).selectOption("Monthly");
+        break;
+      case Yearly:
+        info("Select Yearly option");
+        $(byXpath("//*[@id='repeatType' and @class='selectbox']")).waitUntil(Condition.visible,Configuration.collectionsTimeout).selectOption("Yearly");
+        break;
+      default:
+        info("No option in the list.Please select correct option.");
+        break;
+    }
     if (endRepeat != null) {
       switch (endRepeat) {
         case After:

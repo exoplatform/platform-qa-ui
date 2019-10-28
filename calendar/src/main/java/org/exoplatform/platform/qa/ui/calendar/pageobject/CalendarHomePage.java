@@ -1,10 +1,7 @@
 package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static com.codeborne.selenide.Selenide.refresh;
-import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_AVATAR_CHANGELANGUAGE;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.ELEMENT_CHANGE_LANGUAGE_POPUP_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
@@ -70,9 +67,9 @@ public class CalendarHomePage {
         ELEMENT_CALENDAR_LIST_BUTTON.click();
         break;
       case MONTH:
-        $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"))).waitUntil(Condition.visible,Configuration.timeout);
-        $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"))).click();
-        $(byXpath(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Month"))).waitUntil(Condition.visible,Configuration.timeout);
+        sleep(Configuration.timeout);
+        $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        $(byXpath(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Month"))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
         break;
       case WORKWEEK:
         $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Work Week"))).waitUntil(Condition.visible,Configuration.timeout).click();

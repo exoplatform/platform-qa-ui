@@ -279,8 +279,8 @@ public class PlfUnifiedSearchTestIT extends Base {
     switchTo().alert();
     confirm();
     switchToParentWindow();
-    $(ELEMENT_EDIT_PORTLET_FORM_CLOSE_BUTTON).click();
-    ELEMENT_CLOSE_PORTLET.click();
+    $(ELEMENT_EDIT_PORTLET_FORM_CLOSE_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CLOSE_PORTLET.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
   }
 

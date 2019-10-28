@@ -343,40 +343,42 @@ public class EcmsSEBasicActionTestIT extends Base {
     public void test10_PasteClipboard() {
 
         String titleCommonNode = "titlecommonnode" + getRandomNumber();
+        String titleCommonNodeCopy = titleCommonNode + "(1)";
 
         navigationToolbar.goToSiteExplorer();
-        click(ELEMENT_SIDEBAR_SITES_MANAGEMENT);
+        $(ELEMENT_SIDEBAR_SITES_MANAGEMENT).waitUntil(Condition.visible,Configuration.timeout);
         siteExplorerHome.goToAddNewContent();
         createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
         createNewDocument.addNewWebContent(titleCommonNode, titleCommonNode);
         createNewDocument.saveAndClose();
-
+        sleep(3000);
         // clean the clipboard
-        $(ELEMENT_ACCOUNT_NAME_LINK).click();
-        sleep(Configuration.timeout);
-        $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNode))).waitUntil(Condition.visible,Configuration.timeout).contextClick();
-        $(ELEMENT_SITEEXPLORER_ACTION_COPY).click();
-        $(ELEMENT_SITEEXPLORER_CLIPBOARD).click();
-        $(ELEMENT_CLIPBOARD_CLEAR_ALL).click();
-        $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
-        $(ELEMENT_SIDEBAR_SITES_MANAGEMENT).click();
+        $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNode))).waitUntil(Condition.visible,Configuration.collectionsTimeout).contextClick();
+        $(ELEMENT_SITEEXPLORER_ACTION_COPY).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        $(ELEMENT_SITEEXPLORER_CLIPBOARD).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        executeJavaScript("window.scrollBy(0,-500)");
+        $(ELEMENT_CLIPBOARD_CLEAR_ALL).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(ELEMENT_SIDEBAR_SITES_MANAGEMENT).waitUntil(Condition.visible,Configuration.timeout).click();
 
         info("Test 10 Paste Clipboard");
-        $(ELEMENT_ACCOUNT_NAME_LINK).click();
+        $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
         $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNode))).contextClick();
-        $(ELEMENT_SITEEXPLORER_ACTION_COPY).click();
-        $(ELEMENT_SITEEXPLORER_CLIPBOARD).click();
+        $(ELEMENT_SITEEXPLORER_ACTION_COPY).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(ELEMENT_SITEEXPLORER_CLIPBOARD).waitUntil(Condition.visible,Configuration.timeout).click();
         $(byAttribute("data-original-title", "collaboration:/sites/" + titleCommonNode)).parent().parent().find(byClassName("uiIconEcmsPaste")).click();
-        $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
+        $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).waitUntil(Condition.visible,Configuration.timeout).click();
 
         // delete the past node
-        $(ELEMENT_ACCOUNT_NAME_LINK).click();
+        $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
         $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNode))).contextClick();
-        $(ELEMENT_SITEEXPLORER_ACTION_DELETE).click();
-        $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).click();
-        $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNode))).waitUntil(Condition.visible, Configuration.timeout);
+        $(ELEMENT_SITEEXPLORER_ACTION_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(byXpath("//span[@class='PopupTitle popupTitle' and contains(text(),'Delete')]")).dragAndDropTo($(byXpath("//div[@class='UITableColumnContainer']")));
+        $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
+        sleep(3000);
+        $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNodeCopy))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).isDisplayed();
 
-        siteExplorerHome.deleteData(titleCommonNode);
+        siteExplorerHome.deleteData(titleCommonNodeCopy);
     }
 
 }

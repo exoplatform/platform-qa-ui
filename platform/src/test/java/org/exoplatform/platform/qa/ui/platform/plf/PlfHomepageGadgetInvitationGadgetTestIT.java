@@ -214,6 +214,7 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
     manageLogInOut.signIn(username3,password);
     navigationToolbar.goToQuickSearch();
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
+    getExoWebDriver().getWebDriver().navigate().refresh();
     ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().hover();
     ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().parent().find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).shouldNot(Condition.exist);
@@ -270,6 +271,7 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
     manageLogInOut.signIn(username3, password);
     navigationToolbar.goToQuickSearch();
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.collectionsTimeout);
+    getExoWebDriver().getWebDriver().navigate().refresh();
     executeJavaScript("window.scrollBy(0,250)");
     ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().hover();
     ELEMENT_GADGET_INVITATION.waitUntil(Condition.visible,2000).find(byText(username2 + " " + username2)).parent().parent().waitUntil(Condition.visible,2000).find(byClassName("uiIconClose")).waitUntil(Condition.visible,Configuration.timeout).click();

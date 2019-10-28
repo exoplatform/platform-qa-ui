@@ -73,7 +73,7 @@ public class TaskAssignInChatTestIT extends Base {
     refresh();
     ELEMENT_USER_RESULT_SEARCH.find(byText(PLFData.DATA_NAME_USER2)).click();
     ELEMENT_USER_PROFILE.waitUntil(Condition.appear, Configuration.timeout);
-    ELEMENT_CHAT_BUTTON_USER_PROFILE.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    ELEMENT_CHAT_BUTTON_USER_PROFILE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_MINI_CHAT.waitUntil(Condition.appear, Configuration.timeout);
     MiniChatName = $(byClassName("title-left")).parent().parent().find(byClassName("fullname")).getText();
     Assert.assertEquals(PLFData.DATA_NAME_USER2, MiniChatName);
@@ -84,7 +84,7 @@ public class TaskAssignInChatTestIT extends Base {
     chatManagement.assignTaskInChat(taskName, PLFData.DATA_USER2);
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byLinkText(taskName)).click();
     switchTo().window(2);
-    assertEquals("Tasks", title());
+    Assert.assertEquals(taskName,$(byXpath("(//div[@class='column-item column-title taskName'])[1]")).getText());
     $(byText(taskName)).shouldBe(Condition.visible);
     tasksManagement.deleteTask(taskName);
 
