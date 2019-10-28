@@ -14,41 +14,44 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.onlyOffice.OnlyOfficeLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Configuration.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class OnlyOfficeTestIT extends Base {
 
-  HomePagePlatform               homePagePlatform;
-  NavigationToolbar              navigationToolbar;
-  SiteExplorerHome               siteExplorerHome;
-  ManageLogInOut                 manageLogInOut;
-  ConnectionsManagement          connectionsManagement;
-  ActivityStream                 activityStream;
-  SpaceManagement                spaceManagement;
-  OnlyOfficeDocumentApplication  onlyOfficeDocumentApplication;
-  OnlyOfficeActivityStream       onlyOfficeActivityStream;
-  OnlyOfficeEditingPage          onlyOfficeEditingPage;
+  HomePagePlatform homePagePlatform;
+  NavigationToolbar navigationToolbar;
+  SiteExplorerHome siteExplorerHome;
+  ManageLogInOut manageLogInOut;
+  ConnectionsManagement connectionsManagement;
+  ActivityStream activityStream;
+  SpaceManagement spaceManagement;
+  OnlyOfficeDocumentApplication onlyOfficeDocumentApplication;
+  OnlyOfficeActivityStream onlyOfficeActivityStream;
+  OnlyOfficeEditingPage onlyOfficeEditingPage;
 
 
   @BeforeEach
   public void setupBeforeMethod() {
 
-    homePagePlatform                =new HomePagePlatform(this);
-    navigationToolbar               =new NavigationToolbar(this);
-    siteExplorerHome                =new SiteExplorerHome(this);
-    manageLogInOut                  =new ManageLogInOut(this);
-    spaceManagement                 =new SpaceManagement(this);
-    activityStream                  =new ActivityStream(this);
-    onlyOfficeDocumentApplication   =new OnlyOfficeDocumentApplication(this);
-    onlyOfficeActivityStream        =new OnlyOfficeActivityStream(this);
-    onlyOfficeEditingPage           =new OnlyOfficeEditingPage(this);
+    homePagePlatform = new HomePagePlatform(this);
+    navigationToolbar = new NavigationToolbar(this);
+    siteExplorerHome = new SiteExplorerHome(this);
+    manageLogInOut = new ManageLogInOut(this);
+    spaceManagement = new SpaceManagement(this);
+    activityStream = new ActivityStream(this);
+    onlyOfficeDocumentApplication = new OnlyOfficeDocumentApplication(this);
+    onlyOfficeActivityStream = new OnlyOfficeActivityStream(this);
+    onlyOfficeEditingPage = new OnlyOfficeEditingPage(this);
     manageLogInOut.signInCas("root", "gtn");
-    connectionsManagement           =new ConnectionsManagement(this);
+    connectionsManagement = new ConnectionsManagement(this);
     if ($(ELEMENT_SKIP_BUTTON).is(exist)) {
       $(ELEMENT_SKIP_BUTTON).click();
     }
@@ -59,7 +62,7 @@ public class OnlyOfficeTestIT extends Base {
    * EditOnline_BTN_US01
    * Upload a document & click on Edit Online button in Document Application/View Document and check document is correctly opened
    */
-  public void EditOnlineDocumentFromDocumentsApp () {
+  public void EditOnlineDocumentFromDocumentsApp() {
     String document = "OO_test";
     String userName = PLFData.DATA_NAME_ROOT;
     info("Upload document");
@@ -72,7 +75,7 @@ public class OnlyOfficeTestIT extends Base {
     onlyOfficeDocumentApplication.clickEditOnine();
     switchTo().window(2);
     refresh();
-    onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(document,userName);
+    onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(document, userName);
     switchTo().window(2).close();
     switchTo().window(1).close();
     switchTo().window(0);
@@ -87,13 +90,13 @@ public class OnlyOfficeTestIT extends Base {
    * EditOnline_BTN_US02_(01)
    * Upload a document & click on Edit Online button from Activity Stream, from Document Preview and check document is correctly opened
    */
-  public void EditOnlineDocumentFromActivityStreamAndPreview () {
+  public void EditOnlineDocumentFromActivityStreamAndPreview() {
     String document = "OO_test.docx";
     String check_document = "OO_test";
     String userName = PLFData.DATA_NAME_ROOT;
     info("Edit Online from document from AS");
     activityStream.uploadFileFromAS(document);
-    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document))), visible,timeout);
+    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document))), visible, timeout);
     onlyOfficeActivityStream.editOnlineFromAS();
     switchTo().window(1);
     onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(check_document, userName);
@@ -117,7 +120,7 @@ public class OnlyOfficeTestIT extends Base {
    * EditOnline_BTN_US02_(02)
    * Upload a document in a Space & click on Edit Online button from Space Activity Stream and check document is correctly opened
    */
-  public void EditOnlineDocumentFromSpaceAS () {
+  public void EditOnlineDocumentFromSpaceAS() {
     String document = "OO_test.docx";
     String check_document = "OO_test";
     String userName = PLFData.DATA_NAME_ROOT;
@@ -126,7 +129,7 @@ public class OnlyOfficeTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(spaceTestName, "test", 5000);
     activityStream.uploadFileFromAS(document);
-    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document))),visible, timeout);
+    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document))), visible, timeout);
     onlyOfficeActivityStream.editOnlineFromAS();
     switchTo().window(1);
     onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(check_document, userName);
@@ -142,7 +145,7 @@ public class OnlyOfficeTestIT extends Base {
    * EditOnline_BTN_US02_(03)
    * Upload a document & click on Edit Online button in Document Application and check document is correctly opened
    */
-  public void EditOnlineDocumentFromDocumentApplication () {
+  public void EditOnlineDocumentFromDocumentApplication() {
     String document = "OO_test.docx";
     String check_document = "OO_test";
     String userName = PLFData.DATA_NAME_ROOT;
@@ -154,7 +157,7 @@ public class OnlyOfficeTestIT extends Base {
     switchTo().window(1);
     onlyOfficeDocumentApplication.clickEditOnine();
     switchTo().window(2);
-    onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(check_document,userName);
+    onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(check_document, userName);
     switchTo().window(2).close();
     switchTo().window(1).close();
     switchTo().window(0);
@@ -163,5 +166,30 @@ public class OnlyOfficeTestIT extends Base {
     manageLogInOut.signOut();
   }
 
+  @Test
+  /*
+   * EditOnline_BTN_US03_(01)
+   * Check alignment of "Edit Online Button from AS"
+   */
+  public void EditOnlineButtonAlignmentFromAS() {
+    String document = "OO_test.docx";
+    info("Alignment of Edit Online button in AS");
+    activityStream.uploadFileFromAS(document);
+    refresh();
+    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document))), visible, timeout);
+    onlyOfficeActivityStream.checkAlignmentButtonDocument(ELEMENT_DOWNLOAD_BUTTON_FROM_AS_TEXT, ELEMENT_OPEN_BUTTON_FROM_AS_TEXT, ELEMENT_EDIT_ONLINE_BUTTON_FROM_AS_TEXT);
+    info("Alignment of Edit Online button in AS");
+    ELEMENT_OPEN_DOCUMENT_PREVIEW_FROM_AS.waitUntil(visible, 30000).doubleClick();
+    ELEMENT_EDIT_ONLINE_BUTTON_FROM_PREVIEW_TEXT.waitUntil(visible,openBrowserTimeoutMs);
+    onlyOfficeActivityStream.checkAlignmentButtonDocument(ELEMENT_DOWNLOAD_BUTTON_FROM_PREVIEW_TEXT, ELEMENT_OPEN_IN_DOCUMENT_FROM_PREVIEW_TEXT, ELEMENT_EDIT_ONLINE_BUTTON_FROM_PREVIEW_TEXT);
+    ELEMENT_CLOSE_DOCUMENT_PREVIEW_FROM_AS.waitUntil(visible, collectionsTimeout).click();
+    refresh();
+    activityStream.deleteDocumentFromAS(document);
+    manageLogInOut.signOut();
+  }
+
+
+
 }
+
 

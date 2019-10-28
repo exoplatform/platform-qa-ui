@@ -1,9 +1,12 @@
 package org.exoplatform.platform.qa.ui.onlyOffice.pageobject;
 
+import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.exoplatform.platform.qa.ui.selenium.locator.onlyOffice.OnlyOfficeLocator.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Configuration.*;
@@ -15,6 +18,10 @@ public class OnlyOfficeActivityStream{
     public ManageAlert alert;
 
     public HomePagePlatform homePagePlatform;
+
+    public ActivityStream activityStream;
+    public OnlyOfficeActivityStream onlyOfficeActivityStream;
+    public OnlyOfficeEditingPage    onlyOfficeEditingPage;
 
 
     private ElementEventTestBase evt;
@@ -39,4 +46,19 @@ public class OnlyOfficeActivityStream{
     public void editOnlineFromPreviw() {
         ELEMENT_EDIT_ONlINE_BUTTON.waitUntil(visible,openBrowserTimeoutMs).click();
     }
+
+
+    /**
+     * Check alignment of button Document
+     * @param element1
+     * @param element2
+     * @param element3
+     */
+    public void checkAlignmentButtonDocument(SelenideElement element1, SelenideElement element2, SelenideElement element3) {
+        int locElement1Button = element1.getLocation().y;
+        int locElement2Button = element2.getLocation().y;
+        int locElement3Button = element3.getLocation().y;
+        assertEquals(locElement1Button,locElement2Button,locElement3Button);
+    }
+
 }
