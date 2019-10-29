@@ -163,13 +163,13 @@ public class PlfUnifiedSearchTestIT extends Base {
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).pressEnter();
     navigationToolbar.goToEditLayout();
     pageEditor.goToEditPortlet(ELEMENT_FRAME_CONTAIN_PORTLET);
-    $(ELEMENT_EDIT_PORTLET_FORM_RESULTPERPAGE).selectOption("5");
-    click(ELEMENT_EDIT_PORTLET_FORM_SAVESETTINGS_BUTTON);
+    $(ELEMENT_EDIT_PORTLET_FORM_RESULTPERPAGE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).selectOption("5");
+    $(ELEMENT_EDIT_PORTLET_FORM_SAVESETTINGS_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     switchTo().alert();
     confirm();
     switchToParentWindow();
     $(ELEMENT_EDIT_PORTLET_FORM_CLOSE_BUTTON).click();
-    ELEMENT_CLOSE_PORTLET.click();
+    $(byXpath("//*[@class='uiIconClose pull-right']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**

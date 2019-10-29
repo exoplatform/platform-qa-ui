@@ -324,12 +324,12 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     String content = "content" + getRandomNumber();
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT),Condition.visible,1000);
     eventManagement.goToAddEventFromActionBar();
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).setValue(titleEvent);
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).waitUntil(Condition.visible,Configuration.collectionsTimeout).setValue(titleEvent);
     eventManagement.saveQuickAddEvent();
 
     String titleEvent2 = "titleEvent2" + getRandomNumber();
     calendarManagement.openEditEventTaskPopup(titleEvent, CalendarHomePage.selectViewOption.LIST);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).setValue(titleEvent2);
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).waitUntil(Condition.visible,Configuration.collectionsTimeout).setValue(titleEvent2);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.LIST);
     $(byText(titleEvent2)).waitUntil(Condition.appears, Configuration.collectionsTimeout);

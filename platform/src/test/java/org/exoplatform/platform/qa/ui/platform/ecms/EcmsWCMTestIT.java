@@ -534,17 +534,17 @@ public class EcmsWCMTestIT extends Base {
     info("Test 15 Manage the title");
     String title = "title" + getRandomNumber();
     navigationToolbar.goToSEO();
-    $(ELEMENT_SEO_TITLEBOX).setValue(title);
-    $(ELEMENT_SEO_SAVE).click();
-    $(ELEMENT_SEO_CLOSE).click();
+    $(ELEMENT_SEO_TITLEBOX).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(title);
+    $(ELEMENT_SEO_SAVE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_SEO_CLOSE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     refresh();
     // Verify that the title of the page is changed
     assertEquals(Selenide.title(), title);
     navigationToolbar.goToSEO();
-    $(byClassName("uiIconDelete")).click();
+    $(byClassName("uiIconDelete")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     switchTo().alert().accept();
-    $(ELEMENT_SEO_SAVE).click();
-    $(ELEMENT_SEO_CLOSE).click();
+    $(ELEMENT_SEO_SAVE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_SEO_CLOSE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     refresh();
 
   }
