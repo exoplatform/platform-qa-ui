@@ -18,7 +18,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see <http://www.gnu.org/licenses/>.
  */
-package org.exoplatform.platform.qa.ui.selenium.locator.calender;
+package org.exoplatform.platform.qa.ui.selenium.locator.calendar;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -1034,7 +1034,7 @@ public class CalendarLocator {
                                                                   By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input");
 
   public static final By              ELEMENT_ADD_EDIT_EVENT_NOTE                                      =
-                                                                  By.xpath("//*[@id='UIEventForm']//*[@id='description']");
+                                                                  By.xpath("//textarea[@placeholder='Add a description']");
 
   public static final By              ELEMENT_ADD_EDIT_EVENT_LOCATION                                  =
                                                                       By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[3]/div[2]/input");
@@ -1352,14 +1352,24 @@ public class CalendarLocator {
   public static final By              ELEMENT_DELETE_RECURRING_EVENT_FORM                              =
                                                                           By.xpath("//*[@class='uiConfirmForm']");
 
-  public static final By              ELEMENT_EDIT_DELETE_ONE_EVENT                                    =
+  public static final By              ELEMENT_EDIT_ONE_EVENT                                    =
                                                                     By.xpath("//*[@value='ONE']");
 
-  public static final By              ELEMENT_EDIT_DELETE_FOLLOWING_EVENT                              =
+  public static final By              ELEMENT_EDIT_FOLLOWING_EVENT                              =
                                                                           By.xpath("//*[@value='FOLLOWING']");
 
-  public static final By              ELEMENT_EDIT_DELETE_ALL_EVENT                                    =
+  public static final By              ELEMENT_EDIT_ALL_EVENT                                    =
                                                                     By.xpath("//*[@value='ALL']");
+
+  public static final By              ELEMENT_DELETE_ONE_EVENT                                    =
+                                                                    By.xpath("//*[@value='save_one']");
+
+
+  public static final By              ELEMENT_DELETE_FOLLOWING_EVENT                              =
+                                                                    By.xpath("//*[@value='save_follow']");
+
+  public static final By              ELEMENT_DELETE_ALL_EVENT                                    =
+                                                                    By.xpath("//*[@value='save_all']");
 
   public static final By              ELEMENT_CONFIRM_DELETE_BUTTON                                    =
                                                                     By.xpath("//*[@class='uiConfirmForm']//button[1]");
@@ -1696,6 +1706,7 @@ public class CalendarLocator {
   public static final SelenideElement ELEMENT_EVENT_TITLE_DRAWER=   $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input"));
   public static final SelenideElement ELEMENT_CLOSE_BUTTON_DRAWER=   $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[1]/a"));
   public static final SelenideElement ELEMENT_PARTICIPANT_DRAWER=     $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/div/div/input"));
+  public static final SelenideElement ELEMENT_EVENT_ADD_PARTICIPANT=   $(byXpath("//input[@placeholder='Participants']/following::div[2]/input"));
   public static final SelenideElement ELEMENT_REPEAT_SWITCH_LABEL=     $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[3]/div[2]/div[3]/div/label[1]/span"));
 
 

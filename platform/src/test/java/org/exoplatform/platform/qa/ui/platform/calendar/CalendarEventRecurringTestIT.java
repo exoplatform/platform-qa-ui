@@ -4,7 +4,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.calender.CalendarLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +18,6 @@ import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarHomePage;
 import org.exoplatform.platform.qa.ui.calendar.pageobject.EventManagement;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
-import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 
@@ -462,22 +461,19 @@ public class CalendarEventRecurringTestIT extends Base {
 
     info("Add a event");
     homePagePlatform.goToCalendarPage();
-
     eventManagement.goToAddEventFromActionBar();
-
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               content,
-                                              getDate(0, "MM/dd/yyyy HH") + ":00",
-                                              getDate(0, "MM/dd/yyyy HH") + ":30",
+                                              getDate(0, "MM-dd-yyyy HH") + ":00",
+                                              getDate(0, "MM-dd-yyyy HH") + ":30",
                                               false);
-    eventManagement.moreDetailsEvent();
     check(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX, 2);
     eventManagement.inputRecurringInfoEvent(EventManagement.repeatType.Daily,
                                             "1",
                                             null,
                                             EventManagement.repeatEndType.After,
                                             "5");
-    click(ELEMENT_SAVE_EVENT_OCCURRING);
+    $(ELEMENT_SAVE_EVENT_OCCURRING).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     eventManagement.saveAddEventDetails();
     calendarHomePage.verifyIsPresentEventTaskWithDateTime(titleEvent,
                                                           getDate(0, "MMM dd yyyy"),
@@ -545,10 +541,9 @@ public class CalendarEventRecurringTestIT extends Base {
 
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               content,
-                                              getDate(0, "MM/dd/yyyy HH") + ":00",
-                                              getDate(0, "MM/dd/yyyy HH") + ":30",
+                                              getDate(0, "MM-dd-yyyy HH") + ":00",
+                                              getDate(0, "MM-dd-yyyy HH") + ":30",
                                               false);
-    eventManagement.moreDetailsEvent();
     check(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX, 2);
     eventManagement.inputRecurringInfoEvent(EventManagement.repeatType.Daily,
                                             "1",
@@ -585,8 +580,7 @@ public class CalendarEventRecurringTestIT extends Base {
                                                        CalendarHomePage.selectDayOption.DETAILTIME,
                                                        getDate(0, "MMM dd yyyy"));
     eventManagement.inputDataEventInDetailForm(titleEvent2, contentEvent2, null, null, false);
-    // click(event.ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
-    clickByJavascript(ELEMENT_BUTTON_EVENT_SAVE_DETAILS, 2);
+    $(ELEMENT_EVENT_SAVE_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
     eventManagement.editRecurringEvent(EventManagement.recurringType.ALL_EVENT, true);
     calendarHomePage.verifyIsNotPresentEventTaskWithDateTime(titleEvent,
                                                              getDate(0, "MMM dd yyyy"),
@@ -673,10 +667,9 @@ public class CalendarEventRecurringTestIT extends Base {
 
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               content,
-                                              getDate(0, "MM/dd/yyyy HH") + ":00",
-                                              getDate(0, "MM/dd/yyyy HH") + ":30",
+                                              getDate(0, "MM-dd-yyyy HH") + ":00",
+                                              getDate(0, "MM-dd-yyyy HH") + ":30",
                                               false);
-    eventManagement.moreDetailsEvent();
     check(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX, 2);
     eventManagement.inputRecurringInfoEvent(EventManagement.repeatType.Daily,
                                             "1",
@@ -762,10 +755,9 @@ public class CalendarEventRecurringTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               content,
-                                              getDate(0, "MM/dd/yyyy HH") + ":00",
-                                              getDate(0, "MM/dd/yyyy HH") + ":30",
+                                              getDate(0, "MM-dd-yyyy HH") + ":00",
+                                              getDate(0, "MM-dd-yyyy HH") + ":30",
                                               false);
-    eventManagement.moreDetailsEvent();
     check(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX, 2);
     eventManagement.inputRecurringInfoEvent(EventManagement.repeatType.Daily,
                                             "1",
@@ -776,7 +768,7 @@ public class CalendarEventRecurringTestIT extends Base {
     eventManagement.saveAddEventDetails();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.MONTH);
     $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", titleEvent).replace("$date",
-                                                                                             getDate(0, "MMM dd yyyy")))).hover();
+                                                                                             getDate(0, "MMM dd yyyy")))).waitUntil(Condition.visible,Configuration.timeout).hover();
     $(ELEMENT_TITLE_RECURRING_EVENT).waitUntil(Condition.visible, Configuration.timeout);
     $(ELEMENT_DATE_TIME_RECURRING_EVENT).waitUntil(Condition.visible, Configuration.timeout);
     $(ELEMENT_RECURRING_TEXT_RECURRING_EVENT).waitUntil(Condition.visible, Configuration.timeout);
@@ -801,10 +793,9 @@ public class CalendarEventRecurringTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               content,
-                                              getDate(30, "MM/dd/yyyy HH") + ":00",
-                                              getDate(30, "MM/dd/yyyy HH") + ":30",
+                                              getDate(30, "MM-dd-yyyy HH") + ":00",
+                                              getDate(30, "MM-dd-yyyy HH") + ":30",
                                               false);
-    eventManagement.moreDetailsEvent();
     check(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX, 2);
     eventManagement.inputRecurringInfoEvent(EventManagement.repeatType.Yearly,
                                             "1",
@@ -814,14 +805,15 @@ public class CalendarEventRecurringTestIT extends Base {
     click(ELEMENT_SAVE_EVENT_OCCURRING);
     eventManagement.saveAddEventDetails();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.MONTH);
-    $(ELEMENT_NEXT_BUTTON_ANY_VIEW).click();
+    $(ELEMENT_NEXT_BUTTON_ANY_VIEW).waitUntil(Condition.visible, Configuration.timeout).click();
     $(byText(titleEvent)).waitUntil(Condition.visible, Configuration.timeout);
-    $(ELEMENT_PREVIOUS_BUTTON_ANY_VIEW).click();
+    $(ELEMENT_PREVIOUS_BUTTON_ANY_VIEW).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(byText(titleEvent)).is(Condition.not(Condition.visible));
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEvent2,
                                               content,
-                                              getDate(0, "MM/dd/yyyy HH") + ":00",
-                                              getDate(0, "MM/dd/yyyy HH") + ":30",
+                                              getDate(0, "MM-dd-yyyy HH") + ":00",
+                                              getDate(0, "MM-dd-yyyy HH") + ":30",
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTaskWithDateTime(titleEvent2,
@@ -832,5 +824,13 @@ public class CalendarEventRecurringTestIT extends Base {
                                      CalendarHomePage.selectViewOption.LIST,
                                      CalendarHomePage.selectDayOption.DETAILTIME,
                                      getDate(0, "MM/dd/yyyy"));
+
+    eventManagement.deleteRecurringEvent(titleEvent,
+                                     CalendarHomePage.selectViewOption.MONTH,
+                                     CalendarHomePage.selectDayOption.DETAILTIME,
+                                     EventManagement.recurringType.ALL_EVENT,
+                                     getDate(30, "MMM dd yyyy"),
+                                    true);
+
   }
 }
