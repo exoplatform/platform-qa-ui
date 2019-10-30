@@ -100,7 +100,7 @@ public class OnlyOfficeTestIT extends Base {
     refresh();
     info("Edit Online from document preview");
     ELEMENT_OPEN_DOCUMENT_PREVIEW_FROM_AS.waitUntil(visible, 30000).doubleClick();
-    onlyOfficeActivityStream.editOnlineFromPreviw();
+    onlyOfficeActivityStream.editOnlineFromPreview();
     switchTo().window(1);
     onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(document,extension);
     switchTo().window(1).close();
@@ -154,7 +154,7 @@ public class OnlyOfficeTestIT extends Base {
     switchTo().window(2).close();
     switchTo().window(1).close();
     switchTo().window(0);
-    siteExplorerHome.checkButtonDocument(document);
+    siteExplorerHome.checkButtonDocument("OO_test");
     siteExplorerHome.clickDeleteButtonDocument();
     manageLogInOut.signOut();
   }
