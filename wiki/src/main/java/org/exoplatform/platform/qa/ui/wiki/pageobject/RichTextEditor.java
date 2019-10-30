@@ -824,7 +824,7 @@ public class RichTextEditor {
   public void inputWebAddress(String address) {
     if (!address.isEmpty()) {
       info("Input web address");
-      $(ELEMENT_WEB_PAGE_WEB_ADDRESS).val(address);
+      $(byXpath("//*[@title='Email address']")).waitUntil(Condition.visible,Configuration.collectionsTimeout).val(address);
     }
   }
 
@@ -877,6 +877,7 @@ public class RichTextEditor {
    */
   public void insertWebLink(String address, String label, String tooltip, Boolean isPressEndKey) {
     info("Input web address for the page");
+
     inputWebAddress(address);
     info("Input Label for the page");
     inputLabel(label);

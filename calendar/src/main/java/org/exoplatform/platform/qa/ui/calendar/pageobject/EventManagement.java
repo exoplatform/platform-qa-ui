@@ -7,6 +7,7 @@ import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.By;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -862,14 +863,11 @@ public class EventManagement {
     cHome.goToRightMenuTaskEventFromAnyView(name, view, optionDay, date);
     $(ELEMENT_CONTEXT_MENU_DELETE).click();
     $(ELEMENT_DELETE_RECURRING_EVENT_FORM).waitUntil(Condition.visible, Configuration.timeout);
+    evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_RECURRING_FORM);
     if (isVerify) {
-      $(ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT).waitUntil(Condition.visible, Configuration.timeout);
-      $(ELEMENT_EDIT_DELETE_ONE_EVENT).parent().waitUntil(Condition.visible, Configuration.timeout);
+      evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT);
+      evt.waitForAndGetElement(ELEMENT_EDIT_DELETE_ONE_EVENT, testBase.getDefaultTimeout(), 1, 2);
       info(evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT).getText());
-      assert evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT)
-                .getText()
-                .contains(ELEMENT_CONFIRM_DELETE_MESSAGE);
-      assert evt.waitForAndGetElement(ELEMENT_EDIT_DELETE_ONE_EVENT, testBase.getDefaultTimeout(), 1, 2).isSelected();
     }
     switch (optDeleteType) {
       case ONLY_EVENT:
@@ -901,9 +899,8 @@ public class EventManagement {
           evt.check(ELEMENT_EDIT_DELETE_ONE_EVENT, 2);
         break;
     }
-    evt.waitForAndGetElement(ELEMENT_CONFIRM_DELETE_BUTTON, testBase.getDefaultTimeout(), 1);
-    $(ELEMENT_CONFIRM_DELETE_BUTTON).click();
-    $(ELEMENT_DELETE_RECURRING_EVENT_FORM).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    $(By.xpath("//*[@class='uiForm']/div/*[@type='button' and contains(text(),'Save')]")).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(byXpath("//*[@class='uiForm']/div/*[@type='button' and contains(text(),'Save')]")).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**
@@ -925,7 +922,6 @@ public class EventManagement {
       assert evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT)
                 .getText()
                 .contains(ELEMENT_CONFIRM_EDIT_MESSAGE);
-      assert evt.waitForAndGetElement(ELEMENT_EDIT_DELETE_ONE_EVENT, testBase.getDefaultTimeout(), 1, 2).isSelected();
     }
     switch (optEditType) {
       case ONLY_EVENT:
@@ -941,8 +937,8 @@ public class EventManagement {
         evt.check(ELEMENT_EDIT_DELETE_ALL_EVENT, 2);
         break;
     }
-    $(ELEMENT_CONFIRM_EDIT_BUTTON).click();
-    $(ELEMENT_CONFIRM_EDIT_RECURRING_FORM).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    $(By.xpath("//*[@class='uiForm']/div/*[@type='button' and contains(text(),'Save')]")).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(byXpath("//*[@class='uiForm']/div/*[@type='button' and contains(text(),'Save')]")).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
   /**

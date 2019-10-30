@@ -241,8 +241,14 @@ public class WikiHomePage {
      */
     public void goToPermalink() {
         info("Go to permalink");
-        $(ELEMENT_MORE_LINK).click();
-        $(ELEMENT_PERMALINK_LINK).click();
+        $(ELEMENT_MORE_LINK).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        $(ELEMENT_PERMALINK_LINK).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    }
+
+    public void goToPermalinkForSimpleUserNotAdmin() {
+        info("Go to permalink");
+        $(byXpath("(//*[@id=\"UIWikiPageControlArea_PageToolBar\"]/ul/li)[2]")).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        $(ELEMENT_PERMALINK_LINK).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     }
 
     /**

@@ -12,8 +12,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_WIKI_CONTENT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_WIKI_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
@@ -286,9 +285,10 @@ public class WikiValidattions {
      */
     public void verifyPageContent(String pageName, String pageContent) {
         info("Verify the page's name");
-        $(byXpath(ELEMENT_WIKI_HOME_PAGE_TITLE.replace("${title}", pageName))).waitUntil(Condition.visible,Configuration.timeout);
+        refresh();
+        $(byXpath(ELEMENT_WIKI_HOME_PAGE_TITLE.replace("${title}", pageName))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
         info("Verify the page's content");
-        $(byXpath(ELEMENT_CONTENT_WIKI_PAGE.replace("$content", pageContent))).waitUntil(Condition.visible,Configuration.timeout);
+        $(byXpath(ELEMENT_CONTENT_WIKI_PAGE.replace("$content", pageContent))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
     }
 
     /**

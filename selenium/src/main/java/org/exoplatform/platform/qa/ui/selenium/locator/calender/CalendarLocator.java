@@ -1353,13 +1353,13 @@ public class CalendarLocator {
                                                                           By.xpath("//*[@class='uiConfirmForm']");
 
   public static final By              ELEMENT_EDIT_DELETE_ONE_EVENT                                    =
-                                                                    By.xpath("//*[@value='save_one']");
+                                                                    By.xpath("//*[@value='ONE']");
 
   public static final By              ELEMENT_EDIT_DELETE_FOLLOWING_EVENT                              =
-                                                                          By.xpath("//*[@value='save_follow']");
+                                                                          By.xpath("//*[@value='FOLLOWING']");
 
   public static final By              ELEMENT_EDIT_DELETE_ALL_EVENT                                    =
-                                                                    By.xpath("//*[@value='save_all']");
+                                                                    By.xpath("//*[@value='ALL']");
 
   public static final By              ELEMENT_CONFIRM_DELETE_BUTTON                                    =
                                                                     By.xpath("//*[@class='uiConfirmForm']//button[1]");

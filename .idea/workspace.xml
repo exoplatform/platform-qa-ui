@@ -3,12 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="fc4a0367-df54-4081-9eb5-c93d6d50856e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsWCMTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsWCMTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfDeleteProfileTitleTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfDeleteProfileTitleTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfHomepageGadgetSuggestionGadgetTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfHomepageGadgetSuggestionGadgetTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfHomepageGadgetWhoIsOnlineGadgetTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfHomepageGadgetWhoIsOnlineGadgetTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfUnifiedSearchTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfUnifiedSearchTestIT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarEventRecurringTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarEventRecurringTestIT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionPermalinkTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionPermalinkTestIT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/calender/CalendarLocator.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/calender/CalendarLocator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/NavigationToolbar.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/NavigationToolbar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/RichTextEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/RichTextEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiHomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiHomePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiValidattions.java" beforeDir="false" afterPath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiValidattions.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/forum/target/" />
     <ignored path="$PROJECT_DIR$/task/target/" />
@@ -68,11 +70,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarBasicTestsWithUserTestIT.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionEditTestIT.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="101">
-              <caret line="331" selection-start-line="331" selection-end-line="331" />
+            <state relative-caret-position="162">
+              <caret line="1280" column="37" lean-forward="true" selection-start-line="1280" selection-start-column="37" selection-end-line="1280" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/CalendarManagement.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="125">
+              <caret line="354" column="13" selection-start-line="354" selection-start-column="13" selection-end-line="354" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -88,36 +99,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>test10_4MentionIntranetNotification_InCommentInSpaceWhenNotificationIsDisabled</find>
-      <find>test10_4MentionIntranetNotification_InCommentInSpaceWhenNotificationIsDisabled:</find>
-      <find>test02_CheckAboutMeSectionOfOtherUser</find>
-      <find>test01_CheckConnectionStatusBetweenTwoUsers</find>
-      <find>test02_EditContactInformation</find>
-      <find>test03_04_CheckMyStatusWhenChatIsInstalled</find>
-      <find>test03_CheckOtherProfilePageWithDefaultValue</find>
-      <find>test04_CheckPeopleListing</find>
-      <find>test06_EditReplyfromspace</find>
-      <find>test02_RemoveApplicationOnSpace</find>
-      <find>test05_EditASpace</find>
-      <find>test06_checkMembersListIsSortedByAlphabeticalOrder</find>
-      <find>typeN</find>
-      <find>Intranet</find>
-      <find>AddTaskIn</find>
-      <find>checkAss</find>
-      <find>InPro</find>
-      <find>test07_11_Resume_Delete_ADraftWithSaveAsNormal</find>
-      <find>test01_RenamePage</find>
-      <find>test02_MovePageWhenUserHasNoEditPermissionAtDestinationPage</find>
-      <find>test06_CheckPermalinkWhenUserIsMemberOfSpace</find>
-      <find>test06_MovePage_Intranet_Space</find>
-      <find>test02_AddRelationWithIntranetPortal</find>
-      <find>test03_ViewHistoryToCompareVersions</find>
-      <find>test07_EditPageFromTemplateLeave_Planning</find>
-      <find>test05Edit_AView</find>
-      <find>test05_ManageLock</find>
-      <find>test11_ManageTheTitle</find>
-      <find>test13_AddnEventInPersonalCalendar</find>
       <find>test14_EditAnEventInPersonalCalendar</find>
+      <find>test_AddnEventInPersonalCalendarWithSpecialCharacter</find>
+      <find>test12_ExportCalendar</find>
+      <find>test02_EditEventCategory</find>
+      <find>test02_DeleteFollowingEventsInRecurringEvent</find>
+      <find>test03_04_EditDeleteOnlyACurrentRecurringEvent</find>
+      <find>inputRecurringInfoEvent</find>
+      <find>test02_EditFollowingEventsInRecurringEvent</find>
+      <find>editRecurringEvent</find>
+      <find>delete</find>
+      <find>deleteRecurringEvent</find>
+      <find>editRe</find>
+      <find>deleteRe</find>
+      <find>inputWebAddress</find>
+      <find>insertWe</find>
+      <find>insert</find>
+      <find>test02_PageSubpageAndAttachmentsShouldBeMovedWithThePage</find>
+      <find>test10_PermissionIndicatorIsRefreshedWhenChangingPublicRestrict:</find>
+      <find>test10_PermissionIndicatorIsRefreshedWhenChangingPublicRestrict</find>
+      <find>test09_CreateAWikiPageInASpace</find>
+      <find>test08_DisplayDescendantRestrictedPageInLeftTreePanel</find>
+      <find>test07_DisplayAncestorRestrictedPageInLeftTreePane</find>
+      <find>goToPermalinkForSimpleUserNotAdmin</find>
+      <find>test03_RestrictButtonForNoGrantedUser</find>
+      <find>test02_RestrictButtonForGrantedUserWithoutEditPagePermission</find>
+      <find>test01_RestrictButtonForGrantedUser</find>
+      <find>test08_CheckControlComplexSubpagesTreeWithNameDuplicatedInTheTargetSpace</find>
+      <find>test11_EditEmailAddress</find>
+      <find>hover()</find>
+      <find>test10_EditWikiPageLink</find>
     </findStrings>
     <replaceStrings>
       <replace>And</replace>
@@ -142,9 +153,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/chat/ChatManageMessageTestIT.java" />
-        <option value="$PROJECT_DIR$/chat/src/main/java/org/exoplatform/platform/qa/ui/chat/pageobject/ChatManagement.java" />
-        <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ManageLogInOut.java" />
         <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/calendar/CalendarLocator.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/ReplyToCommentTestIT.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCHomePageTestIT.java" />
@@ -154,7 +162,6 @@
         <option value="$PROJECT_DIR$/ecms/src/main/java/org/exoplatform/platform/qa/ui/ecms/pageobject/SiteExplorerHome.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsSEAdminTestIT.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/forum/ForumPostTestIT.java" />
-        <option value="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiHomePage.java" />
         <option value="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiSettingPage.java" />
         <option value="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiManagement.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiSettingsTestIT.java" />
@@ -168,7 +175,6 @@
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarCategoryTestIT.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarEventTestIT.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarPublishActivityTestIT.java" />
-        <option value="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiValidattions.java" />
         <option value="$PROJECT_DIR$/gatein/src/main/java/org/exoplatform/platform/qa/ui/gatein/pageobject/UserAddManagement.java" />
         <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/social/SpaceHomePage.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiInformationTestIT.java" />
@@ -181,18 +187,23 @@
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCActivityEditTestIT.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsSEBasicActionTestIT.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsSECreateTestIT.java" />
-        <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/NavigationToolbar.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/task/TaskAssignInChatTestIT.java" />
-        <option value="$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java" />
-        <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarEventRecurringTestIT.java" />
         <option value="$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/CalendarHomePage.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfDeleteProfileTitleTestIT.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfHomepageGadgetSuggestionGadgetTestIT.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfHomepageGadgetWhoIsOnlineGadgetTestIT.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfUnifiedSearchTestIT.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCActivityAddTestIT.java" />
-        <option value="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/RichTextEditor.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsWCMTestIT.java" />
+        <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarBasicTestsWithUserTestIT.java" />
+        <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarEventRecurringTestIT.java" />
+        <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/calender/CalendarLocator.java" />
+        <option value="$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java" />
+        <option value="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/RichTextEditor.java" />
+        <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/NavigationToolbar.java" />
+        <option value="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiHomePage.java" />
+        <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionPermalinkTestIT.java" />
+        <option value="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiValidattions.java" />
       </list>
     </option>
   </component>
@@ -248,7 +259,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1572355937595" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1572428797402" />
     <property name="last_opened_file_path" value="$USER_HOME$/kl/platform-qa-ui-master" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -276,7 +287,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CalendarBasicTestsWithUserTestIT.test_AddnEventInPersonalCalendarWithSpecialCharacter">
+  <component name="RunManager" selected="JUnit.CalendarEventRecurringTestIT.test05_AddRecurringEvents">
     <configuration name="CalendarBasicTestsInSpaceTestIT.test01_AddEventInSpace" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
@@ -295,7 +306,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalendarBasicTestsWithUserTestIT.test13_AddnEventInPersonalCalendar" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalendarEventRecurringTestIT.test05_AddRecurringEvents" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
         <pattern>
@@ -304,82 +315,10 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.calendar" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.calendar.CalendarBasicTestsWithUserTestIT" />
-      <option name="METHOD_NAME" value="test13_AddnEventInPersonalCalendar" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.calendar.CalendarEventRecurringTestIT" />
+      <option name="METHOD_NAME" value="test05_AddRecurringEvents" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://plfent-5.2.4-rc01-autoqa01.acceptance10.exoplatform.org" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CalendarBasicTestsWithUserTestIT.test14_EditAnEventInPersonalCalendar" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-platform" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.calendar.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.calendar" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.calendar.CalendarBasicTestsWithUserTestIT" />
-      <option name="METHOD_NAME" value="test14_EditAnEventInPersonalCalendar" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://plfent-5.2.4-rc01-autoqa02.acceptance10.exoplatform.org" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CalendarBasicTestsWithUserTestIT.test15_DeletenEventInPersonalCalendar" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-platform" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.calendar.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.calendar" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.calendar.CalendarBasicTestsWithUserTestIT" />
-      <option name="METHOD_NAME" value="test15_DeletenEventInPersonalCalendar" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://plfent-5.2.4-rc01-autoqa02.acceptance10.exoplatform.org" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CalendarBasicTestsWithUserTestIT.test19_EditEventWithValidData" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-platform" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.calendar.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.calendar" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.calendar.CalendarBasicTestsWithUserTestIT" />
-      <option name="METHOD_NAME" value="test19_EditEventWithValidData" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://plfent-5.2.4-rc01-autoqa02.acceptance10.exoplatform.org" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CalendarBasicTestsWithUserTestIT.test_AddnEventInPersonalCalendarWithSpecialCharacter" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-platform" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.calendar.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.calendar" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.calendar.CalendarBasicTestsWithUserTestIT" />
-      <option name="METHOD_NAME" value="test_AddnEventInPersonalCalendarWithSpecialCharacter" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://plfent-5.2.4-rc01-autoqa02.acceptance10.exoplatform.org" />
       <option name="PARAMETERS" value="" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -421,11 +360,83 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="WikiBasicActionEditTestIT.test10_EditWikiPageLink" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-platform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.wiki.functional.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.wiki.functional" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.wiki.functional.WikiBasicActionEditTestIT" />
+      <option name="METHOD_NAME" value="test10_EditWikiPageLink" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://plfent-5.2.4-rc01-autoqa01.acceptance10.exoplatform.org" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WikiBasicActionEditTestIT.test11_EditEmailAddress" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-platform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.wiki.functional.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.wiki.functional" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.wiki.functional.WikiBasicActionEditTestIT" />
+      <option name="METHOD_NAME" value="test11_EditEmailAddress" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://plfent-5.2.4-rc01-autoqa02.acceptance10.exoplatform.org" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WikiBasicActionMoveMovePageTestIT.test02_PageSubpageAndAttachmentsShouldBeMovedWithThePage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-platform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.wiki.functional.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.wiki.functional" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.wiki.functional.WikiBasicActionMoveMovePageTestIT" />
+      <option name="METHOD_NAME" value="test02_PageSubpageAndAttachmentsShouldBeMovedWithThePage" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://plfent-5.2.4-rc01-autoqa02.acceptance10.exoplatform.org" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WikiBasicActionMoveMovePageTestIT.test04_SpaceNamesDisplayedInLocationLabelsShouldBeUserFriendlyAndNotTechnical" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-platform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.wiki.functional.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.wiki.functional" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.wiki.functional.WikiBasicActionMoveMovePageTestIT" />
+      <option name="METHOD_NAME" value="test04_SpaceNamesDisplayedInLocationLabelsShouldBeUserFriendlyAndNotTechnical" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://plfent-5.2.4-rc01-autoqa02.acceptance10.exoplatform.org" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="MAIN_CLASS_NAME" value="" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://plfent-5.2.4-rc01-autoqa02.acceptance10.exoplatform.org" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://plfent-5.2.4-rc01-autoqa01.acceptance10.exoplatform.org" />
       <option name="PARAMETERS" value="" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -435,19 +446,19 @@
       <item itemvalue="JUnit.CalendarBasicTestsInSpaceTestIT.test01_AddEventInSpace" />
       <item itemvalue="JUnit.PortletInSpaceHomePageTestIT.test04_CheckTheSpaceWhoIsOnlinePortlet" />
       <item itemvalue="JUnit.PlfNavigationTopNavigationTestIT.test05_CreateANewTaskViaTheTopNavigation" />
-      <item itemvalue="JUnit.CalendarBasicTestsWithUserTestIT.test13_AddnEventInPersonalCalendar" />
-      <item itemvalue="JUnit.CalendarBasicTestsWithUserTestIT.test14_EditAnEventInPersonalCalendar" />
-      <item itemvalue="JUnit.CalendarBasicTestsWithUserTestIT.test15_DeletenEventInPersonalCalendar" />
-      <item itemvalue="JUnit.CalendarBasicTestsWithUserTestIT.test19_EditEventWithValidData" />
-      <item itemvalue="JUnit.CalendarBasicTestsWithUserTestIT.test_AddnEventInPersonalCalendarWithSpecialCharacter" />
+      <item itemvalue="JUnit.WikiBasicActionMoveMovePageTestIT.test04_SpaceNamesDisplayedInLocationLabelsShouldBeUserFriendlyAndNotTechnical" />
+      <item itemvalue="JUnit.WikiBasicActionMoveMovePageTestIT.test02_PageSubpageAndAttachmentsShouldBeMovedWithThePage" />
+      <item itemvalue="JUnit.WikiBasicActionEditTestIT.test11_EditEmailAddress" />
+      <item itemvalue="JUnit.WikiBasicActionEditTestIT.test10_EditWikiPageLink" />
+      <item itemvalue="JUnit.CalendarEventRecurringTestIT.test05_AddRecurringEvents" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CalendarBasicTestsWithUserTestIT.test_AddnEventInPersonalCalendarWithSpecialCharacter" />
-        <item itemvalue="JUnit.CalendarBasicTestsWithUserTestIT.test19_EditEventWithValidData" />
-        <item itemvalue="JUnit.CalendarBasicTestsWithUserTestIT.test15_DeletenEventInPersonalCalendar" />
-        <item itemvalue="JUnit.CalendarBasicTestsWithUserTestIT.test14_EditAnEventInPersonalCalendar" />
-        <item itemvalue="JUnit.CalendarBasicTestsWithUserTestIT.test13_AddnEventInPersonalCalendar" />
+        <item itemvalue="JUnit.CalendarEventRecurringTestIT.test05_AddRecurringEvents" />
+        <item itemvalue="JUnit.WikiBasicActionEditTestIT.test10_EditWikiPageLink" />
+        <item itemvalue="JUnit.WikiBasicActionEditTestIT.test11_EditEmailAddress" />
+        <item itemvalue="JUnit.WikiBasicActionMoveMovePageTestIT.test02_PageSubpageAndAttachmentsShouldBeMovedWithThePage" />
+        <item itemvalue="JUnit.WikiBasicActionMoveMovePageTestIT.test04_SpaceNamesDisplayedInLocationLabelsShouldBeUserFriendlyAndNotTechnical" />
       </list>
     </recent_temporary>
   </component>
@@ -465,35 +476,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="EcmsWCMTestIT_test11_ManageTheTitle - 2019.10.29 at 14h 17m 41s.xml">
-      <configuration name="EcmsWCMTestIT.test11_ManageTheTitle" configurationId="JUnit" />
+    <history-entry file="WikiBasicActionPermalinkTestIT_test02_RestrictButtonForGrantedUserWithoutEditPagePermission - 2019.10.30 at 10h 00m 12s.xml">
+      <configuration name="WikiBasicActionPermalinkTestIT.test02_RestrictButtonForGrantedUserWithoutEditPagePermission" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="EcmsWCMTestIT_test11_ManageTheTitle - 2019.10.29 at 14h 18m 24s.xml">
-      <configuration name="EcmsWCMTestIT.test11_ManageTheTitle" configurationId="JUnit" />
+    <history-entry file="WikiBasicActionPermalinkTestIT_test01_RestrictButtonForGrantedUser - 2019.10.30 at 10h 01m 48s.xml">
+      <configuration name="WikiBasicActionPermalinkTestIT.test01_RestrictButtonForGrantedUser" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="EcmsWCMTestIT_test11_ManageTheTitle - 2019.10.29 at 14h 20m 34s.xml">
-      <configuration name="EcmsWCMTestIT.test11_ManageTheTitle" configurationId="JUnit" />
+    <history-entry file="WikiBasicActionPermalinkTestIT_test01_RestrictButtonForGrantedUser - 2019.10.30 at 10h 03m 45s.xml">
+      <configuration name="WikiBasicActionPermalinkTestIT.test01_RestrictButtonForGrantedUser" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="EcmsWCMTestIT_test11_ManageTheTitle - 2019.10.29 at 14h 21m 13s.xml">
-      <configuration name="EcmsWCMTestIT.test11_ManageTheTitle" configurationId="JUnit" />
+    <history-entry file="WikiBasicActionPermalinkTestIT_test01_RestrictButtonForGrantedUser - 2019.10.30 at 10h 05m 52s.xml">
+      <configuration name="WikiBasicActionPermalinkTestIT.test01_RestrictButtonForGrantedUser" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="EcmsWCMTestIT_test11_ManageTheTitle - 2019.10.29 at 14h 23m 46s.xml">
-      <configuration name="EcmsWCMTestIT.test11_ManageTheTitle" configurationId="JUnit" />
+    <history-entry file="WikiBasicActionMoveMovePageTestIT_test08_CheckControlComplexSubpagesTreeWithNameDuplicatedInTheTargetSpace - 2019.10.30 at 10h 15m 19s.xml">
+      <configuration name="WikiBasicActionMoveMovePageTestIT.test08_CheckControlComplexSubpagesTreeWithNameDuplicatedInTheTargetSpace" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CalendarBasicTestsWithUserTestIT_test13_AddnEventInPersonalCalendar - 2019.10.29 at 14h 26m 59s.xml">
-      <configuration name="CalendarBasicTestsWithUserTestIT.test13_AddnEventInPersonalCalendar" configurationId="JUnit" />
+    <history-entry file="WikiBasicActionMoveMovePageTestIT_test07_MoveAPageWhenUserHasEditPermissionOnPage - 2019.10.30 at 10h 26m 55s.xml">
+      <configuration name="WikiBasicActionMoveMovePageTestIT.test07_MoveAPageWhenUserHasEditPermissionOnPage" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CalendarBasicTestsWithUserTestIT_test13_AddnEventInPersonalCalendar - 2019.10.29 at 14h 27m 49s.xml">
-      <configuration name="CalendarBasicTestsWithUserTestIT.test13_AddnEventInPersonalCalendar" configurationId="JUnit" />
+    <history-entry file="WikiBasicActionMoveMovePageTestIT_test06_MoveAPageWhenUserDoesNotHaveEditPermissionOnPage - 2019.10.30 at 10h 29m 04s.xml">
+      <configuration name="WikiBasicActionMoveMovePageTestIT.test06_MoveAPageWhenUserDoesNotHaveEditPermissionOnPage" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CalendarBasicTestsWithUserTestIT_test14_EditAnEventInPersonalCalendar - 2019.10.29 at 14h 28m 38s.xml">
-      <configuration name="CalendarBasicTestsWithUserTestIT.test14_EditAnEventInPersonalCalendar" configurationId="JUnit" />
+    <history-entry file="WikiBasicActionMoveMovePageTestIT_test04_SpaceNamesDisplayedInLocationLabelsShouldBeUserFriendlyAndNotTechnical - 2019.10.30 at 10h 32m 08s.xml">
+      <configuration name="WikiBasicActionMoveMovePageTestIT.test04_SpaceNamesDisplayedInLocationLabelsShouldBeUserFriendlyAndNotTechnical" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CalendarBasicTestsWithUserTestIT_test15_DeletenEventInPersonalCalendar - 2019.10.29 at 14h 29m 20s.xml">
-      <configuration name="CalendarBasicTestsWithUserTestIT.test15_DeletenEventInPersonalCalendar" configurationId="JUnit" />
+    <history-entry file="WikiBasicActionMoveMovePageTestIT_test02_PageSubpageAndAttachmentsShouldBeMovedWithThePage - 2019.10.30 at 10h 37m 28s.xml">
+      <configuration name="WikiBasicActionMoveMovePageTestIT.test02_PageSubpageAndAttachmentsShouldBeMovedWithThePage" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CalendarBasicTestsWithUserTestIT_test19_EditEventWithValidData - 2019.10.29 at 14h 29m 57s.xml">
-      <configuration name="CalendarBasicTestsWithUserTestIT.test19_EditEventWithValidData" configurationId="JUnit" />
+    <history-entry file="WikiBasicActionEditTestIT_test11_EditEmailAddress - 2019.10.30 at 10h 39m 34s.xml">
+      <configuration name="WikiBasicActionEditTestIT.test11_EditEmailAddress" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -507,7 +518,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1533" height="875" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.75086504" visible="true" weight="0.1990585" />
       <window_info id="Structure" order="1" sideWeight="0.20652173" side_tool="true" weight="0.21250841" />
@@ -518,17 +528,17 @@
       <window_info id="Favorites" order="6" sideWeight="0.24913494" side_tool="true" weight="0.16812374" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.5924933" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49764627" visible="true" weight="0.47989276" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.49463806" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49764627" visible="true" weight="0.45710456" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.32171583" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.4772118" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.5053619" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.4530831" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5023537" side_tool="true" weight="0.62600535" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.4919571" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.31903484" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.2841823" />
       <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.24798928" />
-      <window_info anchor="right" id="Coverage" order="0" sideWeight="0.51804125" side_tool="true" visible="true" weight="0.14862138" />
+      <window_info anchor="right" id="Coverage" order="0" sideWeight="0.5185185" side_tool="true" visible="true" weight="0.27168795" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.09683927" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
@@ -536,7 +546,7 @@
       <window_info anchor="right" id="Capture Analysis" order="5" />
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="Maven" order="8" sideWeight="0.48195878" visible="true" weight="0.14862138" />
+      <window_info anchor="right" id="Maven" order="8" sideWeight="0.4814815" visible="true" weight="0.27168795" />
     </layout>
     <layout-to-restore>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.79347825" visible="true" weight="0.20174849" />
@@ -1326,7 +1336,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionPermalinkTestIT.java</url>
-          <line>586</line>
+          <line>571</line>
           <properties />
           <option name="timeStamp" value="1005" />
         </line-breakpoint>
@@ -1734,7 +1744,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java</url>
-          <line>741</line>
+          <line>742</line>
           <properties />
           <option name="timeStamp" value="1286" />
         </line-breakpoint>
@@ -1908,7 +1918,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/RichTextEditor.java</url>
-          <line>879</line>
+          <line>880</line>
           <properties />
           <option name="timeStamp" value="1553" />
         </line-breakpoint>
@@ -1932,7 +1942,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionPermalinkTestIT.java</url>
-          <line>184</line>
+          <line>180</line>
           <properties />
           <option name="timeStamp" value="1565" />
         </line-breakpoint>
@@ -2022,7 +2032,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java</url>
-          <line>924</line>
+          <line>921</line>
           <properties />
           <option name="timeStamp" value="1597" />
         </line-breakpoint>
@@ -2031,12 +2041,6 @@
           <line>813</line>
           <properties />
           <option name="timeStamp" value="1602" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarEventRecurringTestIT.java</url>
-          <line>111</line>
-          <properties />
-          <option name="timeStamp" value="1610" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfCheckLanguagesTestIT.java</url>
@@ -2082,7 +2086,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java</url>
-          <line>478</line>
+          <line>479</line>
           <properties />
           <option name="timeStamp" value="1647" />
         </line-breakpoint>
@@ -2142,7 +2146,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionPermalinkTestIT.java</url>
-          <line>378</line>
+          <line>363</line>
           <properties />
           <option name="timeStamp" value="1676" />
         </line-breakpoint>
@@ -2195,14 +2199,8 @@
           <option name="timeStamp" value="2727" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java</url>
-          <line>865</line>
-          <properties />
-          <option name="timeStamp" value="2732" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarEventRecurringTestIT.java</url>
-          <line>220</line>
+          <line>221</line>
           <properties />
           <option name="timeStamp" value="2734" />
         </line-breakpoint>
@@ -2271,6 +2269,48 @@
           <line>331</line>
           <properties />
           <option name="timeStamp" value="2756" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java</url>
+          <line>871</line>
+          <properties />
+          <option name="timeStamp" value="2758" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java</url>
+          <line>939</line>
+          <properties />
+          <option name="timeStamp" value="2761" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java</url>
+          <line>901</line>
+          <properties />
+          <option name="timeStamp" value="2762" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarEventRecurringTestIT.java</url>
+          <line>150</line>
+          <properties />
+          <option name="timeStamp" value="2763" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java</url>
+          <line>860</line>
+          <properties />
+          <option name="timeStamp" value="2764" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/RichTextEditor.java</url>
+          <line>826</line>
+          <properties />
+          <option name="timeStamp" value="2765" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiHomePage.java</url>
+          <line>286</line>
+          <properties />
+          <option name="timeStamp" value="2766" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionAddAutoSaveTestIT.java</url>
@@ -2372,135 +2412,53 @@
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
-        <expression-string>Selenide.title()</expression-string>
+        <expression-string>$(byXpath(&quot;//*[@title='Email address']&quot;)).val(address);</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>assertEquals(Selenide.title(), title);</expression-string>
+        <expression-string>$(ELEMENT_WEB_PAGE_WEB_ADDRESS).val(address);</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>Assert.assertEquals($$(byId(&quot;existingUsersTable&quot;)).get(0),username1 + &quot; &quot; + username1);</expression-string>
-        <language-id>JAVA</language-id>
-        <custom-info>org.junit.Assert</custom-info>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>Assert.assertEquals($$(byId(&quot;existingUsersTable&quot;)).get(0),(username1 + &quot; &quot; + username1));</expression-string>
-        <language-id>JAVA</language-id>
-        <custom-info>org.junit.Assert</custom-info>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>Assert.assertEquals();$$(byId(&quot;existingUsersTable&quot;)).get(0).shouldHave(Condition.text(username1 + &quot; &quot; + username1));</expression-string>
-        <language-id>JAVA</language-id>
-        <custom-info>org.junit.Assert</custom-info>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>$$(byId(&quot;existingUsersTable&quot;)).get(0);</expression-string>
+        <expression-string>$(ELEMENT_CONTEXT_MENU_DELETE).click();</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>$$(byId(&quot;existingUsersTable&quot;)).get(0).shouldHave(Condition.text(username1 + &quot; &quot; + username1));</expression-string>
+        <expression-string>evt.waitForAndGetElement(ELEMENT_CONFIRM_DELETE_BUTTON, testBase.getDefaultTimeout(), 1).click();</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>$$(byId(&quot;existingUsersTable&quot;)).get(0).shouldHave(Condition.text(username1 + &quot;  &quot; + username1));</expression-string>
+        <expression-string>evt.waitForAndGetElement(ELEMENT_CONFIRM_DELETE_BUTTON, testBase.getDefaultTimeout(), 1);</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>$$(byId(&quot;existingUsersTable&quot;)).get(0).shouldHave(Condition.text(username1 + &quot;&quot; + username1));</expression-string>
+        <expression-string>$(ELEMENT_CONFIRM_DELETE_BUTTON).contextClick();</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>$(ELEMENT_CONFIRM_DELETE_BUTTON).click();</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>testBase.getDefaultTimeout(), 1, 2</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>testBase.getDefaultTimeout(), 1, 2;</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfDeleteProfileTitleTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="52" column="46" lean-forward="true" selection-start-line="52" selection-start-column="46" selection-end-line="52" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfCheckLanguagesTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="110" column="45" lean-forward="true" selection-start-line="110" selection-start-column="45" selection-end-line="110" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfHomepageGadgetSuggestionGadgetTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="503" column="36" lean-forward="true" selection-start-line="503" selection-start-column="36" selection-end-line="503" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfHomepageGadgetWhoIsOnlineGadgetTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="74" column="47" lean-forward="true" selection-start-line="74" selection-start-column="47" selection-end-line="74" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/gatein/GateinLocator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="248" column="107" lean-forward="true" selection-start-line="248" selection-start-column="107" selection-end-line="248" selection-end-column="123" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/Plf_GettintStartedGadgetTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="161" column="50" lean-forward="true" selection-start-line="161" selection-start-column="50" selection-end-line="161" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfUnifiedSearchTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="391" column="29" lean-forward="true" selection-start-line="391" selection-start-column="29" selection-end-line="391" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/LikeCommentTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="1387" column="53" lean-forward="true" selection-start-line="1387" selection-start-column="53" selection-end-line="1387" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/forum/src/main/java/org/exoplatform/platform/qa/ui/forum/pageobject/ForumCategoryManagement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="57" selection-start-line="57" selection-end-line="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/forum/src/main/java/org/exoplatform/platform/qa/ui/forum/pageobject/ForumForumManagement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="91" selection-start-line="91" selection-end-line="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docker-compose-selenium-grid02.yml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docker-compose-selenium-grid03.yml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docker-compose-selenium-grid01.yml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/docker-compose-selenium-grid-stack.yml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -2661,13 +2619,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/RichTextEditor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="1477" column="40" lean-forward="true" selection-start-line="1477" selection-start-column="40" selection-end-line="1477" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiBasicActionManagePageRenameTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
@@ -2686,13 +2637,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="185">
           <caret line="281" column="60" lean-forward="true" selection-start-line="281" selection-start-column="60" selection-end-line="281" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/wiki/WikiLocators.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="604" column="24" selection-start-line="604" selection-start-column="23" selection-end-line="604" selection-end-column="59" />
         </state>
       </provider>
     </entry>
@@ -2741,20 +2685,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.0.0/junit-platform-commons-1.0.0.jar!/org/junit/platform/commons/util/ReflectionUtils.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="175" selection-start-line="175" selection-end-line="175" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/NavigationToolbar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="226" selection-start-line="226" selection-end-line="226" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsWCMTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
@@ -2765,7 +2695,129 @@
     <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarBasicTestsWithUserTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="101">
-          <caret line="331" selection-start-line="331" selection-end-line="331" />
+          <caret line="278" column="61" lean-forward="true" selection-start-line="278" selection-start-column="61" selection-end-line="278" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarCalendarTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="243" column="48" lean-forward="true" selection-start-line="243" selection-start-column="48" selection-end-line="243" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarCategoryTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="103" column="48" lean-forward="true" selection-start-line="103" selection-start-column="48" selection-end-line="103" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/logger/Logger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="93">
+          <caret line="56" selection-start-line="56" selection-end-line="56" />
+          <folding>
+            <element signature="e#1954#1955#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/calender/CalendarLocator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="117">
+          <caret line="1380" column="77" selection-start-line="1380" selection-start-column="76" selection-end-line="1380" selection-end-column="117" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.0.0/junit-platform-commons-1.0.0.jar!/org/junit/platform/commons/util/ReflectionUtils.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="175" selection-start-line="175" selection-end-line="175" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/TestBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="829" selection-start-line="829" selection-end-line="829" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarEventRecurringTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="150" selection-start-line="150" selection-end-line="150" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="951" column="20" lean-forward="true" selection-start-line="951" selection-start-column="20" selection-end-line="951" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/wiki/WikiLocators.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1544">
+          <caret line="1019" column="22" lean-forward="true" selection-start-line="1019" selection-start-column="22" selection-end-line="1019" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/RichTextEditor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="815" column="5" lean-forward="true" selection-start-line="815" selection-start-column="5" selection-end-line="815" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/NavigationToolbar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12">
+          <caret line="560" column="45" lean-forward="true" selection-start-line="560" selection-start-column="45" selection-end-line="560" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiHomePage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionPermalinkTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="155" lean-forward="true" selection-start-line="155" selection-end-line="155" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiValidattions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="297" column="21" lean-forward="true" selection-start-line="297" selection-start-column="21" selection-end-line="297" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionMoveMovePageTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="316" column="51" lean-forward="true" selection-start-line="316" selection-start-column="51" selection-end-line="316" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionEditTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="1280" column="37" lean-forward="true" selection-start-line="1280" selection-start-column="37" selection-end-line="1280" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/CalendarManagement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="354" column="13" selection-start-line="354" selection-start-column="13" selection-end-line="354" selection-end-column="13" />
         </state>
       </provider>
     </entry>
