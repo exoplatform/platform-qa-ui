@@ -1914,7 +1914,7 @@ public class ActivityStream {
         refresh();
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(appears, timeout);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath(NameFile);
-        ELEMENT_BAR_PROGRESS.waitUntil(disappears, timeout);
+        ELEMENT_BAR_PROGRESS.waitUntil(disappears, openBrowserTimeoutMs);
         $(ELEMENT_COMPOSER_SHARE_BUTTON).should(be(enabled));
         $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
     }
@@ -1940,5 +1940,4 @@ public class ActivityStream {
         ELEMENT_DELETE_POPUP_OK.waitUntil(not(visible), timeout);
         $(byText(Document)).waitUntil(not(visible), timeout);
     }
-
 }

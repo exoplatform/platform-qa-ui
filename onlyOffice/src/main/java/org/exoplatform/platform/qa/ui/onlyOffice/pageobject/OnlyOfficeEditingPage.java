@@ -30,13 +30,12 @@ public class OnlyOfficeEditingPage {
     /**
      * Check that document is opened on OnlyOffice Editor
      * @param documentName
-     * @param userName
+     * @param extension
      */
-    public void checkOpeningDocumentWithEditOnline(String documentName, String userName) {
-        $(byText(documentName + ".docx")).waitUntil(visible, openBrowserTimeoutMs);
+    public void checkOpeningDocumentWithEditOnline(String documentName,String extension) {
+        $(byText(documentName + extension)).waitUntil(visible, openBrowserTimeoutMs);
         $(".editor").waitUntil(visible, 60000).exists();
         switchTo().frame("frameEditor");
-        $("#title-user-name").waitUntil(exactText(userName), 120000);
-        $("#id_panel_left").waitUntil(visible, 120000);
+        $("#view-left-menu").parent().find(".tool-menu.left").waitUntil(visible, 120000);
     }
 }

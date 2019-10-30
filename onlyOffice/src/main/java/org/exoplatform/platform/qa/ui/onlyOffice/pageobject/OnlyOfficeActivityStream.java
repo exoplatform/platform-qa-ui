@@ -47,18 +47,16 @@ public class OnlyOfficeActivityStream{
         ELEMENT_EDIT_ONlINE_BUTTON.waitUntil(visible,openBrowserTimeoutMs).click();
     }
 
-
     /**
-     * Check alignment of button Document
+     * Check alignment of Element
      * @param element1
      * @param element2
      * @param element3
      */
-    public void checkAlignmentButtonDocument(SelenideElement element1, SelenideElement element2, SelenideElement element3) {
+    public void checkAlignmentElement(SelenideElement element1, SelenideElement element2, SelenideElement element3) {
         int locElement1Button = element1.getLocation().y;
         int locElement2Button = element2.getLocation().y;
         int locElement3Button = element3.getLocation().y;
         assertEquals(locElement1Button,locElement2Button,locElement3Button);
     }
-
 }
