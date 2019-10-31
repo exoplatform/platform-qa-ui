@@ -492,7 +492,7 @@ public class NavigationToolbar {
    */
   public void goToQuickSearch() {
     info("Click on Quick search icon");
-    $(ELEMENT_TOOLBAR_QUICKSEARCH).click();
+    $(ELEMENT_TOOLBAR_QUICKSEARCH).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
 
   }
 

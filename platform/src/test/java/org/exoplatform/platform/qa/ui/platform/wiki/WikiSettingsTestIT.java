@@ -179,9 +179,10 @@ public class WikiSettingsTestIT extends Base {
     String content = "content" + getRandomNumber();
     homePagePlatform.goToWiki();
     wikiHomePage.goToWikiSettingPage();
-    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();
+    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     wikiSettingManagement.addTemplate(title, description, content);
-    ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(title)).parent().parent().find(ELEMENT_WIKI_ICON_EDIT_TEMPLATE).click();
+    ELEMENT_WIKI_LISTE_TEMPLATE.waitUntil(Condition.visible,Configuration.collectionsTimeout).find(byText(title)).parent().parent().find(ELEMENT_WIKI_ICON_EDIT_TEMPLATE).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     wikiSettingManagement.editTemplate("", newTitle, "", "");
     ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(newTitle)).should(exist);
     wikiSettingManagement.deleteTemplate(newTitle);
@@ -201,7 +202,8 @@ public class WikiSettingsTestIT extends Base {
     String content = "content" + getRandomNumber();
     homePagePlatform.goToWiki();
     wikiHomePage.goToWikiSettingPage();
-    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();
+    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     wikiSettingManagement.addTemplate(title, description, content);
     ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(title)).should(exist);
     wikiSettingManagement.deleteTemplate(title);
@@ -227,7 +229,7 @@ public class WikiSettingsTestIT extends Base {
     String content = "content" + getRandomNumber();
     homePagePlatform.goToWiki();
     wikiHomePage.goToWikiSettingPage();
-    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();
+    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.waitUntil(Condition.visible, Configuration.timeout).click();
     $(ELEMENT_TITLE_TEMPLATE).waitUntil(Condition.appears, Configuration.timeout).setValue(title);
     $(ELEMENT_DESCRIPTION_TEMPLATE).setValue(description);
     $(ELEMENT_CONTENT_TEMPLATE).setValue(content);

@@ -169,9 +169,9 @@ public class WikiHomePage {
      */
     public void goToWikiSettingPage() {
         info("Click on Browser drop down");
-        $(ELEMENT_SEARCH_BROWSERS_DROPDOWN).click();
+        $(ELEMENT_SEARCH_BROWSERS_DROPDOWN).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
         info("Select wiki settings label");
-        $(ELEMENT_SEARCH_BROWSERS_WIKI_SETTINGS).click();
+        $(ELEMENT_SEARCH_BROWSERS_WIKI_SETTINGS).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     }
 
     /**

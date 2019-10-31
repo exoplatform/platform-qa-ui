@@ -2,11 +2,14 @@ package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
@@ -18,15 +21,19 @@ public class WikiSettingManagement {
 
   private final TestBase       testBase;
 
+  private HomePagePlatform homePagePlatform;
 
   public ManageAlert           alert;
 
   private ElementEventTestBase evt;
 
+
   public WikiSettingManagement(TestBase testBase) {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
     alert = new ManageAlert(testBase);
+    this.homePagePlatform=new HomePagePlatform(testBase);
+
   }
 
   /**
@@ -43,6 +50,7 @@ public class WikiSettingManagement {
     evt.waitForAndGetElement(ELEMENT_WIKI_SETTINGS_RESULTS.replace("${tempalte}", template), 3000, 0);
   }
 public void addTemplate(String title,String description,String content){
+
     $(ELEMENT_TITLE_TEMPLATE).waitUntil(Condition.appears, Configuration.timeout).setValue(title);
     $(ELEMENT_DESCRIPTION_TEMPLATE).waitUntil(Condition.visible, Configuration.timeout).setValue(description);
     $(ELEMENT_CONTENT_TEMPLATE).waitUntil(Condition.visible, Configuration.timeout).setValue(content);
