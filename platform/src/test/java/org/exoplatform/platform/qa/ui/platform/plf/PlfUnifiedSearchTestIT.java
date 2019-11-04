@@ -329,7 +329,7 @@ public class PlfUnifiedSearchTestIT extends Base {
     ELEMENT_DROP_DOWN_LIST_RESULT_IN_QUICK_SEARCH.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).pressEnter();
     info("Verify that File checkbox is not shown");
-    $(ELEMENT_SEARCHRESULT_WIKITYPECHECK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).shouldNot(Condition.exist);
+    $(byXpath("//div[@class='noResultInfo']//*[@id='keyword' and text()='${wikiName}']".replace("${wikiName}",wiki))).exists();
     navigationToolbar.goToAdminSearch();
     $(ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_TITLE).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
     info("Click on Enable button");

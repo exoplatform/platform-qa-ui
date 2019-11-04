@@ -75,7 +75,6 @@ public class GateinManagePagesTestIT extends Base {
    */
 
   @Test
-  @BugInPLF("ECMS-7966")
   public void test10_EditPageOfPortal() {
     info("Test 10: Edit page of portal");
     String num = getRandomNumber();

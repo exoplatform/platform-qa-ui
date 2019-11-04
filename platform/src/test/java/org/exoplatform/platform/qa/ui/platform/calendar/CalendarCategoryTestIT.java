@@ -87,7 +87,6 @@ public class CalendarCategoryTestIT extends Base {
   }
 
   @Test
-  @BugInPLF("CAL-1501")
   public void test02_EditEventCategory() {
     String oldNameCategory = "oldNameCategory" + getRandomNumber();
     String newNameCategory = "newNameCategory" + getRandomNumber();
