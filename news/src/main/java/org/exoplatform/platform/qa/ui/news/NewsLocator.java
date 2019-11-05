@@ -29,4 +29,14 @@ public class NewsLocator {
   public static final SelenideElement NEWS_DETAILS_TITLE = NEWS_DETAILS_CONTAINER.find(".newsTitle").find(".newsTitleLink");
 
   public static final SelenideElement NEWS_DETAILS_BODY = NEWS_DETAILS_CONTAINER.find("#newsBody");
+
+  public static final SelenideElement NEWS_DETAILS_AUTHOR = NEWS_DETAILS_CONTAINER.find(".newsAuthor").find(".newsAuthorName");
+
+  public static final SelenideElement NEWS_DETAILS_UPDATER = NEWS_DETAILS_CONTAINER.find(".newsUpdater").find(".newsUpdaterName");
+
+  public static final SelenideElement NEWS_DETAILS_BUTTON_PIN = NEWS_DETAILS_CONTAINER.find("#newsPinButton");
+
+  public static final SelenideElement NEWS_DETAILS_BUTTON_EDIT = NEWS_DETAILS_CONTAINER.find("#newsEditButton");
+
+  public static final SelenideElement NEWS_DETAILS_BUTTON_SHARE = NEWS_DETAILS_CONTAINER.find("#newsShareButton");
 }

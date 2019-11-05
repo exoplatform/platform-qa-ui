@@ -140,4 +140,29 @@ public class NewsComposerManagement {
     NEWS_COMPOSER_TITLE_INPUT.shouldHave(value(text));
   }
 
+  public void verifyNewsAuthor(String author) {
+    NEWS_DETAILS_AUTHOR.shouldBe(visible);
+    NEWS_DETAILS_AUTHOR.shouldHave(text(author));
+  }
+
+  public void verifyNewsUpdater(String updater) {
+    NEWS_DETAILS_UPDATER.shouldBe(visible);
+    NEWS_DETAILS_UPDATER.shouldHave(text(updater));
+  }
+
+  public boolean verifyNewsUpdaterExists() {
+    return NEWS_DETAILS_UPDATER.exists();
+  }
+
+  public boolean verifyNewsButtonPinExists() {
+    return NEWS_DETAILS_BUTTON_PIN.exists();
+  }
+
+  public boolean verifyNewsButtonEditExists() {
+    return NEWS_DETAILS_BUTTON_EDIT.exists();
+  }
+
+  public boolean verifyNewsButtonShareExists() {
+    return NEWS_DETAILS_BUTTON_SHARE.exists();
+  }
 }
