@@ -36,7 +36,7 @@ public class ActivityStream {
 
     public Button button;
 
-    public HomePagePlatform homePagePlatform;
+    public static HomePagePlatform homePagePlatform;
 
     private ElementEventTestBase evt;
 
@@ -1909,8 +1909,8 @@ public class ActivityStream {
     /**
      * Upload file from Activity Stream
      */
-    public void uploadFileFromAS(String NameFile) {
-        ELEMENT_TAB_LINK.click();
+    public static void uploadFileFromAS(String NameFile) {
+        ELEMENT_TAB_LINK.waitUntil(visible,timeout).click();
         refresh();
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(appears, timeout);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath(NameFile);
@@ -1932,12 +1932,12 @@ public class ActivityStream {
     /**
      * Delete document from AS
      */
-    public void deleteDocumentFromAS (String Document) {
-        homePagePlatform.refreshUntil($(byText(Document)), visible, 500);
+    public static void deleteDocumentFromAS (String Document) {
+        homePagePlatform.refreshUntil($(byText(Document)), visible, 100);
         String idActivity2 = $(byText(Document)).parent().parent().parent().parent().getAttribute("id").split("MediaName")[1].split("0")[0];    $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity2))).waitUntil(Condition.visible,Configuration.timeout).click();
         $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}", idActivity2))).waitUntil(visible,timeout).click();
         ELEMENT_DELETE_POPUP_OK.waitUntil(visible,timeout).click();
-        ELEMENT_DELETE_POPUP_OK.waitUntil(not(visible), timeout);
+        ELEMENT_DELETE_POPUP_OK.waitUntil(not(visible), openBrowserTimeoutMs);
         $(byText(Document)).waitUntil(not(visible), timeout);
     }
 }

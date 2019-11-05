@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.onlyOffice;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.SiteExplorerHome;
 import org.exoplatform.platform.qa.ui.onlyOffice.pageobject.OnlyOfficeActivityStream;
 import org.exoplatform.platform.qa.ui.onlyOffice.pageobject.OnlyOfficeDocumentApplication;
@@ -61,6 +62,7 @@ public class OnlyOfficeTestIT extends Base {
   public void EditOnlineDocumentFromDocumentsApp() {
     String document = "OO_test";
     String extension = ".docx";
+    String userName = PLFData.DATA_NAME_ROOT;
     info("Upload document");
     homePagePlatform.goToDocuments();
     siteExplorerHome.uploadFile(document + extension);
@@ -71,7 +73,7 @@ public class OnlyOfficeTestIT extends Base {
     onlyOfficeDocumentApplication.clickEditOnine();
     switchTo().window(2);
     refresh();
-    onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(document, extension);
+    onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(document, extension, userName);
     switchTo().window(2).close();
     switchTo().window(1).close();
     switchTo().window(0);
@@ -89,12 +91,13 @@ public class OnlyOfficeTestIT extends Base {
   public void EditOnlineDocumentFromActivityStreamAndPreview() {
     String document = "OO_test";
     String extension = ".docx";
+    String userName = PLFData.DATA_NAME_ROOT;
     info("Edit Online from document from AS");
-    activityStream.uploadFileFromAS(document+extension);
-    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document+extension))), visible, timeout);
+    activityStream.uploadFileFromAS(document + extension);
+    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document + extension))), visible, timeout);
     onlyOfficeActivityStream.editOnlineFromAS();
     switchTo().window(1);
-    onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(document,extension);
+    onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(document, extension, userName);
     switchTo().window(1).close();
     switchTo().window(0);
     refresh();
@@ -102,11 +105,11 @@ public class OnlyOfficeTestIT extends Base {
     ELEMENT_OPEN_DOCUMENT_PREVIEW_FROM_AS.waitUntil(visible, 30000).doubleClick();
     onlyOfficeActivityStream.editOnlineFromPreview();
     switchTo().window(1);
-    onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(document,extension);
+    onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(document, extension, userName);
     switchTo().window(1).close();
     switchTo().window(0);
     ELEMENT_CLOSE_DOCUMENT_PREVIEW_FROM_AS.waitUntil(visible, collectionsTimeout).click();
-    activityStream.deleteDocumentFromAS( document+ extension);
+    activityStream.deleteDocumentFromAS(document + extension);
     manageLogInOut.signOut();
   }
 
@@ -118,15 +121,16 @@ public class OnlyOfficeTestIT extends Base {
   public void EditOnlineDocumentFromSpaceAS() {
     String document = "OO_test";
     String extension = ".docx";
+    String userName = PLFData.DATA_NAME_ROOT;
     String spaceTestName = "space_1_" + getRandomNumber();
     info("Edit Online document from Space AS");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(spaceTestName, "test", 5000);
-    activityStream.uploadFileFromAS(document+extension);
-    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document+extension))), visible, timeout);
+    activityStream.uploadFileFromAS(document + extension);
+    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document + extension))), visible, timeout);
     onlyOfficeActivityStream.editOnlineFromAS();
     switchTo().window(1);
-    onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(document, extension);
+    onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(document, extension, userName);
     switchTo().window(1).close();
     switchTo().window(0);
     homePagePlatform.goToMySpaces();
@@ -142,15 +146,16 @@ public class OnlyOfficeTestIT extends Base {
   public void EditOnlineDocumentFromDocumentApplication() {
     String document = "OO_test";
     String extension = ".docx";
+    String userName = PLFData.DATA_NAME_ROOT;
     info("Edit Online document from Document Application");
     homePagePlatform.goToDocuments();
-    siteExplorerHome.uploadFile(document+extension);
+    siteExplorerHome.uploadFile(document + extension);
     siteExplorerHome.checkButtonDocument(document);
     siteExplorerHome.clickViewDocumentButton();
     switchTo().window(1);
     onlyOfficeDocumentApplication.clickEditOnine();
     switchTo().window(2);
-    onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(document, extension);
+    onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(document, extension, userName);
     switchTo().window(2).close();
     switchTo().window(1).close();
     switchTo().window(0);
@@ -168,11 +173,11 @@ public class OnlyOfficeTestIT extends Base {
     String document = "OO_test";
     String extension = ".docx";
     info("Alignment of Edit Online button in AS");
-    activityStream.uploadFileFromAS(document+extension);
+    activityStream.uploadFileFromAS(document + extension);
     refresh();
-    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document+extension))), visible, timeout);
+    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document + extension))), visible, timeout);
     onlyOfficeActivityStream.checkAlignmentElement(ELEMENT_DOWNLOAD_BUTTON_FROM_AS_TEXT, ELEMENT_OPEN_BUTTON_FROM_AS_TEXT, ELEMENT_EDIT_ONLINE_BUTTON_FROM_AS_TEXT);
-    activityStream.deleteDocumentFromAS(document+extension);
+    activityStream.deleteDocumentFromAS(document + extension);
     manageLogInOut.signOut();
   }
 
@@ -185,15 +190,15 @@ public class OnlyOfficeTestIT extends Base {
     String document = "OO_test";
     String extension = ".docx";
     info("Alignment of Edit Online button in AS");
-    activityStream.uploadFileFromAS(document+extension);
+    activityStream.uploadFileFromAS(document + extension);
     refresh();
-    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document+extension))), visible, timeout);
+    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document + extension))), visible, timeout);
     ELEMENT_OPEN_DOCUMENT_PREVIEW_FROM_AS.waitUntil(visible, 30000).doubleClick();
-    ELEMENT_EDIT_ONLINE_BUTTON_FROM_PREVIEW_TEXT.waitUntil(visible,openBrowserTimeoutMs);
+    ELEMENT_EDIT_ONLINE_BUTTON_FROM_PREVIEW_TEXT.waitUntil(visible, openBrowserTimeoutMs);
     onlyOfficeActivityStream.checkAlignmentElement(ELEMENT_DOWNLOAD_BUTTON_FROM_PREVIEW_TEXT, ELEMENT_OPEN_IN_DOCUMENT_FROM_PREVIEW_TEXT, ELEMENT_EDIT_ONLINE_BUTTON_FROM_PREVIEW_TEXT);
     ELEMENT_CLOSE_DOCUMENT_PREVIEW_FROM_AS.waitUntil(visible, collectionsTimeout).click();
     refresh();
-    activityStream.deleteDocumentFromAS(document+extension);
+    activityStream.deleteDocumentFromAS(document + extension);
     manageLogInOut.signOut();
   }
 
@@ -207,7 +212,7 @@ public class OnlyOfficeTestIT extends Base {
     String extension = ".docx";
     info("Alignment of Edit Online button in DocumentApp");
     homePagePlatform.goToDocuments();
-    siteExplorerHome.uploadFile(document+extension);
+    siteExplorerHome.uploadFile(document + extension);
     siteExplorerHome.checkButtonDocument(document);
     siteExplorerHome.clickViewDocumentButton();
     switchTo().window(1);
@@ -220,6 +225,5 @@ public class OnlyOfficeTestIT extends Base {
     siteExplorerHome.clickDeleteButtonDocument();
     manageLogInOut.signOut();
   }
+
 }
-
-

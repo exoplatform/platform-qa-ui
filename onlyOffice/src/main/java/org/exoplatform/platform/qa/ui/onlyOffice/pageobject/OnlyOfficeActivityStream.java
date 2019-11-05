@@ -3,7 +3,6 @@ package org.exoplatform.platform.qa.ui.onlyOffice.pageobject;
 import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,11 +18,6 @@ public class OnlyOfficeActivityStream{
 
     public HomePagePlatform homePagePlatform;
 
-    public ActivityStream activityStream;
-    public OnlyOfficeActivityStream onlyOfficeActivityStream;
-    public OnlyOfficeEditingPage    onlyOfficeEditingPage;
-
-
     private ElementEventTestBase evt;
 
     public OnlyOfficeActivityStream(TestBase testBase) {
@@ -36,14 +30,14 @@ public class OnlyOfficeActivityStream{
     /**
      * Edit Online button from AS
      */
-    public void editOnlineFromAS() {
+    public static void editOnlineFromAS() {
         ELEMENT_EDIT_ONlINE_BUTTON.waitUntil(visible,openBrowserTimeoutMs).click();
     }
 
     /**
      * Edit Online button from Preview Document
      */
-    public void editOnlineFromPreview() {
+    public static void editOnlineFromPreview() {
         ELEMENT_EDIT_ONLINE_BUTTON_FROM_PREVIEW.waitUntil(visible, openBrowserTimeoutMs).click();
     }
 
@@ -59,5 +53,4 @@ public class OnlyOfficeActivityStream{
         int locElement3Button = element3.getLocation().y;
         assertEquals(locElement1Button,locElement2Button,locElement3Button);
     }
-
 }

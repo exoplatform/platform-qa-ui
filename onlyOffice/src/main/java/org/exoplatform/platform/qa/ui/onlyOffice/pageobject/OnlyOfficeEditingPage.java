@@ -31,11 +31,13 @@ public class OnlyOfficeEditingPage {
      * Check that document is opened on OnlyOffice Editor
      * @param documentName
      * @param extension
+     * @param userName
      */
-    public void checkOpeningDocumentWithEditOnline(String documentName,String extension) {
+    public static void checkOpeningDocumentWithEditOnline(String documentName,String extension, String userName) {
         $(byText(documentName + extension)).waitUntil(visible, openBrowserTimeoutMs);
         $(".editor").waitUntil(visible, 60000).exists();
         switchTo().frame("frameEditor");
+        $("#title-user-name").waitUntil(exactText(userName), 120000);
         $("#view-left-menu").parent().find(".tool-menu.left").waitUntil(visible, 120000);
     }
 }
