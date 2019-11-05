@@ -66,6 +66,7 @@ public class NewsComposerBasicActionTestIT extends Base {
     newsComposerManagement.postNews();
 
     newsComposerManagement.verifyNewsDetailsTitle(newsTitle);
+    newsComposerManagement.verifyNewsDetailsBody(newsContent);
 
     // cleanup
     homePagePlatform.goToAllSpace();
@@ -107,6 +108,7 @@ public class NewsComposerBasicActionTestIT extends Base {
     newsComposerManagement.postNews();
 
     newsComposerManagement.verifyNewsDetailsTitle(newsTitle);
+    newsComposerManagement.verifyNewsDetailsBody(newsContent);
 
     // cleanup
     homePagePlatform.goToAllSpace();
@@ -143,6 +145,7 @@ public class NewsComposerBasicActionTestIT extends Base {
     newsComposerManagement.updateNews();
 
     newsComposerManagement.verifyNewsDetailsTitle(newsTitleUpdated);
+    newsComposerManagement.verifyNewsDetailsBody(newsContent);
 
     // cleanup
     homePagePlatform.goToAllSpace();

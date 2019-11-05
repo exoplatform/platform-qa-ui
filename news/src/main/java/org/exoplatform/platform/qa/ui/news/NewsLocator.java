@@ -28,5 +28,5 @@ public class NewsLocator {
 
   public static final SelenideElement NEWS_DETAILS_TITLE = NEWS_DETAILS_CONTAINER.find(".newsTitle").find(".newsTitleLink");
 
-  public static final SelenideElement NEWS_DETAILS_BODY = NEWS_DETAILS_CONTAINER.find(".newsBody");
+  public static final SelenideElement NEWS_DETAILS_BODY = NEWS_DETAILS_CONTAINER.find("#newsBody");
 }
