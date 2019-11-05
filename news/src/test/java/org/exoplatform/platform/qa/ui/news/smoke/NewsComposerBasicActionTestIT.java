@@ -1,18 +1,13 @@
 package org.exoplatform.platform.qa.ui.news.smoke;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
 import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.news.pageobject.NewsComposerManagement;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.logger.Logger;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
-import org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -45,19 +40,71 @@ public class NewsComposerBasicActionTestIT extends Base {
   @Test
   public void test01_CreateANewsInASpace() {
     info("Root creates a space");
-    homePagePlatform.goToAllSpace();
+
     String spaceName = "spaceName" + getRandomNumber();
     String spaceDes = "description" + getRandomNumber();
 
     String newsTitle = "newsTitle" + getRandomNumber();
     String newsContent = "newsContent" + getRandomNumber();
+
+    homePagePlatform.goToAllSpace();
     spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
     homePagePlatform.goToSpecificSpace(spaceName);
 
-    newsComposerManagement.postSimpleNews(newsTitle, newsContent);
+    newsComposerManagement.openNewsComposer();
+
+    newsComposerManagement.verifyPostButton(false);
+
+    newsComposerManagement.fillTitleField(newsTitle);
+
+    newsComposerManagement.verifyPostButton(false);
+
+    newsComposerManagement.fillBodyField(newsContent);
+
+    newsComposerManagement.verifyPostButton(true);
+
+    newsComposerManagement.postNews();
+
+    newsComposerManagement.verifyNewsDetailsTitle(newsTitle);
+
+    // cleanup
+    homePagePlatform.goToAllSpace();
+    spaceManagement.deleteSpace(spaceName, false);
+  }
+
+  @Test
+  public void test02_EditANewsInASpace() {
+    info("Root creates a space");
+
+    String spaceName = "spaceName" + getRandomNumber();
+    String spaceDes = "description" + getRandomNumber();
+
+    String newsTitle = "newsTitle" + getRandomNumber();
+    String newsTitleUpdated = newsTitle + " updated";
+    String newsContent = "newsContent" + getRandomNumber();
 
     homePagePlatform.goToAllSpace();
+    spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+    homePagePlatform.goToSpecificSpace(spaceName);
 
+    newsComposerManagement.createNews(newsTitle, newsContent);
+
+    newsComposerManagement.openNewsEditor();
+
+    newsComposerManagement.verifyUpdateButton(false);
+
+    newsComposerManagement.verifyNewsEditorTitle(newsTitle);
+
+    newsComposerManagement.fillTitleField(newsTitleUpdated);
+
+    newsComposerManagement.verifyUpdateButton(true);
+
+    newsComposerManagement.updateNews();
+
+    newsComposerManagement.verifyNewsDetailsTitle(newsTitleUpdated);
+
+    // cleanup
+    homePagePlatform.goToAllSpace();
     spaceManagement.deleteSpace(spaceName, false);
   }
 }
