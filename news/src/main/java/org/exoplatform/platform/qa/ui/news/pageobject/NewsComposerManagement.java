@@ -96,6 +96,13 @@ public class NewsComposerManagement {
   }
 
   /**
+   * Add text into news title text box
+   */
+  public void uploadIllustration() {
+    NEWS_COMPOSER_ILLUSTRATION_INPUT.uploadFromClasspath("illustration.jpg");
+  }
+
+  /**
    * Create a News
    *
    * @param title

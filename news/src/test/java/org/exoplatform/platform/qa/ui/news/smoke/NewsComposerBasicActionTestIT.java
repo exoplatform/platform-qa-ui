@@ -73,7 +73,48 @@ public class NewsComposerBasicActionTestIT extends Base {
   }
 
   @Test
-  public void test02_EditANewsInASpace() {
+  public void test02_CreateANewsInASpaceWithIllustrationAndSummary() {
+    info("Root creates a space");
+
+    String spaceName = "spaceName" + getRandomNumber();
+    String spaceDes = "description" + getRandomNumber();
+
+    String newsTitle = "newsTitle" + getRandomNumber();
+    String newsSummary = "newsSummary" + getRandomNumber();
+    String newsContent = "newsContent" + getRandomNumber();
+
+    homePagePlatform.goToAllSpace();
+    spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+    homePagePlatform.goToSpecificSpace(spaceName);
+
+    newsComposerManagement.openNewsComposer();
+
+    newsComposerManagement.verifyPostButton(false);
+
+    newsComposerManagement.fillTitleField(newsTitle);
+    newsComposerManagement.uploadIllustration();
+
+    newsComposerManagement.verifyPostButton(false);
+
+    newsComposerManagement.fillSummaryField(newsSummary);
+
+    newsComposerManagement.verifyPostButton(false);
+
+    newsComposerManagement.fillBodyField(newsContent);
+
+    newsComposerManagement.verifyPostButton(true);
+
+    newsComposerManagement.postNews();
+
+    newsComposerManagement.verifyNewsDetailsTitle(newsTitle);
+
+    // cleanup
+    homePagePlatform.goToAllSpace();
+    spaceManagement.deleteSpace(spaceName, false);
+  }
+
+  @Test
+  public void test03_EditANewsInASpace() {
     info("Root creates a space");
 
     String spaceName = "spaceName" + getRandomNumber();

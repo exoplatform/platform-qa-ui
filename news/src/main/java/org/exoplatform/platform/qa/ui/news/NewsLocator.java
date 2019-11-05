@@ -22,6 +22,8 @@ public class NewsLocator {
 
   public static final SelenideElement NEWS_COMPOSER_CONTENT_INPUT = $("#newsActivityComposer").find(".cke_wysiwyg_frame");
 
+  public static final SelenideElement NEWS_COMPOSER_ILLUSTRATION_INPUT = $("#newsActivityComposer").find("#uploadedFile");
+
   public static final SelenideElement NEWS_DETAILS_CONTAINER = $(".newsDetails");
 
   public static final SelenideElement NEWS_DETAILS_TITLE = NEWS_DETAILS_CONTAINER.find(".newsTitle").find(".newsTitleLink");
