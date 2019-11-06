@@ -507,11 +507,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     homePagePlatform.refreshUntil(ELEMENT_GAGET_SUGGESTION_SPACE,Condition.visible,1000);
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).shouldNot(Condition.visible);
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space2)).parent().hover();
-    ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space2))
-                                  .parent()
-                                  .parent()
-                                  .find(ELEMENT_BUTTON_CANCEL_SUGGESTION_USER_FROM_GADGET)
-                                  .click();
+    $(byXpath("(//*[contains(text(),'${spaceName}')]/following::*[@class='uiIconClose'])[1]".replace("${spaceName}",space2))).waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).should(Condition.visible);
     manageLogInOut.signIn(username, PLFData.password);
     homePagePlatform.goToMySpaces();

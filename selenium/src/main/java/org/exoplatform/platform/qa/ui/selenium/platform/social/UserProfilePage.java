@@ -242,12 +242,12 @@ public class UserProfilePage {
     String index = (String) (opParams.length > 0 ? opParams[0] : "0");
     Integer xpathCount = testBase.getElements(ELEMENT_EXPERIENCE_LIST).size();
     if (Integer.valueOf(index) >= xpathCount) {
-      $(ELEMENT_ADD_MORE_EXP_ICON).click();
+      $(ELEMENT_ADD_MORE_EXP_ICON).waitUntil(Condition.visible,Configuration.timeout).click();
     }
     info("-- update experience --");
     if (organization != null && organization != "") {
       sleep(2000);
-      executeJavaScript("window.scrollBy(-200,0)");
+      $(byId("ExperienceSection0")).dragAndDropTo($(byXpath("//button[@class='btn btn-save']")));
       sleep(2000);
       $(byXpath(ELEMENT_EXPERIENCE_COMPANY_INPUT.replace("${index}", index))).setValue(organization);
     sleep(2000);

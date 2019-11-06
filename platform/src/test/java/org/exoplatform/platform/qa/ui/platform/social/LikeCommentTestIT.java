@@ -30,6 +30,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
+import org.openqa.selenium.Keys;
 
 /**
  * Created by exo on 11/09/17.
@@ -1057,9 +1058,9 @@ public class LikeCommentTestIT extends Base {
 
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
-    ELEMENT_SPACE_FILE_TAB.waitUntil(Condition.visible,Configuration.timeout).click();
-    refresh();
-    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
+    $(byXpath("//*[@class='uidocactivitycomposer']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.openBrowserTimeoutMs);
+    //ELEMENT_TAB_LINK.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
     activityStream.addActivity(activity1, "");
@@ -1187,6 +1188,7 @@ public class LikeCommentTestIT extends Base {
                               .parent()
                               .find(byText(comment))
                               .should(Condition.exist);
+    refresh();
     activityStream.deleteactivity(activity1);
 
   }
@@ -1340,7 +1342,7 @@ public class LikeCommentTestIT extends Base {
     executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
     ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
     $(byText(comment)).should(Condition.exist);
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+    ELEMENT_CLOSE_DOCUMENT_PREVIEW.waitUntil(Condition.visible, Configuration.timeout).click();
 
     manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
@@ -1350,7 +1352,7 @@ public class LikeCommentTestIT extends Base {
     $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
     $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+    ELEMENT_CLOSE_DOCUMENT_PREVIEW.waitUntil(Condition.visible, Configuration.timeout).click();
 
     manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
@@ -1359,7 +1361,7 @@ public class LikeCommentTestIT extends Base {
     $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
     $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+    ELEMENT_CLOSE_DOCUMENT_PREVIEW.waitUntil(Condition.visible, Configuration.timeout).click();
 
     manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
     ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.appears, Configuration.timeout);
@@ -1375,6 +1377,7 @@ public class LikeCommentTestIT extends Base {
                               .parent()
                               .find(byText(comment))
                               .should(Condition.exist);
+    refresh();
     activityStream.deleteactivity(activity1);
 
   }

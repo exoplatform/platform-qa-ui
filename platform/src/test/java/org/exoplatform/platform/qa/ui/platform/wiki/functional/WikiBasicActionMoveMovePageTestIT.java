@@ -14,8 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Button.ELEMENT_CANCEL_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -223,6 +222,7 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         spaceManagement.searchSpace(space2, "");
         spaceManagement.goToSpace(space2);
         spaceHomePage.goToWikiTab();
+
         wikiValidattions.verifyTitleWikiPage(title);
         wikiHomePage.goToAPage(title);
         wikiValidattions.verifyAltTextImageInContentPage(altText1);
@@ -953,6 +953,9 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         info("Un check edit permission of any group");
         wikiHomePage.goToPermissions();
         wikiPermission.addPermisisonByType(DATA_USER2);
+        wikiPermission.selectPermission(DATA_USER2, WikiPermission.permissionType.Edit_Pages);
+        wikiPermission.savePermisison();
+        wikiHomePage.goToPermissions();
         wikiPermission.unSelectPermission(DATA_USER2, WikiPermission.permissionType.Edit_Pages);
         wikiPermission.savePermisison();
         info("Log in as Mary");
@@ -966,6 +969,7 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         $(ELEMENT_CANCEL_BUTTON).click();
         homePagePlatform.goToWiki();
         wikiHomePage.deleteWiki(wiki1);
+        wikiHomePage.deleteWiki(wiki2);
 
     }
 
@@ -1305,8 +1309,6 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         wikiValidattions.verifyTitleWikiPage(page);
         info("Breadcrumb is displaying :Space2 > Wiki Home >" + page);
         wikiValidattions.verifyBreadCrumbePath(space2, "Wiki Home", page);
-        info("Space Navigation is not displayed anymore");
-        $(ELEMENT_SPACE_WIKI_TAB).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
         homePagePlatform.goToMySpaces();
         spaceManagement.searchSpace(space1, "");
         spaceManagement.deleteSpace(space1, false);

@@ -110,7 +110,7 @@ public class SOCSpaceManagementTestIT extends Base {
         homePagePlatform.goToMySpaces();
         spaceManagement.addNewSpaceSimple(space, space);
         info("All default portlet is displayed");
-        $(byXpath("//i[@class='uiIconAppSpaceHomePage uiIconDefaultApp']")).should(Condition.exist);
+        $(byXpath("//i[@class='uiIconAppSpaceHomePage uiIconDefaultApp']")).waitUntil(Condition.exist,Configuration.timeout);
         $(ELEMENT_SPACE_MENU_AGENDA_PORTLET).should(Condition.exist);
         $(ELEMENT_SPACE_MENU_DOCUMENT_PORTLET).should(Condition.exist);
         $(ELEMENT_SPACE_MENU_FORUM_PORTLET).should(Condition.exist);
@@ -254,9 +254,9 @@ public class SOCSpaceManagementTestIT extends Base {
   public void test02_RemoveApplicationOnSpace() {
     info("Test 02: Remove application of space's toolbar");
     String space1 = "space1" + getRandomNumber();
-    String app = "Forum Statistics";
+    String app = "Bookmarks";
     info("app:" + app);
-    String category = "Adoption";
+    String category = "Tools";
     info("cate:" + category);
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1);

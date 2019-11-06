@@ -335,6 +335,7 @@ public class ReplyToCommentTestIT extends Base {
         forumHomePage.goToTopic(nameTopic);
         forumTopicManagement.quotePost(content, quote);
         homePagePlatform.goToHomePage();
+        executeJavaScript("window.scrollBy(0,150)", "");
         homePagePlatform.refreshUntil($(byText(quote)),Condition.visible,1000);
         sleep(Configuration.timeout);
         String comment_parent_id = $(byText(quote)).parent().parent().parent().parent().getAttribute("data-comment-id");
@@ -347,7 +348,7 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToForum();
         info("Go to Forum home page");
         forumHomePage.goToHomeCategory();
-        $(byText(nameCat)).click();
+        $(byText(nameCat)).waitUntil(Condition.visible,Configuration.timeout).click();
         info("Delete category");
         forumCategoryManagement.deleteCategory(nameCat);
 

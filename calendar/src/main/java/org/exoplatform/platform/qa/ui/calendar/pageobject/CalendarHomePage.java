@@ -63,9 +63,9 @@ public class CalendarHomePage {
         ELEMENT_CALENDAR_LIST_BUTTON.click();
         break;
       case MONTH:
-        $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"))).waitUntil(Condition.visible,Configuration.timeout);
-        $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"))).click();
-        $(byXpath(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Month"))).waitUntil(Condition.visible,Configuration.timeout);
+        sleep(Configuration.timeout);
+        $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        $(byXpath(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Month"))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
         break;
       case WORKWEEK:
         $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Work Week"))).waitUntil(Condition.visible,Configuration.timeout).click();
@@ -175,15 +175,16 @@ public class CalendarHomePage {
         $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE_ICON.replace("$date", date))).click();
         $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE.replace("$name", name).replace("$date",
                 date))).scrollTo().contextClick();}
-      if ($(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))).is(Condition.not(Condition.visible)))
-        $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE.replace("$name", name).replace("$date",
+      if ($(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))).is(Condition.not(Condition.visible))) {
+        $(byXpath("(//*[@data-original-title='Next Month']//i)[2]")).waitUntil(Condition.visible, Configuration.timeout).click();
+        $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date",
                 date))).contextClick();
-      else {
-        homePagePlatform.refreshUntil($(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))),Condition.visible,1000);
-        $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))).contextClick();
-
       }
-
+      else
+      {
+        $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date",
+                date))).contextClick();
+      }
     }
     else {
       homePagePlatform.refreshUntil($(byXpath(ELEMENT_EVENT_TASK_MONTH_VIEW.replace("$name", name))),Condition.visible,1000);
@@ -216,9 +217,8 @@ public class CalendarHomePage {
         if( $(byId("UIListUsers")).find(byText(name)).is(Condition.not(Condition.visible))){
           ELEMENT_NEXT_RIGHT_LIST_DAY_BUTTON.click();
         }
-        $(ELEMENT_ACCOUNT_NAME_LINK).click();
-        $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
-        $(byText(name)).waitUntil(Condition.visible,Configuration.timeout).contextClick();
+        $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible, Configuration.timeout).click();
+        $(byText(name)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).contextClick();
       }
     } else {
       if ($(ELEMENT_TOTAL_PAGE).is(Condition.visible)) {
@@ -328,7 +328,7 @@ public class CalendarHomePage {
         goToRightMenuTaskEventFromDayView(name, optionDay);
         break;
     }
-    $(ELEMENT_CONTEXT_MENU_EDIT).click();
+    $(ELEMENT_CONTEXT_MENU_EDIT).waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_EVENT_DRAWER.waitUntil(Condition.appears, Configuration.timeout);
   }
 
@@ -435,13 +435,13 @@ public class CalendarHomePage {
       case DAY:
         switch (optionDay) {
           case DETAILTIME:
-            $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
+            $(byText(name)).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
             break;
           case ALLDAY:
-            $(byXpath(ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY.replace("$name", name))).waitUntil(Condition.visible,Configuration.timeout);
+            $(byXpath(ELEMENT_EVENT_TASK_DAY_VIEW_ALL_DAY.replace("$name", name))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
             break;
           default:
-            evt.waitForAndGetElement(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name));
+            $(byXpath(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
             break;
         }
 
@@ -452,25 +452,26 @@ public class CalendarHomePage {
             $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
             break;
           case ALLDAY:
+
             $(byXpath(ELEMENT_EVENT_TASK_WEEK_VIEW_ALL_DAY.replace("$name", name))).waitUntil(Condition.visible,Configuration.timeout);
             break;
           default:
-            evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name));
+            $(byXpath(ELEMENT_EVENT_TASK_WEEK_VIEW_ONE_DAY.replace("$name", name))).waitUntil(Condition.visible,Configuration.timeout);
             break;
         }
         break;
       case LIST:
         if ($(ELEMENT_TOTAL_PAGE).is(Condition.exist)) {
-          evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
+          $(byXpath(ELEMENT_ANY_PAGE.replace("$page", "1"))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
           while ((evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name), 5000, 0) == null)
                   && !(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
                   .getText()
                   .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText())))
             evt.click(ELEMENT_NEXT_PAGE);
-          evt.waitForAndGetElement(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
-          evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
+          $(byXpath(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name))).waitUntil(Condition.visible,Configuration.collectionsTimeout);
+          $(byXpath(ELEMENT_ANY_PAGE.replace("$page", "1"))).waitUntil(Condition.visible,Configuration.timeout).click();
         } else {
-          $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
+          $(byText(name)).waitUntil(Condition.appears, Configuration.collectionsTimeout);
         }
         break;
       case MONTH:
@@ -492,7 +493,7 @@ public class CalendarHomePage {
       default:
         switch (optionDay) {
           case DETAILTIME:
-            $(byText(name)).waitUntil(Condition.appears, Configuration.timeout);
+            $(byText(name)).waitUntil(Condition.appears, Configuration.collectionsTimeout);
             break;
           case ALLDAY:
             evt.waitForAndGetElement(ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ALL_DAY.replace("$name", name));
@@ -502,6 +503,21 @@ public class CalendarHomePage {
             break;
         }
         break;
+    }
+  }
+
+  /**
+   * Delete an event by search
+   *
+   * @param name name of event
+   */
+  public void deleteEventBySearch(String name) {
+    if (!name.isEmpty()) {
+      info("Input key search");
+      $(ELEMENT_EVENT_TASK_QUICK_SEARCH).waitUntil(Condition.visible,Configuration.timeout).setValue(name);
+      $(ELEMENT_EVENT_TASK_SEARCH_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
+
+      $(ELEMENT_EVENT_TASK_TITLE.replace("${name}", name)).waitUntil(Condition.visible,Configuration.timeout);
     }
   }
 
@@ -961,6 +977,7 @@ public class CalendarHomePage {
         break;
       case MONTH:
         goToRightMenuTaskEventFromMonthView(name, date);
+        sleep(2000);
         break;
       case WORKWEEK:
         goToRightMenuTaskEventFromWorkWeekView(name, optionDay, date);

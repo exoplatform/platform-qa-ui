@@ -14,6 +14,7 @@ import org.junit.Assert;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -312,7 +313,6 @@ public class SpaceSettingManagement {
    */
   public void addANodeSimple(String name) {
     info("Click on Add node button");
-    // waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON,3000,0).click();
     $(ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON).waitUntil(Condition.visible,Configuration.timeout);
     $(ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON).click();
     info("The popup is shown");
@@ -320,7 +320,8 @@ public class SpaceSettingManagement {
     info("Input a new name for the node");
     $(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_NAME).setValue(name);
     info("Save all changes");
-    // waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE,2000,0).click();
+    $(byXpath("//span[@class='PopupTitle popupTitle' and text()='Add/ Edit Page Node']")).dragAndDropTo($(byXpath("//div[@class='UITableColumnContainer']")));
+
     $(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE).waitUntil(Condition.visible,Configuration.timeout);
    $(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE).click();
     info("Verify that the node is added successfully");

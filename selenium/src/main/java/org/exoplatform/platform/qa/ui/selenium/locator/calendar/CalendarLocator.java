@@ -945,7 +945,7 @@ public class CalendarLocator {
                                                                             By.id("UIQuickAddEventPopupWindow");
 
   public static final By              ELEMENT_QUICK_ADD_EVENT_POPUP                                    =
-                                                                    By.id("UIQuickAddEventPopupWindow");
+                                                                    By.xpath("//div[@id='ExoCalendarEventForm']/div[1]");
 
   public static final By              ELEMENT_QUICK_INPUT_EVENT_NAME                                   =
                                                                      By.xpath("//*[@id='UIQuickAddEvent']//*[@id='eventName']");
@@ -963,10 +963,10 @@ public class CalendarLocator {
                                                                           By.xpath("//*[@id=\"allday\"]");
 
   public static final By              ELEMENT_QUICK_INPUT_EVENT_FROM_DATE                              =
-                                                                          By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label']/following::input[@class='date'])[1]");
+                                                                          By.xpath("(//*[@id=\"ExoCalendarEventForm\"]//following::input[@class='date'])[1]");
 
   public static final By              ELEMENT_QUICK_INPUT_EVENT_TO_DATE                                =
-                                                                        By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label']/following::input[@class='date'])[2]");
+                                                                        By.xpath("(//*[@id=\"ExoCalendarEventForm\"]//following::input[@class='date'])[2]");
 
   public static final String          ELEMENT_QUICK_INPUT_EVENT_FROM_DATE_VALUE                        =
                                                                                 "//*[@id='UIQuickAddEvent']//*[@name='from'][contains(@value,'$value')]";
@@ -1034,10 +1034,10 @@ public class CalendarLocator {
                                                                   By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input");
 
   public static final By              ELEMENT_ADD_EDIT_EVENT_NOTE                                      =
-                                                                  By.xpath("//*[@id='UIEventForm']//*[@id='description']");
+                                                                  By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[6]/div[2]/following::textarea");
 
   public static final By              ELEMENT_ADD_EDIT_EVENT_LOCATION                                  =
-                                                                      By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[3]/div[2]/input");
+                                                                      By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div/following::input[@class='location']");
 
   public static final By              ELEMENT_ADD_EDIT_EVENT_CALENDAR                                  =
                                                                       By.xpath("//*[@id='UIEventForm']//*[@name='calendar']");
@@ -1098,7 +1098,7 @@ public class CalendarLocator {
                                                                         By.xpath("//*[@id='UIQuickAddEventPopupWindow']//*[text()='Cancel']");
 
   public static final By              ELEMENT_BUTTON_EVENT_CANCEL_DETAILS                              =
-                                                                          By.xpath("//*[ @id='UIEventForm']//*[text()='Cancel']");
+                                                                          By.xpath("//*[@class=\"uiAction\"]//*[text()='Cancel']");
 
   public static final SelenideElement ELEMENT_BUTTON_EVENT_SAVE_DETAILS                                =
                                                                         $(byXpath("//*[@id=\"UIEventForm\"]/div[4]/button[1]"));
@@ -1349,17 +1349,26 @@ public class CalendarLocator {
   public static final By              ELEMENT_DELETE_RECURRING_EVENT_FORM                              =
                                                                           By.xpath("//*[@class='uiConfirmForm']");
 
-  public static final By              ELEMENT_EDIT_DELETE_ONE_EVENT                                    =
-                                                                    By.xpath("//*[@value='save']");
+  public static final By              ELEMENT_DELETE_ONE_EVENT                                    =
+                                                                    By.xpath("//*[@value='save_one']");
+
+  public static final By              ELEMENT_EDIT_ONE_EVENT                                    =
+                                                                    By.xpath("//*[@value='ONE']");
 
   public static final By              ELEMENT_EDIT_RECURRING_EVENT_SAVE                                    =
                                                                     By.xpath("(//div[@class=\"uiAction uiActionBorder\"]/button[contains(text(),\"Save\")])[2]");
 
-  public static final By              ELEMENT_EDIT_DELETE_FOLLOWING_EVENT                              =
+  public static final By              ELEMENT_DELETE_FOLLOWING_EVENT                              =
+                                                                          By.xpath("//*[@value='save_follow']");
+
+  public static final By              ELEMENT_EDIT_FOLLOWING_EVENT                              =
                                                                           By.xpath("//*[@value='FOLLOWING']");
 
-  public static final By              ELEMENT_EDIT_DELETE_ALL_EVENT                                    =
+  public static final By              ELEMENT_DELETE_ALL_EVENT                                    =
                                                                     By.xpath("//*[@value='save_all']");
+
+  public static final By              ELEMENT_EDIT_ALL_EVENT                                    =
+                                                                    By.xpath("//*[@value='ALL']");
 
   public static final By              ELEMENT_CONFIRM_DELETE_BUTTON                                    =
                                                                     By.xpath("//*[@class='uiConfirmForm']//button[1]");
@@ -1370,15 +1379,18 @@ public class CalendarLocator {
   public static final String          ELEMENT_CONFIRM_DELETE_MESSAGE                                   =
                                                                      "Would you like to delete only this event, all events in the series, or this and all following events in the series?";
 
-  public static final By              ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT                      =
-                                                                                  By.xpath("//*[@class='media-body']");
+  public static final By              ELEMENT_CONFIRM_DELETE_RECURRING_EVENT                      =
+                                                                                  By.xpath("(//*[@class='media-body'])[2]");
+
+  public static final By              ELEMENT_CONFIRM_EDIT_RECURRING_EVENT                      =
+                                                                                    By.xpath("//*[@class='media-body']");
 
   public static final By              ELEMENT_CONFIRM_EDIT_RECURRING_EVENT_CANCEL_BTN                  =
                                                                                       By.xpath("//*[@id='UIConfirmFormUpdate']//button[2]");
 
   /* Delete recurring event */
   public static final By              ELEMENT_CONFIRM_EDIT_BUTTON                                      =
-                                                                  By.xpath("//*[@id='UIConfirmFormUpdate']//button[1]");
+                                                                  By.xpath("(//div[@class='uiPopup']//button[@type='button'])[5]");
 
   public static final By              ELEMENT_CONFIRM_EDIT_RECURRING_FORM                              =
                                                                           By.xpath(".//*[@class='confirmRadio']");

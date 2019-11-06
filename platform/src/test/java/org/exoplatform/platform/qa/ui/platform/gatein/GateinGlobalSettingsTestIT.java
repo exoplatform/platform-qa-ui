@@ -2,7 +2,6 @@ package org.exoplatform.platform.qa.ui.platform.gatein;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import javafx.beans.binding.StringBinding;
 import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarHomePage;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.*;
@@ -278,34 +277,6 @@ public class GateinGlobalSettingsTestIT extends Base {
         navigationmanagement.addNode(nodeName, "");
         navigationmanagement.inputInfoPageSelector(namePage, titlePage, true, false, false);
         navigationmanagement.checkSearchAndSelectPage();
-    }
-
-    @Tag("gatein")
-    @Test
-    public void test06_CheckMyDashboardDefaultTabModified() {
-        //2418
-        String tabName = "tabName" + getRandomNumber();
-        info("Sign in with ROOT account");
-        manageLogInOut.signIn(username, PASS_ROOT);
-        navigationToolbar.goToMyProfile();
-        refresh();
-        userPageBase.goToDashboardTab();
-        myDashBoard.editMyDashboardDefaultTab(tabName);
-        info("Verify that the default tab is modified");
-        $(byXpath("//span[@id='${name}']".replace("${name}",tabName))).isDisplayed();
-    }
-
-    @Tag("gatein")
-    @Test
-    public void test07_CheckGadgetAddedInMyDashboard() {
-        //2417
-        String gadgetTitle="Services Management";
-        info("Sign in with ROOT account");
-        manageLogInOut.signIn(username, PASS_ROOT);
-        navigationToolbar.goToMyProfile();
-        refresh();
-        userPageBase.goToDashboardTab();
-        myDashBoard.addGadget(gadgetTitle);
     }
 
     @Tag("gatein")

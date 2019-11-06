@@ -697,7 +697,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     manageLogInOut.signIn("john", "gtngtn");
     homePagePlatform.goToMySpaces();
     spaceManagement.searchSpace(space);
-    ELEMENT_SPACES_LIST.find(byText(space)).click();
+    ELEMENT_SPACES_LIST.waitUntil(Condition.visible,Configuration.timeout).find(byText(space)).waitUntil(Condition.visible,Configuration.timeout).click();
     refresh();
     spaceHomePage.goToSpaceSettingTab();
     info("accept request by user 1");
@@ -843,10 +843,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     homePagePlatform.goToWiki();
     wikiHomePage.goToAPage(title);
-
     wikiHomePage.goToPermalink();
-    $(ELEMENT_MAKE_PUBLIC_BUTTON).click();
-    ELEMENT_MSG_MAKE_PUBLIC_RESTRICTED.shouldHave(Condition.text("public"));
     $(ELEMENT_MAKE_RESTRICT_BUTTON).click();
     ELEMENT_MSG_MAKE_PUBLIC_RESTRICTED.shouldHave(Condition.text("restricted"));
     $(ELEMENT_PERMALINK_CLOSE).click();

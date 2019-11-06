@@ -38,7 +38,8 @@ public class WikiSettingPage {
   public void searchTemplate(String template) {
 
     info("Input a template's name and press entrer");
-    $(ELEMENT_TEMPLATE_SEARCH_TEXTBOX).setValue(template).pressEnter();
+    $(ELEMENT_TEMPLATE_SEARCH_TEXTBOX).waitUntil(Condition.visible,Configuration.timeout).val(template);
+    $(ELEMENT_TEMPLATE_SEARCH_TEXTBOX).waitUntil(Condition.visible,Configuration.timeout).pressEnter();
 
     info("Verify that the search results is shown that matchs with keyword");
 
@@ -143,21 +144,21 @@ public class WikiSettingPage {
    */
   public void addTemplate(String title, String des, String content) {
     info("Click on Add more Template button");
-    $(ELEMENT_WIKI_SETTING_ADD_MORE_TEMPALTE).click();
+    $(ELEMENT_WIKI_SETTING_ADD_MORE_TEMPALTE).waitUntil(Condition.visible,Configuration.timeout).click();
 
     if (!title.isEmpty()) {
       info("Input the title for the template");
-      $(ELEMENT_TITLE_TEMPLATE).setValue(title);
+      $(ELEMENT_TITLE_TEMPLATE).waitUntil(Condition.visible,Configuration.timeout).setValue(title);
     }
 
     if (!des.isEmpty()) {
       info("Input the description for the template");
-      $(ELEMENT_DESCRIPTION_TEMPLATE).setValue(des);
+      $(ELEMENT_DESCRIPTION_TEMPLATE).waitUntil(Condition.visible,Configuration.timeout).setValue(des);
     }
 
     if (!content.isEmpty()) {
       info("Input the content for the template");
-      $(ELEMENT_CONTENT_TEMPLATE).setValue(content);
+      $(ELEMENT_CONTENT_TEMPLATE).waitUntil(Condition.visible,Configuration.timeout).setValue(content);
     }
   }
 

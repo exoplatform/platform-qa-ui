@@ -1,6 +1,8 @@
 package org.exoplatform.platform.qa.ui.forum.pageobject;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 
@@ -15,6 +17,7 @@ import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.Keys;
 
 public class PrivateMessageManagement {
   private final TestBase       testBase;
@@ -96,7 +99,7 @@ public class PrivateMessageManagement {
     sleep(2000);
     $(ELEMENT_SEND_BUTTON).click();
     sleep(3000);
-    ELEMENT_FORUM_OK_SEND_MSG.click();
+    ELEMENT_FORUM_OK_SEND_MSG.waitUntil(visible,Configuration.timeout).click();
     sleep(3000);
 
   }
@@ -166,8 +169,8 @@ public class PrivateMessageManagement {
    * @param content String
    */
   public void replyMessage(String contact, String title, String newTitle, String content) {
-    $(byText(title)).click();
-    $(ELEMENT_REPLY).click();
+    $(byText(title)).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_REPLY).waitUntil(Condition.visible,2000).click();
     refresh();
     $(ELEMENT_TITLE_MESSAGE).setValue(newTitle);
     plf.inputFrame(ELEMENT_MESSAGE_CONTENT, content);

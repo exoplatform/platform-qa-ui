@@ -177,7 +177,7 @@ public class CreateNewDocument {
   public void addNewWebContent(String title, String content) {
     $(ELEMENT_FILEFORM_BLANK_NAME).click();
     $(ELEMENT_FILEFORM_BLANK_NAME).setValue(title);
-    $(ELEMENT_FILEFORM_BLANK_CONTENT).click();
+    $(ELEMENT_FILEFORM_BLANK_CONTENT).waitUntil(Condition.visible,Configuration.timeout).click();
     switchTo().frame($(ELEMENT_FILEFORM_BLANK_CONTENT));
     sleep(Configuration.timeout);
     $(byXpath("/html/body")).sendKeys(content);
@@ -206,7 +206,7 @@ public class CreateNewDocument {
     info("save and close");
     // scroll up
     executeJavaScript("window.scrollBy(0,-250)");
-    $(ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE).click();
+    $(ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE).waitUntil(Condition.visible,Configuration.timeout).click();
     sleep(Configuration.timeout);
 
   }

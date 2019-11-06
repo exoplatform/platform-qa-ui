@@ -9,6 +9,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -55,6 +56,8 @@ public class SpaceActivitiesTestIT extends Base {
     spaceSettingManagement = new SpaceSettingManagement(this);
     spaceHomePage = new SpaceHomePage(this);
     activityStream = new ActivityStream(this);
+    manageLogInOut.signIn(PLFData.username, PLFData.DATA_PASS);
+
   }
 
   @Test
@@ -99,6 +102,7 @@ public class SpaceActivitiesTestIT extends Base {
     // click on the activity to appear the delete button
     $(byId(ELEMENT_CONTAINER_ACTIVITY.replace("{id}", id))).find(byClassName(ELEMENT_DATE_ACTIVITY)).click();
     // click on delete button
+    $(byXpath("(//i[@class='uiIconActivityAction uiIconLightGray'])[1]")).waitUntil(Condition.visible,Configuration.timeout).click();
     $(byId(ELEMENT_DELETE_ACTIVITY.replace("{id}", id))).click();
     ELEMENT_DELETE_POPUP_OK.click();
     // verify that the activity doesn't exist
@@ -157,11 +161,12 @@ public class SpaceActivitiesTestIT extends Base {
     // scroll up
     executeJavaScript("window.scrollBy(0,-550)");
     // the id of the comment is id of the activity+1
-    Integer idComment = Integer.parseInt(id) + 1;
+    Integer idComment = Integer.parseInt(id);
+    Integer idDelete = Integer.parseInt(id) + 1 ;
     // hover on the comment to appear the delete button
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-    $(byId(ELEMENT_COMMENT_BLOC.replace("{id}", id))).hover().click();
-    $(byId(ELEMENT_COMMENT_DELETE.replace("{id}", idComment.toString()))).click();
+    $(byXpath("//div[@id='CommentBlock{id}1']//i[@class='uiIconActivityAction uiIconLightGray']".replace("{id}", idComment.toString()))).click();
+    $(byId(ELEMENT_COMMENT_DELETE.replace("{id}", idDelete.toString()))).waitUntil(Condition.visible,Configuration.timeout).click();
     // Confirm
     ELEMENT_DELETE_POPUP_OK.click();
     // verify that the comment is deleted

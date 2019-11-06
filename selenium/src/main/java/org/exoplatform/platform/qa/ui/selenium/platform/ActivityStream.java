@@ -6,6 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -25,6 +26,10 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarL
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_DELETE_COMMENT_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
+import static org.exoplatform.platform.qa.ui.selenium.locator.onlyOffice.OnlyOfficeLocator.*;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Configuration.*;
+
 
 public class ActivityStream {
     private final TestBase testBase;
@@ -474,10 +479,10 @@ public class ActivityStream {
      */
     public void addText(String text) {
         info("----Add text into activity text box-----");
-        SelenideElement frame = $(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible, Configuration.timeout);
+        SelenideElement frame = $(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible, Configuration.collectionsTimeout);
         $(ELEMENT_ACCOUNT_NAME_LINK).click();
         switchTo().frame(frame);
-        ELEMENT_INPUT_ACTIVITY.click();
+        ELEMENT_INPUT_ACTIVITY.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         ELEMENT_INPUT_ACTIVITY.sendKeys(text);
         switchTo().defaultContent();
     }
@@ -620,10 +625,10 @@ public class ActivityStream {
         SelenideElement frame = $(byAttribute("title",
                 "Rich Text Editor, composerEditInput" + idActivity)).waitUntil(Condition.visible,
                 Configuration.timeout);
-        $(ELEMENT_ACCOUNT_NAME_LINK).click();
+        $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
         switchTo().frame(frame);
-        ELEMENT_INPUT_ACTIVITY.click();
-        ELEMENT_INPUT_ACTIVITY.sendKeys(newtext);
+        ELEMENT_INPUT_ACTIVITY.waitUntil(Condition.visible,Configuration.timeout).click();
+        ELEMENT_INPUT_ACTIVITY.waitUntil(Condition.visible,Configuration.timeout).sendKeys(newtext);
         switchTo().defaultContent();
         $(byId(ELEMENT_BUTTON_UPDATE_ACTIVITY.replace("{id}", idActivity))).waitUntil(Condition.enabled, Configuration.timeout)
                 .click();
@@ -704,8 +709,8 @@ public class ActivityStream {
     public void editComment(String text, String newtext) {
         info("-- Editing a Comment--");
         String idComment = $(byText(text)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
-        $(byId(ELEMENT_COMMENT_DROPDOWN.replace("{id}", idComment))).click();
-        $(byId(ELEMENT_EDIT_COMMENT_LINK.replace("{id}", idComment))).click();
+        $(byId(ELEMENT_COMMENT_DROPDOWN.replace("{id}", idComment))).waitUntil(Condition.enabled, Configuration.timeout).click();
+        $(byId(ELEMENT_EDIT_COMMENT_LINK.replace("{id}", idComment))).waitUntil(Condition.enabled, Configuration.timeout).click();
         SelenideElement frame = $(byAttribute("title", "Rich Text Editor, composerEditCommentcomment" + idComment));
         switchTo().frame(frame);
         $(byXpath("/html/body")).click();
@@ -1377,11 +1382,11 @@ public class ActivityStream {
         // click on comment link
         $(byText(activity)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
         // insert comment
-        $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
+        $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
         executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
         // click on the button comment
-        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter()
-                .waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.visible,Configuration.timeout).pressEnter()
+                .waitUntil(Condition.not(Condition.visible), Configuration.collectionsTimeout);
         $(byText(comment)).should(Condition.visible);
     }
 
@@ -1489,7 +1494,7 @@ public class ActivityStream {
         $(byId(ELEMENT_lABEL_REPLY_COMMENT.replace("{id}", idBlocComment))).waitUntil(Condition.visible, Configuration.timeout)
                 .click();
         // Insert the reply
-        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout);
+        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.visible, Configuration.collectionsTimeout);
         $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).click();
         homePagePlatform.refreshUntil($(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))), Condition.visible, 1000);
         switch (type) {
@@ -1628,10 +1633,10 @@ public class ActivityStream {
         // get the id of activity created
         info("-- Editing an activity--");
         homePagePlatform.refreshUntil($(byText(text)), Condition.visible, 500);
-        String idActivity = $(byText(text)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
-        $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).click();
-        $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}", idActivity))).click();
-        ELEMENT_DELETE_POPUP_OK.click();
+        String idActivity = $(byText(text)).parent().parent().parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}", idActivity))).waitUntil(Condition.visible,Configuration.timeout).click();
+        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible,Configuration.timeout).click();
         ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
         $(byText(text)).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     }
@@ -1899,4 +1904,41 @@ public class ActivityStream {
     public enum activitiesFormat {
         Add_FormattingBOLD, Add_FormattingITALIC, Add_FormattingQuote, Add_Formtting_numbred_List, Add_Formtting_Bulled_List, Add_FormttingRemoveFormat, Add_Formtting_Image, Add_Formtting_Link;
     }
+
+
+    /**
+     * Upload file from Activity Stream
+     */
+    public void uploadFileFromAS(String NameFile) {
+        ELEMENT_TAB_LINK.click();
+        refresh();
+        ELEMENT_CONTAINER_DOCUMENT.waitUntil(appears, timeout);
+        ELEMENT_INPUT_DOCUMENT.uploadFromClasspath(NameFile);
+        ELEMENT_BAR_PROGRESS.waitUntil(disappears, timeout);
+        $(ELEMENT_COMPOSER_SHARE_BUTTON).should(be(enabled));
+        $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
+    }
+
+    /**
+     * OpenEditOnlineFromDocumentPreview
+     */
+    public void openEditOnlineFromDocumentPreview (String document) {
+        String idActivity = $(byText(document)).parent().parent().parent().parent().getAttribute("id");
+        $(byId(idActivity)).waitUntil(visible,openBrowserTimeoutMs).click();
+        Assert.assertEquals(ELEMENT_OPEN_DOCUMENT_PREVIEW.getText(),document);
+        ELEMENT_EDIT_ONLINE_BUTTON_FROM_PREVIEW.waitUntil(visible,openBrowserTimeoutMs).click();
+    }
+
+    /**
+     * Delete document from AS
+     */
+    public void deleteDocumentFromAS (String Document) {
+        homePagePlatform.refreshUntil($(byText(Document)), visible, 500);
+        String idActivity2 = $(byText(Document)).parent().parent().parent().parent().getAttribute("id").split("MediaName")[1].split("0")[0];    $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity2))).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}", idActivity2))).waitUntil(visible,timeout).click();
+        ELEMENT_DELETE_POPUP_OK.waitUntil(visible,timeout).click();
+        ELEMENT_DELETE_POPUP_OK.waitUntil(not(visible), timeout);
+        $(byText(Document)).waitUntil(not(visible), timeout);
+    }
+
 }

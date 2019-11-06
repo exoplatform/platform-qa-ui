@@ -59,9 +59,9 @@ public class NavigationToolbar {
   public void goToEditLayout() {
     info("--Go to Edit Layout--");
 
-    evt.clickByJavascript(ELEMENT_LINK_EDIT);
-    evt.mouseOver(ELEMENT_MENU_PAGE_LINK, true);
-    evt.click(ELEMENT_MENU_EDIT_LAYOUT, 2, true);
+    $(ELEMENT_LINK_EDIT).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_MENU_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).hover();
+    $(ELEMENT_MENU_EDIT_LAYOUT).waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   /**
@@ -71,8 +71,8 @@ public class NavigationToolbar {
     info("Go to add page form");
     $(ELEMENT_LINK_EDIT).click();
     $(ELEMENT_MENU_PAGE_LINK).hover();
-    $(ELEMENT_MENU_ADD_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
-    $(ELEMENT_PAGE_CREATION_WIZARD).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_MENU_ADD_PAGE_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_PAGE_CREATION_WIZARD).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
   }
 
   /**
@@ -129,9 +129,9 @@ public class NavigationToolbar {
    */
   public void goToUsersAndGroupsManagement() {
     info("--Go to Users and groups management--");
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.click();
+    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   /**
@@ -214,8 +214,7 @@ public class NavigationToolbar {
     do {
       $(ELEMENT_MENU_CONTENT_LINK).hover();
     } while (!$(ELEMENT_MENU_SITE_EXPLORER).exists());
-    sleep(2000);
-    $(ELEMENT_MENU_SITE_EXPLORER).waitUntil(Condition.visible,2000).click();
+    $(ELEMENT_MENU_SITE_EXPLORER).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Site Explorer is shown successfully");
   }
 
@@ -257,9 +256,8 @@ public class NavigationToolbar {
    */
   public void goToChangeLanguage() {
     info("Open Change Language popup");
-    $(ELEMENT_TOPBAR_AVATAR).waitUntil(Condition.visible, Configuration.timeout);
-    $(ELEMENT_TOPBAR_AVATAR).click();
-    $(ELEMENT_AVATAR_CHANGELANGUAGE).click();
+    $(ELEMENT_TOPBAR_AVATAR).waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+    $(ELEMENT_AVATAR_CHANGELANGUAGE).waitUntil(Condition.visible, Configuration.timeout).click();
   }
 
   /**
@@ -350,13 +348,14 @@ public class NavigationToolbar {
    */
   public void goToCreateWikiPage(String location) {
     info("Go to create wiki page");
-    $(ELEMENT_ADD_TOOTLBAR).click();
-    $(ELEMENT_ADD_WIKI_TOOLBAR).click();
+    $(ELEMENT_ADD_TOOTLBAR).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_ADD_WIKI_TOOLBAR).waitUntil(Condition.visible,Configuration.timeout).click();
     if (!location.isEmpty()) {
-      evt.click(ELEMENT_ADD_WIKI_SET_LOCATION);
-      evt.click(ELEMENT_ADD_WIKI_CHOOSE_LOCATION.replace("{$location}", location));
+      $(ELEMENT_ADD_WIKI_SET_LOCATION).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(ELEMENT_ADD_WIKI_CHOOSE_LOCATION.replace("{$location}", location)).waitUntil(Condition.visible,Configuration.timeout).click();
     }
-    evt.click(ELEMENT_NEXT_BUTTON);
+    $(ELEMENT_NEXT_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
   }
 
   /**
@@ -372,14 +371,14 @@ public class NavigationToolbar {
     $(ELEMENT_ADD_POOL_TOOLBAR).waitUntil(Condition.appears, Configuration.timeout).click();
     if (location != "" && location != null) {
       info("Set location for the poll");
-      $(ELEMENT_ADD_POLL_SET_LOCATION).click();
+      $(ELEMENT_ADD_POLL_SET_LOCATION).waitUntil(Condition.visible, Configuration.timeout).click();
     }
     info("evt.click on Next button");
-    $(ELEMENT_NEXT_BUTTON).click();
+    $(ELEMENT_NEXT_BUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
 
     info("Select a forum for poll");
     $(ELEMENT_SELECT_FORUM_COMBOBOX).waitUntil(Condition.visible, Configuration.timeout).click();
-    $(byText(forum)).click();
+    $(byText(forum)).waitUntil(Condition.visible, Configuration.timeout).click();
     $(ELEMENT_SELECT_FORUM_COMBOBOX).waitUntil(Condition.hasText(forum), Configuration.timeout);
     info("Click on next button");
     ELEMENT_LIST_FORUM_IN_TOP_NAVIGATION.waitUntil(Condition.disappear, Configuration.timeout);
@@ -395,20 +394,21 @@ public class NavigationToolbar {
    */
   public void goToAddTopic(String location, String forum) {
     info("Go to add a topic from toolbar");
-    $(ELEMENT_ADD_TOOTLBAR).click();
-    $(ELEMENT_ADD_TOPIC_TOOLBAR).click();
+    $(ELEMENT_ADD_TOOTLBAR).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_ADD_TOPIC_TOOLBAR).waitUntil(Condition.visible,Configuration.timeout).click();
     if (location != "") {
-      $(ELEMENT_ADD_POLL_SET_LOCATION).click();
+      $(ELEMENT_ADD_POLL_SET_LOCATION).waitUntil(Condition.visible,Configuration.timeout).click();
     }
     info("evt.click on Next button");
-    $(ELEMENT_NEXT_BUTTON).click();
+    $(ELEMENT_NEXT_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Select a forum for topic");
     if (ELEMENT_SELECT_FORUM_COMBOBOX.is(Condition.exist)) {
       ELEMENT_SELECT_FORUM_COMBOBOX.waitUntil(Condition.appears, Configuration.timeout).click();
       $(byText(forum)).waitUntil(Condition.appears, Configuration.timeout).click();
       info("Click on next button");
-      $(ELEMENT_NEXT_BUTTON).click();
+      $(ELEMENT_NEXT_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
     }
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
   }
 
   /**
@@ -428,10 +428,10 @@ public class NavigationToolbar {
   }
 
   public void gotoAddTask(String name) {
-    $(ELEMENT_ADD_TOOTLBAR).click();
-    ELEMENT_ADD_TASK_CLASS_TOOLBAR.click();
-    ELEMENT_TASK_ADD_TITLE.setValue(name);
-    ELEMENT_TASK_BUTTON_ADD.click();
+    $(ELEMENT_ADD_TOOTLBAR).waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_ADD_TASK_CLASS_TOOLBAR.waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_TASK_ADD_TITLE.waitUntil(Condition.visible,Configuration.timeout).setValue(name);
+    ELEMENT_TASK_BUTTON_ADD.waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   /**
@@ -556,11 +556,11 @@ public class NavigationToolbar {
   public void goToAddUser() {
     info("Go to add user page");
     info("Click on administration icon");
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-    ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, 10000);
+    ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-    ELEMENT_ADMINISTRATION_ADD_USERS.click();
+    ELEMENT_ADMINISTRATION_ADD_USERS.waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   public void goToManageCommunity() {
@@ -569,7 +569,7 @@ public class NavigationToolbar {
     sleep(Configuration.timeout);
     ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, 10000);
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
   }
 
   /**

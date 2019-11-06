@@ -960,7 +960,7 @@ public class CalendarManagement {
   public void confirmDeleteEventTask(EventManagement.recurringType... type) {
     if (evt.waitForAndGetElement(ELEMENT_CONFIRM_POPUP_OK, 2000, 0) != null)
       evt.click(ELEMENT_CONFIRM_POPUP_OK);
-    if (evt.waitForAndGetElement(ELEMENT_EDIT_DELETE_ONE_EVENT, 2000, 0) != null) {
+    if (evt.waitForAndGetElement(ELEMENT_DELETE_ONE_EVENT, 2000, 0) != null) {
       if (type.length > 0)
         evMg.deleteRecurringConfirm(type[0]);
       else
@@ -984,7 +984,7 @@ public class CalendarManagement {
       evt.click(ELEMENT_EVENT_TASK_DELETE_BUTTON);
       if (evt.waitForAndGetElement(ELEMENT_CONFIRM_POPUP_OK, 2000, 0) != null)
         evt.click(ELEMENT_CONFIRM_POPUP_OK);
-      if (evt.waitForAndGetElement(ELEMENT_EDIT_DELETE_ONE_EVENT, 2000, 0) != null) {
+      if (evt.waitForAndGetElement(ELEMENT_DELETE_ONE_EVENT, 2000, 0) != null) {
         evMg.deleteRecurringConfirm(EventManagement.recurringType.ALL_EVENT);
       }
       if (evt.waitForAndGetElement(ELEMENT_CONFIRM_POPUP_DELETE, 2000, 0) != null)

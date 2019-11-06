@@ -4,6 +4,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.selenium.Button.ELEMENT_CHANGE_PASSWORD_CLOSE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -129,8 +130,9 @@ public class UserAddManagement {
     $(ELEMENT_SAVE_PASSWORD).click();
     $(byText(ELEMENT_MSG_CHANGE_PASS_WORD)).waitUntil(visible,Configuration.timeout);
     $(byXpath(ELEMENT_CLOSE_MESSAGE)).click();
-    button.close();
-    $(button.ELEMENT_CLOSE_BUTTON).waitUntil(not(visible),Configuration.timeout);
+    evt.waitForAndGetElement(ELEMENT_CHANGE_PASSWORD_CLOSE_BUTTON);
+    evt.click(ELEMENT_CHANGE_PASSWORD_CLOSE_BUTTON);
+    $(ELEMENT_CHANGE_PASSWORD_CLOSE_BUTTON).waitUntil(not(visible),Configuration.timeout);
 
   }
 }

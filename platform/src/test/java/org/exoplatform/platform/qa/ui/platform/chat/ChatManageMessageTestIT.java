@@ -119,8 +119,7 @@ public class ChatManageMessageTestIT extends Base {
     ELEMENT_LIST_DOCUMENTS_IN_SPACE.find(byText("testavatar.png")).shouldNot(Condition.visible);
     info("verify document uploaded in space chat exist in activity stream");
     homePagePlatform.goToHomePage();
-    sleep(Configuration.collectionsTimeout);
-    ELEMENT_CONTAINER_ACTIVITY.find(byAttribute("data-original-title", "eXo-Platform.png")).should(Condition.exist);
+    ELEMENT_CONTAINER_ACTIVITY.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).find(byAttribute("data-original-title", "eXo-Platform.png")).should(Condition.exist);
     sleep(Configuration.timeout);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);

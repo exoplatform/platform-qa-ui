@@ -3,6 +3,8 @@ package org.exoplatform.platform.qa.ui.gatein.pageobject;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.ELEMENT_ANSWER_FORM_SAVE_BUTTON;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_SCHEDULE_DRAG;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -117,7 +119,8 @@ public class NavigationManagement {
       break;
     case DELETE_NODE:
       info("Click on Delete node");
-      $(ELEMENT_MANAGESITES_CONTEXTMENU_DELETE_ICON).click();
+      $(byXpath("(//span[@class='PopupTitle popupTitle'])[1]")).dragAndDropTo($(byXpath("//div[@class='UITableColumnContainer']")));
+      $(ELEMENT_MANAGESITES_CONTEXTMENU_DELETE_ICON).waitUntil(Condition.visible,Configuration.timeout).click();
       alert.acceptAlert();
       break;
     case MOVE_UP:

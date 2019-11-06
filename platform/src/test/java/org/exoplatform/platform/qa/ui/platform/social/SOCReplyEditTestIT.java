@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.platform.social;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
@@ -437,6 +438,7 @@ public class SOCReplyEditTestIT extends Base {
     activityStream.commentActivity(activity1, comment1);
     activityStream.replyToComment(comment1, reply1, usernametest + " " + usernametest);
     activityStream.removeCharactersComment(reply1, 3, false);
+    executeJavaScript("window.scrollBy(0,-150)");
     activityStream.deleteactivity(activity1);
     manageLogInOut.signIn(PLFData.DATA_USER1, DATA_PASS2);
     navigationToolbar.goToManageCommunity();

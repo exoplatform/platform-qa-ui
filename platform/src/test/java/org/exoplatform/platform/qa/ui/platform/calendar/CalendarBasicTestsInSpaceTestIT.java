@@ -5,6 +5,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.junit.jupiter.api.BeforeEach;
@@ -53,10 +54,14 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
     eventManagement = new EventManagement(this);
     calendarHomePage = new CalendarHomePage(this);
     manageLogInOut = new ManageLogInOut(this);
-
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    manageLogInOut.signInCas(PLFData.username, PLFData.password);
   }
 
   @Test
+  @Tag("eventis201")
   public void test01_AddEventInSpace() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String contentEvent = "contentEvent" + getRandomNumber();
@@ -87,6 +92,7 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
   }
 
   @Test
+  @Tag("eventis")
   public void test02_EditEventInSpace() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String titleEvent2 = "titleEvent2" + getRandomNumber();
@@ -102,8 +108,8 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
     $(byClassName("createEvent")).waitUntil(Condition.visible, Configuration.timeout).click();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM-dd-yyyy"),
-                                              getDate(0, "MM-dd-yyyy"),
+                                              getDate(0, "MM-dd-yyyy" + " HH"),
+                                              getDate(0, "MM-dd-yyyy" + " HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     executeJavaScript("window.scrollBy(0,-2000)", "");
@@ -116,8 +122,8 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
                                                        getDate(0, "MMM dd yyyy"));
     eventManagement.inputDataEventInDetailForm(titleEvent2,
                                                contentEvent2,
-                                               getDate(0, "MM-dd-yyyy"),
-                                               getDate(0, "MM-dd-yyyy"),
+                                               getDate(0, "MM-dd-yyyy" + " HH"),
+                                               getDate(0, "MM-dd-yyyy" + " HH"),
                                                false);
     eventManagement.saveAddEventDetails();
     calendarHomePage.verifyIsPresentEventTask(titleEvent2,
@@ -128,6 +134,7 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
   }
 
   @Test
+  @Tag("eventis")
   public void test03_DeleteEventInSpace() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String contentEvent = "contentEvent" + getRandomNumber();
@@ -141,8 +148,8 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
     $(byClassName("createEvent")).waitUntil(Condition.visible, Configuration.timeout).click();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM-dd-yyyy"),
-                                              getDate(0, "MM-dd-yyyy"),
+                                              getDate(0, "MM-dd-yyyy" + " HH"),
+                                              getDate(0, "MM-dd-yyyy" + " HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     executeJavaScript("window.scrollBy(0,-2000)", "");

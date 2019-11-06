@@ -311,10 +311,6 @@ public class WikiInformationTestIT extends Base {
     richTextEditor.editSimplePage(newTitle, "");
     wikiManagement.saveAddPage();
     $(byText(newTitle)).should(Condition.exist);
-
-    info("Restricted link by default: Restricted");
-    $(ELEMENT_RESTRICTED_LINK).shouldHave(Condition.text("Restricted"));
-
     info("The total number of attachments as a link to open the attachments");
     $(ELEMENT_ATTACHMENT_TOTAL_NUMBER).shouldHave(Condition.text("0"));
 

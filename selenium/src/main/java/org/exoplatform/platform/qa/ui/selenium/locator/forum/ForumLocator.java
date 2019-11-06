@@ -565,8 +565,7 @@ public class ForumLocator {
   public static final By ELEMENT_CATEGORY_PERMISSION_TAB_USER_SELECTOR =
           By.xpath(".//*[@id='PermissionTab']//*[@class='uiIconUser uiIconLightGray']");
 
-  public static final String ELEMENT_CATEGORY_DELETE_CONFIRM_MSG =
-          "Are you sure you want to delete this category ?";
+  public static final String ELEMENT_CATEGORY_DELETE_CONFIRM_MSG = "Are you sure you want to delete this category ?";
 
   // Export forum popup
   public static final By ELEMENT_EXPORT_FORUM_EXPORTALL = By.id("checkAll");

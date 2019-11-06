@@ -240,6 +240,7 @@ public class CalendarCalendarTestIT extends Base {
    * Save Expected Outcome: Export successfully with .ics file
    */
   @Test
+  @Tag("eventis")
   public void test12_ExportCalendar() {
     String titleEvent = "titleEvent" + "115693";
     String attachment = getRandomNumber() + ".ics";
@@ -254,7 +255,7 @@ public class CalendarCalendarTestIT extends Base {
     calendarManagement.executeActionCalendar(calendarName, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     info("Check default date");
     eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
-    eventManagement.inputDataEventInQuickForm(titleEvent, titleEvent, getDate(0, "MM/dd/yyyy"), getDate(0, "MM/dd/yyyy"), false);
+    eventManagement.inputDataEventInQuickForm(titleEvent, titleEvent, getDate(0, "MM-dd-yyyy" + " HH"), getDate(0, "MM-dd-yyyy" + " HH"), false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
                                               CalendarHomePage.selectViewOption.LIST,

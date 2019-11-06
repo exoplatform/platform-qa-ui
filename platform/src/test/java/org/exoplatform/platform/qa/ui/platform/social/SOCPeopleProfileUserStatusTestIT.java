@@ -4,8 +4,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_CONNECTION_USER_NAME;
@@ -13,6 +12,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -105,9 +105,10 @@ public class SOCPeopleProfileUserStatusTestIT extends Base {
 
     info("change status to Away");
     mouseOverAndClick(ELEMENT_CHAT_ICON);
-    $(byClassName(ELEMENT_CHAT_STATUS.replace("${status}", iconAway))).click();
-    info(ELEMENT_CHAT_UISTATUSPROFILEPORTLET.replace("${icon}", iconAway).replace("${status}", statusAway));
-    homePagePlatform.refreshUntil($(ELEMENT_CHAT_ICON),visible,1000);
+    sleep(Configuration.timeout);
+    $(byClassName(ELEMENT_CHAT_STATUS.replace("${status}", iconAway))).waitUntil(visible, Configuration.openBrowserTimeoutMs).click();
+    info(ELEMENT_CHAT_UISTATUSPROFILEPORTLET.replace("${icon}", statusAway).replace("${status}", statusAway));
+    homePagePlatform.refreshUntil($(ELEMENT_CHAT_ICON),visible,Configuration.timeout);
     $(ELEMENT_CHAT_ICON).find(byClassName(ELEMENT_CHAT_STATUS.replace("${status}", iconAway))).should(Condition.exist);
     assertEquals($(ELEMENT_CHAT_ICON).find(byClassName("uiIconStatus")).getCssValue("color"),
                  orangeColor);

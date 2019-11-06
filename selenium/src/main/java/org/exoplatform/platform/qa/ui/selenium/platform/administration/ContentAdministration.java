@@ -233,18 +233,18 @@ public class ContentAdministration {
    */
   public void addDrives(String name, String permission, specificView[] applyViews) {
     info("Click on Add button of the drive in the list");
-    ELEMENT_ECM_EXPLORER_DRIVES_ADD_DRIVES.scrollTo().click();
-    ELEMENT_TAB_ADD_DRIVE_POPUP.click();
+    ELEMENT_ECM_EXPLORER_DRIVES_ADD_DRIVES.scrollTo().waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    ELEMENT_TAB_ADD_DRIVE_POPUP.waitUntil(Condition.visible,Configuration.timeout).click();
     info("Type a name for the drive");
-    $(ELEMENT_ECM_EXPLORER_NAME_DRIVES_FORM).setValue(name);
+    $(ELEMENT_ECM_EXPLORER_NAME_DRIVES_FORM).waitUntil(Condition.visible,Configuration.timeout).setValue(name);
     info("Click on Add Permission button for the drive");
-    $(ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON).click();
+    $(ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
     if (permission == "any") {
       info("Set 'any' permission for the drive");
-      $(ELEMENT_ECM_COMMON_ANY_PERMISSION).click();
+      $(ELEMENT_ECM_COMMON_ANY_PERMISSION).waitUntil(Condition.visible,Configuration.timeout).click();
     }
     info("Click on Aplly Views tab");
-    ELEMENT_ECM_EXPLORER_APPLY_VIEWS_FORM.click();
+    ELEMENT_ECM_EXPLORER_APPLY_VIEWS_FORM.waitUntil(Condition.visible,Configuration.timeout).click();
     for (specificView arrayElement : applyViews) {
       info("Select a view type for the drive");
       switch (arrayElement) {
@@ -786,11 +786,13 @@ public class ContentAdministration {
     String mixinType = (String) (opParams.length > 0 ? opParams[0] : null);
     $(ELEMENT_ECM_REPOSITORY_NODES_ADD).click();
     $(ELEMENT_ECM_REPOSITORY_NODES_NAME_FORM).setValue(name);
+    $(byXpath("//span[@class='PopupTitle popupTitle' and text()='Add/Edit Node Type Definitions']")).dragAndDropTo($(byXpath("//div[@class='UITableColumnContainer']")));
     $(ELEMENT_ECM_REPOSITORY_NODES_SUPER_TYPES_FORM).setValue(superTypes);
     if (mixinType != null)
       $(ELEMENT_ECM_REPOSITORY_NODES_MIXIN_TYPES).selectOption(mixinType);
-    $(ELEMENT_ECM_REPOSITORY_NODES_SAVE_FORM).click();
-    $(ELEMENT_ECM_REPOSITORY_NODES_OK_FORM).click();
+    $(byXpath("//span[@class='PopupTitle popupTitle' and text()='Add/Edit Node Type Definitions']")).dragAndDropTo($(byXpath("//div[@class='UITableColumnContainer']")));
+    $(ELEMENT_ECM_REPOSITORY_NODES_SAVE_FORM).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_ECM_REPOSITORY_NODES_OK_FORM).waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   /**
@@ -922,6 +924,7 @@ public class ContentAdministration {
     $(ELEMENT_ECM_TEMPLATES_LIST_TEMPLATE_NAME_FORM).setValue(nameTemplate);
     $(ELEMENT_ECM_TEMPLATES_LIST_NAME_FORM).setValue(name);
     $(ELEMENT_ECM_TEMPLATES_LIST_CONTENT_FORM).setValue(content);
+    $(byXpath("//span[@class='PopupTitle popupTitle' and text()='Add List Template']")).dragAndDropTo($(byXpath("//div[@class='UITableColumnContainer']")));
     $(ELEMENT_ECM_TEMPLATES_LIST_SAVE_FORM).click();
     $(ELEMENT_ECM_TEMPLATES_LIST_SAVE_FORM).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     /*
@@ -959,7 +962,8 @@ public class ContentAdministration {
   public void editTemplateNameInList(String oldTem, String newName) {
     $(byXpath(ELEMENT_ECM_TEMPLATES_LIST_EDIT_LIST.replace("{$name}", oldTem))).click();
     $(ELEMENT_ECM_TEMPLATES_LIST_NAME_FORM).setValue(newName);
-    $(ELEMENT_ECM_TEMPLATES_LIST_SAVE_FORM).click();
+    $(byXpath("//span[@class='PopupTitle popupTitle' and text()='Edit List Template']")).dragAndDropTo($(byXpath("//div[@class='UITableColumnContainer']")));
+    $(ELEMENT_ECM_TEMPLATES_LIST_SAVE_FORM).waitUntil(Condition.visible,Configuration.timeout).click();
     $(byXpath(ELEMENT_ECM_TEMPLATES_LIST_CHECK_BY_NAME.replace("{$name}", newName))).waitUntil(Condition.visible,
                                                                                                Configuration.timeout);
   }

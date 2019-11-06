@@ -900,18 +900,18 @@ public class RichTextEditor {
     $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
     if ($(ELEMENT_SOURCE_EDITOR_BUTTON).is(Condition.not(Condition.exist))
         && (ELEMENT_BUTTON_WIKI_RITCH_TEXT.is(Condition.exist))) {
-      ELEMENT_BUTTON_WIKI_RITCH_TEXT.click();
+      ELEMENT_BUTTON_WIKI_RITCH_TEXT.waitUntil(Condition.visible,Configuration.timeout).click();
     }
     info("Input a new title for the page");
     if (!newTitle.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).clear();
-    $(ELEMENT_TITLE_WIKI_INPUT).val(newTitle);
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.timeout).clear();
+    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.timeout).val(newTitle);
     info("Input a new content for the page");
     if (!newContent.isEmpty()) {
       SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.timeout);
       switchTo().frame(frame);
-      $(byId("body")).clear();
-      $(byId("body")).sendKeys(newContent);
+      $(byId("body")).waitUntil(Condition.visible,Configuration.timeout).clear();
+      $(byId("body")).waitUntil(Condition.visible,Configuration.timeout).sendKeys(newContent);
       switchTo().defaultContent();
     }
   }
@@ -980,15 +980,15 @@ public class RichTextEditor {
     goToImageSettings();
     if (!width.isEmpty()) {
       info("Input width");
-      $(ELEMENT_IMAGE_WIDTH).setValue(width);
+      $(ELEMENT_IMAGE_WIDTH).waitUntil(Condition.visible,Configuration.timeout).setValue(width);
     }
     if (!height.isEmpty()) {
       info("Input height");
-      $(ELEMENT_IMAGE_HEIGHT).setValue(height);
+      $(ELEMENT_IMAGE_HEIGHT).waitUntil(Condition.visible,Configuration.timeout).setValue(height);
     }
     if (!altText.isEmpty()) {
       info("Change alt text");
-      $(ELEMENT_IMAGE_ALTERNATIVE_TEXT).setValue(altText);
+      $(ELEMENT_IMAGE_ALTERNATIVE_TEXT).waitUntil(Condition.visible,Configuration.timeout).setValue(altText);
     }
   }
 
@@ -1001,7 +1001,7 @@ public class RichTextEditor {
     if (!link.isEmpty()) {
       info("Input external Image link");
       sleep(Configuration.timeout);
-      $(ELEMENT_EXTERNAL_IMAGE_INPUT_LINK).waitUntil(Condition.visible,Configuration.timeout).setValue(link);
+      $(ELEMENT_EXTERNAL_IMAGE_INPUT_LINK).waitUntil(Condition.visible,Configuration.collectionsTimeout).setValue(link);
     }
   }
 
@@ -1472,7 +1472,7 @@ public class RichTextEditor {
     sleep(Configuration.timeout);
     refresh();
     if (!title.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).val(title);
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.timeout).val(title);
     info("Input a content for the page");
     if (!content.isEmpty()) {
       SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.timeout);

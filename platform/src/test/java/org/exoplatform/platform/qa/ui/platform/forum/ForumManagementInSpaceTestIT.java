@@ -6,6 +6,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACES_LIST;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -54,6 +55,9 @@ public class ForumManagementInSpaceTestIT extends Base {
     forumForumManagement = new ForumForumManagement(this);
     forumTopicManagement = new ForumTopicManagement(this);
     forumHomePage = new ForumHomePage(this);
+    manageLogInOut = new ManageLogInOut(this);
+    manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);
+
   }
 
   @Test

@@ -13,6 +13,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -62,6 +63,8 @@ public class WikiSettingsTestIT extends Base {
 
   WikiPermission        wikiPermission;
 
+  TestBase              testBase;
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
@@ -79,6 +82,7 @@ public class WikiSettingsTestIT extends Base {
     platformPermission = new PlatformPermission(this);
     manageLogInOut = new ManageLogInOut(this);
     wikiPermission = new WikiPermission(this);
+    testBase = new TestBase();
     if ($(ELEMENT_SKIP_BUTTON).is(exist)) {
       $(ELEMENT_SKIP_BUTTON).click();
     }
@@ -139,7 +143,8 @@ public class WikiSettingsTestIT extends Base {
     homePagePlatform.goToWiki();
     wikiHomePage.goToWikiSettingPage();
     sleep(Configuration.timeout);
-    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.waitUntil(Condition.visible,Configuration.timeout).click();
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     wikiSettingManagement.addTemplate(title, description, content);
     ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(title)).should(exist);
     ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();
@@ -259,10 +264,10 @@ public class WikiSettingsTestIT extends Base {
     wikiManagement.saveAddPage();
 
     wikiHomePage.goToPermissions();
-    $(byText("any")).parent().parent().find(ELEMENT_WIKI_ICON_DELETE_PERMISSION).click();
+    $(byText("any")).parent().parent().find(ELEMENT_WIKI_ICON_DELETE_PERMISSION).waitUntil(Condition.visible,Configuration.timeout).click();
     wikiPermission.addPermisisonByType(DATA_USER2);
-    click(ELEMENT_ADD_PERMISSION);
-    click(ELEMENT_SAVE_PERMISSION);
+    $(ELEMENT_ADD_PERMISSION).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_SAVE_PERMISSION).waitUntil(Condition.visible,Configuration.timeout).click();
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     info("Check if mary can see the page");
     homePagePlatform.goToWiki();

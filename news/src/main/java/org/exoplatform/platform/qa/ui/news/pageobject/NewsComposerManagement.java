@@ -6,15 +6,12 @@ import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ManageFileTestBase;
 
-
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Configuration.*;
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Configuration.timeout;
+import static com.codeborne.selenide.Selenide.switchTo;
+import static org.exoplatform.platform.qa.ui.news.NewsLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_INPUT_ACTIVITY;
-import static org.exoplatform.platform.qa.ui.selenium.locator.news.NewsLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 public class NewsComposerManagement {
   public ManageAlert alert;
@@ -38,32 +35,51 @@ public class NewsComposerManagement {
   }
 
   /**
-   * go to news composer
+   * Open news composer
    */
-  public void selectNewsComposer() {
-    NEWS_COMPOSER_TAB.shouldBe(visible).click();
+  public void openNewsComposer() {
+    NEWS_COMPOSER_LINK.shouldBe(visible).click();
+    switchTo().window(1);
   }
 
   /**
-   * Post a simple news in the current space
-   *
-   * @param title : News title
-   * @param content : News Content
+   * Open news composer
    */
-  public void postSimpleNews(String title, String content) {
-    selectNewsComposer();
-    NEWS_COMPOSER_TITLE_INPUT.should(appears);
-    NEWS_COMPOSER_TITLE_INPUT.setValue(title);
-    if (content != null && !"".equals(content)) {
-      info("----Add text into news content text box-----");
-      fillContentField(content);
-    }
-    info("Save all changes");
-    NEWS_COMPOSER_POST_BUTTON.waitUntil(enabled, timeout).click();
+  public void openNewsEditor() {
+    NEWS_EDITOR_LINK.shouldBe(visible).click();
+    switchTo().window(2);
+  }
 
-    info("-- Verify that news has been added --");
-    $(byText(title)).should(exist);
-    NEWS_COMPOSER_POST_BUTTON.shouldBe(disabled);
+  /**
+   * Click on the Post button
+   */
+  public void postNews() {
+    NEWS_COMPOSER_POST_BUTTON.waitUntil(enabled, timeout).click();
+  }
+
+  /**
+   * Click on the Update button
+   */
+  public void updateNews() {
+    NEWS_EDITOR_UPDATE_BUTTON.waitUntil(enabled, timeout).click();
+  }
+
+  /**
+   * Add text into news title text box
+   *
+   * @param text String
+   */
+  public void fillTitleField(String text) {
+    NEWS_COMPOSER_TITLE_INPUT.waitUntil(visible, timeout).setValue(text);
+  }
+
+  /**
+   * Add text into news summary text box
+   *
+   * @param text String
+   */
+  public void fillSummaryField(String text) {
+    NEWS_COMPOSER_SUMMARY_INPUT.waitUntil(visible, timeout).setValue(text);
   }
 
   /**
@@ -71,13 +87,50 @@ public class NewsComposerManagement {
    *
    * @param text String
    */
-  public void fillContentField(String text) {
+  public void fillBodyField(String text) {
     info("----Add text into into news content text box-----");
-    $(ELEMENT_ACCOUNT_NAME_LINK).click();
     switchTo().frame(NEWS_COMPOSER_CONTENT_INPUT);
     ELEMENT_INPUT_ACTIVITY.click();
     ELEMENT_INPUT_ACTIVITY.sendKeys(text);
     switchTo().defaultContent();
+  }
+
+  /**
+   * Create a News
+   *
+   * @param title
+   * @param body
+   */
+  public void createNews(String title, String body) {
+    openNewsComposer();
+
+    fillTitleField(title);
+    fillBodyField(body);
+
+    postNews();
+  }
+
+  public void verifyPostButton(boolean buttonEnabled) {
+    NEWS_COMPOSER_POST_BUTTON.shouldBe(visible).shouldBe(buttonEnabled ? enabled : disabled);
+  }
+
+  public void verifyUpdateButton(boolean buttonEnabled) {
+    NEWS_EDITOR_UPDATE_BUTTON.shouldBe(visible).shouldBe(buttonEnabled ? enabled : disabled);
+  }
+
+  public void verifyNewsDetailsTitle(String text) {
+    NEWS_DETAILS_TITLE.shouldBe(visible);
+    NEWS_DETAILS_TITLE.shouldHave(text(text));
+  }
+
+  public void verifyNewsDetailsBody(String text) {
+    NEWS_DETAILS_BODY.shouldBe(visible);
+    NEWS_DETAILS_BODY.shouldHave(text(text));
+  }
+
+  public void verifyNewsEditorTitle(String text) {
+    NEWS_COMPOSER_TITLE_INPUT.shouldBe(visible);
+    NEWS_COMPOSER_TITLE_INPUT.shouldHave(value(text));
   }
 
 }

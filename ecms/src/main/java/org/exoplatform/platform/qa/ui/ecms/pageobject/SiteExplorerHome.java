@@ -8,6 +8,8 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 import static org.junit.Assert.assertEquals;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Configuration.*;
 
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -145,9 +147,8 @@ public class SiteExplorerHome {
    */
   public void goToAddNewContent() {
 
-    $(ELEMENT_ACTIONBAR_ADDDOCUMENT).waitUntil(Condition.appears, Configuration.timeout);
     info("Click on New Document on Action Bar");
-    $(ELEMENT_ACTIONBAR_ADDDOCUMENT).click();
+    $(ELEMENT_ACTIONBAR_ADDDOCUMENT).waitUntil(Condition.appears, Configuration.collectionsTimeout).click();
     info("Verify that New content page is shown");
     sleep(Configuration.timeout);
     $(ELEMENT_ADDDOCUMENT_CHOICETYPE).waitUntil(Condition.appears, Configuration.timeout);
@@ -176,17 +177,13 @@ public class SiteExplorerHome {
     info("Click on File Explorer icon");
     // scroll de 50 pixel
     executeJavaScript("window.scrollBy(0,50);", "");
-    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
+    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     sleep(Configuration.collectionsTimeout);
     info("Right click on nodename");
     executeJavaScript("window.scrollBy(0,-250)", "");
-    sleep(Configuration.timeout);
-    $(byXpath("//div[@id='UITreeExplorer']//i[@title='${title}']".replace("${title}",title))).waitUntil(Condition.visible,2000).click();
-    sleep(2000);
-    $(ELEMENT_ACCOUNT_NAME_LINK).click();
-    sleep(2000);
-    ELEMENT_CONTENT_LIST.find(byLinkText(title)).contextClick();
-    sleep(2000);
+    $(byXpath("//div[@id='UITreeExplorer']//i[@title='${title}']".replace("${title}",title))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_CONTENT_LIST.find(byLinkText(title)).waitUntil(Condition.visible,Configuration.timeout).contextClick();
     executeJavaScript("window.scrollBy(0,100);", "");
     info("Click on Delete link");
     sleep(Configuration.timeout);
@@ -210,8 +207,8 @@ public class SiteExplorerHome {
    * @param destination String
    */
   public void copyPasteNode(String title, String destination) {
-    $(ELEMENT_ACCOUNT_NAME_LINK).click();
-    $(byXpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", title))).contextClick();
+    $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byXpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", title))).waitUntil(Condition.visible,Configuration.timeout).contextClick();
     $(ELEMENT_SITEEXPLORER_ACTION_COPY).click();
     $(ELEMENT_ACCOUNT_NAME_LINK).click();
     $(byXpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", destination))).contextClick();
@@ -567,9 +564,10 @@ public class SiteExplorerHome {
    */
   public void lockNode(String name) {
     info("lock node:" + name);
-    $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", name))).contextClick();
-    $(ELEMENT_SITEEXPLORER_LIST_LOCK_NODE).click();
-    $(byXpath(ELEMENT_SITEEXPLORER_LOCK_ICON.replace("$node", name))).waitUntil(Condition.visible,Configuration.timeout);
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+    $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", name))).waitUntil(Condition.visible,Configuration.collectionsTimeout).contextClick();
+    $(ELEMENT_SITEEXPLORER_LIST_LOCK_NODE).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(byXpath(ELEMENT_SITEEXPLORER_LOCK_ICON.replace("$node", name))).waitUntil(Condition.visible,Configuration.collectionsTimeout);
   }
 
   /**
@@ -579,8 +577,8 @@ public class SiteExplorerHome {
    */
   public void unlockNode(String name) {
     info("unlock node:" + name);
-    $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", name))).contextClick();
-    $(ELEMENT_SITEEXPLORER_LIST_UNLOCK_NODE).click();
+    $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", name))).waitUntil(Condition.visible,Configuration.timeout).contextClick();
+    $(ELEMENT_SITEEXPLORER_LIST_UNLOCK_NODE).waitUntil(Condition.visible,Configuration.timeout).click();
     $(byXpath(ELEMENT_SITEEXPLORER_LOCK_ICON.replace("$node", name))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
@@ -1569,6 +1567,9 @@ public class SiteExplorerHome {
     }
   }
 
+
+
+
   /**
    * Delete all files in a folder under Admin view
    *
@@ -1605,4 +1606,35 @@ public class SiteExplorerHome {
   public enum defineValueBehavior {
     CREATE_NEW, REMOVE_EXISTING, REPLACE_EXISTING, THROW_EXEPTION;
   }
+
+
+
+
+
+
+  /**
+   * Click on View Document button
+   */
+  public void clickViewDocumentButton() {
+    $(".uiIconEcmsPermlink").waitUntil(visible, openBrowserTimeoutMs).click();
+  }
+
+  /**
+   * Click on Delete button
+   */
+  public void checkButtonDocument(String officeDocument) {
+    info("click on CheckBox button for Document");
+    $(byXpath("(//div[@class='columnText']//span[@class='nodeName' and text()='${word}']/preceding::span[@class='uiCheckbox'])[last()]".replace("${word}",officeDocument))).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byXpath("(//div[@class='columnText']//span[text()='${word}']/following::*[@class='fileInfoBottom'])[1]".replace("${word}",officeDocument))).waitUntil(Condition.visible,Configuration.timeout).click();
+  }
+
+  /**
+   * Click on Delete button
+   */
+  public void clickDeleteButtonDocument() {
+    info("click on Delete button for Document");
+    $(ELEMENT_DELETE_BUTTON).waitUntil(visible,timeout).click();
+    $(ELEMENT_DELETE_POPUP_BUTTON).waitUntil(visible,timeout).click();
+  }
+
 }

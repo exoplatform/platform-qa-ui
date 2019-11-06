@@ -99,8 +99,9 @@ public class PortletInSpaceHomePageTestIT extends Base {
   }
 
   @Test
-  public void test02_CheckTheSpaceTodayEventInThePortlet() {
+    public void test02_CheckTheSpaceTodayEventInThePortlet() {
     //TC21640 //TC21647 //TC21648 //TC21649
+
     info("Create new space");
     String titleEvent = "titleEvent" + getRandomNumber();
     String space = "space" + getRandomNumber();

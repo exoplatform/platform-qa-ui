@@ -21,6 +21,7 @@
 package org.exoplatform.platform.qa.ui.selenium.locator;
 
 import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 
 import org.openqa.selenium.By;
@@ -737,5 +738,11 @@ public final class HomePageLocator {
 public static final SelenideElement ELEMENT_ACTIVITY_STREAM_CONTAINER= $(byClassName("uiUserActivitiesContainer"));
 
 public static final By ELEMENT_BOX_ACTIVITY=byId("boxContainer");
+
 public static final SelenideElement ELEMENT_ACTIVITY_CONTAINER=$(byClassName("OfficeMiddleTDContainer"));
+
+public static final String ELEMENT_CHECK_FILE_IS_UPLOADED= "//*[@class='ellipsis' and contains(text(),'$doc')]";
+
+
+
 }

@@ -13,6 +13,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 import static org.exoplatform.platform.qa.ui.social.pageobject.NotificationsAdminSeting.notificationType.Edit_Activity;
 import static org.exoplatform.platform.qa.ui.social.pageobject.NotificationsAdminSeting.notificationType.Edit_Comment;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -121,7 +122,7 @@ public class SOCNotificationsEditActivityTestIT extends Base {
     addUsers.addUser(username1, password, email1, username1, username1);
     manageLogInOut.signIn(username1, password);
     navigationToolbar.goToMyNotifications();
-    myNotificationsSetting.verifyLabelNotificationType("Someone edits an activity");
+    myNotificationsSetting.verifyLabelNotificationType("Someone comments on one of my activities");
     myNotificationsSetting.verifyNotificationDefault(Edit_Activity);
     manageLogInOut.signIn(username, PASS_ROOT);
     navigationToolbar.goToManageCommunity();
@@ -174,7 +175,7 @@ public class SOCNotificationsEditActivityTestIT extends Base {
     navigationToolbar.goToIntranetNotification();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(DATA_NAME_ROOT))
                                     .parent()
-                                    .shouldHave(Condition.text(DATA_NAME_ROOT + " has edited his activity."));
+                                    .shouldHave(Condition.text(DATA_NAME_ROOT + " edited a post."));
     manageLogInOut.signIn(username, PASS_ROOT);
     activityStream.deleteactivity(activity1 + newactivity);
     navigationToolbar.goToManageCommunity();
@@ -212,7 +213,7 @@ public class SOCNotificationsEditActivityTestIT extends Base {
     navigationToolbar.goToIntranetNotification();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(DATA_NAME_ROOT))
                                     .parent()
-                                    .shouldHave(Condition.text(DATA_NAME_ROOT + " has edited his comment on your activity."));
+                                    .shouldHave(Condition.text(DATA_NAME_ROOT + " edited a comment on your post."));
     manageLogInOut.signIn(username, PASS_ROOT);
     activityStream.deleteactivity(activity1);
     navigationToolbar.goToManageCommunity();
@@ -248,8 +249,8 @@ public class SOCNotificationsEditActivityTestIT extends Base {
     activityStream.editComment(comment1, newcomment1);
     manageLogInOut.signIn(username1, password);
     navigationToolbar.goToIntranetNotification();
-    $(ELEMENT_VIEW_ALL_BUTTON).click();
-    $(byText(DATA_NAME_ROOT)).parent().shouldHave(Condition.text(DATA_NAME_ROOT + " has edited his comment on your activity."));
+    $(ELEMENT_VIEW_ALL_BUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(byText(DATA_NAME_ROOT)).parent().shouldHave(Condition.text(DATA_NAME_ROOT + " edited a comment on your post."));
     manageLogInOut.signIn(username, PASS_ROOT);
     activityStream.deleteactivity(activity1);
     navigationToolbar.goToManageCommunity();
@@ -292,10 +293,10 @@ public class SOCNotificationsEditActivityTestIT extends Base {
     navigationToolbar.goToIntranetNotification();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(DATA_NAME_ROOT))
                                     .parent()
-                                    .shouldHave(Condition.text(DATA_NAME_ROOT + " has edited his activity."));
+                                    .shouldHave(Condition.text(DATA_NAME_ROOT + " edited a post. "));
     manageLogInOut.signIn(username, PASS_ROOT);
-    activityStream.deleteactivity(activity1);
-    activityStream.deleteactivity(activity2);
+    activityStream.deleteactivity(activity1 + newactivity);
+    activityStream.deleteactivity(activity2 + newactivity2);
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
   }

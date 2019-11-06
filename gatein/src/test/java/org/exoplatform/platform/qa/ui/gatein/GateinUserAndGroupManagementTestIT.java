@@ -13,6 +13,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocat
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,7 @@ import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
+import sun.security.krb5.Config;
 
 /**
  * @date March 10 2015
@@ -371,9 +373,9 @@ public class GateinUserAndGroupManagementTestIT extends Base {
     useraddmanagement.addUser(username1, password1, email1, firstName1, lastName1);
     useraddmanagement.addUser(username2, password2, email2, firstName2, lastName2);
     homePagePlatform.goToConnections();
-    ELEMENT_NAME_OF_PEOPLE.setValue(firstName + " " + lastName).pressEnter();
-    ELEMENT_CONTENT_PEOPLE.find(byText(firstName + " " + lastName)).should(Condition.exist);
-    ELEMENT_CONTENT_PEOPLE.find(byText(firstName1 + " " + lastName1)).shouldNot(Condition.exist);
+    ELEMENT_NAME_OF_PEOPLE.setValue(firstName + " " + lastName).waitUntil(Condition.visible, Configuration.timeout).pressEnter();
+    ELEMENT_CONTENT_PEOPLE.waitUntil(Condition.visible, Configuration.timeout).find(byText(firstName + " " + lastName)).should(Condition.exist);
+    ELEMENT_CONTENT_PEOPLE.waitUntil(Condition.visible, Configuration.timeout).find(byText(firstName1 + " " + lastName1)).shouldNot(Condition.exist);
     refresh();
     navigationToolbar.goToManageCommunity();
     userandgroupmanagement.deleteUser(username);

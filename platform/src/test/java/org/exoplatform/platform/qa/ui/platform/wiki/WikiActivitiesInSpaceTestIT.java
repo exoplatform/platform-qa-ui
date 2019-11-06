@@ -1,10 +1,13 @@
 package org.exoplatform.platform.qa.ui.platform.wiki;
 
 import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.core.PLFData.password;
+import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_SOURCE_EDITOR_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -39,11 +42,14 @@ public class WikiActivitiesInSpaceTestIT extends Base {
 
   ActivityStream   activityStream;
 
+  ManageLogInOut   manageLogInOut;
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
 
     homePagePlatform = new HomePagePlatform(this);
+
     spaceHomePage = new SpaceHomePage(this);
     wikiHomePage = new WikiHomePage(this);
     wikiManagement = new WikiManagement(this);
@@ -51,6 +57,9 @@ public class WikiActivitiesInSpaceTestIT extends Base {
     wikiValidattions = new WikiValidattions(this);
     spaceManagement = new SpaceManagement(this);
     activityStream = new ActivityStream(this);
+    manageLogInOut = new ManageLogInOut(this);
+    manageLogInOut.signInCas(username, password);
+
   }
 
   /**
@@ -78,7 +87,6 @@ public class WikiActivitiesInSpaceTestIT extends Base {
   @Test
   public void test11_AddAWikisActivityAfterCreateAWikiPageInSpace() {
     info("Test 11 Add a wiki's activity after create a wiki page in space");
-
     info("Create a space");
     String space = "space" + getRandomNumber();
     homePagePlatform.goToMySpaces();
@@ -120,7 +128,6 @@ public class WikiActivitiesInSpaceTestIT extends Base {
   @Test
   public void test13_RemoveWikisPageOfSpace() {
     info("Test 13 Remove wiki's page of space");
-
     info("Create a space");
     String space = "space" + getRandomNumber();
     homePagePlatform.goToMySpaces();
@@ -148,6 +155,7 @@ public class WikiActivitiesInSpaceTestIT extends Base {
 
   @Test
   public void test01_editPageWikionSpace() {
+
     info("Edit page wiki on space");
     info("Create a space");
     String space = "space" + getRandomNumber();

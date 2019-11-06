@@ -62,7 +62,7 @@ public class ChatLocator {
     public static final String ELEMENT_STATUS_CHAT_IN_PROFILE_PAGE = "uiIconUser{status}";
 
     public static final String ELEMENT_CHAT_UISTATUSPROFILEPORTLET =
-            ".//*[@id='UIStatusProfilePortlet']//*[@class='${icon}' and @data-original-title='${status}']";
+                                                         "//*[@class='uiIconLightGray uiIconUser{icon}' and @data-original-title='${status}']";
 
     public static final String ELEMENT_CHAT_TOOLTIP =
             "//*[contains(@class,'tooltip-inner') and contains(text(),'${tooltip}')]";
@@ -116,7 +116,7 @@ public class ChatLocator {
 
     public static final SelenideElement ELEMENT_CHAT_LIST_MSG = $(byId("chats"));
 
-    public static final SelenideElement ELEMENT_CHAT_INPUT_SEARCH_USER = $(byId("chat-search"));
+    public static final SelenideElement ELEMENT_CHAT_INPUT_SEARCH_USER = $(By.xpath("//input[@placeholder='Filter discussions']"));
 
     public static final SelenideElement ELEMENT_CHAT_RESULT_SEARCH_USER =
             $(byAttribute("class",
@@ -202,7 +202,7 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_CHAT_ON_SITE_NOTIFICATION_BUTTON=   $(byId("notifyOnSite"));
     public static final SelenideElement ELEMENT_CHAT_NOTIFICATION_DETAIL=   $(byId("chat-notifications-details"));
 
-    public static final SelenideElement ELEMENT_CHAT_BUTTON_USER_PROFILE=  $(byXpath("//*[@id=\"UIUserNavigationPortlet\"]/div[1]/div/div[1]/ul/li[2]/a"));
+    public static final SelenideElement ELEMENT_CHAT_BUTTON_USER_PROFILE=  $(byXpath("//*[@class='chat-button btn']"));
 
     public static final SelenideElement ELEMENT_CHAT_TIP_CONTENT=   $(byId("tiptip_content"));
     public static final SelenideElement ELEMENT_CHAT_ICON_TIP_CONTENT=  $(byXpath("//*[@id=\"tiptip_content\"]/div/a/i"));
