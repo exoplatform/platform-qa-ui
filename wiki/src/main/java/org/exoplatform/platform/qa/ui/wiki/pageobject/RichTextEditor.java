@@ -897,7 +897,14 @@ public class RichTextEditor {
    * @param newContent updated content of the wiki page. Can not be
    */
   public void editSimplePage(String newTitle, String newContent) {
-    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
+    if(!$(ELEMENT_TITLE_WIKI_INPUT).exists())
+    {
+      do {
+        //refresh();
+        testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+        sleep(2000);
+      }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
+    }
     if ($(ELEMENT_SOURCE_EDITOR_BUTTON).is(Condition.not(Condition.exist))
         && (ELEMENT_BUTTON_WIKI_RITCH_TEXT.is(Condition.exist))) {
       ELEMENT_BUTTON_WIKI_RITCH_TEXT.waitUntil(Condition.visible,Configuration.timeout).click();
@@ -1001,7 +1008,7 @@ public class RichTextEditor {
     if (!link.isEmpty()) {
       info("Input external Image link");
       sleep(Configuration.timeout);
-      $(ELEMENT_EXTERNAL_IMAGE_INPUT_LINK).waitUntil(Condition.visible,Configuration.collectionsTimeout).setValue(link);
+      $(ELEMENT_EXTERNAL_IMAGE_INPUT_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(link);
     }
   }
 

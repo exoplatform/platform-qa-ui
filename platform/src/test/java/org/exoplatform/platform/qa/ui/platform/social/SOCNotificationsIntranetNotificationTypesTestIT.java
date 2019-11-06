@@ -2178,12 +2178,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
                     + username2 + " have commented a post."));
     info("Check comment notification in the View All");
     intranetNotification.goToAllNotification();
-    $(byClassName("media")).waitUntil(visible,Configuration.timeout).find(byText(comment2))
-                                             .waitUntil(visible,Configuration.timeout).parent()
-                                             .parent()
-                                             .parent()
-                                             .shouldHave(Condition.text(username3 + " " + username3 + " and " + username2 + " "
-                                                 + username2 + " have commented a post."));
+    $(byClassName("contentSmall")).shouldHave(Condition.text(comment2)).shouldHave(Condition.text(username3 + " " + username3 + " and " + username2 + " " + username2 + " have commented a post."));
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");

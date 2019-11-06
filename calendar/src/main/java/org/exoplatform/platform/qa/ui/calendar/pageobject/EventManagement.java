@@ -182,7 +182,8 @@ public class EventManagement {
       $(ELEMENT_ADD_EDIT_EVENT_NOTE).setValue(note);
     }
     if (opt.length > 0 && opt[0] != null) {
-      $(byId("calendar")).selectOption(opt[0]);
+      $(byXpath("//*[@class='control-label']/following::*[@class='dropdown']")).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+      $(byXpath("//*[@class='dropdown-submenu']//*[@class='trimText' and contains(text(),'${calendarName}')]".replace("${calendarName}",opt[0]))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     }
     if (opt.length > 1 && opt[1] != null) {
       $(byXpath("//*[@id='ExoCalendarEventForm']/div[1]/div[2]/form/div[1]/div[2]/span/select")).selectOption(opt[1]);

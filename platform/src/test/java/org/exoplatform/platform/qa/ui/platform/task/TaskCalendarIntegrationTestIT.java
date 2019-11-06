@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.task;
 
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW;
@@ -75,7 +76,7 @@ public class TaskCalendarIntegrationTestIT extends Base {
     ELEMENT_MINI_CALENDAR_TO.find(byText(getDate(0, "d"))).parent().click();
     homePagePlatform.goToCalendarPage();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.WEEK);
-    ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(taskName)).parent().shouldHave((Condition.text(getDate(0, "HH" + ":00"))));
+    $(byXpath("//*[@id='UIWeekView']//*[@class='eventContainer' and text()='${taskName}']".replace("${taskName}",taskName))).exists();
     homePagePlatform.goToTaskPage();
     projectsManagement.deleteProject(project);
   }
