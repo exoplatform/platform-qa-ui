@@ -32,5 +32,4 @@ public class OnlyOfficeDocumentApplication{
     public void clickEditOnine() {
         $(ELEMENT_EDIT_ONlINE_BUTTON).waitUntil(visible,timeout).click();
     }
-
 }

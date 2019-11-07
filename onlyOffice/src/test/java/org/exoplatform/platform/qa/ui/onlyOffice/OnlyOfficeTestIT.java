@@ -226,4 +226,25 @@ public class OnlyOfficeTestIT extends Base {
     manageLogInOut.signOut();
   }
 
+  @Test
+  /**
+   * EditOnline_BTN_US04
+   * Edit online with OnlyOffice is displayed in new Tab
+   */
+  public void EditOnlineInNewBrowserTab () {
+    String document = "docx_test";
+    String extension = ".docx";
+    String userName = PLFData.DATA_NAME_ROOT;
+    info("Edit Online from document from AS");
+    activityStream.uploadFileFromAS(document + extension);
+    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc",document))),visible,timeout);
+    onlyOfficeActivityStream.editOnlineFromAS();
+    switchTo().window(1);
+    onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(document, extension, userName);
+    switchTo().window(1).close();
+    switchTo().window(0);
+    refresh();
+    activityStream.deleteDocumentFromAS(document + extension);
+    manageLogInOut.signOut();
+  }
 }
