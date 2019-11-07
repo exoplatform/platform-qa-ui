@@ -119,7 +119,7 @@ public class ChatManageMessageTestIT extends Base {
     ELEMENT_LIST_DOCUMENTS_IN_SPACE.find(byText("testavatar.png")).shouldNot(Condition.visible);
     info("verify document uploaded in space chat exist in activity stream");
     homePagePlatform.goToHomePage();
-    ELEMENT_CONTAINER_ACTIVITY.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).find(byAttribute("data-original-title", "eXo-Platform.png")).should(Condition.exist);
+    ELEMENT_CONTAINER_ACTIVITY.find(byAttribute("data-original-title", "eXo-Platform.png")).exists();
     sleep(Configuration.timeout);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
@@ -234,9 +234,7 @@ public class ChatManageMessageTestIT extends Base {
     ELEMENT_CHAT_LIST_MSG.find(byClassName("uiIconChatWiki")).parent().find(byClassName("save-meeting-notes")).click();
     ELEMENT_CHAT_LINK_TEXT_OPEN_WIKI_APP.click();
     switchTo().window(2);
-    do {
-      refresh();
-    } while ($(byXpath("//div[@id='iconTreeExplorer']/a[text()=' Meeting Notes']")).exists());
+    getExoWebDriver().getWebDriver().navigate().refresh();
     $(byXpath("//div[@id='iconTreeExplorer']/a[text()=' Meeting Notes']")).waitUntil(Condition.visible,Configuration.timeout).click();
     String nameWikipage = room + " Meeting " + getDate(0, "dd-MM-yyyy HH-mm");
     $(byText(nameWikipage)).shouldBe(Condition.visible);
