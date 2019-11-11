@@ -54,13 +54,13 @@ public class CalendarHomePage {
     executeJavaScript("window.scrollBy(0,-5500)", "");
     switch (view) {
       case DAY:
-        ELEMENT_CALENDAR_DAY_BUTTON.click();
+        ELEMENT_CALENDAR_DAY_BUTTON.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
         break;
       case WEEK:
-        ELEMENT_CALENDAR_WEEK_BUTTON.click();
+        ELEMENT_CALENDAR_WEEK_BUTTON.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
         break;
       case LIST:
-        ELEMENT_CALENDAR_LIST_BUTTON.click();
+        ELEMENT_CALENDAR_LIST_BUTTON.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
         break;
       case MONTH:
         sleep(Configuration.timeout);

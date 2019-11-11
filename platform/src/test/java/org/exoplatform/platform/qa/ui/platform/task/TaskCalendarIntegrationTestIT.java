@@ -77,6 +77,7 @@ public class TaskCalendarIntegrationTestIT extends Base {
     homePagePlatform.goToCalendarPage();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.WEEK);
     $(byXpath("//*[@id='UIWeekView']//*[@class='eventContainer' and text()='${taskName}']".replace("${taskName}",taskName))).exists();
+    getExoWebDriver().getWebDriver().navigate().refresh();
     homePagePlatform.goToTaskPage();
     projectsManagement.deleteProject(project);
   }

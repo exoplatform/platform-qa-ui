@@ -98,7 +98,7 @@ public class HomePagePlatform {
   }
 
   public void goToTaskPage() {
-    ELEMENT_TASKS_LINK_PLF.waitUntil(Condition.appears, Configuration.timeout).click();
+    ELEMENT_TASKS_LINK_PLF.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
