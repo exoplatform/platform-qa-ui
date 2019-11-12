@@ -88,7 +88,7 @@ public class ChatManagement {
 
   public void checkMenuCollaborativeAction(){
 
-    ELEMENT_COLLABORATION_ACTIONS.should(Condition.exist).click();
+    ELEMENT_COLLABORATION_ACTIONS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_CHAT_COLLABORATION_MENU.waitUntil(Condition.appear, Configuration.timeout);
     ELEMENT_CHAT_ADD_EVENT.should(Condition.visible);
     ELEMENT_CHAT_SHARE_LINK.should(Condition.visible);

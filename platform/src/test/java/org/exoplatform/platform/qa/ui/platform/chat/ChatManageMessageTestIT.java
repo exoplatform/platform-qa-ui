@@ -237,7 +237,7 @@ public class ChatManageMessageTestIT extends Base {
     getExoWebDriver().getWebDriver().navigate().refresh();
     $(byXpath("//div[@id='iconTreeExplorer']/a[text()=' Meeting Notes']")).waitUntil(Condition.visible,Configuration.timeout).click();
     String nameWikipage = room + " Meeting " + getDate(0, "dd-MM-yyyy HH-mm");
-    $(byText(nameWikipage)).shouldBe(Condition.visible);
+    $(byText(nameWikipage)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).shouldBe(Condition.visible);
     wikiHomePage.deleteWiki(nameWikipage);
 
   }

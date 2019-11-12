@@ -64,7 +64,7 @@ public class ChatCollaborativeActionsTestIT extends Base {
         switchTo().window(1);
         roomManagement.addRoom(room);
         chatManagement.checkMenuCollaborativeAction();
-        ELEMENT_COLLABORATION_ACTIONS.click();
+        ELEMENT_COLLABORATION_ACTIONS.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
         roomManagement.deleteRomm(room);
     }
 
@@ -74,8 +74,8 @@ public class ChatCollaborativeActionsTestIT extends Base {
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.addRoom(room);
-        ELEMENT_COLLABORATION_ACTIONS.click();
-        ELEMENT_CHAT_ADD_EVENT.click();
+        ELEMENT_COLLABORATION_ACTIONS.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        ELEMENT_CHAT_ADD_EVENT.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
         chatManagement.checkAddEventPopUp();
         roomManagement.deleteRomm(room);
     }
@@ -123,8 +123,8 @@ public class ChatCollaborativeActionsTestIT extends Base {
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.addRoom(room);
-        ELEMENT_COLLABORATION_ACTIONS.click();
-        ELEMENT_CHAT_ASK_QUESTION.click();
+        ELEMENT_COLLABORATION_ACTIONS.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        ELEMENT_CHAT_ASK_QUESTION.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
         chatManagement.checkAskQuestionPopUp();
         roomManagement.deleteRomm(room);
     }
@@ -166,8 +166,8 @@ public class ChatCollaborativeActionsTestIT extends Base {
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.addRoom(room);
-        ELEMENT_COLLABORATION_ACTIONS.click();
-        ELEMENT_CHAT_RAISE_HAND.click();
+        ELEMENT_COLLABORATION_ACTIONS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        ELEMENT_CHAT_RAISE_HAND.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         chatManagement.checkRaiseHandPopUp();
         roomManagement.deleteRomm(room);
     }
