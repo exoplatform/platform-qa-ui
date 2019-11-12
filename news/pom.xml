@@ -19,6 +19,12 @@
       <artifactId>platform-qa-ui-commons</artifactId>
       <version>${project.version}</version>
     </dependency>
+      <dependency>
+          <groupId>org.exoplatform.platform.qa.ui</groupId>
+          <artifactId>platform-qa-ui-social</artifactId>
+          <version>1.0.x-SNAPSHOT</version>
+          <scope>test</scope>
+      </dependency>
   </dependencies>
 
 </project>

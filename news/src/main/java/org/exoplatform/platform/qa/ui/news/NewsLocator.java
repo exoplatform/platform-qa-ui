@@ -2,7 +2,9 @@ package org.exoplatform.platform.qa.ui.news;
 
 import com.codeborne.selenide.SelenideElement;
 
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.title;
 
 public class NewsLocator {
 
@@ -39,4 +41,48 @@ public class NewsLocator {
   public static final SelenideElement NEWS_DETAILS_BUTTON_EDIT = NEWS_DETAILS_CONTAINER.find("#newsEditButton");
 
   public static final SelenideElement NEWS_DETAILS_BUTTON_SHARE = NEWS_DETAILS_CONTAINER.find("#newsShareButton");
+
+  public static final SelenideElement ELEMENT_GROUPS_BUTTON =$(".uiGrayLightBox").find(".groupButton");
+
+ // public static final SelenideElement ELEMENT_SPACES_BUTTON =$(".nodeGroup").find(".node").by("title", "Spaces");
+  public static final SelenideElement ELEMENT_SPACES_BUTTON = $(byXpath(" //*[@class=\"nodeGroup\"]//*[@title=\"Spaces\"]"));
+
+  public static final SelenideElement NEWS_DETAILS_PUBLICATION_DATE = NEWS_DETAILS_CONTAINER.find(".newsInformationLabel").find(".newsInformationValue.newsPostedDate");
+
+  public static final SelenideElement NEWS_DETAILS_ILLUSTRATION = NEWS_DETAILS_CONTAINER.find(".illustrationPicture");
+
+  public static final SelenideElement ELEMENT_GROUPS_PANEL = $(".nodeGroup");
+
+  public static final SelenideElement ELEMENT_USERNAME_INPUT =$(".control-group").find("#username");
+
+  public static final SelenideElement ELEMENT_MEMBERSHIP_SELECT =$(".uiSelectbox").find("#membership");
+
+  public static final SelenideElement ELEMENT_SAVE_BUTTON =$(".uiAction ").find(".btn ");
+
+  public static final SelenideElement ELEMENT_PLATFORM_BUTTON = $(byXpath("//*[@class=\"nodeGroup\"]//*[@title=\"Platform\"]"));
+
+  public static final SelenideElement ELEMENT_CONTENT_MANAGEMENT_BUTTON = $(byXpath("//*[@class=\"childrenContainer nodeGroup\"]//*[@class=\"node\"]//*[@title=\"Content Management\"]"));
+
+  public static final SelenideElement ELEMENT_USERNAME_PUBLISHER_INPUT =$(".control-group").find(".controls").find("#username");
+
+ public static final SelenideElement NEWS_COMPOSER_PIN_CHECKBOX=$("#newsActivityComposer").find("#pinArticle");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
