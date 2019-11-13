@@ -49,7 +49,7 @@ public class NewsComposerBasicActionTestIT extends Base {
   }
 
   @Test
-  public void test01_CreateANewsInASpace() {
+  public void test01_CreateANewsInASpaceWithSuperUser() {
     info("Root creates a space");
 
     String spaceName = "spaceName" + getRandomNumber();
