@@ -67,6 +67,8 @@ public class NewsLocator {
 
  public static final SelenideElement NEWS_COMPOSER_PIN_CHECKBOX=$("#newsActivityComposer").find("#pinArticle");
 
+ public static final SelenideElement NEWS_DRAFT_SAVED=$(byText("Draft saved"));
+
 
 
 

@@ -16,6 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.news.NewsLocator.*;
@@ -73,11 +74,15 @@ public class NewsComposerBasicActionTestIT extends Base {
 
         newsComposerManagement.fillTitleField(newsTitle);
 
+        newsComposerManagement.verifyDraftSaved();
+
         newsComposerManagement.verifyPostButton(false);
 
         newsComposerManagement.fillBodyField(newsContent);
 
         newsComposerManagement.verifyPostButton(true);
+
+        newsComposerManagement.verifyDraftSaved();
 
         newsComposerManagement.postNews();
 
@@ -130,11 +135,15 @@ public class NewsComposerBasicActionTestIT extends Base {
 
         newsComposerManagement.fillTitleField(newsTitle);
 
+        newsComposerManagement.verifyDraftSaved();
+
         newsComposerManagement.verifyPostButton(false);
 
         newsComposerManagement.fillBodyField(newsContent);
 
         newsComposerManagement.verifyPostButton(true);
+
+        newsComposerManagement.verifyDraftSaved();
 
         newsComposerManagement.postNews();
 
@@ -191,11 +200,15 @@ public class NewsComposerBasicActionTestIT extends Base {
 
         newsComposerManagement.fillTitleField(newsTitle);
 
+        newsComposerManagement.verifyDraftSaved();
+
         newsComposerManagement.verifyPostButton(false);
 
         newsComposerManagement.fillBodyField(newsContent);
 
         newsComposerManagement.verifyPostButton(true);
+
+        newsComposerManagement.verifyDraftSaved();
 
         newsComposerManagement.postNews();
 
@@ -212,13 +225,10 @@ public class NewsComposerBasicActionTestIT extends Base {
         homePagePlatform.goToAllSpace();
         spaceManagement.deleteSpace(spaceName, false);
 
-
   }
-
 
     @Test
     public void test04_CreateANewsInASpaceWithSummary() {
-        info("Root creates a space");
 
         String spaceName = "spaceName" + getRandomNumber();
         String spaceDes = "description" + getRandomNumber();
@@ -227,15 +237,26 @@ public class NewsComposerBasicActionTestIT extends Base {
         String newsContent = "newsContent" + getRandomNumber();
         String newsSummary = "newsSummary" + getRandomNumber();
 
+
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String password = "123456";
+        info("Add user");
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(username1, password, email1, username1, username1);
+
+        info("user create a space");
+        manageLogInOut.signIn(username1,"123456");
         homePagePlatform.goToAllSpace();
         spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
-        homePagePlatform.goToSpecificSpace(spaceName);
 
+        info("user (space manager) post an article with summary");
         newsComposerManagement.openNewsComposer();
 
         newsComposerManagement.verifyPostButton(false);
 
         newsComposerManagement.fillTitleField(newsTitle);
+        newsComposerManagement.verifyDraftSaved();
 
         newsComposerManagement.verifyPostButton(false);
         newsComposerManagement.fillSummaryField(newsSummary);
@@ -243,7 +264,7 @@ public class NewsComposerBasicActionTestIT extends Base {
         newsComposerManagement.fillBodyField(newsContent);
 
         newsComposerManagement.verifyPostButton(true);
-
+        newsComposerManagement.verifyDraftSaved();
 
         newsComposerManagement.postNews();
 
@@ -255,10 +276,15 @@ public class NewsComposerBasicActionTestIT extends Base {
         switchTo().window(0);
         homePagePlatform.goToAllSpace();
         spaceManagement.deleteSpace(spaceName, false);
+        manageLogInOut.signOut();
+        manageLogInOut.signIn("root","gtn");
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+
     }
   @Test
   public void test05_CreateANewsInASpaceWithIllustrationAndSummary() {
-    info("Root creates a space");
+
 
     String spaceName = "spaceName" + getRandomNumber();
     String spaceDes = "description" + getRandomNumber();
@@ -267,43 +293,68 @@ public class NewsComposerBasicActionTestIT extends Base {
     String newsSummary = "newsSummary" + getRandomNumber();
     String newsContent = "newsContent" + getRandomNumber();
 
-    homePagePlatform.goToAllSpace();
-    spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
-    homePagePlatform.goToSpecificSpace(spaceName);
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@gmail.com";
+    String password = "123456";
 
-    newsComposerManagement.openNewsComposer();
+    String redactor="redactor";
 
-    newsComposerManagement.verifyPostButton(false);
+      info("Add user");
+      navigationToolbar.goToAddUser();
+      addUsers.addUser(username1, password, email1, username1, username1);
 
-    newsComposerManagement.fillTitleField(newsTitle);
-    newsComposerManagement.uploadIllustration();
+      info("Create a space and invite a user");
+      homePagePlatform.goToAllSpace();
+      spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+      spaceHomePage.goToSpaceSettingTab();
+      spaceSettingManagement.inviteUser(username1, false, "");
 
-    newsComposerManagement.verifyPostButton(false);
+      info("give  the role redactor for user ");
+      newsComposerManagement.addUserRedactor(redactor, spaceName,username1);
+      info("user accept invitation to the space ");
+      manageLogInOut.signIn(username1, password);
+      homePagePlatform.goToMySpaces();
+      spaceManagement.acceptAInvitation(spaceName);
 
-    newsComposerManagement.fillSummaryField(newsSummary);
+      info("user redactor post an article with summary and illustration ");
+      newsComposerManagement.openNewsComposer();
 
-    newsComposerManagement.verifyPostButton(false);
+      newsComposerManagement.verifyPostButton(false);
 
-    newsComposerManagement.fillBodyField(newsContent);
+      newsComposerManagement.fillTitleField(newsTitle);
+      newsComposerManagement.verifyDraftSaved();
+      newsComposerManagement.uploadIllustration();
 
-    newsComposerManagement.verifyPostButton(true);
+      newsComposerManagement.verifyPostButton(false);
 
-    newsComposerManagement.postNews();
+      newsComposerManagement.fillSummaryField(newsSummary);
 
-    newsComposerManagement.verifyNewsDetailsTitle(newsTitle);
-    newsComposerManagement.verifyNewsDetailsBody(newsContent);
+      newsComposerManagement.verifyPostButton(false);
 
-    // cleanup
+      newsComposerManagement.fillBodyField(newsContent);
+
+      newsComposerManagement.verifyPostButton(true);
+      newsComposerManagement.verifyDraftSaved();
+
+      newsComposerManagement.postNews();
+
+      newsComposerManagement.verifyNewsDetailsTitle(newsTitle);
+      newsComposerManagement.verifyNewsDetailsBody(newsContent);
+
+      // cleanup
       switchTo().window(1).close();
       switchTo().window(0);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(spaceName, false);
+      manageLogInOut.signOut();
+      manageLogInOut.signIn("root","gtn");
+      navigationToolbar.goToManageCommunity();
+      addUsers.deleteUser(username1);
+      homePagePlatform.goToAllSpace();
+      spaceManagement.deleteSpace(spaceName, false);
   }
 
 
   @Test
-  public void test06_EditANewsInASpace() {
-    info("Root creates a space");
+  public void test06_EditANewsInASpace_SpaceManager() {
 
     String spaceName = "spaceName" + getRandomNumber();
     String spaceDes = "description" + getRandomNumber();
@@ -312,10 +363,19 @@ public class NewsComposerBasicActionTestIT extends Base {
     String newsTitleUpdated = newsTitle + " updated";
     String newsContent = "newsContent" + getRandomNumber();
 
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@gmail.com";
+    String password = "123456";
+    info("Add user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+
+    info("user create a space");
+    manageLogInOut.signIn(username1,"123456");
     homePagePlatform.goToAllSpace();
     spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
-    homePagePlatform.goToSpecificSpace(spaceName);
 
+    info("space manager edit a news");
     newsComposerManagement.createNews(newsTitle, newsContent);
 
     newsComposerManagement.openNewsEditor();
@@ -333,14 +393,18 @@ public class NewsComposerBasicActionTestIT extends Base {
     newsComposerManagement.verifyNewsDetailsTitle(newsTitleUpdated);
     newsComposerManagement.verifyNewsDetailsBody(newsContent);
 
-    // cleanup
-    switchTo().window(1).close();
-    switchTo().window(0);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(spaceName, false);
+      // cleanup
+      switchTo().window(1).close();
+      switchTo().window(0);
+      homePagePlatform.goToAllSpace();
+      spaceManagement.deleteSpace(spaceName, false);
+      manageLogInOut.signOut();
+      manageLogInOut.signIn("root","gtn");
+      navigationToolbar.goToManageCommunity();
+      addUsers.deleteUser(username1);
   }
     @Test
-    public void test07_EditAndPostNewsInASpace() {
+    public void test07_EditANewsInASpace_Redactor() {
         info("Root creates a space");
 
         String spaceName = "spaceName" + getRandomNumber();
@@ -349,10 +413,90 @@ public class NewsComposerBasicActionTestIT extends Base {
         String newsTitle = "newsTitle" + getRandomNumber();
         String newsTitleUpdated = newsTitle + " updated";
         String newsContent = "newsContent" + getRandomNumber();
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String password = "123456";
 
+        String redactor="redactor";
+
+        info("Add user");
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(username1, password, email1, username1, username1);
+
+        info("Create a space and invite a user");
         homePagePlatform.goToAllSpace();
         spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
-        homePagePlatform.goToSpecificSpace(spaceName);
+        spaceHomePage.goToSpaceSettingTab();
+        spaceSettingManagement.inviteUser(username1, false, "");
+
+        info("give  the role redactor for user ");
+        newsComposerManagement.addUserRedactor(redactor, spaceName,username1);
+        info("user accept invitation to the space ");
+        manageLogInOut.signIn(username1, password);
+        homePagePlatform.goToMySpaces();
+        spaceManagement.acceptAInvitation(spaceName);
+
+        info("user redactor edit a news ");
+        newsComposerManagement.createNews(newsTitle, newsContent);
+
+        newsComposerManagement.openNewsEditor();
+
+        newsComposerManagement.verifyUpdateButton(false);
+
+        newsComposerManagement.verifyNewsEditorTitle(newsTitle);
+
+        newsComposerManagement.fillTitleField(newsTitleUpdated);
+
+        newsComposerManagement.verifyUpdateButton(true);
+
+        newsComposerManagement.updateNews();
+
+        newsComposerManagement.verifyNewsDetailsTitle(newsTitleUpdated);
+        newsComposerManagement.verifyNewsDetailsBody(newsContent);
+
+        // cleanup
+        switchTo().window(1).close();
+        switchTo().window(0);
+        manageLogInOut.signOut();
+        manageLogInOut.signIn("root","gtn");
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        homePagePlatform.goToAllSpace();
+        spaceManagement.deleteSpace(spaceName, false);
+    }
+    @Test
+    public void test08_EditAndPostNewsInASpace_Redactor() {
+
+        String spaceName = "spaceName" + getRandomNumber();
+        String spaceDes = "description" + getRandomNumber();
+
+        String newsTitle = "newsTitle" + getRandomNumber();
+        String newsTitleUpdated = newsTitle + " updated";
+        String newsContent = "newsContent" + getRandomNumber();
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String password = "123456";
+
+        String redactor="redactor";
+
+        info("Add user");
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(username1, password, email1, username1, username1);
+
+        info("Create a space and invite a user");
+        homePagePlatform.goToAllSpace();
+        spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+        spaceHomePage.goToSpaceSettingTab();
+        spaceSettingManagement.inviteUser(username1, false, "");
+
+        info("give  the role redactor for user ");
+        newsComposerManagement.addUserRedactor(redactor, spaceName,username1);
+        info("user accept invitation to the space ");
+        manageLogInOut.signIn(username1, password);
+        homePagePlatform.goToMySpaces();
+        spaceManagement.acceptAInvitation(spaceName);
+
+        info("Redactor edit and post a news ");
 
         newsComposerManagement.createNews(newsTitle, newsContent);
 
@@ -374,8 +518,47 @@ public class NewsComposerBasicActionTestIT extends Base {
         // cleanup
         switchTo().window(1).close();
         switchTo().window(0);
+        manageLogInOut.signOut();
+        manageLogInOut.signIn("root","gtn");
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
         homePagePlatform.goToAllSpace();
         spaceManagement.deleteSpace(spaceName, false);
     }
+    @Test
+    public void test09_SpaceMember_CheckLinkWriteAnArticleIsNotDisplayed() {
+
+        String spaceName = "spaceName" + getRandomNumber();
+        String spaceDes = "description" + getRandomNumber();
+
+        String username1 = "usernamea" + getRandomString();
+        String email1 = username1 + "@gmail.com";
+        String password = "123456";
+
+        info("Add user");
+        navigationToolbar.goToAddUser();
+        addUsers.addUser(username1, password, email1, username1, username1);
+
+        info("Create a space and invite a user");
+        homePagePlatform.goToAllSpace();
+        spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+        spaceHomePage.goToSpaceSettingTab();
+        spaceSettingManagement.inviteUser(username1, false, "");
+
+        info("user accept invitation to the space ");
+        manageLogInOut.signIn(username1, password);
+        homePagePlatform.goToMySpaces();
+        spaceManagement.acceptAInvitation(spaceName);
+        info("check link write an article is not displayed ");
+        newsComposerManagement.verifyNewsComposer();
+
+        // cleanup
+        manageLogInOut.signOut();
+        manageLogInOut.signIn("root","gtn");
+        navigationToolbar.goToManageCommunity();
+        addUsers.deleteUser(username1);
+        homePagePlatform.goToAllSpace();
+        spaceManagement.deleteSpace(spaceName, false);
+  }
 
 }

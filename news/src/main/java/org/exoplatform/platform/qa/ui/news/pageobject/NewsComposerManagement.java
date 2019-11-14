@@ -125,7 +125,9 @@ public class NewsComposerManagement {
     openNewsComposer();
 
     fillTitleField(title);
+    NEWS_DRAFT_SAVED.waitUntil(Condition.visible, Configuration.timeout);
     fillBodyField(body);
+    NEWS_DRAFT_SAVED.waitUntil(Condition.visible, Configuration.timeout);
 
     postNews();
   }
@@ -173,6 +175,12 @@ public class NewsComposerManagement {
     NEWS_DETAILS_PUBLICATION_DATE.shouldBe(visible);
 
   }
+    public void verifyNewsComposer() {
+        NEWS_COMPOSER_LINK.shouldBe(not(visible));
+    }
+    public void verifyDraftSaved() {
+        NEWS_DRAFT_SAVED.waitUntil(Condition.visible, Configuration.timeout);
+    }
   public boolean verifyPinButtonExists() {
   return   NEWS_COMPOSER_PIN_CHECKBOX.exists();
 
