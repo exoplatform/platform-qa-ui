@@ -66,12 +66,14 @@ public class NewsComposerManagement {
   public void updateNews() {
     NEWS_EDITOR_UPDATE_BUTTON.waitUntil(enabled, timeout).click();
   }
+
   /**
    * Click on the Update and post button
    */
   public void updateAndPostNews() {
     NEWS_EDITOR_UPDATE_AND_POST_BUTTON.waitUntil(enabled, timeout).click();
   }
+
   /**
    * Add text into news title text box
    *
@@ -169,14 +171,17 @@ public class NewsComposerManagement {
     NEWS_DETAILS_PUBLICATION_DATE.shouldBe(visible);
 
   }
-    public void verifyNewsComposer() {
-        NEWS_COMPOSER_LINK.shouldBe(not(visible));
-    }
-    public void verifyDraftSaved() {
-        NEWS_DRAFT_SAVED.waitUntil(Condition.visible, Configuration.timeout);
-    }
+
+  public void verifyNewsComposer() {
+    NEWS_COMPOSER_LINK.shouldBe(not(visible));
+  }
+
+  public void verifyDraftSaved() {
+    NEWS_DRAFT_SAVED.waitUntil(Condition.visible, Configuration.timeout);
+  }
+
   public boolean verifyPinButtonExists() {
-    return   NEWS_COMPOSER_PIN_CHECKBOX.exists();
+    return NEWS_COMPOSER_PIN_CHECKBOX.exists();
   }
 
   public boolean verifyNewsUpdaterExists() {
@@ -206,15 +211,16 @@ public class NewsComposerManagement {
     ELEMENT_MEMBERSHIP_SELECT.selectOptionByValue(redactor);
     NewsLocator.ELEMENT_SAVE_BUTTON.click();
   }
+
   public void addUserPublisher(String publisher, String username) {
     info("Give the role publisher to user " + username);
     navigationToolbar.goToManageCommunity();
     ELEMENT_GROUPS_BUTTON.click();
     ELEMENT_PLATFORM_BUTTON.click();
     ELEMENT_CONTENT_MANAGEMENT_BUTTON.click();
-    ELEMENT_USERNAME_PUBLISHER_INPUT.waitUntil(Condition.visible,Configuration.timeout).setValue(username);
+    ELEMENT_USERNAME_PUBLISHER_INPUT.waitUntil(Condition.visible, Configuration.timeout).setValue(username);
     ELEMENT_MEMBERSHIP_SELECT.selectOptionByValue(publisher);
-    NewsLocator. ELEMENT_SAVE_BUTTON.click();
+    NewsLocator.ELEMENT_SAVE_BUTTON.click();
   }
 
 }
