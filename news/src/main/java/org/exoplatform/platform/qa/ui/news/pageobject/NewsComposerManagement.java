@@ -7,7 +7,6 @@ import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ManageFileTestBase;
 
 import static com.codeborne.selenide.Condition.*;
@@ -16,7 +15,6 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.news.NewsLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_INPUT_ACTIVITY;
-import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_SAVE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class NewsComposerManagement {
@@ -27,15 +25,12 @@ public class NewsComposerManagement {
   public ManageFileTestBase mftb;
   NavigationToolbar navigationToolbar;
 
-  private ElementEventTestBase evt;
-
   /**
    * constructor
    *
    * @param testBase TestBase
    */
   public NewsComposerManagement(TestBase testBase) {
-    this.evt = testBase.getElementEventTestBase();
     this.alert = new ManageAlert(testBase);
     this.button = new Button(testBase);
     this.mftb = new ManageFileTestBase(testBase);
@@ -168,7 +163,6 @@ public class NewsComposerManagement {
 
   public void verifyNewsDetailsIllustration() {
     NEWS_DETAILS_ILLUSTRATION.shouldBe(visible);
-
   }
 
   public void verifyNewsDetailsPublicationDate() {
@@ -182,8 +176,7 @@ public class NewsComposerManagement {
         NEWS_DRAFT_SAVED.waitUntil(Condition.visible, Configuration.timeout);
     }
   public boolean verifyPinButtonExists() {
-  return   NEWS_COMPOSER_PIN_CHECKBOX.exists();
-
+    return   NEWS_COMPOSER_PIN_CHECKBOX.exists();
   }
 
   public boolean verifyNewsUpdaterExists() {
@@ -203,25 +196,23 @@ public class NewsComposerManagement {
   }
 
 
-  public void addUserRedactor(String redactor, String spaceName, String username1){
-
-    info("give  the role redactor for user ");
+  public void addUserRedactor(String redactor, String spaceName, String username) {
+    info("Give the role redactor to user " + username);
     navigationToolbar.goToManageCommunity();
     ELEMENT_GROUPS_BUTTON.click();
     ELEMENT_SPACES_BUTTON.click();
     ELEMENT_GROUPS_PANEL.find(byText(spaceName)).click();
-    ELEMENT_USERNAME_INPUT.waitUntil(Condition.visible, Configuration.timeout).setValue(username1);
+    ELEMENT_USERNAME_INPUT.waitUntil(Condition.visible, Configuration.timeout).setValue(username);
     ELEMENT_MEMBERSHIP_SELECT.selectOptionByValue(redactor);
     NewsLocator.ELEMENT_SAVE_BUTTON.click();
   }
-  public void addUserPublisher(String publisher,String username1){
-
-    info("give  the role publisher for user ");
+  public void addUserPublisher(String publisher, String username) {
+    info("Give the role publisher to user " + username);
     navigationToolbar.goToManageCommunity();
     ELEMENT_GROUPS_BUTTON.click();
     ELEMENT_PLATFORM_BUTTON.click();
     ELEMENT_CONTENT_MANAGEMENT_BUTTON.click();
-    ELEMENT_USERNAME_PUBLISHER_INPUT.waitUntil(Condition.visible,Configuration.timeout).setValue(username1);
+    ELEMENT_USERNAME_PUBLISHER_INPUT.waitUntil(Condition.visible,Configuration.timeout).setValue(username);
     ELEMENT_MEMBERSHIP_SELECT.selectOptionByValue(publisher);
     NewsLocator. ELEMENT_SAVE_BUTTON.click();
   }

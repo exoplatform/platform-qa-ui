@@ -20,6 +20,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.news.NewsLocator.*;
+import static com.codeborne.selenide.Selenide.close;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_PUBLISH_ACTIVITY_CHECKBOX;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -226,6 +227,7 @@ public class NewsComposerBasicActionTestIT extends Base {
         spaceManagement.deleteSpace(spaceName, false);
 
   }
+
 
     @Test
     public void test04_CreateANewsInASpaceWithSummary() {
