@@ -1000,7 +1000,7 @@ public class WikiBasicActionEditTestIT extends Base {
         wikiHomePage.goToMyDraft();
         wikiValidattions.verifyTitleDrafPage(title1);
         info("The page in edit mode is displayed");
-        $(byId("UIWikiDraftGrid")).find(byText(title1)).click();
+        $(byId("UIWikiDraftGrid")).find(byText(title1)).waitUntil(visible,Configuration.collectionsTimeout).click();
         wikiValidattions.verifyResumADraf(title1);
         homePagePlatform.goToWiki();
         wikiHomePage.deleteWiki(title);

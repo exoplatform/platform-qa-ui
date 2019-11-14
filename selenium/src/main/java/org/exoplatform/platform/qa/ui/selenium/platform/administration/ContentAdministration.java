@@ -4,6 +4,8 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_INPUT_SEARCH_USER;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_INPUT_SEARCH_USER_NAME;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.openqa.selenium.By;
@@ -204,6 +206,8 @@ public class ContentAdministration {
     $(byXpath(ELEMENT_ECM_EXPLORER_VIEW_EDIT_LIST.replace("{$name}",viewName))).click();
     $(ELEMENT_ECM_EXPLORER_GO_TO_PERMISSION_FORM).click();
     $(ELEMENT_ECM_EXPLORER_USER_PERMISSION_ADD).click();
+    $(ELEMENT_SEARCH_USER_INPUT).waitUntil(Condition.visible,Configuration.collectionsTimeout).setValue(newName);
+    $(byAttribute("data-original-title","Quick Search")).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     $(byXpath(ELEMENT_ECM_EXPLORER_SELECT_USER_LIST_PERMISSION.replace("{$user}",newName))).click();
     $(ELEMENT_ECM_EXPLORER_ADD_PERMISSION_FORM).click();
     $(byXpath(ELEMENT_ECM_EXPLORER_DELETE_PERMISSION_USER.replace("{$name}",oldName))).click();

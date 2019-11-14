@@ -92,8 +92,8 @@ public class SpaceManagement {
    * @param desc : Space description
    */
   public void addNewSpaceSimple(String name, String desc, int... params) {
-    ELEMENT_ADDNEWSPACE_BUTTON.waitUntil(Condition.visible, Configuration.timeout).click();
-    ELEMENT_SPACE_NAME_INPUT.waitUntil(Condition.visible, Configuration.timeout).setValue(name);
+    ELEMENT_ADDNEWSPACE_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_SPACE_NAME_INPUT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(name);
     ELEMENT_SPACE_DESCRIPTION_INPUT.waitUntil(Condition.visible, Configuration.timeout).setValue(desc);
     info("Save all changes");
     ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.visible, Configuration.timeout).click();

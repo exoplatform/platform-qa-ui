@@ -64,8 +64,8 @@ public class WikiPageInformation {
      */
     public void goToAddRelations() {
         info("Click on Add more relations");
-        $(ELEMENT_PAGE_INFO_ADD_MORE_RELATIONS).waitUntil(Condition.visible, Configuration.timeout).click();
-        $(ELEMENT_ADD_RELATED_PAGE_POPUP_TITLE).waitUntil(Condition.appears, Configuration.timeout);
+        $(ELEMENT_PAGE_INFO_ADD_MORE_RELATIONS).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+        $(ELEMENT_ADD_RELATED_PAGE_POPUP_TITLE).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
         info("Add related page popup is shown");
     }
 

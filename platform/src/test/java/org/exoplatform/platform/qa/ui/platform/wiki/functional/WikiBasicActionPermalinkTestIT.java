@@ -766,6 +766,7 @@ public class WikiBasicActionPermalinkTestIT extends Base {
      * - In the left tree panel, the page 1.1 isn't displayed
      */
     @Test
+    @Tag("wikio")
     public void test08_DisplayDescendantRestrictedPageInLeftTreePanel() {
         info("Test 8: Display descendant Restricted page in left tree panel");
         info("Create 1 new users");

@@ -13,6 +13,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.exoplatform.platform.qa.ui.platform.chat.ChatOnSiteNotificationTestIT;
+import org.junit.Assert;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -539,7 +540,7 @@ public class EcmsWCMTestIT extends Base {
     $(ELEMENT_SEO_CLOSE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     refresh();
     // Verify that the title of the page is changed
-    assertEquals(Selenide.title(), title);
+    Assert.assertEquals(Selenide.title(),title);
     navigationToolbar.goToSEO();
     $(byClassName("uiIconDelete")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     switchTo().alert().accept();

@@ -148,9 +148,9 @@ public class WikiHomePage {
      */
     public void goToMyDraft() {
         info("Click on Browser drop down");
-        $(ELEMENT_SEARCH_BROWSERS_DROPDOWN).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        $(ELEMENT_SEARCH_BROWSERS_DROPDOWN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         info("Select wiki settings label");
-        $(ELEMENT_SEARCH_BROWSERS_MY_DRAFT).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        $(ELEMENT_SEARCH_BROWSERS_MY_DRAFT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
 
     /**
@@ -169,9 +169,9 @@ public class WikiHomePage {
      */
     public void goToWikiSettingPage() {
         info("Click on Browser drop down");
-        $(ELEMENT_SEARCH_BROWSERS_DROPDOWN).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        $(ELEMENT_SEARCH_BROWSERS_DROPDOWN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         info("Select wiki settings label");
-        $(ELEMENT_SEARCH_BROWSERS_WIKI_SETTINGS).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        $(ELEMENT_SEARCH_BROWSERS_WIKI_SETTINGS).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
 
     /**

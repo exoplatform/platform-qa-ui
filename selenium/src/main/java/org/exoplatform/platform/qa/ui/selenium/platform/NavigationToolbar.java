@@ -214,7 +214,7 @@ public class NavigationToolbar {
     do {
       $(ELEMENT_MENU_CONTENT_LINK).hover();
     } while (!$(ELEMENT_MENU_SITE_EXPLORER).exists());
-    $(ELEMENT_MENU_SITE_EXPLORER).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_MENU_SITE_EXPLORER).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Site Explorer is shown successfully");
   }
 
@@ -228,7 +228,7 @@ public class NavigationToolbar {
     info("Hover over on Page link");
     evt.mouseOver(ELEMENT_MENU_PAGE_LINK, true);
     info("Click on Seo Menu");
-    $(ELEMENT_MENU_SEO_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_MENU_SEO_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
