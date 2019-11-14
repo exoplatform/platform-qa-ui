@@ -3,8 +3,13 @@ package org.exoplatform.platform.qa.ui.onlyOffice.pageobject;
 import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+
+import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_CHECK_FILE_IS_UPLOADED;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.exoplatform.platform.qa.ui.selenium.locator.onlyOffice.OnlyOfficeLocator.*;
 import static com.codeborne.selenide.Condition.*;
@@ -17,6 +22,11 @@ public class OnlyOfficeActivityStream{
     public ManageAlert alert;
 
     public HomePagePlatform homePagePlatform;
+
+    public ActivityStream activityStream;
+    public OnlyOfficeActivityStream onlyOfficeActivityStream;
+    public OnlyOfficeEditingPage    onlyOfficeEditingPage;
+
 
     private ElementEventTestBase evt;
 
@@ -52,5 +62,36 @@ public class OnlyOfficeActivityStream{
         int locElement2Button = element2.getLocation().y;
         int locElement3Button = element3.getLocation().y;
         assertEquals(locElement1Button,locElement2Button,locElement3Button);
+    }
+
+    /**
+     * Upload and check opening document with only office from AS
+     * @param document
+     * @param extension
+     */
+    public void editingDocumentWithOnlyOfficeFromAS (String document,String extension, String userName) {
+        activityStream.uploadFileFromAS(document+extension);
+        homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc",document+extension))),visible,timeout);
+        onlyOfficeActivityStream.editOnlineFromAS();
+        switchTo().window(1);
+        onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(document,extension,userName);
+        switchTo().window(1).close();
+        switchTo().window(0);
+        refresh();
+        activityStream.deleteDocumentFromAS(document+extension);
+        refresh();
+    }
+
+    /**
+     * Upload and check that document can't be open with only office from AS
+     * @param document
+     * @param extension
+     */
+    public void notEditingDocumentWithOnlyOfficeFromAS (String document, String extension) {
+        activityStream.uploadFileFromAS(document+extension);
+        homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document+extension))), visible, timeout);
+        ELEMENT_EDIT_ONlINE_BUTTON.shouldNot(exist);
+        refresh();
+        activityStream.deleteDocumentFromAS(document+extension);
     }
 }

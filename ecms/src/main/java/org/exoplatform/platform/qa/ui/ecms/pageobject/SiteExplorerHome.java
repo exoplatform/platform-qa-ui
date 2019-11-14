@@ -1607,11 +1607,6 @@ public class SiteExplorerHome {
     CREATE_NEW, REMOVE_EXISTING, REPLACE_EXISTING, THROW_EXEPTION;
   }
 
-
-
-
-
-
   /**
    * Click on View Document button
    */
@@ -1620,7 +1615,7 @@ public class SiteExplorerHome {
   }
 
   /**
-   * Click on Delete button
+   * Click on Check button
    */
   public void checkButtonDocument(String officeDocument) {
     info("click on CheckBox button for Document");

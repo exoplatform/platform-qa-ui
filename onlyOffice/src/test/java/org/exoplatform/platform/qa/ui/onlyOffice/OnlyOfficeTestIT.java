@@ -226,4 +226,104 @@ public class OnlyOfficeTestIT extends Base {
     manageLogInOut.signOut();
   }
 
+  @Test
+  /*
+   * EditOnline_BTN_US05_(01)
+   * Check that editing online with OO is possible for ".docx",".pptx" and ".xlsx" documents
+   */
+  public void EditOnlineSupportedFile() {
+    String documentDocx = "docx_test";
+    String extensionDocx = ".docx";
+    String documentPptx = "pptx_test";
+    String extensionPptx = ".pptx";
+    String documentXlsx = "xlsx_test";
+    String extensionXlsx = ".xlsx";
+    String userName = PLFData.DATA_NAME_ROOT;
+    info("Editing online of the documents");
+    onlyOfficeActivityStream.editingDocumentWithOnlyOfficeFromAS(documentXlsx, extensionXlsx, userName);
+    sleep(60000);
+    onlyOfficeActivityStream.editingDocumentWithOnlyOfficeFromAS(documentPptx, extensionPptx, userName);
+    sleep(60000);
+    onlyOfficeActivityStream.editingDocumentWithOnlyOfficeFromAS(documentDocx, extensionDocx, userName);
+    manageLogInOut.signOut();
+  }
+
+/*
+  @Test
+  public void EditOnlineSupportedFile_01() {
+    String documentXlsx = "xlsx_test";
+    String extensionXlsx = ".xlsx";
+    String userName = PLFData.DATA_NAME_ROOT;
+    info("Editing online of the document xlsx");
+    onlyOfficeActivityStream.editingDocumentWithOnlyOfficeFromAS(documentXlsx, extensionXlsx, userName);
+    manageLogInOut.signOut();
+  }
+
+  @Test
+  public void EditOnlineSupportedFile_02() {
+    String documentDocx = "docx_test";
+    String extensionDocx = ".docx";
+    String userName = PLFData.DATA_NAME_ROOT;
+    info("Editing online of the document docx");
+    onlyOfficeActivityStream.editingDocumentWithOnlyOfficeFromAS(documentDocx, extensionDocx, userName);
+    manageLogInOut.signOut();
+  }
+
+  @Test
+  public void EditOnlineSupportedFile_03() {
+    String documentPptx = "pptx_test";
+    String extensionPptx = ".pptx";
+    String userName = PLFData.DATA_NAME_ROOT;
+    info("Editing online of the document pptx");
+    onlyOfficeActivityStream.editingDocumentWithOnlyOfficeFromAS(documentPptx, extensionPptx, userName);
+    manageLogInOut.signOut();
+  }
+
+*/
+
+  @Test
+  /*
+   * EditOnline_BTN_US05_(02)
+   * Check that editing online with OO is not possible for for ".docx",".pptx" and ".xlsx" documents
+   */
+  public void EditOnlineNotSupportedFile() {
+
+    String documentDoc = "doc_test";
+    String extensionDoc = ".doc";
+    String documentPpt = "ppt_test";
+    String extensionPpt = ".ppt";
+    String documentXls = "xls_test";
+    String extensionXls = ".xls";
+    String documentPdf = "pdf_test";
+    String extensionPdf = ".pdf";
+    String documentTxt = "txt_test";
+    String extensionTxt = ".txt";
+    String documentOdp = "odp_test";
+    String extensionOdp = ".odp";
+    String documentOds = "ods_test";
+    String extensionOds = ".ods";
+    String documentOdt = "odt_test";
+    String extensionOdt = ".odt";
+    String pictureJpeg = "jpeg_test";
+    String extensionJpeg = ".jpeg";
+    info("No editing online of document ");
+    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentXls,extensionXls);
+    sleep(30000);
+    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentDoc,extensionDoc);
+    sleep(30000);
+    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentPpt,extensionPpt);
+    sleep(30000);
+    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(pictureJpeg,extensionJpeg);
+    sleep(30000);
+    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentPdf,extensionPdf);
+    sleep(30000);
+    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentTxt,extensionTxt);
+    /*sleep(30000);
+    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentOdp,extensionOdp);
+    sleep(30000);
+    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentOds,extensionOds);
+    sleep(30000);
+    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentOdt,extensionOdt);
+    manageLogInOut.signOut();*/
+  }
 }
