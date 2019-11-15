@@ -590,7 +590,7 @@ public class WikiManagement {
     refresh();
     sleep(Configuration.collectionsTimeout);
     if (!newTitle.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.timeout).setValue(newTitle);
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(newTitle);
     info("Waiting 30s before saved all changes");
     try {
       Thread.sleep(31000);

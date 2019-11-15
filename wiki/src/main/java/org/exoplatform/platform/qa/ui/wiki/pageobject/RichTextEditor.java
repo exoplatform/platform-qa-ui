@@ -1472,10 +1472,10 @@ public class RichTextEditor {
     sleep(Configuration.timeout);
     refresh();
     if (!title.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.timeout).val(title);
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).val(title);
     info("Input a content for the page");
     if (!content.isEmpty()) {
-      SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.timeout);
+      SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
       $(byClassName("gwt-RichTextArea")).click();
       switchTo().frame(frame);
       $(byId("body")).sendKeys(content);
