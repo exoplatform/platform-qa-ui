@@ -146,10 +146,10 @@ public class EcmsSESearchTestIT extends Base {
     createNewDocument.addNewFile(title, content);
     createNewDocument.saveAndClose();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
+    sleep(Configuration.openBrowserTimeoutMs);
+    $(ELEMENT_ACTIONBAR_SEARCHBAR).setValue(title).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).pressEnter();
     sleep(Configuration.timeout);
-    $(ELEMENT_ACTIONBAR_SEARCHBAR).setValue(title).waitUntil(Condition.visible,Configuration.timeout).pressEnter();
-    sleep(Configuration.timeout);
-    $(byId("SimpleSearchResult")).find(byText(title)).should(Condition.visible);
+    $(byId("SimpleSearchResult")).find(byText(title)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     siteExplorerHome.deleteData(title);
