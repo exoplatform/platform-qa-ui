@@ -57,6 +57,10 @@ public class NewsComposerManagement {
    * Click on the Post button
    */
   public void postNews() {
+    // we check if at least a first draft has been saved before posting the News, as a workaround for this
+    // bug (we should be able to post a News even if no draft has been saved before)
+    verifyDraftSaved();
+
     NEWS_COMPOSER_POST_BUTTON.waitUntil(enabled, timeout).click();
   }
 
@@ -122,9 +126,7 @@ public class NewsComposerManagement {
     openNewsComposer();
 
     fillTitleField(title);
-    NEWS_DRAFT_SAVED.waitUntil(Condition.visible, Configuration.timeout);
     fillBodyField(body);
-    NEWS_DRAFT_SAVED.waitUntil(Condition.visible, Configuration.timeout);
 
     postNews();
   }
@@ -163,21 +165,20 @@ public class NewsComposerManagement {
     NEWS_DETAILS_UPDATER.shouldHave(text(updater));
   }
 
-  public void verifyNewsDetailsIllustration() {
+  public void verifyNewsDetailsIllustrationVIsible() {
     NEWS_DETAILS_ILLUSTRATION.shouldBe(visible);
   }
 
-  public void verifyNewsDetailsPublicationDate() {
+  public void verifyNewsDetailsPublicationDateVisible() {
     NEWS_DETAILS_PUBLICATION_DATE.shouldBe(visible);
-
   }
 
-  public void verifyNewsComposer() {
-    NEWS_COMPOSER_LINK.shouldBe(not(visible));
+  public void verifyNewsComposerLinkVisible(boolean linkVisible) {
+    NEWS_COMPOSER_LINK.shouldBe(linkVisible ? visible : not(visible));
   }
 
   public void verifyDraftSaved() {
-    NEWS_DRAFT_SAVED.waitUntil(Condition.visible, Configuration.timeout);
+    NEWS_DRAFT_STATUS.waitUntil(visible, timeout).shouldNotBe(empty);
   }
 
   public boolean verifyPinButtonExists() {

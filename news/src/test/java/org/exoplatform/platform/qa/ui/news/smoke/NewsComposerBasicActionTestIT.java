@@ -1,8 +1,5 @@
 package org.exoplatform.platform.qa.ui.news.smoke;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import com.fasterxml.jackson.databind.deser.std.JdkDeserializers;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.news.pageobject.NewsComposerManagement;
 import org.exoplatform.platform.qa.ui.selenium.logger.Logger;
@@ -16,13 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static org.exoplatform.platform.qa.ui.news.NewsLocator.*;
-import static com.codeborne.selenide.Selenide.close;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_PUBLISH_ACTIVITY_CHECKBOX;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -77,15 +68,11 @@ public class NewsComposerBasicActionTestIT extends Base {
 
     newsComposerManagement.fillTitleField(newsTitle);
 
-    newsComposerManagement.verifyDraftSaved();
-
     newsComposerManagement.verifyPostButton(false);
 
     newsComposerManagement.fillBodyField(newsContent);
 
     newsComposerManagement.verifyPostButton(true);
-
-    newsComposerManagement.verifyDraftSaved();
 
     newsComposerManagement.postNews();
 
@@ -132,21 +119,18 @@ public class NewsComposerBasicActionTestIT extends Base {
     spaceManagement.acceptAInvitation(spaceName);
     info("user redactor post an article ");
 
+    homePagePlatform.goToSpecificSpace(spaceName);
     newsComposerManagement.openNewsComposer();
 
     newsComposerManagement.verifyPostButton(false);
 
     newsComposerManagement.fillTitleField(newsTitle);
 
-    newsComposerManagement.verifyDraftSaved();
-
     newsComposerManagement.verifyPostButton(false);
 
     newsComposerManagement.fillBodyField(newsContent);
 
     newsComposerManagement.verifyPostButton(true);
-
-    newsComposerManagement.verifyDraftSaved();
 
     newsComposerManagement.postNews();
 
@@ -165,7 +149,7 @@ public class NewsComposerBasicActionTestIT extends Base {
   }
 
   @Test
-  public void test03_CreateANewsInASpaceeWithPublisherRole() {
+  public void test03_CreateANewsInASpaceWithPublisherRole() {
 
     String spaceName = "spaceName" + getRandomNumber();
     String spaceDes = "description" + getRandomNumber();
@@ -198,21 +182,18 @@ public class NewsComposerBasicActionTestIT extends Base {
     spaceManagement.acceptAInvitation(spaceName);
     info("user publisher post an article ");
 
+    homePagePlatform.goToSpecificSpace(spaceName);
     newsComposerManagement.openNewsComposer();
 
     newsComposerManagement.verifyPostButton(false);
 
     newsComposerManagement.fillTitleField(newsTitle);
 
-    newsComposerManagement.verifyDraftSaved();
-
     newsComposerManagement.verifyPostButton(false);
 
     newsComposerManagement.fillBodyField(newsContent);
 
     newsComposerManagement.verifyPostButton(true);
-
-    newsComposerManagement.verifyDraftSaved();
 
     newsComposerManagement.postNews();
 
@@ -261,7 +242,6 @@ public class NewsComposerBasicActionTestIT extends Base {
     newsComposerManagement.verifyPostButton(false);
 
     newsComposerManagement.fillTitleField(newsTitle);
-    newsComposerManagement.verifyDraftSaved();
 
     newsComposerManagement.verifyPostButton(false);
     newsComposerManagement.fillSummaryField(newsSummary);
@@ -269,7 +249,6 @@ public class NewsComposerBasicActionTestIT extends Base {
     newsComposerManagement.fillBodyField(newsContent);
 
     newsComposerManagement.verifyPostButton(true);
-    newsComposerManagement.verifyDraftSaved();
 
     newsComposerManagement.postNews();
 
@@ -323,12 +302,12 @@ public class NewsComposerBasicActionTestIT extends Base {
     spaceManagement.acceptAInvitation(spaceName);
 
     info("user redactor post an article with summary and illustration ");
+    homePagePlatform.goToSpecificSpace(spaceName);
     newsComposerManagement.openNewsComposer();
 
     newsComposerManagement.verifyPostButton(false);
 
     newsComposerManagement.fillTitleField(newsTitle);
-    newsComposerManagement.verifyDraftSaved();
     newsComposerManagement.uploadIllustration();
 
     newsComposerManagement.verifyPostButton(false);
@@ -340,7 +319,6 @@ public class NewsComposerBasicActionTestIT extends Base {
     newsComposerManagement.fillBodyField(newsContent);
 
     newsComposerManagement.verifyPostButton(true);
-    newsComposerManagement.verifyDraftSaved();
 
     newsComposerManagement.postNews();
 
@@ -382,6 +360,7 @@ public class NewsComposerBasicActionTestIT extends Base {
     spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
 
     info("space manager edit a news");
+    homePagePlatform.goToSpecificSpace(spaceName);
     newsComposerManagement.createNews(newsTitle, newsContent);
 
     newsComposerManagement.openNewsEditor();
@@ -400,6 +379,7 @@ public class NewsComposerBasicActionTestIT extends Base {
     newsComposerManagement.verifyNewsDetailsBody(newsContent);
 
     // cleanup
+    switchTo().window(2).close();
     switchTo().window(1).close();
     switchTo().window(0);
     homePagePlatform.goToAllSpace();
@@ -462,6 +442,7 @@ public class NewsComposerBasicActionTestIT extends Base {
     newsComposerManagement.verifyNewsDetailsBody(newsContent);
 
     // cleanup
+    switchTo().window(2).close();
     switchTo().window(1).close();
     switchTo().window(0);
     manageLogInOut.signOut();
@@ -506,6 +487,7 @@ public class NewsComposerBasicActionTestIT extends Base {
 
     info("Redactor edit and post a news ");
 
+    homePagePlatform.goToSpecificSpace(spaceName);
     newsComposerManagement.createNews(newsTitle, newsContent);
 
     newsComposerManagement.openNewsEditor();
@@ -524,6 +506,7 @@ public class NewsComposerBasicActionTestIT extends Base {
     newsComposerManagement.verifyNewsDetailsBody(newsContent);
 
     // cleanup
+    switchTo().window(2).close();
     switchTo().window(1).close();
     switchTo().window(0);
     manageLogInOut.signOut();
@@ -560,7 +543,7 @@ public class NewsComposerBasicActionTestIT extends Base {
     spaceManagement.acceptAInvitation(spaceName);
 
     info("check link write an article is not displayed ");
-    newsComposerManagement.verifyNewsComposer();
+    newsComposerManagement.verifyNewsComposerLinkVisible(false);
 
     // cleanup
     manageLogInOut.signOut();
