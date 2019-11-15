@@ -63,7 +63,7 @@ public final class QuickSearchResultLocator {
                                                                            By.xpath("//*[@value='event' and @name='contentType']");
 
   public static final By              ELEMENT_SEARCHRESULT_WIKITYPECHECK                       =
-                                                                         By.xpath("//*[@id='lstContentTypes']/li/span/input[@value='wiki']");
+                                                                         By.xpath("//*[@id=\"lstContentTypes\"]/li[3]/span");
 
   public static final By              ELEMENT_SEARCHRESULT_SPACETYPECHECK                      =
                                                                           By.xpath("//*[@value='space' and @name='contentType']");
