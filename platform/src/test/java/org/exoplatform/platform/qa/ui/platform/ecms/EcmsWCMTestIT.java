@@ -173,7 +173,7 @@ public class EcmsWCMTestIT extends Base {
     sleep(Configuration.timeout);
     $(ELEMENT_ADDNEWPAGE_BTNNEXT).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
-    pageCreationWizard.addApplication($(ELEMENT_APPLICATION_CONTENT_TAB), $(byId("Content/portlet_ContentListViewerPortlet")));
+    pageCreationWizard.addApplication($(ELEMENT_APPLICATION_CONTENT_TAB), $(byId("Content/ContentListViewerPortlet")));
     pageCreationWizard.addContentListByContent("General Drives/Sites Management/intranet", content);
     navigationToolbar.goToEditContent();
     ELEMENT_LIST_CONTENT.find(byText(content)).waitUntil(Condition.visible, Configuration.timeout);

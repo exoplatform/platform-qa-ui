@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fc4a0367-df54-4081-9eb5-c93d6d50856e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/QuickSearchResultLocator.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/QuickSearchResultLocator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsWCMTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsWCMTestIT.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/forum/target/" />
     <ignored path="$PROJECT_DIR$/task/target/" />
@@ -60,20 +60,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfUnifiedSearchTestIT.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="245" column="27" selection-start-line="245" selection-start-column="27" selection-end-line="245" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/QuickSearchResultLocator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="124">
-              <caret line="66" lean-forward="true" selection-start-line="66" selection-end-line="66" />
+            <state relative-caret-position="-18">
+              <caret line="427" column="45" lean-forward="true" selection-start-line="427" selection-start-column="45" selection-end-line="427" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -89,7 +80,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>test07_11_Resume_Delete_ADraftWithSaveAsNorma</find>
       <find>test03_EditPage</find>
       <find>test06_3_AutoSaveWhenAddingPageFromStatusMeetingTemplateOnSpa</find>
       <find>test03_ViewHistoryToCompareVersion</find>
@@ -119,6 +109,7 @@
       <find>checkDisplayOfO</find>
       <find>test04_FilterSearch</find>
       <find>ELEMENT_SEARCHRESULT_ALLTYPECHECK</find>
+      <find>searchWe</find>
     </findStrings>
     <replaceStrings>
       <replace>And</replace>
@@ -177,8 +168,6 @@
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/ECMSSearchWebContentWithAccentedCharactersTestIT.java" />
         <option value="$PROJECT_DIR$/gatein/src/test/java/org/exoplatform/platform/qa/ui/gatein/GateinManagePagesTestIT.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarCategoryTestIT.java" />
-        <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsWCMTestIT.java" />
-        <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfUnifiedSearchTestIT.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsIntranetNotificationTypesTestIT.java" />
         <option value="$PROJECT_DIR$/calendar/src/test/java/org/exoplatform/platform/qa/ui/calendar/smoke/CalendarEventTestIT.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarEventTestIT.java" />
@@ -194,6 +183,8 @@
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiSettingsTestIT.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/chat/ChatManageMessageTestIT.java" />
         <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/QuickSearchResultLocator.java" />
+        <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsWCMTestIT.java" />
+        <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfUnifiedSearchTestIT.java" />
       </list>
     </option>
   </component>
@@ -235,41 +226,6 @@
               <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
               <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
-              <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="gatein" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
-              <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="gatein" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
-              <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="gatein" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
-              <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="gatein" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
-              <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="gatein" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="gatein" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -279,7 +235,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1573831698312" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1574069315234" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -305,7 +261,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.PlfUnifiedSearchTestIT.test04_FilterSearch">
+  <component name="RunManager" selected="JUnit.PlfUnifiedSearchTestIT.test10_searchWebContentByContent">
     <configuration name="CalendarBasicTestsInSpaceTestIT.test01_AddEventInSpace" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
@@ -324,35 +280,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PlfHomepageGadgetSuggestionGadgetTestIT.test11_checkDisplayOfOtherSuggestionGadgetWhenUserCloseSuggestionOfSpace" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="EcmsWCMTestIT.test02_CreateNewContentListViewerPageWithModeByContents" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.plf.*" />
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.ecms.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.plf" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.plf.PlfHomepageGadgetSuggestionGadgetTestIT" />
-      <option name="METHOD_NAME" value="test11_checkDisplayOfOtherSuggestionGadgetWhenUserCloseSuggestionOfSpace" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://plfent-6.0.x-portal-rdbms-snapshot-postgresql.acceptance10.exoplatform.org" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PlfHomepageGadgetSuggestionGadgetTestIT.test12_checkDisplayOfOtherSuggestionGadgetWhenUserAcceptSuggestionOfSpace" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-platform" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.plf.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.plf" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.plf.PlfHomepageGadgetSuggestionGadgetTestIT" />
-      <option name="METHOD_NAME" value="test12_checkDisplayOfOtherSuggestionGadgetWhenUserAcceptSuggestionOfSpace" />
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.ecms" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.ecms.EcmsWCMTestIT" />
+      <option name="METHOD_NAME" value="test02_CreateNewContentListViewerPageWithModeByContents" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://plfent-6.0.x-portal-rdbms-snapshot-postgresql.acceptance10.exoplatform.org" />
       <option name="PARAMETERS" value="" />
@@ -414,6 +352,42 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="PlfUnifiedSearchTestIT.test10_searchWebContentByContent" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-platform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.plf.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.plf" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.plf.PlfUnifiedSearchTestIT" />
+      <option name="METHOD_NAME" value="test10_searchWebContentByContent" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://plfent-6.0.x-portal-rdbms-snapshot-postgresql.acceptance10.exoplatform.org" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Plf_GettintStartedGadgetTestIT.test04_CompleteThisGettingStartedGadget" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-platform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.plf.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.plf" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.plf.Plf_GettintStartedGadgetTestIT" />
+      <option name="METHOD_NAME" value="test04_CompleteThisGettingStartedGadget" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://plfent-6.0.x-portal-rdbms-snapshot-postgresql.acceptance10.exoplatform.org" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PortletInSpaceHomePageTestIT.test04_CheckTheSpaceWhoIsOnlinePortlet" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
@@ -442,41 +416,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="org.exoplatform.platform.qa.ui.gatein in platform-qa-ui-gatein" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-gatein" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.gatein.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.gatein" />
-      <option name="MAIN_CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://plfent-6.0.x-portal-rdbms-snapshot-postgresql.acceptance10.exoplatform.org" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="JUnit.CalendarBasicTestsInSpaceTestIT.test01_AddEventInSpace" />
       <item itemvalue="JUnit.PortletInSpaceHomePageTestIT.test04_CheckTheSpaceWhoIsOnlinePortlet" />
       <item itemvalue="JUnit.PlfNavigationTopNavigationTestIT.test05_CreateANewTaskViaTheTopNavigation" />
-      <item itemvalue="JUnit.org.exoplatform.platform.qa.ui.gatein in platform-qa-ui-gatein" />
-      <item itemvalue="JUnit.PlfHomepageGadgetSuggestionGadgetTestIT.test11_checkDisplayOfOtherSuggestionGadgetWhenUserCloseSuggestionOfSpace" />
-      <item itemvalue="JUnit.PlfHomepageGadgetSuggestionGadgetTestIT.test12_checkDisplayOfOtherSuggestionGadgetWhenUserAcceptSuggestionOfSpace" />
       <item itemvalue="JUnit.PlfNavigationSpaceNavigationTestIT.test03_RemoveCollaborationApplicationToolbar" />
       <item itemvalue="JUnit.PlfUnifiedSearchTestIT.test04_FilterSearch" />
+      <item itemvalue="JUnit.PlfUnifiedSearchTestIT.test10_searchWebContentByContent" />
+      <item itemvalue="JUnit.Plf_GettintStartedGadgetTestIT.test04_CompleteThisGettingStartedGadget" />
+      <item itemvalue="JUnit.EcmsWCMTestIT.test02_CreateNewContentListViewerPageWithModeByContents" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PlfUnifiedSearchTestIT.test10_searchWebContentByContent" />
+        <item itemvalue="JUnit.EcmsWCMTestIT.test02_CreateNewContentListViewerPageWithModeByContents" />
+        <item itemvalue="JUnit.Plf_GettintStartedGadgetTestIT.test04_CompleteThisGettingStartedGadget" />
         <item itemvalue="JUnit.PlfUnifiedSearchTestIT.test04_FilterSearch" />
         <item itemvalue="JUnit.PlfNavigationSpaceNavigationTestIT.test03_RemoveCollaborationApplicationToolbar" />
-        <item itemvalue="JUnit.PlfHomepageGadgetSuggestionGadgetTestIT.test12_checkDisplayOfOtherSuggestionGadgetWhenUserAcceptSuggestionOfSpace" />
-        <item itemvalue="JUnit.PlfHomepageGadgetSuggestionGadgetTestIT.test11_checkDisplayOfOtherSuggestionGadgetWhenUserCloseSuggestionOfSpace" />
-        <item itemvalue="JUnit.org.exoplatform.platform.qa.ui.gatein in platform-qa-ui-gatein" />
       </list>
     </recent_temporary>
   </component>
@@ -494,35 +450,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="SOCPeopleProfileDynContainersTestIT_test02_CheckTheLayoutOfEditProfilePage - 2019.11.15 at 14h 54m 25s.xml">
-      <configuration name="SOCPeopleProfileDynContainersTestIT.test02_CheckTheLayoutOfEditProfilePage" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="SOCReplyEditTestIT_test03_addcharacter_EditReply - 2019.11.15 at 14h 55m 34s.xml">
-      <configuration name="SOCReplyEditTestIT.test03_addcharacter_EditReply" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="SOCReplyEditTestIT_test18_CheckEditReplyWithFormattingTextNumbredList - 2019.11.15 at 14h 56m 28s.xml">
-      <configuration name="SOCReplyEditTestIT.test18_CheckEditReplyWithFormattingTextNumbredList" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="SOCSpaceListPendingTestIT_test01_CheckPendingSpaceList - 2019.11.15 at 14h 58m 54s.xml">
-      <configuration name="SOCSpaceListPendingTestIT.test01_CheckPendingSpaceList" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="SOCSpaceManagementTestIT_test05_EditASpace - 2019.11.15 at 15h 00m 56s.xml">
-      <configuration name="SOCSpaceManagementTestIT.test05_EditASpace" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="org_exoplatform_platform_qa_ui_chat_smoke_in_platform-qa-ui-chat - 2019.11.15 at 15h 18m 37s.xml">
-      <configuration name="org.exoplatform.platform.qa.ui.chat.smoke in platform-qa-ui-chat" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="org_exoplatform_platform_qa_ui_gatein_in_platform-qa-ui-gatein - 2019.11.15 at 15h 26m 54s.xml">
-      <configuration name="org.exoplatform.platform.qa.ui.gatein in platform-qa-ui-gatein" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="PlfHomepageGadgetSuggestionGadgetTestIT_test11_checkDisplayOfOtherSuggestionGadgetWhenUserCloseSuggestionOfSpace - 2019.11.15 at 15h 36m 54s.xml">
-      <configuration name="PlfHomepageGadgetSuggestionGadgetTestIT.test11_checkDisplayOfOtherSuggestionGadgetWhenUserCloseSuggestionOfSpace" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="PlfUnifiedSearchTestIT_test04_FilterSearch - 2019.11.15 at 16h 25m 51s.xml">
       <configuration name="PlfUnifiedSearchTestIT.test04_FilterSearch" configurationId="JUnit" />
     </history-entry>
     <history-entry file="PlfUnifiedSearchTestIT_test04_FilterSearch - 2019.11.15 at 16h 27m 02s.xml">
       <configuration name="PlfUnifiedSearchTestIT.test04_FilterSearch" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="EcmsWCMTestIT_test02_CreateNewContentListViewerPageWithModeByContents - 2019.11.15 at 17h 22m 35s.xml">
+      <configuration name="EcmsWCMTestIT.test02_CreateNewContentListViewerPageWithModeByContents" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="EcmsWCMTestIT_test02_CreateNewContentListViewerPageWithModeByContents - 2019.11.15 at 17h 24m 19s.xml">
+      <configuration name="EcmsWCMTestIT.test02_CreateNewContentListViewerPageWithModeByContents" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="PlfUnifiedSearchTestIT_test10_searchWebContentByContent - 2019.11.15 at 17h 29m 46s.xml">
+      <configuration name="PlfUnifiedSearchTestIT.test10_searchWebContentByContent" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="PlfUnifiedSearchTestIT_test10_searchWebContentByContent - 2019.11.15 at 17h 30m 42s.xml">
+      <configuration name="PlfUnifiedSearchTestIT.test10_searchWebContentByContent" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="PlfUnifiedSearchTestIT_test10_searchWebContentByContent - 2019.11.15 at 17h 32m 31s.xml">
+      <configuration name="PlfUnifiedSearchTestIT.test10_searchWebContentByContent" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="PlfUnifiedSearchTestIT_test10_searchWebContentByContent - 2019.11.15 at 17h 34m 43s.xml">
+      <configuration name="PlfUnifiedSearchTestIT.test10_searchWebContentByContent" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="PlfUnifiedSearchTestIT_test10_searchWebContentByContent - 2019.11.15 at 17h 40m 23s.xml">
+      <configuration name="PlfUnifiedSearchTestIT.test10_searchWebContentByContent" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="PlfUnifiedSearchTestIT_test10_searchWebContentByContent - 2019.11.15 at 17h 54m 58s.xml">
+      <configuration name="PlfUnifiedSearchTestIT.test10_searchWebContentByContent" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -536,9 +492,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1533" height="875" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.75086504" visible="true" weight="0.17283121" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.75086504" visible="true" weight="0.24613315" />
       <window_info id="Structure" order="1" sideWeight="0.20652173" side_tool="true" weight="0.21250841" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -547,8 +502,8 @@
       <window_info id="Favorites" order="6" sideWeight="0.24913494" side_tool="true" weight="0.16812374" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.42761394" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49764627" visible="true" weight="0.5469169" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.5053619" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49764627" weight="0.4383378" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.47319034" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.4772118" />
@@ -3117,6 +3072,18 @@
           <properties />
           <option name="timeStamp" value="2834" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/Plf_GettintStartedGadgetTestIT.java</url>
+          <line>212</line>
+          <properties />
+          <option name="timeStamp" value="2835" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfUnifiedSearchTestIT.java</url>
+          <line>430</line>
+          <properties />
+          <option name="timeStamp" value="2842" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/gatein/src/main/java/org/exoplatform/platform/qa/ui/gatein/pageobject/MyDashBoard.java</url>
           <line>84</line>
@@ -3281,20 +3248,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarImproveCreateEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="499" column="53" lean-forward="true" selection-start-line="499" selection-start-column="53" selection-end-line="499" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/CalendarHomePage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="462" column="16" lean-forward="true" selection-start-line="462" selection-start-column="16" selection-end-line="462" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/CalendarManagement.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="98">
@@ -3344,13 +3297,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/Plf_GettintStartedGadgetTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="207" column="26" lean-forward="true" selection-start-line="207" selection-start-column="26" selection-end-line="207" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsAdminTemplatesTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="32">
@@ -3362,13 +3308,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="56">
           <caret line="144" column="84" lean-forward="true" selection-start-line="144" selection-start-column="84" selection-end-line="144" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsWCMTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="160" column="51" lean-forward="true" selection-start-line="160" selection-start-column="51" selection-end-line="160" selection-end-column="51" />
         </state>
       </provider>
     </entry>
@@ -3384,7 +3323,7 @@
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/com/codeborne/selenide/4.3/selenide-4.3-sources.jar!/com/codeborne/selenide/Selenide.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3030">
+        <state relative-caret-position="133">
           <caret line="249" selection-start-line="249" selection-end-line="249" />
           <folding>
             <element signature="e#8346#8347#0" expanded="true" />
@@ -3623,6 +3562,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/QuickSearchResultLocator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="66" lean-forward="true" selection-start-line="66" selection-end-line="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/Plf_GettintStartedGadgetTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2715">
+          <caret line="210" column="95" selection-start-line="210" selection-start-column="95" selection-end-line="210" selection-end-column="95" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsWCMTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="164" column="18" lean-forward="true" selection-start-line="164" selection-start-column="18" selection-end-line="164" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ecms/src/main/java/org/exoplatform/platform/qa/ui/ecms/pageobject/SiteExplorerHome.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="99" selection-start-line="99" selection-end-line="99" />
+        </state>
+      </provider>
+    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.0.0/junit-platform-commons-1.0.0.jar!/org/junit/platform/commons/util/ReflectionUtils.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
@@ -3630,17 +3597,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfUnifiedSearchTestIT.java">
+    <entry file="file://$PROJECT_DIR$/ecms/src/main/java/org/exoplatform/platform/qa/ui/ecms/pageobject/CreateNewDocument.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="245" column="27" selection-start-line="245" selection-start-column="27" selection-end-line="245" selection-end-column="27" />
+        <state relative-caret-position="158">
+          <caret line="179" column="94" selection-start-line="179" selection-start-column="94" selection-end-line="179" selection-end-column="94" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/QuickSearchResultLocator.java">
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfUnifiedSearchTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="66" lean-forward="true" selection-start-line="66" selection-end-line="66" />
+        <state relative-caret-position="-18">
+          <caret line="427" column="45" lean-forward="true" selection-start-line="427" selection-start-column="45" selection-end-line="427" selection-end-column="45" />
         </state>
       </provider>
     </entry>
