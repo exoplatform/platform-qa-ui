@@ -41,7 +41,7 @@ public class OnlyOfficeActivityStream{
      * Edit Online button from AS
      */
     public static void editOnlineFromAS() {
-        ELEMENT_EDIT_ONlINE_BUTTON.waitUntil(visible,openBrowserTimeoutMs).click();
+        $(SELECTOR_EDIT_ONlINE_BUTTON).waitUntil(visible,openBrowserTimeoutMs).click();
     }
 
     /**
@@ -70,16 +70,14 @@ public class OnlyOfficeActivityStream{
      * @param extension
      */
     public void editingDocumentWithOnlyOfficeFromAS (String document,String extension, String userName) {
-        activityStream.uploadFileFromAS(document+extension);
-        homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc",document+extension))),visible,timeout);
+        activityStream.uploadFileFromAS(document + extension);
+        homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc",document+extension))), exist, timeout);
         onlyOfficeActivityStream.editOnlineFromAS();
         switchTo().window(1);
         onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(document,extension,userName);
         switchTo().window(1).close();
         switchTo().window(0);
-        refresh();
         activityStream.deleteDocumentFromAS(document+extension);
-        refresh();
     }
 
     /**
@@ -88,10 +86,10 @@ public class OnlyOfficeActivityStream{
      * @param extension
      */
     public void notEditingDocumentWithOnlyOfficeFromAS (String document, String extension) {
-        activityStream.uploadFileFromAS(document+extension);
-        homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document+extension))), visible, timeout);
-        ELEMENT_EDIT_ONlINE_BUTTON.shouldNot(exist);
-        refresh();
+        activityStream.uploadFileFromAS(document + extension);
+        SelenideElement doc = $(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document + extension)));
+        homePagePlatform.refreshUntil(doc, visible, timeout);
+        doc.find(SELECTOR_EDIT_ONlINE_BUTTON).shouldNot(exist);
         activityStream.deleteDocumentFromAS(document+extension);
     }
 }

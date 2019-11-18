@@ -360,7 +360,7 @@ public class PlfUnifiedSearchTestIT extends Base {
   public void test07_SearchFiles() {
     info("Test 7: Search files");
     String activity1 = "activity1" + getRandomNumber();
-    ELEMENT_TAB_LINK.waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.waitUntil(Condition.visible,Configuration.timeout).click();
     refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");

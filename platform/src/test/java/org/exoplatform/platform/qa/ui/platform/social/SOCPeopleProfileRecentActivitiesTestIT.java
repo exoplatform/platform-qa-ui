@@ -106,7 +106,7 @@ public class SOCPeopleProfileRecentActivitiesTestIT extends Base {
     activityStream.mentionUserActivity(username2, mention);
 
     info("share a document and comment");
-    ELEMENT_TAB_LINK.click();
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
     refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
@@ -170,7 +170,7 @@ public class SOCPeopleProfileRecentActivitiesTestIT extends Base {
     activityStream.mentionUserActivity(username2, mention);
 
     info("share a document and comment");
-    ELEMENT_TAB_LINK.click();
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
     refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");

@@ -56,7 +56,7 @@ public class SOCActivityAddTestIT extends Base {
   @Test
   @Tag("sabis")
   public void test02_Upload_File_Without_Text() {
-    ELEMENT_TAB_LINK.click();
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
     refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
@@ -80,7 +80,7 @@ public class SOCActivityAddTestIT extends Base {
   @Tag("sabis")
   public void test02_CheckIconTitleWhenLikeActivity() {
     String activity1 = "activity1" + getRandomNumber();
-    ELEMENT_TAB_LINK.waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.waitUntil(Condition.visible,Configuration.timeout).click();
     refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");

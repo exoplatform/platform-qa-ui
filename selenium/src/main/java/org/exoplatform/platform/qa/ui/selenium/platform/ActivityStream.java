@@ -18,7 +18,6 @@ import java.awt.*;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_STREAM_CONTAINER;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
@@ -549,7 +548,7 @@ public class ActivityStream {
 
     @Test
     public void Upload_File_With_Text(String text) {
-        ELEMENT_TAB_LINK.click();
+        ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
         refresh();
         addText(text);
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.timeout);
@@ -1909,15 +1908,13 @@ public class ActivityStream {
     /**
      * Upload file from Activity Stream
      */
-    public static void uploadFileFromAS(String NameFile) {
-        homePagePlatform.refreshUntil(ELEMENT_TAB_LINK, visible, 500);
-        ELEMENT_TAB_LINK.waitUntil(visible,timeout).click();
-        refresh();
-        ELEMENT_CONTAINER_DOCUMENT.waitUntil(appears, timeout);
-        ELEMENT_INPUT_DOCUMENT.uploadFromClasspath(NameFile);
+    public static void uploadFileFromAS(String fileName) {
+        // Make sure the Activity Composer File tab is not hidden by the top bar
+        executeJavaScript("window.scrollTo(0,0)");
+        ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.waitUntil(exist, timeout).click();
+        ELEMENT_INPUT_DOCUMENT.waitUntil(exist, timeout).uploadFromClasspath(fileName);
         ELEMENT_BAR_PROGRESS.waitUntil(disappears, openBrowserTimeoutMs);
-        $(ELEMENT_COMPOSER_SHARE_BUTTON).should(be(enabled));
-        $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
+        $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(enabled, timeout).click();
     }
 
     /**
@@ -1934,7 +1931,7 @@ public class ActivityStream {
      * Delete document from AS
      */
     public static void deleteDocumentFromAS (String Document) {
-        homePagePlatform.refreshUntil($(byText(Document)), visible, 500);
+        homePagePlatform.refreshUntil($(byText(Document)), exist, 500);
         String idActivity2 = $(byText(Document)).parent().parent().parent().parent().getAttribute("id").split("MediaName")[1].split("0")[0];
         $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity2))).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
         $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}", idActivity2))).waitUntil(visible,openBrowserTimeoutMs).click();

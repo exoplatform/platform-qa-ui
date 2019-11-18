@@ -10,11 +10,9 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 import static org.junit.Assert.assertEquals;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -24,13 +22,11 @@ import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
-import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
-import org.openqa.selenium.Keys;
 
 /**
  * Created by exo on 11/09/17.
@@ -651,7 +647,7 @@ public class LikeCommentTestIT extends Base {
   public void test10_likeComentAfterPreviewDocument() {
     String activity1 = "activity1" + getRandomNumber();
     String comment = "comment" + getRandomNumber();
-    ELEMENT_TAB_LINK.click();
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
     refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
@@ -677,7 +673,7 @@ public class LikeCommentTestIT extends Base {
     String activity1 = "activity1" + getRandomNumber();
     String comment = "comment" + getRandomNumber();
 
-    ELEMENT_TAB_LINK.click();
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
     refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
@@ -747,7 +743,7 @@ public class LikeCommentTestIT extends Base {
     String activity1 = "activity1" + getRandomNumber();
     String comment = "comment" + getRandomNumber();
 
-    ELEMENT_TAB_LINK.click();
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
     refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
@@ -831,7 +827,7 @@ public class LikeCommentTestIT extends Base {
     String activity1 = "activity1" + getRandomNumber();
     String comment = "comment" + getRandomNumber();
 
-    ELEMENT_TAB_LINK.click();
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
     refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
@@ -902,7 +898,7 @@ public class LikeCommentTestIT extends Base {
     String activity1 = "activity1" + getRandomNumber();
     String comment = "comment" + getRandomNumber();
 
-    ELEMENT_TAB_LINK.click();
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
     refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
@@ -972,7 +968,7 @@ public class LikeCommentTestIT extends Base {
     String activity1 = "activity1" + getRandomNumber();
     String comment = "comment" + getRandomNumber();
 
-    ELEMENT_TAB_LINK.click();
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
     refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
@@ -1060,7 +1056,7 @@ public class LikeCommentTestIT extends Base {
     spaceManagement.addNewSpaceSimple(space, space);
     $(byXpath("//*[@class='uidocactivitycomposer']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.openBrowserTimeoutMs);
-    //ELEMENT_TAB_LINK.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    //ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
     activityStream.addActivity(activity1, "");
@@ -1277,8 +1273,8 @@ public class LikeCommentTestIT extends Base {
     homePagePlatform.goToConnections();
     connectionsManagement.connectToAUser(DATA_USER2);
     homePagePlatform.goToHomePage();
-    ELEMENT_TAB_LINK.click();
-    ELEMENT_TAB_LINK.click();
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
@@ -1329,8 +1325,8 @@ public class LikeCommentTestIT extends Base {
     connectionsManagement.connectToAUser(DATA_USER2);
     connectionsManagement.connectToAUser(DATA_USER3);
     homePagePlatform.goToHomePage();
-    ELEMENT_TAB_LINK.click();
-    ELEMENT_TAB_LINK.click();
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
@@ -1392,8 +1388,8 @@ public class LikeCommentTestIT extends Base {
     connectionsManagement.connectToAUser(DATA_USER3);
     connectionsManagement.connectToAUser(DATA_USER4);
     homePagePlatform.goToHomePage();
-    ELEMENT_TAB_LINK.click();
-    ELEMENT_TAB_LINK.click();
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);

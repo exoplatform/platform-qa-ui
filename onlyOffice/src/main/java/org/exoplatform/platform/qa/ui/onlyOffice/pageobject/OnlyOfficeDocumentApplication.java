@@ -30,7 +30,7 @@ public class OnlyOfficeDocumentApplication{
      * Click on Edit Online button
      */
     public void clickEditOnine() {
-        $(ELEMENT_EDIT_ONlINE_BUTTON).waitUntil(visible,timeout).click();
+        $(SELECTOR_EDIT_ONlINE_BUTTON).waitUntil(visible,timeout).click();
     }
 
 }

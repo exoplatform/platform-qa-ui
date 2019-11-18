@@ -6,9 +6,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -178,7 +176,7 @@ public class SocialBasicTestsWithUserTestIT extends Base {
 
   @Test
   public void test05_Upload_File_Without_Text() {
-    ELEMENT_TAB_LINK.click();
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
     refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
@@ -196,7 +194,7 @@ public class SocialBasicTestsWithUserTestIT extends Base {
   @Test
   public void test06_add_link_without_text() {
     String link = "http://www.google.fr";
-    ELEMENT_TAB_LINK.click();
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
     ELEMENT_TAB_ADD_LINK.click();
     ELEMENT_INPUT_LINK.setValue(link);
     ELEMENT_BUTTON_ATTACH_LINK.click();

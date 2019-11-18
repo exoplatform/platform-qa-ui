@@ -55,7 +55,7 @@ public class OnlyOfficeTestIT extends Base {
   }
 
   @Test
-  /*
+  /**
    * EditOnline_BTN_US01
    * Upload a document & click on Edit Online button in Document Application/View Document and check document is correctly opened
    */
@@ -84,7 +84,7 @@ public class OnlyOfficeTestIT extends Base {
   }
 
   @Test
-  /*
+  /**
    * EditOnline_BTN_US02_(01)
    * Upload a document & click on Edit Online button from Activity Stream, from Document Preview and check document is correctly opened
    */
@@ -114,7 +114,7 @@ public class OnlyOfficeTestIT extends Base {
   }
 
   @Test
-  /*
+  /**
    * EditOnline_BTN_US02_(02)
    * Upload a document in a Space & click on Edit Online button from Space Activity Stream and check document is correctly opened
    */
@@ -139,7 +139,7 @@ public class OnlyOfficeTestIT extends Base {
   }
 
   @Test
-  /*
+  /**
    * EditOnline_BTN_US02_(03)
    * Upload a document & click on Edit Online button in Document Application and check document is correctly opened
    */
@@ -182,7 +182,7 @@ public class OnlyOfficeTestIT extends Base {
   }
 
   @Test
-  /*
+  /**
    * EditOnline_BTN_US03_(02)
    * Check alignment of "Edit Online Button from Document Preview"
    */
@@ -203,7 +203,7 @@ public class OnlyOfficeTestIT extends Base {
   }
 
   @Test
-  /*
+  /**
    * EditOnline_BTN_US03_(03)
    * Check alignment of "Edit Online Button from Document application"
    */
@@ -227,7 +227,7 @@ public class OnlyOfficeTestIT extends Base {
   }
 
   @Test
-  /*
+  /**
    * EditOnline_BTN_US05_(01)
    * Check that editing online with OO is possible for ".docx",".pptx" and ".xlsx" documents
    */
@@ -241,9 +241,7 @@ public class OnlyOfficeTestIT extends Base {
     String userName = PLFData.DATA_NAME_ROOT;
     info("Editing online of the documents");
     onlyOfficeActivityStream.editingDocumentWithOnlyOfficeFromAS(documentXlsx, extensionXlsx, userName);
-    sleep(60000);
     onlyOfficeActivityStream.editingDocumentWithOnlyOfficeFromAS(documentPptx, extensionPptx, userName);
-    sleep(60000);
     onlyOfficeActivityStream.editingDocumentWithOnlyOfficeFromAS(documentDocx, extensionDocx, userName);
     manageLogInOut.signOut();
   }
@@ -284,7 +282,7 @@ public class OnlyOfficeTestIT extends Base {
   @Test
   /*
    * EditOnline_BTN_US05_(02)
-   * Check that editing online with OO is not possible for for ".docx",".pptx" and ".xlsx" documents
+   * Check that editing online with OO is not possible for ".doc",".ppt" and ".xls" documents
    */
   public void EditOnlineNotSupportedFile() {
 
@@ -294,30 +292,20 @@ public class OnlyOfficeTestIT extends Base {
     String extensionPpt = ".ppt";
     String documentXls = "xls_test";
     String extensionXls = ".xls";
-    String documentPdf = "pdf_test";
-    String extensionPdf = ".pdf";
-    String documentTxt = "txt_test";
-    String extensionTxt = ".txt";
-    String documentOdp = "odp_test";
-    String extensionOdp = ".odp";
-    String documentOds = "ods_test";
-    String extensionOds = ".ods";
-    String documentOdt = "odt_test";
-    String extensionOdt = ".odt";
     String pictureJpeg = "jpeg_test";
     String extensionJpeg = ".jpeg";
     info("No editing online of document ");
     onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentXls,extensionXls);
-    sleep(30000);
+    //sleep(30000);
     onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentDoc,extensionDoc);
-    sleep(30000);
+    //sleep(30000);
     onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentPpt,extensionPpt);
-    sleep(30000);
+    //sleep(30000);
     onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(pictureJpeg,extensionJpeg);
-    sleep(30000);
-    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentPdf,extensionPdf);
-    sleep(30000);
-    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentTxt,extensionTxt);
+    //sleep(30000);
+    //onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentPdf,extensionPdf);
+    //sleep(30000);
+    //onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentTxt,extensionTxt);
     /*sleep(30000);
     onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentOdp,extensionOdp);
     sleep(30000);

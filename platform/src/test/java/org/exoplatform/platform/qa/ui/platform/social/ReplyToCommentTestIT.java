@@ -532,7 +532,7 @@ public class ReplyToCommentTestIT extends Base {
         String activity = "Activity" + getRandomNumber();
         String comment = "Comment" + getRandomNumber();
         String reply = "Reply" + getRandomNumber();
-        ELEMENT_TAB_LINK.click();
+        ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
         refresh();
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
@@ -566,7 +566,7 @@ public class ReplyToCommentTestIT extends Base {
         String comment = "Comment" + getRandomNumber();
         String reply = "Reply" + getRandomNumber();
         String replytoreply = "ReplyToReply" + getRandomNumber();
-        ELEMENT_TAB_LINK.click();
+        ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
         refresh();
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
@@ -608,7 +608,7 @@ public class ReplyToCommentTestIT extends Base {
         String reply1 = "Reply1" + getRandomNumber();
         String reply2 = "Reply2" + getRandomNumber();
         String reply3 = "Reply3" + getRandomNumber();
-        ELEMENT_TAB_LINK.click();
+        ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
         refresh();
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
@@ -675,7 +675,7 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToConnections();
         connectionsManagement.connectToAUser(DATA_USER2);
         homePagePlatform.goToHomePage();
-        ELEMENT_TAB_LINK.click();
+        ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
         refresh();
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
@@ -915,7 +915,7 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToConnections();
         connectionsManagement.connectToAUser(DATA_USER2);
         homePagePlatform.goToHomePage();
-        ELEMENT_TAB_LINK.click();
+        ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
         refresh();
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
@@ -1089,8 +1089,8 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToConnections();
         connectionsManagement.connectToAUser(DATA_USER2);
         homePagePlatform.goToHomePage();
-        ELEMENT_TAB_LINK.click();
-        ELEMENT_TAB_LINK.click();
+        ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
+        ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
         ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
@@ -1145,8 +1145,8 @@ public class ReplyToCommentTestIT extends Base {
         connectionsManagement.connectToAUser(DATA_USER2);
         connectionsManagement.connectToAUser(DATA_USER3);
         homePagePlatform.goToHomePage();
-        ELEMENT_TAB_LINK.click();
-        ELEMENT_TAB_LINK.click();
+        ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
+        ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
         ELEMENT_BAR_PROGRESS.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
@@ -1211,8 +1211,8 @@ public class ReplyToCommentTestIT extends Base {
         connectionsManagement.connectToAUser(DATA_USER3);
         connectionsManagement.connectToAUser(DATA_USER4);
         homePagePlatform.goToHomePage();
-        ELEMENT_TAB_LINK.click();
-        ELEMENT_TAB_LINK.click();
+        ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
+        ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
         ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
