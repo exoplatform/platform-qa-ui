@@ -246,46 +246,12 @@ public class OnlyOfficeTestIT extends Base {
     manageLogInOut.signOut();
   }
 
-/*
   @Test
-  public void EditOnlineSupportedFile_01() {
-    String documentXlsx = "xlsx_test";
-    String extensionXlsx = ".xlsx";
-    String userName = PLFData.DATA_NAME_ROOT;
-    info("Editing online of the document xlsx");
-    onlyOfficeActivityStream.editingDocumentWithOnlyOfficeFromAS(documentXlsx, extensionXlsx, userName);
-    manageLogInOut.signOut();
-  }
-
-  @Test
-  public void EditOnlineSupportedFile_02() {
-    String documentDocx = "docx_test";
-    String extensionDocx = ".docx";
-    String userName = PLFData.DATA_NAME_ROOT;
-    info("Editing online of the document docx");
-    onlyOfficeActivityStream.editingDocumentWithOnlyOfficeFromAS(documentDocx, extensionDocx, userName);
-    manageLogInOut.signOut();
-  }
-
-  @Test
-  public void EditOnlineSupportedFile_03() {
-    String documentPptx = "pptx_test";
-    String extensionPptx = ".pptx";
-    String userName = PLFData.DATA_NAME_ROOT;
-    info("Editing online of the document pptx");
-    onlyOfficeActivityStream.editingDocumentWithOnlyOfficeFromAS(documentPptx, extensionPptx, userName);
-    manageLogInOut.signOut();
-  }
-
-*/
-
-  @Test
-  /*
+  /**
    * EditOnline_BTN_US05_(02)
-   * Check that editing online with OO is not possible for ".doc",".ppt" and ".xls" documents
+   * Check that editing online with OO is not possible for different documents
    */
   public void EditOnlineNotSupportedFile() {
-
     String documentDoc = "doc_test";
     String extensionDoc = ".doc";
     String documentPpt = "ppt_test";
@@ -294,24 +260,26 @@ public class OnlyOfficeTestIT extends Base {
     String extensionXls = ".xls";
     String pictureJpeg = "jpeg_test";
     String extensionJpeg = ".jpeg";
+    String documentPdf = "pdf_test";
+    String extensionPdf = ".pdf";
+    String documentTxt = "txt_test";
+    String extensionTxt = ".txt";
+    String documentOdp = "odp_test";
+    String extensionOdp = ".odp";
+    String documentOds = "ods_test";
+    String extensionOds = ".ods";
+    String documentOdt = "odt_test";
+    String extensionOdt = ".odt";
     info("No editing online of document ");
     onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentXls,extensionXls);
-    //sleep(30000);
     onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentDoc,extensionDoc);
-    //sleep(30000);
     onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentPpt,extensionPpt);
-    //sleep(30000);
     onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(pictureJpeg,extensionJpeg);
-    //sleep(30000);
-    //onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentPdf,extensionPdf);
-    //sleep(30000);
-    //onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentTxt,extensionTxt);
-    /*sleep(30000);
+    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentPdf,extensionPdf);
+    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentTxt,extensionTxt);
     onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentOdp,extensionOdp);
-    sleep(30000);
     onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentOds,extensionOds);
-    sleep(30000);
     onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentOdt,extensionOdt);
-    manageLogInOut.signOut();*/
+    manageLogInOut.signOut();
   }
 }
