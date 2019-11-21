@@ -203,6 +203,7 @@ public class WikiSettingsTestIT extends Base {
     String content = "content" + getRandomNumber();
     homePagePlatform.goToWiki();
     wikiHomePage.goToWikiSettingPage();
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     wikiSettingManagement.addTemplate(title, description, content);
@@ -230,7 +231,7 @@ public class WikiSettingsTestIT extends Base {
     String content = "content" + getRandomNumber();
     homePagePlatform.goToWiki();
     wikiHomePage.goToWikiSettingPage();
-    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     $(ELEMENT_TITLE_TEMPLATE).waitUntil(Condition.appears, Configuration.timeout).setValue(title);
     $(ELEMENT_DESCRIPTION_TEMPLATE).setValue(description);
     $(ELEMENT_CONTENT_TEMPLATE).setValue(content);

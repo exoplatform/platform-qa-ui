@@ -54,7 +54,7 @@ public class WikiManagement {
    */
   public void selectTemplateWikiPage(SelenideElement eTemplate) {
     info("--Select  template--");
-    $(ELEMENT_TEMPLATE_SELECT_FORM).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_TEMPLATE_SELECT_FORM).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     eTemplate.selectRadio(eTemplate.getValue());
   }
 
@@ -587,10 +587,11 @@ public class WikiManagement {
     info("Select a template");
     selectTemplateWikiPage(template);
     $(ELEMENT_TEMPLATE_SELECT_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    refresh();
-    sleep(Configuration.collectionsTimeout);
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+    sleep(Configuration.timeout);
     if (!newTitle.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(newTitle);
+      testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,15000).setValue(newTitle);
     info("Waiting 30s before saved all changes");
     try {
       Thread.sleep(31000);

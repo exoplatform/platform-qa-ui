@@ -51,11 +51,11 @@ public class WikiSettingManagement {
   }
 public void addTemplate(String title,String description,String content){
 
-    $(ELEMENT_TITLE_TEMPLATE).waitUntil(Condition.appears, Configuration.timeout).setValue(title);
-    $(ELEMENT_DESCRIPTION_TEMPLATE).waitUntil(Condition.visible, Configuration.timeout).setValue(description);
-    $(ELEMENT_CONTENT_TEMPLATE).waitUntil(Condition.visible, Configuration.timeout).setValue(content);
-    $(ELEMENT_SAVE_TEMPLATE).waitUntil(Condition.visible, Configuration.timeout).click();
-    ELEMENT_WIKI_OK_SAVE_TEMPLATE.waitUntil(Condition.appears,Configuration.timeout).click();
+    $(ELEMENT_TITLE_TEMPLATE).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).setValue(title);
+    $(ELEMENT_DESCRIPTION_TEMPLATE).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(description);
+    $(ELEMENT_CONTENT_TEMPLATE).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(content);
+    $(ELEMENT_SAVE_TEMPLATE).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_WIKI_OK_SAVE_TEMPLATE.waitUntil(Condition.appears,Configuration.openBrowserTimeoutMs).click();
 }
   /**
    * Edit a wiki template

@@ -97,6 +97,7 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     info("Go to Create Wiki page from Navigation toolbar");
     navigationToolbar.goToCreateWikiPage("");
     info("Verify that wiki home page is shown");
+    getExoWebDriver().getWebDriver().navigate().refresh();
     $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
 
   }

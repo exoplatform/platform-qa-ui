@@ -519,7 +519,7 @@ public class CalendarPublishActivityTestIT extends Base {
     eventManagement.saveAddEventDetails();
     homePagePlatform.goToHomePage();
     $(byXpath(ELEMENT_ACTIVITY_TASK_EVENT_COMMENT.replace("$name", titleEvent).replace("$comment",
-                                                                                       comment))).should(Condition.visible);
+                                                                                       comment))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
     info("Clear data");
     homePagePlatform.goToCalendarPage();
     calendarHomePage.deleteEventTask(titleEvent,

@@ -890,7 +890,7 @@ public class EventManagement {
     info("Delete event/tak: " + name);
     cHome.goToRightMenuTaskEventFromAnyView(name, view, optionDay, date);
     $(ELEMENT_CONTEXT_MENU_DELETE).click();
-    $(ELEMENT_DELETE_RECURRING_EVENT_FORM).waitUntil(Condition.visible, Configuration.timeout);
+    $(ELEMENT_DELETE_RECURRING_EVENT_FORM).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     if (isVerify) {
       $(ELEMENT_CONFIRM_DELETE_RECURRING_EVENT).waitUntil(Condition.visible, Configuration.timeout);
       $(ELEMENT_DELETE_ONE_EVENT).parent().waitUntil(Condition.visible, Configuration.timeout);

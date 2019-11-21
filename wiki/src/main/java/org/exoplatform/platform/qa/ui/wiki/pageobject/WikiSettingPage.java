@@ -145,11 +145,11 @@ public class WikiSettingPage {
    */
   public void addTemplate(String title, String des, String content) {
     info("Click on Add more Template button");
-    $(ELEMENT_WIKI_SETTING_ADD_MORE_TEMPALTE).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_WIKI_SETTING_ADD_MORE_TEMPALTE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
     if (!title.isEmpty()) {
       info("Input the title for the template");
-      $(ELEMENT_TITLE_TEMPLATE).waitUntil(Condition.visible,Configuration.timeout).setValue(title);
+      $(ELEMENT_TITLE_TEMPLATE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(title);
     }
 
     if (!des.isEmpty()) {
@@ -159,7 +159,7 @@ public class WikiSettingPage {
 
     if (!content.isEmpty()) {
       info("Input the content for the template");
-      $(ELEMENT_CONTENT_TEMPLATE).waitUntil(Condition.visible,Configuration.timeout).setValue(content);
+      $(ELEMENT_CONTENT_TEMPLATE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(content);
     }
   }
 

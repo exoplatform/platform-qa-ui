@@ -1349,9 +1349,9 @@ public class RichTextEditor {
       }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
     }
     if (!title.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).setValue(title);
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(title);
     info("Waiting 30s before saved all changes");
-    $(ELEMENT_DRAFT_NOTIFY).waitUntil(Condition.appears, 31000, 1);
+    $(ELEMENT_DRAFT_NOTIFY).waitUntil(Condition.appears, 41000, 1);
     info("Save all changes");
 
   }
@@ -1477,9 +1477,9 @@ public class RichTextEditor {
   public void addSimplePageHasAutoSaveWithoutSave(String title, String content) {
     info("Input a title for the page");
     sleep(Configuration.timeout);
-    refresh();
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     if (!title.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).val(title);
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,15000).val(title);
     info("Input a content for the page");
     if (!content.isEmpty()) {
       SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.timeout);

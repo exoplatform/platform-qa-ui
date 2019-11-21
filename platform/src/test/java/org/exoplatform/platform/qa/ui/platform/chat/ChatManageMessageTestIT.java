@@ -153,10 +153,12 @@ public class ChatManageMessageTestIT extends Base {
     info("upload file in user chat");
     if (!$(byText(PLFData.DATA_NAME_USER2)).exists())
       ELEMENT_CHAT_BUTTON_HIDE_OFF_LINE.click();
-    $(byXpath("//div[@class='chat-contact']/div[contains(@style,'${userChat}')]".replace("${userChat}",PLFData.DATA_USER2))).click();
-    if ($(byXpath("//i[@class='uiIconBannerChat uiIconLightGray']")).exists())
-      $(byXpath("//i[@class='uiIconBannerChat uiIconLightGray']")).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byXpath("//*[@class='contact-list-item']//*[@class='chat-contact']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("//*[@id='profileName']/a[text()='${name}']".replace("${name}",PLFData.DATA_NAME_USER2))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    if ($(byXpath("//*[@class='profileMenuNav']//*[@class='uiIconBannerChat']")).exists())
+      $(byXpath("//*[@class='profileMenuNav']//*[@class='uiIconBannerChat']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     refresh();
+    $(byXpath("//*[@class='uiIconChatPopOut']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     chatManagement.uploadFile("testavatar.png");
     sleep(Configuration.timeout);
     info("upload file in space chat");

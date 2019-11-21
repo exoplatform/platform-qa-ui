@@ -378,10 +378,8 @@ public class NavigationToolbar {
 
     info("Select a forum for poll");
     $(ELEMENT_SELECT_FORUM_COMBOBOX).waitUntil(Condition.visible, Configuration.timeout).click();
-    $(byText(forum)).waitUntil(Condition.visible, Configuration.timeout).click();
-    $(ELEMENT_SELECT_FORUM_COMBOBOX).waitUntil(Condition.hasText(forum), Configuration.timeout);
+    $(byText(forum)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     info("Click on next button");
-    ELEMENT_LIST_FORUM_IN_TOP_NAVIGATION.waitUntil(Condition.disappear, Configuration.timeout);
     $(ELEMENT_NEXT_BUTTON).waitUntil(Condition.enabled, Configuration.timeout);
     $(ELEMENT_NEXT_BUTTON).click();
   }
@@ -560,7 +558,7 @@ public class NavigationToolbar {
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-    ELEMENT_ADMINISTRATION_ADD_USERS.waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_ADMINISTRATION_ADD_USERS.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
   }
 
   public void goToManageCommunity() {

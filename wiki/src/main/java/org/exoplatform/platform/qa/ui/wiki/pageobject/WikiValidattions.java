@@ -7,6 +7,7 @@ import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -737,12 +738,12 @@ public class WikiValidattions {
             String total = evt.waitForAndGetElement(ELEMENT_WIKI_SETTING_PAGE_TOTAL_NUMBER).getText();
             int totalNum = Integer.parseInt(total);
             for (int i = 0; i < totalNum; i++) {
-                if (evt.waitForAndGetElement(ELEMENT_WIKI_SETTINGS_RESULTS.replace("${template}", template), 2000, 0) == null) {
+                if ($(byXpath(ELEMENT_WIKI_SETTINGS_RESULTS.replace("${template}", template))).is(Condition.not(Condition.visible))) {
                     info("Click on next button");
-                    evt.click(ELEMENT_WIKI_SETTING_PAGE_NEXT_BUTTON);
+                    $(ELEMENT_WIKI_SETTING_PAGE_NEXT_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
                 } else {
                     info("Verify that the template is shown in the list");
-                    evt.waitForAndGetElement(ELEMENT_WIKI_SETTINGS_RESULTS.replace("${template}", template));
+                    $(byXpath(ELEMENT_WIKI_SETTINGS_RESULTS.replace("${template}", template))).exists();
                     info("The template is shown successfully");
                     break;
                 }

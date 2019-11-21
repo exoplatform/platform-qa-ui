@@ -383,10 +383,10 @@ public class SiteExplorerHome {
    */
   public void editTag(String oldName, String newName) {
     info("Click on Tag Cloud tab of SE");
-    $(ELEMENT_SITEEXPLORER_TAG_CLOUD_TAB).click();
+    $(ELEMENT_SITEEXPLORER_TAG_CLOUD_TAB).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     $(byId("UITagExplorer")).find(byText(oldName)).should(Condition.visible);
     info("Click on Edit button of Tag Cloud");
-    $(ELEMENT_SIDEBAR_TAGCLOUD_EDIT).click();
+    $(ELEMENT_SIDEBAR_TAGCLOUD_EDIT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     $(ELEMENT_SIDEBAR_TAGCLOUD_POPUP_TITLE).waitUntil(Condition.visible,Configuration.timeout);
     info("Click on Edit button of the old tag");
     $(byXpath(ELEMENT_SIDEBAR_TAGCLOUD_POPUP_EDIT.replace("${name}", oldName))).click();
