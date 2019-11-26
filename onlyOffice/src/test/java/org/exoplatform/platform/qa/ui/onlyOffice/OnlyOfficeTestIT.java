@@ -21,6 +21,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLoca
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Configuration.*;
 
+
 public class OnlyOfficeTestIT extends Base {
 
   HomePagePlatform homePagePlatform;
@@ -33,7 +34,6 @@ public class OnlyOfficeTestIT extends Base {
   OnlyOfficeDocumentApplication onlyOfficeDocumentApplication;
   OnlyOfficeActivityStream onlyOfficeActivityStream;
   OnlyOfficeEditingPage onlyOfficeEditingPage;
-
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -59,7 +59,7 @@ public class OnlyOfficeTestIT extends Base {
    * EditOnline_BTN_US01
    * Upload a document & click on Edit Online button in Document Application/View Document and check document is correctly opened
    */
-  public void EditOnlineDocumentFromDocumentsApp() {
+  public void editOnlineDocumentFromDocumentsApp() {
     String document = "OO_test";
     String extension = ".docx";
     String userName = PLFData.DATA_NAME_ROOT;
@@ -88,7 +88,7 @@ public class OnlyOfficeTestIT extends Base {
    * EditOnline_BTN_US02_(01)
    * Upload a document & click on Edit Online button from Activity Stream, from Document Preview and check document is correctly opened
    */
-  public void EditOnlineDocumentFromActivityStreamAndPreview() {
+  public void editOnlineDocumentFromActivityStreamAndPreview() {
     String document = "OO_test";
     String extension = ".docx";
     String userName = PLFData.DATA_NAME_ROOT;
@@ -118,7 +118,7 @@ public class OnlyOfficeTestIT extends Base {
    * EditOnline_BTN_US02_(02)
    * Upload a document in a Space & click on Edit Online button from Space Activity Stream and check document is correctly opened
    */
-  public void EditOnlineDocumentFromSpaceAS() {
+  public void editOnlineDocumentFromSpaceAS() {
     String document = "OO_test";
     String extension = ".docx";
     String userName = PLFData.DATA_NAME_ROOT;
@@ -143,7 +143,7 @@ public class OnlyOfficeTestIT extends Base {
    * EditOnline_BTN_US02_(03)
    * Upload a document & click on Edit Online button in Document Application and check document is correctly opened
    */
-  public void EditOnlineDocumentFromDocumentApplication() {
+  public void editOnlineDocumentFromDocumentApplication() {
     String document = "OO_test";
     String extension = ".docx";
     String userName = PLFData.DATA_NAME_ROOT;
@@ -169,7 +169,7 @@ public class OnlyOfficeTestIT extends Base {
    * EditOnline_BTN_US03_(01)
    * Check alignment of "Edit Online Button from AS"
    **/
-  public void EditOnlineButtonAlignmentFromAS() {
+  public void editOnlineButtonAlignmentFromAS() {
     String document = "OO_test";
     String extension = ".docx";
     info("Alignment of Edit Online button in AS");
@@ -186,7 +186,7 @@ public class OnlyOfficeTestIT extends Base {
    * EditOnline_BTN_US03_(02)
    * Check alignment of "Edit Online Button from Document Preview"
    */
-  public void EditOnlineButtonAlignmentFromDocumentPreview() {
+  public void editOnlineButtonAlignmentFromDocumentPreview() {
     String document = "OO_test";
     String extension = ".docx";
     info("Alignment of Edit Online button in AS");
@@ -207,7 +207,7 @@ public class OnlyOfficeTestIT extends Base {
    * EditOnline_BTN_US03_(03)
    * Check alignment of "Edit Online Button from Document application"
    */
-  public void EditOnlineButtonAlignmentFromDocumentApp() {
+  public void editOnlineButtonAlignmentFromDocumentApp() {
     String document = "OO_test";
     String extension = ".docx";
     info("Alignment of Edit Online button in DocumentApp");
@@ -231,7 +231,7 @@ public class OnlyOfficeTestIT extends Base {
    * EditOnline_BTN_US05_(01)
    * Check that editing online with OO is possible for ".docx",".pptx" and ".xlsx" documents
    */
-  public void EditOnlineSupportedFile() {
+  public void editOnlineSupportedFile() {
     String documentDocx = "docx_test";
     String extensionDocx = ".docx";
     String documentPptx = "pptx_test";
@@ -251,7 +251,7 @@ public class OnlyOfficeTestIT extends Base {
    * EditOnline_BTN_US05_(02)
    * Check that editing online with OO is not possible for different documents
    */
-  public void EditOnlineNotSupportedFile() {
+  public void editOnlineNotSupportedFile() {
     String documentDoc = "doc_test";
     String extensionDoc = ".doc";
     String documentPpt = "ppt_test";
