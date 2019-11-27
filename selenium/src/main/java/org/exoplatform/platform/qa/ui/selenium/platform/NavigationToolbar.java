@@ -469,7 +469,7 @@ public class NavigationToolbar {
     $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     $(ELEMENT_MENU_CONTENT_LINK).hover();
-    $(ELEMENT_SEARCH_LINK).click();
+    $(ELEMENT_SEARCH_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**

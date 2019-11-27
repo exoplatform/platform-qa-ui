@@ -54,13 +54,13 @@ public class CalendarHomePage {
     executeJavaScript("window.scrollBy(0,-5500)", "");
     switch (view) {
       case DAY:
-        ELEMENT_CALENDAR_DAY_BUTTON.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        ELEMENT_CALENDAR_DAY_BUTTON.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         break;
       case WEEK:
-        ELEMENT_CALENDAR_WEEK_BUTTON.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        ELEMENT_CALENDAR_WEEK_BUTTON.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         break;
       case LIST:
-        ELEMENT_CALENDAR_LIST_BUTTON.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        ELEMENT_CALENDAR_LIST_BUTTON.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         break;
       case MONTH:
         sleep(Configuration.timeout);
@@ -182,8 +182,10 @@ public class CalendarHomePage {
       }
       else
       {
+        sleep(2000);
+        testBase.getExoWebDriver().getWebDriver().navigate().refresh();
         $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date",
-                date))).contextClick();
+                date))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).contextClick();
       }
     }
     else {
@@ -1013,7 +1015,7 @@ public class CalendarHomePage {
     info("Delete event/tak: " + name);
     Button button = new Button(this.testBase);
     goToRightMenuTaskEventFromAnyView(name, view, optionDay, date);
-    $(ELEMENT_CONTEXT_MENU_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_CONTEXT_MENU_DELETE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     if (isVerify) {
       if (isEvent) {
         $(byText(ELEMENT_CONFIRM_DELETE_EVENT_MSG)).waitUntil(Condition.appears, Configuration.timeout);
@@ -1026,7 +1028,7 @@ public class CalendarHomePage {
       verifyIsNotPresentEventTask(name, view, optionDay);
     } else
       button.yes();
-    $(byText(name)).waitUntil(Condition.disappears, Configuration.timeout);
+    $(byText(name)).waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs);
   }
 
   /**

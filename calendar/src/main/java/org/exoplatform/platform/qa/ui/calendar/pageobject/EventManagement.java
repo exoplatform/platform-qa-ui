@@ -753,8 +753,8 @@ public class EventManagement {
   public void saveAddEventDetails() {
     info("Save add event details");
     if ($(ELEMENT_ADD_EDIT_EVENT_NAME).is(Condition.visible))
-      $(ELEMENT_ADD_EDIT_EVENT_NAME).click();
-    ELEMENT_EVENT_SAVE_BUTTON.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+      $(ELEMENT_ADD_EDIT_EVENT_NAME).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_EVENT_SAVE_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -889,7 +889,7 @@ public class EventManagement {
     boolean isVerify = (Boolean) (opParams.length > 0 ? opParams[0] : false);
     info("Delete event/tak: " + name);
     cHome.goToRightMenuTaskEventFromAnyView(name, view, optionDay, date);
-    $(ELEMENT_CONTEXT_MENU_DELETE).click();
+    $(ELEMENT_CONTEXT_MENU_DELETE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     $(ELEMENT_DELETE_RECURRING_EVENT_FORM).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     if (isVerify) {
       $(ELEMENT_CONFIRM_DELETE_RECURRING_EVENT).waitUntil(Condition.visible, Configuration.timeout);

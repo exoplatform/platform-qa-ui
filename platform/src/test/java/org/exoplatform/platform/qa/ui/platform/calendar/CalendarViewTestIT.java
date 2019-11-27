@@ -1,7 +1,10 @@
 package org.exoplatform.platform.qa.ui.platform.calendar;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_HP_CALENDARGADGET_LEFTARROW;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -104,6 +107,10 @@ public class CalendarViewTestIT extends Base {
                                      CalendarHomePage.selectViewOption.WEEK,
                                      CalendarHomePage.selectDayOption.ALLDAY,
                                      getDate(1, "MMM dd yyyy"));
+    if(!$(byXpath("//*[contains(text(), '${nameEvent}')]".replace("${nameEvent}",titleEventPre))).isDisplayed())
+    {
+      $(byXpath("//*[@class=\"actionIconSmall \"]//*[@class='uiIconMiniArrowLeft uiIconLightGray']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    }
     calendarHomePage.deleteEventTask(titleEventPre,
                                      CalendarHomePage.selectViewOption.WEEK,
                                      CalendarHomePage.selectDayOption.ALLDAY,
@@ -567,6 +574,7 @@ public class CalendarViewTestIT extends Base {
                                      CalendarHomePage.selectViewOption.MONTH,
                                      CalendarHomePage.selectDayOption.ALLDAY,
                                      getDate(-1, "MMM dd yyyy"));
+    executeJavaScript("window.scrollBy(0,-500)");
     click(ELEMENT_TODAY_ACTION_BAR);
     calendarHomePage.deleteEventTask(titleEventCur,
                                      CalendarHomePage.selectViewOption.DAY,

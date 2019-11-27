@@ -1097,6 +1097,7 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         richTextEditor.addSimplePage(wiki1, wiki1);
+        richTextEditor.addSimplePage(wiki1, wiki1);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(wiki1);
 

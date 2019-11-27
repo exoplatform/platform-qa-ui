@@ -334,7 +334,7 @@ public class WikiValidattions {
         evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_COMPARE_VERSION_TITLE);
         info("Verify that Version N-1 and current version is shown on the page");
         sleep(Configuration.timeout);
-        evt.waitForAndGetElement(ELEMENT_COMPARE_VERSION_VERSION_NUMBER.replace("$num", oldVersion));
+        $(byXpath(ELEMENT_COMPARE_VERSION_VERSION_NUMBER.replace("$num", oldVersion))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
         evt.waitForAndGetElement(ELEMENT_COMPARE_VERSION_CURRENT_VERSION);
     }
 
