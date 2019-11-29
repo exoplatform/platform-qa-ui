@@ -295,9 +295,9 @@ public class WikiManagement {
     $(ELEMENT_MORE_LINK).click();
     info("Click on Move page link");
     $(ELEMENT_MOVE_PAGE).hover().click();
-    ELEMENT_SELECT_DESTINATION.click();
-    ELEMENT_POPUP_SELECT_DESTINATION.find(byText(destination)).click();
-    $(ELEMENT_WIKI_PAGE_MOVE_POPUP_SAVE).click();
+    ELEMENT_SELECT_DESTINATION.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_POPUP_SELECT_DESTINATION.find(byText(destination)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_WIKI_PAGE_MOVE_POPUP_SAVE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**

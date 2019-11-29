@@ -672,6 +672,11 @@ public class CalendarHomePage {
           $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE_ICON.replace("$date", date))).click();
           $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE.replace("$name", name).replace("$date", date))).waitUntil(Condition.visible,Configuration.timeout);
         } else
+          if(!$(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))).isDisplayed()) {
+            $(byXpath("(//i[@class='uiIconMiniArrowRight uiIconLightGray'])[2]")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+            $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))).waitUntil(Condition.visible,Configuration.timeout);
+            $(byXpath("(//i[@class='uiIconMiniArrowLeft uiIconLightGray'])[3]")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+          }
           $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))).waitUntil(Condition.visible,Configuration.timeout);
 
         break;
