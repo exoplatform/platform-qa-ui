@@ -84,7 +84,7 @@ public class TasksManagement {
 
   public void addTask(String taskContent) {
 
-    ELEMENT_BUTTON_ADD_TASK.click();
+    ELEMENT_BUTTON_ADD_TASK.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_INPUT_TASK_TITLE.setValue(taskContent).pressEnter();
     ELEMENT_TASK_FORM.waitUntil(Condition.appears, Configuration.timeout);
     $(byText(taskContent)).waitUntil(Condition.visible, Configuration.timeout);

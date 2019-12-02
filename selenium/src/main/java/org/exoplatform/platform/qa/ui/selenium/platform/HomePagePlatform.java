@@ -90,7 +90,7 @@ public class HomePagePlatform {
    */
   public void goToCalendarPage() {
     info("-- Go to calendar home page --");
-    ELEMENT_CALENDAR_LINK_PLF.waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_CALENDAR_LINK_PLF.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     info("click on Calendar link");
     ELEMENT_CALENDAR_LINK_PLF.click();
     info("Verify that Calendar page is shown");

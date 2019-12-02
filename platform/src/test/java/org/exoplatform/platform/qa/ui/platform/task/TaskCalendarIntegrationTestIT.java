@@ -1,12 +1,15 @@
 package org.exoplatform.platform.qa.ui.platform.task;
 
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -66,13 +69,13 @@ public class TaskCalendarIntegrationTestIT extends Base {
     tasksManagement.addTask(taskName);
     ELEMENT_WORK_PLANED_FIELD.click();
     if (ELEMENT_CHECKBOX_ALL_DAY.is(Condition.selected))
-      ELEMENT_CHECKBOX_ALL_DAY.parent().click();
-    ELEMENT_INPUT_FROM_TIME.setValue(getDate(0, "HH" + ":00"));
-    ELEMENT_INPUT_TO_TIME.setValue(getDate(0, "HH" + ":30"));
-    ELEMENT_INPUT_FROM_TIME.click();
-    ELEMENT_INPUT_TO_TIME.click();
-    ELEMENT_MINI_CALENDAR_FROM.find(byText(getDate(0, "d"))).click();
-    ELEMENT_MINI_CALENDAR_TO.find(byText(getDate(0, "d"))).parent().click();
+      ELEMENT_CHECKBOX_ALL_DAY.parent().waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    do {
+      ELEMENT_INPUT_FROM_TIME.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(getDate(0, "HH" + ":00"));
+      ELEMENT_INPUT_TO_TIME.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(getDate(0, "HH" + ":30"));
+      $(byXpath("(//*[@class='highLight today'])[1]")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).pressEnter();
+      $(byXpath("(//*[@class='highLight today'])[2]")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).pressEnter();
+    }while (!$(byXpath("//*[text()=\"Work planned for \"]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).isDisplayed());
     homePagePlatform.goToCalendarPage();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.WEEK);
     ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(taskName)).parent().shouldHave((Condition.text(getDate(0, "HH" + ":00"))));

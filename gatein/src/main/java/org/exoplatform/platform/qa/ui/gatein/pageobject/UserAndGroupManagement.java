@@ -85,7 +85,7 @@ public class UserAndGroupManagement {
    */
   public void goToGroupTab() {
     info("-- Choose Group Management tab--");
-    ELEMENT_GROUP_TAB.click();
+    ELEMENT_GROUP_TAB.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_TITLE_GROUP_INFO.waitUntil(Condition.appears, Configuration.timeout);
   }
 
@@ -686,9 +686,10 @@ public class UserAndGroupManagement {
   public void deleteUser(String username) {
     info("--Deleting user " + username + "--");
     info("--Search user " + username + "--");
+    ELEMENT_SELECT_BOX_USERS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
     ELEMENT_SELECT_BOX_USERS.selectOptionByValue("userName");
     if (testBase.isTextPresent("Search")) {
-      $(ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);
+      $(ELEMENT_INPUT_SEARCH_USER_NAME).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(username);
     }
 
     ELEMENT_BTN_SEARCH_USER.click();

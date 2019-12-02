@@ -152,7 +152,7 @@ public class ManageLogInOut {
       testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     }
     sleep(Configuration.timeout);
-    $(ELEMENT_SIGN_OUT_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_SIGN_OUT_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
     if (evt.waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK, 2000, 0) != null) {
       info("Clear cache and reconnect to the package");
