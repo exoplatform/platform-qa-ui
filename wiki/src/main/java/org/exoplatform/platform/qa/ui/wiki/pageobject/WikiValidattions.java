@@ -47,7 +47,7 @@ public class WikiValidattions {
         info("Verify that a draf page with the title:" + "title" + " is shown in draf table");
 
         $(byXpath(ELEMENT_DRAFT_OF_NEW_PAGE.replace("${title}", title))).waitUntil(Condition.visible,
-                Configuration.timeout);
+                Configuration.openBrowserTimeoutMs);
     }
 
     /**

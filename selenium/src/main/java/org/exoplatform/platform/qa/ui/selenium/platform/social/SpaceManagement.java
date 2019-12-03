@@ -232,13 +232,11 @@ public class SpaceManagement {
    */
   public void searchSpace(String name, String... number) {
     info("Waiting my space is shown");
-    sleep(Configuration.timeout);
-    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     info("Input the space into search text box");
-    ELEMENT_MY_SPACE_SEARCH_TEXT.setValue(name);
-    sleep(Configuration.timeout);
+    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(name);
     info("evt.click on Search button");
-    $(ELEMENT_MY_SPACE_SEARCH_BTN).click();
+    $(ELEMENT_MY_SPACE_SEARCH_BTN).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
   /**

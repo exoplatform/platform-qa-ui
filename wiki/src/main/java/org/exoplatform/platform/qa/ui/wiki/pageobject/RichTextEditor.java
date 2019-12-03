@@ -824,7 +824,7 @@ public class RichTextEditor {
   public void inputWebAddress(String address) {
     if (!address.isEmpty()) {
       info("Input web address");
-      $(byXpath("//*[@title='Email address']")).waitUntil(Condition.visible,Configuration.collectionsTimeout).val(address);
+      $(ELEMENT_WEB_PAGE_WEB_ADDRESS).val(address);
     }
   }
 
@@ -898,21 +898,28 @@ public class RichTextEditor {
    * @param newContent updated content of the wiki page. Can not be
    */
   public void editSimplePage(String newTitle, String newContent) {
-    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
+    if(!$(ELEMENT_TITLE_WIKI_INPUT).exists())
+    {
+      do {
+        //refresh();
+        testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+        sleep(2000);
+      }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
+    }
     if ($(ELEMENT_SOURCE_EDITOR_BUTTON).is(Condition.not(Condition.exist))
         && (ELEMENT_BUTTON_WIKI_RITCH_TEXT.is(Condition.exist))) {
-      ELEMENT_BUTTON_WIKI_RITCH_TEXT.click();
+      ELEMENT_BUTTON_WIKI_RITCH_TEXT.waitUntil(Condition.visible,Configuration.timeout).click();
     }
     info("Input a new title for the page");
     if (!newTitle.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).clear();
-    $(ELEMENT_TITLE_WIKI_INPUT).val(newTitle);
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.timeout).clear();
+    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.timeout).val(newTitle);
     info("Input a new content for the page");
     if (!newContent.isEmpty()) {
       SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.timeout);
       switchTo().frame(frame);
-      $(byId("body")).clear();
-      $(byId("body")).sendKeys(newContent);
+      $(byId("body")).waitUntil(Condition.visible,Configuration.timeout).clear();
+      $(byId("body")).waitUntil(Condition.visible,Configuration.timeout).sendKeys(newContent);
       switchTo().defaultContent();
     }
   }
@@ -1343,9 +1350,9 @@ public class RichTextEditor {
       }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
     }
     if (!title.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).setValue(title);
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(title);
     info("Waiting 30s before saved all changes");
-    $(ELEMENT_DRAFT_NOTIFY).waitUntil(Condition.appears, 31000, 1);
+    $(ELEMENT_DRAFT_NOTIFY).waitUntil(Condition.appears, 41000, 1);
     info("Save all changes");
 
   }
@@ -1448,7 +1455,7 @@ public class RichTextEditor {
       $(ELEMENT_TITLE_WIKI_INPUT).val(newTitle);
     info("Input a new content for the page");
     if (!newContent.isEmpty()) {
-      SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.timeout);
+      SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
       $(byClassName("gwt-RichTextArea")).click();
       switchTo().frame(frame);
       $(byId("body")).sendKeys(newContent);
@@ -1470,7 +1477,7 @@ public class RichTextEditor {
     sleep(Configuration.timeout);
     refresh();
     if (!title.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.collectionsTimeout).val(title);
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).val(title);
     info("Input a content for the page");
     if (!content.isEmpty()) {
       SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.timeout);

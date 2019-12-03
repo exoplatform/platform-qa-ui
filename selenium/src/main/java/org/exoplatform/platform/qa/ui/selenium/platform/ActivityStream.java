@@ -1630,9 +1630,9 @@ public class ActivityStream {
         info("-- Editing an activity--");
         homePagePlatform.refreshUntil($(byText(text)), Condition.visible, 500);
         String idActivity = $(byText(text)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
-        $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).click();
-        $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}", idActivity))).click();
-        ELEMENT_DELETE_POPUP_OK.click();
+        $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}", idActivity))).waitUntil(Condition.visible,Configuration.timeout).click();
+        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible,Configuration.timeout).click();
         ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
         $(byText(text)).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     }

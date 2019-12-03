@@ -1,8 +1,11 @@
 package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -25,9 +28,8 @@ public class PageEditor {
    */
   public void goToEditPortlet(Object locatorPortlet) {
     info("Go to edit portlet");
-
     evt.mouseOver(locatorPortlet, true);
-    evt.click(ELEMENT_EDIT_PORTLET_ICON);
+    $(ELEMENT_EDIT_PORTLET_ICON).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     evt.waitForAndGetElement(ELEMENT_EDIT_PORTLET_FORM);
   }
 

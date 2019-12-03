@@ -95,8 +95,7 @@ public class SiteExplorerHome {
         selectNode(arrayElement);
       }
     }
-    $(byId("address")).waitUntil(Condition.hasValue("/"+path),Configuration.timeout);
-    sleep(Configuration.timeout);
+    $(byId("address")).waitUntil(Condition.hasValue("/"+path),Configuration.openBrowserTimeoutMs);
   }
 
   /**
@@ -210,14 +209,14 @@ public class SiteExplorerHome {
    * @param destination String
    */
   public void copyPasteNode(String title, String destination) {
-    $(ELEMENT_ACCOUNT_NAME_LINK).click();
-    $(byXpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", title))).contextClick();
-    $(ELEMENT_SITEEXPLORER_ACTION_COPY).click();
-    $(ELEMENT_ACCOUNT_NAME_LINK).click();
+    $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byXpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", title))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).contextClick();
+    $(ELEMENT_SITEEXPLORER_ACTION_COPY).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     $(byXpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", destination))).contextClick();
-    $(ELEMENT_SITEEXPLORER_ACTION_PASTE).click();
+    $(ELEMENT_SITEEXPLORER_ACTION_PASTE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     refresh();
-    $(ELEMENT_SIDEBAR_SITES_MANAGEMENT).click();
+    $(ELEMENT_SIDEBAR_SITES_MANAGEMENT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
   }
 

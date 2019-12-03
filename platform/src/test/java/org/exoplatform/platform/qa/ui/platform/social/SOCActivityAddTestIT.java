@@ -50,7 +50,7 @@ public class SOCActivityAddTestIT extends Base {
     if ($(ELEMENT_INPUT_USERNAME_CAS).is(Condition.not(Condition.exist))) {
       manageLogInOut.signOut();
     }
-    manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);
+    manageLogInOut.signInCas(PLFData.username, PLFData.password);
   }
 
   @Test
@@ -87,13 +87,15 @@ public class SOCActivityAddTestIT extends Base {
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
     activityStream.addActivity(activity1, "");
     String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+
     $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile"))
-                                                         .waitUntil(Condition.visible, Configuration.timeout)
-                                                         .click();
-    ELEMENT_ICON_LIKE_IN_PREVIEW_MODE.click();
+                                                          .hover()
+                                                          .waitUntil(Condition.visible, Configuration.timeout)
+                                                          .click();
+    ELEMENT_ICON_LIKE_IN_PREVIEW_MODE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_ICON_LIKE_IN_PREVIEW_MODE.waitUntil(Condition.have(Condition.attribute("data-original-title", "Unlike")),
                                                 Configuration.timeout);
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+    ELEMENT_CLOSE_DOCUMENT_PREVIEW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     activityStream.deleteactivity(activity1);
 
   }

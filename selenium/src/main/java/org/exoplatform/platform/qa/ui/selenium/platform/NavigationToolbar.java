@@ -559,7 +559,7 @@ public class NavigationToolbar {
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-    ELEMENT_ADMINISTRATION_ADD_USERS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_ADMINISTRATION_ADD_USERS.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
   }
 
   public void goToManageCommunity() {
@@ -568,7 +568,7 @@ public class NavigationToolbar {
     sleep(Configuration.timeout);
     ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, 10000);
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
   }
 
   /**

@@ -280,7 +280,7 @@ public class PlfUnifiedSearchTestIT extends Base {
     confirm();
     switchToParentWindow();
     $(ELEMENT_EDIT_PORTLET_FORM_CLOSE_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    ELEMENT_CLOSE_PORTLET.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("//*[@class='uiIconClose pull-right']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
   }
 
@@ -315,30 +315,30 @@ public class PlfUnifiedSearchTestIT extends Base {
     refresh();
     navigationToolbar.goToAdminSearch();
     info("Content type is shown");
-    $(ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_TITLE).waitUntil(Condition.appears, Configuration.timeout).click();
+    $(ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_TITLE).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
     info("Description is shown");
-    $(ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_DESCRIPTION).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_DESCRIPTION).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     info("Action is shown");
-    $(ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_ACTION).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_ACTION).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
 
     info("Click on Disable button");
-    ELEMENT_BUTTON_DISABLE_ENABLE_WIKI_SEARCH.click();
+    ELEMENT_BUTTON_DISABLE_ENABLE_WIKI_SEARCH.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     info("Open Search page");
     navigationToolbar.goToQuickSearch();
-    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).setValue(wiki);
-    ELEMENT_DROP_DOWN_LIST_RESULT_IN_QUICK_SEARCH.waitUntil(Condition.visible, Configuration.timeout);
-    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).pressEnter();
+    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(wiki);
+    ELEMENT_DROP_DOWN_LIST_RESULT_IN_QUICK_SEARCH.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).pressEnter();
     info("Verify that File checkbox is not shown");
-    $(ELEMENT_SEARCHRESULT_WIKITYPECHECK).shouldNot(Condition.exist);
+    $(byXpath("//*[@id='lstContentTypes']/li[3]/span/input[@value='page']")).isDisplayed();
     navigationToolbar.goToAdminSearch();
-    $(ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_TITLE).waitUntil(Condition.appears, Configuration.timeout).click();
+    $(ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_TITLE).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
     info("Click on Enable button");
-    $(byId("wiki")).click();
+    $(byId("wiki")).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
     info("Open Search page");
     navigationToolbar.goToQuickSearch();
-    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).setValue(wiki);
+    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).setValue(wiki);
     ELEMENT_DROP_DOWN_LIST_RESULT_IN_QUICK_SEARCH.waitUntil(Condition.visible, Configuration.timeout);
-    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).pressEnter();
+    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).pressEnter();
     $(ELEMENT_SEARCHRESULT_WIKITYPECHECK).should(Condition.exist);
     homePagePlatform.goToWiki();
     wikiHomePage.deleteWiki(wiki);
@@ -438,12 +438,12 @@ public class PlfUnifiedSearchTestIT extends Base {
     navigationToolbar.goToQuickSearch();
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).setValue(content);
     ELEMENT_DROP_DOWN_LIST_RESULT_IN_QUICK_SEARCH.waitUntil(Condition.visible, Configuration.timeout)
-            .find(byText(content))
+            .find(byText(name))
             .shouldBe(Condition.visible);
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).pressEnter();
     $(ELEMENT_SEARCHRESULT_ALLTYPECHECK).click();
     $(ELEMENT_SEARCHRESULT_DOCTYPECHECK).parent().click();
-    Assert.assertEquals($(byId("keyword")).getText(),content);
+    Assert.assertEquals($(byClassName("excerpt")).getText(),content);
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     siteExplorerHome.deleteData(name);

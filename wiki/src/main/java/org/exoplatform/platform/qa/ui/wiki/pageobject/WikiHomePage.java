@@ -148,9 +148,9 @@ public class WikiHomePage {
      */
     public void goToMyDraft() {
         info("Click on Browser drop down");
-        $(ELEMENT_SEARCH_BROWSERS_DROPDOWN).click();
+        $(ELEMENT_SEARCH_BROWSERS_DROPDOWN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         info("Select wiki settings label");
-        $(ELEMENT_SEARCH_BROWSERS_MY_DRAFT).click();
+        $(ELEMENT_SEARCH_BROWSERS_MY_DRAFT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
 
     /**
