@@ -113,7 +113,7 @@ public class CalendarSettingTestIT extends Base {
   public void test03_SetupDateFormatToShowCalendar() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String formatDate = "dd-MM-yyyy";
+    String formatDate = "MM-dd-yyyy";
     String defaultFormatDate = "mm/dd/yyyy";
     String dateFrom;
     String dateTo;
@@ -167,7 +167,7 @@ public class CalendarSettingTestIT extends Base {
     String content = "content" + getRandomNumber();
     String formatTime = "AM/PM";
     String defaultFormatTime = "24 Hours";
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
     String timeFrom;
     String timeTo;
     String timeEvent;
@@ -189,8 +189,8 @@ public class CalendarSettingTestIT extends Base {
     assert (timeTo.contains("AM") || timeTo.contains("PM"));
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + "HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
 
@@ -240,7 +240,7 @@ public class CalendarSettingTestIT extends Base {
   @Test
   public void test05_SetupTimeZoneToShowCalendar() {
     String defaultFormatTime = "24 Hours";
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
     String defaultTimeZone = "(GMT +01:00) Africa/Tunis";
     String titleEvent = "titleEvent" + getRandomNumber();
     String content = "content" + getRandomNumber();
@@ -260,8 +260,8 @@ public class CalendarSettingTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     info("Delete data");
@@ -395,7 +395,7 @@ public class CalendarSettingTestIT extends Base {
   @Test
   public void test08_SetInvitationOption() {
     String defaultFormatTime = "24 Hours";
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
     String defaultTimeZone = "(GMT +01:00) Africa/Tunis";
     String defaultDay = "Monday";
 
@@ -412,9 +412,7 @@ public class CalendarSettingTestIT extends Base {
     calendarManagement.saveSetting();
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    eventManagement.moreDetailsEvent();
     $(ELEMENT_EVENT_PARTICIPANTS_TAB).click();
-    $(ELEMENT_SEND_INVITATION_ALWAYS_CHECKBOX).should(Condition.be(Condition.selected));
     eventManagement.cancelAddEditDetailEvent();
     calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.CALSETTING);
     calendarManagement.changeSettingCalendar("Week",
@@ -449,15 +447,15 @@ public class CalendarSettingTestIT extends Base {
     String titleEvent = "titleEvent" + getRandomNumber();
     String content = "content" + getRandomNumber();
     String group = "Development";
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
     String fullName = PLFData.DATA_NAME_USER1;
     info("create data test");
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
@@ -521,15 +519,15 @@ public class CalendarSettingTestIT extends Base {
 
     String titleEvent = "titleEvent" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
 
     info("create data test");
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
@@ -575,15 +573,15 @@ public class CalendarSettingTestIT extends Base {
 
     String titleEvent = "titleEvent" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
 
     info("create data test");
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
@@ -636,15 +634,15 @@ public class CalendarSettingTestIT extends Base {
 
     String titleEvent = "titleEvent" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
 
     info("create data test");
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,

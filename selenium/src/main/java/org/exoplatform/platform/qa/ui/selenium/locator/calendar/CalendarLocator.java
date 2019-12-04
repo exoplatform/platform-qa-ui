@@ -945,7 +945,7 @@ public class CalendarLocator {
                                                                             By.id("UIQuickAddEventPopupWindow");
 
   public static final By              ELEMENT_QUICK_ADD_EVENT_POPUP                                    =
-                                                                    By.id("UIQuickAddEventPopupWindow");
+                                                                    By.xpath("//div[@id='ExoCalendarEventForm']/div[1]");
 
   public static final By              ELEMENT_QUICK_INPUT_EVENT_NAME                                   =
                                                                      By.xpath("//*[@id='UIQuickAddEvent']//*[@id='eventName']");
@@ -963,10 +963,10 @@ public class CalendarLocator {
                                                                           By.xpath("//*[@id=\"allday\"]");
 
   public static final By              ELEMENT_QUICK_INPUT_EVENT_FROM_DATE                              =
-                                                                          By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[1]/div[2]/div[1]/input");
+                                                                          By.xpath("(//*[@id=\"ExoCalendarEventForm\"]//following::input[@class='date'])[1]");
 
   public static final By              ELEMENT_QUICK_INPUT_EVENT_TO_DATE                                =
-                                                                        By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[2]/div[2]/div[1]/input");
+                                                                        By.xpath("(//*[@id=\"ExoCalendarEventForm\"]//following::input[@class='date'])[2]");
 
   public static final String          ELEMENT_QUICK_INPUT_EVENT_FROM_DATE_VALUE                        =
                                                                                 "//*[@id='UIQuickAddEvent']//*[@name='from'][contains(@value,'$value')]";
@@ -975,22 +975,22 @@ public class CalendarLocator {
                                                                               "//*[@id='UIQuickAddEvent']//*[@name='to'][contains(@value,'$value')]";
 
   public static final By              ELEMENT_QUICK_INPUT_EVENT_FROM_TIME                              =
-                                                                          By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[1]/div[2]/div[3]/input");
+                                                                          By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label']/following::input[@class='cbb_input'])[1]");
 
   public static final String          ELEMENT_QUICK_INPUT_EVENT_FROM_TIME_VALUE                        =
                                                                                 "//*[@id='UIQuickAddEvent']//input[@id='fromTime'][contains(@value,'$value')]";
 
   public static final By              ELEMENT_QUICK_INPUT_EVENT_TO_TIME                                =
-                                                                        By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[2]/div[2]/div[3]/input");
+                                                                        By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label']/following::input[@class='cbb_input'])[2]");
 
   public static final String          ELEMENT_QUICK_INPUT_EVENT_TO_TIME_VALUE                          =
                                                                               "//*[@id='UIQuickAddEvent']//input[@id='toTime'][contains(@value,'$value')]";
 
   public static final By              ELEMENT_QUICK_INPUT_EVENT_FROM_TIME_INPUT                        =
-                                                                                By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[1]/div[2]/div[3]/input");
+                                                                                By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label']/following::input[@class='cbb_input'])[1]");
 
   public static final By              ELEMENT_QUICK_INPUT_EVENT_TO_TIME_INPUT                          =
-                                                                              By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[1]/div[2]/div[2]/div[3]/input");
+                                                                              By.xpath("(//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form//div[@class='control-label']/following::input[@class='cbb_input'])[2]");
 
   public static final String          ELEMENT_QUICK_EVENT_SELECT_TO_TIME                               =
                                                                          "//*[@id='UIQuickAddEvent']//*[@id='toTime']/..//*[@class='UIComboboxLabel' and text()='${time}']";
@@ -1098,7 +1098,7 @@ public class CalendarLocator {
                                                                         By.xpath("//*[@id='UIQuickAddEventPopupWindow']//*[text()='Cancel']");
 
   public static final By              ELEMENT_BUTTON_EVENT_CANCEL_DETAILS                              =
-                                                                          By.xpath("//*[ @id='UIEventForm']//*[text()='Cancel']");
+                                                                          By.xpath("//*[@class=\"uiAction\"]//*[text()='Cancel']");
 
   public static final SelenideElement ELEMENT_BUTTON_EVENT_SAVE_DETAILS                                =
                                                                         $(byXpath("//*[@id=\"UIEventForm\"]/div[4]/button[1]"));
@@ -1685,6 +1685,8 @@ public class CalendarLocator {
                                                               $(byClassName("spliterResizableListArea"));
 
   public static final SelenideElement ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW                             = $(byId("UIWeekView"));
+
+  public static final SelenideElement ELEMENT_CALENDAR_TODAY_FIRST_TIME                             = $(byXpath("(//td[@class='tdLine today none'])[1]"));
 
   public static final By ELEMENT_CHECK_CALENDAR=byClassName("iconCheckBox");
 

@@ -1,12 +1,13 @@
 package org.exoplatform.platform.qa.ui.platform.calendar;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -22,10 +23,13 @@ import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by ilyes on 08/11/17.
  */
-@Tag("smoke")
+@Tag("sniff")
 @Tag("calendar")
 public class CalendarBasicTestsInSpaceTestIT extends Base {
   HomePagePlatform homePagePlatform;
@@ -50,20 +54,26 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
     eventManagement = new EventManagement(this);
     calendarHomePage = new CalendarHomePage(this);
     manageLogInOut = new ManageLogInOut(this);
-
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    manageLogInOut.signInCas(PLFData.username, PLFData.password);
   }
 
   @Test
   public void test01_AddEventInSpace() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String contentEvent = "contentEvent" + getRandomNumber();
+    String pattern = "MM-dd-yyyy";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    String date = simpleDateFormat.format(new Date());
     String space = "space" + getRandomNumber();
     info("Create a space");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
     spaceManagement.goToAgendaTab();
     info("Test 13 Add an event in personal calendar");
-    ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.contextClick();
+    ELEMENT_CALENDAR_TODAY_FIRST_TIME.waitUntil(Condition.visible, Configuration.timeout).contextClick();
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT),Condition.visible,1000);
     executeJavaScript("window.scrollBy(0,-2000)", "");
     eventManagement.goToAddEventFromActionBar();
@@ -92,12 +102,12 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
     spaceManagement.addNewSpaceSimple(space, space);
     spaceManagement.goToAgendaTab();
     info("Test 13 Add an event in personal calendar");
-    ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.contextClick();
+    ELEMENT_CALENDAR_TODAY_FIRST_TIME.waitUntil(Condition.visible, Configuration.timeout).contextClick();
     $(byClassName("createEvent")).waitUntil(Condition.visible, Configuration.timeout).click();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM-dd-yyyy"),
-                                              getDate(0, "MM-dd-yyyy"),
+                                              getDate(0, "MM-dd-yyyy" + " HH"),
+                                              getDate(0, "MM-dd-yyyy" + " HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     executeJavaScript("window.scrollBy(0,-2000)", "");
@@ -110,8 +120,8 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
                                                        getDate(0, "MMM dd yyyy"));
     eventManagement.inputDataEventInDetailForm(titleEvent2,
                                                contentEvent2,
-                                               getDate(0, "MM-dd-yyyy"),
-                                               getDate(0, "MM-dd-yyyy"),
+                                               getDate(0, "MM-dd-yyyy" + " HH"),
+                                               getDate(0, "MM-dd-yyyy" + " HH"),
                                                false);
     eventManagement.saveAddEventDetails();
     calendarHomePage.verifyIsPresentEventTask(titleEvent2,
@@ -131,12 +141,12 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
     spaceManagement.addNewSpaceSimple(space, space);
     spaceManagement.goToAgendaTab();
     info("Test 13 Add an event in personal calendar");
-    ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.contextClick();
+    ELEMENT_CALENDAR_TODAY_FIRST_TIME.waitUntil(Condition.visible, Configuration.timeout).contextClick();
     $(byClassName("createEvent")).waitUntil(Condition.visible, Configuration.timeout).click();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM-dd-yyyy"),
-                                              getDate(0, "MM-dd-yyyy"),
+                                              getDate(0, "MM-dd-yyyy" + " HH"),
+                                              getDate(0, "MM-dd-yyyy" + " HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     executeJavaScript("window.scrollBy(0,-2000)", "");

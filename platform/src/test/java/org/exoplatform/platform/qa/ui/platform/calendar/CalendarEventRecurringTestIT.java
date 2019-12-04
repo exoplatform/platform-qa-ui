@@ -768,10 +768,12 @@ public class CalendarEventRecurringTestIT extends Base {
     eventManagement.saveAddEventDetails();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.MONTH);
     $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", titleEvent).replace("$date",
-                                                                                             getDate(0, "MMM dd yyyy")))).waitUntil(Condition.visible,Configuration.timeout).hover();
-    $(ELEMENT_TITLE_RECURRING_EVENT).waitUntil(Condition.visible, Configuration.timeout);
-    $(ELEMENT_DATE_TIME_RECURRING_EVENT).waitUntil(Condition.visible, Configuration.timeout);
-    $(ELEMENT_RECURRING_TEXT_RECURRING_EVENT).waitUntil(Condition.visible, Configuration.timeout);
+                                                                                             getDate(0, "MMM dd yyyy")))).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", titleEvent).replace("$date",
+            getDate(0, "MMM dd yyyy")))).hover();
+    $(ELEMENT_TITLE_RECURRING_EVENT).isDisplayed();
+    $(ELEMENT_DATE_TIME_RECURRING_EVENT).isDisplayed();
+    $(ELEMENT_RECURRING_TEXT_RECURRING_EVENT).isDisplayed();
 
     info("Clear data");
     eventManagement.deleteRecurringEvent(titleEvent,

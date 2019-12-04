@@ -1,6 +1,8 @@
 package org.exoplatform.platform.qa.ui.platform.calendar;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -60,7 +62,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventNext = "titleEventNext" + getRandomNumber();
     String titleEventPre = "titleEventPre" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventCur,
@@ -103,6 +105,10 @@ public class CalendarViewTestIT extends Base {
                                      CalendarHomePage.selectViewOption.WEEK,
                                      CalendarHomePage.selectDayOption.ALLDAY,
                                      getDate(1, "MMM dd yyyy"));
+    if(!$(byXpath("//*[contains(text(), '${nameEvent}')]".replace("${nameEvent}",titleEventPre))).isDisplayed())
+    {
+      $(byXpath("//*[@class=\"actionIconSmall \"]//*[@class='uiIconMiniArrowLeft uiIconLightGray']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    }
     calendarHomePage.deleteEventTask(titleEventPre,
                                      CalendarHomePage.selectViewOption.WEEK,
                                      CalendarHomePage.selectDayOption.ALLDAY,
@@ -128,7 +134,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventNextWeek = "titleEventNextWeek" + getRandomNumber();
     String titleEventPreWeek = "titleEventPreWeek" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
 
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
@@ -224,7 +230,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventNext = "titleEventNext" + getRandomNumber();
     String titleEventPre = "titleEventPre" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventCur,
@@ -249,7 +255,7 @@ public class CalendarViewTestIT extends Base {
     eventManagement.saveQuickAddEvent();
     homePagePlatform.goToCalendarPage();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.LIST);
-    $(ELEMENT_TODAY_ACTION_BAR).click();
+    $(ELEMENT_TODAY_ACTION_BAR).waitUntil(Condition.visible, Configuration.timeout).click();
     calendarHomePage.verifyIsPresentEventTask(titleEventCur,
                                               CalendarHomePage.selectViewOption.LIST,
                                               CalendarHomePage.selectDayOption.ALLDAY);
@@ -259,7 +265,7 @@ public class CalendarViewTestIT extends Base {
     calendarHomePage.verifyIsNotPresentEventTask(titleEventPre,
                                                  CalendarHomePage.selectViewOption.LIST,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
-    $(ELEMENT_NEXT_BUTTON_ANY_VIEW).click();
+    $(ELEMENT_NEXT_BUTTON_ANY_VIEW).waitUntil(Condition.visible, Configuration.timeout).click();
     calendarHomePage.verifyIsNotPresentEventTask(titleEventCur,
                                                  CalendarHomePage.selectViewOption.LIST,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
@@ -269,8 +275,8 @@ public class CalendarViewTestIT extends Base {
     calendarHomePage.verifyIsNotPresentEventTask(titleEventPre,
                                                  CalendarHomePage.selectViewOption.LIST,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
-    $(ELEMENT_TODAY_ACTION_BAR).click();
-    $(ELEMENT_PREVIOUS_BUTTON_ANY_VIEW).click();
+    $(ELEMENT_TODAY_ACTION_BAR).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_PREVIOUS_BUTTON_ANY_VIEW).waitUntil(Condition.visible, Configuration.timeout).click();
     calendarHomePage.verifyIsNotPresentEventTask(titleEventCur,
                                                  CalendarHomePage.selectViewOption.LIST,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
@@ -280,7 +286,7 @@ public class CalendarViewTestIT extends Base {
     calendarHomePage.verifyIsPresentEventTask(titleEventPre,
                                               CalendarHomePage.selectViewOption.LIST,
                                               CalendarHomePage.selectDayOption.ALLDAY);
-    $(ELEMENT_TODAY_ACTION_BAR).click();
+    $(ELEMENT_TODAY_ACTION_BAR).waitUntil(Condition.visible, Configuration.timeout).click();
     calendarHomePage.deleteEventTask(titleEventCur,
                                      CalendarHomePage.selectViewOption.WEEK,
                                      CalendarHomePage.selectDayOption.ALLDAY,
@@ -313,7 +319,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventNextMonth = "titleEventNextMonth" + getRandomNumber();
     String titleEventPreMonth = "titleEventPreMonth" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
     info("Test 4: Check displaying added task/event in month view");
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
@@ -413,7 +419,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventNextWeek = "titleEventNextWeek" + getRandomNumber();
     String titleEventPreWeek = "titleEventPreWeek" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventCur,
@@ -437,7 +443,7 @@ public class CalendarViewTestIT extends Base {
                                               true);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.WEEK);
-    click(ELEMENT_TODAY_ACTION_BAR);
+    $(ELEMENT_TODAY_ACTION_BAR).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     calendarHomePage.verifyIsPresentEventTask(titleEventCur,
                                               CalendarHomePage.selectViewOption.WEEK,
                                               CalendarHomePage.selectDayOption.ALLDAY);
@@ -447,7 +453,7 @@ public class CalendarViewTestIT extends Base {
     calendarHomePage.verifyIsNotPresentEventTask(titleEventPreWeek,
                                                  CalendarHomePage.selectViewOption.WEEK,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
-    click(ELEMENT_NEXT_BUTTON_ANY_VIEW);
+    $(ELEMENT_NEXT_BUTTON_ANY_VIEW).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     calendarHomePage.verifyIsNotPresentEventTask(titleEventCur,
                                                  CalendarHomePage.selectViewOption.WEEK,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
@@ -457,8 +463,8 @@ public class CalendarViewTestIT extends Base {
     calendarHomePage.verifyIsNotPresentEventTask(titleEventPreWeek,
                                                  CalendarHomePage.selectViewOption.WEEK,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
-    click(ELEMENT_TODAY_ACTION_BAR);
-    click(ELEMENT_PREVIOUS_BUTTON_ANY_VIEW);
+    $(ELEMENT_TODAY_ACTION_BAR).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(ELEMENT_PREVIOUS_BUTTON_ANY_VIEW).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     calendarHomePage.verifyIsNotPresentEventTask(titleEventCur,
                                                  CalendarHomePage.selectViewOption.WEEK,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
@@ -468,18 +474,18 @@ public class CalendarViewTestIT extends Base {
     calendarHomePage.verifyIsPresentEventTask(titleEventPreWeek,
                                               CalendarHomePage.selectViewOption.WEEK,
                                               CalendarHomePage.selectDayOption.ALLDAY);
-    $(ELEMENT_TODAY_ACTION_BAR).click();
-    $(ELEMENT_NEXT_BUTTON_ANY_VIEW).click();
+    $(ELEMENT_TODAY_ACTION_BAR).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(ELEMENT_NEXT_BUTTON_ANY_VIEW).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     calendarHomePage.deleteEventTask(titleEventNextWeek,
                                      CalendarHomePage.selectViewOption.WEEK,
                                      CalendarHomePage.selectDayOption.ALLDAY,
                                      getDate(7, "MMM dd yyyy"));
-    $(ELEMENT_TODAY_ACTION_BAR).click();
+    $(ELEMENT_TODAY_ACTION_BAR).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     calendarHomePage.deleteEventTask(titleEventCur,
                                      CalendarHomePage.selectViewOption.WEEK,
                                      CalendarHomePage.selectDayOption.ALLDAY,
                                      getDate(0, "MMM dd yyyy"));
-    $(ELEMENT_PREVIOUS_BUTTON_ANY_VIEW).click();
+    $(ELEMENT_PREVIOUS_BUTTON_ANY_VIEW).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     calendarHomePage.deleteEventTask(titleEventPreWeek,
                                      CalendarHomePage.selectViewOption.WEEK,
                                      CalendarHomePage.selectDayOption.ALLDAY,
@@ -505,7 +511,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventNext = "titleEventNext" + getRandomNumber();
     String titleEventPre = "titleEventPre" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventCur,
@@ -565,6 +571,7 @@ public class CalendarViewTestIT extends Base {
                                      CalendarHomePage.selectViewOption.MONTH,
                                      CalendarHomePage.selectDayOption.ALLDAY,
                                      getDate(-1, "MMM dd yyyy"));
+    executeJavaScript("window.scrollBy(0,-500)");
     click(ELEMENT_TODAY_ACTION_BAR);
     calendarHomePage.deleteEventTask(titleEventCur,
                                      CalendarHomePage.selectViewOption.DAY,
@@ -596,14 +603,14 @@ public class CalendarViewTestIT extends Base {
     String titleEventHoliday = "titleEventHoliday" + getRandomNumber();
     String titleEventAnni = "titleEventAnni" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
 
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventMeeting,
                                               content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
                                               true,
                                               null,
                                               "Meeting");
@@ -612,8 +619,8 @@ public class CalendarViewTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventCall,
                                               content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
                                               true,
                                               null,
                                               "Calls");
@@ -622,8 +629,8 @@ public class CalendarViewTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventClient,
                                               content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
                                               true,
                                               null,
                                               "Clients");
@@ -632,8 +639,8 @@ public class CalendarViewTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventHoliday,
                                               content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
                                               true,
                                               null,
                                               "Holiday");
@@ -642,8 +649,8 @@ public class CalendarViewTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventAnni,
                                               content,
-                                              getDate(0, defaultFormatDate),
-                                              getDate(0, defaultFormatDate),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
                                               true,
                                               null,
                                               "Anniversary");
@@ -802,37 +809,63 @@ public class CalendarViewTestIT extends Base {
     String titleEventHoliday = "titleEventHoliday" + getRandomNumber();
     String titleEventAnni = "titleEventAnni" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM/dd/yyyy";
+    String defaultFormatDate = "MM-dd-yyyy";
 
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    ELEMENT_EVENT_TITLE_DRAWER.waitUntil(Condition.visible, Configuration.timeout).setValue(titleEventMeeting);
-    ELEMENT_EVENT_DESCRIPTION.setValue(content);
-    ELEMENT_EVENT_CATEGORY.selectOption("Meeting");
+    eventManagement.inputDataEventInQuickForm(titleEventMeeting,
+                                              content,
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              true,
+                                              null,
+                                              "Meeting");
     eventManagement.saveQuickAddEvent();
+
     eventManagement.goToAddEventFromActionBar();
-    ELEMENT_EVENT_TITLE_DRAWER.waitUntil(Condition.visible,Configuration.timeout).setValue(titleEventCall);
-    ELEMENT_EVENT_DESCRIPTION.setValue(content);
-    ELEMENT_EVENT_CATEGORY.selectOption("Calls");
+    eventManagement.inputDataEventInQuickForm(titleEventCall,
+                                              content,
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              true,
+                                              null,
+                                              "Calls");
     eventManagement.saveQuickAddEvent();
+
     eventManagement.goToAddEventFromActionBar();
-    ELEMENT_EVENT_TITLE_DRAWER.waitUntil(Condition.visible,Configuration.timeout).setValue(titleEventClient);
-    ELEMENT_EVENT_DESCRIPTION.setValue(content);
-    ELEMENT_EVENT_CATEGORY.selectOption("Clients");
+    eventManagement.inputDataEventInQuickForm(titleEventClient,
+                                              content,
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              true,
+                                              null,
+                                              "Clients");
     eventManagement.saveQuickAddEvent();
+
     eventManagement.goToAddEventFromActionBar();
-    ELEMENT_EVENT_TITLE_DRAWER.waitUntil(Condition.visible,Configuration.timeout).setValue(titleEventHoliday);
-    ELEMENT_EVENT_DESCRIPTION.setValue(content);
-    ELEMENT_EVENT_CATEGORY.selectOption("Holiday");
+    eventManagement.inputDataEventInQuickForm(titleEventHoliday,
+                                              content,
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              true,
+                                              null,
+                                              "Holiday");
     eventManagement.saveQuickAddEvent();
+
     eventManagement.goToAddEventFromActionBar();
-    ELEMENT_EVENT_TITLE_DRAWER.waitUntil(Condition.visible,Configuration.timeout).setValue(titleEventAnni);
-    ELEMENT_EVENT_DESCRIPTION.setValue(content);
-    ELEMENT_EVENT_CATEGORY.selectOption("Anniversary");
+    eventManagement.inputDataEventInQuickForm(titleEventAnni,
+                                              content,
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(0, defaultFormatDate + " HH"),
+                                              true,
+                                              null,
+                                              "Anniversary");
     eventManagement.saveQuickAddEvent();
+
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.LIST);
     click(ELEMENT_TODAY_ACTION_BAR);
     calendarHomePage.selectCategory(CalendarHomePage.selectCategoryOption.ANNIVERSARY);
+
     calendarHomePage.verifyIsNotPresentEventTask(titleEventClient,
                                                  CalendarHomePage.selectViewOption.LIST,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
@@ -848,7 +881,9 @@ public class CalendarViewTestIT extends Base {
     calendarHomePage.verifyIsNotPresentEventTask(titleEventMeeting,
                                                  CalendarHomePage.selectViewOption.LIST,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
+
     calendarHomePage.selectCategory(CalendarHomePage.selectCategoryOption.MEETING);
+
     calendarHomePage.verifyIsNotPresentEventTask(titleEventClient,
                                                  CalendarHomePage.selectViewOption.LIST,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
@@ -864,6 +899,7 @@ public class CalendarViewTestIT extends Base {
     calendarHomePage.verifyIsPresentEventTask(titleEventMeeting,
                                               CalendarHomePage.selectViewOption.LIST,
                                               CalendarHomePage.selectDayOption.ALLDAY);
+
     calendarHomePage.selectCategory(CalendarHomePage.selectCategoryOption.CALL);
     calendarHomePage.verifyIsNotPresentEventTask(titleEventClient,
                                                  CalendarHomePage.selectViewOption.LIST,
@@ -880,6 +916,7 @@ public class CalendarViewTestIT extends Base {
     calendarHomePage.verifyIsNotPresentEventTask(titleEventMeeting,
                                                  CalendarHomePage.selectViewOption.LIST,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
+
     calendarHomePage.selectCategory(CalendarHomePage.selectCategoryOption.HOLIDAY);
     calendarHomePage.verifyIsNotPresentEventTask(titleEventClient,
                                                  CalendarHomePage.selectViewOption.LIST,
@@ -896,6 +933,7 @@ public class CalendarViewTestIT extends Base {
     calendarHomePage.verifyIsNotPresentEventTask(titleEventMeeting,
                                                  CalendarHomePage.selectViewOption.LIST,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
+
     calendarHomePage.selectCategory(CalendarHomePage.selectCategoryOption.CLIENT);
     calendarHomePage.verifyIsPresentEventTask(titleEventClient,
                                               CalendarHomePage.selectViewOption.LIST,
@@ -912,6 +950,7 @@ public class CalendarViewTestIT extends Base {
     calendarHomePage.verifyIsNotPresentEventTask(titleEventMeeting,
                                                  CalendarHomePage.selectViewOption.LIST,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
+
     calendarHomePage.selectCategory(CalendarHomePage.selectCategoryOption.ALL);
     calendarHomePage.verifyIsPresentEventTask(titleEventClient,
                                               CalendarHomePage.selectViewOption.LIST,

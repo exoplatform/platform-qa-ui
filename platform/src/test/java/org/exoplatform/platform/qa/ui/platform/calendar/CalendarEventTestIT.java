@@ -438,8 +438,8 @@ public class CalendarEventTestIT extends Base {
     eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM/dd/yyyy"),
-                                              getDate(0, "MM/dd/yyyy"),
+                                              getDate(0, "MM-dd-yyyy" + " HH"),
+                                              getDate(0, "MM-dd-yyyy" + " HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
@@ -541,8 +541,8 @@ public class CalendarEventTestIT extends Base {
     eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM/dd/yyyy"),
-                                              getDate(0, "MM/dd/yyyy"),
+                                              getDate(0, "MM-dd-yyyy HH"),
+                                              getDate(0, "MM-dd-yyyy HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
@@ -667,9 +667,11 @@ public class CalendarEventTestIT extends Base {
     String titleEvent = "titleEvent" + getRandomNumber();
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    $(ELEMENT_QUICK_INPUT_EVENT_NAME).setValue(titleEvent);
-    $(ELEMENT_QUICK_INPUT_EVENT_FROM_TIME_INPUT).setValue(getDate(0, "HH") + ":13");
-    $(ELEMENT_QUICK_INPUT_EVENT_TO_TIME_INPUT).setValue(getDate(0, "HH") + ":58");
+    eventManagement.inputDataEventInQuickForm(titleEvent,
+            "",
+            getDate(0, "MM-dd-yyyy HH")  + ":13",
+            getDate(0, "MM-dd-yyyy HH") + ":58",
+            false);
     eventManagement.saveQuickAddEvent();
     ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(titleEvent))
                                         .parent()

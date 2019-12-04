@@ -129,7 +129,7 @@ public class CalendarManagement {
         alert.verifyAlertMessage(ELEMENT_CONFIRM_REMOVE_CALENDAR_MSG);
       else
         ELEMENT_YES_BUTTON.click();
-      $(byText(name)).waitUntil(Condition.disappears, Configuration.timeout);
+      $(byText(name)).waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs);
     }
 
   }
