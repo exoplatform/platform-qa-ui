@@ -513,7 +513,7 @@ public class WikiValidattions {
         $(ELEMENT_WIKI_TOOLTIP_RESTRICTED_PAGE_TITLE).exists();
         sleep(Configuration.timeout);
         info("Verify that cannot click on parent page");
-        $(ELEMENT_WIKI_PARENT_PAGE_UN_LINK).waitUntil(Condition.visible, Configuration.timeout);
+        $(ELEMENT_WIKI_PARENT_PAGE_UN_LINK).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     }
 
     /**

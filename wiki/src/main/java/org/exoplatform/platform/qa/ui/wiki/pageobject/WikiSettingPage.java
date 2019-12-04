@@ -38,7 +38,7 @@ public class WikiSettingPage {
   public void searchTemplate(String template) {
 
     info("Input a template's name and press entrer");
-    $(ELEMENT_TEMPLATE_SEARCH_TEXTBOX).setValue(template).pressEnter();
+    $(ELEMENT_TEMPLATE_SEARCH_TEXTBOX).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(template).pressEnter();
 
     info("Verify that the search results is shown that matchs with keyword");
 

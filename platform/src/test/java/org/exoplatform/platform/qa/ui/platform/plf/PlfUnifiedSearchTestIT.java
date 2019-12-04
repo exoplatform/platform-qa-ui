@@ -412,8 +412,8 @@ public class PlfUnifiedSearchTestIT extends Base {
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).setValue(content);
     ELEMENT_DROP_DOWN_LIST_RESULT_IN_QUICK_SEARCH.waitUntil(Condition.visible, Configuration.timeout);
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).pressEnter();
-    $(ELEMENT_SEARCHRESULT_ALLTYPECHECK).click();
-    $(ELEMENT_SEARCHRESULT_DISCTYPECHECK).click();
+    $(ELEMENT_SEARCHRESULT_ALLTYPECHECK).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_SEARCHRESULT_DISCTYPECHECK).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_RESULT_SEARCH.find(byText(content)).should(Condition.exist);
     ELEMENT_RESULT_SEARCH.find(byText(title)).should(Condition.exist);
     homePagePlatform.goToForum();
