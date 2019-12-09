@@ -878,7 +878,7 @@ public class WikiValidattions {
       sleep(Configuration.timeout);
         if (!space.isEmpty()) {
             info("Verify that the space is shown");
-            $(byXpath(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", space))).waitUntil(Condition.visible, Configuration.timeout);
+            $(byXpath(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", space))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
         }
 
     }

@@ -352,9 +352,9 @@ public class CalendarViewTestIT extends Base {
                                                           getDate(0, "MMM dd yyyy"),
                                                           CalendarHomePage.selectViewOption.MONTH,
                                                           CalendarHomePage.selectDayOption.ALLDAY);
-    calendarHomePage.verifyIsNotPresentEventTask(titleEventNextMonth,
+    /*calendarHomePage.verifyIsNotPresentEventTask(titleEventNextMonth,
                                                  CalendarHomePage.selectViewOption.MONTH,
-                                                 CalendarHomePage.selectDayOption.ALLDAY);
+                                                 CalendarHomePage.selectDayOption.ALLDAY);*/
     calendarHomePage.verifyIsNotPresentEventTask(titleEventPreMonth,
                                                  CalendarHomePage.selectViewOption.MONTH,
                                                  CalendarHomePage.selectDayOption.ALLDAY);

@@ -186,6 +186,15 @@ public class CalendarHomePage {
         testBase.getExoWebDriver().getWebDriver().navigate().refresh();
         $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date",
                 date))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).contextClick();
+        sleep(1000);
+        if($(ELEMENT_CONTEXT_MENU_DELETE).isDisplayed()) {
+          info("Delete Icon exists");
+        }
+        else{
+          testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+          $(byXpath("//*[@class='eventSummary']//*[contains(text(),'${titName}')]".replace("${titName}",name))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).contextClick();
+        }
+
       }
     }
     else {
@@ -390,6 +399,7 @@ public class CalendarHomePage {
 
         break;
       case MONTH:
+        sleep(2000);
         $(byXpath(ELEMENT_EVENT_TASK_MONTH_VIEW.replace("$name", name))).shouldNotBe(Condition.visible);
         break;
       case WORKWEEK:

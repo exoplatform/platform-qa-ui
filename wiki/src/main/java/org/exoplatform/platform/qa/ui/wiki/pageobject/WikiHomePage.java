@@ -86,7 +86,7 @@ public class WikiHomePage {
      */
     public void goToAPage(String title) {
         info("-- Go to wiki page --");
-        $(byText(title)).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        $(byText(title)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         $(ELEMENT_WIKI_HOME_PAGE_TEXT).shouldNot(Condition.exist);
     }
 

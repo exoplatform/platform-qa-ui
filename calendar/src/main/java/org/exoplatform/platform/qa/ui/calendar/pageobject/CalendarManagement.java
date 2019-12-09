@@ -373,12 +373,12 @@ public class CalendarManagement {
     openMenuOfCalendar(calendar);
     switch (action) {
     case ADDTASK:
-      $(ELEMENT_CALENDAR_ADD_TASK_MENU).waitUntil(Condition.visible,Configuration.timeout).click();
-      $(ELEMENT_CALENDAR_QUICK_ADD_TASK_FORM).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_CALENDAR_ADD_TASK_MENU).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+      $(ELEMENT_CALENDAR_QUICK_ADD_TASK_FORM).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
       break;
     case ADDEVENT:
-      $(ELEMENT_CALENDAR_ADD_EVENT_MENU).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
-      $(ELEMENT_EVENT_DRAWER).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_CALENDAR_ADD_EVENT_MENU).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+      $(ELEMENT_EVENT_DRAWER).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
       break;
     case EDIT:
       $(ELEMENT_CALENDAR_EDIT_MENU).waitUntil(Condition.visible,Configuration.timeout).click();
