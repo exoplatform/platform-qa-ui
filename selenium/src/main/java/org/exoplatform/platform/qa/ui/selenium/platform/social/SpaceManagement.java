@@ -191,15 +191,15 @@ public class SpaceManagement {
 
     if (oneUser != null) {
       $(ELEMENT_SPACE_MEMBERS).waitUntil(Condition.visible, Configuration.timeout).click();
-      final String assignOrRemoveManagerRole = "(//table[@class='uiGrid table  table-hover table-striped']//th[3]/following::tr[@id='existingUsersTable']/td[text()='${user}']/following::div[@class='uiSwitchBtn'])[1]";
-      $(byXpath(assignOrRemoveManagerRole.replace("${user}", oneUser))).waitUntil(Condition.visible, Configuration.timeout).click();
+      final String assignOrRemoveManagerRole = "(//table[@class='uiGrid table  table-hover table-striped']//th[3]/following::tr[@id='existingUsersTable']/td[contains(text(),'${user}')]/following::div[@class='uiSwitchBtn'])[1]";
+      $(byXpath(assignOrRemoveManagerRole.replace("${user}", oneUser))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     }
     if (manyUsers != null) {
       $(ELEMENT_SPACE_MEMBERS).waitUntil(Condition.visible, Configuration.timeout).click();
 
-      final String assignOrRemoveManagerRole = "(//table[@class='uiGrid table  table-hover table-striped']//th[3]/following::tr[@id='existingUsersTable']/td[text()='${user}']/following::div[@class='uiSwitchBtn'])[1]";
-      $(byXpath(assignOrRemoveManagerRole.replace("${user}", manyUsers.get(0)))).waitUntil(Condition.visible, Configuration.timeout).click();
-      $(byXpath(assignOrRemoveManagerRole.replace("${user}", manyUsers.get(2)))).waitUntil(Condition.visible, Configuration.timeout).click();
+      final String assignOrRemoveManagerRole = "(//table[@class='uiGrid table  table-hover table-striped']//th[3]/following::tr[@id='existingUsersTable']/td[contains(text(),'${user}')]/following::div[@class='uiSwitchBtn'])[1]";
+      $(byXpath(assignOrRemoveManagerRole.replace("${user}", manyUsers.get(0)))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+      $(byXpath(assignOrRemoveManagerRole.replace("${user}", manyUsers.get(2)))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     }
 
   }
@@ -362,13 +362,27 @@ public class SpaceManagement {
       firstNineDays.add("8");
       firstNineDays.add("9");
       if (firstNineDays.contains(dateEvent.substring(9, 10))) {
-        assertEquals(dateEvent.substring(9, 10), ELEMENT_CURRENT_DATE[1].substring(3, 4));
-        info("Created Event Year is : ");
-        assertEquals(dateEvent.substring(0, 4), ELEMENT_CURRENT_DATE[1].substring(5, 9));
+        if($(byXpath("//center//*[contains(text(),'Yesterday')]")).isDisplayed()) {
+          assertEquals(dateEvent.substring(9, 10), ELEMENT_CURRENT_DATE[1].substring(3, 4));
+          info("Created Event Year is : ");
+          assertEquals(dateEvent.substring(0, 4), ELEMENT_CURRENT_DATE[1].substring(5, 9));
+        }
+          else{
+            assertEquals(dateEvent.substring(9, 10), ELEMENT_CURRENT_DATE[1].substring(3, 4));
+            info("Created Event Year is : ");
+            assertEquals(dateEvent.substring(0, 4), ELEMENT_CURRENT_DATE[1].substring(6, 10));
+        }
       } else {
-        assertEquals(dateEvent.substring(8, 10), ELEMENT_CURRENT_DATE[1].substring(3, 5));
-        info("Created Event Year is : ");
-        assertEquals(dateEvent.substring(0, 4), ELEMENT_CURRENT_DATE[1].substring(6, 10));
+        if($(byXpath("//center//*[contains(text(),'Yesterday')]")).isDisplayed()) {
+          assertEquals(dateEvent.substring(8, 10), ELEMENT_CURRENT_DATE[1].substring(3, 5));
+          info("Created Event Year is : ");
+          assertEquals(dateEvent.substring(0, 4), ELEMENT_CURRENT_DATE[1].substring(5, 9));
+        }
+        else{
+          assertEquals(dateEvent.substring(8, 10), ELEMENT_CURRENT_DATE[1].substring(3, 5));
+          info("Created Event Year is : ");
+          assertEquals(dateEvent.substring(0, 4), ELEMENT_CURRENT_DATE[1].substring(6, 10));
+        }
       }
 
     }

@@ -736,7 +736,7 @@ public class EventManagement {
     info("Select Previous and Next day");
     ELEMENT_EVENT_SELECT_FROM.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     if (previousDay!= null) {
-      final SelenideElement ELEMENT_EVENT_PREVIOUS_DAY= $(By.xpath("(//td/a[contains(text(),'${CurrentDay}')]/../preceding-sibling::td/a[@href='#SelectDate'])[last()]".replace("${CurrentDay}",ELEMENT_EVENT_CURRENT_DAY.getText())));
+      final SelenideElement ELEMENT_EVENT_PREVIOUS_DAY= $(By.xpath("(//*[@id='ExoCalendarEventForm']//*[@class='weekDays']//*[@class='currentWeek']//*[contains(text(),'${CurrentDay}')]/../preceding-sibling::td/a[@href='#SelectDate'])[last()]".replace("${CurrentDay}",ELEMENT_EVENT_CURRENT_DAY.getText())));
       ELEMENT_EVENT_PREVIOUS_DAY.waitUntil(Condition.visible,Configuration.timeout).click();
       ELEMENT_EVENT_SELECT_TO.waitUntil(Condition.visible,Configuration.timeout).click();
       ELEMENT_EVENT_PREVIOUS_DAY.waitUntil(Condition.visible,Configuration.timeout).click();
