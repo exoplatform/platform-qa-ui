@@ -824,7 +824,7 @@ public class RichTextEditor {
   public void inputWebAddress(String address) {
     if (!address.isEmpty()) {
       info("Input web address");
-      $(ELEMENT_WEB_PAGE_WEB_ADDRESS).val(address);
+      $(ELEMENT_WEB_PAGE_WEB_ADDRESS).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).val(address);
     }
   }
 
@@ -955,7 +955,7 @@ public class RichTextEditor {
    */
   public void inputLabel(String label) {
     if (label != null && label != "") {
-      $(ELEMENT_LABEL_LINK_TEXTBOX).val(label);
+      $(ELEMENT_LABEL_LINK_TEXTBOX).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).val(label);
     }
   }
 

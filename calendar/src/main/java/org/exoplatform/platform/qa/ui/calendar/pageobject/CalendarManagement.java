@@ -355,9 +355,9 @@ public class CalendarManagement {
             .hover()
             .parent()
             .parent()
-            .waitUntil(Condition.visible, Configuration.collectionsTimeout)
+            .waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs)
             .find(ELEMENT_CALENDAR_ICON_SETTINGS_OF_CALENDAR)
-            .waitUntil(Condition.visible, Configuration.collectionsTimeout)
+            .waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs)
             .click();
   }
 

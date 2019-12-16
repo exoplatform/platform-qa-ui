@@ -1392,7 +1392,7 @@ public class WikiBasicActionEditTestIT extends Base {
         richTextEditor.editSimplePage(title2, "");
         richTextEditor.changeLink(label);
         richTextEditor.goToEditLink();
-        richTextEditor.insertWebLink(address2, label2, "", true);
+        richTextEditor.editWikiPageLink(address2, label2, "");
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(title2);
         info("Click on email link to verify that the link is avaiable");

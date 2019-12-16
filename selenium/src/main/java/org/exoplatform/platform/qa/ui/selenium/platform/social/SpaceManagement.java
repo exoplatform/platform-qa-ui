@@ -351,17 +351,7 @@ public class SpaceManagement {
       info("Created Event Month is : ");
       assertEquals(dateEvent.substring(5, 7), ELEMENT_CURRENT_DATE[1].substring(0, 2));
       info("Created Event day is : ");
-      List<String> firstNineDays = new ArrayList<>();
-      firstNineDays.add("1");
-      firstNineDays.add("2");
-      firstNineDays.add("3");
-      firstNineDays.add("4");
-      firstNineDays.add("5");
-      firstNineDays.add("6");
-      firstNineDays.add("7");
-      firstNineDays.add("8");
-      firstNineDays.add("9");
-      if (firstNineDays.contains(dateEvent.substring(9, 10))) {
+      if (dateEvent.length()==18) {
         if($(byXpath("//center//*[contains(text(),'Yesterday')]")).isDisplayed()) {
           assertEquals(dateEvent.substring(9, 10), ELEMENT_CURRENT_DATE[1].substring(3, 4));
           info("Created Event Year is : ");
@@ -376,7 +366,7 @@ public class SpaceManagement {
         if($(byXpath("//center//*[contains(text(),'Yesterday')]")).isDisplayed()) {
           assertEquals(dateEvent.substring(8, 10), ELEMENT_CURRENT_DATE[1].substring(3, 5));
           info("Created Event Year is : ");
-          assertEquals(dateEvent.substring(0, 4), ELEMENT_CURRENT_DATE[1].substring(5, 9));
+          assertEquals(dateEvent.substring(0, 4), ELEMENT_CURRENT_DATE[1].substring(6, 10));
         }
         else{
           assertEquals(dateEvent.substring(8, 10), ELEMENT_CURRENT_DATE[1].substring(3, 5));

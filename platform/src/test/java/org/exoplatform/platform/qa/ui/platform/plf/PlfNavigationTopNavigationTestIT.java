@@ -130,7 +130,10 @@ public class PlfNavigationTopNavigationTestIT extends Base {
      * displayed
      */
     navigationToolbar.goToAddPoll("", forum);
+    info("Verify that the poll popup is shown");
+    $(ELEMENT_POLL_SUBMIT).waitUntil(Condition.appears, Configuration.timeout);
     info("Delete data");
+    ELEMENT_POLL_CANCEL.waitUntil(Condition.visible, Configuration.timeout).click();
     homePagePlatform.goToForum();
     forumHomePage.goToHomeCategory();
     forumCategoryManagement.deleteCategory(category);
@@ -278,9 +281,10 @@ public class PlfNavigationTopNavigationTestIT extends Base {
   public void test07_OpenUserGuide() {
     info("Test 7: Open user guide");
     homePagePlatform.goToHomePage();
-    homePagePlatform.refreshUntil($(ELEMENT_HELP_TOOLBAR),Condition.visible,1000);
-    $(ELEMENT_HELP_TOOLBAR).waitUntil(Condition.visible,Configuration.timeout).click();
+    homePagePlatform.refreshUntil($(ELEMENT_HELP_TOOLBAR),Condition.visible,Configuration.timeout);
+    $(ELEMENT_HELP_TOOLBAR).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     switchTo().window(1);
+    sleep(2000);
     String url = WebDriverRunner.url();
     assertEquals(url,
                  "https://docs.exoplatform.org/en/5.2/");

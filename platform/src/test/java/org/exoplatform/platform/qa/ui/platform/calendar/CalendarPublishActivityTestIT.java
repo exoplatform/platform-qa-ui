@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.platform.calendar;
 
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER2;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
@@ -817,13 +818,13 @@ public class CalendarPublishActivityTestIT extends Base {
     calendarManagement.deleteCalendar(shareCalendar, false);
 
     homePagePlatform.goToCalendarPage();
-    calendarHomePage.deleteEventTask(titleEventPersonal,
+    calendarHomePage.deleteEventTask(titleEventGroup,
                                      CalendarHomePage.selectViewOption.MONTH,
                                      CalendarHomePage.selectDayOption.DETAILTIME,
                                      getDate(0, "MMM dd yyyy"),
                                      true,
                                      true);
-    calendarHomePage.deleteEventTask(titleEventGroup,
+    calendarHomePage.deleteEventTask(titleEventPersonal,
                                      CalendarHomePage.selectViewOption.MONTH,
                                      CalendarHomePage.selectDayOption.DETAILTIME,
                                      getDate(0, "MMM dd yyyy"),

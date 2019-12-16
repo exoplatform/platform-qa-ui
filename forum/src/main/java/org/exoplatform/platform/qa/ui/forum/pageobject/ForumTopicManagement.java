@@ -289,11 +289,11 @@ public class ForumTopicManagement {
   public void privatePostFromPost(String newTitle, String content) {
     $(byText(content)).parent().parent().parent().parent().find(byText("Private")).click();
     if (newTitle != "")
-      $(ELEMENT_TITLE_POST).setValue(newTitle);
+      $(ELEMENT_TITLE_POST).waitUntil(visible,Configuration.openBrowserTimeoutMs).setValue(newTitle);
 
     if (content != "") {
       switchTo().frame(0);
-      $(byXpath("/html/body")).sendKeys(content);
+      $(byXpath("/html/body")).waitUntil(visible,Configuration.openBrowserTimeoutMs).sendKeys(content);
       switchTo().defaultContent();
       executeJavaScript("window.scrollBy(0,1000)");
       executeJavaScript("window.scrollBy(0,1000)");
