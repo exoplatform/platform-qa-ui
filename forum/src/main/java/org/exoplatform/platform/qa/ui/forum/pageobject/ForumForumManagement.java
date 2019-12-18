@@ -52,15 +52,15 @@ public class ForumForumManagement {
 
     $(ELEMENT_ACTIONBAR_ADDFORUM).waitUntil(Condition.appears, Configuration.timeout);
     info("click on Add forum button");
-    $(ELEMENT_ACTIONBAR_ADDFORUM).click();
+    $(ELEMENT_ACTIONBAR_ADDFORUM).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("input the title for the forum");
-    $(ELEMENT_ADDFORUM_POPUP_TITLE).val(nameForum);
+    $(ELEMENT_ADDFORUM_POPUP_TITLE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).val(nameForum);
     info("check and input Oder field");
-    $(ELEMENT_ADDFORUM_POPUP_ORDER).val(order);
+    $(ELEMENT_ADDFORUM_POPUP_ORDER).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).val(order);
     info("check and input description");
-    $(ELEMENT_ADDFORUM_POPUP_DESCRIPTION).val(description);
+    $(ELEMENT_ADDFORUM_POPUP_DESCRIPTION).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).val(description);
     info("Click on Save button");
-    $(ELEMENT_ADDFORUM_POPUP_SAVE_BUTTON).click();
+    $(ELEMENT_ADDFORUM_POPUP_SAVE_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Finish adding new forum");
   }
 

@@ -560,7 +560,7 @@ public class NavigationToolbar {
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-    ELEMENT_ADMINISTRATION_ADD_USERS.waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_ADMINISTRATION_ADD_USERS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   public void goToManageCommunity() {

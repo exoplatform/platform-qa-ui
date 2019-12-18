@@ -407,7 +407,7 @@ public class ForumTopicTestIT extends Base {
     forumTopicManagement.closeOpenTopic(true);
     info("sign out and log in with user2");
     // manageLogInOut.signOut();
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
 
     info("go to Forum home page");
     homePagePlatform.goToForum();
@@ -435,7 +435,7 @@ public class ForumTopicTestIT extends Base {
 
     info("sign out and log in with user2");
     // manageLogInOut.signOut();
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
 
     info("go to Forum home page");
     homePagePlatform.goToForum();
