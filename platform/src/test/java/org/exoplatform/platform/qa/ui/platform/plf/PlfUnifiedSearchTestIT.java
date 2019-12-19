@@ -189,7 +189,7 @@ public class PlfUnifiedSearchTestIT extends Base {
    */
   @Test
   public void test03_SortSearchResult() {
-    String name = "space";
+    String name = "space" + getRandomNumber();
     String wiki = "wiki" + getRandomNumber();
     info("Test 3: Sort search result");
     homePagePlatform.goToMySpaces();
@@ -462,7 +462,7 @@ public class PlfUnifiedSearchTestIT extends Base {
     forumTopicManagement.startTopic(topic, topic, "", "");
     forumForumManagement.goToStartTopic();
     forumTopicManagement.startTopic(topic1, topic1, "", "");
-    manageLogInOut.signIn(PLFData.DATA_USER2, password);
+    manageLogInOut.signIn(PLFData.DATA_USER2, "gtngtngtn");
     navigationToolbar.goToQuickSearch();
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).setValue(topic);
     ELEMENT_DROP_DOWN_LIST_RESULT_IN_QUICK_SEARCH.waitUntil(Condition.visible, Configuration.timeout)

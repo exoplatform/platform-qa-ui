@@ -79,7 +79,7 @@ public class EcmsSEInfoTestIT extends Base {
     ecms_permission.deletePermissionNode("mary");
     ecms_permission.changeRight("user", "Mary", true, true, false, "");
     ecms_permission.closePermission();
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     navigationToolbar.goToSiteExplorer();
     // Check if mary has edit, read on node1
     siteExplorerHome.selectNode(node1);
@@ -119,7 +119,7 @@ public class EcmsSEInfoTestIT extends Base {
     ecms_permission.deletePermissionNode("mary");
     ecms_permission.changeRight("user", "Mary", true, true, false, "");
     ecms_permission.closePermission();
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     navigationToolbar.goToSiteExplorer();
     // Check if mary has edit, read on node1
     siteExplorerHome.selectNode(node1);
@@ -159,7 +159,7 @@ public class EcmsSEInfoTestIT extends Base {
     ecms_permission.deletePermissionNode("mary");
     ecms_permission.changeRight("user", "Mary", true, true, false, "");
     ecms_permission.closePermission();
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     navigationToolbar.goToSiteExplorer();
     // Check if mary has edit, read on node1
     siteExplorerHome.selectNode(node1);

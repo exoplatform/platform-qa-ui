@@ -21,10 +21,10 @@ public class RoomManagement {
     ELEMENT_CREATE_ROOM.waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_CREATE_ROOM.click();
     ELEMENT_POPUP_ROOM.waitUntil(Condition.appear, Configuration.timeout);
-    ELEMENT_ROOM_NAME.setValue(name);
+    ELEMENT_ROOM_NAME.waitUntil(Condition.visible, Configuration.timeout).setValue(name);
     for (int i = 0; i <= users.length - 1; i++) {
-        ELEMENT_CHAT_INPUT_ROOMUSERSS.setValue(users[i]);
-        ELEMENT_CHAT_RESULT_SEARCH_USER.should(Condition.visible);
+        ELEMENT_CHAT_INPUT_ROOMUSERSS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(users[i]);
+        ELEMENT_CHAT_RESULT_SEARCH_USER.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
         ELEMENT_CHAT_INPUT_ROOMUSERSS.pressEnter();
         sleep(Configuration.timeout);
     }
