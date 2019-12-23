@@ -2,24 +2,33 @@ package org.exoplatform.platform.qa.ui.onlyOffice;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
+import org.exoplatform.platform.qa.ui.ecms.pageobject.DocumentManagement;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.SiteExplorerHome;
+import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
 import org.exoplatform.platform.qa.ui.onlyOffice.pageobject.OnlyOfficeActivityStream;
 import org.exoplatform.platform.qa.ui.onlyOffice.pageobject.OnlyOfficeDocumentApplication;
 import org.exoplatform.platform.qa.ui.onlyOffice.pageobject.OnlyOfficeEditingPage;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
+import org.exoplatform.platform.qa.ui.selenium.platform.ecms.ECMS_Permission;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.onlyOffice.OnlyOfficeLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Configuration.*;
+
+import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
+import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
+import org.exoplatform.platform.qa.ui.selenium.platform.ConnectionsManagement;
 
 
 public class OnlyOfficeTestIT extends Base {
@@ -34,6 +43,12 @@ public class OnlyOfficeTestIT extends Base {
   OnlyOfficeDocumentApplication onlyOfficeDocumentApplication;
   OnlyOfficeActivityStream onlyOfficeActivityStream;
   OnlyOfficeEditingPage onlyOfficeEditingPage;
+
+  AddUsers addUsers;
+  UserAddManagement userAddManagement;
+  UserAndGroupManagement userAndGroupManagement;
+  DocumentManagement documentManagement;
+  ECMS_Permission ecms_permission;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -52,6 +67,11 @@ public class OnlyOfficeTestIT extends Base {
     if ($(ELEMENT_SKIP_BUTTON).is(exist)) {
       $(ELEMENT_SKIP_BUTTON).click();
     }
+
+    addUsers = new AddUsers(this);
+    connectionsManagement = new ConnectionsManagement(this);
+    documentManagement  = new DocumentManagement(this);
+    ecms_permission = new ECMS_Permission(this);
   }
 
   @Test
@@ -280,6 +300,92 @@ public class OnlyOfficeTestIT extends Base {
     onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentOdp,extensionOdp);
     onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentOds,extensionOds);
     onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentOdt,extensionOdt);
+    manageLogInOut.signOut();
+  }
+
+  @Test
+  /**
+   * EditOnline_BTN_US06
+   * Check that editing online with OO is possible only with "edit permission"
+   */
+  public void CheckEditOnlineWithEditPermission () {
+    String userA_name   = "usera"+getRandomString();
+    String userB_name   = "userb"+getRandomString();
+    String userC_name   = "userc"+getRandomString();
+    String email_A      = userA_name+"@gmail.com";
+    String email_B      = userB_name+"@gmail.com";
+    String email_C      = userC_name+"@gmail.com";
+    String password     = "123456";
+    String document = "OO_test";
+    String extension = ".docx";
+    String userName = PLFData.USER_ROOT;
+    String userPass = PLFData.PASS_ROOT;
+    info("Create new users");
+    homePagePlatform.goToHomePage();
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(userA_name,password,email_A,userA_name,userA_name);
+    addUsers.addUser(userB_name,password,email_B,userB_name,userB_name);
+    addUsers.addUser(userC_name,password,email_C,userC_name,userC_name);
+    manageLogInOut.signOut();
+    info("Connection with userA");
+    manageLogInOut.signIn(userB_name, password);
+    homePagePlatform.goToConnections();
+    connectionsManagement.connectToAUser(userA_name);
+    manageLogInOut.signOut();
+    manageLogInOut.signIn(userC_name, password);
+    homePagePlatform.goToHomePage();
+    homePagePlatform.goToConnections();
+    connectionsManagement.connectToAUser(userA_name);
+    manageLogInOut.signOut();
+    info("Accept connections");
+    manageLogInOut.signIn(userA_name,password);
+    homePagePlatform.goToConnections();
+    connectionsManagement.acceptAConnection(userB_name);
+    manageLogInOut.signOut();
+    manageLogInOut.signIn(userA_name,password);
+    homePagePlatform.goToConnections();
+    connectionsManagement.acceptAConnection(userC_name);
+    manageLogInOut.signIn(userA_name,password);
+    info("Upload document and add permissions");
+    homePagePlatform.goToDocuments();
+    SHOW_DRIVERS_BUTTON.waitUntil(visible, timeout).click();
+    USERS_DRIVER_BUTTON.waitUntil(visible, timeout).click();
+    getExoWebDriver().getWebDriver().manage().window().maximize();
+    siteExplorerHome.uploadFile(document + extension);
+    $(byText(document)).waitUntil(visible, timeout).click();
+    documentManagement.goToPermissions();
+    MODIFY_CHECKBOX_USERS.waitUntil(exist,timeout).toWebElement().click();
+    ecms_permission.changeRight("user", userB_name, true, true, true, "");
+    ecms_permission.changeRight("user", userC_name, true, false, true, "");
+    ecms_permission.closePermission();
+    manageLogInOut.signOut();
+    info("Check editing with permission");
+    manageLogInOut.signIn(userB_name,password);
+    homePagePlatform.goToDocuments();
+    SHOW_DRIVERS_BUTTON.waitUntil(visible, timeout).click();
+    USERS_DRIVER_BUTTON.waitUntil(visible, timeout).click();
+    $(byText(document)).waitUntil(visible, timeout).click();
+    $(SELECTOR_EDIT_ONlINE_BUTTON).should(exist);
+    manageLogInOut.signOut();
+    info("Check non editing with permission");
+    manageLogInOut.signIn(userC_name,password);
+    homePagePlatform.goToDocuments();
+    SHOW_DRIVERS_BUTTON.waitUntil(visible, timeout).click();
+    USERS_DRIVER_BUTTON.waitUntil(visible, timeout).click();
+    $(byText(document)).waitUntil(visible, timeout).click();
+    $(SELECTOR_EDIT_ONlINE_BUTTON).shouldNot(exist);
+    info("Delete document & Users");
+    homePagePlatform.goToDocuments();
+    SHOW_DRIVERS_BUTTON.waitUntil(visible, timeout).click();
+    USERS_DRIVER_BUTTON.waitUntil(visible, timeout).click();
+    siteExplorerHome.checkButtonDocument(document);
+    siteExplorerHome.clickDeleteButtonDocument();
+    manageLogInOut.signOut();
+    manageLogInOut.signIn(userName,userPass);
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(userA_name);
+    addUsers.deleteUser(userB_name);
+    addUsers.deleteUser(userC_name);
     manageLogInOut.signOut();
   }
 }

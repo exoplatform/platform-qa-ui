@@ -82,7 +82,7 @@ public class ECMS_Permission {
       sleep(2000);
       $(ELEMENT_SEARCH_USER_INPUT).setValue(name);
       $(byXpath("//span[@class='searchByUser']//a[@data-original-title='Quick Search']")).waitUntil(Condition.visible,Configuration.timeout).click();
-      $(By.xpath((ELEMENT_PERMISSION_USER_ADDUSER).replace("${name}", name))).click();
+      $(By.xpath((ELEMENT_PERMISSION_USER_ADDUSER).replace("${name}", name))).waitUntil(Condition.visible, Configuration.timeout).click();
     }
     if (user == "membership") {
       info("User is a membership");
@@ -97,7 +97,7 @@ public class ECMS_Permission {
     info("Check on checkbox for reading, modifying and removing");
     selectCheckBoxRight(read, modify, remove);
     info("Click on Save button");
-    $(ELEMENT_PERMISSION_SAVE).click();
+    $(ELEMENT_PERMISSION_SAVE).waitUntil(Condition.visible, Configuration.timeout).click();
     info("Finished changing right");
   }
 

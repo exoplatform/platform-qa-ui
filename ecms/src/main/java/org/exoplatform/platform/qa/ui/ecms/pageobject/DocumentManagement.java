@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 
+import static com.codeborne.selenide.Configuration.timeout;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
@@ -128,7 +129,7 @@ public class DocumentManagement {
             $(ELEMENT_ACTIONBAR_MORE).click();
             ELEMENT_BUTTON_PERMISSION_IN_MORE_DROP_DOWN_MENU.click();
         } else {
-            ELEMENT_BUTTON_PERMISSION.click();
+            ELEMENT_BUTTON_PERMISSION.waitUntil(Condition.exist,timeout).click();
         }
     }
 }

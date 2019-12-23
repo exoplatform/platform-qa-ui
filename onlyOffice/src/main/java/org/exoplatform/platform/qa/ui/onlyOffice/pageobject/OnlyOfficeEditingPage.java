@@ -34,7 +34,7 @@ public class OnlyOfficeEditingPage {
      * @param userName
      */
     public static void checkOpeningDocumentWithEditOnline(String documentName,String extension, String userName) {
-        $(byText(documentName + extension)).waitUntil(visible, openBrowserTimeoutMs);
+        $(byText(documentName + extension)).waitUntil(exist, openBrowserTimeoutMs);
         $(".editor").waitUntil(visible, 60000).exists();
         switchTo().frame("frameEditor");
         $("#title-user-name").waitUntil(exactText(userName), 120000);

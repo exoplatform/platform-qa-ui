@@ -1223,6 +1223,11 @@ public class ECMSLocator {
           By.xpath("//div[@class='uiAction uiActionBorder']/button[1]");
 
 
+   public static final SelenideElement SHOW_DRIVERS_BUTTON = $("#driveAction");
+   public static final SelenideElement USERS_DRIVER_BUTTON = $(".uiIconEcms24x24DriveGroup.uiIconEcms24x24LightGray.driveIcon");
+   public static final SelenideElement MODIFY_CHECKBOX_USERS = $("#\\*\\:\\/platform\\/usersaddNode");
+
+
 
 
 }
