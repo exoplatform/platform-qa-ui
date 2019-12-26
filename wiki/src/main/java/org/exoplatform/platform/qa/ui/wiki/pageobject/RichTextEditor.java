@@ -1470,12 +1470,12 @@ public class RichTextEditor {
   public void addSimplePageHasAutoSaveWithoutSave(String title, String content) {
     info("Input a title for the page");
     sleep(Configuration.timeout);
-    refresh();
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     if (!title.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).val(title);
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,15000).val(title);
     info("Input a content for the page");
     if (!content.isEmpty()) {
-      SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+      SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.timeout);
       $(byClassName("gwt-RichTextArea")).click();
       switchTo().frame(frame);
       $(byId("body")).sendKeys(content);

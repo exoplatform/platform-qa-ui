@@ -632,6 +632,7 @@ public class SpaceManagement {
    */
   public void goToSpace(String space) {
     info("Click on the title of the space");
+    searchSpace(space);
     $(byXpath(ELEMENT_ALL_SPACE_SPACE_NAME.replace("$space", space.toLowerCase()))).click();
     $(byXpath(ELEMENT_ALL_SPACE_SPACE_NAME.replace("$space", space))).waitUntil(Condition.not(Condition.visible),
             Configuration.timeout);

@@ -119,7 +119,7 @@ public class EcmsWCMTestIT extends Base {
     pageCreationWizard.inputPageInfoStep1(content, true, "English", content, true, false);
     click(ELEMENT_ADDNEWPAGE_BTNNEXT);
     click(ELEMENT_ADDNEWPAGE_BTNNEXT);
-    pageCreationWizard.addApplication($(ELEMENT_APPLICATION_CONTENT_TAB), $(byId("Content/ContentListViewerPortlet")));
+    pageCreationWizard.addApplication($(ELEMENT_APPLICATION_CONTENT_TAB), $(byId("Content/portlet_ContentListViewerPortlet")));
     pageCreationWizard.addContentlistByFolder("General Drives/Sites Management", "intranet");
     navigationToolbar.goToEditContent();
     sleep(Configuration.timeout);
@@ -173,7 +173,7 @@ public class EcmsWCMTestIT extends Base {
     sleep(Configuration.timeout);
     $(ELEMENT_ADDNEWPAGE_BTNNEXT).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
-    pageCreationWizard.addApplication($(ELEMENT_APPLICATION_CONTENT_TAB), $(byId("Content/ContentListViewerPortlet")));
+    pageCreationWizard.addApplication($(ELEMENT_APPLICATION_CONTENT_TAB), $(byId("Content/portlet_ContentListViewerPortlet")));
     pageCreationWizard.addContentListByContent("General Drives/Sites Management/intranet", content);
     navigationToolbar.goToEditContent();
     ELEMENT_LIST_CONTENT.find(byText(content)).waitUntil(Condition.visible, Configuration.timeout);

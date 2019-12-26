@@ -180,7 +180,7 @@ public class ReplyToCommentTestIT extends Base {
         connectionsManagement.connectToAUser(DATA_USER2);
         homePagePlatform.goToHomePage();
         activityStream.addActivity(activity, "");
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
@@ -221,7 +221,7 @@ public class ReplyToCommentTestIT extends Base {
         connectionsManagement.connectToAUser(DATA_USER2);
         homePagePlatform.goToHomePage();
         activityStream.addActivity(activity, "");
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
@@ -250,7 +250,7 @@ public class ReplyToCommentTestIT extends Base {
         connectionsManagement.connectToAUser(DATA_USER2);
         homePagePlatform.goToHomePage();
         activityStream.addActivity(activity, "");
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
@@ -260,7 +260,7 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToHomePage();
         activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
         $(byText(reply)).waitUntil(Condition.appears, Configuration.timeout);
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         activityStream.replyToReply(activity, reply, replytoreply);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
@@ -279,7 +279,7 @@ public class ReplyToCommentTestIT extends Base {
         connectionsManagement.connectToAUser(DATA_USER2);
         homePagePlatform.goToHomePage();
         activityStream.addActivity(activity, "");
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
@@ -289,7 +289,7 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToHomePage();
         activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
         $(byText(reply)).waitUntil(Condition.appears, Configuration.timeout);
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         activityStream.replyToReply(activity, reply, replytoreply);
         activityStream.deletecomment(activity, comment);
         $(byText(reply)).shouldNot(Condition.exist);
@@ -322,7 +322,7 @@ public class ReplyToCommentTestIT extends Base {
         info("Add a new topic");
         forumForumManagement.goToStartTopic();
         forumTopicManagement.startTopic(nameTopic, description, "", "");
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToForum();
@@ -373,7 +373,7 @@ public class ReplyToCommentTestIT extends Base {
         info("Add a new topic");
         forumForumManagement.goToStartTopic();
         forumTopicManagement.startTopic(nameTopic, description, "", "");
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
@@ -724,7 +724,7 @@ public class ReplyToCommentTestIT extends Base {
         tasksManagement.addTask(task);
         $(byText(task)).should(Condition.exist);
         tasksManagement.addCoworker(task);
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToTaskPage();
         tasksManagement.commentTask(task, comment);
         manageLogInOut.signOut();
@@ -743,7 +743,7 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToTaskPage();
         tasksManagement.addTask(task);
         tasksManagement.addCoworker(task);
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToTaskPage();
         tasksManagement.commentTask(task, comment);
         manageLogInOut.signOut();
@@ -765,14 +765,14 @@ public class ReplyToCommentTestIT extends Base {
         tasksManagement.addTask(task);
         $(byText(task)).should(Condition.exist);
         tasksManagement.addCoworker(task);
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToTaskPage();
         tasksManagement.commentTask(task, comment);
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
         homePagePlatform.goToTaskPage();
         tasksManagement.replyToCommentTask(task, reply, DATA_NAME_USER1);
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToTaskPage();
         tasksManagement.replyToReply(task, reply, replytoreply, DATA_NAME_USER2);
         manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
@@ -791,7 +791,7 @@ public class ReplyToCommentTestIT extends Base {
         tasksManagement.addTask(task);
         tasksManagement.addCoworker(task);
         //login mary
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToTaskPage();
         tasksManagement.commentTask(task, comment);
         manageLogInOut.signOut();
@@ -826,7 +826,7 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToTaskPage();
         tasksManagement.addTask(task);
         tasksManagement.addCoworker(task);
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToTaskPage();
         tasksManagement.commentTask(task, comment);
         manageLogInOut.signOut();
@@ -858,7 +858,7 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToTaskPage();
         tasksManagement.addTask(task);
         tasksManagement.addCoworker(task);
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToTaskPage();
         tasksManagement.commentTask(task, comment);
         manageLogInOut.signOut();
@@ -885,7 +885,7 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToTaskPage();
         tasksManagement.addTask(task);
         tasksManagement.addCoworker(task);
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2,"gtngtngtn");
         homePagePlatform.goToTaskPage();
         tasksManagement.commentTask(task, comment);
         manageLogInOut.signOut();
@@ -893,7 +893,7 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToTaskPage();
         tasksManagement.replyToCommentTask(task, reply, DATA_NAME_USER1);
         $(byText(reply)).waitUntil(Condition.appears, Configuration.timeout);
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToTaskPage();
         tasksManagement.replyToReply(task, reply, replytoreply, DATA_NAME_USER2);
         tasksManagement.deleteComment(task, comment);
@@ -964,7 +964,7 @@ public class ReplyToCommentTestIT extends Base {
         activityStream.addActivity(activity, "");
         activityStream.commentActivity(activity, comment);
         activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
@@ -1006,12 +1006,12 @@ public class ReplyToCommentTestIT extends Base {
         activityStream.addActivity(activity, "");
         activityStream.commentActivity(activity, comment);
         activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
         activityStream.likeReply(reply);
-        manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER3, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
@@ -1048,17 +1048,17 @@ public class ReplyToCommentTestIT extends Base {
         activityStream.addActivity(activity, "");
         activityStream.commentActivity(activity, comment);
         activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
         activityStream.likeReply(reply);
-        manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER3, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
         activityStream.likeReply(reply);
-        manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER4, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
@@ -1104,7 +1104,7 @@ public class ReplyToCommentTestIT extends Base {
         $(byText(comment)).should(Condition.exist);
         activityStream.replyToCommentInPreview(comment, reply, DATA_NAME_USER1);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
@@ -1160,7 +1160,7 @@ public class ReplyToCommentTestIT extends Base {
         $(byText(comment)).should(Condition.exist);
         activityStream.replyToCommentInPreview(comment, reply, DATA_NAME_USER1);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
@@ -1168,7 +1168,7 @@ public class ReplyToCommentTestIT extends Base {
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).click();
         $(byId("commentArea")).find(byText(reply)).parent().find(byClassName("likeCommentLink")).click();
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-        manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER3, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
@@ -1226,7 +1226,7 @@ public class ReplyToCommentTestIT extends Base {
         $(byText(comment)).should(Condition.exist);
         activityStream.replyToCommentInPreview(comment, reply, DATA_NAME_USER1);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
@@ -1234,7 +1234,7 @@ public class ReplyToCommentTestIT extends Base {
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).click();
         $(byId("commentArea")).find(byText(reply)).parent().find(byClassName("likeCommentLink")).click();
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-        manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER3, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
@@ -1242,7 +1242,7 @@ public class ReplyToCommentTestIT extends Base {
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).click();
         $(byId("commentArea")).find(byText(reply)).parent().find(byClassName("likeCommentLink")).click();
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-        manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER4, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();

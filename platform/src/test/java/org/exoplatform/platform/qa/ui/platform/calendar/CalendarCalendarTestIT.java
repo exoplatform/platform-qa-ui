@@ -102,7 +102,7 @@ public class CalendarCalendarTestIT extends Base {
     calendarManagement.saveAddCalendar();
     $(byXpath(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar", calendarName))).waitUntil(Condition.visible, Configuration.timeout);
     calendarManagement.shareCalendar(calendarName, groupShare, edit, 1);
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     homePagePlatform.goToCalendarPage();
     $(byXpath(ELEMENT_SHARED_CALENDAR_LIST_ITEM.replace("$calendar", calendarName))).should(Condition.visible);
     calendarManagement.openMenuOfCalendar(calendarName);
@@ -158,7 +158,7 @@ public class CalendarCalendarTestIT extends Base {
     calendarManagement.saveAddCalendar();
     $(byXpath(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar", calendarName))).waitUntil(Condition.visible, Configuration.timeout);
     calendarManagement.shareCalendar(calendarName, groupShare, edit, 1);
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     homePagePlatform.goToCalendarPage();
     $(byXpath(ELEMENT_SHARED_CALENDAR_LIST_ITEM.replace("$calendar", calendarName))).should(Condition.visible);
     calendarManagement.openMenuOfCalendar(calendarName);
@@ -181,7 +181,7 @@ public class CalendarCalendarTestIT extends Base {
     $(byXpath(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar", newCalendar))).should(Condition.visible);
     calendarManagement.shareCalendar(newCalendar, groupShare, newEdit, 1);
     $(byXpath(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar", newCalendar))).should(Condition.visible);
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     homePagePlatform.goToCalendarPage();
     calendarManagement.openMenuOfCalendar(newCalendar);
     $(ELEMENT_CALENDAR_REMOVE_SHARE_CALENDAR).should(Condition.visible);
@@ -217,13 +217,13 @@ public class CalendarCalendarTestIT extends Base {
     calendarManagement.saveAddCalendar();
     $(byXpath(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar", calendarName))).should(Condition.visible);
     calendarManagement.shareCalendar(calendarName, groupShare, edit, 1);
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     homePagePlatform.goToCalendarPage();
     $(byXpath(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar", calendarName))).should(Condition.visible);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     homePagePlatform.goToCalendarPage();
     calendarManagement.removeUserGrooupFromShareCalendar(calendarName, groupShare);
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     homePagePlatform.goToCalendarPage();
     $(byXpath(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar", calendarName))).shouldNot(Condition.visible);
     info("Clear data");

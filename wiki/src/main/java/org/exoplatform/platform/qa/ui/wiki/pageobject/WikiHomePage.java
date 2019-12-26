@@ -381,6 +381,7 @@ public class WikiHomePage {
      */
     public void closeSpaceSwitcherByClickOutSide() {
         info("Click on outside to close space switcher");
+        testBase.getExoWebDriver().getWebDriver().navigate().refresh();
         $(ELEMENT_SPACE_SWITCHER_OUTSIDE).click();
         evt.waitForElementNotPresent(ELEMENT_SPACE_SWITCHER_INPUT);
     }

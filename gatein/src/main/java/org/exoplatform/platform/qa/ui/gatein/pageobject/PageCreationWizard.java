@@ -142,9 +142,9 @@ public class PageCreationWizard {
     $(ELEMENT_PAGEEDITOR_VIEWPAGE).hover();
     $(ELEMENT_CONTENT_LIST_EDIT_BTN).click();
     contList.selectFolderContent(path, folder);
-    $(ELEMENT_CONTENT_LIST_SAVE_BTN).click();
-    $(ELEMENT_CONTENT_LIST_CLOSE_BTN).click();
-    $(ELEMENT_PAGE_FINISH_BTN).click();
+    $(ELEMENT_CONTENT_LIST_SAVE_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_CONTENT_LIST_CLOSE_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_PAGE_FINISH_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
   }
 
@@ -173,7 +173,7 @@ public class PageCreationWizard {
    * @param content String
    */
   public void addContentDetail(String path, String content) {
-    addApplication($(byTitle("Content")), $(byId("Content/SingleContentViewer")));
+    addApplication($(byTitle("Content")), $(byId("Content/portlet_SingleContentViewer")));
 
     $(ELEMENT_PAGEEDITOR_VIEWPAGE).waitUntil(Condition.appears, Configuration.timeout).click();
     $(ELEMENT_CONTENT_DETAIL_EDIT_BTN).waitUntil(Condition.visible,Configuration.timeout).click();

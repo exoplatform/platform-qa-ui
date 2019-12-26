@@ -31,7 +31,7 @@ public class ContentDetail {
    * @param content String
    */
   public void selectFolderContent(String path, String content) {
-    $(byClassName("uiIconAddPath")).click();
+    $(byClassName("uiIconAddPath")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     String[] arrayPath = path.split("/");
     for (String arrayElement : arrayPath) {
       $(byId("LeftWorkspace")).find(byText(arrayElement)).waitUntil(Condition.visible,Configuration.timeout).click();

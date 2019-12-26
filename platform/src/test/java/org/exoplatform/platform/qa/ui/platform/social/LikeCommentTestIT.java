@@ -97,19 +97,19 @@ public class LikeCommentTestIT extends Base {
                                                .getAttribute("id")
                                                .split("commentContainercomment")[1];
 
-    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
     activityStream.likeUnlikeComment(activity1, comment);
 
-    manageLogInOut.signIn(PLFData.DATA_USER3, PLFData.DATA_PASS);
+    manageLogInOut.signIn(PLFData.DATA_USER3, "gtngtngtn");
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
     activityStream.likeUnlikeComment(activity1, comment);
 
-    manageLogInOut.signIn(PLFData.DATA_USER4, PLFData.DATA_PASS);
+    manageLogInOut.signIn(PLFData.DATA_USER4, "gtngtngtn");
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -144,19 +144,19 @@ public class LikeCommentTestIT extends Base {
                                                .getAttribute("id")
                                                .split("commentContainercomment")[1];
 
-    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
     activityStream.likeUnlikeComment(activity1, comment);
 
-    manageLogInOut.signIn(PLFData.DATA_USER3, PLFData.DATA_PASS);
+    manageLogInOut.signIn(PLFData.DATA_USER3, "gtngtngtn");
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
     activityStream.likeUnlikeComment(activity1, comment);
 
-    manageLogInOut.signIn(PLFData.DATA_USER4, PLFData.DATA_PASS);
+    manageLogInOut.signIn(PLFData.DATA_USER4, "gtngtngtn");
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -165,7 +165,7 @@ public class LikeCommentTestIT extends Base {
     manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().shouldHave(Condition.text("(3)"));
     // connect with user 4 and unlike comment
-    manageLogInOut.signIn(PLFData.DATA_USER4, PLFData.DATA_PASS);
+    manageLogInOut.signIn(PLFData.DATA_USER4, "gtngtngtn");
     activityStream.likeUnlikeComment(activity1, comment);
     manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().shouldHave(Condition.text("(2)"));

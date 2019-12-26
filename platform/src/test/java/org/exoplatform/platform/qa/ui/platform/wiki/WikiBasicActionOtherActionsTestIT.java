@@ -603,7 +603,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     String perLink = ELEMENT_WIKI_PERMELINK.getValue();
     ELEMENT_BUTTON_CLOSE_PERMALINK.click();
     ELEMENT_BUTTON_CLOSE_PERMALINK.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     open(perLink);
     refresh();
     $(byText(title)).should(Condition.exist);
@@ -647,7 +647,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     String perLink = ELEMENT_WIKI_PERMELINK.getValue();
     ELEMENT_BUTTON_CLOSE_PERMALINK.click();
     ELEMENT_BUTTON_CLOSE_PERMALINK.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     open(perLink);
     refresh();
     $(ELEMENT_WIKI_HOME_PAGENOTFOUND).should(Condition.exist);
@@ -689,7 +689,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     wikiHomePage.goToAddBlankPage();
     richTextEditor.addSimplePage(wiki, wiki);
     wikiManagement.saveAddPage();
-    manageLogInOut.signIn(DATA_USER2, password);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     homePagePlatform.goToMySpaces();
     spaceManagement.goToAllSpacesTab();
     info("send request by user 2");
@@ -708,7 +708,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     String perLink = ELEMENT_WIKI_PERMELINK.getValue();
     ELEMENT_BUTTON_CLOSE_PERMALINK.click();
     ELEMENT_BUTTON_CLOSE_PERMALINK.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     open(perLink);
     refresh();
     $(byText(wiki)).should(Condition.exist);
@@ -756,7 +756,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     String perLink = ELEMENT_WIKI_PERMELINK.getValue();
     ELEMENT_BUTTON_CLOSE_PERMALINK.click();
     ELEMENT_BUTTON_CLOSE_PERMALINK.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     open(perLink);
     refresh();
     $(ELEMENT_WIKI_HOME_PAGENOTFOUND).waitUntil(Condition.appears, Configuration.timeout);
@@ -794,7 +794,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     wikiManagement.saveAddPage();
 
     info("Watch the wiki");
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     homePagePlatform.goToWiki();
     wikiHomePage.goToAPage(wiki);
     wikiManagement.watchAPage(mess1);
@@ -1058,7 +1058,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     info("Create space 1 and wiki page 1");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
-    manageLogInOut.signIn(DATA_USER2, password);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     homePagePlatform.goToMySpaces();
     spaceManagement.goToAllSpacesTab();
     info("send request by user 2");
@@ -1099,7 +1099,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     wikiPermission.selectPermission(DATA_USER2, WikiPermission.permissionType.Edit_Pages);
     wikiPermission.savePermisison();
 
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     homePagePlatform.goToMySpaces();
     ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceHomePage.goToWikiTab();
