@@ -315,7 +315,8 @@ public class CalendarLocator {
                                                                     "//*[@id='UIMonthViewGrid']//*[contains(@starttimefull,'$date')]";
 
   public static final String          ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW                        =
-                                                                                "//*[@id='UIMonthView']//*[@class='eventMonthContent']//*[@class='rowContainerDay']/*[contains(@starttimefull,'$date')]//span[contains(text(),'$name')]";
+
+                                                                    "//*[@id='UIMonthView']//*[@class='eventMonthContent']//*[@class='rowContainerDay']//*[contains(text(),'$name')]/preceding::*[contains(@starttimefull,'$date')]";
 
   public static final String          ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE                   =
                                                                                      "//*[@id='UIMonthView']//*[@class='eventMonthContent']//*[@class='moreEventContainer']//*[contains(@starttimefull,'$date')]//span[contains(text(),'$name')]";

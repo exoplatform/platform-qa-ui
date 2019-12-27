@@ -54,13 +54,13 @@ public class CalendarHomePage {
     executeJavaScript("window.scrollBy(0,-5500)", "");
     switch (view) {
       case DAY:
-        ELEMENT_CALENDAR_DAY_BUTTON.click();
+        ELEMENT_CALENDAR_DAY_BUTTON.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         break;
       case WEEK:
-        ELEMENT_CALENDAR_WEEK_BUTTON.click();
+        ELEMENT_CALENDAR_WEEK_BUTTON.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         break;
       case LIST:
-        ELEMENT_CALENDAR_LIST_BUTTON.click();
+        ELEMENT_CALENDAR_LIST_BUTTON.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         break;
       case MONTH:
         sleep(Configuration.timeout);
@@ -182,8 +182,19 @@ public class CalendarHomePage {
       }
       else
       {
+        sleep(2000);
+        testBase.getExoWebDriver().getWebDriver().navigate().refresh();
         $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date",
-                date))).contextClick();
+                date))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).contextClick();
+        sleep(1000);
+        if($(ELEMENT_CONTEXT_MENU_DELETE).isDisplayed()) {
+          info("Delete Icon exists");
+        }
+        else{
+          testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+          $(byXpath("//*[@class='eventSummary']//*[contains(text(),'${titName}')]".replace("${titName}",name))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).contextClick();
+        }
+
       }
     }
     else {
@@ -373,14 +384,14 @@ public class CalendarHomePage {
         break;
       case LIST:
         if ($(ELEMENT_TOTAL_PAGE).is(Condition.visible)) {
-          $(byXpath(ELEMENT_ANY_PAGE.replace("$page", "1"))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+          $(byXpath(ELEMENT_ANY_PAGE.replace("$page", "1"))).click();
           while (!(evt.waitForAndGetElement(ELEMENT_TOTAL_PAGE)
                   .getText()
                   .equals(evt.waitForAndGetElement(ELEMENT_CURRENT_PAGE).getText()))) {
             evt.click(ELEMENT_NEXT_PAGE);
             evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
           }
-          $(byXpath(ELEMENT_ANY_PAGE.replace("$page", "1"))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+          evt.click(ELEMENT_ANY_PAGE.replace("$page", "1"));
         } else {
           evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name));
         }
@@ -388,6 +399,7 @@ public class CalendarHomePage {
 
         break;
       case MONTH:
+        sleep(2000);
         $(byXpath(ELEMENT_EVENT_TASK_MONTH_VIEW.replace("$name", name))).shouldNotBe(Condition.visible);
         break;
       case WORKWEEK:
@@ -670,6 +682,11 @@ public class CalendarHomePage {
           $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE_ICON.replace("$date", date))).click();
           $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE.replace("$name", name).replace("$date", date))).waitUntil(Condition.visible,Configuration.timeout);
         } else
+          if(!$(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))).isDisplayed()) {
+            $(byXpath("(//i[@class='uiIconMiniArrowRight uiIconLightGray'])[2]")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+            $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))).waitUntil(Condition.visible,Configuration.timeout);
+            $(byXpath("(//i[@class='uiIconMiniArrowLeft uiIconLightGray'])[3]")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+          }
           $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))).waitUntil(Condition.visible,Configuration.timeout);
 
         break;
@@ -1007,7 +1024,7 @@ public class CalendarHomePage {
     info("Delete event/tak: " + name);
     Button button = new Button(this.testBase);
     goToRightMenuTaskEventFromAnyView(name, view, optionDay, date);
-    $(ELEMENT_CONTEXT_MENU_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_CONTEXT_MENU_DELETE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     if (isVerify) {
       if (isEvent) {
         $(byText(ELEMENT_CONFIRM_DELETE_EVENT_MSG)).waitUntil(Condition.appears, Configuration.timeout);
@@ -1020,7 +1037,7 @@ public class CalendarHomePage {
       verifyIsNotPresentEventTask(name, view, optionDay);
     } else
       button.yes();
-    $(byText(name)).waitUntil(Condition.disappears, Configuration.timeout);
+    $(byText(name)).waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs);
   }
 
   /**
@@ -1033,7 +1050,7 @@ public class CalendarHomePage {
     if (option != null) {
       switch (option) {
         case ALL:
-          evt.select(ELEMENT_CATEGORY_OPTION, "All", 2);
+          evt.select(ELEMENT_CATEGORY_OPTION, "Events", 2);
           break;
         case ANNIVERSARY:
           evt.select(ELEMENT_CATEGORY_OPTION, "Anniversary", 2);

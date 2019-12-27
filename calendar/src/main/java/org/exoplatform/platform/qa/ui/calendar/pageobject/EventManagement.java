@@ -182,7 +182,8 @@ public class EventManagement {
       $(ELEMENT_ADD_EDIT_EVENT_NOTE).setValue(note);
     }
     if (opt.length > 0 && opt[0] != null) {
-      $(byId("calendar")).selectOption(opt[0]);
+      $(byXpath("//*[@class='control-label']/following::*[@class='dropdown']")).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+      $(byXpath("//*[@class='dropdown-submenu']//*[@class='trimText' and contains(text(),'${calendarName}')]".replace("${calendarName}",opt[0]))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     }
     if (opt.length > 1 && opt[1] != null) {
       $(byXpath("//*[@id='ExoCalendarEventForm']/div[1]/div[2]/form/div[1]/div[2]/span/select")).selectOption(opt[1]);
@@ -888,8 +889,8 @@ public class EventManagement {
     boolean isVerify = (Boolean) (opParams.length > 0 ? opParams[0] : false);
     info("Delete event/tak: " + name);
     cHome.goToRightMenuTaskEventFromAnyView(name, view, optionDay, date);
-    $(ELEMENT_CONTEXT_MENU_DELETE).click();
-    $(ELEMENT_DELETE_RECURRING_EVENT_FORM).waitUntil(Condition.visible, Configuration.timeout);
+    $(ELEMENT_CONTEXT_MENU_DELETE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_DELETE_RECURRING_EVENT_FORM).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     if (isVerify) {
       $(ELEMENT_CONFIRM_DELETE_RECURRING_EVENT).waitUntil(Condition.visible, Configuration.timeout);
       $(ELEMENT_DELETE_ONE_EVENT).parent().waitUntil(Condition.visible, Configuration.timeout);
@@ -1255,7 +1256,7 @@ public class EventManagement {
     $(byText("Add Event")).should(Condition.exist);
     assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
     $(byXpath("//span/select[@class='selectbox category']")).should(Condition.appears);
-    assertEquals("All", ELEMENT_EVENT_CATEGORY.getText());
+    assertEquals("Events", ELEMENT_EVENT_CATEGORY.getText());
     assertEquals("All day", $(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
     assertEquals("Location", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[1]")).getText());
     assertEquals("Enter a location for this event", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));

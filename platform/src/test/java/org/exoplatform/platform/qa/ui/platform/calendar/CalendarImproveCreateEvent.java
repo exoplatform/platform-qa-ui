@@ -165,7 +165,7 @@ public class CalendarImproveCreateEvent extends Base {
     ELEMENT_EVENT_DESCRIPTION.setValue("Description");
     ELEMENT_EVENT_CLEAR_BUTTON.click();
     assertEquals("", ELEMENT_EVENT_DRAWER_TITLE.getText());
-    assertEquals("All", ELEMENT_EVENT_CATEGORY.getText());
+    assertEquals("Events", ELEMENT_EVENT_CATEGORY.getText());
     assertEquals("", ELEMENT_EVENT_LOCATION.getText());
     assertEquals("", ELEMENT_EVENT_DESCRIPTION.getText());
     ELEMENT_EVENT_CANCEL_BUTTON.click();

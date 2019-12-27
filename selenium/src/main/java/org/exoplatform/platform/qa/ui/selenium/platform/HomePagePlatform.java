@@ -33,7 +33,7 @@ public class HomePagePlatform {
   public void goToWiki() {
     info("--Go to Wiki--");
     refreshUntil($(ELEMENT_WIKI_LINK_PLF), Condition.visible, 500);
-    $(ELEMENT_WIKI_LINK_PLF).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_WIKI_LINK_PLF).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     $(ELEMENT_WIKI_LINK_PLF).click();
     refreshUntil($(ELEMENT_WIKI_LINK_PLF), Condition.visible, 500);
     sleep(Configuration.timeout);

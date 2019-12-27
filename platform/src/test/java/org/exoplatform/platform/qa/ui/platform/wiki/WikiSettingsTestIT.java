@@ -270,7 +270,7 @@ public class WikiSettingsTestIT extends Base {
     wikiPermission.addPermisisonByType(DATA_USER2);
     $(ELEMENT_ADD_PERMISSION).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_SAVE_PERMISSION).waitUntil(Condition.visible,Configuration.timeout).click();
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     info("Check if mary can see the page");
     homePagePlatform.goToWiki();
     wikiHomePage.selectAPage(wiki);
@@ -360,7 +360,7 @@ public class WikiSettingsTestIT extends Base {
     wikiPermission.addPermisisonByType(DATA_USER2);
     click(ELEMENT_ADD_PERMISSION);
     click(ELEMENT_SAVE_PERMISSION);
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     info("Check if mary can see the page");
     homePagePlatform.goToWiki();
     wikiHomePage.selectAPage(wiki);
@@ -373,7 +373,7 @@ public class WikiSettingsTestIT extends Base {
     $(byText(DATA_NAME_USER2)).parent().parent().find(ELEMENT_WIKI_ICON_DELETE_PERMISSION).click();
     click(ELEMENT_SAVE_PERMISSION);
 
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     homePagePlatform.goToWiki();
     $(byText(wiki)).shouldNot(exist);
 
@@ -415,7 +415,7 @@ public class WikiSettingsTestIT extends Base {
     wikiPermission.addPermisisonByType(DATA_USER2);
     click(ELEMENT_ADD_PERMISSION);
     click(ELEMENT_SAVE_PERMISSION);
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     open(perLink);
     refresh();
     $(byText(wiki)).waitUntil(Condition.appears, Configuration.timeout);
@@ -461,7 +461,7 @@ public class WikiSettingsTestIT extends Base {
     // mary can now edit the page
     ELEMENT_WIKI_ICON_EDIT_PERMISSION_FOR_MARY.click();
     click(ELEMENT_SAVE_PERMISSION);
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     open(perLink);
     refresh();
     wikiHomePage.goToEditPage();

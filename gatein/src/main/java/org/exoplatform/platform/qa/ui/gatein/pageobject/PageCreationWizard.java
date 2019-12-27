@@ -572,7 +572,7 @@ public class PageCreationWizard {
       info("Select group:" + groupSelect);
       // evt.click(ELEMENT_ADD_PERMISSION_SELECTOR_POPUP_GROUP.replace("${group}",
       // groupSelect), 0, true);
-      $(byXpath("(//*[@title='${groupSelect}'])[2]".replace("${groupSelect}",groupSelect))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+      $(byXpath("(//*[@title='${groupSelect}'])[1]".replace("${groupSelect}",groupSelect))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
 
   }

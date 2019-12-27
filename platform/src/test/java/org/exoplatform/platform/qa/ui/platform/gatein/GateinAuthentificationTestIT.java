@@ -123,7 +123,7 @@ public  void test03_RememberMyLogin() {
 
     *Expected Outcome:
         When user opens the GateIn again, User automatically go to private mode and do not have to sign in*/
-   manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+   manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
    ELEMENT_PLF_HOMEPAGE_DISPLAY.waitUntil((Condition.visible),Configuration.timeout);
 
  }

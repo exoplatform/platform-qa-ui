@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.gatein;
 
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
@@ -128,7 +129,7 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
      */
     manageLogInOut.signIn("root", "gtn");
     navigationToolbar.goToPotalSites();
-    portalmanagesites.goToEditNavigation();
+    $(byXpath("//div[@class=\"siteName\" and text()=\"intranet\"]/following::*[@class=\"uiIconNavigation uiIconLightGray\"]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Add a new node");
     navigationmanagement.addNode(nodeName, "");
     navigationmanagement.inputInfoPageSelector(namePage, titlePage, true, false, false);
@@ -143,7 +144,7 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
      * Outcome: Page Setting, Permission setting tab are updated successfully with
      * new changes
      */
-    portalmanagesites.goToEditNavigation();
+    $(byXpath("//div[@class=\"siteName\" and text()=\"intranet\"]/following::*[@class=\"uiIconNavigation uiIconLightGray\"]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     navigationmanagement.editNodePage(nodeName);// go to declaration de automate
     // right click
     pagecreationwizard.viewProperties();
@@ -163,8 +164,9 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
     pagecreationwizard.saveChangesPageEditor();
     if (!titleActual.equals(newTitlePage))
       assert false : "The title:" + newTitlePage + " is not updated";
+    $(ELEMENT_NAVIGATION_MANAGEMENT_SAVE).click();
     navigationToolbar.goToPotalSites();
-    portalmanagesites.goToEditNavigation();
+    $(byXpath("//div[@class=\"siteName\" and text()=\"intranet\"]/following::*[@class=\"uiIconNavigation uiIconLightGray\"]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
     info("Test 03: Delete node");
     /*

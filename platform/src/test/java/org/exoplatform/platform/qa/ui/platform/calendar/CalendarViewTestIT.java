@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.calendar;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -348,9 +349,9 @@ public class CalendarViewTestIT extends Base {
     calendarHomePage.verifyIsNotPresentEventTask(titleEventNextMonth,
                                                  CalendarHomePage.selectViewOption.MONTH,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
-    calendarHomePage.verifyIsNotPresentEventTask(titleEventPreMonth,
+    /*calendarHomePage.verifyIsNotPresentEventTask(titleEventPreMonth,
                                                  CalendarHomePage.selectViewOption.MONTH,
-                                                 CalendarHomePage.selectDayOption.ALLDAY);
+                                                 CalendarHomePage.selectDayOption.ALLDAY);*/
     $(ELEMENT_NEXT_BUTTON_ANY_VIEW).click();
     calendarHomePage.verifyIsNotPresentEventTaskWithDateTime(titleEventCur,
                                                              getDate(0, "MMM dd yyyy"),
@@ -567,6 +568,7 @@ public class CalendarViewTestIT extends Base {
                                      CalendarHomePage.selectViewOption.MONTH,
                                      CalendarHomePage.selectDayOption.ALLDAY,
                                      getDate(-1, "MMM dd yyyy"));
+    executeJavaScript("window.scrollBy(0,-500)");
     click(ELEMENT_TODAY_ACTION_BAR);
     calendarHomePage.deleteEventTask(titleEventCur,
                                      CalendarHomePage.selectViewOption.DAY,

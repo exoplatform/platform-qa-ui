@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.platform.calendar;
 
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER2;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
@@ -465,7 +466,7 @@ public class CalendarPublishActivityTestIT extends Base {
 
     homePagePlatform.goToHomePage();
     $(byXpath(ELEMENT_ACTIVITY_TASK_EVENT_COMMENT.replace("$name", newTitleEvent).replace("$comment",
-                                                                                          comment))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).exists();
+                                                                                          comment))).should(Condition.visible);
 
     info("Clear data");
     homePagePlatform.goToCalendarPage();
@@ -519,7 +520,7 @@ public class CalendarPublishActivityTestIT extends Base {
     eventManagement.saveAddEventDetails();
     homePagePlatform.goToHomePage();
     $(byXpath(ELEMENT_ACTIVITY_TASK_EVENT_COMMENT.replace("$name", titleEvent).replace("$comment",
-                                                                                       comment))).should(Condition.visible);
+                                                                                       comment))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
     info("Clear data");
     homePagePlatform.goToCalendarPage();
     calendarHomePage.deleteEventTask(titleEvent,
@@ -817,13 +818,13 @@ public class CalendarPublishActivityTestIT extends Base {
     calendarManagement.deleteCalendar(shareCalendar, false);
 
     homePagePlatform.goToCalendarPage();
-    calendarHomePage.deleteEventTask(titleEventPersonal,
+    calendarHomePage.deleteEventTask(titleEventGroup,
                                      CalendarHomePage.selectViewOption.MONTH,
                                      CalendarHomePage.selectDayOption.DETAILTIME,
                                      getDate(0, "MMM dd yyyy"),
                                      true,
                                      true);
-    calendarHomePage.deleteEventTask(titleEventGroup,
+    calendarHomePage.deleteEventTask(titleEventPersonal,
                                      CalendarHomePage.selectViewOption.MONTH,
                                      CalendarHomePage.selectDayOption.DETAILTIME,
                                      getDate(0, "MMM dd yyyy"),

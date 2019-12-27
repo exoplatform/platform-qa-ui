@@ -351,7 +351,7 @@ public class WikiHomePage {
      */
     public void goToSpaceSwitcher() {
         info("Click on drop down");
-        $(ELEMENT_SPACE_DROP_DOWN).click();
+        $(ELEMENT_SPACE_DROP_DOWN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
 
     /**
