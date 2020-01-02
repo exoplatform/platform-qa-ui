@@ -1911,10 +1911,10 @@ public class ActivityStream {
     public static void uploadFileFromAS(String fileName) {
         // Make sure the Activity Composer File tab is not hidden by the top bar
         executeJavaScript("window.scrollTo(0,0)");
-        ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.waitUntil(exist, openBrowserTimeoutMs).click();
-        ELEMENT_INPUT_DOCUMENT.waitUntil(exist, openBrowserTimeoutMs).uploadFromClasspath(fileName);
-        ELEMENT_BAR_PROGRESS.waitUntil(disappears, openBrowserTimeoutMs);
-        $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(enabled, openBrowserTimeoutMs).click();
+        ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.waitUntil(exist, timeout).click();
+        ELEMENT_INPUT_DOCUMENT.waitUntil(exist, timeout).uploadFromClasspath(fileName);
+        ELEMENT_BAR_PROGRESS.waitUntil(disappears, timeout);
+        $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(enabled, timeout).click();
     }
 
     /**
@@ -1933,7 +1933,6 @@ public class ActivityStream {
     public static void deleteDocumentFromAS (String Document) {
         homePagePlatform.refreshUntil($(byText(Document)), exist, 500);
         String idActivity2 = $(byText(Document)).parent().parent().parent().parent().getAttribute("id").split("MediaName")[1].split("0")[0];
-       refresh();
         $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity2))).waitUntil(exist, 30000).click();
         $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}", idActivity2))).waitUntil(exist,30000).click();
         ELEMENT_DELETE_POPUP_OK.waitUntil(visible,timeout).click();

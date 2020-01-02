@@ -70,7 +70,7 @@ public class OnlyOfficeTestIT extends Base {
 
     addUsers = new AddUsers(this);
     connectionsManagement = new ConnectionsManagement(this);
-    documentManagement  = new DocumentManagement(this);
+    documentManagement = new DocumentManagement(this);
     ecms_permission = new ECMS_Permission(this);
   }
 
@@ -291,15 +291,15 @@ public class OnlyOfficeTestIT extends Base {
     String documentOdt = "odt_test";
     String extensionOdt = ".odt";
     info("No editing online of document ");
-    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentXls,extensionXls);
-    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentDoc,extensionDoc);
-    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentPpt,extensionPpt);
-    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(pictureJpeg,extensionJpeg);
-    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentPdf,extensionPdf);
-    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentTxt,extensionTxt);
-    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentOdp,extensionOdp);
-    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentOds,extensionOds);
-    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentOdt,extensionOdt);
+    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentXls, extensionXls);
+    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentDoc, extensionDoc);
+    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentPpt, extensionPpt);
+    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(pictureJpeg, extensionJpeg);
+    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentPdf, extensionPdf);
+    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentTxt, extensionTxt);
+    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentOdp, extensionOdp);
+    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentOds, extensionOds);
+    onlyOfficeActivityStream.notEditingDocumentWithOnlyOfficeFromAS(documentOdt, extensionOdt);
     manageLogInOut.signOut();
   }
 
@@ -308,14 +308,14 @@ public class OnlyOfficeTestIT extends Base {
    * EditOnline_BTN_US06
    * Check that editing online with OO is possible only with "edit permission"
    */
-  public void CheckEditOnlineWithEditPermission () {
-    String userA_name   = "usera"+getRandomString();
-    String userB_name   = "userb"+getRandomString();
-    String userC_name   = "userc"+getRandomString();
-    String email_A      = userA_name+"@gmail.com";
-    String email_B      = userB_name+"@gmail.com";
-    String email_C      = userC_name+"@gmail.com";
-    String password     = "123456";
+  public void checkEditOnlineWithEditPermission() {
+    String userA_name = "usera" + getRandomString();
+    String userB_name = "userb" + getRandomString();
+    String userC_name = "userc" + getRandomString();
+    String email_A = userA_name + "@gmail.com";
+    String email_B = userB_name + "@gmail.com";
+    String email_C = userC_name + "@gmail.com";
+    String password = "123456";
     String document = "OO_test";
     String extension = ".docx";
     String userName = PLFData.USER_ROOT;
@@ -323,9 +323,9 @@ public class OnlyOfficeTestIT extends Base {
     info("Create new users");
     homePagePlatform.goToHomePage();
     navigationToolbar.goToAddUser();
-    addUsers.addUser(userA_name,password,email_A,userA_name,userA_name);
-    addUsers.addUser(userB_name,password,email_B,userB_name,userB_name);
-    addUsers.addUser(userC_name,password,email_C,userC_name,userC_name);
+    addUsers.addUser(userA_name, password, email_A, userA_name, userA_name);
+    addUsers.addUser(userB_name, password, email_B, userB_name, userB_name);
+    addUsers.addUser(userC_name, password, email_C, userC_name, userC_name);
     manageLogInOut.signOut();
     info("Connection with userA");
     manageLogInOut.signIn(userB_name, password);
@@ -338,14 +338,14 @@ public class OnlyOfficeTestIT extends Base {
     connectionsManagement.connectToAUser(userA_name);
     manageLogInOut.signOut();
     info("Accept connections");
-    manageLogInOut.signIn(userA_name,password);
+    manageLogInOut.signIn(userA_name, password);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(userB_name);
     manageLogInOut.signOut();
-    manageLogInOut.signIn(userA_name,password);
+    manageLogInOut.signIn(userA_name, password);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(userC_name);
-    manageLogInOut.signIn(userA_name,password);
+    manageLogInOut.signIn(userA_name, password);
     info("Upload document and add permissions");
     homePagePlatform.goToDocuments();
     SHOW_DRIVERS_BUTTON.waitUntil(visible, timeout).click();
@@ -354,13 +354,13 @@ public class OnlyOfficeTestIT extends Base {
     siteExplorerHome.uploadFile(document + extension);
     $(byText(document)).waitUntil(visible, timeout).click();
     documentManagement.goToPermissions();
-    MODIFY_CHECKBOX_USERS.waitUntil(exist,timeout).toWebElement().click();
+    MODIFY_CHECKBOX_USERS.waitUntil(exist, timeout).toWebElement().click();
     ecms_permission.changeRight("user", userB_name, true, true, true, "");
     ecms_permission.changeRight("user", userC_name, true, false, true, "");
     ecms_permission.closePermission();
     manageLogInOut.signOut();
     info("Check editing with permission");
-    manageLogInOut.signIn(userB_name,password);
+    manageLogInOut.signIn(userB_name, password);
     homePagePlatform.goToDocuments();
     SHOW_DRIVERS_BUTTON.waitUntil(visible, timeout).click();
     USERS_DRIVER_BUTTON.waitUntil(visible, timeout).click();
@@ -368,7 +368,7 @@ public class OnlyOfficeTestIT extends Base {
     $(SELECTOR_EDIT_ONlINE_BUTTON).should(exist);
     manageLogInOut.signOut();
     info("Check non editing with permission");
-    manageLogInOut.signIn(userC_name,password);
+    manageLogInOut.signIn(userC_name, password);
     homePagePlatform.goToDocuments();
     SHOW_DRIVERS_BUTTON.waitUntil(visible, timeout).click();
     USERS_DRIVER_BUTTON.waitUntil(visible, timeout).click();
@@ -381,7 +381,7 @@ public class OnlyOfficeTestIT extends Base {
     siteExplorerHome.checkButtonDocument(document);
     siteExplorerHome.clickDeleteButtonDocument();
     manageLogInOut.signOut();
-    manageLogInOut.signIn(userName,userPass);
+    manageLogInOut.signIn(userName, userPass);
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(userA_name);
     addUsers.deleteUser(userB_name);

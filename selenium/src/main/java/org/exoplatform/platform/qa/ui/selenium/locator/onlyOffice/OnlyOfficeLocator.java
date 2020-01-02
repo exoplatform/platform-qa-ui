@@ -22,5 +22,4 @@ public class OnlyOfficeLocator {
     public static final SelenideElement ELEMENT_PERMISSION_BUTTON_FROM_DOCUMENT_APP = $(".uiIconEcmsViewPermissions.uiIconEcmsLightGray");
     public static final SelenideElement ELEMENT_VERSION_BUTTON_FROM_DOCUMENT_APP = $(".uiIconEcmsManageVersions.uiIconEcmsLightGray");
     public static final SelenideElement ELEMENT_EDIT_DOCUMENT_PROP_BUTTON_FROM_DOCUMENT_APP = $(".uiIconEcmsOnlyofficeOpen.uiIconEcmsLightGray.uiIconEdit");
-
 }

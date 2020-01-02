@@ -3,6 +3,8 @@ package org.exoplatform.platform.qa.ui.ecms.pageobject;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import static com.codeborne.selenide.Condition.*;
+
 
 import static com.codeborne.selenide.Configuration.timeout;
 import static com.codeborne.selenide.Selectors.*;
@@ -129,7 +131,7 @@ public class DocumentManagement {
             $(ELEMENT_ACTIONBAR_MORE).click();
             ELEMENT_BUTTON_PERMISSION_IN_MORE_DROP_DOWN_MENU.click();
         } else {
-            ELEMENT_BUTTON_PERMISSION.waitUntil(Condition.exist,timeout).click();
+            ELEMENT_BUTTON_PERMISSION.waitUntil(exist,timeout).click();
         }
     }
 }
