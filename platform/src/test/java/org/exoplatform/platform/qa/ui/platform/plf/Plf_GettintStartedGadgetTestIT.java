@@ -2,8 +2,7 @@ package org.exoplatform.platform.qa.ui.platform.plf;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
@@ -12,17 +11,12 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarL
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_EDIT_MY_PROFILE_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
-
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.SiteExplorerHome;
@@ -208,11 +202,11 @@ public class Plf_GettintStartedGadgetTestIT extends Base {
     info("add an avatar");
     ELEMENT_HP_GETTING_STARTED_SET_YOUR_PROFILE_PICTURE.click();
     $(ELEMENT_ACCOUNT_NAME_LINK).click();
-    $(ELEMENT_EDIT_MY_PROFILE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_BUTTON_CHANGE_AVATAR.waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_EDIT_MY_PROFILE_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_BUTTON_CHANGE_AVATAR.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_INPUT_UPLOAD_AVATAR.uploadFromClasspath("testavatar.png");
-    ELEMENT_BUTTON_CONFIRM_UPLOAD.waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    ELEMENT_BUTTON_CONFIRM_UPLOAD.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Post an activity");
     homePagePlatform.goToHomePage();
     activityStream.addActivity(text, "");

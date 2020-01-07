@@ -346,6 +346,7 @@ public class WikiSettingsTestIT extends Base {
    */
 
   @Test
+  @Tag("wabis")
   public void test07_DeletePermissionForWiki() {
     info("Test 5: Add Permission for Wiki");
     String wiki = "wiki" + getRandomNumber();
