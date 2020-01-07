@@ -246,12 +246,13 @@ public class SpaceManagement {
     }
     if (isChangeAvatar == true) {
       info("evt.click on change picture button");
-      $(ELEMENT_SPACE_CHANGE_AVATAR_BTN).click();
+      $(ELEMENT_SPACE_CHANGE_AVATAR_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
       $(byId("UIPopupAvatarUploader")).find(byClassName("file")).uploadFromClasspath(filepath);
 
       info("filepath:" + filepath);
+      sleep(2000);
       $(ELEMENT_SPACE_UPLOAD_CONFIRM_BTN).click();
-      $(ELEMENT_SPACE_UPLOAD_SAVE_BTN).click();
+      $(ELEMENT_SPACE_UPLOAD_SAVE_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
     }
   }
 

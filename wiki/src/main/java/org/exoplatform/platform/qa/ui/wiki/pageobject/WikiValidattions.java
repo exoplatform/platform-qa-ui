@@ -507,14 +507,12 @@ public class WikiValidattions {
      */
     public void verifyRestrictedPageHasChildPage() {
         info("Verify that parent page is shown under the title: restricted on the left tree");
-        sleep(Configuration.timeout);
-        (ELEMENT_WIKI_LEFT_TREE_RESTRICTED_PAGE_TITLE).waitUntil(Condition.visible, Configuration.timeout).hover();
+        sleep(Configuration.collectionsTimeout);
+        (ELEMENT_WIKI_LEFT_TREE_RESTRICTED_PAGE_TITLE).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).hover();
         info("Verify the tooltip of the page as:[this page is restricted, you don't have permissions to view it]");
-        sleep(2000);
-        $(ELEMENT_WIKI_TOOLTIP_RESTRICTED_PAGE_TITLE).exists();
-        sleep(Configuration.timeout);
+        $(ELEMENT_WIKI_TOOLTIP_RESTRICTED_PAGE_TITLE).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).exists();
         info("Verify that cannot click on parent page");
-        $(ELEMENT_WIKI_PARENT_PAGE_UN_LINK).waitUntil(Condition.visible, Configuration.timeout);
+        $(ELEMENT_WIKI_PARENT_PAGE_UN_LINK).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     }
 
     /**
@@ -698,8 +696,7 @@ public class WikiValidattions {
      */
     public void verifyTitleWikiPage(String title) {
         info("Verify that the wiki page is created and shown in the list");
-        sleep(Configuration.collectionsTimeout);
-        $(byXpath("//div[@id='iconTreeExplorer']/a[text()='${title}']".replace("${title}", " " + title))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        $(byXpath("//div[@id='iconTreeExplorer']//*[contains(text(),'${title}')]".replace("${title}", " " + title))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.openBrowserTimeoutMs).click();
         $(byXpath("//div[@id='UITreeExplorer']/following::div[@id='titleInfo' and text()='${title}']".replace("${title}",title))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
         info("The wiki page is created successfully");
     }

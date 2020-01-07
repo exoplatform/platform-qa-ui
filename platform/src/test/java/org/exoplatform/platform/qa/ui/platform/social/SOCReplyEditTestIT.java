@@ -501,7 +501,7 @@ public class SOCReplyEditTestIT extends Base {
   }
 
   @Test
-
+  @Tag("sabis")
   public void test17_CheckEditReplyWithFormattingTextItalic() {
     // Check when this feature will be done
     String activity1 = "activity" + getRandomNumber();

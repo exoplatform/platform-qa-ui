@@ -131,9 +131,9 @@ public class PlfNavigationTopNavigationTestIT extends Base {
      */
     navigationToolbar.goToAddPoll("", forum);
     info("Verify that the poll popup is shown");
-    $(ELEMENT_POLL_SUBMIT).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_POLL_SUBMIT).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     info("Delete data");
-    ELEMENT_POLL_CANCEL.waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_POLL_CANCEL.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     homePagePlatform.goToForum();
     forumHomePage.goToHomeCategory();
     forumCategoryManagement.deleteCategory(category);
@@ -287,7 +287,7 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     sleep(2000);
     String url = WebDriverRunner.url();
     assertEquals(url,
-                 "https://docs.exoplatform.org/en/5.2/");
+                 "https://docs.exoplatform.org/en/5.3/");
     switchTo().window(0);
   }
 }

@@ -516,7 +516,6 @@ public class EcmsSECreateTestIT extends Base {
   }
 
   @Test
-  @Tag("eabis")
   public void test12_2Upload_AFileDOCXInIntranetDocument() {
     info("Test 12 Upload a file in Intranet/Document");
     navigationToolbar.goToSiteExplorer();

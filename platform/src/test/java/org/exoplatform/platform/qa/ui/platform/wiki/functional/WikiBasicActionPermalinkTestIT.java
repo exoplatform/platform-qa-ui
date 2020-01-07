@@ -702,7 +702,6 @@ public class WikiBasicActionPermalinkTestIT extends Base {
         wikiHomePage.closePermalinkPopup();
         manageLogInOut.signIn(arrayUsers.get(0), password);
         open(permalink);
-        sleep(Configuration.timeout);
         wikiValidattions.verifyRestrictedPageHasChildPage();
         manageLogInOut.signIn(DATA_USER1, "gtngtn");
         navigationToolbar.goToManageCommunity();

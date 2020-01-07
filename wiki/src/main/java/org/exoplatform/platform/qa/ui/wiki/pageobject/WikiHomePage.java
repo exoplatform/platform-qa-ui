@@ -139,7 +139,8 @@ public class WikiHomePage {
     public void selectAPage(String page) {
         info("Go to a wiki page...");
         info("Select the wiki page");
-        $(byText(page)).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+        $(byXpath("//*[@id='iconTreeExplorer']//*[contains(text(),'${page}')]".replace("${page}",page))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         info("The page is shown");
     }
 
@@ -354,7 +355,7 @@ public class WikiHomePage {
      */
     public void goToSpaceSwitcher() {
         info("Click on drop down");
-        $(ELEMENT_SPACE_DROP_DOWN).click();
+        $(ELEMENT_SPACE_DROP_DOWN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
 
     /**

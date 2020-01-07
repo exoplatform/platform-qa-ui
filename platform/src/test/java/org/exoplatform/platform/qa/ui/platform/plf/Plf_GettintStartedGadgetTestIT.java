@@ -2,8 +2,7 @@ package org.exoplatform.platform.qa.ui.platform.plf;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
@@ -212,7 +211,7 @@ public class Plf_GettintStartedGadgetTestIT extends Base {
     ELEMENT_BUTTON_CHANGE_AVATAR.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_INPUT_UPLOAD_AVATAR.uploadFromClasspath("testavatar.png");
     ELEMENT_BUTTON_CONFIRM_UPLOAD.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Post an activity");
     homePagePlatform.goToHomePage();
     activityStream.addActivity(text, "");

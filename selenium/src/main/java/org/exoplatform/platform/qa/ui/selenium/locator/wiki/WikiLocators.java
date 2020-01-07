@@ -1399,7 +1399,7 @@ public class WikiLocators {
             By.xpath(".//*[contains(@onclick,'ManagePermisisons')]");
 
     public static final SelenideElement ELEMENT_WIKI_LEFT_TREE_RESTRICTED_PAGE_TITLE =
-            $(byXpath(".//*[@id='iconTreeExplorer']//em[contains(text(),'restricted')]"));
+            $(byXpath(".//*[@id='iconTreeExplorer']//*[contains(text(),'restricted')]"));
 
     public static final By ELEMENT_WIKI_TOOLTIP_RESTRICTED_PAGE_TITLE =
             By.xpath(".//*[@id='iconTreeExplorer']//em[contains(@data-original-title,'Access to this page is restricted, you do not have permission to view it.')]");

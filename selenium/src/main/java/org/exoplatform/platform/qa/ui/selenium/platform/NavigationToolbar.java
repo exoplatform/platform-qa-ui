@@ -366,21 +366,21 @@ public class NavigationToolbar {
    */
   public void goToAddPoll(String location, String forum) {
     info("Go to add poll from tootlbar");
-    $(ELEMENT_ADD_TOOTLBAR).waitUntil(Condition.appears, Configuration.timeout).click();
+    $(ELEMENT_ADD_TOOTLBAR).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
     info("Click on Poll link");
-    $(ELEMENT_ADD_POOL_TOOLBAR).waitUntil(Condition.appears, Configuration.timeout).click();
+    $(ELEMENT_ADD_POOL_TOOLBAR).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
     if (location != "" && location != null) {
       info("Set location for the poll");
-      $(ELEMENT_ADD_POLL_SET_LOCATION).waitUntil(Condition.visible, Configuration.timeout).click();
+      $(ELEMENT_ADD_POLL_SET_LOCATION).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     }
     info("evt.click on Next button");
-    $(ELEMENT_NEXT_BUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_NEXT_BUTTON).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
     info("Select a forum for poll");
-    $(ELEMENT_SELECT_FORUM_COMBOBOX).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_SELECT_FORUM_COMBOBOX).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     $(byText(forum)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     info("Click on next button");
-    $(ELEMENT_NEXT_BUTTON).waitUntil(Condition.enabled, Configuration.timeout);
+    $(ELEMENT_NEXT_BUTTON).waitUntil(Condition.enabled, Configuration.openBrowserTimeoutMs);
     $(ELEMENT_NEXT_BUTTON).click();
   }
 
@@ -558,7 +558,7 @@ public class NavigationToolbar {
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-    ELEMENT_ADMINISTRATION_ADD_USERS.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    ELEMENT_ADMINISTRATION_ADD_USERS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   public void goToManageCommunity() {
