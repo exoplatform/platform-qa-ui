@@ -751,7 +751,7 @@ public class CalendarEventRecurringTestIT extends Base {
    */
 
   @Test
-  @Tag("eventis120")
+  @Tag("eventis")
   public void test09_AnExtraIconIsDisplayedForARepeatedEvent() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String content = "content" + getRandomNumber();

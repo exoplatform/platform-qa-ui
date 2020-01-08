@@ -61,7 +61,7 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
   }
 
   @Test
-  @Tag("eventis201")
+  @Tag("eventis")
   public void test01_AddEventInSpace() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String pattern = "MM/dd/yyyy";
