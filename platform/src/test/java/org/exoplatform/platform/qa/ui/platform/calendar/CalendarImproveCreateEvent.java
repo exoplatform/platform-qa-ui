@@ -58,7 +58,7 @@ public class CalendarImproveCreateEvent extends Base {
   }
 
   @Test
-  public void test01_CheckEventPopUpWhenCLickOnAddEvent() {
+  public void test01_checkEventPopUpWhenCLickOnAddEvent() {
     //21495 //21498 //21500 //21503 //21505 //21511 //21522
     String eventTitle = "event" + getRandomNumber();
     String pattern = "MM-dd-yyyy";
@@ -91,7 +91,7 @@ public class CalendarImproveCreateEvent extends Base {
 
 
   @Test
-  public void test02_CheckEventPopUpWhenCLickOnTimeSlot() {
+  public void test02_checkEventPopUpWhenCLickOnTimeSlot() {
     //21496
     String titleEvent = "titleEvent" + getRandomNumber();
     String pattern = "MM-dd-yyyy";

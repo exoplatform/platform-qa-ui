@@ -180,10 +180,9 @@ public class WikiSettingsTestIT extends Base {
     String content = "content" + getRandomNumber();
     homePagePlatform.goToWiki();
     wikiHomePage.goToWikiSettingPage();
-    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+    ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.click();
     wikiSettingManagement.addTemplate(title, description, content);
-    ELEMENT_WIKI_LISTE_TEMPLATE.waitUntil(Condition.visible,Configuration.collectionsTimeout).find(byText(title)).parent().parent().find(ELEMENT_WIKI_ICON_EDIT_TEMPLATE).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(title)).parent().parent().find(ELEMENT_WIKI_ICON_EDIT_TEMPLATE).click();
     wikiSettingManagement.editTemplate("", newTitle, "", "");
     ELEMENT_WIKI_LISTE_TEMPLATE.find(byText(newTitle)).should(exist);
     wikiSettingManagement.deleteTemplate(newTitle);

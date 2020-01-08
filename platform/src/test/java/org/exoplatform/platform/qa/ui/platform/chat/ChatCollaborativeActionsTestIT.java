@@ -64,7 +64,7 @@ public class ChatCollaborativeActionsTestIT extends Base {
         switchTo().window(1);
         roomManagement.addRoom(room);
         chatManagement.checkMenuCollaborativeAction();
-        ELEMENT_COLLABORATION_ACTIONS.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        ELEMENT_COLLABORATION_ACTIONS.click();
         roomManagement.deleteRomm(room);
     }
 
@@ -74,8 +74,8 @@ public class ChatCollaborativeActionsTestIT extends Base {
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.addRoom(room);
-        ELEMENT_COLLABORATION_ACTIONS.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
-        ELEMENT_CHAT_ADD_EVENT.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        ELEMENT_COLLABORATION_ACTIONS.click();
+        ELEMENT_CHAT_ADD_EVENT.click();
         chatManagement.checkAddEventPopUp();
         roomManagement.deleteRomm(room);
     }

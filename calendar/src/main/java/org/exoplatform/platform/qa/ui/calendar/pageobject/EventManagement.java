@@ -202,7 +202,7 @@ public class EventManagement {
   public void inputBasicDetailEvent(String name, String note, String... opt) {
     info("Input into basic fields of Quick EVENT form");
     if (name != null) {
-      $(ELEMENT_ADD_EDIT_EVENT_NAME).waitUntil(Condition.visible,Configuration.collectionsTimeout).setValue(name);
+      $(ELEMENT_ADD_EDIT_EVENT_NAME).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(name);
     }
 
     if (note != null) {
@@ -258,7 +258,7 @@ public class EventManagement {
         for(int i=0; i<=11; i++)
           {
             $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).isDisplayed();
-            $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).waitUntil(Condition.visible,Configuration.timeout).sendKeys(Keys.BACK_SPACE);
+            $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).waitUntil(Condition.visible,Configuration.collectionsTimeout).sendKeys(Keys.BACK_SPACE);
           }
          $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).setValue(dateTimeFrom[0]);
         $(byXpath("(//input[@class='cbb_input'])[1]")).waitUntil(Condition.visible,Configuration.timeout).setValue(dateTimeFrom[1]);
@@ -273,7 +273,7 @@ public class EventManagement {
         for(int k=0; k<=11; k++)
         {
           $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).isDisplayed();
-          $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).waitUntil(Condition.visible,Configuration.timeout).sendKeys(Keys.BACK_SPACE);
+          $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).waitUntil(Condition.visible,Configuration.collectionsTimeout).sendKeys(Keys.BACK_SPACE);
         }
         $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).sendKeys(dateTimeTo[0]);
         $(byXpath("(//input[@class='cbb_input'])[2]")).waitUntil(Condition.visible,Configuration.timeout).setValue(dateTimeTo[1]);

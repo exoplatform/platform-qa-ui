@@ -154,7 +154,7 @@ public class WikiSettingPage {
 
     if (!des.isEmpty()) {
       info("Input the description for the template");
-      $(ELEMENT_DESCRIPTION_TEMPLATE).waitUntil(Condition.visible,Configuration.timeout).setValue(des);
+      $(ELEMENT_DESCRIPTION_TEMPLATE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(des);
     }
 
     if (!content.isEmpty()) {

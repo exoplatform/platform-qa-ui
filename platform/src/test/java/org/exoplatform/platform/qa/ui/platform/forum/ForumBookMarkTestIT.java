@@ -1,8 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.forum;
 
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -168,6 +167,7 @@ public class ForumBookMarkTestIT extends Base {
     info("Delete the category");
     info("Refresh page");
     refresh();
+    executeJavaScript("window.scrollBy(0,-300)");
     $(ELEMENT_CATEGORY_BREADCUMB_HOME).click();
     $(byText(nameCat)).click();
     forumCategoryManagement.deleteCategory(nameCat);

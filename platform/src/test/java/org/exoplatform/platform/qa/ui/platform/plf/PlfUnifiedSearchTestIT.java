@@ -189,7 +189,7 @@ public class PlfUnifiedSearchTestIT extends Base {
    */
   @Test
   public void test03_SortSearchResult() {
-    String name = "space";
+    String name = "space" + getRandomNumber();
     String wiki = "wiki" + getRandomNumber();
     info("Test 3: Sort search result");
     homePagePlatform.goToMySpaces();

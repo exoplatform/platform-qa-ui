@@ -61,8 +61,8 @@ public class CalendarManagement {
   public void goToMenuFromMainCalendar(menuOfMainCalendar action) {
     info("Select action from menu");
 
-    $(ELEMENT_CALENDAR_MENU_ACTIONS_ICON).click();
-    $(ELEMENT_CALENDAR_MENU).waitUntil(Condition.visible, Configuration.timeout);
+    $(ELEMENT_CALENDAR_MENU_ACTIONS_ICON).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_CALENDAR_MENU).waitUntil(Condition.visible, Configuration.collectionsTimeout);
     switch (action) {
       case ADDCAL:
         info("Go to add calendar");
@@ -79,7 +79,7 @@ public class CalendarManagement {
       case ADDCATEGORY:
         info("Go to add category calendar");
         $(ELEMENT_CALENDAR_MENU_ACTIONS_ADD_EVENT_CATEGORY).click();
-        $(ELEMENT_ADD_EVENT_CATEGORY_FORM).waitUntil(Condition.appears, Configuration.timeout);
+        $(ELEMENT_ADD_EVENT_CATEGORY_FORM).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
         break;
       case CALSETTING:
         info("Go to calendar setting");
@@ -87,6 +87,7 @@ public class CalendarManagement {
         evt.waitForAndGetElement(ELEMENT_CALENDAR_MENU_ACTIONS_CALENDAR_SETTING, testBase.getDefaultTimeout(), 1);
         evt.click(ELEMENT_CALENDAR_MENU_ACTIONS_CALENDAR_SETTING, 0, true);
         evt.waitForAndGetElement(ELEMENT_CALENDAR_SETTING_FORM, testBase.getDefaultTimeout(), 1);
+        sleep(Configuration.collectionsTimeout);
         break;
       case IMPORT:
         info("Import calendar");
@@ -340,7 +341,7 @@ public class CalendarManagement {
     $(ELEMENT_ADD_EVENT_CATEGORY_INPUT).setValue(newCategory);
     $(ELEMENT_ADD_EVENT_CATEGORY_INPUT).click();
     $(ELEMENT_EDIT_EVENT_CATEGORY_BUTTON_UPDATE).click();
-    $(byXpath(ELEMENT_LIST_EDIT_EVENT_BUTTON.replace("${categoryName}", newCategory))).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_LIST_EDIT_EVENT_BUTTON.replace("${categoryName}", newCategory))).waitUntil(Condition.visible,Configuration.collectionsTimeout);
     $(ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE).click();
   }
 
@@ -357,7 +358,6 @@ public class CalendarManagement {
             .parent()
             .waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs)
             .find(ELEMENT_CALENDAR_ICON_SETTINGS_OF_CALENDAR)
-            .waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs)
             .click();
   }
 
@@ -676,6 +676,7 @@ public class CalendarManagement {
    * save setting form
    */
   public void saveSetting() {
+    sleep(2000);
     evt.click(ELEMENT_SETTING_FORM_SAVE_BUTTON);
     evt.waitForElementNotPresent(ELEMENT_CALENDAR_SETTING_FORM);
   }
@@ -684,8 +685,8 @@ public class CalendarManagement {
    * cancel setting form
    */
   public void cancelSetting() {
-    evt.click(ELEMENT_SETTING_FORM_CANCEL_BUTTON);
-    evt.waitForElementNotPresent(ELEMENT_CALENDAR_SETTING_FORM);
+    $(ELEMENT_SETTING_FORM_CANCEL_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_CALENDAR_SETTING_FORM).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
 
   }
 
@@ -891,7 +892,7 @@ public class CalendarManagement {
 
     } else {
       info("Double click on the event");
-        ELEMENT_POUPUP_LIST_EVENT.find(byText(name)).doubleClick();
+        ELEMENT_POUPUP_LIST_EVENT.find(byText(name)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).doubleClick();
     }
     ELEMENT_EVENT_DRAWER.waitUntil(Condition.appears, Configuration.timeout);
     info("The edit form is shown");

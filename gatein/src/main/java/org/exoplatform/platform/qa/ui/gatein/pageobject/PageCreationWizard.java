@@ -105,10 +105,8 @@ public class PageCreationWizard {
    * @param element SelenideElement
    */
   public void addApplication(SelenideElement tab, SelenideElement element) {
-    $(ELEMENT_APPLICATION_TAB_ACTIVE).click();
-    $(tab).click();
-
-    // evt.dragAndDropToObject(element, ELEMENT_PAGEEDITOR_VIEWPAGE);
+    $(ELEMENT_APPLICATION_TAB_ACTIVE).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(tab).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     element.dragAndDropTo($(byClassName("VIEW-PAGE")));
   }
 
@@ -122,9 +120,9 @@ public class PageCreationWizard {
    */
   public void addApp(String tabName, String nameApp, SelenideElement appLocator, SelenideElement layoutLocator) {
     info("Add an application to the layout");
-    $(ELEMENT_APPLICATION_TAB).click();
+    $(ELEMENT_APPLICATION_TAB).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     if (!tabName.isEmpty())
-      $(byText(tabName)).click();
+      $(byText(tabName)).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     $(appLocator).dragAndDropTo(layoutLocator);
 
     info("Verify that the application is shown in the layout");
@@ -144,9 +142,9 @@ public class PageCreationWizard {
     $(ELEMENT_PAGEEDITOR_VIEWPAGE).hover();
     $(ELEMENT_CONTENT_LIST_EDIT_BTN).click();
     contList.selectFolderContent(path, folder);
-    $(ELEMENT_CONTENT_LIST_SAVE_BTN).click();
-    $(ELEMENT_CONTENT_LIST_CLOSE_BTN).click();
-    $(ELEMENT_PAGE_FINISH_BTN).click();
+    $(ELEMENT_CONTENT_LIST_SAVE_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_CONTENT_LIST_CLOSE_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_PAGE_FINISH_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
   }
 
@@ -520,13 +518,13 @@ public class PageCreationWizard {
                                boolean... isShowMaxWindow) {
     if (!title.isEmpty()) {
       info("Input new title");
-      $(ELEMENT_VIEW_PROPERTIES_TITLE).setValue(title);
+      $(ELEMENT_VIEW_PROPERTIES_TITLE).waitUntil(Condition.visible,Configuration.collectionsTimeout).setValue(title);
 
     }
     if (!groupsPath.isEmpty()) {
       info("Select a group");
 
-      $(ELEMENT_VIEW_PROPERTIES_PERMISSION_TAB).click();
+      $(ELEMENT_VIEW_PROPERTIES_PERMISSION_TAB).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
       if (isAccessPermision == true) {
         // evt.click(ELEMENT_VIEW_PROPERTIES_ADD_PERMISSION_BTN);
         $(ELEMENT_VIEW_PROPERTIES_ADD_PERMISSION_BTN).click();
@@ -538,9 +536,9 @@ public class PageCreationWizard {
 
       if (isEditPermission == true) {
         info("Select Edit permission settings tab");
-        $(ELEMENT_VIEW_PROPERTIES_EDIT_PERMISSITION_SETTINGS).click();
+        $(ELEMENT_VIEW_PROPERTIES_EDIT_PERMISSITION_SETTINGS).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
         info("Click on Select permission button");
-        $(ELEMENT_VIEW_PROPERTIES_SELECT_PERMISSION_BTN).click();
+        $(ELEMENT_VIEW_PROPERTIES_SELECT_PERMISSION_BTN).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
         selectGroupEditTab(groupsPath);
         info("Select a meberships");
         selectMemberShipEditTab(memberShips);
@@ -574,7 +572,7 @@ public class PageCreationWizard {
       info("Select group:" + groupSelect);
       // evt.click(ELEMENT_ADD_PERMISSION_SELECTOR_POPUP_GROUP.replace("${group}",
       // groupSelect), 0, true);
-      $(byTitle(groupSelect)).click();
+      $(byXpath("(//*[@title='${groupSelect}'])[1]".replace("${groupSelect}",groupSelect))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
 
   }

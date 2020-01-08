@@ -172,9 +172,10 @@ public class SpaceSettingManagement {
             .parent()
             .parent()
             .find(ELEMENT_ICON_DELETE_APPLICATION_FROM_SPACE)
-            .click();
+            .waitUntil(Condition.visible,
+                    Configuration.openBrowserTimeoutMs).click();
     ELEMENT_LIST_OF_EXISTED_APPLICATION_IN_APPLICATION_TAB.find(byText(app)).waitUntil(Condition.disappears,
-            Configuration.timeout);
+            Configuration.openBrowserTimeoutMs);
     info("the application is removed");
   }
 

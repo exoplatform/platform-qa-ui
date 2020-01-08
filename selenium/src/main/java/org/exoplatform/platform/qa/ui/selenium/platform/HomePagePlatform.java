@@ -34,7 +34,7 @@ public class HomePagePlatform {
   public void goToWiki() {
     info("--Go to Wiki--");
     refreshUntil($(ELEMENT_WIKI_LINK_PLF), Condition.visible, 500);
-    $(ELEMENT_WIKI_LINK_PLF).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_WIKI_LINK_PLF).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     $(ELEMENT_WIKI_LINK_PLF).click();
     refreshUntil($(ELEMENT_WIKI_LINK_PLF), Condition.visible, 500);
     sleep(Configuration.timeout);
@@ -174,7 +174,7 @@ public class HomePagePlatform {
    */
   public void goToSpecificSpace(String space) {
     info("Go to space " + space);
-
+    $(byXpath("//*[@class='ps__scrollbar-y']")).dragAndDropTo(ELEMENT_SPECIFIC_PANEL);
     ELEMENT_SPECIFIC_PANEL.find(byText(space)).click();
 
   }
