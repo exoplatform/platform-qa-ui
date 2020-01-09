@@ -147,6 +147,7 @@ public class EcmsAdminExplorerTestIT extends Base {
    * <li>Test Case Name: Delete a View.</li>
    */
 
+  @Test
   public void test04_05_06_07_Add_Edit_Delete_View_AView() {
     info("Test 02 : Add, edit, show and delete a View");
     String title = "aatitle" + getRandomNumber();

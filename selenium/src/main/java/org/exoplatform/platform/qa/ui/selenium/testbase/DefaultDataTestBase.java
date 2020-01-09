@@ -30,11 +30,6 @@ public final class DefaultDataTestBase {
 
   public static final String  DEFAULT_NATIVE_EVENT                       = "true";
 
-  public static final String  DEFAULT_BASEURL                            = "http://localhost:8080/portal";
-
-  public static final String  DEFAULT_BROWSER                            = "firefox";                                           // iexplorer,
-
-  public static final String  DEFAULT_SERVER                             = "ubuntu";                                            // win,
   // firefox,
   // chrome
 

@@ -31,8 +31,6 @@ public class ConnectionsLocator {
   public static final By              ELEMENT_CONNECTION_EVERYONE_TITLE       =
                                                                         By.xpath(".//*[@id='UIAllPeople']//*[contains(text(),'Everyone')]");
 
-  public static final SelenideElement ELEMENT_CONNECTION_CONNECT_BTN          = $(byText("Connect"));
-
   public static final SelenideElement ELEMENT_CONNECTION_CANCEL_BTN           = $(byText("Cancel Request"));
 
   public static final SelenideElement ELEMENT_CONNECTION_REVOVE_BTN           = $(byText("Remove Connection"));
@@ -41,8 +39,6 @@ public class ConnectionsLocator {
                                                                     " //a[contains(@href,'${user}')]/../..//*[text()='Ignore']";
 
   public static final String ELEMENT_CONNECTION_CONFIRM_BTN          = " //a[contains(@href,'${user}')]/../..//*[text()='Confirm']";
-
-  public static final String          ELEMENT_CONNECTION_USER_AVARTAR         = "//a[contains(@href,'${user}')]/img";
 
   public static final String          ELEMENT_CONNECTION_USER_NAME            =
                                                                    "//a[contains(@href,'${user}') and @data-key='title']";
@@ -67,7 +63,6 @@ public class ConnectionsLocator {
 
   public static final By              ELEMENT_ALL_RESULTS                     = By.id("searchAll");
 
-  // public static final By ELEMENT_NAME_OF_PEOPLE = By.id("name");
   public static final By              ELEMENT_POSITIONS_OF_PEOPLE             = By.id("position");
 
   public static final By              ELEMENT_SKILL_OF_PEOPLE                 = By.id("skills");

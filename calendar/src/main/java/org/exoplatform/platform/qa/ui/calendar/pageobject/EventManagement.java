@@ -2,7 +2,6 @@ package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
@@ -24,7 +23,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.interactions.Actions;
 
 public class EventManagement {
   private final TestBase testBase;
@@ -312,10 +310,7 @@ public class EventManagement {
         if (dateTimeFrom.length > 1) {
           if (opt.length > 0) {
             evt.type(ELEMENT_ADD_EDIT_EVENT_FROM_TIME_INPUT, dateTimeFrom[1], true);
-          } /*else {
-            evt.click(ELEMENT_ADD_EDIT_EVENT_FROM_TIME_INPUT, 2);
-            evt.click(ELEMENT_ADD_EDIT_EVENT_SELECT_FROM_TIME.replace("${time}", dateTimeFrom[1]));
-          }*/
+          }
         }
       }
       if ((to != null) & (to != "")) {
@@ -325,10 +320,7 @@ public class EventManagement {
         if (dateTimeTo.length > 1) {
           if (opt.length > 0) {
             evt.type(ELEMENT_ADD_EDIT_EVENT_TO_TIME_INPUT, dateTimeTo[1], true);
-          }/* else {
-            evt.click(ELEMENT_ADD_EDIT_EVENT_TO_TIME_INPUT, 2);
-            evt.click(ELEMENT_ADD_EDIT_EVENT_SELECT_TO_TIME.replace("${time}", dateTimeTo[1]));
-          }*/
+          }
         }
       }
     }
@@ -768,7 +760,6 @@ public class EventManagement {
     info("Go to More Details");
 
     $(ELEMENT_BUTTON_EVENT_MORE_DETAILS).waitUntil(Condition.visible, Configuration.timeout);
-    // click(ELEMENT_BUTTON_EVENT_MORE_DETAILS);
     $(ELEMENT_BUTTON_EVENT_MORE_DETAILS).click();
     $(ELEMENT_BUTTON_EVENT_MORE_DETAILS).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
   }
@@ -853,19 +844,6 @@ public class EventManagement {
           break;
       }
     }
-  }
-
-  /**
-   * Add more Repeat By option
-   *
-   * @param isMonthByMonth boolean
-   */
-  public void selectRepeatByOption(boolean isMonthByMonth) {
-    if (isMonthByMonth)
-      evt.check(ELEMENT_REPEAT_BY_DAY_OF_MONTH, 2);
-    else
-      evt.check(ELEMENT_REPEAT_BY_DAY_OF_WEEK, 2);
-
   }
 
   /**
@@ -1000,90 +978,11 @@ public class EventManagement {
   }
 
   /**
-   * Open Recurring form
-   */
-  public void openRecurringForm() {
-    if (evt.waitForAndGetElement(ELEMENT_RECURRING_REPEAT_BTN, 3000, 0) == null) {
-      info("Click on Repeat checkbox");
-      evt.check(ELEMENT_IS_REPEAT_CHECKBOX, 2);
-    } else {
-      info("Click on Edit button");
-      evt.click(ELEMENT_RECURRING_REPEAT_BTN);
-    }
-    evt.waitForAndGetElement(ELEMENT_RECURRING_FORM, 2000, 1);
-  }
-
-  /**
-   * Save recurring form
-   */
-  public void saveRecurringForm() {
-    info("Click on Save button");
-    evt.click(ELEMENT_RECURRING_SAVE_BTN);
-    evt.waitForElementNotPresent(ELEMENT_RECURRING_SAVE_BTN);
-  }
-
-  /**
-   * Cancel recurring form
-   */
-  public void cancelRecurringForm() {
-    info("Click on Cancel Button");
-    evt.click(ELEMENT_RECURRING_CANCEL_BTN);
-    evt.waitForElementNotPresent(ELEMENT_RECURRING_CANCEL_BTN);
-  }
-
-  /**
-   * Cancel confirming editing recurring form
-   */
-  public void cancelEditRecurringForm() {
-    info("Click on Cancel button");
-    evt.click(ELEMENT_CONFIRM_EDIT_RECURRING_EVENT_CANCEL_BTN);
-    evt.waitForElementNotPresent(ELEMENT_CONFIRM_EDIT_RECURRING_EVENT_CANCEL_BTN);
-  }
-
-  /**
-   * Save Edit Recurring Event Confirm popup
-   */
-  public void saveEditRecurringEventConfirmPopup() {
-    info("Click on Save button");
-    evt.click(ELEMENT_EDIT_RECURRING_EVENT_FORM_SAVE_BTN);
-    evt.waitForElementNotPresent(ELEMENT_EDIT_RECURRING_EVENT_FORM_SAVE_BTN);
-  }
-
-  /**
-   * Cancel confirming deleting recurring form
-   */
-  public void cancelDeletingRecurringForm() {
-    info("Click on Cancel Button");
-    evt.click(ELEMENT_CONFIRM_CANCEL_BUTTON);
-    evt.waitForElementNotPresent(ELEMENT_CONFIRM_CANCEL_BUTTON);
-  }
-
-  /**
-   * Select an option as 5,10,15,20,...60 for reminder Email box
-   *
-   * @param option String
-   */
-  public void selectReminderEmailBox(String option) {
-    info("Select an option");
-    evt.select(ELEMENT_REMINDER_DROP_BOX, option);
-
-  }
-
-  /**
    * Open schedule tab
    */
   public void goToScheduleTab() {
     info("Click on Schedule tab");
     evt.click(ELEMENT_EVENT_SCHEDULE_TAB);
-
-  }
-
-  /**
-   * Open Detail tab
-   */
-  public void goToDetailsTab() {
-    info("Click on Detail tab");
-    evt.click(ELEMENT_EVENT_DETAILS_TAB);
 
   }
 
@@ -1103,107 +1002,6 @@ public class EventManagement {
     info("Click on Reminders tab");
     evt.click(ELEMENT_EVENT_REMINDER_TAB);
 
-  }
-
-  /**
-   * Open invitation participant popup
-   */
-  public void goToInvitationParticipantForm() {
-    info("Click on invitation Participants button");
-    evt.click(ELEMENT_INVITATION_PARTICITPANT_USER);
-
-  }
-
-  /**
-   * Save all changes of invitation participant form
-   */
-  public void saveInvitationParticipantForm() {
-    info("Click on save button");
-    evt.click(ELEMETN_INVITATION_SAVE_BUTTON);
-
-  }
-
-  /**
-   * Remove an user in participants tab of Add/Edit Event/Task form
-   *
-   * @param fullName
-   */
-  public void removeUser(String fullName) {
-    info("Click on Delete button");
-    evt.click(ELEMENT_INVITATION_PARTICIPANTS_REMOVE_BTN.replace("$fullName", fullName));
-    evt.click(ELEMENT_YES_BUTTON);
-    evt.waitForElementNotPresent(ELEMENT_INVITATION_PARTICIPANTS_REMOVE_BTN.replace("$fullName", fullName));
-  }
-
-  /**
-   * Check user selector of event
-   *
-   * @param user
-   * @param isPresent
-   */
-  public void checkUserSelectorOfEvent(String user, boolean isPresent) {
-    goToAddEventFromActionBar();
-    moreDetailsEvent();
-    info("check reminder");
-    goToRemindersTab();
-    evt.click(ELEMENT_REMINDER_ADDMORE_ICON);
-    pPer.checkUserSelector(user, isPresent);
-    evt.click(ELEMENT_USER_CLOSE_BUTTON);
-    info("check participant");
-    goToParticipantsTab();
-    evt.click(ELEMENT_ADD_PARTICIPANTS_BUTTON_IN_PARTICIPANT_TAB);
-
-    evt.click(ELEMENT_PICK_USER_PARTICIPANTS_TAB);
-    pPer.checkUserSelector(user, isPresent);
-    evt.click(ELEMENT_USER_CLOSE_BUTTON);
-    info("check schedule");
-    goToScheduleTab();
-    evt.click(ELEMENT_ADD_PARTICIPANTS_BUTTON_IN_SCHEDULE_TAB);
-    pPer.checkUserSelector(user, isPresent);
-    evt.click(ELEMENT_USER_CLOSE_BUTTON);
-  }
-
-  /**
-   * Check display of event
-   *
-   * @param event     String
-   * @param isPresent boolean
-   */
-  public void checkDisplayOfEvent(String event, boolean isPresent) {
-    if (isPresent)
-      evt.waitForAndGetElement(ELEMENT_EVENT_TASK_TITLE.replace("${name}", event));
-    else
-      evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_TITLE.replace("${name}", event));
-  }
-
-  /**
-   * function: check content of mail then delete mail in email server
-   *
-   * @param titleEvent String
-   * @param opParams   object
-   */
-  public void checkEmailNotificationReminderEvent(String titleEvent, Object... opParams) {
-    info("Check and delete mail");
-    Boolean checkOrNo = (Boolean) (opParams.length > 0 ? opParams[0] : true);
-    String parentWindow = testBase.getExoWebDriver().getWebDriver().getWindowHandle();
-    info("parentWindow:" + parentWindow);
-    for (String windowHandle : testBase.getExoWebDriver().getWebDriver().getWindowHandles()) {
-      testBase.getExoWebDriver().getWebDriver().switchTo().window(windowHandle);
-      info("driver.title:" + testBase.getExoWebDriver().getWebDriver().getTitle());
-    }
-    if (opParams.length > 0) {
-      if (checkOrNo == true)
-        evt.waitForAndGetElement(ELEMENT_GMAIL_CONTENT_REMINDER_EVENT.replace("$task", titleEvent), 30000, 1);
-      else
-        evt.waitForElementNotPresent(ELEMENT_GMAIL_CONTENT_REMINDER_EVENT.replace("$task", titleEvent), 30000, 1);
-    }
-  }
-
-  /**
-   * Define a type of priority none normal high low
-   */
-  public enum priorityType {
-    None, Normal, High, Low;
   }
 
   /**
@@ -1232,13 +1030,6 @@ public class EventManagement {
    */
   public enum repeatEndType {
     Never, After, ByThisDate;
-  }
-
-  /**
-   * Define a time of reminder by email minutes, hours, days, weeks
-   */
-  public enum timeEmailReminder {
-    minutes, hours, days, weeks;
   }
 
   /**
@@ -1273,10 +1064,6 @@ public class EventManagement {
     assertEquals("Clear", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).getText());
     assertEquals("Save", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]")).getText());
     assertEquals("Cancel", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]")).getText());
-  }
-
-  public void checkReminderLabel() {
-
   }
 
 }
