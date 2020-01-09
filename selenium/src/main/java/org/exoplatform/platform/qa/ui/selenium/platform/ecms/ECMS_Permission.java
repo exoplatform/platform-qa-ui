@@ -140,24 +140,6 @@ public class ECMS_Permission {
    * @param groupPath path group: (Ex: Organization/Employees)
    * @param membership membership: (Ex: author)
    */
-  public void selectGroupMembershipOfDrive(String groupPath, String membership) {
-    String[] temp;
-    info("select permission for drive");
-    evt.waitForAndGetElement(ELEMENT_DRIVE_SELECT_MEMBERSHIP_POPUP);
-    temp = groupPath.split("/");
-    for (int i = 0; i < temp.length; i++) {
-      evt.click(ELEMENT_DRIVE_SELECT_RIGHT_PARENT_GROUP.replace("$group", temp[i]));
-    }
-    evt.click(ELEMENT_DRIVE_SELECT_RIGHT_PARENT_GROUP.replace("$group", membership));
-    evt.waitForElementNotPresent(ELEMENT_DRIVE_SELECT_MEMBERSHIP_POPUP);
-  }
-
-  /**
-   * Select group membership
-   * 
-   * @param groupPath path group: (Ex: Organization/Employees)
-   * @param membership membership: (Ex: author)
-   */
   public void selectGroupMembershipOfCat(String groupPath, String membership) {
     String[] temp;
     info("select permission for category");

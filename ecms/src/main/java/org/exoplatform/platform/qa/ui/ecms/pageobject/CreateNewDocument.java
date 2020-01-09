@@ -1,7 +1,5 @@
 package org.exoplatform.platform.qa.ui.ecms.pageobject;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
@@ -17,20 +15,15 @@ import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
-import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class CreateNewDocument {
 
   private final TestBase       testBase;
 
-  public PlatformPermission    per;
-
   public ManageAlert           alert;
 
   public PlatformBase          plf;
-
-  public SiteExplorerHome      SEHome;
 
   private ElementEventTestBase evt;
 
@@ -61,9 +54,7 @@ public class CreateNewDocument {
         sleep(Configuration.timeout);
         executeJavaScript("window.scrollBy(0,200);", "");
         sleep(Configuration.timeout);
-        // move ti page 2 for the list of template
         $(byXpath("//div[@class='PageAvailable']//li/a[text()='2']")).waitUntil(Condition.visible,Configuration.timeout).click();
-        // scroll up
         executeJavaScript("window.scrollBy(0,-400);", "");
         $(ELEMENT_ADDDOCUMENT_WEBCONTENT).click();
       }
@@ -186,25 +177,11 @@ public class CreateNewDocument {
   }
 
   /**
-   * Add a new product
-   *
-   * @param title String
-   * @param summary String
-   */
-  public void addNewProduct(String title, String summary) {
-    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-    evt.type(ELEMENT_FILEFORM_BLANK_NAME, title, true);
-    plf.inputFrame(ELEMENT_FILEFORM_BLANK_CONTENT, summary);
-    evt.switchToParentWindow();
-  }
-
-  /**
    * Save and close a file form
    */
 
   public void saveAndClose() {
     info("save and close");
-    // scroll up
     executeJavaScript("window.scrollBy(0,-250)");
     $(ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     sleep(Configuration.timeout);
@@ -220,35 +197,6 @@ public class CreateNewDocument {
     $(ELEMENT_WEBCONTENTFORM_BUTTON_LINK).click();
     $(ELEMENT_WEBCONTENTFORM_LINK_ADRESS).setValue(url);
     $(ELEMENT_WEBCONTENTFORM_LINK_OK).click();
-  }
-
-  /**
-   * Create a Advanced Document
-   *
-   * @param name String
-   * @param content String
-   * @param title String
-   * @param desc String
-   * @param creator String
-   * @param source String
-   */
-  public void createAdvancedDocument(String name, String content, String title, String desc, String creator, String source) {
-
-    evt.type(ELEMENT_FILEFORM_BLANK_NAME, title, true);
-    plf.inputFrame(ELEMENT_FILEFORM_BLANK_CONTENT, content);
-    evt.switchToParentWindow();
-    if (title != "" && title != null) {
-      evt.type(ELEMENT_DOCFORM_BLANK_TITLE, title, true);
-    }
-    if (desc != "" && desc != null) {
-      evt.type(ELEMENT_DOCFORM_BLANK_DESC, desc, true);
-    }
-    if (creator != "" && creator != null) {
-      evt.type(ELEMENT_DOCFORM_BLANK_CREATOR, creator, true);
-    }
-    if (source != "" && source != null) {
-      evt.type(ELEMENT_DOCFORM_BLANK_SOURCE, source, true);
-    }
   }
 
   /**
