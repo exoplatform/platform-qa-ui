@@ -3,9 +3,7 @@ package org.exoplatform.platform.qa.ui.gatein.pageobject;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
-import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_CONTENT_DETAIL_ADDPATH_BTN;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_SELECT_CONTENT_POPUP_FILE;
-import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_SELECT_CONTENT_POPUP_NODE_FOLDER;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;

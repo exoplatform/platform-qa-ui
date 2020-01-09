@@ -2,7 +2,6 @@ package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.ELEMENT_ANSWER_FORM_SAVE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 
 import com.codeborne.selenide.Condition;

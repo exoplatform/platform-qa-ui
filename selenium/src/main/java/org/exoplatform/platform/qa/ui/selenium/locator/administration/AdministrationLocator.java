@@ -158,22 +158,8 @@ public class AdministrationLocator {
   public static final By              ELEMENT_ECM_ADVANCED_CATEGORIES_NEXT_2NDPAGE_FORM            =
                                                                                         By.xpath(".//*[@id='UIPermissionTreeForm']//*[contains(text(),'Next')]");
 
-  public static final By              ELEMENT_ECM_ADVANCED_CATEGORIES_NEXT_3RDPAGE_FORM            =
-                                                                                        By.xpath(".//*[@id='UIActionTaxonomyManager']//*[contains(text(),'Next')]");
-
   public static final By              ELEMENT_ECM_ADVANCED_CATEGORIES_PREVIOUS_2NDPAGE             =
                                                                                        By.xpath("//*[@id='UIPermissionTreeForm']//*[contains(text(),'Previous')]");
-
-  public static final By              ELEMENT_ECM_ADVANCED_CATEGORIES_PREVIOUS_2NDPAGE_SAVE        =
-                                                                                            By.xpath("//*[@id='UIPermissionTreeForm']//*[contains(text(),'Save')]");
-
-  public static final By              ELEMENT_ECM_ADVANCED_CATEGORIES_PREVIOUS_2NDPAGE_READ        = By.xpath("//*[@id='read']");
-
-  public static final By              ELEMENT_ECM_ADVANCED_CATEGORIES_PREVIOUS_2NDPAGE_ADD         =
-                                                                                           By.xpath("//*[@id='add_node']");
-
-  public static final By              ELEMENT_ECM_ADVANCED_CATEGORIES_PREVIOUS_2NDPAGE_REMOVE      =
-                                                                                              By.xpath("//*[@id='remove']");
 
   public static final By              ELEMENT_ECM_ADVANCED_CATEGORIES_PREVIOUS_3RDPAGE             =
                                                                                        By.xpath("//*[@id='UIActionTaxonomyManager']//*[contains(text(),'Previous')]");
@@ -210,9 +196,6 @@ public class AdministrationLocator {
 
   public static final String          ELEMENT_ECM_ADVANCED_CATEGORIES_WORKSPACE_LIST               =
                                                                                      ".//*[contains(text(),'{$name}')]/../../td[2]//*[contains(text(),'{$workspace}')]";
-
-  public static final String          ELEMENT_ECM_ADVANCED_CATEGORIES_DELETE                       =
-                                                                             ".//*[contains(text(),'{$name}')]/../..//*[@class='uiIconDelete uiIconLightGray']";
 
   public static final String          ELEMENT_SELECT_CATEGORY                                      =
                                                               ".//*[@class='explorerTree']//*[contains(@title,'${name}')]";
@@ -288,9 +271,6 @@ public class AdministrationLocator {
   public static final String          ELEMENT_ECM_EXPLORER_DRIVES_EDIT_LIST                        =
                                                                             "//*[@id='UIDriveList']//*[contains(text(),'{$name}')]/../..//*[@class='uiIconEditInfo uiIconLightGray']";
 
-  public static final String          ELEMENT_ECM_EXPLORER_DRIVES_DELETE_LIST                      =
-                                                                              "//*[@id='UIDriveList']//*[contains(text(),'{$name}')]/../..//*[@class='uiIconDelete uiIconLightGray']";
-
   public static final String          ELEMENT_ECM_EXPLORER_DRIVES_VIEW_OF_VIEWS_LIST               =
                                                                                      "//*[@id='UIDriveList']//*[contains(text(),'{$name}')]/../..//*[contains(text(),'{$view}')]";
 
@@ -300,9 +280,6 @@ public class AdministrationLocator {
 
   public static final By              ELEMENT_ECM_EXPLORER_NAME_VIEW_FORM                          =
                                                                           By.xpath("//*[@id='viewName']");
-
-  public static final String          ELEMENT_ECM_EXPLORER_CHOOSE_TAB_CATEGORY_VIEW_FORM           =
-                                                                                         "//*[contains(text(),'{$tab}')and @class='control-label']/../div/span/input";
 
   public static final By              ELEMENT_ECM_EXPLORE_TAB_NAME_VIEW_FORM                       =
                                                                              By.xpath("//*[@id='tabName']");
@@ -318,9 +295,6 @@ public class AdministrationLocator {
 
   public static final By              ELEMENT_ECM_EXPLORER_USER_PERMISSION_ADD                     =
                                                                                By.xpath("//*[@id='UIViewPermissionForm']//*[@class='uiIconSelectUser uiIconLightGray']");
-
-  public static final By              ELEMENT_ECM_EXPLORER_GROUP_PERMISSION_ADD                    =
-                                                                                By.xpath("//*[@id='UIViewPermissionForm']//*[contains(@class,'uiIconSelectMember')]");
 
   public static final String          ELEMENT_ECM_EXPLORER_SELECT_USER_LIST_PERMISSION             =
                                                                                        "//*[@id='UIListUsers']//*[@class='text' and contains(text(),'{$user}')]/../../td[5]/a";
@@ -358,9 +332,6 @@ public class AdministrationLocator {
 
   public static final By              ELEMENT_ECM_EXPLORER_ADD_ACTION_VIEW_FORM                    =
                                                                                 By.xpath(".//*[@id='UITabContainer']//button[text()='Add']");
-
-  public static final By              ELEMENT_ECM_EXPLORER_DELETE_ACTION_VIEW_FORM                 =
-                                                                                   By.xpath(".//*[@id='UITabList']//i[@class='uiIconDelete uiIconLightGray']");
 
   // Explorer,Views-->Actions tab-->Add/Edit popup
   public static final By              ELEMENT_ECM_EXPLORER_CLOSE_VIEW_MODE                         =
@@ -619,10 +590,6 @@ public class AdministrationLocator {
   public static final String          ELEMENT_ECM_TEMPLATES_LIST_DELETE_LIST                       =
                                                                              "//*[@id='UICLVTemplateList']//*[contains(text(),'{$name}')]/../..//*[@class='uiIconDelete uiIconLightGray']";
 
-  // templates, metadata
-  public static final String          ELEMENT_ECM_TEMPLATES_METADATA_LIST                          =
-                                                                          "//*[@id='UIMetadataList']//*[contains(text(),'{$name}')]";
-
   public static final String          ELEMENT_ECM_TEMPLATES_METADATA_FORM_EDIT                     =
                                                                                "//*[@id='UIMetadataList']//*[contains(text(),'{$name}')]/..//*[@class='uiIconEdit uiIconLightGray']";
 
@@ -670,13 +637,6 @@ public class AdministrationLocator {
 
   public static final By              ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_ACTION            =
                                                                                         By.xpath(".//*[@id='searchAdmin']//th[text()='Content Type']");
-
-  // Action column
-  public static final String          ELEMENT_SEARCHADMIN_ACTION_DISABLE_BUTTON                    =
-                                                                                ".//*[contains(text(),'${type}')]/..//input[@value='Disable']";
-
-  public static final String          ELEMENT_SEARCHADMIN_ACTION_ENABLE_BUTTON                     =
-                                                                               ".//*[contains(text(),'${type}')]/..//input[@value='Enable']";
 
   /***************************************************
    * MANAGE LAYOUT
@@ -769,24 +729,8 @@ public class AdministrationLocator {
 
   // *=============================================================*\\
   // Site menu
-  public static final By              ELEMENT_LINK_EDIT                                            =
-                                                        By.xpath("//*[@class='uiIconPLF24x24Edit']");
-
-  public static final By              ELEMENT_MENU_EDIT_SITES                                      =
-                                                              By.xpath("//*[contains(@href,'#')][contains(text(),'Site')]");
-
-  public static final By              ELEMENT_MENU_EDIT_SITE_LAYOUT                                =
-                                                                    By.xpath(".//*[contains(@href,'#')][contains(text(),'Site')]/..//*[contains(text(),'Layout')]");
-
-  public static final By              ELEMENT_MENU_EDIT_SITES_NAV                                  =
-                                                                  By.xpath("//*[@id='UIAdminToolbarContainer']//a[contains(text(),'Navigation')]");
-
-  public static final By              ELEMENT_MENU_EDIT_ADDSITE                                    = By.linkText("Add Site");
 
   public static final String          ELEMENT_ACTION_BUTTON                                        = "//*[text()='$action']";
-
-  public static final String          ELEMENT_DELETE_TOOLTIP                                       =
-                                                             ".//*[contains(@id, '${tabName}')]//*[@data-original-title='Delete']";
 
   public static final String          ELEMENT_DELETE_BUTTON                                        =
                                                             ".//*[contains(@id, '${tabName}')]//*[@class='uiIconDelete uiIconLightGray']";
@@ -794,9 +738,6 @@ public class AdministrationLocator {
   // Site permission
   public static final String          ELEMENT_PERMISSION_SELECTOR                                  =
                                                                   "//*[@id='PermissionSetting']//*[text() = '${tabName}']";
-
-  public static final String          ELEMENT_PERMISSION_PUBLIC_MODE                               =
-                                                                     "//*[contains(@id,'${tabName}')]//*[@for='publicMode' and text() = 'Everyone:']";
 
   public static final String          ELEMENT_PERMISSION_PUBLIC_MODE_CHECKBOX                      =
                                                                               "//*[contains(@id,'${tabName}')]//*[@id='publicMode']";
@@ -806,9 +747,6 @@ public class AdministrationLocator {
 
   public static final String          ELEMENT_PERMISSION_ADD_USER_BUTTON                           =
                                                                          "//*[contains(@id,'${tabName}')]//*[@class='uiIconAddUser uiIconWhite']/..[contains(text(),'Add Permission')]";
-
-  public static final String          ELEMENT_PERMISSION_TAB_NAME                                  =
-                                                                  "//*[@data-target='#PermissionSetting-tab' and text()='${tabName}']";
 
   public static final String          ELEMENT_CONTAINER_PERMISSION_SELECTOR                        =
                                                                             "//*[@id='UIContainerPermission']//*[text() = '${tabName}']";
@@ -828,23 +766,11 @@ public class AdministrationLocator {
   public static final String          ELEMENT_CONFIRM_DELETE_MESSAGE                               =
                                                                      "Are you sure you want to delete this Access Group?";
 
-  public static final String          ELEMENT_PERMISSION_WARNING                                   =
-                                                                 "//*[contains(@id,'${tabName}')]//*[@id='PermissionGrid']//*[contains(text(),'Warning: nobody is granted this permission')]";
-
   public static final By              ELEMENT_APPLICATION_TAB_ACTIVE                               =
                                                                      By.xpath("//*[@data-target='#appList']");
 
-  public static final By              ELEMENT_APPLICATION_CONTAINER                                =
-                                                                    By.xpath("//*[@class='RightBodyTDContainer TDContainer']");
-
-  public static final By              ELEMENT_PAGE_APPLICATION_CONTAINER                           =
-                                                                         By.xpath("//*[@class='OfficeMiddleTDContainer TDContainer']");
-
   public static final String          ELEMENT_PORTLET_SELECT_PERMISSION_POPUP_TITLE                =
                                                                                     ".//*[contains(@id, '${tabName}')]//*[@class='PopupTitle popupTitle' and (text()='${popupTitle}')]";
-
-  public static final String          ELEMENT_PERMISSION_ACCESS_TAB_ID                             =
-                                                                       "TabContentUIListPermissionSelector";
 
   public static final String          ELEMENT_PERMISSION_MOVE_APPS_TAB_ID                          =
                                                                           "TabContentUIListMoveAppsPermissionSelector";
@@ -852,52 +778,22 @@ public class AdministrationLocator {
   public static final String          ELEMENT_PERMISSION_MOVE_CONTAINERS_TAB_ID                    =
                                                                                 "TabContentUIListMoveContainersPermissionSelector";
 
-  public static final String          ELEMENT_PERMISSION_ACCESS_POPUP_TAB_ID                       =
-                                                                             "UIListPermissionSelectorPopup";
-
   public static final String          ELEMENT_PERMISSION_MOVE_APPS_POPUP_TAB_ID                    =
                                                                                 "UIListMoveAppsPermissionSelectorPopup";
 
   public static final String          ELEMENT_PERMISSION_MOVE_CONTAINERS_POPUP_TAB_ID              =
                                                                                       "UIListMoveContainersPermissionSelectorPopup";
 
-  public static final String          ELEMENT_APPLICATION_IN_LAYOUT_PAGE                           =
-                                                                         "//*[contains(@class,'LAYOUT-PORTLET')]//*[contains(text(),'${name}')]";
-
-  public static final String          ELEMENT_APPLICATION_DELETE_ICON                              =
-                                                                      "//span[contains(text(),'${name}')]/../../../..//*[contains(@class,'uiIconTrash')]";
-
   public static final String          ELEMENT_PERMISSION_TABLE                                     =
                                                                "//*[contains(@id,'${tabName}')]//*[@id='PermissionGrid']";
-
-  // Site's sub-menu
-  public static final String          ELEMENT_EDITSITE_SUBMENU_LAYOUT                              = "Layout";
-
-  public static final String          ELEMENT_EDITSITE_SUBMENU_NAVIGATION                          = "Navigation";
-
-  public static final String          ELEMENT_EDITSITE_SUBMENU_ADDSITE                             = "Add Site";
-
-  public static final String          PERMISSION_SELECTOR_ACCESS                                   = "Access";
-
-  public static final String          PERMISSION_SELECTOR_MOVE_APPS                                = "Move Apps";
-
-  public static final String          PERMISSION_SELECTOR_MOVE_CONTAINERS                          = "Move Containers";
-
-  public static final String          PERMISSION_SELECTOR_EDIT                                     = "Edit";
 
   // Site permission
   public static final String          ELEMENT_PERMISSION_SELECTOR_CONTAINS                         =
                                                                            "//*[@id='PermissionSetting']//*[contains(text(), '${tabName}')]";
 
-  public static final String          ELEMENT_PERMISSION_TABLE_BY_TAB                              =
-                                                                      "//*[contains(@id,'${tabName}')]//*[@id='PermissionGrid']";
 
   public static final By              ELEMENT_BTN_DELETE_DRIVE                                     = byClassName("uiIconDelete");
 
   public static final By ELEMENT_ICON_NEXT_ARROW=byClassName("uiIconNextArrow");
-
-  public static final SelenideElement ELEMENT_BTN_APPLY_CHANGE_LANGUAGE=$(byXpath("//*[@id=\"UIMaskWorkspace\"]/div/div/div/div[2]/a[1]"));
-
-  
 
 }
