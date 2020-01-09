@@ -50,53 +50,6 @@ public class ActivityStream {
     }
 
     /**
-     * Activity arrow menu
-     *
-     * @param opt optionMenuActivity
-     */
-    public void selectOptMenuActivity(optionMenuActivity opt) {
-        evt.click(ELEMENT_ACTIVITY_ARROWDOWN_MENU, 0, true);
-
-        switch (opt) {
-            case All_Activities:
-                info("Select All Activities");
-                evt.click(ELEMENT_ACTIVITY_ALL_ACTIVITIES, 0, true);
-                break;
-            case My_Spaces:
-                info("Select My Spaces");
-                evt.click(ELEMENT_ACTIVITY_MY_SPACES, 0, true);
-                break;
-            case My_Activities:
-                info("Select My Activities");
-                evt.click(ELEMENT_ACTIVITY_MY_ACTIVITIES, 0, true);
-                break;
-            case Connections:
-                info("Select Connections");
-                evt.click(ELEMENT_ACTIVITY_CONNECTIONS, 0, true);
-                break;
-            default:
-                info("No option in the list. Please select correct option.");
-                break;
-        }
-    }
-
-    /**
-     * Check activity after added a file
-     *
-     * @param title String
-     */
-    public void checkActivityAddFile(String title) {
-        info("Verify that the file's title is shown");
-        $(byXpath(ELEMENT_ACTIVITY_FILE_TITLE.replace("{$title}", title))).waitUntil(Condition.visible, Configuration.timeout);
-        info("Verify that file's icon is shown");
-        $(byXpath(ELEMENT_ACTIVITY_FILE_CHECK_ICON_FILE.replace("{$title}", title))).waitUntil(Condition.visible,
-                Configuration.timeout);
-        info("Verify that file's size is shown");
-        $(byXpath(ELEMENT_ACTIVITY_FILE_TITLE_CHECK_FILE_SIZE.replace("{$title}", title))).waitUntil(Condition.visible,
-                Configuration.timeout);
-    }
-
-    /**
      * Check if there is an activity in the stream
      *
      * @param name String
@@ -114,17 +67,6 @@ public class ActivityStream {
      * @param name String
      */
     public void checkNotShownActivity(String name) {
-        info("Verify that the activity of the name:" + name + " is not shown");
-        $(byXpath(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("${title}", name))).shouldNotBe(Condition.visible);
-        info("The activity of the name:" + name + " is not shown successfully");
-    }
-
-    /**
-     * Check if there is no an activity in the stream
-     *
-     * @param name String
-     */
-    public void checkNoActivity(String name) {
         info("Verify that the activity of the name:" + name + " is not shown");
         $(byXpath(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("${title}", name))).shouldNotBe(Condition.visible);
         info("The activity of the name:" + name + " is not shown successfully");
@@ -158,17 +100,6 @@ public class ActivityStream {
                         .replace("${comment}", comment))).waitUntil(Condition.visible, Configuration.timeout);
                 break;
         }
-    }
-
-    /**
-     * Check number like of activity
-     *
-     * @param activity String
-     * @param num      int
-     */
-    public void checkNumLikeOfActivity(String activity, int num) {
-        info("Check number like of: " + activity);
-        evt.waitForAndGetElement(ELEMENT_ACTIVITY_NUM_LIKE.replace("$activity", activity).replace("$num", String.valueOf(num)));
     }
 
     /**
@@ -267,143 +198,6 @@ public class ActivityStream {
     }
 
     /**
-     * Check activity after add a product
-     *
-     * @param title   String
-     * @param version String
-     * @param status  String
-     */
-    public void checkActivityAddProduct(String title, String version, String status) {
-        if (version == null)
-            version = "0";
-        if (status == null)
-            status = "Draft";
-        // check icon and title
-        evt.waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_PRODUCT_TITLE.replace("{$title}", title)));
-        evt.waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_PRODUCT_CHECK_VERSION.replace("{$title}", title)
-                .replace("{$version}", version)));
-        evt.waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_PRODUCT_CHECK_STATUS.replace("{$title}", title)
-                .replace("{$status}", status)));
-    }
-
-    /**
-     * Check content and number of lines of content on activity
-     *
-     * @param activityContent String
-     * @param content         String
-     */
-    public void checkContentOfActivity(String activityContent, String content) {
-        String[] sum;
-        String[] cont;
-        String summaryTemp = activityContent;
-        String contentTemp = content;
-
-        info("Check content and number of lines of content on activity");
-        if (activityContent.contains("...")) {
-            summaryTemp = activityContent.replace("...", "");
-        }
-        if (content.contains("...")) {
-            contentTemp = content.replace("...", "");
-
-        }
-        sum = summaryTemp.split("\n");
-        cont = contentTemp.split("<br>");
-        String[] sumTemp = activityContent.split("\n");
-
-        if (cont.length <= 4) {
-            for (int i = 0; i < sum.length; i++) {
-                info("sum[i]: " + sum[i]);
-                info("cont[i]: " + cont[i]);
-                assert sum[i].contains(cont[i]);
-            }
-        } else {
-            for (int i = 0; i < 4; i++) {
-                assert sum[i].contains(cont[i]);
-            }
-            assert sumTemp[3].contains(cont[3] + "...");
-        }
-    }
-
-    /**
-     * Add a new comment on activity stream
-     *
-     * @param filename    String
-     * @param textContent String
-     */
-    public void addComment(String filename, String textContent) {
-        info("Click on icon comment");
-        int repeat = 0;
-        while ($(byXpath(ELEMENT_COMMENTBOX.replace("${title}", filename))).is(Condition.not(Condition.visible))) {
-            // if repeat more 5 times, break the loop
-            if (repeat > 5)
-                break;
-            // if comment box is shown, break the loop
-            if ($(byXpath(ELEMENT_COMMENT_BUTTON.replace("${activityText}", filename))).is(Condition.visible))
-                break;
-
-            info("Click on icon comment with repeat " + repeat);
-            $(byXpath(ELEMENT_ICON_COMMENT.replace("${title}", filename))).click();
-            repeat++;
-        }
-        info("Put a comment to comment box");
-        int repeat1 = 0;
-        while ($(byXpath(ELEMENT_PUBLICATION_COMMENTPOSTED.replace("${content}", textContent)
-                .replace("$activity", filename))).is(Condition.not(Condition.visible))) {
-            if (repeat1 > 5)
-                break;
-            if ($(byXpath(ELEMENT_PUBLICATION_COMMENTPOSTED.replace("${content}", textContent)
-                    .replace("$activity", filename))).is(Condition.visible))
-                break;
-            else {
-                evt.switchToParentWindow();
-                SelenideElement input = $(byXpath(ELEMENT_COMMENTBOX.replace("${title}", filename))).waitUntil(Condition.visible, Configuration.timeout);
-                Actions action = new Actions(testBase.getExoWebDriver().getWebDriver());
-                action.moveToElement(input).sendKeys(textContent).build().perform();
-                info("Click on comment button to add comment to the activity");
-                $(ELEMENT_COMMENT_BUTTON).click();
-            }
-            info("Repeat " + repeat1);
-            repeat1++;
-        }
-        info("The comment is added successfully");
-    }
-
-    /**
-     * Add a new comment on activity stream using javascript
-     *
-     * @param activityText     String
-     * @param contentOfComment String
-     */
-    public void addCommentUsingJavascript(String activityText, String contentOfComment) {
-        info("add comment using javascript");
-        $(By.xpath(ELEMENT_ICON_COMMENT.replace("${title}", activityText))).click();
-        WebElement commentText = $(byText(activityText)).should(Condition.exist);
-        WebElement commentButton = evt.waitForAndGetElement(ELEMENT_COMMENT_BUTTON);
-        WebElement workingLabel = evt.waitForAndGetElement(ELEMENT_ACTIVITY_ADD_YOUR_COMMENTLABEL.replace("${activityText}",
-                activityText));
-
-        ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].textContent = '';",
-                workingLabel);
-        ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript(
-                "arguments[0].textContent = '"
-                        + contentOfComment + "';",
-                commentText);
-        ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].disabled = false;",
-                commentButton);
-        ((JavascriptExecutor) testBase.getExoWebDriver()
-                .getWebDriver()).executeScript("arguments[0].className = 'btn pull-right btn-primary';",
-                commentButton);
-        evt.click(ELEMENT_COMMENT_BUTTON);
-        info("Verify comment successfully");
-        evt.waitForAndGetElement(ELEMENT_DELETE_COMMENT_BUTTON.replace("${activityText}", activityText)
-                        .replace("${commentText}", contentOfComment),
-                testBase.getDefaultTimeout(),
-                1,
-                2);
-        info("Add comment successfully");
-    }
-
-    /**
      * Show all comment of activities
      *
      * @param name String
@@ -423,48 +217,6 @@ public class ActivityStream {
         info("Show all comment");
         $(byXpath(ELEMENT_PUBLICATION_HIDEALLCOMMENTBTN.replace("${activity}", name))).click();
         $(byXpath(ELEMENT_PUBLICATION_SEEALLCOMMENTBTN.replace("${activity}", name))).waitUntil(Condition.visible, Configuration.timeout);
-    }
-
-    /**
-     * Delete a comment of an activity
-     *
-     * @param name    String
-     * @param comment String
-     */
-    public void deleteComment(String name, String comment) {
-        int repeat = 0;
-        while (evt.waitForAndGetElement(ELEMENT_PUBLICATION_COMMENTPOSTED.replace("$activity", name).replace("${content}", comment),
-                2000,
-                0) != null) {
-            if (repeat > 5)
-                break;
-            if (evt.waitForAndGetElement(ELEMENT_PUBLICATION_COMMENTPOSTED.replace("$activity", name).replace("${content}", comment),
-                    2000,
-                    0) == null)
-                break;
-            info("Hover over on the comment");
-            evt.mouseOver(ELEMENT_PUBLICATION_LASTCOMMENT.replace("${title}", name), true);
-            evt.click(ELEMENT_PUBLICATION_DELETE_LASTCOMMENT.replace("${title}", comment));
-            evt.click(button.ELEMENT_OK_BUTTON);
-
-        }
-        evt.waitForElementNotPresent(ELEMENT_PUBLICATION_COMMENTPOSTED.replace("$activity", name).replace("${content}", comment));
-        info("The comment is deleted successfully");
-    }
-
-    /**
-     * View a comment
-     *
-     * @param activity is the activity's name
-     * @param comment  is comment's content
-     */
-    public void viewComment(String activity, String comment, String value) {
-        info("Hover over on the comment");
-        evt.mouseOver(ELEMENT_PUBLICATION_LASTCOMMENT.replace("${title}", activity), true);
-        if (value != "" || value != null)
-            evt.click(ELEMENT_ACTIVITY_PUBLICATION_VIEW_LASTCOMMENT.replace("$comment", comment).replace("$comment", value));
-        else
-            evt.click(ELEMENT_ACTIVITY_PUBLICATION_VIEW_LASTCOMMENT.replace("$comment", comment));
     }
 
     /**
@@ -497,11 +249,6 @@ public class ActivityStream {
         info("----Click attach button-----");
         $(ELEMENT_COMPOSER_ATTACH_LINK_BUTTON).click();
         evt.waitForAndGetElement(By.id("LinkTitle"));
-    }
-
-    public void closeShareLink() {
-        info("close share link");
-        evt.click(ELEMENT_COMPOSER_CLOSE_SHARE_LINK_BUTTON);
     }
 
     /**
@@ -908,153 +655,6 @@ public class ActivityStream {
     }
 
     /**
-     * Open More menu of Space menu
-     */
-    public void openMorelist() {
-        info("Click on More button");
-        evt.click(ELEMENT_SPACE_MENU_MORE_BTN);
-    }
-
-    /**
-     * Add an activity stream with a text and a attached file
-     *
-     * @param nameDrive  String
-     * @param pathFolder String
-     * @param pathData   String
-     * @param nameFile   String
-     * @param text       String
-     * @param Doc        boolean
-     */
-    public void uploadAndShareFileActivity(String nameDrive,
-                                           String pathFolder,
-                                           String pathData,
-                                           String nameFile,
-                                           String text,
-                                           boolean... Doc) {
-        boolean prev = (Doc.length > 0 ? Doc[0] : false);
-        info("-- Adding an activity--");
-        openUploadPopup(nameDrive, pathFolder);
-        uploadFileFromAS(pathData, nameFile, prev);
-        shareFileActivity(nameDrive, pathFolder, nameFile, text);
-    }
-
-    /**
-     * Add an activity stream with selecting a document that existed in SE
-     *
-     * @param nameDrive  String
-     * @param pathFolder String
-     * @param nameFile   String
-     * @param textDes    String
-     */
-    public void shareFileActivity(String nameDrive, String pathFolder, String nameFile, String textDes) {
-        info("-- Adding an activity--");
-
-        for (int repeat = 0; ; repeat++) {
-            if (repeat > 1) {
-                if (evt.waitForAndGetElement(ELEMENT_COMPOSER_FILE_ATTACHMENT_ACTIVITY, 3000, 0) != null)
-                    break;
-            }
-            if (evt.waitForAndGetElement(ELEMENT_COMPOSER_FILE_ATTACHMENT_ACTIVITY, 5000, 0) != null) {
-                info("Element " + ELEMENT_COMPOSER_FILE_ATTACHMENT_ACTIVITY + " is displayed");
-                break;
-            }
-            info("Retry...[" + repeat + "]");
-            this.testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-            openUploadPopup(nameDrive, pathFolder);
-            evt.waitForAndGetElement(By.linkText(nameFile)).click();
-
-            info("click on Select button");
-            // click(ELEMENT_SELECT_BUTTON);
-            $(ELEMENT_SELECT_BUTTON).click();
-        }
-        info("add a text to composer box of AS");
-        if (textDes != null && textDes != "")
-            addText(textDes);
-        info("----Click share button----");
-        shareActivity();
-    }
-
-    /**
-     * Open Upload Popup from Activity Stream
-     *
-     * @param nameDrive String
-     * @param path      where put the upload file
-     */
-    public void openUploadPopup(String nameDrive, String path) {
-        info("----Click on file icon----");
-
-        for (int repeat = 0; ; repeat++) {
-            if (repeat > 1) {
-                if (evt.waitForAndGetElement(ELEMENT_COMPOSER_FILE_BUTTON, 3000, 0) != null) {
-                    evt.clickByJavascript(ELEMENT_COMPOSER_FILE_BUTTON);
-                    if (evt.waitForAndGetElement(ELEMENT_SELECT_FILE_POPUP, 3000, 0) != null) {
-                        break;
-                    }
-                }
-            }
-            if (evt.waitForAndGetElement(ELEMENT_COMPOSER_FILE_BUTTON, 5000, 0) != null) {
-                info("Element " + ELEMENT_COMPOSER_FILE_BUTTON + " is displayed");
-                evt.clickByJavascript(ELEMENT_COMPOSER_FILE_BUTTON);
-                if (evt.waitForAndGetElement(ELEMENT_SELECT_FILE_POPUP, 3000, 0) != null) {
-                    break;
-                }
-            }
-            info("Retry...[" + repeat + "]");
-            this.testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-            evt.clickByJavascript(ELEMENT_COMPOSER_FILE_BUTTON);
-        }
-        info("----Upload a file-----");
-        evt.waitForAndGetElement(ELEMENT_SELECT_FILE_POPUP, 2000, 1);
-
-        if (!nameDrive.isEmpty()) {
-            info("Click on drop down list");
-            evt.clickByJavascript(ELEMENT_ACTIVITY_UPLOAD_POPUP);
-            info("Drop list is shown");
-            evt.waitForAndGetElement(ELEMENT_DRIVES_LIST);
-            info("Drive item is shown in the list");
-            if (evt.waitForAndGetElement(ELEMENT_DRIVER_OPTION.replace("${driveName}", nameDrive), 3000, 0) == null) {
-                info("select a driver:" + 1);
-                evt.clickByJavascript("(.//*[@id='DriveTypeDropDown']//*[@class='OptionItem'])[1]");
-            } else {
-                info("select a driver:" + nameDrive);
-                evt.clickByJavascript(ELEMENT_DRIVER_OPTION.replace("${driveName}", nameDrive));
-            }
-        }
-        info("go to the folder by path:" + path);
-        String[] arrayPath = path.split("/");
-        for (String arrayElement : arrayPath) {
-            evt.clickByJavascript(ELEMENT_ACTIVITY_UPLOAD_POPUP_NODE.replace("${nameNode}", arrayElement));
-        }
-    }
-
-    /**
-     * Upload a file from Upload Popup
-     *
-     * @param path     where put TestData folder
-     * @param nameFile String
-     * @param Doc
-     */
-    public void uploadFileFromAS(String path, String nameFile, boolean... Doc) {
-        boolean prev = (Doc.length > 0 ? Doc[0] : false);
-        info("-- Upload file --");
-        WebElement frame = evt.waitForAndGetElement(ELEMENT_UPLOAD_FILE_FRAME_XPATH, 3000, 0);
-        testBase.getExoWebDriver().getWebDriver().switchTo().frame(frame);
-        evt.click(ELEMENT_UPLOAD_BUTTON);
-        /*
-         * WebElement el = waitForAndGetElement(ELEMENT_UPLOAD_BUTTON, 4000, 0);
-         * el.sendKeys("\n");
-         */
-        if (prev)
-            testBase.uploadFileUsingRobotDocumentPreview(path + nameFile);
-        else
-            testBase.uploadFileUsingRobot(path + nameFile);
-        evt.switchToParentWindow();
-        evt.waitForElementNotPresent(ELEMENT_ACTIVITY_UPLOAD_POPUP_PROGRESS_UPLOAD, 3000, 0);
-        evt.clickByJavascript(ELEMENT_ACTIVITY_UPLOAD_POPUP_CLOSE_BTN);
-        info("Upload finished");
-    }
-
-    /**
      * Post a activity with mention a user and description text
      *
      * @param username String
@@ -1078,24 +678,6 @@ public class ActivityStream {
         info("Click share button");
         $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
         $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.disabled, Configuration.timeout);
-    }
-
-    /**
-     * Check mention list user
-     *
-     * @param user      String
-     * @param text      String
-     * @param isPresent true if user is in the list false if user is not in the list
-     */
-    public void checkMentionListUser(String user, String text, boolean isPresent) {
-        if (!text.isEmpty())
-            evt.type(ELEMENT_COMPOSER_INPUT_FILED, text, false);
-        evt.type(ELEMENT_COMPOSER_INPUT_FILED, "@" + user, false);
-        if (isPresent) {
-            evt.waitForAndGetElement(ELEMENT_PUBLICATION_SUGGEST_USER.replace("${name}", user));
-        } else {
-            evt.waitForElementNotPresent(ELEMENT_PUBLICATION_SUGGEST_USER.replace("${name}", user));
-        }
     }
 
     /**
@@ -1137,76 +719,6 @@ public class ActivityStream {
         $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
         $(byText(textContent)).should(Condition.exist);
         info("The comment is added successfully");
-    }
-
-    /**
-     * Open Preview mode by clicking on View link
-     *
-     * @param nameDocument String
-     * @param type         if type=1, this is for office document files and media files if
-     *                     type=2, this is for webcontent files if type=3, this is for embedded
-     *                     medias as: youtube, vimeo, slideshared...
-     * @param link         String
-     */
-    public void openPreviewModeOnViewLink(String nameDocument, int type, String link) {
-        info("Open Preview mode");
-        switch (type) {
-            case 1:
-                info("this is a documents or medias");
-                evt.waitElementAndTryGetElement(ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}", nameDocument));
-                // waitForAndGetElement(ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}",
-                // nameDocument));
-                evt.click(ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}", nameDocument));
-                break;
-            case 2:
-                info("this is a content");
-                evt.waitElementAndTryGetElement(ELEMENT_ACTIVITY_WEBCONTENT_VIEW_LINK.replace("${nameContent}", nameDocument));
-                // waitForAndGetElement(ELEMENT_ACTIVITY_WEBCONTENT_VIEW_LINK.replace("${nameContent}",
-                // nameDocument));
-                evt.click(ELEMENT_ACTIVITY_WEBCONTENT_VIEW_LINK.replace("${nameContent}", nameDocument));
-                break;
-            case 3:
-                info("this is a embedded media");
-                evt.waitElementAndTryGetElement(ELEMENT_ACTIVITY_EMBBED_MEDIA_VIEW_LINK.replace("${linkFile}", link));
-                evt.click(ELEMENT_ACTIVITY_EMBBED_MEDIA_VIEW_LINK.replace("${linkFile}", link));
-                break;
-            default:
-                info("Not type for your format.Please check your type");
-                break;
-        }
-    }
-
-    /**
-     * Open Preview mode by clicking on file's name
-     *
-     * @param fileName String
-     * @param link     String
-     * @param type     if type=1, this is for office document files and media files if
-     *                 type=2, this is for webcontent files if type=3, this is for embedded
-     *                 medias as: youtube, vimeo, slideshared...
-     */
-    public void openPreviewModeOnFileName(String fileName, String link, int type) {
-        info("Open Preview mode");
-        switch (type) {
-            case 1:
-                info("this is a documents or medias");
-                evt.waitElementAndTryGetElement(ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}", fileName));
-                evt.click(ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}", fileName));
-                break;
-            case 2:
-                info("this is a content");
-                evt.waitElementAndTryGetElement(ELEMENT_ACTIVITY_WEBCONTENT_TITLE.replace("${title}", fileName));
-                evt.click(ELEMENT_ACTIVITY_WEBCONTENT_TITLE.replace("${title}", fileName));
-                break;
-            case 3:
-                info("this is a embedded media");
-                evt.waitElementAndTryGetElement(ELEMENT_ACTIVITY_AUDIO_VIDEO_TITLE.replace("${link}", link));
-                evt.click(ELEMENT_ACTIVITY_AUDIO_VIDEO_TITLE.replace("${link}", link));
-                break;
-            default:
-                info("Not type for your format.Please check your type");
-                break;
-        }
     }
 
     /**
@@ -1294,38 +806,6 @@ public class ActivityStream {
         }
         evt.waitForElementNotPresent(ELEMENT_ACTIVITY_BOX.replace("${name}", name));
         info("the activity is removed successfully");
-    }
-
-    /**
-     * Open answer form from Activity Stream
-     *
-     * @param question String
-     */
-    public void goToReplyAnswerQuestion(String question) {
-        info("Click on Answer link");
-        evt.click(ELEMENT_QUESTION_ACTIVITY_ANSWER_ICON.replace("$question", question));
-        evt.waitForAndGetElement(ELEMENT_ANSWER_FORM);
-        info("Answer form is shown successfully");
-    }
-
-    /**
-     * Check format of a comment
-     *
-     * @param activity String
-     * @param comment  String
-     * @param fullName String
-     */
-    public void checkFormatComment(String activity, String comment, String fullName) {
-        info("Avatar and content of user comment");
-        evt.waitElementAndTryGetElement(ELEMENT_COMMENT_AVATAR_USER.replace("$activity", activity)
-                .replace("$comment", comment)
-                .replace("$fullName", fullName));
-        info("Name of user comment");
-        evt.waitElementAndTryGetElement(ELEMENT_COMMENT_AUTHOR.replace("$activity", activity)
-                .replace("$comment", comment)
-                .replace("$fullName", fullName));
-        info("Time comment is posted");
-        evt.waitElementAndTryGetElement(ELMEMENT_COMMENT_TIME.replace("$activity", activity).replace("$comment", comment));
     }
 
     /**
@@ -1884,13 +1364,6 @@ public class ActivityStream {
                 .getAttribute("id")
                 .split("commentContainercomment")[1];
         $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idReplyContainer))).click();
-    }
-
-    /**
-     * Define options of menu activity
-     */
-    public enum optionMenuActivity {
-        All_Activities, My_Spaces, My_Activities, Connections;
     }
 
     public enum changeTypes {
