@@ -17,6 +17,7 @@ import org.exoplatform.platform.qa.ui.calendar.pageobject.EventManagement;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
+import org.junit.jupiter.api.Test;
 
 @Tag("calendar")
 @Tag("smoke")
@@ -47,6 +48,7 @@ public class CALEventDeleteTestIT extends Base {
    * <li>Post-Condition:</li>
    */
 
+  @Test
   public void test05_DeleteEventOfGroupCalendar() {
 
     info("Test 5: Delete event of group calendar");

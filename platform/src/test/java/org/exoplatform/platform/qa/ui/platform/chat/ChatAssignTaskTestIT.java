@@ -2,7 +2,6 @@ package org.exoplatform.platform.qa.ui.platform.chat;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import org.exoplatform.platform.qa.ui.calendar.pageobject.TaskManagement;
 import org.exoplatform.platform.qa.ui.chat.pageobject.ChatManagement;
 import org.exoplatform.platform.qa.ui.chat.pageobject.RoomManagement;
 import org.exoplatform.platform.qa.ui.commons.Base;
@@ -18,10 +17,6 @@ import org.exoplatform.platform.qa.ui.task.pageobject.ProjectsManagement;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
-import org.openqa.selenium.By;
-
-import javax.lang.model.element.Element;
-
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
