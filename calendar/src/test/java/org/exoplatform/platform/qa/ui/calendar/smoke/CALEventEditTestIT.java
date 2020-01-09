@@ -52,7 +52,7 @@ public class CALEventEditTestIT extends Base {
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li>
    */
-
+  @Test
   public void test03_EditEventOfGroupCalendar() {
     info("Test 3: Edit event of group calendar");
     /*

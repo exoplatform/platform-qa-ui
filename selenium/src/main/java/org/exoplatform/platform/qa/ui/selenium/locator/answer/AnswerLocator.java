@@ -210,16 +210,10 @@ public class AnswerLocator {
   public static final By              ELEMENT_ANSWER_BUTTON                                 =
           By.xpath("//*[@class='questionAction']//*[text()='Answer']");
   public static final By              ELEMENT_ANSWER_FORM                                   = By.id("UIResponseForm");
-  public static final By              ELEMENT_ANSWER_FORM_DATA_FRAME_INPUT                  =
-          By.xpath("//*[@class='cke_wysiwyg_frame cke_reset']");
   public static final By              ELEMENT_ANSWER_APPROVE_CHECKBOX                       = By.xpath("//*[@id=\"UIResponseForm\"]/div[2]/div[4]/div/span");
   public static final By              ELEMENT_ANSWER_ACTIVATE_CHECKBOX                      = By.xpath("//*[@id=\"UIResponseForm\"]/div[2]/div[5]/div/span");
-  public static final By              ELEMENT_ANSWER_RELATED_BUTTON                         =
-          By.xpath("//*[@class='uiIconLightGray uiIconPlus']");
   public static final By              ELEMENT_ANSWER_FORM_SAVE_BUTTON                       =
           By.xpath(".//*[@id='UIResponseForm']//button[1]");
-  public static final By              ELEMENT_ANSWER_FORM_CANCEL_BUTTON                     =
-          By.xpath(".//*[@id='UIResponseForm']//button[2]");
   // More actions
   public static final String          ELEMENT_ANSWER_MORE_ACTION_BUTTON                     =
           "//*[@class='responseContainer']//*[contains(@id,'answer')]//*[text()='$answer']/../../../../..//*[@class='uiIconSettings uiIconLightGray']";

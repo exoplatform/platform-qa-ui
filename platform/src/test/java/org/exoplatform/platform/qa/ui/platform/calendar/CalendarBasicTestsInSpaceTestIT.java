@@ -64,7 +64,6 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
   @Tag("eventis")
   public void test01_AddEventInSpace() {
     String titleEvent = "titleEvent" + getRandomNumber();
-    String contentEvent = "contentEvent" + getRandomNumber();
     String pattern = "MM-dd-yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
