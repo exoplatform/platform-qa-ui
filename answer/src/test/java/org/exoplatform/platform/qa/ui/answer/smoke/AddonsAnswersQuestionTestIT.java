@@ -58,7 +58,6 @@ public class AddonsAnswersQuestionTestIT extends Base {
     homePagePlatform.goToAnswer();
     questionManagement.goToSubmitQuestion();
     questionManagement.inputDataToQuestionForm(question, content, null, "");
-    // click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
     $(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
     $(ELEMENT_OK_BUTTON_LINK).click();
     $(byText(question)).should(Condition.exist);
@@ -91,7 +90,6 @@ public class AddonsAnswersQuestionTestIT extends Base {
     homePagePlatform.goToAnswer();
     questionManagement.goToSubmitQuestion();
     questionManagement.inputDataToQuestionForm(question, content, null, "");
-    // click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
     $(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
     $(ELEMENT_OK_BUTTON_LINK).click();
     $(byText(question)).should(Condition.exist);
@@ -104,7 +102,6 @@ public class AddonsAnswersQuestionTestIT extends Base {
      */
     questionManagement.goToActionOfQuestionByRightClick(question, QuestionManagement.actionQuestionOption.EDIT);
     questionManagement.inputDataToQuestionForm(newquestion, newcontent, null, "");
-    // click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
     $(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
     $(byText(question)).shouldNot(Condition.exist);
     $(byText(newquestion)).should(Condition.exist);
@@ -135,7 +132,6 @@ public class AddonsAnswersQuestionTestIT extends Base {
     homePagePlatform.goToAnswer();
     questionManagement.goToSubmitQuestion();
     questionManagement.inputDataToQuestionForm(question, content, null, "");
-    // click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
     $(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
     $(ELEMENT_OK_BUTTON_LINK).click();
     $(byText(question)).should(Condition.exist);

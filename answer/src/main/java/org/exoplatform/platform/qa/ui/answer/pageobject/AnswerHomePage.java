@@ -1,7 +1,6 @@
 package org.exoplatform.platform.qa.ui.answer.pageobject;
 
 import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selenide.$;
 
 import static com.codeborne.selenide.Selenide.refresh;
@@ -64,14 +63,4 @@ public class AnswerHomePage {
     $(ELEMENT_ADVANCE_SEARCH_POPUP).waitUntil(Condition.appears, Configuration.timeout);
   }
 
-  /**
-   * Open a detail question
-   * 
-   * @param question
-   */
-  public void goToQuestion(String question) {
-    info("Click on Question link");
-    evt.click(ELEMENT_QUESTION_LINK.replace("$question", question));
-
-  }
 }

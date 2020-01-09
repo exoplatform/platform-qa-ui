@@ -68,25 +68,4 @@ public class AddUsers {
     $(ELEMENT_CONFIRM_INFORMATION).click();
   }
 
-  /**
-   * function: check content of mail then delete mail
-   *
-   * @param title title of the page
-   * @param opParams if true check it's present, false check if it's not present
-   */
-  public void checkEmailNotification(String title, Object... opParams) {
-    info("Check and delete mail");
-    Boolean checkOrNo = (Boolean) (opParams.length > 0 ? opParams[0] : true);
-    String parentWindow = testBase.getExoWebDriver().getWebDriver().getWindowHandle();
-    info("parentWindow:" + parentWindow);
-    for (String windowHandle : testBase.getExoWebDriver().getWebDriver().getWindowHandles()) {
-      testBase.getExoWebDriver().getWebDriver().switchTo().window(windowHandle);
-      info("driver.title:" + testBase.getExoWebDriver().getWebDriver().getTitle());
-    }
-    if (checkOrNo == true) {
-      evt.waitForAndGetElement(ELEMENT_GMAIL_CONTENT.replace("${title}", title), 30000, 0);
-    } else {
-      evt.waitForElementNotPresent(ELEMENT_GMAIL_CONTENT.replace("${title}", title), 30000, 0);
-    }
-  }
 }

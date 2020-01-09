@@ -7,17 +7,12 @@ import static org.exoplatform.platform.qa.ui.selenium.Button.ELEMENT_OK_BUTTON_L
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
-
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.answer.pageobject.AnswerCategoryManagement;
 import org.exoplatform.platform.qa.ui.answer.pageobject.AnswerManagement;
 import org.exoplatform.platform.qa.ui.answer.pageobject.CommentManagement;
@@ -75,10 +70,7 @@ public class AnswerBasicTestsWithUserTestIT extends Base {
   @Test
   public void test04_AddAnswerAQuestion() {
     String answer = "answer" + getRandomNumber();
-    String newanswer = "newanswer" + getRandomNumber();
     String question = "question" + getRandomNumber();
-    String fullName = "fullName" + getRandomNumber();
-    String content = "content" + getRandomNumber();
 
     info("Test 4: Answer a question");
 
@@ -90,7 +82,6 @@ public class AnswerBasicTestsWithUserTestIT extends Base {
     $(byText(question)).click();
     answerManagement.goToAnswerQuestion(question);
     answerManagement.inputDataToAnswer(answer, null, null, null);
-    /// click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
     $(ELEMENT_ANSWER_FORM_SAVE_BUTTON).click();
     $(byText(answer)).waitUntil(Condition.appears, Configuration.timeout);
     questionManagement.deleteQuestion(question);

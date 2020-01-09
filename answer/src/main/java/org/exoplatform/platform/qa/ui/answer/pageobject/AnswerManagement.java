@@ -128,19 +128,6 @@ public class AnswerManagement {
   }
 
   /**
-   * Delete answer
-   * 
-   * @param answer string
-   */
-  public void deleteAnswer(String answer) {
-    info("Delete answer");
-    goToActionOfAnswerFromMoreAction(answer, actionAnswerOption.DELETE);
-    evt.waitForAndGetElement(ELEMENT_ANSWER_CONFIRM_DELETE);
-    evt.click(ELEMENT_ANSWER_DELETE_FORM_OK_BUTTON);
-    evt.waitForElementNotPresent(ELEMENT_ANSWER_CONTENT.replace("$answer", answer));
-  }
-
-  /**
    * function vote/unvote an answer
    * 
    * @param answer string
@@ -154,33 +141,6 @@ public class AnswerManagement {
       info("Unvote answer");
       $(byText(answer)).parent().parent().parent().find(ELEMENT_ICON_UNLIKE_ANSWER).click();
     }
-  }
-
-  /**
-   * Save or Cancel all changes of Answer form
-   *
-   * @param isSave = true if want to save all changes = false if want to cancel
-   *          all changes
-   */
-  public void saveCancelAnswerForm(Boolean isSave) {
-    if (isSave) {
-      info("Click on Save button");
-      evt.click(ELEMENT_ANSWER_FORM_SAVE_BUTTON);
-    } else {
-      info("Click on Cancel button");
-      evt.click(ELEMENT_ANSWER_FORM_CANCEL_BUTTON);
-    }
-    evt.waitForElementNotPresent(ELEMENT_ANSWER_FORM);
-    info("Answer form is closed");
-  }
-
-  /**
-   * Verify the answer that is added
-   */
-  public void verifyAnswerAdded(String answer) {
-    info("Verify that the answer is added successfully");
-    evt.waitForAndGetElement(ELEMENT_ANSWER_CONTENT.replace("$answer", answer));
-    info("The answer is added successfully");
   }
 
   /**
