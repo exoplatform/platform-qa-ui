@@ -5,11 +5,8 @@ import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_SCHEDULE_DRAG;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 
 import com.codeborne.selenide.Condition;
@@ -420,31 +417,8 @@ public class ForumTopicManagement {
     evt.waitForAndGetElement(ELEMENT_FORUM_POST_TITLE, testBase.getDefaultTimeout(), 1);
     evt.type(ELEMENT_FORUM_POST_TITLE, name, true);
     plf.inputFrame(ELEMENT_FORUM_MESSAGE, message);
-    // switchToParentWindow();
     evt.waitForAndGetElement(ELEMENT_FORUM_SETTINGS_SUBMIT, testBase.getDefaultTimeout(), 1);
     evt.clickByJavascript(ELEMENT_FORUM_SETTINGS_SUBMIT, 2);
-    // click(ELEMENT_FORUM_SETTINGS_SUBMIT);
-  }
-
-  /**
-   * addTopicSimple
-   *
-   * @param name String
-   * @param message String
-   */
-  public void addTopicSimple(String name, String message) {
-    evt.click(ELEMENT_FORUM_ADDTOPIC);
-    evt.type(ELEMENT_FORUM_TOPIC_TITLE, name, true);
-    plf.inputFrame(ELEMENT_FORUM_MESSAGE, message);
-    // switchToParentWindow();
-    // click(ELEMENT_FORUM_SETTINGS_SUBMIT);
-    do {
-      evt.waitForAndGetElement(ELEMENT_FORUM_SETTINGS_SUBMIT, testBase.getDefaultTimeout(), 1);
-      evt.clickByJavascript(ELEMENT_FORUM_SETTINGS_SUBMIT, 2);
-    } while (evt.waitForAndGetElement(ELEMENT_FORUM_TOPIC_LINK.replace("${name}", name),
-                                      testBase.getDefaultTimeout(),
-                                      1) == null);
-    info("The topic is created successfully");
   }
 
   /**
@@ -457,7 +431,6 @@ public class ForumTopicManagement {
    */
   public void replyTopic(String newTitle, String newMessg, String pathFile, String fileName) {
     info("Click on Post Reply button");
-    // click(ELEMENT_TOPIC_POST_REPLY_BOTTOM);
     $(ELEMENT_TOPIC_POST_REPLY_BOTTOM).click();
     info("Verify that the pop up is shown");
     $(ELEMENT_TOPIC_NEW_POST_TITLE).should(Condition.exist);
@@ -555,132 +528,6 @@ public class ForumTopicManagement {
     info("Click on Submit button");
     $(ELEMENT_SUBMIT_BUTTON).click();
     info("All changes are saved");
-  }
-
-  /**
-   * Check display of manage topic
-   *
-   * @param forum String
-   * @param topic String
-   * @param isDisplay boolean
-   */
-  public void checkDisplayOfTopicManage(String forum, String topic, boolean isDisplay) {
-    info("check display of manage topic");
-    evt.click(ELEMENT_FORUM_TOPIC_LINK.replace("${name}", topic), 0, true);
-    if (isDisplay) {
-      evt.waitForAndGetElement(ELEMENT_MORE_ACTION);
-      evt.waitForAndGetElement(ELEMENT_MODERATOR);
-    } else {
-      evt.waitForElementNotPresent(ELEMENT_MORE_ACTION);
-      evt.waitForElementNotPresent(ELEMENT_MODERATOR);
-    }
-  }
-
-  /**
-   * Check enable of post reply
-   *
-   * @param topic String
-   * @param isEnable boolean
-   */
-  public void checkEnableOfPostReply(String topic, boolean isEnable) {
-    info("check enable of post reply");
-    evt.click(ELEMENT_FORUM_TOPIC_LINK.replace("${name}", topic), 0, true);
-    if (isEnable) {
-      evt.waitForAndGetElement(ELEMENT_TOPIC_POST_REPLY_BOTTOM);
-    } else {
-      evt.waitForAndGetElement(ELEMENT_TOPIC_POST_REPLY_BUTTON_DISABLE);
-    }
-  }
-
-  /**
-   * Check enable of view post
-   *
-   * @param forum String
-   * @param topic String
-   * @param isEnable boolean
-   */
-  public void checkEnableOfViewPost(String forum, String topic, boolean isEnable) {
-    info("check enable of view post");
-    evt.click(ELEMENT_FORUM_TOPIC_LINK.replace("${name}", forum), 0, true);
-    if (isEnable) {
-      evt.waitForAndGetElement(ELEMENT_START_TOPIC_BTN);
-      evt.click(ELEMENT_FORUM_TOPIC_LINK.replace("${name}", topic), 0, true);
-      evt.waitForAndGetElement(ELEMENT_TOPIC_POST_REPLY_BOTTOM);
-    } else {
-      evt.waitForElementNotPresent(ELEMENT_FORUM_TOPIC_LINK.replace("${name}", topic));
-    }
-  }
-
-  /**
-   * Edit permission of topic
-   *
-   * @param topic String
-   * @param groupPath String
-   * @param member String
-   * @param isView boolean
-   * @param isPost boolean
-   */
-  public void editPermOfTopic(String topic, String groupPath, String member, boolean isView, boolean isPost) {
-    info("edit permission of topic:" + topic);
-    evt.click(ELEMENT_FORUM_TOPIC_LINK.replace("${name}", topic), 0, true);
-    selectItemMoreActionMenuTopic(specifMoreActionMenuTopic.EDIT);
-    forumPerm.selectPermGroupMemberInTopic(groupPath, member, isView, isPost);
-    evt.click(ELEMENT_SUBMIT_BUTTON);
-  }
-
-  /**
-   * Open permissions tab in Add/Edit Topic
-   */
-  public void goToPermissions() {
-    info("Permissions page");
-    evt.click(ELEMENT_TOPIC_PERMISSION_TAB);
-  }
-
-  /**
-   * Select User in Permission tab
-   */
-  public void gotoUserSelectorInPermissionTab() {
-    info("-- Go to wiki home page --");
-    evt.click(ELEMENT_TOPIC_PERMISSION_TAB_USER_SELECTOR);
-  }
-
-  /**
-   * function: Search user in User Selection Form in Topic Permission
-   * @param searchOption String
-   * @param user String
-   */
-
-  public void searchUser(String user, String searchOption) {
-    info("--Search user " + user + "--");
-    evt.type(ELEMENT_TOPIC_PERMISSION_INPUT_SEARCH_USER_NAME, user, true);
-    evt.select(ELEMENT_TOPIC_PERMISSION_SELECT_SEARCH_OPTION, searchOption);
-    evt.click(ELEMENT_TOPIC_PERMISSION_SEARCH_ICON);
-    evt.waitForTextPresent(user);
-  }
-
-  public void searchUserNotFound(String user, String searchOption) {
-    info("--Search user " + user + "--");
-    evt.type(ELEMENT_TOPIC_PERMISSION_INPUT_SEARCH_USER_NAME, user, true);
-    evt.select(ELEMENT_TOPIC_PERMISSION_SELECT_SEARCH_OPTION, searchOption);
-    evt.click(ELEMENT_TOPIC_PERMISSION_SEARCH_ICON);
-    evt.waitForTextNotPresent(user);
-  }
-
-  /**
-   * Close User Selector page
-   */
-  public void closeUserSelector() {
-    info("-- Go to User Selector page --");
-    evt.click(ELEMENT_TOPIC_PERMISSION_CLOSE_USER_SELETOR);
-
-  }
-
-  /**
-   * Cancel Add/Edit Forum form
-   */
-  public void cancelAddEditTopic() {
-    info("Cancel Add or Edit Forum");
-    evt.click(ELEMENT_TOPIC_CANCEL);
   }
 
   /**

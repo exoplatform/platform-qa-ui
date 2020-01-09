@@ -96,26 +96,11 @@ public class ForumHomePage {
   }
 
   /**
-   * Import a category from Administration menu
-   *
-   * @param folderDowloadFile String
-   * @param nameFile String
-   */
-  public void importCategory(String folderDowloadFile, String nameFile) {
-    selectItemAdministrationMenu(specifAdministrationMenu.IMPORT);
-    mftb.importFile(folderDowloadFile, nameFile);
-    button.ok();
-
-  }
-
-  /**
    * Go to a detail category in list By QuynhPT
    *
    * @param name String
    */
   public void goToCategory(String name) {
-    // goToHomeCategory();
-    // evt.click(ELEMENT_FORUM_DETAIL_FORUM_NAME_LINK.replace("${name}", name));
     $(byText(name)).click();
   }
 
@@ -158,27 +143,6 @@ public class ForumHomePage {
   public void goToForum(String name) {
     info("Click on the forum with the name:" + name);
     ELEMENT_CATEGORY_CONTAINER.find(byText(name)).click();
-  }
-
-  /**
-   * Attach file in attach popup
-   *
-   * @param pathFile String
-   * @param fileName String
-   */
-  public void attachFile(String pathFile, String fileName) {
-    info("Attach a file");
-    WebElement element = evt.waitForAndGetElement(ELEMENT_UPLOAD_POPUP_ATTACHMENT_FILE_INPUT, testBase.getDefaultTimeout(), 1, 2);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';",
-                                                                                   element);
-    info("Get the file to attach");
-    element.sendKeys(testBase.getAbsoluteFilePath(pathFile + fileName));
-    info("Verify that the file is attached");
-    evt.waitForAndGetElement(ELEMENT_UPLOAD_POPUP_NAMEFILE.replace("${fileName}", fileName));
-    info("The file is attached successfully");
-    info("Click on Save button");
-    evt.click(ELEMENT_UPLOAD_POPUP_ATTACHMENT_FILE_SAVE_BUTTON);
-
   }
 
   /**
@@ -341,118 +305,6 @@ public class ForumHomePage {
     // TODO Auto-generated method stub
     info("Click on Private Message button");
     $(ELEMENT_ACTIONBAR_PRIVATE_MESSAGE).click();
-  }
-
-  /**
-   * Go to Compose New Message tab in Private Message
-   */
-  public void goToComposeNewMessageTab() {
-    info("Click on Compose New Message tab");
-    evt.click(ELEMENT_PRIVATE_MESSAGE_COMPOSE_MESSAGE_TAB);
-
-  }
-
-  /**
-   * Select User in Compose New Message tab
-   */
-  public void gotoUserSelectorInComposeNewMessageTab() {
-    info("-- Go to wiki home page --");
-    evt.click(ELEMENT_COMPOSE_NEW_MESSAGE_USER_SELECTOR);
-  }
-
-  /**
-   * function: Search user in User Selection Form when Compose New Private Message
-   */
-
-  public void searchUser(String user, String searchOption) {
-    info("--Search user " + user + "--");
-    evt.type(ELEMENT_COMPOSE_NEW_MESSAGE_INPUT_SEARCH_USER_NAME, user, true);
-    evt.select(ELEMENT_COMPOSE_NEW_MESSAGE_SELECT_SEARCH_OPTION, searchOption);
-    evt.click(ELEMENT_COMPOSE_NEW_MESSAGE_SEARCH_ICON);
-    evt.waitForTextPresent(user);
-  }
-
-  public void searchUserNotFound(String user, String searchOption) {
-    info("--Search user " + user + "--");
-    evt.type(ELEMENT_COMPOSE_NEW_MESSAGE_INPUT_SEARCH_USER_NAME, user, true);
-    evt.select(ELEMENT_COMPOSE_NEW_MESSAGE_SELECT_SEARCH_OPTION, searchOption);
-    evt.click(ELEMENT_COMPOSE_NEW_MESSAGE_SEARCH_ICON);
-    evt.waitForTextNotPresent(user);
-  }
-
-  /**
-   * Cancel send Private Message
-   */
-  public void cancelSendPrivateMessage() {
-    info("Cancel Add or Edit Forum");
-    evt.click(ELEMENT_PRIVATE_MESSAGE_CANCEL);
-  }
-
-  /**
-   * Close User Selector page
-   */
-  public void closeUserSelector() {
-    info("-- Go to User Selector page --");
-    evt.click(ELEMENT_COMPOSE_NEW_MESSAGE_CLOSE_USER_SELETOR);
-
-  }
-
-  /**
-   * Go to Manage User in Forum
-   */
-  public void goToManageUser() {
-    // TODO Auto-generated method stub
-    info("Click on Users button on Forum administration bar");
-    evt.click(ELEMENT_FORUM_USER_LIST);
-
-  }
-
-  /**
-   * function: Search user in User Manage Form
-   * @param user String
-   * @param searchOption  String
-   */
-
-  public void searchUserInUserList(String user, String searchOption) {
-    info("--Search user " + user + "--");
-    evt.type(ELEMENT_MANAGE_USER_INPUT_SEARCH_USER_NAME, user, true);
-    evt.click(ELEMENT_MANAGE_USER_SEARCH_ICON);
-    evt.waitForTextPresent(user);
-  }
-
-  public void searchUserInUserListNotFound(String user, String searchOption) {
-    info("--Search user " + user + "--");
-    evt.type(ELEMENT_MANAGE_USER_INPUT_SEARCH_USER_NAME, user, true);
-    evt.click(ELEMENT_MANAGE_USER_SEARCH_ICON);
-    evt.waitForTextNotPresent(user);
-  }
-
-  /**
-   * Close User form
-   */
-  public void closeUserForm() {
-    info("-- Go to User form --");
-    evt.click(ELEMENT_USER_FORM_CLOSE);
-
-  }
-
-  /**
-   * Go to My Subscription
-   */
-  public void gotoMySubscriptions() {
-    evt.click(ELEMENT_FORUM_SETTINGS);
-    evt.click(ELEMENT_FORUM_SETTINGS_MYSUSCRIB);
-  }
-
-  /**
-   * Update email in Sub-scriptions
-   * @param email String
-   */
-  public void updateEmailInMySubscriptions(String email) {
-    info("Update Email in My Subscriptions ");
-    evt.type(ELEMENT_MY_SUBSCRIPTIONS_EMAIL_UPDATE, email, true);
-    evt.click(ELEMENT_FORUM_SETTINGS_UPDATE);
-    evt.waitForTextPresent(email);
   }
 
   /**

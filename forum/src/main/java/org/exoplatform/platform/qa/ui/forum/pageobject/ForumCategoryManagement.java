@@ -7,8 +7,6 @@ import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ManageFileTestBase;
-import org.junit.Assert;
-
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -150,15 +148,6 @@ public class ForumCategoryManagement {
     }
 
     /**
-     * Cancel all changes of Add Category By QuynhPT
-     */
-    public void cancelChangeCategory() {
-        evt.waitForAndGetElement(ELEMENT_ADDCATEGORY_POPUP_CANCEL_BUTTON);
-        evt.click(ELEMENT_ADDCATEGORY_POPUP_CANCEL_BUTTON);
-
-    }
-
-    /**
      * Export a forum
      *
      * @param forumName String
@@ -178,120 +167,6 @@ public class ForumCategoryManagement {
         info("Save all changes");
         $(byXpath(ELEMENT_SAVE_BTN)).click();
         sleep(Configuration.timeout);
-    }
-
-    /**
-     * Import a forum
-     *
-     * @param folderDowloadFile String
-     * @param nameFile          String
-     */
-    public void importForum(String folderDowloadFile, String nameFile) {
-        selectItemManageCategoryMenu(specifManageCategoryMenu.IMPORT_FORUM);
-        mftb.importFile(folderDowloadFile, nameFile);
-        button.ok();
-    }
-
-    /**
-     * Edit permission of category
-     *
-     * @param cat         String
-     * @param groupPath   String
-     * @param member      String
-     * @param isMod       boolean
-     * @param isPostReply boolean
-     * @param isStartTop  boolean
-     * @param isViewPost  boolean
-     */
-    public void editPermOfCategory(String cat,
-                                   String groupPath,
-                                   String member,
-                                   boolean isMod,
-                                   boolean isStartTop,
-                                   boolean isPostReply,
-                                   boolean isViewPost) {
-        info("edit permission of category:" + cat);
-        evt.click(ELEMENT_FORUM_CATEGORY_HOME_TITLE_LINK.replace("${name}", cat));
-        selectItemManageCategoryMenu(specifManageCategoryMenu.EDIT_CATEGORY);
-        evt.click(ELEMENT_PERM_TAB, 0, true);
-        forumPerm.selectPermGroupMember(groupPath, member, isMod, isStartTop, isPostReply, isViewPost);
-        evt.click(ELEMENT_ADDCATEGORY_POPUP_SAVE_BUTTON);
-    }
-
-    /**
-     * Edit permission of category
-     *
-     * @param cat       String
-     * @param groupPath String
-     * @param member    String
-     */
-    public void editRestrictedAudience(String cat, String groupPath, String member) {
-        info("edit permission of category:" + cat);
-        evt.click(ELEMENT_FORUM_CATEGORY_HOME_TITLE_LINK.replace("${name}", cat));
-        selectItemManageCategoryMenu(specifManageCategoryMenu.EDIT_CATEGORY);
-        forumPerm.selectPermGroupMemberRestricted(groupPath, member);
-        evt.click(ELEMENT_ADDCATEGORY_POPUP_SAVE_BUTTON);
-    }
-
-    /**
-     * Check display of category
-     *
-     * @param cat       String
-     * @param isDisplay boolean
-     */
-    public void checkDisplayOfCat(String cat, boolean isDisplay) {
-        info("check display of category:" + cat);
-        if (isDisplay) {
-            evt.waitForAndGetElement(ELEMENT_FORUM_CATEGORY_HOME_TITLE_LINK.replace("${name}", cat));
-            evt.click(ELEMENT_FORUM_CATEGORY_HOME_TITLE_LINK.replace("${name}", cat), 0, true);
-        } else {
-            evt.waitForElementNotPresent(ELEMENT_FORUM_CATEGORY_HOME_TITLE_LINK.replace("${name}", cat));
-        }
-    }
-
-    public void gotoUserSelectorForRestrictedAudience() {
-        info("-- Go to wiki home page --");
-        evt.click(ELEMENT_ADDCATEGORY_RESTRICTED_AUDIENCE);
-    }
-
-    /**
-     * function: Search user in User Seletion Form in Restricted Audience
-     *
-     * @param searchOption String
-     * @param user         String
-     */
-
-    public void searchUser(String user, String searchOption) {
-        info("--Search user " + user + "--");
-        evt.type(ELEMENT_RESTRICTED_AUDIENCE_INPUT_SEARCH_USER_NAME, user, true);
-        evt.select(ELEMENT_RESTRICTED_AUDIENCE_SELECT_SEARCH_OPTION, searchOption);
-        evt.click(ELEMENT_RESTRICTED_AUDIENCE_SEARCH_ICON);
-        evt.waitForTextPresent(user);
-    }
-
-    public void searchUserNotFound(String user, String searchOption) {
-        info("--Search user " + user + "--");
-        evt.type(ELEMENT_RESTRICTED_AUDIENCE_INPUT_SEARCH_USER_NAME, user, true);
-        evt.select(ELEMENT_RESTRICTED_AUDIENCE_SELECT_SEARCH_OPTION, searchOption);
-        evt.click(ELEMENT_RESTRICTED_AUDIENCE_SEARCH_ICON);
-        evt.waitForTextNotPresent(user);
-    }
-
-    /**
-     * Close User Selector page
-     */
-    public void closeUserSelector() {
-        info("-- Go to User Selector page --");
-        evt.click(ELEMENT_RESTRICTED_AUDIENCE_CLOSE_USER_SELETOR);
-
-    }
-
-    /**
-     * Open permissions tab in Add/Edit Category form
-     */
-    public void goToPermissions() {
-        info("Permissions page");
-        evt.click(ELEMENT_CATEGORY_PERMISSION_TAB);
     }
 
     /**
@@ -323,22 +198,6 @@ public class ForumCategoryManagement {
         info("Click on Save button");
         $(ELEMENT_ADDFORUM_POPUP_SAVE_BUTTON).click();
         info("Finish adding new forum");
-    }
-
-    /**
-     * Select User in Permission tab
-     */
-    public void gotoUserSelectorInPermissionTab() {
-        info("-- Go to wiki home page --");
-        evt.click(ELEMENT_CATEGORY_PERMISSION_TAB_USER_SELECTOR);
-    }
-
-    /**
-     * Cancel Add/Edit Category form
-     */
-    public void cancelAddEditCategory() {
-        info("Cancel Add or Edit Category");
-        evt.click(ELEMENT_CATEGORY_CANCEL);
     }
 
     /**
