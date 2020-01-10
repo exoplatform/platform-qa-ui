@@ -22,12 +22,8 @@ package org.exoplatform.platform.qa.ui.commons;
 
 import org.exoplatform.platform.qa.ui.commons.pageobject.Login;
 import org.exoplatform.platform.qa.ui.commons.pageobject.Platform;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-
-import static com.codeborne.selenide.Selenide.$;
 import static org.junit.Assert.assertTrue;
 
 @Tag("login")

@@ -419,7 +419,6 @@ public class ForumTopicTestIT extends Base {
      */
 
     info("sign out and log in with user1");
-    // manageLogInOut.signOut();
     manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
 
     info("go to Forum home page");
@@ -432,7 +431,6 @@ public class ForumTopicTestIT extends Base {
     forumTopicManagement.closeOpenTopic(false);
 
     info("sign out and log in with user2");
-    // manageLogInOut.signOut();
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
 
     info("go to Forum home page");
@@ -441,7 +439,6 @@ public class ForumTopicTestIT extends Base {
     $(byText(topic)).should(Condition.exist);
 
     info("log in back USER1");
-    // manageLogInOut.signOut();
     manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
     info("go to Forum home page");
     homePagePlatform.goToForum();

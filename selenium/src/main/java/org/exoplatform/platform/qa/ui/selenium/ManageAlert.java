@@ -34,8 +34,6 @@ import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class ManageAlert {
   // ECMS > Symlink
-  public final By              ELEMENT_ALERT   = By.xpath("//*[contains(@class, 'popupTitle') and contains(text(), 'Warning')]");
-
   public final By              ELEMENT_MESSAGE = By.xpath("//*[contains(@class, 'warningIcon')]");
 
   public final By              ELEMENT_INFO    = By.xpath("//*[contains(@class, 'infoIcon')]");
@@ -156,19 +154,4 @@ public class ManageAlert {
 
   }
 
-  /**
-   * Input Alert Text
-   *
-   * @param text text
-   */
-  public void inputAlertText(String text) {
-    try {
-      Alert alert = seleniumWebDriver.switchTo().alert();
-      alert.sendKeys(text);
-      alert.accept();
-      evt.switchToParentWindow();
-    } catch (NoAlertPresentException e) {
-    }
-
-  }
 }

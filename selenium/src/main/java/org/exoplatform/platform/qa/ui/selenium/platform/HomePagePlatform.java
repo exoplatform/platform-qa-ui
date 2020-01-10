@@ -180,60 +180,6 @@ public class HomePagePlatform {
   }
 
   /**
-   * Open friend profile page
-   *
-   * @param username
-   */
-  public void goToFriendProfilePage(String username) {
-    info("Go to Friend profile page");
-    testBase.getExoWebDriver().getWebDriver().get(testBase.getExoWebDriver().getBaseUrl() + "/intranet/profile/" + username);
-
-  }
-
-  /**
-   * Select display mode for AS
-   *
-   * @param type as My Activities, All Activities....
-   */
-  public void selectDisplayMode(displayModeType type) {
-    info("Open drop menu");
-    evt.click(ELEMENT_HOMEPAGE_DROP_MENU_ARROW);
-    switch (type) {
-      case My_Activities:
-        info("Select My Activities");
-        evt.click(ELEMENT_HOMEPAGE_DROP_MENU_MY_ACTIVITIES);
-        break;
-      case All_Activities:
-        info("Select All Activities");
-        evt.click(ELEMENT_HOMEPAGE_DROP_MENU_ALL_ACTIVITIES);
-        break;
-      case My_Spaces:
-        info("Select My Spaces");
-        evt.click(ELEMENT_HOMEPAGE_DROP_MENU_MY_SPACES);
-        break;
-      case Connections:
-        info("Select Connections");
-        evt.click(ELEMENT_HOMEPAGE_DROP_MENU_CONNECTIONS);
-        break;
-    }
-  }
-
-  /**
-   * Check display of user in Invitation gadget
-   *
-   * @param user
-   * @param isPresent
-   */
-  public void checkDisplayInInvitationGadget(String user, boolean isPresent) {
-    info("check display of user in Invitation");
-    goToHomePage();
-    if (isPresent)
-      evt.waitForAndGetElement(ELEMENT_INVITATIONS_PEOPLE_AVATAR.replace("${name}", user));
-    else
-      evt.waitForElementNotPresent(ELEMENT_INVITATIONS_PEOPLE_AVATAR.replace("${name}", user));
-  }
-
-  /**
    * Search User in People Field
    */
   public void searchUsersPeople(String user) {
@@ -269,21 +215,6 @@ public class HomePagePlatform {
   }
 
   /**
-   * Check display of user in Suggestion gadget
-   *
-   * @param user
-   * @param isPresent
-   */
-  public void checkDisplayInSuggestionGadget(String user, boolean isPresent) {
-    info("check display of user in Suggestion");
-    goToHomePage();
-    if (isPresent)
-      evt.waitForAndGetElement(ELEMENT_SUGGESTION_NAME.replace("${name}", user));
-    else
-      evt.waitForElementNotPresent(ELEMENT_SUGGESTION_NAME.replace("${name}", user));
-  }
-
-  /**
    * Go to user profile
    */
 
@@ -296,10 +227,4 @@ public class HomePagePlatform {
 
   }
 
-  /**
-   * Define display mode's type of the AS as My Activities,All Activities,...
-   */
-  public enum displayModeType {
-    My_Activities, All_Activities, My_Spaces, Connections;
-  }
 }

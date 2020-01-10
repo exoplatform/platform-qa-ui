@@ -2,7 +2,6 @@ package org.exoplatform.platform.qa.ui.platform.gatein;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import javafx.beans.binding.StringBinding;
 import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarHomePage;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.*;
@@ -13,14 +12,9 @@ import org.exoplatform.platform.qa.ui.selenium.platform.administration.ChangeLan
 import org.exoplatform.platform.qa.ui.selenium.platform.administration.ManageLayout;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import sun.awt.AWTAccessor;
-
-import java.util.ArrayList;
-
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
@@ -143,8 +137,6 @@ public class GateinGlobalSettingsTestIT extends Base {
         info("Change User Profile");
         info("Verify before change User Profile");
         manageLogInOut.signIn(username, password);
-        // waitForAndGetElement(ELEMENT_NAME_OF_USER_TOP_RIGHT.replace("${firstName}",
-        // username).replace("${lastName}", username));
         info("Change User Profile");
         navigationToolbar.goToMyProfile();
         userProfilePage.goToEditProfile();

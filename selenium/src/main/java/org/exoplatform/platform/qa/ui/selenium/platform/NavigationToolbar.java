@@ -289,26 +289,6 @@ public class NavigationToolbar {
   }
 
   /**
-   * Go to IDE page
-   */
-  public void goToIDE() {
-    info("-- Go to IDE home page --");
-    for (int repeat = 0; ; repeat++) {
-      if (repeat > 1) {
-        evt.mouseOverAndClick(ELEMENT_LINK_SETUP);
-        break;
-      }
-      evt.mouseOver(ELEMENT_LINK_SETUP, true);
-      if (evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL_IDE, 5000, 0) != null) {
-        info("Element " + ELEMENT_ADMINISTRATION_PORTAL_IDE + "... is displayed");
-        break;
-      }
-      info("Retry...[" + repeat + "]");
-    }
-    evt.mouseOverAndClick(ELEMENT_ADMINISTRATION_PORTAL_IDE);
-  }
-
-  /**
    * Go to Application home page
    */
   public void goToApplication() {
@@ -433,36 +413,6 @@ public class NavigationToolbar {
   }
 
   /**
-   * Go to upload file fron the toolbar
-   *
-   * @param drive
-   * @param pathInDrive
-   * @param linkFile
-   */
-  public void goToUploadFile(String drive, String pathInDrive, String linkFile) {
-    info("-- Upload file --");
-    evt.click(ELEMENT_ADD_TOOTLBAR);
-    evt.click(ELEMENT_UPLOAD_FILE_TOOLBAR);
-    if (drive != "") {
-    }
-    if (pathInDrive != "") {
-    } else {
-      evt.click(NavigationToolBarLocator.ELEMENT_UPLOAD_FILE_TOOLBAR_PERSONNAL_DOCUMENTS);
-    }
-    WebElement frame = evt.waitForAndGetElement(ELEMENT_UPLOAD_FILE_FRAME_XPATH);
-    testBase.getExoWebDriver().getWebDriver().switchTo().frame(frame);
-    info(testBase.getAbsoluteFilePath(linkFile));
-    ((JavascriptExecutor) testBase.getExoWebDriver()
-            .getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
-    testBase.getExoWebDriver()
-            .getWebDriver()
-            .findElement(ELEMENT_ACTIVITY_UPLOAD_POPUP_UPLOAD_BUTTON)
-            .sendKeys(testBase.getAbsoluteFilePath(linkFile));
-    evt.switchToParentWindow();
-    info("Upload finished");
-  }
-
-  /**
    * Open search administration
    */
   public void goToAdminSearch() {
@@ -499,13 +449,6 @@ public class NavigationToolbar {
    */
   public void goToMyProfile() {
     selectALinkOfUserMenu(specifUserToolBar.MY_PROFILE);
-  }
-
-  /**
-   * Open My dashboard
-   */
-  public void goToMyDashboard() {
-    selectALinkOfUserMenu(specifUserToolBar.MY_DASHBOARD);
   }
 
   /**
@@ -598,117 +541,6 @@ public class NavigationToolbar {
   }
 
   /**
-   * Go to Edit/Site/Layout
-   */
-  public void goToEditSiteLayout() {
-    info("Go to Edit layout form");
-    for (int repeat = 0; ; repeat++) {
-      if (repeat > 1) {
-        evt.mouseOverAndClick(ELEMENT_LINK_EDIT);
-        break;
-      }
-      evt.mouseOver(ELEMENT_LINK_EDIT, true);
-      if (evt.waitForAndGetElement(ELEMENT_MENU_EDIT_SITES, 5000, 0) != null) {
-        info("-- Click Site menu --");
-        evt.mouseOver(ELEMENT_MENU_EDIT_SITES, true);
-        if (evt.waitForAndGetElement(ELEMENT_MENU_EDIT_SITE_LAYOUT, 5000, 0) != null) {
-          evt.click(ELEMENT_MENU_EDIT_SITE_LAYOUT);
-          break;
-        }
-      } else {
-        String editPageRequest = "ajaxGet(eXo.env.server.createPortalURL('UIWorkingWorkspace', 'EditInline', true))";
-        info("editPageRequest:" + editPageRequest);
-        ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript(editPageRequest);
-        break;
-      }
-      info("Retry...[" + repeat + "]");
-    }
-  }
-
-  /**
-   * go to Edit-Site-Navigation
-   */
-  public void goToEditSiteNavigation() {
-    info("Go to Edit layout form");
-    int repeat = 0;
-    while (evt.waitForAndGetElement(ELEMENT_NAVIGATION_MANAGE_POPUP, 5000, 0) == null) {
-      if (repeat > 5)
-        break;
-      if (evt.waitForAndGetElement(ELEMENT_MENU_EDIT_SITES_NAV, 5000, 0) != null)
-        break;
-      info("Click on Edit link");
-      evt.click(ELEMENT_LINK_EDIT);
-      info("-- Click Site menu --");
-      evt.mouseOver(ELEMENT_MENU_EDIT_SITES, true);
-      info("Click on Navigation link");
-      evt.click(ELEMENT_MENU_EDIT_SITES_NAV);
-      repeat++;
-    }
-  }
-
-  /**
-   * go to Edit-Site-Add Site
-   */
-  public void goToEditSiteAddSite() {
-    info("Go to Edit layout form");
-    int repeat = 0;
-    while (evt.waitForAndGetElement(ELEMENT_ADDSITE_MANAGE_POPUP, 5000, 0) == null) {
-      if (repeat > 5)
-        break;
-      if (evt.waitForAndGetElement(ELEMENT_ADDSITE_MANAGE_POPUP, 5000, 0) != null)
-        break;
-      info("Click on Edit link");
-      evt.click(ELEMENT_LINK_EDIT);
-      info("-- Click Site menu --");
-      evt.mouseOver(ELEMENT_MENU_EDIT_SITES, true);
-      info("Click Add Site link");
-      evt.click(ELEMENT_MENU_EDIT_ADDSITE);
-      repeat++;
-    }
-  }
-
-  /**
-   * verify edit page
-   *
-   * @param title
-   * @param isEnable
-   */
-  public void verifyEditPagePerm(String title, boolean isEnable) {
-    info("verify edit page permission");
-    /*
-     * @FIXME
-     * portMg.openPage(testBase.getExoWebDriver().getBaseUrl()+"/intranet/home/"+
-     * title );
-     */
-    if (isEnable) {
-      evt.click(ELEMENT_LINK_EDIT, 0, true);
-      evt.mouseOver(ELEMENT_MENU_PAGE_LINK, true);
-      evt.waitForAndGetElement(ELEMENT_MENU_EDIT_LAYOUT);
-    } else {
-      evt.waitForElementNotPresent(ELEMENT_LINK_EDIT);
-      evt.waitForElementNotPresent(ELEMENT_MENU_EDIT_LAYOUT);
-    }
-  }
-
-  /**
-   * verify edit site
-   *
-   * @param title
-   * @param isEnable
-   */
-  public void verifyEditSitePerm(String title, boolean isEnable) {
-    info("verify edit stie permission");
-    testBase.getExoWebDriver().getWebDriver().get(testBase.getExoWebDriver().getBaseUrl() + "/" + title);
-    if (isEnable) {
-      evt.click(ELEMENT_LINK_EDIT, 0, true);
-      evt.mouseOver(ELEMENT_MENU_SITE_LINK, true);
-      evt.waitForAndGetElement(ELEMENT_MENU_LAYOUT);
-    } else {
-      evt.waitForElementNotPresent(ELEMENT_MENU_LAYOUT);
-    }
-  }
-
-  /**
    * verify Column Name
    */
   public void verifyColumnName(String columnName) {
@@ -725,41 +557,6 @@ public class NavigationToolbar {
     info("CLick on uploaded file" + uploadedFile);
     $(byXpath(ELEMENT_DOCUMENT_FOLDER_UPLOADED_FILE.replace("${file}", uploadedFile))).waitUntil(Condition.visible, Configuration.timeout).click();
     $(byXpath("//i[@id='MultiUploadClose']")).waitUntil(Condition.visible, Configuration.timeout).click();
-  }
-
-  /**
-   * copy Url To Clipboard
-   */
-  public void copyUrlToClipboard(String uploadedFile) {
-    info("Check uploaded file in folder" + uploadedFile);
-    $(byXpath(ELEMENT_DOCUMENT_FOLDER_CHECK.replace("${file}", uploadedFile))).waitUntil(Condition.visible, Configuration.timeout).click();
-    refresh();
-    info("Copy Url to clipboard");
-    $(byXpath("//a[@data-toggle='dropdown' and text()='More  '] ")).waitUntil(Condition.visible, Configuration.timeout).click();
-    COPY_URL_TO_CLIPBOARD_BUTTON.click();
-    executeJavaScript("window.open();");
-    switchTo().window(0);
-    $(byXpath("//input[@name='address']")).waitUntil(Condition.visible, Configuration.timeout).clear();
-    $(byXpath("//input[@name='address']")).waitUntil(Condition.visible, Configuration.timeout).sendKeys(Keys.CONTROL + "v");
-    String copyUrl = $(byXpath("//input[@name='address']")).getValue();
-    switchTo().window(1);
-    open(copyUrl);
-    sleep(3000);
-    $(byXpath("//div[@id='content']/embed[@id='plugin' and @src='${copyUrl}']".replace("${copyUrl}", copyUrl))).isDisplayed();
-    switchTo().window(0);
-    $(byXpath("//input[@name='address']")).waitUntil(Condition.visible, Configuration.timeout).clear();
-  }
-
-  /**
-   * rename Uploaded File
-   */
-  public void renameUploadedFile(String uploadedFile, String uploadedFileNewName) {
-    info("Check uploaded file in folder" + uploadedFile);
-    $(byXpath(ELEMENT_DOCUMENT_FOLDER_CHECK.replace("${file}", uploadedFile))).waitUntil(Condition.visible, Configuration.timeout).click();
-    info("Rename uploaded file");
-    $(ELEMENT_SITEEXPLORER_ACTION_RENAME).waitUntil(Condition.visible, Configuration.timeout).click();
-    $(ELEMENT_SITEEXPLORER_RENAME_FIELD).waitUntil(Condition.visible, Configuration.timeout).setValue(uploadedFileNewName);
-    $(ELEMENT_SITEEXPLORER_RENAME_SAVE).waitUntil(Condition.visible, Configuration.timeout).click();
   }
 
   /**
