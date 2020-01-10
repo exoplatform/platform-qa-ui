@@ -80,8 +80,6 @@ public class ManageFileTestBase {
 
   protected String       chatStatusFilePath;
 
-  protected String       groupsCalenderFilePath;
-
   protected String       remoteGadgetDataFilePath;
 
   protected String       languageFilePath;
@@ -372,8 +370,6 @@ public class ManageFileTestBase {
     Logger.info("Get the file to attach");
     element.sendKeys(getAbsoluteFilePath(pathFile + fileName));
     Logger.info("Verify that the file is attached");
-    // testBase.waitForAndGetElement(LocatorTestBase.ELEMENT_UPLOAD_POPUP_NAMEFILE.replace("${fileName}",
-    // fileName));
     $(byText(fileName)).waitUntil(Condition.appears, 10000);
     Logger.info("The file is attached successfully");
     Logger.info("Click on Save button");
@@ -554,7 +550,6 @@ public class ManageFileTestBase {
       // Setting clipboard with file location
       setClipboardData(path);
       // native key strokes for CTRL, V and ENTER keys
-
       robot.keyPress(KeyEvent.VK_CONTROL);
       robot.keyPress(KeyEvent.VK_V);
       robot.keyRelease(KeyEvent.VK_V);
@@ -577,7 +572,6 @@ public class ManageFileTestBase {
 
     Logger.info("Upload file using Robot");
     String fs = File.separator;
-    // String path=getAbsoluteFilePath(fileLocation.replace("/", fs));
     String path = getAbsoluteFilePathFromFile(fileLocation.replace("/", fs));
     Logger.info("path in uploadRobot:" + path);
     try {

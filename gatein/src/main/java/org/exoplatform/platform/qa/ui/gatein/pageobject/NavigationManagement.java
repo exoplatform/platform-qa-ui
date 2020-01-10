@@ -3,16 +3,10 @@ package org.exoplatform.platform.qa.ui.gatein.pageobject;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.ELEMENT_ANSWER_FORM_SAVE_BUTTON;
-import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_SCHEDULE_DRAG;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase.scrollToBottomPage;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -31,51 +25,6 @@ public class NavigationManagement {
     this.testBase = testBase;
     this.alert = new ManageAlert(testBase);
     this.evt = testBase.getElementEventTestBase();
-  }
-
-  /**
-   * Open Navigation Management popup
-   *
-   * @param site as acme or intranet or a group
-   */
-  public void goToEditNavigation(String site) {
-    evt.waitForAndGetElement(ELEMENT_MANAGESITES_EDIT_NAVIGATION_ICON.replace("${site}", site), 3000, 0);
-    evt.click(ELEMENT_MANAGESITES_EDIT_NAVIGATION_ICON.replace("${site}", site));
-    evt.waitForAndGetElement(ELEMENT_NAVIGATION_MANAGEMENT_POPUP_TITLE, 3000, 0);
-  }
-
-  /**
-   * Edit layout of a portal
-   *
-   * @param site String
-   */
-  public void goToEditLayout(String site) {
-    info("Click on Edit layout button");
-    evt.click(ELEMENT_MANAGESITES_EDIT_LAYOUT_ICON.replace("${site}", site));
-
-  }
-
-  /**
-   * change config of a portal
-   *
-   * @param site String
-   */
-  public void changeConfig(String site) {
-    goToEditLayout(site);
-    info("Click on site's config button");
-    evt.click(ELEMENT_MANAGESITES_EDIT_LAYOUT_SITE_CONFIG_BTN);
-
-  }
-
-  /**
-   * Go to Edit site configuration
-   *
-   * @param site String
-   */
-  public void goToEditSiteConfig(String site) {
-    info("Click on Edit Site Configuration button");
-    evt.click(ELEMENT_MANAGESITES_EDIT_CONFIG_ICON.replace("${site}", site));
-
   }
 
   /**
@@ -156,24 +105,7 @@ public class NavigationManagement {
       $(ELEMENT_NODE_NAME).setValue(subTitle);
     }
   }
-  /**
-   * Check Pages are displayed in Select Page
-   *
-   */
-  public void checkPagesDisplayedInSelectPage(String title, String subTitle) {
-    if (subTitle.isEmpty()) {
-      info("Add parent node");
-      $(ELEMENT_UP_LEVEL_PATH_NODE).click();
-      $(ELEMENT_ADD_NODE).click();
-      $(ELEMENT_NODE_NAME).setValue(title);
-    } else {
-      info("Add sub node");
-      $(byText(title)).waitUntil(Condition.appears,Configuration.timeout);
-      $(byClassName("uiNavigationManagement")).find(byText(title)).scrollTo().click();
-      $(ELEMENT_ADD_NODE).click();
-      $(ELEMENT_NODE_NAME).setValue(subTitle);
-    }
-  }
+
   /**
    * Delete a node
    *
@@ -218,84 +150,6 @@ public class NavigationManagement {
     $(byClassName("uiNavigationManagement")).find(byLinkText(name)).scrollTo().contextClick();
     info("Select Edit link");
     selectItem(specifiContextMenu.EDIT_THIS_NODE);
-  }
-
-  /**
-   * Copy a node
-   *
-   * @param name String
-   */
-  public void copyNode(String name) {
-    info("Copy a node");
-    info("Right click on the node");
-    evt.rightClickOnElement(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name));
-    info("Select Edit link");
-    selectItem(specifiContextMenu.COPY_NODE);
-  }
-
-  /**
-   * Clone a node
-   *
-   * @param name String
-   */
-  public void cloneNode(String name) {
-    info("Clone a node");
-    info("Right click on the node");
-    evt.rightClickOnElement(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name));
-    info("Select Edit link");
-    selectItem(specifiContextMenu.CLONE_NODE);
-  }
-
-  /**
-   * Cut a node
-   *
-   * @param name String
-   */
-  public void cutNode(String name) {
-    info("Cut a node");
-    info("Right click on the node");
-    evt.rightClickOnElement(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name));
-    info("Select Edit link");
-    selectItem(specifiContextMenu.CUT_NODE);
-  }
-
-  /**
-   * Paste a node
-   *
-   * @param name String
-   */
-  public void pasteNode(String name) {
-    info("Paste a node");
-    info("Right click on the node");
-    evt.rightClickOnElement(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name));
-    info("Select Edit link");
-    selectItem(specifiContextMenu.PASTE_NODE);
-  }
-
-  /**
-   * Move up a node
-   *
-   * @param name String
-   */
-  public void moveUpNode(String name) {
-    info("Move up a node");
-    info("Right click on the node");
-    evt.rightClickOnElement(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name));
-    info("Select Edit link");
-    selectItem(specifiContextMenu.MOVE_UP);
-  }
-
-  /**
-   * Move down a node
-   *
-   * @param name String
-   */
-  public void moveDownNode(String name) {
-    info("Move down a node");
-    info("Right click on the node");
-    evt.rightClickOnElement(ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME.replace("${name}", name));
-    info("Select Edit link");
-    selectItem(specifiContextMenu.MOVE_DOWN);
   }
 
   /**
@@ -403,68 +257,6 @@ public class NavigationManagement {
 
   }
 
-  /**
-   * Input information for Icon tab
-   *
-   * @param isSizeIcon boolean
-   * @param typeIcon boolean
-   * @param nameIcon boolean
-   * @param isGetDefault boolean
-   */
-  public void inputInfoIcon(boolean isSizeIcon, String typeIcon, String nameIcon, boolean isGetDefault) {
-
-  }
-
-  /**
-   * Search a page
-   *
-   * @param title  String
-   * @param siteName String
-   * @param type String
-   */
-  public void searchPage(String title, String siteName, String type) {
-    info("waiting the page is loaded full");
-    if (!title.isEmpty()) {
-      info("Input a new title");
-      evt.type(ELEMENT_NODE_PAGE_SELECTOR_TITLE_FIELD, title, true);
-    }
-    if (!siteName.isEmpty()) {
-      info("Input a new site Name");
-      evt.type(ELEMENT_NODE_PAGE_SELECTOR_SITES_NAME_FIELD, siteName, true);
-    }
-    if (!type.isEmpty()) {
-      info("Select a type");
-      evt.select(ELEMENT_NODE_PAGE_SELECTOR_TYPE_DROPBOX, type, 2);
-    }
-    info("Click on Search button");
-    evt.click(ELEMENT_NODE_PAGE_SELECTOR_SEARCH_BUTTON);
-  }
-
-  /**
-   * Select a page in pages list after searching the page
-   *
-   * @param title String
-   */
-  public void selectPage(String title) {
-    info("Searching the page");
-    searchPage(title, "", "");
-    info("Select a page");
-    evt.click(ELEMENT_NODE_PAGE_SELECTOR_SELECT_PAGES_BTN);
-
-  }
-
-  /**
-   * verify Add Navigation permission
-   *@param title String
-   * @param isEnable boolean
-   */
-  public void verifyAddNavigationPerm(String title, boolean isEnable) {
-    info("verify Add Navigation permission");
-
-    if (isEnable) {
-
-    }
-  }
   /*
   *Go To Search And Select Page
    */
