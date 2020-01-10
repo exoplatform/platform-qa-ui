@@ -248,51 +248,6 @@ public class ManageFileTestBase {
   }
 
   /**
-   * cutPasteFileFromOutputToTestData
-   *
-   * @param fileName String
-   */
-  public void cutPasteFileFromOutputToTestData(String fileName) {
-    String fs = File.separator;
-    String source = System.getProperty("user.dir") + "/src/main/resources/TestData/TestOutput/" + fileName;
-    source = source.replace("/", fs);
-    // directory where file will be copied
-    String target = System.getProperty("user.dir") + "/src/main/resources/TestData/";
-    target = target.replace("/", fs);
-
-    // name of source file
-    File sourceFile = new File(source);
-    String name = sourceFile.getName();
-
-    File targetFile = new File(target + name);
-
-    // copy file from one location to other
-    // try {
-    // @TODO fix it by added a dependency to commons-io?
-    // FileUtils.copyFile(sourceFile, targetFile);
-    // } catch (IOException e) {
-    // e.printStackTrace();
-    // }
-    // delete file in TestOutput
-    deleteFile("TestOutput/" + fileName);
-  }
-
-  /**
-   * Import a Category
-   *
-   * @param pathFile String
-   * @param fileName String
-   */
-  public void importFile(String pathFile, String fileName) {
-    Logger.info("Attach a file");
-    testBase.click(LocatorTestBase.ELEMENT_UPLOAD_SELECT_BUTTON);
-    uploadFileUsingRobot(pathFile + "/" + fileName);
-    testBase.waitForAndGetElement(LocatorTestBase.ELEMENT_UPLOAD_POPUP_NAMEFILE.replace("${fileName}", fileName));
-    testBase.click(LocatorTestBase.ELEMENT_SAVE_BTN);
-
-  }
-
-  /**
    * This function returns a absolute path from a relative path
    *
    * @param relativeFilePath String

@@ -48,13 +48,6 @@ public class HomePagePlatform {
     $(byClassName("notif-chat-open-link")).waitUntil(Condition.appears, Configuration.timeout).click();
   }
 
-  public void backToHomeFromChat() {
-    info("--Go to Home--");
-    switchTo().window(1);
-    refreshUntil($(byClassName("home-button")), Condition.visible, 1000);
-    $(byXpath("//i[@class='uiIconHomeInfo']")).waitUntil(Condition.visible,Configuration.timeout).click();
-    refresh();
-  }
   /**
    * Go to Documents
    */
@@ -141,17 +134,6 @@ public class HomePagePlatform {
     sleep(Configuration.timeout);
     $(ELEMENT_FORUM_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout).click();
     refresh();
-  }
-
-  /**
-   * Go to faq page
-   */
-  public void goToFaq() {
-    info("Base url is " + testBase.getExoWebDriver().getBaseUrl());
-    String url = testBase.getExoWebDriver().getBaseUrl() + "/intranet/home/FAQ";
-    info("-- Go to FAQ page --");
-    testBase.getExoWebDriver().getWebDriver().get(url);
-    evt.waitForAndGetElement(ELEMENT_FAQ_QUESTION_LIST);
   }
 
   /**

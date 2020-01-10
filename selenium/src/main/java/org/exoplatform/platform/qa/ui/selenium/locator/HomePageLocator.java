@@ -90,21 +90,6 @@ public final class HomePageLocator {
   public static final By              ELEMENT_HOMPAGE_MIDDLE_PANEL                                         =
                                                                    By.id("OfficeMiddle");
 
-  public static final By              ELEMENT_HOMEPAGE_DROP_MENU_ARROW                                     =
-                                                                       By.xpath(".//*[@id='DisplayModesDropDown']//*[contains(@class,'uiIconMiniArrowDown')]");
-
-  public static final By              ELEMENT_HOMEPAGE_DROP_MENU_MY_ACTIVITIES                             =
-                                                                               By.xpath(".//*[@id='DisplayModesDropDown']//*[contains(@class,'dropdown-menu')]//*[contains(text(),'My Activities')]");
-
-  public static final By              ELEMENT_HOMEPAGE_DROP_MENU_ALL_ACTIVITIES                            =
-                                                                                By.xpath(".//*[@id='DisplayModesDropDown']//*[contains(@class,'dropdown-menu')]//*[contains(text(),'All Activities')]");
-
-  public static final By              ELEMENT_HOMEPAGE_DROP_MENU_MY_SPACES                                 =
-                                                                           By.xpath(".//*[@id='DisplayModesDropDown']//*[contains(@class,'dropdown-menu')]//*[contains(text(),'My Spaces')]");
-
-  public static final By              ELEMENT_HOMEPAGE_DROP_MENU_CONNECTIONS                               =
-                                                                             By.xpath(".//*[@id='DisplayModesDropDown']//*[contains(@class,'dropdown-menu')]//*[contains(text(),'Connections')]");
-
   // Tool bar
   public static final By              ELEMENT_TOOLBAR_ADMINISTRATION                                       =
                                                                      By.xpath("//*[@class='uiIconPLF24x24Setup']");
@@ -191,18 +176,12 @@ public final class HomePageLocator {
                                                                  $(byId("onlineContent"));
 
   // invitation gadget
-  public static final String          ELEMENT_INVITATIONS_PEOPLE_AVATAR                                    =
-                                                                        ".//*[contains(text(),'${name}')]/../../../..//*[@class='peopleInvitePicture pull-left avatarXSmall']";
-
   public static final By              ELEMENT_INVITATIONS_GADGET                                           =
                                                                  By.id("InvitationsPortlet");
 
   // suggestion gadget
   public static final By              ELEMENT_SUGGESTION_BOX                                               =
                                                              By.xpath(".//*[@class='uiBox uiSuggestions']");
-
-  public static final String          ELEMENT_SUGGESTION_NAME                                              =
-                                                              "//*[@id='peopleSuggest']//*[contains(text(),'${name}')]";
 
   // main frame
   public static final By              ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES                        =

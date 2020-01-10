@@ -38,15 +38,10 @@ public class Logger {
     String logMessage = message;
     StackTraceElement[] elements = t.getStackTrace();
     String Filename = elements[2].getFileName();
-    String sClassName = Filename.substring(0, Filename.length() - 5);// remove
-    // .java
+    String sClassName = Filename.substring(0, Filename.length() - 5);
     String sMethodName = elements[2].getMethodName();
     logMessage = String.format("[%-10s][%s] %s", sClassName, sMethodName, message);
     return logMessage;
-  }
-
-  public static void trace(String message) {
-    logger.trace(log(message));
   }
 
   public static void debug(String message) {
@@ -55,10 +50,6 @@ public class Logger {
 
   public static void info(String message) {
     logger.info(log(message));
-  }
-
-  public static void warn(String message) {
-    logger.warn(log(message));
   }
 
   public static void error(String message) {

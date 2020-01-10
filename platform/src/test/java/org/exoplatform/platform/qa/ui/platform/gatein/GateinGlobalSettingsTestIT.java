@@ -22,7 +22,6 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_NAME_OF_USER_TOP_RIGHT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase.scrollToBottomPage;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 

@@ -66,46 +66,11 @@ public final class GateinLocator {
 public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconClose"));
 
   /*************************************
-   * MY DASHBOARD
-   ***************************************************************/
-  public static final By              ELEMENT_DASHBOARD_WORKSPACE_POPUP_TITLE                 =
-                                                                              By.xpath(".//*[@class='PopupTitle popupTitle'][contains(text(),'Dashboard Workspace')]");
-
-  public static final By              ELEMENT_DASHBOARD_WORKSPACE_POPUP_CLOSE                 =
-                                                                              By.xpath(".//*[contains(@class,'UIPopupWindow')]//*[contains(text(),'Dashboard Workspace')]/..//*[contains(@class,'uiIconClose')]");
-
-  // tab
-
-  public static final String          ELEMENT_MYDASH_TAB_NAME                                 = "//*[@id='${name}']";
-
-  public static final String          ELEMENT_MYDASH_DEFAULT_TAB_EDIT                                 = "//li[@class=\"active last editing\"]/a/input";
-
-  public static final String          ELEMENT_MYDASH_BTN_DELETETAB                            =
-                                                                   "//*[@id='${name}']/../../..//*[contains(@class,'uiIconClose')]";
-
-  public static final By              ELEMENT_MYDASH_BTN_ADDGADGET                            =
-                                                                   By.xpath(".//*[@id='GadgetContainer']//*[contains(text(),'Add Gadgets')]");
-
-  public static final String          ELEMENT_MYDASH_ADDED_GADGET_IN_DASHBOARD                =
-                                                                               ".//*[@class='gadgetTitle'][contains(text(),'${name}')]";
-
-  public static final String          ELEMENT_MYDASH_DELETE_GADGET                            =
-                                                                   ".//*[@class='gadgetTitle'][contains(text(),'${name}')]/..//*[contains(@class,'uiIconClose')][1]";
-
-  public static final By              ELEMENT_MYDASH_GADGET_BYURL                             = By.xpath("//*[@id='url']");
-
-  public static final By              ELEMENT_MYDASH_GADGET_ADDBTN                            =
-                                                                   By.xpath(".//*[@id='UIAddGadgetForm']//*[contains(@class,'uiIconPlus')]");
-
-  /*************************************
    * NAVIGATION MANAGEMENT
    ***************************************************************/
 
   public static final By              ELEMENT_MANAGESITES_TITLE                               =
                                                                 By.xpath(".//*[@id='UIPortalNavigationPortlet']//h5[text()='Manage Sites']");
-
-  public static final String          ELEMENT_MANAGESITES_EDIT_NAVIGATION_ICON                =
-                                                                               ".//*[@class='managementBlock']//div[text()='${site}']/../..//*[@class='uiIconNavigation uiIconLightGray']";
 
   public static final String          ELEMENT_MANAGESITES_EDIT_LAYOUT_ICON                    =
                                                                            ".//*[@class='managementBlock']//div[text()='${site}']/../..//*[contains(@class,'uiIconEditLayout')]";
@@ -128,8 +93,6 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
 
   public static final SelenideElement ELEMENT_BUTTON_EDIT_NAVIGATION                          =
                                                                      $(byXpath("//*[@id=\"UISiteManagement\"]/table/tbody/tr[3]/td[3]/a"));
-
-  public static final String          ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME                 = ".//*[@title='${name}']";
 
   public static final By              ELEMENT_NAVIGATION_MANAGEMENT_SAVE                      = By.xpath(".//*[text()='Save']");
 
@@ -232,19 +195,6 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
 
   public static final By              ELEMENT_NODE_PAGE_SELECTOR_CLEAR_PAGE_BTN               =
                                                                                 By.xpath(".//*[@id='UIPageSelector']//button[3]");
-
-  public static final By              ELEMENT_NODE_PAGE_SELECTOR_TITLE_FIELD                  =
-                                                                             By.cssSelector("#UIPageSearchForm #pageTitle");
-
-  public static final By              ELEMENT_NODE_PAGE_SELECTOR_SITES_NAME_FIELD             =
-                                                                                  By.cssSelector("#UIPageSearchForm #siteName");
-
-  public static final By              ELEMENT_NODE_PAGE_SELECTOR_TYPE_DROPBOX                 =
-                                                                              By.cssSelector("#UIPageSearchForm .selectbox");
-
-  public static final By              ELEMENT_NODE_PAGE_SELECTOR_SEARCH_BUTTON                =
-                                                                               By.cssSelector("#UIPageSearchForm .uiIconSearch");
-
   /*************************************
    * PAGE CREATION WINZARD
    ***************************************************************/
@@ -289,12 +239,6 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
 
   public static final By              ELEMENT_VIEW_PROPERTIES                                 =
                                                               By.cssSelector(".PageProfileIcon");
-
-  public static final String          ELEMENT_DRAG_CONTAINER                                  =
-                                                             "//*[@title='Hold this area to drag this container']";
-
-  public static final String          ELEMENT_DRAG_CONTAINER_PLF41                            =
-                                                                   "//*[@data-original-title='Hold this area to drag this container']";
 
   // Container popup editor
   public static final By              ELEMENT_CONTAINER_POPUP_TITLE                           = By.name("title");
