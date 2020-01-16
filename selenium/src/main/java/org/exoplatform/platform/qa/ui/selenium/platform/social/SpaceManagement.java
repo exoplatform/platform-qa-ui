@@ -98,7 +98,7 @@ public class SpaceManagement {
     info("Save all changes");
     ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.visible, Configuration.timeout).click();
     sleep(Configuration.timeout);
-    ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs);
   }
 
   /**
@@ -505,10 +505,10 @@ public class SpaceManagement {
     sleep(Configuration.timeout);
     ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.appears, Configuration.timeout);
     info("Input the space into search text box");
-    ELEMENT_MY_SPACE_SEARCH_TEXT.setValue(name);
+    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.visible, Configuration.timeout).setValue(name);
     sleep(Configuration.timeout);
     info("evt.click on Search button");
-    $(ELEMENT_MY_SPACE_SEARCH_BTN).click();
+    $(ELEMENT_MY_SPACE_SEARCH_BTN).waitUntil(Condition.visible, Configuration.timeout).click();
   }
 
   /**
@@ -677,7 +677,7 @@ public class SpaceManagement {
     goToInvitationsReceivedTab();
     searchSpace(space);
     info("evt.click on Accept button of the space");
-    $(byText(space)).parent().parent().parent().find(ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(byText(space)).parent().parent().parent().find(ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     info("Verify that the user joijed to the space");
     ELEMENT_LIST_MY_SPACES_IN_LEFT_NAVIGATION.find(byText(space)).should(Condition.exist);
   }

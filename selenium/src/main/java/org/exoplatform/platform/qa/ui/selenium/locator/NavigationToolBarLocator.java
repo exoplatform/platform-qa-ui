@@ -235,7 +235,7 @@ public final class NavigationToolBarLocator {
                                                           By.xpath("//*[@tabindex='-1' and contains(text(),'Site')]/..//*[contains(text(),'Layout')]");
 
   public static final By              ELEMENT_MENU_SEO_LINK                               =
-                                                            By.xpath("//span[contains(text(), 'SEO')]");
+                                                            By.xpath("//*[@class='SEOToolbar']");
 
   public static final By              ELEMENT_MENU_ADD_PAGE_LINK                          =
                                                                  By.xpath("//*[contains(text(), 'Add Page')]");

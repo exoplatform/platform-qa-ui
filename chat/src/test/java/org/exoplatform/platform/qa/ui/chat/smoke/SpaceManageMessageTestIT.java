@@ -2,13 +2,13 @@ package org.exoplatform.platform.qa.ui.chat.smoke;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_USER_PROFILE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_USER_RESULT_SEARCH;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_MINI_CHAT;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -123,7 +123,7 @@ public class SpaceManageMessageTestIT extends Base {
     homePagePlatform.goToChat();
     switchTo().window(1);
     info("check that space exist");
-    $(byText(space)).should(Condition.exist);
+    $(byText(space)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).exists();
     switchTo().window(0);
     homePagePlatform.goToAllSpace();
     spaceManagement.deleteSpace(space, false);
@@ -142,13 +142,14 @@ public class SpaceManageMessageTestIT extends Base {
     String message = "message" + getRandomNumber();
     String message2 = "messagee" + getRandomNumber();
     String MiniChatName;
+    manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToAddUser();
     info("Create new user");
     userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
     manageLogInOut.signIn(usernamea, password);
     homePagePlatform.goToChat();
     switchTo().window(0);
-    manageLogInOut.signIn(PLFData.username, PLFData.password);
+    manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
     homePagePlatform.goToHomePage();
     homePagePlatform.goToPeople();
     homePagePlatform.searchUsersPeople(usernamea);
@@ -170,12 +171,12 @@ public class SpaceManageMessageTestIT extends Base {
     manageLogInOut.signIn(usernamea, password);
     homePagePlatform.goToChat();
     switchTo().window(1);
-    $(byText("Root Root")).click();
+    $(byText("John Smith")).click();
     $(byText(message)).should(Condition.exist);
     info("user check message and answer root");
-    chatManagement.sendMessageInRoomOrSpace("Root Root", message2);
+    chatManagement.sendMessageInRoomOrSpace("John Smith", message2);
     switchTo().window(0);
-    manageLogInOut.signIn(PLFData.username, PLFData.password);
+    manageLogInOut.signIn(DATA_USER1, "gtngtn");
     homePagePlatform.goToChat();
     switchTo().window(1);
     refresh();

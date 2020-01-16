@@ -32,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Created by dmardassi on 16/10/2017.
  */
-@Tag("social")
+@Tag("socialis")
 @Tag("sniff")
 public class ReplyToCommentTestIT extends Base {
 
@@ -93,7 +93,7 @@ public class ReplyToCommentTestIT extends Base {
         connectionsManagement.connectToAUser(DATA_USER2);
         homePagePlatform.goToHomePage();
         activityStream.addActivity(activity, "");
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
@@ -117,7 +117,7 @@ public class ReplyToCommentTestIT extends Base {
         connectionsManagement.connectToAUser(DATA_USER2);
         homePagePlatform.goToHomePage();
         activityStream.addActivity(activity, "");
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
@@ -143,7 +143,7 @@ public class ReplyToCommentTestIT extends Base {
         connectionsManagement.connectToAUser(DATA_USER2);
         homePagePlatform.goToHomePage();
         activityStream.addActivity(activity, "");
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
@@ -413,7 +413,7 @@ public class ReplyToCommentTestIT extends Base {
         info("Add a new topic");
         forumForumManagement.goToStartTopic();
         forumTopicManagement.startTopic(nameTopic, description, "", "");
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
@@ -459,7 +459,7 @@ public class ReplyToCommentTestIT extends Base {
         forumForumManagement.goToStartTopic();
         forumTopicManagement.startTopic(nameTopic, description, "", "");
         forumHomePage.goToTopic(nameTopic);
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
@@ -504,7 +504,7 @@ public class ReplyToCommentTestIT extends Base {
         forumForumManagement.goToStartTopic();
         forumTopicManagement.startTopic(nameTopic, description, "", "");
         forumHomePage.goToTopic(nameTopic);
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
@@ -540,7 +540,7 @@ public class ReplyToCommentTestIT extends Base {
         activityStream.addActivity(activity, "");
         homePagePlatform.goToConnections();
         connectionsManagement.connectToAUser(DATA_USER2);
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
@@ -574,7 +574,7 @@ public class ReplyToCommentTestIT extends Base {
         activityStream.addActivity(activity, "");
         homePagePlatform.goToConnections();
         connectionsManagement.connectToAUser(DATA_USER2);
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
@@ -591,7 +591,7 @@ public class ReplyToCommentTestIT extends Base {
         activityStream.replyToCommentInPreview(comment, reply, DATA_NAME_USER1);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         manageLogInOut.signOut();
-        manageLogInOut.signInCas(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signInCas(DATA_USER2, "gtngtngtn");
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).hover().click();
         activityStream.replyToReplyInPreviewMode(reply,replytoreply);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
@@ -617,7 +617,7 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToConnections();
         connectionsManagement.connectToAUser(DATA_USER2);
         //mary comments
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
@@ -636,7 +636,7 @@ public class ReplyToCommentTestIT extends Base {
         activityStream.replyToCommentInPreview(comment, reply1, DATA_NAME_USER1);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
         //mary replys
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).hover().click();
         activityStream.replyToCommentInPreview(comment, reply2, DATA_NAME_USER2);
         ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
@@ -681,7 +681,7 @@ public class ReplyToCommentTestIT extends Base {
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
         ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
         activityStream.addActivity(activity, "");
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
@@ -921,7 +921,7 @@ public class ReplyToCommentTestIT extends Base {
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
         ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
         activityStream.addActivity(activity, "");
-        manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();

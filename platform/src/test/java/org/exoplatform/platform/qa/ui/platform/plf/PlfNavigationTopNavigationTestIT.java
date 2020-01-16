@@ -152,7 +152,6 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     info("Test 3: Create a new Topic via the top navigation");
     String category = "category" + getRandomNumber();
     String forum = "forum" + getRandomNumber();
-    String forum1 = "forumA" + getRandomNumber();
 
     homePagePlatform.goToForum();
     info("Verify that the forum home page is shown full");
@@ -280,9 +279,10 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     homePagePlatform.refreshUntil($(ELEMENT_HELP_TOOLBAR),Condition.visible,1000);
     $(ELEMENT_HELP_TOOLBAR).waitUntil(Condition.visible,Configuration.timeout).click();
     switchTo().window(1);
+    sleep(2000);
     String url = WebDriverRunner.url();
     assertEquals(url,
-                 "https://docs.exoplatform.org/en/5.2/");
+                 "https://docs.exoplatform.org/en/5.3/");
     switchTo().window(0);
   }
 }

@@ -64,9 +64,8 @@ public class ForumHomePage {
   public void selectItemAdministrationMenu(specifAdministrationMenu item) {
     info("Waiting administration menu is shown");
     $(ELEMENT_ACTIONBAR_ADMINISTRATION).should(Condition.appears);
-    // evt.waitForAndGetElement(ELEMENT_ACTIONBAR_ADMINISTRATION);
     info("Click on Manage menu");
-    $(ELEMENT_ACTIONBAR_ADMINISTRATION).click();
+    $(ELEMENT_ACTIONBAR_ADMINISTRATION).waitUntil(Condition.visible,Configuration.timeout).click();
 
     switch (item) {
     case SORT_SETTING:
@@ -75,7 +74,7 @@ public class ForumHomePage {
       break;
     case BBCODE:
       info("Click on BBCode link");
-      $(ELEMENT_ACTIONBAR_ADMIN_BBCODE).click();
+      $(ELEMENT_ACTIONBAR_ADMIN_BBCODE).waitUntil(Condition.visible,Configuration.timeout).click();
       break;
     case NOTIFICATIONS:
       break;
@@ -85,11 +84,11 @@ public class ForumHomePage {
       break;
     case EXPORT:
       info("Export a category");
-      $(ELEMENT_ACTIONBAR_ADMIN_EXPORT).click();
+      $(ELEMENT_ACTIONBAR_ADMIN_EXPORT).waitUntil(Condition.visible,Configuration.timeout).click();
       break;
     case IMPORT:
       info("Import a category");
-      $(ELEMENT_ACTIONBAR_ADMIN_IMPORT).click();
+      $(ELEMENT_ACTIONBAR_ADMIN_IMPORT).waitUntil(Condition.visible,Configuration.timeout).click();
       break;
     default:
       break;
@@ -225,23 +224,23 @@ public class ForumHomePage {
   public void editBBCode(String newTag, String newReplacement, String newDescription, String newExample, boolean use) {
     selectItemAdministrationMenu(specifAdministrationMenu.BBCODE);
     info("Click on Edit BBcode");
-    $(ELEMENT_BBCODE_EDITBBCODE).click();
+    $(ELEMENT_BBCODE_EDITBBCODE).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Input new tag");
-    $(ELEMENT_BBCODE_ADDBBCODEFORM_TAG).setValue(newTag);
+    $(ELEMENT_BBCODE_ADDBBCODEFORM_TAG).waitUntil(Condition.visible,Configuration.timeout).setValue(newTag);
     info("Input new replacement");
-    $(ELEMENT_BBCODE_ADDBBCODEFORM_REPLACEMENT).setValue(newReplacement);
+    $(ELEMENT_BBCODE_ADDBBCODEFORM_REPLACEMENT).waitUntil(Condition.visible,Configuration.timeout).setValue(newReplacement);
     info("Input new description");
-    $(ELEMENT_BBCODE_ADDBBCODEFORM_DESCRIPTION).setValue(newDescription);
+    $(ELEMENT_BBCODE_ADDBBCODEFORM_DESCRIPTION).waitUntil(Condition.visible,Configuration.timeout).setValue(newDescription);
     info("Input new example");
-    $(ELEMENT_BBCODE_ADDBBCODEFORM_EXAMPLE).setValue(newExample);
+    $(ELEMENT_BBCODE_ADDBBCODEFORM_EXAMPLE).waitUntil(Condition.visible,Configuration.timeout).setValue(newExample);
     if (use == true)
-      $(ELEMENT_BBCODE_USE_OPTION).click();
+      $(ELEMENT_BBCODE_USE_OPTION).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Click on Save button and save all changes");
-    $(ELEMENT_EDITSITE_SAVEBTN).click();
+    $(ELEMENT_EDITSITE_SAVEBTN).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Verify that BBcode is edited with changes");
     $(byText(newTag.toUpperCase())).should(Condition.exist);
     info("Close the popup");
-    $(ELEMENT_BBCODE_POPUP_CLOSEBTN).click();
+    $(ELEMENT_BBCODE_POPUP_CLOSEBTN).waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   /**

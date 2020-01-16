@@ -69,7 +69,7 @@ public class HomePagePlatform {
    */
   public void goToPeople() {
     info("--Go to People--");
-    $(ELEMENT_PEOPLE_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_PEOPLE_LINK_PLF).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
   }
 
@@ -81,7 +81,7 @@ public class HomePagePlatform {
     sleep(Configuration.timeout);
     executeJavaScript("window.scrollBy(0,-5500)", "");
     sleep(Configuration.collectionsTimeout);
-    $(ELEMENT_HOME_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_HOME_LINK_PLF).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
   /**

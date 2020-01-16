@@ -313,7 +313,7 @@ public class WikiSettingsTestIT extends Base {
     ELEMENT_WIKI_ICON_EDIT_PERMISSION_FOR_MARY.click();
     click(ELEMENT_SAVE_PERMISSION);
 
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     homePagePlatform.goToWiki();
     wikiHomePage.selectAPage(wiki);
     // check if mary has the rights

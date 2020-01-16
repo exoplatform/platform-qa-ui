@@ -13,6 +13,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.exoplatform.platform.qa.ui.platform.chat.ChatOnSiteNotificationTestIT;
+import org.junit.Assert;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -119,7 +120,7 @@ public class EcmsWCMTestIT extends Base {
     pageCreationWizard.inputPageInfoStep1(content, true, "English", content, true, false);
     click(ELEMENT_ADDNEWPAGE_BTNNEXT);
     click(ELEMENT_ADDNEWPAGE_BTNNEXT);
-    pageCreationWizard.addApplication($(ELEMENT_APPLICATION_CONTENT_TAB), $(byId("Content/portlet_ContentListViewerPortlet")));
+    pageCreationWizard.addApplication($(ELEMENT_APPLICATION_CONTENT_TAB), $(byId("Content/ContentListViewerPortlet")));
     pageCreationWizard.addContentlistByFolder("General Drives/Sites Management", "intranet");
     navigationToolbar.goToEditContent();
     sleep(Configuration.timeout);
@@ -173,7 +174,7 @@ public class EcmsWCMTestIT extends Base {
     sleep(Configuration.timeout);
     $(ELEMENT_ADDNEWPAGE_BTNNEXT).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
-    pageCreationWizard.addApplication($(ELEMENT_APPLICATION_CONTENT_TAB), $(byId("Content/portlet_ContentListViewerPortlet")));
+    pageCreationWizard.addApplication($(ELEMENT_APPLICATION_CONTENT_TAB), $(byId("Content/ContentListViewerPortlet")));
     pageCreationWizard.addContentListByContent("General Drives/Sites Management/intranet", content);
     navigationToolbar.goToEditContent();
     ELEMENT_LIST_CONTENT.find(byText(content)).waitUntil(Condition.visible, Configuration.timeout);
@@ -261,7 +262,7 @@ public class EcmsWCMTestIT extends Base {
     pageCreationWizard.inputPageInfoStep1(content, true, "English", content, true, false);
     click(ELEMENT_ADDNEWPAGE_BTNNEXT);
     click(ELEMENT_ADDNEWPAGE_BTNNEXT);
-    pageCreationWizard.addApplication($(ELEMENT_APPLICATION_CONTENT_TAB), $(byId("Content/portlet_ContentListViewerPortlet")));
+    pageCreationWizard.addApplication($(ELEMENT_APPLICATION_CONTENT_TAB), $(byId("Content/ContentListViewerPortlet")));
     pageCreationWizard.addContentListByContent("General Drives/Sites Management/intranet", content);
     navigationToolbar.goToEditContent();
     // Verify that Selected document/web content is displayed into this page with
@@ -339,7 +340,7 @@ public class EcmsWCMTestIT extends Base {
     pageCreationWizard.inputPageInfoStep1(title, true, "English", title, true, false);
     click(ELEMENT_ADDNEWPAGE_BTNNEXT);
     click(ELEMENT_ADDNEWPAGE_BTNNEXT);
-    pageCreationWizard.addApplication($(ELEMENT_APPLICATION_CONTENT_TAB), $(byId("Content/portlet_ContentListViewerPortlet")));
+    pageCreationWizard.addApplication($(ELEMENT_APPLICATION_CONTENT_TAB), $(byId("Content/ContentListViewerPortlet")));
     pageCreationWizard.addContentlistByFolder("General Drives/Sites Management", "intranet");
     navigationToolbar.goToEditContent();
     // Verify that all webcontents are shown in Content list View page
@@ -425,7 +426,7 @@ public class EcmsWCMTestIT extends Base {
     pageCreationWizard.inputPageInfoStep1(title, true, "English", title, true, false);
     $(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
     $(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
-    pageCreationWizard.addApplication($(ELEMENT_APPLICATION_CONTENT_TAB), $(byId("Content/portlet_ContentListViewerPortlet")));
+    pageCreationWizard.addApplication($(ELEMENT_APPLICATION_CONTENT_TAB), $(byId("Content/ContentListViewerPortlet")));
     pageCreationWizard.addContentListByContent("General Drives/Sites Management/intranet", content1);
 
     navigationToolbar.goToEditContent();
@@ -539,7 +540,7 @@ public class EcmsWCMTestIT extends Base {
     $(ELEMENT_SEO_CLOSE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     refresh();
     // Verify that the title of the page is changed
-    assertEquals(Selenide.title(), title);
+    Assert.assertEquals(Selenide.title(),title);
     navigationToolbar.goToSEO();
     $(byClassName("uiIconDelete")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     switchTo().alert().accept();

@@ -173,7 +173,7 @@ public class PageCreationWizard {
    * @param content String
    */
   public void addContentDetail(String path, String content) {
-    addApplication($(byTitle("Content")), $(byId("Content/portlet_SingleContentViewer")));
+    addApplication($(byTitle("Content")), $(byId("Content/SingleContentViewer")));
 
     $(ELEMENT_PAGEEDITOR_VIEWPAGE).waitUntil(Condition.appears, Configuration.timeout).click();
     $(ELEMENT_CONTENT_DETAIL_EDIT_BTN).waitUntil(Condition.visible,Configuration.timeout).click();

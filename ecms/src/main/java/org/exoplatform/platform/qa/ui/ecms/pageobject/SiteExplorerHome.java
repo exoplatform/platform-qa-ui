@@ -435,13 +435,13 @@ public class SiteExplorerHome {
    */
   public void editDocument(String newTitle, String content) {
 
-    $(ELEMENT_ACTIONBAR_MORE).click();
-    $(ELEMENT_ACTIONBAR_EDIT).click();
+    $(ELEMENT_ACTIONBAR_MORE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_ACTIONBAR_EDIT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
     if ($(ELEMENT_FILE_FORM_TITLE).is(Condition.enabled)) {
       $(ELEMENT_FILE_FORM_TITLE).sendKeys(newTitle);
     }
-    $(ELEMENT_FILEFORM_BLANK_CONTENT).click();
+    $(ELEMENT_FILEFORM_BLANK_CONTENT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     switchTo().frame($(ELEMENT_FILEFORM_BLANK_CONTENT));
     $(byXpath("/html/body")).sendKeys(content);
     switchTo().defaultContent();
@@ -938,15 +938,15 @@ public class SiteExplorerHome {
   public void addCategoryForNode(String node, String category) {
     info("Click on More menu");
     if( $(ELEMENT_ACTIONBAR_CATEGORY).is(Condition.not(Condition.visible)))
-    $(ELEMENT_ACTIONBAR_MORE).click();
+    $(ELEMENT_ACTIONBAR_MORE).waitUntil(Condition.visible,Configuration.timeout).click();
 
-    $(ELEMENT_ACTIONBAR_CATEGORY).click();
+    $(ELEMENT_ACTIONBAR_CATEGORY).waitUntil(Condition.visible,Configuration.timeout).click();
 
-    $(ELEMENT_CATEGORY_CHANGE_FORM_SELECT_CATEGORY).click();
+    $(ELEMENT_CATEGORY_CHANGE_FORM_SELECT_CATEGORY).waitUntil(Condition.visible,Configuration.timeout).click();
 
-    $(ELEMENT_CATEGORY_SELECT_CATEGORY_TREE).selectOption(category);
+    $(ELEMENT_CATEGORY_SELECT_CATEGORY_TREE).waitUntil(Condition.visible,Configuration.timeout).selectOption(category);
 
-    $(ELEMENT_CATEGORY_ADD_ROOT_NODE).click();
+    $(ELEMENT_CATEGORY_ADD_ROOT_NODE).waitUntil(Condition.visible,Configuration.timeout).click();
 
   }
 

@@ -693,7 +693,7 @@ public class UserAndGroupManagement {
 
     ELEMENT_BTN_SEARCH_USER.click();
 
-    $(byClassName("uiIconDeleteUser")).click();
+    $(byClassName("uiIconDeleteUser")).waitUntil(Condition.appears, Configuration.timeout).click();
     alert.acceptAlert();
     $(ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);
     ELEMENT_BTN_SEARCH_USER.click();

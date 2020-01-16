@@ -836,7 +836,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     wikiHomePage.goToAddBlankPage();
     richTextEditor.addSimplePage(title, title);
     wikiManagement.saveAddPage();
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     homePagePlatform.goToWiki();
     $(byText(title)).should(Condition.exist);
 
@@ -850,7 +850,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     wikiHomePage.goToPermalink();
     String perLink = ELEMENT_WIKI_PERMELINK.getValue();
     $(ELEMENT_PERMALINK_CLOSE).click();
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     open(perLink);
     refresh();
     $(ELEMENT_WIKI_HOME_PAGENOTFOUND).waitUntil(Condition.appears, Configuration.timeout);
@@ -940,7 +940,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     $(ELEMENT_PERMALINK_CLOSE).click();
     info("Un check view permission of any group");
     wikiManagement.unCheckViewAUserOfPage(ELEMENT_PERMISSION_VIEW_ANY);
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     open(perLink);
     refresh();
     $(ELEMENT_WIKI_HOME_PAGENOTFOUND).waitUntil(Condition.appears, Configuration.timeout);

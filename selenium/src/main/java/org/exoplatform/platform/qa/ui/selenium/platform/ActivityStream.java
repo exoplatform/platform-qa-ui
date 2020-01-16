@@ -1797,6 +1797,7 @@ public class ActivityStream {
     }
 
     public void showAllReplies(String comment) {
+        executeJavaScript("window.scrollBy(0,150)");
         String idBlocComment = $(byText(comment)).parent()
                 .parent()
                 .parent()

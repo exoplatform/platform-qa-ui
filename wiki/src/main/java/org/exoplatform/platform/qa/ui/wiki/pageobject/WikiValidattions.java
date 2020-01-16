@@ -876,7 +876,11 @@ public class WikiValidattions {
     public void verifyPresentSpaceSwitcher(String space) {
         if (!space.isEmpty()) {
             info("Verify that the space is shown");
-            $(byXpath(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", space))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+            if (!$(byXpath(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", space))).isDisplayed()) {
+                testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+            } else {
+                $(byXpath(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", space))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+            }
         }
 
     }

@@ -948,7 +948,7 @@ public class RichTextEditor {
    */
   public void inputLabel(String label) {
     if (label != null && label != "") {
-      $(ELEMENT_LABEL_LINK_TEXTBOX).val(label);
+      $(ELEMENT_LABEL_LINK_TEXTBOX).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).val(label);
     }
   }
 

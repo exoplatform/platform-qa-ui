@@ -21,7 +21,7 @@ public class ChatManagement {
   }
 
   public void sendMessageInRoomOrSpace(String room, String message) {
-    $(byText(room)).click();
+    $(byText(room)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_CHAT_MESSAGE_INPUT.setValue(message).pressEnter();
     ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.exist);
   }

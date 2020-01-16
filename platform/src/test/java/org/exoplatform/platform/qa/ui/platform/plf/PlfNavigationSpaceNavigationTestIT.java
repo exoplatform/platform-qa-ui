@@ -90,37 +90,6 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
   }
 
   @Test
-  public void test04_RemoveComponentsApplicationToolbar() {
-    info("Test 02: Remove application of space's toolbar");
-    String space1 = "space1" + getRandomNumber();
-    String app = "Blog Articles";
-    String appDesc = "BlogArticlesPortlet";
-    info("app:" + app);
-    String category = "Components";
-    info("cate:" + category);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space1, space1);
-
-    info(" Click on Add Application, select application and click add button");
-    spaceHomePage.goToSpaceSettingTab();
-    spaceSettingManagement.goToApplicationTab();
-    spaceSettingManagement.addApplication(category, app);
-    info("Verify that Application is added to space");
-    if ($(ELEMENT_SPACE_MENU_MORE).is(Condition.exist)) {
-    $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
-    $(byXpath("//span[@id='${appDesc}']".replace("${appDesc}",appDesc))).should(Condition.exist);
-    } else {
-      ELEMENT_SPACE_MENU_TAB.find(byId(appDesc)).should(Condition.exist);
-    }
-    spaceSettingManagement.removeApplication(app);
-    ELEMENT_SPACE_MENU_TAB.find(byText(app)).shouldNot(Condition.exist);
-
-    info("Delete the space");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space1, false);
-  }
-
-  @Test
   public void test05_RemoveToolsApplicationToolbar() {
     info("Test 02: Remove application of space's toolbar");
     String space1 = "space1" + getRandomNumber();
@@ -141,36 +110,6 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
       $(byXpath("//span[@id='Bookmark']")).should(Condition.exist);
     } else {
       ELEMENT_SPACE_MENU_TAB.find(byId("Bookmark")).should(Condition.exist);
-    }
-    spaceSettingManagement.removeApplication(app);
-    ELEMENT_SPACE_MENU_TAB.find(byText(app)).shouldNot(Condition.exist);
-
-    info("Delete the space");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space1, false);
-  }
-
-  @Test
-  public void test06_RemoveToolsApplicationToolbar() {
-    info("Test 02: Remove application of space's toolbar");
-    String space1 = "space1" + getRandomNumber();
-    String app = "Google Map";
-    info("app:" + app);
-    String category = "Web";
-    info("cate:" + category);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space1, space1);
-
-    info(" Click on Add Application, select application and click add button");
-    spaceHomePage.goToSpaceSettingTab();
-    spaceSettingManagement.goToApplicationTab();
-    spaceSettingManagement.addApplication(category, app);
-    info("Verify that Application is added to space");
-    if ($(ELEMENT_SPACE_MENU_MORE).is(Condition.exist)) {
-      $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
-      $(byXpath("//span[@id='GoogleMapPortlet']")).should(Condition.exist);
-    } else {
-      ELEMENT_SPACE_MENU_TAB.find(byId("GoogleMapPortlet")).should(Condition.exist);
     }
     spaceSettingManagement.removeApplication(app);
     ELEMENT_SPACE_MENU_TAB.find(byText(app)).shouldNot(Condition.exist);
@@ -239,34 +178,6 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
   }
 
   @Test
-  public void test09_AddComponentsApplicationToolbar() {
-    info("Test 02: Remove application of space's toolbar");
-    String space1 = "space1" + getRandomNumber();
-    String app = "Blog Articles";
-    String appDesc ="BlogArticlesPortlet";
-    info("app:" + app);
-    String category = "Components";
-    info("cate:" + category);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space1, space1);
-
-    info(" Click on Add Application, select application and click add button");
-    spaceHomePage.goToSpaceSettingTab();
-    spaceSettingManagement.goToApplicationTab();
-    spaceSettingManagement.addApplication(category, app);
-    info("Verify that Application is added to space");
-    if ($(ELEMENT_SPACE_MENU_MORE).is(Condition.exist)) {
-      $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
-      $(byXpath("//span[@id='${appDesc}']".replace("${appDesc}",appDesc))).should(Condition.exist);
-    } else {
-      ELEMENT_SPACE_MENU_TAB.find(byId(appDesc)).should(Condition.exist);
-    }
-    info("Delete the space");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space1, false);
-  }
-
-  @Test
   public void test10_AddToolsApplicationToolbar() {
     info("Test 02: Remove application of space's toolbar");
     String space1 = "space1" + getRandomNumber();
@@ -287,32 +198,6 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
       $(byXpath("//span[@id='Bookmark']")).should(Condition.exist);
     } else {
       ELEMENT_SPACE_MENU_TAB.find(byId("Bookmark")).should(Condition.exist);
-    }
-    info("Delete the space");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space1, false);
-  }
-
-  @Test
-  public void test11_AddToolsApplicationToolbar() {
-    info("Test 02: Remove application of space's toolbar");
-    String space1 = "space1" + getRandomNumber();
-    String app = "Google Map";
-    String category = "Web";
-    info("cate:" + category);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space1, space1);
-
-    info(" Click on Add Application, select application and click add button");
-    spaceHomePage.goToSpaceSettingTab();
-    spaceSettingManagement.goToApplicationTab();
-    spaceSettingManagement.addApplication(category, app);
-    info("Verify that Application is added to space");
-    if ($(ELEMENT_SPACE_MENU_MORE).is(Condition.exist)) {
-      $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
-      $(byXpath("//span[@id='GoogleMapPortlet']")).should(Condition.exist);
-    } else {
-      ELEMENT_SPACE_MENU_TAB.find(byId("GoogleMapPortlet")).should(Condition.exist);
     }
     info("Delete the space");
     homePagePlatform.goToMySpaces();
@@ -352,8 +237,6 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     String space1 = "space1" + getRandomNumber();
     String app = "People Directory";
     String category = "social";
-    String app1 = "Google Map";
-    String category1 = "Web";
     String app2 = "Bookmarks";
     String category2 = "Tools";
     homePagePlatform.goToMySpaces();
@@ -363,7 +246,6 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.goToApplicationTab();
     spaceSettingManagement.addApplication(category, app);
-    spaceSettingManagement.addApplication(category1, app1);
     spaceSettingManagement.addApplication(category2, app2);
     info("Verify that Application is added to space");
     if ($(ELEMENT_SPACE_MENU_MORE).is(Condition.exist)) {
@@ -371,12 +253,6 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
       $(byXpath("//span[@id='PeoplePortlet']")).should(Condition.exist);
     } else {
       ELEMENT_SPACE_MENU_TAB.find(byId("PeoplePortlet")).should(Condition.exist);
-    }
-    if ($(ELEMENT_SPACE_MENU_MORE).is(Condition.exist)) {
-      $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
-      $(byXpath("//span[@id='GoogleMapPortlet']")).should(Condition.exist);
-    } else {
-      ELEMENT_SPACE_MENU_TAB.find(byId("GoogleMapPortlet")).should(Condition.exist);
     }
     if ($(ELEMENT_SPACE_MENU_MORE).is(Condition.exist)) {
       $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
@@ -395,8 +271,6 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     String space1 = "space1" + getRandomNumber();
     String app = "People Directory";
     String category = "social";
-    String app1 = "Google Map";
-    String category1 = "Web";
     String app2 = "Bookmarks";
     String category2 = "Tools";
     homePagePlatform.goToMySpaces();
@@ -406,7 +280,6 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.goToApplicationTab();
     spaceSettingManagement.addApplication(category, app);
-    spaceSettingManagement.addApplication(category1, app1);
     spaceSettingManagement.addApplication(category2, app2);
     info("Verify that Application is added to space");
     if ($(ELEMENT_SPACE_MENU_MORE).is(Condition.exist)) {
@@ -417,22 +290,14 @@ public class PlfNavigationSpaceNavigationTestIT extends Base {
     }
     if ($(ELEMENT_SPACE_MENU_MORE).is(Condition.exist)) {
       $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
-      $(byXpath("//span[@id='GoogleMapPortlet']")).should(Condition.exist);
-    } else {
-      ELEMENT_SPACE_MENU_TAB.find(byId("GoogleMapPortlet")).should(Condition.exist);
-    }
-    if ($(ELEMENT_SPACE_MENU_MORE).is(Condition.exist)) {
-      $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
       $(byXpath("//span[@id='Bookmark']")).should(Condition.exist);
     } else {
       ELEMENT_SPACE_MENU_TAB.find(byId("Bookmark")).should(Condition.exist);
     }
     spaceSettingManagement.removeApplication(app);
-    spaceSettingManagement.removeApplication(app1);
     executeJavaScript("window.scrollBy(0,-200)");
     spaceSettingManagement.removeApplication(app2);
     ELEMENT_SPACE_MENU_TAB.find(byText(app)).shouldNot(Condition.exist);
-    ELEMENT_SPACE_MENU_TAB.find(byText(app1)).shouldNot(Condition.exist);
     ELEMENT_SPACE_MENU_TAB.find(byText(app2)).shouldNot(Condition.exist);
     info("Delete the space");
     homePagePlatform.goToMySpaces();

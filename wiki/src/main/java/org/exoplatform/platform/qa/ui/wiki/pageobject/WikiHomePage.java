@@ -351,6 +351,7 @@ public class WikiHomePage {
      */
     public void goToSpaceSwitcher() {
         info("Click on drop down");
+        sleep(2000);
         $(ELEMENT_SPACE_DROP_DOWN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
 
@@ -362,8 +363,8 @@ public class WikiHomePage {
     public void inputSpaceSwitcher(String text) {
         SelenideElement spaceSwitcherInput = $(ELEMENT_SPACE_SWITCHER_INPUT);
         spaceSwitcherInput.clear();
-        spaceSwitcherInput.click();
-        spaceSwitcherInput.sendKeys(text);
+        spaceSwitcherInput.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        spaceSwitcherInput.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).sendKeys(text);
     }
 
     /**
