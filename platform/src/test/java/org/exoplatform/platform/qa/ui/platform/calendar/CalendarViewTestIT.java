@@ -62,7 +62,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventNext = "titleEventNext" + getRandomNumber();
     String titleEventPre = "titleEventPre" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventCur,
@@ -130,7 +130,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventNextWeek = "titleEventNextWeek" + getRandomNumber();
     String titleEventPreWeek = "titleEventPreWeek" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
 
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
@@ -226,7 +226,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventNext = "titleEventNext" + getRandomNumber();
     String titleEventPre = "titleEventPre" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventCur,
@@ -315,7 +315,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventNextMonth = "titleEventNextMonth" + getRandomNumber();
     String titleEventPreMonth = "titleEventPreMonth" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
     info("Test 4: Check displaying added task/event in month view");
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
@@ -416,7 +416,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventNextWeek = "titleEventNextWeek" + getRandomNumber();
     String titleEventPreWeek = "titleEventPreWeek" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventCur,
@@ -508,7 +508,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventNext = "titleEventNext" + getRandomNumber();
     String titleEventPre = "titleEventPre" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventCur,
@@ -601,7 +601,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventHoliday = "titleEventHoliday" + getRandomNumber();
     String titleEventAnni = "titleEventAnni" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
 
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
@@ -808,7 +808,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventHoliday = "titleEventHoliday" + getRandomNumber();
     String titleEventAnni = "titleEventAnni" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
 
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();

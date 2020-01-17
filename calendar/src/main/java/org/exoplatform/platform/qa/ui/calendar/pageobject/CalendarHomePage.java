@@ -935,7 +935,13 @@ public class CalendarHomePage {
           $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE.replace("$name", name).replace("$date",
                   date))).shouldNotBe(Condition.visible);
         } else
-          $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+          if ($(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))).isDisplayed()) {
+          $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))).waitUntil(Condition.visible,Configuration.timeout).hover();
+          $(byXpath("//*[@class='popover-content']//*[text()='$name']".replace("$name", name))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);}
+          else
+          {
+            $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+          }
         break;
       case WORKWEEK:
         switch (optionDay) {

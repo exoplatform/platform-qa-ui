@@ -77,7 +77,7 @@ public class CalendarCategoryTestIT extends Base {
 
     calendarManagement.addEventCategory(oldNameCategory);
     eventManagement.goToAddEventFromActionBar();
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).find(byText(oldNameCategory));
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[1]/span/select")).find(byText(oldNameCategory));
     eventManagement.cancelQuickAddEditEvent();
 
     info("Test 3: Delete Event Category");
@@ -99,7 +99,7 @@ public class CalendarCategoryTestIT extends Base {
 
     calendarManagement.addEventCategory(oldNameCategory);
     eventManagement.goToAddEventFromActionBar();
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).find(byText(oldNameCategory));
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[1]/span/select")).find(byText(oldNameCategory));
     eventManagement.cancelQuickAddEditEvent();
 
     info("Test 2: Edit Event Category");
@@ -108,7 +108,7 @@ public class CalendarCategoryTestIT extends Base {
     calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.ADDCATEGORY);
     calendarManagement.editEventCategory(oldNameCategory, newNameCategory);
     eventManagement.goToAddEventFromActionBar();
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).find(byText(newNameCategory));
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[1]/span/select")).find(byText(newNameCategory));
     eventManagement.cancelQuickAddEditEvent();
 
     info("Test 3: Delete Event Category");
@@ -130,7 +130,7 @@ public class CalendarCategoryTestIT extends Base {
 
     calendarManagement.addEventCategory(oldNameCategory);
     eventManagement.goToAddEventFromActionBar();
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select")).find(byText(newNameCategory));
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[1]/span/select")).find(byText(newNameCategory));
     eventManagement.cancelQuickAddEditEvent();
 
     info("Test 3: Delete Event Category");

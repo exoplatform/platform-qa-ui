@@ -1032,7 +1032,7 @@ public class CalendarLocator {
                                                                         By.xpath("//*[@id='UIEventForm']");
 
   public static final By              ELEMENT_ADD_EDIT_EVENT_NAME                                      =
-                                                                  By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input");
+                                                                  By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[1]/input");
 
   public static final By              ELEMENT_ADD_EDIT_EVENT_NOTE                                      =
                                                                   By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[6]/div[2]/following::textarea");
@@ -1044,7 +1044,7 @@ public class CalendarLocator {
                                                                       By.xpath("//*[@id='UIEventForm']//*[@name='calendar']");
 
   public static final By              ELEMENT_ADD_EDIT_EVENT_CATEGORY                                  =
-                                                                      By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select");
+                                                                      By.xpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[1]/span/select");
 
   public static final By              ELEMENT_ADD_EDIT_EVENT_PRIORITY                                  =
                                                                       By.xpath("//*[@id='UIEventForm']//*[@name='priority']");
@@ -1701,14 +1701,14 @@ public class CalendarLocator {
   public static final SelenideElement ELEMENT_TASK_DETAIL =$(byClassName("titleList"));
 
   public static final SelenideElement ELEMENT_EVENT_DRAWER=  $(byId("ExoCalendarEventForm"));
-  public static final SelenideElement ELEMENT_EVENT_DRAWER_TITLE=  $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input"));
-  public static final SelenideElement ELEMENT_EVENT_CATEGORY=  $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/span/select"));
+  public static final SelenideElement ELEMENT_EVENT_DRAWER_TITLE=  $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[1]/input"));
+  public static final SelenideElement ELEMENT_EVENT_CATEGORY=  $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[1]/span/select"));
   public static final SelenideElement ELEMENT_EVENT_LOCATION=  $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input"));
   public static final SelenideElement ELEMENT_EVENT_DESCRIPTION=  $(byXpath("//textarea[@placeholder='Add a description']"));
   public static final SelenideElement ELEMENT_EVENT_CANCEL_BUTTON=  $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[2]"));
   public static final SelenideElement ELEMENT_EVENT_SAVE_BUTTON=  $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[1]"));
   public static final SelenideElement ELEMENT_EVENT_CLEAR_BUTTON=  $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]"));
-  public static final SelenideElement ELEMENT_EVENT_TITLE_DRAWER=   $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input"));
+  public static final SelenideElement ELEMENT_EVENT_TITLE_DRAWER=   $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[1]/input"));
   public static final SelenideElement ELEMENT_EVENT_SELECT_FROM=   $(By.xpath("(//div[@class=\"periodDate pull-left\"]/input)[1]"));
   public static final SelenideElement ELEMENT_EVENT_SELECT_TO=   $(By.xpath("(//div[@class=\"periodDate pull-left\"]/input)[2]"));
   public static final SelenideElement ELEMENT_EVENT_CURRENT_DAY=   $(By.xpath("//td/a/following::a[@class=\"highLight today\"]"));

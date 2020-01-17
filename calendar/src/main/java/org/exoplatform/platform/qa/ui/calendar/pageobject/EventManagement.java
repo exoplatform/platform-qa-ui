@@ -81,7 +81,7 @@ public class EventManagement {
     }
     String cell = ELEMENT_CELL_TO_WORKING_PANEL.replace("$date", tempDate2).replace("$time", tempTime);
     info(cell);
-    $(byXpath(cell)).click();
+    $(byXpath(cell)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     $(ELEMENT_QUICK_ADD_EVENT_POPUP).waitUntil(Condition.visible, Configuration.collectionsTimeout);
   }
 
@@ -398,9 +398,9 @@ public class EventManagement {
    */
   public void checkSuggestionEventTimeInQuickForm(String fromDateTime, String toDateTime, int duration) {
     info("Check date is current date");
-    DateFormat formatterTimeTemp = new SimpleDateFormat("MM-dd-yyyy HH:mm");
+    DateFormat formatterTimeTemp = new SimpleDateFormat("MM/dd/yyyy HH:mm");
     DateFormat formatterTime = new SimpleDateFormat("HH:mm");
-    DateFormat formatterDate = new SimpleDateFormat("MM-dd-yyyy");
+    DateFormat formatterDate = new SimpleDateFormat("MM/dd/yyyy");
     String dateFrom = $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).getValue();
     String dateTo = $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).getValue();
     String fromTime = evt.waitForAndGetElement(ELEMENT_QUICK_INPUT_EVENT_FROM_TIME, testBase.getDefaultTimeout(), 1, 2)
@@ -411,7 +411,12 @@ public class EventManagement {
     info("Check default suggestion EVENT time");
     if (fromDateTime == null || fromDateTime == "") {
       info("Check time suggestion default");
-      assert dateFrom.equals(testBase.getCurrentDate("MM-dd-yyyy"));
+      if (testBase.getCurrentDate("MM/dd/yyyy").charAt(0) == '0') {
+        assert ("0" + dateFrom).equals(testBase.getCurrentDate("MM/dd/yyyy"));
+      }
+      else{
+        assert dateFrom.equals(testBase.getCurrentDate("MM-dd-yyyy"));
+       }
     } else {
       info("Check suggesion when select from time");
       try {
@@ -426,7 +431,12 @@ public class EventManagement {
     }
     if (toDateTime == null || toDateTime == "") {
       info("Check time suggestion default");
-      assert dateTo.equals(testBase.getCurrentDate("MM-dd-yyyy"));
+      if (testBase.getCurrentDate("MM/dd/yyyy").charAt(0) == '0') {
+        assert ("0" + dateFrom).equals(testBase.getCurrentDate("MM/dd/yyyy"));
+      }
+      else{
+        assert dateFrom.equals(testBase.getCurrentDate("MM-dd-yyyy"));
+      }
     } else {
       info("Check suggesion when select to time");
       try {
@@ -473,7 +483,12 @@ public class EventManagement {
     info("Check default suggestion EVENT time");
     if (fromDateTime == null || fromDateTime == "") {
       info("Check time suggestion default");
-      assert dateFrom.equals(testBase.getCurrentDate("MM-dd-yyyy"));
+      if (testBase.getCurrentDate("MM/dd/yyyy").charAt(0) == '0') {
+        assert ("0" + dateFrom).equals(testBase.getCurrentDate("MM/dd/yyyy"));
+      }
+      else{
+        assert dateFrom.equals(testBase.getCurrentDate("MM-dd-yyyy"));
+      }
     } else {
       info("Check suggesion when select from time");
       try {
@@ -488,7 +503,12 @@ public class EventManagement {
     }
     if (toDateTime == null || toDateTime == "") {
       info("Check time suggestion default");
-      assert dateTo.equals(testBase.getCurrentDate("MM-dd-yyyy"));
+      if (testBase.getCurrentDate("MM/dd/yyyy").charAt(0) == '0') {
+        assert ("0" + dateFrom).equals(testBase.getCurrentDate("MM/dd/yyyy"));
+      }
+      else{
+        assert dateFrom.equals(testBase.getCurrentDate("MM-dd-yyyy"));
+      }
     } else {
       info("Check suggesion when select to time");
       try {
@@ -1254,7 +1274,7 @@ public class EventManagement {
   public void checkEventPopUp(String date, String userName, String user) {
     switchTo().activeElement();
     $(byText("Add Event")).should(Condition.exist);
-    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
+    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[1]/input")).getAttribute("placeholder"));
     $(byXpath("//span/select[@class='selectbox category']")).should(Condition.appears);
     assertEquals("Events", ELEMENT_EVENT_CATEGORY.getText());
     assertEquals("All day", $(byXpath("(//input[@id=\"allday\"]/following::span)[1]")).getText());
@@ -1262,9 +1282,19 @@ public class EventManagement {
     assertEquals("Enter a location for this event", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));
     assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
     info("Date From is" + date);
-    assertEquals(date, $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).getValue());
+    if (date.charAt(0) == '0') {
+      assertEquals(date, "0" + $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).getValue());
+    }
+    else{
+      assertEquals(date, $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).getValue());
+    }
     info("Date To is" + date);
-    assertEquals(date, $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).getValue());
+    if (date.charAt(0) == '0') {
+      assertEquals(date, "0" + $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).getValue());
+    }
+    else{
+      assertEquals(date, $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).getValue());
+    }
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
     $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
     assertEquals(userName, $(byXpath("//*[@data-value='${user}']".replace("${user}",user))).getText().split("\n")[0]);

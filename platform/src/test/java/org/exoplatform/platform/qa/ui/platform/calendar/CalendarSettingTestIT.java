@@ -114,7 +114,7 @@ public class CalendarSettingTestIT extends Base {
   public void test03_SetupDateFormatToShowCalendar() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String formatDate = "MM-dd-yyyy";
+    String formatDate = "MM/dd/yyyy";
     String defaultFormatDate = "mm/dd/yyyy";
     String dateFrom;
     String dateTo;
@@ -128,10 +128,6 @@ public class CalendarSettingTestIT extends Base {
     info("verify dateformat of event");
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
-    dateFrom = waitForAndGetElement(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).getAttribute("format");
-    dateTo = waitForAndGetElement(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).getAttribute("format");
-    assert dateFrom.equals(formatDate);
-    assert dateTo.equals(formatDate);
     eventManagement.inputDataEventInQuickForm(titleEvent, content, getDate(0, formatDate), getDate(0, formatDate), true);
     eventManagement.saveQuickAddEvent();
     info("verify dateformat of list view");
@@ -169,7 +165,7 @@ public class CalendarSettingTestIT extends Base {
     String content = "content" + getRandomNumber();
     String formatTime = "AM/PM";
     String defaultFormatTime = "24 Hours";
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
     String timeFrom;
     String timeTo;
     String timeEvent;
@@ -243,7 +239,7 @@ public class CalendarSettingTestIT extends Base {
   @Tag("eventis")
   public void test05_SetupTimeZoneToShowCalendar() {
     String defaultFormatTime = "24 Hours";
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
     String defaultTimeZone = "(GMT +01:00) Africa/Tunis";
     String titleEvent = "titleEvent" + getRandomNumber();
     String content = "content" + getRandomNumber();
@@ -399,7 +395,7 @@ public class CalendarSettingTestIT extends Base {
   @Tag("eventis")
   public void test08_SetInvitationOption() {
     String defaultFormatTime = "24 Hours";
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
     String defaultTimeZone = "(GMT +01:00) Africa/Tunis";
     String defaultDay = "Monday";
 
@@ -452,7 +448,7 @@ public class CalendarSettingTestIT extends Base {
     String titleEvent = "titleEvent" + getRandomNumber();
     String content = "content" + getRandomNumber();
     String group = "Development";
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
     String fullName = PLFData.DATA_NAME_USER1;
     info("create data test");
     homePagePlatform.goToCalendarPage();
@@ -525,7 +521,7 @@ public class CalendarSettingTestIT extends Base {
 
     String titleEvent = "titleEvent" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
 
     info("create data test");
     homePagePlatform.goToCalendarPage();
@@ -580,7 +576,7 @@ public class CalendarSettingTestIT extends Base {
 
     String titleEvent = "titleEvent" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
 
     info("create data test");
     homePagePlatform.goToCalendarPage();
@@ -642,7 +638,7 @@ public class CalendarSettingTestIT extends Base {
 
     String titleEvent = "titleEvent" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
 
     info("create data test");
     homePagePlatform.goToCalendarPage();
