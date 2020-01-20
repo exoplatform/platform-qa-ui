@@ -421,8 +421,8 @@ public class CalendarViewTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventCur,
                                               content,
-                                              getDate(40, defaultFormatDate),
-                                              getDate(40, defaultFormatDate),
+                                              getDate(0, defaultFormatDate),
+                                              getDate(0, defaultFormatDate),
                                               true);
     eventManagement.saveQuickAddEvent();
     eventManagement.goToAddEventFromActionBar();
