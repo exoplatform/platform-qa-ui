@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc4a0367-df54-4081-9eb5-c93d6d50856e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/CalendarHomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/CalendarHomePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/CalendarManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/CalendarManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarBasicTestsInSpaceTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarBasicTestsInSpaceTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarBasicTestsWithUserTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarBasicTestsWithUserTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarCalendarTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarCalendarTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarCategoryTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarCategoryTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarEventRecurringTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarEventRecurringTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarEventTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarEventTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarImproveCreateEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarImproveCreateEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarPublishActivityTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarPublishActivityTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarSearchTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarSearchTestIT.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarSettingTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarSettingTestIT.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarViewTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarViewTestIT.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/calendar/CalendarLocator.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/calendar/CalendarLocator.java" afterDir="false" />
@@ -42,17 +32,8 @@
     <SUITE FILE_PATH="coverage/platform_qa_ui$WikiBasicActionManagePageAddDeleteTestIT_Auto_save_message.ic" NAME="WikiBasicActionManagePageAddDeleteTestIT.Auto_save_message Coverage Results" MODIFIED="1561720231253" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>org.exoplatform.platform.qa.ui.platform.wiki.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/platform_qa_ui$ForumPrivateMessageTestIT_test02_ReplyMessage.ic" NAME="ForumPrivateMessageTestIT.test02_ReplyMessage Coverage Results" MODIFIED="1568652124170" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>org.exoplatform.platform.qa.ui.platform.forum.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/platform_qa_ui$EcmsManageDocumentsInSpaceTestIT_test02_CheckScriptNotExecutedWhenFilePathContainsScript.ic" NAME="EcmsManageDocumentsInSpaceTestIT.test02_CheckScriptNotExecutedWhenFilePathContainsScript Coverage Results" MODIFIED="1561022966465" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>org.exoplatform.platform.qa.ui.platform.ecms.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/platform_qa_ui$WikiActivitiesTestIT_test02_DisplayViewChangesPageFromWikisActivity.ic" NAME="WikiActivitiesTestIT.test02_DisplayViewChangesPageFromWikisActivity Coverage Results" MODIFIED="1574784325016" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>org.exoplatform.platform.qa.ui.platform.wiki.functional.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/platform_qa_ui$WikiBasicActionManagePageEditTestIT_test07_EditAPageWhenPublishActivityIsNotChecked.ic" NAME="WikiBasicActionManagePageEditTestIT.test07_EditAPageWhenPublishActivityIsNotChecked Coverage Results" MODIFIED="1573051594813" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>org.exoplatform.platform.qa.ui.platform.wiki.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/platform_qa_ui$CalendarEventRecurringTestIT_test09_AnExtraIconIsDisplayedForARepeatedEvent.ic" NAME="CalendarEventRecurringTestIT.test09_AnExtraIconIsDisplayedForARepeatedEvent Coverage Results" MODIFIED="1574700446525" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>org.exoplatform.platform.qa.ui.platform.calendar.*</FILTER>
@@ -66,14 +47,26 @@
     <SUITE FILE_PATH="coverage/platform_qa_ui$EcmsSESearchTestIT_test03_SimpleSearch.ic" NAME="EcmsSESearchTestIT.test03_SimpleSearch Coverage Results" MODIFIED="1564415115974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>org.exoplatform.platform.qa.ui.platform.ecms.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/platform_qa_ui$PortletInSpaceHomePageTestIT.ic" NAME="PortletInSpaceHomePageTestIT Coverage Results" MODIFIED="1575901776507" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>org.exoplatform.platform.qa.ui.platform.social.functional.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/platform_qa_ui$ForumPrivateMessageTestIT_test02_ReplyMessage.ic" NAME="ForumPrivateMessageTestIT.test02_ReplyMessage Coverage Results" MODIFIED="1568652124170" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>org.exoplatform.platform.qa.ui.platform.forum.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/platform_qa_ui$EcmsManageDocumentsInSpaceTestIT_test02_CheckScriptNotExecutedWhenFilePathContainsScript.ic" NAME="EcmsManageDocumentsInSpaceTestIT.test02_CheckScriptNotExecutedWhenFilePathContainsScript Coverage Results" MODIFIED="1561022966465" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>org.exoplatform.platform.qa.ui.platform.ecms.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/platform_qa_ui$CalendarViewTestIT_test05_CheckDisplayingAddedTaskeventInWeekView.ic" NAME="CalendarViewTestIT.test05_CheckDisplayingAddedTaskeventInWeekView Coverage Results" MODIFIED="1579519209374" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>org.exoplatform.platform.qa.ui.platform.calendar.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/platform_qa_ui$WikiBasicActionManagePageEditTestIT_test07_EditAPageWhenPublishActivityIsNotChecked.ic" NAME="WikiBasicActionManagePageEditTestIT.test07_EditAPageWhenPublishActivityIsNotChecked Coverage Results" MODIFIED="1573051594813" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>org.exoplatform.platform.qa.ui.platform.wiki.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/platform_qa_ui$CalendarEventRecurringTestIT_test10_addRecurringEventStartAfterMonth.ic" NAME="CalendarEventRecurringTestIT.test10_addRecurringEventStartAfterMonth Coverage Results" MODIFIED="1574764235034" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>org.exoplatform.platform.qa.ui.platform.calendar.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/platform_qa_ui$GateinPortalNavigationEditNavigationTestIT_test01_Add_Edit_Delete_NodePage.ic" NAME="GateinPortalNavigationEditNavigationTestIT.test01_Add_Edit_Delete_NodePage Coverage Results" MODIFIED="1577364392858" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>org.exoplatform.platform.qa.ui.gatein.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/platform_qa_ui$PortletInSpaceHomePageTestIT.ic" NAME="PortletInSpaceHomePageTestIT Coverage Results" MODIFIED="1575901776507" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>org.exoplatform.platform.qa.ui.platform.social.functional.*</FILTER>
     </SUITE>
   </component>
   <component name="CoverageViewManager">
@@ -87,21 +80,12 @@
     <favorites_list name="platform-qa-ui" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarViewTestIT.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="428" selection-start-line="428" selection-end-line="428" />
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="91">
-              <caret line="236" column="11" lean-forward="true" selection-start-line="236" selection-start-column="11" selection-end-line="236" selection-end-column="11" />
+            <state relative-caret-position="103">
+              <caret line="343" selection-start-line="343" selection-end-line="343" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -110,28 +94,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsWCMTestIT.java">
+        <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarViewTestIT.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="533" column="21" selection-start-line="533" selection-start-column="21" selection-end-line="533" selection-end-column="21" />
+            <state relative-caret-position="208">
+              <caret line="426" column="40" lean-forward="true" selection-start-line="426" selection-start-column="40" selection-end-line="426" selection-end-column="40" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/TestBase.java">
+        <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarSettingTestIT.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="103">
-              <caret line="829" selection-start-line="829" selection-end-line="829" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/testbase/DateTestBase.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="103">
-              <caret line="157" selection-start-line="157" selection-end-line="157" />
+            <state relative-caret-position="306">
+              <caret line="264" selection-start-line="264" selection-end-line="264" />
             </state>
           </provider>
         </entry>
@@ -147,10 +122,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>est11_ManageTheTitle</find>
-      <find>test11_ManageTheTitle</find>
-      <find>st14_UpdateSEOMetadatasWithLocalizatio</find>
-      <find>t15_DeleteSEOMetadatasWithLocalizatio</find>
       <find>test01_AddEventInSpace</find>
       <find>checkEventPopUp</find>
       <find>openMenuOfCalendar</find>
@@ -177,6 +148,10 @@
       <find>deleteRecurringEvent</find>
       <find>ELEMENT_DELETE_RECURRING_EVENT_FORM</find>
       <find>managet</find>
+      <find>char</find>
+      <find>while</find>
+      <find>uiIconMiniArrowRight</find>
+      <find>formatdate</find>
     </findStrings>
     <replaceStrings>
       <replace>And</replace>
@@ -194,7 +169,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="fix/5.3.x" />
+        <entry key="$PROJECT_DIR$" value="fix/6.0.x" />
       </map>
     </option>
   </component>
@@ -246,12 +221,12 @@
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarImproveCreateEvent.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarSearchTestIT.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarPublishActivityTestIT.java" />
-        <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarSettingTestIT.java" />
-        <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/calendar/CalendarLocator.java" />
-        <option value="$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java" />
-        <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarViewTestIT.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarEventRecurringTestIT.java" />
         <option value="$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/CalendarHomePage.java" />
+        <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/calendar/CalendarLocator.java" />
+        <option value="$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java" />
+        <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarSettingTestIT.java" />
+        <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarViewTestIT.java" />
       </list>
     </option>
   </component>
@@ -269,17 +244,7 @@
   </component>
   <component name="MavenProjectNavigator">
     <treeState>
-      <expand>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="eXo PLF:: QA - UI - Calendar" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-        </path>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="eXo PLF:: QA - UI - Calendar" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
-        </path>
-      </expand>
+      <expand />
       <select />
     </treeState>
   </component>
@@ -299,6 +264,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -310,12 +276,11 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1579273687278" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1579526022582" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -341,7 +306,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.EcmsWCMTestIT.test11_ManageTheTitle">
+  <component name="RunManager" selected="JUnit.CalendarViewTestIT.test05_CheckDisplayingAddedTaskeventInWeekView">
     <configuration name="CalendarBasicTestsInSpaceTestIT.test01_AddEventInSpace" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
@@ -360,42 +325,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalendarEventRecurringTestIT" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-platform" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.calendar.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.calendar" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.calendar.CalendarEventRecurringTestIT" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://plfent-6.0.x-lightweight-snapshot-mysql.acceptance10.exoplatform.org" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CalendarEventRecurringTestIT.test03_04_EditDeleteOnlyACurrentRecurringEvent" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-platform" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.calendar.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.calendar" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.calendar.CalendarEventRecurringTestIT" />
-      <option name="METHOD_NAME" value="test03_04_EditDeleteOnlyACurrentRecurringEvent" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://plfent-6.0.x-lightweight-snapshot-mysql.acceptance10.exoplatform.org" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="CalendarPublishActivityTestIT.test08_ActivitiesShouldBeUpdatedAfterDeletingOfAnEditedRecurringEvent" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
@@ -407,6 +336,42 @@
       <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.calendar" />
       <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.calendar.CalendarPublishActivityTestIT" />
       <option name="METHOD_NAME" value="test08_ActivitiesShouldBeUpdatedAfterDeletingOfAnEditedRecurringEvent" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://plfent-6.0.x-lightweight-snapshot-mysql.acceptance10.exoplatform.org" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalendarSearchTestIT.test01_QuickSearch" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-platform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.calendar.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.calendar" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.calendar.CalendarSearchTestIT" />
+      <option name="METHOD_NAME" value="test01_QuickSearch" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://plfent-6.0.x-lightweight-snapshot-mysql.acceptance10.exoplatform.org" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalendarSettingTestIT.test05_SetupTimeZoneToShowCalendar" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-platform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.calendar.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.calendar" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.calendar.CalendarSettingTestIT" />
+      <option name="METHOD_NAME" value="test05_SetupTimeZoneToShowCalendar" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://plfent-6.0.x-lightweight-snapshot-mysql.acceptance10.exoplatform.org" />
       <option name="PARAMETERS" value="" />
@@ -500,19 +465,19 @@
       <item itemvalue="JUnit.CalendarBasicTestsInSpaceTestIT.test01_AddEventInSpace" />
       <item itemvalue="JUnit.PortletInSpaceHomePageTestIT.test04_CheckTheSpaceWhoIsOnlinePortlet" />
       <item itemvalue="JUnit.PlfNavigationTopNavigationTestIT.test05_CreateANewTaskViaTheTopNavigation" />
-      <item itemvalue="JUnit.CalendarViewTestIT.test05_CheckDisplayingAddedTaskeventInWeekView" />
-      <item itemvalue="JUnit.CalendarEventRecurringTestIT" />
-      <item itemvalue="JUnit.CalendarEventRecurringTestIT.test03_04_EditDeleteOnlyACurrentRecurringEvent" />
       <item itemvalue="JUnit.CalendarPublishActivityTestIT.test08_ActivitiesShouldBeUpdatedAfterDeletingOfAnEditedRecurringEvent" />
       <item itemvalue="JUnit.EcmsWCMTestIT.test11_ManageTheTitle" />
+      <item itemvalue="JUnit.CalendarSearchTestIT.test01_QuickSearch" />
+      <item itemvalue="JUnit.CalendarViewTestIT.test05_CheckDisplayingAddedTaskeventInWeekView" />
+      <item itemvalue="JUnit.CalendarSettingTestIT.test05_SetupTimeZoneToShowCalendar" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.EcmsWCMTestIT.test11_ManageTheTitle" />
         <item itemvalue="JUnit.CalendarViewTestIT.test05_CheckDisplayingAddedTaskeventInWeekView" />
+        <item itemvalue="JUnit.CalendarSettingTestIT.test05_SetupTimeZoneToShowCalendar" />
+        <item itemvalue="JUnit.CalendarSearchTestIT.test01_QuickSearch" />
+        <item itemvalue="JUnit.EcmsWCMTestIT.test11_ManageTheTitle" />
         <item itemvalue="JUnit.CalendarPublishActivityTestIT.test08_ActivitiesShouldBeUpdatedAfterDeletingOfAnEditedRecurringEvent" />
-        <item itemvalue="JUnit.CalendarEventRecurringTestIT.test03_04_EditDeleteOnlyACurrentRecurringEvent" />
-        <item itemvalue="JUnit.CalendarEventRecurringTestIT" />
       </list>
     </recent_temporary>
   </component>
@@ -530,35 +495,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="CalendarEventRecurringTestIT - 2020.01.17 at 14h 28m 02s.xml">
-      <configuration name="CalendarEventRecurringTestIT" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CalendarEventRecurringTestIT - 2020.01.17 at 14h 32m 27s.xml">
-      <configuration name="CalendarEventRecurringTestIT" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CalendarEventRecurringTestIT - 2020.01.17 at 14h 42m 00s.xml">
-      <configuration name="CalendarEventRecurringTestIT" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CalendarEventRecurringTestIT_test03_04_EditDeleteOnlyACurrentRecurringEvent - 2020.01.17 at 14h 44m 03s.xml">
-      <configuration name="CalendarEventRecurringTestIT.test03_04_EditDeleteOnlyACurrentRecurringEvent" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CalendarEventRecurringTestIT_test03_04_EditDeleteOnlyACurrentRecurringEvent - 2020.01.17 at 14h 47m 53s.xml">
-      <configuration name="CalendarEventRecurringTestIT.test03_04_EditDeleteOnlyACurrentRecurringEvent" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CalendarPublishActivityTestIT_test08_ActivitiesShouldBeUpdatedAfterDeletingOfAnEditedRecurringEvent - 2020.01.17 at 14h 50m 29s.xml">
-      <configuration name="CalendarPublishActivityTestIT.test08_ActivitiesShouldBeUpdatedAfterDeletingOfAnEditedRecurringEvent" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CalendarPublishActivityTestIT_test08_ActivitiesShouldBeUpdatedAfterDeletingOfAnEditedRecurringEvent - 2020.01.17 at 14h 53m 18s.xml">
-      <configuration name="CalendarPublishActivityTestIT.test08_ActivitiesShouldBeUpdatedAfterDeletingOfAnEditedRecurringEvent" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CalendarViewTestIT_test05_CheckDisplayingAddedTaskeventInWeekView - 2020.01.17 at 14h 54m 43s.xml">
+    <history-entry file="CalendarViewTestIT_test05_CheckDisplayingAddedTaskeventInWeekView - 2020.01.20 at 13h 11m 33s.xml">
       <configuration name="CalendarViewTestIT.test05_CheckDisplayingAddedTaskeventInWeekView" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CalendarViewTestIT_test05_CheckDisplayingAddedTaskeventInWeekView - 2020.01.17 at 15h 14m 44s.xml">
+    <history-entry file="CalendarViewTestIT_test05_CheckDisplayingAddedTaskeventInWeekView - 2020.01.20 at 13h 12m 45s.xml">
       <configuration name="CalendarViewTestIT.test05_CheckDisplayingAddedTaskeventInWeekView" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="EcmsWCMTestIT_test11_ManageTheTitle - 2020.01.17 at 15h 15m 11s.xml">
-      <configuration name="EcmsWCMTestIT.test11_ManageTheTitle" configurationId="JUnit" />
+    <history-entry file="CalendarSettingTestIT_test05_SetupTimeZoneToShowCalendar - 2020.01.20 at 13h 15m 41s.xml">
+      <configuration name="CalendarSettingTestIT.test05_SetupTimeZoneToShowCalendar" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CalendarSettingTestIT_test05_SetupTimeZoneToShowCalendar - 2020.01.20 at 13h 16m 41s.xml">
+      <configuration name="CalendarSettingTestIT.test05_SetupTimeZoneToShowCalendar" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CalendarSettingTestIT_test05_SetupTimeZoneToShowCalendar - 2020.01.20 at 13h 17m 17s.xml">
+      <configuration name="CalendarSettingTestIT.test05_SetupTimeZoneToShowCalendar" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CalendarSettingTestIT_test05_SetupTimeZoneToShowCalendar - 2020.01.20 at 13h 18m 28s.xml">
+      <configuration name="CalendarSettingTestIT.test05_SetupTimeZoneToShowCalendar" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CalendarSettingTestIT_test05_SetupTimeZoneToShowCalendar - 2020.01.20 at 13h 20m 12s.xml">
+      <configuration name="CalendarSettingTestIT.test05_SetupTimeZoneToShowCalendar" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CalendarSettingTestIT_test05_SetupTimeZoneToShowCalendar - 2020.01.20 at 13h 21m 40s.xml">
+      <configuration name="CalendarSettingTestIT.test05_SetupTimeZoneToShowCalendar" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CalendarViewTestIT_test05_CheckDisplayingAddedTaskeventInWeekView - 2020.01.20 at 13h 22m 33s.xml">
+      <configuration name="CalendarViewTestIT.test05_CheckDisplayingAddedTaskeventInWeekView" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CalendarViewTestIT_test05_CheckDisplayingAddedTaskeventInWeekView - 2020.01.20 at 13h 22m 58s.xml">
+      <configuration name="CalendarViewTestIT.test05_CheckDisplayingAddedTaskeventInWeekView" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -572,8 +537,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1533" height="875" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.75086504" visible="true" weight="0.26092803" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.75086504" visible="true" weight="0.16812374" />
       <window_info id="Structure" order="1" sideWeight="0.20652173" side_tool="true" weight="0.21250841" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -582,17 +548,17 @@
       <window_info id="Favorites" order="6" sideWeight="0.24913494" side_tool="true" weight="0.16812374" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.33646113" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49697378" visible="true" weight="0.45576409" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49764627" weight="0.48793566" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49697378" weight="0.45174262" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49764627" visible="true" weight="0.51206434" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.4772118" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.5067024" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.28150135" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5023537" side_tool="true" weight="0.43431637" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.43967828" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.3297587" />
       <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.5455764" />
-      <window_info anchor="right" id="Coverage" order="0" sideWeight="0.23917995" side_tool="true" visible="true" weight="0.020174848" />
+      <window_info anchor="right" id="Coverage" order="0" sideWeight="0.24186046" side_tool="true" weight="0.112306654" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.09683927" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
@@ -600,10 +566,10 @@
       <window_info anchor="right" id="Capture Analysis" order="5" />
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="Maven" order="8" sideWeight="0.76082003" weight="0.054472093" />
+      <window_info anchor="right" id="Maven" order="8" sideWeight="0.75813955" weight="0.112306654" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.75086504" weight="0.26160052" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.75086504" visible="true" weight="0.16812374" />
       <window_info id="Structure" order="1" sideWeight="0.20652173" side_tool="true" weight="0.21250841" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -612,17 +578,17 @@
       <window_info id="Favorites" order="6" sideWeight="0.24913494" side_tool="true" weight="0.16812374" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.33646113" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49697378" weight="0.5107239" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49764627" visible="true" weight="0.422252" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49697378" weight="0.14343163" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49764627" visible="true" weight="0.3914209" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.4772118" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.5067024" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.28150135" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5023537" side_tool="true" weight="0.43431637" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.43967828" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.3297587" />
       <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.5455764" />
-      <window_info anchor="right" id="Coverage" order="0" sideWeight="0.23917995" side_tool="true" visible="true" weight="0.020174848" />
+      <window_info anchor="right" id="Coverage" order="0" sideWeight="0.24186046" side_tool="true" weight="0.112306654" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.09683927" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
@@ -630,7 +596,7 @@
       <window_info anchor="right" id="Capture Analysis" order="5" />
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="Maven" order="8" sideWeight="0.76082003" weight="0.054472093" />
+      <window_info anchor="right" id="Maven" order="8" sideWeight="0.75813955" weight="0.112306654" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -1936,7 +1902,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java</url>
-          <line>542</line>
+          <line>936</line>
           <properties />
           <option name="timeStamp" value="2092" />
         </line-breakpoint>
@@ -2659,12 +2625,6 @@
           <line>94</line>
           <properties />
           <option name="timeStamp" value="2706" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java</url>
-          <line>204</line>
-          <properties />
-          <option name="timeStamp" value="2707" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarPublishActivityTestIT.java</url>
@@ -3514,7 +3474,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java</url>
-          <line>417</line>
+          <line>811</line>
           <properties />
           <option name="timeStamp" value="3373" />
         </line-breakpoint>
@@ -3532,7 +3492,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java</url>
-          <line>1285</line>
+          <line>1679</line>
           <properties />
           <option name="timeStamp" value="3376" />
         </line-breakpoint>
@@ -3568,7 +3528,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java</url>
-          <line>838</line>
+          <line>1232</line>
           <properties />
           <option name="timeStamp" value="3401" />
         </line-breakpoint>
@@ -3592,21 +3552,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java</url>
-          <line>912</line>
+          <line>1306</line>
           <properties />
           <option name="timeStamp" value="3405" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java</url>
-          <line>239</line>
+          <line>343</line>
           <properties />
-          <option name="timeStamp" value="3407" />
+          <option name="timeStamp" value="3411" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarViewTestIT.java</url>
-          <line>428</line>
+          <url>file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java</url>
+          <line>562</line>
           <properties />
-          <option name="timeStamp" value="3409" />
+          <option name="timeStamp" value="3421" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java</url>
+          <line>672</line>
+          <properties />
+          <option name="timeStamp" value="3422" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/gatein/src/main/java/org/exoplatform/platform/qa/ui/gatein/pageobject/MyDashBoard.java</url>
@@ -3650,6 +3616,20 @@
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
+      <expression>
+        <expression-string>DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(&quot;MM/dd/yyyy&quot;);
+             LocalDateTime now = LocalDateTime.now();
+             dateTimeFormatter.format(now);</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(&quot;yyyy/MM/dd HH:mm:ss&quot;);
+             LocalDateTime now = LocalDateTime.now();
+             dateTimeFormatter.format(now);</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>if (dateTimeFrom.length &gt; 0)
           for(int i=0; i&lt;=10; i++)
@@ -3719,19 +3699,6 @@
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username2);
-    addUsers.deleteUser(username1);</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>$(By.className(&quot;item&quot;)).sendKeys(Keys.CONTROL + &quot;A&quot;);</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
     </expressions>
     <expressions id="setValue">
       <expression>
@@ -3742,57 +3709,47 @@
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
-        <expression-string>getDate(-7, defaultFormatDate)</expression-string>
+        <expression-string>getDate(40, defaultFormatDate)</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>evt.uncheck(ELEMENT_QUICK_CHECKBOX_EVENT_ALLDAY, 2);</expression-string>
+        <expression-string>$(byXpath(&quot;(//input[@class='cbb_input'])[1]&quot;)).waitUntil(Condition.visible,Configuration.timeout).setValue(dateTimeFrom[1]);</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>$(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).sendKeys(&quot;1/24/2020&quot;);</expression-string>
+        <expression-string>dateTimeFrom[0];</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>for(int k=0; k&lt;=10; k++)
-          {
-            $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).sendKeys(Keys.BACK_SPACE);
-          }</expression-string>
+        <expression-string>dateTimeFrom</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>$(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).sendKeys(&quot;1/24/2020&quot;);</expression-string>
+        <expression-string>dateTimeFrom[1]</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>for(int i=0; i&lt;=10; i++)
-          {
-            $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).sendKeys(Keys.BACK_SPACE);
-          }</expression-string>
+        <expression-string>dateTimeFrom[1];</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>$(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).sendKeys(&quot;01/24/2020&quot;);</expression-string>
+        <expression-string>dateTestBase.getDate(gap, format)</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>if (dateTimeFrom.length &gt; 0)
-          for(int i=0; i&lt;=10; i++)
-          {
-            $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).sendKeys(Keys.BACK_SPACE);
-          }</expression-string>
+        <expression-string>getDate(3, defaultFormatDate)</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>$(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).sendKeys(dateTimeFrom[0]);</expression-string>
+        <expression-string>String defaultFormatDate = &quot;MM/dd/yyyy&quot;;</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -3859,20 +3816,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="118">
           <caret line="476" lean-forward="true" selection-start-line="476" selection-end-line="476" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/RichTextEditor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="950" column="20" lean-forward="true" selection-start-line="950" selection-start-column="20" selection-end-line="950" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/wiki/WikiLocators.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="1102" column="55" lean-forward="true" selection-start-line="1102" selection-start-column="55" selection-end-line="1102" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -4060,13 +4003,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarSearchTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="601">
-          <caret line="139" lean-forward="true" selection-start-line="139" selection-end-line="139" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/CalendarManagement.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -4095,24 +4031,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.0.0/junit-platform-commons-1.0.0.jar!/org/junit/platform/commons/util/ReflectionUtils.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-11">
-          <caret line="168" column="79" lean-forward="true" selection-start-line="168" selection-start-column="79" selection-end-line="168" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarEventRecurringTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1927">
           <caret line="413" selection-start-line="413" selection-end-line="413" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/calendar/CalendarLocator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="1347" lean-forward="true" selection-start-line="1347" selection-end-line="1347" />
         </state>
       </provider>
     </entry>
@@ -4126,10 +4048,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarSettingTestIT.java">
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsWCMTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-358">
-          <caret line="465" column="40" lean-forward="true" selection-start-line="465" selection-start-column="40" selection-end-line="465" selection-end-column="40" />
+        <state relative-caret-position="72">
+          <caret line="533" column="21" selection-start-line="533" selection-start-column="21" selection-end-line="533" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarSearchTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-315">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/RichTextEditor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="531" column="15" lean-forward="true" selection-start-line="531" selection-end-line="532" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/wiki/WikiLocators.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="499" column="27" selection-start-line="499" selection-start-column="27" selection-end-line="499" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/calendar/CalendarLocator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="975" column="171" selection-start-line="975" selection-start-column="171" selection-end-line="975" selection-end-column="171" />
         </state>
       </provider>
     </entry>
@@ -4140,34 +4090,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/TestBase.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.0.0/junit-platform-commons-1.0.0.jar!/org/junit/platform/commons/util/ReflectionUtils.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="829" selection-start-line="829" selection-end-line="829" />
+        <state relative-caret-position="120">
+          <caret line="175" selection-start-line="175" selection-end-line="175" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarViewTestIT.java">
+    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/TestBase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="428" selection-start-line="428" selection-end-line="428" />
+        <state relative-caret-position="162">
+          <caret line="829" column="12" selection-start-line="829" selection-start-column="11" selection-end-line="829" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarSettingTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="264" selection-start-line="264" selection-end-line="264" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/calendar/src/main/java/org/exoplatform/platform/qa/ui/calendar/pageobject/EventManagement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="236" column="11" lean-forward="true" selection-start-line="236" selection-start-column="11" selection-end-line="236" selection-end-column="11" />
+        <state relative-caret-position="103">
+          <caret line="343" selection-start-line="343" selection-end-line="343" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsWCMTestIT.java">
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarViewTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="533" column="21" selection-start-line="533" selection-start-column="21" selection-end-line="533" selection-end-column="21" />
+        <state relative-caret-position="208">
+          <caret line="426" column="40" lean-forward="true" selection-start-line="426" selection-start-column="40" selection-end-line="426" selection-end-column="40" />
         </state>
       </provider>
     </entry>

@@ -259,8 +259,8 @@ public class CalendarSettingTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               content,
-                                              getDate(0, defaultFormatDate + " HH"),
-                                              getDate(0, defaultFormatDate + " HH"),
+                                              getDate(1, defaultFormatDate + " HH"),
+                                              getDate(2, defaultFormatDate + " HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     info("Delete data");
