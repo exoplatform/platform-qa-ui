@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.platform.calendar;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -37,7 +38,7 @@ public class CalendarViewTestIT extends Base {
     homePagePlatform = new HomePagePlatform(this);
     eventManagement = new EventManagement(this);
     manageLogInOut = new ManageLogInOut(this);
-    manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
+    manageLogInOut.signInCas(PLFData.username, PLFData.password);
   }
 
   /**
@@ -105,6 +106,10 @@ public class CalendarViewTestIT extends Base {
                                      CalendarHomePage.selectViewOption.WEEK,
                                      CalendarHomePage.selectDayOption.ALLDAY,
                                      getDate(1, "MMM dd yyyy"));
+    if(!$(byXpath("//*[contains(text(), '${nameEvent}')]".replace("${nameEvent}",titleEventPre))).isDisplayed())
+    {
+      $(byXpath("//*[@class=\"actionIconSmall \"]//*[@class='uiIconMiniArrowLeft uiIconLightGray']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    }
     calendarHomePage.deleteEventTask(titleEventPre,
                                      CalendarHomePage.selectViewOption.WEEK,
                                      CalendarHomePage.selectDayOption.ALLDAY,

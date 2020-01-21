@@ -970,10 +970,10 @@ public class CalendarLocator {
                                                                         By.xpath("(//*[@id=\"ExoCalendarEventForm\"]//following::input[@class='date'])[2]");
 
   public static final By              NEXT_MONTH_DATE_PICKER                                =
-                                                                         By.xpath("//*[@class='uiCalendarComponent uiBox']//*[@class='uiIconMiniArrowRight uiIconLightGray']");
+                                                                         By.xpath("//*[@class=\"title clearfix\"]//*[@class='actionIcon pull-right']/i");
 
   public static final By              PREVIOUS_MONTH_DATE_PICKER                                =
-                                                                         By.xpath("//*[@class='uiCalendarComponent uiBox']//*[@class='uiIconMiniArrowLeft uiIconLightGray']");
+                                                                         By.xpath("//*[@class=\"title clearfix\"]//*[@class='actionIcon pull-left']/i");
 
   public static final String          ELEMENT_QUICK_INPUT_EVENT_FROM_DATE_VALUE                        =
                                                                                 "//*[@id='UIQuickAddEvent']//*[@name='from'][contains(@value,'$value')]";
