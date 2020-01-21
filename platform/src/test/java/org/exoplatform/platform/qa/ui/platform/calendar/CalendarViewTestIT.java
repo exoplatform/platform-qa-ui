@@ -38,7 +38,7 @@ public class CalendarViewTestIT extends Base {
     homePagePlatform = new HomePagePlatform(this);
     eventManagement = new EventManagement(this);
     manageLogInOut = new ManageLogInOut(this);
-    manageLogInOut.signInCas(PLFData.username, PLFData.password);
+    manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
   }
 
   /**
@@ -159,6 +159,7 @@ public class CalendarViewTestIT extends Base {
                                               getDate(-7, defaultFormatDate),
                                               true);
     eventManagement.saveQuickAddEvent();
+    executeJavaScript("window.scrollBy(0,-500)");
     $(ELEMENT_TODAY_ACTION_BAR).click();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.WORKWEEK);
     $(ELEMENT_TODAY_ACTION_BAR).click();
@@ -658,6 +659,7 @@ public class CalendarViewTestIT extends Base {
                                               null,
                                               "Anniversary");
     eventManagement.saveQuickAddEvent();
+    executeJavaScript("window.scrollBy(0,-500)");
     click(ELEMENT_TODAY_ACTION_BAR);
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.WEEK);
     calendarHomePage.selectCategory(CalendarHomePage.selectCategoryOption.MEETING);
