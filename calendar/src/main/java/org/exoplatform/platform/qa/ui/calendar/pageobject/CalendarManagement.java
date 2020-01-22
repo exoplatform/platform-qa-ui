@@ -340,7 +340,7 @@ public class CalendarManagement {
     $(ELEMENT_ADD_EVENT_CATEGORY_INPUT).setValue(newCategory);
     $(ELEMENT_ADD_EVENT_CATEGORY_INPUT).click();
     $(ELEMENT_EDIT_EVENT_CATEGORY_BUTTON_UPDATE).click();
-    $(byXpath(ELEMENT_LIST_EDIT_EVENT_BUTTON.replace("${categoryName}", newCategory))).waitUntil(Condition.visible,Configuration.collectionsTimeout);
+    $(byXpath(ELEMENT_LIST_EDIT_EVENT_BUTTON.replace("${categoryName}", newCategory))).exists();
     $(ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE).click();
   }
 
@@ -891,7 +891,7 @@ public class CalendarManagement {
 
     } else {
       info("Double click on the event");
-        ELEMENT_POUPUP_LIST_EVENT.find(byText(name)).doubleClick();
+        $(byXpath("//*[@id='UIListUsers']//*[contains(text(),'${title}')]".replace("${title}", name))).waitUntil(Condition.visible,Configuration.collectionsTimeout).doubleClick();
     }
     ELEMENT_EVENT_DRAWER.waitUntil(Condition.appears, Configuration.timeout);
     info("The edit form is shown");
