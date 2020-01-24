@@ -12,8 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER2;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DATE_ACTIVITY;
@@ -58,7 +57,7 @@ public class SOSDocumentActivityStreamTestIT extends Base{
         documentManagement.goToPublicFolder();
          refresh();
          $(byId("MultiUploadInputFiles")).uploadFromClasspath("eXo-Platform.png");
-         $(byClassName("progress")).waitUntil(visible, Configuration.timeout);
+         sleep(2000);
          $(byClassName("progress")).waitUntil(Condition.not(visible), Configuration.timeout);
        refresh();
         ELEMENT_PUBLIC_LIST_VIEW.find(byText("eXo-Platform")).waitUntil(visible, Configuration.timeout);

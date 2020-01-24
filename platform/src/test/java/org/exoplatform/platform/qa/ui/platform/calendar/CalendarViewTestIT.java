@@ -4,7 +4,6 @@ import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_HP_CALENDARGADGET_LEFTARROW;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -64,7 +63,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventNext = "titleEventNext" + getRandomNumber();
     String titleEventPre = "titleEventPre" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventCur,
@@ -136,7 +135,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventNextWeek = "titleEventNextWeek" + getRandomNumber();
     String titleEventPreWeek = "titleEventPreWeek" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
 
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
@@ -160,6 +159,7 @@ public class CalendarViewTestIT extends Base {
                                               getDate(-7, defaultFormatDate),
                                               true);
     eventManagement.saveQuickAddEvent();
+    executeJavaScript("window.scrollBy(0,-500)");
     $(ELEMENT_TODAY_ACTION_BAR).click();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.WORKWEEK);
     $(ELEMENT_TODAY_ACTION_BAR).click();
@@ -232,7 +232,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventNext = "titleEventNext" + getRandomNumber();
     String titleEventPre = "titleEventPre" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventCur,
@@ -321,7 +321,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventNextMonth = "titleEventNextMonth" + getRandomNumber();
     String titleEventPreMonth = "titleEventPreMonth" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
     info("Test 4: Check displaying added task/event in month view");
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
@@ -352,9 +352,9 @@ public class CalendarViewTestIT extends Base {
                                                           getDate(0, "MMM dd yyyy"),
                                                           CalendarHomePage.selectViewOption.MONTH,
                                                           CalendarHomePage.selectDayOption.ALLDAY);
-    /*calendarHomePage.verifyIsNotPresentEventTask(titleEventNextMonth,
+    calendarHomePage.verifyIsNotPresentEventTask(titleEventNextMonth,
                                                  CalendarHomePage.selectViewOption.MONTH,
-                                                 CalendarHomePage.selectDayOption.ALLDAY);*/
+                                                 CalendarHomePage.selectDayOption.ALLDAY);
     calendarHomePage.verifyIsNotPresentEventTask(titleEventPreMonth,
                                                  CalendarHomePage.selectViewOption.MONTH,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
@@ -422,7 +422,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventNextWeek = "titleEventNextWeek" + getRandomNumber();
     String titleEventPreWeek = "titleEventPreWeek" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventCur,
@@ -514,7 +514,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventNext = "titleEventNext" + getRandomNumber();
     String titleEventPre = "titleEventPre" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventCur,
@@ -607,7 +607,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventHoliday = "titleEventHoliday" + getRandomNumber();
     String titleEventAnni = "titleEventAnni" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
 
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();
@@ -659,6 +659,7 @@ public class CalendarViewTestIT extends Base {
                                               null,
                                               "Anniversary");
     eventManagement.saveQuickAddEvent();
+    executeJavaScript("window.scrollBy(0,-500)");
     click(ELEMENT_TODAY_ACTION_BAR);
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.WEEK);
     calendarHomePage.selectCategory(CalendarHomePage.selectCategoryOption.MEETING);
@@ -814,7 +815,7 @@ public class CalendarViewTestIT extends Base {
     String titleEventHoliday = "titleEventHoliday" + getRandomNumber();
     String titleEventAnni = "titleEventAnni" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
 
     homePagePlatform.goToCalendarPage();
     eventManagement.goToAddEventFromActionBar();

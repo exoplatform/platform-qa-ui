@@ -439,11 +439,11 @@ public class PlfUnifiedSearchTestIT extends Base {
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).setValue(content);
     ELEMENT_DROP_DOWN_LIST_RESULT_IN_QUICK_SEARCH.waitUntil(Condition.visible, Configuration.timeout)
             .find(byText(name))
-            .shouldBe(Condition.visible);
+            .shouldBe(Condition.not(Condition.visible));
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).pressEnter();
     $(ELEMENT_SEARCHRESULT_ALLTYPECHECK).click();
     $(ELEMENT_SEARCHRESULT_DOCTYPECHECK).parent().click();
-    ELEMENT_RESULT_SEARCH.find(byText(name)).should(Condition.visible);
+    ELEMENT_RESULT_SEARCH.find(byText(name)).should(Condition.not(Condition.visible));
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     siteExplorerHome.deleteData(name);

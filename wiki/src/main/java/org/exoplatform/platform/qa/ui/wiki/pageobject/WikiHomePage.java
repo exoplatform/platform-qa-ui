@@ -57,7 +57,7 @@ public class WikiHomePage {
      */
     public void goToAddTemplateWikiPage() {
         info("--Go to add template wiki page--");
-        $(ELEMENT_ADD_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(ELEMENT_ADD_PAGE_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         $(ELEMENT_FROM_TEMPLATE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
     }
 
@@ -356,6 +356,9 @@ public class WikiHomePage {
     public void goToSpaceSwitcher() {
         info("Click on drop down");
         $(ELEMENT_SPACE_DROP_DOWN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+        $(ELEMENT_SPACE_DROP_DOWN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+
     }
 
     /**

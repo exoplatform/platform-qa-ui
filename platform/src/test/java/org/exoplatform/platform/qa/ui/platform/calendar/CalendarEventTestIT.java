@@ -114,7 +114,7 @@ public class CalendarEventTestIT extends Base {
     calendarManagement.saveSetting();
     eventManagement.goToAddEventFromActionBar();
     info("Add attachment");
-    eventManagement.inputDataEventInDetailForm(titleEvent, content, getDate(0, "MM-dd-yyyy"), getDate(0, "MM-dd-yyyy"), false);
+    eventManagement.inputDataEventInDetailForm(titleEvent, content, getDate(0, "MM/dd/yyyy"), getDate(0, "MM/dd/yyyy"), false);
     $(ELEMENT_ADD_EDIT_EVENT_NAME).click();
     $(byId("cal-attach-file")).uploadFromClasspath("eXo-Platform.png");
     eventManagement.saveQuickAddEvent();
@@ -164,7 +164,7 @@ public class CalendarEventTestIT extends Base {
   @Tag("eventis")
   public void test07_CheckDateSuggestion() {
     String fullName = "fullName" + getRandomNumber();
-    String from = getDate(0, "MM-dd-yyyy HH") + ":00";
+    String from = getDate(0, "MM/dd/yyyy HH") + ":00";
     info("Test 7: Check date suggestion");
 
     homePagePlatform.goToCalendarPage();
@@ -225,8 +225,8 @@ public class CalendarEventTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM-dd-yyyy" + " HH"),
-                                              getDate(0, "MM-dd-yyyy" + " HH"),
+                                              getDate(0, "MM/dd/yyyy" + " HH"),
+                                              getDate(0, "MM/dd/yyyy" + " HH"),
                                               false);
     eventManagement.selectUserParticipants(users);
     eventManagement.saveAddEventDetails();
@@ -253,7 +253,7 @@ public class CalendarEventTestIT extends Base {
   public void test16_DragDropEvent() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String contentEvent = "contentEvent" + getRandomNumber();
-    String dateTime = getDate(1, "MM-dd-yyyy");
+    String dateTime = getDate(1, "MM/dd/yyyy");
 
     info("Create data test");
     info("Add a event");
@@ -261,8 +261,8 @@ public class CalendarEventTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM-dd-yyyy" + " HH"),
-                                              getDate(0, "MM-dd-yyyy" + " HH"),
+                                              getDate(0, "MM/dd/yyyy" + " HH"),
+                                              getDate(0, "MM/dd/yyyy" + " HH"),
                                               false);
     String fromTime =
                     waitForAndGetElement(ELEMENT_QUICK_INPUT_EVENT_FROM_TIME_INPUT, DEFAULT_TIMEOUT, 1, 2).getAttribute("value");
@@ -317,8 +317,8 @@ public class CalendarEventTestIT extends Base {
     eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM-dd-yyyy" + " HH"),
-                                              getDate(0, "MM-dd-yyyy" + " HH"),
+                                              getDate(0, "MM/dd/yyyy" + " HH"),
+                                              getDate(0, "MM/dd/yyyy" + " HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
@@ -366,8 +366,8 @@ public class CalendarEventTestIT extends Base {
     eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM-dd-yyyy" + " HH"),
-                                              getDate(0, "MM-dd-yyyy" + " HH"),
+                                              getDate(0, "MM/dd/yyyy" + " HH"),
+                                              getDate(0, "MM/dd/yyyy" + " HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
@@ -399,8 +399,8 @@ public class CalendarEventTestIT extends Base {
     eventManagement.checkSuggestionEventTimeInDetailForm(null, null, 60);
     eventManagement.inputDataEventInDetailForm(titleEvent2,
                                                contentEvent2,
-                                               getDate(0, "MM-dd-yyyy" + " HH"),
-                                               getDate(0, "MM-dd-yyyy" + " HH"),
+                                               getDate(0, "MM/dd/yyyy" + " HH"),
+                                               getDate(0, "MM/dd/yyyy" + " HH"),
                                                false);
     eventManagement.saveAddEventDetails();
     calendarHomePage.verifyIsPresentEventTask(titleEvent2,
@@ -443,8 +443,8 @@ public class CalendarEventTestIT extends Base {
     eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM-dd-yyyy" + " HH"),
-                                              getDate(0, "MM-dd-yyyy" + " HH"),
+                                              getDate(0, "MM/dd/yyyy" + " HH"),
+                                              getDate(0, "MM/dd/yyyy" + " HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
@@ -547,8 +547,8 @@ public class CalendarEventTestIT extends Base {
     eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM-dd-yyyy HH"),
-                                              getDate(0, "MM-dd-yyyy HH"),
+                                              getDate(0, "MM/dd/yyyy HH"),
+                                              getDate(0, "MM/dd/yyyy HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
@@ -600,8 +600,8 @@ public class CalendarEventTestIT extends Base {
     eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM-dd-yyyy HH"),
-                                              getDate(0, "MM-dd-yyyy HH"),
+                                              getDate(0, "MM/dd/yyyy HH"),
+                                              getDate(0, "MM/dd/yyyy HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
@@ -646,8 +646,8 @@ public class CalendarEventTestIT extends Base {
     eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM-dd-yyyy HH"),
-                                              getDate(0, "MM-dd-yyyy HH"),
+                                              getDate(0, "MM/dd/yyyy HH"),
+                                              getDate(0, "MM/dd/yyyy HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
@@ -663,8 +663,8 @@ public class CalendarEventTestIT extends Base {
     eventManagement.checkSuggestionEventTimeInDetailForm(null, null, 60);
     eventManagement.inputDataEventInDetailForm(titleEvent2,
                                                contentEvent2,
-                                               getDate(0, "MM-dd-yyyy HH"),
-                                               getDate(0, "MM-dd-yyyy HH"),
+                                               getDate(0, "MM/dd/yyyy HH"),
+                                               getDate(0, "MM/dd/yyyy HH"),
                                                false);
     eventManagement.saveAddEventDetails();
     calendarHomePage.verifyIsPresentEventTask(titleEvent2,
@@ -687,8 +687,8 @@ public class CalendarEventTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEvent,
             "",
-            getDate(0, "MM-dd-yyyy HH")  + ":13",
-            getDate(0, "MM-dd-yyyy HH") + ":58",
+            getDate(0, "MM/dd/yyyy HH")  + ":13",
+            getDate(0, "MM/dd/yyyy HH") + ":58",
             false);
     eventManagement.saveQuickAddEvent();
     ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.find(byText(titleEvent))

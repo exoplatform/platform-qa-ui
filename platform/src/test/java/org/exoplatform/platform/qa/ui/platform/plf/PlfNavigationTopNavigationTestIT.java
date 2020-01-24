@@ -130,10 +130,7 @@ public class PlfNavigationTopNavigationTestIT extends Base {
      * displayed
      */
     navigationToolbar.goToAddPoll("", forum);
-    info("Verify that the poll popup is shown");
-    $(ELEMENT_POLL_SUBMIT).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     info("Delete data");
-    ELEMENT_POLL_CANCEL.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     homePagePlatform.goToForum();
     forumHomePage.goToHomeCategory();
     forumCategoryManagement.deleteCategory(category);

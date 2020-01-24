@@ -284,6 +284,12 @@ public class CalendarLocator {
   public static final By              ELEMENT_CALENDAR_REFRESH_MENU                                    =
                                                                     By.xpath("//*[@id='tmpMenuElement']//*[@class='uiIconRefresh uiIconLightGray']");
 
+  public static final By              NEXT_MONTH_DATE_PICKER                                =
+                                                                    By.xpath("//*[@class=\"title clearfix\"]//*[@class='actionIcon pull-right']/i");
+
+  public static final By              PREVIOUS_MONTH_DATE_PICKER                                =
+                                                                    By.xpath("//*[@class=\"title clearfix\"]//*[@class='actionIcon pull-left']/i");
+
   // Calendar import form
   public static final By              ELEMENT_CALENDAR_IMPORT_POPUP_FORM                               = By.id("UIImportForm");
 

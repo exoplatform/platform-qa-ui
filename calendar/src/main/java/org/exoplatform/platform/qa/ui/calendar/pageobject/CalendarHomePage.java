@@ -181,7 +181,7 @@ public class CalendarHomePage {
                 date))).contextClick();
         if(!$(ELEMENT_CONTEXT_MENU_DELETE).isDisplayed())
         {
-         $(byXpath("//*[@id='UIMonthViewGrid']//*[contains(@starttimefull,'Feb 07 2020')]/following::*[@class='eventOnDayContent']//*[@class='eventSummary']//*[contains(text(),'${title}')]".replace("${title}",name))).contextClick();
+         $(byXpath("//*[@id='UIMonthViewGrid']//*[contains(@starttimefull,'${date}')]/following::*[@class='eventOnDayContent']//*[@class='eventSummary']//*[contains(text(),'${title}')]".replace("${date}",date).replace("${title}",name))).contextClick();
 
         }
       }
@@ -793,7 +793,7 @@ public class CalendarHomePage {
       verifyIsNotPresentEventTask(name, view, optionDay);
     } else
       button.yes();
-    $(byText(name)).waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs);
+    $(byText(name)).waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs + Configuration.openBrowserTimeoutMs);
   }
 
   /**

@@ -282,7 +282,7 @@ public class CalendarManagement {
     $(ELEMENT_ADD_EVENT_CATEGORY_INPUT).setValue(newCategory);
     $(ELEMENT_ADD_EVENT_CATEGORY_INPUT).click();
     $(ELEMENT_EDIT_EVENT_CATEGORY_BUTTON_UPDATE).click();
-    $(byXpath(ELEMENT_LIST_EDIT_EVENT_BUTTON.replace("${categoryName}", newCategory))).waitUntil(Condition.visible,Configuration.collectionsTimeout);
+    $(byXpath(ELEMENT_LIST_EDIT_EVENT_BUTTON.replace("${categoryName}", newCategory))).exists();
     $(ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE).click();
   }
 

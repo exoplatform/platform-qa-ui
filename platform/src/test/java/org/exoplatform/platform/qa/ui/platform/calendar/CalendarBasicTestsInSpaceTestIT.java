@@ -64,7 +64,7 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
   @Tag("eventis")
   public void test01_AddEventInSpace() {
     String titleEvent = "titleEvent" + getRandomNumber();
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
     String space = "space" + getRandomNumber();
@@ -107,8 +107,8 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
     $(byClassName("createEvent")).waitUntil(Condition.visible, Configuration.timeout).click();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM-dd-yyyy" + " HH"),
-                                              getDate(0, "MM-dd-yyyy" + " HH"),
+                                              getDate(0, "MM/dd/yyyy" + " HH"),
+                                              getDate(0, "MM/dd/yyyy" + " HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     executeJavaScript("window.scrollBy(0,-2000)", "");
@@ -121,8 +121,8 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
                                                        getDate(0, "MMM dd yyyy"));
     eventManagement.inputDataEventInDetailForm(titleEvent2,
                                                contentEvent2,
-                                               getDate(0, "MM-dd-yyyy" + " HH"),
-                                               getDate(0, "MM-dd-yyyy" + " HH"),
+                                               getDate(0, "MM/dd/yyyy" + " HH"),
+                                               getDate(0, "MM/dd/yyyy" + " HH"),
                                                false);
     eventManagement.saveAddEventDetails();
     calendarHomePage.verifyIsPresentEventTask(titleEvent2,
@@ -147,8 +147,8 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
     $(byClassName("createEvent")).waitUntil(Condition.visible, Configuration.timeout).click();
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM-dd-yyyy" + " HH"),
-                                              getDate(0, "MM-dd-yyyy" + " HH"),
+                                              getDate(0, "MM/dd/yyyy" + " HH"),
+                                              getDate(0, "MM/dd/yyyy" + " HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     executeJavaScript("window.scrollBy(0,-2000)", "");
@@ -160,7 +160,7 @@ public class CalendarBasicTestsInSpaceTestIT extends Base {
     calendarHomePage.deleteEventTask(titleEvent,
                                      CalendarHomePage.selectViewOption.LIST,
                                      CalendarHomePage.selectDayOption.DETAILTIME,
-                                     getDate(0, "MM-dd-yyyy"));
+                                     getDate(0, "MM/dd/yyyy"));
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
   }
