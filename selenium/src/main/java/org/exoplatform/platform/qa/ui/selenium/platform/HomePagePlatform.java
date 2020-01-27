@@ -157,7 +157,7 @@ public class HomePagePlatform {
   public void goToSpecificSpace(String space) {
     info("Go to space " + space);
     $(byXpath("//*[@class='ps__scrollbar-y']")).dragAndDropTo(ELEMENT_SPECIFIC_PANEL);
-    ELEMENT_SPECIFIC_PANEL.find(byText(space)).click();
+    ELEMENT_SPECIFIC_PANEL.find(byText(space)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
   }
 
