@@ -2,22 +2,17 @@ package org.exoplatform.platform.qa.ui.forum.pageobject;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
-
 import org.openqa.selenium.By;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.openqa.selenium.Keys;
 
 public class PrivateMessageManagement {
   private final TestBase       testBase;
@@ -59,26 +54,12 @@ public class PrivateMessageManagement {
   }
 
   /**
-   * Go inbox tab
-   */
-  public void goInbox() {
-    evt.click(ELEMENT_TABS_INBOX);
-  }
-
-  /**
    * Go compose tab
    */
   public void goComposeMessage() {
     sleep(2000);
     $(ELEMENT_TABS_COMPOSE_MESSAGE).waitUntil(Condition.visible,Configuration.timeout).click();
     sleep(Configuration.timeout);
-  }
-
-  /**
-   * Go to Inbox tab
-   */
-  public void gotoInboxTab() {
-    evt.click(ELEMENT_TABS_INBOX);
   }
 
   /**
@@ -105,23 +86,6 @@ public class PrivateMessageManagement {
   }
 
   /**
-   * Write message to group
-   *
-   * @param groupPath String
-   * @param member String
-   * @param title String
-   * @param content String
-   */
-  public void writeMessageToGroup(String groupPath, String member, String title, String content) {
-    forumPerm.selectPermGroupMemberMes(groupPath, member);
-    evt.type(ELEMENT_TITLE_MESSAGE, title, true);
-    plf.inputFrame(ELEMENT_MESSAGE_CONTENT, content);
-    evt.click(ELEMENT_SEND_BUTTON);
-    button.ok();
-
-  }
-
-  /**
    * Check inbox message
    *
    * @param contact String
@@ -134,30 +98,6 @@ public class PrivateMessageManagement {
     sleep(Configuration.timeout);
     $(byText(content)).scrollTo().waitUntil(Condition.appears, Configuration.timeout);
     sleep(2000);
-  }
-
-  /**
-   * Check display of message
-   *
-   * @param title String
-   * @param author String
-   * @param isDisplay boolean
-   */
-  public void checkDisplayOfMessage(String title, String author, boolean isDisplay) {
-    if (isDisplay) {
-      evt.waitForAndGetElement(ELEMENT_TITLE_AUTHORS_INBOX.replace("{$title}", title).replace("{$author}", author));
-    } else {
-      evt.waitForElementNotPresent(ELEMENT_TITLE_AUTHORS_INBOX.replace("{$title}", title).replace("{$author}", author));
-    }
-  }
-
-  /**
-   * check inbox message not found
-   *
-   * @param title String
-   */
-  public void checkInboxMessageNotFound(String title) {
-    evt.waitForElementNotPresent(By.xpath(ELEMENT_CONTACT_INBOX.replace("{$content}", title)));
   }
 
   /**
@@ -217,68 +157,5 @@ public class PrivateMessageManagement {
     sleep(Configuration.timeout);
     $(byText(title)).waitUntil(Condition.disappears, Configuration.timeout);
     sleep(2000);
-  }
-
-  /**
-   * Open Select Group Form
-   */
-
-  public void openSelectGroupForm() {
-    evt.click(ELEMENT_COMPOSE_NEW_MESSAGE_GROUP_SELECTOR);
-  }
-
-  /**
-   * Open Select Membership Form
-   */
-
-  public void openSelectMembershipForm() {
-    evt.click(ELEMENT_COMPOSE_NEW_MESSAGE_MEMBERSHIP_SELECTOR);
-  }
-
-  /**
-   * Write message to group
-   *
-   * @param group String
-   *
-   *  @param title String
-   *  @param content String
-   */
-
-  public void writeMessageToGroup(String group, String title, String content) {
-    evt.click(ELEMENT_PRIVATE_MESSAGE_SELECT_GROUP.replace("${name}", group));
-    evt.click(ELEMENT_PRIVATE_MESSAGE_SELECT_A_GROUP.replace("${name}", group));
-    evt.type(ELEMENT_TITLE_MESSAGE, title, true);
-    plf.inputFrame(ELEMENT_MESSAGE_CONTENT, content);
-    evt.click(ELEMENT_SEND_BUTTON);
-    evt.waitForMessage(ELEMENT_PRIVATE_MESSAGE_SEND_SUCCESSFULLY);
-    button.ok();
-
-  }
-
-  /**
-   * Write message to group
-   *
-   * @param group String
-   * @param content String
-   * @param membership String
-   * @param title String
-   */
-
-  public void writeMessageToMembership(String group, String membership, String title, String content) {
-    evt.click(ELEMENT_PRIVATE_MESSAGE_SELECT_GROUP.replace("${name}", group));
-    evt.click(ELEMENT_PRIVATE_MESSAGE_SELECT_A_MEMBERSHIP.replace("${membership}", membership));
-    evt.type(ELEMENT_TITLE_MESSAGE, title, true);
-    plf.inputFrame(ELEMENT_MESSAGE_CONTENT, content);
-    evt.click(ELEMENT_SEND_BUTTON);
-    evt.waitForMessage(ELEMENT_PRIVATE_MESSAGE_SEND_SUCCESSFULLY);
-    button.ok();
-
-  }
-
-  /**
-   * Go inbox tab
-   */
-  public void cancelPrivateMessage() {
-    evt.click(ELEMENT_PRIVATE_MESSAGE_CANCEL_BUTTON);
   }
 }

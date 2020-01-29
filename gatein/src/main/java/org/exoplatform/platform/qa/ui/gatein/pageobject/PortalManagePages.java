@@ -121,15 +121,4 @@ public class PortalManagePages {
     $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGES_POPUP_SAVE_BTN).click();
   }
 
-  /**
-   * Open page
-   *
-   * @param url boolean
-   */
-  public void openPage(String url) {
-    info("open page:" + url);
-    testBase.getExoWebDriver().getWebDriver().get(url);
-
-  }
-
 }
