@@ -126,27 +126,9 @@ public final class ActivityStreamLocator {
     public static final String          ELEMENT_ACTIVITY_TOPIC_VIEW_LAST_REPLY               =
             ".//*[contains(text(),'${topic}')]/../../..//*[@class='uiIconSocLastestReply uiIconSocLightGray']";
 
-    /*********************************************
-     * DOCUMENT PREVIEW
-     ****************************************************************************/
-    // Preview mode shadow
-    public static final By              ELEMENT_PREVIEW_MODE                                 =
-            By.xpath(".//*[@id='UIDocumentPreview']");
-
     /**
      * Exit preview mode ELEMENT_PREVIEW_MODE_CROSS_ICON : "X" icon on the top-right
      */
-    public static final By              ELEMENT_PREVIEW_MODE_CROSS_ICON                      =
-            By.xpath(".//*[@id='UIDocumentPreview']//*[@title='Close Window']");
-
-    public static final By              ELEMENT_COMMENT_COLLAPSE_ICON                        =
-            By.xpath(".//*[contains(@id,'UIDocumentPreview')]//*[contains(@class,'uiIconMiniArrowRight')]");
-
-    public static final By              ELEMENT_COMMENT_EXPAND_ICON                          =
-            By.xpath(".//*[contains(@id,'UIDocumentPreview')]//*[contains(@class,'uiIconMiniArrowLeft')]");
-
-    public static final By              ELEMENT_COMMENT_INPUT_FIELD                          =
-            By.xpath(".//*[@id='commentTextAreaPreview']");
 
     public static final String          ELEMENT_ACTIVITY_WEBCONTENT_CHECK_VERSION            =
             "//*[@class='uiIcon64x64Templateexo_webContent']/../..//*[@class='linkTitle' and contains(text(),'${title}')]/..//*[@class='versionFile' and contains(text(),'Version: {$version}')]";

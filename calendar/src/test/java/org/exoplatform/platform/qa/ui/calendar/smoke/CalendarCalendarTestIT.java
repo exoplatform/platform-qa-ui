@@ -144,7 +144,6 @@ public class CalendarCalendarTestIT extends Base {
   public void test05_AddGroupCalendar() {
     String groupCalendar = "/platform/users";
     String calendarName = "calendarName" + getRandomNumber();
-    String newCalendar = "newCalendar" + getRandomNumber();
     String calendarColor = "light_purple";
 
     info("Test 5: Add Group Calendar");

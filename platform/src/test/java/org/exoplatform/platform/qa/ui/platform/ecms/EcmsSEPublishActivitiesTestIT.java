@@ -396,45 +396,6 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
   }
 
   /**
-   * <li>Case ID:116680.</li>
-   * <li>Test Case Name: Edit a content from the Content activity.</li> Step
-   * Number: 1 Step Name: Step Description: ; - Connect to Intranet - From the
-   * Content activity, click on the link "Edit" Input Data: Expected Outcome: -
-   * The content explorer is opened to edit the content
-   */
-
-  public void test13_EditAContentFromTheContentActivity() {
-    info("Test 13: Edit a content from the Content activity");
-
-    info("Create data test");
-    String title = "title" + getRandomNumber();
-    String content = "content" + getRandomNumber();
-    String newContent = "newContent" + getRandomNumber();
-    info("Finish creating data test");
-
-    info("Create a new Content");
-    navigationToolbar.goToSiteExplorer();
-    siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.goToAddNewContent();
-    createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
-    createNewDocument.addNewFile(title, content);
-    createNewDocument.saveAndClose();
-    homePagePlatform.goToHomePage();
-    refresh();
-    activityStream.checkActivityAddWebContent(title, null, null);
-    $(byText(title)).click();
-    switchTo().frame($(ELEMENT_FILEFORM_BLANK_CONTENT2));
-    $(byXpath("/html/body")).sendKeys(newContent);
-    switchTo().defaultContent();
-    createNewDocument.saveAndClose();
-
-    info("Delete the file");
-    navigationToolbar.goToSiteExplorer();
-    siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.deleteData(title);
-  }
-
-  /**
    * <li>Case ID:116681.</li>
    * <li>Test Case Name: View a content from the Content activity.</li>
    */

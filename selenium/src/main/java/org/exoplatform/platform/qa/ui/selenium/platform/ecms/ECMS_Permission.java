@@ -29,26 +29,6 @@ public class ECMS_Permission {
   }
 
   /**
-   * Wrong path, ToCorrect
-   * 
-   * @param user String
-   * @param read boolean
-   * @param modify boolean
-   * @param remove boolean
-   */
-  public void modifyRightCheckBox(String user, boolean read, boolean modify, boolean remove) {
-    if (read == true) {
-      evt.check(By.xpath("//*[@name='" + user + "read']"));
-    }
-    if (modify == true) {
-      evt.check(By.xpath("//*[@name='" + user + "addNode]"));
-    }
-    if (remove == true) {
-      evt.check(By.xpath("//*[@name=''" + user + "remove]"));
-    }
-  }
-
-  /**
    * Delete permission of a node
    * 
    * @param name String

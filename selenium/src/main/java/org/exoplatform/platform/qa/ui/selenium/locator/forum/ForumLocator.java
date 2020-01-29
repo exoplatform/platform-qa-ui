@@ -234,10 +234,6 @@ public class ForumLocator {
   // More Action menu
   public static final By ELEMENT_MORE_ACTION =
           By.xpath("//*[@data-toggle='dropdown']/*[@class='uiIconSettings uiIconLightGray']");
-  ;
-
-  public static final By ELEMENT_MODERATOR =
-          By.xpath("//*[contains(@class,'uiIconForumModerator')]");
 
   public static final By ELEMENT_EDIT_FORUM =
           By.xpath("//*[contains(@href, 'EditForum')]");
@@ -250,9 +246,6 @@ public class ForumLocator {
 
   public static final By ELEMENT_START_TOPIC_BUTTON =
           By.xpath("//*[contains(@href, 'AddTopic')]");
-
-  public static final By ELEMENT_START_TOPIC_BTN =
-          By.xpath(".//*[contains(@class,'uiIconForumCreateTopic')]");
 
   public static final By ELEMENT_LOCK_FORUM = By.className("uiIconLockMedium");
 
@@ -418,34 +411,10 @@ public class ForumLocator {
 
   public static final By ELEMENT_FORUM_POST_TITLE = By.xpath("//*[@id='PostTitle']");
 
-  public static final By ELEMENT_FORUM_ADDTOPIC =
-          By.xpath(".//*[@id='UITopicContainer']//*[contains(@class,'uiIconForumCreateTopic ')][1]");
-
   public static final By ELEMENT_FORUM_TOPIC_TITLE = By.xpath("//*[@id='ThreadTitle']");
-
-  public static final String ELEMENT_FORUM_TOPIC_LINK = ".//*[contains(text(),'${name}')]";
 
   // Start Topic popup
   public static final By ELEMENT_START_TOPIC_POPUP_TITLE_FILED = By.id("ThreadTitle");
-
-  public static final By ELEMENT_TOPIC_PERMISSION_TAB =
-          By.xpath(".//*[@id='UITopicForm']//*[contains(text(),'Permissions')]");
-
-  public static final By ELEMENT_TOPIC_PERMISSION_TAB_USER_SELECTOR =
-          By.xpath(".//*[@id='ThreadPermission']//*[@class='uiIconUser uiIconLightGray']");
-
-  public static final By ELEMENT_TOPIC_PERMISSION_INPUT_SEARCH_USER_NAME = By.xpath(".//*[@id='QuickSearch']");
-
-  public static final String ELEMENT_TOPIC_PERMISSION_SELECT_SEARCH_OPTION = "//*[contains(@name,'filter')]";
-
-  public static final String ELEMENT_TOPIC_PERMISSION_SEARCH_ICON =
-          ".//*[@id='UIUserSelector']//*[contains(@class,'uiIconSearch uiIconLightGray')]";
-
-  public static final SelenideElement ELEMENT_TOPIC_CANCEL =
-          $(byId("UIForumPopupWindow")).find(byText("Cancel"));
-
-  public static final By ELEMENT_TOPIC_PERMISSION_CLOSE_USER_SELETOR =
-          By.xpath(".//*[@id='UIUserSelector']//*[contains(text(),'Close')]");
 
   // reply post form
   public static final By ELEMENT_TITLE_POST = By.id("PostTitle");
@@ -551,8 +520,7 @@ public class ForumLocator {
                                                           $(byXpath("//*[@id=\"QuickSearchForm\"]/div[2]/a/i"));
   public static final By              ELEMENT_CONFIRM                                    =
                                                       By.xpath("//*[@id='UIForumPopupConfirmation']//*[contains(text(),'OK')]");
-  public static final SelenideElement ELEMENT_POLL_CANCEL                                =
-                                                          $(byXpath("//*[@id=\"UIPollForm\"]/div[3]/button[3]"));
+
   public static final SelenideElement ELEMENT_SEARCH_RESULT                              =
                                                             $(byXpath("//*[@id=\"UIForumListSearch\"]/div[3]/table"));
   public static final SelenideElement ELEMENT_CLOSE_POPUP                                =

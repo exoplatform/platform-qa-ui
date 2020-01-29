@@ -817,9 +817,6 @@ public class ECMSLocator {
   public static final By ELEMENT_DOCUMENT_SHARE_CLOSE_BUTTON =
           By.xpath("(//*[@class='uiIconClose pull-right'])[1]");
 
-  public static final SelenideElement ELEMENT_INCON_ADD_PATH =
-          $(byClassName("uiIconAddPath"));
-
   public static final SelenideElement ELEMENT_CONTENT_LIST =
           $(byId("UITreeExplorer"));
 
@@ -888,9 +885,6 @@ public class ECMSLocator {
   public static final SelenideElement ELEMENT_LIST_DOCUMENTS_IN_SPACE =
           $(byId("UIDocumentContainer"));
 
-
-  public static final SelenideElement ELEMENT_CLOSE_PUBLICATION_POPUP = $(byXpath("//*[@id=\"UIPublicationContainer\"]/div[2]/button"));
-
   public static final SelenideElement ELEMENT_SEARCH_BTN = $(byId("simpleSearch"));
 
   public static final String ELEMENT_GO_BACK_PREVIOUS_PATH = "//td/a[@class='backIcon actionIcon pull-left']";
@@ -915,10 +909,7 @@ public class ECMSLocator {
   public static final By ELEMENT_PUBLIC_FOLDER =
           By.xpath("//*[@id=\"UIDocumentNodeList\"]/div/div[9]/div[4]/a/span");
   public static final SelenideElement ELEMENT_PUBLIC_LIST_VIEW = $(byClassName("uiListGrid"));
-  public static final SelenideElement ELEMENT_FILE_DESCRIPTION = $(byClassName("description"));
   public static final SelenideElement ELEMENT_BUTTON_DELETE_FIRST = $(byXpath("//*[@id=\"ECMContextMenu\"]/div/ul/li[7]/a"));
   public static final SelenideElement ELEMENT_NOTIFICATION = $(byClassName("UIControl"));
-  public static final SelenideElement ELEMENT_CHECK = $(byClassName("uiCheckbox"));
-
   public static final SelenideElement ELEMENT_BUTTON_CLOSE_SEARCH = $(byXpath("//*[@id=\"UIPopupWindow\"]/div[1]/a"));
 }

@@ -2,7 +2,6 @@ package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
@@ -19,9 +18,7 @@ import java.util.Date;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.bouncycastle.crypto.tls.ConnectionEnd.server;
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_USER_CLOSE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_TITLE_WIKI_INPUT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import com.codeborne.selenide.SelenideElement;
@@ -125,37 +122,6 @@ public class EventManagement {
     $(byXpath(cell)).contextClick();
     $(ELEMENT_CONTEXT_MENU_ADD_EVENT).click();
     $(ELEMENT_QUICK_ADD_EVENT_POPUP).waitUntil(Condition.visible, Configuration.timeout);
-  }
-
-  /**
-   * Open add event/task by right click in Month view
-   *
-   * @param date date to create event format: MM/dd/yyyy (Ex: 12/09/2014)
-   */
-  public void goToAddEventByRightClickForMothnView(String date) {
-    info("Go to add task by right clicking from main panel");
-    SimpleDateFormat format1 = new SimpleDateFormat("MM/dd/yyyy");
-    SimpleDateFormat format2 = new SimpleDateFormat("MMM dd yyyy");
-    String tempDate2 = testBase.getCurrentDate("MMM dd yyyy");
-    Date tempDate1 = null;
-
-    info("Get date");
-    if (date != null && date != "") {
-      try {
-        tempDate1 = format1.parse(date);
-      } catch (ParseException e) {
-        e.printStackTrace();
-      }
-      tempDate2 = format2.format(tempDate1);
-      info("Selected date is " + tempDate2);
-    } else {
-      tempDate2 = testBase.getCurrentDate("MMM dd yyyy");
-      info("Selected date is current date" + tempDate2);
-    }
-    String cell = ELEMENT_CELL_TO_MONTH_WORKING_PANEL.replace("$date", tempDate2);
-    evt.rightClickOnElement(cell);
-    evt.click(ELEMENT_CONTEXT_MENU_ADD_EVENT);
-    evt.waitForAndGetElement(ELEMENT_QUICK_ADD_EVENT_POPUP);
   }
 
   /**
@@ -855,31 +821,6 @@ public class EventManagement {
   }
 
   /**
-   * Attach file in "Add new EVENT" form
-   *
-   * @param path path of attachment of a EVENT
-   */
-  public void attachFileToEvent(String path, Boolean... opt) {
-    String fullPath = "";
-    if ("win".equals(server)) {
-      fullPath = "TestData\\" + path;
-    } else {
-      fullPath = "TestData/" + path;
-    }
-    evt.click(ELEMENT_EVENT_ADD_ATTACHMENT);
-    evt.click(ELEMENT_SELECT_FILE_BUTTON);
-    testBase.uploadFileUsingRobot(fullPath);
-    info("opt.length:" + opt.length);
-
-    if (opt.length == 0) {
-      evt.waitForAndGetElement(ELEMENT_ATTACHMENT_FORM_FILE_NAME.replace("$fileName", path));
-      evt.click(ELEMENT_ATTACHMENT_SAVE_BUTTON, 0, true);
-
-      evt.waitForAndGetElement(ELEMENT_ATTACH_FILE_NAME.replace("$fileName", path));
-    }
-  }
-
-  /**
    * Check default suggestion EVENT time in detail add form
    *
    * @param fromDateTime (Format: MM/dd/yyyy HH:mm)
@@ -1024,21 +965,6 @@ public class EventManagement {
   }
 
   /**
-   * add participants into schedule
-   *
-   * @param user String
-   * @param type int
-   */
-  public void addParticipants(String user, int type) {
-    $(ELEMENT_ADD_PARTICIPANTS_BUTTON_IN_SCHEDULE_TAB).click();
-    pPer.selectUserPermission(user, type);
-    if (type != 2 && type != 3 && type != 4)
-      $(byXpath(ELEMENT_USER_CHECKBOX_USERNAME.replace("${user}", user))).parent().waitUntil(Condition.visible,Configuration.timeout);
-    else
-      $(byXpath(ELEMENT_USER_CHECKBOX_FULLNAME.replace("${user}", user))).waitUntil(Condition.visible,Configuration.timeout);
-  }
-
-  /**
    * convertFromTimeToIndex
    *
    * @param time (ex: HH:mm)
@@ -1058,162 +984,6 @@ public class EventManagement {
     }
     info("Index is " + String.valueOf(index));
     return index;
-  }
-
-  /**
-   * Check busy time of user
-   *
-   * @param user String
-   * @param from (ex: HH:mm)
-   * @param to   (ex: HH:mm)
-   */
-  public void checkBusyTimeOfUser(String user, String from, String to) {
-    info("Check busy time of an user");
-    int fromIndex = convertFromTimeToIndex(from);
-    // System.out.println("fromIndex: " + fromIndex);
-    int toIndex = convertFromTimeToIndex(to);
-    // System.out.println("toIndex: " + toIndex);
-    info("From index is " + String.valueOf(fromIndex));
-    info("To index is " + String.valueOf(toIndex));
-    for (int i = fromIndex; i <= toIndex - 1; i++) {
-      info("index:" + i);
-      $(byXpath(ELEMENT_SCHEDULE_BUSY_TIME.replace("${user}", user).replace("${index}", String.valueOf(i))))
-
-              .shouldHave(Condition.attribute("class", "busyDotTime"));
-
-    }
-  }
-
-  /**
-   * Check schedule time of user
-   *
-   * @param from (ex: MM/dd/yyyy HH:mm)
-   * @param to   (ex: MM/dd/yyyy HH:mm)
-   */
-  public void checkScheduleTimeOfUser(String from, String to) {
-    info("Check schedule time of an user");
-    DateFormat formatterDateTime = new SimpleDateFormat("MM/dd/yyyy HH:mm");
-    DateFormat formatterDate = new SimpleDateFormat("MM/dd/yyyy");
-    try {
-      Date dateFrom = formatterDateTime.parse(from);
-      Date dateTo = formatterDateTime.parse(to);
-      Date date = formatterDate.parse(from);
-
-      String dateS = formatterDate.format(date);
-      @SuppressWarnings("deprecation")
-      String timeFrom = String.valueOf(dateFrom.getHours()) + ":" + String.valueOf(dateFrom.getMinutes());
-      @SuppressWarnings("deprecation")
-      String timeTo = String.valueOf(dateTo.getHours()) + ":" + String.valueOf(dateTo.getMinutes());
-
-      int fromIndex = convertFromTimeToIndex(timeFrom);
-      int toIndex = convertFromTimeToIndex(timeTo);
-      for (int i = fromIndex; i <= toIndex; i++) {
-        assert $(byXpath(ELEMENT_SCHEDULE_TIME.replace("${index}", String.valueOf(i))))
-                .getAttribute("class")
-                .contains("userSelection") : "Wrong schedule time";
-      }
-      $(byXpath(ELEMENT_SCHEDULE_SELECTED_DATE.replace("$date", dateS))).waitUntil(Condition.visible, Configuration.timeout);
-    } catch (ParseException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-  }
-
-  /**
-   * change time event from schedule tab
-   *
-   * @param option   String
-   * @param fromTime String
-   * @param toTime   String
-   */
-  public void changeTimeEventFromScheduleTab(PlatformBase.selectArrowOption option, String fromTime, String toTime) {
-    info("Change time event in schedule tab");
-    int fromIndex = convertFromTimeToIndex(fromTime);
-    int toIndex = convertFromTimeToIndex(toTime);
-    info("From is " + fromIndex);
-    info("To is " + toIndex);
-    switch (option) {
-      case NEXT:
-        $(ELEMENT_SCHEDULE_NEXT_DAY).click();
-        break;
-      case PREVIOUS:
-        evt.click(ELEMENT_SCHEDULE_PREVIOUS_DAY);
-        break;
-      case NOW:
-        break;
-      default:
-        break;
-    }
-    $(byXpath(ELEMENT_SCHEDULE_DRAG.replace("${index}", String.valueOf(fromIndex)))).dragAndDropTo($(byXpath(ELEMENT_SCHEDULE_DRAG.replace("${index}", String.valueOf(toIndex)))));
-
-  }
-
-  /**
-   * Select privacy
-   *
-   * @param isPublic true: check public checkbox false: check private checkbox
-   */
-  public void selectPrivacyParticipant(boolean isPublic) {
-    if (isPublic) {
-      info("Select public privacy");
-      evt.check(ELEMENT_PRIVACY_PUBLIC_CHECKBOX, 2);
-    } else {
-      info("Select private privacy");
-      evt.check(ELEMENT_PRIVACY_PRIVATE_CHECKBOX, 2);
-    }
-  }
-
-  /**
-   * selectAvailable on participant tab
-   *
-   * @param option enum
-   */
-  public void selectAvailable(selectAvailableOption option) {
-    switch (option) {
-      case AVAILABLE:
-        info("Select AVAILABLE");
-        evt.check(ELEMENT_AVAILABLE_CHECKBOX, 2);
-        break;
-      case BUSY:
-        info("Select BUSY");
-        evt.check(ELEMENT_BUSY_CHECKBOX, 2);
-        break;
-      case OUTSIDE:
-        info("Select OUTSIDE");
-        evt.check(ELEMENT_OUTSIDE_CHECKBOX, 2);
-        break;
-      default:
-        info("Select AVAILABLE");
-        evt.check(ELEMENT_AVAILABLE_CHECKBOX, 2);
-        break;
-    }
-  }
-
-  /**
-   * selectSendInvitation
-   *
-   * @param option enum
-   */
-  public void selectSendInvitation(PlatformBase.selectInvitationOption option) {
-    switch (option) {
-      case ALWAYS:
-        info("Select ALWAYS");
-        evt.check(ELEMENT_SEND_INVITATION_ALWAYS_CHECKBOX, 2);
-        break;
-      case NEVER:
-        info("Select NEVER");
-        evt.check(ELEMENT_SEND_INVITATION_NEVER_CHECKBOX, 2);
-        break;
-      case ASK:
-        info("Select ASK");
-        evt.check(ELEMENT_SEND_INVITATION_ASK_CHECKBOX, 2);
-        break;
-      default:
-        info("Select NEVER");
-        evt.check(ELEMENT_SEND_INVITATION_NEVER_CHECKBOX, 2);
-        break;
-    }
-
   }
 
   /**
@@ -1265,21 +1035,6 @@ public class EventManagement {
     if ($(ELEMENT_ADD_EDIT_EVENT_NAME).is(Condition.visible))
       $(ELEMENT_ADD_EDIT_EVENT_NAME).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_EVENT_SAVE_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-  }
-
-  /**
-   *
-   */
-
-  /**
-   * Click on more details
-   */
-  public void moreDetailsEvent() {
-    info("Go to More Details");
-
-    $(ELEMENT_BUTTON_EVENT_MORE_DETAILS).waitUntil(Condition.visible, Configuration.timeout);
-    $(ELEMENT_BUTTON_EVENT_MORE_DETAILS).click();
-    $(ELEMENT_BUTTON_EVENT_MORE_DETAILS).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
   }
 
   /**
@@ -1470,63 +1225,12 @@ public class EventManagement {
   }
 
   /**
-   * Delete recurring Confirm selection
-   *
-   * @param optEditType String
-   */
-  public void deleteRecurringConfirm(recurringType optEditType) {
-    evt.waitForAndGetElement(ELEMENT_CONFIRM_EDIT_RECURRING_FORM);
-    switch (optEditType) {
-      case ONLY_EVENT:
-        info("Edit only event recurring");
-        evt.check(ELEMENT_DELETE_ONE_EVENT, 2);
-        break;
-      case FOLLOW_EVENT:
-        info("Edit following event recurring");
-        evt.check(ELEMENT_DELETE_FOLLOWING_EVENT, 2);
-        break;
-      case ALL_EVENT:
-        info("Edit all event recurring");
-        evt.click(ELEMENT_DELETE_ALL_EVENT, 2);
-        break;
-    }
-
-    evt.click(ELEMENT_CONFIRM_DELETE_BUTTON);
-    evt.waitForElementNotPresent(ELEMENT_CONFIRM_DELETE_BUTTON);
-  }
-
-  /**
    * Open schedule tab
    */
   public void goToScheduleTab() {
     info("Click on Schedule tab");
     evt.click(ELEMENT_EVENT_SCHEDULE_TAB);
 
-  }
-
-  /**
-   * Open participants tab
-   */
-  public void goToParticipantsTab() {
-    info("Click on Participants tab");
-    evt.click(ELEMENT_EVENT_PARTICIPANTS_TAB);
-
-  }
-
-  /**
-   * Open reminders tab
-   */
-  public void goToRemindersTab() {
-    info("Click on Reminders tab");
-    evt.click(ELEMENT_EVENT_REMINDER_TAB);
-
-  }
-
-  /**
-   * Available option
-   */
-  public enum selectAvailableOption {
-    AVAILABLE, BUSY, OUTSIDE
   }
 
   /**

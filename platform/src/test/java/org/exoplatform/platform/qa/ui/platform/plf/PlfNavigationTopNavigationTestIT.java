@@ -153,8 +153,6 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     info("Test 3: Create a new Topic via the top navigation");
     String category = "category" + getRandomNumber();
     String forum = "forum" + getRandomNumber();
-    String forum1 = "forumA" + getRandomNumber();
-
     homePagePlatform.goToForum();
     info("Verify that the forum home page is shown full");
     $(ELEMENT_FORUM_WHAT_GOING_ON).waitUntil(Condition.appears, Configuration.timeout);

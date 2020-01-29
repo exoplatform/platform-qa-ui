@@ -20,8 +20,6 @@ import com.codeborne.selenide.WebDriverRunner;
  */
 public class ExoWebDriverProvider implements WebDriverProvider {
 
-  private final boolean proxyEnabled          = Boolean.getBoolean("proxyEnabled");
-
   private final String  chromeDriver          = System.getProperty("webdriver.chrome.driver");
 
   private final String  recommendedResolution = System.getProperty("window.size", "1366,768");

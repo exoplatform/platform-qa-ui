@@ -152,18 +152,8 @@ public class AddonsAnswersQuestionTestIT extends Base {
   @Test
   public void test07_MoveAQuestion() {
     String question = "question" + getRandomNumber();
-    String content = "content" + getRandomNumber();
-    ;
     String paCat1 = "paCat1" + getRandomNumber();
-    ;
     String paDes1 = "paDes1" + getRandomNumber();
-    ;
-
-    String paCat2 = "paCat2" + getRandomNumber();
-    ;
-    String paDes2 = "paDes2" + getRandomNumber();
-    ;
-
     homePagePlatform.goToAnswer();
     questionManagement.goToSubmitQuestion();
     questionManagement.inputDataToQuestionForm(question, "", null, "");

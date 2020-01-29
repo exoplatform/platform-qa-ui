@@ -201,17 +201,6 @@ public class ChatManagement {
     ELEMENT_POPUP_CONTAINER.find(byText("Upload File")).shouldNot(Condition.appear);
   }
 
-  public void goToChatUser(String userChat){
-    if (!$(byText(PLFData.DATA_NAME_USER2)).exists())
-      ELEMENT_CHAT_BUTTON_HIDE_OFF_LINE.click();
-    sleep(Configuration.timeout);
-    $(byXpath("//div[@class='chat-contact']/div[contains(@style,'${userChat}')]".replace("${userChat}",userChat))).click();
-    if ($(byXpath("//i[@class='uiIconBannerChat uiIconLightGray']")).exists())
-      $(byXpath("//i[@class='uiIconBannerChat uiIconLightGray']")).waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(Configuration.timeout);
-    refresh();
-  }
-
   public void checkShareLinPopUp(){
     ELEMENT_POPUP_CONTAINER.find(byText("Share Link")).waitUntil(Condition.appear,Configuration.timeout);
     ELEMENT_POPUP_CONTAINER.find(byXpath("//input[@placeholder='E.g: http://www.exoplatform.com']")).waitUntil(Condition.appear, Configuration.timeout);

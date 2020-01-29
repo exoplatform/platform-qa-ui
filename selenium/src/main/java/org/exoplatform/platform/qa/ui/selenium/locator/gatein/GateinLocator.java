@@ -28,17 +28,6 @@ import org.openqa.selenium.By;
 import com.codeborne.selenide.SelenideElement;
 
 public final class GateinLocator {
-  // Application registry page
-  public static final By              ELEMENT_SHOW_IMPORT_APPLICATION                         = By.id("showImport");
-
-  public static final By              ELEMENT_IMPORT_ALL_APPLICATION                          =
-                                                                     By.xpath("//*[@class='uiIconImport uiIconLightGray']");
-
-  // Left panel
-
-  public static final String          ELEMENT_LEFT_PANEL_APPLICATION_CATEGORY_DELETE_BTN      =
-                                                                                         ".//*[@href='#${category}']/../..//*[contains(@class,'uiIconDelete uiIconLightGray')]";
-
   /*************************************
    * CONTENT LIST
    ***************************************************************/
@@ -55,8 +44,6 @@ public final class GateinLocator {
   public static final By              ELEMENT_EDIT_PORTLET_FORM                               = By.id("tab-UIPortletForm");
 
   public static final By              ELEMENT_EDIT_PORTLET_FORM_CLOSE_BUTTON                  = By.xpath(".//*[@id='Close']");
-
-  public static final By              ELEMENT_EDIT_PORTLET_FORM_SAVE_BUTTON                   = By.xpath(".//*[@id='Save']");
 
   public static final By              ELEMENT_EDIT_PORTLET_FORM_SAVESETTINGS_BUTTON           =
                                                                                     By.xpath("//*[@id='tab-UIPortletForm']//*[text()='Save Settings']");

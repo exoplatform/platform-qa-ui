@@ -64,69 +64,8 @@ public class PortalGroupNavigation {
      * alert.acceptAlert(); $(ELEMENT_DELETE_NAVIGATION_ICON.replace("${groupName}",
      * groupName)).waitUntil(Condition.disappears,10000);
      */
-    // clic on delete navigation
     $(byText(groupName)).parent().find(byXpath("//*[@id=\"UIGroupNavigationGrid\"]/table[1]/tbody/tr[1]/td[4]/a")).click();
     alert.acceptAlert();
     $(byText(groupName)).shouldNot(Condition.exist);
-  }
-
-  /**
-   * function: Edit Priority For Group
-   *
-   * @param groupAdmin Description of group
-   * @param priority Priority you want to set for group
-   */
-  public void editPriorityForGroup(String groupAdmin, String priority) {
-    info("Select group navigation [Administration] and click [Edit Properties]");
-    $(ELEMENT_EDIT_PROPERTIES_ICON.replace("${groupName}", groupAdmin));
-    info("Change priority for this group");
-    evt.select(ELEMENT_GROUP_NAVIGATION_PRIORITY, priority);
-    evt.click(ELEMENT_SAVE_BTN);
-  }
-
-  /**
-   * function: Go to Edit navigation
-   *
-   * @param currentNavigation String
-   */
-  public void editNavigation(String currentNavigation) {
-    String navigation = ELEMENT_EDIT_NAVIGATION.replace("${groupName}", currentNavigation);
-    evt.click(navigation);
-    evt.waitForAndGetElement(ELEMENT_TITLE_NAVIGATION_MANAGEMENT);
-  }
-
-  /**
-   * Verify Add Navigation permission
-   *
-   * @param title page's title
-   * @param isEnable boolean
-   * @param groupName String
-   */
-  public void verifyAddNavigationPerm(String title, boolean isEnable, String groupName) {
-    info("verify Add Navigation permission");
-    portMg.openPage(testBase.getExoWebDriver().getBaseUrl() + "/intranet/home/" + title);
-    if (isEnable && groupName.length() > 0) {
-      evt.waitForAndGetElement(ELEMENT_ADD_NAVIGATION_BUTTON);
-      evt.click(ELEMENT_ADD_NAVIGATION_BUTTON);
-      evt.click(ELEMENT_GROUP_SELECT_ADD_NAVIGATION.replace("${groupName}", groupName));
-      evt.waitForElementNotPresent(ELEMENT_GROUP_SELECT_ADD_NAVIGATION.replace("${groupName}", groupName));
-      evt.click(ELEMENT_CANCEL_BUTON);
-      evt.waitForAndGetElement(ELEMENT_GROUP_NAME.replace("${groupName}", groupName));
-    }
-  }
-
-  /**
-   * Verify Manage Group Site
-   *
-   * @param group String
-   * @param isEnable boolean
-   */
-  public void verifyManageGroupSitePerm(String group, boolean isEnable) {
-    info("Verify Manage Group Site");
-    if (isEnable) {
-      evt.waitForAndGetElement(ELEMENT_EDIT_NAVIGATION.replace("${groupName}", group));
-      evt.waitForAndGetElement(ELEMENT_EDIT_PROPERTIES_ICON.replace("${groupName}", group));
-      evt.waitForAndGetElement(ELEMENT_DELETE_NAVIGATION_ICON.replace("${groupName}", group));
-    }
   }
 }

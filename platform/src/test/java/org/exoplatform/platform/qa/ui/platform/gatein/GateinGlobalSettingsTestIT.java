@@ -222,9 +222,6 @@ public class GateinGlobalSettingsTestIT extends Base {
          * admin/manager/User/Demo don't set language )
          */
         info("Check language default when do not set language for user is English");
-        // $(ELEMENT_HOME_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout);
-        // manageLogInOut.signOut();
-
         /*
          * Step Number: 2 Step Name: Step 2: Check displaying language when language of
          * browser don't support by portal with user account demo Step Description: -

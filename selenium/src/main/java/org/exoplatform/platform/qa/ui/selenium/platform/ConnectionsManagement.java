@@ -126,21 +126,6 @@ public class ConnectionsManagement {
   }
 
   /**
-   * Reset all connections to default status
-   * 
-   * @param username
-   */
-  public void resetConnection(String username) throws Exception {
-    searchPeople(username, null, null, null);
-    if (evt.waitForAndGetElement(ELEMENT_CONNECTION_REVOVE_BTN, 3000, 0) != null)
-      removeConnection(username);
-    if (evt.waitForAndGetElement(ELEMENT_CONNECTION_CANCEL_BTN, 3000, 0) != null)
-      cancelConnection(username);
-    if (evt.waitForAndGetElement(ELEMENT_CONNECTION_IGNORE_BTN.replace("${user}", username), 3000, 0) != null)
-      ignoreConnection(username);
-  }
-
-  /**
    * Accept a connection from a user in Connection page
    * 
    * @param username

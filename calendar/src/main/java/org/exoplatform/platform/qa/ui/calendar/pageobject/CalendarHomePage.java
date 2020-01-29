@@ -9,8 +9,6 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 

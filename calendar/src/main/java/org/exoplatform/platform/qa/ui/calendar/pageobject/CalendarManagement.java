@@ -7,7 +7,6 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarL
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -100,16 +99,6 @@ public class CalendarManagement {
         evt.waitForAndGetElement(ELEMENT_CALENDAR_QUICK_ADD_TASK_FORM);
         break;
     }
-  }
-
-  /**
-   * Open Calendar setting form from Setting button on Actions Bar
-   */
-  public void openSettingCalendar() {
-    info("Click on Settings icon");
-    evt.click(ELEMENT_ACTION_BAR_SETTING_ICON);
-    evt.waitForAndGetElement(ELEMENT_CALENDAR_SETTING_FORM);
-    info("Settings Calendar form is shown");
   }
 
   /**
@@ -215,8 +204,6 @@ public class CalendarManagement {
           break;
         case 1:
           $(ELEMENT_CALENDAR_GROUP_SELECT_USER_BTN).click();
-          // evt.click(ELEMENT_CALENDAR_GROUP_USER_IN_SELECT_FORM.replace("$user",
-          // user[i]));
           $(byText(user[i])).click();
           break;
         case 2:
@@ -411,21 +398,6 @@ public class CalendarManagement {
   }
 
   /**
-   * Check user selector of share calendar
-   *
-   * @param cal String
-   * @param user String
-   * @param isPresent boolean
-   */
-  public void checkUserSelectorOfShareCalendar(String cal, String user, boolean isPresent) {
-    executeActionCalendar(cal, menuOfCalendarOption.SHARE);
-    evt.click(ELEMENT_CALENDAR_SELECT_USER_ICON);
-
-    pPer.checkUserSelector(user, isPresent);
-    evt.click(ELEMENT_USER_CLOSE_BUTTON);
-  }
-
-  /**
    * Share a calendar
    *
    * @param calendar name of calendar
@@ -460,12 +432,7 @@ public class CalendarManagement {
    * @param color color of calendar
    */
   public void importCalendar(String name, String description, String color) {
-    /*
-     * click(ELEMENT_CALENDAR_MENU_ACTIONS_ICON);
-     * click(ELEMENT_CALENDAR_MENU_ACTIONS_IMPORT);
-     */
     goToMenuFromMainCalendar(menuOfMainCalendar.IMPORT);
-    // waitForAndGetElement(ELEMENT_CALENDAR_IMPORT_POPUP_FORM);
     uploadCalendar();
     if (name != null)
       $(ELEMENT_CALENDAR_IMPORT_NAME_INPUT).setValue(name);
@@ -674,7 +641,6 @@ public class CalendarManagement {
       case DELETE:
         info("Select Delete option");
         $(ELEMENT_CONTEXT_MENU_DELETE).click();
-        // click(ELEMENT_CONFIRM_POPUP_OK);
         break;
       case DELETE_RECURRING:
         info("Select Delete option");
@@ -746,45 +712,10 @@ public class CalendarManagement {
    */
   public void deleteTaskEvent(String name) {
     info("Right click on an Event/Task");
-    // scrollElementIntoView(this.driver.findElement(By.xpath(ELEMENT_EVENT_TASK_TITLE.replace("${name}",name))));
-    // evt.rightClickOnElement(By.xpath(ELEMENT_EVENT_TASK_TITLE.replace("${name}",
-    // name)));
     $(byText(name)).contextClick();
     selectOptionByRightclickOnEvent(contextMenuEditEvenOption.DELETE);
     $(ELEMENT_YES_BUTTON).click();
-    // evt.waitForElementNotPresent(ELEMENT_EVENT_TASK_TITLE.replace("${name}",
-    // name));
     $(byText(name)).shouldNot(Condition.exist);
-  }
-
-  /**
-   * Delete task/events by click on Delete button on header bar of Month or List
-   * View
-   */
-  public void deleteTaskEvent(EventManagement.recurringType... type) {
-    info("Click on Delete button");
-    evt.click(ELEMENT_EVENT_TASK_DELETE_BUTTON);
-    confirmDeleteEventTask();
-
-  }
-
-  /**
-   * Confirm deleting Events/Tasks
-   */
-  public void confirmDeleteEventTask(EventManagement.recurringType... type) {
-    if (evt.waitForAndGetElement(ELEMENT_CONFIRM_POPUP_OK, 2000, 0) != null)
-      evt.click(ELEMENT_CONFIRM_POPUP_OK);
-    if (evt.waitForAndGetElement(ELEMENT_DELETE_ONE_EVENT, 2000, 0) != null) {
-      if (type.length > 0)
-        evMg.deleteRecurringConfirm(type[0]);
-      else
-        evMg.deleteRecurringConfirm(EventManagement.recurringType.ALL_EVENT);
-    }
-    if (evt.waitForAndGetElement(ELEMENT_CONFIRM_POPUP_DELETE, 2000, 0) != null) {
-      evt.click(ELEMENT_CONFIRM_POPUP_DELETE);
-      evt.waitForElementNotPresent(ELEMENT_CONFIRM_POPUP_DELETE);
-    }
-
   }
 
   /**
@@ -814,19 +745,6 @@ public class CalendarManagement {
     info("Click on the Display calendar tab");
     $(ELEMENT_CALENDAR_SETTING_FEED_TAB).click();
 
-  }
-
-  /**
-   * Right click on Event/Tasks
-   * 
-   * @param name String
-   * @param date String
-   */
-  public void rightClickEventTaskInMonth(String name, String date) {
-    info("Right click on Event/Task");
-    evt.rightClickOnElement(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$date", testBase.getLastDayOfWeek("MMM dd yyyy"))
-            .replace("$name", name));
-    evt.waitForAndGetElement(ELEMENT_CONTEXT_MENU);
   }
 
   /**
