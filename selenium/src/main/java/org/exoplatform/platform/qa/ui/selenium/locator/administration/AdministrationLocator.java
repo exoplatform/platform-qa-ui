@@ -648,19 +648,6 @@ public class AdministrationLocator {
                                                               By.xpath(".//*[@id='PermissionGrid']");
 
   // *=========================================================EDIT/SITE/LAYOUT==============================================*\
-  public static final By              ELEMENT_EDIT_SITE_LAYOUT_SITE_CONFIG_BTN                     =
-                                                                               By.xpath(".//*[@id='UIPortalComposer']//*[contains(@class,'PageProfileIcon')]");
-
-  public static final By              ELEMENT_EDIT_SITE_LAYOUT_SAVE_BTN                            =
-                                                                        By.xpath(".//*[@id='UIPortalComposer']//*[contains(@class,'uiIconSave')]");
-
-  // SITE CONFIG POPUP
-  public static final By              ELEMENT_SITE_CONFIG_POPUP_PERMISSION_TAB                     =
-                                                                               By.xpath(".//*[@id='UIMaskWorkspace']//*[contains(@data-target,'#PermissionSetting-tab')]");
-
-  public static final By              ELEMENET_SITE_CONFIG_POPUP_SAVE_BTN                          =
-                                                                          By.xpath(".//*[@id='UIPortalForm']//button[1]");
-
   // Edit Portlet popup
   public static final By              ELEMENT_PORTLET_POPUP_PERMISSION_TAB                         =
                                                                            By.xpath(".//*[@data-target='#PortletPermission-tab']");
@@ -668,94 +655,21 @@ public class AdministrationLocator {
   public static final By              ELEMETN_PORTLET_POPUP_SAVE_BTN                               = By.xpath(".//*[@id='Save']");
 
   // HOME PAGE LAYOUT
-  public static final By              ELEMENT_HOME_PAGE_LEFT_PORTLET_BREADCRUM_NAVIGATION          =
-                                                                                          By.xpath(".//*[contains(@id,'LeftBreadCrumbNavigationPortlet')]//*[contains(@class,'LAYOUT-CONTAINER')]");
-
-  public static final By              ELEMENT_HOME_PAGE_LEFT_PORTLET_BREADCRUM_NAVIGATION_EDIT_BTN =
-                                                                                                   By.xpath(".//*[contains(@id,'LeftBreadCrumbNavigationPortlet')]//*[contains(@class,'EDITION-PORTLET')]//*[contains(@class,'uiIconEdit')]");
-
-  public static final By              ELEMENT_HOME_PAGE_LEFT_PORTLET_COMPANY_NAVIGATION            =
-                                                                                        By.xpath(".//*[contains(@id,'LeftNavigationPortlet')]//*[contains(@class,'LAYOUT-CONTAINER')]");
-
-  public static final By              ELEMENT_HOME_PAGE_LEFT_PORTLET_COMPANY_NAVIGATION_EDIT_BTN   =
-                                                                                                 By.xpath(".//*[contains(@id,'LeftNavigationPortlet')]//*[contains(@class,'EDITION-PORTLET')]//*[contains(@class,'uiIconEdit')]");
-
-  public static final By              ELEMENT_HOME_PAGE_LEFT_PORTLET_GROUPS_NAVIGATION             =
-                                                                                       By.xpath(".//*[contains(@id,'GroupsNavigationPortlet')]//*[contains(@class,'LAYOUT-CONTAINER')]");
-
-  public static final By              ELEMENT_HOME_PAGE_LEFT_PORTLET_GROUPS_NAVIGATION_EDIT_BTN    =
-                                                                                                By.xpath(".//*[contains(@id,'GroupsNavigationPortlet')]//*[contains(@class,'EDITION-PORTLET')]//*[contains(@class,'uiIconEdit')]");
-
-  public static final By              ELEMENT_HOME_PAGE_LEFT_PORTLET_SPACES_NAVIGATION             =
-                                                                                       By.xpath(".//*[contains(@id,'SpaceNavigationPortlet')]//*[contains(@class,'LAYOUT-CONTAINER')]");
-
-  public static final By              ELEMENT_HOME_PAGE_LEFT_PORTLET_SPACES_NAVIGATION_EDIT_BTN    =
-                                                                                                By.xpath(".//*[contains(@id,'SpaceNavigationPortlet')]//*[contains(@class,'EDITION-PORTLET')]//*[contains(@class,'uiIconEdit')]");
-
   public static final By              ELEMENT_EDIT_PORTLET_ABORT                                   =
                                                                  By.xpath("//*[@data-original-title='Abort']");
   // *=============================================================EDIT/PAGE/EDIT
   // LAYOUT===========================================*\
-
-  public static final By              ELEMENT_PAGE_EDIT_LAYOUT_PROPERITES_BTN                      =
-                                                                              By.xpath(".//*[@id='UIPageEditor']//*[contains(@class,'PageProfileIcon')]");
-
-  public static final By              ELEMENT_PAGE_EDIT_LAYOUT_SAVE_BTN                            =
-                                                                        By.xpath(".//*[@id='UIPageEditor']//*[contains(@class,'uiIconSave')]");
-
   public static final By              ELEMENT_PAGE_EDIT_LAYOUT_CONTAINER_TAB                       =
                                                                              By.xpath(".//*[@data-target='#contList']");
-
-  // WIKI CONTAINER
-  public static final By              ELEMENT_PAGE_EDIT_LAYOUT_WIKI_CONTAINER                      =
-                                                                              By.xpath(".//*[@id='myWikiPortlet']//*[contains(@class,'LAYOUT-CONTAINER')]");
-
-  public static final By              ELEMENT_PAGE_EDIT_LAYOUT_WIKI_CONTAINER_EDIT_BTN             =
-                                                                                       By.xpath(".//*[@id='myWikiPortlet']//*[contains(@class,'EDITION-CONTAINER')]//*[contains(@class,'uiIconEdit')]");
 
   // EDIT CONTAINER POPUP
   public static final By              ELEMENT_CONTAINER_POPUP_PERMISSION_TAB                       =
                                                                              By.xpath(".//*[@data-target='#UIContainerPermission-tab']");
 
-  public static final By              ELEMENT_CONTAINER_POPUP_SAVE_BTN                             =
-                                                                       By.xpath(".//*[@id='UIContainerForm']//button[1]");
-
-  // PROPERTIES POPUP
-  public static final By              ELEMENT_PROPERTIES_POPUP_PERMISSION_TAB                      =
-                                                                              By.xpath(".//*[@data-target='#PermissionSetting-tab']");
-
-  public static final By              ELEMENT_PROPERTIES_POPUP_SAVE_BTN                            =
-                                                                        By.xpath(".//*[@id='UIPageForm']//button[1]");
-
   // *=============================================================*\\
-  // Site menu
-
-  public static final String          ELEMENT_ACTION_BUTTON                                        = "//*[text()='$action']";
-
-  public static final String          ELEMENT_DELETE_BUTTON                                        =
-                                                            ".//*[contains(@id, '${tabName}')]//*[@class='uiIconDelete uiIconLightGray']";
-
   // Site permission
-  public static final String          ELEMENT_PERMISSION_SELECTOR                                  =
-                                                                  "//*[@id='PermissionSetting']//*[text() = '${tabName}']";
-
-  public static final String          ELEMENT_PERMISSION_PUBLIC_MODE_CHECKBOX                      =
-                                                                              "//*[contains(@id,'${tabName}')]//*[@id='publicMode']";
-
-  public static final String          ELEMENT_PERMISSION_TABLE_COLUMN                              =
-                                                                      "//*[contains(@id,'${tabName}')]//*[@id='PermissionGrid']//*[@id='${columnId}' and text()='${columnLabel}']";
-
-  public static final String          ELEMENT_PERMISSION_ADD_USER_BUTTON                           =
-                                                                         "//*[contains(@id,'${tabName}')]//*[@class='uiIconAddUser uiIconWhite']/..[contains(text(),'Add Permission')]";
-
-  public static final String          ELEMENT_CONTAINER_PERMISSION_SELECTOR                        =
-                                                                            "//*[@id='UIContainerPermission']//*[text() = '${tabName}']";
-
   public static final String          ELEMENT_PERMISSION_ADD_USER_BTN                              =
                                                                       "//*[contains(@id,'${tabName}')]//*[@class='uiIconAddUser uiIconWhite']";
-
-  public static final String          ELEMENT_PORTLET_SELECT_PERMISSION_POPUP                      =
-                                                                              ".//*[contains(@id, '${tabName}')]//*[@class='PopupTitle popupTitle' and (text()='Select Permission' or text()='Group and Membership Selector')]";
 
   public static final String          ELEMENT_PORTLET_SELECT_PERMISSION_GROUP_MEMBERSHIP_NAME      =
                                                                                               ".//*[contains(@id, '${tabName}')]//*[@class='PopupContent popupContent']//*[@title='${name}']";
@@ -763,34 +677,9 @@ public class AdministrationLocator {
   public static final String          ELEMENT_PORTLET_ACCESS_PERMISSION_GROUP_NAME                 =
                                                                                    ".//*[contains(@id, '${tabName}')]//*[@id='PermissionGrid']//*[contains(text(),'${group}')]";
 
-  public static final String          ELEMENT_CONFIRM_DELETE_MESSAGE                               =
-                                                                     "Are you sure you want to delete this Access Group?";
-
-  public static final By              ELEMENT_APPLICATION_TAB_ACTIVE                               =
-                                                                     By.xpath("//*[@data-target='#appList']");
-
   public static final String          ELEMENT_PORTLET_SELECT_PERMISSION_POPUP_TITLE                =
                                                                                     ".//*[contains(@id, '${tabName}')]//*[@class='PopupTitle popupTitle' and (text()='${popupTitle}')]";
-
-  public static final String          ELEMENT_PERMISSION_MOVE_APPS_TAB_ID                          =
-                                                                          "TabContentUIListMoveAppsPermissionSelector";
-
-  public static final String          ELEMENT_PERMISSION_MOVE_CONTAINERS_TAB_ID                    =
-                                                                                "TabContentUIListMoveContainersPermissionSelector";
-
-  public static final String          ELEMENT_PERMISSION_MOVE_APPS_POPUP_TAB_ID                    =
-                                                                                "UIListMoveAppsPermissionSelectorPopup";
-
-  public static final String          ELEMENT_PERMISSION_MOVE_CONTAINERS_POPUP_TAB_ID              =
-                                                                                      "UIListMoveContainersPermissionSelectorPopup";
-
-  public static final String          ELEMENT_PERMISSION_TABLE                                     =
-                                                               "//*[contains(@id,'${tabName}')]//*[@id='PermissionGrid']";
-
   // Site permission
-  public static final String          ELEMENT_PERMISSION_SELECTOR_CONTAINS                         =
-                                                                           "//*[@id='PermissionSetting']//*[contains(text(), '${tabName}')]";
-
 
   public static final By              ELEMENT_BTN_DELETE_DRIVE                                     = byClassName("uiIconDelete");
 

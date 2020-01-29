@@ -44,10 +44,6 @@ public interface Driver {
     return getWebDriver() instanceof InternetExplorerDriver;
   }
 
-  default boolean isFFDriver() {
-    return getWebDriver() instanceof FirefoxDriver;
-  }
-
   // @TODO Decide how to manage the following behavior:
 
   WebDriver getDriverAutoOpenWindow();

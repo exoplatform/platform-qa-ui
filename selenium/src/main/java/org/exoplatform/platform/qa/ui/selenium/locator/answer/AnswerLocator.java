@@ -227,8 +227,6 @@ public class AnswerLocator {
           "//*[@class='responseContainer']//*[contains(@id,'answer')]//*[text()='$answer']/../../../../..//*[@class='uiIconAnsLightGray uiIconAnsEnable']";
   public static final String          ELEMENT_ANSWER_DEACTIVE_BUTTON                        =
           "//*[@class='responseContainer']//*[contains(@id,'answer')]//*[text()='$answer']/../../../../..//*[@class='uiIconAnsLightGray uiIconAnsEnable']";
-  public static final String          ELEMENT_ANSWER_CONTENT                                =
-          "//*[contains(@id,'answer')]//*[text()='$answer']";
   // Delete
   public static final By              ELEMENT_ANSWER_DELETE_CONFIRM_POPUP                   = By.id("UIForumPopupConfirmation");
   public static final By              ELEMENT_ANSWER_CONFIRM_DELETE                         =
@@ -246,12 +244,8 @@ public class AnswerLocator {
   public static final By              ELEMENT_COMMENT_FORM                                  = By.id("UICommentForm");
   public static final By              ELEMENT_COMMENT_FORM_SAVE_BUTTON                      =
           By.xpath("//*[@id='UICommentForm']//*[text()='Save']");
-  public static final String          ELEMENT_COMMENT_CONTENT                               =
-          "//*[@class='responseContainer']//*[contains(@id,'Comment')]//*[text()='$comment']";
   // Delete
   public static final By              ELEMENT_COMMENT_DELETE_CONFIRM_POPUP                  = By.id("UIForumPopupConfirmation");
-  public static final By              ELEMENT_COMMENT_CONFIRM_DELETE                        =
-          By.xpath("//*[@id='UIForumPopupConfirmation']//*[contains(text(),'Are you sure you want to delete this comment ?')]");
   public static final By              ELEMENT_COMMENT_DELETE_FORM_OK_BUTTON                 =
           By.xpath("//*[@id='UIForumPopupConfirmation']//*[text()='OK']");
   /*****************************************

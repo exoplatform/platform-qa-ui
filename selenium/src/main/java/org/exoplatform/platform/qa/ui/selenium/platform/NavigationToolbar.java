@@ -23,14 +23,10 @@ package org.exoplatform.platform.qa.ui.selenium.platform;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator;
 import org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.junit.Assert;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
@@ -132,23 +128,6 @@ public class NavigationToolbar {
     $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
     ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible,Configuration.timeout).click();
-  }
-
-  /**
-   * function: Go to Users and Group management (administration - Community -
-   * Manage Community)
-   */
-  public void goToCommunityManagement() {
-    info("--Go to Users and groups management--");
-    evt.click(ELEMENT_TOOLBAR_ADMINISTRATION);
-    evt.mouseOver(ELEMENT_ADMINISTRATION_USERS, true);
-    if (evt.waitForAndGetElement(ELEMENT_GROUP_AND_ROLE_LINK, 2000, 0) != null)
-      evt.click(ELEMENT_GROUP_AND_ROLE_LINK);
-    else {
-      testBase.getExoWebDriver()
-              .getWebDriver()
-              .get(testBase.getExoWebDriver().getBaseUrl() + "/g/:platform:administrators/administration/management");
-    }
   }
 
   /**
@@ -286,27 +265,6 @@ public class NavigationToolbar {
     ELEMENT_SPACE_ADMIN_LINK.click();
     sleep(2000);
     ELEMENT_SPACE_ADMIN_PAGE.waitUntil(Condition.visible, Configuration.timeout);
-  }
-
-  /**
-   * Go to Application home page
-   */
-  public void goToApplication() {
-    info("-- Go to Application home page --");
-
-    for (int repeat = 0; ; repeat++) {
-      if (repeat > 1) {
-        evt.mouseOverAndClick(ELEMENT_LINK_SETUP);
-        break;
-      }
-      evt.clickByJavascript(ELEMENT_LINK_SETUP, 2);
-      if (evt.waitForAndGetElement(ELEMENT_ADMINISTRATION_APPLICATION, 5000, 0) != null) {
-        info("Element " + ELEMENT_ADMINISTRATION_APPLICATION + "... is displayed");
-        break;
-      }
-      info("Retry...[" + repeat + "]");
-    }
-    evt.mouseOverAndClick(ELEMENT_ADMINISTRATION_APPLICATION);
   }
 
   /**

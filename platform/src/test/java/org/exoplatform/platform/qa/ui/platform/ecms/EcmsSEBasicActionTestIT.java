@@ -158,7 +158,6 @@ public class EcmsSEBasicActionTestIT extends Base {
     @Tag("eabis17")
     public void test03_CutpasteANodeANode() {
 
-        String destination = "intranet";
         String secondDestination = "shared";
 
         String titleCommonNode = "titleCommonNode" + getRandomNumber();
@@ -181,7 +180,6 @@ public class EcmsSEBasicActionTestIT extends Base {
     public void test_04_DragAndDropANode() {
 
         String destination = "intranet";
-        String secondDestination = "shared";
 
         String titleCommonNode = "titleCommonNode" + getRandomNumber();
 

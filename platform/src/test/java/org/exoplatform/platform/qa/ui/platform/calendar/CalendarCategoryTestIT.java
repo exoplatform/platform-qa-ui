@@ -67,7 +67,6 @@ public class CalendarCategoryTestIT extends Base {
   @Test
   public void test01_AddEventCategory() {
     String oldNameCategory = "oldNameCategory" + getRandomNumber();
-    String newNameCategory = "newNameCategory" + getRandomNumber();
 
     info("Test 1: Add Event Category");
     homePagePlatform.goToCalendarPage();

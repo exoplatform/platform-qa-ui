@@ -84,9 +84,6 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_CHAT_RESULT_SEARCH_USER =
             $(byAttribute("class",
                     "selectize-dropdown multi"));
-
-
-    public static final SelenideElement ELEMENT_CHAT_MEETTING_ACTIONS = $(byId("chat-msg-meeting-actions"));
     public static final SelenideElement ELEMENT_CHAT_RESULT_SEARCH_ASSIGNEE= $(byAttribute("class","selectize-dropdown multi large plugin-remove_button"));
   public static final SelenideElement ELEMENT_CHAT_ASSIGNEE_TASK=  $(byId("taskAssignee")).parent().parent().find(byClassName("selectize-input")).find(by("type","text"));
   public static final SelenideElement ELEMENT_CHAT_CREATE_TASK= $(byClassName("uiIconChatCreateTask"));

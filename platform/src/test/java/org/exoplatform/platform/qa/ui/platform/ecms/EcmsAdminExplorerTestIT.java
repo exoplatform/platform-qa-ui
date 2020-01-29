@@ -60,8 +60,6 @@ public class EcmsAdminExplorerTestIT extends Base {
     String title = "title" + getRandomNumber();
     String permission = "any";
     ContentAdministration.specificView[] view = { ContentAdministration.specificView.ADMIN };
-    ContentAdministration.specificView[] newView = { ContentAdministration.specificView.WEB };
-    String[] newV = { "Web" };
     info("Finished getting data test");
     navigationToolbar.goToContentAdministration();
     contentAdministration.goToSpecificMainFunctions(ContentAdministration.mainEcmFunctions.EXPLORER);
@@ -102,8 +100,6 @@ public class EcmsAdminExplorerTestIT extends Base {
     String title = "title" + getRandomNumber();
     String permission = "any";
     ContentAdministration.specificView[] view = { ContentAdministration.specificView.ADMIN };
-    ContentAdministration.specificView[] newView = { ContentAdministration.specificView.WEB };
-    String[] newV = { "Web" };
     info("Finished getting data test");
     navigationToolbar.goToContentAdministration();
     contentAdministration.goToSpecificMainFunctions(ContentAdministration.mainEcmFunctions.EXPLORER);

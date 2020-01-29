@@ -7,24 +7,17 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.QuickSearchResultLocator.ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
-
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
-import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.ConnectionsManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
@@ -86,10 +79,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     manageLogInOut.signInCas(username, password);
   }
 
-
-  /**
-   * Create 3 spaces
-   */
+  @Test
   public void createSpaces() {
     info("--Login with mary account--");
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
@@ -120,6 +110,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
   /**
    * Create 2 spaces and invite to John account
    */
+  @Test
   public void createTwoSpaces() {
     info("--Login with mary account--");
     manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
@@ -151,6 +142,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
   /**
    * Delete all spaces are created before
    */
+  @Test
   public void deleteDataTest() {
     info("Delete space 1");
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
@@ -232,7 +224,6 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
    * members who are user's connections and ordered by creation date
    */
   @Test
-
   public void test01_CheckDisplayOfSuggestionsGadgetIfCommunConnectionIs0() {
     String username1 = "usernamea" + getRandomString();
     String username2 = "usernameb" + getRandomString();

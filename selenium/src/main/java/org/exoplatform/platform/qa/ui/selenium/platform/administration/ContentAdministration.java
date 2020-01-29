@@ -8,16 +8,12 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator;
 import org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator;
-import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.platform.ecms.ECMS_Permission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -31,8 +27,6 @@ public class ContentAdministration {
   public PlatformPermission    plfPerm;
 
   // Permission
-  public By                    ELEMENT_ECM_DRIVE_PERMISSION    = By.xpath("//*[@id='permissions']");
-
   public ManageAlert           alert;
 
   private ElementEventTestBase evt;
@@ -889,106 +883,6 @@ public class ContentAdministration {
   }
 
   /**
-   * select an actions to add for a view type
-   * 
-   * @param action
-   */
-  public void goTospecificEcmActionstypes(specificEcmActionstypes action) {
-    switch (action) {
-    case ADD_CATEGORY:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_ADD_CATEGORY, 2);
-      break;
-    case ADD_TRANSLATION:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_ADD_TRANSLATION, 2);
-      break;
-    case CONTENT_NAVIGATION:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_CONTENT_NAVIGATION, 2);
-      break;
-    case IMPORT_NOTE:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_IMPORT_NOTE, 2);
-      break;
-    case MANAGE_CATEGORIES:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_MANAGE_CATEGORIES, 2);
-      break;
-    case MANAGE_RELATION:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_MANAGE_RELATIONS, 2);
-      break;
-    case APPROVE_CONTENT:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_APPROVE_CONTENT, 2);
-      break;
-    case SHOW_JCR_STRUCTURE:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_SHOW_JCR_STRUCTURE, 2);
-      break;
-    case VIEW_METADATA:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_VIEW_METADATA, 2);
-      break;
-    case VIEW_PROPERTIES:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_VIEW_PROPERTIES, 2);
-      break;
-    case ADD_DOCUMENT:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_ADD_DOCUMENT, 2);
-      break;
-    case ADD_SYMLINK:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_ADD_SYMLINK, 2);
-      break;
-    case EDIT_DOCUMENT:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_EDIT_DOCUMENT, 2);
-      break;
-    case MANAGE_ACTIONS:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_MANAGE_ACTIONS, 2);
-      break;
-    case HIDE_SHOW_CONTENT:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_HIDE_SHOW_CONTENT, 2);
-      break;
-    case MANAGE_VERSION:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_MANAGE_VERSIONS, 2);
-      break;
-    case PUBLISH:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_PUBLISH, 2);
-      break;
-    case TAG_DOCUMENT:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_TAG_DOCUMENT, 2);
-      break;
-    case VIEW_NODE_TYPE:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_VIEW_NODE_TYPE, 2);
-      break;
-    case VOTE:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_VOTE, 2);
-      break;
-    case ADD_FOLDER:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_ADD_FOLDER, 2);
-      break;
-    case COMMENT:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_COMMENT, 2);
-      break;
-    case EXPORT_NODE:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_EXPORT_NODE, 2);
-      break;
-    case MANAGE_AUDITING:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_MANAGE_AUDITING, 2);
-      break;
-    case MANAGE_PUBLISHTATION:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_MANAGE_PUBLICATION, 2);
-      break;
-    case OVERLOAD_THUMBNAILS:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_OVERLOAD_THUMBNAIL, 2);
-      break;
-    case REQUEST_APPROVAL:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_REQUEST_APPROVAL, 2);
-      break;
-    case UPLOAD:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_UPLOAD, 2);
-      break;
-    case VIEW_PERMISSIONS:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_VIEW_PERMISSIONS, 2);
-      break;
-    case WATCH_DOCUMENTS:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_WATCH_DOCUMENT, 2);
-      break;
-    }
-  }
-
-  /**
    * Select a function as: Explorer, Advanced, Template and Repositoty
    */
   public enum mainEcmFunctions {
@@ -1010,10 +904,4 @@ public class ContentAdministration {
     ADMIN, CATEGORY, LIST, ICON, WEB, ITEM
   }
 
-  /**
-   * select action type for a web view By quynhpt
-   */
-  public enum specificEcmActionstypes {
-    ADD_CATEGORY, ADD_TRANSLATION, CONTENT_NAVIGATION, IMPORT_NOTE, MANAGE_CATEGORIES, MANAGE_RELATION, APPROVE_CONTENT, SHOW_JCR_STRUCTURE, VIEW_METADATA, VIEW_PROPERTIES, ADD_DOCUMENT, ADD_SYMLINK, EDIT_DOCUMENT, MANAGE_ACTIONS, HIDE_SHOW_CONTENT, MANAGE_VERSION, PUBLISH, TAG_DOCUMENT, VIEW_NODE_TYPE, VOTE, ADD_FOLDER, COMMENT, EXPORT_NODE, MANAGE_AUDITING, MANAGE_PUBLISHTATION, OVERLOAD_THUMBNAILS, REQUEST_APPROVAL, UPLOAD, VIEW_PERMISSIONS, WATCH_DOCUMENTS;
-  }
 }

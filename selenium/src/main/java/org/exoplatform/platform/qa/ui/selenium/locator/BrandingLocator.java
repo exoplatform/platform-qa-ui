@@ -38,8 +38,6 @@ public final class BrandingLocator {
                                                                           By.xpath(".//h4[text()='Select Navigation Bar Style']");
 
  // Theme selection
-  public static final By ELEMENT_PLF_BRANDING_SELECTTHEME                 = By.xpath("//*[@class='btn dropdown-toggle']");
-
   public static final By ELEMENT_PLF_BRANDING_THEMEDARK                   =
                                                         By.xpath("//input[@value='Dark']");
 

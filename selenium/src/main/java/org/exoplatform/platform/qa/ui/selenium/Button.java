@@ -43,7 +43,6 @@ public class Button {
     public final SelenideElement ELEMENT_YES_BUTTON = $(byXpath("//*[@id=\"UIConfirmation\"]/div[2]/div/a[1]"));
     public static final By ELEMENT_YES_BUTTON_AUX =
             By.xpath("//*[contains(@class, 'popup')]//*[contains(text(),'Yes')]");
-    public final By ELEMENT_APPLY_BUTTON = By.xpath("//*[text()='Apply']");
     public final By ELEMENT_SAVE_BUTTON = By.xpath("//*[text()='Save']");
     public final By ELEMENT_CANCEL_BUTTON_AUX = By.xpath("//*[@data-original-title='Cancel']");
 
@@ -57,9 +56,6 @@ public class Button {
 
     public final By ELEMENT_CONFIRM_BUTTON = By.xpath("//*[text()='Confirm']");
 
-    public static final By ELEMENT_CLOSE_WINDOW =
-            By.xpath("//*[contains(@class, 'uiIconClose') and @title = 'Close Window']");
-
     public final By ELEMENT_NEXT_BUTTON = By.xpath("//*[text()='Next']");
 
     public final By ELEMENT_PREVIOUS_BUTTON = By.xpath("//*[text()='Previous']");
@@ -72,8 +68,6 @@ public class Button {
 
     // Content explorer
     public final By ELEMENT_REFRESH_BUTTON = By.xpath("//*[text()='refresh']");
-
-    public final By ELEMENT_RENAME_BUTTON = By.xpath("//*[text()='Rename']");
 
     private final TestBase testBase;
 
@@ -203,5 +197,4 @@ public class Button {
         evt.click(ELEMENT_PREVIOUS_BUTTON);
 
     }
-
 }

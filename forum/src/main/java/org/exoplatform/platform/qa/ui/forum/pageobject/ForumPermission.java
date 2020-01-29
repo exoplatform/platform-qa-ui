@@ -70,56 +70,6 @@ public class ForumPermission {
     }
 
     /**
-     * Select permission group membership
-     *
-     * @param groupPath   String
-     * @param member      String
-     * @param isMod       boolean
-     * @param isStartTop  boolean
-     * @param isPostReply boolean
-     * @param isViewPost  boolean
-     */
-    public void selectPermGroupMember(String groupPath,
-                                      String member,
-                                      boolean isMod,
-                                      boolean isStartTop,
-                                      boolean isPostReply,
-                                      boolean isViewPost) {
-        String[] temp;
-        info("select group membership");
-        evt.click(ELEMENT_PERM_TAB, 0, true);
-        evt.click(ELEMENT_PERM_ROLE_ICON, 0, true);
-        evt.waitForAndGetElement(ELEMENT_SELECT_MEMBERSHIP_POPUP);
-        temp = groupPath.split("/");
-        for (int i = 0; i < temp.length; i++) {
-            evt.click(ELEMENT_SELECT_RIGHT_PARENT_GROUP.replace("$group", temp[i]), 0, true);
-        }
-        evt.click(ELEMENT_SELECT_RIGHT_PARENT_GROUP.replace("$group", member), 0, true);
-        evt.waitForElementNotPresent(ELEMENT_SELECT_MEMBERSHIP_POPUP);
-        evt.click(ELEMENT_PERM_ADD_BTN, 0, true);
-        selectPermInCategory(isMod, isStartTop, isPostReply, isViewPost);
-    }
-
-    /**
-     * Select permission group membership
-     *
-     * @param groupPath String
-     * @param member    String
-     */
-    public void selectPermGroupMemberRestricted(String groupPath, String member) {
-        String[] temp;
-        info("select group membership");
-        evt.click(ELEMENT_RESTRICTED_ROLE_ICON, 0, true);
-        evt.waitForAndGetElement(ELEMENT_RESTRICTED_SELECT_MEMBERSHIP_POPUP);
-        temp = groupPath.split("/");
-        for (int i = 0; i < temp.length; i++) {
-            evt.click(ELEMENT_RESTRICTED_SELECT_RIGHT_PARENT_GROUP.replace("$group", temp[i]), 0, true);
-        }
-        evt.click(ELEMENT_RESTRICTED_SELECT_RIGHT_PARENT_GROUP.replace("$group", member), 0, true);
-        evt.waitForElementNotPresent(ELEMENT_RESTRICTED_SELECT_MEMBERSHIP_POPUP);
-    }
-
-    /**
      * select permission in topic
      *
      * @param isView boolean
@@ -137,30 +87,6 @@ public class ForumPermission {
         } else {
             evt.uncheck(ELEMENT_PERM_STARTTOP_CHECKBOX, 2);
         }
-    }
-
-    /**
-     * Select permission group membership in topic
-     *
-     * @param groupPath String
-     * @param member    String
-     * @param isView    boolean
-     * @param isPost    boolean
-     */
-    public void selectPermGroupMemberInTopic(String groupPath, String member, boolean isView, boolean isPost) {
-        String[] temp;
-        info("select group membership");
-        evt.click(ELEMENT_PERM_TAB, 0, true);
-        evt.click(ELEMENT_PERM_ROLE_ICON, 0, true);
-        evt.waitForAndGetElement(ELEMENT_SELECT_MEMBERSHIP_POPUP);
-        temp = groupPath.split("/");
-        for (int i = 0; i < temp.length; i++) {
-            evt.click(ELEMENT_SELECT_RIGHT_PARENT_GROUP.replace("$group", temp[i]), 0, true);
-        }
-        evt.click(ELEMENT_SELECT_RIGHT_PARENT_GROUP.replace("$group", member), 0, true);
-        evt.waitForElementNotPresent(ELEMENT_SELECT_MEMBERSHIP_POPUP);
-        evt.click(ELEMENT_PERM_ADD_BTN, 0, true);
-        selectPermInTopic(isView, isPost);
     }
 
     /**

@@ -103,10 +103,6 @@ public final class DefaultDataTestBase {
 
   public static final String  DEFAULT_LANGUAGEURL                        = "DataDriven/" + "language.xls";
 
-  public static final String  DEFAULT_SELECTPATHURL                      = "DataDriven/" + "selectPath.xls";
-
-  public static final String  DEFAULT_MEMBERSHIPURL                      = "DataDriven/" + "membership.xls";
-
   public static final String  DEFAULT_APPLAYOUTURL                       = "DataDriven/" + "applications_layout.xls";
 
   public static final String  DEFAULT_APPLISTGETINURL                    = "DataDriven/" + "gatein_applications_list.xls";

@@ -91,19 +91,11 @@ public class LocatorTestBase {
 
 
   // Upload file popup
-  public static final By              ELEMENT_UPLOAD_SELECT_BUTTON                     =
-                                                                   By.xpath("//*[@class='uploadButton']/*[@class='btn']");
 
   public static final By              ELEMENT_UPLOAD_POPUP_ATTACHMENT_FILE_INPUT       = By.name("file");
 
   public static final By              ELEMENT_UPLOAD_POPUP_ATTACHMENT_FILE_SAVE_BUTTON =
                                                                                        By.xpath(".//*[@id='UIAttachFileForm']//button[text()='Save']");
-
-  public static final String          ELEMENT_UPLOAD_POPUP_NAMEFILE                    =
-                                                                    "//*[@class='fileNameLabel' and contains(text(),'${fileName}')]";
-
-  public static final By              ELEMENT_SAVE_BTN                                 = By.xpath("//*[text()='Save']");
-
   /* ======== End of Term and conditions ===== */
   public static final By              ELEMENT_CONTINUE_BTN                             =
                                                            By.xpath(".//*[@id='UIPortalLoginFormAction']//*[@value = 'Continue']");
