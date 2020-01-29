@@ -12,13 +12,9 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocat
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.util.Map;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -62,18 +58,6 @@ public class PortalManageSites {
   }
 
   /**
-   * change config of a portal
-   *
-   * @param site String
-   */
-  public void changeConfig(String site) {
-    goToEditLayout(site);
-    info("Click on site's config button");
-    evt.click(ELEMENT_MANAGESITES_EDIT_LAYOUT_SITE_CONFIG_BTN);
-
-  }
-
-  /**
    * Go to Edit site configuration
    *
    * @param site String
@@ -93,46 +77,6 @@ public void goToDefaultSkin() {
     $((ELEMENT_ADD_NEW_PORTAL_POPUP_SAVE_BTN)).click();
     $(ELEMENT_ADD_NEW_PORTAL_POPUP_SAVE_BTN).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     refresh();
-  }
-  /**
-   * Add a simple portal
-   *
-   * @param portalName String
-   * @param label String
-   * @param des String
-   * @param groupsPath is as: Platform/Content Management
-   * @param memberShips is as: author
-   */
-  public void addSimplePortal(String portalName, String label, String des, String groupsPath, String memberShips) {
-    info("Click on Add New Portal button");
-    evt.click(ELEMENT_MANAGESITES_ADD_NEW_BTN);
-    if (!portalName.isEmpty()) {
-      info("Input new name for portal name");
-      evt.type(ELEMENT_ADD_NEW_PORTAL_POPUP_NAME, portalName, true);
-    }
-    if (!label.isEmpty()) {
-      info("Input label");
-      evt.type(ELEMENT_ADD_NEW_PORTAL_POPUP_LABEL, label, true);
-    }
-    if (!des.isEmpty()) {
-      info("Input description");
-      evt.type(ELEMENT_ADD_NEW_PORTAL_POPUP_DESC, des, true);
-    }
-    info("Select permission tab");
-    evt.click(ELEMENT_ADD_NEW_PORTAL_POPUP_PERMISSION_TAB);
-    info("Select public permission checkbox");
-    evt.check(ELEMENT_ADD_NEW_PORTAL_POPUP_PUBLIC_PERMISSION, 2);
-    if (!groupsPath.isEmpty()) {
-      info("Select Edit permission settings tab");
-      evt.click(ELEMENT_ADD_NEW_PORTAL_POPUP_EDIT_PERMISSITION_SETTINGS);
-      info("Click on Select permission button");
-      evt.click(ELEMENT_ADD_NEW_PORTAL_POPUP_SELECT_PERMISSION_BTN);
-      info("Select a group");
-      selectGroup(groupsPath);
-      info("Select a meberships");
-      selectMemberShip(memberShips);
-    }
-    saveNewPortal();
   }
 
   /**
@@ -168,45 +112,6 @@ public void goToDefaultSkin() {
     info("click on Save button");
     evt.click(ELEMENT_ADD_NEW_PORTAL_POPUP_SAVE_BTN);
 
-  }
-
-  /**
-   * Edit a simple portal
-   *
-   * @param portalName String
-   * @param label String
-   * @param des String
-   * @param groupsPath is as: Platform/Content Management
-   * @param memberShips is as: author
-   */
-  public void editSimplePortal(String portalName, String label, String des, String groupsPath, String memberShips) {
-    if (!portalName.isEmpty()) {
-      info("Input new name for portal name");
-      evt.type(ELEMENT_ADD_NEW_PORTAL_POPUP_NAME, portalName, true);
-    }
-    if (!label.isEmpty()) {
-      info("Input label");
-      evt.type(ELEMENT_ADD_NEW_PORTAL_POPUP_LABEL, label, true);
-    }
-    if (!des.isEmpty()) {
-      info("Input description");
-      evt.type(ELEMENT_ADD_NEW_PORTAL_POPUP_DESC, des, true);
-    }
-    info("Select permission tab");
-    evt.click(ELEMENT_ADD_NEW_PORTAL_POPUP_PERMISSION_TAB);
-    info("Select public permission checkbox");
-    evt.check(ELEMENT_ADD_NEW_PORTAL_POPUP_PUBLIC_PERMISSION, 2);
-    if (!groupsPath.isEmpty()) {
-      info("Select Edit permission settings tab");
-      evt.click(ELEMENT_ADD_NEW_PORTAL_POPUP_EDIT_PERMISSITION_SETTINGS);
-      info("Click on Select permission button");
-      evt.click(ELEMENT_ADD_NEW_PORTAL_POPUP_SELECT_PERMISSION_BTN);
-      info("Select a group");
-      selectGroup(groupsPath);
-      info("Select a meberships");
-      selectMemberShip(memberShips);
-    }
-    saveNewPortal();
   }
 
   /**
@@ -388,20 +293,5 @@ public void goToDefaultSkin() {
     alert.acceptAlert();
     $(byXpath(ELEMENT_PORTAL_DELETE_ICON.replace("${portalName}", portalName))).waitUntil(not(visible),Configuration.timeout);
   }
-
-  /**
-   * Verify permission on site
-   *@param portal string
-   * @param isEnable boolean
-   */
-  public void verifyPermOnSite(String portal, boolean isEnable) {
-    info("check permission to access site: " + portal);
-    testBase.getExoWebDriver().getWebDriver().get(testBase.getExoWebDriver().getBaseUrl() + "/" + portal);
-    if (isEnable)
-      evt.waitForAndGetElement(ELEMENT_NEW_PORTAL_LOGOUT, 3000, 0);
-    else
-      evt.waitForElementNotPresent(ELEMENT_NEW_PORTAL_LOGOUT, 3000, 0);
-  }
-
 
 }

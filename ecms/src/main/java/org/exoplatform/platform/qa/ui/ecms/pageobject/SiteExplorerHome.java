@@ -10,8 +10,6 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -171,7 +169,6 @@ public class SiteExplorerHome {
    * @param destination boolean
    */
   public void deleteData(String title, boolean... destination) {
-    boolean verify = (destination.length > 0 ? destination[0] : false);
     info("Click on File Explorer icon");
     // scroll de 50 pixel
     executeJavaScript("window.scrollBy(0,50);", "");
@@ -217,29 +214,6 @@ public class SiteExplorerHome {
   }
 
   /**
-   * Open list document's templates
-   */
-  public void openListDocumentTemplateByRightClick() {
-    info("Select Document type");
-    int repeat = 0;
-    while (evt.waitForAndGetElement(ELEMENT_WORKING_AREA_TEMPLATE_DOCUMENTS, 2000, 0) == null) {
-      if (repeat > 5)
-        break;
-      if (evt.waitForAndGetElement(ELEMENT_WORKING_AREA_TEMPLATE_DOCUMENTS, 2000, 0) != null)
-        break;
-      evt.rightClickOnElement(ELEMENT_THUMBNAIL_VIEW_ADMIN_VIEW);
-
-      // Actions action = new Actions(this.driver);
-      // action.moveToElement(waitForAndGetElement(ELEMENT_CONTEXT_MENU_ADD_DOCUMENT))
-      // .doubleClick().perform();
-      evt.click(ELEMENT_CONTEXT_MENU_ADD_DOCUMENT, 2);
-      repeat++;
-    }
-    evt.waitForAndGetElement(ELEMENT_WORKING_AREA_TEMPLATE_DOCUMENTS, 2000, 1);
-    info("Document type is created");
-  }
-
-  /**
    * Cut and paste node
    *
    * @param title String
@@ -271,57 +245,6 @@ public class SiteExplorerHome {
   }
 
   /**
-   * Rename a node
-   *
-   * @param node String
-   * @param newName String
-   */
-  public void renameNode(String node, String newName) {
-    evt.rightClickOnElement(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", node)));
-    evt.click(ELEMENT_SITEEXPLORER_ACTION_RENAME);
-    evt.type(ELEMENT_SITEEXPLORER_RENAME_FIELD, newName, true);
-    evt.click(ELEMENT_SITEEXPLORER_RENAME_SAVE);
-
-    evt.click(ELEMENT_SIDEBAR_SITES_MANAGEMENT);
-
-  }
-
-  /**
-   * Upload a file
-   *
-   * @param link String
-   * @param params String
-   */
-  public void uploadFileWithDymanicPath(String link, Object... params) {
-    Boolean verify = (Boolean) (params.length > 0 ? params[0] : true);
-    Boolean prev = (Boolean) (params.length > 1 ? params[1] : false);
-    if (evt.waitForAndGetElement(ELEMENT_UPLOAD_BUTTON, 10000, 0) == null) {
-      evt.click(ELEMENT_MORE_LINK_WITHOUT_BLOCK);
-    }
-    evt.click(ELEMENT_UPLOAD_LINK);
-    if (prev) {
-      testBase.uploadFileUsingRobotDocumentPreview(link);
-      info("Upload file " + ManageFileTestBase.getAbsoluteFilePathFromFile(link));
-    } else {
-      testBase.uploadFileUsingRobot(link);
-      info("Upload file " + MFTB.getAbsoluteFilePath(link));
-    }
-
-    evt.waitForElementNotPresent(ELEMENT_UPLOAD_PROGRESS_BAR, 120000, 0);
-
-    info("verify:" + verify);
-    if (verify) {
-      String links[] = link.split("/");
-      int length = links.length;
-
-      evt.waitForAndGetElement(By.xpath("//*[contains(text(),'" + links[length - 1] + "')]"));
-    }
-
-    info("Upload file successfully");
-
-  }
-
-  /**
    * Upload a file
    *
    * @param link String
@@ -342,15 +265,6 @@ public class SiteExplorerHome {
     }
 
     info("Upload file successfully");
-
-  }
-
-  /**
-   * Go to Edit page of a document
-   */
-
-  public void goToEditDocument() {
-    evt.click(ELEMENT_ACTIONBAR_EDIT);
 
   }
 
@@ -445,21 +359,6 @@ public class SiteExplorerHome {
     switchTo().frame($(ELEMENT_FILEFORM_BLANK_CONTENT));
     $(byXpath("/html/body")).sendKeys(content);
     switchTo().defaultContent();
-  }
-
-  /**
-   * Go to Intranet page
-   */
-
-  public void goToIntranet() {
-    evt.click(ELEMENT_SITEEXPLORER_LEFTBOX_INTRANET);
-  }
-
-  /**
-   * Go to document
-   */
-  public void goToDocument() {
-    evt.click(ELEMENT_SITEEXPLORER_LEFTBOX_DOCUMENT);
   }
 
   /**
@@ -613,29 +512,6 @@ public class SiteExplorerHome {
   }
 
   /**
-   * Add category for a file in SE
-   *
-   * @param categoryTreeName String
-   * @param arrayCatePath String
-   * @param nameSelectedCategory String
-   */
-  public void addCategory(String categoryTreeName, String[] arrayCatePath, String nameSelectedCategory) {
-    info("select category");
-    $(ELEMENT_ADD_CATEGORY_POPUP_SELECT_CATEGORY_TAB).click();
-
-    $(ELEMENT_ADD_CATEGORY_POPUP_MENU).selectOption(categoryTreeName);
-
-    for (String cateName : arrayCatePath) {
-      // click(ELEMENT_ADD_CATEGORY_POPUP_CATEGORY_NAME_LEFT_SIDE.replace("${nameTitle}",
-      // cateName));
-      $(byXpath(ELEMENT_ADD_CATEGORY_POPUP_CATEGORY_NAME_LEFT_SIDE.replace("${nameTitle}", cateName))).click();
-
-    }
-    $(byXpath(ELEMENT_ADD_CATEGORY_POPUP_SELECT_CATEGORY_RIGHT_SIDE.replace("${nameCategory}", nameSelectedCategory))).click();
-
-  }
-
-  /**
    * Close Add Category popup By QuynhPT date 16/01/2015
    */
   public void closeAddCategoryPopup() {
@@ -708,72 +584,6 @@ public class SiteExplorerHome {
    */
   public void goToExportNode() {
     $(ELEMENT_ACTIONBAR_EXPORT_BUTTON).click();
-
-  }
-
-  /**
-   * Select a value for behavior
-   *
-   * @param value String
-   */
-  public void selectBehavior(defineValueBehavior value) {
-    switch (value) {
-    case CREATE_NEW:
-      evt.click(ELEMENT_IMPORT_NODE_POPUP_BEHAVIOR_CREATE_NEW);
-      break;
-    case REMOVE_EXISTING:
-      evt.click(ELEMENT_IMPORT_NODE_POPUP_BEHAVIOR_REMOVE_EXISTING);
-      break;
-    case REPLACE_EXISTING:
-      evt.click(ELEMENT_IMPORT_NODE_POPUP_BEHAVIOR_REPLACE_EXISTING);
-      break;
-    case THROW_EXEPTION:
-      evt.click(ELEMENT_IMPORT_NODE_POPUP_BEHAVIOR_THROW_EXCEPTION);
-      break;
-    }
-  }
-
-  /**
-   * Import a Node By QuynhPt date 16/01/2015
-   *
-   * @param linkFile String
-   * @param behavior String
-   * @param version boolean
-   * @param linkVersion String
-   */
-  public void importNode(String linkFile, String behavior, boolean version, String linkVersion) {
-    // Verify that the popup is shown
-    evt.waitForAndGetElement(ELEMENT_IMPORT_NODE_POPUP_TITLE);
-
-    // upload the file
-    WebElement upload = evt.waitForAndGetElement(ELEMENT_IMPORT_NODE_POPUP_UPLOAD_BUTTON, testBase.getDefaultTimeout(), 1, 2);
-
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';",
-                                                                                   upload);
-    upload.sendKeys(testBase.getAbsoluteFilePath(linkFile));
-    String[] nameFile = linkFile.split("/");
-    evt.waitForAndGetElement(ELEMENT_IMPORT_NODE_POPUP_UPLOAD_FILE_LABEL.replace("${fileName}", nameFile[1]));
-
-    // select a value for behavior
-    evt.select(ELEMENT_IMPORT_NODE_POPUP_BEHAVIOR, behavior);
-
-    if (version) {
-      WebElement uploadVersion = evt.waitForAndGetElement(ELEMENT_IMPORT_NODE_POPUP_VERSION_HISTORY_BUTTON,
-
-                                                          testBase.getDefaultTimeout(),
-                                                          1,
-                                                          2);
-      ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';",
-                                                                                     uploadVersion);
-      uploadVersion.sendKeys(testBase.getAbsoluteFilePath(linkVersion));
-      String[] namefile = linkVersion.split("/");
-      evt.waitForAndGetElement(ELEMENT_IMPORT_NODE_POPUP_UPLOAD_FILE_LABEL.replace("${fileName}", namefile[1]));
-    }
-    evt.switchToParentWindow();
-    evt.click(ELEMENT_IMPORT_MODE_POPUP_IMPORT_BUTTON);
-
-    evt.waitForMessage("Imported successfully.");
-    evt.click(button.ELEMENT_OK_BUTTON);
 
   }
 
@@ -962,15 +772,6 @@ public class SiteExplorerHome {
   }
 
   /**
-   * Go to root drive as Site Management, Collaboration tabs... of sidebar
-   */
-  public void goToRootDrive() {
-    evt.waitForAndGetElement(ELEMENT_SIDE_BAR_MAINTAB);
-    evt.click(ELEMENT_SIDE_BAR_MAINTAB);
-
-  }
-
-  /**
    * Open View Metadata popup
    */
   public void viewMetadata() {
@@ -1012,84 +813,6 @@ public class SiteExplorerHome {
   }
 
   /**
-   * Delete a file or node in SE by clicking a checkbox of that file
-   *
-   * @param file String
-   */
-  public void selectAndDeleteByCheckBox(String file) {
-    evt.waitForAndGetElement(ELEMENT_PERSONAL_DOCUMENT_FILE_CHECKBOX.replace("${file}", file));
-    evt.click(ELEMENT_PERSONAL_DOCUMENT_FILE_CHECKBOX.replace("${file}", file));
-    evt.click(ELEMENT_ACTIONBAR_DELETE);
-    evt.click(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE);
-    evt.waitForElementNotPresent(ELEMENT_PERSONAL_DOCUMENT_FILE_CHECKBOX.replace("${file}", file));
-  }
-
-  /**
-   * Open drive area
-   */
-  public void openDrives() {
-
-    if (evt.waitForAndGetElement(ELEMENT_SHOW_DRIVES, 3000, 0) != null)
-      evt.click(ELEMENT_SHOW_DRIVES);
-    else
-      evt.click(By.xpath("//*[@title = 'Show Drives']"));
-
-  }
-
-  /**
-   * Go to a drive
-   *
-   * @param nameDrive String
-   */
-  public void selectADrive(String nameDrive) {
-    info("Go to a folder of a drive");
-    evt.waitForAndGetElement(ELEMENT_SELECTED_DRIVE.replace("${nameDrive}", nameDrive));
-    evt.click(ELEMENT_SELECTED_DRIVE.replace("${nameDrive}", nameDrive));
-
-  }
-
-  /**
-   * Go to a folder
-   *
-   * @param path String
-   */
-  public void goToAFolder(String path) {
-    info("Go to a folder of a drive");
-
-    WebElement pathInput = evt.waitForAndGetElement(ELEMENT_SITE_PATH, 2000, 1, 2);
-    pathInput.clear();
-    pathInput.sendKeys(path);
-
-    Actions action = new Actions(this.testBase.getExoWebDriver().getWebDriver());
-    action.moveToElement(pathInput).sendKeys(Keys.ENTER).build().perform();
-    action.moveToElement(pathInput).release();
-
-  }
-
-  /**
-   * Go to a folder in Admin view
-   *
-   * @param name String
-   */
-  public void openAFolder(String name) {
-    info("Click on the folder");
-    evt.click(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", name)));
-
-  }
-
-  /**
-   * Open Web view type
-   */
-  public void clickWebView() {
-    info("Select a view type");
-
-    evt.waitForAndGetElement(ELEMENT_WEB_VIEW);
-    // click(ELEMENT_WEB_VIEW);
-    evt.clickByJavascript(ELEMENT_WEB_VIEW, 2);
-
-  }
-
-  /**
    * Open Admin view type
    */
   public void clickAdminView() {
@@ -1100,55 +823,15 @@ public class SiteExplorerHome {
   }
 
   /**
-   * Open List view type
-   */
-  public void clickListView() {
-    info("Select a view type");
-    evt.waitForAndGetElement(ELEMENT_LIST_VIEW_ICON);
-    evt.click(ELEMENT_LIST_VIEW_ICON);
-
-  }
-
-  /**
-   * Select File Explorer tree on left panel
-   */
-  public void selectFileExplorer() {
-    info("Select File Explorer");
-    WebElement el = (new WebDriverWait(testBase.getExoWebDriver().getWebDriver(),
-                                       30)).until(ExpectedConditions.presenceOfElementLocated(ELEMENT_FILE_EXPLORER_ICON));
-    el.click();
-
-  }
-
-  /**
    * Click on Delete button
    */
   public void clickDeleteButton() {
     info("click on Delete button");
     evt.waitElementAndTryGetElement(ELEMENT_DELETE_ALL_BUTTON);
     WebElement el = evt.waitForAndGetElement(ELEMENT_DELETE_ALL_BUTTON);
-    /*
-     * WebElement el = (new WebDriverWait(driver, 30))
-     * .until(ExpectedConditions.presenceOfElementLocated(
-     * ELEMENT_DELETE_ALL_BUTTON));
-     */
     el.click();
     dialog.deleteInDialog();
 
-  }
-
-  /**
-   * Open a file from right panel
-   *
-   * @param filename String
-   */
-  public void selectAFile(String filename) {
-    info("Waiting the file:" + filename + " is shown");
-    evt.waitForAndGetElement(ELEMENT_FILE_TITLE_RIGHT_PANEL.replace("${fileName}", filename), 5000, 1);
-    info("Select the file");
-    evt.click(ELEMENT_FILE_TITLE_RIGHT_PANEL.replace("${fileName}", filename));
-
-    info("The document is opened");
   }
 
   /**
@@ -1171,127 +854,6 @@ public class SiteExplorerHome {
   }
 
   /**
-   * Select a new content in list
-   *
-   * @param nameContent String
-   */
-  public void selectAContentType(String nameContent) {
-    info("Select a content");
-    WebElement el =
-                  (new WebDriverWait(testBase.getExoWebDriver().getWebDriver(),
-                                     30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(ELEMENT_SITE_EXPLORER_CONTENT_NAME.replace("${nameContent}", nameContent))));
-    el.click();
-
-  }
-
-  /**
-   * Delete all files in a folder under Admin view
-   */
-  public void deleteAllFiles() {
-    info("Select Admin view type");
-    clickAdminView();
-    info("Select All checkbox");
-    selectAllFiles();
-  }
-
-  /**
-   * HEAD Check display of drive
-   *
-   * @param drive String
-   * @param isDisplay boolean
-   */
-  public void checkDisplayOfDrive(String drive, boolean isDisplay) {
-    info("check display of drive:" + drive);
-    evt.click(ELEMENT_ACTIONBAR_SHOWDRIVES, 0, true);
-    if (isDisplay)
-      evt.waitForAndGetElement(ELEMENT_ACTIONBAR_SELECTED_DRIVE.replace("${drive}", drive));
-    else
-      evt.waitForElementNotPresent(ELEMENT_ACTIONBAR_SELECTED_DRIVE.replace("${drive}", drive));
-  }
-
-  /**
-   * Check action in view
-   *
-   * @param view String
-   * @param actions String
-   */
-  public void checkActionInView(String view, String[] actions) {
-    info("check action:" + testBase.action + " in view" + view);
-    evt.waitForAndGetElement(ELEMENT_ITEM_VIEW.replace("$view", view));
-    evt.click(ELEMENT_ITEM_VIEW.replace("$view", view), 0, true);
-    for (String action : actions) {
-      evt.waitForAndGetElement(ELEMENT_ACTIONBAR_ACTION.replace("$action", action));
-    }
-
-  }
-
-  /**
-   * Check query in saved query
-   *
-   * @param queries list of queries
-   */
-  public void checkQueryInSavedQuery(String... queries) {
-    info("check display of query");
-    goToAdvancedSearch();
-    evt.click(ELEMENT_SITEXPLORER_ADVANCEDSEARCH_SAVEDQUERYTAB, 0, true);
-    for (String query : queries) {
-      evt.waitForAndGetElement(ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_EXECUTEQUERY.replace("${name}", query));
-    }
-  }
-
-  /**
-   * Check user selector of Documents/Permission
-   *
-   * @param user String
-   * @param isPresent boolean
-   */
-  public void checkUserSelectorECM(String user, boolean isPresent) {
-    if (evt.waitForAndGetElement(ELEMENT_ACTIONBAR_PERMISSION, testBase.getDefaultTimeout(), 0) == null) {
-      evt.click(ELEMENT_MORE_LINK_WITHOUT_BLOCK);
-    }
-    evt.click(ELEMENT_ACTIONBAR_PERMISSION, 0, true);
-
-    info("check user selector");
-    evt.click(ELEMENT_SELECT_USER_ICON1, 0, true);
-    plfPerm.checkUserSelector(user, isPresent);
-  }
-
-  /**
-   * Check personal file
-   *
-   * @param file String
-   * @param isPresent boolean
-   */
-  public void checkFileInPersonal(String file, boolean isPresent) {
-    info("check file in personal document");
-    evt.waitForAndGetElement(ELEMENT_FOLDERSELECTOR_PATH.replace("${path}", file), 3000, 1);
-  }
-
-  /**
-   * Check SE file
-   *
-   * @param file String
-   * @param isPresent boolean
-   */
-  public void checkFileInSE(String file, boolean isPresent) {
-    info("check file in SE");
-    evt.waitForAndGetElement((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", file), 3000, 1);
-  }
-
-  /**
-   * Watch a document
-   */
-  public void watchDocument() {
-    info("watch a document");
-    evt.click(ELEMENT_ACTIONBAR_WATCH, 0, true);
-
-    evt.click(ELEMENT_ACTIONBAR_WATCH_RADIO, 0, true);
-    evt.click(ELEMENT_ACTIONBAR_WATCH_BUTTON, 0, true);
-    evt.waitForAndGetElement(ELEMENT_ACTIONBAR_WATCH_NOTICE);
-
-  }
-
-  /**
    * Share document
    */
   public void shareDocument() {
@@ -1299,270 +861,6 @@ public class SiteExplorerHome {
     if (evt.waitForAndGetElement(ELEMENT_ACTIONBAR_SHARE, 5000, 0) == null)
       evt.click(ELEMENT_ACTIONBAR_MORE);
     evt.click(ELEMENT_ACTIONBAR_SHARE);
-  }
-
-  /**
-   * Upload file/files to a specific folder
-   *
-   * @param folderName String
-   * @param uploadFiles String
-   * @throws Exception exception
-   */
-  public void uploadFileToFolder(String folderName, ArrayList<String> uploadFiles) throws Exception {
-    info("Upload file to folder");
-    evt.click(ELEMENT_DOCUMENT_SELECTED_FOLDER.replace("${folderName}", folderName));
-
-    for (String fileName : uploadFiles) {
-      uploadFile("TestData/" + fileName);
-    }
-  }
-
-  /**
-   * Share one document to many spaces
-   *
-   * @param fileName String
-   * @param spaceList String
-   * @param comment String
-   */
-  public void shareDocumentToManySpaces(String fileName, ArrayList<String> spaceList, String comment) {
-    info("Share document to space");
-    for (String spaceElement : spaceList) {
-      // Click space list
-      evt.click(ELEMENT_SPACE_LIST);
-      // Select a space
-      evt.click(ELEMENT_SELECTED_SPACE.replace("${spaceName}", spaceElement));
-    }
-    // Comment
-    if (comment != null && !comment.isEmpty()) {
-      evt.type(ELEMENT_SHARE_DOCUMENT_COMMENT, comment, false);
-    }
-
-    // Click Share button
-    evt.click(ELEMENT_SHARE_DOCUMENT_ACTION_BUTTON.replace("${name}", "Share"));
-  }
-
-  /**
-   * Activity about shared document is displayed in Intranet Activity Stream and
-   * Space Activity Stream
-   *
-   * @param shareOwner String
-   * @param fileName String
-   * @param spaceName String
-   */
-  public void checkDisplayOfSharedDocument(String shareOwner, String fileName, String spaceName) {
-    SocialLocator socLocator = new SocialLocator();
-    // Check Shared content in Intranet AS
-    evt.waitForAndGetElement(ELEMENT_SHARE_DOCUMENT_CONTENT.replace("${author}", shareOwner).replace("${spaceName}", spaceName));
-
-    // Open space displayed in shared document
-    evt.click(ELEMENT_SHARE_DOCUMENT_CONTENT.replace("${author}", shareOwner).replace("${spaceName}", spaceName));
-    evt.waitForAndGetElement(socLocator.ELEMENT_SPACE_NAME.replace("${name}", spaceName));
-    // Check Shared content in Space AS
-    evt.waitForAndGetElement(ELEMENT_SHARE_DOCUMENT_CONTENT_IN_SPACE.replace("${author}", shareOwner));
-  }
-
-  /**
-   * Symlink of shared file is displayed in shared folder
-   *
-   * @param fileName String
-   * @param spaceName String
-   */
-  public void checkSharedFileSymlink(String fileName, String spaceName) {
-    SpaceManagement spaceManage = new SpaceManagement(testBase);
-    // Go to Documents of Space
-    spaceManage.goToDocumentTab();
-    evt.waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER);
-    // Open shared folder
-    evt.doubleClickOnElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER);
-    // Find the shared file
-    evt.waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK.replace("${spaceName}", spaceName)
-                                                                               .replace("${fileName}", fileName));
-  }
-
-  /**
-   * Create a space with 2 users
-   *
-   * @param spaceName String
-   * @param user1 String
-   * @param user2 String
-   * @param user2FullName String
-   * @param password String
-   */
-  public void initSpaceWithUsers(String spaceName, String user1, String user2, String user2FullName, String password) {
-    ManageLogInOut manageLoginOut = new ManageLogInOut(testBase);
-    HomePagePlatform homepage = new HomePagePlatform(testBase);
-    SpaceManagement spaceManage = new SpaceManagement(testBase);
-    SpaceHomePage spaceHome = new SpaceHomePage(testBase);
-    SpaceSettingManagement spaceSetting = new SpaceSettingManagement(testBase);
-
-    info("User A login");
-    manageLoginOut.signIn(user1, password);
-
-    info("User A creates a space");
-    homepage.goToAllSpace();
-
-    spaceManage.goToCreateSpace();
-    spaceManage.addNewSpaceSimple(spaceName, "");
-
-    info("User A invites UserB to the space");
-    homepage.goToSpecificSpace(spaceName);
-    spaceHome.goToSpaceSettingTab();
-    spaceSetting.goToMemberTab();
-    spaceSetting.inviteUser(user2, true, user2FullName);
-
-    info("User B login");
-    manageLoginOut.signOut();
-    manageLoginOut.signIn(user2, password);
-
-    info("User B accepted to join the space");
-    homepage.goToAllSpace();
-
-    spaceManage.acceptAInvitation(spaceName);
-
-    manageLoginOut.signOut();
-  }
-
-  /**
-   * Upload and Share a document to a space
-   *
-   * @param fileName String
-   * @param spaceName String
-   * @param comment String
-   */
-  public void uploadAndShareDocumentToSpace(String fileName, String spaceName, String comment) {
-    NavigationToolbar navTool = new NavigationToolbar(testBase);
-
-    info("Share document to space");
-    navTool.goToSiteExplorer();
-
-    uploadFile("TestData/" + fileName);
-
-    evt.waitForAndGetElement(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", fileName));
-    // Share file to space
-    evt.click(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", fileName));
-    shareDocument();
-    // Click space list
-    evt.click(ELEMENT_SPACE_LIST);
-    // Select a space
-    evt.click(ELEMENT_SELECTED_SPACE.replace("${spaceName}", spaceName));
-
-    // Comment
-    if (comment != null && !comment.isEmpty()) {
-      evt.type(ELEMENT_SHARE_DOCUMENT_COMMENT, comment, false);
-    }
-
-    // Click Share button
-    evt.click(ELEMENT_SHARE_DOCUMENT_ACTION_BUTTON.replace("${name}", "Share"));
-  }
-
-  /**
-   * Date: Oct 7, 2015 Delete symlink of shared document in space documents
-   * @param spaceName String
-   * @param fileName String
-   */
-  public void deleteSymlink(String spaceName, String fileName) {
-    HomePagePlatform homepage = new HomePagePlatform(testBase);
-    SpaceManagement spaceManage = new SpaceManagement(testBase);
-
-    homepage.goToSpecificSpace(spaceName);
-
-    spaceManage.goToDocumentTab();
-    evt.waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER);
-    // Open shared folder
-    evt.doubleClickOnElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER);
-    // Find the shared file
-    evt.waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK.replace("${spaceName}", spaceName)
-                                                                               .replace("${fileName}", fileName));
-    // Delete symlink
-    evt.rightClickOnElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK.replace("${spaceName}", spaceName)
-                                                                              .replace("${fileName}", fileName));
-    evt.waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE);
-    evt.click(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE);
-    // confirm
-    evt.waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE_OPTION.replace("${action}", "Delete"));
-    evt.click(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE_OPTION.replace("${action}", "Delete"));
-    evt.waitForElementNotPresent(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK.replace("${spaceName}", spaceName)
-                                                                                   .replace("${fileName}", fileName));
-  }
-
-  public void checkShareActivityAfterDeleted(String spaceName, boolean verifyInSpace) {
-    HomePagePlatform homepage = new HomePagePlatform(testBase);
-    SpaceManagement spaceManage = new SpaceManagement(testBase);
-
-    evt.waitForElementNotPresent(ELEMENT_SHARE_DOCUMENT_CONTENT.replace("${author}", PLFData.DATA_NAME_USER1)
-                                                               .replace("${spaceName}", spaceName));
-    if (verifyInSpace) {
-      homepage.goToSpecificSpace(spaceName);
-      spaceManage.goToActivityStreamTab();
-      evt.waitForElementNotPresent(ELEMENT_SHARE_DOCUMENT_CONTENT_IN_SPACE.replace("${author}", PLFData.DATA_NAME_USER1));
-    }
-  }
-
-  /**
-   * Date: Oct 8, 2015 Documents -Icons button
-   */
-  public void clickIconView() {
-    info("Select a view type");
-    evt.waitForAndGetElement(ELEMENT_ADDRESS_BAR_ICON_VIEW);
-    evt.click(ELEMENT_ADDRESS_BAR_ICON_VIEW);
-
-  }
-
-  /**
-   * The symlink does not exist in Shared folder Date: Oct 21, 2015
-   * @param fileName String
-   * @param spaceName  String
-   */
-  public void checkSharedFileSymlinkAfterDeleted(String fileName, String spaceName) {
-    SpaceManagement spaceManage = new SpaceManagement(testBase);
-    // Go to Documents of Space
-    spaceManage.goToDocumentTab();
-    evt.waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER);
-    // Open shared folder
-    evt.doubleClickOnElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER);
-    // Find the shared file
-    evt.waitForElementNotPresent(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK.replace("${spaceName}", spaceName)
-                                                                                   .replace("${fileName}", fileName));
-  }
-
-  /**
-   * Share document with access rights: Can view/Can edit Date: Oct 22, 2015
-   * @param spaceName String
-   * @param accessRight String
-   * @param comment  String
-   */
-  public void shareDocumentToSpaceWithAccessRight(String spaceName, String accessRight, String comment) {
-    shareDocument();
-    evt.click(ELEMENT_DOCUMENT_SHARE_ACCESS_OPTION.replace("${option}", accessRight));
-    // Click space list
-    evt.click(ELEMENT_SPACE_LIST);
-    // Select a space
-    evt.click(ELEMENT_SELECTED_SPACE.replace("${spaceName}", spaceName));
-
-    // Comment
-    if (comment != null && !comment.isEmpty()) {
-      evt.type(ELEMENT_SHARE_DOCUMENT_COMMENT, comment, false);
-    }
-    // Click Share button
-    evt.click(ELEMENT_SHARE_DOCUMENT_ACTION_BUTTON.replace("${name}", "Share"));
-  }
-
-  /**
-   * Go to drive - folder Date: Oct 27, 2015
-   * @param path String
-   * @param drive  String
-   */
-  public void goToPathOfDrive(String path, String drive) {
-    info("Go to selected Drive");
-    evt.waitForAndGetElement(ELEMENT_ACTIONBAR_SHOWDRIVES);
-    evt.click(ELEMENT_ACTIONBAR_SHOWDRIVES);
-    evt.waitForAndGetElement(ELEMENT_ACTIONBAR_SELECTED_DRIVE.replace("${drive}", drive));
-    evt.click(ELEMENT_ACTIONBAR_SELECTED_DRIVE.replace("${drive}", drive));
-    info("Go to folder");
-    String[] arrayPath = path.split("/");
-    for (String arrayElement : arrayPath) {
-      selectNode(arrayElement);
-    }
   }
 
   /**
@@ -1593,12 +891,5 @@ public class SiteExplorerHome {
 
   public enum selectDriverOrder {
     ASCENDING, DESCENDING
-  }
-
-  /**
-   * Select a value for behavior by quynhpt date 16/01/2015
-   */
-  public enum defineValueBehavior {
-    CREATE_NEW, REMOVE_EXISTING, REPLACE_EXISTING, THROW_EXEPTION;
   }
 }

@@ -12,15 +12,10 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -212,19 +207,6 @@ public class QuestionManagement {
   }
 
   /**
-   * Cancel to Delete question
-   * 
-   * @param question string
-   */
-  public void cancelDeleteQuestion(String question) {
-    info("Delete question");
-    goToActionOfQuestionByRightClick(question, actionQuestionOption.DELETE);
-    evt.waitForAndGetElement(ELEMENT_QUESTION_CONFIRM_DELETE);
-    evt.click(ELEMENT_QUESTION_DELETE_FORM_CANCEL_BUTTON);
-    evt.waitForAndGetElement(ELEMENT_QUESTION_LIST_ITEM.replace("$question", question));
-  }
-
-  /**
    * Go to edit question from manage question form
    * 
    * @param question string
@@ -343,36 +325,6 @@ public class QuestionManagement {
   }
 
   /**
-   * Approve question or not
-   *
-   * @param isApprove true: check to approve false: uncheck to un-approve
-   */
-  public void approveQuestion(Boolean isApprove) {
-    if (isApprove) {
-      info("Approve question");
-      evt.check(ELEMENT_SUBMIET_QUESTION_APPROVE_CHECKBOX, 2);
-    } else {
-      info("Dis-approve question");
-      evt.uncheck(ELEMENT_SUBMIET_QUESTION_APPROVE_CHECKBOX, 2);
-    }
-  }
-
-  /**
-   * Active question or not
-   *
-   * @param isActive true: check to active false: uncheck to un-active
-   */
-  public void activeQuestion(Boolean isActive) {
-    if (isActive) {
-      info("Active question");
-      evt.check(ELEMENT_SUBMIET_QUESTION_ACTIVE_CHECKBOX, 2);
-    } else {
-      info("Un-active question");
-      evt.uncheck(ELEMENT_SUBMIET_QUESTION_ACTIVE_CHECKBOX, 2);
-    }
-  }
-
-  /**
    * Rate question
    *
    * @param number number of rating
@@ -413,58 +365,6 @@ public class QuestionManagement {
 
 
     }
-  }
-
-  /**
-   * Save or cancel all change of submit question form
-   *
-   * @param isSave = true if want to save all changes = false if want to cancel
-   *          all changes
-   */
-  public void saveCancelSubmitQuestion(Boolean isSave) {
-    if (isSave) {
-      info("Click on Save button");
-      evt.click(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
-      button.ok();
-    } else {
-      info("Click on Cancel button");
-      evt.click(ELEMENT_SUBMIT_QUESTION_FORM_CANCEL_BUTTON);
-    }
-    evt.waitForElementNotPresent(ELEMENT_SUBMIT_QUESTION_FORM);
-    info("Submint question form is closed");
-  }
-
-  /**
-   * Open Answer form
-   *
-   * @param question is the question that want to answer
-   */
-  public void goToAnswerForm(String question) {
-    if (question != "" || question != null) {
-      info("Click on Answer link");
-      evt.click(ELEMENT_QUESTION_ANSWER_LINK.replace("$question", question));
-      info("Respone form is shown");
-      evt.waitForAndGetElement(ELEMENT_QUESTION_RESPONE_FORM);
-      info("Answer form is shown successfully");
-    }
-  }
-
-  /**
-   * Check manage question form
-   *
-   * @param isDisplay
-   * @param ques list of question
-   */
-  public void checkMngQuesForm(boolean isDisplay, String... ques) {
-    if (isDisplay) {
-      evt.waitForAndGetElement(ELEMENT_MANAGE_QUESTION_BUTTON);
-      evt.click(ELEMENT_MANAGE_QUESTION_BUTTON, 0, true);
-      for (String q : ques) {
-        evt.waitForAndGetElement(ELEMENT_MANAGE_QUESTION_EDIT_QUESTION.replace("$question", q));
-        evt.waitForAndGetElement(ELEMENT_MANAGE_QUESTION_DELETE_QUESTION.replace("$question", q));
-      }
-    } else
-      evt.waitForElementNotPresent(ELEMENT_MANAGE_QUESTION_BUTTON);
   }
 
   /**
