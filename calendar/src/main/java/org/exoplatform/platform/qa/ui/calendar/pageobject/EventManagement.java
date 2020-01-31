@@ -237,36 +237,31 @@ public class EventManagement {
            }while(!$(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).exists());
            $(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
          }
-          String day = dateTimeFrom[0].substring(3, 5);
-          String date = year + ',' + month + ',' + day;
-          do
-          {
-            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-            LocalDateTime now = LocalDateTime.now();
-            if(dateTimeFrom[0].substring(0,2).compareTo(dateTimeFormatter.format(now).substring(0,2)) == 0 && dateTimeFrom[0].substring(6,10).compareTo(dateTimeFormatter.format(now).substring(6,10)) == 0)
-            {
+          else {
+            String day = dateTimeFrom[0].substring(3, 5);
+            String date = year + ',' + month + ',' + day;
+            do {
+              DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+              LocalDateTime now = LocalDateTime.now();
+              if (dateTimeFrom[0].substring(0, 2).compareTo(dateTimeFormatter.format(now).substring(0, 2)) == 0 && dateTimeFrom[0].substring(6, 10).compareTo(dateTimeFormatter.format(now).substring(6, 10)) == 0) {
 
-            }
-            if(dateTimeFrom[0].substring(0,2).compareTo(dateTimeFormatter.format(now).substring(0,2)) < 0 && dateTimeFrom[0].substring(6,10).compareTo(dateTimeFormatter.format(now).substring(6,10)) == 0)
-            {
-              $(PREVIOUS_MONTH_DATE_PICKER).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-            }
+              }
+              if (dateTimeFrom[0].substring(0, 2).compareTo(dateTimeFormatter.format(now).substring(0, 2)) < 0 && dateTimeFrom[0].substring(6, 10).compareTo(dateTimeFormatter.format(now).substring(6, 10)) == 0) {
+                $(PREVIOUS_MONTH_DATE_PICKER).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+              }
 
-            if(dateTimeFrom[0].substring(0,2).compareTo(dateTimeFormatter.format(now).substring(0,2)) > 0 && dateTimeFrom[0].substring(6,10).compareTo(dateTimeFormatter.format(now).substring(6,10)) == 0)
-            {
-              $(NEXT_MONTH_DATE_PICKER).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-            }
-            if(dateTimeFrom[0].substring(6,10).compareTo(dateTimeFormatter.format(now).substring(6,10)) > 0)
-            {
-              $(NEXT_MONTH_DATE_PICKER).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-            }
-            if(dateTimeFrom[0].substring(6,10).compareTo(dateTimeFormatter.format(now).substring(6,10)) < 0)
-            {
-              $(PREVIOUS_MONTH_DATE_PICKER).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-            }
-          }while(!$(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).exists());
-          $(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-        }
+              if (dateTimeFrom[0].substring(0, 2).compareTo(dateTimeFormatter.format(now).substring(0, 2)) > 0 && dateTimeFrom[0].substring(6, 10).compareTo(dateTimeFormatter.format(now).substring(6, 10)) == 0) {
+                $(NEXT_MONTH_DATE_PICKER).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+              }
+              if (dateTimeFrom[0].substring(6, 10).compareTo(dateTimeFormatter.format(now).substring(6, 10)) > 0) {
+                $(NEXT_MONTH_DATE_PICKER).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+              }
+              if (dateTimeFrom[0].substring(6, 10).compareTo(dateTimeFormatter.format(now).substring(6, 10)) < 0) {
+                $(PREVIOUS_MONTH_DATE_PICKER).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+              }
+            } while (!$(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).exists());
+            $(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+          }}
          else
         {
           String month = dateTimeFrom[0].substring(0, 2);
@@ -303,7 +298,8 @@ public class EventManagement {
             }while(!$(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).exists());
             $(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
           }
-          String day = dateTimeFrom[0].substring(3, 5);
+          else {
+            String day = dateTimeFrom[0].substring(3, 5);
           String date = year + ',' + month + ',' + day;
           do
           {
@@ -331,8 +327,7 @@ public class EventManagement {
             }
           }while(!$(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).exists());
           $(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-        }
-
+        }}
       }
       if ((to != null) & (to != "")) {
         String[] dateTimeTo = to.split(" ");
@@ -372,7 +367,8 @@ public class EventManagement {
             }while(!$(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).exists());
             $(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
           }
-          String day = dateTimeTo[0].substring(3, 5);
+          else {
+            String day = dateTimeTo[0].substring(3, 5);
           String date = year + ',' + month + ',' + day;
           do
           {
@@ -400,7 +396,7 @@ public class EventManagement {
             }
           }while(!$(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).exists());
           $(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-        }
+        }}
         else
         {
           String month = dateTimeTo[0].substring(0, 2);
@@ -436,7 +432,8 @@ public class EventManagement {
             }while(!$(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).exists());
             $(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
           }
-          String day = dateTimeTo[0].substring(3, 5);
+          else {
+            String day = dateTimeTo[0].substring(3, 5);
           String date = year + ',' + month + ',' + day;
           do
           {
@@ -464,8 +461,7 @@ public class EventManagement {
             }
           }while(!$(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).exists());
           $(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-        }
-
+        }}
       }
 
     } else {
@@ -508,7 +504,8 @@ public class EventManagement {
             }while(!$(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).exists());
             $(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
           }
-          String day = dateTimeFrom[0].substring(3, 5);
+          else {
+            String day = dateTimeFrom[0].substring(3, 5);
           String date = year + ',' + month + ',' + day;
           do
           {
@@ -536,7 +533,7 @@ public class EventManagement {
             }
           }while(!$(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).exists());
           $(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-        }
+        }}
         else
         {
           String month = dateTimeFrom[0].substring(0, 2);
@@ -572,7 +569,8 @@ public class EventManagement {
             }while(!$(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).exists());
             $(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
           }
-          String day = dateTimeFrom[0].substring(3, 5);
+          else {
+            String day = dateTimeFrom[0].substring(3, 5);
           String date = year + ',' + month + ',' + day;
           do
           {
@@ -600,7 +598,7 @@ public class EventManagement {
             }
           }while(!$(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).exists());
           $(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-        }
+        }}
 
         $(byXpath("(//input[@class='cbb_input'])[1]")).waitUntil(Condition.visible,Configuration.timeout).setValue(dateTimeFrom[1]);
         if (dateTimeFrom.length > 1) {
@@ -644,7 +642,8 @@ public class EventManagement {
             }while(!$(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).exists());
             $(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
           }
-          String day = dateTimeTo[0].substring(3, 5);
+          else {
+            String day = dateTimeTo[0].substring(3, 5);
           String date = year + ',' + month + ',' + day;
           do
           {
@@ -672,7 +671,7 @@ public class EventManagement {
             }
           }while(!$(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).exists());
           $(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-        }
+        }}
         else
         {
           String month = dateTimeTo[0].substring(0, 2);
@@ -708,7 +707,8 @@ public class EventManagement {
             }while(!$(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).exists());
             $(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
           }
-          String day = dateTimeTo[0].substring(3, 5);
+          else {
+            String day = dateTimeTo[0].substring(3, 5);
           String date = year + ',' + month + ',' + day;
           do
           {
@@ -736,7 +736,7 @@ public class EventManagement {
             }
           }while(!$(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).exists());
           $(By.xpath("//*[@onclick='eXo.cs.UIDateTimePicker.setDate(${date})']".replace("${date}", date))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-        }
+        }}
 
         $(byXpath("(//input[@class='cbb_input'])[2]")).waitUntil(Condition.visible,Configuration.timeout).setValue(dateTimeTo[1]);
         if (dateTimeTo.length > 1) {
