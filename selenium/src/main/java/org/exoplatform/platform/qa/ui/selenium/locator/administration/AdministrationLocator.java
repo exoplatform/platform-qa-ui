@@ -21,7 +21,6 @@
 package org.exoplatform.platform.qa.ui.selenium.locator.administration;
 
 import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -337,82 +336,14 @@ public class AdministrationLocator {
   public static final By              ELEMENT_ECM_EXPLORER_CLOSE_VIEW_MODE                         =
                                                                            By.xpath(".//*[@id='UIViewFormTabPane']//*[contains(text(),'Close')]");
 
-  public static final String          ELEMENT_ECM_EXPLORER_EDIT                                    =
-                                                                ".//*[@data-original-title='${nameView}']/../..//i[@class='uiIconEditInfo uiIconLightGray']";
-
   public static final By              ELEMENT_ECM_EXPLORER_EDIT_VIEWS_SAVE_BUTTON                  =
                                                                                   By.xpath(".//*[@id='UIViewFormTabPane']//button[text()='Save']");
 
   // Expolorer,Views-->Actions tab-->Add/Edit popup
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_ADD_CATEGORY              = By.id("addCategory");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_ADD_TRANSLATION           = By.id("addLocalizationLink");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_CONTENT_NAVIGATION        = By.id("contentNavigation");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_IMPORT_NOTE               = By.id("importNode");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_MANAGE_CATEGORIES         = By.id("manageCategories");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_MANAGE_RELATIONS          = By.id("manageRelations");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_APPROVE_CONTENT           =
-                                                                                         By.id("publicationApproveContent");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_SHOW_JCR_STRUCTURE        = By.id("showJCRStructure");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_VIEW_METADATA             = By.id("viewMetadatas");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_VIEW_PROPERTIES           = By.id("viewProperties");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_ADD_DOCUMENT              = By.id("addDocument");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_ADD_SYMLINK               = By.id("addSymLink");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_EDIT_DOCUMENT             = By.id("editDocument");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_MANAGE_ACTIONS            = By.id("manageActions");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_HIDE_SHOW_CONTENT         = By.id("manageHidden");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_MANAGE_VERSIONS           = By.id("manageVersions");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_PUBLISH                   = By.id("publicationPublish");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_TAG_DOCUMENT              = By.id("taggingDocument");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_VIEW_NODE_TYPE            = By.id("viewNodeType");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_VOTE                      = By.id("vote");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_ADD_FOLDER                = By.id("addFolder");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_COMMENT                   = By.id("comment");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_EXPORT_NODE               = By.id("exportNode");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_MANAGE_AUDITING           = By.id("manageAuditing");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_MANAGE_PUBLICATION        = By.id("managePublications");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_OVERLOAD_THUMBNAIL        = By.id("overloadThumbnail");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_REQUEST_APPROVAL          =
-                                                                                          By.id("publicationRequestApproval");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_UPLOAD                    = By.id("upload");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_VIEW_PERMISSIONS          = By.id("viewPermissions");
-
-  public static final By              ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_WATCH_DOCUMENT            = By.id("watchDocument");
-
   public static final By              ELEMENT_ECM_EXPORER_ACTIONS_POPUP_SAVE_BUTTON                =
                                                                                     By.xpath(".//*[@id='UITabForm']//button[text()='Save']");
 
   // explorer, tags
-  public static final By              ELEMENT_ECM_EXPLORER_TAGS_TAG_PERM_TAB                       =
-                                                                             By.xpath("//*[contains(@data-target,'UITagPermissionManager')]");
-
   public static final By              ELEMENT_ECM_EXPLORER_TAGS_ADD_STYLE_BUTTON                   =
                                                                                  By.xpath("//*[@id='UITagManager']//*[contains(text(),'Add Style')]");
 
@@ -436,10 +367,6 @@ public class AdministrationLocator {
 
   public static final String          ELEMENT_ECM_EXPLORER_TAGS_LIST_CHECK_HTML_CONTENT            =
                                                                                         "//*[@id='UITagManager']//*[contains(text(),'{$name}')]/../..//*[contains(text(),'{$html}')]";
-
-  public static final By              ELEMENT_ECM_EXPLORER_TAGS_PERM_TAB                           =
-                                                                         By.xpath(".//*[contains(@data-target,'TagPermissionManager')]");
-
   // common element
   public static final By              ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON                     =
                                                                                By.xpath(".//*[@class='uiIconAddPermission uiIconLightGray']");
@@ -521,48 +448,8 @@ public class AdministrationLocator {
   public static final SelenideElement ELEMENT_ECM_TEMPLATES_DOCUMENTS_SAVE_FORM                    =
                                                                                 $(byXpath("//*[@id=\"UITemplateForm\"]/div[3]/button[1]"));
 
-  public static final String          ELEMENT_ECM_TEMPLATES_DOCUMENTS_LIST                         =
-                                                                           "//*[@id='UITemplateList']//*[contains(text(),'{$name}')]";
-
-  public static final String          ELEMENT_ECM_TEMPLATES_DOCUMENTS_LIST_EDIT                    =
-                                                                                "//*[@id='UITemplateList']//*[contains(text(),'{$name}')]/../..//*[@class='uiIconEdit uiIconLightGray']";
-
   public static final SelenideElement ELEMENT_ECM_TEMPLATES_DOCUMENTS_SAVE_EDIT_FORM               =
                                                                                      $(byXpath("//*[@id=\"UITemplateEditForm\"]/div[3]/button[1]"));
-
-  public static final String          ELEMENT_ECM_TEMPLATES_DOCUMENTS_LIST_DELETE                  =
-                                                                                  "//*[@id='UITemplateList']//*[contains(text(),'{$name}')]/../..//*[@class='uiIconDelete uiIconLightGray']";
-
-  public static final By              ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_TAB                   =
-                                                                                 By.xpath("//*[@data-toggle='tab'][contains(.,'Dialog')]");
-
-  public static final By              ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_EDIT                  =
-                                                                                  By.xpath("//*[@id='DialogList']//*[contains(@class,'uiIconEdit')]");
-
-  public static final By              ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_REMOVE_PERM           =
-                                                                                         By.xpath(".//*[@id='DialogForm']//*[contains(@class,'uiIconRemovePermission')]");
-
-  public static final By              ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_ADD_PERM              =
-                                                                                      By.xpath(".//*[@id='DialogForm']//*[contains(@class,'uiIconAddPermission')]");
-
-  public static final By              ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_SAVE                  =
-                                                                                  By.xpath(".//*[@id='DialogForm']//*[contains(.,'Save')][@class='btn']");
-
-  public static final By              ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_TAB                     =
-                                                                               By.xpath("//*[@data-toggle='tab'][contains(.,'View')]");
-
-  public static final By              ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_EDIT                    =
-                                                                                By.xpath("//*[@id='VewList']//*[contains(@class,'uiIconEdit')]");
-
-  public static final By              ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_REMOVE_PERM             =
-                                                                                       By.xpath("//*[@id='ViewForm']//*[contains(@class,'uiIconRemovePermission')]");
-
-  public static final By              ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_ADD_PERM                =
-                                                                                    By.xpath("//*[@id='ViewForm']//*[contains(@class,'uiIconAddPermission')]");
-
-  public static final By              ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_SAVE                    =
-                                                                                By.xpath("//*[@id='ViewForm']//*[contains(.,'Save')][@class='btn']");
-
   // templates, List
   public static final By              ELEMENT_ECM_TEMPLATES_LIST_ADD_LIST                          =
                                                                           By.xpath("//*[@id='ContentTemplateContainer']//*[contains(text(),'Add Template')]");
@@ -638,47 +525,12 @@ public class AdministrationLocator {
   public static final By              ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_ACTION            =
                                                                                         By.xpath(".//*[@id='searchAdmin']//th[text()='Content Type']");
 
-  /***************************************************
-   * MANAGE LAYOUT
-   ***********************************************************************************************/
-  public static final By              ELEMENT_PERMISSION_PUBLIC_CHECKBOX                           =
-                                                                         By.xpath(".//*[contains(@id,'UIListPermissionSelector')]//input[@id='publicMode']");
-
-  public static final By              ELEMENT_PERMISSION_GRID                                      =
-                                                              By.xpath(".//*[@id='PermissionGrid']");
-
   // *=========================================================EDIT/SITE/LAYOUT==============================================*\
-  // Edit Portlet popup
-  public static final By              ELEMENT_PORTLET_POPUP_PERMISSION_TAB                         =
-                                                                           By.xpath(".//*[@data-target='#PortletPermission-tab']");
-
-  public static final By              ELEMETN_PORTLET_POPUP_SAVE_BTN                               = By.xpath(".//*[@id='Save']");
-
   // HOME PAGE LAYOUT
   public static final By              ELEMENT_EDIT_PORTLET_ABORT                                   =
                                                                  By.xpath("//*[@data-original-title='Abort']");
-  // *=============================================================EDIT/PAGE/EDIT
-  // LAYOUT===========================================*\
-  public static final By              ELEMENT_PAGE_EDIT_LAYOUT_CONTAINER_TAB                       =
-                                                                             By.xpath(".//*[@data-target='#contList']");
-
-  // EDIT CONTAINER POPUP
-  public static final By              ELEMENT_CONTAINER_POPUP_PERMISSION_TAB                       =
-                                                                             By.xpath(".//*[@data-target='#UIContainerPermission-tab']");
 
   // *=============================================================*\\
-  // Site permission
-  public static final String          ELEMENT_PERMISSION_ADD_USER_BTN                              =
-                                                                      "//*[contains(@id,'${tabName}')]//*[@class='uiIconAddUser uiIconWhite']";
-
-  public static final String          ELEMENT_PORTLET_SELECT_PERMISSION_GROUP_MEMBERSHIP_NAME      =
-                                                                                              ".//*[contains(@id, '${tabName}')]//*[@class='PopupContent popupContent']//*[@title='${name}']";
-
-  public static final String          ELEMENT_PORTLET_ACCESS_PERMISSION_GROUP_NAME                 =
-                                                                                   ".//*[contains(@id, '${tabName}')]//*[@id='PermissionGrid']//*[contains(text(),'${group}')]";
-
-  public static final String          ELEMENT_PORTLET_SELECT_PERMISSION_POPUP_TITLE                =
-                                                                                    ".//*[contains(@id, '${tabName}')]//*[@class='PopupTitle popupTitle' and (text()='${popupTitle}')]";
   // Site permission
 
   public static final By              ELEMENT_BTN_DELETE_DRIVE                                     = byClassName("uiIconDelete");

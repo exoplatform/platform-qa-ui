@@ -320,34 +320,13 @@ public class ForumLocator {
   public static final By ELEMENT_PERM_VIEWPOST_CHECKBOX =
           By.xpath("//*[@id='UIPermissionGrid']//tr[1]/td[5]//input");
 
-  public static final By ELEMENT_PERM_ROLE_ICON =
-          By.xpath(".//*[contains(@id,'Permission')]//*[contains(@class,'uiIconMembership')]");
-
-  public static final By ELEMENT_RESTRICTED_ROLE_ICON =
-          By.xpath(".//*[@id='DetailTab']//*[contains(@class,'uiIconMembership')]");
-
   public static final By ELEMENT_MESSAGE_ROLE_ICON =
           By.xpath(".//*[@id='MessageTab']//*[contains(@class,'uiIconMembership')]");
 
-  public static final By ELEMENT_SELECT_MEMBERSHIP_POPUP =
-          By.xpath(".//*[@id='UIPopupActionChildPopupWindow']");
-
-  public static final By ELEMENT_RESTRICTED_SELECT_MEMBERSHIP_POPUP =
-          By.xpath("//*[@id='UIForumChildPopupWindow']//*[contains(@class,'PopupContent')]");
-
   public static final By ELEMENT_MESSAGE_SELECT_MEMBERSHIP_POPUP = By.xpath(".//*[@id='UIPopupWindow']");
-
-  public static final String ELEMENT_SELECT_RIGHT_PARENT_GROUP =
-          "//*[contains(@id,'UIPopupActionChildPopupWindow')]//a[contains(.,'$group')]";
-
-  public static final String ELEMENT_RESTRICTED_SELECT_RIGHT_PARENT_GROUP =
-          "//*[@id='UIForumChildPopupWindow']//*[contains(@class,'PopupContent')]//a[contains(.,'$group')]";
 
   public static final String ELEMENT_MESSAGE_SELECT_RIGHT_PARENT_GROUP =
           ".//*[@id='UIPopupWindow']//a[contains(.,'$group')]";
-
-  public static final By ELEMENT_PERM_ADD_BTN =
-          By.xpath("//*[contains(@id,'Permission')]//*[contains(@class,'addButton')]");
 
   /***************************************************
    * TOPIC MANAGEMENT
@@ -483,12 +462,8 @@ public class ForumLocator {
   // tab elements
   public static final By ELEMENT_TABS_SENT_MESSAGES =
           By.xpath("//*[@id='UIPrivateMessageForm']//*[@class='nav nav-tabs']//*[contains(text(),'Sent Messages')]");
-  public static final By ELEMENT_TABS_INBOX =
-          By.xpath("//*[@id='UIPrivateMessageForm']//*[@class='nav nav-tabs']//*[contains(text(),'Inbox')]");
   public static final By ELEMENT_TABS_COMPOSE_MESSAGE =
           By.xpath("//*[@id='UIPrivateMessageForm']//*[text()='Compose New Message']");
-  public static final By ELEMENT_PRIVATE_MESSAGE_CANCEL_BUTTON =
-          By.xpath("//*[@id='UIPrivateMessageForm']//*[contains(text(),'Cancel')]");
   // send messages
   public static final By ELEMENT_SEND_TO_MESSAGE = By.id("SendTo");
   public static final By ELEMENT_TITLE_MESSAGE = By.id("MailTitle");
@@ -496,21 +471,6 @@ public class ForumLocator {
           By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");
   public static final By ELEMENT_SEND_BUTTON =
           By.xpath("//*[@id='UIPrivateMessageForm']//*[@class='uiAction']//*[contains(text(),'Send')]");
-  public static final By ELEMENT_COMPOSE_NEW_MESSAGE_GROUP_SELECTOR =
-          By.xpath(".//*[@id='MessageTab']//*[contains(@class,'uiIconGroup')]");
-  public static final String ELEMENT_PRIVATE_MESSAGE_SELECT_GROUP = ".//*[contains(@title,'${name}')]";
-  public static final String ELEMENT_PRIVATE_MESSAGE_SELECT_A_GROUP =
-          ".//*[@id='UIGroupSelector']//*[contains(text(),'Select this Group')]";
-  public static final String ELEMENT_PRIVATE_MESSAGE_SEND_SUCCESSFULLY = "Your message was sent successfully.";
-  public static final By ELEMENT_COMPOSE_NEW_MESSAGE_MEMBERSHIP_SELECTOR =
-          By.xpath(".//*[@id='MessageTab']//*[contains(@class,'uiIconMembership uiIconLightGray')]");
-  public static final String ELEMENT_PRIVATE_MESSAGE_SELECT_A_MEMBERSHIP =
-          ".//*[@id='UIMemberShipSelector']//*[contains(text(),'${membership}')]";
-  // inbox
-  public static final String ELEMENT_TITLE_AUTHORS_INBOX =
-          "//*[@id='UIListInBoxPrivateMessage']//*[contains(text(),'{$author}')]/../..//*[contains(text(),'{$title}')]";
-  public static final String ELEMENT_CONTACT_INBOX =
-          "//*[@id='PermissionInfo']//*[contains(text(),'{$contact}')]";
   public static final By ELEMENT_REPLY =
           By.xpath("//*[@id='uiViewPrivateMessage']//*[@class='uiIconReply uiIconLightGray']");
   // outbox

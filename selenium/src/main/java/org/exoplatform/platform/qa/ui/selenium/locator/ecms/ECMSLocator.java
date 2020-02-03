@@ -222,9 +222,6 @@ public class ECMSLocator {
   public static final SelenideElement GO_BACK_ICON =
           $(byClassName("uiIconEcmsGoBack"));
 
-  public static final By ELEMENT_SITE_PATH =
-          By.cssSelector("#address");
-
   // Action Bar
   public static final By ELEMENT_ACTIONBAR_ADDDOCUMENT =
           By.xpath("//*[@class='uiIconEcmsAddDocument uiIconEcmsLightGray']");
@@ -280,31 +277,13 @@ public class ECMSLocator {
   public static final By ELEMENT_ACTIONBAR_TAG =
           By.xpath("//*[@class='uiIconEcmsTaggingDocument uiIconEcmsLightGray']");
 
-  public static final String ELEMENT_ACTIONBAR_ACTION =
-          "//*[@class='actionIcon'][contains(.,'$action')]";
-
   public static final By ELEMENT_ACTIONBAR_SHOWDRIVES = By.id("driveAction");
-
-  public static final By ELEMENT_ACTIONBAR_DELETE =
-          By.xpath(".//*[@id='ECMContextMenu']//*[@class='uiIconEcmsDelete']");
 
   public static final By ELEMENT_SITE_EXPLORER_ALL_CHECKBOX =
           By.xpath("//input[@type='checkbox' and @name= 'UIFileViewCheckBox']");
 
   public static final By ELEMENT_DELETE_ALL_BUTTON =
           By.xpath(".//*[@id='JCRContextMenu']//i[@class='uiIconEcmsDelete']");
-
-  public static final By ELEMENT_ACTIONBAR_WATCH =
-          By.xpath(".//*[contains(@class,'uiIconEcmsWatchDocument')]");
-
-  public static final By ELEMENT_ACTIONBAR_WATCH_RADIO =
-          By.xpath("//*[@class='uiRadio']/*[@id='notificationType']/../*[contains(.,'Email')]");
-
-  public static final By ELEMENT_ACTIONBAR_WATCH_BUTTON =
-          By.xpath("//*[@class='btn'][contains(.,'Watch')]");
-
-  public static final By ELEMENT_ACTIONBAR_WATCH_NOTICE =
-          By.xpath("//*[@id='wcm-notice'][contains(.,'You are watching this document.')]");
 
   public static final By ELEMENT_ACTIONBAR_SHARE =
           By.xpath("//*[@class='uiIconEcmsShareDocuments uiIconEcmsLightGray']");
@@ -313,15 +292,6 @@ public class ECMSLocator {
   public static final By ELEMENT_ADD_CATEGORY_POPUP_SELECT_CATEGORY_TAB =
           By.xpath(".//*[@id='UICategoryManager']//a[text()='Select Category']");
 
-  public static final By ELEMENT_ADD_CATEGORY_POPUP_MENU =
-          By.name("taxonomyTree");
-
-  public static final String ELEMENT_ADD_CATEGORY_POPUP_CATEGORY_NAME_LEFT_SIDE =
-          ".//*[@id='UIOneTaxonomySelector']//i[@title='${nameTitle}']";
-
-  public static final String ELEMENT_ADD_CATEGORY_POPUP_SELECT_CATEGORY_RIGHT_SIDE =
-          ".//*[@id='UISelectTaxonomyPanel']//div[contains(.,'${nameCategory}')]//../..//i[@class='uiIconValidate uiIconLightGray']";
-
   public static final By ELEMENT_ADD_CATEGORY_POPUP_CLOSED_BUTTON =
           By.xpath(".//*[@id='UICategoryManager']//button[text()='Close']");
 
@@ -329,31 +299,6 @@ public class ECMSLocator {
           ".//*[@id='UICategoriesAddedList']//td[contains(.,'${nameCategory}')]/../..//i[@class='uiIconDelete uiIconLightGray']";
 
   // Import Node popup
-  public static final By ELEMENT_IMPORT_NODE_POPUP_TITLE =
-          By.xpath(".//*[@id='UIPopupWindow']//span[text()='Import']");
-
-  public static final By ELEMENT_IMPORT_NODE_POPUP_UPLOAD_BUTTON = By.name("file");
-
-  public static final By ELEMENT_IMPORT_NODE_POPUP_BEHAVIOR = By.name("behavior");
-
-  public static final By ELEMENT_IMPORT_NODE_POPUP_VERSION_HISTORY_BUTTON =
-          By.xpath("//div[@id='versionHistory']//input[@name='file']");
-
-  public static final By ELEMENT_IMPORT_NODE_POPUP_BEHAVIOR_CREATE_NEW =
-          By.xpath(".//*[@id='UIImportNode']//option[text()='Create New']");
-
-  public static final By ELEMENT_IMPORT_NODE_POPUP_BEHAVIOR_REMOVE_EXISTING =
-          By.xpath(".//*[@id='UIImportNode']//option[text()='Remove Existing']");
-
-  public static final By ELEMENT_IMPORT_NODE_POPUP_BEHAVIOR_REPLACE_EXISTING =
-          By.xpath(".//*[@id='UIImportNode']//option[text()='Replace Existing']");
-
-  public static final By ELEMENT_IMPORT_NODE_POPUP_BEHAVIOR_THROW_EXCEPTION =
-          By.xpath(".//*[@id='UIImportNode']//option[text()='Throw Exception']");
-
-  public static final String ELEMENT_IMPORT_NODE_POPUP_UPLOAD_FILE_LABEL =
-          "//div[@class='fileNameLabel' and contains(text(),'${fileName}')]";
-
   public static final By ELEMENT_IMPORT_MODE_POPUP_IMPORT_BUTTON =
           By.xpath(".//*[@id='UIImportNode']//button[text()='Import']");
 
@@ -394,17 +339,6 @@ public class ECMSLocator {
 
   public static final By ELEMENT_METADATA_POPUP =
           By.xpath("//*[@id='UIViewMetadataManager']");
-
-  // go to Show drives
-  public static final By ELEMENT_SHOW_DRIVES =
-          By.cssSelector("#driveAction");
-
-  public static final String ELEMENT_SELECTED_DRIVE =
-          ".//*[@data-original-title='${nameDrive}']";
-
-  // Drive area
-  public static final String ELEMENT_ACTIONBAR_SELECTED_DRIVE =
-          ".//*[@id='UIDrivesArea']//*[contains(@data-original-title,'${driver}')]";
 
   // View Properties form
   public static final By ELEMENT_VIEWPROPERTIES_PROPERTIES_TAB =
@@ -454,9 +388,6 @@ public class ECMSLocator {
   public static final By ELEMENT_ADDTRANSLATION_SELECTDOC =
           By.xpath("//*[@title='Select Document']");
 
-  public static final String ELEMENT_FOLDERSELECTOR_PATH =
-          "//*[@class='nodeName'][contains(.,'${path}')]";
-
   public static final By ELEMENT_SAVE_BTN =
           By.xpath("//*[text()='Save']");
 
@@ -481,12 +412,6 @@ public class ECMSLocator {
           By.xpath("//*[@class='btn btn-primary' and text()='Save']");
 
   // upload
-  public static final By ELEMENT_MORE_LINK_WITHOUT_BLOCK =
-          By.xpath("//*[@id='uiActionsBarContainer']//*[contains(text(), 'More')]");
-
-  public static final By ELEMENT_UPLOAD_LINK =
-          By.xpath(".//*[@id='UploadButtonDiv']//*[contains(@class,'uiIconEcmsUpload')]");
-
   public static final By ELEMENT_ACTIONBAR_EDIT =
           By.xpath("//*[@class='uiIconEcmsEditDocument uiIconEcmsLightGray']");
 
@@ -500,15 +425,6 @@ public class ECMSLocator {
   // Add document
   public static final By ELEMENT_ADDDOCUMENT_CHOICETYPE =
           By.xpath("//*[@class='templateTitle']");
-
-  public static final By ELEMENT_THUMBNAIL_VIEW_ADMIN_VIEW =
-          By.xpath(".//*[contains(@class,'uiThumbnailsView')]");
-
-  public static final By ELEMENT_CONTEXT_MENU_ADD_DOCUMENT =
-          By.xpath("(.//*[@id='JCRContextMenu']//*[contains(@href,'javascript:void(0)')])[3]");                                                                                                      // By.xpath(".//*[@id='JCRContextMenu']//*[contains(@class,'uiIconEcmsAddDocument')]");
-
-  public static final By ELEMENT_WORKING_AREA_TEMPLATE_DOCUMENTS =
-          By.xpath(".//*[@id='UIDocumentFormController']");
 
   // Add folder
   public static final By ELEMENT_ADDFOLDERBOX =
@@ -532,9 +448,6 @@ public class ECMSLocator {
   public static final By ELEMENT_SITEEXPLORER_ACTION_PASTE =
           By.xpath("//*[@class='uiIconEcmsPaste']");
 
-  public static final By ELEMENT_SITEEXPLORER_ACTION_RENAME =
-          By.xpath("//*[@class='uiIconEcmsRename']");
-
   public static final By ELEMENT_SITEEXPLORER_ACTION_ADDSYMLINK =
           By.xpath("//*[@class='uiIconEcmsAddSymLink']");
 
@@ -557,13 +470,6 @@ public class ECMSLocator {
   public static final String ELEMENT_SITEEXPLORER_LOCK_ICON =
           "//*[contains(@class,'iconLockedsmall')]/../../*[contains(.,'$node')]";
 
-  // Left panel of SE
-  public static final By ELEMENT_FILE_EXPLORER_ICON =
-          By.xpath(".//i[@class='uiIconEcmsExplorerMini uiIconEcmsLightGray']");
-
-  public static final String ELEMENT_FILE_TITLE_RIGHT_PANEL =
-          ".//*[@class='nodeGroup']//span[text()='${fileName}']";
-
   // advanced search
   public static final By ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_NAME =
           By.xpath("//*[@id='keyword']");
@@ -573,9 +479,6 @@ public class ECMSLocator {
 
   public static final By ELEMENT_SITEXPLORER_ADVANCEDSEARCH_CREATEQUERYTAB =
           By.xpath("//*[text()='New Query']");
-
-  public static final By ELEMENT_SITEXPLORER_ADVANCEDSEARCH_SAVEDQUERYTAB =
-          By.xpath("//*[text()='Saved Query']");
 
   public static final By ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_NAMEQUERY =
           By.xpath("//*[@id='name']");
@@ -588,9 +491,6 @@ public class ECMSLocator {
 
   public static final By ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_EXECUTEQUERYBTN =
           By.xpath("//*[@class='uiIconEcmsExecute']");
-
-  public static final String ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_EXECUTEQUERY =
-          "//*[text()='${name}']/../..//*[@class='uiIconEcmsExecute']";
 
   public static final String ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_EDITQUERYBTN =
           "//*[text()='${name}']/../..//*[@class='uiIconEdit uiIconLightGray']";
@@ -610,13 +510,6 @@ public class ECMSLocator {
   // Confirm delete box
   public static final By ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE =
           By.xpath("//*[@class='uiAction uiActionBorder']//*[text()='Delete']");
-
-  // upload file form
-  public static final By ELEMENT_UPLOAD_PROGRESS_BAR =
-          By.xpath(".//*[contains(@class,'progress progress-striped pull-right')]");
-
-  public static final By ELEMENT_UPLOAD_BUTTON =
-          By.xpath("//a[@class='actionIcon' and contains(text(),'Upload')]");
 
   // Permission
   public static final By ELEMENT_SEARCH_USER_INPUT =
@@ -674,18 +567,9 @@ public class ECMSLocator {
   public static final By ELEMENT_CATEGORY_ADD_ROOT_NODE =
           By.xpath("//*[@class='uiIconAddRootNode uiIconLightGray']");
 
-  public static final By ELEMENT_SITEEXPLORER_RENAME_FIELD =
-          By.xpath("//*[@id='renameField']");
-
-  public static final By ELEMENT_SITEEXPLORER_RENAME_SAVE =
-          By.xpath("//*[@id='renameLink']");
-
   // SideBar
   public static final String ELEMENT_SE_NODE =
           "//*[@title='${node}']";
-
-  public static final By ELEMENT_SIDE_BAR_MAINTAB =
-          By.xpath(".//*[@id='UISideBar']//h6[@class='title']");
 
   public static final By ELEMENT_SIDEBAR_SITES_MANAGEMENT =
           By.xpath("//*[@data-original-title='Site Management']");
@@ -748,9 +632,6 @@ public class ECMSLocator {
   public static final String ELEMENT_GRID_LIST_CONTENT =
           ".//*[@class='uiListGrid']//*[text()='${file}']";
 
-  public static final String ELEMENT_PERSONAL_DOCUMENT_FILE_CHECKBOX =
-          ".//*[@id='UIDocumentNodeList']//span[text()='${file}']/../../..//span/input";
-
   // Space drive
   public static final String ELEMENT_SPACE_DRIVE_NODE_TREE_FILE =
           ".//*[@class='nodeGroup']//*[contains(text(),'${file}')]";
@@ -759,61 +640,10 @@ public class ECMSLocator {
   public static final String ELEMENT_PUBLICATION_STATUS =
           "//*[text()='${status}']/..//*[@class='node']";
   // View icons
-  public static final By ELEMENT_LIST_VIEW_ICON =
-          By.xpath("//*[@data-original-title = 'List']");
-
   public static final By ELEMENT_ADMIN_VIEW_ICON =
           By.xpath("//*[@data-original-title = 'Admin']");
 
-  public static final By ELEMENT_WEB_VIEW =
-          By.xpath("//*[@data-original-title = 'Web']");
-
-  public static final String ELEMENT_ITEM_VIEW =
-          "//*[@data-original-title = '$view']";
-
-  // Add new content
-  public static final String ELEMENT_SITE_EXPLORER_CONTENT_NAME =
-          ".//*[@id='UISelectDocumentForm']//i[@data-original-title='${nameContent}']";
-
-  // Share document to space
-  public static final By ELEMENT_SPACE_LIST =
-          By.xpath("//*[@id='DisplayModesDropDown']");
-
-  public static final String ELEMENT_SELECTED_SPACE =
-          "//*[@class='spaceList']//*[text()='${spaceName}']";
-
-  public static final String ELEMENT_SHARE_DOCUMENT_ACTION_BUTTON =
-          "//*[@class='uiActionBorder']//*[text()='${name}']";
-
-  public static final String ELEMENT_SHARE_DOCUMENT_CONTENT_IN_SPACE =
-          "//*[@class='author']//a[contains(text(),'${author}')]/..//*[contains(text(),'shared a document')]";
-
-  public static final By ELEMENT_SHARE_DOCUMENT_COMMENT =
-          By.xpath("//*[@id='DisplaytextAreaInput']");
-
-  public static final By ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER =
-          By.xpath(".//*[@id='UIDocumentInfo']//*[contains(text(),'Shared')]");
-
-  public static final String ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK =
-          "//*[@id='UIDocumentInfo']//*[contains(@symlink,'${spaceName}')]"
-                  + "/../../..//*[@class='uiThumbnailsView UIDocumentInfo']//*[contains(text(),'${fileName}')]";
-
-  public static final By ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE =
-          By.xpath(".//*[@id='ECMContextMenu']/div/ul/li[7]/a");
-
-  public static final String ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE_OPTION =
-          "//*[@class='uiAction uiActionBorder']//*[contains(text(),'${action}')]";
-
   // Notifications
-  public static final String ELEMENT_SHARE_DOCUMENT_CONTENT =
-          "//*[@class='author']//a[contains(text(),'${author}')]/..//*[contains(text(),'shared a document')]/../..//*[@class='dataInfor']//a[contains(text(),'${spaceName}')]";
-
-  public static final String ELEMENT_DOCUMENT_SELECTED_FOLDER =
-          "//*[@id='UIDocumentNodeList']//*[contains(text(),'${folderName}')]";
-
-  public static final String ELEMENT_DOCUMENT_SHARE_ACCESS_OPTION =
-          "//*[@class='accessSpaceMember clearfix']//*[contains(text(), 'Access:')]/..[contains(text(), 'Space Members')]/..//*[@id='permissionDropDown']//option[contains(text(), '${option}')]";
-
   public static final By ELEMENT_DOCUMENT_SHARE_CLOSE_BUTTON =
           By.xpath("(//*[@class='uiIconClose pull-right'])[1]");
 
