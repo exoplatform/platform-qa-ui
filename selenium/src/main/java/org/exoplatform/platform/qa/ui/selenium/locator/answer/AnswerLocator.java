@@ -128,18 +128,10 @@ public class AnswerLocator {
           "//*[@id='AdvanceSearchForm']//*[text()='Search']";
   public static final String          ELEMENT_ADVANCE_SEARCH_ADVANCE_CLOSE_BUTTON           =
           "//*[@id='AdvanceSearchForm']//*[text()='Close']";
-  public static final String          ELEMENT_QUESTION_ANSWER_LINK                          =
-          "//*[contains(text(),'$question')]/../../..//*[@class='questionAction']//*[contains(text(),'answer')]";
-  public static final By              ELEMENT_QUESTION_RESPONE_FORM                         =
-          By.xpath(".//*[@id='UIResponseForm']");
   // Manage question form
   public static final By              ELEMENT_MANAGE_QUESTION_FORM                          = By.id("FAQQuestionManagerment");
   public static final By              ELEMENT_MANAGE_QUESTION_FORM_OPEN_QUESTION_TAB        =
           By.xpath("//*[@data-toggle='tab' and text()='Open Questions']");
-  public static final String          ELEMENT_MANAGE_QUESTION_EDIT_QUESTION                 =
-          "//*[text()='$question']/..//*[@data-original-title='Edit']";
-  public static final String          ELEMENT_MANAGE_QUESTION_DELETE_QUESTION               =
-          "//*[text()='$question']/../..//*[@data-original-title='Delete']";
   public static final String          ELEMENT_MANAGE_QUESTION_ACTIVE_QUESTION_CHECKBOX      =
           "//*[text()='$question']/..//*[@data-original-title='Deactivate' or @data-original-title='Activate']//*[@id='allDay']";
   public static final By              ELEMENT_MANAGE_QUESTION_CLOSE_BUTTON                  =
@@ -150,12 +142,8 @@ public class AnswerLocator {
   public static final By              ELEMENT_SUBMIT_QUESTION_FORM_LANGUAGE_SELECT_BOX      = By.name("AllLanguages");
   public static final By              ELEMENT_SUBMIT_QUESTION_FORM_ATTACHMENT_BUTTON        =
           By.xpath("//*[@class='uiIconAttach uiIconLightGray']");
-  public static final By              ELEMENT_SUBMIET_QUESTION_APPROVE_CHECKBOX             = By.id("IsApproved");
-  public static final By              ELEMENT_SUBMIET_QUESTION_ACTIVE_CHECKBOX              = By.id("IsActivated");
   public static final By              ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON              =
           By.xpath("//*[@id='UIQuestionForm']//*[text()='Save']");
-  public static final By              ELEMENT_SUBMIT_QUESTION_FORM_CANCEL_BUTTON            =
-          By.xpath("//*[@id='UIQuestionForm']//*[text()='Cancel']");
   public static final By              ELEMENT_QUESTION_FILE_INPUT                           = By.xpath("//*[@name='file']");
   // Attach file form
   public static final By              ELEMENT_ATTACH_SAVE_BUTTON                            =
@@ -200,8 +188,6 @@ public class AnswerLocator {
           By.xpath("//*[@id='UIDeleteQuestion']//*[contains(text(),'Are you sure you want to delete this question and its answers?')]");
   public static final By              ELEMENT_QUESTION_DELETE_FORM_OK_BUTTON                =
           By.xpath("//*[@id='UIDeleteQuestion']//*[text()='OK']");
-  public static final By              ELEMENT_QUESTION_DELETE_FORM_CANCEL_BUTTON            =
-          By.xpath("//*[@id='UIDeleteQuestion']//*[text()='Cancel']");
   // Move question form
   public static final By              ELEMENT_QUESTION_MOVE_FORM                            = By.id("FAQMoveQuestion");
   // Send question form
@@ -229,8 +215,6 @@ public class AnswerLocator {
           "//*[@class='responseContainer']//*[contains(@id,'answer')]//*[text()='$answer']/../../../../..//*[@class='uiIconAnsLightGray uiIconAnsEnable']";
   // Delete
   public static final By              ELEMENT_ANSWER_DELETE_CONFIRM_POPUP                   = By.id("UIForumPopupConfirmation");
-  public static final By              ELEMENT_ANSWER_CONFIRM_DELETE                         =
-          By.xpath("//*[@id='UIForumPopupConfirmation']//*[contains(text(),'Are you sure you want to delete this answer ?')]");
   public static final By              ELEMENT_ANSWER_DELETE_FORM_OK_BUTTON                  =
           By.xpath("//*[@id='UIForumPopupConfirmation']//*[text()='OK']");
   public static final By              ELEMENT_SORT_BY_RATE                                  =
