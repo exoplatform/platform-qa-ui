@@ -286,6 +286,7 @@ public class CalendarManagement {
             .parent()
             .waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs)
             .find(ELEMENT_CALENDAR_ICON_SETTINGS_OF_CALENDAR)
+            .waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs)
             .click();
   }
 
