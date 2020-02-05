@@ -63,8 +63,6 @@ public class PlatformPermission {
     if (temp.length > 0) {
       for (int i = 0; i < temp.length; i++) {
         searchUser(temp[i], type);
-
-        // check((ELEMENT_USER_CHECKBOX.replace("${user}", temp[i])), 2);
         $(byXpath(ELEMENT_USER_CHECKBOX.replace("${user}", temp[i]))).parent().click();
         $(ELEMENT_ADD_USERS_BUTTON).click();
       }

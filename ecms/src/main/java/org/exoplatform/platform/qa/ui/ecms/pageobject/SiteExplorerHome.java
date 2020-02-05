@@ -3,34 +3,22 @@ package org.exoplatform.platform.qa.ui.ecms.pageobject;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_SELECT_USER_ICON1;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 import static org.junit.Assert.assertEquals;
-
-import java.util.ArrayList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
-import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.Dialog;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
-import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
-import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
-import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ManageFileTestBase;
 
@@ -813,16 +801,6 @@ public class SiteExplorerHome {
   }
 
   /**
-   * Open Admin view type
-   */
-  public void clickAdminView() {
-    info("Select a view type");
-    evt.waitForAndGetElement(ELEMENT_ADMIN_VIEW_ICON);
-    evt.click(ELEMENT_ADMIN_VIEW_ICON);
-
-  }
-
-  /**
    * Click on Delete button
    */
   public void clickDeleteButton() {
@@ -832,35 +810,6 @@ public class SiteExplorerHome {
     el.click();
     dialog.deleteInDialog();
 
-  }
-
-  /**
-   * Select all files in folder under admin view
-   */
-  public void selectAllFiles() {
-    info("Select all file");
-    WebElement el =
-                  (new WebDriverWait(testBase.getExoWebDriver().getWebDriver(),
-                                     30)).until(ExpectedConditions.presenceOfElementLocated(ELEMENT_SITE_EXPLORER_ALL_CHECKBOX));
-    if (evt.waitForAndGetElement(ELEMENT_DOCUMENT_LIST_ROW_CONTENT, 5000, 0) != null) {
-      info("check on the checkbox");
-      // el.click();
-      evt.clickByJavascript(el, 2);
-
-      info("Click on Delete button");
-      clickDeleteButton();
-    }
-
-  }
-
-  /**
-   * Share document
-   */
-  public void shareDocument() {
-    info("Click to share document");
-    if (evt.waitForAndGetElement(ELEMENT_ACTIONBAR_SHARE, 5000, 0) == null)
-      evt.click(ELEMENT_ACTIONBAR_MORE);
-    evt.click(ELEMENT_ACTIONBAR_SHARE);
   }
 
   /**

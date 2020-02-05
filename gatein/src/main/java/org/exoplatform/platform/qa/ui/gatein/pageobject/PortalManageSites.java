@@ -10,7 +10,6 @@ import static com.codeborne.selenide.Selenide.sleep;
 import static java.time.zone.ZoneRulesProvider.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
 import java.util.Map;
 import org.openqa.selenium.WebElement;
 import com.codeborne.selenide.Condition;
@@ -47,17 +46,6 @@ public class PortalManageSites {
   }
 
   /**
-   * Edit layout of a portal
-   *
-   * @param site String
-   */
-  public void goToEditLayout(String site) {
-    info("Click on Edit layout button");
-    evt.click(ELEMENT_MANAGESITES_EDIT_LAYOUT_ICON.replace("${site}", site));
-
-  }
-
-  /**
    * Go to Edit site configuration
    *
    * @param site String
@@ -77,41 +65,6 @@ public void goToDefaultSkin() {
     $((ELEMENT_ADD_NEW_PORTAL_POPUP_SAVE_BTN)).click();
     $(ELEMENT_ADD_NEW_PORTAL_POPUP_SAVE_BTN).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     refresh();
-  }
-
-  /**
-   * Select a group in permission selector popup
-   *
-   * @param groupsPath is path of groups as:Platform/Content Manangement
-   */
-  public void selectGroup(String groupsPath) {
-    info("Select a group with the path:" + groupsPath);
-    String[] groups = groupsPath.split("/");
-    for (String groupSelect : groups) {
-      info("Select group:" + groupSelect);
-      evt.click(ELEMENT_PERMISSION_SELECTOR_POPUP_GROUP.replace("${group}", groupSelect));
-    }
-
-  }
-
-  /**
-   * Select a membership of a group
-   *
-   * @param memberShip String
-   */
-  public void selectMemberShip(String memberShip) {
-    info("Select a membership:" + memberShip);
-    evt.click(ELEMENT_PERMISSION_SELECTOR_POPUP_MEMEBRSHIP.replace("${member}", memberShip));
-
-  }
-
-  /**
-   * Save all data when create a new portal
-   */
-  public void saveNewPortal() {
-    info("click on Save button");
-    evt.click(ELEMENT_ADD_NEW_PORTAL_POPUP_SAVE_BTN);
-
   }
 
   /**

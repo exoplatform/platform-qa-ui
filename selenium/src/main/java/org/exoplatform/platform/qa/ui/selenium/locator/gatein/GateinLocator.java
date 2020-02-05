@@ -65,15 +65,6 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   public static final String          ELEMENT_MANAGESITES_EDIT_CONFIG_ICON                    =
                                                                            ".//*[@class='managementBlock']//div[text()='${site}']/../..//*[contains(@class,'uiIconEditPortalConfig')]";
 
-  public static final By              ELEMENT_MANAGESITES_ADD_NEW_BTN                         =
-                                                                      By.cssSelector("#UISiteManagement .btn");
-
-  public static final By              ELEMENT_MANAGESITES_EDIT_LAYOUT_SITE_CONFIG_BTN         =
-                                                                                      By.cssSelector(".PageProfileIcon");
-
-  public static final String          ELEMENT_ADD_NAVIGATION_BUTTON                           =
-                                                                    "//*[contains(text(),'Add Navigation')]";
-
   // Navigation Management popup
   public static final By              ELEMENT_NAVIGATION_MANAGEMENT_POPUP_TITLE               =
                                                                                 By.xpath(".//*[@class='PopupTitle popupTitle'][text()='Navigation Management']");
@@ -88,25 +79,8 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   public static final SelenideElement  ELEMENT_LEFT_NAVIGATION_NODE_CHECK= $(byClassName("uiCompanyNavigations"));
 
   // Add new portal popup
-  public static final By              ELEMENT_ADD_NEW_PORTAL_POPUP_NAME                       = By.cssSelector("#name");
-
-  public static final By              ELEMENT_ADD_NEW_PORTAL_POPUP_LABEL                      = By.cssSelector("#label");
-
-  public static final By              ELEMENT_ADD_NEW_PORTAL_POPUP_DESC                       = By.cssSelector("#description");
-
   public static final By              ELEMENT_ADD_NEW_PORTAL_POPUP_SAVE_BTN                   =
                                                                             By.xpath(".//*[@id='UIPortalForm']//button[text()='Save']");
-
-  public static final By              ELEMENT_ADD_NEW_PORTAL_POPUP_PUBLIC_PERMISSION          = By.cssSelector("#publicMode");
-
-  public static final By              ELEMENT_ADD_NEW_PORTAL_POPUP_PERMISSION_TAB             =
-                                                                                  By.xpath(".//*[contains(@data-target,'#PermissionSetting-tab')]");
-
-  public static final By              ELEMENT_ADD_NEW_PORTAL_POPUP_EDIT_PERMISSITION_SETTINGS =
-                                                                                              By.xpath(".//*[contains(text(),'Edit Permission Settings')]");
-
-  public static final By              ELEMENT_ADD_NEW_PORTAL_POPUP_SELECT_PERMISSION_BTN      =
-                                                                                         By.xpath(".//*[contains(text(),'Select Permission')]");
 
   // Permission selector
   public static final String          ELEMENT_PERMISSION_SELECTOR_POPUP_GROUP                 =
@@ -188,9 +162,6 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   // Common
   public static final By              ELEMENT_PAGE_CREATION_WIZARD                            = By.id("UIPageCreationWizard");
 
-  public static final By              ELEMENT_SAVE_BTN_2                                      =
-                                                         By.xpath(".//*[@id='UIContainerForm']//*[text()='Save']");
-
   // Step 1
   public static final By              ELEMENT_PAGE_NAME_INPUT                                 = By.id("pageName");
 
@@ -217,26 +188,11 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
 
   public static final By              ELEMENT_APPLICATION_CONTENT_TAB                         = By.xpath("//*[@title='Content']");
 
-  public static final String          ELEMENT_APPLICATION_SUB_TAB                             =
-                                                                  ".//*[@id='UIApplicationList']//*[contains(@title,'${tabName}')]";
   // Container panel
   public static final By              ELEMENT_CONTAINER_TAB                                   = By.linkText("Containers");
 
-  public static final By              ELEMENT_SWITCH_VIEW_MODE                                = By.linkText("Switch View mode");
-
   public static final By              ELEMENT_VIEW_PROPERTIES                                 =
                                                               By.cssSelector(".PageProfileIcon");
-
-  // Container popup editor
-  public static final By              ELEMENT_CONTAINER_POPUP_TITLE                           = By.name("title");
-
-  public static final String          ELEMENT_CONTAINER_TITLE                                 =
-                                                              "//*[@class='UIRowContainer']//span[text()='${title}']";
-
-  public static final By              ELEMENT_CONTAINER_POPUP_WIDTH                           = By.name("width");
-
-  public static final By              ELEMENT_CONTAINER_POPUP_HEIGHT                          = By.name("height");
-
   // View properties popup
   public static final By              ELEMENT_VIEW_PROPERTIES_POPUP                           = By.cssSelector(".MaskContainer");
 
@@ -245,15 +201,6 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   public static final String          ELEMENT_EDIT_PERMISSION_SELECTOR_POPUP_GROUP            =
                                                                                    ".//*[@id='PermissionSelector']//*[contains(@class,'uiIconNode')][contains(@title,'${group}')]";
 
-  public static final String          ELEMENT_EDIT_PERMISSION_MOVE_APPS_SELECT                =
-                                                                               "//*[contains(@id,'UIListMoveAppsPermissionSelector')]//*[contains(@title,'${group}')]";
-
-  public static final String          ELEMENT_EDIT_PERMISSION_MOVE_CONTAINERS_SELECT          =
-                                                                                     "//*[contains(@id,'UIListMoveContainersPermissionSelector')]//*[contains(@title,'${group}')]";
-
-  public static final String          ELEMENT_ADD_PERMISSION_SELECTOR_POPUP_MEMEBRSHIP        =
-                                                                                       "//*[contains(@id,'UIListPermissionSelector')]//*[contains(@title,'${member}')]";
-
   public static final String          ELEMENT_EDIT_PERMISSION_SELECTOR_POPUP_MEMEBRSHIP       =
                                                                                         ".//*[@id='PermissionSelector']//*[contains(@title,'${member}')]";
 
@@ -261,12 +208,6 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
 
   public static final By              ELEMENT_VIEW_PROPERTIES_SAVE_BTN                        =
                                                                        By.xpath(".//*[@id='UIPageForm']//button[text()='Save']");
-
-  public static final String          ELEMENT_VIEW_PROPERTIES_GROUP_REMOVE_BTN                =
-                                                                               ".//*[@id='PermissionGrid']//*[contains(text(),'${group}')]/../..//*[contains(@class,'uiIconDelete')]";
-
-  public static final By              ELEMENT_VIEW_PROPERTIES_DELETE_EDIT_PERMISSION_BTN      =
-                                                                                         By.xpath(".//*[@id='UIPermissionSelector']//*[contains(text(),'Delete Permission')]");
 
   public static final By              ELEMENT_VIEW_PROPERTIES_PERMISSION_TAB                  =
                                                                              By.xpath(".//*[contains(@data-target,'#PermissionSetting-tab')]");
@@ -282,98 +223,14 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   public static final By              ELEMENT_PAGEEDITOR_FINISHBTN                            =
                                                                    By.xpath("//*[contains(@class,'uiIconSave')]");
 
-  public static final By              ELEMENT_SWITCH_VIEW_MODE_NAME_APPLICATION_CLASS         =
-                                                                                      By.xpath(".//*[contains(@class,'portletName')]");
-
-  public static final String          ELEMENT_APPLICATION_IN_LAYOUT_PAGE                      =
-                                                                         "//*[contains(@class,'LAYOUT-PORTLET')]//*[contains(text(),'${name}')]";
-
-  public static final String          ELEMENT_APPLICATION_EDIT_ICON                           =
-                                                                    "//span[contains(text(),'${name}')]/../../../..//*[contains(@class,'uiIconEdit')]";
-
-  public static final String          ELEMENT_APPLICATION_DELETE_ICON                         =
-                                                                      "//span[contains(text(),'${name}')]/../../../..//*[contains(@class,'uiIconTrash')]";
-
-  public static final By              ELEMENT_DROP_SOURCE_HAS_LAYOUT                          =
-                                                                     By.xpath("//div[@class='UIRowContainer EmptyContainer']");
-
-  public static final String          ELEMENT_DROP_SOURCE_HAS_LAYOUT_BY_NAME                  =
-                                                                             "//span[contains(text(),'${name}')]/../../../..//*[contains(@class,'UIRowContainer')]";
-
-  public static final By              ELEMENT_EDIT_CONTAINER_ICON                             =
-                                                                  By.xpath(".//*[@data-original-title='Edit Container']//*[contains(@class,'uiIconEdit')]");
-
-  public static final String          ELEMENT_EDIT_CONTAINER_ICON_BY_NAME                     =
-                                                                          "//span[contains(text(),'${name}')]/..//*[contains(@class,'uiIconEdit')]";
-
-  public static final String          ELEMENT_DELETE_CONTAINER_ICON_BY_NAME                   =
-                                                                            "//span[contains(text(),'${name}')]/..//*[contains(@class,'uiIconTrash')]";
-
-  public static final String          ELEMENT_APPLICATION_HOLDER_MOVE                         =
-                                                                      "//span[contains(text(),'${name}')]/..//*[contains(@class,'uiIconDragDrop')]";
-
-  public static final String          ELEMENT_DELETE_CONTAINER_ICON_BY_ID                     =
-                                                                          "//*[@id='${id}']//*[@data-original-title='Delete Container']";
-
-  public static final String          ELEMENT_DROP_SOURCE_HAS_LAYOUT_BY_ID                    =
-                                                                           ".//*[@class='UIRowContainer']//*[@id='${id}']";
-
-  // Application popup
-  public static final By              ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_TAB              =
-                                                                                 By.xpath(".//*[@id='tab-UIPortletForm']//*[contains(@data-target,'PortletSetting')]");
-
-  public static final By              ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_TITLE            = By.id("title");
-
-  public static final By              ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_WIDTH            = By.id("width");
-
-  public static final By              ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_HEIGHT           = By.id("height");
-
-  public static final By              ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_SAVE             = By.id("Save");
-
-  public static final By              ELEMENT_PAGEEDITOR_ACCESS_PUBLIC_CHECKBOX               =
-                                                                                By.xpath("//*[contains(@id,'UIListPermissionSelector')]//*[@id='publicMode']");
-
-  public static final By              ELEMENT_PAGEEDITOR_MOVE_APPS_PUBLIC_CHECKBOX            =
-                                                                                   By.xpath(".//*[contains(@id,'UIListMoveAppsPermissionSelector')]//*[@id='publicMode']");
-
-  public static final By              ELEMENT_PAGEEDITOR_MOVE_CONTAINERS_PUBLIC_CHECKBOX      =
-                                                                                         By.xpath("//*[contains(@id,'UIListMoveContainersPermissionSelector')]//*[@id='publicMode']");
-
-  // Edit properties of page
-  public static final String          ELEMENT_VIEW_PAGE_PROPERTIES                            =
-                                                                   ".//*[@id='UIPageEditor']//*[contains(text(),'View Page properties')]";
-
-  public static final By              ELEMENT_VIEWPAGE_PAGETITLE                              = By.id("title");
-
   public static final String          ELEMENT_PERMISSION_SETTING_TAB                          =
                                                                      "//*[@data-target='#PermissionSetting-tab']";
-
-  public static final String          ELEMENT_CONTAINER_PERMISSION_SETTING_TAB                =
-                                                                               "//*[@data-target='#UIContainerPermission-tab']";
 
   public static final String          ELEMENT_EDIT_PERMISSION_SETTING                         =
                                                                       ".//*[@id='PermissionSetting']//*[contains(text(),'Edit')]";
 
-  public static final String          ELEMENT_MOVE_APPS_PERMISSION_SETTING                    =
-                                                                           ".//*[@id='PermissionSetting']//a[contains(text(),'Move Apps')]";
-
-  public static final String          ELEMENT_MOVE_CONTAINERS_PERMISSION_SETTING              =
-                                                                                 ".//*[@id='PermissionSetting']//a[contains(text(),'Move Containers')]";
-
   public static final By          ELEMENT_SELECT_PERMISSION_BUTTON                        = By.xpath("//*[@id=\"UIPermissionSelector\"]/div[3]/a[2]");
 
-
-  public static final By              ELEMENT_EDIT_PORTLET_FORM_ADD_PERM_BTN                  =
-                                                                             By.xpath("//*[contains(@class,'uiIconAddUser')]");
-
-  public static final String          ELEMENT_SELECT_EDIT_GROUP_ITEM                          =
-                                                                     ".//*[@id='PermissionSelector']//*[@title='${group}']/i";
-
-  public static final String          ELEMENT_SELECT_EDIT_MEMBERSHIP_ITEM                     =
-                                                                          ".//*[@id='PermissionSelector']//*[@title='${membership}']";
-
-  public static final String          ELEMENT_SELECTED_EDIT_PERMISSION_MEMBERSHIP             =
-                                                                                  ".//*[@id='UIPermissionSelector']//*[contains(text(),'Membership')]/../*[contains(text(),'${membership}')]";
 
   /*************************************
    * PAGE EDITOR
@@ -381,31 +238,7 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   // Common
   public static final By              ELEMENT_EDIT_PORTLET_ICON                               =
                                                                 By.xpath("//*[@data-original-title='Edit Portlet']");
-
-  public static final String          ELEMENT_EDIT_PORTLET                                    =
-                                                           "//*[@data-original-title='Edit Portlet']/../*[contains(.,'${portlet}')]";
-
-  public static final String          ELEMENT_DELETE_PORTLET                                  =
-                                                             "//*[@data-original-title='Edit Portlet']/../*[contains(.,'${portlet}')]";
-
-  public static final String          ELEMENT_EDITOR_PAGE_APPLICATION_PORTLET                 =
-                                                                              ".//*[@class='portletLayoutDecorator'][contains(text(),'${name}')]";
-  // Application
-  public static final String          ELEMENT_EDIT_PORTLET_CATEGORY_APPLICATION_ARROW_RIGHT   =
-                                                                                            "//*[@title='$category']/*[contains(@class,'uiIconArrowRight')]";
-
-  public static final String          ELEMENT_EDIT_PORTLET_CATEGORY_APPLICATION_ARROW_DOWN    =
-                                                                                           "//*[@title='$category']/*[contains(@class,'uiIconArrowDown')]";
-
-  public static final String          ELEMENT_EDIT_PORTLET_APPLICATION_ID                     = "//*[contains(@id,'$portlet')]";
-
-  public static final String          ELEMENT_APPLICATION_NAME                                =
-                                                               "//*[@class='txtLeft'][contains(.,'$app')]";
-
   // Finish and Abort button
-  public static final By              ELEMENT_EDIT_PORTLET_FINISH                             =
-                                                                  By.xpath("//*[@data-original-title='Finish']");
-
   public static final By              ELEMENT_FRAME_CONTAIN_PORTLET                           =
                                                                     By.xpath("//div[contains(@id,'UIPortlet')]");
 
@@ -414,47 +247,18 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
                                                            ".//*[@id='${id}']/div/div[1]/div/div";
 
   /*************************************
-   * PORTAL BRANDING
-   ***************************************************************/
-  public static final By              ELEMENT_UPLOAD_LINK                                     = By.name("file");
-
-  // Button
-
-  public static final By              ELEMENT_BUTTON_UPLOAD                                   = By.xpath("//*[@id='btUpload']");
-
-  /*************************************
    * PORTAL GROUP NAVIGATION
    ***************************************************************/
-  public static final String          ELEMENT_GROUP_SELECT_ADD_NAVIGATION                     =
-                                                                          "//*[contains(text(),'${groupName}')]/..//a[contains(text(),'Add Navigation')]";
-
   public static final By              ELEMENT_CANCEL_BUTON                                    = By.linkText("Cancel");
 
   public static final String          ELEMENT_GROUP_NAME                                      =
                                                          ".//*[@id='UIGroupNavigationGrid']//*[contains(text(),'${groupName}')]";
 
-  public static final String          ELEMENT_DELETE_NAVIGATION_ICON                          =
-                                                                     "//*[contains(text(),'${groupName}')]/../..//i[@class='uiIconTrash uiIconLightGray']";
-
-  public static final String          ELEMENT_EDIT_PROPERTIES_ICON                            =
-                                                                   "//*[text()='${groupName}']/../..//*[@class='uiIconEditPortalConfig uiIconLightGray']";
-
-  public static final String          ELEMENT_GROUP_NAVIGATION_PRIORITY                       = "//*[@name='priority']";
-
   public static final String          ELEMENT_SAVE_BTN                                        = "//*[text()='Save']";
-
-  public static final String          ELEMENT_EDIT_NAVIGATION                                 =
-                                                              "//*[text()='${groupName}']/../..//i[@class='uiIconNavigation uiIconLightGray']";
-
-  public static final String          ELEMENT_TITLE_NAVIGATION_MANAGEMENT                     =
-                                                                          "//*[text()='Navigation Management']";
 
   /*************************************
    * PORTAL MANAGE PAGES
    ***************************************************************/
-  public static final By              ELEMENT_MANAGEPAGES_TITLE                               =
-                                                                By.xpath(".//*[text()='Manage Pages']");
-
   public static final By              ELEMENT_MANAGEPAGES_TITLE_FIELD                         = By.id("pageTitle");
 
   public static final By              ELEMENT_MANAGEPAGES_SITES_NAME_FIELD                    = By.id("siteName");
@@ -489,11 +293,6 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
 
   public static final By              ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_TYPE_DROPBOX     =
                                                                                           By.xpath(".//*[@name='ownerType']");
-
-  // Search Page
-
-  public static final String          ELEMENT_SELECT_SEARCH_OPTION                            =
-                                                                   "//*[@class='selectbox' and @name='searchOption']";
 
   /*************************************
    * PORTAL MANAGE SITES
@@ -552,9 +351,6 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   public static final String          ELEMENT_NEW_PORTAL_SWITCH                               =
                                                                 "//img[contains(@src, 'sites/${portalName}')]";
 
-  public static final By              ELEMENT_NEW_PORTAL_LOGOUT                               =
-                                                                By.xpath("//*[@id='AcmeWebSiteLogInLogOut']");
-
   public static final String          ELEMENT_USER_DELETE_ICON                                =
                                                                ".//*[contains(text(),'${username}')]/../..//*[@data-original-title='Delete User']/i";
 
@@ -572,10 +368,6 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   public static final SelenideElement ELEMENT_BTN_USER_TAB                                    =
                                                            $(byXpath("//*[@id=\"UIOrganizationPortlet\"]/div[2]/div[1]/ul/li[1]/a"));
 
-  public static final String          ELEMENT_SEARCH_ICON_USERS_MANAGEMENT                    =
-                                                                           "//*[contains(@title,'Quick Search')]";
-
-
   // message
   public static final String          ELEMENT_MSG_CHANGE_PASS_WORD                            = "The password has been changed.";
 
@@ -591,17 +383,8 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   /*************************************
    * USER AND GROUP MANAGEMENT
    ***************************************************************/
-  public static final String          ELEMENT_USER_MANAGEMENT_TAB                             =
-                                                                  "//a[contains(@class,'actionIcon userButton')]/i";
-
   public static final String          ELEMENT_GROUP_MANAGEMENT_SELECT_GROUP                   =
                                                                             ".//*[@class='groupNavigationContainer']//*[contains(@title,'${name}')]";
-
-  public static final String          ELEMENT_TAB_MEMBERSHIP_MANAGEMENT                       =
-                                                                        "//a[contains(@class,'actionIcon membershipButton')]/i";
-
-  public static final String          ELEMENT_MEMBERSHIP_MANAGEMENT_GRID                      =
-                                                                         "//*[contains(text(), 'Add/Edit Membership')]";
 
   public static final By              ELEMENT_INPUT_GROUP_NAME                                = By.id("groupName");
 
@@ -617,23 +400,8 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
 
   public static final By              ELEMENT_GROUP_SEARCH_USER_SEARCH_INPUT                  = By.id("Quick Search");
 
-  public static final String          ELEMENT_GROUP_SEARCH_USER_OPTION                        =
-                                                                       "//*[@class='selectbox' and @name='filter']";
-
-  public static final String          ELEMENT_GROUP_SEARCH_USER_SEARCH_ICON                   =
-                                                                            ".//*[@data-original-title='Quick Search']/i";
-
   public static final String          ELEMENT_ADDED_GROUP_USER_IN_TABLE                       =
                                                                         "//*[@id='UIGridUser']//span[contains(text(),'${username}')]";
-
-  public static final String          ELEMENT_ADDED_GROUP_USER_IN_TABLE1                      =
-                                                                         "//*[@id='UIGridUser']//span[contains(text(),'$mem')]/../../*[@headers='userName']/*[contains(.,'$user')]";
-
-  public static final String          ELEMENT_EDIT_USER_MEM_IN_TABLE_ICON                     =
-                                                                          "//*[@headers='userName']/*[contains(.,'$user')]/../..//*[contains(@class,'uiIconEdit')]";
-
-  public static final String          ELEMENT_EDIT_USER_MEM_FORM                              =
-                                                                 "//*[contains(@class,'UIGroupEditMembershipForm')][contains(.,'$mem')]";
 
   public static final String          ELEMENT_SELECT_MEMBERSHIP                               =
                                                                 "//*[@class='selectbox' and @name='membership']";
@@ -641,28 +409,10 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   public static final By              ELEMENT_SAVE_BUTTON_2                                   =
                                                             By.xpath(".//*[@id='UIGroupMembershipForm']//*[contains(@class,'btn')]");
 
-  public static final String          ELEMENT_MEMBERSHIP_EDIT_ICON                            =
-                                                                   "//span[contains(text(),'${membership}')]/../..//*[contains(@data-original-title,'Edit Membership')]/i";
-
-  public static final String          ELEMENT_MEMBERSHIP_DELETE_ICON                          =
-                                                                     "//span[contains(text(),'${membership}')]/../..//*[contains(@data-original-title,'Delete Membership')]/i";
-
   public static final SelenideElement          ELEMENT_GROUP_SEARCH_USER_SEARCH                  =
                                                                             $(byXpath("//a[@data-original-title='Quick Search']"));
 
   public static final String          ELEMENT_USER_NOT_FOUND                                  = "User ${user}not found in group";
-
-  /*************************************
-   * PORTAL MANAGEMENT
-   ***************************************************************/
-  public static final String          ELEMENT_MEMBERSHIHP                                     =
-                                                          "//*[@id='UIGrid']//span[text()='${membershipName}']";
-
-  public static final String          ELEMENT_MEMBERSHIP_DESCRIPTION                          =
-                                                                     "//*[@id='UIGrid']//span[text()='$des']/../../*[@headers='name']/*[contains(.,'$mem')]";
-
-  public static final String          ELEMENT_MEMBERSHIP_INPUT                                =
-                                                               "//input[@value='${membershipName}']";
 
   // Paging control
   public static final By              ELEMENT_PAGINATION_CONTROL                              =
@@ -678,9 +428,6 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
                                                                             By.xpath(".//*[@ data-original-title='Next Page']//*[@class='uiIconNextArrow']");
 
   // User tab
-  public static final String          ELEMENT_USER_TAB                                        =
-                                                       ".//*[@id='UIOrganizationPortlet']//*[contains(@class,'uiIconUser uiIconLightGray')]";
-
   public static final String          ELEMENT_USER_DELETE_ICON1                               =
                                                                 "//*[@data-original-title='Delete User']/i";
 
@@ -690,17 +437,8 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   // message
   public static final String          ELEMENT_MSG_TOTAL_PAGES                                 = "Total pages";
 
-  public static final String          ELEMENT_MSG_CONFIRM_DELETE_MEMBERSHIP                   =
-                                                                            "Are you sure you want to delete this membership?";
 
   public static final String          ELEMENT_MSG_CONFIRM_DELETE1                             = "Are you sure you want to delete";
-
-
-  public static final By              ELEMENT_OK_BUTTON                                       =
-                                                        By.xpath("//*[contains(text(),'OK')]");
-
-  public static final String          ELEMENT_MSG_CANNOT_DELETE                               =
-                                                                "You cannot delete this membership because it is mandatory.";
 
   // Edit user profile Tab
   public static final By              ELEMENT_USER_PROFILE_TAB                                =
@@ -724,48 +462,6 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   public static final By              ELEMENT_JOB_TITLE                                       = By.id("user.jobtitle");
 
   public static final By              ELEMENT_LANGUAGE                                        = By.name("user.language");
-
-  // Group management
-  public static final String          ELEMENT_USER_REMOVE_MEMBER_ICON                         =
-                                                                      ".//*[contains(text(),'${userName}')]/../..//*[contains(@class,'uiIconDeleteUser')]";
-
-  // Disable Users
-  public static final String          ELEMENT_DISABLE_USER_HANDLE_BTN                         =
-                                                                      ".//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[contains(@class,'switchBtnHandle')]";
-
-  public static final String          ELEMENT_DISBALE_USER_ENABLED                            =
-                                                                   ".//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[@data-original-title='Disable User']";
-
-  public static final String          ELEMENT_DISBALE_USER_DISABLED                           =
-                                                                    ".//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[@data-original-title='Enable User']";
-
-  public static final By              ELEMENT_DISABLE_USER_COLUMN                             =
-                                                                  By.xpath(".//th[@id='DisableEnableUser'][contains(.,'Enabled')]");
-
-  public static final By              ELEMENT_DISABLE_USER_STATUS_DISABLED                    =
-                                                                           By.xpath("//*[@id='UIListUsers-userStatusFilter']/*[contains(.,'Disabled')]");
-
-  public static final By              ELEMENT_DISABLE_USER_STATUS_ALL                         =
-                                                                      By.xpath("//*[@id='UIListUsers-userStatusFilter']/*[contains(.,'All')]");
-
-  public static final String          ELEMENT_DISABLE_USER_STATUS_SELECTED                    =
-                                                                           "//*[@id='UIListUsers-userStatusFilter']/*[contains(.,'$status')][@selected='selected']";
-
-  public static final String          ELEMENT_DISABLE_USER_TOGGLE_NO                          =
-                                                                     "//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[contains(@class,'switchBtnLabelOff')]//*[contains(text(),'No')]";
-
-  public static final String          ELEMENT_DISABLE_USER_TOGGLE_YES                         =
-                                                                      "//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[contains(@class,'switchBtnLabelOn')]//*[contains(text(),'Yes')]";
-
-  // Social networks tab
-  public static final By              ELEMENT_USER_SOCIAL_NETWORKS_TAB                        =
-                                                                       By.xpath("//*[@data-target='#UIAccountSocial-tab']");
-
-  public static final By              ELEMENT_EDITING_CONTAINER_POPUP                         =
-                                                                      By.xpath("//*[@id='UIMaskWorkspace']//*[contains(text(),'Container Setting')]");
-
-  public static final String          ELEMENT_PERMISSION_SELECTOR_BUTTON                      =
-                                                                         ".//*[@class='uiAction uiActionBorder']//*[contains(text(),'Permission Selector')]";
 
   /*************************************
    * CONTENT DETAIL

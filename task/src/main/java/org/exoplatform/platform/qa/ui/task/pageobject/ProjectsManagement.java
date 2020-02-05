@@ -4,9 +4,7 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
 import com.codeborne.selenide.Condition;
-
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -23,15 +21,6 @@ public class ProjectsManagement {
   public ProjectsManagement(TestBase testBase) {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
-  }
-
-  /**
-   * Open Context menu of a given project
-   *
-   * @param project is a project's name in the list
-   */
-  public void goToContMenuGivenProject(String project) {
-    info("Right click on a project in the list");
   }
 
   /**
@@ -52,7 +41,6 @@ public class ProjectsManagement {
     }
     if (des != null || des != "") {
       info("Input description");
-      // $(ELEMENT_ADD_PROJECT_DES).setValue(des);
     }
     if (enableCalendar) {
       info("Enable Calendar intergration");

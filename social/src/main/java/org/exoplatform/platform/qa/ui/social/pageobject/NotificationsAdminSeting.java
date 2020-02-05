@@ -5,7 +5,6 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocat
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import org.openqa.selenium.By;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
@@ -364,12 +363,4 @@ public class NotificationsAdminSeting {
   public enum notificationType {
     NewUser_email, NewUser_intranet, ConnectionRequest_email, ConnectionRequest_intranet, AS_Comment_email, AS_Comment_intranet, AS_Like_email, AS_Like_intranet, AS_Mention_email, AS_Mention_intranet, AS_Post_email, AS_Post_intranet, Space_Invitation_email, Space_Invitation_intranet, Space_Join_email, Space_Join_intranet, Space_Post_email, Space_Post_intranet,Edit_Activity,Edit_Comment;
   }
-
-  /**
-   * Define notification plugin is disable all
-   */
-  public enum notiMode {
-    NewUser, ConnectionRequest, AS_Comment, AS_Like, AS_Mention, AS_Post, Space_Invitation, Space_Join, Space_Post;
-  }
-
 }

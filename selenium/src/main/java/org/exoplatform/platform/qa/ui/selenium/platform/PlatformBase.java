@@ -24,17 +24,12 @@ import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Set;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.exoplatform.platform.qa.ui.selenium.user.UserDatabase;
 
 public class PlatformBase {
 
@@ -235,13 +230,6 @@ public class PlatformBase {
    */
   public enum selectInvitationOption {
     ALWAYS, NEVER, ASK
-  }
-
-  /**
-   * Arrow option
-   */
-  public enum selectArrowOption {
-    NEXT, PREVIOUS, NOW
   }
 
   /**

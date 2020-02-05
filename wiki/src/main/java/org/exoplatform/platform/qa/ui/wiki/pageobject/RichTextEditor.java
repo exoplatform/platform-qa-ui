@@ -6,9 +6,6 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-import java.awt.event.KeyEvent;
-import java.io.File;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -16,7 +13,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
@@ -43,15 +39,6 @@ public class RichTextEditor {
     this.but = new Button(testBase);
     this.plf = new PlatformBase(testBase);
     this.wikiManagement = new WikiManagement(testBase);
-  }
-
-  /**
-   * Click on Insert Macro button
-   */
-  public void clickInsertMacroBtn() {
-    info("Click on Insert Macro button");
-    evt.click(ELEMENT_CREATE_MACRO_BUTTON);
-    evt.waitForElementNotPresent(ELEMENT_CREATE_MACRO_BUTTON);
   }
 
   /**
