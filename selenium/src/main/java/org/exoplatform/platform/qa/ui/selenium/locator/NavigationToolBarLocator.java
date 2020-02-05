@@ -68,14 +68,6 @@ public final class NavigationToolBarLocator {
   public static final By              ELEMENT_NO_NOTIFICATIONS                            =
                                                                By.xpath(".//*[@id='NotificationPopup']//*[@class='no-items' and text()='No notifications']");
 
-  // administration Menu
-  // users
-  public static final By              ELEMENT_ADMINISTRATION_USERS                        =
-                                                                   By.xpath("//*[contains(@href,'g/:platform:administrators/administration/newStaff') and text()='Community']");
-
-  public static final By              ELEMENT_GROUP_AND_ROLE_LINK                         =
-                                                                  By.xpath(".//*[@id='UISetupPlatformToolBarPortlet']//a[contains(@href,'management')]");
-
   // administration-->Portal
   public static final By              ELEMENT_ADMINISTRATION_PORTAL                       = By.xpath("//*[text()='Portal']");
 
@@ -156,9 +148,6 @@ public final class NavigationToolBarLocator {
   public static final By              ELEMENT_ACTIVITIES_PORTLET                          = By.id("UIUserActivityStreamPortlet");
 
   // administration-->Application
-  public static final By              ELEMENT_ADMINISTRATION_APPLICATION                  =
-                                                                         By.xpath(".//*[text()='Applications']");
-
   public static final By              ELEMENT_ADD_TOOTLBAR                                =
                                                            By.xpath("//*[@id='UICreatePlatformToolBarPortlet']//*[@class='uiIconPLF24x24Add']");
 

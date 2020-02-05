@@ -27,10 +27,6 @@ import org.openqa.selenium.By;
  */
 public final class PlatformLocator {
 
-  // Gmail
-  public static final String ELEMENT_GMAIL_CONTENT                =
-                                                   ".//span[contains(.,'\"${title}\" page was modified') or contains(.,'${title}')]";
-
   // page navigation
   public static final By     ELEMENT_NEXT_PAGE                    = By.xpath("//*[@class='uiIconNextArrow']");
 
@@ -77,7 +73,5 @@ public final class PlatformLocator {
   // Social NETWORK account
   public static final    By  ELEMENT_SOURCE_CONTENT          = By.className("cke_button_label");
   public static final    By  ELEMENT_CONTENT          = By.className("cke_source ");
-  public static final    By  ELEMENT_WEB_CONTENT          = By.id("UITabContent");
-
 
 }

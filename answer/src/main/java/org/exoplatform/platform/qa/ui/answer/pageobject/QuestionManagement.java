@@ -2,7 +2,6 @@ package org.exoplatform.platform.qa.ui.answer.pageobject;
 
 import static com.codeborne.selenide.Condition.attribute;
 
-
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;

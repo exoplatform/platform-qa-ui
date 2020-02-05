@@ -228,26 +228,6 @@ public class ManageFileTestBase {
   }
 
   /**
-   * function delete file in folder test output
-   *
-   * @param file file name
-   */
-  public void deleteFile(String file) {
-    String fs = File.separator;
-    String pathFile = System.getProperty("user.dir") + "/src/main/resources/TestData/" + file;
-    pathFile = pathFile.replace("/", fs).replace("\\", fs);
-    File Files = new File(pathFile);
-    if (checkFileExisted(file)) {
-      Files.setWritable(true);
-      Files.delete();
-    }
-    if (checkFileExisted(file) == false) {
-      Logger.info("Delete file successfully");
-    } else
-      Logger.info("Have error when delete file");
-  }
-
-  /**
    * This function returns a absolute path from a relative path
    *
    * @param relativeFilePath String

@@ -5,10 +5,8 @@ import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -60,9 +58,7 @@ public class PortalGroupNavigation {
 
     /*
      * info("Delete navigation of group " + groupName);
-     * $(ELEMENT_DELETE_NAVIGATION_ICON.replace("${groupName}", groupName)).click();
-     * alert.acceptAlert(); $(ELEMENT_DELETE_NAVIGATION_ICON.replace("${groupName}",
-     * groupName)).waitUntil(Condition.disappears,10000);
+     *
      */
     $(byText(groupName)).parent().find(byXpath("//*[@id=\"UIGroupNavigationGrid\"]/table[1]/tbody/tr[1]/td[4]/a")).click();
     alert.acceptAlert();

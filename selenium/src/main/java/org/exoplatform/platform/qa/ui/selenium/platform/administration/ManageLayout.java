@@ -2,8 +2,6 @@ package org.exoplatform.platform.qa.ui.selenium.platform.administration;
 
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;

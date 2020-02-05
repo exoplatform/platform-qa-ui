@@ -5,17 +5,10 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.interactions.Actions;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
-
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -246,7 +239,6 @@ public class PageCreationWizard {
 
       $(ELEMENT_VIEW_PROPERTIES_PERMISSION_TAB).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
       if (isAccessPermision == true) {
-        // evt.click(ELEMENT_VIEW_PROPERTIES_ADD_PERMISSION_BTN);
         $(ELEMENT_VIEW_PROPERTIES_ADD_PERMISSION_BTN).click();
         info("Select a group");
         selectGroup(groupsPath);
@@ -290,8 +282,6 @@ public class PageCreationWizard {
     String[] groups = groupsPath.split("/");
     for (String groupSelect : groups) {
       info("Select group:" + groupSelect);
-      // evt.click(ELEMENT_ADD_PERMISSION_SELECTOR_POPUP_GROUP.replace("${group}",
-      // groupSelect), 0, true);
       $(byXpath("(//*[@title='${groupSelect}'])[1]".replace("${groupSelect}",groupSelect))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
 
@@ -319,8 +309,6 @@ public class PageCreationWizard {
    */
   public void selectMemberShip(String memberShip) {
     info("Select a membership:" + memberShip);
-    // evt.click(ELEMENT_ADD_PERMISSION_SELECTOR_POPUP_MEMEBRSHIP.replace("${member}",
-    // memberShip), 0, true);
     $(byText(memberShip)).click();
 
   }
