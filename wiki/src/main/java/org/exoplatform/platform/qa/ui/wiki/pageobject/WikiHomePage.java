@@ -179,14 +179,6 @@ public class WikiHomePage {
     }
 
     /**
-     * Open permission tab
-     */
-    public void openPermTab() {
-        info("Open Permission tab");
-        $(ELEMENT_WIKI_SETTING_PERM_TAB).click();
-    }
-
-    /**
      * Open permissions for the wiki
      */
     public void goToPermissions() {
@@ -274,34 +266,6 @@ public class WikiHomePage {
     }
 
     /**
-     * Public a page from infor bar or More menu
-     *
-     * @param opParams Boolean
-     */
-    public void publicPage(Boolean... opParams) {
-        info("Make Public page");
-        Boolean useRestrictLink = (Boolean) (opParams.length > 0 ? opParams[0] : false);
-        if (useRestrictLink) {
-            $(ELEMENT_RESTICT_WIKI_ICON).waitUntil(Condition.visible, Configuration.timeout);
-            $(ELEMENT_RESTICT_WIKI_ICON).click();
-        } else {
-            goToPermalink();
-        }
-        $(ELEMENT_MAKE_PUBLIC_BUTTON).click();
-        $(ELEMENT_MAKE_RESTRICT_BUTTON).waitUntil(Condition.visible, Configuration.timeout);
-        dialog.closeMessageDialog();
-    }
-
-    /**
-     * Gets a permanent link by a given value.
-     *
-     * @return The value.
-     */
-    public String getPermalink() {
-        return evt.getValue(ELEMENT_PERMALINK_TEXT);
-    }
-
-    /**
      * Close permalink popup
      */
     public void closePermalinkPopup() {
@@ -318,22 +282,6 @@ public class WikiHomePage {
     public void goToAttachFiles(String number) {
         info("Click attach file link");
         $(byXpath(ELEMENT_PAGE_ATTACHFILE_NUMBER.replace("${number}", number))).click();
-    }
-
-    /**
-     * Delete attach file in View mode in Wiki Homepage or in edit mode when editing
-     * a wiki page
-     *
-     * @param fileName String
-     */
-    public void DeleteAttachFiles(String fileName) {
-        info("Delete attach files");
-
-        if (evt.waitForAndGetElement(ELEMENT_PAGE_DELETEATTACHFILE_VIEW_MODE.replace("${fileName}", fileName), 5000, 0) != null) {
-            $(ELEMENT_PAGE_DELETEATTACHFILE_VIEW_MODE.replace("${fileName}", fileName)).click();
-        } else {
-            $(ELEMENT_PAGE_DELETEATTACHFILE_VIEW_MODE_2.replace("${fileName}", fileName)).click();
-        }
     }
 
     /**
@@ -393,15 +341,6 @@ public class WikiHomePage {
     }
 
     /**
-     * Close space switcher of move page popup by clicking on outside
-     */
-    public void closeSpaceSwitcherMovePopupByClickOutside() {
-        info("Click on outside to close space switcher");
-        $(ELEMENT_SPACE_SWITCHER_OUTSIDE).click();
-        $(ELEMENT_SPACE_SWITCHER_INPUT_MOVE_PAGE_POPUP).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
-    }
-
-    /**
      * Open Page information
      * @param wiki String
      */
@@ -451,49 +390,5 @@ public class WikiHomePage {
         $(ELEMENT_INFOR_BAR_VIEW_CHANGE_LINK).click();
         info("Verify that compare version page is shown");
         evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_COMPARE_VERSION_TITLE);
-    }
-
-    /**
-     * Export a Wiki Page
-     */
-    public void exportWikiPage() {
-        info("Export a Wiki Page");
-        $(ELEMENT_MORE_LINK).click();
-        $(ELEMENT_PDF_LINK).click();
-    }
-
-    /**
-     * Go to Move page form
-     */
-    public void goToMovePageForm() {
-        info("Go to Move page form");
-        info("Click on More link");
-        $(ELEMENT_MORE_LINK).click();
-        info("Click on Move page link");
-        if (evt.waitForAndGetElement(ELEMENT_MOVE_PAGE, 5000, 0) == null) {
-            evt.mouseOverAndClick(ELEMENT_MOVE_PAGE);
-        } else {
-            $(ELEMENT_MOVE_PAGE).click();
-        }
-    }
-
-    public void cancelPermissions() {
-        info("Permissions page");
-        $(ELEMENT_CANCEL_PERMISSION).click();
-    }
-
-    /**
-     * Go to Export a page
-     */
-    public void goToExportPage() {
-        info("Go to Export a page");
-        info("Click on More link");
-        $(ELEMENT_MORE_LINK).click();
-        info("Click on Move page link");
-        if (evt.waitForAndGetElement(ELEMENT_PDF_LINK, 5000, 0) == null) {
-            evt.mouseOverAndClick(ELEMENT_PDF_LINK);
-        } else {
-            $(ELEMENT_PDF_LINK).click();
-        }
     }
 }

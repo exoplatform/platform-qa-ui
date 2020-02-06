@@ -21,15 +21,11 @@
 package org.exoplatform.platform.qa.ui.selenium;
 
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.error;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
 import java.util.*;
 
 import javax.imageio.ImageIO;
@@ -80,98 +76,6 @@ public class Utils {
   }
 
   /**
-   * Simulating keyboard presses
-   *
-   * @param firstKey send the first key (type: KeyEvent)
-   * @param params send the second key (type: KeyEvent)
-   */
-  public static void javaSimulateKeyPress(int firstKey, Object... params) {
-    int secondKey = (Integer) (params.length > 0 ? params[0] : KeyEvent.VK_ENTER);
-    int thirdKey = (Integer) (params.length > 1 ? params[1] : KeyEvent.VK_ENTER);
-    try {
-      Robot robot = new Robot();
-      // Simulate a key press
-      robot.keyPress(firstKey);
-      if (params.length > 0)
-        robot.keyPress(secondKey);
-      if (params.length > 1)
-        robot.keyPress(thirdKey);
-      if (params.length > 0)
-        robot.keyRelease(secondKey);
-      robot.keyRelease(firstKey);
-      if (params.length > 1)
-        robot.keyRelease(thirdKey);
-
-    } catch (AWTException e) {
-      e.printStackTrace();
-    }
-  }
-
-  /**
-   * ipV4 of local machine
-   *
-   * @return ipV4 of local machine
-   */
-  public static String getIPOfLocal() {
-    info("Get IP of localhost");
-    String interName = "";
-    Map<String, String> inter = getInterfaces();
-    for (String key : inter.keySet()) {
-      if (key.contains("eth")) {
-        interName = inter.get(key);
-        break;
-      }
-    }
-    info(interName);
-    return interName;
-  }
-
-  /**
-   * map of interface name and Ip of local machine
-   *
-   * @return map of interface name and Ip of local machine
-   */
-  public static Map<String, String> getInterfaces() {
-    Map<String, String> inter = new HashMap<String, String>();
-    String IP = "";
-    try {
-      Enumeration<NetworkInterface> e = NetworkInterface.getNetworkInterfaces();
-
-      while (e.hasMoreElements()) {
-        NetworkInterface ni = (NetworkInterface) e.nextElement();
-        info("Net interface: " + ni.getName());
-
-        Enumeration<InetAddress> e2 = ni.getInetAddresses();
-        while (e2.hasMoreElements()) {
-          InetAddress ip = (InetAddress) e2.nextElement();
-          if (!ip.isLinkLocalAddress()) {
-            IP = ip.getHostAddress();
-          }
-        }
-        info("IP address: " + IP.toString());
-        inter.put(ni.getName(), IP.toString());
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return inter;
-  }
-
-  /**
-   * This function returns a absolute path from a relative path that get from
-   * excel file
-   *
-   * @param relativeFilePath String
-   * @return absolutePath
-   */
-  public static String getAbsoluteFilePathFromFile(String relativeFilePath) {
-    String curDir = System.getProperty("user.home");
-    String absolutePath = curDir + relativeFilePath;
-    info("absolutePath:" + absolutePath);
-    return absolutePath;
-  }
-
-  /**
    * get random string
    *
    * @return random string
@@ -201,21 +105,5 @@ public class Utils {
       sb.append(c);
     }
     return sb.toString();
-  }
-
-  /**
-   * Create a String list by size
-   *
-   * @param name is the name of array's members
-   * @param size int
-   * @return value
-   */
-  public static ArrayList<String> getListData(String name, int size) {
-    ArrayList<String> array = new ArrayList<String>();
-    for (int i = 1; i < size; i++) {
-      String item = name + " " + String.valueOf(i);
-      array.add(item);
-    }
-    return array;
   }
 }

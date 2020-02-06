@@ -7,7 +7,6 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 
 import com.codeborne.selenide.Condition;
 
@@ -101,39 +100,12 @@ public class WikiSettingPage {
   }
 
   /**
-   * Open template tab
-   */
-  public void goToTemplateTab() {
-    info("click on the template tab");
-    evt.click(ELEMENT_WIKI_SETTING_TEMPLATE_TAB);
-
-  }
-
-  /**
-   * Open Permission tab
-   */
-  public void goToPermissionTab() {
-    info("Click on Permission tab");
-    evt.click(ELEMENT_WIKI_SETTING_PERMISSION_TAB);
-
-  }
-
-  /**
    * Save all changes for the template
    */
   public void saveTemplate() {
     info("Click on Save template");
     $(ELEMENT_SAVE_TEMPLATE).click();
     $(ELEMENT_SAVE_TEMPLATE).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
-  }
-
-  /**
-   * Cancel all changes for the template
-   */
-  public void cancelTemplate() {
-    info("Click on Cancel template");
-    evt.click(ELEMENT_CANCEL_TEMPLATE);
-
   }
 
   /**
