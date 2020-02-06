@@ -22,7 +22,6 @@ package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_NEXT_PAGE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME;
@@ -339,60 +338,8 @@ public class UserAndGroupManagement {
     $(byXpath(ELEMENT_CLOSE_MESSAGE)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
-  /**
-   * Find a user by clicking next arrow
-   *
-   * @param user String
-   */
-  public void findUsersBbyNextArrow(String user) {
-    if (evt.waitForAndGetElement(ELEMENT_PAGINATION_CONTROL, 2000, 0) != null) {
-      int totalPage = Integer.parseInt(evt.waitForAndGetElement(ELEMENT_PAGINATION_TOTAL_PAGE).getText());
-      // if not found user
-      if (evt.waitForAndGetElement(ELEMENT_USER_DELETE_ICON.replace("${username}", user), 2000, 0) == null) {
-        // click on next arrow
-        for (int i = 0; i < totalPage; i++) {
-          info("Click on Next arrow");
-          evt.click(ELEMENT_PAGINATION_ENABLED_NEXT_ARROW);
-          // if found the user, break the loop
-          if (evt.waitForAndGetElement(ELEMENT_USER_DELETE_ICON.replace("${username}", user), 2000, 0) != null)
-            break;
-          // if next arrow is disabled, break the loop
-          if (evt.waitForAndGetElement(ELMEMENT_PAGINATION_CONTROL_DISBALED_NEXT_ARROW, 2000, 0) != null)
-            break;
-        }
-      }
-    }
-  }
-
   // ************************************************DISABLE
   // USERS***********************************//
-
-  /**
-   * Select an option in Disable User drop list
-   *
-   * @param option is a value as :ENABLED,DISABLED OR ALL
-   */
-  public void selectDisableStatus(String option) {
-    info("---Select status----");
-    if (!option.isEmpty()) {
-      evt.select(GateinLocator.ELEMENT_DISABLE_USER_DROP_BOX, option);
-    }
-
-  }
-
-  /**
-   * Verify that the user is shown in the user list
-   *
-   * @param userName is user-name of the user
-   */
-  public void verifyUserPresent(String userName) {
-    info("---Verify that the user is shown in the table");
-    evt.waitForAndGetElement(ELEMENT_USER_NAME_IN_USER_LIST.replace("$userName", userName));
-    info("The user is shown in the table");
-  }
-
-  // *********************************************************************************************************//
-
   /**
    * function: Delete user
    *

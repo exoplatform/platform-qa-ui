@@ -9,10 +9,8 @@ import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.Actions;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -42,16 +40,6 @@ public class SpaceManagement {
     this.evt = testBase.getElementEventTestBase();
     this.homePagePlatform = new HomePagePlatform(testBase);
     this.alert = new ManageAlert(testBase);
-  }
-
-  /**
-   * Open create space form
-   */
-  public void goToCreateSpace() {
-    info("Open create space form");
-    evt.click(ELEMENT_ADD_NEW_SPACE_BUTTON);
-
-    evt.waitForAndGetElement(ELEMENT_ADD_SPACE_FORM);
   }
 
   /**
@@ -209,16 +197,6 @@ public class SpaceManagement {
    */
   public void goToHomeSpace() {
     $(By.xpath("//i[@class='uiIconAppSpaceHomePage uiIconDefaultApp']")).waitUntil(Condition.visible, Configuration.timeout).click();
-  }
-
-  /**
-   * Open Access tab from add new space popup
-   */
-  public void goToAccessTabFromPopUp() {
-    info("evt.click on Access tab");
-    evt.click(ELEMENT_ACCESS_AND_EDIT_TAB_OF_POPUP);
-    evt.waitForAndGetElement(ELEMENT_ACCESS_HIDDEN_RADIO, 2000, 2);
-    info("The tab is shown");
   }
 
   /**
@@ -487,15 +465,6 @@ public class SpaceManagement {
   }
 
   /**
-   * Click Avatar Online Users
-   */
-  public void clickOnlineUsers(String onlineUser) {
-    info("Online User is : " + onlineUser);
-    final SelenideElement onlineUserInSpace = $(byXpath("//h6[text()=\"Who's Online?\"]/following::img[@src=\"/portal/rest/v1/social/users/${onlineUserSpace}/avatar\"]".replace("${onlineUserSpace}", onlineUser)));
-    onlineUserInSpace.waitUntil(Condition.appears, Configuration.timeout).click();
-  }
-
-  /**
    * Search a space by name or description
    *
    * @param name
@@ -615,18 +584,6 @@ public class SpaceManagement {
   }
 
   /**
-   * Join to a space
-   *
-   * @param space
-   */
-  public void joinToASpace(String space) {
-    info("Join to a space");
-    evt.waitForAndGetElement(ELEMENT_MY_SPACE_ALL_SPACES_JOIN_BTN.replace("${space}", space), 2000, 0).click();
-    info("Verify that join button is hidden and leave button is shown");
-    evt.waitForAndGetElement(ELEMENT_SPACE_LEAVE_BTN.replace("${space}", space), 3000, 1);
-  }
-
-  /**
    * Open a space in list space
    *
    * @param space
@@ -649,14 +606,6 @@ public class SpaceManagement {
     info("Verify that");
     $(By.xpath(ELEMENT_SPACE_ACCESS_SPACE_REQUEST_JOIN_MESSAGE.replace("$space", space))).waitUntil(Condition.visible,
             Configuration.timeout);
-  }
-
-  /**
-   * Check that uploaded file does not exist on Space
-   */
-  public void checkUploadedFileNotExist() {
-    info("Verify that uploaded file does not exist on space");
-    $(By.xpath("//div[@class='mediaContent']/img")).shouldNot(Condition.visible);
   }
 
   /**
@@ -697,49 +646,6 @@ public class SpaceManagement {
     $(byXpath(ELEMENT_MY_SPACE_INVITATION_RECEIVED_CANCEL_BTN.replace("${space}",
             space))).waitUntil(Condition.not(Condition.visible),
             Configuration.timeout);
-  }
-
-  /**
-   * Request to join a Space
-   *
-   * @param space
-   */
-  public void requestToJoinSpace(String space, boolean... isVerify) {
-    info("Request to join a space");
-    searchSpace(space, "");
-    evt.click(ELEMENT_REQUEST_TO_JOIN_SPACE_BTN.replace("${space}", space));
-    if (isVerify.length > 0) {
-      evt.waitForAndGetElement(ELEMENT_REQUEST_PENDING.replace("${space}", space), 2000, 1);
-    }
-    info("Request successfully");
-  }
-
-  /**
-   * Join to space
-   *
-   * @param space
-   * @param isVerify
-   */
-  public void joinToSpace(String space, boolean... isVerify) {
-    info("Request to join a space");
-    searchSpace(space, "");
-    evt.click(ELEMENT_MY_SPACE_ALL_SPACES_JOIN_BTN.replace("${space}", space));
-    if (isVerify.length > 0) {
-      evt.waitForAndGetElement(ELEMENT_SPACE_LEAVE_BTN.replace("${space}", space), 2000, 1);
-    }
-    info("Request successfully");
-  }
-
-  /**
-   * Cancel a pending request
-   *
-   * @param space
-   */
-  public void cancelPendingRequest(String space) {
-    info("evt.click on Cancel button");
-    evt.click(ELEMENT_SPACE_CANCEL_BUTTON.replace("${space}", space));
-    evt.waitForElementNotPresent(ELEMENT_SPACE_TITLE.replace("${space}", space), 2000, 1);
-    info("Cancelling pending request is success");
   }
 
   /**
@@ -818,63 +724,6 @@ public class SpaceManagement {
   }
 
   /**
-   * Open user profile portlet of a user
-   *
-   * @param fullName
-   */
-  public void goToUserProfilePage(String fullName) {
-    info("Open User profile page");
-    evt.click(ELEMENT_MEMBER_USER_NAME.replace("${fullName}", fullName));
-  }
-
-  /**
-   * Verify that a user is a member of the space or not
-   *
-   * @param fullName  is full name of the user
-   * @param isDisplay =true if user is a member of the space =false if user is not
-   *                  a memebr of the space
-   */
-  public void verifyMember(String fullName, Boolean isDisplay) {
-    goToMemberTab();
-    if (isDisplay) {
-      info("Verify that member is shown in list");
-      evt.waitForAndGetElement(ELEMENT_MEMBER_USER_NAME.replace("${fullName}", fullName));
-    } else {
-      info("Verify that member isnot shown in list");
-      evt.waitForElementNotPresent(ELEMENT_MEMBER_USER_NAME.replace("${fullName}", fullName));
-    }
-  }
-
-  /**
-   * Verify that a user is a manager of the space or not
-   *
-   * @param fullName  is full name of the user
-   * @param isDisplay =true if user is a manager of the space =false if user is
-   *                  not a manager of the space
-   */
-  public void verifyManager(String fullName, Boolean isDisplay) {
-    goToMemberTab();
-    if (isDisplay) {
-      info("Verify that manager is shown in list");
-      evt.waitForAndGetElement(ELEMENT_MANAGER_USER_NAME.replace("${fullName}", fullName));
-    } else {
-      info("Verify that manager isnot shown in list");
-      evt.waitForElementNotPresent(ELEMENT_MANAGER_USER_NAME.replace("${fullName}", fullName));
-    }
-  }
-
-  /**
-   * Add a new forlder in Document tab
-   */
-  public void goToAddNewFolder() {
-    info("evt.click on New folder on Action Bar");
-    evt.click(ELEMENT_ACTIONBAR_ADDFOLDER);
-    info("Verify that Add folder popup is shown");
-    evt.waitForAndGetElement(ELEMENT_ADDFOLDERBOX);
-    info("The folder is shown successfully");
-  }
-
-  /**
    * Create a new folder in Document Tab
    *
    * @param title
@@ -900,19 +749,5 @@ public class SpaceManagement {
     $(byXpath("//button[@type='button' and text()='Delete']")).waitUntil(Condition.visible, Configuration.timeout).click();
     info("The folder is deleted successfully");
     $(byXpath(ELEMENT_DOCUMENT_FOLDER_CHECK.replace("${file}", folderTitle))).shouldNot(Condition.visible);
-  }
-
-  /**
-   * Open a folder in Document tab
-   *
-   * @param name
-   */
-  public void openFolderDocumentTab(String name) {
-    info("Click on the folder's name");
-    Actions action = new Actions(this.testBase.getExoWebDriver().getWebDriver());
-    action.moveToElement($(byXpath(ELEMENT_DOCUMENT_FOLDER_NAME.replace("$name", name)))).doubleClick().perform();
-    info("Verify that folder is opened");
-    $(byXpath(ELMENT_DOCUMENT_FOLDER_ADDRESS.replace("$name", name.toLowerCase()))).isDisplayed();
-    info("The folder is opened");
   }
 }
