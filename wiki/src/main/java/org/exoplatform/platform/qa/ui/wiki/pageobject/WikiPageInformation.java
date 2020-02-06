@@ -13,11 +13,6 @@ import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
 public class WikiPageInformation {
 
   private final TestBase       testBase;
@@ -82,46 +77,6 @@ public class WikiPageInformation {
     }
 
     /**
-     * Delete a relation of a page
-     *
-     * @param relation String
-     */
-    public void deleteRelation(String relation) {
-        info("Click on Delete button");
-        evt.waitForAndGetElement(ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN.replace("${name}", relation), 2000, 0);
-        evt.click(ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN.replace("${name}", relation));
-        alert.acceptAlert();
-        evt.waitForElementNotPresent(ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN.replace("${name}", relation));
-        info("The relation is deleted");
-    }
-
-    /**
-     * Delete a relation of a page
-     *
-     * @param relation String
-     */
-    public void deleteRelationWithCancelDeleting(String relation) {
-        info("Click on Delete button");
-        evt.waitForAndGetElement(ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN.replace("${name}", relation), 2000, 0);
-        evt.click(ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN.replace("${name}", relation));
-        alert.cancelAlert();
-        evt.waitForAndGetElement(ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN.replace("${name}", relation));
-        info("The relation isnot deleted");
-    }
-
-    /**
-     * Verify that related page is viewed
-     *
-     * @param page String
-     */
-    public void viewRelatedPageContent(String page) {
-        info("Click on related page");
-        evt.click(ELEMENT_PAGE_INFO_RELATED_PAGE_LINK.replace("$page", page));
-        info("Verify that related page's content is shown");
-        evt.waitForAndGetElement(ELEMENT_WIKI_HOME_PAGE_TITLE.replace("${title}", page));
-    }
-
-    /**
      * View version's content of a Wiki page
      *
      * @param num int
@@ -139,17 +94,6 @@ public class WikiPageInformation {
         if ($(ELEMENT_VIEW_VERSION_NEXT_BTN, 2000).is(Condition.visible)) {
             info("Click on Next button");
             $(ELEMENT_VIEW_VERSION_NEXT_BTN).click();
-        }
-
-    }
-
-    /**
-     * View content of previous version
-     */
-    public void viewContentVersionByPreviousArrow() {
-        if (evt.waitForAndGetElement(ELEMENT_VIEW_VERSION_PREVIOUS_BTN, 2000, 0) != null) {
-            info("Click on Previous button");
-            evt.click(ELEMENT_VIEW_VERSION_PREVIOUS_BTN);
         }
 
     }

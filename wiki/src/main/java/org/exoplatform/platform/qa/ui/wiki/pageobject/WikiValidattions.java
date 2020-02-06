@@ -4,7 +4,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -85,28 +84,6 @@ public class WikiValidattions {
         if (tooltip != null && tooltip != "")
             $(byXpath("//*[@title='" + tooltip + "']")).waitUntil(Condition.visible, Configuration.timeout);
         evt.switchToParentWindow();
-    }
-
-    /**
-     * Verify that a macro is inserted into the content of the page
-     *
-     * @param macroType String
-     */
-    public void verifyMacroIntoFrame(String macroType) {
-        WebElement e = evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME, testBase.getDefaultTimeout(), 1, 2);
-        testBase.getExoWebDriver().getWebDriver().switchTo().frame(e);
-        evt.waitForAndGetElement(ELEMENT_MACRO_CLASS_INSERT_INTO_FRAME.replace("$macro", macroType));
-        evt.switchToParentWindow();
-    }
-
-    /**
-     * Verify that macro Iframe is inserted into the content of the page
-     *
-     * @param src String
-     */
-    public void verifyMacroIFrame(String src) {
-        info("Verify that IFrame is inserted");
-        evt.waitForAndGetElement(ELEMENT_MACRO_IFRAME_IN_CONTENT_PAGE.replace("$src", src));
     }
 
     /**
@@ -193,77 +170,6 @@ public class WikiValidattions {
         info("Verify that Add Page button isnot shown");
         evt.waitForElementNotPresent(ELEMENT_ADD_PAGE_LINK);
         info("The button is not shown");
-    }
-
-    /**
-     * Check display of Admin Pages permission
-     *
-     * @param isDisplay boolean
-     */
-    public void checkDisplayOfAdmPage(boolean isDisplay) {
-        info("check display of admin pages");
-        evt.waitForAndGetElement(ELEMENT_ADD_PAGE_LINK);
-        evt.click(ELEMENT_MORE_LINK, 0, true);
-        if (isDisplay) {
-            evt.waitForAndGetElement(ELEMENT_PERMISSION_LINK);
-        } else {
-            evt.waitForElementNotPresent(ELEMENT_PERMISSION_LINK);
-        }
-    }
-
-    /**
-     * Check display of Admin Wiki permission
-     *
-     * @param isDisplay boolean
-     */
-    public void checkDisplayOfAdmWiki(boolean isDisplay) {
-        info("check display of admin wiki");
-        evt.waitForAndGetElement(ELEMENT_ADD_PAGE_LINK);
-        evt.click(ELEMENT_MORE_LINK, 0, true);
-        evt.waitForAndGetElement(ELEMENT_PERMISSION_LINK);
-        evt.click(ELEMENT_SEARCH_BROWSERS_DROPDOWN);
-        if (isDisplay) {
-            evt.waitForAndGetElement(ELEMENT_SEARCH_BROWSERS_WIKI_SETTINGS);
-        } else {
-            evt.waitForElementNotPresent(ELEMENT_SEARCH_BROWSERS_WIKI_SETTINGS);
-        }
-    }
-
-    /**
-     * Check display of edit page permission
-     *
-     * @param title     String
-     * @param isDisplay boolean
-     */
-    public void checkDisplayOfEditPage(String title, boolean isDisplay) {
-        info("check display of edit page");
-        wHome.selectAPage(title);
-        if (isDisplay) {
-            evt.waitForAndGetElement(ELEMENT_ADD_PAGE_LINK);
-            evt.waitForAndGetElement(ELEMENT_EDIT_PAGE_LINK);
-            evt.click(ELEMENT_MORE_LINK, 0, true);
-            evt.waitForElementNotPresent(ELEMENT_PERMISSION_LINK);
-        } else {
-            evt.waitForElementNotPresent(ELEMENT_EDIT_PAGE_LINK);
-        }
-    }
-
-    /**
-     * Check display of view page permission
-     *
-     * @param title     String
-     * @param isDisplay boolean
-     */
-    public void checkDisplayOfViewPage(String title, boolean isDisplay) {
-        info("check display of view page");
-        if (isDisplay) {
-            wHome.selectAPage(title);
-            evt.waitForElementNotPresent(ELEMENT_EDIT_PAGE_LINK);
-            evt.click(ELEMENT_MORE_LINK, 0, true);
-            evt.waitForElementNotPresent(ELEMENT_PERMISSION_LINK);
-        } else {
-
-        }
     }
 
     /**
@@ -367,16 +273,6 @@ public class WikiValidattions {
     }
 
     /**
-     * Verify email format of the email link after inserted a email link to the page
-     *
-     * @param address String
-     */
-    public void verifyEmailFormatLink(String address) {
-        info("Verify that email format of the link is correct");
-        evt.waitForAndGetElement(ELEMENT_EMAIL_LINK_EMAIL_FORMAT.replace("$email", address));
-    }
-
-    /**
      * The page's content is empty
      */
     public void verifyEmptyContentPage() {
@@ -394,53 +290,6 @@ public class WikiValidattions {
     public void verifyInsertedExistLink(String label, String pageLink) {
         info("The page link is shown");
         $(byText(pageLink)).waitUntil(Condition.appears, Configuration.timeout);
-    }
-
-    /**
-     * Verify that the system redirects to the wiki page that is created
-     *
-     * @param label    String
-     * @param pageLink String
-     */
-    public void verifyInsertNewLink(String label, String pageLink) {
-        info("The page link is shown");
-        String actualTitle = this.testBase.getExoWebDriver()
-                .getWebDriver()
-                .findElement(ELEMENT_TITLE_WIKI_INPUT)
-                .getAttribute("value")
-                .toString();
-        if (actualTitle.contains(pageLink))
-            assert true;
-        else
-            assert false;
-    }
-
-    /**
-     * Verify the size of the image in the page's content
-     *
-     * @param width  String
-     * @param height String
-     */
-    public void verifySizeImageInContentPage(String width, String height) {
-        info("Verify that the size of image is changed");
-        evt.waitForAndGetElement(ELEMENT_INSERTED_IMAGE_SIZE.replace("$width", width).replace("$height", height));
-    }
-
-    /**
-     * Verify status when edit a page that has existing a draf
-     *
-     * @param message String
-     * @param date    String
-     */
-    public void verifyStatusWhenEditPageHasExistingDraf(String message, String date) {
-        info("Verify status text");
-        evt.waitForAndGetElement(ELEMETN_WIKI_STATUS_VERSION_TEXT.replace("$status", message).replace("$date", date));
-        info("Verify status with View Changes link");
-        evt.waitForAndGetElement(ELEMENT_WIKI_STATUS_VERSION_VIEW_CHANGES_LINK);
-        info("Verify status with Resume the draf link");
-        evt.waitForAndGetElement(ELEMENT_WIKI_STATUS_RESUME_THE_DRAF_LINK);
-        info("Verify status with Delete link");
-        evt.waitForAndGetElement(ELEMENT_WIKI_STATUS_VERSION_DELETE_LINK);
     }
 
     /**
@@ -515,47 +364,6 @@ public class WikiValidattions {
     }
 
     /**
-     * Verify that the message for many pages have same title in moving page
-     *
-     * @param mess  String
-     * @param pages String
-     */
-    public void verifyMessageManyPagesHaveSameTitleInMovingPage(String mess, ArrayList<String> pages) {
-        if (!pages.isEmpty()) {
-            for (int i = 0; i < pages.size(); i++) {
-                if (i > 4) {
-                    info("i5:" + i + "with:" + pages.get(i));
-                    evt.waitForElementNotPresent(EMENENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_RENAME_LINK.replace("$message", mess)
-                                    .replace("$page", pages.get(i)),
-                            2000,
-                            1);
-                    evt.waitForAndGetElement(ELEMENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_AND_MORE);
-                } else {
-                    info("i0:" + i + "with:" + pages.get(i));
-                    evt.waitForAndGetElement(EMENENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_RENAME_LINK.replace("$message", mess)
-                                    .replace("$page", pages.get(i)),
-                            2000,
-                            1);
-                }
-            }
-        }
-
-    }
-
-    /**
-     * Verify the message for one page has same title in moving page
-     *
-     * @param mess String
-     */
-    public void verifyMessageOnePageHasSameTitleInMovingPage(String mess) {
-        if (!mess.isEmpty()) {
-            info("Verify that the message is shown");
-            evt.waitForAndGetElement(EMENENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_RENAME_LINK.replace("$message", mess));
-            info("The message is shown");
-        }
-    }
-
-    /**
      * Verify breadcrumb path of a page
      *
      * @param locator1 String
@@ -580,81 +388,6 @@ public class WikiValidattions {
         info("Verify that the page is at the path:" + locator1 + "->" + locator2);
         $(byId("UIWikiBreadCrumb")).shouldHave(Condition.text(locator1 + " " + locator2));
         info("The page is at correct path");
-    }
-
-    /**
-     * Verify that the tooltip of rename in the message is shown for one page has
-     * same title in moving page
-     *
-     * @param mess String
-     */
-    public void verifyToolTipMessageOnePageHasSameTitleInMovingPage(String mess) {
-        if (!mess.isEmpty()) {
-            info("Verify that The tooltip of the message is shown");
-            evt.waitForAndGetElement(EMENENT_MOVE_ONE_PAGE_POPUP_ALERT_MESSAGE_RENAME_TOOLTIP.replace("$message", mess));
-            info("The tooltip is shown");
-        }
-    }
-
-    /**
-     * Verify that the tooltip of the message for many pages have same title in
-     * moving page
-     *
-     * @param mess  String
-     * @param pages String
-     */
-    public void verifyToolTipMessageManyPagesHaveSameTitleInMovingPage(String mess, ArrayList<String> pages) {
-        if (!pages.isEmpty()) {
-            for (int i = 0; i < pages.size(); i++) {
-                if (i > 4) {
-                    info("i5:" + i + "with:" + pages.get(i));
-                    evt.waitForElementNotPresent(EMENENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_RENAME_TOOLTIP.replace("$message", mess)
-                                    .replace("$page", pages.get(i)),
-                            2000,
-                            1);
-                    evt.waitForAndGetElement(ELEMENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_AND_MORE);
-                } else {
-                    info("i0:" + i + "with:" + pages.get(i));
-                    evt.waitForAndGetElement(EMENENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_RENAME_TOOLTIP.replace("$message", mess)
-                                    .replace("$page", pages.get(i)),
-                            2000,
-                            1);
-                }
-            }
-        }
-    }
-
-    /**
-     * Verify that a page is parent of other page
-     *
-     * @param parentNode String
-     * @param childNode  String
-     */
-    public void verifyParentChildNode(String parentNode, String childNode) {
-        info("Verify that page A is under page B or page A is parent of the page B");
-        evt.waitForAndGetElement(ELEMENT_TREE_WIKI_PARENT_NODE_CHILD_NODE.replace("$parent", parentNode).replace("$child",
-                childNode));
-        info("The page" + parentNode + " is parent of" + childNode + "");
-    }
-
-    /**
-     * Verify that edit mode is opening
-     *
-     * @param oldTitle String
-     */
-    public void verifyEditModeOpenning(String oldTitle) {
-        info("Verify that input tilte field is shown");
-        evt.waitForAndGetElement(ELEMENT_TITLE_WIKI_INPUT);
-        info("Verify that the value of input title field has correct value of old title");
-        String currentTitle = this.testBase.getExoWebDriver()
-                .getWebDriver()
-                .findElement(ELEMENT_TITLE_WIKI_INPUT)
-                .getAttribute("value")
-                .toString();
-        if (currentTitle.contains(oldTitle))
-            assert true;
-        else
-            assert false;
     }
 
     /**
@@ -752,117 +485,12 @@ public class WikiValidattions {
     }
 
     /**
-     * Verify that a template isnot shown in the list
-     *
-     * @param template String
-     */
-    public void verifyNotTemplateInList(String template) {
-        if (evt.waitForAndGetElement(ELEMENT_WIKI_SETTING_PAGE_TOTAL_NUMBER, 2000, 0) != null) {
-            String total = evt.waitForAndGetElement(ELEMENT_WIKI_SETTING_PAGE_TOTAL_NUMBER).getText();
-            int totalNum = Integer.parseInt(total);
-            for (int i = 0; i < totalNum; i++) {
-                info("Verify that the template is shown in the list");
-                evt.waitForElementNotPresent(ELEMENT_WIKI_SETTINGS_RESULTS.replace("${template}", template));
-                info("The template is shown successfully");
-            }
-        }
-    }
-
-    /**
      * Verify that searching is empty
      */
     public void verifyTemplateSearchEmpty() {
         info("Verify that the searching is empty");
         $(ELEMENT_WIKI_SETTING_SEARCH_EMPTY).waitUntil(Condition.visible, Configuration.timeout);
         info("Searching is empty successfully");
-    }
-
-    /**
-     * Verify that the page is shown in searched results list
-     *
-     * @param page String
-     */
-    public void verifySearchResults(String page) {
-        info("Verify that the page is shown in results searched");
-        evt.waitForAndGetElement(ELEMENT_WIKI_SEARCH_RESULT_PAGE_LINK.replace("$page", page));
-        info("The page is shown successfully");
-    }
-
-    /**
-     * Verify that the page is not shown in searched results list
-     *
-     * @param page String
-     */
-    public void verifyNotSearchResults(String page) {
-        info("Verify that the page isnot shown in results searched");
-        evt.waitForElementNotPresent(ELEMENT_WIKI_SEARCH_RESULT_PAGE_LINK.replace("$page", page));
-        info("The page isnot shown successfully");
-    }
-
-    /**
-     * Verify that searched results is empty
-     */
-    public void verifyEmptySearchResults() {
-        info("Verify that searched results is empty");
-        evt.waitForAndGetElement(ELEMENT_WIKI_SEARCH_EMPTY_RESULTS);
-        info("No results is found");
-    }
-
-    /**
-     * Verify that user can use scroll down to see more spaces
-     */
-    public void verifyScrollDownOfSpaceSwitcher() {
-        info("Scroll down");
-        WebElement spaceList = evt.waitForAndGetElement(By.className("spaceList"));
-        String str1 = String.valueOf(((JavascriptExecutor) testBase.getExoWebDriver()
-                .getWebDriver()).executeScript("return arguments[0].clientHeight;",
-                spaceList));
-        String str = String.valueOf(((JavascriptExecutor) testBase.getExoWebDriver()
-                .getWebDriver()).executeScript("return arguments[0].scrollHeight;",
-                spaceList));
-        int clientHeight = Integer.parseInt(str1);
-        int scrollHeight = Integer.parseInt(str);
-        assert clientHeight < scrollHeight;
-    }
-
-    /**
-     * Verify that spaces in space switcher lis are shown
-     *
-     * @param spaces   ArrayList
-     * @param numIndex int
-     */
-    public void verifyPresentSpaceSwitcher(ArrayList<String> spaces, int... numIndex) {
-        if (numIndex.length > 0) {
-            for (int i = 0; i < spaces.size() - numIndex[0]; i++) {
-                info("Verify that all spaces is shown");
-                evt.waitForAndGetElement(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", spaces.get(i).toLowerCase()).replace(" ", "_"));
-            }
-        } else {
-            for (int i = 0; i < spaces.size(); i++) {
-                info("Verify that all spaces is shown");
-                evt.waitForAndGetElement(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", spaces.get(i).toLowerCase()).replace(" ", "_"));
-            }
-        }
-    }
-
-    /**
-     * Verify that spaces in space switcher are not shown
-     *
-     * @param spaces   ArrayList
-     * @param numIndex int
-     */
-    public void verifyNotPresentSpaceSwitcher(ArrayList<String> spaces, int... numIndex) {
-        if (numIndex.length > 0) {
-            for (int i = 0; i < spaces.size() - numIndex[0]; i++) {
-                info("Verify that all spaces is shown");
-                evt.waitForElementNotPresent(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", spaces.get(i)));
-            }
-        } else {
-            for (int i = 0; i < spaces.size(); i++) {
-                info("Verify that all spaces is shown");
-                evt.waitForElementNotPresent(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", spaces.get(i)));
-            }
-        }
     }
 
     /**
@@ -911,65 +539,6 @@ public class WikiValidattions {
     public void verifyPositionOfASpaceInList(int i, String space) {
         info("Verify that the space has:" + i + " position in the list");
         $(byXpath(ELEMENT_SPACE_SWITCHER_SPACE_POSITION.replace("$num", String.valueOf(i)).replace("$space", space))).waitUntil(Condition.visible, Configuration.timeout);
-    }
-
-    /**
-     * Verify tables in Page information as summary, related, hierachy and recent
-     * changes table
-     */
-    public void verifyTablesPageInformation() {
-        info("Verify sumary table");
-        evt.waitForAndGetElement(ELEMENT_PAGE_INFO_SUMMARY_TABLE);
-        info("Verify relate table");
-        evt.waitForAndGetElement(ELEMENT_PAGE_INFO_RELATED_TABLE);
-        info("Verify hierachy table");
-        evt.waitForAndGetElement(ELEMENT_PAGE_INFO_HIERARCHY_TABLE);
-        info("Verify recent changes table");
-        evt.waitForAndGetElement(ELEMENT_PAGE_INFO_RECENT_CHANGES_TABLE);
-    }
-
-    /**
-     * Verify that related page is added in Related table
-     *
-     * @param locator     String
-     * @param relatedPage String
-     */
-    public void verifyRelatedPage(String locator, String relatedPage) {
-        info("Verify that related page is added to the related table");
-        evt.waitForAndGetElement(ELEMENT_PAGE_INFO_RELATED_TABLE_CONTENT.replace("${col1}", locator).replace("${col2}", relatedPage),
-                2000,
-                1);
-    }
-
-    /**
-     * Verify that a page is not shown in related page list of the related page
-     * popup
-     *
-     * @param page String
-     */
-    public void verifyNotPageInRelatedPageList(String page) {
-        info("Verify that a page is not listed in related page list to select it");
-        evt.waitForElementNotPresent(ELEMENT_ADD_RELATED_POPUP_CONTENT.replace("${page}", page));
-    }
-
-    /**
-     * Verify that a page is not shown in left related page list
-     *
-     * @param page String
-     */
-    public void verifyNotPageInLeftRelatePageList(String page) {
-        info("Verify that a page is not shown in left related page list");
-        evt.waitForElementNotPresent(ELEMENT_PAGE_INFO_RELATED_PAGE_LINK.replace("$page", page));
-    }
-
-    /**
-     * Verify that a page is shown in left related page list
-     *
-     * @param page String
-     */
-    public void verifyPageInLeftRelatePageList(String page) {
-        info("Verify that a page is shown in left related page list");
-        evt.waitForAndGetElement(ELEMENT_PAGE_INFO_RELATED_PAGE_LINK.replace("$page", page));
     }
 
     /**
@@ -1042,50 +611,6 @@ public class WikiValidattions {
             info("Draft does not exist in Draft list");
         }
 
-    }
-
-    /**
-     * Verify macro JIRA
-     */
-    public void verifyMacroTableHeaderJIRA() {
-        info("Information from a JIRA server and displays them as a table with Type, Key, Summary, Status, Created Date");
-        evt.waitForAndGetElement(ELEMENT_MARCO_HEADER_TABLE_JIRA.replace("$header", "Type"));
-        evt.waitForAndGetElement(ELEMENT_MARCO_HEADER_TABLE_JIRA.replace("$header", "Key"));
-        evt.waitForAndGetElement(ELEMENT_MARCO_HEADER_TABLE_JIRA.replace("$header", "Summary"));
-        evt.waitForAndGetElement(ELEMENT_MARCO_HEADER_TABLE_JIRA.replace("$header", "Status"));
-        evt.waitForAndGetElement(ELEMENT_MARCO_HEADER_TABLE_JIRA.replace("$header", "Created Date"));
-    }
-
-    /**
-     * Verify footNode intoFrame of Rich Text Mode
-     *
-     * @param footNode1       String
-     * @param footNode2       String
-     * @param contentMacroBox String
-     */
-    public void verifyMacroFootNodeIntoFrame(String footNode1, String footNode2, String contentMacroBox) {
-        testBase.getExoWebDriver().getWebDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
-        evt.waitForAndGetElement(By.linkText("1"));
-        evt.waitForAndGetElement(By.linkText("2"));
-        evt.waitForAndGetElement(ELEMENT_MACRO_FOOTNOTE.replace("${macro}", footNode1));
-        evt.waitForAndGetElement(ELEMENT_MACRO_FOOTNOTE.replace("${macro}", footNode2));
-        evt.waitForAndGetElement(ELEMENT_MACRO_BOX.replace("${macro}", contentMacroBox));
-        evt.switchToParentWindow();
-    }
-
-    /**
-     * Verify footNode into the content of the page
-     *
-     * @param footNode1       String
-     * @param footNode2       String
-     * @param contentMacroBox String
-     */
-    public void verifyMacroFootNodeIntoContentPage(String footNode1, String footNode2, String contentMacroBox) {
-        evt.waitForAndGetElement(By.linkText("1"));
-        evt.waitForAndGetElement(By.linkText("2"));
-        evt.waitForAndGetElement(ELEMENT_MACRO_FOOTNOTE.replace("${macro}", footNode1));
-        evt.waitForAndGetElement(ELEMENT_MACRO_FOOTNOTE.replace("${macro}", footNode2));
-        evt.waitForAndGetElement(ELEMENT_MACRO_BOX.replace("${macro}", contentMacroBox));
     }
 
     /**

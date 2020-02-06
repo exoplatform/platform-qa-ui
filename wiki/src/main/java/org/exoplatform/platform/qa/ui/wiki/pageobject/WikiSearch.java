@@ -57,7 +57,6 @@ public class WikiSearch {
       goToAdvancedSearchSpaceSwitcher();
       searchSpaces(location);
       info("Select a location");
-      // $(ELEMENT_ADVANCED_SEARCH_SPACE_SWITCHER).click();
       $(byClassName("wikis")).find(byText(location)).click();
 
     }
@@ -69,35 +68,6 @@ public class WikiSearch {
     info("Click on Search button");
     $(ELEMENT_SEARCH_ADVANCED_SEARCH_BTN).click();
 
-  }
-
-  /**
-   * Quick search a page
-   *
-   * @param text String
-   */
-  public void quickSeach(String text) {
-    if (!text.isEmpty()) {
-      info("Input a text to the searched field");
-      evt.type(ELEMENT_WIKI_SEARCH_FIELD, text, true);
-    }
-    info("Click on Search button");
-    evt.click(ELEMENT_WIKI_QUICK_SEARCH_BTN);
-
-  }
-
-  /**
-   * View detail of a page that is listed in searched results page
-   *
-   * @param page String
-   * @param contentPage String
-   */
-  public void viewContentOfSearchedPage(String page, String contentPage) {
-    if (!page.isEmpty()) {
-      info("Click on the page link in searched results list");
-      evt.click(ELEMENT_WIKI_SEARCH_RESULT_PAGE_LINK.replace("$page", page));
-      evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_PAGE.replace("$content", contentPage), 3000, 1);
-    }
   }
 
 }

@@ -2,7 +2,6 @@ package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -92,18 +91,6 @@ public class WikiManagement {
   }
 
   /**
-   * Add a content for a wiki page
-   *
-   * @param content String
-   */
-  public void addContentPage(String content) {
-    info("Input a content for the page");
-    if (!content.isEmpty())
-      plf.inputFrame(ELEMENT_CONTENT_WIKI_FRAME, content);
-
-  }
-
-  /**
    * Save add page
    */
   public void saveAddPage() {
@@ -138,14 +125,6 @@ public class WikiManagement {
   public void publishPageWhenEditPage() {
     info("check on publish checkbox");
     evt.check(ELEMENT_PUBLISH_ACTIVITY_CHECKBOX, 2);
-  }
-
-  /**
-   * unpublish page
-   */
-  public void unPublishPageWhenEditPage() {
-    evt.uncheck(ELEMENT_PUBLISH_ACTIVITY_CHECKBOX, 2);
-
   }
 
   /**
@@ -214,8 +193,6 @@ public class WikiManagement {
    */
   public void movePageWhenUserDoesNotHavePerMissionInDestination(String page1, String page2, boolean destination) {
     info("Open a wiki page 1");
-    // evt.waitForAndGetElement(ELEMENT_TREE_WIKI_NAME.replace("${name}", page1),
-    // 2000, 0).click();
     info("Click on More link");
     $(ELEMENT_MORE).click();
     if (destination) {
@@ -274,14 +251,6 @@ public class WikiManagement {
       $(byXpath(ELEMENT_MOVE_PAGE_POPUP_NEW_LOCATION_HOME.replace("${spaceName}", locator))).waitUntil(Condition.visible,Configuration.timeout);
     }
     $(ELEMENT_MOVE_BTNMOVE).waitUntil(Condition.visible,Configuration.timeout).click();
-  }
-  /**
-   * Open space switcher in move page popup
-   */
-  public void goToSpaceSwitcher() {
-    info("Click on Drop down");
-    evt.click(ELEMENT_MOVE_SPACESWITCHER);
-
   }
 
   /**
@@ -413,60 +382,6 @@ public class WikiManagement {
   }
 
   /**
-   * function: check content of mail then delete mail
-   *
-   * @param title title of the page
-   */
-  public void checkEmailNotification(String title) {
-    info("Check and delete mail");
-
-    for (String windowHandle : testBase.getExoWebDriver().getWebDriver().getWindowHandles()) {
-      testBase.getExoWebDriver().getWebDriver().switchTo().window(windowHandle);
-      info("driver.title:" + testBase.getExoWebDriver().getWebDriver().getTitle());
-    }
-    evt.waitForAndGetElement(ELEMENT_GMAIL_CONTENT_WIKI.replace("${title}", title), 30000, 0);
-    info("Found notify mail");
-
-    info("ELEMENT_GMAIL_CONTENT:" + ELEMENT_GMAIL_CONTENT_WIKI.replace("${title}", title));
-    info("Open email");
-    evt.waitForAndGetElement(ELEMENT_GMAIL_CONTENT_WIKI.replace("${title}", title)).click();
-    String defaultLink = testBase.getExoWebDriver().getBaseUrl() + "/intranet/wiki/" + title;
-    // Store childs and parent windows
-    Object[] allWindows = testBase.getExoWebDriver().getWebDriver().getWindowHandles().toArray();
-    // Get parent window
-    String paWindow = allWindows[0].toString();
-    // Get child window 1. Here is gmail browser
-    String chilwindow1 = allWindows[1].toString();
-    // Get child window 2. Here is last child window when click on subtitle of
-    // email notification
-    String chilwindow2 = allWindows[2].toString();
-    // Focus on Child window2
-    testBase.getExoWebDriver().getWebDriver().switchTo().window(chilwindow2);
-    info("Verify that the link is shown as correct format:");
-    evt.click(ELEMENT_GMAIL_PREVIOUS_EMAIL);
-    info("Check the link's format");
-    String link = evt.waitForAndGetElement(ELEMENT_GMAIL_CONTENT_LINK_WIKI.replace("${page}", title), 3000, 0)
-                     .getAttribute("href")
-                     .toString();
-    // close child window 2
-    testBase.getExoWebDriver().getWebDriver().close();
-    // Focus on child window 1
-    testBase.getExoWebDriver().getWebDriver().switchTo().window(chilwindow1);
-    // close child window 1
-    testBase.getExoWebDriver().getWebDriver().close();
-    // Focus on parent window
-    testBase.getExoWebDriver().getWebDriver().switchTo().window(paWindow);
-
-    info("link:" + link);
-    info("default:" + defaultLink);
-    if (link.contentEquals(defaultLink) == true)
-      assert true;
-    else
-      assert false : "the link's format is incorrect";
-
-  }
-
-  /**
    * Un check view permission for a user or a group
    *
    * @param locator object
@@ -491,12 +406,6 @@ public class WikiManagement {
   public void renameFromAlertMessageOfOnePage() {
     info("Click on Rename link on the alert message area");
     $(EMENENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_RENAME).click();
-
-  }
-
-  public void renameFromAlertMessageOfManyPages(String mess, String page) {
-    info("Click on Rename link of the page");
-    evt.click(EMENENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_RENAME_LINK.replace("$message", mess).replace("$page", page));
 
   }
 
@@ -611,8 +520,6 @@ public class WikiManagement {
   public void PreviewASimplePage(String title, String content) {
     info("Preview a simple page");
     goToPreviewPage();
-    // evt.waitForAndGetElement(ELEMENT_PREVIEW_TEMPLATE_CONTENT.replace("${template}",
-    // title), testBase.getDefaultTimeout(), 1);
     $(byXpath(ELEMENT_PREVIEW_PAGE_CONTENT.replace("${content}", content))).waitUntil(Condition.visible, Configuration.timeout);
   }
 }
