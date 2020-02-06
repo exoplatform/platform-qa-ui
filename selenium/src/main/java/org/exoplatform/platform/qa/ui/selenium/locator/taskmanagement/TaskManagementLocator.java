@@ -44,10 +44,6 @@ public class TaskManagementLocator {
 
   public static final By              ELEMENT_ICON_MARK_AS_COMPLETED                = byClassName("actionIcon");
 
-  // Project area-->General
-  public static final String          ELEMENT_LEFT_PANEL_PROJECT_NAME               =
-          ".//*[contains(@class,'project-name')][contains(.,'$project')]";
-
   // Project area-->Context Menu
   public static final SelenideElement ELEMENT_PROJECT_ICON_ADD_PROJECT              =
           $(byAttribute("data-id",
@@ -97,17 +93,8 @@ public class TaskManagementLocator {
   // Project-->General
 
   // Add project form
-  public static final By              ELEMENT_ADD_PROJECT_PARENT_PROJECT            =
-          By.xpath("(.//*[contains(@class,'addProject')]//*[contains(@class,'hoverStatusBlock')])[1]");
-
-  public static final String          ELEMENT_ADD_PROJECT_PARENT_PROJECT_DROP_MENU  =
-          ".//*[contains(@class,'uiDropdownMenu')]//*[contains(text(),'$project')]";
-
   public static final By              ELEMENT_ADD_PROJECT_TITLE                     =
           By.xpath(".//*[contains(@class,'addProject')]//*[contains(@name,'name')]");
-
-  public static final By              ELEMENT_ADD_PROJECT_DES                       =
-          By.xpath(".//*[contains(@class,'addProject')]//*[contains(@name,'description')]");
 
   public static final By              ELEMETN_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX  =
           By.xpath(".//*[contains(@class,'addProject')]//*[contains(@class,'checkbox')]");
@@ -124,8 +111,6 @@ public class TaskManagementLocator {
 
   public static final By              ELEMENT_EDIT_PROJECT_OPTION                   = byClassName("uiIconEdit");
 
-  public static final SelenideElement ELEMENT_MENU_PROJECT                          = $(byClassName("uiDropdownWithIcon"));
-
   public static final SelenideElement ELEMENT_BUTTON_SAVE                           =
           $(byXpath("//*[@id=\"taskManagement\"]/div[4]/div/div[2]/div[7]/button[1]"));
 
@@ -134,10 +119,6 @@ public class TaskManagementLocator {
   public static final SelenideElement ELEMENT_EDIT_PROJECT                          =
           $(byXpath("//*[@id=\"taskManagement\"]/div[4]/div/div[2]/div[2]/span/div/form/div/div[1]/div/input"));
   // Share project form
-
-  // Color
-  public static final String          ELEMENT_COLOR_TABLE_ITEM                      =
-          ".//*[contains(@class,'project-name')][contains(.,'$project')]/..//*[contains(@class,'$color')]";
 
   // Clone project
 
@@ -196,8 +177,6 @@ public class TaskManagementLocator {
   public static final SelenideElement ELEMENT_ICON_ADD_IMAGE_IN_COMMENT=$(byClassName("cke_button__selectimage_icon"));
 
   public static final SelenideElement ELEMENT_BUTTON_OK_UPLOAD=$(byClassName("cke_dialog_ui_hbox_first")).find(byClassName("btn"));
-  public static final SelenideElement ELEMENT_UNSECHEDULED                         =
-          $(byXpath("//*[@id=\"taskManagement\"]/div[3]/div[2]/div/div/div[6]/div[1]/div/div[2]/span"));
   public  static final  SelenideElement ELEMENT_SHOW_IN_CALENDAR                    =$(byClassName("date-work-plan"));
   public static final SelenideElement ELEMENT_TABLE_PROJECT=$(byClassName("table-project"));
 

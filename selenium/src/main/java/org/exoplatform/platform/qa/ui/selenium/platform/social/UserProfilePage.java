@@ -2,37 +2,20 @@ package org.exoplatform.platform.qa.ui.selenium.platform.social;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
-import static io.netty.util.internal.SystemPropertyUtil.contains;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_BUTTON_CONFIRM_UPLOAD;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_INPUT_UPLOAD_AVATAR;
-import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_MY_PROFILE_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
-import static org.hamcrest.CoreMatchers.containsString;
-import java.text.SimpleDateFormat;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
-import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
-import java.text.DateFormatSymbols;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Month;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class UserProfilePage {
   private final TestBase       testBase;
@@ -47,22 +30,6 @@ public class UserProfilePage {
   public UserProfilePage(TestBase testBase) {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
-  }
-
-  /**
-   * Update Current position By QuynhPT
-   *
-   * @param pos
-   */
-  public void updateCurrentPosition(String pos) {
-    info("Update Current Position");
-    if (pos != "" && pos != null) {
-      evt.waitForAndGetElement(ELEMENT_EDIT_POSITION);
-      evt.click(ELEMENT_EDIT_POSITION);
-
-      evt.click(ELEMENT_EDIT_POSITION_SAVE_BUTTON);
-
-    }
   }
 
   /**
@@ -173,30 +140,6 @@ public class UserProfilePage {
   }
 
   /**
-   * @param url
-   * @param opParams
-   */
-  public void updateUrl(String url, Object... opParams) {
-    evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
-    String index = (String) (opParams.length > 0 ? opParams[0] : "0");
-    Integer xpathCount = testBase.getElements(ELEMENT_CONTACT_URL_INPUT_LIST).size();
-    if (Integer.valueOf(index) >= xpathCount) {
-      evt.click(ELEMENT_CONTACT_URL_ADD_ICON);
-    }
-    if (url != null && !url.isEmpty()) {
-      info("update url");
-      WebElement input = evt.waitForAndGetElement(By.xpath(ELEMENT_CONTACT_URL_INPUT.replace("${index}", index)),
-              testBase.getDefaultTimeout(),
-              1);
-      Actions action = new Actions(testBase.getExoWebDriver().getWebDriver());
-      action.moveToElement(input).click().perform();
-      action.sendKeys(url).perform();
-      // action.moveToElement(input).sendKeys(url).build().perform();
-      // type(ELEMENT_CONTACT_URL_INPUT.replace("${index}", index),url,true);
-    }
-  }
-
-  /**
    * Update phone
    *
    * @param type
@@ -292,26 +235,6 @@ public class UserProfilePage {
   }
 
   /**
-   * Open Activity tab
-   */
-  public void goToActivity() {
-    info("Click on Activity tab");
-    evt.click(ELEMETN_ACTIVITY_TAB);
-  }
-
-  /**
-   * Connect in profile page
-   *
-   * @param user
-   */
-  public void connectToUserInProfilePage(String user) {
-    info("connect to: " + user);
-    testBase.getExoWebDriver().getWebDriver().get(testBase.getExoWebDriver().getBaseUrl() + "/intranet/profile/" + user);
-    evt.click(ELEMENT_UIMINICONNECTIONS_PORLET_CONNECT_STATUS, 0, true);
-    evt.waitForAndGetElement(ELEMENT_UIMINICONNECTIONS_PORLET_CANCEL_STATUS);
-    evt.waitForElementNotPresent(ELEMENT_UIMINICONNECTIONS_PORLET_CONNECT_STATUS);
-  }
-  /**
    * Verify date experiences User Profile displayed in order
    */
   public void verifyEditProfileDatesExperienceDisplayedInOrder(String dStart, String dEnd) throws ParseException {
@@ -338,17 +261,5 @@ public class UserProfilePage {
     $(ELEMENT_EDIT_MY_PROFILE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
 
   }
-  /**
-   * Disconnect in profile page
-   *
-   * @param user
-   */
-  public void disconnectInProfilePage(String user) {
-    info("disconnect: " + user);
-    testBase.getExoWebDriver().getWebDriver().get(testBase.getExoWebDriver().getBaseUrl() + "/intranet/profile/" + user);
-    evt.mouseOver(ELEMENT_UIMINICONNECTIONS_PORLET_CONNECTED_STATUS, true);
-    evt.waitForAndGetElement(ELEMENT_UIMINICONNECTIONS_PORLET_DISCONNECTED_STATUS).click();
-    evt.waitForAndGetElement(ELEMENT_UIMINICONNECTIONS_PORLET_CONNECT_STATUS);
-    evt.waitForElementNotPresent(ELEMENT_UIMINICONNECTIONS_PORLET_CONNECTED_STATUS);
-  }
+
 }
