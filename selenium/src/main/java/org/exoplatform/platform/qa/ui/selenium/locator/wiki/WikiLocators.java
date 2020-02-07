@@ -46,9 +46,6 @@ public class WikiLocators {
     public static final By ELEMENT_SPACE_SWITCHER_INPUT =
             By.xpath("//*[@id='uiSpaceSwitcher_BreadCrumb']//li[contains(@class, 'spaceSearch')]//input[contains(@placeholder, 'Filter Spaces')]");
 
-    public static final String ELEMENT_SPACE_NAME_SELECTED =
-            "//*[contains(@id,'UISpaceSwitcher_/spaces/${space}')]/a";
-
     public static final By ELEMENT_SPACE_SWITCHER_CLOSE_BTN =
             By.xpath(".//*[@id='uiSpaceSwitcher_BreadCrumb']//*[contains(@class,'uiIconClose')]");
 
@@ -190,8 +187,6 @@ public class WikiLocators {
 
     public static final By ELEMENT_PERMISSION_BUTTON_SAVE = By.xpath("//*[text()='Save']");
 
-    public static final By ELEMENT_PERMISSION_BUTTON_OK = By.xpath("//*[text()='OK']");
-
     public static final By ELEMENT_PERMISSION_VIEW_ANY =
             By.xpath("//*[@id='VIEWPAGEany']");
 
@@ -208,24 +203,11 @@ public class WikiLocators {
     public static final By ELEMENT_MOVE_BTNMOVE =
             By.xpath("//*[@class='btn btn-primary' and contains(text(),'Move')]");
 
-    public static final String EMENENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_RENAME_LINK =
-            ".//*[@class='alert'][contains(.,'$message')]//*[contains(@href,'Rename')]";
-
-    public static final By ELEMENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_AND_MORE =
-            By.xpath(".//*[@class='alert'][contains(.,'and more')]");
-
     public static final By EMENENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_RENAME =
             By.xpath(".//*[@class='alert']//*[contains(@href,'Rename')]");
 
-    public static final String EMENENT_MOVE_PAGE_POPUP_ALERT_MESSAGE_RENAME_TOOLTIP =
-            ".//*[@class='alert'][contains(.,'$message')]//*[contains(@title,'Rename the sub-page to move')]";
-
-    public static final String EMENENT_MOVE_ONE_PAGE_POPUP_ALERT_MESSAGE_RENAME_TOOLTIP =
-            ".//*[@class='alert'][contains(.,'$message')]//*[contains(@title,'Rename the page to move')]";
-
     public static final String ELEMENT_MOVE_PAGE_POPUP_NEW_LOCATION_HOME =
             ".//*[@id='newLocation']//*[@class='active']/a[contains(text(),'Wiki Home')]/../..//a[contains(text(),'${spaceName}')]";
-
 
   public static final String          ELEMENT_MESSAGE_USER_DOES_NOT_HAVE_EDIT_PERMMISSON         =
                                                                                          "You have no edit permission at the destination page";
@@ -288,9 +270,6 @@ public class WikiLocators {
     public static final String ELEMENT_TREE_WIKI_NAME =
             ".//*[@id='iconTreeExplorer']//*[contains(text(),'${name}')]";
 
-    public static final String ELEMENT_TREE_WIKI_PARENT_NODE_CHILD_NODE =
-            ".//*[@id='iconTreeExplorer']//*[contains(text(),'$parent')]/../../..//*[contains(text(),'$child')]";
-
     // *===================================================================WIKI
     // MANAGEMENT===========================================================*\\
     public static final String ELEMENT_CONTENT_WIKI_PAGE =
@@ -298,9 +277,6 @@ public class WikiLocators {
 
     public static final By ELEMENT_CONTENT_WIKI_PAGE_EMPTY =
             By.xpath(".//*[@id='UIViewContentDisplay']//*[not(//p)]");
-
-    public static final String ELEMENT_EMAIL_LINK_EMAIL_FORMAT =
-            ".//*[@id='UIViewContentDisplay']//*[contains(@href,'mailto:$email')]";
 
     // Source editor
     public static final By ELEMENT_TITLE_WIKI_INPUT = By.id("titleInput");
@@ -386,29 +362,8 @@ public class WikiLocators {
     public static final By ELEMENT_PAGE_INFO_VIEW_PAGE_INFO_BTN =
             By.xpath(".//button[text()='View Page History']");
 
-    public static final By ELEMENT_PAGE_INFO_SUMMARY_TABLE =
-            By.xpath("//*[contains(@class,'uiPageInfoSummary')]");
-
-    public static final By ELEMENT_PAGE_INFO_RELATED_TABLE =
-            By.xpath("//*[contains(@class,'uiPageInfoRelatedPage')]");
-
     public static final By ELEMENT_PAGE_INFO_ADD_MORE_RELATIONS =
             By.xpath(".//*[@id='UIWikiPageInfo']//button[text()='Add More Relations']");
-
-    public static final String ELEMENT_PAGE_INFO_RELATED_TABLE_CONTENT =
-            ".//*[@id='UIWikiPageInfo']//*[contains(text(),'${col1}')]/..//*[contains(text(),'${col2}')]";
-
-    public static final String ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN =
-            ".//*[contains(text(),'${name}')]/../../../../..//*[@class='uiIconDelete uiIconLightGray']";
-
-    public static final By ELEMENT_PAGE_INFO_HIERARCHY_TABLE =
-            By.xpath("//*[contains(@class,'uiPageInfoHierarchy')]");
-
-    public static final By ELEMENT_PAGE_INFO_RECENT_CHANGES_TABLE =
-            By.xpath("//*[contains(@class,'uiPageInfoChanges')]");
-
-    public static final String ELEMENT_PAGE_INFO_RELATED_PAGE_LINK =
-            ".//*[@id='UIWikiRelatedPages']//*[contains(text(),'$page')]//*[contains(@class,'uiIconFileMini')]";
 
     public static final String ELEMENT_PAGE_INFO_RECENT_CHANGES_VERSION =
             ".//*[@id='UIWikiPageInfo']//*[contains(@href,'#ViewRevision_$num')]";
@@ -467,9 +422,6 @@ public class WikiLocators {
     public static final By ELEMENT_VIEW_VERSION_NEXT_BTN =
             By.xpath(".//*[@id='UIWikiVersionSelect']//*[contains(@href,'#ViewRevision')][contains(text(),'Next')]");
 
-    public static final By ELEMENT_VIEW_VERSION_PREVIOUS_BTN =
-            By.xpath(".//*[@id='UIWikiVersionSelect']//*[contains(@href,'#ViewRevision')][contains(text(),'Prev')]");
-
     // Add more relations
     public static final By ELEMENT_ADD_RELATED_PAGE_POPUP_TITLE =
             By.xpath(".//*[contains(text(),'Add Related Page')]");
@@ -486,16 +438,6 @@ public class WikiLocators {
     // Content page
     public static final By ELEMENT_WIKI_PAGE_EDIT_PARAGRAPH_BTN = byClassName("uiIconEdit");
 
-    // Email notification
-    public static final By ELEMENT_GMAIL_PREVIOUS_EMAIL =
-            By.xpath(".//*[@class='gE hI']");
-
-    public static final String ELEMENT_GMAIL_CONTENT_LINK_WIKI =
-            ".//a[contains(@href,'${page}')]";
-
-    public static final String ELEMENT_GMAIL_CONTENT_WIKI =
-            ".//span[contains(.,'\"${title}\" page was modified')]";
-
     // *==============================================================WIKI SEARCH
     // MANAGEMENT===========================================================*\\
     // Search page
@@ -511,19 +453,7 @@ public class WikiLocators {
     public static final By ELEMENT_SEARCH_ADVANCED_SEARCH_BTN =
             By.xpath(".//*[@id='UIWikiAdvanceSearchForm']/button[text()='Search']");
 
-    public static final By ELEMENT_WIKI_SEARCH_FIELD =
-            By.xpath(".//*[@id='wikiSearchValue']");
-
-    public static final String ELEMENT_WIKI_SEARCH_RESULT_PAGE_LINK =
-            ".//*[@id='UIWikiAdvanceSearchResult']/ul//*[contains(text(),'$page')]";
-
     public static final By ELEMENT_WIKI_ADVANCED_SEARCH_SEARCH_FIELD = By.xpath(".//*[@id='text']");
-
-    public static final By ELEMENT_WIKI_SEARCH_EMPTY_RESULTS =
-            By.xpath(".//*[@id='UIWikiAdvanceSearchResult']//*[contains(@class,'noResult')]");
-
-    public static final By ELEMENT_WIKI_QUICK_SEARCH_BTN =
-            By.xpath(".//*[@id='UIWikiSearchBox']//*[contains(@class,'uiIconSearch ')]");
 
     // *==============================================================WIKI SETTING
     // MANAGEMENT ========================================================*\\
@@ -550,12 +480,6 @@ public class WikiLocators {
 
     public static final By ELEMENT_CANCEL_TEMPLATE =
             By.id("UISubmitToolBarUpper_Cancel_");
-
-    public static final By ELEMENT_WIKI_SETTING_TEMPLATE_TAB =
-            By.xpath(".//*[contains(@href,'TemplateSetting')]");
-
-    public static final By ELEMENT_WIKI_SETTING_PERMISSION_TAB =
-            By.xpath(".//*[contains(@href,'PermissionSetting')]");
 
     public static final By ELEMENT_WIKI_SETTING_ADD_MORE_TEMPALTE =
             By.xpath(".//*[contains(@onclick,'#AddTemplate')]");
@@ -585,9 +509,6 @@ public class WikiLocators {
     public static final By ELEMENT_CONTENT_WIKI_FRAME =
             By.xpath("//div[@class='xRichTextEditor']/iframe");
 
-    public static final String ELEMENT_INSERTED_IMAGE_SIZE =
-            ".//*[@id='UIViewContentDisplay']//*[contains(@width,'$width')][contains(@height,'$height')]";
-
     public static final String ELEMENT_INSERTED_IMAGE_ALT_TEXT =
             ".//*[@id='UIViewContentDisplay']//*[contains(@alt,'$alt')]";
 
@@ -616,10 +537,6 @@ public class WikiLocators {
 
     public static final By ELEMETN_WIKI_DRAFT_CHANGES_PAGE_TITLE =
             By.xpath(".//*[@id='UIWikiMaskWorkspace']//*[contains(text(),'Draft Changes')]");
-
-    // Macro
-    public static final String ELEMENT_MACRO_BOX =
-            "//div[@class='box']/*[contains(.,'${macro}')]";
 
     // Link menu
     public static final By ELEMENT_LINK = By.xpath("//div[@class='gwt-MenuItemLabel' and text()='Link']");
@@ -767,21 +684,6 @@ public class WikiLocators {
     public static final By ELEMENT_CURRENT_PAGE_TAB_UPLOAD_IMAGE_BTN =
             By.xpath("//*[contains(@class,'xNewImagePreview')]");
 
-    public static final String ELEMENT_MACRO_FOOTNOTE =
-            "//li[contains(.,'${macro}')]//a[text()='^']";
-
-    // Macro:IFrame
-    public static final String ELEMENT_MACRO_IFRAME_IN_CONTENT_PAGE =
-            "//*[@id='UIViewContentDisplay']/iframe[contains(@src,'$src')]";
-
-    // Macro:JIRA
-    public static final String ELEMENT_MARCO_HEADER_TABLE_JIRA =
-            ".//*[@id='UIViewContentDisplay']/table//*[contains(text(),'$header')]";
-
-    // Macro:RSS
-    public static final String ELEMENT_MACRO_CLASS_INSERT_INTO_FRAME =
-            ".//*[contains(@class,'$macro')]";
-
     // *=============================================================SOURCE
     // EDITOR==========================================================*\\
     public static final String ELEMENT_EFFECT_BOLD =
@@ -829,8 +731,6 @@ public class WikiLocators {
     public static final By ELEMENT_PERMISSION_SELECT_USER =
             By.xpath("//a[contains(@onclick, 'OpenSelectUserForm')]");
 
-    public static final By ELEMENT_PERMISSION_SELECT_GROUP = By.className("uiIconGroup");
-
     public static final By ELEMENT_PERMISSION_SELECT_MEMBERSHIP =
             By.className("uiIconMembership");
 
@@ -849,32 +749,8 @@ public class WikiLocators {
     public static final By ELEMENT_WIKI_PARENT_PAGE_UN_LINK =
             By.xpath(".//*[@id='iconTreeExplorer']//em[contains(@onclick,'')]");
 
-    public static final By ELEMENT_WIKI_SETTING_PERM_TAB =
-            By.xpath("//*[contains(@href,'PermissionSetting')]");
-
     // *============================================================= WIKI SETTING
     // MANAGEMENT =======================================================*\\
-    public static final By ELEMENT_WIKI_SETTINGS_PERMISSION =
-            By.xpath(".//*[@id='myTab']//*[contains(text(),'Permission')]");
-
-    public static final By ELEMENT_WIKI_SETTINGS_PERMISSION_SELECT_USER_ICON =
-            By.xpath("//*[@class='uiIconUser uiIconLightGray']");
-
-    public static final By ELEMENT_WIKI_SETTINGS_PERMISSION_INPUT_SEARCH_USER_NAME =
-            By.xpath(".//input[@id='Quick Search']");
-
-    public static final String ELEMENT_WIKI_SETTINGS_PERMISSION_SELECT_SEARCH_OPTION =
-            "//*[contains(@name,'filter')]";
-
-    public static final String ELEMENT_WIKI_SETTINGS_PERMISSION_SEARCH_ICON =
-            ".//*[@id='UIUserSelector']//*[contains(@class,'uiIconSearch uiIconLightGray')]";
-
-    public static final String ELEMENT_WIKI_SETTINGS_PERMISSION_USER_NAME_IN_USER_LIST =
-            ".//*[@id='UIListUsers']//*[contains(text(),'$userName')]";
-
-    public static final By ELEMENT_WIKI_SETTINGS_CLOSE_USER_SELETOR =
-            By.xpath(".//*[@id='UIUserSelector']//*[contains(text(),'Close')]");
-
     public static final By ELEMENT_VIEW_PAGE_HISTORY =
             By.xpath("//*[@id='UIWikiPageInfo']/div[2]/div[2]/table/tbody/tr[2]/td/div/button");
 

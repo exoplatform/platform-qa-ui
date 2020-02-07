@@ -13,7 +13,6 @@ import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.Dialog;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
-import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase.filterOption;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class WikiPermission {
@@ -126,24 +125,6 @@ public class WikiPermission {
             $(ELEMENT_PERMISSION_ADD_BUTTON).click();
             info("The group/user/membership is added successfully");
         }
-    }
-
-    /**
-     * Open User list
-     */
-    public void goToSelectUser() {
-        info("Click on select user button");
-        evt.click(ELEMENT_PERMISSION_SELECT_USER);
-
-    }
-
-    /**
-     * Open Membership list
-     */
-    public void goToSelectMemberShip() {
-        info("Click on select membership button");
-        evt.click(ELEMENT_PERMISSION_SELECT_MEMBERSHIP);
-
     }
 
     /**
