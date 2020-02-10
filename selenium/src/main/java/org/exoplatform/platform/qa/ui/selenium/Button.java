@@ -52,19 +52,11 @@ public class Button {
 
     public static final By ELEMENT_CHANGE_PASSWORD_CLOSE_BUTTON = By.xpath("//a[normalize-space(text())='Close']");
 
-    public final By ELEMENT_SELECT_BUTTON = By.xpath("//*[text()='Select']");
-
     public final By ELEMENT_CONFIRM_BUTTON = By.xpath("//*[text()='Confirm']");
 
     public final By ELEMENT_NEXT_BUTTON = By.xpath("//*[text()='Next']");
 
     public final By ELEMENT_PREVIOUS_BUTTON = By.xpath("//*[text()='Previous']");
-
-    public final By ELEMENT_CREATE_LINK_BUTTON = By.xpath("//*[text()='Create Link']");
-
-    public final By ELEMENT_CREATE_MACRO_BUTTON = By.xpath("//button[text()='Insert Macro']");
-
-    public final By ELEMENT_INSERT_TABLE = By.xpath("//button[text()='Insert Table']");
 
     // Content explorer
     public final By ELEMENT_REFRESH_BUTTON = By.xpath("//*[text()='refresh']");
