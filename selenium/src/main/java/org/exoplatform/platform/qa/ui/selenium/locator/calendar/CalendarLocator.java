@@ -43,9 +43,6 @@ public class CalendarLocator {
                                                               "//*[contains(@startfull, '${targetDate}') or contains(@starttimefull, '${targetDate}')]";
 
   // Action bar-->left area (Add task/event)
-  public static final By              ELEMENT_BUTTON_TASK                                              =
-                                                          By.id("UIActionBarQuickAddTask");
-
   public static final By              ELEMENT_BUTTON_EVENT                                             =
                                                            By.id("UIActionBarQuickAddEvent");
 
@@ -59,9 +56,6 @@ public class CalendarLocator {
   public static final String          ELEMENT_CALENDAR_ACTIVE_VIEW                                     =
                                                                    "//*[@class='btn active']//*[text()='$view']";
 
-  // Action bar--> right area-->Settings
-  public static final By              ELEMENT_ACTION_BAR_SETTING_ICON                                  =
-                                                                      By.xpath(".//*[@id='UIActionBar']//*[contains(@class,'uiIconSetting')]");
   // Calendar left panel-->General
   public static final By              ELEMENT_SHOW_HIDE_LEFT_PANEL                                     =
                                                                    By.xpath("//div[@id='ShowHideAll']/i");
@@ -88,8 +82,6 @@ public class CalendarLocator {
   public static final By              ELEMENT_CATEGORY_OPTION                                          =
                                                               By.xpath("//*[@name='eventCategories']");
 
-  public static final By              ELEMENT_EVENT_TASK_DELETE_BUTTON                                 =
-                                                                       By.xpath(".//*[contains(@data-original-title,'Delete')]//*[contains(@class,'uiIconDelete')]");
   // LIST VIEW-->Grid
   public static final String          ELEMENT_EVENT_TASK_LIST_VIEW                                     =
                                                                    "//*[@id='UIListView']//*[@class='uiListViewRow']//*[contains(text(),'$name')]";
@@ -133,9 +125,6 @@ public class CalendarLocator {
 
   public static final String          ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE_ICON              =
                                                                                           "//*[@id='UIMonthView']//*[contains(@starttimefull,'$date')]/..//*[@class='moreEvent' and not(contains(@style, 'display'))]/*[@class='moreEventLabel']";
-
-  public static final String          ELEMENT_CELL_TO_MONTH_WORKING_PANEL                              =
-                                                                          "//td[contains(@starttimefull,'$date')]";
 
   // WORK WEEK VIEW-->Grid
   public static final String          ELEMENT_EVENT_TASK_WORK_WEEK_VIEW_ALL_DAY                        =
@@ -433,9 +422,6 @@ public class CalendarLocator {
    ********************************************************************************************/
 
   // CONTEXT MENU-->Right Click on Task/Event in Grid
-  public static final By              ELEMENT_CONTEXT_MENU                                             =
-                                                           By.xpath(".//*[@id='tmpMenuElement']");
-
   public static final By              ELEMENT_CONTEXT_MENU_VIEW                                        =
                                                                 By.xpath(".//*[@id='tmpMenuElement']//*[contains(@class,'iIconPreview')]");
 
@@ -452,9 +438,6 @@ public class CalendarLocator {
   public static final By              ELEMENT_CONTEXT_MENU_ADD_EVENT                                   =
                                                                      By.xpath(".//*[@id='tmpMenuElement']//*[contains(@class,'uiIconCalCreateEvent')]");
 
-  public static final By              ELEMENT_CONTEXT_MENU_ADD_TASK                                    =
-                                                                    By.xpath(".//*[@id='tmpMenuElement']//*[contains(@class,'uiIconCalCreateTask')]");
-
   // Preview Task/Event popup
 
   public static final String          ELEMENT_PREVIEW_TASK_EVENT_NAME                                  =
@@ -462,13 +445,6 @@ public class CalendarLocator {
 
   public static final By              ELEMENT_CLOSE_PREVIEW_TASK_EVENT_FORM                            =
                                                                             By.xpath("//*[@id='UIEventPreview']//*[text()='Close']");
-
-  // Confirm popup Task/Event
-  public static final By              ELEMENT_CONFIRM_POPUP_OK                                         =
-                                                               By.xpath(".//*[@id='UIConfirmation']//*[contains(text(),'Yes')]");
-
-  public static final By              ELEMENT_CONFIRM_POPUP_DELETE                                     =
-                                                                   By.xpath(".//*[contains(@class,'uiConfirmForm')]//button[1]");
 
   // ADD QUICK TASK FORM
   public static final By              ELEMENT_CALENDAR_QUICK_ADD_TASK_FORM                             = By.id("UIQuickAddTask");
@@ -498,22 +474,6 @@ public class CalendarLocator {
   /***************************************
    * EVENT MANAGEMANT
    ********************************************************************************************/
-  // Upload form
-  public static final By              ELEMENT_ADD_EVENT_UPLOAD_FILE                                    =
-                                                                    By.xpath("//*[@name='file']");
-
-  public static final String          ELEMENT_ATTACH_FILE_LABEL                                        =
-                                                                "//div[@class='fileNameLabel' and contains(text(),'${file}')]";
-
-  public static final By              ELEMENT_ATTACH_FILE_SAVE_BUTTON                                  =
-                                                                      By.xpath("//form[@id='UIAttachFileForm']//button[text()='Save']");
-
-  public static final String          ELEMENT_ADD_EVENT_FILE_ATTACHED                                  =
-                                                                      "//a[@data-original-title='${file}']";
-
-  public static final By              ELEMENT_ADD_EVENT_TASK_UPLOAD_FINISH                             =
-                                                                           By.xpath(".//*[contains(@class,'pull-left percent')][text()='100%']");
-
   // ADD QUICK EVENT FORM
   public static final By              ELEMENT_QUICK_ADD_EVENT_POPUP                                    =
                                                                     By.xpath("//div[@id='ExoCalendarEventForm']/div[1]");
@@ -579,94 +539,14 @@ public class CalendarLocator {
 
   public static final By              ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX                           = By.xpath("//div[@class='reminder pull-left']//div[@class='uiSwitchBtn']");
 
-  public static final By              ELEMENT_BUTTON_EVENT_MORE_DETAILS                                =
-                                                                        By.xpath("//*[@id='UIQuickAddEventPopupWindow']//*[text()='More Details']");
-
   public static final By              ELEMENT_BUTTON_EVENT_CANCEL_DETAILS                              =
                                                                           By.xpath("//*[@class=\"uiAction\"]//*[text()='Cancel']");
-
-  public static final String          ELEMENT_ATTACH_FILE_NAME                                         =
-                                                               "//*[@data-original-title='$fileName']";
-
-  public static final By              ELEMENT_SELECT_FILE_BUTTON                                       =
-                                                                 By.xpath("//*[@class='uploadButton']/*[@class='btn']");
-
-  public static final By              ELEMENT_EVENT_REMINDER_TAB                                       =
-                                                                 By.xpath("//*[text()='Reminders']");
 
   public static final By              ELEMENT_EVENT_PARTICIPANTS_TAB                                   =
                                                                      By.xpath("//*[text()='Participants']");
 
   public static final By              ELEMENT_EVENT_SCHEDULE_TAB                                       =
                                                                  By.xpath("//*[text()='Schedule']");
-
-  // Warning message
-
-  public static final By              ELEMENT_EVENT_ADD_ATTACHMENT                                     =
-                                                                   By.xpath("//*[@id=\"ExoEventForm\"]/div[1]/div[2]/form/div[2]/div[7]/div[2]/div/div[1]/label");
-
-
-  public static final By              ELEMENT_ATTACHMENT_SAVE_BUTTON                                   =
-                                                                     By.xpath("//*[@id='UIAttachFileForm']//*[text()='Save']");
-
-
-  public static final String          ELEMENT_ATTACHMENT_FORM_FILE_NAME                                =
-                                                                        "//*[@class='fileNameLabel' and text()='$fileName']";
-
-  // Schedule tab
-  public static final By              ELEMENT_ADD_PARTICIPANTS_BUTTON_IN_SCHEDULE_TAB                  =
-                                                                                      By.xpath("//*[@id='UIEventForm']//*[@class='uiIconCalInviteUser uiIconLightGray']");
-
-  public static final String          ELEMENT_USER_CHECKBOX_FULLNAME                                   =
-                                                                     "//*[contains(text(),'${user}')]/../..//*[@type='checkbox']";
-
-  public static final String          ELEMENT_USER_CHECKBOX_USERNAME                                   = "//*[@name='${user}']";
-
-  public static final String          ELEMENT_SCHEDULE_BUSY_TIME                                       =
-                                                                 "//*[@id='${user}']/../../../../..//td[${index}]";
-
-  public static final String          ELEMENT_SCHEDULE_TIME                                            =
-                                                            "//*[@id='RowContainerDay']/../../../..//tr[2]//td[${index}]";
-
-  public static final By              ELEMENT_SCHEDULE_NEXT_DAY                                        =
-                                                                By.xpath("//*[@title='Next Day' or @data-original-title='Next Day']");
-
-  public static final By              ELEMENT_SCHEDULE_PREVIOUS_DAY                                    =
-                                                                    By.xpath("//*[@title='Previous Day' or @data-original-title='Previous Day']");
-
-  public static final String          ELEMENT_SCHEDULE_DRAG                                            =
-                                                            "//td[${index}]//span[@data-original-title=\"Drag here to change your event's start and end times\" or @title=\"Drag here to change your event's start and end times\"]";
-
-  public static final String          ELEMENT_SCHEDULE_SELECTED_DATE                                   =
-                                                                     "//*[@id='RowContainerDay' and @datevalue='$date']";
-
-  // Participant tab
-  public static final By              ELEMENT_PRIVACY_PUBLIC_CHECKBOX                                  =
-                                                                      By.xpath("//*[@value='public']");
-
-  public static final By              ELEMENT_PRIVACY_PRIVATE_CHECKBOX                                 =
-                                                                       By.xpath("//*[@value='private']");
-
-  public static final By              ELEMENT_AVAILABLE_CHECKBOX                                       =
-                                                                 By.xpath("//*[@value='available']");
-
-  public static final By              ELEMENT_BUSY_CHECKBOX                                            =
-                                                            By.xpath("//*[@value='busy']");
-
-  public static final By              ELEMENT_OUTSIDE_CHECKBOX                                         =
-                                                               By.xpath("//*[@value='outside']");
-
-  public static final By              ELEMENT_SEND_INVITATION_NEVER_CHECKBOX                           =
-                                                                             By.xpath("//*[@value='never']");
-
-  public static final By              ELEMENT_SEND_INVITATION_ALWAYS_CHECKBOX                          =
-                                                                              By.xpath("//*[@value='always']");
-
-  public static final By              ELEMENT_SEND_INVITATION_ASK_CHECKBOX                             =
-                                                                           By.xpath("//*[@value='ask']");
-
-  public static final By              ELEMENT_REMINDER_ADDMORE_ICON                                    =
-                                                                    By.xpath("//*[@class='reminderByEmail']//*[contains(@class,'uiIconPlus')]");
 
   /* Recurring event form */
   public static final By              ELEMENT_NEVER_END_RECURRING_EVENT                                = By.id("endNever");
@@ -737,130 +617,10 @@ public class CalendarLocator {
                                                                              By.xpath("//*[@class='popover-content']/*[@class='time clearfix']//*[@class='uiIconCalRecurring']/../../*[@class='text']");
 
   /***************************************
-   * TASK MANAGEMANT
-   ********************************************************************************************/
-  // Add Quick Task Form
-  public static final By              ELEMENT_QUICK_ADD_TASK_POPUP                                     =
-                                                                   By.id("UIQuickAddTaskPopupWindow");
-
-  public static final By              ELEMENT_QUICK_INPUT_TASK_NAME                                    =
-                                                                    By.xpath("//*[@id='UIQuickAddTask']//*[@id='eventName']");
-
-  public static final By              ELEMENT_QUICK_INPUT_TASK_NOTE                                    =
-                                                                    By.xpath("//*[@id='UIQuickAddTask']//*[@id='description']");
-
-  public static final By              ELEMENT_QUICK_INPUT_TASK_CALENDAR                                =
-                                                                        By.xpath("//*[@id='UIQuickAddTask']//*[@name='calendar']");
-
-  public static final By              ELEMENT_QUICK_INPUT_TASK_CATEGORY                                =
-                                                                        By.xpath("//*[@id='UIQuickAddTask']//*[@name='category']");
-
-  public static final By              ELEMENT_QUICK_CHECKBOX_TASK_ALLDAY                               =
-                                                                         By.xpath("//*[@id='UIQuickAddTask']//*[@name='allDay']");
-
-  public static final By              ELEMENT_QUICK_INPUT_TASK_FROM_DATE                               =
-                                                                         By.xpath("//*[@id='UIQuickAddTask']//*[@name='from']");
-
-  public static final By              ELEMENT_QUICK_INPUT_TASK_TO_DATE                                 =
-                                                                       By.xpath("//*[@id='UIQuickAddTask']//*[@name='to']");
-
-  public static final By              ELEMENT_QUICK_INPUT_TASK_FROM_TIME                               =
-                                                                         By.xpath("//*[@id='UIQuickAddTask']//*[@name='fromTime']");
-
-  public static final By              ELEMENT_QUICK_INPUT_TASK_TO_TIME                                 =
-                                                                       By.xpath("//*[@id='UIQuickAddTask']//*[@name='toTime']");
-
-  public static final By              ELEMENT_QUICK_INPUT_TASK_FROM_TIME_INPUT                         =
-                                                                               By.xpath("//*[@id='UIQuickAddTask']//*[@id='fromTime']/..//*[@class='UIComboboxInput']");
-
-  public static final By              ELEMENT_QUICK_INPUT_TASK_TO_TIME_INPUT                           =
-                                                                             By.xpath("//*[@id='UIQuickAddTask']//*[@id='toTime']/..//*[@class='UIComboboxInput']");
-
-  public static final String          ELEMENT_QUICK_TASK_SELECT_TO_TIME                                =
-                                                                        "//*[@id='UIQuickAddTask']//*[@id='toTime']/..//*[@class='UIComboboxLabel' and text()='${time}']";
-
-  public static final String          ELEMENT_QUICK_TASK_SELECT_FROM_TIME                              =
-                                                                          "//*[@id='UIQuickAddTask']//*[@id='fromTime']/..//*[@class='UIComboboxLabel' and text()='${time}']";
-
-  public static final By              ELEMENT_ADD_EDIT_TASK_LOCATION                                   =
-                                                                     By.xpath("//*[@id='UITaskForm']//*[@id='place']");
-
-  public static final By              ELEMENT_BUTTON_TASK_SAVE                                         =
-                                                               By.xpath("//*[@id='UIQuickAddTaskPopupWindow']//*[text()='Save']");
-
-  public static final By              ELEMENT_BUTTON_TASK_QUICK_CANCEL                                 =
-                                                                       By.xpath("//*[@id='UIQuickAddTaskPopupWindow']//*[text()='Cancel']");
-
-  // Add Task Form (more details )
-  public static final By              ELEMENT_ADD_EDIT_TASK_NAME                                       =
-                                                                 By.xpath("//*[@id='UITaskForm']//*[@name='eventName']");
-
-  public static final By              ELEMENT_ADD_EDIT_TASK_NOTE                                       =
-                                                                 By.xpath("//*[@id='UITaskForm']//*[@id='description']");
-
-  public static final By              ELEMENT_ADD_EDIT_TASK_CALENDAR                                   =
-                                                                     By.xpath("//*[@id='UITaskForm']//*[@name='calendar']");
-
-  public static final By              ELEMENT_ADD_EDIT_TASK_CATEGORY                                   =
-                                                                     By.xpath("//*[@id='UITaskForm']//*[@name='category']");
-
-  public static final By              ELEMENT_ADD_EDIT_TASK_ALLDAY                                     =
-                                                                   By.xpath("//*[@id='UITaskForm']//*[@name='allDay']");
-
-  public static final By              ELEMENT_ADD_EDIT_TASK_FROM_DATE                                  =
-                                                                      By.xpath("//*[@id='UITaskForm']//*[@name='from']");
-
-  public static final By              ELEMENT_ADD_EDIT_TASK_TO_DATE                                    =
-                                                                    By.xpath("//*[@id='UITaskForm']//*[@name='to']");
-
-  public static final By              ELEMENT_ADD_EDIT_INPUT_TASK_FROM_TIME                            =
-                                                                            By.xpath("//*[@id='UITaskForm']//*[@name='fromTime']");
-
-  public static final By              ELEMENT_ADD_EDIT_INPUT_TASK_TO_TIME                              =
-                                                                          By.xpath("//*[@id='UITaskForm']//*[@name='toTime']");
-
-  public static final By              ELEMENT_ADD_EDIT_TASK_FROM_TIME_INPUT                            =
-                                                                            By.xpath("//*[@id='UITaskForm']//*[@id='fromTime']/..//*[@class='UIComboboxInput']");
-
-  public static final By              ELEMENT_ADD_EDIT_TASK_TO_TIME_INPUT                              =
-                                                                          By.xpath("//*[@id='UITaskForm']//*[@id='toTime']/..//*[@class='UIComboboxInput']");
-
-  public static final String          ELEMENT_ADD_EDIT_TASK_SELECT_FROM_TIME                           =
-                                                                             "//*[@id='UITaskForm']//*[@id='fromTime']/..//*[@class='UIComboboxLabel' and text()='${time}']";
-
-  public static final String          ELEMENT_ADD_EDIT_TASK_SELECT_TO_TIME                             =
-                                                                           "//*[@id='UITaskForm']//*[@id='toTime']/..//*[@class='UIComboboxLabel' and text()='${time}']";
-
-  public static final By              ELEMENT_BUTTON_TASK_MORE_DETAILS                                 =
-                                                                       By.xpath("//*[@id='UIQuickAddTaskPopupWindow']//*[text()='More Details']");
-
-  public static final By              ELEMENT_BUTTON_TASK_SAVE_DETAILS                                 =
-                                                                       By.xpath("//*[@id='UITaskForm']//*[text()='Save']");
-
-  public static final By              ELEMENT_ADD_EDIT_TASK_STATUS                                     =
-                                                                   By.xpath("//*[@id='UITaskForm']//*[@name='status']");
-
-  public static final By              ELEMENT_BUTTON_TASK_CANCEL_DETAILS                               =
-                                                                         By.xpath("//*[ @id='UITaskForm']//*[text()='Cancel']");
-
-  public static final By              ELEMENT_ADD_EDIT_TASK_DELIGATION_ADDUSER_ICON                    =
-                                                                                    By.xpath("//*[@name='delegation']/..//*[contains(@class,'uiIconPlus')]");
-
-  // Attach file form
-
-  public static final By              ELEMENT_TASK_ADD_ATTACHMENT                                      =
-                                                                  By.xpath("//button[contains(@onclick,'AddAttachment')]");
-
-  public static final String          ELEMENT_TASK_ATTACHMENT                                          =
-                                                              "//*[@id='UITaskForm']/..//a[@data-original-title='${file}']";
-
   /***************************************
    * EMAIL NOTIFICATION
    ********************************************************************************************/
   // Reminder email
-  public static final String          ELEMENT_GMAIL_CONTENT_REMINDER_TASK                              =
-                                                                          "//span[contains(text(),'Task Summary: $task')]";
-
   public static final SelenideElement ELEMENT_LIST_CATEGORY                                            =
                                                             $(byId("UIEventCategoryList"));
 

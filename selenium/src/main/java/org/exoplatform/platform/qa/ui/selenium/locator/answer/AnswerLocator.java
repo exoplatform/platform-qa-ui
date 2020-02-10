@@ -203,8 +203,6 @@ public class AnswerLocator {
   // More actions
   public static final String          ELEMENT_ANSWER_MORE_ACTION_BUTTON                     =
           "//*[@class='responseContainer']//*[contains(@id,'answer')]//*[text()='$answer']/../../../../..//*[@class='uiIconSettings uiIconLightGray']";
-  public static final String          ELEMENT_ANSWER_EDIT_BUTTON                            =
-          "//*[@class='responseContainer']//*[contains(@id,'answer')]//*[text()='$answer']/../../../../..//*[@class='uiIconLightGray uiIconEdit']";
   public static final String          ELEMENT_ANSWER_APPROVE_BUTTON                         =
           "//*[@class='responseContainer']//*[contains(@id,'answer')]//*[text()='$answer']/../../../../..//*[@class='uiIconLightGray uiIconEdit']";
   public static final String          ELEMENT_ANSWER_DISAPPROVE_BUTTON                      =
