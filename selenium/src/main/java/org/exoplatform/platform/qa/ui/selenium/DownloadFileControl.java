@@ -20,11 +20,6 @@
  */
 package org.exoplatform.platform.qa.ui.selenium;
 
-import java.util.Set;
-import org.apache.http.client.CookieStore;
-import org.apache.http.impl.client.BasicCookieStore;
-import org.apache.http.impl.cookie.BasicClientCookie;
-import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 
 @SuppressWarnings("deprecation")
@@ -34,27 +29,6 @@ public class DownloadFileControl {
 
   public DownloadFileControl(WebDriver driverObject) {
     driver = driverObject;
-  }
-
-  /**
-   * Add cookies
-   *
-   * @return cookieStore
-   */
-  private static CookieStore seleniumCookiesToCookieStore() {
-
-    Set<Cookie> seleniumCookies = driver.manage().getCookies();
-    CookieStore cookieStore = new BasicCookieStore();
-
-    for (Cookie seleniumCookie : seleniumCookies) {
-      BasicClientCookie basicClientCookie = new BasicClientCookie(seleniumCookie.getName(), seleniumCookie.getValue());
-      basicClientCookie.setDomain(seleniumCookie.getDomain());
-      basicClientCookie.setExpiryDate(seleniumCookie.getExpiry());
-      basicClientCookie.setPath(seleniumCookie.getPath());
-      cookieStore.addCookie(basicClientCookie);
-    }
-
-    return cookieStore;
   }
 
 }
