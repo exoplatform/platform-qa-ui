@@ -75,7 +75,6 @@ public class ElementEventTestBase {
    */
   public WebElement getElement(Object locator, Object... opParams) {
     By by = locator instanceof By ? (By) locator : By.xpath(locator.toString());
-    WebDriver wDriver;
     WebElement elem = null;
     try {
       elem = testBase.getExoWebDriver().getWebDriver().findElement(by);
@@ -270,37 +269,6 @@ public class ElementEventTestBase {
   }
 
   /**
-   * Drag an object
-   *
-   * @param sourceLocator string
-   * @param targetLocator string
-   */
-  public void dragObject(String sourceLocator, String targetLocator) {
-    Logger.info("--Drag an object--");
-    Actions action = new Actions(testBase.getExoWebDriver().getWebDriver());
-    WebElement source = waitForAndGetElement(sourceLocator);
-    WebElement target = waitForAndGetElement(targetLocator);
-
-    try {
-      action.clickAndHold(source).moveToElement(target).release().build().perform();
-    } catch (StaleElementReferenceException e) {
-      checkCycling(e, testBase.getDefaultTimeout() / WAIT_INTERVAL);
-
-      action.clickAndHold(source).moveToElement(target).release().build().perform();
-    } catch (UnhandledAlertException e) {
-      try {
-        Alert alert = testBase.getExoWebDriver().getWebDriver().switchTo().alert();
-        alert.accept();
-        switchToParentWindow();
-      } catch (NoAlertPresentException eNoAlert) {
-      }
-    } finally {
-      testBase.setLoopCount(0);
-    }
-
-  }
-
-  /**
    * Click by using javascript
    *
    * @param locator object
@@ -316,19 +284,6 @@ public class ElementEventTestBase {
       e = waitForAndGetElement(locator, testBase.getDefaultTimeout(), 1, notDisplay);
     }
     ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].click();", e);
-  }
-
-  /**
-   * Type by java script
-   *
-   * @param locatorById object
-   * @param value string
-   * @param opParams object
-   */
-  public void typeByJavascript(Object locatorById, String value, Object... opParams) {
-
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("document.getElementById('" + locatorById
-        + "').value='" + value + "'");
   }
 
   /**
@@ -410,21 +365,6 @@ public class ElementEventTestBase {
   }
 
   /**
-   * Mouse hover by Javascript
-   *
-   * @param locator Object
-   * @param opParams Object
-   */
-  public void mouseHoverByJavaScript(Object locator, Object... opParams) {
-    int notDisplay = (Integer) (opParams.length > 0 ? opParams[0] : 0);
-    WebElement targetElement;
-    String mouseOverScript =
-                           "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
-    targetElement = waitForAndGetElement(locator, 5000, 1, notDisplay);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript(mouseOverScript, targetElement);
-  }
-
-  /**
    * mouse over action
    *
    * @param locator Object
@@ -484,26 +424,6 @@ public class ElementEventTestBase {
   }
 
   /**
-   * wait for text present
-   *
-   * @param text string
-   * @param opts int
-   */
-  public void waitForTextPresent(String text, int... opts) {
-    int waitTime = opts.length > 0 ? opts[0] : testBase.getDefaultTimeout();
-    int display = opts.length > 1 ? opts[1] : 1;
-    for (int second = 0;; second++) {
-      if (second >= waitTime / WAIT_INTERVAL) {
-        Assert.fail("Timeout at waitForTextPresent: " + text);
-      }
-      if (isTextPresent(text, display)) {
-        break;
-      }
-
-    }
-  }
-
-  /**
    * wait for text not present
    *
    * @param text string
@@ -520,18 +440,6 @@ public class ElementEventTestBase {
       }
 
     }
-  }
-
-  /**
-   * wait for msg
-   *
-   * @param message string
-   * @param wait int
-   */
-  public void waitForMessage(String message, int... wait) {
-    int waitTime = wait.length > 0 ? wait[0] : testBase.getDefaultTimeout();
-
-    waitForAndGetElement("//*[contains(text(),'" + message + "')]", waitTime);
   }
 
   /**
@@ -729,64 +637,6 @@ public class ElementEventTestBase {
   }
 
   /**
-   * Change attribute "display" of HTML tag from "none" to "block"
-   *
-   * @param locator Object
-   */
-  public void changeDisplayAttributeHTML(Object locator) {
-    WebElement element = waitForAndGetElement(locator, testBase.getDefaultTimeout(), 1, 2);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';",
-                                                                                   element);
-  }
-
-  /**
-   * Copy and paste a string from one locator to other
-   *
-   * @param origin By
-   * @param target By
-   * @param value string
-   */
-  public void copyPasteString(By origin, By target, String value) {
-    WebElement element1 = testBase.getExoWebDriver().getWebDriver().findElement(origin);
-    WebElement element2 = testBase.getExoWebDriver().getWebDriver().findElement(target);
-
-    Logger.info("Type into the first locator");
-    element1.clear();
-    element1.click();
-    element1.sendKeys(value);
-
-    Logger.info("Copy from the first locator");
-    element1.sendKeys(Keys.chord(Keys.CONTROL, "a"));
-    element1.sendKeys(Keys.chord(Keys.CONTROL, "c"));
-
-    Logger.info("Paste to the second locator");
-    element2.click();
-    element2.sendKeys(Keys.chord(Keys.CONTROL, "v"));
-  }
-
-  /**
-   * @param object By
-   * @return = true: if there is not scroll bar on element = false: if there is
-   *         scroll bar on element
-   */
-  public boolean checkExitScrollBar(By object) {
-    WebElement element = waitForAndGetElement(object);
-    String scrollHeight =
-                        String.valueOf(((JavascriptExecutor) testBase.getExoWebDriver()
-                                                                     .getWebDriver()).executeScript("return arguments[0].scrollHeight;",
-                                                                                                    element));
-    String offsetHeight =
-                        String.valueOf(((JavascriptExecutor) testBase.getExoWebDriver()
-                                                                     .getWebDriver()).executeScript("return arguments[0].offsetHeight;",
-                                                                                                    element));
-    Logger.info("scrollHeight: " + scrollHeight);
-    Logger.info("offsetHeight: " + offsetHeight);
-    int scroll = Integer.parseInt(scrollHeight);
-    int offset = Integer.parseInt(offsetHeight);
-    return scroll == offset;
-  }
-
-  /**
    * function get an element from link text when cannot get by text in xpath
    *
    * @param text string
@@ -820,64 +670,6 @@ public class ElementEventTestBase {
   }
 
   /**
-   * inputDataToCKEditor
-   *
-   * @param framelocator By
-   * @param data string
-   */
-  public void inputDataToCKEditor(By framelocator, String data) {
-    Logger.info("input data to ckeditor");
-
-    try {
-      WebElement inputsummary = null;
-      WebElement e = waitForAndGetElement(framelocator, testBase.getDefaultTimeout(), 1, 2);
-      testBase.getExoWebDriver().getWebDriver().switchTo().frame(e);
-      inputsummary = testBase.getExoWebDriver().getWebDriver().switchTo().activeElement();
-      inputsummary.click();
-      inputsummary.clear();
-      if ("iexplorer".equals(testBase.getBrowser())) {
-        if ("true".equals(testBase.nativeEvent)) {
-          Logger.info("Set nativeEvent is TRUE");
-          ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("document.body.innerHTML='" + data
-              + "' + document.body.innerHTML;");
-        } else {
-          Logger.info("Set nativeEvent is FALSE");
-          // inputsummary.sendKeys(data);
-          ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("document.body.innerHTML='" + data
-              + "' + document.body.innerHTML;");
-        }
-      } else {
-        ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("document.body.innerHTML='" + data
-            + "' + document.body.innerHTML;");
-      }
-    } catch (StaleElementReferenceException e) {
-      checkCycling(e, testBase.getDefaultTimeout() / WAIT_INTERVAL);
-
-      testBase.getExoWebDriver().getWebDriver().switchTo().defaultContent();
-      inputDataToCKEditor(framelocator, data);
-    } catch (ElementNotVisibleException e) {
-      checkCycling(e, testBase.getDefaultTimeout() / WAIT_INTERVAL);
-
-      testBase.getExoWebDriver().getWebDriver().switchTo().defaultContent();
-      inputDataToCKEditor(framelocator, data);
-    } catch (WebDriverException e) {
-      checkCycling(e, testBase.getDefaultTimeout() / WAIT_INTERVAL);
-
-      testBase.getExoWebDriver().getWebDriver().switchTo().defaultContent();
-      inputDataToCKEditor(framelocator, data);
-    }
-    switchToParentWindow();
-  }
-
-  /**
-   * Press Enter key
-   */
-  public void pressEnterKey() {
-    testBase.getAction().sendKeys(Keys.ENTER).perform();
-    testBase.getAction().release();
-  }
-
-  /**
    * Press End Key
    *
    * @param driver WebDriver
@@ -886,13 +678,6 @@ public class ElementEventTestBase {
     Logger.info("Press End key");
     testBase.setAction(new Actions(driver));
     testBase.getAction().sendKeys(Keys.END).perform();
-    testBase.getAction().release();
-  }
-
-  public void pressHomeKey(WebDriver driver) {
-    Logger.info("Press Home key");
-    testBase.setAction(new Actions(driver));
-    testBase.getAction().sendKeys(Keys.HOME).perform();
     testBase.getAction().release();
   }
 
@@ -923,25 +708,6 @@ public class ElementEventTestBase {
     }
 
     Logger.info("The elemnt is shown successfully");
-  }
-
-  /**
-   * Check if a checkbox is checked or not
-   * @param checkedElement String
-   * @return boolean
-   */
-  public boolean checkCheckBoxAttribute(String checkedElement) {
-    Logger.info("Check checkbox attribute");
-    WebElement checkBox = waitForAndGetElement(checkedElement, 2000, 2, 1);
-    if (checkBox != null && !checkBox.isSelected()) {
-      Logger.info("Checkbox is NOT selected");
-      return false;
-    } else if (checkBox != null && checkBox.isSelected()) {
-      Logger.info("Checkbox IS SELECTED");
-      return true;
-    }
-
-    return false;
   }
 
   public int getWaitInterval() {

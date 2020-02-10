@@ -279,14 +279,8 @@ public class ECMSLocator {
 
   public static final By ELEMENT_ACTIONBAR_SHOWDRIVES = By.id("driveAction");
 
-  public static final By ELEMENT_SITE_EXPLORER_ALL_CHECKBOX =
-          By.xpath("//input[@type='checkbox' and @name= 'UIFileViewCheckBox']");
-
   public static final By ELEMENT_DELETE_ALL_BUTTON =
           By.xpath(".//*[@id='JCRContextMenu']//i[@class='uiIconEcmsDelete']");
-
-  public static final By ELEMENT_ACTIONBAR_SHARE =
-          By.xpath("//*[@class='uiIconEcmsShareDocuments uiIconEcmsLightGray']");
 
   // Add Category popup
   public static final By ELEMENT_ADD_CATEGORY_POPUP_SELECT_CATEGORY_TAB =
@@ -639,9 +633,6 @@ public class ECMSLocator {
   // Publication box
   public static final String ELEMENT_PUBLICATION_STATUS =
           "//*[text()='${status}']/..//*[@class='node']";
-  // View icons
-  public static final By ELEMENT_ADMIN_VIEW_ICON =
-          By.xpath("//*[@data-original-title = 'Admin']");
 
   // Notifications
   public static final By ELEMENT_DOCUMENT_SHARE_CLOSE_BUTTON =
