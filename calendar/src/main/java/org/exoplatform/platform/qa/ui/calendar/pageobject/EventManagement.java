@@ -975,28 +975,6 @@ public class EventManagement {
   }
 
   /**
-   * convertFromTimeToIndex
-   *
-   * @param time (ex: HH:mm)
-   */
-  @SuppressWarnings("deprecation")
-  public int convertFromTimeToIndex(String time) {
-    int index = 0;
-    SimpleDateFormat hour = new SimpleDateFormat("HH:mm");
-    try {
-      Date tempHour = hour.parse(time);
-      if (tempHour.getMinutes() == 0)
-        index = (Integer.valueOf(tempHour.getHours()) * 4) + 2;
-      else
-        index = (Integer.valueOf(tempHour.getHours()) * 4) + 3;
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
-    info("Index is " + String.valueOf(index));
-    return index;
-  }
-
-  /**
    * select user participant
    *
    * @param users   String
@@ -1232,15 +1210,6 @@ public class EventManagement {
     }
     $(ELEMENT_CONFIRM_EDIT_BUTTON).click();
     $(ELEMENT_CONFIRM_EDIT_RECURRING_FORM).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
-  }
-
-  /**
-   * Open schedule tab
-   */
-  public void goToScheduleTab() {
-    info("Click on Schedule tab");
-    evt.click(ELEMENT_EVENT_SCHEDULE_TAB);
-
   }
 
   /**
