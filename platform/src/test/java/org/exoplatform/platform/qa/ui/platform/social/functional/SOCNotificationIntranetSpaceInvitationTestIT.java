@@ -269,7 +269,6 @@ public class SOCNotificationIntranetSpaceInvitationTestIT extends Base {
   @Test
   public void test03_RefuseASpaceInvitationFromNotification() {
     info("Test 3: Refuse a Space Invitation from notification");
-    ArrayList<String> arrayUser = new ArrayList<String>();
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@gmail.com";
     String username2 = "usernameb" + getRandomString();
@@ -341,7 +340,6 @@ public class SOCNotificationIntranetSpaceInvitationTestIT extends Base {
   public void test04_CheckViewAllAfterAcceptingASpaceInvitation() {
 
     info("Test 4: Check View All after accepting a Space Invitation");
-    ArrayList<String> arrayUser = new ArrayList<String>();
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@gmail.com";
     String username2 = "usernameb" + getRandomString();

@@ -59,9 +59,6 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   public static final By              ELEMENT_MANAGESITES_TITLE                               =
                                                                 By.xpath(".//*[@id='UIPortalNavigationPortlet']//h5[text()='Manage Sites']");
 
-  public static final String          ELEMENT_MANAGESITES_EDIT_LAYOUT_ICON                    =
-                                                                           ".//*[@class='managementBlock']//div[text()='${site}']/../..//*[contains(@class,'uiIconEditLayout')]";
-
   public static final String          ELEMENT_MANAGESITES_EDIT_CONFIG_ICON                    =
                                                                            ".//*[@class='managementBlock']//div[text()='${site}']/../..//*[contains(@class,'uiIconEditPortalConfig')]";
 
@@ -81,13 +78,6 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   // Add new portal popup
   public static final By              ELEMENT_ADD_NEW_PORTAL_POPUP_SAVE_BTN                   =
                                                                             By.xpath(".//*[@id='UIPortalForm']//button[text()='Save']");
-
-  // Permission selector
-  public static final String          ELEMENT_PERMISSION_SELECTOR_POPUP_GROUP                 =
-                                                                              ".//*[contains(@class,'uiIconNode')][contains(@title,'${group}')]";
-
-  public static final String          ELEMENT_PERMISSION_SELECTOR_POPUP_MEMEBRSHIP            =
-                                                                                   ".//*[@id='PermissionSelector']//*[contains(@title,'${member}')]";
 
   // Contextmenu
   public static final By              ELEMENT_MANAGESITES_CONTEXTMENU_DELETE_ICON             =
@@ -351,9 +341,6 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
   public static final String          ELEMENT_NEW_PORTAL_SWITCH                               =
                                                                 "//img[contains(@src, 'sites/${portalName}')]";
 
-  public static final String          ELEMENT_USER_DELETE_ICON                                =
-                                                               ".//*[contains(text(),'${username}')]/../..//*[@data-original-title='Delete User']/i";
-
   public static final By              ELEMENT_SAVE_ADD_USER                                   =
                                                             By.xpath("//*[@id='UIAccountForm']//*[text()='Save']");
 
@@ -414,25 +401,9 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
 
   public static final String          ELEMENT_USER_NOT_FOUND                                  = "User ${user}not found in group";
 
-  // Paging control
-  public static final By              ELEMENT_PAGINATION_CONTROL                              =
-                                                                 By.xpath(".//*[contains(@class,'pagination')]");
-
-  public static final By              ELMEMENT_PAGINATION_CONTROL_DISBALED_NEXT_ARROW         =
-                                                                                      By.xpath(".//*[@class='disabled']//*[contains(@class,'uiIconNextArrow')]");
-
-  public static final By              ELEMENT_PAGINATION_TOTAL_PAGE                           =
-                                                                    By.xpath("//*[contains(@class,'pagesTotalNumber')]");
-
-  public static final By              ELEMENT_PAGINATION_ENABLED_NEXT_ARROW                   =
-                                                                            By.xpath(".//*[@ data-original-title='Next Page']//*[@class='uiIconNextArrow']");
-
   // User tab
   public static final String          ELEMENT_USER_DELETE_ICON1                               =
                                                                 "//*[@data-original-title='Delete User']/i";
-
-  public static final String          ELEMENT_USER_NAME_IN_USER_LIST                          =
-                                                                     ".//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]";
 
   // message
   public static final String          ELEMENT_MSG_TOTAL_PAGES                                 = "Total pages";
@@ -533,13 +504,6 @@ public static final SelenideElement ELEMENT_CLOSE_PORTLET=$(byClassName("uiIconC
 
   public static final By              ELEMENT_PAGEEDITOR_FINISHLIGHTBTN                       =
                                                                         By.xpath("//*[@class='uiIconSave uiIconLightGray pull-right']");
-
-  /*************************************
-   * DISABLE USER
-   ***************************************************************/
-  // Drop box
-  public static final By              ELEMENT_DISABLE_USER_DROP_BOX                           =
-                                                                    By.id("UIListUsers-userStatusFilter");
 
   /*************************************
    * USER ADD MANAGEMENT

@@ -10,8 +10,6 @@ import static org.junit.Assert.assertEquals;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.Button;
@@ -798,18 +796,6 @@ public class SiteExplorerHome {
     info("Click on Save button");
     $(ELEMENT_SITEEXPLORER_COMMENT_SAVE).click();
     info("Finish adding/Editing the Comment");
-  }
-
-  /**
-   * Click on Delete button
-   */
-  public void clickDeleteButton() {
-    info("click on Delete button");
-    evt.waitElementAndTryGetElement(ELEMENT_DELETE_ALL_BUTTON);
-    WebElement el = evt.waitForAndGetElement(ELEMENT_DELETE_ALL_BUTTON);
-    el.click();
-    dialog.deleteInDialog();
-
   }
 
   /**

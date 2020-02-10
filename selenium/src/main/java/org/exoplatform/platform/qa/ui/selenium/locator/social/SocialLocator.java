@@ -631,15 +631,6 @@ public final class SocialLocator {
   public static final By              ELEMENT_MY_PROFILE_TAB                                            =
                                                              By.xpath("//*[@class='nav nav-tabs userNavigation']//*[@class='uiIconAppprofile uiIconDefaultApp']");
 
-  public static final By              ELEMETN_ACTIVITY_TAB                                              =
-                                                           By.xpath(".//*[contains(@class,'uiIconAppactivities')]");
-
-  // Current position
-  public static final By              ELEMENT_EDIT_POSITION                                             =
-                                                            By.xpath("//*[@id='UIHeaderSection']//*[@class='uiIconEdit']");
-
-  public static final By              ELEMENT_EDIT_POSITION_SAVE_BUTTON                                 = By.id("savePosition");
-
   // About me
   public static final By              ELEMENT_ABOUTME_TEXTAREA_EDIT                                     = By.id("aboutMe");
 
@@ -663,15 +654,6 @@ public final class SocialLocator {
 
   public static final By              ELEMENT_CONTACT_PHONE_ADD_ICON                                    =
                                                                      By.xpath("//*[@id='phones']//*[@data-original-title='Add Item']");
-
-  public static final String          ELEMENT_CONTACT_URL_INPUT                                         =
-                                                                "//*[@class='multiValueContainer']/li[${index}]//*[contains(@name,'urls')]";
-
-  public static final String          ELEMENT_CONTACT_URL_INPUT_LIST                                    =
-                                                                     "//*[@class='multiValueContainer']/li";
-
-  public static final By              ELEMENT_CONTACT_URL_ADD_ICON                                      =
-                                                                   By.xpath("//*[@class='multiValueContainer']//*[@data-original-title='Add Item']");
 
   // Avatar
   public static final By              ELEMENT_CHANGE_AVATAR_LINK                                        =
@@ -736,9 +718,6 @@ public final class SocialLocator {
                                                                                          ".//*[@id='UIMiniConnectionsPortlet']//*[@class='borderContainer']/*[@class='avatarXSmall']";
 
   // Connection status
-  public static final By              ELEMENT_UIMINICONNECTIONS_PORLET_CONNECT_STATUS                   =
-                                                                                      By.xpath(".//*[@id='UIRelationshipAction']//*[@class='uiIconStatusConnect']/..");
-
   public static final By
                                       ELEMENT_ADD_CONNECT_PROFIL_STATUS                                =
 
@@ -758,8 +737,6 @@ public final class SocialLocator {
   public static final By
                                       ELEMENT_CANCEL_REQUEST_PROFIL_STATUS    =
                                                                                  By.xpath("//*[@id=\"UIRelationshipAction\"]/div/button");
-  public static final By              ELEMENT_UIMINICONNECTIONS_PORLET_CANCEL_STATUS                    =
-                                                                                     By.xpath(".//*[@id='UIRelationshipAction']//*[text()='Cancel Request']");
 
   public static final By
                                       ELEMENT_ACCEPT_CONNECT_PROFIL_STATUS         =
@@ -768,10 +745,6 @@ public final class SocialLocator {
   public static final By
                                       ELEMENT_DROPDOWN_DENY_PROFIL_STATUS          =
                                                                                      By.xpath("//*[@id=\"UIRelationshipAction\"]//*[@class='caret']/..");
-  public static final By              ELEMENT_UIMINICONNECTIONS_PORLET_CONNECTED_STATUS                 =
-                                                                                        By.xpath(".//*[@id='UIActionProfilePortlet']//*[@class='btn show-default']/*[@class='uiIconStatusConnected']");
-
-  public static final By              ELEMENT_UIMINICONNECTIONS_PORLET_DISCONNECTED_STATUS              =(byClassName("uiIconStatusDisconnect"));
 
   public static final By
                                       ELEMENT_DENY_PROFIL_STATUS        =
@@ -783,9 +756,6 @@ public final class SocialLocator {
   // select menu (actvity stream, forum, agenda etc ..)
   public static final By              ELEMENT_SPACE_MENU_ACTIVITY_STREAM                                =
                                                                          By.xpath(".//*[@class='tabName' and contains(text(),' Activity Stream')]");
-
-  public static final String          ELEMENT_SPACE_NAME                                                =
-                                                         ".//*[@id='UISpaceMenuPortlet']//*[@class='name'][contains(text(),'${name}')]";
 
   // Navigation menu
   public static final By          ELEMENT_HOME_SPACE_TAB                                             =
@@ -808,9 +778,6 @@ public final class SocialLocator {
 
   public static final By              ELEMENT_MEMBER_TAB                                                =
                                                          By.xpath(".//*[@id='spaceMenuTab']//*[contains(@class,'uiIconAppMembersPortlet ')]");
-
-  public static final By              ELEMENT_MYDASH_BTN_ADDGADGET                                      =
-                                                                   By.xpath(".//*[@id='GadgetContainer']//*[contains(text(),'Add Gadgets')]");
 
   /****************************************************
    * SPACE MANAGEMENTT
@@ -880,9 +847,6 @@ public final class SocialLocator {
   public static final By              ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_TO_JOIN_BTN                   =
                                                                                       byText("Request to Join");
 
-  public static final String          ELEMENT_MY_SPACE_ALL_SPACES_JOIN_BTN                              =
-                                                                           ".//*[contains(text(),'${space}')]/../../..//button[text()='Join']";
-
   public static final String          ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_PENDING                       =
                                                                                   ".//*[contains(text(),'${space}')]/../../..//*[contains(text(),'Request Pending')]";
 
@@ -893,22 +857,12 @@ public final class SocialLocator {
   public static final By              ELEMENT_MY_SPACE_REQUEST_PENDING_TAB                              =
                                                                            By.xpath("//*[contains(@href,'pendingSpace')]");
 
-  public static final String          ELEMENT_SPACE_CANCEL_BUTTON                                       =
-                                                                  "//*[@class='spaceTitle']//*[text()='${space}']/../../..//*[text()='Cancel']";
-
   // Members
   public static final By              ELEMENT_SPACE_MEMBERS                                             =
                                                             By.xpath("//*[@data-toggle='tab' and text()='Members']");
 
   public static final By              ELEMENT_SPACE_BTN_INVITE                                          =
                                                                By.xpath("//*[text()='Invite']");
-
-  // Request to join a space
-  public static final String          ELEMENT_REQUEST_TO_JOIN_SPACE_BTN                                 =
-                                                                        "//*[contains(text(),'${space}')]/../../..//button[text()='Request to Join']";
-
-  public static final String          ELEMENT_REQUEST_PENDING                                           =
-                                                              "//*[contains(text(),'${space}')]/../../..//*[text()='Request Pending']";
 
   // Forum tab
   public static final By              ELEMENT_FORUM_START_BUTTON_UP                                     =
@@ -921,13 +875,6 @@ public final class SocialLocator {
   // Document tab
   public static final By              ELEMENT_DOCUMENT_FOLDER_ADD_BTN                                   =
                                                                       By.xpath(".//*[contains(@class,'uiIconEcmsAddFolder ')]");
-
-  public static final By              ELEMENT_ACTIONBAR_ADDFOLDER                                       =
-                                                                  By.xpath("//*[contains(@id,'uiActionsBarContainer')]//*[contains(@class,'uiIconEcmsAddFolder')]");
-
-
-  public static final By              ELEMENT_ADDFOLDERBOX                                              =
-                                                           By.xpath("//*[contains(@id,'UIPopupContainer')]//*[contains(@class,'PopupTitle')]");
 
   public static final By              ELEMENT_ADDFOLDER_NAME                                            =
                                                              By.xpath("//*[@id='titleTextBox']");
@@ -944,28 +891,12 @@ public final class SocialLocator {
   public static final String          ELEMENT_DOCUMENT_FOLDER_CHECK                                      =
                                                       "(//div[@data-original-title='${file}']/following::div[@class='columnCheckbox']/span)[1]";
 
-  public static final String          ELMENT_DOCUMENT_FOLDER_ADDRESS                                    =
-                                                                     ".//*[@id='address'][contains(@value,'/$name')]";
-
   // Agenda tab
   public static final By              ELEMENT_AGENDA_EVENT_ADD_BTN                                      =
                                                                    By.xpath(".//*[@id='UIActionBarQuickAddEvent']");
 
-  // Member tab
-  public static final String          ELEMENT_MEMBER_USER_NAME                                          =
-                                                               ".//*[@id='spaceMemberListBox']//*[contains(@data-text,'${fullName}')]";
-
-  public static final String          ELEMENT_MANAGER_USER_NAME                                         =
-                                                                ".//*[@id='spaceManagerListBox']//*[contains(@data-text,'${fullName}')]";
-
   // Search user
   public static final By              ELEMENT_INPUT_SEARCH_USER_NAME                                    = By.id("searchTerm");
-
-  public static final String          ELEMENT_SELECT_SEARCH_OPTION                                      =
-                                                                   "//*[contains(@name,'filter')]";
-
-  public static final String          ELEMENT_SEARCH_ICON_USERS_MANAGEMENT                              =
-                                                                           "//*[contains(@class,'uiIconSearch uiIconLightGray')]";
 
   public static final By              ELEMENT_APPLICATION_TAB_ADD_APPLICATION_BTN                       =
                                                                                   By.xpath("//*[@id=\"UITabPanetab3\"]/div/button");
@@ -1017,9 +948,6 @@ public final class SocialLocator {
   public static final String          ELEMENT_SPACE_MEMBERS_USER_TABLE                                  =
                                                                        ".//*[@id='UISpaceMember']//th[contains(text(),'Members')]/../../..//*[contains(text(),'${user}')]";
 
-  public static final String          ELEMENT_USER_IN_MEMBER_TABLE                                      =
-                                                                   ".//*[@id='existingUsersTable']//*[contains(text(),'${fullName}')]";
-
   // Invitation a group
   public static final By              ELEMENT_SPACE_INVITE_USERS_FROM_GROUP_TAB                         =
                                                                                 By.xpath(".//*[contains(@data-target,'#UISpaceGroupBound-tab')]");
@@ -1029,21 +957,6 @@ public final class SocialLocator {
 
   public static final String          ELEMENT_SPACE_INVITE_USERS_FROM_GROUP_SELECT_GROUP                =
                                                                                          ".//*[@id='UISocialGroupSelector']//*[contains(@title,'${name}')]";
-
-  public static final By              ELEMENT_SPACE_INVITE_USERS_FROM_GROUP_SELECTED_LINK               =
-                                                                                          By.xpath(".//*[@id='UISocialGroupSelector']//*[contains(@data-placement,'bottom')]");
-
-  public static final By              ELEMENT_SPACE_INVITE_USERS_FROM_GROU_SELECTED_GROUP_INFO          =
-                                                                                               By.xpath(".//*[@id='groupId']");
-
-  public static final By              ELEMENT_SPACE_INVITED_GROUP_BTN                                   =
-                                                                      By.xpath(".//*[@id='UISpaceMember']//*[contains(@class,'uiIconGroup')]");
-
-  public static final String          ELEMENT_SPACE_INVITED_GROUP_NAME                                  =
-                                                                       "//*[contains(@title,'$name')]";
-
-  public static final By              ELEMENT_SPACE_INVITED_SELECT_GROUP                                =
-                                                                         By.xpath(".//*[@id='UIUsersInGroupSelector']//*[contains(@data-placement,'bottom')]");
 
   // Navigation tab
   public static final By              ELEMENT_SPACE_SETTING_NAVIGATION_TAB                              =
@@ -1065,56 +978,13 @@ public final class SocialLocator {
   public static final By              ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_LABEL                     =
                                                                                     By.xpath(".//*[@id='UIPageNodeForm']//*[contains(text(),'Label')]/..//input");
 
-  public static final By              ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_LANGUAGE                  =
-                                                                                       By.xpath(".//*[@id='PageNodeSetting-tab']//*[@class='selectbox' and @name='languages']");
-
-  public static final By              ELEMENT_CHECKBOX_EXTENDED_LABEL_MODE                              = By.id("switchmode");
-
-  public static final By              ELEMENT_INPUT_LABEL                                               = By.id("i18nizedLabel");
-
-  public static final By              ELEMENT_PAGE_SELECTOR_TAB                                         =
-                                                                By.xpath(".//*[@id='AddNode']//a[text()='Page Selector']");
-
-  public static final By              ELEMENT_INPUT_PAGE_NAME                                           = By.id("pageName");
-
-  public static final By              ELEMENT_INPUT_PAGE_TITLE                                          = By.id("pageTitle");
-
-  public static final By              ELEMENT_CREATE_PAGE_LINK                                          =
-                                                               By.xpath(".//*[@id='UIPageSelector']//*[@class='uiIconAddPage uiIconWhite']");
-
-  public static final By              ELEMENT_SEARCH_SELECTOR_PAGE_LINK                                 =
-                                                                        By.xpath(".//*[@id='UIPageSelector']//*[@class='uiIconSelectPage']");
-
   // Context menu
   public static final By              ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_EDIT                        =
                                                                                  By.xpath(".//*[@id='SpaceNavigationNodePopupMenu']//a[contains(.,'Edit this Node')]");
 
   public static final By              ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_DELETE                      =
+
                                                                                    By.xpath(".//*[@id='SpaceNavigationNodePopupMenu']//a[contains(.,'Delete Node')]");
-
-  public static final By              ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_ADD_NEW_NODE                =
-                                                                                         By.xpath(".//*[@id='SpaceNavigationNodePopupMenu']//a[contains(.,'Add new Node')]");
-
-  public static final By              ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_EDIT_NODE_PAGE              =
-                                                                                           By.xpath(".//*[@id='SpaceNavigationNodePopupMenu']//*[@class='uiIconEditPageNode']");
-
-  public static final By              ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_COPY_NODE                   =
-                                                                                      By.xpath(".//*[@id='SpaceNavigationNodePopupMenu']//a[contains(.,'Copy Node')]");
-
-  public static final By              ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_PASTE_NODE                  =
-                                                                                       By.xpath(".//*[@id='SpaceNavigationNodePopupMenu']//a[contains(.,'Paste Node')]");
-
-  public static final By              ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_CUT_NODE                    =
-                                                                                     By.xpath(".//*[@id='SpaceNavigationNodePopupMenu']//a[contains(.,'Cut Node')]");
-
-  public static final By              ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_MOVE_UP                     =
-                                                                                    By.xpath(".//*[@id='SpaceNavigationNodePopupMenu']//a[contains(.,'Move Up')]");
-
-  public static final By              ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_MOVE_DOWN                   =
-                                                                                      By.xpath(".//*[@id='SpaceNavigationNodePopupMenu']//a[contains(.,'Move Down')]");
-
-  public static final String          ELEMENT_SPACE_NAVIGATION_NODE_POSITION                            =
-                                                                             "//*[@class='childrenContainer nodeGroup']/li[${position}]//a[contains(text(),'${nodeName}')]";
 
   // Access space information
   public static final By              ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE                         =
@@ -1142,17 +1012,6 @@ public final class SocialLocator {
   public static final String          ELEMENT_SPACE_CHANGE_ROLE_USER_MEMBER                             =
                                                                             ".//*[contains(text(),'${user}')]/..//*[@class='uiSwitchBtn']";
 
-  public static final String          ELEMENT_SPACE_CHANGE_ROLE_USER_MEMBER_DISABLE                     =
-                                                                                    "//*[contains(text(),'${user}')]/..//*[contains(@class,'switchBtnDisabled')]";
-
-  public static final String          ELEMENT_SPACE_DELETE_USER_BTN                                     =
-                                                                    ".//*[contains(@onclick,'${user}')]/..//*[@class='uiIconDelete uiIconLightGray']";
-
-  public static final String          ELEMENT_SPACE_REMOVE_USER_BTN_MEMBER_TABLE                        =
-                                                                                 ".//*[contains(@class,'uiIconDelete')]/../../../*[contains(text(),'${fullName}')]";
-
-  public static final String          ELEMENT_SPACE_MEMBERS_TAB_DECLINE_REQUEST_jOINT                   =
-                                                                                      ".//*[contains(text(),'${user}')]/..//*[contains(@class,'uiIconRemove')]";
 
   /************************************************
    * ADD USER
@@ -1188,9 +1047,6 @@ public final class SocialLocator {
   public static final String          ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST                            =
                                                                              ".//*[@id='UISpaceNavigationNodeSelector']//*[contains(text(),'${name}')]";
 
-  public static final String          ELEMENT_SPACE_NAVIGAION_ADD_NODE_CHILDREN_UNDER_PARENT            =
-                                                                                             ".//*[@id='UISpaceNavigationNodeSelector']//*[contains(text(),'${childrenNode}')]/../../..//*[contains(text(),'${parentNode}')]";
-
   public static final By              ELEMENT_CONFIRM_INFORMATION                                       =
                                                                   By.xpath(".//*[text() = 'OK']");
 
@@ -1203,22 +1059,12 @@ public final class SocialLocator {
   public static final By              ELEMENT_SPACE_MENU_MORE                                           =
                                                               By.xpath(".//*[@id='spaceMenuTab']//*[contains(@class,'uiIconAppMoreButton')]");
 
-  public static final By              ELEMENT_SPACE_MENU_DASHBOARD                                      =
-                                                                   By.xpath(".//*[@id='spaceMenuTab']//*[contains(@class,'uiIconAppDashboardPortlet')]");
-
   // Left and right Arrows "Tooltips"
   public static final SelenideElement ELEMENT_SPACE_TOOLTIP_LEFT                                            =
                                                                       $(byXpath("//a[@class='actionIcon prevDate pull-left']"));
 
   public static final SelenideElement ELEMENT_SPACE_TOOLTIP_RIGHT                                            =
                                                                       $(byXpath("//i[@class='uiIconMiniArrowRight uiIconLightGray']"));
-
-  // Add new space buttons
-  public static final By              ELEMENT_ADD_NEW_SPACE_BUTTON                                      =
-                                                                   By.xpath("//*[@class='uiIconSocSimplePlus uiIconSocWhite']");
-
-  public static final By              ELEMENT_ADD_SPACE_FORM                                            =
-                                                             By.id("UIPopupAddSpace");
 
   // Access and Edit tab form
   public static final String          ELEMENT_SPACE_TITLE                                               =
@@ -1249,18 +1095,9 @@ public final class SocialLocator {
   public static final By              ELEMENT_ICON_DECLINE_SPACE_REQUEST_IN_MEMBERS_TAB                 =
                                                                                         byClassName("uiIconRemove");
 
-  public static final By              ELEMENT_SPACE_MEMBERS_SELECT_USER                                 =
-                                                                        By.xpath("//*[@id='UISpaceMember']//*[@class='uiIconUser uiIconLightGray']");
-
-  public static final By              ELEMENT_SPACE_MEMBERS_INVITE                                      =
-                                                                   By.xpath("//*[@id='UISpaceMember']//*[contains(text(),'Invite')]");
-
   // Application tab
   public static final By              ELEMENT_SETTINGS_APP_TAB                                          =
                                                                By.xpath("//*[@id=\"UITabPane\"]/ul/li[4]");
-
-  public static final String          ELEMENT_DELETE_APP_FROM_TOPBAR                                    =
-                                                                     ".//*[@id='UISpaceApplication']//*[contains(text(),'{$application}')]/../..//*[@class='uiIconClose pull-right']";
 
   // Button create
   public static final SelenideElement ELEMENET_SPACE_CREATE_BUTTON                                      =
