@@ -306,29 +306,6 @@ public class ForumLocator {
           By.xpath(".//*[@id='UICategoryForm']//button[text()='Save']");
 
   /***************************************************
-   * FORUM PERMISSION
-   ************************************************************************/
-  public static final By ELEMENT_PERM_MOD_CHECKBOX =
-          By.xpath("//*[@id='UIPermissionGrid']//tr[1]/td[2]//input");
-
-  public static final By ELEMENT_PERM_STARTTOP_CHECKBOX =
-          By.xpath("//*[@id='UIPermissionGrid']//tr[1]/td[3]//input");
-
-  public static final By ELEMENT_PERM_POSTREPLY_CHECKBOX =
-          By.xpath("//*[@id='UIPermissionGrid']//tr[1]/td[4]//input");
-
-  public static final By ELEMENT_PERM_VIEWPOST_CHECKBOX =
-          By.xpath("//*[@id='UIPermissionGrid']//tr[1]/td[5]//input");
-
-  public static final By ELEMENT_MESSAGE_ROLE_ICON =
-          By.xpath(".//*[@id='MessageTab']//*[contains(@class,'uiIconMembership')]");
-
-  public static final By ELEMENT_MESSAGE_SELECT_MEMBERSHIP_POPUP = By.xpath(".//*[@id='UIPopupWindow']");
-
-  public static final String ELEMENT_MESSAGE_SELECT_RIGHT_PARENT_GROUP =
-          ".//*[@id='UIPopupWindow']//a[contains(.,'$group')]";
-
-  /***************************************************
    * TOPIC MANAGEMENT
    ************************************************************************/
   public static final By ELEMENT_POST_REPLY =

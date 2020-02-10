@@ -82,7 +82,6 @@ public class SOCPeopleProfileUserStatusTestIT extends Base {
     String iconInvi = "invisible";
     String statusInvi = "Invisible";
     String iconOnline = "available";
-    String statusOnline = "Available";
     String orangeColor = "rgba(253, 140, 64, 1)";
     String redColor = "rgba(199, 34, 34, 1)";
     String whiteColor = "rgba(153, 153, 153, 1)";

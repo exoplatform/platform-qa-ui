@@ -717,12 +717,6 @@ public class RichTextEditor {
     info("Double Click on Upload New file button");
     $(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_IMAGE_BTN).doubleClick();
     $(byClassName("gwt-FileUpload")).uploadFromClasspath(link);
-    /*
-     * WebElement elem =
-     * waitForAndGetElement(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_NAME,5000,1,2);
-     * scrollToElement(elem, driver); click(elem,2,true);
-     * uploadFileUsingRobot(link);
-     */
   }
 
   /**

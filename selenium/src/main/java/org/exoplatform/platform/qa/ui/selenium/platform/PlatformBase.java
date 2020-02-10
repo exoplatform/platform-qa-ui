@@ -175,57 +175,6 @@ public class PlatformBase {
   }
 
   /**
-   * Select a user in User list
-   *
-   * @param user
-   * @param op
-   */
-  public void selectUser(String user, filterOption op) {
-    searchUser(user, op);
-    info("Select the user");
-    evt.check(ELEMENT_USER_CHECKBOX.replace("$user", user), 2);
-    info("Click on Add button");
-    evt.click(ELEMENT_ADD_USERS_BUTTON);
-    evt.waitForElementNotPresent(ELEMENT_ADD_USERS_BUTTON);
-    info("the user is added");
-  }
-
-  /**
-   * Select a membership in the list
-   *
-   * @param group
-   * @param membership
-   */
-  public void selectMembership(String group, String membership) {
-    String[] groups = group.split("/");
-    for (String groupName : groups) {
-      info("Select the group:" + groupName);
-      evt.click(ELEMENT_GROUP_MEMBERSHIP_NAME_SELECT.replace("$groupName", groupName));
-    }
-    if (!membership.isEmpty()) {
-      info("Select the membership:" + membership);
-      evt.click(ELEMENT_GROUP_MEMBERSHIP_NAME_SELECT.replace("$groupName", membership));
-    }
-    evt.waitForElementNotPresent(ELEMENT_MEMBERSHIP_POPUP);
-  }
-
-  /**
-   * Select a group
-   *
-   * @param group
-   */
-  public void selectGroup(String group) {
-    String[] groups = group.split("/");
-    for (String groupName : groups) {
-      info("Select the group:" + groupName);
-      evt.click(ELEMENT_GROUP_NAME.replace("$group", groupName));
-    }
-    info("Select the group");
-    evt.click(ELEMENT_SELECT_THIS_GROUP);
-    evt.waitForElementNotPresent(ELEMENT_SELECT_GROUP_POPUP);
-  }
-
-  /**
    * Available option
    */
   public enum selectInvitationOption {

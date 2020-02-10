@@ -133,42 +133,6 @@ public class SourceTextEditor {
   }
 
   /**
-   * Modify Wiki content with Source editor
-   *
-   * @param title updated title of the wiki page.
-   * @param content updated content of the wiki page.
-   * @param isClearTitle Boolean
-   * @param isClearContent Boolean
-   */
-  public void inputDataToPage(String title, String content, Boolean isClearTitle, Boolean isClearContent) {
-    String[] text;
-    info("Modify data with source editor");
-    if (title != null) {
-      if (isClearTitle)
-        evt.type(ELEMENT_TITLE_WIKI_INPUT, title, true);
-      else
-        evt.type(ELEMENT_TITLE_WIKI_INPUT, title, false);
-    }
-    if (content != null) {
-      if (isClearContent) {
-        evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).clear();
-        text = content.split("</br>");
-        for (int i = 0; i < text.length; i++) {
-          evt.type(ELEMENT_CONTENT_WIKI_INPUT, text[i], false);
-          evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).sendKeys(Keys.ENTER);
-        }
-      } else {
-        text = content.split("</br>");
-        for (int i = 0; i < text.length; i++) {
-          evt.type(ELEMENT_CONTENT_WIKI_INPUT, text[i], false);
-          evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).sendKeys(Keys.ENTER);
-        }
-      }
-    }
-
-  }
-
-  /**
    * Edit a wiki page with auto save status
    *
    * @param newTitle String
@@ -198,34 +162,15 @@ public class SourceTextEditor {
    * @param link link of file that will be attached
    */
   public void attachFile(String link) {
-    // String fs = File.separator;
-    // WebElement elem = waitForAndGetElement(ELEMENT_UPLOAD_NAME, 5000, 1, 2);
     String fs = File.separator;
     String path = testBase.getAbsoluteFilePath(link.replace("/", fs));
     info("path in uploadRobot:" + path);
-    // doubleClickOnElement(ELEMENT_UPLOAD_NAME);
 
     ((JavascriptExecutor) testBase.getExoWebDriver()
                                   .getWebDriver()).executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
 
     testBase.getExoWebDriver().getWebDriver().findElement(ELEMENT_UPLOAD_NAME).sendKeys(path);
-    /*
-     * scrollToElement(elem, driver); click(elem, 2, true);
-     * uploadFileUsingRobot(link); waitForAndGetElement(By
-     * .linkText(link.substring(link.lastIndexOf(fs) + 1)));
-     */
 
-  }
-
-  /**
-   * Attach many files to a wiki page
-   * @param link String
-   */
-  public void attachMultiFiles(String link) {
-    String[] upload = link.split(";");
-    for (int i = 0; i < upload.length; i++) {
-      attachFile("TestData/" + upload[i]);
-    }
   }
 
   /**

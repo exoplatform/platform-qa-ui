@@ -268,7 +268,6 @@ public class SpaceSettingManagement {
   public void setPermissionForSpace(String[] arrayRight) {
     for (String right : arrayRight) {
       info("Select a permission for space:" + right);
-      // check(ELEMENT_ACCESS_PERMISSION_RADIO.replace("${right}", right),2);
       $(byXpath(ELEMENT_ACCESS_PERMISSION_RADIO.replace("${right}", right))).parent().click();
     }
     info("Save all changes");
