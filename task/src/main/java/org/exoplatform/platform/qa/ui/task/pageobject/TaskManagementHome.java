@@ -1,7 +1,5 @@
 package org.exoplatform.platform.qa.ui.task.pageobject;
 
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
@@ -16,13 +14,6 @@ public class TaskManagementHome {
   public TaskManagementHome(TestBase testBase) {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
-  }
-
-  /**
-   * Go to Tasks area by clicking on Task header on left panel
-   */
-  public void goToTasks() {
-    info("--Go to Tasks area--");
   }
 
 }

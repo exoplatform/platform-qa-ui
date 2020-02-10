@@ -40,7 +40,6 @@ public class Utils {
   public static void captureScreen(String fileName) {
     String path;
     BufferedImage screenCapture;
-    // Thread.sleep(3000);
     try {
       Robot robot = new Robot();
       Rectangle screenSize = getScreenSize();
