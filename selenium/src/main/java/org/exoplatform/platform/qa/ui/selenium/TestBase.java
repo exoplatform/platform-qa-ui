@@ -19,9 +19,6 @@
  * 02110-1301 USA, or see <http://www.gnu.org/licenses/>.
  */
 package org.exoplatform.platform.qa.ui.selenium;
-
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.debug;
-
 import java.util.List;
 
 import org.openqa.selenium.*;
@@ -44,47 +41,16 @@ public class TestBase {
 
   private final ElementEventTestBase       elementEventTestBase       = new ElementEventTestBase(this);
 
-  private final TermsAndConditionsTestBase termsAndConditionsTestBase = new TermsAndConditionsTestBase(this);
-
   public int                               loopCount                  = 0;
 
   public Actions                           action;
-
-  public String                            nativeEvent;
-  // =
-  // 30
-  // seconds
 
   protected int                            DEFAULT_TIMEOUT            = 30000;                               // milliseconds
 
   protected boolean                        ieFlag;
 
-  protected boolean                        chromeFlag;
-
-  protected String                         plfVersion                 = "";
-
   /* ========System Property==================== */
-  protected Boolean                        isRandom;
-
-  protected Boolean                        isUseFile;
-
-  protected String                         jdbcDriver;
-
-  protected String                         dbUrl;
-
   protected String                         user;
-
-  protected String                         pass;
-
-  protected String                         sqlWiki;
-
-  protected String                         sqlAttach;
-
-  protected String                         sqlUser;
-
-  protected String                         sqlContent;
-
-  protected String                         defaultSheet;
 
   /**
    * exoWebDriver that uses Selenide Driver, a wrapper of Selenium Web Driver
