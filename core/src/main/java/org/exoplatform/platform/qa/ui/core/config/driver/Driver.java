@@ -21,6 +21,8 @@
 package org.exoplatform.platform.qa.ui.core.config.driver;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
 /**
@@ -34,10 +36,24 @@ public interface Driver {
 
   String getBaseUrl();
 
+  default boolean isChromeDriver() {
+    return getWebDriver() instanceof ChromeDriver;
+  }
+
   default boolean isIEDriver() {
     return getWebDriver() instanceof InternetExplorerDriver;
   }
 
+  default boolean isFFDriver() {
+    return getWebDriver() instanceof FirefoxDriver;
+  }
+
   // @TODO Decide how to manage the following behavior:
+
+  WebDriver getDriverAutoOpenWindow();
+
+  WebDriver getDriverSetLanguage(String locale);
+
+  void setPreferenceRunTime();
 
 }

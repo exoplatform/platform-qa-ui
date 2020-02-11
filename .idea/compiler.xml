@@ -14,6 +14,8 @@
         <module name="platform-qa-ui-ecms" />
         <module name="platform-qa-ui-forum" />
         <module name="platform-qa-ui-gatein" />
+        <module name="platform-qa-ui-news" />
+        <module name="platform-qa-ui-onlyOffice" />
         <module name="platform-qa-ui-platform" />
         <module name="platform-qa-ui-selenium" />
         <module name="platform-qa-ui-social" />
@@ -31,6 +33,8 @@
       <module name="platform-qa-ui-ecms" target="1.8" />
       <module name="platform-qa-ui-forum" target="1.8" />
       <module name="platform-qa-ui-gatein" target="1.8" />
+      <module name="platform-qa-ui-news" target="1.8" />
+      <module name="platform-qa-ui-onlyOffice" target="1.8" />
       <module name="platform-qa-ui-platform" target="1.8" />
       <module name="platform-qa-ui-selenium" target="1.8" />
       <module name="platform-qa-ui-social" target="1.8" />

@@ -16,7 +16,6 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -170,7 +169,7 @@ public class SOCHomePageTestIT extends Base {
     createNewDocument.saveAndClose();
     homePagePlatform.goToHomePage();
     info("share file from activity stream");
-    ELEMENT_TAB_LINK.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
     refresh();
     ELEMENT_LINK_TEXT_SELECT_FROM_EXISTING_UPLOAD.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_TEXT_DOCUMENT_IN_DOC_ACTIVITY_POPUP.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();

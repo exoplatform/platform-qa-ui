@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>platform-qa-ui</artifactId>
+    <groupId>org.exoplatform.platform.qa.ui</groupId>
+    <version>1.0.x-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>platform-qa-ui-news</artifactId>
+  <packaging>jar</packaging>
+  <name>eXo PLF:: QA - UI - News</name>
+  <description>UI Tests for News</description>
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>platform-qa-ui-commons</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+      <dependency>
+          <groupId>org.exoplatform.platform.qa.ui</groupId>
+          <artifactId>platform-qa-ui-social</artifactId>
+          <version>1.0.x-SNAPSHOT</version>
+          <scope>test</scope>
+      </dependency>
+  </dependencies>
+
+</project>

@@ -5,6 +5,9 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Configuration.*;
+
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -61,8 +64,8 @@ public class ECMS_Permission {
       info("Click on Add User button");
       sleep(2000);
       $(ELEMENT_SEARCH_USER_INPUT).setValue(name);
-      $(byXpath("//span[@class='searchByUser']//a[@data-original-title='Quick Search']")).waitUntil(Condition.visible,Configuration.timeout).click();
-      $(By.xpath((ELEMENT_PERMISSION_USER_ADDUSER).replace("${name}", name))).click();
+      $(byXpath("//span[@class='searchByUser']//a[@data-original-title='Quick Search']")).waitUntil(visible,timeout).click();
+      $(By.xpath((ELEMENT_PERMISSION_USER_ADDUSER).replace("${name}", name))).waitUntil(visible, timeout).click();
     }
     if (user == "membership") {
       info("User is a membership");
@@ -77,7 +80,7 @@ public class ECMS_Permission {
     info("Check on checkbox for reading, modifying and removing");
     selectCheckBoxRight(read, modify, remove);
     info("Click on Save button");
-    $(ELEMENT_PERMISSION_SAVE).click();
+    $(ELEMENT_PERMISSION_SAVE).waitUntil(visible, timeout).click();
     info("Finished changing right");
   }
 

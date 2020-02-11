@@ -187,5 +187,9 @@ public final class ActivityStreamLocator {
     public static final By ELEMENT_SELECTIMAGE_ICON= byClassName("cke_button__selectimage_icon");
     public static final String ELEMENT_LINK_VIEW_ALL_COMMENTS="//*[@id=\"CommentBlockBound{id}\"]/div[1]/a";
     public static final SelenideElement ELEMENT_ACTIVITY_STREAM_HEADING=$(byClassName("heading"));
+    public static final SelenideElement ELEMENT_OPEN_DOCUMENT_PREVIEW =  $(".ellipsis");
+    public static final SelenideElement ELEMENT_OPEN_DOCUMENT_PREVIEW_FROM_AS = $(".infoFile");
+    public static final SelenideElement ELEMENT_CLOSE_DOCUMENT_PREVIEW_FROM_AS = $("#documentPreviewContainer").find(".uiIconClose.uiIconWhite");
+
 
 }
