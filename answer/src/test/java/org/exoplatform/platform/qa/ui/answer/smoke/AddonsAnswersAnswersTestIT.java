@@ -50,10 +50,7 @@ public class AddonsAnswersAnswersTestIT extends Base {
   @Test
   public void test04_AddAnswerAQuestion() {
     String answer = "answer" + getRandomNumber();
-    String newanswer = "newanswer" + getRandomNumber();
     String question = "question" + getRandomNumber();
-    String fullName = "fullName" + getRandomNumber();
-    String content = "content" + getRandomNumber();
 
     info("Test 4: Answer a question");
     /*
@@ -85,7 +82,6 @@ public class AddonsAnswersAnswersTestIT extends Base {
   public void test05_EditAnswerAQuestion() {
     String newanswer = "newanswer" + getRandomNumber();
     String answer = "answer" + getRandomNumber();
-    String fullName = "fullName" + getRandomNumber();
     String question = "question" + getRandomNumber();
 
     info("Test 5: Edit an answer");
@@ -103,7 +99,6 @@ public class AddonsAnswersAnswersTestIT extends Base {
     $(byText(question)).click();
     answerManagement.goToAnswerQuestion(question);
     answerManagement.inputDataToAnswer(answer, null, null, null);
-    /// click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
     $(ELEMENT_ANSWER_FORM_SAVE_BUTTON).scrollTo().click();
     $(byText(answer)).waitUntil(Condition.appears, Configuration.timeout);
 
@@ -111,15 +106,12 @@ public class AddonsAnswersAnswersTestIT extends Base {
     answerManagement.inputDataToAnswer(newanswer, null, null, null);
 
     $(ELEMENT_ANSWER_FORM_SAVE_BUTTON).scrollTo().click();
-    $(byText(answer+newanswer)).waitUntil(Condition.appears, Configuration.timeout);
     questionManagement.deleteQuestion(question);
   }
 
   @Test
   public void test06_DeleteAnswerAQuestion() {
-    String newanswer = "newanswer" + getRandomNumber();
     String answer = "answer" + getRandomNumber();
-    String fullName = "fullName" + getRandomNumber();
     String question = "question" + getRandomNumber();
 
     info("Test 6: Delete an answer");

@@ -10,15 +10,10 @@ import static com.codeborne.selenide.Selenide.sleep;
 import static java.time.zone.ZoneRulesProvider.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
 import java.util.Map;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -45,32 +40,9 @@ public class PortalManageSites {
 
     ELEMENT_BUTTON_EDIT_NAVIGATION.waitUntil(Condition.appears, Configuration.timeout);
 
-    ELEMENT_BUTTON_EDIT_NAVIGATION.click();
+    ELEMENT_BUTTON_EDIT_NAVIGATION.waitUntil(visible,Configuration.collectionsTimeout).click();
 
     $(ELEMENT_NAVIGATION_MANAGEMENT_POPUP_TITLE).waitUntil(Condition.appears, Configuration.timeout);
-  }
-
-  /**
-   * Edit layout of a portal
-   *
-   * @param site String
-   */
-  public void goToEditLayout(String site) {
-    info("Click on Edit layout button");
-    evt.click(ELEMENT_MANAGESITES_EDIT_LAYOUT_ICON.replace("${site}", site));
-
-  }
-
-  /**
-   * change config of a portal
-   *
-   * @param site String
-   */
-  public void changeConfig(String site) {
-    goToEditLayout(site);
-    info("Click on site's config button");
-    evt.click(ELEMENT_MANAGESITES_EDIT_LAYOUT_SITE_CONFIG_BTN);
-
   }
 
   /**
@@ -93,120 +65,6 @@ public void goToDefaultSkin() {
     $((ELEMENT_ADD_NEW_PORTAL_POPUP_SAVE_BTN)).click();
     $(ELEMENT_ADD_NEW_PORTAL_POPUP_SAVE_BTN).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     refresh();
-  }
-  /**
-   * Add a simple portal
-   *
-   * @param portalName String
-   * @param label String
-   * @param des String
-   * @param groupsPath is as: Platform/Content Management
-   * @param memberShips is as: author
-   */
-  public void addSimplePortal(String portalName, String label, String des, String groupsPath, String memberShips) {
-    info("Click on Add New Portal button");
-    evt.click(ELEMENT_MANAGESITES_ADD_NEW_BTN);
-    if (!portalName.isEmpty()) {
-      info("Input new name for portal name");
-      evt.type(ELEMENT_ADD_NEW_PORTAL_POPUP_NAME, portalName, true);
-    }
-    if (!label.isEmpty()) {
-      info("Input label");
-      evt.type(ELEMENT_ADD_NEW_PORTAL_POPUP_LABEL, label, true);
-    }
-    if (!des.isEmpty()) {
-      info("Input description");
-      evt.type(ELEMENT_ADD_NEW_PORTAL_POPUP_DESC, des, true);
-    }
-    info("Select permission tab");
-    evt.click(ELEMENT_ADD_NEW_PORTAL_POPUP_PERMISSION_TAB);
-    info("Select public permission checkbox");
-    evt.check(ELEMENT_ADD_NEW_PORTAL_POPUP_PUBLIC_PERMISSION, 2);
-    if (!groupsPath.isEmpty()) {
-      info("Select Edit permission settings tab");
-      evt.click(ELEMENT_ADD_NEW_PORTAL_POPUP_EDIT_PERMISSITION_SETTINGS);
-      info("Click on Select permission button");
-      evt.click(ELEMENT_ADD_NEW_PORTAL_POPUP_SELECT_PERMISSION_BTN);
-      info("Select a group");
-      selectGroup(groupsPath);
-      info("Select a meberships");
-      selectMemberShip(memberShips);
-    }
-    saveNewPortal();
-  }
-
-  /**
-   * Select a group in permission selector popup
-   *
-   * @param groupsPath is path of groups as:Platform/Content Manangement
-   */
-  public void selectGroup(String groupsPath) {
-    info("Select a group with the path:" + groupsPath);
-    String[] groups = groupsPath.split("/");
-    for (String groupSelect : groups) {
-      info("Select group:" + groupSelect);
-      evt.click(ELEMENT_PERMISSION_SELECTOR_POPUP_GROUP.replace("${group}", groupSelect));
-    }
-
-  }
-
-  /**
-   * Select a membership of a group
-   *
-   * @param memberShip String
-   */
-  public void selectMemberShip(String memberShip) {
-    info("Select a membership:" + memberShip);
-    evt.click(ELEMENT_PERMISSION_SELECTOR_POPUP_MEMEBRSHIP.replace("${member}", memberShip));
-
-  }
-
-  /**
-   * Save all data when create a new portal
-   */
-  public void saveNewPortal() {
-    info("click on Save button");
-    evt.click(ELEMENT_ADD_NEW_PORTAL_POPUP_SAVE_BTN);
-
-  }
-
-  /**
-   * Edit a simple portal
-   *
-   * @param portalName String
-   * @param label String
-   * @param des String
-   * @param groupsPath is as: Platform/Content Management
-   * @param memberShips is as: author
-   */
-  public void editSimplePortal(String portalName, String label, String des, String groupsPath, String memberShips) {
-    if (!portalName.isEmpty()) {
-      info("Input new name for portal name");
-      evt.type(ELEMENT_ADD_NEW_PORTAL_POPUP_NAME, portalName, true);
-    }
-    if (!label.isEmpty()) {
-      info("Input label");
-      evt.type(ELEMENT_ADD_NEW_PORTAL_POPUP_LABEL, label, true);
-    }
-    if (!des.isEmpty()) {
-      info("Input description");
-      evt.type(ELEMENT_ADD_NEW_PORTAL_POPUP_DESC, des, true);
-    }
-    info("Select permission tab");
-    evt.click(ELEMENT_ADD_NEW_PORTAL_POPUP_PERMISSION_TAB);
-    info("Select public permission checkbox");
-    evt.check(ELEMENT_ADD_NEW_PORTAL_POPUP_PUBLIC_PERMISSION, 2);
-    if (!groupsPath.isEmpty()) {
-      info("Select Edit permission settings tab");
-      evt.click(ELEMENT_ADD_NEW_PORTAL_POPUP_EDIT_PERMISSITION_SETTINGS);
-      info("Click on Select permission button");
-      evt.click(ELEMENT_ADD_NEW_PORTAL_POPUP_SELECT_PERMISSION_BTN);
-      info("Select a group");
-      selectGroup(groupsPath);
-      info("Select a meberships");
-      selectMemberShip(memberShips);
-    }
-    saveNewPortal();
   }
 
   /**
@@ -318,7 +176,7 @@ public void goToDefaultSkin() {
       temp.click();
     }
     $(byXpath(ELEMENT_SAVE_BUTTON)).waitUntil(visible,Configuration.timeout).click();
-    sleep(12000);
+    sleep(18000);
     $(ELEMENT_POPUP_ADD_PORTAL).waitUntil(Condition.not(visible),Configuration.timeout);
 
 
@@ -388,20 +246,5 @@ public void goToDefaultSkin() {
     alert.acceptAlert();
     $(byXpath(ELEMENT_PORTAL_DELETE_ICON.replace("${portalName}", portalName))).waitUntil(not(visible),Configuration.timeout);
   }
-
-  /**
-   * Verify permission on site
-   *@param portal string
-   * @param isEnable boolean
-   */
-  public void verifyPermOnSite(String portal, boolean isEnable) {
-    info("check permission to access site: " + portal);
-    testBase.getExoWebDriver().getWebDriver().get(testBase.getExoWebDriver().getBaseUrl() + "/" + portal);
-    if (isEnable)
-      evt.waitForAndGetElement(ELEMENT_NEW_PORTAL_LOGOUT, 3000, 0);
-    else
-      evt.waitForElementNotPresent(ELEMENT_NEW_PORTAL_LOGOUT, 3000, 0);
-  }
-
 
 }

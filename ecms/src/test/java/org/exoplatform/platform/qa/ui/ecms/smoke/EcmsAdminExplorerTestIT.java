@@ -53,8 +53,6 @@ public class EcmsAdminExplorerTestIT extends Base {
     String title = "Atitle" + getRandomNumber();
     String permission = "any";
     ContentAdministration.specificView[] view = { ContentAdministration.specificView.ADMIN };
-    ContentAdministration.specificView[] newView = { ContentAdministration.specificView.WEB };
-    String[] newV = { "Web" };
     info("Finished getting data test");
     navigationToolbar.goToContentAdministration();
     contentAdministration.goToSpecificMainFunctions(ContentAdministration.mainEcmFunctions.EXPLORER);
@@ -147,6 +145,7 @@ public class EcmsAdminExplorerTestIT extends Base {
    * <li>Test Case Name: Delete a View.</li>
    */
 
+  @Test
   public void test04_05_06_07_Add_Edit_Delete_View_AView() {
     info("Test 02 : Add, edit, show and delete a View");
     String title = "aatitle" + getRandomNumber();
@@ -165,7 +164,6 @@ public class EcmsAdminExplorerTestIT extends Base {
     $(byClassName("uiIconView")).click();
     $(byText(title)).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_ECM_EXPLORER_GO_TO_ACTION_FORM).click();
-    // waitForAndGetElement(By.xpath(ELEMENT_ECM_EXPLORER_TAB_ICONS_LIST_SHOW_VIEW.replace("{$tab}",tab[0])));
     $(byText(tabName)).waitUntil(Condition.appears, Configuration.timeout);
     click(ELEMENT_ECM_EXPLORER_CLOSE_VIEW_MODE);
     info("edit a view");

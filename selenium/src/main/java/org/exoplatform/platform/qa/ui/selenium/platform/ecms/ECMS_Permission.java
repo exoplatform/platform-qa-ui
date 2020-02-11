@@ -32,26 +32,6 @@ public class ECMS_Permission {
   }
 
   /**
-   * Wrong path, ToCorrect
-   * 
-   * @param user String
-   * @param read boolean
-   * @param modify boolean
-   * @param remove boolean
-   */
-  public void modifyRightCheckBox(String user, boolean read, boolean modify, boolean remove) {
-    if (read == true) {
-      evt.check(By.xpath("//*[@name='" + user + "read']"));
-    }
-    if (modify == true) {
-      evt.check(By.xpath("//*[@name='" + user + "addNode]"));
-    }
-    if (remove == true) {
-      evt.check(By.xpath("//*[@name=''" + user + "remove]"));
-    }
-  }
-
-  /**
    * Delete permission of a node
    * 
    * @param name String
@@ -135,24 +115,6 @@ public class ECMS_Permission {
   public void closePermission() {
     info("Close permission form");
     $(ELEMENT_PERMISSION_CLOSE).click();
-  }
-
-  /**
-   * Select group membership
-   * 
-   * @param groupPath path group: (Ex: Organization/Employees)
-   * @param membership membership: (Ex: author)
-   */
-  public void selectGroupMembershipOfDrive(String groupPath, String membership) {
-    String[] temp;
-    info("select permission for drive");
-    evt.waitForAndGetElement(ELEMENT_DRIVE_SELECT_MEMBERSHIP_POPUP);
-    temp = groupPath.split("/");
-    for (int i = 0; i < temp.length; i++) {
-      evt.click(ELEMENT_DRIVE_SELECT_RIGHT_PARENT_GROUP.replace("$group", temp[i]));
-    }
-    evt.click(ELEMENT_DRIVE_SELECT_RIGHT_PARENT_GROUP.replace("$group", membership));
-    evt.waitForElementNotPresent(ELEMENT_DRIVE_SELECT_MEMBERSHIP_POPUP);
   }
 
   /**

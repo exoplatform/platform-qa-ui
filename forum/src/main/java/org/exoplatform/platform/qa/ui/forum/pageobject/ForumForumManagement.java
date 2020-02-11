@@ -52,25 +52,16 @@ public class ForumForumManagement {
 
     $(ELEMENT_ACTIONBAR_ADDFORUM).waitUntil(Condition.appears, Configuration.timeout);
     info("click on Add forum button");
-    $(ELEMENT_ACTIONBAR_ADDFORUM).click();
+    $(ELEMENT_ACTIONBAR_ADDFORUM).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("input the title for the forum");
-    $(ELEMENT_ADDFORUM_POPUP_TITLE).val(nameForum);
+    $(ELEMENT_ADDFORUM_POPUP_TITLE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).val(nameForum);
     info("check and input Oder field");
-    $(ELEMENT_ADDFORUM_POPUP_ORDER).val(order);
+    $(ELEMENT_ADDFORUM_POPUP_ORDER).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).val(order);
     info("check and input description");
-    $(ELEMENT_ADDFORUM_POPUP_DESCRIPTION).val(description);
+    $(ELEMENT_ADDFORUM_POPUP_DESCRIPTION).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).val(description);
     info("Click on Save button");
-    $(ELEMENT_ADDFORUM_POPUP_SAVE_BUTTON).click();
+    $(ELEMENT_ADDFORUM_POPUP_SAVE_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Finish adding new forum");
-  }
-
-  /**
-   * Cancel all changes of Add FORUM By QuynhPT
-   */
-  public void cancelChangeAddForum() {
-    evt.waitForAndGetElement(ELEMENT_ADDFORUM_POPUP_CANCEL_BUTTON);
-    evt.click(ELEMENT_ADDFORUM_POPUP_CANCEL_BUTTON);
-
   }
 
   /**
@@ -239,127 +230,6 @@ public class ForumForumManagement {
       selectItemMoreActionMenu(specifMoreActionMenu.UNLOCK);
       $(ELEMENT_FORUM_START_TOPIC_BUTTON).should(Condition.exist);
     }
-  }
-
-  /**
-   * Check display of manage forum
-   *
-   * @param forum String
-   * @param isDisplay boolean
-   */
-  public void checkDisplayOfForumManage(String forum, boolean isDisplay) {
-    info("check display of manage forum");
-    evt.click(ELEMENT_FORUM_FORUM_NAME_LINK.replace("${name}", forum));
-    if (isDisplay) {
-      evt.waitForAndGetElement(ELEMENT_MORE_ACTION);
-      evt.waitForAndGetElement(ELEMENT_MODERATOR);
-    } else {
-      evt.waitForElementNotPresent(ELEMENT_MORE_ACTION);
-      evt.waitForElementNotPresent(ELEMENT_MODERATOR);
-    }
-  }
-
-  /**
-   * Edit permission of forum
-   *
-   * @param forum String
-   * @param groupPath String
-   * @param member String
-   * @param isMod boolean
-   * @param isStartTop boolean
-   * @param isPostReply boolean
-   * @param isViewPost boolean
-   */
-  public void editPermOfForum(String forum,
-                              String groupPath,
-                              String member,
-                              boolean isMod,
-                              boolean isStartTop,
-                              boolean isPostReply,
-                              boolean isViewPost) {
-    info("edit permission of forum:" + forum);
-    evt.click(ELEMENT_FORUM_FORUM_NAME_LINK.replace("${name}", forum), 0, true);
-    selectItemMoreActionMenu(specifMoreActionMenu.EDIT);
-    forumPerm.selectPermGroupMember(groupPath, member, isMod, isStartTop, isPostReply, isViewPost);
-    evt.click(ELEMENT_ADDFORUM_POPUP_SAVE_BUTTON);
-  }
-
-  /**
-   * Check enable of start topic
-   *
-   * @param forum String
-   * @param isEnable boolean
-   */
-  public void checkEnableOfStartTopic(String forum, boolean isEnable) {
-    info("check enable of start topic");
-    evt.click(ELEMENT_FORUM_FORUM_NAME_LINK.replace("${name}", forum), 0, true);
-    if (isEnable) {
-      evt.waitForAndGetElement(ELEMENT_START_TOPIC_BTN);
-    } else {
-      evt.waitForElementNotPresent(ELEMENT_START_TOPIC_BTN);
-    }
-  }
-
-  /**
-   * Open permissions tab in Add/Edit Forum form
-   */
-  public void goToPermissions() {
-    info("Permissions page");
-    evt.click(ELEMENT_FORUM_PERMISSION_TAB);
-  }
-
-  /**
-   * Select User in Permission tab
-   */
-  public void gotoUserSelectorInPermissionTab() {
-    info("-- Go to wiki home page --");
-    evt.click(ELEMENT_FORUM_PERMISSION_TAB_USER_SELECTOR);
-  }
-
-  /**
-   * Cancel Add/Edit Forum form
-   */
-  public void cancelAddEditForum() {
-    info("Cancel Add or Edit Forum");
-    evt.click(ELEMENT_FORUM_CANCEL);
-  }
-
-  /**
-   * Close User Selector page
-   */
-  public void closeUserSelector() {
-    info("-- Go to User Selector page --");
-    evt.click(ELEMENT_FORUM_PERMISSION_CLOSE_USER_SELETOR);
-
-  }
-
-  /**
-   * function: Search user in User Selection Form in Forum Permission
-   *
-   * @param user String
-   * @param searchOption String
-   */
-
-  public void searchUser(String user, String searchOption) {
-    info("--Search user " + user + "--");
-    evt.type(ELEMENT_FORUM_PERMISSION_INPUT_SEARCH_USER_NAME, user, true);
-    evt.select(ELEMENT_FORUM_PERMISSION_SELECT_SEARCH_OPTION, searchOption);
-    evt.click(ELEMENT_FORUM_PERMISSION_SEARCH_ICON);
-    evt.waitForTextPresent(user);
-  }
-
-  /**
-   * Search user not found
-   *
-   * @param user String
-   * @param searchOption String
-   */
-  public void searchUserNotFound(String user, String searchOption) {
-    info("--Search user " + user + "--");
-    evt.type(ELEMENT_FORUM_PERMISSION_INPUT_SEARCH_USER_NAME, user, true);
-    evt.select(ELEMENT_FORUM_PERMISSION_SELECT_SEARCH_OPTION, searchOption);
-    evt.click(ELEMENT_FORUM_PERMISSION_SEARCH_ICON);
-    evt.waitForTextNotPresent(user);
   }
 
   /**

@@ -3,9 +3,7 @@ package org.exoplatform.platform.qa.ui.platform.gatein;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.commons.objectdatabase.TextBoxDatabase;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
-import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,10 +26,8 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 public class GateinAuthentificationTestIT extends Base{
 
     ManageLogInOut manageLogInOut;
-    HomePagePlatform homePagePlatform;
     NavigationToolbar navigationToolbar;
     UserAddManagement userAddManagement;
-    TextBoxDatabase textBoxDatabase;
 
 /**
 *<li> Case ID:123066.</li>

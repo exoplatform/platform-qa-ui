@@ -2,15 +2,10 @@ package org.exoplatform.platform.qa.ui.answer.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator.ELEMENT_ADD_USERS_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-import org.openqa.selenium.By;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -264,89 +259,6 @@ public class AnswerCategoryManagement {
     $(ELEMENT_ATTACHMENT_SAVE_BUTTON).click();
     $(byText(ELEMENT_IMPORT_SUCCESS_MESSAGE)).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_CATEGORY_OK_BUTTON).click();
-  }
-
-  /**
-   * HEAD Set permission
-   *
-   * @param cat
-   * @param group
-   * @param isRestricted
-   * @param isMod
-   */
-  public void setPermission(String cat, String group, boolean isRestricted, boolean isMod) {
-    goToActionOfCategoryFromActionBar(actionCategoryOption.EDIT);
-    evt.click(ELEMENT_CATEGORY_EDIT_PERM_TAB, 0, true);
-    selectGroupMembership(group, "*");
-    evt.click(ELEMENT_ADD_USERS_BUTTON);
-    if (isRestricted)
-      evt.check(By.xpath(ELEMENT_MANAGE_QUESTION_PERM_RESTRICTED.replace("$group", group)), 2);
-    if (isMod)
-      evt.check(By.xpath(ELEMENT_MANAGE_QUESTION_PERM_MODERATOR.replace("$group", group)), 2);
-    evt.click(ELEMENT_CATEGORY_ADD_FORM_SAVE_BUTTON);
-  }
-
-  /**
-   * Select group membership
-   */
-  public void selectGroupMembership(String groupPath, String mem) {
-    info("select group membership");
-    String[] temp;
-    evt.click(ELEMENT_SELECT_MEMBERSHIP_ICON);
-    evt.waitForAndGetElement(ELEMENT_SELECT_MEMBERSHIP_POPUP);
-    temp = groupPath.split("/");
-    for (int i = 0; i < temp.length; i++) {
-      evt.click(ELEMENT_SELECT_RIGHT_PARENT_GROUP.replace("$group", temp[i]));
-    }
-    evt.click(ELEMENT_SELECT_RIGHT_PARENT_GROUP.replace("$group", mem));
-    evt.waitForElementNotPresent(ELEMENT_SELECT_MEMBERSHIP_POPUP);
-  }
-
-  /**
-   * create category
-   *
-   * @param cat string
-   */
-  public void createCategory(String cat) {
-    goToActionOfCategoryFromActionBar(actionCategoryOption.ADD);
-    inputDataToSettingTab(cat, null, cat, null, null, null);
-    evt.click(ELEMENT_CATEGORY_ADD_FORM_SAVE_BUTTON);
-    evt.waitForAndGetElement(ELEMENT_CATEGORY_LIST_ITEM.replace("$category", cat));
-  }
-
-  /**
-   * check accessibility of category
-   *
-   * @param cat string
-   * @param isAccess boolean
-   * @param ques string
-   */
-  public void checkAccessibilityOfCat(String cat, boolean isAccess, String... ques) {
-    if (isAccess) {
-      evt.click(ELEMENT_CATEGORY_LIST_ITEM.replace("$category", cat), 0, true);
-      for (String q : ques) {
-        evt.waitForAndGetElement(By.xpath(ELEMENT_QUESTION_LIST_ITEM.replace("$question", q)));
-      }
-    } else
-      evt.waitForElementNotPresent(ELEMENT_CATEGORY_LIST_ITEM.replace("$category", cat));
-  }
-
-  /**
-   * Check user list
-   *
-   * @param user string
-   * @param isPresent boolean
-   */
-  public void checkPermUserList(String user, boolean isPresent) {
-    goToActionOfCategoryFromActionBar(actionCategoryOption.ADD);
-    evt.click(ELEMENT_CATEGORY_TAB_PERMISSIONS, 0, true);
-
-    evt.click(ELEMENT_CATEGORY_USER_ICON_SELECTOR, 0, true);
-    if (isPresent) {
-      evt.waitForAndGetElement(ELEMENT_CATEGORY_LIST_USER.replace("$user", user));
-    } else {
-      evt.waitForElementNotPresent(ELEMENT_CATEGORY_LIST_USER.replace("$user", user));
-    }
   }
 
   /**

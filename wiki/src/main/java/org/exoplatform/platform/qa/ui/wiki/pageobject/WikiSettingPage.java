@@ -7,7 +7,6 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 
 import com.codeborne.selenide.Condition;
 
@@ -38,8 +37,9 @@ public class WikiSettingPage {
   public void searchTemplate(String template) {
 
     info("Input a template's name and press entrer");
-    $(ELEMENT_TEMPLATE_SEARCH_TEXTBOX).waitUntil(Condition.visible,Configuration.timeout).val(template);
-    $(ELEMENT_TEMPLATE_SEARCH_TEXTBOX).waitUntil(Condition.visible,Configuration.timeout).pressEnter();
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+    $(ELEMENT_TEMPLATE_SEARCH_TEXTBOX).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).val(template);
+    $(ELEMENT_TEMPLATE_SEARCH_TEXTBOX).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).pressEnter();
 
     info("Verify that the search results is shown that matchs with keyword");
 
@@ -100,39 +100,12 @@ public class WikiSettingPage {
   }
 
   /**
-   * Open template tab
-   */
-  public void goToTemplateTab() {
-    info("click on the template tab");
-    evt.click(ELEMENT_WIKI_SETTING_TEMPLATE_TAB);
-
-  }
-
-  /**
-   * Open Permission tab
-   */
-  public void goToPermissionTab() {
-    info("Click on Permission tab");
-    evt.click(ELEMENT_WIKI_SETTING_PERMISSION_TAB);
-
-  }
-
-  /**
    * Save all changes for the template
    */
   public void saveTemplate() {
     info("Click on Save template");
     $(ELEMENT_SAVE_TEMPLATE).click();
     $(ELEMENT_SAVE_TEMPLATE).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
-  }
-
-  /**
-   * Cancel all changes for the template
-   */
-  public void cancelTemplate() {
-    info("Click on Cancel template");
-    evt.click(ELEMENT_CANCEL_TEMPLATE);
-
   }
 
   /**
@@ -144,21 +117,21 @@ public class WikiSettingPage {
    */
   public void addTemplate(String title, String des, String content) {
     info("Click on Add more Template button");
-    $(ELEMENT_WIKI_SETTING_ADD_MORE_TEMPALTE).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_WIKI_SETTING_ADD_MORE_TEMPALTE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
     if (!title.isEmpty()) {
       info("Input the title for the template");
-      $(ELEMENT_TITLE_TEMPLATE).waitUntil(Condition.visible,Configuration.timeout).setValue(title);
+      $(ELEMENT_TITLE_TEMPLATE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(title);
     }
 
     if (!des.isEmpty()) {
       info("Input the description for the template");
-      $(ELEMENT_DESCRIPTION_TEMPLATE).waitUntil(Condition.visible,Configuration.timeout).setValue(des);
+      $(ELEMENT_DESCRIPTION_TEMPLATE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(des);
     }
 
     if (!content.isEmpty()) {
       info("Input the content for the template");
-      $(ELEMENT_CONTENT_TEMPLATE).waitUntil(Condition.visible,Configuration.timeout).setValue(content);
+      $(ELEMENT_CONTENT_TEMPLATE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(content);
     }
   }
 

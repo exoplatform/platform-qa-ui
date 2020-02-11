@@ -25,18 +25,12 @@ import org.openqa.selenium.By;
 public final class PlatformPermissionLocator {
 
   // Option select permission button
-  public static final By     ELEMENT_SELECT_USER_ICON          = By.xpath("//*[@class='uiIconUser uiIconLightGray']");
-
-  public static final By     ELEMENT_SELECT_USER_ICON1         = By.xpath("//*[contains(@class,'uiIconSelectUser')]");
-
   public static final By     ELEMENT_SELECT_GROUP_ICON         = By.xpath("//*[@class='uiIconGroup uiIconLightGray']");
 
   public static final By     ELEMENT_SELECT_MEMBERSHIP_ICON    = By.xpath("//*[@class='uiIconMembership uiIconLightGray']");
 
   // User permission
   public static final String ELEMENT_USER_CHECKBOX             = "//*[text()='${user}']/../..//*[@type='checkbox']";
-
-  public static final String ELEMENT_USER_LIST                 = "//*[@id='UIListUsers']//*[contains(.,'${user}')]";
 
   public static final By     ELEMENT_ADD_USERS_BUTTON          = By.xpath("//*[@id='UIUserSelector']//*[text()='Add']");
 
@@ -45,9 +39,6 @@ public final class PlatformPermissionLocator {
   public static final By     ELEMENT_QUICK_SEARCH_BUTTON       = By.xpath("//a[@data-original-title='Quick Search']/i");
 
   public static final By     ELEMENT_SELECT_SEARCH             = By.name("filter");
-
-  public static final By     ELEMENT_USER_CLOSE_BUTTON         =
-                                                       By.xpath("//*[@id='UIUserSelector']//*[contains(@class,'btn')][contains(.,'Close')]");
 
   // Group permission
   public static final By     ELEMENT_SELECT_GROUP_POPUP        = By.id("UIPopupGroupMembershipSelector");

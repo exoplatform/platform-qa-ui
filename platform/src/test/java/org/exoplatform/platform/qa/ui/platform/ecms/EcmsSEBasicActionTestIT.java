@@ -5,7 +5,6 @@ import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER2;
-import static org.exoplatform.platform.qa.ui.selenium.Button.ELEMENT_OK_BUTTON_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
@@ -21,7 +20,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.CreateNewDocument;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.SiteExplorerHome;
@@ -160,7 +158,6 @@ public class EcmsSEBasicActionTestIT extends Base {
     @Tag("eabis17")
     public void test03_CutpasteANodeANode() {
 
-        String destination = "intranet";
         String secondDestination = "shared";
 
         String titleCommonNode = "titleCommonNode" + getRandomNumber();
@@ -183,7 +180,6 @@ public class EcmsSEBasicActionTestIT extends Base {
     public void test_04_DragAndDropANode() {
 
         String destination = "intranet";
-        String secondDestination = "shared";
 
         String titleCommonNode = "titleCommonNode" + getRandomNumber();
 

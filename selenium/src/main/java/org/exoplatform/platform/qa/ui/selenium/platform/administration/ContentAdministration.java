@@ -8,16 +8,12 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.locator.PlatformPermissionLocator;
 import org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator;
-import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.platform.ecms.ECMS_Permission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -31,10 +27,6 @@ public class ContentAdministration {
   public PlatformPermission    plfPerm;
 
   // Permission
-  public By                    ELEMENT_ECM_WEB_VIEW_PERMISSION = By.xpath("//a[@href='#tab-UIViewPermissionContainer']");
-
-  public By                    ELEMENT_ECM_DRIVE_PERMISSION    = By.xpath("//*[@id='permissions']");
-
   public ManageAlert           alert;
 
   private ElementEventTestBase evt;
@@ -160,29 +152,18 @@ public class ContentAdministration {
    * @param perm
    */
   public void addView(String name, String tabName, String[] tab, String... perm) {
-    /*
-     * evt.click(ELEMENT_ECM_EXPLORER_VIEWS_ADD_VIEWS);
-     * evt.type(ELEMENT_ECM_EXPLORER_NAME_VIEW_FORM, name, true);
-     * evt.click(ELEMENT_ECM_EXPLORER_GO_TO_ACTION_FORM);
-     * evt.click(ELEMENT_ECM_EXPLORER_ADD_ACTION_VIEW_FORM);
-     * evt.type(ELEMENT_ECM_EXPLORE_TAB_NAME_VIEW_FORM, tabName, true);
-     */
     $(ELEMENT_ECM_EXPLORER_VIEWS_ADD_VIEWS).click();
     $(ELEMENT_ECM_EXPLORER_NAME_VIEW_FORM).setValue(name);
     $(ELEMENT_ECM_EXPLORER_GO_TO_ACTION_FORM).click();
     $(ELEMENT_ECM_EXPLORER_ADD_ACTION_VIEW_FORM).click();
     $(ELEMENT_ECM_EXPLORE_TAB_NAME_VIEW_FORM).setValue(tabName);
     for (String arrayElement : tab) {
-      // evt.check(By.xpath(ELEMENT_ECM_EXPLORER_CHOOSE_TAB_CATEGORY_VIEW_FORM.replace("{$tab}",
-      // arrayElement)), 2);
       $(byText(arrayElement)).click();
     }
     $(ELEMENT_ECM_EXPLORE_SAVE_TAB_VIEW_FORM).click();
     $(ELEMENT_ECM_EXPLORER_GO_TO_PERMISSION_FORM).click();
     if (perm.length < 2) {
       $(ELEMENT_ECM_EXPLORER_USER_PERMISSION_ADD).click();
-      // evt.click(By.xpath(ELEMENT_ECM_EXPLORER_SELECT_USER_LIST_PERMISSION.replace("{$user}",
-      // perm[0])));
       $(byId("Quick Search")).setValue(perm[0]);
       $(byClassName("btnSearchUser")).click();
       $(byClassName("uiIconPlus")).click();
@@ -219,8 +200,6 @@ public class ContentAdministration {
   public void deleteView(String viewName) {
     $(By.xpath(ELEMENT_ECM_EXPLORER_VIEW_DELETE_LIST.replace("{$name}", viewName))).click();
     alert.acceptAlert();
-    // evt.waitForElementNotPresent(By.xpath(ELEMENT_ECM_EXPLORER_VIEW_EDIT_LIST.replace("{$name}",
-    // viewName)));
     $(byText(viewName)).shouldNot(Condition.exist);
   }
 
@@ -250,32 +229,26 @@ public class ContentAdministration {
       switch (arrayElement) {
       case ADMIN:
         info("Add Admin view type");
-        // check(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ADMIN,2);
         ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ADMIN.click();
         break;
       case CATEGORY:
         info("Add Category view type");
-        // check(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_CATEGORIES,2);
         evt.clickByJavascript(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_CATEGORIES, 2);
         break;
       case ICON:
         info("Add Icon view type");
-        // check(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ICONS,2);
         evt.clickByJavascript(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ICONS, 2);
         break;
       case LIST:
         info("Add List view type");
-        // check(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_LIST,2);
         evt.clickByJavascript(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_LIST, 2);
         break;
       case WEB:
         info("Add WEB view type");
-        // check(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_WEB,2);
         evt.clickByJavascript(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_WEB, 2);
         break;
       default:
         info("Add WEB view type");
-        // check(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_WEB,2);
         evt.clickByJavascript(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_WEB, 2);
         break;
       }
@@ -336,8 +309,6 @@ public class ContentAdministration {
     $(byText(name)).parent().parent().find((ELEMENT_BTN_DELETE_DRIVE)).click();
 
     alert.acceptAlert();
-    // evt.waitForElementNotPresent(By.xpath(ELEMENT_ECM_EXPLORER_DRIVES_DELETE_LIST.replace("{$name}",
-    // name)));
     $(byText(name)).shouldNot(Condition.exist);
   }
 
@@ -507,49 +478,6 @@ public class ContentAdministration {
     info("Close the form");
     $(ELEMENT_ECM_ADVANCED_CATEGORIES_CLOSE_FORM).click();
     info("Finished editing the category");
-  }
-
-  /**
-   * Select a group in permission selector popup by string
-   * 
-   * @param groupsPath is path of groups as:Platform/Content Manangement
-   */
-  public void selectGroup(String groupsPath) {
-    info("Select a group with the path:" + groupsPath);
-    String[] groups = groupsPath.split("/");
-    for (int i = 0; i < groups.length - 1; i++) {
-      info("Select group:" + groups[i]);
-      evt.click(ELEMENT_SELECT_CATEGORY.replace("${name}", groups[i]));
-    }
-
-  }
-
-  /**
-   * Add sub category
-   * 
-   * @param name
-   */
-  public void addSubCategory(String name) {
-    info("Add sub category " + name);
-    evt.click(ELEMENT_ADD_SUB_CAT_BUTTON);
-    evt.type(ELEMENT_NAME_CAT_TEXTBOX, name, true);
-    evt.click(ELEMENT_ADD_CAT_SAVE_BUTTON);
-  }
-
-  /**
-   * edit with sub category
-   * 
-   * @param name name of category
-   * @param sub name of sub category
-   */
-  public void addSubCat(String name, String sub) {
-    info("add sub category");
-    evt.click(By.xpath(ELEMENT_ECM_ADVANCED_CATEGORIES_EDIT_FORM.replace("{$name}", name)));
-    evt.click(ELEMENT_ADD_SUB_CAT_BUTTON);
-    evt.type(ELEMENT_NAME_CAT_TEXTBOX, sub, true);
-    evt.click(ELEMENT_ADD_CAT_SAVE_BUTTON);
-
-    evt.click(ELEMENT_ECM_ADVANCED_CATEGORIES_CLOSE_FORM);
   }
 
   /**
@@ -856,63 +784,6 @@ public class ContentAdministration {
   }
 
   /**
-   * Edit permission of template dialog
-   * 
-   * @param label
-   * @param group
-   * @param member
-   */
-  public void editPermOfTemplateDialog(String label, String group, String member) {
-    info("edit permission");
-    goToSpecificMainFunctions(mainEcmFunctions.TEMPLATES);
-    goToSpecificFunctions(specificEcmFunctions.DOCUMENTS);
-    evt.click(By.xpath(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LIST_EDIT.replace("{$name}", label)));
-
-    evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_TAB, 0, true);
-    evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_EDIT, 0, true);
-
-    evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_REMOVE_PERM, 0, true);
-    evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_ADD_PERM, 0, true);
-    ecmsPerm.selectGroupMembershipOfLock(group, member);
-    evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_SAVE, 0, true);
-
-  }
-
-  /**
-   * Edit permission of template view
-   * 
-   * @param label
-   * @param group
-   * @param member
-   */
-  public void editPermOfTemplateView(String label, String group, String member) {
-    info("edit permission");
-    goToSpecificMainFunctions(mainEcmFunctions.TEMPLATES);
-    goToSpecificFunctions(specificEcmFunctions.DOCUMENTS);
-    evt.click(By.xpath(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LIST_EDIT.replace("{$name}", label)));
-
-    evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_TAB, 0, true);
-    evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_EDIT, 0, true);
-
-    evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_REMOVE_PERM, 0, true);
-    evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_ADD_PERM, 0, true);
-    ecmsPerm.selectGroupMembershipOfLock(group, member);
-    evt.click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_SAVE, 0, true);
-
-  }
-
-  /**
-   * Delete a Document in Template
-   * 
-   * @param title
-   */
-  public void deleteDocumentTemplate(String title) {
-    evt.click(By.xpath(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LIST_DELETE.replace("{$name}", title)));
-    alert.acceptAlert();
-    evt.waitForElementNotPresent(By.xpath(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LIST.replace("{$name}", title)));
-  }
-
-  /**
    * Add a template into list
    * 
    * @param name
@@ -1012,338 +883,6 @@ public class ContentAdministration {
   }
 
   /**
-   * Add more actions for a View type By QuynhPT date 09/01/2015
-   * 
-   * @param nameView the name of View type as: Web, Admin, Icon, List, Categories
-   * @param action the name of actions that list in the popup
-   */
-  public void addActionsForAView(String nameView, specificEcmActionstypes action) {
-    info("Go to Explorer tab");
-    goToSpecificMainFunctions(mainEcmFunctions.EXPLORER);
-    info("Go to Views link");
-    goToSpecificFunctions(specificEcmFunctions.VIEW);
-    info("Click on Edit button of the View type");
-    evt.click(By.xpath(ELEMENT_ECM_EXPLORER_EDIT.replace("${nameView}", nameView)));
-
-    info("Open Action tab");
-    evt.click(ELEMENT_ECM_EXPLORER_GO_TO_ACTION_FORM);
-
-    info("Click on Add action button");
-    evt.click(ELEMENT_ECM_EXPLORER_EDIT_ACTION_VIEW_FORM);
-
-    info("Select the action");
-    goTospecificEcmActionstypes(action);
-
-    info("Click on Save button of Action popup");
-    evt.click(ELEMENT_ECM_EXPORER_ACTIONS_POPUP_SAVE_BUTTON);
-
-    info("Save all changes");
-    evt.click(ELEMENT_ECM_EXPLORER_EDIT_VIEWS_SAVE_BUTTON);
-
-    info("Finished Adding action for a view");
-  }
-
-  /**
-   * select an actions to add for a view type
-   * 
-   * @param action
-   */
-  public void goTospecificEcmActionstypes(specificEcmActionstypes action) {
-    switch (action) {
-    case ADD_CATEGORY:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_ADD_CATEGORY, 2);
-      break;
-    case ADD_TRANSLATION:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_ADD_TRANSLATION, 2);
-      break;
-    case CONTENT_NAVIGATION:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_CONTENT_NAVIGATION, 2);
-      break;
-    case IMPORT_NOTE:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_IMPORT_NOTE, 2);
-      break;
-    case MANAGE_CATEGORIES:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_MANAGE_CATEGORIES, 2);
-      break;
-    case MANAGE_RELATION:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_MANAGE_RELATIONS, 2);
-      break;
-    case APPROVE_CONTENT:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_APPROVE_CONTENT, 2);
-      break;
-    case SHOW_JCR_STRUCTURE:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_SHOW_JCR_STRUCTURE, 2);
-      break;
-    case VIEW_METADATA:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_VIEW_METADATA, 2);
-      break;
-    case VIEW_PROPERTIES:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_VIEW_PROPERTIES, 2);
-      break;
-    case ADD_DOCUMENT:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_ADD_DOCUMENT, 2);
-      break;
-    case ADD_SYMLINK:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_ADD_SYMLINK, 2);
-      break;
-    case EDIT_DOCUMENT:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_EDIT_DOCUMENT, 2);
-      break;
-    case MANAGE_ACTIONS:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_MANAGE_ACTIONS, 2);
-      break;
-    case HIDE_SHOW_CONTENT:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_HIDE_SHOW_CONTENT, 2);
-      break;
-    case MANAGE_VERSION:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_MANAGE_VERSIONS, 2);
-      break;
-    case PUBLISH:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_PUBLISH, 2);
-      break;
-    case TAG_DOCUMENT:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_TAG_DOCUMENT, 2);
-      break;
-    case VIEW_NODE_TYPE:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_VIEW_NODE_TYPE, 2);
-      break;
-    case VOTE:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_VOTE, 2);
-      break;
-    case ADD_FOLDER:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_ADD_FOLDER, 2);
-      break;
-    case COMMENT:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_COMMENT, 2);
-      break;
-    case EXPORT_NODE:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_EXPORT_NODE, 2);
-      break;
-    case MANAGE_AUDITING:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_MANAGE_AUDITING, 2);
-      break;
-    case MANAGE_PUBLISHTATION:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_MANAGE_PUBLICATION, 2);
-      break;
-    case OVERLOAD_THUMBNAILS:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_OVERLOAD_THUMBNAIL, 2);
-      break;
-    case REQUEST_APPROVAL:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_REQUEST_APPROVAL, 2);
-      break;
-    case UPLOAD:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_UPLOAD, 2);
-      break;
-    case VIEW_PERMISSIONS:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_VIEW_PERMISSIONS, 2);
-      break;
-    case WATCH_DOCUMENTS:
-      evt.check(ELEMENT_ECM_EXPLORER_ACTIONS_POPUP_WATCH_DOCUMENT, 2);
-      break;
-    }
-  }
-
-  /**
-   * Add all actions
-   */
-  public void addAllActions() {
-    info("Go to Explorer tab");
-    goToSpecificMainFunctions(mainEcmFunctions.EXPLORER);
-    info("Go to Views link");
-    goToSpecificFunctions(specificEcmFunctions.VIEW);
-    info("Click on Edit button of the View type");
-    evt.click(ELEMENT_ECM_EXPLORER_EDIT.replace("${nameView}", "Web"));
-
-    info("Open Action tab");
-    evt.click(ELEMENT_ECM_EXPLORER_GO_TO_ACTION_FORM);
-
-    info("Click on Add action button");
-    evt.click(ELEMENT_ECM_EXPLORER_EDIT_ACTION_VIEW_FORM);
-
-    info("Select the actions");
-    for (specificEcmActionstypes type : specificEcmActionstypes.values())
-      goTospecificEcmActionstypes(type);
-
-    info("Click on Save button of Action popup");
-    // click(ELEMENT_ECM_EXPORER_ACTIONS_POPUP_SAVE_BUTTON);
-    evt.clickByJavascript(ELEMENT_ECM_EXPORER_ACTIONS_POPUP_SAVE_BUTTON, 2);
-
-    info("Save all changes");
-    // click(ELEMENT_ECM_EXPLORER_EDIT_VIEWS_SAVE_BUTTON);
-    evt.clickByJavascript(ELEMENT_ECM_EXPLORER_EDIT_VIEWS_SAVE_BUTTON, 2);
-
-    info("Finished Adding action for a view");
-  }
-
-  /**
-   * Add group permission to drive
-   * 
-   * @param drive
-   * @param group
-   * @param membership
-   */
-  public void addGroupPermToDrive(String drive, String group, String membership) {
-    info("add group permission to drive:" + drive);
-    goToSpecificMainFunctions(mainEcmFunctions.EXPLORER);
-    goToSpecificFunctions(specificEcmFunctions.DRIVES);
-    evt.click(By.xpath(ELEMENT_ECM_EXPLORER_DRIVES_EDIT_LIST.replace("{$name}", drive)), 0, true);
-
-    evt.click(ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON, 0, true);
-    ecmsPerm.selectGroupMembershipOfDrive(group, membership);
-    evt.click(ELEMENT_ECM_EXPLORER_DRIVES_SAVE_FORM, 0, true);
-
-  }
-
-  /**
-   * Add group permission to lock
-   * 
-   * @param group
-   * @param membership
-   */
-  public void addGroupPermToLock(String group, String membership) {
-    info("add group permission to lock manager");
-    goToSpecificMainFunctions(mainEcmFunctions.REPOSITORY);
-    goToSpecificFunctions(specificEcmFunctions.LOCKS);
-    evt.click(ELEMENT_ECM_REPOSITORY_MANAGE_LOCK);
-    ecmsPerm.selectGroupMembershipOfLock(group, membership);
-
-  }
-
-  /**
-   * Add group permission to tag
-   * 
-   * @param group
-   * @param membership
-   */
-  public void addGroupPermToTag(String group, String membership) {
-    info("add group permission to tag");
-    goToSpecificMainFunctions(mainEcmFunctions.EXPLORER);
-    goToSpecificFunctions(specificEcmFunctions.TAGS);
-    evt.click(ELEMENT_ECM_EXPLORER_TAGS_TAG_PERM_TAB);
-    ecmsPerm.selectGroupMembershipOfTag(group, membership);
-
-    evt.click(ELEMENT_TAG_SELECT_MEMBERSHIP_ADD_BTN, 0, true);
-  }
-
-  /**
-   * Add group permission to node
-   * 
-   * @param group
-   * @param membership
-   */
-  public void addGroupPermToNode(String group, String membership, boolean read, boolean modify, boolean remove) {
-    info("add group permission to node document");
-    ecmsPerm.selectGroupMembershipOfTag(group, membership);
-    ecmsPerm.selectCheckBoxRight(read, modify, remove);
-    evt.click(ELEMENT_PERMISSION_SAVE, 0, true);
-
-    evt.click(ELEMENT_PERMISSION_CLOSE, 0, true);
-  }
-
-  /**
-   * Check select user in Advance/Category
-   * 
-   * @param cat: name of new category
-   * @param user
-   * @param isPresent true if user is displayed false if user is NOT displayed
-   */
-  public void checkUserSelectorOfCategory(String cat, String user, boolean isPresent) {
-    goToSpecificMainFunctions(mainEcmFunctions.ADVANCED);
-    goToSpecificFunctions(specificEcmFunctions.CATEGORIES);
-    info("Add a category");
-    evt.click(ELEMENT_ECM_ADVANCED_CATEGORIES_ADD_CATEGORIES);
-    info("Type a name for the category");
-    evt.type(ELEMENT_ECM_ADVANCED_CATEGORIES_NAME_FORM, cat, true);
-    info("Click on Next button of the step 1");
-    evt.click(ELEMENT_ECM_ADVANCED_CATEGORIES_NEXT_1STPAGE_FORM, 0, true);
-    info("check user selector");
-    evt.click(PlatformPermissionLocator.ELEMENT_SELECT_USER_ICON1, 0, true);
-    plfPerm.checkUserSelector(user, isPresent);
-  }
-
-  /**
-   * Check select user in Explorer/Tag
-   * 
-   * @param user
-   * @param isPresent true if user is displayed false if user is NOT displayed
-   */
-  public void checkUserSelectorOfTags(String user, boolean isPresent) {
-    goToSpecificMainFunctions(mainEcmFunctions.EXPLORER);
-    goToSpecificFunctions(specificEcmFunctions.TAGS);
-    evt.click(ELEMENT_ECM_EXPLORER_TAGS_PERM_TAB, 0, true);
-    info("check user selector");
-    evt.click(PlatformPermissionLocator.ELEMENT_SELECT_USER_ICON1, 0, true);
-    plfPerm.checkUserSelector(user, isPresent);
-  }
-
-  /**
-   * Check select user in Explorer/View
-   * 
-   * @param view: name of view
-   * @param user
-   * @param isPresent true if user is displayed false if user is NOT displayed
-   */
-  public void checkUserSelectorOfView(String view, String user, boolean isPresent) {
-    goToSpecificMainFunctions(mainEcmFunctions.EXPLORER);
-    goToSpecificFunctions(specificEcmFunctions.VIEW);
-    evt.click(By.xpath(ELEMENT_ECM_EXPLORER_VIEW_EDIT_LIST.replace("{$name}", view)));
-    evt.click(ELEMENT_ECM_EXPLORER_GO_TO_PERMISSION_FORM);
-    info("check user selector");
-    evt.click(PlatformPermissionLocator.ELEMENT_SELECT_USER_ICON1, 0, true);
-    plfPerm.checkUserSelector(user, isPresent);
-  }
-
-  /**
-   * Add WebView type to drive
-   *
-   */
-  public void addViewTypeToDrive(String driveName, specificView[] applyViews) {
-    NavigationToolbar navTool = new NavigationToolbar(testBase);
-
-    info("Go to Explorer tab");
-    navTool.goToContentAdministration();
-
-    info("Go to Explorer tab");
-    goToSpecificMainFunctions(mainEcmFunctions.EXPLORER);
-
-    info("Go to Drives link");
-    goToSpecificFunctions(specificEcmFunctions.DRIVES);
-
-    editDrives(driveName, applyViews);
-
-  }
-
-  /**
-   * Add permission to Drive
-   *
-   */
-  public void addPermissionToDrive(String driveName, String permissionToAdd) {
-    NavigationToolbar navTool = new NavigationToolbar(testBase);
-
-    info("Go to Explorer tab");
-    navTool.goToContentAdministration();
-
-    info("Go to Explorer tab");
-    goToSpecificMainFunctions(mainEcmFunctions.EXPLORER);
-
-    info("Go to Drives link");
-    goToSpecificFunctions(specificEcmFunctions.DRIVES);
-
-    info("Open Drive");
-    evt.click(By.xpath(ELEMENT_ECM_EXPLORER_DRIVES_EDIT_LIST.replace("{$name}", driveName)));
-    info("Go to Drive tab");
-    evt.click(ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON);
-
-    WebElement permissionElement = getElement(ELEMENT_ECM_DRIVE_PERMISSION);
-    String permissionValue = permissionElement.getAttribute("value");
-    permissionValue += "," + permissionToAdd;
-
-    evt.type(ELEMENT_ECM_DRIVE_PERMISSION, permissionValue, true);
-
-    evt.click(ELEMENT_ECM_EXPLORER_DRIVES_SAVE_FORM);
-  }
-
-  /**
    * Select a function as: Explorer, Advanced, Template and Repositoty
    */
   public enum mainEcmFunctions {
@@ -1365,10 +904,4 @@ public class ContentAdministration {
     ADMIN, CATEGORY, LIST, ICON, WEB, ITEM
   }
 
-  /**
-   * select action type for a web view By quynhpt
-   */
-  public enum specificEcmActionstypes {
-    ADD_CATEGORY, ADD_TRANSLATION, CONTENT_NAVIGATION, IMPORT_NOTE, MANAGE_CATEGORIES, MANAGE_RELATION, APPROVE_CONTENT, SHOW_JCR_STRUCTURE, VIEW_METADATA, VIEW_PROPERTIES, ADD_DOCUMENT, ADD_SYMLINK, EDIT_DOCUMENT, MANAGE_ACTIONS, HIDE_SHOW_CONTENT, MANAGE_VERSION, PUBLISH, TAG_DOCUMENT, VIEW_NODE_TYPE, VOTE, ADD_FOLDER, COMMENT, EXPORT_NODE, MANAGE_AUDITING, MANAGE_PUBLISHTATION, OVERLOAD_THUMBNAILS, REQUEST_APPROVAL, UPLOAD, VIEW_PERMISSIONS, WATCH_DOCUMENTS;
-  }
 }

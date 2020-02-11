@@ -7,16 +7,11 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.answer.pageobject.AnswerCategoryManagement;
 import org.exoplatform.platform.qa.ui.answer.pageobject.AnswerHomePage;
 import org.exoplatform.platform.qa.ui.answer.pageobject.QuestionManagement;

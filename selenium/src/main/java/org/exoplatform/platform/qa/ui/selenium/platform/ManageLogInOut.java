@@ -65,7 +65,6 @@ public class ManageLogInOut {
     sleep(2000);
     Boolean verify = (Boolean) (opParams.length > 0 ? opParams[0] : false);
     if ($(ELEMENT_ACCOUNT_NAME_LINK).exists()){
-    //if (evt.waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK, 5000, 0) != null) {
       signOut();
     }
     if (testBase.getSsoType() != "" && testBase.getSsoType() != null) {
@@ -123,9 +122,9 @@ public class ManageLogInOut {
    */
   public void signInCas(String username, String password) {
     testBase.getExoWebDriver().getWebDriver();
-    $(ELEMENT_INPUT_USERNAME).waitUntil(Condition.visible,Configuration.collectionsTimeout).setValue(username);
-    $(ELEMENT_INPUT_PASSWORD).waitUntil(Condition.visible,Configuration.collectionsTimeout).setValue(password);
-    ELEMENT_SIGN_IN_BUTTON_CAS.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(ELEMENT_INPUT_USERNAME).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(username);
+    $(ELEMENT_INPUT_PASSWORD).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(password);
+    ELEMENT_SIGN_IN_BUTTON_CAS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
   }
 
@@ -175,20 +174,6 @@ public class ManageLogInOut {
   }
 
   /**
-   * Sign in as disable user
-   *
-   * @param user
-   * @param pass
-   */
-  public void signInAsDisableUser(String user, String pass) {
-    evt.type(ELEMENT_INPUT_USERNAME, user, true);
-    evt.type(ELEMENT_INPUT_PASSWORD, pass, true);
-    evt.click(ManageLogInOutLocator.ELEMENT_SIGN_IN_BUTTON, 0, true);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_DISABLE_USER_ERROR_MES, 2000, 1);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_SIGN_IN_BUTTON);
-  }
-
-  /**
    * Log in to intranet
    *
    * @param username
@@ -221,113 +206,6 @@ public class ManageLogInOut {
         evt.waitForElementNotPresent(ManageLogInOutLocator.ELEMENT_SIGN_IN_BUTTON);
     }
 
-  }
-
-  /**
-   * Check Login screen with social login buttons By: QuyenNT Date: Nov 24, 2015
-   */
-  public void checkSocialLoginButtons() {
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_SIGN_IN_FACEBOOK_BUTTON);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_SIGN_IN_TWITTER_BUTTON);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_SIGN_IN_LINKEDIN_BUTTON);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_SIGN_IN_GOOGLE_BUTTON);
-  }
-
-  /**
-   * Go to facebook login form and check elements By: QuyenNT Date: Nov 25, 2015
-   */
-  public void checkFacebookLoginForm() {
-    evt.click(ManageLogInOutLocator.ELEMENT_SIGN_IN_FACEBOOK_BUTTON);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_FACEBOOK_LOGIN_FORM_LOGO);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_FACEBOOK_LOGIN_FORM_USERNAME);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_FACEBOOK_LOGIN_FORM_PASSWORD);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_FACEBOOK_LOGIN_FORM_LOGIN_BUTTON);
-  }
-
-  /**
-   * Go to TWITTER login form and check elements By: QuyenNT Date: Nov 25, 2015
-   */
-  public void checkTwitterLoginForm() {
-    evt.click(ManageLogInOutLocator.ELEMENT_SIGN_IN_TWITTER_BUTTON);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_TWITTER_LOGIN_FORM_LOGO);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_TWITTER_LOGIN_FORM_USERNAME);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_TWITTER_LOGIN_FORM_PASSWORD);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_TWITTER_LOGIN_FORM_LOGIN_BUTTON);
-  }
-
-  /**
-   * Go to LINKEDIN login form and check elements By: QuyenNT Date: Nov 25, 2015
-   */
-  public void checkLinkedinLoginForm() {
-    evt.click(ManageLogInOutLocator.ELEMENT_SIGN_IN_LINKEDIN_BUTTON);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_LINKEDIN_LOGIN_FORM_LOGO);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_LINKEDIN_LOGIN_FORM_USERNAME);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_LINKEDIN_LOGIN_FORM_PASSWORD);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_LINKEDIN_LOGIN_FORM_LOGIN_BUTTON);
-  }
-
-  /**
-   * Go to GOOGLE login form and check elements By: QuyenNT Date: Nov 25, 2015
-   */
-  public void checkGoogleLoginForm() {
-    evt.click(ManageLogInOutLocator.ELEMENT_SIGN_IN_GOOGLE_BUTTON);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_GOOGLE_LOGIN_FORM_LOGO);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_GOOGLE_LOGIN_FORM_USERNAME);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_GOOGLE_LOGIN_FORM_NEXT_BUTTON);
-  }
-
-  /**
-   * Login platform with facebook account By: QuyenNT Date: Nov 25, 2015
-   */
-  public void loginWithFacebookAccount(String userName, String password) {
-    info("login with facebook account:" + userName + " and pass " + password);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_FACEBOOK_LOGIN_FORM_USERNAME);
-
-    evt.type(ManageLogInOutLocator.ELEMENT_FACEBOOK_LOGIN_FORM_USERNAME, userName, true);
-    evt.type(ManageLogInOutLocator.ELEMENT_FACEBOOK_LOGIN_FORM_PASSWORD, password, true);
-
-    evt.click(ManageLogInOutLocator.ELEMENT_FACEBOOK_LOGIN_FORM_LOGIN_BUTTON);
-  }
-
-  /**
-   * Login platform with twitter account By: QuyenNT Date: Nov 25, 2015
-   */
-  public void loginWithTwitterAccount(String userName, String password) {
-    info("login with twitter account:" + userName + " and pass " + password);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_TWITTER_LOGIN_FORM_USERNAME);
-    evt.click(ManageLogInOutLocator.ELEMENT_TWITTER_LOGIN_FORM_USERNAME);
-
-    evt.type(ManageLogInOutLocator.ELEMENT_TWITTER_LOGIN_FORM_USERNAME, userName, false);
-    evt.type(ManageLogInOutLocator.ELEMENT_TWITTER_LOGIN_FORM_PASSWORD, password, false);
-
-    evt.click(ManageLogInOutLocator.ELEMENT_TWITTER_LOGIN_FORM_LOGIN_BUTTON);
-  }
-
-  /**
-   * Login platform with Linkedin account By: QuyenNT Date: Nov 25, 2015
-   */
-  public void loginWithLinkedinAccount(String userName, String password) {
-    info("login with Linkedin account:" + userName + " and pass " + password);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_LINKEDIN_LOGIN_FORM_USERNAME);
-
-    evt.type(ManageLogInOutLocator.ELEMENT_LINKEDIN_LOGIN_FORM_USERNAME, userName, true);
-    evt.type(ManageLogInOutLocator.ELEMENT_LINKEDIN_LOGIN_FORM_PASSWORD, password, true);
-    evt.click(ManageLogInOutLocator.ELEMENT_LINKEDIN_LOGIN_FORM_LOGIN_BUTTON);
-  }
-
-  /**
-   * Login platform with Google account By: QuyenNT Date: Nov 25, 2015
-   */
-  public void loginWithGoogleAccount(String userName, String password) {
-    info("login with Google account:" + userName + " and pass " + password);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_GOOGLE_LOGIN_FORM_USERNAME);
-
-    evt.type(ManageLogInOutLocator.ELEMENT_GOOGLE_LOGIN_FORM_USERNAME, userName, true);
-    evt.waitForAndGetElement(ManageLogInOutLocator.ELEMENT_GOOGLE_LOGIN_FORM_NEXT_BUTTON);
-    evt.click(ManageLogInOutLocator.ELEMENT_GOOGLE_LOGIN_FORM_NEXT_BUTTON);
-
-    evt.type(ManageLogInOutLocator.ELEMENT_GOOGLE_LOGIN_FORM_PASSWORD, password, true);
-    evt.click(ManageLogInOutLocator.ELEMENT_GOOGLE_LOGIN_FORM_LOGIN_BUTTON);
   }
 
   public enum SSO {

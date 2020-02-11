@@ -6,7 +6,6 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_INCON_ADD_PATH;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_ADDNEWPAGE_BTNNEXT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_CONTENT_LIST_ADDPATH_BTN;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_MULTIPLE_CONTENT_POPUP_FILE;
@@ -93,7 +92,6 @@ public class EcmsWCMTestIT extends Base {
      * editor Input Data: Expected Outcome: - The selected web content/document is
      * displayed
      */
-    // this.getExoWebDriver().getWebDriver().get(baseUrl+"/intranet");
     navigationToolbar.goToAddPage();
 
     pageCreationWizard.inputPageInfoStep1(content, true, "English", content, true, false);

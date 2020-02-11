@@ -160,7 +160,7 @@ public class WikiActivitiesTestIT extends Base {
         homePagePlatform.goToHomePage();
         activityStream.checkActivityWikiPage(editTitle, editContent, "2", true);
         activityStream.clickOnViewChange(editTitle);
-        $(By.xpath("//div[@id='UIWikiPageInfoArea']/div/span/a[text()='V2']")).waitUntil(Condition.visible,Configuration.timeout);
+        wikiValidattions.verifyCompareVersions("1");
         homePagePlatform.goToWiki();
         wikiHomePage.deleteWiki(editTitle);
 

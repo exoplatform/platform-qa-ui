@@ -1,15 +1,12 @@
 package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.Dialog;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
@@ -118,18 +115,8 @@ public class PortalManagePages {
     $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_PAGE_NAME).setValue(pageName);
     $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_TITLE).setValue(title);
     $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_TYPE_DROPBOX).selectOption("group");
+    sleep(17000);
     $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGES_POPUP_SAVE_BTN).click();
-  }
-
-  /**
-   * Open page
-   *
-   * @param url boolean
-   */
-  public void openPage(String url) {
-    info("open page:" + url);
-    testBase.getExoWebDriver().getWebDriver().get(url);
-
   }
 
 }

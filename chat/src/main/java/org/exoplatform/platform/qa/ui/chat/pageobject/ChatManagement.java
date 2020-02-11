@@ -10,7 +10,6 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
-import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 
 public class ChatManagement {
@@ -21,7 +20,7 @@ public class ChatManagement {
   }
 
   public void sendMessageInRoomOrSpace(String room, String message) {
-    $(byText(room)).click();
+    $(byText(room)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_CHAT_MESSAGE_INPUT.setValue(message).pressEnter();
     ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.exist);
   }
@@ -201,17 +200,6 @@ public class ChatManagement {
     ELEMENT_POPUP_CONTAINER.find(byText("Upload File")).shouldNot(Condition.appear);
   }
 
-  public void goToChatUser(String userChat){
-    if (!$(byText(PLFData.DATA_NAME_USER2)).exists())
-      ELEMENT_CHAT_BUTTON_HIDE_OFF_LINE.click();
-    sleep(Configuration.timeout);
-    $(byXpath("//div[@class='chat-contact']/div[contains(@style,'${userChat}')]".replace("${userChat}",userChat))).click();
-    if ($(byXpath("//i[@class='uiIconBannerChat uiIconLightGray']")).exists())
-      $(byXpath("//i[@class='uiIconBannerChat uiIconLightGray']")).waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(Configuration.timeout);
-    refresh();
-  }
-
   public void checkShareLinPopUp(){
     ELEMENT_POPUP_CONTAINER.find(byText("Share Link")).waitUntil(Condition.appear,Configuration.timeout);
     ELEMENT_POPUP_CONTAINER.find(byXpath("//input[@placeholder='E.g: http://www.exoplatform.com']")).waitUntil(Condition.appear, Configuration.timeout);
@@ -254,9 +242,9 @@ public class ChatManagement {
       ELEMENT_CHAT_RESULT_SEARCH_ASSIGNEE.waitUntil(Condition.visible, Configuration.collectionsTimeout);
       ELEMENT_CHAT_ASSIGNEE_TASK.waitUntil(Condition.visible, Configuration.timeout).pressEnter();
     }
-      ELEMENT_CHAT_DUE_DATE_TASK.waitUntil(Condition.visible,Configuration.timeout).click();
-      ELEMENT_CHAT_CURRENT_DATE_TASK.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
-      ELEMENT_CHAT_POST_TASK_BUTTON.waitUntil(Condition.visible,Configuration.timeout).click();
+      ELEMENT_CHAT_DUE_DATE_TASK.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+      ELEMENT_CHAT_CURRENT_DATE_TASK.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+      ELEMENT_CHAT_POST_TASK_BUTTON.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
       ELEMENT_CONTAINER_LIST_MESSAGES.find(byLinkText(task)).shouldBe(Condition.visible);
     }
     public void sendSmile(String Emoticon){

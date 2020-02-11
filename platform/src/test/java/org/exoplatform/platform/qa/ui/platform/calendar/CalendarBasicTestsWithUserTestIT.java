@@ -166,7 +166,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
   public void test13_AddnEventInPersonalCalendar() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String calendar = "calendar" + getRandomNumber();
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
     info("Test 13 Add an event in personal calendar");
@@ -179,7 +179,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     info("Check default date");
     eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     info("Add event");
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).setValue(titleEvent);
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[1]/input")).setValue(titleEvent);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
             CalendarHomePage.selectViewOption.DAY,
@@ -212,8 +212,8 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM-dd-yyyy" + " HH"),
-                                              getDate(0, "MM-dd-yyyy" + " HH"),
+                                              getDate(0, "MM/dd/yyyy" + " HH"),
+                                              getDate(0, "MM/dd/yyyy" + " HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
@@ -229,8 +229,8 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     eventManagement.checkSuggestionEventTimeInDetailForm(null, null, 60);
     eventManagement.inputDataEventInDetailForm(titleEvent2,
                                                contentEvent2,
-                                               getDate(0, "MM-dd-yyyy" + " HH"),
-                                               getDate(0, "MM-dd-yyyy" + " HH"),
+                                               getDate(0, "MM/dd/yyyy" + " HH"),
+                                               getDate(0, "MM/dd/yyyy" + " HH"),
                                                false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent2,
@@ -242,7 +242,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     calendarHomePage.deleteEventTask(titleEvent2,
                                      CalendarHomePage.selectViewOption.LIST,
                                      CalendarHomePage.selectDayOption.DETAILTIME,
-                                     getDate(0, "MM-dd-yyyy"));
+                                     getDate(0, "MM/dd/yyyy"));
     calendarManagement.deleteCalendar(calendar, false);
   }
 
@@ -264,8 +264,8 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               contentEvent,
-                                              getDate(0, "MM-dd-yyyy" + " HH"),
-                                              getDate(0, "MM-dd-yyyy" + " HH"),
+                                              getDate(0, "MM/dd/yyyy" + " HH"),
+                                              getDate(0, "MM/dd/yyyy" + " HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
@@ -277,7 +277,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     calendarHomePage.deleteEventTask(titleEvent,
                                      CalendarHomePage.selectViewOption.LIST,
                                      CalendarHomePage.selectDayOption.DETAILTIME,
-                                     getDate(0, "MM-dd-yyyy"));
+                                     getDate(0, "MM/dd/yyyy"));
     calendarManagement.deleteCalendar(calendar, false);
   }
 
@@ -286,7 +286,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
   public void test_AddnEventInPersonalCalendarWithSpecialCharacter() {
     String titleEvent = "l'event" + getRandomNumber();
     String calendar = "calendar" + getRandomNumber();
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
     info("Test 13 Add an event in personal calendar");
@@ -299,7 +299,7 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     info("Check default date");
     eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     info("Add event");
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).setValue(titleEvent);
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[1]/input")).setValue(titleEvent);
     eventManagement.saveQuickAddEvent();
     $(byText(titleEvent)).should(Condition.exist);
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
@@ -337,15 +337,15 @@ public class CalendarBasicTestsWithUserTestIT extends Base {
     String content = "content" + getRandomNumber();
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT),Condition.visible,1000);
     eventManagement.goToAddEventFromActionBar();
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).setValue(titleEvent);
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[1]/input")).setValue(titleEvent);
     eventManagement.saveQuickAddEvent();
 
     String titleEvent2 = "titleEvent2" + getRandomNumber();
     calendarManagement.openEditEventTaskPopup(titleEvent, CalendarHomePage.selectViewOption.LIST);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).setValue(titleEvent2);
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[1]/input")).setValue(titleEvent2);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.LIST);
-      $(byText(titleEvent2)).waitUntil(Condition.appears, Configuration.timeout);
+      $(byText(titleEvent2)).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     calendarManagement.deleteCalendar(calendar);
   }
 

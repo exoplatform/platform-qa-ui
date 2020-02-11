@@ -195,9 +195,9 @@ public class MiniChatTestIT extends Base {
     $(byText(message)).waitUntil(Condition.appear, Configuration.timeout).click();
     ELEMENT_MINI_CHAT.waitUntil(Condition.appear, Configuration.timeout);
     $(byText(message)).should(Condition.exist);
-    ELEMENT_MINI_CHAT_POPOUT_ICON.click();
+    ELEMENT_MINI_CHAT_POPOUT_ICON.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     switchTo().window(1);
-    $(byId("room-detail")).find(byText(room)).waitUntil(Condition.appear, Configuration.timeout);
+    $(byId("room-detail")).waitUntil(Condition.visible,Configuration.collectionsTimeout).find(byText(room)).waitUntil(Condition.appear, Configuration.openBrowserTimeoutMs);
     switchToParentWindow();
     ELEMENT_MINI_CHAT.find(byClassName("uiIconClose")).click();
     manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);

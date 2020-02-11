@@ -22,12 +22,8 @@ package org.exoplatform.platform.qa.ui.commons;
 
 import org.exoplatform.platform.qa.ui.commons.pageobject.Login;
 import org.exoplatform.platform.qa.ui.commons.pageobject.Platform;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-
-import static com.codeborne.selenide.Selenide.$;
 import static org.junit.Assert.assertTrue;
 
 @Tag("login")
@@ -47,29 +43,4 @@ public final class LoginTestIT extends Base {
 
     assertTrue("User should be logged", new Login().signIn().isUserLogged());
   }
-
-  /**
-   * Signin with a user that do not exist in the system.
-   *
-   * <p>
-   * This test should display an error message in the Login Container.
-   * </p>
-   */
-  public void signInWithUnknownUser() {
-    // Init instance for signInTest
-    Platform plf = new Platform();
-    plf.open();
-    plf.ensureLicenseIsAccepted().ensureRegisterSoftwareIsSkipped().ensureAccountSetupIsSkipped();
-
-    final Login lg = new Login();
-    if (lg.isUserLogged()){
-      lg.signOut();
-    }
-
-    lg.signIn("failTo", "logIn");
-
-    assertTrue("User should not be logged", !lg.isUserLogged());
-    assertTrue("SignIn with unknown user should display a message.", lg.signinFailContainer.exists());
-  }
-
 }

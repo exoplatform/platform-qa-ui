@@ -28,7 +28,6 @@ import static com.codeborne.selenide.Selenide.$;
 
 public final class BrandingLocator {
 
-  public static final By ELEMENT_UPLOAD_LINK                              = By.name("file");
 
   public static final By ELEMENT_PLF_BRANDINGPAGE                         =
                                                   By.xpath("//*[@class='uiBreadcumbsNavigations']//*[text()='Branding']");
@@ -38,11 +37,7 @@ public final class BrandingLocator {
   public static final By ELEMENT_BANDING_PAGE_SELECT_NAVIGATION_BAR_STYLE =
                                                                           By.xpath(".//h4[text()='Select Navigation Bar Style']");
 
-  public static final By ELEMENT_BANDING_PAGE_PREVIEW                     = By.xpath(".//h4[text()='Preview']");
-
-  // Theme selection
-  public static final By ELEMENT_PLF_BRANDING_SELECTTHEME                 = By.xpath("//*[@class='btn dropdown-toggle']");
-
+ // Theme selection
   public static final By ELEMENT_PLF_BRANDING_THEMEDARK                   =
                                                         By.xpath("//input[@value='Dark']");
 
@@ -50,21 +45,11 @@ public final class BrandingLocator {
                                                          By.xpath("//input[@value='Light']");
 
   // Displayed top bar
-  public static final By ELEMENT_PLF_BRANDING_TOPBAR_THEMELIGHT           =
-                                                                By.xpath("//*[@class='UIContainer UIToolbarContainer  UIToolbarContainerLight']");
-
-  public static final By ELEMENT_PLF_BRANDING_TOPBAR_THEMEDARK            =
-                                                               By.xpath("//*[@class='UIContainer UIToolbarContainer  UIToolbarContainerLight']");
-
   public static final By ELEMENT_PLF_BRANDING_TOPBAR_LOGO                 =
                                                           By.xpath("//*[@alt='Home' and contains(@src, 'logo_preview.png')]");
 
   // Button
-  public static final By ELEMENT_BUTTON_SAVE                              = By.xpath("//*[text()='Save']");
-
   public static final By ELEMENT_BUTTON_CANCEL                            = By.xpath(".//*[@id='cancel']");
-
-  public static final By ELEMENT_BUTTON_UPLOAD                            = By.xpath("//*[@id='btUpload']");
 
   public static final SelenideElement ELEMENT_BUTTON_APPLY =$(byId("save"));
 

@@ -149,8 +149,8 @@ public class CalendarPublishActivityTestIT extends Base {
     calendarManagement.executeActionCalendar(spaceName, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               content,
-                                              getDate(0, "MM-dd-yyyy HH") + ":00",
-                                              getDate(0, "MM-dd-yyyy HH") + ":30",
+                                              getDate(0, "MM/dd/yyyy HH") + ":00",
+                                              getDate(0, "MM/dd/yyyy HH") + ":30",
                                               false);
     check(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX, 2);
     eventManagement.inputRecurringInfoEvent(EventManagement.repeatType.Daily,
@@ -262,8 +262,8 @@ public class CalendarPublishActivityTestIT extends Base {
     calendarManagement.executeActionCalendar(spaceName, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               content,
-                                              getDate(0, "MM-dd-yyyy HH") + ":00",
-                                              getDate(0, "MM-dd-yyyy HH") + ":30",
+                                              getDate(0, "MM/dd/yyyy HH") + ":00",
+                                              getDate(0, "MM/dd/yyyy HH") + ":30",
                                               false);
     check(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX, 2);
     eventManagement.inputRecurringInfoEvent(EventManagement.repeatType.Daily,
@@ -337,8 +337,8 @@ public class CalendarPublishActivityTestIT extends Base {
     calendarManagement.executeActionCalendar(spaceName, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               content,
-                                              getDate(0, "MM-dd-yyyy HH") + ":00",
-                                              getDate(0, "MM-dd-yyyy HH") + ":30",
+                                              getDate(0, "MM/dd/yyyy HH") + ":00",
+                                              getDate(0, "MM/dd/yyyy HH") + ":30",
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
@@ -397,8 +397,8 @@ public class CalendarPublishActivityTestIT extends Base {
     calendarManagement.executeActionCalendar(spaceName, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               content,
-                                              getDate(0, "MM-dd-yyyy HH") + ":00",
-                                              getDate(0, "MM-dd-yyyy HH") + ":30",
+                                              getDate(0, "MM/dd/yyyy HH") + ":00",
+                                              getDate(0, "MM/dd/yyyy HH") + ":30",
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
@@ -448,8 +448,8 @@ public class CalendarPublishActivityTestIT extends Base {
     calendarManagement.executeActionCalendar(spaceName, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               content,
-                                              getDate(0, "MM-dd-yyyy HH") + ":00",
-                                              getDate(0, "MM-dd-yyyy HH") + ":30",
+                                              getDate(0, "MM/dd/yyyy HH") + ":00",
+                                              getDate(0, "MM/dd/yyyy HH") + ":30",
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
@@ -504,8 +504,8 @@ public class CalendarPublishActivityTestIT extends Base {
     calendarManagement.executeActionCalendar(spaceName, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               content,
-                                              getDate(0, "MM-dd-yyyy HH") + ":00",
-                                              getDate(0, "MM-dd-yyyy HH") + ":30",
+                                              getDate(0, "MM/dd/yyyy HH") + ":00",
+                                              getDate(0, "MM/dd/yyyy HH") + ":30",
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
@@ -519,7 +519,7 @@ public class CalendarPublishActivityTestIT extends Base {
     eventManagement.saveAddEventDetails();
     homePagePlatform.goToHomePage();
     $(byXpath(ELEMENT_ACTIVITY_TASK_EVENT_COMMENT.replace("$name", titleEvent).replace("$comment",
-                                                                                       comment))).should(Condition.visible);
+                                                                                       comment))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
     info("Clear data");
     homePagePlatform.goToCalendarPage();
     calendarHomePage.deleteEventTask(titleEvent,
@@ -556,8 +556,8 @@ public class CalendarPublishActivityTestIT extends Base {
     calendarManagement.executeActionCalendar(spaceName, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     eventManagement.inputDataEventInQuickForm(titleEvent,
                                               content,
-                                              getDate(0, "MM-dd-yyyy HH") + ":00",
-                                              getDate(0, "MM-dd-yyyy HH") + ":30",
+                                              getDate(0, "MM/dd/yyyy HH") + ":00",
+                                              getDate(0, "MM/dd/yyyy HH") + ":30",
                                               false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
@@ -689,8 +689,8 @@ public class CalendarPublishActivityTestIT extends Base {
     calendarManagement.executeActionCalendar(groupCalendar, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     eventManagement.inputDataEventInQuickForm(titleEventGroup,
                                               titleEventGroup,
-                                              getDate(0, "MM-dd-yyyy HH") + ":00",
-                                              getDate(0, "MM-dd-yyyy HH") + ":30",
+                                              getDate(0, "MM/dd/yyyy HH") + ":00",
+                                              getDate(0, "MM/dd/yyyy HH") + ":30",
                                               false);
     eventManagement.saveQuickAddEvent();
     homePagePlatform.goToHomePage();
@@ -743,8 +743,8 @@ public class CalendarPublishActivityTestIT extends Base {
     calendarManagement.executeActionCalendar(spaceName, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     eventManagement.inputDataEventInQuickForm(titleEventSpace,
                                               titleEventSpace,
-                                              getDate(0, "MM-dd-yyyy HH") + ":00",
-                                              getDate(0, "MM-dd-yyyy HH") + ":30",
+                                              getDate(0, "MM/dd/yyyy HH") + ":00",
+                                              getDate(0, "MM/dd/yyyy HH") + ":30",
                                               false);
     eventManagement.saveQuickAddEvent();
     homePagePlatform.goToCalendarPage();
@@ -752,8 +752,8 @@ public class CalendarPublishActivityTestIT extends Base {
     calendarManagement.executeActionCalendar(personalCalendar, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     eventManagement.inputDataEventInQuickForm(titleEventPersonal,
                                               titleEventPersonal,
-                                              getDate(0, "MM-dd-yyyy HH") + ":00",
-                                              getDate(0, "MM-dd-yyyy HH") + ":30",
+                                              getDate(0, "MM/dd/yyyy HH") + ":00",
+                                              getDate(0, "MM/dd/yyyy HH") + ":30",
                                               false);
     eventManagement.saveQuickAddEvent();
     homePagePlatform.goToCalendarPage();
@@ -761,8 +761,8 @@ public class CalendarPublishActivityTestIT extends Base {
     calendarManagement.executeActionCalendar(groupCalendar, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     eventManagement.inputDataEventInQuickForm(titleEventGroup,
                                               titleEventGroup,
-                                              getDate(0, "MM-dd-yyyy HH") + ":00",
-                                              getDate(0, "MM-dd-yyyy HH") + ":30",
+                                              getDate(0, "MM/dd/yyyy HH") + ":00",
+                                              getDate(0, "MM/dd/yyyy HH") + ":30",
                                               false);
     eventManagement.saveQuickAddEvent();
     homePagePlatform.goToCalendarPage();
@@ -770,8 +770,8 @@ public class CalendarPublishActivityTestIT extends Base {
     calendarManagement.executeActionCalendar(shareCalendar, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     eventManagement.inputDataEventInQuickForm(titleEventShare,
                                               titleEventShare,
-                                              getDate(0, "MM-dd-yyyy HH") + ":00",
-                                              getDate(0, "MM-dd-yyyy HH") + ":30",
+                                              getDate(0, "MM/dd/yyyy HH") + ":00",
+                                              getDate(0, "MM/dd/yyyy HH") + ":30",
                                               false);
     eventManagement.saveQuickAddEvent();
 
@@ -817,13 +817,13 @@ public class CalendarPublishActivityTestIT extends Base {
     calendarManagement.deleteCalendar(shareCalendar, false);
 
     homePagePlatform.goToCalendarPage();
-    calendarHomePage.deleteEventTask(titleEventPersonal,
+    calendarHomePage.deleteEventTask(titleEventGroup,
                                      CalendarHomePage.selectViewOption.MONTH,
                                      CalendarHomePage.selectDayOption.DETAILTIME,
                                      getDate(0, "MMM dd yyyy"),
                                      true,
                                      true);
-    calendarHomePage.deleteEventTask(titleEventGroup,
+    calendarHomePage.deleteEventTask(titleEventPersonal,
                                      CalendarHomePage.selectViewOption.MONTH,
                                      CalendarHomePage.selectDayOption.DETAILTIME,
                                      getDate(0, "MMM dd yyyy"),

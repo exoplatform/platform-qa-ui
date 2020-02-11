@@ -2,8 +2,7 @@ package org.exoplatform.platform.qa.ui.platform.wiki.functional;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
@@ -360,6 +359,8 @@ public class WikiSpaceSwitcherTestIT extends Base {
     manageLogInOut.signIn(arrayUsers.get(0), password);
 
     homePagePlatform.goToWiki();
+    wikiHomePage.goToSpaceSwitcher();
+    getExoWebDriver().getWebDriver().navigate().refresh();
     wikiHomePage.goToSpaceSwitcher();
     wikiHomePage.inputSpaceSwitcher(" ");
     wikiValidattions.verifyPresentSpaceSwitcher("Intranet");

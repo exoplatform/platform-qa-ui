@@ -10,14 +10,11 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocat
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.util.ArrayList;
-
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.Dialog;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 public class UserAddManagement {
@@ -61,7 +58,7 @@ public class UserAddManagement {
     $(ELEMENT_EMAIL).setValue(email);
     $(ELEMENT_FIRSTNAME).setValue(firstname);
     $(ELEMENT_LASTNAME).setValue(lastName);
-    $(ELEMENT_SAVE_ADD_USER).click();
+    $(ELEMENT_SAVE_ADD_USER).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
     $(byText("You have registered a new account.")).waitUntil(appears, 10000);
     $(byText("OK")).click();
     info("Finish adding an user");
@@ -86,28 +83,6 @@ public class UserAddManagement {
       info("User" + i + ": " + user);
     }
     return array;
-  }
-
-  /**
-   * function: check content of mail then delete mail
-   *
-   * @param title title of the page
-   * @param opParams object
-   */
-  public void checkEmailNotification(String title, Object... opParams) {
-    info("Check and delete mail");
-    Boolean checkOrNo = (Boolean) (opParams.length > 0 ? opParams[0] : true);
-    String parentWindow = testBase.getExoWebDriver().getWebDriver().getWindowHandle();
-    info("parentWindow:" + parentWindow);
-    for (String windowHandle : testBase.getExoWebDriver().getWebDriver().getWindowHandles()) {
-      testBase.getExoWebDriver().getWebDriver().switchTo().window(windowHandle);
-      info("driver.title:" + testBase.getExoWebDriver().getWebDriver().getTitle());
-    }
-    if (checkOrNo == true) {
-      evt.waitForAndGetElement(PlatformLocator.ELEMENT_GMAIL_CONTENT.replace("${title}", title), 30000, 1);
-    } else {
-      evt.waitForElementNotPresent(PlatformLocator.ELEMENT_GMAIL_CONTENT.replace("${title}", title), 30000, 1);
-    }
   }
 
   /**

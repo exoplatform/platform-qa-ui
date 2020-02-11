@@ -13,11 +13,6 @@ import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
 public class WikiPageInformation {
 
   private final TestBase       testBase;
@@ -64,8 +59,8 @@ public class WikiPageInformation {
      */
     public void goToAddRelations() {
         info("Click on Add more relations");
-        $(ELEMENT_PAGE_INFO_ADD_MORE_RELATIONS).waitUntil(Condition.visible, Configuration.timeout).click();
-        $(ELEMENT_ADD_RELATED_PAGE_POPUP_TITLE).waitUntil(Condition.appears, Configuration.timeout);
+        $(ELEMENT_PAGE_INFO_ADD_MORE_RELATIONS).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+        $(ELEMENT_ADD_RELATED_PAGE_POPUP_TITLE).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
         info("Add related page popup is shown");
     }
 
@@ -79,46 +74,6 @@ public class WikiPageInformation {
 
         info("Page history is shown");
         $(ELEMENT_WIKI_PAGE_PAGE_HISTORY_TITLE).waitUntil(Condition.appears, Configuration.timeout);
-    }
-
-    /**
-     * Delete a relation of a page
-     *
-     * @param relation String
-     */
-    public void deleteRelation(String relation) {
-        info("Click on Delete button");
-        evt.waitForAndGetElement(ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN.replace("${name}", relation), 2000, 0);
-        evt.click(ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN.replace("${name}", relation));
-        alert.acceptAlert();
-        evt.waitForElementNotPresent(ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN.replace("${name}", relation));
-        info("The relation is deleted");
-    }
-
-    /**
-     * Delete a relation of a page
-     *
-     * @param relation String
-     */
-    public void deleteRelationWithCancelDeleting(String relation) {
-        info("Click on Delete button");
-        evt.waitForAndGetElement(ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN.replace("${name}", relation), 2000, 0);
-        evt.click(ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN.replace("${name}", relation));
-        alert.cancelAlert();
-        evt.waitForAndGetElement(ELEMENT_PAGE_INFO_RELATED_TABLE_DELETE_BTN.replace("${name}", relation));
-        info("The relation isnot deleted");
-    }
-
-    /**
-     * Verify that related page is viewed
-     *
-     * @param page String
-     */
-    public void viewRelatedPageContent(String page) {
-        info("Click on related page");
-        evt.click(ELEMENT_PAGE_INFO_RELATED_PAGE_LINK.replace("$page", page));
-        info("Verify that related page's content is shown");
-        evt.waitForAndGetElement(ELEMENT_WIKI_HOME_PAGE_TITLE.replace("${title}", page));
     }
 
     /**
@@ -139,17 +94,6 @@ public class WikiPageInformation {
         if ($(ELEMENT_VIEW_VERSION_NEXT_BTN, 2000).is(Condition.visible)) {
             info("Click on Next button");
             $(ELEMENT_VIEW_VERSION_NEXT_BTN).click();
-        }
-
-    }
-
-    /**
-     * View content of previous version
-     */
-    public void viewContentVersionByPreviousArrow() {
-        if (evt.waitForAndGetElement(ELEMENT_VIEW_VERSION_PREVIOUS_BTN, 2000, 0) != null) {
-            info("Click on Previous button");
-            evt.click(ELEMENT_VIEW_VERSION_PREVIOUS_BTN);
         }
 
     }

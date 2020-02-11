@@ -13,9 +13,7 @@ import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.Dialog;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
-import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase.filterOption;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-import org.openqa.selenium.interactions.Actions;
 
 public class WikiPermission {
 
@@ -130,73 +128,6 @@ public class WikiPermission {
     }
 
     /**
-     * Open User list
-     */
-    public void goToSelectUser() {
-        info("Click on select user button");
-        evt.click(ELEMENT_PERMISSION_SELECT_USER);
-
-    }
-
-    /**
-     * Open Membership list
-     */
-    public void goToSelectMemberShip() {
-        info("Click on select membership button");
-        evt.click(ELEMENT_PERMISSION_SELECT_MEMBERSHIP);
-
-    }
-
-    /**
-     * Open Group list
-     */
-    public void goToGroup() {
-        info("Click on select membership button");
-        evt.click(ELEMENT_PERMISSION_SELECT_GROUP);
-
-    }
-
-    /**
-     * Add permission for a user/group/membership by selecting
-     *
-     * @param groupUsers String
-     * @param membership String
-     * @param type String
-     */
-    public void addPermissionBySelect(String groupUsers, String membership, userGroupTypes type) {
-        switch (type) {
-            case Users_UserName:
-                goToSelectUser();
-                plf.selectUser(groupUsers, filterOption.userName);
-                break;
-            case Users_FirstName:
-                goToSelectUser();
-                plf.selectUser(groupUsers, filterOption.firstName);
-                break;
-            case Users_LastName:
-                goToSelectUser();
-                plf.selectUser(groupUsers, filterOption.lastName);
-                break;
-            case Users_Email:
-                goToSelectUser();
-                plf.selectUser(groupUsers, filterOption.email);
-                break;
-            case Membership:
-                goToSelectMemberShip();
-                plf.selectMembership(groupUsers, membership);
-                break;
-            case Groups:
-                goToGroup();
-                plf.selectGroup(groupUsers);
-                break;
-        }
-        info("Click on Add button");
-        evt.click(ELEMENT_PERMISSION_ADD_BUTTON);
-
-        info("The group/user/membership is added successfully");
-    }
-
-    /**
      * Click on Save button in More/Permission
      * @param booleans Boolean
      */
@@ -207,29 +138,6 @@ public class WikiPermission {
         if (!savePresent)
             $(ELEMENT_PERMISSION_BUTTON_SAVE).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
 
-    }
-
-    /**
-     * Save permission in wiki setting
-     */
-    public void savePermWikiSetting() {
-        info("Click on Save button");
-        evt.click(ELEMENT_PERMISSION_BUTTON_SAVE, 0, true);
-        evt.click(ELEMENT_PERMISSION_BUTTON_OK, 0, true);
-    }
-
-    /**
-     * Define permission Types as Users, Membership or Groups
-     */
-    public enum userGroupTypes {
-        Users_UserName, Users_Email, Users_FirstName, Users_LastName, Membership, Groups;
-    }
-
-    /**
-     * Define mode to input permission as type or select
-     */
-    public enum modeInput {
-        Type, Select;
     }
 
     /**

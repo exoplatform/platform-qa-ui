@@ -101,19 +101,6 @@ public class CommentManagement {
   }
 
   /**
-   * Delete comment
-   * 
-   * @param comment string
-   */
-  public void deleteComment(String comment) {
-    info("Delete COMMENT");
-    goToActionOfCommentFromMoreAction(comment, actionCommentOption.DELETE);
-    evt.waitForAndGetElement(ELEMENT_COMMENT_CONFIRM_DELETE);
-    evt.click(ELEMENT_COMMENT_DELETE_FORM_OK_BUTTON);
-    evt.waitForElementNotPresent(ELEMENT_COMMENT_CONTENT.replace("$comment", comment));
-  }
-
-  /**
    * action menu of comment
    */
   public enum actionCommentOption {

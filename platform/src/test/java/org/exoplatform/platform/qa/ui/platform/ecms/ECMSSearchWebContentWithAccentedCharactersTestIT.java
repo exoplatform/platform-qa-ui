@@ -76,7 +76,7 @@ public class ECMSSearchWebContentWithAccentedCharactersTestIT extends Base {
     siteExplorerHome.goToPath("intranet", "Site Management");
     ELEMENT_SEARCH_BTN.setValue("sécurité").pressEnter();
     sleep(Configuration.timeout);
-    $(byId("hResult")).find(byXpath("//*[@id=\"SimpleSearchResult\"]/table/tbody/tr[1]/td[2]"))
+    $(byClassName("uiSearchResult")).find(byXpath("//*[@id=\"SimpleSearchResult\"]/table/tbody/tr[1]/td[2]"))
                                  .find(byText("sécurité"))
                                  .shouldBe(Condition.visible);
     info("Delete web content");

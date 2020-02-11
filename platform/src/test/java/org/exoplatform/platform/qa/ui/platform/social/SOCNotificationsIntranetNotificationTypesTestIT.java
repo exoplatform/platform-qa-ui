@@ -16,13 +16,12 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 
 import java.awt.*;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
@@ -2176,12 +2175,11 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
                     + username2 + " have commented a post."));
     info("Check comment notification in the View All");
     intranetNotification.goToAllNotification();
-    $(byClassName("media")).waitUntil(visible,Configuration.timeout).find(byText(comment2))
-                                             .waitUntil(visible,Configuration.timeout).parent()
-                                             .parent()
-                                             .parent()
-                                             .shouldHave(Condition.text(username3 + " " + username3 + " and " + username2 + " "
-                                                 + username2 + " have commented a post."));
+    Assert.assertEquals($(byXpath("//div[@class=\"status\"]")).getText(),username3 + " " + username3 + " and " + username2 + " "
+            + username2 + " have commented a post.");
+    Assert.assertEquals($(byXpath("//div[@class=\"content\"]/p")).getText(),activity);
+    Assert.assertTrue($(byXpath("//div[@class=\"commentNoHtml\"]")).getText().contains(comment2));
+
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");

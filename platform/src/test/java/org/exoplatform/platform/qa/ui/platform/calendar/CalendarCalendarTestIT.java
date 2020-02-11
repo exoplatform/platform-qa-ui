@@ -89,11 +89,9 @@ public class CalendarCalendarTestIT extends Base {
   @Test
   public void test08_ShareACalendar() {
     String calendarName = "calendarName" + getRandomNumber();
-    String newCalendar = "newCalendar" + getRandomNumber();
     String calendarColor = "light_purple";
     String[] groupShare = { DATA_USER2 };
     boolean[] edit = { false };
-    boolean[] newEdit = { true };
     info("Test 08 Share a calendar");
 
     homePagePlatform.goToCalendarPage();
@@ -255,7 +253,7 @@ public class CalendarCalendarTestIT extends Base {
     calendarManagement.executeActionCalendar(calendarName, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     info("Check default date");
     eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);
-    eventManagement.inputDataEventInQuickForm(titleEvent, titleEvent, getDate(0, "MM-dd-yyyy" + " HH"), getDate(0, "MM-dd-yyyy" + " HH"), false);
+    eventManagement.inputDataEventInQuickForm(titleEvent, titleEvent, getDate(0, "MM/dd/yyyy" + " HH"), getDate(0, "MM/dd/yyyy" + " HH"), false);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
                                               CalendarHomePage.selectViewOption.LIST,

@@ -6,15 +6,11 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_EDIT_MY_PROFILE_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
@@ -74,16 +70,11 @@ public class SOCPeopleProfileDynContainersTestIT extends Base {
     String rightbottom_profile = "rightbottom-profile-container";
     String middle_profile = "middle-profile-container";
     String left_profile = "left-profile-container";
-    String action_profile = "action-profile-container";
-
     navigationToolbar.goToMyProfile();
-
     info("goto edit layout");
     navigationToolbar.goToEditLayout();
-
     info("switch to tab container");
     $(ELEMENT_CONTAINER_TAB).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-
     info("goto edit container");
     $(byXpath(ELEMENT_CONTAINER_ID.replace("${id}", righttop_profile))).waitUntil(Condition.visible, Configuration.timeout);
     $(byXpath(ELEMENT_CONTAINER_ID.replace("${id}", rightbottom_profile))).waitUntil(Condition.visible, Configuration.timeout);
@@ -124,18 +115,13 @@ public class SOCPeopleProfileDynContainersTestIT extends Base {
     String action_editprofile = "action-editprofile-container";
     String left_editprofile = "left-editprofile-container";
     String right_editprofile = "right-editprofile-container";
-
     navigationToolbar.goToMyProfile();
-
     info("goto edit profile");
     $(ELEMENT_EDIT_MY_PROFILE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
-
     info("goto edit layout");
     navigationToolbar.goToEditLayout();
-
     info("switch to tab container");
     $(ELEMENT_CONTAINER_TAB).waitUntil(Condition.visible,Configuration.timeout).click();
-
     info("goto edit container");
     $(byXpath(ELEMENT_CONTAINER_ID.replace("${id}", action_editprofile))).waitUntil(Condition.visible, Configuration.timeout);
     $(byXpath(ELEMENT_CONTAINER_ID.replace("${id}", left_editprofile))).waitUntil(Condition.visible, Configuration.timeout);

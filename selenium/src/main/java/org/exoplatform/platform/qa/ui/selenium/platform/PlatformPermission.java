@@ -63,25 +63,10 @@ public class PlatformPermission {
     if (temp.length > 0) {
       for (int i = 0; i < temp.length; i++) {
         searchUser(temp[i], type);
-
-        // check((ELEMENT_USER_CHECKBOX.replace("${user}", temp[i])), 2);
         $(byXpath(ELEMENT_USER_CHECKBOX.replace("${user}", temp[i]))).parent().click();
         $(ELEMENT_ADD_USERS_BUTTON).click();
       }
     }
-  }
-
-  /**
-   * Check display of user selector
-   *
-   * @param user
-   * @param isPresent
-   */
-  public void checkUserSelector(String user, boolean isPresent) {
-    if (isPresent)
-      evt.waitForAndGetElement(ELEMENT_USER_LIST.replace("${user}", user));
-    else
-      evt.waitForElementNotPresent(ELEMENT_USER_LIST.replace("${user}", user));
   }
 
   /**
@@ -122,19 +107,4 @@ public class PlatformPermission {
     $(ELEMENT_SELECT_MEMBERSHIP_POPUP).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
-  /**
-   * Check search result
-   *
-   * @param keySearch
-   * @param isPresent true if it has result false if it doesn't have result
-   */
-  public void searchUser(String keySearch, boolean isPresent) {
-    evt.type(ELEMENT_SEARCH_USER_INPUT, keySearch, true);
-
-    evt.click(ELEMENT_QUICK_SEARCH_BUTTON);
-    if (isPresent)
-      evt.waitForAndGetElement((ELEMENT_USER_CHECKBOX.replace("${user}", keySearch)), 5000, 1, 2);
-    else
-      evt.waitForElementNotPresent((ELEMENT_USER_CHECKBOX.replace("${user}", keySearch)), 5000, 1, 2);
-  }
 }

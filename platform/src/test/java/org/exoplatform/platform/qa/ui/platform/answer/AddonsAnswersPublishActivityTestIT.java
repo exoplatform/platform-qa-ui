@@ -9,16 +9,11 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME_CAS;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
-
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
 import com.codeborne.selenide.Condition;
-
 import org.exoplatform.platform.qa.ui.answer.pageobject.*;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
@@ -96,7 +91,6 @@ public class AddonsAnswersPublishActivityTestIT extends Base {
     answerCategoryManagement.goToActionOfCategoryFromRightClick(paCat1,
                                                                 AnswerCategoryManagement.actionCategoryOption.SUBMITQUESTION);
     questionManagement.inputDataToQuestionForm(question, content, null, null);
-    // click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
     $(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
     $(ELEMENT_OK_BUTTON_LINK).click();
     $(ELEMENT_OK_BUTTON_LINK).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
@@ -140,7 +134,6 @@ public class AddonsAnswersPublishActivityTestIT extends Base {
     answerHomePage.goToHomeCategory();
     ELEMENT_LIST_CATEGORIE.find(byLinkText(" " + paCat1)).click();
     answerCategoryManagement.deleteCategory(paCat1);
-    // qMang.deleteQuestion(question);
   }
 
   /**
@@ -179,7 +172,6 @@ public class AddonsAnswersPublishActivityTestIT extends Base {
     answerCategoryManagement.goToActionOfCategoryFromRightClick(paCat1,
                                                                 AnswerCategoryManagement.actionCategoryOption.SUBMITQUESTION);
     questionManagement.inputDataToQuestionForm(question, content, null, null);
-    // click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
     $(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
     $(ELEMENT_OK_BUTTON_LINK).click();
     $(ELEMENT_OK_BUTTON_LINK).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
@@ -223,7 +215,6 @@ public class AddonsAnswersPublishActivityTestIT extends Base {
     answerHomePage.goToHomeCategory();
     ELEMENT_LIST_CATEGORIE.find(byLinkText(" " + paCat1)).click();
     answerCategoryManagement.deleteCategory(paCat1);
-    // qMang.deleteQuestion(question);
   }
 
   /**
@@ -272,7 +263,6 @@ public class AddonsAnswersPublishActivityTestIT extends Base {
     }
     answerManagement.goToAnswerQuestion(question);
     answerManagement.inputDataToAnswer(answer1, null, null, null);
-    // click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
     $(ELEMENT_ANSWER_FORM_SAVE_BUTTON).click();
     executeJavaScript("window.scrollBy(0,-2000)", "");
     info("Check homepage activity");
@@ -301,7 +291,6 @@ public class AddonsAnswersPublishActivityTestIT extends Base {
     homePagePlatform.goToAnswer();
     answerManagement.goToAnswerQuestion(question);
     answerManagement.inputDataToAnswer(answer2, null, null, null);
-    // click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
     $(ELEMENT_ANSWER_FORM_SAVE_BUTTON).click();
     executeJavaScript("window.scrollBy(0,-2000)", "");
     info("Check homepage activity");
@@ -366,7 +355,6 @@ public class AddonsAnswersPublishActivityTestIT extends Base {
     }
     answerManagement.goToAnswerQuestion(question);
     answerManagement.inputDataToAnswer(answer1, null, null, null);
-    // click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
     $(ELEMENT_ANSWER_FORM_SAVE_BUTTON).click();
     executeJavaScript("window.scrollBy(0,-2000)", "");
     info("Check homepage activity");
@@ -395,7 +383,6 @@ public class AddonsAnswersPublishActivityTestIT extends Base {
     homePagePlatform.goToAnswer();
     answerManagement.goToAnswerQuestion(question);
     answerManagement.inputDataToAnswer(answer2, null, null, null);
-    // click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
     $(ELEMENT_ANSWER_FORM_SAVE_BUTTON).click();
     executeJavaScript("window.scrollBy(0,-2000)", "");
     info("Check homepage activity");
@@ -459,7 +446,6 @@ public class AddonsAnswersPublishActivityTestIT extends Base {
     }
     answerManagement.goToAnswerQuestion(question);
     answerManagement.inputDataToAnswer(answer1, null, null, null);
-    // click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
     $(ELEMENT_ANSWER_FORM_SAVE_BUTTON).click();
     executeJavaScript("window.scrollBy(0,-2000)", "");
     info("Check homepage activity");
@@ -488,7 +474,6 @@ public class AddonsAnswersPublishActivityTestIT extends Base {
     homePagePlatform.goToAnswer();
     answerManagement.goToAnswerQuestion(question);
     answerManagement.inputDataToAnswer(answer2, null, null, null);
-    // click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
     $(ELEMENT_ANSWER_FORM_SAVE_BUTTON).click();
     executeJavaScript("window.scrollBy(0,-2000)", "");
     info("Check homepage activity");
@@ -532,7 +517,6 @@ public class AddonsAnswersPublishActivityTestIT extends Base {
     info("Create question");
     questionManagement.goToSubmitQuestion();
     questionManagement.inputDataToQuestionForm(question, content, null, null);
-    // click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
     clickByJavascript(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
     click(ELEMENT_OK_BUTTON_LINK);
     info("Test 3: Unactivate a question");
@@ -590,7 +574,6 @@ public class AddonsAnswersPublishActivityTestIT extends Base {
     info("Create question");
     questionManagement.goToSubmitQuestion();
     questionManagement.inputDataToQuestionForm(question, content, null, null);
-    // click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
     clickByJavascript(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
     click(ELEMENT_OK_BUTTON_LINK);
     info("Test 3: Unactivate a question");
@@ -636,7 +619,6 @@ public class AddonsAnswersPublishActivityTestIT extends Base {
     info("Create question");
     questionManagement.goToSubmitQuestion();
     questionManagement.inputDataToQuestionForm(question, content, null, null);
-    // click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
     clickByJavascript(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
     click(ELEMENT_OK_BUTTON_LINK);
 
@@ -644,7 +626,6 @@ public class AddonsAnswersPublishActivityTestIT extends Base {
 
     questionManagement.goToActionOfQuestionByRightClick(question, QuestionManagement.actionQuestionOption.EDIT);
     questionManagement.inputDataToQuestionForm(newquestion, null, null, null);
-    // click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
     $(ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON).click();
     info("Check homepage activity");
     homePagePlatform.goToHomePage();

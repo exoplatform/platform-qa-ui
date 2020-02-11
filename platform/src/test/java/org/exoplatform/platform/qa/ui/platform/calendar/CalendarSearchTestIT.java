@@ -55,7 +55,7 @@ public class CalendarSearchTestIT extends Base {
   public void test01_QuickSearch() {
     String titleEvent = "titleEvent" + " dinner " + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
     String key = "dinner";
     String key1 = "dinnertest";
 
@@ -99,7 +99,7 @@ public class CalendarSearchTestIT extends Base {
   public void test02_AdvancedSearch() {
     String titleEvent = "titleEvent" + " dinner " + getRandomNumber();
     String content = "content" + getRandomNumber();
-    String defaultFormatDate = "MM-dd-yyyy";
+    String defaultFormatDate = "MM/dd/yyyy";
     String key = "dinner";
     String key1 = "dinnertest";
 

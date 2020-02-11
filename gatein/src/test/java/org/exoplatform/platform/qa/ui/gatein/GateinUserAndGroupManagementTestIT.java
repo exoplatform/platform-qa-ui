@@ -11,21 +11,16 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_INPUT_SEARCH_USER_NAME;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
 import com.codeborne.selenide.Condition;
-
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
-import sun.security.krb5.Config;
 
 /**
  * @date March 10 2015
@@ -63,6 +58,7 @@ public class GateinUserAndGroupManagementTestIT extends Base {
    * <li>Case ID:123095.</li>
    * <li>Test Case Name: Delete group.</li>
    */
+  @Test
   public void test01_02_03_04_AddEditDeleteGroupAddUsersToGroup() {
     String groupName = "groupName" + getRandomNumber();
     String groupLabel = "groupLabel" + getRandomNumber();
@@ -133,16 +129,6 @@ public class GateinUserAndGroupManagementTestIT extends Base {
     String newLastName = getRandomString();
     String newDisplayName = "newDisplayName" + getRandomNumber();
     String newEmail = newFirstName + getRandomNumber() + "@test.com";
-
-    /*
-     * String searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
-     * String searchLastName = userSearchOptionData.getUserSearchOptionByIndex(1);
-     * String searchFirstName = userSearchOptionData.getUserSearchOptionByIndex(2);
-     * String searchEmail = userSearchOptionData.getUserSearchOptionByIndex(3);
-     * String searchUser1 = userInfoData.getLastNameByIndex(2); String searchUser2 =
-     * userInfoData.getFirstNameByIndex(4);
-     */
-
     navigationToolbar.goToAddUser();
     info("Create new user");
     useraddmanagement.addUser(username, password, email, firstName, lastName);
@@ -156,13 +142,8 @@ public class GateinUserAndGroupManagementTestIT extends Base {
      */
     info("Test Case 08: Edit user information");
     navigationToolbar.goToUsersAndGroupsManagement();
-    /*
-     * if(waitForAndGetElement(ELEMENT_USER_MANAGEMENT_ACTIVE_TAB, 3000, 0) == null)
-     * click(ELEMENT_USER_MANAGEMENT_TAB);
-     */
     userandgroupmanagement.goToEditUserInfo(username);
     userandgroupmanagement.editUserInfo_AccountTab(newFirstName, newLastName, newDisplayName, newEmail);
-    // waitForTextPresent(newFirstName);
     $(byText(newFirstName)).should(Condition.exist);
 
     /*
@@ -199,21 +180,6 @@ public class GateinUserAndGroupManagementTestIT extends Base {
     String firstName = getRandomString();
     String lastName = getRandomString();
     String email = firstName + getRandomNumber() + "@test.com";
-
-    String newFirstName = getRandomString();
-    String newLastName = getRandomString();
-    String newDisplayName = "newDisplayName" + getRandomNumber();
-    String newEmail = newFirstName + getRandomNumber() + "@test.com";
-
-    /*
-     * String searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
-     * String searchLastName = userSearchOptionData.getUserSearchOptionByIndex(1);
-     * String searchFirstName = userSearchOptionData.getUserSearchOptionByIndex(2);
-     * String searchEmail = userSearchOptionData.getUserSearchOptionByIndex(3);
-     * String searchUser1 = userInfoData.getLastNameByIndex(2); String searchUser2 =
-     * userInfoData.getFirstNameByIndex(4);
-     */
-
     navigationToolbar.goToAddUser();
     info("Create new user");
     useraddmanagement.addUser(username, password, email, firstName, lastName);
@@ -266,21 +232,6 @@ public class GateinUserAndGroupManagementTestIT extends Base {
     String firstName = getRandomString();
     String lastName = getRandomString();
     String email = firstName + getRandomNumber() + "@test.com";
-
-    String newFirstName = getRandomString();
-    String newLastName = getRandomString();
-    String newDisplayName = "newDisplayName" + getRandomNumber();
-    String newEmail = newFirstName + getRandomNumber() + "@test.com";
-
-    /*
-     * String searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
-     * String searchLastName = userSearchOptionData.getUserSearchOptionByIndex(1);
-     * String searchFirstName = userSearchOptionData.getUserSearchOptionByIndex(2);
-     * String searchEmail = userSearchOptionData.getUserSearchOptionByIndex(3);
-     * String searchUser1 = userInfoData.getLastNameByIndex(2); String searchUser2 =
-     * userInfoData.getFirstNameByIndex(4);
-     */
-
     navigationToolbar.goToAddUser();
     info("Create new user");
     useraddmanagement.addUser(username, password, email, firstName, lastName);
@@ -373,9 +324,9 @@ public class GateinUserAndGroupManagementTestIT extends Base {
     useraddmanagement.addUser(username1, password1, email1, firstName1, lastName1);
     useraddmanagement.addUser(username2, password2, email2, firstName2, lastName2);
     homePagePlatform.goToConnections();
-    ELEMENT_NAME_OF_PEOPLE.setValue(firstName + " " + lastName).waitUntil(Condition.visible, Configuration.timeout).pressEnter();
-    ELEMENT_CONTENT_PEOPLE.waitUntil(Condition.visible, Configuration.timeout).find(byText(firstName + " " + lastName)).should(Condition.exist);
-    ELEMENT_CONTENT_PEOPLE.waitUntil(Condition.visible, Configuration.timeout).find(byText(firstName1 + " " + lastName1)).shouldNot(Condition.exist);
+    ELEMENT_NAME_OF_PEOPLE.setValue(firstName + " " + lastName).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).pressEnter();
+    ELEMENT_CONTENT_PEOPLE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).find(byText(firstName + " " + lastName)).should(Condition.exist);
+    ELEMENT_CONTENT_PEOPLE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).find(byText(firstName1 + " " + lastName1)).shouldNot(Condition.exist);
     refresh();
     navigationToolbar.goToManageCommunity();
     userandgroupmanagement.deleteUser(username);

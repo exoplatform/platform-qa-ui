@@ -12,14 +12,9 @@ import org.exoplatform.platform.qa.ui.selenium.platform.administration.ChangeLan
 import org.exoplatform.platform.qa.ui.selenium.platform.administration.ManageLayout;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import sun.awt.AWTAccessor;
-
-import java.util.ArrayList;
-
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
@@ -27,7 +22,6 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_NAME_OF_USER_TOP_RIGHT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase.scrollToBottomPage;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
@@ -142,8 +136,6 @@ public class GateinGlobalSettingsTestIT extends Base {
         info("Change User Profile");
         info("Verify before change User Profile");
         manageLogInOut.signIn(username, password);
-        // waitForAndGetElement(ELEMENT_NAME_OF_USER_TOP_RIGHT.replace("${firstName}",
-        // username).replace("${lastName}", username));
         info("Change User Profile");
         navigationToolbar.goToMyProfile();
         userProfilePage.goToEditProfile();
@@ -230,9 +222,6 @@ public class GateinGlobalSettingsTestIT extends Base {
          * admin/manager/User/Demo don't set language )
          */
         info("Check language default when do not set language for user is English");
-        // $(ELEMENT_HOME_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout);
-        // manageLogInOut.signOut();
-
         /*
          * Step Number: 2 Step Name: Step 2: Check displaying language when language of
          * browser don't support by portal with user account demo Step Description: -

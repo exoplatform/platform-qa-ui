@@ -189,7 +189,7 @@ public class PlfUnifiedSearchTestIT extends Base {
    */
   @Test
   public void test03_SortSearchResult() {
-    String name = "space";
+    String name = "space" + getRandomNumber();
     String wiki = "wiki" + getRandomNumber();
     info("Test 3: Sort search result");
     homePagePlatform.goToMySpaces();
@@ -279,8 +279,8 @@ public class PlfUnifiedSearchTestIT extends Base {
     switchTo().alert();
     confirm();
     switchToParentWindow();
-    $(ELEMENT_EDIT_PORTLET_FORM_CLOSE_BUTTON).click();
-    ELEMENT_CLOSE_PORTLET.click();
+    $(ELEMENT_EDIT_PORTLET_FORM_CLOSE_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("//*[@class='uiIconClose pull-right']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
   }
 
@@ -329,7 +329,7 @@ public class PlfUnifiedSearchTestIT extends Base {
     ELEMENT_DROP_DOWN_LIST_RESULT_IN_QUICK_SEARCH.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).pressEnter();
     info("Verify that File checkbox is not shown");
-    $(ELEMENT_SEARCHRESULT_WIKITYPECHECK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).shouldNot(Condition.exist);
+    $(byXpath("//div[@class='noResultInfo']//*[@id='keyword' and text()='${wikiName}']".replace("${wikiName}",wiki))).exists();
     navigationToolbar.goToAdminSearch();
     $(ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_TITLE).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
     info("Click on Enable button");
@@ -439,11 +439,11 @@ public class PlfUnifiedSearchTestIT extends Base {
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).setValue(content);
     ELEMENT_DROP_DOWN_LIST_RESULT_IN_QUICK_SEARCH.waitUntil(Condition.visible, Configuration.timeout)
             .find(byText(name))
-            .shouldBe(Condition.visible);
+            .shouldBe(Condition.not(Condition.visible));
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).pressEnter();
     $(ELEMENT_SEARCHRESULT_ALLTYPECHECK).click();
     $(ELEMENT_SEARCHRESULT_DOCTYPECHECK).parent().click();
-    ELEMENT_RESULT_SEARCH.find(byText(name)).should(Condition.visible);
+    ELEMENT_RESULT_SEARCH.find(byText(name)).should(Condition.not(Condition.visible));
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     siteExplorerHome.deleteData(name);

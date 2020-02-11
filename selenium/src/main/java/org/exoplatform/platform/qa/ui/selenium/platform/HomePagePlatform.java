@@ -10,8 +10,7 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_CONNECTION_EVERYONE_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.ELEMENT_ANSWER_PORTLET;
-import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.ELEMENT_FAQ_QUESTION_LIST;
+import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_CALENDAR_WORKING_PANEL;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ADDNEWSPACE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -34,7 +33,7 @@ public class HomePagePlatform {
   public void goToWiki() {
     info("--Go to Wiki--");
     refreshUntil($(ELEMENT_WIKI_LINK_PLF), Condition.visible, 500);
-    $(ELEMENT_WIKI_LINK_PLF).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_WIKI_LINK_PLF).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     $(ELEMENT_WIKI_LINK_PLF).click();
     refreshUntil($(ELEMENT_WIKI_LINK_PLF), Condition.visible, 500);
     sleep(Configuration.timeout);
@@ -49,13 +48,6 @@ public class HomePagePlatform {
     $(byClassName("notif-chat-open-link")).waitUntil(Condition.appears, Configuration.timeout).click();
   }
 
-  public void backToHomeFromChat() {
-    info("--Go to Home--");
-    switchTo().window(1);
-    refreshUntil($(byClassName("home-button")), Condition.visible, 1000);
-    $(byXpath("//i[@class='uiIconHomeInfo']")).waitUntil(Condition.visible,Configuration.timeout).click();
-    refresh();
-  }
   /**
    * Go to Documents
    */
@@ -70,7 +62,7 @@ public class HomePagePlatform {
    */
   public void goToPeople() {
     info("--Go to People--");
-    $(ELEMENT_PEOPLE_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_PEOPLE_LINK_PLF).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
   }
 
@@ -82,7 +74,7 @@ public class HomePagePlatform {
     sleep(Configuration.timeout);
     executeJavaScript("window.scrollBy(0,-5500)", "");
     sleep(Configuration.collectionsTimeout);
-    $(ELEMENT_HOME_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_HOME_LINK_PLF).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -98,7 +90,7 @@ public class HomePagePlatform {
   }
 
   public void goToTaskPage() {
-    ELEMENT_TASKS_LINK_PLF.waitUntil(Condition.appears, Configuration.timeout).click();
+    ELEMENT_TASKS_LINK_PLF.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -145,17 +137,6 @@ public class HomePagePlatform {
   }
 
   /**
-   * Go to faq page
-   */
-  public void goToFaq() {
-    info("Base url is " + testBase.getExoWebDriver().getBaseUrl());
-    String url = testBase.getExoWebDriver().getBaseUrl() + "/intranet/home/FAQ";
-    info("-- Go to FAQ page --");
-    testBase.getExoWebDriver().getWebDriver().get(url);
-    evt.waitForAndGetElement(ELEMENT_FAQ_QUESTION_LIST);
-  }
-
-  /**
    * Open Connections page
    */
   public void goToConnections() {
@@ -174,63 +155,9 @@ public class HomePagePlatform {
    */
   public void goToSpecificSpace(String space) {
     info("Go to space " + space);
+    $(byXpath("//*[@class='ps__scrollbar-y']")).dragAndDropTo(ELEMENT_SPECIFIC_PANEL);
+    ELEMENT_SPECIFIC_PANEL.find(byText(space)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
-    ELEMENT_SPECIFIC_PANEL.find(byText(space)).click();
-
-  }
-
-  /**
-   * Open friend profile page
-   *
-   * @param username
-   */
-  public void goToFriendProfilePage(String username) {
-    info("Go to Friend profile page");
-    testBase.getExoWebDriver().getWebDriver().get(testBase.getExoWebDriver().getBaseUrl() + "/intranet/profile/" + username);
-
-  }
-
-  /**
-   * Select display mode for AS
-   *
-   * @param type as My Activities, All Activities....
-   */
-  public void selectDisplayMode(displayModeType type) {
-    info("Open drop menu");
-    evt.click(ELEMENT_HOMEPAGE_DROP_MENU_ARROW);
-    switch (type) {
-      case My_Activities:
-        info("Select My Activities");
-        evt.click(ELEMENT_HOMEPAGE_DROP_MENU_MY_ACTIVITIES);
-        break;
-      case All_Activities:
-        info("Select All Activities");
-        evt.click(ELEMENT_HOMEPAGE_DROP_MENU_ALL_ACTIVITIES);
-        break;
-      case My_Spaces:
-        info("Select My Spaces");
-        evt.click(ELEMENT_HOMEPAGE_DROP_MENU_MY_SPACES);
-        break;
-      case Connections:
-        info("Select Connections");
-        evt.click(ELEMENT_HOMEPAGE_DROP_MENU_CONNECTIONS);
-        break;
-    }
-  }
-
-  /**
-   * Check display of user in Invitation gadget
-   *
-   * @param user
-   * @param isPresent
-   */
-  public void checkDisplayInInvitationGadget(String user, boolean isPresent) {
-    info("check display of user in Invitation");
-    goToHomePage();
-    if (isPresent)
-      evt.waitForAndGetElement(ELEMENT_INVITATIONS_PEOPLE_AVATAR.replace("${name}", user));
-    else
-      evt.waitForElementNotPresent(ELEMENT_INVITATIONS_PEOPLE_AVATAR.replace("${name}", user));
   }
 
   /**
@@ -269,21 +196,6 @@ public class HomePagePlatform {
   }
 
   /**
-   * Check display of user in Suggestion gadget
-   *
-   * @param user
-   * @param isPresent
-   */
-  public void checkDisplayInSuggestionGadget(String user, boolean isPresent) {
-    info("check display of user in Suggestion");
-    goToHomePage();
-    if (isPresent)
-      evt.waitForAndGetElement(ELEMENT_SUGGESTION_NAME.replace("${name}", user));
-    else
-      evt.waitForElementNotPresent(ELEMENT_SUGGESTION_NAME.replace("${name}", user));
-  }
-
-  /**
    * Go to user profile
    */
 
@@ -296,10 +208,4 @@ public class HomePagePlatform {
 
   }
 
-  /**
-   * Define display mode's type of the AS as My Activities,All Activities,...
-   */
-  public enum displayModeType {
-    My_Activities, All_Activities, My_Spaces, Connections;
-  }
 }

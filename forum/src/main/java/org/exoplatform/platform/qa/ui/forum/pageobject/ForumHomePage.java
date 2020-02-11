@@ -7,14 +7,8 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_SAVE_BTN;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
-
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
@@ -64,9 +58,8 @@ public class ForumHomePage {
   public void selectItemAdministrationMenu(specifAdministrationMenu item) {
     info("Waiting administration menu is shown");
     $(ELEMENT_ACTIONBAR_ADMINISTRATION).should(Condition.appears);
-    // evt.waitForAndGetElement(ELEMENT_ACTIONBAR_ADMINISTRATION);
     info("Click on Manage menu");
-    $(ELEMENT_ACTIONBAR_ADMINISTRATION).click();
+    $(ELEMENT_ACTIONBAR_ADMINISTRATION).waitUntil(Condition.visible,Configuration.timeout).click();
 
     switch (item) {
     case SORT_SETTING:
@@ -75,7 +68,7 @@ public class ForumHomePage {
       break;
     case BBCODE:
       info("Click on BBCode link");
-      $(ELEMENT_ACTIONBAR_ADMIN_BBCODE).click();
+      $(ELEMENT_ACTIONBAR_ADMIN_BBCODE).waitUntil(Condition.visible,Configuration.timeout).click();
       break;
     case NOTIFICATIONS:
       break;
@@ -85,28 +78,15 @@ public class ForumHomePage {
       break;
     case EXPORT:
       info("Export a category");
-      $(ELEMENT_ACTIONBAR_ADMIN_EXPORT).click();
+      $(ELEMENT_ACTIONBAR_ADMIN_EXPORT).waitUntil(Condition.visible,Configuration.timeout).click();
       break;
     case IMPORT:
       info("Import a category");
-      $(ELEMENT_ACTIONBAR_ADMIN_IMPORT).click();
+      $(ELEMENT_ACTIONBAR_ADMIN_IMPORT).waitUntil(Condition.visible,Configuration.timeout).click();
       break;
     default:
       break;
     }
-  }
-
-  /**
-   * Import a category from Administration menu
-   *
-   * @param folderDowloadFile String
-   * @param nameFile String
-   */
-  public void importCategory(String folderDowloadFile, String nameFile) {
-    selectItemAdministrationMenu(specifAdministrationMenu.IMPORT);
-    mftb.importFile(folderDowloadFile, nameFile);
-    button.ok();
-
   }
 
   /**
@@ -115,8 +95,6 @@ public class ForumHomePage {
    * @param name String
    */
   public void goToCategory(String name) {
-    // goToHomeCategory();
-    // evt.click(ELEMENT_FORUM_DETAIL_FORUM_NAME_LINK.replace("${name}", name));
     $(byText(name)).click();
   }
 
@@ -162,27 +140,6 @@ public class ForumHomePage {
   }
 
   /**
-   * Attach file in attach popup
-   *
-   * @param pathFile String
-   * @param fileName String
-   */
-  public void attachFile(String pathFile, String fileName) {
-    info("Attach a file");
-    WebElement element = evt.waitForAndGetElement(ELEMENT_UPLOAD_POPUP_ATTACHMENT_FILE_INPUT, testBase.getDefaultTimeout(), 1, 2);
-    ((JavascriptExecutor) testBase.getExoWebDriver().getWebDriver()).executeScript("arguments[0].style.display = 'block';",
-                                                                                   element);
-    info("Get the file to attach");
-    element.sendKeys(testBase.getAbsoluteFilePath(pathFile + fileName));
-    info("Verify that the file is attached");
-    evt.waitForAndGetElement(ELEMENT_UPLOAD_POPUP_NAMEFILE.replace("${fileName}", fileName));
-    info("The file is attached successfully");
-    info("Click on Save button");
-    evt.click(ELEMENT_UPLOAD_POPUP_ATTACHMENT_FILE_SAVE_BUTTON);
-
-  }
-
-  /**
    * Add a BBcode Update QuynhPT
    *
    * @param tag String
@@ -225,23 +182,23 @@ public class ForumHomePage {
   public void editBBCode(String newTag, String newReplacement, String newDescription, String newExample, boolean use) {
     selectItemAdministrationMenu(specifAdministrationMenu.BBCODE);
     info("Click on Edit BBcode");
-    $(ELEMENT_BBCODE_EDITBBCODE).click();
+    $(ELEMENT_BBCODE_EDITBBCODE).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Input new tag");
-    $(ELEMENT_BBCODE_ADDBBCODEFORM_TAG).setValue(newTag);
+    $(ELEMENT_BBCODE_ADDBBCODEFORM_TAG).waitUntil(Condition.visible,Configuration.timeout).setValue(newTag);
     info("Input new replacement");
-    $(ELEMENT_BBCODE_ADDBBCODEFORM_REPLACEMENT).setValue(newReplacement);
+    $(ELEMENT_BBCODE_ADDBBCODEFORM_REPLACEMENT).waitUntil(Condition.visible,Configuration.timeout).setValue(newReplacement);
     info("Input new description");
-    $(ELEMENT_BBCODE_ADDBBCODEFORM_DESCRIPTION).setValue(newDescription);
+    $(ELEMENT_BBCODE_ADDBBCODEFORM_DESCRIPTION).waitUntil(Condition.visible,Configuration.timeout).setValue(newDescription);
     info("Input new example");
-    $(ELEMENT_BBCODE_ADDBBCODEFORM_EXAMPLE).setValue(newExample);
+    $(ELEMENT_BBCODE_ADDBBCODEFORM_EXAMPLE).waitUntil(Condition.visible,Configuration.timeout).setValue(newExample);
     if (use == true)
-      $(ELEMENT_BBCODE_USE_OPTION).click();
+      $(ELEMENT_BBCODE_USE_OPTION).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Click on Save button and save all changes");
-    $(ELEMENT_EDITSITE_SAVEBTN).click();
+    $(ELEMENT_EDITSITE_SAVEBTN).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Verify that BBcode is edited with changes");
     $(byText(newTag.toUpperCase())).should(Condition.exist);
     info("Close the popup");
-    $(ELEMENT_BBCODE_POPUP_CLOSEBTN).click();
+    $(ELEMENT_BBCODE_POPUP_CLOSEBTN).waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   /**
@@ -342,118 +299,6 @@ public class ForumHomePage {
     // TODO Auto-generated method stub
     info("Click on Private Message button");
     $(ELEMENT_ACTIONBAR_PRIVATE_MESSAGE).click();
-  }
-
-  /**
-   * Go to Compose New Message tab in Private Message
-   */
-  public void goToComposeNewMessageTab() {
-    info("Click on Compose New Message tab");
-    evt.click(ELEMENT_PRIVATE_MESSAGE_COMPOSE_MESSAGE_TAB);
-
-  }
-
-  /**
-   * Select User in Compose New Message tab
-   */
-  public void gotoUserSelectorInComposeNewMessageTab() {
-    info("-- Go to wiki home page --");
-    evt.click(ELEMENT_COMPOSE_NEW_MESSAGE_USER_SELECTOR);
-  }
-
-  /**
-   * function: Search user in User Selection Form when Compose New Private Message
-   */
-
-  public void searchUser(String user, String searchOption) {
-    info("--Search user " + user + "--");
-    evt.type(ELEMENT_COMPOSE_NEW_MESSAGE_INPUT_SEARCH_USER_NAME, user, true);
-    evt.select(ELEMENT_COMPOSE_NEW_MESSAGE_SELECT_SEARCH_OPTION, searchOption);
-    evt.click(ELEMENT_COMPOSE_NEW_MESSAGE_SEARCH_ICON);
-    evt.waitForTextPresent(user);
-  }
-
-  public void searchUserNotFound(String user, String searchOption) {
-    info("--Search user " + user + "--");
-    evt.type(ELEMENT_COMPOSE_NEW_MESSAGE_INPUT_SEARCH_USER_NAME, user, true);
-    evt.select(ELEMENT_COMPOSE_NEW_MESSAGE_SELECT_SEARCH_OPTION, searchOption);
-    evt.click(ELEMENT_COMPOSE_NEW_MESSAGE_SEARCH_ICON);
-    evt.waitForTextNotPresent(user);
-  }
-
-  /**
-   * Cancel send Private Message
-   */
-  public void cancelSendPrivateMessage() {
-    info("Cancel Add or Edit Forum");
-    evt.click(ELEMENT_PRIVATE_MESSAGE_CANCEL);
-  }
-
-  /**
-   * Close User Selector page
-   */
-  public void closeUserSelector() {
-    info("-- Go to User Selector page --");
-    evt.click(ELEMENT_COMPOSE_NEW_MESSAGE_CLOSE_USER_SELETOR);
-
-  }
-
-  /**
-   * Go to Manage User in Forum
-   */
-  public void goToManageUser() {
-    // TODO Auto-generated method stub
-    info("Click on Users button on Forum administration bar");
-    evt.click(ELEMENT_FORUM_USER_LIST);
-
-  }
-
-  /**
-   * function: Search user in User Manage Form
-   * @param user String
-   * @param searchOption  String
-   */
-
-  public void searchUserInUserList(String user, String searchOption) {
-    info("--Search user " + user + "--");
-    evt.type(ELEMENT_MANAGE_USER_INPUT_SEARCH_USER_NAME, user, true);
-    evt.click(ELEMENT_MANAGE_USER_SEARCH_ICON);
-    evt.waitForTextPresent(user);
-  }
-
-  public void searchUserInUserListNotFound(String user, String searchOption) {
-    info("--Search user " + user + "--");
-    evt.type(ELEMENT_MANAGE_USER_INPUT_SEARCH_USER_NAME, user, true);
-    evt.click(ELEMENT_MANAGE_USER_SEARCH_ICON);
-    evt.waitForTextNotPresent(user);
-  }
-
-  /**
-   * Close User form
-   */
-  public void closeUserForm() {
-    info("-- Go to User form --");
-    evt.click(ELEMENT_USER_FORM_CLOSE);
-
-  }
-
-  /**
-   * Go to My Subscription
-   */
-  public void gotoMySubscriptions() {
-    evt.click(ELEMENT_FORUM_SETTINGS);
-    evt.click(ELEMENT_FORUM_SETTINGS_MYSUSCRIB);
-  }
-
-  /**
-   * Update email in Sub-scriptions
-   * @param email String
-   */
-  public void updateEmailInMySubscriptions(String email) {
-    info("Update Email in My Subscriptions ");
-    evt.type(ELEMENT_MY_SUBSCRIPTIONS_EMAIL_UPDATE, email, true);
-    evt.click(ELEMENT_FORUM_SETTINGS_UPDATE);
-    evt.waitForTextPresent(email);
   }
 
   /**

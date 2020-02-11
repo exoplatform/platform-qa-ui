@@ -35,7 +35,7 @@ public class Logger {
 
   /**
    * Log a message with the format : [ClassName.MethodName] message
-   * 
+   *
    * @param message to format for log
    * @return formatted string to log
    */
@@ -43,7 +43,7 @@ public class Logger {
     Throwable t = new Throwable();
     StackTraceElement[] elements = t.getStackTrace();
     String Filename = elements[2].getFileName();
-    String sClassName = Filename.substring(0, Filename.length() - 5);// remove .java
+    String sClassName = Filename.substring(0, Filename.length() - 5);
     String sMethodName = elements[2].getMethodName();
     return String.format("[%s.%s] %s", sClassName, sMethodName, message);
   }

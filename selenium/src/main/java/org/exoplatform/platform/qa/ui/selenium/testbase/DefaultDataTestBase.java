@@ -26,42 +26,9 @@ package org.exoplatform.platform.qa.ui.selenium.testbase;
 public final class DefaultDataTestBase {
 
   /* ========Default System Property============= */
-  public static final String  DEFAULT_SSOTYPE                            = "";
-
-  public static final String  DEFAULT_NATIVE_EVENT                       = "true";
-
-  public static final String  DEFAULT_BASEURL                            = "http://localhost:8080/portal";
-
-  public static final String  DEFAULT_BROWSER                            = "firefox";                                           // iexplorer,
-
-  public static final String  DEFAULT_SERVER                             = "ubuntu";                                            // win,
   // firefox,
   // chrome
-
-  public static final Boolean DEFAULT_ISRANDOM                           = true;
   // ubuntu
-
-  public static final Boolean DEFAULT_ISUSEFILE                          = true;
-
-  public static final String  DEFAULT_JDBCDRIVER                         = "com.mysql.jdbc.LegacySeleniumDriver";
-
-  public static final String  DEFAULT_DBURL                              = "jdbc:mysql://localhost:3306/selenium";
-
-  public static final String  DEFAULT_USERMYSQL                          = "root";
-
-  public static final String  DEFAULT_USERPASS                           = "exo";
-
-  public static final String  DEFAULT_SQLWIKI                            = "select * from wiki order by id asc";
-
-  public static final String  DEFAULT_SQLATTACHMENT                      = "select * from space order by id asc";
-
-  public static final String  DEFAULT_SQLUSER                            =
-                                              "select type,username,password,email from user order by id asc";
-
-  public static final String  DEFAULT_SQLCONTENT                         = "select * from textbox order by id asc";
-
-  public static final String  DEFAULT_SHEET                              = "sheet1";
-
   public static final String  DEFAULT_USERFILEURL                        = "DataDriven/" + "user.xls";
 
   public static final String  DEFAULT_ATTACHMENTFILEURL                  = "DataDriven/" + "attachment_file.xls";
@@ -107,10 +74,6 @@ public final class DefaultDataTestBase {
   public static final String  DEFAULT_CONTAINERURL                       = "DataDriven/" + "containers_layout.xls";
 
   public static final String  DEFAULT_LANGUAGEURL                        = "DataDriven/" + "language.xls";
-
-  public static final String  DEFAULT_SELECTPATHURL                      = "DataDriven/" + "selectPath.xls";
-
-  public static final String  DEFAULT_MEMBERSHIPURL                      = "DataDriven/" + "membership.xls";
 
   public static final String  DEFAULT_APPLAYOUTURL                       = "DataDriven/" + "applications_layout.xls";
 

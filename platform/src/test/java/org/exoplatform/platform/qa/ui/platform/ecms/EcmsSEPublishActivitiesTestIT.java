@@ -3,11 +3,9 @@ package org.exoplatform.platform.qa.ui.platform.ecms;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
-import static org.exoplatform.platform.qa.ui.selenium.Button.ELEMENT_CLOSE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_CLOSE_DOCUMENT_PREVIEW;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_CLOSE_PUBLICATION_POPUP;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_FILEFORM_BLANK_CONTENT2;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -305,7 +303,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
     createNewDocument.saveAndClose();
     homePagePlatform.goToHomePage();
     refresh();
-    activityStream.checkActivityAddWebContent(title, null, null);
+    activityStream.checkActivityAddWebContent(title, "0", null);
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.deleteData(title);
     homePagePlatform.goToHomePage();
@@ -395,45 +393,6 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
     info("Check the activity");
     homePagePlatform.goToHomePage();
     $(byXpath(ELEMENT_ACTIVITY_FILE_UPLOAD_TITLE.replace("{$title}", "testavatar.pdf"))).shouldNot(Condition.visible);
-  }
-
-  /**
-   * <li>Case ID:116680.</li>
-   * <li>Test Case Name: Edit a content from the Content activity.</li> Step
-   * Number: 1 Step Name: Step Description: ; - Connect to Intranet - From the
-   * Content activity, click on the link "Edit" Input Data: Expected Outcome: -
-   * The content explorer is opened to edit the content
-   */
-
-  public void test13_EditAContentFromTheContentActivity() {
-    info("Test 13: Edit a content from the Content activity");
-
-    info("Create data test");
-    String title = "title" + getRandomNumber();
-    String content = "content" + getRandomNumber();
-    String newContent = "newContent" + getRandomNumber();
-    info("Finish creating data test");
-
-    info("Create a new Content");
-    navigationToolbar.goToSiteExplorer();
-    siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.goToAddNewContent();
-    createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
-    createNewDocument.addNewFile(title, content);
-    createNewDocument.saveAndClose();
-    homePagePlatform.goToHomePage();
-    refresh();
-    activityStream.checkActivityAddWebContent(title, null, null);
-    $(byText(title)).click();
-    switchTo().frame($(ELEMENT_FILEFORM_BLANK_CONTENT2));
-    $(byXpath("/html/body")).sendKeys(newContent);
-    switchTo().defaultContent();
-    createNewDocument.saveAndClose();
-
-    info("Delete the file");
-    navigationToolbar.goToSiteExplorer();
-    siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.deleteData(title);
   }
 
   /**

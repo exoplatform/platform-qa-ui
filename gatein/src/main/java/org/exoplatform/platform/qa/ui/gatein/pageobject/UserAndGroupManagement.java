@@ -22,8 +22,6 @@ package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_NEXT_PAGE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME;
@@ -39,12 +37,8 @@ import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.Dialog;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-
-import junit.framework.Assert;
-
 public class UserAndGroupManagement {
 
   private final TestBase       testBase;
@@ -71,47 +65,12 @@ public class UserAndGroupManagement {
   }
 
   /**
-   * Select users tab function: Choose Users Tab
-   */
-  public void goToUsersTab() {
-    info("-- Choose Users Management tab--");
-    evt.click(ELEMENT_USER_MANAGEMENT_TAB, 0, true);
-    evt.waitForAndGetElement(GateinLocator.ELEMENT_SEARCH_ICON_USERS_MANAGEMENT);
-
-  }
-
-  /**
    * Select group management tab function: Choose Group Tab
    */
   public void goToGroupTab() {
     info("-- Choose Group Management tab--");
     ELEMENT_GROUP_TAB.click();
     ELEMENT_TITLE_GROUP_INFO.waitUntil(Condition.appears, Configuration.timeout);
-  }
-
-  /**
-   * Select membership management tab function: Choose MemberShip Tab
-   */
-  public void goToMembershipTab() {
-    info("-- Choose Membership Management tab--");
-
-    evt.click(ELEMENT_TAB_MEMBERSHIP_MANAGEMENT);
-    evt.waitForAndGetElement(ELEMENT_MEMBERSHIP_MANAGEMENT_GRID);
-
-  }
-
-  /**
-   * Select a group by array
-   *
-   * @param arrayGroupPath String
-   */
-  public void selectGroup(String[] arrayGroupPath) {
-    info("Select a group in the list");
-    for (String group : arrayGroupPath) {
-      info("Select a group:" + group);
-      evt.click(ELEMENT_GROUP_MANAGEMENT_SELECT_GROUP.replace("${name}", group));
-    }
-
   }
 
   /**
@@ -172,34 +131,6 @@ public class UserAndGroupManagement {
      $(byXpath(addedUser)).waitUntil(Condition.visible,Configuration.timeout);
     }
     info("User is added to administration group");
-  }
-
-  /**
-   * Add a user to content management group
-   *
-   * @param user String
-   * @param membership String
-   */
-  public void addUserContentManagement(String user, String... membership) {
-    info("Go to Group tab");
-    goToGroupTab();
-    evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
-    info("Select Platform/Content Management group");
-    selectGroup("Platform/Content Management");
-    info("Add user to Content Management group by type");
-    evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
-    evt.type(ELEMENT_INPUT_USERNAME, user, true);
-    if (membership.length > 0)
-      evt.select(ELEMENT_SELECT_MEMBERSHIP, membership[0]);
-    evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
-    evt.click(ELEMENT_SAVE_BUTTON_2);
-    String addedUser = ELEMENT_ADDED_GROUP_USER_IN_TABLE.replace("${username}", user);
-    if (testBase.isTextPresent(ELEMENT_MSG_TOTAL_PAGES)) {
-      plfBase.usePaginator(addedUser, ELEMENT_USER_NOT_FOUND.replace("${user}", user));
-    } else {
-      evt.waitForAndGetElement(addedUser);
-    }
-    info("User is added to Content Managment group");
   }
 
   /**
@@ -290,42 +221,6 @@ public class UserAndGroupManagement {
   }
 
   /**
-   * Verify user-membership
-   *
-   * @param user String
-   * @param member String
-   * @param isDisplay boolean
-   */
-  public void verifyUserMemInTable(String user, String member, boolean isDisplay) {
-    info("verify user -membership");
-    if (isDisplay) {
-      evt.waitForAndGetElement(ELEMENT_ADDED_GROUP_USER_IN_TABLE1.replace("$mem", member).replace("$user", user));
-    }
-  }
-
-  /**
-   * function: Search user In Group Management (To add to group)
-   *
-   * @param user (Can be: User name, Last name, First name or Email of the user
-   *          you want to search)
-   * @param searchOption (Can be: User name, Last name, First me or Email option
-   *          corresponding with information you input in "Search")
-   * @param verify (True: if you want to verify new user Searched successfully)
-   */
-  public void searchUserInGroupManagement(String user, String searchOption, boolean verify) {
-    info("--Search user " + user + "--");
-    $(ELEMENT_GROUP_SEARCH_USER_SEARCH_INPUT).click();
-    $(ELEMENT_GROUP_SEARCH_USER_SEARCH_INPUT).setValue(user);
-    $(ELEMENT_GROUP_SEARCH_USER_OPTION).selectOption(searchOption);
-    $(ELEMENT_GROUP_SEARCH_USER_SEARCH_ICON).click();
-    if (verify) {
-      // evt.waitForAndGetElement(ELEMENT_SEARCH_GROUP_USER_IN_TABLE.replace("${username}",
-      // user));
-      $(byText(user)).should(Condition.exist);
-    }
-  }
-
-  /**
    * function: Delete group
    *
    * @param groupName name of Group
@@ -339,119 +234,6 @@ public class UserAndGroupManagement {
     alert.acceptAlert();
     if (verify) {
       $(byText(groupName)).shouldNot(Condition.exist);
-    }
-  }
-
-  /**
-   * function: Add new membership
-   *
-   * @param membershipName name of membership
-   * @param membershipDesc description of membership
-   * @param verify (True if you want to verify new membership created
-   *          successfully)
-   */
-  public void addMembership(String membershipName, String membershipDesc, boolean verify) {
-    By member = By.xpath(ELEMENT_MEMBERSHIHP.replace("${membershipName}", membershipName));
-    info("--Creating new membership--");
-    evt.click(ELEMENT_TAB_MEMBERSHIP_MANAGEMENT);
-    evt.waitForAndGetElement(ELEMENT_INPUT_NAME);
-    evt.type(ELEMENT_INPUT_NAME, membershipName, true);
-    evt.type(ELEMENT_TEXTAREA_DESCRIPTION, membershipDesc, true);
-    evt.click(ELEMENT_SAVE_BUTTON);
-    if (evt.waitForAndGetElement(member, 10000, 0) == null) {
-      evt.click(ELEMENT_NEXT_PAGE);
-    }
-    if (verify)
-      evt.waitForAndGetElement(member);
-  }
-
-  /**
-   * function: Edit membership
-   *
-   * @param membershipName name of membership you want to edit
-   * @param newDesc new description of membership
-   */
-  public void editMembership(String membershipName, String newDesc) {
-    info("-- Edit membership: " + membershipName + "--");
-    boolean verifyMembership;
-    verifyMembership = testBase.isTextPresent(membershipName);
-    if (verifyMembership) {
-      evt.waitForTextPresent(membershipName);
-    } else {
-      evt.click(ELEMENT_NEXT_PAGE);
-    }
-    String editIcon = ELEMENT_MEMBERSHIP_EDIT_ICON.replace("${membership}", membershipName);
-    String membershipInput = ELEMENT_MEMBERSHIP_INPUT.replace("${membershipName}", membershipName);
-    evt.click(editIcon);
-
-    evt.waitForAndGetElement(membershipInput);
-    evt.type(ELEMENT_TEXTAREA_DESCRIPTION, newDesc, true);
-    evt.click(ELEMENT_SAVE_BUTTON);
-    if (verifyMembership) {
-      evt.waitForTextPresent(membershipName);
-    } else {
-      evt.click(ELEMENT_NEXT_PAGE);
-    }
-    evt.waitForTextPresent(newDesc);
-  }
-
-  /**
-   * Verify membership
-   *
-   * @param mem boolean
-   * @param des boolean
-   * @param isDisplay boolean
-   */
-  public void verifyMembership(String mem, String des, boolean isDisplay) {
-    info("verify display of membership");
-    evt.click(ELEMENT_TAB_MEMBERSHIP_MANAGEMENT);
-    if (isDisplay) {
-      evt.waitForAndGetElement(ELEMENT_MEMBERSHIP_DESCRIPTION.replace("$mem", mem).replace("$des", des));
-    }
-  }
-
-  /**
-   * Verify membership in edit form
-   *@param user String
-   * @param mem String
-   * @param isDisplay boolean
-   */
-  public void verifyMembershipInEditForm(String user, String mem, boolean isDisplay) {
-    info("verify display of membership");
-    evt.click(ELEMENT_EDIT_USER_MEM_IN_TABLE_ICON.replace("$user", user), 0, true);
-    if (isDisplay) {
-      evt.waitForAndGetElement(ELEMENT_EDIT_USER_MEM_FORM.replace("$mem", mem));
-    }
-  }
-
-  /**
-   * function: Delete Membership
-   *
-   * @param membershipName name of membership
-   * @param verify (True: if you want to verify membership deleted successfully)
-   */
-  public void deleteMembership(String membershipName, boolean verify) {
-    boolean verifyMembership;
-    verifyMembership = testBase.isTextPresent(membershipName);
-    if (verifyMembership) {
-      evt.waitForTextPresent(membershipName);
-    } else {
-      evt.click(ELEMENT_NEXT_PAGE);
-    }
-    String deleteIcon = ELEMENT_MEMBERSHIP_DELETE_ICON.replace("${membership}", membershipName);
-    info("--Deleting membership--");
-    evt.click(deleteIcon);
-    alert.waitForConfirmation(ELEMENT_MSG_CONFIRM_DELETE_MEMBERSHIP);
-    if (verify) {
-      if (verifyMembership)
-        evt.waitForTextNotPresent(membershipName);
-      if (evt.waitForAndGetElement(ELEMENT_NEXT_PAGE, 10000, 0) != null) {
-        evt.click(ELEMENT_NEXT_PAGE);
-        evt.waitForTextNotPresent(membershipName);
-      }
-    } else {
-      evt.waitForTextPresent(ELEMENT_MSG_CANNOT_DELETE);
-      evt.click(ELEMENT_OK_BUTTON, 0, true);
     }
   }
 
@@ -555,129 +337,8 @@ public class UserAndGroupManagement {
     $(byXpath(ELEMENT_CLOSE_MESSAGE)).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
-  /**
-   * function: Search user
-   *
-   * @param user (Can be: User name, Last name, First name or Email of the user
-   *          you want to search)
-   * @param searchOption (Can be: User name, Last name, First name or Email option
-   *          corresponding with information you input in "Search")
-   */
-  public void searchUser(String user, String searchOption) {
-    info("--Search user " + user + "--");
-    if (testBase.isTextPresent("Search")) {
-      evt.type(GateinLocator.ELEMENT_INPUT_SEARCH_USER_NAME, user, true);
-      evt.select(GateinLocator.ELEMENT_SELECT_SEARCH_OPTION, searchOption);
-    }
-
-    evt.click(GateinLocator.ELEMENT_SEARCH_ICON_USERS_MANAGEMENT);
-    if (testBase.isTextNotPresent(user))
-      evt.click(ELEMENT_OK_BUTTON);
-  }
-
-  /**
-   * Search User is not found
-   *
-   * @param user  String
-   * @param searchOption String
-   */
-  public void searchUserNotFound(String user, String searchOption) {
-    info("--Search user " + user + "--");
-    if (testBase.isTextPresent("Search")) {
-      evt.type(GateinLocator.ELEMENT_INPUT_SEARCH_USER_NAME, user, true);
-      evt.select(GateinLocator.ELEMENT_SELECT_SEARCH_OPTION, searchOption);
-    }
-
-    evt.click(GateinLocator.ELEMENT_SEARCH_ICON_USERS_MANAGEMENT);
-    evt.waitForTextNotPresent(user);
-  }
-
-  /**
-   * Find a user by clicking next arrow
-   *
-   * @param user String
-   */
-  public void findUsersBbyNextArrow(String user) {
-    if (evt.waitForAndGetElement(ELEMENT_PAGINATION_CONTROL, 2000, 0) != null) {
-      int totalPage = Integer.parseInt(evt.waitForAndGetElement(ELEMENT_PAGINATION_TOTAL_PAGE).getText());
-      // if not found user
-      if (evt.waitForAndGetElement(ELEMENT_USER_DELETE_ICON.replace("${username}", user), 2000, 0) == null) {
-        // click on next arrow
-        for (int i = 0; i < totalPage; i++) {
-          info("Click on Next arrow");
-          evt.click(ELEMENT_PAGINATION_ENABLED_NEXT_ARROW);
-          // if found the user, break the loop
-          if (evt.waitForAndGetElement(ELEMENT_USER_DELETE_ICON.replace("${username}", user), 2000, 0) != null)
-            break;
-          // if next arrow is disabled, break the loop
-          if (evt.waitForAndGetElement(ELMEMENT_PAGINATION_CONTROL_DISBALED_NEXT_ARROW, 2000, 0) != null)
-            break;
-        }
-      }
-    }
-  }
-
   // ************************************************DISABLE
   // USERS***********************************//
-
-  /**
-   * Select an option in Disable User drop list
-   *
-   * @param option is a value as :ENABLED,DISABLED OR ALL
-   */
-  public void selectDisableStatus(String option) {
-    info("---Select status----");
-    if (!option.isEmpty()) {
-      evt.select(GateinLocator.ELEMENT_DISABLE_USER_DROP_BOX, option);
-    }
-
-  }
-
-  /**
-   * Enable or disable a User
-   *
-   * @param userName is username of the user
-   * @param isEnabled = true if want to check the user that is enabled = false if
-   *          want to check the user that is disabled
-   */
-  public void enableDisableUser(String userName, boolean isEnabled) {
-    info("---Enable a user---");
-    evt.click(ELEMENT_DISABLE_USER_HANDLE_BTN.replace("$userName", userName));
-
-    if (isEnabled) {
-      info("Verify that user is enabled");
-      selectDisableStatus("Enabled");
-      evt.waitForAndGetElement(ELEMENT_DISBALE_USER_ENABLED.replace("$userName", userName), 2000, 1);
-    } else {
-      info("Verify that user is disabled");
-      selectDisableStatus("Disabled");
-      evt.waitForElementNotPresent(ELEMENT_DISBALE_USER_ENABLED.replace("$userName", userName), 2000, 1);
-    }
-  }
-
-  /**
-   * Verify that the user is shown in the user list
-   *
-   * @param userName is user-name of the user
-   */
-  public void verifyUserPresent(String userName) {
-    info("---Verify that the user is shown in the table");
-    evt.waitForAndGetElement(ELEMENT_USER_NAME_IN_USER_LIST.replace("$userName", userName));
-    info("The user is shown in the table");
-  }
-
-  /**
-   * Verify that the user is not shown in the user list
-   *
-   * @param userName is user-name of the user
-   */
-  public void verifyUserNotPresent(String userName) {
-    info("---Verify that the user is not shown in the table");
-    evt.waitForElementNotPresent(ELEMENT_USER_NAME_IN_USER_LIST.replace("$userName", userName));
-    info("The user is not shown in the table");
-  }
-  // *********************************************************************************************************//
-
   /**
    * function: Delete user
    *
@@ -693,26 +354,13 @@ public class UserAndGroupManagement {
 
     ELEMENT_BTN_SEARCH_USER.click();
 
-    $(byClassName("uiIconDeleteUser")).click();
+    $(byClassName("uiIconDeleteUser")).waitUntil(Condition.appears, Configuration.timeout).click();
     alert.acceptAlert();
     $(ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);
     ELEMENT_BTN_SEARCH_USER.click();
     $(byText("No result found.")).waitUntil(Condition.appears, Configuration.timeout);
     dialog.closeMessageDialog();
 
-  }
-
-  /**
-   * Remove a user from a group
-   *
-   * @param username String
-   */
-  public void removeUser(String username) {
-    info("Click on Delete button");
-    evt.click(ELEMENT_USER_REMOVE_MEMBER_ICON.replace("${userName}", username));
-    alert.acceptAlert();
-    evt.waitForElementNotPresent(ELEMENT_USER_REMOVE_MEMBER_ICON.replace("${userName}", username));
-    info("User is removed from the group successfully");
   }
 
   /**
@@ -729,63 +377,6 @@ public class UserAndGroupManagement {
   }
 
   /**
-   * Check status drop box
-   */
-  public void checkStatusDropBox() {
-    info("check status drop box");
-    evt.waitForAndGetElement(ELEMENT_DISABLE_USER_STATUS_SELECTED.replace("$status", "Enabled"), 2000, 1);
-    evt.waitForAndGetElement(GateinLocator.ELEMENT_DISABLE_USER_DROP_BOX);
-    evt.waitForAndGetElement(ELEMENT_DISABLE_USER_STATUS_ALL);
-    evt.waitForAndGetElement(ELEMENT_DISABLE_USER_STATUS_DISABLED);
-  }
-
-  /**
-   * Check display of all enable and disable user
-   *
-   * @param users String
-   */
-  public void checkDisplayAllUsers(String... users) {
-    info("check display of all users");
-    selectDisableStatus("All");
-    evt.waitForAndGetElement(GateinLocator.ELEMENT_INPUT_SEARCH_USER_NAME).clear();
-    evt.click(GateinLocator.ELEMENT_SEARCH_ICON_USERS_MANAGEMENT);
-    for (String user : users) {
-      findUsersBbyNextArrow(user);
-      verifyUserPresent(user);
-    }
-  }
-
-  /**
-   * Check display of enable user
-   *
-   * @param users String
-   */
-  public void checkDisplayEnableUser(String... users) {
-    info("check display of enable users");
-    evt.waitForAndGetElement(ELEMENT_DISABLE_USER_COLUMN);
-    for (String user : users) {
-      evt.waitForAndGetElement(ELEMENT_DISBALE_USER_ENABLED.replace("$userName", user), 2000, 1);
-      evt.waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_NO.replace("$userName", user), 2000, 1, 2);
-      evt.waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_YES.replace("$userName", user), 2000, 1, 2);
-    }
-  }
-
-  /**
-   * Check display of disable user
-   *
-   * @param users String
-   */
-  public void checkDisplayDisableUser(String... users) {
-    info("check display of disable users");
-    evt.waitForAndGetElement(ELEMENT_DISABLE_USER_COLUMN);
-    for (String user : users) {
-      evt.waitForAndGetElement(ELEMENT_DISBALE_USER_DISABLED.replace("$userName", user), 2000, 1);
-      evt.waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_NO.replace("$userName", user), 2000, 1, 2);
-      evt.waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_YES.replace("$userName", user), 2000, 1, 2);
-    }
-  }
-
-  /**
    * function: Delete user
    */
   public void deleteUser() {
@@ -797,38 +388,5 @@ public class UserAndGroupManagement {
 
       evt.waitForElementNotPresent(ELEMENT_USER_DELETE_ICON1);
     }
-  }
-
-  /**
-   * Open Users tab
-   */
-  public void gotoUserTab() {
-    info("Open Users tab");
-    evt.click(ELEMENT_USER_TAB);
-
-  }
-
-  /**
-   * Check A link is established between the eXo Platform user account and the
-   * social network account. By: QuyenNT Date: Dec 1, 2015
-   * @param element String
-   * @param placeHolder String
-   * @param accountValue  String
-   */
-  public void checkLinkedSocialAccount(String element, String placeHolder, String accountValue) {
-    evt.waitForAndGetElement(ELEMENT_USER_SOCIAL_NETWORKS_TAB);
-    evt.click(ELEMENT_USER_SOCIAL_NETWORKS_TAB);
-    evt.waitForAndGetElement(element.replace(placeHolder, accountValue));
-  }
-
-  /**
-   * Unlink social network account By: QuyenNT Date: Dec 3, 2015
-   * @param unlinkElement object
-   */
-  public void unLinkedSocialAccount(Object unlinkElement) {
-    evt.waitForAndGetElement(ELEMENT_USER_SOCIAL_NETWORKS_TAB);
-    evt.click(ELEMENT_USER_SOCIAL_NETWORKS_TAB);
-    evt.waitForAndGetElement(unlinkElement);
-    evt.click(unlinkElement);
   }
 }

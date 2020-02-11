@@ -6,9 +6,6 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-import java.awt.event.KeyEvent;
-import java.io.File;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -16,7 +13,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.Utils;
 import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
@@ -43,456 +39,6 @@ public class RichTextEditor {
     this.but = new Button(testBase);
     this.plf = new PlatformBase(testBase);
     this.wikiManagement = new WikiManagement(testBase);
-  }
-
-  /**
-   * Click End then Enter in content frame in Rich text mode of Wiki page editor
-   */
-  public void typeEnterInRichText() {
-    try {
-      WebElement inputsummary = null;
-      testBase.getExoWebDriver().getWebDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
-      inputsummary = testBase.getExoWebDriver().getWebDriver().switchTo().activeElement();
-      inputsummary.click();
-      inputsummary.sendKeys(Keys.END);
-      inputsummary.sendKeys(Keys.ENTER);
-      evt.switchToParentWindow();
-      testBase.getExoWebDriver().getWebDriver().switchTo().defaultContent();
-    } catch (StaleElementReferenceException e) {
-      evt.checkCycling(e, testBase.getDefaultTimeout() / evt.getWaitInterval());
-      testBase.getExoWebDriver().getWebDriver().switchTo().defaultContent();
-      typeEnterInRichText();
-    } catch (ElementNotVisibleException e) {
-      evt.checkCycling(e, testBase.getDefaultTimeout() / evt.getWaitInterval());
-      testBase.getExoWebDriver().getWebDriver().switchTo().defaultContent();
-      typeEnterInRichText();
-    } catch (WebDriverException e) {
-      evt.checkCycling(e, testBase.getDefaultTimeout() / evt.getWaitInterval());
-      testBase.getExoWebDriver().getWebDriver().switchTo().defaultContent();
-      typeEnterInRichText();
-    } finally {
-      testBase.loopCount = 0;
-    }
-  }
-
-  /**
-   * Select a macro in a Wiki page editor
-   *
-   * @param cat category to which a macro that will be chosen belongs
-   * @param macro macro name that will be chosen
-   */
-  public void goToMacro(String cat, String macro) {
-    info("Select a macro: " + macro);
-    evt.mouseOverAndClick(ELEMENT_MACRO_LINK);
-    evt.mouseOverAndClick(ELEMENT_INSERT_MACRO_LINK);
-    if (!cat.isEmpty())
-      evt.select(ELEMENT_MACRO_CATEGORY_SELECT, cat);
-    if (!macro.isEmpty()) {
-      evt.mouseOverAndClick(ELEMENT_MACRO_TYPE_FILTER);
-      evt.type(ELEMENT_MACRO_TYPE_FILTER, macro, true);
-    }
-    evt.click(ELEMENT_MACRO_LABEL.replace("${macro}", macro));
-    evt.click(but.ELEMENT_SELECT_BUTTON);
-  }
-
-  /**
-   * Add link to a Wiki page
-   *
-   * @param search parameter to choose whether to search page link or not
-   * @param page Wiki page that will be the target link
-   * @param label label of link that will be added into Wiki page
-   * @param tooltip String
-   * @param opParam Object
-   */
-  public void insertPageLink2WikiPage(boolean search, String page, String label, String tooltip, Object... opParam) {
-    Boolean verify = (Boolean) (opParam.length > 0 ? opParam[0] : false);
-    evt.mouseOverAndClick(ELEMENT_LINK);
-    evt.mouseOverAndClick(ELEMENT_WIKI_PAGE_LINK);
-    info("Create link to the page " + page);
-    if (search) {
-      evt.click(ELEMENT_SEARCH_TAB);
-      evt.type(ELEMENT_SEARCH_TEXTBOX_POPUP, page, true);
-      evt.click(ELEMENT_SEARCH_BUTTON);
-    }
-    if (evt.waitForAndGetElement(ELEMENT_PAGE_SELECTED.replace("${page}", page), 5000, 0) != null)
-      evt.click(ELEMENT_PAGE_SELECTED.replace("${page}", page));
-    else
-      evt.click(ELEMENT_PAGE_SELECTED_PLF41.replace("${page}", page));
-    evt.click(but.ELEMENT_SELECT_BUTTON);
-    if (label != null && label != "")
-      evt.type(ELEMENT_LABEL_LINK_TEXTBOX, label, true);
-    if (tooltip != null && tooltip != "")
-      evt.type(ELEMENT_TOOLTIP_LINK_TEXTBOX, tooltip, true);
-    evt.click(but.ELEMENT_CREATE_LINK_BUTTON);
-    evt.waitForElementNotPresent(but.ELEMENT_CREATE_LINK_BUTTON);
-    if (verify) {
-      WebElement e = evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME, testBase.getDefaultTimeout(), 1, 2);
-      testBase.getExoWebDriver().getWebDriver().switchTo().frame(e);
-      if (label != null && label != "")
-        evt.waitForAndGetElement(By.linkText(label));
-      if (tooltip != null && tooltip != "")
-        evt.waitForAndGetElement(By.xpath("//*[@title='" + tooltip + "']"));
-      evt.switchToParentWindow();
-    }
-  }
-
-  /**
-   * Add table to a Wiki page
-   *
-   * @param rows Number of rows that will be added in the table
-   * @param columns Number of columns that will be added in the table
-   */
-  public void insertTable2WikiPage(String rows, String columns) {
-    $(ELEMENT_TABLE_LINK).click();
-    $(ELEMENT_INSERT_TABLE_LINK).click();
-    evt.type(ELEMENT_ROW_TEXTBOX, rows, true);
-    evt.type(ELEMENT_COLUMN_TEXTBOX, columns, true);
-    evt.click(but.ELEMENT_INSERT_TABLE);
-    evt.waitForAndGetElement("//table");
-  }
-
-  /**
-   * Add macro: "color" into a Wiki page
-   *
-   * @param color color setting of macro
-   * @param message message setting of macro
-   */
-  public void insertMacroColor(String color, String message) {
-    evt.type(ELEMENT_COLOR_TEXTBOX, color, true);
-    evt.type(ELEMENT_COLOR_MESSAGE, message, true);
-    goToMacroCreateBtn();
-  }
-
-  /**
-   * InsertMacroBox
-   *
-   * @param cssClass String
-   * @param image String
-   * @param title String
-   * @param width String
-   * @param content String
-   */
-  public void insertMacroBox(String cssClass, String image, String title, String width, String content) {
-    if (!cssClass.isEmpty()) {
-      info("Input css class");
-      evt.type(ELEMENT_MACRO_BOX_CSSCLASS_FIELD, cssClass, true);
-    }
-
-    if (!image.isEmpty()) {
-      info("Input image");
-      evt.type(ELEMENT_MACRO_BOX_IMAGE_FIELD, image, true);
-    }
-
-    if (!title.isEmpty()) {
-      info("Input title");
-      evt.type(ELEMENT_MACRO_BOX_TITLE_FIELD, title, true);
-    }
-
-    if (!width.isEmpty()) {
-      info("Input width");
-      evt.type(ELEMENT_MACRO_BOX_WIDTH_FIELD, width, true);
-    }
-
-    if (!content.isEmpty()) {
-      info("Input content");
-      evt.type(ELEMENT_MACRO_BOX_CONTENT_FIELD, content, true);
-    }
-    clickInsertMacroBtn();
-
-  }
-
-  /**
-   * Click on Insert Macro button
-   */
-  public void clickInsertMacroBtn() {
-    info("Click on Insert Macro button");
-    evt.click(ELEMENT_CREATE_MACRO_BUTTON);
-    evt.waitForElementNotPresent(ELEMENT_CREATE_MACRO_BUTTON);
-  }
-
-  /**
-   * Insert Children macro
-   *
-   * @param childNum String
-   * @param depth String
-   * @param descendantType String
-   * @param excerptType String
-   * @param parent String
-   */
-  public void insertChildrenMacro(String childNum,
-                                  String depth,
-                                  acceptType descendantType,
-                                  acceptType excerptType,
-                                  String parent) {
-    if (!childNum.isEmpty()) {
-      info("Input child num");
-      evt.type(ELEMENT_MACRO_CHILD_CHILDNUM_FIELD, childNum, true);
-    }
-
-    if (!depth.isEmpty()) {
-      info("Input depth");
-      evt.type(ELEMENT_MACRO_CHILD_DEPTH_FIELD, depth, true);
-    }
-
-    switch (descendantType) {
-    case yes:
-      info("Select yes");
-      plf.selectOption(ELEMENT_MACRO_CHILD_DESCENDANT_FIELD, "true");
-      break;
-    case no:
-      info("Select no");
-      plf.selectOption(ELEMENT_MACRO_CHILD_DESCENDANT_FIELD, "false");
-      break;
-    }
-
-    switch (excerptType) {
-    case yes:
-      info("Select yes");
-      plf.selectOption(ELEMENT_MACRO_CHILD_EXCERPT_FIELD, "true");
-      break;
-    case no:
-      info("Select no");
-      plf.selectOption(ELEMENT_MACRO_CHILD_EXCERPT_FIELD, "false");
-      break;
-    }
-
-    if (!parent.isEmpty()) {
-      info("Input parent");
-      evt.type(ELEMENT_MACRO_CHILD_PARENT_FIELD, parent, true);
-    }
-
-    clickInsertMacroBtn();
-  }
-
-  /**
-   * Insert macro code
-   *
-   * @param cssClass String
-   * @param image String
-   * @param language String
-   * @param title String
-   * @param width String
-   * @param content String
-   */
-  public void insertMacroCode(String cssClass, String image, String language, String title, String width, String content) {
-    if (!cssClass.isEmpty()) {
-      info("Input css class");
-      evt.type(ELEMENT_MACRO_CODE_CSSCLASS_FIELD, cssClass, true);
-    }
-    if (!image.isEmpty()) {
-      info("Input image");
-      evt.type(ELEMENT_MACRO_CODE_IMAGE_FIELD, image, true);
-    }
-    if (!language.isEmpty()) {
-      info("Input language");
-      evt.type(ELEMENT_MACRO_CODE_LANGUAGE_FIELD, language, true);
-    }
-    if (!title.isEmpty()) {
-      info("Input title");
-      evt.type(ELEMENT_MACRO_CODE_TITLE_FIELD, title, true);
-    }
-    if (!width.isEmpty()) {
-      info("Input width");
-      evt.type(ELEMENT_MACRO_CODE_WIDTH_FIELD, width, true);
-    }
-    if (!content.isEmpty()) {
-      info("Input content");
-      evt.type(ELEMENT_MACRO_CODE_CONTENT_FIELD, content, true);
-    }
-    clickInsertMacroBtn();
-  }
-
-  /**
-   * Insert Macro excerpt
-   *
-   * @param hideMode String
-   * @param content String
-   */
-  public void insertMacroExcerpt(acceptType hideMode, String content) {
-    switch (hideMode) {
-    case yes:
-      info("Select yes");
-      plf.selectOption(ELEMENT_MACRO_EXCERPT_DROPBOX, "true");
-      break;
-    case no:
-      info("Select no");
-      plf.selectOption(ELEMENT_MACRO_EXCERPT_DROPBOX, "false");
-      break;
-    }
-
-    if (!content.isEmpty()) {
-      info("Input content");
-      evt.type(ELEMENT_MACRO_EXCERPT_CONTENT_FIELD, content, true);
-    }
-    clickInsertMacroBtn();
-  }
-
-  /**
-   * Insert Macro Tip message
-   *
-   * @param content String
-   */
-  public void insertMacroMessage(String content) {
-    if (!content.isEmpty()) {
-      info("Input content");
-      evt.type(ELEMENT_MACRO_MESSAGE_CONTENT_FIELD, content, true);
-    }
-    clickInsertMacroBtn();
-  }
-
-  /**
-   * Insert Macro FootNode
-   *
-   * @param content String
-   */
-  public void insertMacroFootNode(String content) {
-    if (!content.isEmpty()) {
-      info("Input content");
-      evt.type(ELEMENT_MACRO_FOOTNODE_CONTENT_FIELD, content, true);
-    }
-    clickInsertMacroBtn();
-  }
-
-  /**
-   * Insert Macro table of content
-   *
-   * @param depth String
-   * @param numberedMode String
-   * @param scope String
-   * @param start String
-   */
-  public void insertMacroTableOfContent(String depth, acceptType numberedMode, scopeMode scope, String start) {
-    if (!depth.isEmpty()) {
-      info("Input depth");
-      evt.type(ELEMENT_MACRO_TABLE_OF_CONTENT_DEPTH_FIELD, depth, true);
-    }
-
-    switch (numberedMode) {
-    case yes:
-      info("Select yes");
-      plf.selectOption(ELEMENT_MACRO_TABLE_OF_CONTENT_NUMBERED_FIELD, "true");
-      break;
-    case no:
-      info("Select no");
-      plf.selectOption(ELEMENT_MACRO_TABLE_OF_CONTENT_NUMBERED_FIELD, "false");
-      break;
-    }
-
-    switch (scope) {
-    case PAGE:
-      info("Select Page");
-      plf.selectOption(ELEMENT_MACRO_TABLE_OF_CONTENT_SCOPE_FIELD, scopeMode.PAGE.name());
-      break;
-    case LOCAL:
-      info("Select Local");
-      plf.selectOption(ELEMENT_MACRO_TABLE_OF_CONTENT_SCOPE_FIELD, scopeMode.LOCAL.name());
-      break;
-    }
-
-    if (!start.isEmpty()) {
-      info("Input start");
-      evt.type(ELEMENT_MACRO_TABLE_OF_CONTENT_START_FIELD, start, true);
-    }
-
-    clickInsertMacroBtn();
-  }
-
-  /**
-   * Insert Macro IFrame
-   *
-   * @param height String
-   * @param src String
-   * @param width String
-   */
-  public void insertMacroIFrame(String height, String src, String width) {
-    if (!height.isEmpty()) {
-      info("Input height");
-      evt.type(ELEMENT_MACRO_IFRAME_HEIGHT_FIELD, height, true);
-    }
-    if (!src.isEmpty()) {
-      info("Input src");
-      evt.type(ELEMENT_MACRO_IFRAME_SRC_FIELD, src, true);
-    }
-    if (!width.isEmpty()) {
-      info("Input width");
-      evt.type(ELEMENT_MACRO_IFRAME_WIDTH_FIELD, width, true);
-    }
-    clickInsertMacroBtn();
-  }
-
-  /**
-   * Insert Macro JIRA
-   *
-   * @param url String
-   * @param fieldNames String
-   * @param fields String
-   * @param source String
-   * @param style String
-   * @param content String
-   */
-  public void insertMacroJIRA(String url, String fieldNames, String fields, String source, String style, String content) {
-    if (!url.isEmpty()) {
-      info("Input url");
-      evt.type(ELEMENT_MACRO_JIRA_URL_FIELD, url, true);
-    }
-    if (!fieldNames.isEmpty()) {
-      info("Input field Names");
-      evt.type(ELEMENT_MACRO_JIRA_FIELD_NAMES_FIELD, fieldNames, true);
-    }
-    if (!fields.isEmpty()) {
-      info("Input fields");
-      evt.type(ELEMENT_MACRO_JIRA_FIELDS_FIELD, fields, true);
-    }
-    if (!source.isEmpty()) {
-      info("Input source");
-      evt.type(ELEMENT_MACRO_JIRA_SOURCE_FIELD, source, true);
-    }
-    if (!style.isEmpty()) {
-      info("Input style");
-      evt.type(ELEMENT_MACRO_JIRA_STYLE_FIELD, style, true);
-    }
-    if (!content.isEmpty()) {
-      info("Input content");
-      evt.type(ELEMENT_MACRO_JIRA_CONTENT_FIELD, content, true);
-    }
-    clickInsertMacroBtn();
-  }
-
-  /**
-   * Insert Macro HTML
-   *
-   * @param cleanMode acceptType
-   * @param wikiMode acceptType
-   * @param content String
-   */
-  public void insertMacroHtml(acceptType cleanMode, acceptType wikiMode, String content) {
-    switch (cleanMode) {
-    case yes:
-      info("Select yes");
-      plf.selectOption(ELEMENT_MACRO_HTML_CLEAN_FIELD, "true");
-      break;
-    case no:
-      info("Select no");
-      plf.selectOption(ELEMENT_MACRO_HTML_CLEAN_FIELD, "false");
-      break;
-    }
-
-    switch (wikiMode) {
-    case yes:
-      info("Select yes");
-      plf.selectOption(ELEMENT_MACRO_HTML_WIKI_NAMES_FIELD, "true");
-      break;
-    case no:
-      info("Select no");
-      plf.selectOption(ELEMENT_MACRO_HTML_WIKI_NAMES_FIELD, "false");
-      break;
-    }
-
-    if (!content.isEmpty()) {
-      info("Input content");
-      evt.type(ELEMENT_MACRO_HTML_CONENT_FIELD, content, true);
-    }
-    clickInsertMacroBtn();
   }
 
   /**
@@ -552,8 +98,6 @@ public class RichTextEditor {
     }
     }
 
-
-
   /**
    * Edit an attached file link
    *
@@ -604,69 +148,6 @@ public class RichTextEditor {
       info("Move focus at the end of the line");
       evt.pressEndKey(this.testBase.getExoWebDriver().getWebDriver());
     }
-  }
-
-  /**
-   * Insert attached File link into the page
-   *
-   * @param page Boolean
-   * @param attachedFile Boolean
-   * @param tooltip Boolean
-   * @param tab attachedFileTabType
-   */
-  public void insertAttachedFileLink(String page, String attachedFile, String tooltip, attachedFileTabType tab) {
-    info("Go to Attached file Link");
-    goToAttachedFileLink();
-    switch (tab) {
-    case Current_page:
-      info("Open Current page tab");
-      goToCurrentPageTab();
-      info("Input attached file link");
-      uploadAttachedFile(attachedFile);
-      goToLinkSetting();
-      break;
-    case All_pages:
-      info("Open All pages tab");
-      goToAllPagesTab();
-      info("Expand WikiHome node");
-      goToExplorerWikiHome();
-      info("Select attached file");
-      selectAttachedFile(page, attachedFile);
-      break;
-    }
-    info("Input the tooltip of the link");
-    inputToolTip(tooltip);
-    info("Click on Create link button");
-    goToCreateLink();
-    info("Move focus at the end of the line");
-    evt.pressEndKey(this.testBase.getExoWebDriver().getWebDriver());
-  }
-
-  /**
-   * Modify Wiki content with rich text
-   *
-   * @param title updated title of the wiki page.
-   * @param content updated content of the wiki page.
-   * @param isClearContent String
-   * @param isClearTitle String
-   */
-  public void inputDataToPage(String title, String content, Boolean isClearTitle, Boolean isClearContent) {
-    if (title != null) {
-      if (isClearTitle)
-        evt.type(ELEMENT_TITLE_WIKI_INPUT, title, true);
-      else
-        evt.type(ELEMENT_TITLE_WIKI_INPUT, title, false);
-    }
-    if (content != null) {
-      if (isClearContent) {
-        evt.inputDataToCKEditor(ELEMENT_CONTENT_WIKI_FRAME, content);
-      } else {
-        evt.inputDataToCKEditor(ELEMENT_CONTENT_WIKI_FRAME, content);
-      }
-      testBase.getExoWebDriver().getWebDriver().switchTo().defaultContent();
-    }
-    evt.click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
-    evt.waitForElementNotPresent(ELEMENT_SAVE_BUTTON_ADD_PAGE);
   }
 
   /**
@@ -824,36 +305,7 @@ public class RichTextEditor {
   public void inputWebAddress(String address) {
     if (!address.isEmpty()) {
       info("Input web address");
-      $(ELEMENT_WEB_PAGE_WEB_ADDRESS).val(address);
-    }
-  }
-
-  /**
-   * Edit an image
-   *
-   * @param imageName String
-   * @param width String
-   * @param height String
-   * @param altText String
-   */
-  public void editInsertedImage(String imageName, String width, String height, String altText) {
-    info("Go To Edit Image Link");
-    goToEditImageLink();
-    info("Select the image");
-    evt.click(ELEMENT_IMAGE_LINK_IMAGE_THUMBNAIL.replace("$image", imageName));
-    info("click on Select button");
-    evt.click(ELEMENT_SELECT_BUTTON);
-    if (!width.isEmpty()) {
-      info("Input width");
-      evt.type(ELEMENT_IMAGE_WIDTH, width, true);
-    }
-    if (!height.isEmpty()) {
-      info("Input height");
-      evt.type(ELEMENT_IMAGE_HEIGHT, height, true);
-    }
-    if (!altText.isEmpty()) {
-      info("Change alt text");
-      evt.type(ELEMENT_IMAGE_ALTERNATIVE_TEXT, altText, true);
+      $(ELEMENT_WEB_PAGE_WEB_ADDRESS).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).val(address);
     }
   }
 
@@ -897,7 +349,14 @@ public class RichTextEditor {
    * @param newContent updated content of the wiki page. Can not be
    */
   public void editSimplePage(String newTitle, String newContent) {
-    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
+    if(!$(ELEMENT_TITLE_WIKI_INPUT).exists())
+    {
+      do {
+        //refresh();
+        testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+        sleep(2000);
+      }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
+    }
     if ($(ELEMENT_SOURCE_EDITOR_BUTTON).is(Condition.not(Condition.exist))
         && (ELEMENT_BUTTON_WIKI_RITCH_TEXT.is(Condition.exist))) {
       ELEMENT_BUTTON_WIKI_RITCH_TEXT.waitUntil(Condition.visible,Configuration.timeout).click();
@@ -948,7 +407,7 @@ public class RichTextEditor {
    */
   public void inputLabel(String label) {
     if (label != null && label != "") {
-      $(ELEMENT_LABEL_LINK_TEXTBOX).val(label);
+      $(ELEMENT_LABEL_LINK_TEXTBOX).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).val(label);
     }
   }
 
@@ -1001,7 +460,7 @@ public class RichTextEditor {
     if (!link.isEmpty()) {
       info("Input external Image link");
       sleep(Configuration.timeout);
-      $(ELEMENT_EXTERNAL_IMAGE_INPUT_LINK).waitUntil(Condition.visible,Configuration.collectionsTimeout).setValue(link);
+      $(ELEMENT_EXTERNAL_IMAGE_INPUT_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(link);
     }
   }
 
@@ -1265,12 +724,6 @@ public class RichTextEditor {
     info("Double Click on Upload New file button");
     $(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_IMAGE_BTN).doubleClick();
     $(byClassName("gwt-FileUpload")).uploadFromClasspath(link);
-    /*
-     * WebElement elem =
-     * waitForAndGetElement(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_NAME,5000,1,2);
-     * scrollToElement(elem, driver); click(elem,2,true);
-     * uploadFileUsingRobot(link);
-     */
   }
 
   /**
@@ -1292,27 +745,6 @@ public class RichTextEditor {
       info("click on Wiki Home note");
       $(byId("isc_1open_icon_0")).waitUntil(Condition.visible,Configuration.timeout).click();
       sleep(2000);
-    }
-  }
-
-  /**
-   * Select an attached file in list of All pages tab
-   *
-   * @param page alignType
-   * @param attachedFile alignType
-   */
-  public void selectAttachedFile(String page, String attachedFile) {
-    WebElement el = evt.waitForAndGetElement(ELEMENT_ALL_PAGE_TAB_PAGE_SELECTED.replace("$title", page), 5000, 1, 2);
-    evt.scrollToElement(el, this.testBase.getExoWebDriver().getWebDriver());
-    if (evt.waitForAndGetElement(ELEMENT_ALL_PAGE_TAB_PAGE_SELECTED.replace("$title", page), 5000, 0) != null) {
-      info("Select the page");
-      evt.click(ELEMENT_ALL_PAGE_TAB_PAGE_SELECTED.replace("$title", page));
-      info("Open Attachment file");
-      evt.click(ELEMENT_ALL_PAGE_SELECT_ATTACHEMENT_FILE_PAGE.replace("$page", page));
-      info("Select attached file");
-      evt.click(ELEMENT_ALL_PAGE_TAB_PAGE_SELECTED.replace("$title", attachedFile));
-      info("Click on Select button");
-      evt.click(ELEMENT_SELECT_BUTTON);
     }
   }
 
@@ -1342,9 +774,9 @@ public class RichTextEditor {
       }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
     }
     if (!title.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).setValue(title);
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(title);
     info("Waiting 30s before saved all changes");
-    $(ELEMENT_DRAFT_NOTIFY).waitUntil(Condition.appears, 31000, 1);
+    $(ELEMENT_DRAFT_NOTIFY).waitUntil(Condition.appears, 41000, 1);
     info("Save all changes");
 
   }
@@ -1429,16 +861,6 @@ public class RichTextEditor {
   }
 
   /**
-   * Remove an image
-   */
-  public void goToRemoveImageLink() {
-    info("Click on Link menu");
-    evt.mouseOverAndClick(ELEMENT_IMAGE_LINK);
-    info("Click on Edit image Link menu");
-    evt.mouseOverAndClick(ELEMENT_REMOVE_IMAGE_LINK_MENU);
-  }
-
-  /**
    * Edit a wiki page with auto save status
    *
    * @param newTitle String
@@ -1470,9 +892,9 @@ public class RichTextEditor {
   public void addSimplePageHasAutoSaveWithoutSave(String title, String content) {
     info("Input a title for the page");
     sleep(Configuration.timeout);
-    refresh();
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     if (!title.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.timeout).val(title);
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,15000).val(title);
     info("Input a content for the page");
     if (!content.isEmpty()) {
       SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.timeout);
@@ -1539,261 +961,11 @@ public class RichTextEditor {
     testBase.action.release();
   }
 
-  /**
-   * Uncheck Open New Window checkbox
-   */
-  public void uncheckOpenNewWindow() {
-    info("Uncheck Open New Window checkbox");
-    evt.uncheck(ELEMENT_OPEN_NEW_WINDOW_CHECKBOX, 2);
-  }
-
-  /**
-   * Check Open New Window checkbox
-   */
-  public void checkOpenNewWindow() {
-    info("Check Open New Window checkbox");
-    evt.check(ELEMENT_OPEN_NEW_WINDOW_CHECKBOX, 2);
-  }
-
-  /**
-   * Attach a file to a Wiki page
-   *
-   * @param link link of file that will be attached
-   */
-  public void attachFile(String link) {
-    String fs = File.separator;
-    WebElement elem = evt.waitForAndGetElement(ELEMENT_UPLOAD_NAME, 5000, 1, 2);
-    evt.scrollToElement(elem, testBase.getExoWebDriver().getWebDriver());
-    evt.click(elem, 2, true);
-    testBase.uploadFileUsingRobot(link);
-    evt.waitForAndGetElement(By.linkText(link.substring(link.lastIndexOf(fs) + 1)));
-  }
-
-  /**
-   * Insert Macro RSS
-   *
-   * @param content acceptType
-   * @param count String
-   * @param decoration String
-   * @param feed String
-   * @param image acceptType
-   * @param width String
-   */
-  public void insertMacroRSS(acceptType content,
-                             String count,
-                             acceptType decoration,
-                             String feed,
-                             acceptType image,
-                             String width) {
-    switch (content) {
-    case yes:
-      info("Select yes");
-      plf.selectOption(ELEMENT_MACRO_RSSS_CONTENT_FIELD, "true");
-      break;
-    case no:
-      info("Select no");
-      plf.selectOption(ELEMENT_MACRO_RSSS_CONTENT_FIELD, "false");
-      break;
-    }
-
-    if (!count.isEmpty()) {
-      info("Input count");
-      $(ELEMENT_MACRO_RSS_COUNT_FIELD).val(count);
-    }
-
-    switch (decoration) {
-    case yes:
-      info("Select yes");
-      plf.selectOption(ELEMENT_MACRO_RSS_DECORATION_FIELD, "true");
-      break;
-    case no:
-      info("Select no");
-      plf.selectOption(ELEMENT_MACRO_RSS_DECORATION_FIELD, "false");
-      break;
-    }
-
-    if (!feed.isEmpty()) {
-      info("Input feed");
-      evt.type(ELEMENT_MACRO_RSS_FEED_FIELD, feed, true);
-    }
-
-    switch (image) {
-    case yes:
-      info("Select yes");
-      plf.selectOption(ELEMENT_MACRO_RSS_IMAGE_FIELD, "true");
-      break;
-    case no:
-      info("Select no");
-      plf.selectOption(ELEMENT_MACRO_RSS_IMAGE_FIELD, "false");
-      break;
-    }
-
-    if (!width.isEmpty()) {
-      info("Input width");
-      $(ELEMENT_MACRO_RSS_WIDTH_FIELD).val(width);
-    }
-    clickInsertMacroBtn();
-  }
-
-  /**
-   * Insert macro: "JIRA" into a Wiki page
-   *
-   * @param URL URL setting of macro
-   * @param Content Content setting of macro
-   */
-  public void insertMacroJIRA(String URL, String Content) {
-    info("Go to insert a macro Jira");
-    if (URL != null && URL != "") {
-      info("Insert URL");
-      evt.waitForAndGetElement(ELEMENT_JIRA_URL);
-      $(ELEMENT_JIRA_URL).val(URL);
-    }
-
-    if (Content != null && Content != "") {
-      info("Insert Content");
-      evt.waitForAndGetElement(ELEMENT_JIRA_CONTENT);
-      $(ELEMENT_JIRA_CONTENT).val(Content);
-    }
-  }
-
-  /**
-   * Click on Create button of Insert Macro form
-   */
-  public void goToMacroCreateBtn() {
-    info("Click on Create button");
-    evt.click(but.ELEMENT_CREATE_MACRO_BUTTON);
-    evt.waitForElementNotPresent(but.ELEMENT_CREATE_MACRO_BUTTON);
-  }
-
-  /**
-   * Open Edit Macro form
-   */
-  public void goToEditMacro() {
-    info("Click on Macro link");
-    evt.mouseOverAndClick(ELEMENT_MACRO_LINK);
-    info("Click on Edit Macro link");
-    evt.mouseOverAndClick(ELEMENT_EDIT_MACRO_LINK);
-  }
-
-  /**
-   * Collapse all macro
-   *
-   * @param control true if use key
-   */
-  public void CollapseAllMacro(boolean control) {
-    info("Collapse all macro");
-    if (control) {
-      info("Using Ctrl + Shift + C");
-      Utils.javaSimulateKeyPress(KeyEvent.VK_CONTROL, KeyEvent.VK_SHIFT, KeyEvent.VK_C);
-      testBase.getExoWebDriver().getWebDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
-    } else {
-      info("Click on collapse link");
-      evt.waitForAndGetElement(ELEMENT_MACRO_LINK);
-      evt.mouseOverAndClick(ELEMENT_MACRO_LINK);
-      evt.waitForAndGetElement(ELEMENT_MACRO_COLLAPSE_LINK);
-      evt.mouseOverAndClick(ELEMENT_MACRO_COLLAPSE_LINK);
-      testBase.getExoWebDriver().getWebDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
-    }
-  }
-
-  /**
-   * Expand all macro
-   *
-   * @param control true if use key
-   */
-  public void ExpandAllMacro(boolean control) {
-    info("Expand all macro");
-    if (control) {
-      info("Using Ctrl + Shift + E");
-      Utils.javaSimulateKeyPress(KeyEvent.VK_CONTROL, KeyEvent.VK_SHIFT, KeyEvent.VK_E);
-      testBase.getExoWebDriver().getWebDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
-    } else {
-      info("Click on expand link");
-      evt.waitForAndGetElement(ELEMENT_MACRO_LINK);
-      evt.mouseOverAndClick(ELEMENT_MACRO_LINK);
-      evt.waitForAndGetElement(ELEMENT_MACRO_EXPAND_LINK);
-      evt.mouseOverAndClick(ELEMENT_MACRO_EXPAND_LINK);
-      testBase.getExoWebDriver().getWebDriver().switchTo().frame(evt.waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
-    }
-  }
-
-  /**
-   * Verify after collapse macro
-   *
-   * @param macro String
-   */
-  public void verifyCollapsemacro(String macro) {
-    info("Verify collapse macro");
-    evt.waitForAndGetElement(ELEMENT_MACRO_COLLAPSED_LINK.replace("${macro}", macro));
-  }
-
-  /**
-   * Verify after expand macro
-   *
-   * @param macroCate macroCategories
-   * @param Content String
-   */
-  public void verifyExpandmacro(macroCategories macroCate, String... Content) {
-    String content = (Content.length > 0 ? Content[0] : null);
-    String color = (Content.length > 1 ? Content[1] : null);
-    info("Verify collapse macro");
-    switch (macroCate) {
-    case COLOR:
-      info("Verify Color macro when expanding");
-      evt.waitForAndGetElement(ELEMENT_MACRO_TEXT.replace("${text}", content).replace("${color}", color));
-      break;
-    case JIRA:
-      info("Verify Jira macro when expanding");
-      evt.waitForAndGetElement(ELEMENT_JIRA_MACRO_LINK.replace("${content}", content));
-      break;
-    }
-  }
-
-  /**
-   * Select the JIRA Macro
-   */
-  public void selectJIRAMacro() {
-    info("Focus on the frame");
-    plf.switchFrame(ELEMENT_CONTENT_WIKI_FRAME, 1);
-    WebElement element = testBase.getExoWebDriver().getWebDriver().findElement(ELEMENT_JIRA_TABLE);
-    selectItems(element);
-    element.click();
-    evt.switchToParentWindow();
-  }
-
-  /**
-   * Click on Apply button of Macro Edit form
-   */
-  public void goToMacroEditFormApplyBtn() {
-    info("click on Apply button");
-    evt.click(ELMENET_MACRO_JIRA_EDIT_FORM_APPLY_BTN);
-    evt.waitForElementNotPresent(ELMENET_MACRO_JIRA_EDIT_FORM_APPLY_BTN);
-  }
-
-  /**
-   * Define tab's types of the attached file popup
-   */
-  public enum attachedFileTabType {
-    Current_page, All_pages;
-  }
-
   public enum alignType {
     None, Left, Center, Right, Top, Middle, Bottom;
   }
 
   public enum wikiPageLinkTab {
     My_Recent_Changes, All_pages, Search;
-  }
-
-  public enum acceptType {
-    yes, no;
-  }
-
-  public enum scopeMode {
-    PAGE, LOCAL;
-  }
-
-  public enum macroCategories {
-    JIRA, COLOR;
   }
 }

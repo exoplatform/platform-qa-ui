@@ -6,25 +6,16 @@ import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_FORUM_LINK_PLF;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_POST_FORM_SUBMIT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_POST_IN_TOPIC;
-import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.ELEMENT_TITLE_POST;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumCategoryManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
@@ -194,7 +185,7 @@ public class ForumPostTestIT extends Base {
     homePagePlatform.refreshUntil($(byText(newTitle)),Condition.visible,1000);
     info("Test 4: Delete a post");
     info("Click on delete button of the post that is replied");
-    $(byText(newTitle)).parent().parent().parent().parent().find(ELEMENT_BUTTON_DELETE_POST).click();
+    $(byText(newTitle)).parent().parent().parent().parent().find(ELEMENT_BUTTON_DELETE_POST).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Click on OK button of the confirm popup");
     $(ELEMENT_DELETE_BOX_CONFIRMATION).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Verify that the replied post is deleted");

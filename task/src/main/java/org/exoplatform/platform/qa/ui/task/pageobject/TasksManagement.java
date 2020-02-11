@@ -12,10 +12,8 @@ import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 /**
@@ -33,53 +31,6 @@ public class TasksManagement {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
     this.tasHome = new TaskManagementHome(testBase);
-  }
-
-  /**
-   * Select an option in Task List
-   * 
-   * @param op is an option in the list as: Incoming,All tasks,...
-   */
-  public void selectOptionTask(optionTask op) {
-    info("--Open Task Management--");
-    tasHome.goToTasks();
-    switch (op) {
-    case Incoming:
-      info("Select Incomming option");
-      break;
-    case All_Tasks:
-      info("Select All tasks option");
-      break;
-    case Overdue:
-      info("Select Overdue option");
-      break;
-    case Today:
-      info("Select Today option");
-      break;
-    case Tommorrow:
-      info("Select Tommorrow option");
-      break;
-    case Upcoming:
-      info("Select Upcoming option");
-      break;
-    default:
-      info("No option in the list.Please select correct option.");
-      break;
-    }
-  }
-
-  /**
-   * Open Sorting list of Incoming
-   */
-  public void goToSortIncomingList() {
-    info("Click on Sort list");
-  }
-
-  /**
-   * Open Group list in Incoming
-   */
-  public void goToGroupIncoming() {
-    info("Click on Group list");
   }
 
   public void addTask(String taskContent) {
@@ -172,12 +123,4 @@ public class TasksManagement {
     // Get id Comment button
     $(byId(ELEMENT_VIEW_ALL_REPLIES_LINK_TASK.replace("{id}", idDataComment))).waitUntil(Condition.visible, Configuration.timeout).find(".subCommentShowAllLink").click();
   }
-
-  /**
-   * Define options in Task list
-   */
-  public enum optionTask {
-    Incoming, All_Tasks, Overdue, Today, Tommorrow, Upcoming;
-  }
-
 }

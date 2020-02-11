@@ -11,8 +11,6 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocat
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
-import static org.junit.Assert.assertEquals;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -662,8 +660,6 @@ public class LikeCommentTestIT extends Base {
     $(byText(comment)).should(Condition.exist);
     $(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     $(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).parent().parent().shouldHave(Condition.text("(1)"));
-    //assertEquals("rgba(47, 94, 146, 1)",
-      //           $(byText(comment)).parent().parent().find(byClassName("uiIconThumbUp")).getCssValue("color"));
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
     activityStream.deleteactivity(activity1);
   }

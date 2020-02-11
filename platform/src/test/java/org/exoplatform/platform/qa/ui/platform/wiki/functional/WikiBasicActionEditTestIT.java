@@ -15,7 +15,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Configuration.baseUrl;
@@ -1000,7 +999,7 @@ public class WikiBasicActionEditTestIT extends Base {
         wikiHomePage.goToMyDraft();
         wikiValidattions.verifyTitleDrafPage(title1);
         info("The page in edit mode is displayed");
-        $(byId("UIWikiDraftGrid")).find(byText(title1)).click();
+        $(byId("UIWikiDraftGrid")).find(byText(title1)).waitUntil(visible,Configuration.collectionsTimeout).click();
         wikiValidattions.verifyResumADraf(title1);
         homePagePlatform.goToWiki();
         wikiHomePage.deleteWiki(title);
@@ -1392,7 +1391,7 @@ public class WikiBasicActionEditTestIT extends Base {
         richTextEditor.editSimplePage(title2, "");
         richTextEditor.changeLink(label);
         richTextEditor.goToEditLink();
-        richTextEditor.insertWebLink(address2, label2, "", true);
+        richTextEditor.editWikiPageLink(address2, label2, "");
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(title2);
         info("Click on email link to verify that the link is avaiable");

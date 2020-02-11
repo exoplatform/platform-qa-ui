@@ -58,10 +58,10 @@ public class CalendarImproveCreateEvent extends Base {
   }
 
   @Test
-  public void test01_CheckEventPopUpWhenCLickOnAddEvent() {
+  public void test01_checkEventPopUpWhenCLickOnAddEvent() {
     //21495 //21498 //21500 //21503 //21505 //21511 //21522
     String eventTitle = "event" + getRandomNumber();
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
@@ -91,10 +91,10 @@ public class CalendarImproveCreateEvent extends Base {
 
 
   @Test
-  public void test02_CheckEventPopUpWhenCLickOnTimeSlot() {
+  public void test02_checkEventPopUpWhenCLickOnTimeSlot() {
     //21496
     String titleEvent = "titleEvent" + getRandomNumber();
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
@@ -124,7 +124,7 @@ public class CalendarImproveCreateEvent extends Base {
   @Test
   public void test03_checkCloseButtonOfEventDrawer() {
     //21499
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
@@ -138,7 +138,7 @@ public class CalendarImproveCreateEvent extends Base {
   @Test
   public void test04_checkCancelButtonOfEventDrawer() {
     //21501
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
@@ -153,7 +153,7 @@ public class CalendarImproveCreateEvent extends Base {
   public void test05_CheckClearButtonInEventDrawer() {
     //21501
     String titleEvent = "titleEvent" + getRandomNumber();
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
@@ -165,7 +165,7 @@ public class CalendarImproveCreateEvent extends Base {
     ELEMENT_EVENT_DESCRIPTION.setValue("Description");
     ELEMENT_EVENT_CLEAR_BUTTON.click();
     assertEquals("", ELEMENT_EVENT_DRAWER_TITLE.getText());
-    assertEquals("All", ELEMENT_EVENT_CATEGORY.getText());
+    assertEquals("Events", ELEMENT_EVENT_CATEGORY.getText());
     assertEquals("", ELEMENT_EVENT_LOCATION.getText());
     assertEquals("", ELEMENT_EVENT_DESCRIPTION.getText());
     ELEMENT_EVENT_CANCEL_BUTTON.click();
@@ -175,7 +175,7 @@ public class CalendarImproveCreateEvent extends Base {
   @Test
   public void test06_checkSaveButtonWhenTitleIsEmpty() {
     //21502
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
@@ -191,7 +191,7 @@ public class CalendarImproveCreateEvent extends Base {
   public void test07_checkSaveButtonWhenTitleIsTyped() {
     //21504
     String titleEvent = "titleEvent" + getRandomNumber();
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
@@ -206,7 +206,7 @@ public class CalendarImproveCreateEvent extends Base {
   @Test
   public void test08_AddParticipantToEvent() {
     String titleEvent = "titleEvent" + getRandomNumber();
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
     String username = "usernamea" + getRandomString();
@@ -231,7 +231,7 @@ public class CalendarImproveCreateEvent extends Base {
   @Test
   public void test09_CheckRepeatPreferencePopup() {
     //21514
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
@@ -247,7 +247,7 @@ public class CalendarImproveCreateEvent extends Base {
   @Test
   public void test10_CheckReminderPopup() {
     //21518
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
@@ -263,7 +263,7 @@ public class CalendarImproveCreateEvent extends Base {
   @Test
   public void test11_CheckReminderLabel() {
     //21519 //21520 //21521
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
@@ -290,7 +290,7 @@ public class CalendarImproveCreateEvent extends Base {
   @Test
   public void test12_CheckRepeatLabel() {
     //21515 //21516
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
@@ -308,7 +308,7 @@ public class CalendarImproveCreateEvent extends Base {
 
   @Test
   public void test13_CheckFindTimePopup() {
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
@@ -328,7 +328,7 @@ public class CalendarImproveCreateEvent extends Base {
     //21507 //21506 //21508 //21509 //21523 //21524 //21525 //21526 //21527
     String event = "event" + getRandomNumber();
     String uploadedFile = "eXo-Platform.png";
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
@@ -341,7 +341,7 @@ public class CalendarImproveCreateEvent extends Base {
     for (int i = 0; i <= 11; i++) {
       $(By.className("attachFile")).uploadFromClasspath(uploadedFile);
     }
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).waitUntil(Condition.visible,2000).dragAndDropTo($(byXpath("//div[@title=\"eXo-Platform.png_________\"]")));
+    $(byXpath("//*[@id='ExoCalendarEventForm']/div[1]/div[2]/form/div[1]/div[1]/input")).waitUntil(Condition.visible,2000).dragAndDropTo($(byXpath("//div[@title=\"eXo-Platform.png_________\"]")));
     $(byXpath("//div[@title='${uploadedFile}']".replace("${uploadedFile}", uploadedFile))).exists();
     $(byXpath("//div[@title='${uploadedFile}']".replace("${uploadedFile}", uploadedFile + "_"))).exists();
     $(byXpath("//div[@title='${uploadedFile}']".replace("${uploadedFile}", uploadedFile + "__"))).exists();
@@ -378,7 +378,7 @@ public class CalendarImproveCreateEvent extends Base {
     String event = "event" + getRandomNumber();
     String bigSizePhoto = "eXoMoreThan10MB.jpg";
     String longName = "Calendarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr.png";
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
@@ -388,7 +388,7 @@ public class CalendarImproveCreateEvent extends Base {
     homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT), Condition.visible, 1000);
     eventManagement.goToAddEventFromActionBar();
     eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
-    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).waitUntil(Condition.visible,2000).dragAndDropTo($(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")));
+    $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[1]/input")).waitUntil(Condition.visible,2000).dragAndDropTo($(byXpath("//i[@class=\"uiIcon attachFileIcon\"]")));
     $(By.className("attachFile")).uploadFromClasspath(longName);
     Assert.assertEquals("Attached file name is not " + longName, $(byXpath("//div[@class=\"info\"]/div[@title]")).getText(), longName);
     $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[3]/div/button[3]")).waitUntil(Condition.visible, 2000).click();
@@ -410,7 +410,7 @@ public class CalendarImproveCreateEvent extends Base {
   @Test
   public void test16_CheckBehaviorWhenDisableRepeatButtonFromYesToNo() {
     //21517
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
@@ -451,7 +451,7 @@ public class CalendarImproveCreateEvent extends Base {
   public void test18_CheckTheEventDrawerDisappearsWhilePressOnESCButton() {
     //21661
     String eventTitle = "event" + getRandomNumber();
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
@@ -471,7 +471,7 @@ public class CalendarImproveCreateEvent extends Base {
   public void test19_CheckMessageWhenUserPressESCButton() {
     //21663
     String eventTitle = "event" + getRandomNumber();
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
     homePagePlatform.goToCalendarPage();
@@ -496,7 +496,7 @@ public class CalendarImproveCreateEvent extends Base {
   public void test20_CheckEditEventDrawerWhenClickOnTheEventInCalendar() {
     //21623 //21622 //21621 //21620 //21619 //21618 //21617
     String eventTitle = "event" + getRandomNumber();
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     String eventTitle2 = "event" + getRandomNumber();
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
@@ -524,7 +524,7 @@ public class CalendarImproveCreateEvent extends Base {
     eventManagement.checkEventPopUp(date, PLFData.DATA_NAME_ROOT, PLFData.username);
     ELEMENT_EVENT_TITLE_DRAWER.setValue(eventTitle2);
     ELEMENT_EVENT_CLEAR_BUTTON.click();
-    Assert.assertEquals("Event Title is not " + eventTitle, $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getValue(), eventTitle);
+    Assert.assertEquals("Event Title is not " + eventTitle, $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[1]/input")).getValue(), eventTitle);
     info("Remove the title of event");
     ELEMENT_EVENT_TITLE_DRAWER.clear();
     info("Button Save is disabled");
@@ -552,7 +552,7 @@ public class CalendarImproveCreateEvent extends Base {
     String eventCategory = "Meeting";
     String eventLocation = "location" + getRandomString();
     String eventDescription = "description" + getRandomString();
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     String eventTitle2 = "event" + getRandomNumber();
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
@@ -582,7 +582,7 @@ public class CalendarImproveCreateEvent extends Base {
             CalendarHomePage.selectDayOption.DETAILTIME,
             getDate(0, "MMM dd yyyy"));
     $(byText("Edit Event")).should(Condition.exist);
-    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
+    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[1]/input")).getAttribute("placeholder"));
     assertEquals(eventTitle, ELEMENT_EVENT_DRAWER_TITLE.getValue());
     assertEquals(eventCategory, ELEMENT_EVENT_CATEGORY.getText());
     $(byXpath("//div[@class='item' and text()='${participantName}']".replace("${participantName}", PLFData.DATA_NAME_USER1))).exists();
@@ -599,7 +599,7 @@ public class CalendarImproveCreateEvent extends Base {
             CalendarHomePage.selectDayOption.DETAILTIME,
             getDate(0, "MMM dd yyyy"));
     $(byText("Edit Event")).should(Condition.exist);
-    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[2]/input")).getAttribute("placeholder"));
+    assertEquals("Event title", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[1]/div[1]/input")).getAttribute("placeholder"));
     assertEquals(eventTitle2, ELEMENT_EVENT_DRAWER_TITLE.getValue());
     ELEMENT_EVENT_CANCEL_BUTTON.waitUntil(Condition.visible, Configuration.timeout).click();
     info("Clear all data");

@@ -97,6 +97,7 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     info("Go to Create Wiki page from Navigation toolbar");
     navigationToolbar.goToCreateWikiPage("");
     info("Verify that wiki home page is shown");
+    getExoWebDriver().getWebDriver().navigate().refresh();
     $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
 
   }
@@ -152,8 +153,6 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     info("Test 3: Create a new Topic via the top navigation");
     String category = "category" + getRandomNumber();
     String forum = "forum" + getRandomNumber();
-    String forum1 = "forumA" + getRandomNumber();
-
     homePagePlatform.goToForum();
     info("Verify that the forum home page is shown full");
     $(ELEMENT_FORUM_WHAT_GOING_ON).waitUntil(Condition.appears, Configuration.timeout);
@@ -277,12 +276,13 @@ public class PlfNavigationTopNavigationTestIT extends Base {
   public void test07_OpenUserGuide() {
     info("Test 7: Open user guide");
     homePagePlatform.goToHomePage();
-    homePagePlatform.refreshUntil($(ELEMENT_HELP_TOOLBAR),Condition.visible,1000);
-    $(ELEMENT_HELP_TOOLBAR).waitUntil(Condition.visible,Configuration.timeout).click();
+    homePagePlatform.refreshUntil($(ELEMENT_HELP_TOOLBAR),Condition.visible,Configuration.timeout);
+    $(ELEMENT_HELP_TOOLBAR).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     switchTo().window(1);
+    sleep(2000);
     String url = WebDriverRunner.url();
     assertEquals(url,
-                 "https://docs.exoplatform.org/en/5.2/");
+                 "https://docs.exoplatform.org/en/5.3/");
     switchTo().window(0);
   }
 }

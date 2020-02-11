@@ -16,15 +16,12 @@ import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("chat")
 @Tag("sniff")
@@ -123,8 +120,8 @@ public class ChatCollaborativeActionsTestIT extends Base {
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.addRoom(room);
-        ELEMENT_COLLABORATION_ACTIONS.click();
-        ELEMENT_CHAT_ASK_QUESTION.click();
+        ELEMENT_COLLABORATION_ACTIONS.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        ELEMENT_CHAT_ASK_QUESTION.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
         chatManagement.checkAskQuestionPopUp();
         roomManagement.deleteRomm(room);
     }
@@ -166,8 +163,8 @@ public class ChatCollaborativeActionsTestIT extends Base {
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.addRoom(room);
-        ELEMENT_COLLABORATION_ACTIONS.click();
-        ELEMENT_CHAT_RAISE_HAND.click();
+        ELEMENT_COLLABORATION_ACTIONS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        ELEMENT_CHAT_RAISE_HAND.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         chatManagement.checkRaiseHandPopUp();
         roomManagement.deleteRomm(room);
     }
