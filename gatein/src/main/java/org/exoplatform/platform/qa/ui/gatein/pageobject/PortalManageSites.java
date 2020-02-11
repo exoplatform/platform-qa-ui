@@ -176,7 +176,7 @@ public void goToDefaultSkin() {
       temp.click();
     }
     $(byXpath(ELEMENT_SAVE_BUTTON)).waitUntil(visible,Configuration.timeout).click();
-    sleep(12000);
+    sleep(18000);
     $(ELEMENT_POPUP_ADD_PORTAL).waitUntil(Condition.not(visible),Configuration.timeout);
 
 

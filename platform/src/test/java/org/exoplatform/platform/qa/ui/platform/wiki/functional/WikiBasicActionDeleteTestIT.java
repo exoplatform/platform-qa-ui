@@ -377,7 +377,7 @@ public class WikiBasicActionDeleteTestIT extends Base {
         wikiHomePage.goToAddBlankPage();
         wikiManagement.goToSourceEditor();
         sourceTextEditor.addSimplePageHasAutoSaveWithoutSave(title, content);
-        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+        manageLogInOut.signIn(DATA_USER2, "gtn");
         homePagePlatform.goToWiki();
         wikiHomePage.goToMyDraft();
         wikiValidattions.verifyNotTitleDrafPage(title);

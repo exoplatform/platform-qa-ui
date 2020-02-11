@@ -305,7 +305,7 @@ public class RichTextEditor {
   public void inputWebAddress(String address) {
     if (!address.isEmpty()) {
       info("Input web address");
-      $(ELEMENT_WEB_PAGE_WEB_ADDRESS).val(address);
+      $(ELEMENT_WEB_PAGE_WEB_ADDRESS).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).val(address);
     }
   }
 
@@ -349,7 +349,14 @@ public class RichTextEditor {
    * @param newContent updated content of the wiki page. Can not be
    */
   public void editSimplePage(String newTitle, String newContent) {
-    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
+    if(!$(ELEMENT_TITLE_WIKI_INPUT).exists())
+    {
+      do {
+        //refresh();
+        testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+        sleep(2000);
+      }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
+    }
     if ($(ELEMENT_SOURCE_EDITOR_BUTTON).is(Condition.not(Condition.exist))
         && (ELEMENT_BUTTON_WIKI_RITCH_TEXT.is(Condition.exist))) {
       ELEMENT_BUTTON_WIKI_RITCH_TEXT.waitUntil(Condition.visible,Configuration.timeout).click();
@@ -453,7 +460,7 @@ public class RichTextEditor {
     if (!link.isEmpty()) {
       info("Input external Image link");
       sleep(Configuration.timeout);
-      $(ELEMENT_EXTERNAL_IMAGE_INPUT_LINK).waitUntil(Condition.visible,Configuration.collectionsTimeout).setValue(link);
+      $(ELEMENT_EXTERNAL_IMAGE_INPUT_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(link);
     }
   }
 
@@ -767,9 +774,9 @@ public class RichTextEditor {
       }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
     }
     if (!title.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).setValue(title);
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(title);
     info("Waiting 30s before saved all changes");
-    $(ELEMENT_DRAFT_NOTIFY).waitUntil(Condition.appears, 31000, 1);
+    $(ELEMENT_DRAFT_NOTIFY).waitUntil(Condition.appears, 41000, 1);
     info("Save all changes");
 
   }

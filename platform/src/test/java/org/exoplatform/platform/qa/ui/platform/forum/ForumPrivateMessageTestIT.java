@@ -90,7 +90,7 @@ public class ForumPrivateMessageTestIT extends Base {
     privateMessageManagement.goComposeMessage();
     privateMessageManagement.writeMessage(contact, title, content);
     ELEMENT_CANCEL_PRIVATE_MSG.click();
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
 
     homePagePlatform.goToForum();
     forumHomePage.goToPrivateMessage();
@@ -137,7 +137,7 @@ public class ForumPrivateMessageTestIT extends Base {
     privateMessageManagement.goComposeMessage();
     privateMessageManagement.writeMessage(contact, title, content);
     ELEMENT_CANCEL_PRIVATE_MSG.click();
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.goToForum();
     forumHomePage.goToPrivateMessage();
     privateMessageManagement.checkInboxMessage("", title, content);
@@ -178,7 +178,7 @@ public class ForumPrivateMessageTestIT extends Base {
     privateMessageManagement.forwardMessage(contact, title, contactForward, "", "");
     privateMessageManagement.deleteMessage(title, "");
     ELEMENT_CANCEL_PRIVATE_MSG.click();
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.goToForum();
     forumHomePage.goToPrivateMessage();
     privateMessageManagement.checkInboxMessage("", "Forward:" + title, content);
@@ -224,7 +224,7 @@ public class ForumPrivateMessageTestIT extends Base {
     sleep(2000);
     ELEMENT_CANCEL_PRIVATE_MSG.click();
     sleep(Configuration.timeout);
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.goToForum();
     forumHomePage.goToPrivateMessage();
     privateMessageManagement.checkInboxMessage("", "Forward:" + title, content);

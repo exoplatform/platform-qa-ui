@@ -61,7 +61,7 @@ public class TaskAssignInChatTestIT extends Base {
     manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
     homePagePlatform.goToConnections();
     connectionsManagement.connectToAUser(PLFData.DATA_USER2);
-    manageLogInOut.signIn(PLFData.DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(PLFData.DATA_USER2, "gtn");
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(PLFData.DATA_USER1);
     manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");

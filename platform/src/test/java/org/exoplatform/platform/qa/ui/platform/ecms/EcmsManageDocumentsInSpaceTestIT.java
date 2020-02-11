@@ -77,7 +77,7 @@ public class EcmsManageDocumentsInSpaceTestIT extends Base {
     spaceSettingManagement.goToMemberTabInSpaceSettingTab();
     ELEMENT_INPUT_INVITE_USER.sendKeys(PLFData.DATA_USER2);
     $(ELEMENT_SPACE_BTN_INVITE).click();
-    manageLogInOut.signIn(PLFData.DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(PLFData.DATA_USER2, password);
     homePagePlatform.goToMySpaces();
     spaceManagement.acceptAInvitation(space);
     manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
@@ -92,7 +92,7 @@ public class EcmsManageDocumentsInSpaceTestIT extends Base {
     if ($(byId(ELEMENT_CHECKBOX_MODIFY_PERMISSION.replace("{user}", space))).is(Condition.checked))
       $(byId(ELEMENT_CHECKBOX_MODIFY_PERMISSION.replace("{user}", space))).parent().click();
     $(ELEMENT_CLOSE_BTN).click();
-    manageLogInOut.signIn(PLFData.DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(PLFData.DATA_USER2, password);
     homePagePlatform.goToMySpaces();
     ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceManagement.goToDocumentTab();

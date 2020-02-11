@@ -17,6 +17,7 @@ public class WikiSettingManagement {
 
   private final TestBase       testBase;
 
+  private HomePagePlatform homePagePlatform;
 
   public ManageAlert           alert;
 
@@ -27,6 +28,8 @@ public class WikiSettingManagement {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
     alert = new ManageAlert(testBase);
+    this.homePagePlatform=new HomePagePlatform(testBase);
+
   }
 
 public void addTemplate(String title,String description,String content){

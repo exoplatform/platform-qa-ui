@@ -45,7 +45,7 @@ public class SOSDocumentActivityStreamTestIT extends Base{
         if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
             $(ELEMENT_SKIP_BUTTON).click();
         }
-        manageLogInOut.signInCas(DATA_USER2, "gtngtngtn" );
+        manageLogInOut.signInCas(DATA_USER2, DATA_PASS );
     }
 
 

@@ -165,7 +165,7 @@ public class ChatAssignTaskTestIT extends Base {
         manageLogInOut.signInCas(usernamea, password);
         homePagePlatform.goToChat();
         switchTo().window(1);
-        ELEMENT_CONTACT_LIST.find(byText(room)).waitUntil(Condition.visible, Configuration.timeout);
+        ELEMENT_CONTACT_LIST.find(byText(room)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
         switchToParentWindow();
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);

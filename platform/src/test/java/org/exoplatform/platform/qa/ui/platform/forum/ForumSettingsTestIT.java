@@ -116,7 +116,7 @@ public class ForumSettingsTestIT extends Base {
     $(ELEMENT_FORUM_SETTINGS_SAVE).click();
     $(ELEMENT_FORUM_CLOSEBTN).click();
 
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.goToForum();
     $(byText(DATA_NAME_USER2)).should(Condition.exist);
 

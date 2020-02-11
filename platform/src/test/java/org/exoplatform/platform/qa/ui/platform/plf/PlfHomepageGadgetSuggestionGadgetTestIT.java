@@ -113,7 +113,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
   @Test
   public void createTwoSpaces() {
     info("--Login with mary account--");
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     info("Create 1 space");
     space4 = "space4" + getRandomNumber();
     homePagePlatform.goToMySpaces();
@@ -124,7 +124,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     spaceSettingManagement.inviteUser(DATA_USER4, false, "");
 
     info("--Log in with james account--");
-    manageLogInOut.signIn(DATA_USER3, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER3, DATA_PASS);
     info("Create 1 space");
     space5 = "space5" + getRandomNumber();
     homePagePlatform.goToMySpaces();
@@ -178,7 +178,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
 
     info("Invite John to 2 spaces");
     createTwoSpaces();
-    manageLogInOut.signIn(DATA_USER4, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER4, DATA_PASS);
 
     info("Verify that Don't show the space suggestion");
     ELEMENT_SUGGETION_SPACE.find(byText(space4)).shouldNot(Condition.exist);
@@ -199,10 +199,10 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     connectionsManagement.cancelConnection(DATA_USER2);
     connectionsManagement.cancelConnection(DATA_USER3);
 
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space4, false);
-    manageLogInOut.signIn(DATA_USER3, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER3, DATA_PASS);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space5, false);
   }
@@ -235,7 +235,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email, username1, username1);
     addUsers.addUser(username2, password, email2, username2, username2);
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, PLFData.password);
     info("Verify that The suggestion gadget always displays 2 people suggestions");
     homePagePlatform.refreshUntil($(ELEMENT_SUGGESTION_BOX).find(byText(username1 + " " + username1)),Condition.visible,500);
     $(ELEMENT_SUGGESTION_BOX).find(byText(username1 + " " + username1)).should(Condition.exist);
@@ -361,7 +361,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     homePagePlatform.goToAllSpace();
     ELEMENT_MY_SPACE_SEARCH_TEXT.setValue(space1).pressEnter();
     $(ELEMENT_SPACES_LIST).find(byText(space1)).parent().parent().parent().find(ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION).click();
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, PLFData.password);
     $(ELEMENT_SUGGESTION_BOX).find(byText(space1)).should(Condition.exist);
     $(ELEMENT_SUGGESTION_BOX).find(byText(space2)).should(Condition.exist);
     manageLogInOut.signIn(username, PLFData.password);
@@ -393,7 +393,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     space1 = "spaceA" + getRandomNumber();
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1);
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.refreshUntil(ELEMENT_GAGET_SUGGESTION_SPACE,Condition.visible,1000);
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).hover();
     String id = ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).parent().parent().getAttribute("id");
@@ -454,7 +454,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     space1 = "spaceA" + getRandomNumber();
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1);
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.refreshUntil(ELEMENT_GAGET_SUGGESTION_SPACE,Condition.visible,1000);
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).parent().hover();
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).parent().parent().find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET).click();
@@ -469,7 +469,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     space1 = "spaceA" + getRandomNumber();
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, space1);
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.refreshUntil(ELEMENT_GAGET_SUGGESTION_SPACE,Condition.visible,1000);
     executeJavaScript("window.scrollBy(0,300)");
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).parent().hover();
@@ -494,7 +494,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     spaceManagement.addNewSpaceSimple(space2, space2);
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space3, space3);
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.refreshUntil(ELEMENT_GAGET_SUGGESTION_SPACE,Condition.visible,1000);
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).shouldNot(Condition.visible);
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space2)).parent().hover();
@@ -518,7 +518,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     spaceManagement.addNewSpaceSimple(space2, space2);
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space3, space3);
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.refreshUntil(ELEMENT_GAGET_SUGGESTION_SPACE,Condition.visible,1000);
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space1)).shouldNot(Condition.visible);
     ELEMENT_GAGET_SUGGESTION_SPACE.find(byText(space2)).parent().hover();

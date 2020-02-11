@@ -324,9 +324,9 @@ public class GateinUserAndGroupManagementTestIT extends Base {
     useraddmanagement.addUser(username1, password1, email1, firstName1, lastName1);
     useraddmanagement.addUser(username2, password2, email2, firstName2, lastName2);
     homePagePlatform.goToConnections();
-    ELEMENT_NAME_OF_PEOPLE.setValue(firstName + " " + lastName).waitUntil(Condition.visible, Configuration.timeout).pressEnter();
-    ELEMENT_CONTENT_PEOPLE.waitUntil(Condition.visible, Configuration.timeout).find(byText(firstName + " " + lastName)).should(Condition.exist);
-    ELEMENT_CONTENT_PEOPLE.waitUntil(Condition.visible, Configuration.timeout).find(byText(firstName1 + " " + lastName1)).shouldNot(Condition.exist);
+    ELEMENT_NAME_OF_PEOPLE.setValue(firstName + " " + lastName).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).pressEnter();
+    ELEMENT_CONTENT_PEOPLE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).find(byText(firstName + " " + lastName)).should(Condition.exist);
+    ELEMENT_CONTENT_PEOPLE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).find(byText(firstName1 + " " + lastName1)).shouldNot(Condition.exist);
     refresh();
     navigationToolbar.goToManageCommunity();
     userandgroupmanagement.deleteUser(username);

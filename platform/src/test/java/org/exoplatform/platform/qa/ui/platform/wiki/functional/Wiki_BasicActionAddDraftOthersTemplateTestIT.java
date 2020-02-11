@@ -86,7 +86,7 @@ public class Wiki_BasicActionAddDraftOthersTemplateTestIT extends Base {
     wikiHomePage.goToMyDraft();
     wikiValidattions.verifyDraftExistsInDraftListOrNot(title, true);
     info("Sign in with Mary");
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     info("Go to Myfraft and verify that draft created in step 1 does not exist in draft list");
     homePagePlatform.goToWiki();
     wikiHomePage.goToMyDraft();
@@ -168,7 +168,7 @@ public class Wiki_BasicActionAddDraftOthersTemplateTestIT extends Base {
     info("Add attach file is added successfully in content of page");
     wikiHomePage.goToAPage(title);
     wikiValidattions.verifyAltTextImageInContentPage(altText);
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.goToWiki();
     wikiHomePage.goToAPage(title);
     wikiValidattions.verifyAltTextImageInContentPage(altText);

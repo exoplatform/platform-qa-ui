@@ -303,7 +303,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
     createNewDocument.saveAndClose();
     homePagePlatform.goToHomePage();
     refresh();
-    activityStream.checkActivityAddWebContent(title, null, null);
+    activityStream.checkActivityAddWebContent(title, "0", null);
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.deleteData(title);
     homePagePlatform.goToHomePage();

@@ -114,7 +114,7 @@ public class Plf_GettintStartedGadgetTestIT extends Base {
     info("Connect to a coworker");
     String idBtnConnect = $(byText(DATA_NAME_USER3)).parent().parent().parent().getAttribute("id");
     $(byXpath(ELEMENT_BUTTON_CONNECT_TO_USER.replace("{idbtn}", idBtnConnect))).click();
-    manageLogInOut.signIn(DATA_USER3, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER3, DATA_PASS);
     info("Accept an requested connection");
     homePagePlatform.goToConnections();
     connectionsManagement.goToConnectionTab(ConnectionsManagement.selectTabOption.RECEIVE);

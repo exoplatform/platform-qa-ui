@@ -355,9 +355,9 @@ public class CalendarViewTestIT extends Base {
     calendarHomePage.verifyIsNotPresentEventTask(titleEventNextMonth,
                                                  CalendarHomePage.selectViewOption.MONTH,
                                                  CalendarHomePage.selectDayOption.ALLDAY);
-    /*calendarHomePage.verifyIsNotPresentEventTask(titleEventPreMonth,
+    calendarHomePage.verifyIsNotPresentEventTask(titleEventPreMonth,
                                                  CalendarHomePage.selectViewOption.MONTH,
-                                                 CalendarHomePage.selectDayOption.ALLDAY);*/
+                                                 CalendarHomePage.selectDayOption.ALLDAY);
     $(ELEMENT_NEXT_BUTTON_ANY_VIEW).click();
     calendarHomePage.verifyIsNotPresentEventTaskWithDateTime(titleEventCur,
                                                              getDate(0, "MMM dd yyyy"),

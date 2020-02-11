@@ -127,7 +127,7 @@ public class NavigationToolbar {
     info("--Go to Users and groups management--");
     $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -377,7 +377,7 @@ public class NavigationToolbar {
     $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     $(ELEMENT_MENU_CONTENT_LINK).hover();
-    $(ELEMENT_SEARCH_LINK).click();
+    $(ELEMENT_SEARCH_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -398,7 +398,7 @@ public class NavigationToolbar {
    */
   public void goToQuickSearch() {
     info("Click on Quick search icon");
-    $(ELEMENT_TOOLBAR_QUICKSEARCH).click();
+    $(ELEMENT_TOOLBAR_QUICKSEARCH).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
 
   }
 

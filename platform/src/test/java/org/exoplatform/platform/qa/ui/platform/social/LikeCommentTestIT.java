@@ -29,7 +29,7 @@ import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 /**
  * Created by exo on 11/09/17.
  */
-@Tag("socialis")
+@Tag("social")
 @Tag("sniff")
 public class LikeCommentTestIT extends Base {
   NavigationToolbar      navigationToolbar;
@@ -91,19 +91,19 @@ public class LikeCommentTestIT extends Base {
                                                .getAttribute("id")
                                                .split("commentContainercomment")[1];
 
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
     activityStream.likeUnlikeComment(activity1, comment);
 
-    manageLogInOut.signIn(PLFData.DATA_USER3, "gtngtngtn");
+    manageLogInOut.signIn(PLFData.DATA_USER3, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
     activityStream.likeUnlikeComment(activity1, comment);
 
-    manageLogInOut.signIn(PLFData.DATA_USER4, "gtngtngtn");
+    manageLogInOut.signIn(PLFData.DATA_USER4, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -138,19 +138,19 @@ public class LikeCommentTestIT extends Base {
                                                .getAttribute("id")
                                                .split("commentContainercomment")[1];
 
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
     activityStream.likeUnlikeComment(activity1, comment);
 
-    manageLogInOut.signIn(PLFData.DATA_USER3, "gtngtngtn");
+    manageLogInOut.signIn(PLFData.DATA_USER3, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
     activityStream.likeUnlikeComment(activity1, comment);
 
-    manageLogInOut.signIn(PLFData.DATA_USER4, "gtngtngtn");
+    manageLogInOut.signIn(PLFData.DATA_USER4, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -159,7 +159,7 @@ public class LikeCommentTestIT extends Base {
     manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().shouldHave(Condition.text("(3)"));
     // connect with user 4 and unlike comment
-    manageLogInOut.signIn(PLFData.DATA_USER4, "gtngtngtn");
+    manageLogInOut.signIn(PLFData.DATA_USER4, PLFData.DATA_PASS);
     activityStream.likeUnlikeComment(activity1, comment);
     manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().shouldHave(Condition.text("(2)"));
@@ -190,19 +190,19 @@ public class LikeCommentTestIT extends Base {
                                                .getAttribute("id")
                                                .split("commentContainercomment")[1];
 
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
     activityStream.likeUnlikeComment(activity1, comment);
 
-    manageLogInOut.signIn(PLFData.DATA_USER3, "gtngtngtn");
+    manageLogInOut.signIn(PLFData.DATA_USER3, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
     activityStream.likeUnlikeComment(activity1, comment);
 
-    manageLogInOut.signIn(PLFData.DATA_USER4, "gtngtngtn");
+    manageLogInOut.signIn(PLFData.DATA_USER4, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -242,19 +242,19 @@ public class LikeCommentTestIT extends Base {
                                                .getAttribute("id")
                                                .split("commentContainercomment")[1];
 
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
     activityStream.likeUnlikeComment(activity1, comment);
 
-    manageLogInOut.signIn(PLFData.DATA_USER3, "gtngtngtn");
+    manageLogInOut.signIn(PLFData.DATA_USER3, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
     activityStream.likeUnlikeComment(activity1, comment);
 
-    manageLogInOut.signIn(PLFData.DATA_USER4, "gtngtngtn");
+    manageLogInOut.signIn(PLFData.DATA_USER4, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -295,19 +295,19 @@ public class LikeCommentTestIT extends Base {
                                                .getAttribute("id")
                                                .split("commentContainercomment")[1];
 
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
     activityStream.likeUnlikeComment(activity1, comment);
 
-    manageLogInOut.signIn(PLFData.DATA_USER3, "gtngtngtn");
+    manageLogInOut.signIn(PLFData.DATA_USER3, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
     activityStream.likeUnlikeComment(activity1, comment);
 
-    manageLogInOut.signIn(PLFData.DATA_USER4, "gtngtngtn");
+    manageLogInOut.signIn(PLFData.DATA_USER4, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -372,17 +372,17 @@ public class LikeCommentTestIT extends Base {
                                                .getAttribute("id")
                                                .split("commentContainercomment")[1];
 
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.goToMySpaces();
     spaceManagement.goToInvitationsReceivedTab();
     spaceManagement.acceptAInvitation(space);
     activityStream.likeUnlikeComment(activity1, comment);
-    manageLogInOut.signIn(DATA_USER3, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER3, DATA_PASS);
     homePagePlatform.goToMySpaces();
     spaceManagement.goToInvitationsReceivedTab();
     spaceManagement.acceptAInvitation(space);
     activityStream.likeUnlikeComment(activity1, comment);
-    manageLogInOut.signIn(DATA_USER4, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER4, DATA_PASS);
     homePagePlatform.goToMySpaces();
     spaceManagement.goToInvitationsReceivedTab();
     spaceManagement.acceptAInvitation(space);
@@ -629,7 +629,7 @@ public class LikeCommentTestIT extends Base {
                                                .parent()
                                                .getAttribute("id")
                                                .split("commentContainercomment")[1];
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -688,7 +688,7 @@ public class LikeCommentTestIT extends Base {
     connectionsManagement.connectToAUser(DATA_USER3);
     connectionsManagement.connectToAUser(DATA_USER4);
 
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -697,7 +697,7 @@ public class LikeCommentTestIT extends Base {
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
-    manageLogInOut.signIn(DATA_USER3, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -710,7 +710,7 @@ public class LikeCommentTestIT extends Base {
                                                      .click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
-    manageLogInOut.signIn(DATA_USER4, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -758,7 +758,7 @@ public class LikeCommentTestIT extends Base {
     connectionsManagement.connectToAUser(DATA_USER3);
     connectionsManagement.connectToAUser(DATA_USER4);
 
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -767,7 +767,7 @@ public class LikeCommentTestIT extends Base {
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
-    manageLogInOut.signIn(DATA_USER3, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -776,7 +776,7 @@ public class LikeCommentTestIT extends Base {
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
-    manageLogInOut.signIn(DATA_USER4, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -797,7 +797,7 @@ public class LikeCommentTestIT extends Base {
                                                 .shouldHave(Condition.text("(3)"));
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
-    manageLogInOut.signIn(DATA_USER4, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
     $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).hover();
     $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
@@ -842,7 +842,7 @@ public class LikeCommentTestIT extends Base {
     connectionsManagement.connectToAUser(DATA_USER3);
     connectionsManagement.connectToAUser(DATA_USER4);
 
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -851,7 +851,7 @@ public class LikeCommentTestIT extends Base {
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
-    manageLogInOut.signIn(DATA_USER3, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -860,7 +860,7 @@ public class LikeCommentTestIT extends Base {
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
-    manageLogInOut.signIn(DATA_USER4, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -913,7 +913,7 @@ public class LikeCommentTestIT extends Base {
     connectionsManagement.connectToAUser(DATA_USER3);
     connectionsManagement.connectToAUser(DATA_USER4);
 
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -922,7 +922,7 @@ public class LikeCommentTestIT extends Base {
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
-    manageLogInOut.signIn(DATA_USER3, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -931,7 +931,7 @@ public class LikeCommentTestIT extends Base {
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
-    manageLogInOut.signIn(DATA_USER4, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -983,7 +983,7 @@ public class LikeCommentTestIT extends Base {
     connectionsManagement.connectToAUser(DATA_USER3);
     connectionsManagement.connectToAUser(DATA_USER4);
 
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -992,7 +992,7 @@ public class LikeCommentTestIT extends Base {
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
-    manageLogInOut.signIn(DATA_USER3, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -1001,7 +1001,7 @@ public class LikeCommentTestIT extends Base {
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
-    manageLogInOut.signIn(DATA_USER4, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -1079,7 +1079,7 @@ public class LikeCommentTestIT extends Base {
     connectionsManagement.connectToAUser(DATA_USER2);
     connectionsManagement.connectToAUser(DATA_USER3);
 
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToAllSpace();
@@ -1089,7 +1089,7 @@ public class LikeCommentTestIT extends Base {
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
-    manageLogInOut.signIn(DATA_USER3, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToAllSpace();
@@ -1099,7 +1099,7 @@ public class LikeCommentTestIT extends Base {
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
-    manageLogInOut.signIn(DATA_USER4, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
     homePagePlatform.goToAllSpace();
     spaceManagement.acceptAInvitation(space);
     $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).hover();
@@ -1161,7 +1161,7 @@ public class LikeCommentTestIT extends Base {
                                                .parent()
                                                .getAttribute("id")
                                                .split("commentContainercomment")[1];
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -1196,12 +1196,12 @@ public class LikeCommentTestIT extends Base {
     homePagePlatform.goToHomePage();
     activityStream.addActivity(activity1, "");
     activityStream.commentActivity(activity1, comment);
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
     activityStream.likeUnlikeComment(activity1, comment);
-    manageLogInOut.signIn(DATA_USER3, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -1235,17 +1235,17 @@ public class LikeCommentTestIT extends Base {
     homePagePlatform.goToHomePage();
     activityStream.addActivity(activity1, "");
     activityStream.commentActivity(activity1, comment);
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
     activityStream.likeUnlikeComment(activity1, comment);
-    manageLogInOut.signIn(DATA_USER3, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
     activityStream.likeUnlikeComment(activity1, comment);
-    manageLogInOut.signIn(DATA_USER4, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -1285,7 +1285,7 @@ public class LikeCommentTestIT extends Base {
     $(byText(comment)).should(Condition.exist);
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -1336,7 +1336,7 @@ public class LikeCommentTestIT extends Base {
     $(byText(comment)).should(Condition.exist);
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.waitUntil(Condition.visible, Configuration.timeout).click();
 
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -1346,7 +1346,7 @@ public class LikeCommentTestIT extends Base {
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.waitUntil(Condition.visible, Configuration.timeout).click();
 
-    manageLogInOut.signIn(DATA_USER3, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -1399,7 +1399,7 @@ public class LikeCommentTestIT extends Base {
     $(byText(comment)).should(Condition.exist);
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -1408,7 +1408,7 @@ public class LikeCommentTestIT extends Base {
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
-    manageLogInOut.signIn(DATA_USER3, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -1417,7 +1417,7 @@ public class LikeCommentTestIT extends Base {
     ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
     ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
 
-    manageLogInOut.signIn(DATA_USER4, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();

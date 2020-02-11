@@ -1025,7 +1025,7 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         info("Un check edit permission of any group");
         wikiManagement.unCheckViewAUserOfPage(ELEMENT_PERMISSION_EDIT_ANY);
         info("Log in as Mary");
-        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+        manageLogInOut.signIn(DATA_USER2, DATA_PASS);
         homePagePlatform.goToWiki();
 
         info("Move wiki page 1 to page 2");
@@ -1118,7 +1118,7 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         wikiPermission.selectPermission(DATA_USER2, WikiPermission.permissionType.Edit_Pages);
         wikiPermission.savePermisison();
         info("Log in as Mary");
-        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+        manageLogInOut.signIn(DATA_USER2, DATA_PASS);
         homePagePlatform.goToWiki();
 
         info("Move wiki page 1 to page 2");

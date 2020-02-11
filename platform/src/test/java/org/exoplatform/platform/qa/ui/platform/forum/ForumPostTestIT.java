@@ -187,7 +187,7 @@ public class ForumPostTestIT extends Base {
     info("Click on delete button of the post that is replied");
     $(byText(newTitle)).parent().parent().parent().parent().find(ELEMENT_BUTTON_DELETE_POST).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Click on OK button of the confirm popup");
-    $(ELEMENT_DELETE_BOX_CONFIRMATION).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_DELETE_BOX_CONFIRMATION).waitUntil(Condition.visible,Configuration.timeout).click();
     info("Verify that the replied post is deleted");
     $(ELEMENT_POST_IN_TOPIC).find(byText(title)).shouldNot(Condition.exist);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.visible,Configuration.timeout).click();

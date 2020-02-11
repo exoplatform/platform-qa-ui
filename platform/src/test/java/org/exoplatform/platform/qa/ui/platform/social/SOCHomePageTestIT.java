@@ -170,15 +170,15 @@ public class SOCHomePageTestIT extends Base {
     createNewDocument.saveAndClose();
     homePagePlatform.goToHomePage();
     info("share file from activity stream");
-    ELEMENT_TAB_LINK.click();
+    ELEMENT_TAB_LINK.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     refresh();
-    ELEMENT_LINK_TEXT_SELECT_FROM_EXISTING_UPLOAD.click();
-    ELEMENT_TEXT_DOCUMENT_IN_DOC_ACTIVITY_POPUP.click();
-    ELEMENT_SITE_MANAGEMENT_IN_DOC_ACTIVITY_POPUP.click();
-    ELEMENT_POPUP_DOC_ACTIVITY.find(byText(name)).click();
-    ELEMENT_BUTTON_ATTASH_FILE_IN_DOC_ACTIVITY_POPUP.click();
+    ELEMENT_LINK_TEXT_SELECT_FROM_EXISTING_UPLOAD.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TEXT_DOCUMENT_IN_DOC_ACTIVITY_POPUP.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_SITE_MANAGEMENT_IN_DOC_ACTIVITY_POPUP.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_POPUP_DOC_ACTIVITY.find(byText(name)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_BUTTON_ATTASH_FILE_IN_DOC_ACTIVITY_POPUP.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     $(byAttribute("data-original-title", name)).should(Condition.exist);
-    $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("delete data");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.deleteData(name);
@@ -326,7 +326,7 @@ public class SOCHomePageTestIT extends Base {
     activityStream.addActivity(text, "");
     homePagePlatform.goToConnections();
     connectionsManagement.connectToAUser(DATA_USER2);
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -364,7 +364,7 @@ public class SOCHomePageTestIT extends Base {
     spaceManagement.addNewSpaceSimple(space, space, 60000);
     homePagePlatform.goToConnections();
     connectionsManagement.connectToAUser(DATA_USER2);
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
@@ -382,7 +382,7 @@ public class SOCHomePageTestIT extends Base {
     activityStream.deleteactivity(text1);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     activityStream.deleteactivity(text);
 
   }
@@ -584,7 +584,7 @@ public class SOCHomePageTestIT extends Base {
     homePagePlatform.goToConnections();
     connectionsManagement.connectToAUser(DATA_USER2);
 
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(username);
     homePagePlatform.goToHomePage();
@@ -640,7 +640,7 @@ public class SOCHomePageTestIT extends Base {
   public void test24_UpdateProfileChangeOfAvatar() {
     info("Test 24: Update Profile - change of avatar");
     String comment = "Avatar has been updated.";
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, password);
 
     navigationToolbar.goToMyProfile();
     userProfilePage.goToEditProfile();
@@ -707,7 +707,7 @@ public class SOCHomePageTestIT extends Base {
     String content2 = "content2" + getRandomNumber();
     String name3 = "name3" + getRandomNumber();
     String content3 = "content3" + getRandomNumber();
-    manageLogInOut.signIn(DATA_USER2,"gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2,DATA_PASS);
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToAddNewContent();
     info("Create new file document");
@@ -825,7 +825,7 @@ public class SOCHomePageTestIT extends Base {
     String space = "space" + getRandomNumber();
     String contentSpace = "contentSpace" + getRandomNumber();
     String comment = "Has joined the space.";
-    manageLogInOut.signIn(DATA_USER2,"gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, password);
     homePagePlatform.goToHomePage();
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, contentSpace);
@@ -838,7 +838,7 @@ public class SOCHomePageTestIT extends Base {
     info("check home page");
     $(byText(comment)).parent().parent().parent().parent().find(byText(DATA_NAME_USER1)).should(Condition.exist);
     $(byText(comment)).parent().parent().parent().parent().find(byText(DATA_NAME_USER2)).should(Condition.exist);
-    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
   }
