@@ -531,4 +531,24 @@ public class PlfUnifiedSearchTestIT extends Base {
 
   }
 
+  @Tag("PLF-8677")
+  @Test
+  public void test_NewContentsCreationMustNotBeAcceptedInsideWebContents() {
+      String name = "name" + getRandomNumber();
+      String content = "content" + getRandomNumber();
+      navigationToolbar.goToSiteExplorer();
+      siteExplorerHome.goToPath("intranet/documents", "Site Management");
+      siteExplorerHome.goToAddNewContent();
+      info("Create new file document");
+      createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
+      createNewDocument.addNewWebContent(name, content);
+      createNewDocument.saveAndClose();
+      info("Click on More");
+      $(byXpath("//*[@id='uiActionsBarContainer']//*[@class='dropdown-toggle']")).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+      info("New content button must not be displayed in the navigation bar nor in the right click menu");
+      $(byXpath("//*[@class='uiIconEcmsAddDocument uiIconEcmsLightGray']")).waitUntil(Condition.not(Condition.visible),Configuration.openBrowserTimeoutMs);
+      siteExplorerHome.goToPath("intranet/documents", "Site Management");
+      siteExplorerHome.deleteData(name);
+    }
+
 }
