@@ -151,23 +151,23 @@ public class EcmsAdminExplorerTestIT extends Base {
     String title = "aatitle" + getRandomNumber();
     String tabName = "tabName" + getRandomNumber();
     String oldPermission = "demo";
+    String oldName = "Demo";
     String[] tab = { "Add Category:" };
     String permission = "mary";
 
     navigationToolbar.goToContentAdministration();
     contentAdministration.goToSpecificMainFunctions(ContentAdministration.mainEcmFunctions.EXPLORER);
-    refresh();
     contentAdministration.goToSpecificFunctions(ContentAdministration.specificEcmFunctions.VIEW);
     info("add a view");
     contentAdministration.addView(title, tabName, tab, oldPermission);
     info("show a view");
     $(byClassName("uiIconView")).click();
-    $(byText(title)).waitUntil(Condition.appears, Configuration.timeout);
-    $(ELEMENT_ECM_EXPLORER_GO_TO_ACTION_FORM).click();
-    $(byText(tabName)).waitUntil(Condition.appears, Configuration.timeout);
+    $(byText(title)).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
+    $(ELEMENT_ECM_EXPLORER_GO_TO_ACTION_FORM).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(byText(tabName)).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     click(ELEMENT_ECM_EXPLORER_CLOSE_VIEW_MODE);
     info("edit a view");
-    contentAdministration.editViewPermissionUser(title, oldPermission, permission);
+    contentAdministration.editViewPermissionUser(title, oldName, permission);
     $(byText("Mary")).should(Condition.exist);
     info("delete a view");
     contentAdministration.deleteView(title);

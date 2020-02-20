@@ -71,7 +71,7 @@ public class PlfHomepageGadgetWhoIsOnlineGadgetTestIT extends Base {
   public void test02_ShowInformationOfUser() {
     info("Test 2: Show information of user");
 
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     manageLogInOut.signInWithoutRefresh(username, DATA_PASS);
     // 3 is the id of mary in who on line gadget
     ELEMENT_WHO_ON_LINE_GADGET.hover();

@@ -462,7 +462,7 @@ public class PlfUnifiedSearchTestIT extends Base {
     forumTopicManagement.startTopic(topic, topic, "", "");
     forumForumManagement.goToStartTopic();
     forumTopicManagement.startTopic(topic1, topic1, "", "");
-    manageLogInOut.signIn(PLFData.DATA_USER2, password);
+    manageLogInOut.signIn(PLFData.DATA_USER2, "gtngtngtn");
     navigationToolbar.goToQuickSearch();
     $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).setValue(topic);
     ELEMENT_DROP_DOWN_LIST_RESULT_IN_QUICK_SEARCH.waitUntil(Condition.visible, Configuration.timeout)

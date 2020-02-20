@@ -50,19 +50,19 @@ public class ContentAdministration {
     case EXPLORER:
       info("Select Explorer tab");
       if ($(ELEMENT_ECMS_FUNCTIONS_DRIVES).is(Condition.not(Condition.visible))) {
-        ELEMENT_EXPLORER_CATEGORIES_ECM_FUNCTIONS.click();
+        ELEMENT_EXPLORER_CATEGORIES_ECM_FUNCTIONS.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
       }
       break;
 
     case ADVANCED:
       info("Select Advanced tab");
       if ($(ELEMENT_ADVANCED_CATEGORIES_ECM_FUNCTIONS).is(Condition.visible))
-        $(ELEMENT_ADVANCED_CATEGORIES_ECM_FUNCTIONS).click();
+        $(ELEMENT_ADVANCED_CATEGORIES_ECM_FUNCTIONS).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
       break;
     case TEMPLATES:
       info("Select Templates tab");
       if ($(ELEMENT_TEMPLATE_CATEGORIES_ECM_FUNCTIONS).is(Condition.visible))
-        $(ELEMENT_TEMPLATE_CATEGORIES_ECM_FUNCTIONS).click();
+        $(ELEMENT_TEMPLATE_CATEGORIES_ECM_FUNCTIONS).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
       break;
     case REPOSITORY:
       info("Select Repository tab");

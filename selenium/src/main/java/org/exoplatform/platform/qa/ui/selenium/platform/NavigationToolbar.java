@@ -249,7 +249,7 @@ public class NavigationToolbar {
     info("base url of content admin is " + url);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-    $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[3]/a")).hover();
+    $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[6]/a")).hover();
     ELEMENT_LINK_CONTENT_ADMIN.waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_LINK_CONTENT_ADMIN.click();
   }

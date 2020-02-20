@@ -322,7 +322,7 @@ public class CalendarEventTestIT extends Base {
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
                                               CalendarHomePage.selectViewOption.WEEK,
                                               CalendarHomePage.selectDayOption.DETAILTIME);
-    manageLogInOut.signIn(DATA_USER3, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER3, "gtngtngtn");
     homePagePlatform.goToCalendarPage();
     calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.CALSETTING);
     calendarManagement.changeSettingCalendar(null, "(GMT +01:00) Africa/Tunis", null, null, null, null, null);
@@ -330,7 +330,7 @@ public class CalendarEventTestIT extends Base {
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
                                               CalendarHomePage.selectViewOption.WEEK,
                                               CalendarHomePage.selectDayOption.DETAILTIME);
-    manageLogInOut.signIn(DATA_USER4, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER4, "gtngtngtn");
     homePagePlatform.goToCalendarPage();
     calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.CALSETTING);
     calendarManagement.changeSettingCalendar(null, "(GMT +01:00) Africa/Tunis", null, null, null, null, null);
@@ -339,7 +339,7 @@ public class CalendarEventTestIT extends Base {
                                                  CalendarHomePage.selectViewOption.WEEK,
                                                  CalendarHomePage.selectDayOption.DETAILTIME);
     info("Test 19 Delete an event in group calendar");
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     homePagePlatform.goToCalendarPage();
     calendarHomePage.deleteEventTask(titleEvent,
                                      CalendarHomePage.selectViewOption.WEEK,
@@ -371,7 +371,7 @@ public class CalendarEventTestIT extends Base {
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
                                               CalendarHomePage.selectViewOption.WEEK,
                                               CalendarHomePage.selectDayOption.DETAILTIME);
-    manageLogInOut.signIn(DATA_USER3, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER3, "gtngtngtn");
     homePagePlatform.goToCalendarPage();
     calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.CALSETTING);
     calendarManagement.changeSettingCalendar(null, "(GMT +01:00) Africa/Tunis", null, null, null, null, null);
@@ -379,7 +379,7 @@ public class CalendarEventTestIT extends Base {
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
                                               CalendarHomePage.selectViewOption.WEEK,
                                               CalendarHomePage.selectDayOption.DETAILTIME);
-    manageLogInOut.signIn(DATA_USER4, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER4, "gtngtngtn");
     homePagePlatform.goToCalendarPage();
     calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.CALSETTING);
     calendarManagement.changeSettingCalendar(null, "(GMT +01:00) Africa/Tunis", null, null, null, null, null);
@@ -388,7 +388,7 @@ public class CalendarEventTestIT extends Base {
                                                  CalendarHomePage.selectViewOption.WEEK,
                                                  CalendarHomePage.selectDayOption.DETAILTIME);
     info("Test 18 Edit an event in group calendar");
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     homePagePlatform.goToCalendarPage();
     calendarHomePage.goToEditEventTaskFormByRightClick(titleEvent,
                                                        CalendarHomePage.selectViewOption.DAY,
@@ -404,12 +404,12 @@ public class CalendarEventTestIT extends Base {
     calendarHomePage.verifyIsPresentEventTask(titleEvent2,
                                               CalendarHomePage.selectViewOption.WEEK,
                                               CalendarHomePage.selectDayOption.DETAILTIME);
-    manageLogInOut.signIn(DATA_USER3, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER3, "gtngtngtn");
     homePagePlatform.goToCalendarPage();
     calendarHomePage.verifyIsPresentEventTask(titleEvent2,
                                               CalendarHomePage.selectViewOption.WEEK,
                                               CalendarHomePage.selectDayOption.DETAILTIME);
-    manageLogInOut.signIn(DATA_USER4, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER4, "gtngtngtn");
     homePagePlatform.goToCalendarPage();
     calendarHomePage.verifyIsNotPresentEventTask(titleEvent2,
                                                  CalendarHomePage.selectViewOption.WEEK,
@@ -448,7 +448,7 @@ public class CalendarEventTestIT extends Base {
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
                                               CalendarHomePage.selectViewOption.WEEK,
                                               CalendarHomePage.selectDayOption.DETAILTIME);
-    manageLogInOut.signIn(DATA_USER3, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER3, "gtngtngtn");
     homePagePlatform.goToCalendarPage();
     calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.CALSETTING);
     calendarManagement.changeSettingCalendar(null, "(GMT +01:00) Africa/Tunis", null, null, null, null, null);
@@ -456,7 +456,7 @@ public class CalendarEventTestIT extends Base {
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
                                               CalendarHomePage.selectViewOption.WEEK,
                                               CalendarHomePage.selectDayOption.DETAILTIME);
-    manageLogInOut.signIn(DATA_USER4, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER4, "gtngtngtn");
     homePagePlatform.goToCalendarPage();
     calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.CALSETTING);
     calendarManagement.changeSettingCalendar(null, "(GMT +01:00) Africa/Tunis", null, null, null, null, null);
@@ -471,12 +471,12 @@ public class CalendarEventTestIT extends Base {
                                      CalendarHomePage.selectViewOption.WEEK,
                                      CalendarHomePage.selectDayOption.DETAILTIME,
                                      getDate(0, "MMM dd yyyy"));
-    manageLogInOut.signIn(DATA_USER3, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER3, "gtngtngtn");
     homePagePlatform.goToCalendarPage();
     calendarHomePage.verifyIsNotPresentEventTask(titleEvent,
                                                  CalendarHomePage.selectViewOption.WEEK,
                                                  CalendarHomePage.selectDayOption.DETAILTIME);
-    manageLogInOut.signIn(DATA_USER4, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER4, "gtngtngtn");
     homePagePlatform.goToCalendarPage();
     calendarHomePage.verifyIsNotPresentEventTask(titleEvent,
                                                  CalendarHomePage.selectViewOption.WEEK,
@@ -535,7 +535,7 @@ public class CalendarEventTestIT extends Base {
     $(byXpath(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar", calendarName))).should(Condition.visible);
     calendarManagement.shareCalendar(calendarName, groupShare, edit, 1);
 
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     homePagePlatform.goToCalendarPage();
     calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.CALSETTING);
     calendarManagement.changeSettingCalendar(null, "(GMT +01:00) Africa/Tunis", null, null, null, null, null);
@@ -588,7 +588,7 @@ public class CalendarEventTestIT extends Base {
     $(byXpath(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar", calendarName))).should(Condition.visible);
     calendarManagement.shareCalendar(calendarName, groupShare, edit, 1);
 
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     homePagePlatform.goToCalendarPage();
     calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.CALSETTING);
     calendarManagement.changeSettingCalendar(null, "(GMT +01:00) Africa/Tunis", null, null, null, null, null);
@@ -634,7 +634,7 @@ public class CalendarEventTestIT extends Base {
     $(byXpath(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar", calendarName))).should(Condition.visible);
     calendarManagement.shareCalendar(calendarName, groupShare, edit, 1);
 
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     homePagePlatform.goToCalendarPage();
     calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.CALSETTING);
     calendarManagement.changeSettingCalendar(null, "(GMT +01:00) Africa/Tunis", null, null, null, null, null);

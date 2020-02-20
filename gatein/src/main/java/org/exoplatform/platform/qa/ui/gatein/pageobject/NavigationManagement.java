@@ -100,7 +100,7 @@ public class NavigationManagement {
     } else {
       info("Add sub node");
       $(byText(title)).waitUntil(Condition.appears,Configuration.timeout);
-      $(byClassName("uiNavigationManagement")).find(byText(title)).scrollTo().click();
+      $(byClassName("UINavigationManagement")).find(byText(title)).scrollTo().click();
       $(ELEMENT_ADD_NODE).click();
       $(ELEMENT_NODE_NAME).setValue(subTitle);
     }
@@ -115,7 +115,7 @@ public class NavigationManagement {
     info("Delete a node");
     info("Right click on the node");
 
-    $(byClassName("uiNavigationManagement")).find(byText(title)).scrollTo().contextClick();
+    $(byClassName("UINavigationManagement")).find(byText(title)).scrollTo().contextClick();
     info("Select Delete link");
     selectItem(specifiContextMenu.DELETE_NODE);
 

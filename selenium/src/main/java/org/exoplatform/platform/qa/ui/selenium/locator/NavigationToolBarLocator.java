@@ -82,7 +82,7 @@ public final class NavigationToolBarLocator {
 
   // Administation-->Content
   public static final SelenideElement ELEMENT_LINK_CONTENT_ADMIN                          =
-                                                                 $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[3]/ul/li[2]/a"));
+                                                                 $(byXpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[6]/ul/li[3]/a"));
 
   public static final By              ELEMENT_MENU_CONTENT_LINK                           =
                                                                 By.xpath("//li[@class='dropdown-submenu']/a[text()='Content']");
@@ -90,7 +90,7 @@ public final class NavigationToolBarLocator {
   public static final By              ELEMENT_MENU_SITE_EXPLORER                          = By.xpath("(//*[@id='UISetupPlatformToolBarPortlet']//a[contains(text(),'Administration')]/preceding::a[1])[1]");
 
   public static final By              ELEMENT_SEARCH_LINK                                 =
-                                                          By.xpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[3]/ul/li[3]/a");
+                                                          By.xpath("//*[@id=\"UISetupPlatformToolBarPortlet\"]/ul/li[6]/ul/li[1]/a");
 
   // Setup icon
   public static final By              ELEMENT_LINK_SETUP                                  =
