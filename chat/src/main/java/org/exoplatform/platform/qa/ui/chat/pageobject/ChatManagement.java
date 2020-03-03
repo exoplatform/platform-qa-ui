@@ -27,27 +27,26 @@ public class ChatManagement {
 
   public void uploadFile(String file) {
     ELEMENT_COLLABORATION_ACTIONS.waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_CHAT_UPLOAD_FILE.waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(2000);
+    ELEMENT_CHAT_UPLOAD_FILE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_CHAT_INPUT_UPLOAD.uploadFromClasspath(file);
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byText(file)).waitUntil(Condition.appear,Configuration.timeout);
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byClassName("uiIconChatUpload")).waitUntil(Condition.appear, Configuration.timeout);
   }
 
   public void changeStatus(String status) {
-    ELEMENT_CHAT_ICON_STATUS.click();
+    ELEMENT_CHAT_ICON_STATUS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     switch (status) {
     case "Available":
-      ELEMENT_CHAT_STATUS_AVAILABLE.click();
+      ELEMENT_CHAT_STATUS_AVAILABLE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
       break;
     case "Do not disturb":
-      ELEMENT_CHAT_STATUS_DONOTDISTURB.click();
+      ELEMENT_CHAT_STATUS_DONOTDISTURB.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
       break;
     case "Away":
-      ELEMENT_CHAT_STATUS_AWAY.click();
+      ELEMENT_CHAT_STATUS_AWAY.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
       break;
     case "Invisible":
-      ELEMENT_CHAT_STATUS_INVISIBLE.click();
+      ELEMENT_CHAT_STATUS_INVISIBLE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
       break;
     }
   }
@@ -58,15 +57,14 @@ public class ChatManagement {
     $(byXpath("//div[@class='apps-item-icon']/i[@class='uiIconChatCreateTask']")).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_CHAT_TASK_NAME).setValue(taskName);
     for (int i = 0; i <= user.length - 1; i++) {
-      ELEMENT_CHAT_ASSIGNEE_TASK.setValue(user[i]);
-      sleep(Configuration.collectionsTimeout);
-      ELEMENT_CHAT_RESULT_SEARCH_ASSIGNEE.waitUntil(Condition.visible, Configuration.timeout);
-      ELEMENT_CHAT_ASSIGNEE_TASK.waitUntil(Condition.visible,Configuration.timeout).pressEnter();
+      ELEMENT_CHAT_ASSIGNEE_TASK.waitUntil(Condition.visible,Configuration.timeout).setValue(user[i]);
+      ELEMENT_CHAT_RESULT_SEARCH_ASSIGNEE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+      ELEMENT_CHAT_ASSIGNEE_TASK.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).pressEnter();
     }
-    ELEMENT_CHAT_DUE_DATE_TASK.waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_CHAT_DUE_DATE_TASK.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_CHAT_CURRENT_DATE_TASK.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    ELEMENT_CHAT_POST_TASK_BUTTON.waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_CONTAINER_LIST_MESSAGES.waitUntil(Condition.visible,Configuration.timeout).find(byLinkText(taskName)).waitUntil(Condition.visible,Configuration.timeout).shouldBe(Condition.visible);
+    ELEMENT_CHAT_POST_TASK_BUTTON.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CONTAINER_LIST_MESSAGES.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).find(byLinkText(taskName)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).shouldBe(Condition.visible);
   }
 
   public void addEventInChat(String event, String location){
@@ -107,9 +105,8 @@ public class ChatManagement {
   }
 
   public void uploadFileChatUser(String file) {
-    ELEMENT_COLLABORATION_ACTIONS.waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_CHAT_UPLOAD_FILE.waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(2000);
+    ELEMENT_COLLABORATION_ACTIONS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CHAT_UPLOAD_FILE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_CHAT_INPUT_UPLOAD.uploadFromClasspath(file);
     $(byXpath("//div[@class='message-content']/b/a[text()='${file}']".replace("${file}",file))).exists();
     $(byXpath("//div[@class='message-content']/b/a[text()='${file}']/following::i[@class='uiIconChatUpload']".replace("${file}",file))).exists();
@@ -117,26 +114,24 @@ public class ChatManagement {
 
   public void openMiniChat(String userChat, String userChatName) {
     if (!$(byText(userChatName)).exists())
-      ELEMENT_CHAT_BUTTON_HIDE_OFF_LINE.click();
-    sleep(Configuration.timeout);
+      ELEMENT_CHAT_BUTTON_HIDE_OFF_LINE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     if ($(byXpath("(//div[@class='chat-contact']/div[contains(@style,'${userChat}')])[2]".replace("${userChat}",userChat))).exists())
     {
-      $(byXpath("(//div[@class='chat-contact']/div[contains(@style,'${userChat}')])[2]".replace("${userChat}", userChat))).click();
+      $(byXpath("(//div[@class='chat-contact']/div[contains(@style,'${userChat}')])[2]".replace("${userChat}", userChat))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
     else {
-      $(byXpath("//div[@class='chat-contact']/div[contains(@style,'${userChat}')]".replace("${userChat}", userChat))).click();
+      $(byXpath("//div[@class='chat-contact']/div[contains(@style,'${userChat}')]".replace("${userChat}", userChat))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
-    $(byXpath("//td[@id='profileName']/a[text()='${userChatName}']".replace("${userChatName}",userChatName))).click();
-    $(byXpath("(//span[@class='chat-label-status'])[2]")).waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(2000);
-    ELEMENT_MINI_CHAT_POPOUT_ICON.click();
+    $(byXpath("//td[@id='profileName']/a[text()='${userChatName}']".replace("${userChatName}",userChatName))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("(//span[@class='chat-label-status'])[2]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_MINI_CHAT_POPOUT_ICON.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     refresh();  }
 
   public void addQuestionInChat(String question){
-    ELEMENT_COLLABORATION_ACTIONS.click();
-    ELEMENT_CHAT_ASK_QUESTION.click();
+    ELEMENT_COLLABORATION_ACTIONS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CHAT_ASK_QUESTION.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_POPUP_CONTAINER.find(byXpath("//input[@placeholder='What is your question?']")).sendKeys(question+"?");
-    ELEMENT_CHAT_ASK_BUTTON.click();
+    ELEMENT_CHAT_ASK_BUTTON.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byText(question+"?")).waitUntil(Condition.appear, Configuration.timeout);
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byClassName("uiIconChatQuestion")).waitUntil(Condition.appear, Configuration.timeout);
   }
@@ -312,23 +307,22 @@ public class ChatManagement {
   }
 
   public void changeChatSettings(String Notification){
-    ELEMENT_CHAT_SETTING_NOTIFICATION.click();
+    ELEMENT_CHAT_SETTING_NOTIFICATION.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     switch (Notification) {
       case "DoNotDisturbNotication":
-        ELEMENT_CHAT_DO_NOT_DISTURB_BUTTON_NOTIFICATION.parent().click();
+        ELEMENT_CHAT_DO_NOT_DISTURB_BUTTON_NOTIFICATION.parent().waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         break;
       case "DesktopNotification":
-        sleep(Configuration.timeout);
-        ELEMENT_CHAT_DESKTOP_NOTIFICATION_BUTTON_.parent().waitUntil(Condition.visible,Configuration.timeout).click();
+        ELEMENT_CHAT_DESKTOP_NOTIFICATION_BUTTON_.parent().waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         break;
       case "BipNotification":
-        ELEMENT_CHAT_BIP_NOTIFICATION_BUTTON.parent().click();
+        ELEMENT_CHAT_BIP_NOTIFICATION_BUTTON.parent().waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         break;
       case "OnSiteNotification":
-        ELEMENT_CHAT_ON_SITE_NOTIFICATION_BUTTON.parent().click();
+        ELEMENT_CHAT_ON_SITE_NOTIFICATION_BUTTON.parent().waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         break;
     }
-    ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.click();
+    ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
   }
 

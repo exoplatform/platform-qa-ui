@@ -56,9 +56,8 @@ public class SpaceManagement {
       ELEMENT_SPACES_LIST.find(byText(spaceName)).parent().parent().parent().find(byText("Delete")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
       if (isVerify)
         alert.verifyAlertMessage(ELEMENT_SPACE_CONFIRM_DELETE);
-      $(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
-      sleep(Configuration.collectionsTimeout);
-      ELEMENT_SPACES_LIST.find(byText(spaceName)).waitUntil(Condition.disappear, Configuration.collectionsTimeout);
+      $(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+      ELEMENT_SPACES_LIST.find(byText(spaceName)).waitUntil(Condition.disappear, Configuration.collectionsTimeout + Configuration.collectionsTimeout);
     }
   }
 

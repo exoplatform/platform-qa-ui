@@ -91,23 +91,18 @@ public class ChatManageMessageTestIT extends Base {
     manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
     homePagePlatform.goToChat();
     switchTo().window(1);
-    sleep(2000);
     info("upload file in space chat");
-    $(byText(space)).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byText(space)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     chatManagement.uploadFile("eXo-Platform.png");
-    sleep(Configuration.timeout);
     info("upload file in user chat");
     chatManagement.openMiniChat(PLFData.DATA_USER2, PLFData.DATA_NAME_USER2);
     chatManagement.uploadFileChatUser("testavatar.png");
-    sleep(Configuration.timeout);
     switchTo().window(0);
     info("verify file uploaded in user chat exist in personal document");
     homePagePlatform.goToDocuments();
-    sleep(Configuration.timeout);
-    ELEMENT_FOLDER_DOCUMENT.waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_FOLDER_DOCUMENT.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_LIST_DOCUMENTS.find(byText("eXo-Platform")).shouldNot(Condition.exist);
     ELEMENT_LIST_DOCUMENTS.find(byText("testavatar")).should(Condition.exist);
-    sleep(2000);
     info("verify file uploaded in space chat exist in space's documents");
     homePagePlatform.goToMySpaces();
     ELEMENT_MINI_CHAT_CLOSE_ICON.waitUntil(Condition.visible,Configuration.timeout).click();
@@ -118,7 +113,6 @@ public class ChatManageMessageTestIT extends Base {
     info("verify document uploaded in space chat exist in activity stream");
     homePagePlatform.goToHomePage();
     ELEMENT_CONTAINER_ACTIVITY.find(byAttribute("data-original-title", "eXo-Platform.png")).exists();
-    sleep(Configuration.timeout);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
 
@@ -156,9 +150,8 @@ public class ChatManageMessageTestIT extends Base {
       $(byXpath("//i[@class='uiIconBannerChat uiIconLightGray']")).waitUntil(Condition.visible,Configuration.timeout).click();
     refresh();
     chatManagement.uploadFile("testavatar.png");
-    sleep(Configuration.timeout);
     info("upload file in space chat");
-    $(byText(space)).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byText(space)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     chatManagement.uploadFile("eXo-Platform.png");
     switchTo().window(0);
     info("verify file uploaded in user chat exist in personal document");

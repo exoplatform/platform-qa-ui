@@ -111,12 +111,11 @@ public class PortalManagePages {
     info("Click on Add new Page button");
 
     $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_BTN).waitUntil(Condition.appears, Configuration.timeout);
-    $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_BTN).scrollTo().click();
-    $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_PAGE_NAME).setValue(pageName);
-    $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_TITLE).setValue(title);
+    $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_BTN).scrollTo().waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_PAGE_NAME).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(pageName);
+    $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_TITLE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(title);
     $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_TYPE_DROPBOX).selectOption("group");
-    sleep(17000);
-    $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGES_POPUP_SAVE_BTN).click();
+    $(ELEMENT_MANAGEPAGES_ADD_NEW_PAGES_POPUP_SAVE_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.openBrowserTimeoutMs).click();
   }
 
 }

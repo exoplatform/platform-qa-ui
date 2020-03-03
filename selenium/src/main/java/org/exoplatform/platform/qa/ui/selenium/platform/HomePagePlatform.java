@@ -53,7 +53,7 @@ public class HomePagePlatform {
    */
   public void goToDocuments() {
     info("--Go to Documents--");
-    $(ELEMENT_DOCUMENTS_LINK_PLF).click();
+    $(ELEMENT_DOCUMENTS_LINK_PLF).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
   }
 
