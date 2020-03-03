@@ -729,9 +729,9 @@ public class SiteExplorerHome {
    * @param status String
    */
   public void changeStatusPulication(String status) {
-    $(byXpath(ELEMENT_PUBLICATION_STATUS.replace("${status}", status))).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_PUBLICATION_STATUS.replace("${status}", status))).waitUntil(Condition.visible, openBrowserTimeoutMs);
     $(byXpath(ELEMENT_PUBLICATION_STATUS.replace("${status}", status))).click();
-    $(Button.ELEMENT_CLOSE_BUTTON).click();
+    $(Button.ELEMENT_CLOSE_BUTTON).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
 
   }
 
@@ -742,13 +742,13 @@ public class SiteExplorerHome {
     info("View Metadata");
     info("Click on More link");
     if ( $(ELEMENT_ACTIONBAR_METADATA).is(Condition.not(Condition.visible)))
-    $(ELEMENT_ACTIONBAR_MORE).click();
+    $(ELEMENT_ACTIONBAR_MORE).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     info("Click on Metadata link");
-    $(ELEMENT_ACTIONBAR_METADATA).click();
+    $(ELEMENT_ACTIONBAR_METADATA).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     info("Verify that View metadata popup is shown");
     $(ELEMENT_METADATA_POPUP).waitUntil(Condition.visible,Configuration.timeout);
     info("Close the popup");
-    $(ELEMENT_METADATA_POPUP_CANCEL).click();
+    $(ELEMENT_METADATA_POPUP_CANCEL).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     info("Metadata popup is shown successfully");
   }
 
@@ -762,17 +762,17 @@ public class SiteExplorerHome {
     info("Add/Edit a comment");
     if (isAdd == true) {
       info("Click on Add comment on action bar");
-      $(ELEMENT_ACTIONBAR_ADDCOMMENT).click();
+      $(ELEMENT_ACTIONBAR_ADDCOMMENT).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     } else {
       info("Click on Edit comment button on action bar");
-      $(ELEMENT_SITEEXPLORER_COMMENT_EDIT).click();
+      $(ELEMENT_SITEEXPLORER_COMMENT_EDIT).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     }
     info("Refresh the page");
     refresh();
     info("Input a content to the frame");
-    $(byId("comment")).sendKeys(content);
+    $(byId("comment")).waitUntil(Condition.visible, openBrowserTimeoutMs).sendKeys(content);
     info("Click on Save button");
-    $(ELEMENT_SITEEXPLORER_COMMENT_SAVE).click();
+    $(ELEMENT_SITEEXPLORER_COMMENT_SAVE).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     info("Finish adding/Editing the Comment");
   }
 
@@ -783,7 +783,7 @@ public class SiteExplorerHome {
    */
   public void verifyContentCreatedSuccessfully(String title) {
     info("Verify Content was created successfully");
-    $(byText(title)).waitUntil(Condition.appears, Configuration.timeout);
+    $(byText(title)).waitUntil(Condition.appears, openBrowserTimeoutMs);
     info("Content was created successfully");
   }
 
@@ -834,8 +834,8 @@ public class SiteExplorerHome {
    */
   public void clickDeleteButtonDocument() {
     info("click on Delete button for Document");
-    $(ELEMENT_DELETE_BUTTON).waitUntil(visible,timeout).click();
-    $(ELEMENT_DELETE_POPUP_BUTTON).waitUntil(visible,timeout).click();
+    $(ELEMENT_DELETE_BUTTON).waitUntil(visible,openBrowserTimeoutMs).click();
+    $(ELEMENT_DELETE_POPUP_BUTTON).waitUntil(visible,openBrowserTimeoutMs).click();
   }
 
 }

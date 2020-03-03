@@ -30,7 +30,7 @@ public class ContentList {
    */
   public void selectFolderContent(String path, String content) {
 
-    $(ELEMENT_CONTENT_LIST_ADDPATH_BTN).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_CONTENT_LIST_ADDPATH_BTN).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs + Configuration.timeout).click();
       String[] arrayPath = path.split("/");
       if($(byXpath(ELEMENT_MULTIPLE_CONTENT_POPUP_FILE.replace("${content}",content))).is(Condition.not(Condition.visible))){
       for (String arrayElement : arrayPath) {

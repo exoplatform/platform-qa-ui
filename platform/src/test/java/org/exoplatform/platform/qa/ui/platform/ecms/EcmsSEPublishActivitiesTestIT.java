@@ -88,8 +88,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
     createNewDocument.addNewFile(title, content);
     createNewDocument.saveAndClose();
     homePagePlatform.goToHomePage();
-    sleep(Configuration.collectionsTimeout);
-    $(byText(title)).waitUntil(Condition.visible,Configuration.timeout).should(Condition.visible);
+    $(byText(title)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).should(Condition.visible);
     $(byText(title)).parent().parent().parent().parent().find(byText("Managed Sites")).should(Condition.visible);
     // delete data
     navigationToolbar.goToSiteExplorer();
@@ -146,7 +145,6 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
     createNewDocument.addNewWebContent(title, content);
     createNewDocument.saveAndClose();
     homePagePlatform.goToHomePage();
-    sleep(Configuration.timeout);
     activityStream.checkActivityAddWebContent(title, null, null);
     info("Test 4: Check intranet homepage after publishing a content");
     String comment = "Document has been published.";
@@ -154,7 +152,6 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
     siteExplorerHome.selectNode(title);
     siteExplorerHome.goToPublication();
     siteExplorerHome.changeStatusPulication("Published");
-    sleep(Configuration.timeout);
     homePagePlatform.goToHomePage();
     refresh();
     activityStream.checkActivityAddWebContent(title, "1", "Published");
@@ -327,7 +324,6 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
     info("Upload a file");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    sleep(Configuration.timeout);
     siteExplorerHome.uploadFile("testavatar.pdf");
 
     info("Go to the activity and verify that the file's activity is shown");
@@ -363,8 +359,7 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
     siteExplorerHome.selectNode("testavatar.pdf");
     info("Add a category to the file");
     siteExplorerHome.addCategoryForNode("testavatar.pdf", "intranet");
-    $(byXpath("//*[@id=\"UICategoryManager\"]/div[2]/button")).waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(Configuration.timeout);
+    $(byXpath("//*[@id=\"UICategoryManager\"]/div[2]/button")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     homePagePlatform.goToHomePage();
     $(byText("Category: intranet has been added.")).should(Condition.visible);
     info("Delete the file");
@@ -497,12 +492,10 @@ public class EcmsSEPublishActivitiesTestIT extends Base {
 
     info("Check the comment on the activity");
     homePagePlatform.goToHomePage();
-    sleep(Configuration.timeout);
     $(byXpath(ELEMENT_ACTIVITY_COMMENT.replace("${title}", title).replace("${comment}",
                                                                           "Publication has been moved to: /sites/intranet/"
                                                                               + title))).waitUntil(Condition.visible,
-                                                                                                   Configuration.timeout);
-    sleep(Configuration.timeout);
+                                                                                                   Configuration.openBrowserTimeoutMs);
     info("Delete the file");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath(fileRecept, "Site Management");

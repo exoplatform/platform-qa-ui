@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.platform.ecms;
 
+import static com.codeborne.selenide.Configuration.openBrowserTimeoutMs;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -114,12 +115,10 @@ public class EcmsWCMTestIT extends Base {
     pageCreationWizard.addApplication($(ELEMENT_APPLICATION_CONTENT_TAB), $(byId("Content/ContentListViewerPortlet")));
     pageCreationWizard.addContentlistByFolder("General Drives/Sites Management", "intranet");
     navigationToolbar.goToEditContent();
-    sleep(Configuration.timeout);
-    ($(byXpath("(//a[contains(text(),'${content}')]/following::a[text()='Read more'])[1]".replace("${content}",content.substring(0,11))))).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_LIST_CONTENT.find(byText(content)).waitUntil(Condition.visible, Configuration.timeout);
+    ($(byXpath("(//a[contains(text(),'${content}')]/following::a[text()='Read more'])[1]".replace("${content}",content.substring(0,11))))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_LIST_CONTENT.find(byText(content)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     info("Delete Data test");
     info("Delete created file");
-    sleep(Configuration.timeout);
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.deleteData(content, true);
     info("Delete created page");
@@ -162,13 +161,12 @@ public class EcmsWCMTestIT extends Base {
     siteExplorerHome.verifyContentCreatedSuccessfully(content);
     navigationToolbar.goToAddPage();
     pageCreationWizard.inputPageInfoStep1(content, true, "English", content, true, false);
-    sleep(Configuration.timeout);
-    $(ELEMENT_ADDNEWPAGE_BTNNEXT).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_ADDNEWPAGE_BTNNEXT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     $(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
     pageCreationWizard.addApplication($(ELEMENT_APPLICATION_CONTENT_TAB), $(byId("Content/ContentListViewerPortlet")));
     pageCreationWizard.addContentListByContent("General Drives/Sites Management/intranet", content);
     navigationToolbar.goToEditContent();
-    ELEMENT_LIST_CONTENT.find(byText(content)).waitUntil(Condition.visible, Configuration.timeout);
+    ELEMENT_LIST_CONTENT.find(byText(content)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     info("Delete Data test");
     info("Delete created file");
     navigationToolbar.goToSiteExplorer();
@@ -494,11 +492,9 @@ public class EcmsWCMTestIT extends Base {
     $(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
     $(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
     pageCreationWizard.addContentDetail("General Drives/Sites Management/intranet", content1);
-    $(byTitle("Portlet Mode")).click();
-    $(byTitle("Edit")).click();
-    sleep(Configuration.timeout);
+    $(byTitle("Portlet Mode")).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+    $(byTitle("Edit")).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     contentList.selectFolderContent("intranet", content2);
-    sleep(Configuration.timeout);
     executeJavaScript("window.scrollBy(0,-350);", "");
     $(byText("Done")).waitUntil(Condition.appears, Configuration.timeout);
     info("Delete created files");
@@ -677,12 +673,11 @@ public class EcmsWCMTestIT extends Base {
     info("language2 is:" + language2);
     String apply2 = "Appliquer";
     navigationToolbar.goToSEO();
-    $(ELEMENT_SEO_LANGUAGE_SHOW).waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(Configuration.timeout);
+    $(ELEMENT_SEO_LANGUAGE_SHOW).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     $(ELEMENT_SEO_LANGUAGE_SELECTBOX).sendKeys(language1);
-    $(ELEMENT_SEO_TITLEBOX).setValue(title);
-    $(ELEMENT_SEO_SAVE).waitUntil(Condition.visible,Configuration.timeout).click();
-    $(ELEMENT_SEO_CLOSE).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_SEO_TITLEBOX).waitUntil(Condition.visible, openBrowserTimeoutMs).setValue(title);
+    $(ELEMENT_SEO_SAVE).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+    $(ELEMENT_SEO_CLOSE).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     refresh();
     navigationToolbar.goToChangeLanguage();
     changeLanguages.changeLanguage(language1, apply1);
@@ -690,8 +685,7 @@ public class EcmsWCMTestIT extends Base {
     info("Changed language is:" + language2);
     changeLanguages.changeLanguage(language2, apply2);
     // Verify that sitemaps file is updated
-    sleep(Configuration.timeout);
-    $(byText("sitemaps")).waitUntil(Condition.visible, Configuration.collectionsTimeout);
+    $(byText("sitemaps")).waitUntil(Condition.visible, openBrowserTimeoutMs);
     info("Delete SEO folder");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/SEO", "Site Management");

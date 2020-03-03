@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.platform.ecms;
 
+import static com.codeborne.selenide.Configuration.openBrowserTimeoutMs;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -77,8 +78,7 @@ public class EcmsSEAdminTestIT extends Base {
     info("Create content 1");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("sites/intranet/documents", "Collaboration");
-    sleep(Configuration.timeout);
-    $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     siteExplorerHome.goToAddNewContent();
     createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.FILE);
     createNewDocument.addNewFile(node1, node1);
@@ -139,8 +139,7 @@ public class EcmsSEAdminTestIT extends Base {
     info("Create content 1");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("sites/intranet/documents", "Collaboration");
-    sleep(Configuration.timeout);
-    $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     siteExplorerHome.goToAddNewContent();
     createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.FILE);
     createNewDocument.addNewFile(node1, node1);
@@ -156,11 +155,8 @@ public class EcmsSEAdminTestIT extends Base {
     siteExplorerHome.selectNode(node2);
     info("Click on More link ");
     executeJavaScript("window.scrollBy(0,-5500)", "");
-    sleep(Configuration.timeout);
-    $(byClassName("uiIconEcmsViewAdmin")).waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(Configuration.timeout);
-    $(ELEMENT_ACTIONBAR_MORE).waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(Configuration.timeout);
+    $(byClassName("uiIconEcmsViewAdmin")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_ACTIONBAR_MORE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Add relation");
     siteExplorerHome.goToManageRelation();
     siteExplorerHome.addRelation(nameContent, "sites/intranet/documents");
@@ -194,8 +190,7 @@ public class EcmsSEAdminTestIT extends Base {
     info("Create content 1");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("sites/intranet/documents", "Collaboration");
-    sleep(Configuration.timeout);
-    $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     siteExplorerHome.goToAddNewContent();
     createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.FILE);
     createNewDocument.addNewFile(node1, node1);
@@ -255,20 +250,19 @@ public class EcmsSEAdminTestIT extends Base {
     if ($(byId("exportNode")).is(Condition.not(Condition.selected))) {
       $(byId("exportNode")).parent().click();
     }
-    $(ELEMENT_ECM_EXPORER_ACTIONS_POPUP_SAVE_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
-    $(ELEMENT_ECM_EXPLORER_EDIT_VIEWS_SAVE_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_ECM_EXPORER_ACTIONS_POPUP_SAVE_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_ECM_EXPLORER_EDIT_VIEWS_SAVE_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Add New folder");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("sites/intranet/documents", "Collaboration");
-    sleep(Configuration.timeout);
-    $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     siteExplorerHome.goToAddNewFolder();
     info("Create Folder node");
     createNewDocument.createNewFolder(node1, CreateNewDocument.folderType.Content);
     info("Select folder");
     siteExplorerHome.selectNode(node1);
     executeJavaScript("window.scrollBy(0,-5500)", "");
-    $(byClassName("uiIconEcmsViewAdmin")).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byClassName("uiIconEcmsViewAdmin")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Export a node");
     siteExplorerHome.goToExportNode();
     siteExplorerHome.exportNode(true, false);
@@ -309,8 +303,7 @@ public class EcmsSEAdminTestIT extends Base {
     info("Add New folder");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("sites/intranet/documents", "Collaboration");
-    sleep(Configuration.timeout);
-    $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     siteExplorerHome.goToAddNewFolder();
 
     info("Create Folder node");
@@ -323,19 +316,19 @@ public class EcmsSEAdminTestIT extends Base {
     siteExplorerHome.goToImportNode();
     $(byId("upload")).find(byClassName("file")).uploadFromClasspath("ks-export-forum.xml");
     $(byId("upload")).find(byClassName("progressBarFrame")).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
-    $(ELEMENT_IMPORT_MODE_POPUP_IMPORT_BUTTON).click();
-    $(Button.ELEMENT_OK_BUTTON).click();
+    $(ELEMENT_IMPORT_MODE_POPUP_IMPORT_BUTTON).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+    $(Button.ELEMENT_OK_BUTTON).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     info("Delete all data test");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("sites/intranet/documents", "Collaboration");
-    $(byClassName("uiIconEcmsViewWeb")).click();
-    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
+    $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     ELEMENT_CONTENT_LIST.find(byLinkText(node2)).contextClick();
     info("Click on Delete link");
-    $(ELEMENT_SITEEXPLORER_ACTION_DELETE).click();
+    $(ELEMENT_SITEEXPLORER_ACTION_DELETE).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     info("Click on Delete button on Confirm popup");
-    $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).click();
+    $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
   }
 
   /**
@@ -441,8 +434,7 @@ public class EcmsSEAdminTestIT extends Base {
     info("View Node Properties");
     siteExplorerHome.selectNode(node1);
     executeJavaScript("window.scrollBy(0,-5500)", "");
-    sleep(Configuration.timeout);
-    $(byClassName("uiIconEcmsViewAdmin")).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byClassName("uiIconEcmsViewAdmin")).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     $(ELEMENT_ACTIONBAR_MORE).click();
     siteExplorerHome.goToProperties();
     siteExplorerHome.addProperty(property, property);

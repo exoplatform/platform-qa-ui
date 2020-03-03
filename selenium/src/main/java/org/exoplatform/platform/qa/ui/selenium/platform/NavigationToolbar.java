@@ -27,6 +27,8 @@ import org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
+
+import static com.codeborne.selenide.Configuration.openBrowserTimeoutMs;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
@@ -184,16 +186,15 @@ public class NavigationToolbar {
   public void goToSiteExplorer() {
     info("-- Go to site explorer home page --");
     if (testBase.getExoWebDriver().isIEDriver()) {
-      $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
       $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     } else
-      $(ELEMENT_LINK_SETUP).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(ELEMENT_LINK_SETUP).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Element " + ELEMENT_MENU_CONTENT_LINK + "... is displayed");
-    sleep(Configuration.timeout);
     do {
       $(ELEMENT_MENU_CONTENT_LINK).hover();
     } while (!$(ELEMENT_MENU_SITE_EXPLORER).exists());
-    $(ELEMENT_MENU_SITE_EXPLORER).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_MENU_SITE_EXPLORER).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.timeout).click();
     info("Site Explorer is shown successfully");
   }
 
@@ -258,13 +259,11 @@ public class NavigationToolbar {
    * Go to Space Administration
    */
   public void goToSpaceAdminstration() {
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
-    sleep(2000);
     ELEMENT_ADMINISTRATION_SPACES.hover();
-    ELEMENT_SPACE_ADMIN_LINK.click();
-    sleep(2000);
-    ELEMENT_SPACE_ADMIN_PAGE.waitUntil(Condition.visible, Configuration.timeout);
+    ELEMENT_SPACE_ADMIN_LINK.waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+    ELEMENT_SPACE_ADMIN_PAGE.waitUntil(Condition.visible, openBrowserTimeoutMs);
   }
 
   /**
@@ -464,9 +463,8 @@ public class NavigationToolbar {
 
   public void goToManageCommunity() {
     $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(Configuration.timeout);
-    ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, 10000);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+    ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, openBrowserTimeoutMs + openBrowserTimeoutMs);
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
     ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
   }
@@ -476,9 +474,9 @@ public class NavigationToolbar {
    */
   public void goToNotificationList() {
     info("Click on Notification icon");
-    $(ELEMENT_TOOLBAR_NOTIFICATION_LIST).click();
+    $(ELEMENT_TOOLBAR_NOTIFICATION_LIST).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     info("Notification list is shown");
-    $(ELEMENT_NOTIFICATION_DROPDOWN).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_NOTIFICATION_DROPDOWN).waitUntil(Condition.appears, openBrowserTimeoutMs);
   }
 
   /**
@@ -522,15 +520,14 @@ public class NavigationToolbar {
    */
   public void searchFile(String firstUploadedFile) {
     refresh();
-    $(byXpath("//input[@id='simpleSearch']")).waitUntil(Condition.visible, Configuration.timeout).setValue(firstUploadedFile);
+    $(byXpath("//input[@id='simpleSearch']")).waitUntil(Condition.visible, openBrowserTimeoutMs).setValue(firstUploadedFile);
     if ($(byXpath("//span[@class='warningIcon' and contains(text(),'You are at the root folder.')]")).isDisplayed()) {
       do {
-        $(byXpath("//a[@class='btn' and text()='OK']")).waitUntil(Condition.visible, Configuration.timeout).click();
+        $(byXpath("//a[@class='btn' and text()='OK']")).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
       } while (!$(byXpath("//span[@class='warningIcon' and contains(text(),'You are at the root folder.')]")).isDisplayed());
     }
-    sleep(2000);
-    $(ELEMENT_QUICK_SEARCH_BUTTON).waitUntil(Condition.visible, Configuration.timeout).sendKeys(Keys.ENTER);
-    sleep(2000);
+    $(ELEMENT_QUICK_SEARCH_BUTTON).waitUntil(Condition.visible, openBrowserTimeoutMs).sendKeys(Keys.ENTER);
+
   }
 
   /**

@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.platform.ecms;
 
+import static com.codeborne.selenide.Configuration.openBrowserTimeoutMs;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS;
@@ -105,10 +106,9 @@ public class EcmsSEBasicActionTestIT extends Base {
         createNewDocument.addNewWebContent(node, node);
         createNewDocument.saveAndClose();
 
-        $(ELEMENT_SIDEBAR_SITES_MANAGEMENT).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(ELEMENT_SIDEBAR_SITES_MANAGEMENT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", node + ".lnk"))).waitUntil(Condition.visible,Configuration.timeout).click();
-        sleep(Configuration.timeout);
-        $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         siteExplorerHome.deleteData(node + ".lnk");
         siteExplorerHome.deleteData(folderTitle);
     }
@@ -170,8 +170,7 @@ public class EcmsSEBasicActionTestIT extends Base {
         createNewDocument.saveAndClose();
         info("Test 3: Cut/paste a node");
         siteExplorerHome.cutPasteNode(titleCommonNode, secondDestination);
-        sleep(Configuration.timeout);
-        $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", secondDestination))).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", secondDestination))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         siteExplorerHome.deleteData(titleCommonNode);
     }
 
@@ -190,10 +189,9 @@ public class EcmsSEBasicActionTestIT extends Base {
         createNewDocument.addNewWebContent(titleCommonNode, titleCommonNode);
         createNewDocument.saveAndClose();
         info("Test 4: Drag and drop a node");
-        sleep(Configuration.timeout);
-        ELEMENT_CONTENT_LIST.find(byText(titleCommonNode)).dragAndDropTo($(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", destination))));
+        ELEMENT_CONTENT_LIST.find(byText(titleCommonNode)).waitUntil(Condition.visible, openBrowserTimeoutMs).dragAndDropTo($(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", destination))));
         manageAlert.acceptAlert();
-        $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", destination))).click();
+        $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", destination))).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
         siteExplorerHome.deleteData(titleCommonNode);
 
     }
@@ -315,21 +313,20 @@ public class EcmsSEBasicActionTestIT extends Base {
         createNewDocument.saveAndClose();
 
         // clean the clipboard
-        $(ELEMENT_ACCOUNT_NAME_LINK).click();
+        $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
         $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNode))).contextClick();
-        $(ELEMENT_SITEEXPLORER_ACTION_COPY).click();
-        $(ELEMENT_SITEEXPLORER_CLIPBOARD).click();
-        $(ELEMENT_CLIPBOARD_CLEAR_ALL).click();
-        sleep(Configuration.timeout);
-        $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).waitUntil(Condition.visible,Configuration.timeout).click();
-        $(ELEMENT_SIDEBAR_SITES_MANAGEMENT).click();
+        $(ELEMENT_SITEEXPLORER_ACTION_COPY).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+        $(ELEMENT_SITEEXPLORER_CLIPBOARD).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+        $(ELEMENT_CLIPBOARD_CLEAR_ALL).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+        $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+        $(ELEMENT_SIDEBAR_SITES_MANAGEMENT).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
         info("Test 9: Delete Clipboard");
-        $(ELEMENT_ACCOUNT_NAME_LINK).click();
+        $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
         $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNode))).contextClick();
-        $(ELEMENT_SITEEXPLORER_ACTION_COPY).click();
-        $(ELEMENT_SITEEXPLORER_CLIPBOARD).click();
-        $(byAttribute("data-original-title", "collaboration:/sites/" + titleCommonNode)).parent().parent().find(byClassName("uiIconEcmsDelete")).click();
-        $(byXpath(ELEMENT_CLIPBOARD_DELETE_NODE.replace("{$node}", titleCommonNode))).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+        $(ELEMENT_SITEEXPLORER_ACTION_COPY).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+        $(ELEMENT_SITEEXPLORER_CLIPBOARD).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+        $(byAttribute("data-original-title", "collaboration:/sites/" + titleCommonNode)).parent().parent().find(byClassName("uiIconEcmsDelete")).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+        $(byXpath(ELEMENT_CLIPBOARD_DELETE_NODE.replace("{$node}", titleCommonNode))).waitUntil(Condition.not(Condition.visible), openBrowserTimeoutMs);
         siteExplorerHome.deleteData(titleCommonNode);
     }
 
@@ -346,9 +343,8 @@ public class EcmsSEBasicActionTestIT extends Base {
         createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
         createNewDocument.addNewWebContent(titleCommonNode, titleCommonNode);
         createNewDocument.saveAndClose();
-        sleep(3000);
         // clean the clipboard
-        $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNode))).waitUntil(Condition.visible,Configuration.collectionsTimeout).contextClick();
+        $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNode))).waitUntil(Condition.visible, openBrowserTimeoutMs).contextClick();
         $(ELEMENT_SITEEXPLORER_ACTION_COPY).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
         $(ELEMENT_SITEEXPLORER_CLIPBOARD).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
         executeJavaScript("window.scrollBy(0,-500)");
@@ -370,8 +366,7 @@ public class EcmsSEBasicActionTestIT extends Base {
         $(ELEMENT_SITEEXPLORER_ACTION_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
         $(byXpath("//span[@class='PopupTitle popupTitle' and contains(text(),'Delete')]")).dragAndDropTo($(byXpath("//div[@class='UITableColumnContainer']")));
         $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
-        sleep(3000);
-        $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNodeCopy))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).isDisplayed();
+        $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", titleCommonNodeCopy))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.timeout).isDisplayed();
 
         siteExplorerHome.deleteData(titleCommonNodeCopy);
     }

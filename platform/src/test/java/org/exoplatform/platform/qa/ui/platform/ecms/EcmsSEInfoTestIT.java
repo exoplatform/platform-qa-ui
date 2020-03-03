@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.platform.ecms;
 
+import static com.codeborne.selenide.Configuration.openBrowserTimeoutMs;
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
@@ -195,11 +196,10 @@ public class EcmsSEInfoTestIT extends Base {
 
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("sites/intranet/documents", "Collaboration");
-    $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(Configuration.timeout);
+    $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     siteExplorerHome.uploadFile("testavatar.pdf");
     siteExplorerHome.selectNode("testavatar.pdf");
-    $(byClassName("uiIconEcmsViewAdmin")).click();
+    $(byClassName("uiIconEcmsViewAdmin")).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     siteExplorerHome.viewMetadata();
     info("Delete data test");
     siteExplorerHome.goToPath("intranet/documents", "Site Management");

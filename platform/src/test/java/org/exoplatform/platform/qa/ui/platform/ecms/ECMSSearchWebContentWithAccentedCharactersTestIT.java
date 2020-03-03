@@ -1,8 +1,8 @@
 package org.exoplatform.platform.qa.ui.platform.ecms;
 
+import static com.codeborne.selenide.Configuration.openBrowserTimeoutMs;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.core.PLFData.password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -74,8 +74,7 @@ public class ECMSSearchWebContentWithAccentedCharactersTestIT extends Base {
     createNewDoc.saveAndClose();
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet", "Site Management");
-    ELEMENT_SEARCH_BTN.setValue("sécurité").pressEnter();
-    sleep(Configuration.timeout);
+    ELEMENT_SEARCH_BTN.setValue("sécurité").waitUntil(Condition.visible, openBrowserTimeoutMs).pressEnter();
     $(byClassName("uiSearchResult")).find(byXpath("//*[@id=\"SimpleSearchResult\"]/table/tbody/tr[1]/td[2]"))
                                  .find(byText("sécurité"))
                                  .shouldBe(Condition.visible);
